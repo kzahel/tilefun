@@ -10,6 +10,7 @@ import {
   TILE_SIZE,
 } from "../config/constants.js";
 import { createChicken } from "../entities/Chicken.js";
+import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
@@ -19,7 +20,6 @@ import { Camera } from "../rendering/Camera.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";

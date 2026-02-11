@@ -47,7 +47,7 @@ export class Chunk {
   }
 
   getCorner(cx: number, cy: number): number {
-    return this.corners[cornerIdx(cx, cy)]!;
+    return this.corners[cornerIdx(cx, cy)] ?? 0;
   }
 
   setCorner(cx: number, cy: number, biome: number): void {

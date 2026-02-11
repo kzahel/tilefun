@@ -55,8 +55,9 @@ export function computeChunkAllLayers(
   const baseY = cy * CHUNK_SIZE;
 
   for (let layerIdx = 0; layerIdx < TERRAIN_LAYERS.length; layerIdx++) {
-    const layer = TERRAIN_LAYERS[layerIdx]!;
-    const cache = chunk.autotileLayers[layerIdx]!;
+    const layer = TERRAIN_LAYERS[layerIdx];
+    const cache = chunk.autotileLayers[layerIdx];
+    if (!layer || !cache) continue;
 
     for (let ly = 0; ly < CHUNK_SIZE; ly++) {
       for (let lx = 0; lx < CHUNK_SIZE; lx++) {
@@ -66,7 +67,7 @@ export function computeChunkAllLayers(
           const tx = baseX + lx;
           const ty = baseY + ly;
           const mask = computeMask(tx, ty, getTerrain, layer.isInGroup);
-          cache[idx] = GM_BLOB_LOOKUP[mask & 0xff]!;
+          cache[idx] = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
         } else {
           cache[idx] = 0;
         }

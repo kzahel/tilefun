@@ -74,7 +74,7 @@ export const GM_BLOB_LOOKUP: Uint16Array = buildGmBlobLookup();
 
 /** Get the autotile (col, row) in a GM blob 12×4 sheet for a given 8-bit bitmask. */
 export function getGmBlobSprite(mask: number): { col: number; row: number } {
-  const packed = GM_BLOB_LOOKUP[mask & 0xff]!;
+  const packed = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
   return { col: packed & 0xff, row: packed >> 8 };
 }
 
@@ -87,7 +87,7 @@ function buildGmBlobLookup(): Uint16Array {
   }
 
   // Fallback: isolated tile (mask 0)
-  const fallback = canonicalMap.get(0)!;
+  const fallback = canonicalMap.get(0) ?? 0;
 
   for (let m = 0; m < 256; m++) {
     const canonical = canonicalize(m);

@@ -4,7 +4,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
 
 // Start preview server
-const { execSync, spawn } = await import("child_process");
+const { spawn } = await import("node:child_process");
 const server = spawn("npx", ["vite", "preview", "--port", "4174", "--strictPort"], {
   stdio: ["ignore", "pipe", "pipe"],
   cwd: process.cwd(),

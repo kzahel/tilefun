@@ -50,7 +50,7 @@ describe("GM_BLOB_LOOKUP", () => {
 
   it("all entries decode to valid grid positions", () => {
     for (let m = 0; m < 256; m++) {
-      const packed = GM_BLOB_LOOKUP[m]!;
+      const packed = GM_BLOB_LOOKUP[m] ?? 0;
       const col = packed & 0xff;
       const row = packed >> 8;
       expect(col).toBeLessThan(12);

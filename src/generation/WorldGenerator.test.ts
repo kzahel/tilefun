@@ -135,7 +135,11 @@ describe("WorldGenerator", () => {
 
     // Test multiple chunks to get diverse terrain
     const positions: [number, number][] = [
-      [0, 0], [5, 5], [-3, 2], [10, -10], [20, 20],
+      [0, 0],
+      [5, 5],
+      [-3, 2],
+      [10, -10],
+      [20, 20],
     ];
 
     for (const [cx, cy] of positions) {
