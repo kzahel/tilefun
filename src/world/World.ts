@@ -1,4 +1,4 @@
-import { computeChunkAutotile } from "../autotile/Autotiler.js";
+import { computeChunkAutotile, computeChunkDirtAutotile } from "../autotile/Autotiler.js";
 import { WorldGenerator } from "../generation/WorldGenerator.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
@@ -67,6 +67,7 @@ export class World {
 			const cy = Number(key.slice(commaIdx + 1));
 
 			computeChunkAutotile(chunk, cx, cy, getTerrain);
+			computeChunkDirtAutotile(chunk, cx, cy, getTerrain);
 			chunk.autotileComputed = true;
 			chunk.dirty = true;
 		}

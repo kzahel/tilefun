@@ -1,4 +1,4 @@
-import { Direction, type Entity } from "./Entity.js";
+import type { Entity } from "./Entity.js";
 
 /**
  * Update wander AI for an entity. Transitions between idle and walking.
@@ -33,14 +33,6 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
 		vel.vy = ai.dirY * ai.speed;
 		if (sprite) {
 			sprite.moving = true;
-			if (Math.abs(ai.dirX) >= Math.abs(ai.dirY)) {
-				sprite.direction = ai.dirX > 0 ? Direction.Right : Direction.Left;
-			} else {
-				sprite.direction = ai.dirY > 0 ? Direction.Down : Direction.Up;
-			}
-			// Chicken sprite: row 0 = down/left, row 1 = up/right
-			sprite.frameRow =
-				sprite.direction === Direction.Up || sprite.direction === Direction.Right ? 1 : 0;
 		}
 	} else {
 		vel.vx = 0;

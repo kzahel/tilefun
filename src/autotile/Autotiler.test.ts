@@ -6,23 +6,37 @@ import {
 	AutotileBit,
 	canonicalize,
 	computeChunkAutotile,
+	computeChunkDirtAutotile,
 	computeMask,
-	getAutotileSprite,
+	isDirtGroup,
 	isGrassGroup,
 } from "./Autotiler.js";
 
 describe("isGrassGroup", () => {
-	it("returns true for grass biomes", () => {
+	it("returns true for grass biomes and sand", () => {
 		expect(isGrassGroup(TileId.Grass)).toBe(true);
 		expect(isGrassGroup(TileId.Forest)).toBe(true);
 		expect(isGrassGroup(TileId.DenseForest)).toBe(true);
+		expect(isGrassGroup(TileId.Sand)).toBe(true);
 	});
 
 	it("returns false for non-grass biomes", () => {
 		expect(isGrassGroup(TileId.Water)).toBe(false);
 		expect(isGrassGroup(TileId.DeepWater)).toBe(false);
-		expect(isGrassGroup(TileId.Sand)).toBe(false);
 		expect(isGrassGroup(TileId.Empty)).toBe(false);
+	});
+});
+
+describe("isDirtGroup", () => {
+	it("returns true for sand", () => {
+		expect(isDirtGroup(TileId.Sand)).toBe(true);
+	});
+
+	it("returns false for non-dirt tiles", () => {
+		expect(isDirtGroup(TileId.Grass)).toBe(false);
+		expect(isDirtGroup(TileId.Forest)).toBe(false);
+		expect(isDirtGroup(TileId.Water)).toBe(false);
+		expect(isDirtGroup(TileId.Empty)).toBe(false);
 	});
 });
 
@@ -55,41 +69,6 @@ describe("canonicalize", () => {
 			unique.add(canonicalize(m));
 		}
 		expect(unique.size).toBe(47);
-	});
-});
-
-describe("getAutotileSprite", () => {
-	it("returns correct position for full interior (255)", () => {
-		const { col, row } = getAutotileSprite(255);
-		expect(col).toBe(2);
-		expect(row).toBe(4);
-	});
-
-	it("returns correct position for isolated grass (0)", () => {
-		const { col, row } = getAutotileSprite(0);
-		expect(col).toBe(1);
-		expect(row).toBe(2);
-	});
-
-	it("returns correct position for N-only edge (1)", () => {
-		const { col, row } = getAutotileSprite(1);
-		expect(col).toBe(0);
-		expect(row).toBe(5);
-	});
-
-	it("returns correct position for all-cardinals no-corners (15)", () => {
-		const { col, row } = getAutotileSprite(15);
-		expect(col).toBe(0);
-		expect(row).toBe(7);
-	});
-
-	it("handles non-canonical masks by canonicalizing", () => {
-		// Mask with NW set but only N cardinal → should canonicalize to N-only
-		const nonCanonical = AutotileBit.N | AutotileBit.NW; // 1 | 16 = 17
-		const canonical = AutotileBit.N; // 1
-		const fromNonCanonical = getAutotileSprite(nonCanonical);
-		const fromCanonical = getAutotileSprite(canonical);
-		expect(fromNonCanonical).toEqual(fromCanonical);
 	});
 });
 
@@ -136,6 +115,35 @@ describe("computeMask", () => {
 		const mask = computeMask(5, 5, getTerrain);
 		expect(mask).toBe(AutotileBit.N | AutotileBit.E);
 	});
+
+	it("treats Sand as grass group by default", () => {
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx === 5 && ty === 4) return TileId.Sand;
+			return TileId.Water;
+		};
+		const mask = computeMask(5, 5, getTerrain);
+		expect(mask).toBe(AutotileBit.N);
+	});
+
+	it("uses custom isInGroup predicate for dirt", () => {
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx === 5 && ty === 5) return TileId.Sand;
+			return TileId.Grass;
+		};
+		// With isDirtGroup, grass neighbors don't count
+		const mask = computeMask(5, 5, getTerrain, isDirtGroup);
+		expect(mask).toBe(0);
+	});
+
+	it("detects sand neighbors with isDirtGroup predicate", () => {
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx === 5 && ty === 4) return TileId.Sand; // N
+			if (tx === 6 && ty === 5) return TileId.Sand; // E
+			return TileId.Grass;
+		};
+		const mask = computeMask(5, 5, getTerrain, isDirtGroup);
+		expect(mask).toBe(AutotileBit.N | AutotileBit.E);
+	});
 });
 
 describe("computeChunkAutotile", () => {
@@ -146,8 +154,8 @@ describe("computeChunkAutotile", () => {
 
 		computeChunkAutotile(chunk, 0, 0, getTerrain);
 
-		// All tiles should be full interior (255 → col=2, row=4)
-		const packed = (4 << 8) | 2; // row=4, col=2
+		// All tiles should be full interior (255 → col=1, row=0 in GM blob)
+		const packed = (0 << 8) | 1; // row=0, col=1
 		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
 			expect(chunk.autotileCache[i]).toBe(packed);
 		}
@@ -183,9 +191,70 @@ describe("computeChunkAutotile", () => {
 		const cornerPacked = chunk.autotileCache[0];
 		expect(cornerPacked).not.toBeUndefined();
 		expect(cornerPacked).not.toBe(0);
-		// Interior tile should be full (255)
+		// Interior tile should be full (255 → col=1, row=0 in GM blob)
 		const interiorPacked = chunk.autotileCache[8 * CHUNK_SIZE + 8];
-		const fullPacked = (4 << 8) | 2;
+		const fullPacked = (0 << 8) | 1;
 		expect(interiorPacked).toBe(fullPacked);
+	});
+
+	it("computes autotile for Sand tiles (Sand is in grass group)", () => {
+		const chunk = new Chunk();
+		chunk.fillTerrain(TileId.Sand);
+		const getTerrain = () => TileId.Sand;
+
+		computeChunkAutotile(chunk, 0, 0, getTerrain);
+
+		// Sand is in grass group, so all tiles should have grass autotile
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileCache[i]).toBeGreaterThan(0);
+		}
+	});
+});
+
+describe("computeChunkDirtAutotile", () => {
+	it("fills dirtAutotileCache for sand tiles", () => {
+		const chunk = new Chunk();
+		chunk.fillTerrain(TileId.Sand);
+		const getTerrain = () => TileId.Sand;
+
+		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
+
+		// All sand tiles should have non-zero dirt autotile
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.dirtAutotileCache[i]).toBeGreaterThan(0);
+		}
+	});
+
+	it("sets 0 for non-sand tiles", () => {
+		const chunk = new Chunk();
+		chunk.fillTerrain(TileId.Grass);
+		const getTerrain = () => TileId.Grass;
+
+		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
+
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.dirtAutotileCache[i]).toBe(0);
+		}
+	});
+
+	it("computes edges for sand surrounded by grass", () => {
+		const chunk = new Chunk();
+		chunk.fillTerrain(TileId.Sand);
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx >= 0 && tx < CHUNK_SIZE && ty >= 0 && ty < CHUNK_SIZE) {
+				return TileId.Sand;
+			}
+			return TileId.Grass;
+		};
+
+		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
+
+		// Corner tile should have edge variant (not full interior)
+		const cornerPacked = chunk.dirtAutotileCache[0];
+		expect(cornerPacked).toBeGreaterThan(0);
+		// Interior tile should be full interior
+		const interiorPacked = chunk.dirtAutotileCache[8 * CHUNK_SIZE + 8];
+		expect(interiorPacked).toBeGreaterThan(0);
+		expect(interiorPacked).not.toBe(cornerPacked);
 	});
 });

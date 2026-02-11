@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { createChicken } from "./Chicken.js";
-import { Direction } from "./Entity.js";
 import { createPlayer } from "./Player.js";
 import { onWanderBlocked, updateWanderAI } from "./wanderAI.js";
 
@@ -66,12 +65,12 @@ describe("updateWanderAI", () => {
 		expect(c.sprite?.moving).toBe(true);
 	});
 
-	it("sets sprite direction based on walk direction", () => {
+	it("does not change sprite direction or frameRow", () => {
 		const c = createChicken(0, 0);
-		// angle = 0 → cos(0)=1, sin(0)=0 → dirX=1 → Right
+		const origRow = c.sprite?.frameRow;
 		const rng = makeRandom([0.5, 0.0]);
 		updateWanderAI(c, 2.1, rng);
-		expect(c.sprite?.direction).toBe(Direction.Right);
+		expect(c.sprite?.frameRow).toBe(origRow);
 	});
 
 	it("does nothing if entity has no wanderAI component", () => {

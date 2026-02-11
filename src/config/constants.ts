@@ -22,6 +22,9 @@ export const TICK_RATE = 60;
 /** Player movement speed in world pixels per second. */
 export const PLAYER_SPEED = 64;
 
+/** Speed multiplier when holding shift. */
+export const PLAYER_SPRINT_MULTIPLIER = 4;
+
 /** Camera smooth-follow lerp factor (per tick at 60Hz). */
 export const CAMERA_LERP = 0.1;
 
@@ -33,3 +36,9 @@ export const PLAYER_FRAME_DURATION = 150;
 
 /** Size of each frame in the chicken spritesheet (pixels). */
 export const CHICKEN_SPRITE_SIZE = 16;
+
+/** Number of animation frames in the water spritesheet. */
+export const WATER_FRAME_COUNT = 4;
+
+/** Duration of each water animation frame (milliseconds). */
+export const WATER_FRAME_DURATION_MS = 250;

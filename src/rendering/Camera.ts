@@ -31,6 +31,16 @@ export class Camera {
 	follow(targetX: number, targetY: number, lerpFactor: number): void {
 		this.x += (targetX - this.x) * lerpFactor;
 		this.y += (targetY - this.y) * lerpFactor;
+
+		// Snap to target when very close to avoid infinite asymptotic creep
+		const snapThreshold = 1 / PIXEL_SCALE;
+		if (Math.abs(this.x - targetX) < snapThreshold) this.x = targetX;
+		if (Math.abs(this.y - targetY) < snapThreshold) this.y = targetY;
+
+		// Round camera to pixel grid so all Math.floor'd screen positions
+		// move in lockstep — prevents 1px jitter between tiles and entities
+		this.x = Math.round(this.x * PIXEL_SCALE) / PIXEL_SCALE;
+		this.y = Math.round(this.y * PIXEL_SCALE) / PIXEL_SCALE;
 	}
 
 	/** Get the range of chunk coordinates visible in the current viewport. */

@@ -12,11 +12,12 @@ export enum BiomeId {
 /**
  * Elevation + moisture thresholds for biome classification.
  * Elevation determines water/land split, moisture determines vegetation density.
+ * Sand is a dry inland biome (low moisture) so grass always borders water.
  */
 const ELEVATION_DEEP_WATER = 0.3;
 const ELEVATION_SHALLOW_WATER = 0.4;
-const ELEVATION_SAND = 0.45;
 
+const MOISTURE_SAND = 0.3;
 const MOISTURE_FOREST = 0.5;
 const MOISTURE_DENSE_FOREST = 0.65;
 
@@ -41,7 +42,8 @@ export class BiomeMapper {
 	static classify(elevation: number, moisture: number): BiomeId {
 		if (elevation < ELEVATION_DEEP_WATER) return BiomeId.DeepWater;
 		if (elevation < ELEVATION_SHALLOW_WATER) return BiomeId.ShallowWater;
-		if (elevation < ELEVATION_SAND) return BiomeId.Sand;
+		// Land biomes: grass always borders water, sand is dry inland
+		if (moisture < MOISTURE_SAND) return BiomeId.Sand;
 		if (moisture < MOISTURE_FOREST) return BiomeId.Grass;
 		if (moisture < MOISTURE_DENSE_FOREST) return BiomeId.Forest;
 		return BiomeId.DenseForest;

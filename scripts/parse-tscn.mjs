@@ -1,23 +1,28 @@
 #!/usr/bin/env node
 /**
  * Parses the Godot .tscn terrain peering bit data from Maaack/Sprout-Lands-Tilemap
- * and outputs a JSON autotile metadata file mapping 8-bit bitmask → (col, row) in Grass.png.
+ * and outputs a JSON autotile metadata file mapping 8-bit bitmask → (col, row).
  *
- * Usage: node scripts/parse-tscn.mjs < sprout_lands_tile_map.tscn > grass-autotile.json
+ * Usage:
+ *   node scripts/parse-tscn.mjs < sprout_lands_tile_map.tscn > grass-autotile.json
+ *   node scripts/parse-tscn.mjs --source TileSetAtlasSource_1kfwu --terrain 1 --sheet dirt < ... > dirt-autotile.json
  *
- * The .tscn file can be downloaded from:
- *   https://github.com/Maaack/Sprout-Lands-Tilemap/blob/main/addons/sprout_lands_tilemap/base/scenes/sprout_lands_tile_map.tscn
- *
- * Bitmask bits:
- *   N=1, W=2, E=4, S=8, NW=16, NE=32, SW=64, SE=128
- *
- * Godot peering bit names → our bit values:
- *   top_side → N(1), left_side → W(2), right_side → E(4), bottom_side → S(8)
- *   top_left_corner → NW(16), top_right_corner → NE(32)
- *   bottom_left_corner → SW(64), bottom_right_corner → SE(128)
+ * Options:
+ *   --source ID    TileSetAtlasSource ID in .tscn (default: TileSetAtlasSource_2v0he for Grass)
+ *   --terrain N    Terrain value to match (default: 0 for Grass, 1 for Dirt)
+ *   --sheet NAME   Sheet name in output JSON (default: grass)
  */
 
 import { readFileSync } from "node:fs";
+import { parseArgs } from "node:util";
+
+const { values: args } = parseArgs({
+	options: {
+		source: { type: "string", default: "TileSetAtlasSource_2v0he" },
+		terrain: { type: "string", default: "0" },
+		sheet: { type: "string", default: "grass" },
+	},
+});
 
 const PEERING_BIT_MAP = {
 	top_side: 1,
@@ -30,29 +35,32 @@ const PEERING_BIT_MAP = {
 	bottom_right_corner: 128,
 };
 
-function parseTscn(text) {
-	// Find the first TileSetAtlasSource (Grass.png)
+function parseTscn(text, sourceId, terrainValue, sheetName) {
 	const lines = text.split("\n");
-	let inGrassSource = false;
+	let inSource = false;
 	const tiles = new Map(); // "col:row" → { col, row, peeringBits: Set<string> }
 
+	const peeringRe = new RegExp(
+		`^(\\d+):(\\d+)\\/0\\/terrains_peering_bit\\/(\\w+)\\s*=\\s*${terrainValue}$`,
+	);
+	const terrainRe = new RegExp(
+		`^(\\d+):(\\d+)\\/0\\/terrain\\s*=\\s*${terrainValue}$`,
+	);
+
 	for (const line of lines) {
-		// Detect start of Grass.png atlas source
 		if (
 			line.includes('[sub_resource type="TileSetAtlasSource"') &&
-			line.includes("TileSetAtlasSource_2v0he")
+			line.includes(sourceId)
 		) {
-			inGrassSource = true;
+			inSource = true;
 			continue;
 		}
-		// Detect start of next sub_resource (end of Grass section)
-		if (inGrassSource && line.startsWith("[sub_resource")) {
+		if (inSource && line.startsWith("[sub_resource")) {
 			break;
 		}
-		if (!inGrassSource) continue;
+		if (!inSource) continue;
 
-		// Parse terrain_set=0 and terrain=0 tiles with peering bits
-		const peeringMatch = line.match(/^(\d+):(\d+)\/0\/terrains_peering_bit\/(\w+)\s*=\s*0$/);
+		const peeringMatch = line.match(peeringRe);
 		if (peeringMatch) {
 			const col = Number(peeringMatch[1]);
 			const row = Number(peeringMatch[2]);
@@ -65,8 +73,7 @@ function parseTscn(text) {
 			continue;
 		}
 
-		// Also capture tiles with terrain=0 but no peering bits (isolated/variant tiles)
-		const terrainMatch = line.match(/^(\d+):(\d+)\/0\/terrain\s*=\s*0$/);
+		const terrainMatch = line.match(terrainRe);
 		if (terrainMatch) {
 			const col = Number(terrainMatch[1]);
 			const row = Number(terrainMatch[2]);
@@ -94,10 +101,9 @@ function parseTscn(text) {
 	variants.sort((a, b) => a.mask - b.mask);
 
 	return {
-		sheet: "grass",
+		sheet: sheetName,
 		tileSize: 16,
-		description:
-			"8-bit blob autotile lookup for Sprout Lands Grass.png. Generated from Godot .tscn terrain peering data.",
+		description: `8-bit blob autotile lookup for Sprout Lands ${sheetName}.png. Generated from Godot .tscn terrain peering data.`,
 		bits: {
 			N: 1,
 			W: 2,
@@ -113,5 +119,5 @@ function parseTscn(text) {
 }
 
 const input = readFileSync(process.stdin.fd, "utf-8");
-const result = parseTscn(input);
+const result = parseTscn(input, args.source, args.terrain, args.sheet);
 console.log(JSON.stringify(result, null, "\t"));

@@ -18,7 +18,7 @@ import { Camera } from "../rendering/Camera.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
+import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
@@ -68,8 +68,8 @@ export class Game {
 		this.input.attach();
 
 		const [grassImg, dirtImg, waterImg, objectsImg, playerImg, chickenImg] = await Promise.all([
-			loadImage("assets/tilesets/grass.png"),
-			loadImage("assets/tilesets/dirt.png"),
+			loadImage("assets/tilesets/me-autotile-15.png"),
+			loadImage("assets/tilesets/me-autotile-02.png"),
 			loadImage("assets/tilesets/water.png"),
 			loadImage("assets/tilesets/objects.png"),
 			loadImage("assets/sprites/player.png"),
@@ -154,6 +154,18 @@ export class Game {
 
 		// Debug overlay
 		if (this.debugEnabled) {
+			const px = this.player.position.wx;
+			const py = this.player.position.wy;
+			const ptx = Math.floor(px / TILE_SIZE);
+			const pty = Math.floor(py / TILE_SIZE);
+			const terrain = this.world.getTerrainIfLoaded(ptx, pty);
+			const collision = this.world.getCollision(ptx, pty);
+			const collisionParts: string[] = [];
+			if (collision === 0) collisionParts.push("None");
+			if (collision & CollisionFlag.Solid) collisionParts.push("Solid");
+			if (collision & CollisionFlag.Water) collisionParts.push("Water");
+			if (collision & CollisionFlag.SlowWalk) collisionParts.push("SlowWalk");
+
 			drawDebugOverlay(
 				this.ctx,
 				this.camera,
@@ -162,6 +174,13 @@ export class Game {
 					fps: this.currentFps,
 					entityCount: this.entityManager.entities.length,
 					chunkCount: this.world.chunks.loadedCount,
+					playerWx: px,
+					playerWy: py,
+					playerTx: ptx,
+					playerTy: pty,
+					terrainName: TileId[terrain] ?? `Unknown(${terrain})`,
+					collisionFlags: collisionParts.join("|"),
+					speedMultiplier: collision & CollisionFlag.SlowWalk ? 0.5 : 1.0,
 				},
 				visible,
 			);
@@ -172,7 +191,7 @@ export class Game {
 		const rng = alea("chicken-spawn");
 		let spawned = 0;
 		let attempts = 0;
-		const range = CHUNK_SIZE * TILE_SIZE * 5;
+		const range = CHUNK_SIZE * TILE_SIZE; // 1 chunk radius — keep chickens near player
 		while (spawned < count && attempts < 200) {
 			attempts++;
 			const wx = (rng() - 0.5) * range * 2;

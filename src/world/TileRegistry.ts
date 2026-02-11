@@ -11,6 +11,14 @@ export enum TileId {
 	FlowerRed = 10,
 	FlowerYellow = 11,
 	TallGrass = 12,
+	Mushroom = 13,
+	Rock = 14,
+	Sunflower = 15,
+	SmallBerries = 16,
+	Sprout = 17,
+	Leaf = 18,
+	Pumpkin = 19,
+	BigRock = 20,
 }
 
 /** Collision bitfield flags. */
@@ -46,8 +54,8 @@ export function registerDefaultTiles(): void {
 	// Terrain tiles
 	registerTile(TileId.Grass, {
 		sheetKey: "grass",
-		spriteCol: 2,
-		spriteRow: 4,
+		spriteCol: 9,
+		spriteRow: 3,
 		collision: CollisionFlag.None,
 	});
 	registerTile(TileId.Water, {
@@ -64,21 +72,21 @@ export function registerDefaultTiles(): void {
 	});
 	registerTile(TileId.Sand, {
 		sheetKey: "dirt",
-		spriteCol: 2,
-		spriteRow: 4,
+		spriteCol: 9,
+		spriteRow: 3,
 		collision: CollisionFlag.None,
 	});
 	registerTile(TileId.Forest, {
 		sheetKey: "grass",
-		spriteCol: 2,
-		spriteRow: 4,
+		spriteCol: 9,
+		spriteRow: 3,
 		collision: CollisionFlag.None,
 	});
 	registerTile(TileId.DenseForest, {
 		sheetKey: "grass",
-		spriteCol: 2,
-		spriteRow: 4,
-		collision: CollisionFlag.SlowWalk,
+		spriteCol: 9,
+		spriteRow: 3,
+		collision: CollisionFlag.None,
 	});
 
 	// Detail tiles
@@ -98,6 +106,54 @@ export function registerDefaultTiles(): void {
 		sheetKey: "objects",
 		spriteCol: 0,
 		spriteRow: 2,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Mushroom, {
+		sheetKey: "objects",
+		spriteCol: 3,
+		spriteRow: 2,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Rock, {
+		sheetKey: "objects",
+		spriteCol: 7,
+		spriteRow: 0,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Sunflower, {
+		sheetKey: "objects",
+		spriteCol: 5,
+		spriteRow: 2,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.SmallBerries, {
+		sheetKey: "objects",
+		spriteCol: 2,
+		spriteRow: 2,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Sprout, {
+		sheetKey: "objects",
+		spriteCol: 8,
+		spriteRow: 0,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Leaf, {
+		sheetKey: "objects",
+		spriteCol: 4,
+		spriteRow: 2,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.Pumpkin, {
+		sheetKey: "objects",
+		spriteCol: 6,
+		spriteRow: 1,
+		collision: CollisionFlag.None,
+	});
+	registerTile(TileId.BigRock, {
+		sheetKey: "objects",
+		spriteCol: 6,
+		spriteRow: 0,
 		collision: CollisionFlag.None,
 	});
 }

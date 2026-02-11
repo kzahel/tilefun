@@ -92,9 +92,9 @@ describe("EntityManager", () => {
 			assertDefined(vel);
 			vel.vx = 10;
 			vel.vy = 0;
-			// Water wall at tile (7, 6) = wx 112..127 — small move brings AABB edge into it
+			// Water wall at tile (7, 5) — player AABB is ~16px above feet
 			const getCollision = (tx: number, ty: number) =>
-				tx === 7 && ty === 6 ? CollisionFlag.Water : CollisionFlag.None;
+				tx === 7 && ty === 5 ? CollisionFlag.Water : CollisionFlag.None;
 			em.update(1, getCollision);
 			// X should be blocked (stayed at 100)
 			expect(p.position.wx).toBe(100);

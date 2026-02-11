@@ -15,7 +15,7 @@ export function createChicken(wx: number, wy: number): Entity {
 		sprite: {
 			sheetKey: "chicken",
 			frameCol: 0,
-			frameRow: 0,
+			frameRow: 1,
 			animTimer: 0,
 			frameDuration: CHICKEN_FRAME_DURATION,
 			frameCount: CHICKEN_FRAME_COUNT,

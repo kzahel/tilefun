@@ -3,6 +3,7 @@ const SQRT2_INV = 1 / Math.sqrt(2);
 export interface Movement {
 	dx: number;
 	dy: number;
+	sprinting: boolean;
 }
 
 export class InputManager {
@@ -36,7 +37,9 @@ export class InputManager {
 			dy *= SQRT2_INV;
 		}
 
-		return { dx, dy };
+		const sprinting = this.keysDown.has("Shift");
+
+		return { dx, dy, sprinting };
 	}
 
 	/** Simulate a key press (for testing). */

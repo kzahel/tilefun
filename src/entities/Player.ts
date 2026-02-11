@@ -1,4 +1,9 @@
-import { PLAYER_FRAME_DURATION, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../config/constants.js";
+import {
+	PLAYER_FRAME_DURATION,
+	PLAYER_SPEED,
+	PLAYER_SPRINT_MULTIPLIER,
+	PLAYER_SPRITE_SIZE,
+} from "../config/constants.js";
 import type { Movement } from "../input/InputManager.js";
 import { Direction, type Entity } from "./Entity.js";
 
@@ -25,7 +30,7 @@ export function createPlayer(wx: number, wy: number): Entity {
 		},
 		collider: {
 			offsetX: 0,
-			offsetY: 0,
+			offsetY: -16,
 			width: 10,
 			height: 6,
 		},
@@ -39,10 +44,14 @@ export function updatePlayerFromInput(entity: Entity, movement: Movement, _dt: n
 	if (!velocity || !sprite) return;
 
 	const moving = movement.dx !== 0 || movement.dy !== 0;
-	velocity.vx = movement.dx * PLAYER_SPEED;
-	velocity.vy = movement.dy * PLAYER_SPEED;
+	const speed = movement.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
+	velocity.vx = movement.dx * speed;
+	velocity.vy = movement.dy * speed;
 
 	sprite.moving = moving;
+	sprite.frameDuration = movement.sprinting
+		? PLAYER_FRAME_DURATION / PLAYER_SPRINT_MULTIPLIER
+		: PLAYER_FRAME_DURATION;
 
 	if (moving) {
 		// Determine facing direction from input

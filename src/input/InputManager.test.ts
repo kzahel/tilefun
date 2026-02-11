@@ -83,4 +83,13 @@ describe("InputManager", () => {
 		const m = input.getMovement();
 		expect(m.dx).toBe(0);
 	});
+
+	it("reports sprinting when Shift is held", () => {
+		const input = new InputManager();
+		expect(input.getMovement().sprinting).toBe(false);
+		input.pressKey("Shift");
+		expect(input.getMovement().sprinting).toBe(true);
+		input.releaseKey("Shift");
+		expect(input.getMovement().sprinting).toBe(false);
+	});
 });

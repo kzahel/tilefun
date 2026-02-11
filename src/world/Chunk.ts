@@ -12,8 +12,10 @@ export class Chunk {
 	readonly terrain: Uint16Array;
 	/** Decoration tile IDs (0 = empty). */
 	readonly detail: Uint16Array;
-	/** Resolved spritesheet positions for autotile (packed: row<<8 | col, 0 = not autotiled). */
+	/** Resolved spritesheet positions for grass autotile (packed: row<<8 | col, 0 = not autotiled). */
 	readonly autotileCache: Uint16Array;
+	/** Resolved spritesheet positions for dirt autotile (packed: row<<8 | col, 0 = not autotiled). */
+	readonly dirtAutotileCache: Uint16Array;
 	/** Collision bitfield per tile. */
 	readonly collision: Uint8Array;
 
@@ -28,6 +30,7 @@ export class Chunk {
 		this.terrain = new Uint16Array(AREA);
 		this.detail = new Uint16Array(AREA);
 		this.autotileCache = new Uint16Array(AREA);
+		this.dirtAutotileCache = new Uint16Array(AREA);
 		this.collision = new Uint8Array(AREA);
 	}
 

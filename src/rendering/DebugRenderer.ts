@@ -7,17 +7,35 @@ export interface DebugInfo {
 	fps: number;
 	entityCount: number;
 	chunkCount: number;
+	playerWx: number;
+	playerWy: number;
+	playerTx: number;
+	playerTy: number;
+	terrainName: string;
+	collisionFlags: string;
+	speedMultiplier: number;
 }
 
-function drawFPS(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
+function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
+	const lines = [
+		`FPS: ${info.fps}`,
+		`Entities: ${info.entityCount}  Chunks: ${info.chunkCount}`,
+		`Pos: (${info.playerWx.toFixed(1)}, ${info.playerWy.toFixed(1)})  Tile: (${info.playerTx}, ${info.playerTy})`,
+		`Terrain: ${info.terrainName}`,
+		`Collision: ${info.collisionFlags}  Speed: ${info.speedMultiplier}x`,
+	];
+	const lineHeight = 16;
+	const panelW = 340;
+	const panelH = lines.length * lineHeight + 8;
+
 	ctx.save();
-	ctx.font = "14px monospace";
+	ctx.font = "13px monospace";
 	ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-	ctx.fillRect(4, 4, 180, 56);
+	ctx.fillRect(4, 4, panelW, panelH);
 	ctx.fillStyle = "#00ff00";
-	ctx.fillText(`FPS: ${info.fps}`, 10, 20);
-	ctx.fillText(`Entities: ${info.entityCount}`, 10, 36);
-	ctx.fillText(`Chunks: ${info.chunkCount}`, 10, 52);
+	for (let i = 0; i < lines.length; i++) {
+		ctx.fillText(lines[i] ?? "", 10, 18 + i * lineHeight);
+	}
 	ctx.restore();
 }
 
@@ -84,7 +102,7 @@ export function drawDebugOverlay(
 	info: DebugInfo,
 	visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
 ): void {
-	drawFPS(ctx, info);
+	drawInfoPanel(ctx, info);
 	drawChunkBorders(ctx, camera, visible);
 	drawCollisionBoxes(ctx, camera, entities);
 }

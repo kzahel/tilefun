@@ -3,3 +3,5 @@ dist/
 test-results/
 playwright-report/
 *.zip
+Sprout-Lands-Tilemap-addon/
+screenshot.png

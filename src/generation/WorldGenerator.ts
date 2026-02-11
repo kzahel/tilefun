@@ -22,11 +22,26 @@ const BIOME_COLLISION: Record<BiomeId, number> = {
 	[BiomeId.Sand]: CollisionFlag.None,
 	[BiomeId.Grass]: CollisionFlag.None,
 	[BiomeId.Forest]: CollisionFlag.None,
-	[BiomeId.DenseForest]: CollisionFlag.SlowWalk,
+	[BiomeId.DenseForest]: CollisionFlag.None,
 };
 
-/** Detail tiles to scatter on grass/forest biomes. */
-const GRASS_DETAILS: TileId[] = [TileId.FlowerRed, TileId.FlowerYellow, TileId.TallGrass];
+/** Detail tiles per biome type. */
+const GRASS_DETAILS: TileId[] = [
+	TileId.FlowerRed,
+	TileId.FlowerYellow,
+	TileId.TallGrass,
+	TileId.Sunflower,
+	TileId.SmallBerries,
+	TileId.Sprout,
+];
+const FOREST_DETAILS: TileId[] = [
+	TileId.Mushroom,
+	TileId.Rock,
+	TileId.TallGrass,
+	TileId.Leaf,
+	TileId.Pumpkin,
+	TileId.BigRock,
+];
 
 /** Detail noise threshold: values above this get a detail tile. */
 const DETAIL_THRESHOLD_GRASS = 0.72;
@@ -107,10 +122,11 @@ export class WorldGenerator {
 
 		const detailValue = this.detailNoise.sample(tx, ty);
 		const threshold = biome === BiomeId.Grass ? DETAIL_THRESHOLD_GRASS : DETAIL_THRESHOLD_FOREST;
+		const palette = biome === BiomeId.Grass ? GRASS_DETAILS : FOREST_DETAILS;
 
 		if (detailValue > threshold) {
-			const detailIdx = Math.floor(rng() * GRASS_DETAILS.length);
-			const detail = GRASS_DETAILS[detailIdx];
+			const detailIdx = Math.floor(rng() * palette.length);
+			const detail = palette[detailIdx];
 			if (detail !== undefined) {
 				chunk.setDetail(lx, ly, detail);
 			}
