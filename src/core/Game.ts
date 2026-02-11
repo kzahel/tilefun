@@ -1,12 +1,13 @@
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
-import { PIXEL_SCALE, TILE_SIZE } from "../config/constants.js";
+import { TILE_SIZE } from "../config/constants.js";
 import { Camera } from "../rendering/Camera.js";
+import { TileRenderer } from "../rendering/TileRenderer.js";
+import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
-/** Full interior grass tile position in the Grass.png spritesheet. */
-const GRASS_COL = 2;
-const GRASS_ROW = 4;
+/** Camera pan speed in world pixels per second. */
+const CAMERA_SPEED = 120;
 
 export class Game {
 	private canvas: HTMLCanvasElement;
@@ -14,6 +15,9 @@ export class Game {
 	private camera: Camera;
 	private loop: GameLoop;
 	private grassSheet: Spritesheet | null = null;
+	private world: World;
+	private tileRenderer: TileRenderer;
+	private keysDown = new Set<string>();
 
 	constructor(canvas: HTMLCanvasElement) {
 		const ctx = canvas.getContext("2d");
@@ -21,6 +25,8 @@ export class Game {
 		this.canvas = canvas;
 		this.ctx = ctx;
 		this.camera = new Camera();
+		this.world = new World();
+		this.tileRenderer = new TileRenderer();
 		this.loop = new GameLoop({
 			update: (dt) => this.update(dt),
 			render: (alpha) => this.render(alpha),
@@ -30,9 +36,14 @@ export class Game {
 	async init(): Promise<void> {
 		this.resize();
 		window.addEventListener("resize", () => this.resize());
+		window.addEventListener("keydown", (e) => this.keysDown.add(e.key));
+		window.addEventListener("keyup", (e) => this.keysDown.delete(e.key));
 
 		const grassImg = await loadImage("assets/tilesets/grass.png");
 		this.grassSheet = new Spritesheet(grassImg, TILE_SIZE, TILE_SIZE);
+
+		// Pre-load chunks around origin
+		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
 
 		this.loop.start();
 		this.canvas.dataset.ready = "true";
@@ -44,8 +55,22 @@ export class Game {
 		this.camera.setViewport(this.canvas.width, this.canvas.height);
 	}
 
-	private update(_dt: number): void {
-		// No game logic yet — camera stays at origin
+	private update(dt: number): void {
+		// Arrow key camera panning
+		let dx = 0;
+		let dy = 0;
+		if (this.keysDown.has("ArrowLeft")) dx -= 1;
+		if (this.keysDown.has("ArrowRight")) dx += 1;
+		if (this.keysDown.has("ArrowUp")) dy -= 1;
+		if (this.keysDown.has("ArrowDown")) dy += 1;
+
+		if (dx !== 0 || dy !== 0) {
+			this.camera.x += dx * CAMERA_SPEED * dt;
+			this.camera.y += dy * CAMERA_SPEED * dt;
+		}
+
+		// Update chunk loading based on camera position
+		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
 	}
 
 	private render(_alpha: number): void {
@@ -57,30 +82,7 @@ export class Game {
 
 		if (!this.grassSheet) return;
 
-		// Draw a small grid of grass tiles centered at the world origin
-		const tileScreen = TILE_SIZE * PIXEL_SCALE;
-		const gridSize = 5;
-		const half = Math.floor(gridSize / 2);
-
-		for (let row = -half; row <= half; row++) {
-			for (let col = -half; col <= half; col++) {
-				const worldX = col * TILE_SIZE;
-				const worldY = row * TILE_SIZE;
-				const screen = this.camera.worldToScreen(worldX, worldY);
-				this.grassSheet.drawTile(
-					this.ctx,
-					GRASS_COL,
-					GRASS_ROW,
-					Math.floor(screen.sx),
-					Math.floor(screen.sy),
-					PIXEL_SCALE,
-				);
-			}
-		}
-
-		// Draw one highlighted tile at origin for visual proof
-		const origin = this.camera.worldToScreen(0, 0);
-		this.ctx.strokeStyle = "#ffffff44";
-		this.ctx.strokeRect(Math.floor(origin.sx), Math.floor(origin.sy), tileScreen, tileScreen);
+		const visible = this.camera.getVisibleChunkRange();
+		this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.grassSheet, visible);
 	}
 }
