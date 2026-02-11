@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { InputManager } from "./InputManager.js";
+import { TouchJoystick } from "./TouchJoystick.js";
+
+function makeCanvas(width = 800, height = 600): HTMLCanvasElement {
+  return { width, height } as unknown as HTMLCanvasElement;
+}
 
 describe("InputManager", () => {
   it("returns zero movement when no keys pressed", () => {
@@ -91,5 +96,26 @@ describe("InputManager", () => {
     expect(input.getMovement().sprinting).toBe(true);
     input.releaseKey("Shift");
     expect(input.getMovement().sprinting).toBe(false);
+  });
+
+  it("touch joystick overrides keyboard when active", () => {
+    const input = new InputManager();
+    const joy = new TouchJoystick(makeCanvas());
+    input.setTouchJoystick(joy);
+    input.pressKey("ArrowLeft");
+    joy.simulateTouchStart(100, 300);
+    joy.simulateTouchMove(150, 300); // push right
+    const m = input.getMovement();
+    expect(m.dx).toBeGreaterThan(0); // touch wins over keyboard left
+    expect(m.sprinting).toBe(false);
+  });
+
+  it("falls back to keyboard when touch inactive", () => {
+    const input = new InputManager();
+    const joy = new TouchJoystick(makeCanvas());
+    input.setTouchJoystick(joy);
+    input.pressKey("ArrowRight");
+    const m = input.getMovement();
+    expect(m.dx).toBe(1); // keyboard works when no touch
   });
 });

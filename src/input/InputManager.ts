@@ -1,3 +1,5 @@
+import type { TouchJoystick } from "./TouchJoystick.js";
+
 const SQRT2_INV = 1 / Math.sqrt(2);
 
 export interface Movement {
@@ -8,6 +10,11 @@ export interface Movement {
 
 export class InputManager {
   private readonly keysDown = new Set<string>();
+  private touchJoystick: TouchJoystick | null = null;
+
+  setTouchJoystick(joystick: TouchJoystick): void {
+    this.touchJoystick = joystick;
+  }
 
   attach(): void {
     window.addEventListener("keydown", this.onKeyDown);
@@ -23,6 +30,12 @@ export class InputManager {
 
   /** Poll current movement direction. Returns normalized vector. */
   getMovement(): Movement {
+    // Touch joystick takes priority when active
+    if (this.touchJoystick?.isActive()) {
+      const touch = this.touchJoystick.getMovement();
+      return { dx: touch.dx, dy: touch.dy, sprinting: false };
+    }
+
     let dx = 0;
     let dy = 0;
 

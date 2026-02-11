@@ -16,6 +16,7 @@ import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
+import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
@@ -33,6 +34,7 @@ export class Game {
   private world: World;
   private tileRenderer: TileRenderer;
   private input: InputManager;
+  private touchJoystick: TouchJoystick;
   private entityManager: EntityManager;
   private player: Entity;
   private debugEnabled = false;
@@ -49,6 +51,8 @@ export class Game {
     this.world = new World();
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
+    this.touchJoystick = new TouchJoystick(canvas);
+    this.input.setTouchJoystick(this.touchJoystick);
     this.entityManager = new EntityManager();
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
@@ -68,6 +72,7 @@ export class Game {
       }
     });
     this.input.attach();
+    this.touchJoystick.attach();
 
     // Load terrain layer sheets (data-driven from TERRAIN_LAYERS)
     const [layerImages, shallowWaterImg, objectsImg, playerImg, chickenImg] = await Promise.all([
@@ -195,6 +200,9 @@ export class Game {
         visible,
       );
     }
+
+    // Touch joystick overlay (on top of everything)
+    this.touchJoystick.draw(this.ctx);
   }
 
   private findWalkableSpawn(entity: Entity): void {
