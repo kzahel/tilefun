@@ -118,22 +118,29 @@ GameLoop (fixed timestep 60Hz)
 
 ## Autotile
 
-### Phase 1: 4-bit Cardinal Bitmask (16 variants)
+### 8-bit Blob Autotile (47+ variants)
 
 ```
-Bit 0 (1) = North neighbor is same type
-Bit 1 (2) = West
-Bit 2 (4) = East
-Bit 3 (8) = South
+Cardinal bits:  N(1) W(2) E(4) S(8)
+Diagonal bits:  NW(16) NE(32) SW(64) SE(128)
 
-Bitmask 0..15 -> index into 16-variant autotile strip
+Diagonal bits only count when BOTH adjacent cardinals are set.
+e.g. NW only matters if both N and W are set.
+
+256 possible masks collapse to 47 unique visual variants via lookup table.
 ```
 
 Computed per-chunk after terrain generation. Chunk borders read from neighbor chunks (must be generated first).
 
-### Upgrade Path: 8-bit Blob (47 variants)
+### Metadata Source
 
-Add diagonal bits (NW, NE, SW, SE) that only count when both adjacent cardinals are set. 256 possible masks collapse to 47 unique visual variants via lookup table. Same data structures — only the bitmask computation and lookup table change.
+The Godot plugin [Maaack/Sprout-Lands-Tilemap](https://github.com/Maaack/Sprout-Lands-Tilemap) has the complete terrain peering bit mapping for Sprout Lands. A converter script parses the Godot `.tscn` file into our JSON metadata format, mapping each 8-bit bitmask to its (col, row) in the spritesheet.
+
+Key details from the Godot data:
+- Grass.png has 52 tile positions, 49 with peering bits (extended blob set with visual variants)
+- Water has no terrain — grass blob tiles define the water↔grass transition edges
+- Dirt shares terrain_set with Grass, enabling smooth Grass↔Dirt transitions
+- Fences/Paths use simpler 4-bit sides-only matching
 
 ## Entity System (ECS-lite)
 
