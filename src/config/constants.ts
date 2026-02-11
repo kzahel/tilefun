@@ -18,3 +18,15 @@ export const UNLOAD_DISTANCE = 5;
 
 /** Fixed update tick rate in Hz. */
 export const TICK_RATE = 60;
+
+/** Player movement speed in world pixels per second. */
+export const PLAYER_SPEED = 64;
+
+/** Camera smooth-follow lerp factor (per tick at 60Hz). */
+export const CAMERA_LERP = 0.1;
+
+/** Size of each frame in the character spritesheet (pixels). */
+export const PLAYER_SPRITE_SIZE = 48;
+
+/** Duration of each walk animation frame (milliseconds). */
+export const PLAYER_FRAME_DURATION = 150;

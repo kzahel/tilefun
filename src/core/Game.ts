@@ -1,13 +1,15 @@
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
-import { TILE_SIZE } from "../config/constants.js";
+import { CAMERA_LERP, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
+import { EntityManager } from "../entities/EntityManager.js";
+import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
+import { InputManager } from "../input/InputManager.js";
 import { Camera } from "../rendering/Camera.js";
+import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
-
-/** Camera pan speed in world pixels per second. */
-const CAMERA_SPEED = 120;
 
 export class Game {
 	private canvas: HTMLCanvasElement;
@@ -17,7 +19,9 @@ export class Game {
 	private sheets = new Map<string, Spritesheet>();
 	private world: World;
 	private tileRenderer: TileRenderer;
-	private keysDown = new Set<string>();
+	private input: InputManager;
+	private entityManager: EntityManager;
+	private player: Entity;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const ctx = canvas.getContext("2d");
@@ -27,6 +31,10 @@ export class Game {
 		this.camera = new Camera();
 		this.world = new World();
 		this.tileRenderer = new TileRenderer();
+		this.input = new InputManager();
+		this.entityManager = new EntityManager();
+		this.player = createPlayer(0, 0);
+		this.entityManager.spawn(this.player);
 		this.loop = new GameLoop({
 			update: (dt) => this.update(dt),
 			render: (alpha) => this.render(alpha),
@@ -36,20 +44,21 @@ export class Game {
 	async init(): Promise<void> {
 		this.resize();
 		window.addEventListener("resize", () => this.resize());
-		window.addEventListener("keydown", (e) => this.keysDown.add(e.key));
-		window.addEventListener("keyup", (e) => this.keysDown.delete(e.key));
+		this.input.attach();
 
-		const [grassImg, dirtImg, waterImg, objectsImg] = await Promise.all([
+		const [grassImg, dirtImg, waterImg, objectsImg, playerImg] = await Promise.all([
 			loadImage("assets/tilesets/grass.png"),
 			loadImage("assets/tilesets/dirt.png"),
 			loadImage("assets/tilesets/water.png"),
 			loadImage("assets/tilesets/objects.png"),
+			loadImage("assets/sprites/player.png"),
 		]);
 
 		this.sheets.set("grass", new Spritesheet(grassImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("dirt", new Spritesheet(dirtImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("water", new Spritesheet(waterImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
+		this.sheets.set("player", new Spritesheet(playerImg, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
 
 		// Pre-load chunks around origin and compute initial autotile
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
@@ -66,18 +75,15 @@ export class Game {
 	}
 
 	private update(dt: number): void {
-		// Arrow key camera panning
-		let dx = 0;
-		let dy = 0;
-		if (this.keysDown.has("ArrowLeft")) dx -= 1;
-		if (this.keysDown.has("ArrowRight")) dx += 1;
-		if (this.keysDown.has("ArrowUp")) dy -= 1;
-		if (this.keysDown.has("ArrowDown")) dy += 1;
+		// Player input → velocity + animation state
+		const movement = this.input.getMovement();
+		updatePlayerFromInput(this.player, movement, dt);
 
-		if (dx !== 0 || dy !== 0) {
-			this.camera.x += dx * CAMERA_SPEED * dt;
-			this.camera.y += dy * CAMERA_SPEED * dt;
-		}
+		// Update all entities (velocity → position, animation timers)
+		this.entityManager.update(dt);
+
+		// Camera follows player
+		this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);
 
 		// Update chunk loading based on camera position
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
@@ -97,5 +103,8 @@ export class Game {
 		const visible = this.camera.getVisibleChunkRange();
 		// Terrain, autotile, and details are all baked into the chunk cache
 		this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.sheets, visible);
+
+		// Draw entities Y-sorted on top of terrain
+		drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets);
 	}
 }

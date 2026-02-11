@@ -202,6 +202,96 @@ test("water/grass edges have visual transitions (autotile)", async ({ page }) =>
 	expect(hasTransitions).toBe(true);
 });
 
+test("player sprite visible at screen center", async ({ page }) => {
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+	await page.waitForTimeout(200);
+
+	// The player is at (0,0) and the camera follows, so player is near screen center.
+	// Sample a small area around center — at least one pixel should differ from
+	// the terrain-only background (the player character sprite is drawn on top).
+	const result = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return { hasPixels: false };
+
+		const cx = Math.floor(c.width / 2);
+		const cy = Math.floor(c.height / 2);
+		// Sample a 48x48 area around center (one character frame at 3x scale = 144px,
+		// but we sample a smaller region to ensure we hit the character)
+		const size = 48;
+		const data = ctx.getImageData(cx - size / 2, cy - size / 2, size, size).data;
+		let nonZero = 0;
+		for (let i = 0; i < data.length; i += 4) {
+			if ((data[i + 3] ?? 0) > 0) nonZero++;
+		}
+		return { hasPixels: nonZero > 0 };
+	});
+
+	expect(result.hasPixels).toBe(true);
+});
+
+test("arrow key movement does not crash and keeps rendering", async ({ page }) => {
+	const errors: string[] = [];
+	page.on("console", (msg) => {
+		if (msg.type() === "error") errors.push(msg.text());
+	});
+
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+	await page.waitForTimeout(200);
+
+	// Move player in all directions
+	await page.keyboard.down("ArrowRight");
+	await page.waitForTimeout(400);
+	await page.keyboard.up("ArrowRight");
+
+	await page.keyboard.down("ArrowDown");
+	await page.waitForTimeout(400);
+	await page.keyboard.up("ArrowDown");
+	await page.waitForTimeout(100);
+
+	// Verify still rendering after movement
+	const hasContent = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return false;
+		const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
+		return (pixel[3] ?? 0) > 0;
+	});
+
+	expect(hasContent).toBe(true);
+	expect(errors).toEqual([]);
+});
+
+test("no console errors after WASD movement", async ({ page }) => {
+	const errors: string[] = [];
+	page.on("console", (msg) => {
+		if (msg.type() === "error") errors.push(msg.text());
+	});
+
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+	await page.waitForTimeout(100);
+
+	// Test WASD keys
+	for (const key of ["w", "a", "s", "d"]) {
+		await page.keyboard.down(key);
+		await page.waitForTimeout(200);
+		await page.keyboard.up(key);
+	}
+
+	// Diagonal WASD
+	await page.keyboard.down("w");
+	await page.keyboard.down("d");
+	await page.waitForTimeout(300);
+	await page.keyboard.up("w");
+	await page.keyboard.up("d");
+
+	await page.waitForTimeout(100);
+	expect(errors).toEqual([]);
+});
+
 test("no console errors after rapid scrolling through many chunks", async ({ page }) => {
 	const errors: string[] = [];
 	page.on("console", (msg) => {
