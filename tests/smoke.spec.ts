@@ -100,6 +100,46 @@ test("camera movement via arrow keys does not crash", async ({ page }) => {
 	expect(errors).toEqual([]);
 });
 
+test("terrain has variety — not all identical color", async ({ page }) => {
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+	await page.waitForTimeout(100);
+
+	// Pan camera to cover a larger area to hit different biomes
+	await page.keyboard.down("ArrowRight");
+	await page.waitForTimeout(500);
+	await page.keyboard.up("ArrowRight");
+	await page.keyboard.down("ArrowDown");
+	await page.waitForTimeout(500);
+	await page.keyboard.up("ArrowDown");
+	await page.waitForTimeout(100);
+
+	const hasVariety = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return false;
+
+		// Sample a grid of points across the canvas
+		const colors = new Set<string>();
+		const step = 48; // one tile = 48 screen pixels at 3x scale
+		for (let x = step; x < c.width - step; x += step * 2) {
+			for (let y = step; y < c.height - step; y += step * 2) {
+				const pixel = ctx.getImageData(x, y, 1, 1).data;
+				// Quantize to reduce noise — group similar colors
+				const r = Math.floor((pixel[0] ?? 0) / 32);
+				const g = Math.floor((pixel[1] ?? 0) / 32);
+				const b = Math.floor((pixel[2] ?? 0) / 32);
+				colors.add(`${r},${g},${b}`);
+			}
+		}
+
+		// With procedural terrain (grass, water, sand, forest), expect at least 2 distinct color groups
+		return colors.size >= 2;
+	});
+
+	expect(hasVariety).toBe(true);
+});
+
 test("no console errors on load", async ({ page }) => {
 	const errors: string[] = [];
 	page.on("console", (msg) => {

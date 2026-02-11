@@ -1,13 +1,17 @@
 import { describe, expect, it } from "vitest";
+import { WorldGenerator } from "../generation/WorldGenerator.js";
 import { ChunkManager } from "./ChunkManager.js";
-import { TileId } from "./TileRegistry.js";
+import { registerDefaultTiles, TileId } from "./TileRegistry.js";
 
 describe("ChunkManager", () => {
-	it("creates chunks on demand filled with grass", () => {
+	it("creates chunks on demand with generated terrain", () => {
+		registerDefaultTiles();
 		const mgr = new ChunkManager();
+		mgr.setGenerator(new WorldGenerator("test-seed"));
 		const chunk = mgr.getOrCreate(0, 0);
-		expect(chunk.getTerrain(0, 0)).toBe(TileId.Grass);
-		expect(chunk.getTerrain(8, 8)).toBe(TileId.Grass);
+		// With a generator, tiles should not all be Empty
+		const tile = chunk.getTerrain(0, 0);
+		expect(tile).not.toBe(TileId.Empty);
 	});
 
 	it("returns same chunk for same coordinates", () => {
@@ -25,9 +29,11 @@ describe("ChunkManager", () => {
 	});
 
 	it("handles negative chunk coordinates", () => {
+		registerDefaultTiles();
 		const mgr = new ChunkManager();
+		mgr.setGenerator(new WorldGenerator("test-seed"));
 		const chunk = mgr.getOrCreate(-1, -1);
-		expect(chunk.getTerrain(0, 0)).toBe(TileId.Grass);
+		expect(chunk.getTerrain(0, 0)).not.toBe(TileId.Empty);
 	});
 
 	it("tracks loaded chunk count", () => {

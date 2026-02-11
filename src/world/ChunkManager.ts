@@ -1,6 +1,6 @@
 import { RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
+import type { WorldGenerator } from "../generation/WorldGenerator.js";
 import { Chunk } from "./Chunk.js";
-import { CollisionFlag, TileId } from "./TileRegistry.js";
 import { chunkKey } from "./types.js";
 
 export interface ChunkRange {
@@ -12,6 +12,12 @@ export interface ChunkRange {
 
 export class ChunkManager {
 	private chunks = new Map<string, Chunk>();
+	private generator: WorldGenerator | null = null;
+
+	/** Attach a world generator for procedural chunk creation. */
+	setGenerator(generator: WorldGenerator): void {
+		this.generator = generator;
+	}
 
 	/** Get an existing chunk, or create and populate it. */
 	getOrCreate(cx: number, cy: number): Chunk {
@@ -58,7 +64,7 @@ export class ChunkManager {
 		const unloadMinCy = visible.minCy - UNLOAD_DISTANCE;
 		const unloadMaxCy = visible.maxCy + UNLOAD_DISTANCE;
 
-		for (const [key, _chunk] of this.chunks) {
+		for (const [key] of this.chunks) {
 			const commaIdx = key.indexOf(",");
 			const cx = Number(key.slice(0, commaIdx));
 			const cy = Number(key.slice(commaIdx + 1));
@@ -68,12 +74,10 @@ export class ChunkManager {
 		}
 	}
 
-	/**
-	 * Generate terrain for a chunk.
-	 * For now, fill everything with grass. Procedural generation comes in Session 4.
-	 */
-	private generate(chunk: Chunk, _cx: number, _cy: number): void {
-		chunk.fillTerrain(TileId.Grass);
-		chunk.fillCollision(CollisionFlag.None);
+	/** Generate terrain for a chunk using the attached generator. */
+	private generate(chunk: Chunk, cx: number, cy: number): void {
+		if (this.generator) {
+			this.generator.generate(chunk, cx, cy);
+		}
 	}
 }

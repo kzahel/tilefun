@@ -1,14 +1,18 @@
+import { WorldGenerator } from "../generation/WorldGenerator.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
 import { registerDefaultTiles, type TileId } from "./TileRegistry.js";
 import { tileToChunk, tileToLocal } from "./types.js";
 
+const DEFAULT_SEED = "tilefun-default";
+
 export class World {
 	readonly chunks: ChunkManager;
 
-	constructor() {
+	constructor(seed: string = DEFAULT_SEED) {
 		registerDefaultTiles();
 		this.chunks = new ChunkManager();
+		this.chunks.setGenerator(new WorldGenerator(seed));
 	}
 
 	/** Get terrain tile at a global tile position. */

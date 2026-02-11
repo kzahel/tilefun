@@ -14,7 +14,7 @@ export class Game {
 	private ctx: CanvasRenderingContext2D;
 	private camera: Camera;
 	private loop: GameLoop;
-	private grassSheet: Spritesheet | null = null;
+	private sheets = new Map<string, Spritesheet>();
 	private world: World;
 	private tileRenderer: TileRenderer;
 	private keysDown = new Set<string>();
@@ -39,8 +39,17 @@ export class Game {
 		window.addEventListener("keydown", (e) => this.keysDown.add(e.key));
 		window.addEventListener("keyup", (e) => this.keysDown.delete(e.key));
 
-		const grassImg = await loadImage("assets/tilesets/grass.png");
-		this.grassSheet = new Spritesheet(grassImg, TILE_SIZE, TILE_SIZE);
+		const [grassImg, dirtImg, waterImg, objectsImg] = await Promise.all([
+			loadImage("assets/tilesets/grass.png"),
+			loadImage("assets/tilesets/dirt.png"),
+			loadImage("assets/tilesets/water.png"),
+			loadImage("assets/tilesets/objects.png"),
+		]);
+
+		this.sheets.set("grass", new Spritesheet(grassImg, TILE_SIZE, TILE_SIZE));
+		this.sheets.set("dirt", new Spritesheet(dirtImg, TILE_SIZE, TILE_SIZE));
+		this.sheets.set("water", new Spritesheet(waterImg, TILE_SIZE, TILE_SIZE));
+		this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
 
 		// Pre-load chunks around origin
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
@@ -80,9 +89,10 @@ export class Game {
 		this.ctx.fillStyle = "#1a1a2e";
 		this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-		if (!this.grassSheet) return;
+		if (this.sheets.size === 0) return;
 
 		const visible = this.camera.getVisibleChunkRange();
-		this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.grassSheet, visible);
+		this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.sheets, visible);
+		this.tileRenderer.drawDetails(this.ctx, this.camera, this.world, this.sheets, visible);
 	}
 }

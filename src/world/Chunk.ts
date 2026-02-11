@@ -40,6 +40,14 @@ export class Chunk {
 		this.collision[idx(lx, ly)] = flags;
 	}
 
+	getDetail(lx: number, ly: number): TileId {
+		return this.detail[idx(lx, ly)] as TileId;
+	}
+
+	setDetail(lx: number, ly: number, id: TileId): void {
+		this.detail[idx(lx, ly)] = id;
+	}
+
 	/** Fill entire chunk with a single terrain tile. */
 	fillTerrain(id: TileId): void {
 		this.terrain.fill(id);
