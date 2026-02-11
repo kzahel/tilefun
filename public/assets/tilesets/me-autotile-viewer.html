@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html><head><style>
+body { background: #222; color: #eee; font-family: system-ui, sans-serif; padding: 20px; }
+h1 { margin-bottom: 4px; }
+h2 { margin-top: 0; }
+.subtitle { color: #aaa; margin-bottom: 20px; }
+.category { margin: 30px 0 10px; padding: 8px 16px; border-radius: 6px; font-size: 20px; font-weight: bold; }
+.grid { display: flex; flex-wrap: wrap; gap: 16px; }
+.card { border: 2px solid #555; border-radius: 8px; overflow: hidden; width: 400px; background: #333; }
+.card.overlay { border-color: #c44; }
+.card-header { padding: 8px 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card-header .num { color: #888; font-size: 13px; min-width: 28px; }
+.card-header .name { font-weight: bold; font-size: 15px; }
+.badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; color: white; font-weight: bold; white-space: nowrap; }
+.card img { width: 100%; height: auto; image-rendering: pixelated; display:block; }
+.card-meta { padding: 6px 12px; font-size: 12px; display: flex; gap: 16px; border-top: 1px solid #444; }
+.card-meta .label { color: #888; }
+.card-meta .value { color: #ddd; font-weight: bold; }
+.pair-link { color: #6af; text-decoration: none; }
+.pair-link:hover { text-decoration: underline; }
+.card-notes { padding: 4px 12px 10px; color: #999; font-size: 11px; }
+.checker { background: repeating-conic-gradient(#444 0% 25%, #333 0% 50%) 0 0 / 16px 16px; padding: 4px; }
+.legend { display: flex; gap: 20px; margin: 16px 0; padding: 12px; background: #2a2a2a; border-radius: 6px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.legend-swatch { width: 16px; height: 16px; border-radius: 3px; }
+</style></head><body>
+<h1>Modern Exteriors — 26 Autotile Terrains</h1>
+<p class="subtitle">GM Blob Format, 16&times;16. Each strip: 192&times;64 px (12&times;4 grid) = 47 unique bitmask variants. Shown at 3x scale.<br>
+<b>Primary</b> = center fill (mask 255). <b>Secondary</b> = what shows at edges (mask 0 = island of primary in secondary).<br>
+All standard grass: <span style="background:rgb(107,147,95); padding:2px 8px; border-radius:3px; color:#222; font-weight:bold">rgb(107, 147, 95)</span></p>
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#4a7a2a"></div> Base Terrain (opaque, transitions built-in)</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c44"></div> Overlay (semi-transparent, composited on top of any terrain)</div>
+</div>
+<div class="category" style="background:#2d5a1e">Natural</div>
+<div class="grid">
+<div class="card" id="t1">
+  <div class="card-header">
+    <span class="num">#1</span>
+    <span class="name">Dirt/Grass (Light Brown)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-01.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">dirt_light</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+    
+  </div>
+  <div class="card-notes">Light brown dirt fill, grass at edges. No known reverse sheet.</div>
+</div>
+<div class="card" id="t2">
+  <div class="card-header">
+    <span class="num">#2</span>
+    <span class="name">Dirt/Grass (Warm Brown)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-02.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">dirt_warm</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+     <span class="label">Pair:</span> <a class="pair-link" href="#t12">#12 Grass/Dirt (Warm Brown)</a>
+  </div>
+  <div class="card-notes">Warm brown dirt fill, grass at edges. Reverse of #12.</div>
+</div>
+<div class="card" id="t3">
+  <div class="card-header">
+    <span class="num">#3</span>
+    <span class="name">Water/Grass Shore</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-03.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">water_shallow</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+     <span class="label">Pair:</span> <a class="pair-link" href="#t15">#15 Grass/Water Shore</a>
+  </div>
+  <div class="card-notes">Water fill, grass+dirt strip at shore. Reverse of #15.</div>
+</div>
+<div class="card overlay" id="t6">
+  <div class="card-header">
+    <span class="num">#6</span>
+    <span class="name">Grass (Alpha)</span>
+    <span class="badge" style="background:#c44">OVERLAY</span>
+  </div>
+  <div class="checker" style="padding:4px">
+    <img src="me-autotile-06.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">alpha (transparent)</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+
+  </div>
+  <div class="card-notes">OVERLAY (45%). Center is transparent, grass at edges. Adds grass borders inward.</div>
+</div>
+<div class="card" id="t7">
+  <div class="card-header">
+    <span class="num">#7</span>
+    <span class="name">Sand Light/Grass</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-07.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sand_light</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+
+  </div>
+  <div class="card-notes">Light sand fill, grass at edges. Different (lighter) sand than #8/#9/#10.</div>
+</div>
+<div class="card" id="t8">
+  <div class="card-header">
+    <span class="num">#8</span>
+    <span class="name">Sand/Water (Beach)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-08.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sand</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">water_shallow</span></span>
+
+  </div>
+  <div class="card-notes">Wavy sand fill, shallow water at edges. Beach waterline. Same sand as #9/#10.</div>
+</div>
+<div class="card" id="t9">
+  <div class="card-header">
+    <span class="num">#9</span>
+    <span class="name">Sand/Sand (Texture)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-09.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sand</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">sand_light</span></span>
+    
+  </div>
+  <div class="card-notes">Dark wavy sand fill, lighter sand at edges. Same primary sand as #8/#10.</div>
+</div>
+<div class="card overlay" id="t10">
+  <div class="card-header">
+    <span class="num">#10</span>
+    <span class="name">Sand (Alpha)</span>
+    <span class="badge" style="background:#c44">OVERLAY</span>
+  </div>
+  <div class="checker" style="padding:4px">
+    <img src="me-autotile-10.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sand</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">alpha (transparent)</span></span>
+
+  </div>
+  <div class="card-notes">OVERLAY (65%). Sand fill fading to transparent at edges. Same sand as #8/#9.</div>
+</div>
+<div class="card" id="t12">
+  <div class="card-header">
+    <span class="num">#12</span>
+    <span class="name">Grass/Dirt (Warm Brown)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-12.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">grass</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">dirt_warm</span></span>
+     <span class="label">Pair:</span> <a class="pair-link" href="#t2">#2 Dirt/Grass (Warm Brown)</a>
+  </div>
+  <div class="card-notes">Grass fill, warm brown dirt at edges. Reverse of #2.</div>
+</div>
+<div class="card overlay" id="t13">
+  <div class="card-header">
+    <span class="num">#13</span>
+    <span class="name">Grass (Alpha)</span>
+    <span class="badge" style="background:#c44">OVERLAY</span>
+  </div>
+  <div class="checker" style="padding:4px">
+    <img src="me-autotile-13.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">grass</span></span>
+    <span><span class="label">Secondary:</span> <span class="value"><em style="color:#c44">any (alpha)</em></span></span>
+
+  </div>
+  <div class="card-notes">OVERLAY (78%). Grass onto any base.</div>
+</div>
+<div class="card" id="t15">
+  <div class="card-header">
+    <span class="num">#15</span>
+    <span class="name">Grass/Water Shore</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-15.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">grass</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">water_shallow</span></span>
+     <span class="label">Pair:</span> <a class="pair-link" href="#t3">#3 Water/Grass Shore</a>
+  </div>
+  <div class="card-notes">Grass fill, water at edges. Reverse of #3.</div>
+</div>
+<div class="card" id="t16">
+  <div class="card-header">
+    <span class="num">#16</span>
+    <span class="name">Deep/Shallow Water</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-16.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">water_deep</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">water_shallow</span></span>
+
+  </div>
+  <div class="card-notes">Deep water fill, shallow water at edges.</div>
+</div>
+</div>
+<div class="category" style="background:#3a2d5a">Theme Variant</div>
+<div class="grid">
+<div class="card" id="t4">
+  <div class="card-header">
+    <span class="num">#4</span>
+    <span class="name">Dirt/Grass (Muted/Night)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-04.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">dirt_muted</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass_muted</span></span>
+    
+  </div>
+  <div class="card-notes">Muted/dark palette. Night or spooky theme. Different grass color.</div>
+</div>
+<div class="card overlay" id="t5">
+  <div class="card-header">
+    <span class="num">#5</span>
+    <span class="name">Grass (Muted Alpha)</span>
+    <span class="badge" style="background:#c44">OVERLAY</span>
+  </div>
+  <div class="checker" style="padding:4px">
+    <img src="me-autotile-05.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">alpha (transparent)</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass_muted</span></span>
+
+  </div>
+  <div class="card-notes">OVERLAY (45%). Center transparent, muted grass at edges.</div>
+</div>
+</div>
+<div class="category" style="background:#5a3a1e">Structure</div>
+<div class="grid">
+<div class="card" id="t11">
+  <div class="card-header">
+    <span class="num">#11</span>
+    <span class="name">Playground (Painted)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-11.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">playground</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">grass</span></span>
+    
+  </div>
+  <div class="card-notes">Painted pavement with lines. Playground surface, grass at edges.</div>
+</div>
+<div class="card" id="t14">
+  <div class="card-header">
+    <span class="num">#14</span>
+    <span class="name">Grass/Curb</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-14.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">grass</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">curb</span></span>
+    
+  </div>
+  <div class="card-notes">Grass fill with small curb border at edges.</div>
+</div>
+<div class="card overlay" id="t17">
+  <div class="card-header">
+    <span class="num">#17</span>
+    <span class="name">Fence (Iron)</span>
+    <span class="badge" style="background:#c44">OVERLAY</span>
+  </div>
+  <div class="checker" style="padding:4px">
+    <img src="me-autotile-17.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">alpha (transparent)</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">fence_iron</span></span>
+
+  </div>
+  <div class="card-notes">OVERLAY (48%). Center transparent, iron fence at edges.</div>
+</div>
+<div class="card" id="t18">
+  <div class="card-header">
+    <span class="num">#18</span>
+    <span class="name">Pool / Shallow Water</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-18.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">pool</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">pool_edge</span></span>
+    
+  </div>
+  <div class="card-notes">Pool tiles. Light cyan on darker surround.</div>
+</div>
+</div>
+<div class="category" style="background:#3a3a4a">Urban</div>
+<div class="grid">
+<div class="card" id="t19">
+  <div class="card-header">
+    <span class="num">#19</span>
+    <span class="name">Sidewalk 1 (Warm Light)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-19.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_1</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Lightest/warmest sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t20">
+  <div class="card-header">
+    <span class="num">#20</span>
+    <span class="name">Sidewalk 2 (Warm)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-20.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_2</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Warm beige sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t21">
+  <div class="card-header">
+    <span class="num">#21</span>
+    <span class="name">Sidewalk 3 (Light Gray)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-21.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_3</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Light gray sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t22">
+  <div class="card-header">
+    <span class="num">#22</span>
+    <span class="name">Sidewalk 4 (Gray)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-22.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_4</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Medium gray sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t23">
+  <div class="card-header">
+    <span class="num">#23</span>
+    <span class="name">Sidewalk 5 (Cool Gray)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-23.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_5</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Cool-toned gray sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t24">
+  <div class="card-header">
+    <span class="num">#24</span>
+    <span class="name">Sidewalk 6 (Blue Gray)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-24.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">sidewalk_6</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+    
+  </div>
+  <div class="card-notes">Darkest/coolest sidewalk, asphalt at edges.</div>
+</div>
+<div class="card" id="t25">
+  <div class="card-header">
+    <span class="num">#25</span>
+    <span class="name">Asphalt (White Lines)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-25.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">asphalt_white</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+
+  </div>
+  <div class="card-notes">Asphalt with white lane markings. Plain asphalt at edges.</div>
+</div>
+<div class="card" id="t26">
+  <div class="card-header">
+    <span class="num">#26</span>
+    <span class="name">Asphalt (Yellow Lines)</span>
+    <span class="badge" style="background:#4a7a2a">Base</span>
+  </div>
+  <div style="padding:4px">
+    <img src="me-autotile-26.png">
+  </div>
+  <div class="card-meta">
+    <span><span class="label">Primary:</span> <span class="value">asphalt_yellow</span></span>
+    <span><span class="label">Secondary:</span> <span class="value">asphalt</span></span>
+
+  </div>
+  <div class="card-notes">Asphalt with yellow lane markings. Plain asphalt at edges.</div>
+</div>
+</div>
+
+<div style="margin-top:40px; padding:20px; background:#2a2a2a; border-radius:8px;">
+<h2>Transition Pair Map</h2>
+<pre style="font-size:14px; line-height:1.6; color:#ccc;">
+Deep Water ──(#16)──▶ Shallow Water ──(#3⟷#15)──▶ Grass (dirt strip at shore)
+                            │                              │
+                          (#8)                       (#2⟷#12 or #1)
+                            │                              │
+                      Sand ◀────────(#7)──────────── Grass/Dirt
+                       │
+                     (#9)
+                       │
+                   Light Sand
+
+Alpha overlays (blend onto anything):
+  #6  Grass alpha ─── fills gaps where no dedicated pair exists
+  #10 Sand alpha  ─── fills gaps where no dedicated pair exists
+  #13 Light Grass ─── lighter grass variant overlay
+</pre>
+
+<h2 style="margin-top:24px">Reversible Pairs</h2>
+<table style="border-collapse:collapse; font-size:14px; width:100%">
+<tr style="border-bottom:2px solid #555"><th style="text-align:left;padding:6px">Terrain A</th><th style="padding:6px">⟷</th><th style="text-align:left;padding:6px">Terrain B</th><th style="text-align:left;padding:6px">Use</th></tr>
+<tr><td style="padding:4px 6px">#2 Dirt (warm) primary</td><td style="padding:4px 6px; text-align:center">⟷</td><td style="padding:4px 6px">#12 Grass primary</td><td style="padding:4px 6px; color:#aaa">Use #2 on dirt side, #12 on grass side of border</td></tr>
+<tr><td style="padding:4px 6px">#3 Water primary</td><td style="padding:4px 6px; text-align:center">⟷</td><td style="padding:4px 6px">#15 Grass primary</td><td style="padding:4px 6px; color:#aaa">Use #3 on water side, #15 on grass side of shore</td></tr>
+</table>
+
+<h2 style="margin-top:24px">Terrain Generation (Natural Phase)</h2>
+<p>Noise layers determine terrain type. The autotile renderer picks sheets based on each tile + its neighbors:</p>
+<ol>
+<li><b>Elevation noise</b> → deep water / shallow water / land</li>
+<li><b>Moisture noise</b> → sand (dry) / dirt (normal) / grass (wet)</li>
+<li><b>Variety noise</b> → which dirt color (#1 light vs #2 warm)</li>
+<li>For each border between terrain types, select the matching dedicated pair sheet (or fall back to alpha overlay)</li>
+<li>Props scattered on top for visual detail</li>
+</ol>
+</div>
+</body></html>
