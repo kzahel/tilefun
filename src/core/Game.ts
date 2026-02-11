@@ -51,8 +51,9 @@ export class Game {
 		this.sheets.set("water", new Spritesheet(waterImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
 
-		// Pre-load chunks around origin
+		// Pre-load chunks around origin and compute initial autotile
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+		this.world.computeAutotile();
 
 		this.loop.start();
 		this.canvas.dataset.ready = "true";
@@ -80,6 +81,8 @@ export class Game {
 
 		// Update chunk loading based on camera position
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+		// Compute autotile for newly loaded chunks
+		this.world.computeAutotile();
 	}
 
 	private render(_alpha: number): void {
@@ -92,7 +95,7 @@ export class Game {
 		if (this.sheets.size === 0) return;
 
 		const visible = this.camera.getVisibleChunkRange();
+		// Terrain, autotile, and details are all baked into the chunk cache
 		this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.sheets, visible);
-		this.tileRenderer.drawDetails(this.ctx, this.camera, this.world, this.sheets, visible);
 	}
 }

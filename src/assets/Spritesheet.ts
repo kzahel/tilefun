@@ -23,7 +23,7 @@ export class Spritesheet {
 
 	/** Draw a tile from the spritesheet onto the given context. */
 	drawTile(
-		ctx: CanvasRenderingContext2D,
+		ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
 		col: number,
 		row: number,
 		destX: number,

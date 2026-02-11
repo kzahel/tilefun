@@ -27,6 +27,8 @@ export class ChunkManager {
 			chunk = new Chunk();
 			this.generate(chunk, cx, cy);
 			this.chunks.set(key, chunk);
+			// Invalidate neighbors' autotile so their borders recompute
+			this.invalidateNeighborAutotile(cx, cy);
 		}
 		return chunk;
 	}
@@ -34,6 +36,11 @@ export class ChunkManager {
 	/** Get chunk if it exists (no creation). */
 	get(cx: number, cy: number): Chunk | undefined {
 		return this.chunks.get(chunkKey(cx, cy));
+	}
+
+	/** Iterate all loaded chunks. */
+	entries(): IterableIterator<[string, Chunk]> {
+		return this.chunks.entries();
 	}
 
 	/** Number of loaded chunks. */
@@ -78,6 +85,19 @@ export class ChunkManager {
 	private generate(chunk: Chunk, cx: number, cy: number): void {
 		if (this.generator) {
 			this.generator.generate(chunk, cx, cy);
+		}
+	}
+
+	/** Mark existing neighbor chunks as needing autotile recomputation. */
+	private invalidateNeighborAutotile(cx: number, cy: number): void {
+		for (let dy = -1; dy <= 1; dy++) {
+			for (let dx = -1; dx <= 1; dx++) {
+				if (dx === 0 && dy === 0) continue;
+				const neighbor = this.get(cx + dx, cy + dy);
+				if (neighbor) {
+					neighbor.autotileComputed = false;
+				}
+			}
 		}
 	}
 }

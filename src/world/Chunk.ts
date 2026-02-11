@@ -12,10 +12,17 @@ export class Chunk {
 	readonly terrain: Uint16Array;
 	/** Decoration tile IDs (0 = empty). */
 	readonly detail: Uint16Array;
-	/** Resolved spritesheet positions for autotile. */
+	/** Resolved spritesheet positions for autotile (packed: row<<8 | col, 0 = not autotiled). */
 	readonly autotileCache: Uint16Array;
 	/** Collision bitfield per tile. */
 	readonly collision: Uint8Array;
+
+	/** True when the OffscreenCanvas render cache needs rebuilding. */
+	dirty = true;
+	/** True after the autotile pass has been computed for this chunk. */
+	autotileComputed = false;
+	/** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
+	renderCache: OffscreenCanvas | null = null;
 
 	constructor() {
 		this.terrain = new Uint16Array(AREA);

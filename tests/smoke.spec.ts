@@ -155,3 +155,89 @@ test("no console errors on load", async ({ page }) => {
 
 	expect(errors).toEqual([]);
 });
+
+test("water/grass edges have visual transitions (autotile)", async ({ page }) => {
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+
+	// Pan camera to cover diverse terrain
+	await page.keyboard.down("ArrowRight");
+	await page.waitForTimeout(600);
+	await page.keyboard.up("ArrowRight");
+	await page.keyboard.down("ArrowDown");
+	await page.waitForTimeout(600);
+	await page.keyboard.up("ArrowDown");
+	await page.waitForTimeout(200);
+
+	const hasTransitions = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return false;
+
+		const tileSize = 48; // TILE_SIZE * PIXEL_SCALE
+		const tilesX = Math.floor(c.width / tileSize);
+		const tilesY = Math.floor(c.height / tileSize);
+
+		// Collect per-tile color signatures from the CENTER of each tile
+		const signatures: string[] = [];
+		for (let ty = 0; ty < tilesY; ty++) {
+			for (let tx = 0; tx < tilesX; tx++) {
+				const x = tx * tileSize + Math.floor(tileSize / 2);
+				const y = ty * tileSize + Math.floor(tileSize / 2);
+				const p = ctx.getImageData(x, y, 1, 1).data;
+				// Fine quantization to distinguish autotile variants
+				const r = Math.floor((p[0] ?? 0) / 16);
+				const g = Math.floor((p[1] ?? 0) / 16);
+				const b = Math.floor((p[2] ?? 0) / 16);
+				signatures.push(`${r},${g},${b}`);
+			}
+		}
+
+		const unique = new Set(signatures);
+		// With 47-variant autotile + water + sand + details, expect many unique tile colors
+		// Without autotile, there would only be ~3-4 unique colors (flat grass, water, sand, etc.)
+		return unique.size >= 5;
+	});
+
+	expect(hasTransitions).toBe(true);
+});
+
+test("no console errors after rapid scrolling through many chunks", async ({ page }) => {
+	const errors: string[] = [];
+	page.on("console", (msg) => {
+		if (msg.type() === "error") errors.push(msg.text());
+	});
+
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+
+	// Rapidly scroll in all directions to trigger chunk generation/autotile/caching
+	for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"]) {
+		await page.keyboard.down(key);
+		await page.waitForTimeout(500);
+		await page.keyboard.up(key);
+	}
+
+	// Diagonal movement
+	await page.keyboard.down("ArrowRight");
+	await page.keyboard.down("ArrowDown");
+	await page.waitForTimeout(500);
+	await page.keyboard.up("ArrowRight");
+	await page.keyboard.up("ArrowDown");
+
+	await page.waitForTimeout(200);
+
+	// Verify rendering still works
+	const hasContent = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return false;
+		const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
+		const a = pixel[3] ?? 0;
+		const rgb = (pixel[0] ?? 0) + (pixel[1] ?? 0) + (pixel[2] ?? 0);
+		return a > 0 && rgb > 0;
+	});
+
+	expect(hasContent).toBe(true);
+	expect(errors).toEqual([]);
+});
