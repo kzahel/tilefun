@@ -1,0 +1,253 @@
+{
+	"format": "gamemaker_blob_autotile",
+	"tileSize": 16,
+	"gridCols": 12,
+	"gridRows": 4,
+	"tilesPerSheet": 48,
+	"uniqueVariants": 47,
+	"grassColor": [
+		107,
+		147,
+		95
+	],
+	"terrains": [
+		{
+			"id": 1,
+			"name": "Dirt/Grass (Light Brown)",
+			"file": "me-autotile-01.png",
+			"primary": "dirt_light",
+			"secondary": "grass",
+			"type": "base",
+			"category": "natural"
+		},
+		{
+			"id": 2,
+			"name": "Dirt/Grass (Warm Brown)",
+			"file": "me-autotile-02.png",
+			"primary": "dirt_warm",
+			"secondary": "grass",
+			"type": "base",
+			"category": "natural",
+			"reversePairId": 12
+		},
+		{
+			"id": 3,
+			"name": "Water/Grass Shore",
+			"file": "me-autotile-03.png",
+			"primary": "water_shallow",
+			"secondary": "grass",
+			"type": "base",
+			"category": "natural",
+			"reversePairId": 15
+		},
+		{
+			"id": 4,
+			"name": "Dirt/Grass (Muted/Night)",
+			"file": "me-autotile-04.png",
+			"primary": "dirt_muted",
+			"secondary": "grass_muted",
+			"type": "base",
+			"category": "theme"
+		},
+		{
+			"id": 5,
+			"name": "Grass (Muted Alpha)",
+			"file": "me-autotile-05.png",
+			"primary": "alpha",
+			"secondary": "grass_muted",
+			"type": "overlay",
+			"category": "theme"
+		},
+		{
+			"id": 6,
+			"name": "Grass (Alpha)",
+			"file": "me-autotile-06.png",
+			"primary": "alpha",
+			"secondary": "grass",
+			"type": "overlay",
+			"category": "natural"
+		},
+		{
+			"id": 7,
+			"name": "Sand Light/Grass",
+			"file": "me-autotile-07.png",
+			"primary": "sand_light",
+			"secondary": "grass",
+			"type": "base",
+			"category": "natural"
+		},
+		{
+			"id": 8,
+			"name": "Sand/Water (Beach)",
+			"file": "me-autotile-08.png",
+			"primary": "sand",
+			"secondary": "water_shallow",
+			"type": "base",
+			"category": "natural"
+		},
+		{
+			"id": 9,
+			"name": "Sand/Sand (Texture)",
+			"file": "me-autotile-09.png",
+			"primary": "sand",
+			"secondary": "sand_light",
+			"type": "base",
+			"category": "natural"
+		},
+		{
+			"id": 10,
+			"name": "Sand (Alpha)",
+			"file": "me-autotile-10.png",
+			"primary": "sand",
+			"secondary": "alpha",
+			"type": "overlay",
+			"category": "natural"
+		},
+		{
+			"id": 11,
+			"name": "Playground (Painted)",
+			"file": "me-autotile-11.png",
+			"primary": "playground",
+			"secondary": "grass",
+			"type": "base",
+			"category": "structure"
+		},
+		{
+			"id": 12,
+			"name": "Grass/Dirt (Warm Brown)",
+			"file": "me-autotile-12.png",
+			"primary": "grass",
+			"secondary": "dirt_warm",
+			"type": "base",
+			"category": "natural",
+			"reversePairId": 2
+		},
+		{
+			"id": 13,
+			"name": "Grass (Alpha)",
+			"file": "me-autotile-13.png",
+			"primary": "grass",
+			"secondary": "any",
+			"type": "overlay",
+			"category": "natural"
+		},
+		{
+			"id": 14,
+			"name": "Grass/Curb",
+			"file": "me-autotile-14.png",
+			"primary": "grass",
+			"secondary": "curb",
+			"type": "base",
+			"category": "structure"
+		},
+		{
+			"id": 15,
+			"name": "Grass/Water Shore",
+			"file": "me-autotile-15.png",
+			"primary": "grass",
+			"secondary": "water_shallow",
+			"type": "base",
+			"category": "natural",
+			"reversePairId": 3
+		},
+		{
+			"id": 16,
+			"name": "Deep/Shallow Water",
+			"file": "me-autotile-16.png",
+			"primary": "water_deep",
+			"secondary": "water_shallow",
+			"type": "base",
+			"category": "natural"
+		},
+		{
+			"id": 17,
+			"name": "Fence (Iron)",
+			"file": "me-autotile-17.png",
+			"primary": "alpha",
+			"secondary": "fence_iron",
+			"type": "overlay",
+			"category": "structure"
+		},
+		{
+			"id": 18,
+			"name": "Pool / Shallow Water",
+			"file": "me-autotile-18.png",
+			"primary": "pool",
+			"secondary": "pool_edge",
+			"type": "base",
+			"category": "structure"
+		},
+		{
+			"id": 19,
+			"name": "Sidewalk 1 (Warm Light)",
+			"file": "me-autotile-19.png",
+			"primary": "sidewalk_1",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 20,
+			"name": "Sidewalk 2 (Warm)",
+			"file": "me-autotile-20.png",
+			"primary": "sidewalk_2",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 21,
+			"name": "Sidewalk 3 (Light Gray)",
+			"file": "me-autotile-21.png",
+			"primary": "sidewalk_3",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 22,
+			"name": "Sidewalk 4 (Gray)",
+			"file": "me-autotile-22.png",
+			"primary": "sidewalk_4",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 23,
+			"name": "Sidewalk 5 (Cool Gray)",
+			"file": "me-autotile-23.png",
+			"primary": "sidewalk_5",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 24,
+			"name": "Sidewalk 6 (Blue Gray)",
+			"file": "me-autotile-24.png",
+			"primary": "sidewalk_6",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 25,
+			"name": "Asphalt (White Lines)",
+			"file": "me-autotile-25.png",
+			"primary": "asphalt_white",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		},
+		{
+			"id": 26,
+			"name": "Asphalt (Yellow Lines)",
+			"file": "me-autotile-26.png",
+			"primary": "asphalt_yellow",
+			"secondary": "asphalt",
+			"type": "base",
+			"category": "urban"
+		}
+	]
+}
