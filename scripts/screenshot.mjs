@@ -6,16 +6,16 @@ const page = await browser.newPage({ viewport: { width: 800, height: 600 } });
 // Start preview server
 const { execSync, spawn } = await import("child_process");
 const server = spawn("npx", ["vite", "preview", "--port", "4174", "--strictPort"], {
-	stdio: ["ignore", "pipe", "pipe"],
-	cwd: process.cwd(),
+  stdio: ["ignore", "pipe", "pipe"],
+  cwd: process.cwd(),
 });
 
 // Wait for server to be ready
 await new Promise((resolve) => {
-	server.stdout.on("data", (data) => {
-		if (data.toString().includes("Local")) resolve();
-	});
-	setTimeout(resolve, 3000);
+  server.stdout.on("data", (data) => {
+    if (data.toString().includes("Local")) resolve();
+  });
+  setTimeout(resolve, 3000);
 });
 
 await page.goto("http://localhost:4174", { waitUntil: "domcontentloaded" });

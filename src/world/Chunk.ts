@@ -2,69 +2,89 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import type { TileId } from "./TileRegistry.js";
 
 const AREA = CHUNK_SIZE * CHUNK_SIZE;
+/** Corner grid is one larger than tile grid in each dimension. */
+const CORNER_SIZE = CHUNK_SIZE + 1;
+const CORNER_AREA = CORNER_SIZE * CORNER_SIZE;
 
 function idx(lx: number, ly: number): number {
-	return ly * CHUNK_SIZE + lx;
+  return ly * CHUNK_SIZE + lx;
+}
+
+function cornerIdx(cx: number, cy: number): number {
+  return cy * CORNER_SIZE + cx;
 }
 
 export class Chunk {
-	/** Base terrain tile IDs. */
-	readonly terrain: Uint16Array;
-	/** Decoration tile IDs (0 = empty). */
-	readonly detail: Uint16Array;
-	/** Resolved spritesheet positions for grass autotile (packed: row<<8 | col, 0 = not autotiled). */
-	readonly autotileCache: Uint16Array;
-	/** Resolved spritesheet positions for dirt autotile (packed: row<<8 | col, 0 = not autotiled). */
-	readonly dirtAutotileCache: Uint16Array;
-	/** Collision bitfield per tile. */
-	readonly collision: Uint8Array;
+  static readonly CORNER_SIZE = CORNER_SIZE;
 
-	/** True when the OffscreenCanvas render cache needs rebuilding. */
-	dirty = true;
-	/** True after the autotile pass has been computed for this chunk. */
-	autotileComputed = false;
-	/** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
-	renderCache: OffscreenCanvas | null = null;
+  /** Corner biome values (17×17 = 289). Stores BiomeId at each vertex. */
+  readonly corners: Uint8Array;
+  /** Base terrain tile IDs (derived from corners). */
+  readonly terrain: Uint16Array;
+  /** Decoration tile IDs (0 = empty). */
+  readonly detail: Uint16Array;
+  /** Per-layer autotile caches. Each is packed (row<<8 | col), 0 = no autotile. */
+  readonly autotileLayers: Uint16Array[];
+  /** Collision bitfield per tile. */
+  readonly collision: Uint8Array;
 
-	constructor() {
-		this.terrain = new Uint16Array(AREA);
-		this.detail = new Uint16Array(AREA);
-		this.autotileCache = new Uint16Array(AREA);
-		this.dirtAutotileCache = new Uint16Array(AREA);
-		this.collision = new Uint8Array(AREA);
-	}
+  /** True when the OffscreenCanvas render cache needs rebuilding. */
+  dirty = true;
+  /** True after the autotile pass has been computed for this chunk. */
+  autotileComputed = false;
+  /** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
+  renderCache: OffscreenCanvas | null = null;
 
-	getTerrain(lx: number, ly: number): TileId {
-		return this.terrain[idx(lx, ly)] as TileId;
-	}
+  constructor(layerCount: number) {
+    this.corners = new Uint8Array(CORNER_AREA);
+    this.terrain = new Uint16Array(AREA);
+    this.detail = new Uint16Array(AREA);
+    this.autotileLayers = [];
+    for (let i = 0; i < layerCount; i++) {
+      this.autotileLayers.push(new Uint16Array(AREA));
+    }
+    this.collision = new Uint8Array(AREA);
+  }
 
-	setTerrain(lx: number, ly: number, id: TileId): void {
-		this.terrain[idx(lx, ly)] = id;
-	}
+  getCorner(cx: number, cy: number): number {
+    return this.corners[cornerIdx(cx, cy)]!;
+  }
 
-	getCollision(lx: number, ly: number): number {
-		return this.collision[idx(lx, ly)] as number;
-	}
+  setCorner(cx: number, cy: number, biome: number): void {
+    this.corners[cornerIdx(cx, cy)] = biome;
+  }
 
-	setCollision(lx: number, ly: number, flags: number): void {
-		this.collision[idx(lx, ly)] = flags;
-	}
+  getTerrain(lx: number, ly: number): TileId {
+    return this.terrain[idx(lx, ly)] as TileId;
+  }
 
-	getDetail(lx: number, ly: number): TileId {
-		return this.detail[idx(lx, ly)] as TileId;
-	}
+  setTerrain(lx: number, ly: number, id: TileId): void {
+    this.terrain[idx(lx, ly)] = id;
+  }
 
-	setDetail(lx: number, ly: number, id: TileId): void {
-		this.detail[idx(lx, ly)] = id;
-	}
+  getCollision(lx: number, ly: number): number {
+    return this.collision[idx(lx, ly)] as number;
+  }
 
-	/** Fill entire chunk with a single terrain tile. */
-	fillTerrain(id: TileId): void {
-		this.terrain.fill(id);
-	}
+  setCollision(lx: number, ly: number, flags: number): void {
+    this.collision[idx(lx, ly)] = flags;
+  }
 
-	/** Fill entire chunk collision with a single flag set. */
-	fillCollision(flags: number): void {
-		this.collision.fill(flags);
-	}
+  getDetail(lx: number, ly: number): TileId {
+    return this.detail[idx(lx, ly)] as TileId;
+  }
+
+  setDetail(lx: number, ly: number, id: TileId): void {
+    this.detail[idx(lx, ly)] = id;
+  }
+
+  /** Fill entire chunk with a single terrain tile. */
+  fillTerrain(id: TileId): void {
+    this.terrain.fill(id);
+  }
+
+  /** Fill entire chunk collision with a single flag set. */
+  fillCollision(flags: number): void {
+    this.collision.fill(flags);
+  }
 }

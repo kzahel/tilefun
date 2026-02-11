@@ -2,43 +2,16 @@ import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { TileId } from "../world/TileRegistry.js";
-import {
-	AutotileBit,
-	canonicalize,
-	computeChunkAutotile,
-	computeChunkDirtAutotile,
-	computeMask,
-	isDirtGroup,
-	isGrassGroup,
-} from "./Autotiler.js";
+import { AutotileBit, canonicalize, computeChunkAllLayers, computeMask } from "./Autotiler.js";
+import { TERRAIN_LAYERS } from "./TerrainLayers.js";
 
-describe("isGrassGroup", () => {
-	it("returns true for grass biomes and sand", () => {
-		expect(isGrassGroup(TileId.Grass)).toBe(true);
-		expect(isGrassGroup(TileId.Forest)).toBe(true);
-		expect(isGrassGroup(TileId.DenseForest)).toBe(true);
-		expect(isGrassGroup(TileId.Sand)).toBe(true);
-	});
+const LAYER_COUNT = TERRAIN_LAYERS.length;
 
-	it("returns false for non-grass biomes", () => {
-		expect(isGrassGroup(TileId.Water)).toBe(false);
-		expect(isGrassGroup(TileId.DeepWater)).toBe(false);
-		expect(isGrassGroup(TileId.Empty)).toBe(false);
-	});
-});
-
-describe("isDirtGroup", () => {
-	it("returns true for sand", () => {
-		expect(isDirtGroup(TileId.Sand)).toBe(true);
-	});
-
-	it("returns false for non-dirt tiles", () => {
-		expect(isDirtGroup(TileId.Grass)).toBe(false);
-		expect(isDirtGroup(TileId.Forest)).toBe(false);
-		expect(isDirtGroup(TileId.Water)).toBe(false);
-		expect(isDirtGroup(TileId.Empty)).toBe(false);
-	});
-});
+// Layer indices (must match TERRAIN_LAYERS order)
+const DEEP_LAYER = 0;
+const SAND_LAYER = 1; // sand_on_water: isNonWater group
+const GRASS_LAYER = 2; // grass_on_sand: isGrassLand group (excludes Sand)
+const DIRT_LAYER = 3; // dirt_on_grass: isDirtPath only
 
 describe("canonicalize", () => {
 	it("keeps cardinal-only masks unchanged", () => {
@@ -73,15 +46,17 @@ describe("canonicalize", () => {
 });
 
 describe("computeMask", () => {
-	it("returns 0 when surrounded by water", () => {
+	it("returns 0 when surrounded by water (using sand layer)", () => {
 		const getTerrain = () => TileId.Water;
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isNonWater);
 		expect(mask).toBe(0);
 	});
 
-	it("returns 255 when fully surrounded by grass", () => {
+	it("returns 255 when fully surrounded by grass (using sand layer)", () => {
 		const getTerrain = () => TileId.Grass;
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isNonWater);
 		expect(mask).toBe(255);
 	});
 
@@ -92,7 +67,8 @@ describe("computeMask", () => {
 			if (tx === 6 && ty === 4) return TileId.Grass; // NE
 			return TileId.Water;
 		};
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isNonWater);
 		expect(mask).toBe(AutotileBit.N | AutotileBit.E | AutotileBit.NE); // 1+4+32 = 37
 	});
 
@@ -102,82 +78,152 @@ describe("computeMask", () => {
 			if (tx === 4 && ty === 4) return TileId.Grass; // NW position, but W is not grass
 			return TileId.Water;
 		};
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isNonWater);
 		expect(mask).toBe(AutotileBit.N); // NW not set because W is water
 	});
 
-	it("treats Forest and DenseForest as grass group", () => {
+	it("treats Forest and DenseForest as non-water group", () => {
 		const getTerrain = (tx: number, ty: number) => {
 			if (tx === 5 && ty === 4) return TileId.Forest;
 			if (tx === 6 && ty === 5) return TileId.DenseForest;
 			return TileId.Water;
 		};
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isNonWater);
 		expect(mask).toBe(AutotileBit.N | AutotileBit.E);
 	});
 
-	it("treats Sand as grass group by default", () => {
+	it("Sand is in non-water group but NOT in grass-land group", () => {
 		const getTerrain = (tx: number, ty: number) => {
 			if (tx === 5 && ty === 4) return TileId.Sand;
 			return TileId.Water;
 		};
-		const mask = computeMask(5, 5, getTerrain);
+		const isNonWater = TERRAIN_LAYERS[SAND_LAYER]!.isInGroup;
+		const isGrassLand = TERRAIN_LAYERS[GRASS_LAYER]!.isInGroup;
+		expect(computeMask(5, 5, getTerrain, isNonWater)).toBe(AutotileBit.N);
+		expect(computeMask(5, 5, getTerrain, isGrassLand)).toBe(0);
+	});
+
+	it("DirtPath is in non-water, grass-land, AND dirt groups", () => {
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx === 5 && ty === 4) return TileId.DirtPath;
+			return TileId.Water;
+		};
+		expect(computeMask(5, 5, getTerrain, TERRAIN_LAYERS[SAND_LAYER]!.isInGroup))
+			.toBe(AutotileBit.N);
+		expect(computeMask(5, 5, getTerrain, TERRAIN_LAYERS[GRASS_LAYER]!.isInGroup))
+			.toBe(AutotileBit.N);
+		expect(computeMask(5, 5, getTerrain, TERRAIN_LAYERS[DIRT_LAYER]!.isInGroup))
+			.toBe(AutotileBit.N);
+	});
+
+	it("DeepWater is in the deep water layer group", () => {
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx === 5 && ty === 4) return TileId.DeepWater; // N
+			return TileId.Water;
+		};
+		const isDeep = TERRAIN_LAYERS[DEEP_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isDeep);
 		expect(mask).toBe(AutotileBit.N);
 	});
 
-	it("uses custom isInGroup predicate for dirt", () => {
-		const getTerrain = (tx: number, ty: number) => {
-			if (tx === 5 && ty === 5) return TileId.Sand;
-			return TileId.Grass;
-		};
-		// With isDirtGroup, grass neighbors don't count
-		const mask = computeMask(5, 5, getTerrain, isDirtGroup);
+	it("ShallowWater is NOT in the deep water layer group", () => {
+		const getTerrain = () => TileId.Water;
+		const isDeep = TERRAIN_LAYERS[DEEP_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isDeep);
 		expect(mask).toBe(0);
 	});
 
-	it("detects sand neighbors with isDirtGroup predicate", () => {
+	it("uses dirt layer predicate for DirtPath-only detection", () => {
 		const getTerrain = (tx: number, ty: number) => {
-			if (tx === 5 && ty === 4) return TileId.Sand; // N
-			if (tx === 6 && ty === 5) return TileId.Sand; // E
+			if (tx === 5 && ty === 4) return TileId.DirtPath; // N
+			if (tx === 6 && ty === 5) return TileId.Sand; // E — NOT in dirt group
 			return TileId.Grass;
 		};
-		const mask = computeMask(5, 5, getTerrain, isDirtGroup);
-		expect(mask).toBe(AutotileBit.N | AutotileBit.E);
+		const isDirt = TERRAIN_LAYERS[DIRT_LAYER]!.isInGroup;
+		const mask = computeMask(5, 5, getTerrain, isDirt);
+		expect(mask).toBe(AutotileBit.N); // Only DirtPath, not Sand
 	});
 });
 
-describe("computeChunkAutotile", () => {
-	it("fills autotileCache for grass tiles", () => {
-		const chunk = new Chunk();
+describe("computeChunkAllLayers", () => {
+	it("fills sand layer for grass tiles (nested ring)", () => {
+		const chunk = new Chunk(LAYER_COUNT);
 		chunk.fillTerrain(TileId.Grass);
 		const getTerrain = () => TileId.Grass;
 
-		computeChunkAutotile(chunk, 0, 0, getTerrain);
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
 
-		// All tiles should be full interior (255 → col=1, row=0 in GM blob)
+		// All tiles should be full interior (mask 255 → col=1, row=0 in GM blob)
 		const packed = (0 << 8) | 1; // row=0, col=1
 		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-			expect(chunk.autotileCache[i]).toBe(packed);
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBe(packed);
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBe(packed);
 		}
 	});
 
-	it("sets 0 for non-grass tiles", () => {
-		const chunk = new Chunk();
+	it("sets 0 in all land layers for water tiles", () => {
+		const chunk = new Chunk(LAYER_COUNT);
 		chunk.fillTerrain(TileId.Water);
 		const getTerrain = () => TileId.Water;
 
-		computeChunkAutotile(chunk, 0, 0, getTerrain);
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
 
 		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-			expect(chunk.autotileCache[i]).toBe(0);
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBe(0);
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBe(0);
+			expect(chunk.autotileLayers[DIRT_LAYER]![i]).toBe(0);
+		}
+	});
+
+	it("fills deep water layer for DeepWater tiles", () => {
+		const chunk = new Chunk(LAYER_COUNT);
+		chunk.fillTerrain(TileId.DeepWater);
+		const getTerrain = () => TileId.DeepWater;
+
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
+
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileLayers[DEEP_LAYER]![i]).toBeGreaterThan(0);
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBe(0);
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBe(0);
+			expect(chunk.autotileLayers[DIRT_LAYER]![i]).toBe(0);
+		}
+	});
+
+	it("fills sand layer but NOT grass/dirt layers for Sand tiles", () => {
+		const chunk = new Chunk(LAYER_COUNT);
+		chunk.fillTerrain(TileId.Sand);
+		const getTerrain = () => TileId.Sand;
+
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
+
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBeGreaterThan(0);
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBe(0);
+			expect(chunk.autotileLayers[DIRT_LAYER]![i]).toBe(0);
+		}
+	});
+
+	it("fills all 3 land layers for DirtPath tiles", () => {
+		const chunk = new Chunk(LAYER_COUNT);
+		chunk.fillTerrain(TileId.DirtPath);
+		const getTerrain = () => TileId.DirtPath;
+
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
+
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBeGreaterThan(0);
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBeGreaterThan(0);
+			expect(chunk.autotileLayers[DIRT_LAYER]![i]).toBeGreaterThan(0);
 		}
 	});
 
 	it("computes edge tiles at chunk borders", () => {
-		const chunk = new Chunk();
+		const chunk = new Chunk(LAYER_COUNT);
 		chunk.fillTerrain(TileId.Grass);
 
-		// Chunk is all grass, but neighbors are water
 		const getTerrain = (tx: number, ty: number) => {
 			if (tx >= 0 && tx < CHUNK_SIZE && ty >= 0 && ty < CHUNK_SIZE) {
 				return TileId.Grass;
@@ -185,60 +231,20 @@ describe("computeChunkAutotile", () => {
 			return TileId.Water;
 		};
 
-		computeChunkAutotile(chunk, 0, 0, getTerrain);
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
 
-		// Corner tile (0,0) should have S+E+SE neighbors (right and down are grass)
-		const cornerPacked = chunk.autotileCache[0];
+		// Corner tile should have edge variant (not full interior)
+		const cornerPacked = chunk.autotileLayers[SAND_LAYER]![0];
 		expect(cornerPacked).not.toBeUndefined();
 		expect(cornerPacked).not.toBe(0);
 		// Interior tile should be full (255 → col=1, row=0 in GM blob)
-		const interiorPacked = chunk.autotileCache[8 * CHUNK_SIZE + 8];
+		const interiorPacked = chunk.autotileLayers[SAND_LAYER]![8 * CHUNK_SIZE + 8];
 		const fullPacked = (0 << 8) | 1;
 		expect(interiorPacked).toBe(fullPacked);
 	});
 
-	it("computes autotile for Sand tiles (Sand is in grass group)", () => {
-		const chunk = new Chunk();
-		chunk.fillTerrain(TileId.Sand);
-		const getTerrain = () => TileId.Sand;
-
-		computeChunkAutotile(chunk, 0, 0, getTerrain);
-
-		// Sand is in grass group, so all tiles should have grass autotile
-		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-			expect(chunk.autotileCache[i]).toBeGreaterThan(0);
-		}
-	});
-});
-
-describe("computeChunkDirtAutotile", () => {
-	it("fills dirtAutotileCache for sand tiles", () => {
-		const chunk = new Chunk();
-		chunk.fillTerrain(TileId.Sand);
-		const getTerrain = () => TileId.Sand;
-
-		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
-
-		// All sand tiles should have non-zero dirt autotile
-		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-			expect(chunk.dirtAutotileCache[i]).toBeGreaterThan(0);
-		}
-	});
-
-	it("sets 0 for non-sand tiles", () => {
-		const chunk = new Chunk();
-		chunk.fillTerrain(TileId.Grass);
-		const getTerrain = () => TileId.Grass;
-
-		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
-
-		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-			expect(chunk.dirtAutotileCache[i]).toBe(0);
-		}
-	});
-
-	it("computes edges for sand surrounded by grass", () => {
-		const chunk = new Chunk();
+	it("computes sand edges for sand surrounded by grass", () => {
+		const chunk = new Chunk(LAYER_COUNT);
 		chunk.fillTerrain(TileId.Sand);
 		const getTerrain = (tx: number, ty: number) => {
 			if (tx >= 0 && tx < CHUNK_SIZE && ty >= 0 && ty < CHUNK_SIZE) {
@@ -247,13 +253,37 @@ describe("computeChunkDirtAutotile", () => {
 			return TileId.Grass;
 		};
 
-		computeChunkDirtAutotile(chunk, 0, 0, getTerrain);
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
 
-		// Corner tile should have edge variant (not full interior)
-		const cornerPacked = chunk.dirtAutotileCache[0];
+		// Sand layer: all tiles non-zero (sand + grass are both non-water = same group)
+		const fullPacked = (0 << 8) | 1;
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileLayers[SAND_LAYER]![i]).toBe(fullPacked);
+		}
+		// Grass layer: 0 for all (Sand not in grassLand group)
+		for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+			expect(chunk.autotileLayers[GRASS_LAYER]![i]).toBe(0);
+		}
+	});
+
+	it("computes deep water edges at deep/shallow boundary", () => {
+		const chunk = new Chunk(LAYER_COUNT);
+		chunk.fillTerrain(TileId.DeepWater);
+
+		const getTerrain = (tx: number, ty: number) => {
+			if (tx >= 0 && tx < CHUNK_SIZE && ty >= 0 && ty < CHUNK_SIZE) {
+				return TileId.DeepWater;
+			}
+			return TileId.Water;
+		};
+
+		computeChunkAllLayers(chunk, 0, 0, getTerrain);
+
+		// Corner deep water tile should have edge variant
+		const cornerPacked = chunk.autotileLayers[DEEP_LAYER]![0];
 		expect(cornerPacked).toBeGreaterThan(0);
 		// Interior tile should be full interior
-		const interiorPacked = chunk.dirtAutotileCache[8 * CHUNK_SIZE + 8];
+		const interiorPacked = chunk.autotileLayers[DEEP_LAYER]![8 * CHUNK_SIZE + 8];
 		expect(interiorPacked).toBeGreaterThan(0);
 		expect(interiorPacked).not.toBe(cornerPacked);
 	});

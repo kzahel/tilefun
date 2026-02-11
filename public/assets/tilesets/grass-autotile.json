@@ -1,277 +1,277 @@
 {
-	"sheet": "grass",
-	"tileSize": 16,
-	"description": "8-bit blob autotile lookup for Sprout Lands Grass.png. Generated from Godot .tscn terrain peering data.",
-	"bits": {
-		"N": 1,
-		"W": 2,
-		"E": 4,
-		"S": 8,
-		"NW": 16,
-		"NE": 32,
-		"SW": 64,
-		"SE": 128
-	},
-	"variants": [
-		{
-			"mask": 0,
-			"col": 1,
-			"row": 2
-		},
-		{
-			"mask": 0,
-			"col": 2,
-			"row": 2
-		},
-		{
-			"mask": 0,
-			"col": 3,
-			"row": 2
-		},
-		{
-			"mask": 1,
-			"col": 0,
-			"row": 5
-		},
-		{
-			"mask": 2,
-			"col": 3,
-			"row": 6
-		},
-		{
-			"mask": 3,
-			"col": 5,
-			"row": 7
-		},
-		{
-			"mask": 4,
-			"col": 0,
-			"row": 6
-		},
-		{
-			"mask": 5,
-			"col": 4,
-			"row": 7
-		},
-		{
-			"mask": 6,
-			"col": 1,
-			"row": 6
-		},
-		{
-			"mask": 6,
-			"col": 2,
-			"row": 6
-		},
-		{
-			"mask": 7,
-			"col": 9,
-			"row": 2
-		},
-		{
-			"mask": 8,
-			"col": 0,
-			"row": 2
-		},
-		{
-			"mask": 9,
-			"col": 0,
-			"row": 3
-		},
-		{
-			"mask": 9,
-			"col": 0,
-			"row": 4
-		},
-		{
-			"mask": 10,
-			"col": 5,
-			"row": 6
-		},
-		{
-			"mask": 11,
-			"col": 8,
-			"row": 2
-		},
-		{
-			"mask": 12,
-			"col": 4,
-			"row": 6
-		},
-		{
-			"mask": 13,
-			"col": 9,
-			"row": 3
-		},
-		{
-			"mask": 14,
-			"col": 8,
-			"row": 3
-		},
-		{
-			"mask": 15,
-			"col": 0,
-			"row": 7
-		},
-		{
-			"mask": 15,
-			"col": 1,
-			"row": 7
-		},
-		{
-			"mask": 19,
-			"col": 3,
-			"row": 5
-		},
-		{
-			"mask": 23,
-			"col": 9,
-			"row": 5
-		},
-		{
-			"mask": 27,
-			"col": 7,
-			"row": 5
-		},
-		{
-			"mask": 31,
-			"col": 7,
-			"row": 3
-		},
-		{
-			"mask": 37,
-			"col": 1,
-			"row": 5
-		},
-		{
-			"mask": 39,
-			"col": 6,
-			"row": 5
-		},
-		{
-			"mask": 45,
-			"col": 8,
-			"row": 5
-		},
-		{
-			"mask": 47,
-			"col": 6,
-			"row": 3
-		},
-		{
-			"mask": 55,
-			"col": 2,
-			"row": 5
-		},
-		{
-			"mask": 63,
-			"col": 6,
-			"row": 7
-		},
-		{
-			"mask": 74,
-			"col": 3,
-			"row": 3
-		},
-		{
-			"mask": 75,
-			"col": 9,
-			"row": 4
-		},
-		{
-			"mask": 78,
-			"col": 7,
-			"row": 4
-		},
-		{
-			"mask": 79,
-			"col": 7,
-			"row": 2
-		},
-		{
-			"mask": 91,
-			"col": 3,
-			"row": 4
-		},
-		{
-			"mask": 95,
-			"col": 7,
-			"row": 7
-		},
-		{
-			"mask": 111,
-			"col": 3,
-			"row": 7
-		},
-		{
-			"mask": 127,
-			"col": 4,
-			"row": 4
-		},
-		{
-			"mask": 140,
-			"col": 1,
-			"row": 3
-		},
-		{
-			"mask": 141,
-			"col": 6,
-			"row": 4
-		},
-		{
-			"mask": 142,
-			"col": 8,
-			"row": 4
-		},
-		{
-			"mask": 143,
-			"col": 6,
-			"row": 2
-		},
-		{
-			"mask": 159,
-			"col": 2,
-			"row": 7
-		},
-		{
-			"mask": 173,
-			"col": 1,
-			"row": 4
-		},
-		{
-			"mask": 175,
-			"col": 6,
-			"row": 6
-		},
-		{
-			"mask": 191,
-			"col": 5,
-			"row": 4
-		},
-		{
-			"mask": 206,
-			"col": 2,
-			"row": 3
-		},
-		{
-			"mask": 207,
-			"col": 7,
-			"row": 6
-		},
-		{
-			"mask": 223,
-			"col": 4,
-			"row": 5
-		},
-		{
-			"mask": 239,
-			"col": 5,
-			"row": 5
-		},
-		{
-			"mask": 255,
-			"col": 2,
-			"row": 4
-		}
-	]
+  "sheet": "grass",
+  "tileSize": 16,
+  "description": "8-bit blob autotile lookup for Sprout Lands Grass.png. Generated from Godot .tscn terrain peering data.",
+  "bits": {
+    "N": 1,
+    "W": 2,
+    "E": 4,
+    "S": 8,
+    "NW": 16,
+    "NE": 32,
+    "SW": 64,
+    "SE": 128
+  },
+  "variants": [
+    {
+      "mask": 0,
+      "col": 1,
+      "row": 2
+    },
+    {
+      "mask": 0,
+      "col": 2,
+      "row": 2
+    },
+    {
+      "mask": 0,
+      "col": 3,
+      "row": 2
+    },
+    {
+      "mask": 1,
+      "col": 0,
+      "row": 5
+    },
+    {
+      "mask": 2,
+      "col": 3,
+      "row": 6
+    },
+    {
+      "mask": 3,
+      "col": 5,
+      "row": 7
+    },
+    {
+      "mask": 4,
+      "col": 0,
+      "row": 6
+    },
+    {
+      "mask": 5,
+      "col": 4,
+      "row": 7
+    },
+    {
+      "mask": 6,
+      "col": 1,
+      "row": 6
+    },
+    {
+      "mask": 6,
+      "col": 2,
+      "row": 6
+    },
+    {
+      "mask": 7,
+      "col": 9,
+      "row": 2
+    },
+    {
+      "mask": 8,
+      "col": 0,
+      "row": 2
+    },
+    {
+      "mask": 9,
+      "col": 0,
+      "row": 3
+    },
+    {
+      "mask": 9,
+      "col": 0,
+      "row": 4
+    },
+    {
+      "mask": 10,
+      "col": 5,
+      "row": 6
+    },
+    {
+      "mask": 11,
+      "col": 8,
+      "row": 2
+    },
+    {
+      "mask": 12,
+      "col": 4,
+      "row": 6
+    },
+    {
+      "mask": 13,
+      "col": 9,
+      "row": 3
+    },
+    {
+      "mask": 14,
+      "col": 8,
+      "row": 3
+    },
+    {
+      "mask": 15,
+      "col": 0,
+      "row": 7
+    },
+    {
+      "mask": 15,
+      "col": 1,
+      "row": 7
+    },
+    {
+      "mask": 19,
+      "col": 3,
+      "row": 5
+    },
+    {
+      "mask": 23,
+      "col": 9,
+      "row": 5
+    },
+    {
+      "mask": 27,
+      "col": 7,
+      "row": 5
+    },
+    {
+      "mask": 31,
+      "col": 7,
+      "row": 3
+    },
+    {
+      "mask": 37,
+      "col": 1,
+      "row": 5
+    },
+    {
+      "mask": 39,
+      "col": 6,
+      "row": 5
+    },
+    {
+      "mask": 45,
+      "col": 8,
+      "row": 5
+    },
+    {
+      "mask": 47,
+      "col": 6,
+      "row": 3
+    },
+    {
+      "mask": 55,
+      "col": 2,
+      "row": 5
+    },
+    {
+      "mask": 63,
+      "col": 6,
+      "row": 7
+    },
+    {
+      "mask": 74,
+      "col": 3,
+      "row": 3
+    },
+    {
+      "mask": 75,
+      "col": 9,
+      "row": 4
+    },
+    {
+      "mask": 78,
+      "col": 7,
+      "row": 4
+    },
+    {
+      "mask": 79,
+      "col": 7,
+      "row": 2
+    },
+    {
+      "mask": 91,
+      "col": 3,
+      "row": 4
+    },
+    {
+      "mask": 95,
+      "col": 7,
+      "row": 7
+    },
+    {
+      "mask": 111,
+      "col": 3,
+      "row": 7
+    },
+    {
+      "mask": 127,
+      "col": 4,
+      "row": 4
+    },
+    {
+      "mask": 140,
+      "col": 1,
+      "row": 3
+    },
+    {
+      "mask": 141,
+      "col": 6,
+      "row": 4
+    },
+    {
+      "mask": 142,
+      "col": 8,
+      "row": 4
+    },
+    {
+      "mask": 143,
+      "col": 6,
+      "row": 2
+    },
+    {
+      "mask": 159,
+      "col": 2,
+      "row": 7
+    },
+    {
+      "mask": 173,
+      "col": 1,
+      "row": 4
+    },
+    {
+      "mask": 175,
+      "col": 6,
+      "row": 6
+    },
+    {
+      "mask": 191,
+      "col": 5,
+      "row": 4
+    },
+    {
+      "mask": 206,
+      "col": 2,
+      "row": 3
+    },
+    {
+      "mask": 207,
+      "col": 7,
+      "row": 6
+    },
+    {
+      "mask": 223,
+      "col": 4,
+      "row": 5
+    },
+    {
+      "mask": 239,
+      "col": 5,
+      "row": 5
+    },
+    {
+      "mask": 255,
+      "col": 2,
+      "row": 4
+    }
+  ]
 }

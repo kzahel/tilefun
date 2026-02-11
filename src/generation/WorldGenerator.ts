@@ -1,5 +1,10 @@
 import alea from "alea";
 import { CHUNK_SIZE } from "../config/constants.js";
+import {
+	deriveTerrainFromCorners,
+	getValidFallback,
+	isValidAdjacency,
+} from "../autotile/TerrainGraph.js";
 import type { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { BiomeId, BiomeMapper } from "./BiomeMapper.js";
@@ -47,14 +52,21 @@ const FOREST_DETAILS: TileId[] = [
 const DETAIL_THRESHOLD_GRASS = 0.72;
 const DETAIL_THRESHOLD_FOREST = 0.55;
 
+/** Path noise band — values in this range become DirtPath. */
+const PATH_BAND_LOW = 0.48;
+const PATH_BAND_HIGH = 0.52;
+
+const CORNER_SIZE = CHUNK_SIZE + 1;
+
 /**
- * Generates chunk terrain from noise-based biome mapping.
- * Uses elevation + moisture noise for biome classification,
- * and a separate detail noise layer for scattering decorations.
+ * Corner-based terrain generator.
+ * Fills chunk corners (17×17) from noise, enforces adjacency constraints,
+ * then derives per-tile terrain, collision, and details.
  */
 export class WorldGenerator {
-	private readonly biomeMapper: BiomeMapper;
+	readonly biomeMapper: BiomeMapper;
 	private readonly detailNoise: NoiseMap;
+	private readonly pathNoise: NoiseMap;
 	private readonly seed: string;
 
 	constructor(seed: string) {
@@ -81,14 +93,33 @@ export class WorldGenerator {
 			persistence: 0.5,
 		});
 
+		this.pathNoise = new NoiseMap(`${seed}-paths`, {
+			frequency: 0.05,
+			octaves: 2,
+			lacunarity: 2.0,
+			persistence: 0.5,
+		});
+
 		this.biomeMapper = new BiomeMapper(elevation, moisture);
 	}
 
-	/** Fill a chunk's terrain, collision, and detail arrays from procedural generation. */
+	/** Fill a chunk's corners, derive terrain, collision, and details. */
 	generate(chunk: Chunk, cx: number, cy: number): void {
 		const baseX = cx * CHUNK_SIZE;
 		const baseY = cy * CHUNK_SIZE;
-		// Per-chunk PRNG for detail tile selection (deterministic per chunk)
+
+		// Phase 1: Fill 17×17 corners from noise
+		for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
+			for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
+				const biome = this.biomeMapper.getBiome(baseX + ccx, baseY + ccy);
+				chunk.setCorner(ccx, ccy, biome);
+			}
+		}
+
+		// Phase 2: Enforce adjacency constraints on corners
+		this.enforceCornerAdjacency(chunk, baseX, baseY);
+
+		// Phase 3: Derive per-tile terrain from corners + apply overlays
 		const chunkRng = alea(`${this.seed}-detail-${cx},${cy}`);
 
 		for (let ly = 0; ly < CHUNK_SIZE; ly++) {
@@ -96,14 +127,85 @@ export class WorldGenerator {
 				const tx = baseX + lx;
 				const ty = baseY + ly;
 
-				const biome = this.biomeMapper.getBiome(tx, ty);
-				chunk.setTerrain(lx, ly, BIOME_TILE[biome]);
+				const biome = deriveTerrainFromCorners(
+					chunk.getCorner(lx, ly) as BiomeId,
+					chunk.getCorner(lx + 1, ly) as BiomeId,
+					chunk.getCorner(lx, ly + 1) as BiomeId,
+					chunk.getCorner(lx + 1, ly + 1) as BiomeId,
+				);
+
+				let tileId = BIOME_TILE[biome];
+
+				// DirtPath overlay on grass/forest tiles
+				if (biome === BiomeId.Grass || biome === BiomeId.Forest) {
+					const pathValue = this.pathNoise.sample(tx, ty);
+					if (pathValue > PATH_BAND_LOW && pathValue < PATH_BAND_HIGH) {
+						if (!this.hasWaterOrSandNeighbor(tx, ty)) {
+							tileId = TileId.DirtPath;
+						}
+					}
+				}
+
+				chunk.setTerrain(lx, ly, tileId);
 				chunk.setCollision(lx, ly, BIOME_COLLISION[biome]);
 
 				// Scatter detail tiles on land biomes
 				this.scatterDetail(chunk, lx, ly, tx, ty, biome, chunkRng);
 			}
 		}
+	}
+
+	/**
+	 * Enforce adjacency constraints on corner biomes.
+	 * Checks each corner against its 4 cardinal neighbors' RAW noise biomes
+	 * (deterministic, independent of chunk generation order).
+	 */
+	private enforceCornerAdjacency(
+		chunk: Chunk,
+		baseX: number,
+		baseY: number,
+	): void {
+		for (let cy = 0; cy < CORNER_SIZE; cy++) {
+			for (let cx = 0; cx < CORNER_SIZE; cx++) {
+				let biome = chunk.getCorner(cx, cy) as BiomeId;
+				const wx = baseX + cx;
+				const wy = baseY + cy;
+
+				// Check 4 cardinal neighbor corners using raw noise (not post-enforcement)
+				const offsets = [
+					[0, -1],
+					[-1, 0],
+					[1, 0],
+					[0, 1],
+				] as const;
+				for (const [dx, dy] of offsets) {
+					const nb = this.biomeMapper.getBiome(wx + dx, wy + dy);
+					if (!isValidAdjacency(biome, nb)) {
+						biome = getValidFallback(biome, nb);
+					}
+				}
+
+				chunk.setCorner(cx, cy, biome);
+			}
+		}
+	}
+
+	/** Check if any of the 8 neighbor tile positions would be water or sand. */
+	private hasWaterOrSandNeighbor(tx: number, ty: number): boolean {
+		for (let dy = -1; dy <= 1; dy++) {
+			for (let dx = -1; dx <= 1; dx++) {
+				if (dx === 0 && dy === 0) continue;
+				const b = this.biomeMapper.getBiome(tx + dx, ty + dy);
+				if (
+					b === BiomeId.DeepWater ||
+					b === BiomeId.ShallowWater ||
+					b === BiomeId.Sand
+				) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private scatterDetail(
@@ -115,13 +217,17 @@ export class WorldGenerator {
 		biome: BiomeId,
 		rng: () => number,
 	): void {
-		// Only scatter on grass-like biomes
-		if (biome !== BiomeId.Grass && biome !== BiomeId.Forest && biome !== BiomeId.DenseForest) {
+		if (
+			biome !== BiomeId.Grass &&
+			biome !== BiomeId.Forest &&
+			biome !== BiomeId.DenseForest
+		) {
 			return;
 		}
 
 		const detailValue = this.detailNoise.sample(tx, ty);
-		const threshold = biome === BiomeId.Grass ? DETAIL_THRESHOLD_GRASS : DETAIL_THRESHOLD_FOREST;
+		const threshold =
+			biome === BiomeId.Grass ? DETAIL_THRESHOLD_GRASS : DETAIL_THRESHOLD_FOREST;
 		const palette = biome === BiomeId.Grass ? GRASS_DETAILS : FOREST_DETAILS;
 
 		if (detailValue > threshold) {

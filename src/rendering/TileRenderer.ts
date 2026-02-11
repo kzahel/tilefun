@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import {
 	CHUNK_SIZE,
 	PIXEL_SCALE,
@@ -14,7 +15,6 @@ import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
-const SCALED_TILE = TILE_SIZE * PIXEL_SCALE;
 
 /** Compute the current water animation frame index from a timestamp. */
 export function getWaterFrame(nowMs: number): number {
@@ -31,7 +31,7 @@ export class TileRenderer {
 
 	/**
 	 * Draw all visible chunks from their cached OffscreenCanvas.
-	 * Terrain, autotile, and detail layers are all included in the cache.
+	 * All layers (water base, autotile, details) are baked into the cache.
 	 */
 	drawTerrain(
 		ctx: CanvasRenderingContext2D,
@@ -40,9 +40,6 @@ export class TileRenderer {
 		sheets: Map<string, Spritesheet>,
 		visible: ChunkRange,
 	): void {
-		const waterSheet = sheets.get("water");
-		const waterFrame = getWaterFrame(performance.now());
-
 		for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
 			for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
 				const chunk = world.getChunk(cx, cy);
@@ -78,32 +75,13 @@ export class TileRenderer {
 						this.chunkScreenSize + 1,
 					);
 				}
-
-				// Overlay animated water tiles on top of the static cache
-				if (waterSheet) {
-					for (let ly = 0; ly < CHUNK_SIZE; ly++) {
-						for (let lx = 0; lx < CHUNK_SIZE; lx++) {
-							const tileId = chunk.getTerrain(lx, ly);
-							if (tileId === TileId.Water || tileId === TileId.DeepWater) {
-								waterSheet.drawTile(
-									ctx,
-									waterFrame,
-									0,
-									sx + lx * SCALED_TILE,
-									sy + ly * SCALED_TILE,
-									PIXEL_SCALE,
-								);
-							}
-						}
-					}
-				}
 			}
 		}
 	}
 
 	/**
 	 * Rebuild the chunk's OffscreenCanvas cache.
-	 * Draws terrain (with autotile for grass) and detail tiles at native resolution.
+	 * Draws shallow water base (from ME #16 sheet), then autotile layers, then details.
 	 */
 	private rebuildCache(chunk: Chunk, sheets: Map<string, Spritesheet>): void {
 		if (!chunk.renderCache) {
@@ -114,51 +92,30 @@ export class TileRenderer {
 		offCtx.imageSmoothingEnabled = false;
 		offCtx.clearRect(0, 0, CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
 
-		const grassSheet = sheets.get("grass");
-		const waterSheet = sheets.get("water");
-		const dirtSheet = sheets.get("dirt");
+		// ME sheet #3 (water_shallow/grass): (1,0) = mask 255 = solid shallow water fill
+		const waterSheet = sheets.get("shallowwater");
 
 		for (let ly = 0; ly < CHUNK_SIZE; ly++) {
 			for (let lx = 0; lx < CHUNK_SIZE; lx++) {
 				const dx = lx * TILE_SIZE;
 				const dy = ly * TILE_SIZE;
-				const tileId = chunk.getTerrain(lx, ly);
 				const idx = ly * CHUNK_SIZE + lx;
-				const grassPacked = chunk.autotileCache[idx] ?? 0;
-				const dirtPacked = chunk.dirtAutotileCache[idx] ?? 0;
 
-				if (dirtPacked > 0) {
-					// Sand tile: three layers (water → grass autotile → dirt autotile)
-					if (waterSheet) {
-						waterSheet.drawTile(offCtx, 0, 0, dx, dy, 1);
-					}
-					if (grassSheet && grassPacked > 0) {
-						const grassCol = grassPacked & 0xff;
-						const grassRow = grassPacked >> 8;
-						grassSheet.drawTile(offCtx, grassCol, grassRow, dx, dy, 1);
-					}
-					if (dirtSheet) {
-						const dirtCol = dirtPacked & 0xff;
-						const dirtRow = dirtPacked >> 8;
-						dirtSheet.drawTile(offCtx, dirtCol, dirtRow, dx, dy, 1);
-					}
-				} else if (grassPacked > 0) {
-					// Grass autotile: draw water base underneath for transparent edge reveal
-					if (waterSheet) {
-						waterSheet.drawTile(offCtx, 0, 0, dx, dy, 1);
-					}
-					if (grassSheet) {
-						const col = grassPacked & 0xff;
-						const row = grassPacked >> 8;
-						grassSheet.drawTile(offCtx, col, row, dx, dy, 1);
-					}
-				} else {
-					// Regular tile from registry (water, etc.)
-					const def = getTileDef(tileId);
-					if (def) {
-						const sheet = sheets.get(def.sheetKey);
+				// Shallow water base under all tiles (opaque autotile covers it for land)
+				if (waterSheet) {
+					waterSheet.drawTile(offCtx, 1, 0, dx, dy, 1);
+				}
+
+				// Draw each autotile layer in order
+				for (let layerIdx = 0; layerIdx < TERRAIN_LAYERS.length; layerIdx++) {
+					const packed = chunk.autotileLayers[layerIdx]?.[idx] ?? 0;
+					if (packed > 0) {
+						const layer = TERRAIN_LAYERS[layerIdx]!;
+						const sheet = sheets.get(layer.sheetKey);
 						if (sheet) {
-							sheet.drawTile(offCtx, def.spriteCol, def.spriteRow, dx, dy, 1);
+							const col = packed & 0xff;
+							const row = packed >> 8;
+							sheet.drawTile(offCtx, col, row, dx, dy, 1);
 						}
 					}
 				}

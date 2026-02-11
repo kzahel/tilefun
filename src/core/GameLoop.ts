@@ -7,8 +7,8 @@ const FIXED_DT = 1 / TICK_RATE;
 const MAX_FRAME_TIME = 0.25;
 
 export interface GameLoopCallbacks {
-	update(dt: number): void;
-	render(alpha: number): void;
+  update(dt: number): void;
+  render(alpha: number): void;
 }
 
 /**
@@ -20,49 +20,49 @@ export interface GameLoopCallbacks {
  * interpolation on 120Hz/240Hz displays.
  */
 export class GameLoop {
-	private accumulator = 0;
-	private lastTime = 0;
-	private running = false;
-	private rafId = 0;
-	private callbacks: GameLoopCallbacks;
+  private accumulator = 0;
+  private lastTime = 0;
+  private running = false;
+  private rafId = 0;
+  private callbacks: GameLoopCallbacks;
 
-	constructor(callbacks: GameLoopCallbacks) {
-		this.callbacks = callbacks;
-	}
+  constructor(callbacks: GameLoopCallbacks) {
+    this.callbacks = callbacks;
+  }
 
-	start(): void {
-		if (this.running) return;
-		this.running = true;
-		this.lastTime = performance.now() / 1000;
-		this.rafId = requestAnimationFrame(this.tick);
-	}
+  start(): void {
+    if (this.running) return;
+    this.running = true;
+    this.lastTime = performance.now() / 1000;
+    this.rafId = requestAnimationFrame(this.tick);
+  }
 
-	stop(): void {
-		this.running = false;
-		cancelAnimationFrame(this.rafId);
-	}
+  stop(): void {
+    this.running = false;
+    cancelAnimationFrame(this.rafId);
+  }
 
-	private tick = (nowMs: number): void => {
-		if (!this.running) return;
+  private tick = (nowMs: number): void => {
+    if (!this.running) return;
 
-		const now = nowMs / 1000;
-		let frameTime = now - this.lastTime;
-		this.lastTime = now;
+    const now = nowMs / 1000;
+    let frameTime = now - this.lastTime;
+    this.lastTime = now;
 
-		if (frameTime > MAX_FRAME_TIME) {
-			frameTime = MAX_FRAME_TIME;
-		}
+    if (frameTime > MAX_FRAME_TIME) {
+      frameTime = MAX_FRAME_TIME;
+    }
 
-		this.accumulator += frameTime;
+    this.accumulator += frameTime;
 
-		while (this.accumulator >= FIXED_DT) {
-			this.callbacks.update(FIXED_DT);
-			this.accumulator -= FIXED_DT;
-		}
+    while (this.accumulator >= FIXED_DT) {
+      this.callbacks.update(FIXED_DT);
+      this.accumulator -= FIXED_DT;
+    }
 
-		const alpha = this.accumulator / FIXED_DT;
-		this.callbacks.render(alpha);
+    const alpha = this.accumulator / FIXED_DT;
+    this.callbacks.render(alpha);
 
-		this.rafId = requestAnimationFrame(this.tick);
-	};
+    this.rafId = requestAnimationFrame(this.tick);
+  };
 }
