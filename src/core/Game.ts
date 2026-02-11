@@ -1,13 +1,24 @@
+import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
-import { CAMERA_LERP, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import {
+	CAMERA_LERP,
+	CHICKEN_SPRITE_SIZE,
+	CHUNK_SIZE,
+	PLAYER_SPRITE_SIZE,
+	TILE_SIZE,
+} from "../config/constants.js";
+import { createChicken } from "../entities/Chicken.js";
 import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
+import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { Camera } from "../rendering/Camera.js";
+import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
@@ -22,6 +33,10 @@ export class Game {
 	private input: InputManager;
 	private entityManager: EntityManager;
 	private player: Entity;
+	private debugEnabled = false;
+	private frameCount = 0;
+	private fpsTimer = 0;
+	private currentFps = 0;
 
 	constructor(canvas: HTMLCanvasElement) {
 		const ctx = canvas.getContext("2d");
@@ -44,14 +59,21 @@ export class Game {
 	async init(): Promise<void> {
 		this.resize();
 		window.addEventListener("resize", () => this.resize());
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "F3" || e.key === "`") {
+				e.preventDefault();
+				this.debugEnabled = !this.debugEnabled;
+			}
+		});
 		this.input.attach();
 
-		const [grassImg, dirtImg, waterImg, objectsImg, playerImg] = await Promise.all([
+		const [grassImg, dirtImg, waterImg, objectsImg, playerImg, chickenImg] = await Promise.all([
 			loadImage("assets/tilesets/grass.png"),
 			loadImage("assets/tilesets/dirt.png"),
 			loadImage("assets/tilesets/water.png"),
 			loadImage("assets/tilesets/objects.png"),
 			loadImage("assets/sprites/player.png"),
+			loadImage("assets/sprites/chicken.png"),
 		]);
 
 		this.sheets.set("grass", new Spritesheet(grassImg, TILE_SIZE, TILE_SIZE));
@@ -59,10 +81,17 @@ export class Game {
 		this.sheets.set("water", new Spritesheet(waterImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
 		this.sheets.set("player", new Spritesheet(playerImg, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
+		this.sheets.set(
+			"chicken",
+			new Spritesheet(chickenImg, CHICKEN_SPRITE_SIZE, CHICKEN_SPRITE_SIZE),
+		);
 
 		// Pre-load chunks around origin and compute initial autotile
 		this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
 		this.world.computeAutotile();
+
+		// Spawn chickens on walkable tiles near origin
+		this.spawnChickens(5);
 
 		this.loop.start();
 		this.canvas.dataset.ready = "true";
@@ -79,8 +108,15 @@ export class Game {
 		const movement = this.input.getMovement();
 		updatePlayerFromInput(this.player, movement, dt);
 
-		// Update all entities (velocity → position, animation timers)
-		this.entityManager.update(dt);
+		// NPC AI → velocity + animation state
+		for (const entity of this.entityManager.entities) {
+			if (entity.wanderAI) {
+				updateWanderAI(entity, dt, Math.random);
+			}
+		}
+
+		// Update all entities (velocity → collision-resolved position, animation timers)
+		this.entityManager.update(dt, (tx, ty) => this.world.getCollision(tx, ty));
 
 		// Camera follows player
 		this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);
@@ -106,5 +142,48 @@ export class Game {
 
 		// Draw entities Y-sorted on top of terrain
 		drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets);
+
+		// FPS tracking
+		this.frameCount++;
+		const now = performance.now() / 1000;
+		if (now - this.fpsTimer >= 1) {
+			this.currentFps = this.frameCount;
+			this.frameCount = 0;
+			this.fpsTimer = now;
+		}
+
+		// Debug overlay
+		if (this.debugEnabled) {
+			drawDebugOverlay(
+				this.ctx,
+				this.camera,
+				this.entityManager.entities,
+				{
+					fps: this.currentFps,
+					entityCount: this.entityManager.entities.length,
+					chunkCount: this.world.chunks.loadedCount,
+				},
+				visible,
+			);
+		}
+	}
+
+	private spawnChickens(count: number): void {
+		const rng = alea("chicken-spawn");
+		let spawned = 0;
+		let attempts = 0;
+		const range = CHUNK_SIZE * TILE_SIZE * 5;
+		while (spawned < count && attempts < 200) {
+			attempts++;
+			const wx = (rng() - 0.5) * range * 2;
+			const wy = (rng() - 0.5) * range * 2;
+			const tx = Math.floor(wx / TILE_SIZE);
+			const ty = Math.floor(wy / TILE_SIZE);
+			const collision = this.world.getCollision(tx, ty);
+			if (collision === CollisionFlag.None) {
+				this.entityManager.spawn(createChicken(wx, wy));
+				spawned++;
+			}
+		}
 	}
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PLAYER_SPEED } from "../config/constants.js";
+import { PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../config/constants.js";
 import { Direction } from "./Entity.js";
 import { createPlayer, updatePlayerFromInput } from "./Player.js";
 
@@ -16,6 +16,24 @@ describe("createPlayer", () => {
 		expect(p.sprite?.direction).toBe(Direction.Down);
 		expect(p.sprite?.moving).toBe(false);
 		expect(p.sprite?.frameCol).toBe(0);
+	});
+
+	it("has a collider for feet area", () => {
+		const p = createPlayer(0, 0);
+		expect(p.collider).not.toBeNull();
+		expect(p.collider?.width).toBeGreaterThan(0);
+		expect(p.collider?.height).toBeGreaterThan(0);
+	});
+
+	it("has correct sprite dimensions", () => {
+		const p = createPlayer(0, 0);
+		expect(p.sprite?.spriteWidth).toBe(PLAYER_SPRITE_SIZE);
+		expect(p.sprite?.spriteHeight).toBe(PLAYER_SPRITE_SIZE);
+	});
+
+	it("has no wanderAI", () => {
+		const p = createPlayer(0, 0);
+		expect(p.wanderAI).toBeNull();
 	});
 });
 

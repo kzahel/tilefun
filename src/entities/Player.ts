@@ -1,4 +1,4 @@
-import { PLAYER_FRAME_DURATION, PLAYER_SPEED } from "../config/constants.js";
+import { PLAYER_FRAME_DURATION, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../config/constants.js";
 import type { Movement } from "../input/InputManager.js";
 import { Direction, type Entity } from "./Entity.js";
 
@@ -20,8 +20,16 @@ export function createPlayer(wx: number, wy: number): Entity {
 			frameCount: FRAME_COUNT,
 			direction: Direction.Down,
 			moving: false,
+			spriteWidth: PLAYER_SPRITE_SIZE,
+			spriteHeight: PLAYER_SPRITE_SIZE,
 		},
-		collider: null,
+		collider: {
+			offsetX: 0,
+			offsetY: 0,
+			width: 10,
+			height: 6,
+		},
+		wanderAI: null,
 	};
 }
 

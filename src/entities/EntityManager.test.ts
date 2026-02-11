@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { PLAYER_FRAME_DURATION } from "../config/constants.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
+import { createChicken } from "./Chicken.js";
 import { EntityManager } from "./EntityManager.js";
 import { createPlayer } from "./Player.js";
 
@@ -79,6 +81,68 @@ describe("EntityManager", () => {
 			const dt = 2 / 1000; // 2ms, enough to wrap
 			em.update(dt);
 			expect(spr.frameCol).toBe(0);
+		});
+	});
+
+	describe("collision integration", () => {
+		it("blocks movement into water tiles", () => {
+			const em = new EntityManager();
+			const p = em.spawn(createPlayer(100, 100));
+			const vel = p.velocity;
+			assertDefined(vel);
+			vel.vx = 10;
+			vel.vy = 0;
+			// Water wall at tile (7, 6) = wx 112..127 — small move brings AABB edge into it
+			const getCollision = (tx: number, ty: number) =>
+				tx === 7 && ty === 6 ? CollisionFlag.Water : CollisionFlag.None;
+			em.update(1, getCollision);
+			// X should be blocked (stayed at 100)
+			expect(p.position.wx).toBe(100);
+		});
+
+		it("applies velocity without collision when no getCollision provided", () => {
+			const em = new EntityManager();
+			const p = em.spawn(createPlayer(0, 0));
+			const vel = p.velocity;
+			assertDefined(vel);
+			vel.vx = 60;
+			vel.vy = 30;
+			em.update(1);
+			expect(p.position.wx).toBe(60);
+			expect(p.position.wy).toBe(30);
+		});
+
+		it("applies SlowWalk speed reduction", () => {
+			const em = new EntityManager();
+			const p = em.spawn(createPlayer(50, 50));
+			const vel = p.velocity;
+			assertDefined(vel);
+			vel.vx = 100;
+			vel.vy = 0;
+			// Current tile (3, 3) has SlowWalk
+			const getCollision = (tx: number, ty: number) =>
+				tx === 3 && ty === 3 ? CollisionFlag.SlowWalk : CollisionFlag.None;
+			em.update(1, getCollision);
+			// Should move at half speed: 100 * 0.5 = 50
+			expect(p.position.wx).toBeCloseTo(100, 0);
+		});
+
+		it("reverses chicken direction on collision", () => {
+			const em = new EntityManager();
+			const c = em.spawn(createChicken(100, 100));
+			assertDefined(c.wanderAI);
+			assertDefined(c.velocity);
+			c.wanderAI.state = "walking";
+			c.wanderAI.dirX = 1;
+			c.wanderAI.dirY = 0;
+			c.velocity.vx = 20;
+			c.velocity.vy = 0;
+			// Wall ahead
+			const getCollision = (tx: number, ty: number) =>
+				tx === 7 && ty === 6 ? CollisionFlag.Water : CollisionFlag.None;
+			em.update(1, getCollision);
+			// Direction should be reversed
+			expect(c.wanderAI.dirX).toBe(-1);
 		});
 	});
 

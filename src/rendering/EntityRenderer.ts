@@ -1,5 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { PIXEL_SCALE, PLAYER_SPRITE_SIZE } from "../config/constants.js";
+import { PIXEL_SCALE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "./Camera.js";
 
@@ -23,14 +23,14 @@ export function drawEntities(
 		// Position is at feet (bottom-center of the sprite frame).
 		// Offset draw origin so sprite frame is centered horizontally
 		// and extends upward from feet.
-		const halfW = PLAYER_SPRITE_SIZE / 2;
+		const halfW = sprite.spriteWidth / 2;
 		const screen = camera.worldToScreen(
 			entity.position.wx - halfW,
-			entity.position.wy - PLAYER_SPRITE_SIZE,
+			entity.position.wy - sprite.spriteHeight,
 		);
 
-		const destW = PLAYER_SPRITE_SIZE * PIXEL_SCALE;
-		const destH = PLAYER_SPRITE_SIZE * PIXEL_SCALE;
+		const destW = sprite.spriteWidth * PIXEL_SCALE;
+		const destH = sprite.spriteHeight * PIXEL_SCALE;
 
 		const region = sheet.getRegion(sprite.frameCol, sprite.frameRow);
 		ctx.drawImage(

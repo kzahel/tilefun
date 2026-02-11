@@ -30,6 +30,10 @@ export interface SpriteComponent {
 	frameCount: number;
 	direction: Direction;
 	moving: boolean;
+	/** Pixel width of one frame in the spritesheet. */
+	spriteWidth: number;
+	/** Pixel height of one frame in the spritesheet. */
+	spriteHeight: number;
 }
 
 export interface ColliderComponent {
@@ -40,6 +44,21 @@ export interface ColliderComponent {
 	height: number;
 }
 
+export interface WanderAIComponent {
+	state: "idle" | "walking";
+	/** Time remaining in current state (seconds). */
+	timer: number;
+	/** Movement direction when walking. */
+	dirX: number;
+	dirY: number;
+	idleMin: number;
+	idleMax: number;
+	walkMin: number;
+	walkMax: number;
+	/** Movement speed in px/s. */
+	speed: number;
+}
+
 export interface Entity {
 	id: number;
 	type: string;
@@ -47,4 +66,5 @@ export interface Entity {
 	velocity: VelocityComponent | null;
 	sprite: SpriteComponent | null;
 	collider: ColliderComponent | null;
+	wanderAI: WanderAIComponent | null;
 }

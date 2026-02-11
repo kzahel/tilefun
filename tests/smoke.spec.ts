@@ -292,6 +292,67 @@ test("no console errors after WASD movement", async ({ page }) => {
 	expect(errors).toEqual([]);
 });
 
+test("F3 toggles debug overlay", async ({ page }) => {
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+	await page.waitForTimeout(200);
+
+	// Capture top-left pixels BEFORE debug toggle
+	const pixelsBefore = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return null;
+		const data = ctx.getImageData(5, 5, 180, 55).data;
+		let sum = 0;
+		for (let i = 0; i < data.length; i += 4) {
+			sum += (data[i] ?? 0) + (data[i + 1] ?? 0) + (data[i + 2] ?? 0);
+		}
+		return sum;
+	});
+
+	// Toggle debug via backtick key (F3 may be intercepted by browser)
+	await page.keyboard.press("Backquote");
+	await page.waitForTimeout(200);
+
+	// Check that top-left area changed (dark background + green text drawn)
+	const pixelsAfter = await page.evaluate(() => {
+		const c = document.getElementById("game") as HTMLCanvasElement;
+		const ctx = c.getContext("2d");
+		if (!ctx) return null;
+		const data = ctx.getImageData(5, 5, 180, 55).data;
+		let sum = 0;
+		for (let i = 0; i < data.length; i += 4) {
+			sum += (data[i] ?? 0) + (data[i + 1] ?? 0) + (data[i + 2] ?? 0);
+		}
+		return sum;
+	});
+
+	// The debug overlay should change the pixel content in the top-left area
+	expect(pixelsBefore).not.toBeNull();
+	expect(pixelsAfter).not.toBeNull();
+	expect(pixelsAfter).not.toBe(pixelsBefore);
+});
+
+test("no console errors with collision and NPCs active", async ({ page }) => {
+	const errors: string[] = [];
+	page.on("console", (msg) => {
+		if (msg.type() === "error") errors.push(msg.text());
+	});
+
+	await page.goto("/tilefun/");
+	await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+
+	// Move around for a few seconds to exercise collision and NPC AI
+	for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"]) {
+		await page.keyboard.down(key);
+		await page.waitForTimeout(500);
+		await page.keyboard.up(key);
+	}
+
+	await page.waitForTimeout(200);
+	expect(errors).toEqual([]);
+});
+
 test("no console errors after rapid scrolling through many chunks", async ({ page }) => {
 	const errors: string[] = [];
 	page.on("console", (msg) => {

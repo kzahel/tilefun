@@ -30,3 +30,6 @@ export const PLAYER_SPRITE_SIZE = 48;
 
 /** Duration of each walk animation frame (milliseconds). */
 export const PLAYER_FRAME_DURATION = 150;
+
+/** Size of each frame in the chicken spritesheet (pixels). */
+export const CHICKEN_SPRITE_SIZE = 16;
