@@ -30,9 +30,12 @@ export class EditorPanel {
   private readonly container: HTMLDivElement;
   private readonly buttons: HTMLButtonElement[] = [];
   private readonly modeButton: HTMLButtonElement;
+  private readonly bridgeButton: HTMLButtonElement;
   private pendingClear: TerrainId | null = null;
   selectedTerrain: TerrainId = TerrainId.Grass;
   brushMode: BrushMode = "tile";
+  /** Max bridge insertion depth (0 = no bridging, 1-3 = auto-insert transitions). */
+  bridgeDepth = 2;
 
   constructor() {
     this.container = document.createElement("div");
@@ -51,7 +54,19 @@ export class EditorPanel {
     this.modeButton.addEventListener("click", () => this.toggleMode());
     this.container.appendChild(this.modeButton);
 
-    // Separator after mode button
+    // Bridge depth button
+    this.bridgeButton = document.createElement("button");
+    this.bridgeButton.style.cssText = `
+      height: 44px; border: 2px solid #888; border-radius: 4px;
+      background: #444; color: #fff; font: bold 10px monospace;
+      cursor: pointer; padding: 0 10px;
+    `;
+    this.bridgeButton.title = "Bridge depth: auto-insert transitions (B)";
+    this.bridgeButton.addEventListener("click", () => this.cycleBridgeDepth());
+    this.container.appendChild(this.bridgeButton);
+    this.updateBridgeButton();
+
+    // Separator after controls
     const modeSep = document.createElement("div");
     modeSep.style.cssText = "width: 1px; height: 32px; background: #555; margin: 0 4px;";
     this.container.appendChild(modeSep);
@@ -109,6 +124,17 @@ export class EditorPanel {
     this.brushMode = this.brushMode === "tile" ? "corner" : "tile";
     this.modeButton.textContent = this.brushMode === "tile" ? "Tile" : "Corner";
     this.modeButton.style.borderColor = this.brushMode === "corner" ? "#f0a030" : "#888";
+  }
+
+  cycleBridgeDepth(): void {
+    this.bridgeDepth = (this.bridgeDepth + 1) % 4; // 0, 1, 2, 3
+    this.updateBridgeButton();
+  }
+
+  private updateBridgeButton(): void {
+    const label = this.bridgeDepth === 0 ? "B:Off" : `B:${this.bridgeDepth}`;
+    this.bridgeButton.textContent = label;
+    this.bridgeButton.style.borderColor = this.bridgeDepth > 0 ? "#4a9" : "#888";
   }
 
   consumeClearRequest(): TerrainId | null {

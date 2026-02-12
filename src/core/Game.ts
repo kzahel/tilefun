@@ -104,6 +104,10 @@ export class Game {
         e.preventDefault();
         this.editorPanel.toggleMode();
       }
+      if ((e.key === "b" || e.key === "B") && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.cycleBridgeDepth();
+      }
     });
     this.createEditorButton();
     this.input.attach();
@@ -392,8 +396,9 @@ export class Game {
   ): void {
     this.setGlobalCorner(gx, gy, terrainId);
 
-    // Bridge insertion: check 4 cardinal neighbor corners (depth-limited to 2)
-    if (depth < 2) {
+    // Bridge insertion: check 4 cardinal neighbor corners
+    const maxBridge = this.editorPanel.bridgeDepth;
+    if (maxBridge > 0 && depth < maxBridge) {
       const cardinals: [number, number][] = [
         [gx - 1, gy],
         [gx + 1, gy],

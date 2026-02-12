@@ -45,16 +45,22 @@ export class TerrainAdjacency {
     this.computeBridges();
   }
 
-  /** True if a Tier 1 or Tier 2 edge exists between a and b. */
+  /** True if both directions (a→b and b→a) have blend entries. */
   isValidAdjacency(a: TerrainId, b: TerrainId): boolean {
     if (a === b) return true;
-    return this.any[a * TERRAIN_COUNT + b] === true;
+    return (
+      this.any[a * TERRAIN_COUNT + b] === true &&
+      this.any[b * TERRAIN_COUNT + a] === true
+    );
   }
 
-  /** True only for Tier 1 (dedicated sheet) edges. */
+  /** True only for Tier 1 (dedicated sheet) edges (bidirectional). */
   isDedicatedAdjacency(a: TerrainId, b: TerrainId): boolean {
     if (a === b) return true;
-    return this.dedicated[a * TERRAIN_COUNT + b] === true;
+    return (
+      this.dedicated[a * TERRAIN_COUNT + b] === true &&
+      this.dedicated[b * TERRAIN_COUNT + a] === true
+    );
   }
 
   /** Next terrain on shortest Tier 1 path from `from` to `to`, or undefined if unreachable. */
