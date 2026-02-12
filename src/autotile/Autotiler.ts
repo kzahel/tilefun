@@ -134,8 +134,9 @@ export function computeChunkSubgridBlend(chunk: Chunk, blendGraph: BlendGraph): 
         }
 
         const mask = canonicalize(rawMask);
-        // Skip degenerate masks
-        if (mask === 0 || mask === 255) continue;
+        // Skip degenerate masks: mask=0 means a lone diagonal with no adjacent
+        // cardinals (invisible in the subgrid system).
+        if (mask === 0) continue;
 
         const sprite = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
         const col = sprite & 0xff;

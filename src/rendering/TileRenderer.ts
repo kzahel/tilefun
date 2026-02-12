@@ -1,7 +1,7 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { TileVariants } from "../assets/TileVariants.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
-import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
@@ -33,11 +33,18 @@ export class TileRenderer {
   private blendSheets: Spritesheet[] = [];
   /** BlendGraph for base fill lookups. */
   private blendGraph: BlendGraph | null = null;
+  /** Optional tile variants for base fill variety. */
+  private variants: TileVariants | null = null;
 
   /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
     this.blendSheets = sheets;
     this.blendGraph = graph;
+  }
+
+  /** Set tile variants for base fill variety. */
+  setVariants(variants: TileVariants): void {
+    this.variants = variants;
   }
 
   /**
@@ -75,7 +82,7 @@ export class TileRenderer {
 
         // Rebuild cache if stale or missing
         if (chunk.dirty || !chunk.renderCache) {
-          this.rebuildCache(chunk, sheets);
+          this.rebuildCache(chunk, cx, cy, sheets);
           chunk.dirty = false;
         }
 
@@ -91,7 +98,12 @@ export class TileRenderer {
    * Rebuild the chunk's OffscreenCanvas cache.
    * Draws: shallow water base → tile base fill → blend layers → details.
    */
-  private rebuildCache(chunk: Chunk, sheets: Map<string, Spritesheet>): void {
+  private rebuildCache(
+    chunk: Chunk,
+    cx: number,
+    cy: number,
+    sheets: Map<string, Spritesheet>,
+  ): void {
     if (!chunk.renderCache) {
       chunk.renderCache = new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
     }
@@ -102,6 +114,10 @@ export class TileRenderer {
 
     const waterSheet = sheets.get("shallowwater");
     const graph = this.blendGraph;
+    const variants = this.variants;
+    // World tile origin for this chunk
+    const baseTx = cx * CHUNK_SIZE;
+    const baseTy = cy * CHUNK_SIZE;
 
     for (let ly = 0; ly < CHUNK_SIZE; ly++) {
       for (let lx = 0; lx < CHUNK_SIZE; lx++) {
@@ -114,23 +130,32 @@ export class TileRenderer {
           waterSheet.drawTile(offCtx, 1, 0, dx, dy, 1);
         }
 
-        // 2. Tile's own terrain base fill (covers water for land tiles)
-        //    Derive from corners to preserve DirtLight vs DirtWarm distinction
-        //    (both collapse to TileId.DirtPath, losing the difference).
+        // 2. Tile's own terrain base fill (covers water for land tiles).
+        //    Use the subgrid center (odd,odd) which is the tile's own terrain.
+        //    Blend sprites are opaque 16×16 tiles and fully cover the base fill
+        //    wherever a transition exists, so the base only shows on uniform tiles.
         if (graph) {
-          const terrainId = deriveTerrainIdFromCorners(
-            chunk.getCorner(lx, ly) as TerrainId,
-            chunk.getCorner(lx + 1, ly) as TerrainId,
-            chunk.getCorner(lx, ly + 1) as TerrainId,
-            chunk.getCorner(lx + 1, ly + 1) as TerrainId,
-          );
+          const terrainId = chunk.getSubgrid(
+            2 * lx + 1,
+            2 * ly + 1,
+          ) as TerrainId;
           // Skip base fill for shallow water (already drawn as universal base)
           if (terrainId !== TerrainId.ShallowWater) {
-            const baseFill = graph.getBaseFill(terrainId);
-            if (baseFill) {
-              const baseSheet = this.blendSheets[baseFill.sheetIndex];
-              if (baseSheet) {
-                baseSheet.drawTile(offCtx, baseFill.col, baseFill.row, dx, dy, 1);
+            // Try tile variants first for visual variety
+            const groupName = TerrainId[terrainId];
+            const drawn =
+              variants && groupName
+                ? variants.drawVariant(offCtx, groupName, baseTx + lx, baseTy + ly, dx, dy, 1)
+                : false;
+
+            // Fall back to uniform base fill from blend graph
+            if (!drawn) {
+              const baseFill = graph.getBaseFill(terrainId);
+              if (baseFill) {
+                const baseSheet = this.blendSheets[baseFill.sheetIndex];
+                if (baseSheet) {
+                  baseSheet.drawTile(offCtx, baseFill.col, baseFill.row, dx, dy, 1);
+                }
               }
             }
           }

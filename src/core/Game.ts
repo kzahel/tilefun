@@ -1,6 +1,7 @@
 import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { TileVariants } from "../assets/TileVariants.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId } from "../autotile/TerrainId.js";
@@ -124,13 +125,14 @@ export class Game {
     this.input.attach();
     this.touchJoystick.attach();
 
-    // Load blend graph sheets (11 ME autotile sheets) + entity sheets
+    // Load blend graph sheets (11 ME autotile sheets) + entity sheets + complete tileset
     const blendDescs = this.blendGraph.allSheets;
-    const [blendImages, objectsImg, playerImg, chickenImg] = await Promise.all([
+    const [blendImages, objectsImg, playerImg, chickenImg, completeImg] = await Promise.all([
       Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
       loadImage("assets/tilesets/objects.png"),
       loadImage("assets/sprites/player.png"),
       loadImage("assets/sprites/chicken.png"),
+      loadImage("assets/tilesets/me-complete.png"),
     ]);
 
     // Build indexed blend sheet array for the graph renderer
@@ -149,6 +151,11 @@ export class Game {
       this.sheets.set("shallowwater", me03Sheet);
     }
     this.tileRenderer.setBlendSheets(blendSheets, this.blendGraph);
+
+    // Set up tile variants from the complete ME tileset
+    const variants = new TileVariants(new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE));
+    registerTileVariants(variants);
+    this.tileRenderer.setVariants(variants);
 
     this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
     this.sheets.set("player", new Spritesheet(playerImg, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
@@ -721,4 +728,52 @@ export class Game {
       }
     }
   }
+}
+
+/**
+ * Register base fill variant tiles from the ME Complete Tileset.
+ * Group names match TerrainId enum keys (e.g. "Grass", "DirtWarm").
+ *
+ * Tile coordinates are (col, row) in the 176×514 complete tileset grid.
+ * Grass variants: two regions of textured grass matching autotile color (71, 151, 87).
+ * GrassLight: brighter green tiles for manicured/lawn areas.
+ */
+function registerTileVariants(variants: TileVariants): void {
+  // --- Grass: tiles matching ME autotile grass color (71, 151, 87) ---
+  // Region A (cols 51-63, rows 1-7): terrain section grass variants
+  variants.addTiles("Grass", [
+    { col: 52, row: 2 }, // solid (var=0, 100% match)
+    { col: 53, row: 2 }, // subtle texture (var=37)
+    { col: 55, row: 1 }, // grass blades (var=129)
+    { col: 58, row: 1 },
+    { col: 59, row: 1 },
+    { col: 61, row: 1 },
+    { col: 63, row: 1 },
+    { col: 63, row: 3 }, // moderate texture (var=66)
+    { col: 55, row: 4 },
+    { col: 58, row: 4 },
+    { col: 59, row: 4 },
+    { col: 61, row: 4 }, // (var=66)
+    { col: 62, row: 4 },
+    { col: 62, row: 6 },
+  ]);
+  // Region B (cols 129-145, rows 1-5): alternate terrain grass variants
+  variants.addTiles("Grass", [
+    { col: 130, row: 2 }, // solid (var=0, 100% match)
+    { col: 131, row: 2 }, // subtle texture (var=37)
+    { col: 133, row: 1 }, // (var=71)
+    { col: 137, row: 1 },
+    { col: 136, row: 1 }, // (var=102)
+    { col: 140, row: 1 },
+    { col: 141, row: 1 }, // near-solid (var=18)
+    { col: 145, row: 1 },
+    { col: 133, row: 4 }, // (var=96)
+    { col: 136, row: 4 },
+    { col: 141, row: 5 }, // near-solid (var=18)
+    { col: 145, row: 5 },
+  ]);
+
+  // --- GrassLight: brighter green tiles (cols 7-11, rows 1-5) ---
+  // Color ~(103, 168, 80) — a separate, lighter grass style
+  variants.addRect("GrassLight", 7, 1, 5, 5);
 }
