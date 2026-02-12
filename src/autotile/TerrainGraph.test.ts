@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { CHUNK_SIZE } from "../config/constants.js";
 import { BiomeId } from "../generation/BiomeMapper.js";
+import { Chunk } from "../world/Chunk.js";
+import { TileId } from "../world/TileRegistry.js";
+import { TERRAIN_LAYERS } from "./TerrainLayers.js";
+import { biomeIdToTileId } from "./terrainMapping.js";
 import { deriveTerrainFromCorners, getValidFallback, isValidAdjacency } from "./TerrainGraph.js";
 
 describe("isValidAdjacency", () => {
@@ -67,32 +72,166 @@ describe("deriveTerrainFromCorners", () => {
     expect(deriveTerrainFromCorners(DeepWater, DeepWater, DeepWater, DeepWater)).toBe(DeepWater);
   });
 
-  it("returns majority biome (3 vs 1)", () => {
-    const { Grass, Sand } = BiomeId;
-    expect(deriveTerrainFromCorners(Grass, Grass, Grass, Sand)).toBe(Grass);
+  it("returns lowest-priority biome when corners differ (3 vs 1)", () => {
+    const { Grass, Sand, ShallowWater } = BiomeId;
+    // Sand (2) < Grass (3) → Sand wins
+    expect(deriveTerrainFromCorners(Grass, Grass, Grass, Sand)).toBe(Sand);
+    // Sand (2) < Grass (3) → Sand wins
     expect(deriveTerrainFromCorners(Sand, Sand, Sand, Grass)).toBe(Sand);
+    // ShallowWater (1) < Grass (3) → ShallowWater wins
+    expect(deriveTerrainFromCorners(Grass, Grass, Grass, ShallowWater)).toBe(ShallowWater);
   });
 
-  it("breaks 2v2 ties by higher priority", () => {
+  it("returns lowest-priority biome in 2v2 split", () => {
     const { ShallowWater, Grass } = BiomeId;
-    // Grass (priority 3) > ShallowWater (priority 1)
-    expect(deriveTerrainFromCorners(ShallowWater, ShallowWater, Grass, Grass)).toBe(Grass);
-    expect(deriveTerrainFromCorners(Grass, ShallowWater, Grass, ShallowWater)).toBe(Grass);
+    // ShallowWater (1) < Grass (3) → ShallowWater wins
+    expect(deriveTerrainFromCorners(ShallowWater, ShallowWater, Grass, Grass)).toBe(ShallowWater);
+    expect(deriveTerrainFromCorners(Grass, ShallowWater, Grass, ShallowWater)).toBe(ShallowWater);
   });
 
-  it("breaks 2v2 tie between Sand and Grass in favor of Grass", () => {
+  it("returns lowest-priority biome in 2v2 Sand vs Grass", () => {
     const { Sand, Grass } = BiomeId;
-    expect(deriveTerrainFromCorners(Sand, Sand, Grass, Grass)).toBe(Grass);
+    // Sand (2) < Grass (3) → Sand wins
+    expect(deriveTerrainFromCorners(Sand, Sand, Grass, Grass)).toBe(Sand);
   });
 
-  it("handles 4-way tie (1 each) by highest priority", () => {
+  it("returns lowest-priority biome with 4 distinct corners", () => {
     const { DeepWater, ShallowWater, Sand, Grass } = BiomeId;
-    expect(deriveTerrainFromCorners(DeepWater, ShallowWater, Sand, Grass)).toBe(Grass);
+    // DeepWater (0) is lowest → wins
+    expect(deriveTerrainFromCorners(DeepWater, ShallowWater, Sand, Grass)).toBe(DeepWater);
   });
 
-  it("handles 3 distinct biomes", () => {
+  it("returns lowest-priority biome with 3 distinct biomes", () => {
     const { ShallowWater, Sand, Grass } = BiomeId;
-    // 2 Grass, 1 ShallowWater, 1 Sand → Grass wins by majority
-    expect(deriveTerrainFromCorners(Grass, Grass, ShallowWater, Sand)).toBe(Grass);
+    // ShallowWater (1) is lowest → wins regardless of counts
+    expect(deriveTerrainFromCorners(Grass, Grass, ShallowWater, Sand)).toBe(ShallowWater);
+  });
+
+  it("single water corner on flat grass produces water (editor corner brush scenario)", () => {
+    const { ShallowWater, Grass } = BiomeId;
+    // Painting one water corner: the 4 tiles sharing it each have 3 Grass + 1 Water
+    // All 4 orientations should produce Water
+    expect(deriveTerrainFromCorners(Grass, Grass, Grass, ShallowWater)).toBe(ShallowWater); // SE corner
+    expect(deriveTerrainFromCorners(Grass, Grass, ShallowWater, Grass)).toBe(ShallowWater); // SW corner
+    expect(deriveTerrainFromCorners(Grass, ShallowWater, Grass, Grass)).toBe(ShallowWater); // NE corner
+    expect(deriveTerrainFromCorners(ShallowWater, Grass, Grass, Grass)).toBe(ShallowWater); // NW corner
+  });
+});
+
+describe("corner edit integration: single corner on flat grass chunk", () => {
+  /**
+   * Simulates the Game.applyCornerEdit flow for a single chunk:
+   * set one corner, then re-derive terrain for affected tiles.
+   */
+  function rederiveTile(chunk: Chunk, lx: number, ly: number): void {
+    const nw = chunk.getCorner(lx, ly) as BiomeId;
+    const ne = chunk.getCorner(lx + 1, ly) as BiomeId;
+    const sw = chunk.getCorner(lx, ly + 1) as BiomeId;
+    const se = chunk.getCorner(lx + 1, ly + 1) as BiomeId;
+    const biome = deriveTerrainFromCorners(nw, ne, sw, se);
+    chunk.setTerrain(lx, ly, biomeIdToTileId(biome));
+  }
+
+  function makeGrassChunk(): Chunk {
+    const chunk = new Chunk(TERRAIN_LAYERS.length);
+    chunk.fillTerrain(TileId.Grass);
+    const cornerSize = CHUNK_SIZE + 1;
+    for (let cy = 0; cy < cornerSize; cy++) {
+      for (let cx = 0; cx < cornerSize; cx++) {
+        chunk.setCorner(cx, cy, BiomeId.Grass);
+      }
+    }
+    return chunk;
+  }
+
+  it("painting one water corner at (5,5) makes the 4 sharing tiles Water", () => {
+    const chunk = makeGrassChunk();
+
+    // Paint a single ShallowWater corner at local corner position (5, 5)
+    chunk.setCorner(5, 5, BiomeId.ShallowWater);
+
+    // The 4 tiles sharing corner (5,5):
+    // Tile (4,4) has SE = corner(5,5), Tile (5,4) has SW = corner(5,5),
+    // Tile (4,5) has NE = corner(5,5), Tile (5,5) has NW = corner(5,5)
+    const affectedTiles = [
+      [4, 4],
+      [5, 4],
+      [4, 5],
+      [5, 5],
+    ] as const;
+
+    for (const [lx, ly] of affectedTiles) {
+      rederiveTile(chunk, lx, ly);
+    }
+
+    // All 4 affected tiles should be Water
+    for (const [lx, ly] of affectedTiles) {
+      expect(chunk.getTerrain(lx, ly)).toBe(TileId.Water);
+    }
+
+    // Neighboring tiles (not sharing the corner) should remain Grass
+    const unaffectedTiles = [
+      [3, 3],
+      [6, 3],
+      [3, 6],
+      [6, 6],
+      [5, 3],
+      [3, 5],
+    ] as const;
+    for (const [lx, ly] of unaffectedTiles) {
+      expect(chunk.getTerrain(lx, ly)).toBe(TileId.Grass);
+    }
+  });
+
+  it("painting water corner back to grass restores all tiles to Grass", () => {
+    const chunk = makeGrassChunk();
+
+    // Paint water, re-derive
+    chunk.setCorner(5, 5, BiomeId.ShallowWater);
+    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+      rederiveTile(chunk, lx, ly);
+    }
+
+    // Verify water
+    expect(chunk.getTerrain(5, 5)).toBe(TileId.Water);
+
+    // Paint back to grass
+    chunk.setCorner(5, 5, BiomeId.Grass);
+    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+      rederiveTile(chunk, lx, ly);
+    }
+
+    // All 4 should be Grass again
+    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+      expect(chunk.getTerrain(lx, ly)).toBe(TileId.Grass);
+    }
+  });
+
+  it("two adjacent water corners create a larger water area", () => {
+    const chunk = makeGrassChunk();
+
+    // Paint two adjacent corners: (5,5) and (6,5)
+    chunk.setCorner(5, 5, BiomeId.ShallowWater);
+    chunk.setCorner(6, 5, BiomeId.ShallowWater);
+
+    // Tiles sharing corner (5,5): (4,4), (5,4), (4,5), (5,5)
+    // Tiles sharing corner (6,5): (5,4), (6,4), (5,5), (6,5)
+    // Union: (4,4), (5,4), (6,4), (4,5), (5,5), (6,5)
+    const affectedTiles = [
+      [4, 4],
+      [5, 4],
+      [6, 4],
+      [4, 5],
+      [5, 5],
+      [6, 5],
+    ] as const;
+
+    for (const [lx, ly] of affectedTiles) {
+      rederiveTile(chunk, lx, ly);
+    }
+
+    for (const [lx, ly] of affectedTiles) {
+      expect(chunk.getTerrain(lx, ly)).toBe(TileId.Water);
+    }
   });
 });

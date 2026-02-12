@@ -59,7 +59,9 @@ export function getValidFallback(_myBiome: BiomeId, neighborBiome: BiomeId): Bio
 
 /**
  * Derive a tile's biome from its 4 corner biomes.
- * Uses majority vote; ties broken by terrain priority (higher wins).
+ * Returns the lowest-priority biome present in any corner.
+ * This ensures that painting a single lower-layer corner (e.g. water on grass)
+ * immediately produces that terrain, with autotile transitions at edges.
  */
 export function deriveTerrainFromCorners(
   nw: BiomeId,
@@ -70,21 +72,8 @@ export function deriveTerrainFromCorners(
   // Fast path: all same
   if (nw === ne && ne === sw && sw === se) return nw;
 
-  // Count occurrences (max 6 biome ids, use array)
-  const counts = new Uint8Array(6);
-  counts[nw] = (counts[nw] ?? 0) + 1;
-  counts[ne] = (counts[ne] ?? 0) + 1;
-  counts[sw] = (counts[sw] ?? 0) + 1;
-  counts[se] = (counts[se] ?? 0) + 1;
-
-  let maxCount = 0;
-  let winner: BiomeId = nw;
-  for (let b = 0; b < 6; b++) {
-    const c = counts[b] ?? 0;
-    if (c > maxCount || (c === maxCount && b > winner)) {
-      maxCount = c;
-      winner = b as BiomeId;
-    }
-  }
-  return winner;
+  // Lowest-priority (numerically smallest) biome wins.
+  // Rendering layers draw bottom-to-top, so the lowest layer must be the tile
+  // type for the blend/autotile system to render transitions correctly.
+  return Math.min(nw, ne, sw, se) as BiomeId;
 }
