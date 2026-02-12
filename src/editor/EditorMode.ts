@@ -1,6 +1,8 @@
 import { TerrainId } from "../autotile/TerrainId.js";
-import { TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "../rendering/Camera.js";
+import type { EditorTab } from "./EditorPanel.js";
 
 export type BrushMode = "tile" | "subgrid" | "corner";
 
@@ -16,9 +18,20 @@ export interface PendingSubgridEdit {
   terrainId: TerrainId;
 }
 
+export interface PendingEntitySpawn {
+  wx: number;
+  wy: number;
+  entityType: string;
+}
+
 export class EditorMode {
   selectedTerrain: TerrainId = TerrainId.Grass;
+  selectedEntityType = "chicken";
+  editorTab: EditorTab = "terrain";
   brushMode: BrushMode = "tile";
+
+  /** Reference to live entities for right-click deletion lookup. */
+  entities: readonly Entity[] = [];
 
   // Tile-mode cursor (whole tile)
   cursorTileX = -Infinity;
@@ -37,9 +50,12 @@ export class EditorMode {
   private pendingTileEdits: PendingTileEdit[] = [];
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
   private pendingCornerEdits: PendingSubgridEdit[] = [];
+  private pendingEntitySpawns: PendingEntitySpawn[] = [];
+  private pendingEntityDeletions: number[] = [];
   private isPainting = false;
   private isPanning = false;
   private spaceDown = false;
+  private keysDown = new Set<string>();
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
   private lastPaintedTile = { tx: -Infinity, ty: -Infinity };
   private lastPaintedSubgrid = { gsx: -Infinity, gsy: -Infinity };
@@ -78,9 +94,11 @@ export class EditorMode {
     this.onTouchEnd = (e) => this.handleTouchEnd(e);
     this.onKeyDown = (e) => {
       if (e.key === " ") this.spaceDown = true;
+      this.keysDown.add(e.key);
     };
     this.onKeyUp = (e) => {
       if (e.key === " ") this.spaceDown = false;
+      this.keysDown.delete(e.key);
     };
   }
 
@@ -117,7 +135,24 @@ export class EditorMode {
     this.isPainting = false;
     this.isPanning = false;
     this.spaceDown = false;
+    this.keysDown.clear();
     this.activeTouches.clear();
+  }
+
+  /** Call from game loop to apply continuous key-based panning. */
+  update(dt: number): void {
+    const PAN_SPEED = CHUNK_SIZE * TILE_SIZE * 2; // 2 chunks/sec
+    let dx = 0;
+    let dy = 0;
+    if (this.keysDown.has("ArrowLeft") || this.keysDown.has("a")) dx -= 1;
+    if (this.keysDown.has("ArrowRight") || this.keysDown.has("d")) dx += 1;
+    if (this.keysDown.has("ArrowUp") || this.keysDown.has("w")) dy -= 1;
+    if (this.keysDown.has("ArrowDown") || this.keysDown.has("s")) dy += 1;
+    if (dx !== 0 || dy !== 0) {
+      const speed = PAN_SPEED / this.camera.zoom;
+      this.camera.x += dx * speed * dt;
+      this.camera.y += dy * speed * dt;
+    }
   }
 
   consumePendingEdits(): PendingTileEdit[] {
@@ -139,6 +174,20 @@ export class EditorMode {
     const edits = this.pendingCornerEdits;
     this.pendingCornerEdits = [];
     return edits;
+  }
+
+  consumePendingEntitySpawns(): PendingEntitySpawn[] {
+    if (this.pendingEntitySpawns.length === 0) return this.pendingEntitySpawns;
+    const spawns = this.pendingEntitySpawns;
+    this.pendingEntitySpawns = [];
+    return spawns;
+  }
+
+  consumePendingEntityDeletions(): number[] {
+    if (this.pendingEntityDeletions.length === 0) return this.pendingEntityDeletions;
+    const dels = this.pendingEntityDeletions;
+    this.pendingEntityDeletions = [];
+    return dels;
   }
 
   private canvasCoords(e: MouseEvent): { sx: number; sy: number } {
@@ -174,6 +223,37 @@ export class EditorMode {
       gsx: Math.round(wx / TILE_SIZE) * 2,
       gsy: Math.round(wy / TILE_SIZE) * 2,
     };
+  }
+
+  private screenToWorld(sx: number, sy: number): { wx: number; wy: number } {
+    return this.camera.screenToWorld(sx, sy);
+  }
+
+  private spawnEntityAt(sx: number, sy: number): void {
+    const { wx, wy } = this.screenToWorld(sx, sy);
+    this.pendingEntitySpawns.push({
+      wx,
+      wy,
+      entityType: this.selectedEntityType,
+    });
+  }
+
+  private deleteEntityAt(sx: number, sy: number): void {
+    const { wx, wy } = this.screenToWorld(sx, sy);
+    let bestId = -1;
+    let bestDist = 24; // max world-pixel distance to pick an entity
+    for (const entity of this.entities) {
+      const dx = entity.position.wx - wx;
+      const dy = entity.position.wy - wy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestId = entity.id;
+      }
+    }
+    if (bestId >= 0) {
+      this.pendingEntityDeletions.push(bestId);
+    }
   }
 
   private paintAt(sx: number, sy: number): void {
@@ -235,7 +315,7 @@ export class EditorMode {
   private handleMouseDown(e: MouseEvent): void {
     const { sx, sy } = this.canvasCoords(e);
 
-    // Middle button or space+left = pan
+    // Middle button or space+left = pan (always, regardless of tab)
     if (e.button === 1 || (e.button === 0 && this.spaceDown)) {
       this.isPanning = true;
       this.panStart = {
@@ -248,7 +328,17 @@ export class EditorMode {
       return;
     }
 
-    // Left button = paint
+    if (this.editorTab === "entities") {
+      // Left button = place entity, right button = delete nearest
+      if (e.button === 0) {
+        this.spawnEntityAt(sx, sy);
+      } else if (e.button === 2) {
+        this.deleteEntityAt(sx, sy);
+      }
+      return;
+    }
+
+    // Left button = paint terrain
     if (e.button === 0) {
       this.isPainting = true;
       this.lastPaintedTile.tx = -Infinity;
@@ -288,15 +378,22 @@ export class EditorMode {
     e.preventDefault();
     const { sx, sy } = this.canvasCoords(e);
 
-    // Zoom toward cursor
-    const worldBefore = this.camera.screenToWorld(sx, sy);
-    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-    this.camera.zoom = Math.max(0.05, Math.min(3, this.camera.zoom * zoomFactor));
-    const worldAfter = this.camera.screenToWorld(sx, sy);
+    // ctrlKey is set for pinch-to-zoom on trackpads
+    if (e.ctrlKey) {
+      // Zoom toward cursor
+      const worldBefore = this.camera.screenToWorld(sx, sy);
+      const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+      this.camera.zoom = Math.max(0.05, Math.min(3, this.camera.zoom * zoomFactor));
+      const worldAfter = this.camera.screenToWorld(sx, sy);
 
-    // Adjust camera so the world point under cursor stays fixed
-    this.camera.x += worldBefore.wx - worldAfter.wx;
-    this.camera.y += worldBefore.wy - worldAfter.wy;
+      // Adjust camera so the world point under cursor stays fixed
+      this.camera.x += worldBefore.wx - worldAfter.wx;
+      this.camera.y += worldBefore.wy - worldAfter.wy;
+    } else {
+      // Trackpad scroll → pan
+      this.camera.x += e.deltaX / this.camera.scale;
+      this.camera.y += e.deltaY / this.camera.scale;
+    }
   }
 
   // --- Touch handlers ---
@@ -319,14 +416,18 @@ export class EditorMode {
     }
 
     if (this.activeTouches.size === 1) {
-      // Single touch = paint
+      // Single touch = paint or place entity
       const [first] = this.activeTouches.values();
       if (first) {
-        this.lastPaintedTile.tx = -Infinity;
-        this.lastPaintedTile.ty = -Infinity;
-        this.lastPaintedSubgrid.gsx = -Infinity;
-        this.lastPaintedSubgrid.gsy = -Infinity;
-        this.paintAt(first.sx, first.sy);
+        if (this.editorTab === "entities") {
+          this.spawnEntityAt(first.sx, first.sy);
+        } else {
+          this.lastPaintedTile.tx = -Infinity;
+          this.lastPaintedTile.ty = -Infinity;
+          this.lastPaintedSubgrid.gsx = -Infinity;
+          this.lastPaintedSubgrid.gsy = -Infinity;
+          this.paintAt(first.sx, first.sy);
+        }
       }
     } else if (this.activeTouches.size >= 2) {
       // Two fingers = start pinch/pan
@@ -346,10 +447,12 @@ export class EditorMode {
     if (this.activeTouches.size >= 2) {
       this.updatePinch();
     } else if (this.activeTouches.size === 1) {
-      // Single drag = continuous paint
       const [first] = this.activeTouches.values();
       if (first) {
-        this.paintAt(first.sx, first.sy);
+        // In entity mode, don't drag-to-spam entities
+        if (this.editorTab !== "entities") {
+          this.paintAt(first.sx, first.sy);
+        }
         this.updateCursor(first.sx, first.sy);
       }
     }

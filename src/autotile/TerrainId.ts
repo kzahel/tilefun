@@ -10,11 +10,10 @@ export enum TerrainId {
   Grass = 4,
   DirtLight = 5,
   DirtWarm = 6,
-  DebugGreen = 7,
 }
 
 /** Number of terrain types. */
-export const TERRAIN_COUNT = 8;
+export const TERRAIN_COUNT = 7;
 
 /** All terrain IDs for iteration. */
 export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
@@ -25,7 +24,6 @@ export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
   TerrainId.Grass,
   TerrainId.DirtLight,
   TerrainId.DirtWarm,
-  TerrainId.DebugGreen,
 ];
 
 /**
@@ -41,7 +39,6 @@ export const TERRAIN_DEPTH: Record<TerrainId, number> = {
   [TerrainId.Sand]: 4,
   [TerrainId.DirtLight]: 5,
   [TerrainId.DirtWarm]: 6,
-  [TerrainId.DebugGreen]: 7,
 };
 
 /**

@@ -7,6 +7,14 @@ export class EntityManager {
   readonly entities: Entity[] = [];
   private nextId = 1;
 
+  getNextId(): number {
+    return this.nextId;
+  }
+
+  setNextId(n: number): void {
+    this.nextId = n;
+  }
+
   /** Add an entity to the world. Assigns a unique id. */
   spawn(entity: Entity): Entity {
     entity.id = this.nextId++;
@@ -52,6 +60,14 @@ export class EntityManager {
         }
       }
     }
+  }
+
+  /** Remove an entity by id. Returns true if found and removed. */
+  remove(id: number): boolean {
+    const idx = this.entities.findIndex((e) => e.id === id);
+    if (idx < 0) return false;
+    this.entities.splice(idx, 1);
+    return true;
   }
 
   /** Return entities sorted by Y position for depth ordering. */

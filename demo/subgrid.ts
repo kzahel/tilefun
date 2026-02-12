@@ -26,7 +26,6 @@ const TERRAIN_DISPLAY: Record<TerrainId, TerrainDisplay> = {
   [TerrainId.Grass]: { label: "Grass", color: "#6b935f" },
   [TerrainId.DirtLight]: { label: "Dirt Light", color: "#a08050" },
   [TerrainId.DirtWarm]: { label: "Dirt Warm", color: "#8b6030" },
-  [TerrainId.DebugGreen]: { label: "Debug Green", color: "#4a9a3a" },
 };
 
 // ===================== SHARED INSTANCES =====================

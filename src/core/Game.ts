@@ -15,13 +15,17 @@ import {
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { createChicken } from "../entities/Chicken.js";
+import { createCow } from "../entities/Cow.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
+import { createPigeon } from "../entities/Pigeon.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
+import type { SavedMeta } from "../persistence/SaveManager.js";
+import { SaveManager } from "../persistence/SaveManager.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
@@ -33,7 +37,7 @@ import {
   TileId,
   terrainIdToTileId,
 } from "../world/TileRegistry.js";
-import { tileToChunk, tileToLocal } from "../world/types.js";
+import { chunkKey, tileToChunk, tileToLocal } from "../world/types.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
@@ -56,6 +60,7 @@ export class Game {
   private editorPanel: EditorPanel;
   private blendGraph: BlendGraph;
   private adjacency: TerrainAdjacency;
+  private saveManager: SaveManager;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -76,6 +81,7 @@ export class Game {
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
+    this.saveManager = new SaveManager();
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
@@ -110,6 +116,10 @@ export class Game {
         e.preventDefault();
         this.editorPanel.cycleBrushSize();
       }
+      if ((e.key === "t" || e.key === "T") && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.toggleTab();
+      }
       if ((e.key === "d" || e.key === "D") && this.debugEnabled) {
         e.preventDefault();
         this.debugPanel.toggleBaseMode();
@@ -123,13 +133,16 @@ export class Game {
 
     // Load blend graph sheets (11 ME autotile sheets) + entity sheets + complete tileset
     const blendDescs = this.blendGraph.allSheets;
-    const [blendImages, objectsImg, playerImg, chickenImg, completeImg] = await Promise.all([
-      Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
-      loadImage("assets/tilesets/objects.png"),
-      loadImage("assets/sprites/player.png"),
-      loadImage("assets/sprites/chicken.png"),
-      loadImage("assets/tilesets/me-complete.png"),
-    ]);
+    const [blendImages, objectsImg, playerImg, chickenImg, cowImg, pigeonImg, completeImg] =
+      await Promise.all([
+        Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
+        loadImage("assets/tilesets/objects.png"),
+        loadImage("assets/sprites/player.png"),
+        loadImage("assets/sprites/chicken.png"),
+        loadImage("assets/sprites/cow.png"),
+        loadImage("assets/sprites/pigeon.png"),
+        loadImage("assets/tilesets/me-complete.png"),
+      ]);
 
     // Build indexed blend sheet array for the graph renderer
     const blendSheets: Spritesheet[] = [];
@@ -159,16 +172,56 @@ export class Game {
       "chicken",
       new Spritesheet(chickenImg, CHICKEN_SPRITE_SIZE, CHICKEN_SPRITE_SIZE),
     );
+    this.sheets.set("cow", new Spritesheet(cowImg, 32, 32));
+    this.sheets.set("pigeon", new Spritesheet(pigeonImg, 16, 16));
 
-    // Pre-load chunks around origin and compute initial autotile
-    this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-    this.world.computeAutotile(this.blendGraph);
+    // Open persistence and load saved state
+    await this.saveManager.open();
+    const savedMeta = await this.saveManager.loadMeta();
+    const savedChunks = await this.saveManager.loadChunks();
 
-    // Move player to a walkable tile near origin
-    this.findWalkableSpawn(this.player);
+    if (savedMeta && savedChunks.size > 0) {
+      // Restore from save
+      this.world.chunks.setSavedSubgrids(savedChunks);
+      this.camera.x = savedMeta.cameraX;
+      this.camera.y = savedMeta.cameraY;
+      this.camera.zoom = savedMeta.cameraZoom;
+      this.player.position.wx = savedMeta.playerX;
+      this.player.position.wy = savedMeta.playerY;
+      for (const se of savedMeta.entities) {
+        if (se.type === "player") continue;
+        const factory = ENTITY_FACTORIES[se.type];
+        if (factory) {
+          this.entityManager.spawn(factory(se.wx, se.wy));
+        }
+      }
+      this.entityManager.setNextId(savedMeta.nextEntityId);
+      this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+      this.world.computeAutotile(this.blendGraph);
+    } else {
+      // First run
+      this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+      this.world.computeAutotile(this.blendGraph);
+      this.findWalkableSpawn(this.player);
+      this.spawnChickens(5);
+    }
 
-    // Spawn chickens on walkable tiles near origin
-    this.spawnChickens(5);
+    // Bind save accessors and set up auto-flush on tab hide
+    this.saveManager.bind(
+      (key) => this.world.chunks.getSubgridByKey(key),
+      () => this.buildSaveMeta(),
+    );
+    this.saveManager.onChunksSaved = (keys, getChunk) => {
+      for (const key of keys) {
+        const subgrid = getChunk(key);
+        if (subgrid) this.world.chunks.updateSavedSubgrid(key, subgrid);
+      }
+    };
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        this.saveManager.flush();
+      }
+    });
 
     this.loop.start();
     this.canvas.dataset.ready = "true";
@@ -235,10 +288,14 @@ export class Game {
       this.invalidateAllChunks();
     }
 
-    // Editor mode: paint terrain, skip gameplay
+    // Editor mode: paint terrain or place entities, skip gameplay
     if (this.editorEnabled) {
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.brushMode = this.editorPanel.brushMode;
+      this.editorMode.editorTab = this.editorPanel.editorTab;
+      this.editorMode.selectedEntityType = this.editorPanel.selectedEntityType;
+      this.editorMode.entities = this.entityManager.entities;
+      this.editorMode.update(dt);
 
       // Apply terrain edits (tile mode → set all 9 subgrid points of the tile)
       for (const edit of this.editorMode.consumePendingEdits()) {
@@ -254,6 +311,25 @@ export class Game {
       for (const edit of this.editorMode.consumePendingCornerEdits()) {
         this.applyCornerEdit(edit.gsx, edit.gsy, edit.terrainId);
       }
+
+      // Apply entity spawns
+      let entitiesChanged = false;
+      for (const spawn of this.editorMode.consumePendingEntitySpawns()) {
+        const factory = ENTITY_FACTORIES[spawn.entityType];
+        if (factory) {
+          this.entityManager.spawn(factory(spawn.wx, spawn.wy));
+          entitiesChanged = true;
+        }
+      }
+
+      // Apply entity deletions (skip player)
+      for (const id of this.editorMode.consumePendingEntityDeletions()) {
+        if (id !== this.player.id) {
+          this.entityManager.remove(id);
+          entitiesChanged = true;
+        }
+      }
+      if (entitiesChanged) this.saveManager.markMetaDirty();
 
       // Handle clear canvas
       const clearId = this.editorPanel.consumeClearRequest();
@@ -501,6 +577,7 @@ export class Game {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
       chunk.setSubgrid(lsx, lsy, terrainId);
+      this.saveManager.markChunkDirty(chunkKey(cx, cy));
     }
   }
 
@@ -556,13 +633,14 @@ export class Game {
   private clearAllTerrain(terrainId: TerrainId): void {
     const tileId = terrainIdToTileId(terrainId);
     const collision = getCollisionForTerrain(tileId);
-    for (const [, chunk] of this.world.chunks.entries()) {
+    for (const [key, chunk] of this.world.chunks.entries()) {
       chunk.subgrid.fill(terrainId);
       chunk.fillTerrain(tileId);
       chunk.fillCollision(collision);
       chunk.detail.fill(TileId.Empty);
       chunk.dirty = true;
       chunk.autotileComputed = false;
+      this.saveManager.markChunkDirty(key);
     }
   }
 
@@ -753,6 +831,22 @@ export class Game {
     }
   }
 
+  private buildSaveMeta(): SavedMeta {
+    return {
+      playerX: this.player.position.wx,
+      playerY: this.player.position.wy,
+      cameraX: this.camera.x,
+      cameraY: this.camera.y,
+      cameraZoom: this.camera.zoom,
+      entities: this.entityManager.entities.map((e) => ({
+        type: e.type,
+        wx: e.position.wx,
+        wy: e.position.wy,
+      })),
+      nextEntityId: this.entityManager.getNextId(),
+    };
+  }
+
   private spawnChickens(count: number): void {
     let spawned = 0;
     let attempts = 0;
@@ -771,6 +865,12 @@ export class Game {
     }
   }
 }
+
+const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity> = {
+  chicken: createChicken,
+  cow: createCow,
+  pigeon: createPigeon,
+};
 
 /**
  * Register base fill variant tiles from the ME Complete Tileset.

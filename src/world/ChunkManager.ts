@@ -1,6 +1,8 @@
-import { RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
+import type { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE, RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
+import { getCollisionForTerrain, TileId, terrainIdToTileId } from "./TileRegistry.js";
 import { chunkKey } from "./types.js";
 
 export interface ChunkRange {
@@ -13,6 +15,22 @@ export interface ChunkRange {
 export class ChunkManager {
   private chunks = new Map<string, Chunk>();
   private generator: TerrainStrategy | null = null;
+  private savedSubgrids = new Map<string, Uint8Array>();
+
+  /** Inject saved subgrid data for chunk restore on load. */
+  setSavedSubgrids(saved: Map<string, Uint8Array>): void {
+    this.savedSubgrids = saved;
+  }
+
+  /** Update the saved copy of a chunk's subgrid (called after IDB write). */
+  updateSavedSubgrid(key: string, subgrid: Uint8Array): void {
+    this.savedSubgrids.set(key, new Uint8Array(subgrid));
+  }
+
+  /** Get a chunk's subgrid by key string, for persistence. */
+  getSubgridByKey(key: string): Uint8Array | undefined {
+    return this.chunks.get(key)?.subgrid;
+  }
 
   /** Attach a world generator for procedural chunk creation. */
   setGenerator(generator: TerrainStrategy): void {
@@ -25,12 +43,31 @@ export class ChunkManager {
     let chunk = this.chunks.get(key);
     if (!chunk) {
       chunk = new Chunk();
-      this.generate(chunk, cx, cy);
+      const saved = this.savedSubgrids.get(key);
+      if (saved) {
+        chunk.subgrid.set(saved);
+        this.rederiveFromSubgrid(chunk);
+      } else {
+        this.generate(chunk, cx, cy);
+      }
       this.chunks.set(key, chunk);
       // Invalidate neighbors' autotile so their borders recompute
       this.invalidateNeighborAutotile(cx, cy);
     }
     return chunk;
+  }
+
+  /** Re-derive terrain/collision from subgrid center points after restoring saved data. */
+  private rederiveFromSubgrid(chunk: Chunk): void {
+    for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+      for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+        const terrain = chunk.getSubgrid(lx * 2 + 1, ly * 2 + 1) as TerrainId;
+        const tileId = terrainIdToTileId(terrain);
+        chunk.setTerrain(lx, ly, tileId);
+        chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
+        chunk.setDetail(lx, ly, TileId.Empty);
+      }
+    }
   }
 
   /** Get chunk if it exists (no creation). */

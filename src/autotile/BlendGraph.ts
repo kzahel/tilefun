@@ -97,7 +97,6 @@ export class BlendGraph {
     this.addSheet("me13", "assets/tilesets/me-autotile-13.png"); // grass alpha
     this.addSheet("me15", "assets/tilesets/me-autotile-15.png"); // grass/water_shallow
     this.addSheet("me16", "assets/tilesets/me-autotile-16.png"); // water_deep/water_shallow
-    this.addSheet("debug3c", "assets/tilesets/debug-3color.png"); // debug green/dirt_warm
   }
 
   private set(my: TerrainId, neighbor: TerrainId, entry: BlendEntry): void {
@@ -160,13 +159,6 @@ export class BlendGraph {
       TerrainId.ShallowWater,
       this.dedicatedEntry("me15", TerrainId.ShallowWater),
     );
-
-    // debug 3-color: DebugGreen (primary) over DirtWarm (secondary)
-    this.set(
-      TerrainId.DebugGreen,
-      TerrainId.DirtWarm,
-      this.dedicatedEntry("debug3c", TerrainId.DirtWarm),
-    );
   }
 
   private alphaEntry(sheetKey: string, neighborTerrain: TerrainId): BlendEntry {
@@ -219,7 +211,6 @@ export class BlendGraph {
       [TerrainId.Grass, "me15"],
       [TerrainId.DirtLight, "me01"],
       [TerrainId.DirtWarm, "me02"],
-      [TerrainId.DebugGreen, "debug3c"],
     ];
     for (const [terrain, sheetKey] of fills) {
       this.baseFills.set(terrain, {

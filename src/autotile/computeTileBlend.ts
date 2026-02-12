@@ -91,7 +91,7 @@ export function computeTileBlend(
     // have dedicated (non-alpha) blend entries against. This uses the
     // BlendGraph's per-pair direction instead of relying solely on depth.
     // TERRAIN_DEPTH is only a tiebreaker.
-    base = all[0];
+    base = all[0] ?? nw;
     let bestScore = -1;
     for (const candidate of all) {
       let score = 0;
@@ -103,8 +103,7 @@ export function computeTileBlend(
       }
       if (
         score > bestScore ||
-        (score === bestScore &&
-          TERRAIN_DEPTH[candidate] < TERRAIN_DEPTH[base])
+        (score === bestScore && TERRAIN_DEPTH[candidate] < TERRAIN_DEPTH[base])
       ) {
         bestScore = score;
         base = candidate;
