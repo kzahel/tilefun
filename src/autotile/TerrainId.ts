@@ -40,3 +40,18 @@ export const TERRAIN_DEPTH: Record<TerrainId, number> = {
   [TerrainId.DirtLight]: 5,
   [TerrainId.DirtWarm]: 6,
 };
+
+/**
+ * Base selection strategy for mixed-corner tiles.
+ * - "depth": lowest TERRAIN_DEPTH wins (current behavior)
+ * - "nw": NW corner always wins (no depth concept)
+ */
+export type BaseSelectionMode = "depth" | "nw";
+let _baseSelectionMode: BaseSelectionMode = "depth";
+
+export function getBaseSelectionMode(): BaseSelectionMode {
+  return _baseSelectionMode;
+}
+export function setBaseSelectionMode(mode: BaseSelectionMode): void {
+  _baseSelectionMode = mode;
+}

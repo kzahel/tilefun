@@ -1,8 +1,8 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
-import { TERRAIN_DEPTH, type TerrainId } from "../autotile/TerrainId.js";
 import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import {
   CHUNK_SIZE,
@@ -189,7 +189,7 @@ export class TileRenderer {
             chunk.getCorner(lx + 1, ly + 1) as TerrainId,
           );
           // Skip base fill for shallow water (already drawn as universal base)
-          if (TERRAIN_DEPTH[terrainId] !== 1) {
+          if (terrainId !== TerrainId.ShallowWater) {
             const baseFill = graph.getBaseFill(terrainId);
             if (baseFill) {
               const baseSheet = this.blendSheets[baseFill.sheetIndex];

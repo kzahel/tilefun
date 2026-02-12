@@ -6,7 +6,7 @@ import { MAX_BLEND_LAYERS } from "./BlendGraph.js";
 import { AutotileBit } from "./bitmask.js";
 import { computeBlendMask } from "./CornerBlend.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
-import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
+import { getBaseSelectionMode, TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
 import { tileIdToTerrainId } from "./terrainMapping.js";
 
@@ -129,13 +129,18 @@ export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): v
       // Skip uniform tiles — no blend needed
       if (nw === ne && ne === sw && sw === se) continue;
 
-      // Find base terrain (lowest depth)
-      let base = nw;
-      if (TERRAIN_DEPTH[ne] < TERRAIN_DEPTH[base]) base = ne;
-      if (TERRAIN_DEPTH[sw] < TERRAIN_DEPTH[base]) base = sw;
-      if (TERRAIN_DEPTH[se] < TERRAIN_DEPTH[base]) base = se;
+      // Find base terrain
+      let base: TerrainId;
+      if (getBaseSelectionMode() === "nw") {
+        base = nw;
+      } else {
+        base = nw;
+        if (TERRAIN_DEPTH[ne] < TERRAIN_DEPTH[base]) base = ne;
+        if (TERRAIN_DEPTH[sw] < TERRAIN_DEPTH[base]) base = sw;
+        if (TERRAIN_DEPTH[se] < TERRAIN_DEPTH[base]) base = se;
+      }
 
-      // Collect unique overlay terrains (not base), sorted by depth ascending
+      // Collect unique overlay terrains (not base)
       seen.fill(0);
       seen[base] = 1;
       const overlays: TerrainId[] = [];
@@ -145,7 +150,10 @@ export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): v
           overlays.push(t);
         }
       }
-      overlays.sort((a, b) => TERRAIN_DEPTH[a] - TERRAIN_DEPTH[b]);
+      // In "nw" mode, keep encounter order; in "depth" mode, sort by depth ascending
+      if (getBaseSelectionMode() === "depth") {
+        overlays.sort((a, b) => TERRAIN_DEPTH[a] - TERRAIN_DEPTH[b]);
+      }
 
       // Build blend layers
       layers.length = 0;
@@ -175,8 +183,12 @@ export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): v
         });
       }
 
-      // Sort: dedicated pairs (cat 1, by depth asc) → alpha (cat 2, by depth asc)
-      layers.sort((a, b) => a.category - b.category || a.depth - b.depth);
+      // Sort: dedicated pairs (cat 1) → alpha (cat 2); within category, by depth if depth mode
+      if (getBaseSelectionMode() === "depth") {
+        layers.sort((a, b) => a.category - b.category || a.depth - b.depth);
+      } else {
+        layers.sort((a, b) => a.category - b.category);
+      }
 
       // Pack into chunk.blendLayers
       const count = Math.min(layers.length, MAX_BLEND_LAYERS);

@@ -108,6 +108,10 @@ export class Game {
         e.preventDefault();
         this.editorPanel.cycleBridgeDepth();
       }
+      if ((e.key === "d" || e.key === "D") && this.debugEnabled) {
+        e.preventDefault();
+        this.debugPanel.toggleBaseMode();
+      }
     });
     this.createEditorButton();
     this.input.attach();
@@ -191,18 +195,32 @@ export class Game {
   }
 
   private createEditorButton(): void {
-    const btn = document.createElement("button");
-    btn.textContent = "Edit";
-    btn.style.cssText = `
-      position: fixed; top: 8px; left: 8px; z-index: 100;
+    const BTN_STYLE = `
       font: bold 14px monospace; padding: 8px 16px;
       background: rgba(0,0,0,0.6); color: #fff;
       border: 1px solid #888; border-radius: 4px;
       cursor: pointer; user-select: none;
     `;
-    btn.addEventListener("click", () => this.toggleEditor());
-    document.body.appendChild(btn);
-    this.editorButton = btn;
+
+    const wrap = document.createElement("div");
+    wrap.style.cssText =
+      "position: fixed; top: 8px; left: 8px; z-index: 100; display: flex; gap: 6px;";
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.style.cssText = BTN_STYLE;
+    editBtn.addEventListener("click", () => this.toggleEditor());
+    this.editorButton = editBtn;
+
+    const debugBtn = document.createElement("button");
+    debugBtn.textContent = "Debug";
+    debugBtn.style.cssText = BTN_STYLE;
+    debugBtn.addEventListener("click", () => {
+      this.debugEnabled = !this.debugEnabled;
+      this.debugPanel.visible = this.debugEnabled;
+    });
+    wrap.append(editBtn, debugBtn);
+    document.body.appendChild(wrap);
   }
 
   private resize(): void {
@@ -220,6 +238,9 @@ export class Game {
     const newStrategy = this.debugPanel.consumeStrategyChange();
     if (newSeed !== null || newStrategy !== null) {
       this.regenerateWorld(newSeed ?? this.currentSeed);
+    }
+    if (this.debugPanel.consumeBaseModeChange()) {
+      this.invalidateAllChunks();
     }
 
     // Editor mode: paint terrain, skip gameplay
@@ -489,6 +510,13 @@ export class Game {
     if (lx === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy);
     if (ly === 0) this.invalidateChunk(cx, cy - 1);
     if (ly === CHUNK_SIZE - 1) this.invalidateChunk(cx, cy + 1);
+  }
+
+  private invalidateAllChunks(): void {
+    for (const [, chunk] of this.world.chunks.entries()) {
+      chunk.autotileComputed = false;
+      chunk.dirty = true;
+    }
   }
 
   private invalidateChunk(cx: number, cy: number): void {

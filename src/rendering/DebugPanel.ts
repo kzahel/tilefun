@@ -1,3 +1,5 @@
+import { getBaseSelectionMode, setBaseSelectionMode } from "../autotile/TerrainId.js";
+
 const PANEL_STYLE = `
   position: fixed; top: 8px; right: 8px;
   background: rgba(0,0,0,0.75); color: #fff;
@@ -16,8 +18,10 @@ export class DebugPanel {
   private readonly observerCheckbox: HTMLInputElement;
   private readonly seedInput: HTMLInputElement;
   private readonly strategySelect: HTMLSelectElement;
+  private readonly baseModeBtn: HTMLButtonElement;
   private pendingSeed: string | null = null;
   private pendingStrategy: string | null = null;
+  private pendingBaseMode = false;
 
   constructor(defaultSeed: string) {
     this.container = document.createElement("div");
@@ -106,7 +110,21 @@ export class DebugPanel {
     });
     strategyRow.append(strategyLbl, this.strategySelect);
 
-    this.container.append(zoomRow, observerRow, noclipRow, seedRow, strategyRow);
+    // Base selection mode toggle
+    const baseModeRow = document.createElement("div");
+    baseModeRow.style.cssText = ROW_STYLE;
+    const baseModeLbl = document.createElement("label");
+    baseModeLbl.textContent = "Base";
+    this.baseModeBtn = document.createElement("button");
+    this.baseModeBtn.textContent = getBaseSelectionMode();
+    this.baseModeBtn.style.cssText = "font: 12px monospace; padding: 2px 8px; cursor: pointer;";
+    this.baseModeBtn.addEventListener("click", () => this.toggleBaseMode());
+    const baseModeHint = document.createElement("span");
+    baseModeHint.textContent = "tile base pick";
+    baseModeHint.style.cssText = "color: #999; font-size: 11px;";
+    baseModeRow.append(baseModeLbl, this.baseModeBtn, baseModeHint);
+
+    this.container.append(zoomRow, observerRow, noclipRow, seedRow, strategyRow, baseModeRow);
     document.body.appendChild(this.container);
   }
 
@@ -146,5 +164,19 @@ export class DebugPanel {
     const s = this.pendingStrategy;
     this.pendingStrategy = null;
     return s;
+  }
+
+  /** Returns true if base selection mode was toggled, then clears the flag. */
+  consumeBaseModeChange(): boolean {
+    const changed = this.pendingBaseMode;
+    this.pendingBaseMode = false;
+    return changed;
+  }
+
+  /** Toggle base selection mode (called by keyboard shortcut or button). */
+  toggleBaseMode(): void {
+    setBaseSelectionMode(getBaseSelectionMode() === "depth" ? "nw" : "depth");
+    this.baseModeBtn.textContent = getBaseSelectionMode();
+    this.pendingBaseMode = true;
   }
 }
