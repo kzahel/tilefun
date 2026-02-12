@@ -49,6 +49,12 @@ const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: "chicken", label: "Chicken", color: "#f0c040" },
   { type: "cow", label: "Cow", color: "#d4a880" },
   { type: "pigeon", label: "Pigeon", color: "#8888cc" },
+  { type: "pigeon2", label: "Pigeon 2", color: "#9999aa" },
+  { type: "fish1", label: "Fish 1", color: "#4fa4b8" },
+  { type: "fish2", label: "Fish 2", color: "#3d8ea0" },
+  { type: "fish3", label: "Fish 3", color: "#5bb4c8" },
+  { type: "campfire", label: "Campfire", color: "#e8601c" },
+  { type: "egg-nest", label: "Egg/Nest", color: "#c8a84e" },
 ];
 
 export class EditorPanel {

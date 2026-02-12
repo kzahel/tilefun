@@ -14,12 +14,16 @@ import {
 } from "../config/constants.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
+import { createCampfire } from "../entities/Campfire.js";
 import { createChicken } from "../entities/Chicken.js";
 import { createCow } from "../entities/Cow.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
+import { createEggNest } from "../entities/EggNest.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
+import { createFish1, createFish2, createFish3 } from "../entities/Fish.js";
 import { createPigeon } from "../entities/Pigeon.js";
+import { createPigeon2 } from "../entities/Pigeon2.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
@@ -133,16 +137,35 @@ export class Game {
 
     // Load blend graph sheets (11 ME autotile sheets) + entity sheets + complete tileset
     const blendDescs = this.blendGraph.allSheets;
-    const [blendImages, objectsImg, playerImg, chickenImg, cowImg, pigeonImg, completeImg] =
-      await Promise.all([
-        Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
-        loadImage("assets/tilesets/objects.png"),
-        loadImage("assets/sprites/player.png"),
-        loadImage("assets/sprites/chicken.png"),
-        loadImage("assets/sprites/cow.png"),
-        loadImage("assets/sprites/pigeon.png"),
-        loadImage("assets/tilesets/me-complete.png"),
-      ]);
+    const [
+      blendImages,
+      objectsImg,
+      playerImg,
+      chickenImg,
+      cowImg,
+      pigeonImg,
+      pigeon2Img,
+      fish1Img,
+      fish2Img,
+      fish3Img,
+      campfireImg,
+      eggNestImg,
+      completeImg,
+    ] = await Promise.all([
+      Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
+      loadImage("assets/tilesets/objects.png"),
+      loadImage("assets/sprites/player.png"),
+      loadImage("assets/sprites/chicken.png"),
+      loadImage("assets/sprites/cow.png"),
+      loadImage("assets/sprites/pigeon.png"),
+      loadImage("assets/sprites/pigeon2.png"),
+      loadImage("assets/sprites/fish1.png"),
+      loadImage("assets/sprites/fish2.png"),
+      loadImage("assets/sprites/fish3.png"),
+      loadImage("assets/sprites/campfire.png"),
+      loadImage("assets/sprites/egg-nest.png"),
+      loadImage("assets/tilesets/me-complete.png"),
+    ]);
 
     // Build indexed blend sheet array for the graph renderer
     const blendSheets: Spritesheet[] = [];
@@ -174,6 +197,12 @@ export class Game {
     );
     this.sheets.set("cow", new Spritesheet(cowImg, 32, 32));
     this.sheets.set("pigeon", new Spritesheet(pigeonImg, 16, 16));
+    this.sheets.set("pigeon2", new Spritesheet(pigeon2Img, 16, 16));
+    this.sheets.set("fish1", new Spritesheet(fish1Img, 16, 16));
+    this.sheets.set("fish2", new Spritesheet(fish2Img, 16, 16));
+    this.sheets.set("fish3", new Spritesheet(fish3Img, 16, 16));
+    this.sheets.set("campfire", new Spritesheet(campfireImg, 16, 32));
+    this.sheets.set("egg-nest", new Spritesheet(eggNestImg, 16, 16));
 
     // Open persistence and load saved state
     await this.saveManager.open();
@@ -870,6 +899,12 @@ const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity> = {
   chicken: createChicken,
   cow: createCow,
   pigeon: createPigeon,
+  pigeon2: createPigeon2,
+  fish1: createFish1,
+  fish2: createFish2,
+  fish3: createFish3,
+  campfire: createCampfire,
+  "egg-nest": createEggNest,
 };
 
 /**
