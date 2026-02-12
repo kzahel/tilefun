@@ -2,8 +2,8 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { TERRAIN_DEPTH, type TerrainId } from "../autotile/TerrainId.js";
+import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
 import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
-import { tileIdToTerrainId } from "../autotile/terrainMapping.js";
 import {
   CHUNK_SIZE,
   TILE_SIZE,
@@ -179,9 +179,15 @@ export class TileRenderer {
         }
 
         // 2. Tile's own terrain base fill (covers water for land tiles)
+        //    Derive from corners to preserve DirtLight vs DirtWarm distinction
+        //    (both collapse to TileId.DirtPath, losing the difference).
         if (graph) {
-          const tileId = chunk.getTerrain(lx, ly);
-          const terrainId: TerrainId = tileIdToTerrainId(tileId);
+          const terrainId = deriveTerrainIdFromCorners(
+            chunk.getCorner(lx, ly) as TerrainId,
+            chunk.getCorner(lx + 1, ly) as TerrainId,
+            chunk.getCorner(lx, ly + 1) as TerrainId,
+            chunk.getCorner(lx + 1, ly + 1) as TerrainId,
+          );
           // Skip base fill for shallow water (already drawn as universal base)
           if (TERRAIN_DEPTH[terrainId] !== 1) {
             const baseFill = graph.getBaseFill(terrainId);
