@@ -9,12 +9,7 @@ import { AutotileBit } from "./bitmask.js";
  *
  * Returns a canonical mask (0–255) suitable for GM_BLOB_LOOKUP.
  */
-export function computeCornerMask(
-  nw: boolean,
-  ne: boolean,
-  sw: boolean,
-  se: boolean,
-): number {
+export function computeCornerMask(nw: boolean, ne: boolean, sw: boolean, se: boolean): number {
   const n = nw && ne;
   const s = sw && se;
   const w = nw && sw;

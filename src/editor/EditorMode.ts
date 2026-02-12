@@ -1,23 +1,23 @@
+import { TerrainId } from "../autotile/TerrainId.js";
 import { TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
-import { TileId } from "../world/TileRegistry.js";
 
 export type BrushMode = "tile" | "corner";
 
 interface PendingTileEdit {
   tx: number;
   ty: number;
-  tileId: TileId;
+  terrainId: TerrainId;
 }
 
 export interface PendingCornerEdit {
   gx: number;
   gy: number;
-  tileId: TileId;
+  terrainId: TerrainId;
 }
 
 export class EditorMode {
-  selectedTerrain: TileId = TileId.Grass;
+  selectedTerrain: TerrainId = TerrainId.Grass;
   brushMode: BrushMode = "tile";
 
   // Tile-mode cursor (whole tile)
@@ -165,7 +165,7 @@ export class EditorMode {
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingTileEdits.push({ tx, ty, tileId: this.selectedTerrain });
+    this.pendingTileEdits.push({ tx, ty, terrainId: this.selectedTerrain });
   }
 
   private paintCornerAt(sx: number, sy: number): void {
@@ -173,7 +173,7 @@ export class EditorMode {
     if (gx === this.lastPaintedCorner.gx && gy === this.lastPaintedCorner.gy) return;
     this.lastPaintedCorner.gx = gx;
     this.lastPaintedCorner.gy = gy;
-    this.pendingCornerEdits.push({ gx, gy, tileId: this.selectedTerrain });
+    this.pendingCornerEdits.push({ gx, gy, terrainId: this.selectedTerrain });
   }
 
   private updateCursor(sx: number, sy: number): void {

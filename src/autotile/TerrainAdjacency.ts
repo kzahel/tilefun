@@ -1,5 +1,5 @@
 import type { BlendGraph } from "./BlendGraph.js";
-import { ALL_TERRAIN_IDS, TERRAIN_COUNT, TerrainId } from "./TerrainId.js";
+import { ALL_TERRAIN_IDS, TERRAIN_COUNT, type TerrainId } from "./TerrainId.js";
 
 /**
  * Precomputed terrain adjacency graph derived from BlendGraph.
@@ -70,11 +70,7 @@ export class TerrainAdjacency {
    * Returns empty array if directly adjacent (Tier 1) or same.
    * Returns undefined if no Tier 1 path exists within maxSteps.
    */
-  getBridgePath(
-    from: TerrainId,
-    to: TerrainId,
-    maxSteps = 3,
-  ): TerrainId[] | undefined {
+  getBridgePath(from: TerrainId, to: TerrainId, maxSteps = 3): TerrainId[] | undefined {
     if (from === to) return [];
     if (this.isDedicatedAdjacency(from, to)) return [];
 

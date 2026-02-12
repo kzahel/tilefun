@@ -4,11 +4,7 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
 import type { TerrainId } from "../autotile/TerrainId.js";
-import {
-  biomeIdToTerrainId,
-  terrainIdToTileId,
-  tileIdToBiomeId,
-} from "../autotile/terrainMapping.js";
+import { terrainIdToTileId } from "../autotile/terrainMapping.js";
 import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
@@ -224,14 +220,14 @@ export class Game {
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.brushMode = this.editorPanel.brushMode;
 
-      // Apply terrain edits (tile mode)
+      // Apply terrain edits (tile mode → set all 4 corners of the tile)
       for (const edit of this.editorMode.consumePendingEdits()) {
-        this.applyTerrainEdit(edit.tx, edit.ty, edit.tileId);
+        this.applyTileEdit(edit.tx, edit.ty, edit.terrainId);
       }
 
       // Apply corner edits (corner mode)
       for (const edit of this.editorMode.consumePendingCornerEdits()) {
-        this.applyCornerEdit(edit.gx, edit.gy, biomeIdToTerrainId(tileIdToBiomeId(edit.tileId)));
+        this.applyCornerEdit(edit.gx, edit.gy, edit.terrainId);
       }
 
       // Handle clear canvas
@@ -368,27 +364,13 @@ export class Game {
     }
   }
 
-  private applyTerrainEdit(tx: number, ty: number, tileId: TileId): void {
-    const { cx, cy } = tileToChunk(tx, ty);
-    const { lx, ly } = tileToLocal(tx, ty);
-    const chunk = this.world.getChunkIfLoaded(cx, cy);
-    if (!chunk) return;
-
-    chunk.setTerrain(lx, ly, tileId);
-    chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
-    chunk.setDetail(lx, ly, TileId.Empty);
-    chunk.dirty = true;
-    chunk.autotileComputed = false;
-
-    // Invalidate neighbor chunks if tile is on a chunk edge
-    if (lx === 0) this.invalidateChunk(cx - 1, cy);
-    if (lx === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy);
-    if (ly === 0) this.invalidateChunk(cx, cy - 1);
-    if (ly === CHUNK_SIZE - 1) this.invalidateChunk(cx, cy + 1);
-    if (lx === 0 && ly === 0) this.invalidateChunk(cx - 1, cy - 1);
-    if (lx === CHUNK_SIZE - 1 && ly === 0) this.invalidateChunk(cx + 1, cy - 1);
-    if (lx === 0 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx - 1, cy + 1);
-    if (lx === CHUNK_SIZE - 1 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy + 1);
+  /** Tile brush: set all 4 corners of tile (tx,ty) to the same terrain. */
+  private applyTileEdit(tx: number, ty: number, terrainId: TerrainId): void {
+    // Tile corners: NW=(tx,ty), NE=(tx+1,ty), SW=(tx,ty+1), SE=(tx+1,ty+1)
+    this.applyCornerEdit(tx, ty, terrainId);
+    this.applyCornerEdit(tx + 1, ty, terrainId);
+    this.applyCornerEdit(tx, ty + 1, terrainId);
+    this.applyCornerEdit(tx + 1, ty + 1, terrainId);
   }
 
   private applyCornerEdit(gx: number, gy: number, terrainId: TerrainId): void {
@@ -479,15 +461,14 @@ export class Game {
     }
   }
 
-  private clearAllTerrain(tileId: TileId): void {
+  private clearAllTerrain(terrainId: TerrainId): void {
+    const tileId = terrainIdToTileId(terrainId);
     const collision = getCollisionForTerrain(tileId);
     for (const [, chunk] of this.world.chunks.entries()) {
+      chunk.corners.fill(terrainId);
       chunk.fillTerrain(tileId);
       chunk.fillCollision(collision);
-      // Clear details
-      for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
-        chunk.setDetail(i % CHUNK_SIZE, Math.floor(i / CHUNK_SIZE), TileId.Empty);
-      }
+      chunk.detail.fill(TileId.Empty);
       chunk.dirty = true;
       chunk.autotileComputed = false;
     }

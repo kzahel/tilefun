@@ -48,30 +48,22 @@ describe("computeCornerMask", () => {
     const mask = computeCornerMask(true, true, true, false);
     // N = nw&&ne = true, W = nw&&sw = true, E = ne&&se = false, S = sw&&se = false
     // NW = N&&W&&nw = true, NE = N&&E&&ne = false, SW = S&&W&&sw = false
-    expect(mask).toBe(
-      AutotileBit.N | AutotileBit.W | AutotileBit.NW,
-    );
+    expect(mask).toBe(AutotileBit.N | AutotileBit.W | AutotileBit.NW);
   });
 
   it("3 corners (all except SW) → N + E + NE diagonal", () => {
     const mask = computeCornerMask(true, true, false, true);
-    expect(mask).toBe(
-      AutotileBit.N | AutotileBit.E | AutotileBit.NE,
-    );
+    expect(mask).toBe(AutotileBit.N | AutotileBit.E | AutotileBit.NE);
   });
 
   it("3 corners (all except NE) → W + S + SW diagonal", () => {
     const mask = computeCornerMask(true, false, true, true);
-    expect(mask).toBe(
-      AutotileBit.W | AutotileBit.S | AutotileBit.SW,
-    );
+    expect(mask).toBe(AutotileBit.W | AutotileBit.S | AutotileBit.SW);
   });
 
   it("3 corners (all except NW) → E + S + SE diagonal", () => {
     const mask = computeCornerMask(false, true, true, true);
-    expect(mask).toBe(
-      AutotileBit.E | AutotileBit.S | AutotileBit.SE,
-    );
+    expect(mask).toBe(AutotileBit.E | AutotileBit.S | AutotileBit.SE);
   });
 
   it("diagonal corners (NW + SE) → no cardinals, no diagonals", () => {
@@ -85,9 +77,7 @@ describe("computeCornerMask", () => {
 
   it("top-left L-shape (NW + NE + SW) → N + W + NW", () => {
     const mask = computeCornerMask(true, true, true, false);
-    expect(mask).toBe(
-      AutotileBit.N | AutotileBit.W | AutotileBit.NW,
-    );
+    expect(mask).toBe(AutotileBit.N | AutotileBit.W | AutotileBit.NW);
   });
 
   it("all corners produces a canonical mask", () => {

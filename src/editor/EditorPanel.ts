@@ -1,4 +1,4 @@
-import { TileId } from "../world/TileRegistry.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import type { BrushMode } from "./EditorMode.js";
 
 const PANEL_STYLE = `
@@ -11,28 +11,27 @@ const PANEL_STYLE = `
 `;
 
 interface PaletteEntry {
-  tileId: TileId;
+  terrainId: TerrainId;
   label: string;
   color: string;
 }
 
 const PALETTE: PaletteEntry[] = [
-  { tileId: TileId.Grass, label: "Grass", color: "#6b935f" },
-  { tileId: TileId.Water, label: "Water", color: "#4fa4b8" },
-  { tileId: TileId.DeepWater, label: "Deep", color: "#2a5a8a" },
-  { tileId: TileId.Sand, label: "Sand", color: "#c8a84e" },
-  { tileId: TileId.Forest, label: "Forest", color: "#4a7a3f" },
-  { tileId: TileId.DenseForest, label: "Dense", color: "#2d5a28" },
-  { tileId: TileId.DirtPath, label: "Dirt", color: "#8b6b3e" },
-  { tileId: TileId.Empty, label: "Empty", color: "#1a1a2e" },
+  { terrainId: TerrainId.Grass, label: "Grass", color: "#6b935f" },
+  { terrainId: TerrainId.ShallowWater, label: "Water", color: "#4fa4b8" },
+  { terrainId: TerrainId.DeepWater, label: "Deep", color: "#2a5a8a" },
+  { terrainId: TerrainId.Sand, label: "Sand", color: "#c8a84e" },
+  { terrainId: TerrainId.SandLight, label: "Lt Sand", color: "#d4b86a" },
+  { terrainId: TerrainId.DirtLight, label: "Lt Dirt", color: "#a08050" },
+  { terrainId: TerrainId.DirtWarm, label: "Dirt", color: "#8b6b3e" },
 ];
 
 export class EditorPanel {
   private readonly container: HTMLDivElement;
   private readonly buttons: HTMLButtonElement[] = [];
   private readonly modeButton: HTMLButtonElement;
-  private pendingClear: TileId | null = null;
-  selectedTerrain: TileId = TileId.Grass;
+  private pendingClear: TerrainId | null = null;
+  selectedTerrain: TerrainId = TerrainId.Grass;
   brushMode: BrushMode = "tile";
 
   constructor() {
@@ -68,7 +67,7 @@ export class EditorPanel {
       btn.textContent = entry.label;
       btn.title = entry.label;
       btn.addEventListener("click", () => {
-        this.selectedTerrain = entry.tileId;
+        this.selectedTerrain = entry.terrainId;
         this.updateSelection();
       });
       this.buttons.push(btn);
@@ -112,7 +111,7 @@ export class EditorPanel {
     this.modeButton.style.borderColor = this.brushMode === "corner" ? "#f0a030" : "#888";
   }
 
-  consumeClearRequest(): TileId | null {
+  consumeClearRequest(): TerrainId | null {
     const c = this.pendingClear;
     this.pendingClear = null;
     return c;
@@ -123,9 +122,9 @@ export class EditorPanel {
       const btn = this.buttons[i];
       const entry = PALETTE[i];
       if (btn && entry) {
-        btn.style.borderColor = entry.tileId === this.selectedTerrain ? "#fff" : "#555";
+        btn.style.borderColor = entry.terrainId === this.selectedTerrain ? "#fff" : "#555";
         btn.style.boxShadow =
-          entry.tileId === this.selectedTerrain ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+          entry.terrainId === this.selectedTerrain ? "0 0 6px rgba(255,255,255,0.5)" : "none";
       }
     }
   }

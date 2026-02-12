@@ -9,9 +9,7 @@ const adj = new TerrainAdjacency(graph);
 describe("TerrainAdjacency", () => {
   describe("isDedicatedAdjacency", () => {
     it("same terrain is always dedicated-adjacent", () => {
-      expect(adj.isDedicatedAdjacency(TerrainId.Grass, TerrainId.Grass)).toBe(
-        true,
-      );
+      expect(adj.isDedicatedAdjacency(TerrainId.Grass, TerrainId.Grass)).toBe(true);
     });
 
     it("Tier 1 pairs from architecture doc", () => {
@@ -34,17 +32,11 @@ describe("TerrainAdjacency", () => {
 
     it("non-adjacent terrains are NOT dedicated", () => {
       // DeepWater ↔ Grass has no dedicated sheet
-      expect(
-        adj.isDedicatedAdjacency(TerrainId.DeepWater, TerrainId.Grass),
-      ).toBe(false);
+      expect(adj.isDedicatedAdjacency(TerrainId.DeepWater, TerrainId.Grass)).toBe(false);
       // Sand ↔ Grass has no dedicated sheet
-      expect(adj.isDedicatedAdjacency(TerrainId.Sand, TerrainId.Grass)).toBe(
-        false,
-      );
+      expect(adj.isDedicatedAdjacency(TerrainId.Sand, TerrainId.Grass)).toBe(false);
       // DeepWater ↔ DirtWarm has no dedicated sheet
-      expect(
-        adj.isDedicatedAdjacency(TerrainId.DeepWater, TerrainId.DirtWarm),
-      ).toBe(false);
+      expect(adj.isDedicatedAdjacency(TerrainId.DeepWater, TerrainId.DirtWarm)).toBe(false);
     });
   });
 
@@ -54,9 +46,7 @@ describe("TerrainAdjacency", () => {
     });
 
     it("dedicated pairs are valid", () => {
-      expect(
-        adj.isValidAdjacency(TerrainId.DeepWater, TerrainId.ShallowWater),
-      ).toBe(true);
+      expect(adj.isValidAdjacency(TerrainId.DeepWater, TerrainId.ShallowWater)).toBe(true);
     });
 
     it("alpha fallback pairs are valid", () => {
@@ -106,9 +96,7 @@ describe("TerrainAdjacency", () => {
     it("DeepWater → Grass routes through ShallowWater", () => {
       // DeepWater has no direct Tier 1 edge to Grass
       // Path: DeepWater → ShallowWater → Grass
-      expect(adj.getBridgeStep(TerrainId.DeepWater, TerrainId.Grass)).toBe(
-        TerrainId.ShallowWater,
-      );
+      expect(adj.getBridgeStep(TerrainId.DeepWater, TerrainId.Grass)).toBe(TerrainId.ShallowWater);
     });
 
     it("DeepWater → DirtWarm routes through ShallowWater", () => {
@@ -123,9 +111,7 @@ describe("TerrainAdjacency", () => {
       expect(step).toBeDefined();
       // Sand's Tier 1 neighbors: ShallowWater, SandLight
       // Both lead to Grass which connects to DirtWarm
-      expect(
-        step === TerrainId.ShallowWater || step === TerrainId.SandLight,
-      ).toBe(true);
+      expect(step === TerrainId.ShallowWater || step === TerrainId.SandLight).toBe(true);
     });
   });
 
@@ -135,9 +121,7 @@ describe("TerrainAdjacency", () => {
     });
 
     it("returns empty for directly adjacent Tier 1 pair", () => {
-      expect(
-        adj.getBridgePath(TerrainId.DeepWater, TerrainId.ShallowWater),
-      ).toEqual([]);
+      expect(adj.getBridgePath(TerrainId.DeepWater, TerrainId.ShallowWater)).toEqual([]);
     });
 
     it("DeepWater → Grass = [ShallowWater]", () => {
@@ -147,15 +131,17 @@ describe("TerrainAdjacency", () => {
     });
 
     it("DeepWater → DirtWarm = [ShallowWater, Grass]", () => {
-      expect(
-        adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtWarm),
-      ).toEqual([TerrainId.ShallowWater, TerrainId.Grass]);
+      expect(adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtWarm)).toEqual([
+        TerrainId.ShallowWater,
+        TerrainId.Grass,
+      ]);
     });
 
     it("DeepWater → DirtLight = [ShallowWater, Grass]", () => {
-      expect(
-        adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtLight),
-      ).toEqual([TerrainId.ShallowWater, TerrainId.Grass]);
+      expect(adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtLight)).toEqual([
+        TerrainId.ShallowWater,
+        TerrainId.Grass,
+      ]);
     });
 
     it("max diameter is 3 (graph property)", () => {
@@ -181,9 +167,7 @@ describe("TerrainAdjacency", () => {
     it("respects maxSteps limit", () => {
       // DeepWater → DirtWarm needs 2 intermediates (distance 3)
       // maxSteps=1 should fail
-      expect(
-        adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtWarm, 1),
-      ).toBeUndefined();
+      expect(adj.getBridgePath(TerrainId.DeepWater, TerrainId.DirtWarm, 1)).toBeUndefined();
     });
   });
 });
