@@ -1,6 +1,6 @@
 import { TileId } from "../world/TileRegistry.js";
 
-/** Configuration for one autotile rendering layer. */
+/** @legacy Configuration for one autotile rendering layer. Replaced by BlendGraph. */
 export interface TerrainLayerDef {
   /** Unique identifier for this layer. */
   id: string;
@@ -43,7 +43,8 @@ function isDirtPath(t: TileId): boolean {
 }
 
 /**
- * 4-layer nested ring autotile, rendered bottom-to-top.
+ * @legacy 4-layer nested ring autotile, rendered bottom-to-top.
+ * Replaced by BlendGraph + computeChunkCornerBlend (corner-based blend layers).
  * Each layer covers a broader area, painting over the one below:
  *   L0: deep water on shallow water base
  *   L1: sand fill on ALL land tiles; water shows at edges (ME #8)

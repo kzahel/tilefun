@@ -1,5 +1,6 @@
 import type { NoiseMap } from "./NoiseMap.js";
 
+/** @legacy Replaced by TerrainId for the corner-based terrain system. */
 export enum BiomeId {
   DeepWater = 0,
   ShallowWater = 1,
@@ -23,8 +24,8 @@ const MOISTURE_FOREST = 0.5;
 const MOISTURE_DENSE_FOREST = 0.65;
 
 /**
- * Maps dual-noise values (elevation + moisture) to a BiomeId
- * using a threshold table.
+ * @legacy Maps dual-noise values (elevation + moisture) to a BiomeId
+ * using a threshold table. Used by OnionStrategy; new code uses TerrainId directly.
  */
 export class BiomeMapper {
   constructor(

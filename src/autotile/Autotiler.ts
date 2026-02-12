@@ -13,9 +13,10 @@ import { tileIdToTerrainId } from "./terrainMapping.js";
 export { AutotileBit, canonicalize } from "./bitmask.js";
 
 /**
- * Compute the 8-bit blob bitmask for a tile at global position (tx, ty).
+ * @legacy Compute the 8-bit blob bitmask for a tile at global position (tx, ty).
  * Queries neighbors via the provided callback. Diagonal bits are only set
  * when both adjacent cardinals are also in the group.
+ * Replaced by computeCornerMask (corner-based, no neighbor queries).
  */
 export function computeMask(
   tx: number,
@@ -44,8 +45,9 @@ export function computeMask(
 }
 
 /**
- * Compute autotile for all layers of a chunk.
+ * @legacy Compute autotile for all layers of a chunk.
  * Fills chunk.autotileLayers[layerIndex] for each defined terrain layer.
+ * Replaced by computeChunkCornerBlend (corner-based blend layers).
  *
  * @param getTerrain - Returns terrain TileId at global tile coords.
  *   Should NOT create new chunks (use a "safe" variant).

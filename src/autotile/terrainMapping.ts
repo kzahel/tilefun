@@ -26,8 +26,9 @@ export function terrainIdToTileId(terrain: TerrainId): TileId {
 }
 
 /**
- * Map BiomeId to TerrainId. Forest/DenseForest collapse to Grass.
+ * @legacy Map BiomeId to TerrainId. Forest/DenseForest collapse to Grass.
  * CRITICAL: BiomeId.Grass=3 maps to TerrainId.Grass=4, NOT a direct cast.
+ * Used by OnionStrategy; new code works with TerrainId directly.
  */
 export function biomeIdToTerrainId(biome: BiomeId): TerrainId {
   switch (biome) {

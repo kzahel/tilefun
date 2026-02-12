@@ -16,8 +16,9 @@ const DEFAULTS: NoiseMapOptions = {
 };
 
 /**
- * Multi-octave simplex noise wrapper.
+ * @legacy Multi-octave simplex noise wrapper.
  * sample(x, y) returns a value in [0, 1].
+ * Used by OnionStrategy for procedural generation; new code uses corner-based terrain.
  */
 export class NoiseMap {
   private readonly noise: NoiseFunction2D;
