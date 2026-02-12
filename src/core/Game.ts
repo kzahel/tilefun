@@ -171,7 +171,15 @@ export class Game {
     this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);
 
     // Update chunk loading based on camera position
-    this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+    // Observer mode: load chunks as if zoom=1 so you can see load/unload boundaries
+    if (this.debugPanel.observer && this.camera.zoom !== 1) {
+      const savedZoom = this.camera.zoom;
+      this.camera.zoom = 1;
+      this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+      this.camera.zoom = savedZoom;
+    } else {
+      this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+    }
     // Compute autotile for newly loaded chunks
     this.world.computeAutotile();
   }

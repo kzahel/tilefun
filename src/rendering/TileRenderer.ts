@@ -41,7 +41,8 @@ export class TileRenderer {
 
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
-        const chunk = world.getChunk(cx, cy);
+        const chunk = world.getChunkIfLoaded(cx, cy);
+        if (!chunk) continue;
         const origin = chunkToWorld(cx, cy);
         const screenOrigin = camera.worldToScreen(origin.wx, origin.wy);
 

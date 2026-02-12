@@ -61,6 +61,11 @@ export class World {
     return this.chunks.getOrCreate(cx, cy);
   }
 
+  /** Get chunk if loaded, or undefined. Never creates chunks. */
+  getChunkIfLoaded(cx: number, cy: number): Chunk | undefined {
+    return this.chunks.get(cx, cy);
+  }
+
   /** Update chunk loading/unloading based on visible range. */
   updateLoadedChunks(visible: ChunkRange): void {
     this.chunks.updateLoadedChunks(visible);

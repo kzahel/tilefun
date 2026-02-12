@@ -13,6 +13,7 @@ export class DebugPanel {
   private readonly zoomSlider: HTMLInputElement;
   private readonly zoomLabel: HTMLSpanElement;
   private readonly noclipCheckbox: HTMLInputElement;
+  private readonly observerCheckbox: HTMLInputElement;
   private readonly seedInput: HTMLInputElement;
   private pendingSeed: string | null = null;
 
@@ -27,7 +28,7 @@ export class DebugPanel {
     zoomLbl.textContent = "Zoom";
     this.zoomSlider = document.createElement("input");
     this.zoomSlider.type = "range";
-    this.zoomSlider.min = "0.1";
+    this.zoomSlider.min = "0.05";
     this.zoomSlider.max = "3";
     this.zoomSlider.step = "0.05";
     this.zoomSlider.value = "1";
@@ -35,9 +36,21 @@ export class DebugPanel {
     this.zoomLabel = document.createElement("span");
     this.zoomLabel.textContent = "1.0x";
     this.zoomSlider.addEventListener("input", () => {
-      this.zoomLabel.textContent = `${parseFloat(this.zoomSlider.value).toFixed(1)}x`;
+      this.zoomLabel.textContent = `${parseFloat(this.zoomSlider.value).toFixed(2)}x`;
     });
     zoomRow.append(zoomLbl, this.zoomSlider, this.zoomLabel);
+
+    // Observer checkbox (load chunks at 1x zoom)
+    const observerRow = document.createElement("div");
+    observerRow.style.cssText = ROW_STYLE;
+    const observerLbl = document.createElement("label");
+    observerLbl.textContent = "Observer";
+    this.observerCheckbox = document.createElement("input");
+    this.observerCheckbox.type = "checkbox";
+    const observerHint = document.createElement("span");
+    observerHint.textContent = "load at 1x";
+    observerHint.style.cssText = "color: #999; font-size: 11px;";
+    observerRow.append(observerLbl, this.observerCheckbox, observerHint);
 
     // Noclip checkbox
     const noclipRow = document.createElement("div");
@@ -64,9 +77,17 @@ export class DebugPanel {
     regenBtn.addEventListener("click", () => {
       this.pendingSeed = this.seedInput.value;
     });
-    seedRow.append(seedLbl, this.seedInput, regenBtn);
+    const randomBtn = document.createElement("button");
+    randomBtn.textContent = "Random";
+    randomBtn.style.cssText = "font: 12px monospace; padding: 2px 8px; cursor: pointer;";
+    randomBtn.addEventListener("click", () => {
+      const seed = Math.random().toString(36).slice(2, 10);
+      this.seedInput.value = seed;
+      this.pendingSeed = seed;
+    });
+    seedRow.append(seedLbl, this.seedInput, regenBtn, randomBtn);
 
-    this.container.append(zoomRow, noclipRow, seedRow);
+    this.container.append(zoomRow, observerRow, noclipRow, seedRow);
     document.body.appendChild(this.container);
   }
 
@@ -84,6 +105,10 @@ export class DebugPanel {
 
   get noclip(): boolean {
     return this.noclipCheckbox.checked;
+  }
+
+  get observer(): boolean {
+    return this.observerCheckbox.checked;
   }
 
   /** Returns new seed if regen was requested, then clears the request. */
