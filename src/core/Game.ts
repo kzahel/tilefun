@@ -12,19 +12,22 @@ import {
 } from "../config/constants.js";
 import { createChicken } from "../entities/Chicken.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
-import type { Entity } from "../entities/Entity.js";
+import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
+import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
+
+const DEFAULT_SEED = "tilefun-default";
 
 export class Game {
   private canvas: HTMLCanvasElement;
@@ -39,6 +42,7 @@ export class Game {
   private entityManager: EntityManager;
   private player: Entity;
   private debugEnabled = false;
+  private debugPanel: DebugPanel;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -49,7 +53,7 @@ export class Game {
     this.canvas = canvas;
     this.ctx = ctx;
     this.camera = new Camera();
-    this.world = new World();
+    this.world = new World(DEFAULT_SEED);
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
     this.touchJoystick = new TouchJoystick(canvas);
@@ -57,6 +61,7 @@ export class Game {
     this.entityManager = new EntityManager();
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
+    this.debugPanel = new DebugPanel(DEFAULT_SEED);
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha) => this.render(alpha),
@@ -70,6 +75,7 @@ export class Game {
       if (e.key === "F3" || e.key === "`") {
         e.preventDefault();
         this.debugEnabled = !this.debugEnabled;
+        this.debugPanel.visible = this.debugEnabled;
       }
     });
     this.input.attach();
@@ -120,6 +126,13 @@ export class Game {
   }
 
   private update(dt: number): void {
+    // Apply debug panel state
+    this.camera.zoom = this.debugPanel.zoom;
+    const newSeed = this.debugPanel.consumeSeedChange();
+    if (newSeed !== null) {
+      this.regenerateWorld(newSeed);
+    }
+
     // Player input → velocity + animation state
     const movement = this.input.getMovement();
     updatePlayerFromInput(this.player, movement, dt);
@@ -143,8 +156,16 @@ export class Game {
     }
 
     // Update all entities (velocity → collision-resolved position, animation timers)
-    // Uses non-creating collision lookup to avoid regenerating unloaded chunks
+    // Noclip: temporarily remove player collider so collision is skipped
+    let savedCollider: ColliderComponent | null = null;
+    if (this.debugPanel.noclip && this.player.collider) {
+      savedCollider = this.player.collider;
+      this.player.collider = null;
+    }
     this.entityManager.update(dt, (tx, ty) => this.world.getCollisionIfLoaded(tx, ty));
+    if (savedCollider) {
+      this.player.collider = savedCollider;
+    }
 
     // Camera follows player
     this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);
@@ -216,6 +237,17 @@ export class Game {
 
     // Touch joystick overlay (on top of everything)
     this.touchJoystick.draw(this.ctx);
+  }
+
+  private regenerateWorld(seed: string): void {
+    this.world = new World(seed);
+    this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+    this.world.computeAutotile();
+    // Remove all NPCs, re-spawn
+    this.entityManager.entities.length = 0;
+    this.entityManager.spawn(this.player);
+    this.findWalkableSpawn(this.player);
+    this.spawnChickens(5);
   }
 
   private findWalkableSpawn(entity: Entity): void {

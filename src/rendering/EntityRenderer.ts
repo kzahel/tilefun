@@ -1,5 +1,4 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { PIXEL_SCALE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "./Camera.js";
 
@@ -29,8 +28,8 @@ export function drawEntities(
       entity.position.wy - sprite.spriteHeight,
     );
 
-    const destW = sprite.spriteWidth * PIXEL_SCALE;
-    const destH = sprite.spriteHeight * PIXEL_SCALE;
+    const destW = sprite.spriteWidth * camera.scale;
+    const destH = sprite.spriteHeight * camera.scale;
 
     const region = sheet.getRegion(sprite.frameCol, sprite.frameRow);
     ctx.drawImage(

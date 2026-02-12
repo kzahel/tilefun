@@ -1,0 +1,95 @@
+const PANEL_STYLE = `
+  position: fixed; top: 8px; right: 8px;
+  background: rgba(0,0,0,0.75); color: #fff;
+  font: 13px monospace; padding: 8px 12px;
+  border-radius: 4px; z-index: 100;
+  display: none; user-select: none;
+`;
+
+const ROW_STYLE = "margin: 4px 0; display: flex; align-items: center; gap: 6px;";
+
+export class DebugPanel {
+  private readonly container: HTMLDivElement;
+  private readonly zoomSlider: HTMLInputElement;
+  private readonly zoomLabel: HTMLSpanElement;
+  private readonly noclipCheckbox: HTMLInputElement;
+  private readonly seedInput: HTMLInputElement;
+  private pendingSeed: string | null = null;
+
+  constructor(defaultSeed: string) {
+    this.container = document.createElement("div");
+    this.container.style.cssText = PANEL_STYLE;
+
+    // Zoom slider
+    const zoomRow = document.createElement("div");
+    zoomRow.style.cssText = ROW_STYLE;
+    const zoomLbl = document.createElement("label");
+    zoomLbl.textContent = "Zoom";
+    this.zoomSlider = document.createElement("input");
+    this.zoomSlider.type = "range";
+    this.zoomSlider.min = "0.1";
+    this.zoomSlider.max = "3";
+    this.zoomSlider.step = "0.05";
+    this.zoomSlider.value = "1";
+    this.zoomSlider.style.width = "120px";
+    this.zoomLabel = document.createElement("span");
+    this.zoomLabel.textContent = "1.0x";
+    this.zoomSlider.addEventListener("input", () => {
+      this.zoomLabel.textContent = `${parseFloat(this.zoomSlider.value).toFixed(1)}x`;
+    });
+    zoomRow.append(zoomLbl, this.zoomSlider, this.zoomLabel);
+
+    // Noclip checkbox
+    const noclipRow = document.createElement("div");
+    noclipRow.style.cssText = ROW_STYLE;
+    const noclipLbl = document.createElement("label");
+    noclipLbl.textContent = "Noclip";
+    this.noclipCheckbox = document.createElement("input");
+    this.noclipCheckbox.type = "checkbox";
+    noclipRow.append(noclipLbl, this.noclipCheckbox);
+
+    // Seed input + regen button
+    const seedRow = document.createElement("div");
+    seedRow.style.cssText = ROW_STYLE;
+    const seedLbl = document.createElement("label");
+    seedLbl.textContent = "Seed";
+    this.seedInput = document.createElement("input");
+    this.seedInput.type = "text";
+    this.seedInput.value = defaultSeed;
+    this.seedInput.style.cssText =
+      "width: 100px; font: 12px monospace; background: #333; color: #fff; border: 1px solid #666; padding: 2px 4px;";
+    const regenBtn = document.createElement("button");
+    regenBtn.textContent = "Regen";
+    regenBtn.style.cssText = "font: 12px monospace; padding: 2px 8px; cursor: pointer;";
+    regenBtn.addEventListener("click", () => {
+      this.pendingSeed = this.seedInput.value;
+    });
+    seedRow.append(seedLbl, this.seedInput, regenBtn);
+
+    this.container.append(zoomRow, noclipRow, seedRow);
+    document.body.appendChild(this.container);
+  }
+
+  get visible(): boolean {
+    return this.container.style.display !== "none";
+  }
+
+  set visible(v: boolean) {
+    this.container.style.display = v ? "block" : "none";
+  }
+
+  get zoom(): number {
+    return parseFloat(this.zoomSlider.value);
+  }
+
+  get noclip(): boolean {
+    return this.noclipCheckbox.checked;
+  }
+
+  /** Returns new seed if regen was requested, then clears the request. */
+  consumeSeedChange(): string | null {
+    const s = this.pendingSeed;
+    this.pendingSeed = null;
+    return s;
+  }
+}

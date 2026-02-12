@@ -1,4 +1,4 @@
-import { CHUNK_SIZE, PIXEL_SCALE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "./Camera.js";
@@ -86,8 +86,8 @@ function drawCollisionBoxes(
     if (!entity.collider) continue;
     const aabb = getEntityAABB(entity.position, entity.collider);
     const topLeft = camera.worldToScreen(aabb.left, aabb.top);
-    const w = (aabb.right - aabb.left) * PIXEL_SCALE;
-    const h = (aabb.bottom - aabb.top) * PIXEL_SCALE;
+    const w = (aabb.right - aabb.left) * camera.scale;
+    const h = (aabb.bottom - aabb.top) * camera.scale;
     ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
   }
 

@@ -2,7 +2,6 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import {
   CHUNK_SIZE,
-  PIXEL_SCALE,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -27,8 +26,6 @@ export function getWaterFrame(nowMs: number): number {
  * Includes both terrain (with autotile) and detail layers in the cache.
  */
 export class TileRenderer {
-  private readonly chunkScreenSize = CHUNK_SIZE * TILE_SIZE * PIXEL_SCALE;
-
   /**
    * Draw all visible chunks from their cached OffscreenCanvas.
    * All layers (water base, autotile, details) are baked into the cache.
@@ -40,6 +37,8 @@ export class TileRenderer {
     sheets: Map<string, Spritesheet>,
     visible: ChunkRange,
   ): void {
+    const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
+
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
         const chunk = world.getChunk(cx, cy);
@@ -51,8 +50,8 @@ export class TileRenderer {
 
         // Chunk-level frustum cull
         if (
-          sx + this.chunkScreenSize < 0 ||
-          sy + this.chunkScreenSize < 0 ||
+          sx + chunkScreenSize < 0 ||
+          sy + chunkScreenSize < 0 ||
           sx > ctx.canvas.width ||
           sy > ctx.canvas.height
         ) {
@@ -67,13 +66,7 @@ export class TileRenderer {
 
         if (chunk.renderCache) {
           // Draw 1px oversize to prevent sub-pixel seams between chunks
-          ctx.drawImage(
-            chunk.renderCache,
-            sx,
-            sy,
-            this.chunkScreenSize + 1,
-            this.chunkScreenSize + 1,
-          );
+          ctx.drawImage(chunk.renderCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
         }
       }
     }

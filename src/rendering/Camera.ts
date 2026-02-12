@@ -5,6 +5,12 @@ export class Camera {
   y = 0;
   viewportWidth = 0;
   viewportHeight = 0;
+  zoom = 1;
+
+  /** Effective pixel scale (base scale * zoom). */
+  get scale(): number {
+    return PIXEL_SCALE * this.zoom;
+  }
 
   setViewport(width: number, height: number): void {
     this.viewportWidth = width;
@@ -14,16 +20,16 @@ export class Camera {
   /** Convert world-pixel coordinates to screen (canvas) coordinates. */
   worldToScreen(wx: number, wy: number): { sx: number; sy: number } {
     return {
-      sx: (wx - this.x) * PIXEL_SCALE + this.viewportWidth / 2,
-      sy: (wy - this.y) * PIXEL_SCALE + this.viewportHeight / 2,
+      sx: (wx - this.x) * this.scale + this.viewportWidth / 2,
+      sy: (wy - this.y) * this.scale + this.viewportHeight / 2,
     };
   }
 
   /** Convert screen (canvas) coordinates to world-pixel coordinates. */
   screenToWorld(sx: number, sy: number): { wx: number; wy: number } {
     return {
-      wx: (sx - this.viewportWidth / 2) / PIXEL_SCALE + this.x,
-      wy: (sy - this.viewportHeight / 2) / PIXEL_SCALE + this.y,
+      wx: (sx - this.viewportWidth / 2) / this.scale + this.x,
+      wy: (sy - this.viewportHeight / 2) / this.scale + this.y,
     };
   }
 
@@ -32,15 +38,16 @@ export class Camera {
     this.x += (targetX - this.x) * lerpFactor;
     this.y += (targetY - this.y) * lerpFactor;
 
+    const s = this.scale;
     // Snap to target when very close to avoid infinite asymptotic creep
-    const snapThreshold = 1 / PIXEL_SCALE;
+    const snapThreshold = 1 / s;
     if (Math.abs(this.x - targetX) < snapThreshold) this.x = targetX;
     if (Math.abs(this.y - targetY) < snapThreshold) this.y = targetY;
 
     // Round camera to pixel grid so all Math.floor'd screen positions
     // move in lockstep — prevents 1px jitter between tiles and entities
-    this.x = Math.round(this.x * PIXEL_SCALE) / PIXEL_SCALE;
-    this.y = Math.round(this.y * PIXEL_SCALE) / PIXEL_SCALE;
+    this.x = Math.round(this.x * s) / s;
+    this.y = Math.round(this.y * s) / s;
   }
 
   /** Get the range of chunk coordinates visible in the current viewport. */
