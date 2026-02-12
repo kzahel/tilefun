@@ -18,13 +18,63 @@ const TRANSPARENT = [0, 0, 0, 0];
 const PIXEL_COLORS = [TRANSPARENT, GREEN, RED];
 
 // === GM Blob Layout ===
-const N = 1, W = 2, E = 4, S = 8, NW = 16, NE = 32, SW = 64, SE = 128;
+const N = 1,
+  W = 2,
+  E = 4,
+  S = 8,
+  NW = 16,
+  NE = 32,
+  SW = 64,
+  SE = 128;
 
 const GM_BLOB_47 = [
-  [255,1,0],[239,2,0],[223,3,0],[207,4,0],[127,5,0],[111,6,0],[95,7,0],[79,8,0],[191,9,0],[175,10,0],[159,11,0],
-  [143,0,1],[63,1,1],[47,2,1],[31,3,1],[15,4,1],[173,5,1],[141,6,1],[45,7,1],[13,8,1],[206,9,1],[78,10,1],[142,11,1],
-  [14,0,2],[91,1,2],[27,2,2],[75,3,2],[11,4,2],[55,5,2],[39,6,2],[23,7,2],[7,8,2],[9,9,2],[6,10,2],[140,11,2],
-  [12,0,3],[74,1,3],[10,2,3],[19,3,3],[3,4,3],[37,5,3],[5,6,3],[8,7,3],[4,8,3],[1,9,3],[2,10,3],[0,11,3],
+  [255, 1, 0],
+  [239, 2, 0],
+  [223, 3, 0],
+  [207, 4, 0],
+  [127, 5, 0],
+  [111, 6, 0],
+  [95, 7, 0],
+  [79, 8, 0],
+  [191, 9, 0],
+  [175, 10, 0],
+  [159, 11, 0],
+  [143, 0, 1],
+  [63, 1, 1],
+  [47, 2, 1],
+  [31, 3, 1],
+  [15, 4, 1],
+  [173, 5, 1],
+  [141, 6, 1],
+  [45, 7, 1],
+  [13, 8, 1],
+  [206, 9, 1],
+  [78, 10, 1],
+  [142, 11, 1],
+  [14, 0, 2],
+  [91, 1, 2],
+  [27, 2, 2],
+  [75, 3, 2],
+  [11, 4, 2],
+  [55, 5, 2],
+  [39, 6, 2],
+  [23, 7, 2],
+  [7, 8, 2],
+  [9, 9, 2],
+  [6, 10, 2],
+  [140, 11, 2],
+  [12, 0, 3],
+  [74, 1, 3],
+  [10, 2, 3],
+  [19, 3, 3],
+  [3, 4, 3],
+  [37, 5, 3],
+  [5, 6, 3],
+  [8, 7, 3],
+  [4, 8, 3],
+  [1, 9, 3],
+  [2, 10, 3],
+  [0, 11, 3],
 ];
 
 // === Tile rendering ===
@@ -145,7 +195,7 @@ function addBorder(pixels) {
         if (nx < 0 || ny < 0 || nx >= 16 || ny >= 16) return false;
         return pixels[ny * 16 + nx] === 0;
       };
-      if (check(x-1,y) || check(x+1,y) || check(x,y-1) || check(x,y+1)) {
+      if (check(x - 1, y) || check(x + 1, y) || check(x, y - 1) || check(x, y + 1)) {
         out[idx] = 2; // red border
       }
     }
@@ -154,7 +204,8 @@ function addBorder(pixels) {
 }
 
 // === Generate sheet pixels ===
-const WIDTH = 192, HEIGHT = 64;
+const WIDTH = 192,
+  HEIGHT = 64;
 const rgba = new Uint8Array(WIDTH * HEIGHT * 4);
 // Default: all transparent
 rgba.fill(0);
@@ -162,7 +213,8 @@ rgba.fill(0);
 for (const [mask, col, row] of GM_BLOB_47) {
   const tile = renderTile(mask);
   const bordered = addBorder(tile);
-  const tileX = col * 16, tileY = row * 16;
+  const tileX = col * 16,
+    tileY = row * 16;
   for (let y = 0; y < 16; y++) {
     for (let x = 0; x < 16; x++) {
       const c = PIXEL_COLORS[bordered[y * 16 + x]];
@@ -179,7 +231,10 @@ for (const [mask, col, row] of GM_BLOB_47) {
 for (let y = 0; y < 16; y++) {
   for (let x = 0; x < 16; x++) {
     const idx = (y * WIDTH + x) * 4;
-    rgba[idx] = 50; rgba[idx+1] = 50; rgba[idx+2] = 50; rgba[idx+3] = 255;
+    rgba[idx] = 50;
+    rgba[idx + 1] = 50;
+    rgba[idx + 2] = 50;
+    rgba[idx + 3] = 255;
   }
 }
 
@@ -209,7 +264,11 @@ function encodePNG(width, height, rgbaData) {
   const ihdr = Buffer.alloc(13);
   ihdr.writeUInt32BE(width, 0);
   ihdr.writeUInt32BE(height, 4);
-  ihdr[8] = 8; ihdr[9] = 6; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  ihdr[8] = 8;
+  ihdr[9] = 6;
+  ihdr[10] = 0;
+  ihdr[11] = 0;
+  ihdr[12] = 0;
 
   const raw = Buffer.alloc(height * (1 + width * 4));
   for (let y = 0; y < height; y++) {
