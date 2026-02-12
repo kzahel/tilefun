@@ -18,7 +18,7 @@ function cornerIdx(cx: number, cy: number): number {
 export class Chunk {
   static readonly CORNER_SIZE = CORNER_SIZE;
 
-  /** Corner biome values (17×17 = 289). Stores BiomeId at each vertex. */
+  /** Corner terrain values (17×17 = 289). Stores TerrainId at each vertex. */
   readonly corners: Uint8Array;
   /** Base terrain tile IDs (derived from corners). */
   readonly terrain: Uint16Array;
@@ -58,8 +58,8 @@ export class Chunk {
     return this.corners[cornerIdx(cx, cy)] ?? 0;
   }
 
-  setCorner(cx: number, cy: number, biome: number): void {
-    this.corners[cornerIdx(cx, cy)] = biome;
+  setCorner(cx: number, cy: number, terrain: number): void {
+    this.corners[cornerIdx(cx, cy)] = terrain;
   }
 
   getTerrain(lx: number, ly: number): TileId {

@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { isValidAdjacency } from "../autotile/TerrainGraph.js";
+import { BlendGraph } from "../autotile/BlendGraph.js";
+import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
+import { TERRAIN_COUNT, TerrainId } from "../autotile/TerrainId.js";
 import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
@@ -114,7 +116,7 @@ describe("OnionStrategy", () => {
     expect(foundDetail).toBe(true);
   });
 
-  it("fills 17×17 corner grid with valid biome ids", () => {
+  it("fills 17×17 corner grid with valid TerrainId values", () => {
     registerDefaultTiles();
     const gen = new OnionStrategy("corners-test");
     const chunk = new Chunk(LAYER_COUNT);
@@ -122,16 +124,17 @@ describe("OnionStrategy", () => {
 
     for (let cy = 0; cy < CORNER_SIZE; cy++) {
       for (let cx = 0; cx < CORNER_SIZE; cx++) {
-        const biome = chunk.getCorner(cx, cy);
-        expect(biome).toBeGreaterThanOrEqual(BiomeId.DeepWater);
-        expect(biome).toBeLessThanOrEqual(BiomeId.DenseForest);
+        const terrain = chunk.getCorner(cx, cy);
+        expect(terrain).toBeGreaterThanOrEqual(TerrainId.DeepWater);
+        expect(terrain).toBeLessThan(TERRAIN_COUNT);
       }
     }
   });
 
-  it("enforces adjacency constraints on corners", () => {
+  it("enforces adjacency constraints on corners (TerrainId)", () => {
     registerDefaultTiles();
     const gen = new OnionStrategy("adj-test");
+    const adjacency = new TerrainAdjacency(new BlendGraph());
 
     // Test multiple chunks to get diverse terrain
     const positions: [number, number][] = [
@@ -149,22 +152,22 @@ describe("OnionStrategy", () => {
       // Check all horizontally adjacent corner pairs within chunk
       for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
         for (let ccx = 0; ccx < CORNER_SIZE - 1; ccx++) {
-          const a = chunk.getCorner(ccx, ccy) as BiomeId;
-          const b = chunk.getCorner(ccx + 1, ccy) as BiomeId;
+          const a = chunk.getCorner(ccx, ccy) as TerrainId;
+          const b = chunk.getCorner(ccx + 1, ccy) as TerrainId;
           expect(
-            isValidAdjacency(a, b),
-            `Invalid h-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${BiomeId[a]}↔${BiomeId[b]}`,
+            adjacency.isValidAdjacency(a, b),
+            `Invalid h-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${TerrainId[a]}↔${TerrainId[b]}`,
           ).toBe(true);
         }
       }
       // Check all vertically adjacent corner pairs within chunk
       for (let ccy = 0; ccy < CORNER_SIZE - 1; ccy++) {
         for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
-          const a = chunk.getCorner(ccx, ccy) as BiomeId;
-          const b = chunk.getCorner(ccx, ccy + 1) as BiomeId;
+          const a = chunk.getCorner(ccx, ccy) as TerrainId;
+          const b = chunk.getCorner(ccx, ccy + 1) as TerrainId;
           expect(
-            isValidAdjacency(a, b),
-            `Invalid v-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${BiomeId[a]}↔${BiomeId[b]}`,
+            adjacency.isValidAdjacency(a, b),
+            `Invalid v-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${TerrainId[a]}↔${TerrainId[b]}`,
           ).toBe(true);
         }
       }

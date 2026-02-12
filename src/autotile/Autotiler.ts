@@ -1,5 +1,4 @@
 import { CHUNK_SIZE } from "../config/constants.js";
-import type { BiomeId } from "../generation/BiomeMapper.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { TileId } from "../world/TileRegistry.js";
 import type { BlendGraph } from "./BlendGraph.js";
@@ -9,7 +8,7 @@ import { computeCornerMask } from "./CornerBlend.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
-import { biomeIdToTerrainId, tileIdToTerrainId } from "./terrainMapping.js";
+import { tileIdToTerrainId } from "./terrainMapping.js";
 
 export { AutotileBit, canonicalize } from "./bitmask.js";
 
@@ -99,7 +98,7 @@ interface TileLayer {
 /**
  * Compute per-tile blend layers from chunk corners (corner-based, no fan-out).
  *
- * For each tile, reads its 4 corners (currently BiomeId, converted to TerrainId),
+ * For each tile, reads its 4 corners (TerrainId values),
  * finds the base terrain (lowest depth), and for each overlay terrain computes
  * a corner-based mask using computeCornerMask. No neighbor tiles are consulted —
  * transitions are self-contained within mixed-corner tiles.
@@ -119,11 +118,11 @@ export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): v
         chunk.blendLayers[tileOffset + s] = 0;
       }
 
-      // Read corners and convert BiomeId → TerrainId
-      const nw = biomeIdToTerrainId(chunk.getCorner(lx, ly) as BiomeId);
-      const ne = biomeIdToTerrainId(chunk.getCorner(lx + 1, ly) as BiomeId);
-      const sw = biomeIdToTerrainId(chunk.getCorner(lx, ly + 1) as BiomeId);
-      const se = biomeIdToTerrainId(chunk.getCorner(lx + 1, ly + 1) as BiomeId);
+      // Read corners directly as TerrainId
+      const nw = chunk.getCorner(lx, ly) as TerrainId;
+      const ne = chunk.getCorner(lx + 1, ly) as TerrainId;
+      const sw = chunk.getCorner(lx, ly + 1) as TerrainId;
+      const se = chunk.getCorner(lx + 1, ly + 1) as TerrainId;
 
       // Skip uniform tiles — no blend needed
       if (nw === ne && ne === sw && sw === se) continue;

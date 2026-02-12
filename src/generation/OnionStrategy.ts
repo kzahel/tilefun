@@ -4,6 +4,7 @@ import {
   getValidFallback,
   isValidAdjacency,
 } from "../autotile/TerrainGraph.js";
+import { biomeIdToTerrainId } from "../autotile/terrainMapping.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
@@ -60,9 +61,10 @@ const PATH_BAND_HIGH = 0.52;
 const CORNER_SIZE = CHUNK_SIZE + 1;
 
 /**
- * Corner-based terrain generator.
+ * @legacy Corner-based terrain generator using BiomeId noise.
  * Fills chunk corners (17×17) from noise, enforces adjacency constraints,
- * then derives per-tile terrain, collision, and details.
+ * derives per-tile terrain, collision, and details, then converts
+ * corners from BiomeId to TerrainId for the graph renderer.
  */
 export class OnionStrategy implements TerrainStrategy {
   readonly biomeMapper: BiomeMapper;
@@ -152,6 +154,14 @@ export class OnionStrategy implements TerrainStrategy {
 
         // Scatter detail tiles on land biomes
         this.scatterDetail(chunk, lx, ly, tx, ty, biome, chunkRng);
+      }
+    }
+
+    // Phase 4: Convert corners from BiomeId to TerrainId for graph renderer
+    for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
+      for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
+        const biome = chunk.getCorner(ccx, ccy) as BiomeId;
+        chunk.setCorner(ccx, ccy, biomeIdToTerrainId(biome));
       }
     }
   }

@@ -1,7 +1,7 @@
+import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
-import { BiomeId } from "./BiomeMapper.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
 
 /**
@@ -14,11 +14,11 @@ export class FlatStrategy implements TerrainStrategy {
     chunk.fillTerrain(TileId.Grass);
     chunk.fillCollision(CollisionFlag.None);
 
-    // Set all corners to Grass so corner-based editing starts clean
+    // Set all corners to Grass (TerrainId) so corner-based editing starts clean
     const cornerSize = CHUNK_SIZE + 1;
     for (let cy = 0; cy < cornerSize; cy++) {
       for (let cx = 0; cx < cornerSize; cx++) {
-        chunk.setCorner(cx, cy, BiomeId.Grass);
+        chunk.setCorner(cx, cy, TerrainId.Grass);
       }
     }
   }

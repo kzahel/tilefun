@@ -2,8 +2,13 @@ import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
-import { deriveTerrainFromCorners } from "../autotile/TerrainGraph.js";
-import { biomeIdToTileId, tileIdToBiomeId } from "../autotile/terrainMapping.js";
+import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
+import type { TerrainId } from "../autotile/TerrainId.js";
+import {
+  biomeIdToTerrainId,
+  terrainIdToTileId,
+  tileIdToBiomeId,
+} from "../autotile/terrainMapping.js";
 import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
@@ -20,7 +25,6 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
-import { BiomeId } from "../generation/BiomeMapper.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -227,7 +231,7 @@ export class Game {
 
       // Apply corner edits (corner mode)
       for (const edit of this.editorMode.consumePendingCornerEdits()) {
-        this.applyCornerEdit(edit.gx, edit.gy, tileIdToBiomeId(edit.tileId));
+        this.applyCornerEdit(edit.gx, edit.gy, biomeIdToTerrainId(tileIdToBiomeId(edit.tileId)));
       }
 
       // Handle clear canvas
@@ -387,9 +391,9 @@ export class Game {
     if (lx === CHUNK_SIZE - 1 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy + 1);
   }
 
-  private applyCornerEdit(gx: number, gy: number, biomeId: BiomeId): void {
+  private applyCornerEdit(gx: number, gy: number, terrainId: TerrainId): void {
     // Set the corner in all chunks that share this vertex
-    this.setGlobalCorner(gx, gy, biomeId);
+    this.setGlobalCorner(gx, gy, terrainId);
 
     // Re-derive terrain for the 4 tiles that share this corner:
     // (gx-1,gy-1), (gx,gy-1), (gx-1,gy), (gx,gy)
@@ -400,20 +404,20 @@ export class Game {
     }
   }
 
-  private setGlobalCorner(gx: number, gy: number, biomeId: BiomeId): void {
+  private setGlobalCorner(gx: number, gy: number, terrainId: TerrainId): void {
     const cx = Math.floor(gx / CHUNK_SIZE);
     const cy = Math.floor(gy / CHUNK_SIZE);
     const lcx = gx - cx * CHUNK_SIZE;
     const lcy = gy - cy * CHUNK_SIZE;
 
-    this.setCornerInChunk(cx, cy, lcx, lcy, biomeId);
+    this.setCornerInChunk(cx, cy, lcx, lcy, terrainId);
     // Shared with left neighbor chunk
-    if (lcx === 0) this.setCornerInChunk(cx - 1, cy, CHUNK_SIZE, lcy, biomeId);
+    if (lcx === 0) this.setCornerInChunk(cx - 1, cy, CHUNK_SIZE, lcy, terrainId);
     // Shared with top neighbor chunk
-    if (lcy === 0) this.setCornerInChunk(cx, cy - 1, lcx, CHUNK_SIZE, biomeId);
+    if (lcy === 0) this.setCornerInChunk(cx, cy - 1, lcx, CHUNK_SIZE, terrainId);
     // Shared with diagonal neighbor chunk
     if (lcx === 0 && lcy === 0)
-      this.setCornerInChunk(cx - 1, cy - 1, CHUNK_SIZE, CHUNK_SIZE, biomeId);
+      this.setCornerInChunk(cx - 1, cy - 1, CHUNK_SIZE, CHUNK_SIZE, terrainId);
   }
 
   private setCornerInChunk(
@@ -421,22 +425,22 @@ export class Game {
     cy: number,
     lcx: number,
     lcy: number,
-    biomeId: BiomeId,
+    terrainId: TerrainId,
   ): void {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
-      chunk.setCorner(lcx, lcy, biomeId);
+      chunk.setCorner(lcx, lcy, terrainId);
     }
   }
 
-  private getGlobalCorner(gx: number, gy: number): BiomeId {
+  private getGlobalCorner(gx: number, gy: number): TerrainId {
     const cx = Math.floor(gx / CHUNK_SIZE);
     const cy = Math.floor(gy / CHUNK_SIZE);
     const lcx = gx - cx * CHUNK_SIZE;
     const lcy = gy - cy * CHUNK_SIZE;
     const chunk = this.world.getChunkIfLoaded(cx, cy);
-    if (!chunk) return BiomeId.Grass;
-    return chunk.getCorner(lcx, lcy) as BiomeId;
+    if (!chunk) return 4 as TerrainId; // TerrainId.Grass
+    return chunk.getCorner(lcx, lcy) as TerrainId;
   }
 
   private rederiveTerrainAt(tx: number, ty: number): void {
@@ -451,8 +455,8 @@ export class Game {
     const sw = this.getGlobalCorner(tx, ty + 1);
     const se = this.getGlobalCorner(tx + 1, ty + 1);
 
-    const biome = deriveTerrainFromCorners(nw, ne, sw, se);
-    const tileId = biomeIdToTileId(biome);
+    const terrain = deriveTerrainIdFromCorners(nw, ne, sw, se);
+    const tileId = terrainIdToTileId(terrain);
 
     chunk.setTerrain(lx, ly, tileId);
     chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));

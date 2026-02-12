@@ -11,7 +11,7 @@ import {
 } from "./TerrainGraph.js";
 import { TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
-import { biomeIdToTileId } from "./terrainMapping.js";
+import { terrainIdToTileId } from "./terrainMapping.js";
 
 describe("isValidAdjacency", () => {
   it("allows self-adjacency for all biomes", () => {
@@ -124,18 +124,18 @@ describe("deriveTerrainFromCorners", () => {
   });
 });
 
-describe("corner edit integration: single corner on flat grass chunk", () => {
+describe("corner edit integration: single corner on flat grass chunk (TerrainId corners)", () => {
   /**
    * Simulates the Game.applyCornerEdit flow for a single chunk:
-   * set one corner, then re-derive terrain for affected tiles.
+   * set one corner (TerrainId), then re-derive terrain for affected tiles.
    */
   function rederiveTile(chunk: Chunk, lx: number, ly: number): void {
-    const nw = chunk.getCorner(lx, ly) as BiomeId;
-    const ne = chunk.getCorner(lx + 1, ly) as BiomeId;
-    const sw = chunk.getCorner(lx, ly + 1) as BiomeId;
-    const se = chunk.getCorner(lx + 1, ly + 1) as BiomeId;
-    const biome = deriveTerrainFromCorners(nw, ne, sw, se);
-    chunk.setTerrain(lx, ly, biomeIdToTileId(biome));
+    const nw = chunk.getCorner(lx, ly) as TerrainId;
+    const ne = chunk.getCorner(lx + 1, ly) as TerrainId;
+    const sw = chunk.getCorner(lx, ly + 1) as TerrainId;
+    const se = chunk.getCorner(lx + 1, ly + 1) as TerrainId;
+    const terrain = deriveTerrainIdFromCorners(nw, ne, sw, se);
+    chunk.setTerrain(lx, ly, terrainIdToTileId(terrain));
   }
 
   function makeGrassChunk(): Chunk {
@@ -144,7 +144,7 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     const cornerSize = CHUNK_SIZE + 1;
     for (let cy = 0; cy < cornerSize; cy++) {
       for (let cx = 0; cx < cornerSize; cx++) {
-        chunk.setCorner(cx, cy, BiomeId.Grass);
+        chunk.setCorner(cx, cy, TerrainId.Grass);
       }
     }
     return chunk;
@@ -154,7 +154,7 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     const chunk = makeGrassChunk();
 
     // Paint a single ShallowWater corner at local corner position (5, 5)
-    chunk.setCorner(5, 5, BiomeId.ShallowWater);
+    chunk.setCorner(5, 5, TerrainId.ShallowWater);
 
     // The 4 tiles sharing corner (5,5):
     // Tile (4,4) has SE = corner(5,5), Tile (5,4) has SW = corner(5,5),
@@ -193,7 +193,7 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     const chunk = makeGrassChunk();
 
     // Paint water, re-derive
-    chunk.setCorner(5, 5, BiomeId.ShallowWater);
+    chunk.setCorner(5, 5, TerrainId.ShallowWater);
     for (const [lx, ly] of [
       [4, 4],
       [5, 4],
@@ -207,7 +207,7 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     expect(chunk.getTerrain(5, 5)).toBe(TileId.Water);
 
     // Paint back to grass
-    chunk.setCorner(5, 5, BiomeId.Grass);
+    chunk.setCorner(5, 5, TerrainId.Grass);
     for (const [lx, ly] of [
       [4, 4],
       [5, 4],
@@ -232,8 +232,8 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     const chunk = makeGrassChunk();
 
     // Paint two adjacent corners: (5,5) and (6,5)
-    chunk.setCorner(5, 5, BiomeId.ShallowWater);
-    chunk.setCorner(6, 5, BiomeId.ShallowWater);
+    chunk.setCorner(5, 5, TerrainId.ShallowWater);
+    chunk.setCorner(6, 5, TerrainId.ShallowWater);
 
     // Tiles sharing corner (5,5): (4,4), (5,4), (4,5), (5,5)
     // Tiles sharing corner (6,5): (5,4), (6,4), (5,5), (6,5)
