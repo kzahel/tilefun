@@ -194,7 +194,7 @@ describe("deriveTerrainIdFromCorners", () => {
     ).toBe(TerrainId.Grass);
   });
 
-  it("SandLight (depth 3) vs Grass (depth 4)", () => {
+  it("SandLight (depth 3) vs Grass (depth 2)", () => {
     expect(
       deriveTerrainIdFromCorners(
         TerrainId.SandLight,
@@ -202,6 +202,6 @@ describe("deriveTerrainIdFromCorners", () => {
         TerrainId.SandLight,
         TerrainId.Grass,
       ),
-    ).toBe(TerrainId.SandLight);
+    ).toBe(TerrainId.Grass);
   });
 });

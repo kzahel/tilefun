@@ -10,10 +10,11 @@ export enum TerrainId {
   Grass = 4,
   DirtLight = 5,
   DirtWarm = 6,
+  DebugGreen = 7,
 }
 
 /** Number of terrain types. */
-export const TERRAIN_COUNT = 7;
+export const TERRAIN_COUNT = 8;
 
 /** All terrain IDs for iteration. */
 export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
@@ -24,6 +25,7 @@ export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
   TerrainId.Grass,
   TerrainId.DirtLight,
   TerrainId.DirtWarm,
+  TerrainId.DebugGreen,
 ];
 
 /**
@@ -34,11 +36,12 @@ export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
 export const TERRAIN_DEPTH: Record<TerrainId, number> = {
   [TerrainId.ShallowWater]: 0,
   [TerrainId.DeepWater]: 1,
-  [TerrainId.Sand]: 2,
+  [TerrainId.Grass]: 2,
   [TerrainId.SandLight]: 3,
-  [TerrainId.Grass]: 4,
+  [TerrainId.Sand]: 4,
   [TerrainId.DirtLight]: 5,
   [TerrainId.DirtWarm]: 6,
+  [TerrainId.DebugGreen]: 7,
 };
 
 /**
@@ -54,4 +57,14 @@ export function getBaseSelectionMode(): BaseSelectionMode {
 }
 export function setBaseSelectionMode(mode: BaseSelectionMode): void {
   _baseSelectionMode = mode;
+}
+
+/** When true, force all diagonal bits on → only convex (corner-system) shapes. */
+let _forceConvex = false;
+
+export function getForceConvex(): boolean {
+  return _forceConvex;
+}
+export function setForceConvex(v: boolean): void {
+  _forceConvex = v;
 }

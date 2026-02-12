@@ -1,4 +1,9 @@
-import { getBaseSelectionMode, setBaseSelectionMode } from "../autotile/TerrainId.js";
+import {
+  getBaseSelectionMode,
+  getForceConvex,
+  setBaseSelectionMode,
+  setForceConvex,
+} from "../autotile/TerrainId.js";
 
 const PANEL_STYLE = `
   position: fixed; top: 8px; right: 8px;
@@ -17,7 +22,9 @@ export class DebugPanel {
   private readonly noclipCheckbox: HTMLInputElement;
   private readonly observerCheckbox: HTMLInputElement;
   private readonly baseModeBtn: HTMLButtonElement;
+  private readonly convexCheckbox: HTMLInputElement;
   private pendingBaseMode = false;
+  private pendingConvex = false;
 
   constructor() {
     this.container = document.createElement("div");
@@ -77,7 +84,24 @@ export class DebugPanel {
     baseModeHint.style.cssText = "color: #999; font-size: 11px;";
     baseModeRow.append(baseModeLbl, this.baseModeBtn, baseModeHint);
 
-    this.container.append(zoomRow, observerRow, noclipRow, baseModeRow);
+    // Force convex checkbox
+    const convexRow = document.createElement("div");
+    convexRow.style.cssText = ROW_STYLE;
+    const convexLbl = document.createElement("label");
+    convexLbl.textContent = "Convex";
+    this.convexCheckbox = document.createElement("input");
+    this.convexCheckbox.type = "checkbox";
+    this.convexCheckbox.checked = getForceConvex();
+    this.convexCheckbox.addEventListener("change", () => {
+      setForceConvex(this.convexCheckbox.checked);
+      this.pendingConvex = true;
+    });
+    const convexHint = document.createElement("span");
+    convexHint.textContent = "no concave corners";
+    convexHint.style.cssText = "color: #999; font-size: 11px;";
+    convexRow.append(convexLbl, this.convexCheckbox, convexHint);
+
+    this.container.append(zoomRow, observerRow, noclipRow, baseModeRow, convexRow);
     document.body.appendChild(this.container);
   }
 
@@ -105,6 +129,13 @@ export class DebugPanel {
   consumeBaseModeChange(): boolean {
     const changed = this.pendingBaseMode;
     this.pendingBaseMode = false;
+    return changed;
+  }
+
+  /** Returns true if convex mode was toggled, then clears the flag. */
+  consumeConvexChange(): boolean {
+    const changed = this.pendingConvex;
+    this.pendingConvex = false;
     return changed;
   }
 

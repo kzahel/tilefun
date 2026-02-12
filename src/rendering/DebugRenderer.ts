@@ -1,4 +1,4 @@
-import { getBaseSelectionMode } from "../autotile/TerrainId.js";
+import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
@@ -24,7 +24,7 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     `Pos: (${info.playerWx.toFixed(1)}, ${info.playerWy.toFixed(1)})  Tile: (${info.playerTx}, ${info.playerTy})`,
     `Terrain: ${info.terrainName}`,
     `Collision: ${info.collisionFlags}  Speed: ${info.speedMultiplier}x`,
-    `Base: ${getBaseSelectionMode()} (D to toggle)`,
+    `Base: ${getBaseSelectionMode()} (D to toggle)  Convex: ${getForceConvex() ? "ON" : "off"}`,
   ];
   const lineHeight = 16;
   const panelW = 340;

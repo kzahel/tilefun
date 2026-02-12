@@ -231,7 +231,7 @@ export class Game {
     if (!this.editorEnabled) {
       this.camera.zoom = this.debugPanel.zoom;
     }
-    if (this.debugPanel.consumeBaseModeChange()) {
+    if (this.debugPanel.consumeBaseModeChange() || this.debugPanel.consumeConvexChange()) {
       this.invalidateAllChunks();
     }
 
@@ -248,6 +248,11 @@ export class Game {
       // Apply subgrid edits (subgrid mode)
       for (const edit of this.editorMode.consumePendingSubgridEdits()) {
         this.applySubgridEdit(edit.gsx, edit.gsy, edit.terrainId);
+      }
+
+      // Apply corner edits (corner mode → 3×3 subgrid centered on tile vertex)
+      for (const edit of this.editorMode.consumePendingCornerEdits()) {
+        this.applyCornerEdit(edit.gsx, edit.gsy, edit.terrainId);
       }
 
       // Handle clear canvas
@@ -392,6 +397,23 @@ export class Game {
     for (let dy = 0; dy <= 2; dy++) {
       for (let dx = 0; dx <= 2; dx++) {
         this.applySubgridWithBridges(gsx0 + dx, gsy0 + dy, terrainId, 0);
+      }
+    }
+  }
+
+  /** Corner brush: 3×3 subgrid stamp centered on a tile vertex (even subgrid coord). */
+  private applyCornerEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        this.applySubgridWithBridges(gsx + dx, gsy + dy, terrainId, 0);
+      }
+    }
+    // Re-derive terrain for the 4 tiles sharing this corner
+    const tx = gsx / 2;
+    const ty = gsy / 2;
+    for (let dy = -1; dy <= 0; dy++) {
+      for (let dx = -1; dx <= 0; dx++) {
+        this.rederiveTerrainAt(tx + dx, ty + dy);
       }
     }
   }
@@ -588,6 +610,8 @@ export class Game {
   private drawCursorHighlight(): void {
     if (this.editorPanel.brushMode === "subgrid") {
       this.drawSubgridCursorHighlight();
+    } else if (this.editorPanel.brushMode === "corner") {
+      this.drawCornerCursorHighlight();
     } else {
       this.drawTileCursorHighlight();
     }
@@ -644,6 +668,46 @@ export class Game {
     this.ctx.arc(center.sx, center.sy, radius, 0, Math.PI * 2);
     this.ctx.fillStyle = "rgba(240, 160, 48, 0.8)";
     this.ctx.fill();
+
+    this.ctx.restore();
+  }
+
+  private drawCornerCursorHighlight(): void {
+    const gsx = this.editorMode.cursorCornerX;
+    const gsy = this.editorMode.cursorCornerY;
+    if (!Number.isFinite(gsx)) return;
+
+    const halfTile = TILE_SIZE / 2;
+
+    // 3×3 subgrid area centered on corner
+    const wx0 = (gsx - 1) * halfTile;
+    const wy0 = (gsy - 1) * halfTile;
+    const wx1 = (gsx + 2) * halfTile;
+    const wy1 = (gsy + 2) * halfTile;
+
+    const topLeft = this.camera.worldToScreen(wx0, wy0);
+    const botRight = this.camera.worldToScreen(wx1, wy1);
+    const w = botRight.sx - topLeft.sx;
+    const h = botRight.sy - topLeft.sy;
+
+    this.ctx.save();
+    this.ctx.fillStyle = "rgba(80, 200, 255, 0.2)";
+    this.ctx.strokeStyle = "rgba(80, 200, 255, 0.7)";
+    this.ctx.lineWidth = 2;
+    this.ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
+    this.ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
+
+    // Draw center crosshair at the corner point
+    const center = this.camera.worldToScreen(gsx * halfTile, gsy * halfTile);
+    const r = Math.max(4, 3 * this.camera.scale);
+    this.ctx.strokeStyle = "rgba(80, 200, 255, 0.9)";
+    this.ctx.lineWidth = 2;
+    this.ctx.beginPath();
+    this.ctx.moveTo(center.sx - r, center.sy);
+    this.ctx.lineTo(center.sx + r, center.sy);
+    this.ctx.moveTo(center.sx, center.sy - r);
+    this.ctx.lineTo(center.sx, center.sy + r);
+    this.ctx.stroke();
 
     this.ctx.restore();
   }

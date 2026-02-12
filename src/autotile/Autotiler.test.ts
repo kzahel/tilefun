@@ -251,14 +251,18 @@ describe("computeChunkSubgridBlend", () => {
 
     computeChunkSubgridBlend(chunk, blendGraph);
 
-    // Grass→Sand uses grass alpha fallback (no dedicated pair)
-    const entry = blendGraph.getBlend(TerrainId.Grass, TerrainId.Sand);
+    // Sand→Grass uses sand alpha fallback (no dedicated pair)
+    // Sand(depth 4) is overlay on Grass(depth 2) base
+    const entry = blendGraph.getBlend(TerrainId.Sand, TerrainId.Grass);
     expect(entry).toBeDefined();
     expect(entry?.isAlpha).toBe(true);
 
-    // Grass tile (5,4) near Sand: center=Grass, overlay=Grass → alpha IS drawn
+    // Grass tile (5,4) near Sand: center=Grass, overlay=Sand → alpha NOT drawn
+    // (sand alpha skipped because overlay=Sand ≠ center=Grass)
     const grassTileOffset = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
-    expect(chunk.blendLayers[grassTileOffset]).toBeGreaterThan(0);
+    for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+      expect(chunk.blendLayers[grassTileOffset + s]).toBe(0);
+    }
 
     // Sand tile (5,5) center: all 8 subgrid neighbors are Sand → uniform → no blend
     const sandTileOffset = (5 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;

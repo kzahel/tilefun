@@ -73,6 +73,8 @@ export function terrainIdToTileId(terrain: TerrainId): TileId {
     case TerrainId.DirtLight:
     case TerrainId.DirtWarm:
       return TileId.DirtPath;
+    case TerrainId.DebugGreen:
+      return TileId.DirtPath;
     default:
       return TileId.Grass;
   }

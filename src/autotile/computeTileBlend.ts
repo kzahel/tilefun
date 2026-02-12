@@ -1,7 +1,12 @@
 import type { BlendGraph } from "./BlendGraph.js";
-import { AutotileBit, canonicalize } from "./bitmask.js";
+import { AutotileBit, canonicalize, convexify } from "./bitmask.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
-import { getBaseSelectionMode, TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
+import {
+  getBaseSelectionMode,
+  getForceConvex,
+  TERRAIN_DEPTH,
+  type TerrainId,
+} from "./TerrainId.js";
 
 /** Rich per-tile blend layer info, usable by both game rendering and demo display. */
 export interface BlendLayer {
@@ -77,14 +82,33 @@ export function computeTileBlend(
     }
   }
 
-  // Find base terrain
+  // Find base terrain (the background fill that overlays are drawn on top of).
   let base: TerrainId;
   if (getBaseSelectionMode() === "nw") {
     base = nw;
   } else {
-    base = center;
-    for (const t of all) {
-      if (TERRAIN_DEPTH[t] < TERRAIN_DEPTH[base]) base = t;
+    // Score each candidate: prefer the terrain that the most other terrains
+    // have dedicated (non-alpha) blend entries against. This uses the
+    // BlendGraph's per-pair direction instead of relying solely on depth.
+    // TERRAIN_DEPTH is only a tiebreaker.
+    base = all[0];
+    let bestScore = -1;
+    for (const candidate of all) {
+      let score = 0;
+      for (const other of all) {
+        if (other === candidate) continue;
+        const entry = blendGraph.getBlend(other, candidate);
+        if (entry && !entry.isAlpha) score += 2;
+        else if (entry) score += 1;
+      }
+      if (
+        score > bestScore ||
+        (score === bestScore &&
+          TERRAIN_DEPTH[candidate] < TERRAIN_DEPTH[base])
+      ) {
+        bestScore = score;
+        base = candidate;
+      }
     }
   }
 
@@ -109,7 +133,8 @@ export function computeTileBlend(
     if (entry.isAlpha && overlay !== center) continue;
 
     const rawMask = computeDirectMask(n, ne, e, se, s, sw, w, nw, overlay);
-    const mask = canonicalize(rawMask);
+    let mask = canonicalize(rawMask);
+    if (getForceConvex()) mask = convexify(mask);
     // Skip degenerate masks: mask=0 means a lone diagonal with no adjacent
     // cardinals (invisible in the subgrid system).
     if (mask === 0) continue;

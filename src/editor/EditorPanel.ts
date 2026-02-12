@@ -30,6 +30,7 @@ const PALETTE: PaletteEntry[] = [
   { terrainId: TerrainId.SandLight, label: "Lt Sand", color: "#d4b86a" },
   { terrainId: TerrainId.DirtLight, label: "Lt Dirt", color: "#a08050" },
   { terrainId: TerrainId.DirtWarm, label: "Dirt", color: "#8b6b3e" },
+  { terrainId: TerrainId.DebugGreen, label: "Debug", color: "#4a9a3a" },
 ];
 
 export class EditorPanel {
@@ -130,9 +131,29 @@ export class EditorPanel {
   }
 
   toggleMode(): void {
-    this.brushMode = this.brushMode === "tile" ? "subgrid" : "tile";
-    this.modeButton.textContent = this.brushMode === "tile" ? "Tile" : "Grid";
-    this.modeButton.style.borderColor = this.brushMode === "subgrid" ? "#f0a030" : "#888";
+    if (this.brushMode === "tile") {
+      this.brushMode = "corner";
+    } else if (this.brushMode === "corner") {
+      this.brushMode = "subgrid";
+    } else {
+      this.brushMode = "tile";
+    }
+    this.updateModeButton();
+  }
+
+  private updateModeButton(): void {
+    const labels: Record<BrushMode, string> = {
+      tile: "Tile",
+      corner: "Corner",
+      subgrid: "Grid",
+    };
+    this.modeButton.textContent = labels[this.brushMode];
+    const colors: Record<BrushMode, string> = {
+      tile: "#888",
+      corner: "#50c8ff",
+      subgrid: "#f0a030",
+    };
+    this.modeButton.style.borderColor = colors[this.brushMode];
   }
 
   cycleBrushSize(): void {

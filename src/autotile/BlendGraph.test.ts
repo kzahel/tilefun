@@ -145,6 +145,7 @@ describe("BlendGraph", () => {
         [TerrainId.Grass, TerrainId.DirtWarm], // reverse pair #12
         [TerrainId.ShallowWater, TerrainId.Grass],
         [TerrainId.Grass, TerrainId.ShallowWater], // reverse pair #15
+        [TerrainId.DebugGreen, TerrainId.DirtWarm], // debug 3-color
       ];
       for (const [a, b] of directedPairs) {
         dedicatedKeys.add(`${a},${b}`);
@@ -211,13 +212,13 @@ describe("BlendGraph", () => {
   });
 
   describe("sheet loading", () => {
-    it("registers 11 unique ME sheets", () => {
-      expect(graph.allSheets.length).toBe(11);
+    it("registers 12 unique sheets", () => {
+      expect(graph.allSheets.length).toBe(12);
     });
 
-    it("all sheet paths point to ME autotile PNGs", () => {
+    it("all sheet paths point to known autotile PNGs", () => {
       for (const sheet of graph.allSheets) {
-        expect(sheet.assetPath).toMatch(/^assets\/tilesets\/me-autotile-\d{2}\.png$/);
+        expect(sheet.assetPath).toMatch(/^assets\/tilesets\/(me-autotile-\d{2}|debug-3color)\.png$/);
       }
     });
   });

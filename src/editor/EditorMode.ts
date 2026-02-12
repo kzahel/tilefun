@@ -2,7 +2,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import { TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
 
-export type BrushMode = "tile" | "subgrid";
+export type BrushMode = "tile" | "subgrid" | "corner";
 
 interface PendingTileEdit {
   tx: number;
@@ -28,16 +28,22 @@ export class EditorMode {
   cursorSubgridX = -Infinity;
   cursorSubgridY = -Infinity;
 
+  // Corner-mode cursor (tile corner = even subgrid position)
+  cursorCornerX = -Infinity;
+  cursorCornerY = -Infinity;
+
   private readonly canvas: HTMLCanvasElement;
   private readonly camera: Camera;
   private pendingTileEdits: PendingTileEdit[] = [];
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
+  private pendingCornerEdits: PendingSubgridEdit[] = [];
   private isPainting = false;
   private isPanning = false;
   private spaceDown = false;
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
   private lastPaintedTile = { tx: -Infinity, ty: -Infinity };
   private lastPaintedSubgrid = { gsx: -Infinity, gsy: -Infinity };
+  private lastPaintedCorner = { gsx: -Infinity, gsy: -Infinity };
 
   // Touch state
   private activeTouches = new Map<number, { sx: number; sy: number }>();
@@ -128,6 +134,13 @@ export class EditorMode {
     return edits;
   }
 
+  consumePendingCornerEdits(): PendingSubgridEdit[] {
+    if (this.pendingCornerEdits.length === 0) return this.pendingCornerEdits;
+    const edits = this.pendingCornerEdits;
+    this.pendingCornerEdits = [];
+    return edits;
+  }
+
   private canvasCoords(e: MouseEvent): { sx: number; sy: number } {
     const rect = this.canvas.getBoundingClientRect();
     return {
@@ -154,9 +167,20 @@ export class EditorMode {
     };
   }
 
+  /** Snap to nearest tile corner (even subgrid position = vertex between 4 tiles). */
+  private screenToCorner(sx: number, sy: number): { gsx: number; gsy: number } {
+    const { wx, wy } = this.camera.screenToWorld(sx, sy);
+    return {
+      gsx: Math.round(wx / TILE_SIZE) * 2,
+      gsy: Math.round(wy / TILE_SIZE) * 2,
+    };
+  }
+
   private paintAt(sx: number, sy: number): void {
     if (this.brushMode === "subgrid") {
       this.paintSubgridAt(sx, sy);
+    } else if (this.brushMode === "corner") {
+      this.paintCornerAt(sx, sy);
     } else {
       this.paintTileAt(sx, sy);
     }
@@ -182,6 +206,18 @@ export class EditorMode {
     });
   }
 
+  private paintCornerAt(sx: number, sy: number): void {
+    const { gsx, gsy } = this.screenToCorner(sx, sy);
+    if (gsx === this.lastPaintedCorner.gsx && gsy === this.lastPaintedCorner.gsy) return;
+    this.lastPaintedCorner.gsx = gsx;
+    this.lastPaintedCorner.gsy = gsy;
+    this.pendingCornerEdits.push({
+      gsx,
+      gsy,
+      terrainId: this.selectedTerrain,
+    });
+  }
+
   private updateCursor(sx: number, sy: number): void {
     const { tx, ty } = this.screenToTile(sx, sy);
     this.cursorTileX = tx;
@@ -189,6 +225,9 @@ export class EditorMode {
     const { gsx, gsy } = this.screenToSubgrid(sx, sy);
     this.cursorSubgridX = gsx;
     this.cursorSubgridY = gsy;
+    const corner = this.screenToCorner(sx, sy);
+    this.cursorCornerX = corner.gsx;
+    this.cursorCornerY = corner.gsy;
   }
 
   // --- Mouse handlers ---
@@ -216,6 +255,8 @@ export class EditorMode {
       this.lastPaintedTile.ty = -Infinity;
       this.lastPaintedSubgrid.gsx = -Infinity;
       this.lastPaintedSubgrid.gsy = -Infinity;
+      this.lastPaintedCorner.gsx = -Infinity;
+      this.lastPaintedCorner.gsy = -Infinity;
       this.paintAt(sx, sy);
     }
   }
@@ -327,6 +368,8 @@ export class EditorMode {
       this.lastPaintedTile.ty = -Infinity;
       this.lastPaintedSubgrid.gsx = -Infinity;
       this.lastPaintedSubgrid.gsy = -Infinity;
+      this.lastPaintedCorner.gsx = -Infinity;
+      this.lastPaintedCorner.gsy = -Infinity;
     }
   }
 
