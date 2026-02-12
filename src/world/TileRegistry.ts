@@ -40,6 +40,19 @@ export interface TileDefinition {
   collision: CollisionFlags;
 }
 
+/** Get default collision flags for a terrain tile type. */
+export function getCollisionForTerrain(tileId: TileId): number {
+  switch (tileId) {
+    case TileId.Water:
+    case TileId.DeepWater:
+      return CollisionFlag.Water;
+    case TileId.DenseForest:
+      return CollisionFlag.SlowWalk;
+    default:
+      return CollisionFlag.None;
+  }
+}
+
 const registry = new Map<TileId, TileDefinition>();
 
 export function registerTile(id: TileId, def: TileDefinition): void {

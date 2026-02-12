@@ -1,4 +1,5 @@
-import { computeChunkAllLayers } from "../autotile/Autotiler.js";
+import { computeChunkAllLayers, computeChunkBlendLayers } from "../autotile/Autotiler.js";
+import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
@@ -74,8 +75,9 @@ export class World {
   /**
    * Run the autotile pass for chunks that need it.
    * Should be called after updateLoadedChunks ensures all neighbors are generated.
+   * If blendGraph is provided, also computes per-tile blend layers for the graph renderer.
    */
-  computeAutotile(): void {
+  computeAutotile(blendGraph?: BlendGraph): void {
     const getTerrain = (tx: number, ty: number) => this.getTerrainIfLoaded(tx, ty);
 
     for (const [key, chunk] of this.chunks.entries()) {
@@ -86,6 +88,9 @@ export class World {
       const cy = Number(key.slice(commaIdx + 1));
 
       computeChunkAllLayers(chunk, cx, cy, getTerrain);
+      if (blendGraph) {
+        computeChunkBlendLayers(chunk, cx, cy, getTerrain, blendGraph);
+      }
       chunk.autotileComputed = true;
       chunk.dirty = true;
     }

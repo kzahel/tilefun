@@ -1,9 +1,13 @@
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { TileId } from "../world/TileRegistry.js";
+import type { BlendGraph } from "./BlendGraph.js";
+import { MAX_BLEND_LAYERS } from "./BlendGraph.js";
 import { AutotileBit } from "./bitmask.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
+import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
+import { tileIdToTerrainId } from "./terrainMapping.js";
 
 export { AutotileBit, canonicalize } from "./bitmask.js";
 
@@ -71,6 +75,175 @@ export function computeChunkAllLayers(
         } else {
           cache[idx] = 0;
         }
+      }
+    }
+  }
+}
+
+/** Packed blend layer: (sheetIndex << 16) | (col << 8) | row */
+function packBlend(sheetIndex: number, col: number, row: number): number {
+  return (sheetIndex << 16) | (col << 8) | row;
+}
+
+/** Temporary per-tile layer for sorting before packing. */
+interface TileLayer {
+  packed: number;
+  /** 0=background fill, 1=dedicated pair, 2=alpha overlay */
+  category: number;
+  /** Depth-based sort key within category. */
+  depth: number;
+}
+
+/**
+ * Compute per-tile blend layers for a chunk using the graph renderer.
+ *
+ * For each tile, finds unique neighbor terrains, selects blend sheets
+ * (dedicated pair or alpha fallback), computes independent masks, and
+ * packs results into chunk.blendLayers.
+ *
+ * @param getTerrain - Returns terrain TileId at global tile coords.
+ *   Should NOT create new chunks.
+ * @param blendGraph - The blend sheet selection graph.
+ */
+export function computeChunkBlendLayers(
+  chunk: Chunk,
+  cx: number,
+  cy: number,
+  getTerrain: (tx: number, ty: number) => TileId,
+  blendGraph: BlendGraph,
+): void {
+  const baseX = cx * CHUNK_SIZE;
+  const baseY = cy * CHUNK_SIZE;
+
+  // Reusable buffers to avoid per-tile allocations
+  const neighborSet = new Uint8Array(8); // TerrainId values found in neighborhood
+  let neighborCount = 0;
+  const layers: TileLayer[] = [];
+
+  for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+    for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+      const tileId = chunk.getTerrain(lx, ly);
+      const myTerrain = tileIdToTerrainId(tileId);
+      const tx = baseX + lx;
+      const ty = baseY + ly;
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+
+      // Clear blend layer slots for this tile
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        chunk.blendLayers[tileOffset + s] = 0;
+      }
+
+      // Find unique neighbor terrains
+      neighborCount = 0;
+      const seen = new Uint8Array(8); // bitmap: seen[terrainId] = 1
+      let hasAlphaFallback = false;
+
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          if (dx === 0 && dy === 0) continue;
+          const nt = tileIdToTerrainId(getTerrain(tx + dx, ty + dy));
+          if (nt !== myTerrain && !seen[nt]) {
+            seen[nt] = 1;
+            neighborSet[neighborCount++] = nt;
+          }
+        }
+      }
+
+      if (neighborCount === 0) continue; // Uniform neighborhood
+
+      // Build layers
+      layers.length = 0;
+
+      for (let ni = 0; ni < neighborCount; ni++) {
+        const neighborTerrain = neighborSet[ni] as TerrainId;
+        const entry = blendGraph.getBlend(myTerrain, neighborTerrain);
+        if (!entry) continue;
+
+        if (!entry.isAlpha) {
+          // Dedicated pair (direct or inverted)
+          let mask: number;
+          if (entry.inverted) {
+            // Inverted: bits set where neighborTerrain IS present
+            mask = computeMask(
+              tx,
+              ty,
+              getTerrain,
+              (id) => tileIdToTerrainId(id) === neighborTerrain,
+            );
+            // Skip degenerate masks for inverted sheets
+            if (mask === 0 || mask === 255) continue;
+          } else {
+            // Direct: bits set where my terrain IS present
+            mask = computeMask(
+              tx,
+              ty,
+              getTerrain,
+              (id) => tileIdToTerrainId(id) === myTerrain,
+            );
+          }
+          const sprite = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
+          const col = sprite & 0xff;
+          const row = sprite >> 8;
+          layers.push({
+            packed: packBlend(entry.sheetIndex, col, row),
+            category: 1, // dedicated pair
+            depth: TERRAIN_DEPTH[neighborTerrain],
+          });
+        } else {
+          // Alpha fallback — need background fill for deeper neighbors
+          hasAlphaFallback = true;
+          if (TERRAIN_DEPTH[neighborTerrain] < TERRAIN_DEPTH[myTerrain]) {
+            // Draw neighbor's base fill as background layer (depth-based mask)
+            const neighborDepth = TERRAIN_DEPTH[neighborTerrain];
+            const bgMask = computeMask(tx, ty, getTerrain, (id) => {
+              const d = TERRAIN_DEPTH[tileIdToTerrainId(id)];
+              return d >= neighborDepth;
+            });
+            const baseFill = blendGraph.getBaseFill(neighborTerrain);
+            if (baseFill) {
+              // Use the base fill sheet but at the masked sprite position
+              const bgSprite = GM_BLOB_LOOKUP[bgMask & 0xff] ?? 0;
+              const bgCol = bgSprite & 0xff;
+              const bgRow = bgSprite >> 8;
+              layers.push({
+                packed: packBlend(baseFill.sheetIndex, bgCol, bgRow),
+                category: 0, // background fill
+                depth: neighborDepth,
+              });
+            }
+          }
+        }
+      }
+
+      // Add single alpha overlay for the tile's own terrain (if any alpha fallbacks)
+      if (hasAlphaFallback) {
+        const alpha = blendGraph.getAlpha(myTerrain);
+        if (alpha) {
+          // Alpha mask: only my terrain is "in group" — fades at ALL foreign edges
+          const alphaMask = computeMask(
+            tx,
+            ty,
+            getTerrain,
+            (id) => tileIdToTerrainId(id) === myTerrain,
+          );
+          const alphaSprite = GM_BLOB_LOOKUP[alphaMask & 0xff] ?? 0;
+          const alphaCol = alphaSprite & 0xff;
+          const alphaRow = alphaSprite >> 8;
+          layers.push({
+            packed: packBlend(alpha.sheetIndex, alphaCol, alphaRow),
+            category: 2, // alpha overlay
+            depth: TERRAIN_DEPTH[myTerrain],
+          });
+        }
+      }
+
+      // Sort: background fills (cat 0, by depth asc) → dedicated pairs (cat 1, by depth asc) → alpha (cat 2)
+      layers.sort((a, b) => a.category - b.category || a.depth - b.depth);
+
+      // Pack into chunk.blendLayers
+      const count = Math.min(layers.length, MAX_BLEND_LAYERS);
+      for (let i = 0; i < count; i++) {
+        chunk.blendLayers[tileOffset + i] = layers[i]?.packed ?? 0;
       }
     }
   }

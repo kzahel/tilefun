@@ -1,3 +1,4 @@
+import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { TileId } from "./TileRegistry.js";
 
@@ -25,6 +26,12 @@ export class Chunk {
   readonly detail: Uint16Array;
   /** Per-layer autotile caches. Each is packed (row<<8 | col), 0 = no autotile. */
   readonly autotileLayers: Uint16Array[];
+  /**
+   * Per-tile blend layer data for graph renderer.
+   * Flat array: MAX_BLEND_LAYERS slots per tile, 256 tiles.
+   * Each entry: (sheetIndex << 16 | spriteCol << 8 | spriteRow), 0 = empty.
+   */
+  readonly blendLayers: Uint32Array;
   /** Collision bitfield per tile. */
   readonly collision: Uint8Array;
 
@@ -43,6 +50,7 @@ export class Chunk {
     for (let i = 0; i < layerCount; i++) {
       this.autotileLayers.push(new Uint16Array(AREA));
     }
+    this.blendLayers = new Uint32Array(MAX_BLEND_LAYERS * AREA);
     this.collision = new Uint8Array(AREA);
   }
 

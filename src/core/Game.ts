@@ -1,7 +1,7 @@
 import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
-import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
+import { BlendGraph } from "../autotile/BlendGraph.js";
 import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
@@ -10,6 +10,8 @@ import {
   PLAYER_SPRITE_SIZE,
   TILE_SIZE,
 } from "../config/constants.js";
+import { EditorMode } from "../editor/EditorMode.js";
+import { EditorPanel } from "../editor/EditorPanel.js";
 import { createChicken } from "../entities/Chicken.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
@@ -23,7 +25,8 @@ import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { CollisionFlag, TileId } from "../world/TileRegistry.js";
+import { CollisionFlag, getCollisionForTerrain, TileId } from "../world/TileRegistry.js";
+import { tileToChunk, tileToLocal } from "../world/types.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
@@ -43,7 +46,11 @@ export class Game {
   private player: Entity;
   private debugEnabled = false;
   private debugPanel: DebugPanel;
+  private editorEnabled = false;
+  private editorMode: EditorMode;
+  private editorPanel: EditorPanel;
   private currentSeed: string;
+  private blendGraph: BlendGraph;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -63,7 +70,10 @@ export class Game {
     this.entityManager = new EntityManager();
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
+    this.blendGraph = new BlendGraph();
     this.debugPanel = new DebugPanel(DEFAULT_SEED);
+    this.editorMode = new EditorMode(canvas, this.camera);
+    this.editorPanel = new EditorPanel();
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha) => this.render(alpha),
@@ -79,27 +89,54 @@ export class Game {
         this.debugEnabled = !this.debugEnabled;
         this.debugPanel.visible = this.debugEnabled;
       }
+      if (e.key === "Tab") {
+        e.preventDefault();
+        this.toggleEditor();
+      }
     });
+    this.createEditorButton();
     this.input.attach();
     this.touchJoystick.attach();
 
-    // Load terrain layer sheets (data-driven from TERRAIN_LAYERS)
-    const [layerImages, shallowWaterImg, objectsImg, playerImg, chickenImg] = await Promise.all([
-      Promise.all(TERRAIN_LAYERS.map((layer) => loadImage(layer.assetPath))),
-      loadImage("assets/tilesets/me-autotile-03.png"),
+    // Load blend graph sheets (11 ME autotile sheets) + entity sheets
+    const blendDescs = this.blendGraph.allSheets;
+    const [blendImages, objectsImg, playerImg, chickenImg] = await Promise.all([
+      Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
       loadImage("assets/tilesets/objects.png"),
       loadImage("assets/sprites/player.png"),
       loadImage("assets/sprites/chicken.png"),
     ]);
 
-    for (const [i, layer] of TERRAIN_LAYERS.entries()) {
-      const img = layerImages[i];
+    // Build indexed blend sheet array for the graph renderer
+    const blendSheets: Spritesheet[] = [];
+    for (const [i, desc] of blendDescs.entries()) {
+      const img = blendImages[i];
       if (img) {
-        this.sheets.set(layer.sheetKey, new Spritesheet(img, TILE_SIZE, TILE_SIZE));
+        const sheet = new Spritesheet(img, TILE_SIZE, TILE_SIZE);
+        blendSheets.push(sheet);
+        this.sheets.set(desc.sheetKey, sheet);
       }
     }
-    // ME sheet #3 (water_shallow/grass): primary fill at (1,0) = solid shallow water
-    this.sheets.set("shallowwater", new Spritesheet(shallowWaterImg, TILE_SIZE, TILE_SIZE));
+    // "shallowwater" alias — uses me03 (water_shallow/grass) fill at (1,0)
+    const me03Sheet = this.sheets.get("me03");
+    if (me03Sheet) {
+      this.sheets.set("shallowwater", me03Sheet);
+    }
+    this.tileRenderer.setBlendSheets(blendSheets, this.blendGraph);
+    this.tileRenderer.useGraphRenderer = true;
+
+    // Legacy layer sheet aliases (same PNGs already loaded via blend graph)
+    const legacyAliases: [string, string][] = [
+      ["deepwater", "me16"],
+      ["sand", "me08"],
+      ["grassalpha", "me13"],
+      ["dirt", "me02"],
+    ];
+    for (const [legacyKey, blendKey] of legacyAliases) {
+      const sheet = this.sheets.get(blendKey);
+      if (sheet) this.sheets.set(legacyKey, sheet);
+    }
+
     this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
     this.sheets.set("player", new Spritesheet(playerImg, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
     this.sheets.set(
@@ -109,7 +146,7 @@ export class Game {
 
     // Pre-load chunks around origin and compute initial autotile
     this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-    this.world.computeAutotile();
+    this.world.computeAutotile(this.blendGraph);
 
     // Move player to a walkable tile near origin
     this.findWalkableSpawn(this.player);
@@ -121,6 +158,38 @@ export class Game {
     this.canvas.dataset.ready = "true";
   }
 
+  private editorButton: HTMLButtonElement | null = null;
+
+  private toggleEditor(): void {
+    this.editorEnabled = !this.editorEnabled;
+    this.editorPanel.visible = this.editorEnabled;
+    if (this.editorButton) {
+      this.editorButton.textContent = this.editorEnabled ? "Play" : "Edit";
+    }
+    if (this.editorEnabled) {
+      this.touchJoystick.detach();
+      this.editorMode.attach();
+    } else {
+      this.editorMode.detach();
+      this.touchJoystick.attach();
+    }
+  }
+
+  private createEditorButton(): void {
+    const btn = document.createElement("button");
+    btn.textContent = "Edit";
+    btn.style.cssText = `
+      position: fixed; top: 8px; left: 8px; z-index: 100;
+      font: bold 14px monospace; padding: 8px 16px;
+      background: rgba(0,0,0,0.6); color: #fff;
+      border: 1px solid #888; border-radius: 4px;
+      cursor: pointer; user-select: none;
+    `;
+    btn.addEventListener("click", () => this.toggleEditor());
+    document.body.appendChild(btn);
+    this.editorButton = btn;
+  }
+
   private resize(): void {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
@@ -129,11 +198,34 @@ export class Game {
 
   private update(dt: number): void {
     // Apply debug panel state
-    this.camera.zoom = this.debugPanel.zoom;
+    if (!this.editorEnabled) {
+      this.camera.zoom = this.debugPanel.zoom;
+    }
     const newSeed = this.debugPanel.consumeSeedChange();
     const newStrategy = this.debugPanel.consumeStrategyChange();
     if (newSeed !== null || newStrategy !== null) {
       this.regenerateWorld(newSeed ?? this.currentSeed);
+    }
+
+    // Editor mode: paint terrain, skip gameplay
+    if (this.editorEnabled) {
+      this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
+
+      // Apply terrain edits
+      for (const edit of this.editorMode.consumePendingEdits()) {
+        this.applyTerrainEdit(edit.tx, edit.ty, edit.tileId);
+      }
+
+      // Handle clear canvas
+      const clearId = this.editorPanel.consumeClearRequest();
+      if (clearId !== null) {
+        this.clearAllTerrain(clearId);
+      }
+
+      // Still load chunks (camera may have panned)
+      this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
+      this.world.computeAutotile(this.blendGraph);
+      return;
     }
 
     // Player input → velocity + animation state
@@ -184,7 +276,7 @@ export class Game {
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
     }
     // Compute autotile for newly loaded chunks
-    this.world.computeAutotile();
+    this.world.computeAutotile(this.blendGraph);
   }
 
   private render(_alpha: number): void {
@@ -199,6 +291,12 @@ export class Game {
     const visible = this.camera.getVisibleChunkRange();
     // Terrain, autotile, and details are all baked into the chunk cache
     this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.sheets, visible);
+
+    // Editor overlays (grid + cursor highlight)
+    if (this.editorEnabled) {
+      this.drawEditorGrid(visible);
+      this.drawCursorHighlight();
+    }
 
     // Draw entities Y-sorted on top of terrain
     drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets);
@@ -246,15 +344,120 @@ export class Game {
       );
     }
 
-    // Touch joystick overlay (on top of everything)
-    this.touchJoystick.draw(this.ctx);
+    // Touch joystick overlay (not in editor mode)
+    if (!this.editorEnabled) {
+      this.touchJoystick.draw(this.ctx);
+    }
+  }
+
+  private applyTerrainEdit(tx: number, ty: number, tileId: TileId): void {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (!chunk) return;
+
+    chunk.setTerrain(lx, ly, tileId);
+    chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
+    chunk.setDetail(lx, ly, TileId.Empty);
+    chunk.dirty = true;
+    chunk.autotileComputed = false;
+
+    // Invalidate neighbor chunks if tile is on a chunk edge
+    if (lx === 0) this.invalidateChunk(cx - 1, cy);
+    if (lx === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy);
+    if (ly === 0) this.invalidateChunk(cx, cy - 1);
+    if (ly === CHUNK_SIZE - 1) this.invalidateChunk(cx, cy + 1);
+    if (lx === 0 && ly === 0) this.invalidateChunk(cx - 1, cy - 1);
+    if (lx === CHUNK_SIZE - 1 && ly === 0) this.invalidateChunk(cx + 1, cy - 1);
+    if (lx === 0 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx - 1, cy + 1);
+    if (lx === CHUNK_SIZE - 1 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy + 1);
+  }
+
+  private invalidateChunk(cx: number, cy: number): void {
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (chunk) {
+      chunk.autotileComputed = false;
+      chunk.dirty = true;
+    }
+  }
+
+  private clearAllTerrain(tileId: TileId): void {
+    const collision = getCollisionForTerrain(tileId);
+    for (const [, chunk] of this.world.chunks.entries()) {
+      chunk.fillTerrain(tileId);
+      chunk.fillCollision(collision);
+      // Clear details
+      for (let i = 0; i < CHUNK_SIZE * CHUNK_SIZE; i++) {
+        chunk.setDetail(i % CHUNK_SIZE, Math.floor(i / CHUNK_SIZE), TileId.Empty);
+      }
+      chunk.dirty = true;
+      chunk.autotileComputed = false;
+    }
+  }
+
+  private drawEditorGrid(visible: {
+    minCx: number;
+    minCy: number;
+    maxCx: number;
+    maxCy: number;
+  }): void {
+    if (this.camera.zoom < 0.3) return;
+
+    const ctx = this.ctx;
+    ctx.save();
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+    ctx.lineWidth = 1;
+
+    const minTx = visible.minCx * CHUNK_SIZE;
+    const maxTx = (visible.maxCx + 1) * CHUNK_SIZE;
+    const minTy = visible.minCy * CHUNK_SIZE;
+    const maxTy = (visible.maxCy + 1) * CHUNK_SIZE;
+
+    // Horizontal lines
+    for (let ty = minTy; ty <= maxTy; ty++) {
+      const left = this.camera.worldToScreen(minTx * TILE_SIZE, ty * TILE_SIZE);
+      const right = this.camera.worldToScreen(maxTx * TILE_SIZE, ty * TILE_SIZE);
+      ctx.beginPath();
+      ctx.moveTo(left.sx, left.sy);
+      ctx.lineTo(right.sx, right.sy);
+      ctx.stroke();
+    }
+
+    // Vertical lines
+    for (let tx = minTx; tx <= maxTx; tx++) {
+      const top = this.camera.worldToScreen(tx * TILE_SIZE, minTy * TILE_SIZE);
+      const bottom = this.camera.worldToScreen(tx * TILE_SIZE, maxTy * TILE_SIZE);
+      ctx.beginPath();
+      ctx.moveTo(top.sx, top.sy);
+      ctx.lineTo(bottom.sx, bottom.sy);
+      ctx.stroke();
+    }
+
+    ctx.restore();
+  }
+
+  private drawCursorHighlight(): void {
+    const tx = this.editorMode.cursorTileX;
+    const ty = this.editorMode.cursorTileY;
+    if (!Number.isFinite(tx)) return;
+
+    const tileScreen = this.camera.worldToScreen(tx * TILE_SIZE, ty * TILE_SIZE);
+    const tileScreenSize = TILE_SIZE * this.camera.scale;
+
+    this.ctx.save();
+    this.ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+    this.ctx.lineWidth = 2;
+    this.ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+    this.ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+    this.ctx.restore();
   }
 
   private regenerateWorld(seed: string): void {
     this.currentSeed = seed;
     this.world = new World(seed);
     this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-    this.world.computeAutotile();
+    this.world.computeAutotile(this.blendGraph);
     // Remove all NPCs, re-spawn
     this.entityManager.entities.length = 0;
     this.entityManager.spawn(this.player);
