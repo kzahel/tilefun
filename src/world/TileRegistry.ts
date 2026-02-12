@@ -1,3 +1,5 @@
+import { TerrainId } from "../autotile/TerrainId.js";
+
 /** Tile type identifiers. 0 is reserved for "empty". */
 export enum TileId {
   Empty = 0,
@@ -50,6 +52,29 @@ export function getCollisionForTerrain(tileId: TileId): number {
       return CollisionFlag.SlowWalk;
     default:
       return CollisionFlag.None;
+  }
+}
+
+/**
+ * Map TerrainId to TileId for chunk terrain derivation.
+ * SandLight maps to Sand, DirtLight/DirtWarm map to DirtPath (no dedicated TileIds).
+ */
+export function terrainIdToTileId(terrain: TerrainId): TileId {
+  switch (terrain) {
+    case TerrainId.DeepWater:
+      return TileId.DeepWater;
+    case TerrainId.ShallowWater:
+      return TileId.Water;
+    case TerrainId.Sand:
+    case TerrainId.SandLight:
+      return TileId.Sand;
+    case TerrainId.Grass:
+      return TileId.Grass;
+    case TerrainId.DirtLight:
+    case TerrainId.DirtWarm:
+      return TileId.DirtPath;
+    default:
+      return TileId.Grass;
   }
 }
 

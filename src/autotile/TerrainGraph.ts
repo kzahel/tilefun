@@ -26,19 +26,6 @@ export function deriveTerrainIdFromCorners(
 // --- Legacy BiomeId-based functions below ---
 
 /**
- * @legacy Terrain priority for corner-to-tile derivation.
- * Higher-priority terrain wins ties because higher autotile layers cover lower ones.
- */
-export const TERRAIN_PRIORITY: Record<BiomeId, number> = {
-  [BiomeId.DeepWater]: 0,
-  [BiomeId.ShallowWater]: 1,
-  [BiomeId.Sand]: 2,
-  [BiomeId.Grass]: 3,
-  [BiomeId.Forest]: 4,
-  [BiomeId.DenseForest]: 5,
-};
-
-/**
  * @legacy Valid biome adjacency pairs. Each pair means the two biomes can be
  * directly adjacent at corner positions. Self-adjacency is always valid.
  */

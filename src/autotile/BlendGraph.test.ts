@@ -176,8 +176,13 @@ describe("BlendGraph", () => {
   describe("alpha overlays", () => {
     it("provides alpha for terrains that have alpha sheets", () => {
       // Grass, Sand, SandLight, water terrains have alpha
-      for (const t of [TerrainId.Grass, TerrainId.Sand, TerrainId.SandLight,
-        TerrainId.ShallowWater, TerrainId.DeepWater]) {
+      for (const t of [
+        TerrainId.Grass,
+        TerrainId.Sand,
+        TerrainId.SandLight,
+        TerrainId.ShallowWater,
+        TerrainId.DeepWater,
+      ]) {
         const alpha = graph.getAlpha(t);
         expect(alpha, `Missing alpha for ${TerrainId[t]}`).toBeDefined();
         if (alpha) {

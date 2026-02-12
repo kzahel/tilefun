@@ -4,7 +4,6 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { terrainIdToTileId } from "../autotile/terrainMapping.js";
 import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
@@ -29,7 +28,12 @@ import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { CollisionFlag, getCollisionForTerrain, TileId } from "../world/TileRegistry.js";
+import {
+  CollisionFlag,
+  getCollisionForTerrain,
+  TileId,
+  terrainIdToTileId,
+} from "../world/TileRegistry.js";
 import { tileToChunk, tileToLocal } from "../world/types.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
@@ -464,8 +468,7 @@ export class Game {
     // Shared with top neighbor chunk
     if (lsy === 0) this.setSubgridInChunk(cx, cy - 1, lsx, S, terrainId);
     // Shared with diagonal neighbor chunk
-    if (lsx === 0 && lsy === 0)
-      this.setSubgridInChunk(cx - 1, cy - 1, S, S, terrainId);
+    if (lsx === 0 && lsy === 0) this.setSubgridInChunk(cx - 1, cy - 1, S, S, terrainId);
   }
 
   private setSubgridInChunk(

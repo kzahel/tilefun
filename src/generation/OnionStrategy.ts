@@ -4,7 +4,7 @@ import {
   getValidFallback,
   isValidAdjacency,
 } from "../autotile/TerrainGraph.js";
-import { biomeIdToTerrainId } from "../autotile/terrainMapping.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
@@ -53,6 +53,16 @@ const FOREST_DETAILS: TileId[] = [
 /** Detail noise threshold: values above this get a detail tile. */
 const DETAIL_THRESHOLD_GRASS = 0.72;
 const DETAIL_THRESHOLD_FOREST = 0.55;
+
+/** BiomeId → TerrainId. Forest/DenseForest collapse to Grass. */
+const BIOME_TO_TERRAIN: Record<BiomeId, TerrainId> = {
+  [BiomeId.DeepWater]: TerrainId.DeepWater,
+  [BiomeId.ShallowWater]: TerrainId.ShallowWater,
+  [BiomeId.Sand]: TerrainId.Sand,
+  [BiomeId.Grass]: TerrainId.Grass,
+  [BiomeId.Forest]: TerrainId.Grass,
+  [BiomeId.DenseForest]: TerrainId.Grass,
+};
 
 /** Path noise band — values in this range become DirtPath. */
 const PATH_BAND_LOW = 0.48;
@@ -166,7 +176,7 @@ export class OnionStrategy implements TerrainStrategy {
     for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
       for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
         const biome = chunk.getSubgrid(sx, sy) as BiomeId;
-        chunk.setSubgrid(sx, sy, biomeIdToTerrainId(biome));
+        chunk.setSubgrid(sx, sy, BIOME_TO_TERRAIN[biome]);
       }
     }
   }

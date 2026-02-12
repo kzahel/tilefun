@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { BiomeId } from "../generation/BiomeMapper.js";
 import { Chunk } from "../world/Chunk.js";
-import { TileId } from "../world/TileRegistry.js";
+import { TileId, terrainIdToTileId } from "../world/TileRegistry.js";
 import {
   deriveTerrainFromCorners,
   deriveTerrainIdFromCorners,
@@ -10,7 +10,6 @@ import {
   isValidAdjacency,
 } from "./TerrainGraph.js";
 import { TerrainId } from "./TerrainId.js";
-import { terrainIdToTileId } from "./terrainMapping.js";
 
 describe("isValidAdjacency", () => {
   it("allows self-adjacency for all biomes", () => {
