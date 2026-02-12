@@ -6,6 +6,7 @@ import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
   CHUNK_SIZE,
+  ENTITY_ACTIVATION_DISTANCE,
   PLAYER_SPRITE_SIZE,
   TILE_SIZE,
 } from "../config/constants.js";
@@ -123,15 +124,27 @@ export class Game {
     const movement = this.input.getMovement();
     updatePlayerFromInput(this.player, movement, dt);
 
-    // NPC AI → velocity + animation state
+    // NPC AI → velocity + animation state (freeze entities far from player)
+    const px = this.player.position.wx;
+    const py = this.player.position.wy;
     for (const entity of this.entityManager.entities) {
       if (entity.wanderAI) {
+        const dx = Math.abs(entity.position.wx - px);
+        const dy = Math.abs(entity.position.wy - py);
+        if (dx > ENTITY_ACTIVATION_DISTANCE || dy > ENTITY_ACTIVATION_DISTANCE) {
+          if (entity.velocity) {
+            entity.velocity.vx = 0;
+            entity.velocity.vy = 0;
+          }
+          continue;
+        }
         updateWanderAI(entity, dt, Math.random);
       }
     }
 
     // Update all entities (velocity → collision-resolved position, animation timers)
-    this.entityManager.update(dt, (tx, ty) => this.world.getCollision(tx, ty));
+    // Uses non-creating collision lookup to avoid regenerating unloaded chunks
+    this.entityManager.update(dt, (tx, ty) => this.world.getCollisionIfLoaded(tx, ty));
 
     // Camera follows player
     this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);

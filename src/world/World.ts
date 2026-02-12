@@ -2,7 +2,12 @@ import { computeChunkAllLayers } from "../autotile/Autotiler.js";
 import { WorldGenerator } from "../generation/WorldGenerator.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
-import { registerDefaultTiles, TileId, type TileId as TileIdType } from "./TileRegistry.js";
+import {
+  CollisionFlag,
+  registerDefaultTiles,
+  TileId,
+  type TileId as TileIdType,
+} from "./TileRegistry.js";
 import { tileToChunk, tileToLocal } from "./types.js";
 
 const DEFAULT_SEED = "tilefun-default";
@@ -40,6 +45,15 @@ export class World {
     const { cx, cy } = tileToChunk(tx, ty);
     const { lx, ly } = tileToLocal(tx, ty);
     return this.chunks.getOrCreate(cx, cy).getCollision(lx, ly);
+  }
+
+  /** Get collision flags without creating chunks. Returns blocking for unloaded chunks. */
+  getCollisionIfLoaded(tx: number, ty: number): number {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const chunk = this.chunks.get(cx, cy);
+    if (!chunk) return CollisionFlag.Solid | CollisionFlag.Water;
+    const { lx, ly } = tileToLocal(tx, ty);
+    return chunk.getCollision(lx, ly);
   }
 
   /** Get chunk at chunk coordinates (creates if needed). */

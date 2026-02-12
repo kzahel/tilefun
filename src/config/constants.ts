@@ -42,3 +42,6 @@ export const WATER_FRAME_COUNT = 4;
 
 /** Duration of each water animation frame (milliseconds). */
 export const WATER_FRAME_DURATION_MS = 250;
+
+/** Entities beyond this Chebyshev distance from the player are frozen (world pixels). */
+export const ENTITY_ACTIVATION_DISTANCE = CHUNK_SIZE_PX * (UNLOAD_DISTANCE - 1);
