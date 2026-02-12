@@ -3,6 +3,50 @@ import { TileId } from "../world/TileRegistry.js";
 import { TerrainId } from "./TerrainId.js";
 
 /**
+ * Map TerrainId to TileId for chunk terrain derivation.
+ * SandLight maps to Sand, DirtLight/DirtWarm map to DirtPath (no dedicated TileIds).
+ */
+export function terrainIdToTileId(terrain: TerrainId): TileId {
+  switch (terrain) {
+    case TerrainId.DeepWater:
+      return TileId.DeepWater;
+    case TerrainId.ShallowWater:
+      return TileId.Water;
+    case TerrainId.Sand:
+    case TerrainId.SandLight:
+      return TileId.Sand;
+    case TerrainId.Grass:
+      return TileId.Grass;
+    case TerrainId.DirtLight:
+    case TerrainId.DirtWarm:
+      return TileId.DirtPath;
+    default:
+      return TileId.Grass;
+  }
+}
+
+/**
+ * Map BiomeId to TerrainId. Forest/DenseForest collapse to Grass.
+ * CRITICAL: BiomeId.Grass=3 maps to TerrainId.Grass=4, NOT a direct cast.
+ */
+export function biomeIdToTerrainId(biome: BiomeId): TerrainId {
+  switch (biome) {
+    case BiomeId.DeepWater:
+      return TerrainId.DeepWater;
+    case BiomeId.ShallowWater:
+      return TerrainId.ShallowWater;
+    case BiomeId.Sand:
+      return TerrainId.Sand;
+    case BiomeId.Grass:
+    case BiomeId.Forest:
+    case BiomeId.DenseForest:
+      return TerrainId.Grass;
+    default:
+      return TerrainId.Grass;
+  }
+}
+
+/**
  * Map TileId (from any generation strategy) to TerrainId (for the graph renderer).
  * Forest/DenseForest collapse to Grass. DirtPath maps to DirtWarm.
  */
@@ -25,7 +69,7 @@ export function tileIdToTerrainId(tileId: TileId): TerrainId {
   }
 }
 
-/** Map TileId to BiomeId for corner-based editing. */
+/** @legacy Map TileId to BiomeId for corner-based editing. */
 export function tileIdToBiomeId(tileId: TileId): BiomeId {
   switch (tileId) {
     case TileId.DeepWater:
@@ -43,7 +87,7 @@ export function tileIdToBiomeId(tileId: TileId): BiomeId {
   }
 }
 
-/** Map BiomeId back to TileId for terrain derivation from corners. */
+/** @legacy Map BiomeId back to TileId for terrain derivation from corners. */
 export function biomeIdToTileId(biome: BiomeId): TileId {
   switch (biome) {
     case BiomeId.DeepWater:

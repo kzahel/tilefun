@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE } from "../config/constants.js";
+import { BiomeId } from "../generation/BiomeMapper.js";
 import { Chunk } from "../world/Chunk.js";
 import { TileId } from "../world/TileRegistry.js";
 import {
@@ -7,6 +8,7 @@ import {
   canonicalize,
   computeChunkAllLayers,
   computeChunkBlendLayers,
+  computeChunkCornerBlend,
   computeMask,
 } from "./Autotiler.js";
 import { BlendGraph, MAX_BLEND_LAYERS } from "./BlendGraph.js";
@@ -494,5 +496,164 @@ describe("computeChunkBlendLayers", () => {
     for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
       expect(chunk.blendLayers[tileOffset + s]).toBe(0);
     }
+  });
+});
+
+describe("computeChunkCornerBlend", () => {
+  const blendGraph = new BlendGraph();
+  const B = BiomeId;
+
+  /** Unpack sheetIndex from a packed blend layer value. */
+  function unpackSheet(packed: number): number {
+    return (packed >> 16) & 0xffff;
+  }
+
+  /** Create a chunk with all corners set to the given BiomeId. */
+  function makeUniformChunk(biome: number): Chunk {
+    const chunk = new Chunk(LAYER_COUNT);
+    const cornerSize = CHUNK_SIZE + 1;
+    for (let cy = 0; cy < cornerSize; cy++) {
+      for (let cx = 0; cx < cornerSize; cx++) {
+        chunk.setCorner(cx, cy, biome);
+      }
+    }
+    return chunk;
+  }
+
+  it("produces no blend layers for uniform grass chunk", () => {
+    const chunk = makeUniformChunk(B.Grass);
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    for (let i = 0; i < MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE; i++) {
+      expect(chunk.blendLayers[i]).toBe(0);
+    }
+  });
+
+  it("produces no blend layers for uniform water chunk", () => {
+    const chunk = makeUniformChunk(B.ShallowWater);
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    for (let i = 0; i < MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE; i++) {
+      expect(chunk.blendLayers[i]).toBe(0);
+    }
+  });
+
+  it("single water corner produces blend layers on the 4 sharing tiles only (no fan-out)", () => {
+    const chunk = makeUniformChunk(B.Grass);
+
+    // Paint a single ShallowWater corner at (5, 5)
+    chunk.setCorner(5, 5, B.ShallowWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // The 4 tiles sharing corner (5,5): (4,4), (5,4), (4,5), (5,5)
+    const affectedTiles = [
+      [4, 4],
+      [5, 4],
+      [4, 5],
+      [5, 5],
+    ] as const;
+
+    for (const [lx, ly] of affectedTiles) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+      let hasLayer = false;
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        if (chunk.blendLayers[tileOffset + s] !== 0) {
+          hasLayer = true;
+          break;
+        }
+      }
+      expect(hasLayer).toBe(true);
+    }
+
+    // Non-sharing tiles should have NO blend layers (no fan-out)
+    const unaffectedTiles = [
+      [3, 3],
+      [6, 3],
+      [3, 6],
+      [6, 6],
+      [5, 3],
+      [3, 5],
+      [8, 8],
+    ] as const;
+
+    for (const [lx, ly] of unaffectedTiles) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        expect(chunk.blendLayers[tileOffset + s]).toBe(0);
+      }
+    }
+  });
+
+  it("uses dedicated pair sheet for grass/water corner blend", () => {
+    const chunk = makeUniformChunk(B.Grass);
+
+    // Set SE corner of tile (4,4) to water — corners (5,5)
+    chunk.setCorner(5, 5, B.ShallowWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Tile (4,4) has corners: NW=grass, NE=grass, SW=grass, SE=water
+    // Base = water (lower depth), overlay = grass
+    // blendGraph.getBlend(Grass, ShallowWater) → me15 (dedicated)
+    const tileOffset = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    const packed = chunk.blendLayers[tileOffset];
+    expect(packed).toBeGreaterThan(0);
+
+    const entry = blendGraph.getBlend(TerrainId.Grass, TerrainId.ShallowWater);
+    expect(entry).toBeDefined();
+    expect(unpackSheet(packed ?? 0)).toBe(entry?.sheetIndex);
+  });
+
+  it("two adjacent water corners produce a wider transition zone", () => {
+    const chunk = makeUniformChunk(B.Grass);
+
+    // Two adjacent water corners: (5,5) and (6,5)
+    chunk.setCorner(5, 5, B.ShallowWater);
+    chunk.setCorner(6, 5, B.ShallowWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Tiles sharing either corner: (4,4), (5,4), (6,4), (4,5), (5,5), (6,5)
+    const affectedTiles = [
+      [4, 4],
+      [5, 4],
+      [6, 4],
+      [4, 5],
+      [5, 5],
+      [6, 5],
+    ] as const;
+
+    for (const [lx, ly] of affectedTiles) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+      let hasLayer = false;
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        if (chunk.blendLayers[tileOffset + s] !== 0) {
+          hasLayer = true;
+          break;
+        }
+      }
+      expect(hasLayer).toBe(true);
+    }
+  });
+
+  it("Forest/DenseForest corners collapse to Grass (no blend layers)", () => {
+    const chunk = makeUniformChunk(B.Grass);
+    // Set some corners to Forest — maps to TerrainId.Grass via biomeIdToTerrainId
+    chunk.setCorner(5, 5, B.Forest);
+    chunk.setCorner(6, 5, B.DenseForest);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // All corners map to Grass → uniform → no blend layers
+    for (let i = 0; i < MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE; i++) {
+      expect(chunk.blendLayers[i]).toBe(0);
+    }
+  });
+
+  it("respects MAX_BLEND_LAYERS cap", () => {
+    const chunk = makeUniformChunk(B.Grass);
+    computeChunkCornerBlend(chunk, blendGraph);
+    expect(chunk.blendLayers.length).toBe(MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE);
   });
 });

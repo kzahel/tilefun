@@ -3,9 +3,15 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import { BiomeId } from "../generation/BiomeMapper.js";
 import { Chunk } from "../world/Chunk.js";
 import { TileId } from "../world/TileRegistry.js";
+import {
+  deriveTerrainFromCorners,
+  deriveTerrainIdFromCorners,
+  getValidFallback,
+  isValidAdjacency,
+} from "./TerrainGraph.js";
+import { TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
 import { biomeIdToTileId } from "./terrainMapping.js";
-import { deriveTerrainFromCorners, getValidFallback, isValidAdjacency } from "./TerrainGraph.js";
 
 describe("isValidAdjacency", () => {
   it("allows self-adjacency for all biomes", () => {
@@ -188,7 +194,12 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
 
     // Paint water, re-derive
     chunk.setCorner(5, 5, BiomeId.ShallowWater);
-    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+    for (const [lx, ly] of [
+      [4, 4],
+      [5, 4],
+      [4, 5],
+      [5, 5],
+    ] as const) {
       rederiveTile(chunk, lx, ly);
     }
 
@@ -197,12 +208,22 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
 
     // Paint back to grass
     chunk.setCorner(5, 5, BiomeId.Grass);
-    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+    for (const [lx, ly] of [
+      [4, 4],
+      [5, 4],
+      [4, 5],
+      [5, 5],
+    ] as const) {
       rederiveTile(chunk, lx, ly);
     }
 
     // All 4 should be Grass again
-    for (const [lx, ly] of [[4, 4], [5, 4], [4, 5], [5, 5]] as const) {
+    for (const [lx, ly] of [
+      [4, 4],
+      [5, 4],
+      [4, 5],
+      [5, 5],
+    ] as const) {
       expect(chunk.getTerrain(lx, ly)).toBe(TileId.Grass);
     }
   });
@@ -233,5 +254,73 @@ describe("corner edit integration: single corner on flat grass chunk", () => {
     for (const [lx, ly] of affectedTiles) {
       expect(chunk.getTerrain(lx, ly)).toBe(TileId.Water);
     }
+  });
+});
+
+describe("deriveTerrainIdFromCorners", () => {
+  it("returns the terrain when all 4 corners are the same", () => {
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.Grass,
+        TerrainId.Grass,
+        TerrainId.Grass,
+        TerrainId.Grass,
+      ),
+    ).toBe(TerrainId.Grass);
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.DeepWater,
+        TerrainId.DeepWater,
+        TerrainId.DeepWater,
+        TerrainId.DeepWater,
+      ),
+    ).toBe(TerrainId.DeepWater);
+  });
+
+  it("returns lowest-depth terrain when corners differ", () => {
+    // ShallowWater(depth 1) < Grass(depth 4)
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.Grass,
+        TerrainId.Grass,
+        TerrainId.Grass,
+        TerrainId.ShallowWater,
+      ),
+    ).toBe(TerrainId.ShallowWater);
+  });
+
+  it("returns lowest-depth terrain with 3+ distinct terrains", () => {
+    // DeepWater(0) < ShallowWater(1) < Sand(2) < Grass(4)
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.DeepWater,
+        TerrainId.ShallowWater,
+        TerrainId.Sand,
+        TerrainId.Grass,
+      ),
+    ).toBe(TerrainId.DeepWater);
+  });
+
+  it("handles DirtWarm (depth 6) vs Grass (depth 4)", () => {
+    // Grass has lower depth → wins
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.DirtWarm,
+        TerrainId.DirtWarm,
+        TerrainId.DirtWarm,
+        TerrainId.Grass,
+      ),
+    ).toBe(TerrainId.Grass);
+  });
+
+  it("SandLight (depth 3) vs Grass (depth 4)", () => {
+    expect(
+      deriveTerrainIdFromCorners(
+        TerrainId.SandLight,
+        TerrainId.Grass,
+        TerrainId.SandLight,
+        TerrainId.Grass,
+      ),
+    ).toBe(TerrainId.SandLight);
   });
 });

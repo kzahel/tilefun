@@ -1,7 +1,31 @@
 import { BiomeId } from "../generation/BiomeMapper.js";
+import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 
 /**
- * Terrain priority for corner-to-tile derivation.
+ * Derive a tile's terrain from its 4 corner TerrainIds.
+ * Returns the lowest-depth terrain present in any corner.
+ * The base (lowest depth) terrain fills the tile; higher-depth overlays
+ * are rendered via blend layers on top.
+ */
+export function deriveTerrainIdFromCorners(
+  nw: TerrainId,
+  ne: TerrainId,
+  sw: TerrainId,
+  se: TerrainId,
+): TerrainId {
+  if (nw === ne && ne === sw && sw === se) return nw;
+
+  let base = nw;
+  if (TERRAIN_DEPTH[ne] < TERRAIN_DEPTH[base]) base = ne;
+  if (TERRAIN_DEPTH[sw] < TERRAIN_DEPTH[base]) base = sw;
+  if (TERRAIN_DEPTH[se] < TERRAIN_DEPTH[base]) base = se;
+  return base;
+}
+
+// --- Legacy BiomeId-based functions below ---
+
+/**
+ * @legacy Terrain priority for corner-to-tile derivation.
  * Higher-priority terrain wins ties because higher autotile layers cover lower ones.
  */
 export const TERRAIN_PRIORITY: Record<BiomeId, number> = {
@@ -14,7 +38,7 @@ export const TERRAIN_PRIORITY: Record<BiomeId, number> = {
 };
 
 /**
- * Valid biome adjacency pairs. Each pair means the two biomes can be
+ * @legacy Valid biome adjacency pairs. Each pair means the two biomes can be
  * directly adjacent at corner positions. Self-adjacency is always valid.
  */
 const VALID_PAIRS: ReadonlyArray<readonly [BiomeId, BiomeId]> = [
@@ -41,14 +65,14 @@ for (const [a, b] of VALID_PAIRS) {
   pairSet.add(b * 16 + a);
 }
 
-/** Check if two biomes can be directly adjacent. */
+/** @legacy Check if two biomes can be directly adjacent. */
 export function isValidAdjacency(a: BiomeId, b: BiomeId): boolean {
   if (a === b) return true;
   return pairSet.has(a * 16 + b);
 }
 
 /**
- * Given a corner's biome and an invalid neighbor biome,
+ * @legacy Given a corner's biome and an invalid neighbor biome,
  * return a fallback biome that is valid with the neighbor.
  * Grass is the universal buffer — it's adjacent to everything except DeepWater.
  */
@@ -58,7 +82,7 @@ export function getValidFallback(_myBiome: BiomeId, neighborBiome: BiomeId): Bio
 }
 
 /**
- * Derive a tile's biome from its 4 corner biomes.
+ * @legacy Derive a tile's biome from its 4 corner biomes.
  * Returns the lowest-priority biome present in any corner.
  * This ensures that painting a single lower-layer corner (e.g. water on grass)
  * immediately produces that terrain, with autotile transitions at edges.

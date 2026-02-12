@@ -1,13 +1,15 @@
 import { CHUNK_SIZE } from "../config/constants.js";
+import type { BiomeId } from "../generation/BiomeMapper.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { TileId } from "../world/TileRegistry.js";
 import type { BlendGraph } from "./BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "./BlendGraph.js";
 import { AutotileBit } from "./bitmask.js";
+import { computeCornerMask } from "./CornerBlend.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
-import { tileIdToTerrainId } from "./terrainMapping.js";
+import { biomeIdToTerrainId, tileIdToTerrainId } from "./terrainMapping.js";
 
 export { AutotileBit, canonicalize } from "./bitmask.js";
 
@@ -95,7 +97,97 @@ interface TileLayer {
 }
 
 /**
- * Compute per-tile blend layers for a chunk using the graph renderer.
+ * Compute per-tile blend layers from chunk corners (corner-based, no fan-out).
+ *
+ * For each tile, reads its 4 corners (currently BiomeId, converted to TerrainId),
+ * finds the base terrain (lowest depth), and for each overlay terrain computes
+ * a corner-based mask using computeCornerMask. No neighbor tiles are consulted —
+ * transitions are self-contained within mixed-corner tiles.
+ *
+ * @param blendGraph - The blend sheet selection graph.
+ */
+export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): void {
+  const layers: TileLayer[] = [];
+  const seen = new Uint8Array(8);
+
+  for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+    for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+
+      // Clear blend layer slots for this tile
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        chunk.blendLayers[tileOffset + s] = 0;
+      }
+
+      // Read corners and convert BiomeId → TerrainId
+      const nw = biomeIdToTerrainId(chunk.getCorner(lx, ly) as BiomeId);
+      const ne = biomeIdToTerrainId(chunk.getCorner(lx + 1, ly) as BiomeId);
+      const sw = biomeIdToTerrainId(chunk.getCorner(lx, ly + 1) as BiomeId);
+      const se = biomeIdToTerrainId(chunk.getCorner(lx + 1, ly + 1) as BiomeId);
+
+      // Skip uniform tiles — no blend needed
+      if (nw === ne && ne === sw && sw === se) continue;
+
+      // Find base terrain (lowest depth)
+      let base = nw;
+      if (TERRAIN_DEPTH[ne] < TERRAIN_DEPTH[base]) base = ne;
+      if (TERRAIN_DEPTH[sw] < TERRAIN_DEPTH[base]) base = sw;
+      if (TERRAIN_DEPTH[se] < TERRAIN_DEPTH[base]) base = se;
+
+      // Collect unique overlay terrains (not base), sorted by depth ascending
+      seen.fill(0);
+      seen[base] = 1;
+      const overlays: TerrainId[] = [];
+      for (const t of [nw, ne, sw, se]) {
+        if (!seen[t]) {
+          seen[t] = 1;
+          overlays.push(t);
+        }
+      }
+      overlays.sort((a, b) => TERRAIN_DEPTH[a] - TERRAIN_DEPTH[b]);
+
+      // Build blend layers
+      layers.length = 0;
+
+      for (const overlay of overlays) {
+        const entry = blendGraph.getBlend(overlay, base);
+        if (!entry) continue;
+
+        let mask: number;
+        if (entry.inverted) {
+          // Inverted: mask shows where BASE is present
+          mask = computeCornerMask(nw === base, ne === base, sw === base, se === base);
+          // Skip degenerate: base everywhere (255) or base nowhere (0)
+          if (mask === 0 || mask === 255) continue;
+        } else {
+          // Direct: mask shows where OVERLAY is present
+          mask = computeCornerMask(nw === overlay, ne === overlay, sw === overlay, se === overlay);
+        }
+
+        const sprite = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
+        const col = sprite & 0xff;
+        const row = sprite >> 8;
+        layers.push({
+          packed: packBlend(entry.sheetIndex, col, row),
+          category: entry.isAlpha ? 2 : 1,
+          depth: TERRAIN_DEPTH[overlay],
+        });
+      }
+
+      // Sort: dedicated pairs (cat 1, by depth asc) → alpha (cat 2, by depth asc)
+      layers.sort((a, b) => a.category - b.category || a.depth - b.depth);
+
+      // Pack into chunk.blendLayers
+      const count = Math.min(layers.length, MAX_BLEND_LAYERS);
+      for (let i = 0; i < count; i++) {
+        chunk.blendLayers[tileOffset + i] = layers[i]?.packed ?? 0;
+      }
+    }
+  }
+}
+
+/**
+ * @legacy Compute per-tile blend layers for a chunk using the graph renderer.
  *
  * For each tile, finds unique neighbor terrains, selects blend sheets
  * (dedicated pair or alpha fallback), computes independent masks, and
@@ -174,12 +266,7 @@ export function computeChunkBlendLayers(
             if (mask === 0 || mask === 255) continue;
           } else {
             // Direct: bits set where my terrain IS present
-            mask = computeMask(
-              tx,
-              ty,
-              getTerrain,
-              (id) => tileIdToTerrainId(id) === myTerrain,
-            );
+            mask = computeMask(tx, ty, getTerrain, (id) => tileIdToTerrainId(id) === myTerrain);
           }
           const sprite = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
           const col = sprite & 0xff;
