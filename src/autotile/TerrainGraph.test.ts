@@ -10,7 +10,6 @@ import {
   isValidAdjacency,
 } from "./TerrainGraph.js";
 import { TerrainId } from "./TerrainId.js";
-import { TERRAIN_LAYERS } from "./TerrainLayers.js";
 import { terrainIdToTileId } from "./terrainMapping.js";
 
 describe("isValidAdjacency", () => {
@@ -139,7 +138,7 @@ describe("corner edit integration: single corner on flat grass chunk (TerrainId 
   }
 
   function makeGrassChunk(): Chunk {
-    const chunk = new Chunk(TERRAIN_LAYERS.length);
+    const chunk = new Chunk();
     chunk.fillTerrain(TileId.Grass);
     const cornerSize = CHUNK_SIZE + 1;
     for (let cy = 0; cy < cornerSize; cy++) {

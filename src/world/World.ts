@@ -1,7 +1,4 @@
-import {
-  computeChunkAllLayers,
-  computeChunkCornerBlend,
-} from "../autotile/Autotiler.js";
+import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
@@ -76,23 +73,13 @@ export class World {
 
   /**
    * Run the autotile pass for chunks that need it.
-   * Should be called after updateLoadedChunks ensures all neighbors are generated.
-   * If blendGraph is provided, also computes per-tile blend layers for the graph renderer.
+   * Computes per-tile blend layers from corners using the blend graph.
    */
-  computeAutotile(blendGraph?: BlendGraph): void {
-    const getTerrain = (tx: number, ty: number) => this.getTerrainIfLoaded(tx, ty);
-
-    for (const [key, chunk] of this.chunks.entries()) {
+  computeAutotile(blendGraph: BlendGraph): void {
+    for (const [, chunk] of this.chunks.entries()) {
       if (chunk.autotileComputed) continue;
 
-      const commaIdx = key.indexOf(",");
-      const cx = Number(key.slice(0, commaIdx));
-      const cy = Number(key.slice(commaIdx + 1));
-
-      computeChunkAllLayers(chunk, cx, cy, getTerrain);
-      if (blendGraph) {
-        computeChunkCornerBlend(chunk, blendGraph);
-      }
+      computeChunkSubgridBlend(chunk, blendGraph);
       chunk.autotileComputed = true;
       chunk.dirty = true;
     }

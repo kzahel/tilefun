@@ -3,8 +3,7 @@ import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
-import type { TerrainId } from "../autotile/TerrainId.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { terrainIdToTileId } from "../autotile/terrainMapping.js";
 import {
   CAMERA_LERP,
@@ -108,6 +107,10 @@ export class Game {
         e.preventDefault();
         this.editorPanel.cycleBridgeDepth();
       }
+      if ((e.key === "s" || e.key === "S") && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.cycleBrushSize();
+      }
       if ((e.key === "d" || e.key === "D") && this.debugEnabled) {
         e.preventDefault();
         this.debugPanel.toggleBaseMode();
@@ -142,19 +145,6 @@ export class Game {
       this.sheets.set("shallowwater", me03Sheet);
     }
     this.tileRenderer.setBlendSheets(blendSheets, this.blendGraph);
-    this.tileRenderer.useGraphRenderer = true;
-
-    // Legacy layer sheet aliases (same PNGs already loaded via blend graph)
-    const legacyAliases: [string, string][] = [
-      ["deepwater", "me16"],
-      ["sand", "me08"],
-      ["grassalpha", "me13"],
-      ["dirt", "me02"],
-    ];
-    for (const [legacyKey, blendKey] of legacyAliases) {
-      const sheet = this.sheets.get(blendKey);
-      if (sheet) this.sheets.set(legacyKey, sheet);
-    }
 
     this.sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
     this.sheets.set("player", new Spritesheet(playerImg, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
@@ -248,14 +238,14 @@ export class Game {
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.brushMode = this.editorPanel.brushMode;
 
-      // Apply terrain edits (tile mode → set all 4 corners of the tile)
+      // Apply terrain edits (tile mode → set all 9 subgrid points of the tile)
       for (const edit of this.editorMode.consumePendingEdits()) {
         this.applyTileEdit(edit.tx, edit.ty, edit.terrainId);
       }
 
-      // Apply corner edits (corner mode)
-      for (const edit of this.editorMode.consumePendingCornerEdits()) {
-        this.applyCornerEdit(edit.gx, edit.gy, edit.terrainId);
+      // Apply subgrid edits (subgrid mode)
+      for (const edit of this.editorMode.consumePendingSubgridEdits()) {
+        this.applySubgridEdit(edit.gsx, edit.gsy, edit.terrainId);
       }
 
       // Handle clear canvas
@@ -392,96 +382,114 @@ export class Game {
     }
   }
 
-  /** Tile brush: set all 4 corners of tile (tx,ty) to the same terrain. */
+  /** Tile brush: set all 9 subgrid points of tile (tx,ty) to the same terrain. */
   private applyTileEdit(tx: number, ty: number, terrainId: TerrainId): void {
-    // Tile corners: NW=(tx,ty), NE=(tx+1,ty), SW=(tx,ty+1), SE=(tx+1,ty+1)
-    this.applyCornerEdit(tx, ty, terrainId);
-    this.applyCornerEdit(tx + 1, ty, terrainId);
-    this.applyCornerEdit(tx, ty + 1, terrainId);
-    this.applyCornerEdit(tx + 1, ty + 1, terrainId);
+    // Tile (tx,ty) covers subgrid (2*tx, 2*ty) to (2*tx+2, 2*ty+2)
+    const gsx0 = 2 * tx;
+    const gsy0 = 2 * ty;
+    for (let dy = 0; dy <= 2; dy++) {
+      for (let dx = 0; dx <= 2; dx++) {
+        this.applySubgridWithBridges(gsx0 + dx, gsy0 + dy, terrainId, 0);
+      }
+    }
   }
 
-  private applyCornerEdit(gx: number, gy: number, terrainId: TerrainId): void {
-    this.applyCornerWithBridges(gx, gy, terrainId, 0);
+  /** Subgrid brush: paint with configurable brush size. */
+  private applySubgridEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
+    const size = this.editorPanel.brushSize;
+    const half = Math.floor(size / 2);
+    for (let dy = -half; dy < size - half; dy++) {
+      for (let dx = -half; dx < size - half; dx++) {
+        this.applySubgridWithBridges(gsx + dx, gsy + dy, terrainId, 0);
+      }
+    }
   }
 
   /**
-   * Set a corner and recursively insert bridge corners for invalid adjacencies.
+   * Set a subgrid point and recursively insert bridge points for invalid adjacencies.
    * Bridge insertion uses Tier 1 edges only; alpha-only (Tier 2) pairs are left alone.
    */
-  private applyCornerWithBridges(
-    gx: number,
-    gy: number,
+  private applySubgridWithBridges(
+    gsx: number,
+    gsy: number,
     terrainId: TerrainId,
     depth: number,
   ): void {
-    this.setGlobalCorner(gx, gy, terrainId);
+    this.setGlobalSubgrid(gsx, gsy, terrainId);
 
-    // Bridge insertion: check 4 cardinal neighbor corners
+    // Bridge insertion: check 4 cardinal neighbor subgrid points
     const maxBridge = this.editorPanel.bridgeDepth;
     if (maxBridge > 0 && depth < maxBridge) {
       const cardinals: [number, number][] = [
-        [gx - 1, gy],
-        [gx + 1, gy],
-        [gx, gy - 1],
-        [gx, gy + 1],
+        [gsx - 1, gsy],
+        [gsx + 1, gsy],
+        [gsx, gsy - 1],
+        [gsx, gsy + 1],
       ];
       for (const [nx, ny] of cardinals) {
-        const neighbor = this.getGlobalCorner(nx, ny);
+        const neighbor = this.getGlobalSubgrid(nx, ny);
         if (neighbor === terrainId) continue;
         if (this.adjacency.isValidAdjacency(terrainId, neighbor)) continue;
         const step = this.adjacency.getBridgeStep(terrainId, neighbor);
         if (step !== undefined) {
-          this.applyCornerWithBridges(nx, ny, step, depth + 1);
+          this.applySubgridWithBridges(nx, ny, step, depth + 1);
         }
       }
     }
 
-    // Re-derive terrain for the 4 tiles that share this corner
-    for (let dy = -1; dy <= 0; dy++) {
-      for (let dx = -1; dx <= 0; dx++) {
-        this.rederiveTerrainAt(gx + dx, gy + dy);
+    // Re-derive terrain for tiles whose subgrid region includes this point
+    const txMin = Math.ceil((gsx - 2) / 2);
+    const txMax = Math.floor(gsx / 2);
+    const tyMin = Math.ceil((gsy - 2) / 2);
+    const tyMax = Math.floor(gsy / 2);
+    for (let ty = tyMin; ty <= tyMax; ty++) {
+      for (let tx = txMin; tx <= txMax; tx++) {
+        this.rederiveTerrainAt(tx, ty);
       }
     }
   }
 
-  private setGlobalCorner(gx: number, gy: number, terrainId: TerrainId): void {
-    const cx = Math.floor(gx / CHUNK_SIZE);
-    const cy = Math.floor(gy / CHUNK_SIZE);
-    const lcx = gx - cx * CHUNK_SIZE;
-    const lcy = gy - cy * CHUNK_SIZE;
+  private static readonly SUBGRID_STRIDE = CHUNK_SIZE * 2;
 
-    this.setCornerInChunk(cx, cy, lcx, lcy, terrainId);
+  private setGlobalSubgrid(gsx: number, gsy: number, terrainId: TerrainId): void {
+    const S = Game.SUBGRID_STRIDE;
+    const cx = Math.floor(gsx / S);
+    const cy = Math.floor(gsy / S);
+    const lsx = gsx - cx * S;
+    const lsy = gsy - cy * S;
+
+    this.setSubgridInChunk(cx, cy, lsx, lsy, terrainId);
     // Shared with left neighbor chunk
-    if (lcx === 0) this.setCornerInChunk(cx - 1, cy, CHUNK_SIZE, lcy, terrainId);
+    if (lsx === 0) this.setSubgridInChunk(cx - 1, cy, S, lsy, terrainId);
     // Shared with top neighbor chunk
-    if (lcy === 0) this.setCornerInChunk(cx, cy - 1, lcx, CHUNK_SIZE, terrainId);
+    if (lsy === 0) this.setSubgridInChunk(cx, cy - 1, lsx, S, terrainId);
     // Shared with diagonal neighbor chunk
-    if (lcx === 0 && lcy === 0)
-      this.setCornerInChunk(cx - 1, cy - 1, CHUNK_SIZE, CHUNK_SIZE, terrainId);
+    if (lsx === 0 && lsy === 0)
+      this.setSubgridInChunk(cx - 1, cy - 1, S, S, terrainId);
   }
 
-  private setCornerInChunk(
+  private setSubgridInChunk(
     cx: number,
     cy: number,
-    lcx: number,
-    lcy: number,
+    lsx: number,
+    lsy: number,
     terrainId: TerrainId,
   ): void {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
-      chunk.setCorner(lcx, lcy, terrainId);
+      chunk.setSubgrid(lsx, lsy, terrainId);
     }
   }
 
-  private getGlobalCorner(gx: number, gy: number): TerrainId {
-    const cx = Math.floor(gx / CHUNK_SIZE);
-    const cy = Math.floor(gy / CHUNK_SIZE);
-    const lcx = gx - cx * CHUNK_SIZE;
-    const lcy = gy - cy * CHUNK_SIZE;
+  private getGlobalSubgrid(gsx: number, gsy: number): TerrainId {
+    const S = Game.SUBGRID_STRIDE;
+    const cx = Math.floor(gsx / S);
+    const cy = Math.floor(gsy / S);
+    const lsx = gsx - cx * S;
+    const lsy = gsy - cy * S;
     const chunk = this.world.getChunkIfLoaded(cx, cy);
-    if (!chunk) return 4 as TerrainId; // TerrainId.Grass
-    return chunk.getCorner(lcx, lcy) as TerrainId;
+    if (!chunk) return TerrainId.Grass;
+    return chunk.getSubgrid(lsx, lsy) as TerrainId;
   }
 
   private rederiveTerrainAt(tx: number, ty: number): void {
@@ -490,13 +498,8 @@ export class Game {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (!chunk) return;
 
-    // Tile (tx,ty) has corners: NW=(tx,ty), NE=(tx+1,ty), SW=(tx,ty+1), SE=(tx+1,ty+1)
-    const nw = this.getGlobalCorner(tx, ty);
-    const ne = this.getGlobalCorner(tx + 1, ty);
-    const sw = this.getGlobalCorner(tx, ty + 1);
-    const se = this.getGlobalCorner(tx + 1, ty + 1);
-
-    const terrain = deriveTerrainIdFromCorners(nw, ne, sw, se);
+    // Read center subgrid point: tile (tx,ty) has center at subgrid (2*tx+1, 2*ty+1)
+    const terrain = this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
     const tileId = terrainIdToTileId(terrain);
 
     chunk.setTerrain(lx, ly, tileId);
@@ -531,7 +534,7 @@ export class Game {
     const tileId = terrainIdToTileId(terrainId);
     const collision = getCollisionForTerrain(tileId);
     for (const [, chunk] of this.world.chunks.entries()) {
-      chunk.corners.fill(terrainId);
+      chunk.subgrid.fill(terrainId);
       chunk.fillTerrain(tileId);
       chunk.fillCollision(collision);
       chunk.detail.fill(TileId.Empty);
@@ -582,8 +585,8 @@ export class Game {
   }
 
   private drawCursorHighlight(): void {
-    if (this.editorPanel.brushMode === "corner") {
-      this.drawCornerCursorHighlight();
+    if (this.editorPanel.brushMode === "subgrid") {
+      this.drawSubgridCursorHighlight();
     } else {
       this.drawTileCursorHighlight();
     }
@@ -606,33 +609,40 @@ export class Game {
     this.ctx.restore();
   }
 
-  private drawCornerCursorHighlight(): void {
-    const gx = this.editorMode.cursorCornerX;
-    const gy = this.editorMode.cursorCornerY;
-    if (!Number.isFinite(gx)) return;
+  private drawSubgridCursorHighlight(): void {
+    const gsx = this.editorMode.cursorSubgridX;
+    const gsy = this.editorMode.cursorSubgridY;
+    if (!Number.isFinite(gsx)) return;
 
-    // Corner vertex is at the intersection of tiles
-    const cornerScreen = this.camera.worldToScreen(gx * TILE_SIZE, gy * TILE_SIZE);
-    const radius = Math.max(4, 3 * this.camera.scale);
+    const halfTile = TILE_SIZE / 2;
+    const brushSize = this.editorPanel.brushSize;
+    const half = Math.floor(brushSize / 2);
+
+    // World coords of the brush rectangle
+    const wx0 = (gsx - half) * halfTile;
+    const wy0 = (gsy - half) * halfTile;
+    const wx1 = (gsx - half + brushSize) * halfTile;
+    const wy1 = (gsy - half + brushSize) * halfTile;
+
+    const topLeft = this.camera.worldToScreen(wx0, wy0);
+    const botRight = this.camera.worldToScreen(wx1, wy1);
+    const w = botRight.sx - topLeft.sx;
+    const h = botRight.sy - topLeft.sy;
 
     this.ctx.save();
-
-    // Draw a filled circle at the corner vertex
-    this.ctx.beginPath();
-    this.ctx.arc(cornerScreen.sx, cornerScreen.sy, radius, 0, Math.PI * 2);
-    this.ctx.fillStyle = "rgba(240, 160, 48, 0.6)";
-    this.ctx.fill();
-    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    this.ctx.fillStyle = "rgba(240, 160, 48, 0.25)";
+    this.ctx.strokeStyle = "rgba(240, 160, 48, 0.8)";
     this.ctx.lineWidth = 2;
-    this.ctx.stroke();
+    this.ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
+    this.ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
 
-    // Lightly highlight the 4 tiles that share this corner
-    const halfTile = TILE_SIZE * this.camera.scale;
-    this.ctx.fillStyle = "rgba(240, 160, 48, 0.1)";
-    this.ctx.fillRect(cornerScreen.sx - halfTile, cornerScreen.sy - halfTile, halfTile, halfTile);
-    this.ctx.fillRect(cornerScreen.sx, cornerScreen.sy - halfTile, halfTile, halfTile);
-    this.ctx.fillRect(cornerScreen.sx - halfTile, cornerScreen.sy, halfTile, halfTile);
-    this.ctx.fillRect(cornerScreen.sx, cornerScreen.sy, halfTile, halfTile);
+    // Draw center dot
+    const center = this.camera.worldToScreen(gsx * halfTile, gsy * halfTile);
+    const radius = Math.max(3, 2 * this.camera.scale);
+    this.ctx.beginPath();
+    this.ctx.arc(center.sx, center.sy, radius, 0, Math.PI * 2);
+    this.ctx.fillStyle = "rgba(240, 160, 48, 0.8)";
+    this.ctx.fill();
 
     this.ctx.restore();
   }

@@ -6,7 +6,7 @@ import {
 } from "../autotile/TerrainGraph.js";
 import { biomeIdToTerrainId } from "../autotile/terrainMapping.js";
 import { CHUNK_SIZE } from "../config/constants.js";
-import type { Chunk } from "../world/Chunk.js";
+import { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { BiomeId, BiomeMapper } from "./BiomeMapper.js";
 import { NoiseMap } from "./NoiseMap.js";
@@ -58,13 +58,13 @@ const DETAIL_THRESHOLD_FOREST = 0.55;
 const PATH_BAND_LOW = 0.48;
 const PATH_BAND_HIGH = 0.52;
 
-const CORNER_SIZE = CHUNK_SIZE + 1;
+const SUBGRID_SIZE = Chunk.SUBGRID_SIZE;
 
 /**
- * @legacy Corner-based terrain generator using BiomeId noise.
- * Fills chunk corners (17×17) from noise, enforces adjacency constraints,
- * derives per-tile terrain, collision, and details, then converts
- * corners from BiomeId to TerrainId for the graph renderer.
+ * Sub-grid terrain generator using BiomeId noise.
+ * Fills chunk subgrid (33×33) from noise at half-tile positions,
+ * enforces adjacency constraints, derives per-tile terrain, collision,
+ * and details, then converts subgrid from BiomeId to TerrainId.
  */
 export class OnionStrategy implements TerrainStrategy {
   readonly biomeMapper: BiomeMapper;
@@ -106,23 +106,28 @@ export class OnionStrategy implements TerrainStrategy {
     this.biomeMapper = new BiomeMapper(elevation, moisture);
   }
 
-  /** Fill a chunk's corners, derive terrain, collision, and details. */
+  /** Fill a chunk's subgrid, derive terrain, collision, and details. */
   generate(chunk: Chunk, cx: number, cy: number): void {
     const baseX = cx * CHUNK_SIZE;
     const baseY = cy * CHUNK_SIZE;
 
-    // Phase 1: Fill 17×17 corners from noise
-    for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
-      for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
-        const biome = this.biomeMapper.getBiome(baseX + ccx, baseY + ccy);
-        chunk.setCorner(ccx, ccy, biome);
+    // Phase 1: Fill 33×33 subgrid from noise at half-tile positions.
+    // Subgrid (sx, sy) → world (baseX + sx*0.5, baseY + sy*0.5)
+    for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+      for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+        const wx = baseX + sx * 0.5;
+        const wy = baseY + sy * 0.5;
+        const biome = this.biomeMapper.getBiome(wx, wy);
+        chunk.setSubgrid(sx, sy, biome);
       }
     }
 
-    // Phase 2: Enforce adjacency constraints on corners
-    this.enforceCornerAdjacency(chunk, baseX, baseY);
+    // Phase 2: Enforce adjacency constraints on all subgrid points
+    this.enforceSubgridAdjacency(chunk, baseX, baseY);
 
-    // Phase 3: Derive per-tile terrain from corners + apply overlays
+    // Phase 3: Derive per-tile terrain from subgrid corners + apply overlays.
+    // Each tile (lx, ly) uses its 4 corner subgrid values at even coords:
+    //   NW = (lx*2, ly*2), NE = (lx*2+2, ly*2), SW = (lx*2, ly*2+2), SE = (lx*2+2, ly*2+2)
     const chunkRng = alea(`${this.seed}-detail-${cx},${cy}`);
 
     for (let ly = 0; ly < CHUNK_SIZE; ly++) {
@@ -157,33 +162,33 @@ export class OnionStrategy implements TerrainStrategy {
       }
     }
 
-    // Phase 4: Convert corners from BiomeId to TerrainId for graph renderer
-    for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
-      for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
-        const biome = chunk.getCorner(ccx, ccy) as BiomeId;
-        chunk.setCorner(ccx, ccy, biomeIdToTerrainId(biome));
+    // Phase 4: Convert entire subgrid from BiomeId to TerrainId for blend renderer
+    for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+      for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+        const biome = chunk.getSubgrid(sx, sy) as BiomeId;
+        chunk.setSubgrid(sx, sy, biomeIdToTerrainId(biome));
       }
     }
   }
 
   /**
-   * Enforce adjacency constraints on corner biomes.
-   * Checks each corner against its 4 cardinal neighbors' RAW noise biomes
+   * Enforce adjacency constraints on subgrid biomes.
+   * Checks each point against its 4 cardinal neighbors' RAW noise biomes
    * (deterministic, independent of chunk generation order).
    */
-  private enforceCornerAdjacency(chunk: Chunk, baseX: number, baseY: number): void {
-    for (let cy = 0; cy < CORNER_SIZE; cy++) {
-      for (let cx = 0; cx < CORNER_SIZE; cx++) {
-        let biome = chunk.getCorner(cx, cy) as BiomeId;
-        const wx = baseX + cx;
-        const wy = baseY + cy;
+  private enforceSubgridAdjacency(chunk: Chunk, baseX: number, baseY: number): void {
+    for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+      for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+        let biome = chunk.getSubgrid(sx, sy) as BiomeId;
+        const wx = baseX + sx * 0.5;
+        const wy = baseY + sy * 0.5;
 
-        // Check 4 cardinal neighbor corners using raw noise (not post-enforcement)
+        // Check 4 cardinal neighbors using raw noise (not post-enforcement)
         const offsets = [
-          [0, -1],
-          [-1, 0],
-          [1, 0],
-          [0, 1],
+          [0, -0.5],
+          [-0.5, 0],
+          [0.5, 0],
+          [0, 0.5],
         ] as const;
         for (const [dx, dy] of offsets) {
           const nb = this.biomeMapper.getBiome(wx + dx, wy + dy);
@@ -192,7 +197,7 @@ export class OnionStrategy implements TerrainStrategy {
           }
         }
 
-        chunk.setCorner(cx, cy, biome);
+        chunk.setSubgrid(sx, sy, biome);
       }
     }
   }

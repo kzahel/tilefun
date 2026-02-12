@@ -3,7 +3,6 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import {
   CHUNK_SIZE,
   TILE_SIZE,
@@ -30,14 +29,12 @@ export function getWaterFrame(nowMs: number): number {
  * Includes both terrain (with autotile) and detail layers in the cache.
  */
 export class TileRenderer {
-  /** Indexed sheets array for graph renderer (index matches BlendEntry.sheetIndex). */
+  /** Indexed sheets array (index matches BlendEntry.sheetIndex). */
   private blendSheets: Spritesheet[] = [];
   /** BlendGraph for base fill lookups. */
   private blendGraph: BlendGraph | null = null;
-  /** When true, use the graph renderer instead of the fixed layer renderer. */
-  useGraphRenderer = false;
 
-  /** Set the blend sheets and graph for the graph renderer. */
+  /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
     this.blendSheets = sheets;
     this.blendGraph = graph;
@@ -78,11 +75,7 @@ export class TileRenderer {
 
         // Rebuild cache if stale or missing
         if (chunk.dirty || !chunk.renderCache) {
-          if (this.useGraphRenderer && this.blendGraph) {
-            this.rebuildCacheGraph(chunk, sheets);
-          } else {
-            this.rebuildCache(chunk, sheets);
-          }
+          this.rebuildCache(chunk, sheets);
           chunk.dirty = false;
         }
 
@@ -95,67 +88,10 @@ export class TileRenderer {
   }
 
   /**
-   * Rebuild the chunk's OffscreenCanvas cache (legacy fixed-layer path).
-   * Draws shallow water base, then autotile layers, then details.
-   */
-  private rebuildCache(chunk: Chunk, sheets: Map<string, Spritesheet>): void {
-    if (!chunk.renderCache) {
-      chunk.renderCache = new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
-    }
-    const offCtx = chunk.renderCache.getContext("2d");
-    if (!offCtx) return;
-    offCtx.imageSmoothingEnabled = false;
-    offCtx.clearRect(0, 0, CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
-
-    // ME sheet #3 (water_shallow/grass): (1,0) = mask 255 = solid shallow water fill
-    const waterSheet = sheets.get("shallowwater");
-
-    for (let ly = 0; ly < CHUNK_SIZE; ly++) {
-      for (let lx = 0; lx < CHUNK_SIZE; lx++) {
-        const dx = lx * TILE_SIZE;
-        const dy = ly * TILE_SIZE;
-        const idx = ly * CHUNK_SIZE + lx;
-
-        // Shallow water base under all tiles (opaque autotile covers it for land)
-        if (waterSheet) {
-          waterSheet.drawTile(offCtx, 1, 0, dx, dy, 1);
-        }
-
-        // Draw each autotile layer in order
-        for (let layerIdx = 0; layerIdx < TERRAIN_LAYERS.length; layerIdx++) {
-          const packed = chunk.autotileLayers[layerIdx]?.[idx] ?? 0;
-          if (packed > 0) {
-            const layer = TERRAIN_LAYERS[layerIdx];
-            if (!layer) continue;
-            const sheet = sheets.get(layer.sheetKey);
-            if (sheet) {
-              const col = packed & 0xff;
-              const row = packed >> 8;
-              sheet.drawTile(offCtx, col, row, dx, dy, 1);
-            }
-          }
-        }
-
-        // Detail layer on top
-        const detailId = chunk.getDetail(lx, ly);
-        if (detailId !== TileId.Empty) {
-          const def = getTileDef(detailId);
-          if (def) {
-            const sheet = sheets.get(def.sheetKey);
-            if (sheet) {
-              sheet.drawTile(offCtx, def.spriteCol, def.spriteRow, dx, dy, 1);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Rebuild the chunk's OffscreenCanvas cache using the graph renderer.
+   * Rebuild the chunk's OffscreenCanvas cache.
    * Draws: shallow water base → tile base fill → blend layers → details.
    */
-  private rebuildCacheGraph(chunk: Chunk, sheets: Map<string, Spritesheet>): void {
+  private rebuildCache(chunk: Chunk, sheets: Map<string, Spritesheet>): void {
     if (!chunk.renderCache) {
       chunk.renderCache = new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
     }

@@ -3,31 +3,39 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import type { TileId } from "./TileRegistry.js";
 
 const AREA = CHUNK_SIZE * CHUNK_SIZE;
-/** Corner grid is one larger than tile grid in each dimension. */
-const CORNER_SIZE = CHUNK_SIZE + 1;
-const CORNER_AREA = CORNER_SIZE * CORNER_SIZE;
+
+/**
+ * Sub-grid dimensions. For a 16×16 tile chunk, the sub-grid is 33×33.
+ * Each tile occupies a 2×2 region centered at (2*tx+1, 2*ty+1).
+ * - Centers (odd,odd): tile terrain
+ * - Midpoints (mixed parity): edge shared between 2 tiles
+ * - Corners (even,even): vertex shared between 4 tiles
+ */
+const SUBGRID_SIZE = CHUNK_SIZE * 2 + 1;
+const SUBGRID_AREA = SUBGRID_SIZE * SUBGRID_SIZE;
 
 function idx(lx: number, ly: number): number {
   return ly * CHUNK_SIZE + lx;
 }
 
-function cornerIdx(cx: number, cy: number): number {
-  return cy * CORNER_SIZE + cx;
+function subgridIdx(sx: number, sy: number): number {
+  return sy * SUBGRID_SIZE + sx;
 }
 
 export class Chunk {
-  static readonly CORNER_SIZE = CORNER_SIZE;
+  /** Sub-grid size (33 for 16-tile chunks). */
+  static readonly SUBGRID_SIZE = SUBGRID_SIZE;
+  /** @deprecated Use SUBGRID_SIZE. Old corner grid was CHUNK_SIZE+1=17. */
+  static readonly CORNER_SIZE = CHUNK_SIZE + 1;
 
-  /** Corner terrain values (17×17 = 289). Stores TerrainId at each vertex. */
-  readonly corners: Uint8Array;
-  /** Base terrain tile IDs (derived from corners). */
+  /** Sub-grid terrain values (33×33 = 1089). Stores TerrainId at each point. */
+  readonly subgrid: Uint8Array;
+  /** Base terrain tile IDs (derived from subgrid). */
   readonly terrain: Uint16Array;
   /** Decoration tile IDs (0 = empty). */
   readonly detail: Uint16Array;
-  /** Per-layer autotile caches. Each is packed (row<<8 | col), 0 = no autotile. */
-  readonly autotileLayers: Uint16Array[];
   /**
-   * Per-tile blend layer data for graph renderer.
+   * Per-tile blend layer data.
    * Flat array: MAX_BLEND_LAYERS slots per tile, 256 tiles.
    * Each entry: (sheetIndex << 16 | spriteCol << 8 | spriteRow), 0 = empty.
    */
@@ -42,24 +50,37 @@ export class Chunk {
   /** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
   renderCache: OffscreenCanvas | null = null;
 
-  constructor(layerCount: number) {
-    this.corners = new Uint8Array(CORNER_AREA);
+  constructor() {
+    this.subgrid = new Uint8Array(SUBGRID_AREA);
     this.terrain = new Uint16Array(AREA);
     this.detail = new Uint16Array(AREA);
-    this.autotileLayers = [];
-    for (let i = 0; i < layerCount; i++) {
-      this.autotileLayers.push(new Uint16Array(AREA));
-    }
     this.blendLayers = new Uint32Array(MAX_BLEND_LAYERS * AREA);
     this.collision = new Uint8Array(AREA);
   }
 
-  getCorner(cx: number, cy: number): number {
-    return this.corners[cornerIdx(cx, cy)] ?? 0;
+  /** Read sub-grid point at (sx, sy) in [0, SUBGRID_SIZE). */
+  getSubgrid(sx: number, sy: number): number {
+    return this.subgrid[subgridIdx(sx, sy)] ?? 0;
   }
 
+  /** Write sub-grid point at (sx, sy). */
+  setSubgrid(sx: number, sy: number, terrain: number): void {
+    this.subgrid[subgridIdx(sx, sy)] = terrain;
+  }
+
+  /**
+   * Read corner value — maps corner coords (cx, cy) in [0, 17)
+   * to subgrid even coords (cx*2, cy*2).
+   */
+  getCorner(cx: number, cy: number): number {
+    return this.subgrid[subgridIdx(cx * 2, cy * 2)] ?? 0;
+  }
+
+  /**
+   * Write corner value — maps corner coords to subgrid even coords.
+   */
   setCorner(cx: number, cy: number, terrain: number): void {
-    this.corners[cornerIdx(cx, cy)] = terrain;
+    this.subgrid[subgridIdx(cx * 2, cy * 2)] = terrain;
   }
 
   getTerrain(lx: number, ly: number): TileId {

@@ -1,4 +1,3 @@
-import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import { RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
@@ -25,7 +24,7 @@ export class ChunkManager {
     const key = chunkKey(cx, cy);
     let chunk = this.chunks.get(key);
     if (!chunk) {
-      chunk = new Chunk(TERRAIN_LAYERS.length);
+      chunk = new Chunk();
       this.generate(chunk, cx, cy);
       this.chunks.set(key, chunk);
       // Invalidate neighbors' autotile so their borders recompute

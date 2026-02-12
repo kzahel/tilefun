@@ -2,21 +2,19 @@ import { describe, expect, it } from "vitest";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TERRAIN_COUNT, TerrainId } from "../autotile/TerrainId.js";
-import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { registerDefaultTiles, TileId } from "../world/TileRegistry.js";
 import { BiomeId } from "./BiomeMapper.js";
 import { OnionStrategy } from "./OnionStrategy.js";
 
-const LAYER_COUNT = TERRAIN_LAYERS.length;
-const CORNER_SIZE = CHUNK_SIZE + 1;
+const SUBGRID_SIZE = Chunk.SUBGRID_SIZE;
 
 describe("OnionStrategy", () => {
   it("generates a chunk that is not all the same tile", () => {
     registerDefaultTiles();
     const gen = new OnionStrategy("variety-test");
-    const chunk = new Chunk(LAYER_COUNT);
+    const chunk = new Chunk();
     gen.generate(chunk, 0, 0);
 
     const tileSet = new Set<TileId>();
@@ -38,7 +36,7 @@ describe("OnionStrategy", () => {
     ];
     const allTiles = new Set<TileId>();
     for (const [cx, cy] of positions) {
-      const c = new Chunk(LAYER_COUNT);
+      const c = new Chunk();
       gen2.generate(c, cx, cy);
       for (let y = 0; y < CHUNK_SIZE; y++) {
         for (let x = 0; x < CHUNK_SIZE; x++) {
@@ -55,8 +53,8 @@ describe("OnionStrategy", () => {
     registerDefaultTiles();
     const gen1 = new OnionStrategy("det-seed");
     const gen2 = new OnionStrategy("det-seed");
-    const chunk1 = new Chunk(LAYER_COUNT);
-    const chunk2 = new Chunk(LAYER_COUNT);
+    const chunk1 = new Chunk();
+    const chunk2 = new Chunk();
     gen1.generate(chunk1, 3, -2);
     gen2.generate(chunk2, 3, -2);
 
@@ -77,7 +75,7 @@ describe("OnionStrategy", () => {
     let foundWaterCollision = false;
     for (let cy = -5; cy <= 5 && !foundWaterCollision; cy++) {
       for (let cx = -5; cx <= 5 && !foundWaterCollision; cx++) {
-        const chunk = new Chunk(LAYER_COUNT);
+        const chunk = new Chunk();
         gen.generate(chunk, cx, cy);
         for (let y = 0; y < CHUNK_SIZE; y++) {
           for (let x = 0; x < CHUNK_SIZE; x++) {
@@ -101,7 +99,7 @@ describe("OnionStrategy", () => {
     let foundDetail = false;
     for (let cy = -5; cy <= 5 && !foundDetail; cy++) {
       for (let cx = -5; cx <= 5 && !foundDetail; cx++) {
-        const chunk = new Chunk(LAYER_COUNT);
+        const chunk = new Chunk();
         gen.generate(chunk, cx, cy);
         for (let y = 0; y < CHUNK_SIZE; y++) {
           for (let x = 0; x < CHUNK_SIZE; x++) {
@@ -116,22 +114,22 @@ describe("OnionStrategy", () => {
     expect(foundDetail).toBe(true);
   });
 
-  it("fills 17×17 corner grid with valid TerrainId values", () => {
+  it("fills 33×33 subgrid with valid TerrainId values", () => {
     registerDefaultTiles();
     const gen = new OnionStrategy("corners-test");
-    const chunk = new Chunk(LAYER_COUNT);
+    const chunk = new Chunk();
     gen.generate(chunk, 0, 0);
 
-    for (let cy = 0; cy < CORNER_SIZE; cy++) {
-      for (let cx = 0; cx < CORNER_SIZE; cx++) {
-        const terrain = chunk.getCorner(cx, cy);
+    for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+      for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+        const terrain = chunk.getSubgrid(sx, sy);
         expect(terrain).toBeGreaterThanOrEqual(TerrainId.DeepWater);
         expect(terrain).toBeLessThan(TERRAIN_COUNT);
       }
     }
   });
 
-  it("enforces adjacency constraints on corners (TerrainId)", () => {
+  it("enforces adjacency constraints on subgrid (TerrainId)", () => {
     registerDefaultTiles();
     const gen = new OnionStrategy("adj-test");
     const adjacency = new TerrainAdjacency(new BlendGraph());
@@ -146,46 +144,46 @@ describe("OnionStrategy", () => {
     ];
 
     for (const [cx, cy] of positions) {
-      const chunk = new Chunk(LAYER_COUNT);
+      const chunk = new Chunk();
       gen.generate(chunk, cx, cy);
 
-      // Check all horizontally adjacent corner pairs within chunk
-      for (let ccy = 0; ccy < CORNER_SIZE; ccy++) {
-        for (let ccx = 0; ccx < CORNER_SIZE - 1; ccx++) {
-          const a = chunk.getCorner(ccx, ccy) as TerrainId;
-          const b = chunk.getCorner(ccx + 1, ccy) as TerrainId;
+      // Check all horizontally adjacent subgrid pairs within chunk
+      for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+        for (let sx = 0; sx < SUBGRID_SIZE - 1; sx++) {
+          const a = chunk.getSubgrid(sx, sy) as TerrainId;
+          const b = chunk.getSubgrid(sx + 1, sy) as TerrainId;
           expect(
             adjacency.isValidAdjacency(a, b),
-            `Invalid h-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${TerrainId[a]}↔${TerrainId[b]}`,
+            `Invalid h-adj at chunk(${cx},${cy}) sg(${sx},${sy}): ${TerrainId[a]}↔${TerrainId[b]}`,
           ).toBe(true);
         }
       }
-      // Check all vertically adjacent corner pairs within chunk
-      for (let ccy = 0; ccy < CORNER_SIZE - 1; ccy++) {
-        for (let ccx = 0; ccx < CORNER_SIZE; ccx++) {
-          const a = chunk.getCorner(ccx, ccy) as TerrainId;
-          const b = chunk.getCorner(ccx, ccy + 1) as TerrainId;
+      // Check all vertically adjacent subgrid pairs within chunk
+      for (let sy = 0; sy < SUBGRID_SIZE - 1; sy++) {
+        for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+          const a = chunk.getSubgrid(sx, sy) as TerrainId;
+          const b = chunk.getSubgrid(sx, sy + 1) as TerrainId;
           expect(
             adjacency.isValidAdjacency(a, b),
-            `Invalid v-adj at chunk(${cx},${cy}) corner(${ccx},${ccy}): ${TerrainId[a]}↔${TerrainId[b]}`,
+            `Invalid v-adj at chunk(${cx},${cy}) sg(${sx},${sy}): ${TerrainId[a]}↔${TerrainId[b]}`,
           ).toBe(true);
         }
       }
     }
   });
 
-  it("produces deterministic corners for same seed", () => {
+  it("produces deterministic subgrid for same seed", () => {
     registerDefaultTiles();
     const gen1 = new OnionStrategy("corner-det");
     const gen2 = new OnionStrategy("corner-det");
-    const chunk1 = new Chunk(LAYER_COUNT);
-    const chunk2 = new Chunk(LAYER_COUNT);
+    const chunk1 = new Chunk();
+    const chunk2 = new Chunk();
     gen1.generate(chunk1, 3, -2);
     gen2.generate(chunk2, 3, -2);
 
-    for (let cy = 0; cy < CORNER_SIZE; cy++) {
-      for (let cx = 0; cx < CORNER_SIZE; cx++) {
-        expect(chunk1.getCorner(cx, cy)).toBe(chunk2.getCorner(cx, cy));
+    for (let sy = 0; sy < SUBGRID_SIZE; sy++) {
+      for (let sx = 0; sx < SUBGRID_SIZE; sx++) {
+        expect(chunk1.getSubgrid(sx, sy)).toBe(chunk2.getSubgrid(sx, sy));
       }
     }
   });
@@ -196,7 +194,7 @@ describe("OnionStrategy", () => {
 
     for (let cy = -5; cy <= 5; cy++) {
       for (let cx = -5; cx <= 5; cx++) {
-        const chunk = new Chunk(LAYER_COUNT);
+        const chunk = new Chunk();
         gen.generate(chunk, cx, cy);
         const baseX = cx * CHUNK_SIZE;
         const baseY = cy * CHUNK_SIZE;
