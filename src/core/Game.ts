@@ -2,6 +2,7 @@ import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { deriveTerrainIdFromCorners } from "../autotile/TerrainGraph.js";
 import type { TerrainId } from "../autotile/TerrainId.js";
 import { terrainIdToTileId } from "../autotile/terrainMapping.js";
@@ -55,6 +56,7 @@ export class Game {
   private editorPanel: EditorPanel;
   private currentSeed: string;
   private blendGraph: BlendGraph;
+  private adjacency: TerrainAdjacency;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -75,6 +77,7 @@ export class Game {
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
+    this.adjacency = new TerrainAdjacency(this.blendGraph);
     this.debugPanel = new DebugPanel(DEFAULT_SEED);
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
@@ -374,11 +377,41 @@ export class Game {
   }
 
   private applyCornerEdit(gx: number, gy: number, terrainId: TerrainId): void {
-    // Set the corner in all chunks that share this vertex
+    this.applyCornerWithBridges(gx, gy, terrainId, 0);
+  }
+
+  /**
+   * Set a corner and recursively insert bridge corners for invalid adjacencies.
+   * Bridge insertion uses Tier 1 edges only; alpha-only (Tier 2) pairs are left alone.
+   */
+  private applyCornerWithBridges(
+    gx: number,
+    gy: number,
+    terrainId: TerrainId,
+    depth: number,
+  ): void {
     this.setGlobalCorner(gx, gy, terrainId);
 
-    // Re-derive terrain for the 4 tiles that share this corner:
-    // (gx-1,gy-1), (gx,gy-1), (gx-1,gy), (gx,gy)
+    // Bridge insertion: check 4 cardinal neighbor corners (depth-limited to 2)
+    if (depth < 2) {
+      const cardinals: [number, number][] = [
+        [gx - 1, gy],
+        [gx + 1, gy],
+        [gx, gy - 1],
+        [gx, gy + 1],
+      ];
+      for (const [nx, ny] of cardinals) {
+        const neighbor = this.getGlobalCorner(nx, ny);
+        if (neighbor === terrainId) continue;
+        if (this.adjacency.isValidAdjacency(terrainId, neighbor)) continue;
+        const step = this.adjacency.getBridgeStep(terrainId, neighbor);
+        if (step !== undefined) {
+          this.applyCornerWithBridges(nx, ny, step, depth + 1);
+        }
+      }
+    }
+
+    // Re-derive terrain for the 4 tiles that share this corner
     for (let dy = -1; dy <= 0; dy++) {
       for (let dx = -1; dx <= 0; dx++) {
         this.rederiveTerrainAt(gx + dx, gy + dy);

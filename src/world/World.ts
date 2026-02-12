@@ -1,4 +1,7 @@
-import { computeChunkAllLayers, computeChunkBlendLayers } from "../autotile/Autotiler.js";
+import {
+  computeChunkAllLayers,
+  computeChunkCornerBlend,
+} from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
@@ -88,7 +91,7 @@ export class World {
 
       computeChunkAllLayers(chunk, cx, cy, getTerrain);
       if (blendGraph) {
-        computeChunkBlendLayers(chunk, cx, cy, getTerrain, blendGraph);
+        computeChunkCornerBlend(chunk, blendGraph);
       }
       chunk.autotileComputed = true;
       chunk.dirty = true;
