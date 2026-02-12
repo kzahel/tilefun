@@ -32,8 +32,8 @@ export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
  * Higher = drawn last (shallower, covers what's below).
  */
 export const TERRAIN_DEPTH: Record<TerrainId, number> = {
-  [TerrainId.DeepWater]: 0,
-  [TerrainId.ShallowWater]: 1,
+  [TerrainId.ShallowWater]: 0,
+  [TerrainId.DeepWater]: 1,
   [TerrainId.Sand]: 2,
   [TerrainId.SandLight]: 3,
   [TerrainId.Grass]: 4,

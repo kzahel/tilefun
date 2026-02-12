@@ -42,6 +42,17 @@ export class TerrainAdjacency {
       }
     }
 
+    // Dedicated pairs imply valid adjacency in both directions:
+    // if A→B has pixel-art transition, B can appear next to A without a bridge.
+    for (const a of ALL_TERRAIN_IDS) {
+      for (const b of ALL_TERRAIN_IDS) {
+        if (a === b) continue;
+        if (this.dedicated[a * n + b]) {
+          this.any[b * n + a] = true;
+        }
+      }
+    }
+
     this.computeBridges();
   }
 
@@ -51,13 +62,10 @@ export class TerrainAdjacency {
     return this.any[a * TERRAIN_COUNT + b] === true && this.any[b * TERRAIN_COUNT + a] === true;
   }
 
-  /** True only for Tier 1 (dedicated sheet) edges (bidirectional). */
-  isDedicatedAdjacency(a: TerrainId, b: TerrainId): boolean {
+  /** True if a→b has a dedicated (non-alpha) blend sheet. */
+  hasDedicatedSheet(a: TerrainId, b: TerrainId): boolean {
     if (a === b) return true;
-    return (
-      this.dedicated[a * TERRAIN_COUNT + b] === true &&
-      this.dedicated[b * TERRAIN_COUNT + a] === true
-    );
+    return this.dedicated[a * TERRAIN_COUNT + b] === true;
   }
 
   /** Next terrain on shortest Tier 1 path from `from` to `to`, or undefined if unreachable. */
@@ -68,21 +76,21 @@ export class TerrainAdjacency {
   }
 
   /**
-   * Full bridge path from `from` to `to` using Tier 1 edges only.
+   * Full bridge path from `from` to `to`.
    * Returns the intermediate terrains (not including `from` or `to`).
-   * Returns empty array if directly adjacent (Tier 1) or same.
-   * Returns undefined if no Tier 1 path exists within maxSteps.
+   * Returns empty array if directly adjacent or same.
+   * Returns undefined if no path exists within maxSteps.
    */
   getBridgePath(from: TerrainId, to: TerrainId, maxSteps = 3): TerrainId[] | undefined {
     if (from === to) return [];
-    if (this.isDedicatedAdjacency(from, to)) return [];
+    if (this.isValidAdjacency(from, to)) return [];
 
     const path: TerrainId[] = [];
     let current = from;
     for (let i = 0; i < maxSteps; i++) {
       const next = this.getBridgeStep(current, to);
       if (next === undefined) return undefined;
-      if (this.isDedicatedAdjacency(next, to)) {
+      if (this.isValidAdjacency(next, to)) {
         // next connects directly to target — path complete
         path.push(next);
         return path;
@@ -94,11 +102,11 @@ export class TerrainAdjacency {
     return undefined;
   }
 
-  /** All-pairs BFS on Tier 1 edges to precompute bridgeNext. */
+  /** All-pairs BFS on valid adjacency edges to precompute bridgeNext. */
   private computeBridges(): void {
     const n = TERRAIN_COUNT;
 
-    // BFS from each source terrain
+    // BFS from each source terrain using bidirectional valid-adjacency edges
     for (const source of ALL_TERRAIN_IDS) {
       const dist = new Int8Array(n).fill(-1);
       const next = new Int8Array(n).fill(-1);
@@ -106,12 +114,12 @@ export class TerrainAdjacency {
 
       const queue: TerrainId[] = [];
 
-      // Initialize with direct Tier 1 neighbors
+      // Initialize with direct valid-adjacent neighbors
       for (const neighbor of ALL_TERRAIN_IDS) {
         if (neighbor === source) continue;
-        if (this.dedicated[source * n + neighbor]) {
+        if (this.any[source * n + neighbor] && this.any[neighbor * n + source]) {
           dist[neighbor] = 1;
-          next[neighbor] = neighbor; // First step from source → neighbor
+          next[neighbor] = neighbor;
           queue.push(neighbor);
         }
       }
@@ -119,13 +127,14 @@ export class TerrainAdjacency {
       // BFS
       let head = 0;
       while (head < queue.length) {
-        const current = queue[head++]!;
+        const current = queue[head] as number;
+        head++;
         for (const neighbor of ALL_TERRAIN_IDS) {
           if (neighbor === source) continue;
           if ((dist[neighbor] ?? -1) >= 0) continue;
-          if (!this.dedicated[current * n + neighbor]) continue;
+          if (!this.any[current * n + neighbor] || !this.any[neighbor * n + current]) continue;
           dist[neighbor] = (dist[current] ?? 0) + 1;
-          next[neighbor] = next[current] ?? -1; // First step is same as current's first step
+          next[neighbor] = next[current] ?? -1;
           queue.push(neighbor);
         }
       }

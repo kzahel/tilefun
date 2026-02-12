@@ -11,8 +11,6 @@ export interface BlendEntry {
   sheetKey: string;
   /** Asset path for loading. */
   assetPath: string;
-  /** True if the tile's terrain is the secondary of this sheet (mask semantics differ). */
-  inverted: boolean;
   /** True for alpha overlay sheets (drawn last, semi-transparent). */
   isAlpha: boolean;
   /** Draw priority: lower = drawn earlier. Based on neighbor terrain depth. */
@@ -36,7 +34,7 @@ export interface BaseFill {
  * Blend sheet graph: maps (myTerrain, neighborTerrain) → BlendEntry.
  *
  * For each terrain pair, determines whether to use a dedicated pair sheet,
- * an inverted pair sheet, or an alpha overlay fallback.
+ * a dedicated pair sheet or an alpha overlay fallback.
  */
 export class BlendGraph {
   /** (myTerrain * TERRAIN_COUNT + neighborTerrain) → BlendEntry */
@@ -111,11 +109,7 @@ export class BlendGraph {
     return idx;
   }
 
-  private dedicatedEntry(
-    sheetKey: string,
-    neighborTerrain: TerrainId,
-    inverted: boolean,
-  ): BlendEntry {
+  private dedicatedEntry(sheetKey: string, neighborTerrain: TerrainId): BlendEntry {
     const idx = this.sheetIdx(sheetKey);
     const desc = this.allSheets[idx];
     if (!desc) throw new Error(`No sheet at index ${idx}`);
@@ -123,98 +117,47 @@ export class BlendGraph {
       sheetIndex: idx,
       sheetKey: desc.sheetKey,
       assetPath: desc.assetPath,
-      inverted,
       isAlpha: false,
       priority: TERRAIN_DEPTH[neighborTerrain],
     };
   }
 
   private buildDedicatedPairs(): void {
-    // #16: water_deep (primary) ↔ water_shallow (secondary)
+    // #16: water_deep (primary) over water_shallow (secondary)
     this.set(
       TerrainId.DeepWater,
       TerrainId.ShallowWater,
-      this.dedicatedEntry("me16", TerrainId.ShallowWater, false),
-    );
-    // ShallowWater→DeepWater: handled by DeepWater tile, but provide inverted for completeness
-    this.set(
-      TerrainId.ShallowWater,
-      TerrainId.DeepWater,
-      this.dedicatedEntry("me16", TerrainId.DeepWater, true),
+      this.dedicatedEntry("me16", TerrainId.ShallowWater),
     );
 
-    // #8: sand (primary) ↔ water_shallow (secondary)
+    // #8: sand (primary) over water_shallow (secondary)
     this.set(
       TerrainId.Sand,
       TerrainId.ShallowWater,
-      this.dedicatedEntry("me08", TerrainId.ShallowWater, false),
-    );
-    this.set(
-      TerrainId.ShallowWater,
-      TerrainId.Sand,
-      this.dedicatedEntry("me08", TerrainId.Sand, true),
+      this.dedicatedEntry("me08", TerrainId.ShallowWater),
     );
 
-    // #9: sand (primary) ↔ sand_light (secondary)
-    this.set(
-      TerrainId.Sand,
-      TerrainId.SandLight,
-      this.dedicatedEntry("me09", TerrainId.SandLight, false),
-    );
-    this.set(
-      TerrainId.SandLight,
-      TerrainId.Sand,
-      this.dedicatedEntry("me09", TerrainId.Sand, true),
-    );
+    // #9: sand (primary) over sand_light (secondary)
+    this.set(TerrainId.Sand, TerrainId.SandLight, this.dedicatedEntry("me09", TerrainId.SandLight));
 
-    // #7: sand_light (primary) ↔ grass (secondary)
-    this.set(
-      TerrainId.SandLight,
-      TerrainId.Grass,
-      this.dedicatedEntry("me07", TerrainId.Grass, false),
-    );
-    this.set(
-      TerrainId.Grass,
-      TerrainId.SandLight,
-      this.dedicatedEntry("me07", TerrainId.SandLight, true),
-    );
+    // #7: sand_light (primary) over grass (secondary)
+    this.set(TerrainId.SandLight, TerrainId.Grass, this.dedicatedEntry("me07", TerrainId.Grass));
 
-    // #1: dirt_light (primary) ↔ grass (secondary)
-    this.set(
-      TerrainId.DirtLight,
-      TerrainId.Grass,
-      this.dedicatedEntry("me01", TerrainId.Grass, false),
-    );
-    this.set(
-      TerrainId.Grass,
-      TerrainId.DirtLight,
-      this.dedicatedEntry("me01", TerrainId.DirtLight, true),
-    );
+    // #1: dirt_light (primary) over grass (secondary)
+    this.set(TerrainId.DirtLight, TerrainId.Grass, this.dedicatedEntry("me01", TerrainId.Grass));
 
-    // #2: dirt_warm (primary) ↔ grass (secondary)
-    this.set(
-      TerrainId.DirtWarm,
-      TerrainId.Grass,
-      this.dedicatedEntry("me02", TerrainId.Grass, false),
-    );
-    // #12: grass (primary) ↔ dirt_warm (secondary) — reverse pair, both directions are "direct"
-    this.set(
-      TerrainId.Grass,
-      TerrainId.DirtWarm,
-      this.dedicatedEntry("me12", TerrainId.DirtWarm, false),
-    );
+    // #2: dirt_warm (primary) over grass (secondary)
+    this.set(TerrainId.DirtWarm, TerrainId.Grass, this.dedicatedEntry("me02", TerrainId.Grass));
+    // #12: grass (primary) over dirt_warm (secondary) — dedicated reverse pair
+    this.set(TerrainId.Grass, TerrainId.DirtWarm, this.dedicatedEntry("me12", TerrainId.DirtWarm));
 
-    // #3: water_shallow (primary) ↔ grass (secondary)
-    this.set(
-      TerrainId.ShallowWater,
-      TerrainId.Grass,
-      this.dedicatedEntry("me03", TerrainId.Grass, false),
-    );
-    // #15: grass (primary) ↔ water_shallow (secondary) — reverse pair
+    // #3: water_shallow (primary) over grass (secondary)
+    this.set(TerrainId.ShallowWater, TerrainId.Grass, this.dedicatedEntry("me03", TerrainId.Grass));
+    // #15: grass (primary) over water_shallow (secondary) — dedicated reverse pair
     this.set(
       TerrainId.Grass,
       TerrainId.ShallowWater,
-      this.dedicatedEntry("me15", TerrainId.ShallowWater, false),
+      this.dedicatedEntry("me15", TerrainId.ShallowWater),
     );
   }
 
@@ -226,7 +169,6 @@ export class BlendGraph {
       sheetIndex: idx,
       sheetKey: desc.sheetKey,
       assetPath: desc.assetPath,
-      inverted: false,
       isAlpha: true,
       priority: TERRAIN_DEPTH[neighborTerrain],
     };
@@ -240,8 +182,9 @@ export class BlendGraph {
     // produce green edges on non-grass neighbors (sand, water, etc.).
     this.alphas.set(TerrainId.Sand, this.alphaEntry("me10", TerrainId.Sand));
     this.alphas.set(TerrainId.SandLight, this.alphaEntry("me10", TerrainId.SandLight));
-    this.alphas.set(TerrainId.ShallowWater, this.alphaEntry("me13", TerrainId.ShallowWater));
-    this.alphas.set(TerrainId.DeepWater, this.alphaEntry("me13", TerrainId.DeepWater));
+    // No alpha for water terrains: grass alpha (me13) would produce green
+    // edges on water, which is visually wrong. Water transitions should use
+    // dedicated pair sheets only (me03/me15/me16).
 
     // Fill all remaining (T, N) pairs that don't have dedicated sheets with alpha fallback
     for (const my of ALL_TERRAIN_IDS) {

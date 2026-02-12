@@ -1,126 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE } from "../config/constants.js";
-import { BiomeId } from "../generation/BiomeMapper.js";
 import { Chunk } from "../world/Chunk.js";
 import { TileId, terrainIdToTileId } from "../world/TileRegistry.js";
-import {
-  deriveTerrainFromCorners,
-  deriveTerrainIdFromCorners,
-  getValidFallback,
-  isValidAdjacency,
-} from "./TerrainGraph.js";
+import { deriveTerrainIdFromCorners } from "./TerrainGraph.js";
 import { TerrainId } from "./TerrainId.js";
-
-describe("isValidAdjacency", () => {
-  it("allows self-adjacency for all biomes", () => {
-    for (const b of [
-      BiomeId.DeepWater,
-      BiomeId.ShallowWater,
-      BiomeId.Sand,
-      BiomeId.Grass,
-      BiomeId.Forest,
-      BiomeId.DenseForest,
-    ]) {
-      expect(isValidAdjacency(b, b)).toBe(true);
-    }
-  });
-
-  it("allows DeepWater ↔ ShallowWater", () => {
-    expect(isValidAdjacency(BiomeId.DeepWater, BiomeId.ShallowWater)).toBe(true);
-    expect(isValidAdjacency(BiomeId.ShallowWater, BiomeId.DeepWater)).toBe(true);
-  });
-
-  it("allows ShallowWater ↔ land biomes", () => {
-    expect(isValidAdjacency(BiomeId.ShallowWater, BiomeId.Sand)).toBe(true);
-    expect(isValidAdjacency(BiomeId.ShallowWater, BiomeId.Grass)).toBe(true);
-    expect(isValidAdjacency(BiomeId.ShallowWater, BiomeId.Forest)).toBe(true);
-    expect(isValidAdjacency(BiomeId.ShallowWater, BiomeId.DenseForest)).toBe(true);
-  });
-
-  it("allows Sand ↔ land biomes", () => {
-    expect(isValidAdjacency(BiomeId.Sand, BiomeId.Grass)).toBe(true);
-    expect(isValidAdjacency(BiomeId.Sand, BiomeId.Forest)).toBe(true);
-    expect(isValidAdjacency(BiomeId.Sand, BiomeId.DenseForest)).toBe(true);
-  });
-
-  it("allows vegetation transitions", () => {
-    expect(isValidAdjacency(BiomeId.Grass, BiomeId.Forest)).toBe(true);
-    expect(isValidAdjacency(BiomeId.Grass, BiomeId.DenseForest)).toBe(true);
-    expect(isValidAdjacency(BiomeId.Forest, BiomeId.DenseForest)).toBe(true);
-  });
-
-  it("rejects DeepWater ↔ land (needs ShallowWater buffer)", () => {
-    expect(isValidAdjacency(BiomeId.DeepWater, BiomeId.Sand)).toBe(false);
-    expect(isValidAdjacency(BiomeId.DeepWater, BiomeId.Grass)).toBe(false);
-    expect(isValidAdjacency(BiomeId.DeepWater, BiomeId.Forest)).toBe(false);
-    expect(isValidAdjacency(BiomeId.DeepWater, BiomeId.DenseForest)).toBe(false);
-  });
-});
-
-describe("getValidFallback", () => {
-  it("returns ShallowWater when neighbor is DeepWater", () => {
-    expect(getValidFallback(BiomeId.Grass, BiomeId.DeepWater)).toBe(BiomeId.ShallowWater);
-    expect(getValidFallback(BiomeId.Sand, BiomeId.DeepWater)).toBe(BiomeId.ShallowWater);
-  });
-
-  it("returns Grass for other invalid adjacencies", () => {
-    expect(getValidFallback(BiomeId.DeepWater, BiomeId.Grass)).toBe(BiomeId.Grass);
-  });
-});
-
-describe("deriveTerrainFromCorners", () => {
-  it("returns the biome when all 4 corners are the same", () => {
-    const { Grass, Sand, DeepWater } = BiomeId;
-    expect(deriveTerrainFromCorners(Grass, Grass, Grass, Grass)).toBe(Grass);
-    expect(deriveTerrainFromCorners(Sand, Sand, Sand, Sand)).toBe(Sand);
-    expect(deriveTerrainFromCorners(DeepWater, DeepWater, DeepWater, DeepWater)).toBe(DeepWater);
-  });
-
-  it("returns lowest-priority biome when corners differ (3 vs 1)", () => {
-    const { Grass, Sand, ShallowWater } = BiomeId;
-    // Sand (2) < Grass (3) → Sand wins
-    expect(deriveTerrainFromCorners(Grass, Grass, Grass, Sand)).toBe(Sand);
-    // Sand (2) < Grass (3) → Sand wins
-    expect(deriveTerrainFromCorners(Sand, Sand, Sand, Grass)).toBe(Sand);
-    // ShallowWater (1) < Grass (3) → ShallowWater wins
-    expect(deriveTerrainFromCorners(Grass, Grass, Grass, ShallowWater)).toBe(ShallowWater);
-  });
-
-  it("returns lowest-priority biome in 2v2 split", () => {
-    const { ShallowWater, Grass } = BiomeId;
-    // ShallowWater (1) < Grass (3) → ShallowWater wins
-    expect(deriveTerrainFromCorners(ShallowWater, ShallowWater, Grass, Grass)).toBe(ShallowWater);
-    expect(deriveTerrainFromCorners(Grass, ShallowWater, Grass, ShallowWater)).toBe(ShallowWater);
-  });
-
-  it("returns lowest-priority biome in 2v2 Sand vs Grass", () => {
-    const { Sand, Grass } = BiomeId;
-    // Sand (2) < Grass (3) → Sand wins
-    expect(deriveTerrainFromCorners(Sand, Sand, Grass, Grass)).toBe(Sand);
-  });
-
-  it("returns lowest-priority biome with 4 distinct corners", () => {
-    const { DeepWater, ShallowWater, Sand, Grass } = BiomeId;
-    // DeepWater (0) is lowest → wins
-    expect(deriveTerrainFromCorners(DeepWater, ShallowWater, Sand, Grass)).toBe(DeepWater);
-  });
-
-  it("returns lowest-priority biome with 3 distinct biomes", () => {
-    const { ShallowWater, Sand, Grass } = BiomeId;
-    // ShallowWater (1) is lowest → wins regardless of counts
-    expect(deriveTerrainFromCorners(Grass, Grass, ShallowWater, Sand)).toBe(ShallowWater);
-  });
-
-  it("single water corner on flat grass produces water (editor corner brush scenario)", () => {
-    const { ShallowWater, Grass } = BiomeId;
-    // Painting one water corner: the 4 tiles sharing it each have 3 Grass + 1 Water
-    // All 4 orientations should produce Water
-    expect(deriveTerrainFromCorners(Grass, Grass, Grass, ShallowWater)).toBe(ShallowWater); // SE corner
-    expect(deriveTerrainFromCorners(Grass, Grass, ShallowWater, Grass)).toBe(ShallowWater); // SW corner
-    expect(deriveTerrainFromCorners(Grass, ShallowWater, Grass, Grass)).toBe(ShallowWater); // NE corner
-    expect(deriveTerrainFromCorners(ShallowWater, Grass, Grass, Grass)).toBe(ShallowWater); // NW corner
-  });
-});
 
 describe("corner edit integration: single corner on flat grass chunk (TerrainId corners)", () => {
   /**
@@ -288,7 +171,7 @@ describe("deriveTerrainIdFromCorners", () => {
   });
 
   it("returns lowest-depth terrain with 3+ distinct terrains", () => {
-    // DeepWater(0) < ShallowWater(1) < Sand(2) < Grass(4)
+    // ShallowWater(0) < DeepWater(1) < Sand(2) < Grass(4)
     expect(
       deriveTerrainIdFromCorners(
         TerrainId.DeepWater,
@@ -296,7 +179,7 @@ describe("deriveTerrainIdFromCorners", () => {
         TerrainId.Sand,
         TerrainId.Grass,
       ),
-    ).toBe(TerrainId.DeepWater);
+    ).toBe(TerrainId.ShallowWater);
   });
 
   it("handles DirtWarm (depth 6) vs Grass (depth 4)", () => {

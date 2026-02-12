@@ -16,14 +16,10 @@ export class DebugPanel {
   private readonly zoomLabel: HTMLSpanElement;
   private readonly noclipCheckbox: HTMLInputElement;
   private readonly observerCheckbox: HTMLInputElement;
-  private readonly seedInput: HTMLInputElement;
-  private readonly strategySelect: HTMLSelectElement;
   private readonly baseModeBtn: HTMLButtonElement;
-  private pendingSeed: string | null = null;
-  private pendingStrategy: string | null = null;
   private pendingBaseMode = false;
 
-  constructor(defaultSeed: string) {
+  constructor() {
     this.container = document.createElement("div");
     this.container.style.cssText = PANEL_STYLE;
 
@@ -67,49 +63,6 @@ export class DebugPanel {
     this.noclipCheckbox.type = "checkbox";
     noclipRow.append(noclipLbl, this.noclipCheckbox);
 
-    // Seed input + regen button
-    const seedRow = document.createElement("div");
-    seedRow.style.cssText = ROW_STYLE;
-    const seedLbl = document.createElement("label");
-    seedLbl.textContent = "Seed";
-    this.seedInput = document.createElement("input");
-    this.seedInput.type = "text";
-    this.seedInput.value = defaultSeed;
-    this.seedInput.style.cssText =
-      "width: 100px; font: 12px monospace; background: #333; color: #fff; border: 1px solid #666; padding: 2px 4px;";
-    const regenBtn = document.createElement("button");
-    regenBtn.textContent = "Regen";
-    regenBtn.style.cssText = "font: 12px monospace; padding: 2px 8px; cursor: pointer;";
-    regenBtn.addEventListener("click", () => {
-      this.pendingSeed = this.seedInput.value;
-    });
-    const randomBtn = document.createElement("button");
-    randomBtn.textContent = "Random";
-    randomBtn.style.cssText = "font: 12px monospace; padding: 2px 8px; cursor: pointer;";
-    randomBtn.addEventListener("click", () => {
-      const seed = Math.random().toString(36).slice(2, 10);
-      this.seedInput.value = seed;
-      this.pendingSeed = seed;
-    });
-    seedRow.append(seedLbl, this.seedInput, regenBtn, randomBtn);
-
-    // Strategy selector
-    const strategyRow = document.createElement("div");
-    strategyRow.style.cssText = ROW_STYLE;
-    const strategyLbl = document.createElement("label");
-    strategyLbl.textContent = "Strategy";
-    this.strategySelect = document.createElement("select");
-    this.strategySelect.style.cssText =
-      "font: 12px monospace; background: #333; color: #fff; border: 1px solid #666; padding: 2px 4px;";
-    const onionOpt = document.createElement("option");
-    onionOpt.value = "onion";
-    onionOpt.textContent = "Onion";
-    this.strategySelect.appendChild(onionOpt);
-    this.strategySelect.addEventListener("change", () => {
-      this.pendingStrategy = this.strategySelect.value;
-    });
-    strategyRow.append(strategyLbl, this.strategySelect);
-
     // Base selection mode toggle
     const baseModeRow = document.createElement("div");
     baseModeRow.style.cssText = ROW_STYLE;
@@ -124,7 +77,7 @@ export class DebugPanel {
     baseModeHint.style.cssText = "color: #999; font-size: 11px;";
     baseModeRow.append(baseModeLbl, this.baseModeBtn, baseModeHint);
 
-    this.container.append(zoomRow, observerRow, noclipRow, seedRow, strategyRow, baseModeRow);
+    this.container.append(zoomRow, observerRow, noclipRow, baseModeRow);
     document.body.appendChild(this.container);
   }
 
@@ -146,24 +99,6 @@ export class DebugPanel {
 
   get observer(): boolean {
     return this.observerCheckbox.checked;
-  }
-
-  get strategy(): string {
-    return this.strategySelect.value;
-  }
-
-  /** Returns new seed if regen was requested, then clears the request. */
-  consumeSeedChange(): string | null {
-    const s = this.pendingSeed;
-    this.pendingSeed = null;
-    return s;
-  }
-
-  /** Returns new strategy if changed, then clears the request. */
-  consumeStrategyChange(): string | null {
-    const s = this.pendingStrategy;
-    this.pendingStrategy = null;
-    return s;
   }
 
   /** Returns true if base selection mode was toggled, then clears the flag. */

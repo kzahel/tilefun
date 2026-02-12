@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { OnionStrategy } from "../generation/OnionStrategy.js";
+import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { ChunkManager } from "./ChunkManager.js";
 import { registerDefaultTiles, TileId } from "./TileRegistry.js";
 
@@ -7,11 +7,11 @@ describe("ChunkManager", () => {
   it("creates chunks on demand with generated terrain", () => {
     registerDefaultTiles();
     const mgr = new ChunkManager();
-    mgr.setGenerator(new OnionStrategy("test-seed"));
+    mgr.setGenerator(new FlatStrategy());
     const chunk = mgr.getOrCreate(0, 0);
-    // With a generator, tiles should not all be Empty
+    // With a generator, tiles should be Grass (not Empty)
     const tile = chunk.getTerrain(0, 0);
-    expect(tile).not.toBe(TileId.Empty);
+    expect(tile).toBe(TileId.Grass);
   });
 
   it("returns same chunk for same coordinates", () => {
@@ -31,9 +31,9 @@ describe("ChunkManager", () => {
   it("handles negative chunk coordinates", () => {
     registerDefaultTiles();
     const mgr = new ChunkManager();
-    mgr.setGenerator(new OnionStrategy("test-seed"));
+    mgr.setGenerator(new FlatStrategy());
     const chunk = mgr.getOrCreate(-1, -1);
-    expect(chunk.getTerrain(0, 0)).not.toBe(TileId.Empty);
+    expect(chunk.getTerrain(0, 0)).toBe(TileId.Grass);
   });
 
   it("tracks loaded chunk count", () => {

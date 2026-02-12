@@ -5,5 +5,6 @@ if (!canvas) throw new Error("Canvas element #game not found");
 
 const game = new Game(canvas);
 // Expose for debug/testing
+// biome-ignore lint/suspicious/noExplicitAny: debug/test hook
 (canvas as any).__game = game;
 game.init();

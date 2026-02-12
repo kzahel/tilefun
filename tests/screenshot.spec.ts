@@ -40,6 +40,7 @@ for (const zoom of ZOOM_LEVELS) {
     // Switch to old renderer and force all chunks to re-render
     await page.evaluate(() => {
       const canvas = document.querySelector("canvas");
+      // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
       const game = (canvas as any)?.__game;
       if (!game) return;
       game.tileRenderer.useGraphRenderer = false;

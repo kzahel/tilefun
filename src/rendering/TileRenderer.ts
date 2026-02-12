@@ -135,10 +135,7 @@ export class TileRenderer {
         //    Blend sprites are opaque 16×16 tiles and fully cover the base fill
         //    wherever a transition exists, so the base only shows on uniform tiles.
         if (graph) {
-          const terrainId = chunk.getSubgrid(
-            2 * lx + 1,
-            2 * ly + 1,
-          ) as TerrainId;
+          const terrainId = chunk.getSubgrid(2 * lx + 1, 2 * ly + 1) as TerrainId;
           // Skip base fill for shallow water (already drawn as universal base)
           if (terrainId !== TerrainId.ShallowWater) {
             // Try tile variants first for visual variety

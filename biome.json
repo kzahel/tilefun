@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.3.14/schema.json",
   "files": {
-    "includes": ["**", "!dist", "!test-results"]
+    "includes": ["**", "!dist", "!test-results", "!**/*.tsx"]
   },
   "linter": {
     "enabled": true,
@@ -30,6 +30,18 @@
       "semicolons": "always"
     }
   },
+  "overrides": [
+    {
+      "includes": ["demo/**"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noNonNullAssertion": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {

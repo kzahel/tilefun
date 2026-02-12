@@ -243,44 +243,67 @@ describe("computeChunkSubgridBlend", () => {
     expect(unpackColRow(nwPacked)).toEqual(expectedSprite(127));
   });
 
-  it("inverted blend entry produces correct mask", () => {
-    const chunk = makeUniformChunk(T.ShallowWater);
+  it("alpha overlay only drawn on overlay terrain's own tiles", () => {
+    const chunk = makeUniformChunk(T.Grass);
 
-    // Paint a 1×1 tile block (5,5) as DeepWater → subgrid (10,10)-(12,12)
-    paintTileRegion(chunk, 5, 5, 5, 5, T.DeepWater);
+    // Paint a 1×1 tile block (5,5) as Sand → subgrid (10,10)-(12,12)
+    paintTileRegion(chunk, 5, 5, 5, 5, T.Sand);
 
     computeChunkSubgridBlend(chunk, blendGraph);
 
-    // Tile (5,5) center(11,11): all 8 neighbors = DW → uniform → no blend
-    const innerTile = (5 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    // Grass→Sand uses grass alpha fallback (no dedicated pair)
+    const entry = blendGraph.getBlend(TerrainId.Grass, TerrainId.Sand);
+    expect(entry).toBeDefined();
+    expect(entry?.isAlpha).toBe(true);
+
+    // Grass tile (5,4) near Sand: center=Grass, overlay=Grass → alpha IS drawn
+    const grassTileOffset = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    expect(chunk.blendLayers[grassTileOffset]).toBeGreaterThan(0);
+
+    // Sand tile (5,5) center: all 8 subgrid neighbors are Sand → uniform → no blend
+    const sandTileOffset = (5 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
     for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
-      expect(chunk.blendLayers[innerTile + s]).toBe(0);
+      expect(chunk.blendLayers[sandTileOffset + s]).toBe(0);
+    }
+  });
+
+  it("alpha overlay not drawn on different terrain (deep water near grass)", () => {
+    const chunk = makeUniformChunk(T.Grass);
+
+    // Paint a 2×2 tile block as DeepWater
+    paintTileRegion(chunk, 5, 5, 6, 6, T.DeepWater);
+
+    computeChunkSubgridBlend(chunk, blendGraph);
+
+    // DeepWater has no alpha, and Grass alpha should NOT be drawn on water tiles.
+    // Inner DeepWater tiles are uniform → no blend.
+    for (const [lx, ly] of [
+      [5, 5],
+      [5, 6],
+      [6, 5],
+      [6, 6],
+    ] as const) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+      for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+        expect(chunk.blendLayers[tileOffset + s], `deep water tile (${lx},${ly})`).toBe(0);
+      }
     }
 
-    // Tile (5,4) center(11,9): S(11,10)=DW, SE(12,10)=DW, SW(10,10)=DW, others=SW
-    // overlay=ShallowWater, entry=me16 inverted.
-    // Inverted mask for BASE(DW): S|SW|SE → raw=8+64+128=200
-    // Canonicalize: S=8. SW: S&W → W=0 → strip. SE: S&E → E=0 → strip. Result: S=8
-    const edgeTile = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
-    const edgePacked = chunk.blendLayers[edgeTile] ?? 0;
-    expect(edgePacked).toBeGreaterThan(0);
-    expect(unpackColRow(edgePacked)).toEqual(expectedSprite(8));
-
-    // Verify it uses me16 sheet (deep/shallow)
-    const entry = blendGraph.getBlend(TerrainId.ShallowWater, TerrainId.DeepWater);
-    expect(entry).toBeDefined();
-    expect(unpackSheet(edgePacked)).toBe(entry?.sheetIndex);
+    // But surrounding Grass tiles should have blend layers (grass alpha softening edges)
+    const grassEdgeTile = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    expect(chunk.blendLayers[grassEdgeTile]).toBeGreaterThan(0);
   });
 
   it("all TerrainId values treated directly (no BiomeId conversion)", () => {
     // Verify SandLight (TerrainId=3) is NOT misread as BiomeId.Grass(=3)
-    const chunk = makeUniformChunk(T.SandLight);
-    chunk.setCorner(5, 5, T.Grass);
+    // Use ShallowWater + Grass which have dedicated pair sheets in both directions
+    const chunk = makeUniformChunk(T.ShallowWater);
+    paintTileRegion(chunk, 5, 5, 5, 5, T.Grass);
 
     computeChunkSubgridBlend(chunk, blendGraph);
 
-    // Tile (4,4) has 7 SandLight + 1 Grass → should produce blend layers
-    const tileOffset = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    // Tile (5,4): center=ShallowWater, S neighbor is Grass → dedicated pair blend
+    const tileOffset = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
     let hasLayer = false;
     for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
       if (chunk.blendLayers[tileOffset + s] !== 0) {

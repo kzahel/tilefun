@@ -1,4 +1,3 @@
-import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { TileVariants } from "../assets/TileVariants.js";
@@ -21,7 +20,6 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
-import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
@@ -39,8 +37,6 @@ import { tileToChunk, tileToLocal } from "../world/types.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
 
-const DEFAULT_SEED = "tilefun-default";
-
 export class Game {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -55,10 +51,9 @@ export class Game {
   private player: Entity;
   private debugEnabled = false;
   private debugPanel: DebugPanel;
-  private editorEnabled = false;
+  private editorEnabled = true;
   private editorMode: EditorMode;
   private editorPanel: EditorPanel;
-  private currentSeed: string;
   private blendGraph: BlendGraph;
   private adjacency: TerrainAdjacency;
   private frameCount = 0;
@@ -71,7 +66,6 @@ export class Game {
     this.canvas = canvas;
     this.ctx = ctx;
     this.camera = new Camera();
-    this.currentSeed = DEFAULT_SEED;
     this.world = new World();
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
@@ -82,7 +76,7 @@ export class Game {
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
-    this.debugPanel = new DebugPanel(DEFAULT_SEED);
+    this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
     this.loop = new GameLoop({
@@ -123,7 +117,9 @@ export class Game {
     });
     this.createEditorButton();
     this.input.attach();
-    this.touchJoystick.attach();
+    // Start in editor mode — attach editor, not joystick
+    this.editorMode.attach();
+    this.editorPanel.visible = true;
 
     // Load blend graph sheets (11 ME autotile sheets) + entity sheets + complete tileset
     const blendDescs = this.blendGraph.allSheets;
@@ -208,7 +204,7 @@ export class Game {
       "position: fixed; top: 8px; left: 8px; z-index: 100; display: flex; gap: 6px;";
 
     const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
+    editBtn.textContent = "Play";
     editBtn.style.cssText = BTN_STYLE;
     editBtn.addEventListener("click", () => this.toggleEditor());
     this.editorButton = editBtn;
@@ -234,11 +230,6 @@ export class Game {
     // Apply debug panel state
     if (!this.editorEnabled) {
       this.camera.zoom = this.debugPanel.zoom;
-    }
-    const newSeed = this.debugPanel.consumeSeedChange();
-    const newStrategy = this.debugPanel.consumeStrategyChange();
-    if (newSeed !== null || newStrategy !== null) {
-      this.regenerateWorld(newSeed ?? this.currentSeed);
     }
     if (this.debugPanel.consumeBaseModeChange()) {
       this.invalidateAllChunks();
@@ -657,18 +648,6 @@ export class Game {
     this.ctx.restore();
   }
 
-  private regenerateWorld(seed: string): void {
-    this.currentSeed = seed;
-    this.world = new World(new OnionStrategy(seed));
-    this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-    this.world.computeAutotile(this.blendGraph);
-    // Remove all NPCs, re-spawn
-    this.entityManager.entities.length = 0;
-    this.entityManager.spawn(this.player);
-    this.findWalkableSpawn(this.player);
-    this.spawnChickens(5);
-  }
-
   private findWalkableSpawn(entity: Entity): void {
     const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
     const getCollision = (tx: number, ty: number) => this.world.getCollision(tx, ty);
@@ -711,14 +690,13 @@ export class Game {
   }
 
   private spawnChickens(count: number): void {
-    const rng = alea("chicken-spawn");
     let spawned = 0;
     let attempts = 0;
     const range = CHUNK_SIZE * TILE_SIZE; // 1 chunk radius — keep chickens near player
     while (spawned < count && attempts < 200) {
       attempts++;
-      const wx = (rng() - 0.5) * range * 2;
-      const wy = (rng() - 0.5) * range * 2;
+      const wx = (Math.random() - 0.5) * range * 2;
+      const wy = (Math.random() - 0.5) * range * 2;
       const tx = Math.floor(wx / TILE_SIZE);
       const ty = Math.floor(wy / TILE_SIZE);
       const collision = this.world.getCollision(tx, ty);
