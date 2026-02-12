@@ -19,7 +19,8 @@ src/
     ChunkManager.ts              Load/generate/cache/unload chunks
     TileRegistry.ts              Tile definitions, collision flags, sprite mappings
   generation/
-    WorldGenerator.ts            Noise -> biome -> tiles pipeline
+    TerrainStrategy.ts           Strategy interface for terrain generation
+    OnionStrategy.ts             Noise -> biome -> tiles pipeline (original)
     NoiseMap.ts                  Multi-octave simplex noise
     BiomeMapper.ts               Dual-noise (elevation + moisture) -> biome
   autotile/

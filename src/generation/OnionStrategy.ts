@@ -9,6 +9,7 @@ import type { Chunk } from "../world/Chunk.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { BiomeId, BiomeMapper } from "./BiomeMapper.js";
 import { NoiseMap } from "./NoiseMap.js";
+import type { TerrainStrategy } from "./TerrainStrategy.js";
 
 /** Maps BiomeId to terrain TileId. */
 const BIOME_TILE: Record<BiomeId, TileId> = {
@@ -63,7 +64,7 @@ const CORNER_SIZE = CHUNK_SIZE + 1;
  * Fills chunk corners (17×17) from noise, enforces adjacency constraints,
  * then derives per-tile terrain, collision, and details.
  */
-export class WorldGenerator {
+export class OnionStrategy implements TerrainStrategy {
   readonly biomeMapper: BiomeMapper;
   private readonly detailNoise: NoiseMap;
   private readonly pathNoise: NoiseMap;

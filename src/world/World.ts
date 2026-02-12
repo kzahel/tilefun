@@ -1,5 +1,5 @@
 import { computeChunkAllLayers } from "../autotile/Autotiler.js";
-import { WorldGenerator } from "../generation/WorldGenerator.js";
+import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
 import {
@@ -18,7 +18,7 @@ export class World {
   constructor(seed: string = DEFAULT_SEED) {
     registerDefaultTiles();
     this.chunks = new ChunkManager();
-    this.chunks.setGenerator(new WorldGenerator(seed));
+    this.chunks.setGenerator(new OnionStrategy(seed));
   }
 
   /** Get terrain tile at a global tile position. */

@@ -43,6 +43,7 @@ export class Game {
   private player: Entity;
   private debugEnabled = false;
   private debugPanel: DebugPanel;
+  private currentSeed: string;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -53,6 +54,7 @@ export class Game {
     this.canvas = canvas;
     this.ctx = ctx;
     this.camera = new Camera();
+    this.currentSeed = DEFAULT_SEED;
     this.world = new World(DEFAULT_SEED);
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
@@ -129,8 +131,9 @@ export class Game {
     // Apply debug panel state
     this.camera.zoom = this.debugPanel.zoom;
     const newSeed = this.debugPanel.consumeSeedChange();
-    if (newSeed !== null) {
-      this.regenerateWorld(newSeed);
+    const newStrategy = this.debugPanel.consumeStrategyChange();
+    if (newSeed !== null || newStrategy !== null) {
+      this.regenerateWorld(newSeed ?? this.currentSeed);
     }
 
     // Player input → velocity + animation state
@@ -248,6 +251,7 @@ export class Game {
   }
 
   private regenerateWorld(seed: string): void {
+    this.currentSeed = seed;
     this.world = new World(seed);
     this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
     this.world.computeAutotile();

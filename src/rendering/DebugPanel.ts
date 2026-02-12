@@ -15,7 +15,9 @@ export class DebugPanel {
   private readonly noclipCheckbox: HTMLInputElement;
   private readonly observerCheckbox: HTMLInputElement;
   private readonly seedInput: HTMLInputElement;
+  private readonly strategySelect: HTMLSelectElement;
   private pendingSeed: string | null = null;
+  private pendingStrategy: string | null = null;
 
   constructor(defaultSeed: string) {
     this.container = document.createElement("div");
@@ -87,7 +89,24 @@ export class DebugPanel {
     });
     seedRow.append(seedLbl, this.seedInput, regenBtn, randomBtn);
 
-    this.container.append(zoomRow, observerRow, noclipRow, seedRow);
+    // Strategy selector
+    const strategyRow = document.createElement("div");
+    strategyRow.style.cssText = ROW_STYLE;
+    const strategyLbl = document.createElement("label");
+    strategyLbl.textContent = "Strategy";
+    this.strategySelect = document.createElement("select");
+    this.strategySelect.style.cssText =
+      "font: 12px monospace; background: #333; color: #fff; border: 1px solid #666; padding: 2px 4px;";
+    const onionOpt = document.createElement("option");
+    onionOpt.value = "onion";
+    onionOpt.textContent = "Onion";
+    this.strategySelect.appendChild(onionOpt);
+    this.strategySelect.addEventListener("change", () => {
+      this.pendingStrategy = this.strategySelect.value;
+    });
+    strategyRow.append(strategyLbl, this.strategySelect);
+
+    this.container.append(zoomRow, observerRow, noclipRow, seedRow, strategyRow);
     document.body.appendChild(this.container);
   }
 
@@ -111,10 +130,21 @@ export class DebugPanel {
     return this.observerCheckbox.checked;
   }
 
+  get strategy(): string {
+    return this.strategySelect.value;
+  }
+
   /** Returns new seed if regen was requested, then clears the request. */
   consumeSeedChange(): string | null {
     const s = this.pendingSeed;
     this.pendingSeed = null;
+    return s;
+  }
+
+  /** Returns new strategy if changed, then clears the request. */
+  consumeStrategyChange(): string | null {
+    const s = this.pendingStrategy;
+    this.pendingStrategy = null;
     return s;
   }
 }

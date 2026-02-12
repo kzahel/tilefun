@@ -1,6 +1,6 @@
 import { TERRAIN_LAYERS } from "../autotile/TerrainLayers.js";
 import { RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
-import type { WorldGenerator } from "../generation/WorldGenerator.js";
+import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
 import { chunkKey } from "./types.js";
 
@@ -13,10 +13,10 @@ export interface ChunkRange {
 
 export class ChunkManager {
   private chunks = new Map<string, Chunk>();
-  private generator: WorldGenerator | null = null;
+  private generator: TerrainStrategy | null = null;
 
   /** Attach a world generator for procedural chunk creation. */
-  setGenerator(generator: WorldGenerator): void {
+  setGenerator(generator: TerrainStrategy): void {
     this.generator = generator;
   }
 

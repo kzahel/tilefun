@@ -5,15 +5,15 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { registerDefaultTiles, TileId } from "../world/TileRegistry.js";
 import { BiomeId } from "./BiomeMapper.js";
-import { WorldGenerator } from "./WorldGenerator.js";
+import { OnionStrategy } from "./OnionStrategy.js";
 
 const LAYER_COUNT = TERRAIN_LAYERS.length;
 const CORNER_SIZE = CHUNK_SIZE + 1;
 
-describe("WorldGenerator", () => {
+describe("OnionStrategy", () => {
   it("generates a chunk that is not all the same tile", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("variety-test");
+    const gen = new OnionStrategy("variety-test");
     const chunk = new Chunk(LAYER_COUNT);
     gen.generate(chunk, 0, 0);
 
@@ -26,7 +26,7 @@ describe("WorldGenerator", () => {
 
     // A single 16x16 chunk at the origin might be all one biome,
     // so test across multiple chunks to ensure variety
-    const gen2 = new WorldGenerator("variety-test");
+    const gen2 = new OnionStrategy("variety-test");
     const positions: [number, number][] = [
       [0, 0],
       [5, 5],
@@ -51,8 +51,8 @@ describe("WorldGenerator", () => {
 
   it("produces deterministic output for same seed", () => {
     registerDefaultTiles();
-    const gen1 = new WorldGenerator("det-seed");
-    const gen2 = new WorldGenerator("det-seed");
+    const gen1 = new OnionStrategy("det-seed");
+    const gen2 = new OnionStrategy("det-seed");
     const chunk1 = new Chunk(LAYER_COUNT);
     const chunk2 = new Chunk(LAYER_COUNT);
     gen1.generate(chunk1, 3, -2);
@@ -69,7 +69,7 @@ describe("WorldGenerator", () => {
 
   it("sets collision flags for water tiles", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("collision-test");
+    const gen = new OnionStrategy("collision-test");
 
     // Generate many chunks, find at least one water tile with collision
     let foundWaterCollision = false;
@@ -94,7 +94,7 @@ describe("WorldGenerator", () => {
 
   it("scatters detail tiles on grass biomes", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("detail-test");
+    const gen = new OnionStrategy("detail-test");
 
     let foundDetail = false;
     for (let cy = -5; cy <= 5 && !foundDetail; cy++) {
@@ -116,7 +116,7 @@ describe("WorldGenerator", () => {
 
   it("fills 17×17 corner grid with valid biome ids", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("corners-test");
+    const gen = new OnionStrategy("corners-test");
     const chunk = new Chunk(LAYER_COUNT);
     gen.generate(chunk, 0, 0);
 
@@ -131,7 +131,7 @@ describe("WorldGenerator", () => {
 
   it("enforces adjacency constraints on corners", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("adj-test");
+    const gen = new OnionStrategy("adj-test");
 
     // Test multiple chunks to get diverse terrain
     const positions: [number, number][] = [
@@ -173,8 +173,8 @@ describe("WorldGenerator", () => {
 
   it("produces deterministic corners for same seed", () => {
     registerDefaultTiles();
-    const gen1 = new WorldGenerator("corner-det");
-    const gen2 = new WorldGenerator("corner-det");
+    const gen1 = new OnionStrategy("corner-det");
+    const gen2 = new OnionStrategy("corner-det");
     const chunk1 = new Chunk(LAYER_COUNT);
     const chunk2 = new Chunk(LAYER_COUNT);
     gen1.generate(chunk1, 3, -2);
@@ -189,7 +189,7 @@ describe("WorldGenerator", () => {
 
   it("does not place DirtPath adjacent to water or sand", () => {
     registerDefaultTiles();
-    const gen = new WorldGenerator("dirtpath-test");
+    const gen = new OnionStrategy("dirtpath-test");
 
     for (let cy = -5; cy <= 5; cy++) {
       for (let cx = -5; cx <= 5; cx++) {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { WorldGenerator } from "../generation/WorldGenerator.js";
+import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { ChunkManager } from "./ChunkManager.js";
 import { registerDefaultTiles, TileId } from "./TileRegistry.js";
 
@@ -7,7 +7,7 @@ describe("ChunkManager", () => {
   it("creates chunks on demand with generated terrain", () => {
     registerDefaultTiles();
     const mgr = new ChunkManager();
-    mgr.setGenerator(new WorldGenerator("test-seed"));
+    mgr.setGenerator(new OnionStrategy("test-seed"));
     const chunk = mgr.getOrCreate(0, 0);
     // With a generator, tiles should not all be Empty
     const tile = chunk.getTerrain(0, 0);
@@ -31,7 +31,7 @@ describe("ChunkManager", () => {
   it("handles negative chunk coordinates", () => {
     registerDefaultTiles();
     const mgr = new ChunkManager();
-    mgr.setGenerator(new WorldGenerator("test-seed"));
+    mgr.setGenerator(new OnionStrategy("test-seed"));
     const chunk = mgr.getOrCreate(-1, -1);
     expect(chunk.getTerrain(0, 0)).not.toBe(TileId.Empty);
   });
