@@ -1,6 +1,7 @@
 import { computeChunkAllLayers, computeChunkBlendLayers } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { OnionStrategy } from "../generation/OnionStrategy.js";
+import { FlatStrategy } from "../generation/FlatStrategy.js";
+import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
 import {
@@ -11,15 +12,13 @@ import {
 } from "./TileRegistry.js";
 import { tileToChunk, tileToLocal } from "./types.js";
 
-const DEFAULT_SEED = "tilefun-default";
-
 export class World {
   readonly chunks: ChunkManager;
 
-  constructor(seed: string = DEFAULT_SEED) {
+  constructor(strategy: TerrainStrategy = new FlatStrategy()) {
     registerDefaultTiles();
     this.chunks = new ChunkManager();
-    this.chunks.setGenerator(new OnionStrategy(seed));
+    this.chunks.setGenerator(strategy);
   }
 
   /** Get terrain tile at a global tile position. */

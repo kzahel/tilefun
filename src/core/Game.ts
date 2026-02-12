@@ -21,6 +21,7 @@ import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { BiomeId } from "../generation/BiomeMapper.js";
+import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
@@ -65,7 +66,7 @@ export class Game {
     this.ctx = ctx;
     this.camera = new Camera();
     this.currentSeed = DEFAULT_SEED;
-    this.world = new World(DEFAULT_SEED);
+    this.world = new World();
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
     this.touchJoystick = new TouchJoystick(canvas);
@@ -587,7 +588,7 @@ export class Game {
 
   private regenerateWorld(seed: string): void {
     this.currentSeed = seed;
-    this.world = new World(seed);
+    this.world = new World(new OnionStrategy(seed));
     this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
     this.world.computeAutotile(this.blendGraph);
     // Remove all NPCs, re-spawn
