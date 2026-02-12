@@ -1,4 +1,4 @@
-import { ALL_TERRAIN_IDS, TERRAIN_DEPTH, TerrainId } from "./TerrainId.js";
+import { ALL_TERRAIN_IDS, TERRAIN_COUNT, TERRAIN_DEPTH, TerrainId } from "./TerrainId.js";
 
 /** Maximum blend layers per tile (background fills + dedicated pairs + alpha). */
 export const MAX_BLEND_LAYERS = 6;
@@ -62,7 +62,7 @@ export class BlendGraph {
   /** Look up the blend entry for (myTerrain, neighborTerrain). */
   getBlend(my: TerrainId, neighbor: TerrainId): BlendEntry | undefined {
     if (my === neighbor) return undefined;
-    return this.entries.get(my * 8 + neighbor);
+    return this.entries.get(my * TERRAIN_COUNT + neighbor);
   }
 
   /** Get the base fill (mask 255 solid sprite) for a terrain. */
@@ -97,10 +97,17 @@ export class BlendGraph {
     this.addSheet("me13", "assets/tilesets/me-autotile-13.png"); // grass alpha
     this.addSheet("me15", "assets/tilesets/me-autotile-15.png"); // grass/water_shallow
     this.addSheet("me16", "assets/tilesets/me-autotile-16.png"); // water_deep/water_shallow
+    // Structure sheets
+    this.addSheet("me11", "assets/tilesets/me-autotile-11.png"); // playground/grass
+    this.addSheet("me14", "assets/tilesets/me-autotile-14.png"); // grass/curb
+    // Urban sheets
+    this.addSheet("me21", "assets/tilesets/me-autotile-21.png"); // sidewalk_3/asphalt
+    this.addSheet("me25", "assets/tilesets/me-autotile-25.png"); // asphalt_white/asphalt
+    this.addSheet("me26", "assets/tilesets/me-autotile-26.png"); // asphalt_yellow/asphalt
   }
 
   private set(my: TerrainId, neighbor: TerrainId, entry: BlendEntry): void {
-    this.entries.set(my * 8 + neighbor, entry);
+    this.entries.set(my * TERRAIN_COUNT + neighbor, entry);
   }
 
   private sheetIdx(key: string): number {
@@ -159,6 +166,29 @@ export class BlendGraph {
       TerrainId.ShallowWater,
       this.dedicatedEntry("me15", TerrainId.ShallowWater),
     );
+
+    // #21: sidewalk (primary) over asphalt (secondary)
+    this.set(TerrainId.Sidewalk, TerrainId.Asphalt, this.dedicatedEntry("me21", TerrainId.Asphalt));
+
+    // #25: road white lines (primary) over asphalt (secondary)
+    this.set(
+      TerrainId.RoadWhite,
+      TerrainId.Asphalt,
+      this.dedicatedEntry("me25", TerrainId.Asphalt),
+    );
+
+    // #26: road yellow lines (primary) over asphalt (secondary)
+    this.set(
+      TerrainId.RoadYellow,
+      TerrainId.Asphalt,
+      this.dedicatedEntry("me26", TerrainId.Asphalt),
+    );
+
+    // #11: playground (primary) over grass (secondary)
+    this.set(TerrainId.Playground, TerrainId.Grass, this.dedicatedEntry("me11", TerrainId.Grass));
+
+    // #14: grass (primary) over curb (secondary)
+    this.set(TerrainId.Grass, TerrainId.Curb, this.dedicatedEntry("me14", TerrainId.Curb));
   }
 
   private alphaEntry(sheetKey: string, neighborTerrain: TerrainId): BlendEntry {
@@ -190,7 +220,7 @@ export class BlendGraph {
     for (const my of ALL_TERRAIN_IDS) {
       for (const neighbor of ALL_TERRAIN_IDS) {
         if (my === neighbor) continue;
-        if (this.entries.has(my * 8 + neighbor)) continue;
+        if (this.entries.has(my * TERRAIN_COUNT + neighbor)) continue;
 
         // Use the tile's own alpha overlay
         const alpha = this.alphas.get(my);
@@ -202,21 +232,29 @@ export class BlendGraph {
   }
 
   private buildBaseFills(): void {
-    // Each terrain's solid fill comes from a sheet where it is primary, at position (1,0) = mask 255
-    const fills: [TerrainId, string][] = [
-      [TerrainId.DeepWater, "me16"],
-      [TerrainId.ShallowWater, "me03"],
-      [TerrainId.Sand, "me08"],
-      [TerrainId.SandLight, "me07"],
-      [TerrainId.Grass, "me15"],
-      [TerrainId.DirtLight, "me01"],
-      [TerrainId.DirtWarm, "me02"],
+    // Each terrain's solid fill comes from an autotile sheet.
+    // Primary terrains use (1,0) = mask 255 (full primary fill).
+    // Secondary-only terrains (Asphalt, Curb) use (0,0) = the unused/secondary tile.
+    const fills: [TerrainId, string, number, number][] = [
+      [TerrainId.DeepWater, "me16", 1, 0],
+      [TerrainId.ShallowWater, "me03", 1, 0],
+      [TerrainId.Sand, "me08", 1, 0],
+      [TerrainId.SandLight, "me07", 1, 0],
+      [TerrainId.Grass, "me15", 1, 0],
+      [TerrainId.DirtLight, "me01", 1, 0],
+      [TerrainId.DirtWarm, "me02", 1, 0],
+      [TerrainId.Asphalt, "me21", 0, 0],
+      [TerrainId.Sidewalk, "me21", 1, 0],
+      [TerrainId.RoadWhite, "me25", 1, 0],
+      [TerrainId.RoadYellow, "me26", 1, 0],
+      [TerrainId.Playground, "me11", 1, 0],
+      [TerrainId.Curb, "me14", 0, 0],
     ];
-    for (const [terrain, sheetKey] of fills) {
+    for (const [terrain, sheetKey, col, row] of fills) {
       this.baseFills.set(terrain, {
         sheetIndex: this.sheetIdx(sheetKey),
-        col: 1,
-        row: 0,
+        col,
+        row,
       });
     }
   }

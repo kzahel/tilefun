@@ -10,10 +10,18 @@ export enum TerrainId {
   Grass = 4,
   DirtLight = 5,
   DirtWarm = 6,
+  // Road terrains
+  Asphalt = 7,
+  Sidewalk = 8,
+  RoadWhite = 9,
+  RoadYellow = 10,
+  // Structure terrains
+  Playground = 11,
+  Curb = 12,
 }
 
 /** Number of terrain types. */
-export const TERRAIN_COUNT = 7;
+export const TERRAIN_COUNT = 13;
 
 /** All terrain IDs for iteration. */
 export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
@@ -24,6 +32,12 @@ export const ALL_TERRAIN_IDS: readonly TerrainId[] = [
   TerrainId.Grass,
   TerrainId.DirtLight,
   TerrainId.DirtWarm,
+  TerrainId.Asphalt,
+  TerrainId.Sidewalk,
+  TerrainId.RoadWhite,
+  TerrainId.RoadYellow,
+  TerrainId.Playground,
+  TerrainId.Curb,
 ];
 
 /**
@@ -39,6 +53,12 @@ export const TERRAIN_DEPTH: Record<TerrainId, number> = {
   [TerrainId.Sand]: 4,
   [TerrainId.DirtLight]: 5,
   [TerrainId.DirtWarm]: 6,
+  [TerrainId.Curb]: 7,
+  [TerrainId.Asphalt]: 8,
+  [TerrainId.Sidewalk]: 9,
+  [TerrainId.RoadWhite]: 10,
+  [TerrainId.RoadYellow]: 11,
+  [TerrainId.Playground]: 12,
 };
 
 /**

@@ -27,7 +27,7 @@ export interface PendingEntitySpawn {
 export class EditorMode {
   selectedTerrain: TerrainId = TerrainId.Grass;
   selectedEntityType = "chicken";
-  editorTab: EditorTab = "terrain";
+  editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
 
   /** Reference to live entities for right-click deletion lookup. */

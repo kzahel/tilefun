@@ -26,6 +26,12 @@ const TERRAIN_DISPLAY: Record<TerrainId, TerrainDisplay> = {
   [TerrainId.Grass]: { label: "Grass", color: "#6b935f" },
   [TerrainId.DirtLight]: { label: "Dirt Light", color: "#a08050" },
   [TerrainId.DirtWarm]: { label: "Dirt Warm", color: "#8b6030" },
+  [TerrainId.Asphalt]: { label: "Asphalt", color: "#4a4a50" },
+  [TerrainId.Sidewalk]: { label: "Sidewalk", color: "#b0aaaa" },
+  [TerrainId.RoadWhite]: { label: "Road White", color: "#e0e0e0" },
+  [TerrainId.RoadYellow]: { label: "Road Yellow", color: "#d4a030" },
+  [TerrainId.Playground]: { label: "Playground", color: "#c87050" },
+  [TerrainId.Curb]: { label: "Curb", color: "#808080" },
 };
 
 // ===================== SHARED INSTANCES =====================

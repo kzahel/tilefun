@@ -10,6 +10,13 @@ export enum TileId {
   DenseForest = 5,
   DeepWater = 6,
   DirtPath = 8,
+  // Urban/structure tiles
+  Asphalt = 30,
+  Sidewalk = 31,
+  RoadWhite = 32,
+  RoadYellow = 33,
+  Playground = 34,
+  Curb = 35,
   // Detail tiles (decoration layer)
   FlowerRed = 10,
   FlowerYellow = 11,
@@ -73,6 +80,18 @@ export function terrainIdToTileId(terrain: TerrainId): TileId {
     case TerrainId.DirtLight:
     case TerrainId.DirtWarm:
       return TileId.DirtPath;
+    case TerrainId.Asphalt:
+      return TileId.Asphalt;
+    case TerrainId.Sidewalk:
+      return TileId.Sidewalk;
+    case TerrainId.RoadWhite:
+      return TileId.RoadWhite;
+    case TerrainId.RoadYellow:
+      return TileId.RoadYellow;
+    case TerrainId.Playground:
+      return TileId.Playground;
+    case TerrainId.Curb:
+      return TileId.Curb;
     default:
       return TileId.Grass;
   }

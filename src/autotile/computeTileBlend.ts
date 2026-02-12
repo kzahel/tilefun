@@ -4,6 +4,7 @@ import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import {
   getBaseSelectionMode,
   getForceConvex,
+  TERRAIN_COUNT,
   TERRAIN_DEPTH,
   type TerrainId,
 } from "./TerrainId.js";
@@ -72,7 +73,7 @@ export function computeTileBlend(
   blendGraph: BlendGraph,
 ): TileBlendResult {
   // Gather unique terrains
-  const seen = new Uint8Array(8);
+  const seen = new Uint8Array(TERRAIN_COUNT);
   seen[center] = 1;
   const all: TerrainId[] = [center];
   for (const t of [n, ne, e, se, s, sw, w, nw]) {

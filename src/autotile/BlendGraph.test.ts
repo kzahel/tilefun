@@ -145,6 +145,12 @@ describe("BlendGraph", () => {
         [TerrainId.Grass, TerrainId.DirtWarm], // reverse pair #12
         [TerrainId.ShallowWater, TerrainId.Grass],
         [TerrainId.Grass, TerrainId.ShallowWater], // reverse pair #15
+        // Urban/structure dedicated pairs
+        [TerrainId.Sidewalk, TerrainId.Asphalt],
+        [TerrainId.RoadWhite, TerrainId.Asphalt],
+        [TerrainId.RoadYellow, TerrainId.Asphalt],
+        [TerrainId.Playground, TerrainId.Grass],
+        [TerrainId.Grass, TerrainId.Curb],
       ];
       for (const [a, b] of directedPairs) {
         dedicatedKeys.add(`${a},${b}`);
@@ -167,11 +173,17 @@ describe("BlendGraph", () => {
 
   describe("base fills", () => {
     it("provides a base fill for every terrain", () => {
+      // Terrains that use secondary fill (col=0, row=0) instead of primary fill (col=1, row=0)
+      const secondaryFills = new Set([TerrainId.Asphalt, TerrainId.Curb]);
       for (const t of ALL_TERRAIN_IDS) {
         const fill = graph.getBaseFill(t);
         expect(fill, `Missing base fill for ${TerrainId[t]}`).toBeDefined();
         if (fill) {
-          expect(fill.col).toBe(1);
+          if (secondaryFills.has(t)) {
+            expect(fill.col).toBe(0);
+          } else {
+            expect(fill.col).toBe(1);
+          }
           expect(fill.row).toBe(0);
           expect(fill.sheetIndex).toBeGreaterThanOrEqual(0);
         }
@@ -211,8 +223,8 @@ describe("BlendGraph", () => {
   });
 
   describe("sheet loading", () => {
-    it("registers 11 unique sheets", () => {
-      expect(graph.allSheets.length).toBe(11);
+    it("registers 16 unique sheets", () => {
+      expect(graph.allSheets.length).toBe(16);
     });
 
     it("all sheet paths point to known autotile PNGs", () => {
