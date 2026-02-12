@@ -11,6 +11,7 @@ import {
   computeMask,
 } from "./Autotiler.js";
 import { BlendGraph, MAX_BLEND_LAYERS } from "./BlendGraph.js";
+import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import { TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
 
@@ -662,5 +663,124 @@ describe("computeChunkCornerBlend", () => {
     const chunk = makeUniformChunk(T.Grass);
     computeChunkCornerBlend(chunk, blendGraph);
     expect(chunk.blendLayers.length).toBe(MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE);
+  });
+
+  /** Unpack col and row from a packed blend layer value. */
+  function unpackColRow(packed: number): { col: number; row: number } {
+    return { col: (packed >> 8) & 0xff, row: packed & 0xff };
+  }
+
+  /** Get the expected sprite col/row for a given mask. */
+  function expectedSprite(mask: number): { col: number; row: number } {
+    const packed = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
+    return { col: packed & 0xff, row: packed >> 8 };
+  }
+
+  it("single water corner produces 4 inner concave sprites (tiny pond)", () => {
+    const chunk = makeUniformChunk(T.Grass);
+    chunk.setCorner(5, 5, T.ShallowWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Each tile gets a different concave inner corner mask.
+    // Overlay=Grass (direct), mask = computeBlendMask with 3 true, 1 false.
+    const cases: Array<{ lx: number; ly: number; mask: number; label: string }> = [
+      { lx: 4, ly: 4, mask: 127, label: "concave SE (all except SE)" },
+      { lx: 5, ly: 4, mask: 191, label: "concave SW (all except SW)" },
+      { lx: 4, ly: 5, mask: 223, label: "concave NE (all except NE)" },
+      { lx: 5, ly: 5, mask: 239, label: "concave NW (all except NW)" },
+    ];
+
+    for (const { lx, ly, mask, label } of cases) {
+      const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
+      const packed = chunk.blendLayers[tileOffset] ?? 0;
+      expect(packed, `${label}: should have blend layer`).toBeGreaterThan(0);
+      const sprite = unpackColRow(packed);
+      const expected = expectedSprite(mask);
+      expect(sprite.col, `${label}: col`).toBe(expected.col);
+      expect(sprite.row, `${label}: row`).toBe(expected.row);
+    }
+  });
+
+  it("two horizontal water corners produce edge sprites (not thin cross)", () => {
+    const chunk = makeUniformChunk(T.Grass);
+    // Two water corners on same row: (5,5) and (6,5)
+    chunk.setCorner(5, 5, T.ShallowWater);
+    chunk.setCorner(6, 5, T.ShallowWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Tile (5,4) has corners (G,G,W,W) → south edge, mask 55 for overlay=Grass
+    const edgeTile = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    const edgePacked = chunk.blendLayers[edgeTile] ?? 0;
+    expect(edgePacked).toBeGreaterThan(0);
+    const edgeSprite = unpackColRow(edgePacked);
+    const edgeExpected = expectedSprite(55); // N+W+E+NW+NE = south edge
+    expect(edgeSprite.col).toBe(edgeExpected.col);
+    expect(edgeSprite.row).toBe(edgeExpected.row);
+
+    // Corner tile (4,4) has corners (G,G,G,W) → concave SE corner, mask 127
+    const cornerTile = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    const cornerPacked = chunk.blendLayers[cornerTile] ?? 0;
+    expect(cornerPacked).toBeGreaterThan(0);
+    const cornerSprite = unpackColRow(cornerPacked);
+    const cornerExpected = expectedSprite(127);
+    expect(cornerSprite.col).toBe(cornerExpected.col);
+    expect(cornerSprite.row).toBe(cornerExpected.row);
+  });
+
+  it("four water corners (2x2 tile paint) produce proper edge and corner sprites", () => {
+    const chunk = makeUniformChunk(T.Grass);
+    // Paint all 9 corners of a 2x2 tile block (tiles 5,5 to 6,6)
+    for (let cy = 5; cy <= 7; cy++) {
+      for (let cx = 5; cx <= 7; cx++) {
+        chunk.setCorner(cx, cy, T.ShallowWater);
+      }
+    }
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Tile (5,5) has all 4 water corners → uniform, NO blend layers
+    const innerTile = (5 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    for (let s = 0; s < MAX_BLEND_LAYERS; s++) {
+      expect(chunk.blendLayers[innerTile + s]).toBe(0);
+    }
+
+    // Tile (5,4): top edge (G,G,W,W) → south edge sprite mask 55
+    const topEdge = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    const topPacked = chunk.blendLayers[topEdge] ?? 0;
+    expect(topPacked).toBeGreaterThan(0);
+    const topSprite = unpackColRow(topPacked);
+    expect(topSprite).toEqual(expectedSprite(55));
+
+    // Tile (4,5): left edge (G,W,G,W) → east edge sprite mask 91 (N+W+S+NW+SW)
+    const leftEdge = (5 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    const leftPacked = chunk.blendLayers[leftEdge] ?? 0;
+    expect(leftPacked).toBeGreaterThan(0);
+    const leftSprite = unpackColRow(leftPacked);
+    expect(leftSprite).toEqual(expectedSprite(91));
+
+    // Tile (4,4): NW corner (G,G,G,W) → concave SE corner mask 127
+    const nwCorner = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    const nwPacked = chunk.blendLayers[nwCorner] ?? 0;
+    expect(nwPacked).toBeGreaterThan(0);
+    expect(unpackColRow(nwPacked)).toEqual(expectedSprite(127));
+  });
+
+  it("inverted blend entry produces correct mask", () => {
+    const chunk = makeUniformChunk(T.ShallowWater);
+    // Paint a single DeepWater corner at (5,5)
+    chunk.setCorner(5, 5, T.DeepWater);
+
+    computeChunkCornerBlend(chunk, blendGraph);
+
+    // Tile (4,4): corners (W,W,W,D) → base=DeepWater, overlay=ShallowWater
+    // getBlend(ShallowWater, DeepWater) → me16, inverted=true
+    // Inverted: mask shows where BASE (DeepWater) is → computeBlendMask(F,F,F,T) = E+S+SE = 140
+    const tileOffset = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    const packed = chunk.blendLayers[tileOffset] ?? 0;
+    expect(packed).toBeGreaterThan(0);
+    const sprite = unpackColRow(packed);
+    expect(sprite).toEqual(expectedSprite(140));
   });
 });

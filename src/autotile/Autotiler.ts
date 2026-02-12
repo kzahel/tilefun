@@ -4,7 +4,7 @@ import type { TileId } from "../world/TileRegistry.js";
 import type { BlendGraph } from "./BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "./BlendGraph.js";
 import { AutotileBit } from "./bitmask.js";
-import { computeCornerMask } from "./CornerBlend.js";
+import { computeBlendMask } from "./CornerBlend.js";
 import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import { TERRAIN_DEPTH, type TerrainId } from "./TerrainId.js";
 import { TERRAIN_LAYERS } from "./TerrainLayers.js";
@@ -102,8 +102,8 @@ interface TileLayer {
  *
  * For each tile, reads its 4 corners (TerrainId values),
  * finds the base terrain (lowest depth), and for each overlay terrain computes
- * a corner-based mask using computeCornerMask. No neighbor tiles are consulted —
- * transitions are self-contained within mixed-corner tiles.
+ * a blend mask using computeBlendMask (OR-based cardinals). No neighbor tiles
+ * are consulted — transitions are self-contained within mixed-corner tiles.
  *
  * @param blendGraph - The blend sheet selection graph.
  */
@@ -157,12 +157,12 @@ export function computeChunkCornerBlend(chunk: Chunk, blendGraph: BlendGraph): v
         let mask: number;
         if (entry.inverted) {
           // Inverted: mask shows where BASE is present
-          mask = computeCornerMask(nw === base, ne === base, sw === base, se === base);
+          mask = computeBlendMask(nw === base, ne === base, sw === base, se === base);
           // Skip degenerate: base everywhere (255) or base nowhere (0)
           if (mask === 0 || mask === 255) continue;
         } else {
           // Direct: mask shows where OVERLAY is present
-          mask = computeCornerMask(nw === overlay, ne === overlay, sw === overlay, se === overlay);
+          mask = computeBlendMask(nw === overlay, ne === overlay, sw === overlay, se === overlay);
         }
 
         const sprite = GM_BLOB_LOOKUP[mask & 0xff] ?? 0;
