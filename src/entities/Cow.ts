@@ -40,6 +40,7 @@ export function createCow(wx: number, wy: number): Entity {
       walkMin: 1.0,
       walkMax: 3.0,
       speed: COW_SPEED,
+      directional: false,
     },
   };
 }

@@ -17,6 +17,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { createCampfire } from "../entities/Campfire.js";
 import { createChicken } from "../entities/Chicken.js";
 import { createCow } from "../entities/Cow.js";
+import { createCrow } from "../entities/Crow.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { createEggNest } from "../entities/EggNest.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
@@ -25,6 +26,8 @@ import { createFish1, createFish2, createFish3 } from "../entities/Fish.js";
 import { createPigeon } from "../entities/Pigeon.js";
 import { createPigeon2 } from "../entities/Pigeon2.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
+import { createSeagull } from "../entities/Seagull.js";
+import { createWorm1, createWorm2, createWorm3, createWorm4 } from "../entities/Worm.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -150,6 +153,12 @@ export class Game {
       fish3Img,
       campfireImg,
       eggNestImg,
+      crowImg,
+      seagullImg,
+      worm1Img,
+      worm2Img,
+      worm3Img,
+      worm4Img,
       completeImg,
     ] = await Promise.all([
       Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
@@ -164,6 +173,12 @@ export class Game {
       loadImage("assets/sprites/fish3.png"),
       loadImage("assets/sprites/campfire.png"),
       loadImage("assets/sprites/egg-nest.png"),
+      loadImage("assets/sprites/crow.png"),
+      loadImage("assets/sprites/seagull.png"),
+      loadImage("assets/sprites/worm1.png"),
+      loadImage("assets/sprites/worm2.png"),
+      loadImage("assets/sprites/worm3.png"),
+      loadImage("assets/sprites/worm4.png"),
       loadImage("assets/tilesets/me-complete.png"),
     ]);
 
@@ -203,6 +218,12 @@ export class Game {
     this.sheets.set("fish3", new Spritesheet(fish3Img, 16, 16));
     this.sheets.set("campfire", new Spritesheet(campfireImg, 16, 32));
     this.sheets.set("egg-nest", new Spritesheet(eggNestImg, 16, 16));
+    this.sheets.set("crow", new Spritesheet(crowImg, 32, 32));
+    this.sheets.set("seagull", new Spritesheet(seagullImg, 32, 32));
+    this.sheets.set("worm1", new Spritesheet(worm1Img, 16, 16));
+    this.sheets.set("worm2", new Spritesheet(worm2Img, 16, 16));
+    this.sheets.set("worm3", new Spritesheet(worm3Img, 16, 16));
+    this.sheets.set("worm4", new Spritesheet(worm4Img, 16, 16));
 
     // Open persistence and load saved state
     await this.saveManager.open();
@@ -905,6 +926,12 @@ const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity> = {
   fish3: createFish3,
   campfire: createCampfire,
   "egg-nest": createEggNest,
+  crow: createCrow,
+  seagull: createSeagull,
+  worm1: createWorm1,
+  worm2: createWorm2,
+  worm3: createWorm3,
+  worm4: createWorm4,
 };
 
 /**

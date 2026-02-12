@@ -40,6 +40,7 @@ export function createChicken(wx: number, wy: number): Entity {
       walkMin: 1.0,
       walkMax: 3.0,
       speed: CHICKEN_SPEED,
+      directional: false,
     },
   };
 }

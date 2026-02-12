@@ -57,6 +57,8 @@ export interface WanderAIComponent {
   walkMax: number;
   /** Movement speed in px/s. */
   speed: number;
+  /** When true, sprite.frameRow is updated from movement direction. */
+  directional: boolean;
 }
 
 export interface Entity {

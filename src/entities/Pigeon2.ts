@@ -40,6 +40,7 @@ export function createPigeon2(wx: number, wy: number): Entity {
       walkMin: 0.5,
       walkMax: 2.0,
       speed: PIGEON2_SPEED,
+      directional: false,
     },
   };
 }

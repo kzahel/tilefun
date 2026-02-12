@@ -1,4 +1,4 @@
-import type { Entity } from "./Entity.js";
+import { Direction, type Entity } from "./Entity.js";
 
 /**
  * Update wander AI for an entity. Transitions between idle and walking.
@@ -33,6 +33,10 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
     vel.vy = ai.dirY * ai.speed;
     if (sprite) {
       sprite.moving = true;
+      if (ai.directional) {
+        sprite.direction = directionFromVelocity(ai.dirX, ai.dirY);
+        sprite.frameRow = sprite.direction;
+      }
     }
   } else {
     vel.vx = 0;
@@ -41,6 +45,14 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
       sprite.moving = false;
     }
   }
+}
+
+/** Derive a 4-way Direction from a velocity vector. */
+function directionFromVelocity(dx: number, dy: number): Direction {
+  if (Math.abs(dx) > Math.abs(dy)) {
+    return dx < 0 ? Direction.Left : Direction.Right;
+  }
+  return dy < 0 ? Direction.Up : Direction.Down;
 }
 
 /** Reverse direction when collision blocks movement. */

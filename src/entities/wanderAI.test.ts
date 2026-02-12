@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { createChicken } from "./Chicken.js";
+import { Direction } from "./Entity.js";
 import { createPlayer } from "./Player.js";
+import { createWorm1 } from "./Worm.js";
 import { onWanderBlocked, updateWanderAI } from "./wanderAI.js";
 
 /** Deterministic "random" that returns fixed values in sequence. */
@@ -71,6 +73,24 @@ describe("updateWanderAI", () => {
     const rng = makeRandom([0.5, 0.0]);
     updateWanderAI(c, 2.1, rng);
     expect(c.sprite?.frameRow).toBe(origRow);
+  });
+
+  it("updates frameRow when directional is true", () => {
+    const w = createWorm1(0, 0);
+    expect(w.wanderAI?.directional).toBe(true);
+    // angle=0 → dirX=1, dirY≈0 → Right (Direction.Right = 3)
+    const rng = makeRandom([0.5, 0.0]);
+    updateWanderAI(w, 2.1, rng);
+    expect(w.sprite?.frameRow).toBe(Direction.Right);
+    expect(w.sprite?.direction).toBe(Direction.Right);
+  });
+
+  it("sets Down direction for downward movement (directional)", () => {
+    const w = createWorm1(0, 0);
+    // angle = 0.25 * 2π = π/2 → dirX≈0, dirY=1 → Down
+    const rng = makeRandom([0.5, 0.25]);
+    updateWanderAI(w, 2.1, rng);
+    expect(w.sprite?.frameRow).toBe(Direction.Down);
   });
 
   it("does nothing if entity has no wanderAI component", () => {
