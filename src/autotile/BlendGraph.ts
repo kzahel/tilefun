@@ -235,8 +235,9 @@ export class BlendGraph {
   private buildAlphaFallbacks(): void {
     // Register alpha overlay sheets per terrain
     this.alphas.set(TerrainId.Grass, this.alphaEntry("me13", TerrainId.Grass));
-    this.alphas.set(TerrainId.DirtLight, this.alphaEntry("me13", TerrainId.DirtLight));
-    this.alphas.set(TerrainId.DirtWarm, this.alphaEntry("me13", TerrainId.DirtWarm));
+    // No alpha for DirtLight/DirtWarm: their only valid blend is with grass,
+    // which already has dedicated sheets (ME#01, ME#02). Grass alpha would
+    // produce green edges on non-grass neighbors (sand, water, etc.).
     this.alphas.set(TerrainId.Sand, this.alphaEntry("me10", TerrainId.Sand));
     this.alphas.set(TerrainId.SandLight, this.alphaEntry("me10", TerrainId.SandLight));
     this.alphas.set(TerrainId.ShallowWater, this.alphaEntry("me13", TerrainId.ShallowWater));

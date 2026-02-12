@@ -55,28 +55,25 @@ describe("TerrainAdjacency", () => {
       expect(adj.isValidAdjacency(TerrainId.Grass, TerrainId.Sand)).toBe(true);
     });
 
-    it("all terrain pairs have at least alpha adjacency", () => {
-      // BlendGraph fills alpha fallbacks for all remaining pairs
-      for (const a of [
-        TerrainId.DeepWater,
-        TerrainId.ShallowWater,
-        TerrainId.Sand,
-        TerrainId.SandLight,
-        TerrainId.Grass,
-        TerrainId.DirtLight,
-        TerrainId.DirtWarm,
-      ]) {
-        for (const b of [
-          TerrainId.DeepWater,
-          TerrainId.ShallowWater,
-          TerrainId.Sand,
-          TerrainId.SandLight,
-          TerrainId.Grass,
-          TerrainId.DirtLight,
-          TerrainId.DirtWarm,
-        ]) {
-          expect(adj.isValidAdjacency(a, b)).toBe(true);
+    it("dirt↔non-grass pairs have no adjacency (no alpha or dedicated sheet)", () => {
+      // Dirt has no alpha sheet, so only dirt↔grass has adjacency
+      for (const dirt of [TerrainId.DirtLight, TerrainId.DirtWarm]) {
+        for (const other of [TerrainId.Sand, TerrainId.SandLight, TerrainId.DeepWater]) {
+          expect(adj.isValidAdjacency(dirt, other)).toBe(false);
         }
+      }
+    });
+
+    it("non-dirt pairs still have adjacency (dedicated or alpha)", () => {
+      // Pairs that have dedicated sheets or alpha fallback
+      for (const [a, b] of [
+        [TerrainId.Grass, TerrainId.Sand],
+        [TerrainId.Sand, TerrainId.SandLight],
+        [TerrainId.DeepWater, TerrainId.ShallowWater],
+        [TerrainId.DirtLight, TerrainId.Grass],
+        [TerrainId.DirtWarm, TerrainId.Grass],
+      ] as [TerrainId, TerrainId][]) {
+        expect(adj.isValidAdjacency(a, b)).toBe(true);
       }
     });
   });

@@ -12,17 +12,13 @@ describe("BlendGraph", () => {
       }
     });
 
-    it("returns a valid BlendEntry for all 42 different-terrain pairs", () => {
-      let count = 0;
+    it("returns a valid BlendEntry for all pairs that have blends", () => {
+      // Dirt terrains have no alpha fallback (no dirt alpha sheet exists),
+      // so pairs like DirtLight↔Sand have no blend entry.
       for (const my of ALL_TERRAIN_IDS) {
         for (const neighbor of ALL_TERRAIN_IDS) {
           if (my === neighbor) continue;
-          count++;
           const entry = graph.getBlend(my, neighbor);
-          expect(
-            entry,
-            `Missing blend for (${TerrainId[my]}, ${TerrainId[neighbor]})`,
-          ).toBeDefined();
           if (entry) {
             expect(entry.sheetIndex).toBeGreaterThanOrEqual(0);
             expect(entry.sheetKey).toBeTruthy();
@@ -30,7 +26,14 @@ describe("BlendGraph", () => {
           }
         }
       }
-      expect(count).toBe(42); // 7*7 - 7 = 42
+    });
+
+    it("returns undefined for dirt↔non-grass pairs (no dedicated or alpha)", () => {
+      for (const dirt of [TerrainId.DirtLight, TerrainId.DirtWarm]) {
+        for (const other of [TerrainId.Sand, TerrainId.SandLight, TerrainId.DeepWater]) {
+          expect(graph.getBlend(dirt, other)).toBeUndefined();
+        }
+      }
     });
   });
 
@@ -120,9 +123,8 @@ describe("BlendGraph", () => {
       expect(entry?.isAlpha).toBe(true);
     });
 
-    it("uses alpha for DirtLight→DirtWarm (no dedicated pair)", () => {
-      const entry = graph.getBlend(TerrainId.DirtLight, TerrainId.DirtWarm);
-      expect(entry?.isAlpha).toBe(true);
+    it("returns undefined for DirtLight→DirtWarm (no dedicated pair, no dirt alpha)", () => {
+      expect(graph.getBlend(TerrainId.DirtLight, TerrainId.DirtWarm)).toBeUndefined();
     });
 
     it("all non-dedicated pairs have isAlpha=true", () => {
@@ -172,8 +174,10 @@ describe("BlendGraph", () => {
   });
 
   describe("alpha overlays", () => {
-    it("provides alpha for every terrain", () => {
-      for (const t of ALL_TERRAIN_IDS) {
+    it("provides alpha for terrains that have alpha sheets", () => {
+      // Grass, Sand, SandLight, water terrains have alpha
+      for (const t of [TerrainId.Grass, TerrainId.Sand, TerrainId.SandLight,
+        TerrainId.ShallowWater, TerrainId.DeepWater]) {
         const alpha = graph.getAlpha(t);
         expect(alpha, `Missing alpha for ${TerrainId[t]}`).toBeDefined();
         if (alpha) {
@@ -182,10 +186,13 @@ describe("BlendGraph", () => {
       }
     });
 
-    it("uses grass alpha (#13) for grass-family terrains", () => {
+    it("has no alpha for dirt terrains (no dirt alpha sheet exists)", () => {
+      expect(graph.getAlpha(TerrainId.DirtLight)).toBeUndefined();
+      expect(graph.getAlpha(TerrainId.DirtWarm)).toBeUndefined();
+    });
+
+    it("uses grass alpha (#13) for grass", () => {
       expect(graph.getAlpha(TerrainId.Grass)?.sheetKey).toBe("me13");
-      expect(graph.getAlpha(TerrainId.DirtLight)?.sheetKey).toBe("me13");
-      expect(graph.getAlpha(TerrainId.DirtWarm)?.sheetKey).toBe("me13");
     });
 
     it("uses sand alpha (#10) for sand-family terrains", () => {
