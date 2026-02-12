@@ -4,5 +4,9 @@ test-results/
 playwright-report/
 *.zip
 Sprout-Lands-Tilemap-addon/
-screenshot.png
+screenshot*.png
 assets
+.DS_Store
+*.tiled-project
+*.tiled-session
+ME complete tileset.tsx

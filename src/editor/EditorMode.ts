@@ -2,25 +2,42 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
 import { TileId } from "../world/TileRegistry.js";
 
-interface PendingEdit {
+export type BrushMode = "tile" | "corner";
+
+interface PendingTileEdit {
   tx: number;
   ty: number;
   tileId: TileId;
 }
 
+export interface PendingCornerEdit {
+  gx: number;
+  gy: number;
+  tileId: TileId;
+}
+
 export class EditorMode {
   selectedTerrain: TileId = TileId.Grass;
+  brushMode: BrushMode = "tile";
+
+  // Tile-mode cursor (whole tile)
   cursorTileX = -Infinity;
   cursorTileY = -Infinity;
 
+  // Corner-mode cursor (vertex position)
+  cursorCornerX = -Infinity;
+  cursorCornerY = -Infinity;
+
   private readonly canvas: HTMLCanvasElement;
   private readonly camera: Camera;
-  private pendingEdits: PendingEdit[] = [];
+  private pendingTileEdits: PendingTileEdit[] = [];
+  private pendingCornerEdits: PendingCornerEdit[] = [];
   private isPainting = false;
   private isPanning = false;
   private spaceDown = false;
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
   private lastPaintedTile = { tx: -Infinity, ty: -Infinity };
+  private lastPaintedCorner = { gx: -Infinity, gy: -Infinity };
 
   // Touch state
   private activeTouches = new Map<number, { sx: number; sy: number }>();
@@ -97,10 +114,17 @@ export class EditorMode {
     this.activeTouches.clear();
   }
 
-  consumePendingEdits(): PendingEdit[] {
-    if (this.pendingEdits.length === 0) return this.pendingEdits;
-    const edits = this.pendingEdits;
-    this.pendingEdits = [];
+  consumePendingEdits(): PendingTileEdit[] {
+    if (this.pendingTileEdits.length === 0) return this.pendingTileEdits;
+    const edits = this.pendingTileEdits;
+    this.pendingTileEdits = [];
+    return edits;
+  }
+
+  consumePendingCornerEdits(): PendingCornerEdit[] {
+    if (this.pendingCornerEdits.length === 0) return this.pendingCornerEdits;
+    const edits = this.pendingCornerEdits;
+    this.pendingCornerEdits = [];
     return edits;
   }
 
@@ -120,13 +144,45 @@ export class EditorMode {
     };
   }
 
+  private screenToCorner(sx: number, sy: number): { gx: number; gy: number } {
+    const { wx, wy } = this.camera.screenToWorld(sx, sy);
+    return {
+      gx: Math.round(wx / TILE_SIZE),
+      gy: Math.round(wy / TILE_SIZE),
+    };
+  }
+
   private paintAt(sx: number, sy: number): void {
+    if (this.brushMode === "corner") {
+      this.paintCornerAt(sx, sy);
+    } else {
+      this.paintTileAt(sx, sy);
+    }
+  }
+
+  private paintTileAt(sx: number, sy: number): void {
     const { tx, ty } = this.screenToTile(sx, sy);
-    // Avoid duplicate edits on same tile during drag
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingEdits.push({ tx, ty, tileId: this.selectedTerrain });
+    this.pendingTileEdits.push({ tx, ty, tileId: this.selectedTerrain });
+  }
+
+  private paintCornerAt(sx: number, sy: number): void {
+    const { gx, gy } = this.screenToCorner(sx, sy);
+    if (gx === this.lastPaintedCorner.gx && gy === this.lastPaintedCorner.gy) return;
+    this.lastPaintedCorner.gx = gx;
+    this.lastPaintedCorner.gy = gy;
+    this.pendingCornerEdits.push({ gx, gy, tileId: this.selectedTerrain });
+  }
+
+  private updateCursor(sx: number, sy: number): void {
+    const { tx, ty } = this.screenToTile(sx, sy);
+    this.cursorTileX = tx;
+    this.cursorTileY = ty;
+    const { gx, gy } = this.screenToCorner(sx, sy);
+    this.cursorCornerX = gx;
+    this.cursorCornerY = gy;
   }
 
   // --- Mouse handlers ---
@@ -152,6 +208,8 @@ export class EditorMode {
       this.isPainting = true;
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;
+      this.lastPaintedCorner.gx = -Infinity;
+      this.lastPaintedCorner.gy = -Infinity;
       this.paintAt(sx, sy);
     }
   }
@@ -159,10 +217,7 @@ export class EditorMode {
   private handleMouseMove(e: MouseEvent): void {
     const { sx, sy } = this.canvasCoords(e);
 
-    // Update cursor highlight
-    const { tx, ty } = this.screenToTile(sx, sy);
-    this.cursorTileX = tx;
-    this.cursorTileY = ty;
+    this.updateCursor(sx, sy);
 
     if (this.isPanning) {
       const dx = (e.clientX - this.panStart.sx) / this.camera.scale;
@@ -222,6 +277,8 @@ export class EditorMode {
       if (first) {
         this.lastPaintedTile.tx = -Infinity;
         this.lastPaintedTile.ty = -Infinity;
+        this.lastPaintedCorner.gx = -Infinity;
+        this.lastPaintedCorner.gy = -Infinity;
         this.paintAt(first.sx, first.sy);
       }
     } else if (this.activeTouches.size >= 2) {
@@ -246,9 +303,7 @@ export class EditorMode {
       const [first] = this.activeTouches.values();
       if (first) {
         this.paintAt(first.sx, first.sy);
-        const { tx, ty } = this.screenToTile(first.sx, first.sy);
-        this.cursorTileX = tx;
-        this.cursorTileY = ty;
+        this.updateCursor(first.sx, first.sy);
       }
     }
   }
@@ -264,6 +319,8 @@ export class EditorMode {
     if (this.activeTouches.size === 1) {
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;
+      this.lastPaintedCorner.gx = -Infinity;
+      this.lastPaintedCorner.gy = -Infinity;
     }
   }
 

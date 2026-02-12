@@ -2,6 +2,8 @@ import alea from "alea";
 import { loadImage } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { deriveTerrainFromCorners } from "../autotile/TerrainGraph.js";
+import { biomeIdToTileId, tileIdToBiomeId } from "../autotile/terrainMapping.js";
 import {
   CAMERA_LERP,
   CHICKEN_SPRITE_SIZE,
@@ -18,6 +20,7 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
+import { BiomeId } from "../generation/BiomeMapper.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
@@ -92,6 +95,10 @@ export class Game {
       if (e.key === "Tab") {
         e.preventDefault();
         this.toggleEditor();
+      }
+      if ((e.key === "m" || e.key === "M") && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.toggleMode();
       }
     });
     this.createEditorButton();
@@ -210,10 +217,16 @@ export class Game {
     // Editor mode: paint terrain, skip gameplay
     if (this.editorEnabled) {
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
+      this.editorMode.brushMode = this.editorPanel.brushMode;
 
-      // Apply terrain edits
+      // Apply terrain edits (tile mode)
       for (const edit of this.editorMode.consumePendingEdits()) {
         this.applyTerrainEdit(edit.tx, edit.ty, edit.tileId);
+      }
+
+      // Apply corner edits (corner mode)
+      for (const edit of this.editorMode.consumePendingCornerEdits()) {
+        this.applyCornerEdit(edit.gx, edit.gy, tileIdToBiomeId(edit.tileId));
       }
 
       // Handle clear canvas
@@ -373,6 +386,86 @@ export class Game {
     if (lx === CHUNK_SIZE - 1 && ly === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy + 1);
   }
 
+  private applyCornerEdit(gx: number, gy: number, biomeId: BiomeId): void {
+    // Set the corner in all chunks that share this vertex
+    this.setGlobalCorner(gx, gy, biomeId);
+
+    // Re-derive terrain for the 4 tiles that share this corner:
+    // (gx-1,gy-1), (gx,gy-1), (gx-1,gy), (gx,gy)
+    for (let dy = -1; dy <= 0; dy++) {
+      for (let dx = -1; dx <= 0; dx++) {
+        this.rederiveTerrainAt(gx + dx, gy + dy);
+      }
+    }
+  }
+
+  private setGlobalCorner(gx: number, gy: number, biomeId: BiomeId): void {
+    const cx = Math.floor(gx / CHUNK_SIZE);
+    const cy = Math.floor(gy / CHUNK_SIZE);
+    const lcx = gx - cx * CHUNK_SIZE;
+    const lcy = gy - cy * CHUNK_SIZE;
+
+    this.setCornerInChunk(cx, cy, lcx, lcy, biomeId);
+    // Shared with left neighbor chunk
+    if (lcx === 0) this.setCornerInChunk(cx - 1, cy, CHUNK_SIZE, lcy, biomeId);
+    // Shared with top neighbor chunk
+    if (lcy === 0) this.setCornerInChunk(cx, cy - 1, lcx, CHUNK_SIZE, biomeId);
+    // Shared with diagonal neighbor chunk
+    if (lcx === 0 && lcy === 0)
+      this.setCornerInChunk(cx - 1, cy - 1, CHUNK_SIZE, CHUNK_SIZE, biomeId);
+  }
+
+  private setCornerInChunk(
+    cx: number,
+    cy: number,
+    lcx: number,
+    lcy: number,
+    biomeId: BiomeId,
+  ): void {
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (chunk) {
+      chunk.setCorner(lcx, lcy, biomeId);
+    }
+  }
+
+  private getGlobalCorner(gx: number, gy: number): BiomeId {
+    const cx = Math.floor(gx / CHUNK_SIZE);
+    const cy = Math.floor(gy / CHUNK_SIZE);
+    const lcx = gx - cx * CHUNK_SIZE;
+    const lcy = gy - cy * CHUNK_SIZE;
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (!chunk) return BiomeId.Grass;
+    return chunk.getCorner(lcx, lcy) as BiomeId;
+  }
+
+  private rederiveTerrainAt(tx: number, ty: number): void {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (!chunk) return;
+
+    // Tile (tx,ty) has corners: NW=(tx,ty), NE=(tx+1,ty), SW=(tx,ty+1), SE=(tx+1,ty+1)
+    const nw = this.getGlobalCorner(tx, ty);
+    const ne = this.getGlobalCorner(tx + 1, ty);
+    const sw = this.getGlobalCorner(tx, ty + 1);
+    const se = this.getGlobalCorner(tx + 1, ty + 1);
+
+    const biome = deriveTerrainFromCorners(nw, ne, sw, se);
+    const tileId = biomeIdToTileId(biome);
+
+    chunk.setTerrain(lx, ly, tileId);
+    chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
+    chunk.setDetail(lx, ly, TileId.Empty);
+    chunk.dirty = true;
+    chunk.autotileComputed = false;
+
+    // Invalidate neighbor chunks if tile is on a chunk edge
+    if (lx === 0) this.invalidateChunk(cx - 1, cy);
+    if (lx === CHUNK_SIZE - 1) this.invalidateChunk(cx + 1, cy);
+    if (ly === 0) this.invalidateChunk(cx, cy - 1);
+    if (ly === CHUNK_SIZE - 1) this.invalidateChunk(cx, cy + 1);
+  }
+
   private invalidateChunk(cx: number, cy: number): void {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
@@ -437,6 +530,14 @@ export class Game {
   }
 
   private drawCursorHighlight(): void {
+    if (this.editorPanel.brushMode === "corner") {
+      this.drawCornerCursorHighlight();
+    } else {
+      this.drawTileCursorHighlight();
+    }
+  }
+
+  private drawTileCursorHighlight(): void {
     const tx = this.editorMode.cursorTileX;
     const ty = this.editorMode.cursorTileY;
     if (!Number.isFinite(tx)) return;
@@ -450,6 +551,37 @@ export class Game {
     this.ctx.lineWidth = 2;
     this.ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
     this.ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+    this.ctx.restore();
+  }
+
+  private drawCornerCursorHighlight(): void {
+    const gx = this.editorMode.cursorCornerX;
+    const gy = this.editorMode.cursorCornerY;
+    if (!Number.isFinite(gx)) return;
+
+    // Corner vertex is at the intersection of tiles
+    const cornerScreen = this.camera.worldToScreen(gx * TILE_SIZE, gy * TILE_SIZE);
+    const radius = Math.max(4, 3 * this.camera.scale);
+
+    this.ctx.save();
+
+    // Draw a filled circle at the corner vertex
+    this.ctx.beginPath();
+    this.ctx.arc(cornerScreen.sx, cornerScreen.sy, radius, 0, Math.PI * 2);
+    this.ctx.fillStyle = "rgba(240, 160, 48, 0.6)";
+    this.ctx.fill();
+    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    this.ctx.lineWidth = 2;
+    this.ctx.stroke();
+
+    // Lightly highlight the 4 tiles that share this corner
+    const halfTile = TILE_SIZE * this.camera.scale;
+    this.ctx.fillStyle = "rgba(240, 160, 48, 0.1)";
+    this.ctx.fillRect(cornerScreen.sx - halfTile, cornerScreen.sy - halfTile, halfTile, halfTile);
+    this.ctx.fillRect(cornerScreen.sx, cornerScreen.sy - halfTile, halfTile, halfTile);
+    this.ctx.fillRect(cornerScreen.sx - halfTile, cornerScreen.sy, halfTile, halfTile);
+    this.ctx.fillRect(cornerScreen.sx, cornerScreen.sy, halfTile, halfTile);
+
     this.ctx.restore();
   }
 

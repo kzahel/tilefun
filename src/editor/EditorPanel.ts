@@ -1,4 +1,5 @@
 import { TileId } from "../world/TileRegistry.js";
+import type { BrushMode } from "./EditorMode.js";
 
 const PANEL_STYLE = `
   position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%);
@@ -29,13 +30,32 @@ const PALETTE: PaletteEntry[] = [
 export class EditorPanel {
   private readonly container: HTMLDivElement;
   private readonly buttons: HTMLButtonElement[] = [];
+  private readonly modeButton: HTMLButtonElement;
   private pendingClear: TileId | null = null;
   selectedTerrain: TileId = TileId.Grass;
+  brushMode: BrushMode = "tile";
 
   constructor() {
     this.container = document.createElement("div");
     this.container.style.cssText = PANEL_STYLE;
     this.container.style.display = "none";
+
+    // Mode toggle button
+    this.modeButton = document.createElement("button");
+    this.modeButton.style.cssText = `
+      height: 44px; border: 2px solid #888; border-radius: 4px;
+      background: #444; color: #fff; font: bold 10px monospace;
+      cursor: pointer; padding: 0 10px;
+    `;
+    this.modeButton.textContent = "Tile";
+    this.modeButton.title = "Toggle tile/corner brush mode (M)";
+    this.modeButton.addEventListener("click", () => this.toggleMode());
+    this.container.appendChild(this.modeButton);
+
+    // Separator after mode button
+    const modeSep = document.createElement("div");
+    modeSep.style.cssText = "width: 1px; height: 32px; background: #555; margin: 0 4px;";
+    this.container.appendChild(modeSep);
 
     for (const entry of PALETTE) {
       const btn = document.createElement("button");
@@ -84,6 +104,12 @@ export class EditorPanel {
 
   set visible(v: boolean) {
     this.container.style.display = v ? "flex" : "none";
+  }
+
+  toggleMode(): void {
+    this.brushMode = this.brushMode === "tile" ? "corner" : "tile";
+    this.modeButton.textContent = this.brushMode === "tile" ? "Tile" : "Corner";
+    this.modeButton.style.borderColor = this.brushMode === "corner" ? "#f0a030" : "#888";
   }
 
   consumeClearRequest(): TileId | null {
