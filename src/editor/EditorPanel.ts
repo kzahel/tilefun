@@ -1,6 +1,6 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { TerrainId } from "../autotile/TerrainId.js";
+import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { MAX_ELEVATION } from "../config/constants.js";
 import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
@@ -44,14 +44,18 @@ interface SheetPaletteEntry {
 
 const NATURAL_SHEET_PALETTE: SheetPaletteEntry[] = [
   { sheetKey: "me16", label: "Deep/Shlw", storedValue: TerrainId.DeepWater },
-  { sheetKey: "me03", label: "Shlw/Grass", storedValue: TerrainId.ShallowWaterOnGrass },
+  { sheetKey: "me03", label: "Shlw/Grass", storedValue: VariantId.ShallowWaterOnGrass },
   { sheetKey: "me08", label: "Sand/Shlw", storedValue: TerrainId.Sand },
   { sheetKey: "me09", label: "Sand/SandL", storedValue: TerrainId.Sand },
   { sheetKey: "me07", label: "SandL/Grass", storedValue: TerrainId.SandLight },
   { sheetKey: "me01", label: "DirtL/Grass", storedValue: TerrainId.DirtLight },
   { sheetKey: "me02", label: "DirtW/Grass", storedValue: TerrainId.DirtWarm },
-  { sheetKey: "me12", label: "Grass/DirtW", storedValue: TerrainId.GrassOnDirtWarm },
+  { sheetKey: "me12", label: "Grass/DirtW", storedValue: VariantId.GrassOnDirtWarm },
   { sheetKey: "me15", label: "Grass/Shlw", storedValue: TerrainId.Grass },
+  // Alpha variants (prefer overlay behavior)
+  { sheetKey: "me13", label: "Grass\u03b1", storedValue: VariantId.GrassAlpha },
+  { sheetKey: "me10", label: "Sand\u03b1", storedValue: VariantId.SandAlpha },
+  { sheetKey: "me10", label: "SandL\u03b1", storedValue: VariantId.SandLightAlpha },
 ];
 
 interface RoadPaletteEntry {
@@ -94,6 +98,11 @@ const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: "worm2", label: "Worm 2", color: "#88aa44" },
   { type: "worm3", label: "Worm 3", color: "#aa8844" },
   { type: "worm4", label: "Worm 4", color: "#6688aa" },
+  ...Array.from({ length: 20 }, (_, i) => ({
+    type: `person${i + 1}`,
+    label: `Person ${i + 1}`,
+    color: "#b89070",
+  })),
 ];
 
 const ALL_TABS: EditorTab[] = ["natural", "road", "structure", "entities", "elevation"];

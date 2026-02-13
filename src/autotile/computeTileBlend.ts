@@ -5,6 +5,7 @@ import {
   getBaseSelectionMode,
   getForceConvex,
   getPreferredPartner,
+  isOverlayPreferred,
   TERRAIN_COUNT,
   TERRAIN_DEPTH,
   type TerrainId,
@@ -125,6 +126,10 @@ export function computeTileBlend(
       // Preference boost: if center has a preferred partner, strongly prefer it as base
       if (preferredPartner !== undefined && candidate === preferredPartner) {
         score += 10;
+      }
+      // Overlay preference: penalize center terrain as base so it becomes overlay
+      if (isOverlayPreferred(centerRaw) && candidate === center) {
+        score -= 10;
       }
       if (
         score > bestScore ||
