@@ -6,6 +6,7 @@ import { createEggNest } from "./EggNest.js";
 import type { Entity } from "./Entity.js";
 import { createFish1, createFish2, createFish3 } from "./Fish.js";
 import { createGem } from "./Gem.js";
+import { createGhostAngry, createGhostFriendly } from "./Ghost.js";
 import {
   createPerson1,
   createPerson2,
@@ -43,6 +44,8 @@ export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity
   fish3: createFish3,
   campfire: createCampfire,
   gem: createGem,
+  "ghost-friendly": createGhostFriendly,
+  "ghost-angry": createGhostAngry,
   "egg-nest": createEggNest,
   crow: createCrow,
   seagull: createSeagull,

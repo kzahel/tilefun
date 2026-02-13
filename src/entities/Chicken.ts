@@ -26,7 +26,7 @@ export function createChicken(wx: number, wy: number): Entity {
     },
     collider: {
       offsetX: 0,
-      offsetY: 0,
+      offsetY: -5,
       width: 10,
       height: 6,
     },
@@ -41,6 +41,8 @@ export function createChicken(wx: number, wy: number): Entity {
       walkMax: 3.0,
       speed: CHICKEN_SPEED,
       directional: false,
+      befriendable: true,
+      followDistance: 20,
     },
   };
 }

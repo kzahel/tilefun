@@ -47,7 +47,7 @@ export interface ColliderComponent {
 }
 
 export interface WanderAIComponent {
-  state: "idle" | "walking";
+  state: "idle" | "walking" | "chasing" | "following";
   /** Time remaining in current state (seconds). */
   timer: number;
   /** Movement direction when walking. */
@@ -61,6 +61,18 @@ export interface WanderAIComponent {
   speed: number;
   /** When true, sprite.frameRow is updated from movement direction. */
   directional: boolean;
+  /** Pixel range within which this entity chases the player. */
+  chaseRange?: number;
+  /** Speed when chasing (px/s). */
+  chaseSpeed?: number;
+  /** When true, contact with player causes gem loss + knockback. */
+  hostile?: boolean;
+  /** When true, entity is currently following the player as a buddy. */
+  following?: boolean;
+  /** Minimum distance to keep when following (px). */
+  followDistance?: number;
+  /** When true, player can tap this entity to make it follow. */
+  befriendable?: boolean;
 }
 
 export interface Entity {
@@ -73,4 +85,6 @@ export interface Entity {
   sprite: SpriteComponent | null;
   collider: ColliderComponent | null;
   wanderAI: WanderAIComponent | null;
+  /** When true, entity is hidden this frame (invincibility flash effect). */
+  flashHidden?: boolean;
 }

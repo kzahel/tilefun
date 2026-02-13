@@ -21,4 +21,5 @@ export interface Prop {
     spriteHeight: number;
   };
   collider: PropCollider | null;
+  isProp: true;
 }

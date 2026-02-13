@@ -214,6 +214,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
       spriteHeight: def.height,
     },
     collider: def.collider ? { ...def.collider } : null,
+    isProp: true,
   };
 }
 

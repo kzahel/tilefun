@@ -16,6 +16,7 @@ export function drawEntities(
   world?: World,
 ): void {
   for (const item of items) {
+    if (item.flashHidden) continue;
     const { sprite } = item;
     if (!sprite) continue;
 
@@ -41,6 +42,31 @@ export function drawEntities(
 
     const destW = sprite.spriteWidth * camera.scale;
     const destH = sprite.spriteHeight * camera.scale;
+
+    // Shadow ellipse at visual feet (entities only, not props)
+    if (!item.isProp) {
+      const col = (item as { collider?: { offsetY: number; width: number } }).collider;
+      const baseW = col ? col.width : sprite.spriteWidth * 0.6;
+      const shadowW = baseW * camera.scale;
+      const shadowH = shadowW * 0.35;
+      const feetY = item.position.wy + (col ? col.offsetY : (item.sortOffsetY ?? 0));
+      const feetScreen = camera.worldToScreen(item.position.wx, feetY);
+      ctx.save();
+      ctx.globalAlpha = 0.3;
+      ctx.fillStyle = "#000";
+      ctx.beginPath();
+      ctx.ellipse(
+        Math.floor(feetScreen.sx),
+        Math.floor(feetScreen.sy - elevOffset),
+        shadowW / 2,
+        shadowH / 2,
+        0,
+        0,
+        Math.PI * 2,
+      );
+      ctx.fill();
+      ctx.restore();
+    }
 
     const region = sheet.getRegion(sprite.frameCol, sprite.frameRow);
     ctx.drawImage(

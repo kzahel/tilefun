@@ -28,9 +28,9 @@ export function createCow(wx: number, wy: number): Entity {
     },
     collider: {
       offsetX: 0,
-      offsetY: 0,
-      width: 14,
-      height: 8,
+      offsetY: -5,
+      width: 22,
+      height: 10,
     },
     wanderAI: {
       state: "idle",
@@ -43,6 +43,8 @@ export function createCow(wx: number, wy: number): Entity {
       walkMax: 3.0,
       speed: COW_SPEED,
       directional: false,
+      befriendable: true,
+      followDistance: 24,
     },
   };
 }

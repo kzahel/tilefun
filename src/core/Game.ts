@@ -8,15 +8,17 @@ import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
+import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
+import { createGem } from "../entities/Gem.js";
 import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
-import { updateWanderAI } from "../entities/wanderAI.js";
+import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
@@ -59,7 +61,11 @@ export class Game {
   private mainMenu: MainMenu;
   private currentWorldId: string | null = null;
   private gemSpawner = new GemSpawner();
+  private baddieSpawner = new BaddieSpawner();
   private gemsCollected = 0;
+  private invincibilityTimer = 0;
+  private knockbackVx = 0;
+  private knockbackVy = 0;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
   private frameCount = 0;
   private fpsTimer = 0;
@@ -143,6 +149,7 @@ export class Game {
       }
     });
     this.createEditorButton();
+    this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
     this.input.attach();
     // Start in editor mode — attach editor, not joystick
     this.editorMode.attach();
@@ -281,6 +288,7 @@ export class Game {
       spawnInitialChickens(5, this.world, this.entityManager);
     }
     this.gemSpawner.reset(this.entityManager);
+    this.baddieSpawner.reset(this.entityManager);
 
     // Bind save accessors
     this.saveManager.bind(
@@ -567,7 +575,15 @@ export class Game {
             }
             continue;
           }
-          updateWanderAI(entity, dt, Math.random);
+          if (
+            entity.wanderAI.chaseRange ||
+            entity.wanderAI.following ||
+            entity.wanderAI.befriendable
+          ) {
+            updateBehaviorAI(entity, dt, Math.random, this.player.position);
+          } else {
+            updateWanderAI(entity, dt, Math.random);
+          }
         }
       }
 
@@ -592,10 +608,12 @@ export class Game {
     // Gem spawning + collection (play mode only)
     if (!this.editorEnabled && !this.debugPanel.paused) {
       this.gemSpawner.update(dt, this.player, this.camera, this.entityManager);
+      this.baddieSpawner.update(dt, this.player, this.camera, this.entityManager);
 
-      // Check for gem collection
       const px = this.player.position.wx;
       const py = this.player.position.wy;
+
+      // Check for gem collection
       for (const entity of this.entityManager.entities) {
         if (entity.type !== "gem") continue;
         const dx = entity.position.wx - px;
@@ -605,6 +623,69 @@ export class Game {
           this.gemsCollected++;
           this.saveManager?.markMetaDirty();
           break;
+        }
+      }
+
+      // Baddie contact check (knockback + gem loss)
+      if (this.invincibilityTimer <= 0) {
+        for (const entity of this.entityManager.entities) {
+          if (!entity.wanderAI?.hostile) continue;
+          const dx = entity.position.wx - px;
+          const dy = entity.position.wy - py;
+          if (dx * dx + dy * dy < 12 * 12) {
+            // Knockback away from baddie
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+            this.knockbackVx = (-dx / dist) * 200;
+            this.knockbackVy = (-dy / dist) * 200;
+
+            // Scatter lost gems
+            const lost = Math.min(3, this.gemsCollected);
+            this.gemsCollected -= lost;
+            for (let i = 0; i < lost; i++) {
+              const angle = (Math.PI * 2 * i) / Math.max(lost, 1) + Math.random() * 0.5;
+              const gem = this.entityManager.spawn(
+                createGem(px + Math.cos(angle) * 8, py + Math.sin(angle) * 8),
+              );
+              gem.velocity = {
+                vx: Math.cos(angle) * 80,
+                vy: Math.sin(angle) * 80,
+              };
+            }
+
+            this.invincibilityTimer = 1.5;
+            this.saveManager?.markMetaDirty();
+            break;
+          }
+        }
+      }
+
+      // Tick invincibility + knockback decay
+      if (this.invincibilityTimer > 0) {
+        this.invincibilityTimer -= dt;
+        if (this.player.velocity) {
+          this.player.velocity.vx += this.knockbackVx * dt * 3;
+          this.player.velocity.vy += this.knockbackVy * dt * 3;
+        }
+        const decay = Math.max(0, 1 - dt * 5);
+        this.knockbackVx *= decay;
+        this.knockbackVy *= decay;
+        // Flash effect
+        this.player.flashHidden =
+          this.invincibilityTimer > 0 && Math.floor(this.invincibilityTimer * 8) % 2 === 0;
+      } else {
+        this.player.flashHidden = false;
+      }
+
+      // Decay scattered gem velocity
+      for (const entity of this.entityManager.entities) {
+        if (entity.type === "gem" && entity.velocity) {
+          entity.velocity.vx *= Math.max(0, 1 - dt * 4);
+          entity.velocity.vy *= Math.max(0, 1 - dt * 4);
+          entity.position.wx += entity.velocity.vx * dt;
+          entity.position.wy += entity.velocity.vy * dt;
+          if (Math.abs(entity.velocity.vx) < 1 && Math.abs(entity.velocity.vy) < 1) {
+            entity.velocity = null;
+          }
         }
       }
     }
@@ -743,6 +824,26 @@ export class Game {
     this.input.detach();
   }
 
+  /** Handle tap/click in play mode — befriend nearby entities. */
+  private onPlayClick(e: MouseEvent): void {
+    if (this.editorEnabled || this.mainMenu.visible) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const sx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
+    const sy = (e.clientY - rect.top) * (this.canvas.height / rect.height);
+    const world = this.camera.screenToWorld(sx, sy);
+
+    const BEFRIEND_RANGE_SQ = 24 * 24;
+    for (const entity of this.entityManager.entities) {
+      if (!entity.wanderAI?.befriendable || entity.wanderAI.following) continue;
+      const dx = entity.position.wx - world.wx;
+      const dy = entity.position.wy - world.wy;
+      if (dx * dx + dy * dy < BEFRIEND_RANGE_SQ) {
+        entity.wanderAI.following = true;
+        break;
+      }
+    }
+  }
+
   private drawGemHUD(): void {
     if (!this.gemSpriteCanvas) return;
     const ctx = this.ctx;
@@ -764,6 +865,19 @@ export class Game {
     ctx.strokeText(text, x + ICON_SIZE + 6, y + 2);
     ctx.fillStyle = "#FFD700";
     ctx.fillText(text, x + ICON_SIZE + 6, y + 2);
+
+    // Buddy count
+    let buddyCount = 0;
+    for (const e of this.entityManager.entities) {
+      if (e.wanderAI?.following) buddyCount++;
+    }
+    if (buddyCount > 0) {
+      const bx = x - 60;
+      ctx.strokeStyle = "#000";
+      ctx.strokeText(`\u2764 ${buddyCount}`, bx, y + 2);
+      ctx.fillStyle = "#ff88aa";
+      ctx.fillText(`\u2764 ${buddyCount}`, bx, y + 2);
+    }
     ctx.restore();
   }
 

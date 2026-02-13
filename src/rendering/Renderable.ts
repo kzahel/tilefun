@@ -10,4 +10,8 @@ export interface Renderable {
     spriteWidth: number;
     spriteHeight: number;
   } | null;
+  /** When true, skip entity-specific effects like shadows. */
+  isProp?: boolean;
+  /** When true, entity is hidden this frame (invincibility flash effect). */
+  flashHidden?: boolean;
 }

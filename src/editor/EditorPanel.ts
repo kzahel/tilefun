@@ -98,6 +98,8 @@ const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: "worm2", label: "Worm 2", color: "#88aa44" },
   { type: "worm3", label: "Worm 3", color: "#aa8844" },
   { type: "worm4", label: "Worm 4", color: "#6688aa" },
+  { type: "ghost-friendly", label: "Ghost", color: "#b0a0d0" },
+  { type: "ghost-angry", label: "Baddie", color: "#d04040" },
   ...Array.from({ length: 20 }, (_, i) => ({
     type: `person${i + 1}`,
     label: `Person ${i + 1}`,

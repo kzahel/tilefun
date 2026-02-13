@@ -48,7 +48,7 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
 }
 
 /** Derive a 4-way Direction from a velocity vector. */
-function directionFromVelocity(dx: number, dy: number): Direction {
+export function directionFromVelocity(dx: number, dy: number): Direction {
   if (Math.abs(dx) > Math.abs(dy)) {
     return dx < 0 ? Direction.Left : Direction.Right;
   }
@@ -61,4 +61,74 @@ export function onWanderBlocked(entity: Entity): void {
   if (!ai) return;
   ai.dirX = -ai.dirX;
   ai.dirY = -ai.dirY;
+}
+
+/**
+ * Extended AI update with chase and follow behavior.
+ * Falls back to normal wander for entities without chase/follow fields.
+ */
+export function updateBehaviorAI(
+  entity: Entity,
+  dt: number,
+  random: () => number,
+  playerPos: { wx: number; wy: number },
+): void {
+  const ai = entity.wanderAI;
+  const vel = entity.velocity;
+  if (!ai || !vel) return;
+
+  const dx = playerPos.wx - entity.position.wx;
+  const dy = playerPos.wy - entity.position.wy;
+  const distSq = dx * dx + dy * dy;
+  const dist = Math.sqrt(distSq);
+
+  // --- Chase logic (hostile baddies) ---
+  if (ai.chaseRange && ai.hostile && !ai.following) {
+    if (dist < ai.chaseRange) {
+      ai.state = "chasing";
+      const speed = ai.chaseSpeed ?? ai.speed;
+      if (dist > 2) {
+        vel.vx = (dx / dist) * speed;
+        vel.vy = (dy / dist) * speed;
+      }
+      if (entity.sprite) {
+        entity.sprite.moving = true;
+      }
+      return;
+    }
+    if (ai.state === "chasing") {
+      // Lost the player — return to wandering
+      ai.state = "idle";
+      ai.timer = ai.idleMin + random() * (ai.idleMax - ai.idleMin);
+    }
+  }
+
+  // --- Follow logic (buddies) ---
+  if (ai.following) {
+    const followDist = ai.followDistance ?? 20;
+    if (dist > followDist) {
+      ai.state = "following";
+      const speed = ai.chaseSpeed ?? ai.speed * 1.5;
+      vel.vx = (dx / dist) * speed;
+      vel.vy = (dy / dist) * speed;
+      if (entity.sprite) {
+        entity.sprite.moving = true;
+        if (ai.directional) {
+          entity.sprite.direction = directionFromVelocity(dx, dy);
+          entity.sprite.frameRow = entity.sprite.direction;
+        }
+      }
+      return;
+    }
+    // Close enough — idle near player
+    vel.vx = 0;
+    vel.vy = 0;
+    if (entity.sprite) {
+      entity.sprite.moving = false;
+    }
+    return;
+  }
+
+  // --- Default: normal wander ---
+  updateWanderAI(entity, dt, random);
 }
