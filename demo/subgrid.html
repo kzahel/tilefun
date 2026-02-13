@@ -86,6 +86,8 @@ canvas { cursor: crosshair; border: 1px solid #333; border-radius: 4px; backgrou
   Each tile's 8-bit blob mask is read directly from 8 surrounding sub-grid points.<br>
   <b>Corner</b> points (even,even) only affect diagonal bits. <b>Midpoints</b> (mixed parity) control cardinal bits.<br>
   A lone corner does nothing visible (diagonal bits require adjacent cardinals). Midpoints are the fundamental unit.<br>
+  <b>Modes:</b> <code>Z</code> Positive (fills in) &middot; <code>X</code> Negative (terrain becomes base, enables reverse sheets) &middot; <code>C</code> Unpaint (erases specific terrain).
+  <b>Shapes:</b> <code>1-5</code> for point/2x2/3x3/cross/tile.<br>
   <b>Uses the real game algorithm</b> &mdash; changes to <code>src/autotile/</code> are reflected here via Vite HMR.
 </p>
 
@@ -111,12 +113,20 @@ canvas { cursor: crosshair; border: 1px solid #333; border-radius: 4px; backgrou
   <label>Base:</label>
   <select id="baseSel"></select>
   <span style="color:#444">|</span>
-  <label>Brush:</label>
-  <div class="brush-row">
-    <div class="brush-btn active" data-size="1" title="1 point">1</div>
-    <div class="brush-btn" data-size="2" title="2x2 block">2x2</div>
-    <div class="brush-btn" data-size="3" title="3x3 block (full tile)">3x3</div>
-    <div class="brush-btn" data-size="tile" title="Full tile with smooth edges">Tile</div>
+  <label>Mode:</label>
+  <div class="brush-row" id="modeRow">
+    <div class="brush-btn active" data-mode="positive" title="Positive: terrain fills in [Z]">+</div>
+    <div class="brush-btn" data-mode="negative" title="Negative: terrain becomes base [X]">&minus;</div>
+    <div class="brush-btn" data-mode="unpaint" title="Unpaint: erase specific terrain [C]">&times;</div>
+  </div>
+  <span style="color:#444">|</span>
+  <label>Shape:</label>
+  <div class="brush-row" id="shapeRow">
+    <div class="brush-btn active" data-shape="grid1" title="Single point [1]">&middot;</div>
+    <div class="brush-btn" data-shape="grid2" title="2x2 block [2]">2x2</div>
+    <div class="brush-btn" data-shape="grid3" title="3x3 block [3]">3x3</div>
+    <div class="brush-btn" data-shape="cross" title="Cross pattern [4]">&#10010;</div>
+    <div class="brush-btn" data-shape="tile" title="Full tile [5]">&#9632;</div>
   </div>
   <span style="color:#444">|</span>
   <label>Grid:</label>

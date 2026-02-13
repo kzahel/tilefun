@@ -71,6 +71,7 @@ export function computeTileBlend(
   w: TerrainId,
   nw: TerrainId,
   blendGraph: BlendGraph,
+  forcedBase?: TerrainId,
 ): TileBlendResult {
   // Gather unique terrains
   const seen = new Uint8Array(TERRAIN_COUNT);
@@ -85,7 +86,9 @@ export function computeTileBlend(
 
   // Find base terrain (the background fill that overlays are drawn on top of).
   let base: TerrainId;
-  if (getBaseSelectionMode() === "nw") {
+  if (forcedBase !== undefined && seen[forcedBase]) {
+    base = forcedBase;
+  } else if (getBaseSelectionMode() === "nw") {
     base = nw;
   } else {
     // Score each candidate: prefer the terrain that the most other terrains

@@ -50,7 +50,10 @@ let sgSize = 2 * gridSize + 1;
 let subgrid = new Uint8Array(sgSize * sgSize);
 let baseTerrain: TerrainId = TerrainId.Grass;
 let paintTerrain: TerrainId = TerrainId.ShallowWater;
-let brushSize: number | "tile" = 1;
+type BrushMode = "positive" | "negative" | "unpaint";
+type BrushShape = "grid1" | "grid2" | "grid3" | "cross" | "tile";
+let brushMode: BrushMode = "positive";
+let brushShape: BrushShape = "grid1";
 let hoveredPoint: { sx: number; sy: number } | null = null;
 let hoveredTile: { tx: number; ty: number } | null = null;
 let painting = false;
@@ -119,6 +122,69 @@ function canvasToTile(cx: number, cy: number): { tx: number; ty: number } | null
   return null;
 }
 
+// ===================== BRUSH HELPERS =====================
+
+function getBrushPoints(sx: number, sy: number): { sx: number; sy: number }[] {
+  const pts: { sx: number; sy: number }[] = [];
+  switch (brushShape) {
+    case "grid1":
+      pts.push({ sx, sy });
+      break;
+    case "grid2":
+      for (let dy = 0; dy < 2; dy++)
+        for (let dx = 0; dx < 2; dx++) pts.push({ sx: sx + dx, sy: sy + dy });
+      break;
+    case "grid3":
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) pts.push({ sx: sx + dx, sy: sy + dy });
+      break;
+    case "cross":
+      pts.push({ sx, sy });
+      pts.push({ sx: sx - 1, sy });
+      pts.push({ sx: sx + 1, sy });
+      pts.push({ sx, sy: sy - 1 });
+      pts.push({ sx, sy: sy + 1 });
+      break;
+    case "tile": {
+      // Snap to nearest tile center (odd,odd), then paint all 9 subgrid points
+      const tcx = sx % 2 === 0 ? (sx > 0 ? sx - 1 : sx + 1) : sx;
+      const tcy = sy % 2 === 0 ? (sy > 0 ? sy - 1 : sy + 1) : sy;
+      for (let dy = -1; dy <= 1; dy++)
+        for (let dx = -1; dx <= 1; dx++) pts.push({ sx: tcx + dx, sy: tcy + dy });
+      break;
+    }
+  }
+  return pts.filter((p) => p.sx >= 0 && p.sy >= 0 && p.sx < sgSize && p.sy < sgSize);
+}
+
+function findUnpaintReplacement(sx: number, sy: number): TerrainId {
+  const counts = new Map<TerrainId, number>();
+  const dirs: [number, number][] = [
+    [-1, 0],
+    [1, 0],
+    [0, -1],
+    [0, 1],
+    [-1, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+  ];
+  for (const [dx, dy] of dirs) {
+    const t = getSg(sx + dx, sy + dy);
+    if (t !== paintTerrain) counts.set(t, (counts.get(t) ?? 0) + 1);
+  }
+  if (counts.size === 0) return baseTerrain;
+  let best: TerrainId = baseTerrain;
+  let bestCount = 0;
+  for (const [t, c] of counts) {
+    if (c > bestCount) {
+      best = t;
+      bestCount = c;
+    }
+  }
+  return best;
+}
+
 // ===================== COMPUTATION (uses real game algorithm) =====================
 
 interface TileInfo extends TileBlendResult {
@@ -150,8 +216,9 @@ function computeTileInfo(tx: number, ty: number): TileInfo {
   const w = getSg(cx - 1, cy);
   const nw = getSg(cx - 1, cy - 1);
 
-  // Call the real game algorithm
-  const result = computeTileBlend(center, n, ne, e, se, s, sw, w, nw, blendGraph);
+  // Call the real game algorithm (negative mode forces paintTerrain as base)
+  const forced = brushMode === "negative" ? paintTerrain : undefined;
+  const result = computeTileBlend(center, n, ne, e, se, s, sw, w, nw, blendGraph, forced);
 
   // Gather unique terrains for display
   const seen = new Set<TerrainId>([center, n, ne, e, se, s, sw, w, nw]);
@@ -209,6 +276,34 @@ function render(): void {
     for (let sx = 0; sx < sgSize; sx++) {
       drawPoint(sx, sy);
     }
+  }
+
+  // Brush preview on hover
+  if (hoveredPoint && !painting && brushShape !== "tile") {
+    const pts = getBrushPoints(hoveredPoint.sx, hoveredPoint.sy);
+    ctx.globalAlpha = 0.3;
+    ctx.fillStyle = brushMode === "unpaint" ? "#ff5050" : TERRAIN_DISPLAY[paintTerrain].color;
+    for (const p of pts) {
+      const { x, y } = sgToCanvas(p.sx, p.sy);
+      const type = pointType(p.sx, p.sy);
+      const r = POINT_R[type] + 3;
+      if (type === "center") {
+        ctx.fillRect(x - r, y - r, r * 2, r * 2);
+      } else if (type === "corner") {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(x, y - r);
+        ctx.lineTo(x + r, y);
+        ctx.lineTo(x, y + r);
+        ctx.lineTo(x - r, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1.0;
   }
 
   // Highlight hovered tile
@@ -336,6 +431,9 @@ function updateInfo(): void {
     html += `<div class="row"><span class="lbl">Position:</span><span class="val">(${tx}, ${ty})</span></div>`;
     html += `<div class="row"><span class="lbl">Center:</span><span class="val" style="color:${TERRAIN_DISPLAY[info.center].color}">${TERRAIN_DISPLAY[info.center].label}</span></div>`;
     html += `<div class="row"><span class="lbl">Base:</span><span class="val" style="color:${TERRAIN_DISPLAY[info.base].color}">${TERRAIN_DISPLAY[info.base].label} (depth ${TERRAIN_DEPTH[info.base]})</span></div>`;
+    if (brushMode !== "positive") {
+      html += `<div class="row"><span class="lbl">Mode:</span><span class="val" style="color:${brushMode === "negative" ? "#c84" : "#f55"}">${brushMode}${brushMode === "negative" ? ` (${TERRAIN_DISPLAY[paintTerrain].label} as base)` : ""}</span></div>`;
+    }
 
     if (info.layers.length === 0) {
       html += `<div style="color:#666; margin-top:4px">No blends (uniform neighbors)</div>`;
@@ -548,23 +646,39 @@ function paintFullTile(tx: number, ty: number, terrain: TerrainId): void {
 }
 
 function doPaint(): void {
-  const terrain = paintButton === 2 ? baseTerrain : paintTerrain;
-
-  if (brushSize === "tile") {
-    if (!hoveredTile) return;
-    paintFullTile(hoveredTile.tx, hoveredTile.ty, terrain);
-  } else {
+  if (paintButton === 2) {
+    // Right-click: always paint baseTerrain (universal eraser)
+    if (brushShape === "tile") {
+      if (!hoveredTile) return;
+      paintFullTile(hoveredTile.tx, hoveredTile.ty, baseTerrain);
+    } else {
+      if (!hoveredPoint) return;
+      const pts = getBrushPoints(hoveredPoint.sx, hoveredPoint.sy);
+      for (const p of pts) setSg(p.sx, p.sy, baseTerrain);
+    }
+  } else if (brushMode === "unpaint") {
+    // Unpaint: replace matching points with most common adjacent terrain
     if (!hoveredPoint) return;
-    const { sx, sy } = hoveredPoint;
-    const half = Math.floor(brushSize / 2);
-    for (let dy = -half; dy < brushSize - half; dy++) {
-      for (let dx = -half; dx < brushSize - half; dx++) {
-        setSg(sx + dx, sy + dy, terrain);
+    const pts = getBrushPoints(hoveredPoint.sx, hoveredPoint.sy);
+    for (const p of pts) {
+      if (getSg(p.sx, p.sy) === paintTerrain) {
+        setSg(p.sx, p.sy, findUnpaintReplacement(p.sx, p.sy));
       }
+    }
+  } else {
+    // Positive / Negative: paint normally (negative only affects resolve)
+    if (brushShape === "tile") {
+      if (!hoveredTile) return;
+      paintFullTile(hoveredTile.tx, hoveredTile.ty, paintTerrain);
+    } else {
+      if (!hoveredPoint) return;
+      const pts = getBrushPoints(hoveredPoint.sx, hoveredPoint.sy);
+      for (const p of pts) setSg(p.sx, p.sy, paintTerrain);
     }
   }
   render();
   updateInfo();
+  updateUrl();
 }
 
 // ===================== REFERENCE GRID =====================
@@ -778,7 +892,8 @@ function buildPresets(): void {
 function encodeState(): string {
   let data = "";
   for (let i = 0; i < subgrid.length; i++) data += (subgrid[i] ?? 0).toString();
-  return `#g=${gridSize}&b=${baseTerrain}&p=${paintTerrain}&d=${data}`;
+  const modeCode = { positive: 0, negative: 1, unpaint: 2 }[brushMode] ?? 0;
+  return `#g=${gridSize}&b=${baseTerrain}&p=${paintTerrain}&m=${modeCode}&d=${data}`;
 }
 
 function decodeState(hash: string): boolean {
@@ -795,6 +910,10 @@ function decodeState(hash: string): boolean {
   subgrid = new Uint8Array(sgSize * sgSize);
   if (b >= 0 && b < ALL_TERRAIN_IDS.length) baseTerrain = b as TerrainId;
   if (p >= 0 && p < ALL_TERRAIN_IDS.length) paintTerrain = p as TerrainId;
+  const m = parseInt(params.get("m") ?? "", 10);
+  if (m === 1) brushMode = "negative";
+  else if (m === 2) brushMode = "unpaint";
+  else brushMode = "positive";
 
   subgrid.fill(baseTerrain);
 
@@ -897,14 +1016,58 @@ document.getElementById("shareBtn")?.addEventListener("click", () => {
   render();
 });
 
-document.querySelectorAll<HTMLElement>(".brush-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const val = btn.dataset.size ?? "1";
-    brushSize = val === "tile" ? "tile" : parseInt(val, 10);
-    document.querySelectorAll<HTMLElement>(".brush-btn").forEach((b) => {
-      b.classList.toggle("active", b === btn);
-    });
+// Mode buttons
+function setMode(mode: BrushMode): void {
+  brushMode = mode;
+  document.querySelectorAll<HTMLElement>("#modeRow .brush-btn").forEach((b) => {
+    b.classList.toggle("active", b.dataset.mode === mode);
   });
+  render();
+  updateInfo();
+}
+document.querySelectorAll<HTMLElement>("#modeRow .brush-btn").forEach((btn) => {
+  btn.addEventListener("click", () => setMode(btn.dataset.mode as BrushMode));
+});
+
+// Shape buttons
+function setShape(shape: BrushShape): void {
+  brushShape = shape;
+  document.querySelectorAll<HTMLElement>("#shapeRow .brush-btn").forEach((b) => {
+    b.classList.toggle("active", b.dataset.shape === shape);
+  });
+  render();
+}
+document.querySelectorAll<HTMLElement>("#shapeRow .brush-btn").forEach((btn) => {
+  btn.addEventListener("click", () => setShape(btn.dataset.shape as BrushShape));
+});
+
+// Keyboard shortcuts
+const SHAPE_KEYS: Record<string, BrushShape> = {
+  "1": "grid1",
+  "2": "grid2",
+  "3": "grid3",
+  "4": "cross",
+  "5": "tile",
+};
+document.addEventListener("keydown", (e) => {
+  const key = e.key.toLowerCase();
+  if (key === "z") {
+    setMode("positive");
+    return;
+  }
+  if (key === "x") {
+    setMode("negative");
+    return;
+  }
+  if (key === "c") {
+    setMode("unpaint");
+    return;
+  }
+  const shape = SHAPE_KEYS[key];
+  if (shape) {
+    setShape(shape);
+    return;
+  }
 });
 
 // ===================== INIT =====================
@@ -917,6 +1080,10 @@ function init(): void {
   (document.getElementById("gridSel") as HTMLSelectElement).value = String(gridSize);
   buildPalette();
   buildBaseSel();
+  // Sync mode buttons with restored state
+  document.querySelectorAll<HTMLElement>("#modeRow .brush-btn").forEach((b) => {
+    b.classList.toggle("active", b.dataset.mode === brushMode);
+  });
   buildPresets();
   resizeCanvas();
   render();
