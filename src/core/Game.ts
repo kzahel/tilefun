@@ -608,8 +608,8 @@ export class Game {
 
     // Gem spawning + collection (play mode only)
     if (!this.editorEnabled && !this.debugPanel.paused) {
-      this.gemSpawner.update(dt, this.player, this.camera, this.entityManager);
-      this.baddieSpawner.update(dt, this.player, this.camera, this.entityManager);
+      this.gemSpawner.update(dt, this.player, this.camera, this.entityManager, this.world);
+      this.baddieSpawner.update(dt, this.player, this.camera, this.entityManager, this.world);
 
       const px = this.player.position.wx;
       const py = this.player.position.wy;

@@ -1,5 +1,7 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
+import type { World } from "../world/World.js";
 import type { Entity } from "./Entity.js";
 import type { EntityManager } from "./EntityManager.js";
 import { createGem } from "./Gem.js";
@@ -36,17 +38,28 @@ export class GemSpawner {
     }
   }
 
-  update(dt: number, player: Entity, camera: Camera, entityManager: EntityManager): void {
+  update(
+    dt: number,
+    player: Entity,
+    camera: Camera,
+    entityManager: EntityManager,
+    world: World,
+  ): void {
     this.despawnFar(player, entityManager);
 
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       this.spawnTimer = SPAWN_INTERVAL;
-      this.trySpawn(player, camera, entityManager);
+      this.trySpawn(player, camera, entityManager, world);
     }
   }
 
-  private trySpawn(player: Entity, camera: Camera, entityManager: EntityManager): void {
+  private trySpawn(
+    player: Entity,
+    camera: Camera,
+    entityManager: EntityManager,
+    world: World,
+  ): void {
     // Count current gems
     let gemCount = 0;
     for (const e of entityManager.entities) {
@@ -85,6 +98,11 @@ export class GemSpawner {
     // Random position within the chunk (offset by half tile to avoid chunk edges)
     const wx = choice.cx * CHUNK_SIZE_PX + 8 + Math.random() * (CHUNK_SIZE_PX - 16);
     const wy = choice.cy * CHUNK_SIZE_PX + 8 + Math.random() * (CHUNK_SIZE_PX - 16);
+
+    // Don't spawn on water
+    const tx = Math.floor(wx / TILE_SIZE);
+    const ty = Math.floor(wy / TILE_SIZE);
+    if (world.getCollisionIfLoaded(tx, ty) & CollisionFlag.Water) return;
 
     const gem = entityManager.spawn(createGem(wx, wy));
     this.chunkGemMap.set(chunkKey(choice.cx, choice.cy), gem.id);
