@@ -56,6 +56,9 @@ export class Chunk {
   /** Elevation height per tile (0–MAX_ELEVATION). */
   readonly heightGrid: Uint8Array;
 
+  /** Computed base TerrainId per tile (from autotile blend algorithm). */
+  readonly blendBase: Uint8Array;
+
   constructor() {
     this.subgrid = new Uint8Array(SUBGRID_AREA);
     this.terrain = new Uint16Array(AREA);
@@ -64,6 +67,7 @@ export class Chunk {
     this.collision = new Uint8Array(AREA);
     this.roadGrid = new Uint8Array(AREA);
     this.heightGrid = new Uint8Array(AREA);
+    this.blendBase = new Uint8Array(AREA);
   }
 
   /** Read sub-grid point at (sx, sy) in [0, SUBGRID_SIZE). */

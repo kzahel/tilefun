@@ -50,6 +50,9 @@ export function computeChunkSubgridBlend(chunk: Chunk, blendGraph: BlendGraph): 
         blendGraph,
       );
 
+      // Store the computed base terrain for this tile
+      chunk.blendBase[ly * CHUNK_SIZE + lx] = result.base;
+
       // Pack into chunk.blendLayers
       const count = Math.min(result.layers.length, MAX_BLEND_LAYERS);
       for (let i = 0; i < count; i++) {

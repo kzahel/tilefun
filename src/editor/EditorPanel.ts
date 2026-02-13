@@ -178,6 +178,7 @@ export class EditorPanel {
       { mode: "tile", label: "\u25a0", key: "M" },
       { mode: "subgrid", label: "\u229e", key: "M" },
       { mode: "corner", label: "\u25c7", key: "M" },
+      { mode: "cross", label: "\u271a", key: "M" },
     ];
     for (const { mode, label, key } of brushModes) {
       const btn = document.createElement("button");
@@ -191,32 +192,23 @@ export class EditorPanel {
     }
     this.updateBrushModeButtons();
 
-    // Paint mode buttons: Positive / Negative / Unpaint
+    // Paint mode buttons: Positive / Unpaint
     this.toolRow.appendChild(this.makeSeparator());
     this.toolRow.appendChild(this.makeLabel("Paint"));
     const paintModes: {
       mode: PaintMode;
       label: string;
       key: string;
-      disabled?: boolean;
     }[] = [
       { mode: "positive", label: "+", key: "Z" },
-      { mode: "negative", label: "\u2212", key: "X", disabled: true },
       { mode: "unpaint", label: "\u00d7", key: "C" },
     ];
-    for (const { mode, label, key, disabled } of paintModes) {
+    for (const { mode, label, key } of paintModes) {
       const btn = document.createElement("button");
       btn.style.cssText = BTN_STYLE;
       btn.textContent = label;
-      if (disabled) {
-        btn.title = `${mode} mode (${key}) — not yet implemented`;
-        btn.disabled = true;
-        btn.style.opacity = "0.4";
-        btn.style.cursor = "not-allowed";
-      } else {
-        btn.title = `${mode} mode (${key})`;
-        btn.addEventListener("click", () => this.setPaintMode(mode));
-      }
+      btn.title = `${mode} mode (${key})`;
+      btn.addEventListener("click", () => this.setPaintMode(mode));
       this.toolRow.appendChild(btn);
       this.paintModeButtons.set(mode, btn);
     }
@@ -588,6 +580,11 @@ export class EditorPanel {
 
   setTab(tab: EditorTab): void {
     this.editorTab = tab;
+    // Non-natural tabs don't expose brush/paint controls — reset to defaults
+    if (tab !== "natural") {
+      this.setBrushMode("tile");
+      this.setPaintMode("positive");
+    }
     this.updateTabDisplay();
   }
 
@@ -624,6 +621,8 @@ export class EditorPanel {
       this.setBrushMode("subgrid");
     } else if (this.brushMode === "subgrid") {
       this.setBrushMode("corner");
+    } else if (this.brushMode === "corner") {
+      this.setBrushMode("cross");
     } else {
       this.setBrushMode("tile");
     }
@@ -638,13 +637,14 @@ export class EditorPanel {
   }
 
   private updateSubgridToolVisibility(): void {
-    const show = this.brushMode !== "tile";
-    const d = show ? "" : "none";
-    this.subgridSeparator.style.display = d;
-    this.sizeLabel.style.display = d;
-    this.brushSizeButton.style.display = d;
-    this.bridgeLabel.style.display = d;
-    this.bridgeButton.style.display = d;
+    const showSize = this.brushMode === "subgrid" || this.brushMode === "corner";
+    const showBridge = this.brushMode !== "tile";
+    const sizeD = showSize ? "" : "none";
+    this.sizeLabel.style.display = sizeD;
+    this.brushSizeButton.style.display = sizeD;
+    this.subgridSeparator.style.display = showBridge ? "" : "none";
+    this.bridgeLabel.style.display = showBridge ? "" : "none";
+    this.bridgeButton.style.display = showBridge ? "" : "none";
   }
 
   /** The paint mode actually in effect (accounts for right-click temporary unpaint). */
@@ -668,7 +668,6 @@ export class EditorPanel {
   cycleBrushShape(): void {
     if (this.subgridShape === 1) this.subgridShape = 2;
     else if (this.subgridShape === 2) this.subgridShape = 3;
-    else if (this.subgridShape === 3) this.subgridShape = "cross";
     else this.subgridShape = 1;
     this.updateBrushSizeButton();
   }
@@ -681,7 +680,6 @@ export class EditorPanel {
   private updatePaintModeButtons(): void {
     const colors: Record<PaintMode, string> = {
       positive: "#4a4",
-      negative: "#c84",
       unpaint: "#f55",
     };
     const effective = this.effectivePaintMode;
@@ -693,12 +691,7 @@ export class EditorPanel {
   }
 
   private updateBrushSizeButton(): void {
-    const label =
-      this.subgridShape === "cross"
-        ? "+"
-        : this.subgridShape === 1
-          ? "1x1"
-          : `${this.subgridShape}x${this.subgridShape}`;
+    const label = this.subgridShape === 1 ? "1x1" : `${this.subgridShape}x${this.subgridShape}`;
     this.brushSizeButton.textContent = label;
     this.brushSizeButton.style.borderColor = this.subgridShape !== 1 ? "#a4f" : "#888";
   }

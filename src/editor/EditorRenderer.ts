@@ -13,7 +13,7 @@ interface ChunkRange {
 }
 
 interface EditorState {
-  brushMode: "tile" | "subgrid" | "corner";
+  brushMode: "tile" | "subgrid" | "corner" | "cross";
   effectivePaintMode: PaintMode;
   subgridShape: SubgridShape;
   brushSize: 1 | 2 | 3;
@@ -128,7 +128,7 @@ function drawCursorHighlight(
     drawElevationCursorHighlight(ctx, camera, editorMode, state);
     return;
   }
-  if (state.brushMode === "subgrid") {
+  if (state.brushMode === "subgrid" || state.brushMode === "cross") {
     drawSubgridCursorHighlight(ctx, camera, editorMode, state);
   } else if (state.brushMode === "corner") {
     drawCornerCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode);
@@ -140,9 +140,6 @@ function drawCursorHighlight(
 function getCursorColor(mode: PaintMode): { fill: string; stroke: string } {
   if (mode === "unpaint") {
     return { fill: "rgba(255, 80, 80, 0.25)", stroke: "rgba(255, 80, 80, 0.6)" };
-  }
-  if (mode === "negative") {
-    return { fill: "rgba(200, 160, 60, 0.25)", stroke: "rgba(200, 160, 60, 0.6)" };
   }
   return { fill: "rgba(255, 255, 255, 0.25)", stroke: "rgba(255, 255, 255, 0.6)" };
 }
@@ -185,12 +182,7 @@ function drawSubgridCursorHighlight(
   const shape = state.subgridShape;
   const paintMode = state.effectivePaintMode;
 
-  const baseColor =
-    paintMode === "unpaint"
-      ? "255, 80, 80"
-      : paintMode === "negative"
-        ? "200, 160, 60"
-        : "240, 160, 48";
+  const baseColor = paintMode === "unpaint" ? "255, 80, 80" : "240, 160, 48";
 
   ctx.save();
 
@@ -249,12 +241,7 @@ function drawCornerCursorHighlight(
   if (!Number.isFinite(gsx)) return;
 
   const halfTile = TILE_SIZE / 2;
-  const baseColor =
-    paintMode === "unpaint"
-      ? "255, 80, 80"
-      : paintMode === "negative"
-        ? "200, 160, 60"
-        : "80, 200, 255";
+  const baseColor = paintMode === "unpaint" ? "255, 80, 80" : "80, 200, 255";
 
   const wx0 = (gsx - 1) * halfTile;
   const wy0 = (gsy - 1) * halfTile;

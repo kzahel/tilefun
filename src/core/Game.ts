@@ -119,7 +119,6 @@ export class Game {
         e.preventDefault();
         this.editorPanel.setPaintMode("positive");
       }
-      // "x" for negative mode — disabled (not yet implemented)
       if (e.key === "c" && this.editorEnabled) {
         e.preventDefault();
         this.editorPanel.setPaintMode("unpaint");
@@ -434,7 +433,9 @@ export class Game {
         this.terrainEditor.applyTileEdit(edit.tx, edit.ty, edit.terrainId, paintMode, bridgeDepth);
       }
 
-      // Apply subgrid edits (subgrid mode)
+      // Apply subgrid edits (subgrid / cross mode)
+      const subgridShape =
+        this.editorPanel.brushMode === "cross" ? "cross" : this.editorPanel.subgridShape;
       for (const edit of this.editorMode.consumePendingSubgridEdits()) {
         this.terrainEditor.applySubgridEdit(
           edit.gsx,
@@ -442,7 +443,7 @@ export class Game {
           edit.terrainId,
           paintMode,
           bridgeDepth,
-          this.editorPanel.subgridShape,
+          subgridShape,
         );
       }
 
@@ -578,7 +579,8 @@ export class Game {
         {
           brushMode: this.editorPanel.brushMode,
           effectivePaintMode: this.editorPanel.effectivePaintMode,
-          subgridShape: this.editorPanel.subgridShape,
+          subgridShape:
+            this.editorPanel.brushMode === "cross" ? "cross" : this.editorPanel.subgridShape,
           brushSize: this.editorPanel.brushSize,
           editorTab: this.editorPanel.editorTab,
           elevationGridSize: this.editorPanel.elevationGridSize,

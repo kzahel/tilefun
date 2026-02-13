@@ -2,7 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { TileVariants } from "../assets/TileVariants.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
-import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
   ELEVATION_PX,
@@ -238,11 +238,11 @@ export class TileRenderer {
         }
 
         // 2. Tile's own terrain base fill (covers water for land tiles).
-        //    Use the subgrid center (odd,odd) which is the tile's own terrain.
+        //    Use the blend-computed base (accounts for isolated center points).
         //    Blend sprites are opaque 16×16 tiles and fully cover the base fill
         //    wherever a transition exists, so the base only shows on uniform tiles.
         if (graph) {
-          const terrainId = toBaseTerrainId(chunk.getSubgrid(2 * lx + 1, 2 * ly + 1));
+          const terrainId = chunk.blendBase[ly * CHUNK_SIZE + lx] as TerrainId;
           // Skip base fill for shallow water (already drawn as universal base)
           if (terrainId !== TerrainId.ShallowWater) {
             // Try tile variants first for visual variety
