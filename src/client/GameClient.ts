@@ -144,7 +144,11 @@ export class GameClient {
       // Initial chunk loading
       this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
     } else {
-      // Serialized mode: send visible range so server loads initial chunks
+      // Serialized mode: get initial camera from server (loadWorld already ran during init)
+      const session = this.server.getLocalSession();
+      this.camera.x = session.cameraX;
+      this.camera.y = session.cameraY;
+      this.camera.zoom = session.cameraZoom;
       this.sendVisibleRange();
     }
 
@@ -389,7 +393,15 @@ export class GameClient {
           CAMERA_LERP,
         );
       }
-      this.sendVisibleRange();
+      // Observer mode: only load chunks at 1x zoom even when zoomed out
+      if (this.debugPanel.observer && this.camera.zoom !== 1) {
+        const savedZoom = this.camera.zoom;
+        this.camera.zoom = 1;
+        this.sendVisibleRange();
+        this.camera.zoom = savedZoom;
+      } else {
+        this.sendVisibleRange();
+      }
     } else {
       // Local mode: drive the server tick synchronously
       const session = this.server.getLocalSession();

@@ -321,6 +321,19 @@ export class GameServer {
       session.cameraZoom = cameraZoom;
     }
 
+    // Reset per-client chunk tracking so all chunks get re-sent
+    this.clientChunkRevisions.clear();
+
+    // Notify connected clients of the new world/camera position
+    if (this.broadcasting) {
+      this.transport.broadcast({
+        type: "world-loaded",
+        cameraX,
+        cameraY,
+        cameraZoom,
+      });
+    }
+
     return { cameraX, cameraY, cameraZoom };
   }
 
