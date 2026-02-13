@@ -4,6 +4,8 @@ const DEAD_ZONE = 10;
 const MAX_DISTANCE = 50;
 const BASE_ALPHA = 0.25;
 const THUMB_ALPHA = 0.4;
+const TAP_MAX_DURATION_MS = 300;
+const TAP_MAX_DISTANCE = 15;
 
 interface JoystickState {
   touchId: number;
@@ -11,11 +13,14 @@ interface JoystickState {
   baseY: number;
   thumbX: number;
   thumbY: number;
+  startTime: number;
 }
 
 export class TouchJoystick {
   private state: JoystickState | null = null;
   private canvas: HTMLCanvasElement;
+  /** Called when a short tap (no drag) is detected. Coordinates are client-space. */
+  onTap: ((clientX: number, clientY: number) => void) | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -77,7 +82,14 @@ export class TouchJoystick {
 
   /** Simulate a touch start (for testing). */
   simulateTouchStart(x: number, y: number): void {
-    this.state = { touchId: -1, baseX: x, baseY: y, thumbX: x, thumbY: y };
+    this.state = {
+      touchId: -1,
+      baseX: x,
+      baseY: y,
+      thumbX: x,
+      thumbY: y,
+      startTime: performance.now(),
+    };
   }
 
   /** Simulate thumb movement (for testing). */
@@ -115,6 +127,7 @@ export class TouchJoystick {
         baseY: touch.clientY,
         thumbX: touch.clientX,
         thumbY: touch.clientY,
+        startTime: performance.now(),
       };
       e.preventDefault();
     }
@@ -137,6 +150,14 @@ export class TouchJoystick {
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (touch && touch.identifier === this.state.touchId) {
+        // Detect tap: short duration + minimal movement
+        const elapsed = performance.now() - this.state.startTime;
+        const dx = touch.clientX - this.state.baseX;
+        const dy = touch.clientY - this.state.baseY;
+        const moved = Math.hypot(dx, dy);
+        if (elapsed < TAP_MAX_DURATION_MS && moved < TAP_MAX_DISTANCE && this.onTap) {
+          this.onTap(this.state.baseX, this.state.baseY);
+        }
         this.state = null;
         e.preventDefault();
         return;

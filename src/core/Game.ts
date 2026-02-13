@@ -150,6 +150,7 @@ export class Game {
     });
     this.createEditorButton();
     this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
+    this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
     this.input.attach();
     // Start in editor mode — attach editor, not joystick
     this.editorMode.attach();
@@ -824,21 +825,35 @@ export class Game {
     this.input.detach();
   }
 
-  /** Handle tap/click in play mode — befriend nearby entities. */
+  /** Handle click in play mode (desktop). */
   private onPlayClick(e: MouseEvent): void {
     if (this.editorEnabled || this.mainMenu.visible) return;
     const rect = this.canvas.getBoundingClientRect();
     const sx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
     const sy = (e.clientY - rect.top) * (this.canvas.height / rect.height);
-    const world = this.camera.screenToWorld(sx, sy);
+    this.tryBefriendAt(sx, sy);
+  }
 
+  /** Handle tap in play mode (mobile — from TouchJoystick tap detection). */
+  private onPlayTap(clientX: number, clientY: number): void {
+    if (this.editorEnabled || this.mainMenu.visible) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const sx = (clientX - rect.left) * (this.canvas.width / rect.width);
+    const sy = (clientY - rect.top) * (this.canvas.height / rect.height);
+    this.tryBefriendAt(sx, sy);
+  }
+
+  /** Try to befriend a nearby entity at the given screen coordinates. */
+  /** Toggle follow on the nearest befriendable entity at screen coords. */
+  private tryBefriendAt(sx: number, sy: number): void {
+    const world = this.camera.screenToWorld(sx, sy);
     const BEFRIEND_RANGE_SQ = 24 * 24;
     for (const entity of this.entityManager.entities) {
-      if (!entity.wanderAI?.befriendable || entity.wanderAI.following) continue;
+      if (!entity.wanderAI?.befriendable) continue;
       const dx = entity.position.wx - world.wx;
       const dy = entity.position.wy - world.wy;
       if (dx * dx + dy * dy < BEFRIEND_RANGE_SQ) {
-        entity.wanderAI.following = true;
+        entity.wanderAI.following = !entity.wanderAI.following;
         break;
       }
     }

@@ -144,7 +144,7 @@ describe("EntityManager", () => {
       c.velocity.vy = 0;
       // Wall ahead
       const getCollision = (tx: number, ty: number) =>
-        tx === 7 && ty === 6 ? CollisionFlag.Water : CollisionFlag.None;
+        tx === 7 && ty === 5 ? CollisionFlag.Water : CollisionFlag.None;
       updateWith(em, 1, getCollision, player);
       // Direction should be reversed
       expect(c.wanderAI.dirX).toBe(-1);
