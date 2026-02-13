@@ -65,9 +65,7 @@ export class GameServer {
     // Register transport handlers
     this.start();
 
-    // Open registry and migrate legacy data if needed
     await this.registry.open();
-    await this.migrateIfNeeded();
 
     // Load most recent world, or create a default one
     const worlds = await this.registry.listWorlds();
@@ -491,70 +489,6 @@ export class GameServer {
       nextEntityId: this.entityManager.getNextId(),
       gemsCollected,
     };
-  }
-
-  private async migrateIfNeeded(): Promise<void> {
-    // Check if the legacy "tilefun" database exists with data
-    let legacyDb: IDBDatabase;
-    try {
-      legacyDb = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open("tilefun", 1);
-        req.onupgradeneeded = () => {
-          // DB didn't exist — abort so we don't create an empty one
-          req.transaction?.abort();
-        };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-      });
-    } catch {
-      return; // No legacy DB
-    }
-
-    // Check if it has actual data
-    if (!legacyDb.objectStoreNames.contains("chunks")) {
-      legacyDb.close();
-      return;
-    }
-
-    const hasData = await new Promise<boolean>((resolve) => {
-      try {
-        const tx = legacyDb.transaction("chunks", "readonly");
-        const req = tx.objectStore("chunks").count();
-        req.onsuccess = () => resolve(req.result > 0);
-        req.onerror = () => resolve(false);
-      } catch {
-        resolve(false);
-      }
-    });
-
-    if (!hasData) {
-      legacyDb.close();
-      // Clean up the empty legacy DB
-      indexedDB.deleteDatabase("tilefun");
-      return;
-    }
-
-    // Read all legacy data
-    const legacySave = new SaveManager("tilefun");
-    await legacySave.open();
-    const chunks = await legacySave.loadChunks();
-    const meta = await legacySave.loadMeta();
-    legacySave.close();
-    legacyDb.close();
-
-    // Create a new world entry and copy data
-    const worldMeta = await this.registry.createWorld("My World");
-    const newSave = new SaveManager(dbNameForWorld(worldMeta.id));
-    await newSave.open();
-    await newSave.importData(chunks, meta);
-    newSave.close();
-
-    // Delete legacy database
-    await new Promise<void>((resolve) => {
-      const req = indexedDB.deleteDatabase("tilefun");
-      req.onsuccess = () => resolve();
-      req.onerror = () => resolve(); // best effort
-    });
   }
 
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {

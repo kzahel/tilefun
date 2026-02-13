@@ -210,34 +210,6 @@ export class SaveManager {
     };
   }
 
-  /** Import chunk and meta data in bulk (for migration). */
-  async importData(
-    chunks: Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>,
-    meta: SavedMeta | null,
-  ): Promise<void> {
-    const db = this.db;
-    if (!db) return;
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction([STORE_CHUNKS, STORE_META], "readwrite");
-      const chunkStore = tx.objectStore(STORE_CHUNKS);
-      const metaStore = tx.objectStore(STORE_META);
-      for (const [key, data] of chunks) {
-        const record: { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer } = {
-          subgrid: new Uint8Array(data.subgrid).buffer,
-        };
-        if (data.roadGrid?.some((v) => v !== 0)) {
-          record.roadGrid = new Uint8Array(data.roadGrid).buffer;
-        }
-        chunkStore.put(record, key);
-      }
-      if (meta) {
-        metaStore.put(meta, "state");
-      }
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-    });
-  }
-
   async clear(): Promise<void> {
     const db = this.db;
     if (!db) return;
