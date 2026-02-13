@@ -107,19 +107,16 @@ export class TouchJoystick {
 
   private onTouchStart = (e: TouchEvent): void => {
     if (this.state) return; // already tracking a touch
-    for (let i = 0; i < e.changedTouches.length; i++) {
-      const touch = e.changedTouches[i];
-      if (touch && touch.clientX < this.canvas.width / 2) {
-        this.state = {
-          touchId: touch.identifier,
-          baseX: touch.clientX,
-          baseY: touch.clientY,
-          thumbX: touch.clientX,
-          thumbY: touch.clientY,
-        };
-        e.preventDefault();
-        return;
-      }
+    const touch = e.changedTouches[0];
+    if (touch) {
+      this.state = {
+        touchId: touch.identifier,
+        baseX: touch.clientX,
+        baseY: touch.clientY,
+        thumbX: touch.clientX,
+        thumbY: touch.clientY,
+      };
+      e.preventDefault();
     }
   };
 
