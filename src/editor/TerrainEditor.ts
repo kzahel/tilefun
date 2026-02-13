@@ -1,5 +1,5 @@
 import type { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { TerrainId } from "../autotile/TerrainId.js";
+import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { SaveManager } from "../persistence/SaveManager.js";
 import { getCollisionForTerrain, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
@@ -20,11 +20,11 @@ export class TerrainEditor {
   applyTileEdit(
     tx: number,
     ty: number,
-    rawTerrainId: TerrainId | null,
+    rawTerrainId: number | null,
     paintMode: PaintMode,
     bridgeDepth: number,
   ): void {
-    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
+    const terrainId = rawTerrainId ?? this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
     const gsx0 = 2 * tx;
     const gsy0 = 2 * ty;
     const unpaint = paintMode === "unpaint";
@@ -33,7 +33,7 @@ export class TerrainEditor {
         const gx = gsx0 + dx;
         const gy = gsy0 + dy;
         if (unpaint) {
-          if (this.getGlobalSubgrid(gx, gy) === terrainId) {
+          if (toBaseTerrainId(this.getGlobalSubgrid(gx, gy)) === toBaseTerrainId(terrainId)) {
             this.applySubgridWithBridges(
               gx,
               gy,
@@ -53,18 +53,18 @@ export class TerrainEditor {
   applyCornerEdit(
     gsx: number,
     gsy: number,
-    rawTerrainId: TerrainId | null,
+    rawTerrainId: number | null,
     paintMode: PaintMode,
     bridgeDepth: number,
   ): void {
-    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
+    const terrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
     const unpaint = paintMode === "unpaint";
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
         const gx = gsx + dx;
         const gy = gsy + dy;
         if (unpaint) {
-          if (this.getGlobalSubgrid(gx, gy) === terrainId) {
+          if (toBaseTerrainId(this.getGlobalSubgrid(gx, gy)) === toBaseTerrainId(terrainId)) {
             this.applySubgridWithBridges(
               gx,
               gy,
@@ -92,17 +92,17 @@ export class TerrainEditor {
   applySubgridEdit(
     gsx: number,
     gsy: number,
-    rawTerrainId: TerrainId | null,
+    rawTerrainId: number | null,
     paintMode: PaintMode,
     bridgeDepth: number,
     shape: SubgridShape,
   ): void {
-    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
+    const terrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
     const points = getSubgridBrushPoints(gsx, gsy, shape);
 
     if (paintMode === "unpaint") {
       for (const [px, py] of points) {
-        if (this.getGlobalSubgrid(px, py) === terrainId) {
+        if (toBaseTerrainId(this.getGlobalSubgrid(px, py)) === toBaseTerrainId(terrainId)) {
           const replacement = this.findUnpaintReplacement(px, py, terrainId);
           this.applySubgridWithBridges(px, py, replacement, 0, bridgeDepth);
         }
@@ -157,7 +157,7 @@ export class TerrainEditor {
     if (!chunk) return;
 
     // Water constraint: water tiles cannot be elevated
-    const terrain = this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
+    const terrain = toBaseTerrainId(this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1));
     if (height > 0 && (terrain === TerrainId.ShallowWater || terrain === TerrainId.DeepWater)) {
       return;
     }
@@ -168,7 +168,7 @@ export class TerrainEditor {
   }
 
   /** Fill all loaded chunks with a single terrain. */
-  clearAllTerrain(terrainId: TerrainId): void {
+  clearAllTerrain(terrainId: number): void {
     const tileId = terrainIdToTileId(terrainId);
     const collision = getCollisionForTerrain(tileId);
     for (const [key, chunk] of this.world.chunks.entries()) {
@@ -203,17 +203,18 @@ export class TerrainEditor {
 
   // --- Internal helpers ---
 
-  getGlobalSubgrid(gsx: number, gsy: number): TerrainId {
+  /** Read raw subgrid value (may be a variant like ShallowWaterOnGrass). */
+  getGlobalSubgrid(gsx: number, gsy: number): number {
     const cx = Math.floor(gsx / SUBGRID_STRIDE);
     const cy = Math.floor(gsy / SUBGRID_STRIDE);
     const lsx = gsx - cx * SUBGRID_STRIDE;
     const lsy = gsy - cy * SUBGRID_STRIDE;
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (!chunk) return TerrainId.Grass;
-    return chunk.getSubgrid(lsx, lsy) as TerrainId;
+    return chunk.getSubgrid(lsx, lsy);
   }
 
-  private setGlobalSubgrid(gsx: number, gsy: number, terrainId: TerrainId): void {
+  private setGlobalSubgrid(gsx: number, gsy: number, terrainId: number): void {
     const S = SUBGRID_STRIDE;
     const cx = Math.floor(gsx / S);
     const cy = Math.floor(gsy / S);
@@ -231,7 +232,7 @@ export class TerrainEditor {
     cy: number,
     lsx: number,
     lsy: number,
-    terrainId: TerrainId,
+    terrainId: number,
   ): void {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
@@ -240,8 +241,9 @@ export class TerrainEditor {
     }
   }
 
-  private findUnpaintReplacement(gsx: number, gsy: number, unpaintTerrain: TerrainId): TerrainId {
-    const counts = new Map<TerrainId, number>();
+  private findUnpaintReplacement(gsx: number, gsy: number, unpaintTerrain: number): number {
+    const baseUnpaint = toBaseTerrainId(unpaintTerrain);
+    const counts = new Map<number, number>();
     const dirs: [number, number][] = [
       [-1, 0],
       [1, 0],
@@ -253,11 +255,11 @@ export class TerrainEditor {
       [1, 1],
     ];
     for (const [dx, dy] of dirs) {
-      const t = this.getGlobalSubgrid(gsx + dx, gsy + dy);
-      if (t !== unpaintTerrain) counts.set(t, (counts.get(t) ?? 0) + 1);
+      const raw = this.getGlobalSubgrid(gsx + dx, gsy + dy);
+      if (toBaseTerrainId(raw) !== baseUnpaint) counts.set(raw, (counts.get(raw) ?? 0) + 1);
     }
     if (counts.size === 0) return TerrainId.Grass;
-    let best: TerrainId = TerrainId.Grass;
+    let best: number = TerrainId.Grass;
     let bestCount = 0;
     for (const [t, c] of counts) {
       if (c > bestCount) {
@@ -271,13 +273,14 @@ export class TerrainEditor {
   private applySubgridWithBridges(
     gsx: number,
     gsy: number,
-    terrainId: TerrainId,
+    terrainId: number,
     depth: number,
     maxBridge: number,
   ): void {
     this.setGlobalSubgrid(gsx, gsy, terrainId);
 
     if (maxBridge > 0 && depth < maxBridge) {
+      const baseTerrain = toBaseTerrainId(terrainId);
       const cardinals: [number, number][] = [
         [gsx - 1, gsy],
         [gsx + 1, gsy],
@@ -285,11 +288,12 @@ export class TerrainEditor {
         [gsx, gsy + 1],
       ];
       for (const [nx, ny] of cardinals) {
-        const neighbor = this.getGlobalSubgrid(nx, ny);
-        if (neighbor === terrainId) continue;
-        if (this.adjacency.isValidAdjacency(terrainId, neighbor)) continue;
-        const step = this.adjacency.getBridgeStep(terrainId, neighbor);
+        const neighborBase = toBaseTerrainId(this.getGlobalSubgrid(nx, ny));
+        if (neighborBase === baseTerrain) continue;
+        if (this.adjacency.isValidAdjacency(baseTerrain, neighborBase)) continue;
+        const step = this.adjacency.getBridgeStep(baseTerrain, neighborBase);
         if (step !== undefined) {
+          // Bridge-inserted terrains use base TerrainId (not variant)
           this.applySubgridWithBridges(nx, ny, step, depth + 1, maxBridge);
         }
       }
@@ -313,8 +317,8 @@ export class TerrainEditor {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (!chunk) return;
 
-    const terrain = this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
-    const tileId = terrainIdToTileId(terrain);
+    const baseTerrain = toBaseTerrainId(this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1));
+    const tileId = terrainIdToTileId(baseTerrain);
 
     chunk.setTerrain(lx, ly, tileId);
     chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
@@ -322,7 +326,7 @@ export class TerrainEditor {
 
     // Water constraint: painting water on an elevated tile resets height to 0
     if (
-      (terrain === TerrainId.ShallowWater || terrain === TerrainId.DeepWater) &&
+      (baseTerrain === TerrainId.ShallowWater || baseTerrain === TerrainId.DeepWater) &&
       chunk.getHeight(lx, ly) > 0
     ) {
       chunk.setHeight(lx, ly, 0);

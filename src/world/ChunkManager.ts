@@ -1,4 +1,4 @@
-import type { TerrainId } from "../autotile/TerrainId.js";
+import { toBaseTerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
@@ -102,7 +102,7 @@ export class ChunkManager {
   private rederiveFromSubgrid(chunk: Chunk): void {
     for (let ly = 0; ly < CHUNK_SIZE; ly++) {
       for (let lx = 0; lx < CHUNK_SIZE; lx++) {
-        const terrain = chunk.getSubgrid(lx * 2 + 1, ly * 2 + 1) as TerrainId;
+        const terrain = toBaseTerrainId(chunk.getSubgrid(lx * 2 + 1, ly * 2 + 1));
         const tileId = terrainIdToTileId(terrain);
         chunk.setTerrain(lx, ly, tileId);
         chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));

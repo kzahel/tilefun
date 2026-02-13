@@ -4,9 +4,11 @@ import { GM_BLOB_LOOKUP } from "./gmBlobLayout.js";
 import {
   getBaseSelectionMode,
   getForceConvex,
+  getPreferredPartner,
   TERRAIN_COUNT,
   TERRAIN_DEPTH,
   type TerrainId,
+  toBaseTerrainId,
 } from "./TerrainId.js";
 
 /** Rich per-tile blend layer info, usable by both game rendering and demo display. */
@@ -61,7 +63,7 @@ export function computeDirectMask(
  * and the interactive demo. Changes here affect both.
  */
 export function computeTileBlend(
-  center: TerrainId,
+  centerRaw: number,
   n: TerrainId,
   ne: TerrainId,
   e: TerrainId,
@@ -72,6 +74,9 @@ export function computeTileBlend(
   nw: TerrainId,
   blendGraph: BlendGraph,
 ): TileBlendResult {
+  const center = toBaseTerrainId(centerRaw);
+  const preferredPartner = getPreferredPartner(centerRaw);
+
   // Gather unique terrains
   const seen = new Uint8Array(TERRAIN_COUNT);
   seen[center] = 1;
@@ -101,6 +106,10 @@ export function computeTileBlend(
         const entry = blendGraph.getBlend(other, candidate);
         if (entry && !entry.isAlpha) score += 2;
         else if (entry) score += 1;
+      }
+      // Preference boost: if center has a preferred partner, strongly prefer it as base
+      if (preferredPartner !== undefined && candidate === preferredPartner) {
+        score += 10;
       }
       if (
         score > bestScore ||

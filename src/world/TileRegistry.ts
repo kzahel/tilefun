@@ -1,4 +1,4 @@
-import { TerrainId } from "../autotile/TerrainId.js";
+import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 
 /** Tile type identifiers. 0 is reserved for "empty". */
 export enum TileId {
@@ -62,8 +62,8 @@ export function getCollisionForTerrain(tileId: TileId): number {
  * Map TerrainId to TileId for chunk terrain derivation.
  * SandLight maps to Sand, DirtLight/DirtWarm map to DirtPath (no dedicated TileIds).
  */
-export function terrainIdToTileId(terrain: TerrainId): TileId {
-  switch (terrain) {
+export function terrainIdToTileId(terrain: TerrainId | number): TileId {
+  switch (toBaseTerrainId(terrain)) {
     case TerrainId.DeepWater:
       return TileId.DeepWater;
     case TerrainId.ShallowWater:

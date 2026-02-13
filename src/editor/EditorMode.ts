@@ -11,13 +11,13 @@ export type SubgridShape = 1 | 2 | 3 | "cross";
 interface PendingTileEdit {
   tx: number;
   ty: number;
-  terrainId: TerrainId | null;
+  terrainId: number | null;
 }
 
 export interface PendingSubgridEdit {
   gsx: number;
   gsy: number;
-  terrainId: TerrainId | null;
+  terrainId: number | null;
 }
 
 export interface PendingRoadEdit {
@@ -40,7 +40,7 @@ export interface PendingEntitySpawn {
 }
 
 export class EditorMode {
-  selectedTerrain: TerrainId | null = TerrainId.Grass;
+  selectedTerrain: number | null = TerrainId.Grass;
   selectedRoadType = 0;
   selectedEntityType = "chicken";
   selectedElevation = 1;

@@ -10,7 +10,9 @@ export enum TerrainId {
   Grass = 4,
   DirtLight = 5,
   DirtWarm = 6,
-  // 7-10: formerly road terrains, now on separate road layer (values reserved for save compat)
+  // Sheet variants: same base terrain but different preferred blend direction
+  ShallowWaterOnGrass = 7, // ShallowWater terrain, prefers me03 (water over grass)
+  GrassOnDirtWarm = 8, // Grass terrain, prefers me12 (grass over dirt)
   // Structure terrains
   Playground = 11,
   Curb = 12,
@@ -45,8 +47,9 @@ export const TERRAIN_DEPTH: Record<TerrainId, number> = {
   [TerrainId.Sand]: 4,
   [TerrainId.DirtLight]: 5,
   [TerrainId.DirtWarm]: 6,
+  [TerrainId.ShallowWaterOnGrass]: 0, // same depth as ShallowWater
+  [TerrainId.GrassOnDirtWarm]: 2, // same depth as Grass
   [TerrainId.Curb]: 7,
-  // 7-10 (old road terrains) removed — roads are on separate layer
   [TerrainId.Playground]: 12,
 };
 
@@ -73,4 +76,33 @@ export function getForceConvex(): boolean {
 }
 export function setForceConvex(v: boolean): void {
   _forceConvex = v;
+}
+
+/** Map variant subgrid values to their base TerrainId. Base IDs return themselves. */
+export function toBaseTerrainId(id: number): TerrainId {
+  switch (id) {
+    case TerrainId.ShallowWaterOnGrass:
+      return TerrainId.ShallowWater;
+    case TerrainId.GrassOnDirtWarm:
+      return TerrainId.Grass;
+    default:
+      return id as TerrainId;
+  }
+}
+
+/**
+ * For variant terrain IDs, the preferred base partner terrain.
+ * When this terrain is the tile center and the partner is a neighbor,
+ * the partner gets a score boost to become the base (so this terrain
+ * becomes the overlay using its preferred blend sheet).
+ */
+export function getPreferredPartner(id: number): TerrainId | undefined {
+  switch (id) {
+    case TerrainId.ShallowWaterOnGrass:
+      return TerrainId.Grass;
+    case TerrainId.GrassOnDirtWarm:
+      return TerrainId.DirtWarm;
+    default:
+      return undefined;
+  }
 }

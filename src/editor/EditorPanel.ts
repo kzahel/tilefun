@@ -36,14 +36,22 @@ interface PaletteEntry {
   color: string;
 }
 
-const NATURAL_PALETTE: PaletteEntry[] = [
-  { terrainId: TerrainId.Grass, label: "Grass", color: "#6b935f" },
-  { terrainId: TerrainId.ShallowWater, label: "Shlw Water", color: "#4fa4b8" },
-  { terrainId: TerrainId.DeepWater, label: "Deep Water", color: "#2a5a8a" },
-  { terrainId: TerrainId.Sand, label: "Sand", color: "#c8a84e" },
-  { terrainId: TerrainId.SandLight, label: "Lt Sand", color: "#d4b86a" },
-  { terrainId: TerrainId.DirtLight, label: "Lt Dirt", color: "#a08050" },
-  { terrainId: TerrainId.DirtWarm, label: "Wrm Dirt", color: "#8b6b3e" },
+interface SheetPaletteEntry {
+  sheetKey: string;
+  label: string;
+  storedValue: number;
+}
+
+const NATURAL_SHEET_PALETTE: SheetPaletteEntry[] = [
+  { sheetKey: "me16", label: "Deep/Shlw", storedValue: TerrainId.DeepWater },
+  { sheetKey: "me03", label: "Shlw/Grass", storedValue: TerrainId.ShallowWaterOnGrass },
+  { sheetKey: "me08", label: "Sand/Shlw", storedValue: TerrainId.Sand },
+  { sheetKey: "me09", label: "Sand/SandL", storedValue: TerrainId.Sand },
+  { sheetKey: "me07", label: "SandL/Grass", storedValue: TerrainId.SandLight },
+  { sheetKey: "me01", label: "DirtL/Grass", storedValue: TerrainId.DirtLight },
+  { sheetKey: "me02", label: "DirtW/Grass", storedValue: TerrainId.DirtWarm },
+  { sheetKey: "me12", label: "Grass/DirtW", storedValue: TerrainId.GrassOnDirtWarm },
+  { sheetKey: "me15", label: "Grass/Shlw", storedValue: TerrainId.Grass },
 ];
 
 interface RoadPaletteEntry {
@@ -105,8 +113,10 @@ export class EditorPanel {
   private readonly elevationRow: HTMLDivElement;
   private readonly elevationHeightButtons: HTMLButtonElement[] = [];
   private readonly elevationGridButtons: HTMLButtonElement[] = [];
-  /** All terrain buttons with their entries, for selection highlighting. */
+  /** Structure terrain buttons with their entries, for selection highlighting. */
   private readonly terrainButtons: { btn: HTMLButtonElement; entry: PaletteEntry }[] = [];
+  private readonly naturalPaletteButtons: HTMLButtonElement[] = [];
+  private selectedNaturalIndex = 8;
   private readonly autoButtons: HTMLButtonElement[] = [];
   private readonly terrainWrappers: HTMLDivElement[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
@@ -117,10 +127,10 @@ export class EditorPanel {
   private readonly bridgeLabel: HTMLSpanElement;
   private readonly brushSizeButton: HTMLButtonElement;
   private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
-  private pendingClear: TerrainId | null = null;
+  private pendingClear: number | null = null;
   private pendingRoadClear = false;
   private readonly roadButtons: { btn: HTMLButtonElement; entry: RoadPaletteEntry }[] = [];
-  selectedTerrain: TerrainId | null = TerrainId.Grass;
+  selectedTerrain: number | null = TerrainId.Grass;
   selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
   selectedElevation = 1;
@@ -236,7 +246,7 @@ export class EditorPanel {
     this.container.appendChild(this.toolRow);
 
     // --- Terrain palette rows ---
-    this.naturalRow = this.buildTerrainRow(NATURAL_PALETTE);
+    this.naturalRow = this.buildNaturalRow();
     this.container.appendChild(this.naturalRow);
 
     this.roadRow = this.buildRoadRow();
@@ -343,6 +353,7 @@ export class EditorPanel {
     autoBtn.title = "Smudge: L-click grows, R-click shrinks";
     autoBtn.addEventListener("click", () => {
       this.selectedTerrain = null;
+      this.selectedNaturalIndex = -1;
       this.updateTerrainSelection();
     });
     row.appendChild(autoBtn);
@@ -365,9 +376,95 @@ export class EditorPanel {
       btn.title = entry.label;
       btn.addEventListener("click", () => {
         this.selectedTerrain = entry.terrainId;
+        this.selectedNaturalIndex = -1;
         this.updateTerrainSelection();
       });
       this.terrainButtons.push({ btn, entry });
+      wrapper.appendChild(btn);
+    }
+
+    wrapper.appendChild(this.makeSeparator());
+
+    const clearBtn = document.createElement("button");
+    clearBtn.style.cssText = `
+      height: 44px; border: 2px solid #555; border-radius: 4px;
+      background: #333; color: #fff; font: bold 10px monospace;
+      cursor: pointer; padding: 0 12px;
+    `;
+    clearBtn.textContent = "Clear";
+    clearBtn.title = "Fill all chunks with selected terrain";
+    let confirmTimer = 0;
+    clearBtn.addEventListener("click", () => {
+      if (clearBtn.dataset.confirm === "1") {
+        this.pendingClear = this.selectedTerrain;
+        clearBtn.textContent = "Clear";
+        clearBtn.style.borderColor = "#555";
+        clearBtn.style.background = "#333";
+        delete clearBtn.dataset.confirm;
+        window.clearTimeout(confirmTimer);
+      } else {
+        clearBtn.dataset.confirm = "1";
+        clearBtn.textContent = "Sure?";
+        clearBtn.style.borderColor = "#f55";
+        clearBtn.style.background = "#633";
+        confirmTimer = window.setTimeout(() => {
+          clearBtn.textContent = "Clear";
+          clearBtn.style.borderColor = "#555";
+          clearBtn.style.background = "#333";
+          delete clearBtn.dataset.confirm;
+        }, 2000);
+      }
+    });
+    wrapper.appendChild(clearBtn);
+
+    row.appendChild(wrapper);
+    return row;
+  }
+
+  private buildNaturalRow(): HTMLDivElement {
+    const row = document.createElement("div");
+    row.style.cssText = ROW_STYLE;
+
+    // Auto (smudge) button
+    const autoBtn = document.createElement("button");
+    autoBtn.style.cssText = `
+      width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
+      background: #556; color: #cdf; font: bold 9px monospace;
+      cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      display: flex; align-items: center; justify-content: center;
+    `;
+    autoBtn.textContent = "Auto";
+    autoBtn.title = "Smudge: L-click grows, R-click shrinks";
+    autoBtn.addEventListener("click", () => {
+      this.selectedTerrain = null;
+      this.selectedNaturalIndex = -1;
+      this.updateTerrainSelection();
+    });
+    row.appendChild(autoBtn);
+    this.autoButtons.push(autoBtn);
+
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "contents";
+    this.terrainWrappers.push(wrapper);
+
+    for (let i = 0; i < NATURAL_SHEET_PALETTE.length; i++) {
+      const entry = NATURAL_SHEET_PALETTE[i]!;
+      const btn = document.createElement("button");
+      btn.style.cssText = `
+        width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
+        background: #444; color: #fff; font: bold 9px monospace;
+        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        display: flex; align-items: center; justify-content: center;
+      `;
+      btn.textContent = entry.label;
+      btn.title = `${entry.sheetKey}: ${entry.label}`;
+      const idx = i;
+      btn.addEventListener("click", () => {
+        this.selectedTerrain = entry.storedValue;
+        this.selectedNaturalIndex = idx;
+        this.updateTerrainSelection();
+      });
+      this.naturalPaletteButtons.push(btn);
       wrapper.appendChild(btn);
     }
 
@@ -617,7 +714,7 @@ export class EditorPanel {
     return typeof this.subgridShape === "number" ? this.subgridShape : 1;
   }
 
-  consumeClearRequest(): TerrainId | null {
+  consumeClearRequest(): number | null {
     const c = this.pendingClear;
     this.pendingClear = null;
     return c;
@@ -631,10 +728,19 @@ export class EditorPanel {
 
   private updateTerrainSelection(): void {
     const isAuto = this.selectedTerrain === null;
+    // Natural palette buttons: highlight by palette index (handles duplicate stored values)
+    for (let i = 0; i < this.naturalPaletteButtons.length; i++) {
+      const btn = this.naturalPaletteButtons[i];
+      if (!btn) continue;
+      const active = i === this.selectedNaturalIndex;
+      btn.style.borderColor = active ? "#fff" : "#555";
+      btn.style.boxShadow = active ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+    }
+    // Structure buttons: highlight by terrainId (only when no natural selection)
     for (const { btn, entry } of this.terrainButtons) {
-      btn.style.borderColor = entry.terrainId === this.selectedTerrain ? "#fff" : "#555";
-      btn.style.boxShadow =
-        entry.terrainId === this.selectedTerrain ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+      const active = entry.terrainId === this.selectedTerrain && this.selectedNaturalIndex === -1;
+      btn.style.borderColor = active ? "#fff" : "#555";
+      btn.style.boxShadow = active ? "0 0 6px rgba(255,255,255,0.5)" : "none";
     }
     for (const btn of this.autoButtons) {
       btn.style.borderColor = isAuto ? "#fff" : "#555";
@@ -688,7 +794,22 @@ export class EditorPanel {
     blendSheets: Spritesheet[],
     blendGraph: BlendGraph,
   ): void {
-    // Terrain buttons: draw base fill tile
+    // Natural sheet buttons: draw primary fill from blend sheet
+    for (let i = 0; i < NATURAL_SHEET_PALETTE.length; i++) {
+      const btn = this.naturalPaletteButtons[i];
+      const entry = NATURAL_SHEET_PALETTE[i];
+      if (!btn || !entry) continue;
+      const sheetIdx = blendGraph.allSheets.findIndex((s) => s.sheetKey === entry.sheetKey);
+      if (sheetIdx >= 0) {
+        const sheet = blendSheets[sheetIdx];
+        if (sheet) {
+          // (4,1) = mask 15 (all cardinals, no corners): rounded primary blob with secondary in corners
+          this.renderPreviewCanvas(btn, sheet, 4, 1, 44, 44);
+        }
+      }
+    }
+
+    // Structure buttons: draw base fill tile
     for (const { btn, entry } of this.terrainButtons) {
       const fill = blendGraph.getBaseFill(entry.terrainId);
       const sheet = fill ? blendSheets[fill.sheetIndex] : undefined;

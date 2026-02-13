@@ -2,7 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { TileVariants } from "../assets/TileVariants.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
-import { TerrainId } from "../autotile/TerrainId.js";
+import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
   ELEVATION_PX,
@@ -188,6 +188,12 @@ export class TileRenderer {
               tileScreenSize,
               tileScreenSize,
             );
+
+            // 3. Subtle darken on elevated surface so it reads as raised
+            ctx.globalAlpha = 0.12;
+            ctx.fillStyle = "#000";
+            ctx.fillRect(tileSx, tileSy - cliffH, tileScreenSize, tileScreenSize);
+            ctx.globalAlpha = 1;
           }
         }
       }
@@ -236,7 +242,7 @@ export class TileRenderer {
         //    Blend sprites are opaque 16×16 tiles and fully cover the base fill
         //    wherever a transition exists, so the base only shows on uniform tiles.
         if (graph) {
-          const terrainId = chunk.getSubgrid(2 * lx + 1, 2 * ly + 1) as TerrainId;
+          const terrainId = toBaseTerrainId(chunk.getSubgrid(2 * lx + 1, 2 * ly + 1));
           // Skip base fill for shallow water (already drawn as universal base)
           if (terrainId !== TerrainId.ShallowWater) {
             // Try tile variants first for visual variety

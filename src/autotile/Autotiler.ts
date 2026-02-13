@@ -3,7 +3,7 @@ import type { Chunk } from "../world/Chunk.js";
 import type { BlendGraph } from "./BlendGraph.js";
 import { MAX_BLEND_LAYERS } from "./BlendGraph.js";
 import { computeTileBlend } from "./computeTileBlend.js";
-import type { TerrainId } from "./TerrainId.js";
+import { toBaseTerrainId } from "./TerrainId.js";
 
 export { AutotileBit, canonicalize } from "./bitmask.js";
 export type { BlendLayer, TileBlendResult } from "./computeTileBlend.js";
@@ -38,15 +38,15 @@ export function computeChunkSubgridBlend(chunk: Chunk, blendGraph: BlendGraph): 
       const cy = 2 * ly + 1;
 
       const result = computeTileBlend(
-        chunk.getSubgrid(cx, cy) as TerrainId,
-        chunk.getSubgrid(cx, cy - 1) as TerrainId,
-        chunk.getSubgrid(cx + 1, cy - 1) as TerrainId,
-        chunk.getSubgrid(cx + 1, cy) as TerrainId,
-        chunk.getSubgrid(cx + 1, cy + 1) as TerrainId,
-        chunk.getSubgrid(cx, cy + 1) as TerrainId,
-        chunk.getSubgrid(cx - 1, cy + 1) as TerrainId,
-        chunk.getSubgrid(cx - 1, cy) as TerrainId,
-        chunk.getSubgrid(cx - 1, cy - 1) as TerrainId,
+        chunk.getSubgrid(cx, cy),
+        toBaseTerrainId(chunk.getSubgrid(cx, cy - 1)),
+        toBaseTerrainId(chunk.getSubgrid(cx + 1, cy - 1)),
+        toBaseTerrainId(chunk.getSubgrid(cx + 1, cy)),
+        toBaseTerrainId(chunk.getSubgrid(cx + 1, cy + 1)),
+        toBaseTerrainId(chunk.getSubgrid(cx, cy + 1)),
+        toBaseTerrainId(chunk.getSubgrid(cx - 1, cy + 1)),
+        toBaseTerrainId(chunk.getSubgrid(cx - 1, cy)),
+        toBaseTerrainId(chunk.getSubgrid(cx - 1, cy - 1)),
         blendGraph,
       );
 
