@@ -3,6 +3,7 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
 import { fbm } from "./noise.js";
+import { generateChunkRoads, type RoadGenParams } from "./RoadGenerator.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
 
 /** Controls feature size — lower = larger features. ~0.012 gives ~5-chunk-wide features. */
@@ -40,6 +41,8 @@ export class OnionStrategy implements TerrainStrategy {
     private readonly seed = 42,
     /** Radius in tiles for island mode. 0 = normal generation (no island). */
     private readonly islandRadius = 0,
+    /** Road generation params. Undefined = no roads. */
+    private readonly roadParams?: RoadGenParams,
   ) {}
 
   generate(chunk: Chunk, cx: number, cy: number): void {
@@ -84,6 +87,10 @@ export class OnionStrategy implements TerrainStrategy {
         }
         chunk.setCollision(lx, ly, getCollisionForWaterTile(tileId, waterCount));
       }
+    }
+
+    if (this.roadParams) {
+      generateChunkRoads(chunk, cx, cy, this.seed, this.roadParams, this.islandRadius);
     }
   }
 }

@@ -7,6 +7,7 @@ import { GameLoop } from "../core/GameLoop.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
+import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -43,6 +44,7 @@ export class GameClient {
   private editorMode: EditorMode;
   private editorPanel: EditorPanel;
   private mainMenu: MainMenu;
+  private propCatalog: PropCatalog;
   private editorButton: HTMLButtonElement | null = null;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
   private frameCount = 0;
@@ -88,6 +90,12 @@ export class GameClient {
     this.editorPanel = new EditorPanel();
     this.editorPanel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
+    this.propCatalog = new PropCatalog();
+    this.editorPanel.onOpenCatalog = () => this.propCatalog.show();
+    this.propCatalog.onSelect = (propType: string) => {
+      this.editorPanel.selectedPropType = propType;
+      this.editorPanel.setTab("props");
+    };
 
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
@@ -132,6 +140,14 @@ export class GameClient {
     this.resize();
     window.addEventListener("resize", () => this.resize());
     document.addEventListener("keydown", (e) => this.onKeyDown(e));
+    // Prevent buttons/selects from stealing keyboard focus — keeps all keys routed to the game.
+    // Text inputs (e.g. MainMenu world name/seed) are excluded so they remain typeable.
+    document.addEventListener("mousedown", (e) => {
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === "BUTTON" || tag === "SELECT") {
+        e.preventDefault();
+      }
+    });
     this.createEditorButton();
     this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
     this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
@@ -148,6 +164,8 @@ export class GameClient {
     this.tileRenderer.setRoadSheets(this.sheets);
     this.tileRenderer.setVariants(assets.variants);
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, blendGraph);
+    const meComplete = assets.sheets.get("me-complete");
+    if (meComplete) this.propCatalog.setImage(meComplete.image);
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
@@ -218,7 +236,6 @@ export class GameClient {
     };
     this.mainMenu.onDelete = async (id) => {
       if (this.serialized) {
-        // deleteWorld may auto-load another world (world-loaded handler fires)
         await this.sendRequest({
           type: "delete-world",
           requestId: this.nextRequestId++,
@@ -231,11 +248,6 @@ export class GameClient {
         this.mainMenu.show(resp.worlds);
       } else {
         await this.localServer.deleteWorld(id);
-        const session = this.localServer.getLocalSession();
-        this.camera.x = session.cameraX;
-        this.camera.y = session.cameraY;
-        this.camera.zoom = session.cameraZoom;
-        this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
         const worlds = await this.localServer.listWorlds();
         this.mainMenu.show(worlds);
       }
@@ -280,8 +292,8 @@ export class GameClient {
   // ---- Update ----
 
   private update(dt: number): void {
-    // Skip game updates while menu is open
-    if (this.mainMenu.visible) return;
+    // Skip game updates while menu or catalog is open
+    if (this.mainMenu.visible || this.propCatalog.visible) return;
 
     const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
 
@@ -609,11 +621,15 @@ export class GameClient {
 
   private onKeyDown(e: KeyboardEvent): void {
     if (e.key === "Escape") {
+      if (this.propCatalog.visible) {
+        this.propCatalog.hide();
+        return;
+      }
       e.preventDefault();
       this.toggleMenu();
       return;
     }
-    if (this.mainMenu.visible) return;
+    if (this.mainMenu.visible || this.propCatalog.visible) return;
 
     const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
 

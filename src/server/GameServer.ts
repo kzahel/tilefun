@@ -13,6 +13,7 @@ import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
+import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
@@ -350,17 +351,14 @@ export class GameServer {
   }
 
   async deleteWorld(id: string): Promise<void> {
-    await this.registry.deleteWorld(id);
-    if (id === this.currentWorldId) {
-      const remaining = await this.registry.listWorlds();
-      const next = remaining[0];
-      if (next) {
-        await this.loadWorld(next.id);
-      } else {
-        const meta = await this.registry.createWorld("My World");
-        await this.loadWorld(meta.id);
-      }
+    // Close the SaveManager connection BEFORE deleting the database,
+    // otherwise indexedDB.deleteDatabase() blocks on the open connection.
+    if (id === this.currentWorldId && this.saveManager) {
+      this.saveManager.flush();
+      this.saveManager.close();
+      this.saveManager = null;
     }
+    await this.registry.deleteWorld(id);
   }
 
   async listWorlds(): Promise<WorldMeta[]> {
@@ -673,13 +671,14 @@ export class GameServer {
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
     const type: WorldType = meta?.worldType ?? "generated";
     const seed = meta?.seed ?? 42;
+    const roadParams = meta?.roadParams ?? DEFAULT_ROAD_PARAMS;
     switch (type) {
       case "flat":
         return new FlatStrategy();
       case "island":
-        return new OnionStrategy(seed, 12);
+        return new OnionStrategy(seed, 12, roadParams);
       default:
-        return new OnionStrategy(seed);
+        return new OnionStrategy(seed, 0, roadParams);
     }
   }
 }

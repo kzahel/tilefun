@@ -119,6 +119,7 @@ export class EditorPanel {
   private readonly collapseArrow: HTMLButtonElement;
   /** Called when the user taps the collapse arrow to exit editor mode. */
   onCollapse: (() => void) | null = null;
+  onOpenCatalog: (() => void) | null = null;
   private readonly tabButtons: Map<EditorTab, HTMLButtonElement> = new Map();
   private readonly toolRow: HTMLDivElement;
   private readonly naturalRow: HTMLDivElement;
@@ -367,6 +368,19 @@ export class EditorPanel {
       this.propButtons.push(btn);
       this.propsRow.appendChild(btn);
     }
+
+    this.propsRow.appendChild(this.makeSeparator());
+
+    const browseBtn = document.createElement("button");
+    browseBtn.style.cssText = `
+      width: 80px; height: 44px; border: 2px solid #8cf; border-radius: 4px;
+      background: rgba(100,160,255,0.15); color: #8cf; font: bold 10px monospace;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    `;
+    browseBtn.textContent = "Atlas...";
+    browseBtn.title = "Browse 4800+ sprites from Modern Exteriors";
+    browseBtn.addEventListener("click", () => this.onOpenCatalog?.());
+    this.propsRow.appendChild(browseBtn);
 
     this.propsRow.appendChild(this.makeSeparator());
     this.propsRow.appendChild(this.buildDeleteButton());

@@ -1,3 +1,4 @@
+import { ATLAS_INDEX, ATLAS_PREFIX } from "../assets/AtlasIndex.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -223,6 +224,26 @@ const PROP_DEFS: Record<string, PropDef> = {
 };
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  if (type.startsWith(ATLAS_PREFIX)) {
+    const atlasKey = type.slice(ATLAS_PREFIX.length);
+    const sprite = ATLAS_INDEX.sprites[atlasKey];
+    if (!sprite) throw new Error(`Unknown atlas sprite: ${atlasKey}`);
+    return {
+      id: 0,
+      type,
+      position: { wx, wy },
+      sprite: {
+        sheetKey: "me-complete",
+        frameCol: sprite.x / 16,
+        frameRow: sprite.y / 16,
+        spriteWidth: sprite.w,
+        spriteHeight: sprite.h,
+      },
+      collider: null,
+      walls: null,
+      isProp: true,
+    };
+  }
   const def = PROP_DEFS[type];
   if (!def) throw new Error(`Unknown prop type: ${type}`);
   return {
@@ -243,6 +264,9 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (type.startsWith(ATLAS_PREFIX)) {
+    return type.slice(ATLAS_PREFIX.length) in ATLAS_INDEX.sprites;
+  }
   return type in PROP_DEFS;
 }
 

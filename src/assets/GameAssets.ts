@@ -111,7 +111,9 @@ export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets
   }
 
   // Tile variants from the complete ME tileset
-  const variants = new TileVariants(new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE));
+  const meCompleteSheet = new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE);
+  sheets.set("me-complete", meCompleteSheet);
+  const variants = new TileVariants(meCompleteSheet);
   registerTileVariants(variants);
 
   return { sheets, blendSheets, variants };

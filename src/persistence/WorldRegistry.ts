@@ -1,3 +1,5 @@
+import type { RoadGenParams } from "../generation/RoadGenerator.js";
+
 const REGISTRY_DB = "tilefun-registry";
 const REGISTRY_VERSION = 1;
 const STORE_WORLDS = "worlds";
@@ -13,6 +15,8 @@ export interface WorldMeta {
   seed?: number;
   /** World generation type. Missing = "generated" (back-compat). */
   worldType?: WorldType;
+  /** Road generation parameters. Missing = no generated roads (back-compat). */
+  roadParams?: RoadGenParams;
 }
 
 export function dbNameForWorld(id: string): string {
@@ -77,6 +81,7 @@ export class WorldRegistry {
     name: string,
     worldType: WorldType = "generated",
     seed?: number,
+    roadParams?: RoadGenParams,
   ): Promise<WorldMeta> {
     const db = this.db;
     if (!db) throw new Error("Registry not open");
@@ -89,6 +94,7 @@ export class WorldRegistry {
       seed: seed ?? Math.floor(Math.random() * 2147483647),
       worldType,
     };
+    if (roadParams) meta.roadParams = roadParams;
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_WORLDS, "readwrite");
       tx.objectStore(STORE_WORLDS).put(meta);
@@ -150,6 +156,7 @@ export class WorldRegistry {
       const req = indexedDB.deleteDatabase(dbNameForWorld(id));
       req.onsuccess = () => resolve();
       req.onerror = () => reject(req.error);
+      req.onblocked = () => resolve(); // Don't hang if a connection is still open
     });
   }
 }
