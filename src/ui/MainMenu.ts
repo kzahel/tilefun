@@ -37,6 +37,7 @@ export class MainMenu {
   onCreate: ((name: string) => void) | null = null;
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
+  onClose: (() => void) | null = null;
 
   constructor() {
     this.overlay = document.createElement("div");
@@ -85,6 +86,13 @@ export class MainMenu {
 
     newRow.append(nameInput, createBtn);
     this.overlay.appendChild(newRow);
+
+    // Resume button to close menu and return to game
+    const resumeBtn = document.createElement("button");
+    resumeBtn.textContent = "Resume";
+    resumeBtn.style.cssText = `${BTN_STYLE} width: 320px; margin-top: 12px; font-size: 16px; padding: 10px 16px;`;
+    resumeBtn.addEventListener("click", () => this.onClose?.());
+    this.overlay.appendChild(resumeBtn);
 
     // Prevent keyboard shortcuts from firing while interacting with menu
     this.overlay.addEventListener("keydown", (e) => {

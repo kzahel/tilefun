@@ -2,6 +2,7 @@ import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
 import type { Camera } from "./Camera.js";
 
 export interface DebugInfo {
@@ -79,6 +80,7 @@ function drawCollisionBoxes(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   entities: Entity[],
+  props: Prop[],
 ): void {
   ctx.save();
   ctx.strokeStyle = "rgba(255, 0, 0, 0.7)";
@@ -93,6 +95,16 @@ function drawCollisionBoxes(
     ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
   }
 
+  ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
+  for (const prop of props) {
+    if (!prop.collider) continue;
+    const aabb = getEntityAABB(prop.position, prop.collider);
+    const topLeft = camera.worldToScreen(aabb.left, aabb.top);
+    const w = (aabb.right - aabb.left) * camera.scale;
+    const h = (aabb.bottom - aabb.top) * camera.scale;
+    ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
+  }
+
   ctx.restore();
 }
 
@@ -101,10 +113,11 @@ export function drawDebugOverlay(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   entities: Entity[],
+  props: Prop[],
   info: DebugInfo,
   visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
 ): void {
   drawInfoPanel(ctx, info);
   drawChunkBorders(ctx, camera, visible);
-  drawCollisionBoxes(ctx, camera, entities);
+  drawCollisionBoxes(ctx, camera, entities, props);
 }

@@ -141,7 +141,7 @@ describe("resolveCollision", () => {
 
   it("blocks Y movement and allows X when Y is blocked", () => {
     const entity = makeEntity(100, 100);
-    // Place water below: tile at ty=6 (player AABB is ~16px above feet)
+    // Place water below at ty=6 (collider offsetY=-16 shifts AABB up)
     const check = makeCollisionGrid({ "6,6": CollisionFlag.Water });
     const blocked = resolveCollision(
       entity,

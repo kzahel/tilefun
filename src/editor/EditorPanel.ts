@@ -2,7 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { MAX_ELEVATION } from "../config/constants.js";
-import { PROP_PALETTE } from "../entities/PropFactories.js";
+import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
 
@@ -918,30 +918,16 @@ export class EditorPanel {
       }
     }
 
-    // Prop buttons: draw sprite from objects sheet
-    const objectsSheet = sheets.get("objects");
-    if (objectsSheet) {
-      const PROP_SPRITE_COORDS: Record<string, [number, number]> = {
-        "prop-flower-red": [1, 2],
-        "prop-flower-yellow": [5, 3],
-        "prop-sunflower": [5, 2],
-        "prop-tall-grass": [0, 2],
-        "prop-mushroom": [3, 2],
-        "prop-rock": [7, 0],
-        "prop-big-rock": [6, 0],
-        "prop-pumpkin": [6, 1],
-        "prop-berries": [2, 2],
-        "prop-sprout": [8, 0],
-        "prop-leaf": [4, 2],
-      };
-      for (let i = 0; i < PROP_PALETTE.length; i++) {
-        const btn = this.propButtons[i];
-        const entry = PROP_PALETTE[i];
-        if (!btn || !entry) continue;
-        const coords = PROP_SPRITE_COORDS[entry.type];
-        if (coords) {
-          this.renderPreviewCanvas(btn, objectsSheet, coords[0], coords[1], 64, 44);
-        }
+    // Prop buttons: draw sprite preview from the prop's own sheet
+    for (let i = 0; i < PROP_PALETTE.length; i++) {
+      const btn = this.propButtons[i];
+      const entry = PROP_PALETTE[i];
+      if (!btn || !entry) continue;
+      const info = getPropSheetInfo(entry.type);
+      if (!info) continue;
+      const sheet = sheets.get(info.sheetKey);
+      if (sheet) {
+        this.renderPreviewCanvas(btn, sheet, info.col, info.row, 64, 44);
       }
     }
 

@@ -15,6 +15,8 @@ export function createPlayer(wx: number, wy: number): Entity {
     id: 0,
     type: "player",
     position: { wx, wy },
+    // 48x48 sprite frame but visual feet are ~13px above bottom of frame
+    sortOffsetY: -13,
     velocity: { vx: 0, vy: 0 },
     sprite: {
       sheetKey: "player",

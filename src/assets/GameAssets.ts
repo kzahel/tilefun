@@ -45,6 +45,27 @@ const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
     w: 16,
     h: 32,
   })),
+  // Large props (each PNG is its own sheet)
+  { key: "prop-tent-blue", path: "assets/props/tent-blue.png", w: 64, h: 64 },
+  { key: "prop-tent-green", path: "assets/props/tent-green.png", w: 64, h: 64 },
+  { key: "prop-sand-castle", path: "assets/props/sand-castle.png", w: 32, h: 32 },
+  { key: "prop-beach-umbrella", path: "assets/props/beach-umbrella.png", w: 48, h: 64 },
+  { key: "prop-palm-tree", path: "assets/props/palm-tree.png", w: 64, h: 80 },
+  { key: "prop-oak-tree", path: "assets/props/oak-tree.png", w: 64, h: 64 },
+  { key: "prop-fountain", path: "assets/props/fountain.png", w: 32, h: 48 },
+  { key: "prop-picnic-table", path: "assets/props/picnic-table.png", w: 48, h: 48 },
+  { key: "prop-shed", path: "assets/props/shed.png", w: 48, h: 64 },
+  // Playground equipment
+  { key: "prop-climb-arch", path: "assets/props/climb-arch.png", w: 48, h: 64 },
+  { key: "prop-swing", path: "assets/props/swing.png", w: 32, h: 48 },
+  { key: "prop-seesaw", path: "assets/props/seesaw.png", w: 48, h: 32 },
+  { key: "prop-bouncy-castle", path: "assets/props/bouncy-castle.png", w: 64, h: 48 },
+  { key: "prop-slide", path: "assets/props/slide.png", w: 64, h: 48 },
+  { key: "prop-play-fort", path: "assets/props/play-fort.png", w: 80, h: 80 },
+  { key: "prop-tube-cross", path: "assets/props/tube-cross.png", w: 48, h: 48 },
+  { key: "prop-tube-climber", path: "assets/props/tube-climber.png", w: 96, h: 64 },
+  { key: "prop-basketball-hoop", path: "assets/props/basketball-hoop.png", w: 48, h: 64 },
+  { key: "prop-dino-topiary", path: "assets/props/dino-topiary.png", w: 64, h: 32 },
 ];
 
 /**

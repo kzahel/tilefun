@@ -325,7 +325,12 @@ export class EditorMode {
       const dx = prop.position.wx - wx;
       const dy = prop.position.wy - wy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < bestDist) {
+      // Scale pick radius for larger props
+      const pickRadius = Math.max(
+        24,
+        Math.max(prop.sprite.spriteWidth, prop.sprite.spriteHeight) / 2,
+      );
+      if (dist < pickRadius && dist < bestDist) {
         bestDist = dist;
         bestPropId = prop.id;
         bestEntityId = -1;

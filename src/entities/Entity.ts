@@ -65,6 +65,8 @@ export interface Entity {
   id: number;
   type: string;
   position: PositionComponent;
+  /** Adjusts the Y used for depth sorting (negative = sort as if higher/behind). */
+  sortOffsetY?: number;
   velocity: VelocityComponent | null;
   sprite: SpriteComponent | null;
   collider: ColliderComponent | null;

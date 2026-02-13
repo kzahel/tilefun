@@ -59,13 +59,12 @@ export class EntityManager {
       return false;
     };
 
-    // Helper: build extra-blocker for resolveCollision (props + other entities)
+    // Helper: build extra-blocker for resolveCollision (props + other entities).
     const makeExtraBlocker =
-      (selfId: number, alsoExcludeId?: number) =>
+      (self: Entity, alsoExclude?: Entity) =>
       (aabb: AABB): boolean => {
         if (overlapsAnyProp(aabb)) return true;
-        const excludeIds =
-          alsoExcludeId !== undefined ? new Set([selfId, alsoExcludeId]) : new Set([selfId]);
+        const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         return aabbOverlapsAnyEntity(aabb, excludeIds, this.entities);
       };
 
@@ -95,7 +94,7 @@ export class EntityManager {
 
       const dx = vx * dt * speedMult * pushMult;
       const dy = vy * dt * speedMult * pushMult;
-      resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player.id));
+      resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player));
     } else if (player.velocity) {
       player.position.wx += player.velocity.vx * dt;
       player.position.wy += player.velocity.vy * dt;
@@ -122,7 +121,7 @@ export class EntityManager {
             pushDy,
             getCollision,
             blockMask,
-            makeExtraBlocker(entity.id, player.id),
+            makeExtraBlocker(entity, player),
           );
         }
       }
@@ -143,7 +142,7 @@ export class EntityManager {
           dy,
           getCollision,
           blockMask,
-          makeExtraBlocker(entity.id),
+          makeExtraBlocker(entity),
         );
         if (blocked && entity.wanderAI) {
           onWanderBlocked(entity);
@@ -182,6 +181,8 @@ export class EntityManager {
 
   /** Return entities sorted by Y position for depth ordering. */
   getYSorted(): Entity[] {
-    return [...this.entities].sort((a, b) => a.position.wy - b.position.wy);
+    return [...this.entities].sort(
+      (a, b) => a.position.wy + (a.sortOffsetY ?? 0) - (b.position.wy + (b.sortOffsetY ?? 0)),
+    );
   }
 }
