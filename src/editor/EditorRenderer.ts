@@ -1,6 +1,8 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
+import type { World } from "../world/World.js";
 import type { EditorMode, PaintMode, SubgridShape } from "./EditorMode.js";
+import type { EditorTab } from "./EditorPanel.js";
 import { getSubgridBrushPoints } from "./TerrainEditor.js";
 
 interface ChunkRange {
@@ -15,7 +17,16 @@ interface EditorState {
   effectivePaintMode: PaintMode;
   subgridShape: SubgridShape;
   brushSize: 1 | 2 | 3;
+  editorTab: EditorTab;
+  elevationGridSize: number;
 }
+
+const ELEVATION_OVERLAY_COLORS = [
+  "", // height 0: no overlay
+  "rgba(255,255,0,0.2)",
+  "rgba(255,160,0,0.25)",
+  "rgba(255,60,0,0.3)",
+];
 
 /** Draw editor overlays: tile grid + cursor highlight. */
 export function drawEditorOverlay(
@@ -24,8 +35,12 @@ export function drawEditorOverlay(
   editorMode: EditorMode,
   state: EditorState,
   visible: ChunkRange,
+  world?: World,
 ): void {
   drawEditorGrid(ctx, camera, visible);
+  if (state.editorTab === "elevation" && world) {
+    drawElevationOverlay(ctx, camera, world, visible);
+  }
   drawCursorHighlight(ctx, camera, editorMode, state);
 }
 
@@ -62,12 +77,57 @@ function drawEditorGrid(ctx: CanvasRenderingContext2D, camera: Camera, visible: 
   ctx.restore();
 }
 
+function drawElevationOverlay(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  world: World,
+  visible: ChunkRange,
+): void {
+  const tileScreenSize = TILE_SIZE * camera.scale;
+
+  for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
+    for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
+      const chunk = world.getChunkIfLoaded(cx, cy);
+      if (!chunk) continue;
+
+      let hasElevation = false;
+      for (let i = 0; i < chunk.heightGrid.length; i++) {
+        if (chunk.heightGrid[i] !== 0) {
+          hasElevation = true;
+          break;
+        }
+      }
+      if (!hasElevation) continue;
+
+      for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+        for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+          const h = chunk.getHeight(lx, ly);
+          if (h <= 0) continue;
+          const color = ELEVATION_OVERLAY_COLORS[h] ?? ELEVATION_OVERLAY_COLORS[3];
+          if (!color) continue;
+
+          const tx = cx * CHUNK_SIZE + lx;
+          const ty = cy * CHUNK_SIZE + ly;
+          const screen = camera.worldToScreen(tx * TILE_SIZE, ty * TILE_SIZE);
+
+          ctx.fillStyle = color;
+          ctx.fillRect(screen.sx, screen.sy, tileScreenSize, tileScreenSize);
+        }
+      }
+    }
+  }
+}
+
 function drawCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
   state: EditorState,
 ): void {
+  if (state.editorTab === "elevation") {
+    drawElevationCursorHighlight(ctx, camera, editorMode, state);
+    return;
+  }
   if (state.brushMode === "subgrid") {
     drawSubgridCursorHighlight(ctx, camera, editorMode, state);
   } else if (state.brushMode === "corner") {
@@ -225,5 +285,32 @@ function drawCornerCursorHighlight(
   ctx.lineTo(center.sx, center.sy + r);
   ctx.stroke();
 
+  ctx.restore();
+}
+
+function drawElevationCursorHighlight(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  editorMode: EditorMode,
+  state: EditorState,
+): void {
+  const tx = editorMode.cursorTileX;
+  const ty = editorMode.cursorTileY;
+  if (!Number.isFinite(tx)) return;
+
+  const gridSize = state.elevationGridSize;
+  const half = Math.floor(gridSize / 2);
+  const tileScreenSize = TILE_SIZE * camera.scale;
+
+  const topLeft = camera.worldToScreen((tx - half) * TILE_SIZE, (ty - half) * TILE_SIZE);
+  const w = gridSize * tileScreenSize;
+  const h = gridSize * tileScreenSize;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(255, 200, 60, 0.2)";
+  ctx.strokeStyle = "rgba(255, 200, 60, 0.7)";
+  ctx.lineWidth = 2;
+  ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
+  ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
   ctx.restore();
 }

@@ -140,6 +140,33 @@ export class TerrainEditor {
     if (ly === CHUNK_SIZE - 1) this.invalidateChunkRender(cx, cy + 1);
   }
 
+  /** Elevation brush: set tile height for an NxN area centered on (tx, ty). */
+  applyElevationEdit(tx: number, ty: number, height: number, gridSize: number): void {
+    const half = Math.floor(gridSize / 2);
+    for (let dy = -half; dy < gridSize - half; dy++) {
+      for (let dx = -half; dx < gridSize - half; dx++) {
+        this.setTileHeight(tx + dx, ty + dy, height);
+      }
+    }
+  }
+
+  private setTileHeight(tx: number, ty: number, height: number): void {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (!chunk) return;
+
+    // Water constraint: water tiles cannot be elevated
+    const terrain = this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
+    if (height > 0 && (terrain === TerrainId.ShallowWater || terrain === TerrainId.DeepWater)) {
+      return;
+    }
+
+    chunk.setHeight(lx, ly, height);
+    chunk.dirty = true;
+    this.saveManager.markChunkDirty(chunkKey(cx, cy));
+  }
+
   /** Fill all loaded chunks with a single terrain. */
   clearAllTerrain(terrainId: TerrainId): void {
     const tileId = terrainIdToTileId(terrainId);
@@ -150,6 +177,7 @@ export class TerrainEditor {
       chunk.fillCollision(collision);
       chunk.detail.fill(TileId.Empty);
       chunk.fillRoad(0);
+      chunk.heightGrid.fill(0);
       chunk.dirty = true;
       chunk.autotileComputed = false;
       this.saveManager.markChunkDirty(key);
@@ -291,6 +319,15 @@ export class TerrainEditor {
     chunk.setTerrain(lx, ly, tileId);
     chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
     chunk.setDetail(lx, ly, TileId.Empty);
+
+    // Water constraint: painting water on an elevated tile resets height to 0
+    if (
+      (terrain === TerrainId.ShallowWater || terrain === TerrainId.DeepWater) &&
+      chunk.getHeight(lx, ly) > 0
+    ) {
+      chunk.setHeight(lx, ly, 0);
+    }
+
     chunk.dirty = true;
     chunk.autotileComputed = false;
 

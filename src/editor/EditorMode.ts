@@ -26,6 +26,13 @@ export interface PendingRoadEdit {
   roadType: number;
 }
 
+export interface PendingElevationEdit {
+  tx: number;
+  ty: number;
+  height: number;
+  gridSize: number;
+}
+
 export interface PendingEntitySpawn {
   wx: number;
   wy: number;
@@ -36,6 +43,8 @@ export class EditorMode {
   selectedTerrain: TerrainId | null = TerrainId.Grass;
   selectedRoadType = 0;
   selectedEntityType = "chicken";
+  selectedElevation = 1;
+  elevationGridSize = 1;
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
   paintMode: PaintMode = "positive";
@@ -61,6 +70,7 @@ export class EditorMode {
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
   private pendingCornerEdits: PendingSubgridEdit[] = [];
   private pendingRoadEdits: PendingRoadEdit[] = [];
+  private pendingElevationEdits: PendingElevationEdit[] = [];
   private pendingEntitySpawns: PendingEntitySpawn[] = [];
   private pendingEntityDeletions: number[] = [];
   private isPainting = false;
@@ -196,6 +206,13 @@ export class EditorMode {
     return edits;
   }
 
+  consumePendingElevationEdits(): PendingElevationEdit[] {
+    if (this.pendingElevationEdits.length === 0) return this.pendingElevationEdits;
+    const edits = this.pendingElevationEdits;
+    this.pendingElevationEdits = [];
+    return edits;
+  }
+
   consumePendingEntitySpawns(): PendingEntitySpawn[] {
     if (this.pendingEntitySpawns.length === 0) return this.pendingEntitySpawns;
     const spawns = this.pendingEntitySpawns;
@@ -281,6 +298,10 @@ export class EditorMode {
       this.paintRoadAt(sx, sy);
       return;
     }
+    if (this.editorTab === "elevation") {
+      this.paintElevationAt(sx, sy);
+      return;
+    }
     if (this.brushMode === "subgrid") {
       this.paintSubgridAt(sx, sy);
     } else if (this.brushMode === "corner") {
@@ -288,6 +309,20 @@ export class EditorMode {
     } else {
       this.paintTileAt(sx, sy);
     }
+  }
+
+  private paintElevationAt(sx: number, sy: number): void {
+    const { tx, ty } = this.screenToTile(sx, sy);
+    if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
+    this.lastPaintedTile.tx = tx;
+    this.lastPaintedTile.ty = ty;
+    const height = this.rightClickUnpaint ? 0 : this.selectedElevation;
+    this.pendingElevationEdits.push({
+      tx,
+      ty,
+      height,
+      gridSize: this.elevationGridSize,
+    });
   }
 
   private paintRoadAt(sx: number, sy: number): void {

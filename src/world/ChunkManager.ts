@@ -17,13 +17,22 @@ export class ChunkManager {
   private generator: TerrainStrategy | null = null;
   private savedSubgrids = new Map<string, Uint8Array>();
   private savedRoadGrids = new Map<string, Uint8Array>();
+  private savedHeightGrids = new Map<string, Uint8Array>();
 
   /** Inject saved chunk data for restore on load. */
-  setSavedData(saved: Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>): void {
+  setSavedData(
+    saved: Map<
+      string,
+      { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }
+    >,
+  ): void {
     for (const [key, data] of saved) {
       this.savedSubgrids.set(key, data.subgrid);
       if (data.roadGrid) {
         this.savedRoadGrids.set(key, data.roadGrid);
+      }
+      if (data.heightGrid) {
+        this.savedHeightGrids.set(key, data.heightGrid);
       }
     }
   }
@@ -36,16 +45,24 @@ export class ChunkManager {
   }
 
   /** Update saved copies after IDB write. */
-  updateSavedChunk(key: string, subgrid: Uint8Array, roadGrid: Uint8Array): void {
+  updateSavedChunk(
+    key: string,
+    subgrid: Uint8Array,
+    roadGrid: Uint8Array,
+    heightGrid: Uint8Array,
+  ): void {
     this.savedSubgrids.set(key, new Uint8Array(subgrid));
     this.savedRoadGrids.set(key, new Uint8Array(roadGrid));
+    this.savedHeightGrids.set(key, new Uint8Array(heightGrid));
   }
 
   /** Get a chunk's data by key string, for persistence. */
-  getChunkDataByKey(key: string): { subgrid: Uint8Array; roadGrid: Uint8Array } | undefined {
+  getChunkDataByKey(
+    key: string,
+  ): { subgrid: Uint8Array; roadGrid: Uint8Array; heightGrid: Uint8Array } | undefined {
     const chunk = this.chunks.get(key);
     if (!chunk) return undefined;
-    return { subgrid: chunk.subgrid, roadGrid: chunk.roadGrid };
+    return { subgrid: chunk.subgrid, roadGrid: chunk.roadGrid, heightGrid: chunk.heightGrid };
   }
 
   /** Attach a world generator for procedural chunk creation. */
@@ -66,6 +83,10 @@ export class ChunkManager {
         const savedRoad = this.savedRoadGrids.get(key);
         if (savedRoad) {
           chunk.roadGrid.set(savedRoad);
+        }
+        const savedHeight = this.savedHeightGrids.get(key);
+        if (savedHeight) {
+          chunk.heightGrid.set(savedHeight);
         }
       } else {
         this.generate(chunk, cx, cy);

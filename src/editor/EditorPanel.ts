@@ -1,10 +1,11 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
+import { MAX_ELEVATION } from "../config/constants.js";
 import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
 
-export type EditorTab = "natural" | "road" | "structure" | "entities";
+export type EditorTab = "natural" | "road" | "structure" | "entities" | "elevation";
 
 const PANEL_STYLE = `
   position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%);
@@ -87,8 +88,11 @@ const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: "worm4", label: "Worm 4", color: "#6688aa" },
 ];
 
-const ALL_TABS: EditorTab[] = ["natural", "road", "structure", "entities"];
+const ALL_TABS: EditorTab[] = ["natural", "road", "structure", "entities", "elevation"];
 const TERRAIN_TABS: EditorTab[] = ["natural", "road", "structure"];
+
+const ELEVATION_GRID_SIZES = [1, 2, 3, 4] as const;
+const ELEVATION_COLORS = ["#888", "#9a6", "#c84", "#e44"];
 
 export class EditorPanel {
   private readonly container: HTMLDivElement;
@@ -98,6 +102,9 @@ export class EditorPanel {
   private readonly roadRow: HTMLDivElement;
   private readonly structureRow: HTMLDivElement;
   private readonly entityRow: HTMLDivElement;
+  private readonly elevationRow: HTMLDivElement;
+  private readonly elevationHeightButtons: HTMLButtonElement[] = [];
+  private readonly elevationGridButtons: HTMLButtonElement[] = [];
   /** All terrain buttons with their entries, for selection highlighting. */
   private readonly terrainButtons: { btn: HTMLButtonElement; entry: PaletteEntry }[] = [];
   private readonly autoButtons: HTMLButtonElement[] = [];
@@ -116,6 +123,8 @@ export class EditorPanel {
   selectedTerrain: TerrainId | null = TerrainId.Grass;
   selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
+  selectedElevation = 1;
+  elevationGridSize = 1;
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
   paintMode: PaintMode = "positive";
@@ -136,14 +145,14 @@ export class EditorPanel {
     for (const tab of ALL_TABS) {
       const btn = document.createElement("button");
       btn.style.cssText = TAB_STYLE;
-      btn.textContent =
-        tab === "natural"
-          ? "Natural"
-          : tab === "road"
-            ? "Road"
-            : tab === "structure"
-              ? "Structure"
-              : "Entities";
+      const TAB_LABELS: Record<EditorTab, string> = {
+        natural: "Natural",
+        road: "Road",
+        structure: "Structure",
+        entities: "Entities",
+        elevation: "Elevation",
+      };
+      btn.textContent = TAB_LABELS[tab];
       btn.addEventListener("click", () => this.setTab(tab));
       tabBar.appendChild(btn);
       this.tabButtons.set(tab, btn);
@@ -266,9 +275,54 @@ export class EditorPanel {
 
     this.container.appendChild(this.entityRow);
 
+    // --- Elevation row ---
+    this.elevationRow = document.createElement("div");
+    this.elevationRow.style.cssText = ROW_STYLE;
+
+    this.elevationRow.appendChild(this.makeLabel("Height"));
+    for (let h = 0; h <= MAX_ELEVATION; h++) {
+      const btn = document.createElement("button");
+      btn.style.cssText = BTN_STYLE;
+      btn.style.width = "44px";
+      btn.style.background = ELEVATION_COLORS[h] ?? "#888";
+      btn.textContent = `${h}`;
+      btn.title = h === 0 ? "Flatten (height 0)" : `Set height ${h}`;
+      btn.addEventListener("click", () => {
+        this.selectedElevation = h;
+        this.updateElevationSelection();
+      });
+      this.elevationHeightButtons.push(btn);
+      this.elevationRow.appendChild(btn);
+    }
+
+    this.elevationRow.appendChild(this.makeSeparator());
+    this.elevationRow.appendChild(this.makeLabel("Grid"));
+    for (const size of ELEVATION_GRID_SIZES) {
+      const btn = document.createElement("button");
+      btn.style.cssText = BTN_STYLE;
+      btn.style.width = "44px";
+      btn.textContent = `${size}x${size}`;
+      btn.title = `Paint ${size}x${size} tile area`;
+      btn.addEventListener("click", () => {
+        this.elevationGridSize = size;
+        this.updateElevationSelection();
+      });
+      this.elevationGridButtons.push(btn);
+      this.elevationRow.appendChild(btn);
+    }
+
+    this.elevationRow.appendChild(this.makeSeparator());
+    const elevHint = document.createElement("span");
+    elevHint.style.cssText = "font: 10px monospace; color: #aaa;";
+    elevHint.textContent = "Click: set height / Right-click: flatten";
+    this.elevationRow.appendChild(elevHint);
+
+    this.container.appendChild(this.elevationRow);
+
     this.updateTerrainSelection();
     this.updateRoadSelection();
     this.updateEntitySelection();
+    this.updateElevationSelection();
     this.updateTabDisplay();
     document.body.appendChild(this.container);
   }
@@ -459,6 +513,7 @@ export class EditorPanel {
     this.roadRow.style.display = isRoad ? "flex" : "none";
     this.structureRow.style.display = this.editorTab === "structure" ? "flex" : "none";
     this.entityRow.style.display = this.editorTab === "entities" ? "flex" : "none";
+    this.elevationRow.style.display = this.editorTab === "elevation" ? "flex" : "none";
   }
 
   setBrushMode(mode: BrushMode): void {
@@ -607,6 +662,23 @@ export class EditorPanel {
         btn.style.boxShadow =
           entry.type === this.selectedEntityType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
       }
+    }
+  }
+
+  private updateElevationSelection(): void {
+    for (let i = 0; i < this.elevationHeightButtons.length; i++) {
+      const btn = this.elevationHeightButtons[i];
+      if (!btn) continue;
+      const active = i === this.selectedElevation;
+      btn.style.borderColor = active ? "#fff" : "#555";
+      btn.style.boxShadow = active ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+    }
+    for (let i = 0; i < this.elevationGridButtons.length; i++) {
+      const btn = this.elevationGridButtons[i];
+      if (!btn) continue;
+      const active = ELEVATION_GRID_SIZES[i] === this.elevationGridSize;
+      btn.style.borderColor = active ? "#fff" : "#555";
+      btn.style.boxShadow = active ? "0 0 6px rgba(255,255,255,0.5)" : "none";
     }
   }
 

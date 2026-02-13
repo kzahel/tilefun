@@ -1,0 +1,224 @@
+import type { WorldMeta } from "../persistence/WorldRegistry.js";
+import { relativeTime } from "./relativeTime.js";
+
+const OVERLAY_STYLE = `
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(10, 10, 30, 0.92);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 32px 16px; overflow-y: auto;
+  font-family: monospace; color: #fff;
+`;
+
+const TITLE_STYLE = `
+  font-size: 32px; font-weight: bold; letter-spacing: 4px;
+  margin-bottom: 24px; color: #8cf;
+`;
+
+const CARD_STYLE = `
+  width: 320px; padding: 12px 16px;
+  background: rgba(255,255,255,0.08); border: 1px solid #555;
+  border-radius: 6px; cursor: pointer; user-select: none;
+  display: flex; justify-content: space-between; align-items: center;
+`;
+
+const BTN_STYLE = `
+  font: bold 14px monospace; padding: 8px 16px;
+  background: rgba(255,255,255,0.12); color: #fff;
+  border: 1px solid #888; border-radius: 4px;
+  cursor: pointer; user-select: none;
+`;
+
+export class MainMenu {
+  private overlay: HTMLDivElement;
+  private listEl: HTMLDivElement;
+  private worldCount = 0;
+
+  onSelect: ((worldId: string) => void) | null = null;
+  onCreate: ((name: string) => void) | null = null;
+  onDelete: ((worldId: string) => void) | null = null;
+  onRename: ((worldId: string, name: string) => void) | null = null;
+
+  constructor() {
+    this.overlay = document.createElement("div");
+    this.overlay.style.cssText = OVERLAY_STYLE;
+    this.overlay.style.display = "none";
+
+    const title = document.createElement("div");
+    title.style.cssText = TITLE_STYLE;
+    title.textContent = "TILEFUN";
+    this.overlay.appendChild(title);
+
+    this.listEl = document.createElement("div");
+    this.listEl.style.cssText =
+      "display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; width: 320px;";
+    this.overlay.appendChild(this.listEl);
+
+    // New World button + inline input
+    const newRow = document.createElement("div");
+    newRow.style.cssText = "display: flex; gap: 8px; width: 320px;";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "World name...";
+    nameInput.style.cssText = `
+      flex: 1; font: 14px monospace; padding: 8px;
+      background: rgba(255,255,255,0.1); color: #fff;
+      border: 1px solid #888; border-radius: 4px; outline: none;
+    `;
+
+    const createBtn = document.createElement("button");
+    createBtn.textContent = "New World";
+    createBtn.style.cssText = BTN_STYLE;
+
+    const doCreate = () => {
+      const name = nameInput.value.trim() || `World ${this.worldCount + 1}`;
+      nameInput.value = "";
+      this.onCreate?.(name);
+    };
+
+    createBtn.addEventListener("click", doCreate);
+    nameInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") doCreate();
+      e.stopPropagation();
+    });
+    nameInput.addEventListener("keyup", (e) => e.stopPropagation());
+
+    newRow.append(nameInput, createBtn);
+    this.overlay.appendChild(newRow);
+
+    // Prevent keyboard shortcuts from firing while interacting with menu
+    this.overlay.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") return; // let Escape bubble to close menu
+      e.stopPropagation();
+    });
+    this.overlay.addEventListener("keyup", (e) => e.stopPropagation());
+
+    document.body.appendChild(this.overlay);
+  }
+
+  get visible(): boolean {
+    return this.overlay.style.display !== "none";
+  }
+
+  show(worlds: WorldMeta[]): void {
+    this.worldCount = worlds.length;
+    this.overlay.style.display = "";
+    this.listEl.innerHTML = "";
+
+    if (worlds.length === 0) {
+      const empty = document.createElement("div");
+      empty.style.cssText = "color: #888; text-align: center; padding: 16px;";
+      empty.textContent = "No worlds yet. Create one below!";
+      this.listEl.appendChild(empty);
+      return;
+    }
+
+    for (const world of worlds) {
+      this.listEl.appendChild(this.createCard(world));
+    }
+  }
+
+  hide(): void {
+    this.overlay.style.display = "none";
+  }
+
+  private createCard(world: WorldMeta): HTMLDivElement {
+    const card = document.createElement("div");
+    card.style.cssText = CARD_STYLE;
+    card.addEventListener("mouseenter", () => {
+      card.style.background = "rgba(255,255,255,0.15)";
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.background = "rgba(255,255,255,0.08)";
+    });
+
+    const info = document.createElement("div");
+    info.style.cssText = "display: flex; flex-direction: column; gap: 2px; min-width: 0;";
+
+    const nameEl = document.createElement("div");
+    nameEl.style.cssText =
+      "font-weight: bold; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;";
+    nameEl.textContent = world.name;
+
+    // Double-click to rename
+    nameEl.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+      const input = document.createElement("input");
+      input.type = "text";
+      input.value = world.name;
+      input.style.cssText = `
+        font: bold 15px monospace; padding: 0; margin: 0;
+        background: rgba(255,255,255,0.15); color: #fff;
+        border: 1px solid #aaa; border-radius: 2px; outline: none;
+        width: 180px;
+      `;
+      const finish = () => {
+        const newName = input.value.trim();
+        if (newName && newName !== world.name) {
+          this.onRename?.(world.id, newName);
+          nameEl.textContent = newName;
+        } else {
+          nameEl.textContent = world.name;
+        }
+        input.replaceWith(nameEl);
+      };
+      input.addEventListener("blur", finish);
+      input.addEventListener("keydown", (ke) => {
+        ke.stopPropagation();
+        if (ke.key === "Enter") input.blur();
+        if (ke.key === "Escape") {
+          input.value = world.name;
+          input.blur();
+        }
+      });
+      input.addEventListener("keyup", (ke) => ke.stopPropagation());
+      nameEl.replaceWith(input);
+      input.focus();
+      input.select();
+    });
+
+    const timeEl = document.createElement("div");
+    timeEl.style.cssText = "font-size: 12px; color: #999;";
+    timeEl.textContent = relativeTime(world.lastPlayedAt);
+
+    info.append(nameEl, timeEl);
+
+    // Delete button with 2-click confirm
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "X";
+    delBtn.style.cssText = `
+      font: bold 12px monospace; padding: 4px 8px;
+      background: transparent; color: #888;
+      border: 1px solid transparent; border-radius: 4px;
+      cursor: pointer; flex-shrink: 0;
+    `;
+    let confirmTimer: ReturnType<typeof setTimeout> | null = null;
+    delBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (delBtn.dataset.confirm === "true") {
+        if (confirmTimer) clearTimeout(confirmTimer);
+        this.onDelete?.(world.id);
+        return;
+      }
+      delBtn.dataset.confirm = "true";
+      delBtn.textContent = "Sure?";
+      delBtn.style.color = "#f66";
+      delBtn.style.borderColor = "#f66";
+      confirmTimer = setTimeout(() => {
+        delBtn.dataset.confirm = "";
+        delBtn.textContent = "X";
+        delBtn.style.color = "#888";
+        delBtn.style.borderColor = "transparent";
+      }, 2000);
+    });
+
+    card.append(info, delBtn);
+
+    // Click card to select world
+    card.addEventListener("click", () => {
+      this.onSelect?.(world.id);
+    });
+
+    return card;
+  }
+}

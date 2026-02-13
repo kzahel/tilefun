@@ -5,6 +5,7 @@ import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
+  ELEVATION_PX,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -105,6 +106,89 @@ export class TileRenderer {
         if (chunk.renderCache) {
           // Draw 1px oversize to prevent sub-pixel seams between chunks
           ctx.drawImage(chunk.renderCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
+        }
+      }
+    }
+  }
+
+  /**
+   * Draw elevation: cliff faces and Y-offset tiles for elevated terrain.
+   * Must be called after drawTerrain() so elevated tiles overlay correctly.
+   */
+  drawElevation(
+    ctx: CanvasRenderingContext2D,
+    camera: Camera,
+    world: World,
+    visible: ChunkRange,
+  ): void {
+    const tileScreenSize = TILE_SIZE * camera.scale;
+
+    for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
+      for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
+        const chunk = world.getChunkIfLoaded(cx, cy);
+        if (!chunk?.renderCache) continue;
+
+        // Check if chunk has any elevation at all (fast skip)
+        let hasElevation = false;
+        for (let i = 0; i < chunk.heightGrid.length; i++) {
+          if (chunk.heightGrid[i] !== 0) {
+            hasElevation = true;
+            break;
+          }
+        }
+        if (!hasElevation) continue;
+
+        const origin = chunkToWorld(cx, cy);
+        const screenOrigin = camera.worldToScreen(origin.wx, origin.wy);
+        const chunkSx = Math.round(screenOrigin.sx);
+        const chunkSy = Math.round(screenOrigin.sy);
+
+        // Iterate tiles top-to-bottom for correct overlap
+        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+          for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+            const h = chunk.getHeight(lx, ly);
+            if (h <= 0) continue;
+
+            const tileSx = chunkSx + lx * tileScreenSize;
+            const tileSy = chunkSy + ly * tileScreenSize;
+            const cliffH = h * ELEVATION_PX * camera.scale;
+
+            // Source rect in chunk cache (native pixels)
+            const srcX = lx * TILE_SIZE;
+            const srcY = ly * TILE_SIZE;
+
+            // 1. Draw cliff face: stretch bottom 1px row downward
+            ctx.drawImage(
+              chunk.renderCache,
+              srcX,
+              srcY + TILE_SIZE - 1,
+              TILE_SIZE,
+              1,
+              tileSx,
+              tileSy + tileScreenSize - cliffH,
+              tileScreenSize,
+              cliffH,
+            );
+
+            // Darken the cliff face
+            ctx.globalAlpha = 0.35;
+            ctx.fillStyle = "#000";
+            ctx.fillRect(tileSx, tileSy + tileScreenSize - cliffH, tileScreenSize, cliffH);
+            ctx.globalAlpha = 1;
+
+            // 2. Draw elevated tile shifted up
+            ctx.drawImage(
+              chunk.renderCache,
+              srcX,
+              srcY,
+              TILE_SIZE,
+              TILE_SIZE,
+              tileSx,
+              tileSy - cliffH,
+              tileScreenSize,
+              tileScreenSize,
+            );
+          }
         }
       }
     }

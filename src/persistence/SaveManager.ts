@@ -1,4 +1,3 @@
-const DB_NAME = "tilefun";
 const DB_VERSION = 1;
 const STORE_CHUNKS = "chunks";
 const STORE_META = "meta";
@@ -23,12 +22,14 @@ export interface SavedMeta {
 export interface SavedChunkData {
   subgrid: Uint8Array;
   roadGrid: Uint8Array;
+  heightGrid: Uint8Array;
 }
 
 type GetChunkFn = (key: string) => SavedChunkData | undefined;
 type GetMetaFn = () => SavedMeta;
 
 export class SaveManager {
+  private dbName: string;
   private db: IDBDatabase | null = null;
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
   private dirtyChunks = new Set<string>();
@@ -36,6 +37,10 @@ export class SaveManager {
   private saving = false;
   private getChunk: GetChunkFn | null = null;
   private getMeta: GetMetaFn | null = null;
+
+  constructor(dbName: string) {
+    this.dbName = dbName;
+  }
 
   /** Bind the data accessors once so scheduleSave/flush can use them. */
   bind(getChunk: GetChunkFn, getMeta: GetMetaFn): void {
@@ -45,7 +50,7 @@ export class SaveManager {
 
   async open(): Promise<void> {
     return new Promise((resolve, reject) => {
-      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      const req = indexedDB.open(this.dbName, DB_VERSION);
       req.onupgradeneeded = () => {
         const db = req.result;
         if (!db.objectStoreNames.contains(STORE_CHUNKS)) {
@@ -63,21 +68,31 @@ export class SaveManager {
     });
   }
 
-  async loadChunks(): Promise<Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>> {
+  async loadChunks(): Promise<
+    Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }>
+  > {
     const db = this.db;
     if (!db) return new Map();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_CHUNKS, "readonly");
       const store = tx.objectStore(STORE_CHUNKS);
       const req = store.openCursor();
-      const result = new Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>();
+      const result = new Map<
+        string,
+        { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }
+      >();
       req.onsuccess = () => {
         const cursor = req.result;
         if (cursor) {
-          const value = cursor.value as { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer };
+          const value = cursor.value as {
+            subgrid: ArrayBuffer;
+            roadGrid?: ArrayBuffer;
+            heightGrid?: ArrayBuffer;
+          };
           result.set(cursor.key as string, {
             subgrid: new Uint8Array(value.subgrid),
             roadGrid: value.roadGrid ? new Uint8Array(value.roadGrid) : null,
+            heightGrid: value.heightGrid ? new Uint8Array(value.heightGrid) : null,
           });
           cursor.continue();
         } else {
@@ -157,12 +172,19 @@ export class SaveManager {
     for (const key of chunkKeys) {
       const data = this.getChunk(key);
       if (data) {
-        const record: { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer } = {
+        const record: {
+          subgrid: ArrayBuffer;
+          roadGrid?: ArrayBuffer;
+          heightGrid?: ArrayBuffer;
+        } = {
           subgrid: new Uint8Array(data.subgrid).buffer,
         };
         // Only store roadGrid if it has non-zero data
         if (data.roadGrid.some((v) => v !== 0)) {
           record.roadGrid = new Uint8Array(data.roadGrid).buffer;
+        }
+        if (data.heightGrid.some((v) => v !== 0)) {
+          record.heightGrid = new Uint8Array(data.heightGrid).buffer;
         }
         chunkStore.put(record, key);
       }
@@ -186,6 +208,34 @@ export class SaveManager {
     };
   }
 
+  /** Import chunk and meta data in bulk (for migration). */
+  async importData(
+    chunks: Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>,
+    meta: SavedMeta | null,
+  ): Promise<void> {
+    const db = this.db;
+    if (!db) return;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction([STORE_CHUNKS, STORE_META], "readwrite");
+      const chunkStore = tx.objectStore(STORE_CHUNKS);
+      const metaStore = tx.objectStore(STORE_META);
+      for (const [key, data] of chunks) {
+        const record: { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer } = {
+          subgrid: new Uint8Array(data.subgrid).buffer,
+        };
+        if (data.roadGrid?.some((v) => v !== 0)) {
+          record.roadGrid = new Uint8Array(data.roadGrid).buffer;
+        }
+        chunkStore.put(record, key);
+      }
+      if (meta) {
+        metaStore.put(meta, "state");
+      }
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
   async clear(): Promise<void> {
     const db = this.db;
     if (!db) return;
@@ -196,5 +246,21 @@ export class SaveManager {
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
     });
+  }
+
+  close(): void {
+    if (this.saveTimer !== null) {
+      clearTimeout(this.saveTimer);
+      this.saveTimer = null;
+    }
+    if (this.db) {
+      this.db.close();
+      this.db = null;
+    }
+    this.dirtyChunks.clear();
+    this.metaDirty = false;
+    this.getChunk = null;
+    this.getMeta = null;
+    this.onChunksSaved = null;
   }
 }

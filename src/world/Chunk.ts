@@ -53,6 +53,9 @@ export class Chunk {
   /** Road surface per tile (RoadType enum). 0 = no road. */
   readonly roadGrid: Uint8Array;
 
+  /** Elevation height per tile (0–MAX_ELEVATION). */
+  readonly heightGrid: Uint8Array;
+
   constructor() {
     this.subgrid = new Uint8Array(SUBGRID_AREA);
     this.terrain = new Uint16Array(AREA);
@@ -60,6 +63,7 @@ export class Chunk {
     this.blendLayers = new Uint32Array(MAX_BLEND_LAYERS * AREA);
     this.collision = new Uint8Array(AREA);
     this.roadGrid = new Uint8Array(AREA);
+    this.heightGrid = new Uint8Array(AREA);
   }
 
   /** Read sub-grid point at (sx, sy) in [0, SUBGRID_SIZE). */
@@ -131,5 +135,13 @@ export class Chunk {
 
   fillRoad(roadType: number): void {
     this.roadGrid.fill(roadType);
+  }
+
+  getHeight(lx: number, ly: number): number {
+    return this.heightGrid[idx(lx, ly)] ?? 0;
+  }
+
+  setHeight(lx: number, ly: number, h: number): void {
+    this.heightGrid[idx(lx, ly)] = h;
   }
 }

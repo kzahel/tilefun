@@ -17,11 +17,13 @@ import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
+import { dbNameForWorld, WorldRegistry } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
+import { MainMenu } from "../ui/MainMenu.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { GameLoop } from "./GameLoop.js";
@@ -44,8 +46,12 @@ export class Game {
   private editorMode: EditorMode;
   private editorPanel: EditorPanel;
   private blendGraph: BlendGraph;
+  private adjacency: TerrainAdjacency;
   private terrainEditor: TerrainEditor;
-  private saveManager: SaveManager;
+  private saveManager: SaveManager | null = null;
+  private registry: WorldRegistry;
+  private mainMenu: MainMenu;
+  private currentWorldId: string | null = null;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -65,12 +71,13 @@ export class Game {
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
-    const adjacency = new TerrainAdjacency(this.blendGraph);
-    this.saveManager = new SaveManager();
-    this.terrainEditor = new TerrainEditor(this.world, this.saveManager, adjacency);
+    this.adjacency = new TerrainAdjacency(this.blendGraph);
+    this.terrainEditor = new TerrainEditor(this.world, new SaveManager("_unused"), this.adjacency);
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
+    this.registry = new WorldRegistry();
+    this.mainMenu = new MainMenu();
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha) => this.render(alpha),
@@ -81,6 +88,12 @@ export class Game {
     this.resize();
     window.addEventListener("resize", () => this.resize());
     document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        this.toggleMenu();
+        return;
+      }
+      if (this.mainMenu.visible) return;
       if (e.key === "F3" || e.key === "`") {
         e.preventDefault();
         this.debugEnabled = !this.debugEnabled;
@@ -134,13 +147,85 @@ export class Game {
     this.tileRenderer.setVariants(assets.variants);
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, this.blendGraph);
 
-    // Open persistence and load saved state
+    // Open registry and migrate legacy data if needed
+    await this.registry.open();
+    await this.migrateIfNeeded();
+
+    // Load most recent world, or create a default one
+    const worlds = await this.registry.listWorlds();
+    const firstWorld = worlds[0];
+    if (firstWorld) {
+      await this.loadWorld(firstWorld.id);
+    } else {
+      const meta = await this.registry.createWorld("My World");
+      await this.loadWorld(meta.id);
+    }
+
+    // Set up menu callbacks
+    this.mainMenu.onSelect = (id) => {
+      this.loadWorld(id).then(() => this.mainMenu.hide());
+    };
+    this.mainMenu.onCreate = (name) => {
+      this.registry.createWorld(name).then((meta) => {
+        this.loadWorld(meta.id).then(() => this.mainMenu.hide());
+      });
+    };
+    this.mainMenu.onDelete = async (id) => {
+      await this.registry.deleteWorld(id);
+      if (id === this.currentWorldId) {
+        const remaining = await this.registry.listWorlds();
+        const next = remaining[0];
+        if (next) {
+          await this.loadWorld(next.id);
+        } else {
+          const meta = await this.registry.createWorld("My World");
+          await this.loadWorld(meta.id);
+        }
+      }
+      // Refresh the menu
+      const worlds = await this.registry.listWorlds();
+      this.mainMenu.show(worlds);
+    };
+    this.mainMenu.onRename = (id, name) => {
+      this.registry.renameWorld(id, name);
+    };
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        this.saveManager?.flush();
+      }
+    });
+    window.addEventListener("beforeunload", () => {
+      this.saveManager?.flush();
+    });
+
+    this.loop.start();
+    this.canvas.dataset.ready = "true";
+  }
+
+  private async loadWorld(worldId: string): Promise<void> {
+    // Close previous save manager
+    if (this.saveManager) {
+      this.saveManager.flush();
+      this.saveManager.close();
+    }
+
+    // Create fresh world state
+    this.world = new World();
+    this.entityManager = new EntityManager();
+    this.player = createPlayer(0, 0);
+    this.entityManager.spawn(this.player);
+
+    // Open persistence for this world
+    const dbName = dbNameForWorld(worldId);
+    this.saveManager = new SaveManager(dbName);
+    this.terrainEditor = new TerrainEditor(this.world, this.saveManager, this.adjacency);
+
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
     const savedChunks = await this.saveManager.loadChunks();
 
     if (savedMeta && savedChunks.size > 0) {
-      // Restore from save
       this.world.chunks.setSavedData(savedChunks);
       this.camera.x = savedMeta.cameraX;
       this.camera.y = savedMeta.cameraY;
@@ -158,14 +243,16 @@ export class Game {
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
     } else {
-      // First run
+      this.camera.x = 0;
+      this.camera.y = 0;
+      this.camera.zoom = 1;
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
       findWalkableSpawn(this.player, this.world);
       spawnInitialChickens(5, this.world, this.entityManager);
     }
 
-    // Bind save accessors and set up auto-flush on tab hide
+    // Bind save accessors
     this.saveManager.bind(
       (key) => this.world.chunks.getChunkDataByKey(key),
       () => this.buildSaveMeta(),
@@ -173,17 +260,87 @@ export class Game {
     this.saveManager.onChunksSaved = (keys, getChunk) => {
       for (const key of keys) {
         const data = getChunk(key);
-        if (data) this.world.chunks.updateSavedChunk(key, data.subgrid, data.roadGrid);
+        if (data)
+          this.world.chunks.updateSavedChunk(key, data.subgrid, data.roadGrid, data.heightGrid);
       }
     };
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "hidden") {
-        this.saveManager.flush();
+
+    this.currentWorldId = worldId;
+    await this.registry.updateLastPlayed(worldId);
+  }
+
+  private async migrateIfNeeded(): Promise<void> {
+    // Check if the legacy "tilefun" database exists with data
+    let legacyDb: IDBDatabase;
+    try {
+      legacyDb = await new Promise<IDBDatabase>((resolve, reject) => {
+        const req = indexedDB.open("tilefun", 1);
+        req.onupgradeneeded = () => {
+          // DB didn't exist — abort so we don't create an empty one
+          req.transaction?.abort();
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    } catch {
+      return; // No legacy DB
+    }
+
+    // Check if it has actual data
+    if (!legacyDb.objectStoreNames.contains("chunks")) {
+      legacyDb.close();
+      return;
+    }
+
+    const hasData = await new Promise<boolean>((resolve) => {
+      try {
+        const tx = legacyDb.transaction("chunks", "readonly");
+        const req = tx.objectStore("chunks").count();
+        req.onsuccess = () => resolve(req.result > 0);
+        req.onerror = () => resolve(false);
+      } catch {
+        resolve(false);
       }
     });
 
-    this.loop.start();
-    this.canvas.dataset.ready = "true";
+    if (!hasData) {
+      legacyDb.close();
+      // Clean up the empty legacy DB
+      indexedDB.deleteDatabase("tilefun");
+      return;
+    }
+
+    // Read all legacy data
+    const legacySave = new SaveManager("tilefun");
+    await legacySave.open();
+    const chunks = await legacySave.loadChunks();
+    const meta = await legacySave.loadMeta();
+    legacySave.close();
+    legacyDb.close();
+
+    // Create a new world entry and copy data
+    const worldMeta = await this.registry.createWorld("My World");
+    const newSave = new SaveManager(dbNameForWorld(worldMeta.id));
+    await newSave.open();
+    await newSave.importData(chunks, meta);
+    newSave.close();
+
+    // Delete legacy database
+    await new Promise<void>((resolve) => {
+      const req = indexedDB.deleteDatabase("tilefun");
+      req.onsuccess = () => resolve();
+      req.onerror = () => resolve(); // best effort
+    });
+  }
+
+  private async toggleMenu(): Promise<void> {
+    if (this.mainMenu.visible) {
+      this.mainMenu.hide();
+    } else {
+      this.saveManager?.flush();
+      const worlds = await this.registry.listWorlds();
+      this.mainMenu.show(worlds);
+    }
   }
 
   private editorButton: HTMLButtonElement | null = null;
@@ -221,6 +378,11 @@ export class Game {
     editBtn.addEventListener("click", () => this.toggleEditor());
     this.editorButton = editBtn;
 
+    const menuBtn = document.createElement("button");
+    menuBtn.textContent = "Menu";
+    menuBtn.style.cssText = BTN_STYLE;
+    menuBtn.addEventListener("click", () => this.toggleMenu());
+
     const debugBtn = document.createElement("button");
     debugBtn.textContent = "Debug";
     debugBtn.style.cssText = BTN_STYLE;
@@ -228,7 +390,7 @@ export class Game {
       this.debugEnabled = !this.debugEnabled;
       this.debugPanel.visible = this.debugEnabled;
     });
-    wrap.append(editBtn, debugBtn);
+    wrap.append(editBtn, menuBtn, debugBtn);
     document.body.appendChild(wrap);
   }
 
@@ -239,6 +401,9 @@ export class Game {
   }
 
   private update(dt: number): void {
+    // Skip game updates while menu is open
+    if (this.mainMenu.visible) return;
+
     // Apply debug panel state
     if (!this.editorEnabled) {
       this.camera.zoom = this.debugPanel.zoom;
@@ -256,6 +421,8 @@ export class Game {
       this.editorMode.paintMode = this.editorPanel.effectivePaintMode;
       this.editorMode.editorTab = this.editorPanel.editorTab;
       this.editorMode.selectedEntityType = this.editorPanel.selectedEntityType;
+      this.editorMode.selectedElevation = this.editorPanel.selectedElevation;
+      this.editorMode.elevationGridSize = this.editorPanel.elevationGridSize;
       this.editorMode.entities = this.entityManager.entities;
       this.editorMode.update(dt);
 
@@ -295,6 +462,11 @@ export class Game {
         this.terrainEditor.applyRoadEdit(edit.tx, edit.ty, edit.roadType, paintMode);
       }
 
+      // Apply elevation edits
+      for (const edit of this.editorMode.consumePendingElevationEdits()) {
+        this.terrainEditor.applyElevationEdit(edit.tx, edit.ty, edit.height, edit.gridSize);
+      }
+
       // Apply entity spawns
       let entitiesChanged = false;
       for (const spawn of this.editorMode.consumePendingEntitySpawns()) {
@@ -312,7 +484,7 @@ export class Game {
           entitiesChanged = true;
         }
       }
-      if (entitiesChanged) this.saveManager.markMetaDirty();
+      if (entitiesChanged) this.saveManager?.markMetaDirty();
 
       // Handle clear canvas
       const clearId = this.editorPanel.consumeClearRequest();
@@ -394,7 +566,10 @@ export class Game {
     // Terrain, autotile, and details are all baked into the chunk cache
     this.tileRenderer.drawTerrain(this.ctx, this.camera, this.world, this.sheets, visible);
 
-    // Editor overlays (grid + cursor highlight)
+    // Elevation pass: cliff faces + Y-offset for elevated tiles
+    this.tileRenderer.drawElevation(this.ctx, this.camera, this.world, visible);
+
+    // Editor overlays (grid + cursor highlight + elevation tint)
     if (this.editorEnabled) {
       drawEditorOverlay(
         this.ctx,
@@ -405,13 +580,16 @@ export class Game {
           effectivePaintMode: this.editorPanel.effectivePaintMode,
           subgridShape: this.editorPanel.subgridShape,
           brushSize: this.editorPanel.brushSize,
+          editorTab: this.editorPanel.editorTab,
+          elevationGridSize: this.editorPanel.elevationGridSize,
         },
         visible,
+        this.world,
       );
     }
 
-    // Draw entities Y-sorted on top of terrain
-    drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets);
+    // Draw entities Y-sorted on top of terrain (with elevation offset)
+    drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets, this.world);
 
     // FPS tracking
     this.frameCount++;

@@ -45,3 +45,9 @@ export const WATER_FRAME_DURATION_MS = 250;
 
 /** Entities beyond this Chebyshev distance from the player are frozen (world pixels). */
 export const ENTITY_ACTIVATION_DISTANCE = CHUNK_SIZE_PX * (UNLOAD_DISTANCE - 1);
+
+/** World-pixel Y-offset per elevation level. */
+export const ELEVATION_PX = 8;
+
+/** Maximum tile elevation level (0–3). */
+export const MAX_ELEVATION = 3;
