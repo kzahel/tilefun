@@ -66,6 +66,15 @@ export class World {
     return this.chunks.get(cx, cy);
   }
 
+  /** Get road type at a global tile position. Returns 0 (None) if chunk not loaded. */
+  getRoadAt(tx: number, ty: number): number {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.chunks.get(cx, cy);
+    if (!chunk) return 0;
+    return chunk.getRoad(lx, ly);
+  }
+
   /** Update chunk loading/unloading based on visible range. */
   updateLoadedChunks(visible: ChunkRange): void {
     this.chunks.updateLoadedChunks(visible);

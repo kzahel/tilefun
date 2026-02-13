@@ -207,6 +207,7 @@ export class Game {
       this.sheets.set("shallowwater", me03Sheet);
     }
     this.tileRenderer.setBlendSheets(blendSheets, this.blendGraph);
+    this.tileRenderer.setRoadSheets(this.sheets);
 
     // Set up tile variants from the complete ME tileset
     const variants = new TileVariants(new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE));
@@ -241,7 +242,7 @@ export class Game {
 
     if (savedMeta && savedChunks.size > 0) {
       // Restore from save
-      this.world.chunks.setSavedSubgrids(savedChunks);
+      this.world.chunks.setSavedData(savedChunks);
       this.camera.x = savedMeta.cameraX;
       this.camera.y = savedMeta.cameraY;
       this.camera.zoom = savedMeta.cameraZoom;
@@ -267,13 +268,13 @@ export class Game {
 
     // Bind save accessors and set up auto-flush on tab hide
     this.saveManager.bind(
-      (key) => this.world.chunks.getSubgridByKey(key),
+      (key) => this.world.chunks.getChunkDataByKey(key),
       () => this.buildSaveMeta(),
     );
     this.saveManager.onChunksSaved = (keys, getChunk) => {
       for (const key of keys) {
-        const subgrid = getChunk(key);
-        if (subgrid) this.world.chunks.updateSavedSubgrid(key, subgrid);
+        const data = getChunk(key);
+        if (data) this.world.chunks.updateSavedChunk(key, data.subgrid, data.roadGrid);
       }
     };
     document.addEventListener("visibilitychange", () => {
@@ -351,6 +352,7 @@ export class Game {
     if (this.editorEnabled) {
       this.editorPanel.setTemporaryUnpaint(this.editorMode.rightClickUnpaint);
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
+      this.editorMode.selectedRoadType = this.editorPanel.selectedRoadType;
       this.editorMode.brushMode = this.editorPanel.brushMode;
       this.editorMode.paintMode = this.editorPanel.effectivePaintMode;
       this.editorMode.editorTab = this.editorPanel.editorTab;
@@ -371,6 +373,11 @@ export class Game {
       // Apply corner edits (corner mode → 3×3 subgrid centered on tile vertex)
       for (const edit of this.editorMode.consumePendingCornerEdits()) {
         this.applyCornerEdit(edit.gsx, edit.gsy, edit.terrainId);
+      }
+
+      // Apply road edits
+      for (const edit of this.editorMode.consumePendingRoadEdits()) {
+        this.applyRoadEdit(edit.tx, edit.ty, edit.roadType);
       }
 
       // Apply entity spawns
@@ -396,6 +403,9 @@ export class Game {
       const clearId = this.editorPanel.consumeClearRequest();
       if (clearId !== null) {
         this.clearAllTerrain(clearId);
+      }
+      if (this.editorPanel.consumeRoadClearRequest()) {
+        this.clearAllRoads();
       }
 
       // Still load chunks (camera may have panned)
@@ -527,7 +537,9 @@ export class Game {
   }
 
   /** Tile brush: set all 9 subgrid points of tile (tx,ty) to the same terrain. */
-  private applyTileEdit(tx: number, ty: number, terrainId: TerrainId): void {
+  private applyTileEdit(tx: number, ty: number, rawTerrainId: TerrainId | null): void {
+    // Auto mode: sample terrain at tile center
+    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(2 * tx + 1, 2 * ty + 1);
     // Tile (tx,ty) covers subgrid (2*tx, 2*ty) to (2*tx+2, 2*ty+2)
     const gsx0 = 2 * tx;
     const gsy0 = 2 * ty;
@@ -548,7 +560,9 @@ export class Game {
   }
 
   /** Corner brush: 3×3 subgrid stamp centered on a tile vertex (even subgrid coord). */
-  private applyCornerEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
+  private applyCornerEdit(gsx: number, gsy: number, rawTerrainId: TerrainId | null): void {
+    // Auto mode: sample terrain at corner center
+    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
     const unpaint = this.editorPanel.effectivePaintMode === "unpaint";
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
@@ -574,7 +588,9 @@ export class Game {
   }
 
   /** Subgrid brush: paint with configurable brush shape. */
-  private applySubgridEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
+  private applySubgridEdit(gsx: number, gsy: number, rawTerrainId: TerrainId | null): void {
+    // Auto mode: sample terrain at brush center
+    const terrainId: TerrainId = rawTerrainId ?? this.getGlobalSubgrid(gsx, gsy);
     const shape = this.editorPanel.subgridShape;
     const points = this.getSubgridBrushPoints(gsx, gsy, shape);
 
@@ -782,10 +798,50 @@ export class Game {
       chunk.fillTerrain(tileId);
       chunk.fillCollision(collision);
       chunk.detail.fill(TileId.Empty);
+      chunk.fillRoad(0);
       chunk.dirty = true;
       chunk.autotileComputed = false;
       this.saveManager.markChunkDirty(key);
     }
+  }
+
+  private clearAllRoads(): void {
+    for (const [key, chunk] of this.world.chunks.entries()) {
+      chunk.fillRoad(0);
+      chunk.dirty = true;
+      this.saveManager.markChunkDirty(key);
+    }
+  }
+
+  private applyRoadEdit(tx: number, ty: number, roadType: number): void {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (!chunk) return;
+
+    const paintMode = this.editorPanel.effectivePaintMode;
+    if (paintMode === "unpaint") {
+      if (chunk.getRoad(lx, ly) === roadType) {
+        chunk.setRoad(lx, ly, 0);
+      }
+    } else {
+      chunk.setRoad(lx, ly, paintMode === "positive" ? roadType : 0);
+    }
+
+    chunk.dirty = true;
+    const key = chunkKey(cx, cy);
+    this.saveManager.markChunkDirty(key);
+
+    // Invalidate neighbor chunks for cross-chunk road connectivity
+    if (lx === 0) this.invalidateChunkRender(cx - 1, cy);
+    if (lx === CHUNK_SIZE - 1) this.invalidateChunkRender(cx + 1, cy);
+    if (ly === 0) this.invalidateChunkRender(cx, cy - 1);
+    if (ly === CHUNK_SIZE - 1) this.invalidateChunkRender(cx, cy + 1);
+  }
+
+  private invalidateChunkRender(cx: number, cy: number): void {
+    const chunk = this.world.getChunkIfLoaded(cx, cy);
+    if (chunk) chunk.dirty = true;
   }
 
   private drawEditorGrid(visible: {

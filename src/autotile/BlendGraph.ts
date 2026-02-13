@@ -167,22 +167,7 @@ export class BlendGraph {
       this.dedicatedEntry("me15", TerrainId.ShallowWater),
     );
 
-    // #21: sidewalk (primary) over asphalt (secondary)
-    this.set(TerrainId.Sidewalk, TerrainId.Asphalt, this.dedicatedEntry("me21", TerrainId.Asphalt));
-
-    // #25: road white lines (primary) over asphalt (secondary)
-    this.set(
-      TerrainId.RoadWhite,
-      TerrainId.Asphalt,
-      this.dedicatedEntry("me25", TerrainId.Asphalt),
-    );
-
-    // #26: road yellow lines (primary) over asphalt (secondary)
-    this.set(
-      TerrainId.RoadYellow,
-      TerrainId.Asphalt,
-      this.dedicatedEntry("me26", TerrainId.Asphalt),
-    );
+    // Road pairs (me21/me25/me26) removed — roads use separate grid-based layer
 
     // #11: playground (primary) over grass (secondary)
     this.set(TerrainId.Playground, TerrainId.Grass, this.dedicatedEntry("me11", TerrainId.Grass));
@@ -243,10 +228,7 @@ export class BlendGraph {
       [TerrainId.Grass, "me15", 1, 0],
       [TerrainId.DirtLight, "me01", 1, 0],
       [TerrainId.DirtWarm, "me02", 1, 0],
-      [TerrainId.Asphalt, "me21", 0, 0],
-      [TerrainId.Sidewalk, "me21", 1, 0],
-      [TerrainId.RoadWhite, "me25", 1, 0],
-      [TerrainId.RoadYellow, "me26", 1, 0],
+      // Road base fills removed — roads use separate grid-based layer
       [TerrainId.Playground, "me11", 1, 0],
       [TerrainId.Curb, "me14", 0, 0],
     ];

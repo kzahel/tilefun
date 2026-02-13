@@ -9,6 +9,8 @@ import {
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
 } from "../config/constants.js";
+import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
+import { getRoadSheetKey, isRoad, RoadType } from "../road/RoadType.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { getTileDef, TileId } from "../world/TileRegistry.js";
@@ -35,6 +37,8 @@ export class TileRenderer {
   private blendGraph: BlendGraph | null = null;
   /** Optional tile variants for base fill variety. */
   private variants: TileVariants | null = null;
+  /** Road overlay autotile sheets keyed by RoadType. */
+  private roadSheetMap = new Map<RoadType, Spritesheet>();
 
   /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
@@ -45,6 +49,17 @@ export class TileRenderer {
   /** Set tile variants for base fill variety. */
   setVariants(variants: TileVariants): void {
     this.variants = variants;
+  }
+
+  /** Set road autotile sheets from the loaded sheet map. */
+  setRoadSheets(sheets: Map<string, Spritesheet>): void {
+    for (const rt of [RoadType.Sidewalk, RoadType.LineWhite, RoadType.LineYellow]) {
+      const key = getRoadSheetKey(rt);
+      if (key) {
+        const sheet = sheets.get(key);
+        if (sheet) this.roadSheetMap.set(rt, sheet);
+      }
+    }
   }
 
   /**
@@ -59,6 +74,7 @@ export class TileRenderer {
     visible: ChunkRange,
   ): void {
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
+    const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
 
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
@@ -82,7 +98,7 @@ export class TileRenderer {
 
         // Rebuild cache if stale or missing
         if (chunk.dirty || !chunk.renderCache) {
-          this.rebuildCache(chunk, cx, cy, sheets);
+          this.rebuildCache(chunk, cx, cy, sheets, getGlobalRoad);
           chunk.dirty = false;
         }
 
@@ -103,6 +119,7 @@ export class TileRenderer {
     cx: number,
     cy: number,
     sheets: Map<string, Spritesheet>,
+    getGlobalRoad?: (tx: number, ty: number) => number,
   ): void {
     if (!chunk.renderCache) {
       chunk.renderCache = new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
@@ -171,7 +188,34 @@ export class TileRenderer {
           }
         }
 
-        // 4. Detail layer on top
+        // 4. Road layer (asphalt base + overlay autotile)
+        const road = chunk.getRoad(lx, ly);
+        if (isRoad(road)) {
+          // Draw asphalt base fill from complete tileset (col=0, row=5)
+          if (variants) {
+            variants.sheet.drawTile(offCtx, 0, 5, dx, dy, 1);
+          }
+
+          // Draw overlay sprite for non-asphalt road types
+          if (road !== RoadType.Asphalt) {
+            const overlaySheet = this.roadSheetMap.get(road as RoadType);
+            if (overlaySheet && getGlobalRoad) {
+              const gtx = baseTx + lx;
+              const gty = baseTy + ly;
+              const nsew = computeRoadCardinalMask(
+                road,
+                getGlobalRoad(gtx, gty - 1),
+                getGlobalRoad(gtx + 1, gty),
+                getGlobalRoad(gtx, gty + 1),
+                getGlobalRoad(gtx - 1, gty),
+              );
+              const { col, row } = getRoadSprite(nsew);
+              overlaySheet.drawTile(offCtx, col, row, dx, dy, 1);
+            }
+          }
+        }
+
+        // 5. Detail layer on top
         const detailId = chunk.getDetail(lx, ly);
         if (detailId !== TileId.Empty) {
           const def = getTileDef(detailId);

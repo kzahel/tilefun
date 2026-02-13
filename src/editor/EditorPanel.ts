@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
 
 export type EditorTab = "natural" | "road" | "structure" | "entities";
@@ -42,11 +43,17 @@ const NATURAL_PALETTE: PaletteEntry[] = [
   { terrainId: TerrainId.DirtWarm, label: "Wrm Dirt", color: "#8b6b3e" },
 ];
 
-const ROAD_PALETTE: PaletteEntry[] = [
-  { terrainId: TerrainId.Asphalt, label: "Asphalt", color: "#4a4a50" },
-  { terrainId: TerrainId.Sidewalk, label: "Sidewalk", color: "#b0aaaa" },
-  { terrainId: TerrainId.RoadWhite, label: "White", color: "#e0e0e0" },
-  { terrainId: TerrainId.RoadYellow, label: "Yellow", color: "#d4a030" },
+interface RoadPaletteEntry {
+  roadType: RoadType;
+  label: string;
+  color: string;
+}
+
+const ROAD_PALETTE: RoadPaletteEntry[] = [
+  { roadType: RoadType.Asphalt, label: "Asphalt", color: "#4a4a50" },
+  { roadType: RoadType.Sidewalk, label: "Sidewalk", color: "#b0aaaa" },
+  { roadType: RoadType.LineWhite, label: "White", color: "#e0e0e0" },
+  { roadType: RoadType.LineYellow, label: "Yellow", color: "#d4a030" },
 ];
 
 const STRUCTURE_PALETTE: PaletteEntry[] = [
@@ -91,6 +98,8 @@ export class EditorPanel {
   private readonly entityRow: HTMLDivElement;
   /** All terrain buttons with their entries, for selection highlighting. */
   private readonly terrainButtons: { btn: HTMLButtonElement; entry: PaletteEntry }[] = [];
+  private readonly autoButtons: HTMLButtonElement[] = [];
+  private readonly terrainWrappers: HTMLDivElement[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
   private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
   private readonly bridgeButton: HTMLButtonElement;
@@ -100,7 +109,10 @@ export class EditorPanel {
   private readonly brushSizeButton: HTMLButtonElement;
   private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
   private pendingClear: TerrainId | null = null;
-  selectedTerrain: TerrainId = TerrainId.Grass;
+  private pendingRoadClear = false;
+  private readonly roadButtons: { btn: HTMLButtonElement; entry: RoadPaletteEntry }[] = [];
+  selectedTerrain: TerrainId | null = TerrainId.Grass;
+  selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
@@ -216,7 +228,7 @@ export class EditorPanel {
     this.naturalRow = this.buildTerrainRow(NATURAL_PALETTE);
     this.container.appendChild(this.naturalRow);
 
-    this.roadRow = this.buildTerrainRow(ROAD_PALETTE);
+    this.roadRow = this.buildRoadRow();
     this.container.appendChild(this.roadRow);
 
     this.structureRow = this.buildTerrainRow(STRUCTURE_PALETTE);
@@ -253,6 +265,7 @@ export class EditorPanel {
     this.container.appendChild(this.entityRow);
 
     this.updateTerrainSelection();
+    this.updateRoadSelection();
     this.updateEntitySelection();
     this.updateTabDisplay();
     document.body.appendChild(this.container);
@@ -261,6 +274,28 @@ export class EditorPanel {
   private buildTerrainRow(palette: PaletteEntry[]): HTMLDivElement {
     const row = document.createElement("div");
     row.style.cssText = ROW_STYLE;
+
+    // Auto (smudge) button — always visible
+    const autoBtn = document.createElement("button");
+    autoBtn.style.cssText = `
+      width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
+      background: #556; color: #cdf; font: bold 9px monospace;
+      cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      display: flex; align-items: center; justify-content: center;
+    `;
+    autoBtn.textContent = "Auto";
+    autoBtn.title = "Smudge: L-click grows, R-click shrinks";
+    autoBtn.addEventListener("click", () => {
+      this.selectedTerrain = null;
+      this.updateTerrainSelection();
+    });
+    row.appendChild(autoBtn);
+    this.autoButtons.push(autoBtn);
+
+    // Wrapper for terrain-specific elements (hidden when Auto selected)
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "contents";
+    this.terrainWrappers.push(wrapper);
 
     for (const entry of palette) {
       const btn = document.createElement("button");
@@ -277,10 +312,10 @@ export class EditorPanel {
         this.updateTerrainSelection();
       });
       this.terrainButtons.push({ btn, entry });
-      row.appendChild(btn);
+      wrapper.appendChild(btn);
     }
 
-    row.appendChild(this.makeSeparator());
+    wrapper.appendChild(this.makeSeparator());
 
     const clearBtn = document.createElement("button");
     clearBtn.style.cssText = `
@@ -294,6 +329,66 @@ export class EditorPanel {
     clearBtn.addEventListener("click", () => {
       if (clearBtn.dataset.confirm === "1") {
         this.pendingClear = this.selectedTerrain;
+        clearBtn.textContent = "Clear";
+        clearBtn.style.borderColor = "#555";
+        clearBtn.style.background = "#333";
+        delete clearBtn.dataset.confirm;
+        window.clearTimeout(confirmTimer);
+      } else {
+        clearBtn.dataset.confirm = "1";
+        clearBtn.textContent = "Sure?";
+        clearBtn.style.borderColor = "#f55";
+        clearBtn.style.background = "#633";
+        confirmTimer = window.setTimeout(() => {
+          clearBtn.textContent = "Clear";
+          clearBtn.style.borderColor = "#555";
+          clearBtn.style.background = "#333";
+          delete clearBtn.dataset.confirm;
+        }, 2000);
+      }
+    });
+    wrapper.appendChild(clearBtn);
+
+    row.appendChild(wrapper);
+    return row;
+  }
+
+  private buildRoadRow(): HTMLDivElement {
+    const row = document.createElement("div");
+    row.style.cssText = ROW_STYLE;
+
+    for (const entry of ROAD_PALETTE) {
+      const btn = document.createElement("button");
+      btn.style.cssText = `
+        width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
+        background: ${entry.color}; color: #fff; font: bold 9px monospace;
+        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        display: flex; align-items: center; justify-content: center;
+      `;
+      btn.textContent = entry.label;
+      btn.title = entry.label;
+      btn.addEventListener("click", () => {
+        this.selectedRoadType = entry.roadType;
+        this.updateRoadSelection();
+      });
+      this.roadButtons.push({ btn, entry });
+      row.appendChild(btn);
+    }
+
+    row.appendChild(this.makeSeparator());
+
+    const clearBtn = document.createElement("button");
+    clearBtn.style.cssText = `
+      height: 44px; border: 2px solid #555; border-radius: 4px;
+      background: #333; color: #fff; font: bold 10px monospace;
+      cursor: pointer; padding: 0 12px;
+    `;
+    clearBtn.textContent = "Clear";
+    clearBtn.title = "Clear all roads";
+    let confirmTimer = 0;
+    clearBtn.addEventListener("click", () => {
+      if (clearBtn.dataset.confirm === "1") {
+        this.pendingRoadClear = true;
         clearBtn.textContent = "Clear";
         clearBtn.style.borderColor = "#555";
         clearBtn.style.background = "#333";
@@ -354,10 +449,12 @@ export class EditorPanel {
     for (const [tab, btn] of this.tabButtons) {
       btn.style.cssText = TAB_STYLE + (tab === this.editorTab ? active : inactive);
     }
+    // Road tab uses tile-only painting — hide tool row (brush modes, subgrid tools)
     const isTerrainTab = TERRAIN_TABS.includes(this.editorTab);
-    this.toolRow.style.display = isTerrainTab ? "flex" : "none";
+    const isRoad = this.editorTab === "road";
+    this.toolRow.style.display = isTerrainTab && !isRoad ? "flex" : "none";
     this.naturalRow.style.display = this.editorTab === "natural" ? "flex" : "none";
-    this.roadRow.style.display = this.editorTab === "road" ? "flex" : "none";
+    this.roadRow.style.display = isRoad ? "flex" : "none";
     this.structureRow.style.display = this.editorTab === "structure" ? "flex" : "none";
     this.entityRow.style.display = this.editorTab === "entities" ? "flex" : "none";
   }
@@ -469,11 +566,33 @@ export class EditorPanel {
     return c;
   }
 
+  consumeRoadClearRequest(): boolean {
+    const c = this.pendingRoadClear;
+    this.pendingRoadClear = false;
+    return c;
+  }
+
   private updateTerrainSelection(): void {
+    const isAuto = this.selectedTerrain === null;
     for (const { btn, entry } of this.terrainButtons) {
       btn.style.borderColor = entry.terrainId === this.selectedTerrain ? "#fff" : "#555";
       btn.style.boxShadow =
         entry.terrainId === this.selectedTerrain ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+    }
+    for (const btn of this.autoButtons) {
+      btn.style.borderColor = isAuto ? "#fff" : "#555";
+      btn.style.boxShadow = isAuto ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+    }
+    for (const wrapper of this.terrainWrappers) {
+      wrapper.style.display = isAuto ? "none" : "contents";
+    }
+  }
+
+  private updateRoadSelection(): void {
+    for (const { btn, entry } of this.roadButtons) {
+      btn.style.borderColor = entry.roadType === this.selectedRoadType ? "#fff" : "#555";
+      btn.style.boxShadow =
+        entry.roadType === this.selectedRoadType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
     }
   }
 

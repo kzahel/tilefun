@@ -145,10 +145,7 @@ describe("BlendGraph", () => {
         [TerrainId.Grass, TerrainId.DirtWarm], // reverse pair #12
         [TerrainId.ShallowWater, TerrainId.Grass],
         [TerrainId.Grass, TerrainId.ShallowWater], // reverse pair #15
-        // Urban/structure dedicated pairs
-        [TerrainId.Sidewalk, TerrainId.Asphalt],
-        [TerrainId.RoadWhite, TerrainId.Asphalt],
-        [TerrainId.RoadYellow, TerrainId.Asphalt],
+        // Structure dedicated pairs (road pairs removed — roads on separate layer)
         [TerrainId.Playground, TerrainId.Grass],
         [TerrainId.Grass, TerrainId.Curb],
       ];
@@ -174,7 +171,7 @@ describe("BlendGraph", () => {
   describe("base fills", () => {
     it("provides a base fill for every terrain", () => {
       // Terrains that use secondary fill (col=0, row=0) instead of primary fill (col=1, row=0)
-      const secondaryFills = new Set([TerrainId.Asphalt, TerrainId.Curb]);
+      const secondaryFills = new Set([TerrainId.Curb]);
       for (const t of ALL_TERRAIN_IDS) {
         const fill = graph.getBaseFill(t);
         expect(fill, `Missing base fill for ${TerrainId[t]}`).toBeDefined();

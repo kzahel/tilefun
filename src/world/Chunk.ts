@@ -50,12 +50,16 @@ export class Chunk {
   /** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
   renderCache: OffscreenCanvas | null = null;
 
+  /** Road surface per tile (RoadType enum). 0 = no road. */
+  readonly roadGrid: Uint8Array;
+
   constructor() {
     this.subgrid = new Uint8Array(SUBGRID_AREA);
     this.terrain = new Uint16Array(AREA);
     this.detail = new Uint16Array(AREA);
     this.blendLayers = new Uint32Array(MAX_BLEND_LAYERS * AREA);
     this.collision = new Uint8Array(AREA);
+    this.roadGrid = new Uint8Array(AREA);
   }
 
   /** Read sub-grid point at (sx, sy) in [0, SUBGRID_SIZE). */
@@ -115,5 +119,17 @@ export class Chunk {
   /** Fill entire chunk collision with a single flag set. */
   fillCollision(flags: number): void {
     this.collision.fill(flags);
+  }
+
+  getRoad(lx: number, ly: number): number {
+    return this.roadGrid[idx(lx, ly)] ?? 0;
+  }
+
+  setRoad(lx: number, ly: number, roadType: number): void {
+    this.roadGrid[idx(lx, ly)] = roadType;
+  }
+
+  fillRoad(roadType: number): void {
+    this.roadGrid.fill(roadType);
   }
 }

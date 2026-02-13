@@ -11,13 +11,19 @@ export type SubgridShape = 1 | 2 | 3 | "cross";
 interface PendingTileEdit {
   tx: number;
   ty: number;
-  terrainId: TerrainId;
+  terrainId: TerrainId | null;
 }
 
 export interface PendingSubgridEdit {
   gsx: number;
   gsy: number;
-  terrainId: TerrainId;
+  terrainId: TerrainId | null;
+}
+
+export interface PendingRoadEdit {
+  tx: number;
+  ty: number;
+  roadType: number;
 }
 
 export interface PendingEntitySpawn {
@@ -27,7 +33,8 @@ export interface PendingEntitySpawn {
 }
 
 export class EditorMode {
-  selectedTerrain: TerrainId = TerrainId.Grass;
+  selectedTerrain: TerrainId | null = TerrainId.Grass;
+  selectedRoadType = 0;
   selectedEntityType = "chicken";
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
@@ -53,6 +60,7 @@ export class EditorMode {
   private pendingTileEdits: PendingTileEdit[] = [];
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
   private pendingCornerEdits: PendingSubgridEdit[] = [];
+  private pendingRoadEdits: PendingRoadEdit[] = [];
   private pendingEntitySpawns: PendingEntitySpawn[] = [];
   private pendingEntityDeletions: number[] = [];
   private isPainting = false;
@@ -181,6 +189,13 @@ export class EditorMode {
     return edits;
   }
 
+  consumePendingRoadEdits(): PendingRoadEdit[] {
+    if (this.pendingRoadEdits.length === 0) return this.pendingRoadEdits;
+    const edits = this.pendingRoadEdits;
+    this.pendingRoadEdits = [];
+    return edits;
+  }
+
   consumePendingEntitySpawns(): PendingEntitySpawn[] {
     if (this.pendingEntitySpawns.length === 0) return this.pendingEntitySpawns;
     const spawns = this.pendingEntitySpawns;
@@ -262,6 +277,10 @@ export class EditorMode {
   }
 
   private paintAt(sx: number, sy: number): void {
+    if (this.editorTab === "road") {
+      this.paintRoadAt(sx, sy);
+      return;
+    }
     if (this.brushMode === "subgrid") {
       this.paintSubgridAt(sx, sy);
     } else if (this.brushMode === "corner") {
@@ -269,6 +288,14 @@ export class EditorMode {
     } else {
       this.paintTileAt(sx, sy);
     }
+  }
+
+  private paintRoadAt(sx: number, sy: number): void {
+    const { tx, ty } = this.screenToTile(sx, sy);
+    if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
+    this.lastPaintedTile.tx = tx;
+    this.lastPaintedTile.ty = ty;
+    this.pendingRoadEdits.push({ tx, ty, roadType: this.selectedRoadType });
   }
 
   private paintTileAt(sx: number, sy: number): void {

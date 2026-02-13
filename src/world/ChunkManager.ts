@@ -16,20 +16,36 @@ export class ChunkManager {
   private chunks = new Map<string, Chunk>();
   private generator: TerrainStrategy | null = null;
   private savedSubgrids = new Map<string, Uint8Array>();
+  private savedRoadGrids = new Map<string, Uint8Array>();
 
-  /** Inject saved subgrid data for chunk restore on load. */
+  /** Inject saved chunk data for restore on load. */
+  setSavedData(saved: Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>): void {
+    for (const [key, data] of saved) {
+      this.savedSubgrids.set(key, data.subgrid);
+      if (data.roadGrid) {
+        this.savedRoadGrids.set(key, data.roadGrid);
+      }
+    }
+  }
+
+  /** @deprecated Use setSavedData. */
   setSavedSubgrids(saved: Map<string, Uint8Array>): void {
-    this.savedSubgrids = saved;
+    for (const [key, subgrid] of saved) {
+      this.savedSubgrids.set(key, subgrid);
+    }
   }
 
-  /** Update the saved copy of a chunk's subgrid (called after IDB write). */
-  updateSavedSubgrid(key: string, subgrid: Uint8Array): void {
+  /** Update saved copies after IDB write. */
+  updateSavedChunk(key: string, subgrid: Uint8Array, roadGrid: Uint8Array): void {
     this.savedSubgrids.set(key, new Uint8Array(subgrid));
+    this.savedRoadGrids.set(key, new Uint8Array(roadGrid));
   }
 
-  /** Get a chunk's subgrid by key string, for persistence. */
-  getSubgridByKey(key: string): Uint8Array | undefined {
-    return this.chunks.get(key)?.subgrid;
+  /** Get a chunk's data by key string, for persistence. */
+  getChunkDataByKey(key: string): { subgrid: Uint8Array; roadGrid: Uint8Array } | undefined {
+    const chunk = this.chunks.get(key);
+    if (!chunk) return undefined;
+    return { subgrid: chunk.subgrid, roadGrid: chunk.roadGrid };
   }
 
   /** Attach a world generator for procedural chunk creation. */
@@ -47,6 +63,10 @@ export class ChunkManager {
       if (saved) {
         chunk.subgrid.set(saved);
         this.rederiveFromSubgrid(chunk);
+        const savedRoad = this.savedRoadGrids.get(key);
+        if (savedRoad) {
+          chunk.roadGrid.set(savedRoad);
+        }
       } else {
         this.generate(chunk, cx, cy);
       }

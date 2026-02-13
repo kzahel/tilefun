@@ -20,7 +20,12 @@ export interface SavedMeta {
   nextEntityId: number;
 }
 
-type GetChunkFn = (key: string) => Uint8Array | undefined;
+export interface SavedChunkData {
+  subgrid: Uint8Array;
+  roadGrid: Uint8Array;
+}
+
+type GetChunkFn = (key: string) => SavedChunkData | undefined;
 type GetMetaFn = () => SavedMeta;
 
 export class SaveManager {
@@ -58,19 +63,22 @@ export class SaveManager {
     });
   }
 
-  async loadChunks(): Promise<Map<string, Uint8Array>> {
+  async loadChunks(): Promise<Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>> {
     const db = this.db;
     if (!db) return new Map();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_CHUNKS, "readonly");
       const store = tx.objectStore(STORE_CHUNKS);
       const req = store.openCursor();
-      const result = new Map<string, Uint8Array>();
+      const result = new Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null }>();
       req.onsuccess = () => {
         const cursor = req.result;
         if (cursor) {
-          const value = cursor.value as { subgrid: ArrayBuffer };
-          result.set(cursor.key as string, new Uint8Array(value.subgrid));
+          const value = cursor.value as { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer };
+          result.set(cursor.key as string, {
+            subgrid: new Uint8Array(value.subgrid),
+            roadGrid: value.roadGrid ? new Uint8Array(value.roadGrid) : null,
+          });
           cursor.continue();
         } else {
           resolve(result);
@@ -147,9 +155,16 @@ export class SaveManager {
     const metaStore = tx.objectStore(STORE_META);
 
     for (const key of chunkKeys) {
-      const subgrid = this.getChunk(key);
-      if (subgrid) {
-        chunkStore.put({ subgrid: subgrid.buffer.slice(0) }, key);
+      const data = this.getChunk(key);
+      if (data) {
+        const record: { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer } = {
+          subgrid: new Uint8Array(data.subgrid).buffer,
+        };
+        // Only store roadGrid if it has non-zero data
+        if (data.roadGrid.some((v) => v !== 0)) {
+          record.roadGrid = new Uint8Array(data.roadGrid).buffer;
+        }
+        chunkStore.put(record, key);
       }
     }
 
