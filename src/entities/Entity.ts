@@ -42,6 +42,8 @@ export interface ColliderComponent {
   offsetY: number;
   width: number;
   height: number;
+  /** When false, collider is visual-only (debug box) and doesn't block movement. Default true. */
+  solid?: boolean;
 }
 
 export interface WanderAIComponent {

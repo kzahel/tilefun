@@ -12,8 +12,6 @@ import type { Entity } from "./Entity.js";
 import type { PropManager } from "./PropManager.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
-/** Fraction of player speed applied to pushed entities. */
-const PUSH_SPEED_FRACTION = 0.3;
 /** Player speed multiplier while pushing an entity. */
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
@@ -68,13 +66,16 @@ export class EntityManager {
         return aabbOverlapsAnyEntity(aabb, excludeIds, this.entities);
       };
 
-    // --- Phase 1: Move player ---
+    // --- Phase 1: Push entities in player's path, then move player ---
     if (player.velocity && player.collider) {
       const speedMult = getSpeedMultiplier(player.position, getCollision);
       const { vx, vy } = player.velocity;
 
-      // Detect if player is about to push something — reduce speed
-      let pushMult = 1.0;
+      // Detect pushable entities adjacent to player in movement direction.
+      // pushFactor = dot(velocity dir, player→entity dir): 1 when walking
+      // straight into the entity, 0 when perpendicular — lets the player
+      // slide off entities they're barely touching.
+      const toPush: { entity: Entity; pushFactor: number }[] = [];
       if (vx !== 0 || vy !== 0) {
         const playerBox = getEntityAABB(player.position, player.collider);
         const probeBox: AABB = {
@@ -83,48 +84,47 @@ export class EntityManager {
           right: playerBox.right + Math.sign(vx),
           bottom: playerBox.bottom + Math.sign(vy),
         };
+        const velLen = Math.sqrt(vx * vx + vy * vy);
+        const playerCx = (playerBox.left + playerBox.right) / 2;
+        const playerCy = (playerBox.top + playerBox.bottom) / 2;
         for (const entity of this.entities) {
           if (entity === player || !entity.collider || !entity.wanderAI) continue;
-          if (aabbsOverlap(probeBox, getEntityAABB(entity.position, entity.collider))) {
-            pushMult = PUSH_PLAYER_SPEED_MULT;
-            break;
-          }
+          const entityBox = getEntityAABB(entity.position, entity.collider);
+          if (!aabbsOverlap(probeBox, entityBox)) continue;
+          const toDirX = (entityBox.left + entityBox.right) / 2 - playerCx;
+          const toDirY = (entityBox.top + entityBox.bottom) / 2 - playerCy;
+          const toDirLen = Math.sqrt(toDirX * toDirX + toDirY * toDirY);
+          if (toDirLen === 0) continue;
+          const dot = (vx / velLen) * (toDirX / toDirLen) + (vy / velLen) * (toDirY / toDirLen);
+          const pushFactor = Math.max(0, dot);
+          if (pushFactor > 0) toPush.push({ entity, pushFactor });
         }
       }
 
+      // Slow the player proportional to the strongest push
+      const maxPushFactor = toPush.reduce((m, p) => Math.max(m, p.pushFactor), 0);
+      const pushMult = 1.0 - (1.0 - PUSH_PLAYER_SPEED_MULT) * maxPushFactor;
       const dx = vx * dt * speedMult * pushMult;
       const dy = vy * dt * speedMult * pushMult;
+
+      // Pre-push: move entities proportional to how directly the player walks into them.
+      // If the entity is against a wall it stays put and the player is blocked.
+      for (const { entity, pushFactor } of toPush) {
+        resolveCollision(
+          entity,
+          dx * pushFactor,
+          dy * pushFactor,
+          getCollision,
+          blockMask,
+          makeExtraBlocker(entity, player),
+        );
+      }
+
+      // Now move the player — entities are still solid blockers.
       resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player));
     } else if (player.velocity) {
       player.position.wx += player.velocity.vx * dt;
       player.position.wy += player.velocity.vy * dt;
-    }
-
-    // --- Phase 2: Push entities overlapping the player ---
-    if (player.collider && player.velocity) {
-      const { vx, vy } = player.velocity;
-      if (vx !== 0 || vy !== 0) {
-        const playerBox = getEntityAABB(player.position, player.collider);
-        const len = Math.sqrt(vx * vx + vy * vy);
-        const pushSpeed = len * PUSH_SPEED_FRACTION;
-        const pushDx = (vx / len) * pushSpeed * dt;
-        const pushDy = (vy / len) * pushSpeed * dt;
-
-        for (const entity of this.entities) {
-          if (entity === player || !entity.collider || !entity.wanderAI) continue;
-          const otherBox = getEntityAABB(entity.position, entity.collider);
-          if (!aabbsOverlap(playerBox, otherBox)) continue;
-          // Push: resolve against terrain + props + other entities (exclude self AND player)
-          resolveCollision(
-            entity,
-            pushDx,
-            pushDy,
-            getCollision,
-            blockMask,
-            makeExtraBlocker(entity, player),
-          );
-        }
-      }
     }
 
     // --- Phase 3: Move NPCs ---

@@ -34,7 +34,7 @@ export function aabbOverlapsAnyEntity(
   entities: readonly Entity[],
 ): boolean {
   for (const other of entities) {
-    if (excludeIds.has(other.id) || !other.collider) continue;
+    if (excludeIds.has(other.id) || !other.collider || other.collider.solid === false) continue;
     if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
   }
   return false;
