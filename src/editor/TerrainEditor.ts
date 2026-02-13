@@ -2,7 +2,7 @@ import type { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import type { SaveManager } from "../persistence/SaveManager.js";
-import { getCollisionForTerrain, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
+import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
 import { chunkKey, tileToChunk, tileToLocal } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { PaintMode, SubgridShape } from "./EditorMode.js";
@@ -175,7 +175,7 @@ export class TerrainEditor {
   /** Fill all loaded chunks with a single terrain. */
   clearAllTerrain(terrainId: number): void {
     const tileId = terrainIdToTileId(terrainId);
-    const collision = getCollisionForTerrain(tileId);
+    const collision = getCollisionForWaterTile(tileId, 9);
     for (const [key, chunk] of this.world.chunks.entries()) {
       chunk.subgrid.fill(terrainId);
       chunk.fillTerrain(tileId);
@@ -207,6 +207,20 @@ export class TerrainEditor {
   }
 
   // --- Internal helpers ---
+
+  /** Count water subgrid points in the 3×3 area around a tile (global coords). */
+  private countWaterSubgrid(tx: number, ty: number): number {
+    let count = 0;
+    const cx = 2 * tx + 1;
+    const cy = 2 * ty + 1;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        const t = toBaseTerrainId(this.getGlobalSubgrid(cx + dx, cy + dy));
+        if (t === TerrainId.ShallowWater || t === TerrainId.DeepWater) count++;
+      }
+    }
+    return count;
+  }
 
   /** Read raw subgrid value (may be a variant like ShallowWaterOnGrass). */
   getGlobalSubgrid(gsx: number, gsy: number): number {
@@ -326,7 +340,8 @@ export class TerrainEditor {
     const tileId = terrainIdToTileId(baseTerrain);
 
     chunk.setTerrain(lx, ly, tileId);
-    chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
+    const waterCount = this.countWaterSubgrid(tx, ty);
+    chunk.setCollision(lx, ly, getCollisionForWaterTile(tileId, waterCount));
     chunk.setDetail(lx, ly, TileId.Empty);
 
     // Water constraint: painting water on an elevated tile resets height to 0

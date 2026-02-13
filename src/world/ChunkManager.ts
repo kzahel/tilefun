@@ -2,7 +2,7 @@ import { toBaseTerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
-import { getCollisionForTerrain, TileId, terrainIdToTileId } from "./TileRegistry.js";
+import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "./TileRegistry.js";
 import { chunkKey } from "./types.js";
 
 export interface ChunkRange {
@@ -105,10 +105,26 @@ export class ChunkManager {
         const terrain = toBaseTerrainId(chunk.getSubgrid(lx * 2 + 1, ly * 2 + 1));
         const tileId = terrainIdToTileId(terrain);
         chunk.setTerrain(lx, ly, tileId);
-        chunk.setCollision(lx, ly, getCollisionForTerrain(tileId));
+        const waterCount = this.countWaterSubgrid(chunk, lx, ly);
+        chunk.setCollision(lx, ly, getCollisionForWaterTile(tileId, waterCount));
         chunk.setDetail(lx, ly, TileId.Empty);
       }
     }
+  }
+
+  /** Count water subgrid points in the 3×3 area around a tile. */
+  private countWaterSubgrid(chunk: Chunk, lx: number, ly: number): number {
+    let count = 0;
+    const cx = lx * 2 + 1;
+    const cy = ly * 2 + 1;
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        const t = toBaseTerrainId(chunk.getSubgrid(cx + dx, cy + dy));
+        const tid = terrainIdToTileId(t);
+        if (tid === TileId.Water || tid === TileId.DeepWater) count++;
+      }
+    }
+    return count;
   }
 
   /** Get chunk if it exists (no creation). */

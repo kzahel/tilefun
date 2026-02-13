@@ -45,6 +45,12 @@ export interface TileDefinition {
   collision: CollisionFlags;
 }
 
+/**
+ * Minimum water subgrid points (out of 9 in a tile's 3×3 area) to block movement.
+ * Small water features (puddles, dots, thin edges) remain walkable.
+ */
+export const WATER_BLOCK_THRESHOLD = 5;
+
 /** Get default collision flags for a terrain tile type. */
 export function getCollisionForTerrain(tileId: TileId): number {
   switch (tileId) {
@@ -56,6 +62,17 @@ export function getCollisionForTerrain(tileId: TileId): number {
     default:
       return CollisionFlag.None;
   }
+}
+
+/**
+ * Get collision flags for a water tile considering subgrid coverage.
+ * Only blocks if water covers a majority of the tile's 3×3 subgrid area.
+ */
+export function getCollisionForWaterTile(tileId: TileId, waterCount: number): number {
+  if (tileId === TileId.Water || tileId === TileId.DeepWater) {
+    return waterCount >= WATER_BLOCK_THRESHOLD ? CollisionFlag.Water : CollisionFlag.None;
+  }
+  return getCollisionForTerrain(tileId);
 }
 
 /**
