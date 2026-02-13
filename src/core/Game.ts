@@ -9,6 +9,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
+import { getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -100,6 +101,7 @@ export class Game {
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
+    this.editorPanel.onCollapse = () => this.toggleEditor();
     this.registry = new WorldRegistry();
     this.mainMenu = new MainMenu();
     this.loop = new GameLoop({
@@ -528,7 +530,15 @@ export class Game {
       let entitiesChanged = false;
       for (const spawn of this.editorMode.consumePendingEntitySpawns()) {
         if (isPropType(spawn.entityType)) {
-          this.propManager.add(createProp(spawn.entityType, spawn.wx, spawn.wy));
+          const prop = createProp(spawn.entityType, spawn.wx, spawn.wy);
+          // Skip if the new prop's collider would overlap an existing prop
+          if (
+            prop.collider &&
+            this.propManager.overlapsAnyProp(getEntityAABB(prop.position, prop.collider))
+          ) {
+            continue;
+          }
+          this.propManager.add(prop);
           entitiesChanged = true;
         } else {
           const factory = ENTITY_FACTORIES[spawn.entityType];
@@ -623,14 +633,14 @@ export class Game {
       this.baddieSpawner.update(dt, this.player, this.camera, this.entityManager, this.world);
 
       const px = this.player.position.wx;
-      const py = this.player.position.wy;
+      const py = this.player.position.wy + (this.player.collider?.offsetY ?? 0);
 
-      // Check for gem collection
+      // Check for gem collection (use player body center, not feet)
       for (const entity of this.entityManager.entities) {
         if (entity.type !== "gem") continue;
         const dx = entity.position.wx - px;
         const dy = entity.position.wy - py;
-        if (dx * dx + dy * dy < 12 * 12) {
+        if (dx * dx + dy * dy < 18 * 18) {
           this.entityManager.remove(entity.id);
           this.gemsCollected++;
           this.saveManager?.markMetaDirty();

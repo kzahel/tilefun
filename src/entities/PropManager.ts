@@ -1,4 +1,6 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
+import type { AABB } from "./collision.js";
+import { aabbsOverlap, getEntityAABB } from "./collision.js";
 import type { Prop } from "./Prop.js";
 
 function chunkKey(cx: number, cy: number): string {
@@ -52,6 +54,20 @@ export class PropManager {
       if (bucket.length === 0) this.chunkIndex.delete(key);
     }
     return true;
+  }
+
+  /** Check if an AABB overlaps any existing prop collider (chunk-indexed). */
+  overlapsAnyProp(aabb: AABB): boolean {
+    const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
+    const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
+    const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
+    const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
+    for (const prop of this.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
+      if (prop.collider && aabbsOverlap(aabb, getEntityAABB(prop.position, prop.collider))) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /** Return all props whose chunk falls within the given chunk-coordinate rectangle. */

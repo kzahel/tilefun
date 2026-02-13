@@ -24,8 +24,9 @@ const BTN_STYLE = `
 `;
 
 const TAB_STYLE = `
-  padding: 6px 16px; border: none; border-radius: 6px 6px 0 0;
-  font: bold 11px monospace; cursor: pointer;
+  padding: 10px 14px; border: none; border-radius: 6px 6px 0 0;
+  font: bold 12px monospace; cursor: pointer; min-height: 40px;
+  display: flex; align-items: center; gap: 5px;
 `;
 
 const ROW_STYLE =
@@ -115,6 +116,9 @@ const ELEVATION_COLORS = ["#888", "#9a6", "#c84", "#e44"];
 
 export class EditorPanel {
   private readonly container: HTMLDivElement;
+  private readonly collapseArrow: HTMLButtonElement;
+  /** Called when the user taps the collapse arrow to exit editor mode. */
+  onCollapse: (() => void) | null = null;
   private readonly tabButtons: Map<EditorTab, HTMLButtonElement> = new Map();
   private readonly toolRow: HTMLDivElement;
   private readonly naturalRow: HTMLDivElement;
@@ -166,12 +170,44 @@ export class EditorPanel {
     this.container.style.cssText = PANEL_STYLE;
     this.container.style.display = "none";
 
+    // --- Collapse arrow (above tab bar) ---
+    this.collapseArrow = document.createElement("button");
+    this.collapseArrow.style.cssText = `
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 28px; border: none; border-radius: 6px 6px 0 0;
+      background: rgba(80,80,80,0.6); color: #ccc; font-size: 22px;
+      cursor: pointer; padding: 0; margin: 0; line-height: 1;
+      transition: background 0.15s, color 0.15s;
+    `;
+    this.collapseArrow.textContent = "\u25bc";
+    this.collapseArrow.title = "Close editor (Tab)";
+    this.collapseArrow.addEventListener("pointerenter", () => {
+      this.collapseArrow.style.background = "rgba(120,120,120,0.8)";
+      this.collapseArrow.style.color = "#fff";
+    });
+    this.collapseArrow.addEventListener("pointerleave", () => {
+      this.collapseArrow.style.background = "rgba(80,80,80,0.6)";
+      this.collapseArrow.style.color = "#ccc";
+    });
+    this.collapseArrow.addEventListener("click", () => {
+      this.onCollapse?.();
+    });
+    this.container.appendChild(this.collapseArrow);
+
     // --- Tab bar ---
     const tabBar = document.createElement("div");
-    tabBar.style.cssText = "display: flex; flex-wrap: wrap; gap: 2px; padding: 0 8px;";
+    tabBar.style.cssText = "display: flex; flex-wrap: wrap; gap: 3px; padding: 0 8px;";
     for (const tab of ALL_TABS) {
       const btn = document.createElement("button");
       btn.style.cssText = TAB_STYLE;
+      const TAB_ICONS: Record<EditorTab, string> = {
+        natural: "\ud83c\udf3f",
+        road: "\ud83d\udee3\ufe0f",
+        structure: "\ud83c\udfd7\ufe0f",
+        entities: "\ud83d\udc25",
+        props: "\ud83c\udf32",
+        elevation: "\u26f0\ufe0f",
+      };
       const TAB_LABELS: Record<EditorTab, string> = {
         natural: "Natural",
         road: "Road",
@@ -180,7 +216,11 @@ export class EditorPanel {
         props: "Props",
         elevation: "Elevation",
       };
-      btn.textContent = TAB_LABELS[tab];
+      const icon = document.createElement("span");
+      icon.style.fontSize = "15px";
+      icon.textContent = TAB_ICONS[tab];
+      btn.appendChild(icon);
+      btn.appendChild(document.createTextNode(TAB_LABELS[tab]));
       btn.addEventListener("click", () => this.setTab(tab));
       tabBar.appendChild(btn);
       this.tabButtons.set(tab, btn);
