@@ -55,7 +55,6 @@ const NATURAL_SHEET_PALETTE: SheetPaletteEntry[] = [
   // Alpha variants (prefer overlay behavior)
   { sheetKey: "me13", label: "Grass\u03b1", storedValue: VariantId.GrassAlpha },
   { sheetKey: "me10", label: "Sand\u03b1", storedValue: VariantId.SandAlpha },
-  { sheetKey: "me10", label: "SandL\u03b1", storedValue: VariantId.SandLightAlpha },
 ];
 
 interface RoadPaletteEntry {
