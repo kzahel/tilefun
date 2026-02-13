@@ -868,7 +868,7 @@ export class Game {
       case "flat":
         return new FlatStrategy();
       case "island":
-        return new OnionStrategy(seed, 20);
+        return new OnionStrategy(seed, 12);
       default:
         return new OnionStrategy(seed);
     }
