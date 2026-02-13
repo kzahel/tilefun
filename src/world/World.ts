@@ -1,6 +1,5 @@
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import type { TerrainId } from "../autotile/TerrainId.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { Chunk } from "./Chunk.js";
@@ -76,11 +75,11 @@ export class World {
    * Run the autotile pass for chunks that need it.
    * Computes per-tile blend layers from corners using the blend graph.
    */
-  computeAutotile(blendGraph: BlendGraph, forcedBase?: TerrainId): void {
+  computeAutotile(blendGraph: BlendGraph): void {
     for (const [, chunk] of this.chunks.entries()) {
       if (chunk.autotileComputed) continue;
 
-      computeChunkSubgridBlend(chunk, blendGraph, forcedBase);
+      computeChunkSubgridBlend(chunk, blendGraph);
       chunk.autotileComputed = true;
       chunk.dirty = true;
     }

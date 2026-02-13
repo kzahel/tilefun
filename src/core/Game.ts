@@ -71,8 +71,6 @@ export class Game {
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
-  private lastPaintMode: "positive" | "negative" | "unpaint" = "positive";
-  private lastPaintTerrain: TerrainId = TerrainId.Grass;
 
   constructor(canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
@@ -129,10 +127,7 @@ export class Game {
         e.preventDefault();
         this.editorPanel.setPaintMode("positive");
       }
-      if (e.key === "x" && this.editorEnabled) {
-        e.preventDefault();
-        this.editorPanel.setPaintMode("negative");
-      }
+      // "x" for negative mode — disabled (not yet implemented)
       if (e.key === "c" && this.editorEnabled) {
         e.preventDefault();
         this.editorPanel.setPaintMode("unpaint");
@@ -402,22 +397,9 @@ export class Game {
         this.clearAllTerrain(clearId);
       }
 
-      // Invalidate all chunks if paint mode or paint terrain changed (affects autotile resolve)
-      const currentPaintMode = this.editorPanel.paintMode;
-      const currentPaintTerrain = this.editorPanel.selectedTerrain;
-      if (
-        currentPaintMode !== this.lastPaintMode ||
-        (currentPaintMode === "negative" && currentPaintTerrain !== this.lastPaintTerrain)
-      ) {
-        this.invalidateAllChunks();
-        this.lastPaintMode = currentPaintMode;
-        this.lastPaintTerrain = currentPaintTerrain;
-      }
-
       // Still load chunks (camera may have panned)
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-      const forcedBase = currentPaintMode === "negative" ? currentPaintTerrain : undefined;
-      this.world.computeAutotile(this.blendGraph, forcedBase);
+      this.world.computeAutotile(this.blendGraph);
       return;
     }
 

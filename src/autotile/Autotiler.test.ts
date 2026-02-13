@@ -161,7 +161,7 @@ describe("computeChunkSubgridBlend", () => {
 
     computeChunkSubgridBlend(chunk, blendGraph);
 
-    // Tile (4,4): base = ShallowWater (lower depth), overlay = Grass
+    // Scoring: base = ShallowWater (lower depth), overlay = Grass
     // blendGraph.getBlend(Grass, ShallowWater) → me15 (dedicated)
     const tileOffset = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
     const packed = chunk.blendLayers[tileOffset];
@@ -178,6 +178,7 @@ describe("computeChunkSubgridBlend", () => {
 
     computeChunkSubgridBlend(chunk, blendGraph);
 
+    // Scoring: base = ShallowWater (lower depth), overlay = Grass
     // Each tile sees Water in exactly one of 8 directions.
     // Overlay=Grass (direct): 7 of 8 neighbors match → concave corner mask.
     const cases: Array<{

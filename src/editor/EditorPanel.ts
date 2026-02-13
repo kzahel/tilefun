@@ -92,7 +92,7 @@ export class EditorPanel {
   /** All terrain buttons with their entries, for selection highlighting. */
   private readonly terrainButtons: { btn: HTMLButtonElement; entry: PaletteEntry }[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
-  private readonly modeButton: HTMLButtonElement;
+  private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
   private readonly bridgeButton: HTMLButtonElement;
   private readonly brushSizeButton: HTMLButtonElement;
   private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
@@ -136,26 +136,47 @@ export class EditorPanel {
     this.toolRow = document.createElement("div");
     this.toolRow.style.cssText = ROW_STYLE;
 
-    this.modeButton = document.createElement("button");
-    this.modeButton.style.cssText = BTN_STYLE;
-    this.modeButton.textContent = "Tile";
-    this.modeButton.title = "Toggle tile/subgrid brush mode (M)";
-    this.modeButton.addEventListener("click", () => this.toggleMode());
-    this.toolRow.appendChild(this.modeButton);
+    const brushModes: { mode: BrushMode; icon: string; key: string }[] = [
+      { mode: "tile", icon: "\u25a3", key: "M" },
+      { mode: "subgrid", icon: "\u2b29", key: "M" },
+      { mode: "corner", icon: "\u2b26", key: "M" },
+    ];
+    for (const { mode, icon, key } of brushModes) {
+      const btn = document.createElement("button");
+      btn.style.cssText = BTN_STYLE;
+      btn.textContent = icon;
+      btn.title = `${mode} brush (${key})`;
+      btn.addEventListener("click", () => this.setBrushMode(mode));
+      this.toolRow.appendChild(btn);
+      this.brushModeButtons.set(mode, btn);
+    }
+    this.updateBrushModeButtons();
 
     // Paint mode buttons: Positive / Negative / Unpaint
     this.toolRow.appendChild(this.makeSeparator());
-    const paintModes: { mode: PaintMode; label: string; key: string }[] = [
+    const paintModes: {
+      mode: PaintMode;
+      label: string;
+      key: string;
+      disabled?: boolean;
+    }[] = [
       { mode: "positive", label: "+", key: "Z" },
-      { mode: "negative", label: "\u2212", key: "X" },
+      { mode: "negative", label: "\u2212", key: "X", disabled: true },
       { mode: "unpaint", label: "\u00d7", key: "C" },
     ];
-    for (const { mode, label, key } of paintModes) {
+    for (const { mode, label, key, disabled } of paintModes) {
       const btn = document.createElement("button");
       btn.style.cssText = BTN_STYLE;
       btn.textContent = label;
-      btn.title = `${mode} mode (${key})`;
-      btn.addEventListener("click", () => this.setPaintMode(mode));
+      if (disabled) {
+        btn.title = `${mode} mode (${key}) — not yet implemented`;
+        btn.disabled = true;
+        btn.style.opacity = "0.4";
+        btn.style.cursor = "not-allowed";
+      } else {
+        btn.title = `${mode} mode (${key})`;
+        btn.addEventListener("click", () => this.setPaintMode(mode));
+      }
       this.toolRow.appendChild(btn);
       this.paintModeButtons.set(mode, btn);
     }
@@ -302,30 +323,32 @@ export class EditorPanel {
     this.entityRow.style.display = this.editorTab === "entities" ? "flex" : "none";
   }
 
-  toggleMode(): void {
-    if (this.brushMode === "tile") {
-      this.brushMode = "corner";
-    } else if (this.brushMode === "corner") {
-      this.brushMode = "subgrid";
-    } else {
-      this.brushMode = "tile";
-    }
-    this.updateModeButton();
+  setBrushMode(mode: BrushMode): void {
+    this.brushMode = mode;
+    this.updateBrushModeButtons();
   }
 
-  private updateModeButton(): void {
-    const labels: Record<BrushMode, string> = {
-      tile: "Tile",
-      corner: "Corner",
-      subgrid: "Grid",
-    };
-    this.modeButton.textContent = labels[this.brushMode];
+  toggleMode(): void {
+    if (this.brushMode === "tile") {
+      this.setBrushMode("subgrid");
+    } else if (this.brushMode === "subgrid") {
+      this.setBrushMode("corner");
+    } else {
+      this.setBrushMode("tile");
+    }
+  }
+
+  private updateBrushModeButtons(): void {
     const colors: Record<BrushMode, string> = {
       tile: "#888",
-      corner: "#50c8ff",
       subgrid: "#f0a030",
+      corner: "#50c8ff",
     };
-    this.modeButton.style.borderColor = colors[this.brushMode];
+    for (const [mode, btn] of this.brushModeButtons) {
+      const active = mode === this.brushMode;
+      btn.style.borderColor = active ? colors[mode] : "#555";
+      btn.style.background = active ? "#555" : "#444";
+    }
   }
 
   setPaintMode(mode: PaintMode): void {
