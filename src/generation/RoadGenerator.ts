@@ -32,11 +32,12 @@ export interface RoadGenParams {
 
 export const DEFAULT_ROAD_PARAMS: RoadGenParams = {
   spacing: 40,
-  density: 0.4,
+  density: 0.75,
   width: 5,
   sidewalkWidth: 3,
   sidewalks: true,
   centerLines: true,
+  waterPenalty: 1.5,
 };
 
 /**
@@ -72,16 +73,18 @@ function isHSegmentActive(
   params: RoadGenParams,
   islandRadius: number,
 ): boolean {
-  if (edgeHash(gx, gy, seed + H_SEED_OFFSET) >= params.density) return false;
-  // Sample elevation along the center of the road band
+  // Sample elevation along the center of the road band to compute water fraction
   const centerY = gy * params.spacing + (params.width >> 1);
   const startX = gx * params.spacing;
   const endX = (gx + 1) * params.spacing - 1;
+  let waterCount = 0;
   for (let i = 0; i < WATER_SAMPLES; i++) {
     const x = startX + Math.round((i * (endX - startX)) / (WATER_SAMPLES - 1));
-    if (getElevation(x, centerY, seed, islandRadius) < MIN_ROAD_ELEVATION) return false;
+    if (getElevation(x, centerY, seed, islandRadius) < MIN_ROAD_ELEVATION) waterCount++;
   }
-  return true;
+  const waterFraction = waterCount / WATER_SAMPLES;
+  const effectiveDensity = params.density * Math.max(0, 1 - waterFraction * params.waterPenalty);
+  return edgeHash(gx, gy, seed + H_SEED_OFFSET) < effectiveDensity;
 }
 
 /**
@@ -94,15 +97,17 @@ function isVSegmentActive(
   params: RoadGenParams,
   islandRadius: number,
 ): boolean {
-  if (edgeHash(gx, gy, seed + V_SEED_OFFSET) >= params.density) return false;
   const centerX = gx * params.spacing + (params.width >> 1);
   const startY = gy * params.spacing;
   const endY = (gy + 1) * params.spacing - 1;
+  let waterCount = 0;
   for (let i = 0; i < WATER_SAMPLES; i++) {
     const y = startY + Math.round((i * (endY - startY)) / (WATER_SAMPLES - 1));
-    if (getElevation(centerX, y, seed, islandRadius) < MIN_ROAD_ELEVATION) return false;
+    if (getElevation(centerX, y, seed, islandRadius) < MIN_ROAD_ELEVATION) waterCount++;
   }
-  return true;
+  const waterFraction = waterCount / WATER_SAMPLES;
+  const effectiveDensity = params.density * Math.max(0, 1 - waterFraction * params.waterPenalty);
+  return edgeHash(gx, gy, seed + V_SEED_OFFSET) < effectiveDensity;
 }
 
 /**

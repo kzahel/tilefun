@@ -89,9 +89,7 @@ describe("isRoadAtGlobal", () => {
     expect(tested).toBe(true);
   });
 
-  it("disables entire segment when water is along its path", () => {
-    // Check that H segments are all-or-nothing: sample two points mid-segment
-    // (away from V grid lines) and verify they agree.
+  it("segments are all-or-nothing (two points in same segment agree)", () => {
     const params: RoadGenParams = { ...DEFAULT_ROAD_PARAMS, density: 1 };
     const spacing = params.spacing;
     for (let gy = -2; gy < 5; gy++) {
@@ -105,6 +103,29 @@ describe("isRoadAtGlobal", () => {
         expect(road1).toBe(road2);
       }
     }
+  });
+
+  it("waterPenalty=0 allows roads through water", () => {
+    const params: RoadGenParams = { ...DEFAULT_ROAD_PARAMS, density: 1, waterPenalty: 0 };
+    // With density=1 and no water penalty, every segment should be active.
+    // Check a grid line that we know exists at gy=0.
+    const centerY = 0 * params.spacing + (params.width >> 1);
+    const midX = 0 * params.spacing + (params.spacing >> 1);
+    expect(isRoadAtGlobal(midX, centerY, SEED, params, 0)).toBe(true);
+  });
+
+  it("higher density produces more roads than lower density", () => {
+    const countRoads = (density: number) => {
+      const params: RoadGenParams = { ...DEFAULT_ROAD_PARAMS, density };
+      let count = 0;
+      for (let tx = 0; tx < 200; tx++) {
+        for (let ty = 0; ty < 200; ty++) {
+          if (isRoadAtGlobal(tx, ty, SEED, params, 0)) count++;
+        }
+      }
+      return count;
+    };
+    expect(countRoads(0.75)).toBeGreaterThan(countRoads(0.4));
   });
 });
 

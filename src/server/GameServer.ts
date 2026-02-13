@@ -671,7 +671,7 @@ export class GameServer {
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
     const type: WorldType = meta?.worldType ?? "generated";
     const seed = meta?.seed ?? 42;
-    const roadParams = meta?.roadParams ?? DEFAULT_ROAD_PARAMS;
+    const roadParams = { ...DEFAULT_ROAD_PARAMS, ...meta?.roadParams };
     switch (type) {
       case "flat":
         return new FlatStrategy();
