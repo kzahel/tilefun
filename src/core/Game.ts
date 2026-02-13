@@ -19,11 +19,19 @@ import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
+import { FlatStrategy } from "../generation/FlatStrategy.js";
+import { OnionStrategy } from "../generation/OnionStrategy.js";
+import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
-import { dbNameForWorld, WorldRegistry } from "../persistence/WorldRegistry.js";
+import {
+  dbNameForWorld,
+  type WorldMeta,
+  WorldRegistry,
+  type WorldType,
+} from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
@@ -191,8 +199,8 @@ export class Game {
     this.mainMenu.onSelect = (id) => {
       this.loadWorld(id).then(() => this.mainMenu.hide());
     };
-    this.mainMenu.onCreate = (name) => {
-      this.registry.createWorld(name).then((meta) => {
+    this.mainMenu.onCreate = (name, worldType, seed) => {
+      this.registry.createWorld(name, worldType, seed).then((meta) => {
         this.loadWorld(meta.id).then(() => this.mainMenu.hide());
       });
     };
@@ -239,8 +247,9 @@ export class Game {
       this.saveManager.close();
     }
 
-    // Create fresh world state
-    this.world = new World();
+    // Create fresh world state with the correct generation strategy
+    const worldMeta = await this.registry.getWorld(worldId);
+    this.world = new World(this.buildStrategy(worldMeta));
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
     this.player = createPlayer(0, 0);
@@ -565,6 +574,8 @@ export class Game {
     if (!this.debugPanel.paused) {
       const px = this.player.position.wx;
       const py = this.player.position.wy;
+      // Collect buddies for hostile AI targeting
+      const buddies = this.entityManager.entities.filter((e) => e.wanderAI?.following);
       for (const entity of this.entityManager.entities) {
         if (entity.wanderAI) {
           const dx = Math.abs(entity.position.wx - px);
@@ -581,7 +592,7 @@ export class Game {
             entity.wanderAI.following ||
             entity.wanderAI.befriendable
           ) {
-            updateBehaviorAI(entity, dt, Math.random, this.player.position);
+            updateBehaviorAI(entity, dt, Math.random, this.player.position, buddies);
           } else {
             updateWanderAI(entity, dt, Math.random);
           }
@@ -655,6 +666,29 @@ export class Game {
 
             this.invincibilityTimer = 1.5;
             this.saveManager?.markMetaDirty();
+            break;
+          }
+        }
+      }
+
+      // Baddie vs buddy contact: scare buddy away (stop following + knockback)
+      for (const baddie of this.entityManager.entities) {
+        if (!baddie.wanderAI?.hostile) continue;
+        for (const buddy of this.entityManager.entities) {
+          if (!buddy.wanderAI?.following) continue;
+          const bdx = buddy.position.wx - baddie.position.wx;
+          const bdy = buddy.position.wy - baddie.position.wy;
+          if (bdx * bdx + bdy * bdy < 14 * 14) {
+            buddy.wanderAI.following = false;
+            buddy.wanderAI.state = "walking";
+            const flee = Math.sqrt(bdx * bdx + bdy * bdy) || 1;
+            buddy.wanderAI.dirX = bdx / flee;
+            buddy.wanderAI.dirY = bdy / flee;
+            buddy.wanderAI.timer = 1.5;
+            if (buddy.velocity) {
+              buddy.velocity.vx = (bdx / flee) * 60;
+              buddy.velocity.vy = (bdy / flee) * 60;
+            }
             break;
           }
         }
@@ -813,6 +847,20 @@ export class Game {
     // Touch joystick overlay (not in editor mode)
     if (!this.editorEnabled) {
       this.touchJoystick.draw(this.ctx);
+    }
+  }
+
+  /** Build the terrain generation strategy for a world based on its metadata. */
+  private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
+    const type: WorldType = meta?.worldType ?? "generated";
+    const seed = meta?.seed ?? 42;
+    switch (type) {
+      case "flat":
+        return new FlatStrategy();
+      case "island":
+        return new OnionStrategy(seed, 20);
+      default:
+        return new OnionStrategy(seed);
     }
   }
 

@@ -72,6 +72,7 @@ export function updateBehaviorAI(
   dt: number,
   random: () => number,
   playerPos: { wx: number; wy: number },
+  buddies?: readonly Entity[],
 ): void {
   const ai = entity.wanderAI;
   const vel = entity.velocity;
@@ -84,12 +85,29 @@ export function updateBehaviorAI(
 
   // --- Chase logic (hostile baddies) ---
   if (ai.chaseRange && ai.hostile && !ai.following) {
-    if (dist < ai.chaseRange) {
+    // Find closest target: player or any buddy
+    let targetDx = dx;
+    let targetDy = dy;
+    let targetDist = dist;
+    if (buddies) {
+      for (const buddy of buddies) {
+        const bdx = buddy.position.wx - entity.position.wx;
+        const bdy = buddy.position.wy - entity.position.wy;
+        const bdist = Math.sqrt(bdx * bdx + bdy * bdy);
+        if (bdist < targetDist) {
+          targetDx = bdx;
+          targetDy = bdy;
+          targetDist = bdist;
+        }
+      }
+    }
+
+    if (targetDist < ai.chaseRange) {
       ai.state = "chasing";
       const speed = ai.chaseSpeed ?? ai.speed;
-      if (dist > 2) {
-        vel.vx = (dx / dist) * speed;
-        vel.vy = (dy / dist) * speed;
+      if (targetDist > 2) {
+        vel.vx = (targetDx / targetDist) * speed;
+        vel.vy = (targetDy / targetDist) * speed;
       }
       if (entity.sprite) {
         entity.sprite.moving = true;
@@ -97,7 +115,7 @@ export function updateBehaviorAI(
       return;
     }
     if (ai.state === "chasing") {
-      // Lost the player — return to wandering
+      // Lost all targets — return to wandering
       ai.state = "idle";
       ai.timer = ai.idleMin + random() * (ai.idleMax - ai.idleMin);
     }

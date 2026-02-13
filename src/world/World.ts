@@ -1,6 +1,6 @@
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { FlatStrategy } from "../generation/FlatStrategy.js";
+import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
@@ -15,7 +15,7 @@ import { tileToChunk, tileToLocal } from "./types.js";
 export class World {
   readonly chunks: ChunkManager;
 
-  constructor(strategy: TerrainStrategy = new FlatStrategy()) {
+  constructor(strategy: TerrainStrategy = new OnionStrategy()) {
     registerDefaultTiles();
     this.chunks = new ChunkManager();
     this.chunks.setGenerator(strategy);

@@ -1,4 +1,4 @@
-import type { WorldMeta } from "../persistence/WorldRegistry.js";
+import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 import { relativeTime } from "./relativeTime.js";
 
 const OVERLAY_STYLE = `
@@ -34,7 +34,7 @@ export class MainMenu {
   private worldCount = 0;
 
   onSelect: ((worldId: string) => void) | null = null;
-  onCreate: ((name: string) => void) | null = null;
+  onCreate: ((name: string, worldType: WorldType, seed?: number) => void) | null = null;
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
   onClose: (() => void) | null = null;
@@ -54,27 +54,73 @@ export class MainMenu {
       "display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; width: 320px;";
     this.overlay.appendChild(this.listEl);
 
-    // New World button + inline input
-    const newRow = document.createElement("div");
-    newRow.style.cssText = "display: flex; gap: 8px; width: 320px;";
+    // New World controls
+    const newSection = document.createElement("div");
+    newSection.style.cssText = "display: flex; flex-direction: column; gap: 8px; width: 320px;";
 
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.placeholder = "World name...";
-    nameInput.style.cssText = `
+    const INPUT_STYLE = `
       flex: 1; font: 14px monospace; padding: 8px;
       background: rgba(255,255,255,0.1); color: #fff;
       border: 1px solid #888; border-radius: 4px; outline: none;
     `;
 
+    // Name + Create button row
+    const nameRow = document.createElement("div");
+    nameRow.style.cssText = "display: flex; gap: 8px;";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "World name...";
+    nameInput.style.cssText = INPUT_STYLE;
+
     const createBtn = document.createElement("button");
     createBtn.textContent = "New World";
     createBtn.style.cssText = BTN_STYLE;
 
+    nameRow.append(nameInput, createBtn);
+
+    // Type + Seed row
+    const optRow = document.createElement("div");
+    optRow.style.cssText = "display: flex; gap: 8px; align-items: center;";
+
+    const typeSelect = document.createElement("select");
+    typeSelect.style.cssText = `
+      font: 14px monospace; padding: 6px 8px;
+      background: rgba(255,255,255,0.1); color: #fff;
+      border: 1px solid #888; border-radius: 4px; outline: none;
+    `;
+    for (const [value, label] of [
+      ["generated", "Generated"],
+      ["flat", "Flat Grass"],
+      ["island", "Island"],
+    ] as const) {
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = label;
+      opt.style.background = "#222";
+      typeSelect.appendChild(opt);
+    }
+
+    const seedInput = document.createElement("input");
+    seedInput.type = "number";
+    seedInput.placeholder = "Seed (random)";
+    seedInput.style.cssText = `${INPUT_STYLE} width: 120px; flex: none;`;
+
+    typeSelect.addEventListener("change", () => {
+      seedInput.style.display = typeSelect.value === "flat" ? "none" : "";
+    });
+    typeSelect.addEventListener("keydown", (e) => e.stopPropagation());
+
+    optRow.append(typeSelect, seedInput);
+
     const doCreate = () => {
       const name = nameInput.value.trim() || `World ${this.worldCount + 1}`;
+      const worldType = typeSelect.value as WorldType;
+      const seedVal = seedInput.value.trim();
+      const seed = seedVal ? Number(seedVal) : undefined;
       nameInput.value = "";
-      this.onCreate?.(name);
+      seedInput.value = "";
+      this.onCreate?.(name, worldType, seed);
     };
 
     createBtn.addEventListener("click", doCreate);
@@ -83,9 +129,14 @@ export class MainMenu {
       e.stopPropagation();
     });
     nameInput.addEventListener("keyup", (e) => e.stopPropagation());
+    seedInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") doCreate();
+      e.stopPropagation();
+    });
+    seedInput.addEventListener("keyup", (e) => e.stopPropagation());
 
-    newRow.append(nameInput, createBtn);
-    this.overlay.appendChild(newRow);
+    newSection.append(nameRow, optRow);
+    this.overlay.appendChild(newSection);
 
     // Resume button to close menu and return to game
     const resumeBtn = document.createElement("button");

@@ -2,11 +2,17 @@ const REGISTRY_DB = "tilefun-registry";
 const REGISTRY_VERSION = 1;
 const STORE_WORLDS = "worlds";
 
+export type WorldType = "generated" | "flat" | "island";
+
 export interface WorldMeta {
   id: string;
   name: string;
   createdAt: number;
   lastPlayedAt: number;
+  /** Noise seed for generated worlds. Missing = 42 (back-compat). */
+  seed?: number;
+  /** World generation type. Missing = "generated" (back-compat). */
+  worldType?: WorldType;
 }
 
 export function dbNameForWorld(id: string): string {
@@ -56,7 +62,22 @@ export class WorldRegistry {
     });
   }
 
-  async createWorld(name: string): Promise<WorldMeta> {
+  async getWorld(id: string): Promise<WorldMeta | undefined> {
+    const db = this.db;
+    if (!db) return undefined;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_WORLDS, "readonly");
+      const req = tx.objectStore(STORE_WORLDS).get(id);
+      req.onsuccess = () => resolve(req.result as WorldMeta | undefined);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async createWorld(
+    name: string,
+    worldType: WorldType = "generated",
+    seed?: number,
+  ): Promise<WorldMeta> {
     const db = this.db;
     if (!db) throw new Error("Registry not open");
     const now = Date.now();
@@ -65,6 +86,8 @@ export class WorldRegistry {
       name,
       createdAt: now,
       lastPlayedAt: now,
+      seed: seed ?? Math.floor(Math.random() * 2147483647),
+      worldType,
     };
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_WORLDS, "readwrite");
