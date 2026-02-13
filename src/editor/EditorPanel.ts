@@ -34,12 +34,12 @@ interface PaletteEntry {
 
 const NATURAL_PALETTE: PaletteEntry[] = [
   { terrainId: TerrainId.Grass, label: "Grass", color: "#6b935f" },
-  { terrainId: TerrainId.ShallowWater, label: "Water", color: "#4fa4b8" },
-  { terrainId: TerrainId.DeepWater, label: "Deep", color: "#2a5a8a" },
+  { terrainId: TerrainId.ShallowWater, label: "Shlw Water", color: "#4fa4b8" },
+  { terrainId: TerrainId.DeepWater, label: "Deep Water", color: "#2a5a8a" },
   { terrainId: TerrainId.Sand, label: "Sand", color: "#c8a84e" },
   { terrainId: TerrainId.SandLight, label: "Lt Sand", color: "#d4b86a" },
   { terrainId: TerrainId.DirtLight, label: "Lt Dirt", color: "#a08050" },
-  { terrainId: TerrainId.DirtWarm, label: "Dirt", color: "#8b6b3e" },
+  { terrainId: TerrainId.DirtWarm, label: "Wrm Dirt", color: "#8b6b3e" },
 ];
 
 const ROAD_PALETTE: PaletteEntry[] = [
@@ -94,6 +94,9 @@ export class EditorPanel {
   private readonly entityButtons: HTMLButtonElement[] = [];
   private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
   private readonly bridgeButton: HTMLButtonElement;
+  private readonly subgridSeparator: HTMLDivElement;
+  private readonly sizeLabel: HTMLSpanElement;
+  private readonly bridgeLabel: HTMLSpanElement;
   private readonly brushSizeButton: HTMLButtonElement;
   private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
   private pendingClear: TerrainId | null = null;
@@ -102,6 +105,7 @@ export class EditorPanel {
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
   paintMode: PaintMode = "positive";
+  private _temporaryUnpaint = false;
   /** Subgrid brush shape: 1=1x1, 2=2x2, 3=3x3, "cross"=5-point cross. */
   subgridShape: SubgridShape = 1;
   /** Max bridge insertion depth (0 = no bridging, 1-3 = auto-insert transitions). */
@@ -136,15 +140,17 @@ export class EditorPanel {
     this.toolRow = document.createElement("div");
     this.toolRow.style.cssText = ROW_STYLE;
 
-    const brushModes: { mode: BrushMode; icon: string; key: string }[] = [
-      { mode: "tile", icon: "\u25a3", key: "M" },
-      { mode: "subgrid", icon: "\u2b29", key: "M" },
-      { mode: "corner", icon: "\u2b26", key: "M" },
+    this.toolRow.appendChild(this.makeLabel("Brush"));
+    const brushModes: { mode: BrushMode; label: string; key: string }[] = [
+      { mode: "tile", label: "\u25a0", key: "M" },
+      { mode: "subgrid", label: "\u229e", key: "M" },
+      { mode: "corner", label: "\u25c7", key: "M" },
     ];
-    for (const { mode, icon, key } of brushModes) {
+    for (const { mode, label, key } of brushModes) {
       const btn = document.createElement("button");
       btn.style.cssText = BTN_STYLE;
-      btn.textContent = icon;
+      btn.style.fontSize = "16px";
+      btn.textContent = label;
       btn.title = `${mode} brush (${key})`;
       btn.addEventListener("click", () => this.setBrushMode(mode));
       this.toolRow.appendChild(btn);
@@ -154,6 +160,7 @@ export class EditorPanel {
 
     // Paint mode buttons: Positive / Negative / Unpaint
     this.toolRow.appendChild(this.makeSeparator());
+    this.toolRow.appendChild(this.makeLabel("Paint"));
     const paintModes: {
       mode: PaintMode;
       label: string;
@@ -181,7 +188,10 @@ export class EditorPanel {
       this.paintModeButtons.set(mode, btn);
     }
     this.updatePaintModeButtons();
-    this.toolRow.appendChild(this.makeSeparator());
+    this.subgridSeparator = this.makeSeparator();
+    this.toolRow.appendChild(this.subgridSeparator);
+    this.sizeLabel = this.makeLabel("Size");
+    this.toolRow.appendChild(this.sizeLabel);
 
     this.brushSizeButton = document.createElement("button");
     this.brushSizeButton.style.cssText = BTN_STYLE;
@@ -190,12 +200,15 @@ export class EditorPanel {
     this.toolRow.appendChild(this.brushSizeButton);
     this.updateBrushSizeButton();
 
+    this.bridgeLabel = this.makeLabel("Bridge");
+    this.toolRow.appendChild(this.bridgeLabel);
     this.bridgeButton = document.createElement("button");
     this.bridgeButton.style.cssText = BTN_STYLE;
     this.bridgeButton.title = "Bridge depth: auto-insert transitions (B)";
     this.bridgeButton.addEventListener("click", () => this.cycleBridgeDepth());
     this.toolRow.appendChild(this.bridgeButton);
     this.updateBridgeButton();
+    this.updateSubgridToolVisibility();
 
     this.container.appendChild(this.toolRow);
 
@@ -277,8 +290,27 @@ export class EditorPanel {
     `;
     clearBtn.textContent = "Clear";
     clearBtn.title = "Fill all chunks with selected terrain";
+    let confirmTimer = 0;
     clearBtn.addEventListener("click", () => {
-      this.pendingClear = this.selectedTerrain;
+      if (clearBtn.dataset.confirm === "1") {
+        this.pendingClear = this.selectedTerrain;
+        clearBtn.textContent = "Clear";
+        clearBtn.style.borderColor = "#555";
+        clearBtn.style.background = "#333";
+        delete clearBtn.dataset.confirm;
+        window.clearTimeout(confirmTimer);
+      } else {
+        clearBtn.dataset.confirm = "1";
+        clearBtn.textContent = "Sure?";
+        clearBtn.style.borderColor = "#f55";
+        clearBtn.style.background = "#633";
+        confirmTimer = window.setTimeout(() => {
+          clearBtn.textContent = "Clear";
+          clearBtn.style.borderColor = "#555";
+          clearBtn.style.background = "#333";
+          delete clearBtn.dataset.confirm;
+        }, 2000);
+      }
     });
     row.appendChild(clearBtn);
 
@@ -289,6 +321,13 @@ export class EditorPanel {
     const sep = document.createElement("div");
     sep.style.cssText = "width: 1px; height: 32px; background: #555; margin: 0 4px;";
     return sep;
+  }
+
+  private makeLabel(text: string): HTMLSpanElement {
+    const lbl = document.createElement("span");
+    lbl.style.cssText = "font: 9px monospace; color: #888; margin-right: 2px;";
+    lbl.textContent = text;
+    return lbl;
   }
 
   get visible(): boolean {
@@ -326,6 +365,7 @@ export class EditorPanel {
   setBrushMode(mode: BrushMode): void {
     this.brushMode = mode;
     this.updateBrushModeButtons();
+    this.updateSubgridToolVisibility();
   }
 
   toggleMode(): void {
@@ -339,15 +379,33 @@ export class EditorPanel {
   }
 
   private updateBrushModeButtons(): void {
-    const colors: Record<BrushMode, string> = {
-      tile: "#888",
-      subgrid: "#f0a030",
-      corner: "#50c8ff",
-    };
     for (const [mode, btn] of this.brushModeButtons) {
       const active = mode === this.brushMode;
-      btn.style.borderColor = active ? colors[mode] : "#555";
+      btn.style.borderColor = active ? "#fff" : "#555";
       btn.style.background = active ? "#555" : "#444";
+    }
+  }
+
+  private updateSubgridToolVisibility(): void {
+    const show = this.brushMode !== "tile";
+    const d = show ? "" : "none";
+    this.subgridSeparator.style.display = d;
+    this.sizeLabel.style.display = d;
+    this.brushSizeButton.style.display = d;
+    this.bridgeLabel.style.display = d;
+    this.bridgeButton.style.display = d;
+  }
+
+  /** The paint mode actually in effect (accounts for right-click temporary unpaint). */
+  get effectivePaintMode(): PaintMode {
+    return this._temporaryUnpaint ? "unpaint" : this.paintMode;
+  }
+
+  /** Set temporary unpaint override (while right-click held). */
+  setTemporaryUnpaint(active: boolean): void {
+    if (this._temporaryUnpaint !== active) {
+      this._temporaryUnpaint = active;
+      this.updatePaintModeButtons();
     }
   }
 
@@ -375,8 +433,9 @@ export class EditorPanel {
       negative: "#c84",
       unpaint: "#f55",
     };
+    const effective = this.effectivePaintMode;
     for (const [mode, btn] of this.paintModeButtons) {
-      const active = mode === this.paintMode;
+      const active = mode === effective;
       btn.style.borderColor = active ? colors[mode] : "#555";
       btn.style.background = active ? "#555" : "#444";
     }

@@ -57,6 +57,8 @@ export class EditorMode {
   private pendingEntityDeletions: number[] = [];
   private isPainting = false;
   private isPanning = false;
+  /** True while right-click is held for temporary unpaint. */
+  rightClickUnpaint = false;
   private spaceDown = false;
   private keysDown = new Set<string>();
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
@@ -341,9 +343,10 @@ export class EditorMode {
       return;
     }
 
-    // Left button = paint terrain
-    if (e.button === 0) {
+    // Left button = paint terrain, Right button = unpaint
+    if (e.button === 0 || e.button === 2) {
       this.isPainting = true;
+      this.rightClickUnpaint = e.button === 2;
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;
       this.lastPaintedSubgrid.gsx = -Infinity;
@@ -375,28 +378,22 @@ export class EditorMode {
   private handleMouseUp(_e: MouseEvent): void {
     this.isPainting = false;
     this.isPanning = false;
+    this.rightClickUnpaint = false;
   }
 
   private handleWheel(e: WheelEvent): void {
     e.preventDefault();
     const { sx, sy } = this.canvasCoords(e);
 
-    // ctrlKey is set for pinch-to-zoom on trackpads
-    if (e.ctrlKey) {
-      // Zoom toward cursor
-      const worldBefore = this.camera.screenToWorld(sx, sy);
-      const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-      this.camera.zoom = Math.max(0.05, Math.min(3, this.camera.zoom * zoomFactor));
-      const worldAfter = this.camera.screenToWorld(sx, sy);
+    // Always zoom toward cursor
+    const worldBefore = this.camera.screenToWorld(sx, sy);
+    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+    this.camera.zoom = Math.max(0.05, Math.min(3, this.camera.zoom * zoomFactor));
+    const worldAfter = this.camera.screenToWorld(sx, sy);
 
-      // Adjust camera so the world point under cursor stays fixed
-      this.camera.x += worldBefore.wx - worldAfter.wx;
-      this.camera.y += worldBefore.wy - worldAfter.wy;
-    } else {
-      // Trackpad scroll → pan
-      this.camera.x += e.deltaX / this.camera.scale;
-      this.camera.y += e.deltaY / this.camera.scale;
-    }
+    // Adjust camera so the world point under cursor stays fixed
+    this.camera.x += worldBefore.wx - worldAfter.wx;
+    this.camera.y += worldBefore.wy - worldAfter.wy;
   }
 
   // --- Touch handlers ---

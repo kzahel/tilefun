@@ -349,9 +349,10 @@ export class Game {
 
     // Editor mode: paint terrain or place entities, skip gameplay
     if (this.editorEnabled) {
+      this.editorPanel.setTemporaryUnpaint(this.editorMode.rightClickUnpaint);
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.brushMode = this.editorPanel.brushMode;
-      this.editorMode.paintMode = this.editorPanel.paintMode;
+      this.editorMode.paintMode = this.editorPanel.effectivePaintMode;
       this.editorMode.editorTab = this.editorPanel.editorTab;
       this.editorMode.selectedEntityType = this.editorPanel.selectedEntityType;
       this.editorMode.entities = this.entityManager.entities;
@@ -530,7 +531,7 @@ export class Game {
     // Tile (tx,ty) covers subgrid (2*tx, 2*ty) to (2*tx+2, 2*ty+2)
     const gsx0 = 2 * tx;
     const gsy0 = 2 * ty;
-    const unpaint = this.editorPanel.paintMode === "unpaint";
+    const unpaint = this.editorPanel.effectivePaintMode === "unpaint";
     for (let dy = 0; dy <= 2; dy++) {
       for (let dx = 0; dx <= 2; dx++) {
         const gx = gsx0 + dx;
@@ -548,7 +549,7 @@ export class Game {
 
   /** Corner brush: 3×3 subgrid stamp centered on a tile vertex (even subgrid coord). */
   private applyCornerEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
-    const unpaint = this.editorPanel.paintMode === "unpaint";
+    const unpaint = this.editorPanel.effectivePaintMode === "unpaint";
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
         const gx = gsx + dx;
@@ -577,7 +578,7 @@ export class Game {
     const shape = this.editorPanel.subgridShape;
     const points = this.getSubgridBrushPoints(gsx, gsy, shape);
 
-    if (this.editorPanel.paintMode === "unpaint") {
+    if (this.editorPanel.effectivePaintMode === "unpaint") {
       for (const [px, py] of points) {
         if (this.getGlobalSubgrid(px, py) === terrainId) {
           const replacement = this.findUnpaintReplacement(px, py, terrainId);
@@ -839,7 +840,7 @@ export class Game {
   }
 
   private getCursorColor(): { fill: string; stroke: string } {
-    const mode = this.editorPanel.paintMode;
+    const mode = this.editorPanel.effectivePaintMode;
     if (mode === "unpaint") {
       return { fill: "rgba(255, 80, 80, 0.25)", stroke: "rgba(255, 80, 80, 0.6)" };
     }
@@ -875,7 +876,7 @@ export class Game {
     const halfTile = TILE_SIZE / 2;
     const halfTileScreen = halfTile * this.camera.scale;
     const shape = this.editorPanel.subgridShape;
-    const paintMode = this.editorPanel.paintMode;
+    const paintMode = this.editorPanel.effectivePaintMode;
 
     // Choose color based on paint mode
     const baseColor =
@@ -939,7 +940,7 @@ export class Game {
     if (!Number.isFinite(gsx)) return;
 
     const halfTile = TILE_SIZE / 2;
-    const paintMode = this.editorPanel.paintMode;
+    const paintMode = this.editorPanel.effectivePaintMode;
     const baseColor =
       paintMode === "unpaint"
         ? "255, 80, 80"
