@@ -803,8 +803,8 @@ export class EditorPanel {
       if (sheetIdx >= 0) {
         const sheet = blendSheets[sheetIdx];
         if (sheet) {
-          // (4,1) = mask 15 (all cardinals, no corners): rounded primary blob with secondary in corners
-          this.renderPreviewCanvas(btn, sheet, 4, 1, 44, 44);
+          // (5,2) = mask 55 (N+W+E+NW+NE): top ~2/3 primary, bottom 1/3 secondary
+          this.renderPreviewCanvas(btn, sheet, 5, 2, 44, 44);
         }
       }
     }

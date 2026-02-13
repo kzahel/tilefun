@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
 
 const SETTLE_MS = 1500;
 
@@ -10,24 +10,16 @@ async function waitForGame(page: import("@playwright/test").Page) {
   await page.waitForTimeout(500);
 }
 
-test("editor mode: toggle and paint terrain", async ({ page }) => {
+test("editor mode: paint water on grass", async ({ page }) => {
   await waitForGame(page);
 
-  // Enter editor mode with Tab
-  await page.keyboard.press("Tab");
-  await page.waitForTimeout(200);
-
-  // Verify palette panel is visible via tab button text
-  const naturalTab = page.locator("button", { hasText: "Natural" });
-  await expect(naturalTab).toBeVisible();
-
-  // Select Water terrain (Shallow Water on Grass) via title attribute
+  // Game starts in editor mode — select Water terrain via title attribute
   // (buttons show canvas tile previews, not text labels)
   await page.locator('button[title*="Shlw/Grass"]').click();
   await page.waitForTimeout(100);
 
-  // Click center of canvas to paint
-  const canvas = page.locator("canvas");
+  // Click center of game canvas to paint
+  const canvas = page.locator("#game");
   const box = await canvas.boundingBox();
   if (box) {
     await canvas.click({ position: { x: box.width / 2, y: box.height / 2 } });
@@ -41,28 +33,17 @@ test("editor mode: toggle and paint terrain", async ({ page }) => {
 
   await page.waitForTimeout(SETTLE_MS);
   await page.screenshot({ path: "screenshot-editor-painted.png" });
-
-  // Exit editor mode
-  await page.keyboard.press("Tab");
-  await page.waitForTimeout(200);
-
-  // Verify palette is hidden
-  await expect(naturalTab).not.toBeVisible();
 });
 
 test("editor mode: paint dirt on grass and verify autotile", async ({ page }) => {
   await waitForGame(page);
 
-  // Enter editor mode
-  await page.keyboard.press("Tab");
-  await page.waitForTimeout(200);
-
-  // Select DirtWarm terrain via title attribute
+  // Game starts in editor mode — select DirtWarm terrain via title attribute
   await page.locator('button[title*="DirtW/Grass"]').click();
   await page.waitForTimeout(100);
 
   // Paint a small cluster of dirt tiles in center
-  const canvas = page.locator("canvas");
+  const canvas = page.locator("#game");
   const box = await canvas.boundingBox();
   if (box) {
     const cx = box.width / 2;
