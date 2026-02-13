@@ -3,7 +3,7 @@ import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { CAMERA_LERP, ENTITY_ACTIVATION_DISTANCE, TILE_SIZE } from "../config/constants.js";
+import { CAMERA_LERP, TILE_SIZE } from "../config/constants.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
@@ -14,12 +14,10 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
-import { createGem } from "../entities/Gem.js";
 import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
-import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
@@ -39,6 +37,9 @@ import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
 import type { Renderable } from "../rendering/Renderable.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
+import type { GameplaySession } from "../server/GameplaySimulation.js";
+import { tickGameplay } from "../server/GameplaySimulation.js";
+import { tickAllAI } from "../server/tickAllAI.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -71,10 +72,13 @@ export class Game {
   private currentWorldId: string | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
-  private gemsCollected = 0;
-  private invincibilityTimer = 0;
-  private knockbackVx = 0;
-  private knockbackVy = 0;
+  private gameplaySession: GameplaySession = {
+    player: null as unknown as GameplaySession["player"],
+    gemsCollected: 0,
+    invincibilityTimer: 0,
+    knockbackVx: 0,
+    knockbackVy: 0,
+  };
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
   private frameCount = 0;
   private fpsTimer = 0;
@@ -94,10 +98,11 @@ export class Game {
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
     this.player = createPlayer(0, 0);
+    this.gameplaySession.player = this.player;
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
-    this.terrainEditor = new TerrainEditor(this.world, new SaveManager("_unused"), this.adjacency);
+    this.terrainEditor = new TerrainEditor(this.world, () => {}, this.adjacency);
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera);
     this.editorPanel = new EditorPanel();
@@ -255,12 +260,23 @@ export class Game {
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
     this.player = createPlayer(0, 0);
+    this.gameplaySession = {
+      player: this.player,
+      gemsCollected: 0,
+      invincibilityTimer: 0,
+      knockbackVx: 0,
+      knockbackVy: 0,
+    };
     this.entityManager.spawn(this.player);
 
     // Open persistence for this world
     const dbName = dbNameForWorld(worldId);
     this.saveManager = new SaveManager(dbName);
-    this.terrainEditor = new TerrainEditor(this.world, this.saveManager, this.adjacency);
+    this.terrainEditor = new TerrainEditor(
+      this.world,
+      (key) => this.saveManager?.markChunkDirty(key),
+      this.adjacency,
+    );
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
@@ -286,14 +302,14 @@ export class Game {
         }
       }
       this.entityManager.setNextId(savedMeta.nextEntityId);
-      this.gemsCollected = savedMeta.gemsCollected ?? 0;
+      this.gameplaySession.gemsCollected = savedMeta.gemsCollected ?? 0;
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
     } else {
       this.camera.x = 0;
       this.camera.y = 0;
       this.camera.zoom = 1;
-      this.gemsCollected = 0;
+      this.gameplaySession.gemsCollected = 0;
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
       findWalkableSpawn(this.player, this.world);
@@ -582,32 +598,7 @@ export class Game {
 
     // Entity simulation (NPC AI + physics), unless paused via debug panel
     if (!this.debugPanel.paused) {
-      const px = this.player.position.wx;
-      const py = this.player.position.wy;
-      // Collect buddies for hostile AI targeting
-      const buddies = this.entityManager.entities.filter((e) => e.wanderAI?.following);
-      for (const entity of this.entityManager.entities) {
-        if (entity.wanderAI) {
-          const dx = Math.abs(entity.position.wx - px);
-          const dy = Math.abs(entity.position.wy - py);
-          if (dx > ENTITY_ACTIVATION_DISTANCE || dy > ENTITY_ACTIVATION_DISTANCE) {
-            if (entity.velocity) {
-              entity.velocity.vx = 0;
-              entity.velocity.vy = 0;
-            }
-            continue;
-          }
-          if (
-            entity.wanderAI.chaseRange ||
-            entity.wanderAI.following ||
-            entity.wanderAI.befriendable
-          ) {
-            updateBehaviorAI(entity, dt, Math.random, this.player.position, buddies);
-          } else {
-            updateWanderAI(entity, dt, Math.random);
-          }
-        }
-      }
+      tickAllAI(this.entityManager.entities, this.player.position, dt, Math.random);
 
       // Update all entities (velocity → collision-resolved position, animation timers)
       // Noclip: temporarily remove player collider so collision is skipped
@@ -629,110 +620,13 @@ export class Game {
 
     // Gem spawning + collection (play mode only)
     if (!this.editorEnabled && !this.debugPanel.paused) {
-      this.gemSpawner.update(dt, this.player, this.camera, this.entityManager, this.world);
-      this.baddieSpawner.update(dt, this.player, this.camera, this.entityManager, this.world);
+      const visibleRange = this.camera.getVisibleChunkRange();
+      this.gemSpawner.update(dt, this.player, visibleRange, this.entityManager, this.world);
+      this.baddieSpawner.update(dt, this.player, visibleRange, this.entityManager, this.world);
 
-      const px = this.player.position.wx;
-      const py = this.player.position.wy + (this.player.collider?.offsetY ?? 0);
-
-      // Check for gem collection (use player body center, not feet)
-      for (const entity of this.entityManager.entities) {
-        if (entity.type !== "gem") continue;
-        const dx = entity.position.wx - px;
-        const dy = entity.position.wy - py;
-        if (dx * dx + dy * dy < 18 * 18) {
-          this.entityManager.remove(entity.id);
-          this.gemsCollected++;
-          this.saveManager?.markMetaDirty();
-          break;
-        }
-      }
-
-      // Baddie contact check (knockback + gem loss)
-      if (this.invincibilityTimer <= 0) {
-        for (const entity of this.entityManager.entities) {
-          if (!entity.wanderAI?.hostile) continue;
-          const dx = entity.position.wx - px;
-          const dy = entity.position.wy - py;
-          if (dx * dx + dy * dy < 12 * 12) {
-            // Knockback away from baddie
-            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-            this.knockbackVx = (-dx / dist) * 200;
-            this.knockbackVy = (-dy / dist) * 200;
-
-            // Scatter lost gems
-            const lost = Math.min(3, this.gemsCollected);
-            this.gemsCollected -= lost;
-            for (let i = 0; i < lost; i++) {
-              const angle = (Math.PI * 2 * i) / Math.max(lost, 1) + Math.random() * 0.5;
-              const gem = this.entityManager.spawn(
-                createGem(px + Math.cos(angle) * 8, py + Math.sin(angle) * 8),
-              );
-              gem.velocity = {
-                vx: Math.cos(angle) * 80,
-                vy: Math.sin(angle) * 80,
-              };
-            }
-
-            this.invincibilityTimer = 1.5;
-            this.saveManager?.markMetaDirty();
-            break;
-          }
-        }
-      }
-
-      // Baddie vs buddy contact: scare buddy away (stop following + knockback)
-      for (const baddie of this.entityManager.entities) {
-        if (!baddie.wanderAI?.hostile) continue;
-        for (const buddy of this.entityManager.entities) {
-          if (!buddy.wanderAI?.following) continue;
-          const bdx = buddy.position.wx - baddie.position.wx;
-          const bdy = buddy.position.wy - baddie.position.wy;
-          if (bdx * bdx + bdy * bdy < 14 * 14) {
-            buddy.wanderAI.following = false;
-            buddy.wanderAI.state = "walking";
-            const flee = Math.sqrt(bdx * bdx + bdy * bdy) || 1;
-            buddy.wanderAI.dirX = bdx / flee;
-            buddy.wanderAI.dirY = bdy / flee;
-            buddy.wanderAI.timer = 1.5;
-            if (buddy.velocity) {
-              buddy.velocity.vx = (bdx / flee) * 60;
-              buddy.velocity.vy = (bdy / flee) * 60;
-            }
-            break;
-          }
-        }
-      }
-
-      // Tick invincibility + knockback decay
-      if (this.invincibilityTimer > 0) {
-        this.invincibilityTimer -= dt;
-        if (this.player.velocity) {
-          this.player.velocity.vx += this.knockbackVx * dt * 3;
-          this.player.velocity.vy += this.knockbackVy * dt * 3;
-        }
-        const decay = Math.max(0, 1 - dt * 5);
-        this.knockbackVx *= decay;
-        this.knockbackVy *= decay;
-        // Flash effect
-        this.player.flashHidden =
-          this.invincibilityTimer > 0 && Math.floor(this.invincibilityTimer * 8) % 2 === 0;
-      } else {
-        this.player.flashHidden = false;
-      }
-
-      // Decay scattered gem velocity
-      for (const entity of this.entityManager.entities) {
-        if (entity.type === "gem" && entity.velocity) {
-          entity.velocity.vx *= Math.max(0, 1 - dt * 4);
-          entity.velocity.vy *= Math.max(0, 1 - dt * 4);
-          entity.position.wx += entity.velocity.vx * dt;
-          entity.position.wy += entity.velocity.vy * dt;
-          if (Math.abs(entity.velocity.vx) < 1 && Math.abs(entity.velocity.vy) < 1) {
-            entity.velocity = null;
-          }
-        }
-      }
+      tickGameplay(this.gameplaySession, this.entityManager, dt, {
+        markMetaDirty: () => this.saveManager?.markMetaDirty(),
+      });
     }
 
     // Camera follows player (only in play mode)
@@ -932,7 +826,7 @@ export class Game {
     ctx.save();
     ctx.font = "bold 20px monospace";
     ctx.textBaseline = "top";
-    const text = `${this.gemsCollected}`;
+    const text = `${this.gameplaySession.gemsCollected}`;
     ctx.strokeStyle = "#000";
     ctx.lineWidth = 3;
     ctx.strokeText(text, x + ICON_SIZE + 6, y + 2);
@@ -971,7 +865,7 @@ export class Game {
       cameraZoom: this.camera.zoom,
       entities,
       nextEntityId: this.entityManager.getNextId(),
-      gemsCollected: this.gemsCollected,
+      gemsCollected: this.gameplaySession.gemsCollected,
     };
   }
 }

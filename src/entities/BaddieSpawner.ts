@@ -1,5 +1,5 @@
 import { CHUNK_SIZE_PX, TILE_SIZE } from "../config/constants.js";
-import type { Camera } from "../rendering/Camera.js";
+import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import type { Entity } from "./Entity.js";
@@ -35,7 +35,7 @@ export class BaddieSpawner {
   update(
     dt: number,
     player: Entity,
-    camera: Camera,
+    visibleRange: ChunkRange,
     entityManager: EntityManager,
     world: World,
   ): void {
@@ -43,13 +43,13 @@ export class BaddieSpawner {
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       this.spawnTimer = SPAWN_INTERVAL;
-      this.trySpawn(player, camera, entityManager, world);
+      this.trySpawn(player, visibleRange, entityManager, world);
     }
   }
 
   private trySpawn(
     player: Entity,
-    camera: Camera,
+    visible: ChunkRange,
     entityManager: EntityManager,
     world: World,
   ): void {
@@ -61,7 +61,6 @@ export class BaddieSpawner {
 
     const playerCx = Math.floor(player.position.wx / CHUNK_SIZE_PX);
     const playerCy = Math.floor(player.position.wy / CHUNK_SIZE_PX);
-    const visible = camera.getVisibleChunkRange();
 
     const candidates: { cx: number; cy: number }[] = [];
     for (let cy = playerCy - SPAWN_RADIUS_MAX; cy <= playerCy + SPAWN_RADIUS_MAX; cy++) {

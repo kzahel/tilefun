@@ -1,7 +1,6 @@
 import type { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
-import type { SaveManager } from "../persistence/SaveManager.js";
 import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
 import { chunkKey, tileToChunk, tileToLocal } from "../world/types.js";
 import type { World } from "../world/World.js";
@@ -12,7 +11,7 @@ const SUBGRID_STRIDE = CHUNK_SIZE * 2;
 export class TerrainEditor {
   constructor(
     private readonly world: World,
-    private readonly saveManager: SaveManager,
+    private readonly markChunkDirty: (key: string) => void,
     private readonly adjacency: TerrainAdjacency,
   ) {}
 
@@ -136,7 +135,7 @@ export class TerrainEditor {
 
     chunk.dirty = true;
     const key = chunkKey(cx, cy);
-    this.saveManager.markChunkDirty(key);
+    this.markChunkDirty(key);
 
     // Invalidate neighbor chunks for cross-chunk road connectivity
     if (lx === 0) this.invalidateChunkRender(cx - 1, cy);
@@ -169,7 +168,7 @@ export class TerrainEditor {
 
     chunk.setHeight(lx, ly, height);
     chunk.dirty = true;
-    this.saveManager.markChunkDirty(chunkKey(cx, cy));
+    this.markChunkDirty(chunkKey(cx, cy));
   }
 
   /** Fill all loaded chunks with a single terrain. */
@@ -185,7 +184,7 @@ export class TerrainEditor {
       chunk.heightGrid.fill(0);
       chunk.dirty = true;
       chunk.autotileComputed = false;
-      this.saveManager.markChunkDirty(key);
+      this.markChunkDirty(key);
     }
   }
 
@@ -194,7 +193,7 @@ export class TerrainEditor {
     for (const [key, chunk] of this.world.chunks.entries()) {
       chunk.fillRoad(0);
       chunk.dirty = true;
-      this.saveManager.markChunkDirty(key);
+      this.markChunkDirty(key);
     }
   }
 
@@ -256,7 +255,7 @@ export class TerrainEditor {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
       chunk.setSubgrid(lsx, lsy, terrainId);
-      this.saveManager.markChunkDirty(chunkKey(cx, cy));
+      this.markChunkDirty(chunkKey(cx, cy));
     }
   }
 
