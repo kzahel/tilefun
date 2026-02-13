@@ -87,4 +87,6 @@ export interface Entity {
   wanderAI: WanderAIComponent | null;
   /** When true, entity is hidden this frame (invincibility flash effect). */
   flashHidden?: boolean;
+  /** When true, skip drawing a shadow under this entity. */
+  noShadow?: boolean;
 }

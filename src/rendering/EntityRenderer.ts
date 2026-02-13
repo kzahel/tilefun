@@ -44,7 +44,7 @@ export function drawEntities(
     const destH = sprite.spriteHeight * camera.scale;
 
     // Shadow ellipse at visual feet (entities only, not props)
-    if (!item.isProp) {
+    if (!item.isProp && !item.noShadow) {
       const col = (item as { collider?: { offsetY: number; width: number } }).collider;
       const baseW = col ? col.width : sprite.spriteWidth * 0.6;
       const shadowW = baseW * camera.scale;

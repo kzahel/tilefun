@@ -23,7 +23,7 @@ export const TICK_RATE = 60;
 export const PLAYER_SPEED = 64;
 
 /** Speed multiplier when holding shift. */
-export const PLAYER_SPRINT_MULTIPLIER = 4;
+export const PLAYER_SPRINT_MULTIPLIER = 2;
 
 /** Camera smooth-follow lerp factor (per tick at 60Hz). */
 export const CAMERA_LERP = 0.1;

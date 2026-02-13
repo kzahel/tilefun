@@ -12,6 +12,8 @@ export interface Renderable {
   } | null;
   /** When true, skip entity-specific effects like shadows. */
   isProp?: boolean;
+  /** When true, skip drawing a shadow under this entity. */
+  noShadow?: boolean;
   /** When true, entity is hidden this frame (invincibility flash effect). */
   flashHidden?: boolean;
 }
