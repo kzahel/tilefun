@@ -1,3 +1,5 @@
+import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
@@ -606,5 +608,83 @@ export class EditorPanel {
           entry.type === this.selectedEntityType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
       }
     }
+  }
+
+  /** Render actual tile/sprite graphics into preview buttons once assets are loaded. */
+  setAssets(
+    sheets: Map<string, Spritesheet>,
+    blendSheets: Spritesheet[],
+    blendGraph: BlendGraph,
+  ): void {
+    // Terrain buttons: draw base fill tile
+    for (const { btn, entry } of this.terrainButtons) {
+      const fill = blendGraph.getBaseFill(entry.terrainId);
+      const sheet = fill ? blendSheets[fill.sheetIndex] : undefined;
+      if (fill && sheet) {
+        this.renderPreviewCanvas(btn, sheet, fill.col, fill.row, 44, 44);
+      }
+    }
+
+    // Entity buttons: draw first sprite frame
+    for (let i = 0; i < ENTITY_PALETTE.length; i++) {
+      const btn = this.entityButtons[i];
+      const entry = ENTITY_PALETTE[i];
+      if (!btn || !entry) continue;
+      const sheet = sheets.get(entry.type);
+      if (sheet) {
+        this.renderPreviewCanvas(btn, sheet, 0, 0, 64, 44);
+      }
+    }
+
+    // Road buttons: draw road tile from me-complete
+    const roadSheet = sheets.get("me21");
+    if (roadSheet) {
+      for (const { btn, entry } of this.roadButtons) {
+        // Road base fills: Asphalt=(1,0), Sidewalk/Lines use colored fallback
+        if (entry.roadType === RoadType.Asphalt) {
+          this.renderPreviewCanvas(btn, roadSheet, 1, 0, 44, 44);
+        }
+      }
+    }
+  }
+
+  /** Draw a spritesheet tile into a canvas inside a button. */
+  private renderPreviewCanvas(
+    btn: HTMLButtonElement,
+    sheet: Spritesheet,
+    col: number,
+    row: number,
+    btnW: number,
+    btnH: number,
+  ): void {
+    const canvas = document.createElement("canvas");
+    const pad = 4; // account for border
+    const cw = btnW - pad;
+    const ch = btnH - pad;
+    canvas.width = cw;
+    canvas.height = ch;
+    canvas.style.cssText = "pointer-events: none; image-rendering: pixelated;";
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.imageSmoothingEnabled = false;
+
+    const region = sheet.getRegion(col, row);
+    // Scale sprite to fit canvas, centered
+    const scaleX = cw / region.width;
+    const scaleY = ch / region.height;
+    const scale = Math.min(scaleX, scaleY);
+    const dw = region.width * scale;
+    const dh = region.height * scale;
+    const dx = (cw - dw) / 2;
+    const dy = (ch - dh) / 2;
+
+    ctx.drawImage(sheet.image, region.x, region.y, region.width, region.height, dx, dy, dw, dh);
+
+    btn.textContent = "";
+    btn.style.background = "transparent";
+    btn.style.display = "flex";
+    btn.style.alignItems = "center";
+    btn.style.justifyContent = "center";
+    btn.appendChild(canvas);
   }
 }

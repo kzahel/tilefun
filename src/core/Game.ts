@@ -132,6 +132,7 @@ export class Game {
     this.tileRenderer.setBlendSheets(assets.blendSheets, this.blendGraph);
     this.tileRenderer.setRoadSheets(this.sheets);
     this.tileRenderer.setVariants(assets.variants);
+    this.editorPanel.setAssets(assets.sheets, assets.blendSheets, this.blendGraph);
 
     // Open persistence and load saved state
     await this.saveManager.open();
