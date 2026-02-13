@@ -88,7 +88,22 @@ export function computeTileBlend(
     }
   }
 
+  // Detect "isolated center": center terrain has no matching cardinal neighbors.
+  // Such a center can never produce a visible overlay mask (canonicalize strips
+  // unsupported diagonals → mask=0). Exclude it from base selection so it doesn't
+  // become an invisible base hidden under a full-coverage neighbor overlay.
+  let centerCardinals = 0;
+  if (n === center) centerCardinals++;
+  if (e === center) centerCardinals++;
+  if (s === center) centerCardinals++;
+  if (w === center) centerCardinals++;
+  const centerIsolated = centerCardinals === 0 && all.length > 1;
+
   // Find base terrain (the background fill that overlays are drawn on top of).
+  // When center is isolated, exclude it from candidates (it will be added as
+  // an "island" overlay after the normal blend computation).
+  const baseCandidates = centerIsolated ? all.filter((t) => t !== center) : all;
+
   let base: TerrainId;
   if (getBaseSelectionMode() === "nw") {
     base = nw;
@@ -97,11 +112,11 @@ export function computeTileBlend(
     // have dedicated (non-alpha) blend entries against. This uses the
     // BlendGraph's per-pair direction instead of relying solely on depth.
     // TERRAIN_DEPTH is only a tiebreaker.
-    base = all[0] ?? nw;
+    base = baseCandidates[0] ?? nw;
     let bestScore = -1;
-    for (const candidate of all) {
+    for (const candidate of baseCandidates) {
       let score = 0;
-      for (const other of all) {
+      for (const other of baseCandidates) {
         if (other === candidate) continue;
         const entry = blendGraph.getBlend(other, candidate);
         if (entry && !entry.isAlpha) score += 2;
@@ -164,6 +179,27 @@ export function computeTileBlend(
       terrain: overlay,
       depth: TERRAIN_DEPTH[overlay],
     });
+  }
+
+  // Isolated center: add the center terrain as an "island" overlay drawn on top.
+  // Uses GM blob mask=0 sprite (col=11, row=3) — a small rounded terrain blob.
+  if (centerIsolated && center !== base) {
+    const entry = blendGraph.getBlend(center, base);
+    if (entry) {
+      const islandSprite = GM_BLOB_LOOKUP[0];
+      layers.push({
+        sheetIndex: entry.sheetIndex,
+        sheetKey: entry.sheetKey,
+        assetPath: entry.assetPath,
+        col: islandSprite & 0xff,
+        row: islandSprite >> 8,
+        isAlpha: entry.isAlpha,
+        rawMask: 0,
+        mask: 0,
+        terrain: center,
+        depth: TERRAIN_DEPTH[center],
+      });
+    }
   }
 
   // Sort: dedicated pairs (cat 1) → alpha (cat 2); within category, by depth

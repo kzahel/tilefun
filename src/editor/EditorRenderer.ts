@@ -222,12 +222,12 @@ function drawSubgridCursorHighlight(
     }
   } else {
     const brushSize = state.brushSize;
-    const half = Math.floor(brushSize / 2);
+    const halfBrush = brushSize / 2;
 
-    const wx0 = (gsx - half) * halfTile;
-    const wy0 = (gsy - half) * halfTile;
-    const wx1 = (gsx - half + brushSize) * halfTile;
-    const wy1 = (gsy - half + brushSize) * halfTile;
+    const wx0 = (gsx - halfBrush) * halfTile;
+    const wy0 = (gsy - halfBrush) * halfTile;
+    const wx1 = (gsx + halfBrush) * halfTile;
+    const wy1 = (gsy + halfBrush) * halfTile;
 
     const topLeft = camera.worldToScreen(wx0, wy0);
     const botRight = camera.worldToScreen(wx1, wy1);

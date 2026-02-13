@@ -325,6 +325,70 @@ describe("computeChunkSubgridBlend", () => {
     expect(chunk.blendLayers.length).toBe(MAX_BLEND_LAYERS * CHUNK_SIZE * CHUNK_SIZE);
   });
 
+  it("isolated center point produces island overlay (not hidden by mask=255)", () => {
+    const chunk = makeUniformChunk(T.Grass);
+
+    // Paint ONLY the center subgrid point of tile (5,5) as water.
+    // Tile center is at subgrid (2*5+1, 2*5+1) = (11,11).
+    // All 8 neighbors remain grass.
+    chunk.setSubgrid(11, 11, T.ShallowWater);
+
+    computeChunkSubgridBlend(chunk, blendGraph);
+
+    // Base should be Grass (dominant neighbor), not ShallowWater.
+    // The isolated water center is rendered as an "island" overlay on top.
+    const tileIdx = 5 * CHUNK_SIZE + 5;
+    expect(chunk.blendBase[tileIdx]).toBe(T.Grass);
+
+    // The blend layer should be the island sprite (col=11, row=3 = GM blob mask=0)
+    // from the ShallowWater-over-Grass dedicated sheet (me03).
+    const tileOffset = tileIdx * MAX_BLEND_LAYERS;
+    const packed = chunk.blendLayers[tileOffset] ?? 0;
+    expect(packed, "isolated center should have island blend layer").toBeGreaterThan(0);
+
+    const entry = blendGraph.getBlend(T.ShallowWater, T.Grass);
+    expect(entry).toBeDefined();
+    expect(unpackSheet(packed), "should use water/grass sheet").toBe(entry?.sheetIndex);
+
+    // Island sprite: GM_BLOB_LOOKUP[0] = (col=11, row=3)
+    const sprite = unpackColRow(packed);
+    expect(sprite, "should use isolated island sprite").toEqual({ col: 11, row: 3 });
+  });
+
+  it("X-brush pattern (center + 4 corners) produces island overlay", () => {
+    const chunk = makeUniformChunk(T.Grass);
+
+    // Simulate X-brush from tile center (5,5):
+    // Center: subgrid (11,11) = water
+    // 4 diagonal corners: (10,10), (12,10), (10,12), (12,12) = water
+    chunk.setSubgrid(11, 11, T.ShallowWater);
+    chunk.setSubgrid(10, 10, T.ShallowWater);
+    chunk.setSubgrid(12, 10, T.ShallowWater);
+    chunk.setSubgrid(10, 12, T.ShallowWater);
+    chunk.setSubgrid(12, 12, T.ShallowWater);
+
+    computeChunkSubgridBlend(chunk, blendGraph);
+
+    // Central tile (5,5): 4 cardinal neighbors=grass, 4 diagonal=water.
+    // Center is isolated (0 cardinal matches) → island overlay, base=Grass.
+    const tileIdx = 5 * CHUNK_SIZE + 5;
+    expect(chunk.blendBase[tileIdx]).toBe(T.Grass);
+
+    const centerOffset = tileIdx * MAX_BLEND_LAYERS;
+    const centerPacked = chunk.blendLayers[centerOffset] ?? 0;
+    expect(centerPacked, "central tile should have island blend layer").toBeGreaterThan(0);
+    expect(unpackColRow(centerPacked), "should use island sprite").toEqual({ col: 11, row: 3 });
+
+    // Surrounding tiles that share the painted corners should also have blend.
+    // Tile (4,4): center=grass, SE=(10,10)=water → has blend
+    const nwOffset = (4 * CHUNK_SIZE + 4) * MAX_BLEND_LAYERS;
+    expect(chunk.blendLayers[nwOffset], "NW tile should have blend").toBeGreaterThan(0);
+
+    // Tile (5,4): center=grass, SW=(10,10)=water, SE=(12,10)=water → has blend
+    const nOffset = (4 * CHUNK_SIZE + 5) * MAX_BLEND_LAYERS;
+    expect(chunk.blendLayers[nOffset], "N tile should have blend").toBeGreaterThan(0);
+  });
+
   it("wider region transition with 2 affected tile rows", () => {
     const chunk = makeUniformChunk(T.Grass);
 

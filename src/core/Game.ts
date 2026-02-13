@@ -226,9 +226,7 @@ export class Game {
     const savedMeta = await this.saveManager.loadMeta();
     const savedChunks = await this.saveManager.loadChunks();
 
-    console.log(
-      `[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`,
-    );
+    console.log(`[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`);
     if (savedMeta && savedChunks.size > 0) {
       this.world.chunks.setSavedData(savedChunks);
       this.camera.x = savedMeta.cameraX;
