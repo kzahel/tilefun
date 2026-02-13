@@ -104,6 +104,26 @@ export function tickGameplay(
     }
   }
 
+  // Hostile entities destroyed by campfire contact (ghost trap!)
+  const fireKills: number[] = [];
+  for (const baddie of entityManager.entities) {
+    if (!baddie.wanderAI?.hostile) continue;
+    for (const fire of entityManager.entities) {
+      if (fire.type !== "campfire") continue;
+      const dx = baddie.position.wx - fire.position.wx;
+      const dy = baddie.position.wy - fire.position.wy;
+      if (dx * dx + dy * dy < 16 * 16) {
+        fireKills.push(baddie.id);
+        // Reward: spawn a gem where the baddie died
+        entityManager.spawn(createGem(baddie.position.wx, baddie.position.wy));
+        break;
+      }
+    }
+  }
+  for (const id of fireKills) {
+    entityManager.remove(id);
+  }
+
   // Tick invincibility + knockback decay
   if (session.invincibilityTimer > 0) {
     session.invincibilityTimer -= dt;

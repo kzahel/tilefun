@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { createCampfire } from "../entities/Campfire.js";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
@@ -106,6 +107,38 @@ describe("tickGameplay", () => {
 
       expect(buddy.wanderAI?.following).toBe(false);
       expect(buddy.wanderAI?.state).toBe("walking");
+    });
+  });
+
+  describe("campfire ghost trap", () => {
+    it("destroys hostile entity that overlaps a campfire and spawns a gem", () => {
+      const em = new EntityManager();
+      const player = createPlayer(0, 0);
+      em.spawn(player);
+      const fire = createCampfire(100, 100);
+      em.spawn(fire);
+      const ghost = createGhostAngry(105, 100); // within 16px of campfire
+      em.spawn(ghost);
+      const session = makeSession({ player });
+
+      tickGameplay(session, em, 1 / 60, noopCallbacks);
+
+      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeUndefined();
+      // A reward gem should have been spawned
+      expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(1);
+    });
+
+    it("does not destroy hostile entity far from campfire", () => {
+      const em = new EntityManager();
+      const player = createPlayer(0, 0);
+      em.spawn(player);
+      em.spawn(createCampfire(100, 100));
+      em.spawn(createGhostAngry(200, 200)); // far from fire
+      const session = makeSession({ player });
+
+      tickGameplay(session, em, 1 / 60, noopCallbacks);
+
+      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeDefined();
     });
   });
 
