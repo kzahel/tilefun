@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 const SETTLE_MS = 1500;
 
 async function waitForGame(page: import("@playwright/test").Page) {
-  await page.goto("/");
+  await page.goto("/tilefun/");
   await page.waitForFunction(() => document.querySelector("canvas")?.dataset.ready === "true", {
     timeout: 10000,
   });
@@ -17,21 +17,13 @@ test("editor mode: toggle and paint terrain", async ({ page }) => {
   await page.keyboard.press("Tab");
   await page.waitForTimeout(200);
 
-  // Verify palette panel is visible
-  const palette = page.locator("button", { hasText: "Grass" });
-  await expect(palette).toBeVisible();
+  // Verify palette panel is visible via tab button text
+  const naturalTab = page.locator("button", { hasText: "Natural" });
+  await expect(naturalTab).toBeVisible();
 
-  // Take screenshot showing editor grid
-  await page.screenshot({ path: "screenshot-editor-grid.png" });
-
-  // Click "Clear" to fill with Grass (default selected)
-  await page.locator("button", { hasText: "Clear" }).click();
-  await page.waitForTimeout(SETTLE_MS);
-
-  await page.screenshot({ path: "screenshot-editor-cleared.png" });
-
-  // Select Water terrain and paint some tiles
-  await page.locator("button", { hasText: "Water" }).click();
+  // Select Water terrain (Shallow Water on Grass) via title attribute
+  // (buttons show canvas tile previews, not text labels)
+  await page.locator('button[title*="Shlw/Grass"]').click();
   await page.waitForTimeout(100);
 
   // Click center of canvas to paint
@@ -39,7 +31,6 @@ test("editor mode: toggle and paint terrain", async ({ page }) => {
   const box = await canvas.boundingBox();
   if (box) {
     await canvas.click({ position: { x: box.width / 2, y: box.height / 2 } });
-    // Paint a few more tiles nearby
     await canvas.click({
       position: { x: box.width / 2 + 50, y: box.height / 2 },
     });
@@ -56,7 +47,7 @@ test("editor mode: toggle and paint terrain", async ({ page }) => {
   await page.waitForTimeout(200);
 
   // Verify palette is hidden
-  await expect(palette).not.toBeVisible();
+  await expect(naturalTab).not.toBeVisible();
 });
 
 test("editor mode: paint dirt on grass and verify autotile", async ({ page }) => {
@@ -66,12 +57,8 @@ test("editor mode: paint dirt on grass and verify autotile", async ({ page }) =>
   await page.keyboard.press("Tab");
   await page.waitForTimeout(200);
 
-  // Clear to all Grass
-  await page.locator("button", { hasText: "Clear" }).click();
-  await page.waitForTimeout(SETTLE_MS);
-
-  // Select DirtPath
-  await page.locator("button", { hasText: "Dirt" }).click();
+  // Select DirtWarm terrain via title attribute
+  await page.locator('button[title*="DirtW/Grass"]').click();
   await page.waitForTimeout(100);
 
   // Paint a small cluster of dirt tiles in center
