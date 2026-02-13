@@ -107,6 +107,102 @@ export function resolveCollision(
   return blocked;
 }
 
+/** Separation speed in pixels per second for overlapping entities. */
+const SEPARATION_SPEED = 40;
+
+/**
+ * Gently push apart overlapping solid wandering entities using a spatial hash.
+ * Mutates entity positions in place. Respects tile collision (won't push through walls).
+ */
+export function separateOverlappingEntities(
+  entities: readonly Entity[],
+  player: Entity,
+  dt: number,
+  getCollision: (tx: number, ty: number) => number,
+  blockMask: number,
+): void {
+  // 1. Bucket eligible entities into a spatial hash (cell size = TILE_SIZE)
+  const grid = new Map<number, Entity[]>();
+  for (const entity of entities) {
+    if (
+      entity === player ||
+      !entity.collider ||
+      entity.collider.solid === false ||
+      !entity.wanderAI
+    )
+      continue;
+    const aabb = getEntityAABB(entity.position, entity.collider);
+    const minCx = Math.floor(aabb.left / TILE_SIZE);
+    const maxCx = Math.floor(aabb.right / TILE_SIZE);
+    const minCy = Math.floor(aabb.top / TILE_SIZE);
+    const maxCy = Math.floor(aabb.bottom / TILE_SIZE);
+    for (let cy = minCy; cy <= maxCy; cy++) {
+      for (let cx = minCx; cx <= maxCx; cx++) {
+        // Pack cell coords into a single number for fast hashing.
+        // Offset by 0x8000 to handle negative coords (up to +-32767).
+        const key = ((cx + 0x8000) << 16) | ((cy + 0x8000) & 0xffff);
+        let bucket = grid.get(key);
+        if (!bucket) {
+          bucket = [];
+          grid.set(key, bucket);
+        }
+        bucket.push(entity);
+      }
+    }
+  }
+
+  // 2. Find and separate overlapping pairs
+  const seen = new Set<number>();
+  for (const cell of grid.values()) {
+    if (cell.length < 2) continue;
+    for (let i = 0; i < cell.length; i++) {
+      const a = cell[i];
+      if (!a?.collider) continue;
+      for (let j = i + 1; j < cell.length; j++) {
+        const b = cell[j];
+        if (!b?.collider) continue;
+        const lo = a.id < b.id ? a : b;
+        const hi = a.id < b.id ? b : a;
+        const pairKey = lo.id * 100000 + hi.id;
+        if (seen.has(pairKey)) continue;
+        seen.add(pairKey);
+
+        const aBox = getEntityAABB(a.position, a.collider);
+        const bBox = getEntityAABB(b.position, b.collider);
+        if (!aabbsOverlap(aBox, bBox)) continue;
+
+        // Compute separation direction (center to center)
+        let dx = b.position.wx - a.position.wx;
+        let dy = b.position.wy - a.position.wy;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 0.1) {
+          // Coincident centers — deterministic fallback
+          dx = 1;
+          dy = 0;
+          dist = 1;
+        }
+        const nudge = (SEPARATION_SPEED * dt * 0.5) / dist;
+        const nx = dx * nudge;
+        const ny = dy * nudge;
+
+        // Nudge A away (negative direction), check wall collision first
+        const testA = getEntityAABB({ wx: a.position.wx - nx, wy: a.position.wy - ny }, a.collider);
+        if (!aabbOverlapsSolid(testA, getCollision, blockMask)) {
+          a.position.wx -= nx;
+          a.position.wy -= ny;
+        }
+
+        // Nudge B away (positive direction)
+        const testB = getEntityAABB({ wx: b.position.wx + nx, wy: b.position.wy + ny }, b.collider);
+        if (!aabbOverlapsSolid(testB, getCollision, blockMask)) {
+          b.position.wx += nx;
+          b.position.wy += ny;
+        }
+      }
+    }
+  }
+}
+
 /** Get speed multiplier based on terrain under entity feet. */
 export function getSpeedMultiplier(
   pos: PositionComponent,

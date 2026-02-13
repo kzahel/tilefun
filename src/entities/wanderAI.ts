@@ -123,6 +123,16 @@ export function updateBehaviorAI(
 
   // --- Follow logic (buddies) ---
   if (ai.following) {
+    const leash = ai.followLeash ?? 200;
+    if (dist > leash) {
+      ai.following = false;
+      ai.state = "idle";
+      ai.timer = ai.idleMin + random() * (ai.idleMax - ai.idleMin);
+      vel.vx = 0;
+      vel.vy = 0;
+      if (entity.sprite) entity.sprite.moving = false;
+      return;
+    }
     const followDist = ai.followDistance ?? 20;
     if (dist > followDist) {
       ai.state = "following";

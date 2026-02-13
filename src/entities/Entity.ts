@@ -71,6 +71,8 @@ export interface WanderAIComponent {
   following?: boolean;
   /** Minimum distance to keep when following (px). */
   followDistance?: number;
+  /** Max distance before the entity gives up following and returns to wandering (px). */
+  followLeash?: number;
   /** When true, player can tap this entity to make it follow. */
   befriendable?: boolean;
 }

@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { TILE_SIZE } from "../config/constants.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { createChicken } from "./Chicken.js";
 import {
   aabbOverlapsSolid,
   getEntityAABB,
   getSpeedMultiplier,
   resolveCollision,
+  separateOverlappingEntities,
 } from "./collision.js";
 import type { Entity } from "./Entity.js";
 import { createPlayer } from "./Player.js";
@@ -195,5 +197,148 @@ describe("getSpeedMultiplier", () => {
   it("returns 0.5 on SlowWalk tiles", () => {
     const check = makeCollisionGrid({ "3,3": CollisionFlag.SlowWalk });
     expect(getSpeedMultiplier({ wx: 3 * TILE_SIZE + 1, wy: 3 * TILE_SIZE + 1 }, check)).toBe(0.5);
+  });
+});
+
+describe("separateOverlappingEntities", () => {
+  const noCollision = makeCollisionGrid({});
+  const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
+
+  /** Spawn a chicken and assign an id (normally done by EntityManager). */
+  function spawnChicken(id: number, wx: number, wy: number): Entity {
+    const c = createChicken(wx, wy);
+    c.id = id;
+    return c;
+  }
+
+  it("pushes two overlapping entities apart", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 100, 100);
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // They should have moved in opposite directions
+    const dist = Math.abs(a.position.wx - b.position.wx) + Math.abs(a.position.wy - b.position.wy);
+    expect(dist).toBeGreaterThan(0);
+  });
+
+  it("does not move non-overlapping entities", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 200, 200);
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    expect(a.position.wx).toBe(100);
+    expect(a.position.wy).toBe(100);
+    expect(b.position.wx).toBe(200);
+    expect(b.position.wy).toBe(200);
+  });
+
+  it("ignores non-solid entities", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 100, 100);
+    if (b.collider) b.collider.solid = false;
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // Neither should move because b is non-solid (not bucketed)
+    expect(a.position.wx).toBe(100);
+    expect(b.position.wx).toBe(100);
+  });
+
+  it("ignores entities without wanderAI", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 100, 100);
+    b.wanderAI = null;
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // Neither should move because b has no wanderAI (not bucketed)
+    expect(a.position.wx).toBe(100);
+    expect(b.position.wx).toBe(100);
+  });
+
+  it("excludes the player from separation", () => {
+    const player = createPlayer(100, 100);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const entities = [player, a];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // Player should not move (excluded from bucketing)
+    expect(player.position.wx).toBe(100);
+    expect(player.position.wy).toBe(100);
+  });
+
+  it("does not push entities through solid walls", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    // Place two chickens at same spot, with a wall surrounding tile (6,6)
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 100, 100);
+
+    // Wall on all surrounding tiles — entities can't be nudged anywhere
+    const grid: Record<string, number> = {};
+    for (let ty = 4; ty <= 8; ty++) {
+      for (let tx = 4; tx <= 8; tx++) {
+        if (tx === 6 && ty === 6) continue; // leave current tile clear
+        grid[`${tx},${ty}`] = CollisionFlag.Solid;
+      }
+    }
+    const wallCollision = makeCollisionGrid(grid);
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, wallCollision, blockMask);
+
+    // Entities should stay put (wall blocks the nudge)
+    expect(a.position.wx).toBe(100);
+    expect(b.position.wx).toBe(100);
+  });
+
+  it("separates coincident centers deterministically", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const a = spawnChicken(2, 100, 100);
+    const b = spawnChicken(3, 100, 100);
+    const entities = [player, a, b];
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // Fallback direction is +X, so a moves left, b moves right
+    expect(a.position.wx).toBeLessThan(100);
+    expect(b.position.wx).toBeGreaterThan(100);
+  });
+
+  it("separates multiple stacked entities", () => {
+    const player = createPlayer(500, 500);
+    player.id = 1;
+    const entities: Entity[] = [player];
+    for (let i = 0; i < 5; i++) {
+      entities.push(spawnChicken(10 + i, 100, 100));
+    }
+
+    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+
+    // At least some entities should have moved
+    let movedCount = 0;
+    for (let i = 1; i < entities.length; i++) {
+      const e = entities[i];
+      if (!e) continue;
+      if (e.position.wx !== 100 || e.position.wy !== 100) movedCount++;
+    }
+    expect(movedCount).toBeGreaterThanOrEqual(2);
   });
 });

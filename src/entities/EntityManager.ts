@@ -7,6 +7,7 @@ import {
   getEntityAABB,
   getSpeedMultiplier,
   resolveCollision,
+  separateOverlappingEntities,
 } from "./collision.js";
 import type { Entity } from "./Entity.js";
 import type { PropManager } from "./PropManager.js";
@@ -152,6 +153,9 @@ export class EntityManager {
         entity.position.wy += dy;
       }
     }
+
+    // --- Phase 4: Separate overlapping entities ---
+    separateOverlappingEntities(this.entities, player, dt, getCollision, blockMask);
 
     // --- Tick animations ---
     for (const entity of this.entities) {
