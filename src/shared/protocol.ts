@@ -1,4 +1,5 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
+import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 
 // ---- Client → Server messages ----
 
@@ -71,7 +72,20 @@ export type ClientMessage =
       minCy: number;
       maxCx: number;
       maxCy: number;
-    };
+    }
+  | { type: "flush" }
+  | { type: "invalidate-all-chunks" }
+  | { type: "load-world"; requestId: number; worldId: string }
+  | {
+      type: "create-world";
+      requestId: number;
+      name: string;
+      worldType?: WorldType;
+      seed?: number;
+    }
+  | { type: "delete-world"; requestId: number; worldId: string }
+  | { type: "list-worlds"; requestId: number }
+  | { type: "rename-world"; requestId: number; worldId: string; name: string };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -176,4 +190,14 @@ export interface GameStateMessage {
 export type ServerMessage =
   | { type: "player-assigned"; entityId: number }
   | GameStateMessage
-  | { type: "world-loaded"; cameraX: number; cameraY: number; cameraZoom: number };
+  | {
+      type: "world-loaded";
+      requestId?: number;
+      cameraX: number;
+      cameraY: number;
+      cameraZoom: number;
+    }
+  | { type: "world-created"; requestId: number; meta: WorldMeta }
+  | { type: "world-deleted"; requestId: number }
+  | { type: "world-list"; requestId: number; worlds: WorldMeta[] }
+  | { type: "world-renamed"; requestId: number };

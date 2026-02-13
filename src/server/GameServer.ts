@@ -106,6 +106,14 @@ export class GameServer {
       session.cameraY = this.lastLoadedCamera.cameraY;
       session.cameraZoom = this.lastLoadedCamera.cameraZoom;
       this.sessions.set(clientId, session);
+
+      // Send initial camera position so client knows where to look
+      this.transport.send(clientId, {
+        type: "world-loaded",
+        cameraX: this.lastLoadedCamera.cameraX,
+        cameraY: this.lastLoadedCamera.cameraY,
+        cameraZoom: this.lastLoadedCamera.cameraZoom,
+      });
     });
 
     this.transport.onDisconnect((clientId) => {
@@ -525,6 +533,64 @@ export class GameServer {
           maxCy: msg.maxCy,
         };
         this.updateVisibleChunks(session.visibleRange);
+        break;
+
+      case "flush":
+        this.flush();
+        break;
+
+      case "invalidate-all-chunks":
+        this.invalidateAllChunks();
+        break;
+
+      case "load-world":
+        this.loadWorld(msg.worldId).then((cam) => {
+          this.transport.send(clientId, {
+            type: "world-loaded",
+            requestId: msg.requestId,
+            cameraX: cam.cameraX,
+            cameraY: cam.cameraY,
+            cameraZoom: cam.cameraZoom,
+          });
+        });
+        break;
+
+      case "create-world":
+        this.createWorld(msg.name, msg.worldType, msg.seed).then((meta) => {
+          this.transport.send(clientId, {
+            type: "world-created",
+            requestId: msg.requestId,
+            meta,
+          });
+        });
+        break;
+
+      case "delete-world":
+        this.deleteWorld(msg.worldId).then(() => {
+          this.transport.send(clientId, {
+            type: "world-deleted",
+            requestId: msg.requestId,
+          });
+        });
+        break;
+
+      case "list-worlds":
+        this.listWorlds().then((worlds) => {
+          this.transport.send(clientId, {
+            type: "world-list",
+            requestId: msg.requestId,
+            worlds,
+          });
+        });
+        break;
+
+      case "rename-world":
+        this.renameWorld(msg.worldId, msg.name).then(() => {
+          this.transport.send(clientId, {
+            type: "world-renamed",
+            requestId: msg.requestId,
+          });
+        });
         break;
     }
   }

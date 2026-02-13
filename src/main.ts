@@ -10,7 +10,7 @@ if (!canvas) throw new Error("Canvas element #game not found");
 
 const transport = USE_SERIALIZED ? new SerializingTransport() : new LocalTransport();
 const server = new GameServer(transport.serverSide);
-const client = new GameClient(canvas, transport.clientSide, server, {
+const client = new GameClient(canvas, transport.clientSide, USE_SERIALIZED ? null : server, {
   mode: USE_SERIALIZED ? "serialized" : "local",
 });
 

@@ -10,6 +10,7 @@ import { drawEditorOverlay } from "../editor/EditorRenderer.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
+import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
@@ -17,7 +18,7 @@ import { drawEntities } from "../rendering/EntityRenderer.js";
 import type { Renderable } from "../rendering/Renderable.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
-import type { ServerMessage } from "../shared/protocol.js";
+import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
@@ -49,15 +50,25 @@ export class GameClient {
   private currentFps = 0;
   private stateView: ClientStateView;
   private transport: IClientTransport;
-  private server: GameServer;
+  private server: GameServer | null;
   private serialized: boolean;
   /** Client-side editor enabled tracking for serialized mode. */
   private clientEditorEnabled = true;
+  /** Request/response correlation for serialized mode. */
+  private nextRequestId = 1;
+  // biome-ignore lint/suspicious/noExplicitAny: generic request/response map
+  private pendingRequests = new Map<number, { resolve: (value: any) => void }>();
+
+  /** Access the server instance (local mode only). Throws if null (serialized mode). */
+  private get localServer(): GameServer {
+    if (!this.server) throw new Error("No direct server in serialized mode");
+    return this.server;
+  }
 
   constructor(
     canvas: HTMLCanvasElement,
     transport: IClientTransport,
-    server: GameServer,
+    server: GameServer | null,
     options?: GameClientOptions,
   ) {
     const ctx = canvas.getContext("2d");
@@ -86,6 +97,7 @@ export class GameClient {
 
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
+        // Domain-specific handlers first
         if (msg.type === "game-state") {
           remoteView.applyGameState(msg);
         } else if (msg.type === "world-loaded") {
@@ -95,8 +107,18 @@ export class GameClient {
           this.camera.zoom = msg.cameraZoom;
           this.sendVisibleRange();
         }
+
+        // Resolve pending request/response promises
+        if ("requestId" in msg && msg.requestId !== undefined) {
+          const pending = this.pendingRequests.get(msg.requestId);
+          if (pending) {
+            this.pendingRequests.delete(msg.requestId);
+            pending.resolve(msg);
+          }
+        }
       });
     } else {
+      if (!server) throw new Error("Local mode requires a GameServer instance");
       this.stateView = new LocalStateView(server);
     }
 
@@ -119,7 +141,7 @@ export class GameClient {
     this.editorPanel.visible = true;
 
     // Load all assets — BlendGraph is deterministic, construct locally
-    const blendGraph = this.serialized ? new BlendGraph() : this.server.blendGraph;
+    const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
     const assets = await loadGameAssets(blendGraph);
     this.sheets = assets.sheets;
     this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
@@ -136,70 +158,99 @@ export class GameClient {
 
     if (!this.serialized) {
       // Apply loaded world camera position (local mode — direct access)
-      const session = this.server.getLocalSession();
+      const session = this.localServer.getLocalSession();
       this.camera.x = session.cameraX;
       this.camera.y = session.cameraY;
       this.camera.zoom = session.cameraZoom;
 
       // Initial chunk loading
-      this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-    } else {
-      // Serialized mode: get initial camera from server (loadWorld already ran during init)
-      const session = this.server.getLocalSession();
-      this.camera.x = session.cameraX;
-      this.camera.y = session.cameraY;
-      this.camera.zoom = session.cameraZoom;
-      this.sendVisibleRange();
+      this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
     }
+    // Serialized mode: camera was already set by "world-loaded" message
+    // sent during onConnect (fires before init() runs)
 
-    // Set up menu callbacks (world management stays as direct server calls)
+    // Set up menu callbacks
     this.mainMenu.onSelect = (id) => {
-      this.server.loadWorld(id).then((cam) => {
-        this.camera.x = cam.cameraX;
-        this.camera.y = cam.cameraY;
-        this.camera.zoom = cam.cameraZoom;
-        if (this.serialized) {
-          (this.stateView as RemoteStateView).clear();
-          this.sendVisibleRange();
-        } else {
-          this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-        }
-        this.mainMenu.hide();
-      });
-    };
-    this.mainMenu.onCreate = (name, worldType, seed) => {
-      this.server.createWorld(name, worldType, seed).then((meta) => {
-        this.server.loadWorld(meta.id).then((cam) => {
+      if (this.serialized) {
+        // world-loaded handler applies camera + clears state + sends visible range
+        this.sendRequest({ type: "load-world", requestId: this.nextRequestId++, worldId: id }).then(
+          () => this.mainMenu.hide(),
+        );
+      } else {
+        this.localServer.loadWorld(id).then((cam) => {
           this.camera.x = cam.cameraX;
           this.camera.y = cam.cameraY;
           this.camera.zoom = cam.cameraZoom;
-          if (this.serialized) {
-            (this.stateView as RemoteStateView).clear();
-            this.sendVisibleRange();
-          } else {
-            this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-          }
+          this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
           this.mainMenu.hide();
         });
-      });
+      }
+    };
+    this.mainMenu.onCreate = (name, worldType, seed) => {
+      if (this.serialized) {
+        const msg: ClientMessage & { requestId: number } = {
+          type: "create-world",
+          requestId: this.nextRequestId++,
+          name,
+        };
+        if (worldType !== undefined) msg.worldType = worldType;
+        if (seed !== undefined) msg.seed = seed;
+        this.sendRequest<{ meta: { id: string } }>(msg)
+          .then((resp) => {
+            return this.sendRequest({
+              type: "load-world",
+              requestId: this.nextRequestId++,
+              worldId: resp.meta.id,
+            });
+          })
+          .then(() => this.mainMenu.hide());
+      } else {
+        this.localServer.createWorld(name, worldType, seed).then((meta) => {
+          this.localServer.loadWorld(meta.id).then((cam) => {
+            this.camera.x = cam.cameraX;
+            this.camera.y = cam.cameraY;
+            this.camera.zoom = cam.cameraZoom;
+            this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+            this.mainMenu.hide();
+          });
+        });
+      }
     };
     this.mainMenu.onDelete = async (id) => {
-      await this.server.deleteWorld(id);
-      if (!this.serialized) {
-        const session = this.server.getLocalSession();
+      if (this.serialized) {
+        // deleteWorld may auto-load another world (world-loaded handler fires)
+        await this.sendRequest({
+          type: "delete-world",
+          requestId: this.nextRequestId++,
+          worldId: id,
+        });
+        const resp = await this.sendRequest<{ worlds: WorldMeta[] }>({
+          type: "list-worlds",
+          requestId: this.nextRequestId++,
+        });
+        this.mainMenu.show(resp.worlds);
+      } else {
+        await this.localServer.deleteWorld(id);
+        const session = this.localServer.getLocalSession();
         this.camera.x = session.cameraX;
         this.camera.y = session.cameraY;
         this.camera.zoom = session.cameraZoom;
-        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-      } else {
-        (this.stateView as RemoteStateView).clear();
-        this.sendVisibleRange();
+        this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        const worlds = await this.localServer.listWorlds();
+        this.mainMenu.show(worlds);
       }
-      const worlds = await this.server.listWorlds();
-      this.mainMenu.show(worlds);
     };
     this.mainMenu.onRename = (id, name) => {
-      this.server.renameWorld(id, name);
+      if (this.serialized) {
+        this.transport.send({
+          type: "rename-world",
+          requestId: this.nextRequestId++,
+          worldId: id,
+          name,
+        });
+      } else {
+        this.localServer.renameWorld(id, name);
+      }
     };
     this.mainMenu.onClose = () => {
       this.mainMenu.hide();
@@ -207,11 +258,11 @@ export class GameClient {
 
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
-        this.server.flush();
+        this.flushServer();
       }
     });
     window.addEventListener("beforeunload", () => {
-      this.server.flush();
+      this.flushServer();
     });
 
     this.loop.start();
@@ -220,7 +271,7 @@ export class GameClient {
 
   destroy(): void {
     this.loop.stop();
-    this.server.flush();
+    this.flushServer();
     this.editorMode.detach();
     this.touchJoystick.detach();
     this.input.detach();
@@ -239,7 +290,11 @@ export class GameClient {
       this.camera.zoom = this.debugPanel.zoom;
     }
     if (this.debugPanel.consumeBaseModeChange() || this.debugPanel.consumeConvexChange()) {
-      this.server.invalidateAllChunks();
+      if (this.serialized) {
+        this.transport.send({ type: "invalidate-all-chunks" });
+      } else {
+        this.localServer.invalidateAllChunks();
+      }
     }
 
     if (this.serialized) {
@@ -251,7 +306,7 @@ export class GameClient {
       });
     } else {
       // Sync debug state directly to session
-      const session = this.server.getLocalSession();
+      const session = this.localServer.getLocalSession();
       session.debugPaused = this.debugPanel.paused;
       session.debugNoclip = this.debugPanel.noclip;
     }
@@ -404,9 +459,9 @@ export class GameClient {
       }
     } else {
       // Local mode: drive the server tick synchronously
-      const session = this.server.getLocalSession();
+      const session = this.localServer.getLocalSession();
       session.visibleRange = this.camera.getVisibleChunkRange();
-      this.server.tick(dt);
+      this.localServer.tick(dt);
 
       // Camera follows player (only in play mode)
       if (!editorEnabled) {
@@ -426,10 +481,10 @@ export class GameClient {
       if (this.debugPanel.observer && this.camera.zoom !== 1) {
         const savedZoom = this.camera.zoom;
         this.camera.zoom = 1;
-        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
         this.camera.zoom = savedZoom;
       } else {
-        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
       }
     }
   }
@@ -621,7 +676,7 @@ export class GameClient {
         this.touchJoystick.attach();
       }
     } else {
-      const session = this.server.getLocalSession();
+      const session = this.localServer.getLocalSession();
       session.editorEnabled = !session.editorEnabled;
       this.editorPanel.visible = session.editorEnabled;
       this.transport.send({
@@ -645,9 +700,33 @@ export class GameClient {
     if (this.mainMenu.visible) {
       this.mainMenu.hide();
     } else {
-      this.server.flush();
-      const worlds = await this.server.listWorlds();
-      this.mainMenu.show(worlds);
+      this.flushServer();
+      if (this.serialized) {
+        const resp = await this.sendRequest<{ worlds: WorldMeta[] }>({
+          type: "list-worlds",
+          requestId: this.nextRequestId++,
+        });
+        this.mainMenu.show(resp.worlds);
+      } else {
+        const worlds = await this.localServer.listWorlds();
+        this.mainMenu.show(worlds);
+      }
+    }
+  }
+
+  /** Send a request and return a promise resolved when the server responds with matching requestId. */
+  private sendRequest<T>(msg: ClientMessage & { requestId: number }): Promise<T> {
+    return new Promise((resolve) => {
+      this.pendingRequests.set(msg.requestId, { resolve });
+      this.transport.send(msg);
+    });
+  }
+
+  private flushServer(): void {
+    if (this.serialized) {
+      this.transport.send({ type: "flush" });
+    } else {
+      this.localServer.flush();
     }
   }
 
