@@ -1,6 +1,6 @@
 import { TILE_SIZE } from "../config/constants.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import type { ColliderComponent, Entity, PositionComponent } from "./Entity.js";
+import type { Entity, PositionComponent } from "./Entity.js";
 
 export interface AABB {
   left: number;
@@ -9,14 +9,35 @@ export interface AABB {
   bottom: number;
 }
 
-/** Compute world-space AABB from entity position + collider. */
-export function getEntityAABB(pos: PositionComponent, collider: ColliderComponent): AABB {
+/** Any collider-shaped object (works for both ColliderComponent and PropCollider). */
+type ColliderLike = { offsetX: number; offsetY: number; width: number; height: number };
+
+/** Compute world-space AABB from a position + collider. */
+export function getEntityAABB(pos: { wx: number; wy: number }, collider: ColliderLike): AABB {
   return {
     left: pos.wx + collider.offsetX - collider.width / 2,
     top: pos.wy + collider.offsetY - collider.height,
     right: pos.wx + collider.offsetX + collider.width / 2,
     bottom: pos.wy + collider.offsetY,
   };
+}
+
+/** Check if two AABBs overlap (strict inequality — touching edges don't count). */
+export function aabbsOverlap(a: AABB, b: AABB): boolean {
+  return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+}
+
+/** Check if an AABB overlaps any entity collider, skipping entities in the exclude set. */
+export function aabbOverlapsAnyEntity(
+  aabb: AABB,
+  excludeIds: ReadonlySet<number>,
+  entities: readonly Entity[],
+): boolean {
+  for (const other of entities) {
+    if (excludeIds.has(other.id) || !other.collider) continue;
+    if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
+  }
+  return false;
 }
 
 /** Check if an AABB overlaps any tile matching the block mask. */
@@ -41,6 +62,7 @@ export function aabbOverlapsSolid(
 /**
  * Resolve entity movement with per-axis sliding collision.
  * Mutates entity.position in place. Returns true if any axis was blocked.
+ * Optional `isExtraBlocked` checks additional AABB obstacles (props, other entities).
  */
 export function resolveCollision(
   entity: Entity,
@@ -48,6 +70,7 @@ export function resolveCollision(
   dy: number,
   getCollision: (tx: number, ty: number) => number,
   blockMask: number,
+  isExtraBlocked?: (aabb: AABB) => boolean,
 ): boolean {
   if (!entity.collider) {
     entity.position.wx += dx;
@@ -62,7 +85,8 @@ export function resolveCollision(
     wx: entity.position.wx + dx,
     wy: entity.position.wy,
   };
-  if (!aabbOverlapsSolid(getEntityAABB(testX, entity.collider), getCollision, blockMask)) {
+  const xBox = getEntityAABB(testX, entity.collider);
+  if (!aabbOverlapsSolid(xBox, getCollision, blockMask) && !isExtraBlocked?.(xBox)) {
     entity.position.wx = testX.wx;
   } else {
     blocked = true;
@@ -73,7 +97,8 @@ export function resolveCollision(
     wx: entity.position.wx,
     wy: entity.position.wy + dy,
   };
-  if (!aabbOverlapsSolid(getEntityAABB(testY, entity.collider), getCollision, blockMask)) {
+  const yBox = getEntityAABB(testY, entity.collider);
+  if (!aabbOverlapsSolid(yBox, getCollision, blockMask) && !isExtraBlocked?.(yBox)) {
     entity.position.wy = testY.wy;
   } else {
     blocked = true;

@@ -195,6 +195,9 @@ export class Game {
     this.mainMenu.onRename = (id, name) => {
       this.registry.renameWorld(id, name);
     };
+    this.mainMenu.onClose = () => {
+      this.mainMenu.hide();
+    };
 
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
@@ -560,7 +563,12 @@ export class Game {
         savedCollider = this.player.collider;
         this.player.collider = null;
       }
-      this.entityManager.update(dt, (tx, ty) => this.world.getCollisionIfLoaded(tx, ty));
+      this.entityManager.update(
+        dt,
+        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+        this.player,
+        this.propManager,
+      );
       if (savedCollider) {
         this.player.collider = savedCollider;
       }

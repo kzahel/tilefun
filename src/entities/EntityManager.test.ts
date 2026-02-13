@@ -2,12 +2,28 @@ import { describe, expect, it } from "vitest";
 import { PLAYER_FRAME_DURATION } from "../config/constants.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { createChicken } from "./Chicken.js";
+import type { Entity } from "./Entity.js";
 import { EntityManager } from "./EntityManager.js";
 import { createPlayer } from "./Player.js";
+import { PropManager } from "./PropManager.js";
 
 /** Narrow a nullable to non-null, failing the test if null. */
 function assertDefined<T>(val: T | null | undefined): asserts val is T {
   expect(val).not.toBeNull();
+}
+
+const noCollision = () => CollisionFlag.None;
+const emptyProps = new PropManager();
+
+/** Helper: call update with required player + propManager params. */
+function updateWith(
+  em: EntityManager,
+  dt: number,
+  getCollision: (tx: number, ty: number) => number,
+  player: Entity,
+  propManager?: PropManager,
+): void {
+  em.update(dt, getCollision, player, propManager ?? emptyProps);
 }
 
 describe("EntityManager", () => {
@@ -35,7 +51,7 @@ describe("EntityManager", () => {
       assertDefined(vel);
       vel.vx = 60;
       vel.vy = 30;
-      em.update(1); // 1 second
+      updateWith(em, 1, noCollision, p); // 1 second
       expect(p.position.wx).toBe(60);
       expect(p.position.wy).toBe(30);
     });
@@ -49,7 +65,7 @@ describe("EntityManager", () => {
 
       // Advance past one frame duration
       const dt = (PLAYER_FRAME_DURATION + 1) / 1000;
-      em.update(dt);
+      updateWith(em, dt, noCollision, p);
       expect(spr.frameCol).toBe(1);
     });
 
@@ -64,7 +80,7 @@ describe("EntityManager", () => {
 
       // Stop moving
       spr.moving = false;
-      em.update(1 / 60);
+      updateWith(em, 1 / 60, noCollision, p);
       expect(spr.frameCol).toBe(0);
       expect(spr.animTimer).toBe(0);
     });
@@ -79,7 +95,7 @@ describe("EntityManager", () => {
       spr.animTimer = PLAYER_FRAME_DURATION - 1;
 
       const dt = 2 / 1000; // 2ms, enough to wrap
-      em.update(dt);
+      updateWith(em, dt, noCollision, p);
       expect(spr.frameCol).toBe(0);
     });
   });
@@ -95,21 +111,9 @@ describe("EntityManager", () => {
       // Water wall at tile (7, 5) — player AABB is ~16px above feet
       const getCollision = (tx: number, ty: number) =>
         tx === 7 && ty === 5 ? CollisionFlag.Water : CollisionFlag.None;
-      em.update(1, getCollision);
+      updateWith(em, 1, getCollision, p);
       // X should be blocked (stayed at 100)
       expect(p.position.wx).toBe(100);
-    });
-
-    it("applies velocity without collision when no getCollision provided", () => {
-      const em = new EntityManager();
-      const p = em.spawn(createPlayer(0, 0));
-      const vel = p.velocity;
-      assertDefined(vel);
-      vel.vx = 60;
-      vel.vy = 30;
-      em.update(1);
-      expect(p.position.wx).toBe(60);
-      expect(p.position.wy).toBe(30);
     });
 
     it("applies SlowWalk speed reduction", () => {
@@ -122,13 +126,14 @@ describe("EntityManager", () => {
       // Current tile (3, 3) has SlowWalk
       const getCollision = (tx: number, ty: number) =>
         tx === 3 && ty === 3 ? CollisionFlag.SlowWalk : CollisionFlag.None;
-      em.update(1, getCollision);
+      updateWith(em, 1, getCollision, p);
       // Should move at half speed: 100 * 0.5 = 50
       expect(p.position.wx).toBeCloseTo(100, 0);
     });
 
     it("reverses chicken direction on collision", () => {
       const em = new EntityManager();
+      const player = em.spawn(createPlayer(0, 0)); // far away, won't interfere
       const c = em.spawn(createChicken(100, 100));
       assertDefined(c.wanderAI);
       assertDefined(c.velocity);
@@ -140,7 +145,7 @@ describe("EntityManager", () => {
       // Wall ahead
       const getCollision = (tx: number, ty: number) =>
         tx === 7 && ty === 6 ? CollisionFlag.Water : CollisionFlag.None;
-      em.update(1, getCollision);
+      updateWith(em, 1, getCollision, player);
       // Direction should be reversed
       expect(c.wanderAI.dirX).toBe(-1);
     });
