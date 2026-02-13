@@ -22,12 +22,14 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
-import type { ClientMessage } from "../shared/protocol.js";
+import type { ClientMessage, GameStateMessage } from "../shared/protocol.js";
+import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { World } from "../world/World.js";
 import { tickGameplay } from "./GameplaySimulation.js";
 import { PlayerSession } from "./PlayerSession.js";
+import { ServerLoop } from "./ServerLoop.js";
 import { tickAllAI } from "./tickAllAI.js";
 
 const BEFRIEND_RANGE_SQ = 24 * 24;
@@ -49,6 +51,11 @@ export class GameServer {
   private transport: IServerTransport;
   private lastLoadedGems = 0;
   private lastLoadedCamera = { cameraX: 0, cameraY: 0, cameraZoom: 1 };
+  private loop: ServerLoop | null = null;
+  /** Tracks which chunk revisions each client has received (for delta sync). */
+  private clientChunkRevisions = new Map<string, Map<string, number>>();
+  /** When true, server broadcasts game state to clients after each tick. */
+  broadcasting = false;
 
   constructor(transport: IServerTransport) {
     this.transport = transport;
@@ -103,6 +110,7 @@ export class GameServer {
 
     this.transport.onDisconnect((clientId) => {
       this.sessions.delete(clientId);
+      this.clientChunkRevisions.delete(clientId);
     });
   }
 
@@ -110,6 +118,23 @@ export class GameServer {
     const session = this.sessions.get("local");
     if (!session) throw new Error("No local session");
     return session;
+  }
+
+  /** Start independent tick loop (for serialized/remote mode). */
+  startLoop(): void {
+    if (this.loop) return;
+    this.broadcasting = true;
+    this.loop = new ServerLoop((dt) => {
+      this.tick(dt);
+    });
+    this.loop.start();
+  }
+
+  /** Stop independent tick loop. */
+  stopLoop(): void {
+    this.loop?.stop();
+    this.loop = null;
+    this.broadcasting = false;
   }
 
   /** Run one simulation tick. In local mode, called by client's update(). */
@@ -164,6 +189,18 @@ export class GameServer {
         tickGameplay(session.gameplaySession, this.entityManager, dt, {
           markMetaDirty: () => this.saveManager?.markMetaDirty(),
         });
+      }
+    }
+
+    // Broadcast state to all clients (serialized mode)
+    if (this.broadcasting) {
+      for (const session of this.sessions.values()) {
+        // Compute autotile for chunks in this client's visible range
+        if (session.visibleRange) {
+          this.updateVisibleChunks(session.visibleRange);
+        }
+        const msg = this.buildGameState(session.clientId);
+        this.transport.send(session.clientId, msg);
       }
     }
   }
@@ -318,9 +355,62 @@ export class GameServer {
   }
 
   destroy(): void {
+    this.stopLoop();
     this.saveManager?.flush();
     this.saveManager?.close();
     this.transport.close();
+  }
+
+  /** Build a game-state message for a specific client, with delta chunk sync. */
+  private buildGameState(clientId: string): GameStateMessage {
+    const session = this.sessions.get(clientId);
+    if (!session) throw new Error(`No session for ${clientId}`);
+
+    // Track which chunk revisions this client has seen
+    let revisions = this.clientChunkRevisions.get(clientId);
+    if (!revisions) {
+      revisions = new Map();
+      this.clientChunkRevisions.set(clientId, revisions);
+    }
+
+    // Collect loaded chunk keys and build delta updates
+    const loadedChunkKeys: string[] = [];
+    const chunkUpdates = [];
+    for (const [key, chunk] of this.world.chunks.entries()) {
+      loadedChunkKeys.push(key);
+      const lastRev = revisions.get(key) ?? -1;
+      if (chunk.revision > lastRev) {
+        const commaIdx = key.indexOf(",");
+        const cx = Number(key.slice(0, commaIdx));
+        const cy = Number(key.slice(commaIdx + 1));
+        chunkUpdates.push(serializeChunk(cx, cy, chunk));
+        revisions.set(key, chunk.revision);
+      }
+    }
+
+    // Clean up revisions for unloaded chunks
+    for (const key of revisions.keys()) {
+      if (
+        !this.world.chunks.get(
+          Number(key.slice(0, key.indexOf(","))),
+          Number(key.slice(key.indexOf(",") + 1)),
+        )
+      ) {
+        revisions.delete(key);
+      }
+    }
+
+    return {
+      type: "game-state",
+      entities: this.entityManager.entities.map(serializeEntity),
+      props: this.propManager.props.map(serializeProp),
+      playerEntityId: session.player.id,
+      gemsCollected: session.gameplaySession.gemsCollected,
+      invincibilityTimer: session.gameplaySession.invincibilityTimer,
+      editorEnabled: session.editorEnabled,
+      loadedChunkKeys,
+      chunkUpdates,
+    };
   }
 
   // ---- Private ----
@@ -412,6 +502,16 @@ export class GameServer {
       case "set-debug":
         session.debugPaused = msg.paused;
         session.debugNoclip = msg.noclip;
+        break;
+
+      case "visible-range":
+        session.visibleRange = {
+          minCx: msg.minCx,
+          minCy: msg.minCy,
+          maxCx: msg.maxCx,
+          maxCy: msg.maxCy,
+        };
+        this.updateVisibleChunks(session.visibleRange);
         break;
     }
   }

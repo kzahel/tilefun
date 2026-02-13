@@ -134,6 +134,7 @@ export class TerrainEditor {
     }
 
     chunk.dirty = true;
+    chunk.revision++;
     const key = chunkKey(cx, cy);
     this.markChunkDirty(key);
 
@@ -168,6 +169,7 @@ export class TerrainEditor {
 
     chunk.setHeight(lx, ly, height);
     chunk.dirty = true;
+    chunk.revision++;
     this.markChunkDirty(chunkKey(cx, cy));
   }
 
@@ -184,6 +186,7 @@ export class TerrainEditor {
       chunk.heightGrid.fill(0);
       chunk.dirty = true;
       chunk.autotileComputed = false;
+      chunk.revision++;
       this.markChunkDirty(key);
     }
   }
@@ -193,6 +196,7 @@ export class TerrainEditor {
     for (const [key, chunk] of this.world.chunks.entries()) {
       chunk.fillRoad(0);
       chunk.dirty = true;
+      chunk.revision++;
       this.markChunkDirty(key);
     }
   }
@@ -255,6 +259,7 @@ export class TerrainEditor {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
       chunk.setSubgrid(lsx, lsy, terrainId);
+      chunk.revision++;
       this.markChunkDirty(chunkKey(cx, cy));
     }
   }

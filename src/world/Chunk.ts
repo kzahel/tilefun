@@ -59,6 +59,9 @@ export class Chunk {
   /** Computed base TerrainId per tile (from autotile blend algorithm). */
   readonly blendBase: Uint8Array;
 
+  /** Incremented on each edit. Used for delta chunk sync. */
+  revision = 0;
+
   constructor() {
     this.subgrid = new Uint8Array(SUBGRID_AREA);
     this.terrain = new Uint16Array(AREA);

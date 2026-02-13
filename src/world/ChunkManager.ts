@@ -132,6 +132,11 @@ export class ChunkManager {
     return this.chunks.get(chunkKey(cx, cy));
   }
 
+  /** Remove a chunk by key. Used by RemoteStateView to unload server-unloaded chunks. */
+  remove(key: string): boolean {
+    return this.chunks.delete(key);
+  }
+
   /** Iterate all loaded chunks. */
   entries(): IterableIterator<[string, Chunk]> {
     return this.chunks.entries();

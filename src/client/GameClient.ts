@@ -1,11 +1,13 @@
 import { loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { BlendGraph } from "../autotile/BlendGraph.js";
 import { CAMERA_LERP, TILE_SIZE } from "../config/constants.js";
 import { GameLoop } from "../core/GameLoop.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
+import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { Camera } from "../rendering/Camera.js";
@@ -15,10 +17,16 @@ import { drawEntities } from "../rendering/EntityRenderer.js";
 import type { Renderable } from "../rendering/Renderable.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
+import type { ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
-import { type ClientStateView, LocalStateView } from "./ClientStateView.js";
+import { World } from "../world/World.js";
+import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
+
+export interface GameClientOptions {
+  mode?: "local" | "serialized";
+}
 
 export class GameClient {
   private canvas: HTMLCanvasElement;
@@ -42,14 +50,23 @@ export class GameClient {
   private stateView: ClientStateView;
   private transport: IClientTransport;
   private server: GameServer;
+  private serialized: boolean;
+  /** Client-side editor enabled tracking for serialized mode. */
+  private clientEditorEnabled = true;
 
-  constructor(canvas: HTMLCanvasElement, transport: IClientTransport, server: GameServer) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    transport: IClientTransport,
+    server: GameServer,
+    options?: GameClientOptions,
+  ) {
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Failed to get 2D context");
     this.canvas = canvas;
     this.ctx = ctx;
     this.transport = transport;
     this.server = server;
+    this.serialized = options?.mode === "serialized";
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
     this.input = new InputManager();
@@ -60,7 +77,29 @@ export class GameClient {
     this.editorPanel = new EditorPanel();
     this.editorPanel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
-    this.stateView = new LocalStateView(server);
+
+    if (this.serialized) {
+      // Client-side world with no generator (chunks populated from server messages)
+      const clientWorld = new World(new FlatStrategy());
+      const remoteView = new RemoteStateView(clientWorld);
+      this.stateView = remoteView;
+
+      // Route server messages to RemoteStateView
+      this.transport.onMessage((msg: ServerMessage) => {
+        if (msg.type === "game-state") {
+          remoteView.applyGameState(msg);
+        } else if (msg.type === "world-loaded") {
+          remoteView.clear();
+          this.camera.x = msg.cameraX;
+          this.camera.y = msg.cameraY;
+          this.camera.zoom = msg.cameraZoom;
+          this.sendVisibleRange();
+        }
+      });
+    } else {
+      this.stateView = new LocalStateView(server);
+    }
+
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha) => this.render(alpha),
@@ -79,8 +118,8 @@ export class GameClient {
     this.editorMode.attach();
     this.editorPanel.visible = true;
 
-    // Load all assets
-    const { blendGraph } = this.server;
+    // Load all assets — BlendGraph is deterministic, construct locally
+    const blendGraph = this.serialized ? new BlendGraph() : this.server.blendGraph;
     const assets = await loadGameAssets(blendGraph);
     this.sheets = assets.sheets;
     this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
@@ -95,22 +134,32 @@ export class GameClient {
       new Spritesheet(this.gemSpriteCanvas as unknown as HTMLImageElement, 16, 16),
     );
 
-    // Apply loaded world camera position
-    const session = this.server.getLocalSession();
-    this.camera.x = session.cameraX;
-    this.camera.y = session.cameraY;
-    this.camera.zoom = session.cameraZoom;
+    if (!this.serialized) {
+      // Apply loaded world camera position (local mode — direct access)
+      const session = this.server.getLocalSession();
+      this.camera.x = session.cameraX;
+      this.camera.y = session.cameraY;
+      this.camera.zoom = session.cameraZoom;
 
-    // Initial chunk loading
-    this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+      // Initial chunk loading
+      this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+    } else {
+      // Serialized mode: send visible range so server loads initial chunks
+      this.sendVisibleRange();
+    }
 
-    // Set up menu callbacks
+    // Set up menu callbacks (world management stays as direct server calls)
     this.mainMenu.onSelect = (id) => {
       this.server.loadWorld(id).then((cam) => {
         this.camera.x = cam.cameraX;
         this.camera.y = cam.cameraY;
         this.camera.zoom = cam.cameraZoom;
-        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        if (this.serialized) {
+          (this.stateView as RemoteStateView).clear();
+          this.sendVisibleRange();
+        } else {
+          this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        }
         this.mainMenu.hide();
       });
     };
@@ -120,20 +169,28 @@ export class GameClient {
           this.camera.x = cam.cameraX;
           this.camera.y = cam.cameraY;
           this.camera.zoom = cam.cameraZoom;
-          this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+          if (this.serialized) {
+            (this.stateView as RemoteStateView).clear();
+            this.sendVisibleRange();
+          } else {
+            this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+          }
           this.mainMenu.hide();
         });
       });
     };
     this.mainMenu.onDelete = async (id) => {
       await this.server.deleteWorld(id);
-      // Camera may have changed if current world was deleted
-      const session = this.server.getLocalSession();
-      this.camera.x = session.cameraX;
-      this.camera.y = session.cameraY;
-      this.camera.zoom = session.cameraZoom;
-      this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-      // Refresh the menu
+      if (!this.serialized) {
+        const session = this.server.getLocalSession();
+        this.camera.x = session.cameraX;
+        this.camera.y = session.cameraY;
+        this.camera.zoom = session.cameraZoom;
+        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+      } else {
+        (this.stateView as RemoteStateView).clear();
+        this.sendVisibleRange();
+      }
       const worlds = await this.server.listWorlds();
       this.mainMenu.show(worlds);
     };
@@ -171,22 +228,32 @@ export class GameClient {
     // Skip game updates while menu is open
     if (this.mainMenu.visible) return;
 
-    const session = this.server.getLocalSession();
+    const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
 
     // Apply debug panel state
-    if (!this.stateView.editorEnabled) {
+    if (!editorEnabled) {
       this.camera.zoom = this.debugPanel.zoom;
     }
     if (this.debugPanel.consumeBaseModeChange() || this.debugPanel.consumeConvexChange()) {
       this.server.invalidateAllChunks();
     }
 
-    // Sync debug state to server
-    session.debugPaused = this.debugPanel.paused;
-    session.debugNoclip = this.debugPanel.noclip;
+    if (this.serialized) {
+      // Send debug state via transport
+      this.transport.send({
+        type: "set-debug",
+        paused: this.debugPanel.paused,
+        noclip: this.debugPanel.noclip,
+      });
+    } else {
+      // Sync debug state directly to session
+      const session = this.server.getLocalSession();
+      session.debugPaused = this.debugPanel.paused;
+      session.debugNoclip = this.debugPanel.noclip;
+    }
 
     // Editor mode: paint terrain or place entities
-    if (this.stateView.editorEnabled) {
+    if (editorEnabled) {
       this.editorPanel.setTemporaryUnpaint(this.editorMode.rightClickUnpaint);
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.selectedRoadType = this.editorPanel.selectedRoadType;
@@ -302,7 +369,7 @@ export class GameClient {
     }
 
     // Player input → velocity (skip in editor — camera pans via drag)
-    if (!this.stateView.editorEnabled) {
+    if (!editorEnabled) {
       const movement = this.input.getMovement();
       this.transport.send({
         type: "player-input",
@@ -312,35 +379,46 @@ export class GameClient {
       });
     }
 
-    // Set visible range for spawners (OLD range, before camera follow)
-    session.visibleRange = this.camera.getVisibleChunkRange();
-
-    // Drive the server tick synchronously
-    this.server.tick(dt);
-
-    // Camera follows player (only in play mode)
-    if (!this.stateView.editorEnabled) {
-      this.camera.follow(
-        this.stateView.playerEntity.position.wx,
-        this.stateView.playerEntity.position.wy,
-        CAMERA_LERP,
-      );
-    }
-
-    // Update camera position on server session (for save meta)
-    session.cameraX = this.camera.x;
-    session.cameraY = this.camera.y;
-    session.cameraZoom = this.camera.zoom;
-
-    // Update chunk loading based on camera position (NEW range, after follow)
-    // Observer mode: load chunks as if zoom=1
-    if (this.debugPanel.observer && this.camera.zoom !== 1) {
-      const savedZoom = this.camera.zoom;
-      this.camera.zoom = 1;
-      this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
-      this.camera.zoom = savedZoom;
+    if (this.serialized) {
+      // Serialized mode: server ticks independently, just send visible range
+      // Camera follows player (only in play mode)
+      if (!editorEnabled) {
+        this.camera.follow(
+          this.stateView.playerEntity.position.wx,
+          this.stateView.playerEntity.position.wy,
+          CAMERA_LERP,
+        );
+      }
+      this.sendVisibleRange();
     } else {
-      this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+      // Local mode: drive the server tick synchronously
+      const session = this.server.getLocalSession();
+      session.visibleRange = this.camera.getVisibleChunkRange();
+      this.server.tick(dt);
+
+      // Camera follows player (only in play mode)
+      if (!editorEnabled) {
+        this.camera.follow(
+          this.stateView.playerEntity.position.wx,
+          this.stateView.playerEntity.position.wy,
+          CAMERA_LERP,
+        );
+      }
+
+      // Update camera position on server session (for save meta)
+      session.cameraX = this.camera.x;
+      session.cameraY = this.camera.y;
+      session.cameraZoom = this.camera.zoom;
+
+      // Update chunk loading based on camera position (NEW range, after follow)
+      if (this.debugPanel.observer && this.camera.zoom !== 1) {
+        const savedZoom = this.camera.zoom;
+        this.camera.zoom = 1;
+        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        this.camera.zoom = savedZoom;
+      } else {
+        this.server.updateVisibleChunks(this.camera.getVisibleChunkRange());
+      }
     }
   }
 
@@ -354,6 +432,8 @@ export class GameClient {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     if (this.sheets.size === 0) return;
+
+    const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
 
     const visible = this.camera.getVisibleChunkRange();
     // Terrain, autotile, and details are all baked into the chunk cache
@@ -369,7 +449,7 @@ export class GameClient {
     this.tileRenderer.drawElevation(this.ctx, this.camera, this.stateView.world, visible);
 
     // Editor overlays (grid + cursor highlight + elevation tint)
-    if (this.stateView.editorEnabled) {
+    if (editorEnabled) {
       drawEditorOverlay(
         this.ctx,
         this.camera,
@@ -404,7 +484,7 @@ export class GameClient {
     drawEntities(this.ctx, this.camera, renderables, this.sheets, this.stateView.world);
 
     // Gem counter HUD (play mode only)
-    if (!this.stateView.editorEnabled) {
+    if (!editorEnabled) {
       this.drawGemHUD();
     }
 
@@ -453,7 +533,7 @@ export class GameClient {
     }
 
     // Touch joystick overlay (not in editor mode)
-    if (!this.stateView.editorEnabled) {
+    if (!editorEnabled) {
       this.touchJoystick.draw(this.ctx);
     }
   }
@@ -467,6 +547,9 @@ export class GameClient {
       return;
     }
     if (this.mainMenu.visible) return;
+
+    const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
+
     if (e.key === "F3" || e.key === "`") {
       e.preventDefault();
       this.debugEnabled = !this.debugEnabled;
@@ -476,27 +559,27 @@ export class GameClient {
       e.preventDefault();
       this.toggleEditor();
     }
-    if ((e.key === "m" || e.key === "M") && this.stateView.editorEnabled) {
+    if ((e.key === "m" || e.key === "M") && editorEnabled) {
       e.preventDefault();
       this.editorPanel.toggleMode();
     }
-    if ((e.key === "b" || e.key === "B") && this.stateView.editorEnabled) {
+    if ((e.key === "b" || e.key === "B") && editorEnabled) {
       e.preventDefault();
       this.editorPanel.cycleBridgeDepth();
     }
-    if ((e.key === "s" || e.key === "S") && this.stateView.editorEnabled) {
+    if ((e.key === "s" || e.key === "S") && editorEnabled) {
       e.preventDefault();
       this.editorPanel.cycleBrushShape();
     }
-    if (e.key === "z" && this.stateView.editorEnabled) {
+    if (e.key === "z" && editorEnabled) {
       e.preventDefault();
       this.editorPanel.setPaintMode("positive");
     }
-    if (e.key === "c" && this.stateView.editorEnabled) {
+    if (e.key === "c" && editorEnabled) {
       e.preventDefault();
       this.editorPanel.setPaintMode("unpaint");
     }
-    if ((e.key === "t" || e.key === "T") && this.stateView.editorEnabled) {
+    if ((e.key === "t" || e.key === "T") && editorEnabled) {
       e.preventDefault();
       this.editorPanel.toggleTab();
     }
@@ -507,22 +590,42 @@ export class GameClient {
   }
 
   private toggleEditor(): void {
-    const session = this.server.getLocalSession();
-    session.editorEnabled = !session.editorEnabled;
-    this.editorPanel.visible = session.editorEnabled;
-    this.transport.send({
-      type: "set-editor-mode",
-      enabled: session.editorEnabled,
-    });
-    if (this.editorButton) {
-      this.editorButton.textContent = session.editorEnabled ? "Play" : "Edit";
-    }
-    if (session.editorEnabled) {
-      this.touchJoystick.detach();
-      this.editorMode.attach();
+    if (this.serialized) {
+      // Track editor state locally for immediate UI response
+      this.clientEditorEnabled = !this.clientEditorEnabled;
+      this.editorPanel.visible = this.clientEditorEnabled;
+      this.transport.send({
+        type: "set-editor-mode",
+        enabled: this.clientEditorEnabled,
+      });
+      if (this.editorButton) {
+        this.editorButton.textContent = this.clientEditorEnabled ? "Play" : "Edit";
+      }
+      if (this.clientEditorEnabled) {
+        this.touchJoystick.detach();
+        this.editorMode.attach();
+      } else {
+        this.editorMode.detach();
+        this.touchJoystick.attach();
+      }
     } else {
-      this.editorMode.detach();
-      this.touchJoystick.attach();
+      const session = this.server.getLocalSession();
+      session.editorEnabled = !session.editorEnabled;
+      this.editorPanel.visible = session.editorEnabled;
+      this.transport.send({
+        type: "set-editor-mode",
+        enabled: session.editorEnabled,
+      });
+      if (this.editorButton) {
+        this.editorButton.textContent = session.editorEnabled ? "Play" : "Edit";
+      }
+      if (session.editorEnabled) {
+        this.touchJoystick.detach();
+        this.editorMode.attach();
+      } else {
+        this.editorMode.detach();
+        this.touchJoystick.attach();
+      }
     }
   }
 
@@ -534,6 +637,18 @@ export class GameClient {
       const worlds = await this.server.listWorlds();
       this.mainMenu.show(worlds);
     }
+  }
+
+  /** Send current visible chunk range to server (serialized mode). */
+  private sendVisibleRange(): void {
+    const range = this.camera.getVisibleChunkRange();
+    this.transport.send({
+      type: "visible-range",
+      minCx: range.minCx,
+      minCy: range.minCy,
+      maxCx: range.maxCx,
+      maxCy: range.maxCy,
+    });
   }
 
   private createEditorButton(): void {
