@@ -45,9 +45,9 @@ export class EntityManager {
         }
       }
 
-      // Tick sprite animation
+      // Tick sprite animation (skip single-frame sprites like static props)
       const sprite = entity.sprite;
-      if (sprite) {
+      if (sprite && sprite.frameCount > 1) {
         if (sprite.moving) {
           sprite.animTimer += dt * 1000;
           if (sprite.animTimer >= sprite.frameDuration) {

@@ -129,6 +129,10 @@ function drawCursorHighlight(
     drawElevationCursorHighlight(ctx, camera, editorMode, state);
     return;
   }
+  if (state.editorTab === "props") {
+    drawTileCursorHighlight(ctx, camera, editorMode, "positive", 0);
+    return;
+  }
   if (state.brushMode === "subgrid" || state.brushMode === "cross" || state.brushMode === "x") {
     drawSubgridCursorHighlight(ctx, camera, editorMode, state);
   } else if (state.brushMode === "corner") {

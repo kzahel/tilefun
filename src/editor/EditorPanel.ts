@@ -2,16 +2,17 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { MAX_ELEVATION } from "../config/constants.js";
+import { PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
 import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
 
-export type EditorTab = "natural" | "road" | "structure" | "entities" | "elevation";
+export type EditorTab = "natural" | "road" | "structure" | "entities" | "props" | "elevation";
 
 const PANEL_STYLE = `
-  position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 0; left: 0; right: 0;
   background: rgba(0,0,0,0.8); color: #fff;
   font: 13px monospace; padding: 0;
-  border-radius: 6px; z-index: 100;
+  border-radius: 6px 6px 0 0; z-index: 100;
   display: none; user-select: none;
   flex-direction: column;
 `;
@@ -104,7 +105,7 @@ const ENTITY_PALETTE: EntityPaletteEntry[] = [
   })),
 ];
 
-const ALL_TABS: EditorTab[] = ["natural", "road", "structure", "entities", "elevation"];
+const ALL_TABS: EditorTab[] = ["natural", "road", "structure", "entities", "props", "elevation"];
 const TERRAIN_TABS: EditorTab[] = ["natural", "road", "structure"];
 
 const ELEVATION_GRID_SIZES = [1, 2, 3, 4] as const;
@@ -128,6 +129,9 @@ export class EditorPanel {
   private readonly autoButtons: HTMLButtonElement[] = [];
   private readonly terrainWrappers: HTMLDivElement[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
+  private readonly propsRow: HTMLDivElement;
+  private readonly propButtons: HTMLButtonElement[] = [];
+  private readonly deleteButtons: HTMLButtonElement[] = [];
   private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
   private readonly bridgeButton: HTMLButtonElement;
   private readonly subgridSeparator: HTMLDivElement;
@@ -141,6 +145,9 @@ export class EditorPanel {
   selectedTerrain: number | null = TerrainId.Grass;
   selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
+  selectedPropType = "prop-flower-red";
+  /** When true, tapping places nothing — instead it deletes the nearest entity/prop. */
+  deleteMode = false;
   selectedElevation = 1;
   elevationGridSize = 1;
   editorTab: EditorTab = "natural";
@@ -159,7 +166,7 @@ export class EditorPanel {
 
     // --- Tab bar ---
     const tabBar = document.createElement("div");
-    tabBar.style.cssText = "display: flex; gap: 2px; padding: 0 8px;";
+    tabBar.style.cssText = "display: flex; flex-wrap: wrap; gap: 2px; padding: 0 8px;";
     for (const tab of ALL_TABS) {
       const btn = document.createElement("button");
       btn.style.cssText = TAB_STYLE;
@@ -168,6 +175,7 @@ export class EditorPanel {
         road: "Road",
         structure: "Structure",
         entities: "Entities",
+        props: "Props",
         elevation: "Elevation",
       };
       btn.textContent = TAB_LABELS[tab];
@@ -272,19 +280,56 @@ export class EditorPanel {
       btn.title = `Place ${entry.label} (click map)`;
       btn.addEventListener("click", () => {
         this.selectedEntityType = entry.type;
+        this.deleteMode = false;
         this.updateEntitySelection();
+        this.updateDeleteButtons();
       });
       this.entityButtons.push(btn);
       this.entityRow.appendChild(btn);
     }
 
     this.entityRow.appendChild(this.makeSeparator());
-    const hint = document.createElement("span");
-    hint.style.cssText = "font: 10px monospace; color: #aaa;";
-    hint.textContent = "Click: place / Right-click: delete";
-    this.entityRow.appendChild(hint);
+    this.entityRow.appendChild(this.buildDeleteButton());
 
     this.container.appendChild(this.entityRow);
+
+    // --- Props row ---
+    this.propsRow = document.createElement("div");
+    this.propsRow.style.cssText = ROW_STYLE;
+    this.propsRow.style.maxWidth = "90vw";
+    this.propsRow.style.overflowX = "auto";
+
+    let lastCategory = "";
+    for (const entry of PROP_PALETTE) {
+      if (entry.category !== lastCategory) {
+        if (lastCategory !== "") this.propsRow.appendChild(this.makeSeparator());
+        const catLabel = entry.category === "nature" ? "Nature" : "Playground";
+        this.propsRow.appendChild(this.makeLabel(catLabel));
+        lastCategory = entry.category;
+      }
+      const btn = document.createElement("button");
+      btn.style.cssText = `
+        width: 64px; height: 44px; border: 2px solid #555; border-radius: 4px;
+        background: ${entry.color}; color: #fff; font: bold 9px monospace;
+        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        display: flex; align-items: center; justify-content: center;
+      `;
+      btn.textContent = entry.label;
+      btn.title = `Place ${entry.label} (click map)`;
+      btn.addEventListener("click", () => {
+        this.selectedPropType = entry.type;
+        this.deleteMode = false;
+        this.updatePropSelection();
+        this.updateDeleteButtons();
+      });
+      this.propButtons.push(btn);
+      this.propsRow.appendChild(btn);
+    }
+
+    this.propsRow.appendChild(this.makeSeparator());
+    this.propsRow.appendChild(this.buildDeleteButton());
+
+    this.container.appendChild(this.propsRow);
 
     // --- Elevation row ---
     this.elevationRow = document.createElement("div");
@@ -333,6 +378,7 @@ export class EditorPanel {
     this.updateTerrainSelection();
     this.updateRoadSelection();
     this.updateEntitySelection();
+    this.updatePropSelection();
     this.updateElevationSelection();
     this.updateTabDisplay();
     document.body.appendChild(this.container);
@@ -572,6 +618,30 @@ export class EditorPanel {
     return sep;
   }
 
+  private buildDeleteButton(): HTMLButtonElement {
+    const btn = document.createElement("button");
+    btn.style.cssText = `
+      height: 44px; border: 2px solid #555; border-radius: 4px;
+      background: #444; color: #fff; font: bold 10px monospace;
+      cursor: pointer; padding: 0 12px;
+    `;
+    btn.textContent = "Delete";
+    btn.title = "Toggle delete mode (tap to remove)";
+    btn.addEventListener("click", () => {
+      this.deleteMode = !this.deleteMode;
+      this.updateDeleteButtons();
+    });
+    this.deleteButtons.push(btn);
+    return btn;
+  }
+
+  private updateDeleteButtons(): void {
+    for (const btn of this.deleteButtons) {
+      btn.style.borderColor = this.deleteMode ? "#f55" : "#555";
+      btn.style.background = this.deleteMode ? "#633" : "#444";
+    }
+  }
+
   private makeLabel(text: string): HTMLSpanElement {
     const lbl = document.createElement("span");
     lbl.style.cssText = "font: 9px monospace; color: #888; margin-right: 2px;";
@@ -589,6 +659,8 @@ export class EditorPanel {
 
   setTab(tab: EditorTab): void {
     this.editorTab = tab;
+    this.deleteMode = false;
+    this.updateDeleteButtons();
     // Non-natural tabs don't expose brush/paint controls — reset to defaults
     if (tab !== "natural") {
       this.setBrushMode("tile");
@@ -616,6 +688,7 @@ export class EditorPanel {
     this.roadRow.style.display = isRoad ? "flex" : "none";
     this.structureRow.style.display = this.editorTab === "structure" ? "flex" : "none";
     this.entityRow.style.display = this.editorTab === "entities" ? "flex" : "none";
+    this.propsRow.style.display = this.editorTab === "props" ? "flex" : "none";
     this.elevationRow.style.display = this.editorTab === "elevation" ? "flex" : "none";
   }
 
@@ -775,6 +848,18 @@ export class EditorPanel {
     }
   }
 
+  private updatePropSelection(): void {
+    for (let i = 0; i < PROP_PALETTE.length; i++) {
+      const btn = this.propButtons[i];
+      const entry = PROP_PALETTE[i];
+      if (btn && entry) {
+        btn.style.borderColor = entry.type === this.selectedPropType ? "#fff" : "#555";
+        btn.style.boxShadow =
+          entry.type === this.selectedPropType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
+      }
+    }
+  }
+
   private updateElevationSelection(): void {
     for (let i = 0; i < this.elevationHeightButtons.length; i++) {
       const btn = this.elevationHeightButtons[i];
@@ -830,6 +915,33 @@ export class EditorPanel {
       const sheet = sheets.get(entry.type);
       if (sheet) {
         this.renderPreviewCanvas(btn, sheet, 0, 0, 64, 44);
+      }
+    }
+
+    // Prop buttons: draw sprite from objects sheet
+    const objectsSheet = sheets.get("objects");
+    if (objectsSheet) {
+      const PROP_SPRITE_COORDS: Record<string, [number, number]> = {
+        "prop-flower-red": [1, 2],
+        "prop-flower-yellow": [5, 3],
+        "prop-sunflower": [5, 2],
+        "prop-tall-grass": [0, 2],
+        "prop-mushroom": [3, 2],
+        "prop-rock": [7, 0],
+        "prop-big-rock": [6, 0],
+        "prop-pumpkin": [6, 1],
+        "prop-berries": [2, 2],
+        "prop-sprout": [8, 0],
+        "prop-leaf": [4, 2],
+      };
+      for (let i = 0; i < PROP_PALETTE.length; i++) {
+        const btn = this.propButtons[i];
+        const entry = PROP_PALETTE[i];
+        if (!btn || !entry) continue;
+        const coords = PROP_SPRITE_COORDS[entry.type];
+        if (coords) {
+          this.renderPreviewCanvas(btn, objectsSheet, coords[0], coords[1], 64, 44);
+        }
       }
     }
 

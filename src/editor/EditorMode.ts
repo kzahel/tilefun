@@ -1,6 +1,7 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { EditorTab } from "./EditorPanel.js";
 
@@ -43,6 +44,9 @@ export class EditorMode {
   selectedTerrain: number | null = TerrainId.Grass;
   selectedRoadType = 0;
   selectedEntityType = "chicken";
+  selectedPropType = "prop-flower-red";
+  /** When true, left-click/tap deletes instead of placing. */
+  deleteMode = false;
   selectedElevation = 1;
   elevationGridSize = 1;
   editorTab: EditorTab = "natural";
@@ -51,6 +55,8 @@ export class EditorMode {
 
   /** Reference to live entities for right-click deletion lookup. */
   entities: readonly Entity[] = [];
+  /** Reference to live props for right-click deletion lookup. */
+  props: readonly Prop[] = [];
 
   // Tile-mode cursor (whole tile)
   cursorTileX = -Infinity;
@@ -73,6 +79,7 @@ export class EditorMode {
   private pendingElevationEdits: PendingElevationEdit[] = [];
   private pendingEntitySpawns: PendingEntitySpawn[] = [];
   private pendingEntityDeletions: number[] = [];
+  private pendingPropDeletions: number[] = [];
   private isPainting = false;
   private isPanning = false;
   /** True while right-click is held for temporary unpaint. */
@@ -232,6 +239,13 @@ export class EditorMode {
     return dels;
   }
 
+  consumePendingPropDeletions(): number[] {
+    if (this.pendingPropDeletions.length === 0) return this.pendingPropDeletions;
+    const dels = this.pendingPropDeletions;
+    this.pendingPropDeletions = [];
+    return dels;
+  }
+
   private canvasCoords(e: MouseEvent): { sx: number; sy: number } {
     const rect = this.canvas.getBoundingClientRect();
     return {
@@ -280,21 +294,47 @@ export class EditorMode {
     });
   }
 
+  private spawnPropAt(sx: number, sy: number): void {
+    const { wx, wy } = this.screenToWorld(sx, sy);
+    // Snap to tile center for clean placement
+    const snappedWx = Math.floor(wx / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2;
+    const snappedWy = Math.floor(wy / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2;
+    this.pendingEntitySpawns.push({
+      wx: snappedWx,
+      wy: snappedWy,
+      entityType: this.selectedPropType,
+    });
+  }
+
   private deleteEntityAt(sx: number, sy: number): void {
     const { wx, wy } = this.screenToWorld(sx, sy);
-    let bestId = -1;
-    let bestDist = 24; // max world-pixel distance to pick an entity
+    let bestDist = 24; // max world-pixel distance to pick
+    let bestEntityId = -1;
+    let bestPropId = -1;
     for (const entity of this.entities) {
       const dx = entity.position.wx - wx;
       const dy = entity.position.wy - wy;
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist < bestDist) {
         bestDist = dist;
-        bestId = entity.id;
+        bestEntityId = entity.id;
+        bestPropId = -1;
       }
     }
-    if (bestId >= 0) {
-      this.pendingEntityDeletions.push(bestId);
+    for (const prop of this.props) {
+      const dx = prop.position.wx - wx;
+      const dy = prop.position.wy - wy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestPropId = prop.id;
+        bestEntityId = -1;
+      }
+    }
+    if (bestEntityId >= 0) {
+      this.pendingEntityDeletions.push(bestEntityId);
+    } else if (bestPropId >= 0) {
+      this.pendingPropDeletions.push(bestPropId);
     }
   }
 
@@ -404,10 +444,18 @@ export class EditorMode {
     }
 
     if (this.editorTab === "entities") {
-      // Left button = place entity, right button = delete nearest
-      if (e.button === 0) {
+      if (e.button === 0 && !this.deleteMode) {
         this.spawnEntityAt(sx, sy);
-      } else if (e.button === 2) {
+      } else if (e.button === 2 || (e.button === 0 && this.deleteMode)) {
+        this.deleteEntityAt(sx, sy);
+      }
+      return;
+    }
+
+    if (this.editorTab === "props") {
+      if (e.button === 0 && !this.deleteMode) {
+        this.spawnPropAt(sx, sy);
+      } else if (e.button === 2 || (e.button === 0 && this.deleteMode)) {
         this.deleteEntityAt(sx, sy);
       }
       return;
@@ -522,8 +570,8 @@ export class EditorMode {
         if (this.touchPaintStart) {
           this.commitTouchPaint();
         }
-        // In entity mode, don't drag-to-spam entities
-        if (this.editorTab !== "entities" && !this.wasPinching) {
+        // In entity/props mode, don't drag-to-spam
+        if (this.editorTab !== "entities" && this.editorTab !== "props" && !this.wasPinching) {
           this.paintAt(first.sx, first.sy);
         }
         this.updateCursor(first.sx, first.sy);
@@ -568,7 +616,17 @@ export class EditorMode {
     this.cancelTouchPaint();
     if (!start) return;
     if (this.editorTab === "entities") {
-      this.spawnEntityAt(start.sx, start.sy);
+      if (this.deleteMode) {
+        this.deleteEntityAt(start.sx, start.sy);
+      } else {
+        this.spawnEntityAt(start.sx, start.sy);
+      }
+    } else if (this.editorTab === "props") {
+      if (this.deleteMode) {
+        this.deleteEntityAt(start.sx, start.sy);
+      } else {
+        this.spawnPropAt(start.sx, start.sy);
+      }
     } else {
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;

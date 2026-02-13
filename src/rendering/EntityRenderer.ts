@@ -1,22 +1,22 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
-import type { Entity } from "../entities/Entity.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import type { Renderable } from "./Renderable.js";
 
 /**
- * Draw entities Y-sorted onto the main canvas.
- * Entity position is feet (bottom-center of sprite frame).
+ * Draw renderables Y-sorted onto the main canvas.
+ * Position is feet (bottom-center of sprite frame).
  */
 export function drawEntities(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
-  entities: Entity[],
+  items: Renderable[],
   sheets: Map<string, Spritesheet>,
   world?: World,
 ): void {
-  for (const entity of entities) {
-    const { sprite } = entity;
+  for (const item of items) {
+    const { sprite } = item;
     if (!sprite) continue;
 
     const sheet = sheets.get(sprite.sheetKey);
@@ -25,8 +25,8 @@ export function drawEntities(
     // Elevation offset: look up tile height at entity's feet position
     let elevOffset = 0;
     if (world) {
-      const tx = Math.floor(entity.position.wx / TILE_SIZE);
-      const ty = Math.floor(entity.position.wy / TILE_SIZE);
+      const tx = Math.floor(item.position.wx / TILE_SIZE);
+      const ty = Math.floor(item.position.wy / TILE_SIZE);
       elevOffset = world.getHeightAt(tx, ty) * ELEVATION_PX * camera.scale;
     }
 
@@ -35,8 +35,8 @@ export function drawEntities(
     // and extends upward from feet.
     const halfW = sprite.spriteWidth / 2;
     const screen = camera.worldToScreen(
-      entity.position.wx - halfW,
-      entity.position.wy - sprite.spriteHeight,
+      item.position.wx - halfW,
+      item.position.wy - sprite.spriteHeight,
     );
 
     const destW = sprite.spriteWidth * camera.scale;

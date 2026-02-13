@@ -12,6 +12,8 @@ import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
+import { createProp, isPropType } from "../entities/PropFactories.js";
+import { PropManager } from "../entities/PropManager.js";
 import { updateWanderAI } from "../entities/wanderAI.js";
 import { InputManager } from "../input/InputManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -22,6 +24,7 @@ import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
+import type { Renderable } from "../rendering/Renderable.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
@@ -39,6 +42,7 @@ export class Game {
   private input: InputManager;
   private touchJoystick: TouchJoystick;
   private entityManager: EntityManager;
+  private propManager: PropManager;
   private player: Entity;
   private debugEnabled = false;
   private debugPanel: DebugPanel;
@@ -68,6 +72,7 @@ export class Game {
     this.touchJoystick = new TouchJoystick(canvas);
     this.input.setTouchJoystick(this.touchJoystick);
     this.entityManager = new EntityManager();
+    this.propManager = new PropManager();
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
     this.blendGraph = new BlendGraph();
@@ -214,6 +219,7 @@ export class Game {
     // Create fresh world state
     this.world = new World();
     this.entityManager = new EntityManager();
+    this.propManager = new PropManager();
     this.player = createPlayer(0, 0);
     this.entityManager.spawn(this.player);
 
@@ -236,9 +242,13 @@ export class Game {
       this.player.position.wy = savedMeta.playerY;
       for (const se of savedMeta.entities) {
         if (se.type === "player") continue;
-        const factory = ENTITY_FACTORIES[se.type];
-        if (factory) {
-          this.entityManager.spawn(factory(se.wx, se.wy));
+        if (isPropType(se.type)) {
+          this.propManager.add(createProp(se.type, se.wx, se.wy));
+        } else {
+          const factory = ENTITY_FACTORIES[se.type];
+          if (factory) {
+            this.entityManager.spawn(factory(se.wx, se.wy));
+          }
         }
       }
       this.entityManager.setNextId(savedMeta.nextEntityId);
@@ -423,9 +433,12 @@ export class Game {
       this.editorMode.paintMode = this.editorPanel.effectivePaintMode;
       this.editorMode.editorTab = this.editorPanel.editorTab;
       this.editorMode.selectedEntityType = this.editorPanel.selectedEntityType;
+      this.editorMode.selectedPropType = this.editorPanel.selectedPropType;
+      this.editorMode.deleteMode = this.editorPanel.deleteMode;
       this.editorMode.selectedElevation = this.editorPanel.selectedElevation;
       this.editorMode.elevationGridSize = this.editorPanel.elevationGridSize;
       this.editorMode.entities = this.entityManager.entities;
+      this.editorMode.props = this.propManager.props;
       this.editorMode.update(dt);
 
       const paintMode = this.editorPanel.effectivePaintMode;
@@ -475,13 +488,18 @@ export class Game {
         this.terrainEditor.applyElevationEdit(edit.tx, edit.ty, edit.height, edit.gridSize);
       }
 
-      // Apply entity spawns
+      // Apply entity/prop spawns
       let entitiesChanged = false;
       for (const spawn of this.editorMode.consumePendingEntitySpawns()) {
-        const factory = ENTITY_FACTORIES[spawn.entityType];
-        if (factory) {
-          this.entityManager.spawn(factory(spawn.wx, spawn.wy));
+        if (isPropType(spawn.entityType)) {
+          this.propManager.add(createProp(spawn.entityType, spawn.wx, spawn.wy));
           entitiesChanged = true;
+        } else {
+          const factory = ENTITY_FACTORIES[spawn.entityType];
+          if (factory) {
+            this.entityManager.spawn(factory(spawn.wx, spawn.wy));
+            entitiesChanged = true;
+          }
         }
       }
 
@@ -491,6 +509,12 @@ export class Game {
           this.entityManager.remove(id);
           entitiesChanged = true;
         }
+      }
+
+      // Apply prop deletions
+      for (const id of this.editorMode.consumePendingPropDeletions()) {
+        this.propManager.remove(id);
+        entitiesChanged = true;
       }
       if (entitiesChanged) this.saveManager?.markMetaDirty();
 
@@ -602,8 +626,13 @@ export class Game {
       );
     }
 
-    // Draw entities Y-sorted on top of terrain (with elevation offset)
-    drawEntities(this.ctx, this.camera, this.entityManager.getYSorted(), this.sheets, this.world);
+    // Draw entities + props Y-sorted on top of terrain (with elevation offset)
+    const renderables: Renderable[] = [
+      ...this.entityManager.getYSorted(),
+      ...this.propManager.props,
+    ];
+    renderables.sort((a, b) => a.position.wy - b.position.wy);
+    drawEntities(this.ctx, this.camera, renderables, this.sheets, this.world);
 
     // FPS tracking
     this.frameCount++;
@@ -664,17 +693,21 @@ export class Game {
   }
 
   private buildSaveMeta(): SavedMeta {
+    const entities = this.entityManager.entities.map((e) => ({
+      type: e.type,
+      wx: e.position.wx,
+      wy: e.position.wy,
+    }));
+    for (const p of this.propManager.props) {
+      entities.push({ type: p.type, wx: p.position.wx, wy: p.position.wy });
+    }
     return {
       playerX: this.player.position.wx,
       playerY: this.player.position.wy,
       cameraX: this.camera.x,
       cameraY: this.camera.y,
       cameraZoom: this.camera.zoom,
-      entities: this.entityManager.entities.map((e) => ({
-        type: e.type,
-        wx: e.position.wx,
-        wy: e.position.wy,
-      })),
+      entities,
       nextEntityId: this.entityManager.getNextId(),
     };
   }
