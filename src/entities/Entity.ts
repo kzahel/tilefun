@@ -91,4 +91,6 @@ export interface Entity {
   flashHidden?: boolean;
   /** When true, skip drawing a shadow under this entity. */
   noShadow?: boolean;
+  /** Countdown timer (seconds) — entity flashes then is removed when it reaches 0. */
+  deathTimer?: number;
 }

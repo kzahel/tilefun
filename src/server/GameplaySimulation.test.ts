@@ -111,21 +111,38 @@ describe("tickGameplay", () => {
   });
 
   describe("campfire ghost trap", () => {
-    it("destroys hostile entity that overlaps a campfire and spawns a gem", () => {
+    it("starts death flash when hostile entity overlaps a campfire", () => {
       const em = new EntityManager();
       const player = createPlayer(0, 0);
       em.spawn(player);
-      const fire = createCampfire(100, 100);
-      em.spawn(fire);
+      em.spawn(createCampfire(100, 100));
       const ghost = createGhostAngry(105, 100); // within 16px of campfire
       em.spawn(ghost);
       const session = makeSession({ player });
 
       tickGameplay(session, em, 1 / 60, noopCallbacks);
 
-      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeUndefined();
+      // Ghost should be dying (flash) but not yet removed
+      expect(ghost.deathTimer).toBeDefined();
+      expect(ghost.wanderAI?.hostile).toBe(false);
       // A reward gem should have been spawned
       expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(1);
+    });
+
+    it("removes ghost after death timer expires", () => {
+      const em = new EntityManager();
+      const player = createPlayer(0, 0);
+      em.spawn(player);
+      em.spawn(createCampfire(100, 100));
+      em.spawn(createGhostAngry(105, 100));
+      const session = makeSession({ player });
+
+      // Tick past the 0.4s death timer
+      for (let i = 0; i < 30; i++) {
+        tickGameplay(session, em, 1 / 60, noopCallbacks);
+      }
+
+      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeUndefined();
     });
 
     it("does not destroy hostile entity far from campfire", () => {
@@ -139,6 +156,9 @@ describe("tickGameplay", () => {
       tickGameplay(session, em, 1 / 60, noopCallbacks);
 
       expect(em.entities.find((e) => e.type === "ghost-angry")).toBeDefined();
+      expect(
+        em.entities.find((e) => e.type === "ghost-angry")?.deathTimer,
+      ).toBeUndefined();
     });
   });
 

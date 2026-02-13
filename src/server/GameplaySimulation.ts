@@ -105,22 +105,39 @@ export function tickGameplay(
   }
 
   // Hostile entities destroyed by campfire contact (ghost trap!)
-  const fireKills: number[] = [];
   for (const baddie of entityManager.entities) {
-    if (!baddie.wanderAI?.hostile) continue;
+    if (!baddie.wanderAI?.hostile || baddie.deathTimer !== undefined) continue;
     for (const fire of entityManager.entities) {
       if (fire.type !== "campfire") continue;
       const dx = baddie.position.wx - fire.position.wx;
       const dy = baddie.position.wy - fire.position.wy;
       if (dx * dx + dy * dy < 16 * 16) {
-        fireKills.push(baddie.id);
-        // Reward: spawn a gem where the baddie died
+        // Start death animation — flash for 0.4s then vanish
+        baddie.deathTimer = 0.4;
+        baddie.wanderAI.hostile = false;
+        baddie.wanderAI.state = "idle";
+        if (baddie.velocity) {
+          baddie.velocity.vx = 0;
+          baddie.velocity.vy = 0;
+        }
+        // Reward: spawn a gem where the baddie dies
         entityManager.spawn(createGem(baddie.position.wx, baddie.position.wy));
         break;
       }
     }
   }
-  for (const id of fireKills) {
+
+  // Tick death timers — flash rapidly, remove when expired
+  const dead: number[] = [];
+  for (const entity of entityManager.entities) {
+    if (entity.deathTimer === undefined) continue;
+    entity.deathTimer -= dt;
+    entity.flashHidden = Math.floor(entity.deathTimer * 16) % 2 === 0;
+    if (entity.deathTimer <= 0) {
+      dead.push(entity.id);
+    }
+  }
+  for (const id of dead) {
     entityManager.remove(id);
   }
 
