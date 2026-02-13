@@ -186,7 +186,7 @@ export function computeTileBlend(
   if (centerIsolated && center !== base) {
     const entry = blendGraph.getBlend(center, base);
     if (entry) {
-      const islandSprite = GM_BLOB_LOOKUP[0];
+      const islandSprite = GM_BLOB_LOOKUP[0] ?? 0;
       layers.push({
         sheetIndex: entry.sheetIndex,
         sheetKey: entry.sheetKey,
