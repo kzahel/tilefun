@@ -440,7 +440,11 @@ export class Game {
 
       // Apply subgrid edits (subgrid / cross mode)
       const subgridShape =
-        this.editorPanel.brushMode === "cross" ? "cross" : this.editorPanel.subgridShape;
+        this.editorPanel.brushMode === "cross"
+          ? "cross"
+          : this.editorPanel.brushMode === "x"
+            ? "x"
+            : this.editorPanel.subgridShape;
       for (const edit of this.editorMode.consumePendingSubgridEdits()) {
         this.terrainEditor.applySubgridEdit(
           edit.gsx,
@@ -585,7 +589,11 @@ export class Game {
           brushMode: this.editorPanel.brushMode,
           effectivePaintMode: this.editorPanel.effectivePaintMode,
           subgridShape:
-            this.editorPanel.brushMode === "cross" ? "cross" : this.editorPanel.subgridShape,
+            this.editorPanel.brushMode === "cross"
+              ? "cross"
+              : this.editorPanel.brushMode === "x"
+                ? "x"
+                : this.editorPanel.subgridShape,
           brushSize: this.editorPanel.brushSize,
           editorTab: this.editorPanel.editorTab,
           elevationGridSize: this.editorPanel.elevationGridSize,

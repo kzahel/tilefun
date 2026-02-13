@@ -13,7 +13,7 @@ interface ChunkRange {
 }
 
 interface EditorState {
-  brushMode: "tile" | "subgrid" | "corner" | "cross";
+  brushMode: "tile" | "subgrid" | "corner" | "cross" | "x";
   effectivePaintMode: PaintMode;
   subgridShape: SubgridShape;
   brushSize: 1 | 2 | 3;
@@ -129,7 +129,7 @@ function drawCursorHighlight(
     drawElevationCursorHighlight(ctx, camera, editorMode, state);
     return;
   }
-  if (state.brushMode === "subgrid" || state.brushMode === "cross") {
+  if (state.brushMode === "subgrid" || state.brushMode === "cross" || state.brushMode === "x") {
     drawSubgridCursorHighlight(ctx, camera, editorMode, state);
   } else if (state.brushMode === "corner") {
     drawCornerCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode);
@@ -208,8 +208,8 @@ function drawSubgridCursorHighlight(
 
   ctx.save();
 
-  if (shape === "cross") {
-    const points = getSubgridBrushPoints(gsx, gsy, "cross");
+  if (shape === "cross" || shape === "x") {
+    const points = getSubgridBrushPoints(gsx, gsy, shape);
     ctx.fillStyle = `rgba(${baseColor}, 0.25)`;
     ctx.strokeStyle = `rgba(${baseColor}, 0.8)`;
     ctx.lineWidth = 1;
@@ -263,24 +263,24 @@ function drawCornerCursorHighlight(
   if (!Number.isFinite(gsx)) return;
 
   const halfTile = TILE_SIZE / 2;
+  const halfTileScreen = halfTile * camera.scale;
   const baseColor = paintMode === "unpaint" ? "255, 80, 80" : "80, 200, 255";
 
-  const wx0 = (gsx - 1) * halfTile;
-  const wy0 = (gsy - 1) * halfTile;
-  const wx1 = (gsx + 2) * halfTile;
-  const wy1 = (gsy + 2) * halfTile;
-
-  const topLeft = camera.worldToScreen(wx0, wy0);
-  const botRight = camera.worldToScreen(wx1, wy1);
-  const w = botRight.sx - topLeft.sx;
-  const h = botRight.sy - topLeft.sy;
-
   ctx.save();
-  ctx.fillStyle = `rgba(${baseColor}, 0.2)`;
-  ctx.strokeStyle = `rgba(${baseColor}, 0.7)`;
-  ctx.lineWidth = 2;
-  ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
-  ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
+  ctx.fillStyle = `rgba(${baseColor}, 0.25)`;
+  ctx.strokeStyle = `rgba(${baseColor}, 0.8)`;
+  ctx.lineWidth = 1;
+
+  // Draw the 9 individual subgrid points the corner brush will paint
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      const screen = camera.worldToScreen((gsx + dx) * halfTile, (gsy + dy) * halfTile);
+      const x = screen.sx - halfTileScreen / 2;
+      const y = screen.sy - halfTileScreen / 2;
+      ctx.fillRect(x, y, halfTileScreen, halfTileScreen);
+      ctx.strokeRect(x, y, halfTileScreen, halfTileScreen);
+    }
+  }
 
   // Center crosshair
   const center = camera.worldToScreen(gsx * halfTile, gsy * halfTile);

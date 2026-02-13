@@ -4,9 +4,9 @@ import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { EditorTab } from "./EditorPanel.js";
 
-export type BrushMode = "tile" | "subgrid" | "corner" | "cross";
+export type BrushMode = "tile" | "subgrid" | "corner" | "cross" | "x";
 export type PaintMode = "positive" | "unpaint";
-export type SubgridShape = 1 | 2 | 3 | "cross";
+export type SubgridShape = 1 | 2 | 3 | "cross" | "x";
 
 interface PendingTileEdit {
   tx: number;
@@ -307,7 +307,7 @@ export class EditorMode {
       this.paintElevationAt(sx, sy);
       return;
     }
-    if (this.brushMode === "subgrid" || this.brushMode === "cross") {
+    if (this.brushMode === "subgrid" || this.brushMode === "cross" || this.brushMode === "x") {
       this.paintSubgridAt(sx, sy);
     } else if (this.brushMode === "corner") {
       this.paintCornerAt(sx, sy);

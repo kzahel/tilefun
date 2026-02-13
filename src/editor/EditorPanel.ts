@@ -179,6 +179,7 @@ export class EditorPanel {
       { mode: "subgrid", label: "\u229e", key: "M" },
       { mode: "corner", label: "\u25c7", key: "M" },
       { mode: "cross", label: "\u271a", key: "M" },
+      { mode: "x", label: "\u2716", key: "M" },
     ];
     for (const { mode, label, key } of brushModes) {
       const btn = document.createElement("button");
@@ -623,6 +624,8 @@ export class EditorPanel {
       this.setBrushMode("corner");
     } else if (this.brushMode === "corner") {
       this.setBrushMode("cross");
+    } else if (this.brushMode === "cross") {
+      this.setBrushMode("x");
     } else {
       this.setBrushMode("tile");
     }

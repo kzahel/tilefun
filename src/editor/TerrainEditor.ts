@@ -375,6 +375,15 @@ export function getSubgridBrushPoints(
       [gsx, gsy + 1],
     ];
   }
+  if (shape === "x") {
+    return [
+      [gsx, gsy],
+      [gsx - 1, gsy - 1],
+      [gsx + 1, gsy - 1],
+      [gsx - 1, gsy + 1],
+      [gsx + 1, gsy + 1],
+    ];
+  }
   const size = shape;
   const half = Math.floor(size / 2);
   const pts: [number, number][] = [];
