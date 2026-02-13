@@ -1,6 +1,7 @@
 import { TILE_SIZE } from "../config/constants.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity, PositionComponent } from "./Entity.js";
+import type { PropCollider } from "./Prop.js";
 
 export interface AABB {
   left: number;
@@ -25,6 +26,24 @@ export function getEntityAABB(pos: { wx: number; wy: number }, collider: Collide
 /** Check if two AABBs overlap (strict inequality — touching edges don't count). */
 export function aabbsOverlap(a: AABB, b: AABB): boolean {
   return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+}
+
+/** Check if an AABB overlaps a prop's wall segments (enterable props) or single collider. */
+export function aabbOverlapsPropWalls(
+  aabb: AABB,
+  propPos: { wx: number; wy: number },
+  prop: { collider: PropCollider | null; walls: PropCollider[] | null },
+): boolean {
+  if (prop.walls) {
+    for (const wall of prop.walls) {
+      if (aabbsOverlap(aabb, getEntityAABB(propPos, wall))) return true;
+    }
+    return false;
+  }
+  if (prop.collider) {
+    return aabbsOverlap(aabb, getEntityAABB(propPos, prop.collider));
+  }
+  return false;
 }
 
 /** Check if an AABB overlaps any entity collider, skipping entities in the exclude set. */

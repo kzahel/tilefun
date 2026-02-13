@@ -95,14 +95,37 @@ function drawCollisionBoxes(
     ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
   }
 
-  ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
   for (const prop of props) {
-    if (!prop.collider) continue;
-    const aabb = getEntityAABB(prop.position, prop.collider);
-    const topLeft = camera.worldToScreen(aabb.left, aabb.top);
-    const w = (aabb.right - aabb.left) * camera.scale;
-    const h = (aabb.bottom - aabb.top) * camera.scale;
-    ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
+    if (prop.walls) {
+      // Enterable prop: draw overall bounding collider as dashed cyan
+      if (prop.collider) {
+        ctx.save();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(0, 200, 255, 0.4)";
+        const aabb = getEntityAABB(prop.position, prop.collider);
+        const tl = camera.worldToScreen(aabb.left, aabb.top);
+        const w = (aabb.right - aabb.left) * camera.scale;
+        const h = (aabb.bottom - aabb.top) * camera.scale;
+        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+        ctx.restore();
+      }
+      // Draw each wall segment in orange
+      ctx.strokeStyle = "rgba(255, 160, 0, 0.8)";
+      for (const wall of prop.walls) {
+        const aabb = getEntityAABB(prop.position, wall);
+        const tl = camera.worldToScreen(aabb.left, aabb.top);
+        const w = (aabb.right - aabb.left) * camera.scale;
+        const h = (aabb.bottom - aabb.top) * camera.scale;
+        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+      }
+    } else if (prop.collider) {
+      ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
+      const aabb = getEntityAABB(prop.position, prop.collider);
+      const tl = camera.worldToScreen(aabb.left, aabb.top);
+      const w = (aabb.right - aabb.left) * camera.scale;
+      const h = (aabb.bottom - aabb.top) * camera.scale;
+      ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+    }
   }
 
   ctx.restore();

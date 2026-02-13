@@ -21,5 +21,8 @@ export interface Prop {
     spriteHeight: number;
   };
   collider: PropCollider | null;
+  /** Wall segments for enterable props. When present, movement collision checks
+   *  these instead of the single `collider`. Each wall is a PropCollider rect. */
+  walls: PropCollider[] | null;
   isProp: true;
 }

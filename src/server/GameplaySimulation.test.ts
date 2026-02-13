@@ -156,9 +156,7 @@ describe("tickGameplay", () => {
       tickGameplay(session, em, 1 / 60, noopCallbacks);
 
       expect(em.entities.find((e) => e.type === "ghost-angry")).toBeDefined();
-      expect(
-        em.entities.find((e) => e.type === "ghost-angry")?.deathTimer,
-      ).toBeUndefined();
+      expect(em.entities.find((e) => e.type === "ghost-angry")?.deathTimer).toBeUndefined();
     });
   });
 

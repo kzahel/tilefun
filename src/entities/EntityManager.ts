@@ -3,6 +3,7 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
   aabbOverlapsAnyEntity,
+  aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
   getSpeedMultiplier,
@@ -44,14 +45,14 @@ export class EntityManager {
   ): void {
     const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
-    // Helper: check if an AABB overlaps any prop collider (chunk-indexed)
+    // Helper: check if an AABB overlaps any prop's wall segments (or single collider)
     const overlapsAnyProp = (aabb: AABB): boolean => {
       const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
       const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
       const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
       const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
       for (const prop of propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-        if (prop.collider && aabbsOverlap(aabb, getEntityAABB(prop.position, prop.collider))) {
+        if (aabbOverlapsPropWalls(aabb, prop.position, prop)) {
           return true;
         }
       }

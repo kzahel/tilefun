@@ -7,6 +7,8 @@ interface PropDef {
   width: number;
   height: number;
   collider: PropCollider | null;
+  /** Wall segments for enterable props. Movement collision uses these instead of collider. */
+  walls?: PropCollider[];
 }
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
@@ -124,6 +126,11 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
+    // Arch legs at outer edges, wide walk-through center (24px opening)
+    walls: [
+      { offsetX: -16, offsetY: 0, width: 8, height: 24 }, // Left leg
+      { offsetX: 16, offsetY: 0, width: 8, height: 24 }, // Right leg
+    ],
   },
   "prop-swing": {
     sheetKey: "prop-swing",
@@ -164,6 +171,11 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 80,
     height: 80,
     collider: { offsetX: 0, offsetY: 0, width: 72, height: 40 },
+    // Symmetric towers with centered 16px doorway matching the archway
+    walls: [
+      { offsetX: -22, offsetY: 0, width: 28, height: 40 }, // Left tower + slide
+      { offsetX: 22, offsetY: 0, width: 28, height: 40 }, // Right tower
+    ],
   },
   "prop-tube-cross": {
     sheetKey: "prop-tube-cross",
@@ -172,6 +184,11 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
+    // Bottom-row corners only; top 8px of collision zone is open for E-W passage
+    walls: [
+      { offsetX: -14, offsetY: 0, width: 12, height: 16 }, // SW corner
+      { offsetX: 14, offsetY: 0, width: 12, height: 16 }, // SE corner
+    ],
   },
   "prop-tube-climber": {
     sheetKey: "prop-tube-climber",
@@ -180,6 +197,12 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 96,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 88, height: 32 },
+    // Thin outer legs + wide center hub; two ~19px walk-through passages
+    walls: [
+      { offsetX: -41, offsetY: 0, width: 6, height: 32 }, // Left leg
+      { offsetX: -1, offsetY: 0, width: 36, height: 32 }, // Center hub + junction
+      { offsetX: 41, offsetY: 0, width: 6, height: 32 }, // Right leg
+    ],
   },
   "prop-basketball-hoop": {
     sheetKey: "prop-basketball-hoop",
@@ -214,6 +237,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
       spriteHeight: def.height,
     },
     collider: def.collider ? { ...def.collider } : null,
+    walls: def.walls ? def.walls.map((w) => ({ ...w })) : null,
     isProp: true,
   };
 }
