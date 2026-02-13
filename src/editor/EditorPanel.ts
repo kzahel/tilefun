@@ -142,7 +142,7 @@ export class EditorPanel {
   /** Subgrid brush shape: 1=1x1, 2=2x2, 3=3x3, "cross"=5-point cross. */
   subgridShape: SubgridShape = 1;
   /** Max bridge insertion depth (0 = no bridging, 1-3 = auto-insert transitions). */
-  bridgeDepth = 2;
+  bridgeDepth = 0;
 
   constructor() {
     this.container = document.createElement("div");
@@ -440,7 +440,7 @@ export class EditorPanel {
     this.terrainWrappers.push(wrapper);
 
     for (let i = 0; i < NATURAL_SHEET_PALETTE.length; i++) {
-      const entry = NATURAL_SHEET_PALETTE[i]!;
+      const entry = NATURAL_SHEET_PALETTE[i] as (typeof NATURAL_SHEET_PALETTE)[number];
       const btn = document.createElement("button");
       btn.style.cssText = `
         width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
@@ -638,7 +638,7 @@ export class EditorPanel {
 
   private updateSubgridToolVisibility(): void {
     const showSize = this.brushMode === "subgrid" || this.brushMode === "corner";
-    const showBridge = this.brushMode !== "tile";
+    const showBridge = true;
     const sizeD = showSize ? "" : "none";
     this.sizeLabel.style.display = sizeD;
     this.brushSizeButton.style.display = sizeD;

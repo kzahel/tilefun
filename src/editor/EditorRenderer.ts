@@ -19,6 +19,7 @@ interface EditorState {
   brushSize: 1 | 2 | 3;
   editorTab: EditorTab;
   elevationGridSize: number;
+  bridgeDepth: number;
 }
 
 const ELEVATION_OVERLAY_COLORS = [
@@ -133,7 +134,7 @@ function drawCursorHighlight(
   } else if (state.brushMode === "corner") {
     drawCornerCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode);
   } else {
-    drawTileCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode);
+    drawTileCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode, state.bridgeDepth);
   }
 }
 
@@ -149,6 +150,7 @@ function drawTileCursorHighlight(
   camera: Camera,
   editorMode: EditorMode,
   paintMode: PaintMode,
+  bridgeDepth = 0,
 ): void {
   const tx = editorMode.cursorTileX;
   const ty = editorMode.cursorTileY;
@@ -162,8 +164,28 @@ function drawTileCursorHighlight(
   ctx.fillStyle = color.fill;
   ctx.strokeStyle = color.stroke;
   ctx.lineWidth = 2;
-  ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
-  ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+
+  if (bridgeDepth === 0) {
+    // Full tile
+    ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+    ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+  } else {
+    // Cross pattern (skip corners) — draw 5 half-tile squares
+    const h = tileScreenSize / 2;
+    // Center
+    ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy + h / 2, h, h);
+    // North
+    ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy - h / 2, h, h);
+    // South
+    ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy + tileScreenSize - h / 2, h, h);
+    // West
+    ctx.fillRect(tileScreen.sx - h / 2, tileScreen.sy + h / 2, h, h);
+    // East
+    ctx.fillRect(tileScreen.sx + tileScreenSize - h / 2, tileScreen.sy + h / 2, h, h);
+    // Stroke tile boundary as reference
+    ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
+  }
+
   ctx.restore();
 }
 

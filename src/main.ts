@@ -7,4 +7,10 @@ const game = new Game(canvas);
 // Expose for debug/testing
 // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
 (canvas as any).__game = game;
-game.init();
+game.init().catch((err) => console.error("[tilefun] init failed:", err));
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    game.destroy();
+  });
+}

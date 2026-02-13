@@ -90,6 +90,11 @@ export class EditorMode {
   private pinchStartZoom = 1;
   private pinchStartMid = { sx: 0, sy: 0 };
   private pinchStartCam = { x: 0, y: 0 };
+  /** Deferred first-touch paint — cancelled if a second finger arrives (pinch). */
+  private touchPaintTimer: ReturnType<typeof setTimeout> | null = null;
+  private touchPaintStart: { sx: number; sy: number } | null = null;
+  /** True while a pinch gesture is active — suppresses paint on 2→1 finger transition. */
+  private wasPinching = false;
 
   // Bound handlers for attach/detach
   private readonly onMouseDown: (e: MouseEvent) => void;
@@ -380,6 +385,9 @@ export class EditorMode {
   // --- Mouse handlers ---
 
   private handleMouseDown(e: MouseEvent): void {
+    // Ignore synthetic mouse events generated from touch
+    if (this.activeTouches.size > 0 || this.wasPinching) return;
+
     const { sx, sy } = this.canvasCoords(e);
 
     // Middle button or space+left = pan (always, regardless of tab)
@@ -420,6 +428,8 @@ export class EditorMode {
   }
 
   private handleMouseMove(e: MouseEvent): void {
+    if (this.activeTouches.size > 0 || this.wasPinching) return;
+
     const { sx, sy } = this.canvasCoords(e);
 
     this.updateCursor(sx, sy);
@@ -478,21 +488,18 @@ export class EditorMode {
     }
 
     if (this.activeTouches.size === 1) {
-      // Single touch = paint or place entity
+      // Defer single-touch paint — a second finger may arrive for pinch/pan.
       const [first] = this.activeTouches.values();
       if (first) {
-        if (this.editorTab === "entities") {
-          this.spawnEntityAt(first.sx, first.sy);
-        } else {
-          this.lastPaintedTile.tx = -Infinity;
-          this.lastPaintedTile.ty = -Infinity;
-          this.lastPaintedSubgrid.gsx = -Infinity;
-          this.lastPaintedSubgrid.gsy = -Infinity;
-          this.paintAt(first.sx, first.sy);
-        }
+        this.touchPaintStart = { sx: first.sx, sy: first.sy };
+        this.touchPaintTimer = setTimeout(() => {
+          this.commitTouchPaint();
+        }, 200);
       }
     } else if (this.activeTouches.size >= 2) {
-      // Two fingers = start pinch/pan
+      // Second finger arrived — cancel deferred paint and start pinch/pan
+      this.cancelTouchPaint();
+      this.wasPinching = true;
       this.startPinch();
     }
   }
@@ -511,8 +518,12 @@ export class EditorMode {
     } else if (this.activeTouches.size === 1) {
       const [first] = this.activeTouches.values();
       if (first) {
+        // If deferred paint is pending, commit it now (user is dragging to paint)
+        if (this.touchPaintStart) {
+          this.commitTouchPaint();
+        }
         // In entity mode, don't drag-to-spam entities
-        if (this.editorTab !== "entities") {
+        if (this.editorTab !== "entities" && !this.wasPinching) {
           this.paintAt(first.sx, first.sy);
         }
         this.updateCursor(first.sx, first.sy);
@@ -527,14 +538,43 @@ export class EditorMode {
         this.activeTouches.delete(t.identifier);
       }
     }
-    // If going from 2→1 fingers, restart as potential paint
-    if (this.activeTouches.size === 1) {
+    if (this.activeTouches.size === 0) {
+      // All fingers lifted — if deferred paint is still pending, it was a quick tap
+      if (this.touchPaintStart) {
+        this.commitTouchPaint();
+      }
+      this.wasPinching = false;
+    } else if (this.activeTouches.size === 1) {
+      // 2→1 fingers — reset paint dedup but don't start painting (still part of gesture)
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;
       this.lastPaintedSubgrid.gsx = -Infinity;
       this.lastPaintedSubgrid.gsy = -Infinity;
       this.lastPaintedCorner.gsx = -Infinity;
       this.lastPaintedCorner.gsy = -Infinity;
+    }
+  }
+
+  private cancelTouchPaint(): void {
+    if (this.touchPaintTimer !== null) {
+      clearTimeout(this.touchPaintTimer);
+      this.touchPaintTimer = null;
+    }
+    this.touchPaintStart = null;
+  }
+
+  private commitTouchPaint(): void {
+    const start = this.touchPaintStart;
+    this.cancelTouchPaint();
+    if (!start) return;
+    if (this.editorTab === "entities") {
+      this.spawnEntityAt(start.sx, start.sy);
+    } else {
+      this.lastPaintedTile.tx = -Infinity;
+      this.lastPaintedTile.ty = -Infinity;
+      this.lastPaintedSubgrid.gsx = -Infinity;
+      this.lastPaintedSubgrid.gsy = -Infinity;
+      this.paintAt(start.sx, start.sy);
     }
   }
 

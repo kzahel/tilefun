@@ -16,7 +16,9 @@ export class TerrainEditor {
     private readonly adjacency: TerrainAdjacency,
   ) {}
 
-  /** Tile brush: set all 9 subgrid points of tile (tx,ty) to the same terrain. */
+  /** Tile brush: set subgrid points of tile (tx,ty).
+   *  bridgeDepth 0: full 3x3 (original behavior).
+   *  bridgeDepth > 0: 5-point cross (skip corners to avoid diagonal nubs). */
   applyTileEdit(
     tx: number,
     ty: number,
@@ -28,8 +30,11 @@ export class TerrainEditor {
     const gsx0 = 2 * tx;
     const gsy0 = 2 * ty;
     const unpaint = paintMode === "unpaint";
+
     for (let dy = 0; dy <= 2; dy++) {
       for (let dx = 0; dx <= 2; dx++) {
+        // When bridge > 0, skip corners to avoid spiky diagonal artifacts
+        if (bridgeDepth > 0 && (dx === 0 || dx === 2) && (dy === 0 || dy === 2)) continue;
         const gx = gsx0 + dx;
         const gy = gsy0 + dy;
         if (unpaint) {

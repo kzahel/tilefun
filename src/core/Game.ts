@@ -154,8 +154,10 @@ export class Game {
     const worlds = await this.registry.listWorlds();
     const firstWorld = worlds[0];
     if (firstWorld) {
+      console.log("[tilefun] loading existing world:", firstWorld.id, firstWorld.name);
       await this.loadWorld(firstWorld.id);
     } else {
+      console.warn("[tilefun] no worlds found in registry — creating new world");
       const meta = await this.registry.createWorld("My World");
       await this.loadWorld(meta.id);
     }
@@ -224,6 +226,9 @@ export class Game {
     const savedMeta = await this.saveManager.loadMeta();
     const savedChunks = await this.saveManager.loadChunks();
 
+    console.log(
+      `[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`,
+    );
     if (savedMeta && savedChunks.size > 0) {
       this.world.chunks.setSavedData(savedChunks);
       this.camera.x = savedMeta.cameraX;
@@ -584,6 +589,7 @@ export class Game {
           brushSize: this.editorPanel.brushSize,
           editorTab: this.editorPanel.editorTab,
           elevationGridSize: this.editorPanel.elevationGridSize,
+          bridgeDepth: this.editorPanel.bridgeDepth,
         },
         visible,
         this.world,
@@ -640,6 +646,15 @@ export class Game {
     if (!this.editorEnabled) {
       this.touchJoystick.draw(this.ctx);
     }
+  }
+
+  destroy(): void {
+    this.loop.stop();
+    this.saveManager?.flush();
+    this.saveManager?.close();
+    this.editorMode.detach();
+    this.touchJoystick.detach();
+    this.input.detach();
   }
 
   private buildSaveMeta(): SavedMeta {

@@ -6,8 +6,8 @@
  *
  * Uses raw PNG encoding (no dependencies).
  */
-import { writeFileSync } from "fs";
-import { deflateSync } from "zlib";
+import { writeFileSync } from "node:fs";
+import { deflateSync } from "node:zlib";
 
 // === Colors (RGBA) ===
 const GREEN = [74, 154, 58, 255];
@@ -156,8 +156,8 @@ function renderQuadrant(pixels, qox, qoy, hasH, hasV, hasDiag) {
           // The V-edge column (px near outerX) must be transparent
           // The H-edge row (py near outerY) must be green
           // Inner edges always green
-          const distFromOuter = Math.abs(px - outerX);
-          const distFromInner = Math.abs(py - innerY);
+          const _distFromOuter = Math.abs(px - outerX);
+          const _distFromInner = Math.abs(py - innerY);
           // Green if: close to H-edge (top/bottom) OR close to inner,
           // but NOT close to V-edge (left/right outer)
           // Use a simple threshold: brown within a circle near the V-outer+inner corner
