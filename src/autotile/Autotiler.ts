@@ -23,7 +23,11 @@ function packBlend(sheetIndex: number, col: number, row: number): number {
  *
  * @param blendGraph - The blend sheet selection graph.
  */
-export function computeChunkSubgridBlend(chunk: Chunk, blendGraph: BlendGraph): void {
+export function computeChunkSubgridBlend(
+  chunk: Chunk,
+  blendGraph: BlendGraph,
+  forcedBase?: TerrainId,
+): void {
   for (let ly = 0; ly < CHUNK_SIZE; ly++) {
     for (let lx = 0; lx < CHUNK_SIZE; lx++) {
       const tileOffset = (ly * CHUNK_SIZE + lx) * MAX_BLEND_LAYERS;
@@ -48,6 +52,7 @@ export function computeChunkSubgridBlend(chunk: Chunk, blendGraph: BlendGraph): 
         chunk.getSubgrid(cx - 1, cy) as TerrainId,
         chunk.getSubgrid(cx - 1, cy - 1) as TerrainId,
         blendGraph,
+        forcedBase,
       );
 
       // Pack into chunk.blendLayers

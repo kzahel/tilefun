@@ -5,6 +5,8 @@ import type { Camera } from "../rendering/Camera.js";
 import type { EditorTab } from "./EditorPanel.js";
 
 export type BrushMode = "tile" | "subgrid" | "corner";
+export type PaintMode = "positive" | "negative" | "unpaint";
+export type SubgridShape = 1 | 2 | 3 | "cross";
 
 interface PendingTileEdit {
   tx: number;
@@ -29,6 +31,7 @@ export class EditorMode {
   selectedEntityType = "chicken";
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
+  paintMode: PaintMode = "positive";
 
   /** Reference to live entities for right-click deletion lookup. */
   entities: readonly Entity[] = [];

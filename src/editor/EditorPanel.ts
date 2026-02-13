@@ -1,5 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
-import type { BrushMode } from "./EditorMode.js";
+import type { BrushMode, PaintMode, SubgridShape } from "./EditorMode.js";
 
 export type EditorTab = "natural" | "road" | "structure" | "entities";
 
@@ -95,13 +95,15 @@ export class EditorPanel {
   private readonly modeButton: HTMLButtonElement;
   private readonly bridgeButton: HTMLButtonElement;
   private readonly brushSizeButton: HTMLButtonElement;
+  private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
   private pendingClear: TerrainId | null = null;
   selectedTerrain: TerrainId = TerrainId.Grass;
   selectedEntityType = "chicken";
   editorTab: EditorTab = "natural";
   brushMode: BrushMode = "tile";
-  /** Subgrid brush size: 1=single point, 2=2x2 block, 3=3x3 block. */
-  brushSize: 1 | 2 | 3 = 1;
+  paintMode: PaintMode = "positive";
+  /** Subgrid brush shape: 1=1x1, 2=2x2, 3=3x3, "cross"=5-point cross. */
+  subgridShape: SubgridShape = 1;
   /** Max bridge insertion depth (0 = no bridging, 1-3 = auto-insert transitions). */
   bridgeDepth = 2;
 
@@ -141,10 +143,29 @@ export class EditorPanel {
     this.modeButton.addEventListener("click", () => this.toggleMode());
     this.toolRow.appendChild(this.modeButton);
 
+    // Paint mode buttons: Positive / Negative / Unpaint
+    this.toolRow.appendChild(this.makeSeparator());
+    const paintModes: { mode: PaintMode; label: string; key: string }[] = [
+      { mode: "positive", label: "+", key: "Z" },
+      { mode: "negative", label: "\u2212", key: "X" },
+      { mode: "unpaint", label: "\u00d7", key: "C" },
+    ];
+    for (const { mode, label, key } of paintModes) {
+      const btn = document.createElement("button");
+      btn.style.cssText = BTN_STYLE;
+      btn.textContent = label;
+      btn.title = `${mode} mode (${key})`;
+      btn.addEventListener("click", () => this.setPaintMode(mode));
+      this.toolRow.appendChild(btn);
+      this.paintModeButtons.set(mode, btn);
+    }
+    this.updatePaintModeButtons();
+    this.toolRow.appendChild(this.makeSeparator());
+
     this.brushSizeButton = document.createElement("button");
     this.brushSizeButton.style.cssText = BTN_STYLE;
-    this.brushSizeButton.title = "Subgrid brush size (S)";
-    this.brushSizeButton.addEventListener("click", () => this.cycleBrushSize());
+    this.brushSizeButton.title = "Subgrid brush shape (S)";
+    this.brushSizeButton.addEventListener("click", () => this.cycleBrushShape());
     this.toolRow.appendChild(this.brushSizeButton);
     this.updateBrushSizeButton();
 
@@ -307,10 +328,16 @@ export class EditorPanel {
     this.modeButton.style.borderColor = colors[this.brushMode];
   }
 
-  cycleBrushSize(): void {
-    if (this.brushSize === 1) this.brushSize = 2;
-    else if (this.brushSize === 2) this.brushSize = 3;
-    else this.brushSize = 1;
+  setPaintMode(mode: PaintMode): void {
+    this.paintMode = mode;
+    this.updatePaintModeButtons();
+  }
+
+  cycleBrushShape(): void {
+    if (this.subgridShape === 1) this.subgridShape = 2;
+    else if (this.subgridShape === 2) this.subgridShape = 3;
+    else if (this.subgridShape === 3) this.subgridShape = "cross";
+    else this.subgridShape = 1;
     this.updateBrushSizeButton();
   }
 
@@ -319,16 +346,39 @@ export class EditorPanel {
     this.updateBridgeButton();
   }
 
+  private updatePaintModeButtons(): void {
+    const colors: Record<PaintMode, string> = {
+      positive: "#4a4",
+      negative: "#c84",
+      unpaint: "#f55",
+    };
+    for (const [mode, btn] of this.paintModeButtons) {
+      const active = mode === this.paintMode;
+      btn.style.borderColor = active ? colors[mode] : "#555";
+      btn.style.background = active ? "#555" : "#444";
+    }
+  }
+
   private updateBrushSizeButton(): void {
-    const label = this.brushSize === 1 ? "1x1" : `${this.brushSize}x${this.brushSize}`;
+    const label =
+      this.subgridShape === "cross"
+        ? "+"
+        : this.subgridShape === 1
+          ? "1x1"
+          : `${this.subgridShape}x${this.subgridShape}`;
     this.brushSizeButton.textContent = label;
-    this.brushSizeButton.style.borderColor = this.brushSize > 1 ? "#a4f" : "#888";
+    this.brushSizeButton.style.borderColor = this.subgridShape !== 1 ? "#a4f" : "#888";
   }
 
   private updateBridgeButton(): void {
     const label = this.bridgeDepth === 0 ? "B:Off" : `B:${this.bridgeDepth}`;
     this.bridgeButton.textContent = label;
     this.bridgeButton.style.borderColor = this.bridgeDepth > 0 ? "#4a9" : "#888";
+  }
+
+  /** Numeric brush size for backward compat. Cross returns 1 (handled separately). */
+  get brushSize(): 1 | 2 | 3 {
+    return typeof this.subgridShape === "number" ? this.subgridShape : 1;
   }
 
   consumeClearRequest(): TerrainId | null {

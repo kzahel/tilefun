@@ -71,6 +71,8 @@ export class Game {
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
+  private lastPaintMode: "positive" | "negative" | "unpaint" = "positive";
+  private lastPaintTerrain: TerrainId = TerrainId.Grass;
 
   constructor(canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
@@ -121,7 +123,19 @@ export class Game {
       }
       if ((e.key === "s" || e.key === "S") && this.editorEnabled) {
         e.preventDefault();
-        this.editorPanel.cycleBrushSize();
+        this.editorPanel.cycleBrushShape();
+      }
+      if (e.key === "z" && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.setPaintMode("positive");
+      }
+      if (e.key === "x" && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.setPaintMode("negative");
+      }
+      if (e.key === "c" && this.editorEnabled) {
+        e.preventDefault();
+        this.editorPanel.setPaintMode("unpaint");
       }
       if ((e.key === "t" || e.key === "T") && this.editorEnabled) {
         e.preventDefault();
@@ -342,6 +356,7 @@ export class Game {
     if (this.editorEnabled) {
       this.editorMode.selectedTerrain = this.editorPanel.selectedTerrain;
       this.editorMode.brushMode = this.editorPanel.brushMode;
+      this.editorMode.paintMode = this.editorPanel.paintMode;
       this.editorMode.editorTab = this.editorPanel.editorTab;
       this.editorMode.selectedEntityType = this.editorPanel.selectedEntityType;
       this.editorMode.entities = this.entityManager.entities;
@@ -387,9 +402,22 @@ export class Game {
         this.clearAllTerrain(clearId);
       }
 
+      // Invalidate all chunks if paint mode or paint terrain changed (affects autotile resolve)
+      const currentPaintMode = this.editorPanel.paintMode;
+      const currentPaintTerrain = this.editorPanel.selectedTerrain;
+      if (
+        currentPaintMode !== this.lastPaintMode ||
+        (currentPaintMode === "negative" && currentPaintTerrain !== this.lastPaintTerrain)
+      ) {
+        this.invalidateAllChunks();
+        this.lastPaintMode = currentPaintMode;
+        this.lastPaintTerrain = currentPaintTerrain;
+      }
+
       // Still load chunks (camera may have panned)
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
-      this.world.computeAutotile(this.blendGraph);
+      const forcedBase = currentPaintMode === "negative" ? currentPaintTerrain : undefined;
+      this.world.computeAutotile(this.blendGraph, forcedBase);
       return;
     }
 
@@ -520,18 +548,36 @@ export class Game {
     // Tile (tx,ty) covers subgrid (2*tx, 2*ty) to (2*tx+2, 2*ty+2)
     const gsx0 = 2 * tx;
     const gsy0 = 2 * ty;
+    const unpaint = this.editorPanel.paintMode === "unpaint";
     for (let dy = 0; dy <= 2; dy++) {
       for (let dx = 0; dx <= 2; dx++) {
-        this.applySubgridWithBridges(gsx0 + dx, gsy0 + dy, terrainId, 0);
+        const gx = gsx0 + dx;
+        const gy = gsy0 + dy;
+        if (unpaint) {
+          if (this.getGlobalSubgrid(gx, gy) === terrainId) {
+            this.applySubgridWithBridges(gx, gy, this.findUnpaintReplacement(gx, gy, terrainId), 0);
+          }
+        } else {
+          this.applySubgridWithBridges(gx, gy, terrainId, 0);
+        }
       }
     }
   }
 
   /** Corner brush: 3×3 subgrid stamp centered on a tile vertex (even subgrid coord). */
   private applyCornerEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
+    const unpaint = this.editorPanel.paintMode === "unpaint";
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
-        this.applySubgridWithBridges(gsx + dx, gsy + dy, terrainId, 0);
+        const gx = gsx + dx;
+        const gy = gsy + dy;
+        if (unpaint) {
+          if (this.getGlobalSubgrid(gx, gy) === terrainId) {
+            this.applySubgridWithBridges(gx, gy, this.findUnpaintReplacement(gx, gy, terrainId), 0);
+          }
+        } else {
+          this.applySubgridWithBridges(gx, gy, terrainId, 0);
+        }
       }
     }
     // Re-derive terrain for the 4 tiles sharing this corner
@@ -544,15 +590,80 @@ export class Game {
     }
   }
 
-  /** Subgrid brush: paint with configurable brush size. */
+  /** Subgrid brush: paint with configurable brush shape. */
   private applySubgridEdit(gsx: number, gsy: number, terrainId: TerrainId): void {
-    const size = this.editorPanel.brushSize;
-    const half = Math.floor(size / 2);
-    for (let dy = -half; dy < size - half; dy++) {
-      for (let dx = -half; dx < size - half; dx++) {
-        this.applySubgridWithBridges(gsx + dx, gsy + dy, terrainId, 0);
+    const shape = this.editorPanel.subgridShape;
+    const points = this.getSubgridBrushPoints(gsx, gsy, shape);
+
+    if (this.editorPanel.paintMode === "unpaint") {
+      for (const [px, py] of points) {
+        if (this.getGlobalSubgrid(px, py) === terrainId) {
+          const replacement = this.findUnpaintReplacement(px, py, terrainId);
+          this.applySubgridWithBridges(px, py, replacement, 0);
+        }
+      }
+    } else {
+      for (const [px, py] of points) {
+        this.applySubgridWithBridges(px, py, terrainId, 0);
       }
     }
+  }
+
+  private getSubgridBrushPoints(
+    gsx: number,
+    gsy: number,
+    shape: 1 | 2 | 3 | "cross",
+  ): [number, number][] {
+    if (shape === "cross") {
+      return [
+        [gsx, gsy],
+        [gsx - 1, gsy],
+        [gsx + 1, gsy],
+        [gsx, gsy - 1],
+        [gsx, gsy + 1],
+      ];
+    }
+    const size = shape;
+    const half = Math.floor(size / 2);
+    const pts: [number, number][] = [];
+    for (let dy = -half; dy < size - half; dy++) {
+      for (let dx = -half; dx < size - half; dx++) {
+        pts.push([gsx + dx, gsy + dy]);
+      }
+    }
+    return pts;
+  }
+
+  /**
+   * For unpaint mode: find the most common neighboring terrain that isn't
+   * the one being unpainted, so we can replace it with something sensible.
+   */
+  private findUnpaintReplacement(gsx: number, gsy: number, unpaintTerrain: TerrainId): TerrainId {
+    const counts = new Map<TerrainId, number>();
+    const dirs: [number, number][] = [
+      [-1, 0],
+      [1, 0],
+      [0, -1],
+      [0, 1],
+      [-1, -1],
+      [1, -1],
+      [-1, 1],
+      [1, 1],
+    ];
+    for (const [dx, dy] of dirs) {
+      const t = this.getGlobalSubgrid(gsx + dx, gsy + dy);
+      if (t !== unpaintTerrain) counts.set(t, (counts.get(t) ?? 0) + 1);
+    }
+    if (counts.size === 0) return TerrainId.Grass;
+    let best: TerrainId = TerrainId.Grass;
+    let bestCount = 0;
+    for (const [t, c] of counts) {
+      if (c > bestCount) {
+        best = t;
+        bestCount = c;
+      }
+    }
+    return best;
   }
 
   /**
@@ -745,6 +856,17 @@ export class Game {
     }
   }
 
+  private getCursorColor(): { fill: string; stroke: string } {
+    const mode = this.editorPanel.paintMode;
+    if (mode === "unpaint") {
+      return { fill: "rgba(255, 80, 80, 0.25)", stroke: "rgba(255, 80, 80, 0.6)" };
+    }
+    if (mode === "negative") {
+      return { fill: "rgba(200, 160, 60, 0.25)", stroke: "rgba(200, 160, 60, 0.6)" };
+    }
+    return { fill: "rgba(255, 255, 255, 0.25)", stroke: "rgba(255, 255, 255, 0.6)" };
+  }
+
   private drawTileCursorHighlight(): void {
     const tx = this.editorMode.cursorTileX;
     const ty = this.editorMode.cursorTileY;
@@ -752,10 +874,11 @@ export class Game {
 
     const tileScreen = this.camera.worldToScreen(tx * TILE_SIZE, ty * TILE_SIZE);
     const tileScreenSize = TILE_SIZE * this.camera.scale;
+    const color = this.getCursorColor();
 
     this.ctx.save();
-    this.ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
-    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+    this.ctx.fillStyle = color.fill;
+    this.ctx.strokeStyle = color.stroke;
     this.ctx.lineWidth = 2;
     this.ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
     this.ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
@@ -768,33 +891,61 @@ export class Game {
     if (!Number.isFinite(gsx)) return;
 
     const halfTile = TILE_SIZE / 2;
-    const brushSize = this.editorPanel.brushSize;
-    const half = Math.floor(brushSize / 2);
+    const halfTileScreen = halfTile * this.camera.scale;
+    const shape = this.editorPanel.subgridShape;
+    const paintMode = this.editorPanel.paintMode;
 
-    // World coords of the brush rectangle
-    const wx0 = (gsx - half) * halfTile;
-    const wy0 = (gsy - half) * halfTile;
-    const wx1 = (gsx - half + brushSize) * halfTile;
-    const wy1 = (gsy - half + brushSize) * halfTile;
-
-    const topLeft = this.camera.worldToScreen(wx0, wy0);
-    const botRight = this.camera.worldToScreen(wx1, wy1);
-    const w = botRight.sx - topLeft.sx;
-    const h = botRight.sy - topLeft.sy;
+    // Choose color based on paint mode
+    const baseColor =
+      paintMode === "unpaint"
+        ? "255, 80, 80"
+        : paintMode === "negative"
+          ? "200, 160, 60"
+          : "240, 160, 48";
 
     this.ctx.save();
-    this.ctx.fillStyle = "rgba(240, 160, 48, 0.25)";
-    this.ctx.strokeStyle = "rgba(240, 160, 48, 0.8)";
-    this.ctx.lineWidth = 2;
-    this.ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
-    this.ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
+
+    if (shape === "cross") {
+      // Draw 5-point cross preview
+      const points = this.getSubgridBrushPoints(gsx, gsy, "cross");
+      this.ctx.fillStyle = `rgba(${baseColor}, 0.25)`;
+      this.ctx.strokeStyle = `rgba(${baseColor}, 0.8)`;
+      this.ctx.lineWidth = 1;
+      for (const [px, py] of points) {
+        const screen = this.camera.worldToScreen(px * halfTile, py * halfTile);
+        const x = screen.sx - halfTileScreen / 2;
+        const y = screen.sy - halfTileScreen / 2;
+        this.ctx.fillRect(x, y, halfTileScreen, halfTileScreen);
+        this.ctx.strokeRect(x, y, halfTileScreen, halfTileScreen);
+      }
+    } else {
+      const brushSize = this.editorPanel.brushSize;
+      const half = Math.floor(brushSize / 2);
+
+      // World coords of the brush rectangle
+      const wx0 = (gsx - half) * halfTile;
+      const wy0 = (gsy - half) * halfTile;
+      const wx1 = (gsx - half + brushSize) * halfTile;
+      const wy1 = (gsy - half + brushSize) * halfTile;
+
+      const topLeft = this.camera.worldToScreen(wx0, wy0);
+      const botRight = this.camera.worldToScreen(wx1, wy1);
+      const w = botRight.sx - topLeft.sx;
+      const h = botRight.sy - topLeft.sy;
+
+      this.ctx.fillStyle = `rgba(${baseColor}, 0.25)`;
+      this.ctx.strokeStyle = `rgba(${baseColor}, 0.8)`;
+      this.ctx.lineWidth = 2;
+      this.ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
+      this.ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
+    }
 
     // Draw center dot
     const center = this.camera.worldToScreen(gsx * halfTile, gsy * halfTile);
     const radius = Math.max(3, 2 * this.camera.scale);
     this.ctx.beginPath();
     this.ctx.arc(center.sx, center.sy, radius, 0, Math.PI * 2);
-    this.ctx.fillStyle = "rgba(240, 160, 48, 0.8)";
+    this.ctx.fillStyle = `rgba(${baseColor}, 0.8)`;
     this.ctx.fill();
 
     this.ctx.restore();
@@ -806,6 +957,13 @@ export class Game {
     if (!Number.isFinite(gsx)) return;
 
     const halfTile = TILE_SIZE / 2;
+    const paintMode = this.editorPanel.paintMode;
+    const baseColor =
+      paintMode === "unpaint"
+        ? "255, 80, 80"
+        : paintMode === "negative"
+          ? "200, 160, 60"
+          : "80, 200, 255";
 
     // 3×3 subgrid area centered on corner
     const wx0 = (gsx - 1) * halfTile;
@@ -819,8 +977,8 @@ export class Game {
     const h = botRight.sy - topLeft.sy;
 
     this.ctx.save();
-    this.ctx.fillStyle = "rgba(80, 200, 255, 0.2)";
-    this.ctx.strokeStyle = "rgba(80, 200, 255, 0.7)";
+    this.ctx.fillStyle = `rgba(${baseColor}, 0.2)`;
+    this.ctx.strokeStyle = `rgba(${baseColor}, 0.7)`;
     this.ctx.lineWidth = 2;
     this.ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
     this.ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
@@ -828,7 +986,7 @@ export class Game {
     // Draw center crosshair at the corner point
     const center = this.camera.worldToScreen(gsx * halfTile, gsy * halfTile);
     const r = Math.max(4, 3 * this.camera.scale);
-    this.ctx.strokeStyle = "rgba(80, 200, 255, 0.9)";
+    this.ctx.strokeStyle = `rgba(${baseColor}, 0.9)`;
     this.ctx.lineWidth = 2;
     this.ctx.beginPath();
     this.ctx.moveTo(center.sx - r, center.sy);
