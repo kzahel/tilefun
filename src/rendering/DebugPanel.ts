@@ -23,6 +23,7 @@ export class DebugPanel {
   private readonly observerCheckbox: HTMLInputElement;
   private readonly baseModeBtn: HTMLButtonElement;
   private readonly convexCheckbox: HTMLInputElement;
+  private readonly pauseCheckbox: HTMLInputElement;
   private pendingBaseMode = false;
   private pendingConvex = false;
 
@@ -101,7 +102,19 @@ export class DebugPanel {
     convexHint.style.cssText = "color: #999; font-size: 11px;";
     convexRow.append(convexLbl, this.convexCheckbox, convexHint);
 
-    this.container.append(zoomRow, observerRow, noclipRow, baseModeRow, convexRow);
+    // Pause entities checkbox
+    const pauseRow = document.createElement("div");
+    pauseRow.style.cssText = ROW_STYLE;
+    const pauseLbl = document.createElement("label");
+    pauseLbl.textContent = "Pause";
+    this.pauseCheckbox = document.createElement("input");
+    this.pauseCheckbox.type = "checkbox";
+    const pauseHint = document.createElement("span");
+    pauseHint.textContent = "freeze entities";
+    pauseHint.style.cssText = "color: #999; font-size: 11px;";
+    pauseRow.append(pauseLbl, this.pauseCheckbox, pauseHint);
+
+    this.container.append(zoomRow, observerRow, noclipRow, pauseRow, baseModeRow, convexRow);
     document.body.appendChild(this.container);
   }
 
@@ -123,6 +136,10 @@ export class DebugPanel {
 
   get observer(): boolean {
     return this.observerCheckbox.checked;
+  }
+
+  get paused(): boolean {
+    return this.pauseCheckbox.checked;
   }
 
   /** Returns true if base selection mode was toggled, then clears the flag. */

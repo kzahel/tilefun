@@ -584,7 +584,7 @@ export class EditorPanel {
       btn.style.boxShadow = isAuto ? "0 0 6px rgba(255,255,255,0.5)" : "none";
     }
     for (const wrapper of this.terrainWrappers) {
-      wrapper.style.display = isAuto ? "none" : "contents";
+      wrapper.style.display = "contents";
     }
   }
 
