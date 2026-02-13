@@ -1,5 +1,6 @@
 import { loadGameAssets } from "../assets/GameAssets.js";
-import type { Spritesheet } from "../assets/Spritesheet.js";
+import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
+import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { CAMERA_LERP, ENTITY_ACTIVATION_DISTANCE, TILE_SIZE } from "../config/constants.js";
@@ -11,6 +12,7 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
+import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
@@ -56,6 +58,9 @@ export class Game {
   private registry: WorldRegistry;
   private mainMenu: MainMenu;
   private currentWorldId: string | null = null;
+  private gemSpawner = new GemSpawner();
+  private gemsCollected = 0;
+  private gemSpriteCanvas: HTMLCanvasElement | null = null;
   private frameCount = 0;
   private fpsTimer = 0;
   private currentFps = 0;
@@ -150,6 +155,13 @@ export class Game {
     this.tileRenderer.setRoadSheets(this.sheets);
     this.tileRenderer.setVariants(assets.variants);
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, this.blendGraph);
+
+    // Generate procedural gem sprite and add to sheets
+    this.gemSpriteCanvas = generateGemSprite();
+    this.sheets.set(
+      "gem",
+      new Spritesheet(this.gemSpriteCanvas as unknown as HTMLImageElement, 16, 16),
+    );
 
     // Open registry and migrate legacy data if needed
     await this.registry.open();
@@ -255,17 +267,20 @@ export class Game {
         }
       }
       this.entityManager.setNextId(savedMeta.nextEntityId);
+      this.gemsCollected = savedMeta.gemsCollected ?? 0;
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
     } else {
       this.camera.x = 0;
       this.camera.y = 0;
       this.camera.zoom = 1;
+      this.gemsCollected = 0;
       this.world.updateLoadedChunks(this.camera.getVisibleChunkRange());
       this.world.computeAutotile(this.blendGraph);
       findWalkableSpawn(this.player, this.world);
       spawnInitialChickens(5, this.world, this.entityManager);
     }
+    this.gemSpawner.reset(this.entityManager);
 
     // Bind save accessors
     this.saveManager.bind(
@@ -574,6 +589,26 @@ export class Game {
       }
     }
 
+    // Gem spawning + collection (play mode only)
+    if (!this.editorEnabled && !this.debugPanel.paused) {
+      this.gemSpawner.update(dt, this.player, this.camera, this.entityManager);
+
+      // Check for gem collection
+      const px = this.player.position.wx;
+      const py = this.player.position.wy;
+      for (const entity of this.entityManager.entities) {
+        if (entity.type !== "gem") continue;
+        const dx = entity.position.wx - px;
+        const dy = entity.position.wy - py;
+        if (dx * dx + dy * dy < 12 * 12) {
+          this.entityManager.remove(entity.id);
+          this.gemsCollected++;
+          this.saveManager?.markMetaDirty();
+          break;
+        }
+      }
+    }
+
     // Camera follows player (only in play mode)
     if (!this.editorEnabled) {
       this.camera.follow(this.player.position.wx, this.player.position.wy, CAMERA_LERP);
@@ -639,8 +674,15 @@ export class Game {
       ...this.entityManager.getYSorted(),
       ...this.propManager.props,
     ];
-    renderables.sort((a, b) => a.position.wy - b.position.wy);
+    renderables.sort(
+      (a, b) => a.position.wy + (a.sortOffsetY ?? 0) - (b.position.wy + (b.sortOffsetY ?? 0)),
+    );
     drawEntities(this.ctx, this.camera, renderables, this.sheets, this.world);
+
+    // Gem counter HUD (play mode only)
+    if (!this.editorEnabled) {
+      this.drawGemHUD();
+    }
 
     // FPS tracking
     this.frameCount++;
@@ -669,6 +711,7 @@ export class Game {
         this.ctx,
         this.camera,
         this.entityManager.entities,
+        this.propManager.props,
         {
           fps: this.currentFps,
           entityCount: this.entityManager.entities.length,
@@ -700,6 +743,30 @@ export class Game {
     this.input.detach();
   }
 
+  private drawGemHUD(): void {
+    if (!this.gemSpriteCanvas) return;
+    const ctx = this.ctx;
+    const ICON_SIZE = 24;
+    const PADDING = 12;
+    const x = this.canvas.width - PADDING - ICON_SIZE - 48;
+    const y = PADDING;
+
+    // Gem icon (first frame)
+    ctx.drawImage(this.gemSpriteCanvas, 0, 0, 16, 16, x, y, ICON_SIZE, ICON_SIZE);
+
+    // Count text
+    ctx.save();
+    ctx.font = "bold 20px monospace";
+    ctx.textBaseline = "top";
+    const text = `${this.gemsCollected}`;
+    ctx.strokeStyle = "#000";
+    ctx.lineWidth = 3;
+    ctx.strokeText(text, x + ICON_SIZE + 6, y + 2);
+    ctx.fillStyle = "#FFD700";
+    ctx.fillText(text, x + ICON_SIZE + 6, y + 2);
+    ctx.restore();
+  }
+
   private buildSaveMeta(): SavedMeta {
     const entities = this.entityManager.entities.map((e) => ({
       type: e.type,
@@ -717,6 +784,7 @@ export class Game {
       cameraZoom: this.camera.zoom,
       entities,
       nextEntityId: this.entityManager.getNextId(),
+      gemsCollected: this.gemsCollected,
     };
   }
 }

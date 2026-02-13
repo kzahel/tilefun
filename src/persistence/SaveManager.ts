@@ -17,6 +17,8 @@ export interface SavedMeta {
   cameraZoom: number;
   entities: SerializedEntity[];
   nextEntityId: number;
+  /** Total gems collected (absent in older saves → defaults to 0). */
+  gemsCollected?: number;
 }
 
 export interface SavedChunkData {
