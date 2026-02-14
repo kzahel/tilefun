@@ -30,7 +30,7 @@ describe("TagServiceImpl", () => {
 
     const tagged = service.getTagged("befriendable");
     expect(tagged).toHaveLength(1);
-    expect(tagged[0]!.type).toBe("chicken");
+    expect(tagged[0]?.type).toBe("chicken");
 
     const npcs = service.getTagged("npc");
     expect(npcs).toHaveLength(1);
@@ -47,7 +47,7 @@ describe("TagServiceImpl", () => {
     service.notifySpawn(entity);
 
     expect(cb).toHaveBeenCalledTimes(1);
-    expect(cb.mock.calls[0]![0].type).toBe("chicken");
+    expect(cb.mock.calls[0]?.[0].type).toBe("chicken");
   });
 
   it("addTag adds to index and fires callback", () => {
