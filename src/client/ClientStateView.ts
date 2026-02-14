@@ -109,8 +109,23 @@ export class RemoteStateView implements ClientStateView {
    * Buffer a game-state message for deferred application.
    * Call applyPending() during the client update tick to apply it,
    * ensuring entity and camera updates are synchronized.
+   *
+   * If a previous game-state is still pending, its chunk updates are
+   * merged into the new message so delta chunk data is never lost
+   * (the server's revision tracking considers them sent).
    */
   bufferGameState(msg: GameStateMessage): void {
+    if (this._pendingState && this._pendingState.chunkUpdates.length > 0) {
+      // Merge: keep old chunk updates, let new ones override for same cx,cy
+      const merged = new Map<string, (typeof msg.chunkUpdates)[0]>();
+      for (const cu of this._pendingState.chunkUpdates) {
+        merged.set(`${cu.cx},${cu.cy}`, cu);
+      }
+      for (const cu of msg.chunkUpdates) {
+        merged.set(`${cu.cx},${cu.cy}`, cu);
+      }
+      msg = { ...msg, chunkUpdates: Array.from(merged.values()) };
+    }
     this._pendingState = msg;
   }
 

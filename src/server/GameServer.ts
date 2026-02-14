@@ -1,6 +1,6 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { CHUNK_SIZE_PX, TICK_RATE } from "../config/constants.js";
+import { CHUNK_SIZE_PX, RENDER_DISTANCE, TICK_RATE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
@@ -158,6 +158,16 @@ export class GameServer {
       session.cameraX = this.lastLoadedCamera.cameraX;
       session.cameraY = this.lastLoadedCamera.cameraY;
       session.cameraZoom = this.lastLoadedCamera.cameraZoom;
+      // Seed a reasonable initial visible range so the first few ticks
+      // load chunks near the camera (before the client sends visible-range).
+      const camCx = Math.floor(this.lastLoadedCamera.cameraX / CHUNK_SIZE_PX);
+      const camCy = Math.floor(this.lastLoadedCamera.cameraY / CHUNK_SIZE_PX);
+      session.visibleRange = {
+        minCx: camCx - 3,
+        minCy: camCy - 3,
+        maxCx: camCx + 3,
+        maxCy: camCy + 3,
+      };
       this.sessions.set(clientId, session);
 
       console.log(`[tilefun] client connected: ${clientId} (${this.sessions.size} total)`);
@@ -237,7 +247,8 @@ export class GameServer {
         // between server ticks — without this, inputs are lost and prediction
         // diverges, causing visible jitter.
         for (let i = 0; i < inputs.length - 1; i++) {
-          updatePlayerFromInput(session.player, inputs[i], dt);
+          const input = inputs[i]!;
+          updatePlayerFromInput(session.player, input, dt);
           if (session.player.velocity && session.player.collider && !session.debugNoclip) {
             const speedMult = getSpeedMultiplier(session.player.position, getCollision);
             const pdx = session.player.velocity.vx * dt * speedMult;
@@ -247,12 +258,12 @@ export class GameServer {
             session.player.position.wx += session.player.velocity.vx * dt;
             session.player.position.wy += session.player.velocity.vy * dt;
           }
-          session.lastProcessedInputSeq = inputs[i].seq;
+          session.lastProcessedInputSeq = input.seq;
         }
 
         // Last input goes through normal path (EntityManager handles movement
         // including push mechanics, entity-entity collision, etc.)
-        const lastInput = inputs[inputs.length - 1];
+        const lastInput = inputs[inputs.length - 1]!;
         updatePlayerFromInput(session.player, lastInput, dt);
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
@@ -326,11 +337,27 @@ export class GameServer {
 
     // Broadcast state to all clients (serialized mode)
     if (this.broadcasting) {
+      // Compute the union of all sessions' visible ranges so that one
+      // session's updateVisibleChunks can't unload another session's chunks.
+      let unionRange: ChunkRange | null = null;
       for (const session of this.sessions.values()) {
-        // Compute autotile for chunks in this client's visible range
-        if (session.visibleRange) {
-          this.updateVisibleChunks(session.visibleRange);
+        const r = session.visibleRange;
+        if (r) {
+          if (!unionRange) {
+            unionRange = { minCx: r.minCx, minCy: r.minCy, maxCx: r.maxCx, maxCy: r.maxCy };
+          } else {
+            unionRange.minCx = Math.min(unionRange.minCx, r.minCx);
+            unionRange.minCy = Math.min(unionRange.minCy, r.minCy);
+            unionRange.maxCx = Math.max(unionRange.maxCx, r.maxCx);
+            unionRange.maxCy = Math.max(unionRange.maxCy, r.maxCy);
+          }
         }
+      }
+      if (unionRange) {
+        this.updateVisibleChunks(unionRange);
+      }
+
+      for (const session of this.sessions.values()) {
         const msg = this.buildGameState(session.clientId);
         this.transport.send(session.clientId, msg);
       }
@@ -588,36 +615,43 @@ export class GameServer {
       this.clientChunkRevisions.set(clientId, revisions);
     }
 
-    // Collect loaded chunk keys and build delta updates
+    // Collect loaded chunk keys and build delta updates.
+    // Only include chunks within this session's visible range (+ RENDER_DISTANCE
+    // buffer) so we don't send chunks loaded for other sessions.
+    const range = session.visibleRange;
+    const chunkBuf = RENDER_DISTANCE;
+    const cMinCx = range.minCx - chunkBuf;
+    const cMaxCx = range.maxCx + chunkBuf;
+    const cMinCy = range.minCy - chunkBuf;
+    const cMaxCy = range.maxCy + chunkBuf;
+
     const loadedChunkKeys: string[] = [];
     const chunkUpdates = [];
     for (const [key, chunk] of this.world.chunks.entries()) {
+      const commaIdx = key.indexOf(",");
+      const cx = Number(key.slice(0, commaIdx));
+      const cy = Number(key.slice(commaIdx + 1));
+      if (cx < cMinCx || cx > cMaxCx || cy < cMinCy || cy > cMaxCy) continue;
       loadedChunkKeys.push(key);
       const lastRev = revisions.get(key) ?? -1;
       if (chunk.revision > lastRev) {
-        const commaIdx = key.indexOf(",");
-        const cx = Number(key.slice(0, commaIdx));
-        const cy = Number(key.slice(commaIdx + 1));
         chunkUpdates.push(serializeChunk(cx, cy, chunk));
         revisions.set(key, chunk.revision);
       }
     }
 
-    // Clean up revisions for unloaded chunks
+    // Clean up revisions for chunks no longer in this session's range
     for (const key of revisions.keys()) {
-      if (
-        !this.world.chunks.get(
-          Number(key.slice(0, key.indexOf(","))),
-          Number(key.slice(key.indexOf(",") + 1)),
-        )
-      ) {
+      const ci = key.indexOf(",");
+      const kcx = Number(key.slice(0, ci));
+      const kcy = Number(key.slice(ci + 1));
+      if (kcx < cMinCx || kcx > cMaxCx || kcy < cMinCy || kcy > cMaxCy) {
         revisions.delete(key);
       }
     }
 
     // Filter entities and props to those near the player's viewport
     const buf = GameServer.BROADCAST_BUFFER_CHUNKS;
-    const range = session.visibleRange;
     const nearbyEntities = this.entityManager.spatialHash.queryRange(
       range.minCx - buf,
       range.minCy - buf,

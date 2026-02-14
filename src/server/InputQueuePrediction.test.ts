@@ -144,7 +144,7 @@ describe("Client prediction matches server after reconciliation", () => {
     for (let seq = 1; seq <= 10; seq++) {
       // Client: store input + predict
       predictor.storeInput(seq, RIGHT, DT);
-      predictor.update(DT, RIGHT, world, []);
+      predictor.update(DT, RIGHT, world, [], []);
 
       // Transport: send input
       sendInput(transport, seq, RIGHT);
@@ -153,7 +153,7 @@ describe("Client prediction matches server after reconciliation", () => {
       server.tick(DT);
 
       // Client: reconcile
-      predictor.reconcile(session.player, session.lastProcessedInputSeq, world, []);
+      predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
 
       // After reconciliation with no unacked inputs, predicted == server
       expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
@@ -174,20 +174,20 @@ describe("Client prediction matches server after reconciliation", () => {
     // Client tick 1
     ++seq;
     predictor.storeInput(seq, RIGHT, DT);
-    predictor.update(DT, RIGHT, world, []);
+    predictor.update(DT, RIGHT, world, [], []);
     sendInput(transport, seq, RIGHT);
 
     // Client tick 2 (fires before server gets to tick)
     ++seq;
     predictor.storeInput(seq, RIGHT, DT);
-    predictor.update(DT, RIGHT, world, []);
+    predictor.update(DT, RIGHT, world, [], []);
     sendInput(transport, seq, RIGHT);
 
     // Server tick 1: processes both inputs
     server.tick(DT);
 
     // Client reconciles with server state
-    predictor.reconcile(session.player, session.lastProcessedInputSeq, world, []);
+    predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
     expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
 
     // --- Server tick 2 fires with no client input ---
@@ -201,14 +201,14 @@ describe("Client prediction matches server after reconciliation", () => {
     // --- Client tick 3 ---
     ++seq;
     predictor.storeInput(seq, RIGHT, DT);
-    predictor.update(DT, RIGHT, world, []);
+    predictor.update(DT, RIGHT, world, [], []);
     sendInput(transport, seq, RIGHT);
 
     // Server tick 3: processes 1 input
     server.tick(DT);
 
     // Reconcile again
-    predictor.reconcile(session.player, session.lastProcessedInputSeq, world, []);
+    predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
     expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
 
     // Total: 3 inputs processed on both sides
@@ -228,13 +228,13 @@ describe("Client prediction matches server after reconciliation", () => {
     const jitterPattern = [2, 0, 1, 1, 1];
 
     for (let tick = 0; tick < 50; tick++) {
-      const inputsThisTick = jitterPattern[tick % jitterPattern.length];
+      const inputsThisTick = jitterPattern[tick % jitterPattern.length]!;
 
       // Client ticks (send inputs + predict)
       for (let i = 0; i < inputsThisTick; i++) {
         ++seq;
         predictor.storeInput(seq, RIGHT, DT);
-        predictor.update(DT, RIGHT, world, []);
+        predictor.update(DT, RIGHT, world, [], []);
         sendInput(transport, seq, RIGHT);
       }
 
@@ -242,7 +242,7 @@ describe("Client prediction matches server after reconciliation", () => {
       server.tick(DT);
 
       // Client reconcile
-      predictor.reconcile(session.player, session.lastProcessedInputSeq, world, []);
+      predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
     }
 
     expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);

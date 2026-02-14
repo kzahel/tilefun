@@ -35,7 +35,10 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         const httpServer = viteServer.httpServer;
         if (!httpServer) return;
 
-        const transport = new WebSocketServerTransport({ server: httpServer, path: "/ws" });
+        const transport = new WebSocketServerTransport({
+          server: httpServer as import("node:http").Server,
+          path: "/ws",
+        });
         server = new GameServer(transport, {
           registry: new FsWorldRegistry(dataDir),
           createStore: (worldId) =>
@@ -51,9 +54,7 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         console.log("[tilefun] Game server running (attached to Vite dev server)");
         console.log(`[tilefun] Multiplayer URL: http://localhost:${port}/tilefun/?multiplayer`);
         if (lanIp) {
-          console.log(
-            `[tilefun] LAN Multiplayer:  http://${lanIp}:${port}/tilefun/?multiplayer`,
-          );
+          console.log(`[tilefun] LAN Multiplayer:  http://${lanIp}:${port}/tilefun/?multiplayer`);
         }
       });
     },
