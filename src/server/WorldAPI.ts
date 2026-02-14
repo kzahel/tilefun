@@ -6,6 +6,7 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import type { PropManager } from "../entities/PropManager.js";
+import { OverlapServiceImpl } from "../scripting/OverlapServiceImpl.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { EntityHandle, PlayerHandle } from "./EntityHandle.js";
@@ -170,15 +171,6 @@ class StubTagService implements TagService {
     return () => {};
   }
   onTagRemoved(_tag: string, _cb: (entity: EntityHandle) => void): Unsubscribe {
-    return () => {};
-  }
-}
-
-class StubOverlapService implements OverlapService {
-  onOverlap(_tag: string, _cb: (self: EntityHandle, other: EntityHandle) => void): Unsubscribe {
-    return () => {};
-  }
-  onOverlapEnd(_tag: string, _cb: (self: EntityHandle, other: EntityHandle) => void): Unsubscribe {
     return () => {};
   }
 }
@@ -404,7 +396,7 @@ export class WorldAPIImpl implements WorldAPI {
   readonly tags: TagService;
   readonly events: EventBusImpl;
   readonly tick: TickServiceImpl;
-  readonly overlap: OverlapService;
+  readonly overlap: OverlapServiceImpl;
 
   private elapsedTime = 0;
 
@@ -423,7 +415,7 @@ export class WorldAPIImpl implements WorldAPI {
     this.tags = new StubTagService();
     this.events = new EventBusImpl();
     this.tick = new TickServiceImpl();
-    this.overlap = new StubOverlapService();
+    this.overlap = new OverlapServiceImpl(entityManager);
   }
 
   get time(): number {

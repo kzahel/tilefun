@@ -16,6 +16,7 @@ import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { befriendableMod } from "../mods/befriendable.js";
+import { campfireTrapMod } from "../mods/campfire-trap.js";
 import { deathTimerMod } from "../mods/death-timer.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
@@ -60,7 +61,7 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  private readonly mods: Mod[] = [befriendableMod, deathTimerMod];
+  private readonly mods: Mod[] = [befriendableMod, deathTimerMod, campfireTrapMod];
   private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {
@@ -189,6 +190,9 @@ export class GameServer {
 
         // ── TickService.postSimulation ──
         this.worldAPI.tick.firePost(dt);
+
+        // ── OverlapService detection ──
+        this.worldAPI.overlap.tick();
       }
 
       // 3. Spawners + gameplay (play mode only, not paused)

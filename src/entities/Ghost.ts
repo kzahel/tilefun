@@ -92,5 +92,6 @@ export function createGhostAngry(wx: number, wy: number): Entity {
       chaseSpeed: GHOST_CHASE_SPEED,
       hostile: true,
     },
+    tags: new Set(["hostile"]),
   };
 }
