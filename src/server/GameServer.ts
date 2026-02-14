@@ -12,7 +12,7 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
-import type { ClientMessage } from "../shared/protocol.js";
+import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
@@ -173,8 +173,7 @@ export class GameServer {
         }
       }
 
-      // New connection: create session and add to default realm
-      const realm = this.activeRealm;
+      // New connection: create session
       const session = new PlayerSession(clientId);
       const num = this.nextPlayerNumber++;
       session.playerNumber = num;
@@ -184,23 +183,33 @@ export class GameServer {
       // Add to global sessions map
       this.sessions.set(clientId, session);
 
-      // Add player to the default realm
-      realm.addPlayer(session);
+      if (clientId === "local") {
+        // Single-player: auto-join default realm immediately
+        const realm = this.activeRealm;
+        realm.addPlayer(session);
 
-      console.log(
-        `[tilefun] client connected: ${clientId} as ${session.displayName} (${realm.sessions.size} in realm)`,
-      );
+        console.log(
+          `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
+        );
 
-      this.transport.send(clientId, {
-        type: "player-assigned",
-        entityId: session.player.id,
-      });
-      this.transport.send(clientId, {
-        type: "world-loaded",
-        cameraX: realm.lastLoadedCamera.cameraX,
-        cameraY: realm.lastLoadedCamera.cameraY,
-        cameraZoom: realm.lastLoadedCamera.cameraZoom,
-      });
+        this.transport.send(clientId, {
+          type: "player-assigned",
+          entityId: session.player.id,
+        });
+        this.transport.send(clientId, {
+          type: "world-loaded",
+          cameraX: realm.lastLoadedCamera.cameraX,
+          cameraY: realm.lastLoadedCamera.cameraY,
+          cameraZoom: realm.lastLoadedCamera.cameraZoom,
+        });
+      } else {
+        // Multiplayer: start in lobby, send realm list
+        console.log(`[tilefun] client connected: ${clientId} as ${session.displayName} (lobby)`);
+
+        this.buildRealmList().then((realms) => {
+          this.transport.send(clientId, { type: "realm-list", realms });
+        });
+      }
     });
 
     this.transport.onDisconnect((clientId) => {
@@ -438,6 +447,33 @@ export class GameServer {
     await this.registry.renameWorld(id, name);
   }
 
+  /** Build a RealmInfo list: all registered worlds with live player counts. */
+  private async buildRealmList(): Promise<RealmInfo[]> {
+    const worlds = await this.registry.listWorlds();
+    return worlds.map((w): RealmInfo => {
+      const info: RealmInfo = {
+        id: w.id,
+        name: w.name,
+        playerCount: this.realms.get(w.id)?.sessions.size ?? 0,
+        createdAt: w.createdAt,
+        lastPlayedAt: w.lastPlayedAt,
+      };
+      if (w.worldType) info.worldType = w.worldType;
+      return info;
+    });
+  }
+
+  /** Broadcast realm-player-count to all connected non-dormant clients. */
+  private broadcastRealmPlayerCount(worldId: string): void {
+    const realm = this.realms.get(worldId);
+    const count = realm?.sessions.size ?? 0;
+    const dormantIds = new Set(this.dormantSessions.keys());
+    for (const [cid] of this.sessions) {
+      if (dormantIds.has(cid)) continue;
+      this.transport.send(cid, { type: "realm-player-count", worldId, count });
+    }
+  }
+
   flush(): void {
     for (const realm of this.realms.values()) {
       realm.flush();
@@ -479,6 +515,53 @@ export class GameServer {
             cameraY: cam.cameraY,
             cameraZoom: cam.cameraZoom,
           });
+        });
+        return;
+
+      case "list-realms":
+        this.buildRealmList().then((realms) => {
+          this.transport.send(clientId, {
+            type: "realm-list",
+            requestId: msg.requestId,
+            realms,
+          });
+        });
+        return;
+
+      case "join-realm": {
+        const oldRealmId = session.realmId;
+        this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
+          this.transport.send(clientId, {
+            type: "player-assigned",
+            entityId: session.player.id,
+          });
+          this.transport.send(clientId, {
+            type: "realm-joined",
+            requestId: msg.requestId,
+            cameraX: cam.cameraX,
+            cameraY: cam.cameraY,
+            cameraZoom: cam.cameraZoom,
+          });
+          // Broadcast updated player counts for old and new realms
+          if (oldRealmId) this.broadcastRealmPlayerCount(oldRealmId);
+          this.broadcastRealmPlayerCount(msg.worldId);
+        });
+        return;
+      }
+
+      case "leave-realm":
+        if (session.realmId) {
+          const leftRealmId = session.realmId;
+          const realm = this.realms.get(leftRealmId);
+          if (realm) {
+            realm.removePlayer(clientId);
+            this.tryUnloadRealm(leftRealmId);
+          }
+          this.broadcastRealmPlayerCount(leftRealmId);
+        }
+        this.transport.send(clientId, {
+          type: "realm-left",
+          requestId: msg.requestId,
         });
         return;
 

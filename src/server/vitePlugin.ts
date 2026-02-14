@@ -5,6 +5,7 @@ import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
+import { initServerLog, installCrashHandlers, serverLog, serverLogError } from "./serverLog.js";
 
 function getLanAddress(): string | null {
   for (const ifaces of Object.values(networkInterfaces())) {
@@ -35,23 +36,31 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         const httpServer = viteServer.httpServer;
         if (!httpServer) return;
 
-        const transport = new WebSocketServerTransport({
-          server: httpServer as import("node:http").Server,
-          path: "/ws",
-        });
-        server = new GameServer(transport, {
-          registry: new FsWorldRegistry(dataDir),
-          createStore: (worldId) =>
-            new FsPersistenceStore(join(dataDir, "worlds", worldId), ["chunks", "meta"]),
-        });
+        initServerLog(dataDir);
+        installCrashHandlers();
 
-        await server.init();
-        server.startLoop();
+        try {
+          const transport = new WebSocketServerTransport({
+            server: httpServer as import("node:http").Server,
+            path: "/ws",
+          });
+          server = new GameServer(transport, {
+            registry: new FsWorldRegistry(dataDir),
+            createStore: (worldId) =>
+              new FsPersistenceStore(join(dataDir, "worlds", worldId), ["chunks", "meta"]),
+          });
+
+          await server.init();
+          server.startLoop();
+        } catch (err) {
+          serverLogError("server startup failed", err);
+          return;
+        }
 
         const addr = httpServer.address();
         const port = typeof addr === "object" && addr ? addr.port : 5173;
         const lanIp = getLanAddress();
-        console.log("[tilefun] Game server running (attached to Vite dev server)");
+        serverLog(`Game server running (attached to Vite dev server)`);
         console.log(`[tilefun] Multiplayer URL: http://localhost:${port}/tilefun/?multiplayer`);
         if (lanIp) {
           console.log(`[tilefun] LAN Multiplayer:  http://${lanIp}:${port}/tilefun/?multiplayer`);

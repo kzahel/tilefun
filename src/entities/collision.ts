@@ -174,8 +174,9 @@ export function separateOverlappingEntities(
   }
 
   // 2. Separate entities overlapping with players (push only the entity, not the player)
+  // Skip when player is jumping — entities should stay put while being vaulted over.
   for (const player of players) {
-    if (!player.collider) continue;
+    if (!player.collider || (player.jumpZ ?? 0) > 0) continue;
     const playerBox = getEntityAABB(player.position, player.collider);
     for (const entity of pushableEntities) {
       if (!entity.collider) continue;

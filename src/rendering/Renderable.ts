@@ -19,4 +19,6 @@ export interface Renderable {
   noShadow?: boolean;
   /** When true, entity is hidden this frame (invincibility flash effect). */
   flashHidden?: boolean;
+  /** Current height above ground in world pixels (jump mechanic). */
+  jumpZ?: number;
 }

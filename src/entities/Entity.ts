@@ -105,4 +105,8 @@ export interface Entity {
   attributes?: Map<string, unknown>;
   /** Accumulated time since last AI/physics tick (server-only, not serialized). */
   tickAccumulator?: number;
+  /** Current height above ground in world pixels (jump mechanic). */
+  jumpZ?: number;
+  /** Vertical velocity in world px/s, positive = up (server-only, not serialized). */
+  jumpVZ?: number;
 }

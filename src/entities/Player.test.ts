@@ -45,80 +45,80 @@ describe("createPlayer", () => {
 describe("updatePlayerFromInput", () => {
   it("sets velocity from movement input", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false, jump: false }, 1 / 60);
     expect(p.velocity?.vx).toBe(PLAYER_SPEED);
     expect(p.velocity?.vy).toBe(0);
   });
 
   it("marks sprite as moving when input is non-zero", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 0, dy: -1, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 0, dy: -1, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.moving).toBe(true);
   });
 
   it("marks sprite as not moving when input is zero", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false }, 1 / 60);
-    updatePlayerFromInput(p, { dx: 0, dy: 0, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false, jump: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 0, dy: 0, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.moving).toBe(false);
     expect(p.velocity?.vx).toBe(0);
   });
 
   it("faces right when moving right", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Right);
     expect(p.sprite?.frameRow).toBe(Direction.Right);
   });
 
   it("faces left when moving left", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: -1, dy: 0, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: -1, dy: 0, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Left);
   });
 
   it("faces up when moving up", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 0, dy: -1, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 0, dy: -1, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Up);
   });
 
   it("faces down when moving down", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 0, dy: 1, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 0, dy: 1, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Down);
   });
 
   it("prefers horizontal direction on diagonal input", () => {
     const p = createPlayer(0, 0);
     const diag = 1 / Math.sqrt(2);
-    updatePlayerFromInput(p, { dx: diag, dy: diag, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: diag, dy: diag, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Right);
   });
 
   it("uses vertical direction when vertical component is dominant", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 0.3, dy: -0.9, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 0.3, dy: -0.9, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.direction).toBe(Direction.Up);
   });
 
   it("multiplies speed when sprinting", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true, jump: false }, 1 / 60);
     expect(p.velocity?.vx).toBe(PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER);
     expect(p.velocity?.vy).toBe(0);
   });
 
   it("speeds up animation when sprinting", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true, jump: false }, 1 / 60);
     expect(p.sprite?.frameDuration).toBe(PLAYER_FRAME_DURATION / PLAYER_SPRINT_MULTIPLIER);
   });
 
   it("restores normal animation speed when not sprinting", () => {
     const p = createPlayer(0, 0);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true }, 1 / 60);
-    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: true, jump: false }, 1 / 60);
+    updatePlayerFromInput(p, { dx: 1, dy: 0, sprinting: false, jump: false }, 1 / 60);
     expect(p.sprite?.frameDuration).toBe(PLAYER_FRAME_DURATION);
   });
 });

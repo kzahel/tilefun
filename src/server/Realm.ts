@@ -1,6 +1,12 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { CHUNK_SIZE_PX, RENDER_DISTANCE, TICK_RATE } from "../config/constants.js";
+import {
+  CHUNK_SIZE_PX,
+  JUMP_GRAVITY,
+  JUMP_VELOCITY,
+  RENDER_DISTANCE,
+  TICK_RATE,
+} from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import {
@@ -214,6 +220,10 @@ export class Realm {
         for (let i = 0; i < inputs.length - 1; i++) {
           const input = inputs[i]!;
           updatePlayerFromInput(session.player, input, dt);
+          if (input.jump && !(session.player.jumpZ ?? 0)) {
+            session.player.jumpZ = 0.01;
+            session.player.jumpVZ = JUMP_VELOCITY;
+          }
           if (session.player.velocity && session.player.collider && !session.debugNoclip) {
             const speedMult = getSpeedMultiplier(session.player.position, getCollision);
             const pdx = session.player.velocity.vx * dt * speedMult;
@@ -230,6 +240,10 @@ export class Realm {
         // including push mechanics, entity-entity collision, etc.)
         const lastInput = inputs[inputs.length - 1]!;
         updatePlayerFromInput(session.player, lastInput, dt);
+        if (lastInput.jump && !(session.player.jumpZ ?? 0)) {
+          session.player.jumpZ = 0.01;
+          session.player.jumpVZ = JUMP_VELOCITY;
+        }
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
         // No input this tick (timing jitter between client RAF and server
@@ -279,6 +293,19 @@ export class Realm {
       // Restore noclip colliders
       for (const [session, collider] of savedColliders) {
         session.player.collider = collider;
+      }
+
+      // ── Jump physics for all players ──
+      for (const session of activeSessions) {
+        const p = session.player;
+        if (p.jumpZ !== undefined && p.jumpZ > 0 && p.jumpVZ !== undefined) {
+          p.jumpVZ -= JUMP_GRAVITY * dt;
+          p.jumpZ += p.jumpVZ * dt;
+          if (p.jumpZ <= 0) {
+            delete p.jumpZ;
+            delete p.jumpVZ;
+          }
+        }
       }
 
       // ── TickService.postSimulation ──
@@ -364,6 +391,7 @@ export class Realm {
           dx: msg.dx,
           dy: msg.dy,
           sprinting: msg.sprinting,
+          jump: msg.jump,
           seq: msg.seq,
         });
         break;

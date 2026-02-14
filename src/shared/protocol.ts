@@ -1,6 +1,17 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 
+// ---- Realm browser types ----
+
+export interface RealmInfo {
+  id: string;
+  name: string;
+  playerCount: number;
+  worldType?: WorldType;
+  createdAt: number;
+  lastPlayedAt: number;
+}
+
 // ---- Client → Server messages ----
 
 export type ClientMessage =
@@ -10,6 +21,7 @@ export type ClientMessage =
       dx: number;
       dy: number;
       sprinting: boolean;
+      jump: boolean;
     }
   | {
       type: "player-interact";
@@ -94,7 +106,10 @@ export type ClientMessage =
       tileY: number;
       editorTab: string;
       brushMode: string;
-    };
+    }
+  | { type: "list-realms"; requestId: number }
+  | { type: "join-realm"; requestId: number; worldId: string }
+  | { type: "leave-realm"; requestId: number };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -161,6 +176,8 @@ export interface EntitySnapshot {
   flashHidden?: boolean;
   noShadow?: boolean;
   deathTimer?: number;
+  jumpZ?: number;
+  jumpVZ?: number;
 }
 
 export interface PropSnapshot {
@@ -227,4 +244,14 @@ export type ServerMessage =
   | { type: "world-deleted"; requestId: number }
   | { type: "world-list"; requestId: number; worlds: WorldMeta[] }
   | { type: "world-renamed"; requestId: number }
-  | { type: "rcon-response"; requestId: number; output: string[]; error?: boolean };
+  | { type: "rcon-response"; requestId: number; output: string[]; error?: boolean }
+  | { type: "realm-list"; requestId?: number; realms: RealmInfo[] }
+  | {
+      type: "realm-joined";
+      requestId: number;
+      cameraX: number;
+      cameraY: number;
+      cameraZoom: number;
+    }
+  | { type: "realm-left"; requestId: number }
+  | { type: "realm-player-count"; worldId: string; count: number };

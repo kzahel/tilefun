@@ -2,7 +2,7 @@ import type { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { drawGrassBlades, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
  * Play mode scene.
@@ -94,6 +94,7 @@ export class PlayScene implements GameScene {
       dx: movement.dx,
       dy: movement.dy,
       sprinting: movement.sprinting,
+      jump: movement.jump,
     });
 
     // Server tick + camera follow + chunk loading
@@ -222,6 +223,7 @@ export class PlayScene implements GameScene {
     gc.camera.y += gc.camera.shakeOffsetY;
 
     renderWorld(gc);
+    drawGrassBlades(gc);
     renderEntities(gc, alpha);
     drawGemHUD(gc);
     renderDebugOverlay(gc);

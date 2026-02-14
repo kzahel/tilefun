@@ -77,6 +77,8 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.flashHidden !== undefined) result.flashHidden = e.flashHidden;
   if (e.noShadow !== undefined) result.noShadow = e.noShadow;
   if (e.deathTimer !== undefined) result.deathTimer = e.deathTimer;
+  if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
+  if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
   return result;
 }
 
@@ -108,6 +110,8 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.flashHidden !== undefined) result.flashHidden = s.flashHidden;
   if (s.noShadow !== undefined) result.noShadow = s.noShadow;
   if (s.deathTimer !== undefined) result.deathTimer = s.deathTimer;
+  if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
+  if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
   return result;
 }
 

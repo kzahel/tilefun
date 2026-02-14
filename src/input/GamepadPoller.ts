@@ -4,10 +4,11 @@ const DEAD_ZONE = 0.15;
 
 export class GamepadPoller {
   poll(): Movement {
-    if (typeof navigator.getGamepads !== "function") return { dx: 0, dy: 0, sprinting: false };
+    if (typeof navigator.getGamepads !== "function")
+      return { dx: 0, dy: 0, sprinting: false, jump: false };
     const gamepads = navigator.getGamepads();
     const gp = gamepads[0] ?? gamepads[1] ?? gamepads[2] ?? gamepads[3];
-    if (!gp) return { dx: 0, dy: 0, sprinting: false };
+    if (!gp) return { dx: 0, dy: 0, sprinting: false, jump: false };
 
     // Left stick: axes 0 (X) and 1 (Y)
     let dx = gp.axes[0] ?? 0;
@@ -26,7 +27,9 @@ export class GamepadPoller {
 
     // Button 0 = A (Xbox) / Cross (PlayStation) = sprint
     const sprinting = gp.buttons[0]?.pressed ?? false;
+    // Button 1 = B (Xbox) / Circle (PlayStation) = jump
+    const jump = gp.buttons[1]?.pressed ?? false;
 
-    return { dx, dy, sprinting };
+    return { dx, dy, sprinting, jump };
   }
 }

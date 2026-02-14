@@ -13,6 +13,7 @@ describe("LocalTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
 
     expect(handler).toHaveBeenCalledOnce();
@@ -22,6 +23,7 @@ describe("LocalTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
   });
 
@@ -89,6 +91,7 @@ describe("LocalTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
 
     expect(handler).not.toHaveBeenCalled();
@@ -109,6 +112,7 @@ describe("LocalTransport", () => {
       dx: 0,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
     order.push("after");
 

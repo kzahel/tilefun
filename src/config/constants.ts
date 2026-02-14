@@ -51,3 +51,9 @@ export const ELEVATION_PX = 8;
 
 /** Maximum tile elevation level (0–3). */
 export const MAX_ELEVATION = 3;
+
+/** Jump initial upward velocity in world px/s. */
+export const JUMP_VELOCITY = 150;
+
+/** Jump gravity in world px/s². */
+export const JUMP_GRAVITY = 500;

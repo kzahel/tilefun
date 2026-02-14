@@ -1,4 +1,5 @@
-import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { WorldType } from "../persistence/WorldRegistry.js";
+import type { RealmInfo } from "../shared/protocol.js";
 import { relativeTime } from "./relativeTime.js";
 
 const OVERLAY_STYLE = `
@@ -32,6 +33,9 @@ export class MainMenu {
   private overlay: HTMLDivElement;
   private listEl: HTMLDivElement;
   private worldCount = 0;
+  private currentRealms: RealmInfo[] = [];
+  /** Map from worldId to the player-count badge element for live updates. */
+  private playerCountBadges = new Map<string, HTMLSpanElement>();
 
   onSelect: ((worldId: string) => void) | null = null;
   onCreate: ((name: string, worldType: WorldType, seed?: number) => void) | null = null;
@@ -159,12 +163,14 @@ export class MainMenu {
     return this.overlay.style.display !== "none";
   }
 
-  show(worlds: WorldMeta[]): void {
-    this.worldCount = worlds.length;
+  show(realms: RealmInfo[]): void {
+    this.worldCount = realms.length;
+    this.currentRealms = realms;
+    this.playerCountBadges.clear();
     this.overlay.style.display = "";
     this.listEl.innerHTML = "";
 
-    if (worlds.length === 0) {
+    if (realms.length === 0) {
       const empty = document.createElement("div");
       empty.style.cssText = "color: #888; text-align: center; padding: 16px;";
       empty.textContent = "No worlds yet. Create one below!";
@@ -172,8 +178,8 @@ export class MainMenu {
       return;
     }
 
-    for (const world of worlds) {
-      this.listEl.appendChild(this.createCard(world));
+    for (const realm of realms) {
+      this.listEl.appendChild(this.createCard(realm));
     }
   }
 
@@ -181,7 +187,23 @@ export class MainMenu {
     this.overlay.style.display = "none";
   }
 
-  private createCard(world: WorldMeta): HTMLDivElement {
+  /** Update a single realm's player count badge (live push). */
+  updatePlayerCount(worldId: string, count: number): void {
+    const badge = this.playerCountBadges.get(worldId);
+    if (badge) {
+      badge.textContent = count > 0 ? `${count} playing` : "";
+      badge.style.display = count > 0 ? "" : "none";
+    }
+    // Also update the cached realm data
+    for (const r of this.currentRealms) {
+      if (r.id === worldId) {
+        r.playerCount = count;
+        break;
+      }
+    }
+  }
+
+  private createCard(realm: RealmInfo): HTMLDivElement {
     const card = document.createElement("div");
     card.style.cssText = CARD_STYLE;
     card.addEventListener("mouseenter", () => {
@@ -194,17 +216,33 @@ export class MainMenu {
     const info = document.createElement("div");
     info.style.cssText = "display: flex; flex-direction: column; gap: 2px; min-width: 0;";
 
+    const nameRow = document.createElement("div");
+    nameRow.style.cssText = "display: flex; align-items: center; gap: 8px;";
+
     const nameEl = document.createElement("div");
     nameEl.style.cssText =
       "font-weight: bold; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;";
-    nameEl.textContent = world.name;
+    nameEl.textContent = realm.name;
+
+    // Player count badge
+    const badge = document.createElement("span");
+    badge.style.cssText =
+      "font-size: 11px; color: #8f8; background: rgba(100,255,100,0.15); padding: 1px 6px; border-radius: 8px; white-space: nowrap;";
+    if (realm.playerCount > 0) {
+      badge.textContent = `${realm.playerCount} playing`;
+    } else {
+      badge.style.display = "none";
+    }
+    this.playerCountBadges.set(realm.id, badge);
+
+    nameRow.append(nameEl, badge);
 
     // Double-click to rename
     nameEl.addEventListener("dblclick", (e) => {
       e.stopPropagation();
       const input = document.createElement("input");
       input.type = "text";
-      input.value = world.name;
+      input.value = realm.name;
       input.style.cssText = `
         font: bold 15px monospace; padding: 0; margin: 0;
         background: rgba(255,255,255,0.15); color: #fff;
@@ -213,11 +251,11 @@ export class MainMenu {
       `;
       const finish = () => {
         const newName = input.value.trim();
-        if (newName && newName !== world.name) {
-          this.onRename?.(world.id, newName);
+        if (newName && newName !== realm.name) {
+          this.onRename?.(realm.id, newName);
           nameEl.textContent = newName;
         } else {
-          nameEl.textContent = world.name;
+          nameEl.textContent = realm.name;
         }
         input.replaceWith(nameEl);
       };
@@ -226,7 +264,7 @@ export class MainMenu {
         ke.stopPropagation();
         if (ke.key === "Enter") input.blur();
         if (ke.key === "Escape") {
-          input.value = world.name;
+          input.value = realm.name;
           input.blur();
         }
       });
@@ -238,9 +276,9 @@ export class MainMenu {
 
     const timeEl = document.createElement("div");
     timeEl.style.cssText = "font-size: 12px; color: #999;";
-    timeEl.textContent = relativeTime(world.lastPlayedAt);
+    timeEl.textContent = relativeTime(realm.lastPlayedAt);
 
-    info.append(nameEl, timeEl);
+    info.append(nameRow, timeEl);
 
     // Delete button with 2-click confirm
     const delBtn = document.createElement("button");
@@ -256,7 +294,7 @@ export class MainMenu {
       e.stopPropagation();
       if (delBtn.dataset.confirm === "true") {
         if (confirmTimer) clearTimeout(confirmTimer);
-        this.onDelete?.(world.id);
+        this.onDelete?.(realm.id);
         return;
       }
       delBtn.dataset.confirm = "true";
@@ -275,7 +313,7 @@ export class MainMenu {
 
     // Click card to select world
     card.addEventListener("click", () => {
-      this.onSelect?.(world.id);
+      this.onSelect?.(realm.id);
     });
 
     return card;

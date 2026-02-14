@@ -68,6 +68,8 @@ const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
   { key: "prop-tube-climber", path: "assets/props/tube-climber.png", w: 96, h: 64 },
   { key: "prop-basketball-hoop", path: "assets/props/basketball-hoop.png", w: 48, h: 64 },
   { key: "prop-dino-topiary", path: "assets/props/dino-topiary.png", w: 64, h: 32 },
+  // Decorative overlays
+  { key: "grass-blades", path: "assets/sprites/grass-blades.png", w: 8, h: 8 },
 ];
 
 /**

@@ -46,6 +46,7 @@ describe("GameServer", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
 
     server.tick(1 / 60);

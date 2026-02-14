@@ -1,5 +1,5 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import type { WorldMeta } from "../persistence/WorldRegistry.js";
+import type { RealmInfo } from "../shared/protocol.js";
 
 /**
  * Main menu overlay scene.
@@ -8,14 +8,14 @@ import type { WorldMeta } from "../persistence/WorldRegistry.js";
  */
 export class MenuScene implements GameScene {
   readonly transparent = true;
-  private worlds: WorldMeta[];
+  private realms: RealmInfo[];
 
-  constructor(worlds: WorldMeta[]) {
-    this.worlds = worlds;
+  constructor(realms: RealmInfo[]) {
+    this.realms = realms;
   }
 
   onEnter(gc: GameContext): void {
-    gc.mainMenu.show(this.worlds);
+    gc.mainMenu.show(this.realms);
   }
 
   onExit(gc: GameContext): void {

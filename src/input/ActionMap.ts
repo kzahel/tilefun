@@ -10,6 +10,7 @@ export type ActionName =
   | "move_left"
   | "move_right"
   | "sprint"
+  | "jump"
   // Editor mode (continuous)
   | "pan_up"
   | "pan_down"
@@ -47,6 +48,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "move_left", keys: ["a", "ArrowLeft"] },
   { action: "move_right", keys: ["d", "ArrowRight"] },
   { action: "sprint", keys: ["Shift"] },
+  { action: "jump", keys: [" "] },
   // Editor camera pan (same physical keys, different action context)
   { action: "pan_up", keys: ["w", "ArrowUp"] },
   { action: "pan_down", keys: ["s", "ArrowDown"] },

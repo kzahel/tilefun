@@ -90,6 +90,7 @@ export class EntityManager {
 
     // Helper: build extra-blocker for resolveCollision (props + other entities).
     // Uses spatial hash for nearby entity lookups instead of scanning all entities.
+    // When self is airborne (jumping), small entities (spriteHeight <= 32) are skipped.
     const makeExtraBlocker =
       (self: Entity, alsoExclude?: Entity) =>
       (aabb: AABB): boolean => {
@@ -99,7 +100,10 @@ export class EntityManager {
         const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
         const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-        const nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        let nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        if ((self.jumpZ ?? 0) > 0) {
+          nearby = nearby.filter((e) => (e.sprite?.spriteHeight ?? 0) > 32);
+        }
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       };
 
@@ -110,8 +114,10 @@ export class EntityManager {
         const { vx, vy } = player.velocity;
 
         // Detect pushable entities adjacent to player in movement direction.
+        // Skip push detection entirely when player is jumping (any height).
         const toPush: { entity: Entity; pushFactor: number }[] = [];
-        if (vx !== 0 || vy !== 0) {
+        const jumping = (player.jumpZ ?? 0) > 0;
+        if ((vx !== 0 || vy !== 0) && !jumping) {
           const playerBox = getEntityAABB(player.position, player.collider);
           const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
           const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);

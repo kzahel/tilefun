@@ -2,6 +2,7 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { drawEntities } from "../rendering/EntityRenderer.js";
+import { renderGrassBlades as renderGrassBladesImpl } from "../rendering/GrassBladeRenderer.js";
 import type { Renderable } from "../rendering/Renderable.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 
@@ -29,6 +30,19 @@ export function renderWorld(gc: GameContext): void {
   tileRenderer.drawElevation(ctx, camera, stateView.world, visible);
 
   return; // Entities drawn after scene-specific overlays (editor grid goes between terrain and entities)
+}
+
+/**
+ * Draw animated grass blade overlays on full-grass tiles.
+ * Blades sway idly and push away from nearby entities.
+ * Call after renderWorld() and before renderEntities().
+ */
+export function drawGrassBlades(gc: GameContext): void {
+  const { ctx, camera, stateView, sheets } = gc;
+  const sheet = sheets.get("grass-blades");
+  if (!sheet) return;
+  const visible = camera.getVisibleChunkRange();
+  renderGrassBladesImpl(ctx, camera, stateView.world, stateView.entities, sheet, visible);
 }
 
 /**

@@ -10,8 +10,8 @@ import { GameServer } from "./GameServer.js";
 const DT = 1 / TICK_RATE;
 const MOVE_PER_TICK = PLAYER_SPEED * DT;
 
-const RIGHT: Movement = { dx: 1, dy: 0, sprinting: false };
-const IDLE: Movement = { dx: 0, dy: 0, sprinting: false };
+const RIGHT: Movement = { dx: 1, dy: 0, sprinting: false, jump: false };
+const IDLE: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
 
 function createTestServer() {
   const transport = new LocalTransport();
@@ -31,6 +31,7 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement) {
     dx: movement.dx,
     dy: movement.dy,
     sprinting: movement.sprinting,
+    jump: movement.jump,
   });
 }
 
@@ -110,7 +111,7 @@ describe("Input queue prediction invariant", () => {
 
     // 2 inputs in one tick: first right, then down
     sendInput(transport, 1, RIGHT);
-    sendInput(transport, 2, { dx: 0, dy: 1, sprinting: false });
+    sendInput(transport, 2, { dx: 0, dy: 1, sprinting: false, jump: false });
     server.tick(DT);
 
     // Should have moved right for input 1, then down for input 2

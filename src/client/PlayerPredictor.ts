@@ -1,3 +1,4 @@
+import { JUMP_GRAVITY, JUMP_VELOCITY } from "../config/constants.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -116,9 +117,19 @@ export class PlayerPredictor {
     const oldX = this.predicted.position.wx;
     const oldY = this.predicted.position.wy;
 
-    // Snap to server's authoritative position
+    // Snap to server's authoritative position and jump state
     this.predicted.position.wx = serverPlayer.position.wx;
     this.predicted.position.wy = serverPlayer.position.wy;
+    if (serverPlayer.jumpZ !== undefined) {
+      this.predicted.jumpZ = serverPlayer.jumpZ;
+    } else {
+      delete this.predicted.jumpZ;
+    }
+    if (serverPlayer.jumpVZ !== undefined) {
+      this.predicted.jumpVZ = serverPlayer.jumpVZ;
+    } else {
+      delete this.predicted.jumpVZ;
+    }
 
     // Trim acknowledged inputs
     const firstUnackedIdx = this.inputBuffer.findIndex((i) => i.seq > lastProcessedInputSeq);
@@ -184,6 +195,12 @@ export class PlayerPredictor {
 
     updatePlayerFromInput(this.predicted, movement, dt);
 
+    // Jump initiation
+    if (movement.jump && !(this.predicted.jumpZ ?? 0)) {
+      this.predicted.jumpZ = 0.01;
+      this.predicted.jumpVZ = JUMP_VELOCITY;
+    }
+
     if (this.predicted.velocity) {
       const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
       const speedMult =
@@ -199,6 +216,20 @@ export class PlayerPredictor {
       } else {
         this.predicted.position.wx += dx;
         this.predicted.position.wy += dy;
+      }
+    }
+
+    // Jump physics (gravity)
+    if (
+      this.predicted.jumpZ !== undefined &&
+      this.predicted.jumpZ > 0 &&
+      this.predicted.jumpVZ !== undefined
+    ) {
+      this.predicted.jumpVZ -= JUMP_GRAVITY * dt;
+      this.predicted.jumpZ += this.predicted.jumpVZ * dt;
+      if (this.predicted.jumpZ <= 0) {
+        delete this.predicted.jumpZ;
+        delete this.predicted.jumpVZ;
       }
     }
   }
@@ -219,6 +250,8 @@ export class PlayerPredictor {
       wanderAI: null,
     };
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
+    if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;
+    if (serverPlayer.jumpVZ !== undefined) clone.jumpVZ = serverPlayer.jumpVZ;
     return clone;
   }
 
@@ -254,8 +287,10 @@ export class PlayerPredictor {
       for (const prop of props) {
         if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
       }
+      const skipSmall = (entity.jumpZ ?? 0) > 0;
       for (const other of entities) {
         if (other.id === playerId || !other.collider?.clientSolid) continue;
+        if (skipSmall && (other.sprite?.spriteHeight ?? 0) <= 32) continue;
         if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
       }
       return false;

@@ -6,6 +6,7 @@ import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
+import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
 
 const PORT = parseInt(process.env.PORT ?? "3001", 10);
 const DATA_DIR = process.env.DATA_DIR ?? "./data";
@@ -79,6 +80,9 @@ const httpServer = createServer((req, res) => {
   res.end("Not Found");
 });
 
+initServerLog(DATA_DIR);
+installCrashHandlers();
+
 // Create WebSocket transport attached to HTTP server
 const transport = new WebSocketServerTransport({ server: httpServer });
 
@@ -93,20 +97,18 @@ await server.init();
 server.startLoop();
 
 httpServer.listen(PORT, () => {
-  console.log(`[tilefun] Server listening on http://localhost:${PORT}`);
+  serverLog(`Server listening on http://localhost:${PORT}`);
   if (hasDistDir) {
-    console.log(`[tilefun] Serving client at http://localhost:${PORT}${BASE_PATH}`);
+    serverLog(`Serving client at http://localhost:${PORT}${BASE_PATH}`);
   } else {
-    console.log("[tilefun] No dist/ found — run 'npm run build' to serve client files");
-    console.log(
-      `[tilefun] For dev, use 'npm run dev' + open http://localhost:5173/?server=localhost:${PORT}`,
-    );
+    serverLog("No dist/ found — run 'npm run build' to serve client files");
+    serverLog(`For dev, use 'npm run dev' + open http://localhost:5173/?server=localhost:${PORT}`);
   }
 });
 
 // Graceful shutdown
 function shutdown() {
-  console.log("\n[tilefun] Shutting down...");
+  serverLog("Shutting down...");
   server.destroy();
   httpServer.close();
   process.exit(0);

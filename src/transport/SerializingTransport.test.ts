@@ -13,6 +13,7 @@ describe("SerializingTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
 
     expect(handler).toHaveBeenCalledOnce();
@@ -22,6 +23,7 @@ describe("SerializingTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
   });
 
@@ -68,6 +70,7 @@ describe("SerializingTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     };
     transport.clientSide.send(original);
 
@@ -109,6 +112,7 @@ describe("SerializingTransport", () => {
       dx: 1,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
 
     expect(handler).not.toHaveBeenCalled();
@@ -129,6 +133,7 @@ describe("SerializingTransport", () => {
       dx: 0,
       dy: 0,
       sprinting: false,
+      jump: false,
     });
     order.push("after");
 

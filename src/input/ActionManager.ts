@@ -9,6 +9,7 @@ export interface Movement {
   dx: number;
   dy: number;
   sprinting: boolean;
+  jump: boolean;
 }
 
 type DiscreteCallback = () => void;
@@ -80,7 +81,7 @@ export class ActionManager {
   getMovement(): Movement {
     if (this.touchJoystick?.isActive()) {
       const touch = this.touchJoystick.getMovement();
-      return { dx: touch.dx, dy: touch.dy, sprinting: false };
+      return { dx: touch.dx, dy: touch.dy, sprinting: false, jump: this.touchJoystick.jumping };
     }
     let dx = 0;
     let dy = 0;
@@ -93,13 +94,14 @@ export class ActionManager {
       dy *= SQRT2_INV;
     }
     const sprinting = this.isHeld("sprint");
+    const jump = this.isHeld("jump");
 
     // Merge gamepad: if keyboard is idle, use gamepad stick; always OR sprint
     const gp = this.gamepadPoller.poll();
     if (dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
-      return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting };
+      return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
     }
-    return { dx, dy, sprinting: sprinting || gp.sprinting };
+    return { dx, dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
   }
 
   getPanDirection(): { dx: number; dy: number } {

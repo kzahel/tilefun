@@ -21,6 +21,9 @@ export class TouchJoystick {
   private canvas: HTMLCanvasElement;
   /** Called when a short tap (no drag) is detected. Coordinates are client-space. */
   onTap: ((clientX: number, clientY: number) => void) | null = null;
+  /** True while a second finger is touching (used as jump input on mobile). */
+  jumping = false;
+  private jumpTouchId: number | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -39,6 +42,8 @@ export class TouchJoystick {
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
     this.state = null;
+    this.jumping = false;
+    this.jumpTouchId = null;
   }
 
   isActive(): boolean {
@@ -118,18 +123,26 @@ export class TouchJoystick {
   }
 
   private onTouchStart = (e: TouchEvent): void => {
-    if (this.state) return; // already tracking a touch
-    const touch = e.changedTouches[0];
-    if (touch) {
-      this.state = {
-        touchId: touch.identifier,
-        baseX: touch.clientX,
-        baseY: touch.clientY,
-        thumbX: touch.clientX,
-        thumbY: touch.clientY,
-        startTime: performance.now(),
-      };
-      e.preventDefault();
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      const touch = e.changedTouches[i];
+      if (!touch) continue;
+      if (!this.state) {
+        // First finger: joystick
+        this.state = {
+          touchId: touch.identifier,
+          baseX: touch.clientX,
+          baseY: touch.clientY,
+          thumbX: touch.clientX,
+          thumbY: touch.clientY,
+          startTime: performance.now(),
+        };
+        e.preventDefault();
+      } else if (this.jumpTouchId === null) {
+        // Second finger while joystick active: jump
+        this.jumpTouchId = touch.identifier;
+        this.jumping = true;
+        e.preventDefault();
+      }
     }
   };
 
@@ -146,10 +159,10 @@ export class TouchJoystick {
   };
 
   private onTouchEnd = (e: TouchEvent): void => {
-    if (!this.state) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
-      if (touch && touch.identifier === this.state.touchId) {
+      if (!touch) continue;
+      if (this.state && touch.identifier === this.state.touchId) {
         // Detect tap: short duration + minimal movement
         const elapsed = performance.now() - this.state.startTime;
         const dx = touch.clientX - this.state.baseX;
@@ -159,8 +172,13 @@ export class TouchJoystick {
           this.onTap(this.state.baseX, this.state.baseY);
         }
         this.state = null;
+        this.jumping = false;
+        this.jumpTouchId = null;
         e.preventDefault();
-        return;
+      } else if (touch.identifier === this.jumpTouchId) {
+        this.jumping = false;
+        this.jumpTouchId = null;
+        e.preventDefault();
       }
     }
   };

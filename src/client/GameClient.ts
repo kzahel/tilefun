@@ -27,7 +27,7 @@ import { EditScene } from "../scenes/EditScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import type { GameServer } from "../server/GameServer.js";
-import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { World } from "../world/World.js";
@@ -70,6 +70,11 @@ export class GameClient {
   private nextRequestId = 1;
   // biome-ignore lint/suspicious/noExplicitAny: generic request/response map
   private pendingRequests = new Map<number, { resolve: (value: any) => void }>();
+
+  /** Realm list received while in lobby (multiplayer connect flow). */
+  private lobbyRealmList: RealmInfo[] | null = null;
+  /** True once init() has completed and we're ready to show UI. */
+  private initDone = false;
 
   /** Access the server instance (local mode only). Throws if null (serialized mode). */
   private get localServer(): GameServer {
@@ -135,12 +140,29 @@ export class GameClient {
         // position changes that desync camera and entity interpolation)
         if (msg.type === "game-state") {
           remoteView.bufferGameState(msg);
-        } else if (msg.type === "world-loaded") {
+        } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
           remoteView.clear();
           this.camera.x = msg.cameraX;
           this.camera.y = msg.cameraY;
           this.camera.zoom = msg.cameraZoom;
           this.gcSendVisibleRange();
+          this.lobbyRealmList = null;
+        } else if (msg.type === "realm-list") {
+          if (this.initDone) {
+            // Show realm browser immediately
+            if (!this.scenes.has(MenuScene)) {
+              this.scenes.push(new MenuScene(msg.realms));
+            } else {
+              this.mainMenu.show(msg.realms);
+            }
+          } else {
+            // Buffer for after init completes
+            this.lobbyRealmList = msg.realms;
+          }
+        } else if (msg.type === "realm-left") {
+          remoteView.clear();
+        } else if (msg.type === "realm-player-count") {
+          this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
         } else if (msg.type === "kicked") {
           console.warn(`[tilefun] Kicked: ${msg.reason}`);
           this.destroy();
@@ -249,9 +271,9 @@ export class GameClient {
     // Set up menu callbacks
     this.mainMenu.onSelect = (id) => {
       if (this.serialized) {
-        // world-loaded handler applies camera + clears state + sends visible range
+        // realm-joined handler applies camera + clears state + sends visible range
         this.gcSendRequest({
-          type: "load-world",
+          type: "join-realm",
           requestId: this.nextRequestId++,
           worldId: id,
         }).then(() => {
@@ -279,7 +301,7 @@ export class GameClient {
         this.gcSendRequest<{ meta: { id: string } }>(msg)
           .then((resp) => {
             return this.gcSendRequest({
-              type: "load-world",
+              type: "join-realm",
               requestId: this.nextRequestId++,
               worldId: resp.meta.id,
             });
@@ -306,15 +328,15 @@ export class GameClient {
           requestId: this.nextRequestId++,
           worldId: id,
         });
-        const resp = await this.gcSendRequest<{ worlds: WorldMeta[] }>({
-          type: "list-worlds",
+        const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
+          type: "list-realms",
           requestId: this.nextRequestId++,
         });
-        this.mainMenu.show(resp.worlds);
+        this.mainMenu.show(resp.realms);
       } else {
         await this.localServer.deleteWorld(id);
         const worlds = await this.localServer.listWorlds();
-        this.mainMenu.show(worlds);
+        this.mainMenu.show(GameClient.toRealmInfoList(worlds));
       }
     };
     this.mainMenu.onRename = (id, name) => {
@@ -341,6 +363,14 @@ export class GameClient {
     window.addEventListener("beforeunload", () => {
       this.gcFlushServer();
     });
+
+    this.initDone = true;
+
+    // If we received a realm-list while connecting (multiplayer lobby), show it now
+    if (this.lobbyRealmList) {
+      this.scenes.push(new MenuScene(this.lobbyRealmList));
+      this.lobbyRealmList = null;
+    }
 
     this.loop.start();
     this.canvas.dataset.ready = "true";
@@ -397,14 +427,14 @@ export class GameClient {
   private async toggleMenu(): Promise<void> {
     this.gcFlushServer();
     if (this.serialized) {
-      const resp = await this.gcSendRequest<{ worlds: WorldMeta[] }>({
-        type: "list-worlds",
+      const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
+        type: "list-realms",
         requestId: this.nextRequestId++,
       });
-      this.scenes.push(new MenuScene(resp.worlds));
+      this.scenes.push(new MenuScene(resp.realms));
     } else {
       const worlds = await this.localServer.listWorlds();
-      this.scenes.push(new MenuScene(worlds));
+      this.scenes.push(new MenuScene(GameClient.toRealmInfoList(worlds)));
     }
   }
 
@@ -415,6 +445,21 @@ export class GameClient {
     return new Promise((resolve) => {
       this.pendingRequests.set(msg.requestId, { resolve });
       this.transport.send(msg);
+    });
+  }
+
+  /** Convert WorldMeta[] to RealmInfo[] (local mode — no player counts). */
+  private static toRealmInfoList(worlds: WorldMeta[]): RealmInfo[] {
+    return worlds.map((w): RealmInfo => {
+      const info: RealmInfo = {
+        id: w.id,
+        name: w.name,
+        playerCount: 0,
+        createdAt: w.createdAt,
+        lastPlayedAt: w.lastPlayedAt,
+      };
+      if (w.worldType) info.worldType = w.worldType;
+      return info;
     });
   }
 
