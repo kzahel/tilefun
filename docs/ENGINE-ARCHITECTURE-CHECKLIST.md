@@ -10,6 +10,7 @@ Things experienced game developers always build early because they're painful to
 - [x] **Scripting/mod API** — Roblox-inspired WorldAPI facade + services (in progress)
 - [x] **Input action mapping** — ActionManager maps raw keys/gamepad/touch to named actions
 - [x] **Save format versioning** — migration chain system with `PersistenceStore` abstraction (IDB now, SQLite later)
+- [x] **Scene state machine** — stack-based SceneManager with PlayScene, EditScene, MenuScene, CatalogScene
 
 ---
 
@@ -34,34 +35,15 @@ Every edit operation becomes a `Command` object with `execute()` and `undo()`. N
 
 **Minimum viable stub:** A `CommandHistory` class with `execute(cmd)`, `undo()`, `redo()`. Wrap the terrain brush as the first command.
 
-### 3. Scene / game state machine
+### ~~3. Scene / game state machine~~ ✓
 
-A formal state machine for game states: `Menu → Playing → Editing → Paused → Dialogue → Inventory`.
+*Done — Stack-based `SceneManager` with `push()`/`pop()`/`replace()`. Four scenes: `PlayScene`, `EditScene`, `MenuScene` (transparent overlay), `CatalogScene` (transparent overlay). Each scene owns `update()`, `render()`, and lifecycle hooks (`onEnter`/`onExit`/`onResume`/`onPause`). GameClient delegates to SceneManager for the game loop. See `src/core/SceneManager.ts`, `src/core/GameScene.ts`, `src/scenes/`.*
 
-**Why it's hard to retrofit:** Ad-hoc boolean flags (`isPaused && !isEditing && !isInMenu`) multiply quickly and create impossible-to-debug state combinations.
+### ~~4. Asset manager / resource registry~~ ✓ (partial)
 
-**What it unlocks:**
-- Title screen, pause menu, settings screen, inventory
-- World management UI (create/switch/delete worlds — already on the roadmap)
-- Clean input routing (pause menu captures input, game doesn't)
-- Modal dialogs that block game input
+*Already in good shape. `SPRITE_MANIFEST` in `GameAssets.ts` centralizes all sprite loading with `Promise.all`. `Map<string, Spritesheet>` for key-based lookup. Atlas index (4,816 ME sprites) compacted from 962KB to 190KB grouped-by-theme format, lazy-fetched at runtime instead of bundled (JS bundle: 880KB → 181KB). See `src/assets/GameAssets.ts`, `src/assets/AtlasIndex.ts`.*
 
-**Minimum viable stub:** A stack-based state manager: `pushState(PauseMenu)`, `popState()`. Each state owns its own `update()`, `render()`, `handleInput()`.
-
-### 4. Asset manager / resource registry
-
-A central place that loads, caches, and references assets by key. `assets.get("player_walk")` instead of scattered `new Image()` calls.
-
-**Why it's hard to retrofit:** Asset loading is scattered across many files. Centralizing later means finding and rewriting every load site.
-
-**What it unlocks:**
-- Loading screen with progress bar
-- Hot-reload during development (change a sprite, see it update without refresh)
-- Asset pack swapping for mods
-- Prevents duplicate loads of the same spritesheet
-- Prerequisite for asset encryption/obfuscation (already on the roadmap)
-
-**Minimum viable stub:** An `AssetManager` with `load(key, path)`, `get(key)`, and a `Promise.all` loading phase at startup.
+*Remaining opportunities: loading progress callback, singleton access (stop threading `sheets` map), type-safe sheet keys.*
 
 ### ~~5. Save format versioning~~ ✓
 
@@ -187,8 +169,8 @@ A `Settings` object persisted to localStorage with UI to change values.
 |-------|------|--------|
 | ~~Now~~ | ~~Save format versioning (#5)~~ | ✓ Done |
 | ~~Now~~ | ~~Input action mapping (#1)~~ | ✓ Done |
-| Soon | Scene state machine (#3) | Medium |
-| Soon | Asset manager (#4) | Medium |
+| ~~Soon~~ | ~~Scene state machine (#3)~~ | ✓ Done |
+| ~~Soon~~ | ~~Asset manager (#4)~~ | ✓ Partial |
 | Soon | Time manager (#7) | Small |
 | When editor grows | Command pattern (#2) | Medium |
 | When adding entities/props | Render layers (#8) | Medium |
