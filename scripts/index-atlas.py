@@ -6,7 +6,7 @@ For each singles PNG, finds its (x, y, w, h) location in the master tileset
 using 16x16 cell hashing for fast candidate lookup, then pixel-perfect
 verification to eliminate false positives.
 
-Outputs: assets/exteriors/Modern_Exteriors_16x16/atlas-index.json
+Outputs: public/data/me-atlas-index.json (compact grouped-by-theme format)
 """
 
 from __future__ import annotations
@@ -21,7 +21,7 @@ REPO = Path(__file__).resolve().parent.parent
 ME_DIR = REPO / "assets" / "exteriors" / "Modern_Exteriors_16x16"
 MASTER = ME_DIR / "Modern_Exteriors_Complete_Tileset.png"
 SINGLES_DIR = ME_DIR / "Modern_Exteriors_Complete_Singles_16x16"
-OUT = REPO / "data" / "me-atlas-index.json"
+OUT = REPO / "public" / "data" / "me-atlas-index.json"
 
 
 def normalize_tile(img: Image.Image, x: int, y: int) -> bytes:
@@ -143,7 +143,8 @@ def main():
     singles = sorted(SINGLES_DIR.rglob("*.png"))
     print(f"\nFound {len(singles)} singles PNGs")
 
-    results = {}
+    # themes dict: theme -> { name: [x, y, w, h], ... }
+    themes: dict[str, dict[str, list[int]]] = {}
     matched = 0
     unmatched = 0
     unmatched_names = []
@@ -163,11 +164,7 @@ def main():
                 theme, prop_name = name.split("_16x16_", 1)
             else:
                 theme, prop_name = "", name
-            results[name] = {
-                "x": x, "y": y, "w": w, "h": h,
-                "name": prop_name,
-                "theme": theme,
-            }
+            themes.setdefault(theme, {})[prop_name] = [x, y, w, h]
             matched += 1
         else:
             unmatched += 1
@@ -180,22 +177,27 @@ def main():
         for n in unmatched_names:
             print(n)
 
+    # Sort themes and sprite names for deterministic output
+    sorted_themes = {}
+    for theme in sorted(themes.keys()):
+        sorted_themes[theme] = dict(sorted(themes[theme].items()))
+
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT, "w") as f:
         json.dump(
             {
                 "atlas": "Modern_Exteriors_Complete_Tileset.png",
-                "tile_size": TILE,
-                "atlas_width": master.size[0],
-                "atlas_height": master.size[1],
-                "total_singles": len(singles),
+                "tileSize": TILE,
+                "atlasWidth": master.size[0],
+                "atlasHeight": master.size[1],
                 "matched": matched,
                 "unmatched": unmatched,
-                "sprites": results,
+                "themes": sorted_themes,
             },
             f,
-            indent=2,
+            separators=(",", ":"),
         )
-    print(f"\nWrote {OUT}")
+    print(f"\nWrote {OUT} ({OUT.stat().st_size / 1024:.1f} KB)")
 
 
 if __name__ == "__main__":

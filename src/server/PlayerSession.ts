@@ -1,6 +1,16 @@
 import type { Entity } from "../entities/Entity.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
-import type { GameplaySession } from "./GameplaySimulation.js";
+
+/**
+ * Mutable session state for a single player's gameplay (gems, knockback, invincibility).
+ */
+export interface GameplaySession {
+  player: Entity;
+  gemsCollected: number;
+  invincibilityTimer: number;
+  knockbackVx: number;
+  knockbackVy: number;
+}
 
 export class PlayerSession {
   readonly clientId: string;

@@ -1,3 +1,4 @@
+import { loadAtlasIndex } from "../assets/AtlasIndex.js";
 import { loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
@@ -158,7 +159,7 @@ export class GameClient {
 
     // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
-    const assets = await loadGameAssets(blendGraph);
+    const [assets] = await Promise.all([loadGameAssets(blendGraph), loadAtlasIndex()]);
     this.sheets = assets.sheets;
     this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
     this.tileRenderer.setRoadSheets(this.sheets);
@@ -166,6 +167,7 @@ export class GameClient {
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, blendGraph);
     const meComplete = assets.sheets.get("me-complete");
     if (meComplete) this.propCatalog.setImage(meComplete.image);
+    this.propCatalog.populateAtlas();
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();

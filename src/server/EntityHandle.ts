@@ -1,7 +1,7 @@
 import { TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import type { GameplaySession } from "./GameplaySimulation.js";
+import type { GameplaySession } from "./PlayerSession.js";
 
 const EMPTY_SET: ReadonlySet<string> = new Set();
 
@@ -46,6 +46,9 @@ export class EntityHandle {
   get vy(): number {
     return this.entity.velocity?.vy ?? 0;
   }
+  get hasVelocity(): boolean {
+    return this.entity.velocity !== null;
+  }
 
   setVelocity(vx: number, vy: number): void {
     if (!this.alive) return;
@@ -55,6 +58,11 @@ export class EntityHandle {
     } else {
       this.entity.velocity = { vx, vy };
     }
+  }
+
+  clearVelocity(): void {
+    if (!this.alive) return;
+    this.entity.velocity = null;
   }
 
   // --- Tile position (derived) ---
@@ -212,9 +220,26 @@ export class PlayerHandle extends EntityHandle {
     return this.session.invincibilityTimer > 0;
   }
 
+  get invincibilityTimer(): number {
+    return this.session.invincibilityTimer;
+  }
+
   setInvincible(seconds: number): void {
     if (!this.alive) return;
     this.session.invincibilityTimer = seconds;
+  }
+
+  get knockbackVx(): number {
+    return this.session.knockbackVx;
+  }
+  get knockbackVy(): number {
+    return this.session.knockbackVy;
+  }
+
+  setKnockback(vx: number, vy: number): void {
+    if (!this.alive) return;
+    this.session.knockbackVx = vx;
+    this.session.knockbackVy = vy;
   }
 
   knockback(fromWx: number, fromWy: number, speed: number): void {

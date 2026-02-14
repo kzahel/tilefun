@@ -1,4 +1,4 @@
-import { ATLAS_INDEX, ATLAS_PREFIX } from "../assets/AtlasIndex.js";
+import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -226,7 +226,7 @@ const PROP_DEFS: Record<string, PropDef> = {
 export function createProp(type: string, wx: number, wy: number): Prop {
   if (type.startsWith(ATLAS_PREFIX)) {
     const atlasKey = type.slice(ATLAS_PREFIX.length);
-    const sprite = ATLAS_INDEX.sprites[atlasKey];
+    const sprite = getAtlasSprites()[atlasKey];
     if (!sprite) throw new Error(`Unknown atlas sprite: ${atlasKey}`);
     return {
       id: 0,
@@ -265,7 +265,8 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 
 export function isPropType(type: string): boolean {
   if (type.startsWith(ATLAS_PREFIX)) {
-    return type.slice(ATLAS_PREFIX.length) in ATLAS_INDEX.sprites;
+    if (!isAtlasLoaded()) return false;
+    return type.slice(ATLAS_PREFIX.length) in getAtlasSprites();
   }
   return type in PROP_DEFS;
 }

@@ -21,6 +21,8 @@ import { buddyScareMod } from "../mods/buddy-scare.js";
 import { campfireTrapMod } from "../mods/campfire-trap.js";
 import { deathTimerMod } from "../mods/death-timer.js";
 import { gemCollectorMod } from "../mods/gem-collector.js";
+import { gemVelocityDecayMod } from "../mods/gem-velocity-decay.js";
+import { invincibilityDecayMod } from "../mods/invincibility-decay.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
@@ -35,7 +37,6 @@ import { serializeChunk, serializeEntity, serializeProp } from "../shared/serial
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { World } from "../world/World.js";
-import { tickGameplay } from "./GameplaySimulation.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { ServerLoop } from "./ServerLoop.js";
 import { tickAllAI } from "./tickAllAI.js";
@@ -72,6 +73,8 @@ export class GameServer {
     buddyScareMod,
     deathTimerMod,
     campfireTrapMod,
+    invincibilityDecayMod,
+    gemVelocityDecayMod,
   ];
   private modTeardowns = new Map<string, Unsubscribe>();
 
@@ -225,10 +228,6 @@ export class GameServer {
           this.entityManager,
           this.world,
         );
-
-        tickGameplay(session.gameplaySession, this.entityManager, dt, {
-          markMetaDirty: () => this.saveManager?.markMetaDirty(),
-        });
       }
     }
 

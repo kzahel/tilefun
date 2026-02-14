@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { EntityHandle, PlayerHandle } from "./EntityHandle.js";
-import type { GameplaySession } from "./GameplaySimulation.js";
+import type { GameplaySession } from "./PlayerSession.js";
 
 function createTestEntity(overrides?: Partial<Entity>): Entity {
   return {

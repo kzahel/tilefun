@@ -1,4 +1,9 @@
-import { type AtlasSpriteEntry, getAtlasEntries, getAtlasThemes } from "../assets/AtlasIndex.js";
+import {
+  type AtlasSpriteEntry,
+  getAtlasEntries,
+  getAtlasThemes,
+  isAtlasLoaded,
+} from "../assets/AtlasIndex.js";
 
 const OVERLAY_STYLE = `
   position: fixed; inset: 0; z-index: 250;
@@ -99,12 +104,6 @@ export class PropCatalog {
     allOption.value = "";
     allOption.textContent = "All themes";
     this.themeSelect.appendChild(allOption);
-    for (const theme of getAtlasThemes()) {
-      const opt = document.createElement("option");
-      opt.value = theme;
-      opt.textContent = formatTheme(theme);
-      this.themeSelect.appendChild(opt);
-    }
     header.appendChild(this.themeSelect);
 
     this.countLabel = document.createElement("span");
@@ -124,9 +123,6 @@ export class PropCatalog {
     this.grid = document.createElement("div");
     this.grid.style.cssText = GRID_STYLE;
     this.overlay.appendChild(this.grid);
-
-    // Build cells
-    this.buildCells();
 
     // Event listeners
     let debounceTimer = 0;
@@ -154,6 +150,18 @@ export class PropCatalog {
     });
 
     document.body.appendChild(this.overlay);
+  }
+
+  /** Populate theme dropdown and sprite cells after atlas index is loaded. */
+  populateAtlas(): void {
+    if (!isAtlasLoaded()) return;
+    for (const theme of getAtlasThemes()) {
+      const opt = document.createElement("option");
+      opt.value = theme;
+      opt.textContent = formatTheme(theme);
+      this.themeSelect.appendChild(opt);
+    }
+    this.buildCells();
   }
 
   setImage(img: HTMLImageElement): void {
