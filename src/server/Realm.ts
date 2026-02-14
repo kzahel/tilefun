@@ -14,7 +14,9 @@ import {
   aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
   getEntityAABB,
+  getEntityElevation,
   getSpeedMultiplier,
+  isElevationBlocked,
   resolveCollision,
 } from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
@@ -114,28 +116,38 @@ export class Realm {
 
   /**
    * Add a player to this realm: create player entity, set up session state,
-   * add to realm sessions map.
+   * add to realm sessions map. Loads per-player data if available.
    */
-  addPlayer(session: PlayerSession): void {
-    const player = createPlayer(this.lastLoadedPlayerPos.wx, this.lastLoadedPlayerPos.wy);
+  async addPlayer(session: PlayerSession): Promise<void> {
+    // Try to load per-player saved data
+    const saved = this.saveManager ? await this.saveManager.loadPlayerData(session.clientId) : null;
+
+    const spawnX = saved?.x ?? this.lastLoadedPlayerPos.wx;
+    const spawnY = saved?.y ?? this.lastLoadedPlayerPos.wy;
+    const gems = saved?.gemsCollected ?? this.lastLoadedGems;
+    const camX = saved?.cameraX ?? this.lastLoadedCamera.cameraX;
+    const camY = saved?.cameraY ?? this.lastLoadedCamera.cameraY;
+    const camZoom = saved?.cameraZoom ?? this.lastLoadedCamera.cameraZoom;
+
+    const player = createPlayer(spawnX, spawnY);
     this.entityManager.spawn(player);
 
     session.player = player;
     session.gameplaySession = {
       player,
-      gemsCollected: this.lastLoadedGems,
+      gemsCollected: gems,
       invincibilityTimer: 0,
       knockbackVx: 0,
       knockbackVy: 0,
     };
-    session.cameraX = this.lastLoadedCamera.cameraX;
-    session.cameraY = this.lastLoadedCamera.cameraY;
-    session.cameraZoom = this.lastLoadedCamera.cameraZoom;
+    session.cameraX = camX;
+    session.cameraY = camY;
+    session.cameraZoom = camZoom;
     session.realmId = this.currentWorldId;
 
     // Seed a reasonable initial visible range near the camera
-    const camCx = Math.floor(this.lastLoadedCamera.cameraX / CHUNK_SIZE_PX);
-    const camCy = Math.floor(this.lastLoadedCamera.cameraY / CHUNK_SIZE_PX);
+    const camCx = Math.floor(camX / CHUNK_SIZE_PX);
+    const camCy = Math.floor(camY / CHUNK_SIZE_PX);
     session.visibleRange = {
       minCx: camCx - 3,
       minCy: camCy - 3,
@@ -146,17 +158,25 @@ export class Realm {
     this.sessions.set(session.clientId, session);
     this.clearClientRevisions(session.clientId);
 
+    console.log(
+      `[tilefun:realm] addPlayer client=${session.clientId} player.id=${player.id} editorEnabled=${session.editorEnabled} inputQueue=${session.inputQueue.length} worldId=${this.currentWorldId}`,
+    );
+
     // Cancel idle timeout — realm is occupied again
     this.idleSince = null;
   }
 
   /**
-   * Remove a player from this realm: remove entity, clean up session state.
+   * Remove a player from this realm: save per-player data, remove entity,
+   * clean up session state.
    * The session object itself is NOT deleted — it stays in GameServer's global map.
    */
   removePlayer(clientId: string): void {
     const session = this.sessions.get(clientId);
     if (!session) return;
+
+    // Persist per-player data before removing
+    this.savePlayerData(session);
 
     this.entityManager.remove(session.player.id);
     this.sessions.delete(clientId);
@@ -167,6 +187,19 @@ export class Realm {
     if (this.sessions.size === 0) {
       this.idleSince = Date.now();
     }
+  }
+
+  /** Mark per-player data dirty so it gets persisted on next save tick. */
+  savePlayerData(session: PlayerSession): void {
+    if (!this.saveManager) return;
+    this.saveManager.markPlayerDirty(session.clientId, {
+      gemsCollected: session.gameplaySession.gemsCollected,
+      x: session.player.position.wx,
+      y: session.player.position.wy,
+      cameraX: session.cameraX,
+      cameraY: session.cameraY,
+      cameraZoom: session.cameraZoom,
+    });
   }
 
   /** Close persistence if the given worldId matches the currently loaded world. */
@@ -198,8 +231,9 @@ export class Realm {
         const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
         const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
-        // Extra blocker for simplified collision — props + solid entities.
+        // Extra blocker for simplified collision — props + solid entities + elevation.
         // Matches makeExtraBlocker in EntityManager but without push mechanics.
+        const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
         const playerExclude = new Set([session.player.id]);
         const extraBlocker = (aabb: AABB): boolean => {
           const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
@@ -209,6 +243,9 @@ export class Realm {
           for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
             if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
           }
+          const currentElev = getEntityElevation(session.player, getHeight);
+          if (isElevationBlocked(aabb, currentElev, session.player.jumpZ ?? 0, getHeight))
+            return true;
           const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
           return aabbOverlapsAnyEntity(aabb, playerExclude, nearby);
         };
@@ -288,6 +325,7 @@ export class Realm {
         players,
         this.propManager,
         entityTickDts,
+        (tx, ty) => this.world.getHeightAt(tx, ty),
       );
 
       // Restore noclip colliders
@@ -749,12 +787,16 @@ export class Realm {
     let player: Entity | undefined;
 
     for (const session of this.sessions.values()) {
-      cameraX = session.cameraX;
-      cameraY = session.cameraY;
-      cameraZoom = session.cameraZoom;
-      gemsCollected = session.gameplaySession.gemsCollected;
-      player = session.player;
-      break;
+      // Persist per-player data for all players
+      this.savePlayerData(session);
+      // Use first session for realm-level meta (backward compat)
+      if (!player) {
+        cameraX = session.cameraX;
+        cameraY = session.cameraY;
+        cameraZoom = session.cameraZoom;
+        gemsCollected = session.gameplaySession.gemsCollected;
+        player = session.player;
+      }
     }
 
     const entities = this.entityManager.entities.map((e) => ({

@@ -1,8 +1,10 @@
 import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
-import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { ENTITY_PHYSICAL_HEIGHT } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
+import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 
 export interface DebugInfo {
@@ -16,6 +18,7 @@ export interface DebugInfo {
   terrainName: string;
   collisionFlags: string;
   speedMultiplier: number;
+  playerJumpZ?: number | undefined;
 }
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
@@ -27,6 +30,9 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     `Collision: ${info.collisionFlags}  Speed: ${info.speedMultiplier}x`,
     `Base: ${getBaseSelectionMode()} (D to toggle)  Convex: ${getForceConvex() ? "ON" : "off"}`,
   ];
+  if (info.playerJumpZ) {
+    lines.push(`Jump: Z=${info.playerJumpZ.toFixed(1)}`);
+  }
   const lineHeight = 16;
   const panelW = 340;
   const panelH = lines.length * lineHeight + 8;
@@ -76,26 +82,95 @@ function drawChunkBorders(
   ctx.restore();
 }
 
+/** Compute screen-space elevation Y-offset for a world position. */
+function getElevOffset(pos: { wx: number; wy: number }, camera: Camera, world?: World): number {
+  if (!world) return 0;
+  const tx = Math.floor(pos.wx / TILE_SIZE);
+  const ty = Math.floor(pos.wy / TILE_SIZE);
+  return world.getHeightAt(tx, ty) * ELEVATION_PX * camera.scale;
+}
+
+/** Draw a vertical height line with a tick mark at the top. Blue, from bottomY upward. */
+function drawHeightLine(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  bottomY: number,
+  heightPx: number,
+): void {
+  ctx.save();
+  ctx.strokeStyle = "rgba(80, 140, 255, 0.8)";
+  ctx.beginPath();
+  ctx.moveTo(cx, bottomY);
+  ctx.lineTo(cx, bottomY - heightPx);
+  ctx.stroke();
+  // Tick at top
+  ctx.beginPath();
+  ctx.moveTo(cx - 3, bottomY - heightPx);
+  ctx.lineTo(cx + 3, bottomY - heightPx);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function drawCollisionBoxes(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   entities: Entity[],
   props: Prop[],
+  world?: World,
 ): void {
   ctx.save();
-  ctx.strokeStyle = "rgba(255, 0, 0, 0.7)";
   ctx.lineWidth = 1;
 
   for (const entity of entities) {
     if (!entity.collider) continue;
     const aabb = getEntityAABB(entity.position, entity.collider);
-    const topLeft = camera.worldToScreen(aabb.left, aabb.top);
+    const elevOffset = getElevOffset(entity.position, camera, world);
+    const jumpZ = entity.jumpZ ?? 0;
+    const jumpOffset = jumpZ * camera.scale;
     const w = (aabb.right - aabb.left) * camera.scale;
     const h = (aabb.bottom - aabb.top) * camera.scale;
-    ctx.strokeRect(Math.floor(topLeft.sx), Math.floor(topLeft.sy), w, h);
+    const topLeft = camera.worldToScreen(aabb.left, aabb.top);
+    const sx = Math.floor(topLeft.sx);
+    const groundSy = Math.floor(topLeft.sy - elevOffset);
+
+    const physHeight =
+      ENTITY_PHYSICAL_HEIGHT[entity.type] ?? (entity.sprite?.spriteHeight ?? 16) * 0.5;
+    const heightPx = physHeight * camera.scale;
+
+    if (jumpZ > 0) {
+      // Ground shadow box (dashed, faded)
+      ctx.save();
+      ctx.setLineDash([3, 3]);
+      ctx.strokeStyle = "rgba(255, 0, 0, 0.3)";
+      ctx.strokeRect(sx, groundSy, w, h);
+      ctx.restore();
+
+      // Elevated box (solid)
+      ctx.strokeStyle = "rgba(255, 0, 0, 0.7)";
+      const elevSy = Math.floor(groundSy - jumpOffset);
+      ctx.strokeRect(sx, elevSy, w, h);
+
+      // Height line from bottom of elevated box
+      const cx = Math.floor(sx + w / 2);
+      drawHeightLine(ctx, cx, elevSy + h, heightPx);
+
+      // jumpZ label
+      ctx.font = "10px monospace";
+      ctx.fillStyle = "rgba(255, 100, 100, 0.9)";
+      ctx.fillText(`z=${jumpZ.toFixed(1)}`, sx + w + 2, elevSy + h / 2);
+    } else {
+      // Grounded box
+      ctx.strokeStyle = "rgba(255, 0, 0, 0.7)";
+      ctx.strokeRect(sx, groundSy, w, h);
+
+      // Height line from bottom of box
+      const cx = Math.floor(sx + w / 2);
+      drawHeightLine(ctx, cx, groundSy + h, heightPx);
+    }
   }
 
   for (const prop of props) {
+    const elevOffset = getElevOffset(prop.position, camera, world);
     if (prop.walls) {
       // Enterable prop: draw overall bounding collider as dashed cyan
       if (prop.collider) {
@@ -106,7 +181,7 @@ function drawCollisionBoxes(
         const tl = camera.worldToScreen(aabb.left, aabb.top);
         const w = (aabb.right - aabb.left) * camera.scale;
         const h = (aabb.bottom - aabb.top) * camera.scale;
-        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy - elevOffset), w, h);
         ctx.restore();
       }
       // Draw each wall segment in orange
@@ -116,7 +191,7 @@ function drawCollisionBoxes(
         const tl = camera.worldToScreen(aabb.left, aabb.top);
         const w = (aabb.right - aabb.left) * camera.scale;
         const h = (aabb.bottom - aabb.top) * camera.scale;
-        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy - elevOffset), w, h);
       }
     } else if (prop.collider) {
       ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
@@ -124,7 +199,13 @@ function drawCollisionBoxes(
       const tl = camera.worldToScreen(aabb.left, aabb.top);
       const w = (aabb.right - aabb.left) * camera.scale;
       const h = (aabb.bottom - aabb.top) * camera.scale;
-      ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy), w, h);
+      const sy = Math.floor(tl.sy - elevOffset);
+      ctx.strokeRect(Math.floor(tl.sx), sy, w, h);
+
+      // Height line from bottom of prop box (props use half spriteHeight as proxy)
+      const cx = Math.floor(tl.sx + w / 2);
+      const propHeight = Math.min(prop.sprite.spriteHeight, 32) * 0.5;
+      drawHeightLine(ctx, cx, sy + h, propHeight * camera.scale);
     }
   }
 
@@ -149,11 +230,12 @@ export function drawDebugOverlay(
   visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
   flags?: DebugRenderFlags,
   playerNames?: Record<number, string>,
+  world?: World,
 ): void {
   const showAll = !flags; // no flags = show all (legacy debugEnabled path)
   if (showAll || flags?.showInfoPanel) drawInfoPanel(ctx, info);
   if (showAll || flags?.showChunkBorders) drawChunkBorders(ctx, camera, visible);
-  if (showAll || flags?.showBboxes) drawCollisionBoxes(ctx, camera, entities, props);
+  if (showAll || flags?.showBboxes) drawCollisionBoxes(ctx, camera, entities, props, world);
   if (flags?.showGrid) drawTileGrid(ctx, camera, visible);
   if (playerNames && (showAll || flags?.showPlayerNames)) {
     drawPlayerNames(ctx, camera, entities, playerNames);

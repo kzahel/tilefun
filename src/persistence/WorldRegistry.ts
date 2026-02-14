@@ -1,4 +1,5 @@
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
+import { generateUUID } from "../shared/uuid.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
 
 export type { WorldMeta, WorldType } from "./IWorldRegistry.js";
@@ -75,7 +76,7 @@ export class WorldRegistry implements IWorldRegistry {
     if (!db) throw new Error("Registry not open");
     const now = Date.now();
     const meta: WorldMeta = {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       name,
       createdAt: now,
       lastPlayedAt: now,

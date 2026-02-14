@@ -80,7 +80,7 @@ const httpServer = createServer((req, res) => {
   res.end("Not Found");
 });
 
-initServerLog(DATA_DIR);
+await initServerLog(DATA_DIR);
 installCrashHandlers();
 
 // Create WebSocket transport attached to HTTP server
@@ -90,7 +90,7 @@ const transport = new WebSocketServerTransport({ server: httpServer });
 const server = new GameServer(transport, {
   registry: new FsWorldRegistry(DATA_DIR),
   createStore: (worldId) =>
-    new FsPersistenceStore(join(DATA_DIR, "worlds", worldId), ["chunks", "meta"]),
+    new FsPersistenceStore(join(DATA_DIR, "worlds", worldId), ["chunks", "meta", "players"]),
 });
 
 await server.init();

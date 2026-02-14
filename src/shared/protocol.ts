@@ -107,6 +107,7 @@ export type ClientMessage =
       editorTab: string;
       brushMode: string;
     }
+  | { type: "identify"; displayName: string }
   | { type: "list-realms"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string }
   | { type: "leave-realm"; requestId: number };

@@ -26,6 +26,7 @@
     "vitest": "^4.0.18"
   },
   "dependencies": {
+    "peerjs": "^1.5.5",
     "ws": "^8.18.0"
   }
 }

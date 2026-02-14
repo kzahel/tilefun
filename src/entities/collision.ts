@@ -1,4 +1,4 @@
-import { TILE_SIZE } from "../config/constants.js";
+import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity, PositionComponent } from "./Entity.js";
 import type { PropCollider } from "./Prop.js";
@@ -76,6 +76,39 @@ export function aabbOverlapsSolid(
     }
   }
   return false;
+}
+
+/** Get the tile elevation at an entity's feet position. */
+export function getEntityElevation(
+  entity: Entity,
+  getHeight: (tx: number, ty: number) => number,
+): number {
+  const tx = Math.floor(entity.position.wx / TILE_SIZE);
+  const ty = Math.floor(entity.position.wy / TILE_SIZE);
+  return getHeight(tx, ty);
+}
+
+/**
+ * Check if the proposed AABB's feet tile has higher elevation than the
+ * entity's current ground level, considering jump height. Downhill (target ≤
+ * current) is always allowed. Returns true when movement should be blocked.
+ *
+ * Only the tile at the bottom-center of the AABB (feet position) is checked,
+ * not every tile the AABB overlaps. This prevents corner-catching where the
+ * AABB edge grazes an elevated tile at cliff corners.
+ */
+export function isElevationBlocked(
+  aabb: AABB,
+  currentElevation: number,
+  jumpZ: number,
+  getHeight: (tx: number, ty: number) => number,
+): boolean {
+  const feetX = (aabb.left + aabb.right) / 2;
+  const feetY = aabb.bottom - 0.001;
+  const tx = Math.floor(feetX / TILE_SIZE);
+  const ty = Math.floor(feetY / TILE_SIZE);
+  const h = getHeight(tx, ty);
+  return h > currentElevation && jumpZ < (h - currentElevation) * ELEVATION_PX;
 }
 
 /**

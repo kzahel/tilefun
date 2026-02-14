@@ -36,7 +36,7 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         const httpServer = viteServer.httpServer;
         if (!httpServer) return;
 
-        initServerLog(dataDir);
+        await initServerLog(dataDir);
         installCrashHandlers();
 
         try {
@@ -47,7 +47,11 @@ export function tilefunServer(dataDir = "./data"): Plugin {
           server = new GameServer(transport, {
             registry: new FsWorldRegistry(dataDir),
             createStore: (worldId) =>
-              new FsPersistenceStore(join(dataDir, "worlds", worldId), ["chunks", "meta"]),
+              new FsPersistenceStore(join(dataDir, "worlds", worldId), [
+                "chunks",
+                "meta",
+                "players",
+              ]),
           });
 
           await server.init();

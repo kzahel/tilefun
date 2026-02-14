@@ -2,6 +2,17 @@ import type { WorldType } from "../persistence/WorldRegistry.js";
 import type { RealmInfo } from "../shared/protocol.js";
 import { relativeTime } from "./relativeTime.js";
 
+/** Parse a seed string: pure digits → number, otherwise hash to a 31-bit int. */
+function parseSeed(s: string): number {
+  const n = Number(s);
+  if (Number.isFinite(n) && /^\d+$/.test(s)) return n;
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  }
+  return h >>> 0; // unsigned 32-bit
+}
+
 const OVERLAY_STYLE = `
   position: fixed; inset: 0; z-index: 200;
   background: rgba(10, 10, 30, 0.92);
@@ -42,6 +53,8 @@ export class MainMenu {
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
   onClose: (() => void) | null = null;
+  onSwitchProfile: (() => void) | null = null;
+  onHostP2P: (() => void) | null = null;
 
   constructor() {
     this.overlay = document.createElement("div");
@@ -106,7 +119,7 @@ export class MainMenu {
     }
 
     const seedInput = document.createElement("input");
-    seedInput.type = "number";
+    seedInput.type = "text";
     seedInput.placeholder = "Seed (random)";
     seedInput.style.cssText = `${INPUT_STYLE} width: 120px; flex: none;`;
 
@@ -121,7 +134,7 @@ export class MainMenu {
       const name = nameInput.value.trim() || `World ${this.worldCount + 1}`;
       const worldType = typeSelect.value as WorldType;
       const seedVal = seedInput.value.trim();
-      const seed = seedVal ? Number(seedVal) : undefined;
+      const seed = seedVal ? parseSeed(seedVal) : undefined;
       nameInput.value = "";
       seedInput.value = "";
       this.onCreate?.(name, worldType, seed);
@@ -142,12 +155,43 @@ export class MainMenu {
     newSection.append(nameRow, optRow);
     this.overlay.appendChild(newSection);
 
+    // Bottom button group — constrained to same width as world list
+    const btnGroup = document.createElement("div");
+    btnGroup.style.cssText =
+      "display: flex; flex-direction: column; gap: 8px; width: 320px; margin-top: 16px;";
+
     // Resume button to close menu and return to game
     const resumeBtn = document.createElement("button");
     resumeBtn.textContent = "Resume";
-    resumeBtn.style.cssText = `${BTN_STYLE} width: 320px; margin-top: 12px; font-size: 16px; padding: 10px 16px;`;
+    resumeBtn.style.cssText = `${BTN_STYLE} width: 100%; font-size: 16px; padding: 10px 16px; background: rgba(100,160,255,0.2); border-color: #68f;`;
     resumeBtn.addEventListener("click", () => this.onClose?.());
-    this.overlay.appendChild(resumeBtn);
+    btnGroup.appendChild(resumeBtn);
+
+    // Secondary buttons row
+    const secondaryRow = document.createElement("div");
+    secondaryRow.style.cssText = "display: flex; gap: 8px;";
+
+    const switchBtn = document.createElement("button");
+    switchBtn.textContent = "Switch Player";
+    switchBtn.style.cssText = `${BTN_STYLE} flex: 1; color: #aaa;`;
+    switchBtn.addEventListener("click", () => this.onSwitchProfile?.());
+
+    const hostBtn = document.createElement("button");
+    hostBtn.textContent = "Host P2P";
+    hostBtn.style.cssText = `${BTN_STYLE} flex: 1; color: #4fc3f7;`;
+    hostBtn.addEventListener("click", () => {
+      if (this.onHostP2P) {
+        this.onHostP2P();
+      } else {
+        const url = new URL(window.location.href);
+        url.searchParams.set("host", "");
+        window.location.href = url.toString();
+      }
+    });
+
+    secondaryRow.append(switchBtn, hostBtn);
+    btnGroup.appendChild(secondaryRow);
+    this.overlay.appendChild(btnGroup);
 
     // Prevent keyboard shortcuts from firing while interacting with menu
     this.overlay.addEventListener("keydown", (e) => {

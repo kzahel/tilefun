@@ -151,6 +151,18 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply a full game-state message from the server. */
   applyGameState(msg: GameStateMessage): void {
+    // Log state transitions that matter for debugging realm-switch movement bug
+    if (msg.playerEntityId !== this._playerEntityId) {
+      console.log(
+        `[tilefun:rsv] playerEntityId changed: ${this._playerEntityId} → ${msg.playerEntityId}`,
+      );
+    }
+    if (msg.editorEnabled !== this._editorEnabled) {
+      console.log(
+        `[tilefun:rsv] editorEnabled changed: ${this._editorEnabled} → ${msg.editorEnabled}`,
+      );
+    }
+
     // Save old positions for render interpolation (match by entity ID)
     const prevPositions = new Map<number, { wx: number; wy: number }>();
     for (const e of this._entities) {
@@ -194,6 +206,9 @@ export class RemoteStateView implements ClientStateView {
 
   /** Clear all cached state (e.g., when switching worlds). */
   clear(): void {
+    console.log(
+      `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingState=${!!this._pendingState}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
+    );
     this._entities = [];
     this._props = [];
     this._playerEntityId = -1;
@@ -201,6 +216,7 @@ export class RemoteStateView implements ClientStateView {
     this._invincibilityTimer = 0;
     this._remoteCursors = [];
     this._playerNames = {};
+    this._pendingState = null; // Fix: clear stale pending state from old realm
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);

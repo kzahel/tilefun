@@ -1,10 +1,11 @@
-import { JUMP_GRAVITY, JUMP_VELOCITY } from "../config/constants.js";
+import { JUMP_GRAVITY, JUMP_VELOCITY, TILE_SIZE } from "../config/constants.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
   aabbsOverlap,
   getEntityAABB,
   getSpeedMultiplier,
+  isElevationBlocked,
 } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerFromInput } from "../entities/Player.js";
@@ -212,7 +213,7 @@ export class PlayerPredictor {
 
       if (this.predicted.collider && !this.noclip) {
         const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
-        this.resolvePlayerCollision(dx, dy, getCollision, blockMask, props, entities);
+        this.resolvePlayerCollision(dx, dy, getCollision, blockMask, props, entities, world);
       } else {
         this.predicted.position.wx += dx;
         this.predicted.position.wy += dy;
@@ -267,6 +268,7 @@ export class PlayerPredictor {
     blockMask: number,
     props: readonly Prop[],
     entities: readonly Entity[],
+    world: World,
   ): void {
     const entity = this.predicted;
     if (!entity) return;
@@ -277,6 +279,7 @@ export class PlayerPredictor {
     }
 
     const playerId = entity.id;
+    const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
     const isBlocked = (aabb: {
       left: number;
       top: number;
@@ -287,6 +290,10 @@ export class PlayerPredictor {
       for (const prop of props) {
         if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
       }
+      const feetTx = Math.floor(entity.position.wx / TILE_SIZE);
+      const feetTy = Math.floor(entity.position.wy / TILE_SIZE);
+      const currentElev = getHeight(feetTx, feetTy);
+      if (isElevationBlocked(aabb, currentElev, entity.jumpZ ?? 0, getHeight)) return true;
       const skipSmall = (entity.jumpZ ?? 0) > 0;
       for (const other of entities) {
         if (other.id === playerId || !other.collider?.clientSolid) continue;

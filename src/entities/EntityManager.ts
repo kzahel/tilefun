@@ -6,7 +6,9 @@ import {
   aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
+  getEntityElevation,
   getSpeedMultiplier,
+  isElevationBlocked,
   resolveCollision,
   separateOverlappingEntities,
 } from "./collision.js";
@@ -59,6 +61,7 @@ export class EntityManager {
     players: readonly Entity[],
     propManager: PropManager,
     entityTickDts?: ReadonlyMap<Entity, number>,
+    getHeight?: (tx: number, ty: number) => number,
   ): void {
     const playerSet = new Set(players);
 
@@ -95,15 +98,23 @@ export class EntityManager {
       (self: Entity, alsoExclude?: Entity) =>
       (aabb: AABB): boolean => {
         if (overlapsAnyProp(aabb)) return true;
+        if (getHeight) {
+          const currentElev = getEntityElevation(self, getHeight);
+          if (isElevationBlocked(aabb, currentElev, self.jumpZ ?? 0, getHeight)) return true;
+        }
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
         const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
         const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
         let nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-        if ((self.jumpZ ?? 0) > 0) {
-          nearby = nearby.filter((e) => (e.sprite?.spriteHeight ?? 0) > 32);
-        }
+        // Airborne entities don't block ground movement and vice versa (reflexive)
+        const selfAirborne = (self.jumpZ ?? 0) > 0;
+        nearby = nearby.filter((e) => {
+          if ((e.jumpZ ?? 0) > 0) return false; // airborne entity doesn't block us
+          if (selfAirborne && (e.sprite?.spriteHeight ?? 0) <= 32) return false; // we're airborne over small entity
+          return true;
+        });
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       };
 

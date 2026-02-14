@@ -91,7 +91,8 @@ export class GameServer {
     this.registry = deps?.registry ?? new WorldRegistry();
     this.createStore =
       deps?.createStore ??
-      ((worldId) => new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta"]));
+      ((worldId) =>
+        new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta", "players"]));
     // Create a default realm (will be loaded with a world in init() or loadWorld())
     const defaultRealm = new Realm([baseGameMod]);
     // Use a sentinel key until a real world is loaded
@@ -186,21 +187,21 @@ export class GameServer {
       if (clientId === "local") {
         // Single-player: auto-join default realm immediately
         const realm = this.activeRealm;
-        realm.addPlayer(session);
+        realm.addPlayer(session).then(() => {
+          console.log(
+            `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
+          );
 
-        console.log(
-          `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
-        );
-
-        this.transport.send(clientId, {
-          type: "player-assigned",
-          entityId: session.player.id,
-        });
-        this.transport.send(clientId, {
-          type: "world-loaded",
-          cameraX: realm.lastLoadedCamera.cameraX,
-          cameraY: realm.lastLoadedCamera.cameraY,
-          cameraZoom: realm.lastLoadedCamera.cameraZoom,
+          this.transport.send(clientId, {
+            type: "player-assigned",
+            entityId: session.player.id,
+          });
+          this.transport.send(clientId, {
+            type: "world-loaded",
+            cameraX: session.cameraX,
+            cameraY: session.cameraY,
+            cameraZoom: session.cameraZoom,
+          });
         });
       } else {
         // Multiplayer: start in lobby, send realm list
@@ -348,13 +349,13 @@ export class GameServer {
     // Get or create target realm
     const targetRealm = await this.getOrCreateRealm(worldId);
 
-    // Add player to target realm
-    targetRealm.addPlayer(session);
+    // Add player to target realm (loads per-player saved data)
+    await targetRealm.addPlayer(session);
 
     return {
-      cameraX: targetRealm.lastLoadedCamera.cameraX,
-      cameraY: targetRealm.lastLoadedCamera.cameraY,
-      cameraZoom: targetRealm.lastLoadedCamera.cameraZoom,
+      cameraX: session.cameraX,
+      cameraY: session.cameraY,
+      cameraZoom: session.cameraZoom,
     };
   }
 
@@ -501,6 +502,10 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "identify":
+        session.displayName = msg.displayName || session.displayName;
+        return;
+
       case "load-world":
         // Per-player realm switching: only move the requesting player
         this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
@@ -530,7 +535,13 @@ export class GameServer {
 
       case "join-realm": {
         const oldRealmId = session.realmId;
+        console.log(
+          `[tilefun:server] join-realm: client=${clientId} old=${oldRealmId} new=${msg.worldId} editorEnabled=${session.editorEnabled}`,
+        );
         this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
+          console.log(
+            `[tilefun:server] join-realm complete: client=${clientId} player.id=${session.player.id} editorEnabled=${session.editorEnabled} realmId=${session.realmId}`,
+          );
           this.transport.send(clientId, {
             type: "player-assigned",
             entityId: session.player.id,

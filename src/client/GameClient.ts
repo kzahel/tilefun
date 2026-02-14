@@ -35,6 +35,10 @@ import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientS
 
 export interface GameClientOptions {
   mode?: "local" | "serialized";
+  profile?: { id: string; name: string };
+  profileStore?: {
+    listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
+  };
 }
 
 export class GameClient {
@@ -75,6 +79,8 @@ export class GameClient {
   private lobbyRealmList: RealmInfo[] | null = null;
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
+  /** Player profile (display name, id). */
+  private profile: { id: string; name: string } | null = null;
 
   /** Access the server instance (local mode only). Throws if null (serialized mode). */
   private get localServer(): GameServer {
@@ -95,6 +101,7 @@ export class GameClient {
     this.transport = transport;
     this.server = server;
     this.serialized = options?.mode === "serialized";
+    this.profile = options?.profile ?? null;
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
     this.actions = new ActionManager();
@@ -141,6 +148,9 @@ export class GameClient {
         if (msg.type === "game-state") {
           remoteView.bufferGameState(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
+          console.log(
+            `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${!!remoteView["_predictor"]?.player}, editorEnabled=${remoteView.editorEnabled}`,
+          );
           remoteView.clear();
           this.camera.x = msg.cameraX;
           this.camera.y = msg.cameraY;
@@ -185,6 +195,11 @@ export class GameClient {
           }
         }
       });
+
+      // Send profile identity to server
+      if (this.profile) {
+        this.transport.send({ type: "identify", displayName: this.profile.name });
+      }
     } else {
       if (!server) throw new Error("Local mode requires a GameServer instance");
       this.stateView = new LocalStateView(server);

@@ -152,6 +152,7 @@ export function renderDebugOverlay(gc: GameContext): void {
       terrainName: TileId[terrain] ?? `Unknown(${terrain})`,
       collisionFlags: collisionParts.join("|"),
       speedMultiplier: collision & CollisionFlag.SlowWalk ? 0.5 : 1.0,
+      playerJumpZ: stateView.playerEntity.jumpZ,
     },
     camera.getVisibleChunkRange(),
     gc.debugEnabled
@@ -164,5 +165,6 @@ export function renderDebugOverlay(gc: GameContext): void {
           showPlayerNames: false,
         },
     stateView.playerNames,
+    stateView.world,
   );
 }

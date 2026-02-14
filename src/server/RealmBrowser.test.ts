@@ -172,6 +172,8 @@ describe("Realm browser protocol", () => {
     // init() calls start() which registers handlers, then triggers connect for... no,
     // init doesn't trigger connect. Let's connect manually.
     transport.connect("local");
+    // addPlayer is async — wait for microtask to resolve
+    await new Promise((r) => setTimeout(r, 0));
 
     const assigned = transport.messagesOfType("local", "player-assigned");
     const worldLoaded = transport.messagesOfType("local", "world-loaded");
@@ -391,7 +393,8 @@ describe("Realm browser protocol", () => {
     transport.connect("player-1");
     await new Promise((r) => setTimeout(r, 10));
 
-    const firstWorldId = transport.messagesOfType("player-1", "realm-list")[0]!.realms[0]!.id;
+    const realmList = transport.messagesOfType("player-1", "realm-list")[0]!.realms;
+    const firstWorldId = realmList.find((r: RealmInfo) => r.id !== secondWorld.id)!.id;
     transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId: firstWorldId });
     await new Promise((r) => setTimeout(r, 10));
 

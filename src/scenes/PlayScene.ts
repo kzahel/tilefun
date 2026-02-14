@@ -49,7 +49,13 @@ export class PlayScene implements GameScene {
   }
 
   onResume(gc: GameContext): void {
+    console.log(
+      `[tilefun:play] onResume — predictor=${!!this.predictor?.player}, editorEnabled=${gc.stateView.editorEnabled}, playerEntityId=${gc.stateView.playerEntity.id}`,
+    );
     gc.touchJoystick.attach();
+    // Re-send editor mode false — after realm switch the server may have a new
+    // session that defaults editorEnabled=true
+    gc.transport.send({ type: "set-editor-mode", enabled: false });
     if (gc.serialized && this.predictor) {
       (gc.stateView as RemoteStateView).setPredictor(this.predictor);
     }
@@ -112,6 +118,14 @@ export class PlayScene implements GameScene {
           const serverPlayer = remoteView.serverPlayerEntity;
           if (serverPlayer.id !== -1) {
             if (!this.predictor.player) {
+              console.log(
+                `[tilefun:play] predictor.reset — serverPlayer.id=${serverPlayer.id}, pos=(${serverPlayer.position.wx.toFixed(1)}, ${serverPlayer.position.wy.toFixed(1)})`,
+              );
+              this.predictor.reset(serverPlayer);
+            } else if (this.predictor.player.id !== serverPlayer.id) {
+              console.log(
+                `[tilefun:play] predictor entity ID mismatch: predicted=${this.predictor.player.id} server=${serverPlayer.id} — forcing reset`,
+              );
               this.predictor.reset(serverPlayer);
             } else {
               this.predictor.reconcile(

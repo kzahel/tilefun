@@ -1,4 +1,5 @@
 import { TICK_RATE } from "../config/constants.js";
+import { serverLogError } from "./serverLog.js";
 
 const FIXED_DT = 1 / TICK_RATE;
 
@@ -18,7 +19,11 @@ export class ServerLoop {
   start(): void {
     if (this.intervalId !== null) return;
     this.intervalId = setInterval(() => {
-      this.tickFn(FIXED_DT);
+      try {
+        this.tickFn(FIXED_DT);
+      } catch (err) {
+        serverLogError("tick error", err);
+      }
     }, FIXED_DT * 1000);
   }
 

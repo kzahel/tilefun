@@ -9,6 +9,7 @@ import type { PersistenceStore } from "./PersistenceStore.js";
 
 const STORE_CHUNKS = "chunks";
 const STORE_META = "meta";
+const STORE_PLAYERS = "players";
 const SAVE_DEBOUNCE_MS = 2000;
 
 export interface SerializedEntity {
@@ -29,6 +30,15 @@ export interface SavedMeta {
   gemsCollected?: number;
 }
 
+export interface SavedPlayerData {
+  gemsCollected: number;
+  x: number;
+  y: number;
+  cameraX: number;
+  cameraY: number;
+  cameraZoom: number;
+}
+
 export interface SavedChunkData {
   subgrid: Uint8Array;
   roadGrid: Uint8Array;
@@ -41,6 +51,7 @@ type GetMetaFn = () => SavedMeta;
 export class SaveManager {
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
   private dirtyChunks = new Set<string>();
+  private dirtyPlayers = new Map<string, SavedPlayerData>();
   private metaDirty = false;
   private saving = false;
   private getChunk: GetChunkFn | null = null;
@@ -94,6 +105,16 @@ export class SaveManager {
     return (raw as SavedMeta) ?? null;
   }
 
+  async loadPlayerData(playerId: string): Promise<SavedPlayerData | null> {
+    const raw = await this.store.get(STORE_PLAYERS, playerId);
+    return (raw as SavedPlayerData) ?? null;
+  }
+
+  markPlayerDirty(playerId: string, data: SavedPlayerData): void {
+    this.dirtyPlayers.set(playerId, data);
+    this.scheduleSave();
+  }
+
   markChunkDirty(key: string): void {
     this.dirtyChunks.add(key);
     this.scheduleSave();
@@ -106,7 +127,7 @@ export class SaveManager {
 
   /** Returns true if there are pending dirty items. */
   get hasDirty(): boolean {
-    return this.dirtyChunks.size > 0 || this.metaDirty;
+    return this.dirtyChunks.size > 0 || this.dirtyPlayers.size > 0 || this.metaDirty;
   }
 
   /** Schedule a debounced save. */
@@ -140,6 +161,8 @@ export class SaveManager {
     this.saving = true;
     const chunkKeys = [...this.dirtyChunks];
     this.dirtyChunks.clear();
+    const playerEntries = new Map(this.dirtyPlayers);
+    this.dirtyPlayers.clear();
     const saveMeta = this.metaDirty;
     this.metaDirty = false;
 
@@ -166,6 +189,10 @@ export class SaveManager {
       }
     }
 
+    for (const [playerId, data] of playerEntries) {
+      entries.push({ collection: STORE_PLAYERS, key: playerId, value: data });
+    }
+
     if (saveMeta) {
       entries.push({ collection: STORE_META, key: "state", value: this.getMeta() });
     }
@@ -181,6 +208,9 @@ export class SaveManager {
         this.saving = false;
         // Re-mark as dirty so next save attempt includes them
         for (const key of chunkKeys) this.dirtyChunks.add(key);
+        for (const [id, data] of playerEntries) {
+          if (!this.dirtyPlayers.has(id)) this.dirtyPlayers.set(id, data);
+        }
         if (saveMeta) this.metaDirty = true;
       },
     );
@@ -240,6 +270,7 @@ export class SaveManager {
     }
     this.store.close();
     this.dirtyChunks.clear();
+    this.dirtyPlayers.clear();
     this.metaDirty = false;
     this.getChunk = null;
     this.getMeta = null;
