@@ -32,6 +32,7 @@ import { tickGameplay } from "./GameplaySimulation.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { ServerLoop } from "./ServerLoop.js";
 import { tickAllAI } from "./tickAllAI.js";
+import { WorldAPIImpl } from "./WorldAPI.js";
 
 const BEFRIEND_RANGE_SQ = 24 * 24;
 
@@ -39,6 +40,7 @@ export class GameServer {
   world: World;
   entityManager: EntityManager;
   propManager: PropManager;
+  worldAPI: WorldAPIImpl;
 
   readonly blendGraph: BlendGraph;
   private adjacency: TerrainAdjacency;
@@ -67,6 +69,7 @@ export class GameServer {
     this.adjacency = new TerrainAdjacency(this.blendGraph);
     this.terrainEditor = new TerrainEditor(this.world, () => {}, this.adjacency);
     this.registry = new WorldRegistry();
+    this.worldAPI = this.createWorldAPI();
   }
 
   async init(): Promise<void> {
@@ -201,6 +204,8 @@ export class GameServer {
       }
     }
 
+    this.worldAPI.advanceTime(dt);
+
     // Broadcast state to all clients (serialized mode)
     if (this.broadcasting) {
       for (const session of this.sessions.values()) {
@@ -264,6 +269,7 @@ export class GameServer {
       (key) => this.saveManager?.markChunkDirty(key),
       this.adjacency,
     );
+    this.worldAPI = this.createWorldAPI();
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
@@ -666,6 +672,21 @@ export class GameServer {
       nextEntityId: this.entityManager.getNextId(),
       gemsCollected,
     };
+  }
+
+  private createWorldAPI(): WorldAPIImpl {
+    return new WorldAPIImpl(
+      this.world,
+      this.entityManager,
+      this.propManager,
+      this.terrainEditor,
+      () => {
+        for (const session of this.sessions.values()) {
+          return session;
+        }
+        return undefined;
+      },
+    );
   }
 
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {

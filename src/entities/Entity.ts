@@ -93,4 +93,8 @@ export interface Entity {
   noShadow?: boolean;
   /** Countdown timer (seconds) — entity flashes then is removed when it reaches 0. */
   deathTimer?: number;
+  /** Tags for scripting API (ephemeral, not persisted). */
+  tags?: Set<string>;
+  /** Per-entity key-value attributes for scripting API (ephemeral, not persisted). */
+  attributes?: Map<string, unknown>;
 }
