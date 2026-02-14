@@ -47,6 +47,8 @@ export class EntityManager {
 
   /**
    * Update all entities: apply velocity with collision, tick animation.
+   * @param players One or more player entities. In local mode this is a
+   *   single-element array; in multiplayer it contains all active players.
    * @param entityTickDts If provided, only entities in this map are ticked,
    *   using their per-entity dt (accumulated from tick tiering).
    *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
@@ -54,17 +56,21 @@ export class EntityManager {
   update(
     dt: number,
     getCollision: (tx: number, ty: number) => number,
-    player: Entity,
+    players: readonly Entity[],
     propManager: PropManager,
     entityTickDts?: ReadonlyMap<Entity, number>,
   ): void {
+    const playerSet = new Set(players);
+
     // Save previous positions for render interpolation (only for ticking entities)
     for (const entity of this.entities) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
       entity.prevPosition = { wx: entity.position.wx, wy: entity.position.wy };
     }
-    // Player may not be in this.entities (it's passed separately)
-    player.prevPosition = { wx: player.position.wx, wy: player.position.wy };
+    // Players may not be in this.entities (they're passed separately)
+    for (const player of players) {
+      player.prevPosition = { wx: player.position.wx, wy: player.position.wy };
+    }
 
     const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
@@ -97,85 +103,80 @@ export class EntityManager {
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       };
 
-    // --- Phase 1: Push entities in player's path, then move player ---
-    if (player.velocity && player.collider) {
-      const speedMult = getSpeedMultiplier(player.position, getCollision);
-      const { vx, vy } = player.velocity;
+    // --- Phase 1: Push entities in each player's path, then move players ---
+    for (const player of players) {
+      if (player.velocity && player.collider) {
+        const speedMult = getSpeedMultiplier(player.position, getCollision);
+        const { vx, vy } = player.velocity;
 
-      // Detect pushable entities adjacent to player in movement direction.
-      // pushFactor = dot(velocity dir, player→entity dir): 1 when walking
-      // straight into the entity, 0 when perpendicular — lets the player
-      // slide off entities they're barely touching.
-      const toPush: { entity: Entity; pushFactor: number }[] = [];
-      if (vx !== 0 || vy !== 0) {
-        const playerBox = getEntityAABB(player.position, player.collider);
-        // Probe extends by the movement distance (at least 1px) so we detect
-        // entities we'd reach this frame, even at sprint speed.
-        const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
-        const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);
-        const probeBox: AABB = {
-          left: playerBox.left + probeX,
-          top: playerBox.top + probeY,
-          right: playerBox.right + probeX,
-          bottom: playerBox.bottom + probeY,
-        };
-        const velLen = Math.sqrt(vx * vx + vy * vy);
-        const playerCx = (playerBox.left + playerBox.right) / 2;
-        const playerCy = (playerBox.top + playerBox.bottom) / 2;
-        // Use spatial hash to find nearby entities instead of scanning all
-        const probMinCx = Math.floor(probeBox.left / CHUNK_SIZE_PX);
-        const probMaxCx = Math.floor(probeBox.right / CHUNK_SIZE_PX);
-        const probMinCy = Math.floor(probeBox.top / CHUNK_SIZE_PX);
-        const probMaxCy = Math.floor(probeBox.bottom / CHUNK_SIZE_PX);
-        const nearbyEntities = this.spatialHash.queryRange(
-          probMinCx,
-          probMinCy,
-          probMaxCx,
-          probMaxCy,
-        );
-        for (const entity of nearbyEntities) {
-          if (entity === player || !entity.collider || !entity.wanderAI) continue;
-          const entityBox = getEntityAABB(entity.position, entity.collider);
-          if (!aabbsOverlap(probeBox, entityBox)) continue;
-          const toDirX = (entityBox.left + entityBox.right) / 2 - playerCx;
-          const toDirY = (entityBox.top + entityBox.bottom) / 2 - playerCy;
-          const toDirLen = Math.sqrt(toDirX * toDirX + toDirY * toDirY);
-          if (toDirLen === 0) continue;
-          const dot = (vx / velLen) * (toDirX / toDirLen) + (vy / velLen) * (toDirY / toDirLen);
-          const pushFactor = Math.max(0, dot);
-          if (pushFactor > 0) toPush.push({ entity, pushFactor });
+        // Detect pushable entities adjacent to player in movement direction.
+        const toPush: { entity: Entity; pushFactor: number }[] = [];
+        if (vx !== 0 || vy !== 0) {
+          const playerBox = getEntityAABB(player.position, player.collider);
+          const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
+          const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);
+          const probeBox: AABB = {
+            left: playerBox.left + probeX,
+            top: playerBox.top + probeY,
+            right: playerBox.right + probeX,
+            bottom: playerBox.bottom + probeY,
+          };
+          const velLen = Math.sqrt(vx * vx + vy * vy);
+          const playerCx = (playerBox.left + playerBox.right) / 2;
+          const playerCy = (playerBox.top + playerBox.bottom) / 2;
+          const probMinCx = Math.floor(probeBox.left / CHUNK_SIZE_PX);
+          const probMaxCx = Math.floor(probeBox.right / CHUNK_SIZE_PX);
+          const probMinCy = Math.floor(probeBox.top / CHUNK_SIZE_PX);
+          const probMaxCy = Math.floor(probeBox.bottom / CHUNK_SIZE_PX);
+          const nearbyEntities = this.spatialHash.queryRange(
+            probMinCx,
+            probMinCy,
+            probMaxCx,
+            probMaxCy,
+          );
+          for (const entity of nearbyEntities) {
+            if (entity === player || !entity.collider || !entity.wanderAI) continue;
+            const entityBox = getEntityAABB(entity.position, entity.collider);
+            if (!aabbsOverlap(probeBox, entityBox)) continue;
+            const toDirX = (entityBox.left + entityBox.right) / 2 - playerCx;
+            const toDirY = (entityBox.top + entityBox.bottom) / 2 - playerCy;
+            const toDirLen = Math.sqrt(toDirX * toDirX + toDirY * toDirY);
+            if (toDirLen === 0) continue;
+            const dot = (vx / velLen) * (toDirX / toDirLen) + (vy / velLen) * (toDirY / toDirLen);
+            const pushFactor = Math.max(0, dot);
+            if (pushFactor > 0) toPush.push({ entity, pushFactor });
+          }
         }
+
+        // Slow the player proportional to the strongest push
+        const maxPushFactor = toPush.reduce((m, p) => Math.max(m, p.pushFactor), 0);
+        const pushMult = 1.0 - (1.0 - PUSH_PLAYER_SPEED_MULT) * maxPushFactor;
+        const dx = vx * dt * speedMult * pushMult;
+        const dy = vy * dt * speedMult * pushMult;
+
+        // Pre-push: move entities proportional to how directly the player walks into them.
+        for (const { entity, pushFactor } of toPush) {
+          resolveCollision(
+            entity,
+            dx * pushFactor,
+            dy * pushFactor,
+            getCollision,
+            blockMask,
+            makeExtraBlocker(entity, player),
+          );
+        }
+
+        // Now move the player — entities are still solid blockers.
+        resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player));
+      } else if (player.velocity) {
+        player.position.wx += player.velocity.vx * dt;
+        player.position.wy += player.velocity.vy * dt;
       }
-
-      // Slow the player proportional to the strongest push
-      const maxPushFactor = toPush.reduce((m, p) => Math.max(m, p.pushFactor), 0);
-      const pushMult = 1.0 - (1.0 - PUSH_PLAYER_SPEED_MULT) * maxPushFactor;
-      const dx = vx * dt * speedMult * pushMult;
-      const dy = vy * dt * speedMult * pushMult;
-
-      // Pre-push: move entities proportional to how directly the player walks into them.
-      // If the entity is against a wall it stays put and the player is blocked.
-      for (const { entity, pushFactor } of toPush) {
-        resolveCollision(
-          entity,
-          dx * pushFactor,
-          dy * pushFactor,
-          getCollision,
-          blockMask,
-          makeExtraBlocker(entity, player),
-        );
-      }
-
-      // Now move the player — entities are still solid blockers.
-      resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player));
-    } else if (player.velocity) {
-      player.position.wx += player.velocity.vx * dt;
-      player.position.wy += player.velocity.vy * dt;
     }
 
-    // --- Phase 3: Move NPCs (using per-entity tick dt when available) ---
+    // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
     for (const entity of this.entities) {
-      if (entity === player || !entity.velocity) continue;
+      if (playerSet.has(entity) || !entity.velocity) continue;
       if (entityTickDts && !entityTickDts.has(entity)) continue;
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
@@ -201,13 +202,13 @@ export class EntityManager {
       }
     }
 
-    // Update spatial hash after all movement (player + NPCs)
+    // Update spatial hash after all movement (players + NPCs)
     for (const entity of this.entities) {
       this.spatialHash.update(entity);
     }
 
-    // --- Phase 4: Separate overlapping entities ---
-    separateOverlappingEntities(this.entities, player, dt, getCollision, blockMask);
+    // --- Phase 3: Separate overlapping entities ---
+    separateOverlappingEntities(this.entities, playerSet, dt, getCollision, blockMask);
 
     // --- Tick animations (only for ticking entities) ---
     for (const entity of this.entities) {

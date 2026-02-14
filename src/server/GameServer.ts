@@ -36,7 +36,7 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
-import type { ClientMessage, GameStateMessage } from "../shared/protocol.js";
+import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
@@ -47,6 +47,17 @@ import { ServerLoop } from "./ServerLoop.js";
 import { tickAllAI } from "./tickAllAI.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
+
+const CURSOR_COLORS = [
+  "#4fc3f7",
+  "#ff8a65",
+  "#81c784",
+  "#ba68c8",
+  "#fff176",
+  "#f06292",
+  "#4dd0e1",
+  "#a1887f",
+];
 
 export interface GameServerDeps {
   registry: IWorldRegistry;
@@ -81,6 +92,11 @@ export class GameServer {
   broadcasting = false;
   /** Monotonic tick counter, incremented each tick. */
   private tickCounter = 0;
+  /** Monotonic player number, incremented on each connect. */
+  private nextPlayerNumber = 1;
+  /** Sessions that disconnected but may reconnect within the grace period. */
+  private dormantSessions = new Map<string, ReturnType<typeof setTimeout>>();
+  private static readonly DORMANT_TIMEOUT_MS = 60_000;
   private readonly mods: Mod[] = [baseGameMod];
   private modTeardowns = new Map<string, Unsubscribe>();
   private serverConsole: ConsoleEngine | null = null;
@@ -143,8 +159,33 @@ export class GameServer {
     });
 
     this.transport.onConnect((clientId) => {
-      // Each connecting client gets their own player entity.
-      // In single-player (local), reuse the existing player if present.
+      // Cancel any dormant cleanup timer for this clientId
+      const dormantTimer = this.dormantSessions.get(clientId);
+      if (dormantTimer) {
+        clearTimeout(dormantTimer);
+        this.dormantSessions.delete(clientId);
+      }
+
+      // Reconnection: reuse existing session and player entity
+      const existingSession = this.sessions.get(clientId);
+      if (existingSession) {
+        console.log(`[tilefun] client reconnected: ${clientId} as ${existingSession.displayName}`);
+        this.transport.send(clientId, {
+          type: "player-assigned",
+          entityId: existingSession.player.id,
+        });
+        this.transport.send(clientId, {
+          type: "world-loaded",
+          cameraX: existingSession.cameraX,
+          cameraY: existingSession.cameraY,
+          cameraZoom: existingSession.cameraZoom,
+        });
+        // Reset chunk revisions so all chunks get re-sent to the fresh connection
+        this.clientChunkRevisions.delete(clientId);
+        return;
+      }
+
+      // New connection: create player entity and session
       let player: Entity;
       const existingPlayer = this.entityManager.entities.find((e) => e.type === "player");
       if (clientId === "local" && existingPlayer) {
@@ -168,11 +209,20 @@ export class GameServer {
         maxCx: camCx + 3,
         maxCy: camCy + 3,
       };
+      const num = this.nextPlayerNumber++;
+      session.playerNumber = num;
+      session.displayName = `Player ${num}`;
+      session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
       this.sessions.set(clientId, session);
 
-      console.log(`[tilefun] client connected: ${clientId} (${this.sessions.size} total)`);
+      console.log(
+        `[tilefun] client connected: ${clientId} as ${session.displayName} (${this.sessions.size} total)`,
+      );
 
-      // Send initial camera position so client knows where to look
+      this.transport.send(clientId, {
+        type: "player-assigned",
+        entityId: session.player.id,
+      });
       this.transport.send(clientId, {
         type: "world-loaded",
         cameraX: this.lastLoadedCamera.cameraX,
@@ -182,13 +232,34 @@ export class GameServer {
     });
 
     this.transport.onDisconnect((clientId) => {
+      if (clientId === "local") return;
+
       const session = this.sessions.get(clientId);
-      if (session && clientId !== "local") {
-        this.entityManager.remove(session.player.id);
+      if (!session) return;
+
+      // Zero velocity so the dormant player entity doesn't drift
+      if (session.player.velocity) {
+        session.player.velocity.vx = 0;
+        session.player.velocity.vy = 0;
       }
-      this.sessions.delete(clientId);
-      this.clientChunkRevisions.delete(clientId);
-      console.log(`[tilefun] client disconnected: ${clientId} (${this.sessions.size} total)`);
+
+      console.log(
+        `[tilefun] client disconnected: ${clientId} (${session.displayName}), dormant for ${GameServer.DORMANT_TIMEOUT_MS / 1000}s`,
+      );
+
+      // Keep session alive for a grace period to allow reconnection (e.g. page refresh)
+      const timer = setTimeout(() => {
+        this.dormantSessions.delete(clientId);
+        const s = this.sessions.get(clientId);
+        if (s) {
+          this.entityManager.remove(s.player.id);
+          this.sessions.delete(clientId);
+          this.clientChunkRevisions.delete(clientId);
+          console.log(`[tilefun] dormant session expired: ${clientId} (${s.displayName})`);
+        }
+      }, GameServer.DORMANT_TIMEOUT_MS);
+
+      this.dormantSessions.set(clientId, timer);
     });
   }
 
@@ -219,8 +290,11 @@ export class GameServer {
   tick(dt: number): void {
     this.tickCounter++;
 
+    // ── Phase 1: Process player inputs (per-session) ──
+    // Drain each session's input queue and set player velocity.
+    // This must happen before physics so EntityManager sees correct velocities.
     for (const session of this.sessions.values()) {
-      // 1. Apply player inputs (drain queue — process ALL queued inputs)
+      if (this.dormantSessions.has(session.clientId)) continue;
       if (!session.editorEnabled && session.inputQueue.length > 0) {
         const inputs = session.inputQueue;
         session.inputQueue = [];
@@ -274,47 +348,61 @@ export class GameServer {
         session.player.velocity.vx = 0;
         session.player.velocity.vy = 0;
       }
+    }
 
-      // 2. AI + Physics (skip if paused)
-      if (!session.debugPaused) {
-        // Compute per-entity tick tiers (near=every frame, mid=accumulated, far=frozen)
-        const entityTickDts = this.computeEntityTickDts(session.player, session.visibleRange, dt);
+    // ── Phase 2: AI + Physics (once, not per-session) ──
+    // Previously this ran inside the per-session loop, meaning N sessions
+    // caused N entity updates per tick — doubling/tripling movement speed.
+    const activeSessions = [...this.sessions.values()].filter(
+      (s) => !s.debugPaused && !this.dormantSessions.has(s.clientId),
+    );
+    if (activeSessions.length > 0) {
+      // Merge entity tick tiers across all active sessions' visible ranges
+      const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, dt);
 
-        tickAllAI(this.entityManager.entities, session.player.position, entityTickDts, Math.random);
+      // AI: pass nearest player position per entity (for chase/follow)
+      const playerPositions = activeSessions.map((s) => s.player.position);
+      tickAllAI(this.entityManager.entities, playerPositions, entityTickDts, Math.random);
 
-        // ── TickService.preSimulation ──
-        this.worldAPI.tick.firePre(dt);
+      // ── TickService.preSimulation ──
+      this.worldAPI.tick.firePre(dt);
 
-        // Noclip: temporarily remove player collider
-        let savedCollider: ColliderComponent | null = null;
+      // Noclip: temporarily remove player colliders
+      const savedColliders = new Map<PlayerSession, ColliderComponent>();
+      for (const session of activeSessions) {
         if (session.debugNoclip && session.player.collider) {
-          savedCollider = session.player.collider;
+          savedColliders.set(session, session.player.collider);
           session.player.collider = null;
         }
-
-        this.entityManager.update(
-          dt,
-          (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-          session.player,
-          this.propManager,
-          entityTickDts,
-        );
-
-        if (savedCollider) {
-          session.player.collider = savedCollider;
-        }
-
-        // ── TickService.postSimulation ──
-        this.worldAPI.tick.firePost(dt);
-
-        // ── TagService removal detection ──
-        this.worldAPI.tags.tick();
-
-        // ── OverlapService detection ──
-        this.worldAPI.overlap.tick();
       }
 
-      // 3. Spawners + gameplay (play mode only, not paused)
+      const players = activeSessions.map((s) => s.player);
+      this.entityManager.update(
+        dt,
+        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+        players,
+        this.propManager,
+        entityTickDts,
+      );
+
+      // Restore noclip colliders
+      for (const [session, collider] of savedColliders) {
+        session.player.collider = collider;
+      }
+
+      // ── TickService.postSimulation ──
+      this.worldAPI.tick.firePost(dt);
+
+      // ── TagService removal detection ──
+      this.worldAPI.tags.tick();
+
+      // ── OverlapService detection ──
+      this.worldAPI.overlap.tick();
+    }
+
+    // ── Phase 3: Spawners (per-session, near each player) ──
+    for (const session of this.sessions.values()) {
+      if (this.dormantSessions.has(session.clientId)) continue;
       if (!session.editorEnabled && !session.debugPaused) {
         this.gemSpawner.update(
           dt,
@@ -341,6 +429,7 @@ export class GameServer {
       // session's updateVisibleChunks can't unload another session's chunks.
       let unionRange: ChunkRange | null = null;
       for (const session of this.sessions.values()) {
+        if (this.dormantSessions.has(session.clientId)) continue;
         const r = session.visibleRange;
         if (r) {
           if (!unionRange) {
@@ -358,6 +447,7 @@ export class GameServer {
       }
 
       for (const session of this.sessions.values()) {
+        if (this.dormantSessions.has(session.clientId)) continue;
         const msg = this.buildGameState(session.clientId);
         this.transport.send(session.clientId, msg);
       }
@@ -526,6 +616,10 @@ export class GameServer {
   }
 
   destroy(): void {
+    for (const timer of this.dormantSessions.values()) {
+      clearTimeout(timer);
+    }
+    this.dormantSessions.clear();
     for (const teardown of this.modTeardowns.values()) {
       teardown();
     }
@@ -548,18 +642,25 @@ export class GameServer {
   private static readonly MID_TICK_FRAMES = 4;
 
   /**
-   * Compute per-entity tick dts based on distance from the player's viewport.
-   * Near entities tick every frame; mid-tier entities accumulate dt and tick
-   * every few frames with the accumulated value; far entities are frozen.
+   * Compute per-entity tick dts across multiple sessions.
+   * An entity is "near" if it's near ANY player, "mid" if near any mid range, etc.
+   * This avoids the old bug where calling computeEntityTickDts per-session
+   * inside the physics loop caused entities to be ticked N times.
    */
-  private computeEntityTickDts(player: Entity, range: ChunkRange, dt: number): Map<Entity, number> {
+  private computeEntityTickDtsMulti(
+    sessions: readonly PlayerSession[],
+    dt: number,
+  ): Map<Entity, number> {
     const result = new Map<Entity, number>();
     const nearBuf = GameServer.BROADCAST_BUFFER_CHUNKS;
     const midBuf = nearBuf + GameServer.MID_TICK_BUFFER;
     const midInterval = GameServer.MID_TICK_FRAMES / TICK_RATE;
 
+    // Collect all player entities so we always tick them
+    const playerSet = new Set(sessions.map((s) => s.player));
+
     for (const entity of this.entityManager.entities) {
-      if (entity === player) {
+      if (playerSet.has(entity)) {
         result.set(entity, dt);
         continue;
       }
@@ -567,25 +668,37 @@ export class GameServer {
       const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX);
       const cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
 
-      // Near tier: within visible range + broadcast buffer → every frame
-      if (
-        cx >= range.minCx - nearBuf &&
-        cx <= range.maxCx + nearBuf &&
-        cy >= range.minCy - nearBuf &&
-        cy <= range.maxCy + nearBuf
-      ) {
+      // Check if entity is near ANY session's visible range
+      let isNear = false;
+      let isMid = false;
+      for (const session of sessions) {
+        const range = session.visibleRange;
+        if (
+          cx >= range.minCx - nearBuf &&
+          cx <= range.maxCx + nearBuf &&
+          cy >= range.minCy - nearBuf &&
+          cy <= range.maxCy + nearBuf
+        ) {
+          isNear = true;
+          break;
+        }
+        if (
+          cx >= range.minCx - midBuf &&
+          cx <= range.maxCx + midBuf &&
+          cy >= range.minCy - midBuf &&
+          cy <= range.maxCy + midBuf
+        ) {
+          isMid = true;
+        }
+      }
+
+      if (isNear) {
         result.set(entity, dt);
         entity.tickAccumulator = 0;
         continue;
       }
 
-      // Mid tier: within extended range → reduced tick rate with accumulated dt
-      if (
-        cx >= range.minCx - midBuf &&
-        cx <= range.maxCx + midBuf &&
-        cy >= range.minCy - midBuf &&
-        cy <= range.maxCy + midBuf
-      ) {
+      if (isMid) {
         const acc = (entity.tickAccumulator ?? 0) + dt;
         if (acc >= midInterval) {
           result.set(entity, acc);
@@ -596,7 +709,7 @@ export class GameServer {
         continue;
       }
 
-      // Far tier: frozen (not in map, velocity zeroed by tickAllAI)
+      // Far tier: frozen
       entity.tickAccumulator = 0;
     }
 
@@ -669,6 +782,20 @@ export class GameServer {
       range.maxCy + buf,
     );
 
+    // Collect other players' editor cursors
+    const editorCursors: RemoteEditorCursor[] = [];
+    for (const [otherId, other] of this.sessions) {
+      if (otherId === clientId || !other.editorEnabled || !other.editorCursor) continue;
+      editorCursors.push({
+        displayName: other.displayName,
+        color: other.cursorColor,
+        tileX: other.editorCursor.tileX,
+        tileY: other.editorCursor.tileY,
+        editorTab: other.editorCursor.editorTab,
+        brushMode: other.editorCursor.brushMode,
+      });
+    }
+
     return {
       type: "game-state",
       serverTick: this.tickCounter,
@@ -681,6 +808,7 @@ export class GameServer {
       editorEnabled: session.editorEnabled,
       loadedChunkKeys,
       chunkUpdates,
+      editorCursors,
     };
   }
 
@@ -769,6 +897,16 @@ export class GameServer {
 
       case "set-editor-mode":
         session.editorEnabled = msg.enabled;
+        if (!msg.enabled) session.editorCursor = null;
+        break;
+
+      case "editor-cursor":
+        session.editorCursor = {
+          tileX: msg.tileX,
+          tileY: msg.tileY,
+          editorTab: msg.editorTab,
+          brushMode: msg.brushMode,
+        };
         break;
 
       case "set-debug":

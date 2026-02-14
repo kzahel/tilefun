@@ -218,7 +218,7 @@ describe("separateOverlappingEntities", () => {
     const b = spawnChicken(3, 100, 100);
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // They should have moved in opposite directions
     const dist = Math.abs(a.position.wx - b.position.wx) + Math.abs(a.position.wy - b.position.wy);
@@ -232,7 +232,7 @@ describe("separateOverlappingEntities", () => {
     const b = spawnChicken(3, 200, 200);
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     expect(a.position.wx).toBe(100);
     expect(a.position.wy).toBe(100);
@@ -248,7 +248,7 @@ describe("separateOverlappingEntities", () => {
     if (b.collider) b.collider.solid = false;
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // Neither should move because b is non-solid (not bucketed)
     expect(a.position.wx).toBe(100);
@@ -263,7 +263,7 @@ describe("separateOverlappingEntities", () => {
     b.wanderAI = null;
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // Neither should move because b has no wanderAI (not bucketed)
     expect(a.position.wx).toBe(100);
@@ -276,7 +276,7 @@ describe("separateOverlappingEntities", () => {
     const a = spawnChicken(2, 100, 100);
     const entities = [player, a];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // Player should not move (excluded from bucketing)
     expect(player.position.wx).toBe(100);
@@ -301,7 +301,7 @@ describe("separateOverlappingEntities", () => {
     const wallCollision = makeCollisionGrid(grid);
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, wallCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, wallCollision, blockMask);
 
     // Entities should stay put (wall blocks the nudge)
     expect(a.position.wx).toBe(100);
@@ -315,7 +315,7 @@ describe("separateOverlappingEntities", () => {
     const b = spawnChicken(3, 100, 100);
     const entities = [player, a, b];
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // Fallback direction is +X, so a moves left, b moves right
     expect(a.position.wx).toBeLessThan(100);
@@ -330,7 +330,7 @@ describe("separateOverlappingEntities", () => {
       entities.push(spawnChicken(10 + i, 100, 100));
     }
 
-    separateOverlappingEntities(entities, player, 1 / 60, noCollision, blockMask);
+    separateOverlappingEntities(entities, new Set([player]), 1 / 60, noCollision, blockMask);
 
     // At least some entities should have moved
     let movedCount = 0;

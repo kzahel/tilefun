@@ -1,5 +1,5 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import { drawEditorOverlay } from "../editor/EditorRenderer.js";
+import { drawEditorOverlay, drawRemoteCursors } from "../editor/EditorRenderer.js";
 import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
@@ -11,6 +11,10 @@ type Unsubscribe = () => void;
 export class EditScene implements GameScene {
   readonly transparent = false;
   private unsubscribes: Unsubscribe[] = [];
+  private lastCursorTileX = -Infinity;
+  private lastCursorTileY = -Infinity;
+  private lastCursorTab = "";
+  private lastCursorBrush = "";
 
   onEnter(gc: GameContext): void {
     gc.editorMode.attach();
@@ -200,6 +204,30 @@ export class EditScene implements GameScene {
       gc.transport.send({ type: "edit-clear-roads" });
     }
 
+    // Send editor cursor to server (only when changed)
+    const curTX = gc.editorMode.cursorTileX;
+    const curTY = gc.editorMode.cursorTileY;
+    const curTab = gc.editorPanel.editorTab;
+    const curBrush = gc.editorPanel.brushMode;
+    if (
+      curTX !== this.lastCursorTileX ||
+      curTY !== this.lastCursorTileY ||
+      curTab !== this.lastCursorTab ||
+      curBrush !== this.lastCursorBrush
+    ) {
+      this.lastCursorTileX = curTX;
+      this.lastCursorTileY = curTY;
+      this.lastCursorTab = curTab;
+      this.lastCursorBrush = curBrush;
+      gc.transport.send({
+        type: "editor-cursor",
+        tileX: curTX,
+        tileY: curTY,
+        editorTab: curTab,
+        brushMode: curBrush,
+      });
+    }
+
     // Server tick + chunk loading (no camera follow — editor pans manually)
     if (gc.serialized) {
       if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
@@ -257,6 +285,9 @@ export class EditScene implements GameScene {
       visible,
       gc.stateView.world,
     );
+
+    // Draw other players' editor cursors
+    drawRemoteCursors(gc.ctx, gc.camera, gc.stateView.remoteCursors);
 
     renderEntities(gc, alpha);
     renderDebugOverlay(gc);

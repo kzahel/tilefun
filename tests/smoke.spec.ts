@@ -224,8 +224,8 @@ test("F3 toggles debug overlay", async ({ page }) => {
     return sum;
   });
 
-  // Toggle debug via backtick key (F3 may be intercepted by browser)
-  await page.keyboard.press("Backquote");
+  // Toggle debug overlay via F3
+  await page.keyboard.press("F3");
   await page.waitForTimeout(200);
 
   // Check that top-left area changed (dark background + green text drawn)

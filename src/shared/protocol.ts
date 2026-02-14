@@ -87,7 +87,14 @@ export type ClientMessage =
   | { type: "delete-world"; requestId: number; worldId: string }
   | { type: "list-worlds"; requestId: number }
   | { type: "rename-world"; requestId: number; worldId: string; name: string }
-  | { type: "rcon"; requestId: number; command: string };
+  | { type: "rcon"; requestId: number; command: string }
+  | {
+      type: "editor-cursor";
+      tileX: number;
+      tileY: number;
+      editorTab: string;
+      brushMode: string;
+    };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -177,6 +184,15 @@ export interface PropSnapshot {
   sortOffsetY?: number;
 }
 
+export interface RemoteEditorCursor {
+  displayName: string;
+  color: string;
+  tileX: number;
+  tileY: number;
+  editorTab: string;
+  brushMode: string;
+}
+
 export interface GameStateMessage {
   type: "game-state";
   serverTick: number;
@@ -189,12 +205,14 @@ export interface GameStateMessage {
   editorEnabled: boolean;
   loadedChunkKeys: string[];
   chunkUpdates: ChunkSnapshot[];
+  editorCursors: RemoteEditorCursor[];
 }
 
 // ---- Server → Client messages ----
 
 export type ServerMessage =
   | { type: "player-assigned"; entityId: number }
+  | { type: "kicked"; reason: string }
   | GameStateMessage
   | {
       type: "world-loaded";

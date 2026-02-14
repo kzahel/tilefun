@@ -34,6 +34,23 @@ export class PlayerSession {
   cameraY = 0;
   cameraZoom = 1;
 
+  /** Auto-assigned display name (e.g. "Player 1"). */
+  displayName = "";
+
+  /** Connection order number (1-based). */
+  playerNumber = 0;
+
+  /** Assigned cursor color (CSS hex color). */
+  cursorColor = "#ffffff";
+
+  /** Latest editor cursor state from client (null if not editing). */
+  editorCursor: {
+    tileX: number;
+    tileY: number;
+    editorTab: string;
+    brushMode: string;
+  } | null = null;
+
   /** Debug state (set by client). */
   debugPaused = false;
   debugNoclip = false;

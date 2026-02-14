@@ -1,16 +1,19 @@
-import type { Server as HttpServer } from "node:http";
+import type { Server as HttpServer, IncomingMessage } from "node:http";
 import { type WebSocket, WebSocketServer } from "ws";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "./Transport.js";
 
 /**
  * WebSocket-backed server transport for Node.js.
- * Each connected WebSocket gets a unique clientId.
+ * Each connected WebSocket is identified by a UUID extracted from the
+ * connection URL query string (?uuid=...).
  */
 export class WebSocketServerTransport implements IServerTransport {
   private wss: WebSocketServer;
   private clients = new Map<string, WebSocket>();
-  private nextClientId = 1;
+  /** Sockets that were replaced by a newer connection with the same UUID.
+   *  Their close/error handlers are suppressed to avoid spurious disconnects. */
+  private replacedSockets = new Set<WebSocket>();
   private messageHandler: ((clientId: string, msg: ClientMessage) => void) | null = null;
   private connectHandler: ((clientId: string) => void) | null = null;
   private disconnectHandler: ((clientId: string) => void) | null = null;
@@ -34,8 +37,34 @@ export class WebSocketServerTransport implements IServerTransport {
       this.wss = new WebSocketServer({ server: options.server });
     }
 
-    this.wss.on("connection", (ws) => {
-      const clientId = `ws-${this.nextClientId++}`;
+    this.wss.on("connection", (ws: WebSocket, req: IncomingMessage) => {
+      // Extract UUID from query params
+      const url = new URL(req.url ?? "", "http://localhost");
+      const uuid = url.searchParams.get("uuid");
+      if (!uuid) {
+        console.error("[tilefun] WebSocket connection without UUID, closing");
+        ws.close(4000, "Missing UUID");
+        return;
+      }
+      const clientId = uuid;
+
+      // Kick existing connection with same UUID (last-write-wins)
+      const existingWs = this.clients.get(clientId);
+      if (existingWs) {
+        this.replacedSockets.add(existingWs);
+        try {
+          existingWs.send(
+            JSON.stringify({
+              type: "kicked",
+              reason: "Connected from another tab",
+            }),
+          );
+        } catch {
+          // Old socket may already be closing
+        }
+        existingWs.close(4001, "Replaced by new connection");
+      }
+
       this.clients.set(clientId, ws);
 
       ws.on("message", (data) => {
@@ -48,14 +77,21 @@ export class WebSocketServerTransport implements IServerTransport {
       });
 
       ws.on("close", () => {
-        this.clients.delete(clientId);
-        this.disconnectHandler?.(clientId);
+        // Suppress disconnect for sockets that were replaced by a newer connection
+        if (this.replacedSockets.delete(ws)) return;
+        if (this.clients.get(clientId) === ws) {
+          this.clients.delete(clientId);
+          this.disconnectHandler?.(clientId);
+        }
       });
 
       ws.on("error", (err) => {
         console.error(`[tilefun] WebSocket error for ${clientId}:`, err);
-        this.clients.delete(clientId);
-        this.disconnectHandler?.(clientId);
+        if (this.replacedSockets.delete(ws)) return;
+        if (this.clients.get(clientId) === ws) {
+          this.clients.delete(clientId);
+          this.disconnectHandler?.(clientId);
+        }
       });
 
       this.connectHandler?.(clientId);

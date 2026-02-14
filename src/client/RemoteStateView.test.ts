@@ -49,6 +49,7 @@ function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMess
     editorEnabled: true,
     loadedChunkKeys: [],
     chunkUpdates: [],
+    editorCursors: [],
     ...overrides,
   };
 }

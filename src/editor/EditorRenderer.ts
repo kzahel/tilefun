@@ -1,5 +1,6 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
+import type { RemoteEditorCursor } from "../shared/protocol.js";
 import type { World } from "../world/World.js";
 import type { EditorMode, PaintMode, SubgridShape } from "./EditorMode.js";
 import type { EditorTab } from "./EditorPanel.js";
@@ -325,5 +326,51 @@ function drawElevationCursorHighlight(
   ctx.lineWidth = 2;
   ctx.fillRect(topLeft.sx, topLeft.sy, w, h);
   ctx.strokeRect(topLeft.sx, topLeft.sy, w, h);
+  ctx.restore();
+}
+
+function hexToRgba(hex: string, alpha: number): string {
+  const r = Number.parseInt(hex.slice(1, 3), 16);
+  const g = Number.parseInt(hex.slice(3, 5), 16);
+  const b = Number.parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/** Draw remote players' editor cursors as colored tile highlights with name labels. */
+export function drawRemoteCursors(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  cursors: readonly RemoteEditorCursor[],
+): void {
+  if (cursors.length === 0) return;
+
+  const tileScreenSize = TILE_SIZE * camera.scale;
+
+  ctx.save();
+  for (const cursor of cursors) {
+    if (!Number.isFinite(cursor.tileX)) continue;
+
+    const screen = camera.worldToScreen(cursor.tileX * TILE_SIZE, cursor.tileY * TILE_SIZE);
+
+    // Colored tile highlight
+    ctx.fillStyle = hexToRgba(cursor.color, 0.2);
+    ctx.strokeStyle = hexToRgba(cursor.color, 0.7);
+    ctx.lineWidth = 2;
+    ctx.fillRect(screen.sx, screen.sy, tileScreenSize, tileScreenSize);
+    ctx.strokeRect(screen.sx, screen.sy, tileScreenSize, tileScreenSize);
+
+    // Name label above the cursor
+    ctx.font = "bold 11px monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    const lx = screen.sx + tileScreenSize / 2;
+    const ly = screen.sy - 4;
+
+    // Text shadow for readability
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+    ctx.fillText(cursor.displayName, lx + 1, ly + 1);
+    ctx.fillStyle = cursor.color;
+    ctx.fillText(cursor.displayName, lx, ly);
+  }
   ctx.restore();
 }

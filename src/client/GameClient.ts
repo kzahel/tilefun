@@ -141,6 +141,17 @@ export class GameClient {
           this.camera.y = msg.cameraY;
           this.camera.zoom = msg.cameraZoom;
           this.gcSendVisibleRange();
+        } else if (msg.type === "kicked") {
+          console.warn(`[tilefun] Kicked: ${msg.reason}`);
+          this.destroy();
+          const overlay = document.createElement("div");
+          overlay.style.cssText =
+            "position:fixed;inset:0;background:rgba(0,0,0,0.85);color:#fff;display:flex;align-items:center;justify-content:center;font:bold 24px sans-serif;z-index:9999;text-align:center;padding:2em;";
+          overlay.textContent = `Disconnected: ${msg.reason}`;
+          document.body.appendChild(overlay);
+          return;
+        } else if (msg.type === "player-assigned") {
+          console.log(`[tilefun] Player entity assigned: ${msg.entityId}`);
         }
 
         // Resolve pending request/response promises
@@ -203,8 +214,8 @@ export class GameClient {
       this.camera.zoom = val;
     });
 
-    // Start in editor mode
-    this.scenes.push(new EditScene());
+    // Start in play mode
+    this.scenes.push(new PlayScene());
 
     // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;

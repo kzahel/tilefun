@@ -12,7 +12,7 @@ describe("tickAllAI", () => {
     far.id = 1;
 
     const tickDts = new Map<Entity, number>();
-    tickAllAI([far], { wx: 0, wy: 0 }, tickDts, Math.random);
+    tickAllAI([far], [{ wx: 0, wy: 0 }], tickDts, Math.random);
 
     expect(far.velocity.vx).toBe(0);
     expect(far.velocity.vy).toBe(0);
@@ -27,7 +27,7 @@ describe("tickAllAI", () => {
     if (ai) ai.timer = 0;
 
     const tickDts = new Map<Entity, number>([[chicken, 0.01]]);
-    tickAllAI([chicken], { wx: 0, wy: 0 }, tickDts, () => 0.5);
+    tickAllAI([chicken], [{ wx: 0, wy: 0 }], tickDts, () => 0.5);
 
     expect(chicken.wanderAI?.state).toBe("walking");
   });
@@ -38,7 +38,7 @@ describe("tickAllAI", () => {
     const playerPos = { wx: 10, wy: 0 };
 
     const tickDts = new Map<Entity, number>([[ghost, 1 / 60]]);
-    tickAllAI([ghost], playerPos, tickDts, Math.random);
+    tickAllAI([ghost], [playerPos], tickDts, Math.random);
 
     // Ghost should be chasing (within its chase range of 80)
     expect(ghost.wanderAI?.state).toBe("chasing");
@@ -52,7 +52,7 @@ describe("tickAllAI", () => {
 
     const tickDts = new Map<Entity, number>([[player, 1 / 60]]);
     // Should not throw
-    tickAllAI([player], { wx: 0, wy: 0 }, tickDts, Math.random);
+    tickAllAI([player], [{ wx: 0, wy: 0 }], tickDts, Math.random);
   });
 
   it("activates following entity within range", () => {
@@ -67,7 +67,7 @@ describe("tickAllAI", () => {
     const playerPos = { wx: 50, wy: 50 };
 
     const tickDts = new Map<Entity, number>([[chicken, 1 / 60]]);
-    tickAllAI([chicken], playerPos, tickDts, Math.random);
+    tickAllAI([chicken], [playerPos], tickDts, Math.random);
 
     // Should be in "following" state and moving toward player
     expect(chicken.wanderAI?.state).toBe("following");

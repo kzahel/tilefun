@@ -1,7 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GameServer } from "../server/GameServer.js";
-import type { GameStateMessage } from "../shared/protocol.js";
+import type { GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
@@ -14,6 +14,7 @@ export interface ClientStateView {
   readonly gemsCollected: number;
   readonly invincibilityTimer: number;
   readonly editorEnabled: boolean;
+  readonly remoteCursors: readonly RemoteEditorCursor[];
 }
 
 /**
@@ -44,6 +45,9 @@ export class LocalStateView implements ClientStateView {
   get editorEnabled(): boolean {
     return this.server.getLocalSession().editorEnabled;
   }
+  get remoteCursors(): readonly RemoteEditorCursor[] {
+    return [];
+  }
 }
 
 /** Placeholder entity returned before server has sent state. */
@@ -70,6 +74,7 @@ export class RemoteStateView implements ClientStateView {
   private _gemsCollected = 0;
   private _invincibilityTimer = 0;
   private _editorEnabled = true;
+  private _remoteCursors: RemoteEditorCursor[] = [];
   private _pendingState: GameStateMessage | null = null;
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
@@ -158,6 +163,7 @@ export class RemoteStateView implements ClientStateView {
     this._gemsCollected = msg.gemsCollected;
     this._invincibilityTimer = msg.invincibilityTimer;
     this._editorEnabled = msg.editorEnabled;
+    this._remoteCursors = msg.editorCursors;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
 
@@ -186,6 +192,7 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = -1;
     this._gemsCollected = 0;
     this._invincibilityTimer = 0;
+    this._remoteCursors = [];
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);
@@ -216,5 +223,8 @@ export class RemoteStateView implements ClientStateView {
   }
   get editorEnabled(): boolean {
     return this._editorEnabled;
+  }
+  get remoteCursors(): readonly RemoteEditorCursor[] {
+    return this._remoteCursors;
   }
 }

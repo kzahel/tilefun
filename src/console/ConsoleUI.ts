@@ -2,7 +2,7 @@ import type { ConsoleEngine } from "./ConsoleEngine.js";
 import type { OutputLine } from "./ConsoleOutput.js";
 
 const CONTAINER_STYLE = `
-  position: fixed; top: 0; left: 0; right: 0; height: 50vh;
+  position: fixed; top: 0; left: 0; right: 0; height: 25vh;
   background: rgba(10, 10, 30, 0.92);
   font: 13px monospace; color: #ccc;
   z-index: 300; display: none;

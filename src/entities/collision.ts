@@ -136,7 +136,7 @@ const SEPARATION_SPEED = 40;
  */
 export function separateOverlappingEntities(
   entities: readonly Entity[],
-  player: Entity,
+  players: ReadonlySet<Entity>,
   dt: number,
   getCollision: (tx: number, ty: number) => number,
   blockMask: number,
@@ -146,7 +146,7 @@ export function separateOverlappingEntities(
   const pushableEntities: Entity[] = [];
   for (const entity of entities) {
     if (
-      entity === player ||
+      players.has(entity) ||
       !entity.collider ||
       entity.collider.solid === false ||
       !entity.wanderAI
@@ -173,8 +173,9 @@ export function separateOverlappingEntities(
     }
   }
 
-  // 2. Separate entities overlapping with the player (push only the entity, not the player)
-  if (player.collider) {
+  // 2. Separate entities overlapping with players (push only the entity, not the player)
+  for (const player of players) {
+    if (!player.collider) continue;
     const playerBox = getEntityAABB(player.position, player.collider);
     for (const entity of pushableEntities) {
       if (!entity.collider) continue;

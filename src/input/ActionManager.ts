@@ -1,5 +1,6 @@
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
+import { GamepadPoller } from "./GamepadPoller.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
 
 const SQRT2_INV = 1 / Math.sqrt(2);
@@ -19,6 +20,7 @@ export class ActionManager {
   private readonly keysDown = new Set<string>();
   private readonly listeners = new Map<ActionName, Set<DiscreteCallback>>();
   private touchJoystick: TouchJoystick | null = null;
+  private gamepadPoller = new GamepadPoller();
 
   constructor(config?: ActionMapConfig) {
     this.config = config ?? DEFAULT_ACTION_MAP;
@@ -90,7 +92,14 @@ export class ActionManager {
       dx *= SQRT2_INV;
       dy *= SQRT2_INV;
     }
-    return { dx, dy, sprinting: this.isHeld("sprint") };
+    const sprinting = this.isHeld("sprint");
+
+    // Merge gamepad: if keyboard is idle, use gamepad stick; always OR sprint
+    const gp = this.gamepadPoller.poll();
+    if (dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
+      return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting };
+    }
+    return { dx, dy, sprinting: sprinting || gp.sprinting };
   }
 
   getPanDirection(): { dx: number; dy: number } {

@@ -23,7 +23,7 @@ function updateWith(
   player: Entity,
   propManager?: PropManager,
 ): void {
-  em.update(dt, getCollision, player, propManager ?? emptyProps);
+  em.update(dt, getCollision, [player], propManager ?? emptyProps);
 }
 
 describe("EntityManager", () => {
