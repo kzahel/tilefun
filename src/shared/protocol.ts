@@ -146,6 +146,7 @@ export interface EntitySnapshot {
     spriteWidth: number;
     spriteHeight: number;
     flipX?: boolean;
+    drawOffsetY?: number;
   } | null;
   collider: {
     offsetX: number;

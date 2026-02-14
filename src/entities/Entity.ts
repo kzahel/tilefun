@@ -36,6 +36,8 @@ export interface SpriteComponent {
   spriteWidth: number;
   /** Pixel height of one frame in the spritesheet. */
   spriteHeight: number;
+  /** Visual offset in world pixels applied when drawing (negative = draw higher). Does not affect position or collision. */
+  drawOffsetY?: number;
 }
 
 export interface ColliderComponent {

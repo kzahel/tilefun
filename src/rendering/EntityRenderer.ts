@@ -82,8 +82,9 @@ export function drawEntities(
 
     const region = sheet.getRegion(sprite.frameCol, sprite.frameRow);
     const jumpOffset = (item.jumpZ ?? 0) * camera.scale;
+    const drawOffsetY = (sprite.drawOffsetY ?? 0) * camera.scale;
     const dx = Math.floor(screen.sx);
-    const dy = Math.floor(screen.sy - elevOffset - jumpOffset);
+    const dy = Math.floor(screen.sy - elevOffset - jumpOffset + drawOffsetY);
     if (sprite.flipX) {
       ctx.save();
       ctx.scale(-1, 1);

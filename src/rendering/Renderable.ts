@@ -12,6 +12,7 @@ export interface Renderable {
     spriteWidth: number;
     spriteHeight: number;
     flipX?: boolean;
+    drawOffsetY?: number;
   } | null;
   /** When true, skip entity-specific effects like shadows. */
   isProp?: boolean;
