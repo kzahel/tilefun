@@ -9,7 +9,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { drawEditorOverlay } from "../editor/EditorRenderer.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import { InputManager } from "../input/InputManager.js";
+import { ActionManager } from "../input/ActionManager.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
@@ -37,7 +37,7 @@ export class GameClient {
   private loop: GameLoop;
   private sheets = new Map<string, Spritesheet>();
   private tileRenderer: TileRenderer;
-  private input: InputManager;
+  private actions: ActionManager;
   private touchJoystick: TouchJoystick;
   private debugEnabled = false;
   private debugPanel: DebugPanel;
@@ -82,11 +82,11 @@ export class GameClient {
     this.serialized = options?.mode === "serialized";
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
-    this.input = new InputManager();
+    this.actions = new ActionManager();
     this.touchJoystick = new TouchJoystick(canvas);
-    this.input.setTouchJoystick(this.touchJoystick);
+    this.actions.setTouchJoystick(this.touchJoystick);
     this.debugPanel = new DebugPanel();
-    this.editorMode = new EditorMode(canvas, this.camera);
+    this.editorMode = new EditorMode(canvas, this.camera, this.actions);
     this.editorPanel = new EditorPanel();
     this.editorPanel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
@@ -139,7 +139,6 @@ export class GameClient {
   async init(): Promise<void> {
     this.resize();
     window.addEventListener("resize", () => this.resize());
-    document.addEventListener("keydown", (e) => this.onKeyDown(e));
     // Prevent buttons/selects from stealing keyboard focus — keeps all keys routed to the game.
     // Text inputs (e.g. MainMenu world name/seed) are excluded so they remain typeable.
     document.addEventListener("mousedown", (e) => {
@@ -151,7 +150,8 @@ export class GameClient {
     this.createEditorButton();
     this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
     this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
-    this.input.attach();
+    this.actions.attach();
+    this.bindActions();
     // Start in editor mode — attach editor, not joystick
     this.editorMode.attach();
     this.editorPanel.visible = true;
@@ -286,7 +286,7 @@ export class GameClient {
     this.flushServer();
     this.editorMode.detach();
     this.touchJoystick.detach();
-    this.input.detach();
+    this.actions.detach();
   }
 
   // ---- Update ----
@@ -441,7 +441,7 @@ export class GameClient {
 
     // Player input → velocity (skip in editor — camera pans via drag)
     if (!editorEnabled) {
-      const movement = this.input.getMovement();
+      const movement = this.actions.getMovement();
       this.transport.send({
         type: "player-input",
         dx: movement.dx,
@@ -619,57 +619,55 @@ export class GameClient {
 
   // ---- UI ----
 
-  private onKeyDown(e: KeyboardEvent): void {
-    if (e.key === "Escape") {
+  private isEditorActive(): boolean {
+    return this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
+  }
+
+  private bindActions(): void {
+    this.actions.on("toggle_menu", () => {
       if (this.propCatalog.visible) {
         this.propCatalog.hide();
         return;
       }
-      e.preventDefault();
       this.toggleMenu();
-      return;
-    }
-    if (this.mainMenu.visible || this.propCatalog.visible) return;
-
-    const editorEnabled = this.serialized ? this.clientEditorEnabled : this.stateView.editorEnabled;
-
-    if (e.key === "F3" || e.key === "`") {
-      e.preventDefault();
+    });
+    this.actions.on("toggle_debug", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
       this.debugEnabled = !this.debugEnabled;
       this.debugPanel.visible = this.debugEnabled;
-    }
-    if (e.key === "Tab") {
-      e.preventDefault();
+    });
+    this.actions.on("toggle_editor", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
       this.toggleEditor();
-    }
-    if ((e.key === "m" || e.key === "M") && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.toggleMode();
-    }
-    if ((e.key === "b" || e.key === "B") && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.cycleBridgeDepth();
-    }
-    if ((e.key === "s" || e.key === "S") && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.cycleBrushShape();
-    }
-    if (e.key === "z" && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.setPaintMode("positive");
-    }
-    if (e.key === "c" && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.setPaintMode("unpaint");
-    }
-    if ((e.key === "t" || e.key === "T") && editorEnabled) {
-      e.preventDefault();
-      this.editorPanel.toggleTab();
-    }
-    if ((e.key === "d" || e.key === "D") && this.debugEnabled) {
-      e.preventDefault();
-      this.debugPanel.toggleBaseMode();
-    }
+    });
+    this.actions.on("toggle_paint_mode", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.toggleMode();
+    });
+    this.actions.on("cycle_bridge_depth", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.cycleBridgeDepth();
+    });
+    this.actions.on("cycle_brush_shape", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.cycleBrushShape();
+    });
+    this.actions.on("paint_positive", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.setPaintMode("positive");
+    });
+    this.actions.on("paint_unpaint", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.setPaintMode("unpaint");
+    });
+    this.actions.on("toggle_tab", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.isEditorActive()) this.editorPanel.toggleTab();
+    });
+    this.actions.on("toggle_base_mode", () => {
+      if (this.mainMenu.visible || this.propCatalog.visible) return;
+      if (this.debugEnabled) this.debugPanel.toggleBaseMode();
+    });
   }
 
   private toggleEditor(): void {

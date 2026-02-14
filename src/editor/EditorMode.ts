@@ -2,6 +2,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import type { ActionManager } from "../input/ActionManager.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { EditorTab } from "./EditorPanel.js";
 
@@ -72,6 +73,7 @@ export class EditorMode {
 
   private readonly canvas: HTMLCanvasElement;
   private readonly camera: Camera;
+  private readonly actions: ActionManager;
   private pendingTileEdits: PendingTileEdit[] = [];
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
   private pendingCornerEdits: PendingSubgridEdit[] = [];
@@ -84,8 +86,6 @@ export class EditorMode {
   private isPanning = false;
   /** True while right-click is held for temporary unpaint. */
   rightClickUnpaint = false;
-  private spaceDown = false;
-  private keysDown = new Set<string>();
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
   private lastPaintedTile = { tx: -Infinity, ty: -Infinity };
   private lastPaintedSubgrid = { gsx: -Infinity, gsy: -Infinity };
@@ -112,12 +112,11 @@ export class EditorMode {
   private readonly onTouchStart: (e: TouchEvent) => void;
   private readonly onTouchMove: (e: TouchEvent) => void;
   private readonly onTouchEnd: (e: TouchEvent) => void;
-  private readonly onKeyDown: (e: KeyboardEvent) => void;
-  private readonly onKeyUp: (e: KeyboardEvent) => void;
 
-  constructor(canvas: HTMLCanvasElement, camera: Camera) {
+  constructor(canvas: HTMLCanvasElement, camera: Camera, actions: ActionManager) {
     this.canvas = canvas;
     this.camera = camera;
+    this.actions = actions;
 
     this.onMouseDown = (e) => this.handleMouseDown(e);
     this.onMouseMove = (e) => this.handleMouseMove(e);
@@ -127,14 +126,6 @@ export class EditorMode {
     this.onTouchStart = (e) => this.handleTouchStart(e);
     this.onTouchMove = (e) => this.handleTouchMove(e);
     this.onTouchEnd = (e) => this.handleTouchEnd(e);
-    this.onKeyDown = (e) => {
-      if (e.key === " ") this.spaceDown = true;
-      this.keysDown.add(e.key);
-    };
-    this.onKeyUp = (e) => {
-      if (e.key === " ") this.spaceDown = false;
-      this.keysDown.delete(e.key);
-    };
   }
 
   attach(): void {
@@ -151,8 +142,6 @@ export class EditorMode {
     });
     this.canvas.addEventListener("touchend", this.onTouchEnd);
     this.canvas.addEventListener("touchcancel", this.onTouchEnd);
-    window.addEventListener("keydown", this.onKeyDown);
-    window.addEventListener("keyup", this.onKeyUp);
   }
 
   detach(): void {
@@ -165,24 +154,15 @@ export class EditorMode {
     this.canvas.removeEventListener("touchmove", this.onTouchMove);
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
-    window.removeEventListener("keydown", this.onKeyDown);
-    window.removeEventListener("keyup", this.onKeyUp);
     this.isPainting = false;
     this.isPanning = false;
-    this.spaceDown = false;
-    this.keysDown.clear();
     this.activeTouches.clear();
   }
 
   /** Call from game loop to apply continuous key-based panning. */
   update(dt: number): void {
     const PAN_SPEED = CHUNK_SIZE * TILE_SIZE * 2; // 2 chunks/sec
-    let dx = 0;
-    let dy = 0;
-    if (this.keysDown.has("ArrowLeft") || this.keysDown.has("a")) dx -= 1;
-    if (this.keysDown.has("ArrowRight") || this.keysDown.has("d")) dx += 1;
-    if (this.keysDown.has("ArrowUp") || this.keysDown.has("w")) dy -= 1;
-    if (this.keysDown.has("ArrowDown") || this.keysDown.has("s")) dy += 1;
+    const { dx, dy } = this.actions.getPanDirection();
     if (dx !== 0 || dy !== 0) {
       const speed = PAN_SPEED / this.camera.zoom;
       this.camera.x += dx * speed * dt;
@@ -436,7 +416,7 @@ export class EditorMode {
     const { sx, sy } = this.canvasCoords(e);
 
     // Middle button or space+left = pan (always, regardless of tab)
-    if (e.button === 1 || (e.button === 0 && this.spaceDown)) {
+    if (e.button === 1 || (e.button === 0 && this.actions.isHeld("pan_modifier"))) {
       this.isPanning = true;
       this.panStart = {
         sx: e.clientX,
