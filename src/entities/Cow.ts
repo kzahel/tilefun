@@ -46,5 +46,6 @@ export function createCow(wx: number, wy: number): Entity {
       befriendable: true,
       followDistance: 24,
     },
+    tags: new Set(["befriendable"]),
   };
 }

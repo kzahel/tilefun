@@ -252,14 +252,15 @@ describe("WorldAPIImpl", () => {
       unsub();
     });
 
-    it("events methods exist and return Unsubscribe", () => {
+    it("events.on receives emitted events", () => {
       const { api } = createTestAPI();
-      api.events.emit("test");
-      const unsub = api.events.on("test", () => {});
-      expect(typeof unsub).toBe("function");
+      let received: unknown = null;
+      const unsub = api.events.on("test", (data) => {
+        received = data;
+      });
+      api.events.emit("test", { value: 42 });
+      expect(received).toEqual({ value: 42 });
       unsub();
-      const unsub2 = api.events.once("test", () => {});
-      unsub2();
     });
 
     it("tick methods exist and return Unsubscribe", () => {

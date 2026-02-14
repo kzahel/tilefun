@@ -15,6 +15,7 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import { befriendableMod } from "../mods/befriendable.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import {
@@ -32,9 +33,8 @@ import { tickGameplay } from "./GameplaySimulation.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { ServerLoop } from "./ServerLoop.js";
 import { tickAllAI } from "./tickAllAI.js";
+import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
-
-const BEFRIEND_RANGE_SQ = 24 * 24;
 
 export class GameServer {
   world: World;
@@ -59,6 +59,8 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
+  private readonly mods: Mod[] = [befriendableMod];
+  private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {
     this.transport = transport;
@@ -70,6 +72,7 @@ export class GameServer {
     this.terrainEditor = new TerrainEditor(this.world, () => {}, this.adjacency);
     this.registry = new WorldRegistry();
     this.worldAPI = this.createWorldAPI();
+    this.registerMods();
   }
 
   async init(): Promise<void> {
@@ -270,6 +273,7 @@ export class GameServer {
       this.adjacency,
     );
     this.worldAPI = this.createWorldAPI();
+    this.registerMods();
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
@@ -380,6 +384,10 @@ export class GameServer {
   }
 
   destroy(): void {
+    for (const teardown of this.modTeardowns.values()) {
+      teardown();
+    }
+    this.modTeardowns.clear();
     this.stopLoop();
     this.saveManager?.flush();
     this.saveManager?.close();
@@ -600,15 +608,7 @@ export class GameServer {
   }
 
   private handleInteract(wx: number, wy: number): void {
-    for (const entity of this.entityManager.entities) {
-      if (!entity.wanderAI?.befriendable) continue;
-      const dx = entity.position.wx - wx;
-      const dy = entity.position.wy - wy;
-      if (dx * dx + dy * dy < BEFRIEND_RANGE_SQ) {
-        entity.wanderAI.following = !entity.wanderAI.following;
-        break;
-      }
-    }
+    this.worldAPI.events.emit("player-interact", { wx, wy });
   }
 
   private handleSpawn(entityType: string, wx: number, wy: number): void {
@@ -672,6 +672,21 @@ export class GameServer {
       nextEntityId: this.entityManager.getNextId(),
       gemsCollected,
     };
+  }
+
+  private registerMods(): void {
+    for (const teardown of this.modTeardowns.values()) {
+      teardown();
+    }
+    this.modTeardowns.clear();
+    for (const mod of this.mods) {
+      try {
+        const teardown = mod.register(this.worldAPI);
+        this.modTeardowns.set(mod.name, teardown);
+      } catch (err) {
+        console.error(`[tilefun] Failed to register mod "${mod.name}":`, err);
+      }
+    }
   }
 
   private createWorldAPI(): WorldAPIImpl {

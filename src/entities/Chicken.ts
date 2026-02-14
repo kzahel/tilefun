@@ -44,5 +44,6 @@ export function createChicken(wx: number, wy: number): Entity {
       befriendable: true,
       followDistance: 20,
     },
+    tags: new Set(["befriendable"]),
   };
 }

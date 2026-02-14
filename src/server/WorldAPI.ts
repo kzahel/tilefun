@@ -9,6 +9,7 @@ import type { PropManager } from "../entities/PropManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { EntityHandle, PlayerHandle } from "./EntityHandle.js";
+import { EventBusImpl } from "./EventBusImpl.js";
 import type { PlayerSession } from "./PlayerSession.js";
 
 // ---- Unsubscribe / Mod types ----
@@ -168,16 +169,6 @@ class StubTagService implements TagService {
     return () => {};
   }
   onTagRemoved(_tag: string, _cb: (entity: EntityHandle) => void): Unsubscribe {
-    return () => {};
-  }
-}
-
-class StubEventBus implements EventBus {
-  emit(_event: string, _data?: unknown): void {}
-  on(_event: string, _cb: (data?: unknown) => void): Unsubscribe {
-    return () => {};
-  }
-  once(_event: string, _cb: (data?: unknown) => void): Unsubscribe {
     return () => {};
   }
 }
@@ -419,7 +410,7 @@ export class WorldAPIImpl implements WorldAPI {
   readonly world: WorldQueryAPI;
   readonly player: PlayerAPI;
   readonly tags: TagService;
-  readonly events: EventBus;
+  readonly events: EventBusImpl;
   readonly tick: TickService;
   readonly overlap: OverlapService;
 
@@ -438,7 +429,7 @@ export class WorldAPIImpl implements WorldAPI {
     this.world = new WorldQueryAPIImpl(worldObj);
     this.player = new PlayerAPIImpl(entityManager, getSession);
     this.tags = new StubTagService();
-    this.events = new StubEventBus();
+    this.events = new EventBusImpl();
     this.tick = new StubTickService();
     this.overlap = new StubOverlapService();
   }
