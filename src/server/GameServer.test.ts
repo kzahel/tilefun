@@ -42,6 +42,7 @@ describe("GameServer", () => {
 
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,

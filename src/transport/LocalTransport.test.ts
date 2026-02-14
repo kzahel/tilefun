@@ -9,6 +9,7 @@ describe("LocalTransport", () => {
 
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -17,6 +18,7 @@ describe("LocalTransport", () => {
     expect(handler).toHaveBeenCalledOnce();
     expect(handler).toHaveBeenCalledWith("local", {
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -83,6 +85,7 @@ describe("LocalTransport", () => {
     transport.clientSide.close();
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -102,6 +105,7 @@ describe("LocalTransport", () => {
     order.push("before");
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 0,
       dy: 0,
       sprinting: false,

@@ -20,6 +20,9 @@ export class PlayerSession {
   /** Latest input from client (consumed each tick). */
   latestInput: { dx: number; dy: number; sprinting: boolean } | null = null;
 
+  /** Sequence number of the last processed player-input message. */
+  lastProcessedInputSeq = 0;
+
   /** Gameplay state (gems, invincibility, knockback). */
   gameplaySession: GameplaySession;
 

@@ -39,6 +39,8 @@ function makeTestProp(id: number, wx: number, wy: number) {
 function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMessage {
   return {
     type: "game-state",
+    serverTick: 0,
+    lastProcessedInputSeq: 0,
     entities: [],
     props: [],
     playerEntityId: 1,

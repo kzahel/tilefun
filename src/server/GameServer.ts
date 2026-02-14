@@ -60,6 +60,8 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
+  /** Monotonic tick counter, incremented each tick. */
+  private tickCounter = 0;
   private readonly mods: Mod[] = [baseGameMod];
   private modTeardowns = new Map<string, Unsubscribe>();
 
@@ -155,6 +157,8 @@ export class GameServer {
 
   /** Run one simulation tick. In local mode, called by client's update(). */
   tick(dt: number): void {
+    this.tickCounter++;
+
     for (const session of this.sessions.values()) {
       // 1. Apply player input
       if (!session.editorEnabled && session.latestInput) {
@@ -536,6 +540,8 @@ export class GameServer {
 
     return {
       type: "game-state",
+      serverTick: this.tickCounter,
+      lastProcessedInputSeq: session.lastProcessedInputSeq,
       entities: nearbyEntities.map(serializeEntity),
       props: nearbyProps.map(serializeProp),
       playerEntityId: session.player.id,
@@ -560,6 +566,7 @@ export class GameServer {
           dy: msg.dy,
           sprinting: msg.sprinting,
         };
+        session.lastProcessedInputSeq = msg.seq;
         break;
 
       case "player-interact":

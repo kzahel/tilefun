@@ -4,6 +4,7 @@ import type { GameServer } from "../server/GameServer.js";
 import type { GameStateMessage } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
+import type { PlayerPredictor } from "./PlayerPredictor.js";
 
 export interface ClientStateView {
   readonly world: World;
@@ -70,9 +71,38 @@ export class RemoteStateView implements ClientStateView {
   private _invincibilityTimer = 0;
   private _editorEnabled = true;
   private _pendingState: GameStateMessage | null = null;
+  private _predictor: PlayerPredictor | null = null;
+  private _stateAppliedThisTick = false;
+  private _serverTick = 0;
+  private _lastProcessedInputSeq = 0;
 
   constructor(world: World) {
     this._world = world;
+  }
+
+  /** Attach a predictor so that playerEntity and entities use predicted position. */
+  setPredictor(predictor: PlayerPredictor | null): void {
+    this._predictor = predictor;
+  }
+
+  /** Whether new server state was applied during the most recent applyPending() call. */
+  get stateAppliedThisTick(): boolean {
+    return this._stateAppliedThisTick;
+  }
+
+  /** Server tick number from the latest game state. */
+  get serverTick(): number {
+    return this._serverTick;
+  }
+
+  /** Last processed input sequence number from the latest game state. */
+  get lastProcessedInputSeq(): number {
+    return this._lastProcessedInputSeq;
+  }
+
+  /** Get the raw server player entity (for reconciliation, bypasses predictor). */
+  get serverPlayerEntity(): Entity {
+    return this._entities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY;
   }
 
   /**
@@ -86,9 +116,11 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply any buffered game-state. Call at the start of each client update tick. */
   applyPending(): void {
+    this._stateAppliedThisTick = false;
     if (!this._pendingState) return;
     this.applyGameState(this._pendingState);
     this._pendingState = null;
+    this._stateAppliedThisTick = true;
   }
 
   /** Apply a full game-state message from the server. */
@@ -111,6 +143,8 @@ export class RemoteStateView implements ClientStateView {
     this._gemsCollected = msg.gemsCollected;
     this._invincibilityTimer = msg.invincibilityTimer;
     this._editorEnabled = msg.editorEnabled;
+    this._serverTick = msg.serverTick;
+    this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
 
     // Apply chunk updates (delta — only new/changed chunks)
     for (const cs of msg.chunkUpdates) {
@@ -147,12 +181,16 @@ export class RemoteStateView implements ClientStateView {
     return this._world;
   }
   get entities(): readonly Entity[] {
-    return this._entities;
+    if (!this._predictor?.player) return this._entities;
+    const predicted = this._predictor.player;
+    const playerId = this._playerEntityId;
+    return this._entities.map((e) => (e.id === playerId ? predicted : e));
   }
   get props(): readonly Prop[] {
     return this._props;
   }
   get playerEntity(): Entity {
+    if (this._predictor?.player) return this._predictor.player;
     return this._entities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY;
   }
   get gemsCollected(): number {

@@ -1,3 +1,5 @@
+import type { RemoteStateView } from "../client/ClientStateView.js";
+import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
@@ -5,9 +7,12 @@ import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.j
 /**
  * Play mode scene.
  * Handles: player movement input, camera follow, gem HUD, touch joystick.
+ * In serialized mode, runs client-side prediction for the player entity.
  */
 export class PlayScene implements GameScene {
   readonly transparent = false;
+  private predictor: PlayerPredictor | null = null;
+  private inputSeq = 0;
 
   onEnter(gc: GameContext): void {
     gc.touchJoystick.attach();
@@ -18,14 +23,33 @@ export class PlayScene implements GameScene {
       gc.server.getLocalSession().editorEnabled = false;
     }
     gc.transport.send({ type: "set-editor-mode", enabled: false });
+
+    // Create predictor for serialized mode
+    if (gc.serialized) {
+      this.predictor = new PlayerPredictor();
+      const remoteView = gc.stateView as RemoteStateView;
+      remoteView.setPredictor(this.predictor);
+      // Initialize from current server state if available
+      const serverPlayer = remoteView.serverPlayerEntity;
+      if (serverPlayer.id !== -1) {
+        this.predictor.reset(serverPlayer);
+      }
+    }
   }
 
   onExit(gc: GameContext): void {
     gc.touchJoystick.detach();
+    if (gc.serialized && this.predictor) {
+      (gc.stateView as RemoteStateView).setPredictor(null);
+      this.predictor = null;
+    }
   }
 
   onResume(gc: GameContext): void {
     gc.touchJoystick.attach();
+    if (gc.serialized && this.predictor) {
+      (gc.stateView as RemoteStateView).setPredictor(this.predictor);
+    }
   }
 
   onPause(gc: GameContext): void {
@@ -60,8 +84,10 @@ export class PlayScene implements GameScene {
 
     // Player movement input
     const movement = gc.actions.getMovement();
+    const seq = ++this.inputSeq;
     gc.transport.send({
       type: "player-input",
+      seq,
       dx: movement.dx,
       dy: movement.dy,
       sprinting: movement.sprinting,
@@ -69,6 +95,38 @@ export class PlayScene implements GameScene {
 
     // Server tick + camera follow + chunk loading
     if (gc.serialized) {
+      const remoteView = gc.stateView as RemoteStateView;
+
+      if (this.predictor) {
+        this.predictor.noclip = gc.debugPanel.noclip;
+
+        // Reconcile BEFORE storing current input — replay rebuilds prediction
+        // from server state + unacked inputs from previous frames only.
+        // Storing current input first would cause it to be replayed AND
+        // applied in update(), double-moving the player.
+        if (remoteView.stateAppliedThisTick) {
+          const serverPlayer = remoteView.serverPlayerEntity;
+          if (serverPlayer.id !== -1) {
+            if (!this.predictor.player) {
+              this.predictor.reset(serverPlayer);
+            } else {
+              this.predictor.reconcile(
+                serverPlayer,
+                remoteView.lastProcessedInputSeq,
+                gc.stateView.world,
+                gc.stateView.props,
+              );
+            }
+          }
+        }
+
+        // Store current input for future reconciliation, then predict
+        this.predictor.storeInput(seq, movement, dt);
+        this.predictor.update(dt, movement, gc.stateView.world, gc.stateView.props);
+      }
+
+      // Camera follows predicted player position (stateView.playerEntity
+      // returns the predicted player when predictor is attached)
       gc.camera.follow(
         gc.stateView.playerEntity.position.wx,
         gc.stateView.playerEntity.position.wy,
@@ -113,16 +171,31 @@ export class PlayScene implements GameScene {
 
     // Override camera with exponential follow toward the interpolated player.
     // Standard linear camera interpolation creates derivative discontinuities
-    // at tick boundaries (camera lerp ≠ entity linear motion), visible as
+    // at tick boundaries (camera lerp != entity linear motion), visible as
     // jitter at high refresh rates. The exponential form matches the follow()
     // decay curve, giving smooth sub-tick motion tied to the player.
-    const player = gc.stateView.playerEntity;
-    if (player.prevPosition) {
-      const px = player.prevPosition.wx + (player.position.wx - player.prevPosition.wx) * alpha;
-      const py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
+    if (gc.serialized && this.predictor?.player) {
+      // Use predicted player's prevPosition for smooth camera interpolation
+      const prev = this.predictor.prevPosition;
+      const cur = this.predictor.player.position;
+      const px = prev.wx + (cur.wx - prev.wx) * alpha;
+      const py = prev.wy + (cur.wy - prev.wy) * alpha;
       const f = 1 - (1 - CAMERA_LERP) ** alpha;
       gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
       gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
+
+      // Set prevPosition on the predicted entity so renderEntities
+      // interpolates it correctly for Y-sorting and drawing
+      this.predictor.player.prevPosition = prev;
+    } else {
+      const player = gc.stateView.playerEntity;
+      if (player.prevPosition) {
+        const px = player.prevPosition.wx + (player.position.wx - player.prevPosition.wx) * alpha;
+        const py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
+        const f = 1 - (1 - CAMERA_LERP) ** alpha;
+        gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
+        gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
+      }
     }
 
     renderWorld(gc);

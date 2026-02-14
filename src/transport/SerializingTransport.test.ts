@@ -9,6 +9,7 @@ describe("SerializingTransport", () => {
 
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -17,6 +18,7 @@ describe("SerializingTransport", () => {
     expect(handler).toHaveBeenCalledOnce();
     expect(handler).toHaveBeenCalledWith("local", {
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -62,6 +64,7 @@ describe("SerializingTransport", () => {
 
     const original = {
       type: "player-input" as const,
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -102,6 +105,7 @@ describe("SerializingTransport", () => {
     transport.clientSide.close();
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 1,
       dy: 0,
       sprinting: false,
@@ -121,6 +125,7 @@ describe("SerializingTransport", () => {
     order.push("before");
     transport.clientSide.send({
       type: "player-input",
+      seq: 1,
       dx: 0,
       dy: 0,
       sprinting: false,

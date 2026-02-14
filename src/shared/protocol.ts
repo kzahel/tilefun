@@ -6,6 +6,7 @@ import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 export type ClientMessage =
   | {
       type: "player-input";
+      seq: number;
       dx: number;
       dy: number;
       sprinting: boolean;
@@ -176,6 +177,8 @@ export interface PropSnapshot {
 
 export interface GameStateMessage {
   type: "game-state";
+  serverTick: number;
+  lastProcessedInputSeq: number;
   entities: EntitySnapshot[];
   props: PropSnapshot[];
   playerEntityId: number;
