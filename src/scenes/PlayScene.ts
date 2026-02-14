@@ -9,10 +9,13 @@ import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.j
  * Handles: player movement input, camera follow, gem HUD, touch joystick.
  * In serialized mode, runs client-side prediction for the player entity.
  */
+const HIT_SHAKE_INTENSITY = 6;
+
 export class PlayScene implements GameScene {
   readonly transparent = false;
   private predictor: PlayerPredictor | null = null;
   private inputSeq = 0;
+  private prevInvincibilityTimer = 0;
 
   onEnter(gc: GameContext): void {
     gc.touchJoystick.attach();
@@ -171,6 +174,15 @@ export class PlayScene implements GameScene {
         gc.server.updateVisibleChunks(gc.camera.getVisibleChunkRange());
       }
     }
+
+    // Detect player hit (invincibility transition 0 → >0) and trigger screen shake
+    const invTimer = gc.stateView.invincibilityTimer;
+    if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
+      gc.camera.shake(HIT_SHAKE_INTENSITY);
+    }
+    this.prevInvincibilityTimer = invTimer;
+
+    gc.camera.updateShake();
   }
 
   render(alpha: number, gc: GameContext): void {
@@ -204,6 +216,10 @@ export class PlayScene implements GameScene {
         gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
       }
     }
+
+    // Apply screen shake after camera override so it isn't clobbered
+    gc.camera.x += gc.camera.shakeOffsetX;
+    gc.camera.y += gc.camera.shakeOffsetY;
 
     renderWorld(gc);
     renderEntities(gc, alpha);

@@ -71,6 +71,12 @@ export class Realm {
   lastLoadedPlayerPos = { wx: 0, wy: 0 };
   currentWorldId: string | null = null;
 
+  /**
+   * Timestamp (Date.now()) when the last player left this realm, or null if
+   * the realm still has players. Used for idle-timeout unloading.
+   */
+  idleSince: number | null = null;
+
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
 
@@ -133,6 +139,9 @@ export class Realm {
 
     this.sessions.set(session.clientId, session);
     this.clearClientRevisions(session.clientId);
+
+    // Cancel idle timeout — realm is occupied again
+    this.idleSince = null;
   }
 
   /**
@@ -147,6 +156,11 @@ export class Realm {
     this.sessions.delete(clientId);
     this.clearClientRevisions(clientId);
     session.realmId = null;
+
+    // Start idle timeout if this was the last player
+    if (this.sessions.size === 0) {
+      this.idleSince = Date.now();
+    }
   }
 
   /** Close persistence if the given worldId matches the currently loaded world. */

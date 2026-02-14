@@ -56,6 +56,8 @@ export class GameServer {
   /** Sessions that disconnected but may reconnect within the grace period. */
   private dormantSessions = new Map<string, ReturnType<typeof setTimeout>>();
   private static readonly DORMANT_TIMEOUT_MS = 60_000;
+  /** How long an empty (non-default) realm stays loaded before being destroyed. */
+  private static readonly REALM_IDLE_TIMEOUT_MS = 5 * 60 * 1000;
   private serverConsole: ConsoleEngine | null = null;
 
   // ── Delegation getters for backward compatibility ──
@@ -268,6 +270,7 @@ export class GameServer {
     for (const realm of this.realms.values()) {
       realm.tick(dt, this.transport, this.broadcasting, dormantIds);
     }
+    this.checkIdleRealms();
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */
@@ -347,17 +350,36 @@ export class GameServer {
   }
 
   /**
-   * If a realm has no players and is not the default realm,
-   * flush and destroy it to free memory.
+   * Mark a non-default realm as idle when it has no players.
+   * The realm stays loaded for REALM_IDLE_TIMEOUT_MS to allow quick rejoin.
+   * Actual cleanup happens in checkIdleRealms() during tick().
    */
   private tryUnloadRealm(worldId: string): void {
     if (worldId === this.defaultRealmId) return;
     const realm = this.realms.get(worldId);
     if (!realm || realm.sessions.size > 0) return;
 
-    console.log(`[tilefun] unloading empty realm: ${worldId}`);
-    realm.destroy();
-    this.realms.delete(worldId);
+    // Realm.removePlayer already sets idleSince — just log for visibility
+    console.log(
+      `[tilefun] realm idle, will unload in ${GameServer.REALM_IDLE_TIMEOUT_MS / 1000}s: ${worldId}`,
+    );
+  }
+
+  /**
+   * Check all non-default realms for idle timeout expiration and destroy them.
+   * Called from tick().
+   */
+  private checkIdleRealms(): void {
+    const now = Date.now();
+    for (const [worldId, realm] of this.realms) {
+      if (worldId === this.defaultRealmId) continue;
+      if (realm.idleSince === null) continue;
+      if (now - realm.idleSince >= GameServer.REALM_IDLE_TIMEOUT_MS) {
+        console.log(`[tilefun] unloading idle realm: ${worldId}`);
+        realm.destroy();
+        this.realms.delete(worldId);
+      }
+    }
   }
 
   /**
@@ -380,11 +402,30 @@ export class GameServer {
   }
 
   async deleteWorld(id: string): Promise<void> {
-    // Close the SaveManager connection BEFORE deleting the database,
-    // otherwise indexedDB.deleteDatabase() blocks on the open connection.
     const realm = this.realms.get(id);
     if (realm) {
-      realm.closePersistenceIfCurrent(id);
+      // Boot any players in the realm back to the default realm
+      if (realm.sessions.size > 0 && this.defaultRealmId && id !== this.defaultRealmId) {
+        const sessionsToMove = [...realm.sessions.values()];
+        for (const session of sessionsToMove) {
+          await this.movePlayerToRealm(session.clientId, session, this.defaultRealmId);
+          this.transport.send(session.clientId, {
+            type: "player-assigned",
+            entityId: session.player.id,
+          });
+          this.transport.send(session.clientId, {
+            type: "world-loaded",
+            cameraX: session.cameraX,
+            cameraY: session.cameraY,
+            cameraZoom: session.cameraZoom,
+          });
+        }
+      }
+
+      // Close the SaveManager connection BEFORE deleting the database,
+      // otherwise indexedDB.deleteDatabase() blocks on the open connection.
+      realm.destroy();
+      this.realms.delete(id);
     }
     await this.registry.deleteWorld(id);
   }
