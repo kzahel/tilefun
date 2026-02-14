@@ -129,22 +129,6 @@ describe("tickGameplay", () => {
       expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(1);
     });
 
-    it("removes ghost after death timer expires", () => {
-      const em = new EntityManager();
-      const player = createPlayer(0, 0);
-      em.spawn(player);
-      em.spawn(createCampfire(100, 100));
-      em.spawn(createGhostAngry(105, 100));
-      const session = makeSession({ player });
-
-      // Tick past the 0.4s death timer
-      for (let i = 0; i < 30; i++) {
-        tickGameplay(session, em, 1 / 60, noopCallbacks);
-      }
-
-      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeUndefined();
-    });
-
     it("does not destroy hostile entity far from campfire", () => {
       const em = new EntityManager();
       const player = createPlayer(0, 0);

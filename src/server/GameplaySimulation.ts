@@ -127,20 +127,6 @@ export function tickGameplay(
     }
   }
 
-  // Tick death timers — flash rapidly, remove when expired
-  const dead: number[] = [];
-  for (const entity of entityManager.entities) {
-    if (entity.deathTimer === undefined) continue;
-    entity.deathTimer -= dt;
-    entity.flashHidden = Math.floor(entity.deathTimer * 16) % 2 === 0;
-    if (entity.deathTimer <= 0) {
-      dead.push(entity.id);
-    }
-  }
-  for (const id of dead) {
-    entityManager.remove(id);
-  }
-
   // Tick invincibility + knockback decay
   if (session.invincibilityTimer > 0) {
     session.invincibilityTimer -= dt;

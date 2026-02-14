@@ -159,6 +159,10 @@ export class EntityHandle {
     this.entity.flashHidden = on;
   }
 
+  get deathTimer(): number | undefined {
+    return this.entity.deathTimer;
+  }
+
   setDeathTimer(seconds: number): void {
     if (!this.alive) return;
     this.entity.deathTimer = seconds;

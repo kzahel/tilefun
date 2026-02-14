@@ -16,6 +16,7 @@ import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { befriendableMod } from "../mods/befriendable.js";
+import { deathTimerMod } from "../mods/death-timer.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import {
@@ -59,7 +60,7 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  private readonly mods: Mod[] = [befriendableMod];
+  private readonly mods: Mod[] = [befriendableMod, deathTimerMod];
   private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {
@@ -165,6 +166,9 @@ export class GameServer {
       if (!session.debugPaused) {
         tickAllAI(this.entityManager.entities, session.player.position, dt, Math.random);
 
+        // ── TickService.preSimulation ──
+        this.worldAPI.tick.firePre(dt);
+
         // Noclip: temporarily remove player collider
         let savedCollider: ColliderComponent | null = null;
         if (session.debugNoclip && session.player.collider) {
@@ -182,6 +186,9 @@ export class GameServer {
         if (savedCollider) {
           session.player.collider = savedCollider;
         }
+
+        // ── TickService.postSimulation ──
+        this.worldAPI.tick.firePost(dt);
       }
 
       // 3. Spawners + gameplay (play mode only, not paused)
