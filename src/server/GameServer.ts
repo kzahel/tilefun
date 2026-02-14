@@ -11,18 +11,11 @@ import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
+import { baseGameMod } from "../game/base-game.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
-import { baddieContactMod } from "../mods/baddie-contact.js";
-import { befriendableMod } from "../mods/befriendable.js";
-import { buddyScareMod } from "../mods/buddy-scare.js";
-import { campfireTrapMod } from "../mods/campfire-trap.js";
-import { deathTimerMod } from "../mods/death-timer.js";
-import { gemCollectorMod } from "../mods/gem-collector.js";
-import { gemVelocityDecayMod } from "../mods/gem-velocity-decay.js";
-import { invincibilityDecayMod } from "../mods/invincibility-decay.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
@@ -66,16 +59,7 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  private readonly mods: Mod[] = [
-    befriendableMod,
-    gemCollectorMod,
-    baddieContactMod,
-    buddyScareMod,
-    deathTimerMod,
-    campfireTrapMod,
-    invincibilityDecayMod,
-    gemVelocityDecayMod,
-  ];
+  private readonly mods: Mod[] = [baseGameMod];
   private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {
