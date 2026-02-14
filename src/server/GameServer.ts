@@ -191,6 +191,9 @@ export class GameServer {
         // ── TickService.postSimulation ──
         this.worldAPI.tick.firePost(dt);
 
+        // ── TagService removal detection ──
+        this.worldAPI.tags.tick();
+
         // ── OverlapService detection ──
         this.worldAPI.overlap.tick();
       }

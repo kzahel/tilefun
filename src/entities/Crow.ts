@@ -41,5 +41,6 @@ export function createCrow(wx: number, wy: number): Entity {
       speed: CROW_SPEED,
       directional: true,
     },
+    tags: new Set(["befriendable", "npc"]),
   };
 }

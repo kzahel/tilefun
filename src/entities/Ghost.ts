@@ -47,7 +47,7 @@ export function createGhostFriendly(wx: number, wy: number): Entity {
       befriendable: true,
       followDistance: 24,
     },
-    tags: new Set(["befriendable"]),
+    tags: new Set(["befriendable", "npc"]),
   };
 }
 

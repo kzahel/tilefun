@@ -31,5 +31,6 @@ export function createGem(wx: number, wy: number): Entity {
       solid: false,
     },
     wanderAI: null,
+    tags: new Set(["gem", "collectible"]),
   };
 }

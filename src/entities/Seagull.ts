@@ -41,5 +41,6 @@ export function createSeagull(wx: number, wy: number): Entity {
       speed: SEAGULL_SPEED,
       directional: true,
     },
+    tags: new Set(["befriendable", "npc"]),
   };
 }

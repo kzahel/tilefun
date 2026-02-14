@@ -40,6 +40,7 @@ function createPerson(n: number, wx: number, wy: number): Entity {
       speed: PERSON_SPEED,
       directional: true,
     },
+    tags: new Set(["befriendable", "npc"]),
   };
 }
 

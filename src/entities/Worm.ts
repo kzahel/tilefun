@@ -57,5 +57,6 @@ function makeWorm(type: string, wx: number, wy: number): Entity {
       speed: WORM_SPEED,
       directional: true,
     },
+    tags: new Set(["npc"]),
   };
 }

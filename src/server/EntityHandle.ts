@@ -78,13 +78,17 @@ export class EntityHandle {
 
   addTag(tag: string): void {
     if (!this.alive) return;
+    if (this.entity.tags?.has(tag)) return;
     if (!this.entity.tags) this.entity.tags = new Set();
     this.entity.tags.add(tag);
+    this.entityManager.tagChangeHook?.onAdd(this.entity, tag);
   }
 
   removeTag(tag: string): void {
     if (!this.alive) return;
-    this.entity.tags?.delete(tag);
+    if (!this.entity.tags?.has(tag)) return;
+    this.entity.tags.delete(tag);
+    this.entityManager.tagChangeHook?.onRemove(this.entity, tag);
   }
 
   hasTag(tag: string): boolean {

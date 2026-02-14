@@ -42,5 +42,6 @@ export function createPigeon2(wx: number, wy: number): Entity {
       speed: PIGEON2_SPEED,
       directional: false,
     },
+    tags: new Set(["befriendable", "npc"]),
   };
 }

@@ -7,6 +7,7 @@ import type { Prop } from "../entities/Prop.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { OverlapServiceImpl } from "../scripting/OverlapServiceImpl.js";
+import { TagServiceImpl } from "../scripting/TagServiceImpl.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { EntityHandle, PlayerHandle } from "./EntityHandle.js";
@@ -156,25 +157,6 @@ export class PropHandle {
   }
 }
 
-// ---- Stub services (Phase 2-3 placeholders) ----
-
-class StubTagService implements TagService {
-  addTag(_entity: EntityHandle, _tag: string): void {}
-  removeTag(_entity: EntityHandle, _tag: string): void {}
-  hasTag(_entity: EntityHandle, _tag: string): boolean {
-    return false;
-  }
-  getTagged(_tag: string): EntityHandle[] {
-    return [];
-  }
-  onTagAdded(_tag: string, _cb: (entity: EntityHandle) => void): Unsubscribe {
-    return () => {};
-  }
-  onTagRemoved(_tag: string, _cb: (entity: EntityHandle) => void): Unsubscribe {
-    return () => {};
-  }
-}
-
 // ---- Sub-API implementations ----
 
 class TerrainAPIImpl implements TerrainAPI {
@@ -244,12 +226,16 @@ class TerrainAPIImpl implements TerrainAPI {
 }
 
 class EntityAPIImpl implements EntityAPI {
-  constructor(private readonly em: EntityManager) {}
+  constructor(
+    private readonly em: EntityManager,
+    private readonly tagService: TagServiceImpl,
+  ) {}
 
   spawn(type: string, wx: number, wy: number): EntityHandle | null {
     const factory = ENTITY_FACTORIES[type];
     if (!factory) return null;
     const entity = this.em.spawn(factory(wx, wy));
+    this.tagService.notifySpawn(entity);
     return new EntityHandle(entity, this.em);
   }
 
@@ -393,7 +379,7 @@ export class WorldAPIImpl implements WorldAPI {
   readonly props: PropAPI;
   readonly world: WorldQueryAPI;
   readonly player: PlayerAPI;
-  readonly tags: TagService;
+  readonly tags: TagServiceImpl;
   readonly events: EventBusImpl;
   readonly tick: TickServiceImpl;
   readonly overlap: OverlapServiceImpl;
@@ -407,12 +393,13 @@ export class WorldAPIImpl implements WorldAPI {
     terrainEditor: TerrainEditor,
     getSession: () => PlayerSession | undefined,
   ) {
+    const tagService = new TagServiceImpl(entityManager);
     this.terrain = new TerrainAPIImpl(terrainEditor);
-    this.entities = new EntityAPIImpl(entityManager);
+    this.entities = new EntityAPIImpl(entityManager, tagService);
     this.props = new PropAPIImpl(propManager);
     this.world = new WorldQueryAPIImpl(worldObj);
     this.player = new PlayerAPIImpl(entityManager, getSession);
-    this.tags = new StubTagService();
+    this.tags = tagService;
     this.events = new EventBusImpl();
     this.tick = new TickServiceImpl();
     this.overlap = new OverlapServiceImpl(entityManager);

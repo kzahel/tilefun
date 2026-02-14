@@ -25,6 +25,7 @@ export function createFish1(wx: number, wy: number): Entity {
     collider: null,
     wanderAI: null,
     noShadow: true,
+    tags: new Set(["befriendable", "npc"]),
   };
 }
 
@@ -50,6 +51,7 @@ export function createFish2(wx: number, wy: number): Entity {
     collider: null,
     wanderAI: null,
     noShadow: true,
+    tags: new Set(["befriendable", "npc"]),
   };
 }
 
@@ -75,5 +77,6 @@ export function createFish3(wx: number, wy: number): Entity {
     collider: null,
     wanderAI: null,
     noShadow: true,
+    tags: new Set(["befriendable", "npc"]),
   };
 }

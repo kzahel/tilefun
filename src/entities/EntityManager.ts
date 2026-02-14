@@ -21,6 +21,12 @@ export class EntityManager {
   readonly entities: Entity[] = [];
   private nextId = 1;
 
+  /** Optional hook for TagServiceImpl to receive tag change notifications. */
+  tagChangeHook?: {
+    onAdd: (entity: Entity, tag: string) => void;
+    onRemove: (entity: Entity, tag: string) => void;
+  };
+
   getNextId(): number {
     return this.nextId;
   }
