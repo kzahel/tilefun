@@ -129,6 +129,7 @@ export interface EntitySnapshot {
     width: number;
     height: number;
     solid?: boolean;
+    clientSolid?: boolean;
   } | null;
   wanderAI: {
     state: string;

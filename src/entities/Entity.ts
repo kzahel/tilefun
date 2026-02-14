@@ -46,6 +46,8 @@ export interface ColliderComponent {
   height: number;
   /** When false, collider is visual-only (debug box) and doesn't block movement. Default true. */
   solid?: boolean;
+  /** When true, client predicts collision with this entity (no rubber-banding). */
+  clientSolid?: boolean;
 }
 
 export interface WanderAIComponent {

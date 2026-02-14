@@ -1,6 +1,7 @@
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
+  aabbsOverlap,
   getEntityAABB,
   getSpeedMultiplier,
 } from "../entities/collision.js";
@@ -71,7 +72,13 @@ export class PlayerPredictor {
    * Run one prediction tick. Called from PlayScene.update() at FIXED_DT rate.
    * Applies movement input + collision using the client's world data.
    */
-  update(dt: number, movement: Movement, world: World, props: readonly Prop[]): void {
+  update(
+    dt: number,
+    movement: Movement,
+    world: World,
+    props: readonly Prop[],
+    entities: readonly Entity[],
+  ): void {
     if (!this.predicted) return;
 
     // Save previous position for render interpolation
@@ -80,7 +87,7 @@ export class PlayerPredictor {
       wy: this.predicted.position.wy,
     };
 
-    this.applyInput(movement, dt, world, props);
+    this.applyInput(movement, dt, world, props, entities);
   }
 
   /**
@@ -99,6 +106,7 @@ export class PlayerPredictor {
     lastProcessedInputSeq: number,
     world: World,
     props: readonly Prop[],
+    entities: readonly Entity[],
   ): void {
     if (!this.predicted) {
       this.reset(serverPlayer);
@@ -123,7 +131,7 @@ export class PlayerPredictor {
 
     // Replay unacknowledged inputs on top of server position
     for (const input of this.inputBuffer) {
-      this.applyInput(input.movement, input.dt, world, props);
+      this.applyInput(input.movement, input.dt, world, props, entities);
     }
 
     // If position changed drastically (teleport/knockback), also snap
@@ -165,7 +173,13 @@ export class PlayerPredictor {
    * Apply a single input tick: set velocity from movement, then resolve
    * collision. Shared between live prediction (update) and replay (reconcile).
    */
-  private applyInput(movement: Movement, dt: number, world: World, props: readonly Prop[]): void {
+  private applyInput(
+    movement: Movement,
+    dt: number,
+    world: World,
+    props: readonly Prop[],
+    entities: readonly Entity[],
+  ): void {
     if (!this.predicted) return;
 
     updatePlayerFromInput(this.predicted, movement, dt);
@@ -181,7 +195,7 @@ export class PlayerPredictor {
 
       if (this.predicted.collider && !this.noclip) {
         const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
-        this.resolvePlayerCollision(dx, dy, getCollision, blockMask, props);
+        this.resolvePlayerCollision(dx, dy, getCollision, blockMask, props, entities);
       } else {
         this.predicted.position.wx += dx;
         this.predicted.position.wy += dy;
@@ -211,7 +225,7 @@ export class PlayerPredictor {
   /**
    * Simplified collision resolution for player prediction.
    * Per-axis sliding — same algorithm as resolveCollision in collision.ts,
-   * plus prop wall/collider checks. Does NOT check entity-entity collision.
+   * plus prop wall/collider checks and clientSolid entity checks.
    */
   private resolvePlayerCollision(
     dx: number,
@@ -219,6 +233,7 @@ export class PlayerPredictor {
     getCollision: (tx: number, ty: number) => number,
     blockMask: number,
     props: readonly Prop[],
+    entities: readonly Entity[],
   ): void {
     const entity = this.predicted;
     if (!entity) return;
@@ -228,6 +243,7 @@ export class PlayerPredictor {
       return;
     }
 
+    const playerId = entity.id;
     const isBlocked = (aabb: {
       left: number;
       top: number;
@@ -237,6 +253,10 @@ export class PlayerPredictor {
       if (aabbOverlapsSolid(aabb, getCollision, blockMask)) return true;
       for (const prop of props) {
         if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+      }
+      for (const other of entities) {
+        if (other.id === playerId || !other.collider?.clientSolid) continue;
+        if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
       }
       return false;
     };

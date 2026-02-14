@@ -115,6 +115,7 @@ export class PlayScene implements GameScene {
                 remoteView.lastProcessedInputSeq,
                 gc.stateView.world,
                 gc.stateView.props,
+                gc.stateView.entities,
               );
             }
           }
@@ -122,7 +123,13 @@ export class PlayScene implements GameScene {
 
         // Store current input for future reconciliation, then predict
         this.predictor.storeInput(seq, movement, dt);
-        this.predictor.update(dt, movement, gc.stateView.world, gc.stateView.props);
+        this.predictor.update(
+          dt,
+          movement,
+          gc.stateView.world,
+          gc.stateView.props,
+          gc.stateView.entities,
+        );
       }
 
       // Camera follows predicted player position (stateView.playerEntity

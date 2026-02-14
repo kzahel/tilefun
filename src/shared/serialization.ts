@@ -11,6 +11,7 @@ function serializeCollider(c: {
   width: number;
   height: number;
   solid?: boolean;
+  clientSolid?: boolean;
 }) {
   const result: EntitySnapshot["collider"] = {
     offsetX: c.offsetX,
@@ -19,6 +20,7 @@ function serializeCollider(c: {
     height: c.height,
   };
   if (c.solid !== undefined) result.solid = c.solid;
+  if (c.clientSolid !== undefined) result.clientSolid = c.clientSolid;
   return result;
 }
 
@@ -119,6 +121,7 @@ function deserializeCollider(
     height: c.height,
   };
   if (c.solid !== undefined) result.solid = c.solid;
+  if (c.clientSolid !== undefined) result.clientSolid = c.clientSolid;
   return result;
 }
 
