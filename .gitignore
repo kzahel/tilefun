@@ -10,3 +10,4 @@ screenshot*.png
 *.tiled-project
 *.tiled-session
 ME complete tileset.tsx
+data/

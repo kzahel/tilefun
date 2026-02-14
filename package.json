@@ -12,14 +12,20 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "dev:server": "tsx --watch src/server/standalone.ts",
+    "start:server": "tsx src/server/standalone.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@playwright/test": "^1.58.2",
+    "@types/ws": "^8.5.14",
+    "tsx": "^4.19.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^4.0.18"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
 }

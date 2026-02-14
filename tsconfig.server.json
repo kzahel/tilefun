@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": [
+    "src/server",
+    "src/shared",
+    "src/transport",
+    "src/persistence",
+    "src/autotile",
+    "src/entities",
+    "src/world",
+    "src/game",
+    "src/generation",
+    "src/config",
+    "src/editor",
+    "src/road"
+  ]
+}

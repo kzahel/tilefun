@@ -1,29 +1,17 @@
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
+import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
+
+export type { WorldMeta, WorldType } from "./IWorldRegistry.js";
 
 const REGISTRY_DB = "tilefun-registry";
 const REGISTRY_VERSION = 1;
 const STORE_WORLDS = "worlds";
 
-export type WorldType = "generated" | "flat" | "island";
-
-export interface WorldMeta {
-  id: string;
-  name: string;
-  createdAt: number;
-  lastPlayedAt: number;
-  /** Noise seed for generated worlds. Missing = 42 (back-compat). */
-  seed?: number;
-  /** World generation type. Missing = "generated" (back-compat). */
-  worldType?: WorldType;
-  /** Road generation parameters. Missing = no generated roads (back-compat). */
-  roadParams?: RoadGenParams;
-}
-
 export function dbNameForWorld(id: string): string {
   return `tilefun-world-${id}`;
 }
 
-export class WorldRegistry {
+export class WorldRegistry implements IWorldRegistry {
   private db: IDBDatabase | null = null;
 
   async open(): Promise<void> {

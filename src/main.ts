@@ -1,35 +1,56 @@
 import { GameClient } from "./client/GameClient.js";
 import { GameServer } from "./server/GameServer.js";
-import { LocalTransport } from "./transport/LocalTransport.js";
 import { SerializingTransport } from "./transport/SerializingTransport.js";
+import { WebSocketClientTransport } from "./transport/WebSocketClientTransport.js";
 
-const USE_SERIALIZED = true;
+const canvasEl = document.getElementById("game") as HTMLCanvasElement | null;
+if (!canvasEl) throw new Error("Canvas element #game not found");
+const canvas: HTMLCanvasElement = canvasEl;
 
-const canvas = document.getElementById("game") as HTMLCanvasElement | null;
-if (!canvas) throw new Error("Canvas element #game not found");
+// ?server=host:port      → connect to a specific standalone server
+// ?multiplayer           → connect to game server on same host (Vite plugin uses /ws path)
+// ?server=host:port/ws   → explicit path also works
+// (neither)              → single-player, in-browser server
+const params = new URLSearchParams(window.location.search);
+const serverParam = params.get("server"); // e.g. "localhost:3001"
+const multiplayer = params.has("multiplayer");
 
-const transport = USE_SERIALIZED ? new SerializingTransport() : new LocalTransport();
-const server = new GameServer(transport.serverSide);
-const client = new GameClient(canvas, transport.clientSide, USE_SERIALIZED ? null : server, {
-  mode: USE_SERIALIZED ? "serialized" : "local",
-});
-
-// Expose for debug/testing
-// biome-ignore lint/suspicious/noExplicitAny: debug/test hook
-(canvas as any).__game = client;
+let client: GameClient;
+let server: GameServer | null = null;
 
 async function start() {
-  await server.init();
-  transport.triggerConnect();
-  await client.init();
-  if (USE_SERIALIZED) server.startLoop();
+  if (serverParam || multiplayer) {
+    // Multiplayer mode: connect via WebSocket.
+    // ?multiplayer uses /ws path (Vite plugin shares HTTP server with HMR).
+    // ?server=host:port connects to standalone server (no path needed).
+    const wsUrl = serverParam ? `ws://${serverParam}` : `ws://${window.location.host}/ws`;
+    console.log(`[tilefun] Connecting to server at ${wsUrl}...`);
+    const wsTransport = new WebSocketClientTransport(wsUrl);
+    await wsTransport.ready();
+    console.log("[tilefun] Connected to server");
+    client = new GameClient(canvas, wsTransport, null, { mode: "serialized" });
+    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
+    (canvas as any).__game = client;
+    await client.init();
+  } else {
+    // Single-player mode: local server + SerializingTransport
+    const transport = new SerializingTransport();
+    server = new GameServer(transport.serverSide);
+    client = new GameClient(canvas, transport.clientSide, null, { mode: "serialized" });
+    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
+    (canvas as any).__game = client;
+    await server.init();
+    transport.triggerConnect();
+    await client.init();
+    server.startLoop();
+  }
 }
 
 start().catch((err) => console.error("[tilefun] init failed:", err));
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => {
-    client.destroy();
-    server.destroy();
+    client?.destroy();
+    server?.destroy();
   });
 }
