@@ -45,15 +45,22 @@ export class EntityManager {
     return entity;
   }
 
-  /** Update all entities: apply velocity with collision, tick animation. */
+  /**
+   * Update all entities: apply velocity with collision, tick animation.
+   * @param entityTickDts If provided, only entities in this map are ticked,
+   *   using their per-entity dt (accumulated from tick tiering).
+   *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
+   */
   update(
     dt: number,
     getCollision: (tx: number, ty: number) => number,
     player: Entity,
     propManager: PropManager,
+    entityTickDts?: ReadonlyMap<Entity, number>,
   ): void {
-    // Save previous positions for render interpolation (before any physics)
+    // Save previous positions for render interpolation (only for ticking entities)
     for (const entity of this.entities) {
+      if (entityTickDts && !entityTickDts.has(entity)) continue;
       entity.prevPosition = { wx: entity.position.wx, wy: entity.position.wy };
     }
     // Player may not be in this.entities (it's passed separately)
@@ -162,13 +169,15 @@ export class EntityManager {
       player.position.wy += player.velocity.vy * dt;
     }
 
-    // --- Phase 3: Move NPCs ---
+    // --- Phase 3: Move NPCs (using per-entity tick dt when available) ---
     for (const entity of this.entities) {
       if (entity === player || !entity.velocity) continue;
+      if (entityTickDts && !entityTickDts.has(entity)) continue;
 
+      const entityDt = entityTickDts?.get(entity) ?? dt;
       const speedMult = entity.collider ? getSpeedMultiplier(entity.position, getCollision) : 1.0;
-      const dx = entity.velocity.vx * dt * speedMult;
-      const dy = entity.velocity.vy * dt * speedMult;
+      const dx = entity.velocity.vx * entityDt * speedMult;
+      const dy = entity.velocity.vy * entityDt * speedMult;
 
       if (entity.collider) {
         const blocked = resolveCollision(
@@ -196,12 +205,14 @@ export class EntityManager {
     // --- Phase 4: Separate overlapping entities ---
     separateOverlappingEntities(this.entities, player, dt, getCollision, blockMask);
 
-    // --- Tick animations ---
+    // --- Tick animations (only for ticking entities) ---
     for (const entity of this.entities) {
+      if (entityTickDts && !entityTickDts.has(entity)) continue;
       const sprite = entity.sprite;
       if (sprite && sprite.frameCount > 1) {
+        const entityDt = entityTickDts?.get(entity) ?? dt;
         if (sprite.moving) {
-          sprite.animTimer += dt * 1000;
+          sprite.animTimer += entityDt * 1000;
           if (sprite.animTimer >= sprite.frameDuration) {
             sprite.animTimer -= sprite.frameDuration;
             sprite.frameCol = (sprite.frameCol + 1) % sprite.frameCount;

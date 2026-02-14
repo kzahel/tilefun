@@ -1,5 +1,6 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
+import { CHUNK_SIZE_PX, TICK_RATE } from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import { getEntityAABB } from "../entities/collision.js";
@@ -163,7 +164,10 @@ export class GameServer {
 
       // 2. AI + Physics (skip if paused)
       if (!session.debugPaused) {
-        tickAllAI(this.entityManager.entities, session.player.position, dt, Math.random);
+        // Compute per-entity tick tiers (near=every frame, mid=accumulated, far=frozen)
+        const entityTickDts = this.computeEntityTickDts(session.player, session.visibleRange, dt);
+
+        tickAllAI(this.entityManager.entities, session.player.position, entityTickDts, Math.random);
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(dt);
@@ -180,6 +184,7 @@ export class GameServer {
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
           session.player,
           this.propManager,
+          entityTickDts,
         );
 
         if (savedCollider) {
@@ -403,6 +408,73 @@ export class GameServer {
     this.transport.close();
   }
 
+  /**
+   * Number of extra chunks beyond the client's visible range to include
+   * when filtering entities/props for broadcast. Prevents pop-in at edges.
+   */
+  private static readonly BROADCAST_BUFFER_CHUNKS = 2;
+
+  /** Extra chunks beyond broadcast range that get reduced tick rate. */
+  private static readonly MID_TICK_BUFFER = 6;
+  /** Frames between ticks for mid-tier entities. */
+  private static readonly MID_TICK_FRAMES = 4;
+
+  /**
+   * Compute per-entity tick dts based on distance from the player's viewport.
+   * Near entities tick every frame; mid-tier entities accumulate dt and tick
+   * every few frames with the accumulated value; far entities are frozen.
+   */
+  private computeEntityTickDts(player: Entity, range: ChunkRange, dt: number): Map<Entity, number> {
+    const result = new Map<Entity, number>();
+    const nearBuf = GameServer.BROADCAST_BUFFER_CHUNKS;
+    const midBuf = nearBuf + GameServer.MID_TICK_BUFFER;
+    const midInterval = GameServer.MID_TICK_FRAMES / TICK_RATE;
+
+    for (const entity of this.entityManager.entities) {
+      if (entity === player) {
+        result.set(entity, dt);
+        continue;
+      }
+
+      const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX);
+      const cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
+
+      // Near tier: within visible range + broadcast buffer → every frame
+      if (
+        cx >= range.minCx - nearBuf &&
+        cx <= range.maxCx + nearBuf &&
+        cy >= range.minCy - nearBuf &&
+        cy <= range.maxCy + nearBuf
+      ) {
+        result.set(entity, dt);
+        entity.tickAccumulator = 0;
+        continue;
+      }
+
+      // Mid tier: within extended range → reduced tick rate with accumulated dt
+      if (
+        cx >= range.minCx - midBuf &&
+        cx <= range.maxCx + midBuf &&
+        cy >= range.minCy - midBuf &&
+        cy <= range.maxCy + midBuf
+      ) {
+        const acc = (entity.tickAccumulator ?? 0) + dt;
+        if (acc >= midInterval) {
+          result.set(entity, acc);
+          entity.tickAccumulator = 0;
+        } else {
+          entity.tickAccumulator = acc;
+        }
+        continue;
+      }
+
+      // Far tier: frozen (not in map, velocity zeroed by tickAllAI)
+      entity.tickAccumulator = 0;
+    }
+
+    return result;
+  }
+
   /** Build a game-state message for a specific client, with delta chunk sync. */
   private buildGameState(clientId: string): GameStateMessage {
     const session = this.sessions.get(clientId);
@@ -442,10 +514,30 @@ export class GameServer {
       }
     }
 
+    // Filter entities and props to those near the player's viewport
+    const buf = GameServer.BROADCAST_BUFFER_CHUNKS;
+    const range = session.visibleRange;
+    const nearbyEntities = this.entityManager.spatialHash.queryRange(
+      range.minCx - buf,
+      range.minCy - buf,
+      range.maxCx + buf,
+      range.maxCy + buf,
+    );
+    // Ensure the player entity is always included
+    if (!nearbyEntities.includes(session.player)) {
+      nearbyEntities.push(session.player);
+    }
+    const nearbyProps = this.propManager.getPropsInChunkRange(
+      range.minCx - buf,
+      range.minCy - buf,
+      range.maxCx + buf,
+      range.maxCy + buf,
+    );
+
     return {
       type: "game-state",
-      entities: this.entityManager.entities.map(serializeEntity),
-      props: this.propManager.props.map(serializeProp),
+      entities: nearbyEntities.map(serializeEntity),
+      props: nearbyProps.map(serializeProp),
       playerEntityId: session.player.id,
       gemsCollected: session.gameplaySession.gemsCollected,
       invincibilityTimer: session.gameplaySession.invincibilityTimer,

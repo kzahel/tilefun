@@ -2,6 +2,7 @@ import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import { isRoad } from "../road/RoadType.js";
 import type { Chunk } from "./Chunk.js";
 import { ChunkManager, type ChunkRange } from "./ChunkManager.js";
 import {
@@ -40,11 +41,13 @@ export class World {
     return chunk.getTerrain(lx, ly);
   }
 
-  /** Get collision flags at a global tile position. */
+  /** Get collision flags at a global tile position. Roads override terrain blocking. */
   getCollision(tx: number, ty: number): number {
     const { cx, cy } = tileToChunk(tx, ty);
     const { lx, ly } = tileToLocal(tx, ty);
-    return this.chunks.getOrCreate(cx, cy).getCollision(lx, ly);
+    const chunk = this.chunks.getOrCreate(cx, cy);
+    if (isRoad(chunk.getRoad(lx, ly))) return CollisionFlag.None;
+    return chunk.getCollision(lx, ly);
   }
 
   /** Get collision flags without creating chunks. Returns blocking for unloaded chunks. */
@@ -53,6 +56,7 @@ export class World {
     const chunk = this.chunks.get(cx, cy);
     if (!chunk) return CollisionFlag.Solid | CollisionFlag.Water;
     const { lx, ly } = tileToLocal(tx, ty);
+    if (isRoad(chunk.getRoad(lx, ly))) return CollisionFlag.None;
     return chunk.getCollision(lx, ly);
   }
 

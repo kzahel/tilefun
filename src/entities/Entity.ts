@@ -101,4 +101,6 @@ export interface Entity {
   tags?: Set<string>;
   /** Per-entity key-value attributes for scripting API (ephemeral, not persisted). */
   attributes?: Map<string, unknown>;
+  /** Accumulated time since last AI/physics tick (server-only, not serialized). */
+  tickAccumulator?: number;
 }
