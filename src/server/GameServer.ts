@@ -1,9 +1,6 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
-import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { createPlayer } from "../entities/Player.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { baseGameMod } from "../game/base-game.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
@@ -42,7 +39,12 @@ export class GameServer {
   /** Player speed multiplier (set via sv_speed cvar). */
   speedMultiplier = 1;
 
-  private activeRealm: Realm;
+  /** All active realms, keyed by worldId. */
+  private readonly realms = new Map<string, Realm>();
+  /** The default realm's worldId (set during init, used for new connections). */
+  private defaultRealmId: string | null = null;
+  /** Master session list — every connected player, regardless of realm. */
+  private readonly sessions = new Map<string, PlayerSession>();
   private readonly transport: IServerTransport;
   private readonly registry: IWorldRegistry;
   private readonly createStore: (worldId: string) => PersistenceStore;
@@ -58,7 +60,13 @@ export class GameServer {
 
   // ── Delegation getters for backward compatibility ──
   // External code (LocalStateView, tests, serverCommands) accesses these fields.
-  // They now live on the active Realm.
+  // They delegate to the default realm.
+
+  private get activeRealm(): Realm {
+    const realm = this.defaultRealmId ? this.realms.get(this.defaultRealmId) : undefined;
+    if (!realm) throw new Error("No active realm");
+    return realm;
+  }
 
   get world() {
     return this.activeRealm.world;
@@ -82,7 +90,12 @@ export class GameServer {
     this.createStore =
       deps?.createStore ??
       ((worldId) => new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta"]));
-    this.activeRealm = new Realm([baseGameMod]);
+    // Create a default realm (will be loaded with a world in init() or loadWorld())
+    const defaultRealm = new Realm([baseGameMod]);
+    // Use a sentinel key until a real world is loaded
+    defaultRealm.currentWorldId = "__default__";
+    this.realms.set("__default__", defaultRealm);
+    this.defaultRealmId = "__default__";
   }
 
   /** Initialize the server-side console engine with server commands. */
@@ -112,11 +125,11 @@ export class GameServer {
     const firstWorld = worlds[0];
     if (firstWorld) {
       console.log("[tilefun] loading existing world:", firstWorld.id, firstWorld.name);
-      await this.loadWorld(firstWorld.id);
+      await this.loadWorldIntoDefaultRealm(firstWorld.id);
     } else {
       console.warn("[tilefun] no worlds found in registry — creating new world");
       const meta = await this.registry.createWorld("My World");
-      await this.loadWorld(meta.id);
+      await this.loadWorldIntoDefaultRealm(meta.id);
     }
   }
 
@@ -135,61 +148,45 @@ export class GameServer {
       }
 
       // Reconnection: reuse existing session and player entity
-      const existingSession = this.activeRealm.sessions.get(clientId);
-      if (existingSession) {
-        console.log(`[tilefun] client reconnected: ${clientId} as ${existingSession.displayName}`);
-        this.transport.send(clientId, {
-          type: "player-assigned",
-          entityId: existingSession.player.id,
-        });
-        this.transport.send(clientId, {
-          type: "world-loaded",
-          cameraX: existingSession.cameraX,
-          cameraY: existingSession.cameraY,
-          cameraZoom: existingSession.cameraZoom,
-        });
-        // Reset chunk revisions so all chunks get re-sent to the fresh connection
-        this.activeRealm.clearClientRevisions(clientId);
-        return;
+      const existingSession = this.sessions.get(clientId);
+      if (existingSession && existingSession.realmId) {
+        const realm = this.realms.get(existingSession.realmId);
+        if (realm) {
+          console.log(
+            `[tilefun] client reconnected: ${clientId} as ${existingSession.displayName}`,
+          );
+          this.transport.send(clientId, {
+            type: "player-assigned",
+            entityId: existingSession.player.id,
+          });
+          this.transport.send(clientId, {
+            type: "world-loaded",
+            cameraX: existingSession.cameraX,
+            cameraY: existingSession.cameraY,
+            cameraZoom: existingSession.cameraZoom,
+          });
+          // Reset chunk revisions so all chunks get re-sent to the fresh connection
+          realm.clearClientRevisions(clientId);
+          return;
+        }
       }
 
-      // New connection: create player entity and session
-      let player: Entity;
-      const existingPlayer = this.activeRealm.entityManager.entities.find(
-        (e) => e.type === "player",
-      );
-      if (clientId === "local" && existingPlayer) {
-        player = existingPlayer;
-      } else {
-        player = createPlayer(
-          this.activeRealm.lastLoadedCamera.cameraX,
-          this.activeRealm.lastLoadedCamera.cameraY,
-        );
-        this.activeRealm.entityManager.spawn(player);
-      }
-      const session = new PlayerSession(clientId, player);
-      session.gameplaySession.gemsCollected = this.activeRealm.lastLoadedGems;
-      session.cameraX = this.activeRealm.lastLoadedCamera.cameraX;
-      session.cameraY = this.activeRealm.lastLoadedCamera.cameraY;
-      session.cameraZoom = this.activeRealm.lastLoadedCamera.cameraZoom;
-      // Seed a reasonable initial visible range so the first few ticks
-      // load chunks near the camera (before the client sends visible-range).
-      const camCx = Math.floor(this.activeRealm.lastLoadedCamera.cameraX / CHUNK_SIZE_PX);
-      const camCy = Math.floor(this.activeRealm.lastLoadedCamera.cameraY / CHUNK_SIZE_PX);
-      session.visibleRange = {
-        minCx: camCx - 3,
-        minCy: camCy - 3,
-        maxCx: camCx + 3,
-        maxCy: camCy + 3,
-      };
+      // New connection: create session and add to default realm
+      const realm = this.activeRealm;
+      const session = new PlayerSession(clientId);
       const num = this.nextPlayerNumber++;
       session.playerNumber = num;
       session.displayName = `Player ${num}`;
       session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
-      this.activeRealm.sessions.set(clientId, session);
+
+      // Add to global sessions map
+      this.sessions.set(clientId, session);
+
+      // Add player to the default realm
+      realm.addPlayer(session);
 
       console.log(
-        `[tilefun] client connected: ${clientId} as ${session.displayName} (${this.activeRealm.sessions.size} total)`,
+        `[tilefun] client connected: ${clientId} as ${session.displayName} (${realm.sessions.size} in realm)`,
       );
 
       this.transport.send(clientId, {
@@ -198,16 +195,16 @@ export class GameServer {
       });
       this.transport.send(clientId, {
         type: "world-loaded",
-        cameraX: this.activeRealm.lastLoadedCamera.cameraX,
-        cameraY: this.activeRealm.lastLoadedCamera.cameraY,
-        cameraZoom: this.activeRealm.lastLoadedCamera.cameraZoom,
+        cameraX: realm.lastLoadedCamera.cameraX,
+        cameraY: realm.lastLoadedCamera.cameraY,
+        cameraZoom: realm.lastLoadedCamera.cameraZoom,
       });
     });
 
     this.transport.onDisconnect((clientId) => {
       if (clientId === "local") return;
 
-      const session = this.activeRealm.sessions.get(clientId);
+      const session = this.sessions.get(clientId);
       if (!session) return;
 
       // Zero velocity so the dormant player entity doesn't drift
@@ -223,11 +220,17 @@ export class GameServer {
       // Keep session alive for a grace period to allow reconnection (e.g. page refresh)
       const timer = setTimeout(() => {
         this.dormantSessions.delete(clientId);
-        const s = this.activeRealm.sessions.get(clientId);
+        const s = this.sessions.get(clientId);
         if (s) {
-          this.activeRealm.entityManager.remove(s.player.id);
-          this.activeRealm.sessions.delete(clientId);
-          this.activeRealm.clearClientRevisions(clientId);
+          // Remove from whatever realm the session is in
+          if (s.realmId) {
+            const realm = this.realms.get(s.realmId);
+            if (realm) {
+              realm.removePlayer(clientId);
+              this.tryUnloadRealm(s.realmId);
+            }
+          }
+          this.sessions.delete(clientId);
           console.log(`[tilefun] dormant session expired: ${clientId} (${s.displayName})`);
         }
       }, GameServer.DORMANT_TIMEOUT_MS);
@@ -237,7 +240,7 @@ export class GameServer {
   }
 
   getLocalSession(): PlayerSession {
-    const session = this.activeRealm.sessions.get("local");
+    const session = this.sessions.get("local");
     if (!session) throw new Error("No local session");
     return session;
   }
@@ -259,10 +262,12 @@ export class GameServer {
     this.broadcasting = false;
   }
 
-  /** Run one simulation tick. In local mode, called by client's update(). */
+  /** Run one simulation tick. Iterates ALL active realms. */
   tick(dt: number): void {
     const dormantIds = new Set(this.dormantSessions.keys());
-    this.activeRealm.tick(dt, this.transport, this.broadcasting, dormantIds);
+    for (const realm of this.realms.values()) {
+      realm.tick(dt, this.transport, this.broadcasting, dormantIds);
+    }
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */
@@ -275,22 +280,99 @@ export class GameServer {
     this.activeRealm.invalidateAllChunks();
   }
 
+  /**
+   * Get or create a realm for the given worldId.
+   * If a realm is already loaded for this world, returns it.
+   * Otherwise, creates a new Realm and loads the world into it.
+   */
+  private async getOrCreateRealm(worldId: string): Promise<Realm> {
+    const existing = this.realms.get(worldId);
+    if (existing) return existing;
+
+    const realm = new Realm([baseGameMod]);
+    await realm.loadWorld(worldId, this.registry, this.createStore);
+    this.realms.set(worldId, realm);
+    return realm;
+  }
+
+  /**
+   * Load a world into the default realm (used during init and for backward compat).
+   * Re-keys the realm in the map from its old key to the new worldId.
+   */
+  private async loadWorldIntoDefaultRealm(
+    worldId: string,
+  ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
+    const realm = this.activeRealm;
+
+    // Re-key in the realms map
+    if (this.defaultRealmId && this.defaultRealmId !== worldId) {
+      this.realms.delete(this.defaultRealmId);
+    }
+    this.realms.set(worldId, realm);
+    this.defaultRealmId = worldId;
+
+    const cam = await realm.loadWorld(worldId, this.registry, this.createStore);
+    return cam;
+  }
+
+  /**
+   * Move a single player to a different realm/world.
+   * Creates the target realm if not already loaded.
+   */
+  private async movePlayerToRealm(
+    clientId: string,
+    session: PlayerSession,
+    worldId: string,
+  ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
+    // Remove from current realm
+    if (session.realmId) {
+      const oldRealm = this.realms.get(session.realmId);
+      if (oldRealm) {
+        oldRealm.removePlayer(clientId);
+        this.tryUnloadRealm(session.realmId);
+      }
+    }
+
+    // Get or create target realm
+    const targetRealm = await this.getOrCreateRealm(worldId);
+
+    // Add player to target realm
+    targetRealm.addPlayer(session);
+
+    return {
+      cameraX: targetRealm.lastLoadedCamera.cameraX,
+      cameraY: targetRealm.lastLoadedCamera.cameraY,
+      cameraZoom: targetRealm.lastLoadedCamera.cameraZoom,
+    };
+  }
+
+  /**
+   * If a realm has no players and is not the default realm,
+   * flush and destroy it to free memory.
+   */
+  private tryUnloadRealm(worldId: string): void {
+    if (worldId === this.defaultRealmId) return;
+    const realm = this.realms.get(worldId);
+    if (!realm || realm.sessions.size > 0) return;
+
+    console.log(`[tilefun] unloading empty realm: ${worldId}`);
+    realm.destroy();
+    this.realms.delete(worldId);
+  }
+
+  /**
+   * Public loadWorld for backward compat (used by GameClient in local/non-serialized mode).
+   * Moves the local player to the target world's realm.
+   */
   async loadWorld(
     worldId: string,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
-    const cam = await this.activeRealm.loadWorld(worldId, this.registry, this.createStore);
-
-    // Notify connected clients of the new world/camera position
-    if (this.broadcasting) {
-      this.transport.broadcast({
-        type: "world-loaded",
-        cameraX: cam.cameraX,
-        cameraY: cam.cameraY,
-        cameraZoom: cam.cameraZoom,
-      });
+    const localSession = this.sessions.get("local");
+    if (localSession) {
+      return this.movePlayerToRealm("local", localSession, worldId);
     }
-
-    return cam;
+    // Fallback: load into default realm (no sessions yet)
+    return this.loadWorldIntoDefaultRealm(worldId);
   }
 
   async createWorld(name: string, worldType?: WorldType, seed?: number): Promise<WorldMeta> {
@@ -300,7 +382,10 @@ export class GameServer {
   async deleteWorld(id: string): Promise<void> {
     // Close the SaveManager connection BEFORE deleting the database,
     // otherwise indexedDB.deleteDatabase() blocks on the open connection.
-    this.activeRealm.closePersistenceIfCurrent(id);
+    const realm = this.realms.get(id);
+    if (realm) {
+      realm.closePersistenceIfCurrent(id);
+    }
     await this.registry.deleteWorld(id);
   }
 
@@ -313,7 +398,9 @@ export class GameServer {
   }
 
   flush(): void {
-    this.activeRealm.flush();
+    for (const realm of this.realms.values()) {
+      realm.flush();
+    }
   }
 
   destroy(): void {
@@ -321,7 +408,10 @@ export class GameServer {
       clearTimeout(timer);
     }
     this.dormantSessions.clear();
-    this.activeRealm.destroy();
+    for (const realm of this.realms.values()) {
+      realm.destroy();
+    }
+    this.realms.clear();
     this.stopLoop();
     this.transport.close();
   }
@@ -329,13 +419,18 @@ export class GameServer {
   // ---- Private ----
 
   private handleMessage(clientId: string, msg: ClientMessage): void {
-    const session = this.activeRealm.sessions.get(clientId);
+    const session = this.sessions.get(clientId);
     if (!session) return;
 
     // Global messages handled by GameServer
     switch (msg.type) {
       case "load-world":
-        this.loadWorld(msg.worldId).then((cam) => {
+        // Per-player realm switching: only move the requesting player
+        this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
+          this.transport.send(clientId, {
+            type: "player-assigned",
+            entityId: session.player.id,
+          });
           this.transport.send(clientId, {
             type: "world-loaded",
             requestId: msg.requestId,
@@ -401,7 +496,10 @@ export class GameServer {
       }
     }
 
-    // Realm-scoped messages delegated to the active realm
-    this.activeRealm.handleMessage(clientId, session, msg);
+    // Realm-scoped messages: find the session's realm and delegate
+    if (!session.realmId) return;
+    const realm = this.realms.get(session.realmId);
+    if (!realm) return;
+    realm.handleMessage(clientId, session, msg);
   }
 }

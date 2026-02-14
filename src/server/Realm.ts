@@ -68,6 +68,7 @@ export class Realm {
 
   lastLoadedGems = 0;
   lastLoadedCamera = { cameraX: 0, cameraY: 0, cameraZoom: 1 };
+  lastLoadedPlayerPos = { wx: 0, wy: 0 };
   currentWorldId: string | null = null;
 
   private readonly mods: Mod[];
@@ -97,6 +98,55 @@ export class Realm {
   /** Clear per-client chunk revision tracking (forces full re-send). */
   clearClientRevisions(clientId: string): void {
     this.clientChunkRevisions.delete(clientId);
+  }
+
+  /**
+   * Add a player to this realm: create player entity, set up session state,
+   * add to realm sessions map.
+   */
+  addPlayer(session: PlayerSession): void {
+    const player = createPlayer(this.lastLoadedPlayerPos.wx, this.lastLoadedPlayerPos.wy);
+    this.entityManager.spawn(player);
+
+    session.player = player;
+    session.gameplaySession = {
+      player,
+      gemsCollected: this.lastLoadedGems,
+      invincibilityTimer: 0,
+      knockbackVx: 0,
+      knockbackVy: 0,
+    };
+    session.cameraX = this.lastLoadedCamera.cameraX;
+    session.cameraY = this.lastLoadedCamera.cameraY;
+    session.cameraZoom = this.lastLoadedCamera.cameraZoom;
+    session.realmId = this.currentWorldId;
+
+    // Seed a reasonable initial visible range near the camera
+    const camCx = Math.floor(this.lastLoadedCamera.cameraX / CHUNK_SIZE_PX);
+    const camCy = Math.floor(this.lastLoadedCamera.cameraY / CHUNK_SIZE_PX);
+    session.visibleRange = {
+      minCx: camCx - 3,
+      minCy: camCy - 3,
+      maxCx: camCx + 3,
+      maxCy: camCy + 3,
+    };
+
+    this.sessions.set(session.clientId, session);
+    this.clearClientRevisions(session.clientId);
+  }
+
+  /**
+   * Remove a player from this realm: remove entity, clean up session state.
+   * The session object itself is NOT deleted — it stays in GameServer's global map.
+   */
+  removePlayer(clientId: string): void {
+    const session = this.sessions.get(clientId);
+    if (!session) return;
+
+    this.entityManager.remove(session.player.id);
+    this.sessions.delete(clientId);
+    this.clearClientRevisions(clientId);
+    session.realmId = null;
   }
 
   /** Close persistence if the given worldId matches the currently loaded world. */
@@ -427,22 +477,6 @@ export class Realm {
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
 
-    // Create player and session
-    const player = createPlayer(0, 0);
-    this.entityManager.spawn(player);
-
-    // Update all sessions with new player
-    for (const session of this.sessions.values()) {
-      session.player = player;
-      session.gameplaySession = {
-        player,
-        gemsCollected: 0,
-        invincibilityTimer: 0,
-        knockbackVx: 0,
-        knockbackVy: 0,
-      };
-    }
-
     // Open persistence for this world
     const store = createStore(worldId);
     this.saveManager = new SaveManager(store);
@@ -461,6 +495,8 @@ export class Realm {
     let cameraX = 0;
     let cameraY = 0;
     let cameraZoom = 1;
+    let playerX = 0;
+    let playerY = 0;
 
     console.log(`[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`);
     if (savedMeta && savedChunks.size > 0) {
@@ -468,8 +504,8 @@ export class Realm {
       cameraX = savedMeta.cameraX;
       cameraY = savedMeta.cameraY;
       cameraZoom = savedMeta.cameraZoom;
-      player.position.wx = savedMeta.playerX;
-      player.position.wy = savedMeta.playerY;
+      playerX = savedMeta.playerX;
+      playerY = savedMeta.playerY;
       for (const se of savedMeta.entities) {
         if (se.type === "player") continue;
         if (isPropType(se.type)) {
@@ -483,12 +519,13 @@ export class Realm {
       }
       this.entityManager.setNextId(savedMeta.nextEntityId);
       this.lastLoadedGems = savedMeta.gemsCollected ?? 0;
-      for (const session of this.sessions.values()) {
-        session.gameplaySession.gemsCollected = this.lastLoadedGems;
-      }
     } else {
       this.lastLoadedGems = 0;
-      findWalkableSpawn(player, this.world);
+      // Find a walkable spawn point using a temporary entity
+      const tempPlayer = createPlayer(0, 0);
+      findWalkableSpawn(tempPlayer, this.world);
+      playerX = tempPlayer.position.wx;
+      playerY = tempPlayer.position.wy;
       spawnInitialChickens(5, this.world, this.entityManager);
     }
 
@@ -511,13 +548,9 @@ export class Realm {
     this.currentWorldId = worldId;
     await registry.updateLastPlayed(worldId);
 
-    // Store and apply camera to sessions
+    // Store loaded positions for addPlayer() to use
     this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
-    for (const session of this.sessions.values()) {
-      session.cameraX = cameraX;
-      session.cameraY = cameraY;
-      session.cameraZoom = cameraZoom;
-    }
+    this.lastLoadedPlayerPos = { wx: playerX, wy: playerY };
 
     // Reset per-client chunk tracking so all chunks get re-sent
     this.clientChunkRevisions.clear();

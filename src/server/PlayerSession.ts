@@ -14,7 +14,8 @@ export interface GameplaySession {
 
 export class PlayerSession {
   readonly clientId: string;
-  player: Entity;
+  /** Player entity in the current realm. Set by Realm.addPlayer(). */
+  player!: Entity;
   editorEnabled = true;
 
   /** Which realm this session is in (null = lobby, not in any realm). */
@@ -27,7 +28,7 @@ export class PlayerSession {
   lastProcessedInputSeq = 0;
 
   /** Gameplay state (gems, invincibility, knockback). */
-  gameplaySession: GameplaySession;
+  gameplaySession!: GameplaySession;
 
   /** Visible chunk range (set by client each frame, used by spawners). */
   visibleRange: ChunkRange = { minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 };
@@ -58,15 +59,17 @@ export class PlayerSession {
   debugPaused = false;
   debugNoclip = false;
 
-  constructor(clientId: string, player: Entity) {
+  constructor(clientId: string, player?: Entity) {
     this.clientId = clientId;
-    this.player = player;
-    this.gameplaySession = {
-      player,
-      gemsCollected: 0,
-      invincibilityTimer: 0,
-      knockbackVx: 0,
-      knockbackVy: 0,
-    };
+    if (player) {
+      this.player = player;
+      this.gameplaySession = {
+        player,
+        gemsCollected: 0,
+        invincibilityTimer: 0,
+        knockbackVx: 0,
+        knockbackVy: 0,
+      };
+    }
   }
 }
