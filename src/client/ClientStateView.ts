@@ -15,6 +15,8 @@ export interface ClientStateView {
   readonly invincibilityTimer: number;
   readonly editorEnabled: boolean;
   readonly remoteCursors: readonly RemoteEditorCursor[];
+  /** Entity ID → display name for player entities. */
+  readonly playerNames: Record<number, string>;
 }
 
 /**
@@ -48,6 +50,9 @@ export class LocalStateView implements ClientStateView {
   get remoteCursors(): readonly RemoteEditorCursor[] {
     return [];
   }
+  get playerNames(): Record<number, string> {
+    return {};
+  }
 }
 
 /** Placeholder entity returned before server has sent state. */
@@ -75,6 +80,7 @@ export class RemoteStateView implements ClientStateView {
   private _invincibilityTimer = 0;
   private _editorEnabled = true;
   private _remoteCursors: RemoteEditorCursor[] = [];
+  private _playerNames: Record<number, string> = {};
   private _pendingState: GameStateMessage | null = null;
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
@@ -164,6 +170,7 @@ export class RemoteStateView implements ClientStateView {
     this._invincibilityTimer = msg.invincibilityTimer;
     this._editorEnabled = msg.editorEnabled;
     this._remoteCursors = msg.editorCursors;
+    this._playerNames = msg.playerNames;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
 
@@ -193,6 +200,7 @@ export class RemoteStateView implements ClientStateView {
     this._gemsCollected = 0;
     this._invincibilityTimer = 0;
     this._remoteCursors = [];
+    this._playerNames = {};
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);
@@ -226,5 +234,8 @@ export class RemoteStateView implements ClientStateView {
   }
   get remoteCursors(): readonly RemoteEditorCursor[] {
     return this._remoteCursors;
+  }
+  get playerNames(): Record<number, string> {
+    return this._playerNames;
   }
 }

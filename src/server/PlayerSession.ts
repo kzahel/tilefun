@@ -17,6 +17,9 @@ export class PlayerSession {
   player: Entity;
   editorEnabled = true;
 
+  /** Which realm this session is in (null = lobby, not in any realm). */
+  realmId: string | null = null;
+
   /** Queued inputs from client (drained each tick). */
   inputQueue: { dx: number; dy: number; sprinting: boolean; seq: number }[] = [];
 

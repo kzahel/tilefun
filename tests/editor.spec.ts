@@ -8,6 +8,9 @@ async function waitForGame(page: import("@playwright/test").Page) {
     timeout: 10000,
   });
   await page.waitForTimeout(500);
+  // Game starts in play mode — toggle to editor mode with Tab
+  await page.keyboard.press("Tab");
+  await page.waitForTimeout(300);
 }
 
 test("editor mode: paint water on grass", async ({ page }) => {

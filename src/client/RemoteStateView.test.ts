@@ -50,6 +50,7 @@ function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMess
     loadedChunkKeys: [],
     chunkUpdates: [],
     editorCursors: [],
+    playerNames: {},
     ...overrides,
   };
 }

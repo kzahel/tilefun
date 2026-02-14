@@ -136,6 +136,7 @@ export interface DebugRenderFlags {
   showChunkBorders: boolean;
   showBboxes: boolean;
   showGrid: boolean;
+  showPlayerNames: boolean;
 }
 
 /** Draw debug overlay with fine-grained control via flags. */
@@ -147,12 +148,41 @@ export function drawDebugOverlay(
   info: DebugInfo,
   visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
   flags?: DebugRenderFlags,
+  playerNames?: Record<number, string>,
 ): void {
   const showAll = !flags; // no flags = show all (legacy debugEnabled path)
   if (showAll || flags?.showInfoPanel) drawInfoPanel(ctx, info);
   if (showAll || flags?.showChunkBorders) drawChunkBorders(ctx, camera, visible);
   if (showAll || flags?.showBboxes) drawCollisionBoxes(ctx, camera, entities, props);
   if (flags?.showGrid) drawTileGrid(ctx, camera, visible);
+  if (playerNames && (showAll || flags?.showPlayerNames)) {
+    drawPlayerNames(ctx, camera, entities, playerNames);
+  }
+}
+
+function drawPlayerNames(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  entities: Entity[],
+  playerNames: Record<number, string>,
+): void {
+  ctx.save();
+  ctx.font = "bold 11px monospace";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+  for (const entity of entities) {
+    const name = playerNames[entity.id];
+    if (!name) continue;
+    const screen = camera.worldToScreen(entity.position.wx, entity.position.wy);
+    // Draw above the entity sprite (approx 48px sprite height * scale)
+    const labelY = screen.sy - (entity.sprite?.spriteHeight ?? 32) * camera.scale - 4;
+    // Shadow for readability
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+    ctx.fillText(name, screen.sx + 1, labelY + 1);
+    ctx.fillStyle = "#4fc3f7";
+    ctx.fillText(name, screen.sx, labelY);
+  }
+  ctx.restore();
 }
 
 function drawTileGrid(

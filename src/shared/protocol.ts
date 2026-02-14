@@ -206,6 +206,8 @@ export interface GameStateMessage {
   loadedChunkKeys: string[];
   chunkUpdates: ChunkSnapshot[];
   editorCursors: RemoteEditorCursor[];
+  /** Entity ID → display name for all player entities. */
+  playerNames: Record<number, string>;
 }
 
 // ---- Server → Client messages ----

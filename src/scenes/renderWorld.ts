@@ -142,6 +142,13 @@ export function renderDebugOverlay(gc: GameContext): void {
     camera.getVisibleChunkRange(),
     gc.debugEnabled
       ? undefined // legacy path: show all
-      : { showInfoPanel: showFps, showChunkBorders: showChunks, showBboxes, showGrid },
+      : {
+          showInfoPanel: showFps,
+          showChunkBorders: showChunks,
+          showBboxes,
+          showGrid,
+          showPlayerNames: false,
+        },
+    stateView.playerNames,
   );
 }
