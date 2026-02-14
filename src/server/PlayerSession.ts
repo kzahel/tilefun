@@ -17,10 +17,10 @@ export class PlayerSession {
   player: Entity;
   editorEnabled = true;
 
-  /** Latest input from client (consumed each tick). */
-  latestInput: { dx: number; dy: number; sprinting: boolean } | null = null;
+  /** Queued inputs from client (drained each tick). */
+  inputQueue: { dx: number; dy: number; sprinting: boolean; seq: number }[] = [];
 
-  /** Sequence number of the last processed player-input message. */
+  /** Sequence number of the last input actually consumed in tick(). */
   lastProcessedInputSeq = 0;
 
   /** Gameplay state (gems, invincibility, knockback). */

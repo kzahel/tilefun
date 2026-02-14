@@ -131,6 +131,7 @@ const SEPARATION_SPEED = 40;
 
 /**
  * Gently push apart overlapping solid wandering entities using a spatial hash.
+ * Also separates entities that overlap with the player (pushing only the entity).
  * Mutates entity positions in place. Respects tile collision (won't push through walls).
  */
 export function separateOverlappingEntities(
@@ -142,6 +143,7 @@ export function separateOverlappingEntities(
 ): void {
   // 1. Bucket eligible entities into a spatial hash (cell size = TILE_SIZE)
   const grid = new Map<number, Entity[]>();
+  const pushableEntities: Entity[] = [];
   for (const entity of entities) {
     if (
       entity === player ||
@@ -150,6 +152,7 @@ export function separateOverlappingEntities(
       !entity.wanderAI
     )
       continue;
+    pushableEntities.push(entity);
     const aabb = getEntityAABB(entity.position, entity.collider);
     const minCx = Math.floor(aabb.left / TILE_SIZE);
     const maxCx = Math.floor(aabb.right / TILE_SIZE);
@@ -170,7 +173,41 @@ export function separateOverlappingEntities(
     }
   }
 
-  // 2. Find and separate overlapping pairs
+  // 2. Separate entities overlapping with the player (push only the entity, not the player)
+  if (player.collider) {
+    const playerBox = getEntityAABB(player.position, player.collider);
+    for (const entity of pushableEntities) {
+      if (!entity.collider) continue;
+      const entityBox = getEntityAABB(entity.position, entity.collider);
+      if (!aabbsOverlap(playerBox, entityBox)) continue;
+
+      // Compute overlap depth on each axis
+      const overlapX =
+        Math.min(playerBox.right, entityBox.right) - Math.max(playerBox.left, entityBox.left);
+      const overlapY =
+        Math.min(playerBox.bottom, entityBox.bottom) - Math.max(playerBox.top, entityBox.top);
+
+      // Push entity out along the axis with smallest overlap (minimum penetration)
+      let nx = 0;
+      let ny = 0;
+      if (overlapX < overlapY) {
+        nx = entity.position.wx > player.position.wx ? overlapX + 0.5 : -(overlapX + 0.5);
+      } else {
+        ny = entity.position.wy > player.position.wy ? overlapY + 0.5 : -(overlapY + 0.5);
+      }
+
+      const testBox = getEntityAABB(
+        { wx: entity.position.wx + nx, wy: entity.position.wy + ny },
+        entity.collider,
+      );
+      if (!aabbOverlapsSolid(testBox, getCollision, blockMask)) {
+        entity.position.wx += nx;
+        entity.position.wy += ny;
+      }
+    }
+  }
+
+  // 3. Find and separate overlapping entity-entity pairs
   const seen = new Set<number>();
   for (const cell of grid.values()) {
     if (cell.length < 2) continue;

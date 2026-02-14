@@ -3,7 +3,14 @@ import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { CHUNK_SIZE_PX, TICK_RATE } from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
-import { getEntityAABB } from "../entities/collision.js";
+import {
+  type AABB,
+  aabbOverlapsAnyEntity,
+  aabbOverlapsPropWalls,
+  getEntityAABB,
+  getSpeedMultiplier,
+  resolveCollision,
+} from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -30,6 +37,7 @@ import type { ClientMessage, GameStateMessage } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { ServerLoop } from "./ServerLoop.js";
@@ -160,10 +168,58 @@ export class GameServer {
     this.tickCounter++;
 
     for (const session of this.sessions.values()) {
-      // 1. Apply player input
-      if (!session.editorEnabled && session.latestInput) {
-        updatePlayerFromInput(session.player, session.latestInput, dt);
-        session.latestInput = null;
+      // 1. Apply player inputs (drain queue — process ALL queued inputs)
+      if (!session.editorEnabled && session.inputQueue.length > 0) {
+        const inputs = session.inputQueue;
+        session.inputQueue = [];
+        const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
+        const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
+
+        // Extra blocker for simplified collision — props + solid entities.
+        // Matches makeExtraBlocker in EntityManager but without push mechanics.
+        const playerExclude = new Set([session.player.id]);
+        const extraBlocker = (aabb: AABB): boolean => {
+          const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
+          const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
+          const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
+          const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
+          for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
+            if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+          }
+          const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+          return aabbOverlapsAnyEntity(aabb, playerExclude, nearby);
+        };
+
+        // Process extra inputs (all but last) with simplified collision.
+        // This handles the case where timing jitter causes 2+ client ticks
+        // between server ticks — without this, inputs are lost and prediction
+        // diverges, causing visible jitter.
+        for (let i = 0; i < inputs.length - 1; i++) {
+          updatePlayerFromInput(session.player, inputs[i], dt);
+          if (session.player.velocity && session.player.collider && !session.debugNoclip) {
+            const speedMult = getSpeedMultiplier(session.player.position, getCollision);
+            const pdx = session.player.velocity.vx * dt * speedMult;
+            const pdy = session.player.velocity.vy * dt * speedMult;
+            resolveCollision(session.player, pdx, pdy, getCollision, blockMask, extraBlocker);
+          } else if (session.player.velocity) {
+            session.player.position.wx += session.player.velocity.vx * dt;
+            session.player.position.wy += session.player.velocity.vy * dt;
+          }
+          session.lastProcessedInputSeq = inputs[i].seq;
+        }
+
+        // Last input goes through normal path (EntityManager handles movement
+        // including push mechanics, entity-entity collision, etc.)
+        const lastInput = inputs[inputs.length - 1];
+        updatePlayerFromInput(session.player, lastInput, dt);
+        session.lastProcessedInputSeq = lastInput.seq;
+      } else if (!session.editorEnabled && session.player.velocity) {
+        // No input this tick (timing jitter between client RAF and server
+        // setInterval). Zero velocity so EntityManager.update() doesn't
+        // advance the player — the client didn't predict any movement for
+        // this tick either, so the server must stay in sync.
+        session.player.velocity.vx = 0;
+        session.player.velocity.vy = 0;
       }
 
       // 2. AI + Physics (skip if paused)
@@ -561,12 +617,12 @@ export class GameServer {
 
     switch (msg.type) {
       case "player-input":
-        session.latestInput = {
+        session.inputQueue.push({
           dx: msg.dx,
           dy: msg.dy,
           sprinting: msg.sprinting,
-        };
-        session.lastProcessedInputSeq = msg.seq;
+          seq: msg.seq,
+        });
         break;
 
       case "player-interact":

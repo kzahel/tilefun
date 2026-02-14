@@ -93,7 +93,7 @@ interface IServerTransport {
 ### `src/server/GameServer.ts`
 Owns all authoritative state. Extracted from `Game.ts`:
 - **State**: World, EntityManager, PropManager, player entity, spawners, TerrainEditor, persistence
-- **Per-client**: `PlayerSession` (entity, latestInput, gemsCollected, invincibilityTimer, knockback, visibleChunkRange)
+- **Per-client**: `PlayerSession` (entity, inputQueue, gemsCollected, invincibilityTimer, knockback, visibleChunkRange)
 - **Tick** (60Hz via `setInterval`):
   1. Process queued client messages
   2. Update player velocities from session inputs (Game.ts:577-581)
@@ -109,7 +109,7 @@ Owns all authoritative state. Extracted from `Game.ts`:
 class PlayerSession {
   clientId: string;
   entity: Entity;
-  latestInput: Movement;
+  inputQueue: Movement;
   editorEnabled: boolean;
   gemsCollected: number;
   invincibilityTimer: number;

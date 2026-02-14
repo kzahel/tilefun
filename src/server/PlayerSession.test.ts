@@ -9,7 +9,7 @@ describe("PlayerSession", () => {
 
     expect(session.clientId).toBe("test-client");
     expect(session.editorEnabled).toBe(true);
-    expect(session.latestInput).toBeNull();
+    expect(session.inputQueue).toEqual([]);
     expect(session.cameraX).toBe(0);
     expect(session.cameraY).toBe(0);
     expect(session.cameraZoom).toBe(1);

@@ -109,11 +109,15 @@ export class EntityManager {
       const toPush: { entity: Entity; pushFactor: number }[] = [];
       if (vx !== 0 || vy !== 0) {
         const playerBox = getEntityAABB(player.position, player.collider);
+        // Probe extends by the movement distance (at least 1px) so we detect
+        // entities we'd reach this frame, even at sprint speed.
+        const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
+        const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);
         const probeBox: AABB = {
-          left: playerBox.left + Math.sign(vx),
-          top: playerBox.top + Math.sign(vy),
-          right: playerBox.right + Math.sign(vx),
-          bottom: playerBox.bottom + Math.sign(vy),
+          left: playerBox.left + probeX,
+          top: playerBox.top + probeY,
+          right: playerBox.right + probeX,
+          bottom: playerBox.bottom + probeY,
         };
         const velLen = Math.sqrt(vx * vx + vy * vy);
         const playerCx = (playerBox.left + playerBox.right) / 2;
