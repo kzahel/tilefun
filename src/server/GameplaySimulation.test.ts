@@ -1,9 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { createCampfire } from "../entities/Campfire.js";
-import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
-import { createGhostAngry } from "../entities/Ghost.js";
 import { createPlayer } from "../entities/Player.js";
 import { type GameplaySession, tickGameplay } from "./GameplaySimulation.js";
 
@@ -21,100 +18,10 @@ function makeSession(overrides?: Partial<GameplaySession>): GameplaySession {
 const noopCallbacks = { markMetaDirty: () => {} };
 
 describe("tickGameplay", () => {
-  // gem collection is now handled by gem-collector mod (see gem-collector.test.ts)
-
-  describe("baddie contact", () => {
-    it("applies knockback and scatters gems on baddie contact", () => {
-      const em = new EntityManager();
-      const player = createPlayer(100, 100);
-      em.spawn(player);
-      const baddie = createGhostAngry(105, 84); // within 12px of player body center (offsetY=-16)
-      em.spawn(baddie);
-      const session = makeSession({ player, gemsCollected: 3 });
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      expect(session.invincibilityTimer).toBeCloseTo(1.5 - 1 / 60);
-      expect(session.knockbackVx).not.toBe(0);
-      expect(session.gemsCollected).toBe(0); // lost 3
-      // 3 scattered gems should have been spawned
-      const gems = em.entities.filter((e) => e.type === "gem");
-      expect(gems).toHaveLength(3);
-    });
-
-    it("does not apply damage during invincibility", () => {
-      const em = new EntityManager();
-      const player = createPlayer(100, 100);
-      em.spawn(player);
-      em.spawn(createGhostAngry(105, 100));
-      const session = makeSession({ player, gemsCollected: 5, invincibilityTimer: 1.0 });
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      expect(session.gemsCollected).toBe(5); // no gem loss
-    });
-  });
-
-  describe("buddy scare", () => {
-    it("scares a buddy away from a baddie", () => {
-      const em = new EntityManager();
-      const player = createPlayer(0, 0);
-      em.spawn(player);
-
-      const buddy = createChicken(100, 100);
-      const buddyAI = buddy.wanderAI;
-      expect(buddyAI).not.toBeNull();
-      if (buddyAI) {
-        buddyAI.following = true;
-        buddyAI.befriendable = true;
-      }
-      em.spawn(buddy);
-
-      const baddie = createGhostAngry(105, 100); // within 14px of buddy
-      em.spawn(baddie);
-
-      const session = makeSession({ player, invincibilityTimer: 2.0 }); // invincible to skip player damage
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      expect(buddy.wanderAI?.following).toBe(false);
-      expect(buddy.wanderAI?.state).toBe("walking");
-    });
-  });
-
-  describe("campfire ghost trap", () => {
-    it("starts death flash when hostile entity overlaps a campfire", () => {
-      const em = new EntityManager();
-      const player = createPlayer(0, 0);
-      em.spawn(player);
-      em.spawn(createCampfire(100, 100));
-      const ghost = createGhostAngry(105, 100); // within 16px of campfire
-      em.spawn(ghost);
-      const session = makeSession({ player });
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      // Ghost should be dying (flash) but not yet removed
-      expect(ghost.deathTimer).toBeDefined();
-      expect(ghost.wanderAI?.hostile).toBe(false);
-      // A reward gem should have been spawned
-      expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(1);
-    });
-
-    it("does not destroy hostile entity far from campfire", () => {
-      const em = new EntityManager();
-      const player = createPlayer(0, 0);
-      em.spawn(player);
-      em.spawn(createCampfire(100, 100));
-      em.spawn(createGhostAngry(200, 200)); // far from fire
-      const session = makeSession({ player });
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      expect(em.entities.find((e) => e.type === "ghost-angry")).toBeDefined();
-      expect(em.entities.find((e) => e.type === "ghost-angry")?.deathTimer).toBeUndefined();
-    });
-  });
+  // gem collection → gem-collector mod (gem-collector.test.ts)
+  // baddie contact → baddie-contact mod (baddie-contact.test.ts)
+  // buddy scare → buddy-scare mod (buddy-scare.test.ts)
+  // campfire trap → campfire-trap mod (campfire-trap.test.ts)
 
   describe("invincibility decay", () => {
     it("decrements invincibility timer", () => {

@@ -15,7 +15,9 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import { baddieContactMod } from "../mods/baddie-contact.js";
 import { befriendableMod } from "../mods/befriendable.js";
+import { buddyScareMod } from "../mods/buddy-scare.js";
 import { campfireTrapMod } from "../mods/campfire-trap.js";
 import { deathTimerMod } from "../mods/death-timer.js";
 import { gemCollectorMod } from "../mods/gem-collector.js";
@@ -63,7 +65,14 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  private readonly mods: Mod[] = [befriendableMod, gemCollectorMod, deathTimerMod, campfireTrapMod];
+  private readonly mods: Mod[] = [
+    befriendableMod,
+    gemCollectorMod,
+    baddieContactMod,
+    buddyScareMod,
+    deathTimerMod,
+    campfireTrapMod,
+  ];
   private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {

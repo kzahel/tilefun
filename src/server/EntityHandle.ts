@@ -145,6 +145,17 @@ export class EntityHandle {
     this.entity.wanderAI.following = following;
   }
 
+  setAIDirection(dx: number, dy: number): void {
+    if (!this.alive || !this.entity.wanderAI) return;
+    this.entity.wanderAI.dirX = dx;
+    this.entity.wanderAI.dirY = dy;
+  }
+
+  setAITimer(seconds: number): void {
+    if (!this.alive || !this.entity.wanderAI) return;
+    this.entity.wanderAI.timer = seconds;
+  }
+
   // --- Lifecycle ---
 
   remove(): void {

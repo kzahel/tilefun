@@ -8,25 +8,16 @@ Things experienced game developers always build early because they're painful to
 - [x] **Event bus** — decoupled communication between systems
 - [x] **Persistence** — IndexedDB auto-save (chunks + player + entities)
 - [x] **Scripting/mod API** — Roblox-inspired WorldAPI facade + services (in progress)
+- [x] **Input action mapping** — ActionManager maps raw keys/gamepad/touch to named actions
+- [x] **Save format versioning** — migration chain system with `PersistenceStore` abstraction (IDB now, SQLite later)
 
 ---
 
 ## High priority — hard to retrofit
 
-### 1. Input action mapping layer
+### ~~1. Input action mapping layer~~ ✓
 
-Instead of `if (key === "w") move()`, define named actions (`"move_up"`, `"attack"`, `"open_inventory"`) and bind them to keys/buttons/touch/gamepad in a config.
-
-**Why it's hard to retrofit:** Every system currently hardcoding key checks has to be rewritten.
-
-**What it unlocks:**
-- Rebindable controls (settings screen)
-- Gamepad support becomes a config change, not a code rewrite
-- Touch controls become a virtual-stick mapped to the same actions
-- Directly addresses the playtesting finding that our 6-year-old struggles with simultaneous keypresses
-- Replay system becomes possible (record actions, not raw input)
-
-**Minimum viable stub:** An `InputManager` that maps raw events to action names, and all game code subscribes to actions instead of raw keys.
+*Done — `ActionManager` maps raw keys/gamepad/touch to named actions. See `src/input/ActionManager.ts`.*
 
 ### 2. Command pattern (undo/redo)
 
@@ -72,18 +63,9 @@ A central place that loads, caches, and references assets by key. `assets.get("p
 
 **Minimum viable stub:** An `AssetManager` with `load(key, path)`, `get(key)`, and a `Promise.all` loading phase at startup.
 
-### 5. Save format versioning
+### ~~5. Save format versioning~~ ✓
 
-Add a version number to the save format and a migration system.
-
-**Why it's hard to retrofit:** The first time you need to change the format without this, you either break existing saves or write ugly one-off fixup code. Gets worse with every format change.
-
-**What it unlocks:**
-- Safely evolve the persistence format (add props, new entity fields, world metadata)
-- Backwards compatibility for saved worlds
-- Import/export of worlds between players
-
-**Minimum viable stub:** Add `version: 1` to the save envelope. On load: `if (version < 2) migrateV1toV2(data)`. Chain migrations.
+*Done — `CURRENT_SAVE_VERSION` + chainable `SaveMigration` system in `src/persistence/migrations.ts`. Generic `PersistenceStore` interface (`src/persistence/PersistenceStore.ts`) with `IdbPersistenceStore` for browser; SaveManager delegates to it. Bump version + add migration entry = done.*
 
 ---
 
@@ -203,8 +185,8 @@ A `Settings` object persisted to localStorage with UI to change values.
 
 | Phase | Item | Effort |
 |-------|------|--------|
-| Now | Save format versioning (#5) | Small |
-| Now | Input action mapping (#1) | Medium |
+| ~~Now~~ | ~~Save format versioning (#5)~~ | ✓ Done |
+| ~~Now~~ | ~~Input action mapping (#1)~~ | ✓ Done |
 | Soon | Scene state machine (#3) | Medium |
 | Soon | Asset manager (#4) | Medium |
 | Soon | Time manager (#7) | Small |
