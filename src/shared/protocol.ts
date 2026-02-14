@@ -173,12 +173,16 @@ export interface EntitySnapshot {
     followDistance?: number;
     followLeash?: number;
     befriendable?: boolean;
+    rideSpeed?: number;
   } | null;
   flashHidden?: boolean;
   noShadow?: boolean;
   deathTimer?: number;
   jumpZ?: number;
   jumpVZ?: number;
+  parentId?: number;
+  localOffsetX?: number;
+  localOffsetY?: number;
 }
 
 export interface PropSnapshot {
@@ -226,6 +230,8 @@ export interface GameStateMessage {
   editorCursors: RemoteEditorCursor[];
   /** Entity ID → display name for all player entities. */
   playerNames: Record<number, string>;
+  /** Entity ID of the player's mount (undefined when not riding). */
+  mountEntityId?: number;
 }
 
 // ---- Server → Client messages ----
@@ -237,6 +243,7 @@ export type ServerMessage =
   | {
       type: "world-loaded";
       requestId?: number;
+      worldId?: string;
       cameraX: number;
       cameraY: number;
       cameraZoom: number;
@@ -250,9 +257,11 @@ export type ServerMessage =
   | {
       type: "realm-joined";
       requestId: number;
+      worldId: string;
       cameraX: number;
       cameraY: number;
       cameraZoom: number;
     }
   | { type: "realm-left"; requestId: number }
-  | { type: "realm-player-count"; worldId: string; count: number };
+  | { type: "realm-player-count"; worldId: string; count: number }
+  | { type: "chat"; sender: string; text: string };

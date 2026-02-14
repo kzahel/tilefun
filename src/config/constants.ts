@@ -29,7 +29,7 @@ export const PLAYER_SPRINT_MULTIPLIER = 2;
 export const CAMERA_LERP = 0.1;
 
 /** Size of each frame in the character spritesheet (pixels). */
-export const PLAYER_SPRITE_SIZE = 48;
+export const PLAYER_SPRITE_SIZE = 16;
 
 /** Duration of each walk animation frame (milliseconds). */
 export const PLAYER_FRAME_DURATION = 150;

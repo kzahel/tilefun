@@ -21,6 +21,8 @@ export function tickAllAI(
   const buddies = entities.filter((e) => e.wanderAI?.following);
   for (const entity of entities) {
     if (!entity.wanderAI) continue;
+    // Skip ridden entities — their velocity is controlled by the rider's input
+    if (entity.wanderAI.state === "ridden") continue;
     const dt = entityTickDts.get(entity);
     if (dt === undefined) {
       // Frozen: zero velocity so entity stops

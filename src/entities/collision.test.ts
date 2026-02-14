@@ -127,8 +127,8 @@ describe("resolveCollision", () => {
 
   it("blocks X movement and allows Y when X is blocked", () => {
     const entity = makeEntity(100, 100);
-    // Place water wall to the right: tile at tx=7, ty=5 (player AABB is ~16px above feet)
-    const check = makeCollisionGrid({ "7,5": CollisionFlag.Water });
+    // Place water wall to the right: tile at tx=7, ty=6 (player AABB is ~3px above feet)
+    const check = makeCollisionGrid({ "7,6": CollisionFlag.Water });
     const blocked = resolveCollision(
       entity,
       20,
@@ -143,8 +143,8 @@ describe("resolveCollision", () => {
 
   it("blocks Y movement and allows X when Y is blocked", () => {
     const entity = makeEntity(100, 100);
-    // Place water below at ty=6 (collider offsetY=-16 shifts AABB up)
-    const check = makeCollisionGrid({ "6,6": CollisionFlag.Water });
+    // Place water below at ty=7 (collider offsetY=-3 keeps AABB near feet)
+    const check = makeCollisionGrid({ "6,7": CollisionFlag.Water });
     const blocked = resolveCollision(
       entity,
       5,

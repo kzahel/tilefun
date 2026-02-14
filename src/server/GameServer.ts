@@ -164,6 +164,7 @@ export class GameServer {
           });
           this.transport.send(clientId, {
             type: "world-loaded",
+            ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: existingSession.cameraX,
             cameraY: existingSession.cameraY,
             cameraZoom: existingSession.cameraZoom,
@@ -198,6 +199,7 @@ export class GameServer {
           });
           this.transport.send(clientId, {
             type: "world-loaded",
+            ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: session.cameraX,
             cameraY: session.cameraY,
             cameraZoom: session.cameraZoom,
@@ -220,7 +222,7 @@ export class GameServer {
       if (!session) return;
 
       // Zero velocity so the dormant player entity doesn't drift
-      if (session.player.velocity) {
+      if (session.player?.velocity) {
         session.player.velocity.vx = 0;
         session.player.velocity.vy = 0;
       }
@@ -425,6 +427,7 @@ export class GameServer {
           });
           this.transport.send(session.clientId, {
             type: "world-loaded",
+            worldId: this.defaultRealmId,
             cameraX: session.cameraX,
             cameraY: session.cameraY,
             cameraZoom: session.cameraZoom,
@@ -475,6 +478,15 @@ export class GameServer {
     }
   }
 
+  /** Broadcast a chat message to all connected (non-dormant) clients. */
+  broadcastChat(sender: string, text: string): void {
+    const dormantIds = new Set(this.dormantSessions.keys());
+    for (const [cid] of this.sessions) {
+      if (dormantIds.has(cid)) continue;
+      this.transport.send(cid, { type: "chat", sender, text });
+    }
+  }
+
   flush(): void {
     for (const realm of this.realms.values()) {
       realm.flush();
@@ -516,6 +528,7 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "world-loaded",
             requestId: msg.requestId,
+            worldId: msg.worldId,
             cameraX: cam.cameraX,
             cameraY: cam.cameraY,
             cameraZoom: cam.cameraZoom,
@@ -549,6 +562,7 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "realm-joined",
             requestId: msg.requestId,
+            worldId: msg.worldId,
             cameraX: cam.cameraX,
             cameraY: cam.cameraY,
             cameraZoom: cam.cameraZoom,
@@ -617,7 +631,9 @@ export class GameServer {
       case "rcon": {
         const output: string[] = [];
         if (this.serverConsole) {
+          this.serverConsole.rconSenderName = session.displayName || clientId;
           const lines = this.serverConsole.execServer(msg.command);
+          this.serverConsole.rconSenderName = null;
           output.push(...lines);
         } else {
           output.push("Server console not initialized");

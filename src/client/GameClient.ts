@@ -29,6 +29,7 @@ import { PlayScene } from "../scenes/PlayScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
+import { ChatHUD } from "../ui/ChatHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { World } from "../world/World.js";
 import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
@@ -39,6 +40,9 @@ export interface GameClientOptions {
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
   };
+  roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
+  /** When true, auto-join the first active realm instead of showing the realm list. */
+  autoJoinRealm?: boolean;
 }
 
 export class GameClient {
@@ -60,10 +64,12 @@ export class GameClient {
   private transport: IClientTransport;
   private server: GameServer | null;
   private serialized: boolean;
+  private autoJoinRealm: boolean;
   private scenes: SceneManager;
   private time: Time;
   private consoleEngine: ConsoleEngine;
   private consoleUI: ConsoleUI;
+  private chatHUD: ChatHUD;
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
@@ -101,6 +107,7 @@ export class GameClient {
     this.transport = transport;
     this.server = server;
     this.serialized = options?.mode === "serialized";
+    this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
@@ -112,6 +119,7 @@ export class GameClient {
     this.editorPanel = new EditorPanel();
     this.editorPanel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
+    this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
     this.editorPanel.onOpenCatalog = () => this.scenes.push(new CatalogScene());
     this.propCatalog.onSelect = (propType: string) => {
@@ -132,6 +140,7 @@ export class GameClient {
       return resp.output;
     };
     this.consoleUI = new ConsoleUI(this.consoleEngine);
+    this.chatHUD = new ChatHUD();
 
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
@@ -151,6 +160,9 @@ export class GameClient {
           console.log(
             `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${!!remoteView["_predictor"]?.player}, editorEnabled=${remoteView.editorEnabled}`,
           );
+          if (msg.worldId) {
+            this.mainMenu.currentWorldId = msg.worldId;
+          }
           remoteView.clear();
           this.camera.x = msg.cameraX;
           this.camera.y = msg.cameraY;
@@ -158,7 +170,16 @@ export class GameClient {
           this.gcSendVisibleRange();
           this.lobbyRealmList = null;
         } else if (msg.type === "realm-list") {
-          if (this.initDone) {
+          if (this.autoJoinRealm && msg.realms.length > 0) {
+            // P2P guest: auto-join the most active realm (skip menu)
+            const target = msg.realms.find((r) => r.playerCount > 0) ?? msg.realms[0]!;
+            this.autoJoinRealm = false; // only auto-join once
+            this.gcSendRequest({
+              type: "join-realm",
+              requestId: this.nextRequestId++,
+              worldId: target.id,
+            });
+          } else if (this.initDone) {
             // Show realm browser immediately
             if (!this.scenes.has(MenuScene)) {
               this.scenes.push(new MenuScene(msg.realms));
@@ -184,6 +205,9 @@ export class GameClient {
           return;
         } else if (msg.type === "player-assigned") {
           console.log(`[tilefun] Player entity assigned: ${msg.entityId}`);
+        } else if (msg.type === "chat") {
+          this.consoleEngine.output.printInfo(`[${msg.sender}] ${msg.text}`);
+          this.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
         }
 
         // Resolve pending request/response promises
@@ -296,6 +320,7 @@ export class GameClient {
         });
       } else {
         this.localServer.loadWorld(id).then((cam) => {
+          this.mainMenu.currentWorldId = id;
           this.camera.x = cam.cameraX;
           this.camera.y = cam.cameraY;
           this.camera.zoom = cam.cameraZoom;
@@ -327,6 +352,7 @@ export class GameClient {
       } else {
         this.localServer.createWorld(name, worldType, seed).then((meta) => {
           this.localServer.loadWorld(meta.id).then((cam) => {
+            this.mainMenu.currentWorldId = meta.id;
             this.camera.x = cam.cameraX;
             this.camera.y = cam.cameraY;
             this.camera.zoom = cam.cameraZoom;
@@ -389,6 +415,11 @@ export class GameClient {
 
     this.loop.start();
     this.canvas.dataset.ready = "true";
+  }
+
+  /** Set hosting info to display in the main menu (when this client is hosting P2P). */
+  setHostingInfo(info: import("../ui/HostingBanner.js").HostingInfo): void {
+    this.mainMenu.hostingInfo = info;
   }
 
   destroy(): void {
@@ -523,6 +554,7 @@ export class GameClient {
       touchJoystick: this.touchJoystick,
       console: this.consoleEngine,
       consoleUI: this.consoleUI,
+      chatHUD: this.chatHUD,
       server: this.server,
       serialized: this.serialized,
       scenes: this.scenes,
@@ -563,7 +595,7 @@ export class GameClient {
 
     const wrap = document.createElement("div");
     wrap.style.cssText =
-      "position: fixed; top: 8px; left: 8px; z-index: 100; display: flex; gap: 6px;";
+      "position: fixed; bottom: 8px; left: 8px; z-index: 100; display: flex; gap: 6px;";
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Play";
@@ -585,6 +617,14 @@ export class GameClient {
     });
     wrap.append(editBtn, menuBtn, debugBtn);
     document.body.appendChild(wrap);
+
+    // Keep buttons above the editor panel when it's visible
+    const panelEl = this.editorPanel.el;
+    const updateBottom = () => {
+      const panelH = panelEl.offsetHeight;
+      wrap.style.bottom = panelH > 0 ? `${panelH + 8}px` : "8px";
+    };
+    new ResizeObserver(updateBottom).observe(panelEl);
   }
 
   private resize(): void {

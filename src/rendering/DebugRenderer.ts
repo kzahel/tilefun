@@ -36,14 +36,16 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
   const lineHeight = 16;
   const panelW = 340;
   const panelH = lines.length * lineHeight + 8;
+  // Start below the HTML button bar (top: 8px + ~38px button height + gap)
+  const panelY = 50;
 
   ctx.save();
   ctx.font = "13px monospace";
   ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-  ctx.fillRect(4, 4, panelW, panelH);
+  ctx.fillRect(4, panelY, panelW, panelH);
   ctx.fillStyle = "#00ff00";
   for (let i = 0; i < lines.length; i++) {
-    ctx.fillText(lines[i] ?? "", 10, 18 + i * lineHeight);
+    ctx.fillText(lines[i] ?? "", 10, panelY + 14 + i * lineHeight);
   }
   ctx.restore();
 }

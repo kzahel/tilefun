@@ -18,6 +18,9 @@ export class ConsoleEngine {
    */
   rconSend: ((command: string) => Promise<string[]>) | null = null;
 
+  /** Set by the rcon handler before execServer() so commands can identify the caller. */
+  rconSenderName: string | null = null;
+
   constructor() {
     this.registerBuiltins();
   }
@@ -35,8 +38,25 @@ export class ConsoleEngine {
 
     this.output.print(`] ${trimmed}`);
 
+    // Bare text (no / prefix) → chat
+    if (!trimmed.startsWith("/")) {
+      if (this.rconSend) {
+        this.rconSend(`say ${trimmed}`)
+          .then((lines) => {
+            for (const line of lines) this.output.print(line);
+          })
+          .catch((e) => {
+            this.output.printError(`chat error: ${e instanceof Error ? e.message : String(e)}`);
+          });
+      } else {
+        this.output.printError("Not connected");
+      }
+      return;
+    }
+
+    // /prefixed → command or cvar
     const tokens = tokenize(trimmed);
-    const name = tokens[0]!.toLowerCase();
+    const name = stripSlash(tokens[0]!.toLowerCase());
     const args = tokens.slice(1);
 
     // Check if it's a cvar get/set
@@ -55,7 +75,7 @@ export class ConsoleEngine {
     const cmd = this.commands.get(name);
     if (cmd) {
       if (cmd.serverSide && this.rconSend) {
-        this.rconSend(trimmed)
+        this.rconSend(trimmed.slice(1))
           .then((lines) => {
             for (const line of lines) this.output.print(line);
           })
@@ -81,7 +101,7 @@ export class ConsoleEngine {
     if (!trimmed) return lines;
 
     const tokens = tokenize(trimmed);
-    const name = tokens[0]!.toLowerCase();
+    const name = stripSlash(tokens[0]!.toLowerCase());
     const args = tokens.slice(1);
 
     const cv = this.cvars.get(name);
@@ -107,14 +127,14 @@ export class ConsoleEngine {
 
     // Completing the command/cvar name
     if (tokens.length <= 1) {
-      const prefix = (tokens[0] ?? "").toLowerCase();
+      const prefix = stripSlash((tokens[0] ?? "").toLowerCase());
       const cvarMatches = this.cvars.getNames().filter((n) => n.startsWith(prefix));
       const cmdMatches = this.commands.getCompletions(prefix);
       return [...new Set([...cmdMatches, ...cvarMatches])].sort();
     }
 
     // Completing an argument
-    const cmdName = tokens[0]!.toLowerCase();
+    const cmdName = stripSlash(tokens[0]!.toLowerCase());
     const argIndex = tokens.length - 2; // -1 for cmd name, -1 for current partial
     const argPartial = tokens[tokens.length - 1] ?? "";
     return this.commands.getArgCompletions(cmdName, argIndex, argPartial);
@@ -272,6 +292,11 @@ export class ConsoleEngine {
       },
     });
   }
+}
+
+/** Strip an optional leading '/' so `/say` is treated the same as `say`. */
+function stripSlash(name: string): string {
+  return name.startsWith("/") ? name.slice(1) : name;
 }
 
 function tokenize(input: string): string[] {

@@ -118,22 +118,31 @@ export class PlayScene implements GameScene {
           const serverPlayer = remoteView.serverPlayerEntity;
           if (serverPlayer.id !== -1) {
             if (!this.predictor.player) {
+              const serverMount =
+                remoteView.mountEntityId !== undefined
+                  ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
+                  : undefined;
               console.log(
                 `[tilefun:play] predictor.reset — serverPlayer.id=${serverPlayer.id}, pos=(${serverPlayer.position.wx.toFixed(1)}, ${serverPlayer.position.wy.toFixed(1)})`,
               );
-              this.predictor.reset(serverPlayer);
+              this.predictor.reset(serverPlayer, serverMount);
             } else if (this.predictor.player.id !== serverPlayer.id) {
+              const serverMount =
+                remoteView.mountEntityId !== undefined
+                  ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
+                  : undefined;
               console.log(
                 `[tilefun:play] predictor entity ID mismatch: predicted=${this.predictor.player.id} server=${serverPlayer.id} — forcing reset`,
               );
-              this.predictor.reset(serverPlayer);
+              this.predictor.reset(serverPlayer, serverMount);
             } else {
               this.predictor.reconcile(
                 serverPlayer,
                 remoteView.lastProcessedInputSeq,
                 gc.stateView.world,
                 gc.stateView.props,
-                gc.stateView.entities,
+                remoteView.serverEntities,
+                remoteView.mountEntityId,
               );
             }
           }
@@ -198,6 +207,7 @@ export class PlayScene implements GameScene {
     this.prevInvincibilityTimer = invTimer;
 
     gc.camera.updateShake();
+    gc.chatHUD.update(dt);
   }
 
   render(alpha: number, gc: GameContext): void {
@@ -240,6 +250,7 @@ export class PlayScene implements GameScene {
     drawGrassBlades(gc);
     renderEntities(gc, alpha);
     drawGemHUD(gc);
+    gc.chatHUD.render(gc.ctx);
     renderDebugOverlay(gc);
     gc.touchJoystick.draw(gc.ctx);
     gc.camera.restoreActual();

@@ -32,7 +32,7 @@ describe("double-gems mod", () => {
     const teardownDouble = doubleGemsMod.register(api);
 
     // Player at (50,50), gem at (50,31) — overlapping
-    api.entities.spawn("gem", 50, 31);
+    api.entities.spawn("gem", 50, 47);
     api.overlap.tick();
 
     // Base game gives 1, double-gems gives another 1 = 2 total
@@ -48,7 +48,7 @@ describe("double-gems mod", () => {
     const teardownDouble = doubleGemsMod.register(api);
     teardownDouble();
 
-    api.entities.spawn("gem", 50, 31);
+    api.entities.spawn("gem", 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.gemsCollected).toBe(1);
@@ -61,7 +61,7 @@ describe("double-gems mod", () => {
     const teardownBase = baseGameMod.register(api);
     const teardownDouble = doubleGemsMod.register(api);
 
-    const gem = api.entities.spawn("gem", 50, 31);
+    const gem = api.entities.spawn("gem", 50, 47);
     gem?.setAttribute("gemValue", 5);
     api.overlap.tick();
 

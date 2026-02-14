@@ -182,6 +182,23 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
       }
     },
   });
+  engine.commands.register({
+    name: "say",
+    description: "Broadcast a chat message to all players",
+    args: [{ name: "message", type: "string", rest: true }],
+    category: "sv",
+    serverSide: true,
+    execute: (args, out) => {
+      const text = args.message as string;
+      if (!text) {
+        out("Usage: say <message>");
+        return;
+      }
+      const sender = engine.rconSenderName ?? "Server";
+      server.broadcastChat(sender, text);
+      out(`[${sender}] ${text}`);
+    },
+  });
 }
 
 function getFirstSession(server: GameServer) {

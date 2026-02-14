@@ -98,6 +98,52 @@ export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): 
     },
   });
 
+  // ── Room directory commands ──
+
+  engine.commands.register({
+    name: "rooms",
+    description: "List public games from the room directory",
+    args: [],
+    category: "cl",
+    execute: (_args, out) => {
+      const dir = gc.mainMenu.roomDirectory;
+      if (!dir) {
+        out("Room directory not available");
+        return;
+      }
+      out("Fetching public rooms...");
+      dir.listRooms().then((rooms) => {
+        if (rooms.length === 0) {
+          out("No public games found");
+          return;
+        }
+        for (const room of rooms) {
+          out(
+            `  ${room.name} — ${room.hostName} (${room.playerCount} player${room.playerCount !== 1 ? "s" : ""}) [${room.peerId}]`,
+          );
+        }
+        out(`${rooms.length} public game${rooms.length !== 1 ? "s" : ""}`);
+      });
+    },
+  });
+
+  engine.commands.register({
+    name: "join",
+    description: "Join a public game by peer ID",
+    args: [{ name: "peerId", type: "string" }],
+    category: "cl",
+    execute: (args, out) => {
+      const peerId = args.peerId as string;
+      out(`Joining ${peerId}...`);
+      const url = new URL(window.location.href);
+      url.searchParams.delete("host");
+      url.searchParams.delete("multiplayer");
+      url.searchParams.delete("server");
+      url.searchParams.set("join", peerId);
+      window.location.href = url.toString();
+    },
+  });
+
   // Register fun cvars used by commands above
   engine.cvars.register<boolean>({
     name: "invisibility",

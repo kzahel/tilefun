@@ -10,6 +10,8 @@ export interface GameplaySession {
   invincibilityTimer: number;
   knockbackVx: number;
   knockbackVy: number;
+  /** Entity ID of the mount the player is riding, or null. */
+  mountId: number | null;
 }
 
 export class PlayerSession {
@@ -69,6 +71,7 @@ export class PlayerSession {
         invincibilityTimer: 0,
         knockbackVx: 0,
         knockbackVy: 0,
+        mountId: null,
       };
     }
   }

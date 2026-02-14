@@ -38,7 +38,7 @@ describe("baddie contact", () => {
     const { api, session } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    api.entities.spawn("ghost-angry", 50, 31);
+    api.entities.spawn("ghost-angry", 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.invincibilityTimer).toBe(1.5);
@@ -54,7 +54,7 @@ describe("baddie contact", () => {
     const teardown = baseGameMod.register(api);
 
     session.gameplaySession.gemsCollected = 5;
-    api.entities.spawn("ghost-angry", 50, 31);
+    api.entities.spawn("ghost-angry", 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.gemsCollected).toBe(2);
@@ -70,7 +70,7 @@ describe("baddie contact", () => {
 
     session.gameplaySession.invincibilityTimer = 1.0;
     session.gameplaySession.gemsCollected = 5;
-    api.entities.spawn("ghost-angry", 50, 31);
+    api.entities.spawn("ghost-angry", 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.gemsCollected).toBe(5);
@@ -82,7 +82,7 @@ describe("baddie contact", () => {
     const { api } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    api.entities.spawn("ghost-angry", 50, 31);
+    api.entities.spawn("ghost-angry", 50, 47);
 
     let emitted: unknown = null;
     api.events.on("player-hit", (data) => {
@@ -478,7 +478,7 @@ describe("gem collector", () => {
     const { api, session } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    const gem = spawnGem(api, 50, 31);
+    const gem = spawnGem(api, 50, 47);
 
     expect(session.gameplaySession.gemsCollected).toBe(0);
     api.overlap.tick();
@@ -494,7 +494,7 @@ describe("gem collector", () => {
     const teardown = baseGameMod.register(api);
 
     session.gameplaySession.invincibilityTimer = 1.0;
-    const gem = spawnGem(api, 50, 31);
+    const gem = spawnGem(api, 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.gemsCollected).toBe(0);
@@ -507,7 +507,7 @@ describe("gem collector", () => {
     const { api, session } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    const gem = spawnGem(api, 50, 31);
+    const gem = spawnGem(api, 50, 47);
     gem.setAttribute("gemValue", 5);
     api.overlap.tick();
 
@@ -520,7 +520,7 @@ describe("gem collector", () => {
     const { api, session } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    spawnGem(api, 50, 31);
+    spawnGem(api, 50, 47);
     api.overlap.tick();
 
     expect(session.gameplaySession.gemsCollected).toBe(1);
@@ -532,7 +532,7 @@ describe("gem collector", () => {
     const { api } = createTestEnv();
     const teardown = baseGameMod.register(api);
 
-    spawnGem(api, 50, 31);
+    spawnGem(api, 50, 47);
 
     let emitted: unknown = null;
     api.events.on("item-collected", (data) => {
@@ -633,7 +633,7 @@ describe("teardown", () => {
     teardown();
 
     // Baddie contact should not trigger
-    api.entities.spawn("ghost-angry", 50, 31);
+    api.entities.spawn("ghost-angry", 50, 47);
     api.overlap.tick();
     expect(session.gameplaySession.invincibilityTimer).toBe(0);
 
@@ -643,7 +643,7 @@ describe("teardown", () => {
     expect(session.gameplaySession.invincibilityTimer).toBe(1.0);
 
     // Gem collection should not trigger
-    spawnGem(api, 50, 31);
+    spawnGem(api, 50, 47);
     api.overlap.tick();
     expect(session.gameplaySession.gemsCollected).toBe(0);
   });

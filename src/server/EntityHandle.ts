@@ -133,13 +133,33 @@ export class EntityHandle {
     return result;
   }
 
+  // --- Parent-child ---
+
+  get parentId(): number | undefined {
+    return this.entity.parentId;
+  }
+
+  setParent(parentId: number, offsetX = 0, offsetY = 0): void {
+    if (!this.alive) return;
+    this.entity.parentId = parentId;
+    this.entity.localOffsetX = offsetX;
+    this.entity.localOffsetY = offsetY;
+  }
+
+  clearParent(): void {
+    if (!this.alive) return;
+    delete this.entity.parentId;
+    delete this.entity.localOffsetX;
+    delete this.entity.localOffsetY;
+  }
+
   // --- AI ---
 
-  get aiState(): "idle" | "walking" | "chasing" | "following" | null {
+  get aiState(): "idle" | "walking" | "chasing" | "following" | "ridden" | null {
     return this.entity.wanderAI?.state ?? null;
   }
 
-  setAIState(state: "idle" | "walking" | "chasing" | "following"): void {
+  setAIState(state: "idle" | "walking" | "chasing" | "following" | "ridden"): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.state = state;
   }
@@ -249,5 +269,45 @@ export class PlayerHandle extends EntityHandle {
     const dist = Math.sqrt(dx * dx + dy * dy) || 1;
     this.session.knockbackVx = (dx / dist) * speed;
     this.session.knockbackVy = (dy / dist) * speed;
+  }
+
+  // --- Riding ---
+
+  get mountId(): number | null {
+    return this.session.mountId;
+  }
+
+  mount(target: EntityHandle): void {
+    if (!this.alive) return;
+    this.entity.parentId = target.id;
+    this.entity.localOffsetX = 0;
+    this.entity.localOffsetY = 0;
+    this.entity.jumpZ = 10;
+    delete this.entity.jumpVZ;
+    this.entity.noShadow = true;
+    this.session.mountId = target.id;
+    if (target.aiState !== null) target.setAIState("ridden");
+    target.setFollowing(false);
+    this.setVelocity(0, 0);
+  }
+
+  dismount(): void {
+    if (!this.alive || this.session.mountId === null) return;
+    const mountEntity = this.entityManager.entities.find((e) => e.id === this.session.mountId);
+    delete this.entity.parentId;
+    delete this.entity.localOffsetX;
+    delete this.entity.localOffsetY;
+    delete this.entity.noShadow;
+    this.session.mountId = null;
+    if (mountEntity) {
+      if (mountEntity.wanderAI) {
+        mountEntity.wanderAI.state = "idle";
+        mountEntity.wanderAI.timer = 1.0;
+      }
+      if (mountEntity.velocity) {
+        mountEntity.velocity.vx = 0;
+        mountEntity.velocity.vy = 0;
+      }
+    }
   }
 }

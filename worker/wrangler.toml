@@ -1,0 +1,8 @@
+name = "tilefun-rooms"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[[kv_namespaces]]
+binding = "ROOMS"
+id = "645981acf085415c9cea835bd9aa2050"
+preview_id = "3db0b733862049f6aff409ea18d506ec"

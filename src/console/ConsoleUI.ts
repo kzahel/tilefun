@@ -224,8 +224,13 @@ export class ConsoleUI {
 
   private applyCompletion(value: string): void {
     const tokens = this.inputEl.value.split(" ");
-    tokens[tokens.length - 1] = value;
-    this.inputEl.value = tokens.join(" ") + (tokens.length === 1 ? " " : "");
+    if (tokens.length === 1) {
+      // Completing command name — prefix with / to distinguish from chat
+      this.inputEl.value = `/${value} `;
+    } else {
+      tokens[tokens.length - 1] = value;
+      this.inputEl.value = tokens.join(" ");
+    }
   }
 
   private showCompletions(): void {

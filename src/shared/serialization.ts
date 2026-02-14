@@ -46,6 +46,7 @@ function serializeWanderAI(
   if (ai.followDistance !== undefined) result.followDistance = ai.followDistance;
   if (ai.followLeash !== undefined) result.followLeash = ai.followLeash;
   if (ai.befriendable !== undefined) result.befriendable = ai.befriendable;
+  if (ai.rideSpeed !== undefined) result.rideSpeed = ai.rideSpeed;
   return result;
 }
 
@@ -79,6 +80,9 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.deathTimer !== undefined) result.deathTimer = e.deathTimer;
   if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
+  if (e.parentId !== undefined) result.parentId = e.parentId;
+  if (e.localOffsetX !== undefined) result.localOffsetX = e.localOffsetX;
+  if (e.localOffsetY !== undefined) result.localOffsetY = e.localOffsetY;
   return result;
 }
 
@@ -112,6 +116,9 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.deathTimer !== undefined) result.deathTimer = s.deathTimer;
   if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
+  if (s.parentId !== undefined) result.parentId = s.parentId;
+  if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
+  if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
   return result;
 }
 
@@ -133,7 +140,7 @@ function deserializeWanderAI(
   ai: NonNullable<EntitySnapshot["wanderAI"]>,
 ): NonNullable<Entity["wanderAI"]> {
   const result: NonNullable<Entity["wanderAI"]> = {
-    state: ai.state as "idle" | "walking" | "chasing" | "following",
+    state: ai.state as "idle" | "walking" | "chasing" | "following" | "ridden",
     timer: ai.timer,
     dirX: ai.dirX,
     dirY: ai.dirY,
@@ -151,6 +158,7 @@ function deserializeWanderAI(
   if (ai.followDistance !== undefined) result.followDistance = ai.followDistance;
   if (ai.followLeash !== undefined) result.followLeash = ai.followLeash;
   if (ai.befriendable !== undefined) result.befriendable = ai.befriendable;
+  if (ai.rideSpeed !== undefined) result.rideSpeed = ai.rideSpeed;
   return result;
 }
 

@@ -24,15 +24,17 @@ export class PeerHostTransport {
   private remoteClients = new Map<string, DataConnection>();
   private closed = false;
 
-  constructor() {
-    this.peer = new Peer({
+  constructor(peerId?: string) {
+    const opts = {
+      debug: 0 as const,
       config: {
         iceServers: [
           { urls: "stun:stun.l.google.com:19302" },
           { urls: "stun:stun1.l.google.com:19302" },
         ],
       },
-    });
+    };
+    this.peer = peerId ? new Peer(peerId, opts) : new Peer(opts);
 
     const self = this;
 
@@ -94,9 +96,24 @@ export class PeerHostTransport {
       },
     };
 
+    this.peer.on("open", (id) => {
+      console.log(
+        `[tilefun] P2P host peer open: ${id}, server: ${this.peer.options.host}:${this.peer.options.port}${this.peer.options.path}`,
+      );
+    });
+
     // Handle incoming PeerJS connections from guests
     this.peer.on("connection", (conn) => {
+      console.log(
+        `[tilefun] P2P host: incoming connection from ${conn.peer}, serialization: ${conn.serialization}, metadata:`,
+        conn.metadata,
+      );
       this.handleConnection(conn);
+    });
+
+    this.peer.on("disconnected", () => {
+      console.warn("[tilefun] P2P host disconnected from signaling server — attempting reconnect");
+      this.peer.reconnect();
     });
 
     this.peer.on("error", (err) => {
@@ -118,6 +135,11 @@ export class PeerHostTransport {
   /** Fire the connect event for the local host client (like SerializingTransport.triggerConnect). */
   triggerConnect(): void {
     this.connectHandler?.(LOCAL_CLIENT_ID);
+  }
+
+  /** Total player count (remote guests + local host). */
+  get playerCount(): number {
+    return this.remoteClients.size + 1;
   }
 
   private handleConnection(conn: DataConnection): void {

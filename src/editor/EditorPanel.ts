@@ -115,6 +115,7 @@ const ELEVATION_GRID_SIZES = [1, 2, 3, 4] as const;
 const ELEVATION_COLORS = ["#888", "#9a6", "#c84", "#e44"];
 
 export class EditorPanel {
+  readonly el: HTMLDivElement;
   private readonly container: HTMLDivElement;
   private readonly collapseArrow: HTMLButtonElement;
   /** Called when the user taps the collapse arrow to exit editor mode. */
@@ -168,6 +169,7 @@ export class EditorPanel {
 
   constructor() {
     this.container = document.createElement("div");
+    this.el = this.container;
     this.container.style.cssText = PANEL_STYLE;
     this.container.style.display = "none";
 

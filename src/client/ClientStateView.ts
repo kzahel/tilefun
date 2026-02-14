@@ -86,6 +86,7 @@ export class RemoteStateView implements ClientStateView {
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
   private _lastProcessedInputSeq = 0;
+  private _mountEntityId: number | undefined = undefined;
 
   constructor(world: World) {
     this._world = world;
@@ -185,6 +186,7 @@ export class RemoteStateView implements ClientStateView {
     this._playerNames = msg.playerNames;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
+    this._mountEntityId = msg.mountEntityId;
 
     // Apply chunk updates (delta — only new/changed chunks)
     for (const cs of msg.chunkUpdates) {
@@ -229,8 +231,17 @@ export class RemoteStateView implements ClientStateView {
   get entities(): readonly Entity[] {
     if (!this._predictor?.player) return this._entities;
     const predicted = this._predictor.player;
+    const predictedMount = this._predictor.mount;
     const playerId = this._playerEntityId;
-    return this._entities.map((e) => (e.id === playerId ? predicted : e));
+    const mountId = predictedMount?.id ?? -1;
+    return this._entities.map((e) => {
+      if (e.id === playerId) return predicted;
+      if (e.id === mountId && predictedMount) {
+        predictedMount.prevPosition = this._predictor!.mountPrevPosition;
+        return predictedMount;
+      }
+      return e;
+    });
   }
   get props(): readonly Prop[] {
     return this._props;
@@ -253,5 +264,14 @@ export class RemoteStateView implements ClientStateView {
   }
   get playerNames(): Record<number, string> {
     return this._playerNames;
+  }
+  /** Mount entity ID from the latest server state (undefined when not riding). */
+  get mountEntityId(): number | undefined {
+    return this._mountEntityId;
+  }
+
+  /** Raw server entities (not replaced by predictor). Used for reconciliation. */
+  get serverEntities(): readonly Entity[] {
+    return this._entities;
   }
 }

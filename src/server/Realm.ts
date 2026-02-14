@@ -4,6 +4,8 @@ import {
   CHUNK_SIZE_PX,
   JUMP_GRAVITY,
   JUMP_VELOCITY,
+  PLAYER_SPEED,
+  PLAYER_SPRINT_MULTIPLIER,
   RENDER_DISTANCE,
   TICK_RATE,
 } from "../config/constants.js";
@@ -13,13 +15,14 @@ import {
   type AABB,
   aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
+  aabbsOverlap,
   getEntityAABB,
   getEntityElevation,
   getSpeedMultiplier,
   isElevationBlocked,
   resolveCollision,
 } from "../entities/collision.js";
-import type { ColliderComponent, Entity } from "../entities/Entity.js";
+import { type ColliderComponent, Direction, type Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
@@ -139,6 +142,7 @@ export class Realm {
       invincibilityTimer: 0,
       knockbackVx: 0,
       knockbackVy: 0,
+      mountId: null,
     };
     session.cameraX = camX;
     session.cameraY = camY;
@@ -174,6 +178,11 @@ export class Realm {
   removePlayer(clientId: string): void {
     const session = this.sessions.get(clientId);
     if (!session) return;
+
+    // Auto-dismount before removing player
+    if (session.gameplaySession.mountId !== null) {
+      this.dismountPlayer(session);
+    }
 
     // Persist per-player data before removing
     this.savePlayerData(session);
@@ -225,16 +234,37 @@ export class Realm {
     // This must happen before physics so EntityManager sees correct velocities.
     for (const session of this.sessions.values()) {
       if (dormantClientIds.has(session.clientId)) continue;
+
+      // ── Mount bookkeeping: auto-dismount if mount entity was removed ──
+      if (session.gameplaySession.mountId !== null) {
+        const mount = this.entityManager.entities.find(
+          (e) => e.id === session.gameplaySession.mountId,
+        );
+        if (!mount) this.dismountPlayer(session);
+      }
+
       if (!session.editorEnabled && session.inputQueue.length > 0) {
         const inputs = session.inputQueue;
         session.inputQueue = [];
         const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
         const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
+        // Resolve mount entity for input redirection
+        const mount =
+          session.gameplaySession.mountId !== null
+            ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
+              null)
+            : null;
+
+        // The entity that receives movement input (mount when riding, player otherwise)
+        const movementTarget = mount ?? session.player;
+
         // Extra blocker for simplified collision — props + solid entities + elevation.
         // Matches makeExtraBlocker in EntityManager but without push mechanics.
         const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
-        const playerExclude = new Set([session.player.id]);
+        const targetExclude = mount
+          ? new Set([session.player.id, mount.id])
+          : new Set([session.player.id]);
         const extraBlocker = (aabb: AABB): boolean => {
           const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
           const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
@@ -243,11 +273,11 @@ export class Realm {
           for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
             if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
           }
-          const currentElev = getEntityElevation(session.player, getHeight);
-          if (isElevationBlocked(aabb, currentElev, session.player.jumpZ ?? 0, getHeight))
+          const currentElev = getEntityElevation(movementTarget, getHeight);
+          if (isElevationBlocked(aabb, currentElev, movementTarget.jumpZ ?? 0, getHeight))
             return true;
           const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-          return aabbOverlapsAnyEntity(aabb, playerExclude, nearby);
+          return aabbOverlapsAnyEntity(aabb, targetExclude, nearby);
         };
 
         // Process extra inputs (all but last) with simplified collision.
@@ -256,19 +286,30 @@ export class Realm {
         // diverges, causing visible jitter.
         for (let i = 0; i < inputs.length - 1; i++) {
           const input = inputs[i]!;
-          updatePlayerFromInput(session.player, input, dt);
-          if (input.jump && !(session.player.jumpZ ?? 0)) {
-            session.player.jumpZ = 0.01;
-            session.player.jumpVZ = JUMP_VELOCITY;
+
+          if (mount) {
+            // Riding: jump = dismount
+            if (input.jump) {
+              this.dismountPlayer(session);
+              break; // Remaining inputs processed as normal player next tick
+            }
+            this.applyMountInput(mount, input);
+          } else {
+            updatePlayerFromInput(session.player, input, dt);
+            if (input.jump && !(session.player.jumpZ ?? 0)) {
+              session.player.jumpZ = 0.01;
+              session.player.jumpVZ = JUMP_VELOCITY;
+            }
           }
-          if (session.player.velocity && session.player.collider && !session.debugNoclip) {
-            const speedMult = getSpeedMultiplier(session.player.position, getCollision);
-            const pdx = session.player.velocity.vx * dt * speedMult;
-            const pdy = session.player.velocity.vy * dt * speedMult;
-            resolveCollision(session.player, pdx, pdy, getCollision, blockMask, extraBlocker);
-          } else if (session.player.velocity) {
-            session.player.position.wx += session.player.velocity.vx * dt;
-            session.player.position.wy += session.player.velocity.vy * dt;
+
+          if (movementTarget.velocity && movementTarget.collider && !session.debugNoclip) {
+            const speedMult = getSpeedMultiplier(movementTarget.position, getCollision);
+            const pdx = movementTarget.velocity.vx * dt * speedMult;
+            const pdy = movementTarget.velocity.vy * dt * speedMult;
+            resolveCollision(movementTarget, pdx, pdy, getCollision, blockMask, extraBlocker);
+          } else if (movementTarget.velocity) {
+            movementTarget.position.wx += movementTarget.velocity.vx * dt;
+            movementTarget.position.wy += movementTarget.velocity.vy * dt;
           }
           session.lastProcessedInputSeq = input.seq;
         }
@@ -276,10 +317,29 @@ export class Realm {
         // Last input goes through normal path (EntityManager handles movement
         // including push mechanics, entity-entity collision, etc.)
         const lastInput = inputs[inputs.length - 1]!;
-        updatePlayerFromInput(session.player, lastInput, dt);
-        if (lastInput.jump && !(session.player.jumpZ ?? 0)) {
-          session.player.jumpZ = 0.01;
-          session.player.jumpVZ = JUMP_VELOCITY;
+        // Re-resolve mount (may have dismounted during extra inputs above)
+        const currentMount =
+          session.gameplaySession.mountId !== null
+            ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
+              null)
+            : null;
+        if (currentMount) {
+          if (lastInput.jump) {
+            this.dismountPlayer(session);
+          } else {
+            this.applyMountInput(currentMount, lastInput);
+            // Zero player velocity — position derived from parent resolution
+            if (session.player.velocity) {
+              session.player.velocity.vx = 0;
+              session.player.velocity.vy = 0;
+            }
+          }
+        } else {
+          updatePlayerFromInput(session.player, lastInput, dt);
+          if (lastInput.jump && !(session.player.jumpZ ?? 0)) {
+            session.player.jumpZ = 0.01;
+            session.player.jumpVZ = JUMP_VELOCITY;
+          }
         }
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
@@ -289,6 +349,17 @@ export class Realm {
         // this tick either, so the server must stay in sync.
         session.player.velocity.vx = 0;
         session.player.velocity.vy = 0;
+        // Also zero mount velocity when no input
+        if (session.gameplaySession.mountId !== null) {
+          const mount = this.entityManager.entities.find(
+            (e) => e.id === session.gameplaySession.mountId,
+          );
+          if (mount?.velocity) {
+            mount.velocity.vx = 0;
+            mount.velocity.vy = 0;
+            if (mount.sprite) mount.sprite.moving = false;
+          }
+        }
       }
     }
 
@@ -333,15 +404,20 @@ export class Realm {
         session.player.collider = collider;
       }
 
-      // ── Jump physics for all players ──
+      // ── Jump physics for all players + mount detection on landing ──
       for (const session of activeSessions) {
         const p = session.player;
         if (p.jumpZ !== undefined && p.jumpZ > 0 && p.jumpVZ !== undefined) {
+          const wasAirborne = p.jumpZ > 0;
           p.jumpVZ -= JUMP_GRAVITY * dt;
           p.jumpZ += p.jumpVZ * dt;
           if (p.jumpZ <= 0) {
             delete p.jumpZ;
             delete p.jumpVZ;
+            // On landing, check for rideable entity under the player
+            if (wasAirborne && session.gameplaySession.mountId === null) {
+              this.tryMountOnLanding(session);
+            }
           }
         }
       }
@@ -504,6 +580,10 @@ export class Realm {
       case "set-editor-mode":
         session.editorEnabled = msg.enabled;
         if (!msg.enabled) session.editorCursor = null;
+        // Auto-dismount when entering editor mode
+        if (msg.enabled && session.gameplaySession.mountId !== null) {
+          this.dismountPlayer(session);
+        }
         break;
 
       case "editor-cursor":
@@ -652,6 +732,116 @@ export class Realm {
     this.saveManager?.close();
   }
 
+  // ---- Riding helpers ----
+
+  /** Apply movement input to a mount entity (uses rideSpeed, updates sprite). */
+  private applyMountInput(
+    mount: Entity,
+    input: { dx: number; dy: number; sprinting: boolean },
+  ): void {
+    if (!mount.velocity) return;
+    const baseSpeed = mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
+    const speed = input.sprinting ? baseSpeed * PLAYER_SPRINT_MULTIPLIER : baseSpeed;
+    mount.velocity.vx = input.dx * speed;
+    mount.velocity.vy = input.dy * speed;
+
+    const moving = input.dx !== 0 || input.dy !== 0;
+    if (mount.sprite) {
+      mount.sprite.moving = moving;
+      if (moving) {
+        if (mount.wanderAI?.directional === false) {
+          // Non-directional sprites (e.g., cow): only flip horizontally, keep frameRow=0
+          if (input.dx !== 0) {
+            mount.sprite.flipX = input.dx < 0;
+          }
+        } else {
+          if (Math.abs(input.dx) >= Math.abs(input.dy)) {
+            mount.sprite.direction = input.dx > 0 ? Direction.Right : Direction.Left;
+          } else {
+            mount.sprite.direction = input.dy > 0 ? Direction.Down : Direction.Up;
+          }
+          mount.sprite.frameRow = mount.sprite.direction;
+        }
+      }
+    }
+  }
+
+  /** Dismount the player from their current mount. */
+  private dismountPlayer(session: PlayerSession): void {
+    const mountId = session.gameplaySession.mountId;
+    if (mountId === null) return;
+
+    const mount = this.entityManager.entities.find((e) => e.id === mountId);
+
+    // Clear parent relationship
+    delete session.player.parentId;
+    delete session.player.localOffsetX;
+    delete session.player.localOffsetY;
+    session.gameplaySession.mountId = null;
+
+    // Offset player to the side of the mount + small hop
+    if (mount) {
+      session.player.position.wx = mount.position.wx + 16;
+      session.player.position.wy = mount.position.wy;
+      // Restore mount AI
+      if (mount.wanderAI) {
+        mount.wanderAI.state = "idle";
+        mount.wanderAI.timer = 1.0;
+      }
+      if (mount.velocity) {
+        mount.velocity.vx = 0;
+        mount.velocity.vy = 0;
+      }
+      if (mount.sprite) mount.sprite.moving = false;
+    }
+
+    // Small hop off
+    session.player.jumpZ = 0.01;
+    session.player.jumpVZ = JUMP_VELOCITY * 0.5;
+    delete session.player.noShadow;
+  }
+
+  /** Check for rideable entities under the player on landing; mount if found. */
+  private tryMountOnLanding(session: PlayerSession): void {
+    const player = session.player;
+    if (!player.collider) return;
+
+    const playerBox = getEntityAABB(player.position, player.collider);
+
+    for (const entity of this.entityManager.entities) {
+      if (entity.id === player.id) continue;
+      if (!entity.tags?.has("rideable")) continue;
+      if (entity.wanderAI?.state === "ridden") continue; // already ridden
+      if (!entity.collider) continue;
+
+      const entityBox = getEntityAABB(entity.position, entity.collider);
+      if (!aabbsOverlap(playerBox, entityBox)) continue;
+
+      // Mount!
+      session.gameplaySession.mountId = entity.id;
+      player.parentId = entity.id;
+      player.localOffsetX = 0;
+      player.localOffsetY = 0;
+      // Visual lift so player appears on top of the mount (render-only, not physics)
+      player.jumpZ = 10;
+      delete player.jumpVZ;
+      player.noShadow = true; // cow's shadow is bigger
+      if (entity.wanderAI) {
+        entity.wanderAI.state = "ridden";
+        entity.wanderAI.following = false;
+      }
+      if (entity.velocity) {
+        entity.velocity.vx = 0;
+        entity.velocity.vy = 0;
+      }
+      if (player.velocity) {
+        player.velocity.vx = 0;
+        player.velocity.vy = 0;
+      }
+      break;
+    }
+  }
+
   // ---- Private ----
 
   /** Build a game-state message for a specific client, with delta chunk sync. */
@@ -713,6 +903,15 @@ export class Realm {
     if (!nearbyEntities.includes(session.player)) {
       nearbyEntities.push(session.player);
     }
+    // Ensure the mount entity is always included when riding
+    if (session.gameplaySession.mountId !== null) {
+      const mount = this.entityManager.entities.find(
+        (e) => e.id === session.gameplaySession.mountId,
+      );
+      if (mount && !nearbyEntities.includes(mount)) {
+        nearbyEntities.push(mount);
+      }
+    }
     const nearbyProps = this.propManager.getPropsInChunkRange(
       range.minCx - buf,
       range.minCy - buf,
@@ -750,6 +949,9 @@ export class Realm {
       chunkUpdates,
       editorCursors,
       playerNames,
+      ...(session.gameplaySession.mountId != null
+        ? { mountEntityId: session.gameplaySession.mountId }
+        : {}),
     };
   }
 

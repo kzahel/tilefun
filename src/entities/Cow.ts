@@ -45,7 +45,8 @@ export function createCow(wx: number, wy: number): Entity {
       directional: false,
       befriendable: true,
       followDistance: 24,
+      rideSpeed: 30,
     },
-    tags: new Set(["befriendable", "npc"]),
+    tags: new Set(["befriendable", "npc", "rideable"]),
   };
 }

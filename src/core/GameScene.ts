@@ -13,6 +13,7 @@ import type { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
+import type { ChatHUD } from "../ui/ChatHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import type { SceneManager } from "./SceneManager.js";
 import type { Time } from "./Time.js";
@@ -40,6 +41,7 @@ export interface GameContext {
   readonly touchJoystick: TouchJoystick;
   readonly console: ConsoleEngine;
   readonly consoleUI: ConsoleUI;
+  readonly chatHUD: ChatHUD;
 
   // Server access (local mode only, null in serialized)
   readonly server: GameServer | null;

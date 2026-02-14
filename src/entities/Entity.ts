@@ -51,7 +51,7 @@ export interface ColliderComponent {
 }
 
 export interface WanderAIComponent {
-  state: "idle" | "walking" | "chasing" | "following";
+  state: "idle" | "walking" | "chasing" | "following" | "ridden";
   /** Time remaining in current state (seconds). */
   timer: number;
   /** Movement direction when walking. */
@@ -79,6 +79,8 @@ export interface WanderAIComponent {
   followLeash?: number;
   /** When true, player can tap this entity to make it follow. */
   befriendable?: boolean;
+  /** Speed in px/s when ridden by a player. */
+  rideSpeed?: number;
 }
 
 export interface Entity {
@@ -109,4 +111,10 @@ export interface Entity {
   jumpZ?: number;
   /** Vertical velocity in world px/s, positive = up (server-only, not serialized). */
   jumpVZ?: number;
+  /** ID of the parent entity this entity is attached to (riding, carried, on platform, etc.). */
+  parentId?: number;
+  /** Local X offset from parent's position (world pixels). Only meaningful when parentId is set. */
+  localOffsetX?: number;
+  /** Local Y offset from parent's position (world pixels). Only meaningful when parentId is set. */
+  localOffsetY?: number;
 }

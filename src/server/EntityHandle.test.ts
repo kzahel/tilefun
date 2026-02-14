@@ -233,6 +233,7 @@ describe("PlayerHandle", () => {
       invincibilityTimer: 0,
       knockbackVx: 0,
       knockbackVy: 0,
+      mountId: null,
     };
     const handle = new PlayerHandle(entity, em, session);
     return { entity, em, session, handle };

@@ -1,5 +1,7 @@
 import type { WorldType } from "../persistence/WorldRegistry.js";
+import type { RoomDirectory, RoomInfo } from "../rooms/RoomDirectory.js";
 import type { RealmInfo } from "../shared/protocol.js";
+import { createHostingButtons, type HostingInfo } from "./HostingBanner.js";
 import { relativeTime } from "./relativeTime.js";
 
 /** Parse a seed string: pure digits → number, otherwise hash to a 31-bit int. */
@@ -47,6 +49,11 @@ export class MainMenu {
   private currentRealms: RealmInfo[] = [];
   /** Map from worldId to the player-count badge element for live updates. */
   private playerCountBadges = new Map<string, HTMLSpanElement>();
+  /** The world the local player is currently in (shown as "You are here"). */
+  currentWorldId: string | null = null;
+
+  roomDirectory: RoomDirectory | null = null;
+  private hostingSection: HTMLDivElement;
 
   onSelect: ((worldId: string) => void) | null = null;
   onCreate: ((name: string, worldType: WorldType, seed?: number) => void) | null = null;
@@ -155,6 +162,12 @@ export class MainMenu {
     newSection.append(nameRow, optRow);
     this.overlay.appendChild(newSection);
 
+    // Hosting info section (hidden unless hosting)
+    this.hostingSection = document.createElement("div");
+    this.hostingSection.style.cssText =
+      "display: none; flex-direction: column; gap: 6px; width: 320px; margin-top: 12px; padding: 10px 12px; background: rgba(79,195,247,0.1); border: 1px solid #4fc3f7; border-radius: 6px;";
+    this.overlay.appendChild(this.hostingSection);
+
     // Bottom button group — constrained to same width as world list
     const btnGroup = document.createElement("div");
     btnGroup.style.cssText =
@@ -184,14 +197,43 @@ export class MainMenu {
         this.onHostP2P();
       } else {
         const url = new URL(window.location.href);
-        url.searchParams.set("host", "");
-        window.location.href = url.toString();
+        url.searchParams.delete("host");
+        url.searchParams.delete("multiplayer");
+        url.searchParams.delete("server");
+        url.searchParams.delete("join");
+        window.location.href = `${url.toString()}${url.search ? "&" : "?"}host`;
       }
     });
 
     secondaryRow.append(switchBtn, hostBtn);
     btnGroup.appendChild(secondaryRow);
+
+    // Browse Public Games button
+    const browseBtn = document.createElement("button");
+    browseBtn.textContent = "Browse Public Games";
+    browseBtn.style.cssText = `${BTN_STYLE} width: 100%; color: #fc4;`;
+    browseBtn.addEventListener("click", () => this.showBrowsePanel());
+    btnGroup.appendChild(browseBtn);
+
     this.overlay.appendChild(btnGroup);
+
+    // About section
+    const aboutEl = document.createElement("div");
+    aboutEl.style.cssText = "margin-top: 24px; font-size: 12px; color: #666; text-align: center;";
+    const link = document.createElement("a");
+    link.href = "https://github.com/kzahel/tilefun";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "github.com/kzahel/tilefun";
+    link.style.cssText = "color: #68f; text-decoration: none;";
+    link.addEventListener("mouseenter", () => {
+      link.style.textDecoration = "underline";
+    });
+    link.addEventListener("mouseleave", () => {
+      link.style.textDecoration = "none";
+    });
+    aboutEl.append("Tilefun \u00B7 ", link);
+    this.overlay.appendChild(aboutEl);
 
     // Prevent keyboard shortcuts from firing while interacting with menu
     this.overlay.addEventListener("keydown", (e) => {
@@ -211,7 +253,7 @@ export class MainMenu {
     this.worldCount = realms.length;
     this.currentRealms = realms;
     this.playerCountBadges.clear();
-    this.overlay.style.display = "";
+    this.overlay.style.display = "flex";
     this.listEl.innerHTML = "";
 
     if (realms.length === 0) {
@@ -225,6 +267,27 @@ export class MainMenu {
     for (const realm of realms) {
       this.listEl.appendChild(this.createCard(realm));
     }
+  }
+
+  set hostingInfo(info: HostingInfo | null) {
+    this.hostingSection.innerHTML = "";
+    if (!info) {
+      this.hostingSection.style.display = "none";
+      return;
+    }
+    this.hostingSection.style.display = "flex";
+
+    const label = document.createElement("div");
+    label.style.cssText = "color: #4fc3f7; font-weight: bold; font-size: 13px;";
+    label.textContent = "Hosting P2P Game";
+
+    const urlEl = document.createElement("div");
+    urlEl.style.cssText = "word-break: break-all; color: #aaa; font-size: 11px;";
+    urlEl.textContent = info.joinUrl;
+
+    const btnRow = createHostingButtons(info);
+
+    this.hostingSection.append(label, urlEl, btnRow);
   }
 
   hide(): void {
@@ -279,7 +342,16 @@ export class MainMenu {
     }
     this.playerCountBadges.set(realm.id, badge);
 
-    nameRow.append(nameEl, badge);
+    // "You are here" indicator for current world
+    const hereBadge = document.createElement("span");
+    hereBadge.style.cssText =
+      "font-size: 11px; color: #8cf; background: rgba(100,160,255,0.2); padding: 1px 6px; border-radius: 8px; white-space: nowrap;";
+    hereBadge.textContent = "You are here";
+    if (realm.id !== this.currentWorldId) {
+      hereBadge.style.display = "none";
+    }
+
+    nameRow.append(nameEl, badge, hereBadge);
 
     // Double-click to rename
     nameEl.addEventListener("dblclick", (e) => {
@@ -358,6 +430,135 @@ export class MainMenu {
     // Click card to select world
     card.addEventListener("click", () => {
       this.onSelect?.(realm.id);
+    });
+
+    return card;
+  }
+
+  private async showBrowsePanel(): Promise<void> {
+    if (!this.roomDirectory) return;
+
+    // Create a modal overlay for the room list
+    const panel = document.createElement("div");
+    panel.style.cssText = `
+      position: fixed; inset: 0; z-index: 250;
+      background: rgba(10, 10, 30, 0.95);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 16px; overflow-y: auto;
+      font-family: monospace; color: #fff;
+    `;
+
+    const header = document.createElement("div");
+    header.style.cssText = "font-size: 24px; font-weight: bold; color: #fc4; margin-bottom: 16px;";
+    header.textContent = "Public Games";
+
+    const roomListEl = document.createElement("div");
+    roomListEl.style.cssText =
+      "display: flex; flex-direction: column; gap: 8px; width: 320px; margin-bottom: 16px;";
+
+    const btnRow = document.createElement("div");
+    btnRow.style.cssText = "display: flex; gap: 8px;";
+
+    const refreshBtn = document.createElement("button");
+    refreshBtn.textContent = "Refresh";
+    refreshBtn.style.cssText = `${BTN_STYLE} color: #fc4;`;
+    refreshBtn.addEventListener("click", () => loadRooms());
+
+    const backBtn = document.createElement("button");
+    backBtn.textContent = "Back";
+    backBtn.style.cssText = BTN_STYLE;
+    backBtn.addEventListener("click", () => panel.remove());
+
+    btnRow.append(refreshBtn, backBtn);
+    panel.append(header, roomListEl, btnRow);
+
+    panel.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        panel.remove();
+        return;
+      }
+      e.stopPropagation();
+    });
+    panel.addEventListener("keyup", (e) => e.stopPropagation());
+
+    document.body.appendChild(panel);
+
+    const loadRooms = async () => {
+      roomListEl.innerHTML = "";
+      const loading = document.createElement("div");
+      loading.style.cssText = "color: #888; text-align: center; padding: 16px;";
+      loading.textContent = "Loading...";
+      roomListEl.appendChild(loading);
+
+      const rooms = await this.roomDirectory!.listRooms();
+      roomListEl.innerHTML = "";
+
+      if (rooms.length === 0) {
+        const empty = document.createElement("div");
+        empty.style.cssText = "color: #888; text-align: center; padding: 16px;";
+        empty.textContent = "No public games found";
+        roomListEl.appendChild(empty);
+        return;
+      }
+
+      for (const room of rooms) {
+        roomListEl.appendChild(this.createRoomCard(room));
+      }
+    };
+
+    loadRooms();
+  }
+
+  private createRoomCard(room: RoomInfo): HTMLDivElement {
+    const card = document.createElement("div");
+    card.style.cssText = CARD_STYLE;
+    card.addEventListener("mouseenter", () => {
+      card.style.background = "rgba(255,255,255,0.15)";
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.background = "rgba(255,255,255,0.08)";
+    });
+
+    const info = document.createElement("div");
+    info.style.cssText = "display: flex; flex-direction: column; gap: 2px; min-width: 0;";
+
+    const nameEl = document.createElement("div");
+    nameEl.style.cssText =
+      "font-weight: bold; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;";
+    nameEl.textContent = room.name;
+
+    const detailEl = document.createElement("div");
+    detailEl.style.cssText = "font-size: 12px; color: #999;";
+    detailEl.textContent = `Host: ${room.hostName} · ${room.playerCount} player${room.playerCount !== 1 ? "s" : ""}`;
+
+    info.append(nameEl, detailEl);
+
+    const joinBtn = document.createElement("button");
+    joinBtn.textContent = "Join";
+    joinBtn.style.cssText = `
+      font: bold 12px monospace; padding: 4px 12px;
+      background: rgba(100, 255, 100, 0.2); color: #8f8;
+      border: 1px solid #8f8; border-radius: 4px;
+      cursor: pointer; flex-shrink: 0;
+    `;
+    joinBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const url = new URL(window.location.href);
+      url.searchParams.delete("host");
+      url.searchParams.delete("multiplayer");
+      url.searchParams.delete("server");
+      url.searchParams.set("join", room.peerId);
+      window.location.href = url.toString();
+    });
+
+    card.append(info, joinBtn);
+    card.addEventListener("click", () => {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("host");
+      url.searchParams.delete("multiplayer");
+      url.searchParams.delete("server");
+      url.searchParams.set("join", room.peerId);
+      window.location.href = url.toString();
     });
 
     return card;

@@ -79,4 +79,13 @@ export function registerServerCommandStubs(engine: ConsoleEngine): void {
     serverSide: true,
     execute: noop,
   });
+
+  engine.commands.register({
+    name: "say",
+    description: "Broadcast a chat message to all players",
+    args: [{ name: "message", type: "string", rest: true }],
+    category: "sv",
+    serverSide: true,
+    execute: noop,
+  });
 }

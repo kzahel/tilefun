@@ -55,7 +55,7 @@ export function renderEntities(gc: GameContext, alpha = 1): void {
   if (sheets.size === 0) return;
 
   // Viewport bounds in world coordinates, with margin for sprites partially on-screen
-  const CULL_MARGIN = 48; // pixels — covers largest sprite height (player = 48px)
+  const CULL_MARGIN = 48; // pixels — covers largest sprite height
   const topLeft = camera.screenToWorld(-CULL_MARGIN * camera.scale, -CULL_MARGIN * camera.scale);
   const bottomRight = camera.screenToWorld(
     camera.viewportWidth + CULL_MARGIN * camera.scale,

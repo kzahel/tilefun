@@ -85,6 +85,11 @@ function parseArgs(
         result[arg.name] = raw === "1" || raw === "true";
         break;
       case "string":
+        if (arg.rest) {
+          // Consume all remaining tokens joined by space
+          result[arg.name] = [raw, ...tokens.slice(i + 1)].join(" ");
+          return result;
+        }
         result[arg.name] = raw;
         break;
     }

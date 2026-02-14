@@ -113,6 +113,7 @@ export class EntityManager {
         nearby = nearby.filter((e) => {
           if ((e.jumpZ ?? 0) > 0) return false; // airborne entity doesn't block us
           if (selfAirborne && (e.sprite?.spriteHeight ?? 0) <= 32) return false; // we're airborne over small entity
+          if (e.parentId === self.id) return false; // children (e.g. rider) don't block parent
           return true;
         });
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
@@ -194,6 +195,7 @@ export class EntityManager {
     // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
     for (const entity of this.entities) {
       if (playerSet.has(entity) || !entity.velocity) continue;
+      if (entity.parentId !== undefined) continue; // parented: position derived from parent
       if (entityTickDts && !entityTickDts.has(entity)) continue;
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
@@ -224,10 +226,14 @@ export class EntityManager {
       this.spatialHash.update(entity);
     }
 
-    // --- Phase 3: Separate overlapping entities ---
-    separateOverlappingEntities(this.entities, playerSet, dt, getCollision, blockMask);
+    // --- Phase 3: Separate overlapping entities (skip parented) ---
+    const unparentedEntities = this.entities.filter((e) => e.parentId === undefined);
+    separateOverlappingEntities(unparentedEntities, playerSet, dt, getCollision, blockMask);
 
-    // --- Tick animations (only for ticking entities) ---
+    // --- Phase 4: Resolve parented entity positions ---
+    this.resolveParentedPositions(players);
+
+    // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of this.entities) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
       const sprite = entity.sprite;
@@ -243,6 +249,54 @@ export class EntityManager {
           sprite.frameCol = 0;
           sprite.animTimer = 0;
         }
+      }
+    }
+  }
+
+  /**
+   * Resolve world positions for entities with a parentId.
+   * Processes parent-first (topological order) to support nesting.
+   * Auto-detaches children whose parent no longer exists.
+   */
+  resolveParentedPositions(players: readonly Entity[]): void {
+    // Build id→entity map for O(1) parent lookup (includes players)
+    const byId = new Map<number, Entity>();
+    for (const e of this.entities) byId.set(e.id, e);
+    for (const p of players) byId.set(p.id, p);
+
+    // Count parented entities
+    let remaining = 0;
+    for (const e of this.entities) {
+      if (e.parentId !== undefined) remaining++;
+    }
+    for (const p of players) {
+      if (p.parentId !== undefined) remaining++;
+    }
+    if (remaining === 0) return;
+
+    const resolved = new Set<number>();
+    const allEntities = [...this.entities, ...players];
+
+    // Iterative resolution — max 10 passes for nesting depth (typically 1-2)
+    for (let pass = 0; pass < 10 && remaining > 0; pass++) {
+      for (const e of allEntities) {
+        if (e.parentId === undefined || resolved.has(e.id)) continue;
+        const parent = byId.get(e.parentId);
+        if (!parent) {
+          // Parent removed — auto-detach
+          delete e.parentId;
+          delete e.localOffsetX;
+          delete e.localOffsetY;
+          remaining--;
+          continue;
+        }
+        // Only resolve if parent is unparented or already resolved this tick
+        if (parent.parentId !== undefined && !resolved.has(parent.id)) continue;
+
+        e.position.wx = parent.position.wx + (e.localOffsetX ?? 0);
+        e.position.wy = parent.position.wy + (e.localOffsetY ?? 0);
+        resolved.add(e.id);
+        remaining--;
       }
     }
   }

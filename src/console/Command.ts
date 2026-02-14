@@ -4,6 +4,8 @@ export interface CommandArg {
   name: string;
   type: "string" | "number" | "boolean";
   optional?: boolean;
+  /** If true (only valid on the last string arg), consumes all remaining tokens. */
+  rest?: boolean;
   completions?: () => string[];
 }
 
