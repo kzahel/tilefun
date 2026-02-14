@@ -24,7 +24,8 @@ export type ActionName =
   | "paint_unpaint"
   | "toggle_tab"
   // Debug (discrete)
-  | "toggle_base_mode";
+  | "toggle_base_mode"
+  | "toggle_console";
 
 /** Maps one action to one or more keys (KeyboardEvent.key values). */
 export interface ActionBinding {
@@ -37,7 +38,8 @@ export type ActionMapConfig = ActionBinding[];
 export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   // Global
   { action: "toggle_menu", keys: ["Escape"] },
-  { action: "toggle_debug", keys: ["F3", "`"] },
+  { action: "toggle_debug", keys: ["F3"] },
+  { action: "toggle_console", keys: ["`"] },
   { action: "toggle_editor", keys: ["Tab"] },
   // Play mode movement
   { action: "move_up", keys: ["w", "ArrowUp"] },

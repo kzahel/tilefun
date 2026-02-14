@@ -1,6 +1,7 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { CHUNK_SIZE_PX, TICK_RATE } from "../config/constants.js";
+import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import {
@@ -25,6 +26,8 @@ import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
+import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
+import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import {
@@ -45,17 +48,25 @@ import { tickAllAI } from "./tickAllAI.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
 
+export interface GameServerDeps {
+  registry: IWorldRegistry;
+  createStore: (worldId: string) => PersistenceStore;
+}
+
 export class GameServer {
   world: World;
   entityManager: EntityManager;
   propManager: PropManager;
   worldAPI: WorldAPIImpl;
+  /** Player speed multiplier (set via sv_speed cvar). */
+  speedMultiplier = 1;
 
   readonly blendGraph: BlendGraph;
   private adjacency: TerrainAdjacency;
   private terrainEditor: TerrainEditor;
   private saveManager: SaveManager | null = null;
-  private registry: WorldRegistry;
+  private registry: IWorldRegistry;
+  private createStore: (worldId: string) => PersistenceStore;
   private currentWorldId: string | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
@@ -72,23 +83,43 @@ export class GameServer {
   private tickCounter = 0;
   private readonly mods: Mod[] = [baseGameMod];
   private modTeardowns = new Map<string, Unsubscribe>();
+  private serverConsole: ConsoleEngine | null = null;
 
-  constructor(transport: IServerTransport) {
+  constructor(transport: IServerTransport, deps?: GameServerDeps) {
     this.transport = transport;
+    this.registry = deps?.registry ?? new WorldRegistry();
+    this.createStore =
+      deps?.createStore ??
+      ((worldId) => new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta"]));
     this.world = new World();
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
     this.terrainEditor = new TerrainEditor(this.world, () => {}, this.adjacency);
-    this.registry = new WorldRegistry();
     this.worldAPI = this.createWorldAPI();
     this.registerMods();
+  }
+
+  /** Initialize the server-side console engine with server commands. */
+  initConsole(): void {
+    const console_ = new ConsoleEngine();
+    this.serverConsole = console_;
+    import("../console/serverCommands.js").then(({ registerServerCommands }) => {
+      registerServerCommands(console_, this);
+      console.log("[tilefun] server console initialized");
+    });
+  }
+
+  /** Get the first player session (for single-player commands). */
+  getFirstSession(): PlayerSession | undefined {
+    return this.sessions.values().next().value;
   }
 
   async init(): Promise<void> {
     // Register transport handlers
     this.start();
+    this.initConsole();
 
     await this.registry.open();
 
@@ -112,10 +143,14 @@ export class GameServer {
     });
 
     this.transport.onConnect((clientId) => {
-      // Use the existing player from loadWorld if available
+      // Each connecting client gets their own player entity.
+      // In single-player (local), reuse the existing player if present.
+      let player: Entity;
       const existingPlayer = this.entityManager.entities.find((e) => e.type === "player");
-      const player = existingPlayer ?? createPlayer(0, 0);
-      if (!existingPlayer) {
+      if (clientId === "local" && existingPlayer) {
+        player = existingPlayer;
+      } else {
+        player = createPlayer(this.lastLoadedCamera.cameraX, this.lastLoadedCamera.cameraY);
         this.entityManager.spawn(player);
       }
       const session = new PlayerSession(clientId, player);
@@ -124,6 +159,8 @@ export class GameServer {
       session.cameraY = this.lastLoadedCamera.cameraY;
       session.cameraZoom = this.lastLoadedCamera.cameraZoom;
       this.sessions.set(clientId, session);
+
+      console.log(`[tilefun] client connected: ${clientId} (${this.sessions.size} total)`);
 
       // Send initial camera position so client knows where to look
       this.transport.send(clientId, {
@@ -135,8 +172,13 @@ export class GameServer {
     });
 
     this.transport.onDisconnect((clientId) => {
+      const session = this.sessions.get(clientId);
+      if (session && clientId !== "local") {
+        this.entityManager.remove(session.player.id);
+      }
       this.sessions.delete(clientId);
       this.clientChunkRevisions.delete(clientId);
+      console.log(`[tilefun] client disconnected: ${clientId} (${this.sessions.size} total)`);
     });
   }
 
@@ -338,8 +380,7 @@ export class GameServer {
     }
 
     // Open persistence for this world
-    const dbName = dbNameForWorld(worldId);
-    const store = new IdbPersistenceStore(dbName, ["chunks", "meta"]);
+    const store = this.createStore(worldId);
     this.saveManager = new SaveManager(store);
     this.terrainEditor = new TerrainEditor(
       this.world,
@@ -768,6 +809,22 @@ export class GameServer {
           });
         });
         break;
+
+      case "rcon": {
+        const output: string[] = [];
+        if (this.serverConsole) {
+          const lines = this.serverConsole.execServer(msg.command);
+          output.push(...lines);
+        } else {
+          output.push("Server console not initialized");
+        }
+        this.transport.send(clientId, {
+          type: "rcon-response",
+          requestId: msg.requestId,
+          output,
+        });
+        break;
+      }
     }
   }
 

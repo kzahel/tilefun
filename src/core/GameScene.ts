@@ -1,5 +1,7 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
+import type { ConsoleEngine } from "../console/ConsoleEngine.js";
+import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
 import type { EditorPanel } from "../editor/EditorPanel.js";
 import type { PropCatalog } from "../editor/PropCatalog.js";
@@ -36,6 +38,8 @@ export interface GameContext {
   readonly propCatalog: PropCatalog;
   readonly debugPanel: DebugPanel;
   readonly touchJoystick: TouchJoystick;
+  readonly console: ConsoleEngine;
+  readonly consoleUI: ConsoleUI;
 
   // Server access (local mode only, null in serialized)
   readonly server: GameServer | null;

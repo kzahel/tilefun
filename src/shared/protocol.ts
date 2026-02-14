@@ -86,7 +86,8 @@ export type ClientMessage =
     }
   | { type: "delete-world"; requestId: number; worldId: string }
   | { type: "list-worlds"; requestId: number }
-  | { type: "rename-world"; requestId: number; worldId: string; name: string };
+  | { type: "rename-world"; requestId: number; worldId: string; name: string }
+  | { type: "rcon"; requestId: number; command: string };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -205,4 +206,5 @@ export type ServerMessage =
   | { type: "world-created"; requestId: number; meta: WorldMeta }
   | { type: "world-deleted"; requestId: number }
   | { type: "world-list"; requestId: number; worlds: WorldMeta[] }
-  | { type: "world-renamed"; requestId: number };
+  | { type: "world-renamed"; requestId: number }
+  | { type: "rcon-response"; requestId: number; output: string[]; error?: boolean };

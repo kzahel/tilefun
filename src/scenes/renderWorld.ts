@@ -100,7 +100,14 @@ export function renderDebugOverlay(gc: GameContext): void {
     fpsTimer = now;
   }
 
-  if (!gc.debugEnabled) return;
+  // Check both legacy debugEnabled and individual render cvars
+  const showFps = gc.console.cvars.get("r_showfps")?.get() === true;
+  const showBboxes = gc.console.cvars.get("r_showbboxes")?.get() === true;
+  const showChunks = gc.console.cvars.get("r_showchunks")?.get() === true;
+  const showGrid = gc.console.cvars.get("r_showgrid")?.get() === true;
+  const anyCvar = showFps || showBboxes || showChunks || showGrid;
+
+  if (!gc.debugEnabled && !anyCvar) return;
 
   const { ctx, camera, stateView } = gc;
   const px = stateView.playerEntity.position.wx;
@@ -133,5 +140,8 @@ export function renderDebugOverlay(gc: GameContext): void {
       speedMultiplier: collision & CollisionFlag.SlowWalk ? 0.5 : 1.0,
     },
     camera.getVisibleChunkRange(),
+    gc.debugEnabled
+      ? undefined // legacy path: show all
+      : { showInfoPanel: showFps, showChunkBorders: showChunks, showBboxes, showGrid },
   );
 }

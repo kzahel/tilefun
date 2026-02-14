@@ -11,6 +11,12 @@ export class Camera {
   prevX = 0;
   prevY = 0;
 
+  /** Screen shake state. */
+  private shakeIntensity = 0;
+  private shakeDecay = 0.9;
+  shakeOffsetX = 0;
+  shakeOffsetY = 0;
+
   /** Actual position saved during interpolation, restored after render. */
   private actualX = 0;
   private actualY = 0;
@@ -74,6 +80,24 @@ export class Camera {
   restoreActual(): void {
     this.x = this.actualX;
     this.y = this.actualY;
+  }
+
+  /** Trigger a screen shake effect. */
+  shake(intensity: number): void {
+    this.shakeIntensity = intensity;
+  }
+
+  /** Update shake offsets (call each tick). */
+  updateShake(): void {
+    if (this.shakeIntensity > 0.1) {
+      this.shakeOffsetX = (Math.random() - 0.5) * this.shakeIntensity * 2;
+      this.shakeOffsetY = (Math.random() - 0.5) * this.shakeIntensity * 2;
+      this.shakeIntensity *= this.shakeDecay;
+    } else {
+      this.shakeIntensity = 0;
+      this.shakeOffsetX = 0;
+      this.shakeOffsetY = 0;
+    }
   }
 
   /** Get the range of chunk coordinates visible in the current viewport. */

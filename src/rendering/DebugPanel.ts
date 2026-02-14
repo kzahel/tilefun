@@ -142,6 +142,14 @@ export class DebugPanel {
     return this.pauseCheckbox.checked;
   }
 
+  setNoclip(value: boolean): void {
+    this.noclipCheckbox.checked = value;
+  }
+
+  setPaused(value: boolean): void {
+    this.pauseCheckbox.checked = value;
+  }
+
   /** Returns true if base selection mode was toggled, then clears the flag. */
   consumeBaseModeChange(): boolean {
     const changed = this.pendingBaseMode;

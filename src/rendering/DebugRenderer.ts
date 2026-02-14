@@ -131,7 +131,14 @@ function drawCollisionBoxes(
   ctx.restore();
 }
 
-/** Draw complete debug overlay. */
+export interface DebugRenderFlags {
+  showInfoPanel: boolean;
+  showChunkBorders: boolean;
+  showBboxes: boolean;
+  showGrid: boolean;
+}
+
+/** Draw debug overlay with fine-grained control via flags. */
 export function drawDebugOverlay(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
@@ -139,8 +146,49 @@ export function drawDebugOverlay(
   props: Prop[],
   info: DebugInfo,
   visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
+  flags?: DebugRenderFlags,
 ): void {
-  drawInfoPanel(ctx, info);
-  drawChunkBorders(ctx, camera, visible);
-  drawCollisionBoxes(ctx, camera, entities, props);
+  const showAll = !flags; // no flags = show all (legacy debugEnabled path)
+  if (showAll || flags?.showInfoPanel) drawInfoPanel(ctx, info);
+  if (showAll || flags?.showChunkBorders) drawChunkBorders(ctx, camera, visible);
+  if (showAll || flags?.showBboxes) drawCollisionBoxes(ctx, camera, entities, props);
+  if (flags?.showGrid) drawTileGrid(ctx, camera, visible);
+}
+
+function drawTileGrid(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  visible: { minCx: number; minCy: number; maxCx: number; maxCy: number },
+): void {
+  ctx.save();
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  ctx.lineWidth = 1;
+
+  const chunkTiles = CHUNK_SIZE;
+  const minTx = visible.minCx * chunkTiles;
+  const maxTx = (visible.maxCx + 1) * chunkTiles;
+  const minTy = visible.minCy * chunkTiles;
+  const maxTy = (visible.maxCy + 1) * chunkTiles;
+
+  for (let ty = minTy; ty <= maxTy; ty++) {
+    const wy = ty * TILE_SIZE;
+    const left = camera.worldToScreen(minTx * TILE_SIZE, wy);
+    const right = camera.worldToScreen(maxTx * TILE_SIZE, wy);
+    ctx.beginPath();
+    ctx.moveTo(left.sx, left.sy);
+    ctx.lineTo(right.sx, right.sy);
+    ctx.stroke();
+  }
+
+  for (let tx = minTx; tx <= maxTx; tx++) {
+    const wx = tx * TILE_SIZE;
+    const top = camera.worldToScreen(wx, minTy * TILE_SIZE);
+    const bottom = camera.worldToScreen(wx, maxTy * TILE_SIZE);
+    ctx.beginPath();
+    ctx.moveTo(top.sx, top.sy);
+    ctx.lineTo(bottom.sx, bottom.sy);
+    ctx.stroke();
+  }
+
+  ctx.restore();
 }

@@ -3,6 +3,11 @@ import { loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { ConsoleEngine } from "../console/ConsoleEngine.js";
+import { ConsoleUI } from "../console/ConsoleUI.js";
+import { registerClientCommands } from "../console/clientCommands.js";
+import { registerClientCVars } from "../console/clientCVars.js";
+import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
@@ -53,6 +58,8 @@ export class GameClient {
   private serialized: boolean;
   private scenes: SceneManager;
   private time: Time;
+  private consoleEngine: ConsoleEngine;
+  private consoleUI: ConsoleUI;
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
@@ -103,6 +110,16 @@ export class GameClient {
 
     this.scenes = new SceneManager();
     this.time = new Time();
+    this.consoleEngine = new ConsoleEngine();
+    this.consoleEngine.rconSend = async (command: string) => {
+      const resp = await this.gcSendRequest<{ output: string[]; error?: boolean }>({
+        type: "rcon",
+        requestId: this.nextRequestId++,
+        command,
+      });
+      return resp.output;
+    };
+    this.consoleUI = new ConsoleUI(this.consoleEngine);
 
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
@@ -173,7 +190,18 @@ export class GameClient {
     this.bindActions();
 
     // Build GameContext and wire it into the scene manager
-    this.scenes.setContext(this.buildGameContext());
+    const gc = this.buildGameContext();
+    this.scenes.setContext(gc);
+
+    // Register console cvars and commands
+    const clientCVars = registerClientCVars(this.consoleEngine);
+    registerClientCommands(this.consoleEngine, gc);
+    registerServerCommandStubs(this.consoleEngine);
+
+    // Wire r_pixelscale cvar to camera zoom
+    clientCVars.r_pixelscale.onChange((val) => {
+      this.camera.zoom = val;
+    });
 
     // Start in editor mode
     this.scenes.push(new EditScene());
@@ -312,6 +340,7 @@ export class GameClient {
     this.gcFlushServer();
     this.scenes.clear();
     this.actions.detach();
+    this.consoleUI.destroy();
   }
 
   // ---- Actions ----
@@ -336,6 +365,9 @@ export class GameClient {
     this.actions.on("toggle_editor", () => {
       if (this.scenes.has(MenuScene) || this.scenes.has(CatalogScene)) return;
       this.toggleEditor();
+    });
+    this.actions.on("toggle_console", () => {
+      this.consoleUI.toggle();
     });
     this.actions.on("toggle_base_mode", () => {
       if (this.scenes.has(MenuScene) || this.scenes.has(CatalogScene)) return;
@@ -418,6 +450,8 @@ export class GameClient {
       propCatalog: this.propCatalog,
       debugPanel: this.debugPanel,
       touchJoystick: this.touchJoystick,
+      console: this.consoleEngine,
+      consoleUI: this.consoleUI,
       server: this.server,
       serialized: this.serialized,
       scenes: this.scenes,
