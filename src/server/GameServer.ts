@@ -18,6 +18,8 @@ import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { befriendableMod } from "../mods/befriendable.js";
 import { campfireTrapMod } from "../mods/campfire-trap.js";
 import { deathTimerMod } from "../mods/death-timer.js";
+import { gemCollectorMod } from "../mods/gem-collector.js";
+import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import {
@@ -61,7 +63,7 @@ export class GameServer {
   private clientChunkRevisions = new Map<string, Map<string, number>>();
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  private readonly mods: Mod[] = [befriendableMod, deathTimerMod, campfireTrapMod];
+  private readonly mods: Mod[] = [befriendableMod, gemCollectorMod, deathTimerMod, campfireTrapMod];
   private modTeardowns = new Map<string, Unsubscribe>();
 
   constructor(transport: IServerTransport) {
@@ -280,7 +282,8 @@ export class GameServer {
 
     // Open persistence for this world
     const dbName = dbNameForWorld(worldId);
-    this.saveManager = new SaveManager(dbName);
+    const store = new IdbPersistenceStore(dbName, ["chunks", "meta"]);
+    this.saveManager = new SaveManager(store);
     this.terrainEditor = new TerrainEditor(
       this.world,
       (key) => this.saveManager?.markChunkDirty(key),

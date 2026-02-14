@@ -35,19 +35,6 @@ export function tickGameplay(
   const px = player.position.wx;
   const py = player.position.wy + (player.collider?.offsetY ?? 0);
 
-  // Check for gem collection (use player body center, not feet)
-  for (const entity of entityManager.entities) {
-    if (entity.type !== "gem") continue;
-    const dx = entity.position.wx - px;
-    const dy = entity.position.wy - py;
-    if (dx * dx + dy * dy < 18 * 18) {
-      entityManager.remove(entity.id);
-      session.gemsCollected++;
-      callbacks.markMetaDirty();
-      break;
-    }
-  }
-
   // Baddie contact check (knockback + gem loss)
   if (session.invincibilityTimer <= 0) {
     for (const entity of entityManager.entities) {

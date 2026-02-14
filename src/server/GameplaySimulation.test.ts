@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createCampfire } from "../entities/Campfire.js";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -21,35 +21,7 @@ function makeSession(overrides?: Partial<GameplaySession>): GameplaySession {
 const noopCallbacks = { markMetaDirty: () => {} };
 
 describe("tickGameplay", () => {
-  describe("gem collection", () => {
-    it("collects a gem when player is close enough", () => {
-      const em = new EntityManager();
-      const player = createPlayer(100, 100);
-      em.spawn(player);
-      em.spawn(createGem(105, 100)); // within 18px
-      const session = makeSession({ player });
-      const markMetaDirty = vi.fn();
-
-      tickGameplay(session, em, 1 / 60, { markMetaDirty });
-
-      expect(session.gemsCollected).toBe(1);
-      expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(0);
-      expect(markMetaDirty).toHaveBeenCalled();
-    });
-
-    it("does not collect a gem that is far away", () => {
-      const em = new EntityManager();
-      const player = createPlayer(100, 100);
-      em.spawn(player);
-      em.spawn(createGem(200, 200)); // far away
-      const session = makeSession({ player });
-
-      tickGameplay(session, em, 1 / 60, noopCallbacks);
-
-      expect(session.gemsCollected).toBe(0);
-      expect(em.entities.filter((e) => e.type === "gem")).toHaveLength(1);
-    });
-  });
+  // gem collection is now handled by gem-collector mod (see gem-collector.test.ts)
 
   describe("baddie contact", () => {
     it("applies knockback and scatters gems on baddie contact", () => {

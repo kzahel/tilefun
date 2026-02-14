@@ -1,4 +1,12 @@
-const DB_VERSION = 1;
+import {
+  applyMigrations,
+  CURRENT_SAVE_VERSION,
+  FORMAT_VERSION_KEY,
+  type FormatVersionRecord,
+  MIGRATIONS,
+} from "./migrations.js";
+import type { PersistenceStore } from "./PersistenceStore.js";
+
 const STORE_CHUNKS = "chunks";
 const STORE_META = "meta";
 const SAVE_DEBOUNCE_MS = 2000;
@@ -31,8 +39,6 @@ type GetChunkFn = (key: string) => SavedChunkData | undefined;
 type GetMetaFn = () => SavedMeta;
 
 export class SaveManager {
-  private dbName: string;
-  private db: IDBDatabase | null = null;
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
   private dirtyChunks = new Set<string>();
   private metaDirty = false;
@@ -40,9 +46,7 @@ export class SaveManager {
   private getChunk: GetChunkFn | null = null;
   private getMeta: GetMetaFn | null = null;
 
-  constructor(dbName: string) {
-    this.dbName = dbName;
-  }
+  constructor(private readonly store: PersistenceStore) {}
 
   /** Bind the data accessors once so scheduleSave/flush can use them. */
   bind(getChunk: GetChunkFn, getMeta: GetMetaFn): void {
@@ -51,70 +55,43 @@ export class SaveManager {
   }
 
   async open(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const req = indexedDB.open(this.dbName, DB_VERSION);
-      req.onupgradeneeded = () => {
-        const db = req.result;
-        if (!db.objectStoreNames.contains(STORE_CHUNKS)) {
-          db.createObjectStore(STORE_CHUNKS);
-        }
-        if (!db.objectStoreNames.contains(STORE_META)) {
-          db.createObjectStore(STORE_META);
-        }
-      };
-      req.onsuccess = () => {
-        this.db = req.result;
-        resolve();
-      };
-      req.onerror = () => reject(req.error);
-    });
+    await this.store.open();
+    await this.runMigrations();
+    await this.store.save([
+      {
+        collection: STORE_META,
+        key: FORMAT_VERSION_KEY,
+        value: { version: CURRENT_SAVE_VERSION } satisfies FormatVersionRecord,
+      },
+    ]);
   }
 
   async loadChunks(): Promise<
     Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }>
   > {
-    const db = this.db;
-    if (!db) return new Map();
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE_CHUNKS, "readonly");
-      const store = tx.objectStore(STORE_CHUNKS);
-      const req = store.openCursor();
-      const result = new Map<
-        string,
-        { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }
-      >();
-      req.onsuccess = () => {
-        const cursor = req.result;
-        if (cursor) {
-          const value = cursor.value as {
-            subgrid: ArrayBuffer;
-            roadGrid?: ArrayBuffer;
-            heightGrid?: ArrayBuffer;
-          };
-          result.set(cursor.key as string, {
-            subgrid: new Uint8Array(value.subgrid),
-            roadGrid: value.roadGrid ? new Uint8Array(value.roadGrid) : null,
-            heightGrid: value.heightGrid ? new Uint8Array(value.heightGrid) : null,
-          });
-          cursor.continue();
-        } else {
-          resolve(result);
-        }
+    const raw = await this.store.getAll(STORE_CHUNKS);
+    const result = new Map<
+      string,
+      { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }
+    >();
+    for (const [key, value] of raw) {
+      const v = value as {
+        subgrid: ArrayBuffer;
+        roadGrid?: ArrayBuffer;
+        heightGrid?: ArrayBuffer;
       };
-      req.onerror = () => reject(req.error);
-    });
+      result.set(key, {
+        subgrid: new Uint8Array(v.subgrid),
+        roadGrid: v.roadGrid ? new Uint8Array(v.roadGrid) : null,
+        heightGrid: v.heightGrid ? new Uint8Array(v.heightGrid) : null,
+      });
+    }
+    return result;
   }
 
   async loadMeta(): Promise<SavedMeta | null> {
-    const db = this.db;
-    if (!db) return null;
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction(STORE_META, "readonly");
-      const store = tx.objectStore(STORE_META);
-      const req = store.get("state");
-      req.onsuccess = () => resolve((req.result as SavedMeta) ?? null);
-      req.onerror = () => reject(req.error);
-    });
+    const raw = await this.store.get(STORE_META, "state");
+    return (raw as SavedMeta) ?? null;
   }
 
   markChunkDirty(key: string): void {
@@ -156,8 +133,7 @@ export class SaveManager {
   onChunksSaved: ((keys: string[], getChunk: GetChunkFn) => void) | null = null;
 
   private doSave(): void {
-    const db = this.db;
-    if (!db || this.saving) return;
+    if (this.saving) return;
     if (!this.getChunk || !this.getMeta) return;
     if (!this.hasDirty) return;
 
@@ -167,9 +143,7 @@ export class SaveManager {
     const saveMeta = this.metaDirty;
     this.metaDirty = false;
 
-    const tx = db.transaction([STORE_CHUNKS, STORE_META], "readwrite");
-    const chunkStore = tx.objectStore(STORE_CHUNKS);
-    const metaStore = tx.objectStore(STORE_META);
+    const entries: { collection: string; key: string; value: unknown }[] = [];
 
     for (const key of chunkKeys) {
       const data = this.getChunk(key);
@@ -188,38 +162,75 @@ export class SaveManager {
         if (data.heightGrid.some((v) => v !== 0)) {
           record.heightGrid = new Uint8Array(data.heightGrid).buffer;
         }
-        chunkStore.put(record, key);
+        entries.push({ collection: STORE_CHUNKS, key, value: record });
       }
     }
 
     if (saveMeta) {
-      metaStore.put(this.getMeta(), "state");
+      entries.push({ collection: STORE_META, key: "state", value: this.getMeta() });
     }
 
-    tx.oncomplete = () => {
-      this.saving = false;
-      if (this.onChunksSaved && this.getChunk) {
-        this.onChunksSaved(chunkKeys, this.getChunk);
-      }
-    };
-    tx.onerror = () => {
-      this.saving = false;
-      // Re-mark as dirty so next save attempt includes them
-      for (const key of chunkKeys) this.dirtyChunks.add(key);
-      if (saveMeta) this.metaDirty = true;
-    };
+    this.store.save(entries).then(
+      () => {
+        this.saving = false;
+        if (this.onChunksSaved && this.getChunk) {
+          this.onChunksSaved(chunkKeys, this.getChunk);
+        }
+      },
+      () => {
+        this.saving = false;
+        // Re-mark as dirty so next save attempt includes them
+        for (const key of chunkKeys) this.dirtyChunks.add(key);
+        if (saveMeta) this.metaDirty = true;
+      },
+    );
+  }
+
+  private async runMigrations(): Promise<void> {
+    const raw = await this.store.get(STORE_META, FORMAT_VERSION_KEY);
+    const record = raw as FormatVersionRecord | undefined;
+    const version = record?.version ?? 1;
+
+    if (version > CURRENT_SAVE_VERSION) {
+      console.warn(
+        `[tilefun] Save format v${version} is newer than app v${CURRENT_SAVE_VERSION}. ` +
+          "Data may have been saved by a newer version.",
+      );
+      return;
+    }
+    if (version >= CURRENT_SAVE_VERSION) return;
+
+    console.log(
+      `[tilefun] Save format v${version} → v${CURRENT_SAVE_VERSION}, running migrations...`,
+    );
+
+    const rawMeta =
+      ((await this.store.get(STORE_META, "state")) as Record<string, unknown>) ?? null;
+    const rawChunks = (await this.store.getAll(STORE_CHUNKS)) as Map<
+      string,
+      Record<string, unknown>
+    >;
+    const result = applyMigrations(version, rawMeta, rawChunks, MIGRATIONS, CURRENT_SAVE_VERSION);
+
+    const entries: { collection: string; key: string; value: unknown }[] = [];
+    for (const [key, data] of result.chunks) {
+      entries.push({ collection: STORE_CHUNKS, key, value: data });
+    }
+    if (result.meta) {
+      entries.push({ collection: STORE_META, key: "state", value: result.meta });
+    }
+    entries.push({
+      collection: STORE_META,
+      key: FORMAT_VERSION_KEY,
+      value: { version: result.version } satisfies FormatVersionRecord,
+    });
+    await this.store.save(entries);
+
+    console.log(`[tilefun] Migrations complete. Save format is now v${CURRENT_SAVE_VERSION}.`);
   }
 
   async clear(): Promise<void> {
-    const db = this.db;
-    if (!db) return;
-    return new Promise((resolve, reject) => {
-      const tx = db.transaction([STORE_CHUNKS, STORE_META], "readwrite");
-      tx.objectStore(STORE_CHUNKS).clear();
-      tx.objectStore(STORE_META).clear();
-      tx.oncomplete = () => resolve();
-      tx.onerror = () => reject(tx.error);
-    });
+    await this.store.clear();
   }
 
   close(): void {
@@ -227,10 +238,7 @@ export class SaveManager {
       clearTimeout(this.saveTimer);
       this.saveTimer = null;
     }
-    if (this.db) {
-      this.db.close();
-      this.db = null;
-    }
+    this.store.close();
     this.dirtyChunks.clear();
     this.metaDirty = false;
     this.getChunk = null;
