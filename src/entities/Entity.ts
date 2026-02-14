@@ -30,6 +30,8 @@ export interface SpriteComponent {
   frameCount: number;
   direction: Direction;
   moving: boolean;
+  /** When true, sprite is drawn mirrored horizontally. */
+  flipX?: boolean;
   /** Pixel width of one frame in the spritesheet. */
   spriteWidth: number;
   /** Pixel height of one frame in the spritesheet. */
@@ -81,6 +83,8 @@ export interface Entity {
   id: number;
   type: string;
   position: PositionComponent;
+  /** Previous position (before last physics tick), for render interpolation. Ephemeral. */
+  prevPosition?: PositionComponent;
   /** Adjusts the Y used for depth sorting (negative = sort as if higher/behind). */
   sortOffsetY?: number;
   velocity: VelocityComponent | null;

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createChicken } from "./Chicken.js";
+import { createCow } from "./Cow.js";
 import { Direction } from "./Entity.js";
 import { createPlayer } from "./Player.js";
 import { createWorm1 } from "./Worm.js";
@@ -91,6 +92,26 @@ describe("updateWanderAI", () => {
     const rng = makeRandom([0.5, 0.25]);
     updateWanderAI(w, 2.1, rng);
     expect(w.sprite?.frameRow).toBe(Direction.Down);
+  });
+
+  it("sets flipX true when non-directional entity walks left", () => {
+    const cow = createCow(0, 0);
+    // rng(0.5) for walk duration, rng(0.5) for angle → angle = π → dirX = -1
+    const rng = makeRandom([0.5, 0.5]);
+    updateWanderAI(cow, 3.1, rng); // expire 3s idle timer
+    expect(cow.wanderAI?.state).toBe("walking");
+    expect(cow.wanderAI?.dirX).toBeLessThan(0);
+    expect(cow.sprite?.flipX).toBe(true);
+  });
+
+  it("sets flipX false when non-directional entity walks right", () => {
+    const cow = createCow(0, 0);
+    // rng(0.5) for walk duration, rng(0.0) for angle → angle = 0 → dirX = 1
+    const rng = makeRandom([0.5, 0.0]);
+    updateWanderAI(cow, 3.1, rng);
+    expect(cow.wanderAI?.state).toBe("walking");
+    expect(cow.wanderAI?.dirX).toBeGreaterThan(0);
+    expect(cow.sprite?.flipX).toBe(false);
   });
 
   it("does nothing if entity has no wanderAI component", () => {

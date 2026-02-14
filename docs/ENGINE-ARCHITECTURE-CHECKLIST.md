@@ -67,18 +67,9 @@ A `SoundManager` with `play("gem_collect")`, `playMusic("overworld")`, `setVolum
 
 **Tech:** Web Audio API is fine for this scale. Howler.js is a nice wrapper if you want a library.
 
-### 7. Fixed timestep + time manager
+### ~~7. Fixed timestep + time manager~~ ✓
 
-A central `Time` object: `{ dt, elapsed, timeScale, paused }`.
-
-**Why to do it early:** Without this, game speed varies with frame rate, and adding pause/slow-mo later means auditing every `dt` usage.
-
-**What it unlocks:**
-- Pause for free (`timeScale = 0`)
-- Slow-mo for free (`timeScale = 0.5`)
-- Frame-rate independent physics/movement
-- Consistent behavior across fast/slow machines
-- Day/night cycle (if ever wanted)
+*Done — `Time` class (`src/core/Time.ts`) with `elapsed` and `alpha`. Fixed timestep was already in `GameLoop.ts`; now render interpolation alpha flows through to `Camera` (prev/current interpolation) and `EntityRenderer` (entity position interpolation via `prevPosition`). Camera pixel rounding removed in favor of smooth sub-pixel interpolation. `timeScale` is a future addition. See `src/core/Time.ts`, `src/rendering/Camera.ts`, `src/rendering/EntityRenderer.ts`.*
 
 ### 8. Render layer / draw order system
 
@@ -171,7 +162,7 @@ A `Settings` object persisted to localStorage with UI to change values.
 | ~~Now~~ | ~~Input action mapping (#1)~~ | ✓ Done |
 | ~~Soon~~ | ~~Scene state machine (#3)~~ | ✓ Done |
 | ~~Soon~~ | ~~Asset manager (#4)~~ | ✓ Partial |
-| Soon | Time manager (#7) | Small |
+| ~~Soon~~ | ~~Time manager (#7)~~ | ✓ Done |
 | When editor grows | Command pattern (#2) | Medium |
 | When adding entities/props | Render layers (#8) | Medium |
 | When performance matters | Object pooling (#9) | Small |

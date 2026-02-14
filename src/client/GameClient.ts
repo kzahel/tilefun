@@ -6,6 +6,7 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
+import { Time } from "../core/Time.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
@@ -46,10 +47,12 @@ export class GameClient {
   private mainMenu: MainMenu;
   private propCatalog: PropCatalog;
   private stateView: ClientStateView;
+  private remoteView: RemoteStateView | null = null;
   private transport: IClientTransport;
   private server: GameServer | null;
   private serialized: boolean;
   private scenes: SceneManager;
+  private time: Time;
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
@@ -99,18 +102,22 @@ export class GameClient {
     };
 
     this.scenes = new SceneManager();
+    this.time = new Time();
 
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
       const clientWorld = new World(new FlatStrategy());
       const remoteView = new RemoteStateView(clientWorld);
       this.stateView = remoteView;
+      this.remoteView = remoteView;
 
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
-        // Domain-specific handlers first
+        // Domain-specific handlers first — buffer game-state for deferred
+        // application during client update tick (prevents async entity
+        // position changes that desync camera and entity interpolation)
         if (msg.type === "game-state") {
-          remoteView.applyGameState(msg);
+          remoteView.bufferGameState(msg);
         } else if (msg.type === "world-loaded") {
           remoteView.clear();
           this.camera.x = msg.cameraX;
@@ -134,8 +141,17 @@ export class GameClient {
     }
 
     this.loop = new GameLoop({
-      update: (dt) => this.scenes.update(dt),
-      render: (alpha) => this.scenes.render(alpha),
+      update: (dt) => {
+        this.time.elapsed += dt;
+        // Apply buffered server state at the start of each client tick so
+        // entity position changes are synchronized with camera.savePrev/follow.
+        this.remoteView?.applyPending();
+        this.scenes.update(dt);
+      },
+      render: (alpha) => {
+        this.time.alpha = alpha;
+        this.scenes.render(alpha);
+      },
     });
   }
 
@@ -176,10 +192,7 @@ export class GameClient {
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
-    this.sheets.set(
-      "gem",
-      new Spritesheet(this.gemSpriteCanvas as unknown as HTMLImageElement, 16, 16),
-    );
+    this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
 
     if (!this.serialized) {
       // Apply loaded world camera position (local mode — direct access)
@@ -408,6 +421,7 @@ export class GameClient {
       server: this.server,
       serialized: this.serialized,
       scenes: this.scenes,
+      time: this.time,
       get gemSpriteCanvas() {
         return client.gemSpriteCanvas;
       },

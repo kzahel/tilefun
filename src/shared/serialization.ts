@@ -70,6 +70,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
     collider: e.collider ? serializeCollider(e.collider) : null,
     wanderAI: e.wanderAI ? serializeWanderAI(e.wanderAI) : null,
   };
+  if (result.sprite && e.sprite?.flipX !== undefined) result.sprite.flipX = e.sprite.flipX;
   if (e.sortOffsetY !== undefined) result.sortOffsetY = e.sortOffsetY;
   if (e.flashHidden !== undefined) result.flashHidden = e.flashHidden;
   if (e.noShadow !== undefined) result.noShadow = e.noShadow;
@@ -100,6 +101,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
     collider: s.collider ? deserializeCollider(s.collider) : null,
     wanderAI: s.wanderAI ? deserializeWanderAI(s.wanderAI) : null,
   };
+  if (result.sprite && s.sprite?.flipX !== undefined) result.sprite.flipX = s.sprite.flipX;
   if (s.sortOffsetY !== undefined) result.sortOffsetY = s.sortOffsetY;
   if (s.flashHidden !== undefined) result.flashHidden = s.flashHidden;
   if (s.noShadow !== undefined) result.noShadow = s.noShadow;

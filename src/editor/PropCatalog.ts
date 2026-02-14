@@ -73,7 +73,7 @@ export class PropCatalog {
   private countLabel: HTMLSpanElement;
   private grid: HTMLDivElement;
   private cells: { el: HTMLDivElement; entry: AtlasSpriteEntry }[] = [];
-  private meCompleteImage: HTMLImageElement | null = null;
+  private meCompleteImage: CanvasImageSource | null = null;
   private thumbnailsRendered = false;
 
   onSelect: ((propType: string) => void) | null = null;
@@ -164,7 +164,7 @@ export class PropCatalog {
     this.buildCells();
   }
 
-  setImage(img: HTMLImageElement): void {
+  setImage(img: CanvasImageSource): void {
     this.meCompleteImage = img;
   }
 

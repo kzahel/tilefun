@@ -13,6 +13,7 @@ import type { ClientMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import type { SceneManager } from "./SceneManager.js";
+import type { Time } from "./Time.js";
 
 /**
  * Shared resources available to all scenes.
@@ -42,6 +43,9 @@ export interface GameContext {
 
   // Scene manager reference (so scenes can push/pop)
   readonly scenes: SceneManager;
+
+  // Central time manager (elapsed time, render interpolation alpha)
+  readonly time: Time;
 
   // Mutable client-side state
   gemSpriteCanvas: HTMLCanvasElement | null;

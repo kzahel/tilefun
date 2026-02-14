@@ -11,10 +11,10 @@ export const CHUNK_SIZE_PX = TILE_SIZE * CHUNK_SIZE;
 export const PIXEL_SCALE = 3;
 
 /** Chunks beyond the viewport to keep loaded. */
-export const RENDER_DISTANCE = 3;
+export const RENDER_DISTANCE = 1;
 
 /** Chunks beyond the viewport to unload from memory. */
-export const UNLOAD_DISTANCE = 5;
+export const UNLOAD_DISTANCE = 3;
 
 /** Fixed update tick rate in Hz. */
 export const TICK_RATE = 60;

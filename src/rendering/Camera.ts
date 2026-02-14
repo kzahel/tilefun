@@ -7,6 +7,14 @@ export class Camera {
   viewportHeight = 0;
   zoom = 1;
 
+  /** Previous position (before last update tick), for render interpolation. */
+  prevX = 0;
+  prevY = 0;
+
+  /** Actual position saved during interpolation, restored after render. */
+  private actualX = 0;
+  private actualY = 0;
+
   /** Effective pixel scale (base scale * zoom). */
   get scale(): number {
     return PIXEL_SCALE * this.zoom;
@@ -38,16 +46,34 @@ export class Camera {
     this.x += (targetX - this.x) * lerpFactor;
     this.y += (targetY - this.y) * lerpFactor;
 
-    const s = this.scale;
     // Snap to target when very close to avoid infinite asymptotic creep
+    const s = this.scale;
     const snapThreshold = 1 / s;
     if (Math.abs(this.x - targetX) < snapThreshold) this.x = targetX;
     if (Math.abs(this.y - targetY) < snapThreshold) this.y = targetY;
+  }
 
-    // Round camera to pixel grid so all Math.floor'd screen positions
-    // move in lockstep — prevents 1px jitter between tiles and entities
-    this.x = Math.round(this.x * s) / s;
-    this.y = Math.round(this.y * s) / s;
+  /** Save current position as previous (call at start of each update tick). */
+  savePrev(): void {
+    this.prevX = this.x;
+    this.prevY = this.y;
+  }
+
+  /**
+   * Temporarily set camera position to interpolated value for rendering.
+   * Call restoreActual() after rendering to restore the true position.
+   */
+  applyInterpolation(alpha: number): void {
+    this.actualX = this.x;
+    this.actualY = this.y;
+    this.x = this.prevX + (this.x - this.prevX) * alpha;
+    this.y = this.prevY + (this.y - this.prevY) * alpha;
+  }
+
+  /** Restore the true (post-update) camera position after rendering. */
+  restoreActual(): void {
+    this.x = this.actualX;
+    this.y = this.actualY;
   }
 
   /** Get the range of chunk coordinates visible in the current viewport. */

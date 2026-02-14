@@ -33,6 +33,9 @@ export class PlayScene implements GameScene {
   }
 
   update(dt: number, gc: GameContext): void {
+    // Save camera state for render interpolation
+    gc.camera.savePrev();
+
     // Debug panel state
     gc.camera.zoom = gc.debugPanel.zoom;
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
@@ -105,12 +108,29 @@ export class PlayScene implements GameScene {
     }
   }
 
-  render(_alpha: number, gc: GameContext): void {
+  render(alpha: number, gc: GameContext): void {
+    gc.camera.applyInterpolation(alpha);
+
+    // Override camera with exponential follow toward the interpolated player.
+    // Standard linear camera interpolation creates derivative discontinuities
+    // at tick boundaries (camera lerp ≠ entity linear motion), visible as
+    // jitter at high refresh rates. The exponential form matches the follow()
+    // decay curve, giving smooth sub-tick motion tied to the player.
+    const player = gc.stateView.playerEntity;
+    if (player.prevPosition) {
+      const px = player.prevPosition.wx + (player.position.wx - player.prevPosition.wx) * alpha;
+      const py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
+      const f = 1 - (1 - CAMERA_LERP) ** alpha;
+      gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
+      gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
+    }
+
     renderWorld(gc);
-    renderEntities(gc);
+    renderEntities(gc, alpha);
     drawGemHUD(gc);
     renderDebugOverlay(gc);
     gc.touchJoystick.draw(gc.ctx);
+    gc.camera.restoreActual();
   }
 }
 

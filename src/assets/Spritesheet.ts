@@ -1,9 +1,12 @@
+/** Any image source usable with drawImage that exposes width/height. */
+export type SpriteImage = CanvasImageSource & { width: number; height: number };
+
 export class Spritesheet {
   readonly cols: number;
   readonly rows: number;
 
   constructor(
-    readonly image: HTMLImageElement,
+    readonly image: SpriteImage,
     readonly tileWidth: number,
     readonly tileHeight: number,
   ) {

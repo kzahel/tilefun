@@ -63,6 +63,9 @@ export class EditScene implements GameScene {
   }
 
   update(dt: number, gc: GameContext): void {
+    // Save camera state for render interpolation
+    gc.camera.savePrev();
+
     // Debug panel state
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
       if (gc.serialized) {
@@ -227,7 +230,8 @@ export class EditScene implements GameScene {
     }
   }
 
-  render(_alpha: number, gc: GameContext): void {
+  render(alpha: number, gc: GameContext): void {
+    gc.camera.applyInterpolation(alpha);
     renderWorld(gc);
 
     // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
@@ -254,7 +258,8 @@ export class EditScene implements GameScene {
       gc.stateView.world,
     );
 
-    renderEntities(gc);
+    renderEntities(gc, alpha);
     renderDebugOverlay(gc);
+    gc.camera.restoreActual();
   }
 }

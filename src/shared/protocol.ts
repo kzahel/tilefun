@@ -120,6 +120,7 @@ export interface EntitySnapshot {
     moving: boolean;
     spriteWidth: number;
     spriteHeight: number;
+    flipX?: boolean;
   } | null;
   collider: {
     offsetX: number;

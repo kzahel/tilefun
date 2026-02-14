@@ -36,6 +36,8 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
       if (ai.directional) {
         sprite.direction = directionFromVelocity(ai.dirX, ai.dirY);
         sprite.frameRow = sprite.direction;
+      } else if (ai.dirX !== 0) {
+        sprite.flipX = ai.dirX < 0;
       }
     }
   } else {
@@ -111,6 +113,9 @@ export function updateBehaviorAI(
       }
       if (entity.sprite) {
         entity.sprite.moving = true;
+        if (!ai.directional && vel.vx !== 0) {
+          entity.sprite.flipX = vel.vx < 0;
+        }
       }
       return;
     }
@@ -144,6 +149,8 @@ export function updateBehaviorAI(
         if (ai.directional) {
           entity.sprite.direction = directionFromVelocity(dx, dy);
           entity.sprite.frameRow = entity.sprite.direction;
+        } else if (vel.vx !== 0) {
+          entity.sprite.flipX = vel.vx < 0;
         }
       }
       return;

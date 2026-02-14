@@ -34,19 +34,54 @@ export function renderWorld(gc: GameContext): void {
 /**
  * Draw y-sorted entities and props on top of terrain.
  * Called after any scene-specific overlays (editor grid, etc.).
+ * Culls entities outside the viewport before Y-sorting.
  */
-export function renderEntities(gc: GameContext): void {
+export function renderEntities(gc: GameContext, alpha = 1): void {
   const { ctx, camera, stateView, sheets } = gc;
   if (sheets.size === 0) return;
 
-  const renderables: Renderable[] = [
-    ...(stateView.entities.filter((e) => e.sprite) as Renderable[]),
-    ...stateView.props,
-  ];
-  renderables.sort(
-    (a, b) => a.position.wy + (a.sortOffsetY ?? 0) - (b.position.wy + (b.sortOffsetY ?? 0)),
+  // Viewport bounds in world coordinates, with margin for sprites partially on-screen
+  const CULL_MARGIN = 48; // pixels — covers largest sprite height (player = 48px)
+  const topLeft = camera.screenToWorld(-CULL_MARGIN * camera.scale, -CULL_MARGIN * camera.scale);
+  const bottomRight = camera.screenToWorld(
+    camera.viewportWidth + CULL_MARGIN * camera.scale,
+    camera.viewportHeight + CULL_MARGIN * camera.scale,
   );
-  drawEntities(ctx, camera, renderables, sheets, stateView.world);
+
+  const renderables: Renderable[] = [];
+  for (const e of stateView.entities) {
+    if (
+      !e.sprite ||
+      e.position.wx < topLeft.wx ||
+      e.position.wx > bottomRight.wx ||
+      e.position.wy < topLeft.wy ||
+      e.position.wy > bottomRight.wy
+    )
+      continue;
+    renderables.push(e as Renderable);
+  }
+  for (const p of stateView.props) {
+    if (
+      p.position.wx < topLeft.wx ||
+      p.position.wx > bottomRight.wx ||
+      p.position.wy < topLeft.wy ||
+      p.position.wy > bottomRight.wy
+    )
+      continue;
+    renderables.push(p);
+  }
+
+  // Sort by interpolated Y position for correct depth ordering
+  renderables.sort((a, b) => {
+    const ay = a.prevPosition
+      ? a.prevPosition.wy + (a.position.wy - a.prevPosition.wy) * alpha
+      : a.position.wy;
+    const by = b.prevPosition
+      ? b.prevPosition.wy + (b.position.wy - b.prevPosition.wy) * alpha
+      : b.position.wy;
+    return ay + (a.sortOffsetY ?? 0) - (by + (b.sortOffsetY ?? 0));
+  });
+  drawEntities(ctx, camera, renderables, sheets, alpha, stateView.world);
 }
 
 /** FPS state — shared across scenes since it's a global counter. */

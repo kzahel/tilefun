@@ -69,15 +69,44 @@ export class RemoteStateView implements ClientStateView {
   private _gemsCollected = 0;
   private _invincibilityTimer = 0;
   private _editorEnabled = true;
+  private _pendingState: GameStateMessage | null = null;
 
   constructor(world: World) {
     this._world = world;
   }
 
+  /**
+   * Buffer a game-state message for deferred application.
+   * Call applyPending() during the client update tick to apply it,
+   * ensuring entity and camera updates are synchronized.
+   */
+  bufferGameState(msg: GameStateMessage): void {
+    this._pendingState = msg;
+  }
+
+  /** Apply any buffered game-state. Call at the start of each client update tick. */
+  applyPending(): void {
+    if (!this._pendingState) return;
+    this.applyGameState(this._pendingState);
+    this._pendingState = null;
+  }
+
   /** Apply a full game-state message from the server. */
   applyGameState(msg: GameStateMessage): void {
+    // Save old positions for render interpolation (match by entity ID)
+    const prevPositions = new Map<number, { wx: number; wy: number }>();
+    for (const e of this._entities) {
+      prevPositions.set(e.id, { wx: e.position.wx, wy: e.position.wy });
+    }
+
     this._entities = msg.entities.map(deserializeEntity);
     this._props = msg.props.map(deserializeProp);
+
+    // Restore prev positions onto new entities for interpolation
+    for (const e of this._entities) {
+      const prev = prevPositions.get(e.id);
+      if (prev) e.prevPosition = prev;
+    }
     this._playerEntityId = msg.playerEntityId;
     this._gemsCollected = msg.gemsCollected;
     this._invincibilityTimer = msg.invincibilityTimer;

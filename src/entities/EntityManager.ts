@@ -12,6 +12,7 @@ import {
 } from "./collision.js";
 import type { Entity } from "./Entity.js";
 import type { PropManager } from "./PropManager.js";
+import { SpatialHash } from "./SpatialHash.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
 /** Player speed multiplier while pushing an entity. */
@@ -19,6 +20,7 @@ const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
   readonly entities: Entity[] = [];
+  readonly spatialHash = new SpatialHash();
   private nextId = 1;
 
   /** Optional hook for TagServiceImpl to receive tag change notifications. */
@@ -39,6 +41,7 @@ export class EntityManager {
   spawn(entity: Entity): Entity {
     entity.id = this.nextId++;
     this.entities.push(entity);
+    this.spatialHash.insert(entity);
     return entity;
   }
 
@@ -49,6 +52,13 @@ export class EntityManager {
     player: Entity,
     propManager: PropManager,
   ): void {
+    // Save previous positions for render interpolation (before any physics)
+    for (const entity of this.entities) {
+      entity.prevPosition = { wx: entity.position.wx, wy: entity.position.wy };
+    }
+    // Player may not be in this.entities (it's passed separately)
+    player.prevPosition = { wx: player.position.wx, wy: player.position.wy };
+
     const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
     // Helper: check if an AABB overlaps any prop's wall segments (or single collider)
@@ -66,12 +76,18 @@ export class EntityManager {
     };
 
     // Helper: build extra-blocker for resolveCollision (props + other entities).
+    // Uses spatial hash for nearby entity lookups instead of scanning all entities.
     const makeExtraBlocker =
       (self: Entity, alsoExclude?: Entity) =>
       (aabb: AABB): boolean => {
         if (overlapsAnyProp(aabb)) return true;
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
-        return aabbOverlapsAnyEntity(aabb, excludeIds, this.entities);
+        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
+        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
+        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
+        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
+        const nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       };
 
     // --- Phase 1: Push entities in player's path, then move player ---
@@ -95,7 +111,18 @@ export class EntityManager {
         const velLen = Math.sqrt(vx * vx + vy * vy);
         const playerCx = (playerBox.left + playerBox.right) / 2;
         const playerCy = (playerBox.top + playerBox.bottom) / 2;
-        for (const entity of this.entities) {
+        // Use spatial hash to find nearby entities instead of scanning all
+        const probMinCx = Math.floor(probeBox.left / CHUNK_SIZE_PX);
+        const probMaxCx = Math.floor(probeBox.right / CHUNK_SIZE_PX);
+        const probMinCy = Math.floor(probeBox.top / CHUNK_SIZE_PX);
+        const probMaxCy = Math.floor(probeBox.bottom / CHUNK_SIZE_PX);
+        const nearbyEntities = this.spatialHash.queryRange(
+          probMinCx,
+          probMinCy,
+          probMaxCx,
+          probMaxCy,
+        );
+        for (const entity of nearbyEntities) {
           if (entity === player || !entity.collider || !entity.wanderAI) continue;
           const entityBox = getEntityAABB(entity.position, entity.collider);
           if (!aabbsOverlap(probeBox, entityBox)) continue;
@@ -161,6 +188,11 @@ export class EntityManager {
       }
     }
 
+    // Update spatial hash after all movement (player + NPCs)
+    for (const entity of this.entities) {
+      this.spatialHash.update(entity);
+    }
+
     // --- Phase 4: Separate overlapping entities ---
     separateOverlappingEntities(this.entities, player, dt, getCollision, blockMask);
 
@@ -186,6 +218,8 @@ export class EntityManager {
   remove(id: number): boolean {
     const idx = this.entities.findIndex((e) => e.id === id);
     if (idx < 0) return false;
+    const entity = this.entities[idx];
+    if (entity) this.spatialHash.remove(entity);
     this.entities.splice(idx, 1);
     return true;
   }

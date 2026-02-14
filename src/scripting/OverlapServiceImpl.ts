@@ -1,3 +1,4 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
@@ -10,11 +11,8 @@ type OverlapCallback = (self: EntityHandle, other: EntityHandle) => void;
  * AABB overlap detection service. Runs once per tick (post-simulation).
  *
  * For each watched tag, finds all entities with that tag and checks their
- * AABB overlap against every other entity that has a collider. Fires enter/exit
- * callbacks when overlap state changes between ticks.
- *
- * N² pairwise check — fine for current entity counts (dozens). Add spatial
- * hashing if it grows to hundreds+.
+ * AABB overlap against nearby entities (via spatial hash) that have a collider.
+ * Fires enter/exit callbacks when overlap state changes between ticks.
  */
 export class OverlapServiceImpl implements OverlapService {
   private readonly em: EntityManager;
@@ -80,10 +78,17 @@ export class OverlapServiceImpl implements OverlapService {
         }
       }
 
-      // Check each tagged entity against all other entities with colliders
+      // Check each tagged entity against nearby entities (via spatial hash)
+      const spatialHash = this.em.spatialHash;
       for (const self of tagged) {
         const selfAABB = getEntityAABB(self.position, self.collider);
-        for (const other of entities) {
+        // Query entities in same + adjacent chunks
+        const minCx = Math.floor(selfAABB.left / CHUNK_SIZE_PX);
+        const maxCx = Math.floor(selfAABB.right / CHUNK_SIZE_PX);
+        const minCy = Math.floor(selfAABB.top / CHUNK_SIZE_PX);
+        const maxCy = Math.floor(selfAABB.bottom / CHUNK_SIZE_PX);
+        const nearby = spatialHash.queryRange(minCx - 1, minCy - 1, maxCx + 1, maxCy + 1);
+        for (const other of nearby) {
           if (other === self || !other.collider) continue;
           const otherAABB = getEntityAABB(other.position, other.collider);
           if (aabbsOverlap(selfAABB, otherAABB)) {

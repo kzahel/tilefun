@@ -51,8 +51,8 @@ describe("ChunkManager", () => {
   it("updateLoadedChunks loads within render distance", () => {
     const mgr = new ChunkManager();
     mgr.updateLoadedChunks({ minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 });
-    // RENDER_DISTANCE = 3, so should load from -3 to 3 in each direction = 7x7 = 49
-    expect(mgr.loadedCount).toBe(49);
+    // RENDER_DISTANCE = 1, so should load from -1 to 1 in each direction = 3x3 = 9
+    expect(mgr.loadedCount).toBe(9);
   });
 
   it("updateLoadedChunks unloads beyond unload distance", () => {
@@ -64,7 +64,7 @@ describe("ChunkManager", () => {
 
     // Move camera far away - chunks at origin should be unloaded
     mgr.updateLoadedChunks({ minCx: 20, minCy: 20, maxCx: 20, maxCy: 20 });
-    // Old chunks at origin (beyond UNLOAD_DISTANCE=5 from 20) should be gone
+    // Old chunks at origin (beyond UNLOAD_DISTANCE=3 from 20) should be gone
     expect(mgr.get(0, 0)).toBeUndefined();
   });
 
