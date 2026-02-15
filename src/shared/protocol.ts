@@ -1,4 +1,5 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
+import type { ColliderComponent, SpriteComponent, WanderAIComponent } from "../entities/Entity.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 
 // ---- Realm browser types ----
@@ -134,48 +135,9 @@ export interface EntitySnapshot {
   position: { wx: number; wy: number };
   sortOffsetY?: number;
   velocity: { vx: number; vy: number } | null;
-  sprite: {
-    sheetKey: string;
-    frameCol: number;
-    frameRow: number;
-    animTimer: number;
-    frameDuration: number;
-    frameCount: number;
-    direction: number;
-    moving: boolean;
-    spriteWidth: number;
-    spriteHeight: number;
-    flipX?: boolean;
-    drawOffsetY?: number;
-  } | null;
-  collider: {
-    offsetX: number;
-    offsetY: number;
-    width: number;
-    height: number;
-    solid?: boolean;
-    clientSolid?: boolean;
-  } | null;
-  wanderAI: {
-    state: string;
-    timer: number;
-    dirX: number;
-    dirY: number;
-    idleMin: number;
-    idleMax: number;
-    walkMin: number;
-    walkMax: number;
-    speed: number;
-    directional: boolean;
-    chaseRange?: number;
-    chaseSpeed?: number;
-    hostile?: boolean;
-    following?: boolean;
-    followDistance?: number;
-    followLeash?: number;
-    befriendable?: boolean;
-    rideSpeed?: number;
-  } | null;
+  sprite: SpriteComponent | null;
+  collider: ColliderComponent | null;
+  wanderAI: WanderAIComponent | null;
   flashHidden?: boolean;
   noShadow?: boolean;
   deathTimer?: number;

@@ -293,7 +293,7 @@ export class Realm {
               this.dismountPlayer(session);
               break; // Remaining inputs processed as normal player next tick
             }
-            this.applyMountInput(mount, input);
+            this.applyMountInput(mount, input, session.player);
           } else {
             updatePlayerFromInput(session.player, input, dt);
             if (input.jump && !(session.player.jumpZ ?? 0)) {
@@ -327,7 +327,7 @@ export class Realm {
           if (lastInput.jump) {
             this.dismountPlayer(session);
           } else {
-            this.applyMountInput(currentMount, lastInput);
+            this.applyMountInput(currentMount, lastInput, session.player);
             // Zero player velocity — position derived from parent resolution
             if (session.player.velocity) {
               session.player.velocity.vx = 0;
@@ -738,6 +738,7 @@ export class Realm {
   private applyMountInput(
     mount: Entity,
     input: { dx: number; dy: number; sprinting: boolean },
+    rider?: Entity,
   ): void {
     if (!mount.velocity) return;
     const baseSpeed = mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
@@ -763,6 +764,17 @@ export class Realm {
           mount.sprite.frameRow = mount.sprite.direction;
         }
       }
+    }
+
+    // Sync rider direction to match mount facing
+    if (rider?.sprite && mount.sprite) {
+      rider.sprite.direction =
+        mount.wanderAI?.directional === false
+          ? mount.sprite.flipX
+            ? Direction.Left
+            : Direction.Right
+          : mount.sprite.direction;
+      rider.sprite.frameRow = rider.sprite.direction;
     }
   }
 

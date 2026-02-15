@@ -1,5 +1,5 @@
 import { TILE_SIZE } from "../config/constants.js";
-import type { Entity } from "../entities/Entity.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { GameplaySession } from "./PlayerSession.js";
 
@@ -289,6 +289,22 @@ export class PlayerHandle extends EntityHandle {
     if (target.aiState !== null) target.setAIState("ridden");
     target.setFollowing(false);
     this.setVelocity(0, 0);
+    // Reset rider sprite to standing pose, facing mount direction
+    if (this.entity.sprite) {
+      this.entity.sprite.moving = false;
+      this.entity.sprite.frameCol = 0;
+      this.entity.sprite.animTimer = 0;
+      const mountEntity = this.entityManager.entities.find((e) => e.id === target.id);
+      if (mountEntity?.sprite) {
+        this.entity.sprite.direction =
+          mountEntity.wanderAI?.directional === false
+            ? mountEntity.sprite.flipX
+              ? Direction.Left
+              : Direction.Right
+            : mountEntity.sprite.direction;
+        this.entity.sprite.frameRow = this.entity.sprite.direction;
+      }
+    }
   }
 
   dismount(): void {

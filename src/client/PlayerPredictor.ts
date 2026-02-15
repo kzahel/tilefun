@@ -463,6 +463,17 @@ export class PlayerPredictor {
         }
       }
     }
+
+    // Sync rider direction to match mount facing
+    if (this.predicted?.sprite && mount.sprite) {
+      this.predicted.sprite.direction =
+        mount.wanderAI?.directional === false
+          ? mount.sprite.flipX
+            ? Direction.Left
+            : Direction.Right
+          : mount.sprite.direction;
+      this.predicted.sprite.frameRow = this.predicted.sprite.direction;
+    }
   }
 
   private clonePlayer(serverPlayer: Entity): Entity {
