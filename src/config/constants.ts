@@ -25,6 +25,20 @@ export const PLAYER_SPEED = 64;
 /** Speed multiplier when holding shift. */
 export const PLAYER_SPRINT_MULTIPLIER = 2;
 
+// ── Friction & acceleration (QuakeWorld-inspired) ──
+
+/** Base ground friction (QW default: 4, higher = snappier stops). */
+export const PLAYER_FRICTION = 6;
+
+/** Ground acceleration multiplier (QW default: 10). */
+export const PLAYER_ACCELERATE = 10;
+
+/** Friction uses this as minimum speed for the control term (QW: 100). */
+export const PLAYER_STOP_SPEED = 16;
+
+/** Below this speed, velocity is zeroed (prevents micro-drift). */
+export const PLAYER_STOP_THRESHOLD = 2;
+
 /** Camera smooth-follow lerp factor (per tick at 60Hz). */
 export const CAMERA_LERP = 0.1;
 

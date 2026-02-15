@@ -151,4 +151,9 @@ export class Chunk {
   setHeight(lx: number, ly: number, h: number): void {
     this.heightGrid[idx(lx, ly)] = h;
   }
+
+  /** Computed base TerrainId at a local tile position (from autotile blend). */
+  getBlendBase(lx: number, ly: number): number {
+    return this.blendBase[idx(lx, ly)] ?? 0;
+  }
 }

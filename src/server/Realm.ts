@@ -25,7 +25,7 @@ import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
 import { GemSpawner } from "../entities/GemSpawner.js";
-import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
+import { createPlayer } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
@@ -41,7 +41,9 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
+  applyFriction,
   applyMountInput,
+  applyMovementPhysics,
   cutJumpVelocity,
   initiateJump,
   moveAndCollide,
@@ -306,7 +308,7 @@ export class Realm {
             if (!input.jump) session.jumpConsumed = false;
             applyMountInput(mount, input, session.player);
           } else {
-            updatePlayerFromInput(session.player, input, dt);
+            applyMovementPhysics(session.player, input, dt, ctx);
             // Quake-style jump: level-triggered with consumed flag
             if (input.jump) {
               if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
@@ -346,7 +348,15 @@ export class Realm {
             }
           }
         } else {
-          updatePlayerFromInput(session.player, lastInput, dt);
+          // Build a fresh ctx for the last input (EntityManager handles collision
+          // for the last input, but we need ctx for friction/acceleration lookup)
+          const playerExclude = new Set([session.player.id]);
+          const playerCtx = this.buildMovementContext(
+            playerExclude,
+            session.debugNoclip,
+            session.player,
+          );
+          applyMovementPhysics(session.player, lastInput, dt, playerCtx);
           // Quake-style jump: level-triggered with consumed flag
           if (lastInput.jump) {
             if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
@@ -361,20 +371,26 @@ export class Realm {
         session.lastJumpHeld = lastInput.jump;
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
-        // No input this tick (timing jitter between client RAF and server
-        // setInterval). Zero velocity so EntityManager.update() doesn't
-        // advance the player — the client didn't predict any movement for
-        // this tick either, so the server must stay in sync.
-        session.player.velocity.vx = 0;
-        session.player.velocity.vy = 0;
-        // Also zero mount velocity when no input
+        // No input this tick — apply friction only (natural deceleration).
+        // With the friction model, velocity persists between ticks.
+        const noInputCtx = this.buildMovementContext(
+          new Set([session.player.id]),
+          session.debugNoclip,
+          session.player,
+        );
+        applyMovementPhysics(
+          session.player,
+          { dx: 0, dy: 0, sprinting: false, jump: false },
+          dt,
+          noInputCtx,
+        );
+        // Also apply friction to mount when no input
         if (session.gameplaySession.mountId !== null) {
           const mount = this.entityManager.entities.find(
             (e) => e.id === session.gameplaySession.mountId,
           );
           if (mount?.velocity) {
-            mount.velocity.vx = 0;
-            mount.velocity.vy = 0;
+            applyFriction(mount, dt, 1.0);
             if (mount.sprite) mount.sprite.moving = false;
           }
         }
@@ -957,6 +973,8 @@ export class Realm {
         return false;
       },
       noclip,
+      getTerrainAt: (tx, ty) => this.world.getBlendBaseAt(tx, ty),
+      getRoadAt: (tx, ty) => this.world.getRoadAt(tx, ty),
     };
   }
 

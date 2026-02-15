@@ -1,5 +1,6 @@
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { isRoad } from "../road/RoadType.js";
@@ -86,6 +87,15 @@ export class World {
     const chunk = this.chunks.get(cx, cy);
     if (!chunk) return 0;
     return chunk.getRoad(lx, ly);
+  }
+
+  /** Get computed blendBase TerrainId at a global tile position. Returns Grass if unloaded. */
+  getBlendBaseAt(tx: number, ty: number): number {
+    const { cx, cy } = tileToChunk(tx, ty);
+    const { lx, ly } = tileToLocal(tx, ty);
+    const chunk = this.chunks.get(cx, cy);
+    if (!chunk) return TerrainId.Grass;
+    return chunk.getBlendBase(lx, ly);
   }
 
   /** Update chunk loading/unloading based on visible range. */

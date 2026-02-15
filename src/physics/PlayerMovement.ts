@@ -3,14 +3,21 @@ import {
   JUMP_CUT_MULTIPLIER,
   JUMP_GRAVITY,
   JUMP_VELOCITY,
+  PLAYER_ACCELERATE,
+  PLAYER_FRAME_DURATION,
+  PLAYER_FRICTION,
   PLAYER_SPEED,
   PLAYER_SPRINT_MULTIPLIER,
+  PLAYER_STOP_SPEED,
+  PLAYER_STOP_THRESHOLD,
   STEP_UP_THRESHOLD,
 } from "../config/constants.js";
-import { aabbOverlapsSolid, getEntityAABB, getSpeedMultiplier } from "../entities/collision.js";
+import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
+import type { Movement } from "../input/ActionManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
+import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
   type EntitySurface,
   getHighestWalkableEntitySurfaceZ,
@@ -22,13 +29,38 @@ import {
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
-// ── Gravity scale (set via sv_gravity CVar) ──
+// ── CVars (runtime-tunable, same pattern as gravityScale) ──
+
 let gravityScale = 1;
 export function setGravityScale(scale: number): void {
   gravityScale = scale;
 }
 export function getGravityScale(): number {
   return gravityScale;
+}
+
+let frictionCVar = PLAYER_FRICTION;
+export function setFriction(v: number): void {
+  frictionCVar = v;
+}
+export function getFriction(): number {
+  return frictionCVar;
+}
+
+let accelerateCVar = PLAYER_ACCELERATE;
+export function setAccelerate(v: number): void {
+  accelerateCVar = v;
+}
+export function getAccelerate(): number {
+  return accelerateCVar;
+}
+
+let stopSpeedCVar = PLAYER_STOP_SPEED;
+export function setStopSpeed(v: number): void {
+  stopSpeedCVar = v;
+}
+export function getStopSpeed(): number {
+  return stopSpeedCVar;
 }
 
 /**
@@ -146,11 +178,127 @@ export function tickJumpGravity(
   return false;
 }
 
+// ── QuakeWorld-style friction & acceleration (adapted for 2D) ──
+
 /**
- * Move an entity using its current velocity, applying terrain speed multiplier
- * and per-axis sliding collision via the provided MovementContext.
+ * Apply ground friction to an entity's XY velocity.
+ * QW PM_Friction adapted for 2D top-down. Callers should skip this while
+ * airborne so jumping preserves momentum over slow terrain (water, sand).
+ * @param surfaceFriction Multiplier from terrain/road surface properties.
+ */
+export function applyFriction(entity: Entity, dt: number, surfaceFriction: number): void {
+  if (!entity.velocity) return;
+  const { vx, vy } = entity.velocity;
+  const speed = Math.sqrt(vx * vx + vy * vy);
+  if (speed < PLAYER_STOP_THRESHOLD) {
+    entity.velocity.vx = 0;
+    entity.velocity.vy = 0;
+    return;
+  }
+
+  const friction = frictionCVar * surfaceFriction;
+  const control = Math.max(speed, stopSpeedCVar);
+  const drop = control * friction * dt;
+  let newspeed = speed - drop;
+  if (newspeed < 0) newspeed = 0;
+  const scale = newspeed / speed;
+  entity.velocity.vx = vx * scale;
+  entity.velocity.vy = vy * scale;
+}
+
+/**
+ * Accelerate toward wish direction, capped at wish speed.
+ * QW PM_Accelerate adapted for 2D.
+ */
+export function applyAcceleration(
+  entity: Entity,
+  wishdirX: number,
+  wishdirY: number,
+  wishspeed: number,
+  dt: number,
+): void {
+  if (!entity.velocity || wishspeed <= 0) return;
+  const currentspeed = entity.velocity.vx * wishdirX + entity.velocity.vy * wishdirY;
+  const addspeed = wishspeed - currentspeed;
+  if (addspeed <= 0) return;
+  let accelspeed = accelerateCVar * dt * wishspeed;
+  if (accelspeed > addspeed) accelspeed = addspeed;
+  entity.velocity.vx += accelspeed * wishdirX;
+  entity.velocity.vy += accelspeed * wishdirY;
+}
+
+/**
+ * Apply friction + acceleration from player input. Replaces the old
+ * `updatePlayerFromInput` for non-mounted movement.
+ *
+ * - Computes wish direction and wish speed from input
+ * - Looks up surface properties for friction/speed multiplier
+ * - Applies QW-style friction then acceleration
+ * - Updates sprite direction and animation from input
+ */
+export function applyMovementPhysics(
+  entity: Entity,
+  input: Movement,
+  dt: number,
+  ctx: MovementContext,
+): void {
+  if (!entity.velocity) return;
+
+  const airborne = entity.jumpVZ !== undefined;
+
+  // Surface properties for friction and speed (ignored while airborne)
+  const defaultTerrain = (_tx: number, _ty: number) => 4; // Grass
+  const defaultRoad = (_tx: number, _ty: number) => 0; // None
+  const surface = airborne
+    ? { friction: 1.0, speedMult: 1.0 }
+    : getSurfaceProperties(
+        entity.position.wx,
+        entity.position.wy,
+        ctx.getTerrainAt ?? defaultTerrain,
+        ctx.getRoadAt ?? defaultRoad,
+        ctx.getCollision,
+      );
+
+  // 1. Friction first (QW order) — skip while airborne to preserve momentum
+  if (!airborne) {
+    applyFriction(entity, dt, surface.friction);
+  }
+
+  // 2. Compute wish direction and wish speed
+  const { dx, dy } = input;
+  const moving = dx !== 0 || dy !== 0;
+  if (moving) {
+    const len = Math.sqrt(dx * dx + dy * dy);
+    const wishdirX = dx / len;
+    const wishdirY = dy / len;
+    const baseSpeed = input.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
+    const wishspeed = baseSpeed * surface.speedMult;
+    applyAcceleration(entity, wishdirX, wishdirY, wishspeed, dt);
+  }
+
+  // 3. Update sprite from input (not velocity — prevents animation during passive slide)
+  if (entity.sprite) {
+    entity.sprite.moving = moving;
+    entity.sprite.frameDuration = input.sprinting
+      ? PLAYER_FRAME_DURATION / PLAYER_SPRINT_MULTIPLIER
+      : PLAYER_FRAME_DURATION;
+    if (moving) {
+      if (Math.abs(dx) >= Math.abs(dy)) {
+        entity.sprite.direction = dx > 0 ? Direction.Right : Direction.Left;
+      } else {
+        entity.sprite.direction = dy > 0 ? Direction.Down : Direction.Up;
+      }
+      entity.sprite.frameRow = entity.sprite.direction;
+    }
+  }
+}
+
+/**
+ * Move an entity using its current velocity with per-axis sliding collision.
  *
  * Handles noclip (skip collision) and no-collider (free movement) cases.
+ * Does NOT apply speed multipliers — velocity is assumed to already
+ * reflect surface properties via the friction/acceleration model.
  */
 export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext): void {
   if (!entity.velocity) return;
@@ -162,9 +310,8 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
     return;
   }
 
-  const speedMult = getSpeedMultiplier(entity.position, ctx.getCollision);
-  const dx = entity.velocity.vx * dt * speedMult;
-  const dy = entity.velocity.vy * dt * speedMult;
+  const dx = entity.velocity.vx * dt;
+  const dy = entity.velocity.vy * dt;
 
   const entityWz = entity.wz ?? 0;
   const entityHeight = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;

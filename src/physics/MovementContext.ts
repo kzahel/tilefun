@@ -17,4 +17,8 @@ export interface MovementContext {
   isPropBlocked(aabb: AABB, entityWz: number, entityHeight: number): boolean;
   /** When true, skip all collision (debug noclip). */
   noclip: boolean;
+  /** Computed blendBase TerrainId at tile coords. For surface friction lookup. */
+  getTerrainAt?(tx: number, ty: number): number;
+  /** Road type at tile coords. For surface friction lookup. */
+  getRoadAt?(tx: number, ty: number): number;
 }

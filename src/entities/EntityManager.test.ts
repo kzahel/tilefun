@@ -116,19 +116,19 @@ describe("EntityManager", () => {
       expect(p.position.wx).toBe(100);
     });
 
-    it("applies SlowWalk speed reduction", () => {
+    it("applies SlowWalk speed reduction to NPCs", () => {
       const em = new EntityManager();
-      const p = em.spawn(createPlayer(50, 50));
-      const vel = p.velocity;
-      assertDefined(vel);
-      vel.vx = 100;
-      vel.vy = 0;
-      // Current tile (3, 3) has SlowWalk
+      const player = em.spawn(createPlayer(0, 0)); // far away
+      const npc = em.spawn(createChicken(50, 50));
+      assertDefined(npc.velocity);
+      npc.velocity.vx = 100;
+      npc.velocity.vy = 0;
+      // Current tile (3, 3) has SlowWalk — NPCs still use getSpeedMultiplier
       const getCollision = (tx: number, ty: number) =>
         tx === 3 && ty === 3 ? CollisionFlag.SlowWalk : CollisionFlag.None;
-      updateWith(em, 1, getCollision, p);
-      // Should move at half speed: 100 * 0.5 = 50
-      expect(p.position.wx).toBeCloseTo(100, 0);
+      updateWith(em, 1, getCollision, player);
+      // NPC should move at half speed: 100 * 0.5 = 50
+      expect(npc.position.wx).toBeCloseTo(100, 0);
     });
 
     it("reverses chicken direction on collision", () => {

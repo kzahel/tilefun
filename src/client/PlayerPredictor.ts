@@ -1,13 +1,13 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
 import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import { updatePlayerFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyMountInput,
+  applyMovementPhysics,
   cutJumpVelocity,
   initiateJump,
   moveAndCollide,
@@ -434,8 +434,16 @@ export class PlayerPredictor {
         this.predicted.wz = this.predictedMount.wz + this.predicted.jumpZ;
       }
     } else {
-      // ── Normal: apply input to player directly ──
-      updatePlayerFromInput(this.predicted, movement, dt);
+      // ── Normal: apply friction + acceleration from input ──
+      const playerExclude = new Set([this.predicted.id]);
+      const playerCtx = this.buildMovementContext(
+        world,
+        props,
+        entities,
+        playerExclude,
+        this.predicted,
+      );
+      applyMovementPhysics(this.predicted, movement, dt, playerCtx);
 
       // Quake-style jump: level-triggered with consumed flag
       if (movement.jump) {
@@ -449,14 +457,6 @@ export class PlayerPredictor {
       }
       this.lastJumpHeld = movement.jump;
 
-      const playerExclude = new Set([this.predicted.id]);
-      const playerCtx = this.buildMovementContext(
-        world,
-        props,
-        entities,
-        playerExclude,
-        this.predicted,
-      );
       moveAndCollide(this.predicted, dt, playerCtx);
 
       // Ground tracking after XY movement — shared functions keep
@@ -534,6 +534,8 @@ export class PlayerPredictor {
         return false;
       },
       noclip: this.noclip,
+      getTerrainAt: (tx, ty) => world.getBlendBaseAt(tx, ty),
+      getRoadAt: (tx, ty) => world.getRoadAt(tx, ty),
     };
   }
 }

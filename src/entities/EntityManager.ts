@@ -136,9 +136,9 @@ export class EntityManager {
       };
 
     // --- Phase 1: Push entities in each player's path, then move players ---
+    // Player velocity is already friction/acceleration-adjusted — no speedMult needed.
     for (const player of players) {
       if (player.velocity && player.collider) {
-        const speedMult = getSpeedMultiplier(player.position, getCollision);
         const { vx, vy } = player.velocity;
 
         // Detect pushable entities adjacent to player in movement direction.
@@ -147,8 +147,8 @@ export class EntityManager {
         const playerPhysH = player.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         if (vx !== 0 || vy !== 0) {
           const playerBox = getEntityAABB(player.position, player.collider);
-          const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
-          const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);
+          const probeX = Math.max(1, Math.abs(vx * dt)) * Math.sign(vx);
+          const probeY = Math.max(1, Math.abs(vy * dt)) * Math.sign(vy);
           const probeBox: AABB = {
             left: playerBox.left + probeX,
             top: playerBox.top + probeY,
@@ -189,8 +189,8 @@ export class EntityManager {
         // Slow the player proportional to the strongest push
         const maxPushFactor = toPush.reduce((m, p) => Math.max(m, p.pushFactor), 0);
         const pushMult = 1.0 - (1.0 - PUSH_PLAYER_SPEED_MULT) * maxPushFactor;
-        const dx = vx * dt * speedMult * pushMult;
-        const dy = vy * dt * speedMult * pushMult;
+        const dx = vx * dt * pushMult;
+        const dy = vy * dt * pushMult;
 
         // Pre-push: move entities proportional to how directly the player walks into them.
         for (const { entity, pushFactor } of toPush) {
