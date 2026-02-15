@@ -1,9 +1,9 @@
 import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
+  applyGroundTracking,
+  getEffectiveGroundZ,
   getSurfaceZ,
-  getWalkableEntitySurfaceZ,
-  getWalkablePropSurfaceZ,
   isElevationBlocked3D,
 } from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -246,76 +246,30 @@ export class EntityManager {
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
     if (getHeight) {
-      // Helper: compute effective ground Z including terrain + walkable prop/entity surfaces
-      const getEffectiveGroundZ = (e: Entity): number => {
-        let groundZ = getSurfaceZ(e.position.wx, e.position.wy, getHeight);
-        if (e.collider) {
-          const footprint = getEntityAABB(e.position, e.collider);
-          const minCx = Math.floor(footprint.left / CHUNK_SIZE_PX);
-          const maxCx = Math.floor(footprint.right / CHUNK_SIZE_PX);
-          const minCy = Math.floor(footprint.top / CHUNK_SIZE_PX);
-          const maxCy = Math.floor(footprint.bottom / CHUNK_SIZE_PX);
-          const nearbyProps = propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy);
-          const propZ = getWalkablePropSurfaceZ(footprint, e.wz ?? 0, nearbyProps);
-          if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
-          const nearbyEntities = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-          const entZ = getWalkableEntitySurfaceZ(footprint, e.id, e.wz ?? 0, nearbyEntities);
-          if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
-        }
-        return groundZ;
+      const computeGroundZ = (e: Entity): number => {
+        const footprint = e.collider ? getEntityAABB(e.position, e.collider) : null;
+        const minCx = Math.floor((footprint?.left ?? e.position.wx) / CHUNK_SIZE_PX);
+        const maxCx = Math.floor((footprint?.right ?? e.position.wx) / CHUNK_SIZE_PX);
+        const minCy = Math.floor((footprint?.top ?? e.position.wy) / CHUNK_SIZE_PX);
+        const maxCy = Math.floor((footprint?.bottom ?? e.position.wy) / CHUNK_SIZE_PX);
+        return getEffectiveGroundZ(
+          e,
+          getHeight,
+          propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),
+          this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
+        );
       };
 
       for (const entity of this.entities) {
         if (entityTickDts && !entityTickDts.has(entity)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
         if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
-        const groundZ = getEffectiveGroundZ(entity);
-        entity.groundZ = groundZ;
-        if (entity.wz === undefined) {
-          // First frame: initialize wz at ground level
-          entity.wz = groundZ;
-        } else if (entity.jumpVZ === undefined) {
-          // Grounded entity — check for cliff edge or snap
-          if (entity.wz > groundZ && playerSet.has(entity)) {
-            if (entity.wz - groundZ <= STEP_UP_THRESHOLD) {
-              // Small step down — snap to ground instead of falling
-              entity.wz = groundZ;
-              delete entity.jumpZ;
-            } else {
-              // Player walked off cliff — start falling
-              entity.jumpVZ = 0;
-              entity.jumpZ = entity.wz - groundZ;
-            }
-          } else {
-            // Snap to ground (NPCs always snap, players on same/higher ground)
-            entity.wz = groundZ;
-            delete entity.jumpZ;
-          }
-        }
+        applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
       for (const player of players) {
         if (player.parentId !== undefined) continue; // riders: Z is visual-only
-        const groundZ = getEffectiveGroundZ(player);
-        player.groundZ = groundZ;
-        if (player.wz === undefined) {
-          player.wz = groundZ;
-        } else if (player.jumpVZ === undefined) {
-          if (player.wz > groundZ) {
-            if (player.wz - groundZ <= STEP_UP_THRESHOLD) {
-              // Small step down — snap to ground instead of falling
-              player.wz = groundZ;
-              delete player.jumpZ;
-            } else {
-              // Player walked off cliff — start falling
-              player.jumpVZ = 0;
-              player.jumpZ = player.wz - groundZ;
-            }
-          } else {
-            player.wz = groundZ;
-            delete player.jumpZ;
-          }
-        }
+        applyGroundTracking(player, computeGroundZ(player), true);
       }
     }
 

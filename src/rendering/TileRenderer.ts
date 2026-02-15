@@ -5,6 +5,7 @@ import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
+  ELEVATION_PX,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -145,8 +146,10 @@ export class TileRenderer {
             const globalTy = cy * CHUNK_SIZE + ly;
             result.push({
               kind: "elevation",
-              // Sort at the tile's south edge so entities behind sort earlier
-              sortKey: (globalTy + 1) * TILE_SIZE,
+              // Sort at the tile's south edge minus elevation offset so entities
+              // standing on the surface (whose sortKey includes h * ELEVATION_PX)
+              // always sort after their own tile.
+              sortKey: (globalTy + 1) * TILE_SIZE - h * ELEVATION_PX,
               wx: origin.wx + lx * TILE_SIZE,
               wy: origin.wy + ly * TILE_SIZE,
               chunkCache: chunk.renderCache,

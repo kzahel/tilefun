@@ -23,6 +23,11 @@ export function drawScene2D(
   for (const item of items) {
     switch (item.kind) {
       case "sprite":
+        // Draw elevated shadows inline so they appear on top of the
+        // elevation surface tile rather than being covered by it.
+        if (item.hasShadow && !item.flashHidden && item.shadowTerrainZ > 0) {
+          drawOneShadow(ctx, camera, item);
+        }
         drawSprite(ctx, camera, item, sheets);
         break;
       case "elevation":
@@ -38,28 +43,40 @@ export function drawScene2D(
   }
 }
 
+/** Draw a single entity shadow ellipse. */
+function drawOneShadow(ctx: CanvasRenderingContext2D, camera: Camera, item: SpriteItem): void {
+  const shadowW = item.shadowWidth * camera.scale;
+  const shadowH = shadowW * 0.35;
+  const terrainOffset = item.shadowTerrainZ * camera.scale;
+  const feetScreen = camera.worldToScreen(item.wx, item.shadowFeetWy);
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = "#000";
+  ctx.beginPath();
+  ctx.ellipse(
+    Math.floor(feetScreen.sx),
+    Math.floor(feetScreen.sy - terrainOffset),
+    shadowW / 2,
+    shadowH / 2,
+    0,
+    0,
+    Math.PI * 2,
+  );
+  ctx.fill();
+  ctx.restore();
+}
+
+/**
+ * Pre-pass: draw shadows for entities on flat terrain only.
+ * Elevated shadows are drawn inline in the main pass (after the elevation
+ * tile surface so they aren't covered up).
+ */
 function drawShadows(ctx: CanvasRenderingContext2D, camera: Camera, items: SceneItem[]): void {
   for (const item of items) {
     if (item.kind !== "sprite" || !item.hasShadow || item.flashHidden) continue;
-    const shadowW = item.shadowWidth * camera.scale;
-    const shadowH = shadowW * 0.35;
-    const terrainOffset = item.shadowTerrainZ * camera.scale;
-    const feetScreen = camera.worldToScreen(item.wx, item.shadowFeetWy);
-    ctx.save();
-    ctx.globalAlpha = 0.3;
-    ctx.fillStyle = "#000";
-    ctx.beginPath();
-    ctx.ellipse(
-      Math.floor(feetScreen.sx),
-      Math.floor(feetScreen.sy - terrainOffset),
-      shadowW / 2,
-      shadowH / 2,
-      0,
-      0,
-      Math.PI * 2,
-    );
-    ctx.fill();
-    ctx.restore();
+    // Skip elevated shadows — they'll be drawn inline in the main pass
+    if (item.shadowTerrainZ > 0) continue;
+    drawOneShadow(ctx, camera, item);
   }
 }
 

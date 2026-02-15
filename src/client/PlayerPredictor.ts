@@ -1,8 +1,4 @@
-import {
-  DEFAULT_PHYSICAL_HEIGHT,
-  JUMP_BUFFER_TIME,
-  STEP_UP_THRESHOLD,
-} from "../config/constants.js";
+import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
 import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerFromInput } from "../entities/Player.js";
@@ -17,11 +13,7 @@ import {
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
-import {
-  getSurfaceZ,
-  getWalkableEntitySurfaceZ,
-  getWalkablePropSurfaceZ,
-} from "../physics/surfaceHeight.js";
+import { applyGroundTracking, getEffectiveGroundZ } from "../physics/surfaceHeight.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -64,11 +56,11 @@ export class PlayerPredictor {
   /** Previous predicted wz for render interpolation. */
   private _prevWz = 0;
 
-  /** Previous jump input state for edge detection. */
-  private prevJumpInput = false;
+  /** Whether the current jump press has been consumed (Quake's oldbuttons). */
+  private jumpConsumed = false;
 
-  /** Time remaining on buffered jump input (seconds). */
-  private jumpBufferTimer = 0;
+  /** Whether jump was held on the most recent input (for landing-frame check). */
+  private lastJumpHeld = false;
 
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
@@ -99,8 +91,8 @@ export class PlayerPredictor {
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this._prevWz = this.predicted.wz ?? 0;
     this.inputBuffer = [];
-    this.prevJumpInput = false;
-    this.jumpBufferTimer = 0;
+    this.jumpConsumed = false;
+    this.lastJumpHeld = false;
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
       this.predictedMount = this.clonePlayer(serverMount);
@@ -419,18 +411,17 @@ export class PlayerPredictor {
       // ── Normal: apply input to player directly ──
       updatePlayerFromInput(this.predicted, movement, dt);
 
-      const jumpRising = movement.jump && !this.prevJumpInput;
-      const jumpFalling = !movement.jump && this.prevJumpInput;
-      if (jumpRising) {
-        if (this.predicted.jumpVZ === undefined) {
+      // Quake-style jump: level-triggered with consumed flag
+      if (movement.jump) {
+        if (this.predicted.jumpVZ === undefined && !this.jumpConsumed) {
           initiateJump(this.predicted);
-        } else {
-          this.jumpBufferTimer = JUMP_BUFFER_TIME;
+          this.jumpConsumed = true;
         }
-      } else if (jumpFalling) {
+      } else if (this.jumpConsumed) {
         cutJumpVelocity(this.predicted);
+        this.jumpConsumed = false;
       }
-      this.prevJumpInput = movement.jump;
+      this.lastJumpHeld = movement.jump;
 
       const playerExclude = new Set([this.predicted.id]);
       const playerCtx = this.buildMovementContext(
@@ -442,45 +433,17 @@ export class PlayerPredictor {
       );
       moveAndCollide(this.predicted, dt, playerCtx);
 
-      // Ground tracking after XY movement (terrain + walkable prop/entity surfaces)
+      // Ground tracking after XY movement — shared functions keep
+      // client prediction in sync with server's EntityManager.
       const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-      let groundZ = getSurfaceZ(this.predicted.position.wx, this.predicted.position.wy, getHeight);
-      if (this.predicted.collider) {
-        const footprint = getEntityAABB(this.predicted.position, this.predicted.collider);
-        const propZ = getWalkablePropSurfaceZ(footprint, this.predicted.wz ?? 0, props);
-        if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
-        const entZ = getWalkableEntitySurfaceZ(
-          footprint,
-          this.predicted.id,
-          this.predicted.wz ?? 0,
-          entities,
-        );
-        if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
-      }
-      this.predicted.groundZ = groundZ;
-      if (this.predicted.wz === undefined) {
-        this.predicted.wz = groundZ;
-      } else if (this.predicted.jumpVZ === undefined && this.predicted.wz > groundZ) {
-        if (this.predicted.wz - groundZ <= STEP_UP_THRESHOLD) {
-          // Small step down — snap to ground instead of falling
-          this.predicted.wz = groundZ;
-        } else {
-          // Cliff edge — start falling
-          this.predicted.jumpVZ = 0;
-          this.predicted.jumpZ = this.predicted.wz - groundZ;
-        }
-      } else if (this.predicted.jumpVZ === undefined) {
-        // Snap to ground
-        this.predicted.wz = groundZ;
-      }
+      const groundZ = getEffectiveGroundZ(this.predicted, getHeight, props, entities);
+      applyGroundTracking(this.predicted, groundZ, true);
 
       const landed = tickJumpGravity(this.predicted, dt, getHeight, props, entities);
-      if (landed && this.jumpBufferTimer > 0) {
+      if (landed && this.lastJumpHeld && !this.jumpConsumed) {
+        // Quake-style: jump immediately on landing if held and not consumed
         initiateJump(this.predicted);
-        this.jumpBufferTimer = 0;
-      }
-      if (this.jumpBufferTimer > 0) {
-        this.jumpBufferTimer -= dt;
+        this.jumpConsumed = true;
       }
     }
   }

@@ -172,8 +172,8 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "world-loaded",
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
-            cameraX: existingSession.cameraX,
-            cameraY: existingSession.cameraY,
+            cameraX: existingSession.player.position.wx,
+            cameraY: existingSession.player.position.wy,
             cameraZoom: existingSession.cameraZoom,
           });
           // Reset chunk revisions so all chunks get re-sent to the fresh connection
@@ -207,8 +207,8 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "world-loaded",
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
-            cameraX: session.cameraX,
-            cameraY: session.cameraY,
+            cameraX: session.player.position.wx,
+            cameraY: session.player.position.wy,
             cameraZoom: session.cameraZoom,
           });
         });
@@ -373,8 +373,8 @@ export class GameServer {
     await targetRealm.addPlayer(session);
 
     return {
-      cameraX: session.cameraX,
-      cameraY: session.cameraY,
+      cameraX: session.player.position.wx,
+      cameraY: session.player.position.wy,
       cameraZoom: session.cameraZoom,
     };
   }
@@ -446,8 +446,8 @@ export class GameServer {
           this.transport.send(session.clientId, {
             type: "world-loaded",
             worldId: this.defaultRealmId,
-            cameraX: session.cameraX,
-            cameraY: session.cameraY,
+            cameraX: session.player.position.wx,
+            cameraY: session.player.position.wy,
             cameraZoom: session.cameraZoom,
           });
         }

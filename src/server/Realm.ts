@@ -3,7 +3,6 @@ import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import {
   CHUNK_SIZE_PX,
   DEFAULT_PHYSICAL_HEIGHT,
-  JUMP_BUFFER_TIME,
   JUMP_VELOCITY,
   RENDER_DISTANCE,
   THROW_ANGLE,
@@ -296,31 +295,30 @@ export class Realm {
         // diverges, causing visible jitter.
         for (let i = 0; i < inputs.length - 1; i++) {
           const input = inputs[i]!;
-          const jumpRising = input.jump && !session.prevJumpInput;
-          const jumpFalling = !input.jump && session.prevJumpInput;
 
           if (mount) {
-            // Riding: jump rising edge = dismount
-            if (jumpRising) {
+            // Riding: first jump press = dismount (Quake-style: held + not consumed)
+            if (input.jump && !session.jumpConsumed) {
               this.dismountPlayer(session);
-              session.prevJumpInput = input.jump;
+              session.jumpConsumed = true;
               break; // Remaining inputs processed as normal player next tick
             }
+            if (!input.jump) session.jumpConsumed = false;
             applyMountInput(mount, input, session.player);
           } else {
             updatePlayerFromInput(session.player, input, dt);
-            if (jumpRising) {
-              if (session.player.jumpVZ === undefined) {
+            // Quake-style jump: level-triggered with consumed flag
+            if (input.jump) {
+              if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
                 initiateJump(session.player);
-              } else {
-                session.jumpBufferTimer = JUMP_BUFFER_TIME;
+                session.jumpConsumed = true;
               }
-            } else if (jumpFalling) {
+            } else if (session.jumpConsumed) {
               cutJumpVelocity(session.player);
+              session.jumpConsumed = false;
             }
           }
 
-          session.prevJumpInput = input.jump;
           moveAndCollide(movementTarget, dt, ctx);
           session.lastProcessedInputSeq = input.seq;
         }
@@ -328,8 +326,6 @@ export class Realm {
         // Last input goes through normal path (EntityManager handles movement
         // including push mechanics, entity-entity collision, etc.)
         const lastInput = inputs[inputs.length - 1]!;
-        const lastJumpRising = lastInput.jump && !session.prevJumpInput;
-        const lastJumpFalling = !lastInput.jump && session.prevJumpInput;
         // Re-resolve mount (may have dismounted during extra inputs above)
         const currentMount =
           session.gameplaySession.mountId !== null
@@ -337,9 +333,11 @@ export class Realm {
               null)
             : null;
         if (currentMount) {
-          if (lastJumpRising) {
+          if (lastInput.jump && !session.jumpConsumed) {
             this.dismountPlayer(session);
+            session.jumpConsumed = true;
           } else {
+            if (!lastInput.jump) session.jumpConsumed = false;
             applyMountInput(currentMount, lastInput, session.player);
             // Zero player velocity — position derived from parent resolution
             if (session.player.velocity) {
@@ -349,17 +347,18 @@ export class Realm {
           }
         } else {
           updatePlayerFromInput(session.player, lastInput, dt);
-          if (lastJumpRising) {
-            if (session.player.jumpVZ === undefined) {
+          // Quake-style jump: level-triggered with consumed flag
+          if (lastInput.jump) {
+            if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
               initiateJump(session.player);
-            } else {
-              session.jumpBufferTimer = JUMP_BUFFER_TIME;
+              session.jumpConsumed = true;
             }
-          } else if (lastJumpFalling) {
+          } else if (session.jumpConsumed) {
             cutJumpVelocity(session.player);
+            session.jumpConsumed = false;
           }
         }
-        session.prevJumpInput = lastInput.jump;
+        session.lastJumpHeld = lastInput.jump;
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
         // No input this tick (timing jitter between client RAF and server
@@ -472,17 +471,13 @@ export class Realm {
             delete p.jumpZ;
             // Brief invincibility flash so the respawn is visible
             session.gameplaySession.invincibilityTimer = 0.75;
-          } else if (session.jumpBufferTimer > 0) {
-            // Buffered jump: immediately re-jump on landing
+          } else if (session.lastJumpHeld && !session.jumpConsumed) {
+            // Quake-style: jump immediately on landing if held and not consumed
             initiateJump(p);
-            session.jumpBufferTimer = 0;
+            session.jumpConsumed = true;
           } else if (session.gameplaySession.mountId === null) {
             this.tryMountOnLanding(session);
           }
-        }
-        // Decrement jump buffer timer
-        if (session.jumpBufferTimer > 0) {
-          session.jumpBufferTimer -= dt;
         }
       }
 

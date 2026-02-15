@@ -61,9 +61,6 @@ export const JUMP_GRAVITY = 500;
 /** Velocity multiplier applied when jump button is released while ascending (variable jump height). */
 export const JUMP_CUT_MULTIPLIER = 0.4;
 
-/** Seconds to buffer a jump input pressed while airborne. */
-export const JUMP_BUFFER_TIME = 0.15;
-
 /** Default physical height (world px) for entities missing collider.physicalHeight. */
 export const DEFAULT_PHYSICAL_HEIGHT = 8;
 

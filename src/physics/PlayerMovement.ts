@@ -110,8 +110,11 @@ export function tickJumpGravity(
     const prevWz = entity.wz;
     entity.jumpVZ -= JUMP_GRAVITY * gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
+    // Terrain landing uses center point — not AABB max — so the player
+    // actually lands at the lower elevation after walking off a cliff.
+    // (Ground *tracking* uses AABB max to prevent premature falls along edges.)
     let groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
-    // Check walkable prop surfaces for landing (no height filter — land on
+    // Check walkable prop/entity surfaces for landing (no height filter — land on
     // any surface we descend through, unlike step-up which uses threshold)
     if (entity.collider) {
       const footprint = getEntityAABB(entity.position, entity.collider);

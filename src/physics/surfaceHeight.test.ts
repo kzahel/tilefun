@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
-import { getMaxSurfaceZUnderAABB, getSurfaceZ, isElevationBlocked3D } from "./surfaceHeight.js";
+import { ELEVATION_PX, STEP_UP_THRESHOLD, TILE_SIZE } from "../config/constants.js";
+import {
+  applyGroundTracking,
+  getEffectiveGroundZ,
+  getMaxSurfaceZUnderAABB,
+  getSurfaceZ,
+  isElevationBlocked3D,
+} from "./surfaceHeight.js";
 
 /** Create a getHeight function from a sparse tile→height map. */
 function heightMap(map: Record<string, number>): (tx: number, ty: number) => number {
@@ -114,5 +120,147 @@ describe("isElevationBlocked3D", () => {
   it("allows on flat terrain", () => {
     const aabb = { left: 10, top: 10, right: 20, bottom: 20 };
     expect(isElevationBlocked3D(aabb, 0, () => 0)).toBe(false);
+  });
+});
+
+describe("getEffectiveGroundZ", () => {
+  const collider = { offsetX: 0, offsetY: 0, width: 10, height: 10 };
+
+  it("uses center point when entity has no collider", () => {
+    const getHeight = heightMap({ "6,6": 2 });
+    const entity = { position: { wx: 100, wy: 100 }, collider: null, id: 1 };
+    expect(getEffectiveGroundZ(entity, getHeight, [], [])).toBe(2 * ELEVATION_PX);
+  });
+
+  it("uses AABB max when entity has a collider", () => {
+    // Tile (0,0) at height 0, tile (1,0) at height 2.
+    // Entity center is on tile 0 but AABB straddles into tile 1.
+    const getHeight = heightMap({ "1,0": 2 });
+    const entity = { position: { wx: 14, wy: 5 }, collider, id: 1 };
+    // Center on tile 0 (wx=14 → tx=0), but AABB right = 14+5 = 19 → tile 1
+    expect(getEffectiveGroundZ(entity, getHeight, [], [])).toBe(2 * ELEVATION_PX);
+  });
+
+  it("center-point fallback returns lower tile for no-collider entity", () => {
+    const getHeight = heightMap({ "1,0": 2 });
+    // Center at wx=14 → tile 0 (height 0), even though tile 1 is elevated
+    const entity = { position: { wx: 14, wy: 5 }, collider: null, id: 1 };
+    expect(getEffectiveGroundZ(entity, getHeight, [], [])).toBe(0);
+  });
+
+  it("returns walkable prop surface when higher than terrain", () => {
+    const entity = { position: { wx: 50, wy: 50 }, collider, id: 1, wz: 10 };
+    const prop = {
+      position: { wx: 50, wy: 50 },
+      collider: {
+        offsetX: -8,
+        offsetY: -8,
+        width: 16,
+        height: 16,
+        walkableTop: true,
+        zHeight: 12,
+      },
+      walls: null,
+    };
+    expect(getEffectiveGroundZ(entity, () => 0, [prop], [])).toBe(12);
+  });
+
+  it("returns walkable entity surface when higher than terrain", () => {
+    const entity = { position: { wx: 50, wy: 50 }, collider, id: 1, wz: 10 };
+    const other = {
+      id: 2,
+      position: { wx: 50, wy: 50 },
+      collider: { offsetX: -8, offsetY: -8, width: 16, height: 16, physicalHeight: 12 },
+      wz: 0,
+    };
+    expect(getEffectiveGroundZ(entity, () => 0, [], [other])).toBe(12);
+  });
+
+  it("terrain wins when higher than prop/entity surfaces", () => {
+    const getHeight = heightMap({ "3,3": 3 }); // 3 * 8 = 24
+    const entity = { position: { wx: 50, wy: 50 }, collider, id: 1, wz: 24 };
+    const prop = {
+      position: { wx: 50, wy: 50 },
+      collider: {
+        offsetX: -8,
+        offsetY: -8,
+        width: 16,
+        height: 16,
+        walkableTop: true,
+        zHeight: 10,
+      },
+      walls: null,
+    };
+    expect(getEffectiveGroundZ(entity, getHeight, [prop], [])).toBe(3 * ELEVATION_PX);
+  });
+});
+
+describe("applyGroundTracking", () => {
+  it("initializes wz on first frame", () => {
+    const entity: { wz?: number; jumpVZ?: number; jumpZ?: number; groundZ?: number } = {};
+    applyGroundTracking(entity, 16, true);
+    expect(entity.wz).toBe(16);
+    expect(entity.groundZ).toBe(16);
+  });
+
+  it("snaps grounded entity to ground when at same level", () => {
+    const entity = { wz: 16, groundZ: 16 };
+    applyGroundTracking(entity, 16, true);
+    expect(entity.wz).toBe(16);
+  });
+
+  it("snaps grounded entity up to higher ground", () => {
+    const entity = { wz: 8, groundZ: 8 };
+    applyGroundTracking(entity, 16, true);
+    expect(entity.wz).toBe(16);
+  });
+
+  it("snaps down for small step (within STEP_UP_THRESHOLD)", () => {
+    const entity: { wz?: number; jumpVZ?: number; jumpZ?: number; groundZ?: number } = {
+      wz: STEP_UP_THRESHOLD,
+      jumpZ: STEP_UP_THRESHOLD,
+    };
+    applyGroundTracking(entity, 0, true);
+    expect(entity.wz).toBe(0);
+    expect(entity.jumpZ).toBeUndefined();
+    expect(entity.jumpVZ).toBeUndefined();
+  });
+
+  it("starts fall for cliff edge (beyond STEP_UP_THRESHOLD) when canFall", () => {
+    const drop = STEP_UP_THRESHOLD + 1;
+    const entity: { wz?: number; jumpVZ?: number; jumpZ?: number; groundZ?: number } = {
+      wz: drop,
+    };
+    applyGroundTracking(entity, 0, true);
+    expect(entity.jumpVZ).toBe(0);
+    expect(entity.jumpZ).toBe(drop);
+    expect(entity.wz).toBe(drop); // hasn't fallen yet, just started
+  });
+
+  it("snaps down instead of falling when canFall is false (NPCs)", () => {
+    const entity: { wz?: number; jumpVZ?: number; jumpZ?: number; groundZ?: number } = {
+      wz: 2 * ELEVATION_PX,
+    };
+    applyGroundTracking(entity, 0, false);
+    expect(entity.wz).toBe(0);
+    expect(entity.jumpVZ).toBeUndefined();
+  });
+
+  it("does not modify airborne entity (jumpVZ defined)", () => {
+    const entity = { wz: 20, jumpVZ: -5, jumpZ: 12, groundZ: 8 };
+    applyGroundTracking(entity, 0, true);
+    // Only groundZ should update; wz and jumpVZ untouched
+    expect(entity.groundZ).toBe(0);
+    expect(entity.wz).toBe(20);
+    expect(entity.jumpVZ).toBe(-5);
+  });
+
+  it("cleans up jumpZ on ground snap", () => {
+    const entity: { wz?: number; jumpVZ?: number; jumpZ?: number; groundZ?: number } = {
+      wz: 8,
+      jumpZ: 4,
+    };
+    applyGroundTracking(entity, 8, true);
+    expect(entity.jumpZ).toBeUndefined();
   });
 });

@@ -58,6 +58,75 @@ export function isElevationBlocked3D(
   return getMaxSurfaceZUnderAABB(aabb, getHeight) > entityWz + stepUpThreshold;
 }
 
+/**
+ * Compute the effective ground Z for an entity, considering terrain elevation
+ * (AABB max), walkable prop surfaces, and walkable entity surfaces.
+ *
+ * Shared between server (EntityManager) and client (PlayerPredictor) to keep
+ * ground tracking in sync. Callers are responsible for providing nearby
+ * props/entities from their own spatial queries.
+ */
+export function getEffectiveGroundZ(
+  entity: {
+    position: { wx: number; wy: number };
+    collider: ColliderComponent | null;
+    id: number;
+    wz?: number;
+  },
+  getHeight: (tx: number, ty: number) => number,
+  props: readonly PropSurface[],
+  entities: readonly EntitySurface[],
+): number {
+  if (!entity.collider) {
+    return getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+  }
+  const footprint = getEntityAABB(entity.position, entity.collider);
+  let groundZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
+  const propZ = getWalkablePropSurfaceZ(footprint, entity.wz ?? 0, props);
+  if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+  const entZ = getWalkableEntitySurfaceZ(footprint, entity.id, entity.wz ?? 0, entities);
+  if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
+  return groundZ;
+}
+
+/**
+ * Apply ground tracking to a grounded entity: snap wz to ground, or detect
+ * cliff edges and start falling. Sets entity.groundZ as a side-effect.
+ *
+ * When `canFall` is true (players), stepping off a ledge > STEP_UP_THRESHOLD
+ * triggers a fall instead of snapping down. When false (NPCs), always snap.
+ *
+ * Shared between server (EntityManager) and client (PlayerPredictor).
+ */
+export function applyGroundTracking(
+  entity: {
+    wz?: number;
+    jumpVZ?: number;
+    jumpZ?: number;
+    groundZ?: number;
+  },
+  groundZ: number,
+  canFall: boolean,
+): void {
+  entity.groundZ = groundZ;
+  if (entity.wz === undefined) {
+    entity.wz = groundZ;
+  } else if (entity.jumpVZ === undefined) {
+    if (entity.wz > groundZ && canFall) {
+      if (entity.wz - groundZ <= STEP_UP_THRESHOLD) {
+        entity.wz = groundZ;
+        delete entity.jumpZ;
+      } else {
+        entity.jumpVZ = 0;
+        entity.jumpZ = entity.wz - groundZ;
+      }
+    } else if (entity.jumpVZ === undefined) {
+      entity.wz = groundZ;
+      delete entity.jumpZ;
+    }
+  }
+}
+
 /** Minimal entity shape for surface queries. Works with both Entity and EntitySnapshot. */
 export interface EntitySurface {
   id: number;

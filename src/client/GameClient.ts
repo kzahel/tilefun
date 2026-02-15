@@ -74,6 +74,8 @@ export class GameClient {
   private server: GameServer | null;
   private serialized: boolean;
   private autoJoinRealm: boolean;
+  /** True after HMR camera restore — prevents server world-loaded from overwriting. */
+  private hmrCameraRestored: boolean;
   private scenes: SceneManager;
   private time: Time;
   private consoleEngine: ConsoleEngine;
@@ -125,6 +127,7 @@ export class GameClient {
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
+    this.hmrCameraRestored = false;
     this.profile = options?.profile ?? null;
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
@@ -191,9 +194,13 @@ export class GameClient {
             this.mainMenu.currentWorldId = msg.worldId;
           }
           remoteView.clear();
-          this.camera.x = msg.cameraX;
-          this.camera.y = msg.cameraY;
-          this.camera.zoom = msg.cameraZoom;
+          if (this.hmrCameraRestored) {
+            // HMR already restored camera — don't let fresh server defaults overwrite it
+            this.hmrCameraRestored = false;
+          } else {
+            this.camera.snapTo(msg.cameraX, msg.cameraY);
+            this.camera.zoom = msg.cameraZoom;
+          }
           this.gcSendVisibleRange();
           this.lobbyRealmList = null;
         } else if (msg.type === "realm-list") {
@@ -349,6 +356,7 @@ export class GameClient {
         }
         if (typeof hmr.cameraX === "number" && typeof hmr.cameraY === "number") {
           this.camera.snapTo(hmr.cameraX, hmr.cameraY);
+          this.hmrCameraRestored = true;
         }
       } catch {
         this.scenes.push(new PlayScene());
@@ -392,6 +400,11 @@ export class GameClient {
 
     // Set up menu callbacks
     this.mainMenu.onSelect = (id) => {
+      // Already on this world — just close the menu
+      if (this.mainMenu.currentWorldId === id) {
+        if (this.scenes.has(MenuScene)) this.scenes.pop();
+        return;
+      }
       if (this.serialized) {
         // realm-joined handler applies camera + clears state + sends visible range
         this.gcSendRequest({

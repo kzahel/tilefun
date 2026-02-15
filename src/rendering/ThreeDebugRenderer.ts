@@ -46,8 +46,8 @@ const INFINITE_WALL_HEIGHT = 48;
 /** Initial camera orbit distance from the target. */
 const INITIAL_ORBIT_DISTANCE = 400;
 
-/** Initial camera tilt angle (radians from +Y). ~55 degrees = nice 3/4 view. */
-const INITIAL_POLAR_ANGLE = Math.PI / 3.2;
+/** Initial camera tilt angle (radians from +Y). ~30° = steep top-down 3/4 view matching 2D. */
+const INITIAL_POLAR_ANGLE = Math.PI / 6;
 
 export class ThreeDebugRenderer {
   private renderer: THREE.WebGLRenderer | null = null;
@@ -187,8 +187,9 @@ export class ThreeDebugRenderer {
   ): void {
     if (!this.active || !this.renderer || !this.scene || !this.camera || !this.controls) return;
 
-    // Sync orbit target to 2D camera center
+    // Sync orbit target to 2D camera center, translating camera to preserve orbit offset
     const target = toThree(gameCameraX, gameCameraY, 0);
+    this.camera.position.sub(this.controls.target).add(target);
     this.controls.target.copy(target);
     this.controls.update();
 
@@ -314,7 +315,7 @@ export class ThreeDebugRenderer {
       const edges = new THREE.EdgesGeometry(boxGeo);
       const line = new THREE.LineSegments(edges, MAT_ENTITY);
 
-      const center = toThree(wx + c.width / 2, wy + c.height / 2, wz + physH / 2);
+      const center = toThree(wx, wy - c.height / 2, wz + physH / 2);
       line.position.copy(center);
       this.entityGroup.add(line);
 
@@ -352,7 +353,7 @@ export class ThreeDebugRenderer {
     const edges = new THREE.EdgesGeometry(boxGeo);
     const line = new THREE.LineSegments(edges, mat);
 
-    const center = toThree(wx + c.width / 2, wy + c.height / 2, zBase + zHeight / 2);
+    const center = toThree(wx, wy - c.height / 2, zBase + zHeight / 2);
     line.position.copy(center);
     this.propGroup.add(line);
 
@@ -367,7 +368,7 @@ export class ThreeDebugRenderer {
         side: THREE.DoubleSide,
       });
       const plane = new THREE.Mesh(planeGeo, planeMat);
-      const topCenter = toThree(wx + c.width / 2, wy + c.height / 2, zBase + zHeight);
+      const topCenter = toThree(wx, wy - c.height / 2, zBase + zHeight);
       plane.position.copy(topCenter);
       this.propGroup.add(plane);
     }

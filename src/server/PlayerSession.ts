@@ -67,11 +67,12 @@ export class PlayerSession {
   /** Timestamp (ms) when this session was created. */
   connectedAt = Date.now();
 
-  /** Previous jump input state for edge detection (like Quake's oldbuttons). */
-  prevJumpInput = false;
+  /** Whether the current jump button press has been consumed (Quake's oldbuttons & BUTTON_JUMP).
+   *  Set when a jump fires, cleared when jump is released. Prevents pogo-sticking. */
+  jumpConsumed = false;
 
-  /** Time remaining on buffered jump input (seconds). */
-  jumpBufferTimer = 0;
+  /** Whether jump was held on the most recent input (used for landing-frame jump check). */
+  lastJumpHeld = false;
 
   /** Debug state (set by client). */
   debugPaused = false;
