@@ -1,6 +1,6 @@
 import type { PersistenceStore, SaveEntry } from "./PersistenceStore.js";
 
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 /**
  * IndexedDB implementation of PersistenceStore.
