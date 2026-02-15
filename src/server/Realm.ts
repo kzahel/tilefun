@@ -136,6 +136,7 @@ export class Realm {
       knockbackVx: 0,
       knockbackVy: 0,
       mountId: null,
+      lastDismountedId: null,
     };
     session.cameraX = camX;
     session.cameraY = camY;
@@ -367,8 +368,9 @@ export class Realm {
       }
 
       // ── Jump physics for all players + mount detection on landing ──
+      const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
       for (const session of activeSessions) {
-        const landed = tickJumpGravity(session.player, dt);
+        const landed = tickJumpGravity(session.player, dt, getHeight);
         if (landed && session.gameplaySession.mountId === null) {
           this.tryMountOnLanding(session);
         }
@@ -697,12 +699,11 @@ export class Realm {
     delete session.player.parentId;
     delete session.player.localOffsetX;
     delete session.player.localOffsetY;
+    session.gameplaySession.lastDismountedId = mountId;
     session.gameplaySession.mountId = null;
 
-    // Offset player to the side of the mount + small hop
+    // Dismount at current position (player was parented to mount)
     if (mount) {
-      session.player.position.wx = mount.position.wx + 16;
-      session.player.position.wy = mount.position.wy;
       // Restore mount AI
       if (mount.wanderAI) {
         mount.wanderAI.state = "idle";
@@ -715,9 +716,12 @@ export class Realm {
       if (mount.sprite) mount.sprite.moving = false;
     }
 
-    // Small hop off
-    session.player.jumpZ = 0.01;
+    // Hop off from riding height — start jump from the visual mount position
+    const ridingZ = (session.player.groundZ ?? 0) + (session.player.jumpZ ?? 10);
+    session.player.wz = ridingZ;
+    session.player.jumpZ = ridingZ - (session.player.groundZ ?? 0);
     session.player.jumpVZ = JUMP_VELOCITY * 0.5;
+    session.player.jumpZ = 0.01;
     delete session.player.noShadow;
   }
 
@@ -728,8 +732,12 @@ export class Realm {
 
     const playerBox = getEntityAABB(player.position, player.collider);
 
+    const skipId = session.gameplaySession.lastDismountedId;
+    session.gameplaySession.lastDismountedId = null;
+
     for (const entity of this.entityManager.entities) {
       if (entity.id === player.id) continue;
+      if (entity.id === skipId) continue; // just dismounted — don't re-mount
       if (!entity.tags?.has("rideable")) continue;
       if (entity.wanderAI?.state === "ridden") continue; // already ridden
       if (!entity.collider) continue;

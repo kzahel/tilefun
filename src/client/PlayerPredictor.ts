@@ -10,6 +10,7 @@ import {
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
+import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -178,7 +179,12 @@ export class PlayerPredictor {
       this.mountOffsetX = serverPlayer.localOffsetX ?? 0;
       this.mountOffsetY = serverPlayer.localOffsetY ?? 0;
 
-      // Sync jump state from server — jumpZ is used as visual lift while riding
+      // Sync wz and jump state from server — jumpZ is visual lift while riding
+      if (serverPlayer.wz !== undefined) {
+        this.predicted.wz = serverPlayer.wz;
+      } else {
+        delete this.predicted.wz;
+      }
       if (serverPlayer.jumpZ !== undefined) {
         this.predicted.jumpZ = serverPlayer.jumpZ;
       } else {
@@ -242,6 +248,11 @@ export class PlayerPredictor {
       // Snap to server's authoritative position and jump state
       this.predicted.position.wx = serverPlayer.position.wx;
       this.predicted.position.wy = serverPlayer.position.wy;
+      if (serverPlayer.wz !== undefined) {
+        this.predicted.wz = serverPlayer.wz;
+      } else {
+        delete this.predicted.wz;
+      }
       if (serverPlayer.jumpZ !== undefined) {
         this.predicted.jumpZ = serverPlayer.jumpZ;
       } else {
@@ -391,7 +402,26 @@ export class PlayerPredictor {
       );
       moveAndCollide(this.predicted, dt, playerCtx);
 
-      tickJumpGravity(this.predicted, dt);
+      // Ground tracking after XY movement
+      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
+      const groundZ = getSurfaceZ(
+        this.predicted.position.wx,
+        this.predicted.position.wy,
+        getHeight,
+      );
+      this.predicted.groundZ = groundZ;
+      if (this.predicted.wz === undefined) {
+        this.predicted.wz = groundZ;
+      } else if (this.predicted.jumpVZ === undefined && this.predicted.wz > groundZ) {
+        // Cliff edge — start falling
+        this.predicted.jumpVZ = 0;
+        this.predicted.jumpZ = this.predicted.wz - groundZ;
+      } else if (this.predicted.jumpVZ === undefined) {
+        // Snap to ground
+        this.predicted.wz = groundZ;
+      }
+
+      tickJumpGravity(this.predicted, dt, getHeight);
     }
   }
 
@@ -413,6 +443,7 @@ export class PlayerPredictor {
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
     if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;
     if (serverPlayer.jumpVZ !== undefined) clone.jumpVZ = serverPlayer.jumpVZ;
+    if (serverPlayer.wz !== undefined) clone.wz = serverPlayer.wz;
     if (serverPlayer.parentId !== undefined) clone.parentId = serverPlayer.parentId;
     if (serverPlayer.localOffsetX !== undefined) clone.localOffsetX = serverPlayer.localOffsetX;
     if (serverPlayer.localOffsetY !== undefined) clone.localOffsetY = serverPlayer.localOffsetY;

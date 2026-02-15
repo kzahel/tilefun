@@ -234,6 +234,7 @@ describe("PlayerHandle", () => {
       knockbackVx: 0,
       knockbackVy: 0,
       mountId: null,
+      lastDismountedId: null,
     };
     const handle = new PlayerHandle(entity, em, session);
     return { entity, em, session, handle };

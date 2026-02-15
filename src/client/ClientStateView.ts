@@ -3,6 +3,7 @@ import type { Prop } from "../entities/Prop.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
+import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
 
@@ -191,11 +192,14 @@ export class RemoteStateView implements ClientStateView {
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
     this._mountEntityId = msg.mountEntityId;
 
-    // Apply chunk updates (delta — only new/changed chunks)
+    // Apply chunk updates (delta — only new/changed chunks).
+    // Use put() instead of getOrCreate() to avoid invalidateNeighborAutotile()
+    // which would reset autotileComputed on already-applied neighbor chunks.
     for (const cs of msg.chunkUpdates) {
       let chunk = this._world.chunks.get(cs.cx, cs.cy);
       if (!chunk) {
-        chunk = this._world.chunks.getOrCreate(cs.cx, cs.cy);
+        chunk = new Chunk();
+        this._world.chunks.put(cs.cx, cs.cy, chunk);
       }
       applyChunkSnapshot(chunk, cs);
     }

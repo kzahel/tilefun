@@ -24,6 +24,11 @@ export type ActionName =
   | "paint_positive"
   | "paint_unpaint"
   | "toggle_tab"
+  // Play mode (discrete)
+  | "zoom_1"
+  | "zoom_2"
+  | "zoom_3"
+  | "zoom_4"
   // Debug (discrete)
   | "toggle_base_mode"
   | "toggle_console";
@@ -62,6 +67,11 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "paint_positive", keys: ["z"] },
   { action: "paint_unpaint", keys: ["c"] },
   { action: "toggle_tab", keys: ["t", "T"] },
+  // Play mode zoom presets
+  { action: "zoom_1", keys: ["1"] },
+  { action: "zoom_2", keys: ["2"] },
+  { action: "zoom_3", keys: ["3"] },
+  { action: "zoom_4", keys: ["4"] },
   // Debug
   { action: "toggle_base_mode", keys: ["d", "D"] },
 ];

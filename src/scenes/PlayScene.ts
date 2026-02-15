@@ -11,11 +11,19 @@ import { drawGrassBlades, renderDebugOverlay, renderEntities, renderWorld } from
  */
 const HIT_SHAKE_INTENSITY = 6;
 
+const ZOOM_PRESETS: Record<string, number> = {
+  zoom_1: 2,
+  zoom_2: 1,
+  zoom_3: 0.5,
+  zoom_4: 0.25,
+};
+
 export class PlayScene implements GameScene {
   readonly transparent = false;
   private predictor: PlayerPredictor | null = null;
   private inputSeq = 0;
   private prevInvincibilityTimer = 0;
+  private zoomUnsubs: (() => void)[] = [];
 
   onEnter(gc: GameContext): void {
     gc.touchJoystick.attach();
@@ -26,6 +34,9 @@ export class PlayScene implements GameScene {
       gc.server.getLocalSession().editorEnabled = false;
     }
     gc.transport.send({ type: "set-editor-mode", enabled: false });
+
+    // Zoom preset hotkeys
+    this.bindZoomActions(gc);
 
     // Create predictor for serialized mode
     if (gc.serialized) {
@@ -42,6 +53,7 @@ export class PlayScene implements GameScene {
 
   onExit(gc: GameContext): void {
     gc.touchJoystick.detach();
+    this.unbindZoomActions();
     if (gc.serialized && this.predictor) {
       (gc.stateView as RemoteStateView).setPredictor(null);
       this.predictor = null;
@@ -53,6 +65,7 @@ export class PlayScene implements GameScene {
       `[tilefun:play] onResume — predictor=${!!this.predictor?.player}, editorEnabled=${gc.stateView.editorEnabled}, playerEntityId=${gc.stateView.playerEntity.id}`,
     );
     gc.touchJoystick.attach();
+    this.bindZoomActions(gc);
     // Re-send editor mode false — after realm switch the server may have a new
     // session that defaults editorEnabled=true
     gc.transport.send({ type: "set-editor-mode", enabled: false });
@@ -63,6 +76,7 @@ export class PlayScene implements GameScene {
 
   onPause(gc: GameContext): void {
     gc.touchJoystick.detach();
+    this.unbindZoomActions();
   }
 
   update(dt: number, gc: GameContext): void {
@@ -255,6 +269,22 @@ export class PlayScene implements GameScene {
     renderDebugOverlay(gc);
     gc.touchJoystick.draw(gc.ctx);
     gc.camera.restoreActual();
+  }
+
+  private bindZoomActions(gc: GameContext): void {
+    this.unbindZoomActions();
+    for (const [action, zoom] of Object.entries(ZOOM_PRESETS)) {
+      this.zoomUnsubs.push(
+        gc.actions.on(action as import("../input/ActionMap.js").ActionName, () => {
+          gc.debugPanel.setZoom(zoom);
+        }),
+      );
+    }
+  }
+
+  private unbindZoomActions(): void {
+    for (const unsub of this.zoomUnsubs) unsub();
+    this.zoomUnsubs.length = 0;
   }
 }
 

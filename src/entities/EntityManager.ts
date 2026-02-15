@@ -1,4 +1,5 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, STEP_UP_THRESHOLD } from "../config/constants.js";
+import { getSurfaceZ, isElevationBlocked3D } from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
@@ -6,9 +7,7 @@ import {
   aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
-  getEntityElevation,
   getSpeedMultiplier,
-  isElevationBlocked,
   resolveCollision,
   separateOverlappingEntities,
 } from "./collision.js";
@@ -99,8 +98,7 @@ export class EntityManager {
       (aabb: AABB): boolean => {
         if (overlapsAnyProp(aabb)) return true;
         if (getHeight) {
-          const currentElev = getEntityElevation(self, getHeight);
-          if (isElevationBlocked(aabb, currentElev, self.jumpZ ?? 0, getHeight)) return true;
+          if (isElevationBlocked3D(aabb, self.wz ?? 0, getHeight, STEP_UP_THRESHOLD)) return true;
         }
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
@@ -218,6 +216,49 @@ export class EntityManager {
       } else {
         entity.position.wx += dx;
         entity.position.wy += dy;
+      }
+    }
+
+    // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
+    if (getHeight) {
+      for (const entity of this.entities) {
+        if (entityTickDts && !entityTickDts.has(entity)) continue;
+        if (entity.parentId !== undefined) continue; // riders: Z is visual-only
+        const groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+        entity.groundZ = groundZ;
+        if (entity.wz === undefined) {
+          // First frame: initialize wz at ground level
+          entity.wz = groundZ;
+        } else if (entity.jumpVZ === undefined) {
+          // Grounded entity — check for cliff edge or snap
+          if (entity.wz > groundZ && playerSet.has(entity)) {
+            // Player walked off cliff — start falling
+            entity.jumpVZ = 0;
+            entity.jumpZ = entity.wz - groundZ;
+          } else {
+            // Snap to ground (NPCs always snap, players on same/higher ground)
+            entity.wz = groundZ;
+            delete entity.jumpZ;
+          }
+        }
+      }
+      // Also initialize players that may not be in this.entities
+      for (const player of players) {
+        if (player.parentId !== undefined) continue; // riders: Z is visual-only
+        const groundZ = getSurfaceZ(player.position.wx, player.position.wy, getHeight);
+        player.groundZ = groundZ;
+        if (player.wz === undefined) {
+          player.wz = groundZ;
+        } else if (player.jumpVZ === undefined) {
+          if (player.wz > groundZ) {
+            // Player walked off cliff — start falling
+            player.jumpVZ = 0;
+            player.jumpZ = player.wz - groundZ;
+          } else {
+            player.wz = groundZ;
+            delete player.jumpZ;
+          }
+        }
       }
     }
 

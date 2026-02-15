@@ -132,6 +132,14 @@ export class ChunkManager {
     return this.chunks.get(chunkKey(cx, cy));
   }
 
+  /**
+   * Insert a chunk directly without generation or neighbor invalidation.
+   * Used by RemoteStateView where chunks are populated from server snapshots.
+   */
+  put(cx: number, cy: number, chunk: Chunk): void {
+    this.chunks.set(chunkKey(cx, cy), chunk);
+  }
+
   /** Remove a chunk by key. Used by RemoteStateView to unload server-unloaded chunks. */
   remove(key: string): boolean {
     return this.chunks.delete(key);

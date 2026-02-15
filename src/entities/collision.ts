@@ -213,6 +213,8 @@ export function separateOverlappingEntities(
     const playerBox = getEntityAABB(player.position, player.collider);
     for (const entity of pushableEntities) {
       if (!entity.collider) continue;
+      // Skip mount — rider is parented to it, so they always overlap
+      if (player.parentId === entity.id) continue;
       const entityBox = getEntityAABB(entity.position, entity.collider);
       if (!aabbsOverlap(playerBox, entityBox)) continue;
 

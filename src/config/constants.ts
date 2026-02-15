@@ -57,3 +57,6 @@ export const JUMP_VELOCITY = 150;
 
 /** Jump gravity in world px/s². */
 export const JUMP_GRAVITY = 500;
+
+/** Max elevation step (world px) an entity can walk up without jumping. Phase 1: 0 (must jump). */
+export const STEP_UP_THRESHOLD = 0;

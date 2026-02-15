@@ -109,12 +109,16 @@ export interface Entity {
   attributes?: Map<string, unknown>;
   /** Accumulated time since last AI/physics tick (server-only, not serialized). */
   tickAccumulator?: number;
-  /** Current height above ground in world pixels (jump mechanic). */
+  /** Current height above ground in world pixels (jump mechanic). Derived from wz - groundZ. */
   jumpZ?: number;
   /** Previous jumpZ (before last tick), for render interpolation. Ephemeral. */
   prevJumpZ?: number;
-  /** Vertical velocity in world px/s, positive = up (server-only, not serialized). */
+  /** Vertical velocity in world px/s, positive = up. */
   jumpVZ?: number;
+  /** Absolute Z position in world pixels (0 = world floor). */
+  wz?: number;
+  /** Computed surface height at entity feet in world pixels (not serialized, computed each tick). */
+  groundZ?: number;
   /** ID of the parent entity this entity is attached to (riding, carried, on platform, etc.). */
   parentId?: number;
   /** Local X offset from parent's position (world pixels). Only meaningful when parentId is set. */

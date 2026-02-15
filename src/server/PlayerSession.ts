@@ -12,6 +12,8 @@ export interface GameplaySession {
   knockbackVy: number;
   /** Entity ID of the mount the player is riding, or null. */
   mountId: number | null;
+  /** Entity ID of last dismounted mount — prevents immediate re-mount on landing. */
+  lastDismountedId: number | null;
 }
 
 export class PlayerSession {
@@ -72,6 +74,7 @@ export class PlayerSession {
         knockbackVx: 0,
         knockbackVy: 0,
         mountId: null,
+        lastDismountedId: null,
       };
     }
   }

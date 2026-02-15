@@ -143,6 +143,7 @@ export interface EntitySnapshot {
   deathTimer?: number;
   jumpZ?: number;
   jumpVZ?: number;
+  wz?: number;
   parentId?: number;
   localOffsetX?: number;
   localOffsetY?: number;

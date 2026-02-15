@@ -21,6 +21,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.deathTimer !== undefined) result.deathTimer = e.deathTimer;
   if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
+  if (e.wz !== undefined) result.wz = e.wz;
   if (e.parentId !== undefined) result.parentId = e.parentId;
   if (e.localOffsetX !== undefined) result.localOffsetX = e.localOffsetX;
   if (e.localOffsetY !== undefined) result.localOffsetY = e.localOffsetY;
@@ -43,6 +44,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.deathTimer !== undefined) result.deathTimer = s.deathTimer;
   if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
+  if (s.wz !== undefined) result.wz = s.wz;
   if (s.parentId !== undefined) result.parentId = s.parentId;
   if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
   if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;

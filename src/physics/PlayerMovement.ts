@@ -3,17 +3,13 @@ import {
   JUMP_VELOCITY,
   PLAYER_SPEED,
   PLAYER_SPRINT_MULTIPLIER,
+  STEP_UP_THRESHOLD,
 } from "../config/constants.js";
-import {
-  aabbOverlapsSolid,
-  getEntityAABB,
-  getEntityElevation,
-  getSpeedMultiplier,
-  isElevationBlocked,
-} from "../entities/collision.js";
+import { aabbOverlapsSolid, getEntityAABB, getSpeedMultiplier } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
+import { getSurfaceZ, isElevationBlocked3D } from "./surfaceHeight.js";
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
@@ -64,26 +60,38 @@ export function applyMountInput(
   }
 }
 
-/** Initiate a jump if the entity is on the ground. */
+/** Initiate a jump if the entity is on the ground (no vertical velocity). */
 export function initiateJump(entity: Entity): void {
-  if (!(entity.jumpZ ?? 0)) {
-    entity.jumpZ = 0.01;
+  if (entity.jumpVZ === undefined) {
+    const wz = entity.wz ?? 0;
+    entity.wz = wz + 0.01;
     entity.jumpVZ = JUMP_VELOCITY;
+    entity.jumpZ = 0.01;
   }
 }
 
 /**
- * Tick jump gravity for an entity. Returns true if the entity just landed.
+ * Tick jump/fall gravity for an entity using absolute Z. Returns true if the
+ * entity just landed. Updates wz, groundZ, and the legacy jumpZ for rendering.
  */
-export function tickJumpGravity(entity: Entity, dt: number): boolean {
-  if (entity.jumpZ !== undefined && entity.jumpZ > 0 && entity.jumpVZ !== undefined) {
+export function tickJumpGravity(
+  entity: Entity,
+  dt: number,
+  getHeight: (tx: number, ty: number) => number,
+): boolean {
+  if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
     entity.jumpVZ -= JUMP_GRAVITY * dt;
-    entity.jumpZ += entity.jumpVZ * dt;
-    if (entity.jumpZ <= 0) {
-      delete entity.jumpZ;
+    entity.wz += entity.jumpVZ * dt;
+    const groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+    entity.groundZ = groundZ;
+    if (entity.wz <= groundZ) {
+      entity.wz = groundZ;
       delete entity.jumpVZ;
+      delete entity.jumpZ;
       return true;
     }
+    entity.jumpZ = entity.wz - groundZ;
+    return false;
   }
   return false;
 }
@@ -108,8 +116,7 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   const dx = entity.velocity.vx * dt * speedMult;
   const dy = entity.velocity.vy * dt * speedMult;
 
-  const currentElev = getEntityElevation(entity, ctx.getHeight);
-  const jumpZ = entity.jumpZ ?? 0;
+  const entityWz = entity.wz ?? 0;
 
   const isBlocked = (aabb: {
     left: number;
@@ -119,7 +126,7 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   }): boolean => {
     if (aabbOverlapsSolid(aabb, ctx.getCollision, BLOCK_MASK)) return true;
     if (ctx.isPropBlocked(aabb)) return true;
-    if (isElevationBlocked(aabb, currentElev, jumpZ, ctx.getHeight)) return true;
+    if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, STEP_UP_THRESHOLD)) return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;
   };

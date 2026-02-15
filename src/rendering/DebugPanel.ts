@@ -142,6 +142,11 @@ export class DebugPanel {
     return this.pauseCheckbox.checked;
   }
 
+  setZoom(value: number): void {
+    this.zoomSlider.value = String(value);
+    this.zoomLabel.textContent = `${value.toFixed(2)}x`;
+  }
+
   setNoclip(value: boolean): void {
     this.noclipCheckbox.checked = value;
   }
