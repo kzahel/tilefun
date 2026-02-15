@@ -1,4 +1,3 @@
-import type { Spritesheet } from "../assets/Spritesheet.js";
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
@@ -6,8 +5,7 @@ import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
-import type { Camera } from "./Camera.js";
-import type { Renderable } from "./Renderable.js";
+import type { GrassItem } from "./SceneItem.js";
 
 interface BladeInstance {
   wx: number;
@@ -29,9 +27,10 @@ const PUSH_RADIUS_SQ = PUSH_RADIUS * PUSH_RADIUS;
 const MAX_PUSH_RAD = 0.5;
 const TWO_PI = Math.PI * 2;
 
-// Anchor: X is always center of 8px cell, Y depends on variant
-const ANCHOR_X = 4;
-const ANCHOR_Y = [7, 7, 6, 6]; // big-A, big-B, small-A, small-B
+/** Anchor X: always center of 8px cell. Exported for Canvas2D renderer. */
+export const GRASS_ANCHOR_X = 4;
+/** Anchor Y per variant: [big-A, big-B, small-A, small-B]. Exported for Canvas2D renderer. */
+export const GRASS_ANCHOR_Y = [7, 7, 6, 6];
 
 const bladeCache = new Map<string, ChunkBladeCache>();
 
@@ -98,25 +97,30 @@ function getBlades(chunk: Chunk, cx: number, cy: number): BladeInstance[] {
   return blades;
 }
 
+/** Viewport bounds in world coordinates for culling. */
+export interface WorldViewport {
+  minWx: number;
+  minWy: number;
+  maxWx: number;
+  maxWy: number;
+}
+
 let _debugLogged = false;
 
 /**
- * Collect grass blade renderables for Y-sorted drawing with entities/props.
- * Each blade gets a customDraw callback that handles rotation/sway.
+ * Collect grass blade scene items for Y-sorted drawing with entities/props.
+ * Returns renderer-agnostic GrassItem[] with pre-computed sway + push angles.
  */
-export function collectGrassBladeRenderables(
-  ctx: CanvasRenderingContext2D,
-  camera: Camera,
+export function collectGrassBladeItems(
   world: World,
   entityPositions: readonly { position: { wx: number; wy: number } }[],
-  sheet: Spritesheet,
   visible: ChunkRange,
-): Renderable[] {
-  const nowSec = performance.now() / 1000;
-  const scale = camera.scale;
-  const canvasW = ctx.canvas.width;
-  const canvasH = ctx.canvas.height;
-  const result: Renderable[] = [];
+  viewport: WorldViewport,
+  nowSec: number,
+): GrassItem[] {
+  const result: GrassItem[] = [];
+  // World-space margin for culling (grass blades are small, 30 world pixels is generous)
+  const margin = 30;
 
   // Debug: log once on first call
   if (!_debugLogged) {
@@ -139,7 +143,7 @@ export function collectGrassBladeRenderables(
       }
     }
     console.warn(
-      `[GrassBlades] sheet=${sheet.cols}x${sheet.rows} visible=${visible.minCx},${visible.minCy}..${visible.maxCx},${visible.maxCy} chunks=${chunkCount} blades=${totalBlades}`,
+      `[GrassBlades] visible=${visible.minCx},${visible.minCy}..${visible.maxCx},${visible.maxCy} chunks=${chunkCount} blades=${totalBlades}`,
     );
     if (sampleBlendBase) console.warn(`[GrassBlades] ${sampleBlendBase}`);
   }
@@ -164,28 +168,25 @@ export function collectGrassBladeRenderables(
       const blades = getBlades(chunk, cx, cy);
       if (blades.length === 0) continue;
 
-      // Quick chunk-level screen cull
+      // Quick chunk-level world-space cull
       const origin = chunkToWorld(cx, cy);
-      const chunkScreen = camera.worldToScreen(origin.wx, origin.wy);
-      const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * scale;
+      const chunkSize = CHUNK_SIZE * TILE_SIZE;
       if (
-        chunkScreen.sx + chunkScreenSize < -30 ||
-        chunkScreen.sy + chunkScreenSize < -30 ||
-        chunkScreen.sx > canvasW + 30 ||
-        chunkScreen.sy > canvasH + 30
+        origin.wx + chunkSize < viewport.minWx - margin ||
+        origin.wy + chunkSize < viewport.minWy - margin ||
+        origin.wx > viewport.maxWx + margin ||
+        origin.wy > viewport.maxWy + margin
       ) {
         continue;
       }
 
       for (const blade of blades) {
-        const screen = camera.worldToScreen(blade.wx, blade.wy);
-
-        // Per-blade screen cull
+        // Per-blade world-space cull
         if (
-          screen.sx < -30 ||
-          screen.sy < -30 ||
-          screen.sx > canvasW + 30 ||
-          screen.sy > canvasH + 30
+          blade.wx < viewport.minWx - margin ||
+          blade.wy < viewport.minWy - margin ||
+          blade.wx > viewport.maxWx + margin ||
+          blade.wy > viewport.maxWy + margin
         ) {
           continue;
         }
@@ -211,25 +212,13 @@ export function collectGrassBladeRenderables(
         // 3. Blend: push overrides sway but keeps a trace of sway for liveliness
         const angle = pushAngle !== 0 ? pushAngle + swayAngle * 0.3 : swayAngle;
 
-        // Capture values for the draw callback
-        const sx = screen.sx;
-        const sy = screen.sy;
-        const variant = blade.variant;
-        const ay = ANCHOR_Y[variant] ?? 7;
-        const drawAngle = angle;
-
         result.push({
-          position: { wx: blade.wx, wy: blade.wy },
-          sprite: null,
-          isProp: true,
-          noShadow: true,
-          customDraw: () => {
-            ctx.save();
-            ctx.translate(sx, sy);
-            ctx.rotate(drawAngle);
-            sheet.drawTile(ctx, variant, 0, -ANCHOR_X * scale, -ay * scale, scale);
-            ctx.restore();
-          },
+          kind: "grass",
+          sortKey: blade.wy,
+          wx: blade.wx,
+          wy: blade.wy,
+          variant: blade.variant,
+          angle,
         });
       }
     }

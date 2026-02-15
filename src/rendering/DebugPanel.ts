@@ -25,6 +25,7 @@ export class DebugPanel {
   private readonly baseModeBtn: HTMLButtonElement;
   private readonly convexCheckbox: HTMLInputElement;
   private readonly pauseCheckbox: HTMLInputElement;
+  private readonly show3dCheckbox: HTMLInputElement;
   private pendingBaseMode = false;
   private pendingConvex = false;
 
@@ -121,7 +122,27 @@ export class DebugPanel {
     pauseHint.style.cssText = "color: #999; font-size: 11px;";
     pauseRow.append(pauseLbl, this.pauseCheckbox, pauseHint);
 
-    this.container.append(zoomRow, observerRow, noclipRow, pauseRow, baseModeRow, convexRow);
+    // 3D debug view checkbox
+    const show3dRow = document.createElement("div");
+    show3dRow.style.cssText = ROW_STYLE;
+    const show3dLbl = document.createElement("label");
+    show3dLbl.textContent = "3D View";
+    this.show3dCheckbox = document.createElement("input");
+    this.show3dCheckbox.type = "checkbox";
+    const show3dHint = document.createElement("span");
+    show3dHint.textContent = "split-screen";
+    show3dHint.style.cssText = "color: #999; font-size: 11px;";
+    show3dRow.append(show3dLbl, this.show3dCheckbox, show3dHint);
+
+    this.container.append(
+      zoomRow,
+      observerRow,
+      noclipRow,
+      pauseRow,
+      show3dRow,
+      baseModeRow,
+      convexRow,
+    );
     document.body.appendChild(this.container);
   }
 
@@ -147,6 +168,18 @@ export class DebugPanel {
 
   get paused(): boolean {
     return this.pauseCheckbox.checked;
+  }
+
+  get show3d(): boolean {
+    return this.show3dCheckbox.checked;
+  }
+
+  set show3d(value: boolean) {
+    this.show3dCheckbox.checked = value;
+  }
+
+  onShow3dChange(cb: (checked: boolean) => void): void {
+    this.show3dCheckbox.addEventListener("change", () => cb(this.show3dCheckbox.checked));
   }
 
   setZoom(value: number): void {

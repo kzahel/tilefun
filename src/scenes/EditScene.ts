@@ -1,6 +1,6 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { drawEditorOverlay, drawRemoteCursors } from "../editor/EditorRenderer.js";
-import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
 
@@ -291,6 +291,7 @@ export class EditScene implements GameScene {
 
     renderEntities(gc, alpha);
     renderDebugOverlay(gc);
+    render3DDebug(gc);
     gc.camera.restoreActual();
   }
 }

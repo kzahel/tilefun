@@ -19,6 +19,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
     "@playwright/test": "^1.58.2",
+    "@types/three": "^0.182.0",
     "@types/ws": "^8.5.14",
     "tsx": "^4.19.0",
     "typescript": "^5.9.3",
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "peerjs": "^1.5.5",
+    "three": "^0.182.0",
     "ws": "^8.18.0"
   }
 }

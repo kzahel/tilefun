@@ -6,7 +6,7 @@ import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
-import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
  * Play mode scene.
@@ -71,6 +71,10 @@ export class PlayScene implements GameScene {
   /** Accumulated throw charge time (seconds). 0 = not charging. */
   private throwChargeTime = 0;
   private wasThrowHeld = false;
+  /** Track ball entity positions for water-splash effect on removal. */
+  private ballPositions = new Map<number, { wx: number; wy: number }>();
+  /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
+  private ballDying: Set<number> | undefined;
 
   onEnter(gc: GameContext): void {
     // Attach touch buttons before joystick so button claims are processed first
@@ -378,6 +382,9 @@ export class PlayScene implements GameScene {
     }
     this.wasAirborne = airborne;
 
+    // Detect ball removal — spawn water splash if it disappeared over water
+    this.detectBallSplashes(gc);
+
     // Detect ghost death (entity gains deathTimer) — play spatial bell sound
     this.detectGhostDeaths(gc);
 
@@ -436,11 +443,12 @@ export class PlayScene implements GameScene {
     gc.camera.y += gc.camera.shakeOffsetY;
 
     renderWorld(gc);
-    const particleRenderables = this.particles.collectRenderables(gc.ctx, gc.camera);
-    renderEntities(gc, alpha, particleRenderables);
+    const particleItems = this.particles.collectItems();
+    renderEntities(gc, alpha, particleItems);
     drawGemHUD(gc);
     gc.chatHUD.render(gc.ctx);
     renderDebugOverlay(gc);
+    render3DDebug(gc);
     gc.touchJoystick.draw(gc.ctx);
     gc.touchButtons.draw(gc.ctx);
     gc.camera.restoreActual();
@@ -460,6 +468,30 @@ export class PlayScene implements GameScene {
   private unbindZoomActions(): void {
     for (const unsub of this.zoomUnsubs) unsub();
     this.zoomUnsubs.length = 0;
+  }
+
+  private detectBallSplashes(gc: GameContext): void {
+    const liveBalls = new Map<number, boolean>();
+    for (const e of gc.stateView.entities) {
+      if (e.type !== "ball") continue;
+      liveBalls.set(e.id, e.deathTimer !== undefined);
+      this.ballPositions.set(e.id, { wx: e.position.wx, wy: e.position.wy });
+    }
+    // Check for balls that disappeared — splash only if they weren't despawning
+    // (water removal is instant with no deathTimer; stopped balls fade via deathTimer)
+    for (const [id, pos] of this.ballPositions) {
+      if (liveBalls.has(id)) continue;
+      if (!this.ballDying?.has(id)) {
+        this.particles.spawnWaterSplash(pos.wx, pos.wy, 0.4);
+        playRandomSound(gc, SPLASH_KEYS, 0.3, 0.8 + Math.random() * 0.3);
+      }
+      this.ballPositions.delete(id);
+    }
+    // Track which balls have a deathTimer so we can distinguish water vs despawn
+    this.ballDying = new Set<number>();
+    for (const [id, dying] of liveBalls) {
+      if (dying) this.ballDying.add(id);
+    }
   }
 
   private detectGhostDeaths(gc: GameContext): void {

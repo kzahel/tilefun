@@ -913,6 +913,12 @@ export class Realm {
         player.velocity.vx = 0;
         player.velocity.vy = 0;
       }
+      // Reset player sprite to idle so the walking animation doesn't persist
+      if (player.sprite) {
+        player.sprite.moving = false;
+        player.sprite.frameCol = 0;
+        player.sprite.animTimer = 0;
+      }
       break;
     }
   }

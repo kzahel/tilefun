@@ -325,6 +325,14 @@ export class GameClient {
       this.loop.timeScale = val;
     });
 
+    // Wire r_show3d to debug panel checkbox (bidirectional)
+    clientCVars.r_show3d.onChange((val) => {
+      this.debugPanel.show3d = val;
+    });
+    this.debugPanel.onShow3dChange((checked) => {
+      clientCVars.r_show3d.set(checked);
+    });
+
     // Start in play mode (or restore edit mode from HMR state)
     const hmrJson = sessionStorage.getItem(HMR_KEY);
     if (hmrJson) {
@@ -715,50 +723,91 @@ export class GameClient {
   // ---- UI ----
 
   private createEditorButton(): void {
-    const BTN_STYLE = `
-      font: bold 14px monospace; padding: 8px 16px;
-      background: rgba(0,0,0,0.6); color: #fff;
-      border: 1px solid #888; border-radius: 4px;
-      cursor: pointer; user-select: none;
+    const MENU_BTN_STYLE = `
+      font: bold 14px monospace; padding: 10px 16px;
+      background: none; color: #fff; border: none;
+      cursor: pointer; user-select: none; text-align: left;
+      width: 100%;
     `;
 
-    const wrap = document.createElement("div");
-    wrap.style.cssText =
-      "position: fixed; bottom: 8px; left: 8px; z-index: 100; display: flex; gap: 6px;";
+    // Backdrop overlay (click to close)
+    const backdrop = document.createElement("div");
+    backdrop.style.cssText =
+      "position: fixed; inset: 0; z-index: 180; background: rgba(0,0,0,0.3); display: none;";
+    backdrop.addEventListener("click", () => closePanel());
 
+    // Slide-in panel
+    const panel = document.createElement("div");
+    panel.style.cssText = `
+      position: fixed; top: 0; left: 0; bottom: 0; width: 200px;
+      background: rgba(0,0,0,0.85); z-index: 190;
+      display: flex; flex-direction: column; padding: 60px 8px 8px;
+      transform: translateX(-100%); transition: transform 0.2s ease-out;
+    `;
+
+    // Hamburger button
+    const hamburger = document.createElement("button");
+    hamburger.textContent = "\u2630";
+    hamburger.style.cssText = `
+      position: fixed; top: 8px; left: 8px; z-index: 200;
+      width: 44px; height: 44px; font-size: 24px;
+      background: rgba(0,0,0,0.6); color: #fff;
+      border: 1px solid #888; border-radius: 4px;
+      cursor: pointer; user-select: none; line-height: 1;
+    `;
+
+    let panelOpen = false;
+    const openPanel = () => {
+      panelOpen = true;
+      backdrop.style.display = "";
+      panel.style.transform = "translateX(0)";
+    };
+    const closePanel = () => {
+      panelOpen = false;
+      backdrop.style.display = "none";
+      panel.style.transform = "translateX(-100%)";
+    };
+    hamburger.addEventListener("click", () => {
+      if (panelOpen) closePanel();
+      else openPanel();
+    });
+
+    // Menu items
     const editBtn = document.createElement("button");
     editBtn.textContent = "Play";
-    editBtn.style.cssText = BTN_STYLE;
-    editBtn.addEventListener("click", () => this.toggleEditor());
+    editBtn.style.cssText = MENU_BTN_STYLE;
+    editBtn.addEventListener("click", () => {
+      closePanel();
+      this.toggleEditor();
+    });
     this.editorButton = editBtn;
 
     const menuBtn = document.createElement("button");
     menuBtn.textContent = "Menu";
-    menuBtn.style.cssText = BTN_STYLE;
-    menuBtn.addEventListener("click", () => this.toggleMenu());
+    menuBtn.style.cssText = MENU_BTN_STYLE;
+    menuBtn.addEventListener("click", () => {
+      closePanel();
+      this.toggleMenu();
+    });
 
     const debugBtn = document.createElement("button");
     debugBtn.textContent = "Debug";
-    debugBtn.style.cssText = BTN_STYLE;
+    debugBtn.style.cssText = MENU_BTN_STYLE;
     debugBtn.addEventListener("click", () => {
+      closePanel();
       this.debugEnabled = !this.debugEnabled;
       this.debugPanel.visible = this.debugEnabled;
     });
-    wrap.append(editBtn, menuBtn, debugBtn);
-    document.body.appendChild(wrap);
 
-    // Keep buttons above the editor panel when it's visible
-    const panelEl = this.editorPanel.el;
-    const updateBottom = () => {
-      const panelH = panelEl.offsetHeight;
-      wrap.style.bottom = panelH > 0 ? `${panelH + 8}px` : "8px";
-    };
-    new ResizeObserver(updateBottom).observe(panelEl);
+    panel.append(editBtn, menuBtn, debugBtn);
+    document.body.append(backdrop, panel, hamburger);
   }
 
   private resize(): void {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
+    const rect = this.canvas.getBoundingClientRect();
+    this.canvas.width = Math.round(rect.width);
+    this.canvas.height = Math.round(rect.height);
     this.camera.setViewport(this.canvas.width, this.canvas.height);
   }
 

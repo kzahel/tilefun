@@ -10,6 +10,7 @@ export interface ClientCVars {
   cl_timescale: CVar<number>;
   cl_nopredict: CVar<boolean>;
   cl_verticalfollow: CVar<boolean>;
+  r_show3d: CVar<boolean>;
 }
 
 export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
@@ -81,6 +82,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "cl",
   });
 
+  const r_show3d = engine.cvars.register<boolean>({
+    name: "r_show3d",
+    description: "Show 3D debug view (split-screen)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   return {
     r_showbboxes,
     r_showchunks,
@@ -90,5 +99,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     cl_timescale,
     cl_nopredict,
     cl_verticalfollow,
+    r_show3d,
   };
 }

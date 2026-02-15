@@ -1,5 +1,4 @@
-import type { Camera } from "./Camera.js";
-import type { Renderable } from "./Renderable.js";
+import type { ParticleItem } from "./SceneItem.js";
 
 interface Particle {
   wx: number;
@@ -84,49 +83,22 @@ export class ParticleSystem {
     this.particles.length = write;
   }
 
-  render(ctx: CanvasRenderingContext2D, camera: Camera): void {
-    if (this.particles.length === 0) return;
-    ctx.save();
-    for (const p of this.particles) {
-      const alpha = p.life / p.maxLife;
-      const screen = camera.worldToScreen(p.wx, p.wy);
-      const r = p.size * camera.scale;
-      ctx.globalAlpha = alpha * 0.8;
-      ctx.fillStyle = p.color;
-      ctx.fillRect(
-        Math.floor(screen.sx - r / 2),
-        Math.floor(screen.sy - p.z * camera.scale - r / 2),
-        Math.ceil(r),
-        Math.ceil(r),
-      );
-    }
-    ctx.restore();
-  }
-
   /**
-   * Return particles as Y-sortable renderables so they interleave with
-   * entities and elevation in the depth sort (e.g. occluded behind cliffs).
+   * Return particles as renderer-agnostic ParticleItem[] for Y-sorted
+   * scene rendering (interleaved with entities and elevation).
    */
-  collectRenderables(ctx: CanvasRenderingContext2D, camera: Camera): Renderable[] {
-    const result: Renderable[] = [];
+  collectItems(): ParticleItem[] {
+    const result: ParticleItem[] = [];
     for (const p of this.particles) {
-      const alpha = p.life / p.maxLife;
-      const screen = camera.worldToScreen(p.wx, p.wy);
-      const r = p.size * camera.scale;
-      const sx = Math.floor(screen.sx - r / 2);
-      const sy = Math.floor(screen.sy - p.z * camera.scale - r / 2);
-      const cr = Math.ceil(r);
-      const col = p.color;
-      const a = alpha * 0.8;
       result.push({
-        position: { wx: p.wx, wy: p.wy },
-        sprite: null,
-        customDraw: () => {
-          ctx.globalAlpha = a;
-          ctx.fillStyle = col;
-          ctx.fillRect(sx, sy, cr, cr);
-          ctx.globalAlpha = 1;
-        },
+        kind: "particle",
+        sortKey: p.wy,
+        wx: p.wx,
+        wy: p.wy,
+        z: p.z,
+        size: p.size,
+        color: p.color,
+        alpha: (p.life / p.maxLife) * 0.8,
       });
     }
     return result;

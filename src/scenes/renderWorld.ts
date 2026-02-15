@@ -1,10 +1,51 @@
 import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
+import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
+import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { collectScene } from "../rendering/collectScene.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
-import { drawEntities, drawEntityShadows } from "../rendering/EntityRenderer.js";
-import { collectGrassBladeRenderables } from "../rendering/GrassBladeRenderer.js";
-import type { Renderable } from "../rendering/Renderable.js";
+import type { ParticleItem } from "../rendering/SceneItem.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
+
+// ── 3D debug renderer (lazy-loaded) ──
+
+type ThreeDebugRendererType = import("../rendering/ThreeDebugRenderer.js").ThreeDebugRenderer;
+let threeDebug: ThreeDebugRendererType | null = null;
+let threeLoading = false;
+
+/** Toggle + render the Three.js 3D debug split-screen view based on r_show3d. */
+export function render3DDebug(gc: GameContext): void {
+  const show3d = gc.console.cvars.get("r_show3d")?.get() === true;
+
+  if (show3d && !threeDebug && !threeLoading) {
+    threeLoading = true;
+    import("../rendering/ThreeDebugRenderer.js").then(({ ThreeDebugRenderer }) => {
+      threeDebug = new ThreeDebugRenderer(gc.canvas);
+      threeDebug.setEnabled(true);
+      threeLoading = false;
+    });
+    return;
+  }
+
+  if (!show3d && threeDebug) {
+    threeDebug.dispose();
+    threeDebug = null;
+    return;
+  }
+
+  if (threeDebug) {
+    const { camera, stateView } = gc;
+    threeDebug.render(
+      camera.x,
+      camera.y,
+      stateView.entities as Entity[],
+      stateView.props as Prop[],
+      stateView.world,
+      camera.getVisibleChunkRange(),
+    );
+  }
+}
 
 /**
  * Shared world rendering used by both PlayScene and EditScene.
@@ -26,7 +67,7 @@ export function renderWorld(gc: GameContext): void {
   // Terrain + autotile + details (baked into chunk cache)
   tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible);
 
-  // Elevation is drawn interleaved with entities via collectElevationRenderables
+  // Elevation is drawn interleaved with entities via collectScene
   // (moved from a separate pass so cliffs properly occlude entities behind them)
 
   return; // Entities drawn after scene-specific overlays (editor grid goes between terrain and entities)
@@ -35,106 +76,28 @@ export function renderWorld(gc: GameContext): void {
 /**
  * Draw y-sorted entities, props, and grass blades on top of terrain.
  * Called after any scene-specific overlays (editor grid, etc.).
- * Culls entities outside the viewport before Y-sorting.
+ * Collects a renderer-agnostic SceneItem[], then draws via Canvas2D backend.
  */
-export function renderEntities(gc: GameContext, alpha = 1, extraRenderables?: Renderable[]): void {
-  const { ctx, camera, stateView, sheets } = gc;
+export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: ParticleItem[]): void {
+  const { ctx, camera, stateView, sheets, tileRenderer } = gc;
   if (sheets.size === 0) return;
 
-  // Viewport bounds in world coordinates
-  const vpTL = camera.screenToWorld(0, 0);
-  const vpBR = camera.screenToWorld(camera.viewportWidth, camera.viewportHeight);
-  // Small margin for rendering effects not captured by sprite bounds (drawOffsetY, elevation, shadows)
-  const M = 16;
-
-  const renderables: Renderable[] = [];
-  for (const e of stateView.entities) {
-    if (!e.sprite) continue;
-    const effectiveWy = e.position.wy - (e.wz ?? 0);
-    const halfW = e.sprite.spriteWidth / 2;
-    if (
-      e.position.wx + halfW < vpTL.wx - M ||
-      e.position.wx - halfW > vpBR.wx + M ||
-      effectiveWy < vpTL.wy - M ||
-      effectiveWy - e.sprite.spriteHeight > vpBR.wy + M
-    )
-      continue;
-    renderables.push(e as Renderable);
-  }
-  for (const p of stateView.props) {
-    const sw = p.sprite?.spriteWidth ?? 16;
-    const sh = p.sprite?.spriteHeight ?? 16;
-    const halfW = sw / 2;
-    if (
-      p.position.wx + halfW < vpTL.wx - M ||
-      p.position.wx - halfW > vpBR.wx + M ||
-      p.position.wy < vpTL.wy - M ||
-      p.position.wy - sh > vpBR.wy + M
-    )
-      continue;
-    renderables.push(p);
-  }
-
-  // Collect grass blade renderables for Y-sorting with entities/props
   const visible = camera.getVisibleChunkRange();
   const grassSheet = sheets.get("grass-blades");
-  if (grassSheet) {
-    const grassBlades = collectGrassBladeRenderables(
-      ctx,
-      camera,
-      stateView.world,
-      stateView.entities,
-      grassSheet,
-      visible,
-    );
-    for (const blade of grassBlades) {
-      renderables.push(blade);
-    }
-  }
 
-  // Collect elevation renderables so cliff faces interleave with entities
-  // in the Y-sort — entities behind cliffs get occluded correctly
-  const elevationRenderables = gc.tileRenderer.collectElevationRenderables(
-    ctx,
-    camera,
+  const items = collectScene(
+    stateView.entities,
+    stateView.props,
     stateView.world,
+    camera,
     visible,
+    alpha,
+    tileRenderer,
+    extraParticles ?? [],
+    grassSheet !== undefined,
   );
-  for (const elev of elevationRenderables) {
-    renderables.push(elev);
-  }
 
-  // Extra renderables (e.g. particles) passed in by the scene
-  if (extraRenderables) {
-    for (const r of extraRenderables) {
-      renderables.push(r);
-    }
-  }
-
-  // Sort by interpolated Y + Z for correct depth ordering. Z_SORT_FACTOR
-  // makes elevated entities sort later (drawn on top). Factor 1 means 1px of
-  // Z counts the same as 1px of Y depth — enough to draw entities above the
-  // prop they're standing on, without being so aggressive that ground-level
-  // entities in front incorrectly sort behind elevated ones.
-  const Z_SORT_FACTOR = 1;
-  renderables.sort((a, b) => {
-    const ay = a.prevPosition
-      ? a.prevPosition.wy + (a.position.wy - a.prevPosition.wy) * alpha
-      : a.position.wy;
-    const by = b.prevPosition
-      ? b.prevPosition.wy + (b.position.wy - b.prevPosition.wy) * alpha
-      : b.position.wy;
-    return (
-      ay +
-      (a.sortOffsetY ?? 0) +
-      (a.wz ?? 0) * Z_SORT_FACTOR -
-      (by + (b.sortOffsetY ?? 0) + (b.wz ?? 0) * Z_SORT_FACTOR)
-    );
-  });
-  // Pre-pass: shadows at terrain level, drawn before all sprites so they
-  // appear behind props (e.g. table shadow peeks out at edges, not on top)
-  drawEntityShadows(ctx, camera, renderables, alpha, stateView.world);
-  drawEntities(ctx, camera, renderables, sheets, alpha, stateView.world);
+  drawScene2D(ctx, camera, items, sheets, grassSheet);
 }
 
 /** FPS state — shared across scenes since it's a global counter. */

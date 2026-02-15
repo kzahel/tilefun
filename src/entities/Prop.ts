@@ -15,7 +15,7 @@ export interface PropCollider {
 
 /**
  * A static placed decoration. Much leaner than Entity — no velocity, AI, or animation.
- * Sprite field names match Renderable so props can be Y-sort-merged with entities for drawing.
+ * Sprite field names match Entity so props can be Y-sort-merged with entities for drawing.
  */
 export interface Prop {
   id: number;
