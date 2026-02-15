@@ -32,6 +32,7 @@ export function createGhostFriendly(wx: number, wy: number): Entity {
       width: 10,
       height: 8,
       solid: false,
+      physicalHeight: 10,
     },
     wanderAI: {
       state: "idle",
@@ -76,6 +77,7 @@ export function createGhostAngry(wx: number, wy: number): Entity {
       width: 10,
       height: 8,
       solid: false,
+      physicalHeight: 10,
     },
     wanderAI: {
       state: "idle",

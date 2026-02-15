@@ -29,6 +29,7 @@ export function createPigeon2(wx: number, wy: number): Entity {
       offsetY: 0,
       width: 8,
       height: 6,
+      physicalHeight: 6,
     },
     wanderAI: {
       state: "idle",

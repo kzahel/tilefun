@@ -12,10 +12,10 @@ import { drawGrassBlades, renderDebugOverlay, renderEntities, renderWorld } from
 const HIT_SHAKE_INTENSITY = 6;
 
 const ZOOM_PRESETS: Record<string, number> = {
-  zoom_1: 2,
-  zoom_2: 1,
-  zoom_3: 0.5,
-  zoom_4: 0.25,
+  zoom_1: 0.25,
+  zoom_2: 0.5,
+  zoom_3: 1,
+  zoom_4: 2,
 };
 
 export class PlayScene implements GameScene {

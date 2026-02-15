@@ -34,38 +34,6 @@ import { createPigeon2 } from "./Pigeon2.js";
 import { createSeagull } from "./Seagull.js";
 import { createWorm1, createWorm2, createWorm3, createWorm4 } from "./Worm.js";
 
-/**
- * Physical height of each entity type in world pixels (z-axis).
- * Used for debug 3D bounding box visualization and jump/vault collision.
- * Unregistered types fall back to DEFAULT_PHYSICAL_HEIGHT.
- */
-export const DEFAULT_PHYSICAL_HEIGHT = 8;
-export const ENTITY_PHYSICAL_HEIGHT: Record<string, number> = {
-  player: 24,
-  chicken: 8,
-  cow: 20,
-  pigeon: 6,
-  pigeon2: 6,
-  crow: 12,
-  seagull: 12,
-  campfire: 16,
-  gem: 4,
-  "ghost-friendly": 10,
-  "ghost-angry": 10,
-  "egg-nest": 4,
-  fish1: 4,
-  fish2: 4,
-  fish3: 4,
-  worm1: 4,
-  worm2: 4,
-  worm3: 4,
-  worm4: 4,
-};
-// Person variants all share the same height
-for (let i = 1; i <= 20; i++) {
-  ENTITY_PHYSICAL_HEIGHT[`person${i}`] = 24;
-}
-
 export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity> = {
   chicken: createChicken,
   cow: createCow,

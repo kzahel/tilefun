@@ -44,6 +44,7 @@ function makeWorm(type: string, wx: number, wy: number): Entity {
       offsetY: 0,
       width: 8,
       height: 6,
+      physicalHeight: 4,
     },
     wanderAI: {
       state: "idle",

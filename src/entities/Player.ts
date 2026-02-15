@@ -35,6 +35,7 @@ export function createPlayer(wx: number, wy: number): Entity {
       width: 10,
       height: 6,
       clientSolid: true,
+      physicalHeight: 24,
     },
     wanderAI: null,
   };

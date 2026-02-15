@@ -1,8 +1,10 @@
+import { DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
 import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
+import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyMountInput,
@@ -413,9 +415,14 @@ export class PlayerPredictor {
       if (this.predicted.wz === undefined) {
         this.predicted.wz = groundZ;
       } else if (this.predicted.jumpVZ === undefined && this.predicted.wz > groundZ) {
-        // Cliff edge — start falling
-        this.predicted.jumpVZ = 0;
-        this.predicted.jumpZ = this.predicted.wz - groundZ;
+        if (this.predicted.wz - groundZ <= STEP_UP_THRESHOLD) {
+          // Small step down — snap to ground instead of falling
+          this.predicted.wz = groundZ;
+        } else {
+          // Cliff edge — start falling
+          this.predicted.jumpVZ = 0;
+          this.predicted.jumpZ = this.predicted.wz - groundZ;
+        }
       } else if (this.predicted.jumpVZ === undefined) {
         // Snap to ground
         this.predicted.wz = groundZ;
@@ -466,10 +473,14 @@ export class PlayerPredictor {
       getCollision: (tx, ty) => world.getCollisionIfLoaded(tx, ty),
       getHeight: (tx, ty) => world.getHeightAt(tx, ty),
       isEntityBlocked: (aabb) => {
-        const skipSmall = (movingEntity.jumpZ ?? 0) > 0;
+        const selfWz = movingEntity.wz ?? 0;
+        const selfHeight = movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         for (const other of entities) {
           if (excludeIds.has(other.id) || !other.collider?.clientSolid) continue;
-          if (skipSmall && (other.sprite?.spriteHeight ?? 0) <= 32) continue;
+          // 3D entity-entity filtering: skip if Z ranges don't overlap
+          const otherWz = other.wz ?? 0;
+          const otherHeight = other.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+          if (!zRangesOverlap(selfWz, selfHeight, otherWz, otherHeight)) continue;
           if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
         }
         return false;

@@ -1,4 +1,5 @@
-import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { DEFAULT_PHYSICAL_HEIGHT, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { zRangesOverlap } from "../physics/AABB3D.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity, PositionComponent } from "./Entity.js";
 import type { PropCollider } from "./Prop.js";
@@ -207,14 +208,20 @@ export function separateOverlappingEntities(
   }
 
   // 2. Separate entities overlapping with players (push only the entity, not the player)
-  // Skip when player is jumping — entities should stay put while being vaulted over.
+  // Skip when Z ranges don't overlap (e.g. player jumping over entity).
   for (const player of players) {
-    if (!player.collider || (player.jumpZ ?? 0) > 0) continue;
+    if (!player.collider) continue;
+    const playerWz = player.wz ?? 0;
+    const playerHeight = player.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
     const playerBox = getEntityAABB(player.position, player.collider);
     for (const entity of pushableEntities) {
       if (!entity.collider) continue;
       // Skip mount — rider is parented to it, so they always overlap
       if (player.parentId === entity.id) continue;
+      // Skip if Z ranges don't overlap
+      const entityWz = entity.wz ?? 0;
+      const entityHeight = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+      if (!zRangesOverlap(playerWz, playerHeight, entityWz, entityHeight)) continue;
       const entityBox = getEntityAABB(entity.position, entity.collider);
       if (!aabbsOverlap(playerBox, entityBox)) continue;
 
@@ -259,6 +266,13 @@ export function separateOverlappingEntities(
         const pairKey = lo.id * 100000 + hi.id;
         if (seen.has(pairKey)) continue;
         seen.add(pairKey);
+
+        // Skip if Z ranges don't overlap
+        const aWz = a.wz ?? 0;
+        const aHeight = a.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+        const bWz = b.wz ?? 0;
+        const bHeight = b.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+        if (!zRangesOverlap(aWz, aHeight, bWz, bHeight)) continue;
 
         const aBox = getEntityAABB(a.position, a.collider);
         const bBox = getEntityAABB(b.position, b.collider);

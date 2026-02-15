@@ -58,5 +58,8 @@ export const JUMP_VELOCITY = 150;
 /** Jump gravity in world px/s². */
 export const JUMP_GRAVITY = 500;
 
-/** Max elevation step (world px) an entity can walk up without jumping. Phase 1: 0 (must jump). */
-export const STEP_UP_THRESHOLD = 0;
+/** Default physical height (world px) for entities missing collider.physicalHeight. */
+export const DEFAULT_PHYSICAL_HEIGHT = 8;
+
+/** Max elevation step (world px) an entity can walk up without jumping. Half an ELEVATION_PX level. */
+export const STEP_UP_THRESHOLD = 4;

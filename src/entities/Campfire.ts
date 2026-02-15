@@ -30,6 +30,7 @@ export function createCampfire(wx: number, wy: number): Entity {
       width: 12,
       height: 8,
       clientSolid: true,
+      physicalHeight: 16,
     },
     wanderAI: null,
     tags: new Set(["campfire"]),

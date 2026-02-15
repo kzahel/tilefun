@@ -1,8 +1,12 @@
 import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
-import { CHUNK_SIZE, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import {
+  CHUNK_SIZE,
+  DEFAULT_PHYSICAL_HEIGHT,
+  ELEVATION_PX,
+  TILE_SIZE,
+} from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
-import { ENTITY_PHYSICAL_HEIGHT } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
@@ -135,8 +139,7 @@ function drawCollisionBoxes(
     const sx = Math.floor(topLeft.sx);
     const groundSy = Math.floor(topLeft.sy - elevOffset);
 
-    const physHeight =
-      ENTITY_PHYSICAL_HEIGHT[entity.type] ?? (entity.sprite?.spriteHeight ?? 16) * 0.5;
+    const physHeight = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
     const heightPx = physHeight * camera.scale;
 
     if (jumpZ > 0) {

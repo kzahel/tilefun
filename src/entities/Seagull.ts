@@ -28,6 +28,7 @@ export function createSeagull(wx: number, wy: number): Entity {
       offsetY: 0,
       width: 10,
       height: 6,
+      physicalHeight: 12,
     },
     wanderAI: {
       state: "idle",

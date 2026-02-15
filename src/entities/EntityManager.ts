@@ -1,4 +1,5 @@
-import { CHUNK_SIZE_PX, STEP_UP_THRESHOLD } from "../config/constants.js";
+import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
+import { zRangesOverlap } from "../physics/AABB3D.js";
 import { getSurfaceZ, isElevationBlocked3D } from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
@@ -106,13 +107,14 @@ export class EntityManager {
         const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
         let nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-        // Airborne entities don't block ground movement and vice versa (reflexive)
-        const selfAirborne = (self.jumpZ ?? 0) > 0;
+        // 3D entity-entity filtering: skip entities whose Z ranges don't overlap with ours
+        const selfWz = self.wz ?? 0;
+        const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         nearby = nearby.filter((e) => {
-          if ((e.jumpZ ?? 0) > 0) return false; // airborne entity doesn't block us
-          if (selfAirborne && (e.sprite?.spriteHeight ?? 0) <= 32) return false; // we're airborne over small entity
           if (e.parentId === self.id) return false; // children (e.g. rider) don't block parent
-          return true;
+          const eWz = e.wz ?? 0;
+          const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+          return zRangesOverlap(selfWz, selfHeight, eWz, eHeight);
         });
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       };
@@ -124,10 +126,10 @@ export class EntityManager {
         const { vx, vy } = player.velocity;
 
         // Detect pushable entities adjacent to player in movement direction.
-        // Skip push detection entirely when player is jumping (any height).
         const toPush: { entity: Entity; pushFactor: number }[] = [];
-        const jumping = (player.jumpZ ?? 0) > 0;
-        if ((vx !== 0 || vy !== 0) && !jumping) {
+        const playerWz = player.wz ?? 0;
+        const playerPhysH = player.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+        if (vx !== 0 || vy !== 0) {
           const playerBox = getEntityAABB(player.position, player.collider);
           const probeX = Math.max(1, Math.abs(vx * dt * speedMult)) * Math.sign(vx);
           const probeY = Math.max(1, Math.abs(vy * dt * speedMult)) * Math.sign(vy);
@@ -152,6 +154,10 @@ export class EntityManager {
           );
           for (const entity of nearbyEntities) {
             if (entity === player || !entity.collider || !entity.wanderAI) continue;
+            // Skip push if Z ranges don't overlap
+            const eWz = entity.wz ?? 0;
+            const eH = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+            if (!zRangesOverlap(playerWz, playerPhysH, eWz, eH)) continue;
             const entityBox = getEntityAABB(entity.position, entity.collider);
             if (!aabbsOverlap(probeBox, entityBox)) continue;
             const toDirX = (entityBox.left + entityBox.right) / 2 - playerCx;
@@ -232,9 +238,15 @@ export class EntityManager {
         } else if (entity.jumpVZ === undefined) {
           // Grounded entity — check for cliff edge or snap
           if (entity.wz > groundZ && playerSet.has(entity)) {
-            // Player walked off cliff — start falling
-            entity.jumpVZ = 0;
-            entity.jumpZ = entity.wz - groundZ;
+            if (entity.wz - groundZ <= STEP_UP_THRESHOLD) {
+              // Small step down — snap to ground instead of falling
+              entity.wz = groundZ;
+              delete entity.jumpZ;
+            } else {
+              // Player walked off cliff — start falling
+              entity.jumpVZ = 0;
+              entity.jumpZ = entity.wz - groundZ;
+            }
           } else {
             // Snap to ground (NPCs always snap, players on same/higher ground)
             entity.wz = groundZ;
@@ -251,9 +263,15 @@ export class EntityManager {
           player.wz = groundZ;
         } else if (player.jumpVZ === undefined) {
           if (player.wz > groundZ) {
-            // Player walked off cliff — start falling
-            player.jumpVZ = 0;
-            player.jumpZ = player.wz - groundZ;
+            if (player.wz - groundZ <= STEP_UP_THRESHOLD) {
+              // Small step down — snap to ground instead of falling
+              player.wz = groundZ;
+              delete player.jumpZ;
+            } else {
+              // Player walked off cliff — start falling
+              player.jumpVZ = 0;
+              player.jumpZ = player.wz - groundZ;
+            }
           } else {
             player.wz = groundZ;
             delete player.jumpZ;

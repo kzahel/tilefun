@@ -29,6 +29,7 @@ export function createChicken(wx: number, wy: number): Entity {
       offsetY: -5,
       width: 10,
       height: 6,
+      physicalHeight: 8,
     },
     wanderAI: {
       state: "idle",

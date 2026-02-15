@@ -50,6 +50,8 @@ export interface ColliderComponent {
   solid?: boolean;
   /** When true, client predicts collision with this entity (no rubber-banding). */
   clientSolid?: boolean;
+  /** Z-axis extent above feet in world pixels. Used for 3D entity-entity collision filtering. */
+  physicalHeight?: number;
 }
 
 export interface WanderAIComponent {

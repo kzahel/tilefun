@@ -1,6 +1,6 @@
 # 3D Physics Engine Design Doc
 
-**Status**: Design reference (not implementing yet)
+**Status**: Phases 0–2 implemented, Phases 3–5 design reference
 
 ## Vision
 Full 3D physics under the hood, rendered as top-down pixel art sprites (Link's Awakening Switch model). Discrete Minecraft-style height steps, no smooth slopes. Entities have absolute Z position, land on surfaces, fall off edges, walk on rooftops.

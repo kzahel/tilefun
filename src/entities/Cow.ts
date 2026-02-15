@@ -31,6 +31,7 @@ export function createCow(wx: number, wy: number): Entity {
       offsetY: -5,
       width: 22,
       height: 10,
+      physicalHeight: 20,
     },
     wanderAI: {
       state: "idle",
