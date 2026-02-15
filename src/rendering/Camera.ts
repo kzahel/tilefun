@@ -7,6 +7,9 @@ export class Camera {
   viewportHeight = 0;
   zoom = 1;
 
+  /** True until the first follow() call, so the camera snaps instead of lerping. */
+  private firstFollow = true;
+
   /** Previous position (before last update tick), for render interpolation. */
   prevX = 0;
   prevY = 0;
@@ -49,6 +52,15 @@ export class Camera {
 
   /** Smoothly move toward a target position using linear interpolation. */
   follow(targetX: number, targetY: number, lerpFactor: number): void {
+    if (this.firstFollow) {
+      this.firstFollow = false;
+      this.x = targetX;
+      this.y = targetY;
+      this.prevX = targetX;
+      this.prevY = targetY;
+      return;
+    }
+
     this.x += (targetX - this.x) * lerpFactor;
     this.y += (targetY - this.y) * lerpFactor;
 

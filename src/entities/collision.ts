@@ -29,19 +29,48 @@ export function aabbsOverlap(a: AABB, b: AABB): boolean {
   return a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
 }
 
-/** Check if an AABB overlaps a prop's wall segments (enterable props) or single collider. */
+/**
+ * Check if a prop collider's Z range overlaps an entity's Z range.
+ * When entityWz/entityHeight are undefined, always returns true (no Z filtering).
+ */
+function propColliderOverlapsZ(
+  c: PropCollider,
+  entityWz: number | undefined,
+  entityHeight: number | undefined,
+): boolean {
+  if (entityWz === undefined || entityHeight === undefined) return true;
+  const wallBase = c.zBase ?? 0;
+  const wallHeight = c.zHeight;
+  if (wallHeight === undefined) {
+    // Infinite height — only skip if entity is entirely below zBase
+    return entityWz + entityHeight > wallBase;
+  }
+  const wallTop = wallBase + wallHeight;
+  // Ranges overlap when neither is entirely above/below the other
+  return entityWz < wallTop && entityWz + entityHeight > wallBase;
+}
+
+/**
+ * Check if an AABB overlaps a prop's wall segments (enterable props) or single collider.
+ * When entityWz and entityHeight are provided, performs Z-axis filtering — walls whose
+ * Z range doesn't overlap the entity's Z range are skipped (e.g., walking under a bridge).
+ */
 export function aabbOverlapsPropWalls(
   aabb: AABB,
   propPos: { wx: number; wy: number },
   prop: { collider: PropCollider | null; walls: PropCollider[] | null },
+  entityWz?: number,
+  entityHeight?: number,
 ): boolean {
   if (prop.walls) {
     for (const wall of prop.walls) {
+      if (!propColliderOverlapsZ(wall, entityWz, entityHeight)) continue;
       if (aabbsOverlap(aabb, getEntityAABB(propPos, wall))) return true;
     }
     return false;
   }
   if (prop.collider) {
+    if (!propColliderOverlapsZ(prop.collider, entityWz, entityHeight)) return false;
     return aabbsOverlap(aabb, getEntityAABB(propPos, prop.collider));
   }
   return false;

@@ -1,4 +1,5 @@
 import {
+  DEFAULT_PHYSICAL_HEIGHT,
   JUMP_GRAVITY,
   JUMP_VELOCITY,
   PLAYER_SPEED,
@@ -12,6 +13,15 @@ import type { MovementContext } from "./MovementContext.js";
 import { getSurfaceZ, isElevationBlocked3D } from "./surfaceHeight.js";
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
+
+// ── Gravity scale (set via sv_gravity CVar) ──
+let gravityScale = 1;
+export function setGravityScale(scale: number): void {
+  gravityScale = scale;
+}
+export function getGravityScale(): number {
+  return gravityScale;
+}
 
 /**
  * Apply movement input to a mount entity (uses rideSpeed, updates sprite).
@@ -80,7 +90,7 @@ export function tickJumpGravity(
   getHeight: (tx: number, ty: number) => number,
 ): boolean {
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
-    entity.jumpVZ -= JUMP_GRAVITY * dt;
+    entity.jumpVZ -= JUMP_GRAVITY * gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
     const groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
     entity.groundZ = groundZ;
@@ -117,6 +127,7 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   const dy = entity.velocity.vy * dt * speedMult;
 
   const entityWz = entity.wz ?? 0;
+  const entityHeight = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
 
   const isBlocked = (aabb: {
     left: number;
@@ -125,7 +136,7 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
     bottom: number;
   }): boolean => {
     if (aabbOverlapsSolid(aabb, ctx.getCollision, BLOCK_MASK)) return true;
-    if (ctx.isPropBlocked(aabb)) return true;
+    if (ctx.isPropBlocked(aabb, entityWz, entityHeight)) return true;
     if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, STEP_UP_THRESHOLD)) return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;

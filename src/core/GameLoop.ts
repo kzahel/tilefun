@@ -25,6 +25,7 @@ export class GameLoop {
   private running = false;
   private rafId = 0;
   private callbacks: GameLoopCallbacks;
+  timeScale = 1;
 
   constructor(callbacks: GameLoopCallbacks) {
     this.callbacks = callbacks;
@@ -53,7 +54,7 @@ export class GameLoop {
       frameTime = MAX_FRAME_TIME;
     }
 
-    this.accumulator += frameTime;
+    this.accumulator += frameTime * this.timeScale;
 
     while (this.accumulator >= FIXED_DT) {
       this.callbacks.update(FIXED_DT);

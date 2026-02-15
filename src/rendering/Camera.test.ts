@@ -52,10 +52,19 @@ describe("Camera", () => {
     expect(tl.wy).toBeCloseTo(-100); // -(600/2) / 3
   });
 
-  it("follow lerps toward target", () => {
+  it("first follow snaps to target", () => {
     const cam = new Camera();
-    cam.x = 0;
-    cam.y = 0;
+    cam.follow(100, 200, 0.5);
+    expect(cam.x).toBe(100);
+    expect(cam.y).toBe(200);
+    expect(cam.prevX).toBe(100);
+    expect(cam.prevY).toBe(200);
+  });
+
+  it("follow lerps toward target after first snap", () => {
+    const cam = new Camera();
+    // First follow snaps
+    cam.follow(0, 0, 0.5);
 
     cam.follow(100, 200, 0.5);
     expect(cam.x).toBe(50);

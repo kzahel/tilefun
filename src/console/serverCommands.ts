@@ -1,4 +1,5 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
+import { setGravityScale } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 
@@ -31,6 +32,21 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
   server.speedMultiplier = sv_speed.get();
   sv_speed.onChange((val) => {
     server.speedMultiplier = val;
+  });
+
+  const sv_gravity = engine.cvars.register<number>({
+    name: "sv_gravity",
+    description: "Gravity multiplier (1 = normal, 0.5 = moon, 2 = heavy)",
+    type: "number",
+    defaultValue: 1,
+    min: 0,
+    max: 20,
+    category: "sv",
+  });
+
+  setGravityScale(sv_gravity.get());
+  sv_gravity.onChange((val) => {
+    setGravityScale(val);
   });
 
   // ── Server Commands ──

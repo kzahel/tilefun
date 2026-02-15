@@ -1,5 +1,7 @@
-import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { ELEVATION_PX, STEP_UP_THRESHOLD, TILE_SIZE } from "../config/constants.js";
 import type { AABB } from "../entities/collision.js";
+import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import type { PropCollider } from "../entities/Prop.js";
 
 /**
  * Terrain surface height at a world-pixel point, in world pixels.
@@ -53,4 +55,39 @@ export function isElevationBlocked3D(
   stepUpThreshold = 0,
 ): boolean {
   return getMaxSurfaceZUnderAABB(aabb, getHeight) > entityWz + stepUpThreshold;
+}
+
+/** Minimal prop shape for surface queries. Works with both Prop and PropSnapshot. */
+export interface PropSurface {
+  position: { wx: number; wy: number };
+  collider: PropCollider | null;
+  walls: PropCollider[] | null;
+}
+
+/**
+ * Get the highest walkable prop surface Z under an entity's AABB footprint.
+ * Only considers colliders/walls with `walkableTop: true` and finite `zHeight`.
+ * Returns undefined if no walkable prop surfaces overlap.
+ */
+export function getWalkablePropSurfaceZ(
+  aabb: AABB,
+  entityWz: number,
+  props: readonly PropSurface[],
+): number | undefined {
+  let maxZ: number | undefined;
+  for (const prop of props) {
+    const colliders = prop.walls ?? (prop.collider ? [prop.collider] : []);
+    for (const c of colliders) {
+      if (!c.walkableTop || c.zHeight === undefined) continue;
+      const topZ = (c.zBase ?? 0) + c.zHeight;
+      // Only walk on top if entity is within step-up range of the surface
+      if (entityWz + STEP_UP_THRESHOLD < topZ) continue; // too far below
+      if (entityWz > topZ + STEP_UP_THRESHOLD) continue; // too far above
+      // Check XY overlap
+      if (aabbsOverlap(aabb, getEntityAABB(prop.position, c))) {
+        if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
+      }
+    }
+  }
+  return maxZ;
 }

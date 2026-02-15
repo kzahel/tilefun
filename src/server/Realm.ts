@@ -115,8 +115,9 @@ export class Realm {
    * add to realm sessions map. Loads per-player data if available.
    */
   async addPlayer(session: PlayerSession): Promise<void> {
-    // Try to load per-player saved data
-    const saved = this.saveManager ? await this.saveManager.loadPlayerData(session.clientId) : null;
+    // Try to load per-player saved data (prefer stable profileId over session clientId)
+    const persistId = session.profileId || session.clientId;
+    const saved = this.saveManager ? await this.saveManager.loadPlayerData(persistId) : null;
 
     const spawnX = saved?.x ?? this.lastLoadedPlayerPos.wx;
     const spawnY = saved?.y ?? this.lastLoadedPlayerPos.wy;
@@ -195,7 +196,8 @@ export class Realm {
   /** Mark per-player data dirty so it gets persisted on next save tick. */
   savePlayerData(session: PlayerSession): void {
     if (!this.saveManager) return;
-    this.saveManager.markPlayerDirty(session.clientId, {
+    const persistId = session.profileId || session.clientId;
+    this.saveManager.markPlayerDirty(persistId, {
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
       y: session.player.position.wy,
@@ -785,13 +787,13 @@ export class Realm {
         const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       },
-      isPropBlocked: (aabb) => {
+      isPropBlocked: (aabb, entityWz, entityHeight) => {
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
         const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
         const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
         for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-          if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+          if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) return true;
         }
         return false;
       },

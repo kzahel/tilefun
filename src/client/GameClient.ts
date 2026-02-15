@@ -43,7 +43,11 @@ export interface GameClientOptions {
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
   /** When true, auto-join the first active realm instead of showing the realm list. */
   autoJoinRealm?: boolean;
+  /** The client ID used for the server connection (for debug display). */
+  clientId?: string;
 }
+
+const HMR_KEY = "tilefun-hmr-ui";
 
 export class GameClient {
   private canvas: HTMLCanvasElement;
@@ -87,6 +91,8 @@ export class GameClient {
   private initDone = false;
   /** Player profile (display name, id). */
   private profile: { id: string; name: string } | null = null;
+  /** The client ID used for the server connection (for debug display). */
+  private clientId: string;
 
   /** Access the server instance (local mode only). Throws if null (serialized mode). */
   private get localServer(): GameServer {
@@ -109,6 +115,7 @@ export class GameClient {
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
+    this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
     this.actions = new ActionManager();
@@ -223,9 +230,13 @@ export class GameClient {
         }
       });
 
-      // Send profile identity to server
+      // Send profile identity to server (profileId for persistence, displayName for labels)
       if (this.profile) {
-        this.transport.send({ type: "identify", displayName: this.profile.name });
+        this.transport.send({
+          type: "identify",
+          displayName: this.profile.name,
+          profileId: this.profile.id,
+        });
       }
     } else {
       if (!server) throw new Error("Local mode requires a GameServer instance");
@@ -278,8 +289,31 @@ export class GameClient {
       this.camera.zoom = val;
     });
 
-    // Start in play mode
-    this.scenes.push(new PlayScene());
+    // Wire cl_timescale to game loop
+    clientCVars.cl_timescale.onChange((val) => {
+      this.loop.timeScale = val;
+    });
+
+    // Start in play mode (or restore edit mode from HMR state)
+    const hmrJson = sessionStorage.getItem(HMR_KEY);
+    if (hmrJson) {
+      sessionStorage.removeItem(HMR_KEY);
+      try {
+        const hmr = JSON.parse(hmrJson);
+        this.scenes.push(hmr.isEditMode ? new EditScene() : new PlayScene());
+        if (hmr.debugEnabled) {
+          this.debugEnabled = true;
+          this.debugPanel.visible = true;
+        }
+        if (typeof hmr.zoom === "number") {
+          this.debugPanel.setZoom(hmr.zoom);
+        }
+      } catch {
+        this.scenes.push(new PlayScene());
+      }
+    } else {
+      this.scenes.push(new PlayScene());
+    }
 
     // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
@@ -398,6 +432,13 @@ export class GameClient {
     this.mainMenu.onClose = () => {
       if (this.scenes.has(MenuScene)) this.scenes.pop();
     };
+    this.mainMenu.onSwitchProfile = () => {
+      // Clear the active profile preference so the picker shows on reload
+      localStorage.removeItem("tilefun-active-profile");
+      // Clear per-tab session ID so a new one is generated for the new profile
+      sessionStorage.removeItem("tilefun-tab-session-id");
+      window.location.reload();
+    };
 
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
@@ -423,6 +464,16 @@ export class GameClient {
   /** Set hosting info to display in the main menu (when this client is hosting P2P). */
   setHostingInfo(info: import("../ui/HostingBanner.js").HostingInfo): void {
     this.mainMenu.hostingInfo = info;
+  }
+
+  /** Save UI state to sessionStorage so it survives Vite HMR reloads. */
+  saveHMRState(): void {
+    const state = {
+      isEditMode: this.scenes.current instanceof EditScene,
+      debugEnabled: this.debugEnabled,
+      zoom: this.debugPanel.zoom,
+    };
+    sessionStorage.setItem(HMR_KEY, JSON.stringify(state));
   }
 
   destroy(): void {
@@ -562,6 +613,8 @@ export class GameClient {
       serialized: this.serialized,
       scenes: this.scenes,
       time: this.time,
+      clientId: this.clientId,
+      profile: this.profile,
       get gemSpriteCanvas() {
         return client.gemSpriteCanvas;
       },

@@ -4,6 +4,7 @@ import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
 import { GameServer } from "./server/GameServer.js";
+import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
 import { PeerHostTransport } from "./transport/PeerHostTransport.js";
 import { SerializingTransport } from "./transport/SerializingTransport.js";
@@ -173,15 +174,29 @@ async function start() {
   const profileStore = new PlayerProfileStore();
   await profileStore.open();
   const profile = await resolveProfile(profileStore);
-  const PLAYERID_KEY = "tilefun-playerid-override";
   const playerIdParam = params.get("playerid");
+  const isMultiplayer = !!(joinPeerId || hostP2P || serverParam || multiplayer);
+
+  // For multiplayer connections without explicit ?playerid, generate a per-tab
+  // session UUID so multiple tabs on the same computer get separate sessions.
+  // sessionStorage persists across page refresh within the same tab.
+  const SESSION_KEY = "tilefun-tab-session-id";
+  let playerId: string;
   if (playerIdParam) {
-    sessionStorage.setItem(PLAYERID_KEY, playerIdParam);
+    playerId = playerIdParam;
+  } else if (isMultiplayer) {
+    let tabId = sessionStorage.getItem(SESSION_KEY);
+    if (!tabId) {
+      tabId = generateUUID();
+      sessionStorage.setItem(SESSION_KEY, tabId);
+    }
+    playerId = tabId;
+  } else {
+    playerId = profile.id;
   }
-  const playerIdOverride = playerIdParam ?? sessionStorage.getItem(PLAYERID_KEY);
-  const playerId = playerIdOverride ?? profile.id;
+
   console.log(
-    `[tilefun] Playing as "${profile.name}" (${playerId}${playerIdOverride ? ", overridden via ?playerid" : ""})`,
+    `[tilefun] Playing as "${profile.name}" (${playerId}${playerIdParam ? ", overridden via ?playerid" : ""})`,
   );
   roomDirectory = new RoomDirectory(ROOM_DIRECTORY_URL);
 
@@ -232,6 +247,7 @@ async function start() {
       profileStore,
       roomDirectory,
       autoJoinRealm: true,
+      clientId: playerId,
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
@@ -248,6 +264,7 @@ async function start() {
       profile,
       profileStore,
       roomDirectory,
+      clientId: playerId,
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
@@ -278,6 +295,7 @@ async function start() {
       profileStore,
       roomDirectory,
       autoJoinRealm: true,
+      clientId: playerId,
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
@@ -291,6 +309,7 @@ async function start() {
       profile,
       profileStore,
       roomDirectory,
+      clientId: playerId,
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
@@ -394,6 +413,7 @@ window.addEventListener("unhandledrejection", (event) => {
 
 if (import.meta.hot) {
   import.meta.hot.dispose(() => {
+    client?.saveHMRState();
     client?.destroy();
     server?.destroy();
     hostingBanner?.destroy();

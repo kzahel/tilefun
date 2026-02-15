@@ -515,7 +515,19 @@ export class GameServer {
     // Global messages handled by GameServer
     switch (msg.type) {
       case "identify":
-        session.displayName = msg.displayName || session.displayName;
+        if (msg.profileId) {
+          session.profileId = msg.profileId;
+        }
+        if (msg.displayName) {
+          // Check if the requested name would duplicate another session's name.
+          // If so, keep the server-assigned numbered name.
+          const isDuplicate = [...this.sessions.values()].some(
+            (s) => s !== session && s.displayName === msg.displayName,
+          );
+          if (!isDuplicate) {
+            session.displayName = msg.displayName;
+          }
+        }
         return;
 
       case "load-world":

@@ -105,6 +105,7 @@ function drawHeightLine(
 ): void {
   ctx.save();
   ctx.strokeStyle = "rgba(80, 140, 255, 0.8)";
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(cx, bottomY);
   ctx.lineTo(cx, bottomY - heightPx);
@@ -189,27 +190,39 @@ function drawCollisionBoxes(
         ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy - elevOffset), w, h);
         ctx.restore();
       }
-      // Draw each wall segment in orange
-      ctx.strokeStyle = "rgba(255, 160, 0, 0.8)";
+      // Draw each wall segment in orange, with height lines for Z-aware walls
       for (const wall of prop.walls) {
         const aabb = getEntityAABB(prop.position, wall);
         const tl = camera.worldToScreen(aabb.left, aabb.top);
         const w = (aabb.right - aabb.left) * camera.scale;
         const h = (aabb.bottom - aabb.top) * camera.scale;
-        ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy - elevOffset), w, h);
+        const zBase = wall.zBase ?? 0;
+        const baseOffset = zBase * camera.scale;
+        const sy = Math.floor(tl.sy - elevOffset - baseOffset);
+        ctx.strokeStyle = wall.walkableTop
+          ? "rgba(0, 220, 200, 0.8)" // cyan-green for walkable
+          : "rgba(255, 160, 0, 0.8)"; // orange for normal walls
+        ctx.strokeRect(Math.floor(tl.sx), sy, w, h);
+        // Height line if wall has finite zHeight
+        if (wall.zHeight !== undefined) {
+          const cx = Math.floor(tl.sx + w / 2);
+          drawHeightLine(ctx, cx, sy + h, wall.zHeight * camera.scale);
+        }
       }
     } else if (prop.collider) {
+      const zBase = prop.collider.zBase ?? 0;
+      const baseOffset = zBase * camera.scale;
       ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
       const aabb = getEntityAABB(prop.position, prop.collider);
       const tl = camera.worldToScreen(aabb.left, aabb.top);
       const w = (aabb.right - aabb.left) * camera.scale;
       const h = (aabb.bottom - aabb.top) * camera.scale;
-      const sy = Math.floor(tl.sy - elevOffset);
+      const sy = Math.floor(tl.sy - elevOffset - baseOffset);
       ctx.strokeRect(Math.floor(tl.sx), sy, w, h);
 
-      // Height line from bottom of prop box (props use half spriteHeight as proxy)
+      // Height line using actual zHeight if available, else spriteHeight proxy
       const cx = Math.floor(tl.sx + w / 2);
-      const propHeight = Math.min(prop.sprite.spriteHeight, 32) * 0.5;
+      const propHeight = prop.collider.zHeight ?? Math.min(prop.sprite.spriteHeight, 32) * 0.5;
       drawHeightLine(ctx, cx, sy + h, propHeight * camera.scale);
     }
   }

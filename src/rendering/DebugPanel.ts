@@ -17,6 +17,7 @@ const ROW_STYLE = "margin: 4px 0; display: flex; align-items: center; gap: 6px;"
 
 export class DebugPanel {
   private readonly container: HTMLDivElement;
+  private readonly playerInfoEl: HTMLDivElement;
   private readonly zoomSlider: HTMLInputElement;
   private readonly zoomLabel: HTMLSpanElement;
   private readonly noclipCheckbox: HTMLInputElement;
@@ -30,6 +31,12 @@ export class DebugPanel {
   constructor() {
     this.container = document.createElement("div");
     this.container.style.cssText = PANEL_STYLE;
+
+    // Player info row (updated externally)
+    this.playerInfoEl = document.createElement("div");
+    this.playerInfoEl.style.cssText =
+      "margin: 4px 0 8px; font-size: 11px; color: #8cf; border-bottom: 1px solid #444; padding-bottom: 6px; word-break: break-all;";
+    this.container.appendChild(this.playerInfoEl);
 
     // Zoom slider
     const zoomRow = document.createElement("div");
@@ -167,6 +174,16 @@ export class DebugPanel {
     const changed = this.pendingConvex;
     this.pendingConvex = false;
     return changed;
+  }
+
+  /** Update the player info display. */
+  setPlayerInfo(info: {
+    clientId: string;
+    profileName: string;
+    profileId: string;
+    entityId: number;
+  }): void {
+    this.playerInfoEl.innerHTML = `<b>Client:</b> ${info.clientId}<br><b>Profile:</b> ${info.profileName} (${info.profileId.slice(0, 8)}...)<br><b>Entity:</b> ${info.entityId}`;
   }
 
   /** Toggle base selection mode (called by keyboard shortcut or button). */

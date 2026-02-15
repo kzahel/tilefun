@@ -53,6 +53,10 @@ export interface GameContext {
   // Central time manager (elapsed time, render interpolation alpha)
   readonly time: Time;
 
+  // Player identity
+  readonly clientId: string;
+  readonly profile: { id: string; name: string } | null;
+
   // Mutable client-side state
   gemSpriteCanvas: HTMLCanvasElement | null;
   debugEnabled: boolean;

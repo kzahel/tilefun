@@ -12,7 +12,7 @@ export class GamepadPoller {
 
     // Left stick: axes 0 (X) and 1 (Y)
     let dx = gp.axes[0] ?? 0;
-    let dy = gp.axes[1] ?? 0;
+    let dy = -(gp.axes[1] ?? 0);
 
     // Apply dead zone per-axis
     if (Math.abs(dx) < DEAD_ZONE) dx = 0;

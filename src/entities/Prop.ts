@@ -3,6 +3,12 @@ export interface PropCollider {
   offsetY: number;
   width: number;
   height: number;
+  /** Z-axis base (default 0 = ground level). */
+  zBase?: number;
+  /** Z-axis extent above zBase (default infinity = full-height wall). */
+  zHeight?: number;
+  /** Whether the top surface is a walkable platform. Requires finite zHeight. */
+  walkableTop?: boolean;
 }
 
 /**

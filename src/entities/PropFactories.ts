@@ -129,8 +129,8 @@ const PROP_DEFS: Record<string, PropDef> = {
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
     // Arch legs at outer edges, wide walk-through center (24px opening)
     walls: [
-      { offsetX: -16, offsetY: 0, width: 8, height: 24 }, // Left leg
-      { offsetX: 16, offsetY: 0, width: 8, height: 24 }, // Right leg
+      { offsetX: -16, offsetY: 0, width: 8, height: 24, zHeight: 24 }, // Left leg
+      { offsetX: 16, offsetY: 0, width: 8, height: 24, zHeight: 24 }, // Right leg
     ],
   },
   "prop-swing": {
@@ -174,8 +174,8 @@ const PROP_DEFS: Record<string, PropDef> = {
     collider: { offsetX: 0, offsetY: 0, width: 72, height: 40 },
     // Symmetric towers with centered 16px doorway matching the archway
     walls: [
-      { offsetX: -22, offsetY: 0, width: 28, height: 40 }, // Left tower + slide
-      { offsetX: 22, offsetY: 0, width: 28, height: 40 }, // Right tower
+      { offsetX: -22, offsetY: 0, width: 28, height: 40, zHeight: 32, walkableTop: true }, // Left tower + slide
+      { offsetX: 22, offsetY: 0, width: 28, height: 40, zHeight: 32, walkableTop: true }, // Right tower
     ],
   },
   "prop-tube-cross": {
@@ -187,8 +187,8 @@ const PROP_DEFS: Record<string, PropDef> = {
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
     // Bottom-row corners only; top 8px of collision zone is open for E-W passage
     walls: [
-      { offsetX: -14, offsetY: 0, width: 12, height: 16 }, // SW corner
-      { offsetX: 14, offsetY: 0, width: 12, height: 16 }, // SE corner
+      { offsetX: -14, offsetY: 0, width: 12, height: 16, zHeight: 16 }, // SW corner
+      { offsetX: 14, offsetY: 0, width: 12, height: 16, zHeight: 16 }, // SE corner
     ],
   },
   "prop-tube-climber": {
@@ -198,11 +198,11 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 96,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 88, height: 32 },
-    // Thin outer legs + wide center hub; two ~19px walk-through passages
+    // Thin outer legs + wide center hub; center hub raised so entities can walk underneath
     walls: [
-      { offsetX: -41, offsetY: 0, width: 6, height: 32 }, // Left leg
-      { offsetX: -1, offsetY: 0, width: 36, height: 32 }, // Center hub + junction
-      { offsetX: 41, offsetY: 0, width: 6, height: 32 }, // Right leg
+      { offsetX: -41, offsetY: 0, width: 6, height: 32, zHeight: 24 }, // Left leg
+      { offsetX: -1, offsetY: 0, width: 36, height: 32, zBase: 12, zHeight: 20, walkableTop: true }, // Center hub (passable underneath)
+      { offsetX: 41, offsetY: 0, width: 6, height: 32, zHeight: 24 }, // Right leg
     ],
   },
   "prop-basketball-hoop": {

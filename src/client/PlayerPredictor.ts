@@ -12,7 +12,7 @@ import {
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
-import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { getSurfaceZ, getWalkablePropSurfaceZ } from "../physics/surfaceHeight.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -404,13 +404,14 @@ export class PlayerPredictor {
       );
       moveAndCollide(this.predicted, dt, playerCtx);
 
-      // Ground tracking after XY movement
+      // Ground tracking after XY movement (terrain + walkable prop surfaces)
       const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-      const groundZ = getSurfaceZ(
-        this.predicted.position.wx,
-        this.predicted.position.wy,
-        getHeight,
-      );
+      let groundZ = getSurfaceZ(this.predicted.position.wx, this.predicted.position.wy, getHeight);
+      if (this.predicted.collider) {
+        const footprint = getEntityAABB(this.predicted.position, this.predicted.collider);
+        const propZ = getWalkablePropSurfaceZ(footprint, this.predicted.wz ?? 0, props);
+        if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+      }
       this.predicted.groundZ = groundZ;
       if (this.predicted.wz === undefined) {
         this.predicted.wz = groundZ;
@@ -485,9 +486,9 @@ export class PlayerPredictor {
         }
         return false;
       },
-      isPropBlocked: (aabb) => {
+      isPropBlocked: (aabb, entityWz, entityHeight) => {
         for (const prop of props) {
-          if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+          if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) return true;
         }
         return false;
       },

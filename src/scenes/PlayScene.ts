@@ -105,6 +105,16 @@ export class PlayScene implements GameScene {
       session.debugNoclip = gc.debugPanel.noclip;
     }
 
+    // Update debug panel player info
+    if (gc.debugEnabled && gc.profile) {
+      gc.debugPanel.setPlayerInfo({
+        clientId: gc.clientId,
+        profileName: gc.profile.name,
+        profileId: gc.profile.id,
+        entityId: gc.stateView.playerEntity.id,
+      });
+    }
+
     // Player movement input
     const movement = gc.actions.getMovement();
     const seq = ++this.inputSeq;

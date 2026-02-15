@@ -13,8 +13,8 @@ export interface MovementContext {
   getHeight(tx: number, ty: number): number;
   /** Whether the AABB overlaps any blocking entity. */
   isEntityBlocked(aabb: AABB): boolean;
-  /** Whether the AABB overlaps any prop wall/collider. */
-  isPropBlocked(aabb: AABB): boolean;
+  /** Whether the AABB overlaps any prop wall/collider. Z params enable Z-axis filtering. */
+  isPropBlocked(aabb: AABB, entityWz: number, entityHeight: number): boolean;
   /** When true, skip all collision (debug noclip). */
   noclip: boolean;
 }

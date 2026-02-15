@@ -1,6 +1,10 @@
 import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
-import { getSurfaceZ, isElevationBlocked3D } from "../physics/surfaceHeight.js";
+import {
+  getSurfaceZ,
+  getWalkablePropSurfaceZ,
+  isElevationBlocked3D,
+} from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
@@ -78,13 +82,13 @@ export class EntityManager {
     const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
     // Helper: check if an AABB overlaps any prop's wall segments (or single collider)
-    const overlapsAnyProp = (aabb: AABB): boolean => {
+    const overlapsAnyProp = (aabb: AABB, entityWz?: number, entityHeight?: number): boolean => {
       const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
       const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
       const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
       const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
       for (const prop of propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-        if (aabbOverlapsPropWalls(aabb, prop.position, prop)) {
+        if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) {
           return true;
         }
       }
@@ -97,9 +101,11 @@ export class EntityManager {
     const makeExtraBlocker =
       (self: Entity, alsoExclude?: Entity) =>
       (aabb: AABB): boolean => {
-        if (overlapsAnyProp(aabb)) return true;
+        const selfWz = self.wz ?? 0;
+        const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+        if (overlapsAnyProp(aabb, selfWz, selfHeight)) return true;
         if (getHeight) {
-          if (isElevationBlocked3D(aabb, self.wz ?? 0, getHeight, STEP_UP_THRESHOLD)) return true;
+          if (isElevationBlocked3D(aabb, selfWz, getHeight, STEP_UP_THRESHOLD)) return true;
         }
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
@@ -108,8 +114,6 @@ export class EntityManager {
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
         let nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
         // 3D entity-entity filtering: skip entities whose Z ranges don't overlap with ours
-        const selfWz = self.wz ?? 0;
-        const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         nearby = nearby.filter((e) => {
           if (e.parentId === self.id) return false; // children (e.g. rider) don't block parent
           const eWz = e.wz ?? 0;
@@ -227,10 +231,26 @@ export class EntityManager {
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
     if (getHeight) {
+      // Helper: compute effective ground Z including terrain + walkable prop surfaces
+      const getEffectiveGroundZ = (e: Entity): number => {
+        let groundZ = getSurfaceZ(e.position.wx, e.position.wy, getHeight);
+        if (e.collider) {
+          const footprint = getEntityAABB(e.position, e.collider);
+          const minCx = Math.floor(footprint.left / CHUNK_SIZE_PX);
+          const maxCx = Math.floor(footprint.right / CHUNK_SIZE_PX);
+          const minCy = Math.floor(footprint.top / CHUNK_SIZE_PX);
+          const maxCy = Math.floor(footprint.bottom / CHUNK_SIZE_PX);
+          const nearbyProps = propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy);
+          const propZ = getWalkablePropSurfaceZ(footprint, e.wz ?? 0, nearbyProps);
+          if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+        }
+        return groundZ;
+      };
+
       for (const entity of this.entities) {
         if (entityTickDts && !entityTickDts.has(entity)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
-        const groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+        const groundZ = getEffectiveGroundZ(entity);
         entity.groundZ = groundZ;
         if (entity.wz === undefined) {
           // First frame: initialize wz at ground level
@@ -257,7 +277,7 @@ export class EntityManager {
       // Also initialize players that may not be in this.entities
       for (const player of players) {
         if (player.parentId !== undefined) continue; // riders: Z is visual-only
-        const groundZ = getSurfaceZ(player.position.wx, player.position.wy, getHeight);
+        const groundZ = getEffectiveGroundZ(player);
         player.groundZ = groundZ;
         if (player.wz === undefined) {
           player.wz = groundZ;

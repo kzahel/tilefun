@@ -1,5 +1,6 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
 import type { ColliderComponent, SpriteComponent, WanderAIComponent } from "../entities/Entity.js";
+import type { PropCollider } from "../entities/Prop.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 
 // ---- Realm browser types ----
@@ -108,7 +109,7 @@ export type ClientMessage =
       editorTab: string;
       brushMode: string;
     }
-  | { type: "identify"; displayName: string }
+  | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string }
   | { type: "leave-realm"; requestId: number };
@@ -160,13 +161,8 @@ export interface PropSnapshot {
     spriteWidth: number;
     spriteHeight: number;
   };
-  collider: {
-    offsetX: number;
-    offsetY: number;
-    width: number;
-    height: number;
-  } | null;
-  walls: { offsetX: number; offsetY: number; width: number; height: number }[] | null;
+  collider: PropCollider | null;
+  walls: PropCollider[] | null;
   sortOffsetY?: number;
 }
 

@@ -59,6 +59,9 @@ export class PlayerSession {
     brushMode: string;
   } | null = null;
 
+  /** Stable profile ID for player data persistence (separate from clientId). */
+  profileId: string | null = null;
+
   /** Debug state (set by client). */
   debugPaused = false;
   debugNoclip = false;
