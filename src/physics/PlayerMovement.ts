@@ -11,6 +11,8 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
 import {
+  type EntitySurface,
+  getHighestWalkableEntitySurfaceZ,
   getHighestWalkablePropSurfaceZ,
   getSurfaceZ,
   isElevationBlocked3D,
@@ -94,6 +96,7 @@ export function tickJumpGravity(
   dt: number,
   getHeight: (tx: number, ty: number) => number,
   props?: readonly PropSurface[],
+  entities?: readonly EntitySurface[],
 ): boolean {
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
     entity.jumpVZ -= JUMP_GRAVITY * gravityScale * dt;
@@ -101,10 +104,16 @@ export function tickJumpGravity(
     let groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
     // Check walkable prop surfaces for landing (no height filter — land on
     // any surface we descend through, unlike step-up which uses threshold)
-    if (props && entity.collider) {
+    if (entity.collider) {
       const footprint = getEntityAABB(entity.position, entity.collider);
-      const propZ = getHighestWalkablePropSurfaceZ(footprint, props);
-      if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+      if (props) {
+        const propZ = getHighestWalkablePropSurfaceZ(footprint, props);
+        if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+      }
+      if (entities) {
+        const entZ = getHighestWalkableEntitySurfaceZ(footprint, entity.id, entity.wz, entities);
+        if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
+      }
     }
     entity.groundZ = groundZ;
     if (entity.wz <= groundZ) {

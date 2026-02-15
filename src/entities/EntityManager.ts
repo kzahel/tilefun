@@ -2,6 +2,7 @@ import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../co
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   getSurfaceZ,
+  getWalkableEntitySurfaceZ,
   getWalkablePropSurfaceZ,
   isElevationBlocked3D,
 } from "../physics/surfaceHeight.js";
@@ -231,7 +232,7 @@ export class EntityManager {
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
     if (getHeight) {
-      // Helper: compute effective ground Z including terrain + walkable prop surfaces
+      // Helper: compute effective ground Z including terrain + walkable prop/entity surfaces
       const getEffectiveGroundZ = (e: Entity): number => {
         let groundZ = getSurfaceZ(e.position.wx, e.position.wy, getHeight);
         if (e.collider) {
@@ -243,6 +244,9 @@ export class EntityManager {
           const nearbyProps = propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy);
           const propZ = getWalkablePropSurfaceZ(footprint, e.wz ?? 0, nearbyProps);
           if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+          const nearbyEntities = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+          const entZ = getWalkableEntitySurfaceZ(footprint, e.id, e.wz ?? 0, nearbyEntities);
+          if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
         }
         return groundZ;
       };

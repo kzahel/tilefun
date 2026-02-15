@@ -1,6 +1,12 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { CHUNK_SIZE_PX, JUMP_VELOCITY, RENDER_DISTANCE, TICK_RATE } from "../config/constants.js";
+import {
+  CHUNK_SIZE_PX,
+  DEFAULT_PHYSICAL_HEIGHT,
+  JUMP_VELOCITY,
+  RENDER_DISTANCE,
+  TICK_RATE,
+} from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import {
@@ -26,6 +32,7 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyMountInput,
@@ -270,7 +277,7 @@ export class Realm {
         const targetExclude = mount
           ? new Set([session.player.id, mount.id])
           : new Set([session.player.id]);
-        const ctx = this.buildMovementContext(targetExclude, session.debugNoclip);
+        const ctx = this.buildMovementContext(targetExclude, session.debugNoclip, movementTarget);
 
         // Process extra inputs (all but last) with simplified collision.
         // This handles the case where timing jitter causes 2+ client ticks
@@ -389,7 +396,18 @@ export class Realm {
         const nearbyProps = p.collider
           ? this.propManager.getPropsNearPosition(p.position, p.collider)
           : [];
-        const landed = tickJumpGravity(p, dt, getHeight, nearbyProps);
+        const nearbyEntities = p.collider
+          ? (() => {
+              const fp = getEntityAABB(p.position, p.collider!);
+              return this.entityManager.spatialHash.queryRange(
+                Math.floor(fp.left / CHUNK_SIZE_PX),
+                Math.floor(fp.top / CHUNK_SIZE_PX),
+                Math.floor(fp.right / CHUNK_SIZE_PX),
+                Math.floor(fp.bottom / CHUNK_SIZE_PX),
+              );
+            })()
+          : [];
+        const landed = tickJumpGravity(p, dt, getHeight, nearbyProps, nearbyEntities);
         if (landed && session.gameplaySession.mountId === null) {
           this.tryMountOnLanding(session);
         }
@@ -809,7 +827,11 @@ export class Realm {
   // ---- Private ----
 
   /** Build a MovementContext for simplified collision (extra-input processing). */
-  private buildMovementContext(excludeIds: ReadonlySet<number>, noclip: boolean): MovementContext {
+  private buildMovementContext(
+    excludeIds: ReadonlySet<number>,
+    noclip: boolean,
+    movingEntity?: Entity,
+  ): MovementContext {
     return {
       getCollision: (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
       getHeight: (tx, ty) => this.world.getHeightAt(tx, ty),
@@ -818,7 +840,16 @@ export class Realm {
         const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
         const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
         const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-        const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        let nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        if (movingEntity) {
+          const selfWz = movingEntity.wz ?? 0;
+          const selfHeight = movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+          nearby = nearby.filter((e) => {
+            const eWz = e.wz ?? 0;
+            const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+            return zRangesOverlap(selfWz, selfHeight, eWz, eHeight);
+          });
+        }
         return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
       },
       isPropBlocked: (aabb, entityWz, entityHeight) => {

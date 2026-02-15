@@ -291,6 +291,13 @@ const PROP_DEFS: Record<string, PropDef> = {
   },
 };
 
+// Debug: verify staircase walls at module load time
+console.log(
+  "[tilefun:props] climb-arch walls:",
+  PROP_DEFS["prop-climb-arch"]?.walls?.length,
+  PROP_DEFS["prop-climb-arch"]?.walls,
+);
+
 export function createProp(type: string, wx: number, wy: number): Prop {
   if (type.startsWith(ATLAS_PREFIX)) {
     const atlasKey = type.slice(ATLAS_PREFIX.length);

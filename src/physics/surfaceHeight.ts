@@ -1,6 +1,7 @@
 import { ELEVATION_PX, STEP_UP_THRESHOLD, TILE_SIZE } from "../config/constants.js";
 import type { AABB } from "../entities/collision.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import type { ColliderComponent } from "../entities/Entity.js";
 import type { PropCollider } from "../entities/Prop.js";
 
 /**
@@ -57,6 +58,14 @@ export function isElevationBlocked3D(
   return getMaxSurfaceZUnderAABB(aabb, getHeight) > entityWz + stepUpThreshold;
 }
 
+/** Minimal entity shape for surface queries. Works with both Entity and EntitySnapshot. */
+export interface EntitySurface {
+  id: number;
+  position: { wx: number; wy: number };
+  collider: ColliderComponent | null;
+  wz?: number;
+}
+
 /** Minimal prop shape for surface queries. Works with both Prop and PropSnapshot. */
 export interface PropSurface {
   position: { wx: number; wy: number };
@@ -110,6 +119,62 @@ export function getWalkablePropSurfaceZ(
       if (aabbsOverlap(aabb, getEntityAABB(prop.position, c))) {
         if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
       }
+    }
+  }
+  return maxZ;
+}
+
+/**
+ * Get the highest walkable entity surface Z under an AABB footprint, ignoring
+ * height threshold. Used for landing checks during jump/fall — land on any
+ * solid entity we descend through.
+ *
+ * Only considers entities whose feet are at or below selfWz — prevents
+ * entities below from "landing" on entities above (infinite lift feedback loop).
+ */
+export function getHighestWalkableEntitySurfaceZ(
+  aabb: AABB,
+  selfId: number,
+  selfWz: number,
+  entities: readonly EntitySurface[],
+): number | undefined {
+  let maxZ: number | undefined;
+  for (const e of entities) {
+    if (e.id === selfId || !e.collider || e.collider.solid === false) continue;
+    const physH = e.collider.physicalHeight;
+    if (physH === undefined) continue;
+    const eWz = e.wz ?? 0;
+    if (eWz > selfWz) continue; // entity's feet are above ours — we're below it
+    const topZ = eWz + physH;
+    if (aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))) {
+      if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
+    }
+  }
+  return maxZ;
+}
+
+/**
+ * Get the highest walkable entity surface Z under an AABB footprint,
+ * within step-up range. Used for ground tracking while walking.
+ */
+export function getWalkableEntitySurfaceZ(
+  aabb: AABB,
+  selfId: number,
+  entityWz: number,
+  entities: readonly EntitySurface[],
+): number | undefined {
+  let maxZ: number | undefined;
+  for (const e of entities) {
+    if (e.id === selfId || !e.collider || e.collider.solid === false) continue;
+    const physH = e.collider.physicalHeight;
+    if (physH === undefined) continue;
+    const eWz = e.wz ?? 0;
+    if (eWz > entityWz) continue; // entity's feet are above ours — we're below it
+    const topZ = eWz + physH;
+    if (entityWz + STEP_UP_THRESHOLD < topZ) continue; // too far below
+    if (entityWz > topZ + STEP_UP_THRESHOLD) continue; // too far above
+    if (aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))) {
+      if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
     }
   }
   return maxZ;
