@@ -176,6 +176,19 @@ export interface RemoteEditorCursor {
   brushMode: string;
 }
 
+/** Physics CVar values that affect client-side prediction. */
+export interface PhysicsCVars {
+  gravity: number;
+  friction: number;
+  accelerate: number;
+  airAccelerate: number;
+  airWishCap: number;
+  stopSpeed: number;
+  noBunnyHop: boolean;
+  smallJumps: boolean;
+  timeScale: number;
+}
+
 export interface GameStateMessage {
   type: "game-state";
   serverTick: number;
@@ -193,6 +206,8 @@ export interface GameStateMessage {
   playerNames: Record<number, string>;
   /** Entity ID of the player's mount (undefined when not riding). */
   mountEntityId?: number;
+  /** Server physics CVars for client prediction sync. */
+  cvars: PhysicsCVars;
 }
 
 // ---- Server → Client messages ----

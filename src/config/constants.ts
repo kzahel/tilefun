@@ -33,6 +33,12 @@ export const PLAYER_FRICTION = 100;
 /** Ground acceleration (QW default: 10, ≥60 = instant like pre-friction). */
 export const PLAYER_ACCELERATE = 100;
 
+/** Air acceleration (QW default: 0.7 — much lower than ground for limited air control). */
+export const PLAYER_AIR_ACCELERATE = 1;
+
+/** Air wishspeed cap (QW: 30 out of maxspeed 320). Limits per-frame speed gain from air strafing. */
+export const PLAYER_AIR_WISHCAP = 6;
+
 /** Friction uses this as minimum speed for the control term (QW: 100). */
 export const PLAYER_STOP_SPEED = 16;
 

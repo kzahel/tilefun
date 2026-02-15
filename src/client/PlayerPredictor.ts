@@ -65,6 +65,9 @@ export class PlayerPredictor {
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
 
+  /** Last reconciliation correction (predicted - server, before replay). */
+  private _lastCorrection = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
+
   /** The predicted mount entity (null when not riding). */
   private predictedMount: Entity | null = null;
 
@@ -270,6 +273,10 @@ export class PlayerPredictor {
 
       const oldX = this.predicted.position.wx;
       const oldY = this.predicted.position.wy;
+      const oldWz = this.predicted.wz ?? 0;
+      const oldVx = this.predicted.velocity?.vx ?? 0;
+      const oldVy = this.predicted.velocity?.vy ?? 0;
+      const oldJumpVZ = this.predicted.jumpVZ ?? 0;
 
       // Snap to server's authoritative position, velocity, and jump state.
       // Velocity must be snapped because the friction/acceleration model is
@@ -300,6 +307,17 @@ export class PlayerPredictor {
       } else {
         delete this.predicted.jumpVZ;
       }
+
+      // Record correction: how much the server state differs from our prediction
+      // (before replay — this is the raw misprediction from the last server tick)
+      this._lastCorrection = {
+        wx: oldX - serverPlayer.position.wx,
+        wy: oldY - serverPlayer.position.wy,
+        wz: oldWz - (serverPlayer.wz ?? 0),
+        vx: oldVx - (serverPlayer.velocity?.vx ?? 0),
+        vy: oldVy - (serverPlayer.velocity?.vy ?? 0),
+        jumpVZ: oldJumpVZ - (serverPlayer.jumpVZ ?? 0),
+      };
 
       // Trim acknowledged inputs
       this.trimInputBuffer(lastProcessedInputSeq);
@@ -406,6 +424,11 @@ export class PlayerPredictor {
   /** Get previous mount position for render interpolation. */
   get mountPrevPosition(): PositionComponent {
     return this._mountPrevPosition;
+  }
+
+  /** Get the last reconciliation correction (predicted minus server, before replay). */
+  get lastCorrection() {
+    return this._lastCorrection;
   }
 
   // ---- Private helpers ----

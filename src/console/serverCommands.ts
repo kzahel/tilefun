@@ -1,10 +1,14 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import {
   setAccelerate,
+  setAirAccelerate,
+  setAirWishCap,
   setFriction,
   setGravityScale,
   setNoBunnyHop,
+  setSmallJumps,
   setStopSpeed,
+  setTimeScale,
 } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
@@ -37,6 +41,12 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
     setGravityScale(val as number);
   });
 
+  const sv_smalljumps = getCVar(engine, "sv_smalljumps");
+  setSmallJumps(sv_smalljumps.get() as boolean);
+  sv_smalljumps.onChange((val) => {
+    setSmallJumps(val as boolean);
+  });
+
   const sv_nobunnyhop = getCVar(engine, "sv_nobunnyhop");
   setNoBunnyHop(sv_nobunnyhop.get() as boolean);
   sv_nobunnyhop.onChange((val) => {
@@ -55,6 +65,18 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
     setAccelerate(val as number);
   });
 
+  const sv_airaccelerate = getCVar(engine, "sv_airaccelerate");
+  setAirAccelerate(sv_airaccelerate.get() as number);
+  sv_airaccelerate.onChange((val) => {
+    setAirAccelerate(val as number);
+  });
+
+  const sv_airwishcap = getCVar(engine, "sv_airwishcap");
+  setAirWishCap(sv_airwishcap.get() as number);
+  sv_airwishcap.onChange((val) => {
+    setAirWishCap(val as number);
+  });
+
   const sv_stopspeed = getCVar(engine, "sv_stopspeed");
   setStopSpeed(sv_stopspeed.get() as number);
   sv_stopspeed.onChange((val) => {
@@ -63,8 +85,10 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
 
   const sv_timescale = getCVar(engine, "sv_timescale");
   server.timeScale = sv_timescale.get() as number;
+  setTimeScale(sv_timescale.get() as number);
   sv_timescale.onChange((val) => {
     server.timeScale = val as number;
+    setTimeScale(val as number);
   });
 
   // ── Server Commands ──

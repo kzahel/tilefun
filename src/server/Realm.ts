@@ -45,12 +45,21 @@ import {
   applyMountInput,
   applyMovementPhysics,
   cutJumpVelocity,
+  getAccelerate,
+  getAirAccelerate,
+  getAirWishCap,
+  getFriction,
+  getGravityScale,
+  getNoBunnyHop,
+  getSmallJumps,
+  getStopSpeed,
+  getTimeScale,
   initiateJump,
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
-import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { applyGroundTracking, getEffectiveGroundZ, getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -323,6 +332,46 @@ export class Realm {
           }
 
           moveAndCollide(movementTarget, dt, ctx);
+
+          // Ground tracking + jump gravity must run per-input to match
+          // the client predictor's applyInput. Without this, the server
+          // applies gravity once per tick while the client applies it per
+          // input, causing the predicted jump arc to diverge (visible as
+          // mid-air judder on reconciliation).
+          {
+            const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
+            const p = movementTarget;
+            const nearbyProps = p.collider
+              ? this.propManager.getPropsNearPosition(p.position, p.collider)
+              : [];
+            const nearbyEntities = p.collider
+              ? (() => {
+                  const fp = getEntityAABB(p.position, p.collider!);
+                  return this.entityManager.spatialHash.queryRange(
+                    Math.floor(fp.left / CHUNK_SIZE_PX),
+                    Math.floor(fp.top / CHUNK_SIZE_PX),
+                    Math.floor(fp.right / CHUNK_SIZE_PX),
+                    Math.floor(fp.bottom / CHUNK_SIZE_PX),
+                  );
+                })()
+              : [];
+            const groundZ = getEffectiveGroundZ(p, getHeight, nearbyProps, nearbyEntities);
+            applyGroundTracking(p, groundZ, !mount);
+            if (!mount) {
+              const landed = tickJumpGravity(
+                session.player,
+                dt,
+                getHeight,
+                nearbyProps,
+                nearbyEntities,
+              );
+              if (landed && session.lastJumpHeld && !session.jumpConsumed) {
+                initiateJump(session.player);
+                session.jumpConsumed = true;
+              }
+            }
+          }
+
           session.lastProcessedInputSeq = input.seq;
         }
 
@@ -1089,6 +1138,17 @@ export class Realm {
       chunkUpdates,
       editorCursors,
       playerNames,
+      cvars: {
+        gravity: getGravityScale(),
+        friction: getFriction(),
+        accelerate: getAccelerate(),
+        airAccelerate: getAirAccelerate(),
+        airWishCap: getAirWishCap(),
+        stopSpeed: getStopSpeed(),
+        noBunnyHop: getNoBunnyHop(),
+        smallJumps: getSmallJumps(),
+        timeScale: getTimeScale(),
+      },
       ...(session.gameplaySession.mountId != null
         ? { mountEntityId: session.gameplaySession.mountId }
         : {}),

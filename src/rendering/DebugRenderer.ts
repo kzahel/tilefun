@@ -27,6 +27,10 @@ export interface DebugInfo {
   serverWx?: number | undefined;
   serverWy?: number | undefined;
   serverWz?: number | undefined;
+  /** Last reconciliation correction (predicted - server, before replay). */
+  correction?:
+    | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
+    | undefined;
 }
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
@@ -44,6 +48,12 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     const dz = (info.playerWz ?? 0) - (info.serverWz ?? 0);
     lines.push(
       `Srv: (${info.serverWx.toFixed(1)}, ${info.serverWy.toFixed(1)}, Z=${(info.serverWz ?? 0).toFixed(1)})  d=(${dx.toFixed(1)}, ${dy.toFixed(1)}, ${dz.toFixed(1)})`,
+    );
+  }
+  {
+    const c = info.correction ?? { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
+    lines.push(
+      `Err: pos=(${c.wx.toFixed(2)}, ${c.wy.toFixed(2)}, ${c.wz.toFixed(2)})  vel=(${c.vx.toFixed(1)}, ${c.vy.toFixed(1)})  jVZ=${c.jumpVZ.toFixed(1)}`,
     );
   }
   if (info.playerJumpZ) {

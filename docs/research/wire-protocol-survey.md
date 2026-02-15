@@ -28,6 +28,11 @@ Every tick (60 Hz), each client gets a custom JSON `GameStateMessage` containing
 
 **No binary encoding, no entity delta, no field-level diffing, no bandwidth management.**
 
+**TODO**: `PhysicsCVars` (gravity/friction/accelerate/stopSpeed/noBunnyHop) are sent as
+JSON on every `GameStateMessage` (~80 bytes/tick). With delta compression or a binary
+protocol these would be 0 bytes when unchanged. Until then, this is a small but constant
+per-tick overhead that should be eliminated by any future wire protocol work.
+
 Steady-state cost: ~12-15 KB/tick (20 entities), ~750 KB/s per client.
 50-chicken scenario: ~30 KB/tick, ~1.8 MB/s per client.
 

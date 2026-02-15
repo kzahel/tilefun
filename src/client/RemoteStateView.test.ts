@@ -1,6 +1,33 @@
 import { describe, expect, it } from "vitest";
+import {
+  PLAYER_ACCELERATE,
+  PLAYER_AIR_ACCELERATE,
+  PLAYER_AIR_WISHCAP,
+  PLAYER_FRICTION,
+  PLAYER_STOP_SPEED,
+} from "../config/constants.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import type { GameStateMessage } from "../shared/protocol.js";
+import {
+  getAccelerate,
+  getAirAccelerate,
+  getAirWishCap,
+  getFriction,
+  getGravityScale,
+  getNoBunnyHop,
+  getSmallJumps,
+  getStopSpeed,
+  getTimeScale,
+  setAccelerate,
+  setAirAccelerate,
+  setAirWishCap,
+  setFriction,
+  setGravityScale,
+  setNoBunnyHop,
+  setSmallJumps,
+  setStopSpeed,
+  setTimeScale,
+} from "../physics/PlayerMovement.js";
+import type { GameStateMessage, PhysicsCVars } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
@@ -36,6 +63,18 @@ function makeTestProp(id: number, wx: number, wy: number) {
   });
 }
 
+const DEFAULT_CVARS: PhysicsCVars = {
+  gravity: 1,
+  friction: PLAYER_FRICTION,
+  accelerate: PLAYER_ACCELERATE,
+  airAccelerate: PLAYER_AIR_ACCELERATE,
+  airWishCap: PLAYER_AIR_WISHCAP,
+  stopSpeed: PLAYER_STOP_SPEED,
+  noBunnyHop: false,
+  smallJumps: false,
+  timeScale: 1,
+};
+
 function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMessage {
   return {
     type: "game-state",
@@ -51,6 +90,7 @@ function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMess
     chunkUpdates: [],
     editorCursors: [],
     playerNames: {},
+    cvars: DEFAULT_CVARS,
     ...overrides,
   };
 }
@@ -217,5 +257,58 @@ describe("RemoteStateView", () => {
     );
     expect(view.entities).toHaveLength(1);
     expect(view.entities.at(0)?.id).toBe(3);
+  });
+
+  it("syncs physics CVars from game-state to PlayerMovement module", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Reset to defaults
+    setGravityScale(1);
+    setFriction(PLAYER_FRICTION);
+    setAccelerate(PLAYER_ACCELERATE);
+    setAirAccelerate(PLAYER_AIR_ACCELERATE);
+    setAirWishCap(PLAYER_AIR_WISHCAP);
+    setStopSpeed(PLAYER_STOP_SPEED);
+    setNoBunnyHop(false);
+    setSmallJumps(false);
+    setTimeScale(1);
+
+    view.applyGameState(
+      makeGameState({
+        cvars: {
+          gravity: 0.5,
+          friction: 4,
+          accelerate: 10,
+          airAccelerate: 0.7,
+          airWishCap: 30,
+          stopSpeed: 100,
+          noBunnyHop: true,
+          smallJumps: true,
+          timeScale: 0.5,
+        },
+      }),
+    );
+
+    expect(getGravityScale()).toBe(0.5);
+    expect(getFriction()).toBe(4);
+    expect(getAccelerate()).toBe(10);
+    expect(getAirAccelerate()).toBe(0.7);
+    expect(getAirWishCap()).toBe(30);
+    expect(getStopSpeed()).toBe(100);
+    expect(getNoBunnyHop()).toBe(true);
+    expect(getSmallJumps()).toBe(true);
+    expect(getTimeScale()).toBe(0.5);
+
+    // Restore defaults so other tests aren't affected
+    setGravityScale(1);
+    setFriction(PLAYER_FRICTION);
+    setAccelerate(PLAYER_ACCELERATE);
+    setAirAccelerate(PLAYER_AIR_ACCELERATE);
+    setAirWishCap(PLAYER_AIR_WISHCAP);
+    setStopSpeed(PLAYER_STOP_SPEED);
+    setNoBunnyHop(false);
+    setSmallJumps(false);
+    setTimeScale(1);
   });
 });

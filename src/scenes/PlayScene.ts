@@ -5,6 +5,7 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
+import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -290,10 +291,12 @@ export class PlayScene implements GameScene {
           }
         }
 
-        // Store current input for future reconciliation, then predict
-        this.predictor.storeInput(seq, movement, dt);
+        // Store current input for future reconciliation, then predict.
+        // Scale dt by server timeScale so prediction matches server physics.
+        const scaledDt = dt * getTimeScale();
+        this.predictor.storeInput(seq, movement, scaledDt);
         this.predictor.update(
-          dt,
+          scaledDt,
           movement,
           gc.stateView.world,
           gc.stateView.props,

@@ -1,5 +1,16 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import {
+  setAccelerate,
+  setAirAccelerate,
+  setAirWishCap,
+  setFriction,
+  setGravityScale,
+  setNoBunnyHop,
+  setSmallJumps,
+  setStopSpeed,
+  setTimeScale,
+} from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
@@ -20,6 +31,10 @@ export interface ClientStateView {
   readonly playerNames: Record<number, string>;
   /** Raw server player position (before client prediction). Undefined in local mode. */
   readonly serverPlayerPosition?: { wx: number; wy: number; wz?: number } | undefined;
+  /** Last reconciliation correction (predicted - server, before replay). Undefined in local mode. */
+  readonly predictionCorrection?:
+    | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
+    | undefined;
 }
 
 /**
@@ -200,6 +215,17 @@ export class RemoteStateView implements ClientStateView {
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
     this._mountEntityId = msg.mountEntityId;
 
+    // Sync server physics CVars so client prediction matches server movement.
+    setGravityScale(msg.cvars.gravity);
+    setFriction(msg.cvars.friction);
+    setAccelerate(msg.cvars.accelerate);
+    setAirAccelerate(msg.cvars.airAccelerate);
+    setAirWishCap(msg.cvars.airWishCap);
+    setStopSpeed(msg.cvars.stopSpeed);
+    setNoBunnyHop(msg.cvars.noBunnyHop);
+    setSmallJumps(msg.cvars.smallJumps);
+    setTimeScale(msg.cvars.timeScale);
+
     // Apply chunk updates (delta — only new/changed chunks).
     // Use put() instead of getOrCreate() to avoid invalidateNeighborAutotile()
     // which would reset autotileComputed on already-applied neighbor chunks.
@@ -287,6 +313,9 @@ export class RemoteStateView implements ClientStateView {
     const pos: { wx: number; wy: number; wz?: number } = { wx: sp.position.wx, wy: sp.position.wy };
     if (sp.wz !== undefined) pos.wz = sp.wz;
     return pos;
+  }
+  get predictionCorrection() {
+    return this._predictor?.lastCorrection;
   }
   /** Mount entity ID from the latest server state (undefined when not riding). */
   get mountEntityId(): number | undefined {

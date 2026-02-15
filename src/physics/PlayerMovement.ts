@@ -4,6 +4,8 @@ import {
   JUMP_GRAVITY,
   JUMP_VELOCITY,
   PLAYER_ACCELERATE,
+  PLAYER_AIR_ACCELERATE,
+  PLAYER_AIR_WISHCAP,
   PLAYER_FRAME_DURATION,
   PLAYER_FRICTION,
   PLAYER_SPEED,
@@ -55,6 +57,22 @@ export function getAccelerate(): number {
   return accelerateCVar;
 }
 
+let airAccelerateCVar = PLAYER_AIR_ACCELERATE;
+export function setAirAccelerate(v: number): void {
+  airAccelerateCVar = v;
+}
+export function getAirAccelerate(): number {
+  return airAccelerateCVar;
+}
+
+let airWishCapCVar = PLAYER_AIR_WISHCAP;
+export function setAirWishCap(v: number): void {
+  airWishCapCVar = v;
+}
+export function getAirWishCap(): number {
+  return airWishCapCVar;
+}
+
 let stopSpeedCVar = PLAYER_STOP_SPEED;
 export function setStopSpeed(v: number): void {
   stopSpeedCVar = v;
@@ -69,6 +87,22 @@ export function setNoBunnyHop(v: boolean): void {
 }
 export function getNoBunnyHop(): boolean {
   return noBunnyHop;
+}
+
+let smallJumps = false;
+export function setSmallJumps(v: boolean): void {
+  smallJumps = v;
+}
+export function getSmallJumps(): boolean {
+  return smallJumps;
+}
+
+let timeScaleCVar = 1;
+export function setTimeScale(v: number): void {
+  timeScaleCVar = v;
+}
+export function getTimeScale(): number {
+  return timeScaleCVar;
 }
 
 /**
@@ -142,6 +176,7 @@ export function initiateJump(entity: Entity): void {
 
 /** Cut jump velocity when the jump button is released while ascending (variable jump height). */
 export function cutJumpVelocity(entity: Entity): void {
+  if (!smallJumps) return;
   if (entity.jumpVZ !== undefined && entity.jumpVZ > 0) {
     entity.jumpVZ *= JUMP_CUT_MULTIPLIER;
   }
@@ -227,7 +262,7 @@ export function applyFriction(entity: Entity, dt: number, surfaceFriction: numbe
 }
 
 /**
- * Accelerate toward wish direction, capped at wish speed.
+ * Ground acceleration toward wish direction, capped at wish speed.
  * QW PM_Accelerate adapted for 2D.
  */
 export function applyAcceleration(
@@ -235,13 +270,38 @@ export function applyAcceleration(
   wishdirX: number,
   wishdirY: number,
   wishspeed: number,
+  accel: number,
   dt: number,
 ): void {
   if (!entity.velocity || wishspeed <= 0) return;
   const currentspeed = entity.velocity.vx * wishdirX + entity.velocity.vy * wishdirY;
   const addspeed = wishspeed - currentspeed;
   if (addspeed <= 0) return;
-  let accelspeed = accelerateCVar * dt * wishspeed;
+  let accelspeed = accel * dt * wishspeed;
+  if (accelspeed > addspeed) accelspeed = addspeed;
+  entity.velocity.vx += accelspeed * wishdirX;
+  entity.velocity.vy += accelspeed * wishdirY;
+}
+
+/**
+ * Air acceleration with wishspeed cap — QW PM_AirAccelerate adapted for 2D.
+ * The cap limits per-frame speed gain from strafing: addspeed uses the capped
+ * wishspeed, but accelspeed uses the full wishspeed (matching QW behavior).
+ */
+export function applyAirAcceleration(
+  entity: Entity,
+  wishdirX: number,
+  wishdirY: number,
+  wishspeed: number,
+  accel: number,
+  dt: number,
+): void {
+  if (!entity.velocity || wishspeed <= 0) return;
+  const cappedWish = Math.min(wishspeed, airWishCapCVar);
+  const currentspeed = entity.velocity.vx * wishdirX + entity.velocity.vy * wishdirY;
+  const addspeed = cappedWish - currentspeed;
+  if (addspeed <= 0) return;
+  let accelspeed = accel * dt * wishspeed;
   if (accelspeed > addspeed) accelspeed = addspeed;
   entity.velocity.vx += accelspeed * wishdirX;
   entity.velocity.vy += accelspeed * wishdirY;
@@ -293,7 +353,11 @@ export function applyMovementPhysics(
     const wishdirY = dy / len;
     const baseSpeed = input.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
     const wishspeed = baseSpeed * surface.speedMult;
-    applyAcceleration(entity, wishdirX, wishdirY, wishspeed, dt);
+    if (airborne) {
+      applyAirAcceleration(entity, wishdirX, wishdirY, wishspeed, airAccelerateCVar, dt);
+    } else {
+      applyAcceleration(entity, wishdirX, wishdirY, wishspeed, accelerateCVar, dt);
+    }
   }
 
   // 3. Update sprite from input (not velocity — prevents animation during passive slide)
