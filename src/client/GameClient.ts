@@ -112,6 +112,9 @@ export class GameClient {
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
     this.actions = new ActionManager();
+    if (new URLSearchParams(window.location.search).has("nogamepad")) {
+      this.actions.disableGamepad();
+    }
     this.touchJoystick = new TouchJoystick(canvas);
     this.actions.setTouchJoystick(this.touchJoystick);
     this.debugPanel = new DebugPanel();

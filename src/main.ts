@@ -173,8 +173,16 @@ async function start() {
   const profileStore = new PlayerProfileStore();
   await profileStore.open();
   const profile = await resolveProfile(profileStore);
-  const playerId = profile.id;
-  console.log(`[tilefun] Playing as "${profile.name}" (${playerId})`);
+  const PLAYERID_KEY = "tilefun-playerid-override";
+  const playerIdParam = params.get("playerid");
+  if (playerIdParam) {
+    sessionStorage.setItem(PLAYERID_KEY, playerIdParam);
+  }
+  const playerIdOverride = playerIdParam ?? sessionStorage.getItem(PLAYERID_KEY);
+  const playerId = playerIdOverride ?? profile.id;
+  console.log(
+    `[tilefun] Playing as "${profile.name}" (${playerId}${playerIdOverride ? ", overridden via ?playerid" : ""})`,
+  );
   roomDirectory = new RoomDirectory(ROOM_DIRECTORY_URL);
 
   if (joinPeerId) {
@@ -269,6 +277,7 @@ async function start() {
       profile,
       profileStore,
       roomDirectory,
+      autoJoinRealm: true,
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;

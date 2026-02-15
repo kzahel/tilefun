@@ -21,7 +21,7 @@ export class ActionManager {
   private readonly keysDown = new Set<string>();
   private readonly listeners = new Map<ActionName, Set<DiscreteCallback>>();
   private touchJoystick: TouchJoystick | null = null;
-  private gamepadPoller = new GamepadPoller();
+  private gamepadPoller: GamepadPoller | null = new GamepadPoller();
 
   constructor(config?: ActionMapConfig) {
     this.config = config ?? DEFAULT_ACTION_MAP;
@@ -51,6 +51,10 @@ export class ActionManager {
 
   getConfig(): ActionMapConfig {
     return this.config;
+  }
+
+  disableGamepad(): void {
+    this.gamepadPoller = null;
   }
 
   setTouchJoystick(joystick: TouchJoystick): void {
@@ -97,11 +101,16 @@ export class ActionManager {
     const jump = this.isHeld("jump");
 
     // Merge gamepad: if keyboard is idle, use gamepad stick; always OR sprint
-    const gp = this.gamepadPoller.poll();
-    if (dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
+    const gp = this.gamepadPoller?.poll();
+    if (gp && dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
       return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
     }
-    return { dx, dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
+    return {
+      dx,
+      dy,
+      sprinting: sprinting || (gp?.sprinting ?? false),
+      jump: jump || (gp?.jump ?? false),
+    };
   }
 
   getPanDirection(): { dx: number; dy: number } {
