@@ -7,6 +7,7 @@ import {
   applyMountInput,
   initiateJump,
   moveAndCollide,
+  setGravityScale,
   tickJumpGravity,
 } from "./PlayerMovement.js";
 
@@ -240,6 +241,35 @@ describe("initiateJump + tickJumpGravity", () => {
     expect(player.wz).toBeGreaterThan(0);
     expect(player.jumpZ).toBeGreaterThan(0);
     expect(player.jumpZ).toBe(player.wz); // On flat terrain, jumpZ === wz
+  });
+
+  it("lower gravity produces higher jumps", () => {
+    // Normal gravity
+    setGravityScale(1);
+    const normal = createPlayer(100, 100);
+    normal.wz = 0;
+    initiateJump(normal);
+    let normalPeak = 0;
+    for (let i = 0; i < 600; i++) {
+      if (normal.wz !== undefined && normal.wz > normalPeak) normalPeak = normal.wz;
+      if (tickJumpGravity(normal, 1 / 60, flatHeight)) break;
+    }
+
+    // Half gravity
+    setGravityScale(0.5);
+    const moon = createPlayer(100, 100);
+    moon.wz = 0;
+    initiateJump(moon);
+    let moonPeak = 0;
+    for (let i = 0; i < 600; i++) {
+      if (moon.wz !== undefined && moon.wz > moonPeak) moonPeak = moon.wz;
+      if (tickJumpGravity(moon, 1 / 60, flatHeight)) break;
+    }
+
+    // Reset
+    setGravityScale(1);
+
+    expect(moonPeak).toBeGreaterThan(normalPeak * 1.5);
   });
 });
 

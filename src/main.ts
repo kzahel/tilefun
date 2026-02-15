@@ -4,6 +4,7 @@ import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
 import { GameServer } from "./server/GameServer.js";
+import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "./shared/storageKeys.js";
 import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
 import { PeerHostTransport } from "./transport/PeerHostTransport.js";
@@ -27,8 +28,6 @@ const serverParam = params.get("server"); // e.g. "localhost:3001"
 const multiplayer = params.has("multiplayer");
 const hostP2P = params.has("host");
 const joinPeerId = params.get("join");
-
-const ACTIVE_PROFILE_KEY = "tilefun-active-profile";
 
 let client: GameClient;
 let server: GameServer | null = null;
@@ -180,15 +179,14 @@ async function start() {
   // For multiplayer connections without explicit ?playerid, generate a per-tab
   // session UUID so multiple tabs on the same computer get separate sessions.
   // sessionStorage persists across page refresh within the same tab.
-  const SESSION_KEY = "tilefun-tab-session-id";
   let playerId: string;
   if (playerIdParam) {
     playerId = playerIdParam;
   } else if (isMultiplayer) {
-    let tabId = sessionStorage.getItem(SESSION_KEY);
+    let tabId = sessionStorage.getItem(TAB_SESSION_KEY);
     if (!tabId) {
       tabId = generateUUID();
-      sessionStorage.setItem(SESSION_KEY, tabId);
+      sessionStorage.setItem(TAB_SESSION_KEY, tabId);
     }
     playerId = tabId;
   } else {
@@ -409,6 +407,11 @@ window.addEventListener("error", (event) => {
 window.addEventListener("unhandledrejection", (event) => {
   console.error("[tilefun] unhandled rejection:", event.reason);
   showErrorOverlay(event.reason);
+});
+
+// Save UI state before page unload (Vite full-reload HMR path)
+window.addEventListener("beforeunload", () => {
+  client?.saveHMRState();
 });
 
 if (import.meta.hot) {

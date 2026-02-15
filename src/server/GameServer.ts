@@ -38,6 +38,8 @@ export interface GameServerDeps {
 export class GameServer {
   /** Player speed multiplier (set via sv_speed cvar). */
   speedMultiplier = 1;
+  /** Server time scale (set via sv_timescale cvar). */
+  timeScale = 1;
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
@@ -158,6 +160,11 @@ export class GameServer {
           console.log(
             `[tilefun] client reconnected: ${clientId} as ${existingSession.displayName}`,
           );
+          // Reset input tracking — the reconnected client starts inputSeq at 0,
+          // so the old lastProcessedInputSeq would cause the client to discard
+          // its entire input buffer during reconciliation (rubber-banding).
+          existingSession.lastProcessedInputSeq = 0;
+          existingSession.inputQueue = [];
           this.transport.send(clientId, {
             type: "player-assigned",
             entityId: existingSession.player.id,
@@ -278,9 +285,10 @@ export class GameServer {
 
   /** Run one simulation tick. Iterates ALL active realms. */
   tick(dt: number): void {
+    const scaledDt = dt * this.timeScale;
     const dormantIds = new Set(this.dormantSessions.keys());
     for (const realm of this.realms.values()) {
-      realm.tick(dt, this.transport, this.broadcasting, dormantIds);
+      realm.tick(scaledDt, this.transport, this.broadcasting, dormantIds);
     }
     this.checkIdleRealms();
   }
@@ -517,6 +525,23 @@ export class GameServer {
       case "identify":
         if (msg.profileId) {
           session.profileId = msg.profileId;
+          // Evict any other session with the same profileId (profile takeover)
+          for (const [otherId, other] of this.sessions) {
+            if (otherId !== clientId && other.profileId === msg.profileId) {
+              console.log(
+                `[tilefun] evicting duplicate profile ${msg.profileId}: old=${otherId} new=${clientId}`,
+              );
+              this.transport.send(otherId, {
+                type: "kicked",
+                reason: "Logged in from another connection",
+              });
+              if (other.realmId) {
+                const realm = this.realms.get(other.realmId);
+                realm?.removePlayer(otherId);
+              }
+              this.sessions.delete(otherId);
+            }
+          }
         }
         if (msg.displayName) {
           // Check if the requested name would duplicate another session's name.

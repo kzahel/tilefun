@@ -62,6 +62,17 @@ export class ConsoleEngine {
     // Check if it's a cvar get/set
     const cv = this.cvars.get(name);
     if (cv) {
+      // Server CVars: forward via rcon so the server applies the change
+      if (cv.category === "sv" && this.rconSend) {
+        this.rconSend(trimmed.slice(1))
+          .then((lines) => {
+            for (const line of lines) this.output.print(line);
+          })
+          .catch((e) => {
+            this.output.printError(`rcon error: ${e instanceof Error ? e.message : String(e)}`);
+          });
+        return;
+      }
       if (args.length === 0) {
         this.output.print(cv.toString());
       } else {
@@ -86,6 +97,18 @@ export class ConsoleEngine {
       }
       const out: OutputFn = (text) => this.output.print(text);
       this.commands.execute(name, args, out);
+      return;
+    }
+
+    // Not found locally — forward to server via rcon (handles sv_* cvars etc.)
+    if (this.rconSend) {
+      this.rconSend(trimmed.slice(1))
+        .then((lines) => {
+          for (const line of lines) this.output.print(line);
+        })
+        .catch((e) => {
+          this.output.printError(`rcon error: ${e instanceof Error ? e.message : String(e)}`);
+        });
       return;
     }
 

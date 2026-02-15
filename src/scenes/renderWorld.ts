@@ -1,8 +1,8 @@
 import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
-import { drawEntities } from "../rendering/EntityRenderer.js";
-import { renderGrassBlades as renderGrassBladesImpl } from "../rendering/GrassBladeRenderer.js";
+import { drawEntities, drawEntityShadows } from "../rendering/EntityRenderer.js";
+import { collectGrassBladeRenderables } from "../rendering/GrassBladeRenderer.js";
 import type { Renderable } from "../rendering/Renderable.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 
@@ -33,20 +33,7 @@ export function renderWorld(gc: GameContext): void {
 }
 
 /**
- * Draw animated grass blade overlays on full-grass tiles.
- * Blades sway idly and push away from nearby entities.
- * Call after renderWorld() and before renderEntities().
- */
-export function drawGrassBlades(gc: GameContext): void {
-  const { ctx, camera, stateView, sheets } = gc;
-  const sheet = sheets.get("grass-blades");
-  if (!sheet) return;
-  const visible = camera.getVisibleChunkRange();
-  renderGrassBladesImpl(ctx, camera, stateView.world, stateView.entities, sheet, visible);
-}
-
-/**
- * Draw y-sorted entities and props on top of terrain.
+ * Draw y-sorted entities, props, and grass blades on top of terrain.
  * Called after any scene-specific overlays (editor grid, etc.).
  * Culls entities outside the viewport before Y-sorting.
  */
@@ -85,7 +72,29 @@ export function renderEntities(gc: GameContext, alpha = 1): void {
     renderables.push(p);
   }
 
-  // Sort by interpolated Y position for correct depth ordering
+  // Collect grass blade renderables for Y-sorting with entities/props
+  const grassSheet = sheets.get("grass-blades");
+  if (grassSheet) {
+    const visible = camera.getVisibleChunkRange();
+    const grassBlades = collectGrassBladeRenderables(
+      ctx,
+      camera,
+      stateView.world,
+      stateView.entities,
+      grassSheet,
+      visible,
+    );
+    for (const blade of grassBlades) {
+      renderables.push(blade);
+    }
+  }
+
+  // Sort by interpolated Y + Z for correct depth ordering. Z_SORT_FACTOR
+  // makes elevated entities sort later (drawn on top). Factor 1 means 1px of
+  // Z counts the same as 1px of Y depth — enough to draw entities above the
+  // prop they're standing on, without being so aggressive that ground-level
+  // entities in front incorrectly sort behind elevated ones.
+  const Z_SORT_FACTOR = 1;
   renderables.sort((a, b) => {
     const ay = a.prevPosition
       ? a.prevPosition.wy + (a.position.wy - a.prevPosition.wy) * alpha
@@ -93,8 +102,16 @@ export function renderEntities(gc: GameContext, alpha = 1): void {
     const by = b.prevPosition
       ? b.prevPosition.wy + (b.position.wy - b.prevPosition.wy) * alpha
       : b.position.wy;
-    return ay + (a.sortOffsetY ?? 0) - (by + (b.sortOffsetY ?? 0));
+    return (
+      ay +
+      (a.sortOffsetY ?? 0) +
+      (a.wz ?? 0) * Z_SORT_FACTOR -
+      (by + (b.sortOffsetY ?? 0) + (b.wz ?? 0) * Z_SORT_FACTOR)
+    );
   });
+  // Pre-pass: shadows at terrain level, drawn before all sprites so they
+  // appear behind props (e.g. table shadow peeks out at edges, not on top)
+  drawEntityShadows(ctx, camera, renderables, alpha, stateView.world);
   drawEntities(ctx, camera, renderables, sheets, alpha, stateView.world);
 }
 
@@ -152,6 +169,7 @@ export function renderDebugOverlay(gc: GameContext): void {
       terrainName: TileId[terrain] ?? `Unknown(${terrain})`,
       collisionFlags: collisionParts.join("|"),
       speedMultiplier: collision & CollisionFlag.SlowWalk ? 0.5 : 1.0,
+      playerWz: stateView.playerEntity.wz,
       playerJumpZ: stateView.playerEntity.jumpZ,
     },
     camera.getVisibleChunkRange(),

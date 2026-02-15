@@ -2,7 +2,7 @@ import type { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import { drawGrassBlades, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
  * Play mode scene.
@@ -112,6 +112,7 @@ export class PlayScene implements GameScene {
         profileName: gc.profile.name,
         profileId: gc.profile.id,
         entityId: gc.stateView.playerEntity.id,
+        worldId: gc.mainMenu.currentWorldId,
       });
     }
 
@@ -256,6 +257,7 @@ export class PlayScene implements GameScene {
       // interpolates it correctly for Y-sorting and drawing
       this.predictor.player.prevPosition = prev;
       this.predictor.player.prevJumpZ = this.predictor.prevJumpZ;
+      this.predictor.player.prevWz = this.predictor.prevWz;
     } else {
       const player = gc.stateView.playerEntity;
       if (player.prevPosition) {
@@ -272,7 +274,6 @@ export class PlayScene implements GameScene {
     gc.camera.y += gc.camera.shakeOffsetY;
 
     renderWorld(gc);
-    drawGrassBlades(gc);
     renderEntities(gc, alpha);
     drawGemHUD(gc);
     gc.chatHUD.render(gc.ctx);

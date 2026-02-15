@@ -64,12 +64,14 @@ export function aabbOverlapsPropWalls(
 ): boolean {
   if (prop.walls) {
     for (const wall of prop.walls) {
+      if (wall.passable) continue; // walkable surface only — doesn't block movement
       if (!propColliderOverlapsZ(wall, entityWz, entityHeight)) continue;
       if (aabbsOverlap(aabb, getEntityAABB(propPos, wall))) return true;
     }
     return false;
   }
   if (prop.collider) {
+    if (prop.collider.passable) return false;
     if (!propColliderOverlapsZ(prop.collider, entityWz, entityHeight)) return false;
     return aabbsOverlap(aabb, getEntityAABB(propPos, prop.collider));
   }

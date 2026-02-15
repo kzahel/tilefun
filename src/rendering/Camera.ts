@@ -50,6 +50,15 @@ export class Camera {
     };
   }
 
+  /** Immediately set camera position (e.g. restoring from HMR state). */
+  snapTo(x: number, y: number): void {
+    this.x = x;
+    this.y = y;
+    this.prevX = x;
+    this.prevY = y;
+    this.firstFollow = false;
+  }
+
   /** Smoothly move toward a target position using linear interpolation. */
   follow(targetX: number, targetY: number, lerpFactor: number): void {
     if (this.firstFollow) {

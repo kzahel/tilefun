@@ -52,6 +52,9 @@ export class PlayerPredictor {
   /** Previous predicted jumpZ for render interpolation. */
   private _prevJumpZ = 0;
 
+  /** Previous predicted wz for render interpolation. */
+  private _prevWz = 0;
+
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
 
@@ -79,6 +82,7 @@ export class PlayerPredictor {
       wy: this.predicted.position.wy,
     };
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
+    this._prevWz = this.predicted.wz ?? 0;
     this.inputBuffer = [];
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
@@ -125,6 +129,7 @@ export class PlayerPredictor {
       wy: this.predicted.position.wy,
     };
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
+    this._prevWz = this.predicted.wz ?? 0;
     if (this.predictedMount) {
       this._mountPrevPosition = {
         wx: this.predictedMount.position.wx,
@@ -342,6 +347,11 @@ export class PlayerPredictor {
     return this._prevJumpZ;
   }
 
+  /** Get previous predicted wz for render interpolation. */
+  get prevWz(): number {
+    return this._prevWz;
+  }
+
   /** Get previous mount position for render interpolation. */
   get mountPrevPosition(): PositionComponent {
     return this._mountPrevPosition;
@@ -429,7 +439,7 @@ export class PlayerPredictor {
         this.predicted.wz = groundZ;
       }
 
-      tickJumpGravity(this.predicted, dt, getHeight);
+      tickJumpGravity(this.predicted, dt, getHeight, props);
     }
   }
 

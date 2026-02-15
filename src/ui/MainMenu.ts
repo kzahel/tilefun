@@ -240,7 +240,10 @@ export class MainMenu {
       if (e.key === "Escape") return; // let Escape bubble to close menu
       e.stopPropagation();
     });
-    this.overlay.addEventListener("keyup", (e) => e.stopPropagation());
+    this.overlay.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") return; // let Escape bubble so ActionManager clears keysDown
+      e.stopPropagation();
+    });
 
     document.body.appendChild(this.overlay);
   }

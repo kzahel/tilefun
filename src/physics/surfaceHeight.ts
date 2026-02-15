@@ -65,6 +65,29 @@ export interface PropSurface {
 }
 
 /**
+ * Get the highest walkable prop surface Z under an AABB footprint, ignoring
+ * entity height. Used for landing checks during jump/fall — we want to land
+ * on any walkable surface we descend through, not just those within step-up range.
+ */
+export function getHighestWalkablePropSurfaceZ(
+  aabb: AABB,
+  props: readonly PropSurface[],
+): number | undefined {
+  let maxZ: number | undefined;
+  for (const prop of props) {
+    const colliders = prop.walls ?? (prop.collider ? [prop.collider] : []);
+    for (const c of colliders) {
+      if (!c.walkableTop || c.zHeight === undefined) continue;
+      const topZ = (c.zBase ?? 0) + c.zHeight;
+      if (aabbsOverlap(aabb, getEntityAABB(prop.position, c))) {
+        if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
+      }
+    }
+  }
+  return maxZ;
+}
+
+/**
  * Get the highest walkable prop surface Z under an entity's AABB footprint.
  * Only considers colliders/walls with `walkableTop: true` and finite `zHeight`.
  * Returns undefined if no walkable prop surfaces overlap.

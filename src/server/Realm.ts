@@ -115,6 +115,19 @@ export class Realm {
    * add to realm sessions map. Loads per-player data if available.
    */
   async addPlayer(session: PlayerSession): Promise<void> {
+    // Evict any existing session in this realm with the same profileId (race-condition safety net)
+    if (session.profileId) {
+      for (const [otherId, other] of this.sessions) {
+        if (otherId !== session.clientId && other.profileId === session.profileId) {
+          console.log(
+            `[tilefun:realm] evicting duplicate profileId=${session.profileId} old=${otherId} new=${session.clientId}`,
+          );
+          this.removePlayer(otherId);
+          break;
+        }
+      }
+    }
+
     // Try to load per-player saved data (prefer stable profileId over session clientId)
     const persistId = session.profileId || session.clientId;
     const saved = this.saveManager ? await this.saveManager.loadPlayerData(persistId) : null;
@@ -372,7 +385,11 @@ export class Realm {
       // ── Jump physics for all players + mount detection on landing ──
       const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
       for (const session of activeSessions) {
-        const landed = tickJumpGravity(session.player, dt, getHeight);
+        const p = session.player;
+        const nearbyProps = p.collider
+          ? this.propManager.getPropsNearPosition(p.position, p.collider)
+          : [];
+        const landed = tickJumpGravity(p, dt, getHeight, nearbyProps);
         if (landed && session.gameplaySession.mountId === null) {
           this.tryMountOnLanding(session);
         }
@@ -723,7 +740,6 @@ export class Realm {
     session.player.wz = ridingZ;
     session.player.jumpZ = ridingZ - (session.player.groundZ ?? 0);
     session.player.jumpVZ = JUMP_VELOCITY * 0.5;
-    session.player.jumpZ = 0.01;
     delete session.player.noShadow;
   }
 
@@ -732,7 +748,18 @@ export class Realm {
     const player = session.player;
     if (!player.collider) return;
 
+    // Use an expanded AABB for mount detection. The 3D collision system prevents
+    // the player from passing through the cow during jumps (Z-ranges overlap on
+    // the ground), so the player lands adjacent to the cow rather than overlapping.
+    // Expanding by a few pixels detects nearby rideable entities on landing.
+    const MOUNT_MARGIN = 4;
     const playerBox = getEntityAABB(player.position, player.collider);
+    const expandedBox = {
+      left: playerBox.left - MOUNT_MARGIN,
+      top: playerBox.top - MOUNT_MARGIN,
+      right: playerBox.right + MOUNT_MARGIN,
+      bottom: playerBox.bottom + MOUNT_MARGIN,
+    };
 
     const skipId = session.gameplaySession.lastDismountedId;
     session.gameplaySession.lastDismountedId = null;
@@ -745,14 +772,21 @@ export class Realm {
       if (!entity.collider) continue;
 
       const entityBox = getEntityAABB(entity.position, entity.collider);
-      if (!aabbsOverlap(playerBox, entityBox)) continue;
+      if (!aabbsOverlap(expandedBox, entityBox)) continue;
 
       // Mount!
       session.gameplaySession.mountId = entity.id;
       player.parentId = entity.id;
       player.localOffsetX = 0;
       player.localOffsetY = 0;
-      // Visual lift so player appears on top of the mount (render-only, not physics)
+      // Snap player position to mount immediately (don't wait for
+      // resolveParentedPositions next tick) — avoids camera jump
+      player.position.wx = entity.position.wx;
+      player.position.wy = entity.position.wy;
+      // Visual lift: set wz above ground so the renderer (which uses wz
+      // directly when defined) elevates the player onto the mount's back
+      const mountGroundZ = player.groundZ ?? 0;
+      player.wz = mountGroundZ + 10;
       player.jumpZ = 10;
       delete player.jumpVZ;
       player.noShadow = true; // cow's shadow is bigger

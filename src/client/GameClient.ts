@@ -28,9 +28,11 @@ import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
+import { ACTIVE_PROFILE_KEY, HMR_KEY, TAB_SESSION_KEY } from "../shared/storageKeys.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
+import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { World } from "../world/World.js";
 import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
 
@@ -39,6 +41,7 @@ export interface GameClientOptions {
   profile?: { id: string; name: string };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
+    createProfile(name: string): Promise<{ id: string; name: string }>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
   /** When true, auto-join the first active realm instead of showing the realm list. */
@@ -46,8 +49,6 @@ export interface GameClientOptions {
   /** The client ID used for the server connection (for debug display). */
   clientId?: string;
 }
-
-const HMR_KEY = "tilefun-hmr-ui";
 
 export class GameClient {
   private canvas: HTMLCanvasElement;
@@ -91,6 +92,8 @@ export class GameClient {
   private initDone = false;
   /** Player profile (display name, id). */
   private profile: { id: string; name: string } | null = null;
+  /** Profile store for listing/creating profiles (Switch Player). */
+  private profileStore: GameClientOptions["profileStore"];
   /** The client ID used for the server connection (for debug display). */
   private clientId: string;
 
@@ -115,6 +118,7 @@ export class GameClient {
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
+    this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
@@ -308,6 +312,9 @@ export class GameClient {
         if (typeof hmr.zoom === "number") {
           this.debugPanel.setZoom(hmr.zoom);
         }
+        if (typeof hmr.cameraX === "number" && typeof hmr.cameraY === "number") {
+          this.camera.snapTo(hmr.cameraX, hmr.cameraY);
+        }
       } catch {
         this.scenes.push(new PlayScene());
       }
@@ -433,11 +440,35 @@ export class GameClient {
       if (this.scenes.has(MenuScene)) this.scenes.pop();
     };
     this.mainMenu.onSwitchProfile = () => {
-      // Clear the active profile preference so the picker shows on reload
-      localStorage.removeItem("tilefun-active-profile");
-      // Clear per-tab session ID so a new one is generated for the new profile
-      sessionStorage.removeItem("tilefun-tab-session-id");
-      window.location.reload();
+      if (!this.profileStore) return;
+      const picker = new ProfilePicker();
+      const store = this.profileStore;
+
+      const showList = () => {
+        store.listProfiles().then((profiles) => picker.show(profiles));
+      };
+
+      picker.onSelect = (profile) => {
+        if (!profile) {
+          // "Back" pressed from PIN/create screen — re-show list
+          showList();
+          return;
+        }
+        // Save selected profile, clear tab session, reload with new identity
+        localStorage.setItem(ACTIVE_PROFILE_KEY, profile.id);
+        sessionStorage.removeItem(TAB_SESSION_KEY);
+        window.location.reload();
+      };
+
+      picker.onCreate = (name) => {
+        store.createProfile(name).then((newProfile) => {
+          localStorage.setItem(ACTIVE_PROFILE_KEY, newProfile.id);
+          sessionStorage.removeItem(TAB_SESSION_KEY);
+          window.location.reload();
+        });
+      };
+
+      showList();
     };
 
     document.addEventListener("visibilitychange", () => {
@@ -472,6 +503,8 @@ export class GameClient {
       isEditMode: this.scenes.current instanceof EditScene,
       debugEnabled: this.debugEnabled,
       zoom: this.debugPanel.zoom,
+      cameraX: this.camera.x,
+      cameraY: this.camera.y,
     };
     sessionStorage.setItem(HMR_KEY, JSON.stringify(state));
   }

@@ -22,6 +22,7 @@ export interface DebugInfo {
   terrainName: string;
   collisionFlags: string;
   speedMultiplier: number;
+  playerWz?: number | undefined;
   playerJumpZ?: number | undefined;
 }
 
@@ -29,7 +30,7 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
   const lines = [
     `FPS: ${info.fps}`,
     `Entities: ${info.entityCount}  Chunks: ${info.chunkCount}`,
-    `Pos: (${info.playerWx.toFixed(1)}, ${info.playerWy.toFixed(1)})  Tile: (${info.playerTx}, ${info.playerTy})`,
+    `Pos: (${info.playerWx.toFixed(1)}, ${info.playerWy.toFixed(1)}, Z=${(info.playerWz ?? 0).toFixed(1)})  Tile: (${info.playerTx}, ${info.playerTy})`,
     `Terrain: ${info.terrainName}`,
     `Collision: ${info.collisionFlags}  Speed: ${info.speedMultiplier}x`,
     `Base: ${getBaseSelectionMode()} (D to toggle)  Convex: ${getForceConvex() ? "ON" : "off"}`,
@@ -131,7 +132,11 @@ function drawCollisionBoxes(
   for (const entity of entities) {
     if (!entity.collider) continue;
     const aabb = getEntityAABB(entity.position, entity.collider);
-    const elevOffset = getElevOffset(entity.position, camera, world);
+    // Use wz for ground offset (accounts for prop surfaces), fall back to terrain
+    const elevOffset =
+      entity.wz !== undefined
+        ? (entity.wz - (entity.jumpZ ?? 0)) * camera.scale
+        : getElevOffset(entity.position, camera, world);
     const jumpZ = entity.jumpZ ?? 0;
     const jumpOffset = jumpZ * camera.scale;
     const w = (aabb.right - aabb.left) * camera.scale;

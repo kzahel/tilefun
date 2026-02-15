@@ -1,6 +1,6 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { drawEditorOverlay, drawRemoteCursors } from "../editor/EditorRenderer.js";
-import { drawGrassBlades, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
 
@@ -261,7 +261,6 @@ export class EditScene implements GameScene {
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
     renderWorld(gc);
-    drawGrassBlades(gc);
 
     // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
     const visible = gc.camera.getVisibleChunkRange();

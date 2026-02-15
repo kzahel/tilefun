@@ -1,15 +1,21 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
+import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
 
 const entityTypeNames = () => Object.keys(ENTITY_FACTORIES);
 
 /**
- * Register server-side command stubs on the client for help text and tab completion.
- * These commands are never executed locally — the ConsoleEngine dispatches them
- * via rcon when it sees `serverSide: true`.
+ * Register server-side command and CVar stubs on the client for help text and
+ * tab completion. These are never executed locally — the ConsoleEngine forwards
+ * them to the server via rcon.
  */
 export function registerServerCommandStubs(engine: ConsoleEngine): void {
   const noop = () => {};
+
+  // Server CVar stubs (autocomplete + help; actual values live on the server)
+  for (const def of SERVER_CVAR_DEFS) {
+    engine.cvars.register(def);
+  }
 
   engine.commands.register({
     name: "spawn",

@@ -9,6 +9,8 @@ export interface PropCollider {
   zHeight?: number;
   /** Whether the top surface is a walkable platform. Requires finite zHeight. */
   walkableTop?: boolean;
+  /** When true, this collider only affects walkable surface height — it does not block movement. */
+  passable?: boolean;
 }
 
 /**

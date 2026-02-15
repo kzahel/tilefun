@@ -166,9 +166,14 @@ export class RemoteStateView implements ClientStateView {
     }
 
     // Save old state for render interpolation (match by entity ID)
-    const prevState = new Map<number, { wx: number; wy: number; jumpZ: number }>();
+    const prevState = new Map<number, { wx: number; wy: number; jumpZ: number; wz: number }>();
     for (const e of this._entities) {
-      prevState.set(e.id, { wx: e.position.wx, wy: e.position.wy, jumpZ: e.jumpZ ?? 0 });
+      prevState.set(e.id, {
+        wx: e.position.wx,
+        wy: e.position.wy,
+        jumpZ: e.jumpZ ?? 0,
+        wz: e.wz ?? 0,
+      });
     }
 
     this._entities = msg.entities.map(deserializeEntity);
@@ -180,6 +185,7 @@ export class RemoteStateView implements ClientStateView {
       if (prev) {
         e.prevPosition = { wx: prev.wx, wy: prev.wy };
         e.prevJumpZ = prev.jumpZ;
+        e.prevWz = prev.wz;
       }
     }
     this._playerEntityId = msg.playerEntityId;

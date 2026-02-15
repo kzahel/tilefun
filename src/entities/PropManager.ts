@@ -1,7 +1,7 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { AABB } from "./collision.js";
 import { aabbsOverlap, getEntityAABB } from "./collision.js";
-import type { Prop } from "./Prop.js";
+import type { Prop, PropCollider } from "./Prop.js";
 
 function chunkKey(cx: number, cy: number): string {
   return `${cx},${cy}`;
@@ -68,6 +68,17 @@ export class PropManager {
       }
     }
     return false;
+  }
+
+  /** Return props near an entity's position based on its collider footprint. */
+  getPropsNearPosition(position: { wx: number; wy: number }, collider: PropCollider): Prop[] {
+    const footprint = getEntityAABB(position, collider);
+    return this.getPropsInChunkRange(
+      Math.floor(footprint.left / CHUNK_SIZE_PX),
+      Math.floor(footprint.top / CHUNK_SIZE_PX),
+      Math.floor(footprint.right / CHUNK_SIZE_PX),
+      Math.floor(footprint.bottom / CHUNK_SIZE_PX),
+    );
   }
 
   /** Return all props whose chunk falls within the given chunk-coordinate rectangle. */

@@ -20,8 +20,14 @@ export interface Renderable {
   noShadow?: boolean;
   /** When true, entity is hidden this frame (invincibility flash effect). */
   flashHidden?: boolean;
+  /** Absolute Z position in world pixels (0 = world floor). */
+  wz?: number;
+  /** Previous wz (before last tick), for render interpolation. */
+  prevWz?: number;
   /** Current height above ground in world pixels (jump mechanic). */
   jumpZ?: number;
   /** Previous jumpZ (before last tick), for render interpolation. */
   prevJumpZ?: number;
+  /** If set, called instead of standard sprite draw (e.g. rotated grass blades). */
+  customDraw?: () => void;
 }

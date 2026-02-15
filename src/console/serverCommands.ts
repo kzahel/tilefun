@@ -2,51 +2,39 @@ import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { setGravityScale } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
+import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
 
 const entityTypeNames = () => Object.keys(ENTITY_FACTORIES);
 
+function getCVar(engine: ConsoleEngine, name: string) {
+  const cv = engine.cvars.get(name);
+  if (!cv) throw new Error(`Server CVar ${name} not registered`);
+  return cv;
+}
+
 export function registerServerCommands(engine: ConsoleEngine, server: GameServer): void {
-  // ── Server CVars ──
+  // ── Server CVars (from shared defs) ──
+  for (const def of SERVER_CVAR_DEFS) {
+    engine.cvars.register(def);
+  }
 
-  engine.cvars.register<number>({
-    name: "sv_tickrate",
-    description: "Server tick rate (Hz)",
-    type: "number",
-    defaultValue: 60,
-    min: 1,
-    max: 240,
-    category: "sv",
-  });
-
-  const sv_speed = engine.cvars.register<number>({
-    name: "sv_speed",
-    description: "Player speed multiplier",
-    type: "number",
-    defaultValue: 1,
-    min: 0.1,
-    max: 20,
-    category: "sv",
-  });
-
-  // Make sv_speed accessible from server tick
-  server.speedMultiplier = sv_speed.get();
+  // ── Wire CVars to server state ──
+  const sv_speed = getCVar(engine, "sv_speed");
+  server.speedMultiplier = sv_speed.get() as number;
   sv_speed.onChange((val) => {
-    server.speedMultiplier = val;
+    server.speedMultiplier = val as number;
   });
 
-  const sv_gravity = engine.cvars.register<number>({
-    name: "sv_gravity",
-    description: "Gravity multiplier (1 = normal, 0.5 = moon, 2 = heavy)",
-    type: "number",
-    defaultValue: 1,
-    min: 0,
-    max: 20,
-    category: "sv",
-  });
-
-  setGravityScale(sv_gravity.get());
+  const sv_gravity = getCVar(engine, "sv_gravity");
+  setGravityScale(sv_gravity.get() as number);
   sv_gravity.onChange((val) => {
-    setGravityScale(val);
+    setGravityScale(val as number);
+  });
+
+  const sv_timescale = getCVar(engine, "sv_timescale");
+  server.timeScale = sv_timescale.get() as number;
+  sv_timescale.onChange((val) => {
+    server.timeScale = val as number;
   });
 
   // ── Server Commands ──

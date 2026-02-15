@@ -182,8 +182,14 @@ export class DebugPanel {
     profileName: string;
     profileId: string;
     entityId: number;
+    worldId: string | null;
   }): void {
-    this.playerInfoEl.innerHTML = `<b>Client:</b> ${info.clientId}<br><b>Profile:</b> ${info.profileName} (${info.profileId.slice(0, 8)}...)<br><b>Entity:</b> ${info.entityId}`;
+    const cid = info.clientId.length > 12 ? `${info.clientId.slice(0, 8)}...` : info.clientId;
+    const wid =
+      info.worldId && info.worldId.length > 12
+        ? `${info.worldId.slice(0, 8)}...`
+        : (info.worldId ?? "—");
+    this.playerInfoEl.innerHTML = `<b>Client:</b> ${cid}<br><b>Profile:</b> ${info.profileName} (${info.profileId.slice(0, 8)}...)<br><b>Entity:</b> ${info.entityId} · <b>Realm:</b> ${wid}`;
   }
 
   /** Toggle base selection mode (called by keyboard shortcut or button). */

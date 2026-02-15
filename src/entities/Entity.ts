@@ -115,6 +115,8 @@ export interface Entity {
   jumpZ?: number;
   /** Previous jumpZ (before last tick), for render interpolation. Ephemeral. */
   prevJumpZ?: number;
+  /** Previous wz (before last tick), for render interpolation. Ephemeral. */
+  prevWz?: number;
   /** Vertical velocity in world px/s, positive = up. */
   jumpVZ?: number;
   /** Absolute Z position in world pixels (0 = world floor). */

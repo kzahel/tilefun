@@ -1,4 +1,5 @@
 import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
+import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -10,6 +11,76 @@ interface PropDef {
   collider: PropCollider | null;
   /** Wall segments for enterable props. Movement collision uses these instead of collider. */
   walls?: PropCollider[];
+}
+
+/**
+ * Generate a symmetric staircase of passable walkable surfaces.
+ * Steps ascend from each end to a peak in the center, creating a
+ * reusable "step-up / platform / step-down" clip pattern.
+ *
+ * Each step is within STEP_UP_THRESHOLD of the next, so the player
+ * auto-steps between them during normal walking.
+ */
+function makeStairSteps(config: {
+  /** Total width of the staircase region (X axis). */
+  totalWidth: number;
+  /** Depth of each step collider (Y axis). */
+  depth: number;
+  /** Peak height at the center. Must be a multiple of stepHeight. */
+  peakHeight: number;
+  /** Height per step (default STEP_UP_THRESHOLD). */
+  stepHeight?: number;
+  /** Y offset for all steps. */
+  offsetY?: number;
+}): PropCollider[] {
+  const { totalWidth, depth, peakHeight, stepHeight = STEP_UP_THRESHOLD, offsetY = 0 } = config;
+  const numSteps = Math.round(peakHeight / stepHeight);
+  // Each side gets numSteps steps, center gets remaining width
+  const stepWidth = totalWidth / (numSteps * 2 + 2);
+  const centerWidth = stepWidth * 2;
+  const steps: PropCollider[] = [];
+
+  // Ascending steps (left side)
+  for (let i = 0; i < numSteps; i++) {
+    steps.push({
+      offsetX: -totalWidth / 2 + stepWidth * (i + 0.5),
+      offsetY,
+      width: stepWidth + 0.5, // slight overlap prevents gaps
+      height: depth,
+      zBase: 0,
+      zHeight: (i + 1) * stepHeight,
+      walkableTop: true,
+      passable: true,
+    });
+  }
+
+  // Center platform at peak
+  steps.push({
+    offsetX: 0,
+    offsetY,
+    width: centerWidth + 0.5,
+    height: depth,
+    zBase: 0,
+    zHeight: peakHeight,
+    walkableTop: true,
+    passable: true,
+  });
+
+  // Descending steps (right side, mirror of ascending)
+  for (let i = 0; i < numSteps; i++) {
+    steps.push({
+      offsetX: totalWidth / 2 - stepWidth * (numSteps - i - 0.5),
+      offsetY,
+      width: stepWidth + 0.5,
+      height: depth,
+      zBase: 0,
+      zHeight: (numSteps - i) * stepHeight,
+      walkableTop: true,
+      passable: true,
+    });
+  }
+
+  return steps;
 }
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
@@ -109,7 +180,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     row: 0,
     width: 48,
     height: 48,
-    collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
+    collider: { offsetX: 0, offsetY: 0, width: 40, height: 24, zHeight: 16, walkableTop: true },
   },
   "prop-shed": {
     sheetKey: "prop-shed",
@@ -127,11 +198,8 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
-    // Arch legs at outer edges, wide walk-through center (24px opening)
-    walls: [
-      { offsetX: -16, offsetY: 0, width: 8, height: 24, zHeight: 24 }, // Left leg
-      { offsetX: 16, offsetY: 0, width: 8, height: 24, zHeight: 24 }, // Right leg
-    ],
+    // Passable staircase: player walks up one side, across the peak, down the other
+    walls: makeStairSteps({ totalWidth: 40, depth: 24, peakHeight: 12 }),
   },
   "prop-swing": {
     sheetKey: "prop-swing",

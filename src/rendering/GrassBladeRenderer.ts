@@ -7,6 +7,7 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import type { Renderable } from "./Renderable.js";
 
 interface BladeInstance {
   wx: number;
@@ -99,18 +100,23 @@ function getBlades(chunk: Chunk, cx: number, cy: number): BladeInstance[] {
 
 let _debugLogged = false;
 
-export function renderGrassBlades(
+/**
+ * Collect grass blade renderables for Y-sorted drawing with entities/props.
+ * Each blade gets a customDraw callback that handles rotation/sway.
+ */
+export function collectGrassBladeRenderables(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   world: World,
   entityPositions: readonly { position: { wx: number; wy: number } }[],
   sheet: Spritesheet,
   visible: ChunkRange,
-): void {
+): Renderable[] {
   const nowSec = performance.now() / 1000;
   const scale = camera.scale;
   const canvasW = ctx.canvas.width;
   const canvasH = ctx.canvas.height;
+  const result: Renderable[] = [];
 
   // Debug: log once on first call
   if (!_debugLogged) {
@@ -198,7 +204,6 @@ export function renderGrassBlades(
             closestDistSq = dSq;
             const dist = Math.sqrt(dSq);
             const strength = 1 - dist / PUSH_RADIUS;
-            // Lean horizontally away from entity (dx/dist gives direction, -1..1)
             pushAngle = (dx / dist) * strength * MAX_PUSH_RAD;
           }
         }
@@ -206,14 +211,29 @@ export function renderGrassBlades(
         // 3. Blend: push overrides sway but keeps a trace of sway for liveliness
         const angle = pushAngle !== 0 ? pushAngle + swayAngle * 0.3 : swayAngle;
 
-        // 4. Draw rotated sprite around base anchor
-        const ay = ANCHOR_Y[blade.variant] ?? 7;
-        ctx.save();
-        ctx.translate(screen.sx, screen.sy);
-        ctx.rotate(angle);
-        sheet.drawTile(ctx, blade.variant, 0, -ANCHOR_X * scale, -ay * scale, scale);
-        ctx.restore();
+        // Capture values for the draw callback
+        const sx = screen.sx;
+        const sy = screen.sy;
+        const variant = blade.variant;
+        const ay = ANCHOR_Y[variant] ?? 7;
+        const drawAngle = angle;
+
+        result.push({
+          position: { wx: blade.wx, wy: blade.wy },
+          sprite: null,
+          isProp: true,
+          noShadow: true,
+          customDraw: () => {
+            ctx.save();
+            ctx.translate(sx, sy);
+            ctx.rotate(drawAngle);
+            sheet.drawTile(ctx, variant, 0, -ANCHOR_X * scale, -ay * scale, scale);
+            ctx.restore();
+          },
+        });
       }
     }
   }
+
+  return result;
 }
