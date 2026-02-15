@@ -18,6 +18,8 @@ export interface ClientStateView {
   readonly remoteCursors: readonly RemoteEditorCursor[];
   /** Entity ID → display name for player entities. */
   readonly playerNames: Record<number, string>;
+  /** Raw server player position (before client prediction). Undefined in local mode. */
+  readonly serverPlayerPosition?: { wx: number; wy: number; wz?: number } | undefined;
 }
 
 /**
@@ -277,6 +279,13 @@ export class RemoteStateView implements ClientStateView {
   }
   get playerNames(): Record<number, string> {
     return this._playerNames;
+  }
+  get serverPlayerPosition(): { wx: number; wy: number; wz?: number } | undefined {
+    const sp = this._entities.find((e) => e.id === this._playerEntityId);
+    if (!sp) return undefined;
+    const pos: { wx: number; wy: number; wz?: number } = { wx: sp.position.wx, wy: sp.position.wy };
+    if (sp.wz !== undefined) pos.wz = sp.wz;
+    return pos;
   }
   /** Mount entity ID from the latest server state (undefined when not riding). */
   get mountEntityId(): number | undefined {

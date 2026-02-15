@@ -28,6 +28,7 @@ function createPerson(n: number, wx: number, wy: number): Entity {
       width: 10,
       height: 6,
       physicalHeight: 24,
+      clientSolid: true,
     },
     wanderAI: {
       state: "idle",
@@ -42,6 +43,7 @@ function createPerson(n: number, wx: number, wy: number): Entity {
       directional: true,
     },
     tags: new Set(["befriendable", "npc"]),
+    weight: 70,
   };
 }
 

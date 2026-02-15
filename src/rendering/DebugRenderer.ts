@@ -24,6 +24,9 @@ export interface DebugInfo {
   speedMultiplier: number;
   playerWz?: number | undefined;
   playerJumpZ?: number | undefined;
+  serverWx?: number | undefined;
+  serverWy?: number | undefined;
+  serverWz?: number | undefined;
 }
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
@@ -35,11 +38,19 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     `Collision: ${info.collisionFlags}  Speed: ${info.speedMultiplier}x`,
     `Base: ${getBaseSelectionMode()} (D to toggle)  Convex: ${getForceConvex() ? "ON" : "off"}`,
   ];
+  if (info.serverWx !== undefined && info.serverWy !== undefined) {
+    const dx = info.playerWx - info.serverWx;
+    const dy = info.playerWy - info.serverWy;
+    const dz = (info.playerWz ?? 0) - (info.serverWz ?? 0);
+    lines.push(
+      `Srv: (${info.serverWx.toFixed(1)}, ${info.serverWy.toFixed(1)}, Z=${(info.serverWz ?? 0).toFixed(1)})  d=(${dx.toFixed(1)}, ${dy.toFixed(1)}, ${dz.toFixed(1)})`,
+    );
+  }
   if (info.playerJumpZ) {
     lines.push(`Jump: Z=${info.playerJumpZ.toFixed(1)}`);
   }
   const lineHeight = 16;
-  const panelW = 340;
+  const panelW = 440;
   const panelH = lines.length * lineHeight + 8;
   // Start below the HTML button bar (top: 8px + ~38px button height + gap)
   const panelY = 50;
@@ -119,6 +130,51 @@ function drawHeightLine(
   ctx.restore();
 }
 
+/** Draw an upward arrow indicating infinite height. Red-orange dashed line with arrow tip. */
+function drawInfiniteHeightLine(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  bottomY: number,
+  scale: number,
+): void {
+  const arrowLen = 20 * scale;
+  const tipSize = 3 * scale;
+  ctx.save();
+  ctx.strokeStyle = "rgba(255, 80, 60, 0.8)";
+  ctx.lineWidth = 2;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(cx, bottomY);
+  ctx.lineTo(cx, bottomY - arrowLen);
+  ctx.stroke();
+  // Arrow tip (solid)
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.moveTo(cx, bottomY - arrowLen - tipSize);
+  ctx.lineTo(cx - tipSize, bottomY - arrowLen);
+  ctx.lineTo(cx + tipSize, bottomY - arrowLen);
+  ctx.closePath();
+  ctx.fillStyle = "rgba(255, 80, 60, 0.8)";
+  ctx.fill();
+  ctx.restore();
+}
+
+/** Draw a Z-range label next to a collision box. */
+function drawZLabel(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  zBase: number,
+  zHeight: number | undefined,
+): void {
+  const label = zHeight !== undefined ? `${zBase}-${zBase + zHeight}` : `${zBase}-∞`;
+  ctx.save();
+  ctx.font = "9px monospace";
+  ctx.fillStyle = zHeight !== undefined ? "rgba(80, 180, 255, 0.9)" : "rgba(255, 100, 70, 0.9)";
+  ctx.fillText(label, x, y);
+  ctx.restore();
+}
+
 function drawCollisionBoxes(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
@@ -195,7 +251,7 @@ function drawCollisionBoxes(
         ctx.strokeRect(Math.floor(tl.sx), Math.floor(tl.sy - elevOffset), w, h);
         ctx.restore();
       }
-      // Draw each wall segment in orange, with height lines for Z-aware walls
+      // Draw each wall segment with height indicators
       for (const wall of prop.walls) {
         const aabb = getEntityAABB(prop.position, wall);
         const tl = camera.worldToScreen(aabb.left, aabb.top);
@@ -203,32 +259,47 @@ function drawCollisionBoxes(
         const h = (aabb.bottom - aabb.top) * camera.scale;
         const zBase = wall.zBase ?? 0;
         const baseOffset = zBase * camera.scale;
+        const sx = Math.floor(tl.sx);
         const sy = Math.floor(tl.sy - elevOffset - baseOffset);
-        ctx.strokeStyle = wall.walkableTop
-          ? "rgba(0, 220, 200, 0.8)" // cyan-green for walkable
-          : "rgba(255, 160, 0, 0.8)"; // orange for normal walls
-        ctx.strokeRect(Math.floor(tl.sx), sy, w, h);
-        // Height line if wall has finite zHeight
-        if (wall.zHeight !== undefined) {
-          const cx = Math.floor(tl.sx + w / 2);
-          drawHeightLine(ctx, cx, sy + h, wall.zHeight * camera.scale);
+        if (wall.walkableTop) {
+          ctx.strokeStyle = "rgba(0, 220, 200, 0.8)"; // cyan-green for walkable
+        } else if (wall.zHeight === undefined) {
+          ctx.strokeStyle = "rgba(255, 100, 60, 0.7)"; // red-orange for infinite walls
+        } else {
+          ctx.strokeStyle = "rgba(255, 160, 0, 0.8)"; // orange for finite walls
         }
+        ctx.strokeRect(sx, sy, w, h);
+        const cx = Math.floor(sx + w / 2);
+        if (wall.zHeight !== undefined) {
+          drawHeightLine(ctx, cx, sy + h, wall.zHeight * camera.scale);
+        } else {
+          drawInfiniteHeightLine(ctx, cx, sy + h, camera.scale);
+        }
+        // Z-range label
+        drawZLabel(ctx, sx + w + 2, sy + h / 2, zBase, wall.zHeight);
       }
     } else if (prop.collider) {
       const zBase = prop.collider.zBase ?? 0;
       const baseOffset = zBase * camera.scale;
-      ctx.strokeStyle = "rgba(0, 200, 255, 0.7)";
+      const isInfinite = prop.collider.zHeight === undefined;
+      ctx.strokeStyle = isInfinite
+        ? "rgba(255, 100, 60, 0.7)" // red-orange for infinite
+        : "rgba(0, 200, 255, 0.7)"; // cyan for finite
       const aabb = getEntityAABB(prop.position, prop.collider);
       const tl = camera.worldToScreen(aabb.left, aabb.top);
       const w = (aabb.right - aabb.left) * camera.scale;
       const h = (aabb.bottom - aabb.top) * camera.scale;
+      const sx = Math.floor(tl.sx);
       const sy = Math.floor(tl.sy - elevOffset - baseOffset);
-      ctx.strokeRect(Math.floor(tl.sx), sy, w, h);
+      ctx.strokeRect(sx, sy, w, h);
 
-      // Height line using actual zHeight if available, else spriteHeight proxy
-      const cx = Math.floor(tl.sx + w / 2);
-      const propHeight = prop.collider.zHeight ?? Math.min(prop.sprite.spriteHeight, 32) * 0.5;
-      drawHeightLine(ctx, cx, sy + h, propHeight * camera.scale);
+      const cx = Math.floor(sx + w / 2);
+      if (isInfinite) {
+        drawInfiniteHeightLine(ctx, cx, sy + h, camera.scale);
+      } else {
+        drawHeightLine(ctx, cx, sy + h, (prop.collider.zHeight ?? 0) * camera.scale);
+      }
+      drawZLabel(ctx, sx + w + 2, sy + h / 2, zBase, prop.collider.zHeight);
     }
   }
 

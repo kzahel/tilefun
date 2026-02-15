@@ -46,5 +46,6 @@ export function createChicken(wx: number, wy: number): Entity {
       followDistance: 20,
     },
     tags: new Set(["befriendable", "npc"]),
+    weight: 2,
   };
 }

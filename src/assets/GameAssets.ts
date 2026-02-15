@@ -39,6 +39,7 @@ const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
   { key: "worm2", path: "assets/sprites/worm2.png", w: 16, h: 16 },
   { key: "worm3", path: "assets/sprites/worm3.png", w: 16, h: 16 },
   { key: "worm4", path: "assets/sprites/worm4.png", w: 16, h: 16 },
+  { key: "ball", path: "assets/sprites/ball.png", w: 8, h: 8 },
   { key: "ghost-friendly", path: "assets/sprites/ghost-friendly.png", w: 16, h: 16 },
   { key: "ghost-angry", path: "assets/sprites/ghost-angry.png", w: 16, h: 16 },
   ...Array.from({ length: 20 }, (_, i) => ({

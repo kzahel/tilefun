@@ -9,6 +9,7 @@ export interface ClientCVars {
   r_pixelscale: CVar<number>;
   cl_timescale: CVar<number>;
   cl_nopredict: CVar<boolean>;
+  cl_verticalfollow: CVar<boolean>;
 }
 
 export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
@@ -72,6 +73,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "cl",
   });
 
+  const cl_verticalfollow = engine.cvars.register<boolean>({
+    name: "cl_verticalfollow",
+    description: "Camera follows player vertical position (elevation + jumps)",
+    type: "boolean",
+    defaultValue: false,
+    category: "cl",
+  });
+
   return {
     r_showbboxes,
     r_showchunks,
@@ -80,5 +89,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_pixelscale,
     cl_timescale,
     cl_nopredict,
+    cl_verticalfollow,
   };
 }

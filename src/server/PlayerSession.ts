@@ -14,6 +14,8 @@ export interface GameplaySession {
   mountId: number | null;
   /** Entity ID of last dismounted mount — prevents immediate re-mount on landing. */
   lastDismountedId: number | null;
+  /** Position saved while grounded on non-water. Used for water-landing respawn. */
+  lastSafePosition: { wx: number; wy: number } | null;
 }
 
 export class PlayerSession {
@@ -62,6 +64,15 @@ export class PlayerSession {
   /** Stable profile ID for player data persistence (separate from clientId). */
   profileId: string | null = null;
 
+  /** Timestamp (ms) when this session was created. */
+  connectedAt = Date.now();
+
+  /** Previous jump input state for edge detection (like Quake's oldbuttons). */
+  prevJumpInput = false;
+
+  /** Time remaining on buffered jump input (seconds). */
+  jumpBufferTimer = 0;
+
   /** Debug state (set by client). */
   debugPaused = false;
   debugNoclip = false;
@@ -78,6 +89,7 @@ export class PlayerSession {
         knockbackVy: 0,
         mountId: null,
         lastDismountedId: null,
+        lastSafePosition: null,
       };
     }
   }

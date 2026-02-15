@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { AudioManager } from "../audio/AudioManager.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
@@ -6,6 +7,7 @@ import type { EditorMode } from "../editor/EditorMode.js";
 import type { EditorPanel } from "../editor/EditorPanel.js";
 import type { PropCatalog } from "../editor/PropCatalog.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
@@ -31,6 +33,7 @@ export interface GameContext {
   readonly transport: IClientTransport;
   readonly sheets: Map<string, Spritesheet>;
   readonly tileRenderer: TileRenderer;
+  readonly audioManager: AudioManager;
 
   // DOM UI components (scenes control their visibility)
   readonly editorMode: EditorMode;
@@ -39,6 +42,7 @@ export interface GameContext {
   readonly propCatalog: PropCatalog;
   readonly debugPanel: DebugPanel;
   readonly touchJoystick: TouchJoystick;
+  readonly touchButtons: TouchButtons;
   readonly console: ConsoleEngine;
   readonly consoleUI: ConsoleUI;
   readonly chatHUD: ChatHUD;

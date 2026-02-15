@@ -131,12 +131,17 @@ export function getWalkablePropSurfaceZ(
  *
  * Only considers entities whose feet are at or below selfWz — prevents
  * entities below from "landing" on entities above (infinite lift feedback loop).
+ *
+ * When prevWz is provided (pre-gravity wz), only considers surfaces that the
+ * entity was at or above before this tick's gravity — prevents teleporting
+ * upward onto surfaces the entity hasn't descended through.
  */
 export function getHighestWalkableEntitySurfaceZ(
   aabb: AABB,
   selfId: number,
   selfWz: number,
   entities: readonly EntitySurface[],
+  prevWz?: number,
 ): number | undefined {
   let maxZ: number | undefined;
   for (const e of entities) {
@@ -146,6 +151,8 @@ export function getHighestWalkableEntitySurfaceZ(
     const eWz = e.wz ?? 0;
     if (eWz > selfWz) continue; // entity's feet are above ours — we're below it
     const topZ = eWz + physH;
+    // Only land on surfaces we were at or above before gravity (descended through)
+    if (prevWz !== undefined && topZ > prevWz) continue;
     if (aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))) {
       if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
     }

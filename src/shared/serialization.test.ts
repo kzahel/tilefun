@@ -78,25 +78,22 @@ function makeMinimalEntity(): Entity {
 function makeFullProp(): Prop {
   return {
     id: 10,
-    type: "playground",
+    type: "prop-climb-arch",
     position: { wx: 50, wy: 75 },
     sprite: {
-      sheetKey: "playground-sheet",
+      sheetKey: "prop-climb-arch",
       frameCol: 0,
       frameRow: 0,
       spriteWidth: 48,
       spriteHeight: 64,
     },
     collider: {
-      offsetX: -24,
-      offsetY: -8,
-      width: 48,
-      height: 16,
+      offsetX: 0,
+      offsetY: 0,
+      width: 40,
+      height: 24,
     },
-    walls: [
-      { offsetX: -24, offsetY: -64, width: 2, height: 64 },
-      { offsetX: 22, offsetY: -64, width: 2, height: 64 },
-    ],
+    walls: null, // walls come from definition, not serialized
     isProp: true,
   };
 }
@@ -160,7 +157,7 @@ describe("Entity serialization", () => {
 });
 
 describe("Prop serialization", () => {
-  it("round-trips a prop with walls", () => {
+  it("round-trips a prop and reconstructs walls from definition", () => {
     const prop = makeFullProp();
     const snapshot = serializeProp(prop);
     const result = deserializeProp(snapshot);
@@ -170,8 +167,11 @@ describe("Prop serialization", () => {
     expect(result.position).toEqual(prop.position);
     expect(result.sprite).toEqual(prop.sprite);
     expect(result.collider).toEqual(prop.collider);
-    expect(result.walls).toEqual(prop.walls);
     expect(result.isProp).toBe(true);
+    // walls are reconstructed from the prop definition, not serialized
+    expect(result.walls).toHaveLength(7); // climb-arch has 7 stair-step walls
+    expect(result.walls![0]).toHaveProperty("walkableTop", true);
+    expect(result.walls![0]).toHaveProperty("passable", true);
   });
 
   it("round-trips a prop without collider or walls", () => {
@@ -198,14 +198,14 @@ describe("Prop serialization", () => {
     expect(result.isProp).toBe(true);
   });
 
-  it("survives JSON roundtrip", () => {
+  it("survives JSON roundtrip and reconstructs walls", () => {
     const prop = makeFullProp();
     const snapshot = serializeProp(prop);
     const jsonRoundtrip = JSON.parse(JSON.stringify(snapshot));
     const result = deserializeProp(jsonRoundtrip);
 
-    expect(result.walls).toHaveLength(2);
-    expect(result.walls?.[0]).toEqual(prop.walls?.[0]);
+    // walls are not in the snapshot — they come from the definition
+    expect(result.walls).toHaveLength(7);
   });
 });
 

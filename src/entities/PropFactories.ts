@@ -1,4 +1,5 @@
 import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
+import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
@@ -11,6 +12,8 @@ interface PropDef {
   collider: PropCollider | null;
   /** Wall segments for enterable props. Movement collision uses these instead of collider. */
   walls?: PropCollider[];
+  /** Physical material for impact/landing sounds. Default Soft. */
+  material?: MaterialType;
 }
 
 /**
@@ -102,6 +105,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 16,
     height: 16,
     collider: { offsetX: 0, offsetY: 0, width: 12, height: 8 },
+    material: MaterialType.Stone,
   },
   "prop-big-rock": {
     sheetKey: "objects",
@@ -110,6 +114,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 16,
     height: 16,
     collider: { offsetX: 0, offsetY: 0, width: 14, height: 10 },
+    material: MaterialType.Stone,
   },
   "prop-tall-grass": { sheetKey: "objects", col: 0, row: 2, width: 16, height: 16, collider: null },
   "prop-mushroom": { sheetKey: "objects", col: 3, row: 2, width: 16, height: 16, collider: null },
@@ -125,6 +130,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 56, height: 32 },
+    material: MaterialType.Fabric,
   },
   "prop-tent-green": {
     sheetKey: "prop-tent-green",
@@ -133,6 +139,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 56, height: 32 },
+    material: MaterialType.Fabric,
   },
   "prop-sand-castle": {
     sheetKey: "prop-sand-castle",
@@ -157,6 +164,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 80,
     collider: { offsetX: 0, offsetY: 0, width: 12, height: 12 },
+    material: MaterialType.Wood,
   },
   "prop-oak-tree": {
     sheetKey: "prop-oak-tree",
@@ -165,6 +173,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 16, height: 12 },
+    material: MaterialType.Wood,
   },
   "prop-fountain": {
     sheetKey: "prop-fountain",
@@ -173,6 +182,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 32,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 24, height: 20 },
+    material: MaterialType.Stone,
   },
   "prop-picnic-table": {
     sheetKey: "prop-picnic-table",
@@ -181,6 +191,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24, zHeight: 16, walkableTop: true },
+    material: MaterialType.Wood,
   },
   "prop-shed": {
     sheetKey: "prop-shed",
@@ -189,6 +200,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 32 },
+    material: MaterialType.Wood,
   },
   // Playground equipment
   "prop-climb-arch": {
@@ -200,6 +212,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 24 },
     // Passable staircase: player walks up one side, across the peak, down the other
     walls: makeStairSteps({ totalWidth: 40, depth: 24, peakHeight: 12 }),
+    material: MaterialType.Metal,
   },
   "prop-swing": {
     sheetKey: "prop-swing",
@@ -208,6 +221,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 32,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 24, height: 16 },
+    material: MaterialType.Metal,
   },
   "prop-seesaw": {
     sheetKey: "prop-seesaw",
@@ -216,6 +230,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 32,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 16 },
+    material: MaterialType.Wood,
   },
   "prop-bouncy-castle": {
     sheetKey: "prop-bouncy-castle",
@@ -224,6 +239,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 56, height: 32 },
+    material: MaterialType.Fabric,
   },
   "prop-slide": {
     sheetKey: "prop-slide",
@@ -232,6 +248,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 64,
     height: 48,
     collider: { offsetX: 0, offsetY: 0, width: 56, height: 24 },
+    material: MaterialType.Metal,
   },
   "prop-play-fort": {
     sheetKey: "prop-play-fort",
@@ -245,6 +262,7 @@ const PROP_DEFS: Record<string, PropDef> = {
       { offsetX: -22, offsetY: 0, width: 28, height: 40, zHeight: 32, walkableTop: true }, // Left tower + slide
       { offsetX: 22, offsetY: 0, width: 28, height: 40, zHeight: 32, walkableTop: true }, // Right tower
     ],
+    material: MaterialType.Wood,
   },
   "prop-tube-cross": {
     sheetKey: "prop-tube-cross",
@@ -258,6 +276,7 @@ const PROP_DEFS: Record<string, PropDef> = {
       { offsetX: -14, offsetY: 0, width: 12, height: 16, zHeight: 16 }, // SW corner
       { offsetX: 14, offsetY: 0, width: 12, height: 16, zHeight: 16 }, // SE corner
     ],
+    material: MaterialType.Metal,
   },
   "prop-tube-climber": {
     sheetKey: "prop-tube-climber",
@@ -272,6 +291,7 @@ const PROP_DEFS: Record<string, PropDef> = {
       { offsetX: -1, offsetY: 0, width: 36, height: 32, zBase: 12, zHeight: 20, walkableTop: true }, // Center hub (passable underneath)
       { offsetX: 41, offsetY: 0, width: 6, height: 32, zHeight: 24 }, // Right leg
     ],
+    material: MaterialType.Metal,
   },
   "prop-basketball-hoop": {
     sheetKey: "prop-basketball-hoop",
@@ -280,6 +300,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 64,
     collider: { offsetX: 0, offsetY: 0, width: 12, height: 12 },
+    material: MaterialType.Metal,
   },
   "prop-dino-topiary": {
     sheetKey: "prop-dino-topiary",
@@ -291,12 +312,17 @@ const PROP_DEFS: Record<string, PropDef> = {
   },
 };
 
-// Debug: verify staircase walls at module load time
-console.log(
-  "[tilefun:props] climb-arch walls:",
-  PROP_DEFS["prop-climb-arch"]?.walls?.length,
-  PROP_DEFS["prop-climb-arch"]?.walls,
-);
+/** Look up the physical material for a prop type. Returns undefined for soft/natural props. */
+export function getMaterialForPropType(type: string): MaterialType | undefined {
+  return PROP_DEFS[type]?.material;
+}
+
+/** Look up static wall segments for a prop type (from the definition, not serialized). */
+export function getWallsForPropType(type: string): PropCollider[] | null {
+  const def = PROP_DEFS[type];
+  if (!def?.walls) return null;
+  return def.walls.map((w) => ({ ...w }));
+}
 
 export function createProp(type: string, wx: number, wy: number): Prop {
   if (type.startsWith(ATLAS_PREFIX)) {
@@ -321,6 +347,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
   }
   const def = PROP_DEFS[type];
   if (!def) throw new Error(`Unknown prop type: ${type}`);
+  const walls = def.walls ? def.walls.map((w) => ({ ...w })) : null;
   return {
     id: 0,
     type,
@@ -333,7 +360,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
       spriteHeight: def.height,
     },
     collider: def.collider ? { ...def.collider } : null,
-    walls: def.walls ? def.walls.map((w) => ({ ...w })) : null,
+    walls,
     isProp: true,
   };
 }

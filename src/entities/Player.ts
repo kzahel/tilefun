@@ -38,6 +38,7 @@ export function createPlayer(wx: number, wy: number): Entity {
       physicalHeight: 12,
     },
     wanderAI: null,
+    weight: 30,
   };
 }
 

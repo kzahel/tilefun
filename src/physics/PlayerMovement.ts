@@ -1,5 +1,6 @@
 import {
   DEFAULT_PHYSICAL_HEIGHT,
+  JUMP_CUT_MULTIPLIER,
   JUMP_GRAVITY,
   JUMP_VELOCITY,
   PLAYER_SPEED,
@@ -87,6 +88,13 @@ export function initiateJump(entity: Entity): void {
   }
 }
 
+/** Cut jump velocity when the jump button is released while ascending (variable jump height). */
+export function cutJumpVelocity(entity: Entity): void {
+  if (entity.jumpVZ !== undefined && entity.jumpVZ > 0) {
+    entity.jumpVZ *= JUMP_CUT_MULTIPLIER;
+  }
+}
+
 /**
  * Tick jump/fall gravity for an entity using absolute Z. Returns true if the
  * entity just landed. Updates wz, groundZ, and the legacy jumpZ for rendering.
@@ -99,6 +107,7 @@ export function tickJumpGravity(
   entities?: readonly EntitySurface[],
 ): boolean {
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
+    const prevWz = entity.wz;
     entity.jumpVZ -= JUMP_GRAVITY * gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
     let groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
@@ -111,7 +120,13 @@ export function tickJumpGravity(
         if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
       }
       if (entities) {
-        const entZ = getHighestWalkableEntitySurfaceZ(footprint, entity.id, entity.wz, entities);
+        const entZ = getHighestWalkableEntitySurfaceZ(
+          footprint,
+          entity.id,
+          entity.wz,
+          entities,
+          prevWz,
+        );
         if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
       }
     }
@@ -150,16 +165,23 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
 
   const entityWz = entity.wz ?? 0;
   const entityHeight = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+  // Airborne entities can't step up — they must be above the surface to pass
+  const airborne = entity.jumpVZ !== undefined;
+  const elevStepUp = airborne ? 0 : STEP_UP_THRESHOLD;
 
-  const isBlocked = (aabb: {
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
-  }): boolean => {
-    if (aabbOverlapsSolid(aabb, ctx.getCollision, BLOCK_MASK)) return true;
+  const isBlocked = (
+    aabb: { left: number; top: number; right: number; bottom: number },
+    testPos: { wx: number; wy: number },
+  ): boolean => {
+    const mask = airborne ? CollisionFlag.Solid : BLOCK_MASK;
+    if (aabbOverlapsSolid(aabb, ctx.getCollision, mask)) return true;
     if (ctx.isPropBlocked(aabb, entityWz, entityHeight)) return true;
-    if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, STEP_UP_THRESHOLD)) return true;
+    if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, elevStepUp)) return true;
+    // Also check feet position — may be outside AABB due to collider offset.
+    // Without this, walking south lets feet cross onto elevated tiles before
+    // the AABB does, and ground tracking snaps wz up incorrectly.
+    const feetSurfaceZ = getSurfaceZ(testPos.wx, testPos.wy, ctx.getHeight);
+    if (feetSurfaceZ > entityWz + elevStepUp) return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;
   };
@@ -167,13 +189,13 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   // Per-axis sliding: try X, then Y with updated X
   const testX = { wx: entity.position.wx + dx, wy: entity.position.wy };
   const xBox = getEntityAABB(testX, entity.collider);
-  if (!isBlocked(xBox)) {
+  if (!isBlocked(xBox, testX)) {
     entity.position.wx = testX.wx;
   }
 
   const testY = { wx: entity.position.wx, wy: entity.position.wy + dy };
   const yBox = getEntityAABB(testY, entity.collider);
-  if (!isBlocked(yBox)) {
+  if (!isBlocked(yBox, testY)) {
     entity.position.wy = testY.wy;
   }
 }

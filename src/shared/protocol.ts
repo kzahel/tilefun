@@ -109,6 +109,7 @@ export type ClientMessage =
       editorTab: string;
       brushMode: string;
     }
+  | { type: "throw-ball"; dirX: number; dirY: number; force: number }
   | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string }
@@ -148,6 +149,7 @@ export interface EntitySnapshot {
   parentId?: number;
   localOffsetX?: number;
   localOffsetY?: number;
+  weight?: number;
 }
 
 export interface PropSnapshot {
@@ -162,7 +164,6 @@ export interface PropSnapshot {
     spriteHeight: number;
   };
   collider: PropCollider | null;
-  walls: PropCollider[] | null;
   sortOffsetY?: number;
 }
 

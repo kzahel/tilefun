@@ -26,8 +26,8 @@ export function renderWorld(gc: GameContext): void {
   // Terrain + autotile + details (baked into chunk cache)
   tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible);
 
-  // Elevation: cliff faces + Y-offset
-  tileRenderer.drawElevation(ctx, camera, stateView.world, visible);
+  // Elevation is drawn interleaved with entities via collectElevationRenderables
+  // (moved from a separate pass so cliffs properly occlude entities behind them)
 
   return; // Entities drawn after scene-specific overlays (editor grid goes between terrain and entities)
 }
@@ -37,45 +37,48 @@ export function renderWorld(gc: GameContext): void {
  * Called after any scene-specific overlays (editor grid, etc.).
  * Culls entities outside the viewport before Y-sorting.
  */
-export function renderEntities(gc: GameContext, alpha = 1): void {
+export function renderEntities(gc: GameContext, alpha = 1, extraRenderables?: Renderable[]): void {
   const { ctx, camera, stateView, sheets } = gc;
   if (sheets.size === 0) return;
 
-  // Viewport bounds in world coordinates, with margin for sprites partially on-screen
-  const CULL_MARGIN = 48; // pixels — covers largest sprite height
-  const topLeft = camera.screenToWorld(-CULL_MARGIN * camera.scale, -CULL_MARGIN * camera.scale);
-  const bottomRight = camera.screenToWorld(
-    camera.viewportWidth + CULL_MARGIN * camera.scale,
-    camera.viewportHeight + CULL_MARGIN * camera.scale,
-  );
+  // Viewport bounds in world coordinates
+  const vpTL = camera.screenToWorld(0, 0);
+  const vpBR = camera.screenToWorld(camera.viewportWidth, camera.viewportHeight);
+  // Small margin for rendering effects not captured by sprite bounds (drawOffsetY, elevation, shadows)
+  const M = 16;
 
   const renderables: Renderable[] = [];
   for (const e of stateView.entities) {
+    if (!e.sprite) continue;
+    const effectiveWy = e.position.wy - (e.wz ?? 0);
+    const halfW = e.sprite.spriteWidth / 2;
     if (
-      !e.sprite ||
-      e.position.wx < topLeft.wx ||
-      e.position.wx > bottomRight.wx ||
-      e.position.wy < topLeft.wy ||
-      e.position.wy > bottomRight.wy
+      e.position.wx + halfW < vpTL.wx - M ||
+      e.position.wx - halfW > vpBR.wx + M ||
+      effectiveWy < vpTL.wy - M ||
+      effectiveWy - e.sprite.spriteHeight > vpBR.wy + M
     )
       continue;
     renderables.push(e as Renderable);
   }
   for (const p of stateView.props) {
+    const sw = p.sprite?.spriteWidth ?? 16;
+    const sh = p.sprite?.spriteHeight ?? 16;
+    const halfW = sw / 2;
     if (
-      p.position.wx < topLeft.wx ||
-      p.position.wx > bottomRight.wx ||
-      p.position.wy < topLeft.wy ||
-      p.position.wy > bottomRight.wy
+      p.position.wx + halfW < vpTL.wx - M ||
+      p.position.wx - halfW > vpBR.wx + M ||
+      p.position.wy < vpTL.wy - M ||
+      p.position.wy - sh > vpBR.wy + M
     )
       continue;
     renderables.push(p);
   }
 
   // Collect grass blade renderables for Y-sorting with entities/props
+  const visible = camera.getVisibleChunkRange();
   const grassSheet = sheets.get("grass-blades");
   if (grassSheet) {
-    const visible = camera.getVisibleChunkRange();
     const grassBlades = collectGrassBladeRenderables(
       ctx,
       camera,
@@ -86,6 +89,25 @@ export function renderEntities(gc: GameContext, alpha = 1): void {
     );
     for (const blade of grassBlades) {
       renderables.push(blade);
+    }
+  }
+
+  // Collect elevation renderables so cliff faces interleave with entities
+  // in the Y-sort — entities behind cliffs get occluded correctly
+  const elevationRenderables = gc.tileRenderer.collectElevationRenderables(
+    ctx,
+    camera,
+    stateView.world,
+    visible,
+  );
+  for (const elev of elevationRenderables) {
+    renderables.push(elev);
+  }
+
+  // Extra renderables (e.g. particles) passed in by the scene
+  if (extraRenderables) {
+    for (const r of extraRenderables) {
+      renderables.push(r);
     }
   }
 
@@ -171,6 +193,9 @@ export function renderDebugOverlay(gc: GameContext): void {
       speedMultiplier: collision & CollisionFlag.SlowWalk ? 0.5 : 1.0,
       playerWz: stateView.playerEntity.wz,
       playerJumpZ: stateView.playerEntity.jumpZ,
+      serverWx: stateView.serverPlayerPosition?.wx,
+      serverWy: stateView.serverPlayerPosition?.wy,
+      serverWz: stateView.serverPlayerPosition?.wz,
     },
     camera.getVisibleChunkRange(),
     gc.debugEnabled

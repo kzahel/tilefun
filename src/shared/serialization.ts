@@ -1,5 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { getWallsForPropType } from "../entities/PropFactories.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { ChunkSnapshot, EntitySnapshot, PropSnapshot } from "./protocol.js";
 
@@ -25,6 +26,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.parentId !== undefined) result.parentId = e.parentId;
   if (e.localOffsetX !== undefined) result.localOffsetX = e.localOffsetX;
   if (e.localOffsetY !== undefined) result.localOffsetY = e.localOffsetY;
+  if (e.weight !== undefined) result.weight = e.weight;
   return result;
 }
 
@@ -48,6 +50,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.parentId !== undefined) result.parentId = s.parentId;
   if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
   if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
+  if (s.weight !== undefined) result.weight = s.weight;
   return result;
 }
 
@@ -60,7 +63,6 @@ export function serializeProp(p: Prop): PropSnapshot {
     position: { ...p.position },
     sprite: { ...p.sprite },
     collider: p.collider ? { ...p.collider } : null,
-    walls: p.walls ? p.walls.map((w) => ({ ...w })) : null,
   };
 }
 
@@ -71,7 +73,7 @@ export function deserializeProp(s: PropSnapshot): Prop {
     position: { ...s.position },
     sprite: { ...s.sprite },
     collider: s.collider ? { ...s.collider } : null,
-    walls: s.walls ? s.walls.map((w) => ({ ...w })) : null,
+    walls: getWallsForPropType(s.type),
     isProp: true,
   };
 }

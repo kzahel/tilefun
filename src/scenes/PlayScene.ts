@@ -1,7 +1,11 @@
+import { AmbientSystem } from "../audio/AmbientSystem.js";
+import { FootstepSystem } from "../audio/FootstepSystem.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
+import { Direction } from "../entities/Entity.js";
+import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
@@ -10,6 +14,36 @@ import { renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.j
  * In serialized mode, runs client-side prediction for the player entity.
  */
 const HIT_SHAKE_INTENSITY = 6;
+const GHOST_HIT_KEYS = [
+  "ghost_hit_000",
+  "ghost_hit_001",
+  "ghost_hit_002",
+  "ghost_hit_003",
+  "ghost_hit_004",
+];
+const GHOST_DEATH_KEYS = [
+  "ghost_death_000",
+  "ghost_death_001",
+  "ghost_death_002",
+  "ghost_death_003",
+  "ghost_death_004",
+];
+const GHOST_DEATH_MAX_DISTANCE = 300;
+const GHOST_DEATH_VOLUME = 0.35;
+
+/** Soft impact keys used for water splash (pitched down). */
+const SPLASH_KEYS = [
+  "impact_soft_heavy_000",
+  "impact_soft_heavy_001",
+  "impact_soft_heavy_002",
+  "impact_soft_heavy_003",
+  "impact_soft_heavy_004",
+];
+/** Distance threshold to distinguish water-respawn teleport from normal landing. */
+const WATER_RESPAWN_DIST_SQ = 32 * 32;
+
+/** Max hold time in seconds before throw force reaches 1.0. */
+const THROW_CHARGE_DURATION = 1.0;
 
 const ZOOM_PRESETS: Record<string, number> = {
   zoom_1: 0.25,
@@ -24,8 +58,23 @@ export class PlayScene implements GameScene {
   private inputSeq = 0;
   private prevInvincibilityTimer = 0;
   private zoomUnsubs: (() => void)[] = [];
+  private particles = new ParticleSystem();
+  private footsteps: FootstepSystem | null = null;
+  private ambient: AmbientSystem | null = null;
+  private wasAirborne = false;
+  /** Player position last frame while airborne (for detecting water-respawn teleport). */
+  private lastAirborneWx = 0;
+  private lastAirborneWy = 0;
+  private prevGemsCollected = 0;
+  /** Entity IDs that have been seen with deathTimer (to detect ghost death onset). */
+  private dyingEntities = new Set<number>();
+  /** Accumulated throw charge time (seconds). 0 = not charging. */
+  private throwChargeTime = 0;
+  private wasThrowHeld = false;
 
   onEnter(gc: GameContext): void {
+    // Attach touch buttons before joystick so button claims are processed first
+    gc.touchButtons.attach();
     gc.touchJoystick.attach();
     if (gc.editorButton) gc.editorButton.textContent = "Edit";
 
@@ -37,6 +86,20 @@ export class PlayScene implements GameScene {
 
     // Zoom preset hotkeys
     this.bindZoomActions(gc);
+
+    // Audio systems
+    this.footsteps = new FootstepSystem(
+      gc.audioManager,
+      () => gc.stateView.world,
+      () => gc.camera,
+      () => gc.stateView.playerEntity,
+      () => gc.stateView.props,
+    );
+    this.ambient = new AmbientSystem(
+      gc.audioManager,
+      () => gc.camera,
+      () => gc.stateView.playerEntity,
+    );
 
     // Create predictor for serialized mode
     if (gc.serialized) {
@@ -53,7 +116,11 @@ export class PlayScene implements GameScene {
 
   onExit(gc: GameContext): void {
     gc.touchJoystick.detach();
+    gc.touchButtons.detach();
     this.unbindZoomActions();
+    this.footsteps = null;
+    this.ambient = null;
+    this.dyingEntities.clear();
     if (gc.serialized && this.predictor) {
       (gc.stateView as RemoteStateView).setPredictor(null);
       this.predictor = null;
@@ -64,6 +131,7 @@ export class PlayScene implements GameScene {
     console.log(
       `[tilefun:play] onResume — predictor=${!!this.predictor?.player}, editorEnabled=${gc.stateView.editorEnabled}, playerEntityId=${gc.stateView.playerEntity.id}`,
     );
+    gc.touchButtons.attach();
     gc.touchJoystick.attach();
     this.bindZoomActions(gc);
     // Re-send editor mode false — after realm switch the server may have a new
@@ -76,6 +144,7 @@ export class PlayScene implements GameScene {
 
   onPause(gc: GameContext): void {
     gc.touchJoystick.detach();
+    gc.touchButtons.detach();
     this.unbindZoomActions();
   }
 
@@ -127,6 +196,50 @@ export class PlayScene implements GameScene {
       sprinting: movement.sprinting,
       jump: movement.jump,
     });
+
+    // Throw charge tracking
+    const throwHeld = gc.actions.isHeld("throw");
+    if (throwHeld) {
+      this.throwChargeTime += dt;
+    } else if (this.wasThrowHeld) {
+      // Released — throw the ball
+      const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
+      let dirX = 0;
+      let dirY = 0;
+
+      // Use movement direction if player is moving (supports diagonal joystick)
+      if (movement.dx !== 0 || movement.dy !== 0) {
+        const len = Math.sqrt(movement.dx * movement.dx + movement.dy * movement.dy) || 1;
+        dirX = movement.dx / len;
+        dirY = movement.dy / len;
+      } else {
+        // Stationary — use sprite facing direction
+        const playerSprite = gc.stateView.playerEntity.sprite;
+        if (playerSprite) {
+          switch (playerSprite.direction) {
+            case Direction.Right:
+              dirX = 1;
+              break;
+            case Direction.Left:
+              dirX = -1;
+              break;
+            case Direction.Up:
+              dirY = -1;
+              break;
+            case Direction.Down:
+              dirY = 1;
+              break;
+          }
+        } else {
+          dirY = 1; // fallback: down
+        }
+      }
+      gc.transport.send({ type: "throw-ball", dirX, dirY, force });
+      this.throwChargeTime = 0;
+    }
+    this.wasThrowHeld = throwHeld;
+
+    const verticalFollow = gc.console.cvars.get("cl_verticalfollow")?.get() === true;
 
     // Server tick + camera follow + chunk loading
     if (gc.serialized) {
@@ -186,11 +299,9 @@ export class PlayScene implements GameScene {
 
       // Camera follows predicted player position (stateView.playerEntity
       // returns the predicted player when predictor is attached)
-      gc.camera.follow(
-        gc.stateView.playerEntity.position.wx,
-        gc.stateView.playerEntity.position.wy,
-        CAMERA_LERP,
-      );
+      const playerEnt = gc.stateView.playerEntity;
+      const zOffset = verticalFollow ? (playerEnt.wz ?? 0) : 0;
+      gc.camera.follow(playerEnt.position.wx, playerEnt.position.wy - zOffset, CAMERA_LERP);
       if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
         const savedZoom = gc.camera.zoom;
         gc.camera.zoom = 1;
@@ -204,9 +315,10 @@ export class PlayScene implements GameScene {
       session.visibleRange = gc.camera.getVisibleChunkRange();
       gc.server.tick(dt);
 
+      const localZOffset = verticalFollow ? (gc.stateView.playerEntity.wz ?? 0) : 0;
       gc.camera.follow(
         gc.stateView.playerEntity.position.wx,
-        gc.stateView.playerEntity.position.wy,
+        gc.stateView.playerEntity.position.wy - localZOffset,
         CAMERA_LERP,
       );
 
@@ -224,15 +336,54 @@ export class PlayScene implements GameScene {
       }
     }
 
-    // Detect player hit (invincibility transition 0 → >0) and trigger screen shake
+    // Detect player hit (invincibility transition 0 → >0) and trigger screen shake + sound.
+    // Skip if the player was airborne — that's a water-respawn blink, not a ghost hit.
     const invTimer = gc.stateView.invincibilityTimer;
-    if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
+    if (invTimer > 0 && this.prevInvincibilityTimer === 0 && !this.wasAirborne) {
       gc.camera.shake(HIT_SHAKE_INTENSITY);
+      playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
     }
     this.prevInvincibilityTimer = invTimer;
 
+    // Gem pickup sound
+    const gems = gc.stateView.gemsCollected;
+    if (gems > this.prevGemsCollected && this.prevGemsCollected >= 0) {
+      const buf = gc.audioManager.getBuffer("gem_pickup");
+      if (buf) {
+        gc.audioManager.playOneShot({ buffer: buf, volume: 0.4, pitch: 1 + Math.random() * 0.1 });
+      }
+    }
+    this.prevGemsCollected = gems;
+
     gc.camera.updateShake();
     gc.chatHUD.update(dt);
+
+    // Detect player landing (jumpVZ transitions from defined → undefined)
+    const player = gc.stateView.playerEntity;
+    const airborne = player.jumpVZ !== undefined;
+    if (this.wasAirborne && !airborne) {
+      // If position teleported far, it was a water-respawn — splash at the old position
+      const dx = player.position.wx - this.lastAirborneWx;
+      const dy = player.position.wy - this.lastAirborneWy;
+      if (dx * dx + dy * dy > WATER_RESPAWN_DIST_SQ) {
+        this.particles.spawnWaterSplash(this.lastAirborneWx, this.lastAirborneWy);
+        playRandomSound(gc, SPLASH_KEYS, 0.45, 0.6 + Math.random() * 0.15);
+      } else {
+        this.particles.spawnLandingDust(player.position.wx, player.position.wy);
+      }
+    }
+    if (airborne) {
+      this.lastAirborneWx = player.position.wx;
+      this.lastAirborneWy = player.position.wy;
+    }
+    this.wasAirborne = airborne;
+
+    // Detect ghost death (entity gains deathTimer) — play spatial bell sound
+    this.detectGhostDeaths(gc);
+
+    this.footsteps?.update(dt, gc.stateView.entities);
+    this.ambient?.update(dt, gc.stateView.entities);
+    this.particles.update(dt);
   }
 
   render(alpha: number, gc: GameContext): void {
@@ -243,12 +394,18 @@ export class PlayScene implements GameScene {
     // at tick boundaries (camera lerp != entity linear motion), visible as
     // jitter at high refresh rates. The exponential form matches the follow()
     // decay curve, giving smooth sub-tick motion tied to the player.
+    const verticalFollow = gc.console.cvars.get("cl_verticalfollow")?.get() === true;
     if (gc.serialized && this.predictor?.player) {
       // Use predicted player's prevPosition for smooth camera interpolation
       const prev = this.predictor.prevPosition;
       const cur = this.predictor.player.position;
       const px = prev.wx + (cur.wx - prev.wx) * alpha;
-      const py = prev.wy + (cur.wy - prev.wy) * alpha;
+      let py = prev.wy + (cur.wy - prev.wy) * alpha;
+      if (verticalFollow) {
+        const prevZ = this.predictor.prevWz ?? 0;
+        const curZ = this.predictor.player.wz ?? 0;
+        py -= prevZ + (curZ - prevZ) * alpha;
+      }
       const f = 1 - (1 - CAMERA_LERP) ** alpha;
       gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
       gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
@@ -262,7 +419,12 @@ export class PlayScene implements GameScene {
       const player = gc.stateView.playerEntity;
       if (player.prevPosition) {
         const px = player.prevPosition.wx + (player.position.wx - player.prevPosition.wx) * alpha;
-        const py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
+        let py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
+        if (verticalFollow) {
+          const prevZ = player.prevWz ?? 0;
+          const curZ = player.wz ?? 0;
+          py -= prevZ + (curZ - prevZ) * alpha;
+        }
         const f = 1 - (1 - CAMERA_LERP) ** alpha;
         gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
         gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
@@ -274,11 +436,13 @@ export class PlayScene implements GameScene {
     gc.camera.y += gc.camera.shakeOffsetY;
 
     renderWorld(gc);
-    renderEntities(gc, alpha);
+    const particleRenderables = this.particles.collectRenderables(gc.ctx, gc.camera);
+    renderEntities(gc, alpha, particleRenderables);
     drawGemHUD(gc);
     gc.chatHUD.render(gc.ctx);
     renderDebugOverlay(gc);
     gc.touchJoystick.draw(gc.ctx);
+    gc.touchButtons.draw(gc.ctx);
     gc.camera.restoreActual();
   }
 
@@ -297,6 +461,58 @@ export class PlayScene implements GameScene {
     for (const unsub of this.zoomUnsubs) unsub();
     this.zoomUnsubs.length = 0;
   }
+
+  private detectGhostDeaths(gc: GameContext): void {
+    const liveIds = new Set<number>();
+    const player = gc.stateView.playerEntity;
+
+    for (const e of gc.stateView.entities) {
+      if (e.deathTimer === undefined) continue;
+      liveIds.add(e.id);
+      if (this.dyingEntities.has(e.id)) continue;
+
+      // Newly dying entity — play spatial death sound
+      this.dyingEntities.add(e.id);
+      const dx = e.position.wx - player.position.wx;
+      const dy = e.position.wy - player.position.wy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > GHOST_DEATH_MAX_DISTANCE) continue;
+
+      const distFactor = 1 - dist / GHOST_DEATH_MAX_DISTANCE;
+      const camera = gc.camera;
+      const screen = camera.worldToScreen(e.position.wx, e.position.wy);
+      const centerX = camera.viewportWidth / 2;
+      const normalizedX = camera.viewportWidth > 0 ? (screen.sx - centerX) / (centerX || 1) : 0;
+      const pan = Math.max(-0.5, Math.min(0.5, normalizedX * 0.5));
+
+      const idx = Math.floor(Math.random() * GHOST_DEATH_KEYS.length);
+      const key = GHOST_DEATH_KEYS[idx];
+      if (!key) continue;
+      const buf = gc.audioManager.getBuffer(key);
+      if (!buf) continue;
+      gc.audioManager.playOneShot({
+        buffer: buf,
+        volume: GHOST_DEATH_VOLUME * distFactor,
+        pitch: 0.8 + Math.random() * 0.3,
+        pan,
+      });
+    }
+
+    // Prune IDs for despawned entities
+    for (const id of this.dyingEntities) {
+      if (!liveIds.has(id)) this.dyingEntities.delete(id);
+    }
+  }
+}
+
+/** Play a random sound from a list of keys (non-spatial, centered). */
+function playRandomSound(gc: GameContext, keys: string[], volume: number, pitch: number): void {
+  const idx = Math.floor(Math.random() * keys.length);
+  const key = keys[idx];
+  if (!key) return;
+  const buf = gc.audioManager.getBuffer(key);
+  if (!buf) return;
+  gc.audioManager.playOneShot({ buffer: buf, volume, pitch });
 }
 
 function drawGemHUD(gc: GameContext): void {

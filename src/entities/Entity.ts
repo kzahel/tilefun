@@ -129,4 +129,6 @@ export interface Entity {
   localOffsetX?: number;
   /** Local Y offset from parent's position (world pixels). Only meaningful when parentId is set. */
   localOffsetY?: number;
+  /** Mass in kg. Affects footstep audio volume/pitch (heavier = louder, lower pitch). */
+  weight?: number;
 }

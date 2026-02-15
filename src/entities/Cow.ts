@@ -49,5 +49,6 @@ export function createCow(wx: number, wy: number): Entity {
       rideSpeed: 30,
     },
     tags: new Set(["befriendable", "npc", "rideable"]),
+    weight: 500,
   };
 }

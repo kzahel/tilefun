@@ -21,19 +21,79 @@ export class PropManager {
     this.nextId = n;
   }
 
-  add(prop: Prop): Prop {
-    prop.id = this.nextId++;
-    this.props.push(prop);
-    const key = chunkKey(
-      Math.floor(prop.position.wx / CHUNK_SIZE_PX),
-      Math.floor(prop.position.wy / CHUNK_SIZE_PX),
-    );
+  /**
+   * Compute the chunk-coordinate range covering all of a prop's collision shapes.
+   * Props with no colliders fall back to a single chunk based on center position.
+   */
+  private getPropChunkRange(prop: Prop): {
+    minCx: number;
+    minCy: number;
+    maxCx: number;
+    maxCy: number;
+  } {
+    const colliders: PropCollider[] = [];
+    if (prop.walls) {
+      for (const w of prop.walls) colliders.push(w);
+    }
+    if (prop.collider) {
+      colliders.push(prop.collider);
+    }
+
+    if (colliders.length === 0) {
+      const cx = Math.floor(prop.position.wx / CHUNK_SIZE_PX);
+      const cy = Math.floor(prop.position.wy / CHUNK_SIZE_PX);
+      return { minCx: cx, minCy: cy, maxCx: cx, maxCy: cy };
+    }
+
+    let left = Infinity;
+    let top = Infinity;
+    let right = -Infinity;
+    let bottom = -Infinity;
+    for (const c of colliders) {
+      const aabb = getEntityAABB(prop.position, c);
+      left = Math.min(left, aabb.left);
+      top = Math.min(top, aabb.top);
+      right = Math.max(right, aabb.right);
+      bottom = Math.max(bottom, aabb.bottom);
+    }
+
+    return {
+      minCx: Math.floor(left / CHUNK_SIZE_PX),
+      minCy: Math.floor(top / CHUNK_SIZE_PX),
+      maxCx: Math.floor(right / CHUNK_SIZE_PX),
+      maxCy: Math.floor(bottom / CHUNK_SIZE_PX),
+    };
+  }
+
+  /** Add prop to chunk index bucket, creating if needed. */
+  private indexProp(key: string, prop: Prop): void {
     let bucket = this.chunkIndex.get(key);
     if (!bucket) {
       bucket = [];
       this.chunkIndex.set(key, bucket);
     }
     bucket.push(prop);
+  }
+
+  /** Remove prop from chunk index bucket, cleaning up empty buckets. */
+  private unindexProp(key: string, prop: Prop): void {
+    const bucket = this.chunkIndex.get(key);
+    if (bucket) {
+      const bi = bucket.indexOf(prop);
+      if (bi >= 0) bucket.splice(bi, 1);
+      if (bucket.length === 0) this.chunkIndex.delete(key);
+    }
+  }
+
+  add(prop: Prop): Prop {
+    prop.id = this.nextId++;
+    this.props.push(prop);
+    const { minCx, minCy, maxCx, maxCy } = this.getPropChunkRange(prop);
+    for (let cy = minCy; cy <= maxCy; cy++) {
+      for (let cx = minCx; cx <= maxCx; cx++) {
+        this.indexProp(chunkKey(cx, cy), prop);
+      }
+    }
     return prop;
   }
 
@@ -43,15 +103,11 @@ export class PropManager {
     const prop = this.props[idx];
     if (!prop) return false;
     this.props.splice(idx, 1);
-    const key = chunkKey(
-      Math.floor(prop.position.wx / CHUNK_SIZE_PX),
-      Math.floor(prop.position.wy / CHUNK_SIZE_PX),
-    );
-    const bucket = this.chunkIndex.get(key);
-    if (bucket) {
-      const bi = bucket.indexOf(prop);
-      if (bi >= 0) bucket.splice(bi, 1);
-      if (bucket.length === 0) this.chunkIndex.delete(key);
+    const { minCx, minCy, maxCx, maxCy } = this.getPropChunkRange(prop);
+    for (let cy = minCy; cy <= maxCy; cy++) {
+      for (let cx = minCx; cx <= maxCx; cx++) {
+        this.unindexProp(chunkKey(cx, cy), prop);
+      }
     }
     return true;
   }
@@ -84,11 +140,17 @@ export class PropManager {
   /** Return all props whose chunk falls within the given chunk-coordinate rectangle. */
   getPropsInChunkRange(minCx: number, minCy: number, maxCx: number, maxCy: number): Prop[] {
     const result: Prop[] = [];
+    const seen = new Set<number>();
     for (let cy = minCy; cy <= maxCy; cy++) {
       for (let cx = minCx; cx <= maxCx; cx++) {
         const bucket = this.chunkIndex.get(chunkKey(cx, cy));
         if (bucket) {
-          for (const p of bucket) result.push(p);
+          for (const p of bucket) {
+            if (!seen.has(p.id)) {
+              seen.add(p.id);
+              result.push(p);
+            }
+          }
         }
       }
     }

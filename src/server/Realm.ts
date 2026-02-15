@@ -3,12 +3,18 @@ import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import {
   CHUNK_SIZE_PX,
   DEFAULT_PHYSICAL_HEIGHT,
+  JUMP_BUFFER_TIME,
   JUMP_VELOCITY,
   RENDER_DISTANCE,
+  THROW_ANGLE,
+  THROW_MAX_SPEED,
+  THROW_MIN_SPEED,
   TICK_RATE,
+  TILE_SIZE,
 } from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
+import { createBall } from "../entities/Ball.js";
 import {
   aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
@@ -33,17 +39,21 @@ import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
+import { tickBallPhysics } from "../physics/BallPhysics.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyMountInput,
+  cutJumpVelocity,
   initiateJump,
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
+import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { tickAllAI } from "./tickAllAI.js";
@@ -158,6 +168,7 @@ export class Realm {
       knockbackVy: 0,
       mountId: null,
       lastDismountedId: null,
+      lastSafePosition: { wx: spawnX, wy: spawnY },
     };
     session.cameraX = camX;
     session.cameraY = camY;
@@ -285,19 +296,31 @@ export class Realm {
         // diverges, causing visible jitter.
         for (let i = 0; i < inputs.length - 1; i++) {
           const input = inputs[i]!;
+          const jumpRising = input.jump && !session.prevJumpInput;
+          const jumpFalling = !input.jump && session.prevJumpInput;
 
           if (mount) {
-            // Riding: jump = dismount
-            if (input.jump) {
+            // Riding: jump rising edge = dismount
+            if (jumpRising) {
               this.dismountPlayer(session);
+              session.prevJumpInput = input.jump;
               break; // Remaining inputs processed as normal player next tick
             }
             applyMountInput(mount, input, session.player);
           } else {
             updatePlayerFromInput(session.player, input, dt);
-            if (input.jump) initiateJump(session.player);
+            if (jumpRising) {
+              if (session.player.jumpVZ === undefined) {
+                initiateJump(session.player);
+              } else {
+                session.jumpBufferTimer = JUMP_BUFFER_TIME;
+              }
+            } else if (jumpFalling) {
+              cutJumpVelocity(session.player);
+            }
           }
 
+          session.prevJumpInput = input.jump;
           moveAndCollide(movementTarget, dt, ctx);
           session.lastProcessedInputSeq = input.seq;
         }
@@ -305,6 +328,8 @@ export class Realm {
         // Last input goes through normal path (EntityManager handles movement
         // including push mechanics, entity-entity collision, etc.)
         const lastInput = inputs[inputs.length - 1]!;
+        const lastJumpRising = lastInput.jump && !session.prevJumpInput;
+        const lastJumpFalling = !lastInput.jump && session.prevJumpInput;
         // Re-resolve mount (may have dismounted during extra inputs above)
         const currentMount =
           session.gameplaySession.mountId !== null
@@ -312,7 +337,7 @@ export class Realm {
               null)
             : null;
         if (currentMount) {
-          if (lastInput.jump) {
+          if (lastJumpRising) {
             this.dismountPlayer(session);
           } else {
             applyMountInput(currentMount, lastInput, session.player);
@@ -324,8 +349,17 @@ export class Realm {
           }
         } else {
           updatePlayerFromInput(session.player, lastInput, dt);
-          if (lastInput.jump) initiateJump(session.player);
+          if (lastJumpRising) {
+            if (session.player.jumpVZ === undefined) {
+              initiateJump(session.player);
+            } else {
+              session.jumpBufferTimer = JUMP_BUFFER_TIME;
+            }
+          } else if (lastJumpFalling) {
+            cutJumpVelocity(session.player);
+          }
         }
+        session.prevJumpInput = lastInput.jump;
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
         // No input this tick (timing jitter between client RAF and server
@@ -407,11 +441,58 @@ export class Realm {
               );
             })()
           : [];
+        // Save safe position while grounded on non-water
+        if (p.jumpVZ === undefined) {
+          const tx = Math.floor(p.position.wx / TILE_SIZE);
+          const ty = Math.floor(p.position.wy / TILE_SIZE);
+          const flags = this.world.getCollisionIfLoaded(tx, ty);
+          if (!(flags & CollisionFlag.Water)) {
+            session.gameplaySession.lastSafePosition = {
+              wx: p.position.wx,
+              wy: p.position.wy,
+            };
+          }
+        }
+
         const landed = tickJumpGravity(p, dt, getHeight, nearbyProps, nearbyEntities);
-        if (landed && session.gameplaySession.mountId === null) {
-          this.tryMountOnLanding(session);
+        if (landed) {
+          // Check if player landed on water — respawn at last safe position
+          const landTx = Math.floor(p.position.wx / TILE_SIZE);
+          const landTy = Math.floor(p.position.wy / TILE_SIZE);
+          const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
+          if (landFlags & CollisionFlag.Water) {
+            const safe = session.gameplaySession.lastSafePosition;
+            if (safe) {
+              p.position.wx = safe.wx;
+              p.position.wy = safe.wy;
+              p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
+              p.groundZ = p.wz;
+            }
+            delete p.jumpVZ;
+            delete p.jumpZ;
+            // Brief invincibility flash so the respawn is visible
+            session.gameplaySession.invincibilityTimer = 0.75;
+          } else if (session.jumpBufferTimer > 0) {
+            // Buffered jump: immediately re-jump on landing
+            initiateJump(p);
+            session.jumpBufferTimer = 0;
+          } else if (session.gameplaySession.mountId === null) {
+            this.tryMountOnLanding(session);
+          }
+        }
+        // Decrement jump buffer timer
+        if (session.jumpBufferTimer > 0) {
+          session.jumpBufferTimer -= dt;
         }
       }
+
+      // ── Ball physics (gravity, bouncing, entity collision) ──
+      tickBallPhysics(
+        this.entityManager,
+        dt,
+        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+        (tx, ty) => this.world.getHeightAt(tx, ty),
+      );
 
       // ── TickService.postSimulation ──
       this.worldAPI.tick.firePost(dt);
@@ -504,6 +585,20 @@ export class Realm {
       case "player-interact":
         this.worldAPI.events.emit("player-interact", { wx: msg.wx, wy: msg.wy });
         break;
+
+      case "throw-ball": {
+        const player = session.player;
+        const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
+        const xySpeed = speed * Math.cos(THROW_ANGLE);
+        const zSpeed = speed * Math.sin(THROW_ANGLE);
+        const ball = createBall(player.position.wx, player.position.wy);
+        ball.velocity = { vx: msg.dirX * xySpeed, vy: msg.dirY * xySpeed };
+        ball.wz = (player.wz ?? 0) + 8; // throw from chest height
+        ball.jumpVZ = zSpeed;
+        ball.jumpZ = 8;
+        this.entityManager.spawn(ball);
+        break;
+      }
 
       case "edit-terrain-tile":
         this.terrainEditor.applyTileEdit(
@@ -753,10 +848,8 @@ export class Realm {
       if (mount.sprite) mount.sprite.moving = false;
     }
 
-    // Hop off from riding height — start jump from the visual mount position
-    const ridingZ = (session.player.groundZ ?? 0) + (session.player.jumpZ ?? 10);
-    session.player.wz = ridingZ;
-    session.player.jumpZ = ridingZ - (session.player.groundZ ?? 0);
+    // Hop off from riding height — wz is already tracked by resolveParentedPositions
+    session.player.jumpZ = (session.player.wz ?? 0) - (session.player.groundZ ?? 0);
     session.player.jumpVZ = JUMP_VELOCITY * 0.5;
     delete session.player.noShadow;
   }
@@ -801,10 +894,10 @@ export class Realm {
       // resolveParentedPositions next tick) — avoids camera jump
       player.position.wx = entity.position.wx;
       player.position.wy = entity.position.wy;
-      // Visual lift: set wz above ground so the renderer (which uses wz
-      // directly when defined) elevates the player onto the mount's back
-      const mountGroundZ = player.groundZ ?? 0;
-      player.wz = mountGroundZ + 10;
+      // Visual lift: set wz above mount so the renderer elevates the
+      // player onto the mount's back. Use the mount's wz (not player.groundZ
+      // which may include the cow's own walkable surface height, double-counting).
+      player.wz = (entity.wz ?? 0) + 10;
       player.jumpZ = 10;
       delete player.jumpVZ;
       player.noShadow = true; // cow's shadow is bigger

@@ -260,6 +260,16 @@ export class GameServer {
     });
   }
 
+  /** Iterate all connected sessions (including dormant). */
+  getSessions(): IterableIterator<PlayerSession> {
+    return this.sessions.values();
+  }
+
+  /** Check if a session is dormant (disconnected, awaiting reconnect). */
+  isDormant(clientId: string): boolean {
+    return this.dormantSessions.has(clientId);
+  }
+
   getLocalSession(): PlayerSession {
     const session = this.sessions.get("local");
     if (!session) throw new Error("No local session");
@@ -682,6 +692,14 @@ export class GameServer {
         });
         return;
       }
+    }
+
+    // set-editor-mode is handled at the GameServer level so it works even
+    // before the session has joined a realm (the initial PlayScene.onEnter
+    // fires before the async addPlayer resolves and sets realmId).
+    if (msg.type === "set-editor-mode") {
+      session.editorEnabled = msg.enabled;
+      if (!msg.enabled) session.editorCursor = null;
     }
 
     // Realm-scoped messages: find the session's realm and delegate

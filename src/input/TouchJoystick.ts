@@ -21,9 +21,8 @@ export class TouchJoystick {
   private canvas: HTMLCanvasElement;
   /** Called when a short tap (no drag) is detected. Coordinates are client-space. */
   onTap: ((clientX: number, clientY: number) => void) | null = null;
-  /** True while a second finger is touching (used as jump input on mobile). */
-  jumping = false;
-  private jumpTouchId: number | null = null;
+  /** Touch IDs claimed by other systems (e.g. TouchButtons). Joystick ignores these. */
+  claimedTouches: Set<number> | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -42,8 +41,6 @@ export class TouchJoystick {
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
     this.state = null;
-    this.jumping = false;
-    this.jumpTouchId = null;
   }
 
   isActive(): boolean {
@@ -126,6 +123,8 @@ export class TouchJoystick {
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
+      // Skip touches claimed by other systems (e.g. on-screen buttons)
+      if (this.claimedTouches?.has(touch.identifier)) continue;
       if (!this.state) {
         // First finger: joystick
         this.state = {
@@ -136,11 +135,6 @@ export class TouchJoystick {
           thumbY: touch.clientY,
           startTime: performance.now(),
         };
-        e.preventDefault();
-      } else if (this.jumpTouchId === null) {
-        // Second finger while joystick active: jump
-        this.jumpTouchId = touch.identifier;
-        this.jumping = true;
         e.preventDefault();
       }
     }
@@ -172,12 +166,6 @@ export class TouchJoystick {
           this.onTap(this.state.baseX, this.state.baseY);
         }
         this.state = null;
-        this.jumping = false;
-        this.jumpTouchId = null;
-        e.preventDefault();
-      } else if (touch.identifier === this.jumpTouchId) {
-        this.jumping = false;
-        this.jumpTouchId = null;
         e.preventDefault();
       }
     }

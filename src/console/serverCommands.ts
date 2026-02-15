@@ -187,6 +187,31 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
     },
   });
   engine.commands.register({
+    name: "players",
+    description: "List all connected players",
+    args: [],
+    category: "sv",
+    serverSide: true,
+    execute: (_args, out) => {
+      const now = Date.now();
+      const sessions = [...server.getSessions()];
+      if (sessions.length === 0) {
+        out("No players connected");
+        return;
+      }
+      out(`Players online: ${sessions.length}`);
+      for (const s of sessions) {
+        const uptime = formatDuration(now - s.connectedAt);
+        const dormant = server.isDormant(s.clientId) ? " [dormant]" : "";
+        const profile = s.profileId ?? "(none)";
+        out(
+          `  #${s.playerNumber} ${s.displayName} — profile: ${profile}, connected: ${uptime}${dormant}`,
+        );
+      }
+    },
+  });
+
+  engine.commands.register({
     name: "say",
     description: "Broadcast a chat message to all players",
     args: [{ name: "message", type: "string", rest: true }],
@@ -207,4 +232,14 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
 
 function getFirstSession(server: GameServer) {
   return server.getFirstSession();
+}
+
+function formatDuration(ms: number): string {
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  if (h > 0) return `${h}h ${m}m ${s}s`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
 }

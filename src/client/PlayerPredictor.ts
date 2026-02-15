@@ -1,4 +1,8 @@
-import { DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
+import {
+  DEFAULT_PHYSICAL_HEIGHT,
+  JUMP_BUFFER_TIME,
+  STEP_UP_THRESHOLD,
+} from "../config/constants.js";
 import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerFromInput } from "../entities/Player.js";
@@ -8,6 +12,7 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyMountInput,
+  cutJumpVelocity,
   initiateJump,
   moveAndCollide,
   tickJumpGravity,
@@ -59,6 +64,12 @@ export class PlayerPredictor {
   /** Previous predicted wz for render interpolation. */
   private _prevWz = 0;
 
+  /** Previous jump input state for edge detection. */
+  private prevJumpInput = false;
+
+  /** Time remaining on buffered jump input (seconds). */
+  private jumpBufferTimer = 0;
+
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
 
@@ -88,6 +99,8 @@ export class PlayerPredictor {
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this._prevWz = this.predicted.wz ?? 0;
     this.inputBuffer = [];
+    this.prevJumpInput = false;
+    this.jumpBufferTimer = 0;
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
       this.predictedMount = this.clonePlayer(serverMount);
@@ -406,7 +419,18 @@ export class PlayerPredictor {
       // ── Normal: apply input to player directly ──
       updatePlayerFromInput(this.predicted, movement, dt);
 
-      if (movement.jump) initiateJump(this.predicted);
+      const jumpRising = movement.jump && !this.prevJumpInput;
+      const jumpFalling = !movement.jump && this.prevJumpInput;
+      if (jumpRising) {
+        if (this.predicted.jumpVZ === undefined) {
+          initiateJump(this.predicted);
+        } else {
+          this.jumpBufferTimer = JUMP_BUFFER_TIME;
+        }
+      } else if (jumpFalling) {
+        cutJumpVelocity(this.predicted);
+      }
+      this.prevJumpInput = movement.jump;
 
       const playerExclude = new Set([this.predicted.id]);
       const playerCtx = this.buildMovementContext(
@@ -450,7 +474,14 @@ export class PlayerPredictor {
         this.predicted.wz = groundZ;
       }
 
-      tickJumpGravity(this.predicted, dt, getHeight, props, entities);
+      const landed = tickJumpGravity(this.predicted, dt, getHeight, props, entities);
+      if (landed && this.jumpBufferTimer > 0) {
+        initiateJump(this.predicted);
+        this.jumpBufferTimer = 0;
+      }
+      if (this.jumpBufferTimer > 0) {
+        this.jumpBufferTimer -= dt;
+      }
     }
   }
 

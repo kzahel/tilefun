@@ -58,8 +58,43 @@ export const JUMP_VELOCITY = 150;
 /** Jump gravity in world px/s². */
 export const JUMP_GRAVITY = 500;
 
+/** Velocity multiplier applied when jump button is released while ascending (variable jump height). */
+export const JUMP_CUT_MULTIPLIER = 0.4;
+
+/** Seconds to buffer a jump input pressed while airborne. */
+export const JUMP_BUFFER_TIME = 0.15;
+
 /** Default physical height (world px) for entities missing collider.physicalHeight. */
 export const DEFAULT_PHYSICAL_HEIGHT = 8;
 
 /** Max elevation step (world px) an entity can walk up without jumping. Half an ELEVATION_PX level. */
 export const STEP_UP_THRESHOLD = 4;
+
+// ── Ball throwing ──
+
+/** Minimum throw speed in world px/s (quick tap). */
+export const THROW_MIN_SPEED = 180;
+
+/** Maximum throw speed in world px/s (full charge). */
+export const THROW_MAX_SPEED = 300;
+
+/** Launch angle in radians (30 degrees from horizontal). */
+export const THROW_ANGLE = Math.PI / 6;
+
+/** Gravity for balls in world px/s² (floatier than jump gravity). */
+export const BALL_GRAVITY = 400;
+
+/** Fraction of velocity retained per bounce (vertical and horizontal). */
+export const BOUNCE_RESTITUTION = 0.55;
+
+/** Fraction of horizontal speed retained on ground bounce. */
+export const BOUNCE_FRICTION = 0.75;
+
+/** Minimum vertical speed to keep bouncing (below this the ball stops). */
+export const BOUNCE_STOP_VZ = 15;
+
+/** Speed impulse applied to entities hit by a ball (world px/s). */
+export const BALL_PUSH_SPEED = 60;
+
+/** Seconds before a stopped ball despawns. */
+export const BALL_DESPAWN_TIME = 3.0;

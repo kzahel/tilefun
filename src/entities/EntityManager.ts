@@ -106,7 +106,18 @@ export class EntityManager {
         const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         if (overlapsAnyProp(aabb, selfWz, selfHeight)) return true;
         if (getHeight) {
-          if (isElevationBlocked3D(aabb, selfWz, getHeight, STEP_UP_THRESHOLD)) return true;
+          // Airborne entities can't step up — must be above terrain to pass
+          const elevStepUp = self.jumpVZ !== undefined ? 0 : STEP_UP_THRESHOLD;
+          if (isElevationBlocked3D(aabb, selfWz, getHeight, elevStepUp)) return true;
+          // Also check feet position — may be outside AABB due to collider offset.
+          // Without this, walking south lets feet cross onto elevated tiles before
+          // the AABB does, and ground tracking snaps wz up incorrectly.
+          if (self.collider) {
+            const feetWx = (aabb.left + aabb.right) / 2 - self.collider.offsetX;
+            const feetWy = aabb.bottom - self.collider.offsetY;
+            const feetSurfaceZ = getSurfaceZ(feetWx, feetWy, getHeight);
+            if (feetSurfaceZ > selfWz + elevStepUp) return true;
+          }
         }
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
@@ -194,7 +205,9 @@ export class EntityManager {
         }
 
         // Now move the player — entities are still solid blockers.
-        resolveCollision(player, dx, dy, getCollision, blockMask, makeExtraBlocker(player));
+        // Airborne players can fly over water tiles (land-in-water respawns them).
+        const playerMask = player.jumpVZ !== undefined ? CollisionFlag.Solid : blockMask;
+        resolveCollision(player, dx, dy, getCollision, playerMask, makeExtraBlocker(player));
       } else if (player.velocity) {
         player.position.wx += player.velocity.vx * dt;
         player.position.wy += player.velocity.vy * dt;
@@ -205,6 +218,7 @@ export class EntityManager {
     for (const entity of this.entities) {
       if (playerSet.has(entity) || !entity.velocity) continue;
       if (entity.parentId !== undefined) continue; // parented: position derived from parent
+      if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
       if (entityTickDts && !entityTickDts.has(entity)) continue;
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
@@ -254,6 +268,7 @@ export class EntityManager {
       for (const entity of this.entities) {
         if (entityTickDts && !entityTickDts.has(entity)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
+        if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
         const groundZ = getEffectiveGroundZ(entity);
         entity.groundZ = groundZ;
         if (entity.wz === undefined) {
@@ -378,6 +393,13 @@ export class EntityManager {
 
         e.position.wx = parent.position.wx + (e.localOffsetX ?? 0);
         e.position.wy = parent.position.wy + (e.localOffsetY ?? 0);
+        // Track rider Z to mount's surface + ride offset (jumpZ stores the offset)
+        if (parent.wz !== undefined && e.jumpZ !== undefined) {
+          e.wz = parent.wz + e.jumpZ;
+        }
+        if (parent.groundZ !== undefined) {
+          e.groundZ = parent.groundZ;
+        }
         resolved.add(e.id);
         remaining--;
       }

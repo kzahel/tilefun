@@ -9,3 +9,4 @@
 - Cars! Jump onto them and ride on top (new entity type needed)
 - Player should be invulnerable to enemies while riding a mount
 - Limit bad ghosts to max 3 on screen (extras should disappear); no limit on good ghosts
+- Bad ghosts can't go on streets — streets are safe zones

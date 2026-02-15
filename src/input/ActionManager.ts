@@ -1,6 +1,7 @@
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import { GamepadPoller } from "./GamepadPoller.js";
+import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
 
 const SQRT2_INV = 1 / Math.sqrt(2);
@@ -21,6 +22,7 @@ export class ActionManager {
   private readonly keysDown = new Set<string>();
   private readonly listeners = new Map<ActionName, Set<DiscreteCallback>>();
   private touchJoystick: TouchJoystick | null = null;
+  private touchButtons: TouchButtons | null = null;
   private gamepadPoller: GamepadPoller | null = new GamepadPoller();
 
   constructor(config?: ActionMapConfig) {
@@ -61,6 +63,10 @@ export class ActionManager {
     this.touchJoystick = joystick;
   }
 
+  setTouchButtons(buttons: TouchButtons): void {
+    this.touchButtons = buttons;
+  }
+
   attach(): void {
     window.addEventListener("keydown", this.onKeyDown);
     window.addEventListener("keyup", this.onKeyUp);
@@ -77,6 +83,12 @@ export class ActionManager {
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {
+    // Check on-screen touch buttons
+    if (this.touchButtons) {
+      if (action === "jump" && this.touchButtons.jumpPressed) return true;
+      if (action === "throw" && this.touchButtons.throwPressed) return true;
+      if (action === "sprint" && this.touchButtons.sprintPressed) return true;
+    }
     const binding = this.config.find((b) => b.action === action);
     if (!binding) return false;
     return binding.keys.some((k) => this.keysDown.has(k));
@@ -85,7 +97,12 @@ export class ActionManager {
   getMovement(): Movement {
     if (this.touchJoystick?.isActive()) {
       const touch = this.touchJoystick.getMovement();
-      return { dx: touch.dx, dy: touch.dy, sprinting: false, jump: this.touchJoystick.jumping };
+      return {
+        dx: touch.dx,
+        dy: touch.dy,
+        sprinting: this.isHeld("sprint"),
+        jump: this.isHeld("jump"),
+      };
     }
     let dx = 0;
     let dy = 0;

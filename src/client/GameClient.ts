@@ -2,6 +2,8 @@ import { loadAtlasIndex } from "../assets/AtlasIndex.js";
 import { loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { AudioManager } from "../audio/AudioManager.js";
+import { buildFootstepManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
@@ -17,6 +19,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { ActionManager } from "../input/ActionManager.js";
+import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
@@ -59,6 +62,7 @@ export class GameClient {
   private tileRenderer: TileRenderer;
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
+  private touchButtons: TouchButtons;
   private debugPanel: DebugPanel;
   private editorMode: EditorMode;
   private editorPanel: EditorPanel;
@@ -75,11 +79,15 @@ export class GameClient {
   private consoleEngine: ConsoleEngine;
   private consoleUI: ConsoleUI;
   private chatHUD: ChatHUD;
+  private audioManager: AudioManager;
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
   private debugEnabled = false;
+
+  /** Guard to prevent concurrent toggleMenu() calls from pushing duplicate MenuScenes. */
+  private menuOpening = false;
 
   /** Request/response correlation for serialized mode. */
   private nextRequestId = 1;
@@ -127,7 +135,11 @@ export class GameClient {
       this.actions.disableGamepad();
     }
     this.touchJoystick = new TouchJoystick(canvas);
+    this.touchButtons = new TouchButtons(canvas);
+    // Let joystick skip touches claimed by on-screen buttons
+    this.touchJoystick.claimedTouches = this.touchButtons.claimedTouches;
     this.actions.setTouchJoystick(this.touchJoystick);
+    this.actions.setTouchButtons(this.touchButtons);
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera, this.actions);
     this.editorPanel = new EditorPanel();
@@ -155,6 +167,7 @@ export class GameClient {
     };
     this.consoleUI = new ConsoleUI(this.consoleEngine);
     this.chatHUD = new ChatHUD();
+    this.audioManager = new AudioManager();
 
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
@@ -265,11 +278,12 @@ export class GameClient {
   async init(): Promise<void> {
     this.resize();
     window.addEventListener("resize", () => this.resize());
-    // Prevent buttons/selects from stealing keyboard focus — keeps all keys routed to the game.
+    // Prevent buttons from stealing keyboard focus — keeps all keys routed to the game.
     // Text inputs (e.g. MainMenu world name/seed) are excluded so they remain typeable.
+    // SELECT elements are NOT prevented — preventDefault on mousedown blocks native dropdowns.
     document.addEventListener("mousedown", (e) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === "BUTTON" || tag === "SELECT") {
+      if (tag === "BUTTON") {
         e.preventDefault();
       }
     });
@@ -278,6 +292,19 @@ export class GameClient {
     this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
     this.actions.attach();
     this.bindActions();
+
+    // Unlock Web Audio on first user gesture (autoplay policy)
+    const unlockAudio = () => {
+      this.audioManager.tryResume();
+      if (this.audioManager.ready) {
+        document.removeEventListener("click", unlockAudio);
+        document.removeEventListener("keydown", unlockAudio);
+        document.removeEventListener("touchstart", unlockAudio);
+      }
+    };
+    document.addEventListener("click", unlockAudio);
+    document.addEventListener("keydown", unlockAudio);
+    document.addEventListener("touchstart", unlockAudio);
 
     // Build GameContext and wire it into the scene manager
     const gc = this.buildGameContext();
@@ -324,7 +351,11 @@ export class GameClient {
 
     // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
-    const [assets] = await Promise.all([loadGameAssets(blendGraph), loadAtlasIndex()]);
+    const [assets] = await Promise.all([
+      loadGameAssets(blendGraph),
+      loadAtlasIndex(),
+      this.audioManager.preload(buildFootstepManifest()),
+    ]);
     this.sheets = assets.sheets;
     this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
     this.tileRenderer.setRoadSheets(this.sheets);
@@ -512,6 +543,7 @@ export class GameClient {
   destroy(): void {
     this.loop.stop();
     this.gcFlushServer();
+    this.transport.close();
     this.scenes.clear();
     this.actions.detach();
     this.consoleUI.destroy();
@@ -558,16 +590,22 @@ export class GameClient {
   }
 
   private async toggleMenu(): Promise<void> {
-    this.gcFlushServer();
-    if (this.serialized) {
-      const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
-        type: "list-realms",
-        requestId: this.nextRequestId++,
-      });
-      this.scenes.push(new MenuScene(resp.realms));
-    } else {
-      const worlds = await this.localServer.listWorlds();
-      this.scenes.push(new MenuScene(GameClient.toRealmInfoList(worlds)));
+    if (this.menuOpening) return;
+    this.menuOpening = true;
+    try {
+      this.gcFlushServer();
+      if (this.serialized) {
+        const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
+          type: "list-realms",
+          requestId: this.nextRequestId++,
+        });
+        this.scenes.push(new MenuScene(resp.realms));
+      } else {
+        const worlds = await this.localServer.listWorlds();
+        this.scenes.push(new MenuScene(GameClient.toRealmInfoList(worlds)));
+      }
+    } finally {
+      this.menuOpening = false;
     }
   }
 
@@ -633,12 +671,14 @@ export class GameClient {
         return client.sheets;
       },
       tileRenderer: this.tileRenderer,
+      audioManager: this.audioManager,
       editorMode: this.editorMode,
       editorPanel: this.editorPanel,
       mainMenu: this.mainMenu,
       propCatalog: this.propCatalog,
       debugPanel: this.debugPanel,
       touchJoystick: this.touchJoystick,
+      touchButtons: this.touchButtons,
       console: this.consoleEngine,
       consoleUI: this.consoleUI,
       chatHUD: this.chatHUD,

@@ -18,6 +18,7 @@ import { getTileDef, TileId } from "../world/TileRegistry.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import type { Renderable } from "./Renderable.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
 
@@ -198,6 +199,107 @@ export class TileRenderer {
         }
       }
     }
+  }
+
+  /**
+   * Collect elevation tiles as Y-sortable renderables so they interleave
+   * correctly with entities. Entities north of a cliff sort before it and
+   * get occluded; entities south (or on top with wz) sort after and draw
+   * on top. Each renderable's customDraw draws the same cliff face +
+   * elevated tile as drawElevation.
+   */
+  collectElevationRenderables(
+    ctx: CanvasRenderingContext2D,
+    camera: Camera,
+    world: World,
+    visible: ChunkRange,
+  ): Renderable[] {
+    const result: Renderable[] = [];
+    const tileScreenSize = TILE_SIZE * camera.scale;
+
+    for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
+      for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
+        const chunk = world.getChunkIfLoaded(cx, cy);
+        if (!chunk?.renderCache) continue;
+
+        // Fast skip: no elevation in this chunk
+        let hasElevation = false;
+        for (let i = 0; i < chunk.heightGrid.length; i++) {
+          if (chunk.heightGrid[i] !== 0) {
+            hasElevation = true;
+            break;
+          }
+        }
+        if (!hasElevation) continue;
+
+        const origin = chunkToWorld(cx, cy);
+        const screenOrigin = camera.worldToScreen(origin.wx, origin.wy);
+        const chunkSx = Math.round(screenOrigin.sx);
+        const chunkSy = Math.round(screenOrigin.sy);
+
+        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+          for (let lx = 0; lx < CHUNK_SIZE; lx++) {
+            const h = chunk.getHeight(lx, ly);
+            if (h <= 0) continue;
+
+            const tileSx = chunkSx + lx * tileScreenSize;
+            const tileSy = chunkSy + ly * tileScreenSize;
+            const cliffH = h * ELEVATION_PX * camera.scale;
+            const srcX = lx * TILE_SIZE;
+            const srcY = ly * TILE_SIZE;
+
+            // Capture renderCache reference — stable for the frame
+            const cache = chunk.renderCache;
+
+            const globalTy = cy * CHUNK_SIZE + ly;
+            result.push({
+              // Sort at the tile's south edge so entities behind sort earlier
+              position: { wx: origin.wx + lx * TILE_SIZE, wy: (globalTy + 1) * TILE_SIZE },
+              sprite: null,
+              customDraw: () => {
+                // 1. Cliff face: stretch bottom 1px row downward
+                ctx.drawImage(
+                  cache,
+                  srcX,
+                  srcY + TILE_SIZE - 1,
+                  TILE_SIZE,
+                  1,
+                  tileSx,
+                  tileSy + tileScreenSize - cliffH,
+                  tileScreenSize,
+                  cliffH,
+                );
+                // Darken the cliff face
+                ctx.globalAlpha = 0.35;
+                ctx.fillStyle = "#000";
+                ctx.fillRect(tileSx, tileSy + tileScreenSize - cliffH, tileScreenSize, cliffH);
+                ctx.globalAlpha = 1;
+
+                // 2. Elevated tile shifted up
+                ctx.drawImage(
+                  cache,
+                  srcX,
+                  srcY,
+                  TILE_SIZE,
+                  TILE_SIZE,
+                  tileSx,
+                  tileSy - cliffH,
+                  tileScreenSize,
+                  tileScreenSize,
+                );
+
+                // 3. Subtle darken on elevated surface
+                ctx.globalAlpha = 0.12;
+                ctx.fillStyle = "#000";
+                ctx.fillRect(tileSx, tileSy - cliffH, tileScreenSize, tileScreenSize);
+                ctx.globalAlpha = 1;
+              },
+            });
+          }
+        }
+      }
+    }
+    return result;
   }
 
   /**
