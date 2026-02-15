@@ -135,47 +135,48 @@ function drawSprite(
 
 function drawElevation(ctx: CanvasRenderingContext2D, camera: Camera, item: ElevationItem): void {
   const tileScreenSize = TILE_SIZE * camera.scale;
-  // Convert tile top-left world position to screen
   const screen = camera.worldToScreen(item.wx, item.wy);
   const tileSx = Math.round(screen.sx);
   const tileSy = Math.round(screen.sy);
   const cliffH = item.height * ELEVATION_PX * camera.scale;
 
-  // 1. Cliff face: stretch bottom 1px row downward
-  ctx.drawImage(
-    item.chunkCache,
-    item.srcX,
-    item.srcY + TILE_SIZE - 1,
-    TILE_SIZE,
-    1,
-    tileSx,
-    tileSy + tileScreenSize - cliffH,
-    tileScreenSize,
-    cliffH,
-  );
-  // Darken the cliff face
-  ctx.globalAlpha = 0.35;
-  ctx.fillStyle = "#000";
-  ctx.fillRect(tileSx, tileSy + tileScreenSize - cliffH, tileScreenSize, cliffH);
-  ctx.globalAlpha = 1;
-
-  // 2. Elevated tile shifted up
-  ctx.drawImage(
-    item.chunkCache,
-    item.srcX,
-    item.srcY,
-    TILE_SIZE,
-    TILE_SIZE,
-    tileSx,
-    tileSy - cliffH,
-    tileScreenSize,
-    tileScreenSize,
-  );
-  // Subtle darken on elevated surface so it reads as raised
-  ctx.globalAlpha = 0.12;
-  ctx.fillStyle = "#000";
-  ctx.fillRect(tileSx, tileSy - cliffH, tileScreenSize, tileScreenSize);
-  ctx.globalAlpha = 1;
+  if (item.phase === "surface") {
+    // Elevated tile shifted up
+    ctx.drawImage(
+      item.chunkCache,
+      item.srcX,
+      item.srcY,
+      TILE_SIZE,
+      TILE_SIZE,
+      tileSx,
+      tileSy - cliffH,
+      tileScreenSize,
+      tileScreenSize,
+    );
+    // Subtle darken on elevated surface so it reads as raised
+    ctx.globalAlpha = 0.12;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(tileSx, tileSy - cliffH, tileScreenSize, tileScreenSize);
+    ctx.globalAlpha = 1;
+  } else {
+    // Cliff face: stretch bottom 1px row downward
+    ctx.drawImage(
+      item.chunkCache,
+      item.srcX,
+      item.srcY + TILE_SIZE - 1,
+      TILE_SIZE,
+      1,
+      tileSx,
+      tileSy + tileScreenSize - cliffH,
+      tileScreenSize,
+      cliffH,
+    );
+    // Darken the cliff face
+    ctx.globalAlpha = 0.35;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(tileSx, tileSy + tileScreenSize - cliffH, tileScreenSize, cliffH);
+    ctx.globalAlpha = 1;
+  }
 }
 
 function drawGrass(

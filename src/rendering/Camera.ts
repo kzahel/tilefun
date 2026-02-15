@@ -59,6 +59,11 @@ export class Camera {
     this.firstFollow = false;
   }
 
+  /** Make the next follow() call snap instead of lerping (e.g. after switching worlds). */
+  requestSnap(): void {
+    this.firstFollow = true;
+  }
+
   /** Smoothly move toward a target position using linear interpolation. */
   follow(targetX: number, targetY: number, lerpFactor: number): void {
     if (this.firstFollow) {

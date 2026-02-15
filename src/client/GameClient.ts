@@ -200,10 +200,17 @@ export class GameClient {
           } else {
             this.camera.snapTo(msg.cameraX, msg.cameraY);
             this.camera.zoom = msg.cameraZoom;
+            // Snap to player position on next follow() — avoids lerp when
+            // switching worlds where the player position differs from saved camera.
+            this.camera.requestSnap();
           }
           this.gcSendVisibleRange();
           this.lobbyRealmList = null;
         } else if (msg.type === "realm-list") {
+          // Skip unsolicited-broadcast handling when this is a response to
+          // a gcSendRequest (e.g. from toggleMenu) — the requestId resolver
+          // below will deliver it to the caller, which pushes MenuScene itself.
+          const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
           if (this.autoJoinRealm && msg.realms.length > 0) {
             // P2P guest: auto-join the most active realm (skip menu)
             const target = msg.realms.find((r) => r.playerCount > 0) ?? msg.realms[0]!;
@@ -213,14 +220,14 @@ export class GameClient {
               requestId: this.nextRequestId++,
               worldId: target.id,
             });
-          } else if (this.initDone) {
-            // Show realm browser immediately
+          } else if (!isRequestResponse && this.initDone) {
+            // Unsolicited broadcast — show realm browser immediately
             if (!this.scenes.has(MenuScene)) {
               this.scenes.push(new MenuScene(msg.realms));
             } else {
               this.mainMenu.show(msg.realms);
             }
-          } else {
+          } else if (!isRequestResponse) {
             // Buffer for after init completes
             this.lobbyRealmList = msg.realms;
           }
@@ -417,9 +424,9 @@ export class GameClient {
       } else {
         this.localServer.loadWorld(id).then((cam) => {
           this.mainMenu.currentWorldId = id;
-          this.camera.x = cam.cameraX;
-          this.camera.y = cam.cameraY;
+          this.camera.snapTo(cam.cameraX, cam.cameraY);
           this.camera.zoom = cam.cameraZoom;
+          this.camera.requestSnap();
           this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
           if (this.scenes.has(MenuScene)) this.scenes.pop();
         });
@@ -449,9 +456,9 @@ export class GameClient {
         this.localServer.createWorld(name, worldType, seed).then((meta) => {
           this.localServer.loadWorld(meta.id).then((cam) => {
             this.mainMenu.currentWorldId = meta.id;
-            this.camera.x = cam.cameraX;
-            this.camera.y = cam.cameraY;
+            this.camera.snapTo(cam.cameraX, cam.cameraY);
             this.camera.zoom = cam.cameraZoom;
+            this.camera.requestSnap();
             this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
             if (this.scenes.has(MenuScene)) this.scenes.pop();
           });

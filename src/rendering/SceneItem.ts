@@ -38,6 +38,11 @@ export interface SpriteItem {
 export interface ElevationItem {
   kind: "elevation";
   sortKey: number;
+  /**
+   * "surface" draws the tile shifted up (background for entities on this level).
+   * "cliff" draws the cliff face (occludes entities at lower elevations).
+   */
+  phase: "surface" | "cliff";
   /** Tile top-left world X. */
   wx: number;
   /** Tile top-left world Y. */

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { ELEVATION_PX } from "../config/constants.js";
+import { ELEVATION_PX, STEP_UP_THRESHOLD } from "../config/constants.js";
 import type { AABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
+import type { Prop } from "../entities/Prop.js";
 import type { MovementContext } from "./MovementContext.js";
 import {
   applyMountInput,
@@ -10,6 +11,7 @@ import {
   setGravityScale,
   tickJumpGravity,
 } from "./PlayerMovement.js";
+import { applyGroundTracking, getEffectiveGroundZ } from "./surfaceHeight.js";
 
 /** Flat terrain getHeight — all tiles at height 0. */
 const flatHeight = () => 0;
@@ -391,5 +393,108 @@ describe("server/client context parity", () => {
     // Both should be blocked
     expect(serverPlayer.position.wx).toBe(clientPlayer.position.wx);
     expect(serverPlayer.position.wx).toBe(100);
+  });
+});
+
+describe("mount ground tracking", () => {
+  /** Create a walkable prop (like a seesaw step) at a given position with a walkable surface. */
+  function makeWalkableProp(wx: number, wy: number, topZ: number): Prop {
+    return {
+      id: 100,
+      type: "test-step",
+      position: { wx, wy },
+      sprite: { sheetKey: "test", frameCol: 0, frameRow: 0, spriteWidth: 16, spriteHeight: 16 },
+      collider: {
+        offsetX: 0,
+        offsetY: 0,
+        width: 32,
+        height: 32,
+        zBase: 0,
+        zHeight: topZ,
+        walkableTop: true,
+        passable: true,
+      },
+      walls: null,
+      isProp: true,
+    };
+  }
+
+  it("getEffectiveGroundZ detects walkable prop surfaces", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = 0;
+
+    const prop = makeWalkableProp(100, 100, STEP_UP_THRESHOLD);
+    const groundZ = getEffectiveGroundZ(mount, flatHeight, [prop], []);
+
+    expect(groundZ).toBe(STEP_UP_THRESHOLD);
+  });
+
+  it("applyGroundTracking snaps mount wz to walkable surface", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = 0;
+
+    const groundZ = STEP_UP_THRESHOLD;
+    applyGroundTracking(mount, groundZ, false);
+
+    expect(mount.wz).toBe(STEP_UP_THRESHOLD);
+    expect(mount.groundZ).toBe(STEP_UP_THRESHOLD);
+  });
+
+  it("mount + rider wz stays in sync across step-ups", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = 0;
+    mount.groundZ = 0;
+
+    const rider = createPlayer(100, 100);
+    rider.parentId = mount.id;
+    rider.jumpZ = 10; // ride offset
+    rider.wz = 10; // initially at mount.wz + jumpZ
+
+    // Simulate mount walking onto a step
+    const stepZ = STEP_UP_THRESHOLD;
+    applyGroundTracking(mount, stepZ, false);
+
+    // Derive rider wz from mount (same as resolveParentedPositions)
+    if (mount.wz !== undefined && rider.jumpZ !== undefined) {
+      rider.wz = mount.wz + rider.jumpZ;
+    }
+
+    expect(mount.wz).toBe(stepZ);
+    expect(rider.wz).toBe(stepZ + 10);
+  });
+
+  it("mount steps up progressively through staircase", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = 0;
+
+    // Simulate walking up 3 steps, each STEP_UP_THRESHOLD high
+    for (let step = 1; step <= 3; step++) {
+      const groundZ = step * STEP_UP_THRESHOLD;
+      applyGroundTracking(mount, groundZ, false);
+      expect(mount.wz).toBe(groundZ);
+    }
+  });
+
+  it("mount snaps down when walking off a step (canFall=false)", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = STEP_UP_THRESHOLD * 2;
+
+    // Walk off to flat ground
+    applyGroundTracking(mount, 0, false);
+
+    // NPC mount snaps down (canFall=false means instant snap, not fall)
+    expect(mount.wz).toBe(0);
+  });
+
+  it("getEffectiveGroundZ uses AABB-max for terrain under mount", () => {
+    const mount = createPlayer(100, 100);
+    mount.wz = 0;
+    // Mount straddles two tiles — one flat, one at elevation 1
+    const getHeight = (tx: number, ty: number) => (tx === 6 && ty === 6 ? 1 : 0);
+
+    const groundZ = getEffectiveGroundZ(mount, getHeight, [], []);
+
+    // Should use the max elevation under the AABB
+    expect(groundZ).toBe(ELEVATION_PX);
   });
 });

@@ -301,6 +301,15 @@ function drawCollisionBoxes(
       }
       drawZLabel(ctx, sx + w + 2, sy + h / 2, zBase, prop.collider.zHeight);
     }
+
+    // Prop type label below the sprite
+    const labelScreen = camera.worldToScreen(prop.position.wx, prop.position.wy);
+    const label = prop.type.replace("prop-", "");
+    ctx.font = "9px monospace";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "rgba(255, 200, 100, 0.9)";
+    ctx.fillText(label, Math.floor(labelScreen.sx), Math.floor(labelScreen.sy + 4));
+    ctx.textAlign = "start";
   }
 
   ctx.restore();

@@ -151,6 +151,144 @@ describe("EntityManager", () => {
     });
   });
 
+  describe("resolveParentedPositions", () => {
+    it("derives child XY from parent position + local offsets", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 200));
+      const child = em.spawn(createPlayer(0, 0));
+      child.parentId = parent.id;
+      child.localOffsetX = 5;
+      child.localOffsetY = -3;
+
+      em.resolveParentedPositions([]);
+
+      expect(child.position.wx).toBe(105);
+      expect(child.position.wy).toBe(197);
+    });
+
+    it("derives child wz from parent wz + child jumpZ", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 100));
+      parent.wz = 16;
+      const child = em.spawn(createPlayer(0, 0));
+      child.parentId = parent.id;
+      child.jumpZ = 10; // ride offset
+
+      em.resolveParentedPositions([]);
+
+      expect(child.wz).toBe(26); // parent.wz + child.jumpZ
+    });
+
+    it("derives child groundZ from parent groundZ", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 100));
+      parent.groundZ = 8;
+      const child = em.spawn(createPlayer(0, 0));
+      child.parentId = parent.id;
+
+      em.resolveParentedPositions([]);
+
+      expect(child.groundZ).toBe(8);
+    });
+
+    it("child wz tracks parent wz changes", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 100));
+      parent.wz = 0;
+      const child = em.spawn(createPlayer(0, 0));
+      child.parentId = parent.id;
+      child.jumpZ = 10;
+
+      em.resolveParentedPositions([]);
+      expect(child.wz).toBe(10);
+
+      // Parent walks onto elevated surface
+      parent.wz = 8;
+      em.resolveParentedPositions([]);
+      expect(child.wz).toBe(18);
+    });
+
+    it("auto-detaches child when parent is removed", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 100));
+      const child = em.spawn(createPlayer(50, 50));
+      child.parentId = parent.id;
+
+      em.remove(parent.id);
+      em.resolveParentedPositions([]);
+
+      expect(child.parentId).toBeUndefined();
+      expect(child.localOffsetX).toBeUndefined();
+      // Position unchanged (stays at last set value)
+      expect(child.position.wx).toBe(50);
+    });
+
+    it("works with player entities passed separately", () => {
+      const em = new EntityManager();
+      const mount = em.spawn(createPlayer(200, 300));
+      mount.wz = 12;
+      const player = createPlayer(0, 0); // not in em.entities
+      player.id = 999;
+      player.parentId = mount.id;
+      player.localOffsetX = 0;
+      player.localOffsetY = 0;
+      player.jumpZ = 10;
+
+      em.resolveParentedPositions([player]);
+
+      expect(player.position.wx).toBe(200);
+      expect(player.position.wy).toBe(300);
+      expect(player.wz).toBe(22);
+    });
+
+    it("uses zero offset when localOffset is undefined", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(50, 75));
+      const child = em.spawn(createPlayer(0, 0));
+      child.parentId = parent.id;
+      // localOffsetX/Y not set
+
+      em.resolveParentedPositions([]);
+
+      expect(child.position.wx).toBe(50);
+      expect(child.position.wy).toBe(75);
+    });
+  });
+
+  describe("ground tracking skips parented entities", () => {
+    const flatHeight = () => 0;
+
+    it("does not apply ground tracking to parented entity", () => {
+      const em = new EntityManager();
+      const parent = em.spawn(createPlayer(100, 100));
+      parent.wz = 0;
+      const child = em.spawn(createPlayer(100, 100));
+      child.parentId = parent.id;
+      child.wz = 20; // elevated — should NOT be snapped to ground
+      child.jumpZ = 10;
+
+      em.update(1 / 60, noCollision, [parent], emptyProps, undefined, flatHeight);
+
+      // child.wz should be derived from parent, not ground-tracked
+      // resolveParentedPositions sets wz = parent.wz + jumpZ = 0 + 10 = 10
+      expect(child.wz).toBe(10);
+    });
+
+    it("applies ground tracking to non-parented entities", () => {
+      const em = new EntityManager();
+      const entity = em.spawn(createPlayer(100, 100));
+      delete entity.wz; // uninitialized
+      const player = createPlayer(0, 0);
+      player.id = 999;
+
+      em.update(1 / 60, noCollision, [player], emptyProps, undefined, flatHeight);
+
+      // Should be initialized to ground level
+      expect(entity.wz).toBe(0);
+      expect(entity.groundZ).toBe(0);
+    });
+  });
+
   describe("getYSorted", () => {
     it("returns entities sorted by Y position", () => {
       const em = new EntityManager();

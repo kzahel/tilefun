@@ -144,18 +144,30 @@ export class TileRenderer {
             if (h <= 0) continue;
 
             const globalTy = cy * CHUNK_SIZE + ly;
-            result.push({
-              kind: "elevation",
-              // Sort at the tile's south edge minus elevation offset so entities
-              // standing on the surface (whose sortKey includes h * ELEVATION_PX)
-              // always sort after their own tile.
-              sortKey: (globalTy + 1) * TILE_SIZE - h * ELEVATION_PX,
-              wx: origin.wx + lx * TILE_SIZE,
-              wy: origin.wy + ly * TILE_SIZE,
+            const tileWx = origin.wx + lx * TILE_SIZE;
+            const tileWy = origin.wy + ly * TILE_SIZE;
+            const base = {
+              kind: "elevation" as const,
+              wx: tileWx,
+              wy: tileWy,
               chunkCache: chunk.renderCache,
               srcX: lx * TILE_SIZE,
               srcY: ly * TILE_SIZE,
               height: h,
+            };
+            // Surface: sorts just before entities at this elevation so they
+            // draw on top of their own ground.
+            result.push({
+              ...base,
+              phase: "surface",
+              sortKey: globalTy * TILE_SIZE + h * ELEVATION_PX - 0.5,
+            });
+            // Cliff face: sorts at the tile's south edge so it occludes
+            // lower-elevation entities approaching from the north.
+            result.push({
+              ...base,
+              phase: "cliff",
+              sortKey: (globalTy + 1) * TILE_SIZE,
             });
           }
         }

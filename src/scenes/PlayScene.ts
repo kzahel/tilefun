@@ -302,10 +302,15 @@ export class PlayScene implements GameScene {
       }
 
       // Camera follows predicted player position (stateView.playerEntity
-      // returns the predicted player when predictor is attached)
+      // returns the predicted player when predictor is attached).
+      // Skip follow when player is a placeholder (id -1) — e.g. between
+      // world switch and first game-state — so camera.requestSnap() stays
+      // pending until a real player position arrives.
       const playerEnt = gc.stateView.playerEntity;
-      const zOffset = verticalFollow ? (playerEnt.wz ?? 0) : 0;
-      gc.camera.follow(playerEnt.position.wx, playerEnt.position.wy - zOffset, CAMERA_LERP);
+      if (playerEnt.id !== -1) {
+        const zOffset = verticalFollow ? (playerEnt.wz ?? 0) : 0;
+        gc.camera.follow(playerEnt.position.wx, playerEnt.position.wy - zOffset, CAMERA_LERP);
+      }
       if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
         const savedZoom = gc.camera.zoom;
         gc.camera.zoom = 1;

@@ -211,13 +211,23 @@ export class PlayerPredictor {
       const oldMountX = this.predictedMount.position.wx;
       const oldMountY = this.predictedMount.position.wy;
 
-      // Snap mount to server's authoritative position
+      // Snap mount to server's authoritative position and Z state
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
       this.predictedMount.collider = serverMount.collider;
       this.predictedMount.sprite = serverMount.sprite ? { ...serverMount.sprite } : null;
       if (serverMount.wanderAI) {
         this.predictedMount.wanderAI = { ...serverMount.wanderAI };
+      }
+      if (serverMount.wz !== undefined) {
+        this.predictedMount.wz = serverMount.wz;
+      } else {
+        delete this.predictedMount.wz;
+      }
+      if (serverMount.groundZ !== undefined) {
+        this.predictedMount.groundZ = serverMount.groundZ;
+      } else {
+        delete this.predictedMount.groundZ;
       }
 
       // Snap player to server position
@@ -331,6 +341,13 @@ export class PlayerPredictor {
     if (serverPlayer.deathTimer !== undefined) this.predicted.deathTimer = serverPlayer.deathTimer;
   }
 
+  /** Clear predicted state (e.g. when switching worlds). */
+  clearPredicted(): void {
+    this.predicted = null;
+    this.predictedMount = null;
+    this.inputBuffer = [];
+  }
+
   /** Get the predicted player entity (or null before first server state). */
   get player(): Entity | null {
     return this.predicted;
@@ -404,9 +421,18 @@ export class PlayerPredictor {
       );
       moveAndCollide(this.predictedMount, dt, mountCtx);
 
+      // Ground tracking for mount — keep wz in sync with terrain/prop surfaces
+      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
+      const mountGroundZ = getEffectiveGroundZ(this.predictedMount, getHeight, props, entities);
+      applyGroundTracking(this.predictedMount, mountGroundZ, false);
+
       // Derive player position from mount + offset
       this.predicted.position.wx = this.predictedMount.position.wx + this.mountOffsetX;
       this.predicted.position.wy = this.predictedMount.position.wy + this.mountOffsetY;
+      // Derive player wz from mount surface + ride offset
+      if (this.predictedMount.wz !== undefined && this.predicted.jumpZ !== undefined) {
+        this.predicted.wz = this.predictedMount.wz + this.predicted.jumpZ;
+      }
     } else {
       // ── Normal: apply input to player directly ──
       updatePlayerFromInput(this.predicted, movement, dt);

@@ -234,6 +234,7 @@ export class RemoteStateView implements ClientStateView {
     this._remoteCursors = [];
     this._playerNames = {};
     this._pendingState = null; // Fix: clear stale pending state from old realm
+    this._predictor?.clearPredicted();
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);

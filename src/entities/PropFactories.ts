@@ -230,6 +230,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 48,
     height: 32,
     collider: { offsetX: 0, offsetY: 0, width: 40, height: 16 },
+    walls: makeStairSteps({ totalWidth: 40, depth: 16, peakHeight: 8 }),
     material: MaterialType.Wood,
   },
   "prop-bouncy-castle": {
