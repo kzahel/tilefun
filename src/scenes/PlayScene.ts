@@ -346,9 +346,8 @@ export class PlayScene implements GameScene {
     }
 
     // Detect player hit (invincibility transition 0 → >0) and trigger screen shake + sound.
-    // Skip if the player was airborne — that's a water-respawn blink, not a ghost hit.
     const invTimer = gc.stateView.invincibilityTimer;
-    if (invTimer > 0 && this.prevInvincibilityTimer === 0 && !this.wasAirborne) {
+    if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
       gc.camera.shake(HIT_SHAKE_INTENSITY);
       playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
     }
@@ -502,6 +501,7 @@ export class PlayScene implements GameScene {
   private detectGhostDeaths(gc: GameContext): void {
     const liveIds = new Set<number>();
     const player = gc.stateView.playerEntity;
+    const airborne = player.jumpVZ !== undefined;
 
     for (const e of gc.stateView.entities) {
       if (e.deathTimer === undefined) continue;
@@ -513,6 +513,12 @@ export class PlayScene implements GameScene {
       const dx = e.position.wx - player.position.wx;
       const dy = e.position.wy - player.position.wy;
       const dist = Math.sqrt(dx * dx + dy * dy);
+
+      // Stomp effect: player is airborne and close → cloud puff
+      if (airborne && dist < 32) {
+        this.particles.spawnStompCloud(e.position.wx, e.position.wy);
+      }
+
       if (dist > GHOST_DEATH_MAX_DISTANCE) continue;
 
       const distFactor = 1 - dist / GHOST_DEATH_MAX_DISTANCE;

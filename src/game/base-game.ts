@@ -6,6 +6,8 @@ const SCATTER_SPEED = 80;
 const SCATTER_OFFSET = 8;
 const KNOCKBACK_SPEED = 200;
 const INVINCIBILITY_DURATION = 1.5;
+const STOMP_BOUNCE_VZ = 150;
+const STOMP_DEATH_TIMER = 0.4;
 
 // ── Creature constants ──
 const BEFRIEND_RANGE = 24;
@@ -29,6 +31,23 @@ export const baseGameMod: Mod = {
       api.overlap.onOverlap("hostile", (self, other) => {
         const player = api.player.fromEntity(other);
         if (!player || player.isInvincible) return;
+
+        // Mario-style stomp: player falling from above kills the entity
+        if (
+          other.jumpVZ !== undefined &&
+          other.jumpVZ < 0 &&
+          other.wz > self.wz &&
+          self.deathTimer === undefined
+        ) {
+          self.setDeathTimer(STOMP_DEATH_TIMER);
+          self.removeTag("hostile");
+          self.setAIState("idle");
+          self.setVelocity(0, 0);
+          api.entities.spawn("gem", self.wx, self.wy);
+          other.setJumpVZ(STOMP_BOUNCE_VZ);
+          api.events.emit("enemy-stomped", { player, enemy: self });
+          return;
+        }
 
         player.knockback(self.wx, self.wy, KNOCKBACK_SPEED);
 

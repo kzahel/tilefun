@@ -18,6 +18,7 @@ interface Particle {
 
 const DIRT_COLORS = ["#8B6914", "#A0782C", "#6B4F1D", "#C4A265"];
 const WATER_COLORS = ["#4488CC", "#66AADD", "#3377BB", "#88CCEE", "#FFFFFF"];
+const CLOUD_COLORS = ["#FFFFFF", "#EEEEEE", "#DDDDDD", "#CCCCCC"];
 const GRAVITY = 120; // px/s²
 
 export class ParticleSystem {
@@ -41,6 +42,28 @@ export class ParticleSystem {
         maxLife: life,
         size: 1 + Math.random() * 1.2,
         color: DIRT_COLORS[Math.floor(Math.random() * DIRT_COLORS.length)] ?? "#8B6914",
+      });
+    }
+  }
+
+  /** Spawn a puff of white cloud particles (stomp effect). */
+  spawnStompCloud(wx: number, wy: number): void {
+    const count = 12;
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8;
+      const speed = 12 + Math.random() * 20;
+      const life = 0.3 + Math.random() * 0.15;
+      this.particles.push({
+        wx: wx + (Math.random() - 0.5) * 6,
+        wy: wy + (Math.random() - 0.5) * 3,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed * 0.4,
+        vz: 35 + Math.random() * 40,
+        z: 0,
+        life,
+        maxLife: life,
+        size: 2 + Math.random() * 1.5,
+        color: CLOUD_COLORS[Math.floor(Math.random() * CLOUD_COLORS.length)] ?? "#FFFFFF",
       });
     }
   }

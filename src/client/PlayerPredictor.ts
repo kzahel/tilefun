@@ -271,9 +271,20 @@ export class PlayerPredictor {
       const oldX = this.predicted.position.wx;
       const oldY = this.predicted.position.wy;
 
-      // Snap to server's authoritative position and jump state
+      // Snap to server's authoritative position, velocity, and jump state.
+      // Velocity must be snapped because the friction/acceleration model is
+      // path-dependent — replaying inputs from the wrong starting velocity
+      // produces different results than the server.
       this.predicted.position.wx = serverPlayer.position.wx;
       this.predicted.position.wy = serverPlayer.position.wy;
+      if (serverPlayer.velocity) {
+        if (!this.predicted.velocity) {
+          this.predicted.velocity = { vx: serverPlayer.velocity.vx, vy: serverPlayer.velocity.vy };
+        } else {
+          this.predicted.velocity.vx = serverPlayer.velocity.vx;
+          this.predicted.velocity.vy = serverPlayer.velocity.vy;
+        }
+      }
       if (serverPlayer.wz !== undefined) {
         this.predicted.wz = serverPlayer.wz;
       } else {
@@ -313,7 +324,21 @@ export class PlayerPredictor {
     // Copy server-authoritative state that we don't predict
     this.predicted.id = serverPlayer.id;
     this.predicted.collider = serverPlayer.collider;
-    this.predicted.sprite = serverPlayer.sprite;
+    // Sprite: copy structural fields (sheet, dimensions) from server, but
+    // preserve predicted animation state (moving, direction, frameRow,
+    // frameDuration). The server's sprite may have stale animation if a
+    // no-input tick or timing jitter set moving=false between acked inputs.
+    const predMoving = this.predicted.sprite?.moving;
+    const predDirection = this.predicted.sprite?.direction;
+    const predFrameRow = this.predicted.sprite?.frameRow;
+    const predFrameDuration = this.predicted.sprite?.frameDuration;
+    this.predicted.sprite = serverPlayer.sprite ? { ...serverPlayer.sprite } : null;
+    if (this.predicted.sprite && predMoving !== undefined) {
+      this.predicted.sprite.moving = predMoving;
+      this.predicted.sprite.direction = predDirection ?? this.predicted.sprite.direction;
+      this.predicted.sprite.frameRow = predFrameRow ?? this.predicted.sprite.frameRow;
+      if (predFrameDuration !== undefined) this.predicted.sprite.frameDuration = predFrameDuration;
+    }
     if (serverPlayer.parentId !== undefined) {
       this.predicted.parentId = serverPlayer.parentId;
     } else {

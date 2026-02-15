@@ -27,11 +27,11 @@ export const PLAYER_SPRINT_MULTIPLIER = 2;
 
 // ── Friction & acceleration (QuakeWorld-inspired) ──
 
-/** Base ground friction (QW default: 4, higher = snappier stops). */
-export const PLAYER_FRICTION = 6;
+/** Base ground friction (QW default: 4, ≥60 = instant stop like pre-friction). */
+export const PLAYER_FRICTION = 100;
 
-/** Ground acceleration multiplier (QW default: 10). */
-export const PLAYER_ACCELERATE = 10;
+/** Ground acceleration (QW default: 10, ≥60 = instant like pre-friction). */
+export const PLAYER_ACCELERATE = 100;
 
 /** Friction uses this as minimum speed for the control term (QW: 100). */
 export const PLAYER_STOP_SPEED = 16;

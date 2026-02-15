@@ -31,7 +31,12 @@ import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
-import { ACTIVE_PROFILE_KEY, HMR_KEY, TAB_SESSION_KEY } from "../shared/storageKeys.js";
+import {
+  ACTIVE_PROFILE_KEY,
+  HMR_KEY,
+  LAST_WORLD_KEY,
+  TAB_SESSION_KEY,
+} from "../shared/storageKeys.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
@@ -192,6 +197,7 @@ export class GameClient {
           );
           if (msg.worldId) {
             this.mainMenu.currentWorldId = msg.worldId;
+            sessionStorage.setItem(LAST_WORLD_KEY, msg.worldId);
           }
           remoteView.clear();
           if (this.hmrCameraRestored) {
@@ -212,8 +218,13 @@ export class GameClient {
           // below will deliver it to the caller, which pushes MenuScene itself.
           const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
           if (this.autoJoinRealm && msg.realms.length > 0) {
-            // P2P guest: auto-join the most active realm (skip menu)
-            const target = msg.realms.find((r) => r.playerCount > 0) ?? msg.realms[0]!;
+            // Auto-join: prefer the last world this tab was in (survives HMR /
+            // server restart), falling back to the most active realm.
+            const lastWorldId = sessionStorage.getItem(LAST_WORLD_KEY);
+            const target =
+              (lastWorldId && msg.realms.find((r) => r.id === lastWorldId)) ||
+              msg.realms.find((r) => r.playerCount > 0) ||
+              msg.realms[0]!;
             this.autoJoinRealm = false; // only auto-join once
             this.gcSendRequest({
               type: "join-realm",

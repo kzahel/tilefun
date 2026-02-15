@@ -49,6 +49,7 @@ import {
   moveAndCollide,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
+import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
@@ -371,19 +372,21 @@ export class Realm {
         session.lastJumpHeld = lastInput.jump;
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
-        // No input this tick — apply friction only (natural deceleration).
-        // With the friction model, velocity persists between ticks.
-        const noInputCtx = this.buildMovementContext(
-          new Set([session.player.id]),
-          session.debugNoclip,
-          session.player,
-        );
-        applyMovementPhysics(
-          session.player,
-          { dx: 0, dy: 0, sprinting: false, jump: false },
-          dt,
-          noInputCtx,
-        );
+        // No input this tick (timing jitter) — apply friction only.
+        // Don't call applyMovementPhysics here: it would set sprite.moving=false,
+        // causing animation flicker on the client. Sprite state should only
+        // change from actual player input, not from missing-input ticks.
+        const airborne = session.player.jumpVZ !== undefined;
+        if (!airborne) {
+          const surface = getSurfaceProperties(
+            session.player.position.wx,
+            session.player.position.wy,
+            (tx, ty) => this.world.getBlendBaseAt(tx, ty),
+            (tx, ty) => this.world.getRoadAt(tx, ty),
+            (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+          );
+          applyFriction(session.player, dt, surface.friction);
+        }
         // Also apply friction to mount when no input
         if (session.gameplaySession.mountId !== null) {
           const mount = this.entityManager.entities.find(
@@ -391,7 +394,6 @@ export class Realm {
           );
           if (mount?.velocity) {
             applyFriction(mount, dt, 1.0);
-            if (mount.sprite) mount.sprite.moving = false;
           }
         }
       }
@@ -704,7 +706,11 @@ export class Realm {
           maxCx: msg.maxCx,
           maxCy: msg.maxCy,
         };
-        this.updateVisibleChunks(session.visibleRange);
+        // Don't call updateVisibleChunks here — it uses a single session's
+        // range which unloads chunks that OTHER sessions need, creating
+        // invisible collision walls for far-away players. The tick method
+        // already computes the union of all sessions' visible ranges and
+        // calls updateVisibleChunks with that.
         break;
 
       case "flush":

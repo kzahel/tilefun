@@ -31,11 +31,25 @@ export class EntityHandle {
   get wy(): number {
     return this.entity.position.wy;
   }
+  get wz(): number {
+    return this.entity.wz ?? 0;
+  }
 
   setPosition(wx: number, wy: number): void {
     if (!this.alive) return;
     this.entity.position.wx = wx;
     this.entity.position.wy = wy;
+  }
+
+  // --- Jump / Z velocity ---
+
+  get jumpVZ(): number | undefined {
+    return this.entity.jumpVZ;
+  }
+
+  setJumpVZ(vz: number): void {
+    if (!this.alive) return;
+    this.entity.jumpVZ = vz;
   }
 
   // --- Velocity ---

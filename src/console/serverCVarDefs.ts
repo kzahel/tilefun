@@ -1,7 +1,7 @@
 import type { CVarDesc } from "./CVar.js";
 
 /** Shared server CVar definitions — used by both server (for real registration) and client (for stubs). */
-export const SERVER_CVAR_DEFS: readonly CVarDesc<number>[] = [
+export const SERVER_CVAR_DEFS: readonly CVarDesc[] = [
   {
     name: "sv_tickrate",
     description: "Server tick rate (Hz)",
@@ -36,6 +36,40 @@ export const SERVER_CVAR_DEFS: readonly CVarDesc<number>[] = [
     defaultValue: 1,
     min: 0.1,
     max: 10,
+    category: "sv",
+  },
+  {
+    name: "sv_nobunnyhop",
+    description: "Clamp player speed to wishspeed on jump (disables bunny-hopping)",
+    type: "boolean",
+    defaultValue: false,
+    category: "sv",
+  },
+  {
+    name: "sv_friction",
+    description: "Ground friction (QW: 4, ≥60 = instant stop)",
+    type: "number",
+    defaultValue: 100,
+    min: 0,
+    max: 1000,
+    category: "sv",
+  },
+  {
+    name: "sv_accelerate",
+    description: "Ground acceleration (QW: 10, ≥60 = instant)",
+    type: "number",
+    defaultValue: 100,
+    min: 0,
+    max: 1000,
+    category: "sv",
+  },
+  {
+    name: "sv_stopspeed",
+    description: "Friction control floor speed (QW: 100, default: 16)",
+    type: "number",
+    defaultValue: 16,
+    min: 0,
+    max: 500,
     category: "sv",
   },
 ];

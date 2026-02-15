@@ -1,5 +1,11 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
-import { setGravityScale } from "../physics/PlayerMovement.js";
+import {
+  setAccelerate,
+  setFriction,
+  setGravityScale,
+  setNoBunnyHop,
+  setStopSpeed,
+} from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
@@ -29,6 +35,30 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
   setGravityScale(sv_gravity.get() as number);
   sv_gravity.onChange((val) => {
     setGravityScale(val as number);
+  });
+
+  const sv_nobunnyhop = getCVar(engine, "sv_nobunnyhop");
+  setNoBunnyHop(sv_nobunnyhop.get() as boolean);
+  sv_nobunnyhop.onChange((val) => {
+    setNoBunnyHop(val as boolean);
+  });
+
+  const sv_friction = getCVar(engine, "sv_friction");
+  setFriction(sv_friction.get() as number);
+  sv_friction.onChange((val) => {
+    setFriction(val as number);
+  });
+
+  const sv_accelerate = getCVar(engine, "sv_accelerate");
+  setAccelerate(sv_accelerate.get() as number);
+  sv_accelerate.onChange((val) => {
+    setAccelerate(val as number);
+  });
+
+  const sv_stopspeed = getCVar(engine, "sv_stopspeed");
+  setStopSpeed(sv_stopspeed.get() as number);
+  sv_stopspeed.onChange((val) => {
+    setStopSpeed(val as number);
   });
 
   const sv_timescale = getCVar(engine, "sv_timescale");

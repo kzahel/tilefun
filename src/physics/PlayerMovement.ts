@@ -63,6 +63,14 @@ export function getStopSpeed(): number {
   return stopSpeedCVar;
 }
 
+let noBunnyHop = false;
+export function setNoBunnyHop(v: boolean): void {
+  noBunnyHop = v;
+}
+export function getNoBunnyHop(): boolean {
+  return noBunnyHop;
+}
+
 /**
  * Apply movement input to a mount entity (uses rideSpeed, updates sprite).
  * Shared between server (Realm) and client (PlayerPredictor).
@@ -113,6 +121,18 @@ export function applyMountInput(
 /** Initiate a jump if the entity is on the ground (no vertical velocity). */
 export function initiateJump(entity: Entity): void {
   if (entity.jumpVZ === undefined) {
+    // sv_nobunnyhop: clamp XY speed to max wishspeed on takeoff
+    if (noBunnyHop && entity.velocity) {
+      const maxWish = PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER;
+      const speed = Math.sqrt(
+        entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy,
+      );
+      if (speed > maxWish) {
+        const scale = maxWish / speed;
+        entity.velocity.vx *= scale;
+        entity.velocity.vy *= scale;
+      }
+    }
     const wz = entity.wz ?? 0;
     entity.wz = wz + 0.01;
     entity.jumpVZ = JUMP_VELOCITY;
