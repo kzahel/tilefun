@@ -111,6 +111,8 @@ export interface Entity {
   tickAccumulator?: number;
   /** Current height above ground in world pixels (jump mechanic). */
   jumpZ?: number;
+  /** Previous jumpZ (before last tick), for render interpolation. Ephemeral. */
+  prevJumpZ?: number;
   /** Vertical velocity in world px/s, positive = up (server-only, not serialized). */
   jumpVZ?: number;
   /** ID of the parent entity this entity is attached to (riding, carried, on platform, etc.). */

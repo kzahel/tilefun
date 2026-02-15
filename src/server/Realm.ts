@@ -1,28 +1,15 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import {
-  CHUNK_SIZE_PX,
-  JUMP_GRAVITY,
-  JUMP_VELOCITY,
-  PLAYER_SPEED,
-  PLAYER_SPRINT_MULTIPLIER,
-  RENDER_DISTANCE,
-  TICK_RATE,
-} from "../config/constants.js";
+import { CHUNK_SIZE_PX, JUMP_VELOCITY, RENDER_DISTANCE, TICK_RATE } from "../config/constants.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import {
-  type AABB,
   aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
-  getEntityElevation,
-  getSpeedMultiplier,
-  isElevationBlocked,
-  resolveCollision,
 } from "../entities/collision.js";
-import { type ColliderComponent, Direction, type Entity } from "../entities/Entity.js";
+import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
@@ -39,11 +26,17 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { MovementContext } from "../physics/MovementContext.js";
+import {
+  applyMountInput,
+  initiateJump,
+  moveAndCollide,
+  tickJumpGravity,
+} from "../physics/PlayerMovement.js";
 import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { tickAllAI } from "./tickAllAI.js";
@@ -246,8 +239,6 @@ export class Realm {
       if (!session.editorEnabled && session.inputQueue.length > 0) {
         const inputs = session.inputQueue;
         session.inputQueue = [];
-        const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
-        const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
 
         // Resolve mount entity for input redirection
         const mount =
@@ -259,26 +250,11 @@ export class Realm {
         // The entity that receives movement input (mount when riding, player otherwise)
         const movementTarget = mount ?? session.player;
 
-        // Extra blocker for simplified collision — props + solid entities + elevation.
-        // Matches makeExtraBlocker in EntityManager but without push mechanics.
-        const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
+        // Build MovementContext for simplified collision (extra inputs).
         const targetExclude = mount
           ? new Set([session.player.id, mount.id])
           : new Set([session.player.id]);
-        const extraBlocker = (aabb: AABB): boolean => {
-          const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
-          const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
-          const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
-          const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-          for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-            if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
-          }
-          const currentElev = getEntityElevation(movementTarget, getHeight);
-          if (isElevationBlocked(aabb, currentElev, movementTarget.jumpZ ?? 0, getHeight))
-            return true;
-          const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-          return aabbOverlapsAnyEntity(aabb, targetExclude, nearby);
-        };
+        const ctx = this.buildMovementContext(targetExclude, session.debugNoclip);
 
         // Process extra inputs (all but last) with simplified collision.
         // This handles the case where timing jitter causes 2+ client ticks
@@ -293,24 +269,13 @@ export class Realm {
               this.dismountPlayer(session);
               break; // Remaining inputs processed as normal player next tick
             }
-            this.applyMountInput(mount, input, session.player);
+            applyMountInput(mount, input, session.player);
           } else {
             updatePlayerFromInput(session.player, input, dt);
-            if (input.jump && !(session.player.jumpZ ?? 0)) {
-              session.player.jumpZ = 0.01;
-              session.player.jumpVZ = JUMP_VELOCITY;
-            }
+            if (input.jump) initiateJump(session.player);
           }
 
-          if (movementTarget.velocity && movementTarget.collider && !session.debugNoclip) {
-            const speedMult = getSpeedMultiplier(movementTarget.position, getCollision);
-            const pdx = movementTarget.velocity.vx * dt * speedMult;
-            const pdy = movementTarget.velocity.vy * dt * speedMult;
-            resolveCollision(movementTarget, pdx, pdy, getCollision, blockMask, extraBlocker);
-          } else if (movementTarget.velocity) {
-            movementTarget.position.wx += movementTarget.velocity.vx * dt;
-            movementTarget.position.wy += movementTarget.velocity.vy * dt;
-          }
+          moveAndCollide(movementTarget, dt, ctx);
           session.lastProcessedInputSeq = input.seq;
         }
 
@@ -327,7 +292,7 @@ export class Realm {
           if (lastInput.jump) {
             this.dismountPlayer(session);
           } else {
-            this.applyMountInput(currentMount, lastInput, session.player);
+            applyMountInput(currentMount, lastInput, session.player);
             // Zero player velocity — position derived from parent resolution
             if (session.player.velocity) {
               session.player.velocity.vx = 0;
@@ -336,10 +301,7 @@ export class Realm {
           }
         } else {
           updatePlayerFromInput(session.player, lastInput, dt);
-          if (lastInput.jump && !(session.player.jumpZ ?? 0)) {
-            session.player.jumpZ = 0.01;
-            session.player.jumpVZ = JUMP_VELOCITY;
-          }
+          if (lastInput.jump) initiateJump(session.player);
         }
         session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
@@ -406,19 +368,9 @@ export class Realm {
 
       // ── Jump physics for all players + mount detection on landing ──
       for (const session of activeSessions) {
-        const p = session.player;
-        if (p.jumpZ !== undefined && p.jumpZ > 0 && p.jumpVZ !== undefined) {
-          const wasAirborne = p.jumpZ > 0;
-          p.jumpVZ -= JUMP_GRAVITY * dt;
-          p.jumpZ += p.jumpVZ * dt;
-          if (p.jumpZ <= 0) {
-            delete p.jumpZ;
-            delete p.jumpVZ;
-            // On landing, check for rideable entity under the player
-            if (wasAirborne && session.gameplaySession.mountId === null) {
-              this.tryMountOnLanding(session);
-            }
-          }
+        const landed = tickJumpGravity(session.player, dt);
+        if (landed && session.gameplaySession.mountId === null) {
+          this.tryMountOnLanding(session);
         }
       }
 
@@ -734,50 +686,6 @@ export class Realm {
 
   // ---- Riding helpers ----
 
-  /** Apply movement input to a mount entity (uses rideSpeed, updates sprite). */
-  private applyMountInput(
-    mount: Entity,
-    input: { dx: number; dy: number; sprinting: boolean },
-    rider?: Entity,
-  ): void {
-    if (!mount.velocity) return;
-    const baseSpeed = mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
-    const speed = input.sprinting ? baseSpeed * PLAYER_SPRINT_MULTIPLIER : baseSpeed;
-    mount.velocity.vx = input.dx * speed;
-    mount.velocity.vy = input.dy * speed;
-
-    const moving = input.dx !== 0 || input.dy !== 0;
-    if (mount.sprite) {
-      mount.sprite.moving = moving;
-      if (moving) {
-        if (mount.wanderAI?.directional === false) {
-          // Non-directional sprites (e.g., cow): only flip horizontally, keep frameRow=0
-          if (input.dx !== 0) {
-            mount.sprite.flipX = input.dx < 0;
-          }
-        } else {
-          if (Math.abs(input.dx) >= Math.abs(input.dy)) {
-            mount.sprite.direction = input.dx > 0 ? Direction.Right : Direction.Left;
-          } else {
-            mount.sprite.direction = input.dy > 0 ? Direction.Down : Direction.Up;
-          }
-          mount.sprite.frameRow = mount.sprite.direction;
-        }
-      }
-    }
-
-    // Sync rider direction to match mount facing
-    if (rider?.sprite && mount.sprite) {
-      rider.sprite.direction =
-        mount.wanderAI?.directional === false
-          ? mount.sprite.flipX
-            ? Direction.Left
-            : Direction.Right
-          : mount.sprite.direction;
-      rider.sprite.frameRow = rider.sprite.direction;
-    }
-  }
-
   /** Dismount the player from their current mount. */
   private dismountPlayer(session: PlayerSession): void {
     const mountId = session.gameplaySession.mountId;
@@ -855,6 +763,33 @@ export class Realm {
   }
 
   // ---- Private ----
+
+  /** Build a MovementContext for simplified collision (extra-input processing). */
+  private buildMovementContext(excludeIds: ReadonlySet<number>, noclip: boolean): MovementContext {
+    return {
+      getCollision: (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+      getHeight: (tx, ty) => this.world.getHeightAt(tx, ty),
+      isEntityBlocked: (aabb) => {
+        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
+        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
+        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
+        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
+        const nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+        return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
+      },
+      isPropBlocked: (aabb) => {
+        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
+        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
+        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
+        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
+        for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
+          if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+        }
+        return false;
+      },
+      noclip,
+    };
+  }
 
   /** Build a game-state message for a specific client, with delta chunk sync. */
   private buildGameState(clientId: string): GameStateMessage {

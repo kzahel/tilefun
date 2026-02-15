@@ -164,19 +164,22 @@ export class RemoteStateView implements ClientStateView {
       );
     }
 
-    // Save old positions for render interpolation (match by entity ID)
-    const prevPositions = new Map<number, { wx: number; wy: number }>();
+    // Save old state for render interpolation (match by entity ID)
+    const prevState = new Map<number, { wx: number; wy: number; jumpZ: number }>();
     for (const e of this._entities) {
-      prevPositions.set(e.id, { wx: e.position.wx, wy: e.position.wy });
+      prevState.set(e.id, { wx: e.position.wx, wy: e.position.wy, jumpZ: e.jumpZ ?? 0 });
     }
 
     this._entities = msg.entities.map(deserializeEntity);
     this._props = msg.props.map(deserializeProp);
 
-    // Restore prev positions onto new entities for interpolation
+    // Restore prev state onto new entities for interpolation
     for (const e of this._entities) {
-      const prev = prevPositions.get(e.id);
-      if (prev) e.prevPosition = prev;
+      const prev = prevState.get(e.id);
+      if (prev) {
+        e.prevPosition = { wx: prev.wx, wy: prev.wy };
+        e.prevJumpZ = prev.jumpZ;
+      }
     }
     this._playerEntityId = msg.playerEntityId;
     this._gemsCollected = msg.gemsCollected;

@@ -1,23 +1,15 @@
-import {
-  JUMP_GRAVITY,
-  JUMP_VELOCITY,
-  PLAYER_SPEED,
-  PLAYER_SPRINT_MULTIPLIER,
-  TILE_SIZE,
-} from "../config/constants.js";
-import {
-  aabbOverlapsPropWalls,
-  aabbOverlapsSolid,
-  aabbsOverlap,
-  getEntityAABB,
-  getSpeedMultiplier,
-  isElevationBlocked,
-} from "../entities/collision.js";
-import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
+import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
+import type { MovementContext } from "../physics/MovementContext.js";
+import {
+  applyMountInput,
+  initiateJump,
+  moveAndCollide,
+  tickJumpGravity,
+} from "../physics/PlayerMovement.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -54,6 +46,9 @@ export class PlayerPredictor {
   /** Previous predicted position for render interpolation. */
   private _prevPosition: PositionComponent = { wx: 0, wy: 0 };
 
+  /** Previous predicted jumpZ for render interpolation. */
+  private _prevJumpZ = 0;
+
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
 
@@ -80,6 +75,7 @@ export class PlayerPredictor {
       wx: this.predicted.position.wx,
       wy: this.predicted.position.wy,
     };
+    this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this.inputBuffer = [];
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
@@ -120,11 +116,12 @@ export class PlayerPredictor {
   ): void {
     if (!this.predicted) return;
 
-    // Save previous positions for render interpolation
+    // Save previous state for render interpolation
     this._prevPosition = {
       wx: this.predicted.position.wx,
       wy: this.predicted.position.wy,
     };
+    this._prevJumpZ = this.predicted.jumpZ ?? 0;
     if (this.predictedMount) {
       this._mountPrevPosition = {
         wx: this.predictedMount.position.wx,
@@ -327,6 +324,11 @@ export class PlayerPredictor {
     return this._prevPosition;
   }
 
+  /** Get previous predicted jumpZ for render interpolation. */
+  get prevJumpZ(): number {
+    return this._prevJumpZ;
+  }
+
   /** Get previous mount position for render interpolation. */
   get mountPrevPosition(): PositionComponent {
     return this._mountPrevPosition;
@@ -358,33 +360,17 @@ export class PlayerPredictor {
 
     if (this.predictedMount) {
       // ── Riding: apply input to mount, derive player position ──
-      this.applyMountInput(this.predictedMount, movement);
+      applyMountInput(this.predictedMount, movement, this.predicted);
 
-      if (this.predictedMount.velocity) {
-        const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
-        const speedMult = this.predictedMount.collider
-          ? getSpeedMultiplier(this.predictedMount.position, getCollision)
-          : 1.0;
-        const dx = this.predictedMount.velocity.vx * dt * speedMult;
-        const dy = this.predictedMount.velocity.vy * dt * speedMult;
-
-        if (this.predictedMount.collider && !this.noclip) {
-          const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
-          this.resolveMountCollision(
-            this.predictedMount,
-            dx,
-            dy,
-            getCollision,
-            blockMask,
-            props,
-            entities,
-            world,
-          );
-        } else {
-          this.predictedMount.position.wx += dx;
-          this.predictedMount.position.wy += dy;
-        }
-      }
+      const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
+      const mountCtx = this.buildMovementContext(
+        world,
+        props,
+        entities,
+        mountExclude,
+        this.predictedMount,
+      );
+      moveAndCollide(this.predictedMount, dt, mountCtx);
 
       // Derive player position from mount + offset
       this.predicted.position.wx = this.predictedMount.position.wx + this.mountOffsetX;
@@ -393,86 +379,19 @@ export class PlayerPredictor {
       // ── Normal: apply input to player directly ──
       updatePlayerFromInput(this.predicted, movement, dt);
 
-      // Jump initiation
-      if (movement.jump && !(this.predicted.jumpZ ?? 0)) {
-        this.predicted.jumpZ = 0.01;
-        this.predicted.jumpVZ = JUMP_VELOCITY;
-      }
+      if (movement.jump) initiateJump(this.predicted);
 
-      if (this.predicted.velocity) {
-        const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
-        const speedMult =
-          this.predicted.collider && !this.noclip
-            ? getSpeedMultiplier(this.predicted.position, getCollision)
-            : 1.0;
-        const dx = this.predicted.velocity.vx * dt * speedMult;
-        const dy = this.predicted.velocity.vy * dt * speedMult;
+      const playerExclude = new Set([this.predicted.id]);
+      const playerCtx = this.buildMovementContext(
+        world,
+        props,
+        entities,
+        playerExclude,
+        this.predicted,
+      );
+      moveAndCollide(this.predicted, dt, playerCtx);
 
-        if (this.predicted.collider && !this.noclip) {
-          const blockMask = CollisionFlag.Solid | CollisionFlag.Water;
-          this.resolvePlayerCollision(dx, dy, getCollision, blockMask, props, entities, world);
-        } else {
-          this.predicted.position.wx += dx;
-          this.predicted.position.wy += dy;
-        }
-      }
-
-      // Jump physics (gravity)
-      if (
-        this.predicted.jumpZ !== undefined &&
-        this.predicted.jumpZ > 0 &&
-        this.predicted.jumpVZ !== undefined
-      ) {
-        this.predicted.jumpVZ -= JUMP_GRAVITY * dt;
-        this.predicted.jumpZ += this.predicted.jumpVZ * dt;
-        if (this.predicted.jumpZ <= 0) {
-          delete this.predicted.jumpZ;
-          delete this.predicted.jumpVZ;
-        }
-      }
-    }
-  }
-
-  /** Apply movement input to a mount entity (mirrors server's applyMountInput). */
-  private applyMountInput(
-    mount: Entity,
-    input: { dx: number; dy: number; sprinting: boolean },
-  ): void {
-    if (!mount.velocity) return;
-    const baseSpeed = mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
-    const speed = input.sprinting ? baseSpeed * PLAYER_SPRINT_MULTIPLIER : baseSpeed;
-    mount.velocity.vx = input.dx * speed;
-    mount.velocity.vy = input.dy * speed;
-
-    const moving = input.dx !== 0 || input.dy !== 0;
-    if (mount.sprite) {
-      mount.sprite.moving = moving;
-      if (moving) {
-        if (mount.wanderAI?.directional === false) {
-          // Non-directional sprites (e.g., cow): only flip horizontally, keep frameRow=0
-          if (input.dx !== 0) {
-            mount.sprite.flipX = input.dx < 0;
-          }
-        } else {
-          if (Math.abs(input.dx) >= Math.abs(input.dy)) {
-            mount.sprite.direction = input.dx > 0 ? Direction.Right : Direction.Left;
-          } else {
-            mount.sprite.direction = input.dy > 0 ? Direction.Down : Direction.Up;
-          }
-          mount.sprite.frameRow = mount.sprite.direction;
-        }
-      }
-    }
-
-    // Sync rider direction to match mount facing
-    if (this.predicted?.sprite && mount.sprite) {
-      this.predicted.sprite.direction =
-        mount.wanderAI?.directional === false
-          ? mount.sprite.flipX
-            ? Direction.Left
-            : Direction.Right
-          : mount.sprite.direction;
-      this.predicted.sprite.frameRow = this.predicted.sprite.direction;
+      tickJumpGravity(this.predicted, dt);
     }
   }
 
@@ -501,125 +420,36 @@ export class PlayerPredictor {
   }
 
   /**
-   * Simplified collision resolution for player prediction.
-   * Per-axis sliding — same algorithm as resolveCollision in collision.ts,
-   * plus prop wall/collider checks and clientSolid entity checks.
+   * Build a MovementContext for client-side prediction.
+   * Uses `clientSolid` for entity blocking (vs server's `solid`).
+   * Captures the moving entity by reference so jumpZ-dependent checks stay current.
    */
-  private resolvePlayerCollision(
-    dx: number,
-    dy: number,
-    getCollision: (tx: number, ty: number) => number,
-    blockMask: number,
+  private buildMovementContext(
+    world: World,
     props: readonly Prop[],
     entities: readonly Entity[],
-    world: World,
-  ): void {
-    const entity = this.predicted;
-    if (!entity) return;
-    if (!entity.collider) {
-      entity.position.wx += dx;
-      entity.position.wy += dy;
-      return;
-    }
-
-    const playerId = entity.id;
-    const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-    const isBlocked = (aabb: {
-      left: number;
-      top: number;
-      right: number;
-      bottom: number;
-    }): boolean => {
-      if (aabbOverlapsSolid(aabb, getCollision, blockMask)) return true;
-      for (const prop of props) {
-        if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
-      }
-      const feetTx = Math.floor(entity.position.wx / TILE_SIZE);
-      const feetTy = Math.floor(entity.position.wy / TILE_SIZE);
-      const currentElev = getHeight(feetTx, feetTy);
-      if (isElevationBlocked(aabb, currentElev, entity.jumpZ ?? 0, getHeight)) return true;
-      const skipSmall = (entity.jumpZ ?? 0) > 0;
-      for (const other of entities) {
-        if (other.id === playerId || !other.collider?.clientSolid) continue;
-        if (skipSmall && (other.sprite?.spriteHeight ?? 0) <= 32) continue;
-        if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
-      }
-      return false;
+    excludeIds: ReadonlySet<number>,
+    movingEntity: Entity,
+  ): MovementContext {
+    return {
+      getCollision: (tx, ty) => world.getCollisionIfLoaded(tx, ty),
+      getHeight: (tx, ty) => world.getHeightAt(tx, ty),
+      isEntityBlocked: (aabb) => {
+        const skipSmall = (movingEntity.jumpZ ?? 0) > 0;
+        for (const other of entities) {
+          if (excludeIds.has(other.id) || !other.collider?.clientSolid) continue;
+          if (skipSmall && (other.sprite?.spriteHeight ?? 0) <= 32) continue;
+          if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
+        }
+        return false;
+      },
+      isPropBlocked: (aabb) => {
+        for (const prop of props) {
+          if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
+        }
+        return false;
+      },
+      noclip: this.noclip,
     };
-
-    // Try X axis
-    const testX = { wx: entity.position.wx + dx, wy: entity.position.wy };
-    const xBox = getEntityAABB(testX, entity.collider);
-    if (!isBlocked(xBox)) {
-      entity.position.wx = testX.wx;
-    }
-
-    // Try Y axis (using updated X)
-    const testY = { wx: entity.position.wx, wy: entity.position.wy + dy };
-    const yBox = getEntityAABB(testY, entity.collider);
-    if (!isBlocked(yBox)) {
-      entity.position.wy = testY.wy;
-    }
-  }
-
-  /**
-   * Simplified collision resolution for mount prediction.
-   * Same as player collision but uses the mount's collider and excludes both
-   * mount and player from entity checks.
-   */
-  private resolveMountCollision(
-    mount: Entity,
-    dx: number,
-    dy: number,
-    getCollision: (tx: number, ty: number) => number,
-    blockMask: number,
-    props: readonly Prop[],
-    entities: readonly Entity[],
-    world: World,
-  ): void {
-    if (!mount.collider) {
-      mount.position.wx += dx;
-      mount.position.wy += dy;
-      return;
-    }
-
-    const mountId = mount.id;
-    const playerId = this.predicted?.id ?? -1;
-    const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-    const isBlocked = (aabb: {
-      left: number;
-      top: number;
-      right: number;
-      bottom: number;
-    }): boolean => {
-      if (aabbOverlapsSolid(aabb, getCollision, blockMask)) return true;
-      for (const prop of props) {
-        if (aabbOverlapsPropWalls(aabb, prop.position, prop)) return true;
-      }
-      const feetTx = Math.floor(mount.position.wx / TILE_SIZE);
-      const feetTy = Math.floor(mount.position.wy / TILE_SIZE);
-      const currentElev = getHeight(feetTx, feetTy);
-      if (isElevationBlocked(aabb, currentElev, mount.jumpZ ?? 0, getHeight)) return true;
-      for (const other of entities) {
-        if (other.id === mountId || other.id === playerId) continue;
-        if (!other.collider?.clientSolid) continue;
-        if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
-      }
-      return false;
-    };
-
-    // Try X axis
-    const testX = { wx: mount.position.wx + dx, wy: mount.position.wy };
-    const xBox = getEntityAABB(testX, mount.collider);
-    if (!isBlocked(xBox)) {
-      mount.position.wx = testX.wx;
-    }
-
-    // Try Y axis (using updated X)
-    const testY = { wx: mount.position.wx, wy: mount.position.wy + dy };
-    const yBox = getEntityAABB(testY, mount.collider);
-    if (!isBlocked(yBox)) {
-      mount.position.wy = testY.wy;
-    }
   }
 }

@@ -22,4 +22,6 @@ export interface Renderable {
   flashHidden?: boolean;
   /** Current height above ground in world pixels (jump mechanic). */
   jumpZ?: number;
+  /** Previous jumpZ (before last tick), for render interpolation. */
+  prevJumpZ?: number;
 }

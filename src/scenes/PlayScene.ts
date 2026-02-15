@@ -228,9 +228,10 @@ export class PlayScene implements GameScene {
       gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
       gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
 
-      // Set prevPosition on the predicted entity so renderEntities
+      // Set prev state on the predicted entity so renderEntities
       // interpolates it correctly for Y-sorting and drawing
       this.predictor.player.prevPosition = prev;
+      this.predictor.player.prevJumpZ = this.predictor.prevJumpZ;
     } else {
       const player = gc.stateView.playerEntity;
       if (player.prevPosition) {
