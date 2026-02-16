@@ -51,6 +51,7 @@ import {
   getFriction,
   getGravityScale,
   getNoBunnyHop,
+  getPhysicsCVarRevision,
   getSmallJumps,
   getStopSpeed,
   getTimeScale,
@@ -70,6 +71,44 @@ import type { PlayerSession } from "./PlayerSession.js";
 import { tickAllAI } from "./tickAllAI.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
+
+/** Per-client delta tracking — stores last-sent values to avoid resending unchanged fields. */
+interface ClientDeltaState {
+  // Scalars — last-sent value (sentinel forces full first send)
+  gemsCollected: number;
+  invincibilityTimer: number;
+  editorEnabled: boolean;
+  mountEntityId: number | null;
+
+  // Objects — last-sent revision counter
+  propRevision: number;
+  propRangeKey: string;
+  cvarsRevision: number;
+  playerNamesRevision: number;
+  editorCursorsRevision: number;
+
+  // Chunk keys — last-sent joined string
+  loadedChunkKeysJoined: string;
+
+  // Chunk revisions (folded from old clientChunkRevisions)
+  chunkRevisions: Map<string, number>;
+}
+
+function createClientDeltaState(): ClientDeltaState {
+  return {
+    gemsCollected: -1,
+    invincibilityTimer: -1,
+    editorEnabled: false, // will differ from true default → forces first send
+    mountEntityId: -2 as number | null, // impossible entity ID → forces first send
+    propRevision: -1,
+    propRangeKey: "",
+    cvarsRevision: -1,
+    playerNamesRevision: -1,
+    editorCursorsRevision: -1,
+    loadedChunkKeysJoined: "",
+    chunkRevisions: new Map(),
+  };
+}
 
 /**
  * A Realm encapsulates all per-world server state:
@@ -93,10 +132,14 @@ export class Realm {
 
   /** Sessions currently in this realm. */
   readonly sessions = new Map<string, PlayerSession>();
-  /** Per-client chunk revision tracking for delta sync. */
-  private clientChunkRevisions = new Map<string, Map<string, number>>();
+  /** Per-client delta tracking for bandwidth optimization. */
+  private clientDeltaStates = new Map<string, ClientDeltaState>();
   /** Monotonic tick counter. */
   private tickCounter = 0;
+  /** Bumped when sessions join/leave (affects playerNames). */
+  private playerNamesRevision = 0;
+  /** Bumped when any session's editor cursor or editor mode changes. */
+  private editorCursorsRevision = 0;
 
   lastLoadedGems = 0;
   lastLoadedCamera = { cameraX: 0, cameraY: 0, cameraZoom: 1 };
@@ -133,9 +176,9 @@ export class Realm {
     return this.sessions.values().next().value;
   }
 
-  /** Clear per-client chunk revision tracking (forces full re-send). */
+  /** Clear per-client delta tracking (forces full re-send). */
   clearClientRevisions(clientId: string): void {
-    this.clientChunkRevisions.delete(clientId);
+    this.clientDeltaStates.delete(clientId);
   }
 
   /**
@@ -198,6 +241,7 @@ export class Realm {
 
     this.sessions.set(session.clientId, session);
     this.clearClientRevisions(session.clientId);
+    this.playerNamesRevision++;
 
     console.log(
       `[tilefun:realm] addPlayer client=${session.clientId} player.id=${player.id} editorEnabled=${session.editorEnabled} inputQueue=${session.inputQueue.length} worldId=${this.currentWorldId}`,
@@ -227,6 +271,7 @@ export class Realm {
     this.entityManager.remove(session.player.id);
     this.sessions.delete(clientId);
     this.clearClientRevisions(clientId);
+    this.playerNamesRevision++;
     session.realmId = null;
 
     // Start idle timeout if this was the last player
@@ -728,6 +773,7 @@ export class Realm {
       case "set-editor-mode":
         session.editorEnabled = msg.enabled;
         if (!msg.enabled) session.editorCursor = null;
+        this.editorCursorsRevision++;
         // Auto-dismount when entering editor mode
         if (msg.enabled && session.gameplaySession.mountId !== null) {
           this.dismountPlayer(session);
@@ -741,6 +787,7 @@ export class Realm {
           editorTab: msg.editorTab,
           brushMode: msg.brushMode,
         };
+        this.editorCursorsRevision++;
         break;
 
       case "set-debug":
@@ -864,8 +911,8 @@ export class Realm {
     this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
     this.lastLoadedPlayerPos = { wx: playerX, wy: playerY };
 
-    // Reset per-client chunk tracking so all chunks get re-sent
-    this.clientChunkRevisions.clear();
+    // Reset per-client delta tracking so all data gets re-sent
+    this.clientDeltaStates.clear();
 
     return { cameraX, cameraY, cameraZoom };
   }
@@ -1033,17 +1080,18 @@ export class Realm {
     };
   }
 
-  /** Build a game-state message for a specific client, with delta chunk sync. */
+  /** Build a game-state message for a specific client, with delta optimization. */
   private buildGameState(clientId: string): GameStateMessage {
     const session = this.sessions.get(clientId);
     if (!session) throw new Error(`No session for ${clientId}`);
 
-    // Track which chunk revisions this client has seen
-    let revisions = this.clientChunkRevisions.get(clientId);
-    if (!revisions) {
-      revisions = new Map();
-      this.clientChunkRevisions.set(clientId, revisions);
+    // Get or create per-client delta state (sentinels force full first send)
+    let delta = this.clientDeltaStates.get(clientId);
+    if (!delta) {
+      delta = createClientDeltaState();
+      this.clientDeltaStates.set(clientId, delta);
     }
+    const revisions = delta.chunkRevisions;
 
     // Collect loaded chunk keys and build delta updates.
     // Only include chunks within this session's visible range (+ RENDER_DISTANCE
@@ -1080,7 +1128,7 @@ export class Realm {
       }
     }
 
-    // Filter entities and props to those near the player's viewport
+    // Filter entities to those near the player's viewport
     const buf = Realm.BROADCAST_BUFFER_CHUNKS;
     const nearbyEntities = this.entityManager.spatialHash.queryRange(
       range.minCx - buf,
@@ -1101,44 +1149,100 @@ export class Realm {
         nearbyEntities.push(mount);
       }
     }
-    const nearbyProps = this.propManager.getPropsInChunkRange(
-      range.minCx - buf,
-      range.minCy - buf,
-      range.maxCx + buf,
-      range.maxCy + buf,
-    );
 
-    // Collect other players' editor cursors
-    const editorCursors: RemoteEditorCursor[] = [];
-    const playerNames: Record<number, string> = {};
-    for (const [otherId, other] of this.sessions) {
-      playerNames[other.player.id] = other.displayName;
-      if (otherId === clientId || !other.editorEnabled || !other.editorCursor) continue;
-      editorCursors.push({
-        displayName: other.displayName,
-        color: other.cursorColor,
-        tileX: other.editorCursor.tileX,
-        tileY: other.editorCursor.tileY,
-        editorTab: other.editorCursor.editorTab,
-        brushMode: other.editorCursor.brushMode,
-      });
-    }
-
-    return {
+    // Build message with always-present fields
+    const msg: GameStateMessage = {
       type: "game-state",
       serverTick: this.tickCounter,
       lastProcessedInputSeq: session.lastProcessedInputSeq,
       entities: nearbyEntities.map(serializeEntity),
-      props: nearbyProps.map(serializeProp),
       playerEntityId: session.player.id,
-      gemsCollected: session.gameplaySession.gemsCollected,
-      invincibilityTimer: session.gameplaySession.invincibilityTimer,
-      editorEnabled: session.editorEnabled,
-      loadedChunkKeys,
-      chunkUpdates,
-      editorCursors,
-      playerNames,
-      cvars: {
+    };
+
+    // Delta: props — check revision + visible range
+    const propRangeKey = `${range.minCx - buf},${range.minCy - buf},${range.maxCx + buf},${range.maxCy + buf}`;
+    if (this.propManager.revision !== delta.propRevision || propRangeKey !== delta.propRangeKey) {
+      const nearbyProps = this.propManager.getPropsInChunkRange(
+        range.minCx - buf,
+        range.minCy - buf,
+        range.maxCx + buf,
+        range.maxCy + buf,
+      );
+      msg.props = nearbyProps.map(serializeProp);
+      delta.propRevision = this.propManager.revision;
+      delta.propRangeKey = propRangeKey;
+    }
+
+    // Delta: scalar per-session fields
+    const gems = session.gameplaySession.gemsCollected;
+    if (gems !== delta.gemsCollected) {
+      msg.gemsCollected = gems;
+      delta.gemsCollected = gems;
+    }
+
+    const invTimer = session.gameplaySession.invincibilityTimer;
+    if (invTimer !== delta.invincibilityTimer) {
+      msg.invincibilityTimer = invTimer;
+      delta.invincibilityTimer = invTimer;
+    }
+
+    if (session.editorEnabled !== delta.editorEnabled) {
+      msg.editorEnabled = session.editorEnabled;
+      delta.editorEnabled = session.editorEnabled;
+    }
+
+    // Delta: mountEntityId (null = not riding, absent = unchanged)
+    const currentMount = session.gameplaySession.mountId;
+    if (currentMount !== delta.mountEntityId) {
+      msg.mountEntityId = currentMount;
+      delta.mountEntityId = currentMount;
+    }
+
+    // Delta: loadedChunkKeys — compare joined string
+    loadedChunkKeys.sort();
+    const keysJoined = loadedChunkKeys.join(";");
+    if (keysJoined !== delta.loadedChunkKeysJoined) {
+      msg.loadedChunkKeys = loadedChunkKeys;
+      delta.loadedChunkKeysJoined = keysJoined;
+    }
+
+    // Delta: chunkUpdates — only include when non-empty
+    if (chunkUpdates.length > 0) {
+      msg.chunkUpdates = chunkUpdates;
+    }
+
+    // Delta: playerNames — check revision
+    if (this.playerNamesRevision !== delta.playerNamesRevision) {
+      const playerNames: Record<number, string> = {};
+      for (const [, other] of this.sessions) {
+        playerNames[other.player.id] = other.displayName;
+      }
+      msg.playerNames = playerNames;
+      delta.playerNamesRevision = this.playerNamesRevision;
+    }
+
+    // Delta: editorCursors — check revision
+    if (this.editorCursorsRevision !== delta.editorCursorsRevision) {
+      const editorCursors: RemoteEditorCursor[] = [];
+      for (const [otherId, other] of this.sessions) {
+        if (otherId === clientId || !other.editorEnabled || !other.editorCursor) continue;
+        editorCursors.push({
+          displayName: other.displayName,
+          color: other.cursorColor,
+          tileX: other.editorCursor.tileX,
+          tileY: other.editorCursor.tileY,
+          editorTab: other.editorCursor.editorTab,
+          brushMode: other.editorCursor.brushMode,
+        });
+      }
+      msg.editorCursors = editorCursors;
+      delta.editorCursorsRevision = this.editorCursorsRevision;
+    }
+
+    // Delta: cvars — check revision
+    const cvarsRev = getPhysicsCVarRevision();
+    if (cvarsRev !== delta.cvarsRevision) {
+      msg.cvars = {
         gravity: getGravityScale(),
         friction: getFriction(),
         accelerate: getAccelerate(),
@@ -1148,11 +1252,11 @@ export class Realm {
         noBunnyHop: getNoBunnyHop(),
         smallJumps: getSmallJumps(),
         timeScale: getTimeScale(),
-      },
-      ...(session.gameplaySession.mountId != null
-        ? { mountEntityId: session.gameplaySession.mountId }
-        : {}),
-    };
+      };
+      delta.cvarsRevision = cvarsRev;
+    }
+
+    return msg;
   }
 
   private handleSpawn(entityType: string, wx: number, wy: number): void {

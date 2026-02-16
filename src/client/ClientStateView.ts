@@ -145,18 +145,27 @@ export class RemoteStateView implements ClientStateView {
    * (the server's revision tracking considers them sent).
    */
   bufferGameState(msg: GameStateMessage): void {
-    if (this._pendingState && this._pendingState.chunkUpdates.length > 0) {
-      // Merge: keep old chunk updates, let new ones override for same cx,cy
-      const merged = new Map<string, (typeof msg.chunkUpdates)[0]>();
-      for (const cu of this._pendingState.chunkUpdates) {
-        merged.set(`${cu.cx},${cu.cy}`, cu);
+    if (this._pendingState) {
+      // Merge delta fields: { ...old, ...new } preserves old values for fields
+      // absent in the new message (undefined-valued keys aren't own properties
+      // after JSON round-trip, so spread won't overwrite with undefined).
+      const merged = { ...this._pendingState, ...msg };
+
+      // Special merge for chunkUpdates: append, don't replace
+      const oldChunks = this._pendingState.chunkUpdates;
+      if (oldChunks?.length) {
+        const chunkMap = new Map<string, (typeof oldChunks)[0]>();
+        for (const cu of oldChunks) chunkMap.set(`${cu.cx},${cu.cy}`, cu);
+        if (msg.chunkUpdates) {
+          for (const cu of msg.chunkUpdates) chunkMap.set(`${cu.cx},${cu.cy}`, cu);
+        }
+        merged.chunkUpdates = Array.from(chunkMap.values());
       }
-      for (const cu of msg.chunkUpdates) {
-        merged.set(`${cu.cx},${cu.cy}`, cu);
-      }
-      msg = { ...msg, chunkUpdates: Array.from(merged.values()) };
+
+      this._pendingState = merged;
+    } else {
+      this._pendingState = msg;
     }
-    this._pendingState = msg;
   }
 
   /** Apply any buffered game-state. Call at the start of each client update tick. */
@@ -168,7 +177,7 @@ export class RemoteStateView implements ClientStateView {
     this._stateAppliedThisTick = true;
   }
 
-  /** Apply a full game-state message from the server. */
+  /** Apply a game-state message from the server (delta-aware: absent fields = unchanged). */
   applyGameState(msg: GameStateMessage): void {
     // Log state transitions that matter for debugging realm-switch movement bug
     if (msg.playerEntityId !== this._playerEntityId) {
@@ -176,7 +185,7 @@ export class RemoteStateView implements ClientStateView {
         `[tilefun:rsv] playerEntityId changed: ${this._playerEntityId} → ${msg.playerEntityId}`,
       );
     }
-    if (msg.editorEnabled !== this._editorEnabled) {
+    if (msg.editorEnabled !== undefined && msg.editorEnabled !== this._editorEnabled) {
       console.log(
         `[tilefun:rsv] editorEnabled changed: ${this._editorEnabled} → ${msg.editorEnabled}`,
       );
@@ -193,8 +202,11 @@ export class RemoteStateView implements ClientStateView {
       });
     }
 
+    // Always-present fields
     this._entities = msg.entities.map(deserializeEntity);
-    this._props = msg.props.map(deserializeProp);
+    this._playerEntityId = msg.playerEntityId;
+    this._serverTick = msg.serverTick;
+    this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
 
     // Restore prev state onto new entities for interpolation
     for (const e of this._entities) {
@@ -205,44 +217,50 @@ export class RemoteStateView implements ClientStateView {
         e.prevWz = prev.wz;
       }
     }
-    this._playerEntityId = msg.playerEntityId;
-    this._gemsCollected = msg.gemsCollected;
-    this._invincibilityTimer = msg.invincibilityTimer;
-    this._editorEnabled = msg.editorEnabled;
-    this._remoteCursors = msg.editorCursors;
-    this._playerNames = msg.playerNames;
-    this._serverTick = msg.serverTick;
-    this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
-    this._mountEntityId = msg.mountEntityId;
+
+    // Delta fields — only update when present (absent = unchanged)
+    if (msg.props !== undefined) this._props = msg.props.map(deserializeProp);
+    if (msg.gemsCollected !== undefined) this._gemsCollected = msg.gemsCollected;
+    if (msg.invincibilityTimer !== undefined) this._invincibilityTimer = msg.invincibilityTimer;
+    if (msg.editorEnabled !== undefined) this._editorEnabled = msg.editorEnabled;
+    if (msg.editorCursors !== undefined) this._remoteCursors = msg.editorCursors;
+    if (msg.playerNames !== undefined) this._playerNames = msg.playerNames;
+    if (msg.mountEntityId !== undefined) this._mountEntityId = msg.mountEntityId ?? undefined;
 
     // Sync server physics CVars so client prediction matches server movement.
-    setGravityScale(msg.cvars.gravity);
-    setFriction(msg.cvars.friction);
-    setAccelerate(msg.cvars.accelerate);
-    setAirAccelerate(msg.cvars.airAccelerate);
-    setAirWishCap(msg.cvars.airWishCap);
-    setStopSpeed(msg.cvars.stopSpeed);
-    setNoBunnyHop(msg.cvars.noBunnyHop);
-    setSmallJumps(msg.cvars.smallJumps);
-    setTimeScale(msg.cvars.timeScale);
+    if (msg.cvars !== undefined) {
+      setGravityScale(msg.cvars.gravity);
+      setFriction(msg.cvars.friction);
+      setAccelerate(msg.cvars.accelerate);
+      setAirAccelerate(msg.cvars.airAccelerate);
+      setAirWishCap(msg.cvars.airWishCap);
+      setStopSpeed(msg.cvars.stopSpeed);
+      setNoBunnyHop(msg.cvars.noBunnyHop);
+      setSmallJumps(msg.cvars.smallJumps);
+      setTimeScale(msg.cvars.timeScale);
+    }
 
     // Apply chunk updates (delta — only new/changed chunks).
     // Use put() instead of getOrCreate() to avoid invalidateNeighborAutotile()
     // which would reset autotileComputed on already-applied neighbor chunks.
-    for (const cs of msg.chunkUpdates) {
-      let chunk = this._world.chunks.get(cs.cx, cs.cy);
-      if (!chunk) {
-        chunk = new Chunk();
-        this._world.chunks.put(cs.cx, cs.cy, chunk);
+    if (msg.chunkUpdates !== undefined) {
+      for (const cs of msg.chunkUpdates) {
+        let chunk = this._world.chunks.get(cs.cx, cs.cy);
+        if (!chunk) {
+          chunk = new Chunk();
+          this._world.chunks.put(cs.cx, cs.cy, chunk);
+        }
+        applyChunkSnapshot(chunk, cs);
       }
-      applyChunkSnapshot(chunk, cs);
     }
 
     // Unload chunks the server no longer has loaded
-    const loadedSet = new Set(msg.loadedChunkKeys);
-    for (const [key] of this._world.chunks.entries()) {
-      if (!loadedSet.has(key)) {
-        this._world.chunks.remove(key);
+    if (msg.loadedChunkKeys !== undefined) {
+      const loadedSet = new Set(msg.loadedChunkKeys);
+      for (const [key] of this._world.chunks.entries()) {
+        if (!loadedSet.has(key)) {
+          this._world.chunks.remove(key);
+        }
       }
     }
   }

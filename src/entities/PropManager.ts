@@ -12,6 +12,8 @@ export class PropManager {
   readonly props: Prop[] = [];
   private nextId = 1;
   private chunkIndex = new Map<string, Prop[]>();
+  /** Monotonic revision counter — incremented on add/remove for delta sync. */
+  revision = 0;
 
   getNextId(): number {
     return this.nextId;
@@ -88,6 +90,7 @@ export class PropManager {
   add(prop: Prop): Prop {
     prop.id = this.nextId++;
     this.props.push(prop);
+    this.revision++;
     const { minCx, minCy, maxCx, maxCy } = this.getPropChunkRange(prop);
     for (let cy = minCy; cy <= maxCy; cy++) {
       for (let cx = minCx; cx <= maxCx; cx++) {
@@ -103,6 +106,7 @@ export class PropManager {
     const prop = this.props[idx];
     if (!prop) return false;
     this.props.splice(idx, 1);
+    this.revision++;
     const { minCx, minCy, maxCx, maxCy } = this.getPropChunkRange(prop);
     for (let cy = minCy; cy <= maxCy; cy++) {
       for (let cx = minCx; cx <= maxCx; cx++) {

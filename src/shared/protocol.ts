@@ -190,24 +190,28 @@ export interface PhysicsCVars {
 }
 
 export interface GameStateMessage {
+  // Always present (needed every tick for prediction/rendering):
   type: "game-state";
   serverTick: number;
   lastProcessedInputSeq: number;
   entities: EntitySnapshot[];
-  props: PropSnapshot[];
   playerEntityId: number;
-  gemsCollected: number;
-  invincibilityTimer: number;
-  editorEnabled: boolean;
-  loadedChunkKeys: string[];
-  chunkUpdates: ChunkSnapshot[];
-  editorCursors: RemoteEditorCursor[];
+
+  // Delta fields — only present when changed from last sent value.
+  // Absent (undefined) = unchanged, keep previous client value.
+  props?: PropSnapshot[];
+  gemsCollected?: number;
+  invincibilityTimer?: number;
+  editorEnabled?: boolean;
+  loadedChunkKeys?: string[];
+  chunkUpdates?: ChunkSnapshot[];
+  editorCursors?: RemoteEditorCursor[];
   /** Entity ID → display name for all player entities. */
-  playerNames: Record<number, string>;
-  /** Entity ID of the player's mount (undefined when not riding). */
-  mountEntityId?: number;
+  playerNames?: Record<number, string>;
+  /** Entity ID of the player's mount. null = not riding, absent = unchanged. */
+  mountEntityId?: number | null;
   /** Server physics CVars for client prediction sync. */
-  cvars: PhysicsCVars;
+  cvars?: PhysicsCVars;
 }
 
 // ---- Server → Client messages ----

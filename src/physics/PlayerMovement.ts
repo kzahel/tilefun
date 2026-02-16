@@ -33,9 +33,16 @@ const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
 // ── CVars (runtime-tunable, same pattern as gravityScale) ──
 
+/** Monotonic revision counter — incremented when any physics CVar changes. */
+let physicsCVarRevision = 0;
+export function getPhysicsCVarRevision(): number {
+  return physicsCVarRevision;
+}
+
 let gravityScale = 1;
 export function setGravityScale(scale: number): void {
   gravityScale = scale;
+  physicsCVarRevision++;
 }
 export function getGravityScale(): number {
   return gravityScale;
@@ -44,6 +51,7 @@ export function getGravityScale(): number {
 let frictionCVar = PLAYER_FRICTION;
 export function setFriction(v: number): void {
   frictionCVar = v;
+  physicsCVarRevision++;
 }
 export function getFriction(): number {
   return frictionCVar;
@@ -52,6 +60,7 @@ export function getFriction(): number {
 let accelerateCVar = PLAYER_ACCELERATE;
 export function setAccelerate(v: number): void {
   accelerateCVar = v;
+  physicsCVarRevision++;
 }
 export function getAccelerate(): number {
   return accelerateCVar;
@@ -60,6 +69,7 @@ export function getAccelerate(): number {
 let airAccelerateCVar = PLAYER_AIR_ACCELERATE;
 export function setAirAccelerate(v: number): void {
   airAccelerateCVar = v;
+  physicsCVarRevision++;
 }
 export function getAirAccelerate(): number {
   return airAccelerateCVar;
@@ -68,6 +78,7 @@ export function getAirAccelerate(): number {
 let airWishCapCVar = PLAYER_AIR_WISHCAP;
 export function setAirWishCap(v: number): void {
   airWishCapCVar = v;
+  physicsCVarRevision++;
 }
 export function getAirWishCap(): number {
   return airWishCapCVar;
@@ -76,6 +87,7 @@ export function getAirWishCap(): number {
 let stopSpeedCVar = PLAYER_STOP_SPEED;
 export function setStopSpeed(v: number): void {
   stopSpeedCVar = v;
+  physicsCVarRevision++;
 }
 export function getStopSpeed(): number {
   return stopSpeedCVar;
@@ -84,6 +96,7 @@ export function getStopSpeed(): number {
 let noBunnyHop = false;
 export function setNoBunnyHop(v: boolean): void {
   noBunnyHop = v;
+  physicsCVarRevision++;
 }
 export function getNoBunnyHop(): boolean {
   return noBunnyHop;
@@ -92,6 +105,7 @@ export function getNoBunnyHop(): boolean {
 let smallJumps = false;
 export function setSmallJumps(v: boolean): void {
   smallJumps = v;
+  physicsCVarRevision++;
 }
 export function getSmallJumps(): boolean {
   return smallJumps;
@@ -100,6 +114,7 @@ export function getSmallJumps(): boolean {
 let timeScaleCVar = 1;
 export function setTimeScale(v: number): void {
   timeScaleCVar = v;
+  physicsCVarRevision++;
 }
 export function getTimeScale(): number {
   return timeScaleCVar;
