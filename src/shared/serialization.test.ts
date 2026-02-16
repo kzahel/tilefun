@@ -109,9 +109,10 @@ describe("Entity serialization", () => {
     expect(result.position).toEqual(entity.position);
     expect(result.velocity).toEqual(entity.velocity);
     // Sprite: dynamic state from snapshot + static fields from def
-    expect(result.sprite?.frameCol).toBe(entity.sprite?.frameCol);
+    // animTimer and frameCol are NOT serialized — client computes locally
+    expect(result.sprite?.frameCol).toBe(0);
     expect(result.sprite?.frameRow).toBe(entity.sprite?.frameRow);
-    expect(result.sprite?.animTimer).toBe(entity.sprite?.animTimer);
+    expect(result.sprite?.animTimer).toBe(0);
     expect(result.sprite?.direction).toBe(entity.sprite?.direction);
     expect(result.sprite?.moving).toBe(entity.sprite?.moving);
     // Static fields come from ENTITY_DEFS["chicken"]
@@ -128,8 +129,9 @@ describe("Entity serialization", () => {
       physicalHeight: 8,
     });
     // WanderAI: dynamic state from snapshot + static from def
+    // timer is NOT serialized — only needed server-side
     expect(result.wanderAI?.state).toBe("walking");
-    expect(result.wanderAI?.timer).toBe(1.5);
+    expect(result.wanderAI?.timer).toBe(0);
     expect(result.wanderAI?.dirX).toBe(1);
     expect(result.wanderAI?.dirY).toBe(0);
     expect(result.wanderAI?.speed).toBe(20); // from def

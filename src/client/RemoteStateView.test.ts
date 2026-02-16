@@ -80,7 +80,6 @@ function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMess
     type: "game-state",
     serverTick: 0,
     lastProcessedInputSeq: 0,
-    entities: [],
     props: [],
     playerEntityId: 1,
     gemsCollected: 0,
@@ -115,13 +114,13 @@ describe("RemoteStateView", () => {
     expect(player.type).toBe("player");
   });
 
-  it("applies entity state from game-state message", () => {
+  it("applies entity baselines from game-state message", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
     view.applyGameState(
       makeGameState({
-        entities: [makeTestEntity(1, 50, 75), makeTestEntity(2, 100, 200)],
+        entityBaselines: [makeTestEntity(1, 50, 75), makeTestEntity(2, 100, 200)],
         playerEntityId: 1,
       }),
     );
@@ -130,6 +129,54 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.id).toBe(1);
     expect(view.entities.at(1)?.position).toEqual({ wx: 100, wy: 200 });
     expect(view.playerEntity.id).toBe(1);
+  });
+
+  it("applies entity deltas to existing entities", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: baselines
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
+
+    // Second tick: delta moves entity
+    view.applyGameState(
+      makeGameState({
+        entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.position).toEqual({ wx: 100, wy: 200 });
+  });
+
+  it("applies entity exits", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: two entities
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 50, 50)],
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.entities).toHaveLength(2);
+
+    // Second tick: entity 2 exits
+    view.applyGameState(
+      makeGameState({
+        entityExits: [2],
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.id).toBe(1);
   });
 
   it("applies prop state from game-state message", () => {
@@ -152,7 +199,7 @@ describe("RemoteStateView", () => {
 
     view.applyGameState(
       makeGameState({
-        entities: [makeTestEntity(1, 0, 0)],
+        entityBaselines: [makeTestEntity(1, 0, 0)],
         playerEntityId: 1,
         gemsCollected: 15,
         invincibilityTimer: 2.5,
@@ -220,7 +267,7 @@ describe("RemoteStateView", () => {
     // Apply some state
     view.applyGameState(
       makeGameState({
-        entities: [makeTestEntity(1, 0, 0)],
+        entityBaselines: [makeTestEntity(1, 0, 0)],
         props: [makeTestProp(10, 0, 0)],
         playerEntityId: 1,
         gemsCollected: 42,
@@ -237,26 +284,53 @@ describe("RemoteStateView", () => {
     expect(view.playerEntity.id).toBe(-1);
   });
 
-  it("replaces entities on each game-state (not accumulates)", () => {
+  it("exits remove entities and baselines add new ones", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
+    // First tick: two entities
     view.applyGameState(
       makeGameState({
-        entities: [makeTestEntity(1, 0, 0), makeTestEntity(2, 0, 0)],
+        entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 0, 0)],
         playerEntityId: 1,
       }),
     );
     expect(view.entities).toHaveLength(2);
 
+    // Second tick: entity 1 and 2 exit, entity 3 enters
     view.applyGameState(
       makeGameState({
-        entities: [makeTestEntity(3, 50, 50)],
+        entityExits: [1, 2],
+        entityBaselines: [makeTestEntity(3, 50, 50)],
         playerEntityId: 3,
       }),
     );
     expect(view.entities).toHaveLength(1);
     expect(view.entities.at(0)?.id).toBe(3);
+  });
+
+  it("entities persist across ticks without explicit updates", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: baseline
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Second tick: no entity updates at all (idle entity)
+    view.applyGameState(
+      makeGameState({
+        playerEntityId: 1,
+      }),
+    );
+
+    // Entity should still be there with original position
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
   });
 
   it("syncs physics CVars from game-state to PlayerMovement module", () => {

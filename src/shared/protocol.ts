@@ -2,6 +2,7 @@ import type { PaintMode, SubgridShape } from "../editor/EditorTypes.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import type { PropCollider } from "../entities/Prop.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { EntityDelta } from "./entityDelta.js";
 
 // ---- Realm browser types ----
 
@@ -191,8 +192,13 @@ export interface GameStateMessage {
   type: "game-state";
   serverTick: number;
   lastProcessedInputSeq: number;
-  entities: EntitySnapshot[];
   playerEntityId: number;
+
+  // Entity delta protocol — baselines for new entities, deltas for changed,
+  // exits for removed. All optional (absent = none of that type this tick).
+  entityBaselines?: EntitySnapshot[];
+  entityDeltas?: EntityDelta[];
+  entityExits?: number[];
 
   // Delta fields — only present when changed from last sent value.
   // Absent (undefined) = unchanged, keep previous client value.

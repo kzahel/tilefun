@@ -11,15 +11,13 @@ import type { ChunkSnapshot, EntitySnapshot, PropSnapshot } from "./protocol.js"
 export function serializeEntity(e: Entity): EntitySnapshot {
   const def = ENTITY_DEFS[e.type];
 
-  // Extract only dynamic sprite state
+  // Extract only dynamic sprite state (animTimer/frameCol omitted — client-side animation)
   let spriteState: SpriteState | null = null;
   if (e.sprite) {
     spriteState = {
-      frameCol: e.sprite.frameCol,
-      frameRow: e.sprite.frameRow,
-      animTimer: e.sprite.animTimer,
       direction: e.sprite.direction,
       moving: e.sprite.moving,
+      frameRow: e.sprite.frameRow,
     };
     if (e.sprite.flipX !== undefined) spriteState.flipX = e.sprite.flipX;
     // Only include frameDuration when it differs from the def
@@ -28,12 +26,11 @@ export function serializeEntity(e: Entity): EntitySnapshot {
     }
   }
 
-  // Extract only dynamic AI state
+  // Extract only dynamic AI state (timer omitted — only needed server-side)
   let wanderAIState: WanderAIState | null = null;
   if (e.wanderAI) {
     wanderAIState = {
       state: e.wanderAI.state,
-      timer: e.wanderAI.timer,
       dirX: e.wanderAI.dirX,
       dirY: e.wanderAI.dirY,
     };
@@ -63,7 +60,8 @@ export function serializeEntity(e: Entity): EntitySnapshot {
 export function deserializeEntity(s: EntitySnapshot): Entity {
   const def = ENTITY_DEFS[s.type];
 
-  // Reconstruct full SpriteComponent by merging def + dynamic state
+  // Reconstruct full SpriteComponent by merging def + dynamic state.
+  // animTimer/frameCol default to 0 — client-side animation will overwrite.
   let sprite: Entity["sprite"] = null;
   if (s.spriteState && def?.sprite) {
     sprite = {
@@ -72,9 +70,9 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
       spriteHeight: def.sprite.spriteHeight,
       frameCount: def.sprite.frameCount,
       frameDuration: s.spriteState.frameDuration ?? def.sprite.frameDuration,
-      frameCol: s.spriteState.frameCol,
+      frameCol: 0,
       frameRow: s.spriteState.frameRow,
-      animTimer: s.spriteState.animTimer,
+      animTimer: 0,
       direction: s.spriteState.direction,
       moving: s.spriteState.moving,
     };
@@ -82,12 +80,13 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
     if (s.spriteState.flipX !== undefined) sprite.flipX = s.spriteState.flipX;
   }
 
-  // Reconstruct full WanderAIComponent by merging def + dynamic state
+  // Reconstruct full WanderAIComponent by merging def + dynamic state.
+  // Timer defaults to 0 — only needed server-side.
   let wanderAI: Entity["wanderAI"] = null;
   if (s.wanderAIState && def?.wanderAI) {
     wanderAI = {
       state: s.wanderAIState.state as "idle" | "walking" | "chasing" | "following" | "ridden",
-      timer: s.wanderAIState.timer,
+      timer: 0,
       dirX: s.wanderAIState.dirX,
       dirY: s.wanderAIState.dirY,
       idleMin: def.wanderAI.idleMin,

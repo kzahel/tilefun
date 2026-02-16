@@ -298,6 +298,8 @@ export class GameClient {
         // Apply buffered server state at the start of each client tick so
         // entity position changes are synchronized with camera.savePrev/follow.
         this.remoteView?.applyPending();
+        // Tick client-side sprite animations (animTimer/frameCol not serialized).
+        this.remoteView?.tickAnimations(dt);
         this.scenes.update(dt);
       },
       render: (alpha) => {

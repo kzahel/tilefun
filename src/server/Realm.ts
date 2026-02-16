@@ -61,7 +61,14 @@ import {
 } from "../physics/PlayerMovement.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { applyGroundTracking, getEffectiveGroundZ, getSurfaceZ } from "../physics/surfaceHeight.js";
-import type { ClientMessage, GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
+import type { EntityDelta } from "../shared/entityDelta.js";
+import { diffEntitySnapshots } from "../shared/entityDelta.js";
+import type {
+  ClientMessage,
+  EntitySnapshot,
+  GameStateMessage,
+  RemoteEditorCursor,
+} from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
@@ -92,6 +99,9 @@ interface ClientDeltaState {
 
   // Chunk revisions (folded from old clientChunkRevisions)
   chunkRevisions: Map<string, number>;
+
+  // Entity delta tracking — last-sent snapshot per entity ID
+  lastSentEntities: Map<number, EntitySnapshot>;
 }
 
 function createClientDeltaState(): ClientDeltaState {
@@ -107,6 +117,7 @@ function createClientDeltaState(): ClientDeltaState {
     editorCursorsRevision: -1,
     loadedChunkKeysJoined: "",
     chunkRevisions: new Map(),
+    lastSentEntities: new Map(),
   };
 }
 
@@ -1155,9 +1166,42 @@ export class Realm {
       type: "game-state",
       serverTick: this.tickCounter,
       lastProcessedInputSeq: session.lastProcessedInputSeq,
-      entities: nearbyEntities.map(serializeEntity),
       playerEntityId: session.player.id,
     };
+
+    // Entity delta compression: baselines for new, deltas for changed, exits for removed
+    const lastSent = delta.lastSentEntities;
+    const currentEntityIds = new Set<number>();
+    const entityBaselines: EntitySnapshot[] = [];
+    const entityDeltas: EntityDelta[] = [];
+
+    for (const entity of nearbyEntities) {
+      const snapshot = serializeEntity(entity);
+      currentEntityIds.add(entity.id);
+      const prev = lastSent.get(entity.id);
+      if (!prev) {
+        // New entity — send full baseline
+        entityBaselines.push(snapshot);
+      } else {
+        // Known entity — diff and send delta if changed
+        const d = diffEntitySnapshots(prev, snapshot);
+        if (d) entityDeltas.push(d);
+      }
+      lastSent.set(entity.id, snapshot);
+    }
+
+    // Find entities that left visibility (were in lastSent but not in current nearby set)
+    const entityExits: number[] = [];
+    for (const id of lastSent.keys()) {
+      if (!currentEntityIds.has(id)) {
+        entityExits.push(id);
+        lastSent.delete(id);
+      }
+    }
+
+    if (entityBaselines.length > 0) msg.entityBaselines = entityBaselines;
+    if (entityDeltas.length > 0) msg.entityDeltas = entityDeltas;
+    if (entityExits.length > 0) msg.entityExits = entityExits;
 
     // Delta: props — check revision + visible range
     const propRangeKey = `${range.minCx - buf},${range.minCy - buf},${range.maxCx + buf},${range.maxCy + buf}`;

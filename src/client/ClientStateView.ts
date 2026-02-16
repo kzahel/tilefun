@@ -12,6 +12,7 @@ import {
   setTimeScale,
 } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
+import { applyEntityDelta } from "../shared/entityDelta.js";
 import type { GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
@@ -91,6 +92,7 @@ const PLACEHOLDER_ENTITY: Entity = {
  */
 export class RemoteStateView implements ClientStateView {
   private _world: World;
+  private _entityMap: Map<number, Entity> = new Map();
   private _entities: Entity[] = [];
   private _props: Prop[] = [];
   private _playerEntityId = -1;
@@ -99,7 +101,7 @@ export class RemoteStateView implements ClientStateView {
   private _editorEnabled = true;
   private _remoteCursors: RemoteEditorCursor[] = [];
   private _playerNames: Record<number, string> = {};
-  private _pendingState: GameStateMessage | null = null;
+  private _pendingStates: GameStateMessage[] = [];
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
@@ -140,40 +142,22 @@ export class RemoteStateView implements ClientStateView {
    * Call applyPending() during the client update tick to apply it,
    * ensuring entity and camera updates are synchronized.
    *
-   * If a previous game-state is still pending, its chunk updates are
-   * merged into the new message so delta chunk data is never lost
-   * (the server's revision tracking considers them sent).
+   * Messages are queued and applied in order — entity delta protocol
+   * requires sequential application (baselines/deltas/exits are relative
+   * to the previous tick's state).
    */
   bufferGameState(msg: GameStateMessage): void {
-    if (this._pendingState) {
-      // Merge delta fields: { ...old, ...new } preserves old values for fields
-      // absent in the new message (undefined-valued keys aren't own properties
-      // after JSON round-trip, so spread won't overwrite with undefined).
-      const merged = { ...this._pendingState, ...msg };
-
-      // Special merge for chunkUpdates: append, don't replace
-      const oldChunks = this._pendingState.chunkUpdates;
-      if (oldChunks?.length) {
-        const chunkMap = new Map<string, (typeof oldChunks)[0]>();
-        for (const cu of oldChunks) chunkMap.set(`${cu.cx},${cu.cy}`, cu);
-        if (msg.chunkUpdates) {
-          for (const cu of msg.chunkUpdates) chunkMap.set(`${cu.cx},${cu.cy}`, cu);
-        }
-        merged.chunkUpdates = Array.from(chunkMap.values());
-      }
-
-      this._pendingState = merged;
-    } else {
-      this._pendingState = msg;
-    }
+    this._pendingStates.push(msg);
   }
 
-  /** Apply any buffered game-state. Call at the start of each client update tick. */
+  /** Apply any buffered game-state messages. Call at the start of each client update tick. */
   applyPending(): void {
     this._stateAppliedThisTick = false;
-    if (!this._pendingState) return;
-    this.applyGameState(this._pendingState);
-    this._pendingState = null;
+    if (this._pendingStates.length === 0) return;
+    for (const msg of this._pendingStates) {
+      this.applyGameState(msg);
+    }
+    this._pendingStates.length = 0;
     this._stateAppliedThisTick = true;
   }
 
@@ -191,32 +175,48 @@ export class RemoteStateView implements ClientStateView {
       );
     }
 
-    // Save old state for render interpolation (match by entity ID)
-    const prevState = new Map<number, { wx: number; wy: number; jumpZ: number; wz: number }>();
-    for (const e of this._entities) {
-      prevState.set(e.id, {
-        wx: e.position.wx,
-        wy: e.position.wy,
-        jumpZ: e.jumpZ ?? 0,
-        wz: e.wz ?? 0,
-      });
-    }
-
     // Always-present fields
-    this._entities = msg.entities.map(deserializeEntity);
     this._playerEntityId = msg.playerEntityId;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
 
-    // Restore prev state onto new entities for interpolation
-    for (const e of this._entities) {
-      const prev = prevState.get(e.id);
-      if (prev) {
-        e.prevPosition = { wx: prev.wx, wy: prev.wy };
-        e.prevJumpZ = prev.jumpZ;
-        e.prevWz = prev.wz;
+    // --- Entity delta protocol ---
+
+    // Save prev positions for interpolation before applying updates
+    for (const e of this._entityMap.values()) {
+      e.prevPosition = { wx: e.position.wx, wy: e.position.wy };
+      e.prevJumpZ = e.jumpZ ?? 0;
+      e.prevWz = e.wz ?? 0;
+    }
+
+    // Process exits — remove entities that left visibility
+    if (msg.entityExits) {
+      for (const id of msg.entityExits) {
+        this._entityMap.delete(id);
       }
     }
+
+    // Process baselines — new entities (full snapshots)
+    if (msg.entityBaselines) {
+      for (const snapshot of msg.entityBaselines) {
+        const entity = deserializeEntity(snapshot);
+        // New entity — no prev position for interpolation
+        this._entityMap.set(entity.id, entity);
+      }
+    }
+
+    // Process deltas — update changed fields on existing entities
+    if (msg.entityDeltas) {
+      for (const delta of msg.entityDeltas) {
+        const entity = this._entityMap.get(delta.id);
+        if (entity) {
+          applyEntityDelta(entity, delta);
+        }
+      }
+    }
+
+    // Rebuild flat entity array from map
+    this._entities = Array.from(this._entityMap.values());
 
     // Delta fields — only update when present (absent = unchanged)
     if (msg.props !== undefined) this._props = msg.props.map(deserializeProp);
@@ -268,8 +268,9 @@ export class RemoteStateView implements ClientStateView {
   /** Clear all cached state (e.g., when switching worlds). */
   clear(): void {
     console.log(
-      `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingState=${!!this._pendingState}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
+      `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingStates=${this._pendingStates.length}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
     );
+    this._entityMap.clear();
     this._entities = [];
     this._props = [];
     this._playerEntityId = -1;
@@ -277,7 +278,7 @@ export class RemoteStateView implements ClientStateView {
     this._invincibilityTimer = 0;
     this._remoteCursors = [];
     this._playerNames = {};
-    this._pendingState = null; // Fix: clear stale pending state from old realm
+    this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
     this._predictor?.clearPredicted();
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
@@ -343,5 +344,29 @@ export class RemoteStateView implements ClientStateView {
   /** Raw server entities (not replaced by predictor). Used for reconciliation. */
   get serverEntities(): readonly Entity[] {
     return this._entities;
+  }
+
+  /**
+   * Tick sprite animations client-side. Called every client update tick.
+   * Replicates the server's EntityManager animation logic (Phase 5 in its tick)
+   * so that animTimer/frameCol stay correct without being serialized.
+   */
+  tickAnimations(dt: number): void {
+    const dtMs = dt * 1000;
+    for (const entity of this._entities) {
+      const sprite = entity.sprite;
+      if (sprite && sprite.frameCount > 1) {
+        if (sprite.moving) {
+          sprite.animTimer += dtMs;
+          if (sprite.animTimer >= sprite.frameDuration) {
+            sprite.animTimer -= sprite.frameDuration;
+            sprite.frameCol = (sprite.frameCol + 1) % sprite.frameCount;
+          }
+        } else {
+          sprite.frameCol = 0;
+          sprite.animTimer = 0;
+        }
+      }
+    }
   }
 }

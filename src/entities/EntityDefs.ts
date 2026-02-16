@@ -46,22 +46,24 @@ export interface EntityDef {
 
 // ---- Dynamic state types (serialized per-tick) ----
 
-/** Dynamic sprite state — serialized per-tick in EntitySnapshot. */
+/** Dynamic sprite state — serialized per-tick in EntitySnapshot.
+ * Animation fields (animTimer, frameCol) are NOT serialized — the client
+ * computes animation locally from `moving`, `frameDuration`, and `frameCount`.
+ */
 export interface SpriteState {
-  frameCol: number;
-  frameRow: number;
-  animTimer: number;
   direction: Direction;
   moving: boolean;
+  frameRow: number;
   flipX?: boolean;
   /** Only present when differs from def (e.g. player sprint). */
   frameDuration?: number;
 }
 
-/** Dynamic AI state — serialized per-tick in EntitySnapshot. */
+/** Dynamic AI state — serialized per-tick in EntitySnapshot.
+ * The AI `timer` is NOT serialized — only needed server-side for state transitions.
+ */
 export interface WanderAIState {
   state: string;
-  timer: number;
   dirX: number;
   dirY: number;
   following?: boolean;
