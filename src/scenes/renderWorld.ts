@@ -105,6 +105,10 @@ let frameCount = 0;
 let fpsTimer = 0;
 let currentFps = 0;
 
+/** Net stats — KB/s receive rate, sampled every second alongside FPS. */
+let lastBytesReceived = 0;
+let currentNetKbps = 0;
+
 /** Update FPS counter and render the debug overlay if enabled. */
 export function renderDebugOverlay(gc: GameContext): void {
   // FPS tracking
@@ -113,6 +117,12 @@ export function renderDebugOverlay(gc: GameContext): void {
   if (now - fpsTimer >= 1) {
     currentFps = frameCount;
     frameCount = 0;
+
+    // Net stats: compute KB/s from bytesReceived delta
+    const rxNow = gc.transport.bytesReceived ?? 0;
+    currentNetKbps = (rxNow - lastBytesReceived) / 1024;
+    lastBytesReceived = rxNow;
+
     fpsTimer = now;
   }
 
@@ -145,6 +155,7 @@ export function renderDebugOverlay(gc: GameContext): void {
     stateView.props as import("../entities/Prop.js").Prop[],
     {
       fps: currentFps,
+      netKbps: gc.transport.bytesReceived !== undefined ? currentNetKbps : undefined,
       entityCount: stateView.entities.length,
       chunkCount: stateView.world.chunks.loadedCount,
       playerWx: px,

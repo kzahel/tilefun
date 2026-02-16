@@ -8,12 +8,15 @@ import type { IClientTransport } from "./Transport.js";
 export class WebSocketClientTransport implements IClientTransport {
   private ws: WebSocket;
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
+  bytesReceived = 0;
 
   constructor(url: string) {
     this.ws = new WebSocket(url);
     this.ws.onmessage = (event) => {
       try {
-        const msg = JSON.parse(event.data as string) as ServerMessage;
+        const raw = event.data as string;
+        this.bytesReceived += raw.length;
+        const msg = JSON.parse(raw) as ServerMessage;
         this.messageHandler?.(msg);
       } catch (err) {
         console.error("[tilefun] Bad server message:", err);

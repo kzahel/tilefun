@@ -20,6 +20,7 @@ export class SerializingTransport {
 
   constructor() {
     const self = this;
+    let rxBytes = 0;
 
     this.clientSide = {
       send(msg: ClientMessage): void {
@@ -32,16 +33,23 @@ export class SerializingTransport {
       close(): void {
         self.closed = true;
       },
+      get bytesReceived() {
+        return rxBytes;
+      },
     };
 
     this.serverSide = {
       send(_clientId: string, msg: ServerMessage): void {
         if (self.closed) return;
-        self.clientMessageHandler?.(roundtrip(msg));
+        const json = JSON.stringify(msg);
+        rxBytes += json.length;
+        self.clientMessageHandler?.(JSON.parse(json) as ServerMessage);
       },
       broadcast(msg: ServerMessage): void {
         if (self.closed) return;
-        self.clientMessageHandler?.(roundtrip(msg));
+        const json = JSON.stringify(msg);
+        rxBytes += json.length;
+        self.clientMessageHandler?.(JSON.parse(json) as ServerMessage);
       },
       onMessage(handler: (clientId: string, msg: ClientMessage) => void): void {
         self.serverMessageHandler = handler;

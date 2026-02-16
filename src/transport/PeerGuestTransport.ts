@@ -29,6 +29,7 @@ export class PeerGuestTransport implements IClientTransport {
   private pendingMessages: ServerMessage[] = [];
   private destroyed = false;
   private reconnectAttempts = 0;
+  bytesReceived = 0;
   private static readonly MAX_RECONNECT_ATTEMPTS = 5;
   private static readonly RECONNECT_DELAY_MS = 2_000;
   onStatus: ((status: PeerGuestStatus, detail?: string) => void) | null = null;
@@ -126,6 +127,9 @@ export class PeerGuestTransport implements IClientTransport {
 
     this.conn.on("data", (data) => {
       try {
+        if (typeof data === "string") {
+          this.bytesReceived += data.length;
+        }
         const msg = (typeof data === "string" ? JSON.parse(data) : data) as ServerMessage;
         if (this.messageHandler) {
           this.messageHandler(msg);

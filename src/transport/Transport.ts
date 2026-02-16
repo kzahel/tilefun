@@ -4,6 +4,8 @@ export interface IClientTransport {
   send(msg: ClientMessage): void;
   onMessage(handler: (msg: ServerMessage) => void): void;
   close(): void;
+  /** Cumulative bytes received from the server (for net stats display). */
+  readonly bytesReceived?: number;
 }
 
 export interface IServerTransport {
