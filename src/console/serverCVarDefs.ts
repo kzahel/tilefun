@@ -90,6 +90,14 @@ export const SERVER_CVAR_DEFS: readonly CVarDesc[] = [
     category: "sv",
   },
   {
+    name: "sv_platformerair",
+    description:
+      "Platformer-style air control (ground friction+accel apply mid-air). Off = QW air physics.",
+    type: "boolean",
+    defaultValue: true,
+    category: "sv",
+  },
+  {
     name: "sv_stopspeed",
     description: "Friction control floor speed (QW: 100, default: 16)",
     type: "number",

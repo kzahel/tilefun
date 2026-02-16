@@ -52,6 +52,7 @@ import {
   getGravityScale,
   getNoBunnyHop,
   getPhysicsCVarRevision,
+  getPlatformerAir,
   getSmallJumps,
   getStopSpeed,
   getTimeScale,
@@ -1305,6 +1306,7 @@ export class Realm {
           stopSpeed: getStopSpeed(),
           noBunnyHop: getNoBunnyHop(),
           smallJumps: getSmallJumps(),
+          platformerAir: getPlatformerAir(),
           timeScale: getTimeScale(),
         },
       });

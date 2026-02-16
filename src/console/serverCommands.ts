@@ -6,6 +6,7 @@ import {
   setFriction,
   setGravityScale,
   setNoBunnyHop,
+  setPlatformerAir,
   setSmallJumps,
   setStopSpeed,
   setTimeScale,
@@ -51,6 +52,12 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
   setNoBunnyHop(sv_nobunnyhop.get() as boolean);
   sv_nobunnyhop.onChange((val) => {
     setNoBunnyHop(val as boolean);
+  });
+
+  const sv_platformerair = getCVar(engine, "sv_platformerair");
+  setPlatformerAir(sv_platformerair.get() as boolean);
+  sv_platformerair.onChange((val) => {
+    setPlatformerAir(val as boolean);
   });
 
   const sv_friction = getCVar(engine, "sv_friction");

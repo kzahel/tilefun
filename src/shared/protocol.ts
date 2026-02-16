@@ -184,6 +184,7 @@ export interface PhysicsCVars {
   stopSpeed: number;
   noBunnyHop: boolean;
   smallJumps: boolean;
+  platformerAir: boolean;
   timeScale: number;
 }
 

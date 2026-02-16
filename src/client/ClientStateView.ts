@@ -7,6 +7,7 @@ import {
   setFriction,
   setGravityScale,
   setNoBunnyHop,
+  setPlatformerAir,
   setSmallJumps,
   setStopSpeed,
   setTimeScale,
@@ -304,6 +305,7 @@ export class RemoteStateView implements ClientStateView {
     setStopSpeed(msg.cvars.stopSpeed);
     setNoBunnyHop(msg.cvars.noBunnyHop);
     setSmallJumps(msg.cvars.smallJumps);
+    setPlatformerAir(msg.cvars.platformerAir);
     setTimeScale(msg.cvars.timeScale);
   }
 

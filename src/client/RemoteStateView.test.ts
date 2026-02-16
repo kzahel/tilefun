@@ -15,6 +15,7 @@ import {
   getFriction,
   getGravityScale,
   getNoBunnyHop,
+  getPlatformerAir,
   getSmallJumps,
   getStopSpeed,
   getTimeScale,
@@ -24,6 +25,7 @@ import {
   setFriction,
   setGravityScale,
   setNoBunnyHop,
+  setPlatformerAir,
   setSmallJumps,
   setStopSpeed,
   setTimeScale,
@@ -560,6 +562,7 @@ describe("RemoteStateView", () => {
     setStopSpeed(PLAYER_STOP_SPEED);
     setNoBunnyHop(false);
     setSmallJumps(false);
+    setPlatformerAir(true);
     setTimeScale(1);
 
     view.applyMessage({
@@ -573,6 +576,7 @@ describe("RemoteStateView", () => {
         stopSpeed: 100,
         noBunnyHop: true,
         smallJumps: true,
+        platformerAir: false,
         timeScale: 0.5,
       },
     });
@@ -585,6 +589,7 @@ describe("RemoteStateView", () => {
     expect(getStopSpeed()).toBe(100);
     expect(getNoBunnyHop()).toBe(true);
     expect(getSmallJumps()).toBe(true);
+    expect(getPlatformerAir()).toBe(false);
     expect(getTimeScale()).toBe(0.5);
 
     // Restore defaults so other tests aren't affected
@@ -596,6 +601,7 @@ describe("RemoteStateView", () => {
     setStopSpeed(PLAYER_STOP_SPEED);
     setNoBunnyHop(false);
     setSmallJumps(false);
+    setPlatformerAir(true);
     setTimeScale(1);
   });
 

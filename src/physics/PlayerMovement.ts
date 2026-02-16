@@ -111,6 +111,15 @@ export function getSmallJumps(): boolean {
   return smallJumps;
 }
 
+let platformerAir = true;
+export function setPlatformerAir(v: boolean): void {
+  platformerAir = v;
+  physicsCVarRevision++;
+}
+export function getPlatformerAir(): boolean {
+  return platformerAir;
+}
+
 let timeScaleCVar = 1;
 export function setTimeScale(v: number): void {
   timeScaleCVar = v;
@@ -354,8 +363,8 @@ export function applyMovementPhysics(
         ctx.getCollision,
       );
 
-  // 1. Friction first (QW order) — skip while airborne to preserve momentum
-  if (!airborne) {
+  // 1. Friction first (QW order) — skip while airborne unless platformer air control
+  if (!airborne || platformerAir) {
     applyFriction(entity, dt, surface.friction);
   }
 
@@ -368,7 +377,7 @@ export function applyMovementPhysics(
     const wishdirY = dy / len;
     const baseSpeed = input.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
     const wishspeed = baseSpeed * surface.speedMult;
-    if (airborne) {
+    if (airborne && !platformerAir) {
       applyAirAcceleration(entity, wishdirX, wishdirY, wishspeed, airAccelerateCVar, dt);
     } else {
       applyAcceleration(entity, wishdirX, wishdirY, wishspeed, accelerateCVar, dt);
