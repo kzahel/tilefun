@@ -6,7 +6,7 @@ A creative-mode-first 2D tile game — paint terrain, place entities, hit play, 
 
 **Play it live:** https://kyle.graehl.org/tilefun | **Dev log:** https://kyle.graehl.org/tilefun-devlog/
 
-<video src="https://github.com/kzahel/tilefun-devlog/releases/download/devlog-2026-02-15/devlog-2026-02-15.mp4" controls muted playsinline width="400"></video>
+<video src="https://github.com/user-attachments/assets/038140dd-e987-4f71-8ec4-8fa5425dba1d" controls muted playsinline width="400"></video>
 
 ## Features
 
