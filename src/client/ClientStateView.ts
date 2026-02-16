@@ -13,7 +13,17 @@ import {
 } from "../physics/PlayerMovement.js";
 import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
-import type { GameStateMessage, RemoteEditorCursor } from "../shared/protocol.js";
+import type {
+  BufferedMessage,
+  FrameMessage,
+  RemoteEditorCursor,
+  SyncChunksMessage,
+  SyncCVarsMessage,
+  SyncEditorCursorsMessage,
+  SyncPlayerNamesMessage,
+  SyncPropsMessage,
+  SyncSessionMessage,
+} from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
@@ -101,7 +111,7 @@ export class RemoteStateView implements ClientStateView {
   private _editorEnabled = true;
   private _remoteCursors: RemoteEditorCursor[] = [];
   private _playerNames: Record<number, string> = {};
-  private _pendingStates: GameStateMessage[] = [];
+  private _pendingStates: BufferedMessage[] = [];
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
@@ -138,7 +148,7 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /**
-   * Buffer a game-state message for deferred application.
+   * Buffer a message for deferred application.
    * Call applyPending() during the client update tick to apply it,
    * ensuring entity and camera updates are synchronized.
    *
@@ -146,32 +156,54 @@ export class RemoteStateView implements ClientStateView {
    * requires sequential application (baselines/deltas/exits are relative
    * to the previous tick's state).
    */
-  bufferGameState(msg: GameStateMessage): void {
+  bufferMessage(msg: BufferedMessage): void {
     this._pendingStates.push(msg);
   }
 
-  /** Apply any buffered game-state messages. Call at the start of each client update tick. */
+  /** Apply any buffered messages. Call at the start of each client update tick. */
   applyPending(): void {
     this._stateAppliedThisTick = false;
     if (this._pendingStates.length === 0) return;
     for (const msg of this._pendingStates) {
-      this.applyGameState(msg);
+      this.applyMessage(msg);
     }
     this._pendingStates.length = 0;
     this._stateAppliedThisTick = true;
   }
 
-  /** Apply a game-state message from the server (delta-aware: absent fields = unchanged). */
-  applyGameState(msg: GameStateMessage): void {
+  /** Dispatch a buffered message to the appropriate handler. */
+  applyMessage(msg: BufferedMessage): void {
+    switch (msg.type) {
+      case "frame":
+        this.applyFrame(msg);
+        break;
+      case "sync-session":
+        this.applySyncSession(msg);
+        break;
+      case "sync-chunks":
+        this.applySyncChunks(msg);
+        break;
+      case "sync-props":
+        this.applySyncProps(msg);
+        break;
+      case "sync-cvars":
+        this.applySyncCVars(msg);
+        break;
+      case "sync-player-names":
+        this.applySyncPlayerNames(msg);
+        break;
+      case "sync-editor-cursors":
+        this.applySyncEditorCursors(msg);
+        break;
+    }
+  }
+
+  /** Apply a per-tick frame message (entity delta protocol). */
+  applyFrame(msg: FrameMessage): void {
     // Log state transitions that matter for debugging realm-switch movement bug
     if (msg.playerEntityId !== this._playerEntityId) {
       console.log(
         `[tilefun:rsv] playerEntityId changed: ${this._playerEntityId} → ${msg.playerEntityId}`,
-      );
-    }
-    if (msg.editorEnabled !== undefined && msg.editorEnabled !== this._editorEnabled) {
-      console.log(
-        `[tilefun:rsv] editorEnabled changed: ${this._editorEnabled} → ${msg.editorEnabled}`,
       );
     }
 
@@ -179,8 +211,6 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = msg.playerEntityId;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
-
-    // --- Entity delta protocol ---
 
     // Save prev positions for interpolation before applying updates
     for (const e of this._entityMap.values()) {
@@ -217,29 +247,23 @@ export class RemoteStateView implements ClientStateView {
 
     // Rebuild flat entity array from map
     this._entities = Array.from(this._entityMap.values());
+  }
 
-    // Delta fields — only update when present (absent = unchanged)
-    if (msg.props !== undefined) this._props = msg.props.map(deserializeProp);
-    if (msg.gemsCollected !== undefined) this._gemsCollected = msg.gemsCollected;
-    if (msg.invincibilityTimer !== undefined) this._invincibilityTimer = msg.invincibilityTimer;
-    if (msg.editorEnabled !== undefined) this._editorEnabled = msg.editorEnabled;
-    if (msg.editorCursors !== undefined) this._remoteCursors = msg.editorCursors;
-    if (msg.playerNames !== undefined) this._playerNames = msg.playerNames;
-    if (msg.mountEntityId !== undefined) this._mountEntityId = msg.mountEntityId ?? undefined;
-
-    // Sync server physics CVars so client prediction matches server movement.
-    if (msg.cvars !== undefined) {
-      setGravityScale(msg.cvars.gravity);
-      setFriction(msg.cvars.friction);
-      setAccelerate(msg.cvars.accelerate);
-      setAirAccelerate(msg.cvars.airAccelerate);
-      setAirWishCap(msg.cvars.airWishCap);
-      setStopSpeed(msg.cvars.stopSpeed);
-      setNoBunnyHop(msg.cvars.noBunnyHop);
-      setSmallJumps(msg.cvars.smallJumps);
-      setTimeScale(msg.cvars.timeScale);
+  /** Apply session sync (gems, invincibility, editor, mount). */
+  private applySyncSession(msg: SyncSessionMessage): void {
+    if (msg.editorEnabled !== this._editorEnabled) {
+      console.log(
+        `[tilefun:rsv] editorEnabled changed: ${this._editorEnabled} → ${msg.editorEnabled}`,
+      );
     }
+    this._gemsCollected = msg.gemsCollected;
+    this._invincibilityTimer = msg.invincibilityTimer;
+    this._editorEnabled = msg.editorEnabled;
+    this._mountEntityId = msg.mountEntityId ?? undefined;
+  }
 
+  /** Apply chunk sync (terrain data and/or loaded chunk set). */
+  private applySyncChunks(msg: SyncChunksMessage): void {
     // Apply chunk updates (delta — only new/changed chunks).
     // Use put() instead of getOrCreate() to avoid invalidateNeighborAutotile()
     // which would reset autotileComputed on already-applied neighbor chunks.
@@ -263,6 +287,34 @@ export class RemoteStateView implements ClientStateView {
         }
       }
     }
+  }
+
+  /** Apply props sync. */
+  private applySyncProps(msg: SyncPropsMessage): void {
+    this._props = msg.props.map(deserializeProp);
+  }
+
+  /** Apply physics CVars sync for client prediction. */
+  private applySyncCVars(msg: SyncCVarsMessage): void {
+    setGravityScale(msg.cvars.gravity);
+    setFriction(msg.cvars.friction);
+    setAccelerate(msg.cvars.accelerate);
+    setAirAccelerate(msg.cvars.airAccelerate);
+    setAirWishCap(msg.cvars.airWishCap);
+    setStopSpeed(msg.cvars.stopSpeed);
+    setNoBunnyHop(msg.cvars.noBunnyHop);
+    setSmallJumps(msg.cvars.smallJumps);
+    setTimeScale(msg.cvars.timeScale);
+  }
+
+  /** Apply player names sync. */
+  private applySyncPlayerNames(msg: SyncPlayerNamesMessage): void {
+    this._playerNames = msg.playerNames;
+  }
+
+  /** Apply editor cursors sync. */
+  private applySyncEditorCursors(msg: SyncEditorCursorsMessage): void {
+    this._remoteCursors = msg.editorCursors;
   }
 
   /** Clear all cached state (e.g., when switching worlds). */

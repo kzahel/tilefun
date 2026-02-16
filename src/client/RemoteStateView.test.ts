@@ -27,7 +27,7 @@ import {
   setStopSpeed,
   setTimeScale,
 } from "../physics/PlayerMovement.js";
-import type { GameStateMessage, PhysicsCVars } from "../shared/protocol.js";
+import type { FrameMessage } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
@@ -63,33 +63,12 @@ function makeTestProp(id: number, wx: number, wy: number) {
   });
 }
 
-const DEFAULT_CVARS: PhysicsCVars = {
-  gravity: 1,
-  friction: PLAYER_FRICTION,
-  accelerate: PLAYER_ACCELERATE,
-  airAccelerate: PLAYER_AIR_ACCELERATE,
-  airWishCap: PLAYER_AIR_WISHCAP,
-  stopSpeed: PLAYER_STOP_SPEED,
-  noBunnyHop: false,
-  smallJumps: false,
-  timeScale: 1,
-};
-
-function makeGameState(overrides: Partial<GameStateMessage> = {}): GameStateMessage {
+function makeFrame(overrides: Partial<FrameMessage> = {}): FrameMessage {
   return {
-    type: "game-state",
+    type: "frame",
     serverTick: 0,
     lastProcessedInputSeq: 0,
-    props: [],
     playerEntityId: 1,
-    gemsCollected: 0,
-    invincibilityTimer: 0,
-    editorEnabled: true,
-    loadedChunkKeys: [],
-    chunkUpdates: [],
-    editorCursors: [],
-    playerNames: {},
-    cvars: DEFAULT_CVARS,
     ...overrides,
   };
 }
@@ -114,12 +93,12 @@ describe("RemoteStateView", () => {
     expect(player.type).toBe("player");
   });
 
-  it("applies entity baselines from game-state message", () => {
+  it("applies entity baselines from frame message", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75), makeTestEntity(2, 100, 200)],
         playerEntityId: 1,
       }),
@@ -136,8 +115,8 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // First tick: baselines
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
       }),
@@ -145,8 +124,8 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
 
     // Second tick: delta moves entity
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
         playerEntityId: 1,
       }),
@@ -160,8 +139,8 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // First tick: two entities
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 50, 50)],
         playerEntityId: 1,
       }),
@@ -169,8 +148,8 @@ describe("RemoteStateView", () => {
     expect(view.entities).toHaveLength(2);
 
     // Second tick: entity 2 exits
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityExits: [2],
         playerEntityId: 1,
       }),
@@ -179,40 +158,43 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.id).toBe(1);
   });
 
-  it("applies prop state from game-state message", () => {
+  it("applies prop state from sync-props message", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    view.applyGameState(
-      makeGameState({
-        props: [makeTestProp(10, 25, 50)],
-      }),
-    );
+    view.applyMessage({
+      type: "sync-props",
+      props: [makeTestProp(10, 25, 50)],
+    });
 
     expect(view.props).toHaveLength(1);
     expect(view.props.at(0)?.type).toBe("tree");
   });
 
-  it("applies gameplay state", () => {
+  it("applies gameplay state from sync-session", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0)],
         playerEntityId: 1,
-        gemsCollected: 15,
-        invincibilityTimer: 2.5,
-        editorEnabled: false,
       }),
     );
+    view.applyMessage({
+      type: "sync-session",
+      gemsCollected: 15,
+      invincibilityTimer: 2.5,
+      editorEnabled: false,
+      mountEntityId: null,
+    });
 
     expect(view.gemsCollected).toBe(15);
     expect(view.invincibilityTimer).toBe(2.5);
     expect(view.editorEnabled).toBe(false);
   });
 
-  it("applies chunk updates", () => {
+  it("applies chunk updates from sync-chunks", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
@@ -222,12 +204,11 @@ describe("RemoteStateView", () => {
     chunk.revision = 1;
     const snapshot = serializeChunk(0, 0, chunk);
 
-    view.applyGameState(
-      makeGameState({
-        loadedChunkKeys: ["0,0"],
-        chunkUpdates: [snapshot],
-      }),
-    );
+    view.applyMessage({
+      type: "sync-chunks",
+      loadedChunkKeys: ["0,0"],
+      chunkUpdates: [snapshot],
+    });
 
     const loaded = view.world.chunks.get(0, 0);
     expect(loaded).toBeTruthy();
@@ -242,21 +223,18 @@ describe("RemoteStateView", () => {
     // First load a chunk
     const chunk = new Chunk();
     chunk.revision = 1;
-    view.applyGameState(
-      makeGameState({
-        loadedChunkKeys: ["0,0"],
-        chunkUpdates: [serializeChunk(0, 0, chunk)],
-      }),
-    );
+    view.applyMessage({
+      type: "sync-chunks",
+      loadedChunkKeys: ["0,0"],
+      chunkUpdates: [serializeChunk(0, 0, chunk)],
+    });
     expect(view.world.chunks.get(0, 0)).toBeTruthy();
 
     // Now send state without that chunk
-    view.applyGameState(
-      makeGameState({
-        loadedChunkKeys: [],
-        chunkUpdates: [],
-      }),
-    );
+    view.applyMessage({
+      type: "sync-chunks",
+      loadedChunkKeys: [],
+    });
     expect(view.world.chunks.get(0, 0)).toBeUndefined();
   });
 
@@ -265,16 +243,28 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // Apply some state
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0)],
-        props: [makeTestProp(10, 0, 0)],
         playerEntityId: 1,
-        gemsCollected: 42,
-        loadedChunkKeys: ["0,0"],
-        chunkUpdates: [serializeChunk(0, 0, new Chunk())],
       }),
     );
+    view.applyMessage({
+      type: "sync-props",
+      props: [makeTestProp(10, 0, 0)],
+    });
+    view.applyMessage({
+      type: "sync-session",
+      gemsCollected: 42,
+      invincibilityTimer: 0,
+      editorEnabled: true,
+      mountEntityId: null,
+    });
+    view.applyMessage({
+      type: "sync-chunks",
+      loadedChunkKeys: ["0,0"],
+      chunkUpdates: [serializeChunk(0, 0, new Chunk())],
+    });
 
     view.clear();
 
@@ -289,8 +279,8 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // First tick: two entities
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 0, 0)],
         playerEntityId: 1,
       }),
@@ -298,8 +288,8 @@ describe("RemoteStateView", () => {
     expect(view.entities).toHaveLength(2);
 
     // Second tick: entity 1 and 2 exit, entity 3 enters
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityExits: [1, 2],
         entityBaselines: [makeTestEntity(3, 50, 50)],
         playerEntityId: 3,
@@ -314,16 +304,16 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // First tick: baseline
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
       }),
     );
 
     // Second tick: no entity updates at all (idle entity)
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         playerEntityId: 1,
       }),
     );
@@ -338,8 +328,8 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // First tick: baseline at (50, 75)
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
       }),
@@ -348,8 +338,8 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.prevPosition).toBeUndefined();
 
     // Second tick: delta moves entity to (100, 200)
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
         playerEntityId: 1,
       }),
@@ -363,16 +353,16 @@ describe("RemoteStateView", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
       }),
     );
 
     // No-change tick — prevPosition should still be saved
-    view.applyGameState(
-      makeGameState({
+    view.applyFrame(
+      makeFrame({
         playerEntityId: 1,
       }),
     );
@@ -381,13 +371,13 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
   });
 
-  it("bufferGameState queues messages, applyPending applies them in order", () => {
+  it("bufferMessage queues messages, applyPending applies them in order", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
     // Buffer baseline
-    view.bufferGameState(
-      makeGameState({
+    view.bufferMessage(
+      makeFrame({
         serverTick: 1,
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
@@ -395,8 +385,8 @@ describe("RemoteStateView", () => {
     );
 
     // Buffer delta
-    view.bufferGameState(
-      makeGameState({
+    view.bufferMessage(
+      makeFrame({
         serverTick: 2,
         entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
         playerEntityId: 1,
@@ -419,8 +409,8 @@ describe("RemoteStateView", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    view.bufferGameState(
-      makeGameState({
+    view.bufferMessage(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 50, 75)],
         playerEntityId: 1,
       }),
@@ -438,15 +428,15 @@ describe("RemoteStateView", () => {
     const view = new RemoteStateView(world);
 
     // Buffer in correct order: baseline → delta → exit
-    view.bufferGameState(
-      makeGameState({
+    view.bufferMessage(
+      makeFrame({
         serverTick: 1,
         entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 50, 50)],
         playerEntityId: 1,
       }),
     );
-    view.bufferGameState(
-      makeGameState({
+    view.bufferMessage(
+      makeFrame({
         serverTick: 2,
         entityDeltas: [{ id: 1, position: { wx: 100, wy: 100 } }],
         entityExits: [2],
@@ -461,75 +451,78 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.position).toEqual({ wx: 100, wy: 100 });
   });
 
-  it("delta fields absent = unchanged (keep previous values)", () => {
+  it("session state unchanged when no sync-session received", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    // First tick: set all values
-    view.applyGameState(
-      makeGameState({
+    // First: set session state
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0)],
         playerEntityId: 1,
-        gemsCollected: 15,
-        invincibilityTimer: 2.5,
-        editorEnabled: false,
+      }),
+    );
+    view.applyMessage({
+      type: "sync-session",
+      gemsCollected: 15,
+      invincibilityTimer: 2.5,
+      editorEnabled: false,
+      mountEntityId: null,
+    });
+
+    expect(view.gemsCollected).toBe(15);
+    expect(view.invincibilityTimer).toBe(2.5);
+    expect(view.editorEnabled).toBe(false);
+
+    // Second tick: only frame, no sync-session — values should be retained
+    view.applyFrame(
+      makeFrame({
+        serverTick: 1,
+        playerEntityId: 1,
       }),
     );
 
     expect(view.gemsCollected).toBe(15);
     expect(view.invincibilityTimer).toBe(2.5);
     expect(view.editorEnabled).toBe(false);
-
-    // Second tick: only gemsCollected changes, others TRULY absent
-    // (must not use makeGameState which sets defaults for all fields)
-    view.applyGameState({
-      type: "game-state",
-      serverTick: 1,
-      lastProcessedInputSeq: 0,
-      playerEntityId: 1,
-      gemsCollected: 20,
-      // invincibilityTimer absent — should keep 2.5
-      // editorEnabled absent — should keep false
-    });
-
-    expect(view.gemsCollected).toBe(20);
-    expect(view.invincibilityTimer).toBe(2.5); // unchanged
-    expect(view.editorEnabled).toBe(false); // unchanged
   });
 
-  it("mountEntityId null vs undefined semantics", () => {
+  it("mountEntityId null clears mount in sync-session", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
-    // First tick: mount entity set
-    view.applyGameState(
-      makeGameState({
+    // First: mount entity set
+    view.applyFrame(
+      makeFrame({
         entityBaselines: [makeTestEntity(1, 0, 0)],
         playerEntityId: 1,
-        mountEntityId: 42,
       }),
     );
+    view.applyMessage({
+      type: "sync-session",
+      gemsCollected: 0,
+      invincibilityTimer: 0,
+      editorEnabled: true,
+      mountEntityId: 42,
+    });
     expect(view.mountEntityId).toBe(42);
 
-    // Second tick: mountEntityId absent — should keep 42
-    view.applyGameState(
-      makeGameState({
-        playerEntityId: 1,
-      }),
-    );
+    // Second tick: only frame — mount should be retained
+    view.applyFrame(makeFrame({ playerEntityId: 1 }));
     expect(view.mountEntityId).toBe(42);
 
-    // Third tick: mountEntityId null — should clear (dismount)
-    view.applyGameState(
-      makeGameState({
-        playerEntityId: 1,
-        mountEntityId: null,
-      }),
-    );
+    // Third tick: sync-session with mount=null — should clear (dismount)
+    view.applyMessage({
+      type: "sync-session",
+      gemsCollected: 0,
+      invincibilityTimer: 0,
+      editorEnabled: true,
+      mountEntityId: null,
+    });
     expect(view.mountEntityId).toBeUndefined();
   });
 
-  it("syncs physics CVars from game-state to PlayerMovement module", () => {
+  it("syncs physics CVars from sync-cvars to PlayerMovement module", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
 
@@ -544,21 +537,20 @@ describe("RemoteStateView", () => {
     setSmallJumps(false);
     setTimeScale(1);
 
-    view.applyGameState(
-      makeGameState({
-        cvars: {
-          gravity: 0.5,
-          friction: 4,
-          accelerate: 10,
-          airAccelerate: 0.7,
-          airWishCap: 30,
-          stopSpeed: 100,
-          noBunnyHop: true,
-          smallJumps: true,
-          timeScale: 0.5,
-        },
-      }),
-    );
+    view.applyMessage({
+      type: "sync-cvars",
+      cvars: {
+        gravity: 0.5,
+        friction: 4,
+        accelerate: 10,
+        airAccelerate: 0.7,
+        airWishCap: 30,
+        stopSpeed: 100,
+        noBunnyHop: true,
+        smallJumps: true,
+        timeScale: 0.5,
+      },
+    });
 
     expect(getGravityScale()).toBe(0.5);
     expect(getFriction()).toBe(4);

@@ -66,8 +66,10 @@ import { diffEntitySnapshots } from "../shared/entityDelta.js";
 import type {
   ClientMessage,
   EntitySnapshot,
-  GameStateMessage,
+  FrameMessage,
   RemoteEditorCursor,
+  ServerMessage,
+  SyncChunksMessage,
 } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -670,8 +672,10 @@ export class Realm {
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId)) continue;
-        const msg = this.buildGameState(session.clientId);
-        transport.send(session.clientId, msg);
+        const messages = this.buildMessages(session.clientId);
+        for (const msg of messages) {
+          transport.send(session.clientId, msg);
+        }
       }
     }
   }
@@ -1091,8 +1095,8 @@ export class Realm {
     };
   }
 
-  /** Build a game-state message for a specific client, with delta optimization. */
-  private buildGameState(clientId: string): GameStateMessage {
+  /** Build per-tick frame + on-change sync events for a specific client. */
+  private buildMessages(clientId: string): ServerMessage[] {
     const session = this.sessions.get(clientId);
     if (!session) throw new Error(`No session for ${clientId}`);
 
@@ -1161,14 +1165,6 @@ export class Realm {
       }
     }
 
-    // Build message with always-present fields
-    const msg: GameStateMessage = {
-      type: "game-state",
-      serverTick: this.tickCounter,
-      lastProcessedInputSeq: session.lastProcessedInputSeq,
-      playerEntityId: session.player.id,
-    };
-
     // Entity delta compression: baselines for new, deltas for changed, exits for removed
     const lastSent = delta.lastSentEntities;
     const currentEntityIds = new Set<number>();
@@ -1199,11 +1195,61 @@ export class Realm {
       }
     }
 
-    if (entityBaselines.length > 0) msg.entityBaselines = entityBaselines;
-    if (entityDeltas.length > 0) msg.entityDeltas = entityDeltas;
-    if (entityExits.length > 0) msg.entityExits = entityExits;
+    // -- Build messages array: frame first, then sync events --
+    const messages: ServerMessage[] = [];
 
-    // Delta: props — check revision + visible range
+    // Frame message (always sent every tick)
+    const frame: FrameMessage = {
+      type: "frame",
+      serverTick: this.tickCounter,
+      lastProcessedInputSeq: session.lastProcessedInputSeq,
+      playerEntityId: session.player.id,
+    };
+    if (entityBaselines.length > 0) frame.entityBaselines = entityBaselines;
+    if (entityDeltas.length > 0) frame.entityDeltas = entityDeltas;
+    if (entityExits.length > 0) frame.entityExits = entityExits;
+    messages.push(frame);
+
+    // Sync: session scalars (gems, invincibility, editor, mount)
+    const gems = session.gameplaySession.gemsCollected;
+    const invTimer = session.gameplaySession.invincibilityTimer;
+    const currentMount = session.gameplaySession.mountId;
+    const sessionDirty =
+      gems !== delta.gemsCollected ||
+      invTimer !== delta.invincibilityTimer ||
+      session.editorEnabled !== delta.editorEnabled ||
+      currentMount !== delta.mountEntityId;
+    if (sessionDirty) {
+      messages.push({
+        type: "sync-session",
+        gemsCollected: gems,
+        invincibilityTimer: invTimer,
+        editorEnabled: session.editorEnabled,
+        mountEntityId: currentMount,
+      });
+      delta.gemsCollected = gems;
+      delta.invincibilityTimer = invTimer;
+      delta.editorEnabled = session.editorEnabled;
+      delta.mountEntityId = currentMount;
+    }
+
+    // Sync: chunks (keys and/or data)
+    loadedChunkKeys.sort();
+    const keysJoined = loadedChunkKeys.join(";");
+    const chunkKeysDirty = keysJoined !== delta.loadedChunkKeysJoined;
+    if (chunkKeysDirty || chunkUpdates.length > 0) {
+      const syncChunks: SyncChunksMessage = { type: "sync-chunks" };
+      if (chunkKeysDirty) {
+        syncChunks.loadedChunkKeys = loadedChunkKeys;
+        delta.loadedChunkKeysJoined = keysJoined;
+      }
+      if (chunkUpdates.length > 0) {
+        syncChunks.chunkUpdates = chunkUpdates;
+      }
+      messages.push(syncChunks);
+    }
+
+    // Sync: props
     const propRangeKey = `${range.minCx - buf},${range.minCy - buf},${range.maxCx + buf},${range.maxCy + buf}`;
     if (this.propManager.revision !== delta.propRevision || propRangeKey !== delta.propRangeKey) {
       const nearbyProps = this.propManager.getPropsInChunkRange(
@@ -1212,60 +1258,22 @@ export class Realm {
         range.maxCx + buf,
         range.maxCy + buf,
       );
-      msg.props = nearbyProps.map(serializeProp);
+      messages.push({ type: "sync-props", props: nearbyProps.map(serializeProp) });
       delta.propRevision = this.propManager.revision;
       delta.propRangeKey = propRangeKey;
     }
 
-    // Delta: scalar per-session fields
-    const gems = session.gameplaySession.gemsCollected;
-    if (gems !== delta.gemsCollected) {
-      msg.gemsCollected = gems;
-      delta.gemsCollected = gems;
-    }
-
-    const invTimer = session.gameplaySession.invincibilityTimer;
-    if (invTimer !== delta.invincibilityTimer) {
-      msg.invincibilityTimer = invTimer;
-      delta.invincibilityTimer = invTimer;
-    }
-
-    if (session.editorEnabled !== delta.editorEnabled) {
-      msg.editorEnabled = session.editorEnabled;
-      delta.editorEnabled = session.editorEnabled;
-    }
-
-    // Delta: mountEntityId (null = not riding, absent = unchanged)
-    const currentMount = session.gameplaySession.mountId;
-    if (currentMount !== delta.mountEntityId) {
-      msg.mountEntityId = currentMount;
-      delta.mountEntityId = currentMount;
-    }
-
-    // Delta: loadedChunkKeys — compare joined string
-    loadedChunkKeys.sort();
-    const keysJoined = loadedChunkKeys.join(";");
-    if (keysJoined !== delta.loadedChunkKeysJoined) {
-      msg.loadedChunkKeys = loadedChunkKeys;
-      delta.loadedChunkKeysJoined = keysJoined;
-    }
-
-    // Delta: chunkUpdates — only include when non-empty
-    if (chunkUpdates.length > 0) {
-      msg.chunkUpdates = chunkUpdates;
-    }
-
-    // Delta: playerNames — check revision
+    // Sync: playerNames
     if (this.playerNamesRevision !== delta.playerNamesRevision) {
       const playerNames: Record<number, string> = {};
       for (const [, other] of this.sessions) {
         playerNames[other.player.id] = other.displayName;
       }
-      msg.playerNames = playerNames;
+      messages.push({ type: "sync-player-names", playerNames });
       delta.playerNamesRevision = this.playerNamesRevision;
     }
 
-    // Delta: editorCursors — check revision
+    // Sync: editorCursors
     if (this.editorCursorsRevision !== delta.editorCursorsRevision) {
       const editorCursors: RemoteEditorCursor[] = [];
       for (const [otherId, other] of this.sessions) {
@@ -1279,28 +1287,31 @@ export class Realm {
           brushMode: other.editorCursor.brushMode,
         });
       }
-      msg.editorCursors = editorCursors;
+      messages.push({ type: "sync-editor-cursors", editorCursors });
       delta.editorCursorsRevision = this.editorCursorsRevision;
     }
 
-    // Delta: cvars — check revision
+    // Sync: cvars
     const cvarsRev = getPhysicsCVarRevision();
     if (cvarsRev !== delta.cvarsRevision) {
-      msg.cvars = {
-        gravity: getGravityScale(),
-        friction: getFriction(),
-        accelerate: getAccelerate(),
-        airAccelerate: getAirAccelerate(),
-        airWishCap: getAirWishCap(),
-        stopSpeed: getStopSpeed(),
-        noBunnyHop: getNoBunnyHop(),
-        smallJumps: getSmallJumps(),
-        timeScale: getTimeScale(),
-      };
+      messages.push({
+        type: "sync-cvars",
+        cvars: {
+          gravity: getGravityScale(),
+          friction: getFriction(),
+          accelerate: getAccelerate(),
+          airAccelerate: getAirAccelerate(),
+          airWishCap: getAirWishCap(),
+          stopSpeed: getStopSpeed(),
+          noBunnyHop: getNoBunnyHop(),
+          smallJumps: getSmallJumps(),
+          timeScale: getTimeScale(),
+        },
+      });
       delta.cvarsRevision = cvarsRev;
     }
 
-    return msg;
+    return messages;
   }
 
   private handleSpawn(entityType: string, wx: number, wy: number): void {

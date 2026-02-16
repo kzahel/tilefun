@@ -154,7 +154,7 @@ export class PlayerPredictor {
 
   /**
    * Reconcile predicted position against authoritative server state using
-   * input replay. Called when a new GameStateMessage is applied.
+   * input replay. Called when a new FrameMessage is applied.
    *
    * 1. Snap to server's authoritative position
    * 2. Discard acknowledged inputs (seq <= lastProcessedInputSeq)

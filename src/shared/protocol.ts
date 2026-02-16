@@ -187,42 +187,73 @@ export interface PhysicsCVars {
   timeScale: number;
 }
 
-export interface GameStateMessage {
-  // Always present (needed every tick for prediction/rendering):
-  type: "game-state";
+// ---- Per-tick frame message (hot path — future unreliable channel) ----
+
+export interface FrameMessage {
+  type: "frame";
   serverTick: number;
   lastProcessedInputSeq: number;
   playerEntityId: number;
-
-  // Entity delta protocol — baselines for new entities, deltas for changed,
-  // exits for removed. All optional (absent = none of that type this tick).
   entityBaselines?: EntitySnapshot[];
   entityDeltas?: EntityDelta[];
   entityExits?: number[];
+}
 
-  // Delta fields — only present when changed from last sent value.
-  // Absent (undefined) = unchanged, keep previous client value.
-  props?: PropSnapshot[];
-  gemsCollected?: number;
-  invincibilityTimer?: number;
-  editorEnabled?: boolean;
+// ---- Sync events (on-change only — future reliable channel) ----
+
+export interface SyncSessionMessage {
+  type: "sync-session";
+  gemsCollected: number;
+  invincibilityTimer: number;
+  editorEnabled: boolean;
+  /** null = not riding. Absence of entire SyncSession = unchanged. */
+  mountEntityId: number | null;
+}
+
+export interface SyncChunksMessage {
+  type: "sync-chunks";
   loadedChunkKeys?: string[];
   chunkUpdates?: ChunkSnapshot[];
-  editorCursors?: RemoteEditorCursor[];
-  /** Entity ID → display name for all player entities. */
-  playerNames?: Record<number, string>;
-  /** Entity ID of the player's mount. null = not riding, absent = unchanged. */
-  mountEntityId?: number | null;
-  /** Server physics CVars for client prediction sync. */
-  cvars?: PhysicsCVars;
 }
+
+export interface SyncPropsMessage {
+  type: "sync-props";
+  props: PropSnapshot[];
+}
+
+export interface SyncCVarsMessage {
+  type: "sync-cvars";
+  cvars: PhysicsCVars;
+}
+
+export interface SyncPlayerNamesMessage {
+  type: "sync-player-names";
+  playerNames: Record<number, string>;
+}
+
+export interface SyncEditorCursorsMessage {
+  type: "sync-editor-cursors";
+  editorCursors: RemoteEditorCursor[];
+}
+
+export type SyncMessage =
+  | SyncSessionMessage
+  | SyncChunksMessage
+  | SyncPropsMessage
+  | SyncCVarsMessage
+  | SyncPlayerNamesMessage
+  | SyncEditorCursorsMessage;
+
+/** Union of all bufferable messages (frame + sync). */
+export type BufferedMessage = FrameMessage | SyncMessage;
 
 // ---- Server → Client messages ----
 
 export type ServerMessage =
   | { type: "player-assigned"; entityId: number }
   | { type: "kicked"; reason: string }
-  | GameStateMessage
+  | FrameMessage
+  | SyncMessage
   | {
       type: "world-loaded";
       requestId?: number;

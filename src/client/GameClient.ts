@@ -193,11 +193,19 @@ export class GameClient {
 
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
-        // Domain-specific handlers first — buffer game-state for deferred
+        // Domain-specific handlers first — buffer frame/sync messages for deferred
         // application during client update tick (prevents async entity
         // position changes that desync camera and entity interpolation)
-        if (msg.type === "game-state") {
-          remoteView.bufferGameState(msg);
+        if (
+          msg.type === "frame" ||
+          msg.type === "sync-session" ||
+          msg.type === "sync-chunks" ||
+          msg.type === "sync-props" ||
+          msg.type === "sync-cvars" ||
+          msg.type === "sync-player-names" ||
+          msg.type === "sync-editor-cursors"
+        ) {
+          remoteView.bufferMessage(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
           console.log(
             `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${!!remoteView["_predictor"]?.player}, editorEnabled=${remoteView.editorEnabled}`,
