@@ -8,13 +8,14 @@ For wire protocol research (QW, Source, Roblox comparisons), see
 
 ---
 
-## Current State (Phases 1-4 complete)
+## Current State (Phases 1-5 complete)
 
-Every tick at 60 Hz, the server builds per-client messages (JSON) sent over a
-single reliable ordered channel (WebSocket, WebRTC reliable data channel, or
-in-memory `SerializingTransport`).
+Every tick at 60 Hz, the server builds per-client messages sent over a single
+reliable ordered channel (WebSocket, WebRTC reliable data channel, or in-memory
+`SerializingTransport`). Messages are binary-encoded (ArrayBuffer) with a JSON
+fallback for infrequent message types.
 
-**Completed optimizations** (Phases 1-4):
+**Completed optimizations** (Phases 1-5):
 
 1. **Delta fields** (Phase 1): Slow-changing fields (props, CVars, player names,
    editor cursors, session state) are tracked per-client and only sent on change.
@@ -27,14 +28,22 @@ in-memory `SerializingTransport`).
 4. **Entity delta compression** (Phase 4): Server tracks `lastSentEntities` per
    client. New entities get full baselines, changed entities get field-level
    deltas, removed entities get exit IDs. Idle entities = 0 bytes.
+5. **Binary encoding** (Phase 5): `FrameMessage`, `player-input`, and
+   `SyncChunksMessage` use DataView/ArrayBuffer encoding. Entity type strings
+   mapped to u8 indices, SpriteState packed into 2-4 bytes, WanderAIState into
+   3 bytes. Chunk data sent as raw typed array bytes. Remaining message types
+   use a JSON fallback envelope (0xFF tag byte + UTF-8 JSON). ~3-5x reduction
+   on top of delta compression.
 
-**Steady-state cost**: ~50 KB/s per client with 50 entities (down from ~1.8 MB/s
-pre-optimization). Idle entities contribute 0 bytes.
+**Steady-state cost**: ~10-15 KB/s per client with 50 entities (down from
+~1.8 MB/s pre-optimization). Idle frame = 19 bytes at 60 Hz = 1.1 KB/s.
 
-**Next**: Phase 5 (binary encoding) for ~3-4x further compression.
+**Next**: Phase 6 (WebRTC unreliable channel) for latency improvement.
 
 Key files:
 - `src/shared/protocol.ts` — message types, snapshot shapes
+- `src/shared/binaryCodec.ts` — binary encode/decode for all message types
+- `src/shared/entityTypeIndex.ts` — entity type string ↔ u8 index mapping
 - `src/shared/serialization.ts` — entity/prop/chunk serialization
 - `src/shared/entityDelta.ts` — entity delta diff/apply
 - `src/server/Realm.ts` — per-client game state building (`buildMessages`)
@@ -281,15 +290,19 @@ Per-entity delta protocol:
 - **Encoding**: JSON or binary
 - **Impact**: 80-90% reduction in entity data. 50 idle chickens = 0 bytes.
 
-### Phase 5: Binary Encoding
+### Phase 5: Binary Encoding ✅
 
-Replace JSON with DataView/ArrayBuffer. Fixed-layout binary messages with
-type-byte headers. String fields become u8 enum indices.
+Replaced JSON with DataView/ArrayBuffer for hot-path messages. Type-byte
+headers (0x01=Frame, 0x03=SyncChunks, 0x80=player-input, 0xFF=JSON fallback).
+Entity type strings → u8 indices via `entityTypeIndex.ts`. SpriteState packed
+into 2-4 bytes, WanderAIState into 3 bytes. Chunk arrays sent as raw bytes.
 
 - **Transport**: Single channel
-- **Encoding**: Binary (ArrayBuffer)
-- **Impact**: ~3-4x compression on top of all previous optimizations
-- Entity snapshot: ~20-30 bytes binary vs ~150 JSON (post-SpriteDef split)
+- **Encoding**: Binary (ArrayBuffer) for FrameMessage, player-input,
+  SyncChunksMessage. JSON fallback (0xFF envelope) for remaining types.
+- **Impact**: ~3-5x compression on top of delta compression. Idle frame = 19
+  bytes. Position-only delta = 16 bytes. player-input = 8 bytes.
+  Chunk data ~2x smaller (fixed 9.3 KB vs ~19 KB JSON).
 
 ### Phase 6: WebRTC Unreliable Channel
 

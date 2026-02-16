@@ -1,4 +1,10 @@
 import Peer, { type DataConnection } from "peerjs";
+import {
+  decodeClientMessage,
+  decodeServerMessage,
+  encodeClientMessage,
+  encodeServerMessage,
+} from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport, IServerTransport } from "./Transport.js";
 
@@ -38,11 +44,11 @@ export class PeerHostTransport {
 
     const self = this;
 
-    // --- clientSide: for host's own GameClient (zero latency) ---
+    // --- clientSide: for host's own GameClient (binary roundtrip) ---
     this.clientSide = {
       send(msg: ClientMessage): void {
         if (self.closed) return;
-        self.serverMessageHandler?.(LOCAL_CLIENT_ID, roundtrip(msg));
+        self.serverMessageHandler?.(LOCAL_CLIENT_ID, decodeClientMessage(encodeClientMessage(msg)));
       },
       onMessage(handler: (msg: ServerMessage) => void): void {
         self.clientMessageHandler = handler;
@@ -57,23 +63,25 @@ export class PeerHostTransport {
       send(clientId: string, msg: ServerMessage): void {
         if (self.closed) return;
         if (clientId === LOCAL_CLIENT_ID) {
-          self.clientMessageHandler?.(roundtrip(msg));
+          const buf = encodeServerMessage(msg);
+          self.clientMessageHandler?.(decodeServerMessage(buf));
         } else {
           const conn = self.remoteClients.get(clientId);
           if (conn?.open) {
-            conn.send(JSON.stringify(msg));
+            conn.send(encodeServerMessage(msg));
           }
         }
       },
       broadcast(msg: ServerMessage): void {
         if (self.closed) return;
-        // Local host client
-        self.clientMessageHandler?.(roundtrip(msg));
-        // All remote guests (stringify once)
-        const data = JSON.stringify(msg);
+        // Encode once, send to all
+        const buf = encodeServerMessage(msg);
+        // Local host client (decode copy)
+        self.clientMessageHandler?.(decodeServerMessage(buf));
+        // All remote guests
         for (const conn of self.remoteClients.values()) {
           if (conn.open) {
-            conn.send(data);
+            conn.send(buf);
           }
         }
       },
@@ -154,7 +162,9 @@ export class PeerHostTransport {
     const existing = this.remoteClients.get(clientId);
     if (existing) {
       try {
-        existing.send(JSON.stringify({ type: "kicked", reason: "Connected from another tab" }));
+        existing.send(
+          encodeServerMessage({ type: "kicked", reason: "Connected from another tab" }),
+        );
       } catch {
         // Old connection may already be closing
       }
@@ -170,7 +180,9 @@ export class PeerHostTransport {
 
     conn.on("data", (data) => {
       try {
-        const msg = (typeof data === "string" ? JSON.parse(data) : data) as ClientMessage;
+        const buf =
+          data instanceof ArrayBuffer ? data : ((data as Uint8Array).buffer as ArrayBuffer);
+        const msg = decodeClientMessage(buf);
         this.serverMessageHandler?.(clientId, msg);
       } catch (err) {
         console.error(`[tilefun] Bad P2P message from ${clientId}:`, err);
@@ -192,8 +204,4 @@ export class PeerHostTransport {
       }
     });
   }
-}
-
-function roundtrip<T>(msg: T): T {
-  return JSON.parse(JSON.stringify(msg));
 }

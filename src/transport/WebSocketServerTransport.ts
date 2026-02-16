@@ -1,5 +1,6 @@
 import type { Server as HttpServer, IncomingMessage } from "node:http";
 import { type WebSocket, WebSocketServer } from "ws";
+import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "./Transport.js";
 
@@ -54,7 +55,7 @@ export class WebSocketServerTransport implements IServerTransport {
         this.replacedSockets.add(existingWs);
         try {
           existingWs.send(
-            JSON.stringify({
+            encodeServerMessage({
               type: "kicked",
               reason: "Connected from another tab",
             }),
@@ -69,7 +70,16 @@ export class WebSocketServerTransport implements IServerTransport {
 
       ws.on("message", (data) => {
         try {
-          const msg = JSON.parse(data.toString()) as ClientMessage;
+          // Node ws delivers Buffer for binary messages. Extract the
+          // underlying ArrayBuffer slice to get a proper ArrayBuffer.
+          let buf: ArrayBuffer;
+          if (data instanceof ArrayBuffer) {
+            buf = data;
+          } else {
+            const b = data as Buffer;
+            buf = b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
+          }
+          const msg = decodeClientMessage(buf);
           this.messageHandler?.(clientId, msg);
         } catch (err) {
           console.error(`[tilefun] Bad message from ${clientId}:`, err);
@@ -101,12 +111,12 @@ export class WebSocketServerTransport implements IServerTransport {
   send(clientId: string, msg: ServerMessage): void {
     const ws = this.clients.get(clientId);
     if (ws?.readyState === 1 /* WebSocket.OPEN */) {
-      ws.send(JSON.stringify(msg));
+      ws.send(encodeServerMessage(msg));
     }
   }
 
   broadcast(msg: ServerMessage): void {
-    const data = JSON.stringify(msg);
+    const data = encodeServerMessage(msg);
     for (const ws of this.clients.values()) {
       if (ws.readyState === 1) {
         ws.send(data);

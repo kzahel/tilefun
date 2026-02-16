@@ -1,3 +1,4 @@
+import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "./Transport.js";
 
@@ -12,11 +13,12 @@ export class WebSocketClientTransport implements IClientTransport {
 
   constructor(url: string) {
     this.ws = new WebSocket(url);
+    this.ws.binaryType = "arraybuffer";
     this.ws.onmessage = (event) => {
       try {
-        const raw = event.data as string;
-        this.bytesReceived += raw.length;
-        const msg = JSON.parse(raw) as ServerMessage;
+        const buf = event.data as ArrayBuffer;
+        this.bytesReceived += buf.byteLength;
+        const msg = decodeServerMessage(buf);
         this.messageHandler?.(msg);
       } catch (err) {
         console.error("[tilefun] Bad server message:", err);
@@ -42,7 +44,7 @@ export class WebSocketClientTransport implements IClientTransport {
 
   send(msg: ClientMessage): void {
     if (this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(JSON.stringify(msg));
+      this.ws.send(encodeClientMessage(msg));
     }
   }
 

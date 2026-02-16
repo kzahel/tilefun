@@ -1,12 +1,18 @@
+import {
+  decodeClientMessage,
+  decodeServerMessage,
+  encodeClientMessage,
+  encodeServerMessage,
+} from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport, IServerTransport } from "./Transport.js";
 
 const LOCAL_CLIENT_ID = "local";
 
 /**
- * In-memory transport that JSON-roundtrips every message.
- * Validates that all data survives serialization — catches TypedArrays,
- * functions, circular refs, or undefined values that would break real networking.
+ * In-memory transport that binary-roundtrips every message.
+ * Validates that all data survives binary encoding — catches unsupported
+ * field types or missing codec paths that would break real networking.
  */
 export class SerializingTransport {
   readonly clientSide: IClientTransport;
@@ -25,7 +31,8 @@ export class SerializingTransport {
     this.clientSide = {
       send(msg: ClientMessage): void {
         if (self.closed) return;
-        self.serverMessageHandler?.(LOCAL_CLIENT_ID, roundtrip(msg));
+        const decoded = decodeClientMessage(encodeClientMessage(msg));
+        self.serverMessageHandler?.(LOCAL_CLIENT_ID, decoded);
       },
       onMessage(handler: (msg: ServerMessage) => void): void {
         self.clientMessageHandler = handler;
@@ -41,15 +48,15 @@ export class SerializingTransport {
     this.serverSide = {
       send(_clientId: string, msg: ServerMessage): void {
         if (self.closed) return;
-        const json = JSON.stringify(msg);
-        rxBytes += json.length;
-        self.clientMessageHandler?.(JSON.parse(json) as ServerMessage);
+        const buf = encodeServerMessage(msg);
+        rxBytes += buf.byteLength;
+        self.clientMessageHandler?.(decodeServerMessage(buf));
       },
       broadcast(msg: ServerMessage): void {
         if (self.closed) return;
-        const json = JSON.stringify(msg);
-        rxBytes += json.length;
-        self.clientMessageHandler?.(JSON.parse(json) as ServerMessage);
+        const buf = encodeServerMessage(msg);
+        rxBytes += buf.byteLength;
+        self.clientMessageHandler?.(decodeServerMessage(buf));
       },
       onMessage(handler: (clientId: string, msg: ClientMessage) => void): void {
         self.serverMessageHandler = handler;
@@ -73,8 +80,4 @@ export class SerializingTransport {
   triggerDisconnect(): void {
     this.disconnectHandler?.(LOCAL_CLIENT_ID);
   }
-}
-
-function roundtrip<T>(msg: T): T {
-  return JSON.parse(JSON.stringify(msg));
 }

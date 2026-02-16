@@ -1,4 +1,5 @@
 import Peer from "peerjs";
+import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "./Transport.js";
 
@@ -127,10 +128,10 @@ export class PeerGuestTransport implements IClientTransport {
 
     this.conn.on("data", (data) => {
       try {
-        if (typeof data === "string") {
-          this.bytesReceived += data.length;
-        }
-        const msg = (typeof data === "string" ? JSON.parse(data) : data) as ServerMessage;
+        const buf =
+          data instanceof ArrayBuffer ? data : ((data as Uint8Array).buffer as ArrayBuffer);
+        this.bytesReceived += buf.byteLength;
+        const msg = decodeServerMessage(buf);
         if (this.messageHandler) {
           this.messageHandler(msg);
         } else {
@@ -191,7 +192,7 @@ export class PeerGuestTransport implements IClientTransport {
 
   send(msg: ClientMessage): void {
     if (this.conn?.open) {
-      this.conn.send(JSON.stringify(msg));
+      this.conn.send(encodeClientMessage(msg));
     }
   }
 
