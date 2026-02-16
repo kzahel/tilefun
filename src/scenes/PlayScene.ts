@@ -456,8 +456,10 @@ export class PlayScene implements GameScene {
     gc.chatHUD.render(gc.ctx);
     renderDebugOverlay(gc);
     render3DDebug(gc);
-    gc.touchJoystick.draw(gc.ctx);
-    gc.touchButtons.draw(gc.ctx);
+    if (!gc.xrActive) {
+      gc.touchJoystick.draw(gc.ctx);
+      gc.touchButtons.draw(gc.ctx);
+    }
     gc.camera.restoreActual();
   }
 

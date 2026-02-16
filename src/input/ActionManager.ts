@@ -1,3 +1,4 @@
+import type { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import { GamepadPoller } from "./GamepadPoller.js";
@@ -59,6 +60,10 @@ export class ActionManager {
     this.gamepadPoller = null;
   }
 
+  setXRManager(xr: XRSessionManager): void {
+    if (this.gamepadPoller) this.gamepadPoller.xrManager = xr;
+  }
+
   setTouchJoystick(joystick: TouchJoystick): void {
     this.touchJoystick = joystick;
   }
@@ -83,6 +88,11 @@ export class ActionManager {
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {
+    // Check XR controller buttons
+    const xr = this.gamepadPoller?.xrManager;
+    if (xr?.active) {
+      if (action === "throw" && xr.throwHeld) return true;
+    }
     // Check on-screen touch buttons
     if (this.touchButtons) {
       if (action === "jump" && this.touchButtons.jumpPressed) return true;

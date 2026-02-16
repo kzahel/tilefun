@@ -281,7 +281,10 @@ async function start() {
     // ?multiplayer uses /ws path (Vite plugin shares HTTP server with HMR).
     // ?server=host:port connects to standalone server (no path needed).
 
-    const baseWsUrl = serverParam ? `ws://${serverParam}` : `ws://${window.location.host}/ws`;
+    const wsProto = window.location.protocol === "https:" ? "wss" : "ws";
+    const baseWsUrl = serverParam
+      ? `ws://${serverParam}`
+      : `${wsProto}://${window.location.host}/ws`;
     const wsUrl = `${baseWsUrl}${baseWsUrl.includes("?") ? "&" : "?"}uuid=${encodeURIComponent(playerId)}`;
     console.log(`[tilefun] Connecting as ${playerId} to ${baseWsUrl}...`);
     const wsTransport = new WebSocketClientTransport(wsUrl);

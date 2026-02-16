@@ -42,6 +42,7 @@ import { ChatHUD } from "../ui/ChatHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { World } from "../world/World.js";
+import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
 
 export interface GameClientOptions {
@@ -87,6 +88,8 @@ export class GameClient {
   private consoleUI: ConsoleUI;
   private chatHUD: ChatHUD;
   private audioManager: AudioManager;
+
+  private xrManager = new XRSessionManager();
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
@@ -148,6 +151,7 @@ export class GameClient {
     this.touchJoystick.claimedTouches = this.touchButtons.claimedTouches;
     this.actions.setTouchJoystick(this.touchJoystick);
     this.actions.setTouchButtons(this.touchButtons);
+    this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
     this.editorMode = new EditorMode(canvas, this.camera, this.actions);
     this.editorPanel = new EditorPanel();
@@ -745,6 +749,9 @@ export class GameClient {
       set editorButton(v) {
         client.editorButton = v;
       },
+      get xrActive() {
+        return client.xrManager.active;
+      },
       flushServer: () => this.gcFlushServer(),
       sendRequest: <T>(msg: ClientMessage & { requestId: number }) => this.gcSendRequest<T>(msg),
       sendVisibleRange: () => this.gcSendVisibleRange(),
@@ -831,6 +838,56 @@ export class GameClient {
     });
 
     panel.append(editBtn, menuBtn, debugBtn);
+
+    // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
+    const vrBtn = document.createElement("button");
+    vrBtn.textContent = "VR (checking...)";
+    vrBtn.style.cssText = `${MENU_BTN_STYLE} color: #666;`;
+    vrBtn.disabled = true;
+    // Always show on Quest UA even if feature detection hasn't resolved yet
+    const isQuestUA = /Quest/i.test(navigator.userAgent);
+    if (isQuestUA) {
+      panel.appendChild(vrBtn);
+    }
+    XRSessionManager.isSupported().then(
+      (supported) => {
+        if (!supported) {
+          if (isQuestUA) {
+            vrBtn.textContent = "VR (not supported)";
+            console.warn(
+              "[tilefun:xr] Quest UA detected but immersive-vr not supported. navigator.xr =",
+              navigator.xr,
+            );
+          }
+          return;
+        }
+        vrBtn.textContent = "Enter VR";
+        vrBtn.style.color = "#4fc3f7";
+        vrBtn.disabled = false;
+        if (!isQuestUA) panel.appendChild(vrBtn);
+      },
+      (err) => {
+        console.error("[tilefun:xr] isSupported check failed:", err);
+        if (isQuestUA) vrBtn.textContent = "VR (error)";
+      },
+    );
+    vrBtn.addEventListener("click", () => {
+      closePanel();
+      if (this.xrManager.active) {
+        this.xrManager.exitVR();
+      } else {
+        this.xrManager.enterVR(this.canvas, this.loop).catch((err) => {
+          console.error("[tilefun:xr] Failed to enter VR:", err);
+          vrBtn.textContent = "VR (failed)";
+          vrBtn.style.color = "#f66";
+        });
+      }
+    });
+    this.xrManager.onSessionEnd = () => {
+      vrBtn.textContent = "Enter VR";
+      vrBtn.style.color = "#4fc3f7";
+    };
+
     document.body.append(backdrop, panel, hamburger);
   }
 

@@ -65,6 +65,8 @@ export interface GameContext {
   gemSpriteCanvas: HTMLCanvasElement | null;
   debugEnabled: boolean;
   editorButton: HTMLButtonElement | null;
+  /** True while an immersive XR/VR session is active. */
+  readonly xrActive: boolean;
 
   // Helper methods
   flushServer(): void;

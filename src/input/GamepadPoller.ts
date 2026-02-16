@@ -1,9 +1,14 @@
+import type { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { Movement } from "./ActionManager.js";
 
 const DEAD_ZONE = 0.15;
 
 export class GamepadPoller {
+  xrManager: XRSessionManager | null = null;
+
   poll(): Movement {
+    // XR input takes priority when an immersive session is active.
+    if (this.xrManager?.active) return this.xrManager.movement;
     if (typeof navigator.getGamepads !== "function")
       return { dx: 0, dy: 0, sprinting: false, jump: false };
     const gamepads = navigator.getGamepads();

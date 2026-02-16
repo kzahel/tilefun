@@ -43,6 +43,30 @@ export class GameLoop {
     cancelAnimationFrame(this.rafId);
   }
 
+  /**
+   * Process one frame from an external time source (e.g. XR session rAF).
+   * Call stop() first to prevent the internal rAF from also ticking.
+   */
+  externalTick(nowMs: number): void {
+    const now = nowMs / 1000;
+    let frameTime = now - this.lastTime;
+    this.lastTime = now;
+
+    if (frameTime > MAX_FRAME_TIME) {
+      frameTime = MAX_FRAME_TIME;
+    }
+
+    this.accumulator += frameTime * this.timeScale;
+
+    while (this.accumulator >= FIXED_DT) {
+      this.callbacks.update(FIXED_DT);
+      this.accumulator -= FIXED_DT;
+    }
+
+    const alpha = this.accumulator / FIXED_DT;
+    this.callbacks.render(alpha);
+  }
+
   private tick = (nowMs: number): void => {
     if (!this.running) return;
 
