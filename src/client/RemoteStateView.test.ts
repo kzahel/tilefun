@@ -333,6 +333,202 @@ describe("RemoteStateView", () => {
     expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
   });
 
+  it("saves prevPosition before applying updates", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: baseline at (50, 75)
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+    // No prevPosition on first tick (new baseline)
+    expect(view.entities.at(0)?.prevPosition).toBeUndefined();
+
+    // Second tick: delta moves entity to (100, 200)
+    view.applyGameState(
+      makeGameState({
+        entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
+        playerEntityId: 1,
+      }),
+    );
+    // prevPosition should be the old position
+    expect(view.entities.at(0)?.prevPosition).toEqual({ wx: 50, wy: 75 });
+    expect(view.entities.at(0)?.position).toEqual({ wx: 100, wy: 200 });
+  });
+
+  it("prevPosition is saved for idle entities too", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // No-change tick — prevPosition should still be saved
+    view.applyGameState(
+      makeGameState({
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.entities.at(0)?.prevPosition).toEqual({ wx: 50, wy: 75 });
+    // Position unchanged
+    expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
+  });
+
+  it("bufferGameState queues messages, applyPending applies them in order", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Buffer baseline
+    view.bufferGameState(
+      makeGameState({
+        serverTick: 1,
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Buffer delta
+    view.bufferGameState(
+      makeGameState({
+        serverTick: 2,
+        entityDeltas: [{ id: 1, position: { wx: 100, wy: 200 } }],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Nothing applied yet
+    expect(view.entities).toHaveLength(0);
+
+    // Apply both
+    view.applyPending();
+
+    // Both applied in order: baseline first, then delta
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.position).toEqual({ wx: 100, wy: 200 });
+    expect(view.stateAppliedThisTick).toBe(true);
+  });
+
+  it("applyPending clears queue after applying", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.bufferGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+    view.applyPending();
+    expect(view.stateAppliedThisTick).toBe(true);
+
+    // Second call with no new messages
+    view.applyPending();
+    expect(view.stateAppliedThisTick).toBe(false);
+  });
+
+  it("sequential buffer ordering matters — baseline then delta", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Buffer in correct order: baseline → delta → exit
+    view.bufferGameState(
+      makeGameState({
+        serverTick: 1,
+        entityBaselines: [makeTestEntity(1, 0, 0), makeTestEntity(2, 50, 50)],
+        playerEntityId: 1,
+      }),
+    );
+    view.bufferGameState(
+      makeGameState({
+        serverTick: 2,
+        entityDeltas: [{ id: 1, position: { wx: 100, wy: 100 } }],
+        entityExits: [2],
+        playerEntityId: 1,
+      }),
+    );
+    view.applyPending();
+
+    // Entity 1 moved, entity 2 exited
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.id).toBe(1);
+    expect(view.entities.at(0)?.position).toEqual({ wx: 100, wy: 100 });
+  });
+
+  it("delta fields absent = unchanged (keep previous values)", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: set all values
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 0, 0)],
+        playerEntityId: 1,
+        gemsCollected: 15,
+        invincibilityTimer: 2.5,
+        editorEnabled: false,
+      }),
+    );
+
+    expect(view.gemsCollected).toBe(15);
+    expect(view.invincibilityTimer).toBe(2.5);
+    expect(view.editorEnabled).toBe(false);
+
+    // Second tick: only gemsCollected changes, others TRULY absent
+    // (must not use makeGameState which sets defaults for all fields)
+    view.applyGameState({
+      type: "game-state",
+      serverTick: 1,
+      lastProcessedInputSeq: 0,
+      playerEntityId: 1,
+      gemsCollected: 20,
+      // invincibilityTimer absent — should keep 2.5
+      // editorEnabled absent — should keep false
+    });
+
+    expect(view.gemsCollected).toBe(20);
+    expect(view.invincibilityTimer).toBe(2.5); // unchanged
+    expect(view.editorEnabled).toBe(false); // unchanged
+  });
+
+  it("mountEntityId null vs undefined semantics", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // First tick: mount entity set
+    view.applyGameState(
+      makeGameState({
+        entityBaselines: [makeTestEntity(1, 0, 0)],
+        playerEntityId: 1,
+        mountEntityId: 42,
+      }),
+    );
+    expect(view.mountEntityId).toBe(42);
+
+    // Second tick: mountEntityId absent — should keep 42
+    view.applyGameState(
+      makeGameState({
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.mountEntityId).toBe(42);
+
+    // Third tick: mountEntityId null — should clear (dismount)
+    view.applyGameState(
+      makeGameState({
+        playerEntityId: 1,
+        mountEntityId: null,
+      }),
+    );
+    expect(view.mountEntityId).toBeUndefined();
+  });
+
   it("syncs physics CVars from game-state to PlayerMovement module", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);
