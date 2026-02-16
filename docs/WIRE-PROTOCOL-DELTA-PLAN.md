@@ -1,5 +1,7 @@
 # Plan: Delta Optimization for Slow-Changing GameStateMessage Fields
 
+Phase 1 of the Protocol Evolution Roadmap (`docs/NETWORK-ARCHITECTURE.md`).
+
 ## Goal
 
 Stop resending identical data every tick. Make slow-changing fields on `GameStateMessage` optional — server tracks what was last sent per client, only includes fields when they've changed. Client keeps previous values when a field is absent.

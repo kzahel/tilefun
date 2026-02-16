@@ -1,5 +1,5 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorTypes.js";
-import type { ColliderComponent, SpriteComponent, WanderAIComponent } from "../entities/Entity.js";
+import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import type { PropCollider } from "../entities/Prop.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 
@@ -135,11 +135,9 @@ export interface EntitySnapshot {
   id: number;
   type: string;
   position: { wx: number; wy: number };
-  sortOffsetY?: number;
   velocity: { vx: number; vy: number } | null;
-  sprite: SpriteComponent | null;
-  collider: ColliderComponent | null;
-  wanderAI: WanderAIComponent | null;
+  spriteState: SpriteState | null;
+  wanderAIState: WanderAIState | null;
   flashHidden?: boolean;
   noShadow?: boolean;
   deathTimer?: number;
@@ -149,7 +147,6 @@ export interface EntitySnapshot {
   parentId?: number;
   localOffsetX?: number;
   localOffsetY?: number;
-  weight?: number;
 }
 
 export interface PropSnapshot {

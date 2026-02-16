@@ -232,13 +232,17 @@ sent, omits unchanged fields. Client keeps previous values when absent.
 ### Phase 2: SpriteDef Registry (static/dynamic split)
 
 Factor static entity metadata (sprite dimensions, sheet keys, collider shapes,
-AI config) into a shared compile-time registry. Entities carry a `defKey`
-string + dynamic-only state. Both sides look up static props from the registry.
+AI config) into a shared compile-time registry (`ENTITY_DEFS`). EntitySnapshot
+carries the `type` string (which IS the def key) + dynamic-only state
+(`SpriteState`, `WanderAIState`). Collider is entirely eliminated from the
+wire — all 7 fields are static per entity type. Both sides look up static
+props from the shared registry.
 
 - **Transport**: Single reliable channel (no change)
 - **Encoding**: JSON (no change)
-- **Impact**: ~60% reduction in per-entity snapshot size (~400 bytes → ~150)
+- **Impact**: ~70% reduction in per-entity snapshot size (~460 bytes → ~120)
 - **Prerequisite for**: Efficient delta compression (fewer fields to diff)
+- **Details**: `docs/SPRITEDEF-SPLIT-PLAN.md`
 
 ### Phase 3: Message Type Split
 

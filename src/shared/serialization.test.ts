@@ -107,14 +107,62 @@ describe("Entity serialization", () => {
     expect(result.id).toBe(entity.id);
     expect(result.type).toBe(entity.type);
     expect(result.position).toEqual(entity.position);
-    expect(result.sortOffsetY).toBe(entity.sortOffsetY);
     expect(result.velocity).toEqual(entity.velocity);
-    expect(result.sprite).toEqual(entity.sprite);
-    expect(result.collider).toEqual(entity.collider);
-    expect(result.wanderAI).toEqual(entity.wanderAI);
+    // Sprite: dynamic state from snapshot + static fields from def
+    expect(result.sprite?.frameCol).toBe(entity.sprite?.frameCol);
+    expect(result.sprite?.frameRow).toBe(entity.sprite?.frameRow);
+    expect(result.sprite?.animTimer).toBe(entity.sprite?.animTimer);
+    expect(result.sprite?.direction).toBe(entity.sprite?.direction);
+    expect(result.sprite?.moving).toBe(entity.sprite?.moving);
+    // Static fields come from ENTITY_DEFS["chicken"]
+    expect(result.sprite?.sheetKey).toBe("chicken");
+    expect(result.sprite?.spriteWidth).toBe(16);
+    expect(result.sprite?.spriteHeight).toBe(16);
+    expect(result.sprite?.frameCount).toBe(4);
+    // Collider comes entirely from def
+    expect(result.collider).toEqual({
+      offsetX: 0,
+      offsetY: -5,
+      width: 10,
+      height: 6,
+      physicalHeight: 8,
+    });
+    // WanderAI: dynamic state from snapshot + static from def
+    expect(result.wanderAI?.state).toBe("walking");
+    expect(result.wanderAI?.timer).toBe(1.5);
+    expect(result.wanderAI?.dirX).toBe(1);
+    expect(result.wanderAI?.dirY).toBe(0);
+    expect(result.wanderAI?.speed).toBe(20); // from def
+    expect(result.wanderAI?.befriendable).toBe(true); // from def
+    // Static entity-level fields from def
+    expect(result.weight).toBe(2); // chicken weight from def
     expect(result.flashHidden).toBe(true);
     expect(result.noShadow).toBe(true);
     expect(result.deathTimer).toBe(2.5);
+  });
+
+  it("snapshot contains only dynamic fields (no static)", () => {
+    const entity = makeFullEntity();
+    const snapshot = serializeEntity(entity);
+
+    // Snapshot should have spriteState, not sprite
+    expect(snapshot.spriteState).toBeTruthy();
+    const snap = snapshot as unknown as Record<string, unknown>;
+    expect(snap.sprite).toBeUndefined();
+    expect(snap.collider).toBeUndefined();
+    expect(snap.sortOffsetY).toBeUndefined();
+    expect(snap.weight).toBeUndefined();
+
+    // spriteState should not contain static fields
+    const ss = snapshot.spriteState as unknown as Record<string, unknown>;
+    expect(ss.sheetKey).toBeUndefined();
+    expect(ss.spriteWidth).toBeUndefined();
+
+    // wanderAIState should not contain static fields
+    expect(snapshot.wanderAIState).toBeTruthy();
+    const ais = snapshot.wanderAIState as unknown as Record<string, unknown>;
+    expect(ais.speed).toBeUndefined();
+    expect(ais.idleMin).toBeUndefined();
   });
 
   it("round-trips a minimal entity with null fields", () => {
@@ -141,8 +189,8 @@ describe("Entity serialization", () => {
     const result = deserializeEntity(jsonRoundtrip);
 
     expect(result.position).toEqual(entity.position);
-    expect(result.wanderAI?.chaseRange).toBe(64);
-    expect(result.collider?.solid).toBe(false);
+    expect(result.wanderAI?.befriendable).toBe(true); // from def
+    expect(result.collider?.offsetY).toBe(-5); // from chicken def
   });
 
   it("produces no object identity sharing", () => {
@@ -153,6 +201,24 @@ describe("Entity serialization", () => {
     expect(result.position).not.toBe(entity.position);
     expect(result.velocity).not.toBe(entity.velocity);
     expect(result.sprite).not.toBe(entity.sprite);
+  });
+
+  it("omits frameDuration from spriteState when it matches def", () => {
+    const entity = makeFullEntity();
+    // Set frameDuration to match the chicken def (200)
+    entity.sprite!.frameDuration = 200;
+    const snapshot = serializeEntity(entity);
+    expect(snapshot.spriteState?.frameDuration).toBeUndefined();
+  });
+
+  it("includes frameDuration in spriteState when it differs from def", () => {
+    const entity = makeFullEntity();
+    // Set frameDuration to differ from the chicken def (200)
+    entity.sprite!.frameDuration = 100;
+    const snapshot = serializeEntity(entity);
+    expect(snapshot.spriteState?.frameDuration).toBe(100);
+    const result = deserializeEntity(snapshot);
+    expect(result.sprite?.frameDuration).toBe(100);
   });
 });
 
