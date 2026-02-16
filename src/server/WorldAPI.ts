@@ -1,5 +1,5 @@
 import { TILE_SIZE } from "../config/constants.js";
-import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
+import type { PaintMode, SubgridShape } from "../editor/EditorTypes.js";
 import type { TerrainEditor } from "../editor/TerrainEditor.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { EntityManager } from "../entities/EntityManager.js";

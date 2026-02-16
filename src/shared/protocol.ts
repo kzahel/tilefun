@@ -1,4 +1,4 @@
-import type { PaintMode, SubgridShape } from "../editor/EditorMode.js";
+import type { PaintMode, SubgridShape } from "../editor/EditorTypes.js";
 import type { ColliderComponent, SpriteComponent, WanderAIComponent } from "../entities/Entity.js";
 import type { PropCollider } from "../entities/Prop.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";

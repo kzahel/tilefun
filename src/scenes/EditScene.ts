@@ -29,12 +29,12 @@ export class EditScene implements GameScene {
 
     // Bind editor-specific actions
     this.unsubscribes.push(
-      gc.actions.on("toggle_paint_mode", () => gc.editorPanel.toggleMode()),
-      gc.actions.on("cycle_bridge_depth", () => gc.editorPanel.cycleBridgeDepth()),
-      gc.actions.on("cycle_brush_shape", () => gc.editorPanel.cycleBrushShape()),
-      gc.actions.on("paint_positive", () => gc.editorPanel.setPaintMode("positive")),
-      gc.actions.on("paint_unpaint", () => gc.editorPanel.setPaintMode("unpaint")),
-      gc.actions.on("toggle_tab", () => gc.editorPanel.toggleTab()),
+      gc.actions.on("toggle_paint_mode", () => gc.editorModel.toggleMode()),
+      gc.actions.on("cycle_bridge_depth", () => gc.editorModel.cycleBridgeDepth()),
+      gc.actions.on("cycle_brush_shape", () => gc.editorModel.cycleBrushShape()),
+      gc.actions.on("paint_positive", () => gc.editorModel.setPaintMode("positive")),
+      gc.actions.on("paint_unpaint", () => gc.editorModel.setPaintMode("unpaint")),
+      gc.actions.on("toggle_tab", () => gc.editorModel.toggleTab()),
     );
   }
 
@@ -51,12 +51,12 @@ export class EditScene implements GameScene {
 
     // Re-bind editor-specific actions
     this.unsubscribes.push(
-      gc.actions.on("toggle_paint_mode", () => gc.editorPanel.toggleMode()),
-      gc.actions.on("cycle_bridge_depth", () => gc.editorPanel.cycleBridgeDepth()),
-      gc.actions.on("cycle_brush_shape", () => gc.editorPanel.cycleBrushShape()),
-      gc.actions.on("paint_positive", () => gc.editorPanel.setPaintMode("positive")),
-      gc.actions.on("paint_unpaint", () => gc.editorPanel.setPaintMode("unpaint")),
-      gc.actions.on("toggle_tab", () => gc.editorPanel.toggleTab()),
+      gc.actions.on("toggle_paint_mode", () => gc.editorModel.toggleMode()),
+      gc.actions.on("cycle_bridge_depth", () => gc.editorModel.cycleBridgeDepth()),
+      gc.actions.on("cycle_brush_shape", () => gc.editorModel.cycleBrushShape()),
+      gc.actions.on("paint_positive", () => gc.editorModel.setPaintMode("positive")),
+      gc.actions.on("paint_unpaint", () => gc.editorModel.setPaintMode("unpaint")),
+      gc.actions.on("toggle_tab", () => gc.editorModel.toggleTab()),
     );
   }
 
@@ -91,24 +91,14 @@ export class EditScene implements GameScene {
       session.debugNoclip = gc.debugPanel.noclip;
     }
 
-    // Sync editor panel state → editor mode
-    gc.editorPanel.setTemporaryUnpaint(gc.editorMode.rightClickUnpaint);
-    gc.editorMode.selectedTerrain = gc.editorPanel.selectedTerrain;
-    gc.editorMode.selectedRoadType = gc.editorPanel.selectedRoadType;
-    gc.editorMode.brushMode = gc.editorPanel.brushMode;
-    gc.editorMode.paintMode = gc.editorPanel.effectivePaintMode;
-    gc.editorMode.editorTab = gc.editorPanel.editorTab;
-    gc.editorMode.selectedEntityType = gc.editorPanel.selectedEntityType;
-    gc.editorMode.selectedPropType = gc.editorPanel.selectedPropType;
-    gc.editorMode.deleteMode = gc.editorPanel.deleteMode;
-    gc.editorMode.selectedElevation = gc.editorPanel.selectedElevation;
-    gc.editorMode.elevationGridSize = gc.editorPanel.elevationGridSize;
+    // Sync right-click unpaint and live entity/prop refs into editor mode
+    gc.editorModel.setTemporaryUnpaint(gc.editorMode.rightClickUnpaint);
     gc.editorMode.entities = gc.stateView.entities as import("../entities/Entity.js").Entity[];
     gc.editorMode.props = gc.stateView.props as import("../entities/Prop.js").Prop[];
     gc.editorMode.update(dt);
 
-    const paintMode = gc.editorPanel.effectivePaintMode;
-    const bridgeDepth = gc.editorPanel.bridgeDepth;
+    const paintMode = gc.editorModel.effectivePaintMode;
+    const bridgeDepth = gc.editorModel.bridgeDepth;
 
     // Apply terrain edits (tile mode)
     for (const edit of gc.editorMode.consumePendingEdits()) {
@@ -124,11 +114,11 @@ export class EditScene implements GameScene {
 
     // Apply subgrid edits
     const subgridShape =
-      gc.editorPanel.brushMode === "cross"
+      gc.editorModel.brushMode === "cross"
         ? ("cross" as const)
-        : gc.editorPanel.brushMode === "x"
+        : gc.editorModel.brushMode === "x"
           ? ("x" as const)
-          : gc.editorPanel.subgridShape;
+          : gc.editorModel.subgridShape;
     for (const edit of gc.editorMode.consumePendingSubgridEdits()) {
       gc.transport.send({
         type: "edit-terrain-subgrid",
@@ -196,19 +186,19 @@ export class EditScene implements GameScene {
     }
 
     // Handle clear canvas
-    const clearId = gc.editorPanel.consumeClearRequest();
+    const clearId = gc.editorModel.consumeClearRequest();
     if (clearId !== null) {
       gc.transport.send({ type: "edit-clear-terrain", terrainId: clearId });
     }
-    if (gc.editorPanel.consumeRoadClearRequest()) {
+    if (gc.editorModel.consumeRoadClearRequest()) {
       gc.transport.send({ type: "edit-clear-roads" });
     }
 
     // Send editor cursor to server (only when changed)
     const curTX = gc.editorMode.cursorTileX;
     const curTY = gc.editorMode.cursorTileY;
-    const curTab = gc.editorPanel.editorTab;
-    const curBrush = gc.editorPanel.brushMode;
+    const curTab = gc.editorModel.editorTab;
+    const curBrush = gc.editorModel.brushMode;
     if (
       curTX !== this.lastCursorTileX ||
       curTY !== this.lastCursorTileY ||
@@ -268,20 +258,7 @@ export class EditScene implements GameScene {
       gc.ctx,
       gc.camera,
       gc.editorMode,
-      {
-        brushMode: gc.editorPanel.brushMode,
-        effectivePaintMode: gc.editorPanel.effectivePaintMode,
-        subgridShape:
-          gc.editorPanel.brushMode === "cross"
-            ? "cross"
-            : gc.editorPanel.brushMode === "x"
-              ? "x"
-              : gc.editorPanel.subgridShape,
-        brushSize: gc.editorPanel.brushSize,
-        editorTab: gc.editorPanel.editorTab,
-        elevationGridSize: gc.editorPanel.elevationGridSize,
-        bridgeDepth: gc.editorPanel.bridgeDepth,
-      },
+      gc.editorModel,
       visible,
       gc.stateView.world,
     );

@@ -15,6 +15,7 @@ import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
 import { Time } from "../core/Time.js";
 import { EditorMode } from "../editor/EditorMode.js";
+import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
@@ -71,6 +72,7 @@ export class GameClient {
   private touchButtons: TouchButtons;
   private debugPanel: DebugPanel;
   private editorMode: EditorMode;
+  private editorModel: EditorModel;
   private editorPanel: EditorPanel;
   private mainMenu: MainMenu;
   private propCatalog: PropCatalog;
@@ -153,16 +155,17 @@ export class GameClient {
     this.actions.setTouchButtons(this.touchButtons);
     this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
-    this.editorMode = new EditorMode(canvas, this.camera, this.actions);
-    this.editorPanel = new EditorPanel();
-    this.editorPanel.onCollapse = () => this.toggleEditor();
+    this.editorModel = new EditorModel();
+    this.editorMode = new EditorMode(canvas, this.camera, this.actions, this.editorModel);
+    this.editorPanel = new EditorPanel(this.editorModel);
+    this.editorModel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
     this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
-    this.editorPanel.onOpenCatalog = () => this.scenes.push(new CatalogScene());
+    this.editorModel.onOpenCatalog = () => this.scenes.push(new CatalogScene());
     this.propCatalog.onSelect = (propType: string) => {
-      this.editorPanel.selectedPropType = propType;
-      this.editorPanel.setTab("props");
+      this.editorModel.selectedPropType = propType;
+      this.editorModel.setTab("props");
       if (this.scenes.has(CatalogScene)) this.scenes.pop();
     };
 
@@ -716,6 +719,7 @@ export class GameClient {
       tileRenderer: this.tileRenderer,
       audioManager: this.audioManager,
       editorMode: this.editorMode,
+      editorModel: this.editorModel,
       editorPanel: this.editorPanel,
       mainMenu: this.mainMenu,
       propCatalog: this.propCatalog,

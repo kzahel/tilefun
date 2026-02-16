@@ -1,14 +1,11 @@
-import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import type { Camera } from "../rendering/Camera.js";
-import type { EditorTab } from "./EditorPanel.js";
+import type { EditorModel } from "./EditorModel.js";
 
-export type BrushMode = "tile" | "subgrid" | "corner" | "cross" | "x";
-export type PaintMode = "positive" | "unpaint";
-export type SubgridShape = 1 | 2 | 3 | "cross" | "x";
+export type { BrushMode, PaintMode, SubgridShape } from "./EditorTypes.js";
 
 interface PendingTileEdit {
   tx: number;
@@ -42,18 +39,6 @@ export interface PendingEntitySpawn {
 }
 
 export class EditorMode {
-  selectedTerrain: number | null = TerrainId.Grass;
-  selectedRoadType = 0;
-  selectedEntityType = "chicken";
-  selectedPropType = "prop-flower-red";
-  /** When true, left-click/tap deletes instead of placing. */
-  deleteMode = false;
-  selectedElevation = 1;
-  elevationGridSize = 1;
-  editorTab: EditorTab = "natural";
-  brushMode: BrushMode = "tile";
-  paintMode: PaintMode = "positive";
-
   /** Reference to live entities for right-click deletion lookup. */
   entities: readonly Entity[] = [];
   /** Reference to live props for right-click deletion lookup. */
@@ -74,6 +59,7 @@ export class EditorMode {
   private readonly canvas: HTMLCanvasElement;
   private readonly camera: Camera;
   private readonly actions: ActionManager;
+  private readonly model: EditorModel;
   private pendingTileEdits: PendingTileEdit[] = [];
   private pendingSubgridEdits: PendingSubgridEdit[] = [];
   private pendingCornerEdits: PendingSubgridEdit[] = [];
@@ -113,10 +99,16 @@ export class EditorMode {
   private readonly onTouchMove: (e: TouchEvent) => void;
   private readonly onTouchEnd: (e: TouchEvent) => void;
 
-  constructor(canvas: HTMLCanvasElement, camera: Camera, actions: ActionManager) {
+  constructor(
+    canvas: HTMLCanvasElement,
+    camera: Camera,
+    actions: ActionManager,
+    model: EditorModel,
+  ) {
     this.canvas = canvas;
     this.camera = camera;
     this.actions = actions;
+    this.model = model;
 
     this.onMouseDown = (e) => this.handleMouseDown(e);
     this.onMouseMove = (e) => this.handleMouseMove(e);
@@ -270,7 +262,7 @@ export class EditorMode {
     this.pendingEntitySpawns.push({
       wx,
       wy,
-      entityType: this.selectedEntityType,
+      entityType: this.model.selectedEntityType,
     });
   }
 
@@ -282,7 +274,7 @@ export class EditorMode {
     this.pendingEntitySpawns.push({
       wx: snappedWx,
       wy: snappedWy,
-      entityType: this.selectedPropType,
+      entityType: this.model.selectedPropType,
     });
   }
 
@@ -324,17 +316,21 @@ export class EditorMode {
   }
 
   private paintAt(sx: number, sy: number): void {
-    if (this.editorTab === "road") {
+    if (this.model.editorTab === "road") {
       this.paintRoadAt(sx, sy);
       return;
     }
-    if (this.editorTab === "elevation") {
+    if (this.model.editorTab === "elevation") {
       this.paintElevationAt(sx, sy);
       return;
     }
-    if (this.brushMode === "subgrid" || this.brushMode === "cross" || this.brushMode === "x") {
+    if (
+      this.model.brushMode === "subgrid" ||
+      this.model.brushMode === "cross" ||
+      this.model.brushMode === "x"
+    ) {
       this.paintSubgridAt(sx, sy);
-    } else if (this.brushMode === "corner") {
+    } else if (this.model.brushMode === "corner") {
       this.paintCornerAt(sx, sy);
     } else {
       this.paintTileAt(sx, sy);
@@ -346,12 +342,12 @@ export class EditorMode {
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    const height = this.rightClickUnpaint ? 0 : this.selectedElevation;
+    const height = this.rightClickUnpaint ? 0 : this.model.selectedElevation;
     this.pendingElevationEdits.push({
       tx,
       ty,
       height,
-      gridSize: this.elevationGridSize,
+      gridSize: this.model.elevationGridSize,
     });
   }
 
@@ -360,7 +356,7 @@ export class EditorMode {
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingRoadEdits.push({ tx, ty, roadType: this.selectedRoadType });
+    this.pendingRoadEdits.push({ tx, ty, roadType: this.model.selectedRoadType });
   }
 
   private paintTileAt(sx: number, sy: number): void {
@@ -368,7 +364,7 @@ export class EditorMode {
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingTileEdits.push({ tx, ty, terrainId: this.selectedTerrain });
+    this.pendingTileEdits.push({ tx, ty, terrainId: this.model.selectedTerrain });
   }
 
   private paintSubgridAt(sx: number, sy: number): void {
@@ -379,7 +375,7 @@ export class EditorMode {
     this.pendingSubgridEdits.push({
       gsx,
       gsy,
-      terrainId: this.selectedTerrain,
+      terrainId: this.model.selectedTerrain,
     });
   }
 
@@ -391,7 +387,7 @@ export class EditorMode {
     this.pendingCornerEdits.push({
       gsx,
       gsy,
-      terrainId: this.selectedTerrain,
+      terrainId: this.model.selectedTerrain,
     });
   }
 
@@ -428,19 +424,19 @@ export class EditorMode {
       return;
     }
 
-    if (this.editorTab === "entities") {
-      if (e.button === 0 && !this.deleteMode) {
+    if (this.model.editorTab === "entities") {
+      if (e.button === 0 && !this.model.deleteMode) {
         this.spawnEntityAt(sx, sy);
-      } else if (e.button === 2 || (e.button === 0 && this.deleteMode)) {
+      } else if (e.button === 2 || (e.button === 0 && this.model.deleteMode)) {
         this.deleteEntityAt(sx, sy);
       }
       return;
     }
 
-    if (this.editorTab === "props") {
-      if (e.button === 0 && !this.deleteMode) {
+    if (this.model.editorTab === "props") {
+      if (e.button === 0 && !this.model.deleteMode) {
         this.spawnPropAt(sx, sy);
-      } else if (e.button === 2 || (e.button === 0 && this.deleteMode)) {
+      } else if (e.button === 2 || (e.button === 0 && this.model.deleteMode)) {
         this.deleteEntityAt(sx, sy);
       }
       return;
@@ -556,7 +552,11 @@ export class EditorMode {
           this.commitTouchPaint();
         }
         // In entity/props mode, don't drag-to-spam
-        if (this.editorTab !== "entities" && this.editorTab !== "props" && !this.wasPinching) {
+        if (
+          this.model.editorTab !== "entities" &&
+          this.model.editorTab !== "props" &&
+          !this.wasPinching
+        ) {
           this.paintAt(first.sx, first.sy);
         }
         this.updateCursor(first.sx, first.sy);
@@ -600,14 +600,14 @@ export class EditorMode {
     const start = this.touchPaintStart;
     this.cancelTouchPaint();
     if (!start) return;
-    if (this.editorTab === "entities") {
-      if (this.deleteMode) {
+    if (this.model.editorTab === "entities") {
+      if (this.model.deleteMode) {
         this.deleteEntityAt(start.sx, start.sy);
       } else {
         this.spawnEntityAt(start.sx, start.sy);
       }
-    } else if (this.editorTab === "props") {
-      if (this.deleteMode) {
+    } else if (this.model.editorTab === "props") {
+      if (this.model.deleteMode) {
         this.deleteEntityAt(start.sx, start.sy);
       } else {
         this.spawnPropAt(start.sx, start.sy);

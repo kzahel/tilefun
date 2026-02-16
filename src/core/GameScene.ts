@@ -4,6 +4,7 @@ import type { ClientStateView } from "../client/ClientStateView.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
+import type { EditorModel } from "../editor/EditorModel.js";
 import type { EditorPanel } from "../editor/EditorPanel.js";
 import type { PropCatalog } from "../editor/PropCatalog.js";
 import type { ActionManager } from "../input/ActionManager.js";
@@ -37,6 +38,7 @@ export interface GameContext {
 
   // DOM UI components (scenes control their visibility)
   readonly editorMode: EditorMode;
+  readonly editorModel: EditorModel;
   readonly editorPanel: EditorPanel;
   readonly mainMenu: MainMenu;
   readonly propCatalog: PropCatalog;

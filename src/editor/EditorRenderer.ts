@@ -2,8 +2,8 @@ import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { RemoteEditorCursor } from "../shared/protocol.js";
 import type { World } from "../world/World.js";
-import type { EditorMode, PaintMode, SubgridShape } from "./EditorMode.js";
-import type { EditorTab } from "./EditorPanel.js";
+import type { EditorMode } from "./EditorMode.js";
+import type { EditorModel } from "./EditorModel.js";
 import { getSubgridBrushPoints } from "./TerrainEditor.js";
 
 interface ChunkRange {
@@ -11,16 +11,6 @@ interface ChunkRange {
   minCy: number;
   maxCx: number;
   maxCy: number;
-}
-
-interface EditorState {
-  brushMode: "tile" | "subgrid" | "corner" | "cross" | "x";
-  effectivePaintMode: PaintMode;
-  subgridShape: SubgridShape;
-  brushSize: 1 | 2 | 3;
-  editorTab: EditorTab;
-  elevationGridSize: number;
-  bridgeDepth: number;
 }
 
 const ELEVATION_OVERLAY_COLORS = [
@@ -35,15 +25,15 @@ export function drawEditorOverlay(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  state: EditorState,
+  model: EditorModel,
   visible: ChunkRange,
   world?: World,
 ): void {
   drawEditorGrid(ctx, camera, visible);
-  if (state.editorTab === "elevation" && world) {
+  if (model.editorTab === "elevation" && world) {
     drawElevationOverlay(ctx, camera, world, visible);
   }
-  drawCursorHighlight(ctx, camera, editorMode, state);
+  drawCursorHighlight(ctx, camera, editorMode, model);
 }
 
 function drawEditorGrid(ctx: CanvasRenderingContext2D, camera: Camera, visible: ChunkRange): void {
@@ -124,26 +114,26 @@ function drawCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  state: EditorState,
+  model: EditorModel,
 ): void {
-  if (state.editorTab === "elevation") {
-    drawElevationCursorHighlight(ctx, camera, editorMode, state);
+  if (model.editorTab === "elevation") {
+    drawElevationCursorHighlight(ctx, camera, editorMode, model);
     return;
   }
-  if (state.editorTab === "props") {
+  if (model.editorTab === "props") {
     drawTileCursorHighlight(ctx, camera, editorMode, "positive", 0);
     return;
   }
-  if (state.brushMode === "subgrid" || state.brushMode === "cross" || state.brushMode === "x") {
-    drawSubgridCursorHighlight(ctx, camera, editorMode, state);
-  } else if (state.brushMode === "corner") {
-    drawCornerCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode);
+  if (model.brushMode === "subgrid" || model.brushMode === "cross" || model.brushMode === "x") {
+    drawSubgridCursorHighlight(ctx, camera, editorMode, model);
+  } else if (model.brushMode === "corner") {
+    drawCornerCursorHighlight(ctx, camera, editorMode, model.effectivePaintMode);
   } else {
-    drawTileCursorHighlight(ctx, camera, editorMode, state.effectivePaintMode, state.bridgeDepth);
+    drawTileCursorHighlight(ctx, camera, editorMode, model.effectivePaintMode, model.bridgeDepth);
   }
 }
 
-function getCursorColor(mode: PaintMode): { fill: string; stroke: string } {
+function getCursorColor(mode: string): { fill: string; stroke: string } {
   if (mode === "unpaint") {
     return { fill: "rgba(255, 80, 80, 0.25)", stroke: "rgba(255, 80, 80, 0.6)" };
   }
@@ -154,7 +144,7 @@ function drawTileCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  paintMode: PaintMode,
+  paintMode: string,
   bridgeDepth = 0,
 ): void {
   const tx = editorMode.cursorTileX;
@@ -171,23 +161,15 @@ function drawTileCursorHighlight(
   ctx.lineWidth = 2;
 
   if (bridgeDepth === 0) {
-    // Full tile
     ctx.fillRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
     ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
   } else {
-    // Cross pattern (skip corners) — draw 5 half-tile squares
     const h = tileScreenSize / 2;
-    // Center
     ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy + h / 2, h, h);
-    // North
     ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy - h / 2, h, h);
-    // South
     ctx.fillRect(tileScreen.sx + h / 2, tileScreen.sy + tileScreenSize - h / 2, h, h);
-    // West
     ctx.fillRect(tileScreen.sx - h / 2, tileScreen.sy + h / 2, h, h);
-    // East
     ctx.fillRect(tileScreen.sx + tileScreenSize - h / 2, tileScreen.sy + h / 2, h, h);
-    // Stroke tile boundary as reference
     ctx.strokeRect(tileScreen.sx, tileScreen.sy, tileScreenSize, tileScreenSize);
   }
 
@@ -198,7 +180,7 @@ function drawSubgridCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  state: EditorState,
+  model: EditorModel,
 ): void {
   const gsx = editorMode.cursorSubgridX;
   const gsy = editorMode.cursorSubgridY;
@@ -206,8 +188,9 @@ function drawSubgridCursorHighlight(
 
   const halfTile = TILE_SIZE / 2;
   const halfTileScreen = halfTile * camera.scale;
-  const shape = state.subgridShape;
-  const paintMode = state.effectivePaintMode;
+  const shape =
+    model.brushMode === "cross" ? "cross" : model.brushMode === "x" ? "x" : model.subgridShape;
+  const paintMode = model.effectivePaintMode;
 
   const baseColor = paintMode === "unpaint" ? "255, 80, 80" : "240, 160, 48";
 
@@ -226,7 +209,7 @@ function drawSubgridCursorHighlight(
       ctx.strokeRect(x, y, halfTileScreen, halfTileScreen);
     }
   } else {
-    const brushSize = state.brushSize;
+    const brushSize = model.brushSize;
     const halfBrush = brushSize / 2;
 
     const wx0 = (gsx - halfBrush) * halfTile;
@@ -261,7 +244,7 @@ function drawCornerCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  paintMode: PaintMode,
+  paintMode: string,
 ): void {
   const gsx = editorMode.cursorCornerX;
   const gsy = editorMode.cursorCornerY;
@@ -276,7 +259,6 @@ function drawCornerCursorHighlight(
   ctx.strokeStyle = `rgba(${baseColor}, 0.8)`;
   ctx.lineWidth = 1;
 
-  // Draw the 9 individual subgrid points the corner brush will paint
   for (let dy = -1; dy <= 1; dy++) {
     for (let dx = -1; dx <= 1; dx++) {
       const screen = camera.worldToScreen((gsx + dx) * halfTile, (gsy + dy) * halfTile);
@@ -287,7 +269,6 @@ function drawCornerCursorHighlight(
     }
   }
 
-  // Center crosshair
   const center = camera.worldToScreen(gsx * halfTile, gsy * halfTile);
   const r = Math.max(4, 3 * camera.scale);
   ctx.strokeStyle = `rgba(${baseColor}, 0.9)`;
@@ -306,13 +287,13 @@ function drawElevationCursorHighlight(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   editorMode: EditorMode,
-  state: EditorState,
+  model: EditorModel,
 ): void {
   const tx = editorMode.cursorTileX;
   const ty = editorMode.cursorTileY;
   if (!Number.isFinite(tx)) return;
 
-  const gridSize = state.elevationGridSize;
+  const gridSize = model.elevationGridSize;
   const half = Math.floor(gridSize / 2);
   const tileScreenSize = TILE_SIZE * camera.scale;
 
@@ -352,21 +333,18 @@ export function drawRemoteCursors(
 
     const screen = camera.worldToScreen(cursor.tileX * TILE_SIZE, cursor.tileY * TILE_SIZE);
 
-    // Colored tile highlight
     ctx.fillStyle = hexToRgba(cursor.color, 0.2);
     ctx.strokeStyle = hexToRgba(cursor.color, 0.7);
     ctx.lineWidth = 2;
     ctx.fillRect(screen.sx, screen.sy, tileScreenSize, tileScreenSize);
     ctx.strokeRect(screen.sx, screen.sy, tileScreenSize, tileScreenSize);
 
-    // Name label above the cursor
     ctx.font = "bold 11px monospace";
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
     const lx = screen.sx + tileScreenSize / 2;
     const ly = screen.sy - 4;
 
-    // Text shadow for readability
     ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
     ctx.fillText(cursor.displayName, lx + 1, ly + 1);
     ctx.fillStyle = cursor.color;

@@ -4,7 +4,7 @@ import { CHUNK_SIZE } from "../config/constants.js";
 import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
 import { chunkKey, tileToChunk, tileToLocal } from "../world/types.js";
 import type { World } from "../world/World.js";
-import type { PaintMode, SubgridShape } from "./EditorMode.js";
+import type { PaintMode, SubgridShape } from "./EditorTypes.js";
 
 const SUBGRID_STRIDE = CHUNK_SIZE * 2;
 
