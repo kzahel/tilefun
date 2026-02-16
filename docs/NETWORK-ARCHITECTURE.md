@@ -8,27 +8,38 @@ For wire protocol research (QW, Source, Roblox comparisons), see
 
 ---
 
-## Current State
+## Current State (Phases 1-4 complete)
 
-Every tick at 60 Hz, the server builds a per-client `GameStateMessage` (JSON)
-containing full entity snapshots, prop snapshots, chunk deltas, physics CVars,
-player names, editor cursors, and session state. This is sent over a single
-reliable ordered channel (WebSocket, WebRTC reliable data channel, or in-memory
-`SerializingTransport`).
+Every tick at 60 Hz, the server builds per-client messages (JSON) sent over a
+single reliable ordered channel (WebSocket, WebRTC reliable data channel, or
+in-memory `SerializingTransport`).
 
-**Steady-state cost**: ~12-15 KB/tick (20 entities), ~750 KB/s per client.
-50-entity scenario: ~30 KB/tick, ~1.8 MB/s per client.
+**Completed optimizations** (Phases 1-4):
 
-The only optimization in place: chunk data uses revision-based delta (only sends
-chunk snapshots when the revision exceeds the client's last-seen revision).
-Everything else is brute-force full-state every tick.
+1. **Delta fields** (Phase 1): Slow-changing fields (props, CVars, player names,
+   editor cursors, session state) are tracked per-client and only sent on change.
+2. **SpriteDef registry** (Phase 2): Static entity metadata (sprite dimensions,
+   collider shapes, AI config) factored into `ENTITY_DEFS`. Only dynamic state
+   (`SpriteState`, `WanderAIState`) is serialized. Collider eliminated from wire.
+3. **Message type split** (Phase 3): `FrameMessage` (per-tick entity data) +
+   typed sync events (`SyncSession`, `SyncChunks`, `SyncProps`, `SyncCVars`,
+   `SyncPlayerNames`, `SyncEditorCursors`). Ready for channel routing (Phase 6).
+4. **Entity delta compression** (Phase 4): Server tracks `lastSentEntities` per
+   client. New entities get full baselines, changed entities get field-level
+   deltas, removed entities get exit IDs. Idle entities = 0 bytes.
+
+**Steady-state cost**: ~50 KB/s per client with 50 entities (down from ~1.8 MB/s
+pre-optimization). Idle entities contribute 0 bytes.
+
+**Next**: Phase 5 (binary encoding) for ~3-4x further compression.
 
 Key files:
 - `src/shared/protocol.ts` — message types, snapshot shapes
 - `src/shared/serialization.ts` — entity/prop/chunk serialization
-- `src/server/Realm.ts` — per-client game state building
+- `src/shared/entityDelta.ts` — entity delta diff/apply
+- `src/server/Realm.ts` — per-client game state building (`buildMessages`)
 - `src/transport/` — all transport implementations
-- `src/client/ClientStateView.ts` — client state application
+- `src/client/ClientStateView.ts` — client state application (`RemoteStateView`)
 
 ---
 
@@ -218,7 +229,7 @@ fragmentation and retransmission automatically.
 Each step builds on the previous. The delta tracking infrastructure carries
 forward through all phases.
 
-### Phase 1: Delta Fields on GameStateMessage (current)
+### Phase 1: Delta Fields on GameStateMessage ✅
 
 Make slow-changing fields optional. Server tracks per-client what was last
 sent, omits unchanged fields. Client keeps previous values when absent.
@@ -229,7 +240,7 @@ sent, omits unchanged fields. Client keeps previous values when absent.
   to 0 bytes/tick when unchanged)
 - **Details**: `docs/WIRE-PROTOCOL-DELTA-PLAN.md`
 
-### Phase 2: SpriteDef Registry (static/dynamic split)
+### Phase 2: SpriteDef Registry (static/dynamic split) ✅
 
 Factor static entity metadata (sprite dimensions, sheet keys, collider shapes,
 AI config) into a shared compile-time registry (`ENTITY_DEFS`). EntitySnapshot
@@ -244,7 +255,7 @@ props from the shared registry.
 - **Prerequisite for**: Efficient delta compression (fewer fields to diff)
 - **Details**: `docs/SPRITEDEF-SPLIT-PLAN.md`
 
-### Phase 3: Message Type Split
+### Phase 3: Message Type Split ✅
 
 Split `GameStateMessage` into:
 - `FrameMessage` — per-tick entity data (the hot path)
@@ -257,14 +268,14 @@ types are now ready to route to different channels.
 - **Encoding**: JSON (no change yet)
 - **Impact**: Cleaner code, explicit per-tick vs on-change semantics
 
-### Phase 4: Entity Delta Compression
+### Phase 4: Entity Delta Compression ✅
 
-QW-style ack-based frame reference with per-field bitmask deltas:
-- Server stores last N entity snapshots per client in a ring buffer
-- Client acks received frames
-- Server deltas from last ack'd frame (only changed fields)
-- Entity lifecycle: enter (full baseline), update (delta), exit (removal)
+Per-entity delta protocol:
+- Server stores last-sent entity snapshot per client (`lastSentEntities` map)
+- Entity lifecycle: enter (full baseline), update (field-level delta), exit (ID)
 - Idle entities = 0 bytes
+- Client maintains persistent `_entityMap` and applies deltas in-place
+- Client-side animation (animTimer/frameCol) not serialized — computed locally
 
 - **Transport**: Single channel (but designed for unreliable tolerance)
 - **Encoding**: JSON or binary

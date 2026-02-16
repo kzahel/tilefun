@@ -6,6 +6,7 @@ import {
   PLAYER_FRICTION,
   PLAYER_STOP_SPEED,
 } from "../config/constants.js";
+import { Direction } from "../entities/Entity.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import {
   getAccelerate,
@@ -40,6 +41,30 @@ function makeTestEntity(id: number, wx: number, wy: number) {
     position: { wx, wy },
     velocity: { vx: 0, vy: 0 },
     sprite: null,
+    collider: null,
+    wanderAI: null,
+  });
+}
+
+/** Entity with a sprite so tickAnimations has something to animate. */
+function makeAnimatedEntity(id: number, wx: number, wy: number, moving: boolean) {
+  return serializeEntity({
+    id,
+    type: "chicken",
+    position: { wx, wy },
+    velocity: { vx: 0, vy: 0 },
+    sprite: {
+      sheetKey: "chicken",
+      spriteWidth: 16,
+      spriteHeight: 16,
+      frameCount: 4,
+      frameDuration: 200,
+      frameCol: 0,
+      frameRow: 0,
+      animTimer: 0,
+      direction: Direction.Down,
+      moving,
+    },
     collider: null,
     wanderAI: null,
   });
@@ -572,5 +597,154 @@ describe("RemoteStateView", () => {
     setNoBunnyHop(false);
     setSmallJumps(false);
     setTimeScale(1);
+  });
+
+  it("applies sync-player-names", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyMessage({
+      type: "sync-player-names",
+      playerNames: { 1: "Alice", 2: "Bob" },
+    });
+
+    expect(view.playerNames).toEqual({ 1: "Alice", 2: "Bob" });
+  });
+
+  it("applies sync-editor-cursors", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyMessage({
+      type: "sync-editor-cursors",
+      editorCursors: [
+        {
+          displayName: "Alice",
+          color: "#ff0000",
+          tileX: 5,
+          tileY: 10,
+          editorTab: "terrain",
+          brushMode: "tile",
+        },
+      ],
+    });
+
+    expect(view.remoteCursors).toHaveLength(1);
+    expect(view.remoteCursors.at(0)?.displayName).toBe("Alice");
+    expect(view.remoteCursors.at(0)?.tileX).toBe(5);
+  });
+
+  it("delta for unknown entity is silently ignored", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Baseline for entity 1 only
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeTestEntity(1, 50, 75)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Delta for entity 99 (not in entity map) — should not throw
+    view.applyFrame(
+      makeFrame({
+        entityDeltas: [{ id: 99, position: { wx: 999, wy: 999 } }],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Entity 1 is unchanged, no entity 99 appeared
+    expect(view.entities).toHaveLength(1);
+    expect(view.entities.at(0)?.position).toEqual({ wx: 50, wy: 75 });
+  });
+});
+
+describe("RemoteStateView tickAnimations", () => {
+  it("advances frameCol for moving entities", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeAnimatedEntity(1, 0, 0, true)],
+        playerEntityId: 1,
+      }),
+    );
+
+    const entity = view.entities.at(0);
+    expect(entity?.sprite?.frameCol).toBe(0);
+    expect(entity?.sprite?.animTimer).toBe(0);
+
+    // Tick 200ms — should advance one frame (frameDuration=200)
+    view.tickAnimations(0.2);
+    expect(entity?.sprite?.frameCol).toBe(1);
+  });
+
+  it("wraps frameCol around frameCount", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeAnimatedEntity(1, 0, 0, true)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Advance through all 4 frames (frameCount=4, frameDuration=200ms)
+    // tickAnimations advances one frame per call when dt >= frameDuration
+    for (let i = 0; i < 4; i++) {
+      view.tickAnimations(0.2);
+    }
+    // After 4 advances: 0→1→2→3→0 (wraps around)
+    expect(view.entities.at(0)?.sprite?.frameCol).toBe(0);
+  });
+
+  it("resets frameCol to 0 for idle entities", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Start moving
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeAnimatedEntity(1, 0, 0, true)],
+        playerEntityId: 1,
+      }),
+    );
+    view.tickAnimations(0.2); // advance to frame 1
+    expect(view.entities.at(0)?.sprite?.frameCol).toBe(1);
+
+    // Stop moving via delta
+    view.applyFrame(
+      makeFrame({
+        entityDeltas: [
+          { id: 1, spriteState: { direction: Direction.Down, moving: false, frameRow: 0 } },
+        ],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Tick — should reset to frame 0
+    view.tickAnimations(0.1);
+    expect(view.entities.at(0)?.sprite?.frameCol).toBe(0);
+    expect(view.entities.at(0)?.sprite?.animTimer).toBe(0);
+  });
+
+  it("does not animate entities without sprite", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    // Entity with null sprite
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeTestEntity(1, 0, 0)],
+        playerEntityId: 1,
+      }),
+    );
+
+    // Should not throw
+    view.tickAnimations(0.1);
+    expect(view.entities.at(0)?.sprite).toBeNull();
   });
 });
