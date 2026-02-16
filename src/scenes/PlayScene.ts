@@ -7,6 +7,7 @@ import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
+import { quantizeAxis } from "../shared/binaryCodec.js";
 import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
@@ -190,8 +191,15 @@ export class PlayScene implements GameScene {
       });
     }
 
-    // Player movement input
-    const movement = gc.actions.getMovement();
+    // Player movement input — quantize dx/dy so prediction uses the same
+    // values the server will see after binary decoding (no misprediction drift).
+    const rawMovement = gc.actions.getMovement();
+    const movement = {
+      dx: quantizeAxis(rawMovement.dx),
+      dy: quantizeAxis(rawMovement.dy),
+      sprinting: rawMovement.sprinting,
+      jump: rawMovement.jump,
+    };
     const seq = ++this.inputSeq;
     gc.transport.send({
       type: "player-input",

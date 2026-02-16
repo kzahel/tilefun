@@ -549,7 +549,7 @@ describe("EntityDelta binary codec", () => {
 // ---- player-input ----
 
 describe("player-input binary codec", () => {
-  it("encodes to exactly 14 bytes", () => {
+  it("encodes to exactly 8 bytes", () => {
     const msg: ClientMessage = {
       type: "player-input",
       seq: 12345,
@@ -559,10 +559,10 @@ describe("player-input binary codec", () => {
       jump: false,
     };
     const buf = encodeClientMessage(msg);
-    expect(buf.byteLength).toBe(14);
+    expect(buf.byteLength).toBe(8);
   });
 
-  it("roundtrips all field values", () => {
+  it("roundtrips cardinal values exactly", () => {
     const msg: ClientMessage = {
       type: "player-input",
       seq: 99999,
@@ -571,11 +571,15 @@ describe("player-input binary codec", () => {
       sprinting: false,
       jump: true,
     };
-    const decoded = roundtripClient(msg);
-    expect(decoded).toEqual(msg);
+    const decoded = roundtripClient(msg) as Extract<ClientMessage, { type: "player-input" }>;
+    expect(decoded.seq).toBe(99999);
+    expect(decoded.dx).toBeCloseTo(-1, 2);
+    expect(decoded.dy).toBe(0);
+    expect(decoded.sprinting).toBe(false);
+    expect(decoded.jump).toBe(true);
   });
 
-  it("roundtrips diagonal fractional input", () => {
+  it("roundtrips diagonal fractional input within 1%", () => {
     const SQRT2_INV = 1 / Math.sqrt(2);
     const msg: ClientMessage = {
       type: "player-input",
@@ -586,8 +590,22 @@ describe("player-input binary codec", () => {
       jump: false,
     };
     const decoded = roundtripClient(msg) as Extract<ClientMessage, { type: "player-input" }>;
-    expect(decoded.dx).toBeCloseTo(SQRT2_INV, 5);
-    expect(decoded.dy).toBeCloseTo(-SQRT2_INV, 5);
+    expect(decoded.dx).toBeCloseTo(SQRT2_INV, 2);
+    expect(decoded.dy).toBeCloseTo(-SQRT2_INV, 2);
+  });
+
+  it("roundtrips analog gamepad values within 1%", () => {
+    const msg: ClientMessage = {
+      type: "player-input",
+      seq: 1,
+      dx: 0.5,
+      dy: -0.25,
+      sprinting: false,
+      jump: false,
+    };
+    const decoded = roundtripClient(msg) as Extract<ClientMessage, { type: "player-input" }>;
+    expect(decoded.dx).toBeCloseTo(0.5, 2);
+    expect(decoded.dy).toBeCloseTo(-0.25, 2);
   });
 
   it("roundtrips zero movement", () => {

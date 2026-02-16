@@ -765,24 +765,25 @@ function readWanderAIState(view: DataView, off: number): [WanderAIState, number]
 // ---- player-input encoding ----
 
 function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>): ArrayBuffer {
-  const buf = new ArrayBuffer(14);
+  const buf = new ArrayBuffer(8);
   const view = new DataView(buf);
   view.setUint8(0, TAG_PLAYER_INPUT);
   view.setUint32(1, msg.seq, true);
-  view.setFloat32(5, msg.dx, true);
-  view.setFloat32(9, msg.dy, true);
+  // Quantize analog [-1,1] to Int8 [-127,127]. 0.8% precision — plenty for a joystick.
+  view.setInt8(5, Math.round(Math.max(-1, Math.min(1, msg.dx)) * 127));
+  view.setInt8(6, Math.round(Math.max(-1, Math.min(1, msg.dy)) * 127));
   let flags = 0;
   if (msg.sprinting) flags |= 0x01;
   if (msg.jump) flags |= 0x02;
-  view.setUint8(13, flags);
+  view.setUint8(7, flags);
   return buf;
 }
 
 function decodePlayerInput(view: DataView): ClientMessage {
   const seq = view.getUint32(1, true);
-  const dx = view.getFloat32(5, true);
-  const dy = view.getFloat32(9, true);
-  const flags = view.getUint8(13);
+  const dx = view.getInt8(5) / 127;
+  const dy = view.getInt8(6) / 127;
+  const flags = view.getUint8(7);
   return {
     type: "player-input",
     seq,
@@ -1026,6 +1027,15 @@ function readChunkSnapshot(
     },
     off,
   ];
+}
+
+// ---- Shared quantization (for prediction parity) ----
+
+/** Quantize an analog axis value [-1,1] the same way the binary codec does.
+ *  Call this on dx/dy *before* sending and predicting so client and server
+ *  process identical values. */
+export function quantizeAxis(v: number): number {
+  return Math.round(Math.max(-1, Math.min(1, v)) * 127) / 127;
 }
 
 // ---- Exports for testing ----
