@@ -41,9 +41,7 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
-  applyPlayerInputIntent,
   applyFriction,
-  applyMountInput,
   getAccelerate,
   getAirAccelerate,
   getAirWishCap,
@@ -333,10 +331,11 @@ export class Realm {
   ): void {
     this.tickCounter++;
     const movementPhysics = getMovementPhysicsParams();
+    const preSteppedEntityIds = new Set<number>();
 
     // ── Phase 1: Process player inputs (per-session) ──
-    // Drain each session's input queue and set player velocity.
-    // This must happen before physics so EntityManager sees correct velocities.
+    // Drain each session's input queue and run full per-input simulation steps.
+    // Entities stepped here are skipped in Phase 2 to avoid double simulation.
     for (const session of this.sessions.values()) {
       if (dormantClientIds.has(session.clientId)) continue;
 
@@ -352,19 +351,6 @@ export class Realm {
         const inputs = session.inputQueue;
         session.inputQueue = [];
 
-        // Resolve mount entity for input redirection
-        const mount =
-          session.gameplaySession.mountId !== null
-            ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
-              null)
-            : null;
-
-        // Build MovementContext for simplified collision (extra inputs).
-        const targetExclude = mount
-          ? new Set([session.player.id, mount.id])
-          : new Set([session.player.id]);
-        const movementTarget = mount ?? session.player;
-        const ctx = this.buildMovementContext(targetExclude, session.debugNoclip, movementTarget);
         const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
         const sampleSurfaces = (entity: Entity) => {
           if (!entity.collider) {
@@ -384,99 +370,76 @@ export class Realm {
           return { props: nearbyProps, entities: nearbyEntities };
         };
 
-        // Process extra inputs (all but last) with simplified collision.
-        // This handles the case where timing jitter causes 2+ client ticks
-        // between server ticks — without this, inputs are lost and prediction
-        // diverges, causing visible jitter.
-        for (let i = 0; i < inputs.length - 1; i++) {
-          const input = inputs[i]!;
+        for (const input of inputs) {
+          const mount =
+            session.gameplaySession.mountId !== null
+              ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
+                null)
+              : null;
 
           if (mount) {
-            // Riding: first jump press = dismount (Quake-style: held + not consumed)
+            // Riding: first jump press dismounts (held jump won't retrigger until release).
             if (input.jump && !session.jumpConsumed) {
               this.dismountPlayer(session);
               session.jumpConsumed = true;
-              break; // Remaining inputs processed as normal player next tick
+            } else {
+              if (!input.jump) session.jumpConsumed = false;
+              const mountExclude = new Set([session.player.id, mount.id]);
+              const mountCtx = this.buildMovementContext(mountExclude, session.debugNoclip, mount);
+              stepMountFromInput(
+                mount,
+                input,
+                dt,
+                mountCtx,
+                getHeight,
+                sampleSurfaces,
+                session.player,
+                this.physicsMult,
+              );
+              // Position is derived from the mount when parented.
+              if (session.player.velocity) {
+                session.player.velocity.vx = 0;
+                session.player.velocity.vy = 0;
+              }
+              this.updateLastSafePosition(session);
+              preSteppedEntityIds.add(mount.id);
+              preSteppedEntityIds.add(session.player.id);
             }
-            if (!input.jump) session.jumpConsumed = false;
-            stepMountFromInput(
-              mount,
-              input,
-              dt,
-              ctx,
-              getHeight,
-              sampleSurfaces,
-              session.player,
-              this.physicsMult,
-            );
-          } else {
-            const nextState = stepPlayerFromInput(
-              session.player,
-              input,
-              dt,
-              ctx,
-              getHeight,
-              sampleSurfaces,
-              {
-                jumpConsumed: session.jumpConsumed,
-                lastJumpHeld: session.lastJumpHeld,
-              },
-              movementPhysics,
-              this.physicsMult,
-            );
-            session.jumpConsumed = nextState.jumpConsumed;
-            session.lastJumpHeld = nextState.lastJumpHeld;
+            session.lastJumpHeld = input.jump;
+            session.lastProcessedInputSeq = input.seq;
+            continue;
           }
 
-          session.lastProcessedInputSeq = input.seq;
-        }
-
-        // Last input goes through normal path (EntityManager handles movement
-        // including push mechanics, entity-entity collision, etc.)
-        const lastInput = inputs[inputs.length - 1]!;
-        // Re-resolve mount (may have dismounted during extra inputs above)
-        const currentMount =
-          session.gameplaySession.mountId !== null
-            ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
-              null)
-            : null;
-        if (currentMount) {
-          if (lastInput.jump && !session.jumpConsumed) {
-            this.dismountPlayer(session);
-            session.jumpConsumed = true;
-          } else {
-            if (!lastInput.jump) session.jumpConsumed = false;
-            applyMountInput(currentMount, lastInput, session.player);
-            // Zero player velocity — position derived from parent resolution
-            if (session.player.velocity) {
-              session.player.velocity.vx = 0;
-              session.player.velocity.vy = 0;
-            }
-          }
-        } else {
-          // Build a fresh ctx for the last input (EntityManager handles collision
-          // for the last input, but we need ctx for friction/acceleration lookup)
           const playerExclude = new Set([session.player.id]);
           const playerCtx = this.buildMovementContext(
             playerExclude,
             session.debugNoclip,
             session.player,
           );
-          const nextState = applyPlayerInputIntent(
+          const wasAirborne = session.player.jumpVZ !== undefined;
+          const nextState = stepPlayerFromInput(
             session.player,
-            lastInput,
+            input,
             dt,
             playerCtx,
+            getHeight,
+            sampleSurfaces,
             {
               jumpConsumed: session.jumpConsumed,
               lastJumpHeld: session.lastJumpHeld,
             },
             movementPhysics,
+            this.physicsMult,
           );
           session.jumpConsumed = nextState.jumpConsumed;
+          session.lastJumpHeld = nextState.lastJumpHeld;
+          this.updateLastSafePosition(session);
+          if (wasAirborne && session.player.jumpVZ === undefined) {
+            this.handlePlayerLanding(session, getHeight, movementPhysics);
+          }
+          preSteppedEntityIds.add(session.player.id);
+          session.lastProcessedInputSeq = input.seq;
         }
-        session.lastJumpHeld = lastInput.jump;
-        session.lastProcessedInputSeq = lastInput.seq;
       } else if (!session.editorEnabled && session.player.velocity) {
         // No input this tick (timing jitter) — apply friction only.
         // Don't call applyMovementPhysics here: it would set sprite.moving=false,
@@ -544,10 +507,12 @@ export class Realm {
           this.propManager,
           entityTickDts,
           (tx, ty) => this.world.getHeightAt(tx, ty),
+          preSteppedEntityIds,
         );
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {
+          if (preSteppedEntityIds.has(session.player.id)) continue;
           const p = session.player;
           const nearbyProps = p.collider
             ? this.propManager.getPropsNearPosition(p.position, p.collider)
@@ -563,18 +528,7 @@ export class Realm {
                 );
               })()
             : [];
-          // Save safe position while grounded on non-water
-          if (p.jumpVZ === undefined) {
-            const tx = Math.floor(p.position.wx / TILE_SIZE);
-            const ty = Math.floor(p.position.wy / TILE_SIZE);
-            const flags = this.world.getCollisionIfLoaded(tx, ty);
-            if (!(flags & CollisionFlag.Water)) {
-              session.gameplaySession.lastSafePosition = {
-                wx: p.position.wx,
-                wy: p.position.wy,
-              };
-            }
-          }
+          this.updateLastSafePosition(session);
 
           const landed = tickJumpGravity(
             p,
@@ -584,31 +538,7 @@ export class Realm {
             nearbyProps,
             nearbyEntities,
           );
-          if (landed) {
-            // Check if player landed on water — respawn at last safe position
-            const landTx = Math.floor(p.position.wx / TILE_SIZE);
-            const landTy = Math.floor(p.position.wy / TILE_SIZE);
-            const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
-            if (landFlags & CollisionFlag.Water) {
-              const safe = session.gameplaySession.lastSafePosition;
-              if (safe) {
-                p.position.wx = safe.wx;
-                p.position.wy = safe.wy;
-                p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
-                p.groundZ = p.wz;
-              }
-              delete p.jumpVZ;
-              delete p.jumpZ;
-              // Brief invincibility flash so the respawn is visible
-              session.gameplaySession.invincibilityTimer = 0.75;
-            } else if (session.lastJumpHeld && !session.jumpConsumed) {
-              // Quake-style: jump immediately on landing if held and not consumed
-              initiateJump(p, movementPhysics);
-              session.jumpConsumed = true;
-            } else if (session.gameplaySession.mountId === null) {
-              this.tryMountOnLanding(session);
-            }
-          }
+          if (landed) this.handlePlayerLanding(session, getHeight, movementPhysics);
         }
 
         // ── Ball physics (gravity, bouncing, entity collision) ──
@@ -1063,6 +993,57 @@ export class Realm {
   }
 
   // ---- Private ----
+
+  /** Save respawn-safe location while the player is grounded on non-water. */
+  private updateLastSafePosition(session: PlayerSession): void {
+    const p = session.player;
+    if (p.jumpVZ !== undefined) return;
+    const tx = Math.floor(p.position.wx / TILE_SIZE);
+    const ty = Math.floor(p.position.wy / TILE_SIZE);
+    const flags = this.world.getCollisionIfLoaded(tx, ty);
+    if (flags & CollisionFlag.Water) return;
+    session.gameplaySession.lastSafePosition = {
+      wx: p.position.wx,
+      wy: p.position.wy,
+    };
+  }
+
+  /** Handle server-only side effects when a player lands. */
+  private handlePlayerLanding(
+    session: PlayerSession,
+    getHeight: (tx: number, ty: number) => number,
+    movementPhysics = getMovementPhysicsParams(),
+  ): void {
+    const p = session.player;
+    const landTx = Math.floor(p.position.wx / TILE_SIZE);
+    const landTy = Math.floor(p.position.wy / TILE_SIZE);
+    const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
+    if (landFlags & CollisionFlag.Water) {
+      const safe = session.gameplaySession.lastSafePosition;
+      if (safe) {
+        p.position.wx = safe.wx;
+        p.position.wy = safe.wy;
+        p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
+        p.groundZ = p.wz;
+      }
+      delete p.jumpVZ;
+      delete p.jumpZ;
+      // Brief invincibility flash so the respawn is visible.
+      session.gameplaySession.invincibilityTimer = 0.75;
+      return;
+    }
+
+    // Quake-style: jump immediately on landing if held and not consumed.
+    if (session.lastJumpHeld && !session.jumpConsumed) {
+      initiateJump(p, movementPhysics);
+      session.jumpConsumed = true;
+      return;
+    }
+
+    if (session.gameplaySession.mountId === null) {
+      this.tryMountOnLanding(session);
+    }
+  }
 
   /** Build a MovementContext for simplified collision (extra-input processing). */
   private buildMovementContext(

@@ -59,6 +59,7 @@ export class EntityManager {
    * @param entityTickDts If provided, only entities in this map are ticked,
    *   using their per-entity dt (accumulated from tick tiering).
    *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
+   * @param skipEntityIds Optional entity IDs to freeze for this update pass.
    */
   update(
     dt: number,
@@ -67,6 +68,7 @@ export class EntityManager {
     propManager: PropManager,
     entityTickDts?: ReadonlyMap<Entity, number>,
     getHeight?: (tx: number, ty: number) => number,
+    skipEntityIds?: ReadonlySet<number>,
   ): void {
     const playerSet = new Set(players);
 
@@ -138,6 +140,7 @@ export class EntityManager {
     // --- Phase 1: Push entities in each player's path, then move players ---
     // Player velocity is already friction/acceleration-adjusted — no speedMult needed.
     for (const player of players) {
+      if (skipEntityIds?.has(player.id)) continue;
       if (player.velocity && player.collider) {
         const { vx, vy } = player.velocity;
 
@@ -217,6 +220,7 @@ export class EntityManager {
     // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
     for (const entity of this.entities) {
       if (playerSet.has(entity) || !entity.velocity) continue;
+      if (skipEntityIds?.has(entity.id)) continue;
       if (entity.parentId !== undefined) continue; // parented: position derived from parent
       if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
       if (entityTickDts && !entityTickDts.has(entity)) continue;
@@ -262,12 +266,14 @@ export class EntityManager {
 
       for (const entity of this.entities) {
         if (entityTickDts && !entityTickDts.has(entity)) continue;
+        if (skipEntityIds?.has(entity.id)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
         if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
       for (const player of players) {
+        if (skipEntityIds?.has(player.id)) continue;
         if (player.parentId !== undefined) continue; // riders: Z is visual-only
         applyGroundTracking(player, computeGroundZ(player), true);
       }
@@ -279,7 +285,9 @@ export class EntityManager {
     }
 
     // --- Phase 3: Separate overlapping entities (skip parented) ---
-    const unparentedEntities = this.entities.filter((e) => e.parentId === undefined);
+    const unparentedEntities = this.entities.filter(
+      (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
+    );
     separateOverlappingEntities(unparentedEntities, playerSet, dt, getCollision, blockMask);
 
     // --- Phase 4: Resolve parented entity positions ---
