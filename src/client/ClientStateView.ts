@@ -442,7 +442,7 @@ export class RemoteStateView implements ClientStateView {
     return this._entities.map((e) => {
       if (e.id === playerId) return predicted;
       if (e.id === mountId && predictedMount) {
-        predictedMount.prevPosition = this._predictor!.mountPrevPosition;
+        predictedMount.prevPosition = this._predictor?.mountPrevPosition;
         return predictedMount;
       }
       return e;

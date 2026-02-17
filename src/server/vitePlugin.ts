@@ -3,6 +3,7 @@ import { join } from "node:path";
 import type { Plugin } from "vite";
 import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
+import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
 import { initServerLog, installCrashHandlers, serverLog, serverLogError } from "./serverLog.js";
@@ -25,6 +26,7 @@ function getLanAddress(): string | null {
  */
 export function tilefunServer(dataDir = "./data"): Plugin {
   let server: GameServer | null = null;
+  const netTransport = (process.env.NET_TRANSPORT ?? "ws").toLowerCase();
 
   return {
     name: "tilefun-server",
@@ -40,10 +42,10 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         installCrashHandlers();
 
         try {
-          const transport = new WebSocketServerTransport({
-            server: httpServer as import("node:http").Server,
-            path: "/ws",
-          });
+          const transport = await createTransport(
+            httpServer as import("node:http").Server,
+            netTransport,
+          );
           server = new GameServer(transport, {
             registry: new FsWorldRegistry(dataDir),
             createStore: (worldId) =>
@@ -64,10 +66,20 @@ export function tilefunServer(dataDir = "./data"): Plugin {
         const addr = httpServer.address();
         const port = typeof addr === "object" && addr ? addr.port : 5173;
         const lanIp = getLanAddress();
-        serverLog(`Game server running (attached to Vite dev server)`);
-        console.log(`[tilefun] Multiplayer URL: http://localhost:${port}/tilefun/?multiplayer`);
+        serverLog(`Game server running (attached to Vite dev server, transport=${netTransport})`);
+        const localBase = `http://localhost:${port}/tilefun/?multiplayer`;
+        const lanBase = lanIp ? `http://${lanIp}:${port}/tilefun/?multiplayer` : null;
+        if (netTransport === "webrtc") {
+          console.log(`[tilefun] Multiplayer URL: ${localBase}&transport=webrtc`);
+        } else {
+          console.log(`[tilefun] Multiplayer URL: ${localBase}`);
+        }
         if (lanIp) {
-          console.log(`[tilefun] LAN Multiplayer:  http://${lanIp}:${port}/tilefun/?multiplayer`);
+          if (netTransport === "webrtc" && lanBase) {
+            console.log(`[tilefun] LAN Multiplayer:  ${lanBase}&transport=webrtc`);
+          } else if (lanBase) {
+            console.log(`[tilefun] LAN Multiplayer:  ${lanBase}`);
+          }
         }
       });
     },
@@ -79,4 +91,21 @@ export function tilefunServer(dataDir = "./data"): Plugin {
       }
     },
   };
+}
+
+async function createTransport(
+  server: import("node:http").Server,
+  netTransport: string,
+): Promise<IServerTransport> {
+  if (netTransport === "webrtc") {
+    const { WebRtcServerTransport } = await import("../transport/WebRtcServerTransport.js");
+    return await WebRtcServerTransport.create({
+      server,
+      path: "/rtc-signal",
+    });
+  }
+  return new WebSocketServerTransport({
+    server,
+    path: "/ws",
+  });
 }

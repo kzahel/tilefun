@@ -56,7 +56,7 @@ export class ConsoleEngine {
 
     // /prefixed → command or cvar
     const tokens = tokenize(trimmed);
-    const name = stripSlash(tokens[0]!.toLowerCase());
+    const name = stripSlash(tokens[0]?.toLowerCase());
     const args = tokens.slice(1);
 
     // Check if it's a cvar get/set
@@ -124,7 +124,7 @@ export class ConsoleEngine {
     if (!trimmed) return lines;
 
     const tokens = tokenize(trimmed);
-    const name = stripSlash(tokens[0]!.toLowerCase());
+    const name = stripSlash(tokens[0]?.toLowerCase());
     const args = tokens.slice(1);
 
     const cv = this.cvars.get(name);
@@ -165,7 +165,7 @@ export class ConsoleEngine {
     }
 
     // Completing an argument.
-    const cmdName = stripSlash(tokens[0]!.toLowerCase());
+    const cmdName = stripSlash(tokens[0]?.toLowerCase());
     const argIndex = tokens.length - 2; // -1 for cmd name, -1 for current partial
     const currentToken = tokens[tokens.length - 1] ?? "";
     const argPartial = currentToken.toLowerCase();

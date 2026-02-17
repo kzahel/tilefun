@@ -16,14 +16,12 @@ export class EditScene implements GameScene {
   private lastCursorTab = "";
   private lastCursorBrush = "";
   private cursorSendCooldown = 0;
-  private pendingCursor:
-    | {
-        tileX: number;
-        tileY: number;
-        editorTab: string;
-        brushMode: string;
-      }
-    | null = null;
+  private pendingCursor: {
+    tileX: number;
+    tileY: number;
+    editorTab: string;
+    brushMode: string;
+  } | null = null;
   private static readonly CURSOR_SEND_INTERVAL = 1 / 20; // 20 Hz max
 
   onEnter(gc: GameContext): void {

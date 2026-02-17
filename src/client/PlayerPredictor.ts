@@ -1,15 +1,15 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
+import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import {
-  MAX_INPUT_STEP_SECONDS,
   getMovementPhysicsParams,
   getServerPhysicsMult,
+  MAX_INPUT_STEP_SECONDS,
   splitInputStepDurations,
   stepMountFromInput,
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
-import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import type { World } from "../world/World.js";
 

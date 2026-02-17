@@ -4,10 +4,10 @@ import {
   applyGroundTracking,
   getEffectiveGroundZ,
   getMaxSurfaceZUnderAABB,
-  resolveGroundZForTracking,
-  resolveGroundZForLanding,
   getSurfaceZ,
   isElevationBlocked3D,
+  resolveGroundZForLanding,
+  resolveGroundZForTracking,
 } from "./surfaceHeight.js";
 
 /** Create a getHeight function from a sparse tile→height map. */

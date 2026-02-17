@@ -493,7 +493,7 @@ export class MainMenu {
       loading.textContent = "Loading...";
       roomListEl.appendChild(loading);
 
-      const rooms = await this.roomDirectory!.listRooms();
+      const rooms = await this.roomDirectory?.listRooms();
       roomListEl.innerHTML = "";
 
       if (rooms.length === 0) {

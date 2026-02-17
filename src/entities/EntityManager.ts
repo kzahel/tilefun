@@ -2,8 +2,8 @@ import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../co
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   applyGroundTracking,
-  resolveGroundZForTracking,
   isElevationBlocked3D,
+  resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";

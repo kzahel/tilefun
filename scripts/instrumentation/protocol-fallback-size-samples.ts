@@ -1,12 +1,12 @@
+import type { WorldMeta } from "../../src/persistence/IWorldRegistry.ts";
 import { encodeClientMessage, encodeServerMessage } from "../../src/shared/binaryCodec.ts";
 import type {
   ClientMessage,
-  ServerMessage,
   PropSnapshot,
-  RemoteEditorCursor,
   RealmInfo,
+  RemoteEditorCursor,
+  ServerMessage,
 } from "../../src/shared/protocol.ts";
-import type { WorldMeta } from "../../src/persistence/IWorldRegistry.ts";
 
 function sizeClient(msg: ClientMessage): number {
   return encodeClientMessage(msg).byteLength;
@@ -142,7 +142,10 @@ const clientSamples: Array<[string, ClientMessage]> = [
 const serverSamples: Array<[string, ServerMessage]> = [
   ["player-assigned", { type: "player-assigned", entityId: 1 }],
   ["kicked", { type: "kicked", reason: "Connected from another tab" }],
-  ["sync-session", { type: "sync-session", gemsCollected: 3, editorEnabled: false, mountEntityId: null }],
+  [
+    "sync-session",
+    { type: "sync-session", gemsCollected: 3, editorEnabled: false, mountEntityId: null },
+  ],
   ["sync-invincibility", { type: "sync-invincibility", startTick: 500, durationTicks: 45 }],
   ["sync-props-1", { type: "sync-props", props: [prop] }],
   [
@@ -173,7 +176,10 @@ const serverSamples: Array<[string, ServerMessage]> = [
       },
     },
   ],
-  ["sync-player-names-2", { type: "sync-player-names", playerNames: { 1: "Player 1", 2: "Player 2" } }],
+  [
+    "sync-player-names-2",
+    { type: "sync-player-names", playerNames: { 1: "Player 1", 2: "Player 2" } },
+  ],
   [
     "sync-player-names-16",
     {

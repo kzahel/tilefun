@@ -253,9 +253,9 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
 
   // Conditional fields
   if (mask & (1 << BIT_VELOCITY)) {
-    view.setFloat32(off, snap.velocity!.vx, true);
+    view.setFloat32(off, snap.velocity?.vx, true);
     off += 4;
-    view.setFloat32(off, snap.velocity!.vy, true);
+    view.setFloat32(off, snap.velocity?.vy, true);
     off += 4;
   }
   if (mask & (1 << BIT_SPRITE)) {
@@ -481,15 +481,15 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
 
   // Write values for changed, non-null fields
   if (changeMask & (1 << 0)) {
-    view.setFloat32(off, delta.position!.wx, true);
+    view.setFloat32(off, delta.position?.wx, true);
     off += 4;
-    view.setFloat32(off, delta.position!.wy, true);
+    view.setFloat32(off, delta.position?.wy, true);
     off += 4;
   }
   if (changeMask & (1 << 1) && !(nullMask & (1 << 1))) {
-    view.setFloat32(off, delta.velocity!.vx, true);
+    view.setFloat32(off, delta.velocity?.vx, true);
     off += 4;
-    view.setFloat32(off, delta.velocity!.vy, true);
+    view.setFloat32(off, delta.velocity?.vy, true);
     off += 4;
   }
   if (changeMask & (1 << 2) && !(nullMask & (1 << 2))) {

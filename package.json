@@ -31,5 +31,8 @@
     "peerjs": "^1.5.5",
     "three": "^0.182.0",
     "ws": "^8.18.0"
+  },
+  "optionalDependencies": {
+    "node-datachannel": "^0.32.1"
   }
 }

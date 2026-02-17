@@ -89,7 +89,9 @@ export class NetEmulatedClientTransport implements IClientTransport {
     }
 
     if (shouldDrop(this.config.rxLossPct)) return;
-    this.scheduleOrRun(this.config.rxLatencyMs, this.config.rxJitterMs, () => this.messageHandler?.(msg));
+    this.scheduleOrRun(this.config.rxLatencyMs, this.config.rxJitterMs, () =>
+      this.messageHandler?.(msg),
+    );
   }
 
   private scheduleOrRun(latencyMs: number, jitterMs: number, fn: () => void): void {

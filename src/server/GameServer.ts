@@ -13,10 +13,7 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
-import {
-  setServerPhysicsMult,
-  setServerTickMs,
-} from "../physics/PlayerMovement.js";
+import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
@@ -163,7 +160,7 @@ export class GameServer {
 
       // Reconnection: reuse existing session and player entity
       const existingSession = this.sessions.get(clientId);
-      if (existingSession && existingSession.realmId) {
+      if (existingSession?.realmId) {
         const realm = this.realms.get(existingSession.realmId);
         if (realm) {
           console.log(

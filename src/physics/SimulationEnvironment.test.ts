@@ -153,7 +153,9 @@ describe("createMovementContext", () => {
 
     const fixtures = [blocker];
     const queryByOverlap = (aabb: { left: number; top: number; right: number; bottom: number }) =>
-      fixtures.filter((entity) => aabbsOverlap(aabb, getEntityAABB(entity.position, entity.collider!)));
+      fixtures.filter((entity) =>
+        aabbsOverlap(aabb, getEntityAABB(entity.position, entity.collider!)),
+      );
 
     const serverCtx = createMovementContext({
       getCollision: () => 0,

@@ -238,8 +238,8 @@ describe("Prop serialization", () => {
     expect(result.isProp).toBe(true);
     // walls are reconstructed from the prop definition, not serialized
     expect(result.walls).toHaveLength(7); // climb-arch has 7 stair-step walls
-    expect(result.walls![0]).toHaveProperty("walkableTop", true);
-    expect(result.walls![0]).toHaveProperty("passable", true);
+    expect(result.walls?.[0]).toHaveProperty("walkableTop", true);
+    expect(result.walls?.[0]).toHaveProperty("passable", true);
   });
 
   it("round-trips a prop without collider or walls", () => {

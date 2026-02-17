@@ -4,12 +4,15 @@ import { extname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
+import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
 import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
 
 const PORT = parseInt(process.env.PORT ?? "3001", 10);
 const DATA_DIR = process.env.DATA_DIR ?? "./data";
+const NET_TRANSPORT = (process.env.NET_TRANSPORT ?? "ws").toLowerCase();
+const RTC_SIGNAL_PATH = process.env.RTC_SIGNAL_PATH ?? "/rtc-signal";
 
 // Resolve dist/ directory (Vite build output) relative to project root
 const thisFile = fileURLToPath(import.meta.url);
@@ -83,8 +86,7 @@ const httpServer = createServer((req, res) => {
 await initServerLog(DATA_DIR);
 installCrashHandlers();
 
-// Create WebSocket transport attached to HTTP server
-const transport = new WebSocketServerTransport({ server: httpServer });
+const transport = await createTransport();
 
 // Create game server with filesystem persistence
 const server = new GameServer(transport, {
@@ -98,11 +100,18 @@ server.startLoop();
 
 httpServer.listen(PORT, () => {
   serverLog(`Server listening on http://localhost:${PORT}`);
+  serverLog(`Network transport: ${NET_TRANSPORT}`);
   if (hasDistDir) {
     serverLog(`Serving client at http://localhost:${PORT}${BASE_PATH}`);
   } else {
     serverLog("No dist/ found — run 'npm run build' to serve client files");
     serverLog(`For dev, use 'npm run dev' + open http://localhost:5173/?server=localhost:${PORT}`);
+  }
+  if (NET_TRANSPORT === "webrtc") {
+    serverLog(
+      `WebRTC connect URL: http://localhost:${PORT}${BASE_PATH}?server=localhost:${PORT}&transport=webrtc`,
+    );
+    serverLog(`WebRTC signaling path: ${RTC_SIGNAL_PATH}`);
   }
 });
 
@@ -116,3 +125,14 @@ function shutdown() {
 
 process.on("SIGINT", shutdown);
 process.on("SIGTERM", shutdown);
+
+async function createTransport(): Promise<IServerTransport> {
+  if (NET_TRANSPORT === "webrtc") {
+    const { WebRtcServerTransport } = await import("../transport/WebRtcServerTransport.js");
+    return await WebRtcServerTransport.create({
+      server: httpServer,
+      path: RTC_SIGNAL_PATH,
+    });
+  }
+  return new WebSocketServerTransport({ server: httpServer });
+}

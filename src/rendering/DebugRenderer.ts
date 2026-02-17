@@ -1,4 +1,5 @@
 import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
+import type { ExtrapolationStats } from "../client/ClientStateView.js";
 import {
   CHUNK_SIZE,
   DEFAULT_PHYSICAL_HEIGHT,
@@ -10,7 +11,6 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
-import type { ExtrapolationStats } from "../client/ClientStateView.js";
 
 export interface DebugInfo {
   fps: number;

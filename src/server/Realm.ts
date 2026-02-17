@@ -13,10 +13,7 @@ import {
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import { createBall } from "../entities/Ball.js";
-import {
-  aabbsOverlap,
-  getEntityAABB,
-} from "../entities/collision.js";
+import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -42,16 +39,16 @@ import {
   getAirWishCap,
   getFriction,
   getGravityScale,
-  MAX_INPUT_STEP_SECONDS,
   getMovementPhysicsParams,
   getNoBunnyHop,
   getPhysicsCVarRevision,
   getPlatformerAir,
-  type PlayerStepOutcome,
   getSmallJumps,
   getStopSpeed,
   getTimeScale,
   initiateJump,
+  MAX_INPUT_STEP_SECONDS,
+  type PlayerStepOutcome,
   splitInputStepDurations,
   stepMountFromInput,
   stepPlayerFromInput,
@@ -366,12 +363,7 @@ export class Realm {
         const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
         const getTerrainAt = (tx: number, ty: number) => this.world.getBlendBaseAt(tx, ty);
         const getRoadAt = (tx: number, ty: number) => this.world.getRoadAt(tx, ty);
-        const queryProps = (aabb: {
-          left: number;
-          top: number;
-          right: number;
-          bottom: number;
-        }) =>
+        const queryProps = (aabb: { left: number; top: number; right: number; bottom: number }) =>
           this.propManager.getPropsInChunkRange(
             Math.floor(aabb.left / CHUNK_SIZE_PX),
             Math.floor(aabb.top / CHUNK_SIZE_PX),
@@ -401,8 +393,9 @@ export class Realm {
           }
           const mount =
             session.gameplaySession.mountId !== null
-              ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
-                null)
+              ? (this.entityManager.entities.find(
+                  (e) => e.id === session.gameplaySession.mountId,
+                ) ?? null)
               : null;
 
           if (mount) {
@@ -473,7 +466,8 @@ export class Realm {
             enteredWater: this.isEntityOnWater(session.player),
             endedGrounded: session.player.jumpVZ === undefined,
           };
-          const heldInput = input.jumpPressed === undefined ? input : { ...input, jumpPressed: false };
+          const heldInput =
+            input.jumpPressed === undefined ? input : { ...input, jumpPressed: false };
           for (let i = 0; i < stepDts.length; i++) {
             const stepResult = stepPlayerFromInput(
               session.player,

@@ -228,8 +228,8 @@ describe("buildMessages sync events", () => {
     // Session sync should be present
     const sessions = getSyncOfType<SyncSessionMessage>(tickMsgs, "sync-session");
     expect(sessions).toHaveLength(1);
-    expect(sessions[0]!.gemsCollected).toBeDefined();
-    expect(sessions[0]!.editorEnabled).toBeDefined();
+    expect(sessions[0]?.gemsCollected).toBeDefined();
+    expect(sessions[0]?.editorEnabled).toBeDefined();
 
     // Player names sync
     const names = getSyncOfType<SyncPlayerNamesMessage>(tickMsgs, "sync-player-names");
@@ -267,7 +267,7 @@ describe("buildMessages sync events", () => {
     const tickMsgs2 = tickAndGetMessages(server, messages);
     const sessions = getSyncOfType<SyncSessionMessage>(tickMsgs2, "sync-session");
     expect(sessions).toHaveLength(1);
-    expect(sessions[0]!.editorEnabled).toBe(false);
+    expect(sessions[0]?.editorEnabled).toBe(false);
   });
 
   it("editor mode not sent when unchanged", () => {
@@ -298,8 +298,8 @@ describe("buildMessages sync events", () => {
     const tickMsgs2 = tickAndGetMessages(server, messages);
     const inv2 = getSyncOfType<SyncInvincibilityMessage>(tickMsgs2, "sync-invincibility");
     expect(inv2).toHaveLength(1);
-    expect(inv2[0]!.startTick).toBeGreaterThan(0);
-    expect(inv2[0]!.durationTicks).toBeGreaterThan(0);
+    expect(inv2[0]?.startTick).toBeGreaterThan(0);
+    expect(inv2[0]?.durationTicks).toBeGreaterThan(0);
 
     // Next tick still invincible (decaying), but no new event
     const tickMsgs3 = tickAndGetMessages(server, messages);
@@ -337,8 +337,8 @@ describe("buildMessages chunk deltas", () => {
 
     const chunks = getSyncOfType<SyncChunksMessage>(tickMsgs, "sync-chunks");
     expect(chunks).toHaveLength(1);
-    expect(chunks[0]!.loadedChunkKeys).toBeDefined();
-    expect(chunks[0]!.loadedChunkKeys?.length).toBeGreaterThan(0);
+    expect(chunks[0]?.loadedChunkKeys).toBeDefined();
+    expect(chunks[0]?.loadedChunkKeys?.length).toBeGreaterThan(0);
   });
 
   it("second tick omits chunk data when unchanged", () => {

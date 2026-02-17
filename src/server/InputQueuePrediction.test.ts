@@ -72,12 +72,12 @@ describe("Input queue prediction invariant", () => {
       server.tick(DT);
     }
     const posAfterMoving = session.player.position.wx;
-    const velAfter = session.player.velocity!.vx;
+    const velAfter = session.player.velocity?.vx;
 
     // Now tick with no new input — friction decelerates
     server.tick(DT);
 
-    const velAfterFriction = Math.abs(session.player.velocity!.vx);
+    const velAfterFriction = Math.abs(session.player.velocity?.vx);
     // Velocity should be lower after friction (or zero at high friction values)
     expect(velAfterFriction).toBeLessThan(Math.abs(velAfter));
     // If residual velocity remains, player should have slid forward
@@ -174,8 +174,8 @@ describe("Client prediction matches server after reconciliation", () => {
       predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
 
       // After reconciliation with no unacked inputs, predicted == server
-      expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
-      expect(predictor.player!.position.wy).toBeCloseTo(session.player.position.wy);
+      expect(predictor.player?.position.wx).toBeCloseTo(session.player.position.wx);
+      expect(predictor.player?.position.wy).toBeCloseTo(session.player.position.wy);
     }
   });
 
@@ -206,7 +206,7 @@ describe("Client prediction matches server after reconciliation", () => {
 
     // Client reconciles with server state
     predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
-    expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
+    expect(predictor.player?.position.wx).toBeCloseTo(session.player.position.wx);
 
     // --- Server tick 2 fires with no client input ---
     server.tick(DT);
@@ -227,7 +227,7 @@ describe("Client prediction matches server after reconciliation", () => {
 
     // Reconcile again
     predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
-    expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
+    expect(predictor.player?.position.wx).toBeCloseTo(session.player.position.wx);
 
     // Total: 3 inputs processed on both sides
     expect(session.lastProcessedInputSeq).toBe(3);
@@ -263,7 +263,7 @@ describe("Client prediction matches server after reconciliation", () => {
       predictor.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
     }
 
-    expect(predictor.player!.position.wx).toBeCloseTo(session.player.position.wx);
+    expect(predictor.player?.position.wx).toBeCloseTo(session.player.position.wx);
     expect(session.lastProcessedInputSeq).toBe(seq);
   });
 });

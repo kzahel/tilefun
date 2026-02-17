@@ -9,6 +9,7 @@ import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
 import { PeerHostTransport } from "./transport/PeerHostTransport.js";
 import { SerializingTransport } from "./transport/SerializingTransport.js";
+import { WebRtcClientTransport } from "./transport/WebRtcClientTransport.js";
 import { WebSocketClientTransport } from "./transport/WebSocketClientTransport.js";
 import { HostingBanner } from "./ui/HostingBanner.js";
 import { ProfilePicker } from "./ui/ProfilePicker.js";
@@ -20,6 +21,8 @@ const canvas: HTMLCanvasElement = canvasEl;
 // ?server=host:port      → connect to a specific standalone server
 // ?multiplayer           → connect to game server on same host (Vite plugin uses /ws path)
 // ?server=host:port/ws   → explicit path also works
+// ?transport=webrtc      → dedicated server WebRTC datachannel (WS signaling)
+// ?signal=wss://...      → override signaling URL for dedicated WebRTC mode
 // ?host                  → P2P host: run server in-browser, accept WebRTC guests
 // ?join=PEER_ID          → P2P guest: connect to host via WebRTC DataChannel
 // (neither)              → single-player, in-browser server
@@ -33,6 +36,21 @@ let client: GameClient;
 let server: GameServer | null = null;
 let hostingBanner: HostingBanner | null = null;
 let roomDirectory: RoomDirectory | null = null;
+
+function resolveWebRtcSignalUrl(serverParam: string | null, wsProto: "ws" | "wss"): string {
+  const signalOverride = params.get("signal");
+  if (signalOverride) {
+    return signalOverride;
+  }
+
+  const signalPath = params.get("signalPath") ?? "/rtc-signal";
+  if (serverParam) {
+    const base = new URL(serverParam.includes("://") ? serverParam : `ws://${serverParam}`);
+    return `${base.protocol}//${base.host}${signalPath}`;
+  }
+
+  return `${wsProto}://${window.location.host}${signalPath}`;
+}
 
 /** Resolve the active player profile (auto-create or show picker). */
 async function resolveProfile(profileStore: PlayerProfileStore): Promise<PlayerProfile> {
@@ -282,22 +300,42 @@ async function start() {
     // ?server=host:port connects to standalone server (no path needed).
 
     const wsProto = window.location.protocol === "https:" ? "wss" : "ws";
-    const baseWsUrl = serverParam
-      ? `ws://${serverParam}`
-      : `${wsProto}://${window.location.host}/ws`;
-    const wsUrl = `${baseWsUrl}${baseWsUrl.includes("?") ? "&" : "?"}uuid=${encodeURIComponent(playerId)}`;
-    console.log(`[tilefun] Connecting as ${playerId} to ${baseWsUrl}...`);
-    const wsTransport = new WebSocketClientTransport(wsUrl);
-    await wsTransport.ready();
-    console.log("[tilefun] Connected to server");
-    client = new GameClient(canvas, wsTransport, null, {
-      mode: "serialized",
-      profile,
-      profileStore,
-      roomDirectory,
-      autoJoinRealm: true,
-      clientId: playerId,
-    });
+    const transportParam = params.get("transport")?.toLowerCase();
+    if (transportParam === "webrtc") {
+      const signalUrl = resolveWebRtcSignalUrl(serverParam, wsProto);
+      console.log(`[tilefun] Connecting as ${playerId} to ${signalUrl} (WebRTC signaling)...`);
+      const rtcTransport = new WebRtcClientTransport({
+        signalUrl,
+        clientId: playerId,
+      });
+      await rtcTransport.ready();
+      console.log("[tilefun] Connected to server (WebRTC datachannel)");
+      client = new GameClient(canvas, rtcTransport, null, {
+        mode: "serialized",
+        profile,
+        profileStore,
+        roomDirectory,
+        autoJoinRealm: true,
+        clientId: playerId,
+      });
+    } else {
+      const baseWsUrl = serverParam
+        ? `ws://${serverParam}`
+        : `${wsProto}://${window.location.host}/ws`;
+      const wsUrl = `${baseWsUrl}${baseWsUrl.includes("?") ? "&" : "?"}uuid=${encodeURIComponent(playerId)}`;
+      console.log(`[tilefun] Connecting as ${playerId} to ${baseWsUrl}...`);
+      const wsTransport = new WebSocketClientTransport(wsUrl);
+      await wsTransport.ready();
+      console.log("[tilefun] Connected to server");
+      client = new GameClient(canvas, wsTransport, null, {
+        mode: "serialized",
+        profile,
+        profileStore,
+        roomDirectory,
+        autoJoinRealm: true,
+        clientId: playerId,
+      });
+    }
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
     await client.init();

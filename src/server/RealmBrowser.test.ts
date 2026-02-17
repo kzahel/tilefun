@@ -197,8 +197,8 @@ describe("Realm browser protocol", () => {
     // Should get realm-list, NOT player-assigned or world-loaded
     const realmList = transport.messagesOfType("player-1", "realm-list");
     expect(realmList).toHaveLength(1);
-    expect(realmList[0]!.realms).toBeInstanceOf(Array);
-    expect(realmList[0]!.realms.length).toBeGreaterThan(0);
+    expect(realmList[0]?.realms).toBeInstanceOf(Array);
+    expect(realmList[0]?.realms.length).toBeGreaterThan(0);
 
     const assigned = transport.messagesOfType("player-1", "player-assigned");
     const worldLoaded = transport.messagesOfType("player-1", "world-loaded");
@@ -226,18 +226,18 @@ describe("Realm browser protocol", () => {
     const lists = transport.messagesOfType("player-1", "realm-list");
     expect(lists).toHaveLength(1);
 
-    const realms = lists[0]!.realms;
+    const realms = lists[0]?.realms;
     expect(realms.length).toBe(2);
 
     // The default realm should have 1 player (the local client)
     const defaultRealm = realms.find((r: RealmInfo) => r.playerCount > 0);
     expect(defaultRealm).toBeDefined();
-    expect(defaultRealm!.playerCount).toBe(1);
+    expect(defaultRealm?.playerCount).toBe(1);
 
     // Second world should have 0 players
     const secondRealm = realms.find((r: RealmInfo) => r.name === "Second World");
     expect(secondRealm).toBeDefined();
-    expect(secondRealm!.playerCount).toBe(0);
+    expect(secondRealm?.playerCount).toBe(0);
   });
 
   it("join-realm moves player to realm and responds with realm-joined", async () => {
@@ -250,7 +250,7 @@ describe("Realm browser protocol", () => {
     // Get the realm list to find a worldId
     const realmList = transport.messagesOfType("player-1", "realm-list");
     expect(realmList).toHaveLength(1);
-    const worldId = realmList[0]!.realms[0]!.id;
+    const worldId = realmList[0]?.realms[0]?.id;
 
     transport.clearMessages("player-1");
 
@@ -261,14 +261,14 @@ describe("Realm browser protocol", () => {
     // Should get player-assigned + realm-joined
     const assigned = transport.messagesOfType("player-1", "player-assigned");
     expect(assigned).toHaveLength(1);
-    expect(assigned[0]!.entityId).toBeGreaterThan(0);
+    expect(assigned[0]?.entityId).toBeGreaterThan(0);
 
     const joined = transport.messagesOfType("player-1", "realm-joined");
     expect(joined).toHaveLength(1);
-    expect(joined[0]!.requestId).toBe(1);
-    expect(joined[0]!.cameraX).toBeDefined();
-    expect(joined[0]!.cameraY).toBeDefined();
-    expect(joined[0]!.cameraZoom).toBeDefined();
+    expect(joined[0]?.requestId).toBe(1);
+    expect(joined[0]?.cameraX).toBeDefined();
+    expect(joined[0]?.cameraY).toBeDefined();
+    expect(joined[0]?.cameraZoom).toBeDefined();
   });
 
   it("join-realm broadcasts realm-player-count", async () => {
@@ -279,7 +279,7 @@ describe("Realm browser protocol", () => {
     transport.connect("player-2");
     await new Promise((r) => setTimeout(r, 10));
 
-    const worldId = transport.messagesOfType("player-1", "realm-list")[0]!.realms[0]!.id;
+    const worldId = transport.messagesOfType("player-1", "realm-list")[0]?.realms[0]?.id;
 
     // Player 1 joins
     transport.clearMessages("player-1");
@@ -298,7 +298,7 @@ describe("Realm browser protocol", () => {
     // The count for the joined realm should be 1
     const latest1 = counts1.find((m) => m.worldId === worldId);
     expect(latest1).toBeDefined();
-    expect(latest1!.count).toBe(1);
+    expect(latest1?.count).toBe(1);
   });
 
   it("leave-realm removes player from realm", async () => {
@@ -308,7 +308,7 @@ describe("Realm browser protocol", () => {
     transport.connect("player-1");
     await new Promise((r) => setTimeout(r, 10));
 
-    const worldId = transport.messagesOfType("player-1", "realm-list")[0]!.realms[0]!.id;
+    const worldId = transport.messagesOfType("player-1", "realm-list")[0]?.realms[0]?.id;
     transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId });
     await new Promise((r) => setTimeout(r, 10));
 
@@ -319,7 +319,7 @@ describe("Realm browser protocol", () => {
 
     const left = transport.messagesOfType("player-1", "realm-left");
     expect(left).toHaveLength(1);
-    expect(left[0]!.requestId).toBe(2);
+    expect(left[0]?.requestId).toBe(2);
 
     // After leaving, list-realms should show 0 players
     transport.clearMessages("player-1");
@@ -327,8 +327,8 @@ describe("Realm browser protocol", () => {
     await new Promise((r) => setTimeout(r, 10));
 
     const lists = transport.messagesOfType("player-1", "realm-list");
-    const realm = lists[0]!.realms.find((r: RealmInfo) => r.id === worldId);
-    expect(realm!.playerCount).toBe(0);
+    const realm = lists[0]?.realms.find((r: RealmInfo) => r.id === worldId);
+    expect(realm?.playerCount).toBe(0);
   });
 
   it("leave-realm broadcasts realm-player-count", async () => {
@@ -339,7 +339,7 @@ describe("Realm browser protocol", () => {
     transport.connect("player-2");
     await new Promise((r) => setTimeout(r, 10));
 
-    const worldId = transport.messagesOfType("player-1", "realm-list")[0]!.realms[0]!.id;
+    const worldId = transport.messagesOfType("player-1", "realm-list")[0]?.realms[0]?.id;
     transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId });
     transport.clientSend("player-2", { type: "join-realm", requestId: 1, worldId });
     await new Promise((r) => setTimeout(r, 10));
@@ -354,7 +354,7 @@ describe("Realm browser protocol", () => {
     const counts2 = transport.messagesOfType("player-2", "realm-player-count");
     const update = counts2.find((m) => m.worldId === worldId);
     expect(update).toBeDefined();
-    expect(update!.count).toBe(1);
+    expect(update?.count).toBe(1);
   });
 
   it("realm-scoped messages are ignored while in lobby", async () => {
@@ -393,8 +393,8 @@ describe("Realm browser protocol", () => {
     transport.connect("player-1");
     await new Promise((r) => setTimeout(r, 10));
 
-    const realmList = transport.messagesOfType("player-1", "realm-list")[0]!.realms;
-    const firstWorldId = realmList.find((r: RealmInfo) => r.id !== secondWorld.id)!.id;
+    const realmList = transport.messagesOfType("player-1", "realm-list")[0]?.realms;
+    const firstWorldId = realmList.find((r: RealmInfo) => r.id !== secondWorld.id)?.id;
     transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId: firstWorldId });
     await new Promise((r) => setTimeout(r, 10));
 
@@ -414,7 +414,7 @@ describe("Realm browser protocol", () => {
 
     const joined = transport.messagesOfType("player-1", "realm-joined");
     expect(joined).toHaveLength(1);
-    expect(joined[0]!.requestId).toBe(2);
+    expect(joined[0]?.requestId).toBe(2);
 
     // Verify player counts: both realms should now be at 0 and 1 respectively
     transport.clearMessages("player-1");
@@ -422,10 +422,10 @@ describe("Realm browser protocol", () => {
     await new Promise((r) => setTimeout(r, 10));
 
     const lists = transport.messagesOfType("player-1", "realm-list");
-    const first = lists[0]!.realms.find((r: RealmInfo) => r.id === firstWorldId);
-    const second = lists[0]!.realms.find((r: RealmInfo) => r.id === secondWorld.id);
-    expect(first!.playerCount).toBe(0);
-    expect(second!.playerCount).toBe(1);
+    const first = lists[0]?.realms.find((r: RealmInfo) => r.id === firstWorldId);
+    const second = lists[0]?.realms.find((r: RealmInfo) => r.id === secondWorld.id);
+    expect(first?.playerCount).toBe(0);
+    expect(second?.playerCount).toBe(1);
   });
 
   it("reconnecting multiplayer client rejoins their realm", async () => {
@@ -435,7 +435,7 @@ describe("Realm browser protocol", () => {
     transport.connect("player-1");
     await new Promise((r) => setTimeout(r, 10));
 
-    const worldId = transport.messagesOfType("player-1", "realm-list")[0]!.realms[0]!.id;
+    const worldId = transport.messagesOfType("player-1", "realm-list")[0]?.realms[0]?.id;
     transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId });
     await new Promise((r) => setTimeout(r, 10));
 

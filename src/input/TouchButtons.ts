@@ -41,15 +41,15 @@ export class TouchButtons {
   }
 
   get jumpPressed(): boolean {
-    return this.buttons[0]!.pressed;
+    return this.buttons[0]?.pressed;
   }
 
   get throwPressed(): boolean {
-    return this.buttons[1]!.pressed;
+    return this.buttons[1]?.pressed;
   }
 
   get sprintPressed(): boolean {
-    return this.buttons[2]!.pressed;
+    return this.buttons[2]?.pressed;
   }
 
   attach(): void {

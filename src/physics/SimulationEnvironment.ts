@@ -1,5 +1,10 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
-import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB, type AABB } from "../entities/collision.js";
+import {
+  type AABB,
+  aabbOverlapsPropWalls,
+  aabbsOverlap,
+  getEntityAABB,
+} from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { zRangesOverlap } from "./AABB3D.js";
@@ -39,7 +44,8 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       const selfWz = options.movingEntity.wz ?? 0;
       const selfHeight = options.movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
       for (const other of options.queryEntities(aabb)) {
-        if (options.excludeIds.has(other.id) || !other.collider || !shouldEntityBlock(other)) continue;
+        if (options.excludeIds.has(other.id) || !other.collider || !shouldEntityBlock(other))
+          continue;
         const otherWz = other.wz ?? 0;
         const otherHeight = other.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         if (!zRangesOverlap(selfWz, selfHeight, otherWz, otherHeight)) continue;

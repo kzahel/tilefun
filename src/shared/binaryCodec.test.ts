@@ -28,6 +28,14 @@ function roundtripClient(msg: ClientMessage): ClientMessage {
   return decodeClientMessage(encodeClientMessage(msg));
 }
 
+function expectDefined<T>(value: T | null | undefined): T {
+  expect(value).toBeDefined();
+  if (value == null) {
+    throw new Error("Expected value to be defined");
+  }
+  return value;
+}
+
 // ---- Entity type index ----
 
 describe("entityTypeIndex", () => {
@@ -144,7 +152,7 @@ describe("EntitySnapshot binary codec", () => {
       entityBaselines: [snap],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    expect(decoded.entityBaselines![0]!).toEqual(snap);
+    expect(expectDefined(decoded.entityBaselines?.[0])).toEqual(snap);
   });
 
   it("roundtrips baseline with all optional fields", () => {
@@ -184,15 +192,15 @@ describe("EntitySnapshot binary codec", () => {
       entityBaselines: [snap],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const result = decoded.entityBaselines![0]!;
+    const result = expectDefined(decoded.entityBaselines?.[0]);
 
     expect(result.id).toBe(100);
     expect(result.type).toBe("player");
     // f32 precision: compare within tolerance
     expect(result.position.wx).toBeCloseTo(-50.5, 2);
     expect(result.position.wy).toBeCloseTo(300.75, 2);
-    expect(result.velocity!.vx).toBeCloseTo(10, 2);
-    expect(result.velocity!.vy).toBeCloseTo(-5, 2);
+    expect(result.velocity?.vx).toBeCloseTo(10, 2);
+    expect(result.velocity?.vy).toBeCloseTo(-5, 2);
     expect(result.spriteState).toEqual(snap.spriteState);
     expect(result.wanderAIState).toEqual(snap.wanderAIState);
     expect(result.flashHidden).toBe(true);
@@ -224,7 +232,7 @@ describe("EntitySnapshot binary codec", () => {
         entityBaselines: [snap],
       };
       const decoded = roundtripServer(msg) as FrameMessage;
-      expect(decoded.entityBaselines![0]!.type).toBe(entityType);
+      expect(decoded.entityBaselines?.[0]?.type).toBe(entityType);
     }
   });
 
@@ -249,7 +257,7 @@ describe("EntitySnapshot binary codec", () => {
       entityBaselines: [snap],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const ss = decoded.entityBaselines![0]!.spriteState!;
+    const ss = expectDefined(expectDefined(decoded.entityBaselines?.[0]).spriteState);
     expect(ss.direction).toBe(Direction.Down);
     expect(ss.moving).toBe(false);
     expect(ss.frameRow).toBe(0);
@@ -275,7 +283,7 @@ describe("EntitySnapshot binary codec", () => {
         entityBaselines: [snap],
       };
       const decoded = roundtripServer(msg) as FrameMessage;
-      expect(decoded.entityBaselines![0]!.spriteState!.direction).toBe(dir);
+      expect(decoded.entityBaselines?.[0]?.spriteState?.direction).toBe(dir);
     }
   });
 
@@ -297,7 +305,7 @@ describe("EntitySnapshot binary codec", () => {
         entityBaselines: [snap],
       };
       const decoded = roundtripServer(msg) as FrameMessage;
-      expect(decoded.entityBaselines![0]!.wanderAIState!.state).toBe(state);
+      expect(decoded.entityBaselines?.[0]?.wanderAIState?.state).toBe(state);
     }
   });
 
@@ -320,7 +328,7 @@ describe("EntitySnapshot binary codec", () => {
     const decoded = roundtripServer(msg) as FrameMessage;
     expect(decoded.entityBaselines).toHaveLength(10);
     for (let i = 0; i < 10; i++) {
-      expect(decoded.entityBaselines![i]!.id).toBe(i + 1);
+      expect(decoded.entityBaselines?.[i]?.id).toBe(i + 1);
     }
   });
 });
@@ -341,10 +349,10 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const result = decoded.entityDeltas![0]!;
+    const result = expectDefined(decoded.entityDeltas?.[0]);
     expect(result.id).toBe(42);
-    expect(result.position!.wx).toBeCloseTo(100.5, 2);
-    expect(result.position!.wy).toBeCloseTo(200.25, 2);
+    expect(result.position?.wx).toBeCloseTo(100.5, 2);
+    expect(result.position?.wy).toBeCloseTo(200.25, 2);
     // All other fields should be absent
     expect(result.velocity).toBeUndefined();
     expect(result.spriteState).toBeUndefined();
@@ -381,7 +389,7 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    expect(decoded.entityDeltas![0]!.velocity).toBeNull();
+    expect(decoded.entityDeltas?.[0]?.velocity).toBeNull();
   });
 
   it("roundtrips velocity with value", () => {
@@ -397,8 +405,8 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    expect(decoded.entityDeltas![0]!.velocity!.vx).toBeCloseTo(3.5, 2);
-    expect(decoded.entityDeltas![0]!.velocity!.vy).toBeCloseTo(-1.5, 2);
+    expect(decoded.entityDeltas?.[0]?.velocity?.vx).toBeCloseTo(3.5, 2);
+    expect(decoded.entityDeltas?.[0]?.velocity?.vy).toBeCloseTo(-1.5, 2);
   });
 
   it("roundtrips spriteState set to null", () => {
@@ -414,7 +422,7 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    expect(decoded.entityDeltas![0]!.spriteState).toBeNull();
+    expect(decoded.entityDeltas?.[0]?.spriteState).toBeNull();
   });
 
   it("roundtrips wanderAIState set to null", () => {
@@ -430,7 +438,7 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    expect(decoded.entityDeltas![0]!.wanderAIState).toBeNull();
+    expect(decoded.entityDeltas?.[0]?.wanderAIState).toBeNull();
   });
 
   it("roundtrips optional field removal (null sentinels)", () => {
@@ -454,7 +462,7 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const result = decoded.entityDeltas![0]!;
+    const result = expectDefined(decoded.entityDeltas?.[0]);
     expect(result.flashHidden).toBeNull();
     expect(result.noShadow).toBeNull();
     expect(result.deathTimer).toBeNull();
@@ -487,7 +495,7 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const result = decoded.entityDeltas![0]!;
+    const result = expectDefined(decoded.entityDeltas?.[0]);
     expect(result.flashHidden).toBe(true);
     expect(result.noShadow).toBe(false);
     expect(result.deathTimer).toBeCloseTo(1.5, 2);
@@ -529,17 +537,17 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const decoded = roundtripServer(msg) as FrameMessage;
-    const result = decoded.entityDeltas![0]!;
-    expect(result.position!.wx).toBeCloseTo(100, 2);
-    expect(result.velocity!.vx).toBeCloseTo(1, 2);
-    expect(result.spriteState!.direction).toBe(Direction.Up);
-    expect(result.spriteState!.moving).toBe(true);
-    expect(result.spriteState!.flipX).toBe(true);
-    expect(result.spriteState!.frameDuration).toBe(200);
-    expect(result.wanderAIState!.state).toBe("chasing");
-    expect(result.wanderAIState!.dirX).toBe(1);
-    expect(result.wanderAIState!.dirY).toBe(-1);
-    expect(result.wanderAIState!.following).toBe(true);
+    const result = expectDefined(decoded.entityDeltas?.[0]);
+    expect(result.position?.wx).toBeCloseTo(100, 2);
+    expect(result.velocity?.vx).toBeCloseTo(1, 2);
+    expect(result.spriteState?.direction).toBe(Direction.Up);
+    expect(result.spriteState?.moving).toBe(true);
+    expect(result.spriteState?.flipX).toBe(true);
+    expect(result.spriteState?.frameDuration).toBe(200);
+    expect(result.wanderAIState?.state).toBe("chasing");
+    expect(result.wanderAIState?.dirX).toBe(1);
+    expect(result.wanderAIState?.dirY).toBe(-1);
+    expect(result.wanderAIState?.following).toBe(true);
     expect(result.flashHidden).toBe(true);
     expect(result.deathTimer).toBeCloseTo(3.0, 2);
     expect(result.jumpZ).toBeCloseTo(5, 2);
@@ -700,7 +708,7 @@ describe("SyncChunksMessage binary codec", () => {
     };
     const decoded = roundtripServer(msg) as SyncChunksMessage;
     expect(decoded.chunkUpdates).toHaveLength(1);
-    const result = decoded.chunkUpdates![0]!;
+    const result = expectDefined(decoded.chunkUpdates?.[0]);
     expect(result.cx).toBe(3);
     expect(result.cy).toBe(-2);
     expect(result.revision).toBe(42);

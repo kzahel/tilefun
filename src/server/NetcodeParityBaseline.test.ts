@@ -163,7 +163,7 @@ function runTraceScenario(options: TraceScenarioOptions): TraceSample[] {
       });
     }
 
-    while (pendingInputs.length > 0 && pendingInputs[0]!.deliverTick <= tick) {
+    while (pendingInputs.length > 0 && pendingInputs[0]?.deliverTick <= tick) {
       const next = pendingInputs.shift()!;
       sendInput(transport, next.seq, next.movement, next.dt);
     }
@@ -281,7 +281,12 @@ describe("Netcode parity baseline trace harness", () => {
       ticks: 10,
       inputsForTick: (tick) => {
         if (tick === 0) {
-          return [createMovement(IDLE), createMovement(JUMP_IDLE), createMovement(IDLE), createMovement(IDLE)];
+          return [
+            createMovement(IDLE),
+            createMovement(JUMP_IDLE),
+            createMovement(IDLE),
+            createMovement(IDLE),
+          ];
         }
         return repeatMovement(IDLE, 4);
       },

@@ -13,8 +13,8 @@ import {
   PLAYER_STOP_SPEED,
   PLAYER_STOP_THRESHOLD,
   STEP_UP_THRESHOLD,
-  TILE_SIZE,
   TICK_RATE,
+  TILE_SIZE,
 } from "../config/constants.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
@@ -25,10 +25,10 @@ import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
   applyGroundTracking,
   type EntitySurface,
-  resolveGroundZForLanding,
-  resolveGroundZForTracking,
   isElevationBlocked3D,
   type PropSurface,
+  resolveGroundZForLanding,
+  resolveGroundZForTracking,
 } from "./surfaceHeight.js";
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
@@ -246,13 +246,9 @@ export function splitInputStepDurations(
 ): number[] {
   if (!Number.isFinite(totalDt) || totalDt <= 0) return [];
   const safeMaxStep =
-    Number.isFinite(maxStepSeconds) && maxStepSeconds > 0
-      ? maxStepSeconds
-      : MAX_INPUT_STEP_SECONDS;
+    Number.isFinite(maxStepSeconds) && maxStepSeconds > 0 ? maxStepSeconds : MAX_INPUT_STEP_SECONDS;
   const safeMaxSubsteps =
-    Number.isFinite(maxSubsteps) && maxSubsteps > 0
-      ? Math.floor(maxSubsteps)
-      : MAX_INPUT_SUBSTEPS;
+    Number.isFinite(maxSubsteps) && maxSubsteps > 0 ? Math.floor(maxSubsteps) : MAX_INPUT_SUBSTEPS;
   const boundedTotal = Math.min(totalDt, safeMaxStep * safeMaxSubsteps);
   const fullSteps = Math.floor(boundedTotal / safeMaxStep);
   const remainder = boundedTotal - fullSteps * safeMaxStep;
@@ -685,7 +681,12 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   const airborne = entity.jumpVZ !== undefined;
   const elevStepUp = airborne ? 0 : STEP_UP_THRESHOLD;
 
-  const isBlocked = (aabb: { left: number; top: number; right: number; bottom: number }): boolean => {
+  const isBlocked = (aabb: {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+  }): boolean => {
     const mask = airborne ? CollisionFlag.Solid : BLOCK_MASK;
     if (aabbOverlapsSolid(aabb, ctx.getCollision, mask)) return true;
     if (ctx.isPropBlocked(aabb, entityWz, entityHeight)) return true;

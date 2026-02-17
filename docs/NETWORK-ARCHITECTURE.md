@@ -316,6 +316,19 @@ events to a reliable/ordered data channel. The protocol is already split
   Lost entity frames are simply skipped (next tick corrects). Reliable
   sync data (chunks, props, config) is unaffected by entity frame loss.
 
+### Input Delivery Policy (initial dedicated WebRTC mode)
+
+For the first dedicated-server WebRTC rollout, keep `player-input` on a
+**reliable ordered** channel. This avoids duplicate-input handling while we
+validate signaling, ICE, and server deployment.
+
+- Client still sends one input per local simulation step (`seq` monotonic).
+- Server still reports `lastProcessedInputSeq` in each frame for reconciliation.
+- No input retransmit window yet (inputs are reliable to start).
+
+Future optimization can move inputs to unreliable delivery with a rolling
+re-send window keyed by `lastProcessedInputSeq`.
+
 ### Phase 7: Bandwidth Budget and Priority
 
 When entity data exceeds the unreliable channel's MTU budget:
@@ -501,8 +514,14 @@ decision is in the transport layer, not the protocol layer.
 1. Server starts `WebSocketServerTransport` on HTTP server
 2. Client connects via `WebSocketClientTransport` with UUID
 3. All data flows over WebSocket (reliable, ordered)
-4. (Future) Optional WebRTC upgrade: client and server establish a
-   peer connection for unreliable entity data + voice relay
+
+### Dedicated Server (WebRTC datachannel + WS signaling)
+
+1. Server starts signaling WebSocket endpoint (`/rtc-signal` by default)
+2. Client opens signaling socket with UUID and sends SDP offer
+3. Server answers and exchanges ICE candidates
+4. Client/server open one reliable datachannel for gameplay traffic
+5. All game messages use existing binary codec over that datachannel
 
 ### Local (Same Browser Tab)
 
