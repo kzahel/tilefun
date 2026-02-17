@@ -24,9 +24,8 @@ import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
   applyGroundTracking,
   type EntitySurface,
-  getEffectiveGroundZ,
-  getHighestWalkableEntitySurfaceZ,
-  getHighestWalkablePropSurfaceZ,
+  resolveGroundZForLanding,
+  resolveGroundZForTracking,
   getSurfaceZ,
   isElevationBlocked3D,
   type PropSurface,
@@ -296,7 +295,7 @@ export function stepPlayerFromInput(
   for (let i = 0; i < steps; i++) {
     moveAndCollide(entity, stepDt, ctx);
     const surfaces = sampleSurfaces(entity);
-    const groundZ = getEffectiveGroundZ(entity, getHeight, surfaces.props, surfaces.entities);
+    const groundZ = resolveGroundZForTracking(entity, getHeight, surfaces.props, surfaces.entities);
     applyGroundTracking(entity, groundZ, true);
     const landed = tickJumpGravity(
       entity,
@@ -334,7 +333,7 @@ export function stepMountFromInput(
   for (let i = 0; i < steps; i++) {
     moveAndCollide(mount, stepDt, ctx);
     const surfaces = sampleSurfaces(mount);
-    const groundZ = getEffectiveGroundZ(mount, getHeight, surfaces.props, surfaces.entities);
+    const groundZ = resolveGroundZForTracking(mount, getHeight, surfaces.props, surfaces.entities);
     applyGroundTracking(mount, groundZ, false);
   }
 }
@@ -432,29 +431,7 @@ export function tickJumpGravity(
     const prevWz = entity.wz;
     entity.jumpVZ -= JUMP_GRAVITY * physics.gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
-    // Terrain landing uses center point — not AABB max — so the player
-    // actually lands at the lower elevation after walking off a cliff.
-    // (Ground *tracking* uses AABB max to prevent premature falls along edges.)
-    let groundZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
-    // Check walkable prop/entity surfaces for landing (no height filter — land on
-    // any surface we descend through, unlike step-up which uses threshold)
-    if (entity.collider) {
-      const footprint = getEntityAABB(entity.position, entity.collider);
-      if (props) {
-        const propZ = getHighestWalkablePropSurfaceZ(footprint, props);
-        if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
-      }
-      if (entities) {
-        const entZ = getHighestWalkableEntitySurfaceZ(
-          footprint,
-          entity.id,
-          entity.wz,
-          entities,
-          prevWz,
-        );
-        if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
-      }
-    }
+    const groundZ = resolveGroundZForLanding(entity, getHeight, props, entities, prevWz);
     entity.groundZ = groundZ;
     if (entity.wz <= groundZ) {
       entity.wz = groundZ;

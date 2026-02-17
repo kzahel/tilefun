@@ -66,7 +66,7 @@ export function isElevationBlocked3D(
  * ground tracking in sync. Callers are responsible for providing nearby
  * props/entities from their own spatial queries.
  */
-export function getEffectiveGroundZ(
+export function resolveGroundZForTracking(
   entity: {
     position: { wx: number; wy: number };
     collider: ColliderComponent | null;
@@ -87,6 +87,63 @@ export function getEffectiveGroundZ(
   const entZ = getWalkableEntitySurfaceZ(footprint, entity.id, entity.wz ?? 0, entities);
   if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
   return groundZ;
+}
+
+/**
+ * Resolve landing ground Z for airborne entities.
+ *
+ * Uses full-footprint terrain sampling and "highest descended-through"
+ * walkable surfaces for props/entities (no step-up threshold filter).
+ */
+export function resolveGroundZForLanding(
+  entity: {
+    position: { wx: number; wy: number };
+    collider: ColliderComponent | null;
+    id: number;
+    wz?: number;
+  },
+  getHeight: (tx: number, ty: number) => number,
+  props?: readonly PropSurface[],
+  entities?: readonly EntitySurface[],
+  prevWz?: number,
+): number {
+  if (!entity.collider) {
+    return getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+  }
+  const footprint = getEntityAABB(entity.position, entity.collider);
+  let groundZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
+  if (props) {
+    const propZ = getHighestWalkablePropSurfaceZ(footprint, props);
+    if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
+  }
+  if (entities) {
+    const entZ = getHighestWalkableEntitySurfaceZ(
+      footprint,
+      entity.id,
+      entity.wz ?? 0,
+      entities,
+      prevWz,
+    );
+    if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
+  }
+  return groundZ;
+}
+
+/**
+ * @deprecated Use resolveGroundZForTracking instead.
+ */
+export function getEffectiveGroundZ(
+  entity: {
+    position: { wx: number; wy: number };
+    collider: ColliderComponent | null;
+    id: number;
+    wz?: number;
+  },
+  getHeight: (tx: number, ty: number) => number,
+  props: readonly PropSurface[],
+  entities: readonly EntitySurface[],
+): number {
+  return resolveGroundZForTracking(entity, getHeight, props, entities);
 }
 
 /**

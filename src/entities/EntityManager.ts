@@ -2,7 +2,7 @@ import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../co
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   applyGroundTracking,
-  getEffectiveGroundZ,
+  resolveGroundZForTracking,
   getSurfaceZ,
   isElevationBlocked3D,
 } from "../physics/surfaceHeight.js";
@@ -256,7 +256,7 @@ export class EntityManager {
         const maxCx = Math.floor((footprint?.right ?? e.position.wx) / CHUNK_SIZE_PX);
         const minCy = Math.floor((footprint?.top ?? e.position.wy) / CHUNK_SIZE_PX);
         const maxCy = Math.floor((footprint?.bottom ?? e.position.wy) / CHUNK_SIZE_PX);
-        return getEffectiveGroundZ(
+        return resolveGroundZForTracking(
           e,
           getHeight,
           propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),

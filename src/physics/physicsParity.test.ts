@@ -231,6 +231,23 @@ describe("initiateJump + tickJumpGravity", () => {
     expect(player.jumpZ).toBeUndefined();
   });
 
+  it("lands on the elevated edge surface when AABB still overlaps it", () => {
+    const player = createPlayer(15, 12);
+    const getHeight = (tx: number, ty: number) => (tx === 1 && ty === 0 ? 2 : 0);
+    player.wz = 2 * ELEVATION_PX;
+    initiateJump(player, getMovementPhysicsParams());
+
+    let landed = false;
+    for (let i = 0; i < 600; i++) {
+      landed = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams());
+      if (landed) break;
+    }
+
+    expect(landed).toBe(true);
+    expect(player.wz).toBe(2 * ELEVATION_PX);
+    expect(player.jumpZ).toBeUndefined();
+  });
+
   it("tracks wz during jump arc", () => {
     const player = createPlayer(100, 100);
     player.wz = 0;

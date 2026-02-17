@@ -4,6 +4,7 @@ import {
   applyGroundTracking,
   getEffectiveGroundZ,
   getMaxSurfaceZUnderAABB,
+  resolveGroundZForLanding,
   getSurfaceZ,
   isElevationBlocked3D,
 } from "./surfaceHeight.js";
@@ -192,6 +193,29 @@ describe("getEffectiveGroundZ", () => {
       walls: null,
     };
     expect(getEffectiveGroundZ(entity, getHeight, [prop], [])).toBe(3 * ELEVATION_PX);
+  });
+});
+
+describe("resolveGroundZForLanding", () => {
+  const collider = { offsetX: 0, offsetY: 0, width: 10, height: 10 };
+
+  it("uses AABB-max terrain when entity has a collider", () => {
+    const getHeight = heightMap({ "1,0": 2 });
+    const entity = { position: { wx: 14, wy: 5 }, collider, id: 1, wz: 2 * ELEVATION_PX };
+    expect(resolveGroundZForLanding(entity, getHeight)).toBe(2 * ELEVATION_PX);
+  });
+
+  it("filters entity-top landing by descended-through prevWz", () => {
+    const entity = { position: { wx: 50, wy: 50 }, collider, id: 1, wz: 10 };
+    const platform = {
+      id: 2,
+      position: { wx: 50, wy: 50 },
+      collider: { offsetX: -8, offsetY: -8, width: 16, height: 16, physicalHeight: 12 },
+      wz: 0,
+    };
+
+    expect(resolveGroundZForLanding(entity, () => 0, [], [platform], 8)).toBe(0);
+    expect(resolveGroundZForLanding(entity, () => 0, [], [platform], 20)).toBe(12);
   });
 });
 
