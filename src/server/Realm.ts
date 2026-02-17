@@ -47,6 +47,7 @@ import {
   getAirWishCap,
   getFriction,
   getGravityScale,
+  MAX_INPUT_STEP_SECONDS,
   getMovementPhysicsParams,
   getNoBunnyHop,
   getPhysicsCVarRevision,
@@ -55,6 +56,7 @@ import {
   getStopSpeed,
   getTimeScale,
   initiateJump,
+  splitInputStepDurations,
   stepMountFromInput,
   stepPlayerFromInput,
   tickJumpGravity,
@@ -372,6 +374,11 @@ export class Realm {
 
         for (const input of inputs) {
           const inputDt = this.resolveInputStepDt(input.dtMs, dt);
+          const stepDts = splitInputStepDurations(inputDt, MAX_INPUT_STEP_SECONDS);
+          if (stepDts.length === 0) {
+            session.lastProcessedInputSeq = input.seq;
+            continue;
+          }
           const mount =
             session.gameplaySession.mountId !== null
               ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
@@ -388,16 +395,18 @@ export class Realm {
               if (!input.jump) session.jumpConsumed = false;
               const mountExclude = new Set([session.player.id, mount.id]);
               const mountCtx = this.buildMovementContext(mountExclude, session.debugNoclip, mount);
-              stepMountFromInput(
-                mount,
-                input,
-                inputDt,
-                mountCtx,
-                getHeight,
-                sampleSurfaces,
-                session.player,
-                this.physicsMult,
-              );
+              for (const stepDt of stepDts) {
+                stepMountFromInput(
+                  mount,
+                  input,
+                  stepDt,
+                  mountCtx,
+                  getHeight,
+                  sampleSurfaces,
+                  session.player,
+                  this.physicsMult,
+                );
+              }
               // Position is derived from the mount when parented.
               if (session.player.velocity) {
                 session.player.velocity.vx = 0;
@@ -419,20 +428,24 @@ export class Realm {
             session.player,
           );
           const wasAirborne = session.player.jumpVZ !== undefined;
-          const nextState = stepPlayerFromInput(
-            session.player,
-            input,
-            inputDt,
-            playerCtx,
-            getHeight,
-            sampleSurfaces,
-            {
-              jumpConsumed: session.jumpConsumed,
-              lastJumpHeld: session.lastJumpHeld,
-            },
-            movementPhysics,
-            this.physicsMult,
-          );
+          let nextState = {
+            jumpConsumed: session.jumpConsumed,
+            lastJumpHeld: session.lastJumpHeld,
+          };
+          const heldInput = input.jumpPressed === undefined ? input : { ...input, jumpPressed: false };
+          for (let i = 0; i < stepDts.length; i++) {
+            nextState = stepPlayerFromInput(
+              session.player,
+              i === 0 ? input : heldInput,
+              stepDts[i]!,
+              playerCtx,
+              getHeight,
+              sampleSurfaces,
+              nextState,
+              movementPhysics,
+              this.physicsMult,
+            );
+          }
           session.jumpConsumed = nextState.jumpConsumed;
           session.lastJumpHeld = nextState.lastJumpHeld;
           this.updateLastSafePosition(session);
@@ -1003,12 +1016,12 @@ export class Realm {
 
   // ---- Private ----
 
-  /** Resolve per-input simulation dt (seconds), clamped for server safety. */
+  /** Resolve per-input simulation dt (seconds), sanitized for server safety. */
   private resolveInputStepDt(dtMs: number | undefined, fallbackDt: number): number {
     if (dtMs === undefined) return fallbackDt;
     const seconds = dtMs / 1000;
     if (!Number.isFinite(seconds) || seconds <= 0) return fallbackDt;
-    return Math.min(0.1, seconds);
+    return seconds;
   }
 
   /** Save respawn-safe location while the player is grounded on non-water. */

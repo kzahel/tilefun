@@ -208,6 +208,40 @@ export interface SurfaceSample {
 
 export type SurfaceSampler = (entity: Entity) => SurfaceSample;
 
+/** Maximum simulation time integrated in a single input step. */
+export const MAX_INPUT_STEP_SECONDS = 0.1;
+
+/** Safety cap for internal subdivisions per input command. */
+export const MAX_INPUT_SUBSTEPS = 16;
+
+/**
+ * Split one input command dt into bounded simulation slices.
+ * Keeps both server and predictor deterministic at large command intervals.
+ */
+export function splitInputStepDurations(
+  totalDt: number,
+  maxStepSeconds = MAX_INPUT_STEP_SECONDS,
+  maxSubsteps = MAX_INPUT_SUBSTEPS,
+): number[] {
+  if (!Number.isFinite(totalDt) || totalDt <= 0) return [];
+  const safeMaxStep =
+    Number.isFinite(maxStepSeconds) && maxStepSeconds > 0
+      ? maxStepSeconds
+      : MAX_INPUT_STEP_SECONDS;
+  const safeMaxSubsteps =
+    Number.isFinite(maxSubsteps) && maxSubsteps > 0
+      ? Math.floor(maxSubsteps)
+      : MAX_INPUT_SUBSTEPS;
+  const boundedTotal = Math.min(totalDt, safeMaxStep * safeMaxSubsteps);
+  const fullSteps = Math.floor(boundedTotal / safeMaxStep);
+  const remainder = boundedTotal - fullSteps * safeMaxStep;
+  const includeRemainder = remainder > 1e-9;
+  const steps = new Array<number>(fullSteps + (includeRemainder ? 1 : 0));
+  for (let i = 0; i < fullSteps; i++) steps[i] = safeMaxStep;
+  if (includeRemainder) steps[fullSteps] = remainder;
+  return steps;
+}
+
 /**
  * Apply player input to velocity and jump-button state, but do not move/collide.
  * Shared by client predictor and server input processing.

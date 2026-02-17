@@ -6,8 +6,10 @@ import type { Movement } from "../input/ActionManager.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
+  MAX_INPUT_STEP_SECONDS,
   getMovementPhysicsParams,
   getServerPhysicsMult,
+  splitInputStepDurations,
   stepMountFromInput,
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
@@ -686,6 +688,8 @@ export class PlayerPredictor {
     physics: MovementPhysicsParams,
   ): void {
     if (!this.predicted) return;
+    const stepDts = splitInputStepDurations(dt, MAX_INPUT_STEP_SECONDS);
+    if (stepDts.length === 0) return;
 
     if (this.predictedMount) {
       // ── Riding: apply input to mount, derive player position ──
@@ -698,16 +702,18 @@ export class PlayerPredictor {
         mountExclude,
         this.predictedMount,
       );
-      stepMountFromInput(
-        this.predictedMount,
-        movement,
-        dt,
-        mountCtx,
-        getHeight,
-        () => ({ props, entities }),
-        this.predicted,
-        getServerPhysicsMult(),
-      );
+      for (const stepDt of stepDts) {
+        stepMountFromInput(
+          this.predictedMount,
+          movement,
+          stepDt,
+          mountCtx,
+          getHeight,
+          () => ({ props, entities }),
+          this.predicted,
+          getServerPhysicsMult(),
+        );
+      }
 
       // Derive player position from mount + offset
       this.predicted.position.wx = this.predictedMount.position.wx + this.mountOffsetX;
@@ -727,20 +733,25 @@ export class PlayerPredictor {
         this.predicted,
       );
       const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-      const nextState = stepPlayerFromInput(
-        this.predicted,
-        movement,
-        dt,
-        playerCtx,
-        getHeight,
-        () => ({ props, entities }),
-        {
-          jumpConsumed: this.jumpConsumed,
-          lastJumpHeld: this.lastJumpHeld,
-        },
-        physics,
-        getServerPhysicsMult(),
-      );
+      let nextState = {
+        jumpConsumed: this.jumpConsumed,
+        lastJumpHeld: this.lastJumpHeld,
+      };
+      const heldInput =
+        movement.jumpPressed === undefined ? movement : { ...movement, jumpPressed: false };
+      for (let i = 0; i < stepDts.length; i++) {
+        nextState = stepPlayerFromInput(
+          this.predicted,
+          i === 0 ? movement : heldInput,
+          stepDts[i]!,
+          playerCtx,
+          getHeight,
+          () => ({ props, entities }),
+          nextState,
+          physics,
+          getServerPhysicsMult(),
+        );
+      }
       this.jumpConsumed = nextState.jumpConsumed;
       this.lastJumpHeld = nextState.lastJumpHeld;
     }

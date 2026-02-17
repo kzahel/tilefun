@@ -189,6 +189,21 @@ describe("Netcode parity baseline trace harness", () => {
     expect(maxMetric(trace, "ackGap")).toBe(0);
   });
 
+  it("keeps parity for large command dt via internal input subdivision", () => {
+    const trace = runTraceScenario({
+      serverTickHz: 2,
+      commandRateHz: 2,
+      ticks: 8,
+      inputsForTick: () => [createMovement(RIGHT)],
+    });
+
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(1e-6);
+    expect(maxMetric(trace, "correctionVelErr")).toBeLessThan(1e-6);
+    expect(maxMetric(trace, "resimPosErr")).toBeLessThan(1e-6);
+    expect(maxMetric(trace, "resimVelErr")).toBeLessThan(1e-6);
+    expect(maxMetric(trace, "ackGap")).toBe(0);
+  });
+
   it("keeps low-tick quick-tap jump aligned with predictor", () => {
     const trace = runTraceScenario({
       serverTickHz: 15,
