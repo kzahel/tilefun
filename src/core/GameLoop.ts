@@ -1,8 +1,5 @@
 import { TICK_RATE } from "../config/constants.js";
 
-/** Fixed simulation timestep in seconds. */
-const FIXED_DT = 1 / TICK_RATE;
-
 /** Maximum frame time cap to prevent spiral of death on lag spikes. */
 const MAX_FRAME_TIME = 0.25;
 
@@ -14,10 +11,10 @@ export interface GameLoopCallbacks {
 /**
  * Fixed-timestep game loop with interpolation alpha.
  *
- * Runs update() at a fixed rate (TICK_RATE Hz) regardless of display refresh
- * rate. The render() callback receives an alpha value [0, 1) representing how
- * far between two fixed updates the current frame falls, for smooth
- * interpolation on 120Hz/240Hz displays.
+ * Runs update() at a fixed rate (default TICK_RATE Hz) regardless of display
+ * refresh rate. The render() callback receives an alpha value [0, 1)
+ * representing how far between two fixed updates the current frame falls,
+ * for smooth interpolation on 120Hz/240Hz displays.
  */
 export class GameLoop {
   private accumulator = 0;
@@ -25,10 +22,17 @@ export class GameLoop {
   private running = false;
   private rafId = 0;
   private callbacks: GameLoopCallbacks;
+  private fixedDt = 1 / TICK_RATE;
   timeScale = 1;
 
   constructor(callbacks: GameLoopCallbacks) {
     this.callbacks = callbacks;
+  }
+
+  /** Change the simulation tick rate. Resets the accumulator to avoid burst ticks. */
+  setTickRate(hz: number): void {
+    this.fixedDt = 1 / hz;
+    this.accumulator = 0;
   }
 
   start(): void {
@@ -58,12 +62,12 @@ export class GameLoop {
 
     this.accumulator += frameTime * this.timeScale;
 
-    while (this.accumulator >= FIXED_DT) {
-      this.callbacks.update(FIXED_DT);
-      this.accumulator -= FIXED_DT;
+    while (this.accumulator >= this.fixedDt) {
+      this.callbacks.update(this.fixedDt);
+      this.accumulator -= this.fixedDt;
     }
 
-    const alpha = this.accumulator / FIXED_DT;
+    const alpha = this.accumulator / this.fixedDt;
     this.callbacks.render(alpha);
   }
 
@@ -80,12 +84,12 @@ export class GameLoop {
 
     this.accumulator += frameTime * this.timeScale;
 
-    while (this.accumulator >= FIXED_DT) {
-      this.callbacks.update(FIXED_DT);
-      this.accumulator -= FIXED_DT;
+    while (this.accumulator >= this.fixedDt) {
+      this.callbacks.update(this.fixedDt);
+      this.accumulator -= this.fixedDt;
     }
 
-    const alpha = this.accumulator / FIXED_DT;
+    const alpha = this.accumulator / this.fixedDt;
     this.callbacks.render(alpha);
 
     this.rafId = requestAnimationFrame(this.tick);

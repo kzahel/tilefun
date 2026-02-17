@@ -100,6 +100,8 @@ export class GameClient {
 
   /** Guard to prevent concurrent toggleMenu() calls from pushing duplicate MenuScenes. */
   private menuOpening = false;
+  /** Last applied tick rate from server (for change detection). */
+  private _lastTickRate = 0;
 
   /** Request/response correlation for serialized mode. */
   private nextRequestId = 1;
@@ -306,6 +308,13 @@ export class GameClient {
         // Apply buffered server state at the start of each client tick so
         // entity position changes are synchronized with camera.savePrev/follow.
         this.remoteView?.applyPending();
+        // Sync tick rate from server — must happen after applyPending so the
+        // new CVar value is available, but before scene update so prediction
+        // runs at the correct rate next frame.
+        if (this.remoteView && this.remoteView.tickRate !== this._lastTickRate) {
+          this._lastTickRate = this.remoteView.tickRate;
+          this.loop.setTickRate(this._lastTickRate);
+        }
         // Tick client-side sprite animations (animTimer/frameCol not serialized).
         this.remoteView?.tickAnimations(dt);
         this.scenes.update(dt);

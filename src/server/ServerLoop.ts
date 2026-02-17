@@ -1,8 +1,6 @@
 import { TICK_RATE } from "../config/constants.js";
 import { serverLogError } from "./serverLog.js";
 
-const FIXED_DT = 1 / TICK_RATE;
-
 /**
  * Server-side tick loop using setInterval.
  * Not used in phase 1 local mode (client drives server.tick() directly).
@@ -11,26 +9,37 @@ const FIXED_DT = 1 / TICK_RATE;
 export class ServerLoop {
   private intervalId: ReturnType<typeof setInterval> | null = null;
   private readonly tickFn: (dt: number) => void;
+  private fixedDt: number;
 
-  constructor(tickFn: (dt: number) => void) {
+  constructor(tickFn: (dt: number) => void, tickRate = TICK_RATE) {
     this.tickFn = tickFn;
+    this.fixedDt = 1 / tickRate;
   }
 
   start(): void {
     if (this.intervalId !== null) return;
     this.intervalId = setInterval(() => {
       try {
-        this.tickFn(FIXED_DT);
+        this.tickFn(this.fixedDt);
       } catch (err) {
         serverLogError("tick error", err);
       }
-    }, FIXED_DT * 1000);
+    }, this.fixedDt * 1000);
   }
 
   stop(): void {
     if (this.intervalId !== null) {
       clearInterval(this.intervalId);
       this.intervalId = null;
+    }
+  }
+
+  setTickRate(hz: number): void {
+    this.fixedDt = 1 / hz;
+    // Restart interval at new rate if currently running
+    if (this.intervalId !== null) {
+      this.stop();
+      this.start();
     }
   }
 }

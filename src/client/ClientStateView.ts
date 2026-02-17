@@ -1,3 +1,4 @@
+import { TICK_RATE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import {
@@ -118,6 +119,7 @@ export class RemoteStateView implements ClientStateView {
   private _serverTick = 0;
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
+  private _tickRate = TICK_RATE;
 
   constructor(world: World) {
     this._world = world;
@@ -307,6 +309,7 @@ export class RemoteStateView implements ClientStateView {
     setSmallJumps(msg.cvars.smallJumps);
     setPlatformerAir(msg.cvars.platformerAir);
     setTimeScale(msg.cvars.timeScale);
+    this._tickRate = msg.cvars.tickRate;
   }
 
   /** Apply player names sync. */
@@ -393,6 +396,10 @@ export class RemoteStateView implements ClientStateView {
   /** Mount entity ID from the latest server state (undefined when not riding). */
   get mountEntityId(): number | undefined {
     return this._mountEntityId;
+  }
+  /** Server tick rate in Hz (synced from sv_tickrate CVar). */
+  get tickRate(): number {
+    return this._tickRate;
   }
 
   /** Raw server entities (not replaced by predictor). Used for reconciliation. */

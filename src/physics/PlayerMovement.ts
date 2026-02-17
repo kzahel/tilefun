@@ -13,6 +13,7 @@ import {
   PLAYER_STOP_SPEED,
   PLAYER_STOP_THRESHOLD,
   STEP_UP_THRESHOLD,
+  TICK_RATE,
 } from "../config/constants.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
@@ -127,6 +128,15 @@ export function setTimeScale(v: number): void {
 }
 export function getTimeScale(): number {
   return timeScaleCVar;
+}
+
+let tickRateCVar = TICK_RATE;
+export function setServerTickRate(v: number): void {
+  tickRateCVar = v;
+  physicsCVarRevision++;
+}
+export function getServerTickRate(): number {
+  return tickRateCVar;
 }
 
 /**

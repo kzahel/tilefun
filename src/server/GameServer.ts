@@ -1,4 +1,5 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { TICK_RATE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
@@ -12,6 +13,7 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
+import { setServerTickRate } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
@@ -40,6 +42,8 @@ export class GameServer {
   speedMultiplier = 1;
   /** Server time scale (set via sv_timescale cvar). */
   timeScale = 1;
+  /** Current server tick rate in Hz (set via sv_tickrate cvar). */
+  private _tickRate = TICK_RATE;
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
@@ -293,6 +297,20 @@ export class GameServer {
     this.broadcasting = false;
   }
 
+  /** Update server tick rate (called from sv_tickrate CVar). */
+  setTickRate(hz: number): void {
+    this._tickRate = hz;
+    setServerTickRate(hz);
+    this.loop?.setTickRate(hz);
+    for (const realm of this.realms.values()) {
+      realm.tickRate = hz;
+    }
+  }
+
+  get tickRate(): number {
+    return this._tickRate;
+  }
+
   /** Run one simulation tick. Iterates ALL active realms. */
   tick(dt: number): void {
     const scaledDt = dt * this.timeScale;
@@ -323,6 +341,7 @@ export class GameServer {
     if (existing) return existing;
 
     const realm = new Realm([baseGameMod]);
+    realm.tickRate = this._tickRate;
     await realm.loadWorld(worldId, this.registry, this.createStore);
     this.realms.set(worldId, realm);
     return realm;

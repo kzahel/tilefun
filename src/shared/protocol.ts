@@ -186,6 +186,7 @@ export interface PhysicsCVars {
   smallJumps: boolean;
   platformerAir: boolean;
   timeScale: number;
+  tickRate: number;
 }
 
 // ---- Per-tick frame message (hot path — future unreliable channel) ----

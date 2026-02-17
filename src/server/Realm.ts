@@ -166,6 +166,9 @@ export class Realm {
    */
   idleSince: number | null = null;
 
+  /** Server tick rate in Hz (set by GameServer from sv_tickrate CVar). */
+  tickRate = TICK_RATE;
+
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
 
@@ -1308,6 +1311,7 @@ export class Realm {
           smallJumps: getSmallJumps(),
           platformerAir: getPlatformerAir(),
           timeScale: getTimeScale(),
+          tickRate: this.tickRate,
         },
       });
       delta.cvarsRevision = cvarsRev;
@@ -1424,7 +1428,7 @@ export class Realm {
     const result = new Map<Entity, number>();
     const nearBuf = Realm.BROADCAST_BUFFER_CHUNKS;
     const midBuf = nearBuf + Realm.MID_TICK_BUFFER;
-    const midInterval = Realm.MID_TICK_FRAMES / TICK_RATE;
+    const midInterval = Realm.MID_TICK_FRAMES / this.tickRate;
 
     // Collect all player entities so we always tick them
     const playerSet = new Set(sessions.map((s) => s.player));

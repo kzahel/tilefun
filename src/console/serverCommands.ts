@@ -90,6 +90,12 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
     setStopSpeed(val as number);
   });
 
+  const sv_tickrate = getCVar(engine, "sv_tickrate");
+  server.setTickRate(sv_tickrate.get() as number);
+  sv_tickrate.onChange((val) => {
+    server.setTickRate(val as number);
+  });
+
   const sv_timescale = getCVar(engine, "sv_timescale");
   server.timeScale = sv_timescale.get() as number;
   setTimeScale(sv_timescale.get() as number);

@@ -578,6 +578,7 @@ describe("RemoteStateView", () => {
         smallJumps: true,
         platformerAir: false,
         timeScale: 0.5,
+        tickRate: 30,
       },
     });
 
