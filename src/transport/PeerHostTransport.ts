@@ -7,6 +7,7 @@ import {
 } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport, IServerTransport } from "./Transport.js";
+import { routeServerMessageChannel } from "./webrtcChannels.js";
 
 const LOCAL_CLIENT_ID = "local";
 
@@ -28,6 +29,7 @@ export class PeerHostTransport {
   private connectHandler: ((clientId: string) => void) | null = null;
   private disconnectHandler: ((clientId: string) => void) | null = null;
   private remoteClients = new Map<string, DataConnection>();
+  private remoteEntitiesFallbackLogged = new Set<string>();
   private closed = false;
 
   constructor(peerId?: string) {
@@ -57,7 +59,7 @@ export class PeerHostTransport {
         self.closed = true;
       },
       getDebugInfo() {
-        return { transport: "Host local (P2P guests via WebRTC)" };
+        return { transport: "Host local (P2P guests: WebRTC sync-only fallback)" };
       },
     };
 
@@ -69,6 +71,10 @@ export class PeerHostTransport {
           const buf = encodeServerMessage(msg);
           self.clientMessageHandler?.(decodeServerMessage(buf));
         } else {
+          const routed = routeServerMessageChannel(msg, false);
+          if (routed.fellBack) {
+            self.logRemoteEntitiesFallbackOnce(clientId);
+          }
           const conn = self.remoteClients.get(clientId);
           if (conn?.open) {
             conn.send(encodeServerMessage(msg));
@@ -82,7 +88,11 @@ export class PeerHostTransport {
         // Local host client (decode copy)
         self.clientMessageHandler?.(decodeServerMessage(buf));
         // All remote guests
-        for (const conn of self.remoteClients.values()) {
+        const routed = routeServerMessageChannel(msg, false);
+        for (const [clientId, conn] of self.remoteClients) {
+          if (routed.fellBack) {
+            self.logRemoteEntitiesFallbackOnce(clientId);
+          }
           if (conn.open) {
             conn.send(buf);
           }
@@ -103,6 +113,7 @@ export class PeerHostTransport {
           conn.close();
         }
         self.remoteClients.clear();
+        self.remoteEntitiesFallbackLogged.clear();
         self.peer.destroy();
       },
     };
@@ -173,6 +184,7 @@ export class PeerHostTransport {
       }
       existing.close();
     }
+    this.remoteEntitiesFallbackLogged.delete(clientId);
 
     this.remoteClients.set(clientId, conn);
 
@@ -195,6 +207,7 @@ export class PeerHostTransport {
     conn.on("close", () => {
       if (this.remoteClients.get(clientId) === conn) {
         this.remoteClients.delete(clientId);
+        this.remoteEntitiesFallbackLogged.delete(clientId);
         this.disconnectHandler?.(clientId);
       }
     });
@@ -203,8 +216,17 @@ export class PeerHostTransport {
       console.error(`[tilefun] P2P error for ${clientId}:`, err);
       if (this.remoteClients.get(clientId) === conn) {
         this.remoteClients.delete(clientId);
+        this.remoteEntitiesFallbackLogged.delete(clientId);
         this.disconnectHandler?.(clientId);
       }
     });
+  }
+
+  private logRemoteEntitiesFallbackOnce(clientId: string): void {
+    if (this.remoteEntitiesFallbackLogged.has(clientId)) return;
+    this.remoteEntitiesFallbackLogged.add(clientId);
+    console.warn(
+      `[tilefun] PeerJS host transport for ${clientId} uses a single reliable channel (Phase 6 entities-channel fallback)`,
+    );
   }
 }

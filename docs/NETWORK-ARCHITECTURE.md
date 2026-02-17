@@ -8,7 +8,7 @@ For wire protocol research (QW, Source, Roblox comparisons), see
 
 ---
 
-## Current State (Phases 1-5 complete)
+## Current State (Phases 1-6 complete)
 
 Every tick at 60 Hz, the server builds per-client messages sent over a single
 reliable ordered channel (WebSocket, WebRTC reliable data channel, or in-memory
@@ -38,7 +38,8 @@ fallback for infrequent message types.
 **Steady-state cost**: ~10-15 KB/s per client with 50 entities (down from
 ~1.8 MB/s pre-optimization). Idle frame = 19 bytes at 60 Hz = 1.1 KB/s.
 
-**Next**: Phase 6 (WebRTC unreliable channel) for latency improvement.
+**Current focus**: validate dual-channel dedicated WebRTC in more real-world
+network conditions.
 
 Key files:
 - `src/shared/protocol.ts` — message types, snapshot shapes
@@ -48,6 +49,7 @@ Key files:
 - `src/shared/entityDelta.ts` — entity delta diff/apply
 - `src/server/Realm.ts` — per-client game state building (`buildMessages`)
 - `src/transport/` — all transport implementations
+- `src/transport/webrtcChannels.ts` — channel classification/routing policy
 - `src/client/ClientStateView.ts` — client state application (`RemoteStateView`)
 
 ---
@@ -304,17 +306,37 @@ into 2-4 bytes, WanderAIState into 3 bytes. Chunk arrays sent as raw bytes.
   bytes. Position-only delta = 16 bytes. player-input = 8 bytes.
   Chunk data ~2x smaller (fixed 9.3 KB vs ~19 KB JSON).
 
-### Phase 6: WebRTC Unreliable Channel
+### Phase 6: WebRTC Unreliable Channel ✅
 
-Route `FrameMessage` to an unreliable/unordered data channel. Route sync
-events to a reliable/ordered data channel. The protocol is already split
-(Phase 3) and binary-encoded (Phase 5) — this is just a routing change.
+Implemented channel routing policy:
 
-- **Transport**: Two SCTP data channels on one RTCPeerConnection
-- **Encoding**: Binary
-- **Impact**: Eliminates TCP head-of-line blocking for entity updates.
-  Lost entity frames are simply skipped (next tick corrects). Reliable
-  sync data (chunks, props, config) is unaffected by entity frame loss.
+- `frame` (server→client): preferred `entities` channel (`ordered: false`,
+  `maxRetransmits: 0`)
+- All other server messages (`sync-*`, `player-assigned`, `world-loaded`,
+  realm/meta/chat/control): `sync` channel (`ordered: true`, reliable)
+- All client→server messages (including `player-input`): `sync` channel
+
+Dedicated WebRTC now uses two data channels on one peer connection:
+
+- `sync` label: reliable/ordered
+- `entities` label: unordered/unreliable
+
+Fallback behavior:
+
+- If `entities` is unavailable/closed, `frame` is transparently rerouted to
+  `sync`, with a one-time warning log per connection.
+- Reliable-channel fragmentation/reassembly remains active for large
+  sync/control payloads.
+- No app-level fragmentation/retransmit is done on the unreliable entities
+  channel.
+
+PeerJS (P2P) limit in Phase 6:
+
+- PeerJS `DataConnection` cleanly exposes only one managed gameplay channel and
+  does not provide a clean dual-channel API with unordered+maxRetransmits=0 on
+  the same managed connection.
+- P2P host/guest therefore run in explicit **sync-only fallback** mode for now
+  (single reliable channel), while preserving the same routing classifier.
 
 ### Input Delivery Policy (initial dedicated WebRTC mode)
 
@@ -483,7 +505,7 @@ restrictive NAT, some mobile browsers). The protocol design ensures graceful
 degradation:
 
 - **WebSocket-only mode**: All data (entities + sync) on one reliable ordered
-  channel. This is what we have today. It works, just with higher latency
+  channel. This remains the default path and fallback. It works, just with higher latency
   under packet loss (TCP head-of-line blocking).
 - **WebRTC upgrade**: When available, establish a peer connection and migrate
   entity data to the unreliable channel. Sync data can stay on WebSocket or
@@ -505,8 +527,9 @@ decision is in the transport layer, not the protocol layer.
 2. Host gets a peer ID, shares join URL
 3. Guest opens URL → `PeerGuestTransport` connects via PeerJS
 4. PeerJS establishes `RTCPeerConnection` with ICE/STUN
-5. Reliable data channel created automatically by PeerJS
-6. (Future) Host creates unreliable data channel, guest accepts
+5. Single reliable data channel is used (explicit Phase 6 fallback mode)
+6. Server message routing still classifies `frame` vs sync/control, but both are
+   sent over the same reliable PeerJS channel
 7. (Future) Voice: both sides add audio tracks after user permission
 
 ### Dedicated Server (WebSocket)
@@ -520,14 +543,38 @@ decision is in the transport layer, not the protocol layer.
 1. Server starts signaling WebSocket endpoint (`/rtc-signal` by default)
 2. Client opens signaling socket with UUID and sends SDP offer
 3. Server answers and exchanges ICE candidates
-4. Client/server open one reliable datachannel for gameplay traffic
-5. All game messages use existing binary codec over that datachannel
+4. Client creates two data channels on one peer connection:
+   `sync` (reliable/ordered) and `entities` (unordered/unreliable)
+5. Server routes `frame` to `entities`, all required state/control to `sync`
+6. If `entities` is unavailable, `frame` falls back to `sync` and logs once
 
 ### Local (Same Browser Tab)
 
 1. `SerializingTransport` — in-memory JSON roundtrip
 2. Zero latency, validates serialization correctness
 3. No network involved — used for single-player and development
+
+## Phase 6 Testing Notes
+
+### Dev mode (Vite + plugin server)
+
+1. Run `npm run dev`
+2. Open `http://localhost:5173/?multiplayer&transport=webrtc`
+3. Confirm overlay debug transport shows `WebRTC dedicated dual-channel`
+   (or `sync-only` fallback if entities channel is unavailable)
+4. Verify initial chunk/world sync succeeds and gameplay runs without runtime
+   errors
+
+### Standalone mode
+
+1. Terminal A: `NET_TRANSPORT=webrtc npm run start:server`
+2. Terminal B (optional, for client assets): `npm run dev`
+3. Open `http://localhost:5173/?server=localhost:3001&transport=webrtc`
+   (or use standalone-served client URL if built assets are present)
+4. Validate:
+   - `frame` traffic stays smooth
+   - world/chunk sync and control messages remain reliable
+   - fallback to sync logs once if entities channel is unavailable
 
 ---
 

@@ -2,6 +2,7 @@ import Peer from "peerjs";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "./Transport.js";
+import { classifyClientMessageChannel } from "./webrtcChannels.js";
 
 export type PeerGuestStatus =
   | "connecting-signaling"
@@ -30,6 +31,7 @@ export class PeerGuestTransport implements IClientTransport {
   private pendingMessages: ServerMessage[] = [];
   private destroyed = false;
   private reconnectAttempts = 0;
+  private singleChannelFallbackLogged = false;
   bytesReceived = 0;
   private static readonly MAX_RECONNECT_ATTEMPTS = 5;
   private static readonly RECONNECT_DELAY_MS = 2_000;
@@ -121,6 +123,7 @@ export class PeerGuestTransport implements IClientTransport {
     this.conn.on("open", () => {
       console.log("[tilefun] P2P DataChannel open");
       this.reconnectAttempts = 0;
+      this.logSingleChannelFallbackOnce();
       this.emitStatus("datachannel-open");
       onFirstOpen?.();
       onFirstOpen = undefined; // only call once
@@ -191,6 +194,7 @@ export class PeerGuestTransport implements IClientTransport {
   }
 
   send(msg: ClientMessage): void {
+    if (classifyClientMessageChannel(msg) !== "sync") return;
     if (this.conn?.open) {
       this.conn.send(encodeClientMessage(msg));
     }
@@ -213,10 +217,18 @@ export class PeerGuestTransport implements IClientTransport {
 
   getDebugInfo() {
     const dcState = this.conn?.open ? "open" : "closed";
-    return { transport: `WebRTC P2P (${dcState})` };
+    return { transport: `WebRTC P2P sync-only fallback (${dcState})` };
   }
 
   private emitStatus(status: PeerGuestStatus, detail?: string): void {
     this.onStatus?.(status, detail);
+  }
+
+  private logSingleChannelFallbackOnce(): void {
+    if (this.singleChannelFallbackLogged) return;
+    this.singleChannelFallbackLogged = true;
+    console.warn(
+      "[tilefun] PeerJS guest transport uses a single reliable channel (Phase 6 entities-channel fallback)",
+    );
   }
 }

@@ -1,4 +1,13 @@
 declare module "node-datachannel" {
+  export interface DataChannelInitConfig {
+    protocol?: string;
+    negotiated?: boolean;
+    id?: number;
+    unordered?: boolean;
+    maxPacketLifeTime?: number;
+    maxRetransmits?: number;
+  }
+
   export interface PeerConnectionLike {
     onLocalDescription?(handler: (sdp: string, type: "offer" | "answer") => void): void;
     onLocalCandidate?(handler: (candidate: string, sdpMid: string) => void): void;
@@ -6,16 +15,18 @@ declare module "node-datachannel" {
     onStateChange?(handler: (state: string) => void): void;
     setRemoteDescription?(sdp: string, type: "offer" | "answer"): void;
     addRemoteCandidate?(candidate: string, sdpMid?: string): void;
+    createDataChannel?(label: string, config?: DataChannelInitConfig): DataChannelLike;
     close?(): void;
   }
 
   export interface DataChannelLike {
+    getLabel?(): string;
     onOpen?(handler: () => void): void;
     onClosed?(handler: () => void): void;
     onError?(handler: (err: string) => void): void;
     onMessage?(handler: (data: string | ArrayBuffer | Uint8Array) => void): void;
-    sendMessageBinary?(data: Uint8Array): void;
-    sendMessage?(data: string | Uint8Array): void;
+    sendMessageBinary?(data: Uint8Array): boolean;
+    sendMessage?(data: string | Uint8Array): boolean;
     close?(): void;
   }
 

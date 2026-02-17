@@ -5,6 +5,10 @@ import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "./Transport.js";
 import {
+  classifyDataChannelLabel,
+  routeServerMessageChannel,
+} from "./webrtcChannels.js";
+import {
   fragmentForDataChannel,
   WEBRTC_FRAGMENT_DEFAULT_MAX_PAYLOAD_BYTES,
 } from "./webrtcFragment.js";
@@ -21,15 +25,26 @@ type SignalServerToClient =
   | { type: "candidate"; candidate: string; sdpMid?: string }
   | { type: "error"; reason: string };
 
+interface DataChannelLike {
+  getLabel?(): string;
+  onOpen?(handler: () => void): void;
+  onClosed?(handler: () => void): void;
+  onError?(handler: (err: string) => void): void;
+  onMessage?(handler: (data: string | ArrayBuffer | Uint8Array) => void): void;
+  sendMessageBinary?(data: Uint8Array): boolean | void;
+  sendMessage?(data: string | Uint8Array): boolean | void;
+  close?(): void;
+}
+
 interface ClientState {
   signalWs: WebSocket;
   peer: PeerConnectionLike;
-  dataChannel: {
-    sendMessageBinary?(data: Uint8Array): void;
-    sendMessage?(data: Uint8Array): void;
-    close?(): void;
-  } | null;
+  syncChannel: DataChannelLike | null;
+  entitiesChannel: DataChannelLike | null;
+  syncOpen: boolean;
+  entitiesOpen: boolean;
   connected: boolean;
+  entitiesFallbackLogged: boolean;
 }
 
 interface WebRtcServerTransportOptions {
@@ -45,7 +60,9 @@ interface WebRtcServerTransportOptions {
  *
  * Design:
  * - Signaling: WebSocket (offer/answer + ICE candidates)
- * - Game data: one reliable ordered RTCDataChannel per client
+ * - Game data: dual data channels on one peer connection
+ *   - entities: unordered + maxRetransmits=0 (frame hot path)
+ *   - sync: ordered + reliable (all sync/control + client->server)
  * - Message payloads: existing binary protocol (encodeServerMessage/decodeClientMessage)
  */
 export class WebRtcServerTransport implements IServerTransport {
@@ -92,16 +109,16 @@ export class WebRtcServerTransport implements IServerTransport {
 
   send(clientId: string, msg: ServerMessage): void {
     const client = this.clients.get(clientId);
-    if (!client?.connected || !client.dataChannel) return;
+    if (!client?.connected || !client.syncOpen) return;
     const encoded = encodeServerMessage(msg);
-    this.sendEncoded(clientId, client, encoded);
+    this.sendEncoded(clientId, client, msg, encoded);
   }
 
   broadcast(msg: ServerMessage): void {
     const encoded = encodeServerMessage(msg);
     for (const [clientId, client] of this.clients) {
-      if (!client.connected || !client.dataChannel) continue;
-      this.sendEncoded(clientId, client, encoded);
+      if (!client.connected || !client.syncOpen) continue;
+      this.sendEncoded(clientId, client, msg, encoded);
     }
   }
 
@@ -149,8 +166,12 @@ export class WebRtcServerTransport implements IServerTransport {
     this.clients.set(clientId, {
       signalWs: ws,
       peer,
-      dataChannel: null,
+      syncChannel: null,
+      entitiesChannel: null,
+      syncOpen: false,
+      entitiesOpen: false,
       connected: false,
+      entitiesFallbackLogged: false,
     });
 
     ws.on("message", (data) => {
@@ -164,7 +185,7 @@ export class WebRtcServerTransport implements IServerTransport {
 
     ws.on("close", () => {
       if (this.replacedSockets.delete(ws)) return;
-      // If signaling closes before we establish datachannel, drop the pending peer.
+      // If signaling closes before we establish sync channel, drop the pending peer.
       const client = this.clients.get(clientId);
       if (client && !client.connected) {
         this.dropClient(clientId, false);
@@ -183,7 +204,7 @@ export class WebRtcServerTransport implements IServerTransport {
 
   private createPeer(clientId: string, signalWs: WebSocket): PeerConnectionLike {
     const peer = new this.ndc.PeerConnection(`tilefun-${clientId}`, {
-      iceServers: this.iceServers,
+      iceServers: [...this.iceServers],
     });
 
     peer.onLocalDescription?.((sdp, type) => {
@@ -200,33 +221,29 @@ export class WebRtcServerTransport implements IServerTransport {
     peer.onDataChannel?.((dc) => {
       const client = this.clients.get(clientId);
       if (!client) return;
-      client.dataChannel = dc;
 
-      dc.onOpen?.(() => {
-        const state = this.clients.get(clientId);
-        if (!state || state.connected) return;
-        state.connected = true;
-        this.connectHandler?.(clientId);
-      });
+      const label = dc.getLabel?.();
+      const parsedKind = classifyDataChannelLabel(label);
+      const kind =
+        parsedKind ??
+        (!client.syncChannel ? "sync" : !client.entitiesChannel ? "entities" : undefined);
 
-      dc.onMessage?.((data) => {
-        const buf = toArrayBuffer(data);
-        if (!buf) return;
-        try {
-          const msg = decodeClientMessage(buf);
-          this.messageHandler?.(clientId, msg);
-        } catch (err) {
-          console.error(`[tilefun] Bad WebRTC message from ${clientId}:`, err);
-        }
-      });
+      if (!kind) {
+        console.warn(
+          `[tilefun] Ignoring unexpected WebRTC datachannel label from ${clientId}: ${label ?? "(none)"}`,
+        );
+        dc.close?.();
+        return;
+      }
 
-      dc.onClosed?.(() => {
-        this.dropClient(clientId, true);
-      });
+      if (kind === "sync") {
+        client.syncChannel = dc;
+        this.attachSyncChannelHandlers(clientId, dc);
+        return;
+      }
 
-      dc.onError?.((err) => {
-        console.error(`[tilefun] Datachannel error for ${clientId}:`, err);
-      });
+      client.entitiesChannel = dc;
+      this.attachEntitiesChannelHandlers(clientId, dc);
     });
 
     peer.onStateChange?.((state) => {
@@ -236,6 +253,63 @@ export class WebRtcServerTransport implements IServerTransport {
     });
 
     return peer;
+  }
+
+  private attachSyncChannelHandlers(clientId: string, dc: DataChannelLike): void {
+    dc.onOpen?.(() => {
+      const state = this.clients.get(clientId);
+      if (!state) return;
+      state.syncOpen = true;
+      if (state.connected) return;
+      state.connected = true;
+      this.connectHandler?.(clientId);
+    });
+
+    dc.onMessage?.((data) => {
+      const buf = toArrayBuffer(data);
+      if (!buf) return;
+      try {
+        const msg = decodeClientMessage(buf);
+        this.messageHandler?.(clientId, msg);
+      } catch (err) {
+        console.error(`[tilefun] Bad WebRTC sync message from ${clientId}:`, err);
+      }
+    });
+
+    dc.onClosed?.(() => {
+      this.dropClient(clientId, true);
+    });
+
+    dc.onError?.((err) => {
+      console.error(`[tilefun] Sync datachannel error for ${clientId}:`, err);
+    });
+  }
+
+  private attachEntitiesChannelHandlers(clientId: string, dc: DataChannelLike): void {
+    dc.onOpen?.(() => {
+      const state = this.clients.get(clientId);
+      if (!state) return;
+      state.entitiesOpen = true;
+      console.log(`[tilefun] WebRTC entities channel ready for ${clientId}`);
+    });
+
+    dc.onMessage?.((_data) => {
+      // Phase 6 keeps client->server traffic on reliable sync.
+    });
+
+    dc.onClosed?.(() => {
+      const state = this.clients.get(clientId);
+      if (!state) return;
+      state.entitiesOpen = false;
+      if (state.entitiesChannel === dc) {
+        state.entitiesChannel = null;
+      }
+      this.logEntitiesFallbackOnce(clientId, state, "entities datachannel closed");
+    });
+
+    dc.onError?.((err) => {
+      console.error(`[tilefun] Entities datachannel error for ${clientId}:`, err);
+    });
   }
 
   private handleSignalMessage(clientId: string, raw: string): void {
@@ -277,7 +351,12 @@ export class WebRtcServerTransport implements IServerTransport {
     this.clients.delete(clientId);
 
     try {
-      client.dataChannel?.close?.();
+      client.syncChannel?.close?.();
+    } catch {
+      // Ignore teardown errors.
+    }
+    try {
+      client.entitiesChannel?.close?.();
     } catch {
       // Ignore teardown errors.
     }
@@ -299,7 +378,47 @@ export class WebRtcServerTransport implements IServerTransport {
     }
   }
 
-  private sendEncoded(clientId: string, client: ClientState, encoded: ArrayBuffer): void {
+  private sendEncoded(
+    clientId: string,
+    client: ClientState,
+    msg: ServerMessage,
+    encoded: ArrayBuffer,
+  ): void {
+    const route = routeServerMessageChannel(msg, client.entitiesOpen && !!client.entitiesChannel);
+    if (route.fellBack) {
+      this.logEntitiesFallbackOnce(clientId, client, "entities channel unavailable");
+      this.sendEncodedReliable(clientId, client, encoded);
+      return;
+    }
+
+    if (route.channel === "entities") {
+      if (this.sendEncodedEntities(clientId, client, encoded)) {
+        return;
+      }
+      this.logEntitiesFallbackOnce(clientId, client, "entities send failed");
+    }
+
+    this.sendEncodedReliable(clientId, client, encoded);
+  }
+
+  private sendEncodedEntities(clientId: string, client: ClientState, encoded: ArrayBuffer): boolean {
+    if (!client.entitiesChannel || !client.entitiesOpen) {
+      return false;
+    }
+    try {
+      // No app-level fragmentation/retransmit on unreliable entities channel.
+      sendBinary(client.entitiesChannel, new Uint8Array(encoded));
+      return true;
+    } catch (err) {
+      if (!isMessageSizeLimitError(err)) {
+        console.error(`[tilefun] WebRTC entities send failed for ${clientId}:`, err);
+      }
+      return false;
+    }
+  }
+
+  private sendEncodedReliable(clientId: string, client: ClientState, encoded: ArrayBuffer): void {
+    if (!client.syncChannel || !client.syncOpen) return;
     const source = new Uint8Array(encoded);
     let maxPayload = WEBRTC_FRAGMENT_DEFAULT_MAX_PAYLOAD_BYTES;
 
@@ -307,17 +426,23 @@ export class WebRtcServerTransport implements IServerTransport {
       const packets = this.buildPackets(source, maxPayload);
       try {
         for (const packet of packets) {
-          sendBinary(client.dataChannel, packet);
+          sendBinary(client.syncChannel, packet);
         }
         return;
       } catch (err) {
         if (!isMessageSizeLimitError(err) || maxPayload <= 512) {
-          console.error(`[tilefun] WebRTC send failed for ${clientId}:`, err);
+          console.error(`[tilefun] WebRTC reliable send failed for ${clientId}:`, err);
           return;
         }
         maxPayload = Math.max(512, Math.floor(maxPayload / 2));
       }
     }
+  }
+
+  private logEntitiesFallbackOnce(clientId: string, client: ClientState, reason: string): void {
+    if (client.entitiesFallbackLogged) return;
+    client.entitiesFallbackLogged = true;
+    console.warn(`[tilefun] WebRTC ${clientId}: falling back to sync channel (${reason})`);
   }
 
   private buildPackets(encoded: Uint8Array, maxPayload: number): Uint8Array[] {
@@ -341,15 +466,22 @@ function toArrayBuffer(data: string | ArrayBuffer | Uint8Array): ArrayBuffer | n
   return null;
 }
 
-function sendBinary(
-  dataChannel: { sendMessageBinary?(data: Uint8Array): void; sendMessage?(data: Uint8Array): void },
-  msg: Uint8Array,
-): void {
+function sendBinary(dataChannel: DataChannelLike, msg: Uint8Array): void {
   if (dataChannel.sendMessageBinary) {
-    dataChannel.sendMessageBinary(msg);
+    const ok = dataChannel.sendMessageBinary(msg);
+    if (ok === false) {
+      throw new Error("sendMessageBinary returned false");
+    }
     return;
   }
-  dataChannel.sendMessage?.(msg);
+  if (dataChannel.sendMessage) {
+    const ok = dataChannel.sendMessage(msg);
+    if (ok === false) {
+      throw new Error("sendMessage returned false");
+    }
+    return;
+  }
+  throw new Error("No binary send function on datachannel");
 }
 
 async function loadNodeDataChannel(): Promise<NodeDataChannelModule> {

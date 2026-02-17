@@ -1,6 +1,11 @@
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IClientTransport } from "./Transport.js";
+import {
+  classifyClientMessageChannel,
+  WEBRTC_ENTITIES_CHANNEL_LABEL,
+  WEBRTC_SYNC_CHANNEL_LABEL,
+} from "./webrtcChannels.js";
 import { decodeFragmentPacket } from "./webrtcFragment.js";
 
 type SignalClientToServer =
@@ -16,7 +21,10 @@ export interface WebRtcClientTransportOptions {
   signalUrl: string;
   clientId: string;
   iceServers?: RTCIceServer[];
+  /** Deprecated alias for syncChannelLabel. */
   channelLabel?: string;
+  syncChannelLabel?: string;
+  entitiesChannelLabel?: string;
 }
 
 /**
@@ -25,9 +33,11 @@ export interface WebRtcClientTransportOptions {
  */
 export class WebRtcClientTransport implements IClientTransport {
   private readonly pc: RTCPeerConnection;
-  private readonly dc: RTCDataChannel;
+  private readonly syncDc: RTCDataChannel;
+  private readonly entitiesDc: RTCDataChannel | null;
   private readonly ws: WebSocket;
   private closed = false;
+  private entitiesFallbackLogged = false;
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
   private readyResolvers: { resolve: () => void; reject: (err: Error) => void } | null = null;
   private readyDone = false;
@@ -44,29 +54,32 @@ export class WebRtcClientTransport implements IClientTransport {
         { urls: "stun:stun1.l.google.com:19302" },
       ],
     });
-    this.dc = this.pc.createDataChannel(options.channelLabel ?? "game", {
-      ordered: true,
-    });
-    this.dc.binaryType = "arraybuffer";
 
-    this.dc.onopen = () => {
+    const syncLabel = options.syncChannelLabel ?? options.channelLabel ?? WEBRTC_SYNC_CHANNEL_LABEL;
+    const entitiesLabel = options.entitiesChannelLabel ?? WEBRTC_ENTITIES_CHANNEL_LABEL;
+
+    this.syncDc = this.pc.createDataChannel(syncLabel, { ordered: true });
+    this.syncDc.binaryType = "arraybuffer";
+    this.syncDc.onopen = () => {
       console.log(
-        `[tilefun] WebRTC dedicated datachannel open (pc=${this.pc.connectionState}, ice=${this.pc.iceConnectionState})`,
+        `[tilefun] WebRTC dedicated sync channel open (pc=${this.pc.connectionState}, ice=${this.pc.iceConnectionState})`,
       );
       this.startStatsPolling();
       this.resolveReady();
     };
-    this.dc.onmessage = (event) => {
-      this.consumeData(event.data);
+    this.syncDc.onmessage = (event) => {
+      this.consumeData(event.data, "sync");
     };
-    this.dc.onerror = (event) => {
-      console.error("[tilefun] WebRTC datachannel error:", event);
+    this.syncDc.onerror = (event) => {
+      console.error("[tilefun] WebRTC sync datachannel error:", event);
     };
-    this.dc.onclose = () => {
+    this.syncDc.onclose = () => {
       if (!this.closed) {
-        console.warn("[tilefun] WebRTC datachannel closed");
+        console.warn("[tilefun] WebRTC sync datachannel closed");
       }
     };
+
+    this.entitiesDc = this.createEntitiesChannel(entitiesLabel);
 
     this.pc.onicecandidate = (event) => {
       const candidate = event.candidate;
@@ -105,12 +118,12 @@ export class WebRtcClientTransport implements IClientTransport {
   }
 
   ready(timeoutMs = 30_000): Promise<void> {
-    if (this.dc.readyState === "open") return Promise.resolve();
+    if (this.syncDc.readyState === "open") return Promise.resolve();
     if (this.readyDone) return Promise.reject(new Error("WebRTC transport is closed"));
 
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
-        if (this.dc.readyState === "open") return;
+        if (this.syncDc.readyState === "open") return;
         this.rejectReady(new Error("WebRTC connection timed out"));
       }, timeoutMs);
 
@@ -128,8 +141,9 @@ export class WebRtcClientTransport implements IClientTransport {
   }
 
   send(msg: ClientMessage): void {
-    if (this.dc.readyState !== "open") return;
-    this.dc.send(encodeClientMessage(msg));
+    if (classifyClientMessageChannel(msg) !== "sync") return;
+    if (this.syncDc.readyState !== "open") return;
+    this.syncDc.send(encodeClientMessage(msg));
   }
 
   onMessage(handler: (msg: ServerMessage) => void): void {
@@ -141,18 +155,56 @@ export class WebRtcClientTransport implements IClientTransport {
     this.readyDone = true;
     this.stopStatsPolling();
     this.fragmentAssemblies.clear();
-    this.dc.close();
+    this.entitiesDc?.close();
+    this.syncDc.close();
     this.pc.close();
     this.ws.close();
   }
 
   getDebugInfo() {
-    const dcState = this.dc.readyState;
-    const pcState = this.pc.connectionState;
+    const syncState = this.syncDc.readyState;
+    const entitiesState = this.entitiesDc?.readyState ?? "unavailable";
+    const mode = entitiesState === "open" ? "dual-channel" : "sync-only";
     return {
-      transport: `WebRTC dedicated (${pcState}/${dcState})`,
+      transport: `WebRTC dedicated ${mode} (${this.pc.connectionState}/sync:${syncState}/entities:${entitiesState})`,
       rttMs: this.lastRttMs,
     };
+  }
+
+  private createEntitiesChannel(label: string): RTCDataChannel | null {
+    try {
+      const dc = this.pc.createDataChannel(label, {
+        ordered: false,
+        maxRetransmits: 0,
+      });
+      dc.binaryType = "arraybuffer";
+      dc.onopen = () => {
+        console.log("[tilefun] WebRTC dedicated entities channel open (unordered/unreliable)");
+      };
+      dc.onmessage = (event) => {
+        this.consumeData(event.data, "entities");
+      };
+      dc.onerror = (event) => {
+        console.error("[tilefun] WebRTC entities datachannel error:", event);
+      };
+      dc.onclose = () => {
+        if (!this.closed) {
+          this.logEntitiesFallbackOnce("entities datachannel closed");
+        }
+      };
+      return dc;
+    } catch (err) {
+      this.logEntitiesFallbackOnce(
+        `entities datachannel unavailable, falling back to reliable sync only (${err instanceof Error ? err.message : String(err)})`,
+      );
+      return null;
+    }
+  }
+
+  private logEntitiesFallbackOnce(reason: string): void {
+    if (this.entitiesFallbackLogged) return;
+    this.entitiesFallbackLogged = true;
+    console.warn(`[tilefun] WebRTC dedicated: ${reason}`);
   }
 
   private async startOffer(): Promise<void> {
@@ -204,12 +256,12 @@ export class WebRtcClientTransport implements IClientTransport {
     }
   }
 
-  private consumeData(data: string | ArrayBuffer | Blob): void {
+  private consumeData(data: string | ArrayBuffer | Blob, channel: "sync" | "entities"): void {
     if (typeof data === "string") return;
     if (data instanceof Blob) {
       data
         .arrayBuffer()
-        .then((buf) => this.consumeData(buf))
+        .then((buf) => this.consumeData(buf, channel))
         .catch((err) => {
           console.error("[tilefun] Failed to decode WebRTC blob:", err);
         });
@@ -218,9 +270,14 @@ export class WebRtcClientTransport implements IClientTransport {
 
     try {
       this.bytesReceived += data.byteLength;
-      this.consumeBinaryPacket(new Uint8Array(data));
+      const packet = new Uint8Array(data);
+      if (channel === "sync") {
+        this.consumeSyncBinaryPacket(packet);
+      } else {
+        this.deliverDecoded(packet);
+      }
     } catch (err) {
-      console.error("[tilefun] Bad WebRTC server message:", err);
+      console.error(`[tilefun] Bad WebRTC ${channel} server message:`, err);
     }
   }
 
@@ -239,7 +296,8 @@ export class WebRtcClientTransport implements IClientTransport {
     if (!this.closed) {
       this.stopStatsPolling();
       this.fragmentAssemblies.clear();
-      this.dc.close();
+      this.entitiesDc?.close();
+      this.syncDc.close();
       this.pc.close();
       this.ws.close();
     }
@@ -304,7 +362,7 @@ export class WebRtcClientTransport implements IClientTransport {
       });
   }
 
-  private consumeBinaryPacket(packet: Uint8Array): void {
+  private consumeSyncBinaryPacket(packet: Uint8Array): void {
     const fragment = decodeFragmentPacket(packet);
     if (!fragment) {
       this.deliverDecoded(packet);
