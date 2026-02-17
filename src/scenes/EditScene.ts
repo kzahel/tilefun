@@ -15,6 +15,16 @@ export class EditScene implements GameScene {
   private lastCursorTileY = -Infinity;
   private lastCursorTab = "";
   private lastCursorBrush = "";
+  private cursorSendCooldown = 0;
+  private pendingCursor:
+    | {
+        tileX: number;
+        tileY: number;
+        editorTab: string;
+        brushMode: string;
+      }
+    | null = null;
+  private static readonly CURSOR_SEND_INTERVAL = 1 / 20; // 20 Hz max
 
   onEnter(gc: GameContext): void {
     gc.editorMode.attach();
@@ -69,6 +79,7 @@ export class EditScene implements GameScene {
   update(dt: number, gc: GameContext): void {
     // Save camera state for render interpolation
     gc.camera.savePrev();
+    this.cursorSendCooldown = Math.max(0, this.cursorSendCooldown - dt);
 
     // Debug panel state
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
@@ -190,28 +201,43 @@ export class EditScene implements GameScene {
       gc.transport.send({ type: "edit-clear-roads" });
     }
 
-    // Send editor cursor to server (only when changed)
+    // Send editor cursor to server (delta + 20 Hz throttle for high-rate mouse movement)
     const curTX = gc.editorMode.cursorTileX;
     const curTY = gc.editorMode.cursorTileY;
     const curTab = gc.editorModel.editorTab;
     const curBrush = gc.editorModel.brushMode;
-    if (
+    const cursorChanged =
       curTX !== this.lastCursorTileX ||
       curTY !== this.lastCursorTileY ||
       curTab !== this.lastCursorTab ||
-      curBrush !== this.lastCursorBrush
-    ) {
-      this.lastCursorTileX = curTX;
-      this.lastCursorTileY = curTY;
-      this.lastCursorTab = curTab;
-      this.lastCursorBrush = curBrush;
-      gc.transport.send({
-        type: "editor-cursor",
+      curBrush !== this.lastCursorBrush;
+    if (cursorChanged) {
+      this.pendingCursor = {
         tileX: curTX,
         tileY: curTY,
         editorTab: curTab,
         brushMode: curBrush,
-      });
+      };
+    }
+    if (this.pendingCursor) {
+      const toolChanged =
+        this.pendingCursor.editorTab !== this.lastCursorTab ||
+        this.pendingCursor.brushMode !== this.lastCursorBrush;
+      if (toolChanged || this.cursorSendCooldown <= 0) {
+        this.lastCursorTileX = this.pendingCursor.tileX;
+        this.lastCursorTileY = this.pendingCursor.tileY;
+        this.lastCursorTab = this.pendingCursor.editorTab;
+        this.lastCursorBrush = this.pendingCursor.brushMode;
+        gc.transport.send({
+          type: "editor-cursor",
+          tileX: this.pendingCursor.tileX,
+          tileY: this.pendingCursor.tileY,
+          editorTab: this.pendingCursor.editorTab,
+          brushMode: this.pendingCursor.brushMode,
+        });
+        this.pendingCursor = null;
+        this.cursorSendCooldown = EditScene.CURSOR_SEND_INTERVAL;
+      }
     }
 
     // Server tick + chunk loading (no camera follow — editor pans manually)
