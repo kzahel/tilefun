@@ -73,7 +73,8 @@ export interface GameContext {
   // Helper methods
   flushServer(): void;
   sendRequest<T>(msg: ClientMessage & { requestId: number }): Promise<T>;
-  sendVisibleRange(): void;
+  sendVisibleRange(force?: boolean): void;
+  sendDebugState(paused: boolean, noclip: boolean, force?: boolean): void;
 }
 
 /**

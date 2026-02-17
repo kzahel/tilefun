@@ -107,6 +107,10 @@ export class GameClient {
   private nextRequestId = 1;
   // biome-ignore lint/suspicious/noExplicitAny: generic request/response map
   private pendingRequests = new Map<number, { resolve: (value: any) => void }>();
+  /** Last visible range key sent to server (serialized mode). */
+  private lastVisibleRangeKey: string | null = null;
+  /** Last debug flag key sent to server (serialized mode). */
+  private lastDebugStateKey: string | null = null;
 
   /** Realm list received while in lobby (multiplayer connect flow). */
   private lobbyRealmList: RealmInfo[] | null = null;
@@ -227,7 +231,8 @@ export class GameClient {
             // switching worlds where the player position differs from saved camera.
             this.camera.requestSnap();
           }
-          this.gcSendVisibleRange();
+          this.gcSendVisibleRange(true);
+          this.gcSendDebugState(this.debugPanel.paused, this.debugPanel.noclip, true);
           this.lobbyRealmList = null;
         } else if (msg.type === "realm-list") {
           // Skip unsolicited-broadcast handling when this is a response to
@@ -707,9 +712,12 @@ export class GameClient {
     }
   }
 
-  /** Send current visible chunk range to server (serialized mode). */
-  private gcSendVisibleRange(): void {
+  /** Send current visible chunk range to server when changed (serialized mode). */
+  private gcSendVisibleRange(force = false): void {
     const range = this.camera.getVisibleChunkRange();
+    const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
+    if (!force && key === this.lastVisibleRangeKey) return;
+    this.lastVisibleRangeKey = key;
     this.transport.send({
       type: "visible-range",
       minCx: range.minCx,
@@ -717,6 +725,14 @@ export class GameClient {
       maxCx: range.maxCx,
       maxCy: range.maxCy,
     });
+  }
+
+  /** Send debug flags to server when changed (serialized mode). */
+  private gcSendDebugState(paused: boolean, noclip: boolean, force = false): void {
+    const key = `${paused ? 1 : 0}${noclip ? 1 : 0}`;
+    if (!force && key === this.lastDebugStateKey) return;
+    this.lastDebugStateKey = key;
+    this.transport.send({ type: "set-debug", paused, noclip });
   }
 
   // ---- GameContext construction ----
@@ -777,7 +793,9 @@ export class GameClient {
       },
       flushServer: () => this.gcFlushServer(),
       sendRequest: <T>(msg: ClientMessage & { requestId: number }) => this.gcSendRequest<T>(msg),
-      sendVisibleRange: () => this.gcSendVisibleRange(),
+      sendVisibleRange: (force?: boolean) => this.gcSendVisibleRange(force),
+      sendDebugState: (paused: boolean, noclip: boolean, force?: boolean) =>
+        this.gcSendDebugState(paused, noclip, force),
     };
   }
 

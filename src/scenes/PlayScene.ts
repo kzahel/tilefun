@@ -169,11 +169,7 @@ export class PlayScene implements GameScene {
     }
 
     if (gc.serialized) {
-      gc.transport.send({
-        type: "set-debug",
-        paused: gc.debugPanel.paused,
-        noclip: gc.debugPanel.noclip,
-      });
+      gc.sendDebugState(gc.debugPanel.paused, gc.debugPanel.noclip);
     } else if (gc.server) {
       const session = gc.server.getLocalSession();
       session.debugPaused = gc.debugPanel.paused;
