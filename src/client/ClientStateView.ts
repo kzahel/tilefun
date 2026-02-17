@@ -34,6 +34,21 @@ import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
 
+export interface ExtrapolationGhost {
+  entityId: number;
+  wx: number;
+  wy: number;
+  wz?: number;
+}
+
+export interface ExtrapolationStats {
+  samples: number;
+  avgPosErr: number;
+  maxPosErr: number;
+  avgLeadMs: number;
+  lastLeadMs: number;
+}
+
 export interface ClientStateView {
   readonly world: World;
   readonly entities: readonly Entity[];
@@ -51,6 +66,20 @@ export interface ClientStateView {
   readonly predictionCorrection?:
     | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
     | undefined;
+  /** Rolling reconcile stats for debug overlay (serialized mode only). */
+  readonly reconcileStats?:
+    | {
+        samples: number;
+        notable: number;
+        avgPosErr: number;
+        maxPosErr: number;
+        threshold: number;
+      }
+    | undefined;
+  /** Most recent extrapolation-vs-authoritative error sample (debug/shadow mode). */
+  readonly extrapolationStats?: ExtrapolationStats | undefined;
+  /** Sample current remote extrapolation candidates (debug/shadow mode). */
+  getExtrapolationGhosts?(maxSeconds: number): readonly ExtrapolationGhost[];
 }
 
 /**
@@ -100,6 +129,10 @@ const PLACEHOLDER_ENTITY: Entity = {
   wanderAI: null,
 };
 
+interface ExtrapolationSample extends ExtrapolationGhost {
+  leadMs: number;
+}
+
 /**
  * Serialized-mode state view: maintains a local copy of game state,
  * updated from ServerMessage broadcasts. All data has gone through
@@ -128,6 +161,18 @@ export class RemoteStateView implements ClientStateView {
   private _tickMs = 1000 / TICK_RATE;
   private _tickRate = TICK_RATE;
   private _physicsMult = 1;
+  private _reconcileStats:
+    | {
+        samples: number;
+        notable: number;
+        avgPosErr: number;
+        maxPosErr: number;
+        threshold: number;
+      }
+    | undefined;
+  private _lastFrameAppliedAtMs = 0;
+  private _lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
+  private _extrapolationStats: ExtrapolationStats | undefined;
 
   constructor(world: World) {
     this._world = world;
@@ -214,6 +259,9 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply a per-tick frame message (entity delta protocol). */
   applyFrame(msg: FrameMessage): void {
+    const extrapolationSamples = this._lastExtrapolationSamples;
+    this._lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
+
     // Log state transitions that matter for debugging realm-switch movement bug
     if (msg.playerEntityId !== this._playerEntityId) {
       console.log(
@@ -262,6 +310,8 @@ export class RemoteStateView implements ClientStateView {
 
     // Rebuild flat entity array from map
     this._entities = Array.from(this._entityMap.values());
+    this.updateExtrapolationStats(extrapolationSamples);
+    this._lastFrameAppliedAtMs = performance.now();
   }
 
   /** Apply session sync (gems, editor, mount). */
@@ -368,6 +418,10 @@ export class RemoteStateView implements ClientStateView {
     this._playerNames = {};
     this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
     this._predictor?.clearPredicted();
+    this._reconcileStats = undefined;
+    this._lastFrameAppliedAtMs = 0;
+    this._lastExtrapolationSamples.clear();
+    this._extrapolationStats = undefined;
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);
@@ -440,6 +494,21 @@ export class RemoteStateView implements ClientStateView {
   get predictionCorrection() {
     return this._predictor?.lastCorrection;
   }
+  get reconcileStats() {
+    return this._reconcileStats;
+  }
+  get extrapolationStats(): ExtrapolationStats | undefined {
+    return this._extrapolationStats;
+  }
+  setReconcileStats(stats: {
+    samples: number;
+    notable: number;
+    avgPosErr: number;
+    maxPosErr: number;
+    threshold: number;
+  }): void {
+    this._reconcileStats = stats;
+  }
   /** Mount entity ID from the latest server state (undefined when not riding). */
   get mountEntityId(): number | undefined {
     return this._mountEntityId;
@@ -460,6 +529,47 @@ export class RemoteStateView implements ClientStateView {
   /** Raw server entities (not replaced by predictor). Used for reconciliation. */
   get serverEntities(): readonly Entity[] {
     return this._entities;
+  }
+
+  getExtrapolationGhosts(maxSeconds: number): readonly ExtrapolationGhost[] {
+    if (maxSeconds <= 0 || this._lastFrameAppliedAtMs <= 0) {
+      this._lastExtrapolationSamples.clear();
+      return [];
+    }
+
+    const nowMs = performance.now();
+    const rawLeadMs = Math.max(0, nowMs - this._lastFrameAppliedAtMs);
+    const leadMs = Math.min(rawLeadMs, maxSeconds * 1000);
+    if (leadMs <= 0) {
+      this._lastExtrapolationSamples.clear();
+      return [];
+    }
+    const leadSec = leadMs / 1000;
+
+    const ghosts: ExtrapolationGhost[] = [];
+    const samples = new Map<number, ExtrapolationSample>();
+
+    for (const entity of this._entities) {
+      if (entity.id === this._playerEntityId) continue;
+      if (entity.type !== "player") continue;
+      if (!entity.velocity || !entity.sprite) continue;
+      const speedSq = entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy;
+      if (speedSq <= 0.0001) continue;
+
+      const ghost: ExtrapolationGhost = {
+        entityId: entity.id,
+        wx: entity.position.wx + entity.velocity.vx * leadSec,
+        wy: entity.position.wy + entity.velocity.vy * leadSec,
+      };
+      if (entity.wz !== undefined) {
+        ghost.wz = entity.wz + (entity.jumpVZ ?? 0) * leadSec;
+      }
+      ghosts.push(ghost);
+      samples.set(entity.id, { ...ghost, leadMs });
+    }
+
+    this._lastExtrapolationSamples = samples;
+    return ghosts;
   }
 
   /**
@@ -484,5 +594,47 @@ export class RemoteStateView implements ClientStateView {
         }
       }
     }
+  }
+
+  private updateExtrapolationStats(samples: ReadonlyMap<number, ExtrapolationSample>): void {
+    if (samples.size === 0) {
+      this._extrapolationStats = undefined;
+      return;
+    }
+
+    let count = 0;
+    let sumErr = 0;
+    let maxErr = 0;
+    let sumLeadMs = 0;
+    let lastLeadMs = 0;
+
+    for (const entity of this._entities) {
+      const sample = samples.get(entity.id);
+      if (!sample) continue;
+
+      const dx = sample.wx - entity.position.wx;
+      const dy = sample.wy - entity.position.wy;
+      const dz = (sample.wz ?? 0) - (entity.wz ?? 0);
+      const err = Math.hypot(dx, dy, dz);
+
+      count++;
+      sumErr += err;
+      maxErr = Math.max(maxErr, err);
+      sumLeadMs += sample.leadMs;
+      lastLeadMs = sample.leadMs;
+    }
+
+    if (count === 0) {
+      this._extrapolationStats = undefined;
+      return;
+    }
+
+    this._extrapolationStats = {
+      samples: count,
+      avgPosErr: sumErr / count,
+      maxPosErr: maxErr,
+      avgLeadMs: sumLeadMs / count,
+      lastLeadMs,
+    };
   }
 }

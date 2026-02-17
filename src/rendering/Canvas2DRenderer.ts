@@ -103,8 +103,12 @@ function drawSprite(
   const dx = Math.floor(screen.sx);
   const dy = Math.floor(screen.sy - totalZScreen + drawOffsetY);
 
+  ctx.save();
+  if (item.alpha !== undefined) {
+    ctx.globalAlpha = Math.max(0, Math.min(1, item.alpha));
+  }
+
   if (item.flipX) {
-    ctx.save();
     ctx.scale(-1, 1);
     ctx.drawImage(
       sheet.image,
@@ -117,7 +121,6 @@ function drawSprite(
       destW,
       destH,
     );
-    ctx.restore();
   } else {
     ctx.drawImage(
       sheet.image,
@@ -131,6 +134,8 @@ function drawSprite(
       destH,
     );
   }
+
+  ctx.restore();
 }
 
 function drawElevation(ctx: CanvasRenderingContext2D, camera: Camera, item: ElevationItem): void {

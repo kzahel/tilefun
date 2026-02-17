@@ -8,7 +8,17 @@ export interface ClientCVars {
   r_showfps: CVar<boolean>;
   r_pixelscale: CVar<number>;
   cl_timescale: CVar<number>;
+  cl_netem: CVar<boolean>;
+  cl_netem_tx_loss_pct: CVar<number>;
+  cl_netem_rx_loss_pct: CVar<number>;
+  cl_netem_tx_latency_ms: CVar<number>;
+  cl_netem_rx_latency_ms: CVar<number>;
+  cl_netem_tx_jitter_ms: CVar<number>;
+  cl_netem_rx_jitter_ms: CVar<number>;
   cl_nopredict: CVar<boolean>;
+  cl_extrapolate: CVar<boolean>;
+  cl_extrapolate_amount: CVar<number>;
+  cl_debugextrapolation: CVar<boolean>;
   cl_log_reconcile: CVar<boolean>;
   cl_reconcile_log_threshold: CVar<number>;
   cl_reconcile_log_interval_ms: CVar<number>;
@@ -69,9 +79,103 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "cl",
   });
 
+  const cl_netem = engine.cvars.register<boolean>({
+    name: "cl_netem",
+    description: "Enable client-side network emulation (loss/latency/jitter)",
+    type: "boolean",
+    defaultValue: false,
+    category: "cl",
+  });
+
+  const cl_netem_tx_loss_pct = engine.cvars.register<number>({
+    name: "cl_netem_tx_loss_pct",
+    description: "Drop chance (%) for client->server packets",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 100,
+    category: "cl",
+  });
+
+  const cl_netem_rx_loss_pct = engine.cvars.register<number>({
+    name: "cl_netem_rx_loss_pct",
+    description: "Drop chance (%) for server->client packets",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 100,
+    category: "cl",
+  });
+
+  const cl_netem_tx_latency_ms = engine.cvars.register<number>({
+    name: "cl_netem_tx_latency_ms",
+    description: "Base latency in ms for client->server packets",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 5000,
+    category: "cl",
+  });
+
+  const cl_netem_rx_latency_ms = engine.cvars.register<number>({
+    name: "cl_netem_rx_latency_ms",
+    description: "Base latency in ms for server->client packets",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 5000,
+    category: "cl",
+  });
+
+  const cl_netem_tx_jitter_ms = engine.cvars.register<number>({
+    name: "cl_netem_tx_jitter_ms",
+    description: "Jitter range in ms for client->server packets (+/-)",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 1000,
+    category: "cl",
+  });
+
+  const cl_netem_rx_jitter_ms = engine.cvars.register<number>({
+    name: "cl_netem_rx_jitter_ms",
+    description: "Jitter range in ms for server->client packets (+/-)",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 1000,
+    category: "cl",
+  });
+
   const cl_nopredict = engine.cvars.register<boolean>({
     name: "cl_nopredict",
     description: "Disable client-side prediction",
+    type: "boolean",
+    defaultValue: false,
+    category: "cl",
+  });
+
+  const cl_extrapolate = engine.cvars.register<boolean>({
+    name: "cl_extrapolate",
+    description: "Sample remote extrapolation candidates (shadow mode, no gameplay effect)",
+    type: "boolean",
+    defaultValue: false,
+    category: "cl",
+  });
+
+  const cl_extrapolate_amount = engine.cvars.register<number>({
+    name: "cl_extrapolate_amount",
+    description: "Maximum remote extrapolation window in seconds (debug/shadow mode)",
+    type: "number",
+    defaultValue: 0.1,
+    min: 0,
+    max: 0.5,
+    category: "cl",
+  });
+
+  const cl_debugextrapolation = engine.cvars.register<boolean>({
+    name: "cl_debugextrapolation",
+    description: "Render translucent extrapolated ghosts for remote players",
     type: "boolean",
     defaultValue: false,
     category: "cl",
@@ -128,7 +232,17 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_showfps,
     r_pixelscale,
     cl_timescale,
+    cl_netem,
+    cl_netem_tx_loss_pct,
+    cl_netem_rx_loss_pct,
+    cl_netem_tx_latency_ms,
+    cl_netem_rx_latency_ms,
+    cl_netem_tx_jitter_ms,
+    cl_netem_rx_jitter_ms,
     cl_nopredict,
+    cl_extrapolate,
+    cl_extrapolate_amount,
+    cl_debugextrapolation,
     cl_log_reconcile,
     cl_reconcile_log_threshold,
     cl_reconcile_log_interval_ms,

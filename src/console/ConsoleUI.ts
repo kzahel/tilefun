@@ -40,6 +40,16 @@ const COMPLETION_ITEM_STYLE = `
   padding: 2px 8px; cursor: pointer;
 `;
 
+interface CompletionSession {
+  baseInput: string;
+  replaceStart: number;
+  replaceEnd: number;
+  values: string[];
+  index: number;
+  isNameCompletion: boolean;
+  typedToken: string;
+}
+
 export class ConsoleUI {
   private container: HTMLDivElement;
   private outputEl: HTMLDivElement;
@@ -47,8 +57,7 @@ export class ConsoleUI {
   private completionEl: HTMLDivElement;
   private engine: ConsoleEngine;
   private unsubLine: (() => void) | null = null;
-  private completions: string[] = [];
-  private completionIndex = -1;
+  private completionSession: CompletionSession | null = null;
 
   constructor(engine: ConsoleEngine) {
     this.engine = engine;
@@ -188,58 +197,85 @@ export class ConsoleUI {
   }
 
   private tabComplete(reverse: boolean): void {
-    const text = this.inputEl.value;
-    if (!text.trim()) {
-      // Show all commands
-      this.completions = this.engine.complete("");
-      this.completionIndex = -1;
-      this.showCompletions();
-      return;
+    let session = this.completionSession;
+    if (!session) {
+      session = this.createCompletionSession();
+      this.completionSession = session;
+      if (!session || session.values.length === 0) return;
     }
 
-    if (this.completions.length === 0 || this.completionIndex < 0) {
-      this.completions = this.engine.complete(text);
-      this.completionIndex = -1;
-    }
-
-    if (this.completions.length === 0) return;
-
-    if (this.completions.length === 1) {
-      this.applyCompletion(this.completions[0]!);
+    if (session.values.length === 1) {
+      this.applyCompletion(session, session.values[0]!, true);
       this.hideCompletions();
       return;
     }
 
-    // Cycle through
+    // First Tab with multiple matches: expand to the longest shared prefix
+    // before switching into candidate cycling.
+    if (session.index < 0) {
+      const lcp = longestCommonPrefix(session.values);
+      if (lcp.length > session.typedToken.length) {
+        this.applyCompletion(session, lcp, false);
+      }
+      this.showCompletions();
+      return;
+    }
+
+    // Cycle through explicit candidates.
     if (reverse) {
-      this.completionIndex =
-        this.completionIndex <= 0 ? this.completions.length - 1 : this.completionIndex - 1;
+      session.index = session.index <= 0 ? session.values.length - 1 : session.index - 1;
     } else {
-      this.completionIndex = (this.completionIndex + 1) % this.completions.length;
+      session.index = (session.index + 1) % session.values.length;
     }
 
     this.showCompletions();
-    this.applyCompletion(this.completions[this.completionIndex]!);
+    this.applyCompletion(session, session.values[session.index]!, true);
   }
 
-  private applyCompletion(value: string): void {
-    const tokens = this.inputEl.value.split(" ");
-    if (tokens.length === 1) {
-      // Completing command name — prefix with / to distinguish from chat
-      this.inputEl.value = `/${value} `;
-    } else {
-      tokens[tokens.length - 1] = value;
-      this.inputEl.value = tokens.join(" ");
-    }
+  private createCompletionSession(): CompletionSession | null {
+    const input = this.inputEl.value;
+    const cursor = this.inputEl.selectionStart ?? input.length;
+    const replaceStart = findTokenStart(input, cursor);
+    const replaceEnd = findTokenEnd(input, cursor);
+    const detail = this.engine.completeDetailed(input.slice(0, cursor));
+    if (detail.values.length === 0) return null;
+
+    const rawToken = detail.currentToken;
+    const typedToken = (detail.isNameCompletion ? stripSlash(rawToken) : rawToken).toLowerCase();
+    return {
+      baseInput: input,
+      replaceStart,
+      replaceEnd,
+      values: detail.values,
+      index: -1,
+      isNameCompletion: detail.isNameCompletion,
+      typedToken,
+    };
+  }
+
+  private applyCompletion(session: CompletionSession, value: string, finalized: boolean): void {
+    const before = session.baseInput.slice(0, session.replaceStart);
+    const after = session.baseInput.slice(session.replaceEnd);
+    const token = session.isNameCompletion ? `/${value}` : value;
+    const needsSpace = finalized && (after.length === 0 || !/^\s/.test(after));
+    const insert = needsSpace ? `${token} ` : token;
+    this.inputEl.value = `${before}${insert}${after}`;
+    const caret = before.length + insert.length;
+    this.inputEl.selectionStart = this.inputEl.selectionEnd = caret;
   }
 
   private showCompletions(): void {
+    const session = this.completionSession;
+    if (!session || session.values.length === 0) {
+      this.completionEl.style.display = "none";
+      return;
+    }
     this.completionEl.innerHTML = "";
-    for (let i = 0; i < Math.min(this.completions.length, 20); i++) {
+    for (let i = 0; i < Math.min(session.values.length, 20); i++) {
       const item = document.createElement("div");
       item.style.cssText = COMPLETION_ITEM_STYLE;
-      item.textContent = this.completions[i]!;
-      if (i === this.completionIndex) {
+      item.textContent = session.values[i]!;
+      if (i === session.index) {
         item.style.background = "#336";
         item.style.color = "#fff";
       } else {
@@ -248,26 +284,26 @@ export class ConsoleUI {
       const idx = i;
       item.addEventListener("mousedown", (e) => {
         e.preventDefault();
-        this.applyCompletion(this.completions[idx]!);
+        if (!this.completionSession) return;
+        this.applyCompletion(this.completionSession, this.completionSession.values[idx]!, true);
         this.hideCompletions();
         this.inputEl.focus();
       });
       this.completionEl.appendChild(item);
     }
-    if (this.completions.length > 20) {
+    if (session.values.length > 20) {
       const more = document.createElement("div");
       more.style.cssText = COMPLETION_ITEM_STYLE;
       more.style.color = "#666";
-      more.textContent = `... and ${this.completions.length - 20} more`;
+      more.textContent = `... and ${session.values.length - 20} more`;
       this.completionEl.appendChild(more);
     }
-    this.completionEl.style.display = this.completions.length > 0 ? "block" : "none";
+    this.completionEl.style.display = "block";
   }
 
   private hideCompletions(): void {
     this.completionEl.style.display = "none";
-    this.completions = [];
-    this.completionIndex = -1;
+    this.completionSession = null;
   }
 
   private navigateHistory(dir: "up" | "down"): void {
@@ -280,4 +316,38 @@ export class ConsoleUI {
       });
     }
   }
+}
+
+function stripSlash(name: string): string {
+  return name.startsWith("/") ? name.slice(1) : name;
+}
+
+function longestCommonPrefix(values: readonly string[]): string {
+  if (values.length === 0) return "";
+  let prefix = values[0]!;
+  for (let i = 1; i < values.length; i++) {
+    const next = values[i]!;
+    let j = 0;
+    const len = Math.min(prefix.length, next.length);
+    while (j < len && prefix[j] === next[j]) j++;
+    prefix = prefix.slice(0, j);
+    if (prefix.length === 0) break;
+  }
+  return prefix;
+}
+
+function findTokenStart(input: string, cursor: number): number {
+  let i = Math.max(0, Math.min(cursor, input.length));
+  while (i > 0 && !isWhitespace(input[i - 1]!)) i--;
+  return i;
+}
+
+function findTokenEnd(input: string, cursor: number): number {
+  let i = Math.max(0, Math.min(cursor, input.length));
+  while (i < input.length && !isWhitespace(input[i]!)) i++;
+  return i;
+}
+
+function isWhitespace(ch: string): boolean {
+  return ch === " " || ch === "\t" || ch === "\n" || ch === "\r";
 }

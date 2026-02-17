@@ -38,6 +38,7 @@ import {
   LAST_WORLD_KEY,
   TAB_SESSION_KEY,
 } from "../shared/storageKeys.js";
+import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
@@ -79,6 +80,7 @@ export class GameClient {
   private stateView: ClientStateView;
   private remoteView: RemoteStateView | null = null;
   private transport: IClientTransport;
+  private netEmulatedTransport: NetEmulatedClientTransport;
   private server: GameServer | null;
   private serialized: boolean;
   private autoJoinRealm: boolean;
@@ -139,7 +141,8 @@ export class GameClient {
     if (!ctx) throw new Error("Failed to get 2D context");
     this.canvas = canvas;
     this.ctx = ctx;
-    this.transport = transport;
+    this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
+    this.transport = this.netEmulatedTransport;
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
@@ -371,6 +374,26 @@ export class GameClient {
     const clientCVars = registerClientCVars(this.consoleEngine);
     registerClientCommands(this.consoleEngine, gc);
     registerServerCommandStubs(this.consoleEngine);
+
+    const applyNetEmulationConfig = () => {
+      this.netEmulatedTransport.setConfig({
+        enabled: clientCVars.cl_netem.get(),
+        txLossPct: clientCVars.cl_netem_tx_loss_pct.get(),
+        rxLossPct: clientCVars.cl_netem_rx_loss_pct.get(),
+        txLatencyMs: clientCVars.cl_netem_tx_latency_ms.get(),
+        rxLatencyMs: clientCVars.cl_netem_rx_latency_ms.get(),
+        txJitterMs: clientCVars.cl_netem_tx_jitter_ms.get(),
+        rxJitterMs: clientCVars.cl_netem_rx_jitter_ms.get(),
+      });
+    };
+    applyNetEmulationConfig();
+    clientCVars.cl_netem.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_tx_loss_pct.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_rx_loss_pct.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_tx_latency_ms.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_rx_latency_ms.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_tx_jitter_ms.onChange(applyNetEmulationConfig);
+    clientCVars.cl_netem_rx_jitter_ms.onChange(applyNetEmulationConfig);
 
     // Wire r_pixelscale cvar to camera zoom
     clientCVars.r_pixelscale.onChange((val) => {

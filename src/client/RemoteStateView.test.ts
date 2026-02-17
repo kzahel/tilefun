@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   PLAYER_ACCELERATE,
   PLAYER_AIR_ACCELERATE,
@@ -66,6 +66,29 @@ function makeAnimatedEntity(id: number, wx: number, wy: number, moving: boolean)
       animTimer: 0,
       direction: Direction.Down,
       moving,
+    },
+    collider: null,
+    wanderAI: null,
+  });
+}
+
+function makeTestPlayer(id: number, wx: number, wy: number, vx: number, vy: number) {
+  return serializeEntity({
+    id,
+    type: "player",
+    position: { wx, wy },
+    velocity: { vx, vy },
+    sprite: {
+      sheetKey: "player",
+      spriteWidth: 16,
+      spriteHeight: 16,
+      frameCount: 4,
+      frameDuration: 120,
+      frameCol: 0,
+      frameRow: 0,
+      animTimer: 0,
+      direction: Direction.Down,
+      moving: true,
     },
     collider: null,
     wanderAI: null,
@@ -781,5 +804,63 @@ describe("RemoteStateView tickAnimations", () => {
     // Should not throw
     view.tickAnimations(0.1);
     expect(view.entities.at(0)?.sprite).toBeNull();
+  });
+});
+
+describe("RemoteStateView extrapolation debug sampling", () => {
+  it("samples ghost positions for remote players using capped lead time", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+    const nowSpy = vi.spyOn(performance, "now");
+
+    nowSpy.mockReturnValue(1000);
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeTestPlayer(1, 0, 0, 0, 0), makeTestPlayer(2, 100, 50, 10, 0)],
+        playerEntityId: 1,
+      }),
+    );
+
+    nowSpy.mockReturnValue(1200);
+    const ghosts = view.getExtrapolationGhosts(0.05);
+    expect(ghosts).toHaveLength(1);
+    expect(ghosts.at(0)?.entityId).toBe(2);
+    expect(ghosts.at(0)?.wx).toBeCloseTo(100.5, 3);
+    expect(ghosts.at(0)?.wy).toBeCloseTo(50, 3);
+
+    nowSpy.mockRestore();
+  });
+
+  it("tracks extrapolation error when authoritative updates arrive", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+    const nowSpy = vi.spyOn(performance, "now");
+
+    nowSpy.mockReturnValue(1000);
+    view.applyFrame(
+      makeFrame({
+        entityBaselines: [makeTestPlayer(1, 0, 0, 0, 0), makeTestPlayer(2, 100, 50, 10, 0)],
+        playerEntityId: 1,
+      }),
+    );
+
+    nowSpy.mockReturnValue(1050);
+    view.getExtrapolationGhosts(0.1);
+
+    nowSpy.mockReturnValue(1066);
+    view.applyFrame(
+      makeFrame({
+        entityDeltas: [{ id: 2, position: { wx: 100.5, wy: 50 } }],
+        playerEntityId: 1,
+      }),
+    );
+
+    expect(view.extrapolationStats).toBeDefined();
+    expect(view.extrapolationStats?.samples).toBe(1);
+    expect(view.extrapolationStats?.avgPosErr).toBeCloseTo(0, 4);
+    expect(view.extrapolationStats?.maxPosErr).toBeCloseTo(0, 4);
+    expect(view.extrapolationStats?.avgLeadMs).toBeCloseTo(50, 4);
+
+    nowSpy.mockRestore();
   });
 });

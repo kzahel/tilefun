@@ -489,6 +489,13 @@ export class PlayScene implements GameScene {
     this.reconcilePosErrSum += posErr;
     if (posErr > this.reconcilePosErrMax) this.reconcilePosErrMax = posErr;
     if (posErr >= threshold) this.reconcileNotable++;
+    remoteView.setReconcileStats({
+      samples: this.reconcileSamples,
+      notable: this.reconcileNotable,
+      avgPosErr: this.reconcilePosErrSum / this.reconcileSamples,
+      maxPosErr: this.reconcilePosErrMax,
+      threshold,
+    });
 
     const nowMs = performance.now();
     if (nowMs < this.nextReconcileLogAtMs) return;
@@ -503,6 +510,13 @@ export class PlayScene implements GameScene {
     this.reconcileNotable = 0;
     this.reconcilePosErrSum = 0;
     this.reconcilePosErrMax = 0;
+    remoteView.setReconcileStats({
+      samples: 0,
+      notable: 0,
+      avgPosErr: 0,
+      maxPosErr: 0,
+      threshold,
+    });
     this.nextReconcileLogAtMs = nowMs + intervalMs;
   }
 

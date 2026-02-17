@@ -16,6 +16,13 @@ import type { TileRenderer } from "./TileRenderer.js";
  */
 const Z_SORT_FACTOR = 1;
 
+interface ExtrapolationGhostItem {
+  entityId: number;
+  wx: number;
+  wy: number;
+  wz?: number;
+}
+
 /** Interpolate between previous and current position. */
 function lerpPos(
   pos: { wx: number; wy: number },
@@ -48,8 +55,13 @@ export function collectScene(
   tileRenderer: TileRenderer,
   particles: ParticleItem[],
   hasGrass: boolean,
+  extrapolationGhosts?: readonly ExtrapolationGhostItem[],
 ): SceneItem[] {
   const items: SceneItem[] = [];
+  const ghostByEntityId =
+    extrapolationGhosts && extrapolationGhosts.length > 0
+      ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
+      : undefined;
 
   // Viewport bounds in world coordinates for culling
   const vpTL = camera.screenToWorld(0, 0);
@@ -118,6 +130,42 @@ export function collectScene(
       shadowTerrainZ,
       flashHidden: e.flashHidden ?? false,
     } satisfies SpriteItem);
+
+    const ghost = ghostByEntityId?.get(e.id);
+    if (ghost && Math.hypot(ghost.wx - pos.wx, ghost.wy - pos.wy) >= 0.25) {
+      let ghostZOffset: number;
+      if (ghost.wz !== undefined) {
+        ghostZOffset = ghost.wz;
+      } else if (e.wz !== undefined) {
+        ghostZOffset = e.wz;
+      } else {
+        const ghostTx = Math.floor(ghost.wx / TILE_SIZE);
+        const ghostTy = Math.floor(ghost.wy / TILE_SIZE);
+        const ghostElevOffset = world.getHeightAt(ghostTx, ghostTy) * ELEVATION_PX;
+        ghostZOffset = ghostElevOffset + (e.jumpZ ?? 0);
+      }
+
+      items.push({
+        kind: "sprite",
+        sortKey: ghost.wy + (e.sortOffsetY ?? 0) + (ghost.wz ?? e.wz ?? 0) * Z_SORT_FACTOR,
+        wx: ghost.wx,
+        wy: ghost.wy,
+        zOffset: ghostZOffset,
+        sheetKey: e.sprite.sheetKey,
+        frameCol: e.sprite.frameCol,
+        frameRow: e.sprite.frameRow,
+        spriteWidth: e.sprite.spriteWidth,
+        spriteHeight: e.sprite.spriteHeight,
+        flipX: e.sprite.flipX ?? false,
+        drawOffsetY: e.sprite.drawOffsetY ?? 0,
+        hasShadow: false,
+        shadowFeetWy: 0,
+        shadowWidth: 0,
+        shadowTerrainZ: 0,
+        flashHidden: false,
+        alpha: 0.35,
+      } satisfies SpriteItem);
+    }
   }
 
   // --- Props ---

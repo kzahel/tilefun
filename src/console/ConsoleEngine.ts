@@ -144,23 +144,50 @@ export class ConsoleEngine {
     return lines;
   }
 
-  complete(partial: string): string[] {
-    const trimmed = partial.trim();
-    const tokens = tokenize(trimmed);
+  completeDetailed(partial: string): {
+    values: string[];
+    isNameCompletion: boolean;
+    currentToken: string;
+  } {
+    const tokens = tokenizeForCompletion(partial);
 
-    // Completing the command/cvar name
+    // Completing the command/cvar name.
     if (tokens.length <= 1) {
-      const prefix = stripSlash((tokens[0] ?? "").toLowerCase());
+      const currentToken = tokens[0] ?? "";
+      const prefix = stripSlash(currentToken.toLowerCase());
       const cvarMatches = this.cvars.getNames().filter((n) => n.startsWith(prefix));
       const cmdMatches = this.commands.getCompletions(prefix);
-      return [...new Set([...cmdMatches, ...cvarMatches])].sort();
+      return {
+        values: [...new Set([...cmdMatches, ...cvarMatches])].sort(),
+        isNameCompletion: true,
+        currentToken,
+      };
     }
 
-    // Completing an argument
+    // Completing an argument.
     const cmdName = stripSlash(tokens[0]!.toLowerCase());
     const argIndex = tokens.length - 2; // -1 for cmd name, -1 for current partial
-    const argPartial = tokens[tokens.length - 1] ?? "";
-    return this.commands.getArgCompletions(cmdName, argIndex, argPartial);
+    const currentToken = tokens[tokens.length - 1] ?? "";
+    const argPartial = currentToken.toLowerCase();
+
+    const cv = this.cvars.get(cmdName);
+    if (cv) {
+      return {
+        values: this.getCVarValueCompletions(cv, argIndex, argPartial),
+        isNameCompletion: false,
+        currentToken,
+      };
+    }
+
+    return {
+      values: this.commands.getArgCompletions(cmdName, argIndex, currentToken),
+      isNameCompletion: false,
+      currentToken,
+    };
+  }
+
+  complete(partial: string): string[] {
+    return this.completeDetailed(partial).values;
   }
 
   historyUp(): string | null {
@@ -315,6 +342,25 @@ export class ConsoleEngine {
       },
     });
   }
+
+  private getCVarValueCompletions(
+    cv: import("./CVar.js").CVar,
+    argIndex: number,
+    partialLower: string,
+  ): string[] {
+    // CVar console syntax only has one argument (the value).
+    if (argIndex > 0) return [];
+    if (cv.type === "boolean") {
+      return ["0", "1", "true", "false"].filter((s) => s.startsWith(partialLower));
+    }
+    if (cv.type === "number") {
+      const options = new Set<string>([String(cv.get()), String(cv.defaultValue)]);
+      if (cv.min !== undefined) options.add(String(cv.min));
+      if (cv.max !== undefined) options.add(String(cv.max));
+      return [...options].filter((s) => s.toLowerCase().startsWith(partialLower));
+    }
+    return [];
+  }
 }
 
 /** Strip an optional leading '/' so `/say` is treated the same as `say`. */
@@ -340,5 +386,14 @@ function tokenize(input: string): string[] {
     current += ch;
   }
   if (current) tokens.push(current);
+  return tokens;
+}
+
+function tokenizeForCompletion(input: string): string[] {
+  const noLeading = input.replace(/^\s+/, "");
+  if (noLeading.length === 0) return [];
+  const hasTrailingWhitespace = /\s$/.test(noLeading);
+  const tokens = tokenize(noLeading);
+  if (hasTrailingWhitespace) tokens.push("");
   return tokens;
 }

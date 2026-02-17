@@ -33,6 +33,8 @@ export interface SpriteItem {
   shadowTerrainZ: number;
   /** When true, entity is hidden this frame (invincibility flash). */
   flashHidden: boolean;
+  /** Optional per-item alpha (debug overlays, ghost sprites). */
+  alpha?: number;
 }
 
 export interface ElevationItem {

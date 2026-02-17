@@ -311,6 +311,8 @@ export class GameServer {
   /** Update server command tick interval in milliseconds. */
   setTickMs(ms: number): void {
     if (ms <= 0) return;
+    if (Math.abs(ms - this._tickMs) < 1e-9) return;
+    const prevMs = this._tickMs;
     this._tickMs = ms;
     setServerTickMs(ms);
     this.loop?.setTickMs(ms);
@@ -318,14 +320,21 @@ export class GameServer {
       realm.tickRate = 1000 / ms;
       realm.physicsMult = this._physicsMult;
     }
+    console.log(
+      `[tilefun:server] tick changed: ${prevMs.toFixed(3)}ms (${(1000 / prevMs).toFixed(2)}Hz) -> ${ms.toFixed(3)}ms (${(1000 / ms).toFixed(2)}Hz)`,
+    );
   }
 
   setPhysicsMult(mult: number): void {
-    this._physicsMult = Math.max(1, Math.floor(mult));
+    const next = Math.max(1, Math.floor(mult));
+    if (next === this._physicsMult) return;
+    const prev = this._physicsMult;
+    this._physicsMult = next;
     setServerPhysicsMult(this._physicsMult);
     for (const realm of this.realms.values()) {
       realm.physicsMult = this._physicsMult;
     }
+    console.log(`[tilefun:server] physics substeps changed: ${prev} -> ${this._physicsMult}`);
   }
 
   get tickRate(): number {

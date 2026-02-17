@@ -10,6 +10,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import type { ExtrapolationStats } from "../client/ClientStateView.js";
 
 export interface DebugInfo {
   fps: number;
@@ -33,6 +34,16 @@ export interface DebugInfo {
   correction?:
     | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
     | undefined;
+  reconcileStats?:
+    | {
+        samples: number;
+        notable: number;
+        avgPosErr: number;
+        maxPosErr: number;
+        threshold: number;
+      }
+    | undefined;
+  extrapolationStats?: ExtrapolationStats | undefined;
 }
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
@@ -57,6 +68,18 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     const c = info.correction ?? { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
     lines.push(
       `Err: pos=(${c.wx.toFixed(2)}, ${c.wy.toFixed(2)}, ${c.wz.toFixed(2)})  vel=(${c.vx.toFixed(1)}, ${c.vy.toFixed(1)})  jVZ=${c.jumpVZ.toFixed(1)}`,
+    );
+  }
+  if (info.reconcileStats) {
+    const s = info.reconcileStats;
+    lines.push(
+      `ReconWin: n=${s.samples} notable=${s.notable} avg=${s.avgPosErr.toFixed(3)} max=${s.maxPosErr.toFixed(3)} thr=${s.threshold.toFixed(3)}`,
+    );
+  }
+  if (info.extrapolationStats) {
+    const s = info.extrapolationStats;
+    lines.push(
+      `Extrap: n=${s.samples} avgErr=${s.avgPosErr.toFixed(3)} maxErr=${s.maxPosErr.toFixed(3)} lead=${s.avgLeadMs.toFixed(1)}ms`,
     );
   }
   if (info.playerJumpZ) {

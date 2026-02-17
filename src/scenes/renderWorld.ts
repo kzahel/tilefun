@@ -84,6 +84,15 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
 
   const visible = camera.getVisibleChunkRange();
   const grassSheet = sheets.get("grass-blades");
+  const extrapolate = gc.console.cvars.get("cl_extrapolate")?.get() === true;
+  const debugExtrapolation = gc.console.cvars.get("cl_debugextrapolation")?.get() === true;
+  const extrapolateAmountRaw = gc.console.cvars.get("cl_extrapolate_amount")?.get();
+  const extrapolateAmount =
+    typeof extrapolateAmountRaw === "number" ? Math.max(0, extrapolateAmountRaw) : 0;
+  const extrapolationGhosts =
+    (debugExtrapolation || extrapolate) && extrapolateAmount > 0
+      ? stateView.getExtrapolationGhosts?.(extrapolateAmount)
+      : undefined;
 
   const items = collectScene(
     stateView.entities,
@@ -95,6 +104,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     tileRenderer,
     extraParticles ?? [],
     grassSheet !== undefined,
+    debugExtrapolation ? extrapolationGhosts : undefined,
   );
 
   drawScene2D(ctx, camera, items, sheets, grassSheet);
@@ -171,6 +181,8 @@ export function renderDebugOverlay(gc: GameContext): void {
       serverWy: stateView.serverPlayerPosition?.wy,
       serverWz: stateView.serverPlayerPosition?.wz,
       correction: stateView.predictionCorrection,
+      reconcileStats: stateView.reconcileStats,
+      extrapolationStats: stateView.extrapolationStats,
     },
     camera.getVisibleChunkRange(),
     gc.debugEnabled
