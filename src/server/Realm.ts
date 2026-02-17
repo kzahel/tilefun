@@ -446,7 +446,12 @@ export class Realm {
         // causing animation flicker on the client. Sprite state should only
         // change from actual player input, not from missing-input ticks.
         const airborne = session.player.jumpVZ !== undefined;
-        if (!airborne) {
+        if (airborne) {
+          // Match predictor physics: apply air friction when platformerAir is enabled.
+          if (movementPhysics.platformerAir) {
+            applyFriction(session.player, dt, 1.0, movementPhysics);
+          }
+        } else {
           const surface = getSurfaceProperties(
             session.player.position.wx,
             session.player.position.wy,

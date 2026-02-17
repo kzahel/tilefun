@@ -32,7 +32,7 @@ import type {
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
-import type { PlayerPredictor } from "./PlayerPredictor.js";
+import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
 
 export interface ExtrapolationGhost {
   entityId: number;
@@ -66,6 +66,8 @@ export interface ClientStateView {
   readonly predictionCorrection?:
     | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
     | undefined;
+  /** Last detailed reconciliation sample (serialized mode only). */
+  readonly predictionDiagnostics?: ReconcileDiagnostics | undefined;
   /** Rolling reconcile stats for debug overlay (serialized mode only). */
   readonly reconcileStats?:
     | {
@@ -494,6 +496,9 @@ export class RemoteStateView implements ClientStateView {
   get predictionCorrection() {
     return this._predictor?.lastCorrection;
   }
+  get predictionDiagnostics(): ReconcileDiagnostics | undefined {
+    return this._predictor?.lastReconcileDiagnostics ?? undefined;
+  }
   get reconcileStats() {
     return this._reconcileStats;
   }
@@ -553,7 +558,8 @@ export class RemoteStateView implements ClientStateView {
       if (entity.id === this._playerEntityId) continue;
       if (entity.type !== "player") continue;
       if (!entity.velocity || !entity.sprite) continue;
-      const speedSq = entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy;
+      const speedSq =
+        entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy;
       if (speedSq <= 0.0001) continue;
 
       const ghost: ExtrapolationGhost = {

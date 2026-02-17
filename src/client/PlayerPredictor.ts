@@ -27,6 +27,63 @@ export interface StoredInput {
   physics: MovementPhysicsParams;
 }
 
+export type ReconcileCauseTag =
+  | "dt_mismatch"
+  | "replay_backlog"
+  | "grounded_flip"
+  | "quantization_like"
+  | "param_mismatch"
+  | "jump_state"
+  | "velocity_drift";
+
+export interface ReconcileStateSnapshot {
+  wx: number;
+  wy: number;
+  wz: number;
+  vx: number;
+  vy: number;
+  jumpVZ: number;
+  grounded: boolean;
+}
+
+export interface ReconcileDiagnostics {
+  mode: "player" | "mount";
+  ackSeq: number;
+  serverTick: number | undefined;
+  expectedInputDt: number | undefined;
+  replayCount: number;
+  replayFirstSeq: number | undefined;
+  replayLastSeq: number | undefined;
+  replayDtMin: number;
+  replayDtMax: number;
+  replayDtAvg: number;
+  replayDtSpread: number;
+  replayPhysicsRevisions: readonly number[];
+  currentPhysicsRevision: number;
+  correctionPosErr: number;
+  correctionVelErr: number;
+  resimPosErr: number;
+  resimVelErr: number;
+  causeTags: readonly ReconcileCauseTag[];
+  predictedBefore: ReconcileStateSnapshot;
+  authoritative: ReconcileStateSnapshot;
+  predictedAfter: ReconcileStateSnapshot;
+}
+
+interface ReconcileReplayStats {
+  count: number;
+  firstSeq: number | undefined;
+  lastSeq: number | undefined;
+  dtMin: number;
+  dtMax: number;
+  dtAvg: number;
+  dtSpread: number;
+  revisions: readonly number[];
+  currentRevision: number;
+  hasMixedRevisions: boolean;
+  hasRevisionMismatch: boolean;
+}
+
 /**
  * Client-side player prediction with input replay reconciliation.
  *
@@ -67,6 +124,9 @@ export class PlayerPredictor {
   /** Last reconciliation correction (predicted - server, before replay). */
   private _lastCorrection = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
 
+  /** Last detailed reconciliation sample for diagnostics. */
+  private _lastReconcileDiagnostics: ReconcileDiagnostics | null = null;
+
   /** The predicted mount entity (null when not riding). */
   private predictedMount: Entity | null = null;
 
@@ -95,6 +155,7 @@ export class PlayerPredictor {
     this.inputBuffer = [];
     this.jumpConsumed = false;
     this.lastJumpHeld = false;
+    this._lastReconcileDiagnostics = null;
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
       this.predictedMount = this.clonePlayer(serverMount);
@@ -169,6 +230,7 @@ export class PlayerPredictor {
     props: readonly Prop[],
     entities: readonly Entity[],
     mountEntityId?: number,
+    diagnostics?: { expectedInputDt?: number; serverTick?: number },
   ): void {
     if (!this.predicted) {
       const serverMount =
@@ -178,6 +240,30 @@ export class PlayerPredictor {
       this.reset(serverPlayer, serverMount);
       return;
     }
+
+    const predictedBefore = this.snapshotEntity(this.predicted);
+    const authoritative = this.snapshotEntity(serverPlayer);
+    this._lastCorrection = {
+      wx: predictedBefore.wx - authoritative.wx,
+      wy: predictedBefore.wy - authoritative.wy,
+      wz: predictedBefore.wz - authoritative.wz,
+      vx: predictedBefore.vx - authoritative.vx,
+      vy: predictedBefore.vy - authoritative.vy,
+      jumpVZ: predictedBefore.jumpVZ - authoritative.jumpVZ,
+    };
+    let replayStats: ReconcileReplayStats = {
+      count: 0,
+      firstSeq: undefined,
+      lastSeq: undefined,
+      dtMin: 0,
+      dtMax: 0,
+      dtAvg: 0,
+      dtSpread: 0,
+      revisions: [],
+      currentRevision: getMovementPhysicsParams().revision,
+      hasMixedRevisions: false,
+      hasRevisionMismatch: false,
+    };
 
     // Detect mount from server state
     const serverMount =
@@ -240,6 +326,7 @@ export class PlayerPredictor {
 
       // Trim acknowledged inputs
       this.trimInputBuffer(lastProcessedInputSeq);
+      replayStats = this.collectReplayStats();
 
       // Replay unacknowledged inputs on mount
       for (const input of this.inputBuffer) {
@@ -272,10 +359,6 @@ export class PlayerPredictor {
 
       const oldX = this.predicted.position.wx;
       const oldY = this.predicted.position.wy;
-      const oldWz = this.predicted.wz ?? 0;
-      const oldVx = this.predicted.velocity?.vx ?? 0;
-      const oldVy = this.predicted.velocity?.vy ?? 0;
-      const oldJumpVZ = this.predicted.jumpVZ ?? 0;
 
       // Snap to server's authoritative position, velocity, and jump state.
       // Velocity must be snapped because the friction/acceleration model is
@@ -307,19 +390,9 @@ export class PlayerPredictor {
         delete this.predicted.jumpVZ;
       }
 
-      // Record correction: how much the server state differs from our prediction
-      // (before replay — this is the raw misprediction from the last server tick)
-      this._lastCorrection = {
-        wx: oldX - serverPlayer.position.wx,
-        wy: oldY - serverPlayer.position.wy,
-        wz: oldWz - (serverPlayer.wz ?? 0),
-        vx: oldVx - (serverPlayer.velocity?.vx ?? 0),
-        vy: oldVy - (serverPlayer.velocity?.vy ?? 0),
-        jumpVZ: oldJumpVZ - (serverPlayer.jumpVZ ?? 0),
-      };
-
       // Trim acknowledged inputs
       this.trimInputBuffer(lastProcessedInputSeq);
+      replayStats = this.collectReplayStats();
 
       // Replay unacknowledged inputs on top of server position
       for (const input of this.inputBuffer) {
@@ -381,6 +454,54 @@ export class PlayerPredictor {
       delete this.predicted.noShadow;
     }
     if (serverPlayer.deathTimer !== undefined) this.predicted.deathTimer = serverPlayer.deathTimer;
+
+    const predictedAfter = this.snapshotEntity(this.predicted);
+    const correctionPosErr = Math.hypot(
+      this._lastCorrection.wx,
+      this._lastCorrection.wy,
+      this._lastCorrection.wz,
+    );
+    const correctionVelErr = Math.hypot(this._lastCorrection.vx, this._lastCorrection.vy);
+    const resimPosErr = Math.hypot(
+      predictedAfter.wx - predictedBefore.wx,
+      predictedAfter.wy - predictedBefore.wy,
+      predictedAfter.wz - predictedBefore.wz,
+    );
+    const resimVelErr = Math.hypot(
+      predictedAfter.vx - predictedBefore.vx,
+      predictedAfter.vy - predictedBefore.vy,
+    );
+    this._lastReconcileDiagnostics = {
+      mode: serverMount ? "mount" : "player",
+      ackSeq: lastProcessedInputSeq,
+      serverTick: diagnostics?.serverTick,
+      expectedInputDt: diagnostics?.expectedInputDt,
+      replayCount: replayStats.count,
+      replayFirstSeq: replayStats.firstSeq,
+      replayLastSeq: replayStats.lastSeq,
+      replayDtMin: replayStats.dtMin,
+      replayDtMax: replayStats.dtMax,
+      replayDtAvg: replayStats.dtAvg,
+      replayDtSpread: replayStats.dtSpread,
+      replayPhysicsRevisions: replayStats.revisions,
+      currentPhysicsRevision: replayStats.currentRevision,
+      correctionPosErr,
+      correctionVelErr,
+      resimPosErr,
+      resimVelErr,
+      causeTags: this.inferReconcileCauseTags(
+        predictedBefore,
+        authoritative,
+        replayStats,
+        correctionPosErr,
+        correctionVelErr,
+        this._lastCorrection.jumpVZ,
+        diagnostics?.expectedInputDt,
+      ),
+      predictedBefore,
+      authoritative,
+      predictedAfter,
+    };
   }
 
   /** Clear predicted state (e.g. when switching worlds). */
@@ -388,6 +509,7 @@ export class PlayerPredictor {
     this.predicted = null;
     this.predictedMount = null;
     this.inputBuffer = [];
+    this._lastReconcileDiagnostics = null;
   }
 
   /** Get the predicted player entity (or null before first server state). */
@@ -430,6 +552,11 @@ export class PlayerPredictor {
     return this._lastCorrection;
   }
 
+  /** Get the last detailed reconciliation sample (or null before first reconcile). */
+  get lastReconcileDiagnostics(): ReconcileDiagnostics | null {
+    return this._lastReconcileDiagnostics;
+  }
+
   // ---- Private helpers ----
 
   private trimInputBuffer(lastProcessedInputSeq: number): void {
@@ -439,6 +566,111 @@ export class PlayerPredictor {
     } else if (firstUnackedIdx > 0) {
       this.inputBuffer = this.inputBuffer.slice(firstUnackedIdx);
     }
+  }
+
+  private snapshotEntity(entity: Entity): ReconcileStateSnapshot {
+    return {
+      wx: entity.position.wx,
+      wy: entity.position.wy,
+      wz: entity.wz ?? 0,
+      vx: entity.velocity?.vx ?? 0,
+      vy: entity.velocity?.vy ?? 0,
+      jumpVZ: entity.jumpVZ ?? 0,
+      grounded: entity.jumpVZ === undefined,
+    };
+  }
+
+  private collectReplayStats(): ReconcileReplayStats {
+    const currentRevision = getMovementPhysicsParams().revision;
+    const count = this.inputBuffer.length;
+    if (count === 0) {
+      return {
+        count: 0,
+        firstSeq: undefined,
+        lastSeq: undefined,
+        dtMin: 0,
+        dtMax: 0,
+        dtAvg: 0,
+        dtSpread: 0,
+        revisions: [],
+        currentRevision,
+        hasMixedRevisions: false,
+        hasRevisionMismatch: false,
+      };
+    }
+
+    let dtMin = Number.POSITIVE_INFINITY;
+    let dtMax = 0;
+    let dtSum = 0;
+    const revisions = new Set<number>();
+    const firstSeq = this.inputBuffer[0]?.seq;
+    const lastSeq = this.inputBuffer[count - 1]?.seq;
+    for (const input of this.inputBuffer) {
+      if (input.dt < dtMin) dtMin = input.dt;
+      if (input.dt > dtMax) dtMax = input.dt;
+      dtSum += input.dt;
+      revisions.add(input.physics.revision);
+    }
+    const revisionList = Array.from(revisions.values()).sort((a, b) => a - b);
+    return {
+      count,
+      firstSeq,
+      lastSeq,
+      dtMin,
+      dtMax,
+      dtAvg: dtSum / count,
+      dtSpread: dtMax - dtMin,
+      revisions: revisionList,
+      currentRevision,
+      hasMixedRevisions: revisionList.length > 1,
+      hasRevisionMismatch: revisionList.some((rev) => rev !== currentRevision),
+    };
+  }
+
+  private inferReconcileCauseTags(
+    predictedBefore: ReconcileStateSnapshot,
+    authoritative: ReconcileStateSnapshot,
+    replay: ReconcileReplayStats,
+    correctionPosErr: number,
+    correctionVelErr: number,
+    correctionJumpVZ: number,
+    expectedInputDt?: number,
+  ): ReconcileCauseTag[] {
+    const tags: ReconcileCauseTag[] = [];
+
+    if (expectedInputDt !== undefined && replay.count > 0) {
+      const dtDelta = Math.abs(replay.dtAvg - expectedInputDt);
+      const dtTolerance = Math.max(0.00025, expectedInputDt * 0.02);
+      if (dtDelta > dtTolerance || replay.dtSpread > dtTolerance) {
+        tags.push("dt_mismatch");
+      }
+    }
+
+    if (replay.count > 0 && correctionPosErr > 0.25 && correctionVelErr > 8) {
+      tags.push("replay_backlog");
+    }
+
+    if (predictedBefore.grounded !== authoritative.grounded) {
+      tags.push("grounded_flip");
+    }
+
+    if (replay.hasMixedRevisions || replay.hasRevisionMismatch) {
+      tags.push("param_mismatch");
+    }
+
+    if (Math.abs(correctionJumpVZ) > 0.2) {
+      tags.push("jump_state");
+    }
+
+    if (correctionVelErr > 12 && correctionPosErr > 0.25) {
+      tags.push("velocity_drift");
+    }
+
+    if (correctionPosErr > 0 && correctionPosErr < 0.2 && correctionVelErr < 0.15) {
+      tags.push("quantization_like");
+    }
+
+    return tags;
   }
 
   /**
