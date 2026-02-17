@@ -371,6 +371,7 @@ export class Realm {
         };
 
         for (const input of inputs) {
+          const inputDt = this.resolveInputStepDt(input.dtMs, dt);
           const mount =
             session.gameplaySession.mountId !== null
               ? (this.entityManager.entities.find((e) => e.id === session.gameplaySession.mountId) ??
@@ -379,7 +380,8 @@ export class Realm {
 
           if (mount) {
             // Riding: first jump press dismounts (held jump won't retrigger until release).
-            if (input.jump && !session.jumpConsumed) {
+            const jumpPressed = input.jumpPressed === true;
+            if ((jumpPressed || input.jump) && !session.jumpConsumed) {
               this.dismountPlayer(session);
               session.jumpConsumed = true;
             } else {
@@ -389,7 +391,7 @@ export class Realm {
               stepMountFromInput(
                 mount,
                 input,
-                dt,
+                inputDt,
                 mountCtx,
                 getHeight,
                 sampleSurfaces,
@@ -420,7 +422,7 @@ export class Realm {
           const nextState = stepPlayerFromInput(
             session.player,
             input,
-            dt,
+            inputDt,
             playerCtx,
             getHeight,
             sampleSurfaces,
@@ -646,6 +648,8 @@ export class Realm {
           dy: msg.dy,
           sprinting: msg.sprinting,
           jump: msg.jump,
+          jumpPressed: msg.jumpPressed,
+          dtMs: msg.dtMs,
           seq: msg.seq,
         });
         break;
@@ -998,6 +1002,14 @@ export class Realm {
   }
 
   // ---- Private ----
+
+  /** Resolve per-input simulation dt (seconds), clamped for server safety. */
+  private resolveInputStepDt(dtMs: number | undefined, fallbackDt: number): number {
+    if (dtMs === undefined) return fallbackDt;
+    const seconds = dtMs / 1000;
+    if (!Number.isFinite(seconds) || seconds <= 0) return fallbackDt;
+    return Math.min(0.1, seconds);
+  }
 
   /** Save respawn-safe location while the player is grounded on non-water. */
   private updateLastSafePosition(session: PlayerSession): void {

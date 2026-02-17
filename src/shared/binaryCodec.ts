@@ -765,7 +765,7 @@ function readWanderAIState(view: DataView, off: number): [WanderAIState, number]
 // ---- player-input encoding ----
 
 function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>): ArrayBuffer {
-  const buf = new ArrayBuffer(8);
+  const buf = new ArrayBuffer(10);
   const view = new DataView(buf);
   view.setUint8(0, TAG_PLAYER_INPUT);
   view.setUint32(1, msg.seq, true);
@@ -775,7 +775,10 @@ function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>
   let flags = 0;
   if (msg.sprinting) flags |= 0x01;
   if (msg.jump) flags |= 0x02;
+  if (msg.jumpPressed) flags |= 0x04;
   view.setUint8(7, flags);
+  const dtMs = quantizeInputDtMs(msg.dtMs ?? 0);
+  view.setUint16(8, Math.round(dtMs * 100), true);
   return buf;
 }
 
@@ -784,6 +787,8 @@ function decodePlayerInput(view: DataView): ClientMessage {
   const dx = view.getInt8(5) / 127;
   const dy = view.getInt8(6) / 127;
   const flags = view.getUint8(7);
+  const hasDt = view.byteLength >= 10;
+  const dtMs = hasDt ? view.getUint16(8, true) / 100 : 0;
   return {
     type: "player-input",
     seq,
@@ -791,6 +796,8 @@ function decodePlayerInput(view: DataView): ClientMessage {
     dy,
     sprinting: (flags & 0x01) !== 0,
     jump: (flags & 0x02) !== 0,
+    ...((flags & 0x04) !== 0 ? { jumpPressed: true } : {}),
+    ...(dtMs > 0 ? { dtMs } : {}),
   };
 }
 
@@ -1036,6 +1043,12 @@ function readChunkSnapshot(
  *  process identical values. */
 export function quantizeAxis(v: number): number {
   return Math.round(Math.max(-1, Math.min(1, v)) * 127) / 127;
+}
+
+/** Quantize command dt (ms) to the binary wire precision (0.01ms, u16-backed). */
+export function quantizeInputDtMs(v: number): number {
+  const clamped = Math.max(0, Math.min(655.35, v));
+  return Math.round(clamped * 100) / 100;
 }
 
 // ---- Exports for testing ----

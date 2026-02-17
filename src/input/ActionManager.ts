@@ -12,6 +12,8 @@ export interface Movement {
   dy: number;
   sprinting: boolean;
   jump: boolean;
+  /** Edge-triggered jump press sampled from input events (optional). */
+  jumpPressed?: boolean;
 }
 
 type DiscreteCallback = () => void;

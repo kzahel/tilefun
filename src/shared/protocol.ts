@@ -25,6 +25,10 @@ export type ClientMessage =
       dy: number;
       sprinting: boolean;
       jump: boolean;
+      /** Discrete jump edge since the previous command sample. */
+      jumpPressed?: boolean;
+      /** Command-step delta time in milliseconds (client simulation step). */
+      dtMs?: number;
     }
   | {
       type: "player-interact";

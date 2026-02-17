@@ -222,13 +222,14 @@ export function applyPlayerInputIntent(
 ): JumpInputState {
   applyMovementPhysics(entity, input, dt, ctx, physics);
 
+  const jumpPressed = input.jumpPressed === true || (input.jump && !state.lastJumpHeld);
   let jumpConsumed = state.jumpConsumed;
-  if (input.jump) {
-    if (entity.jumpVZ === undefined && !jumpConsumed) {
-      initiateJump(entity, physics);
-      jumpConsumed = true;
-    }
-  } else if (jumpConsumed) {
+  let jumpInitiated = false;
+  if (jumpPressed && entity.jumpVZ === undefined && !jumpConsumed) {
+    initiateJump(entity, physics);
+    jumpConsumed = true;
+    jumpInitiated = true;
+  } else if (!input.jump && jumpConsumed && !jumpInitiated) {
     cutJumpVelocity(entity, physics);
     jumpConsumed = false;
   }

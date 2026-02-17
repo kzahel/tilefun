@@ -3,6 +3,7 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { TICK_RATE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
+import { quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { GameServer } from "./GameServer.js";
 
@@ -21,18 +22,27 @@ interface TraceSample {
   correctionJumpVZErr: number;
   resimPosErr: number;
   resimVelErr: number;
+  authoritativeWz: number;
+  authoritativeJumpVZ: number;
   causeTags: readonly string[];
 }
 
 function createMovement(m: Movement): Movement {
-  return { dx: m.dx, dy: m.dy, sprinting: m.sprinting, jump: m.jump };
+  return {
+    dx: m.dx,
+    dy: m.dy,
+    sprinting: m.sprinting,
+    jump: m.jump,
+    ...(m.jumpPressed ? { jumpPressed: true } : {}),
+  };
 }
 
 function repeatMovement(m: Movement, count: number): Movement[] {
   return Array.from({ length: count }, () => createMovement(m));
 }
 
-function sendInput(transport: LocalTransport, seq: number, movement: Movement): void {
+function sendInput(transport: LocalTransport, seq: number, movement: Movement, dt: number): void {
+  const dtMs = quantizeInputDtMs(dt * 1000);
   transport.clientSide.send({
     type: "player-input",
     seq,
@@ -40,6 +50,8 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement): 
     dy: movement.dy,
     sprinting: movement.sprinting,
     jump: movement.jump,
+    jumpPressed: movement.jumpPressed,
+    dtMs,
   });
 }
 
@@ -79,10 +91,11 @@ function runTraceScenario(options: {
     const inputs = options.inputsForTick(tick);
 
     for (const movement of inputs) {
+      const commandStepDt = quantizeInputDtMs(commandDt * 1000) / 1000;
       seq++;
-      predictor.storeInput(seq, movement, commandDt);
-      predictor.update(commandDt, movement, world, [], []);
-      sendInput(transport, seq, movement);
+      predictor.storeInput(seq, movement, commandStepDt);
+      predictor.update(commandStepDt, movement, world, [], []);
+      sendInput(transport, seq, movement, commandStepDt);
     }
 
     server.tick(serverDt);
@@ -107,6 +120,8 @@ function runTraceScenario(options: {
       ),
       resimPosErr: diagnostics.resimPosErr,
       resimVelErr: diagnostics.resimVelErr,
+      authoritativeWz: diagnostics.authoritative.wz,
+      authoritativeJumpVZ: diagnostics.authoritative.jumpVZ,
       causeTags: diagnostics.causeTags,
     });
   }
@@ -174,7 +189,7 @@ describe("Netcode parity baseline trace harness", () => {
     expect(maxMetric(trace, "ackGap")).toBe(0);
   });
 
-  it("locks in current low-tick quick-tap jump mismatch signature", () => {
+  it("keeps low-tick quick-tap jump aligned with predictor", () => {
     const trace = runTraceScenario({
       serverTickHz: 15,
       commandRateHz: 60,
@@ -188,9 +203,33 @@ describe("Netcode parity baseline trace harness", () => {
     });
 
     const jumpStateSamples = trace.filter((sample) => sample.causeTags.includes("jump_state"));
-    expect(jumpStateSamples.length).toBeGreaterThan(0);
-    expect(maxMetric(trace, "correctionJumpVZErr")).toBeGreaterThan(0.2);
-    expect(maxMetric(trace, "correctionPosErr")).toBeGreaterThan(0.25);
+    expect(jumpStateSamples).toHaveLength(0);
+    expect(maxMetric(trace, "correctionJumpVZErr")).toBeLessThan(0.01);
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.01);
+    expect(maxMetric(trace, "resimPosErr")).toBeLessThan(0.01);
+  });
+
+  it("applies edge-triggered jumpPressed even when held jump samples are false", () => {
+    const trace = runTraceScenario({
+      serverTickHz: 15,
+      commandRateHz: 60,
+      ticks: 10,
+      inputsForTick: (tick) => {
+        if (tick === 0) {
+          return [
+            createMovement(IDLE),
+            { dx: 0, dy: 0, sprinting: false, jump: false, jumpPressed: true },
+            createMovement(IDLE),
+            createMovement(IDLE),
+          ];
+        }
+        return repeatMovement(IDLE, 4);
+      },
+    });
+
+    expect(maxMetric(trace, "authoritativeWz")).toBeGreaterThan(0);
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.01);
+    expect(maxMetric(trace, "correctionJumpVZErr")).toBeLessThan(0.01);
   });
 });
 

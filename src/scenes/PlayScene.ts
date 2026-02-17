@@ -7,7 +7,7 @@ import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
-import { quantizeAxis } from "../shared/binaryCodec.js";
+import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
@@ -94,6 +94,9 @@ export class PlayScene implements GameScene {
   private reconcileSamplesWithReplay = 0;
   private reconcileNotableWithReplay = 0;
   private nextReconcileLogAtMs = 0;
+  private jumpPressLatched = false;
+  private lastSampledJumpHeld = false;
+  private jumpPressUnsub: (() => void) | null = null;
 
   onEnter(gc: GameContext): void {
     // Attach touch buttons before joystick so button claims are processed first
@@ -109,6 +112,9 @@ export class PlayScene implements GameScene {
 
     // Zoom preset hotkeys
     this.bindZoomActions(gc);
+    this.jumpPressUnsub = gc.actions.on("jump", () => {
+      this.jumpPressLatched = true;
+    });
 
     // Audio systems
     this.footsteps = new FootstepSystem(
@@ -144,6 +150,10 @@ export class PlayScene implements GameScene {
     this.footsteps = null;
     this.ambient = null;
     this.dyingEntities.clear();
+    this.jumpPressUnsub?.();
+    this.jumpPressUnsub = null;
+    this.jumpPressLatched = false;
+    this.lastSampledJumpHeld = false;
     if (gc.serialized && this.predictor) {
       (gc.stateView as RemoteStateView).setPredictor(null);
       this.predictor = null;
@@ -207,11 +217,15 @@ export class PlayScene implements GameScene {
     // Player movement input — quantize dx/dy so prediction uses the same
     // values the server will see after binary decoding (no misprediction drift).
     const rawMovement = gc.actions.getMovement();
+    const jumpPressed = this.consumeJumpPressed(rawMovement.jump);
+    const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
+    const commandDt = commandDtMs / 1000;
     const movement = {
       dx: quantizeAxis(rawMovement.dx),
       dy: quantizeAxis(rawMovement.dy),
       sprinting: rawMovement.sprinting,
       jump: rawMovement.jump,
+      jumpPressed,
     };
     const seq = ++this.inputSeq;
     gc.transport.send({
@@ -221,6 +235,8 @@ export class PlayScene implements GameScene {
       dy: movement.dy,
       sprinting: movement.sprinting,
       jump: movement.jump,
+      jumpPressed: movement.jumpPressed,
+      dtMs: commandDtMs,
     });
 
     // Throw charge tracking
@@ -318,11 +334,9 @@ export class PlayScene implements GameScene {
         }
 
         // Store current input for future reconciliation, then predict.
-        // Scale dt by server timeScale so prediction matches server physics.
-        const scaledDt = dt * getTimeScale();
-        this.predictor.storeInput(seq, movement, scaledDt);
+        this.predictor.storeInput(seq, movement, commandDt);
         this.predictor.update(
-          scaledDt,
+          commandDt,
           movement,
           gc.stateView.world,
           gc.stateView.props,
@@ -615,6 +629,13 @@ export class PlayScene implements GameScene {
   private unbindZoomActions(): void {
     for (const unsub of this.zoomUnsubs) unsub();
     this.zoomUnsubs.length = 0;
+  }
+
+  private consumeJumpPressed(jumpHeld: boolean): boolean {
+    const pressed = this.jumpPressLatched || (jumpHeld && !this.lastSampledJumpHeld);
+    this.jumpPressLatched = false;
+    this.lastSampledJumpHeld = jumpHeld;
+    return pressed;
   }
 
   private detectBallSplashes(gc: GameContext): void {

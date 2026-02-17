@@ -3,6 +3,7 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { TICK_RATE } from "../config/constants.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { Movement } from "../input/ActionManager.js";
+import { quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { World } from "../world/World.js";
 import { GameServer } from "./GameServer.js";
@@ -31,6 +32,7 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement) {
     dy: movement.dy,
     sprinting: movement.sprinting,
     jump: movement.jump,
+    dtMs: quantizeInputDtMs(DT * 1000),
   });
 }
 

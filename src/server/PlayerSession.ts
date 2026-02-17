@@ -28,7 +28,15 @@ export class PlayerSession {
   realmId: string | null = null;
 
   /** Queued inputs from client (drained each tick). */
-  inputQueue: { dx: number; dy: number; sprinting: boolean; jump: boolean; seq: number }[] = [];
+  inputQueue: {
+    dx: number;
+    dy: number;
+    sprinting: boolean;
+    jump: boolean;
+    jumpPressed?: boolean;
+    dtMs?: number;
+    seq: number;
+  }[] = [];
 
   /** Sequence number of the last input actually consumed in tick(). */
   lastProcessedInputSeq = 0;
