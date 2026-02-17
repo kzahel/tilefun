@@ -229,7 +229,7 @@ fragmentation and retransmission automatically.
 | `gemsCollected`           | 1 (reliable)   | On pickup   | `svc_updatestat`              |
 | `editorEnabled`           | 1 (reliable)   | On toggle   | (no equivalent)               |
 | `mountEntityId`           | 1 (reliable)   | On mount    | `svc_updatestat`              |
-| `invincibilityTimer`      | 1 (reliable)   | On damage   | `svc_damage`                  |
+| `sync-invincibility`      | 1 (reliable)   | On start/reset | `svc_damage`               |
 
 ---
 

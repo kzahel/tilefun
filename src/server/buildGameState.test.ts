@@ -4,6 +4,7 @@ import type {
   ServerMessage,
   SyncChunksMessage,
   SyncCVarsMessage,
+  SyncInvincibilityMessage,
   SyncPlayerNamesMessage,
   SyncSessionMessage,
 } from "../shared/protocol.js";
@@ -283,6 +284,27 @@ describe("buildMessages sync events", () => {
     const tickMsgs3 = tickAndGetMessages(server, messages);
     const sessions = getSyncOfType<SyncSessionMessage>(tickMsgs3, "sync-session");
     expect(sessions).toHaveLength(0);
+  });
+
+  it("invincibility start sends one sync-invincibility event (not every decay tick)", () => {
+    const { server, messages } = createBroadcastingServer();
+    const session = server.getLocalSession();
+
+    // First tick initializes delta state
+    tickAndGetMessages(server, messages);
+
+    // Trigger invincibility
+    session.gameplaySession.invincibilityTimer = 0.75;
+    const tickMsgs2 = tickAndGetMessages(server, messages);
+    const inv2 = getSyncOfType<SyncInvincibilityMessage>(tickMsgs2, "sync-invincibility");
+    expect(inv2).toHaveLength(1);
+    expect(inv2[0]!.startTick).toBeGreaterThan(0);
+    expect(inv2[0]!.durationTicks).toBeGreaterThan(0);
+
+    // Next tick still invincible (decaying), but no new event
+    const tickMsgs3 = tickAndGetMessages(server, messages);
+    const inv3 = getSyncOfType<SyncInvincibilityMessage>(tickMsgs3, "sync-invincibility");
+    expect(inv3).toHaveLength(0);
   });
 
   it("frame always-present fields are always sent", () => {

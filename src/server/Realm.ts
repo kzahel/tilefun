@@ -86,6 +86,7 @@ import { WorldAPIImpl } from "./WorldAPI.js";
 interface ClientDeltaState {
   // Scalars — last-sent value (sentinel forces full first send)
   gemsCollected: number;
+  /** Last observed server-side timer, used to detect invincibility starts/resets. */
   invincibilityTimer: number;
   editorEnabled: boolean;
   mountEntityId: number | null;
@@ -1214,28 +1215,37 @@ export class Realm {
     if (entityExits.length > 0) frame.entityExits = entityExits;
     messages.push(frame);
 
-    // Sync: session scalars (gems, invincibility, editor, mount)
+    // Sync: session scalars (gems, editor, mount)
     const gems = session.gameplaySession.gemsCollected;
     const invTimer = session.gameplaySession.invincibilityTimer;
     const currentMount = session.gameplaySession.mountId;
     const sessionDirty =
       gems !== delta.gemsCollected ||
-      invTimer !== delta.invincibilityTimer ||
       session.editorEnabled !== delta.editorEnabled ||
       currentMount !== delta.mountEntityId;
     if (sessionDirty) {
       messages.push({
         type: "sync-session",
         gemsCollected: gems,
-        invincibilityTimer: invTimer,
         editorEnabled: session.editorEnabled,
         mountEntityId: currentMount,
       });
       delta.gemsCollected = gems;
-      delta.invincibilityTimer = invTimer;
       delta.editorEnabled = session.editorEnabled;
       delta.mountEntityId = currentMount;
     }
+
+    // Sync: invincibility event (start/reset only, countdown reconstructed client-side)
+    const invincibilityStarted =
+      invTimer > 0 && (delta.invincibilityTimer <= 0 || invTimer > delta.invincibilityTimer);
+    if (invincibilityStarted) {
+      messages.push({
+        type: "sync-invincibility",
+        startTick: this.tickCounter,
+        durationTicks: Math.max(1, Math.ceil(invTimer * this.tickRate)),
+      });
+    }
+    delta.invincibilityTimer = invTimer;
 
     // Sync: chunks (keys and/or data)
     loadedChunkKeys.sort();

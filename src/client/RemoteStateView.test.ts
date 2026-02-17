@@ -211,14 +211,46 @@ describe("RemoteStateView", () => {
     view.applyMessage({
       type: "sync-session",
       gemsCollected: 15,
-      invincibilityTimer: 2.5,
       editorEnabled: false,
       mountEntityId: null,
     });
 
     expect(view.gemsCollected).toBe(15);
-    expect(view.invincibilityTimer).toBe(2.5);
     expect(view.editorEnabled).toBe(false);
+  });
+
+  it("applies sync-invincibility and reconstructs countdown from serverTick", () => {
+    const world = new World(new FlatStrategy());
+    const view = new RemoteStateView(world);
+
+    view.applyFrame(
+      makeFrame({
+        serverTick: 100,
+        playerEntityId: 1,
+      }),
+    );
+    view.applyMessage({
+      type: "sync-invincibility",
+      startTick: 100,
+      durationTicks: 60,
+    });
+    expect(view.invincibilityTimer).toBeCloseTo(1, 3);
+
+    view.applyFrame(
+      makeFrame({
+        serverTick: 130,
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.invincibilityTimer).toBeCloseTo(0.5, 3);
+
+    view.applyFrame(
+      makeFrame({
+        serverTick: 160,
+        playerEntityId: 1,
+      }),
+    );
+    expect(view.invincibilityTimer).toBe(0);
   });
 
   it("applies chunk updates from sync-chunks", () => {
@@ -283,7 +315,6 @@ describe("RemoteStateView", () => {
     view.applyMessage({
       type: "sync-session",
       gemsCollected: 42,
-      invincibilityTimer: 0,
       editorEnabled: true,
       mountEntityId: null,
     });
@@ -492,13 +523,11 @@ describe("RemoteStateView", () => {
     view.applyMessage({
       type: "sync-session",
       gemsCollected: 15,
-      invincibilityTimer: 2.5,
       editorEnabled: false,
       mountEntityId: null,
     });
 
     expect(view.gemsCollected).toBe(15);
-    expect(view.invincibilityTimer).toBe(2.5);
     expect(view.editorEnabled).toBe(false);
 
     // Second tick: only frame, no sync-session — values should be retained
@@ -510,7 +539,6 @@ describe("RemoteStateView", () => {
     );
 
     expect(view.gemsCollected).toBe(15);
-    expect(view.invincibilityTimer).toBe(2.5);
     expect(view.editorEnabled).toBe(false);
   });
 
@@ -528,7 +556,6 @@ describe("RemoteStateView", () => {
     view.applyMessage({
       type: "sync-session",
       gemsCollected: 0,
-      invincibilityTimer: 0,
       editorEnabled: true,
       mountEntityId: 42,
     });
@@ -542,7 +569,6 @@ describe("RemoteStateView", () => {
     view.applyMessage({
       type: "sync-session",
       gemsCollected: 0,
-      invincibilityTimer: 0,
       editorEnabled: true,
       mountEntityId: null,
     });

@@ -206,10 +206,18 @@ export interface FrameMessage {
 export interface SyncSessionMessage {
   type: "sync-session";
   gemsCollected: number;
-  invincibilityTimer: number;
   editorEnabled: boolean;
   /** null = not riding. Absence of entire SyncSession = unchanged. */
   mountEntityId: number | null;
+}
+
+/** Event-style invincibility sync: countdown is reconstructed client-side. */
+export interface SyncInvincibilityMessage {
+  type: "sync-invincibility";
+  /** Server tick when invincibility started/reset. */
+  startTick: number;
+  /** Duration in ticks at the server tick rate when the event was emitted. */
+  durationTicks: number;
 }
 
 export interface SyncChunksMessage {
@@ -240,6 +248,7 @@ export interface SyncEditorCursorsMessage {
 
 export type SyncMessage =
   | SyncSessionMessage
+  | SyncInvincibilityMessage
   | SyncChunksMessage
   | SyncPropsMessage
   | SyncCVarsMessage

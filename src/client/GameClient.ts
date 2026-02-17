@@ -205,6 +205,7 @@ export class GameClient {
         if (
           msg.type === "frame" ||
           msg.type === "sync-session" ||
+          msg.type === "sync-invincibility" ||
           msg.type === "sync-chunks" ||
           msg.type === "sync-props" ||
           msg.type === "sync-cvars" ||

@@ -737,9 +737,18 @@ describe("JSON fallback", () => {
     const msg: ServerMessage = {
       type: "sync-session",
       gemsCollected: 15,
-      invincibilityTimer: 0,
       editorEnabled: true,
       mountEntityId: null,
+    };
+    const decoded = roundtripServer(msg);
+    expect(decoded).toEqual(msg);
+  });
+
+  it("roundtrips sync-invincibility via JSON fallback", () => {
+    const msg: ServerMessage = {
+      type: "sync-invincibility",
+      startTick: 1200,
+      durationTicks: 45,
     };
     const decoded = roundtripServer(msg);
     expect(decoded).toEqual(msg);

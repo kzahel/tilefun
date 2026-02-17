@@ -22,6 +22,7 @@ import type {
   SyncChunksMessage,
   SyncCVarsMessage,
   SyncEditorCursorsMessage,
+  SyncInvincibilityMessage,
   SyncPlayerNamesMessage,
   SyncPropsMessage,
   SyncSessionMessage,
@@ -110,6 +111,9 @@ export class RemoteStateView implements ClientStateView {
   private _playerEntityId = -1;
   private _gemsCollected = 0;
   private _invincibilityTimer = 0;
+  private _invincibilityStartTick = -1;
+  private _invincibilityDurationTicks = 0;
+  private _invincibilityTickRate = TICK_RATE;
   private _editorEnabled = true;
   private _remoteCursors: RemoteEditorCursor[] = [];
   private _playerNames: Record<number, string> = {};
@@ -183,6 +187,9 @@ export class RemoteStateView implements ClientStateView {
       case "sync-session":
         this.applySyncSession(msg);
         break;
+      case "sync-invincibility":
+        this.applySyncInvincibility(msg);
+        break;
       case "sync-chunks":
         this.applySyncChunks(msg);
         break;
@@ -214,6 +221,7 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = msg.playerEntityId;
     this._serverTick = msg.serverTick;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
+    this.updateInvincibilityTimer();
 
     // Save prev positions for interpolation before applying updates
     for (const e of this._entityMap.values()) {
@@ -252,7 +260,7 @@ export class RemoteStateView implements ClientStateView {
     this._entities = Array.from(this._entityMap.values());
   }
 
-  /** Apply session sync (gems, invincibility, editor, mount). */
+  /** Apply session sync (gems, editor, mount). */
   private applySyncSession(msg: SyncSessionMessage): void {
     if (msg.editorEnabled !== this._editorEnabled) {
       console.log(
@@ -260,9 +268,16 @@ export class RemoteStateView implements ClientStateView {
       );
     }
     this._gemsCollected = msg.gemsCollected;
-    this._invincibilityTimer = msg.invincibilityTimer;
     this._editorEnabled = msg.editorEnabled;
     this._mountEntityId = msg.mountEntityId ?? undefined;
+  }
+
+  /** Apply invincibility start/reset event and reconstruct countdown locally. */
+  private applySyncInvincibility(msg: SyncInvincibilityMessage): void {
+    this._invincibilityStartTick = msg.startTick;
+    this._invincibilityDurationTicks = msg.durationTicks;
+    this._invincibilityTickRate = this._tickRate;
+    this.updateInvincibilityTimer();
   }
 
   /** Apply chunk sync (terrain data and/or loaded chunk set). */
@@ -310,6 +325,7 @@ export class RemoteStateView implements ClientStateView {
     setPlatformerAir(msg.cvars.platformerAir);
     setTimeScale(msg.cvars.timeScale);
     this._tickRate = msg.cvars.tickRate;
+    this.updateInvincibilityTimer();
   }
 
   /** Apply player names sync. */
@@ -333,6 +349,9 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = -1;
     this._gemsCollected = 0;
     this._invincibilityTimer = 0;
+    this._invincibilityStartTick = -1;
+    this._invincibilityDurationTicks = 0;
+    this._invincibilityTickRate = TICK_RATE;
     this._remoteCursors = [];
     this._playerNames = {};
     this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
@@ -373,6 +392,22 @@ export class RemoteStateView implements ClientStateView {
   }
   get invincibilityTimer(): number {
     return this._invincibilityTimer;
+  }
+
+  private updateInvincibilityTimer(): void {
+    if (this._invincibilityDurationTicks <= 0 || this._invincibilityStartTick < 0) {
+      this._invincibilityTimer = 0;
+      return;
+    }
+    const elapsedTicks = Math.max(0, this._serverTick - this._invincibilityStartTick);
+    const remainingTicks = this._invincibilityDurationTicks - elapsedTicks;
+    if (remainingTicks <= 0) {
+      this._invincibilityTimer = 0;
+      this._invincibilityDurationTicks = 0;
+      this._invincibilityStartTick = -1;
+      return;
+    }
+    this._invincibilityTimer = remainingTicks / this._invincibilityTickRate;
   }
   get editorEnabled(): boolean {
     return this._editorEnabled;
