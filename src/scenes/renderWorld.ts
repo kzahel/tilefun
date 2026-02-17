@@ -157,6 +157,7 @@ export function renderDebugOverlay(gc: GameContext): void {
   if (collision & CollisionFlag.Solid) collisionParts.push("Solid");
   if (collision & CollisionFlag.Water) collisionParts.push("Water");
   if (collision & CollisionFlag.SlowWalk) collisionParts.push("SlowWalk");
+  const transportDebug = gc.transport.getDebugInfo?.();
 
   drawDebugOverlay(
     ctx,
@@ -166,6 +167,8 @@ export function renderDebugOverlay(gc: GameContext): void {
     {
       fps: currentFps,
       netKbps: gc.transport.bytesReceived !== undefined ? currentNetKbps : undefined,
+      transport: transportDebug?.transport,
+      transportRttMs: transportDebug?.rttMs,
       entityCount: stateView.entities.length,
       chunkCount: stateView.world.chunks.loadedCount,
       playerWx: px,

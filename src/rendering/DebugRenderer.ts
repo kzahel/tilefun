@@ -30,6 +30,10 @@ export interface DebugInfo {
   serverWz?: number | undefined;
   /** Network receive rate in KB/s (undefined = not tracked). */
   netKbps?: number | undefined;
+  /** Human-readable active client transport label. */
+  transport?: string | undefined;
+  /** Transport RTT in milliseconds when available (e.g. WebRTC). */
+  transportRttMs?: number | undefined;
   /** Last reconciliation correction (predicted - server, before replay). */
   correction?:
     | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
@@ -48,8 +52,11 @@ export interface DebugInfo {
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
   const netLabel = info.netKbps !== undefined ? `  Net: ${info.netKbps.toFixed(1)} KB/s` : "";
+  const transportLabel = info.transport ? `  Tx: ${info.transport}` : "";
+  const rttLabel =
+    info.transportRttMs !== undefined ? `  RTT: ${info.transportRttMs.toFixed(1)}ms` : "";
   const lines = [
-    `FPS: ${info.fps}${netLabel}`,
+    `FPS: ${info.fps}${netLabel}${transportLabel}${rttLabel}`,
     `Entities: ${info.entityCount}  Chunks: ${info.chunkCount}`,
     `Pos: (${info.playerWx.toFixed(1)}, ${info.playerWy.toFixed(1)}, Z=${(info.playerWz ?? 0).toFixed(1)})  Tile: (${info.playerTx}, ${info.playerTy})`,
     `Terrain: ${info.terrainName}`,

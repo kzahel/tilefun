@@ -4,6 +4,10 @@ import { type WebSocket, WebSocketServer } from "ws";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "./Transport.js";
+import {
+  fragmentForDataChannel,
+  WEBRTC_FRAGMENT_DEFAULT_MAX_PAYLOAD_BYTES,
+} from "./webrtcFragment.js";
 
 type NodeDataChannelModule = typeof nodeDataChannelImport;
 type PeerConnectionLike = InstanceType<NodeDataChannelModule["PeerConnection"]>;
@@ -55,6 +59,7 @@ export class WebRtcServerTransport implements IServerTransport {
   private readonly clients = new Map<string, ClientState>();
   private readonly replacedSockets = new Set<WebSocket>();
   private readonly iceServers: readonly string[];
+  private nextFragmentMessageId = 1;
   private messageHandler: ((clientId: string, msg: ClientMessage) => void) | null = null;
   private connectHandler: ((clientId: string) => void) | null = null;
   private disconnectHandler: ((clientId: string) => void) | null = null;
@@ -89,14 +94,14 @@ export class WebRtcServerTransport implements IServerTransport {
     const client = this.clients.get(clientId);
     if (!client?.connected || !client.dataChannel) return;
     const encoded = encodeServerMessage(msg);
-    sendBinary(client.dataChannel, encoded);
+    this.sendEncoded(clientId, client, encoded);
   }
 
   broadcast(msg: ServerMessage): void {
     const encoded = encodeServerMessage(msg);
-    for (const client of this.clients.values()) {
+    for (const [clientId, client] of this.clients) {
       if (!client.connected || !client.dataChannel) continue;
-      sendBinary(client.dataChannel, encoded);
+      this.sendEncoded(clientId, client, encoded);
     }
   }
 
@@ -293,6 +298,38 @@ export class WebRtcServerTransport implements IServerTransport {
       this.disconnectHandler?.(clientId);
     }
   }
+
+  private sendEncoded(clientId: string, client: ClientState, encoded: ArrayBuffer): void {
+    const source = new Uint8Array(encoded);
+    let maxPayload = WEBRTC_FRAGMENT_DEFAULT_MAX_PAYLOAD_BYTES;
+
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const packets = this.buildPackets(source, maxPayload);
+      try {
+        for (const packet of packets) {
+          sendBinary(client.dataChannel, packet);
+        }
+        return;
+      } catch (err) {
+        if (!isMessageSizeLimitError(err) || maxPayload <= 512) {
+          console.error(`[tilefun] WebRTC send failed for ${clientId}:`, err);
+          return;
+        }
+        maxPayload = Math.max(512, Math.floor(maxPayload / 2));
+      }
+    }
+  }
+
+  private buildPackets(encoded: Uint8Array, maxPayload: number): Uint8Array[] {
+    return fragmentForDataChannel(encoded, this.allocateFragmentMessageId(), maxPayload);
+  }
+
+  private allocateFragmentMessageId(): number {
+    const id = this.nextFragmentMessageId >>> 0;
+    this.nextFragmentMessageId = (this.nextFragmentMessageId + 1) >>> 0;
+    if (this.nextFragmentMessageId === 0) this.nextFragmentMessageId = 1;
+    return id;
+  }
 }
 
 function toArrayBuffer(data: string | ArrayBuffer | Uint8Array): ArrayBuffer | null {
@@ -306,14 +343,13 @@ function toArrayBuffer(data: string | ArrayBuffer | Uint8Array): ArrayBuffer | n
 
 function sendBinary(
   dataChannel: { sendMessageBinary?(data: Uint8Array): void; sendMessage?(data: Uint8Array): void },
-  msg: ArrayBuffer,
+  msg: Uint8Array,
 ): void {
-  const bytes = new Uint8Array(msg);
   if (dataChannel.sendMessageBinary) {
-    dataChannel.sendMessageBinary(bytes);
+    dataChannel.sendMessageBinary(msg);
     return;
   }
-  dataChannel.sendMessage?.(bytes);
+  dataChannel.sendMessage?.(msg);
 }
 
 async function loadNodeDataChannel(): Promise<NodeDataChannelModule> {
@@ -347,4 +383,9 @@ function toText(data: unknown): string | null {
     return new TextDecoder().decode(merged);
   }
   return null;
+}
+
+function isMessageSizeLimitError(err: unknown): boolean {
+  if (!(err instanceof Error)) return false;
+  return err.message.includes("Message size exceeds limit");
 }

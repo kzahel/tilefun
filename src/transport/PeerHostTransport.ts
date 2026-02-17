@@ -56,6 +56,9 @@ export class PeerHostTransport {
       close(): void {
         self.closed = true;
       },
+      getDebugInfo() {
+        return { transport: "Host local (P2P guests via WebRTC)" };
+      },
     };
 
     // --- serverSide: for GameServer (routes to local + remote) ---

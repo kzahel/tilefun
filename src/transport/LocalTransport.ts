@@ -27,6 +27,9 @@ export class LocalTransport {
       close(): void {
         self.closed = true;
       },
+      getDebugInfo() {
+        return { transport: "Local in-memory" };
+      },
     };
 
     this.serverSide = {

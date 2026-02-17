@@ -43,6 +43,9 @@ export class SerializingTransport {
       get bytesReceived() {
         return rxBytes;
       },
+      getDebugInfo() {
+        return { transport: "In-memory binary loopback" };
+      },
     };
 
     this.serverSide = {

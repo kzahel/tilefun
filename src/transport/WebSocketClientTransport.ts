@@ -55,4 +55,16 @@ export class WebSocketClientTransport implements IClientTransport {
   close(): void {
     this.ws.close();
   }
+
+  getDebugInfo() {
+    const state =
+      this.ws.readyState === WebSocket.CONNECTING
+        ? "connecting"
+        : this.ws.readyState === WebSocket.OPEN
+          ? "open"
+          : this.ws.readyState === WebSocket.CLOSING
+            ? "closing"
+            : "closed";
+    return { transport: `WebSocket (${state})` };
+  }
 }

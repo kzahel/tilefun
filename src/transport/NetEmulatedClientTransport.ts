@@ -1,5 +1,5 @@
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
-import type { IClientTransport } from "./Transport.js";
+import type { ClientTransportDebugInfo, IClientTransport } from "./Transport.js";
 
 export interface NetEmulationConfig {
   enabled: boolean;
@@ -54,6 +54,12 @@ export class NetEmulatedClientTransport implements IClientTransport {
 
   get bytesReceived(): number {
     return this.base.bytesReceived ?? 0;
+  }
+
+  getDebugInfo(): ClientTransportDebugInfo {
+    const base = this.base.getDebugInfo?.() ?? { transport: "Unknown" };
+    if (!this.config.enabled) return base;
+    return { ...base, transport: `${base.transport} + netem` };
   }
 
   send(msg: ClientMessage): void {

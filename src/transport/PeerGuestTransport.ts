@@ -211,6 +211,11 @@ export class PeerGuestTransport implements IClientTransport {
     this.peer.destroy();
   }
 
+  getDebugInfo() {
+    const dcState = this.conn?.open ? "open" : "closed";
+    return { transport: `WebRTC P2P (${dcState})` };
+  }
+
   private emitStatus(status: PeerGuestStatus, detail?: string): void {
     this.onStatus?.(status, detail);
   }
