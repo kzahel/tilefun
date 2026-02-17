@@ -77,14 +77,15 @@ export function resolveGroundZForTracking(
   props: readonly PropSurface[],
   entities: readonly EntitySurface[],
 ): number {
-  if (!entity.collider) {
-    return getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
-  }
-  const footprint = getEntityAABB(entity.position, entity.collider);
-  let groundZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
-  const propZ = getWalkablePropSurfaceZ(footprint, entity.wz ?? 0, props);
+  const groundFootprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
+  let groundZ = getTerrainGroundZ(entity, getHeight);
+  const propZ = groundFootprint
+    ? getWalkablePropSurfaceZ(groundFootprint, entity.wz ?? 0, props)
+    : undefined;
   if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
-  const entZ = getWalkableEntitySurfaceZ(footprint, entity.id, entity.wz ?? 0, entities);
+  const entZ = groundFootprint
+    ? getWalkableEntitySurfaceZ(groundFootprint, entity.id, entity.wz ?? 0, entities)
+    : undefined;
   if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
   return groundZ;
 }
@@ -107,26 +108,46 @@ export function resolveGroundZForLanding(
   entities?: readonly EntitySurface[],
   prevWz?: number,
 ): number {
-  if (!entity.collider) {
-    return getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
-  }
-  const footprint = getEntityAABB(entity.position, entity.collider);
-  let groundZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
+  const groundFootprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
+  let groundZ = getTerrainGroundZ(entity, getHeight);
   if (props) {
-    const propZ = getHighestWalkablePropSurfaceZ(footprint, props);
+    const propZ = groundFootprint
+      ? getHighestWalkablePropSurfaceZ(groundFootprint, props)
+      : undefined;
     if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
   }
   if (entities) {
-    const entZ = getHighestWalkableEntitySurfaceZ(
-      footprint,
-      entity.id,
-      entity.wz ?? 0,
-      entities,
-      prevWz,
-    );
+    const entZ = groundFootprint
+      ? getHighestWalkableEntitySurfaceZ(
+          groundFootprint,
+          entity.id,
+          entity.wz ?? 0,
+          entities,
+          prevWz,
+        )
+      : undefined;
     if (entZ !== undefined && entZ > groundZ) groundZ = entZ;
   }
   return groundZ;
+}
+
+/**
+ * Terrain ground Z for an entity.
+ * For colliders, include both full-footprint max and feet tile surface so
+ * offset colliders don't drop below the tile under their feet at edges.
+ */
+function getTerrainGroundZ(
+  entity: {
+    position: { wx: number; wy: number };
+    collider: ColliderComponent | null;
+  },
+  getHeight: (tx: number, ty: number) => number,
+): number {
+  const feetZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
+  if (!entity.collider) return feetZ;
+  const footprint = getEntityAABB(entity.position, entity.collider);
+  const footprintZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
+  return Math.max(footprintZ, feetZ);
 }
 
 /**

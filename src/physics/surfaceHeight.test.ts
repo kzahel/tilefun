@@ -4,6 +4,7 @@ import {
   applyGroundTracking,
   getEffectiveGroundZ,
   getMaxSurfaceZUnderAABB,
+  resolveGroundZForTracking,
   resolveGroundZForLanding,
   getSurfaceZ,
   isElevationBlocked3D,
@@ -196,12 +197,33 @@ describe("getEffectiveGroundZ", () => {
   });
 });
 
+describe("resolveGroundZForTracking", () => {
+  it("includes feet tile height when an offset collider's AABB has left the north edge", () => {
+    // Elevated tile at (0,0), flat north tile at (0,-1)
+    const getHeight = heightMap({ "0,0": 2 });
+    // Player-like collider whose AABB sits above feet.
+    // At wy=0.5 (still on tile 0), AABB bottom is -2.5 and no longer overlaps tile 0.
+    const collider = { offsetX: 0, offsetY: -3, width: 10, height: 6 };
+    const entity = { position: { wx: 8, wy: 0.5 }, collider, id: 1, wz: 2 * ELEVATION_PX };
+
+    expect(resolveGroundZForTracking(entity, getHeight, [], [])).toBe(2 * ELEVATION_PX);
+  });
+});
+
 describe("resolveGroundZForLanding", () => {
   const collider = { offsetX: 0, offsetY: 0, width: 10, height: 10 };
 
   it("uses AABB-max terrain when entity has a collider", () => {
     const getHeight = heightMap({ "1,0": 2 });
     const entity = { position: { wx: 14, wy: 5 }, collider, id: 1, wz: 2 * ELEVATION_PX };
+    expect(resolveGroundZForLanding(entity, getHeight)).toBe(2 * ELEVATION_PX);
+  });
+
+  it("includes feet tile height when an offset collider's AABB has left the north edge", () => {
+    const getHeight = heightMap({ "0,0": 2 });
+    const offsetCollider = { offsetX: 0, offsetY: -3, width: 10, height: 6 };
+    const entity = { position: { wx: 8, wy: 0.5 }, collider: offsetCollider, id: 1, wz: 4 };
+
     expect(resolveGroundZForLanding(entity, getHeight)).toBe(2 * ELEVATION_PX);
   });
 
