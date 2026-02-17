@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
-import { TICK_RATE } from "../config/constants.js";
+import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
 import { quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
+import { tileToChunk, tileToLocal, worldToTile } from "../world/types.js";
 import { GameServer } from "./GameServer.js";
 
 const IDLE: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
@@ -75,27 +77,95 @@ function createRig(serverTickHz: number) {
   return { transport, server, session, world, predictor };
 }
 
-function runTraceScenario(options: {
+interface TraceRigContext {
+  transport: LocalTransport;
+  server: GameServer;
+  session: ReturnType<GameServer["getLocalSession"]>;
+  world: GameServer["world"];
+  predictor: PlayerPredictor;
+}
+
+interface TraceScenarioOptions {
   serverTickHz: number;
   commandRateHz: number;
   ticks: number;
   inputsForTick: (tick: number) => Movement[];
-}): TraceSample[] {
+  inputDeliveryDelayTicks?: number;
+  postTicks?: number;
+  setupRig?: (ctx: TraceRigContext) => void;
+}
+
+function setTileFixture(
+  world: GameServer["world"],
+  tx: number,
+  ty: number,
+  height: number,
+  collision: number,
+): void {
+  const { cx, cy } = tileToChunk(tx, ty);
+  const { lx, ly } = tileToLocal(tx, ty);
+  const chunk = world.getChunk(cx, cy);
+  chunk.setHeight(lx, ly, height);
+  chunk.setCollision(lx, ly, collision);
+}
+
+function setupElevationEdgeFixture(
+  world: GameServer["world"],
+  session: ReturnType<GameServer["getLocalSession"]>,
+): void {
+  const { tx, ty } = worldToTile(session.player.position.wx, session.player.position.wy);
+  for (let y = ty - 1; y <= ty + 1; y++) {
+    for (let x = tx - 2; x <= tx + 8; x++) {
+      const elevated = x >= tx + 2 && x <= tx + 5;
+      setTileFixture(world, x, y, elevated ? 2 : 0, CollisionFlag.None);
+    }
+  }
+  session.player.position.wx = (tx + 1) * TILE_SIZE + TILE_SIZE * 0.25;
+  session.player.position.wy = ty * TILE_SIZE + TILE_SIZE * 0.5;
+  session.player.wz = 0;
+  session.player.groundZ = 0;
+  session.player.velocity = { vx: 0, vy: 0 };
+  delete session.player.jumpZ;
+  delete session.player.jumpVZ;
+}
+
+function runTraceScenario(options: TraceScenarioOptions): TraceSample[] {
   const { transport, server, session, world, predictor } = createRig(options.serverTickHz);
+  options.setupRig?.({ transport, server, session, world, predictor });
+  predictor.reset(session.player);
   const serverDt = 1 / options.serverTickHz;
   const commandDt = 1 / options.commandRateHz;
+  const inputDeliveryDelayTicks = Math.max(0, options.inputDeliveryDelayTicks ?? 0);
+  const postTicks = Math.max(0, options.postTicks ?? 0);
+  const totalTicks = options.ticks + postTicks;
   const trace: TraceSample[] = [];
+  const pendingInputs: Array<{
+    deliverTick: number;
+    seq: number;
+    movement: Movement;
+    dt: number;
+  }> = [];
   let seq = 0;
 
-  for (let tick = 0; tick < options.ticks; tick++) {
-    const inputs = options.inputsForTick(tick);
+  for (let tick = 0; tick < totalTicks; tick++) {
+    const inputs = tick < options.ticks ? options.inputsForTick(tick) : [];
 
     for (const movement of inputs) {
       const commandStepDt = quantizeInputDtMs(commandDt * 1000) / 1000;
       seq++;
       predictor.storeInput(seq, movement, commandStepDt);
       predictor.update(commandStepDt, movement, world, [], []);
-      sendInput(transport, seq, movement, commandStepDt);
+      pendingInputs.push({
+        deliverTick: tick + inputDeliveryDelayTicks,
+        seq,
+        movement,
+        dt: commandStepDt,
+      });
+    }
+
+    while (pendingInputs.length > 0 && pendingInputs[0]!.deliverTick <= tick) {
+      const next = pendingInputs.shift()!;
+      sendInput(transport, next.seq, next.movement, next.dt);
     }
 
     server.tick(serverDt);
@@ -260,6 +330,77 @@ describe("Netcode parity baseline trace harness", () => {
     expect(maxMetric(trace, "correctionJumpVZErr")).toBeLessThan(0.02);
     expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.02);
     expect(maxMetric(trace, "resimPosErr")).toBeLessThan(0.02);
+  });
+
+  it("keeps elevation-edge jump and landing parity aligned", () => {
+    const jumpRightHeld: Movement = { ...RIGHT, jump: true };
+    const trace = runTraceScenario({
+      serverTickHz: 20,
+      commandRateHz: 60,
+      ticks: 20,
+      setupRig: ({ session, predictor, world }) => {
+        setupElevationEdgeFixture(world, session);
+        session.debugNoclip = false;
+        predictor.noclip = false;
+      },
+      inputsForTick: (tick) => {
+        if (tick < 4) return repeatMovement(RIGHT, 3);
+        if (tick === 4) {
+          return [
+            { ...jumpRightHeld, jumpPressed: true },
+            createMovement(jumpRightHeld),
+            createMovement(jumpRightHeld),
+          ];
+        }
+        if (tick < 10) return repeatMovement(jumpRightHeld, 3);
+        if (tick < 16) return repeatMovement(RIGHT, 3);
+        return repeatMovement(IDLE, 3);
+      },
+    });
+
+    expect(maxMetric(trace, "authoritativeWz")).toBeGreaterThan(0);
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.05);
+    expect(maxMetric(trace, "correctionVelErr")).toBeLessThan(0.1);
+    expect(maxMetric(trace, "resimPosErr")).toBeLessThan(0.05);
+  });
+
+  it("keeps delayed-ack elevation-edge landing reconcile stable", () => {
+    const jumpRightHeld: Movement = { ...RIGHT, jump: true };
+    const trace = runTraceScenario({
+      serverTickHz: 20,
+      commandRateHz: 60,
+      ticks: 20,
+      postTicks: 4,
+      inputDeliveryDelayTicks: 2,
+      setupRig: ({ session, predictor, world }) => {
+        setupElevationEdgeFixture(world, session);
+        session.debugNoclip = false;
+        predictor.noclip = false;
+      },
+      inputsForTick: (tick) => {
+        if (tick < 4) return repeatMovement(RIGHT, 3);
+        if (tick === 4) {
+          return [
+            { ...jumpRightHeld, jumpPressed: true },
+            createMovement(jumpRightHeld),
+            createMovement(jumpRightHeld),
+          ];
+        }
+        if (tick < 10) return repeatMovement(jumpRightHeld, 3);
+        if (tick < 16) return repeatMovement(RIGHT, 3);
+        return repeatMovement(IDLE, 3);
+      },
+    });
+
+    expect(trace.some((sample) => sample.ackGap > 0)).toBe(true);
+    expect(trace.some((sample) => sample.causeTags.includes("replay_backlog"))).toBe(true);
+    expect(maxMetric(trace, "authoritativeWz")).toBeGreaterThan(0);
+    expect(maxMetric(trace, "correctionPosErr")).toBeGreaterThan(0.5);
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(20);
+    const settled = trace[trace.length - 1]!;
+    expect(settled.ackGap).toBe(0);
+    expect(settled.correctionPosErr).toBeLessThan(1.0);
+    expect(settled.resimPosErr).toBeLessThan(1.0);
   });
 });
 

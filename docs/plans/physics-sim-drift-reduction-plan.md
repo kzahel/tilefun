@@ -49,12 +49,20 @@ Last updated: 2026-02-17
   - `/Users/kgraehl/code/tilefun/src/physics/physicsParity.test.ts` (structured gravity outcome + water-entry step outcome assertions).
   - `/Users/kgraehl/code/tilefun/src/server/NetcodeParityBaseline.test.ts` (held-jump landing reconcile parity scenario).
 
-4. Build/type hygiene status: Complete for current blockers
+4. Phase 4 status: Complete
+- Expanded netcode parity coverage in `/Users/kgraehl/code/tilefun/src/server/NetcodeParityBaseline.test.ts`:
+  - Edge-elevation + jump + landing parity scenario.
+  - Delayed-ack + elevation-edge landing reconcile scenario (with replay backlog diagnostics + settled-state assertions).
+- Expanded adapter contract coverage in `/Users/kgraehl/code/tilefun/src/physics/SimulationEnvironment.test.ts`:
+  - Blocking parity between server/client movement-context adapters on equivalent fixtures.
+  - Mixed-surface ground outcome parity (terrain + walkable prop top + entity-top landing semantics) across server/client query styles.
+
+5. Build/type hygiene status: Complete for current blockers
 - Fixed `exactOptionalPropertyTypes` payload construction in `/Users/kgraehl/code/tilefun/src/server/NetcodeParityBaseline.test.ts` and `/Users/kgraehl/code/tilefun/src/server/Realm.ts` by omitting optional fields when undefined.
 - `npm run build` is currently green.
 
-5. Next phase: Phase 4
-- Strengthen parity test matrix (edge-elevation/jump/landing and delayed-ack reconcile fixtures).
+6. Next phase: Phase 5
+- Add invariants + guardrails docs/comments/assertions for drift-sensitive boundaries.
 
 ## Phase 1: Consolidate Ground Resolution APIs
 ## Objective
