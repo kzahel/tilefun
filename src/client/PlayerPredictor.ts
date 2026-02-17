@@ -6,10 +6,12 @@ import type { Movement } from "../input/ActionManager.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
+  getMovementPhysicsParams,
   getServerPhysicsMult,
   stepMountFromInput,
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
+import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -22,6 +24,7 @@ export interface StoredInput {
   seq: number;
   movement: Movement;
   dt: number;
+  physics: MovementPhysicsParams;
 }
 
 /**
@@ -115,7 +118,7 @@ export class PlayerPredictor {
     if (this.inputBuffer.length >= INPUT_BUFFER_SIZE) {
       this.inputBuffer.shift();
     }
-    this.inputBuffer.push({ seq, movement, dt });
+    this.inputBuffer.push({ seq, movement, dt, physics: getMovementPhysicsParams() });
   }
 
   /**
@@ -145,7 +148,7 @@ export class PlayerPredictor {
       };
     }
 
-    this.applyInput(movement, dt, world, props, entities);
+    this.applyInput(movement, dt, world, props, entities, getMovementPhysicsParams());
   }
 
   /**
@@ -240,7 +243,7 @@ export class PlayerPredictor {
 
       // Replay unacknowledged inputs on mount
       for (const input of this.inputBuffer) {
-        this.applyInput(input.movement, input.dt, world, props, entities);
+        this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
       }
 
       // Snap check for mount teleport
@@ -320,7 +323,7 @@ export class PlayerPredictor {
 
       // Replay unacknowledged inputs on top of server position
       for (const input of this.inputBuffer) {
-        this.applyInput(input.movement, input.dt, world, props, entities);
+        this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
       }
 
       // If position changed drastically (teleport/knockback), also snap
@@ -448,6 +451,7 @@ export class PlayerPredictor {
     world: World,
     props: readonly Prop[],
     entities: readonly Entity[],
+    physics: MovementPhysicsParams,
   ): void {
     if (!this.predicted) return;
 
@@ -502,6 +506,7 @@ export class PlayerPredictor {
           jumpConsumed: this.jumpConsumed,
           lastJumpHeld: this.lastJumpHeld,
         },
+        physics,
         getServerPhysicsMult(),
       );
       this.jumpConsumed = nextState.jumpConsumed;

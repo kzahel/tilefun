@@ -6,6 +6,7 @@ import type { Prop } from "../entities/Prop.js";
 import type { MovementContext } from "./MovementContext.js";
 import {
   applyMountInput,
+  getMovementPhysicsParams,
   initiateJump,
   moveAndCollide,
   setGravityScale,
@@ -172,7 +173,7 @@ describe("initiateJump + tickJumpGravity", () => {
     const player = createPlayer(100, 100);
     player.wz = 0;
 
-    initiateJump(player);
+    initiateJump(player, getMovementPhysicsParams());
 
     expect(player.jumpZ).toBe(0.01);
     expect(player.jumpVZ).toBeDefined();
@@ -186,7 +187,7 @@ describe("initiateJump + tickJumpGravity", () => {
     player.jumpVZ = 50;
     player.wz = 5;
 
-    initiateJump(player);
+    initiateJump(player, getMovementPhysicsParams());
 
     // Should not reset — jumpVZ is defined
     expect(player.jumpZ).toBe(5);
@@ -197,12 +198,12 @@ describe("initiateJump + tickJumpGravity", () => {
   it("applies gravity and lands on flat terrain", () => {
     const player = createPlayer(100, 100);
     player.wz = 0;
-    initiateJump(player);
+    initiateJump(player, getMovementPhysicsParams());
 
     // Tick until landed
     let landed = false;
     for (let i = 0; i < 600; i++) {
-      landed = tickJumpGravity(player, 1 / 60, flatHeight);
+      landed = tickJumpGravity(player, 1 / 60, flatHeight, getMovementPhysicsParams());
       if (landed) break;
     }
 
@@ -217,11 +218,11 @@ describe("initiateJump + tickJumpGravity", () => {
     // Start at elevation 1 (8px)
     const getHeight = () => 1;
     player.wz = ELEVATION_PX;
-    initiateJump(player);
+    initiateJump(player, getMovementPhysicsParams());
 
     let landed = false;
     for (let i = 0; i < 600; i++) {
-      landed = tickJumpGravity(player, 1 / 60, getHeight);
+      landed = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams());
       if (landed) break;
     }
 
@@ -233,11 +234,11 @@ describe("initiateJump + tickJumpGravity", () => {
   it("tracks wz during jump arc", () => {
     const player = createPlayer(100, 100);
     player.wz = 0;
-    initiateJump(player);
+    initiateJump(player, getMovementPhysicsParams());
 
     // After a few ticks, wz should be above ground
     for (let i = 0; i < 5; i++) {
-      tickJumpGravity(player, 1 / 60, flatHeight);
+      tickJumpGravity(player, 1 / 60, flatHeight, getMovementPhysicsParams());
     }
 
     expect(player.wz).toBeGreaterThan(0);
@@ -250,22 +251,22 @@ describe("initiateJump + tickJumpGravity", () => {
     setGravityScale(1);
     const normal = createPlayer(100, 100);
     normal.wz = 0;
-    initiateJump(normal);
+    initiateJump(normal, getMovementPhysicsParams());
     let normalPeak = 0;
     for (let i = 0; i < 600; i++) {
       if (normal.wz !== undefined && normal.wz > normalPeak) normalPeak = normal.wz;
-      if (tickJumpGravity(normal, 1 / 60, flatHeight)) break;
+      if (tickJumpGravity(normal, 1 / 60, flatHeight, getMovementPhysicsParams())) break;
     }
 
     // Half gravity
     setGravityScale(0.5);
     const moon = createPlayer(100, 100);
     moon.wz = 0;
-    initiateJump(moon);
+    initiateJump(moon, getMovementPhysicsParams());
     let moonPeak = 0;
     for (let i = 0; i < 600; i++) {
       if (moon.wz !== undefined && moon.wz > moonPeak) moonPeak = moon.wz;
-      if (tickJumpGravity(moon, 1 / 60, flatHeight)) break;
+      if (tickJumpGravity(moon, 1 / 60, flatHeight, getMovementPhysicsParams())) break;
     }
 
     // Reset
@@ -357,13 +358,23 @@ describe("server/client context parity", () => {
     serverPlayer.wz = 0;
     clientPlayer.wz = 0;
 
-    initiateJump(serverPlayer);
-    initiateJump(clientPlayer);
+    initiateJump(serverPlayer, getMovementPhysicsParams());
+    initiateJump(clientPlayer, getMovementPhysicsParams());
 
     const dt = 1 / 60;
     for (let i = 0; i < 120; i++) {
-      const serverLanded = tickJumpGravity(serverPlayer, dt, flatHeight);
-      const clientLanded = tickJumpGravity(clientPlayer, dt, flatHeight);
+      const serverLanded = tickJumpGravity(
+        serverPlayer,
+        dt,
+        flatHeight,
+        getMovementPhysicsParams(),
+      );
+      const clientLanded = tickJumpGravity(
+        clientPlayer,
+        dt,
+        flatHeight,
+        getMovementPhysicsParams(),
+      );
 
       expect(serverPlayer.wz).toBe(clientPlayer.wz);
       expect(serverPlayer.jumpZ).toBe(clientPlayer.jumpZ);

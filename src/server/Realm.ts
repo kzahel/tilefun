@@ -49,6 +49,7 @@ import {
   getAirWishCap,
   getFriction,
   getGravityScale,
+  getMovementPhysicsParams,
   getNoBunnyHop,
   getPhysicsCVarRevision,
   getPlatformerAir,
@@ -331,6 +332,7 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
   ): void {
     this.tickCounter++;
+    const movementPhysics = getMovementPhysicsParams();
 
     // ── Phase 1: Process player inputs (per-session) ──
     // Drain each session's input queue and set player velocity.
@@ -368,7 +370,10 @@ export class Realm {
           if (!entity.collider) {
             return { props: [] as const, entities: [] as const };
           }
-          const nearbyProps = this.propManager.getPropsNearPosition(entity.position, entity.collider);
+          const nearbyProps = this.propManager.getPropsNearPosition(
+            entity.position,
+            entity.collider,
+          );
           const fp = getEntityAABB(entity.position, entity.collider);
           const nearbyEntities = this.entityManager.spatialHash.queryRange(
             Math.floor(fp.left / CHUNK_SIZE_PX),
@@ -416,6 +421,7 @@ export class Realm {
                 jumpConsumed: session.jumpConsumed,
                 lastJumpHeld: session.lastJumpHeld,
               },
+              movementPhysics,
               this.physicsMult,
             );
             session.jumpConsumed = nextState.jumpConsumed;
@@ -456,10 +462,17 @@ export class Realm {
             session.debugNoclip,
             session.player,
           );
-          const nextState = applyPlayerInputIntent(session.player, lastInput, dt, playerCtx, {
-            jumpConsumed: session.jumpConsumed,
-            lastJumpHeld: session.lastJumpHeld,
-          });
+          const nextState = applyPlayerInputIntent(
+            session.player,
+            lastInput,
+            dt,
+            playerCtx,
+            {
+              jumpConsumed: session.jumpConsumed,
+              lastJumpHeld: session.lastJumpHeld,
+            },
+            movementPhysics,
+          );
           session.jumpConsumed = nextState.jumpConsumed;
         }
         session.lastJumpHeld = lastInput.jump;
@@ -478,7 +491,7 @@ export class Realm {
             (tx, ty) => this.world.getRoadAt(tx, ty),
             (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
           );
-          applyFriction(session.player, dt, surface.friction);
+          applyFriction(session.player, dt, surface.friction, movementPhysics);
         }
         // Also apply friction to mount when no input
         if (session.gameplaySession.mountId !== null) {
@@ -486,7 +499,7 @@ export class Realm {
             (e) => e.id === session.gameplaySession.mountId,
           );
           if (mount?.velocity) {
-            applyFriction(mount, dt, 1.0);
+            applyFriction(mount, dt, 1.0, movementPhysics);
           }
         }
       }
@@ -563,7 +576,14 @@ export class Realm {
             }
           }
 
-          const landed = tickJumpGravity(p, stepDt, getHeight, nearbyProps, nearbyEntities);
+          const landed = tickJumpGravity(
+            p,
+            stepDt,
+            getHeight,
+            movementPhysics,
+            nearbyProps,
+            nearbyEntities,
+          );
           if (landed) {
             // Check if player landed on water — respawn at last safe position
             const landTx = Math.floor(p.position.wx / TILE_SIZE);
@@ -583,7 +603,7 @@ export class Realm {
               session.gameplaySession.invincibilityTimer = 0.75;
             } else if (session.lastJumpHeld && !session.jumpConsumed) {
               // Quake-style: jump immediately on landing if held and not consumed
-              initiateJump(p);
+              initiateJump(p, movementPhysics);
               session.jumpConsumed = true;
             } else if (session.gameplaySession.mountId === null) {
               this.tryMountOnLanding(session);

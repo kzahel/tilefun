@@ -34,6 +34,19 @@ import {
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
+export interface MovementPhysicsParams {
+  revision: number;
+  gravityScale: number;
+  friction: number;
+  accelerate: number;
+  airAccelerate: number;
+  airWishCap: number;
+  stopSpeed: number;
+  noBunnyHop: boolean;
+  smallJumps: boolean;
+  platformerAir: boolean;
+}
+
 // ── CVars (runtime-tunable, same pattern as gravityScale) ──
 
 /** Monotonic revision counter — incremented when any physics CVar changes. */
@@ -42,89 +55,108 @@ export function getPhysicsCVarRevision(): number {
   return physicsCVarRevision;
 }
 
-let gravityScale = 1;
-export function setGravityScale(scale: number): void {
-  gravityScale = scale;
+const movementPhysicsParams: Omit<MovementPhysicsParams, "revision"> = {
+  gravityScale: 1,
+  friction: PLAYER_FRICTION,
+  accelerate: PLAYER_ACCELERATE,
+  airAccelerate: PLAYER_AIR_ACCELERATE,
+  airWishCap: PLAYER_AIR_WISHCAP,
+  stopSpeed: PLAYER_STOP_SPEED,
+  noBunnyHop: false,
+  smallJumps: false,
+  platformerAir: true,
+};
+
+function setPhysicsParam<K extends keyof Omit<MovementPhysicsParams, "revision">>(
+  key: K,
+  value: Omit<MovementPhysicsParams, "revision">[K],
+): void {
+  if (movementPhysicsParams[key] === value) return;
+  movementPhysicsParams[key] = value;
   physicsCVarRevision++;
+}
+
+export function getMovementPhysicsParams(): MovementPhysicsParams {
+  return {
+    revision: physicsCVarRevision,
+    gravityScale: movementPhysicsParams.gravityScale,
+    friction: movementPhysicsParams.friction,
+    accelerate: movementPhysicsParams.accelerate,
+    airAccelerate: movementPhysicsParams.airAccelerate,
+    airWishCap: movementPhysicsParams.airWishCap,
+    stopSpeed: movementPhysicsParams.stopSpeed,
+    noBunnyHop: movementPhysicsParams.noBunnyHop,
+    smallJumps: movementPhysicsParams.smallJumps,
+    platformerAir: movementPhysicsParams.platformerAir,
+  };
+}
+
+export function setGravityScale(scale: number): void {
+  setPhysicsParam("gravityScale", scale);
 }
 export function getGravityScale(): number {
-  return gravityScale;
+  return movementPhysicsParams.gravityScale;
 }
 
-let frictionCVar = PLAYER_FRICTION;
 export function setFriction(v: number): void {
-  frictionCVar = v;
-  physicsCVarRevision++;
+  setPhysicsParam("friction", v);
 }
 export function getFriction(): number {
-  return frictionCVar;
+  return movementPhysicsParams.friction;
 }
 
-let accelerateCVar = PLAYER_ACCELERATE;
 export function setAccelerate(v: number): void {
-  accelerateCVar = v;
-  physicsCVarRevision++;
+  setPhysicsParam("accelerate", v);
 }
 export function getAccelerate(): number {
-  return accelerateCVar;
+  return movementPhysicsParams.accelerate;
 }
 
-let airAccelerateCVar = PLAYER_AIR_ACCELERATE;
 export function setAirAccelerate(v: number): void {
-  airAccelerateCVar = v;
-  physicsCVarRevision++;
+  setPhysicsParam("airAccelerate", v);
 }
 export function getAirAccelerate(): number {
-  return airAccelerateCVar;
+  return movementPhysicsParams.airAccelerate;
 }
 
-let airWishCapCVar = PLAYER_AIR_WISHCAP;
 export function setAirWishCap(v: number): void {
-  airWishCapCVar = v;
-  physicsCVarRevision++;
+  setPhysicsParam("airWishCap", v);
 }
 export function getAirWishCap(): number {
-  return airWishCapCVar;
+  return movementPhysicsParams.airWishCap;
 }
 
-let stopSpeedCVar = PLAYER_STOP_SPEED;
 export function setStopSpeed(v: number): void {
-  stopSpeedCVar = v;
-  physicsCVarRevision++;
+  setPhysicsParam("stopSpeed", v);
 }
 export function getStopSpeed(): number {
-  return stopSpeedCVar;
+  return movementPhysicsParams.stopSpeed;
 }
 
-let noBunnyHop = false;
 export function setNoBunnyHop(v: boolean): void {
-  noBunnyHop = v;
-  physicsCVarRevision++;
+  setPhysicsParam("noBunnyHop", v);
 }
 export function getNoBunnyHop(): boolean {
-  return noBunnyHop;
+  return movementPhysicsParams.noBunnyHop;
 }
 
-let smallJumps = false;
 export function setSmallJumps(v: boolean): void {
-  smallJumps = v;
-  physicsCVarRevision++;
+  setPhysicsParam("smallJumps", v);
 }
 export function getSmallJumps(): boolean {
-  return smallJumps;
+  return movementPhysicsParams.smallJumps;
 }
 
-let platformerAir = true;
 export function setPlatformerAir(v: boolean): void {
-  platformerAir = v;
-  physicsCVarRevision++;
+  setPhysicsParam("platformerAir", v);
 }
 export function getPlatformerAir(): boolean {
-  return platformerAir;
+  return movementPhysicsParams.platformerAir;
 }
 
 let timeScaleCVar = 1;
 export function setTimeScale(v: number): void {
+  if (timeScaleCVar === v) return;
   timeScaleCVar = v;
   physicsCVarRevision++;
 }
@@ -134,6 +166,8 @@ export function getTimeScale(): number {
 
 let tickRateCVar = TICK_RATE;
 export function setServerTickRate(v: number): void {
+  if (v <= 0) return;
+  if (tickRateCVar === v) return;
   tickRateCVar = v;
   physicsCVarRevision++;
 }
@@ -142,7 +176,9 @@ export function getServerTickRate(): number {
 }
 export function setServerTickMs(ms: number): void {
   if (ms <= 0) return;
-  tickRateCVar = 1000 / ms;
+  const tickRate = 1000 / ms;
+  if (tickRateCVar === tickRate) return;
+  tickRateCVar = tickRate;
   physicsCVarRevision++;
 }
 export function getServerTickMs(): number {
@@ -151,7 +187,9 @@ export function getServerTickMs(): number {
 
 let physicsMultCVar = 1;
 export function setServerPhysicsMult(v: number): void {
-  physicsMultCVar = Math.max(1, Math.floor(v));
+  const next = Math.max(1, Math.floor(v));
+  if (physicsMultCVar === next) return;
+  physicsMultCVar = next;
   physicsCVarRevision++;
 }
 export function getServerPhysicsMult(): number {
@@ -180,17 +218,18 @@ export function applyPlayerInputIntent(
   dt: number,
   ctx: MovementContext,
   state: JumpInputState,
+  physics: MovementPhysicsParams,
 ): JumpInputState {
-  applyMovementPhysics(entity, input, dt, ctx);
+  applyMovementPhysics(entity, input, dt, ctx, physics);
 
   let jumpConsumed = state.jumpConsumed;
   if (input.jump) {
     if (entity.jumpVZ === undefined && !jumpConsumed) {
-      initiateJump(entity);
+      initiateJump(entity, physics);
       jumpConsumed = true;
     }
   } else if (jumpConsumed) {
-    cutJumpVelocity(entity);
+    cutJumpVelocity(entity, physics);
     jumpConsumed = false;
   }
 
@@ -212,9 +251,10 @@ export function stepPlayerFromInput(
   getHeight: (tx: number, ty: number) => number,
   sampleSurfaces: SurfaceSampler,
   state: JumpInputState,
+  physics: MovementPhysicsParams,
   substeps = 1,
 ): JumpInputState {
-  let next = applyPlayerInputIntent(entity, input, dt, ctx, state);
+  let next = applyPlayerInputIntent(entity, input, dt, ctx, state, physics);
   const steps = Math.max(1, Math.floor(substeps));
   const stepDt = dt / steps;
 
@@ -223,9 +263,16 @@ export function stepPlayerFromInput(
     const surfaces = sampleSurfaces(entity);
     const groundZ = getEffectiveGroundZ(entity, getHeight, surfaces.props, surfaces.entities);
     applyGroundTracking(entity, groundZ, true);
-    const landed = tickJumpGravity(entity, stepDt, getHeight, surfaces.props, surfaces.entities);
+    const landed = tickJumpGravity(
+      entity,
+      stepDt,
+      getHeight,
+      physics,
+      surfaces.props,
+      surfaces.entities,
+    );
     if (landed && next.lastJumpHeld && !next.jumpConsumed) {
-      initiateJump(entity);
+      initiateJump(entity, physics);
       next = { ...next, jumpConsumed: true };
     }
   }
@@ -305,10 +352,10 @@ export function applyMountInput(
 }
 
 /** Initiate a jump if the entity is on the ground (no vertical velocity). */
-export function initiateJump(entity: Entity): void {
+export function initiateJump(entity: Entity, physics: MovementPhysicsParams): void {
   if (entity.jumpVZ === undefined) {
     // sv_nobunnyhop: clamp XY speed to max wishspeed on takeoff
-    if (noBunnyHop && entity.velocity) {
+    if (physics.noBunnyHop && entity.velocity) {
       const maxWish = PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER;
       const speed = Math.sqrt(
         entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy,
@@ -327,8 +374,8 @@ export function initiateJump(entity: Entity): void {
 }
 
 /** Cut jump velocity when the jump button is released while ascending (variable jump height). */
-export function cutJumpVelocity(entity: Entity): void {
-  if (!smallJumps) return;
+export function cutJumpVelocity(entity: Entity, physics: MovementPhysicsParams): void {
+  if (!physics.smallJumps) return;
   if (entity.jumpVZ !== undefined && entity.jumpVZ > 0) {
     entity.jumpVZ *= JUMP_CUT_MULTIPLIER;
   }
@@ -342,12 +389,13 @@ export function tickJumpGravity(
   entity: Entity,
   dt: number,
   getHeight: (tx: number, ty: number) => number,
+  physics: MovementPhysicsParams,
   props?: readonly PropSurface[],
   entities?: readonly EntitySurface[],
 ): boolean {
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
     const prevWz = entity.wz;
-    entity.jumpVZ -= JUMP_GRAVITY * gravityScale * dt;
+    entity.jumpVZ -= JUMP_GRAVITY * physics.gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
     // Terrain landing uses center point — not AABB max — so the player
     // actually lands at the lower elevation after walking off a cliff.
@@ -393,7 +441,12 @@ export function tickJumpGravity(
  * airborne so jumping preserves momentum over slow terrain (water, sand).
  * @param surfaceFriction Multiplier from terrain/road surface properties.
  */
-export function applyFriction(entity: Entity, dt: number, surfaceFriction: number): void {
+export function applyFriction(
+  entity: Entity,
+  dt: number,
+  surfaceFriction: number,
+  physics: MovementPhysicsParams,
+): void {
   if (!entity.velocity) return;
   const { vx, vy } = entity.velocity;
   const speed = Math.sqrt(vx * vx + vy * vy);
@@ -403,8 +456,8 @@ export function applyFriction(entity: Entity, dt: number, surfaceFriction: numbe
     return;
   }
 
-  const friction = frictionCVar * surfaceFriction;
-  const control = Math.max(speed, stopSpeedCVar);
+  const friction = physics.friction * surfaceFriction;
+  const control = Math.max(speed, physics.stopSpeed);
   const drop = control * friction * dt;
   let newspeed = speed - drop;
   if (newspeed < 0) newspeed = 0;
@@ -447,9 +500,10 @@ export function applyAirAcceleration(
   wishspeed: number,
   accel: number,
   dt: number,
+  physics: MovementPhysicsParams,
 ): void {
   if (!entity.velocity || wishspeed <= 0) return;
-  const cappedWish = Math.min(wishspeed, airWishCapCVar);
+  const cappedWish = Math.min(wishspeed, physics.airWishCap);
   const currentspeed = entity.velocity.vx * wishdirX + entity.velocity.vy * wishdirY;
   const addspeed = cappedWish - currentspeed;
   if (addspeed <= 0) return;
@@ -473,6 +527,7 @@ export function applyMovementPhysics(
   input: Movement,
   dt: number,
   ctx: MovementContext,
+  physics: MovementPhysicsParams,
 ): void {
   if (!entity.velocity) return;
 
@@ -492,8 +547,8 @@ export function applyMovementPhysics(
       );
 
   // 1. Friction first (QW order) — skip while airborne unless platformer air control
-  if (!airborne || platformerAir) {
-    applyFriction(entity, dt, surface.friction);
+  if (!airborne || physics.platformerAir) {
+    applyFriction(entity, dt, surface.friction, physics);
   }
 
   // 2. Compute wish direction and wish speed
@@ -505,10 +560,18 @@ export function applyMovementPhysics(
     const wishdirY = dy / len;
     const baseSpeed = input.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
     const wishspeed = baseSpeed * surface.speedMult;
-    if (airborne && !platformerAir) {
-      applyAirAcceleration(entity, wishdirX, wishdirY, wishspeed, airAccelerateCVar, dt);
+    if (airborne && !physics.platformerAir) {
+      applyAirAcceleration(
+        entity,
+        wishdirX,
+        wishdirY,
+        wishspeed,
+        physics.airAccelerate,
+        dt,
+        physics,
+      );
     } else {
-      applyAcceleration(entity, wishdirX, wishdirY, wishspeed, accelerateCVar, dt);
+      applyAcceleration(entity, wishdirX, wishdirY, wishspeed, physics.accelerate, dt);
     }
   }
 
