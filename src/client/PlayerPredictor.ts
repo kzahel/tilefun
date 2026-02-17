@@ -1,10 +1,6 @@
-import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
-import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
-import { zRangesOverlap } from "../physics/AABB3D.js";
-import type { MovementContext } from "../physics/MovementContext.js";
 import {
   MAX_INPUT_STEP_SECONDS,
   getMovementPhysicsParams,
@@ -14,6 +10,7 @@ import {
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
 import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
+import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -690,18 +687,39 @@ export class PlayerPredictor {
     if (!this.predicted) return;
     const stepDts = splitInputStepDurations(dt, MAX_INPUT_STEP_SECONDS);
     if (stepDts.length === 0) return;
+    const queryEntities = (_aabb: {
+      left: number;
+      top: number;
+      right: number;
+      bottom: number;
+    }): readonly Entity[] => entities;
+    const queryProps = (_aabb: {
+      left: number;
+      top: number;
+      right: number;
+      bottom: number;
+    }): readonly Prop[] => props;
+    const sampleSurfaces = createSurfaceSampler({ queryEntities, queryProps });
+    const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
+    const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
+    const getTerrainAt = (tx: number, ty: number) => world.getBlendBaseAt(tx, ty);
+    const getRoadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
 
     if (this.predictedMount) {
       // ── Riding: apply input to mount, derive player position ──
-      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
       const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
-      const mountCtx = this.buildMovementContext(
-        world,
-        props,
-        entities,
-        mountExclude,
-        this.predictedMount,
-      );
+      const mountCtx = createMovementContext({
+        getCollision,
+        getHeight,
+        getTerrainAt,
+        getRoadAt,
+        queryEntities,
+        queryProps,
+        movingEntity: this.predictedMount,
+        excludeIds: mountExclude,
+        noclip: this.noclip,
+        shouldEntityBlock: (other) => other.collider?.clientSolid === true,
+      });
       for (const stepDt of stepDts) {
         stepMountFromInput(
           this.predictedMount,
@@ -709,7 +727,7 @@ export class PlayerPredictor {
           stepDt,
           mountCtx,
           getHeight,
-          () => ({ props, entities }),
+          sampleSurfaces,
           this.predicted,
           getServerPhysicsMult(),
         );
@@ -725,14 +743,18 @@ export class PlayerPredictor {
     } else {
       // ── Normal: apply friction + acceleration from input ──
       const playerExclude = new Set([this.predicted.id]);
-      const playerCtx = this.buildMovementContext(
-        world,
-        props,
-        entities,
-        playerExclude,
-        this.predicted,
-      );
-      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
+      const playerCtx = createMovementContext({
+        getCollision,
+        getHeight,
+        getTerrainAt,
+        getRoadAt,
+        queryEntities,
+        queryProps,
+        movingEntity: this.predicted,
+        excludeIds: playerExclude,
+        noclip: this.noclip,
+        shouldEntityBlock: (other) => other.collider?.clientSolid === true,
+      });
       let nextState = {
         jumpConsumed: this.jumpConsumed,
         lastJumpHeld: this.lastJumpHeld,
@@ -746,7 +768,7 @@ export class PlayerPredictor {
           stepDts[i]!,
           playerCtx,
           getHeight,
-          () => ({ props, entities }),
+          sampleSurfaces,
           nextState,
           physics,
           getServerPhysicsMult(),
@@ -780,45 +802,5 @@ export class PlayerPredictor {
     if (serverPlayer.localOffsetX !== undefined) clone.localOffsetX = serverPlayer.localOffsetX;
     if (serverPlayer.localOffsetY !== undefined) clone.localOffsetY = serverPlayer.localOffsetY;
     return clone;
-  }
-
-  /**
-   * Build a MovementContext for client-side prediction.
-   * Uses `clientSolid` for entity blocking (vs server's `solid`).
-   * Captures the moving entity by reference so jumpZ-dependent checks stay current.
-   */
-  private buildMovementContext(
-    world: World,
-    props: readonly Prop[],
-    entities: readonly Entity[],
-    excludeIds: ReadonlySet<number>,
-    movingEntity: Entity,
-  ): MovementContext {
-    return {
-      getCollision: (tx, ty) => world.getCollisionIfLoaded(tx, ty),
-      getHeight: (tx, ty) => world.getHeightAt(tx, ty),
-      isEntityBlocked: (aabb) => {
-        const selfWz = movingEntity.wz ?? 0;
-        const selfHeight = movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-        for (const other of entities) {
-          if (excludeIds.has(other.id) || !other.collider?.clientSolid) continue;
-          // 3D entity-entity filtering: skip if Z ranges don't overlap
-          const otherWz = other.wz ?? 0;
-          const otherHeight = other.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-          if (!zRangesOverlap(selfWz, selfHeight, otherWz, otherHeight)) continue;
-          if (aabbsOverlap(aabb, getEntityAABB(other.position, other.collider))) return true;
-        }
-        return false;
-      },
-      isPropBlocked: (aabb, entityWz, entityHeight) => {
-        for (const prop of props) {
-          if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) return true;
-        }
-        return false;
-      },
-      noclip: this.noclip,
-      getTerrainAt: (tx, ty) => world.getBlendBaseAt(tx, ty),
-      getRoadAt: (tx, ty) => world.getRoadAt(tx, ty),
-    };
   }
 }

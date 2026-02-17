@@ -2,7 +2,6 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import {
   CHUNK_SIZE_PX,
-  DEFAULT_PHYSICAL_HEIGHT,
   JUMP_VELOCITY,
   RENDER_DISTANCE,
   THROW_ANGLE,
@@ -15,8 +14,6 @@ import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import { createBall } from "../entities/Ball.js";
 import {
-  aabbOverlapsAnyEntity,
-  aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
@@ -37,9 +34,7 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
-import { zRangesOverlap } from "../physics/AABB3D.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
-import type { MovementContext } from "../physics/MovementContext.js";
 import {
   applyFriction,
   getAccelerate,
@@ -61,6 +56,7 @@ import {
   stepPlayerFromInput,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
+import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { EntityDelta } from "../shared/entityDelta.js";
@@ -353,24 +349,35 @@ export class Realm {
         const inputs = session.inputQueue;
         session.inputQueue = [];
 
+        const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
         const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
-        const sampleSurfaces = (entity: Entity) => {
-          if (!entity.collider) {
-            return { props: [] as const, entities: [] as const };
-          }
-          const nearbyProps = this.propManager.getPropsNearPosition(
-            entity.position,
-            entity.collider,
+        const getTerrainAt = (tx: number, ty: number) => this.world.getBlendBaseAt(tx, ty);
+        const getRoadAt = (tx: number, ty: number) => this.world.getRoadAt(tx, ty);
+        const queryProps = (aabb: {
+          left: number;
+          top: number;
+          right: number;
+          bottom: number;
+        }) =>
+          this.propManager.getPropsInChunkRange(
+            Math.floor(aabb.left / CHUNK_SIZE_PX),
+            Math.floor(aabb.top / CHUNK_SIZE_PX),
+            Math.floor(aabb.right / CHUNK_SIZE_PX),
+            Math.floor(aabb.bottom / CHUNK_SIZE_PX),
           );
-          const fp = getEntityAABB(entity.position, entity.collider);
-          const nearbyEntities = this.entityManager.spatialHash.queryRange(
-            Math.floor(fp.left / CHUNK_SIZE_PX),
-            Math.floor(fp.top / CHUNK_SIZE_PX),
-            Math.floor(fp.right / CHUNK_SIZE_PX),
-            Math.floor(fp.bottom / CHUNK_SIZE_PX),
+        const queryEntities = (aabb: {
+          left: number;
+          top: number;
+          right: number;
+          bottom: number;
+        }) =>
+          this.entityManager.spatialHash.queryRange(
+            Math.floor(aabb.left / CHUNK_SIZE_PX),
+            Math.floor(aabb.top / CHUNK_SIZE_PX),
+            Math.floor(aabb.right / CHUNK_SIZE_PX),
+            Math.floor(aabb.bottom / CHUNK_SIZE_PX),
           );
-          return { props: nearbyProps, entities: nearbyEntities };
-        };
+        const sampleSurfaces = createSurfaceSampler({ queryProps, queryEntities });
 
         for (const input of inputs) {
           const inputDt = this.resolveInputStepDt(input.dtMs, dt);
@@ -394,7 +401,17 @@ export class Realm {
             } else {
               if (!input.jump) session.jumpConsumed = false;
               const mountExclude = new Set([session.player.id, mount.id]);
-              const mountCtx = this.buildMovementContext(mountExclude, session.debugNoclip, mount);
+              const mountCtx = createMovementContext({
+                getCollision,
+                getHeight,
+                getTerrainAt,
+                getRoadAt,
+                queryEntities,
+                queryProps,
+                movingEntity: mount,
+                excludeIds: mountExclude,
+                noclip: session.debugNoclip,
+              });
               for (const stepDt of stepDts) {
                 stepMountFromInput(
                   mount,
@@ -422,11 +439,17 @@ export class Realm {
           }
 
           const playerExclude = new Set([session.player.id]);
-          const playerCtx = this.buildMovementContext(
-            playerExclude,
-            session.debugNoclip,
-            session.player,
-          );
+          const playerCtx = createMovementContext({
+            getCollision,
+            getHeight,
+            getTerrainAt,
+            getRoadAt,
+            queryEntities,
+            queryProps,
+            movingEntity: session.player,
+            excludeIds: playerExclude,
+            noclip: session.debugNoclip,
+          });
           const wasAirborne = session.player.jumpVZ !== undefined;
           let nextState = {
             jumpConsumed: session.jumpConsumed,
@@ -661,9 +684,9 @@ export class Realm {
           dy: msg.dy,
           sprinting: msg.sprinting,
           jump: msg.jump,
-          jumpPressed: msg.jumpPressed,
-          dtMs: msg.dtMs,
           seq: msg.seq,
+          ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
+          ...(msg.dtMs !== undefined ? { dtMs: msg.dtMs } : {}),
         });
         break;
 
@@ -1073,48 +1096,6 @@ export class Realm {
     if (session.gameplaySession.mountId === null) {
       this.tryMountOnLanding(session);
     }
-  }
-
-  /** Build a MovementContext for simplified collision (extra-input processing). */
-  private buildMovementContext(
-    excludeIds: ReadonlySet<number>,
-    noclip: boolean,
-    movingEntity?: Entity,
-  ): MovementContext {
-    return {
-      getCollision: (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-      getHeight: (tx, ty) => this.world.getHeightAt(tx, ty),
-      isEntityBlocked: (aabb) => {
-        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
-        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
-        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
-        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-        let nearby = this.entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-        if (movingEntity) {
-          const selfWz = movingEntity.wz ?? 0;
-          const selfHeight = movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-          nearby = nearby.filter((e) => {
-            const eWz = e.wz ?? 0;
-            const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-            return zRangesOverlap(selfWz, selfHeight, eWz, eHeight);
-          });
-        }
-        return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
-      },
-      isPropBlocked: (aabb, entityWz, entityHeight) => {
-        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
-        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
-        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
-        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-        for (const prop of this.propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy)) {
-          if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) return true;
-        }
-        return false;
-      },
-      noclip,
-      getTerrainAt: (tx, ty) => this.world.getBlendBaseAt(tx, ty),
-      getRoadAt: (tx, ty) => this.world.getRoadAt(tx, ty),
-    };
   }
 
   /** Build per-tick frame + on-change sync events for a specific client. */

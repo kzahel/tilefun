@@ -50,7 +50,7 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement, d
     dy: movement.dy,
     sprinting: movement.sprinting,
     jump: movement.jump,
-    jumpPressed: movement.jumpPressed,
+    ...(movement.jumpPressed !== undefined ? { jumpPressed: movement.jumpPressed } : {}),
     dtMs,
   });
 }
