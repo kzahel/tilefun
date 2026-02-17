@@ -6,14 +6,10 @@ import type { Movement } from "../input/ActionManager.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
-  applyMountInput,
-  applyMovementPhysics,
-  cutJumpVelocity,
-  initiateJump,
-  moveAndCollide,
-  tickJumpGravity,
+  getServerPhysicsMult,
+  stepMountFromInput,
+  stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
-import { applyGroundTracking, getEffectiveGroundZ } from "../physics/surfaceHeight.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -457,8 +453,7 @@ export class PlayerPredictor {
 
     if (this.predictedMount) {
       // ── Riding: apply input to mount, derive player position ──
-      applyMountInput(this.predictedMount, movement, this.predicted);
-
+      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
       const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
       const mountCtx = this.buildMovementContext(
         world,
@@ -467,12 +462,16 @@ export class PlayerPredictor {
         mountExclude,
         this.predictedMount,
       );
-      moveAndCollide(this.predictedMount, dt, mountCtx);
-
-      // Ground tracking for mount — keep wz in sync with terrain/prop surfaces
-      const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-      const mountGroundZ = getEffectiveGroundZ(this.predictedMount, getHeight, props, entities);
-      applyGroundTracking(this.predictedMount, mountGroundZ, false);
+      stepMountFromInput(
+        this.predictedMount,
+        movement,
+        dt,
+        mountCtx,
+        getHeight,
+        () => ({ props, entities }),
+        this.predicted,
+        getServerPhysicsMult(),
+      );
 
       // Derive player position from mount + offset
       this.predicted.position.wx = this.predictedMount.position.wx + this.mountOffsetX;
@@ -491,34 +490,22 @@ export class PlayerPredictor {
         playerExclude,
         this.predicted,
       );
-      applyMovementPhysics(this.predicted, movement, dt, playerCtx);
-
-      // Quake-style jump: level-triggered with consumed flag
-      if (movement.jump) {
-        if (this.predicted.jumpVZ === undefined && !this.jumpConsumed) {
-          initiateJump(this.predicted);
-          this.jumpConsumed = true;
-        }
-      } else if (this.jumpConsumed) {
-        cutJumpVelocity(this.predicted);
-        this.jumpConsumed = false;
-      }
-      this.lastJumpHeld = movement.jump;
-
-      moveAndCollide(this.predicted, dt, playerCtx);
-
-      // Ground tracking after XY movement — shared functions keep
-      // client prediction in sync with server's EntityManager.
       const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-      const groundZ = getEffectiveGroundZ(this.predicted, getHeight, props, entities);
-      applyGroundTracking(this.predicted, groundZ, true);
-
-      const landed = tickJumpGravity(this.predicted, dt, getHeight, props, entities);
-      if (landed && this.lastJumpHeld && !this.jumpConsumed) {
-        // Quake-style: jump immediately on landing if held and not consumed
-        initiateJump(this.predicted);
-        this.jumpConsumed = true;
-      }
+      const nextState = stepPlayerFromInput(
+        this.predicted,
+        movement,
+        dt,
+        playerCtx,
+        getHeight,
+        () => ({ props, entities }),
+        {
+          jumpConsumed: this.jumpConsumed,
+          lastJumpHeld: this.lastJumpHeld,
+        },
+        getServerPhysicsMult(),
+      );
+      this.jumpConsumed = nextState.jumpConsumed;
+      this.lastJumpHeld = nextState.lastJumpHeld;
     }
   }
 

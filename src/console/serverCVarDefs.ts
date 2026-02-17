@@ -4,11 +4,29 @@ import type { CVarDesc } from "./CVar.js";
 export const SERVER_CVAR_DEFS: readonly CVarDesc[] = [
   {
     name: "sv_tickrate",
-    description: "Server tick rate (Hz)",
+    description: "Server command tick rate (Hz, legacy alias for sv_tick_ms)",
     type: "number",
     defaultValue: 60,
     min: 1,
     max: 240,
+    category: "sv",
+  },
+  {
+    name: "sv_tick_ms",
+    description: "Server command tick interval in milliseconds",
+    type: "number",
+    defaultValue: 1000 / 60,
+    min: 1,
+    max: 1000,
+    category: "sv",
+  },
+  {
+    name: "sv_physics_mult",
+    description: "Physics substeps per command tick (1 = same as command tick)",
+    type: "number",
+    defaultValue: 1,
+    min: 1,
+    max: 16,
     category: "sv",
   },
   {

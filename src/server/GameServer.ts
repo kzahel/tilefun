@@ -13,7 +13,10 @@ import {
   WorldRegistry,
   type WorldType,
 } from "../persistence/WorldRegistry.js";
-import { setServerTickRate } from "../physics/PlayerMovement.js";
+import {
+  setServerPhysicsMult,
+  setServerTickMs,
+} from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
@@ -42,8 +45,10 @@ export class GameServer {
   speedMultiplier = 1;
   /** Server time scale (set via sv_timescale cvar). */
   timeScale = 1;
-  /** Current server tick rate in Hz (set via sv_tickrate cvar). */
-  private _tickRate = TICK_RATE;
+  /** Current server command tick interval in ms. */
+  private _tickMs = 1000 / TICK_RATE;
+  /** Physics substeps per command tick. */
+  private _physicsMult = 1;
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
@@ -297,18 +302,42 @@ export class GameServer {
     this.broadcasting = false;
   }
 
-  /** Update server tick rate (called from sv_tickrate CVar). */
+  /** Update server command tick rate (Hz, legacy compatibility). */
   setTickRate(hz: number): void {
-    this._tickRate = hz;
-    setServerTickRate(hz);
-    this.loop?.setTickRate(hz);
+    if (hz <= 0) return;
+    this.setTickMs(1000 / hz);
+  }
+
+  /** Update server command tick interval in milliseconds. */
+  setTickMs(ms: number): void {
+    if (ms <= 0) return;
+    this._tickMs = ms;
+    setServerTickMs(ms);
+    this.loop?.setTickMs(ms);
     for (const realm of this.realms.values()) {
-      realm.tickRate = hz;
+      realm.tickRate = 1000 / ms;
+      realm.physicsMult = this._physicsMult;
+    }
+  }
+
+  setPhysicsMult(mult: number): void {
+    this._physicsMult = Math.max(1, Math.floor(mult));
+    setServerPhysicsMult(this._physicsMult);
+    for (const realm of this.realms.values()) {
+      realm.physicsMult = this._physicsMult;
     }
   }
 
   get tickRate(): number {
-    return this._tickRate;
+    return 1000 / this._tickMs;
+  }
+
+  get tickMs(): number {
+    return this._tickMs;
+  }
+
+  get physicsMult(): number {
+    return this._physicsMult;
   }
 
   /** Run one simulation tick. Iterates ALL active realms. */
@@ -341,7 +370,8 @@ export class GameServer {
     if (existing) return existing;
 
     const realm = new Realm([baseGameMod]);
-    realm.tickRate = this._tickRate;
+    realm.tickRate = this.tickRate;
+    realm.physicsMult = this._physicsMult;
     await realm.loadWorld(worldId, this.registry, this.createStore);
     this.realms.set(worldId, realm);
     return realm;

@@ -35,7 +35,18 @@ export class ServerLoop {
   }
 
   setTickRate(hz: number): void {
+    if (hz <= 0) return;
     this.fixedDt = 1 / hz;
+    // Restart interval at new rate if currently running
+    if (this.intervalId !== null) {
+      this.stop();
+      this.start();
+    }
+  }
+
+  setTickMs(ms: number): void {
+    if (ms <= 0) return;
+    this.fixedDt = ms / 1000;
     // Restart interval at new rate if currently running
     if (this.intervalId !== null) {
       this.stop();

@@ -91,9 +91,38 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
   });
 
   const sv_tickrate = getCVar(engine, "sv_tickrate");
-  server.setTickRate(sv_tickrate.get() as number);
+  const sv_tick_ms = getCVar(engine, "sv_tick_ms");
+  const sv_physics_mult = getCVar(engine, "sv_physics_mult");
+
+  let syncingTickCvars = false;
+  const applyTickMs = (ms: number) => {
+    server.setTickMs(ms);
+  };
+
+  applyTickMs(sv_tick_ms.get() as number);
+  server.setPhysicsMult(sv_physics_mult.get() as number);
+
   sv_tickrate.onChange((val) => {
-    server.setTickRate(val as number);
+    const hz = val as number;
+    const ms = 1000 / hz;
+    if (!syncingTickCvars) {
+      syncingTickCvars = true;
+      sv_tick_ms.set(ms);
+      syncingTickCvars = false;
+    }
+    applyTickMs(ms);
+  });
+  sv_tick_ms.onChange((val) => {
+    const ms = val as number;
+    if (!syncingTickCvars) {
+      syncingTickCvars = true;
+      sv_tickrate.set(1000 / ms);
+      syncingTickCvars = false;
+    }
+    applyTickMs(ms);
+  });
+  sv_physics_mult.onChange((val) => {
+    server.setPhysicsMult(val as number);
   });
 
   const sv_timescale = getCVar(engine, "sv_timescale");

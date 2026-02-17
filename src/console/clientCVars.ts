@@ -9,6 +9,9 @@ export interface ClientCVars {
   r_pixelscale: CVar<number>;
   cl_timescale: CVar<number>;
   cl_nopredict: CVar<boolean>;
+  cl_log_reconcile: CVar<boolean>;
+  cl_reconcile_log_threshold: CVar<number>;
+  cl_reconcile_log_interval_ms: CVar<number>;
   cl_verticalfollow: CVar<boolean>;
   r_show3d: CVar<boolean>;
 }
@@ -74,6 +77,34 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "cl",
   });
 
+  const cl_log_reconcile = engine.cvars.register<boolean>({
+    name: "cl_log_reconcile",
+    description: "Log client prediction reconciliation error summaries",
+    type: "boolean",
+    defaultValue: false,
+    category: "cl",
+  });
+
+  const cl_reconcile_log_threshold = engine.cvars.register<number>({
+    name: "cl_reconcile_log_threshold",
+    description: "Minimum position error magnitude (world px) counted as notable",
+    type: "number",
+    defaultValue: 0.5,
+    min: 0,
+    max: 128,
+    category: "cl",
+  });
+
+  const cl_reconcile_log_interval_ms = engine.cvars.register<number>({
+    name: "cl_reconcile_log_interval_ms",
+    description: "How often to emit reconciliation summary logs",
+    type: "number",
+    defaultValue: 1000,
+    min: 100,
+    max: 60000,
+    category: "cl",
+  });
+
   const cl_verticalfollow = engine.cvars.register<boolean>({
     name: "cl_verticalfollow",
     description: "Camera follows player vertical position (elevation + jumps)",
@@ -98,6 +129,9 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_pixelscale,
     cl_timescale,
     cl_nopredict,
+    cl_log_reconcile,
+    cl_reconcile_log_threshold,
+    cl_reconcile_log_interval_ms,
     cl_verticalfollow,
     r_show3d,
   };

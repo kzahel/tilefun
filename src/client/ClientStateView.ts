@@ -9,6 +9,8 @@ import {
   setGravityScale,
   setNoBunnyHop,
   setPlatformerAir,
+  setServerPhysicsMult,
+  setServerTickMs,
   setSmallJumps,
   setStopSpeed,
   setTimeScale,
@@ -123,7 +125,9 @@ export class RemoteStateView implements ClientStateView {
   private _serverTick = 0;
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
+  private _tickMs = 1000 / TICK_RATE;
   private _tickRate = TICK_RATE;
+  private _physicsMult = 1;
 
   constructor(world: World) {
     this._world = world;
@@ -324,7 +328,12 @@ export class RemoteStateView implements ClientStateView {
     setSmallJumps(msg.cvars.smallJumps);
     setPlatformerAir(msg.cvars.platformerAir);
     setTimeScale(msg.cvars.timeScale);
-    this._tickRate = msg.cvars.tickRate;
+    const tickMs = msg.cvars.tickMs > 0 ? msg.cvars.tickMs : 1000 / msg.cvars.tickRate;
+    this._tickMs = tickMs;
+    this._tickRate = 1000 / tickMs;
+    this._physicsMult = Math.max(1, Math.floor(msg.cvars.physicsMult ?? 1));
+    setServerTickMs(this._tickMs);
+    setServerPhysicsMult(this._physicsMult);
     this.updateInvincibilityTimer();
   }
 
@@ -352,6 +361,9 @@ export class RemoteStateView implements ClientStateView {
     this._invincibilityStartTick = -1;
     this._invincibilityDurationTicks = 0;
     this._invincibilityTickRate = TICK_RATE;
+    this._tickMs = 1000 / TICK_RATE;
+    this._tickRate = TICK_RATE;
+    this._physicsMult = 1;
     this._remoteCursors = [];
     this._playerNames = {};
     this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
@@ -435,6 +447,14 @@ export class RemoteStateView implements ClientStateView {
   /** Server tick rate in Hz (synced from sv_tickrate CVar). */
   get tickRate(): number {
     return this._tickRate;
+  }
+  /** Server command tick interval in ms (synced from sv_tick_ms CVar). */
+  get tickMs(): number {
+    return this._tickMs;
+  }
+  /** Physics substeps per command tick (synced from sv_physics_mult CVar). */
+  get physicsMult(): number {
+    return this._physicsMult;
   }
 
   /** Raw server entities (not replaced by predictor). Used for reconciliation. */

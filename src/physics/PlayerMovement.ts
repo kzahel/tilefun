@@ -22,7 +22,9 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
 import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
+  applyGroundTracking,
   type EntitySurface,
+  getEffectiveGroundZ,
   getHighestWalkableEntitySurfaceZ,
   getHighestWalkablePropSurfaceZ,
   getSurfaceZ,
@@ -137,6 +139,122 @@ export function setServerTickRate(v: number): void {
 }
 export function getServerTickRate(): number {
   return tickRateCVar;
+}
+export function setServerTickMs(ms: number): void {
+  if (ms <= 0) return;
+  tickRateCVar = 1000 / ms;
+  physicsCVarRevision++;
+}
+export function getServerTickMs(): number {
+  return 1000 / tickRateCVar;
+}
+
+let physicsMultCVar = 1;
+export function setServerPhysicsMult(v: number): void {
+  physicsMultCVar = Math.max(1, Math.floor(v));
+  physicsCVarRevision++;
+}
+export function getServerPhysicsMult(): number {
+  return physicsMultCVar;
+}
+
+export interface JumpInputState {
+  jumpConsumed: boolean;
+  lastJumpHeld: boolean;
+}
+
+export interface SurfaceSample {
+  props: readonly PropSurface[];
+  entities: readonly EntitySurface[];
+}
+
+export type SurfaceSampler = (entity: Entity) => SurfaceSample;
+
+/**
+ * Apply player input to velocity and jump-button state, but do not move/collide.
+ * Shared by client predictor and server input processing.
+ */
+export function applyPlayerInputIntent(
+  entity: Entity,
+  input: Movement,
+  dt: number,
+  ctx: MovementContext,
+  state: JumpInputState,
+): JumpInputState {
+  applyMovementPhysics(entity, input, dt, ctx);
+
+  let jumpConsumed = state.jumpConsumed;
+  if (input.jump) {
+    if (entity.jumpVZ === undefined && !jumpConsumed) {
+      initiateJump(entity);
+      jumpConsumed = true;
+    }
+  } else if (jumpConsumed) {
+    cutJumpVelocity(entity);
+    jumpConsumed = false;
+  }
+
+  return {
+    jumpConsumed,
+    lastJumpHeld: input.jump,
+  };
+}
+
+/**
+ * Apply one player input step including movement/collision/ground/jump.
+ * Uses substeps for movement integration when physics tick is higher than command tick.
+ */
+export function stepPlayerFromInput(
+  entity: Entity,
+  input: Movement,
+  dt: number,
+  ctx: MovementContext,
+  getHeight: (tx: number, ty: number) => number,
+  sampleSurfaces: SurfaceSampler,
+  state: JumpInputState,
+  substeps = 1,
+): JumpInputState {
+  let next = applyPlayerInputIntent(entity, input, dt, ctx, state);
+  const steps = Math.max(1, Math.floor(substeps));
+  const stepDt = dt / steps;
+
+  for (let i = 0; i < steps; i++) {
+    moveAndCollide(entity, stepDt, ctx);
+    const surfaces = sampleSurfaces(entity);
+    const groundZ = getEffectiveGroundZ(entity, getHeight, surfaces.props, surfaces.entities);
+    applyGroundTracking(entity, groundZ, true);
+    const landed = tickJumpGravity(entity, stepDt, getHeight, surfaces.props, surfaces.entities);
+    if (landed && next.lastJumpHeld && !next.jumpConsumed) {
+      initiateJump(entity);
+      next = { ...next, jumpConsumed: true };
+    }
+  }
+
+  return next;
+}
+
+/**
+ * Apply one mount input step including movement/collision/ground tracking.
+ */
+export function stepMountFromInput(
+  mount: Entity,
+  input: Movement,
+  dt: number,
+  ctx: MovementContext,
+  getHeight: (tx: number, ty: number) => number,
+  sampleSurfaces: SurfaceSampler,
+  rider?: Entity,
+  substeps = 1,
+): void {
+  applyMountInput(mount, input, rider);
+  const steps = Math.max(1, Math.floor(substeps));
+  const stepDt = dt / steps;
+  for (let i = 0; i < steps; i++) {
+    moveAndCollide(mount, stepDt, ctx);
+    const surfaces = sampleSurfaces(mount);
+    const groundZ = getEffectiveGroundZ(mount, getHeight, surfaces.props, surfaces.entities);
+    applyGroundTracking(mount, groundZ, false);
+  }
 }
 
 /**

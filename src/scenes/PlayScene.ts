@@ -77,6 +77,12 @@ export class PlayScene implements GameScene {
   private ballPositions = new Map<number, { wx: number; wy: number }>();
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
   private ballDying: Set<number> | undefined;
+  /** Reconciliation telemetry counters (for cl_log_reconcile summaries). */
+  private reconcileSamples = 0;
+  private reconcileNotable = 0;
+  private reconcilePosErrSum = 0;
+  private reconcilePosErrMax = 0;
+  private nextReconcileLogAtMs = 0;
 
   onEnter(gc: GameContext): void {
     // Attach touch buttons before joystick so button claims are processed first
@@ -292,6 +298,7 @@ export class PlayScene implements GameScene {
                 remoteView.mountEntityId,
               );
             }
+            this.maybeLogReconcile(gc, remoteView);
           }
         }
 
@@ -465,6 +472,38 @@ export class PlayScene implements GameScene {
       gc.touchButtons.draw(gc.ctx);
     }
     gc.camera.restoreActual();
+  }
+
+  private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {
+    const enabled = gc.console.cvars.get("cl_log_reconcile")?.get() === true;
+    if (!enabled) return;
+
+    const correction = remoteView.predictionCorrection;
+    if (!correction) return;
+
+    const threshold = Number(gc.console.cvars.get("cl_reconcile_log_threshold")?.get() ?? 0.5);
+    const intervalMs = Number(gc.console.cvars.get("cl_reconcile_log_interval_ms")?.get() ?? 1000);
+    const posErr = Math.hypot(correction.wx, correction.wy, correction.wz);
+
+    this.reconcileSamples++;
+    this.reconcilePosErrSum += posErr;
+    if (posErr > this.reconcilePosErrMax) this.reconcilePosErrMax = posErr;
+    if (posErr >= threshold) this.reconcileNotable++;
+
+    const nowMs = performance.now();
+    if (nowMs < this.nextReconcileLogAtMs) return;
+
+    if (this.reconcileSamples > 0) {
+      const avgPosErr = this.reconcilePosErrSum / this.reconcileSamples;
+      console.log(
+        `[tilefun:reconcile] tick=${remoteView.serverTick} ack=${remoteView.lastProcessedInputSeq} samples=${this.reconcileSamples} notable=${this.reconcileNotable} avgPosErr=${avgPosErr.toFixed(3)} maxPosErr=${this.reconcilePosErrMax.toFixed(3)} threshold=${threshold.toFixed(3)}`,
+      );
+    }
+    this.reconcileSamples = 0;
+    this.reconcileNotable = 0;
+    this.reconcilePosErrSum = 0;
+    this.reconcilePosErrMax = 0;
+    this.nextReconcileLogAtMs = nowMs + intervalMs;
   }
 
   private bindZoomActions(gc: GameContext): void {

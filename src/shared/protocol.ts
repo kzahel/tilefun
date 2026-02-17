@@ -186,6 +186,9 @@ export interface PhysicsCVars {
   smallJumps: boolean;
   platformerAir: boolean;
   timeScale: number;
+  tickMs: number;
+  physicsMult: number;
+  /** Backward-compat mirror of tickMs. */
   tickRate: number;
 }
 

@@ -41,10 +41,9 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import {
+  applyPlayerInputIntent,
   applyFriction,
   applyMountInput,
-  applyMovementPhysics,
-  cutJumpVelocity,
   getAccelerate,
   getAirAccelerate,
   getAirWishCap,
@@ -57,11 +56,12 @@ import {
   getStopSpeed,
   getTimeScale,
   initiateJump,
-  moveAndCollide,
+  stepMountFromInput,
+  stepPlayerFromInput,
   tickJumpGravity,
 } from "../physics/PlayerMovement.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
-import { applyGroundTracking, getEffectiveGroundZ, getSurfaceZ } from "../physics/surfaceHeight.js";
+import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { EntityDelta } from "../shared/entityDelta.js";
 import { diffEntitySnapshots } from "../shared/entityDelta.js";
 import type {
@@ -169,6 +169,8 @@ export class Realm {
 
   /** Server tick rate in Hz (set by GameServer from sv_tickrate CVar). */
   tickRate = TICK_RATE;
+  /** Physics substeps per command tick. */
+  physicsMult = 1;
 
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
@@ -355,14 +357,27 @@ export class Realm {
               null)
             : null;
 
-        // The entity that receives movement input (mount when riding, player otherwise)
-        const movementTarget = mount ?? session.player;
-
         // Build MovementContext for simplified collision (extra inputs).
         const targetExclude = mount
           ? new Set([session.player.id, mount.id])
           : new Set([session.player.id]);
+        const movementTarget = mount ?? session.player;
         const ctx = this.buildMovementContext(targetExclude, session.debugNoclip, movementTarget);
+        const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
+        const sampleSurfaces = (entity: Entity) => {
+          if (!entity.collider) {
+            return { props: [] as const, entities: [] as const };
+          }
+          const nearbyProps = this.propManager.getPropsNearPosition(entity.position, entity.collider);
+          const fp = getEntityAABB(entity.position, entity.collider);
+          const nearbyEntities = this.entityManager.spatialHash.queryRange(
+            Math.floor(fp.left / CHUNK_SIZE_PX),
+            Math.floor(fp.top / CHUNK_SIZE_PX),
+            Math.floor(fp.right / CHUNK_SIZE_PX),
+            Math.floor(fp.bottom / CHUNK_SIZE_PX),
+          );
+          return { props: nearbyProps, entities: nearbyEntities };
+        };
 
         // Process extra inputs (all but last) with simplified collision.
         // This handles the case where timing jitter causes 2+ client ticks
@@ -379,60 +394,32 @@ export class Realm {
               break; // Remaining inputs processed as normal player next tick
             }
             if (!input.jump) session.jumpConsumed = false;
-            applyMountInput(mount, input, session.player);
+            stepMountFromInput(
+              mount,
+              input,
+              dt,
+              ctx,
+              getHeight,
+              sampleSurfaces,
+              session.player,
+              this.physicsMult,
+            );
           } else {
-            applyMovementPhysics(session.player, input, dt, ctx);
-            // Quake-style jump: level-triggered with consumed flag
-            if (input.jump) {
-              if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
-                initiateJump(session.player);
-                session.jumpConsumed = true;
-              }
-            } else if (session.jumpConsumed) {
-              cutJumpVelocity(session.player);
-              session.jumpConsumed = false;
-            }
-          }
-
-          moveAndCollide(movementTarget, dt, ctx);
-
-          // Ground tracking + jump gravity must run per-input to match
-          // the client predictor's applyInput. Without this, the server
-          // applies gravity once per tick while the client applies it per
-          // input, causing the predicted jump arc to diverge (visible as
-          // mid-air judder on reconciliation).
-          {
-            const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
-            const p = movementTarget;
-            const nearbyProps = p.collider
-              ? this.propManager.getPropsNearPosition(p.position, p.collider)
-              : [];
-            const nearbyEntities = p.collider
-              ? (() => {
-                  const fp = getEntityAABB(p.position, p.collider!);
-                  return this.entityManager.spatialHash.queryRange(
-                    Math.floor(fp.left / CHUNK_SIZE_PX),
-                    Math.floor(fp.top / CHUNK_SIZE_PX),
-                    Math.floor(fp.right / CHUNK_SIZE_PX),
-                    Math.floor(fp.bottom / CHUNK_SIZE_PX),
-                  );
-                })()
-              : [];
-            const groundZ = getEffectiveGroundZ(p, getHeight, nearbyProps, nearbyEntities);
-            applyGroundTracking(p, groundZ, !mount);
-            if (!mount) {
-              const landed = tickJumpGravity(
-                session.player,
-                dt,
-                getHeight,
-                nearbyProps,
-                nearbyEntities,
-              );
-              if (landed && session.lastJumpHeld && !session.jumpConsumed) {
-                initiateJump(session.player);
-                session.jumpConsumed = true;
-              }
-            }
+            const nextState = stepPlayerFromInput(
+              session.player,
+              input,
+              dt,
+              ctx,
+              getHeight,
+              sampleSurfaces,
+              {
+                jumpConsumed: session.jumpConsumed,
+                lastJumpHeld: session.lastJumpHeld,
+              },
+              this.physicsMult,
+            );
+            session.jumpConsumed = nextState.jumpConsumed;
+            session.lastJumpHeld = nextState.lastJumpHeld;
           }
 
           session.lastProcessedInputSeq = input.seq;
@@ -469,17 +456,11 @@ export class Realm {
             session.debugNoclip,
             session.player,
           );
-          applyMovementPhysics(session.player, lastInput, dt, playerCtx);
-          // Quake-style jump: level-triggered with consumed flag
-          if (lastInput.jump) {
-            if (session.player.jumpVZ === undefined && !session.jumpConsumed) {
-              initiateJump(session.player);
-              session.jumpConsumed = true;
-            }
-          } else if (session.jumpConsumed) {
-            cutJumpVelocity(session.player);
-            session.jumpConsumed = false;
-          }
+          const nextState = applyPlayerInputIntent(session.player, lastInput, dt, playerCtx, {
+            jumpConsumed: session.jumpConsumed,
+            lastJumpHeld: session.lastJumpHeld,
+          });
+          session.jumpConsumed = nextState.jumpConsumed;
         }
         session.lastJumpHeld = lastInput.jump;
         session.lastProcessedInputSeq = lastInput.seq;
@@ -518,17 +499,11 @@ export class Realm {
       (s) => !s.debugPaused && !dormantClientIds.has(s.clientId),
     );
     if (activeSessions.length > 0) {
-      // Merge entity tick tiers across all active sessions' visible ranges
-      const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, dt);
+      const physicsSteps = Math.max(1, this.physicsMult);
+      const stepDt = dt / physicsSteps;
+      const players = activeSessions.map((s) => s.player);
 
-      // AI: pass nearest player position per entity (for chase/follow)
-      const playerPositions = activeSessions.map((s) => s.player.position);
-      tickAllAI(this.entityManager.entities, playerPositions, entityTickDts, Math.random);
-
-      // ── TickService.preSimulation ──
-      this.worldAPI.tick.firePre(dt);
-
-      // Noclip: temporarily remove player colliders
+      // Noclip: temporarily remove player colliders for all physics substeps.
       const savedColliders = new Map<PlayerSession, ColliderComponent>();
       for (const session of activeSessions) {
         if (session.debugNoclip && session.player.collider) {
@@ -537,96 +512,107 @@ export class Realm {
         }
       }
 
-      const players = activeSessions.map((s) => s.player);
-      this.entityManager.update(
-        dt,
-        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-        players,
-        this.propManager,
-        entityTickDts,
-        (tx, ty) => this.world.getHeightAt(tx, ty),
-      );
+      const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
+      for (let step = 0; step < physicsSteps; step++) {
+        // Merge entity tick tiers across all active sessions' visible ranges.
+        const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
+
+        // AI: pass nearest player position per entity (for chase/follow)
+        const playerPositions = activeSessions.map((s) => s.player.position);
+        tickAllAI(this.entityManager.entities, playerPositions, entityTickDts, Math.random);
+
+        // ── TickService.preSimulation ──
+        this.worldAPI.tick.firePre(stepDt);
+
+        this.entityManager.update(
+          stepDt,
+          (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+          players,
+          this.propManager,
+          entityTickDts,
+          (tx, ty) => this.world.getHeightAt(tx, ty),
+        );
+
+        // ── Jump physics for all players + mount detection on landing ──
+        for (const session of activeSessions) {
+          const p = session.player;
+          const nearbyProps = p.collider
+            ? this.propManager.getPropsNearPosition(p.position, p.collider)
+            : [];
+          const nearbyEntities = p.collider
+            ? (() => {
+                const fp = getEntityAABB(p.position, p.collider!);
+                return this.entityManager.spatialHash.queryRange(
+                  Math.floor(fp.left / CHUNK_SIZE_PX),
+                  Math.floor(fp.top / CHUNK_SIZE_PX),
+                  Math.floor(fp.right / CHUNK_SIZE_PX),
+                  Math.floor(fp.bottom / CHUNK_SIZE_PX),
+                );
+              })()
+            : [];
+          // Save safe position while grounded on non-water
+          if (p.jumpVZ === undefined) {
+            const tx = Math.floor(p.position.wx / TILE_SIZE);
+            const ty = Math.floor(p.position.wy / TILE_SIZE);
+            const flags = this.world.getCollisionIfLoaded(tx, ty);
+            if (!(flags & CollisionFlag.Water)) {
+              session.gameplaySession.lastSafePosition = {
+                wx: p.position.wx,
+                wy: p.position.wy,
+              };
+            }
+          }
+
+          const landed = tickJumpGravity(p, stepDt, getHeight, nearbyProps, nearbyEntities);
+          if (landed) {
+            // Check if player landed on water — respawn at last safe position
+            const landTx = Math.floor(p.position.wx / TILE_SIZE);
+            const landTy = Math.floor(p.position.wy / TILE_SIZE);
+            const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
+            if (landFlags & CollisionFlag.Water) {
+              const safe = session.gameplaySession.lastSafePosition;
+              if (safe) {
+                p.position.wx = safe.wx;
+                p.position.wy = safe.wy;
+                p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
+                p.groundZ = p.wz;
+              }
+              delete p.jumpVZ;
+              delete p.jumpZ;
+              // Brief invincibility flash so the respawn is visible
+              session.gameplaySession.invincibilityTimer = 0.75;
+            } else if (session.lastJumpHeld && !session.jumpConsumed) {
+              // Quake-style: jump immediately on landing if held and not consumed
+              initiateJump(p);
+              session.jumpConsumed = true;
+            } else if (session.gameplaySession.mountId === null) {
+              this.tryMountOnLanding(session);
+            }
+          }
+        }
+
+        // ── Ball physics (gravity, bouncing, entity collision) ──
+        tickBallPhysics(
+          this.entityManager,
+          stepDt,
+          (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+          (tx, ty) => this.world.getHeightAt(tx, ty),
+        );
+
+        // ── TickService.postSimulation ──
+        this.worldAPI.tick.firePost(stepDt);
+
+        // ── TagService removal detection ──
+        this.worldAPI.tags.tick();
+
+        // ── OverlapService detection ──
+        this.worldAPI.overlap.tick();
+      }
 
       // Restore noclip colliders
       for (const [session, collider] of savedColliders) {
         session.player.collider = collider;
       }
-
-      // ── Jump physics for all players + mount detection on landing ──
-      const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
-      for (const session of activeSessions) {
-        const p = session.player;
-        const nearbyProps = p.collider
-          ? this.propManager.getPropsNearPosition(p.position, p.collider)
-          : [];
-        const nearbyEntities = p.collider
-          ? (() => {
-              const fp = getEntityAABB(p.position, p.collider!);
-              return this.entityManager.spatialHash.queryRange(
-                Math.floor(fp.left / CHUNK_SIZE_PX),
-                Math.floor(fp.top / CHUNK_SIZE_PX),
-                Math.floor(fp.right / CHUNK_SIZE_PX),
-                Math.floor(fp.bottom / CHUNK_SIZE_PX),
-              );
-            })()
-          : [];
-        // Save safe position while grounded on non-water
-        if (p.jumpVZ === undefined) {
-          const tx = Math.floor(p.position.wx / TILE_SIZE);
-          const ty = Math.floor(p.position.wy / TILE_SIZE);
-          const flags = this.world.getCollisionIfLoaded(tx, ty);
-          if (!(flags & CollisionFlag.Water)) {
-            session.gameplaySession.lastSafePosition = {
-              wx: p.position.wx,
-              wy: p.position.wy,
-            };
-          }
-        }
-
-        const landed = tickJumpGravity(p, dt, getHeight, nearbyProps, nearbyEntities);
-        if (landed) {
-          // Check if player landed on water — respawn at last safe position
-          const landTx = Math.floor(p.position.wx / TILE_SIZE);
-          const landTy = Math.floor(p.position.wy / TILE_SIZE);
-          const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
-          if (landFlags & CollisionFlag.Water) {
-            const safe = session.gameplaySession.lastSafePosition;
-            if (safe) {
-              p.position.wx = safe.wx;
-              p.position.wy = safe.wy;
-              p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
-              p.groundZ = p.wz;
-            }
-            delete p.jumpVZ;
-            delete p.jumpZ;
-            // Brief invincibility flash so the respawn is visible
-            session.gameplaySession.invincibilityTimer = 0.75;
-          } else if (session.lastJumpHeld && !session.jumpConsumed) {
-            // Quake-style: jump immediately on landing if held and not consumed
-            initiateJump(p);
-            session.jumpConsumed = true;
-          } else if (session.gameplaySession.mountId === null) {
-            this.tryMountOnLanding(session);
-          }
-        }
-      }
-
-      // ── Ball physics (gravity, bouncing, entity collision) ──
-      tickBallPhysics(
-        this.entityManager,
-        dt,
-        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-        (tx, ty) => this.world.getHeightAt(tx, ty),
-      );
-
-      // ── TickService.postSimulation ──
-      this.worldAPI.tick.firePost(dt);
-
-      // ── TagService removal detection ──
-      this.worldAPI.tags.tick();
-
-      // ── OverlapService detection ──
-      this.worldAPI.overlap.tick();
     }
 
     // ── Phase 3: Spawners (per-session, near each player) ──
@@ -1321,6 +1307,8 @@ export class Realm {
           smallJumps: getSmallJumps(),
           platformerAir: getPlatformerAir(),
           timeScale: getTimeScale(),
+          tickMs: 1000 / this.tickRate,
+          physicsMult: this.physicsMult,
           tickRate: this.tickRate,
         },
       });
