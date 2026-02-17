@@ -762,7 +762,7 @@ export class PlayerPredictor {
       const heldInput =
         movement.jumpPressed === undefined ? movement : { ...movement, jumpPressed: false };
       for (let i = 0; i < stepDts.length; i++) {
-        nextState = stepPlayerFromInput(
+        const stepResult = stepPlayerFromInput(
           this.predicted,
           i === 0 ? movement : heldInput,
           stepDts[i]!,
@@ -773,6 +773,7 @@ export class PlayerPredictor {
           physics,
           getServerPhysicsMult(),
         );
+        nextState = stepResult.jumpState;
       }
       this.jumpConsumed = nextState.jumpConsumed;
       this.lastJumpHeld = nextState.lastJumpHeld;

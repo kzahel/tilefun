@@ -246,6 +246,21 @@ describe("Netcode parity baseline trace harness", () => {
     expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.01);
     expect(maxMetric(trace, "correctionJumpVZErr")).toBeLessThan(0.01);
   });
+
+  it("keeps held-jump landing replay aligned under reconcile", () => {
+    const trace = runTraceScenario({
+      serverTickHz: 15,
+      commandRateHz: 60,
+      ticks: 24,
+      inputsForTick: () => repeatMovement(JUMP_IDLE, 4),
+    });
+
+    const jumpStateSamples = trace.filter((sample) => sample.causeTags.includes("jump_state"));
+    expect(jumpStateSamples).toHaveLength(0);
+    expect(maxMetric(trace, "correctionJumpVZErr")).toBeLessThan(0.02);
+    expect(maxMetric(trace, "correctionPosErr")).toBeLessThan(0.02);
+    expect(maxMetric(trace, "resimPosErr")).toBeLessThan(0.02);
+  });
 });
 
 describe("Input queue + ack monotonic baseline", () => {

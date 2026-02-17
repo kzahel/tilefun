@@ -10,6 +10,7 @@ import {
   initiateJump,
   moveAndCollide,
   setGravityScale,
+  stepPlayerFromInput,
   tickJumpGravity,
 } from "./PlayerMovement.js";
 import { applyGroundTracking, getEffectiveGroundZ } from "./surfaceHeight.js";
@@ -203,7 +204,7 @@ describe("initiateJump + tickJumpGravity", () => {
     // Tick until landed
     let landed = false;
     for (let i = 0; i < 600; i++) {
-      landed = tickJumpGravity(player, 1 / 60, flatHeight, getMovementPhysicsParams());
+      landed = tickJumpGravity(player, 1 / 60, flatHeight, getMovementPhysicsParams()).landed;
       if (landed) break;
     }
 
@@ -221,12 +222,16 @@ describe("initiateJump + tickJumpGravity", () => {
     initiateJump(player, getMovementPhysicsParams());
 
     let landed = false;
+    let landingGroundZ = 0;
     for (let i = 0; i < 600; i++) {
-      landed = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams());
+      const gravity = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams());
+      landed = gravity.landed;
+      landingGroundZ = gravity.groundZ;
       if (landed) break;
     }
 
     expect(landed).toBe(true);
+    expect(landingGroundZ).toBe(ELEVATION_PX);
     expect(player.wz).toBe(ELEVATION_PX); // Landed at elevation 1
     expect(player.jumpZ).toBeUndefined();
   });
@@ -239,7 +244,7 @@ describe("initiateJump + tickJumpGravity", () => {
 
     let landed = false;
     for (let i = 0; i < 600; i++) {
-      landed = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams());
+      landed = tickJumpGravity(player, 1 / 60, getHeight, getMovementPhysicsParams()).landed;
       if (landed) break;
     }
 
@@ -272,7 +277,7 @@ describe("initiateJump + tickJumpGravity", () => {
     let normalPeak = 0;
     for (let i = 0; i < 600; i++) {
       if (normal.wz !== undefined && normal.wz > normalPeak) normalPeak = normal.wz;
-      if (tickJumpGravity(normal, 1 / 60, flatHeight, getMovementPhysicsParams())) break;
+      if (tickJumpGravity(normal, 1 / 60, flatHeight, getMovementPhysicsParams()).landed) break;
     }
 
     // Half gravity
@@ -283,13 +288,46 @@ describe("initiateJump + tickJumpGravity", () => {
     let moonPeak = 0;
     for (let i = 0; i < 600; i++) {
       if (moon.wz !== undefined && moon.wz > moonPeak) moonPeak = moon.wz;
-      if (tickJumpGravity(moon, 1 / 60, flatHeight, getMovementPhysicsParams())) break;
+      if (tickJumpGravity(moon, 1 / 60, flatHeight, getMovementPhysicsParams()).landed) break;
     }
 
     // Reset
     setGravityScale(1);
 
     expect(moonPeak).toBeGreaterThan(normalPeak * 1.5);
+  });
+
+  it("reports enteredWater in pure step outcome without realm side effects", () => {
+    const player = createPlayer(100, 100);
+    player.wz = 0.5;
+    player.jumpZ = 0.5;
+    player.jumpVZ = -80;
+    const waterContext: MovementContext = {
+      getCollision: () => 2, // CollisionFlag.Water
+      getHeight: flatHeight,
+      isEntityBlocked: () => false,
+      isPropBlocked: () => false,
+      noclip: false,
+    };
+
+    const result = stepPlayerFromInput(
+      player,
+      { dx: 0, dy: 0, sprinting: false, jump: false },
+      1 / 60,
+      waterContext,
+      flatHeight,
+      () => ({ props: [], entities: [] }),
+      { jumpConsumed: false, lastJumpHeld: false },
+      getMovementPhysicsParams(),
+      1,
+    );
+
+    expect(result.outcome.landed).toBe(true);
+    expect(result.outcome.enteredWater).toBe(true);
+    expect(result.outcome.endedGrounded).toBe(true);
+    expect(result.outcome.groundZ).toBe(0);
+    expect(player.position.wx).toBe(100);
+    expect(player.position.wy).toBe(100);
   });
 });
 
@@ -385,13 +423,13 @@ describe("server/client context parity", () => {
         dt,
         flatHeight,
         getMovementPhysicsParams(),
-      );
+      ).landed;
       const clientLanded = tickJumpGravity(
         clientPlayer,
         dt,
         flatHeight,
         getMovementPhysicsParams(),
-      );
+      ).landed;
 
       expect(serverPlayer.wz).toBe(clientPlayer.wz);
       expect(serverPlayer.jumpZ).toBe(clientPlayer.jumpZ);

@@ -23,6 +23,39 @@ This was primarily a policy consistency issue, not a transport/input-queue issue
 2. Rewriting all entity/NPC simulation in one pass.
 3. Large-scale rendering or serialization refactors.
 
+## Progress
+Last updated: 2026-02-17
+
+1. Phase 1 status: Complete
+- Added `resolveGroundZForTracking(...)` and `resolveGroundZForLanding(...)` in `/Users/kgraehl/code/tilefun/src/physics/surfaceHeight.ts`.
+- Updated movement/landing call sites to use explicit resolver APIs in `/Users/kgraehl/code/tilefun/src/physics/PlayerMovement.ts` and `/Users/kgraehl/code/tilefun/src/entities/EntityManager.ts`.
+- Added/updated resolver coverage in `/Users/kgraehl/code/tilefun/src/physics/surfaceHeight.test.ts` and edge-landing parity coverage in `/Users/kgraehl/code/tilefun/src/physics/physicsParity.test.ts`.
+
+2. Phase 2 status: Complete
+- Added shared simulation adapter module `/Users/kgraehl/code/tilefun/src/physics/SimulationEnvironment.ts` (`createMovementContext`, `createSurfaceSampler`).
+- Removed duplicated movement-context construction logic from `/Users/kgraehl/code/tilefun/src/client/PlayerPredictor.ts` and `/Users/kgraehl/code/tilefun/src/server/Realm.ts`.
+- Added adapter contract tests in `/Users/kgraehl/code/tilefun/src/physics/SimulationEnvironment.test.ts`.
+
+3. Phase 3 status: Complete
+- Added structured pure-sim outcomes in `/Users/kgraehl/code/tilefun/src/physics/PlayerMovement.ts`:
+  - `JumpGravityOutcome` from `tickJumpGravity(...)`.
+  - `PlayerStepResult`/`PlayerStepOutcome` from `stepPlayerFromInput(...)` (`landed`, `groundZ`, `enteredWater`, `endedGrounded`).
+  - `MountStepOutcome` from `stepMountFromInput(...)`.
+- Moved server-only gameplay handling to realm orchestration in `/Users/kgraehl/code/tilefun/src/server/Realm.ts` via `handlePlayerStepOutcome(...)`:
+  - Water landing respawn + invincibility timer.
+  - Auto-mount on grounded non-water landing.
+- Updated `/Users/kgraehl/code/tilefun/src/client/PlayerPredictor.ts` to consume pure step outputs (`jumpState`) during prediction/replay.
+- Added/adjusted parity coverage in:
+  - `/Users/kgraehl/code/tilefun/src/physics/physicsParity.test.ts` (structured gravity outcome + water-entry step outcome assertions).
+  - `/Users/kgraehl/code/tilefun/src/server/NetcodeParityBaseline.test.ts` (held-jump landing reconcile parity scenario).
+
+4. Build/type hygiene status: Complete for current blockers
+- Fixed `exactOptionalPropertyTypes` payload construction in `/Users/kgraehl/code/tilefun/src/server/NetcodeParityBaseline.test.ts` and `/Users/kgraehl/code/tilefun/src/server/Realm.ts` by omitting optional fields when undefined.
+- `npm run build` is currently green.
+
+5. Next phase: Phase 4
+- Strengthen parity test matrix (edge-elevation/jump/landing and delayed-ack reconcile fixtures).
+
 ## Phase 1: Consolidate Ground Resolution APIs
 ## Objective
 Make ground policy explicit and reusable so landing and tracking cannot drift.

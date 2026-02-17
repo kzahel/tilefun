@@ -13,6 +13,7 @@ import {
   PLAYER_STOP_SPEED,
   PLAYER_STOP_THRESHOLD,
   STEP_UP_THRESHOLD,
+  TILE_SIZE,
   TICK_RATE,
 } from "../config/constants.js";
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
@@ -200,6 +201,28 @@ export interface JumpInputState {
   lastJumpHeld: boolean;
 }
 
+export interface JumpGravityOutcome {
+  landed: boolean;
+  groundZ: number;
+}
+
+export interface PlayerStepOutcome {
+  landed: boolean;
+  groundZ: number;
+  enteredWater: boolean;
+  endedGrounded: boolean;
+}
+
+export interface PlayerStepResult {
+  jumpState: JumpInputState;
+  outcome: PlayerStepOutcome;
+}
+
+export interface MountStepOutcome {
+  groundZ: number;
+  enteredWater: boolean;
+}
+
 export interface SurfaceSample {
   props: readonly PropSurface[];
   entities: readonly EntitySurface[];
@@ -287,17 +310,25 @@ export function stepPlayerFromInput(
   state: JumpInputState,
   physics: MovementPhysicsParams,
   substeps = 1,
-): JumpInputState {
+): PlayerStepResult {
   let next = applyPlayerInputIntent(entity, input, dt, ctx, state, physics);
   const steps = Math.max(1, Math.floor(substeps));
   const stepDt = dt / steps;
+  let landed = false;
+  let groundZ = entity.groundZ ?? entity.wz ?? 0;
+  let enteredWater = false;
 
   for (let i = 0; i < steps; i++) {
     moveAndCollide(entity, stepDt, ctx);
     const surfaces = sampleSurfaces(entity);
-    const groundZ = resolveGroundZForTracking(entity, getHeight, surfaces.props, surfaces.entities);
-    applyGroundTracking(entity, groundZ, true);
-    const landed = tickJumpGravity(
+    const trackedGroundZ = resolveGroundZForTracking(
+      entity,
+      getHeight,
+      surfaces.props,
+      surfaces.entities,
+    );
+    applyGroundTracking(entity, trackedGroundZ, true);
+    const gravity = tickJumpGravity(
       entity,
       stepDt,
       getHeight,
@@ -305,13 +336,26 @@ export function stepPlayerFromInput(
       surfaces.props,
       surfaces.entities,
     );
-    if (landed && next.lastJumpHeld && !next.jumpConsumed) {
+    groundZ = gravity.groundZ;
+    landed = landed || gravity.landed;
+    if (gravity.landed && isEntityOnWater(entity, ctx)) {
+      enteredWater = true;
+    }
+    if (gravity.landed && next.lastJumpHeld && !next.jumpConsumed) {
       initiateJump(entity, physics);
       next = { ...next, jumpConsumed: true };
     }
   }
 
-  return next;
+  return {
+    jumpState: next,
+    outcome: {
+      landed,
+      groundZ,
+      enteredWater,
+      endedGrounded: entity.jumpVZ === undefined,
+    },
+  };
 }
 
 /**
@@ -326,16 +370,21 @@ export function stepMountFromInput(
   sampleSurfaces: SurfaceSampler,
   rider?: Entity,
   substeps = 1,
-): void {
+): MountStepOutcome {
   applyMountInput(mount, input, rider);
   const steps = Math.max(1, Math.floor(substeps));
   const stepDt = dt / steps;
+  let groundZ = mount.groundZ ?? mount.wz ?? 0;
   for (let i = 0; i < steps; i++) {
     moveAndCollide(mount, stepDt, ctx);
     const surfaces = sampleSurfaces(mount);
-    const groundZ = resolveGroundZForTracking(mount, getHeight, surfaces.props, surfaces.entities);
+    groundZ = resolveGroundZForTracking(mount, getHeight, surfaces.props, surfaces.entities);
     applyGroundTracking(mount, groundZ, false);
   }
+  return {
+    groundZ,
+    enteredWater: isEntityOnWater(mount, ctx),
+  };
 }
 
 /**
@@ -416,8 +465,8 @@ export function cutJumpVelocity(entity: Entity, physics: MovementPhysicsParams):
 }
 
 /**
- * Tick jump/fall gravity for an entity using absolute Z. Returns true if the
- * entity just landed. Updates wz, groundZ, and the legacy jumpZ for rendering.
+ * Tick jump/fall gravity for an entity using absolute Z.
+ * Returns structured landing/ground metadata and updates wz/groundZ/jumpZ.
  */
 export function tickJumpGravity(
   entity: Entity,
@@ -426,7 +475,8 @@ export function tickJumpGravity(
   physics: MovementPhysicsParams,
   props?: readonly PropSurface[],
   entities?: readonly EntitySurface[],
-): boolean {
+): JumpGravityOutcome {
+  const existingGroundZ = entity.groundZ ?? entity.wz ?? 0;
   if (entity.jumpVZ !== undefined && entity.wz !== undefined) {
     const prevWz = entity.wz;
     entity.jumpVZ -= JUMP_GRAVITY * physics.gravityScale * dt;
@@ -437,12 +487,18 @@ export function tickJumpGravity(
       entity.wz = groundZ;
       delete entity.jumpVZ;
       delete entity.jumpZ;
-      return true;
+      return { landed: true, groundZ };
     }
     entity.jumpZ = entity.wz - groundZ;
-    return false;
+    return { landed: false, groundZ };
   }
-  return false;
+  return { landed: false, groundZ: existingGroundZ };
+}
+
+function isEntityOnWater(entity: Entity, ctx: MovementContext): boolean {
+  const tx = Math.floor(entity.position.wx / TILE_SIZE);
+  const ty = Math.floor(entity.position.wy / TILE_SIZE);
+  return (ctx.getCollision(tx, ty) & CollisionFlag.Water) !== 0;
 }
 
 // ── QuakeWorld-style friction & acceleration (adapted for 2D) ──

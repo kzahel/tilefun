@@ -47,6 +47,7 @@ import {
   getNoBunnyHop,
   getPhysicsCVarRevision,
   getPlatformerAir,
+  type PlayerStepOutcome,
   getSmallJumps,
   getStopSpeed,
   getTimeScale,
@@ -119,6 +120,18 @@ function createClientDeltaState(): ClientDeltaState {
     loadedChunkKeysJoined: "",
     chunkRevisions: new Map(),
     lastSentEntities: new Map(),
+  };
+}
+
+function mergePlayerStepOutcomes(
+  previous: PlayerStepOutcome,
+  next: PlayerStepOutcome,
+): PlayerStepOutcome {
+  return {
+    landed: previous.landed || next.landed,
+    groundZ: next.groundZ,
+    enteredWater: previous.enteredWater || next.enteredWater,
+    endedGrounded: next.endedGrounded,
   };
 }
 
@@ -450,14 +463,19 @@ export class Realm {
             excludeIds: playerExclude,
             noclip: session.debugNoclip,
           });
-          const wasAirborne = session.player.jumpVZ !== undefined;
           let nextState = {
             jumpConsumed: session.jumpConsumed,
             lastJumpHeld: session.lastJumpHeld,
           };
+          let playerStepOutcome: PlayerStepOutcome = {
+            landed: false,
+            groundZ: session.player.groundZ ?? session.player.wz ?? 0,
+            enteredWater: this.isEntityOnWater(session.player),
+            endedGrounded: session.player.jumpVZ === undefined,
+          };
           const heldInput = input.jumpPressed === undefined ? input : { ...input, jumpPressed: false };
           for (let i = 0; i < stepDts.length; i++) {
-            nextState = stepPlayerFromInput(
+            const stepResult = stepPlayerFromInput(
               session.player,
               i === 0 ? input : heldInput,
               stepDts[i]!,
@@ -468,13 +486,13 @@ export class Realm {
               movementPhysics,
               this.physicsMult,
             );
+            nextState = stepResult.jumpState;
+            playerStepOutcome = mergePlayerStepOutcomes(playerStepOutcome, stepResult.outcome);
           }
           session.jumpConsumed = nextState.jumpConsumed;
           session.lastJumpHeld = nextState.lastJumpHeld;
           this.updateLastSafePosition(session);
-          if (wasAirborne && session.player.jumpVZ === undefined) {
-            this.handlePlayerLanding(session, getHeight, movementPhysics);
-          }
+          this.handlePlayerStepOutcome(session, playerStepOutcome, getHeight, movementPhysics);
           preSteppedEntityIds.add(session.player.id);
           session.lastProcessedInputSeq = input.seq;
         }
@@ -573,7 +591,7 @@ export class Realm {
             : [];
           this.updateLastSafePosition(session);
 
-          const landed = tickJumpGravity(
+          const gravity = tickJumpGravity(
             p,
             stepDt,
             getHeight,
@@ -581,7 +599,17 @@ export class Realm {
             nearbyProps,
             nearbyEntities,
           );
-          if (landed) this.handlePlayerLanding(session, getHeight, movementPhysics);
+          this.handlePlayerStepOutcome(
+            session,
+            {
+              landed: gravity.landed,
+              groundZ: gravity.groundZ,
+              enteredWater: gravity.landed && this.isEntityOnWater(p),
+              endedGrounded: p.jumpVZ === undefined,
+            },
+            getHeight,
+            movementPhysics,
+          );
         }
 
         // ── Ball physics (gravity, bouncing, entity collision) ──
@@ -1051,27 +1079,23 @@ export class Realm {
   private updateLastSafePosition(session: PlayerSession): void {
     const p = session.player;
     if (p.jumpVZ !== undefined) return;
-    const tx = Math.floor(p.position.wx / TILE_SIZE);
-    const ty = Math.floor(p.position.wy / TILE_SIZE);
-    const flags = this.world.getCollisionIfLoaded(tx, ty);
-    if (flags & CollisionFlag.Water) return;
+    if (this.isEntityOnWater(p)) return;
     session.gameplaySession.lastSafePosition = {
       wx: p.position.wx,
       wy: p.position.wy,
     };
   }
 
-  /** Handle server-only side effects when a player lands. */
-  private handlePlayerLanding(
+  /** Handle server-only side effects after applying a pure player simulation step. */
+  private handlePlayerStepOutcome(
     session: PlayerSession,
+    outcome: PlayerStepOutcome,
     getHeight: (tx: number, ty: number) => number,
     movementPhysics = getMovementPhysicsParams(),
   ): void {
+    if (!outcome.landed) return;
     const p = session.player;
-    const landTx = Math.floor(p.position.wx / TILE_SIZE);
-    const landTy = Math.floor(p.position.wy / TILE_SIZE);
-    const landFlags = this.world.getCollisionIfLoaded(landTx, landTy);
-    if (landFlags & CollisionFlag.Water) {
+    if (outcome.enteredWater) {
       const safe = session.gameplaySession.lastSafePosition;
       if (safe) {
         p.position.wx = safe.wx;
@@ -1086,6 +1110,8 @@ export class Realm {
       return;
     }
 
+    if (!outcome.endedGrounded) return;
+
     // Quake-style: jump immediately on landing if held and not consumed.
     if (session.lastJumpHeld && !session.jumpConsumed) {
       initiateJump(p, movementPhysics);
@@ -1096,6 +1122,12 @@ export class Realm {
     if (session.gameplaySession.mountId === null) {
       this.tryMountOnLanding(session);
     }
+  }
+
+  private isEntityOnWater(entity: Entity): boolean {
+    const tx = Math.floor(entity.position.wx / TILE_SIZE);
+    const ty = Math.floor(entity.position.wy / TILE_SIZE);
+    return (this.world.getCollisionIfLoaded(tx, ty) & CollisionFlag.Water) !== 0;
   }
 
   /** Build per-tick frame + on-change sync events for a specific client. */
