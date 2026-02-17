@@ -27,11 +27,10 @@ export function createPlayer(wx: number, wy: number): Entity {
       moving: false,
       spriteWidth: PLAYER_SPRITE_SIZE,
       spriteHeight: PLAYER_SPRITE_SIZE,
-      drawOffsetY: -2,
     },
     collider: {
       offsetX: 0,
-      offsetY: -3,
+      offsetY: 0,
       width: 10,
       height: 6,
       clientSolid: true,

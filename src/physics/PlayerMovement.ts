@@ -27,7 +27,6 @@ import {
   type EntitySurface,
   resolveGroundZForLanding,
   resolveGroundZForTracking,
-  getSurfaceZ,
   isElevationBlocked3D,
   type PropSurface,
 } from "./surfaceHeight.js";
@@ -686,19 +685,11 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   const airborne = entity.jumpVZ !== undefined;
   const elevStepUp = airborne ? 0 : STEP_UP_THRESHOLD;
 
-  const isBlocked = (
-    aabb: { left: number; top: number; right: number; bottom: number },
-    testPos: { wx: number; wy: number },
-  ): boolean => {
+  const isBlocked = (aabb: { left: number; top: number; right: number; bottom: number }): boolean => {
     const mask = airborne ? CollisionFlag.Solid : BLOCK_MASK;
     if (aabbOverlapsSolid(aabb, ctx.getCollision, mask)) return true;
     if (ctx.isPropBlocked(aabb, entityWz, entityHeight)) return true;
     if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, elevStepUp)) return true;
-    // Also check feet position — may be outside AABB due to collider offset.
-    // Without this, walking south lets feet cross onto elevated tiles before
-    // the AABB does, and ground tracking snaps wz up incorrectly.
-    const feetSurfaceZ = getSurfaceZ(testPos.wx, testPos.wy, ctx.getHeight);
-    if (feetSurfaceZ > entityWz + elevStepUp) return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;
   };
@@ -706,13 +697,13 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   // Per-axis sliding: try X, then Y with updated X
   const testX = { wx: entity.position.wx + dx, wy: entity.position.wy };
   const xBox = getEntityAABB(testX, entity.collider);
-  if (!isBlocked(xBox, testX)) {
+  if (!isBlocked(xBox)) {
     entity.position.wx = testX.wx;
   }
 
   const testY = { wx: entity.position.wx, wy: entity.position.wy + dy };
   const yBox = getEntityAABB(testY, entity.collider);
-  if (!isBlocked(yBox, testY)) {
+  if (!isBlocked(yBox)) {
     entity.position.wy = testY.wy;
   }
 }

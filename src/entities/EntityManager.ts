@@ -3,7 +3,6 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   applyGroundTracking,
   resolveGroundZForTracking,
-  getSurfaceZ,
   isElevationBlocked3D,
 } from "../physics/surfaceHeight.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -111,15 +110,6 @@ export class EntityManager {
           // Airborne entities can't step up — must be above terrain to pass
           const elevStepUp = self.jumpVZ !== undefined ? 0 : STEP_UP_THRESHOLD;
           if (isElevationBlocked3D(aabb, selfWz, getHeight, elevStepUp)) return true;
-          // Also check feet position — may be outside AABB due to collider offset.
-          // Without this, walking south lets feet cross onto elevated tiles before
-          // the AABB does, and ground tracking snaps wz up incorrectly.
-          if (self.collider) {
-            const feetWx = (aabb.left + aabb.right) / 2 - self.collider.offsetX;
-            const feetWy = aabb.bottom - self.collider.offsetY;
-            const feetSurfaceZ = getSurfaceZ(feetWx, feetWy, getHeight);
-            if (feetSurfaceZ > selfWz + elevStepUp) return true;
-          }
         }
         const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
         const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);

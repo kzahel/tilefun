@@ -123,7 +123,7 @@ describe("Entity serialization", () => {
     // Collider comes entirely from def
     expect(result.collider).toEqual({
       offsetX: 0,
-      offsetY: -5,
+      offsetY: 0,
       width: 10,
       height: 6,
       physicalHeight: 8,
@@ -192,7 +192,7 @@ describe("Entity serialization", () => {
 
     expect(result.position).toEqual(entity.position);
     expect(result.wanderAI?.befriendable).toBe(true); // from def
-    expect(result.collider?.offsetY).toBe(-5); // from chicken def
+    expect(result.collider?.offsetY).toBe(0); // from chicken def
   });
 
   it("produces no object identity sharing", () => {

@@ -54,7 +54,7 @@ function makeEntity(overrides?: Partial<Entity>): Entity {
     },
     collider: {
       offsetX: 0,
-      offsetY: -5,
+      offsetY: 0,
       width: 10,
       height: 6,
       physicalHeight: 8,

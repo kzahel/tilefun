@@ -11,8 +11,6 @@ export function createCow(wx: number, wy: number): Entity {
     id: 0,
     type: "cow",
     position: { wx, wy },
-    // 32x32 sprite frame but visual feet are ~5px above bottom of frame
-    sortOffsetY: -5,
     velocity: { vx: 0, vy: 0 },
     sprite: {
       sheetKey: "cow",
@@ -25,10 +23,11 @@ export function createCow(wx: number, wy: number): Entity {
       moving: false,
       spriteWidth: COW_SPRITE_SIZE,
       spriteHeight: COW_SPRITE_SIZE,
+      drawOffsetY: 3,
     },
     collider: {
       offsetX: 0,
-      offsetY: -5,
+      offsetY: 0,
       width: 22,
       height: 10,
       physicalHeight: 10,

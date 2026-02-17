@@ -23,10 +23,11 @@ export function createChicken(wx: number, wy: number): Entity {
       moving: false,
       spriteWidth: CHICKEN_SPRITE_SIZE,
       spriteHeight: CHICKEN_SPRITE_SIZE,
+      drawOffsetY: 2,
     },
     collider: {
       offsetX: 0,
-      offsetY: -5,
+      offsetY: 0,
       width: 10,
       height: 6,
       physicalHeight: 8,
