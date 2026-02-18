@@ -4,10 +4,7 @@ import { type WebSocket, WebSocketServer } from "ws";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "./Transport.js";
-import {
-  classifyDataChannelLabel,
-  routeServerMessageChannel,
-} from "./webrtcChannels.js";
+import { classifyDataChannelLabel, routeServerMessageChannel } from "./webrtcChannels.js";
 import {
   fragmentForDataChannel,
   WEBRTC_FRAGMENT_DEFAULT_MAX_PAYLOAD_BYTES,
@@ -401,7 +398,11 @@ export class WebRtcServerTransport implements IServerTransport {
     this.sendEncodedReliable(clientId, client, encoded);
   }
 
-  private sendEncodedEntities(clientId: string, client: ClientState, encoded: ArrayBuffer): boolean {
+  private sendEncodedEntities(
+    clientId: string,
+    client: ClientState,
+    encoded: ArrayBuffer,
+  ): boolean {
     if (!client.entitiesChannel || !client.entitiesOpen) {
       return false;
     }
