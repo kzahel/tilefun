@@ -163,8 +163,10 @@ function runTraceScenario(options: TraceScenarioOptions): TraceSample[] {
       });
     }
 
-    while (pendingInputs.length > 0 && pendingInputs[0]?.deliverTick <= tick) {
-      const next = pendingInputs.shift()!;
+    while (pendingInputs.length > 0) {
+      const next = pendingInputs[0];
+      if (!next || next.deliverTick > tick) break;
+      pendingInputs.shift();
       sendInput(transport, next.seq, next.movement, next.dt);
     }
 

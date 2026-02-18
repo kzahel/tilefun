@@ -56,7 +56,12 @@ export class ConsoleEngine {
 
     // /prefixed → command or cvar
     const tokens = tokenize(trimmed);
-    const name = stripSlash(tokens[0]?.toLowerCase());
+    const head = tokens[0];
+    if (!head) {
+      this.output.printError("Missing command name");
+      return;
+    }
+    const name = stripSlash(head.toLowerCase());
     const args = tokens.slice(1);
 
     // Check if it's a cvar get/set
@@ -76,7 +81,12 @@ export class ConsoleEngine {
       if (args.length === 0) {
         this.output.print(cv.toString());
       } else {
-        cv.setFromString(args[0]!);
+        const value = args[0];
+        if (value === undefined) {
+          this.output.printError(`Missing value for ${cv.name}`);
+          return;
+        }
+        cv.setFromString(value);
         this.output.print(`${cv.name} = ${String(cv.get())}`);
       }
       return;
@@ -124,7 +134,12 @@ export class ConsoleEngine {
     if (!trimmed) return lines;
 
     const tokens = tokenize(trimmed);
-    const name = stripSlash(tokens[0]?.toLowerCase());
+    const head = tokens[0];
+    if (!head) {
+      lines.push("Missing command name");
+      return lines;
+    }
+    const name = stripSlash(head.toLowerCase());
     const args = tokens.slice(1);
 
     const cv = this.cvars.get(name);
@@ -132,7 +147,12 @@ export class ConsoleEngine {
       if (args.length === 0) {
         lines.push(cv.toString());
       } else {
-        cv.setFromString(args[0]!);
+        const value = args[0];
+        if (value === undefined) {
+          lines.push(`Missing value for ${cv.name}`);
+          return lines;
+        }
+        cv.setFromString(value);
         lines.push(`${cv.name} = ${String(cv.get())}`);
       }
       return lines;
@@ -165,7 +185,15 @@ export class ConsoleEngine {
     }
 
     // Completing an argument.
-    const cmdName = stripSlash(tokens[0]?.toLowerCase());
+    const head = tokens[0];
+    if (!head) {
+      return {
+        values: [],
+        isNameCompletion: true,
+        currentToken: "",
+      };
+    }
+    const cmdName = stripSlash(head.toLowerCase());
     const argIndex = tokens.length - 2; // -1 for cmd name, -1 for current partial
     const currentToken = tokens[tokens.length - 1] ?? "";
     const argPartial = currentToken.toLowerCase();

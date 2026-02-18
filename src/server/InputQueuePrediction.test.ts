@@ -72,14 +72,14 @@ describe("Input queue prediction invariant", () => {
       server.tick(DT);
     }
     const posAfterMoving = session.player.position.wx;
-    const velAfter = session.player.velocity?.vx;
+    const velAfter = Math.abs(session.player.velocity?.vx ?? 0);
 
     // Now tick with no new input — friction decelerates
     server.tick(DT);
 
-    const velAfterFriction = Math.abs(session.player.velocity?.vx);
+    const velAfterFriction = Math.abs(session.player.velocity?.vx ?? 0);
     // Velocity should be lower after friction (or zero at high friction values)
-    expect(velAfterFriction).toBeLessThan(Math.abs(velAfter));
+    expect(velAfterFriction).toBeLessThan(velAfter);
     // If residual velocity remains, player should have slid forward
     if (velAfterFriction > 0) {
       expect(session.player.position.wx).toBeGreaterThan(posAfterMoving);

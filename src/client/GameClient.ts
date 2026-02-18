@@ -218,7 +218,7 @@ export class GameClient {
           remoteView.bufferMessage(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
           console.log(
-            `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${!!remoteView._predictor?.player}, editorEnabled=${remoteView.editorEnabled}`,
+            `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
           );
           if (msg.worldId) {
             this.mainMenu.currentWorldId = msg.worldId;

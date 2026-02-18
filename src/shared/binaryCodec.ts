@@ -253,9 +253,13 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
 
   // Conditional fields
   if (mask & (1 << BIT_VELOCITY)) {
-    view.setFloat32(off, snap.velocity?.vx, true);
+    const velocity = snap.velocity;
+    if (!velocity) {
+      throw new Error("Invalid baseline: velocity bit set but velocity is null");
+    }
+    view.setFloat32(off, velocity.vx, true);
     off += 4;
-    view.setFloat32(off, snap.velocity?.vy, true);
+    view.setFloat32(off, velocity.vy, true);
     off += 4;
   }
   if (mask & (1 << BIT_SPRITE)) {
@@ -481,15 +485,23 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
 
   // Write values for changed, non-null fields
   if (changeMask & (1 << 0)) {
-    view.setFloat32(off, delta.position?.wx, true);
+    const position = delta.position;
+    if (!position) {
+      throw new Error("Invalid delta: position bit set but position is missing");
+    }
+    view.setFloat32(off, position.wx, true);
     off += 4;
-    view.setFloat32(off, delta.position?.wy, true);
+    view.setFloat32(off, position.wy, true);
     off += 4;
   }
   if (changeMask & (1 << 1) && !(nullMask & (1 << 1))) {
-    view.setFloat32(off, delta.velocity?.vx, true);
+    const velocity = delta.velocity;
+    if (!velocity) {
+      throw new Error("Invalid delta: velocity bit set but velocity is missing");
+    }
+    view.setFloat32(off, velocity.vx, true);
     off += 4;
-    view.setFloat32(off, delta.velocity?.vy, true);
+    view.setFloat32(off, velocity.vy, true);
     off += 4;
   }
   if (changeMask & (1 << 2) && !(nullMask & (1 << 2))) {

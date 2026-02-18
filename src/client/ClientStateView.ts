@@ -185,6 +185,11 @@ export class RemoteStateView implements ClientStateView {
     this._predictor = predictor;
   }
 
+  /** Whether client prediction currently has an active player entity. */
+  get hasPredictedPlayer(): boolean {
+    return !!this._predictor?.player;
+  }
+
   /** Whether new server state was applied during the most recent applyPending() call. */
   get stateAppliedThisTick(): boolean {
     return this._stateAppliedThisTick;
@@ -434,15 +439,16 @@ export class RemoteStateView implements ClientStateView {
     return this._world;
   }
   get entities(): readonly Entity[] {
-    if (!this._predictor?.player) return this._entities;
-    const predicted = this._predictor.player;
-    const predictedMount = this._predictor.mount;
+    const predictor = this._predictor;
+    if (!predictor?.player) return this._entities;
+    const predicted = predictor.player;
+    const predictedMount = predictor.mount;
     const playerId = this._playerEntityId;
     const mountId = predictedMount?.id ?? -1;
     return this._entities.map((e) => {
       if (e.id === playerId) return predicted;
       if (e.id === mountId && predictedMount) {
-        predictedMount.prevPosition = this._predictor?.mountPrevPosition;
+        predictedMount.prevPosition = predictor.mountPrevPosition;
         return predictedMount;
       }
       return e;

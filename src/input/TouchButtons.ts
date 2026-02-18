@@ -41,15 +41,15 @@ export class TouchButtons {
   }
 
   get jumpPressed(): boolean {
-    return this.buttons[0]?.pressed;
+    return this.buttons[0]?.pressed ?? false;
   }
 
   get throwPressed(): boolean {
-    return this.buttons[1]?.pressed;
+    return this.buttons[1]?.pressed ?? false;
   }
 
   get sprintPressed(): boolean {
-    return this.buttons[2]?.pressed;
+    return this.buttons[2]?.pressed ?? false;
   }
 
   attach(): void {
@@ -81,8 +81,9 @@ export class TouchButtons {
 
     const positions = this.getPositions();
     for (let i = 0; i < this.buttons.length; i++) {
-      const btn = this.buttons[i]!;
-      const pos = positions[i]!;
+      const btn = this.buttons[i];
+      const pos = positions[i];
+      if (!btn || !pos) continue;
 
       ctx.save();
       // Circle
@@ -128,7 +129,8 @@ export class TouchButtons {
   private hitTest(x: number, y: number): number {
     const positions = this.getPositions();
     for (let i = 0; i < positions.length; i++) {
-      const pos = positions[i]!;
+      const pos = positions[i];
+      if (!pos) continue;
       const dx = x - pos.x;
       const dy = y - pos.y;
       if (dx * dx + dy * dy <= HIT_RADIUS * HIT_RADIUS) {
@@ -144,7 +146,8 @@ export class TouchButtons {
       if (!touch) continue;
       const btnIdx = this.hitTest(touch.clientX, touch.clientY);
       if (btnIdx < 0) continue;
-      const btn = this.buttons[btnIdx]!;
+      const btn = this.buttons[btnIdx];
+      if (!btn) continue;
       if (btn.touchId !== null) continue; // already held by another finger
       btn.touchId = touch.identifier;
       btn.pressed = true;
