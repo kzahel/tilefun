@@ -5,6 +5,7 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
@@ -44,6 +45,17 @@ const SPLASH_KEYS = [
 /** Distance threshold to distinguish water-respawn teleport from normal landing. */
 const WATER_RESPAWN_DIST_SQ = 32 * 32;
 
+/** Soft impact keys used for ball-hits-entity sound. */
+const BALL_HIT_KEYS = [
+  "impact_soft_medium_000",
+  "impact_soft_medium_001",
+  "impact_soft_medium_002",
+  "impact_soft_medium_003",
+  "impact_soft_medium_004",
+];
+const BALL_HIT_MAX_DISTANCE = 300;
+const BALL_HIT_VOLUME = 0.4;
+
 /** Max hold time in seconds before throw force reaches 1.0. */
 const THROW_CHARGE_DURATION = 1.0;
 
@@ -77,6 +89,8 @@ export class PlayScene implements GameScene {
   private ballPositions = new Map<number, { wx: number; wy: number }>();
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
   private ballDying: Set<number> | undefined;
+  /** Previous wander AI state per entity ID (for detecting scared transitions). */
+  private prevWanderStates = new Map<number, string>();
   /** Reconciliation telemetry counters (for cl_log_reconcile summaries). */
   private reconcileSamples = 0;
   /** Likely true mismatch count (resim drift or no-replay correction over threshold). */
@@ -435,6 +449,9 @@ export class PlayScene implements GameScene {
     // Detect ghost death (entity gains deathTimer) — play spatial bell sound
     this.detectGhostDeaths(gc);
 
+    // Detect NPC scared by ball hit — play spatial impact sound
+    this.detectBallHits(gc);
+
     this.footsteps?.update(dt, gc.stateView.entities);
     this.ambient?.update(dt, gc.stateView.entities);
     this.particles.update(dt);
@@ -708,6 +725,61 @@ export class PlayScene implements GameScene {
     // Prune IDs for despawned entities
     for (const id of this.dyingEntities) {
       if (!liveIds.has(id)) this.dyingEntities.delete(id);
+    }
+  }
+
+  private detectBallHits(gc: GameContext): void {
+    const player = gc.stateView.playerEntity;
+    const liveIds = new Set<number>();
+
+    for (const e of gc.stateView.entities) {
+      if (!e.wanderAI) continue;
+      liveIds.add(e.id);
+
+      const currentState = e.wanderAI.state;
+      const prevState = this.prevWanderStates.get(e.id);
+      this.prevWanderStates.set(e.id, currentState);
+
+      if (currentState !== "scared" || prevState === "scared") continue;
+
+      // Newly scared — play spatial impact sound
+      const dx = e.position.wx - player.position.wx;
+      const dy = e.position.wy - player.position.wy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > BALL_HIT_MAX_DISTANCE) continue;
+
+      const distFactor = 1 - dist / BALL_HIT_MAX_DISTANCE;
+      const camera = gc.camera;
+      const screen = camera.worldToScreen(e.position.wx, e.position.wy);
+      const centerX = camera.viewportWidth / 2;
+      const normalizedX = camera.viewportWidth > 0 ? (screen.sx - centerX) / (centerX || 1) : 0;
+      const pan = Math.max(-0.5, Math.min(0.5, normalizedX * 0.5));
+
+      // Pitch based on entity weight: lighter = higher pitch
+      const weight = e.weight ?? ENTITY_DEFS[e.type]?.weight ?? 10;
+      const pitch =
+        weight < 5
+          ? 1.3 + Math.random() * 0.2
+          : weight > 100
+            ? 0.7 + Math.random() * 0.15
+            : 0.9 + Math.random() * 0.2;
+
+      const idx = Math.floor(Math.random() * BALL_HIT_KEYS.length);
+      const key = BALL_HIT_KEYS[idx];
+      if (!key) continue;
+      const buf = gc.audioManager.getBuffer(key);
+      if (!buf) continue;
+      gc.audioManager.playOneShot({
+        buffer: buf,
+        volume: BALL_HIT_VOLUME * distFactor,
+        pitch,
+        pan,
+      });
+    }
+
+    // Prune stale entries for entities that no longer exist
+    for (const id of this.prevWanderStates.keys()) {
+      if (!liveIds.has(id)) this.prevWanderStates.delete(id);
     }
   }
 }

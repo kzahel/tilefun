@@ -2,6 +2,8 @@ import {
   BALL_DESPAWN_TIME,
   BALL_GRAVITY,
   BALL_PUSH_SPEED,
+  BALL_SCARE_DURATION,
+  BALL_SCARE_KNOCKBACK,
   BOUNCE_FRICTION,
   BOUNCE_RESTITUTION,
   BOUNCE_STOP_VZ,
@@ -162,14 +164,30 @@ export function tickBallPhysics(
         const hitDx = other.position.wx - ball.position.wx;
         const hitDy = other.position.wy - ball.position.wy;
         const hitDist = Math.sqrt(hitDx * hitDx + hitDy * hitDy) || 1;
-        if (other.velocity) {
-          other.velocity.vx += (hitDx / hitDist) * BALL_PUSH_SPEED;
-          other.velocity.vy += (hitDy / hitDist) * BALL_PUSH_SPEED;
+        const hitNx = hitDx / hitDist;
+        const hitNy = hitDy / hitDist;
+
+        // Scare NPCs (non-hostile entities with wander AI)
+        const ai = other.wanderAI;
+        if (ai && !ai.hostile) {
+          if (other.velocity) {
+            other.velocity.vx += hitNx * BALL_SCARE_KNOCKBACK;
+            other.velocity.vy += hitNy * BALL_SCARE_KNOCKBACK;
+          }
+          ai.state = "scared";
+          ai.scaredTimer = BALL_SCARE_DURATION;
+          ai.dirX = hitNx;
+          ai.dirY = hitNy;
+          ai.timer = 0.3;
+          if (other.sprite) other.sprite.moving = true;
+        } else if (other.velocity) {
+          other.velocity.vx += hitNx * BALL_PUSH_SPEED;
+          other.velocity.vy += hitNy * BALL_PUSH_SPEED;
         }
 
         // Bounce the ball away from entity
-        ball.velocity.vx = -(hitDx / hitDist) * Math.abs(ball.velocity.vx) * BOUNCE_RESTITUTION;
-        ball.velocity.vy = -(hitDy / hitDist) * Math.abs(ball.velocity.vy) * BOUNCE_RESTITUTION;
+        ball.velocity.vx = -hitNx * Math.abs(ball.velocity.vx) * BOUNCE_RESTITUTION;
+        ball.velocity.vy = -hitNy * Math.abs(ball.velocity.vy) * BOUNCE_RESTITUTION;
 
         // Separate ball from entity
         const overlapX =

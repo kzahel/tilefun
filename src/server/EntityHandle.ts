@@ -169,11 +169,11 @@ export class EntityHandle {
 
   // --- AI ---
 
-  get aiState(): "idle" | "walking" | "chasing" | "following" | "ridden" | null {
+  get aiState(): "idle" | "walking" | "chasing" | "following" | "ridden" | "scared" | null {
     return this.entity.wanderAI?.state ?? null;
   }
 
-  setAIState(state: "idle" | "walking" | "chasing" | "following" | "ridden"): void {
+  setAIState(state: "idle" | "walking" | "chasing" | "following" | "ridden" | "scared"): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.state = state;
   }

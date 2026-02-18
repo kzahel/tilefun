@@ -55,7 +55,7 @@ export interface ColliderComponent {
 }
 
 export interface WanderAIComponent {
-  state: "idle" | "walking" | "chasing" | "following" | "ridden";
+  state: "idle" | "walking" | "chasing" | "following" | "ridden" | "scared";
   /** Time remaining in current state (seconds). */
   timer: number;
   /** Movement direction when walking. */
@@ -85,6 +85,8 @@ export interface WanderAIComponent {
   befriendable?: boolean;
   /** Speed in px/s when ridden by a player. */
   rideSpeed?: number;
+  /** Remaining seconds of scared behavior after being hit by a ball (server-only). */
+  scaredTimer?: number;
 }
 
 export interface Entity {

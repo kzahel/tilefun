@@ -1,3 +1,4 @@
+import { BALL_SCARE_SPEED_MULT } from "../config/constants.js";
 import { Direction, type Entity } from "./Entity.js";
 
 /**
@@ -8,6 +9,46 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
   const ai = entity.wanderAI;
   const vel = entity.velocity;
   if (!ai || !vel) return;
+
+  // --- Scared state: frantic movement after being hit by a ball ---
+  if (ai.state === "scared" && ai.scaredTimer !== undefined) {
+    ai.scaredTimer -= dt;
+    if (ai.scaredTimer <= 0) {
+      // Calm down — return to idle
+      delete ai.scaredTimer;
+      ai.state = "idle";
+      ai.timer = ai.idleMin + random() * (ai.idleMax - ai.idleMin);
+      ai.dirX = 0;
+      ai.dirY = 0;
+      vel.vx = 0;
+      vel.vy = 0;
+      if (entity.sprite) entity.sprite.moving = false;
+      return;
+    }
+
+    ai.timer -= dt;
+    if (ai.timer <= 0) {
+      // Pick a new random direction frequently for frantic look
+      ai.timer = 0.2 + random() * 0.3;
+      const angle = random() * Math.PI * 2;
+      ai.dirX = Math.cos(angle);
+      ai.dirY = Math.sin(angle);
+    }
+
+    const scaredSpeed = ai.speed * BALL_SCARE_SPEED_MULT;
+    vel.vx = ai.dirX * scaredSpeed;
+    vel.vy = ai.dirY * scaredSpeed;
+    if (entity.sprite) {
+      entity.sprite.moving = true;
+      if (ai.directional) {
+        entity.sprite.direction = directionFromVelocity(ai.dirX, ai.dirY);
+        entity.sprite.frameRow = entity.sprite.direction;
+      } else if (ai.dirX !== 0) {
+        entity.sprite.flipX = ai.dirX < 0;
+      }
+    }
+    return;
+  }
 
   ai.timer -= dt;
 
@@ -79,6 +120,12 @@ export function updateBehaviorAI(
   const ai = entity.wanderAI;
   const vel = entity.velocity;
   if (!ai || !vel) return;
+
+  // --- Scared overrides chase/follow — delegate to wander (which handles scared) ---
+  if (ai.state === "scared") {
+    updateWanderAI(entity, dt, random);
+    return;
+  }
 
   const dx = playerPos.wx - entity.position.wx;
   const dy = playerPos.wy - entity.position.wy;

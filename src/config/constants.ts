@@ -115,3 +115,12 @@ export const BALL_PUSH_SPEED = 60;
 
 /** Seconds before a stopped ball despawns. */
 export const BALL_DESPAWN_TIME = 3.0;
+
+/** Knockback impulse applied to NPC entities hit by a ball (world px/s). */
+export const BALL_SCARE_KNOCKBACK = 120;
+
+/** Seconds an NPC stays scared after being hit by a ball. */
+export const BALL_SCARE_DURATION = 3.0;
+
+/** Speed multiplier for scared NPC movement. */
+export const BALL_SCARE_SPEED_MULT = 3;
