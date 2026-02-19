@@ -1,5 +1,9 @@
 # CLAUDE.md
 
+## Cross-Project Context
+
+For cross-project context (how this project relates to Transistor, JSTorrent, etc.), see `~/code/dotfiles/projects/README.md`.
+
 ## After making changes
 
 Always run typecheck and tests before considering work done:
