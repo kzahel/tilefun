@@ -24,6 +24,7 @@ import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
+import { TentSpawner } from "../entities/TentSpawner.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
@@ -153,6 +154,7 @@ export class Realm {
   saveManager: SaveManager | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
+  private tentSpawner = new TentSpawner();
 
   /** Sessions currently in this realm. */
   readonly sessions = new Map<string, PlayerSession>();
@@ -650,6 +652,7 @@ export class Realm {
           this.entityManager,
           this.world,
         );
+        this.tentSpawner.update(dt, this.propManager, this.entityManager);
       }
     }
 
@@ -924,6 +927,7 @@ export class Realm {
 
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);
+    this.tentSpawner.reset();
 
     // Bind save accessors
     this.saveManager.bind(
