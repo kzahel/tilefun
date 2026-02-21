@@ -1,7 +1,7 @@
 import type { WorldType } from "../persistence/WorldRegistry.js";
 import type { RoomDirectory, RoomInfo } from "../rooms/RoomDirectory.js";
 import type { RealmInfo } from "../shared/protocol.js";
-import { createHostingButtons, type HostingInfo } from "./HostingBanner.js";
+import { createHostingButtons, createQRCode, type HostingInfo } from "./HostingBanner.js";
 import { relativeTime } from "./relativeTime.js";
 
 /** Parse a seed string: pure digits → number, otherwise hash to a 31-bit int. */
@@ -288,9 +288,11 @@ export class MainMenu {
     urlEl.style.cssText = "word-break: break-all; color: #aaa; font-size: 11px;";
     urlEl.textContent = info.joinUrl;
 
+    const qr = createQRCode(info.joinUrl);
+
     const btnRow = createHostingButtons(info);
 
-    this.hostingSection.append(label, urlEl, btnRow);
+    this.hostingSection.append(label, urlEl, qr, btnRow);
   }
 
   hide(): void {

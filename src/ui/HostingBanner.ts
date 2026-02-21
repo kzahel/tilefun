@@ -1,3 +1,4 @@
+import QRCode from "qrcode";
 import type { RoomDirectory } from "../rooms/RoomDirectory.js";
 
 export interface HostingInfo {
@@ -96,9 +97,11 @@ export class HostingBanner {
     urlEl.style.cssText = "word-break: break-all; color: #aaa; font-size: 11px;";
     urlEl.textContent = joinUrl;
 
+    const qr = createQRCode(joinUrl);
+
     const btnRow = createHostingButtons(this.info);
 
-    this.overlay.append(headerRow, urlEl, btnRow);
+    this.overlay.append(headerRow, urlEl, qr, btnRow);
     document.body.appendChild(this.overlay);
   }
 
@@ -106,6 +109,20 @@ export class HostingBanner {
     if (this.info.isPublic) this.info.togglePublic();
     this.overlay.remove();
   }
+}
+
+/** Create a QR code canvas element for the given URL. */
+export function createQRCode(url: string): HTMLDivElement {
+  const container = document.createElement("div");
+  container.style.cssText = "display: flex; justify-content: center; padding: 4px 0;";
+  const canvas = document.createElement("canvas");
+  QRCode.toCanvas(canvas, url, {
+    width: 160,
+    margin: 1,
+    color: { dark: "#ffffffff", light: "#00000000" },
+  });
+  container.appendChild(canvas);
+  return container;
 }
 
 /** Create the Copy Link + Go Public button row, reusable in banner and main menu. */
