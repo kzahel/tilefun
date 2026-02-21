@@ -725,10 +725,15 @@ export class Realm {
       case "throw-ball": {
         const player = session.player;
         const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
-        const xySpeed = speed * Math.cos(THROW_ANGLE);
-        const zSpeed = speed * Math.sin(THROW_ANGLE);
+        // Add random jitter so consecutive throws spread out
+        const speedJitter = 1 + (Math.random() - 0.5) * 0.15; // ±7.5% speed
+        const angleJitter = (Math.random() - 0.5) * 0.18; // ±~5° direction
+        const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
+        const jitteredSpeed = speed * speedJitter;
+        const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
+        const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
         const ball = createBall(player.position.wx, player.position.wy);
-        ball.velocity = { vx: msg.dirX * xySpeed, vy: msg.dirY * xySpeed };
+        ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
         ball.wz = (player.wz ?? 0) + 8; // throw from chest height
         ball.jumpVZ = zSpeed;
         ball.jumpZ = 8;

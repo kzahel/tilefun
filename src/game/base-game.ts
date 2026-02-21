@@ -20,6 +20,7 @@ const VELOCITY_STOP_THRESHOLD = 1;
 
 // ── Death constants ──
 const CAMPFIRE_DEATH_TIMER = 0.4;
+const CAMPFIRE_KILL_RADIUS = 16;
 
 export const baseGameMod: Mod = {
   name: "base-game",
@@ -125,16 +126,22 @@ export const baseGameMod: Mod = {
       }),
     );
 
-    // ── Creatures: campfire trap ──
+    // ── Creatures: campfire trap (proximity-based) ──
+    // Ghosts can't overlap the campfire collider, so use distance instead.
     unsubs.push(
-      api.overlap.onOverlap("campfire", (_self, other) => {
-        if (!other.hasTag("hostile")) return;
-        if (other.deathTimer !== undefined) return;
-        other.setDeathTimer(CAMPFIRE_DEATH_TIMER);
-        other.removeTag("hostile");
-        other.setAIState("idle");
-        other.setVelocity(0, 0);
-        api.entities.spawn("gem", other.wx, other.wy);
+      api.tick.onPostSimulation(() => {
+        for (const fire of api.entities.findByTag("campfire")) {
+          const nearby = api.entities.findInRadius(fire.wx, fire.wy, CAMPFIRE_KILL_RADIUS);
+          for (const other of nearby) {
+            if (!other.hasTag("hostile")) continue;
+            if (other.deathTimer !== undefined) continue;
+            other.setDeathTimer(CAMPFIRE_DEATH_TIMER);
+            other.removeTag("hostile");
+            other.setAIState("idle");
+            other.setVelocity(0, 0);
+            api.entities.spawn("gem", other.wx, other.wy);
+          }
+        }
       }),
     );
 

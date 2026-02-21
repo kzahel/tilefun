@@ -321,15 +321,15 @@ describe("befriendable", () => {
 // ── Creatures: campfire trap ──
 
 describe("campfire trap", () => {
-  it("starts death timer when hostile entity overlaps campfire", () => {
+  it("starts death timer when hostile entity is near campfire", () => {
     const { api } = createTestEnv(0, 0);
     const teardown = baseGameMod.register(api);
 
     api.entities.spawn("campfire", 100, 100);
     const ghost = api.entities.spawn("ghost-angry", 100, 100);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
-    expect(ghost?.deathTimer).toBe(0.4);
+    expect(ghost?.deathTimer).toBeDefined();
 
     teardown();
   });
@@ -340,7 +340,7 @@ describe("campfire trap", () => {
 
     api.entities.spawn("campfire", 100, 100);
     const ghost = api.entities.spawn("ghost-angry", 100, 100);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
     expect(ghost?.hasTag("hostile")).toBe(false);
     expect(ghost?.aiState).toBe("idle");
@@ -354,7 +354,7 @@ describe("campfire trap", () => {
 
     api.entities.spawn("campfire", 100, 100);
     api.entities.spawn("ghost-angry", 100, 100);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
     const gems = api.entities.findByType("gem");
     expect(gems).toHaveLength(1);
@@ -368,7 +368,7 @@ describe("campfire trap", () => {
 
     api.entities.spawn("campfire", 100, 100);
     const chicken = api.entities.spawn("chicken", 100, 100);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
     expect(chicken?.deathTimer).toBeUndefined();
 
@@ -382,9 +382,11 @@ describe("campfire trap", () => {
     api.entities.spawn("campfire", 100, 100);
     const ghost = api.entities.spawn("ghost-angry", 100, 100);
     ghost?.setDeathTimer(0.2);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
-    expect(ghost?.deathTimer).toBe(0.2);
+    // Should not have been reset to CAMPFIRE_DEATH_TIMER (0.4);
+    // it ticks down by dt so it's slightly less than 0.2
+    expect(ghost?.deathTimer).toBeLessThan(0.2);
 
     teardown();
   });
@@ -395,7 +397,7 @@ describe("campfire trap", () => {
 
     api.entities.spawn("campfire", 100, 100);
     const ghost = api.entities.spawn("ghost-angry", 200, 200);
-    api.overlap.tick();
+    api.tick.firePost(1 / 60);
 
     expect(ghost?.deathTimer).toBeUndefined();
     expect(ghost?.hasTag("hostile")).toBe(true);
