@@ -99,22 +99,26 @@ export class World {
   }
 
   /** Update chunk loading/unloading based on visible range. */
-  updateLoadedChunks(visible: ChunkRange): void {
-    this.chunks.updateLoadedChunks(visible);
+  updateLoadedChunks(visible: ChunkRange, maxChunkLoads = Number.POSITIVE_INFINITY): void {
+    this.chunks.updateLoadedChunks(visible, maxChunkLoads);
   }
 
   /**
    * Run the autotile pass for chunks that need it.
    * Computes per-tile blend layers from corners using the blend graph.
    */
-  computeAutotile(blendGraph: BlendGraph): void {
+  computeAutotile(blendGraph: BlendGraph, maxChunks = Number.POSITIVE_INFINITY): void {
+    const limit = Math.max(0, Math.floor(maxChunks));
+    let processed = 0;
     for (const [, chunk] of this.chunks.entries()) {
       if (chunk.autotileComputed) continue;
+      if (processed >= limit) break;
 
       computeChunkSubgridBlend(chunk, blendGraph);
       chunk.autotileComputed = true;
       chunk.dirty = true;
       chunk.revision++;
+      processed++;
     }
   }
 }

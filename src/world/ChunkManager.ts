@@ -159,16 +159,31 @@ export class ChunkManager {
    * Load chunks within RENDER_DISTANCE of the visible range,
    * unload chunks beyond UNLOAD_DISTANCE.
    */
-  updateLoadedChunks(visible: ChunkRange): void {
+  updateLoadedChunks(visible: ChunkRange, maxChunkLoads = Number.POSITIVE_INFINITY): void {
     // Load chunks within render distance
     const loadMinCx = visible.minCx - RENDER_DISTANCE;
     const loadMaxCx = visible.maxCx + RENDER_DISTANCE;
     const loadMinCy = visible.minCy - RENDER_DISTANCE;
     const loadMaxCy = visible.maxCy + RENDER_DISTANCE;
+    const centerCx = (visible.minCx + visible.maxCx) * 0.5;
+    const centerCy = (visible.minCy + visible.maxCy) * 0.5;
+    const missing: { cx: number; cy: number; dist: number }[] = [];
 
     for (let cy = loadMinCy; cy <= loadMaxCy; cy++) {
       for (let cx = loadMinCx; cx <= loadMaxCx; cx++) {
-        this.getOrCreate(cx, cy);
+        if (this.get(cx, cy)) continue;
+        const dist = Math.abs(cx - centerCx) + Math.abs(cy - centerCy);
+        missing.push({ cx, cy, dist });
+      }
+    }
+
+    if (missing.length > 0) {
+      missing.sort((a, b) => a.dist - b.dist);
+      const loadLimit = Math.max(0, Math.floor(maxChunkLoads));
+      const count = Math.min(loadLimit, missing.length);
+      for (let i = 0; i < count; i++) {
+        const c = missing[i];
+        if (c) this.getOrCreate(c.cx, c.cy);
       }
     }
 

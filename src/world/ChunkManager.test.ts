@@ -68,6 +68,12 @@ describe("ChunkManager", () => {
     expect(mgr.get(0, 0)).toBeUndefined();
   });
 
+  it("updateLoadedChunks can cap new chunk loads per call", () => {
+    const mgr = new ChunkManager();
+    mgr.updateLoadedChunks({ minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 }, 2);
+    expect(mgr.loadedCount).toBe(2);
+  });
+
   it("get returns undefined for unloaded chunks", () => {
     const mgr = new ChunkManager();
     expect(mgr.get(99, 99)).toBeUndefined();

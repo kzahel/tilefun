@@ -6,6 +6,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
   ELEVATION_PX,
+  MAX_CHUNK_CACHE_ROWS_PER_FRAME,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -21,6 +22,13 @@ import type { Camera } from "./Camera.js";
 import type { ElevationItem } from "./SceneItem.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
+
+interface CacheBuildState {
+  canvas: OffscreenCanvas;
+  nextRowOrderIdx: number;
+  revision: number;
+  rowOrder: number[];
+}
 
 /** Compute the current water animation frame index from a timestamp. */
 export function getWaterFrame(nowMs: number): number {
@@ -41,6 +49,8 @@ export class TileRenderer {
   private variants: TileVariants | null = null;
   /** Road overlay autotile sheets keyed by RoadType. */
   private roadSheetMap = new Map<RoadType, Spritesheet>();
+  /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
+  private cacheBuildStates = new Map<string, CacheBuildState>();
 
   /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
@@ -77,11 +87,16 @@ export class TileRenderer {
   ): void {
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
     const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
+    let rowsRemaining = MAX_CHUNK_CACHE_ROWS_PER_FRAME;
+    const visibleKeys = new Set<string>();
+    const centerWy = camera.y;
 
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
         const chunk = world.getChunkIfLoaded(cx, cy);
         if (!chunk) continue;
+        const key = `${cx},${cy}`;
+        visibleKeys.add(key);
         const origin = chunkToWorld(cx, cy);
         const screenOrigin = camera.worldToScreen(origin.wx, origin.wy);
 
@@ -98,17 +113,35 @@ export class TileRenderer {
           continue;
         }
 
-        // Rebuild cache if stale or missing
-        if (chunk.dirty || !chunk.renderCache) {
-          this.rebuildCache(chunk, cx, cy, sheets, getGlobalRoad);
-          chunk.dirty = false;
+        // Rebuild cache incrementally to avoid single-frame spikes.
+        if ((chunk.dirty || !chunk.renderCache) && rowsRemaining > 0) {
+          const chunkOriginWy = origin.wy;
+          const focalRow = Math.max(
+            0,
+            Math.min(CHUNK_SIZE - 1, Math.floor((centerWy - chunkOriginWy) / TILE_SIZE)),
+          );
+          rowsRemaining = this.advanceCacheBuild(
+            key,
+            chunk,
+            cx,
+            cy,
+            sheets,
+            rowsRemaining,
+            focalRow,
+            getGlobalRoad,
+          );
         }
 
-        if (chunk.renderCache) {
+        const drawCache = chunk.renderCache ?? this.cacheBuildStates.get(key)?.canvas;
+        if (drawCache) {
           // Draw 1px oversize to prevent sub-pixel seams between chunks
-          ctx.drawImage(chunk.renderCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
+          ctx.drawImage(drawCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
         }
       }
+    }
+
+    for (const key of this.cacheBuildStates.keys()) {
+      if (!visibleKeys.has(key)) this.cacheBuildStates.delete(key);
     }
   }
 
@@ -176,25 +209,86 @@ export class TileRenderer {
     return result;
   }
 
-  /**
-   * Rebuild the chunk's OffscreenCanvas cache.
-   * Draws: shallow water base → tile base fill → blend layers → details.
-   */
-  private rebuildCache(
+  /** Advance one chunk cache build by up to `rowBudget` rows. */
+  private advanceCacheBuild(
+    key: string,
     chunk: Chunk,
     cx: number,
     cy: number,
     sheets: Map<string, Spritesheet>,
+    rowBudget: number,
+    focalRow: number,
+    getGlobalRoad?: (tx: number, ty: number) => number,
+  ): number {
+    let state = this.cacheBuildStates.get(key);
+    if (!state) {
+      state = {
+        canvas: new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
+        nextRowOrderIdx: 0,
+        revision: chunk.revision,
+        rowOrder: this.buildRowOrder(focalRow),
+      };
+      this.cacheBuildStates.set(key, state);
+    }
+    if (state.revision !== chunk.revision) {
+      state.revision = chunk.revision;
+      state.nextRowOrderIdx = 0;
+      state.rowOrder = this.buildRowOrder(focalRow);
+      const restartCtx = state.canvas.getContext("2d");
+      if (!restartCtx) return rowBudget;
+      restartCtx.imageSmoothingEnabled = false;
+      restartCtx.clearRect(0, 0, CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
+    } else if (state.nextRowOrderIdx === 0) {
+      const setupCtx = state.canvas.getContext("2d");
+      if (!setupCtx) return rowBudget;
+      setupCtx.imageSmoothingEnabled = false;
+      setupCtx.clearRect(0, 0, CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
+    }
+
+    const offCtx = state.canvas.getContext("2d");
+    if (!offCtx) return rowBudget;
+    let usedRows = 0;
+    while (usedRows < rowBudget && state.nextRowOrderIdx < state.rowOrder.length) {
+      const ly = state.rowOrder[state.nextRowOrderIdx];
+      state.nextRowOrderIdx++;
+      if (ly === undefined) continue;
+      this.drawCacheRows(chunk, cx, cy, sheets, offCtx, ly, ly + 1, getGlobalRoad);
+      usedRows++;
+    }
+
+    if (state.nextRowOrderIdx >= state.rowOrder.length) {
+      chunk.renderCache = state.canvas;
+      chunk.dirty = false;
+      this.cacheBuildStates.delete(key);
+    }
+
+    return rowBudget - usedRows;
+  }
+
+  /** Build center-out row ordering so rows near the camera are rendered first. */
+  private buildRowOrder(centerRow: number): number[] {
+    const order: number[] = [];
+    for (let d = 0; d < CHUNK_SIZE; d++) {
+      const up = centerRow - d;
+      if (up >= 0) order.push(up);
+      if (d === 0) continue;
+      const down = centerRow + d;
+      if (down < CHUNK_SIZE) order.push(down);
+    }
+    return order;
+  }
+
+  /** Draw a contiguous row range into a chunk cache canvas. */
+  private drawCacheRows(
+    chunk: Chunk,
+    cx: number,
+    cy: number,
+    sheets: Map<string, Spritesheet>,
+    offCtx: OffscreenCanvasRenderingContext2D,
+    rowStart: number,
+    rowEnd: number,
     getGlobalRoad?: (tx: number, ty: number) => number,
   ): void {
-    if (!chunk.renderCache) {
-      chunk.renderCache = new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
-    }
-    const offCtx = chunk.renderCache.getContext("2d");
-    if (!offCtx) return;
-    offCtx.imageSmoothingEnabled = false;
-    offCtx.clearRect(0, 0, CHUNK_NATIVE_PX, CHUNK_NATIVE_PX);
-
     const waterSheet = sheets.get("shallowwater");
     const graph = this.blendGraph;
     const variants = this.variants;
@@ -202,7 +296,7 @@ export class TileRenderer {
     const baseTx = cx * CHUNK_SIZE;
     const baseTy = cy * CHUNK_SIZE;
 
-    for (let ly = 0; ly < CHUNK_SIZE; ly++) {
+    for (let ly = rowStart; ly < rowEnd; ly++) {
       for (let lx = 0; lx < CHUNK_SIZE; lx++) {
         const dx = lx * TILE_SIZE;
         const dy = ly * TILE_SIZE;

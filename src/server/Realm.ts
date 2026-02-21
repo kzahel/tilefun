@@ -3,6 +3,8 @@ import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import {
   CHUNK_SIZE_PX,
   JUMP_VELOCITY,
+  MAX_AUTOTILE_CHUNKS_PER_UPDATE,
+  MAX_CHUNK_LOADS_PER_UPDATE,
   RENDER_DISTANCE,
   THROW_ANGLE,
   THROW_MAX_SPEED,
@@ -688,8 +690,12 @@ export class Realm {
 
   /** Load/unload chunks for the given visible range and compute autotile. */
   updateVisibleChunks(range: ChunkRange): void {
-    this.world.updateLoadedChunks(range);
-    this.world.computeAutotile(this.blendGraph);
+    const initialWarmLoad = this.world.chunks.loadedCount === 0;
+    const maxLoads =
+      this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
+    const maxAutotile = initialWarmLoad ? Number.POSITIVE_INFINITY : MAX_AUTOTILE_CHUNKS_PER_UPDATE;
+    this.world.updateLoadedChunks(range, maxLoads);
+    this.world.computeAutotile(this.blendGraph, maxAutotile);
   }
 
   /** Mark all chunks for re-render (debug mode changes). */

@@ -16,6 +16,15 @@ export const RENDER_DISTANCE = 1;
 /** Chunks beyond the viewport to unload from memory. */
 export const UNLOAD_DISTANCE = 3;
 
+/** Max number of new chunks to generate per server/client update tick. */
+export const MAX_CHUNK_LOADS_PER_UPDATE = 4;
+
+/** Max number of loaded chunks to run autotile blending on per update tick. */
+export const MAX_AUTOTILE_CHUNKS_PER_UPDATE = 2;
+
+/** Max number of chunk cache rows to rebuild per rendered frame. */
+export const MAX_CHUNK_CACHE_ROWS_PER_FRAME = 4;
+
 /** Fixed update tick rate in Hz. */
 export const TICK_RATE = 60;
 
