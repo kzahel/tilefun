@@ -163,7 +163,22 @@ const PROP_DEFS: Record<string, PropDef> = {
     row: 0,
     width: 64,
     height: 80,
-    collider: { offsetX: 0, offsetY: 0, width: 12, height: 12 },
+    collider: { offsetX: 0, offsetY: 0, width: 12, height: 12, zHeight: 48 },
+    walls: [
+      // Trunk — blocks movement from ground to canopy
+      { offsetX: 0, offsetY: 0, width: 12, height: 12, zHeight: 48 },
+      // Canopy — walkable platform, doesn't block horizontal movement
+      {
+        offsetX: 0,
+        offsetY: -2,
+        width: 28,
+        height: 20,
+        zBase: 40,
+        zHeight: 8,
+        walkableTop: true,
+        passable: true,
+      },
+    ],
     material: MaterialType.Wood,
   },
   "prop-oak-tree": {
@@ -172,7 +187,22 @@ const PROP_DEFS: Record<string, PropDef> = {
     row: 0,
     width: 64,
     height: 64,
-    collider: { offsetX: 0, offsetY: 0, width: 16, height: 12 },
+    collider: { offsetX: 0, offsetY: 0, width: 16, height: 12, zHeight: 32 },
+    walls: [
+      // Trunk — blocks movement from ground to crown
+      { offsetX: 0, offsetY: 0, width: 16, height: 12, zHeight: 32 },
+      // Crown — walkable platform, doesn't block horizontal movement
+      {
+        offsetX: 0,
+        offsetY: -2,
+        width: 32,
+        height: 24,
+        zBase: 24,
+        zHeight: 8,
+        walkableTop: true,
+        passable: true,
+      },
+    ],
     material: MaterialType.Wood,
   },
   "prop-fountain": {
