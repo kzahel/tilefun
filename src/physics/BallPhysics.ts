@@ -13,6 +13,7 @@ import {
 } from "../config/constants.js";
 import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { createGem } from "../entities/Gem.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import { getSurfaceZ } from "./surfaceHeight.js";
@@ -167,9 +168,20 @@ export function tickBallPhysics(
         const hitNx = hitDx / hitDist;
         const hitNy = hitDy / hitDist;
 
-        // Scare NPCs (non-hostile entities with wander AI)
+        // Kill hostile entities (angry ghosts etc.)
         const ai = other.wanderAI;
-        if (ai && !ai.hostile) {
+        if (ai?.hostile && other.deathTimer === undefined) {
+          other.deathTimer = 0.4;
+          ai.hostile = false;
+          other.tags?.delete("hostile");
+          ai.state = "idle";
+          if (other.velocity) {
+            other.velocity.vx = 0;
+            other.velocity.vy = 0;
+          }
+          entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (ai && !ai.hostile) {
+          // Scare NPCs (non-hostile entities with wander AI)
           if (other.velocity) {
             other.velocity.vx += hitNx * BALL_SCARE_KNOCKBACK;
             other.velocity.vy += hitNy * BALL_SCARE_KNOCKBACK;
