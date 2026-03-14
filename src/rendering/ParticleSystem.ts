@@ -16,6 +16,7 @@ interface Particle {
   color: string;
 }
 
+const HOSTILE_COLORS = ["#FF3333", "#CC2222", "#FF5555", "#AA1111"];
 const DIRT_COLORS = ["#8B6914", "#A0782C", "#6B4F1D", "#C4A265"];
 const WATER_COLORS = ["#4488CC", "#66AADD", "#3377BB", "#88CCEE", "#FFFFFF"];
 const CLOUD_COLORS = ["#FFFFFF", "#EEEEEE", "#DDDDDD", "#CCCCCC"];
@@ -88,6 +89,26 @@ export class ParticleSystem {
         color: WATER_COLORS[Math.floor(Math.random() * WATER_COLORS.length)] ?? "#4488CC",
       });
     }
+  }
+
+  /** Emit a single wispy particle from a hostile entity. Call each frame. */
+  spawnHostileWisp(wx: number, wy: number): void {
+    if (Math.random() > 0.3) return; // ~30% chance per frame → ~18/s at 60fps
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 3 + Math.random() * 6;
+    const life = 0.4 + Math.random() * 0.3;
+    this.particles.push({
+      wx: wx + (Math.random() - 0.5) * 8,
+      wy: wy + (Math.random() - 0.5) * 4,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed * 0.3,
+      vz: 10 + Math.random() * 15,
+      z: Math.random() * 4,
+      life,
+      maxLife: life,
+      size: 0.8 + Math.random() * 0.8,
+      color: HOSTILE_COLORS[Math.floor(Math.random() * HOSTILE_COLORS.length)] ?? "#FF3333",
+    });
   }
 
   update(dt: number): void {

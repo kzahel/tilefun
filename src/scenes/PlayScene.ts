@@ -454,6 +454,14 @@ export class PlayScene implements GameScene {
 
     this.footsteps?.update(dt, gc.stateView.entities);
     this.ambient?.update(dt, gc.stateView.entities);
+
+    // Hostile entities emit red wisps
+    for (const e of gc.stateView.entities) {
+      if (e.wanderAI?.hostile && e.deathTimer === undefined) {
+        this.particles.spawnHostileWisp(e.position.wx, e.position.wy);
+      }
+    }
+
     this.particles.update(dt);
   }
 
