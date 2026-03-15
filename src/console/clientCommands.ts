@@ -1,4 +1,5 @@
 import type { GameContext } from "../core/GameScene.js";
+import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 
 export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): void {
@@ -141,6 +142,17 @@ export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): 
       url.searchParams.delete("server");
       url.searchParams.set("join", peerId);
       window.location.href = url.toString();
+    },
+  });
+
+  engine.commands.register({
+    name: "prop_editor",
+    description: "Open prop collision editor",
+    args: [],
+    category: "cl",
+    execute: (_args, out) => {
+      gc.scenes.push(new PropEditorScene());
+      out("Prop editor opened. ESC to exit.");
     },
   });
 

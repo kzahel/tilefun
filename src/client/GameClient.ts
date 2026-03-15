@@ -30,6 +30,7 @@ import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
+import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import {
@@ -902,7 +903,19 @@ export class GameClient {
       this.debugPanel.visible = this.debugEnabled;
     });
 
-    panel.append(editBtn, menuBtn, debugBtn);
+    const propEditorBtn = document.createElement("button");
+    propEditorBtn.textContent = "Prop Editor";
+    propEditorBtn.style.cssText = MENU_BTN_STYLE;
+    propEditorBtn.addEventListener("click", () => {
+      closePanel();
+      if (this.scenes.has(PropEditorScene)) {
+        this.scenes.pop();
+      } else {
+        this.scenes.push(new PropEditorScene());
+      }
+    });
+
+    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn);
 
     // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
     const vrBtn = document.createElement("button");

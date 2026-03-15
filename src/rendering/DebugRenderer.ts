@@ -218,7 +218,7 @@ function drawZLabel(
   ctx.restore();
 }
 
-function drawCollisionBoxes(
+export function drawCollisionBoxes(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
   entities: Entity[],

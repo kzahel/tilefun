@@ -349,9 +349,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-2": {
@@ -361,9 +359,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-3": {
@@ -373,9 +369,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 256,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -8, width: 160, height: 72, zHeight: 52, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -8, width: 160, height: 72, zHeight: 52, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-4": {
@@ -385,9 +379,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-5": {
@@ -397,9 +389,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-terraced-house-6": {
@@ -409,9 +399,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 192,
     height: 240,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-country-house": {
@@ -421,9 +409,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 288,
     height: 256,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 240, height: 80, zHeight: 40, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 240, height: 80, zHeight: 40, walkableTop: true }],
     material: MaterialType.Stone,
   },
   "prop-japanese-house": {
@@ -433,9 +419,7 @@ const PROP_DEFS: Record<string, PropDef> = {
     width: 240,
     height: 224,
     collider: null,
-    walls: [
-      { offsetX: 0, offsetY: -5, width: 200, height: 64, zHeight: 36, walkableTop: true },
-    ],
+    walls: [{ offsetX: 0, offsetY: -5, width: 200, height: 64, zHeight: 36, walkableTop: true }],
     material: MaterialType.Wood,
   },
   // ── Street furniture (from ME atlas) ───────────────────────────────────
