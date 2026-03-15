@@ -256,7 +256,12 @@ export class EditorPanel {
     for (const entry of PROP_PALETTE) {
       if (entry.category !== lastCategory) {
         if (lastCategory !== "") this.propsRow.appendChild(this.makeSeparator());
-        const catLabel = entry.category === "nature" ? "Nature" : "Playground";
+        const catLabel =
+          entry.category === "nature"
+            ? "Nature"
+            : entry.category === "building"
+              ? "Buildings"
+              : "Playground";
         this.propsRow.appendChild(this.makeLabel(catLabel));
         lastCategory = entry.category;
       }

@@ -44,7 +44,7 @@ export const DEFAULT_ROAD_PARAMS: RoadGenParams = {
  * Deterministic hash for grid edge activation.
  * Returns a value in [0, 1) for the grid edge at (a, b) with the given seed.
  */
-function edgeHash(a: number, b: number, seed: number): number {
+export function edgeHash(a: number, b: number, seed: number): number {
   let h = (a * 374761393 + b * 668265263 + seed * 1274126177) | 0;
   h = Math.imul(h ^ (h >>> 13), 1103515245);
   h = Math.imul(h ^ (h >>> 16), 2654435769);
@@ -66,7 +66,7 @@ export function getElevation(tx: number, ty: number, seed: number, islandRadius:
  * Is a horizontal road segment active and dry (no water along its path)?
  * Checks hash activation AND samples elevation along the segment center.
  */
-function isHSegmentActive(
+export function isHSegmentActive(
   gx: number,
   gy: number,
   seed: number,
@@ -90,7 +90,7 @@ function isHSegmentActive(
 /**
  * Is a vertical road segment active and dry (no water along its path)?
  */
-function isVSegmentActive(
+export function isVSegmentActive(
   gx: number,
   gy: number,
   seed: number,

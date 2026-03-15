@@ -341,6 +341,149 @@ const PROP_DEFS: Record<string, PropDef> = {
     height: 32,
     collider: { offsetX: 0, offsetY: 0, width: 56, height: 16 },
   },
+  // ── Buildings (from ME atlas) ──────────────────────────────────────────
+  "prop-terraced-house-1": {
+    sheetKey: "me-complete",
+    col: 30,
+    row: 454,
+    width: 192,
+    height: 240,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-terraced-house-2": {
+    sheetKey: "me-complete",
+    col: 42,
+    row: 454,
+    width: 192,
+    height: 240,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-terraced-house-3": {
+    sheetKey: "me-complete",
+    col: 30,
+    row: 472,
+    width: 192,
+    height: 256,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -8, width: 160, height: 72, zHeight: 52, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-terraced-house-4": {
+    sheetKey: "me-complete",
+    col: 42,
+    row: 472,
+    width: 192,
+    height: 240,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-terraced-house-5": {
+    sheetKey: "me-complete",
+    col: 62,
+    row: 472,
+    width: 192,
+    height: 240,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-terraced-house-6": {
+    sheetKey: "me-complete",
+    col: 62,
+    row: 457,
+    width: 192,
+    height: 240,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 160, height: 64, zHeight: 48, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-country-house": {
+    sheetKey: "me-complete",
+    col: 0,
+    row: 452,
+    width: 288,
+    height: 256,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 240, height: 80, zHeight: 40, walkableTop: true },
+    ],
+    material: MaterialType.Stone,
+  },
+  "prop-japanese-house": {
+    sheetKey: "me-complete",
+    col: 140,
+    row: 475,
+    width: 240,
+    height: 224,
+    collider: null,
+    walls: [
+      { offsetX: 0, offsetY: -5, width: 200, height: 64, zHeight: 36, walkableTop: true },
+    ],
+    material: MaterialType.Wood,
+  },
+  // ── Street furniture (from ME atlas) ───────────────────────────────────
+  "prop-street-lamp": {
+    sheetKey: "me-complete",
+    col: 8,
+    row: 17,
+    width: 16,
+    height: 64,
+    collider: { offsetX: 0, offsetY: 0, width: 4, height: 4 },
+    material: MaterialType.Metal,
+  },
+  "prop-bench": {
+    sheetKey: "me-complete",
+    col: 5,
+    row: 11,
+    width: 32,
+    height: 32,
+    collider: { offsetX: 0, offsetY: 0, width: 28, height: 12, zHeight: 10, walkableTop: true },
+    material: MaterialType.Wood,
+  },
+  "prop-mailbox": {
+    sheetKey: "me-complete",
+    col: 130,
+    row: 333,
+    width: 16,
+    height: 32,
+    collider: { offsetX: 0, offsetY: 0, width: 12, height: 8 },
+    material: MaterialType.Metal,
+  },
+  "prop-garden-fountain": {
+    sheetKey: "me-complete",
+    col: 22,
+    row: 226,
+    width: 48,
+    height: 96,
+    collider: { offsetX: 0, offsetY: 0, width: 40, height: 40 },
+    material: MaterialType.Stone,
+  },
+  "prop-fire-hydrant": {
+    sheetKey: "me-complete",
+    col: 168,
+    row: 252,
+    width: 32,
+    height: 32,
+    collider: { offsetX: 0, offsetY: 0, width: 12, height: 12 },
+    material: MaterialType.Metal,
+  },
 };
 
 /** Look up the physical material for a prop type. Returns undefined for soft/natural props. */
@@ -418,7 +561,7 @@ export interface PropPaletteEntry {
   type: string;
   label: string;
   color: string;
-  category: "nature" | "playground";
+  category: "nature" | "playground" | "building";
 }
 
 export const PROP_PALETTE: PropPaletteEntry[] = [
@@ -453,4 +596,18 @@ export const PROP_PALETTE: PropPaletteEntry[] = [
   { type: "prop-tube-climber", label: "Tube Climber", color: "#4080d0", category: "playground" },
   { type: "prop-basketball-hoop", label: "B-ball Hoop", color: "#808080", category: "playground" },
   { type: "prop-dino-topiary", label: "Dino Topiary", color: "#30a040", category: "playground" },
+  // Buildings & street furniture
+  { type: "prop-terraced-house-1", label: "House 1", color: "#b08060", category: "building" },
+  { type: "prop-terraced-house-2", label: "House 2", color: "#a07050", category: "building" },
+  { type: "prop-terraced-house-3", label: "House 3", color: "#c09070", category: "building" },
+  { type: "prop-terraced-house-4", label: "House 4", color: "#907050", category: "building" },
+  { type: "prop-terraced-house-5", label: "House 5", color: "#b08060", category: "building" },
+  { type: "prop-terraced-house-6", label: "House 6", color: "#a06040", category: "building" },
+  { type: "prop-country-house", label: "Country House", color: "#d0a070", category: "building" },
+  { type: "prop-japanese-house", label: "Japanese House", color: "#806040", category: "building" },
+  { type: "prop-street-lamp", label: "Street Lamp", color: "#404040", category: "building" },
+  { type: "prop-bench", label: "Bench", color: "#806030", category: "building" },
+  { type: "prop-mailbox", label: "Mailbox", color: "#4060c0", category: "building" },
+  { type: "prop-garden-fountain", label: "Gdn Fountain", color: "#607080", category: "building" },
+  { type: "prop-fire-hydrant", label: "Fire Hydrant", color: "#c03030", category: "building" },
 ];

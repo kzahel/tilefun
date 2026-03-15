@@ -28,6 +28,7 @@ import { TentSpawner } from "../entities/TentSpawner.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
+import { generateStructuresForChunk } from "../generation/StructureGenerator.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -155,6 +156,14 @@ export class Realm {
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
   private tentSpawner = new TentSpawner();
+
+  /** World generation params (stored for structure generation). */
+  private worldSeed = 42;
+  private roadParams = DEFAULT_ROAD_PARAMS;
+  private worldIslandRadius = 0;
+  private worldType: WorldType = "generated";
+  /** Tracks processed road intersections/segments for structure generation. */
+  private processedStructureKeys = new Set<string>();
 
   /** Sessions currently in this realm. */
   readonly sessions = new Map<string, PlayerSession>();
@@ -697,8 +706,39 @@ export class Realm {
     const maxLoads =
       this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
     const maxAutotile = initialWarmLoad ? Number.POSITIVE_INFINITY : MAX_AUTOTILE_CHUNKS_PER_UPDATE;
+    const chunksBefore = new Set<string>();
+    if (this.worldType !== "flat") {
+      for (const [key] of this.world.chunks.entries()) {
+        chunksBefore.add(key);
+      }
+    }
     this.world.updateLoadedChunks(range, maxLoads);
     this.world.computeAutotile(this.blendGraph, maxAutotile);
+
+    // Generate structures for newly loaded chunks (only for worlds with roads)
+    if (this.worldType !== "flat") {
+      for (const [key] of this.world.chunks.entries()) {
+        if (chunksBefore.has(key)) continue;
+        const commaIdx = key.indexOf(",");
+        const cx = Number(key.slice(0, commaIdx));
+        const cy = Number(key.slice(commaIdx + 1));
+        const { placements, newIntersectionKeys } = generateStructuresForChunk(
+          cx,
+          cy,
+          this.worldSeed,
+          this.roadParams,
+          this.worldIslandRadius,
+          this.processedStructureKeys,
+        );
+        for (const k of newIntersectionKeys) {
+          this.processedStructureKeys.add(k);
+        }
+        for (const p of placements) {
+          const prop = createProp(p.propType, p.wx, p.wy);
+          this.propManager.add(prop);
+        }
+      }
+    }
   }
 
   /** Mark all chunks for re-render (debug mode changes). */
@@ -928,6 +968,7 @@ export class Realm {
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);
     this.tentSpawner.reset();
+    this.processedStructureKeys.clear();
 
     // Bind save accessors
     this.saveManager.bind(
@@ -1545,6 +1586,11 @@ export class Realm {
     const type: WorldType = meta?.worldType ?? "generated";
     const seed = meta?.seed ?? 42;
     const roadParams = { ...DEFAULT_ROAD_PARAMS, ...meta?.roadParams };
+    // Store for structure generation
+    this.worldType = type;
+    this.worldSeed = seed;
+    this.roadParams = roadParams;
+    this.worldIslandRadius = type === "island" ? 12 : 0;
     switch (type) {
       case "flat":
         return new FlatStrategy();
