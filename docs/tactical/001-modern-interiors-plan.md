@@ -109,11 +109,23 @@ Generated review captures:
 
 ### Chunk 4: Curated Architectural Metadata
 
-Status: pending
+Status: in progress
 
 - Create curated metadata for room-builder floors, wall strips, baseboards, arched entryways, floor connectors, and door/opening variants.
 - Define roles such as `floor-fill`, `back-wall`, `front-wall`, `side-wall`, `doorway`, `threshold`, and `foreground-wall`.
 - Add basic collision metadata for walls and passable metadata for doorways.
+
+Initial spatial-mapping subchunk:
+
+- Add a draft generated-room renderer that uses atlas metadata, room-builder sheet crops, and individual room-builder tile keys.
+- Render two room attempts side by side:
+  - Draft A: a `3d-walls` sheet crop with repeated floor tiles underneath.
+  - Draft B: a rough flat-wall guess assembled from wall, baseboard, floor, and floor-connector tile keys.
+- Capture the comparison with Playwright so feedback can happen from screenshots.
+
+Generated review captures:
+
+- `test-results/interiors/draft-generated-room-comparison.png`
 
 ### Chunk 5: Indoor Map Model
 
@@ -173,3 +185,4 @@ Status: pending
 - 2026-07-04: Completed Chunk 1 by adding the Modern Interiors atlas generator, generated atlas PNG, generated JSON index, npm script, and asset credit.
 - 2026-07-04: Completed Chunk 2 by adding runtime Modern Interiors metadata loading, atlas image registration, an in-game validation/browser panel, and Playwright coverage for the layered home preview.
 - 2026-07-04: Completed Chunk 3 by adding URL-driven interiors panel startup state and a Playwright screenshot capture workflow for remote review.
+- 2026-07-04: Started Chunk 4 with a draft generated-room spatial-mapping renderer and screenshot capture.

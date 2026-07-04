@@ -9,6 +9,7 @@ import {
   type ModernInteriorsSourceKind,
   type ModernInteriorsVariant,
 } from "../assets/ModernInteriorsAtlasIndex.js";
+import { drawDraftInteriorRoomComparison } from "../interiors/DraftRoomGenerator.js";
 
 const MAX_VISIBLE_ENTRIES = 720;
 const DEFAULT_DESIGN = "generic-home-designs/generic-home-1";
@@ -154,6 +155,7 @@ export class InteriorCatalog {
   private layerControls: HTMLDivElement;
   private stackCanvas: HTMLCanvasElement;
   private sourcePreviewCanvas: HTMLCanvasElement;
+  private generatedRoomCanvas: HTMLCanvasElement;
   private entries: ModernInteriorsAtlasEntry[] = [];
   private enabledLayers = new Set<string>();
   private layerControlDesign = "";
@@ -247,6 +249,13 @@ export class InteriorCatalog {
 
     this.previewPanel.appendChild(previewGrid);
 
+    this.generatedRoomCanvas = document.createElement("canvas");
+    this.generatedRoomCanvas.style.cssText = CANVAS_STYLE;
+    this.generatedRoomCanvas.setAttribute("data-testid", "interior-generated-room");
+    this.previewPanel.appendChild(
+      this.wrapCanvas("Generated room draft", this.generatedRoomCanvas),
+    );
+
     this.layerControls = document.createElement("div");
     this.layerControls.style.cssText =
       "display: flex; flex-wrap: wrap; gap: 8px; align-items: center;";
@@ -284,6 +293,7 @@ export class InteriorCatalog {
   setImage(img: CanvasImageSource): void {
     this.atlasImage = img;
     this.renderPrefabPreview();
+    this.renderGeneratedRoomPreview();
     this.applyFilter();
   }
 
@@ -295,6 +305,7 @@ export class InteriorCatalog {
     this.applyPendingRouteState();
     this.applyFilter();
     this.renderPrefabPreview();
+    this.renderGeneratedRoomPreview();
   }
 
   setRouteState(state: InteriorCatalogRouteState): void {
@@ -302,6 +313,7 @@ export class InteriorCatalog {
     this.applyPendingRouteState();
     this.applyFilter();
     this.renderPrefabPreview();
+    this.renderGeneratedRoomPreview();
   }
 
   get visible(): boolean {
@@ -312,6 +324,7 @@ export class InteriorCatalog {
     this.overlay.style.display = "flex";
     this.applyFilter();
     this.renderPrefabPreview();
+    this.renderGeneratedRoomPreview();
     this.searchInput.focus();
   }
 
@@ -480,6 +493,11 @@ export class InteriorCatalog {
     } else {
       this.clearCanvas(this.sourcePreviewCanvas, 224, 128, 1);
     }
+  }
+
+  private renderGeneratedRoomPreview(): void {
+    if (!this.atlasImage || !isModernInteriorsAtlasLoaded()) return;
+    drawDraftInteriorRoomComparison(this.generatedRoomCanvas, this.atlasImage);
   }
 
   private renderLayerControls(layers: ModernInteriorsAtlasEntry[]): void {

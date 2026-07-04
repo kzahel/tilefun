@@ -24,6 +24,9 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
   await page.getByTestId("interior-prefab-preview").screenshot({
     path: `${CAPTURE_DIR}/generic-home-1-source-preview.png`,
   });
+  await page.getByTestId("interior-generated-room").screenshot({
+    path: `${CAPTURE_DIR}/draft-generated-room-comparison.png`,
+  });
 });
 
 test("capture room-builder wall candidates", async ({ page }) => {

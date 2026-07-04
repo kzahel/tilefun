@@ -20,9 +20,10 @@ async function canvasHasAtlasContent(locator: import("@playwright/test").Locator
       const g = data[i + 1] ?? 0;
       const b = data[i + 2] ?? 0;
       const isChecker = (r === 32 && g === 40 && b === 56) || (r === 21 && g === 27 && b === 40);
-      if (!isChecker) atlasPixels++;
+      const isDraftBackground = r === 14 && g === 17 && b === 24;
+      if (!isChecker && !isDraftBackground) atlasPixels++;
     }
-    return atlasPixels > 500;
+    return atlasPixels > 2000;
   });
 }
 
@@ -37,4 +38,5 @@ test("Modern Interiors validation panel renders Generic Home layers", async ({ p
 
   await expect(await canvasHasAtlasContent(page.getByTestId("interior-prefab-stack"))).toBe(true);
   await expect(await canvasHasAtlasContent(page.getByTestId("interior-prefab-preview"))).toBe(true);
+  await expect(await canvasHasAtlasContent(page.getByTestId("interior-generated-room"))).toBe(true);
 });
