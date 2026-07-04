@@ -1,7 +1,14 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 const CAPTURE_DIR = "test-results/interiors";
+
+test("capture source atlas geometry grids", () => {
+  execFileSync("node", ["scripts/capture-interiors-source-grids.mjs"], {
+    stdio: "inherit",
+  });
+});
 
 async function waitForInteriorsPanel(page: import("@playwright/test").Page, query: string) {
   fs.mkdirSync(CAPTURE_DIR, { recursive: true });

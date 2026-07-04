@@ -90,7 +90,8 @@ Status: completed
   - `interiorVariant`
   - `interiorSearch`
 - Add a repeatable screenshot capture command for remote review.
-- Save generated screenshots under ignored test artifacts instead of requiring manual browser interaction.
+- Save generated screenshots under ignored `test-results/interiors` artifacts instead of requiring manual browser interaction.
+- Do not commit generated screenshot binaries; regenerate or copy them to temporary local paths for review links.
 
 Completed artifacts:
 
@@ -123,10 +124,14 @@ Initial spatial-mapping subchunk:
   - Draft B: the equivalent `3d-walls` sheet crop as a visual control.
   - Draft C: a rough flat-wall guess assembled from wall, baseboard, floor, and floor-connector tile keys.
 - Capture the comparison with Playwright so feedback can happen from screenshots.
+- Generate labeled source-grid captures for the wall/border/baseboard sheets used while validating atlas geometry.
 
 Generated review captures:
 
 - `test-results/interiors/draft-generated-room-comparison.png`
+- `test-results/interiors/3d-walls-source-grid.png`
+- `test-results/interiors/borders-source-grid.png`
+- `test-results/interiors/baseboards-source-grid.png`
 
 ### Chunk 5: Indoor Map Model
 
@@ -187,3 +192,4 @@ Status: pending
 - 2026-07-04: Completed Chunk 2 by adding runtime Modern Interiors metadata loading, atlas image registration, an in-game validation/browser panel, and Playwright coverage for the layered home preview.
 - 2026-07-04: Completed Chunk 3 by adding URL-driven interiors panel startup state and a Playwright screenshot capture workflow for remote review.
 - 2026-07-04: Started Chunk 4 with a draft generated-room spatial-mapping renderer and screenshot capture.
+- 2026-07-04: Added repeatable labeled source-grid captures for the 3D walls, borders, and baseboards sheets after stale scratch artifact paths were found.
