@@ -56,12 +56,27 @@ Generated counts:
 
 ### Chunk 2: Atlas Browser and Validation Scene
 
-Status: pending
+Status: completed
 
 - Add a runtime loader for the Modern Interiors atlas index.
 - Add a simple in-game or dev-only browser/filter for interior entries.
 - Render one known prefab, starting with `Generic_Home_1`, using its layer images.
 - Validate scale, transparency, draw order, and visual fidelity against the source preview.
+
+Completed artifacts:
+
+- `src/assets/ModernInteriorsAtlasIndex.ts`
+- `src/editor/InteriorCatalog.ts`
+- `src/scenes/InteriorCatalogScene.ts`
+- `tests/interiors.spec.ts`
+
+Runtime behavior:
+
+- `modern-interiors-atlas.png` now loads as the `modern-interiors` sheet.
+- `modern-interiors-atlas.json` now loads during client initialization.
+- The side menu exposes an `Interiors` validation panel.
+- The panel filters atlas entries by source kind, category, variant, and search text.
+- The panel renders `Generic_Home_1` as a composed layer stack next to the source preview.
 
 ### Chunk 3: Curated Architectural Metadata
 
@@ -127,3 +142,4 @@ Status: pending
 
 - 2026-07-04: Created tactical plan and started Chunk 1.
 - 2026-07-04: Completed Chunk 1 by adding the Modern Interiors atlas generator, generated atlas PNG, generated JSON index, npm script, and asset credit.
+- 2026-07-04: Completed Chunk 2 by adding runtime Modern Interiors metadata loading, atlas image registration, an in-game validation/browser panel, and Playwright coverage for the layered home preview.

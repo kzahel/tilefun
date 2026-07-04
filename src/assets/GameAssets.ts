@@ -1,6 +1,7 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import { loadImage } from "./AssetLoader.js";
+import { MODERN_INTERIORS_SHEET_KEY } from "./ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "./Spritesheet.js";
 import { TileVariants } from "./TileVariants.js";
 
@@ -80,10 +81,11 @@ const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
 export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets> {
   const blendDescs = blendGraph.allSheets;
 
-  const [blendImages, spriteImages, completeImg] = await Promise.all([
+  const [blendImages, spriteImages, completeImg, modernInteriorsImg] = await Promise.all([
     Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
     Promise.all(SPRITE_MANIFEST.map((m) => loadImage(m.path))),
     loadImage("assets/tilesets/me-complete.png"),
+    loadImage("assets/tilesets/modern-interiors-atlas.png"),
   ]);
 
   const sheets = new Map<string, Spritesheet>();
@@ -116,6 +118,7 @@ export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets
   // Tile variants from the complete ME tileset
   const meCompleteSheet = new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE);
   sheets.set("me-complete", meCompleteSheet);
+  sheets.set(MODERN_INTERIORS_SHEET_KEY, new Spritesheet(modernInteriorsImg, TILE_SIZE, TILE_SIZE));
   const variants = new TileVariants(meCompleteSheet);
   registerTileVariants(variants);
 

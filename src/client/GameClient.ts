@@ -1,6 +1,10 @@
 import { loadAtlasIndex } from "../assets/AtlasIndex.js";
 import { loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
+import {
+  loadModernInteriorsAtlasIndex,
+  MODERN_INTERIORS_SHEET_KEY,
+} from "../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
@@ -17,6 +21,7 @@ import { Time } from "../core/Time.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
+import { InteriorCatalog } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { ActionManager } from "../input/ActionManager.js";
@@ -28,6 +33,7 @@ import { DebugPanel } from "../rendering/DebugPanel.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
+import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
@@ -78,6 +84,7 @@ export class GameClient {
   private editorPanel: EditorPanel;
   private mainMenu: MainMenu;
   private propCatalog: PropCatalog;
+  private interiorCatalog: InteriorCatalog;
   private stateView: ClientStateView;
   private remoteView: RemoteStateView | null = null;
   private transport: IClientTransport;
@@ -172,6 +179,10 @@ export class GameClient {
     this.mainMenu = new MainMenu();
     this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
+    this.interiorCatalog = new InteriorCatalog();
+    this.interiorCatalog.onClose = () => {
+      if (this.scenes.has(InteriorCatalogScene)) this.scenes.pop();
+    };
     this.editorModel.onOpenCatalog = () => this.scenes.push(new CatalogScene());
     this.propCatalog.onSelect = (propType: string) => {
       this.editorModel.selectedPropType = propType;
@@ -444,6 +455,7 @@ export class GameClient {
     const [assets] = await Promise.all([
       loadGameAssets(blendGraph),
       loadAtlasIndex(),
+      loadModernInteriorsAtlasIndex(),
       this.audioManager.preload(buildFootstepManifest()),
     ]);
     this.sheets = assets.sheets;
@@ -454,6 +466,9 @@ export class GameClient {
     const meComplete = assets.sheets.get("me-complete");
     if (meComplete) this.propCatalog.setImage(meComplete.image);
     this.propCatalog.populateAtlas();
+    const modernInteriors = assets.sheets.get(MODERN_INTERIORS_SHEET_KEY);
+    if (modernInteriors) this.interiorCatalog.setImage(modernInteriors.image);
+    this.interiorCatalog.populateAtlas();
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
@@ -652,6 +667,10 @@ export class GameClient {
         this.scenes.pop();
         return;
       }
+      if (this.scenes.has(InteriorCatalogScene)) {
+        this.scenes.pop();
+        return;
+      }
       if (this.scenes.has(MenuScene)) {
         this.scenes.pop();
       } else {
@@ -659,19 +678,37 @@ export class GameClient {
       }
     });
     this.actions.on("toggle_debug", () => {
-      if (this.scenes.has(MenuScene) || this.scenes.has(CatalogScene)) return;
+      if (
+        this.scenes.has(MenuScene) ||
+        this.scenes.has(CatalogScene) ||
+        this.scenes.has(InteriorCatalogScene)
+      ) {
+        return;
+      }
       this.debugEnabled = !this.debugEnabled;
       this.debugPanel.visible = this.debugEnabled;
     });
     this.actions.on("toggle_editor", () => {
-      if (this.scenes.has(MenuScene) || this.scenes.has(CatalogScene)) return;
+      if (
+        this.scenes.has(MenuScene) ||
+        this.scenes.has(CatalogScene) ||
+        this.scenes.has(InteriorCatalogScene)
+      ) {
+        return;
+      }
       this.toggleEditor();
     });
     this.actions.on("toggle_console", () => {
       this.consoleUI.toggle();
     });
     this.actions.on("toggle_base_mode", () => {
-      if (this.scenes.has(MenuScene) || this.scenes.has(CatalogScene)) return;
+      if (
+        this.scenes.has(MenuScene) ||
+        this.scenes.has(CatalogScene) ||
+        this.scenes.has(InteriorCatalogScene)
+      ) {
+        return;
+      }
       if (this.debugEnabled) this.debugPanel.toggleBaseMode();
     });
   }
@@ -783,6 +820,7 @@ export class GameClient {
       editorPanel: this.editorPanel,
       mainMenu: this.mainMenu,
       propCatalog: this.propCatalog,
+      interiorCatalog: this.interiorCatalog,
       debugPanel: this.debugPanel,
       touchJoystick: this.touchJoystick,
       touchButtons: this.touchButtons,
@@ -852,6 +890,7 @@ export class GameClient {
     // Hamburger button
     const hamburger = document.createElement("button");
     hamburger.textContent = "\u2630";
+    hamburger.setAttribute("data-testid", "main-menu-toggle");
     hamburger.style.cssText = `
       position: fixed; top: 8px; left: 8px; z-index: 200;
       width: 44px; height: 44px; font-size: 24px;
@@ -915,7 +954,20 @@ export class GameClient {
       }
     });
 
-    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn);
+    const interiorsBtn = document.createElement("button");
+    interiorsBtn.textContent = "Interiors";
+    interiorsBtn.style.cssText = MENU_BTN_STYLE;
+    interiorsBtn.setAttribute("data-testid", "open-interiors-catalog");
+    interiorsBtn.addEventListener("click", () => {
+      closePanel();
+      if (this.scenes.has(InteriorCatalogScene)) {
+        this.scenes.pop();
+      } else {
+        this.scenes.push(new InteriorCatalogScene());
+      }
+    });
+
+    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn, interiorsBtn);
 
     // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
     const vrBtn = document.createElement("button");

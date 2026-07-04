@@ -6,6 +6,7 @@ import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
 import type { EditorModel } from "../editor/EditorModel.js";
 import type { EditorPanel } from "../editor/EditorPanel.js";
+import type { InteriorCatalog } from "../editor/InteriorCatalog.js";
 import type { PropCatalog } from "../editor/PropCatalog.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import type { TouchButtons } from "../input/TouchButtons.js";
@@ -42,6 +43,7 @@ export interface GameContext {
   readonly editorPanel: EditorPanel;
   readonly mainMenu: MainMenu;
   readonly propCatalog: PropCatalog;
+  readonly interiorCatalog: InteriorCatalog;
   readonly debugPanel: DebugPanel;
   readonly touchJoystick: TouchJoystick;
   readonly touchButtons: TouchButtons;
