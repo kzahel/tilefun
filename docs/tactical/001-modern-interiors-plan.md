@@ -118,9 +118,10 @@ Status: in progress
 Initial spatial-mapping subchunk:
 
 - Add a draft generated-room renderer that uses atlas metadata, room-builder sheet crops, and individual room-builder tile keys.
-- Render two room attempts side by side:
-  - Draft A: a `3d-walls` sheet crop with repeated floor tiles underneath.
-  - Draft B: a rough flat-wall guess assembled from wall, baseboard, floor, and floor-connector tile keys.
+- Render three room attempts in one screenshot:
+  - Draft A: individual `3d-walls` tile keys from `c00-r00..c07-r06`, with role overlays for north, west, east, south, and corner hypotheses.
+  - Draft B: the equivalent `3d-walls` sheet crop as a visual control.
+  - Draft C: a rough flat-wall guess assembled from wall, baseboard, floor, and floor-connector tile keys.
 - Capture the comparison with Playwright so feedback can happen from screenshots.
 
 Generated review captures:
