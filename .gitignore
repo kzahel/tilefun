@@ -11,3 +11,5 @@ screenshot*.png
 *.tiled-session
 ME complete tileset.tsx
 data/
+!public/data/
+!public/data/**

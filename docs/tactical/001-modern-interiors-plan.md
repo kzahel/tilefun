@@ -1,0 +1,129 @@
+# 001 Modern Interiors Plan
+
+## Goal
+
+Build first-class indoor apartment support using the Modern Interiors asset pack. The end state is enterable buildings from the overworld, indoor maps with explicit architectural and furnishing layers, and procedural apartment generation from curated prefab room metadata.
+
+## Current Understanding
+
+- Modern Exteriors is already wired into runtime through `me-complete.png` and `public/data/me-atlas-index.json`, but it is mostly exterior-facing and has shallow semantics.
+- Modern Interiors is the right source for apartments. It contains:
+  - `Interiors_16x16.png`, a large 16-column master sheet.
+  - `Room_Builder_16x16.png` plus room-builder subfiles for floors, walls, baseboards, arched entryways, floor shadows, connectors, and 3D walls.
+  - Theme sheets for living rooms, bathrooms, bedrooms, kitchens, hospitals, shops, museums, condominiums, and other indoor contexts.
+  - Numbered singles for furniture and decor, with normal, shadowless, and black-shadow variants.
+  - Example home designs already split into layer images where layer 1 is shell/floor/walls and later layers are furniture/foreground.
+- Automatic matching from numbered singles back to source sheets is useful but incomplete. Runtime should use a generated packed atlas with stable keys instead of depending on exact original atlas coordinates.
+
+## Design Direction
+
+- Treat Modern Interiors as a separate runtime asset family from Modern Exteriors.
+- Generate a packed runtime atlas and JSON index from the source pack.
+- Layer curated metadata on top of generated metadata:
+  - Generated metadata: key, source path, source kind, atlas rect, size, variant, theme, room-builder category.
+  - Curated metadata: semantic role, collision footprint, sort anchor, draw layer, room tags, doorway behavior, placement rules.
+- Add explicit indoor map support instead of forcing interiors into the existing terrain/autotile model.
+- Use portals to link exterior doors to `interiorId` instances and back to overworld exits.
+- Bump save format when indoor layers become persistent. Backward compatibility should load old worlds with no indoor maps.
+
+## Implementation Chunks
+
+### Chunk 1: Generated Modern Interiors Atlas
+
+Status: completed
+
+- Add a script that packs Modern Interiors singles, room-builder tiles/sheets, and home-design layer images into a generated runtime atlas.
+- Emit `public/data/modern-interiors-atlas.json`.
+- Emit `public/assets/tilesets/modern-interiors-atlas.png`.
+- Add asset source credit for Modern Interiors.
+- Keep this chunk data-only plus tooling; no runtime rendering behavior yet.
+
+Completed artifacts:
+
+- `scripts/index-interiors-atlas.mjs`
+- `npm run assets:interiors`
+- `public/assets/tilesets/modern-interiors-atlas.png`
+- `public/data/modern-interiors-atlas.json`
+
+Generated counts:
+
+- 19,493 total entries.
+- 15,964 furniture/decor singles across normal, shadowless, and black-shadow variants.
+- 3,476 room-builder tile entries.
+- 9 room-builder sheet entries.
+- 44 home-design layer/preview entries.
+- Atlas size: 2048x8800.
+
+### Chunk 2: Atlas Browser and Validation Scene
+
+Status: pending
+
+- Add a runtime loader for the Modern Interiors atlas index.
+- Add a simple in-game or dev-only browser/filter for interior entries.
+- Render one known prefab, starting with `Generic_Home_1`, using its layer images.
+- Validate scale, transparency, draw order, and visual fidelity against the source preview.
+
+### Chunk 3: Curated Architectural Metadata
+
+Status: pending
+
+- Create curated metadata for room-builder floors, wall strips, baseboards, arched entryways, floor connectors, and door/opening variants.
+- Define roles such as `floor-fill`, `back-wall`, `front-wall`, `side-wall`, `doorway`, `threshold`, and `foreground-wall`.
+- Add basic collision metadata for walls and passable metadata for doorways.
+
+### Chunk 4: Indoor Map Model
+
+Status: pending
+
+- Add an indoor map representation with explicit layers:
+  - `floor`
+  - `wallBack`
+  - `wallFront`
+  - `furniture`
+  - `foreground`
+  - `collision`
+  - `portals`
+- Decide whether indoor maps are chunked or fixed-size room instances for the first version.
+- Add sync and persistence models.
+- Bump save format and migrate old saves to empty indoor data.
+
+### Chunk 5: First Enterable Building Flow
+
+Status: pending
+
+- Attach portal metadata to one exterior building/door prop.
+- Enter from overworld into a fixed test apartment.
+- Exit back to the correct overworld door.
+- Preserve player position and camera behavior cleanly across the transition.
+
+### Chunk 6: Procedural Apartment Generator
+
+Status: pending
+
+- Generate floor plans from room rectangles and doorway constraints.
+- Fill floor/wall layers from curated room-builder metadata.
+- Place furniture from curated room role pools.
+- Validate walkability from entrance to major rooms and exits.
+- Support deterministic generation from seed and apartment type.
+
+### Chunk 7: Editor Workflow
+
+Status: pending
+
+- Let the editor inspect and place indoor tiles/objects.
+- Add prefab stamping for rooms and whole apartments.
+- Add collision/portal visualization.
+- Support user feedback loops where atlas keys can be marked correct/incorrect and metadata refined.
+
+## Open Questions
+
+- Should the first playable interiors be fixed-size instances or chunked indoor worlds?
+- Should furniture be stored as props, indoor objects, or a new shared placed-object type?
+- How much of the numbered singles should be curated manually versus grouped by theme and selected visually?
+- Do we want normal, shadowless, or black-shadow furniture as the default visual style?
+- Should indoor floor/wall layers render through the existing chunk cache or a separate indoor renderer?
+
+## Status Log
+
+- 2026-07-04: Created tactical plan and started Chunk 1.
+- 2026-07-04: Completed Chunk 1 by adding the Modern Interiors atlas generator, generated atlas PNG, generated JSON index, npm script, and asset credit.

@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "assets:interiors": "node scripts/index-interiors-atlas.mjs",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts"
   },
@@ -23,6 +24,7 @@
     "@types/three": "^0.182.0",
     "@types/ws": "^8.5.14",
     "@vitejs/plugin-basic-ssl": "^2.1.4",
+    "pngjs": "^5.0.0",
     "tsx": "^4.19.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",

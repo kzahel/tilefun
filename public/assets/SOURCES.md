@@ -2,6 +2,9 @@
 
 All sprites by Cup Nooble (Sprout Lands asset pack).
 
+Additional interior art from LimeZu Modern Interiors. Credit required:
+https://limezu.itch.io/moderninteriors
+
 ## Tilesets (`tilesets/`)
 
 | File | Source | Original Name | Dimensions |
@@ -11,6 +14,7 @@ All sprites by Cup Nooble (Sprout Lands asset pack).
 | water.png | Sprout Lands Basic Pack | `Tilesets/Water.png` | 64x16 (4x1 tiles) |
 | objects.png | Sprout Lands Basic Pack | `Tilesets/Basic_Grass_Biom_things.png` | 144x80 (9x5 tiles) |
 | grass-autotile.json | Generated from Maaack .tscn | `base/scenes/sprout_lands_tile_map.tscn` | 47 variants |
+| modern-interiors-atlas.png | Generated from LimeZu Modern Interiors | `assets/interiors/` | See `public/data/modern-interiors-atlas.json` |
 
 Grass and dirt tilesets use the Maaack versions because the autotile coordinate
 lookup table (extracted from their Godot .tscn) matches that layout. The basic
