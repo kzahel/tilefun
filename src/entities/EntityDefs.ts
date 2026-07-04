@@ -42,6 +42,8 @@ export interface EntityDef {
   noShadow?: boolean;
   hasVelocity: boolean;
   initialMoving?: boolean;
+  /** When true, entity can only move on water tiles (fish, etc.). */
+  aquatic?: boolean;
 }
 
 // ---- Dynamic state types (serialized per-tick) ----
@@ -286,42 +288,66 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
       sheetKey: "fish1",
       spriteWidth: 16,
       spriteHeight: 16,
-      frameCount: 12,
-      frameDuration: 180,
+      frameCount: 4,
+      frameDuration: 200,
     },
-    collider: null,
-    wanderAI: null,
+    collider: { offsetX: 0, offsetY: 0, width: 8, height: 6 },
+    wanderAI: {
+      idleMin: 1.0,
+      idleMax: 3.0,
+      walkMin: 2.0,
+      walkMax: 5.0,
+      speed: 12,
+      directional: false,
+    },
     noShadow: true,
-    hasVelocity: false,
+    hasVelocity: true,
     initialMoving: true,
+    aquatic: true,
   },
   fish2: {
     sprite: {
       sheetKey: "fish2",
       spriteWidth: 16,
       spriteHeight: 16,
-      frameCount: 12,
-      frameDuration: 180,
+      frameCount: 4,
+      frameDuration: 200,
     },
-    collider: null,
-    wanderAI: null,
+    collider: { offsetX: 0, offsetY: 0, width: 8, height: 6 },
+    wanderAI: {
+      idleMin: 1.0,
+      idleMax: 3.0,
+      walkMin: 2.0,
+      walkMax: 5.0,
+      speed: 12,
+      directional: false,
+    },
     noShadow: true,
-    hasVelocity: false,
+    hasVelocity: true,
     initialMoving: true,
+    aquatic: true,
   },
   fish3: {
     sprite: {
       sheetKey: "fish3",
       spriteWidth: 16,
       spriteHeight: 16,
-      frameCount: 14,
-      frameDuration: 180,
+      frameCount: 4,
+      frameDuration: 200,
     },
-    collider: null,
-    wanderAI: null,
+    collider: { offsetX: 0, offsetY: 0, width: 8, height: 6 },
+    wanderAI: {
+      idleMin: 1.0,
+      idleMax: 3.0,
+      walkMin: 2.0,
+      walkMax: 5.0,
+      speed: 12,
+      directional: false,
+    },
     noShadow: true,
-    hasVelocity: false,
+    hasVelocity: true,
     initialMoving: true,
+    aquatic: true,
   },
   campfire: {
     sprite: {

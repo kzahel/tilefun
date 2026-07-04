@@ -110,6 +110,24 @@ export function aabbOverlapsSolid(
   return false;
 }
 
+/** Check if any tile under an AABB lacks the Water collision flag (for aquatic entities). */
+export function aabbLacksWater(
+  aabb: AABB,
+  getCollision: (tx: number, ty: number) => number,
+): boolean {
+  const minTx = Math.floor(aabb.left / TILE_SIZE);
+  const maxTx = Math.floor((aabb.right - 0.001) / TILE_SIZE);
+  const minTy = Math.floor(aabb.top / TILE_SIZE);
+  const maxTy = Math.floor((aabb.bottom - 0.001) / TILE_SIZE);
+
+  for (let ty = minTy; ty <= maxTy; ty++) {
+    for (let tx = minTx; tx <= maxTx; tx++) {
+      if (!(getCollision(tx, ty) & CollisionFlag.Water)) return true;
+    }
+  }
+  return false;
+}
+
 /** Get the tile elevation at an entity's feet position. */
 export function getEntityElevation(
   entity: Entity,

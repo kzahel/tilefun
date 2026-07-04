@@ -22,6 +22,12 @@ const VELOCITY_STOP_THRESHOLD = 1;
 const CAMPFIRE_DEATH_TIMER = 0.4;
 const CAMPFIRE_KILL_RADIUS = 16;
 
+// ── Friendly ghost combat constants ──
+const GHOST_FIGHT_RANGE = 24;
+const GHOST_GUARD_RANGE = 80;
+const GHOST_FIRE_AWAY_DIST = 16;
+const GHOST_GUARD_MIN_TIME = 5;
+
 export const baseGameMod: Mod = {
   name: "base-game",
   register(api) {
@@ -131,6 +137,7 @@ export const baseGameMod: Mod = {
     unsubs.push(
       api.tick.onPostSimulation(() => {
         for (const fire of api.entities.findByTag("campfire")) {
+          if (fire.hasTag("ghost-fire")) continue;
           const nearby = api.entities.findInRadius(fire.wx, fire.wy, CAMPFIRE_KILL_RADIUS);
           for (const other of nearby) {
             if (!other.hasTag("hostile")) continue;
@@ -174,6 +181,73 @@ export const baseGameMod: Mod = {
         player.giveGems(value);
         api.events.emit("item-collected", { entity: self, player, value });
         self.remove();
+      }),
+    );
+
+    // ── Friendly ghost combat: fight baddies, build fire, guard ──
+    unsubs.push(
+      api.tick.onPostSimulation((dt) => {
+        for (const ghost of api.entities.findByType("ghost-friendly")) {
+          const fireId = ghost.getAttribute("guardFireId") as number | undefined;
+
+          if (fireId !== undefined) {
+            // Guard mode: stay idle next to fire
+            ghost.setVelocity(0, 0);
+            ghost.setAIState("idle");
+            ghost.setAITimer(1);
+
+            // Count down minimum guard time
+            const guardTimer = ((ghost.getAttribute("guardTimer") as number) ?? 0) - dt;
+            ghost.setAttribute("guardTimer", guardTimer);
+
+            // Only check for all-clear after minimum guard time
+            if (guardTimer <= 0) {
+              const hostileNearby = api.entities
+                .findInRadius(ghost.wx, ghost.wy, GHOST_GUARD_RANGE)
+                .some((e) => e.hasTag("hostile") && e.deathTimer === undefined);
+
+              if (!hostileNearby) {
+                // All clear — remove fire and resume wandering
+                const fire = api.entities.find(fireId);
+                if (fire) fire.remove();
+                ghost.setAttribute("guardFireId", null);
+                ghost.setAttribute("guardTimer", null);
+              }
+            }
+            continue;
+          }
+
+          // Normal mode: check for nearby hostile entities
+          const nearby = api.entities.findInRadius(ghost.wx, ghost.wy, GHOST_FIGHT_RANGE);
+          for (const enemy of nearby) {
+            if (!enemy.hasTag("hostile") || enemy.deathTimer !== undefined) continue;
+
+            // Fight! Kill the angry ghost
+            enemy.setDeathTimer(CAMPFIRE_DEATH_TIMER);
+            enemy.removeTag("hostile");
+            enemy.setAIState("idle");
+            enemy.setVelocity(0, 0);
+            api.entities.spawn("gem", enemy.wx, enemy.wy);
+
+            // Build a fire on the opposite side from the enemy
+            const fdx = ghost.wx - enemy.wx;
+            const fdy = ghost.wy - enemy.wy;
+            const fdist = Math.sqrt(fdx * fdx + fdy * fdy) || 1;
+            const fireX = ghost.wx + (fdx / fdist) * GHOST_FIRE_AWAY_DIST;
+            const fireY = ghost.wy + (fdy / fdist) * GHOST_FIRE_AWAY_DIST;
+            const fire = api.entities.spawn("campfire", fireX, fireY);
+            if (fire) {
+              fire.addTag("ghost-fire");
+              ghost.setAttribute("guardFireId", fire.id);
+              ghost.setAttribute("guardTimer", GHOST_GUARD_MIN_TIME);
+            }
+            ghost.setVelocity(0, 0);
+            ghost.setAIState("idle");
+            ghost.setAITimer(1);
+            ghost.setFollowing(false);
+            break;
+          }
+        }
       }),
     );
 

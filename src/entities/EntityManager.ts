@@ -8,6 +8,7 @@ import {
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
+  aabbLacksWater,
   aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
   aabbsOverlap,
@@ -17,6 +18,7 @@ import {
   separateOverlappingEntities,
 } from "./collision.js";
 import type { Entity } from "./Entity.js";
+import { ENTITY_DEFS } from "./EntityDefs.js";
 import type { PropManager } from "./PropManager.js";
 import { SpatialHash } from "./SpatialHash.js";
 import { onWanderBlocked } from "./wanderAI.js";
@@ -216,18 +218,30 @@ export class EntityManager {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
-      const speedMult = entity.collider ? getSpeedMultiplier(entity.position, getCollision) : 1.0;
+      const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
+      const speedMult =
+        entity.collider && !isAquatic ? getSpeedMultiplier(entity.position, getCollision) : 1.0;
       const dx = entity.velocity.vx * entityDt * speedMult;
       const dy = entity.velocity.vy * entityDt * speedMult;
 
       if (entity.collider) {
+        // Aquatic entities: blocked by Solid only (water is passable),
+        // plus an extra check that every tile under their AABB has water.
+        const entityBlockMask = isAquatic ? CollisionFlag.Solid : blockMask;
+        const baseBlocker = makeExtraBlocker(entity);
+        const extraBlocker = isAquatic
+          ? (aabb: AABB): boolean => {
+              if (baseBlocker(aabb)) return true;
+              return aabbLacksWater(aabb, getCollision);
+            }
+          : baseBlocker;
         const blocked = resolveCollision(
           entity,
           dx,
           dy,
           getCollision,
-          blockMask,
-          makeExtraBlocker(entity),
+          entityBlockMask,
+          extraBlocker,
         );
         if (blocked && entity.wanderAI) {
           onWanderBlocked(entity);

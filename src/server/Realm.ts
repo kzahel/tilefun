@@ -20,6 +20,7 @@ import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
+import { FishSpawner } from "../entities/FishSpawner.js";
 import { GemSpawner } from "../entities/GemSpawner.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
@@ -155,6 +156,7 @@ export class Realm {
   saveManager: SaveManager | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
+  private fishSpawner = new FishSpawner();
   private tentSpawner = new TentSpawner();
 
   /** World generation params (stored for structure generation). */
@@ -661,6 +663,7 @@ export class Realm {
           this.entityManager,
           this.world,
         );
+        this.fishSpawner.update(dt, session.visibleRange, this.entityManager, this.world);
         this.tentSpawner.update(dt, this.propManager, this.entityManager);
       }
     }
@@ -967,6 +970,7 @@ export class Realm {
 
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);
+    this.fishSpawner.reset(this.entityManager);
     this.tentSpawner.reset();
     this.processedStructureKeys.clear();
 
