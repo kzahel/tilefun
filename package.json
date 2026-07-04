@@ -13,6 +13,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts",
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts"

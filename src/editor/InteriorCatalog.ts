@@ -132,6 +132,14 @@ function naturalSize(entry: ModernInteriorsAtlasEntry): { width: number; height:
   return { width: entry.rect[2], height: entry.rect[3] };
 }
 
+export interface InteriorCatalogRouteState {
+  search?: string;
+  sourceKind?: "" | ModernInteriorsSourceKind;
+  category?: string;
+  variant?: "" | ModernInteriorsVariant;
+  design?: string;
+}
+
 export class InteriorCatalog {
   private overlay: HTMLDivElement;
   private searchInput: HTMLInputElement;
@@ -150,6 +158,7 @@ export class InteriorCatalog {
   private enabledLayers = new Set<string>();
   private layerControlDesign = "";
   private atlasImage: CanvasImageSource | null = null;
+  private pendingRouteState: InteriorCatalogRouteState | null = null;
 
   onClose: (() => void) | null = null;
 
@@ -283,6 +292,14 @@ export class InteriorCatalog {
     this.entries = getModernInteriorsEntries();
     this.populateCategories();
     this.populateDesigns();
+    this.applyPendingRouteState();
+    this.applyFilter();
+    this.renderPrefabPreview();
+  }
+
+  setRouteState(state: InteriorCatalogRouteState): void {
+    this.pendingRouteState = state;
+    this.applyPendingRouteState();
     this.applyFilter();
     this.renderPrefabPreview();
   }
@@ -308,6 +325,16 @@ export class InteriorCatalog {
     } else {
       this.hide();
     }
+  }
+
+  private applyPendingRouteState(): void {
+    if (!this.pendingRouteState) return;
+    const state = this.pendingRouteState;
+    if (state.search !== undefined) this.searchInput.value = state.search;
+    if (state.sourceKind !== undefined) this.sourceSelect.value = state.sourceKind;
+    if (state.category !== undefined) this.categorySelect.value = state.category;
+    if (state.variant !== undefined) this.variantSelect.value = state.variant;
+    if (state.design !== undefined) this.designSelect.value = state.design;
   }
 
   private makeSelect<T extends string>(options: { value: T; label: string }[]): HTMLSelectElement {

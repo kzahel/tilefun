@@ -21,7 +21,7 @@ import { Time } from "../core/Time.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
-import { InteriorCatalog } from "../editor/InteriorCatalog.js";
+import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { ActionManager } from "../input/ActionManager.js";
@@ -612,6 +612,8 @@ export class GameClient {
       showList();
     };
 
+    this.applyStartupRoute();
+
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") {
         this.gcFlushServer();
@@ -739,6 +741,58 @@ export class GameClient {
     } finally {
       this.menuOpening = false;
     }
+  }
+
+  private applyStartupRoute(): void {
+    const params = new URLSearchParams(window.location.search);
+    this.interiorCatalog.setRouteState(this.readInteriorRouteState(params));
+
+    const debug = params.get("debug");
+    if (debug === "1" || debug === "true") {
+      this.debugEnabled = true;
+      this.debugPanel.visible = true;
+    }
+
+    const panel = params.get("panel") ?? params.get("open");
+    if (panel === "interiors") {
+      if (!this.scenes.has(InteriorCatalogScene)) this.scenes.push(new InteriorCatalogScene());
+    } else if (panel === "props" || panel === "catalog") {
+      if (!this.scenes.has(CatalogScene)) this.scenes.push(new CatalogScene());
+    }
+  }
+
+  private readInteriorRouteState(params: URLSearchParams): InteriorCatalogRouteState {
+    const state: InteriorCatalogRouteState = {};
+    const search = params.get("interiorSearch") ?? params.get("search");
+    if (search !== null) state.search = search;
+
+    const sourceKind = params.get("interiorSource");
+    if (
+      sourceKind === "" ||
+      sourceKind === "home_design_layer" ||
+      sourceKind === "room_builder_tile" ||
+      sourceKind === "room_builder_sheet" ||
+      sourceKind === "single"
+    ) {
+      state.sourceKind = sourceKind;
+    }
+
+    const category = params.get("interiorCategory");
+    if (category !== null) state.category = category;
+
+    const variant = params.get("interiorVariant");
+    if (
+      variant === "" ||
+      variant === "normal" ||
+      variant === "shadowless" ||
+      variant === "black-shadow"
+    ) {
+      state.variant = variant;
+    }
+
+    const design = params.get("interiorDesign");
+    if (design !== null) state.design = design;
+    return state;
   }
 
   // ---- Helpers (also exposed via GameContext) ----

@@ -78,7 +78,36 @@ Runtime behavior:
 - The panel filters atlas entries by source kind, category, variant, and search text.
 - The panel renders `Generic_Home_1` as a composed layer stack next to the source preview.
 
-### Chunk 3: Curated Architectural Metadata
+### Chunk 3: Headless Validation Capture Workflow
+
+Status: completed
+
+- Add URL-driven startup state for validation panels so Playwright can open directly to a target view.
+- Support `?panel=interiors` with optional interior filters:
+  - `interiorDesign`
+  - `interiorSource`
+  - `interiorCategory`
+  - `interiorVariant`
+  - `interiorSearch`
+- Add a repeatable screenshot capture command for remote review.
+- Save generated screenshots under ignored test artifacts instead of requiring manual browser interaction.
+
+Completed artifacts:
+
+- Startup route handling in `src/client/GameClient.ts`.
+- Route-state support in `src/editor/InteriorCatalog.ts`.
+- `tests/interiors-screenshots.spec.ts`.
+- `npm run screenshots:interiors`.
+
+Generated review captures:
+
+- `test-results/interiors/generic-home-1-panel.png`
+- `test-results/interiors/generic-home-1-layer-stack.png`
+- `test-results/interiors/generic-home-1-source-preview.png`
+- `test-results/interiors/room-builder-walls-panel.png`
+- `test-results/interiors/room-builder-walls-grid.png`
+
+### Chunk 4: Curated Architectural Metadata
 
 Status: pending
 
@@ -86,7 +115,7 @@ Status: pending
 - Define roles such as `floor-fill`, `back-wall`, `front-wall`, `side-wall`, `doorway`, `threshold`, and `foreground-wall`.
 - Add basic collision metadata for walls and passable metadata for doorways.
 
-### Chunk 4: Indoor Map Model
+### Chunk 5: Indoor Map Model
 
 Status: pending
 
@@ -102,7 +131,7 @@ Status: pending
 - Add sync and persistence models.
 - Bump save format and migrate old saves to empty indoor data.
 
-### Chunk 5: First Enterable Building Flow
+### Chunk 6: First Enterable Building Flow
 
 Status: pending
 
@@ -111,7 +140,7 @@ Status: pending
 - Exit back to the correct overworld door.
 - Preserve player position and camera behavior cleanly across the transition.
 
-### Chunk 6: Procedural Apartment Generator
+### Chunk 7: Procedural Apartment Generator
 
 Status: pending
 
@@ -121,7 +150,7 @@ Status: pending
 - Validate walkability from entrance to major rooms and exits.
 - Support deterministic generation from seed and apartment type.
 
-### Chunk 7: Editor Workflow
+### Chunk 8: Editor Workflow
 
 Status: pending
 
@@ -143,3 +172,4 @@ Status: pending
 - 2026-07-04: Created tactical plan and started Chunk 1.
 - 2026-07-04: Completed Chunk 1 by adding the Modern Interiors atlas generator, generated atlas PNG, generated JSON index, npm script, and asset credit.
 - 2026-07-04: Completed Chunk 2 by adding runtime Modern Interiors metadata loading, atlas image registration, an in-game validation/browser panel, and Playwright coverage for the layered home preview.
+- 2026-07-04: Completed Chunk 3 by adding URL-driven interiors panel startup state and a Playwright screenshot capture workflow for remote review.
