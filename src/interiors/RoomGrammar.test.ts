@@ -7,9 +7,9 @@ function blocksAt(tiles: PlacedRoomTile[], x: number, y: number): boolean {
 }
 
 describe("gray room grammar", () => {
-  it("stretches a square shell while leaving a two-tile front passage", () => {
+  it("stretches a square shell while leaving a one-tile front passage", () => {
     for (const width of [8, 12]) {
-      const openingX = Math.floor(width / 2) - 1;
+      const openingX = Math.floor(width / 2);
       const tiles = buildRoomTiles({ width, height: 8, frontOpeningX: openingX });
       expect(
         tiles.find((tile) => tile.x === 3 && tile.y === 0 && tile.role === "back-wall")?.key,
@@ -18,8 +18,11 @@ describe("gray room grammar", () => {
         tiles.find((tile) => tile.x === 0 && tile.y === 4 && tile.role === "side-wall")?.key,
       ).toBe("room-builder/3d-walls/c10-r02");
       for (let x = 0; x < width; x++) {
-        expect(blocksAt(tiles, x, 7)).toBe(x < openingX || x >= openingX + 2);
+        expect(blocksAt(tiles, x, 8)).toBe(x !== openingX);
       }
+      expect(
+        tiles.filter((tile) => tile.role === "front-wall").every((tile) => tile.cropHeight === 6),
+      ).toBe(true);
     }
   });
 
@@ -27,16 +30,16 @@ describe("gray room grammar", () => {
     const tiles = buildRoomTiles({
       width: 12,
       height: 10,
-      frontOpeningX: 5,
-      divider: { y: 5, openingX: 5 },
+      frontOpeningX: 6,
+      divider: { y: 5, openingX: 6 },
     });
     for (const y of [5, 6]) {
       for (let x = 1; x < 11; x++) {
-        expect(blocksAt(tiles, x, y)).toBe(x !== 5 && x !== 6);
+        expect(blocksAt(tiles, x, y)).toBe(x !== 6);
       }
     }
     expect(
-      tiles.find((tile) => tile.x === 4 && tile.y === 5 && tile.role === "divider-wall")?.key,
+      tiles.find((tile) => tile.x === 5 && tile.y === 5 && tile.role === "divider-wall")?.key,
     ).toBe("room-builder/3d-walls/c08-r03");
     expect(
       tiles.find((tile) => tile.x === 7 && tile.y === 5 && tile.role === "divider-wall")?.key,
@@ -53,8 +56,8 @@ describe("gray room grammar", () => {
     const tiles = buildRoomTiles({
       width: 12,
       height: 10,
-      frontOpeningX: 5,
-      divider: { y: 5, openingX: 5 },
+      frontOpeningX: 6,
+      divider: { y: 5, openingX: 6 },
     });
     expect(tiles.every((tile) => keys.has(tile.key))).toBe(true);
   });

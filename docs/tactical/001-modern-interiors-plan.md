@@ -140,6 +140,14 @@ Follow-up spatial-mapping result:
 - `src/interiors/RoomGrammar.ts` now builds compact, wide, and divided cutaway rooms with explicit roles and blocking metadata. The front rail and its passage are still a visual hypothesis, not yet validated against an authored room.
 - Repeatable capture: `test-results/interiors/room-grammar-variants.png` from `npm run screenshots:interiors`.
 
+Generic Home 1 geometry study:
+
+- The unfurnished source is 14 columns wide and 214 pixels high: 13 complete 16-pixel rows plus a 6-pixel bottom trim. Its upper wood-floored room widens asymmetrically into west and east bays, narrows through tapered corners, and joins a lower gray-tiled room through a one-tile divider passage.
+- Walkable openings reach the north, west, east, and south image boundaries. The divider passage is a fifth named connection. The semantic cell map and tile recipe live in `src/interiors/GenericHomeGeometry.ts`.
+- Rebuilding the image from room-builder tiles yields one visible pixel difference from the source. The visual comparison and topology map are captured as `test-results/interiors/generic-home-1-geometry-study.png`.
+- The straight east interior column and the hall row can be repeated without moving corner or doorway pieces. A 16-column, 16-row derived variant is captured as `test-results/interiors/generic-home-1-derived-variation.png`.
+- The simpler room grammar now uses the source's one-tile passage and six-pixel bottom trim. Taper pieces are reserved for shape changes instead of being placed at every front corner.
+
 ### Chunk 5: Indoor Map Model
 
 Status: pending
@@ -201,3 +209,4 @@ Status: pending
 - 2026-07-04: Started Chunk 4 with a draft generated-room spatial-mapping renderer and screenshot capture.
 - 2026-07-04: Added repeatable labeled source-grid captures for the 3D walls, borders, and baseboards sheets after stale scratch artifact paths were found.
 - 2026-09-27: Matched architectural tiles against the source home shell and added a first reusable gray-wall room grammar with three rendered variants.
+- 2026-09-27: Reconstructed Generic Home 1 from room-builder tiles, mapped its five connections and floor zones, corrected the simple room edge rules, and verified a stretched topology-preserving variant.

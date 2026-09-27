@@ -9,6 +9,10 @@ import {
   type ModernInteriorsSourceKind,
   type ModernInteriorsVariant,
 } from "../assets/ModernInteriorsAtlasIndex.js";
+import {
+  drawGenericHomeGeometryStudy,
+  drawGenericHomeVariantPreview,
+} from "../interiors/GenericHomeGeometry.js";
 import { drawRoomGrammarPreview } from "../interiors/RoomGrammar.js";
 
 const MAX_VISIBLE_ENTRIES = 720;
@@ -156,6 +160,8 @@ export class InteriorCatalog {
   private stackCanvas: HTMLCanvasElement;
   private sourcePreviewCanvas: HTMLCanvasElement;
   private generatedRoomCanvas: HTMLCanvasElement;
+  private geometryStudyCanvas: HTMLCanvasElement;
+  private geometryVariantCanvas: HTMLCanvasElement;
   private entries: ModernInteriorsAtlasEntry[] = [];
   private enabledLayers = new Set<string>();
   private layerControlDesign = "";
@@ -254,6 +260,20 @@ export class InteriorCatalog {
     this.generatedRoomCanvas.setAttribute("data-testid", "interior-generated-room");
     this.previewPanel.appendChild(
       this.wrapCanvas("Generated room grammar", this.generatedRoomCanvas),
+    );
+
+    this.geometryStudyCanvas = document.createElement("canvas");
+    this.geometryStudyCanvas.style.cssText = CANVAS_STYLE;
+    this.geometryStudyCanvas.setAttribute("data-testid", "interior-geometry-study");
+    this.previewPanel.appendChild(
+      this.wrapCanvas("Generic Home 1 geometry study", this.geometryStudyCanvas),
+    );
+
+    this.geometryVariantCanvas = document.createElement("canvas");
+    this.geometryVariantCanvas.style.cssText = CANVAS_STYLE;
+    this.geometryVariantCanvas.setAttribute("data-testid", "interior-geometry-variant");
+    this.previewPanel.appendChild(
+      this.wrapCanvas("Generic Home 1 derived variation", this.geometryVariantCanvas),
     );
 
     this.layerControls = document.createElement("div");
@@ -498,6 +518,9 @@ export class InteriorCatalog {
   private renderGeneratedRoomPreview(): void {
     if (!this.atlasImage || !isModernInteriorsAtlasLoaded()) return;
     drawRoomGrammarPreview(this.generatedRoomCanvas, this.atlasImage);
+    const differences = drawGenericHomeGeometryStudy(this.geometryStudyCanvas, this.atlasImage);
+    this.geometryStudyCanvas.dataset.visibleDifferences = String(differences);
+    drawGenericHomeVariantPreview(this.geometryVariantCanvas, this.atlasImage);
   }
 
   private renderLayerControls(layers: ModernInteriorsAtlasEntry[]): void {

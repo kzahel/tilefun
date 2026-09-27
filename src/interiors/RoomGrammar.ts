@@ -16,21 +16,22 @@ export interface PlacedRoomTile {
   y: number;
   role: RoomTileRole;
   blocksMovement: boolean;
+  cropHeight?: number;
 }
 
 export interface RoomSpec {
   width: number;
   height: number;
-  /** Two adjacent walkable tiles in the front boundary. */
+  /** One-tile exit through the six-pixel front trim. */
   frontOpeningX?: number;
-  /** A two-tile-high wall with a two-tile passage. */
+  /** A two-tile-high wall with a one-tile passage. */
   divider?: { y: number; openingX: number };
 }
 
 /**
  * A small, curated grammar for the gray 3D-wall family. Its back and side tiles
- * occur in Generic Home 1's shell. This is a cutaway room, so the front edge is
- * a low rail rather than another back wall.
+ * occur in Generic Home 1's shell. The source has straight side walls and a
+ * six-pixel bottom trim; its tapered corner pieces belong at shape changes.
  */
 export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
   const { width, height, frontOpeningX, divider } = spec;
@@ -39,7 +40,7 @@ export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
   }
   if (
     frontOpeningX !== undefined &&
-    (!Number.isInteger(frontOpeningX) || frontOpeningX < 2 || frontOpeningX > width - 4)
+    (!Number.isInteger(frontOpeningX) || frontOpeningX < 2 || frontOpeningX > width - 3)
   ) {
     throw new Error("Front opening must leave at least two wall tiles on each side");
   }
@@ -50,14 +51,27 @@ export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
       divider.y < 3 ||
       divider.y > height - 4 ||
       divider.openingX < 2 ||
-      divider.openingX > width - 4)
+      divider.openingX > width - 3)
   ) {
     throw new Error("Divider and passage must fit inside the room");
   }
 
   const tiles: PlacedRoomTile[] = [];
-  const put = (key: string, x: number, y: number, role: RoomTileRole): void => {
-    tiles.push({ key, x, y, role, blocksMovement: role !== "floor" });
+  const put = (
+    key: string,
+    x: number,
+    y: number,
+    role: RoomTileRole,
+    cropHeight?: number,
+  ): void => {
+    tiles.push({
+      key,
+      x,
+      y,
+      role,
+      blocksMovement: role !== "floor",
+      ...(cropHeight ? { cropHeight } : {}),
+    });
   };
 
   for (let y = 0; y < height; y++) {
@@ -71,24 +85,22 @@ export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
     put(wall(col, x === 0 || x === width - 1 ? 0 : 2), x, 0, "back-wall");
     put(wall(col, x === 0 || x === width - 1 ? 1 : 3), x, 1, "back-wall");
   }
-  for (let y = 2; y < height - 2; y++) {
+  for (let y = 2; y < height; y++) {
     put(wall(10, 2), 0, y, "side-wall");
     put(wall(13, 2), width - 1, y, "side-wall");
   }
-  put(wall(10, 4), 0, height - 2, "side-wall");
-  put(wall(13, 4), width - 1, height - 2, "side-wall");
 
   for (let x = 0; x < width; x++) {
-    if (frontOpeningX !== undefined && x >= frontOpeningX && x < frontOpeningX + 2) continue;
-    put(wall(11, 5), x, height - 1, "front-wall");
+    if (x === frontOpeningX) continue;
+    put(wall(x === 0 ? 10 : x === width - 1 ? 13 : 11, 5), x, height, "front-wall", 6);
   }
 
   if (divider) {
     for (let x = 1; x < width - 1; x++) {
-      if (x >= divider.openingX && x < divider.openingX + 2) continue;
+      if (x === divider.openingX) continue;
       // These four edge tiles frame the same passage in Generic Home 1.
       const isLeftDoorEdge = x === divider.openingX - 1;
-      const isRightDoorEdge = x === divider.openingX + 2;
+      const isRightDoorEdge = x === divider.openingX + 1;
       const col = isLeftDoorEdge || isRightDoorEdge ? 8 : 11;
       const topRow = isLeftDoorEdge ? 3 : isRightDoorEdge ? 0 : 2;
       const bottomRow = isLeftDoorEdge ? 4 : isRightDoorEdge ? 1 : 3;
@@ -111,7 +123,8 @@ function drawRoom(
   for (const tile of buildRoomTiles(spec)) {
     const entry = getModernInteriorsEntry(tile.key);
     if (!entry) throw new Error(`Missing room grammar tile: ${tile.key}`);
-    const [sx, sy, sw, sh] = entry.rect;
+    const [sx, sy, sw] = entry.rect;
+    const sh = tile.cropHeight ?? TILE_SIZE;
     ctx.drawImage(
       atlasImage,
       sx,
@@ -149,19 +162,19 @@ export function drawRoomGrammarPreview(
       title: "A. Compact room, front passage",
       note: "8 x 8 tiles; back/side/front rules",
       y: 62,
-      spec: { width: 8, height: 8, frontOpeningX: 3 },
+      spec: { width: 8, height: 8, frontOpeningX: 4 },
     },
     {
       title: "B. Same rules, wider room",
       note: "12 x 8 tiles; horizontal pieces repeat",
       y: 380,
-      spec: { width: 12, height: 8, frontOpeningX: 5 },
+      spec: { width: 12, height: 8, frontOpeningX: 6 },
     },
     {
-      title: "C. Divider with a two-tile passage",
+      title: "C. Divider with a one-tile passage",
       note: "12 x 10 tiles; matching doorway edge pieces",
       y: 700,
-      spec: { width: 12, height: 10, frontOpeningX: 5, divider: { y: 5, openingX: 5 } },
+      spec: { width: 12, height: 10, frontOpeningX: 6, divider: { y: 5, openingX: 6 } },
     },
   ];
   for (const { title, note, y, spec } of examples) {
@@ -171,6 +184,6 @@ export function drawRoomGrammarPreview(
     drawRoom(ctx, atlasImage, spec, 32, y, scale);
     ctx.fillStyle = "#94a3b8";
     ctx.font = "10px monospace";
-    ctx.fillText(note, 32, y + spec.height * TILE_SIZE * scale + 16);
+    ctx.fillText(note, 32, y + spec.height * TILE_SIZE * scale + 26);
   }
 }

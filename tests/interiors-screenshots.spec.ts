@@ -39,6 +39,24 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
     `${CAPTURE_DIR}/room-grammar-variants.png`,
     Buffer.from(roomPng.split(",")[1], "base64"),
   );
+
+  const study = page.getByTestId("interior-geometry-study");
+  await expect(study).toHaveAttribute("data-visible-differences", "1");
+  const studyPng = await study.evaluate((canvas) =>
+    (canvas as HTMLCanvasElement).toDataURL("image/png"),
+  );
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/generic-home-1-geometry-study.png`,
+    Buffer.from(studyPng.split(",")[1], "base64"),
+  );
+
+  const variantPng = await page
+    .getByTestId("interior-geometry-variant")
+    .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/generic-home-1-derived-variation.png`,
+    Buffer.from(variantPng.split(",")[1], "base64"),
+  );
 });
 
 test("capture room-builder wall candidates", async ({ page }) => {
