@@ -10,6 +10,12 @@ import {
   type ModernInteriorsVariant,
 } from "../assets/ModernInteriorsAtlasIndex.js";
 import {
+  APARTMENT_EXAMPLES,
+  describeFloorPlan,
+  drawApartmentPlan,
+  parseFloorPlan,
+} from "../interiors/ApartmentFloorPlan.js";
+import {
   drawGenericHomeGeometryStudy,
   drawGenericHomeVariantPreview,
 } from "../interiors/GenericHomeGeometry.js";
@@ -162,6 +168,10 @@ export class InteriorCatalog {
   private generatedRoomCanvas: HTMLCanvasElement;
   private geometryStudyCanvas: HTMLCanvasElement;
   private geometryVariantCanvas: HTMLCanvasElement;
+  private apartmentSelect: HTMLSelectElement;
+  private apartmentSketch: HTMLTextAreaElement;
+  private apartmentStatus: HTMLDivElement;
+  private apartmentCanvas: HTMLCanvasElement;
   private entries: ModernInteriorsAtlasEntry[] = [];
   private enabledLayers = new Set<string>();
   private layerControlDesign = "";
@@ -239,6 +249,37 @@ export class InteriorCatalog {
     this.designSelect.style.cssText = `${CONTROL_STYLE} width: 100%;`;
     this.previewPanel.appendChild(this.designSelect);
 
+    const apartmentHeading = document.createElement("div");
+    apartmentHeading.style.cssText = "font: bold 14px monospace; color: #9bd7ff;";
+    apartmentHeading.textContent = "Floor plan → tiled apartment";
+    this.previewPanel.appendChild(apartmentHeading);
+    this.apartmentSelect = this.makeSelect([
+      ...APARTMENT_EXAMPLES.map(({ id, name }) => ({ value: id, label: name })),
+      { value: "custom", label: "Custom sketch" },
+    ]);
+    this.apartmentSelect.setAttribute("data-testid", "apartment-example-select");
+    this.previewPanel.appendChild(this.apartmentSelect);
+    const legend = document.createElement("div");
+    legend.style.cssText = "font: 11px monospace; color: #a8b3c2; line-height: 1.5;";
+    legend.textContent =
+      "Edit the sketch: L living, B bedroom, K kitchen, T bath, H hall, # wall, + door, space outside.";
+    this.previewPanel.appendChild(legend);
+    this.apartmentSketch = document.createElement("textarea");
+    this.apartmentSketch.style.cssText = `${CONTROL_STYLE} width: 100%; min-height: 180px; box-sizing: border-box; white-space: pre; resize: vertical; line-height: 1.1; font-size: 10px;`;
+    this.apartmentSketch.spellcheck = false;
+    this.apartmentSketch.wrap = "off";
+    this.apartmentSketch.value = APARTMENT_EXAMPLES[0].sketch;
+    this.apartmentSketch.setAttribute("data-testid", "apartment-sketch");
+    this.previewPanel.appendChild(this.apartmentSketch);
+    this.apartmentStatus = document.createElement("div");
+    this.apartmentStatus.style.cssText = "font: 11px monospace; color: #a8dcb9;";
+    this.apartmentStatus.setAttribute("data-testid", "apartment-status");
+    this.previewPanel.appendChild(this.apartmentStatus);
+    this.apartmentCanvas = document.createElement("canvas");
+    this.apartmentCanvas.style.cssText = CANVAS_STYLE;
+    this.apartmentCanvas.setAttribute("data-testid", "apartment-preview");
+    this.previewPanel.appendChild(this.wrapCanvas("Generated from sketch", this.apartmentCanvas));
+
     const previewGrid = document.createElement("div");
     previewGrid.style.cssText =
       "display: grid; grid-template-columns: 1fr; gap: 10px; min-width: 0;";
@@ -290,6 +331,15 @@ export class InteriorCatalog {
     this.categorySelect.addEventListener("change", () => this.applyFilter());
     this.variantSelect.addEventListener("change", () => this.applyFilter());
     this.designSelect.addEventListener("change", () => this.renderPrefabPreview());
+    this.apartmentSelect.addEventListener("change", () => {
+      const selected = APARTMENT_EXAMPLES.find(({ id }) => id === this.apartmentSelect.value);
+      if (selected) this.apartmentSketch.value = selected.sketch;
+      this.renderApartmentPreview();
+    });
+    this.apartmentSketch.addEventListener("input", () => {
+      this.apartmentSelect.value = "custom";
+      this.renderApartmentPreview();
+    });
 
     for (const evt of [
       "mousedown",
@@ -521,6 +571,23 @@ export class InteriorCatalog {
     const differences = drawGenericHomeGeometryStudy(this.geometryStudyCanvas, this.atlasImage);
     this.geometryStudyCanvas.dataset.visibleDifferences = String(differences);
     drawGenericHomeVariantPreview(this.geometryVariantCanvas, this.atlasImage);
+    this.renderApartmentPreview();
+  }
+
+  private renderApartmentPreview(): void {
+    try {
+      const plan = parseFloorPlan(this.apartmentSketch.value);
+      this.apartmentStatus.textContent = describeFloorPlan(plan);
+      this.apartmentStatus.style.color = "#a8dcb9";
+      if (this.atlasImage && isModernInteriorsAtlasLoaded()) {
+        drawApartmentPlan(this.apartmentCanvas, this.atlasImage, plan);
+      }
+    } catch (error) {
+      this.apartmentStatus.textContent = error instanceof Error ? error.message : String(error);
+      this.apartmentStatus.style.color = "#ff9b9b";
+      this.apartmentCanvas.width = 1;
+      this.apartmentCanvas.height = 1;
+    }
   }
 
   private renderLayerControls(layers: ModernInteriorsAtlasEntry[]): void {

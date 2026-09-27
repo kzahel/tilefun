@@ -69,3 +69,24 @@ test("capture room-builder wall candidates", async ({ page }) => {
     path: `${CAPTURE_DIR}/room-builder-walls-grid.png`,
   });
 });
+
+test("capture apartments generated from editable floor plans", async ({ page }) => {
+  await waitForInteriorsPanel(page, "");
+  const picker = page.getByTestId("apartment-example-select");
+  for (const id of ["small", "large", "strange"]) {
+    await picker.selectOption(id);
+    await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
+    const data = await page
+      .getByTestId("apartment-preview")
+      .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
+    fs.writeFileSync(
+      `${CAPTURE_DIR}/${id}-apartment.png`,
+      Buffer.from(data.split(",")[1], "base64"),
+    );
+  }
+  await page.getByTestId("apartment-sketch").fill("#####\n#LL+#\n#####");
+  await expect(picker).toHaveValue("custom");
+  await expect(page.getByTestId("apartment-status")).toContainText("Passage");
+  await picker.selectOption("small");
+  await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
+});

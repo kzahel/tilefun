@@ -176,7 +176,15 @@ Status: pending
 
 ### Chunk 7: Procedural Apartment Generator
 
-Status: pending
+Status: in progress
+
+Floor-plan-driven prototype:
+
+- `src/interiors/ApartmentFloorPlan.ts` parses an editable character grid: `L` living, `B` bedroom, `K` kitchen, `T` bath, `H` hall, `#` wall, `+` passage, and space outside. Each grid cell is one 16-pixel tile.
+- The parser checks door orientation, requires an exterior entrance, and flood-fills passable cells to reject disconnected rooms.
+- The preview derives floor material, gray wall faces, and oriented door thresholds from the plan. It uses the same atlas entries across the small, large, and irregular examples; the irregular layout has concave exterior corners and offset wings.
+- The Interiors panel exposes the sketch for live edits and shows validation errors. Run `npm run screenshots:interiors` for `small-apartment.png`, `large-apartment.png`, and `strange-apartment.png` in `test-results/interiors/`.
+- This prototype fills architectural surfaces. Furniture placement, generated floor plans from apartment constraints, indoor collision/portal persistence, and game-world entry remain follow-up work.
 
 - Generate floor plans from room rectangles and doorway constraints.
 - Fill floor/wall layers from curated room-builder metadata.
@@ -212,3 +220,4 @@ Status: pending
 - 2026-09-27: Matched architectural tiles against the source home shell and added a first reusable gray-wall room grammar with three rendered variants.
 - 2026-09-27: Reconstructed Generic Home 1 from room-builder tiles, mapped its five connections and floor zones, corrected the simple room edge rules, and verified a stretched topology-preserving variant.
 - 2026-09-27: Corrected the simple divided-room preview so the divider joins the left and right perimeter walls with the proper source end caps.
+- 2026-09-27: Added editable apartment sketches, a tile-based floor-plan renderer, reachability validation, and three screenshot examples including a concave, offset plan.
