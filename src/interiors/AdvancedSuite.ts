@@ -17,6 +17,10 @@ export interface AdvancedSuiteSpec {
   southRoom: boolean;
 }
 
+// Leave one row above the source shell so the branch corners can use every
+// atlas tile from r00 through r04 before reaching their side passages.
+export const ADVANCED_SUITE_SOURCE_Y = 1;
+
 export const ADVANCED_SUITE_EXAMPLES = [
   {
     id: "cross",
@@ -24,11 +28,11 @@ export const ADVANCED_SUITE_EXAMPLES = [
     note: "Rooms branch west and east from the source hall.",
     spec: {
       westWidth: 9,
-      westTop: 1,
-      westBottom: 10,
+      westTop: 0,
+      westBottom: 11,
       eastWidth: 10,
-      eastTop: 2,
-      eastBottom: 12,
+      eastTop: 1,
+      eastBottom: 13,
       southRoom: false,
     },
   },
@@ -39,10 +43,10 @@ export const ADVANCED_SUITE_EXAMPLES = [
     spec: {
       westWidth: 7,
       westTop: 0,
-      westBottom: 9,
+      westBottom: 10,
       eastWidth: 13,
-      eastTop: 2,
-      eastBottom: 13,
+      eastTop: 1,
+      eastBottom: 14,
       southRoom: true,
     },
   },
@@ -155,11 +159,11 @@ function stampSouthRoom(map: LayeredInteriorMap, mainX: number): void {
   const left = mainX + 2;
   const right = mainX + 12;
   const openingX = mainX + 7;
-  const top = 13;
-  const bottom = 21;
+  const top = 13 + ADVANCED_SUITE_SOURCE_Y;
+  const bottom = 21 + ADVANCED_SUITE_SOURCE_Y;
   // Replace the source's shallow front trim with a shared two-row divider.
   // Its portal becomes floor, with matching jambs on both sides.
-  const sourcePortal = map.cells[13]?.[openingX];
+  const sourcePortal = map.cells[top]?.[openingX];
   if (!sourcePortal || sourcePortal.semantic !== "opening") {
     throw new Error("Missing south portal in source shell");
   }
@@ -241,22 +245,22 @@ export function buildAdvancedSuite(spec: AdvancedSuiteSpec): LayeredInteriorMap 
     spec.eastTop < 0 ||
     spec.westBottom - spec.westTop < 6 ||
     spec.eastBottom - spec.eastTop < 6 ||
-    spec.westBottom > 13 ||
-    spec.eastBottom > 13 ||
-    spec.westTop > 1 ||
-    spec.eastTop !== 2
+    spec.westBottom > 13 + ADVANCED_SUITE_SOURCE_Y ||
+    spec.eastBottom > 13 + ADVANCED_SUITE_SOURCE_Y ||
+    spec.westTop !== ADVANCED_SUITE_SOURCE_Y - 1 ||
+    spec.eastTop !== ADVANCED_SUITE_SOURCE_Y
   ) {
-    throw new Error("Side rooms must contain their source-shell openings");
+    throw new Error("Side rooms must fit the source openings and full-height corner tiles");
   }
   const width = spec.westWidth + 14 + spec.eastWidth;
-  const height = spec.southRoom ? 22 : 14;
+  const height = (spec.southRoom ? 22 : 14) + ADVANCED_SUITE_SOURCE_Y;
   const map = createLayeredInteriorMap(width, height, (height - 1) * 16 + 6);
   const mainX = spec.westWidth;
   const source = buildGenericHomeLayeredMap();
   for (let y = 0; y < source.height; y++) {
     for (let x = 0; x < source.width; x++) {
       const original = source.cells[y]?.[x];
-      const target = map.cells[y]?.[x + mainX];
+      const target = map.cells[y + ADVANCED_SUITE_SOURCE_Y]?.[x + mainX];
       if (!original || !target) continue;
       target.semantic = original.semantic;
       for (const layer of INTERIOR_DRAW_ORDER) target[layer].push(...original[layer]);
@@ -267,7 +271,7 @@ export function buildAdvancedSuite(spec: AdvancedSuiteSpec): LayeredInteriorMap 
     { left: 0, right: mainX - 1, top: spec.westTop, bottom: spec.westBottom },
     "wood",
     "right",
-    [4, 5],
+    [4 + ADVANCED_SUITE_SOURCE_Y, 5 + ADVANCED_SUITE_SOURCE_Y],
   );
   stampSideRoom(
     map,
@@ -279,7 +283,7 @@ export function buildAdvancedSuite(spec: AdvancedSuiteSpec): LayeredInteriorMap 
     },
     "tile",
     "left",
-    [5],
+    [5 + ADVANCED_SUITE_SOURCE_Y],
   );
   if (spec.southRoom) stampSouthRoom(map, mainX);
   return map;
@@ -385,7 +389,7 @@ export function drawAdvancedSuitePreview(
     roomCanvas.height * renderScale,
   );
   drawSemanticMap(ctx, map, mapX, mapY);
-  const reached = reachableSuiteCells(map, example.spec.westWidth + 7, 0);
+  const reached = reachableSuiteCells(map, example.spec.westWidth + 7, ADVANCED_SUITE_SOURCE_Y);
   ctx.fillStyle = "#a8dcb9";
   ctx.font = "11px monospace";
   ctx.fillText(
