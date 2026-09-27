@@ -1,4 +1,10 @@
 import { getModernInteriorsEntry } from "../assets/ModernInteriorsAtlasIndex.js";
+import {
+  createLayeredInteriorMap,
+  drawLayeredInteriorMap,
+  type LayeredInteriorMap,
+  placeInteriorTile,
+} from "./LayeredInteriorMap.js";
 
 const TILE = 16;
 export const GENERIC_HOME_WIDTH = 14;
@@ -208,6 +214,40 @@ export function buildGenericHomeTiles(): GenericHomeTile[] {
   return tiles;
 }
 
+function layerGenericHomeTiles(
+  width: number,
+  height: number,
+  pixelHeight: number,
+  tiles: GenericHomeTile[],
+  semanticAt: (x: number, y: number) => GenericHomeCell,
+): LayeredInteriorMap {
+  const map = createLayeredInteriorMap(width, height, pixelHeight, semanticAt);
+  for (const tile of tiles) {
+    const layer =
+      tile.role === "wood-floor" || tile.role === "tile-floor"
+        ? "floor"
+        : tile.role === "edge"
+          ? "foreground"
+          : "wall";
+    placeInteriorTile(map, layer, tile.x, tile.y, {
+      key: tile.key,
+      ...(tile.cropHeight ? { cropHeight: tile.cropHeight } : {}),
+    });
+  }
+  return map;
+}
+
+/** The shell's topology and visual layers can overlap within one tile cell. */
+export function buildGenericHomeLayeredMap(): LayeredInteriorMap {
+  return layerGenericHomeTiles(
+    GENERIC_HOME_WIDTH,
+    GENERIC_HOME_HEIGHT,
+    GENERIC_HOME_PIXEL_HEIGHT,
+    buildGenericHomeTiles(),
+    genericHomeCellAt,
+  );
+}
+
 export interface GenericHomeVariantSpec {
   /** Repeat the east-side interior column while retaining the same openings. */
   extraEastColumns: number;
@@ -260,6 +300,19 @@ export function buildGenericHomeVariantTiles(spec: GenericHomeVariantSpec): Gene
   return expandedRows;
 }
 
+export function buildGenericHomeVariantLayeredMap(
+  spec: GenericHomeVariantSpec,
+): LayeredInteriorMap {
+  validateVariant(spec);
+  return layerGenericHomeTiles(
+    GENERIC_HOME_WIDTH + spec.extraEastColumns,
+    GENERIC_HOME_HEIGHT + spec.extraHallRows,
+    GENERIC_HOME_PIXEL_HEIGHT + spec.extraHallRows * TILE,
+    buildGenericHomeVariantTiles(spec),
+    (x, y) => genericHomeVariantCellAt(x, y, spec),
+  );
+}
+
 export function genericHomeVariantCellAt(
   x: number,
   y: number,
@@ -269,20 +322,6 @@ export function genericHomeVariantCellAt(
   const sourceX = x < 9 ? x : x < 9 + spec.extraEastColumns ? 9 : x - spec.extraEastColumns;
   const sourceY = y < 8 ? y : y < 8 + spec.extraHallRows ? 7 : y - spec.extraHallRows;
   return genericHomeCellAt(sourceX, sourceY);
-}
-
-function drawTilePlan(
-  ctx: CanvasRenderingContext2D,
-  atlasImage: CanvasImageSource,
-  tiles: GenericHomeTile[],
-): void {
-  for (const tile of tiles) {
-    const entry = getModernInteriorsEntry(tile.key);
-    if (!entry) throw new Error(`Missing Generic Home tile: ${tile.key}`);
-    const [sx, sy, sw] = entry.rect;
-    const height = tile.cropHeight ?? TILE;
-    ctx.drawImage(atlasImage, sx, sy, sw, height, tile.x * TILE, tile.y * TILE, sw, height);
-  }
 }
 
 function portalLabel(x: number, y: number): string | null {
@@ -316,7 +355,7 @@ export function drawGenericHomeGeometryStudy(
   rebuiltCtx.imageSmoothingEnabled = false;
   const [sx, sy, sw, sh] = source.rect;
   sourceCtx.drawImage(atlasImage, sx, sy, sw, sh, 0, 0, sw, sh);
-  drawTilePlan(rebuiltCtx, atlasImage, buildGenericHomeTiles());
+  drawLayeredInteriorMap(rebuiltCtx, atlasImage, buildGenericHomeLayeredMap());
 
   const original = sourceCtx.getImageData(0, 0, sw, sh).data;
   const rebuilt = rebuiltCtx.getImageData(0, 0, sw, sh).data;
@@ -385,6 +424,55 @@ export function drawGenericHomeGeometryStudy(
   return visibleDifferences;
 }
 
+export function drawGenericHomeLayerStudy(
+  canvas: HTMLCanvasElement,
+  atlasImage: CanvasImageSource,
+): number {
+  const map = buildGenericHomeLayeredMap();
+  const layerGroups = [
+    { title: "Floor underlay", layers: ["floor"] as const },
+    { title: "Wall faces + transparent edges", layers: ["wall", "foreground"] as const },
+    { title: "Combined source shell", layers: ["floor", "wall", "foreground"] as const },
+  ];
+  canvas.width = 1450;
+  canvas.height = 550;
+  canvas.style.width = `${canvas.width}px`;
+  canvas.style.height = `${canvas.height}px`;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return 0;
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = "#0e1118";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#9bd7ff";
+  ctx.font = "bold 16px monospace";
+  ctx.fillText("Generic Home 1: independent visual layers in each semantic cell", 20, 28);
+
+  for (const [index, group] of layerGroups.entries()) {
+    const layerCanvas = document.createElement("canvas");
+    layerCanvas.width = map.width * TILE;
+    layerCanvas.height = map.pixelHeight;
+    const layerCtx = layerCanvas.getContext("2d");
+    if (!layerCtx) continue;
+    drawLayeredInteriorMap(layerCtx, atlasImage, map, group.layers);
+    const x = 20 + index * 480;
+    ctx.fillStyle = "#dbe8ff";
+    ctx.font = "12px monospace";
+    ctx.fillText(group.title, x, 58);
+    ctx.drawImage(layerCanvas, x, 72, layerCanvas.width * 2, layerCanvas.height * 2);
+  }
+  const overlapCells = map.cells
+    .flat()
+    .filter((cell) => cell.floor.length && cell.foreground.length);
+  ctx.fillStyle = "#aab9c9";
+  ctx.font = "11px monospace";
+  ctx.fillText(
+    `${overlapCells.length} tapered corner cells contain both floor and transparent wall pieces (x=2 and 12, y=6).`,
+    20,
+    525,
+  );
+  return overlapCells.length;
+}
+
 export function drawGenericHomeVariantPreview(
   canvas: HTMLCanvasElement,
   atlasImage: CanvasImageSource,
@@ -399,7 +487,7 @@ export function drawGenericHomeVariantPreview(
   const roomCtx = roomCanvas.getContext("2d");
   if (!roomCtx) return;
   roomCtx.imageSmoothingEnabled = false;
-  drawTilePlan(roomCtx, atlasImage, buildGenericHomeVariantTiles(spec));
+  drawLayeredInteriorMap(roomCtx, atlasImage, buildGenericHomeVariantLayeredMap(spec));
 
   canvas.width = 970;
   canvas.height = 630;

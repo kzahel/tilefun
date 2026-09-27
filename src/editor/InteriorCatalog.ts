@@ -17,6 +17,7 @@ import {
 } from "../interiors/ApartmentFloorPlan.js";
 import {
   drawGenericHomeGeometryStudy,
+  drawGenericHomeLayerStudy,
   drawGenericHomeVariantPreview,
 } from "../interiors/GenericHomeGeometry.js";
 import { drawRoomGrammarPreview } from "../interiors/RoomGrammar.js";
@@ -167,6 +168,7 @@ export class InteriorCatalog {
   private sourcePreviewCanvas: HTMLCanvasElement;
   private generatedRoomCanvas: HTMLCanvasElement;
   private geometryStudyCanvas: HTMLCanvasElement;
+  private layerStudyCanvas: HTMLCanvasElement;
   private geometryVariantCanvas: HTMLCanvasElement;
   private apartmentSelect: HTMLSelectElement;
   private apartmentSketch: HTMLTextAreaElement;
@@ -308,6 +310,13 @@ export class InteriorCatalog {
     this.geometryStudyCanvas.setAttribute("data-testid", "interior-geometry-study");
     this.previewPanel.appendChild(
       this.wrapCanvas("Generic Home 1 geometry study", this.geometryStudyCanvas),
+    );
+
+    this.layerStudyCanvas = document.createElement("canvas");
+    this.layerStudyCanvas.style.cssText = CANVAS_STYLE;
+    this.layerStudyCanvas.setAttribute("data-testid", "interior-layer-study");
+    this.previewPanel.appendChild(
+      this.wrapCanvas("Generic Home 1 layered shell", this.layerStudyCanvas),
     );
 
     this.geometryVariantCanvas = document.createElement("canvas");
@@ -570,6 +579,9 @@ export class InteriorCatalog {
     drawRoomGrammarPreview(this.generatedRoomCanvas, this.atlasImage);
     const differences = drawGenericHomeGeometryStudy(this.geometryStudyCanvas, this.atlasImage);
     this.geometryStudyCanvas.dataset.visibleDifferences = String(differences);
+    this.layerStudyCanvas.dataset.overlapCells = String(
+      drawGenericHomeLayerStudy(this.layerStudyCanvas, this.atlasImage),
+    );
     drawGenericHomeVariantPreview(this.geometryVariantCanvas, this.atlasImage);
     this.renderApartmentPreview();
   }

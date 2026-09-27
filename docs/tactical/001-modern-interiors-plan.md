@@ -149,6 +149,13 @@ Generic Home 1 geometry study:
 - The simpler room grammar now uses the source's one-tile passage and six-pixel bottom trim. Taper pieces are reserved for shape changes instead of being placed at every front corner.
 - The simple divided-room preview now replaces both side-wall cells at the divider with the source's left and right end caps; its wall face reaches both outer edges without a one-tile seam.
 
+Layered shell follow-up:
+
+- Generic Home 1's source preview is an exact pixel composite of Layer 1 (architecture) and Layer 2 (transparent furniture/decorations). Several architectural pieces also contain transparent pixels: the shallow front edge and tapered side corners are examples.
+- `src/interiors/LayeredInteriorMap.ts` now stores independent floor, wall, foreground, and object placements within each semantic cell. The two tapered cells in the source shell each have both a floor underlay and transparent wall foreground piece.
+- The Generic Home shell and its stretched variant now render through those layer channels. The source shell remains one visible pixel from the Layer 1 asset, and the repeatable `generic-home-1-layer-study.png` capture shows floor, wall, and recombined output separately.
+- The apartment sketch renderer still uses its first flat one-cell wall recipe. The next visual-grammar pass should compile apartment plans into layered wall faces and matching passages, checked against this source shell before evaluating whole-apartment previews.
+
 ### Chunk 5: Indoor Map Model
 
 Status: pending
@@ -221,3 +228,4 @@ Status: pending
 - 2026-09-27: Reconstructed Generic Home 1 from room-builder tiles, mapped its five connections and floor zones, corrected the simple room edge rules, and verified a stretched topology-preserving variant.
 - 2026-09-27: Corrected the simple divided-room preview so the divider joins the left and right perimeter walls with the proper source end caps.
 - 2026-09-27: Added editable apartment sketches, a tile-based floor-plan renderer, reachability validation, and three screenshot examples including a concave, offset plan.
+- 2026-09-27: Confirmed the source prefab's two-layer alpha composition, introduced independent visual layers per semantic cell, and proved the layered shell reconstruction against Generic Home 1.

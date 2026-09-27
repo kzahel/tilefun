@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  buildGenericHomeLayeredMap,
   buildGenericHomeTiles,
   buildGenericHomeVariantTiles,
   GENERIC_HOME_HEIGHT,
@@ -72,6 +73,18 @@ describe("Generic Home 1 geometry", () => {
     expect(bottom).toHaveLength(10);
     expect(bottom.every((tile) => tile.cropHeight === 6)).toBe(true);
     expect(bottom.some((tile) => tile.x === 7)).toBe(false);
+  });
+
+  it("keeps floor beneath transparent tapered wall pieces", () => {
+    const map = buildGenericHomeLayeredMap();
+    for (const x of [2, 12]) {
+      const cell = map.cells[6]?.[x];
+      expect(cell?.semantic).toBe("wall");
+      expect(cell?.floor).toHaveLength(1);
+      expect(cell?.foreground).toHaveLength(1);
+    }
+    expect(map.cells[6]?.[3]?.floor).toHaveLength(1);
+    expect(map.cells[6]?.[3]?.foreground).toHaveLength(0);
   });
 
   it("extends straight runs while preserving openings and floor zones", () => {

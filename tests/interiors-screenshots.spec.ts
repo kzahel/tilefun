@@ -22,6 +22,29 @@ async function waitForInteriorsPanel(page: import("@playwright/test").Page, quer
 test("capture Generic Home 1 layer validation", async ({ page }) => {
   await waitForInteriorsPanel(page, "interiorDesign=generic-home-designs/generic-home-1");
 
+  const prefabDifferences = await page.evaluate(() => {
+    const stack = document.querySelector<HTMLCanvasElement>(
+      '[data-testid="interior-prefab-stack"]',
+    );
+    const preview = document.querySelector<HTMLCanvasElement>(
+      '[data-testid="interior-prefab-preview"]',
+    );
+    if (!stack || !preview || stack.width !== preview.width || stack.height !== preview.height) {
+      return -1;
+    }
+    const stackPixels = stack.getContext("2d")?.getImageData(0, 0, stack.width, stack.height).data;
+    const previewPixels = preview
+      .getContext("2d")
+      ?.getImageData(0, 0, preview.width, preview.height).data;
+    if (!stackPixels || !previewPixels) return -1;
+    let differences = 0;
+    for (let i = 0; i < stackPixels.length; i++) {
+      if (stackPixels[i] !== previewPixels[i]) differences++;
+    }
+    return differences;
+  });
+  expect(prefabDifferences).toBe(0);
+
   await page.getByTestId("interior-catalog").screenshot({
     path: `${CAPTURE_DIR}/generic-home-1-panel.png`,
   });
@@ -48,6 +71,16 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
   fs.writeFileSync(
     `${CAPTURE_DIR}/generic-home-1-geometry-study.png`,
     Buffer.from(studyPng.split(",")[1], "base64"),
+  );
+
+  const layerStudy = page.getByTestId("interior-layer-study");
+  await expect(layerStudy).toHaveAttribute("data-overlap-cells", "2");
+  const layerPng = await layerStudy.evaluate((canvas) =>
+    (canvas as HTMLCanvasElement).toDataURL("image/png"),
+  );
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/generic-home-1-layer-study.png`,
+    Buffer.from(layerPng.split(",")[1], "base64"),
   );
 
   const variantPng = await page
