@@ -9,6 +9,7 @@ import {
   type ModernInteriorsSourceKind,
   type ModernInteriorsVariant,
 } from "../assets/ModernInteriorsAtlasIndex.js";
+import { ADVANCED_SUITE_EXAMPLES, drawAdvancedSuitePreview } from "../interiors/AdvancedSuite.js";
 import {
   APARTMENT_EXAMPLES,
   describeFloorPlan,
@@ -171,6 +172,7 @@ export class InteriorCatalog {
   private geometryStudyCanvas: HTMLCanvasElement;
   private layerStudyCanvas: HTMLCanvasElement;
   private connectedRoomCanvas: HTMLCanvasElement;
+  private advancedSuiteCanvases: HTMLCanvasElement[] = [];
   private geometryVariantCanvas: HTMLCanvasElement;
   private apartmentSelect: HTMLSelectElement;
   private apartmentSketch: HTMLTextAreaElement;
@@ -327,6 +329,14 @@ export class InteriorCatalog {
     this.previewPanel.appendChild(
       this.wrapCanvas("Connected rooms from semantic plans", this.connectedRoomCanvas),
     );
+
+    for (const example of ADVANCED_SUITE_EXAMPLES) {
+      const canvas = document.createElement("canvas");
+      canvas.style.cssText = CANVAS_STYLE;
+      canvas.setAttribute("data-testid", `interior-advanced-suite-${example.id}`);
+      this.previewPanel.appendChild(this.wrapCanvas(example.name, canvas));
+      this.advancedSuiteCanvases.push(canvas);
+    }
 
     this.geometryVariantCanvas = document.createElement("canvas");
     this.geometryVariantCanvas.style.cssText = CANVAS_STYLE;
@@ -592,6 +602,13 @@ export class InteriorCatalog {
       drawGenericHomeLayerStudy(this.layerStudyCanvas, this.atlasImage),
     );
     drawConnectedRoomGrammarPreview(this.connectedRoomCanvas, this.atlasImage);
+    for (const [index, example] of ADVANCED_SUITE_EXAMPLES.entries()) {
+      const canvas = this.advancedSuiteCanvases[index];
+      if (canvas)
+        canvas.dataset.reachable = String(
+          drawAdvancedSuitePreview(canvas, this.atlasImage, example),
+        );
+    }
     drawGenericHomeVariantPreview(this.geometryVariantCanvas, this.atlasImage);
     this.renderApartmentPreview();
   }

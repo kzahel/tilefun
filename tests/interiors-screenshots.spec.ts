@@ -131,3 +131,18 @@ test("capture apartments generated from editable floor plans", async ({ page }) 
   await picker.selectOption("small");
   await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
 });
+
+test("capture branched and offset layered suites", async ({ page }) => {
+  await waitForInteriorsPanel(page, "");
+  for (const id of ["cross", "offset"]) {
+    const canvas = page.getByTestId(`interior-advanced-suite-${id}`);
+    await expect(canvas).toHaveAttribute("data-reachable", /[1-9][0-9]*/);
+    const data = await canvas.evaluate((item) =>
+      (item as HTMLCanvasElement).toDataURL("image/png"),
+    );
+    fs.writeFileSync(
+      `${CAPTURE_DIR}/advanced-suite-${id}.png`,
+      Buffer.from(data.split(",")[1], "base64"),
+    );
+  }
+});
