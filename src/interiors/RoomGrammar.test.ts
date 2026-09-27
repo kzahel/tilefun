@@ -34,10 +34,20 @@ describe("gray room grammar", () => {
       divider: { y: 5, openingX: 6 },
     });
     for (const y of [5, 6]) {
-      for (let x = 1; x < 11; x++) {
-        expect(blocksAt(tiles, x, y)).toBe(x !== 6);
+      for (let x = 0; x < 12; x++) {
+        const dividerTile = tiles.find(
+          (tile) => tile.x === x && tile.y === y && tile.role === "divider-wall",
+        );
+        expect(Boolean(dividerTile)).toBe(x !== 6);
       }
+      expect(tiles.some((tile) => tile.y === y && tile.role === "side-wall")).toBe(false);
     }
+    expect(
+      tiles.find((tile) => tile.x === 0 && tile.y === 5 && tile.role === "divider-wall")?.key,
+    ).toBe("room-builder/3d-walls/c11-r00");
+    expect(
+      tiles.find((tile) => tile.x === 11 && tile.y === 5 && tile.role === "divider-wall")?.key,
+    ).toBe("room-builder/3d-walls/c12-r00");
     expect(
       tiles.find((tile) => tile.x === 5 && tile.y === 5 && tile.role === "divider-wall")?.key,
     ).toBe("room-builder/3d-walls/c08-r03");

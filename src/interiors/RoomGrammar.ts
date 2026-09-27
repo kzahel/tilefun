@@ -86,6 +86,7 @@ export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
     put(wall(col, x === 0 || x === width - 1 ? 1 : 3), x, 1, "back-wall");
   }
   for (let y = 2; y < height; y++) {
+    if (divider && (y === divider.y || y === divider.y + 1)) continue;
     put(wall(10, 2), 0, y, "side-wall");
     put(wall(13, 2), width - 1, y, "side-wall");
   }
@@ -96,16 +97,34 @@ export function buildRoomTiles(spec: RoomSpec): PlacedRoomTile[] {
   }
 
   if (divider) {
-    for (let x = 1; x < width - 1; x++) {
+    for (let x = 0; x < width; x++) {
       if (x === divider.openingX) continue;
-      // These four edge tiles frame the same passage in Generic Home 1.
+      // Generic Home 1's divider replaces the side-wall tiles at both ends.
+      // Its end caps make a continuous join from the left edge to the right.
       const isLeftDoorEdge = x === divider.openingX - 1;
       const isRightDoorEdge = x === divider.openingX + 1;
-      const col = isLeftDoorEdge || isRightDoorEdge ? 8 : 11;
-      const topRow = isLeftDoorEdge ? 3 : isRightDoorEdge ? 0 : 2;
-      const bottomRow = isLeftDoorEdge ? 4 : isRightDoorEdge ? 1 : 3;
-      put(wall(col, topRow), x, divider.y, "divider-wall");
-      put(wall(col, bottomRow), x, divider.y + 1, "divider-wall");
+      const top =
+        x === 0
+          ? [11, 0]
+          : x === width - 1
+            ? [12, 0]
+            : isLeftDoorEdge
+              ? [8, 3]
+              : isRightDoorEdge
+                ? [8, 0]
+                : [11, 2];
+      const bottom =
+        x === 0
+          ? [10, 1]
+          : x === width - 1
+            ? [12, 1]
+            : isLeftDoorEdge
+              ? [8, 4]
+              : isRightDoorEdge
+                ? [8, 1]
+                : [11, 3];
+      put(wall(top[0] as number, top[1] as number), x, divider.y, "divider-wall");
+      put(wall(bottom[0] as number, bottom[1] as number), x, divider.y + 1, "divider-wall");
     }
   }
 

@@ -147,6 +147,7 @@ Generic Home 1 geometry study:
 - Rebuilding the image from room-builder tiles yields one visible pixel difference from the source. The visual comparison and topology map are captured as `test-results/interiors/generic-home-1-geometry-study.png`.
 - The straight east interior column and the hall row can be repeated without moving corner or doorway pieces. A 16-column, 16-row derived variant is captured as `test-results/interiors/generic-home-1-derived-variation.png`.
 - The simpler room grammar now uses the source's one-tile passage and six-pixel bottom trim. Taper pieces are reserved for shape changes instead of being placed at every front corner.
+- The simple divided-room preview now replaces both side-wall cells at the divider with the source's left and right end caps; its wall face reaches both outer edges without a one-tile seam.
 
 ### Chunk 5: Indoor Map Model
 
@@ -210,3 +211,4 @@ Status: pending
 - 2026-07-04: Added repeatable labeled source-grid captures for the 3D walls, borders, and baseboards sheets after stale scratch artifact paths were found.
 - 2026-09-27: Matched architectural tiles against the source home shell and added a first reusable gray-wall room grammar with three rendered variants.
 - 2026-09-27: Reconstructed Generic Home 1 from room-builder tiles, mapped its five connections and floor zones, corrected the simple room edge rules, and verified a stretched topology-preserving variant.
+- 2026-09-27: Corrected the simple divided-room preview so the divider joins the left and right perimeter walls with the proper source end caps.
