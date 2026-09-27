@@ -31,9 +31,14 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
   await page.getByTestId("interior-prefab-preview").screenshot({
     path: `${CAPTURE_DIR}/generic-home-1-source-preview.png`,
   });
-  await page.getByTestId("interior-generated-room").screenshot({
-    path: `${CAPTURE_DIR}/draft-generated-room-comparison.png`,
-  });
+  // Read the canvas bitmap directly: the preview is taller than the scroll pane.
+  const roomPng = await page
+    .getByTestId("interior-generated-room")
+    .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/room-grammar-variants.png`,
+    Buffer.from(roomPng.split(",")[1], "base64"),
+  );
 });
 
 test("capture room-builder wall candidates", async ({ page }) => {

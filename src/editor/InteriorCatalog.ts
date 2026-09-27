@@ -9,7 +9,7 @@ import {
   type ModernInteriorsSourceKind,
   type ModernInteriorsVariant,
 } from "../assets/ModernInteriorsAtlasIndex.js";
-import { drawDraftInteriorRoomComparison } from "../interiors/DraftRoomGenerator.js";
+import { drawRoomGrammarPreview } from "../interiors/RoomGrammar.js";
 
 const MAX_VISIBLE_ENTRIES = 720;
 const DEFAULT_DESIGN = "generic-home-designs/generic-home-1";
@@ -253,7 +253,7 @@ export class InteriorCatalog {
     this.generatedRoomCanvas.style.cssText = CANVAS_STYLE;
     this.generatedRoomCanvas.setAttribute("data-testid", "interior-generated-room");
     this.previewPanel.appendChild(
-      this.wrapCanvas("Generated room draft", this.generatedRoomCanvas),
+      this.wrapCanvas("Generated room grammar", this.generatedRoomCanvas),
     );
 
     this.layerControls = document.createElement("div");
@@ -497,7 +497,7 @@ export class InteriorCatalog {
 
   private renderGeneratedRoomPreview(): void {
     if (!this.atlasImage || !isModernInteriorsAtlasLoaded()) return;
-    drawDraftInteriorRoomComparison(this.generatedRoomCanvas, this.atlasImage);
+    drawRoomGrammarPreview(this.generatedRoomCanvas, this.atlasImage);
   }
 
   private renderLayerControls(layers: ModernInteriorsAtlasEntry[]): void {

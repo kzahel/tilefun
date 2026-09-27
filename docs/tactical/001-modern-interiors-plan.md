@@ -128,10 +128,17 @@ Initial spatial-mapping subchunk:
 
 Generated review captures:
 
-- `test-results/interiors/draft-generated-room-comparison.png`
+- `test-results/interiors/draft-generated-room-comparison.png` (first draft, now replaced by the room grammar capture below)
 - `test-results/interiors/3d-walls-source-grid.png`
 - `test-results/interiors/borders-source-grid.png`
 - `test-results/interiors/baseboards-source-grid.png`
+
+Follow-up spatial-mapping result:
+
+- The first comparison proved tile extraction but did not establish room roles. The 3D walls sheet contains several color families of partly assembled wall features; its first `c00..c07` crop should not be treated as a generic room.
+- Exact tile matches against `Generic_Home_1_Layer_1.png` identify a useful gray family: `c11-r02/r03` form the repeating two-tile back-wall face; `c10-r00/r01/r02` and `c13-r00/r01/r02` form left and right edges. The same example uses `c08-r03/r04` and `c08-r00/r01` at a passage in a divider.
+- `src/interiors/RoomGrammar.ts` now builds compact, wide, and divided cutaway rooms with explicit roles and blocking metadata. The front rail and its passage are still a visual hypothesis, not yet validated against an authored room.
+- Repeatable capture: `test-results/interiors/room-grammar-variants.png` from `npm run screenshots:interiors`.
 
 ### Chunk 5: Indoor Map Model
 
@@ -193,3 +200,4 @@ Status: pending
 - 2026-07-04: Completed Chunk 3 by adding URL-driven interiors panel startup state and a Playwright screenshot capture workflow for remote review.
 - 2026-07-04: Started Chunk 4 with a draft generated-room spatial-mapping renderer and screenshot capture.
 - 2026-07-04: Added repeatable labeled source-grid captures for the 3D walls, borders, and baseboards sheets after stale scratch artifact paths were found.
+- 2026-09-27: Matched architectural tiles against the source home shell and added a first reusable gray-wall room grammar with three rendered variants.
