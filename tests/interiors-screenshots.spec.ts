@@ -114,7 +114,7 @@ test("capture room-builder wall candidates", async ({ page }) => {
 test("capture apartments generated from editable floor plans", async ({ page }) => {
   await waitForInteriorsPanel(page, "");
   const picker = page.getByTestId("apartment-example-select");
-  for (const id of ["small", "large", "strange"]) {
+  for (const id of ["small", "large", "strange", "stepped"]) {
     await picker.selectOption(id);
     await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
     const data = await page
@@ -125,7 +125,22 @@ test("capture apartments generated from editable floor plans", async ({ page }) 
       Buffer.from(data.split(",")[1], "base64"),
     );
   }
-  await page.getByTestId("apartment-sketch").fill("#####\n#LL+#\n#####");
+  const sketch = page.getByTestId("apartment-sketch");
+  const canvas = page.getByTestId("apartment-preview");
+  const previous = await canvas.evaluate((item) =>
+    (item as HTMLCanvasElement).toDataURL("image/png"),
+  );
+  await sketch.fill("#########\n#LLL#BBB#\n#LLL#BBB#\n#LLL+BBB#\n#LLL#BBB#\n##+######");
+  await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
+  const custom = await canvas.evaluate((item) =>
+    (item as HTMLCanvasElement).toDataURL("image/png"),
+  );
+  expect(custom).not.toBe(previous);
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/custom-apartment.png`,
+    Buffer.from(custom.split(",")[1], "base64"),
+  );
+  await sketch.fill("#####\n#LL+#\n#####");
   await expect(picker).toHaveValue("custom");
   await expect(page.getByTestId("apartment-status")).toContainText("Passage");
   await picker.selectOption("small");

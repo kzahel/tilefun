@@ -188,17 +188,17 @@ Status: in progress
 
 Floor-plan-driven prototype:
 
-- `src/interiors/ApartmentFloorPlan.ts` parses an editable character grid: `L` living, `B` bedroom, `K` kitchen, `T` bath, `H` hall, `#` wall, `+` passage, and space outside. Each grid cell is one 16-pixel tile.
+- `src/interiors/ApartmentFloorPlan.ts` parses an editable character grid: `L` living, `B` bedroom, `K` kitchen, `T` bath, `H` hall, `#` wall, `+` passage, and space outside. `ApartmentArchitecture.ts` expands each sketch cell into a two-by-two group of 16-pixel atlas tiles so shared walls can show their full face and two-row dividers.
 - The parser checks door orientation, requires an exterior entrance, and flood-fills passable cells to reject disconnected rooms.
-- The preview derives floor material, gray wall faces, and oriented door thresholds from the plan. It uses the same atlas entries across the small, large, and irregular examples; the irregular layout has concave exterior corners and offset wings.
-- The Interiors panel exposes the sketch for live edits and shows validation errors. Run `npm run screenshots:interiors` for `small-apartment.png`, `large-apartment.png`, and `strange-apartment.png` in `test-results/interiors/`.
+- The layered preview derives floor material, shared wall faces, source jambs, side-wall tapers over floor, and shallow south-facing exterior trim from the sketch. Side passages too close to an upper corner are rejected with a location-specific error. The small, large, irregular, and stepped examples all retain connected floors.
+- The Interiors panel exposes the sketch for live edits and shows validation errors. Run `npm run screenshots:interiors` for `small-apartment.png`, `large-apartment.png`, `strange-apartment.png`, `stepped-apartment.png`, and an edited `custom-apartment.png` in `test-results/interiors/`.
 - `src/interiors/AdvancedSuite.ts` now composes the validated Generic Home shell with west/east side rooms and an optional lower room. The four-room cross and asymmetric five-room examples use source-family wall faces, floor continuation at each connection, and semantic reachability checks. Their captures are `advanced-suite-cross.png` and `advanced-suite-offset.png`.
 - The side branches now use the source's tapered wall returns over a wood floor underlay. Wood continues through the east opening before changing to tile inside that room. The lower branch replaces the source's shallow exterior trim with a shared two-row divider and matching passage caps, removing the dark seam between rooms.
 - The upper side-room joins use the complete five-row corner sequence from the atlas. A one-row top margin lets the rooms rise far enough above their openings for the wall border and face shading to turn together; shorter returns had left dark strokes inside the wall face.
 - This prototype fills architectural surfaces. Furniture placement, generated floor plans from apartment constraints, indoor collision/portal persistence, and game-world entry remain follow-up work.
 
 - Generate floor plans from room rectangles and doorway constraints.
-- Fill floor/wall layers from curated room-builder metadata.
+- Extend the floor-plan compiler with furniture-safe wall/door clearances and more corner variants.
 - Place furniture from curated room role pools.
 - Validate walkability from entrance to major rooms and exits.
 - Support deterministic generation from seed and apartment type.
@@ -237,3 +237,4 @@ Status: pending
 - 2026-09-27: Added source-style branched four- and five-room suites with varied wing size and height, and verified every walkable cell connects to the entrance.
 - 2026-09-27: Corrected the branched suite connections after screenshot review: tapered side-wall returns, source-style floor continuity through the east opening, and a continuous two-row divider at the south room.
 - 2026-09-27: Reworked the two upper side-room joins with full-height atlas wall returns after reviewing zoomed screenshots; confirmed the border and shading now follow the source's complete corner sequence.
+- 2026-09-27: Connected editable apartment sketches to a layered architectural compiler with shared two-row walls, source passage jambs, side-wall tapers, shallow front trim, short-return validation, and a stepped stress example.

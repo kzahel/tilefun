@@ -1,4 +1,5 @@
-import { getModernInteriorsEntry } from "../assets/ModernInteriorsAtlasIndex.js";
+import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
+import { drawLayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 export type RoomKind = "L" | "B" | "K" | "T" | "H";
 export type PlanCell = RoomKind | "#" | "+" | " ";
@@ -17,14 +18,6 @@ const ROOM_NAMES: Record<RoomKind, string> = {
   K: "Kitchen",
   T: "Bath",
   H: "Hall",
-};
-
-const FLOOR_TILES: Record<RoomKind, string> = {
-  L: "room-builder/floors/c01-r31",
-  B: "room-builder/floors/c04-r29",
-  K: "room-builder/floors/c13-r29",
-  T: "room-builder/floors/c13-r20",
-  H: "room-builder/floors/c01-r05",
 };
 
 const DIRECTIONS = [
@@ -201,48 +194,45 @@ function strangeApartment(): string {
   return finish(d);
 }
 
+function steppedApartment(): string {
+  const d = draft(32, 25);
+  paint(d, "B", 2, 1, 10, 6);
+  paint(d, "H", 12, 1, 15, 21);
+  paint(d, "K", 17, 3, 29, 9);
+  paint(d, "L", 2, 8, 10, 16);
+  paint(d, "B", 17, 11, 29, 16);
+  paint(d, "H", 2, 18, 10, 22);
+  paint(d, "T", 17, 18, 22, 22);
+  outline(d);
+  for (const [x, y] of [
+    [11, 3],
+    [16, 5],
+    [11, 11],
+    [23, 10],
+    [16, 13],
+    [11, 20],
+    [16, 20],
+    [6, 23],
+  ] as const)
+    door(d, x, y);
+  return finish(d);
+}
+
 export const APARTMENT_EXAMPLES = [
   { id: "small", name: "Small apartment", sketch: smallApartment() },
   { id: "large", name: "Large apartment", sketch: largeApartment() },
   { id: "strange", name: "Strange floor plan", sketch: strangeApartment() },
+  { id: "stepped", name: "Stepped floor plan", sketch: steppedApartment() },
 ] as const;
-
-function drawAtlasTile(
-  ctx: CanvasRenderingContext2D,
-  image: CanvasImageSource,
-  key: string,
-  x: number,
-  y: number,
-): void {
-  const entry = getModernInteriorsEntry(key);
-  if (!entry) throw new Error(`Missing apartment tile: ${key}`);
-  const [sx, sy, sw, sh] = entry.rect;
-  ctx.drawImage(image, sx, sy, sw, sh, x, y, 16, 16);
-}
-
-function wallKey(plan: FloorPlan, x: number, y: number): string {
-  const north = at(plan.rows, x, y - 1);
-  const south = at(plan.rows, x, y + 1);
-  const west = at(plan.rows, x - 1, y);
-  const east = at(plan.rows, x + 1, y);
-  // Horizontal wall faces use the gray wall band's top and base. Vertical
-  // faces use its left/right jambs. Every branch is a tile from one family.
-  if (isRoom(south) || south === "+") return "room-builder/3d-walls/c11-r02";
-  if (isRoom(north) || north === "+") return "room-builder/3d-walls/c11-r03";
-  if (isRoom(east) || east === "+") return "room-builder/3d-walls/c10-r02";
-  if (isRoom(west) || west === "+") return "room-builder/3d-walls/c13-r02";
-  return "room-builder/3d-walls/c11-r02";
-}
 
 export function drawApartmentPlan(
   canvas: HTMLCanvasElement,
   image: CanvasImageSource,
   plan: FloorPlan,
 ): void {
-  const scale = 2;
-  const tile = 16 * scale;
-  canvas.width = (plan.width + 2) * tile;
-  canvas.height = (plan.height + 2) * tile;
+  const map = buildLayeredApartmentPlan(plan);
+  canvas.width = map.width * 16 + 64;
+  canvas.height = map.pixelHeight + 64;
   canvas.style.width = "min(100%, 480px)";
   canvas.style.height = "auto";
   const ctx = canvas.getContext("2d");
@@ -251,39 +241,8 @@ export function drawApartmentPlan(
   ctx.fillStyle = "#171b26";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.save();
-  ctx.scale(scale, scale);
-  ctx.translate(16, 16);
-  for (let y = 0; y < plan.height; y++) {
-    for (let x = 0; x < plan.width; x++) {
-      const cell = at(plan.rows, x, y);
-      if (isRoom(cell)) drawAtlasTile(ctx, image, FLOOR_TILES[cell], x * 16, y * 16);
-    }
-  }
-  for (let y = 0; y < plan.height; y++) {
-    for (let x = 0; x < plan.width; x++) {
-      const cell = at(plan.rows, x, y);
-      if (cell === "#") drawAtlasTile(ctx, image, wallKey(plan, x, y), x * 16, y * 16);
-      if (cell === "+") {
-        const neighboringFloor = DIRECTIONS.map(([dx, dy]) => at(plan.rows, x + dx, y + dy)).find(
-          isRoom,
-        );
-        if (neighboringFloor)
-          drawAtlasTile(ctx, image, FLOOR_TILES[neighboringFloor], x * 16, y * 16);
-        const verticalWall = isRoom(at(plan.rows, x - 1, y)) || isRoom(at(plan.rows, x + 1, y));
-        if (verticalWall) {
-          ctx.fillStyle = "#373a4a";
-          ctx.fillRect(x * 16 + 6, y * 16, 4, 16);
-          ctx.fillStyle = "#d6bd80";
-          ctx.fillRect(x * 16 + 7, y * 16 + 2, 2, 12);
-        } else {
-          ctx.fillStyle = "#373a4a";
-          ctx.fillRect(x * 16, y * 16 + 6, 16, 4);
-          ctx.fillStyle = "#d6bd80";
-          ctx.fillRect(x * 16 + 2, y * 16 + 7, 12, 2);
-        }
-      }
-    }
-  }
+  ctx.translate(32, 32);
+  drawLayeredInteriorMap(ctx, image, map);
   ctx.restore();
 }
 

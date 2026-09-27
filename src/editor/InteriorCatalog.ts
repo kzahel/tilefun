@@ -268,7 +268,7 @@ export class InteriorCatalog {
     const legend = document.createElement("div");
     legend.style.cssText = "font: 11px monospace; color: #a8b3c2; line-height: 1.5;";
     legend.textContent =
-      "Edit the sketch: L living, B bedroom, K kitchen, T bath, H hall, # wall, + door, space outside.";
+      "Edit the sketch: L living, B bedroom, K kitchen, T bath, H hall, # wall, + door, space outside. Leave two wall cells above a side door for its corner tiles.";
     this.previewPanel.appendChild(legend);
     this.apartmentSketch = document.createElement("textarea");
     this.apartmentSketch.style.cssText = `${CONTROL_STYLE} width: 100%; min-height: 180px; box-sizing: border-box; white-space: pre; resize: vertical; line-height: 1.1; font-size: 10px;`;
