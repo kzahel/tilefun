@@ -41,7 +41,7 @@ export const ADVANCED_SUITE_EXAMPLES = [
       westTop: 0,
       westBottom: 9,
       eastWidth: 13,
-      eastTop: 3,
+      eastTop: 2,
       eastBottom: 13,
       southRoom: true,
     },
@@ -82,6 +82,8 @@ function stampSideRoom(
 ): void {
   const { left, right, top, bottom } = bounds;
   const doorwayX = doorwaySide === "left" ? left : right;
+  const firstDoorY = Math.min(...doorwayRows);
+  const lastDoorY = Math.max(...doorwayRows);
   for (let x = left; x <= right; x++) {
     for (const y of [top, top + 1]) {
       mark(map, x, y, "wall");
@@ -95,12 +97,27 @@ function stampSideRoom(
     for (let x = left; x <= right; x++) {
       if (x === doorwayX && doorwayRows.includes(y)) {
         mark(map, x, y, "opening");
+        // Carry the main room's wood through the wall; the side room's tile
+        // material begins after the passage, as in the source divider.
         placeInteriorTile(map, "floor", x, y, {
-          key: floor(material, x, left + 1, right - 1, y === top + 2),
+          key: floor("wood", x, left + 1, right - 1, y === top + 2),
         });
       } else if (x === left || x === right) {
         mark(map, x, y, "wall");
-        placeInteriorTile(map, "wall", x, y, { key: wall(x === left ? 10 : 13, 2) });
+        if (x === doorwayX && y === lastDoorY + 1) {
+          // The source uses a partly transparent taper over floor where a
+          // side opening returns to a full-height wall.
+          placeInteriorTile(map, "floor", x, y, {
+            key: floor("wood", x, left + 1, right - 1, false),
+          });
+          placeInteriorTile(map, "foreground", x, y, {
+            key: wall(doorwaySide === "left" ? 9 : 14, 4),
+          });
+        } else {
+          placeInteriorTile(map, "wall", x, y, {
+            key: wall(x === left ? 10 : 13, x === doorwayX && y === firstDoorY - 1 ? 4 : 2),
+          });
+        }
       } else {
         mark(map, x, y, material);
         placeInteriorTile(map, "floor", x, y, {
@@ -108,6 +125,22 @@ function stampSideRoom(
         });
       }
     }
+  }
+  // The source's side opening uses a two-piece wall return above its floor
+  // passage. These cells can overlap the room's back-wall corner rows.
+  const upperShoulder = map.cells[firstDoorY - 2]?.[doorwayX];
+  if (firstDoorY - 2 > top && upperShoulder?.semantic === "wall") {
+    upperShoulder.wall.length = 0;
+    placeInteriorTile(map, "wall", doorwayX, firstDoorY - 2, {
+      key: wall(doorwaySide === "left" ? 10 : 13, 3),
+    });
+  }
+  const upperJoin = map.cells[firstDoorY - 1]?.[doorwayX];
+  if (upperJoin?.semantic === "wall") {
+    upperJoin.wall.length = 0;
+    placeInteriorTile(map, "wall", doorwayX, firstDoorY - 1, {
+      key: wall(doorwaySide === "left" ? 10 : 13, 4),
+    });
   }
   for (let x = left; x <= right; x++) {
     mark(map, x, bottom, "wall");
@@ -122,26 +155,37 @@ function stampSouthRoom(map: LayeredInteriorMap, mainX: number): void {
   const left = mainX + 2;
   const right = mainX + 12;
   const openingX = mainX + 7;
-  const top = 14;
+  const top = 13;
   const bottom = 21;
-  // The source shell's south portal is transparent. Floor now continues
-  // beneath it, into a two-row passage in the new room's back wall.
+  // Replace the source's shallow front trim with a shared two-row divider.
+  // Its portal becomes floor, with matching jambs on both sides.
   const sourcePortal = map.cells[13]?.[openingX];
   if (!sourcePortal || sourcePortal.semantic !== "opening") {
     throw new Error("Missing south portal in source shell");
   }
-  placeInteriorTile(map, "floor", openingX, 13, { key: "room-builder/floors/c13-r35" });
   for (let x = left; x <= right; x++) {
     for (const y of [top, top + 1]) {
+      const item = map.cells[y]?.[x];
+      if (!item) throw new Error(`Missing south divider cell ${x},${y}`);
+      if (y === top) item.foreground.length = 0;
+      else mark(map, x, y, x === openingX ? "opening" : "wall");
       if (x === openingX) {
-        mark(map, x, y, "opening");
         placeInteriorTile(map, "floor", x, y, { key: "room-builder/floors/c13-r35" });
         continue;
       }
-      mark(map, x, y, "wall");
       const isTop = y === top;
       const col =
-        x === openingX - 1 ? 8 : x === openingX + 1 ? 8 : x === left ? 10 : x === right ? 13 : 11;
+        x === openingX - 1
+          ? 8
+          : x === openingX + 1
+            ? 8
+            : x === left
+              ? isTop
+                ? 11
+                : 10
+              : x === right
+                ? 12
+                : 11;
       const row =
         x === openingX - 1
           ? isTop
@@ -199,8 +243,8 @@ export function buildAdvancedSuite(spec: AdvancedSuiteSpec): LayeredInteriorMap 
     spec.eastBottom - spec.eastTop < 6 ||
     spec.westBottom > 13 ||
     spec.eastBottom > 13 ||
-    spec.westTop > 2 ||
-    spec.eastTop > 3
+    spec.westTop > 1 ||
+    spec.eastTop !== 2
   ) {
     throw new Error("Side rooms must contain their source-shell openings");
   }
