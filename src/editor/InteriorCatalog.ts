@@ -15,6 +15,7 @@ import {
   drawApartmentPlan,
   parseFloorPlan,
 } from "../interiors/ApartmentFloorPlan.js";
+import { drawConnectedRoomGrammarPreview } from "../interiors/ConnectedRoomGrammar.js";
 import {
   drawGenericHomeGeometryStudy,
   drawGenericHomeLayerStudy,
@@ -169,6 +170,7 @@ export class InteriorCatalog {
   private generatedRoomCanvas: HTMLCanvasElement;
   private geometryStudyCanvas: HTMLCanvasElement;
   private layerStudyCanvas: HTMLCanvasElement;
+  private connectedRoomCanvas: HTMLCanvasElement;
   private geometryVariantCanvas: HTMLCanvasElement;
   private apartmentSelect: HTMLSelectElement;
   private apartmentSketch: HTMLTextAreaElement;
@@ -317,6 +319,13 @@ export class InteriorCatalog {
     this.layerStudyCanvas.setAttribute("data-testid", "interior-layer-study");
     this.previewPanel.appendChild(
       this.wrapCanvas("Generic Home 1 layered shell", this.layerStudyCanvas),
+    );
+
+    this.connectedRoomCanvas = document.createElement("canvas");
+    this.connectedRoomCanvas.style.cssText = CANVAS_STYLE;
+    this.connectedRoomCanvas.setAttribute("data-testid", "interior-connected-rooms");
+    this.previewPanel.appendChild(
+      this.wrapCanvas("Connected rooms from semantic plans", this.connectedRoomCanvas),
     );
 
     this.geometryVariantCanvas = document.createElement("canvas");
@@ -582,6 +591,7 @@ export class InteriorCatalog {
     this.layerStudyCanvas.dataset.overlapCells = String(
       drawGenericHomeLayerStudy(this.layerStudyCanvas, this.atlasImage),
     );
+    drawConnectedRoomGrammarPreview(this.connectedRoomCanvas, this.atlasImage);
     drawGenericHomeVariantPreview(this.geometryVariantCanvas, this.atlasImage);
     this.renderApartmentPreview();
   }

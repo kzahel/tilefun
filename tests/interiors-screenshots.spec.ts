@@ -83,6 +83,14 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
     Buffer.from(layerPng.split(",")[1], "base64"),
   );
 
+  const connectedPng = await page
+    .getByTestId("interior-connected-rooms")
+    .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
+  fs.writeFileSync(
+    `${CAPTURE_DIR}/connected-room-grammar.png`,
+    Buffer.from(connectedPng.split(",")[1], "base64"),
+  );
+
   const variantPng = await page
     .getByTestId("interior-geometry-variant")
     .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
