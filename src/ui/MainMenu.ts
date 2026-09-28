@@ -208,6 +208,13 @@ export class MainMenu {
     secondaryRow.append(switchBtn, hostBtn);
     btnGroup.appendChild(secondaryRow);
 
+    const workbenchLink = document.createElement("a");
+    workbenchLink.href = "interior-workbench.html";
+    workbenchLink.textContent = "Indoor Workbench";
+    workbenchLink.setAttribute("data-testid", "open-indoor-workbench");
+    workbenchLink.style.cssText = `${BTN_STYLE} display: block; text-align: center; text-decoration: none;`;
+    btnGroup.appendChild(workbenchLink);
+
     // Browse Public Games button
     const browseBtn = document.createElement("button");
     browseBtn.textContent = "Browse Public Games";
