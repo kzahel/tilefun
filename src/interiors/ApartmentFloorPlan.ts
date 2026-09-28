@@ -8,6 +8,8 @@ export interface FloorPlan {
   width: number;
   height: number;
   rows: PlanCell[][];
+  /** Typed rooms and enclosed, unpainted spaces; exterior spaces stay false. */
+  inside: boolean[][];
   rooms: RoomKind[];
   entrances: { x: number; y: number }[];
 }
@@ -33,6 +35,36 @@ function isRoom(cell: PlanCell): cell is RoomKind {
 
 function at(rows: PlanCell[][], x: number, y: number): PlanCell {
   return rows[y]?.[x] ?? " ";
+}
+
+function insideMask(rows: PlanCell[][], width: number): boolean[][] {
+  const height = rows.length;
+  const exterior = Array.from({ length: height }, () => Array<boolean>(width).fill(false));
+  const queue: { x: number; y: number }[] = [];
+  const visit = (x: number, y: number): void => {
+    if (x < 0 || x >= width || y < 0 || y >= height) return;
+    if (at(rows, x, y) !== " " || exterior[y]?.[x]) return;
+    const row = exterior[y];
+    if (!row) return;
+    row[x] = true;
+    queue.push({ x, y });
+  };
+  for (let x = 0; x < width; x++) {
+    visit(x, 0);
+    visit(x, height - 1);
+  }
+  for (let y = 0; y < height; y++) {
+    visit(0, y);
+    visit(width - 1, y);
+  }
+  for (let i = 0; i < queue.length; i++) {
+    const cell = queue[i];
+    if (!cell) continue;
+    for (const [dx, dy] of DIRECTIONS) visit(cell.x + dx, cell.y + dy);
+  }
+  return rows.map((row, y) =>
+    row.map((cell, x) => isRoom(cell) || (cell === " " && !exterior[y]?.[x])),
+  );
 }
 
 export function parseFloorPlan(source: string): FloorPlan {
@@ -68,10 +100,11 @@ export function parseFloorPlan(source: string): FloorPlan {
       if (floorCount === 1 && adjacent.includes(" ")) entrances.push({ x, y });
     }
   }
+  const inside = insideMask(rows, width);
   // A standalone room or an in-progress sketch can be useful without an
   // exterior entrance. Only check reachability when one is present.
   if (entrances.length === 0)
-    return { width, height: rows.length, rows, rooms: [...rooms], entrances };
+    return { width, height: rows.length, rows, inside, rooms: [...rooms], entrances };
 
   const visited = new Set<string>();
   const queue = [...entrances];
@@ -94,7 +127,7 @@ export function parseFloorPlan(source: string): FloorPlan {
       }
     }
   }
-  return { width, height: rows.length, rows, rooms: [...rooms], entrances };
+  return { width, height: rows.length, rows, inside, rooms: [...rooms], entrances };
 }
 
 type Draft = { grid: PlanCell[][]; width: number; height: number };

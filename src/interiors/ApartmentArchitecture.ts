@@ -30,11 +30,15 @@ function isBoundary(cell: PlanCell): boolean {
   return cell === "#" || cell === "+";
 }
 
+function isInside(plan: FloorPlan, x: number, y: number): boolean {
+  return plan.inside[y]?.[x] ?? false;
+}
+
 function axisAt(plan: FloorPlan, x: number, y: number): Axis {
-  const north = isRoom(at(plan, x, y - 1));
-  const south = isRoom(at(plan, x, y + 1));
-  const west = isRoom(at(plan, x - 1, y));
-  const east = isRoom(at(plan, x + 1, y));
+  const north = isInside(plan, x, y - 1);
+  const south = isInside(plan, x, y + 1);
+  const west = isInside(plan, x - 1, y);
+  const east = isInside(plan, x + 1, y);
   if (north || south) return "horizontal";
   // Include the elbow cell in a front wall when a horizontal face turns into
   // a side wall below it. Otherwise its face shifts by one atlas column.
@@ -85,7 +89,13 @@ function sideFace(
 ): { dx: number; col: number; floor: RoomKind | null } {
   const west = roomBeside(plan, x - 1, y);
   const east = roomBeside(plan, x + 1, y);
-  return { dx: west ? 1 : 0, col: east ? 10 : west ? 13 : 10, floor: west ?? east };
+  const westInside = [0, -1, 1].some((dy) => isInside(plan, x - 1, y + dy));
+  const eastInside = [0, -1, 1].some((dy) => isInside(plan, x + 1, y + dy));
+  return {
+    dx: westInside ? 1 : 0,
+    col: eastInside ? 10 : westInside ? 13 : 10,
+    floor: west ?? east,
+  };
 }
 
 function doorwayFloor(plan: FloorPlan, x: number, y: number): RoomKind {
@@ -112,12 +122,12 @@ function horizontalBounds(plan: FloorPlan, x: number, y: number): [number, numbe
 
 function frontEdge(plan: FloorPlan, x: number, y: number): boolean {
   const [left, right] = horizontalBounds(plan, x, y);
-  let floorAbove = false;
+  let insideAbove = false;
   for (let px = left; px <= right; px++) {
-    floorAbove ||= isRoom(at(plan, px, y - 1));
+    insideAbove ||= isInside(plan, px, y - 1);
     if (at(plan, px, y + 1) !== " ") return false;
   }
-  return floorAbove;
+  return insideAbove;
 }
 
 function bayFrontEdge(plan: FloorPlan, x: number, y: number): boolean {

@@ -23,7 +23,21 @@ function reachableFloorCount(map: LayeredInteriorMap, x: number, y: number): num
 describe("layered apartment compiler", () => {
   it("renders a wall-only draft while its floor remains unpainted", () => {
     const map = buildLayeredApartmentPlan(parseFloorPlan("#####\n#   #\n#   #\n#####"));
-    expect(map.cells.flat().some((cell) => cell.wall.length > 0)).toBe(true);
+    const floored = buildLayeredApartmentPlan(parseFloorPlan("#####\n#LLL#\n#LLL#\n#####"));
+    expect(map.cells[2]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+    expect(map.cells[2]?.[9]?.wall[0]?.key).toBe("room-builder/3d-walls/c13-r02");
+    expect(map.cells[6]?.[0]?.foreground[0]).toEqual({
+      key: "room-builder/3d-walls/c10-r05",
+      cropHeight: 6,
+    });
+    expect(map.cells[6]?.[9]?.foreground[0]).toEqual({
+      key: "room-builder/3d-walls/c13-r05",
+      cropHeight: 6,
+    });
+    expect(map.pixelHeight).toBe(102);
+    expect(map.cells.map((row) => row.map((cell) => [cell.wall, cell.foreground]))).toEqual(
+      floored.cells.map((row) => row.map((cell) => [cell.wall, cell.foreground])),
+    );
     expect(map.cells[2]?.[2]?.semantic).toBe("void");
     expect(map.cells[2]?.[2]?.floor).toHaveLength(0);
   });

@@ -22,6 +22,13 @@ describe("apartment floor plans", () => {
     const plan = parseFloorPlan("#####\n#   #\n#   #\n#####");
     expect(plan.rooms).toHaveLength(0);
     expect(plan.entrances).toHaveLength(0);
+    expect(plan.inside[1]?.[1]).toBe(true);
+    expect(plan.inside[0]?.[0]).toBe(false);
+  });
+
+  it("does not mistake an open gap for enclosed space", () => {
+    const plan = parseFloorPlan("## ##\n#   #\n#####");
+    expect(plan.inside[1]?.[2]).toBe(false);
   });
 
   it("rejects a doorway that ends in a wall", () => {
