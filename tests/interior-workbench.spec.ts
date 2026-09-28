@@ -90,3 +90,22 @@ test("phone layout switches between the plan and the rendered zone", async ({ pa
     fullPage: true,
   });
 });
+
+test("new enclosed rooms persist locally and custom fixtures can be deleted", async ({ page }) => {
+  await page.goto("/tilefun/interior-workbench.html");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await page.getByRole("button", { name: "New room" }).click();
+  await expect(page.getByTestId("workbench-status")).toContainText("Untitled room");
+  await expect(page.getByTestId("workbench-status")).not.toHaveClass(/error/);
+  await expect(page.getByTestId("render-canvas")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Reset" })).toBeDisabled();
+  const id = await page.getByTestId("fixture-select").inputValue();
+  await page.reload();
+  await expect(page.getByTestId("fixture-select")).toHaveValue(id);
+  await expect(page.getByTestId("workbench-status")).toContainText("Untitled room");
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.getByRole("button", { name: "Delete" }).click();
+  await expect(page.getByTestId("fixture-select")).toHaveValue("small");
+  await page.reload();
+  await expect(page.getByTestId("fixture-select").locator(`option[value="${id}"]`)).toHaveCount(0);
+});

@@ -50,8 +50,10 @@ app.innerHTML = `
     <h1>Indoor Workbench</h1>
     <select id="fixture-select" data-testid="fixture-select" aria-label="Fixture"></select>
     <input id="fixture-name" aria-label="Fixture name" placeholder="Fixture name" />
+    <button id="create-fixture">New room</button>
     <button id="new-fixture">Duplicate</button>
     <button id="reset-fixture">Reset</button>
+    <button id="delete-fixture">Delete</button>
     <button id="export-fixture" data-testid="export-fixture">Export</button>
     <button id="import-fixture">Import</button>
     <input id="import-file" type="file" accept="application/json,.json" hidden />
@@ -205,6 +207,9 @@ function updateFixtureSelect(): void {
   }
   fixtureSelect.value = current.id;
   fixtureName.value = current.name;
+  const isBuiltIn = builtInDocuments().some((item) => item.id === current.id);
+  element<HTMLButtonElement>("reset-fixture").disabled = !isBuiltIn;
+  element<HTMLButtonElement>("delete-fixture").disabled = isBuiltIn;
 }
 
 function setTool(next: Tool): void {
@@ -683,7 +688,7 @@ fixtureName.addEventListener("change", () => {
   renderAll();
 });
 element<HTMLButtonElement>("new-fixture").addEventListener("click", () => {
-  const id = `custom-${Date.now()}`;
+  const id = `custom-${crypto.randomUUID()}`;
   const copy: WorkbenchDocument = {
     ...structuredClone(current),
     id,
@@ -692,6 +697,22 @@ element<HTMLButtonElement>("new-fixture").addEventListener("click", () => {
   documents.set(id, copy);
   save();
   activateFixture(id);
+  fixtureName.focus();
+  fixtureName.select();
+});
+element<HTMLButtonElement>("create-fixture").addEventListener("click", () => {
+  const id = `custom-${crypto.randomUUID()}`;
+  const room: WorkbenchDocument = {
+    version: 1,
+    id,
+    name: "Untitled room",
+    sketch: ["########", ...Array(6).fill("#LLLLLL#"), "########"].join("\n"),
+    overrides: [],
+    issues: [],
+  };
+  documents.set(id, room);
+  activateFixture(id);
+  save();
   fixtureName.focus();
   fixtureName.select();
 });
@@ -706,6 +727,13 @@ element<HTMLButtonElement>("reset-fixture").addEventListener("click", () => {
   save();
   updateFixtureSelect();
   renderAll();
+});
+element<HTMLButtonElement>("delete-fixture").addEventListener("click", () => {
+  if (builtInDocuments().some((item) => item.id === current.id)) return;
+  if (!window.confirm(`Delete "${current.name}" from this browser?`)) return;
+  documents.delete(current.id);
+  activateFixture("small");
+  save();
 });
 element<HTMLButtonElement>("export-fixture").addEventListener("click", () => {
   const blob = new Blob([JSON.stringify(current, null, 2)], { type: "application/json" });

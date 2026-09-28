@@ -12,6 +12,12 @@ describe("apartment floor plans", () => {
     expect(() => parseFloorPlan("#####\n#LLL#\n#####\n#BBB#\n##+##")).toThrow(/cannot be reached/);
   });
 
+  it("accepts an enclosed standalone room without an entrance", () => {
+    const plan = parseFloorPlan("####\n#LL#\n#LL#\n####");
+    expect(plan.entrances).toHaveLength(0);
+    expect(plan.rooms).toEqual(["L"]);
+  });
+
   it("rejects a doorway that ends in a wall", () => {
     expect(() => parseFloorPlan("#####\n#LL+#\n#####")).toThrow(/Passage/);
   });

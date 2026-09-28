@@ -71,7 +71,10 @@ export function parseFloorPlan(source: string): FloorPlan {
     }
   }
   if (!firstFloor) throw new Error("Plan needs at least one room cell");
-  if (entrances.length === 0) throw new Error("Plan needs an exterior + entrance");
+  // A standalone room or an in-progress sketch can be useful without an
+  // exterior entrance. Only check reachability when one is present.
+  if (entrances.length === 0)
+    return { width, height: rows.length, rows, rooms: [...rooms], entrances };
 
   const visited = new Set<string>();
   const queue = [...entrances];
