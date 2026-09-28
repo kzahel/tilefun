@@ -19,6 +19,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
+        interiorWorkbench: resolve(root, "interior-workbench.html"),
       },
     },
   },

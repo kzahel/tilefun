@@ -205,12 +205,12 @@ Floor-plan-driven prototype:
 
 ### Chunk 8: Editor Workflow
 
-Status: pending
+Status: in progress
 
-- Let the editor inspect and place indoor tiles/objects.
+- The standalone Indoor Workbench at `/tilefun/interior-workbench.html` opens named apartment fixtures without starting the game. It shows editable semantic cells and the layered atlas rendering together, with plan painting, per-layer tile overrides, inspection, rectangular feedback flags, local autosave, and JSON export/import. On narrow screens the two views can be switched or stacked. See `docs/interior-workbench.md`.
 - Add prefab stamping for rooms and whole apartments.
-- Add collision/portal visualization.
-- Support user feedback loops where atlas keys can be marked correct/incorrect and metadata refined.
+- Add collision/portal visualization and a playable indoor scene.
+- Use exported flags and tile overrides to refine the compiler rules and atlas role metadata.
 
 ## Open Questions
 
@@ -240,3 +240,4 @@ Status: pending
 - 2026-09-27: Connected editable apartment sketches to a layered architectural compiler with shared two-row walls, source passage jambs, side-wall tapers, shallow front trim, short-return validation, and a stepped stress example.
 - 2026-09-28: Corrected the apartment preview after visual review: restored the approved floor palette, removed doubled shared-wall rails, used atlas corner sequences at wall elbows, and added shallow rail and taper tiles to inset south edges. Renamed the staggered footprint example to “Offset rooms.”
 - 2026-09-28: Matched the apartment preview's display to the approved demos at 2× atlas scale. Corrected horizontal door expansion so a one-cell sketch passage leaves one atlas column open through the two-row wall, matching Generic Home 1; removed dangling trim at inset endpoints.
+- 2026-09-28: Added a dedicated indoor fixture workbench with side-by-side plan and rendering, pan/zoom, plan and atlas-tile painting, layer inspection, rectangular feedback flags, and portable JSON review files.

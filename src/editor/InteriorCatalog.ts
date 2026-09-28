@@ -259,6 +259,11 @@ export class InteriorCatalog {
     apartmentHeading.style.cssText = "font: bold 14px monospace; color: #9bd7ff;";
     apartmentHeading.textContent = "Floor plan → tiled apartment";
     this.previewPanel.appendChild(apartmentHeading);
+    const workbenchLink = document.createElement("a");
+    workbenchLink.href = "interior-workbench.html";
+    workbenchLink.textContent = "Open indoor workbench →";
+    workbenchLink.style.cssText = "font: 12px monospace; color: #9bd7ff;";
+    this.previewPanel.appendChild(workbenchLink);
     this.apartmentSelect = this.makeSelect([
       ...APARTMENT_EXAMPLES.map(({ id, name }) => ({ value: id, label: name })),
       { value: "custom", label: "Custom sketch" },
