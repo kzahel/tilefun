@@ -51,13 +51,11 @@ export function parseFloorPlan(source: string): FloorPlan {
   );
   const rooms = new Set<RoomKind>();
   const entrances: { x: number; y: number }[] = [];
-  let firstFloor: { x: number; y: number } | null = null;
   for (let y = 0; y < rows.length; y++) {
     for (let x = 0; x < width; x++) {
       const cell = at(rows, x, y);
       if (isRoom(cell)) {
         rooms.add(cell);
-        firstFloor ??= { x, y };
       }
       if (cell !== "+") continue;
       const adjacent = DIRECTIONS.map(([dx, dy]) => at(rows, x + dx, y + dy));
@@ -70,7 +68,6 @@ export function parseFloorPlan(source: string): FloorPlan {
       if (floorCount === 1 && adjacent.includes(" ")) entrances.push({ x, y });
     }
   }
-  if (!firstFloor) throw new Error("Plan needs at least one room cell");
   // A standalone room or an in-progress sketch can be useful without an
   // exterior entrance. Only check reachability when one is present.
   if (entrances.length === 0)

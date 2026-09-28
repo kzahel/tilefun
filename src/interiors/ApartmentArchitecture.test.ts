@@ -21,6 +21,13 @@ function reachableFloorCount(map: LayeredInteriorMap, x: number, y: number): num
 }
 
 describe("layered apartment compiler", () => {
+  it("renders a wall-only draft while its floor remains unpainted", () => {
+    const map = buildLayeredApartmentPlan(parseFloorPlan("#####\n#   #\n#   #\n#####"));
+    expect(map.cells.flat().some((cell) => cell.wall.length > 0)).toBe(true);
+    expect(map.cells[2]?.[2]?.semantic).toBe("void");
+    expect(map.cells[2]?.[2]?.floor).toHaveLength(0);
+  });
+
   it.each(APARTMENT_EXAMPLES)("keeps every opening and room connected in $name", ({ sketch }) => {
     const plan = parseFloorPlan(sketch);
     const map = buildLayeredApartmentPlan(plan);

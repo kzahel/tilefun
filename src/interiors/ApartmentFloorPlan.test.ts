@@ -18,6 +18,12 @@ describe("apartment floor plans", () => {
     expect(plan.rooms).toEqual(["L"]);
   });
 
+  it("accepts a wall-only draft before any floor is painted", () => {
+    const plan = parseFloorPlan("#####\n#   #\n#   #\n#####");
+    expect(plan.rooms).toHaveLength(0);
+    expect(plan.entrances).toHaveLength(0);
+  });
+
   it("rejects a doorway that ends in a wall", () => {
     expect(() => parseFloorPlan("#####\n#LL+#\n#####")).toThrow(/Passage/);
   });
