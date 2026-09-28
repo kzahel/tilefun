@@ -1021,7 +1021,15 @@ export class GameClient {
       }
     });
 
-    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn, interiorsBtn);
+    const workbenchBtn = document.createElement("button");
+    workbenchBtn.textContent = "Indoor Workbench";
+    workbenchBtn.style.cssText = MENU_BTN_STYLE;
+    workbenchBtn.setAttribute("data-testid", "open-indoor-workbench");
+    workbenchBtn.addEventListener("click", () => {
+      window.location.href = "interior-workbench.html";
+    });
+
+    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn, interiorsBtn, workbenchBtn);
 
     // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
     const vrBtn = document.createElement("button");
