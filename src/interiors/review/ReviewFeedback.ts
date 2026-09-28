@@ -1,3 +1,32 @@
+/** Pixel coordinates in the original render; emoji cells span 32px. */
+export interface ReviewPin {
+  x: number;
+  y: number;
+  size: 16 | 32;
+}
+export function parseReviewPins(value: unknown, sketch: string): ReviewPin[] {
+  const rows = sketch.split("\n");
+  const width = Math.max(...rows.map((row) => row.length)) * 32;
+  if (!Array.isArray(value) || value.length > 20) throw new Error("Invalid pins");
+  return value.map((pin) => {
+    if (!pin || typeof pin !== "object") throw new Error("Invalid pin");
+    const { x, y, size } = pin;
+    if (
+      !Number.isInteger(x) ||
+      !Number.isInteger(y) ||
+      (size !== 16 && size !== 32) ||
+      x < 0 ||
+      y < 0 ||
+      x % size !== 0 ||
+      y % size !== 0 ||
+      x >= width ||
+      y >= rows.length * 32
+    )
+      throw new Error("Invalid pin");
+    return { x, y, size };
+  });
+}
+
 export interface ReviewFeedback {
   id: string;
   caseId: string;
@@ -8,6 +37,7 @@ export interface ReviewFeedback {
   name: string;
   createdAt: string;
   screenshot?: string;
+  pins?: ReviewPin[];
 }
 export function parseReviewFeedback(value: unknown): ReviewFeedback {
   if (!value || typeof value !== "object") throw new Error("Invalid feedback");
@@ -47,6 +77,7 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
     sketch: v.sketch as string,
     name: v.name as string,
     createdAt: v.createdAt as string,
+    ...(v.pins !== undefined ? { pins: parseReviewPins(v.pins, v.sketch as string) } : {}),
     ...(typeof v.screenshot === "string" ? { screenshot: v.screenshot } : {}),
   };
 }

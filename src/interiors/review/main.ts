@@ -3,7 +3,13 @@ import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import { REVIEW_STAGES, type ReviewCase, reviewCases } from "./ReviewCases.js";
-import { currentVerdict, parseReviewFeedback, type ReviewFeedback } from "./ReviewFeedback.js";
+import {
+  currentVerdict,
+  parseReviewFeedback,
+  parseReviewPins,
+  type ReviewFeedback,
+  type ReviewPin,
+} from "./ReviewFeedback.js";
 import "./review.css";
 
 const STORAGE = "tilefun.indoor-review.v1";
@@ -20,6 +26,7 @@ interface State {
   batch: { id: string; fingerprint: string }[];
   paused: boolean;
   draft: string;
+  annotation: { caseId: string; fingerprint: string; pins: ReviewPin[] } | null;
 }
 const initial: State = {
   current: "",
@@ -29,6 +36,7 @@ const initial: State = {
   batch: [],
   paused: false,
   draft: "",
+  annotation: null,
 };
 let state = initial;
 try {
@@ -46,8 +54,14 @@ try {
       records: saved.records.map(parseReviewFeedback),
       outbox: saved.outbox.map(parseReviewFeedback),
     };
+    if (state.annotation) {
+      const recordSketch =
+        reviewCases().find((c) => c.id === state.annotation?.caseId)?.sketch ?? "";
+      state.annotation.pins = parseReviewPins(state.annotation.pins, recordSketch);
+    }
   }
 } catch {
+  state = { ...initial, annotation: null };
   /* Start fresh if browser storage cannot be read. */
 }
 const root = document.getElementById("app");
@@ -62,7 +76,7 @@ root.innerHTML = `
     <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
   </section>
   <section id="pause" hidden><h2>Ready for the next fix.</h2><p>Your two reports are captured; the save status is above. Say “ready” in chat to start the next fix—I can read saved feedback directly. Changed rooms will return for review.</p><button id="continue">Keep reviewing</button> <button id="refresh-review">Check for updates</button></section>
-  <div id="actions"><label class="note-label">Optional note <span>N to type · Enter to mark wrong</span><input id="note" maxlength="2000" placeholder="e.g. bottom-left corner" autocomplete="off" /></label><div class="buttons"><button id="wrong" class="wrong">Wrong <kbd>X</kbd></button><button id="good" class="good">Looks right <kbd>Space</kbd></button><button id="skip">Skip <kbd>→</kbd></button></div></div>
+  <div id="actions"><p class="pin-hint">Tap a block in the render or floor plan to pin it to your report.</p><div id="pins" aria-label="Pinned blocks"></div><label class="note-label">Optional note <span>N to type · Enter to mark wrong</span><input id="note" maxlength="2000" placeholder="e.g. bottom-left corner" autocomplete="off" /></label><div class="buttons"><button id="wrong" class="wrong">Wrong <kbd>X</kbd></button><button id="good" class="good">Looks right <kbd>Space</kbd></button><button id="skip">Skip <kbd>→</kbd></button></div></div>
   <footer><button id="previous">← Previous</button><button id="undo">Undo verdict</button><span id="hint">Review judges appearance; these cases are not pre-approved.</span></footer>
   <details id="unsupported"><summary id="unsupported-label">Compiler exclusions</summary><pre id="unsupported-list"></pre></details>
 </main>`;
@@ -106,6 +120,8 @@ function show(next: ReadyCase | undefined, push = true): void {
   if (push && current && next?.id !== current.id) history.push(current.id);
   current = next;
   if (next) state.current = next.id;
+  if (state.annotation?.caseId !== next?.id || state.annotation?.fingerprint !== next?.fingerprint)
+    state.annotation = null;
   save();
   draw();
 }
@@ -141,11 +157,19 @@ function draw(): void {
     T: "🟦",
     " ": "",
   };
-  for (const row of current.sketch.split("\n")) {
+  for (const [y, row] of current.sketch.split("\n").entries()) {
     const line = document.createElement("div");
     line.className = "plan-row";
-    for (const char of row) {
-      const cell = document.createElement("span");
+    for (const [x, char] of [...row].entries()) {
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.dataset.x = String(x);
+      cell.dataset.y = String(y);
+      cell.setAttribute("aria-label", `Pin row ${y + 1}, column ${x + 1}`);
+      cell.onclick = () => {
+        addPin({ x: x * 32, y: y * 32, size: 32 }, true);
+        cell.blur();
+      };
       cell.textContent = symbols[char] ?? char;
       line.append(cell);
     }
@@ -153,7 +177,7 @@ function draw(): void {
   }
   canvas.width = current.image.width;
   canvas.height = current.image.height;
-  canvas.getContext("2d")?.drawImage(current.image, 0, 0);
+  drawPins();
   resizeCanvas();
   const verdict = judgment(current);
   const old = [...state.records].reverse().find((r) => r.caseId === current?.id);
@@ -164,9 +188,84 @@ function draw(): void {
       : "Not reviewed yet";
   note.value = state.draft;
 }
+function drawPins(): void {
+  if (!current) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  ctx.drawImage(current.image, 0, 0);
+  const pins = state.annotation?.pins ?? [];
+  const list = el("pins");
+  list.replaceChildren();
+  for (const cell of el("plan").querySelectorAll<HTMLElement>("button")) {
+    cell.classList.toggle(
+      "pinned",
+      pins.some(
+        (p) =>
+          Math.floor(p.x / 32) === Number(cell.dataset.x) &&
+          Math.floor(p.y / 32) === Number(cell.dataset.y),
+      ),
+    );
+  }
+  for (const [i, pin] of pins.entries()) {
+    const height = Math.min(pin.size, canvas.height - pin.y);
+    ctx.strokeStyle = "#ffcf57";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(pin.x + 0.5, pin.y + 0.5, pin.size - 1, height - 1);
+    const labelY = height < 12 ? Math.max(0, pin.y - 12) : pin.y;
+    ctx.fillStyle = "#ffcf57";
+    ctx.fillRect(pin.x, labelY, i >= 9 ? 15 : 9, 12);
+    ctx.font = "bold 10px sans-serif";
+    ctx.fillStyle = "#171e2a";
+    ctx.fillText(String(i + 1), pin.x + 1, labelY + 10);
+    const button = document.createElement("button");
+    button.textContent = `${i + 1} · R${Math.floor(pin.y / 32) + 1} C${Math.floor(pin.x / 32) + 1} ×`;
+    button.setAttribute("aria-label", `Remove pin ${i + 1}`);
+    button.onclick = () => {
+      state.annotation?.pins.splice(i, 1);
+      save();
+      drawPins();
+    };
+    list.append(button);
+  }
+}
+function revealPin(pin: ReviewPin): void {
+  const wrap = el("render-wrap");
+  const bounds = canvas.getBoundingClientRect();
+  const viewport = wrap.getBoundingClientRect();
+  const scale = bounds.width / canvas.width;
+  wrap.scrollLeft +=
+    bounds.left - viewport.left + (pin.x + pin.size / 2) * scale - wrap.clientWidth / 2;
+  wrap.scrollTop +=
+    bounds.top - viewport.top + (pin.y + pin.size / 2) * scale - wrap.clientHeight / 2;
+}
+function addPin(pin: ReviewPin, reveal = false): void {
+  if (!current || state.paused || navigating) return;
+  state.annotation ??= { caseId: current.id, fingerprint: current.fingerprint, pins: [] };
+  const pins = state.annotation.pins;
+  // A double-tap should leave one pin, not toggle it back off.
+  if (pins.length >= 20 || pins.some((p) => p.x === pin.x && p.y === pin.y && p.size === pin.size))
+    return;
+  pins.push(pin);
+  save();
+  drawPins();
+  if (reveal) revealPin(pin);
+}
+canvas.addEventListener("click", (event) => {
+  const bounds = canvas.getBoundingClientRect();
+  const x = Math.floor(((event.clientX - bounds.left) * canvas.width) / bounds.width / 16) * 16;
+  const y = Math.floor(((event.clientY - bounds.top) * canvas.height) / bounds.height / 16) * 16;
+  if (x >= 0 && y >= 0 && x < canvas.width && y < canvas.height) addPin({ x, y, size: 16 });
+});
 function resizeCanvas(): void {
   if (!current) return;
-  const width = el("render-wrap").clientWidth - 32;
+  const wrap = el("render-wrap");
+  // Compact counterexamples should fit in one phone view at native pixel
+  // scale. Large apartments retain the scrollable viewport.
+  wrap.style.height =
+    window.matchMedia("(max-width: 700px)").matches && canvas.width <= 288 && canvas.height <= 288
+      ? `${Math.max(220, canvas.height + 32)}px`
+      : "";
+  const width = wrap.clientWidth - 32;
   const maxHeight = el("render-wrap").clientHeight - 32;
   const scale = Math.max(
     1,
@@ -240,9 +339,11 @@ function vote(verdict: "good" | "wrong"): void {
     verdict,
     note: note.value.trim(),
     createdAt: new Date().toISOString(),
-    screenshot: voted.image.toDataURL("image/png"),
+    screenshot: canvas.toDataURL("image/png"),
+    ...(state.annotation?.pins.length ? { pins: [...state.annotation.pins] } : {}),
   };
   state.draft = "";
+  state.annotation = null;
   note.value = "";
   (document.activeElement as HTMLElement | null)?.blur();
   state.batch = state.batch.filter((c) => c.id !== voted.id);
@@ -381,6 +482,7 @@ async function start(): Promise<void> {
   const changed = cases.find((c) =>
     state.batch.some((b) => b.id === c.id && b.fingerprint !== c.fingerprint),
   );
+  const reduction = changed && cases.find((c) => c.relatedCaseId === changed.id && !judgment(c));
   if (changed) {
     state.paused = false;
     state.batch = [];
@@ -389,8 +491,12 @@ async function start(): Promise<void> {
   }
   const restored = pool().find((c) => c.id === state.current);
   show(
-    changed ??
-      (restored && (state.paused || state.draft || !judgment(restored)) ? restored : undefined) ??
+    reduction ??
+      changed ??
+      (restored &&
+      (state.paused || state.draft || state.annotation?.pins.length || !judgment(restored))
+        ? restored
+        : undefined) ??
       nextCase() ??
       restored,
     false,

@@ -1,5 +1,7 @@
 import { APARTMENT_EXAMPLES, type PlanCell } from "../ApartmentFloorPlan.js";
 
+import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFixtures.js";
+
 export const REVIEW_STAGES = [
   "Tiny rooms",
   "Doorways",
@@ -7,12 +9,14 @@ export const REVIEW_STAGES = [
   "Corners",
   "Junctions",
   "Apartments",
+  "Small stress cases",
 ] as const;
 export interface ReviewCase {
   id: string;
   name: string;
   stage: number;
   sketch: string;
+  relatedCaseId?: string;
 }
 type Grid = PlanCell[][];
 const rectangle = (w: number, h: number, floor: PlanCell = "L"): Grid =>
@@ -41,7 +45,7 @@ function shell(floors: Grid): Grid {
 export function reviewCases(): ReviewCase[] {
   const result: ReviewCase[] = [];
   const seen = new Set<string>();
-  function add(stage: number, name: string, grid: Grid | string): void {
+  function add(stage: number, name: string, grid: Grid | string, relatedCaseId?: string): void {
     const sketch = typeof grid === "string" ? grid : grid.map((row) => row.join("")).join("\n");
     // Review geometry once: floor palette swaps do not make a new wall or
     // doorway case. Keep the original sketch/ID so existing verdicts survive.
@@ -50,7 +54,13 @@ export function reviewCases(): ReviewCase[] {
     seen.add(geometry);
     let hash = 2166136261;
     for (const char of sketch) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
-    result.push({ id: `review-${stage}-${(hash >>> 0).toString(16)}`, name, stage, sketch });
+    result.push({
+      id: `review-${stage}-${(hash >>> 0).toString(16)}`,
+      name,
+      stage,
+      sketch,
+      ...(relatedCaseId ? { relatedCaseId } : {}),
+    });
   }
   for (const [w, h] of [
     [1, 1],
@@ -139,6 +149,104 @@ export function reviewCases(): ReviewCase[] {
         g = rotate(g);
       }
     }
+  // Keep the original category indexes and IDs stable. These deliberately
+  // combine nearby features rather than adding more floor palettes or rooms.
+  // Focus the next small-case round on reductions of the actual pinned
+  // apartment joins, before the broader motif permutations.
+  for (const fixture of APARTMENT_JOIN_FIXTURES) {
+    for (const mirror of [false, true]) {
+      const sketch = mirror
+        ? fixture.sketch
+            .split("\n")
+            .map((row) => [...row].reverse().join(""))
+            .join("\n")
+        : fixture.sketch;
+      add(6, `Reported join · ${fixture.name}${mirror ? " · mirror" : ""}`, sketch);
+    }
+  }
+  for (const fixture of WIDE_WALL_FIXTURES) {
+    const width = Math.max(...fixture.sketch.split("\n").map((row) => row.length));
+    for (const mirror of [false, true]) {
+      const sketch = fixture.sketch
+        .split("\n")
+        .map((row) => {
+          const padded = row.padEnd(width);
+          return mirror ? [...padded].reverse().join("") : padded;
+        })
+        .join("\n");
+      add(
+        6,
+        `Wide wall · ${fixture.name}${mirror ? " · mirror" : ""}`,
+        sketch,
+        fixture.relatedCaseId,
+      );
+    }
+  }
+  const stressStart = result.length;
+  function stressVariants(name: string, original: Grid): void {
+    for (const mirrored of [false, true]) {
+      let grid = original.map((row) => (mirrored ? [...row].reverse() : [...row]));
+      for (let turn = 0; turn < 4; turn++) {
+        add(6, `${name} · ${mirrored ? "mirror · " : ""}turn ${turn + 1}`, grid);
+        grid = rotate(grid);
+      }
+    }
+  }
+  for (const gap of [1, 2]) {
+    for (const opposite of [false, true]) {
+      const grid = rectangle(5, 5 + gap);
+      for (let y = 1; y <= 5 + gap; y++) (grid[y] as PlanCell[])[3] = "#";
+      for (let x = 1; x <= 2; x++) {
+        (grid[2] as PlanCell[])[x] = "#";
+        (grid[3 + gap] as PlanCell[])[opposite ? 6 - x : x] = "#";
+      }
+      stressVariants(
+        `Nearby T junctions · ${opposite ? "opposite" : "same"} sides · gap ${gap}`,
+        grid,
+      );
+    }
+  }
+  for (const offset of [1, 2]) {
+    const grid = rectangle(5, 5);
+    for (let y = 1; y <= 3; y++) (grid[y] as PlanCell[])[2] = "#";
+    for (let x = 2; x <= 2 + offset; x++) (grid[3] as PlanCell[])[x] = "#";
+    for (let y = 3; y <= 5; y++) (grid[y] as PlanCell[])[2 + offset] = "#";
+    stressVariants(`Short stepped divider · offset ${offset}`, grid);
+  }
+  for (const length of [1, 2, 3]) {
+    const grid = rectangle(3, 4);
+    for (let y = 1; y <= length; y++) (grid[y] as PlanCell[])[2] = "#";
+    stressVariants(`Wall end · return ${length}`, grid);
+  }
+  // Mix families so a short session does not consist only of rotations of
+  // one motif. The broader coverage-driven scheduler is a later increment.
+  const stress = result.splice(stressStart);
+  const families = ["Wall end", "Short stepped divider", "Nearby T junctions"].map((prefix) =>
+    stress.filter((c) => c.name.startsWith(prefix)),
+  );
+  for (let i = 0; i < Math.max(...families.map((family) => family.length)); i++)
+    for (const family of families) {
+      const candidate = family[i];
+      if (candidate) result.push(candidate);
+    }
+  // Smaller reductions of the reported end/step failures. Retain the existing
+  // queue and IDs; these also stress a single straight cell between junctions.
+  for (const [name, sketch] of [
+    ["Compact wall end", "#####\n#L#L#\n#LLL#\n#####"],
+    ["Compact stepped divider", "######\n#L#LL#\n#L##L#\n#LL#L#\n######"],
+  ] as const) {
+    for (const mirror of [false, true])
+      add(
+        6,
+        `${name}${mirror ? " · mirror" : ""}`,
+        mirror
+          ? sketch
+              .split("\n")
+              .map((row) => [...row].reverse().join(""))
+              .join("\n")
+          : sketch,
+      );
+  }
   for (const item of APARTMENT_EXAMPLES) add(5, item.name, item.sketch);
   return result;
 }

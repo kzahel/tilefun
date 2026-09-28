@@ -18,6 +18,9 @@ The current workbench is an architectural editing and review surface. A playable
 
 ## Fast review loop
 
+The next architecture and coverage work is specified in the
+[wall solver and rapid review plan](tactical/002-interior-wall-solver-plan.md).
+
 Open `/tilefun/interior-review.html` for one-at-a-time visual review. The
 workbench header links to it. The deterministic coverage ladder starts with
 one-cell rooms and proceeds through doorway positions on
@@ -28,6 +31,7 @@ exclusions, never as approved renders.
 
 - **Space / Looks right:** accept and advance.
 - **X / Wrong:** flag and advance; no explanation required.
+- **Tap a block** in the render or emoji plan to attach a numbered pin. Double-tapping adds just one pin. Tap its numbered chip to remove it. Pins survive reload and are saved with the next verdict and its screenshot; they do not send a chat message.
 - **N:** focus the optional note; Enter submits it as wrong.
 - **Right / Skip**, **Left / Previous**, **Backspace / Undo verdict**.
 - Two wrong answers pause the batch. Say “ready” in chat to start the next
@@ -38,7 +42,7 @@ exclusions, never as approved renders.
 
 The Vite development service also serves the public deployment, so source edits
 refresh the open page through Vite. Browser state preserves position, draft
-notes, and unsent feedback. Each judgment fingerprints the actual composed
+notes, pins, and unsent feedback. Each judgment fingerprints the actual composed
 pixels, dimensions, and sketch. Unchanged renders retain their judgments;
 changed renders need review again. If a paused failure changes, the page
 resumes on that case after reload. A static build needs a reload after redeploy;
@@ -47,7 +51,7 @@ the automatic source-refresh behavior belongs to the development service.
 Feedback is automatically posted to `/tilefun/api/interior-review` and appended
 to ignored `data/interior-review/feedback.ndjson`. Each record includes the
 sketch, case ID, verdict, optional note, render fingerprint, and a PNG of the
-judged render. Agents can read this inbox directly; no export is needed. Read
+judged render. Optional `pins` contain original-render pixel coordinates (`x`, `y`) and `size`: 16 for an atlas tile, 32 for an emoji cell. The PNG includes numbered markers; the fingerprint always describes the unmarked render. Agents can read this inbox directly; no export is needed. Read
 records in append order and use the latest record per case. `clear` represents
 undo. Always re-render and compare fingerprints before treating an older
 report as still current. The GET endpoint exposes latest metadata without PNGs;
@@ -65,6 +69,11 @@ test judgments out of real feedback.
 Floor-only variants are collapsed to one case per geometry; existing case IDs
 and judgments for retained plans stay intact.
 
-Current batch: 86 unique layouts, 78 renderable with the present compiler.
-Eight rotated inset-corner cases throw `Bay front ... has no floor above it`;
-these are ready-made compiler repros independent of visual feedback.
+The **Small stress cases** category adds 56 compact cases with nearby junctions, short stepped
+dividers, and wall ends in distinct rotations/reflections. These deliberately
+probe interactions; they are not pre-approved. Existing case IDs stay unchanged.
+
+Ten focused **Reported join** cases now lead that category. They reduce the pinned
+apartment transitions into adjacent south edges, divider/exterior transitions,
+and exterior/shared corners, including doors before/after the transition and mirrored counterparts. Review one or two
+failures as usual; the full 66-case category is a coverage pool, not a checklist.

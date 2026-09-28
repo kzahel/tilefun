@@ -7,7 +7,13 @@ export interface InteriorVisualTile {
   key: string;
   /** Optional left-aligned source slice for doorway outlines and junction trim. */
   cropWidth?: number;
+  /** Trim the same pixels from the source and destination left edge. */
+  cropX?: number;
   cropHeight?: number;
+  /** Pixel placement relative to the atlas cell, independent of its source crop. */
+  offsetX?: number;
+  /** Stretch a uniform atlas strip when emitting a wider wall surface. */
+  drawWidth?: number;
 }
 
 export interface InteriorLayeredCell {
@@ -77,9 +83,20 @@ export function drawLayeredInteriorMap(
           const entry = getModernInteriorsEntry(tile.key);
           if (!entry) throw new Error(`Missing interior tile: ${tile.key}`);
           const [sx, sy, sw, sh] = entry.rect;
-          const width = tile.cropWidth ?? sw;
+          const cropX = tile.cropX ?? 0;
+          const width = tile.cropWidth ?? sw - cropX;
           const height = tile.cropHeight ?? sh;
-          ctx.drawImage(atlasImage, sx, sy, width, height, x * 16, y * 16, width, height);
+          ctx.drawImage(
+            atlasImage,
+            sx + cropX,
+            sy,
+            width,
+            height,
+            x * 16 + cropX + (tile.offsetX ?? 0),
+            y * 16,
+            tile.drawWidth ?? width,
+            height,
+          );
         }
       }
     }

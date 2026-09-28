@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { REVIEW_STAGES, reviewCases } from "./ReviewCases.js";
 import { currentVerdict, parseReviewFeedback, type ReviewFeedback } from "./ReviewFeedback.js";
@@ -12,7 +13,9 @@ describe("review coverage", () => {
     expect(new Set(cases.map((c) => c.sketch)).size).toBe(cases.length);
     expect(new Set(cases.map((c) => c.sketch.replace(/[BKTH]/g, "L"))).size).toBe(cases.length);
     expect(new Set(cases.map((c) => c.stage)).size).toBe(REVIEW_STAGES.length);
-    for (const c of cases) expect(() => parseFloorPlan(c.sketch), c.name).not.toThrow();
+    for (const c of cases) {
+      expect(() => buildLayeredApartmentPlan(parseFloorPlan(c.sketch)), c.name).not.toThrow();
+    }
     const smallest = parseFloorPlan(cases[0]?.sketch ?? "");
     expect([smallest.width, smallest.height]).toEqual([3, 3]);
   });
@@ -45,6 +48,24 @@ describe("review verdict validity", () => {
         record.fingerprint,
       ),
     ).toBeUndefined();
+  });
+  it("keeps bounded render and emoji pins while accepting older reports without pins", () => {
+    const pins = [
+      { x: 16, y: 32, size: 16 },
+      { x: 32, y: 32, size: 32 },
+    ];
+    expect(parseReviewFeedback({ ...record, pins }).pins).toEqual(pins);
+    for (const bad of [
+      null,
+      [{ x: -16, y: 0, size: 16 }],
+      [{ x: 96, y: 0, size: 32 }],
+      [{ x: 0, y: 96, size: 16 }],
+      [{ x: 1, y: 0, size: 16 }],
+      [{ x: 0, y: 0, size: 8 }],
+      Array(21).fill(pins[0]),
+    ]) {
+      expect(() => parseReviewFeedback({ ...record, pins: bad })).toThrow();
+    }
   });
   it("accepts a one-click report without a note, but rejects oversized or malformed input", () => {
     expect(parseReviewFeedback(record)).toEqual(record);

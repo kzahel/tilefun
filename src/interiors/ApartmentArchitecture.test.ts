@@ -184,6 +184,20 @@ describe("layered apartment compiler", () => {
     expect(map.cells[2]?.[30]?.floor[0]?.key).toBe("room-builder/floors/c13-r35");
   });
 
+  it("uses fixed two-sided faces for the conflicting Offset wall", () => {
+    const map = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[3].sketch));
+    expect(map.cells[0]?.[32]?.wall[0]?.key).toBe("room-builder/3d-walls/c12-r00");
+    expect(map.cells[2]?.[32]?.wall[0]?.key).toBe("room-builder/3d-walls/c13-r02");
+    expect(map.cells[2]?.[33]?.wall[0]).toEqual({
+      key: "room-builder/3d-walls/c10-r02",
+      cropX: 0,
+      cropWidth: 7,
+    });
+    expect(map.cells[4]?.[33]?.wall[0]?.key).toBe("room-builder/3d-walls/c11-r00");
+    expect(map.cells[6]?.[32]?.wall[0]?.key).toBe("room-builder/3d-walls/c13-r02");
+    expect(map.cells[6]?.[33]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+  });
+
   it("rejects a side passage too close to an upper wall step", () => {
     const plan = parseFloorPlan("########\n#LL#HHH#\n#LL+HHH#\n#LL#HHH#\n##+#####");
     expect(() => buildLayeredApartmentPlan(plan)).toThrow(/needs two wall cells above/);
@@ -204,13 +218,19 @@ describe("layered apartment compiler", () => {
     const strange = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[2].sketch));
     expect(strange.cells[20]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");
     expect(strange.cells[21]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r04");
-    expect(strange.cells[32]?.[32]?.floor).toHaveLength(1);
-    expect(strange.cells[33]?.[14]?.floor).toHaveLength(1);
-    expect(strange.cells[33]?.[14]?.foreground).toHaveLength(0);
-    expect(strange.cells[33]?.[32]?.foreground[0]?.key).toBe("room-builder/3d-walls/c09-r04");
-    expect(strange.cells[33]?.[20]?.foreground[0]).toEqual({
+    // Recessed trim is at the same top edge as a straight south wall. No
+    // floor or detached second rail spills into the exterior notch below it.
+    expect(strange.cells[32]?.[20]?.foreground[0]).toEqual({
       key: "room-builder/3d-walls/c11-r05",
       cropHeight: 6,
     });
+    expect(strange.cells[33]?.[20]?.floor).toHaveLength(0);
+    expect(strange.cells[33]?.[20]?.foreground).toHaveLength(0);
+    // The shared partition stays in the same atlas column past the notch.
+    expect(strange.cells[31]?.[33]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+    expect(strange.cells[33]?.[33]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+    expect(strange.cells[34]?.[33]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+    expect(strange.cells[38]?.[36]?.foreground[0]?.cropHeight).toBe(6);
+    expect(strange.cells[38]?.[36]?.wall).toHaveLength(0);
   });
 });

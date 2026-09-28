@@ -132,7 +132,11 @@ aside {
   display: flex;
   height: 22px;
 }
-.plan-row span {
+.plan-row button {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   display: inline-block;
   width: 22px;
   flex: 0 0 22px;
@@ -319,4 +323,33 @@ footer button {
   #verdict {
     font-size: 12px;
   }
+}
+
+#render,
+#plan button {
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+#plan button.pinned {
+  outline: 2px solid #ffcf57;
+  outline-offset: -2px;
+  background: #675523;
+}
+.pin-hint {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+#pins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+#pins:empty {
+  display: none;
+}
+#pins button {
+  padding: 5px 8px;
+  font-size: 12px;
+  color: #ffcf57;
 }
