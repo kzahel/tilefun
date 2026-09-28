@@ -43,12 +43,13 @@ describe("layered apartment compiler", () => {
     expect(map.cells[13]?.[21]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r04");
     expect(map.cells[12]?.[24]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r00");
     expect(map.cells[13]?.[24]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r01");
-    // Shared vertical doorway at 9,3: both wall faces taper over floor below it.
-    expect(map.cells[4]?.[18]?.wall[0]?.key).toBe("room-builder/3d-walls/c13-r03");
+    // Shared vertical doorway at 9,3: one face returns into the passage.
+    expect(map.cells[4]?.[19]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");
     expect(map.cells[5]?.[19]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r04");
     expect(map.cells[8]?.[18]?.floor).toHaveLength(1);
-    expect(map.cells[8]?.[18]?.foreground[0]?.key).toBe("room-builder/3d-walls/c14-r04");
     expect(map.cells[8]?.[19]?.foreground[0]?.key).toBe("room-builder/3d-walls/c09-r04");
+    expect(map.cells[2]?.[2]?.floor[0]?.key).toBe("room-builder/floors/c01-r31");
+    expect(map.cells[2]?.[30]?.floor[0]?.key).toBe("room-builder/floors/c13-r35");
   });
 
   it("rejects a side passage too close to an upper wall step", () => {
@@ -66,7 +67,13 @@ describe("layered apartment compiler", () => {
     });
     expect(small.pixelHeight).toBe(small.height * 16 - 26);
     const strange = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[2].sketch));
-    expect(strange.cells[32]?.[20]?.wall).toHaveLength(1);
-    expect(strange.cells[32]?.[20]?.foreground).toHaveLength(0);
+    expect(strange.cells[20]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");
+    expect(strange.cells[21]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r04");
+    expect(strange.cells[32]?.[32]?.floor).toHaveLength(1);
+    expect(strange.cells[33]?.[32]?.foreground[0]?.key).toBe("room-builder/3d-walls/c09-r04");
+    expect(strange.cells[33]?.[20]?.foreground[0]).toEqual({
+      key: "room-builder/3d-walls/c11-r05",
+      cropHeight: 6,
+    });
   });
 });

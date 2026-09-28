@@ -12,10 +12,10 @@ type Axis = "horizontal" | "vertical";
 
 const FLOOR_TILES: Record<RoomKind, string> = {
   L: "room-builder/floors/c01-r31",
-  B: "room-builder/floors/c04-r29",
-  K: "room-builder/floors/c13-r29",
-  T: "room-builder/floors/c13-r20",
-  H: "room-builder/floors/c01-r05",
+  B: "room-builder/floors/c01-r31",
+  K: "room-builder/floors/c13-r35",
+  T: "room-builder/floors/c13-r35",
+  H: "room-builder/floors/c01-r31",
 };
 
 function at(plan: FloorPlan, x: number, y: number): PlanCell {
@@ -36,6 +36,14 @@ function axisAt(plan: FloorPlan, x: number, y: number): Axis {
   const west = isRoom(at(plan, x - 1, y));
   const east = isRoom(at(plan, x + 1, y));
   if (north || south) return "horizontal";
+  // Include the elbow cell in a front wall when a horizontal face turns into
+  // a side wall below it. Otherwise its face shifts by one atlas column.
+  if (
+    isBoundary(at(plan, x, y + 1)) &&
+    ((east && isBoundary(at(plan, x - 1, y))) || (west && isBoundary(at(plan, x + 1, y))))
+  ) {
+    return "horizontal";
+  }
   if (west || east) return "vertical";
   const horizontal =
     Number(isBoundary(at(plan, x - 1, y))) + Number(isBoundary(at(plan, x + 1, y)));
@@ -70,28 +78,64 @@ function roomBeside(plan: FloorPlan, x: number, y: number): RoomKind | null {
   return null;
 }
 
+function sideFace(
+  plan: FloorPlan,
+  x: number,
+  y: number,
+): { dx: number; col: number; floor: RoomKind | null } {
+  const west = roomBeside(plan, x - 1, y);
+  const east = roomBeside(plan, x + 1, y);
+  return { dx: west ? 1 : 0, col: east ? 10 : west ? 13 : 10, floor: west ?? east };
+}
+
 function doorwayFloor(plan: FloorPlan, x: number, y: number): RoomKind {
   const axis = axisAt(plan, x, y);
   const candidates =
     axis === "horizontal"
       ? [at(plan, x, y - 1), at(plan, x, y + 1)]
       : [at(plan, x - 1, y), at(plan, x + 1, y)];
-  const room = candidates.find(isRoom);
+  // Keep wood through a mixed-material passage, then change material on the
+  // room floor beyond it, as in the validated Generic Home divider.
+  const rooms = candidates.filter(isRoom);
+  const room = rooms.find((cell) => FLOOR_TILES[cell] === FLOOR_TILES.L) ?? rooms[0];
   if (!room) throw new Error(`Passage at ${x},${y} has no floor`);
   return room;
 }
 
-function frontEdge(plan: FloorPlan, x: number, y: number): boolean {
+function horizontalBounds(plan: FloorPlan, x: number, y: number): [number, number] {
   let left = x;
   let right = x;
   while (boundaryOnAxis(plan, left - 1, y, "horizontal")) left--;
   while (boundaryOnAxis(plan, right + 1, y, "horizontal")) right++;
+  return [left, right];
+}
+
+function frontEdge(plan: FloorPlan, x: number, y: number): boolean {
+  const [left, right] = horizontalBounds(plan, x, y);
   let floorAbove = false;
   for (let px = left; px <= right; px++) {
     floorAbove ||= isRoom(at(plan, px, y - 1));
     if (at(plan, px, y + 1) !== " ") return false;
   }
   return floorAbove;
+}
+
+function bayFrontEdge(plan: FloorPlan, x: number, y: number): boolean {
+  const [left, right] = horizontalBounds(plan, x, y);
+  if (right - left < 2) return false;
+  let floorAbove = false;
+  let sideBelow = false;
+  for (let px = left; px <= right; px++) {
+    floorAbove ||= isRoom(at(plan, px, y - 1));
+    const below = at(plan, px, y + 1);
+    if (below === " ") continue;
+    if ((px === left || px === right) && boundaryOnAxis(plan, px, y + 1, "vertical")) {
+      sideBelow = true;
+      continue;
+    }
+    return false;
+  }
+  return floorAbove && sideBelow;
 }
 
 function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
@@ -105,6 +149,38 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
   if (frontEdge(plan, x, y)) {
     put(map, "foreground", ox, oy, wall(leftEnd ? 10 : 11, 5), 6);
     put(map, "foreground", ox + 1, oy, wall(rightEnd ? 13 : 11, 5), 6);
+    return;
+  }
+  if (bayFrontEdge(plan, x, y)) {
+    const above = at(plan, x, y - 1);
+    const sideBelow = boundaryOnAxis(plan, x, y + 1, "vertical");
+    const face = sideBelow ? sideFace(plan, x, y + 1) : null;
+    const room = isRoom(above) ? above : (face?.floor ?? roomBeside(plan, x, y - 1));
+    if (!room) throw new Error(`Bay front at ${x},${y} has no floor above it`);
+    for (let dx = 0; dx < SCALE; dx++) {
+      put(map, "floor", ox + dx, oy, FLOOR_TILES[room]);
+    }
+    for (let dx = 0; dx < SCALE; dx++) {
+      if (face && dx === face.dx) {
+        put(map, "floor", ox + dx, oy + 1, FLOOR_TILES[room]);
+        put(map, "foreground", ox + dx, oy + 1, wall(face.col === 10 ? 9 : 14, 4));
+      } else {
+        put(map, "foreground", ox + dx, oy + 1, wall(11, 5), 6);
+      }
+    }
+    return;
+  }
+  const openSide = rightEnd ? at(plan, x + 1, y) : leftEnd ? at(plan, x - 1, y) : " ";
+  const verticalAbove = boundaryOnAxis(plan, x, y - 1, "vertical");
+  const verticalBelow = boundaryOnAxis(plan, x, y + 1, "vertical");
+  if (isRoom(openSide) && (verticalAbove || verticalBelow)) {
+    // At a T-junction the downward side wall owns the continuing corner.
+    const fromAbove = verticalAbove && !verticalBelow;
+    const face = sideFace(plan, x, fromAbove ? y - 1 : y + 1);
+    for (let dy = 0; dy < SCALE; dy++) {
+      put(map, "wall", ox + face.dx, oy + dy, wall(face.col, fromAbove ? 3 + dy : dy));
+      put(map, "floor", ox + 1 - face.dx, oy + dy, FLOOR_TILES[openSide]);
+    }
     return;
   }
   for (let dy = 0; dy < SCALE; dy++) {
@@ -150,26 +226,21 @@ function validateSidePassages(plan: FloorPlan): void {
 function placeVerticalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
   const ox = x * SCALE;
   const oy = y * SCALE;
-  const west = roomBeside(plan, x - 1, y);
-  const east = roomBeside(plan, x + 1, y);
+  const face = sideFace(plan, x, y);
   const beforeDoor = at(plan, x, y + 1) === "+" && boundaryOnAxis(plan, x, y + 1, "vertical");
   const afterDoor = at(plan, x, y - 1) === "+" && boundaryOnAxis(plan, x, y - 1, "vertical");
+  // A shared wall has one visible side-wall face. The other half of the sketch
+  // cell continues the neighboring floor, so it does not create two rails.
   for (let dy = 0; dy < SCALE; dy++) {
     const row = beforeDoor ? 3 + dy : 2;
-    const leftCol = west ? 13 : 10;
-    const rightCol = east ? 10 : west ? 13 : 15;
-    if (afterDoor && dy === 0) {
-      if (west) {
-        put(map, "floor", ox, oy, FLOOR_TILES[west]);
-        put(map, "foreground", ox, oy, wall(14, 4));
-      } else put(map, "wall", ox, oy, wall(leftCol, row));
-      if (east) {
-        put(map, "floor", ox + 1, oy, FLOOR_TILES[east]);
-        put(map, "foreground", ox + 1, oy, wall(9, 4));
-      } else put(map, "wall", ox + 1, oy, wall(rightCol, row));
+    const wallX = ox + face.dx;
+    const floorX = ox + 1 - face.dx;
+    if (face.floor) put(map, "floor", floorX, oy + dy, FLOOR_TILES[face.floor]);
+    if (afterDoor && dy === 0 && face.floor) {
+      put(map, "floor", wallX, oy, FLOOR_TILES[face.floor]);
+      put(map, "foreground", wallX, oy, wall(face.col === 10 ? 9 : 14, 4));
     } else {
-      put(map, "wall", ox, oy + dy, wall(leftCol, row));
-      put(map, "wall", ox + 1, oy + dy, wall(rightCol, row));
+      put(map, "wall", wallX, oy + dy, wall(face.col, row));
     }
   }
 }

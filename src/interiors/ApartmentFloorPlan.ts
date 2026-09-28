@@ -222,7 +222,7 @@ export const APARTMENT_EXAMPLES = [
   { id: "small", name: "Small apartment", sketch: smallApartment() },
   { id: "large", name: "Large apartment", sketch: largeApartment() },
   { id: "strange", name: "Strange floor plan", sketch: strangeApartment() },
-  { id: "stepped", name: "Stepped floor plan", sketch: steppedApartment() },
+  { id: "stepped", name: "Offset rooms", sketch: steppedApartment() },
 ] as const;
 
 export function drawApartmentPlan(
