@@ -147,8 +147,8 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
   const rightEnd = !boundaryOnAxis(plan, x + 1, y, "horizontal");
   const divider = isRoom(at(plan, x, y - 1)) && isRoom(at(plan, x, y + 1));
   if (frontEdge(plan, x, y)) {
-    put(map, "foreground", ox, oy, wall(leftEnd ? 10 : 11, 5), 6);
-    put(map, "foreground", ox + 1, oy, wall(rightEnd ? 13 : 11, 5), 6);
+    put(map, "foreground", ox, oy, wall(leftDoor ? 11 : leftEnd ? 10 : 11, 5), 6);
+    put(map, "foreground", ox + 1, oy, wall(rightDoor ? 11 : rightEnd ? 13 : 11, 5), 6);
     return;
   }
   if (bayFrontEdge(plan, x, y)) {
@@ -164,6 +164,10 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
       if (face && dx === face.dx) {
         put(map, "floor", ox + dx, oy + 1, FLOOR_TILES[room]);
         put(map, "foreground", ox + dx, oy + 1, wall(face.col === 10 ? 9 : 14, 4));
+      } else if (face) {
+        // The other half of this expanded endpoint is room floor beside the
+        // side-wall taper, not a dangling piece of trim over the void.
+        put(map, "floor", ox + dx, oy + 1, FLOOR_TILES[room]);
       } else {
         put(map, "foreground", ox + dx, oy + 1, wall(11, 5), 6);
       }
@@ -185,11 +189,9 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
   }
   for (let dy = 0; dy < SCALE; dy++) {
     const top = dy === 0;
-    const left = leftDoor
-      ? wall(8, top ? 0 : 1)
-      : leftEnd
-        ? wall(divider ? (top ? 11 : 10) : 10, top ? 0 : 1)
-        : wall(11, top ? 2 : 3);
+    const left = leftEnd
+      ? wall(divider ? (top ? 11 : 10) : 10, top ? 0 : 1)
+      : wall(11, top ? 2 : 3);
     const right = rightDoor
       ? wall(8, top ? 3 : 4)
       : rightEnd
@@ -197,6 +199,25 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
         : wall(11, top ? 2 : 3);
     put(map, "wall", ox, oy + dy, left);
     put(map, "wall", ox + 1, oy + dy, right);
+  }
+}
+
+function placeHorizontalDoor(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
+  const ox = x * SCALE;
+  const oy = y * SCALE;
+  // A sketch cell spans two atlas columns. Keep the passage in its left
+  // column and use the right column for the source's one-tile jamb. The
+  // approved room has a one-tile passage through a two-row divider.
+  const frontEntrance = isRoom(at(plan, x, y - 1)) && at(plan, x, y + 1) === " ";
+  for (let dy = 0; dy < SCALE; dy++) {
+    const cell = map.cells[oy + dy]?.[ox + 1];
+    if (!cell) throw new Error(`Expanded passage cell ${x},${y} is missing`);
+    cell.semantic = "wall";
+    if (frontEntrance) {
+      if (dy === 0) put(map, "foreground", ox + 1, oy, wall(11, 5), 6);
+    } else {
+      put(map, "wall", ox + 1, oy + dy, wall(8, dy));
+    }
   }
 }
 
@@ -273,6 +294,13 @@ export function buildLayeredApartmentPlan(plan: FloorPlan): LayeredInteriorMap {
       if (at(plan, x, y) !== "#") continue;
       if (axisAt(plan, x, y) === "horizontal") placeHorizontalWall(map, plan, x, y);
       else placeVerticalWall(map, plan, x, y);
+    }
+  }
+  for (let y = 0; y < plan.height; y++) {
+    for (let x = 0; x < plan.width; x++) {
+      if (at(plan, x, y) === "+" && axisAt(plan, x, y) === "horizontal") {
+        placeHorizontalDoor(map, plan, x, y);
+      }
     }
   }
   if (

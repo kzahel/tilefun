@@ -231,10 +231,13 @@ export function drawApartmentPlan(
   plan: FloorPlan,
 ): void {
   const map = buildLayeredApartmentPlan(plan);
-  canvas.width = map.width * 16 + 64;
-  canvas.height = map.pixelHeight + 64;
-  canvas.style.width = "min(100%, 480px)";
-  canvas.style.height = "auto";
+  // Match the approved room and suite previews: one atlas pixel is displayed
+  // as two screen pixels, without shrinking the whole plan into the panel.
+  const renderScale = 2;
+  canvas.width = map.width * 16 * renderScale + 64;
+  canvas.height = map.pixelHeight * renderScale + 64;
+  canvas.style.width = `${canvas.width}px`;
+  canvas.style.height = `${canvas.height}px`;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   ctx.imageSmoothingEnabled = false;
@@ -242,6 +245,7 @@ export function drawApartmentPlan(
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.save();
   ctx.translate(32, 32);
+  ctx.scale(renderScale, renderScale);
   drawLayeredInteriorMap(ctx, image, map);
   ctx.restore();
 }

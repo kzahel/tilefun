@@ -117,6 +117,17 @@ test("capture apartments generated from editable floor plans", async ({ page }) 
   for (const id of ["small", "large", "strange", "stepped"]) {
     await picker.selectOption(id);
     await expect(page.getByTestId("apartment-status")).toContainText("all floors reachable");
+    const previewSize = await page.getByTestId("apartment-preview").evaluate((canvas) => ({
+      bitmapWidth: (canvas as HTMLCanvasElement).width,
+      displayWidth: canvas.getBoundingClientRect().width,
+    }));
+    const sketchWidth = Math.max(
+      ...(await page.getByTestId("apartment-sketch").inputValue())
+        .split("\n")
+        .map((line) => line.length),
+    );
+    expect(previewSize.bitmapWidth).toBe(sketchWidth * 64 + 64);
+    expect(previewSize.displayWidth).toBeGreaterThanOrEqual(previewSize.bitmapWidth);
     const data = await page
       .getByTestId("apartment-preview")
       .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));

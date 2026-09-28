@@ -38,11 +38,13 @@ describe("layered apartment compiler", () => {
   it("uses the source divider jambs and layered side-wall returns", () => {
     const plan = parseFloorPlan(APARTMENT_EXAMPLES[0].sketch);
     const map = buildLayeredApartmentPlan(plan);
-    // Horizontal doorway at 11,6: two wall rows flank a floor passage.
+    // Horizontal doorway at 11,6: one atlas column opens through two wall rows.
     expect(map.cells[12]?.[21]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r03");
     expect(map.cells[13]?.[21]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r04");
-    expect(map.cells[12]?.[24]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r00");
-    expect(map.cells[13]?.[24]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r01");
+    expect(map.cells[12]?.[22]?.semantic).toBe("opening");
+    expect(map.cells[12]?.[23]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r00");
+    expect(map.cells[13]?.[23]?.wall[0]?.key).toBe("room-builder/3d-walls/c08-r01");
+    expect(map.cells[12]?.[23]?.semantic).toBe("wall");
     // Shared vertical doorway at 9,3: one face returns into the passage.
     expect(map.cells[4]?.[19]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");
     expect(map.cells[5]?.[19]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r04");
@@ -65,11 +67,16 @@ describe("layered apartment compiler", () => {
       key: "room-builder/3d-walls/c11-r05",
       cropHeight: 6,
     });
+    expect(small.cells[28]?.[12]?.semantic).toBe("opening");
+    expect(small.cells[28]?.[13]?.semantic).toBe("wall");
+    expect(small.cells[28]?.[13]?.foreground[0]?.key).toBe("room-builder/3d-walls/c11-r05");
     expect(small.pixelHeight).toBe(small.height * 16 - 26);
     const strange = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[2].sketch));
     expect(strange.cells[20]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");
     expect(strange.cells[21]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r04");
     expect(strange.cells[32]?.[32]?.floor).toHaveLength(1);
+    expect(strange.cells[33]?.[14]?.floor).toHaveLength(1);
+    expect(strange.cells[33]?.[14]?.foreground).toHaveLength(0);
     expect(strange.cells[33]?.[32]?.foreground[0]?.key).toBe("room-builder/3d-walls/c09-r04");
     expect(strange.cells[33]?.[20]?.foreground[0]).toEqual({
       key: "room-builder/3d-walls/c11-r05",
