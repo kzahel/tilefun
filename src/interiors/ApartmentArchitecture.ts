@@ -40,6 +40,20 @@ function axisAt(plan: FloorPlan, x: number, y: number): Axis {
   const west = isInside(plan, x - 1, y);
   const east = isInside(plan, x + 1, y);
   if (north || south) return "horizontal";
+  // A divider meeting a side wall owns the full intersection cell. Leaving
+  // this classified as vertical shortens the divider by one sketch cell and
+  // makes it float beside the perimeter. Rooms on both sides of the branch
+  // distinguish this junction from an ordinary exterior corner.
+  if (
+    [-1, 1].some(
+      (dx) =>
+        isBoundary(at(plan, x + dx, y)) &&
+        isInside(plan, x + dx, y - 1) &&
+        isInside(plan, x + dx, y + 1),
+    )
+  ) {
+    return "horizontal";
+  }
   // Include the elbow cell in a front wall when a horizontal face turns into
   // a side wall below it. Otherwise its face shifts by one atlas column.
   if (
@@ -148,17 +162,34 @@ function bayFrontEdge(plan: FloorPlan, x: number, y: number): boolean {
   return floorAbove && sideBelow;
 }
 
+function sharedVerticalJunction(plan: FloorPlan, x: number, y: number): boolean {
+  return (
+    at(plan, x, y) === "#" &&
+    boundaryOnAxis(plan, x - 1, y, "horizontal") &&
+    boundaryOnAxis(plan, x + 1, y, "horizontal") &&
+    boundaryOnAxis(plan, x, y + 1, "vertical") &&
+    isInside(plan, x - 1, y + 1) &&
+    isInside(plan, x + 1, y + 1)
+  );
+}
+
 function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
   const ox = x * SCALE;
   const oy = y * SCALE;
-  const leftDoor = at(plan, x - 1, y) === "+" && boundaryOnAxis(plan, x - 1, y, "horizontal");
   const rightDoor = at(plan, x + 1, y) === "+" && boundaryOnAxis(plan, x + 1, y, "horizontal");
   const leftEnd = !boundaryOnAxis(plan, x - 1, y, "horizontal");
   const rightEnd = !boundaryOnAxis(plan, x + 1, y, "horizontal");
-  const divider = isRoom(at(plan, x, y - 1)) && isRoom(at(plan, x, y + 1));
+  // Endpoint cells have side walls above/below, so derive the divider role
+  // from the whole run rather than only the cell being painted.
+  const [runLeft, runRight] = horizontalBounds(plan, x, y);
+  const divider = Array.from({ length: runRight - runLeft + 1 }, (_, i) => runLeft + i).some(
+    (px) => isInside(plan, px, y - 1) && isInside(plan, px, y + 1),
+  );
   if (frontEdge(plan, x, y)) {
-    put(map, "foreground", ox, oy, wall(leftDoor ? 11 : leftEnd ? 10 : 11, 5), 6);
-    put(map, "foreground", ox + 1, oy, wall(rightDoor ? 11 : rightEnd ? 13 : 11, 5), 6);
+    put(map, "foreground", ox, oy, wall(leftEnd ? 10 : 11, 5), 6);
+    // Use the north doorway's clean jamb top at a passage, cropped to the
+    // rail height. Exterior corner pieces add an unwanted square end panel.
+    put(map, "foreground", ox + 1, oy, rightDoor ? wall(8, 3) : wall(rightEnd ? 13 : 11, 5), 6);
     return;
   }
   if (bayFrontEdge(plan, x, y)) {
@@ -188,6 +219,24 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
   const verticalAbove = boundaryOnAxis(plan, x, y - 1, "vertical");
   const verticalBelow = boundaryOnAxis(plan, x, y + 1, "vertical");
   if (isRoom(openSide) && (verticalAbove || verticalBelow)) {
+    if (
+      rightEnd &&
+      verticalAbove &&
+      verticalBelow &&
+      [-1, 1].every((dx) => [-1, 1].every((dy) => isInside(plan, x + dx, y + dy)))
+    ) {
+      // A west-facing branch meets a continuing partition. Keep its vertical
+      // face straight and extend the west arm into the spare atlas column;
+      // an east-facing elbow would project a false jamb into the open room.
+      for (let dy = 0; dy < SCALE; dy++) {
+        put(map, "wall", ox, oy + dy, wall(11, 2 + dy));
+        put(map, "wall", ox + 1, oy + dy, wall(10, 2));
+      }
+      // Join just the exposed outline to the incoming rail; the vertical
+      // white strip and shaded side remain continuous through the junction.
+      placeInteriorTile(map, "wall", ox + 1, oy, { key: wall(10, 3), cropWidth: 1, cropHeight: 6 });
+      return;
+    }
     // At a T-junction the downward side wall owns the continuing corner.
     const fromAbove = verticalAbove && !verticalBelow;
     const face = sideFace(plan, x, fromAbove ? y - 1 : y + 1);
@@ -210,6 +259,15 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
     put(map, "wall", ox, oy + dy, left);
     put(map, "wall", ox + 1, oy + dy, right);
   }
+  if (sharedVerticalJunction(plan, x, y)) {
+    // Match the back wall's two-row exterior corner. The c09 sequence has a
+    // taller three-row face and makes this partition appear too high.
+    for (let dy = 0; dy < SCALE; dy++) {
+      const cell = map.cells[oy + dy]?.[ox + 1];
+      // At a cross, retain the incoming vertical rail above the intersection.
+      if (cell) cell.wall = [{ key: wall(dy === 0 && verticalAbove ? 11 : 10, dy) }];
+    }
+  }
 }
 
 function placeHorizontalDoor(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
@@ -224,7 +282,8 @@ function placeHorizontalDoor(map: LayeredInteriorMap, plan: FloorPlan, x: number
     if (!cell) throw new Error(`Expanded passage cell ${x},${y} is missing`);
     cell.semantic = "wall";
     if (frontEntrance) {
-      if (dy === 0) put(map, "foreground", ox + 1, oy, wall(11, 5), 6);
+      // Match the opposite jamb to the north door, keeping only its trim.
+      if (dy === 0) put(map, "foreground", ox + 1, oy, wall(8, 0), 6);
     } else {
       put(map, "wall", ox + 1, oy + dy, wall(8, dy));
     }
@@ -260,6 +319,7 @@ function placeVerticalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number, 
   const face = sideFace(plan, x, y);
   const beforeDoor = at(plan, x, y + 1) === "+" && boundaryOnAxis(plan, x, y + 1, "vertical");
   const afterDoor = at(plan, x, y - 1) === "+" && boundaryOnAxis(plan, x, y - 1, "vertical");
+  const shared = isInside(plan, x - 1, y) && isInside(plan, x + 1, y);
   // A shared wall has one visible side-wall face. The other half of the sketch
   // cell continues the neighboring floor, so it does not create two rails.
   for (let dy = 0; dy < SCALE; dy++) {
@@ -272,12 +332,48 @@ function placeVerticalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number, 
       put(map, "foreground", wallX, oy, wall(face.col === 10 ? 9 : 14, 4));
     } else {
       put(map, "wall", wallX, oy + dy, wall(face.col, row));
+      if (beforeDoor && shared) {
+        // The corner-return tiles intentionally connect to a horizontal wall
+        // on their left. A freestanding partition has no such wall: close
+        // that exposed end with the one-pixel outline from a doorway jamb.
+        placeInteriorTile(map, "wall", wallX, oy + dy, { key: wall(8, dy), cropWidth: 1 });
+      }
     }
   }
 }
 
 function semanticOf(cell: PlanCell): string {
   return cell === "#" ? "wall" : cell === "+" ? "opening" : cell === " " ? "void" : cell;
+}
+
+function placeInteriorJunctionCap(
+  map: LayeredInteriorMap,
+  plan: FloorPlan,
+  x: number,
+  y: number,
+): void {
+  // Interior T/cross intersections have room floor in all four quadrants.
+  // Count actual wall arms: openings and simple two-arm bends keep their
+  // existing trim, including the preferred plain north/south doorway edges.
+  if (
+    at(plan, x, y) !== "#" ||
+    ![-1, 1].every((dx) => [-1, 1].every((dy) => isInside(plan, x + dx, y + dy)))
+  )
+    return;
+  const arms =
+    Number(at(plan, x - 1, y) === "#") +
+    Number(at(plan, x + 1, y) === "#") +
+    Number(at(plan, x, y - 1) === "#") +
+    Number(at(plan, x, y + 1) === "#");
+  if (arms < 3) return;
+  // All shared partitions use the left-edged gray face in the right atlas
+  // column. Copy only its 7×6 outlined top square, not the surrounding rail
+  // or shaded wall face, so this is a trim-only change.
+  placeInteriorTile(map, "foreground", x * SCALE + 1, y * SCALE, {
+    key: wall(10, 5),
+    cropWidth: 7,
+    cropHeight: 6,
+  });
 }
 
 /** Compiles an editable floor/wall/door sketch into independent visual layers. */
@@ -311,6 +407,7 @@ export function buildLayeredApartmentPlan(plan: FloorPlan): LayeredInteriorMap {
       if (at(plan, x, y) === "+" && axisAt(plan, x, y) === "horizontal") {
         placeHorizontalDoor(map, plan, x, y);
       }
+      placeInteriorJunctionCap(map, plan, x, y);
     }
   }
   if (

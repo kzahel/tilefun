@@ -21,6 +21,115 @@ function reachableFloorCount(map: LayeredInteriorMap, x: number, y: number): num
 }
 
 describe("layered apartment compiler", () => {
+  it("adds a small top square at the bedroom/hall divider junction", () => {
+    const map = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[0].sketch));
+    expect(map.cells[12]?.[19]?.foreground).toEqual([
+      { key: "room-builder/3d-walls/c10-r05", cropWidth: 7, cropHeight: 6 },
+    ]);
+    // Adjacent passage jambs keep their plain top; a square is a wall-joint
+    // treatment rather than a new doorway cap.
+    expect(map.cells[12]?.[21]?.foreground).toHaveLength(0);
+    expect(map.cells[12]?.[23]?.foreground).toHaveLength(0);
+    expect(map.cells[28]?.[13]?.foreground[0]?.key).toBe("room-builder/3d-walls/c08-r00");
+  });
+
+  it("keeps a west-branch T connected without an elbow projecting east", () => {
+    const map = buildLayeredApartmentPlan(
+      parseFloorPlan("#######\n#KK#KK#\n#KK#KK#\n####KK#\n#LL#KK#\n#LL#KK#\n#######"),
+    );
+    for (const y of [6, 7]) {
+      expect(map.cells[y]?.[6]?.floor).toHaveLength(0);
+      expect(map.cells[y]?.[6]?.wall[0]?.key).toBe(`room-builder/3d-walls/c11-r0${y - 4}`);
+      expect(map.cells[y]?.[7]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+      expect(map.cells[y]?.[8]?.wall).toHaveLength(0);
+      expect(map.cells[y]?.[8]?.floor).toHaveLength(1);
+    }
+    expect(map.cells[6]?.[7]?.wall[1]).toEqual({
+      key: "room-builder/3d-walls/c10-r03",
+      cropWidth: 1,
+      cropHeight: 6,
+    });
+  });
+
+  it("carries a cross junction into the lower divider with matching wall height", () => {
+    const map = buildLayeredApartmentPlan(
+      parseFloorPlan("#######\n#LL#KK#\n#LL#KK#\n#######\n#KK#KK#\n#KK#KK#\n#######"),
+    );
+    expect([6, 7, 8].map((y) => map.cells[y]?.[7]?.wall[0]?.key)).toEqual([
+      "room-builder/3d-walls/c11-r00",
+      "room-builder/3d-walls/c10-r01",
+      "room-builder/3d-walls/c10-r02",
+    ]);
+  });
+
+  it.each([3, 5])("connects and closes the upper vertical divider in a %s-row room", (height) => {
+    const rooms = Array<string>(height).fill("#LL#LL#");
+    rooms[2] = "#LL+LL#";
+    const map = buildLayeredApartmentPlan(
+      parseFloorPlan(["#######", ...rooms, "#######"].join("\n")),
+    );
+    expect([0, 1, 2].map((y) => map.cells[y]?.[7]?.wall[0]?.key)).toEqual([
+      "room-builder/3d-walls/c10-r00",
+      "room-builder/3d-walls/c10-r01",
+      "room-builder/3d-walls/c10-r02",
+    ]);
+    expect(map.cells[4]?.[7]?.wall).toEqual([
+      { key: "room-builder/3d-walls/c10-r03" },
+      { key: "room-builder/3d-walls/c08-r00", cropWidth: 1 },
+    ]);
+    expect(map.cells[5]?.[7]?.wall).toEqual([
+      { key: "room-builder/3d-walls/c10-r04" },
+      { key: "room-builder/3d-walls/c08-r01", cropWidth: 1 },
+    ]);
+    for (const y of [6, 7]) expect(map.cells[y]?.[7]?.wall).toHaveLength(0);
+    if (height === 5)
+      expect(map.cells[8]?.[7]?.foreground).toEqual([{ key: "room-builder/3d-walls/c09-r04" }]);
+  });
+
+  it.each([1, 2, 3])("joins both ends of a divider to the perimeter with door %s", (position) => {
+    const divider = [..."#####"];
+    divider[position] = "+";
+    const map = buildLayeredApartmentPlan(
+      parseFloorPlan(
+        ["#####", "#LLL#", "#LLL#", divider.join(""), "#LLL#", "#LLL#", "#####"].join("\n"),
+      ),
+    );
+    // Same T-junction caps as the authored Generic Home divider. The whole
+    // band spans the perimeter, with exactly one atlas column left open.
+    expect(map.cells[6]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c11-r00");
+    expect(map.cells[7]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r01");
+    expect(map.cells[6]?.[9]?.wall[0]?.key).toBe("room-builder/3d-walls/c12-r00");
+    expect(map.cells[7]?.[9]?.wall[0]?.key).toBe("room-builder/3d-walls/c12-r01");
+    for (const y of [6, 7]) {
+      for (let x = 0; x < map.width; x++) {
+        expect(map.cells[y]?.[x]?.wall.length).toBe(x === position * 2 ? 0 : 1);
+      }
+    }
+  });
+
+  it.each(["L", "K"])("caps both sides of south doorways over %s floors", (floor) => {
+    for (const position of [1, 2, 3]) {
+      const bottom = [..."#####"];
+      bottom[position] = "+";
+      const map = buildLayeredApartmentPlan(
+        parseFloorPlan(
+          ["#####", ...Array(3).fill(`#${floor.repeat(3)}#`), bottom.join("")].join("\n"),
+        ),
+      );
+      const opening = position * 2;
+      expect(map.cells[8]?.[opening - 1]?.foreground).toEqual([
+        { key: "room-builder/3d-walls/c08-r03", cropHeight: 6 },
+      ]);
+      expect(map.cells[8]?.[opening + 1]?.foreground).toEqual([
+        { key: "room-builder/3d-walls/c08-r00", cropHeight: 6 },
+      ]);
+      expect(map.cells[8]?.[opening]?.semantic).toBe("opening");
+      expect(map.cells[8]?.[opening]?.floor).toHaveLength(1);
+      expect(map.cells[8]?.[opening]?.foreground).toHaveLength(0);
+      expect(map.pixelHeight).toBe(134);
+    }
+  });
+
   it("renders a wall-only draft while its floor remains unpainted", () => {
     const map = buildLayeredApartmentPlan(parseFloorPlan("#####\n#   #\n#   #\n#####"));
     const floored = buildLayeredApartmentPlan(parseFloorPlan("#####\n#LLL#\n#LLL#\n#####"));
@@ -90,7 +199,7 @@ describe("layered apartment compiler", () => {
     });
     expect(small.cells[28]?.[12]?.semantic).toBe("opening");
     expect(small.cells[28]?.[13]?.semantic).toBe("wall");
-    expect(small.cells[28]?.[13]?.foreground[0]?.key).toBe("room-builder/3d-walls/c11-r05");
+    expect(small.cells[28]?.[13]?.foreground[0]?.key).toBe("room-builder/3d-walls/c08-r00");
     expect(small.pixelHeight).toBe(small.height * 16 - 26);
     const strange = buildLayeredApartmentPlan(parseFloorPlan(APARTMENT_EXAMPLES[2].sketch));
     expect(strange.cells[20]?.[4]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r03");

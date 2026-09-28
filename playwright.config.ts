@@ -9,6 +9,7 @@ export default defineConfig({
   },
   webServer: {
     command: "npm run preview",
+    env: { INTERIOR_REVIEW_DIR: "test-results/interior-review-feedback" },
     port: 4173,
     reuseExistingServer: true,
   },

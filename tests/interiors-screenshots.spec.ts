@@ -3,8 +3,18 @@ import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 const CAPTURE_DIR = "test-results/interiors";
+const SOURCE_ATLAS_DIR = "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles";
+const SOURCE_ATLAS_FILES = [
+  "Room_Builder_borders_16x16.png",
+  "Room_Builder_Baseboards_16x16.png",
+  "Room_Builder_3d_walls_16x16.png",
+];
 
 test("capture source atlas geometry grids", () => {
+  test.skip(
+    SOURCE_ATLAS_FILES.some((file) => !fs.existsSync(`${SOURCE_ATLAS_DIR}/${file}`)),
+    "Source atlas PNGs are local assets and are not included in the repository",
+  );
   execFileSync("node", ["scripts/capture-interiors-source-grids.mjs"], {
     stdio: "inherit",
   });

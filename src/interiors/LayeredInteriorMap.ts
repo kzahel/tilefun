@@ -5,6 +5,8 @@ export type InteriorLayer = (typeof INTERIOR_DRAW_ORDER)[number];
 
 export interface InteriorVisualTile {
   key: string;
+  /** Optional left-aligned source slice for doorway outlines and junction trim. */
+  cropWidth?: number;
   cropHeight?: number;
 }
 
@@ -75,8 +77,9 @@ export function drawLayeredInteriorMap(
           const entry = getModernInteriorsEntry(tile.key);
           if (!entry) throw new Error(`Missing interior tile: ${tile.key}`);
           const [sx, sy, sw, sh] = entry.rect;
+          const width = tile.cropWidth ?? sw;
           const height = tile.cropHeight ?? sh;
-          ctx.drawImage(atlasImage, sx, sy, sw, height, x * 16, y * 16, sw, height);
+          ctx.drawImage(atlasImage, sx, sy, width, height, x * 16, y * 16, width, height);
         }
       }
     }
