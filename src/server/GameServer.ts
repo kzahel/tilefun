@@ -4,6 +4,11 @@ import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { baseGameMod } from "../game/base-game.js";
+import {
+  descriptorFromMetadata,
+  type GenerationRequest,
+  resolveCreation,
+} from "../generation/GenerationDescriptor.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -49,6 +54,7 @@ export class GameServer {
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
+  private readonly loadingRealms = new Map<string, Promise<Realm>>();
   /** The default realm's worldId (set during init, used for new connections). */
   private defaultRealmId: string | null = null;
   /** Master session list — every connected player, regardless of realm. */
@@ -73,9 +79,14 @@ export class GameServer {
   // They delegate to the default realm.
 
   private get activeRealm(): Realm {
-    const realm = this.defaultRealmId ? this.realms.get(this.defaultRealmId) : undefined;
+    const selectedId = this.sessions.get("local")?.realmId ?? this.defaultRealmId;
+    const realm = selectedId ? this.realms.get(selectedId) : undefined;
     if (!realm) throw new Error("No active realm");
     return realm;
+  }
+
+  get worldGeneration() {
+    return this.activeRealm.generation;
   }
 
   get world() {
@@ -177,6 +188,7 @@ export class GameServer {
           });
           this.transport.send(clientId, {
             type: "world-loaded",
+            generation: realm.generation,
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: existingSession.player.position.wx,
             cameraY: existingSession.player.position.wy,
@@ -212,6 +224,7 @@ export class GameServer {
           });
           this.transport.send(clientId, {
             type: "world-loaded",
+            generation: realm.generation,
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: session.player.position.wx,
             cameraY: session.player.position.wy,
@@ -375,12 +388,27 @@ export class GameServer {
     const existing = this.realms.get(worldId);
     if (existing) return existing;
 
-    const realm = new Realm([baseGameMod]);
-    realm.tickRate = this.tickRate;
-    realm.physicsMult = this._physicsMult;
-    await realm.loadWorld(worldId, this.registry, this.createStore);
-    this.realms.set(worldId, realm);
-    return realm;
+    const pending = this.loadingRealms.get(worldId);
+    if (pending) return pending;
+    const loading = (async () => {
+      const realm = new Realm([baseGameMod]);
+      realm.tickRate = this.tickRate;
+      realm.physicsMult = this._physicsMult;
+      try {
+        await realm.loadWorld(worldId, this.registry, this.createStore);
+        this.realms.set(worldId, realm);
+        return realm;
+      } catch (error) {
+        realm.destroy();
+        throw error;
+      }
+    })();
+    this.loadingRealms.set(worldId, loading);
+    try {
+      return await loading;
+    } finally {
+      this.loadingRealms.delete(worldId);
+    }
   }
 
   /**
@@ -412,6 +440,8 @@ export class GameServer {
     session: PlayerSession,
     worldId: string,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
+    // Validate/load the destination before removing a player from a live realm.
+    const targetRealm = await this.getOrCreateRealm(worldId);
     // Remove from current realm
     if (session.realmId) {
       const oldRealm = this.realms.get(session.realmId);
@@ -420,9 +450,6 @@ export class GameServer {
         this.tryUnloadRealm(session.realmId);
       }
     }
-
-    // Get or create target realm
-    const targetRealm = await this.getOrCreateRealm(worldId);
 
     // Add player to target realm (loads per-player saved data)
     await targetRealm.addPlayer(session);
@@ -482,8 +509,14 @@ export class GameServer {
     return this.loadWorldIntoDefaultRealm(worldId);
   }
 
-  async createWorld(name: string, worldType?: WorldType, seed?: number): Promise<WorldMeta> {
-    return this.registry.createWorld(name, worldType, seed);
+  async createWorld(
+    name: string,
+    worldType?: WorldType,
+    seed?: number,
+    generation?: GenerationRequest,
+  ): Promise<WorldMeta> {
+    const resolved = generation ? resolveCreation(generation) : undefined;
+    return this.registry.createWorld(name, worldType, seed, undefined, resolved);
   }
 
   async deleteWorld(id: string): Promise<void> {
@@ -500,6 +533,8 @@ export class GameServer {
           });
           this.transport.send(session.clientId, {
             type: "world-loaded",
+            generation:
+              this.realms.get(this.defaultRealmId)?.generation ?? this.activeRealm.generation,
             worldId: this.defaultRealmId,
             cameraX: session.player.position.wx,
             cameraY: session.player.position.wy,
@@ -535,7 +570,7 @@ export class GameServer {
         createdAt: w.createdAt,
         lastPlayedAt: w.lastPlayedAt,
       };
-      if (w.worldType) info.worldType = w.worldType;
+      info.generation = descriptorFromMetadata(w);
       return info;
     });
   }
@@ -622,20 +657,29 @@ export class GameServer {
 
       case "load-world":
         // Per-player realm switching: only move the requesting player
-        this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
-          this.transport.send(clientId, {
-            type: "player-assigned",
-            entityId: session.player.id,
-          });
-          this.transport.send(clientId, {
-            type: "world-loaded",
-            requestId: msg.requestId,
-            worldId: msg.worldId,
-            cameraX: cam.cameraX,
-            cameraY: cam.cameraY,
-            cameraZoom: cam.cameraZoom,
-          });
-        });
+        this.movePlayerToRealm(clientId, session, msg.worldId)
+          .then((cam) => {
+            this.transport.send(clientId, {
+              type: "player-assigned",
+              entityId: session.player.id,
+            });
+            this.transport.send(clientId, {
+              type: "world-loaded",
+              requestId: msg.requestId,
+              worldId: msg.worldId,
+              generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
+              cameraX: cam.cameraX,
+              cameraY: cam.cameraY,
+              cameraZoom: cam.cameraZoom,
+            });
+          })
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: String(error),
+            }),
+          );
         return;
 
       case "list-realms":
@@ -653,26 +697,35 @@ export class GameServer {
         console.log(
           `[tilefun:server] join-realm: client=${clientId} old=${oldRealmId} new=${msg.worldId} editorEnabled=${session.editorEnabled}`,
         );
-        this.movePlayerToRealm(clientId, session, msg.worldId).then((cam) => {
-          console.log(
-            `[tilefun:server] join-realm complete: client=${clientId} player.id=${session.player.id} editorEnabled=${session.editorEnabled} realmId=${session.realmId}`,
+        this.movePlayerToRealm(clientId, session, msg.worldId)
+          .then((cam) => {
+            console.log(
+              `[tilefun:server] join-realm complete: client=${clientId} player.id=${session.player.id} editorEnabled=${session.editorEnabled} realmId=${session.realmId}`,
+            );
+            this.transport.send(clientId, {
+              type: "player-assigned",
+              entityId: session.player.id,
+            });
+            this.transport.send(clientId, {
+              type: "realm-joined",
+              requestId: msg.requestId,
+              worldId: msg.worldId,
+              generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
+              cameraX: cam.cameraX,
+              cameraY: cam.cameraY,
+              cameraZoom: cam.cameraZoom,
+            });
+            // Broadcast updated player counts for old and new realms
+            if (oldRealmId) this.broadcastRealmPlayerCount(oldRealmId);
+            this.broadcastRealmPlayerCount(msg.worldId);
+          })
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: String(error),
+            }),
           );
-          this.transport.send(clientId, {
-            type: "player-assigned",
-            entityId: session.player.id,
-          });
-          this.transport.send(clientId, {
-            type: "realm-joined",
-            requestId: msg.requestId,
-            worldId: msg.worldId,
-            cameraX: cam.cameraX,
-            cameraY: cam.cameraY,
-            cameraZoom: cam.cameraZoom,
-          });
-          // Broadcast updated player counts for old and new realms
-          if (oldRealmId) this.broadcastRealmPlayerCount(oldRealmId);
-          this.broadcastRealmPlayerCount(msg.worldId);
-        });
         return;
       }
 
@@ -693,13 +746,21 @@ export class GameServer {
         return;
 
       case "create-world":
-        this.createWorld(msg.name, msg.worldType, msg.seed).then((meta) => {
-          this.transport.send(clientId, {
-            type: "world-created",
-            requestId: msg.requestId,
-            meta,
-          });
-        });
+        this.createWorld(msg.name, msg.worldType, msg.seed, msg.generation)
+          .then((meta) => {
+            this.transport.send(clientId, {
+              type: "world-created",
+              requestId: msg.requestId,
+              meta,
+            });
+          })
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: error instanceof Error ? error.message : String(error),
+            }),
+          );
         return;
 
       case "delete-world":

@@ -1,4 +1,11 @@
 import { describe, expect, it } from "vitest";
+import {
+  createDescriptor,
+  type GenerationDescriptor,
+  type GenerationRequest,
+  resolveCreation,
+} from "../generation/GenerationDescriptor.js";
+import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore, SaveEntry } from "../persistence/PersistenceStore.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
@@ -23,7 +30,13 @@ class MemoryRegistry implements IWorldRegistry {
     return this.worlds.get(id);
   }
 
-  async createWorld(name: string, worldType?: WorldType): Promise<WorldMeta> {
+  async createWorld(
+    name: string,
+    worldType?: WorldType,
+    seed?: number,
+    _roads?: RoadGenParams,
+    generation?: GenerationRequest,
+  ): Promise<WorldMeta> {
     const now = Date.now();
     const meta: WorldMeta = {
       id: `world-${this.nextId++}`,
@@ -31,7 +44,8 @@ class MemoryRegistry implements IWorldRegistry {
       createdAt: now,
       lastPlayedAt: now,
       worldType: worldType ?? "flat",
-      seed: 42,
+      seed: seed ?? 42,
+      ...(generation ? { generation: resolveCreation(generation) } : {}),
     };
     this.worlds.set(meta.id, meta);
     return meta;
@@ -482,4 +496,71 @@ describe("Realm browser protocol", () => {
     const realmList = transport.messagesOfType("player-1", "realm-list");
     expect(realmList).toHaveLength(0);
   });
+});
+
+describe("versioned world creation protocol", () => {
+  it("stores authoritative identity and shares a single Regional realm for concurrent joins", async () => {
+    const { server, transport, registry } = await createTestSetup();
+    transport.connect("one");
+    transport.connect("two");
+    const generation = createDescriptor("regional", 2026);
+    transport.clientSend("one", {
+      type: "create-world",
+      requestId: 10,
+      name: "Regional city",
+      generation,
+    });
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    const created = firstMessage(transport.messagesOfType("one", "world-created"), "created");
+    expect((await registry.getWorld(created.meta.id))?.generation).toEqual(generation);
+    transport.clientSend("one", { type: "join-realm", requestId: 11, worldId: created.meta.id });
+    transport.clientSend("two", { type: "join-realm", requestId: 12, worldId: created.meta.id });
+    await new Promise((resolve) => setTimeout(resolve, 30));
+    const a = firstMessage(transport.messagesOfType("one", "realm-joined"), "one joined");
+    const b = firstMessage(transport.messagesOfType("two", "realm-joined"), "two joined");
+    expect(a.generation).toEqual(generation);
+    expect(b.generation).toEqual(generation);
+    expect([a.cameraX, a.cameraY]).toEqual([b.cameraX, b.cameraY]);
+    transport.clientSend("one", { type: "list-realms", requestId: 13 });
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    const list = transport.messagesOfType("one", "realm-list").at(-1);
+    expect(list?.realms.find((realm) => realm.id === created.meta.id)).toMatchObject({
+      playerCount: 2,
+      generation,
+    });
+    server.destroy();
+  });
+  it("rejects unsupported descriptors explicitly without creating a fallback world", async () => {
+    const { server, transport, registry } = await createTestSetup();
+    transport.connect("one");
+    const count = (await registry.listWorlds()).length;
+    transport.clientSend("one", {
+      type: "create-world",
+      requestId: 20,
+      name: "Bad",
+      generation: {
+        ...createDescriptor("regional", 2026),
+        version: "future",
+      } as unknown as GenerationDescriptor,
+    });
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(transport.messagesOfType("one", "request-error")).toHaveLength(1);
+    expect((await registry.listWorlds()).length).toBe(count);
+    server.destroy();
+  });
+});
+
+it("direct local consumers follow the local player into the chosen generator realm", async () => {
+  const { server, transport, registry } = await createTestSetup();
+  transport.connect("local");
+  await new Promise((resolve) => setTimeout(resolve, 5));
+  const generation = createDescriptor("regional", 2026);
+  const meta = await registry.createWorld("Regional", undefined, undefined, undefined, generation);
+  await server.loadWorld(meta.id);
+  expect(server.worldGeneration).toEqual(generation);
+  const position = server.getLocalSession().player.position;
+  expect(
+    server.world.getCollision(Math.floor(position.wx / 16), Math.floor(position.wy / 16)),
+  ).toBe(0);
+  server.destroy();
 });

@@ -2,8 +2,8 @@
 
 The first regional slice of [Tactical 004](tactical/004-world-explorer-and-regional-generation-plan.md)
 is available at `/tilefun/world-explorer.html`. The game menu also links to it.
-Tactical 005 A–B adds shared versioned generators and configurable real-tile
-preview. Player-facing game selection/persistence is the next slice. No saved
+Tactical 005 A–C adds shared versioned generators, configurable real-tile
+preview, and game type/seed/settings selection with pinned persistence. No saved
 world is changed by opening the explorer.
 
 ## Run and review
@@ -119,8 +119,7 @@ The agreed next sequence is recorded in
 [Tactical 005: generator profiles and shared tile preview](tactical/005-generator-profiles-and-shared-tile-preview-plan.md).
 First freeze Classic and establish shared generator selection/realization; then
 add configurable zoom into real tiles; then support generator type/seed/settings
-in actual game creation and persistence. The current checkpoint implements A–B; actual game creation and persistence
-selection is next. Explorer and gameplay will consume one implementation
+in actual game creation and persistence. The current checkpoint implements A–C. Explorer and gameplay will consume one implementation
 per selected generator, with the existing terrain/scene pipeline reused.
 
 After those slices, Tactical 004's slice 2 refines Ferngrove into a connected
@@ -167,3 +166,28 @@ reviews include presentation identity. Diagnostic memory figures are estimates
 of retained typed buffers and completed caches, rather than whole-browser heap.
 Desktop and phone-layout captures and actual worker/game buffer parity checks
 are automated. Physical phone measurements remain unperformed.
+
+
+## Game world creation (Tactical 005 C)
+
+**Create this world** opens the game creation controls with the complete explorer
+setup. Creation requires the normal New World action, then enters at a dry
+starting place. The game menu lists Classic, Island, Flat, and Regional from the
+same catalog and shares the explorer's numeric/text seed convention. Blank seeds
+are resolved once by the authority. Classic/Island expose road spacing, density,
+and width; their complete resolved road configuration is stored with the world.
+The Regional profile currently has fixed generation settings.
+
+New metadata stores only the complete `generation` descriptor. Legacy type/seed/
+road fields are read through the compatibility adapter. IndexedDB and filesystem
+registries use the same resolver; unsupported versions/settings produce explicit
+request errors. Game world lists display the selected generator, seed, and
+revision. Joins return authoritative identity, including local, serialized, and
+multiplayer paths. Concurrent joins share one realm load.
+
+Normal Regional creation finds a dry settlement/planner location using bounded
+queries and places the camera/player there. Exact Play here and saved overlays
+remain the next D milestone. Unit tests cover filesystem reloads and edited
+terrain for all types, authoritative random-seed resolution, concurrent joins,
+invalid versions, and direct local consumers. Browser tests create and reopen all
+four types through IndexedDB and verify the explorer handoff.

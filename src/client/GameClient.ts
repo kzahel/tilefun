@@ -24,6 +24,11 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
+import {
+  descriptorChoice,
+  descriptorFromMetadata,
+  type GenerationDescriptor,
+} from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -115,8 +120,10 @@ export class GameClient {
 
   /** Request/response correlation for serialized mode. */
   private nextRequestId = 1;
-  // biome-ignore lint/suspicious/noExplicitAny: generic request/response map
-  private pendingRequests = new Map<number, { resolve: (value: any) => void }>();
+  private pendingRequests = new Map<
+    number,
+    { resolve: (value: ServerMessage) => void; reject: (error: Error) => void }
+  >();
   /** Last visible range key sent to server (serialized mode). */
   private lastVisibleRangeKey: string | null = null;
   /** Last debug flag key sent to server (serialized mode). */
@@ -229,6 +236,7 @@ export class GameClient {
         ) {
           remoteView.bufferMessage(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
+          if (msg.generation) this.showWorldIdentity(msg.generation);
           console.log(
             `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
           );
@@ -305,7 +313,8 @@ export class GameClient {
           const pending = this.pendingRequests.get(msg.requestId);
           if (pending) {
             this.pendingRequests.delete(msg.requestId);
-            pending.resolve(msg);
+            if (msg.type === "request-error") pending.reject(new Error(msg.message));
+            else pending.resolve(msg);
           }
         }
       });
@@ -506,6 +515,7 @@ export class GameClient {
       } else {
         this.localServer.loadWorld(id).then((cam) => {
           this.mainMenu.currentWorldId = id;
+          this.showWorldIdentity(this.localServer.worldGeneration);
           this.camera.snapTo(cam.cameraX, cam.cameraY);
           this.camera.zoom = cam.cameraZoom;
           this.camera.requestSnap();
@@ -514,7 +524,7 @@ export class GameClient {
         });
       }
     };
-    this.mainMenu.onCreate = (name, worldType, seed) => {
+    this.mainMenu.onCreate = (name, worldType, seed, generation) => {
       if (this.serialized) {
         const msg: ClientMessage & { requestId: number } = {
           type: "create-world",
@@ -523,6 +533,7 @@ export class GameClient {
         };
         if (worldType !== undefined) msg.worldType = worldType;
         if (seed !== undefined) msg.seed = seed;
+        if (generation !== undefined) msg.generation = generation;
         this.gcSendRequest<{ meta: { id: string } }>(msg)
           .then((resp) => {
             return this.gcSendRequest({
@@ -533,18 +544,23 @@ export class GameClient {
           })
           .then(() => {
             if (this.scenes.has(MenuScene)) this.scenes.pop();
-          });
+          })
+          .catch((error) => this.mainMenu.showCreationError(String(error)));
       } else {
-        this.localServer.createWorld(name, worldType, seed).then((meta) => {
-          this.localServer.loadWorld(meta.id).then((cam) => {
-            this.mainMenu.currentWorldId = meta.id;
-            this.camera.snapTo(cam.cameraX, cam.cameraY);
-            this.camera.zoom = cam.cameraZoom;
-            this.camera.requestSnap();
-            this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-            if (this.scenes.has(MenuScene)) this.scenes.pop();
-          });
-        });
+        this.localServer
+          .createWorld(name, worldType, seed, generation)
+          .then((meta) => {
+            return this.localServer.loadWorld(meta.id).then((cam) => {
+              this.mainMenu.currentWorldId = meta.id;
+              this.showWorldIdentity(this.localServer.worldGeneration);
+              this.camera.snapTo(cam.cameraX, cam.cameraY);
+              this.camera.zoom = cam.cameraZoom;
+              this.camera.requestSnap();
+              this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+              if (this.scenes.has(MenuScene)) this.scenes.pop();
+            });
+          })
+          .catch((error) => this.mainMenu.showCreationError(String(error)));
       }
     };
     this.mainMenu.onDelete = async (id) => {
@@ -633,6 +649,9 @@ export class GameClient {
 
     this.loop.start();
     this.canvas.dataset.ready = "true";
+    if (!this.serialized) this.showWorldIdentity(this.localServer.worldGeneration);
+    if (new URL(location.href).searchParams.has("generation") && !this.scenes.has(MenuScene))
+      await this.toggleMenu();
   }
 
   /** Set hosting info to display in the main menu (when this client is hosting P2P). */
@@ -799,10 +818,19 @@ export class GameClient {
 
   /** Send a request and return a promise resolved when the server responds with matching requestId. */
   private gcSendRequest<T>(msg: ClientMessage & { requestId: number }): Promise<T> {
-    return new Promise((resolve) => {
-      this.pendingRequests.set(msg.requestId, { resolve });
+    return new Promise((resolve, reject) => {
+      this.pendingRequests.set(msg.requestId, {
+        resolve: (value) => resolve(value as unknown as T),
+        reject,
+      });
       this.transport.send(msg);
     });
+  }
+
+  private showWorldIdentity(generation: GenerationDescriptor): void {
+    this.canvas.dataset.generator = descriptorChoice(generation);
+    this.canvas.dataset.seed = String(generation.seed);
+    this.canvas.dataset.generation = JSON.stringify(generation);
   }
 
   /** Convert WorldMeta[] to RealmInfo[] (local mode — no player counts). */
@@ -815,7 +843,7 @@ export class GameClient {
         createdAt: w.createdAt,
         lastPlayedAt: w.lastPlayedAt,
       };
-      if (w.worldType) info.worldType = w.worldType;
+      info.generation = descriptorFromMetadata(w);
       return info;
     });
   }

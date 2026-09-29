@@ -1,19 +1,22 @@
-import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import type {
+  GenerationDescriptor,
+  GenerationRequest,
+} from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 
-export type WorldType = "generated" | "flat" | "island";
+export type WorldType = "generated" | "flat" | "island" | "regional";
 
 export interface WorldMeta {
-  generation?: GenerationDescriptor;
+  readonly generation?: GenerationDescriptor;
   id: string;
   name: string;
   createdAt: number;
   lastPlayedAt: number;
-  /** Noise seed for generated worlds. Missing = 42 (back-compat). */
+  /** Legacy seed field. New worlds use generation; missing legacy seed resolves to 42. */
   seed?: number;
-  /** World generation type. Missing = "generated" (back-compat). */
+  /** Legacy type field. New worlds use generation; missing legacy type resolves to Classic. */
   worldType?: WorldType;
-  /** Road generation parameters. Missing = no generated roads (back-compat). */
+  /** Legacy road overrides. Realm historically merges missing fields with default roads. */
   roadParams?: RoadGenParams;
 }
 
@@ -31,6 +34,7 @@ export interface IWorldRegistry {
     worldType?: WorldType,
     seed?: number,
     roadParams?: RoadGenParams,
+    generation?: GenerationRequest,
   ): Promise<WorldMeta>;
   updateLastPlayed(id: string): Promise<void>;
   renameWorld(id: string, name: string): Promise<void>;

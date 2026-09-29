@@ -48,14 +48,16 @@ export function spawnInitialChickens(
   count: number,
   world: World,
   entityManager: EntityManager,
+  centerX = 0,
+  centerY = 0,
 ): void {
   let spawned = 0;
   let attempts = 0;
   const range = CHUNK_SIZE * TILE_SIZE;
   while (spawned < count && attempts < 200) {
     attempts++;
-    const wx = (Math.random() - 0.5) * range * 2;
-    const wy = (Math.random() - 0.5) * range * 2;
+    const wx = centerX + (Math.random() - 0.5) * range * 2;
+    const wy = centerY + (Math.random() - 0.5) * range * 2;
     const tx = Math.floor(wx / TILE_SIZE);
     const ty = Math.floor(wy / TILE_SIZE);
     const collision = world.getCollision(tx, ty);

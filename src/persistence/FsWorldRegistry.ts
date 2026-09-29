@@ -2,6 +2,11 @@ import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, renameSync, rmSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import {
+  descriptorFromMetadata,
+  type GenerationRequest,
+  resolveCreation,
+} from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
 
@@ -12,6 +17,7 @@ import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
 export class FsWorldRegistry implements IWorldRegistry {
   private readonly registryPath: string;
   private worlds: WorldMeta[] = [];
+  private writes: Promise<void> = Promise.resolve();
 
   constructor(private readonly dataDir: string) {
     this.registryPath = join(dataDir, "registry.json");
@@ -44,17 +50,23 @@ export class FsWorldRegistry implements IWorldRegistry {
     worldType: WorldType = "generated",
     seed?: number,
     roadParams?: RoadGenParams,
+    generation?: GenerationRequest,
   ): Promise<WorldMeta> {
+    const resolved = generation
+      ? resolveCreation(generation)
+      : descriptorFromMetadata({
+          worldType,
+          seed: seed ?? Math.floor(Math.random() * 2147483647),
+          ...(roadParams ? { roadParams } : {}),
+        });
     const now = Date.now();
     const meta: WorldMeta = {
       id: randomUUID(),
       name,
       createdAt: now,
       lastPlayedAt: now,
-      seed: seed ?? Math.floor(Math.random() * 2147483647),
-      worldType,
+      generation: resolved,
     };
-    if (roadParams) meta.roadParams = roadParams;
     this.worlds.push(meta);
     await this.persist();
     return meta;
@@ -88,8 +100,15 @@ export class FsWorldRegistry implements IWorldRegistry {
 
   /** Atomically write registry to disk (write .tmp, rename). */
   private async persist(): Promise<void> {
-    const tmpPath = `${this.registryPath}.tmp`;
-    await writeFile(tmpPath, JSON.stringify(this.worlds, null, 2));
-    renameSync(tmpPath, this.registryPath);
+    const snapshot = JSON.stringify(this.worlds, null, 2);
+    const write = this.writes
+      .catch(() => {})
+      .then(async () => {
+        const tmpPath = `${this.registryPath}.tmp`;
+        await writeFile(tmpPath, snapshot);
+        renameSync(tmpPath, this.registryPath);
+      });
+    this.writes = write;
+    await write;
   }
 }

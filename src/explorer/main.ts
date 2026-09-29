@@ -239,6 +239,9 @@ function requestQuery(): void {
 }
 
 function changedView(immediate = false): void {
+  const gameUrl = new URL("./", location.href);
+  gameUrl.searchParams.set("generation", JSON.stringify(generation));
+  element<HTMLAnchorElement>("#create-world").href = gameUrl.href;
   client.invalidate();
   app.dataset.settled = "false";
   requestDraw();

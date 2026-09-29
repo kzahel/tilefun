@@ -28,6 +28,8 @@ import { PropManager } from "../entities/PropManager.js";
 import { TentSpawner } from "../entities/TentSpawner.js";
 import { descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
+import { regionalStart } from "../generation/regional/RegionalSpawn.js";
+import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -158,6 +160,9 @@ export class Realm {
   private tentSpawner = new TentSpawner();
 
   private generator = createGenerator(descriptorFromMetadata());
+  get generation() {
+    return this.generator.descriptor;
+  }
   /** Tracks processed road intersections/segments for structure generation. */
   private processedStructureKeys = new Set<string>();
 
@@ -895,6 +900,9 @@ export class Realm {
     registry: IWorldRegistry,
     createStore: (id: string) => PersistenceStore,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
+    const worldMeta = await registry.getWorld(worldId);
+    if (!worldMeta) throw new Error("World not found.");
+    descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
     // Close previous save manager
     if (this.saveManager) {
       this.saveManager.flush();
@@ -902,7 +910,6 @@ export class Realm {
     }
 
     // Create fresh world state with the correct generation strategy
-    const worldMeta = await registry.getWorld(worldId);
     this.world = new World(this.buildStrategy(worldMeta));
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
@@ -952,11 +959,25 @@ export class Realm {
     } else {
       this.lastLoadedGems = 0;
       // Find a walkable spawn point using a temporary entity
-      const tempPlayer = createPlayer(0, 0);
+      const start =
+        this.generation.type === "regional"
+          ? regionalStart(regionalWorld(this.generation.seed))
+          : { x: 0, y: 0 };
+      const tempPlayer = createPlayer(start.x * TILE_SIZE, start.y * TILE_SIZE);
       findWalkableSpawn(tempPlayer, this.world);
       playerX = tempPlayer.position.wx;
       playerY = tempPlayer.position.wy;
-      spawnInitialChickens(5, this.world, this.entityManager);
+      if (this.generation.type === "regional") {
+        cameraX = playerX;
+        cameraY = playerY;
+      }
+      spawnInitialChickens(
+        5,
+        this.world,
+        this.entityManager,
+        this.generation.type === "regional" ? playerX : 0,
+        this.generation.type === "regional" ? playerY : 0,
+      );
     }
 
     this.gemSpawner.reset(this.entityManager);

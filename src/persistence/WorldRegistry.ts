@@ -1,3 +1,8 @@
+import {
+  descriptorFromMetadata,
+  type GenerationRequest,
+  resolveCreation,
+} from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
@@ -71,19 +76,25 @@ export class WorldRegistry implements IWorldRegistry {
     worldType: WorldType = "generated",
     seed?: number,
     roadParams?: RoadGenParams,
+    generation?: GenerationRequest,
   ): Promise<WorldMeta> {
     const db = this.db;
     if (!db) throw new Error("Registry not open");
+    const resolved = generation
+      ? resolveCreation(generation)
+      : descriptorFromMetadata({
+          worldType,
+          seed: seed ?? Math.floor(Math.random() * 2147483647),
+          ...(roadParams ? { roadParams } : {}),
+        });
     const now = Date.now();
     const meta: WorldMeta = {
       id: generateUUID(),
       name,
       createdAt: now,
       lastPlayedAt: now,
-      seed: seed ?? Math.floor(Math.random() * 2147483647),
-      worldType,
+      generation: resolved,
     };
-    if (roadParams) meta.roadParams = roadParams;
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_WORLDS, "readwrite");
       tx.objectStore(STORE_WORLDS).put(meta);

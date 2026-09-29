@@ -389,9 +389,18 @@ Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it
   rendered desktop/phone-layout captures. Physical
   phone measurements remain outstanding.
 
+- Slice C: complete descriptors now persist in IndexedDB/filesystem registries
+  and travel through create/join/list protocol paths. Game controls use the shared
+  catalog/parser, expose Classic road settings, and accept explorer setup links.
+  Blank seeds resolve once at the authority. Regional starts at a bounded dry
+  planner location. Concurrent joins share one realm load, and direct local
+  consumers follow their player. Typecheck and 985 unit tests pass; targeted
+  browser creation/reload/handoff tests pass for every generator. Build and all
+  111 browser tests pass; lint has only existing warnings.
+
 ## Next action
 
-A–B are implemented. Continue **slice C** with durable descriptor storage and
-the actual game type/seed/settings controls, then continue D–E.
+A–C are implemented. Continue **slice D** with the connected district, audited
+building recipes, saved overlays, and authoritative Play here, then continue E.
 Record measured caps and any changed contracts in this document and update
 [the explorer checkpoint guide](../world-explorer.md) after each accepted slice.

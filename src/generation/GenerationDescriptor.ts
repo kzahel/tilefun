@@ -165,3 +165,17 @@ export function descriptorChoice(descriptor: GenerationDescriptor): GeneratorCho
 export function descriptorKey(descriptor: GenerationDescriptor): string {
   return JSON.stringify(resolveDescriptor(descriptor));
 }
+
+/** Creation intent allows a blank seed; only the authority resolves randomness. */
+export type GenerationRequest =
+  | GenerationDescriptor
+  | { choice: GeneratorChoice; seed?: number; roads?: RoadGenParams };
+export function resolveCreation(
+  request: GenerationRequest,
+  randomSeed: () => number = () => Math.floor(Math.random() * 2147483647),
+): GenerationDescriptor {
+  if (!request || typeof request !== "object") throw new Error("Invalid generation request.");
+  return "type" in request
+    ? resolveDescriptor(request)
+    : createDescriptor(request.choice, request.seed ?? randomSeed(), request.roads);
+}

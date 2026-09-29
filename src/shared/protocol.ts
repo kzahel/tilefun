@@ -1,6 +1,10 @@
 import type { PaintMode, SubgridShape } from "../editor/EditorTypes.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import type { PropCollider } from "../entities/Prop.js";
+import type {
+  GenerationDescriptor,
+  GenerationRequest,
+} from "../generation/GenerationDescriptor.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 import type { EntityDelta } from "./entityDelta.js";
 
@@ -11,6 +15,7 @@ export interface RealmInfo {
   name: string;
   playerCount: number;
   worldType?: WorldType;
+  generation?: GenerationDescriptor;
   createdAt: number;
   lastPlayedAt: number;
 }
@@ -100,6 +105,7 @@ export type ClientMessage =
       type: "create-world";
       requestId: number;
       name: string;
+      generation?: GenerationRequest;
       worldType?: WorldType;
       seed?: number;
     }
@@ -274,12 +280,14 @@ export type ServerMessage =
   | SyncMessage
   | {
       type: "world-loaded";
+      generation?: GenerationDescriptor;
       requestId?: number;
       worldId?: string;
       cameraX: number;
       cameraY: number;
       cameraZoom: number;
     }
+  | { type: "request-error"; requestId: number; message: string }
   | { type: "world-created"; requestId: number; meta: WorldMeta }
   | { type: "world-deleted"; requestId: number }
   | { type: "world-list"; requestId: number; worlds: WorldMeta[] }
@@ -288,6 +296,7 @@ export type ServerMessage =
   | { type: "realm-list"; requestId?: number; realms: RealmInfo[] }
   | {
       type: "realm-joined";
+      generation?: GenerationDescriptor;
       requestId: number;
       worldId: string;
       cameraX: number;

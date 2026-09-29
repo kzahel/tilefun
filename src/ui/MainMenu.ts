@@ -1,19 +1,19 @@
+import {
+  createDescriptor,
+  descriptorChoice,
+  GENERATOR_CATALOG,
+  type GenerationDescriptor,
+  type GenerationRequest,
+  type GeneratorChoice,
+  resolveDescriptor,
+  seedFromText,
+} from "../generation/GenerationDescriptor.js";
+import { DEFAULT_ROAD_PARAMS } from "../generation/RoadGenerator.js";
 import type { WorldType } from "../persistence/WorldRegistry.js";
 import type { RoomDirectory, RoomInfo } from "../rooms/RoomDirectory.js";
 import type { RealmInfo } from "../shared/protocol.js";
 import { createHostingButtons, createQRCode, type HostingInfo } from "./HostingBanner.js";
 import { relativeTime } from "./relativeTime.js";
-
-/** Parse a seed string: pure digits → number, otherwise hash to a 31-bit int. */
-function parseSeed(s: string): number {
-  const n = Number(s);
-  if (Number.isFinite(n) && /^\d+$/.test(s)) return n;
-  let h = 0;
-  for (let i = 0; i < s.length; i++) {
-    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
-  }
-  return h >>> 0; // unsigned 32-bit
-}
 
 const OVERLAY_STYLE = `
   position: fixed; inset: 0; z-index: 200;
@@ -47,6 +47,7 @@ export class MainMenu {
   private listEl: HTMLDivElement;
   private worldCount = 0;
   private currentRealms: RealmInfo[] = [];
+  private creationError = document.createElement("p");
   /** Map from worldId to the player-count badge element for live updates. */
   private playerCountBadges = new Map<string, HTMLSpanElement>();
   /** The world the local player is currently in (shown as "You are here"). */
@@ -56,7 +57,9 @@ export class MainMenu {
   private hostingSection: HTMLDivElement;
 
   onSelect: ((worldId: string) => void) | null = null;
-  onCreate: ((name: string, worldType: WorldType, seed?: number) => void) | null = null;
+  onCreate:
+    | ((name: string, worldType: WorldType, seed?: number, generation?: GenerationRequest) => void)
+    | null = null;
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
   onClose: (() => void) | null = null;
@@ -114,25 +117,23 @@ export class MainMenu {
     optRow.style.cssText = "display: flex; gap: 8px; align-items: center;";
 
     const typeSelect = document.createElement("select");
+    typeSelect.setAttribute("aria-label", "World type");
     typeSelect.style.cssText = `
       font: 14px monospace; padding: 6px 8px;
       background: rgba(255,255,255,0.1); color: #fff;
       border: 1px solid #888; border-radius: 4px; outline: none;
     `;
-    for (const [value, label] of [
-      ["generated", "Generated"],
-      ["flat", "Flat Grass"],
-      ["island", "Island"],
-    ] as const) {
+    for (const entry of GENERATOR_CATALOG) {
       const opt = document.createElement("option");
-      opt.value = value;
-      opt.textContent = label;
+      opt.value = entry.choice;
+      opt.textContent = entry.label;
       opt.style.background = "#222";
       typeSelect.appendChild(opt);
     }
 
     const seedInput = document.createElement("input");
     seedInput.type = "text";
+    seedInput.setAttribute("aria-label", "World seed");
     seedInput.placeholder = "Seed (random)";
     seedInput.style.cssText = `${INPUT_STYLE} width: 120px; flex: none;`;
 
@@ -143,14 +144,71 @@ export class MainMenu {
 
     optRow.append(typeSelect, seedInput);
 
+    let imported: GenerationDescriptor | null = null;
+    try {
+      const serialized = new URL(location.href).searchParams.get("generation");
+      if (serialized) {
+        imported = resolveDescriptor(JSON.parse(serialized));
+        typeSelect.value = descriptorChoice(imported);
+        seedInput.value = String(imported.seed);
+        nameInput.value = "Explorer world";
+      }
+    } catch (error) {
+      this.showCreationError(String(error));
+    }
+    const settingsRow = document.createElement("div");
+    settingsRow.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; font:12px monospace;";
+    const roads = imported?.type === "classic" ? { ...imported.roads } : { ...DEFAULT_ROAD_PARAMS };
+    for (const [key, label, min, max, step] of [
+      ["spacing", "Road spacing", 8, 256, 1],
+      ["density", "Road density", 0, 1, 0.05],
+      ["width", "Road width", 1, 16, 1],
+    ] as const) {
+      const wrapper = document.createElement("label");
+      wrapper.textContent = label;
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = String(min);
+      input.max = String(max);
+      input.step = String(step);
+      input.value = String(roads[key]);
+      input.setAttribute("aria-label", label);
+      input.style.cssText = `${INPUT_STYLE} width:65px; display:block;`;
+      input.onchange = () => {
+        if (input.checkValidity()) roads[key] = Number(input.value);
+        else input.reportValidity();
+      };
+      input.addEventListener("keydown", (event) => event.stopPropagation());
+      input.addEventListener("keyup", (event) => event.stopPropagation());
+      wrapper.append(input);
+      settingsRow.append(wrapper);
+    }
+    const showSettings = () => {
+      settingsRow.style.display = ["classic", "island"].includes(typeSelect.value)
+        ? "flex"
+        : "none";
+    };
+    typeSelect.addEventListener("change", showSettings);
+    showSettings();
+    this.creationError.setAttribute("role", "alert");
+    this.creationError.style.cssText = "color:#ffb5a0; font:12px monospace; margin:0;";
     const doCreate = () => {
-      const name = nameInput.value.trim() || `World ${this.worldCount + 1}`;
-      const worldType = typeSelect.value as WorldType;
-      const seedVal = seedInput.value.trim();
-      const seed = seedVal ? parseSeed(seedVal) : undefined;
-      nameInput.value = "";
-      seedInput.value = "";
-      this.onCreate?.(name, worldType, seed);
+      try {
+        const name = nameInput.value.trim() || `World ${this.worldCount + 1}`;
+        const choice = typeSelect.value as GeneratorChoice;
+        const seedVal = seedInput.value.trim();
+        const seed = seedVal
+          ? imported && seedVal === String(imported.seed)
+            ? imported.seed
+            : seedFromText(seedVal)
+          : undefined;
+        const generation: GenerationRequest =
+          seed === undefined ? { choice, roads } : createDescriptor(choice, seed, roads);
+        this.creationError.textContent = "";
+        this.onCreate?.(name, choice === "classic" ? "generated" : choice, seed, generation);
+      } catch (error) {
+        this.showCreationError(String(error));
+      }
     };
 
     createBtn.addEventListener("click", doCreate);
@@ -165,7 +223,7 @@ export class MainMenu {
     });
     seedInput.addEventListener("keyup", (e) => e.stopPropagation());
 
-    newSection.append(nameRow, optRow);
+    newSection.append(nameRow, optRow, settingsRow, this.creationError);
     this.overlay.appendChild(newSection);
 
     // Hosting info section (hidden unless hosting)
@@ -256,6 +314,10 @@ export class MainMenu {
 
   get visible(): boolean {
     return this.overlay.style.display !== "none";
+  }
+
+  showCreationError(message: string): void {
+    this.creationError.textContent = message;
   }
 
   show(realms: RealmInfo[]): void {
@@ -405,7 +467,11 @@ export class MainMenu {
     timeEl.style.cssText = "font-size: 12px; color: #999;";
     timeEl.textContent = relativeTime(realm.lastPlayedAt);
 
-    info.append(nameRow, timeEl);
+    const generationEl = document.createElement("div");
+    generationEl.style.cssText = "font:12px monospace; color:#b8d0b8;";
+    if (realm.generation)
+      generationEl.textContent = `${descriptorChoice(realm.generation)} · seed ${realm.generation.seed} · ${realm.generation.version}`;
+    info.append(nameRow, generationEl, timeEl);
 
     // Delete button with 2-click confirm
     const delBtn = document.createElement("button");
