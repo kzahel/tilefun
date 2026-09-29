@@ -2,10 +2,57 @@ import { describe, expect, it } from "vitest";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
+import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { REVIEW_STAGES, reviewCases } from "./ReviewCases.js";
 import { currentVerdict, parseReviewFeedback, type ReviewFeedback } from "./ReviewFeedback.js";
 
 describe("review coverage", () => {
+  it("adds three compact eight-case rounds with connected whole-room floor plans", () => {
+    const cases = interactionReviewCases();
+    for (const stage of [9, 10, 11]) expect(cases.filter((c) => c.stage === stage)).toHaveLength(8);
+    for (const c of cases) {
+      const plan = parseFloorPlan(c.sketch);
+      const map = buildProfileApartmentPlan(plan, c.profiles);
+      expect(map.width * 16).toBeLessThanOrEqual(288);
+      expect(map.pixelHeight).toBeLessThanOrEqual(288);
+      for (const surface of map.surfaces)
+        for (const [x, y] of surface.points) {
+          expect(x, c.id).toBeGreaterThanOrEqual(0);
+          expect(x, c.id).toBeLessThan(map.width * 16);
+          expect(y, c.id).toBeGreaterThanOrEqual(0);
+          expect(y, c.id).toBeLessThan(map.pixelHeight);
+        }
+      if (c.stage !== 11) continue;
+      const floors = new Set<string>();
+      plan.rows.forEach((row, y) => {
+        row.forEach((cell, x) => {
+          if (cell === "L" || cell === "+") floors.add(`${x},${y}`);
+        });
+      });
+      const start = [...floors][0];
+      if (!start) throw new Error("Empty composition");
+      const reached = new Set([start]),
+        queue = [start];
+      for (let i = 0; i < queue.length; i++) {
+        const point = queue[i];
+        if (!point) continue;
+        const [x = 0, y = 0] = point.split(",").map(Number);
+        for (const [dx, dy] of [
+          [1, 0],
+          [-1, 0],
+          [0, 1],
+          [0, -1],
+        ] as const) {
+          const next = `${x + dx},${y + dy}`;
+          if (floors.has(next) && !reached.has(next)) {
+            reached.add(next);
+            queue.push(next);
+          }
+        }
+      }
+      expect(reached.size, c.id).toBe(floors.size);
+    }
+  });
   it("has reproducible unique sketches and IDs, spanning small rooms through apartments", () => {
     const cases = reviewCases();
     expect(cases).toEqual(reviewCases());

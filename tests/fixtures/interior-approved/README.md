@@ -29,3 +29,7 @@ Their saved good fingerprints match the captured PNGs. The baseline now protects
 The low south attachment was approved on 2026-09-29 (source commit 4295746).
 Its exact pixels bring the regression baseline to 184. The tall south connection
 still requires review. These fixtures are test references, never runtime caches.
+
+The tall south height step was approved on 2026-09-29 (source commit 406a3fa).
+Its captured pixels match that verdict. All 185 existing cases are now protected;
+the subsequent 24 interaction/composition cases are not yet approved.

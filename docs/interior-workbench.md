@@ -132,3 +132,25 @@ On a local desktop through the public deployment, the first case appeared around
 1.67-second uninterrupted task at 4× throttling fell below 75 ms. All counts
 completed around 2.5 seconds in that run, while the page remained usable. These
 are diagnostic desktop measurements, not a phone timing guarantee.
+
+### Unchecked filter and interaction rounds
+
+**Unchecked only**, beside the category selector, is on by default and remembered
+across reloads. It hides currently graded cases from forward/back navigation and
+shows an empty state when a category is complete. Turn it off to browse or revisit
+grades. Changed pixels return to the unchecked queue automatically; the two-report
+pause may still display the last flagged case for context. `?unchecked=1` or `0`
+can explicitly set the filter on a link.
+
+Three new eight-case categories follow the 185 approved cases:
+
+- `?stage=9`: small profile interactions—mirrored L/T joins, doors beside corners,
+  one-cell returns, and thick side-wall attachments.
+- `?stage=10`: combined height/thickness changes—straight steps, doors, mixed T
+  junctions, and thick north/south attachments with low approaches.
+- `?stage=11`: connected rooms—two/three-room layouts, a narrow hall with offset
+  doors, and short returns, including mirrors.
+
+These 24 candidates use the same wood floor, fit within a 288px canvas, and reuse
+the existing source sprite sheet. They are unapproved until reviewed. Start with
+stage 9; one or two failures are enough to begin another fix.

@@ -918,5 +918,10 @@
     "id": "connection-south-low",
     "name": "South cutaway attachment \u00b7 low partition",
     "fp": "69d20a85dee97205cbbce9be4ea4e281e7bf1ca8aff158751891400eabb05ffd"
+  },
+  {
+    "id": "connection-south-tall",
+    "name": "South cutaway attachment \u00b7 tall partition",
+    "fp": "4f8f8e9465346fcb8cc446d68b4be7712987a4ff0fa77e9baecb96adc60fb10e"
   }
 ]

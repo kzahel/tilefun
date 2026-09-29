@@ -3,6 +3,7 @@ import { APARTMENT_EXAMPLES, type PlanCell } from "../ApartmentFloorPlan.js";
 import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFixtures.js";
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
+import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { profileReviewCases } from "./ProfileReviewCases.js";
 
 export const REVIEW_STAGES = [
@@ -15,6 +16,9 @@ export const REVIEW_STAGES = [
   "Small stress cases",
   "Wall heights & arches",
   "Thickness & end joins",
+  "Small profile interactions",
+  "Mixed heights & thickness",
+  "Connected room layouts",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -254,5 +258,10 @@ export function reviewCases(): ReviewCase[] {
       );
   }
   for (const item of APARTMENT_EXAMPLES) add(5, item.name, item.sketch);
-  return [...result, ...profileReviewCases(), ...connectionReviewCases()];
+  return [
+    ...result,
+    ...profileReviewCases(),
+    ...connectionReviewCases(),
+    ...interactionReviewCases(),
+  ];
 }

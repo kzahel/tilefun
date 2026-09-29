@@ -23,6 +23,7 @@ interface ReadyCase extends ReviewCase {
 interface State {
   current: string;
   stage: string;
+  uncheckedOnly: boolean;
   records: ReviewFeedback[];
   outbox: ReviewFeedback[];
   batch: { id: string; fingerprint: string }[];
@@ -33,6 +34,7 @@ interface State {
 const initial: State = {
   current: "",
   stage: "all",
+  uncheckedOnly: true,
   records: [],
   outbox: [],
   batch: [],
@@ -53,6 +55,7 @@ try {
     state = {
       ...initial,
       ...saved,
+      uncheckedOnly: saved.uncheckedOnly !== false,
       records: saved.records.map(parseReviewFeedback),
       outbox: saved.outbox.map(parseReviewFeedback),
     };
@@ -80,12 +83,16 @@ if (
   state.draft = "";
   state.annotation = null;
 }
+const requestedFilter = new URL(location.href).searchParams.get("unchecked");
+if (requestedFilter === "1" || requestedFilter === "0")
+  state.uncheckedOnly = requestedFilter === "1";
 const root = document.getElementById("app");
 if (!root) throw new Error("Review root is missing");
 root.innerHTML = `
 <header><a href="./interior-workbench.html">← Workbench</a><span>INDOOR REVIEW</span><span id="sync" role="status">Connecting…</span></header>
 <main>
   <div class="heading"><div><h1>Does this room look right?</h1><p>One key per room. Two mistakes are enough to start a fix.</p></div><label>Cases <select id="stage"><option value="all">Small → complex</option>${REVIEW_STAGES.map((s, i) => `<option value="${i}">${s}</option>`).join("")}</select></label></div>
+  <label class="review-filter"><input type="checkbox" id="unchecked-only"> Unchecked only</label>
   <div class="progress"><span id="position">Preparing cases…</span><span id="counts"></span></div>
   <section class="case" id="case">
     <div class="render-panel"><h2 id="case-name">Loading atlas…</h2><div id="render-wrap"><canvas id="render" aria-label="Generated interior"></canvas></div></div>
@@ -102,6 +109,7 @@ function el<T extends HTMLElement = HTMLElement>(id: string): T {
 const note = el<HTMLInputElement>("note");
 const stage = el<HTMLSelectElement>("stage");
 const canvas = el<HTMLCanvasElement>("render");
+const uncheckedOnly = el<HTMLInputElement>("unchecked-only");
 const cases: ReadyCase[] = reviewCases().map((c) => ({ ...c, fingerprint: "" }));
 // Only the active unmarked image and one scratch canvas exist. Neither renders
 // nor calculated fingerprints are persisted or reused across reloads.
@@ -141,7 +149,7 @@ function nextCase(after?: string): ReadyCase | undefined {
   const available = pool();
   const start = Math.max(0, available.findIndex((c) => c.id === after) + 1);
   const ordered = [...available.slice(start), ...available.slice(0, start)];
-  return ordered.find((c) => c.fingerprint && !judgment(c));
+  return ordered.find((c) => c.fingerprint && (!state.uncheckedOnly || !judgment(c)));
 }
 function show(next: ReadyCase | undefined, push = true): void {
   if (!assetsReady) return;
@@ -183,11 +191,16 @@ function drawStatus(): void {
     el("counts").textContent =
       `${t.reviewed} / ${t.reviewed + t.unchecked + t.checking} reviewed · ${t.wrong} wrong${t.checking ? ` · checking ${t.checking}` : ""}`;
   stage.value = state.stage;
+  uncheckedOnly.checked = state.uncheckedOnly;
   for (const id of ["good", "wrong"]) el<HTMLButtonElement>(id).disabled = !current?.fingerprint;
 }
 function draw(): void {
+  if (current && state.uncheckedOnly && !state.paused && judgment(current)) {
+    show(nextCase(current.id), false);
+    return;
+  }
   drawStatus();
-  const available = pool();
+  const available = pool().filter((c) => !state.uncheckedOnly || !judgment(c));
   el("pause").hidden = !state.paused;
   el("actions").hidden = state.paused || !current;
   el("case").hidden = !current;
@@ -195,11 +208,13 @@ function draw(): void {
   if (!current) {
     el("position").textContent = available.some((c) => !c.fingerprint)
       ? "Checking remaining cases… You can choose another category."
-      : "All current renders in this set reviewed. Choose another set or revisit Previous.";
+      : "No unchecked cases in this category. Choose another category or turn off Unchecked only to browse graded cases.";
     return;
   }
   el("position").textContent =
-    `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
+    state.paused && state.uncheckedOnly
+      ? `${REVIEW_STAGES[current.stage]} · Last flagged case`
+      : `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
   el("case-name").textContent = current.name;
   el("legend").textContent = current.profiles
     ? `▂ Low wall · ▅ Normal wall · █ Tall wall · 🚪 Opening${current.profiles.walls.some((w) => w.thickness === "thick") ? " · Outlined = thick" : ""}`
@@ -454,14 +469,19 @@ el("skip").onclick = () => {
   show(nextCase(current?.id));
 };
 el("previous").onclick = () => {
-  const id = history.pop();
-  if (id) {
+  while (history.length) {
+    const id = history.pop();
+    const target = pool().find((c) => c.id === id && (!state.uncheckedOnly || !judgment(c)));
+    if (!target) continue;
     state.draft = "";
-    show(
-      cases.find((c) => c.id === id),
-      false,
-    );
+    show(target, false);
+    break;
   }
+};
+uncheckedOnly.onchange = () => {
+  state.uncheckedOnly = uncheckedOnly.checked;
+  state.draft = "";
+  show(state.paused ? current : nextCase());
 };
 el("undo").onclick = undo;
 el("continue").onclick = () => {
@@ -564,7 +584,7 @@ async function verifyCase(c: ReadyCase): Promise<void> {
     !state.paused &&
     pool().includes(c) &&
     !excluded.has(c.id) &&
-    !judgment(c)
+    (!state.uncheckedOnly || !judgment(c))
   )
     show(c, false);
 }
@@ -574,10 +594,10 @@ async function findUnchecked(): Promise<ReadyCase | undefined> {
   const candidates = pool();
   const records = new Map(state.records.map((r) => [r.caseId, r]));
   const priority = (c: ReadyCase) => (records.get(c.id)?.verdict === "good" ? 1 : 0);
-  candidates.sort((a, b) => priority(a) - priority(b));
+  if (state.uncheckedOnly) candidates.sort((a, b) => priority(a) - priority(b));
   for (const c of candidates) {
     await verifyCase(c);
-    if (!excluded.has(c.id) && !judgment(c)) return c;
+    if (!excluded.has(c.id) && (!state.uncheckedOnly || !judgment(c))) return c;
   }
 }
 async function start(): Promise<void> {
@@ -611,7 +631,7 @@ async function start(): Promise<void> {
     changed ??
     (restored &&
     !excluded.has(restored.id) &&
-    (state.paused || state.draft || state.annotation?.pins.length || !judgment(restored))
+    (state.paused || !state.uncheckedOnly || !judgment(restored))
       ? restored
       : undefined) ??
     (await findUnchecked());
@@ -619,7 +639,7 @@ async function start(): Promise<void> {
     state.stage = "all";
     target = await findUnchecked();
   }
-  show(target ?? restored, false);
+  show(target ?? (!state.uncheckedOnly ? restored : undefined), false);
   el("app").dataset.reviewReady = "true";
   // Revalidate everything for exact category counts, without storing images or
   // blocking review. Navigation changes the priority of the next scratch render.

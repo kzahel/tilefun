@@ -1,0 +1,94 @@
+import { readFileSync } from "node:fs";
+import { expect, test } from "@playwright/test";
+
+const approved = JSON.parse(
+  readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
+) as { id: string; name: string; fp: string }[];
+function approvedRecords() {
+  return approved.map((r, i) => ({
+    id: `approved-${i}`,
+    caseId: r.id,
+    name: r.name,
+    sketch: "",
+    fingerprint: r.fp,
+    verdict: "good",
+    note: "",
+    createdAt: "2026-09-29T00:00:00Z",
+  }));
+}
+
+test("unchecked filter hides completed categories, supports browsing grades, and survives reload", async ({
+  page,
+}) => {
+  await page.route("**/api/interior-review", (route) => route.fulfill({ json: approvedRecords() }));
+  await page.goto("/tilefun/interior-review.html?stage=9");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#unchecked-only")).toBeChecked();
+  await page.locator("#stage").selectOption("8");
+  await expect(page.locator("#case")).toBeHidden();
+  await expect(page.locator("#position")).toContainText("No unchecked cases");
+  await page.locator("#unchecked-only").uncheck();
+  await expect(page.locator("#case-id")).toHaveText("connection-straight");
+  await expect(page.locator("#verdict")).toContainText("Marked right");
+  await page.goto("/tilefun/interior-review.html");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#unchecked-only")).not.toBeChecked();
+  await expect(page.locator("#case-id")).toHaveText("connection-straight");
+  await page.locator("#unchecked-only").check();
+  await expect(page.locator("#case")).toBeHidden();
+  await page.locator("#stage").selectOption("9");
+  await expect(page.locator("#case-id")).toHaveText("interaction-bend-reverse-mirror");
+  await page.reload();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#unchecked-only")).toBeChecked();
+});
+
+test("three new eight-case rounds fit a phone and preserve the two-report pause", async ({
+  page,
+}) => {
+  const records: Record<string, unknown>[] = approvedRecords();
+  const posts: Record<string, unknown>[] = [];
+  await page.route("**/api/interior-review", async (route) => {
+    if (route.request().method() === "POST") {
+      const row = route.request().postDataJSON();
+      posts.push(row);
+      records.push(row);
+      await route.fulfill({ json: { saved: true } });
+    } else await route.fulfill({ json: records });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tilefun/interior-review.html?stage=9&unchecked=1");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator('#stage option[value="all"]')).toHaveText(
+    "Small → complex — 24 unchecked",
+  );
+  await expect(page.locator("#unsupported-label")).toHaveText("0 cases excluded by the compiler");
+  const visited = new Set<string>();
+  for (const stage of ["9", "10", "11"]) {
+    await page.locator("#stage").selectOption(stage);
+    await expect(page.locator("#position")).toContainText("1 of 8");
+    for (let i = 0; i < 8; i++) {
+      const id = (await page.locator("#case-id").textContent()) ?? "";
+      expect(visited.has(id)).toBe(false);
+      visited.add(id);
+      const size = await page.locator("#render").evaluate((el) => ({
+        width: (el as HTMLCanvasElement).width,
+        height: (el as HTMLCanvasElement).height,
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      }));
+      expect(size.width).toBeLessThanOrEqual(288);
+      expect(size.height).toBeLessThanOrEqual(288);
+      expect(size.overflow).toBe(false);
+      await page.locator("#skip").click();
+    }
+  }
+  expect(visited.size).toBe(24);
+  await page.locator("#stage").selectOption("9");
+  await page.locator("#wrong").click();
+  await expect(page.locator('#stage option[value="9"]')).toContainText("7 unchecked · 1 wrong");
+  await page.waitForTimeout(180);
+  await page.locator("#wrong").click();
+  await expect(page.locator("#pause")).toBeVisible();
+  await expect.poll(() => posts.length).toBe(2);
+  expect(posts.every((p) => p.profiles && p.screenshot)).toBe(true);
+});

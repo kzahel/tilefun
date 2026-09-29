@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 
 const approved = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
@@ -69,7 +70,7 @@ test("review starts before verification finishes, uses only small sprites, and r
         .map((e) => ({ name: e.name, size: (e as PerformanceResourceTiming).decodedBodySize })),
       stored: Object.keys(JSON.parse(localStorage.getItem("tilefun.indoor-review.v1") ?? "{}")),
     }));
-    expect(result.probe.hashes).toBe(185);
+    expect(result.probe.hashes).toBe(reviewCases().length);
     expect(result.probe.firstHashes).toBeLessThan(10);
     expect(result.probe.lastTicks - result.probe.firstTicks).toBeGreaterThan(20);
     expect(result.probe.canvases).toBe(2); // active unmarked image + scratch, besides the HTML display canvas
@@ -86,6 +87,7 @@ test("review starts before verification finishes, uses only small sprites, and r
       "paused",
       "records",
       "stage",
+      "uncheckedOnly",
     ]);
   }
 });
@@ -93,16 +95,18 @@ test("review starts before verification finishes, uses only small sprites, and r
 test("category counts verify old verdicts, distinguish wrong from unchecked, and follow undo", async ({
   page,
 }) => {
-  const records: Record<string, unknown>[] = approved.map((r, i) => ({
-    id: `approved-${i}`,
-    caseId: r.id,
-    name: r.name,
-    sketch: "",
-    fingerprint: r.id === "connection-straight" ? "0".repeat(64) : r.fp,
-    verdict: "good",
-    note: "",
-    createdAt: "2026-09-29T00:00:00Z",
-  }));
+  const records: Record<string, unknown>[] = approved
+    .filter((r) => r.id !== "connection-south-tall")
+    .map((r, i) => ({
+      id: `approved-${i}`,
+      caseId: r.id,
+      name: r.name,
+      sketch: "",
+      fingerprint: r.id === "connection-straight" ? "0".repeat(64) : r.fp,
+      verdict: "good",
+      note: "",
+      createdAt: "2026-09-29T00:00:00Z",
+    }));
   await page.route("**/api/interior-review", async (route) => {
     if (route.request().method() === "POST") {
       const row = route.request().postDataJSON();

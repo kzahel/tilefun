@@ -737,3 +737,23 @@ reload, counts after changed pixels/undo, and the existing feedback cycle.
 
 Next: review the tall south height step and confirm loading feels responsive on
 the phone before expanding the geometry pool.
+
+### Interaction, mixed-profile, and composition rounds, 2026-09-29
+
+All 185 existing cases are approved, including the tall south height step. The
+new round adds 24 candidates in three eight-case categories: small interactions,
+mixed height/thickness, and connected-room compositions. Mirrors, corner-adjacent
+doors, short returns, thick shell attachments, and narrow offset halls test how
+the accepted features behave together. The renderer is unchanged for this round.
+All accepted pixels remain protected, and each whole-room sketch has connected
+walkable floor cells through its openings.
+
+An explicit, persistent Unchecked only filter now removes current grades from
+navigation and stops completed categories from displaying the last graded room.
+Turning it off permits browsing all cases. Live pixel verification, changed-case
+reopening, optional notes/pins, and the two-failure pause continue unchanged.
+
+Next: review small interactions first, then mixed profiles, then compositions.
+Use the first one or two failures to refine shared connection rules, keeping the
+remaining unreviewed cases available as counterexamples rather than requiring a
+complete batch submission.

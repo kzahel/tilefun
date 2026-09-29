@@ -98,6 +98,17 @@ select {
   font-size: 13px;
   color: #aebcce;
 }
+.review-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.review-filter input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
 .case {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 30%);
