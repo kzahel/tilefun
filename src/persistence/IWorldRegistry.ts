@@ -1,8 +1,10 @@
+import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 
 export type WorldType = "generated" | "flat" | "island";
 
 export interface WorldMeta {
+  generation?: GenerationDescriptor;
   id: string;
   name: string;
   createdAt: number;

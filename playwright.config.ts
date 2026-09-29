@@ -4,14 +4,15 @@ export default defineConfig({
   testDir: "./tests",
   timeout: 30_000,
   use: {
-    baseURL: "http://localhost:4173",
+    baseURL: "http://localhost:4174",
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "npm run preview",
+    // Keep test persistence separate from any developer preview on port 4173.
+    command: "npm run preview -- --port 4174 --strictPort",
     env: { INTERIOR_REVIEW_DIR: "test-results/interior-review-feedback" },
-    port: 4173,
-    reuseExistingServer: true,
+    port: 4174,
+    reuseExistingServer: false,
   },
   projects: [
     {

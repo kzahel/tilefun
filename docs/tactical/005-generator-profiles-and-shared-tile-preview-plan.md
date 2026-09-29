@@ -1,6 +1,6 @@
 # Generator profiles and shared tile preview
 
-Status: agreed implementation direction, September 29, 2026; not implemented.
+Status: implementation in progress, September 29, 2026.
 The regional map checkpoint in commit `6d388bb` has been reviewed positively.
 This plan records the next work and its handoff to the remaining world-building
 work in [Tactical 004](004-world-explorer-and-regional-generation-plan.md).
@@ -369,6 +369,16 @@ Use the sibling checkout `~/code/mclone` as an architectural reference:
 Borrow those boundaries and reuse principles. Tilefun remains a 2D TypeScript
 game using its existing sprites and renderers; it does not require mclone's
 Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it.
+
+## Implementation record
+
+- Slice A: captured frozen terrain/placement fixtures for Classic, Island, and
+  Flat; added immutable descriptors, validation, catalog, metadata compatibility,
+  shared terrain derivation, generator-owned placement dispatch, and transferable
+  chunk data. Legacy numeric seeds remain unchanged. Regional tile realization
+  is explicitly unavailable until slice B. Typecheck, 975 unit tests, and build
+  passed. Browser checks passed 105/106 initially; the review-inbox test passed
+  with a dedicated test server after isolating it from the open demo server.
 
 ## Next action
 

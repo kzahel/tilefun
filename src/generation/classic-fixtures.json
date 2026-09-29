@@ -1,0 +1,58 @@
+[
+  {
+    "type": "generated",
+    "seed": 42,
+    "cx": 0,
+    "cy": 0,
+    "terrainHash": "a7b59ca74e3fe2be0a76e9335438a190dd971ebb06895838dff2c1316d28097e",
+    "placementHash": "dfbdac583f3d5ca7b47fa22196f24f1983bfdab07318bea5a5e8c468ecccb351"
+  },
+  {
+    "type": "generated",
+    "seed": 2026,
+    "cx": -4,
+    "cy": 3,
+    "terrainHash": "79ae6e8cadd1087fc744474abefd2d0515028feb32de503192f0d0f2d7355f37",
+    "placementHash": "9deee1d4a70cb392928d3343888a6fa96e0ec403cc22733b1f9d7d2555067c84"
+  },
+  {
+    "type": "generated",
+    "seed": -12.5,
+    "cx": 5,
+    "cy": -7,
+    "terrainHash": "122acd1b0958e3ba4f862add3151d603be731b6008db3e8659bb0ea2d48917f0",
+    "placementHash": "6b1a18265f55f1cae223c1bde394491e1e0f0fc59e9a3213d03068934f21584e"
+  },
+  {
+    "type": "generated",
+    "seed": 4294967298,
+    "cx": -1,
+    "cy": -1,
+    "terrainHash": "a2b2419f6fdd87b163cb37cce3d574aa9cef037b764720596ff7a67553155a0b",
+    "placementHash": "338ca37f84db882f266dee2ccc62d46a64cd332aff630f927cde4fc24c0cd0cf"
+  },
+  {
+    "type": "island",
+    "seed": 42,
+    "cx": 0,
+    "cy": 0,
+    "terrainHash": "8055ad09632dc71f54aa60f1f29a4c30efec709f9f54b24b3585bfb002f836b6",
+    "placementHash": "ac4e7130b81f1e88ae59fe40273652b5223546753b9a275e43f9a409f5c615a7"
+  },
+  {
+    "type": "island",
+    "seed": 2026,
+    "cx": -1,
+    "cy": 0,
+    "terrainHash": "f4e2cfa360053e4a515ce052a3cee055e767de775bb47ba6bd97b7a59bd5bc20",
+    "placementHash": "b9dc731fc610488d5ffacefb6ead992fc11c29688cb58c427c048a204c2fc526"
+  },
+  {
+    "type": "flat",
+    "seed": 42,
+    "cx": -9,
+    "cy": 12,
+    "terrainHash": "11459bb52e24a1a5597407dfc1535aa3995ea4b0619b9ed333aa7e10830fd8dd",
+    "placementHash": "538f514128904209f9764dcafafc91ad1ca7aff7487cbef55947600c66e0e47b"
+  }
+]

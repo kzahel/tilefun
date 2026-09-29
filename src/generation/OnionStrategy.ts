@@ -1,7 +1,7 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
-import { getCollisionForWaterTile, TileId, terrainIdToTileId } from "../world/TileRegistry.js";
+import { deriveTerrain } from "./deriveTerrain.js";
 import { fbm } from "./noise.js";
 import { generateChunkRoads, type RoadGenParams } from "./RoadGenerator.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
@@ -68,26 +68,7 @@ export class OnionStrategy implements TerrainStrategy {
       }
     }
 
-    // Derive terrain tiles and collision from subgrid centers
-    for (let ly = 0; ly < CHUNK_SIZE; ly++) {
-      for (let lx = 0; lx < CHUNK_SIZE; lx++) {
-        const terrain = chunk.getSubgrid(lx * 2 + 1, ly * 2 + 1);
-        const tileId = terrainIdToTileId(terrain);
-        chunk.setTerrain(lx, ly, tileId);
-
-        // Count water subgrid points in 3x3 area for collision threshold
-        let waterCount = 0;
-        const scx = lx * 2 + 1;
-        const scy = ly * 2 + 1;
-        for (let dy = -1; dy <= 1; dy++) {
-          for (let dx = -1; dx <= 1; dx++) {
-            const tid = terrainIdToTileId(chunk.getSubgrid(scx + dx, scy + dy));
-            if (tid === TileId.Water || tid === TileId.DeepWater) waterCount++;
-          }
-        }
-        chunk.setCollision(lx, ly, getCollisionForWaterTile(tileId, waterCount));
-      }
-    }
+    deriveTerrain(chunk);
 
     if (this.roadParams) {
       generateChunkRoads(chunk, cx, cy, this.seed, this.roadParams, this.islandRadius);

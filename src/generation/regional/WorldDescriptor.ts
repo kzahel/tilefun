@@ -23,12 +23,4 @@ export function validateWorld(world: RegionalWorld): void {
   }
 }
 
-/** Same seed convention as the game menu, without importing game UI. */
-export function seedFromText(text: string): number {
-  const value = text.trim();
-  if (/^\d+$/.test(value)) return regionalWorld(Number(value)).seed;
-  if (!value) return 42;
-  let hash = 0;
-  for (let i = 0; i < value.length; i++) hash = (Math.imul(hash, 31) + value.charCodeAt(i)) | 0;
-  return hash >>> 0;
-}
+export { seedFromText } from "../GenerationDescriptor.js";
