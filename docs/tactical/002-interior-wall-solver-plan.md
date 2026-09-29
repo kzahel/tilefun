@@ -658,3 +658,36 @@ Only the rejected tall east render changes. Geometry checks cover the rail/base
 endpoints and absent exposed end face; a pixel check covers the newly connected
 cap. Next: review this one remaining attachment, then continue thickness and
 north/south attachment coverage.
+
+### Explicit thickness and north/south end connections, 2026-09-29
+
+The tall east connection is now approved, bringing the protected baseline to
+177 images. A separate eight-case round at `?stage=8` exercises the next two
+dimensions without reopening those approvals: thin/thick straight, L, T, and
+doorway shapes, then low/tall attachments at both the north and south shell.
+
+`ProfileWall.thickness` accepts `thin` (8px) and `thick` (16px), defaulting to the
+approved thin footprint. The south/east faces remain anchored as thickness grows
+north/west. All bands still compile into one occupancy union before faces and
+coplanar boundaries are resolved. Explicit-width horizontal door ends reach the
+opening boundary, leaving one full sketch cell clear. Omitted widths preserve
+the previously approved door ends. Feedback serializes the width specification,
+and the plan outlines thick cells so the intended change is quick to identify.
+
+North attachments start at the room wall's base. For a tall wall whose ordinary
+cap would project above the canvas, a local connection adapter joins the native
+cap at y=5 and blends back to the normal projection within the first cell. Its
+projected segments remain monotone. South attachments reach the foreground
+cutaway at its existing ground boundary and render behind that trim. Side-shell
+bridges also span the selected band width. These are explicit connections to the
+existing shell projection, not a change to the camera of accepted cases.
+
+Validation covers footprint anchors, a clear thick-wall doorway, the north
+connection bounds/order, the south cutaway boundary, width feedback, mobile
+layout, and the two-failure pause. Every approved pixel remains protected.
+
+Next: review this small round, fix the first one or two failures, then stress
+accepted joins with mirrored L/T shapes, short returns and adjacent doors before
+combining height and width transitions. Generalize supported connection rules
+from that evidence. Keep appearance review separate from future collision and
+navigation footprints; the current semantic wall cells remain conservative.

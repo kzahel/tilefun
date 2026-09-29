@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "./ApartmentWallProfiles.js";
+import { connectionReviewCases } from "./review/ConnectionReviewCases.js";
 import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
@@ -59,7 +60,7 @@ describe("experimental wall profiles", () => {
     expect(map.surfaces.some((s) => s.plane.startsWith("south:"))).toBe(true);
   });
   it("keeps new surfaces within their compact review canvas", () => {
-    for (const c of profileReviewCases()) {
+    for (const c of [...profileReviewCases(), ...connectionReviewCases()]) {
       const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
       for (const s of map.surfaces)
         for (const [x, y] of s.points) {
@@ -93,5 +94,88 @@ describe("experimental wall profiles", () => {
         walls: [{ x: 1, y: 1, height: "low" }],
       }),
     ).toThrow();
+  });
+});
+
+describe("wall thickness and end connections", () => {
+  const fixture = (id: string) => {
+    const c = connectionReviewCases().find((c) => c.id === `connection-${id}`);
+    if (!c) throw new Error(`Missing connection ${id}`);
+    return c;
+  };
+  const build = (id: string) => {
+    const c = fixture(id);
+    return buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+  };
+  it("thickens toward north/west while keeping the south/east faces anchored", () => {
+    const c = fixture("straight");
+    const plan = parseFloorPlan(c.sketch);
+    const maps = ["thin", "thick"].map((thickness) =>
+      buildProfileApartmentPlan(plan, {
+        walls: c.profiles.walls.map((w) => ({ ...w, thickness: thickness as "thin" | "thick" })),
+      }),
+    );
+    const bounds = maps.map((m) => {
+      const points = m.surfaces.filter((s) => s.plane === "top:24").flatMap((s) => s.points);
+      return [
+        Math.min(...points.map(([x]) => x)),
+        Math.max(...points.map(([x]) => x)),
+        Math.min(...points.map(([, y]) => y)),
+        Math.max(...points.map(([, y]) => y)),
+      ];
+    });
+    expect(bounds).toEqual([
+      [74, 146, 96, 104],
+      [66, 146, 88, 104],
+    ]);
+  });
+  it("leaves a full 32px opening through the thick footprint", () => {
+    const map = build("door");
+    const tops = map.surfaces.filter((s) => s.plane === "top:24");
+    // Undo the 6px elevation shear to inspect the ground footprint.
+    const intervals = tops.map((s) => s.points.map(([x]) => x + 6));
+    expect(intervals.every((xs) => Math.max(...xs) <= 128 || Math.min(...xs) >= 160)).toBe(true);
+    expect(intervals.some((xs) => Math.max(...xs) === 128)).toBe(true);
+    expect(intervals.some((xs) => Math.min(...xs) === 160)).toBe(true);
+    for (const y of [6, 7])
+      for (const x of [8, 9]) expect(map.cells[y]?.[x]?.semantic).toBe("opening");
+  });
+  it("joins the tall north cap without clipping or reversing its projected segments", () => {
+    const tops = build("north-tall").surfaces.filter((s) => s.plane === "top:40");
+    expect(Math.min(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(5);
+    for (const s of tops) {
+      const [nw, ne, se, sw] = s.points;
+      if (!nw || !ne || !se || !sw) throw new Error("Incomplete cap");
+      expect(sw[1]).toBeGreaterThan(nw[1]);
+      expect(se[1]).toBeGreaterThan(ne[1]);
+    }
+  });
+  it.each(["low", "tall"])("ends the %s south partition exactly at the cutaway", (height) => {
+    const map = build(`south-${height}`);
+    const points = map.surfaces.flatMap((s) => s.points);
+    expect(Math.max(...points.map(([, y]) => y))).toBe(224);
+    expect(map.pixelHeight).toBe(230);
+    expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
+  });
+  it("persists explicit thickness and rejects unsupported width specifications", () => {
+    const c = fixture("straight");
+    const r = {
+      id: "test-width",
+      caseId: c.id,
+      name: c.name,
+      sketch: c.sketch,
+      profiles: c.profiles,
+      fingerprint: "b".repeat(64),
+      verdict: "wrong",
+      note: "",
+      createdAt: "2026-09-29T00:00:00Z",
+    };
+    expect(parseReviewFeedback(r).profiles).toEqual(c.profiles);
+    expect(() =>
+      parseReviewFeedback({
+        ...r,
+        profiles: { walls: [{ x: 2, y: 3, height: "normal", thickness: "wide" }] },
+      }),
+    ).toThrow("Invalid wall profiles");
   });
 });

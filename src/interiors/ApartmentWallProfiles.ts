@@ -4,11 +4,14 @@ import { verticalWallProfile } from "./ApartmentWallAlignment.js";
 import type { InteriorSurface, LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 export type WallHeight = "low" | "normal" | "tall";
+export type WallThickness = "thin" | "thick";
 export const WALL_HEIGHTS: Record<WallHeight, number> = { low: 8, normal: 24, tall: 40 };
+export const WALL_THICKNESSES: Record<WallThickness, number> = { thin: 8, thick: 16 };
 export interface ProfileWall {
   x: number;
   y: number;
   height: WallHeight;
+  thickness?: WallThickness;
 }
 export interface WallProfileOptions {
   walls: ProfileWall[];
@@ -53,6 +56,7 @@ export function buildProfileApartmentPlan(
   };
   const columns = new Map<string, { x: number; y: number; height: number }>();
   const eastPorts = new Map<string, { height: number; faceX: number; railX: number }>();
+  const northPorts = new Map<string, { height: number; lift: number }>();
   for (let y = 0; y < plan.height; y++)
     for (let x = 0; x < plan.width; x++) {
       if (
@@ -69,9 +73,20 @@ export function buildProfileApartmentPlan(
         }
     }
   for (const w of options.walls) {
-    if (plan.rows[w.y]?.[w.x] !== "#" || !WALL_HEIGHTS[w.height])
-      throw new Error("Profile requires a wall and supported height");
-    if (w.x < 1 || w.y < 2 || w.x >= plan.width - 1 || w.y >= plan.height - 1)
+    if (
+      plan.rows[w.y]?.[w.x] !== "#" ||
+      !WALL_HEIGHTS[w.height] ||
+      !WALL_THICKNESSES[w.thickness ?? "thin"]
+    )
+      throw new Error("Profile requires a wall and supported height/thickness");
+    const attachNorth = w.y === 1 && [-1, 0, 1].every((dx) => plan.rows[0]?.[w.x + dx] === "#");
+    if (
+      w.x < 1 ||
+      w.y < 1 ||
+      (w.y === 1 && !attachNorth) ||
+      w.x >= plan.width - 1 ||
+      w.y >= plan.height - 1
+    )
       throw new Error("Profile sampler requires interior walls with projection clearance");
     // Restore the floor under the slimmer footprint, including where a low wall
     // reveals more floor than the legacy full-height cell assembly.
@@ -83,15 +98,32 @@ export function buildProfileApartmentPlan(
         cell.floor = [{ key: "room-builder/floors/c01-r31" }];
         cell.semantic = "wall";
       }
-    const n = selected.has(key(w.x, w.y - 1));
+    const n = selected.has(key(w.x, w.y - 1)) || attachNorth;
+    // Keep the south/east face anchored as a band thickens north/west.
+    const width = WALL_THICKNESSES[w.thickness ?? "thin"] / 8;
+    const minX = 3 - width,
+      minY = 4 - width;
     const verticalShell = (x: number) => [-1, 0, 1].every((dy) => plan.rows[w.y + dy]?.[x] === "#");
     const attachWest = w.x === 1 && verticalShell(0);
     const attachEast = w.x === plan.width - 2 && verticalShell(plan.width - 1);
-    const e = selected.has(key(w.x + 1, w.y)) || attachEast,
-      west = selected.has(key(w.x - 1, w.y)) || attachWest;
+    // Explicit footprints reach the edge of an adjacent opening, leaving one
+    // full sketch cell clear. Omitted widths retain the approved old door ends.
+    const e =
+        selected.has(key(w.x + 1, w.y)) ||
+        attachEast ||
+        (w.thickness !== undefined && profileOpening(w.x + 1, w.y)),
+      west =
+        selected.has(key(w.x - 1, w.y)) ||
+        attachWest ||
+        (w.thickness !== undefined && profileOpening(w.x - 1, w.y));
     for (let gy = 0; gy < 4; gy++)
       for (let gx = 0; gx < 4; gx++) {
-        if (!((gx === 2 && (gy === 3 || n)) || (gy === 3 && ((west && gx <= 2) || (e && gx >= 2)))))
+        if (
+          !(
+            (gx >= minX && gx <= 2 && (gy >= minY || n)) ||
+            (gy >= minY && ((west && gx <= 2) || (e && gx >= minX)))
+          )
+        )
           continue;
         const x = w.x * 4 + gx,
           y = w.y * 4 + gy;
@@ -99,13 +131,14 @@ export function buildProfileApartmentPlan(
       }
     // Extend the physical band to the room-facing shell, rather than leaving
     // half a sketch cell of floor between the two rendering systems.
-    const bridgeY = w.y * 4 + 3;
+    const bridgeY = w.y * 4 + minY;
     for (const x of attachWest
       ? [2, 3]
       : attachEast
         ? [plan.width * 4 - 4, plan.width * 4 - 3, plan.width * 4 - 2]
         : [])
-      columns.set(key(x, bridgeY), { x, y: bridgeY, height: WALL_HEIGHTS[w.height] });
+      for (let y = bridgeY; y < bridgeY + width; y++)
+        columns.set(key(x, y), { x, y, height: WALL_HEIGHTS[w.height] });
     if (attachEast) {
       const h = WALL_HEIGHTS[w.height];
       const end = plan.width * 4 - 1;
@@ -117,16 +150,36 @@ export function buildProfileApartmentPlan(
       // not expose its own east face as if it were a freestanding wall.
       if (end * 8 - h / 4 < faceX) {
         const port = { height: h, faceX, railX };
-        eastPorts.set(key(end, bridgeY), port);
-        eastPorts.set(key(end, bridgeY + 1), port);
+        for (let y = bridgeY; y <= bridgeY + width; y++) eastPorts.set(key(end, y), port);
         const topY = bridgeY * 8 - h;
         cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
           key: wall(10, 2),
           cropX: 2,
           cropWidth: 1,
-          cropHeight: 7,
+          cropHeight: width * 8 - 1,
           offsetX: (railX % 16) - 2,
           offsetY: (topY % 16) + 1,
+        });
+      }
+    }
+    if (attachNorth) {
+      const h = WALL_HEIGHTS[w.height];
+      const lift = Math.max(0, 5 - (32 - h));
+      if (lift) {
+        // The native north cap ends at y=5. Blend its connection back into the
+        // ordinary projection over the first cell, keeping every segment monotone.
+        for (let y = 4; y <= 8; y++)
+          for (let x = w.x * 4 + minX; x <= w.x * 4 + 3; x++)
+            northPorts.set(key(x, y), { height: h, lift: (lift * (8 - y)) / 4 });
+        const capX = (w.x * 4 + minX) * 8 - h / 4;
+        cellAt(Math.floor(capX / 16), 0).foreground.push({
+          key: wall(10, 2),
+          cropX: 2,
+          cropWidth: 1,
+          drawWidth: width * 8 - 1,
+          cropHeight: 1,
+          offsetX: (capX % 16) - 1,
+          offsetY: 5,
         });
       }
     }
@@ -134,9 +187,10 @@ export function buildProfileApartmentPlan(
   const surfaces: InteriorSurface[] = [];
   const project = (x: number, y: number, h: number): Point => {
     const port = eastPorts.get(key(x, y));
+    const north = northPorts.get(key(x, y));
     return [
       port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,
-      y * 8 - h,
+      y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
     ];
   };
   function face(points: Point[], plane: string, kind: "top" | "south" | "east") {

@@ -69,6 +69,56 @@ test("height sampler is compact and preserves the two-failure review cycle", asy
   expect(posted[0]?.fingerprint).not.toBe(posted[1]?.fingerprint);
 });
 
+test("thickness round exposes eight compact cases and saves widths in the quick review cycle", async ({
+  page,
+}) => {
+  const posted: { profiles?: { walls: { thickness?: string }[] } }[] = [];
+  await page.route("**/api/interior-review", async (route) => {
+    if (route.request().method() === "POST") {
+      posted.push(route.request().postDataJSON());
+      await route.fulfill({ json: { ok: true } });
+    } else await route.fulfill({ json: [] });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tilefun/interior-review.html?stage=8");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#position")).toContainText("1 of 8");
+  await expect(page.locator("#case-id")).toHaveText("connection-straight");
+  await expect(page.locator("#plan .thick-wall")).toHaveCount(2);
+  await expect(page.locator("#legend")).toContainText("Outlined = thick");
+  const ids: string[] = [];
+  for (let i = 0; i < 8; i++) {
+    ids.push((await page.locator("#case-id").textContent()) ?? "");
+    const fits = await page
+      .locator("#render")
+      .evaluate(
+        (c) =>
+          c.getBoundingClientRect().width <= 288 &&
+          document.documentElement.scrollWidth <= innerWidth,
+      );
+    expect(fits).toBe(true);
+    await page.locator("#skip").click();
+  }
+  expect(ids).toEqual([
+    "connection-straight",
+    "connection-bend",
+    "connection-tee",
+    "connection-door",
+    "connection-north-low",
+    "connection-north-tall",
+    "connection-south-low",
+    "connection-south-tall",
+  ]);
+  await page.locator("#wrong").click();
+  await expect(page.locator("#case-id")).toHaveText("connection-bend");
+  // The UI briefly ignores voting to prevent an accidental double tap.
+  await page.waitForTimeout(180);
+  await page.locator("#wrong").click();
+  await expect(page.locator("#pause")).toBeVisible();
+  await expect.poll(() => posted.length).toBe(2);
+  expect(posted[0]?.profiles?.walls.map((w) => w.thickness)).toEqual(["thin", "thick", "thick"]);
+});
+
 for (const fixture of [
   { id: "profile-door-false", cap: [20, 116], floor: [20, 98, 52] },
   { id: "profile-door-true", cap: [20, 84], floor: [] },

@@ -147,6 +147,10 @@ aside {
   margin: 16px 0;
   font-size: 12px;
 }
+
+#plan button.thick-wall {
+  box-shadow: inset 0 0 0 2px currentColor;
+}
 #verdict {
   font-size: 13px;
   color: #b9d0eb;

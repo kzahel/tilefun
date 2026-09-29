@@ -85,7 +85,20 @@ normal, and tall partitions, a native arch, and small mixed-height counterexampl
 Height marks in the plan identify the changed walls; the floor palette is fixed.
 Two wrong marks still pause the batch, and notes/pins remain optional.
 
-The 163 approved legacy renders and thirteen approved height/arch renders are preserved in
+The 163 approved legacy renders and fourteen approved height/arch renders are preserved in
 `tests/fixtures/interior-approved`; a browser test checks their exact pixels.
 The height sampler is opt-in and does not replace the workbench's approved wall
 renderer. Height specifications are included in feedback for reproducibility.
+
+### Thickness and end joins
+
+Open `interior-review.html?stage=8` for eight new candidates: thin/thick straight,
+L, T, and doorway transitions, plus low/tall attachments at the north wall and
+south cutaway. The plan outlines thick cells and retains the height marks. These
+use 8px/16px footprints with the south/east face anchored; thickening extends to
+the north/west. Explicit thickness also makes a horizontal opening exactly one
+32px sketch cell wide. Widths are saved with feedback, including optional pins.
+
+The same two-failure pause applies. This is a separate opt-in round; all 177
+previously approved renders retain their exact pixels. The new cases are visual
+candidates, not accepted baselines or a general gameplay collision system.

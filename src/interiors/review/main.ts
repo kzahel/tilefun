@@ -159,7 +159,7 @@ function draw(): void {
     `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
   el("case-name").textContent = current.name;
   el("legend").textContent = current.profiles
-    ? "▂ Low wall · ▅ Normal wall · █ Tall wall · 🚪 Opening"
+    ? `▂ Low wall · ▅ Normal wall · █ Tall wall · 🚪 Opening${current.profiles.walls.some((w) => w.thickness === "thick") ? " · Outlined = thick" : ""}`
     : "🧱 Wall · 🚪 Door · 🟫 Wood · 🟦 Tile";
   el("case-id").textContent = current.id;
   el("sketch").textContent = current.sketch;
@@ -192,7 +192,10 @@ function draw(): void {
       cell.textContent = profile
         ? { low: "▂", normal: "▅", tall: "█" }[profile.height]
         : (symbols[char] ?? char);
-      if (profile) cell.title = `${profile.height} wall`;
+      if (profile) {
+        cell.title = `${profile.height}, ${profile.thickness ?? "thin"} wall`;
+        cell.classList.toggle("thick-wall", profile.thickness === "thick");
+      }
       line.append(cell);
     }
     plan.append(line);

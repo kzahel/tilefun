@@ -16,3 +16,7 @@ in this baseline. There are now 173 approved renders.
 Three side-wall attachment renders were added after individual approvals on
 2026-09-29 (source commit 49f3974). The tall east attachment remains outside
 the baseline pending review. The baseline now contains 176 approved renders.
+
+The tall east attachment was approved on 2026-09-29 (source commit 9d4a6a9).
+Its captured pixels match the saved good verdict exactly. All 177 existing
+cases are now protected; thickness/end-join candidates require new review.

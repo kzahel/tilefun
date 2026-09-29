@@ -82,13 +82,22 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
       !Array.isArray(p.walls) ||
       p.walls.length > 4800 ||
       p.walls.some(
-        (w) => !w || !at(w.x, w.y, "#") || !["low", "normal", "tall"].includes(w.height),
+        (w) =>
+          !w ||
+          !at(w.x, w.y, "#") ||
+          !["low", "normal", "tall"].includes(w.height) ||
+          (w.thickness !== undefined && !["thin", "thick"].includes(w.thickness)),
       ) ||
       (p.arch !== undefined && (!p.arch || !at(p.arch.x, p.arch.y, "+")))
     )
       throw new Error("Invalid wall profiles");
     profiles = {
-      walls: p.walls.map(({ x, y, height }) => ({ x, y, height })),
+      walls: p.walls.map(({ x, y, height, thickness }) => ({
+        x,
+        y,
+        height,
+        ...(thickness !== undefined ? { thickness } : {}),
+      })),
       ...(p.arch ? { arch: { x: p.arch.x, y: p.arch.y } } : {}),
     };
   }
