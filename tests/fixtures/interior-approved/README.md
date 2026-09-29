@@ -33,3 +33,9 @@ still requires review. These fixtures are test references, never runtime caches.
 The tall south height step was approved on 2026-09-29 (source commit 406a3fa).
 Its captured pixels match that verdict. All 185 existing cases are now protected;
 the subsequent 24 interaction/composition cases are not yet approved.
+
+Sixteen interaction cases were approved on 2026-09-29 (source commit 2ee17d0):
+seven small interactions, all eight mixed-profile cases, and the first two-room
+composition. Each capture matches its good verdict. The baseline now protects
+201 renders; the rejected normal-height east attachments and remaining six room
+compositions still require review.

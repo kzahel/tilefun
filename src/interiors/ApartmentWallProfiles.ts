@@ -166,10 +166,10 @@ export function buildProfileApartmentPlan(
       const railX =
         (plan.width - 1) * 32 + verticalWallProfile(roomPlan, plan.width - 1, w.y).railX;
       const faceX = railX - 9;
-      // A shallow end already overlaps the shell's visible face. A taller end
-      // projects into the room and must meet the shell's opposite-facing rail,
-      // not expose its own east face as if it were a freestanding wall.
-      if (end * 8 - h / 4 < faceX) {
+      // Only a low cutaway uses the shallow overlap. Normal and tall partitions
+      // must meet the shell's inward-facing rail and hide their covered end.
+      // Projected overlap alone does not imply that the two faces agree.
+      if (h > WALL_HEIGHTS.low) {
         const port = { height: h, faceX, railX };
         for (let y = bridgeY; y <= bridgeY + width; y++) eastPorts.set(key(end, y), port);
         const topY = bridgeY * 8 - h;

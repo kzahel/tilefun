@@ -193,6 +193,13 @@ function drawStatus(): void {
   stage.value = state.stage;
   uncheckedOnly.checked = state.uncheckedOnly;
   for (const id of ["good", "wrong"]) el<HTMLButtonElement>(id).disabled = !current?.fingerprint;
+  if (current) {
+    const available = pool().filter((c) => !state.uncheckedOnly || (c.fingerprint && !judgment(c)));
+    el("position").textContent =
+      state.paused && state.uncheckedOnly
+        ? `${REVIEW_STAGES[current.stage]} · Last flagged case`
+        : `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
+  }
 }
 function draw(): void {
   if (current && state.uncheckedOnly && !state.paused && judgment(current)) {
@@ -211,10 +218,6 @@ function draw(): void {
       : "No unchecked cases in this category. Choose another category or turn off Unchecked only to browse graded cases.";
     return;
   }
-  el("position").textContent =
-    state.paused && state.uncheckedOnly
-      ? `${REVIEW_STAGES[current.stage]} · Last flagged case`
-      : `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
   el("case-name").textContent = current.name;
   el("legend").textContent = current.profiles
     ? `▂ Low wall · ▅ Normal wall · █ Tall wall · 🚪 Opening${current.profiles.walls.some((w) => w.thickness === "thick") ? " · Outlined = thick" : ""}`

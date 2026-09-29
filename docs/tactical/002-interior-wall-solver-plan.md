@@ -757,3 +757,21 @@ Next: review small interactions first, then mixed profiles, then compositions.
 Use the first one or two failures to refine shared connection rules, keeping the
 remaining unreviewed cases available as counterexamples rather than requiring a
 complete batch submission.
+
+### Correct normal-height east attachments, 2026-09-29
+
+Sixteen more candidates were approved, bringing the protected baseline to 201.
+The rejected thick east-shell interaction and three-room layout both showed a
+perspective mismatch where a normal-height partition joined the east room wall.
+
+The previous connection test only redirected a cap when its projected endpoint
+fell short of the shell face. A normal-height cap overlapped that face but still
+faced the wrong way, retaining a free east end. East connections now distinguish
+low cutaways from raised partitions: normal and tall walls meet the inward-facing
+rail and omit the covered end face. Approved low and tall joins remain unchanged.
+
+The fix changes the two reports and the six remaining unreviewed compositions
+that share the same connection. No approved pixels change. Geometry checks cover
+thin/thick rail and base endpoints; browser checks cover the complete cap seam,
+including a thick cap spanning a tile-row boundary. Next: recheck the two reports,
+then continue through the remaining room layouts.

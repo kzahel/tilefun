@@ -5,6 +5,42 @@ const baseline = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; fp: string }[];
 
+for (const [id, stage, top] of [
+  ["interaction-thick-shell-mirror", "9", 88],
+  ["interaction-three-rooms", "11", 96],
+] as const)
+  test(`normal-height east cap joins the room rail in ${id}`, async ({ page }) => {
+    await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
+    await page.addInitScript(
+      ({ id, stage }) =>
+        localStorage.setItem(
+          "tilefun.indoor-review.v1",
+          JSON.stringify({
+            current: id,
+            stage,
+            records: [],
+            outbox: [],
+            batch: [],
+            paused: false,
+            draft: "",
+            annotation: null,
+          }),
+        ),
+      { id, stage },
+    );
+    await page.goto(`/tilefun/interior-review.html?stage=${stage}`);
+    await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+    await expect(page.locator("#case-id")).toHaveText(id);
+    const cap = await page.locator("#render").evaluate((el, top) => {
+      const ctx = (el as HTMLCanvasElement).getContext("2d");
+      if (!ctx) throw new Error("Missing render");
+      return Array.from({ length: 103 - top }, (_, i) =>
+        Array.from(ctx.getImageData(249, top + 1 + i, 1, 1).data),
+      );
+    }, top);
+    expect(cap).toEqual(Array(103 - top).fill([248, 248, 248, 255]));
+  });
+
 test(`all ${baseline.length} approved interiors retain their exact rendered pixels`, async ({
   page,
 }) => {

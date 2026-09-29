@@ -154,3 +154,11 @@ Three new eight-case categories follow the 185 approved cases:
 These 24 candidates use the same wood floor, fit within a 288px canvas, and reuse
 the existing source sprite sheet. They are unapproved until reviewed. Start with
 stage 9; one or two failures are enough to begin another fix.
+
+The next review accepted sixteen of those candidates (201 approved renders in
+total). The two normal-height east-wall reports now use the same inward-facing
+connection as tall partitions. Reload reopens those changed reports; the six
+unreviewed room compositions also receive the shared fix. Existing approvals
+remain current. The unchecked-only position counter now updates as background
+verification finishes, so it reflects the remaining cases without reselecting a
+category.

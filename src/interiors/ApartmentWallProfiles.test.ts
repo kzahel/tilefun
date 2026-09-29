@@ -2,10 +2,30 @@ import { describe, expect, it } from "vitest";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "./ApartmentWallProfiles.js";
 import { connectionReviewCases } from "./review/ConnectionReviewCases.js";
+import { interactionReviewCases } from "./review/InteractionReviewCases.js";
 import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
+  it.each([
+    ["interaction-thick-shell-mirror", 88],
+    ["interaction-three-rooms", 96],
+  ] as const)("connects the normal-height east face to the shell in %s", (id, topY) => {
+    const c = interactionReviewCases().find((c) => c.id === id);
+    if (!c) throw new Error("Missing normal east attachment");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "top:24" && s.points.some(([x, y]) => x === 249 && y === topY),
+      ),
+    ).toBe(true);
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "south:16" && s.points.some(([x, y]) => x === 240 && y === 128),
+      ),
+    ).toBe(true);
+    expect(map.surfaces.some((s) => s.plane === "east:31")).toBe(false);
+  });
   it("matches the tall east attachment to the shell's inward-facing perspective", () => {
     const c = profileReviewCases().find((c) => c.id === "profile-door-east-tall");
     if (!c) throw new Error("Missing east attachment fixture");

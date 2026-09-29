@@ -923,5 +923,85 @@
     "id": "connection-south-tall",
     "name": "South cutaway attachment \u00b7 tall partition",
     "fp": "4f8f8e9465346fcb8cc446d68b4be7712987a4ff0fa77e9baecb96adc60fb10e"
+  },
+  {
+    "id": "interaction-bend-reverse-mirror",
+    "name": "Thick corner \u00b7 opposite-facing arm \u00b7 mirror",
+    "fp": "d9f97ee7e7b5299100f7f2d90464db95528cc9ef3373d5e4d0609f6774cfca88"
+  },
+  {
+    "id": "interaction-tee-reverse-mirror",
+    "name": "Thick T \u00b7 opposite-facing branches \u00b7 mirror",
+    "fp": "9d2cea28981caa8ef9f029f885944545970aa700dbea7801754988408c02e192"
+  },
+  {
+    "id": "interaction-corner-door",
+    "name": "Door immediately beside a thick corner",
+    "fp": "d50df6e12bef312a6bd54c100062ad0a242a0097bc81f426d3755413acc58874"
+  },
+  {
+    "id": "interaction-short-return",
+    "name": "One-cell return between width changes",
+    "fp": "7189068ca76a1136f1c085522d374eedb7c5e41cecce673ebd25c6736a5c0ec0"
+  },
+  {
+    "id": "interaction-thick-shell",
+    "name": "Thick partition meets the side wall",
+    "fp": "810e3220f5c9ba4a36424164db358d2973a6079d8cc110c69b67a1e987841087"
+  },
+  {
+    "id": "interaction-corner-door-mirror",
+    "name": "Door immediately beside a thick corner \u00b7 mirror",
+    "fp": "4fc537c846b385790138ac65f7af0e0b01804cb86374041d02fd05e3967a38e7"
+  },
+  {
+    "id": "interaction-short-return-mirror",
+    "name": "One-cell return between width changes \u00b7 mirror",
+    "fp": "0d2a5a6ee10bf97c051ba00195be486eaae3d61f30414095f84cce0d354b38e5"
+  },
+  {
+    "id": "interaction-mixed-step",
+    "name": "Tall/thick meets low/thin",
+    "fp": "cf2da8bad1480e377d4270b2eb67fe38653904596b9f219651e5f33fa790e32e"
+  },
+  {
+    "id": "interaction-mixed-door",
+    "name": "Door between tall/thick and low/thin",
+    "fp": "ccbbf45a225ccff59f5c74a8d2044d035c2781e74f9abe1d5097c0bf8ae3dbd5"
+  },
+  {
+    "id": "interaction-mixed-tee",
+    "name": "T junction with three heights and two widths",
+    "fp": "eb1df318bbe29b335450f9d6dcba5c13f53db17c41ea956d9f4d4626ea5bb92f"
+  },
+  {
+    "id": "interaction-mixed-step-mirror",
+    "name": "Tall/thick meets low/thin \u00b7 mirror",
+    "fp": "5437c753fa689871b1d0aba3bd38c73ffebcd4460b1c57155a6808316fc26016"
+  },
+  {
+    "id": "interaction-mixed-door-mirror",
+    "name": "Door between tall/thick and low/thin \u00b7 mirror",
+    "fp": "c8d2c411a81b0a2b761c76fc40fd0cdf623a5efb833dc93d862ca084db21ebc7"
+  },
+  {
+    "id": "interaction-mixed-tee-mirror",
+    "name": "T junction with three heights and two widths \u00b7 mirror",
+    "fp": "0c269bf3ee095a76484d10896b853e2685ef9670d53ad71d829d742ad797f1e2"
+  },
+  {
+    "id": "interaction-mixed-north",
+    "name": "Thick north join with a low approach",
+    "fp": "e6433d103bdb53d5226caf856703f271f7951fb44dde144e91456cb40029edaf"
+  },
+  {
+    "id": "interaction-mixed-south",
+    "name": "Thick south join with a low approach",
+    "fp": "95d3af16534a37765471e179a458d9b4e680ab9bf9e08fd432d974a5f15a37ab"
+  },
+  {
+    "id": "interaction-two-rooms",
+    "name": "Two rooms \u00b7 door between different wall profiles",
+    "fp": "744c7cfc540cf3493c7fa8be8157732fbf26cb6349e1dd1bb42ddb2e0d3ae0bf"
   }
 ]

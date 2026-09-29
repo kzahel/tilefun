@@ -4,18 +4,39 @@ import { expect, test } from "@playwright/test";
 const approved = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; name: string; fp: string }[];
-function approvedRecords() {
-  return approved.map((r, i) => ({
-    id: `approved-${i}`,
-    caseId: r.id,
-    name: r.name,
-    sketch: "",
-    fingerprint: r.fp,
-    verdict: "good",
-    note: "",
-    createdAt: "2026-09-29T00:00:00Z",
-  }));
+function approvedRecords(includeInteractions = false) {
+  // Keep this scenario's three new rounds ungraded as the real baseline grows.
+  return approved
+    .filter((r) => includeInteractions || !r.id.startsWith("interaction-"))
+    .map((r, i) => ({
+      id: `approved-${i}`,
+      caseId: r.id,
+      name: r.name,
+      sketch: "",
+      fingerprint: r.fp,
+      verdict: "good",
+      note: "",
+      createdAt: "2026-09-29T00:00:00Z",
+    }));
 }
+
+test("unchecked position updates after background verification without changing categories", async ({
+  page,
+}) => {
+  const caseId = "interaction-thick-shell-mirror";
+  const records = approvedRecords(true).filter((r) => r.caseId !== caseId);
+  await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
+  await page.addInitScript((current) => {
+    localStorage.setItem(
+      "tilefun.indoor-review.v1",
+      JSON.stringify({ current, stage: "9", records: [], outbox: [], batch: [], draft: "" }),
+    );
+  }, caseId);
+  await page.goto("/tilefun/interior-review.html?stage=9&unchecked=1");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#case-id")).toHaveText(caseId);
+  await expect(page.locator("#position")).toContainText("1 of 1");
+});
 
 test("unchecked filter hides completed categories, supports browsing grades, and survives reload", async ({
   page,
