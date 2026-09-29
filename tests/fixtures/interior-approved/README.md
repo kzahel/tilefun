@@ -61,3 +61,12 @@ their latest good verdicts, including all five reopened attachments. There are
 no pending reapprovals. `superseded-fingerprints.json` retains older hashes solely
 to test that changed renders invalidate historical verdicts. Stage 12 adds eight
 new boundary candidates; those remain outside the approved baseline.
+
+After 1d59799, both normal north attachments and the thick low north attachment
+were approved and captured with matching verdicts. The tall north and normal
+south reports require the renderer to distinguish physical shell height from
+cutaway height. That shared correction reopens `connection-north-tall`,
+`connection-south-tall`, `interaction-mixed-north`, and `interaction-mixed-south`.
+Their historical PNGs remain untouched, with hashes in `pending-reapproval.json`.
+The active baseline protects 208 unchanged renders; changed versions still need
+human review.

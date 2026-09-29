@@ -12,6 +12,71 @@ const superseded = JSON.parse(
   ),
 ) as { id: string; name: string; fp: string }[];
 
+test("tall north overhang remains visible and plan pins account for viewport padding", async ({
+  page,
+}) => {
+  await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
+  await page.addInitScript(() => {
+    if (localStorage.getItem("tilefun.indoor-review.v1")) return;
+    localStorage.setItem(
+      "tilefun.indoor-review.v1",
+      JSON.stringify({
+        current: "boundary-north-tall-thick",
+        stage: "12",
+        records: [],
+        outbox: [],
+        batch: [],
+        draft: "",
+      }),
+    );
+  });
+  await page.goto("/tilefun/interior-review.html?stage=12");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  const cap = await page.locator("#render").evaluate((el) => {
+    const ctx = (el as HTMLCanvasElement).getContext("2d");
+    if (!ctx) throw new Error("Missing canvas");
+    return Array.from(ctx.getImageData(100, 10, 1, 1).data);
+  });
+  expect(cap).toEqual([248, 248, 248, 255]);
+  const cell = page.locator('#plan button[data-x="3"][data-y="1"]');
+  await cell.click();
+  await expect(cell).toHaveClass(/pinned/);
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem("tilefun.indoor-review.v1") ?? "{}").annotation.pins,
+    ),
+  ).toEqual([{ x: 96, y: 48, size: 32 }]);
+  await page.reload();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(cell).toHaveClass(/pinned/);
+  await expect(page.locator("#pins")).toContainText("R2 C4");
+});
+
+test("normal south cap continues into the cutaway without a lower end face", async ({ page }) => {
+  await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "tilefun.indoor-review.v1",
+      JSON.stringify({
+        current: "boundary-south-normal-thin",
+        stage: "12",
+        records: [],
+        outbox: [],
+        batch: [],
+        draft: "",
+      }),
+    ),
+  );
+  await page.goto("/tilefun/interior-review.html?stage=12");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  const cap = await page.locator("#render").evaluate((el) => {
+    const ctx = (el as HTMLCanvasElement).getContext("2d");
+    if (!ctx) throw new Error("Missing canvas");
+    return [184, 192].map((y) => Array.from(ctx.getImageData(110, y, 1, 1).data));
+  });
+  expect(cap).toEqual(Array(2).fill([248, 248, 248, 255]));
+});
+
 test("changed side connections reopen their historical approvals", async ({ page }) => {
   await page.route("**/api/interior-review", (route) =>
     route.fulfill({
@@ -69,14 +134,14 @@ function approvedRecords(includeInteractions = false) {
     }));
 }
 
-test("eight boundary cases are the only unchecked cases and fit a phone", async ({ page }) => {
-  const records = approvedRecords(true);
+test("eight boundary cases fit a phone and retain category counts", async ({ page }) => {
+  const records = approvedRecords(true).filter((r) => !r.caseId.startsWith("boundary-"));
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/tilefun/interior-review.html?stage=12&unchecked=1");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator('#stage option[value="all"]')).toHaveText(
-    "Small → complex — 8 unchecked",
+    `Small → complex — ${reviewCases().length - records.length} unchecked`,
   );
   await expect(page.locator('#stage option[value="12"]')).toHaveText(
     "North & south attachments — 8 unchecked",
@@ -93,7 +158,11 @@ test("eight boundary cases are the only unchecked cases and fit a phone", async 
       height: (el as HTMLCanvasElement).height,
       overflow: document.documentElement.scrollWidth > innerWidth,
     }));
-    expect(size).toEqual({ width: 224, height: 198, overflow: false });
+    expect(size).toEqual({
+      width: 224,
+      height: id === "boundary-north-tall-thick" ? 214 : 198,
+      overflow: false,
+    });
     if (id.startsWith("boundary-north-normal")) {
       const seam = await page.locator("#render").evaluate((el) => {
         const ctx = (el as HTMLCanvasElement).getContext("2d");
@@ -112,16 +181,16 @@ test("eight boundary cases are the only unchecked cases and fit a phone", async 
 test("unchecked position updates after background verification without changing categories", async ({
   page,
 }) => {
-  const caseId = "interaction-mixed-step";
+  const caseId = "interaction-thick-shell-mirror";
   const records = approvedRecords(true).filter((r) => r.caseId !== caseId);
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
   await page.addInitScript((current) => {
     localStorage.setItem(
       "tilefun.indoor-review.v1",
-      JSON.stringify({ current, stage: "10", records: [], outbox: [], batch: [], draft: "" }),
+      JSON.stringify({ current, stage: "9", records: [], outbox: [], batch: [], draft: "" }),
     );
   }, caseId);
-  await page.goto("/tilefun/interior-review.html?stage=10&unchecked=1");
+  await page.goto("/tilefun/interior-review.html?stage=9&unchecked=1");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#case-id")).toHaveText(caseId);
   await expect(page.locator("#position")).toContainText("1 of 1");
@@ -134,16 +203,16 @@ test("unchecked filter hides completed categories, supports browsing grades, and
   await page.goto("/tilefun/interior-review.html?stage=9");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#unchecked-only")).toBeChecked();
-  await page.locator("#stage").selectOption("8");
+  await page.locator("#stage").selectOption("0");
   await expect(page.locator("#case")).toBeHidden();
   await expect(page.locator("#position")).toContainText("No unchecked cases");
   await page.locator("#unchecked-only").uncheck();
-  await expect(page.locator("#case-id")).toHaveText("connection-straight");
+  const firstGraded = await page.locator("#case-id").textContent();
   await expect(page.locator("#verdict")).toContainText("Marked right");
   await page.goto("/tilefun/interior-review.html");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#unchecked-only")).not.toBeChecked();
-  await expect(page.locator("#case-id")).toHaveText("connection-straight");
+  await expect(page.locator("#case-id")).toHaveText(firstGraded ?? "");
   await page.locator("#unchecked-only").check();
   await expect(page.locator("#case")).toBeHidden();
   await page.locator("#stage").selectOption("9");

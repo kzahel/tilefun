@@ -264,13 +264,16 @@ for (const [height, capX] of [
     await page.goto("/tilefun/interior-review.html?stage=8");
     await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
     await expect(page.locator("#case-id")).toHaveText(`connection-south-${height}`);
-    const seam = await page.locator("#render").evaluate((element, x) => {
-      const ctx = (element as HTMLCanvasElement).getContext("2d");
-      if (!ctx) throw new Error("Missing canvas");
-      return [190, 200, 224, 225].map((y) =>
-        Array.from(ctx.getImageData(y >= 224 ? 114 : x, y, 1, 1).data),
-      );
-    }, capX);
+    const seam = await page.locator("#render").evaluate(
+      (element, { x, joinX }) => {
+        const ctx = (element as HTMLCanvasElement).getContext("2d");
+        if (!ctx) throw new Error("Missing canvas");
+        return [190, 216, 224, 225].map((y) =>
+          Array.from(ctx.getImageData(y >= 224 ? joinX : x, y, 1, 1).data),
+        );
+      },
+      { x: capX, joinX: height === "low" ? 114 : 110 },
+    );
     expect(seam[0]).toEqual([248, 248, 248, 255]);
     if (height === "low") expect(seam[1]).toEqual([248, 248, 248, 255]);
     else expect(seam[1]?.[0]).toBeLessThan(248);

@@ -910,19 +910,9 @@
     "fp": "d217bc27f49011ba6a15d5153630cd15207ca295d0150722d721c03e8945b3c3"
   },
   {
-    "id": "connection-north-tall",
-    "name": "North wall attachment \u00b7 tall partition",
-    "fp": "caa55ff6a97c37558305791bef0984a54e5cd060ccd73ef07fe11aeaf4e64da7"
-  },
-  {
     "id": "connection-south-low",
     "name": "South cutaway attachment \u00b7 low partition",
     "fp": "69d20a85dee97205cbbce9be4ea4e281e7bf1ca8aff158751891400eabb05ffd"
-  },
-  {
-    "id": "connection-south-tall",
-    "name": "South cutaway attachment \u00b7 tall partition",
-    "fp": "4f8f8e9465346fcb8cc446d68b4be7712987a4ff0fa77e9baecb96adc60fb10e"
   },
   {
     "id": "interaction-bend-reverse-mirror",
@@ -995,16 +985,6 @@
     "fp": "0c269bf3ee095a76484d10896b853e2685ef9670d53ad71d829d742ad797f1e2"
   },
   {
-    "id": "interaction-mixed-north",
-    "name": "Thick north join with a low approach",
-    "fp": "e6433d103bdb53d5226caf856703f271f7951fb44dde144e91456cb40029edaf"
-  },
-  {
-    "id": "interaction-mixed-south",
-    "name": "Thick south join with a low approach",
-    "fp": "95d3af16534a37765471e179a458d9b4e680ab9bf9e08fd432d974a5f15a37ab"
-  },
-  {
     "id": "interaction-two-rooms",
     "name": "Two rooms \u00b7 door between different wall profiles",
     "fp": "1b1da98f4bbf8aa4e3bb8b7cbbbf67681b7e1aa5aebaa528310d1f271e900abc"
@@ -1043,5 +1023,20 @@
     "id": "interaction-room-returns-mirror",
     "name": "Connected rooms \u00b7 short returns beside two doors \u00b7 mirror",
     "fp": "36c5f6c992205efd86eed89848fb59c0ed0e1033a9cc15e701b655fb2e4ad8e8"
+  },
+  {
+    "id": "boundary-north-normal-thin",
+    "name": "North wall \u00b7 normal, thin partition",
+    "fp": "011d9986274ef9a6a3e69e16e45cb3ae8697cb8fa64989fd0868814d15888ab5"
+  },
+  {
+    "id": "boundary-north-normal-thick",
+    "name": "North wall \u00b7 normal, thick partition",
+    "fp": "2474be8fdf17bacb8fe51afcfff1f089311e522da3692d1d69ea75d92cb59bee"
+  },
+  {
+    "id": "boundary-north-low-thick",
+    "name": "North wall \u00b7 low, thick partition",
+    "fp": "5c18a3a0d1e93fd159d01f6bdd575c1f1cf64d7bf554e76ea98ceaf76d1c2e93"
   }
 ]

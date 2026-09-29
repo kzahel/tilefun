@@ -8,6 +8,14 @@ import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
+  it.each(["thin", "thick"])("joins a normal %s south wall without an exposed end", (thickness) => {
+    const c = boundaryReviewCases().find((c) => c.id === `boundary-south-normal-${thickness}`);
+    if (!c) throw new Error("Missing normal south fixture");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    const tops = map.surfaces.filter((s) => s.plane === "top:24");
+    expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
+    expect(map.surfaces.some((s) => s.plane === "south:24")).toBe(false);
+  });
   it.each(["thin", "thick"])("joins a normal %s north cap to the native rail", (thickness) => {
     const c = boundaryReviewCases().find((c) => c.id === `boundary-north-normal-${thickness}`);
     if (!c) throw new Error("Missing normal north fixture");
@@ -151,8 +159,8 @@ describe("experimental wall profiles", () => {
         for (const [x, y] of s.points) {
           expect(x).toBeGreaterThanOrEqual(0);
           expect(x).toBeLessThan(map.width * 16);
-          expect(y).toBeGreaterThanOrEqual(0);
-          expect(y).toBeLessThan(map.pixelHeight);
+          expect(y + (map.contentOffsetY ?? 0)).toBeGreaterThanOrEqual(0);
+          expect(y + (map.contentOffsetY ?? 0)).toBeLessThan(map.pixelHeight);
         }
     }
   });
@@ -225,9 +233,11 @@ describe("wall thickness and end connections", () => {
     for (const y of [6, 7])
       for (const x of [8, 9]) expect(map.cells[y]?.[x]?.semantic).toBe("opening");
   });
-  it("joins the tall north cap without clipping or reversing its projected segments", () => {
-    const tops = build("north-tall").surfaces.filter((s) => s.plane === "top:40");
-    expect(Math.min(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(5);
+  it("keeps the tall north cap above the normal shell without clipping", () => {
+    const map = build("north-tall");
+    const tops = map.surfaces.filter((s) => s.plane === "top:40");
+    expect(Math.min(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(5 - 16);
+    expect(map.contentOffsetY).toBe(16);
     for (const s of tops) {
       const [nw, ne, se, sw] = s.points;
       if (!nw || !ne || !se || !sw) throw new Error("Incomplete cap");
@@ -244,12 +254,12 @@ describe("wall thickness and end connections", () => {
     expect(Math.max(...points.map(([, y]) => y))).toBe(224);
     const tops = map.surfaces.filter((s) => s.plane.startsWith("top:"));
     expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(
-      height === "low" ? 224 : 192,
+      height === "low" ? 224 : 208,
     );
     const end = map.surfaces.filter((s) => s.plane === "south:28");
-    expect(end).toHaveLength(height === "low" ? 0 : 4);
+    expect(end).toHaveLength(height === "low" ? 0 : 2);
     if (height === "tall")
-      expect(Math.min(...end.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
+      expect(Math.min(...end.flatMap((s) => s.points.map(([, y]) => y)))).toBe(208);
     expect(map.pixelHeight).toBe(230);
     expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
   });

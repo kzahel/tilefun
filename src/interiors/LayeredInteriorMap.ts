@@ -30,6 +30,8 @@ export interface LayeredInteriorMap {
   width: number;
   height: number;
   pixelHeight: number;
+  /** Viewport padding for geometry that projects above the plan's origin. */
+  contentOffsetY?: number;
   cells: InteriorLayeredCell[][];
   surfaces?: InteriorSurface[];
 }
@@ -85,6 +87,8 @@ export function drawLayeredInteriorMap(
   layers: readonly InteriorLayer[] = INTERIOR_DRAW_ORDER,
 ): void {
   ctx.imageSmoothingEnabled = false;
+  ctx.save();
+  ctx.translate(0, map.contentOffsetY ?? 0);
   for (const layer of layers) {
     for (let y = 0; y < map.height; y++) {
       for (let x = 0; x < map.width; x++) {
@@ -113,6 +117,7 @@ export function drawLayeredInteriorMap(
     }
     if (layer === "wall" && map.surfaces) drawInteriorSurfaces(ctx, atlasImage, map.surfaces);
   }
+  ctx.restore();
 }
 
 /** Integer scan conversion keeps the experimental extrusions pixel-crisp. */

@@ -120,16 +120,18 @@ test("category counts verify old verdicts, distinguish wrong from unchecked, and
   await page.goto("/tilefun/interior-review.html?stage=8");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const option = page.locator('#stage option[value="8"]');
-  await expect(option).toHaveText("Thickness & end joins — 2 unchecked");
+  const unchecked =
+    8 - records.filter((r) => String(r.caseId).startsWith("connection-")).length + 1;
+  await expect(option).toHaveText(`Thickness & end joins — ${unchecked} unchecked`);
   await expect(page.locator('#stage option[value="0"]')).toHaveText("Tiny rooms — 0 unchecked · ✓");
   await page.locator("#stage").selectOption("8");
   await expect(page.locator("#case-id")).toHaveText("connection-straight");
   await page.locator("#good").click();
-  await expect(option).toHaveText("Thickness & end joins — 1 unchecked");
+  await expect(option).toHaveText(`Thickness & end joins — ${unchecked - 1} unchecked`);
   await page.locator("#undo").click();
-  await expect(option).toHaveText("Thickness & end joins — 2 unchecked");
+  await expect(option).toHaveText(`Thickness & end joins — ${unchecked} unchecked`);
   await page.waitForTimeout(180);
   await page.locator("#wrong").click();
-  await expect(option).toHaveText("Thickness & end joins — 1 unchecked · 1 wrong");
+  await expect(option).toHaveText(`Thickness & end joins — ${unchecked - 1} unchecked · 1 wrong`);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

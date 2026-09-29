@@ -29,8 +29,8 @@ describe("review coverage", () => {
         for (const [x, y] of s.points) {
           expect(x, c.id).toBeGreaterThanOrEqual(0);
           expect(x, c.id).toBeLessThan(map.width * 16);
-          expect(y, c.id).toBeGreaterThanOrEqual(0);
-          expect(y, c.id).toBeLessThan(map.pixelHeight);
+          expect(y + (map.contentOffsetY ?? 0), c.id).toBeGreaterThanOrEqual(0);
+          expect(y + (map.contentOffsetY ?? 0), c.id).toBeLessThan(map.pixelHeight);
         }
     }
     expect(combinations.size).toBe(12);
@@ -47,8 +47,8 @@ describe("review coverage", () => {
         for (const [x, y] of surface.points) {
           expect(x, c.id).toBeGreaterThanOrEqual(0);
           expect(x, c.id).toBeLessThan(map.width * 16);
-          expect(y, c.id).toBeGreaterThanOrEqual(0);
-          expect(y, c.id).toBeLessThan(map.pixelHeight);
+          expect(y + (map.contentOffsetY ?? 0), c.id).toBeGreaterThanOrEqual(0);
+          expect(y + (map.contentOffsetY ?? 0), c.id).toBeLessThan(map.pixelHeight);
         }
       if (c.stage !== 11) continue;
       const floors = new Set<string>();
@@ -138,6 +138,9 @@ describe("review verdict validity", () => {
       { x: 32, y: 32, size: 32 },
     ];
     expect(parseReviewFeedback({ ...record, pins }).pins).toEqual(pins);
+    expect(parseReviewFeedback({ ...record, pins: [{ x: 32, y: 48, size: 32 }] }).pins).toEqual([
+      { x: 32, y: 48, size: 32 },
+    ]);
     for (const bad of [
       null,
       [{ x: -16, y: 0, size: 16 }],

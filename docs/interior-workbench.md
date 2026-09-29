@@ -184,3 +184,10 @@ normal thin walls, then normal/low/tall thick walls at each boundary. These 7×7
 sketches fit a 224px canvas and complete the height/width matrix alongside earlier
 thin-wall approvals. Only the eight new candidates are unchecked; the same
 one-click review and two-report pause apply.
+
+The first three north cases passed. Tall north walls now rise above the shell,
+with viewport padding that keeps the entire wall visible and pins aligned.
+Normal south walls join the cutaway continuously; tall ones retain the physical
+height difference above that normal wall. This reopens four earlier tall
+attachments. Refresh shows nine unchecked cases, while 208 approved images stay
+unchanged. The rejected reports remain the first priority after reload.

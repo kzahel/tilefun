@@ -842,3 +842,28 @@ enough; passing structural bounds and screenshot checks does not approve their
 appearance. After this round, target compact door/corner and nearby-junction
 counterexamples, then automate selection of distinct generated interactions so
 human review remains small and high signal.
+
+### Separate physical shell height from cutaway height, 2026-09-29
+
+Three north cases passed. The reviewer rejected the tall north wall being
+flattened at its join and the normal south wall retaining a step beside another
+normal wall. Both expose the distinction between physical height and what the
+cutaway displays.
+
+North attachments now use the normal shell as their elevation reference: a tall
+cap remains 16px above its cap. Geometry keeps its plan coordinates, while a 16px
+viewport inset provides room above the shell without clipping. Floor-plan pins
+include this inset, and render pins map back to the correct plan row. Feedback
+accepts plan-sized pins offset by a 16px half-cell; no generated images are cached.
+
+South cutaways represent normal-height physical walls. They cover the first 24px
+of an adjoining wall even though their rendered trim is shallow. A normal wall
+therefore joins continuously; a tall wall exposes only its additional 16px.
+Low-wall appearances are preserved.
+
+The shared fix reopens four older north/south tall attachments. Their reference
+images are retained pending reapproval; the other 208 approved renders remain
+unchanged, including the three newly accepted north cases. Review the two reports
+first, then the three remaining boundary candidates and four reopened cases:
+nine unchecked in total. Geometry, seam pixels, overhang visibility, and pin
+persistence are covered by regression checks.

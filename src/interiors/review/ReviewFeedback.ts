@@ -20,7 +20,8 @@ export function parseReviewPins(value: unknown, sketch: string): ReviewPin[] {
       x < 0 ||
       y < 0 ||
       x % size !== 0 ||
-      y % size !== 0 ||
+      // North overhang padding shifts a plan-sized pin by half a cell.
+      y % 16 !== 0 ||
       x >= width ||
       y >= rows.length * 32
     )

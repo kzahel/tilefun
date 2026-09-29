@@ -110,10 +110,10 @@ export function buildProfileApartmentPlan(
       [-1, 0, 1].every((dx) => plan.rows[plan.height - 1]?.[w.x + dx] === "#");
     if (attachSouth) {
       const endY = (plan.height - 1) * 4;
-      // The low cutaway covers the first 8px of the end. A taller partition
-      // retains its height step above that connection instead of flattening.
+      // The shallow trim represents a normal-height wall under cutaway policy.
+      // Only elevation above that physical wall exposes an end at this join.
       for (let x = w.x * 4 + minX; x <= w.x * 4 + 3; x++) southPorts.add(key(x, endY));
-      const capX = (w.x * 4 + minX) * 8 - Math.min(WALL_HEIGHTS[w.height], WALL_HEIGHTS.low) / 4;
+      const capX = (w.x * 4 + minX) * 8 - Math.min(WALL_HEIGHTS[w.height], WALL_HEIGHTS.normal) / 4;
       // Write within each owning tile so the next trim tile cannot cover a
       // connection that crosses a 16px boundary.
       for (let x = capX + 1; x < capX + width * 8; x++)
@@ -207,7 +207,7 @@ export function buildProfileApartmentPlan(
     }
     if (attachNorth) {
       const h = WALL_HEIGHTS[w.height];
-      const lift = h >= WALL_HEIGHTS.normal ? 5 - (32 - h) : 0;
+      const lift = h >= WALL_HEIGHTS.normal ? 5 - (32 - WALL_HEIGHTS.normal) : 0;
       if (lift) {
         // The native north cap ends at y=5. Blend its connection back into the
         // ordinary projection over the first cell, keeping every segment monotone.
@@ -215,15 +215,16 @@ export function buildProfileApartmentPlan(
           for (let x = w.x * 4 + minX; x <= w.x * 4 + 3; x++)
             northPorts.set(key(x, y), { height: h, lift: (lift * (8 - y)) / 4 });
         const capX = (w.x * 4 + minX) * 8 - h / 4;
-        cellAt(Math.floor(capX / 16), 0).foreground.push({
-          key: wall(10, 2),
-          cropX: 2,
-          cropWidth: 1,
-          drawWidth: width * 8 - 1,
-          cropHeight: 1,
-          offsetX: (capX % 16) - 1,
-          offsetY: 5,
-        });
+        if (h === WALL_HEIGHTS.normal)
+          cellAt(Math.floor(capX / 16), 0).foreground.push({
+            key: wall(10, 2),
+            cropX: 2,
+            cropWidth: 1,
+            drawWidth: width * 8 - 1,
+            cropHeight: 1,
+            offsetX: (capX % 16) - 1,
+            offsetY: 5,
+          });
       }
     }
   }
@@ -238,7 +239,7 @@ export function buildProfileApartmentPlan(
           (Math.sign(port.railX - port.faceX) * Math.max(0, h - port.height)) / 4
         : x * 8 - h / 4,
       southPorts.has(key(x, y))
-        ? y * 8 - Math.max(0, h - WALL_HEIGHTS.low)
+        ? y * 8 - Math.max(0, h - WALL_HEIGHTS.normal)
         : y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
     ];
   };
@@ -260,7 +261,7 @@ export function buildProfileApartmentPlan(
       "top",
     );
     const south = southPorts.has(key(x, y + 1))
-      ? WALL_HEIGHTS.low
+      ? WALL_HEIGHTS.normal
       : (columns.get(key(x, y + 1))?.height ?? 0);
     for (let z = Math.min(south, h); z < h; z += 8)
       face(
@@ -302,6 +303,13 @@ export function buildProfileApartmentPlan(
   for (const s of surfaces)
     s.edges = s.points.map((a, i) => counts.get(edgeId(s, a, nextPoint(s, i))) === 1);
   map.surfaces = surfaces;
+  // Preserve tall overhangs above the north wall. Round the viewport padding to
+  // a half-cell so review pins remain aligned with their 16px pixel grid.
+  const minY = Math.min(0, ...surfaces.flatMap((s) => s.points.map(([, y]) => y)));
+  if (minY < 0) {
+    map.contentOffsetY = Math.ceil(-minY / 16) * 16;
+    map.pixelHeight += map.contentOffsetY;
+  }
   if (options.arch) {
     const { x, y } = options.arch;
     if (plan.rows[y]?.[x] !== "+") throw new Error("Arch requires an opening");

@@ -19,6 +19,7 @@ const STORAGE = "tilefun.indoor-review.v1";
 const API = "/tilefun/api/interior-review";
 interface ReadyCase extends ReviewCase {
   fingerprint: string;
+  contentOffsetY?: number;
 }
 interface State {
   current: string;
@@ -246,7 +247,7 @@ function draw(): void {
       cell.dataset.y = String(y);
       cell.setAttribute("aria-label", `Pin row ${y + 1}, column ${x + 1}`);
       cell.onclick = () => {
-        addPin({ x: x * 32, y: y * 32, size: 32 }, true);
+        addPin({ x: x * 32, y: y * 32 + (current?.contentOffsetY ?? 0), size: 32 }, true);
         cell.blur();
       };
       const profile = current.profiles?.walls.find((w) => w.x === x && w.y === y);
@@ -292,7 +293,8 @@ function drawPins(): void {
       pins.some(
         (p) =>
           Math.floor(p.x / 32) === Number(cell.dataset.x) &&
-          Math.floor(p.y / 32) === Number(cell.dataset.y),
+          Math.max(0, Math.floor((p.y - (current?.contentOffsetY ?? 0)) / 32)) ===
+            Number(cell.dataset.y),
       ),
     );
   }
@@ -308,7 +310,7 @@ function drawPins(): void {
     ctx.fillStyle = "#171e2a";
     ctx.fillText(String(i + 1), pin.x + 1, labelY + 10);
     const button = document.createElement("button");
-    button.textContent = `${i + 1} · R${Math.floor(pin.y / 32) + 1} C${Math.floor(pin.x / 32) + 1} ×`;
+    button.textContent = `${i + 1} · R${Math.max(0, Math.floor((pin.y - (current.contentOffsetY ?? 0)) / 32)) + 1} C${Math.floor(pin.x / 32) + 1} ×`;
     button.setAttribute("aria-label", `Remove pin ${i + 1}`);
     button.onclick = () => {
       state.annotation?.pins.splice(i, 1);
@@ -539,13 +541,14 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("resize", resizeCanvas);
 
-function renderCase(fixture: ReviewCase, image: HTMLCanvasElement): void {
+function renderCase(fixture: ReadyCase, image: HTMLCanvasElement): void {
   const plan = parseFloorPlan(fixture.sketch);
   const map = fixture.profiles
     ? buildProfileApartmentPlan(plan, fixture.profiles)
     : buildLayeredApartmentPlan(plan);
   image.width = map.width * 16;
   image.height = map.pixelHeight;
+  fixture.contentOffsetY = map.contentOffsetY ?? 0;
   const ctx = image.getContext("2d", { willReadFrequently: image === scratch });
   if (!ctx) throw new Error("Canvas is unavailable");
   ctx.fillStyle = "#171e2a";
