@@ -6,6 +6,10 @@ test("shared movement stops at furniture, supports precise placement, and saves 
   const posts: Record<string, unknown>[] = [];
   let offline = true;
   await page.route("**/api/interior-review", async (route) => {
+    if (route.request().method() === "GET") {
+      await route.fulfill({ json: [] });
+      return;
+    }
     posts.push(route.request().postDataJSON());
     await route.fulfill({ status: offline ? 503 : 200, json: { saved: !offline } });
   });
@@ -88,4 +92,87 @@ test("direction controls release and dragging selects actual sprite pixels", asy
   await page.reload();
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#x")).toHaveValue("82");
+});
+
+test("jumps onto tall furniture, records good verdicts, and reopens changed physics", async ({
+  page,
+}) => {
+  const posts: Record<string, unknown>[] = [];
+  await page.route("**/api/interior-review", async (route) => {
+    if (route.request().method() === "GET") {
+      await route.fulfill({ json: posts });
+      return;
+    }
+    posts.push(route.request().postDataJSON());
+    await route.fulfill({ json: { saved: true } });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  const canvas = page.locator("#room");
+  await page.locator("#gravity").selectOption("0.25");
+  await canvas.focus();
+  await page.keyboard.down("ArrowUp");
+  await page.waitForTimeout(500);
+  await page.keyboard.up("ArrowUp");
+  await page.keyboard.down("Space");
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-player-z")))
+    .toBeGreaterThan(34);
+  await page.keyboard.down("ArrowUp");
+  await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerY) < 86);
+  await page.keyboard.up("ArrowUp");
+  await expect(canvas).toHaveAttribute("data-airborne", "false");
+  await page.keyboard.up("Space");
+  await expect(canvas).toHaveAttribute("data-player-z", "32");
+  await expect(page.locator("#position")).toContainText("On object");
+  await page.locator("#good").click();
+  await expect(page.locator("#grade")).toContainText("✓ Looks good");
+  expect(posts[0]?.verdict).toBe("good");
+  expect(posts[0]?.playtest).toMatchObject({
+    playerZ: 32,
+    groundZ: 32,
+    gravityScale: 0.25,
+    bodies: { wardrobe: { height: 32, walkableTop: true } },
+  });
+  await page.reload();
+  await expect(page.locator("#grade")).toContainText("✓ Looks good");
+  await expect(page.locator("#gravity")).toHaveValue("0.25");
+  await page.locator("#physics-controls summary").click();
+  await page.locator("#height").fill("40");
+  await page.locator("#apply-height").click();
+  await expect(page.locator("#status")).toHaveText("Collision height updated.");
+  await expect(page.locator("#grade")).toContainText("Unchecked");
+  await page.locator("#good").click();
+  await expect(page.locator("#grade")).toContainText("✓ Looks good");
+  expect(posts.at(-1)?.playtest).toMatchObject({
+    bodies: { wardrobe: { height: 40, walkableTop: true } },
+  });
+  await page.locator("#gravity").selectOption("1");
+  await expect(page.locator("#grade")).toContainText("Unchecked");
+  await page.locator("#depth").check();
+  await expect(page.locator("#depth-help")).toContainText("not object height");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+});
+
+test("phone jump control releases on cancellation and high jumps stay in view", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await page.locator("#gravity").selectOption("0.1");
+  const jump = page.locator("#jump");
+  await jump.scrollIntoViewIfNeeded();
+  const b = await jump.boundingBox();
+  if (!b) throw new Error("Missing jump control");
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  await page.mouse.down();
+  await expect
+    .poll(async () => Number(await page.locator("#room").getAttribute("data-view-offset-y")))
+    .toBeGreaterThan(0);
+  await jump.dispatchEvent("pointercancel", { pointerId: 1 });
+  await page.mouse.up();
+  await expect(page.locator("#room")).toHaveAttribute("data-airborne", "false", { timeout: 8000 });
+  await expect(page.locator("#room")).toHaveAttribute("data-player-z", "0");
+  await expect(page.locator("#room")).toHaveAttribute("data-view-offset-y", "0");
 });

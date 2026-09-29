@@ -181,3 +181,50 @@ placements, and offline report retries. All 233 approved wall renders remain
 identical. The explicitly approved bedside scene also matches its saved verdict
 and joins the regression baseline (234 images total); no other furniture case is
 promoted. Biome remains at the existing 65 warnings and five infos.
+
+## Height, jumping, and positive runtime verdicts, 2026-09-29
+
+The movement test now passes finite `zHeight`/`walkableTop` colliders to the same
+prop collision and surface-sampling code used in the game. Space or the holdable
+phone Jump button uses the real jump input path; the player can land on furniture,
+stand there, and fall when walking off. Gravity presets (1, 0.5, 0.25, and 0.1)
+allow inspection of tall objects. Reset player clears height, vertical velocity,
+and jump state. The view follows unusually high jumps so the player stays visible.
+
+`FurniturePhysics.ts` holds provisional runtime heights for the four blocking
+objects in these three scenes: bunk 24px, wardrobe 32px, table and stool 10px.
+They are candidates for review, not inferred approvals of the sprites. The
+selected object's height and landable-top flag can be edited and saved locally.
+Height edits that would intersect the player are rejected. These runtime values
+are separate from static catalog metadata, preserving the prior static approval.
+The current shape is one rectangular prism per object; plants remain nonblocking
+surface decorations. Compound bodies and multiple top surfaces are future work.
+
+The collision overlay now draws ground and raised top rectangles with vertical
+edges, including the player's volume at its actual Z. Green tops are landable.
+“Depth lines” is renamed “Draw-order guides,” with an explanation that these
+lines describe rendering order, not physical height. Player sprites shift upward
+by world Z and use the game's Y+Z sorting convention.
+
+Both **Looks good** and **Report issue** are always visible at the bottom of the
+screen. Either captures the scene, screenshot, player XYZ/vertical velocity,
+gravity, collider heights, and landability. Runtime verdicts persist through the
+same offline outbox and server inbox as other feedback, but never approve static
+catalog cases. The displayed verdict applies only to matching placements,
+catalog metadata, runtime physics version, and gravity; changing these shows
+Unchecked. Walking or changing diagnostic overlays does not erase a verdict.
+New runtime physics or rendering behavior must bump the runtime version.
+
+Next review: check whether the raised collider tops match each sprite and whether
+landing/standing looks and feels correct, then refine those heights before adding
+more furniture. Normal gravity should not reach the wardrobe; 0.25× can.
+
+Validation: typecheck and production build pass, as do 947 unit tests. The full
+browser run passed 88 cases; the remaining jump-control test was clicking below
+its desktop viewport. Giving that phone test an explicit phone viewport and
+scrolling its control into view made its rerun pass (89 browser cases verified).
+New checks cover actual low-gravity landing, standing and falling, height-based
+collision, airborne reset, persisted good verdicts and their invalidation,
+phone jump cancellation, and keeping very high jumps visible. The public phone
+smoke test visibly landed on the wardrobe at Z=32. The exact 234-image static
+baseline still passes. Biome retains 65 warnings and five infos.

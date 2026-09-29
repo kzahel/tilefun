@@ -14,6 +14,7 @@ import {
 } from "../FurnishedInterior.js";
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
 import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH } from "../FurnitureMotion.js";
+import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
 import spriteIndexUrl from "../review/assets/review-sprites.json?url";
 import spriteUrl from "../review/assets/review-sprites.png?url";
 import { parseReviewFeedback, type ReviewFeedback } from "../review/ReviewFeedback.js";
@@ -25,14 +26,17 @@ root.innerHTML = `<header><a href="./interior-review.html?stage=15">← Review</
 <h1>Furniture in motion</h1><p>Walk behind and in front. Check what actually blocks your feet.</p>
 <div class="toolbar"><label>Scene <select id="scene">${MOTION_SCENES.map((s) => `<option value="${s.id}">${s.name}</option>`).join("")}</select></label><button id="reset">Reset scene</button></div>
 <div id="viewport"><canvas id="room" tabindex="0" aria-label="Furniture movement test"></canvas></div>
-<div class="toolbar"><label><input id="collisions" type="checkbox" checked> Collision</label><label><input id="bounds" type="checkbox"> Sprite bounds</label><label><input id="depth" type="checkbox"> Depth lines</label></div>
-<p class="legend">Pink: solid footprint · Cyan: player’s feet · White: image extent</p>
+<div class="toolbar"><label><input id="collisions" type="checkbox" checked> Collision</label><label><input id="bounds" type="checkbox"> Sprite bounds</label><label><input id="depth" type="checkbox"> Draw-order guides</label></div>
+<p class="legend">Pink: solid volume · Green: landable top · Cyan: player volume</p>
+<p id="depth-help" hidden>Yellow lines mark drawing order, not object height. Jumping raises the player’s drawing priority, as in the game. Collision boxes show actual heights.</p>
+<div class="toolbar"><label>Gravity <select id="gravity"><option value="1">Normal · 1×</option><option value="0.5">Low · 0.5×</option><option value="0.25">Very low · 0.25×</option><option value="0.1">Test tall objects · 0.1×</option></select></label></div>
 <div class="toolbar"><label>Mode <select id="mode"><option value="walk">Walk</option><option value="place">Place furniture</option></select></label><button id="circle">Walk around object</button><button id="home">Reset player</button></div>
-<div id="walk-controls"><p>Arrow keys / WASD, or hold a direction below.</p><div class="pad"><button data-dx="-1" data-dy="0" aria-label="Walk left">←</button><button data-dx="0" data-dy="-1" aria-label="Walk up">↑</button><button data-dx="0" data-dy="1" aria-label="Walk down">↓</button><button data-dx="1" data-dy="0" aria-label="Walk right">→</button></div></div>
+<div id="walk-controls"><p>Arrow keys / WASD to move, hold Space to jump. Lower gravity reaches taller objects.</p><div class="pad"><button data-dx="-1" data-dy="0" aria-label="Walk left">←</button><button data-dx="0" data-dy="-1" aria-label="Walk up">↑</button><button data-dx="0" data-dy="1" aria-label="Walk down">↓</button><button data-dx="1" data-dy="0" aria-label="Walk right">→</button><button id="jump">Jump</button></div></div>
 <div class="toolbar"><label>Object <select id="object"></select></label><span id="dimensions"></span></div>
+<details id="physics-controls"><summary>Object collision height</summary><p>These are starting estimates to test against the art. Changes are saved with your review.</p><div class="toolbar"><label>Height (px) <input id="height" type="number" min="1" max="64" step="1"></label><label><input id="landable" type="checkbox"> Can stand on top</label><button id="apply-height">Apply height</button></div></details>
 <div id="placement" hidden><p>Drag the object, or adjust its ground anchor by single pixels. Items on top move with it.</p><div class="toolbar"><label>X <input id="x" type="number" step="1"></label><label>Y <input id="y" type="number" step="1"></label><button id="apply">Apply position</button></div><div class="pad"><button data-nx="-1" data-ny="0" aria-label="Move object left one pixel">← 1px</button><button data-nx="0" data-ny="-1" aria-label="Move object up one pixel">↑ 1px</button><button data-nx="0" data-ny="1" aria-label="Move object down one pixel">↓ 1px</button><button data-nx="1" data-ny="0" aria-label="Move object right one pixel">→ 1px</button></div></div>
 <p id="position"></p><p id="status" role="status">Preparing scene…</p>
-<section class="report"><label>Optional note <input id="note" maxlength="1800" placeholder="e.g. I stop too far from the wardrobe"></label><button id="report">Report issue</button><p>Your scene, player position and screenshot are included.</p></section>`;
+<section class="report"><p id="grade" role="status">Unchecked</p><label>Optional note <input id="note" maxlength="1800" placeholder="e.g. I stop too far from the wardrobe"></label><div class="verdict-buttons"><button id="good">Looks good</button><button id="report">Report issue</button></div><p>Your scene, player height, gravity, object settings and screenshot are included.</p></section>`;
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = el<HTMLCanvasElement>("room"),
   ctx = canvas.getContext("2d");
@@ -44,6 +48,22 @@ const storage = "tilefun.furniture-motion.v1",
   outboxKey = "tilefun.furniture-motion-outbox.v1";
 let saved: Record<string, FurniturePlacement[]> = {};
 let outbox: ReviewFeedback[] = [];
+let records: ReviewFeedback[] = [];
+const recordsKey = "tilefun.furniture-motion-verdicts.v1",
+  physicsKey = "tilefun.furniture-motion-physics.v1";
+let savedPhysics: Record<string, { bodies: FurnitureBodies; gravityScale: number }> = {};
+try {
+  records = JSON.parse(localStorage.getItem(recordsKey) ?? "[]").map(parseReviewFeedback);
+} catch {
+  records = [];
+}
+try {
+  savedPhysics = JSON.parse(localStorage.getItem(physicsKey) ?? "{}");
+  if (!savedPhysics || Array.isArray(savedPhysics) || typeof savedPhysics !== "object")
+    savedPhysics = {};
+} catch {
+  savedPhysics = {};
+}
 try {
   saved = JSON.parse(localStorage.getItem(storage) ?? "{}");
   if (!saved || Array.isArray(saved) || typeof saved !== "object") saved = {};
@@ -73,6 +93,8 @@ let circling = false,
   stuck = 0;
 const keys = new Set<string>();
 let held: [number, number] = [0, 0];
+let jumpHeld = false;
+let viewOffsetY = 0;
 const atlas = new Image(),
   playerImage = new Image();
 const camera = new Camera();
@@ -95,18 +117,59 @@ function selection() {
   if (!o) throw new Error("Missing selected object");
   return o;
 }
+function sceneSignature() {
+  return JSON.stringify({
+    version: FURNITURE_PHYSICS_VERSION,
+    sketch: MOTION_SKETCH,
+    furniture: furnitureSignature(model.furniture),
+    bodies: model.bodies,
+    gravityScale: model.gravityScale,
+  });
+}
+function grade() {
+  const latest = records.filter((r) => r.caseId === `furniture-motion-${scene.value}`).at(-1);
+  el("grade").textContent =
+    latest?.playtest?.sceneSignature === sceneSignature()
+      ? latest.verdict === "good"
+        ? "✓ Looks good — this layout and physics settings"
+        : "Issue reported for this layout and physics settings"
+      : "Unchecked — this layout and physics settings";
+}
+function remember(row: ReviewFeedback) {
+  const { screenshot: _screenshot, ...metadata } = row;
+  const merged = new Map(records.map((r) => [r.id, r]));
+  merged.set(row.id, metadata);
+  records = [...merged.values()].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  // Keep the latest verdict per scene; changing a scene never resurrects an older approval.
+  records = [...new Map(records.map((r) => [r.caseId, r])).values()];
+  try {
+    localStorage.setItem(recordsKey, JSON.stringify(records));
+  } catch {
+    /* Outbox remains authoritative. */
+  }
+  grade();
+}
 function fields() {
   const o = selection();
   el<HTMLInputElement>("x").value = String(o.x);
   el<HTMLInputElement>("y").value = String(o.y);
   el("dimensions").textContent =
     `Solid ${o.footprint.width}×${o.footprint.height}px · Sprite ${o.definition.size.join("×")}px`;
+  const body = model.bodies[o.placement.id];
+  el("dimensions").textContent += body ? ` · Height ${body.height}px` : "";
+  if (body) {
+    el<HTMLInputElement>("height").value = String(body.height);
+    el<HTMLInputElement>("landable").checked = body.walkableTop;
+  }
+  grade();
   dirty = true;
 }
 function persist() {
   saved[scene.value] = model.furniture;
+  savedPhysics[scene.value] = { bodies: model.bodies, gravityScale: model.gravityScale };
   try {
     localStorage.setItem(storage, JSON.stringify(saved));
+    localStorage.setItem(physicsKey, JSON.stringify(savedPhysics));
   } catch {
     status("Placement works, but browser storage is full; reload will lose it.");
   }
@@ -116,14 +179,19 @@ function load(reset = false) {
   placementError = "";
   keys.clear();
   held = [0, 0];
+  jumpHeld = false;
   const preset = MOTION_SCENES.find((s) => s.id === scene.value) ?? defaultScene();
   try {
     model = new FurnitureMotion(
       !reset && saved[preset.id] ? (saved[preset.id] ?? preset.furniture) : preset.furniture,
+      reset ? undefined : savedPhysics[preset.id]?.bodies,
     );
   } catch {
     model = new FurnitureMotion(preset.furniture);
   }
+  const gravity = reset ? 1 : (savedPhysics[preset.id]?.gravityScale ?? 1);
+  model.gravityScale = [1, 0.5, 0.25, 0.1].includes(gravity) ? gravity : 1;
+  el<HTMLSelectElement>("gravity").value = String(model.gravityScale);
   if (reset) persist();
   object.replaceChildren(
     ...model.objects
@@ -174,6 +242,7 @@ mode.onchange = () => {
   stop();
   keys.clear();
   held = [0, 0];
+  jumpHeld = false;
   el("placement").hidden = mode.value !== "place";
   el("walk-controls").hidden = mode.value !== "walk";
   canvas.style.cursor = mode.value === "place" ? "grab" : "default";
@@ -188,20 +257,62 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-nx]"))
   };
 for (const id of ["collisions", "bounds", "depth"])
   el(id).onchange = () => {
+    el("depth-help").hidden = !el<HTMLInputElement>("depth").checked;
     dirty = true;
   };
 el("home").onclick = () => {
-  stop();
-  if (model.canStand(80, 120)) {
-    model.player.position = { wx: 80, wy: 120 };
-    model.player.velocity = { vx: 0, vy: 0 };
+  clearInput();
+  try {
+    model.resetPlayer();
     dirty = true;
-  } else status("Move furniture away from the starting position first.");
+    status("Player reset.");
+  } catch (error) {
+    status(String(error));
+  }
 };
+el("gravity").onchange = () => {
+  model.gravityScale = Number(el<HTMLSelectElement>("gravity").value);
+  persist();
+  grade();
+};
+el("apply-height").onclick = () => {
+  stop();
+  try {
+    model.setBody(object.value, {
+      height: el<HTMLInputElement>("height").valueAsNumber,
+      walkableTop: el<HTMLInputElement>("landable").checked,
+    });
+    persist();
+    fields();
+    placementError = "";
+    status("Collision height updated.");
+  } catch (error) {
+    placementError = String(error);
+    status(placementError);
+  }
+};
+const jumpButton = el<HTMLButtonElement>("jump");
+jumpButton.onpointerdown = (e) => {
+  e.preventDefault();
+  stop();
+  jumpHeld = true;
+  jumpButton.setPointerCapture(e.pointerId);
+};
+const releaseJump = () => {
+  jumpHeld = false;
+};
+jumpButton.onpointerup = releaseJump;
+jumpButton.onpointercancel = releaseJump;
+jumpButton.onlostpointercapture = releaseJump;
 el("circle").onclick = () => {
   if (circling) {
     stop();
     status("Walk stopped.");
+    return;
+  }
+  clearInput();
+  if ((model.player.wz ?? 0) > 0 || model.player.jumpVZ !== undefined) {
+    status("Reset the player to the floor before starting the automatic walk.");
     return;
   }
   targets = model.circleTargets(object.value);
@@ -226,6 +337,7 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-dx]")) 
   button.onlostpointercapture = release;
 }
 const movementKeys = new Set([
+  "Space",
   "ArrowLeft",
   "ArrowRight",
   "ArrowUp",
@@ -250,6 +362,7 @@ addEventListener("keyup", (e) => keys.delete(e.code));
 function clearInput() {
   keys.clear();
   held = [0, 0];
+  jumpHeld = false;
   stop();
 }
 addEventListener("blur", clearInput);
@@ -260,7 +373,7 @@ const point = (e: PointerEvent): [number, number] => {
   const b = canvas.getBoundingClientRect();
   return [
     ((e.clientX - b.left) * canvas.width) / b.width,
-    ((e.clientY - b.top) * canvas.height) / b.height,
+    ((e.clientY - b.top) * canvas.height) / b.height - viewOffsetY,
   ];
 };
 let drag: { pointer: number; x: number; y: number; px: number; py: number } | null = null;
@@ -308,12 +421,15 @@ function draw() {
   const p = model.player,
     s = p.sprite;
   if (!s) return;
+  viewOffsetY = Math.max(0, Math.ceil(24 + (p.wz ?? 0) - p.position.wy));
+  ctx.save();
+  ctx.translate(0, viewOffsetY);
   const item: SpriteItem = {
     kind: "sprite",
-    sortKey: p.position.wy,
+    sortKey: p.position.wy + (p.wz ?? 0),
     wx: p.position.wx,
     wy: p.position.wy,
-    zOffset: 0,
+    zOffset: p.wz ?? 0,
     sheetKey: "player",
     frameCol: s.frameCol,
     frameRow: s.frameRow,
@@ -336,19 +452,43 @@ function draw() {
     [
       {
         id: "player",
-        depth: p.position.wy,
+        depth: p.position.wy + (p.wz ?? 0),
         draw: (c) => drawScene2D(c, camera, [item], sheets, undefined),
       },
     ],
     model.placementArea,
   );
   if (el<HTMLInputElement>("collisions").checked) {
-    ctx.strokeStyle = "#ff719a";
-    for (const { bounds: b } of model.collisionBoxes())
-      ctx.strokeRect(b.left + 0.5, b.top + 0.5, b.right - b.left - 1, b.bottom - b.top - 1);
-    const r = model.playerBounds();
-    ctx.strokeStyle = "#62efff";
-    ctx.strokeRect(r.left + 0.5, r.top + 0.5, r.right - r.left - 1, r.bottom - r.top - 1);
+    const box = (
+      b: { left: number; top: number; right: number; bottom: number },
+      z: number,
+      height: number,
+      color: string,
+      topColor: string,
+    ) => {
+      const x = b.left + 0.5,
+        y = b.top - z + 0.5,
+        w = b.right - b.left - 1,
+        h = b.bottom - b.top - 1;
+      ctx.strokeStyle = color;
+      ctx.strokeRect(x, y, w, h);
+      ctx.beginPath();
+      for (const [cx, cy] of [
+        [x, y],
+        [x + w, y],
+        [x, y + h],
+        [x + w, y + h],
+      ]) {
+        ctx.moveTo(cx ?? 0, cy ?? 0);
+        ctx.lineTo(cx ?? 0, (cy ?? 0) - height);
+      }
+      ctx.stroke();
+      ctx.strokeStyle = topColor;
+      ctx.strokeRect(x, y - height, w, h);
+    };
+    for (const b of model.collisionBoxes())
+      box(b.bounds, 0, b.height, "#ff719a", b.walkableTop ? "#80edb1" : "#ff719a");
+    box(model.playerBounds(), p.wz ?? 0, p.collider?.physicalHeight ?? 12, "#62efff", "#62efff");
     ctx.strokeStyle = "#536c85";
     ctx.strokeRect(
       model.floor.left + 0.5,
@@ -369,7 +509,7 @@ function draw() {
       );
     ctx.strokeRect(
       Math.floor(p.position.wx - 8) + 0.5,
-      Math.floor(p.position.wy - 16) + 0.5,
+      Math.floor(p.position.wy - (p.wz ?? 0) - 16) + 0.5,
       15,
       15,
     );
@@ -384,7 +524,7 @@ function draw() {
       ctx.stroke();
     }
     ctx.fillStyle = "#62efff";
-    ctx.fillRect(Math.floor(p.position.wx) - 7, Math.floor(p.position.wy), 14, 1);
+    ctx.fillRect(Math.floor(p.position.wx) - 7, Math.floor(p.position.wy + (p.wz ?? 0)), 14, 1);
   }
   if (mode.value === "place") {
     const o = selection();
@@ -399,11 +539,16 @@ function draw() {
     ctx.fillRect(o.x - 2, o.y, 5, 1);
     ctx.fillRect(o.x, o.y - 2, 1, 5);
   }
+  ctx.restore();
+  canvas.dataset.viewOffsetY = String(viewOffsetY);
   canvas.dataset.playerX = p.position.wx.toFixed(3);
   canvas.dataset.playerY = p.position.wy.toFixed(3);
+  canvas.dataset.playerZ = String(p.wz ?? 0);
+  canvas.dataset.groundZ = String(p.groundZ ?? 0);
+  canvas.dataset.airborne = String(p.jumpVZ !== undefined);
   canvas.dataset.circling = String(circling);
   el("position").textContent =
-    `Player feet: ${p.position.wx.toFixed(1)}, ${p.position.wy.toFixed(1)} · Collision box: 10×6px`;
+    `Player feet: ${p.position.wx.toFixed(1)}, ${p.position.wy.toFixed(1)} · Height: ${(p.wz ?? 0).toFixed(1)}px · ${p.jumpVZ !== undefined ? "Airborne" : (p.wz ?? 0) > 0 ? "On object" : "On floor"}`;
   dirty = false;
 }
 function autoVector(): [number, number] {
@@ -457,8 +602,10 @@ function frame(now: number) {
     }
     const { wx, wy } = model.player.position,
       oldFrame = model.player.sprite?.frameCol,
-      oldFacing = model.player.sprite?.frameRow;
-    model.step(dx, dy);
+      oldFacing = model.player.sprite?.frameRow,
+      oldZ = model.player.wz,
+      oldAirborne = model.player.jumpVZ !== undefined;
+    model.step(dx, dy, 1 / 120, mode.value === "walk" && (jumpHeld || keys.has("Space")));
     const moved = Math.hypot(model.player.position.wx - wx, model.player.position.wy - wy);
     if (circling && (dx || dy)) {
       stuck = moved < 0.001 ? stuck + 1 : 0;
@@ -470,6 +617,8 @@ function frame(now: number) {
     if (
       moved ||
       oldFrame !== model.player.sprite?.frameCol ||
+      oldZ !== model.player.wz ||
+      oldAirborne !== (model.player.jumpVZ !== undefined) ||
       oldFacing !== model.player.sprite?.frameRow
     )
       dirty = true;
@@ -509,16 +658,24 @@ async function sync() {
     syncing = false;
   }
 }
-el("report").onclick = async () => {
+async function submit(verdict: "good" | "wrong") {
   if (!ready) return;
   const button = el<HTMLButtonElement>("report");
   button.disabled = true;
-  stop();
+  el<HTMLButtonElement>("good").disabled = true;
+  clearInput();
   draw();
   try {
     const playtest = {
       playerX: model.player.position.wx,
       playerY: model.player.position.wy,
+      playerZ: model.player.wz ?? 0,
+      groundZ: model.player.groundZ ?? 0,
+      ...(model.player.jumpVZ !== undefined ? { jumpVZ: model.player.jumpVZ } : {}),
+      bodies: structuredClone(model.bodies),
+      gravityScale: model.gravityScale,
+      physicsVersion: FURNITURE_PHYSICS_VERSION,
+      sceneSignature: sceneSignature(),
       facing: model.player.sprite?.frameRow ?? 0,
       selected: object.value,
       mode: mode.value as "walk" | "place",
@@ -539,7 +696,7 @@ el("report").onclick = async () => {
     const fingerprint = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
-    outbox.push({
+    const row: ReviewFeedback = {
       id: crypto.randomUUID(),
       caseId: `furniture-motion-${sceneId}`,
       name,
@@ -550,21 +707,42 @@ el("report").onclick = async () => {
       fingerprint,
       screenshot,
       note,
-      verdict: "wrong",
+      verdict,
       createdAt: new Date().toISOString(),
-    });
+    };
+    outbox.push(row);
+    remember(row);
     const stored = storeOutbox();
     el<HTMLInputElement>("note").value = "";
     status(
       stored
-        ? "Issue captured. Say ‘ready’ in chat when you want me to check it."
+        ? verdict === "good"
+          ? "Looks good recorded. Try the next scene when ready."
+          : "Issue captured. Say ‘ready’ in chat when you want me to check it."
         : "Issue captured in memory. Keep this page open until the report is saved.",
     );
     await sync();
   } finally {
     button.disabled = false;
+    el<HTMLButtonElement>("good").disabled = false;
   }
-};
+}
+el("report").onclick = () => void submit("wrong");
+el("good").onclick = () => void submit("good");
+async function loadVerdicts() {
+  try {
+    const response = await fetch("/tilefun/api/interior-review", { cache: "no-store" });
+    if (!response.ok) return;
+    const rows: unknown = await response.json();
+    if (Array.isArray(rows))
+      for (const row of rows) {
+        const parsed = parseReviewFeedback(row);
+        if (parsed.caseId.startsWith("furniture-motion-") && parsed.playtest) remember(parsed);
+      }
+  } catch {
+    /* Local verdicts and outbox remain available offline. */
+  }
+}
 async function start() {
   atlas.src = spriteUrl;
   playerImage.src = `${import.meta.env.BASE_URL}assets/sprites/player.png`;
@@ -584,7 +762,9 @@ async function start() {
   el("sync").textContent = "Ready";
   draw();
   el("app").dataset.ready = "true";
+  for (const row of outbox) remember(row);
   void sync();
+  void loadVerdicts();
 }
 void start().catch((error) => status(`Could not start: ${String(error)}`));
 setInterval(() => {

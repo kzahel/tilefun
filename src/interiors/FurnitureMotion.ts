@@ -8,6 +8,12 @@ import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { compileFurniture, type PlacedFurniture } from "./FurnishedInterior.js";
 import type { FurnitureDefinition, FurniturePlacement } from "./FurnitureCatalog.js";
+import {
+  FURNITURE_BODIES,
+  type FurnitureBodies,
+  type FurnitureBody,
+  parseFurnitureBodies,
+} from "./FurniturePhysics.js";
 
 export const MOTION_SKETCH = "#####\n#LLL#\n#LLL#\n#LLL#\n#####";
 export const MOTION_SCENES = [
@@ -29,10 +35,21 @@ export const MOTION_SCENES = [
 ] satisfies { id: string; name: string; furniture: FurniturePlacement[] }[];
 
 /** Convert curated floor rectangles to the same bottom-centred colliders used by game props. */
-export function furnitureCollider(d: FurnitureDefinition): PropCollider | null {
+export function furnitureCollider(
+  d: FurnitureDefinition,
+  body = FURNITURE_BODIES[d.id],
+): PropCollider | null {
   if (!d.blocking) return null;
+  if (!body) throw new Error(`No reviewed physics candidate for ${d.id}`);
   const r = d.footprint;
-  return { offsetX: r.x + r.width / 2, offsetY: r.y + r.height, width: r.width, height: r.height };
+  return {
+    zHeight: body.height,
+    walkableTop: body.walkableTop,
+    offsetX: r.x + r.width / 2,
+    offsetY: r.y + r.height,
+    width: r.width,
+    height: r.height,
+  };
 }
 
 export class FurnitureMotion {
@@ -41,14 +58,27 @@ export class FurnitureMotion {
   readonly player = createPlayer(80, 120);
   furniture: FurniturePlacement[];
   objects: PlacedFurniture[];
+  bodies: FurnitureBodies;
+  gravityScale = 1;
   /** Physical inner edges of this sealed, rectangular test room, in pixels. No 32px wall-cell blocking. */
   readonly floor = { left: 8, top: 32, right: 152, bottom: 128 };
   readonly placementArea = { x: 8, y: 32, width: 144, height: 96 };
   readonly context: MovementContext;
   private jumpState = { jumpConsumed: false, lastJumpHeld: false };
-  constructor(furniture: readonly FurniturePlacement[]) {
+  constructor(furniture: readonly FurniturePlacement[], bodies?: FurnitureBodies) {
     this.furniture = structuredClone([...furniture]);
     this.objects = compileFurniture(this.plan, this.furniture, this.placementArea);
+    this.bodies = parseFurnitureBodies(
+      bodies ??
+        Object.fromEntries(
+          this.objects
+            .filter((o) => o.definition.blocking)
+            .map((o) => [o.placement.id, FURNITURE_BODIES[o.definition.id]]),
+        ),
+    );
+    for (const o of this.objects)
+      if (o.definition.blocking && !this.bodies[o.placement.id])
+        throw new Error("Missing furniture height");
     this.context = {
       getCollision: () => 0,
       getHeight: () => 0,
@@ -63,7 +93,7 @@ export class FurnitureMotion {
           aabbOverlapsPropWalls(
             aabb,
             { wx: o.x, wy: o.y },
-            { collider: furnitureCollider(o.definition), walls: null },
+            { collider: furnitureCollider(o.definition, this.bodies[o.placement.id]), walls: null },
             wz,
             height,
           ),
@@ -82,12 +112,12 @@ export class FurnitureMotion {
       this.player.position = { wx: spawn[0], wy: spawn[1] };
     }
   }
-  canStand(x: number, y: number): boolean {
+  canStand(x: number, y: number, z = 0): boolean {
     const c = this.player.collider;
     if (!c) return false;
     return !this.context.isPropBlocked(
       getEntityAABB({ wx: x, wy: y }, c),
-      0,
+      z,
       c.physicalHeight ?? 12,
     );
   }
@@ -96,26 +126,42 @@ export class FurnitureMotion {
     if (!collider) throw new Error("Missing player collider");
     return getEntityAABB(this.player.position, collider);
   }
-  collisionBoxes(): { id: string; bounds: AABB }[] {
+  collisionBoxes(): { id: string; bounds: AABB; height: number; walkableTop: boolean }[] {
     return this.objects.flatMap((o) => {
-      const c = furnitureCollider(o.definition);
-      return c ? [{ id: o.placement.id, bounds: getEntityAABB({ wx: o.x, wy: o.y }, c) }] : [];
+      const c = furnitureCollider(o.definition, this.bodies[o.placement.id]);
+      return c
+        ? [
+            {
+              id: o.placement.id,
+              bounds: getEntityAABB({ wx: o.x, wy: o.y }, c),
+              height: c.zHeight ?? 0,
+              walkableTop: c.walkableTop ?? false,
+            },
+          ]
+        : [];
     });
   }
   /** Reuse the exact player input/physics step used by client prediction and the server. */
-  step(dx: number, dy: number, dt = 1 / 120): void {
+  step(dx: number, dy: number, dt = 1 / 120, jump = false): void {
     const length = Math.hypot(dx, dy),
       scale = Math.max(1, length);
-    const input: Movement = { dx: dx / scale, dy: dy / scale, sprinting: false, jump: false };
+    const input: Movement = { dx: dx / scale, dy: dy / scale, sprinting: false, jump };
     this.jumpState = stepPlayerFromInput(
       this.player,
       input,
       Math.min(dt, 1 / 120),
       this.context,
       () => 0,
-      () => ({ props: [], entities: [] }),
+      () => ({
+        props: this.objects.map((o) => ({
+          position: { wx: o.x, wy: o.y },
+          collider: furnitureCollider(o.definition, this.bodies[o.placement.id]),
+          walls: null,
+        })),
+        entities: [],
+      }),
       this.jumpState,
-      getMovementPhysicsParams(),
+      { ...getMovementPhysicsParams(), gravityScale: this.gravityScale },
     ).jumpState;
     const sprite = this.player.sprite;
     if (sprite) {
@@ -150,11 +196,32 @@ export class FurnitureMotion {
         throw new Error("Sprite would leave the room view");
     this.furniture = next;
     this.objects = objects;
-    if (!this.canStand(this.player.position.wx, this.player.position.wy)) {
+    if (!this.canStand(this.player.position.wx, this.player.position.wy, this.player.wz ?? 0)) {
       this.furniture = previous;
       this.objects = oldObjects;
       throw new Error("That would overlap the player");
     }
+  }
+  setBody(id: string, body: FurnitureBody): void {
+    if (!this.bodies[id]) throw new Error("Missing furniture body");
+    const next = parseFurnitureBodies({ ...this.bodies, [id]: body });
+    const previous = this.bodies;
+    this.bodies = next;
+    if (!this.canStand(this.player.position.wx, this.player.position.wy, this.player.wz ?? 0)) {
+      this.bodies = previous;
+      throw new Error("That height would overlap the player; move or reset the player first");
+    }
+  }
+  resetPlayer(): void {
+    if (!this.canStand(80, 120))
+      throw new Error("Move furniture away from the starting position first");
+    this.player.position = { wx: 80, wy: 120 };
+    this.player.velocity = { vx: 0, vy: 0 };
+    this.player.wz = 0;
+    this.player.groundZ = 0;
+    delete this.player.jumpZ;
+    delete this.player.jumpVZ;
+    this.jumpState = { jumpConsumed: false, lastJumpHeld: false };
   }
   /** Small deterministic 2px path grid; only the game collision adapter decides passability. */
   pathTo(x: number, y: number): [number, number][] | null {

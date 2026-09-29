@@ -144,3 +144,33 @@ canvas {
     font-size: 11px;
   }
 }
+.verdict-buttons {
+  display: flex;
+  gap: 8px;
+}
+.verdict-buttons button {
+  flex: 1;
+}
+#good {
+  background: #23513e;
+}
+#physics-controls {
+  margin: 12px 0;
+  font-size: 13px;
+}
+#jump {
+  background: #3e3b69;
+}
+body {
+  padding-bottom: 72px;
+}
+.verdict-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(708px, calc(100% - 24px));
+  padding: 10px 0;
+  background: #101621;
+  z-index: 2;
+}

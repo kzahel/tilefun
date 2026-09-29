@@ -1,5 +1,6 @@
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
 import { type FurniturePlacement, parseFurniturePlacements } from "../FurnitureCatalog.js";
+import { type FurnitureBodies, parseFurnitureBodies } from "../FurniturePhysics.js";
 
 /** Pixel coordinates in the original render; emoji cells span 32px. */
 export interface ReviewPin {
@@ -49,6 +50,13 @@ export interface ReviewFeedback {
   playtest?: {
     playerX: number;
     playerY: number;
+    playerZ?: number;
+    groundZ?: number;
+    jumpVZ?: number;
+    gravityScale?: number;
+    bodies?: FurnitureBodies;
+    physicsVersion?: number;
+    sceneSignature?: string;
     facing: number;
     selected: string;
     mode: "walk" | "place";
@@ -133,7 +141,27 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
       !["walk", "place"].includes(p.mode)
     )
       throw new Error("Invalid playtest context");
+    if (
+      [p.playerZ, p.groundZ].some(
+        (n) => n !== undefined && (!Number.isFinite(n) || n < 0 || n > 4096),
+      ) ||
+      (p.jumpVZ !== undefined && (!Number.isFinite(p.jumpVZ) || Math.abs(p.jumpVZ) > 4096)) ||
+      (p.gravityScale !== undefined &&
+        (!Number.isFinite(p.gravityScale) || p.gravityScale < 0.1 || p.gravityScale > 2)) ||
+      (p.physicsVersion !== undefined &&
+        (!Number.isInteger(p.physicsVersion) || p.physicsVersion < 1)) ||
+      (p.sceneSignature !== undefined &&
+        (typeof p.sceneSignature !== "string" || p.sceneSignature.length > 50000))
+    )
+      throw new Error("Invalid playtest physics");
     playtest = {
+      ...(p.playerZ !== undefined ? { playerZ: p.playerZ } : {}),
+      ...(p.groundZ !== undefined ? { groundZ: p.groundZ } : {}),
+      ...(p.jumpVZ !== undefined ? { jumpVZ: p.jumpVZ } : {}),
+      ...(p.gravityScale !== undefined ? { gravityScale: p.gravityScale } : {}),
+      ...(p.bodies !== undefined ? { bodies: parseFurnitureBodies(p.bodies) } : {}),
+      ...(p.physicsVersion !== undefined ? { physicsVersion: p.physicsVersion } : {}),
+      ...(p.sceneSignature !== undefined ? { sceneSignature: p.sceneSignature } : {}),
       playerX: p.playerX,
       playerY: p.playerY,
       facing: p.facing,

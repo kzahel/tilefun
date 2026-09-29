@@ -3,6 +3,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import { furnishedSceneOrder } from "./FurnishedInterior.js";
 import { FURNITURE_CATALOG } from "./FurnitureCatalog.js";
 import { FurnitureMotion, furnitureCollider, MOTION_SCENES } from "./FurnitureMotion.js";
+import { FURNITURE_BODIES } from "./FurniturePhysics.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 const scene = (id: string) => {
@@ -12,7 +13,7 @@ const scene = (id: string) => {
 };
 describe("furniture in shared game physics", () => {
   it("converts ground footprints to game prop colliders without including sprite padding", () => {
-    for (const d of FURNITURE_CATALOG) {
+    for (const d of FURNITURE_CATALOG.filter((d) => !d.blocking || FURNITURE_BODIES[d.id])) {
       const c = furnitureCollider(d);
       if (!d.blocking) {
         expect(c).toBeNull();
@@ -92,6 +93,54 @@ describe("furniture in shared game physics", () => {
     expect(m.canStand(m.player.position.wx, m.player.position.wy)).toBe(true);
     expect(m.player.position).not.toEqual({ wx: 80, wy: 120 });
   });
+  it("lands on finite-height furniture, stays on top, and falls when walking off", () => {
+    const m = scene("wardrobe");
+    m.gravityScale = 0.25;
+    // Approach from directly in front; walk toward it only after clearing its top.
+    m.player.position = { wx: 80, wy: 98 };
+    let maxZ = 0;
+    for (let i = 0; i < 500; i++) {
+      const z = m.player.wz ?? 0;
+      m.step(0, z > 34 && m.player.position.wy > 84 ? -1 : 0, 1 / 120, true);
+      maxZ = Math.max(maxZ, m.player.wz ?? 0);
+    }
+    expect(maxZ).toBeGreaterThan(32);
+    expect(m.player.wz).toBe(32);
+    expect(m.player.jumpVZ).toBeUndefined();
+    for (let i = 0; i < 30; i++) m.step(0, 0);
+    expect(m.player.wz).toBe(32);
+    expect(() => m.setBody("wardrobe", { height: 40, walkableTop: true })).toThrow(/overlap/);
+    for (let i = 0; i < 180; i++) m.step(1, 0);
+    expect(m.player.wz).toBe(0);
+    expect(m.player.jumpVZ).toBeUndefined();
+  });
+  it("normal gravity cannot clear the wardrobe, while lower gravity can", () => {
+    const peak = (gravity: number) => {
+      const m = scene("wardrobe");
+      m.gravityScale = gravity;
+      let highest = 0;
+      for (let i = 0; i < 600; i++) {
+        m.step(0, 0, 1 / 120, true);
+        highest = Math.max(highest, m.player.wz ?? 0);
+      }
+      return highest;
+    };
+    expect(peak(1)).toBeLessThan(32);
+    expect(peak(0.25)).toBeGreaterThan(64);
+  });
+  it("height edits alter Z collision and reset clears airborne state", () => {
+    const m = scene("wardrobe");
+    expect(m.canStand(80, 84, 31)).toBe(false);
+    expect(m.canStand(80, 84, 32)).toBe(true);
+    m.setBody("wardrobe", { height: 48, walkableTop: false });
+    expect(m.canStand(80, 84, 32)).toBe(false);
+    m.step(0, 0, 1 / 120, true);
+    m.resetPlayer();
+    expect(m.player.wz).toBe(0);
+    expect(m.player.jumpVZ).toBeUndefined();
+    expect(m.bodies.wardrobe).toEqual({ height: 48, walkableTop: false });
+    expect(() => m.setBody("wardrobe", { height: NaN, walkableTop: true })).toThrow();
+  });
   it("saves movement context without confusing it with a static approval", () => {
     const m = scene("bunk");
     const report = {
@@ -100,12 +149,24 @@ describe("furniture in shared game physics", () => {
       fingerprint: "a".repeat(64),
       name: "Test",
       sketch: "#####\n#LLL#\n#####",
-      verdict: "wrong",
+      verdict: "good",
       note: "",
       createdAt: "2026-09-29T00:00:00Z",
       furniture: m.furniture,
       furnitureCatalogVersion: 1,
-      playtest: { playerX: 80, playerY: 94.2, facing: 1, selected: "bunk", mode: "walk" },
+      playtest: {
+        playerX: 80,
+        playerY: 94.2,
+        playerZ: 24,
+        groundZ: 24,
+        gravityScale: 0.25,
+        bodies: m.bodies,
+        physicsVersion: 1,
+        sceneSignature: "example",
+        facing: 1,
+        selected: "bunk",
+        mode: "walk",
+      },
     };
     expect(parseReviewFeedback(report).playtest).toEqual(report.playtest);
     expect(() =>
