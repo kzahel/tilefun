@@ -16,7 +16,13 @@
       <main class="workspace">
         <aside class="sidebar" aria-label="Explorer controls">
           <div class="intro"><span class="eyebrow">REGIONAL STUDY / 01</span><h1>A world takes shape.</h1><p>Follow the landscape. Find a place.<br />See how the pieces connect.</p></div>
-          <form id="seed-form" class="seed-form"><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
+          <form id="seed-form" class="seed-form"><label for="generator">World type</label><select id="generator" aria-label="World type"></select><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
+          <fieldset class="layers"><legend>Terrain preview</legend>
+            <label for="display-mode">Display<select id="display-mode"><option value="auto">Auto</option><option value="map">Map</option><option value="tiles">Tiles</option><option value="coverage">Coverage</option></select></label>
+            <label for="detail-zoom">Tiles above zoom<input id="detail-zoom" type="number" min="2" max="32" step="1" /></label>
+            <label for="detail-radius">Detail radius (chunks)<input id="detail-radius" type="number" min="1" max="3" step="1" /></label>
+            <label for="sample-budget">Map sample budget<input id="sample-budget" type="number" min="1024" max="24576" step="1024" /></label>
+          </fieldset>
           <fieldset class="layers"><legend>Map layers</legend>
             <label><span><i class="swatch geography"></i>Geography</span><input type="checkbox" data-layer="geography" checked /></label>
             <label><span><i class="swatch land-use"></i>Rural land & woods</span><input type="checkbox" data-layer="landUse" checked /></label>
@@ -30,7 +36,7 @@
             <button id="export-review" class="text-button" type="button">Export review notes ↓</button>
           </section>
           <section id="inspection" class="inspection" aria-live="polite"><span class="eyebrow">FEATURE INSPECTOR</span><h2>Pick a place on the map</h2><p>Tap a settlement or a connection to inspect its identity and reservation.</p></section>
-          <p class="scope-note">This is the shared regional plan. Streets, building art, saved edits, and entering play arrive in later slices.</p>
+          <p class="scope-note">Zoom into actual terrain tiles. Preview and gameplay share each generator. Building art and saved-world inspection arrive in later slices.</p>
         </aside>
         <section class="map-stage" aria-label="Regional world map">
           <canvas id="map" aria-label="World map. Drag to pan, scroll or pinch to zoom. Arrow keys pan; plus and minus zoom." tabindex="0"></canvas>

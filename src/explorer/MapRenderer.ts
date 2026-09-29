@@ -1,9 +1,9 @@
+import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
 import {
   type Connection,
   LandCover,
   type Point,
   REGION_SIZE,
-  type RegionalResult,
   type Settlement,
 } from "../generation/regional/RegionalPlanner.js";
 import type { Overlays, ViewState } from "./ViewState.js";

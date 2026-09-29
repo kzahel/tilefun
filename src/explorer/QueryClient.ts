@@ -1,3 +1,4 @@
+import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { RegionalRequest } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { WorkerRequest, WorkerResponse } from "./workerProtocol.js";
@@ -46,10 +47,14 @@ export class QueryClient {
     if (this.active) this.worker.postMessage({ type: "cancel", id: this.active.id });
   }
 
-  submit(world: RegionalWorld, request: RegionalRequest): void {
+  submit(
+    world: RegionalWorld | GenerationDescriptor,
+    request: RegionalRequest,
+    exact?: { cx: number; cy: number }[],
+  ): void {
     if (this.disposed) return;
     this.invalidate();
-    this.pending = { type: "query", id: this.wanted, world, request };
+    this.pending = { type: "query", id: this.wanted, world, request, ...(exact ? { exact } : {}) };
     this.dispatch();
   }
 

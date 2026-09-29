@@ -40,6 +40,8 @@ export function getWaterFrame(nowMs: number): number {
  * at native resolution (256x256), then drawn scaled to the main canvas.
  * Includes both terrain (with autotile) and detail layers in the cache.
  */
+export type TerrainRenderWorld = Pick<World, "getRoadAt" | "getChunkIfLoaded">;
+
 export class TileRenderer {
   /** Indexed sheets array (index matches BlendEntry.sheetIndex). */
   private blendSheets: Spritesheet[] = [];
@@ -81,13 +83,15 @@ export class TileRenderer {
   drawTerrain(
     ctx: CanvasRenderingContext2D,
     camera: Camera,
-    world: World,
+    world: TerrainRenderWorld,
     sheets: Map<string, Spritesheet>,
     visible: ChunkRange,
+    readyOnly = false,
+    cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
   ): void {
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
     const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
-    let rowsRemaining = MAX_CHUNK_CACHE_ROWS_PER_FRAME;
+    let rowsRemaining = cacheRowBudget;
     const visibleKeys = new Set<string>();
     const centerWy = camera.y;
 
@@ -132,7 +136,9 @@ export class TileRenderer {
           );
         }
 
-        const drawCache = chunk.renderCache ?? this.cacheBuildStates.get(key)?.canvas;
+        const drawCache = readyOnly
+          ? chunk.renderCache
+          : (chunk.renderCache ?? this.cacheBuildStates.get(key)?.canvas);
         if (drawCache) {
           // Draw 1px oversize to prevent sub-pixel seams between chunks
           ctx.drawImage(drawCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
@@ -151,7 +157,7 @@ export class TileRenderer {
    * get occluded; entities south (or on top with wz) sort after and draw
    * on top. Returns renderer-agnostic ElevationItem[] with world-space data.
    */
-  collectElevationItems(world: World, visible: ChunkRange): ElevationItem[] {
+  collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange): ElevationItem[] {
     const result: ElevationItem[] = [];
 
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {

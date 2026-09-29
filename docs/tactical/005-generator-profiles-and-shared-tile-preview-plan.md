@@ -380,10 +380,18 @@ Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it
   passed. Browser checks passed 105/106 initially; the review-inbox test passed
   with a dedicated test server after isolating it from the open demo server.
 
+- Slice B: Regional exact terrain and admitted major roads now run through the
+  shared producer; all four choices have bounded overview queries. The explorer
+  uses shared terrain assets/autotiling/rendering with Auto/Map/Tiles/Coverage,
+  configurable admission/footprint/sample caps, complete-cache coverage, links,
+  and independent worker/game parity checks. Typecheck and 980 unit tests pass;
+  all 109 browser tests pass, including sustained exact navigation and
+  rendered desktop/phone-layout captures. Physical
+  phone measurements remain outstanding.
+
 ## Next action
 
-Start **slice A** with the Classic compatibility fixtures and a small shared
-descriptor/catalog design. Carry that through the terrain/placement boundary
-refactor, then implement **slice B** until real-tile zoom is ready for review.
+A–B are implemented. Continue **slice C** with durable descriptor storage and
+the actual game type/seed/settings controls, then continue D–E.
 Record measured caps and any changed contracts in this document and update
 [the explorer checkpoint guide](../world-explorer.md) after each accepted slice.

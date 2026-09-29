@@ -1,14 +1,22 @@
-import { QUERY_LIMITS, type RegionalResult } from "../generation/regional/RegionalPlanner.js";
+import {
+  createDescriptor,
+  descriptorChoice,
+  descriptorKey,
+  GENERATOR_CATALOG,
+  type GeneratorChoice,
+} from "../generation/GenerationDescriptor.js";
+import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
+import { QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
 import { regionalWorld, seedFromText } from "../generation/regional/WorldDescriptor.js";
 import { featureAt, type MapFeature, MapRenderer } from "./MapRenderer.js";
+import { DEFAULT_PREVIEW, explorerUrl, parseExplorerLocation } from "./PreviewSettings.js";
 import { QueryClient } from "./QueryClient.js";
+import { TilePreview } from "./TilePreview.js";
 import {
   clampView,
   DEFAULT_OVERLAYS,
   DEFAULT_VIEW,
-  locationUrl,
   type Overlays,
-  parseLocation,
   screenToWorld,
   type ViewState,
   visibleBounds,
@@ -32,11 +40,14 @@ const noteInput = element<HTMLInputElement>("#review-note");
 const renderer = new MapRenderer();
 const startedAt = performance.now();
 let world = regionalWorld(2026);
+let generation = createDescriptor("regional", 2026);
+let preview = { ...DEFAULT_PREVIEW };
 let view = { ...DEFAULT_VIEW };
 let overlays = { ...DEFAULT_OVERLAYS };
 let locationError: string | null = null;
 try {
-  ({ world, view, overlays } = parseLocation(location.href));
+  ({ generation, view, overlays, preview } = parseExplorerLocation(location.href));
+  world = regionalWorld(generation.type === "regional" ? generation.seed : 2026);
 } catch (error) {
   locationError = error instanceof Error ? error.message : String(error);
 }
@@ -54,6 +65,8 @@ let computeMs = 0;
 let elapsedMs = 0;
 let transferMs = 0;
 let firstViewMs = 0;
+let terrainMs = 0;
+const tilePreview = new TilePreview(requestDraw);
 
 function notify(message: string): void {
   element("#notice").textContent = message;
@@ -73,6 +86,8 @@ const client = new QueryClient(worker, (response) => {
   }
   if (response.type !== "result") return;
   result = response.result;
+  terrainMs = response.terrainMs;
+  tilePreview.accept(response.chunks);
   computeMs = response.computeMs;
   elapsedMs = response.elapsedMs;
   transferMs = Math.max(0, performance.timeOrigin + performance.now() - response.finishedAt);
@@ -180,6 +195,12 @@ function requestDraw(): void {
     frame = 0;
     const start = performance.now();
     renderer.draw(canvas, width, height, view, overlays, result, selected?.id ?? null);
+    const pendingTiles = tilePreview.draw(canvas, width, height, view, preview.mode === "coverage");
+    app.dataset.tileReady = String(tilePreview.stats.ready);
+    app.dataset.tileResident = String(tilePreview.stats.resident);
+    app.dataset.tileBytes = String(tilePreview.stats.bytes);
+    app.dataset.generator = descriptorChoice(generation);
+    if (pendingTiles) requestDraw();
     drawMs = performance.now() - start;
     maxDrawMs = Math.max(maxDrawMs, drawMs);
     if (result && !firstViewMs) {
@@ -203,12 +224,17 @@ function requestDraw(): void {
 function requestQuery(): void {
   if (disposed || locationError) return;
   requestTimer = 0;
-  client.submit(world, {
-    bounds: visibleBounds(view, width, height),
-    detail: "region",
-    sampleStep: 6 / view.zoom,
-    limits: QUERY_LIMITS,
-  });
+  const exact = tilePreview.prepare(generation, view, width, height, preview);
+  client.submit(
+    generation,
+    {
+      bounds: visibleBounds(view, width, height),
+      detail: "region",
+      sampleStep: 6 / view.zoom,
+      limits: { ...QUERY_LIMITS, maxSamples: preview.sampleBudget },
+    },
+    exact,
+  );
   updateDiagnostics();
 }
 
@@ -217,7 +243,7 @@ function changedView(immediate = false): void {
   app.dataset.settled = "false";
   requestDraw();
   clearTimeout(requestTimer);
-  history.replaceState(null, "", locationUrl(location.href, world, view, overlays));
+  history.replaceState(null, "", explorerUrl(location.href, generation, view, overlays, preview));
   if (immediate) requestQuery();
   else requestTimer = window.setTimeout(requestQuery, 60);
 }
@@ -237,9 +263,11 @@ function updateDiagnostics(): void {
     `Plan ${computeMs.toFixed(1)} ms CPU · ${elapsedMs.toFixed(1)} ms elapsed`,
     `Transfer ${transferMs.toFixed(1)} ms · draw ${drawMs.toFixed(1)} ms (max ${maxDrawMs.toFixed(1)})`,
     `Samples ${stats?.samples.toLocaleString() ?? "—"} · owners ${stats?.owners ?? "—"} · features ${stats?.features ?? "—"}`,
-    `Detail chunks 0 · sample buffers ${(bytes / 1024).toFixed(0)} KiB`,
+    `Detail ${tilePreview.stats.ready} ready / ${tilePreview.stats.resident} resident (cap 81) · buffers ${(bytes / 1024).toFixed(0)} KiB`,
+    `Terrain ${terrainMs.toFixed(1)} ms · autotile ${tilePreview.stats.autotileMs.toFixed(1)} ms · detail memory ${(tilePreview.stats.bytes / 1024 / 1024).toFixed(1)} MiB`,
+    `Terrain assets ${tilePreview.stats.assetsMs.toFixed(0)} ms${tilePreview.stats.error ? ` · ${tilePreview.stats.error}` : ""}`,
     `Jobs ${client.stats.submitted} · cancelled ${client.stats.cancelled} · stale ${client.stats.discarded}`,
-    `First view ${firstViewMs ? `${firstViewMs.toFixed(0)} ms` : "pending"} · no game assets`,
+    `First view ${firstViewMs ? `${firstViewMs.toFixed(0)} ms` : "pending"}`,
   ].join("\n");
 }
 
@@ -380,31 +408,72 @@ for (const checkbox of document.querySelectorAll<HTMLInputElement>("[data-layer]
   checkbox.checked = overlays[key];
   checkbox.onchange = () => {
     overlays[key] = checkbox.checked;
-    history.replaceState(null, "", locationUrl(location.href, world, view, overlays));
+    history.replaceState(null, "", explorerUrl(location.href, generation, view, overlays, preview));
     requestDraw();
   };
 }
-seedInput.value = String(world.seed);
+const generatorSelect = element<HTMLSelectElement>("#generator");
+for (const entry of GENERATOR_CATALOG) {
+  const option = document.createElement("option");
+  option.value = entry.choice;
+  option.textContent = entry.label;
+  generatorSelect.append(option);
+}
+generatorSelect.value = descriptorChoice(generation);
+element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
+const modeSelect = element<HTMLSelectElement>("#display-mode");
+modeSelect.value = preview.mode;
+modeSelect.onchange = () => {
+  preview.mode = modeSelect.value as typeof preview.mode;
+  changedView(true);
+};
+for (const [id, key] of [
+  ["detail-zoom", "detailZoom"],
+  ["detail-radius", "radius"],
+  ["sample-budget", "sampleBudget"],
+] as const) {
+  const input = element<HTMLInputElement>(`#${id}`);
+  input.value = String(preview[key]);
+  input.onchange = () => {
+    if (!input.checkValidity()) {
+      input.reportValidity();
+      input.value = String(preview[key]);
+      return;
+    }
+    preview[key] = Number(input.value);
+    changedView(true);
+  };
+}
+seedInput.value = String(generation.seed);
 element<HTMLFormElement>("#seed-form").onsubmit = (event) => {
   event.preventDefault();
   try {
-    world = regionalWorld(seedFromText(seedInput.value));
+    generation = createDescriptor(
+      element<HTMLSelectElement>("#generator").value as GeneratorChoice,
+      seedFromText(seedInput.value),
+    );
+    world = regionalWorld(generation.type === "regional" ? generation.seed : 2026);
+    element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
     locationError = null;
     delete app.dataset.error;
-    seedInput.value = String(world.seed);
+    seedInput.value = String(generation.seed);
     result = null;
     selected = null;
     renderer.release();
     loading.hidden = false;
     loading.textContent = "Drawing this world…";
     updateInspection();
-    visitCase(0);
+    if (generation.type === "classic" || generation.type === "flat") {
+      view = { x: 0, y: 0, zoom: 4 };
+      changedView(true);
+      updateReview();
+    } else visitCase(0);
   } catch (error) {
     notify(error instanceof Error ? error.message : String(error));
   }
 };
 element("#share").onclick = async () => {
-  const url = locationUrl(location.href, world, view, overlays);
+  const url = explorerUrl(location.href, generation, view, overlays, preview);
   const field = element<HTMLInputElement>("#location-link");
   field.value = url;
   try {
@@ -424,6 +493,8 @@ const cases: { id: string; title: string; view: ViewState }[] = [
   { id: "broad-landscape", title: "The wider landscape", view: { x: 300, y: 519, zoom: 0.035 } },
 ];
 interface ReviewRecord {
+  generation?: typeof generation;
+  preview?: typeof preview;
   caseId: string;
   world: typeof world;
   view: ViewState;
@@ -459,7 +530,9 @@ try {
   notify("Review storage is unavailable. You can still export this session's notes.");
 }
 function reviewKey(caseId: string): string {
-  return `${world.generatorVersion}:${world.profile}:${world.seed}:${caseId}`;
+  return generation.type === "regional" && preview.mode === "auto" && view.zoom < preview.detailZoom
+    ? `${world.generatorVersion}:${world.profile}:${world.seed}:${caseId}`
+    : `${descriptorKey(generation)}:${preview.mode}:${preview.detailZoom}:${preview.radius}:${caseId}`;
 }
 function updateReview(): void {
   const container = element("#review-cases");
@@ -501,6 +574,8 @@ function recordReview(verdict: ReviewRecord["verdict"]): void {
   reviews[reviewKey(reviewCase.id)] = {
     caseId: reviewCase.id,
     world: { ...world },
+    generation,
+    preview: { ...preview },
     view: { ...view },
     bounds: visibleBounds(view, width, height),
     detail: result.detail,
@@ -508,7 +583,7 @@ function recordReview(verdict: ReviewRecord["verdict"]): void {
     featureId: selected?.id ?? null,
     verdict,
     note: noteInput.value.trim(),
-    location: locationUrl(location.href, world, view, overlays),
+    location: explorerUrl(location.href, generation, view, overlays, preview),
     createdAt: new Date().toISOString(),
   };
   try {
@@ -529,11 +604,13 @@ function recordReview(verdict: ReviewRecord["verdict"]): void {
 element("#approve").onclick = () => recordReview("approved");
 element("#report").onclick = () => recordReview("reported");
 element("#export-review").onclick = () => {
-  const records = Object.values(reviews).filter(
-    (r) =>
-      r.world.seed === world.seed &&
-      r.world.generatorVersion === world.generatorVersion &&
-      r.world.profile === world.profile,
+  const records = Object.values(reviews).filter((r) =>
+    r.generation
+      ? descriptorKey(r.generation) === descriptorKey(generation)
+      : generation.type === "regional" &&
+        r.world.seed === world.seed &&
+        r.world.generatorVersion === world.generatorVersion &&
+        r.world.profile === world.profile,
   );
   const url = URL.createObjectURL(
     new Blob([JSON.stringify({ formatVersion: 1, records }, null, 2)], {
@@ -563,6 +640,7 @@ function dispose(): void {
   cancelAnimationFrame(frame);
   client.dispose();
   renderer.release();
+  tilePreview.dispose();
   result = null;
 }
 window.addEventListener("pagehide", (event) => {

@@ -190,3 +190,154 @@ test("unsupported generator links show an error and can recover through seed sel
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   await expect(page.locator("#app")).not.toHaveAttribute("data-error", /.+/);
 });
+
+test("real tile zoom uses bounded shared rendering, configurable settings, and releases detail on map mode", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(`${explorer}?seed=2026&x=300&y=519&zoom=32`);
+  const app = page.locator("#app");
+  await expect(app).toHaveAttribute("data-settled", "true");
+  await expect
+    .poll(async () => Number(await app.getAttribute("data-tile-ready")))
+    .toBeGreaterThan(0);
+  expect(Number(await app.getAttribute("data-tile-resident"))).toBeLessThanOrEqual(81);
+  const resources = await page.evaluate(() =>
+    performance.getEntriesByType("resource").map((r) => r.name),
+  );
+  expect(resources.some((r) => r.includes("me-complete.png"))).toBe(true);
+  expect(resources.some((r) => /player\.png|modern-interiors-atlas/.test(r))).toBe(false);
+  await page.screenshot({ path: path.join(os.tmpdir(), "tilefun-exact-terrain-desktop.png") });
+  await page.locator("#display-mode").selectOption("coverage");
+  await page.locator("#detail-radius").fill("1");
+  await page.locator("#detail-radius").dispatchEvent("change");
+  await expect(app).toHaveAttribute("data-settled", "true");
+  expect(Number(await app.getAttribute("data-tile-resident"))).toBeLessThanOrEqual(25);
+  await page.reload();
+  await expect(page.locator("#display-mode")).toHaveValue("coverage");
+  await expect(page.locator("#detail-radius")).toHaveValue("1");
+  await expect
+    .poll(async () => Number(await app.getAttribute("data-tile-ready")))
+    .toBeGreaterThan(0);
+  await page.locator("#display-mode").selectOption("map");
+  await expect(app).toHaveAttribute("data-settled", "true");
+  await expect(app).toHaveAttribute("data-tile-resident", "0");
+  await page.locator("#generator").selectOption("island");
+  await page.getByRole("button", { name: "Explore", exact: true }).click();
+  await page.locator("#display-mode").selectOption("tiles");
+  await expect(app).toHaveAttribute("data-generator", "island");
+  await expect
+    .poll(async () => Number(await app.getAttribute("data-tile-ready")))
+    .toBeGreaterThan(0);
+  await page.screenshot({ path: path.join(os.tmpdir(), "tilefun-exact-island-desktop.png") });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: path.join(os.tmpdir(), "tilefun-exact-terrain-phone.png"),
+    fullPage: true,
+  });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+  expect(errors).toEqual([]);
+});
+
+test("actual explorer worker realizes exactly the game producer buffers for every generator", async ({
+  page,
+}) => {
+  const { createDescriptor } = await import("../src/generation/GenerationDescriptor.js");
+  const { createGenerator } = await import("../src/generation/Generator.js");
+  const { World } = await import("../src/world/World.js");
+  await page.goto(explorer);
+  await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
+  const workerUrl = page.workers()[0]?.url();
+  if (!workerUrl) throw new Error("Explorer worker missing");
+  for (const choice of ["classic", "island", "flat", "regional"] as const) {
+    const generation = createDescriptor(choice, 2026);
+    const buffers = await page.evaluate(
+      async ({ workerUrl, generation }) => {
+        const worker = new Worker(workerUrl, { type: "module" });
+        try {
+          return await new Promise<Record<string, number[]>>((resolve, reject) => {
+            worker.onerror = (error) => reject(new Error(error.message));
+            worker.onmessage = ({ data }) => {
+              if (data.type === "error") reject(new Error(data.message));
+              else {
+                const chunk = data.chunks[0].data;
+                resolve(
+                  Object.fromEntries(
+                    Object.entries(chunk).map(([key, buffer]) => [
+                      key,
+                      Array.from(buffer as Uint8Array),
+                    ]),
+                  ),
+                );
+              }
+            };
+            worker.postMessage({
+              type: "query",
+              id: 1,
+              world: generation,
+              request: {
+                bounds: { minX: -16, minY: 32, maxX: 0, maxY: 48 },
+                detail: "region",
+                sampleStep: 4,
+                limits: { maxSamples: 24576, maxOwners: 144, maxFeatures: 432 },
+              },
+              exact: [{ cx: -1, cy: 2 }],
+            });
+          });
+        } finally {
+          worker.terminate();
+        }
+      },
+      { workerUrl, generation },
+    );
+    const world = new World(createGenerator(generation).terrain);
+    const expected = world.getChunk(-1, 2);
+    for (const field of [
+      "subgrid",
+      "terrain",
+      "detail",
+      "collision",
+      "roadGrid",
+      "heightGrid",
+    ] as const)
+      expect(buffers[field]).toEqual(Array.from(expected[field]));
+  }
+});
+
+test("sustained exact navigation and repeated source changes keep bounded residency on phone layout", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${explorer}?seed=2026&x=300&y=519&zoom=16&radius=1`);
+  const app = page.locator("#app");
+  for (let i = 0; i < 8; i++) {
+    await expect(app).toHaveAttribute("data-settled", "true");
+    await expect
+      .poll(async () => Number(await app.getAttribute("data-tile-ready")))
+      .toBeGreaterThan(0);
+    expect(Number(await app.getAttribute("data-tile-resident"))).toBeLessThanOrEqual(25);
+    expect(Number(await app.getAttribute("data-tile-bytes"))).toBeLessThan(10 * 1024 * 1024);
+    await page.locator("#map").focus();
+    await page.keyboard.press(i % 2 ? "ArrowRight" : "ArrowDown");
+  }
+  await page.screenshot({
+    path: path.join(os.tmpdir(), "tilefun-exact-regional-phone.png"),
+    fullPage: true,
+  });
+  for (const [choice, seed] of [
+    ["flat", "7"],
+    ["classic", "2026"],
+    ["regional", "2026"],
+  ] as const) {
+    await page.locator("#generator").selectOption(choice);
+    await page.locator("#seed").fill(seed);
+    await page.getByRole("button", { name: "Explore", exact: true }).click();
+    await expect(app).toHaveAttribute("data-settled", "true");
+    expect(Number(await app.getAttribute("data-tile-resident"))).toBeLessThanOrEqual(25);
+    await expect(app).toHaveAttribute("data-generator", choice);
+  }
+  await page.goto("about:blank");
+  await expect.poll(() => page.workers().length).toBe(0);
+});

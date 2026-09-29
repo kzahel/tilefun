@@ -1,4 +1,6 @@
+import { TerrainId } from "../../autotile/TerrainId.js";
 import { fbm } from "../noise.js";
+import { regionalTerrainForElevation } from "./RegionalTerrain.js";
 import { MAX_WORLD_COORDINATE, type RegionalWorld, validateWorld } from "./WorldDescriptor.js";
 
 /** All planning positions and bounds are in tiles. Bounds are half-open. */
@@ -212,7 +214,7 @@ export function connectionForOwner(
   return null;
 }
 
-function validateRequest(request: RegionalRequest): void {
+export function validateRequest(request: RegionalRequest): void {
   const b = request.bounds;
   if (
     ![b.minX, b.minY, b.maxX, b.maxY].every(
@@ -240,7 +242,11 @@ function validateRequest(request: RegionalRequest): void {
   }
 }
 
-function makeGrid(bounds: Bounds, sampleStep: number, maxSamples: number): RegionalResult["grid"] {
+export function makeGrid(
+  bounds: Bounds,
+  sampleStep: number,
+  maxSamples: number,
+): RegionalResult["grid"] {
   let step = 2 ** Math.ceil(Math.log2(Math.max(4, sampleStep)));
   while (true) {
     const x = Math.floor(bounds.minX / step) * step;
@@ -278,9 +284,9 @@ export function* regionalQuerySteps(
       elevation[index] = e;
       moisture[index] = m;
       cover[index] =
-        e < 0
+        regionalTerrainForElevation(e) <= TerrainId.ShallowWater
           ? LandCover.Water
-          : e < 0.055
+          : regionalTerrainForElevation(e) <= TerrainId.SandLight
             ? LandCover.Shore
             : m > 0.02
               ? LandCover.Woodland

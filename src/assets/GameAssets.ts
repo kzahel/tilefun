@@ -13,7 +13,6 @@ export interface GameAssets {
 
 /** Sprite asset manifest: key → { path, width, height }. */
 const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
-  { key: "objects", path: "assets/tilesets/objects.png", w: TILE_SIZE, h: TILE_SIZE },
   {
     key: "player",
     path: "assets/sprites/player.png",
@@ -78,19 +77,15 @@ const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
  * Load all game assets (blend sheets, entity sprites, tileset).
  * Returns sheets map, indexed blend sheet array, and tile variants.
  */
-export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets> {
+/** Terrain-only consumer uses the same manifests and variants as gameplay. */
+export async function loadTerrainAssets(blendGraph: BlendGraph): Promise<GameAssets> {
   const blendDescs = blendGraph.allSheets;
-
-  const [blendImages, spriteImages, completeImg, modernInteriorsImg] = await Promise.all([
+  const [blendImages, completeImg, objectsImg] = await Promise.all([
     Promise.all(blendDescs.map((desc) => loadImage(desc.assetPath))),
-    Promise.all(SPRITE_MANIFEST.map((m) => loadImage(m.path))),
     loadImage("assets/tilesets/me-complete.png"),
-    loadImage("assets/tilesets/modern-interiors-atlas.png"),
+    loadImage("assets/tilesets/objects.png"),
   ]);
-
   const sheets = new Map<string, Spritesheet>();
-
-  // Build indexed blend sheet array
   const blendSheets: Spritesheet[] = [];
   for (const [i, desc] of blendDescs.entries()) {
     const img = blendImages[i];
@@ -100,29 +95,31 @@ export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets
       sheets.set(desc.sheetKey, sheet);
     }
   }
+  const me03 = sheets.get("me03");
+  if (me03) sheets.set("shallowwater", me03);
+  sheets.set("objects", new Spritesheet(objectsImg, TILE_SIZE, TILE_SIZE));
+  const completeSheet = new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE);
+  sheets.set("me-complete", completeSheet);
+  const variants = new TileVariants(completeSheet);
+  registerTileVariants(variants);
+  return { sheets, blendSheets, variants };
+}
 
-  // "shallowwater" alias — uses me03 (water_shallow/grass) fill at (1,0)
-  const me03Sheet = sheets.get("me03");
-  if (me03Sheet) {
-    sheets.set("shallowwater", me03Sheet);
-  }
-
-  // Entity and tileset sprites
+export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets> {
+  const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
+    loadTerrainAssets(blendGraph),
+    Promise.all(SPRITE_MANIFEST.map((m) => loadImage(m.path))),
+    loadImage("assets/tilesets/modern-interiors-atlas.png"),
+  ]);
   for (const [i, manifest] of SPRITE_MANIFEST.entries()) {
     const img = spriteImages[i];
-    if (img) {
-      sheets.set(manifest.key, new Spritesheet(img, manifest.w, manifest.h));
-    }
+    if (img) terrain.sheets.set(manifest.key, new Spritesheet(img, manifest.w, manifest.h));
   }
-
-  // Tile variants from the complete ME tileset
-  const meCompleteSheet = new Spritesheet(completeImg, TILE_SIZE, TILE_SIZE);
-  sheets.set("me-complete", meCompleteSheet);
-  sheets.set(MODERN_INTERIORS_SHEET_KEY, new Spritesheet(modernInteriorsImg, TILE_SIZE, TILE_SIZE));
-  const variants = new TileVariants(meCompleteSheet);
-  registerTileVariants(variants);
-
-  return { sheets, blendSheets, variants };
+  terrain.sheets.set(
+    MODERN_INTERIORS_SHEET_KEY,
+    new Spritesheet(modernInteriorsImg, TILE_SIZE, TILE_SIZE),
+  );
+  return terrain;
 }
 
 /**

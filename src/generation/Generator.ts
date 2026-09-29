@@ -1,6 +1,8 @@
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { RegionalStrategy } from "./regional/RegionalStrategy.js";
+import { regionalWorld } from "./regional/WorldDescriptor.js";
 import { generateStructuresForChunk, type StructurePlacement } from "./StructureGenerator.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
 
@@ -34,6 +36,10 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
         placements: () => ({ placements: [], newIntersectionKeys: [] }),
       };
     case "regional":
-      throw new Error("Regional tile realization is not installed yet.");
+      return {
+        descriptor,
+        terrain: new RegionalStrategy(regionalWorld(descriptor.seed)),
+        placements: () => ({ placements: [], newIntersectionKeys: [] }),
+      };
   }
 }

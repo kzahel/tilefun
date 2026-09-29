@@ -2,8 +2,9 @@
 
 The first regional slice of [Tactical 004](tactical/004-world-explorer-and-regional-generation-plan.md)
 is available at `/tilefun/world-explorer.html`. The game menu also links to it.
-This is a procedural regional preview; game terrain still uses the legacy
-generator. No saved world is changed by opening the explorer.
+Tactical 005 A–B adds shared versioned generators and configurable real-tile
+preview. Player-facing game selection/persistence is the next slice. No saved
+world is changed by opening the explorer.
 
 ## Run and review
 
@@ -31,8 +32,8 @@ version, profile, seed, and case. Generated maps are never stored.
 
 The useful review question at this checkpoint is whether the region makes sense:
 settlement scale and spacing, countryside/woods/water transitions, connection
-placement, and continuity while panning across a cell boundary. Apartment art,
-local street layout, collision, and walkability are subsequent checkpoints.
+placement, and continuity while panning across a cell boundary. Real terrain/major roads are now available through tile zoom; apartment art and
+local street layouts are subsequent checkpoints.
 
 ## Shared contracts
 
@@ -44,7 +45,7 @@ local street layout, collision, and walkability are subsequent checkpoints.
   within ±16,777,216 tiles; navigation is conservatively bounded inside that.
 - Geography is a direct regional field. Settlement reservations raise their
   buildable cores to dry land and taper through an 80-tile halo contained within
-  their owner. Future tile realization must use these same facts.
+  their owner. Regional tile realization consumes these same facts.
 - One 1,024-tile cell owns at most one settlement. Settlement IDs and outlines
   depend on the descriptor and owner, never the camera, sampling resolution,
   query window, budget, or job order. Feature identity is the world descriptor
@@ -118,8 +119,8 @@ The agreed next sequence is recorded in
 [Tactical 005: generator profiles and shared tile preview](tactical/005-generator-profiles-and-shared-tile-preview-plan.md).
 First freeze Classic and establish shared generator selection/realization; then
 add configurable zoom into real tiles; then support generator type/seed/settings
-in actual game creation and persistence. The current checkpoint does not yet
-implement those features. Explorer and gameplay will consume one implementation
+in actual game creation and persistence. The current checkpoint implements A–B; actual game creation and persistence
+selection is next. Explorer and gameplay will consume one implementation
 per selected generator, with the existing terrain/scene pipeline reused.
 
 After those slices, Tactical 004's slice 2 refines Ferngrove into a connected
@@ -134,3 +135,35 @@ deletion/move overlays so regeneration preserves saved changes. **Play here**
 requires authoritative safe-spawn resolution; inspecting a saved world carries
 its explicit world ID and obtains saved overlays from that authority. None of
 those new game/persistence paths are enabled at this checkpoint.
+
+## Real-tile preview checkpoint (Tactical 005 B)
+
+The explorer now offers Regional, Classic, Island, and Flat through the shared
+versioned generator catalog. Zoom to 12 CSS pixels per tile to admit exact terrain
+automatically; the zoom range extends to 64. For example, open
+`world-explorer.html?seed=2026&x=300&y=519&zoom=32` to inspect Ferngrove's major
+connection with real terrain/road sheets. Auto has 15% zoom hysteresis. Map
+releases detailed chunks; Tiles forces a bounded footprint even at broad zoom;
+Coverage colors complete caches green and pending areas amber.
+
+Detail radius is configurable from one to three chunks. The visible footprint
+is at most 7×7 chunks, with one chunk of neighbor data around it (at most 81
+resident chunks total). The map sample budget is configurable from 1,024 to
+24,576. The worker keeps one active and one replaceable pending query, yields
+between detailed chunks, rejects stale results, and transfers renderer-free
+buffers. Exact content replaces coarse content only after its render cache is
+complete. Navigation shares the existing tile-coordinate view and controls.
+
+Terrain assets load lazily using the same manifest, variants, autotiling, and
+`TileRenderer` as gameplay. No gameplay realm or simulation is created. Regional
+uses its own geography/material sampler and admitted major corridors; Classic's
+captured terrain and placement fixtures remain unchanged. Regional district
+streets, vegetation, and buildings are the later D–E slices.
+
+New share links/reports include the immutable generation descriptor and preview
+configuration. Existing regional links still resolve `regional-v1` /
+`temperate-v1`. Existing coarse review verdicts remain coarse reviews; exact-mode
+reviews include presentation identity. Diagnostic memory figures are estimates
+of retained typed buffers and completed caches, rather than whole-browser heap.
+Desktop and phone-layout captures and actual worker/game buffer parity checks
+are automated. Physical phone measurements remain unperformed.

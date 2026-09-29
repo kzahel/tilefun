@@ -607,3 +607,21 @@ h2 {
     font-size: 10px;
   }
 }
+
+.seed-form select {
+  width: 100%;
+  margin-bottom: 10px;
+}
+select {
+  background: #f9f7ec;
+  color: #263d30;
+  border: 1px solid #c6cbbb;
+  border-radius: 5px;
+  padding: 6px;
+}
+.layers input[type="number"] {
+  width: 72px;
+  padding: 4px;
+  border: 1px solid #c6cbbb;
+  border-radius: 4px;
+}

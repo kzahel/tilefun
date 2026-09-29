@@ -32,7 +32,7 @@ export const DEFAULT_OVERLAYS: Overlays = {
   boundaries: false,
 };
 export const MIN_ZOOM = 0.0005;
-export const MAX_ZOOM = 3;
+export const MAX_ZOOM = 64;
 
 export function clampView(view: ViewState): ViewState {
   const edge = MAX_WORLD_COORDINATE / 2;

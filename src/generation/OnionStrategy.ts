@@ -45,6 +45,14 @@ export class OnionStrategy implements TerrainStrategy {
     private readonly roadParams?: RoadGenParams,
   ) {}
 
+  sampleTerrain(wx: number, wy: number): TerrainId {
+    const elevation =
+      this.islandRadius > 0
+        ? 1 - (2 * Math.sqrt(wx * wx + wy * wy)) / this.islandRadius
+        : fbm(wx * NOISE_SCALE, wy * NOISE_SCALE, this.seed, 3);
+    return elevationToTerrain(elevation);
+  }
+
   generate(chunk: Chunk, cx: number, cy: number): void {
     const SG = Chunk.SUBGRID_SIZE; // 33
 
@@ -53,18 +61,7 @@ export class OnionStrategy implements TerrainStrategy {
       for (let sx = 0; sx < SG; sx++) {
         const wx = cx * CHUNK_SIZE + sx / 2;
         const wy = cy * CHUNK_SIZE + sy / 2;
-        let elevation: number;
-
-        if (this.islandRadius > 0) {
-          // Island mode: simple concentric rings, no noise — always deterministic
-          const dist = Math.sqrt(wx * wx + wy * wy);
-          // Map distance to elevation: center=1, edge of island=0, beyond=-1
-          elevation = 1 - (2 * dist) / this.islandRadius;
-        } else {
-          elevation = fbm(wx * NOISE_SCALE, wy * NOISE_SCALE, this.seed, 3);
-        }
-
-        chunk.setSubgrid(sx, sy, elevationToTerrain(elevation));
+        chunk.setSubgrid(sx, sy, this.sampleTerrain(wx, wy));
       }
     }
 
