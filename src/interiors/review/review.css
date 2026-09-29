@@ -88,6 +88,7 @@ label {
 }
 select {
   margin-left: 8px;
+  max-width: min(100%, 440px);
 }
 .progress {
   display: flex;
@@ -260,6 +261,9 @@ footer button {
   .heading label {
     display: block;
     margin-top: 14px;
+  }
+  .heading select {
+    max-width: calc(100% - 50px);
   }
   h1 {
     font-size: 23px;

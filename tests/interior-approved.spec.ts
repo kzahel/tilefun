@@ -167,9 +167,7 @@ for (const [height, capX] of [
   ["low", 114],
   ["tall", 106],
 ] as const)
-  test(`${height} south partition opens into the cutaway without a visible end face`, async ({
-    page,
-  }) => {
+  test(`${height} south partition preserves the height step at the cutaway`, async ({ page }) => {
     await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
     await page.addInitScript(
       (height) =>
@@ -194,7 +192,12 @@ for (const [height, capX] of [
     const seam = await page.locator("#render").evaluate((element, x) => {
       const ctx = (element as HTMLCanvasElement).getContext("2d");
       if (!ctx) throw new Error("Missing canvas");
-      return [210, 219, 223, 224, 225].map((y) => Array.from(ctx.getImageData(x, y, 1, 1).data));
+      return [190, 200, 224, 225].map((y) =>
+        Array.from(ctx.getImageData(y >= 224 ? 114 : x, y, 1, 1).data),
+      );
     }, capX);
-    expect(seam).toEqual(Array(5).fill([248, 248, 248, 255]));
+    expect(seam[0]).toEqual([248, 248, 248, 255]);
+    if (height === "low") expect(seam[1]).toEqual([248, 248, 248, 255]);
+    else expect(seam[1]?.[0]).toBeLessThan(248);
+    expect(seam.slice(2)).toEqual(Array(2).fill([248, 248, 248, 255]));
   });

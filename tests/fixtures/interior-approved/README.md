@@ -25,3 +25,7 @@ Six thickness/end-join cases were approved on 2026-09-29 (source commit fcb2a93)
 the straight, L, T, and doorway thickness cases and both north attachments.
 Their saved good fingerprints match the captured PNGs. The baseline now protects
 183 renders; the two rejected south attachments remain outside it.
+
+The low south attachment was approved on 2026-09-29 (source commit 4295746).
+Its exact pixels bring the regression baseline to 184. The tall south connection
+still requires review. These fixtures are test references, never runtime caches.

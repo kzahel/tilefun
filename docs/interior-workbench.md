@@ -107,3 +107,28 @@ The four thickness cases and both north attachments have since been approved and
 added to the baseline (183 renders total). The south attachments now join the
 foreground cap without an exposed free end. Reload returns the two changed
 south cases for review; the six unchanged approvals remain current.
+
+### Responsive loading and remaining counts
+
+The review page loads a dedicated 27-sprite source sheet and index (about 16 KB
+combined, 256×71 pixels), instead of the full 20 MB library. `npm run assets:review`
+repackages the required source slices without generating any room images. Run it
+when a case introduces new sprites; `npm run build` checks that the sheet is current.
+Vite gives built sprite assets content-based filenames for normal browser caching.
+
+Only the active unmarked canvas and one reusable scratch canvas are allocated,
+in addition to the visible canvas. No generated room images or computed render
+fingerprints are cached across reloads. Saved verdicts, notes, pins, and the
+offline feedback outbox retain their existing persistence.
+
+The reported/current case is checked first. The rest are regenerated in short
+tasks that yield to browser input and painting. Navigation reprioritizes the
+background checks. Each category shows unchecked, still-checking, and wrong counts;
+an old verdict counts only after its fingerprint matches freshly generated pixels.
+The first case is usable before all category counts finish checking.
+
+On a local desktop through the public deployment, the first case appeared around
+0.3 seconds; 4× CPU throttling produced a similar first-case time. The previous
+1.67-second uninterrupted task at 4× throttling fell below 75 ms. All counts
+completed around 2.5 seconds in that run, while the page remained usable. These
+are diagnostic desktop measurements, not a phone timing guarantee.

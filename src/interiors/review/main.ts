@@ -12,12 +12,13 @@ import {
   type ReviewPin,
 } from "./ReviewFeedback.js";
 import "./review.css";
+import spriteIndexUrl from "./assets/review-sprites.json?url";
+import spriteUrl from "./assets/review-sprites.png?url";
 
 const STORAGE = "tilefun.indoor-review.v1";
 const API = "/tilefun/api/interior-review";
 interface ReadyCase extends ReviewCase {
   fingerprint: string;
-  image: HTMLCanvasElement;
 }
 interface State {
   current: string;
@@ -101,7 +102,16 @@ function el<T extends HTMLElement = HTMLElement>(id: string): T {
 const note = el<HTMLInputElement>("note");
 const stage = el<HTMLSelectElement>("stage");
 const canvas = el<HTMLCanvasElement>("render");
-const cases: ReadyCase[] = [];
+const cases: ReadyCase[] = reviewCases().map((c) => ({ ...c, fingerprint: "" }));
+// Only the active unmarked image and one scratch canvas exist. Neither renders
+// nor calculated fingerprints are persisted or reused across reloads.
+const activeImage = document.createElement("canvas");
+const scratch = document.createElement("canvas");
+const atlas = new Image();
+let assetsReady = false;
+let paintedId = "";
+const unsupported: string[] = [];
+const excluded = new Set<string>();
 let current: ReadyCase | undefined;
 let syncing = false;
 let storageError = false;
@@ -120,7 +130,9 @@ function save(): boolean {
   }
 }
 function pool(): ReadyCase[] {
-  return cases.filter((c) => state.stage === "all" || String(c.stage) === state.stage);
+  return cases.filter(
+    (c) => !excluded.has(c.id) && (state.stage === "all" || String(c.stage) === state.stage),
+  );
 }
 function judgment(c: ReadyCase): ReviewFeedback | undefined {
   return currentVerdict(state.records, c.id, c.fingerprint);
@@ -129,9 +141,10 @@ function nextCase(after?: string): ReadyCase | undefined {
   const available = pool();
   const start = Math.max(0, available.findIndex((c) => c.id === after) + 1);
   const ordered = [...available.slice(start), ...available.slice(0, start)];
-  return ordered.find((c) => !judgment(c));
+  return ordered.find((c) => c.fingerprint && !judgment(c));
 }
 function show(next: ReadyCase | undefined, push = true): void {
+  if (!assetsReady) return;
   if (push && current && next?.id !== current.id) history.push(current.id);
   current = next;
   if (next) state.current = next.id;
@@ -140,19 +153,49 @@ function show(next: ReadyCase | undefined, push = true): void {
   save();
   draw();
 }
-function draw(): void {
-  const available = pool();
-  const reviewed = available.filter((c) => judgment(c));
-  el("counts").textContent =
-    `${reviewed.length} / ${available.length} reviewed · ${reviewed.filter((c) => judgment(c)?.verdict === "wrong").length} wrong`;
+function drawStatus(): void {
+  const fresh = () => ({ reviewed: 0, unchecked: 0, checking: 0, wrong: 0 });
+  const totals = [fresh(), ...REVIEW_STAGES.map(fresh)];
+  for (const c of cases) {
+    if (excluded.has(c.id)) continue;
+    const verdict = judgment(c);
+    for (const i of [0, c.stage + 1]) {
+      const t = totals[i];
+      if (!t) continue;
+      if (!c.fingerprint) t.checking++;
+      else if (!verdict) t.unchecked++;
+      else {
+        t.reviewed++;
+        if (verdict.verdict === "wrong") t.wrong++;
+      }
+    }
+  }
+  for (const option of stage.options) {
+    const i = option.value === "all" ? 0 : Number(option.value) + 1;
+    const t = totals[i];
+    if (!t) continue;
+    const label = i === 0 ? "Small → complex" : REVIEW_STAGES[i - 1];
+    const text = `${label} — ${t.unchecked} unchecked${t.checking ? ` · checking ${t.checking}` : t.unchecked === 0 ? " · ✓" : ""}${t.wrong ? ` · ${t.wrong} wrong` : ""}`;
+    if (option.textContent !== text) option.textContent = text;
+  }
+  const t = totals[state.stage === "all" ? 0 : Number(state.stage) + 1];
+  if (t)
+    el("counts").textContent =
+      `${t.reviewed} / ${t.reviewed + t.unchecked + t.checking} reviewed · ${t.wrong} wrong${t.checking ? ` · checking ${t.checking}` : ""}`;
   stage.value = state.stage;
+  for (const id of ["good", "wrong"]) el<HTMLButtonElement>(id).disabled = !current?.fingerprint;
+}
+function draw(): void {
+  drawStatus();
+  const available = pool();
   el("pause").hidden = !state.paused;
   el("actions").hidden = state.paused || !current;
   el("case").hidden = !current;
   el<HTMLButtonElement>("undo").disabled = !state.records.some((r) => r.verdict !== "clear");
   if (!current) {
-    el("position").textContent =
-      "All current renders in this set reviewed. Choose another set or revisit Previous.";
+    el("position").textContent = available.some((c) => !c.fingerprint)
+      ? "Checking remaining cases… You can choose another category."
+      : "All current renders in this set reviewed. Choose another set or revisit Previous.";
     return;
   }
   el("position").textContent =
@@ -200,8 +243,12 @@ function draw(): void {
     }
     plan.append(line);
   }
-  canvas.width = current.image.width;
-  canvas.height = current.image.height;
+  if (paintedId !== current.id) {
+    renderCase(current, activeImage);
+    paintedId = current.id;
+  }
+  canvas.width = activeImage.width;
+  canvas.height = activeImage.height;
   drawPins();
   resizeCanvas();
   const verdict = judgment(current);
@@ -217,7 +264,7 @@ function drawPins(): void {
   if (!current) return;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
-  ctx.drawImage(current.image, 0, 0);
+  ctx.drawImage(activeImage, 0, 0);
   const pins = state.annotation?.pins ?? [];
   const list = el("pins");
   list.replaceChildren();
@@ -264,7 +311,7 @@ function revealPin(pin: ReviewPin): void {
     bounds.top - viewport.top + (pin.y + pin.size / 2) * scale - wrap.clientHeight / 2;
 }
 function addPin(pin: ReviewPin, reveal = false): void {
-  if (!current || state.paused || navigating) return;
+  if (!current?.fingerprint || state.paused || navigating) return;
   state.annotation ??= { caseId: current.id, fingerprint: current.fingerprint, pins: [] };
   const pins = state.annotation.pins;
   // A double-tap should leave one pin, not toggle it back off.
@@ -349,7 +396,7 @@ function enqueue(row: ReviewFeedback): void {
   void sync();
 }
 function vote(verdict: "good" | "wrong"): void {
-  if (!current || state.paused || navigating) return;
+  if (!current?.fingerprint || state.paused || navigating) return;
   navigating = true;
   setTimeout(() => {
     navigating = false;
@@ -469,51 +516,88 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("resize", resizeCanvas);
 
-async function start(): Promise<void> {
-  await loadModernInteriorsAtlasIndex();
-  const atlas = new Image();
-  atlas.src = "assets/tilesets/modern-interiors-atlas.png";
-  await atlas.decode();
-  const unsupported: string[] = [];
-  for (const fixture of reviewCases()) {
-    try {
-      const parsed = parseFloorPlan(fixture.sketch);
-      const map = fixture.profiles
-        ? buildProfileApartmentPlan(parsed, fixture.profiles)
-        : buildLayeredApartmentPlan(parsed);
-      const image = document.createElement("canvas");
-      image.width = map.width * 16;
-      image.height = map.pixelHeight;
-      const context = image.getContext("2d");
-      if (!context) throw new Error("Canvas is unavailable");
-      context.fillStyle = "#171e2a";
-      context.fillRect(0, 0, image.width, image.height);
-      drawLayeredInteriorMap(context, atlas, map);
-      // Hash final pixels plus plan and dimensions, independent of display zoom or code revision.
-      const pixels = context.getImageData(0, 0, image.width, image.height).data;
-      const header = new TextEncoder().encode(
-        `${fixture.sketch}\n${image.width},${image.height}\n`,
-      );
-      const bytes = new Uint8Array(header.length + pixels.length);
-      bytes.set(header);
-      bytes.set(pixels, header.length);
-      const fingerprint = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
-      cases.push({ ...fixture, image, fingerprint });
-    } catch (error) {
-      unsupported.push(`${fixture.id} · ${fixture.name}\n${String(error)}\n${fixture.sketch}`);
-    }
+function renderCase(fixture: ReviewCase, image: HTMLCanvasElement): void {
+  const plan = parseFloorPlan(fixture.sketch);
+  const map = fixture.profiles
+    ? buildProfileApartmentPlan(plan, fixture.profiles)
+    : buildLayeredApartmentPlan(plan);
+  image.width = map.width * 16;
+  image.height = map.pixelHeight;
+  const ctx = image.getContext("2d", { willReadFrequently: image === scratch });
+  if (!ctx) throw new Error("Canvas is unavailable");
+  ctx.fillStyle = "#171e2a";
+  ctx.fillRect(0, 0, image.width, image.height);
+  drawLayeredInteriorMap(ctx, atlas, map);
+}
+// A real task boundary (not a resolved Promise) gives input and painting a turn.
+const yieldToBrowser = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
+async function verifyCase(c: ReadyCase): Promise<void> {
+  if (c.fingerprint || excluded.has(c.id)) return;
+  await yieldToBrowser();
+  try {
+    renderCase(c, scratch);
+    const ctx = scratch.getContext("2d");
+    if (!ctx) throw new Error("Canvas is unavailable");
+    const pixels = ctx.getImageData(0, 0, scratch.width, scratch.height).data;
+    const header = new TextEncoder().encode(`${c.sketch}\n${scratch.width},${scratch.height}\n`);
+    const bytes = new Uint8Array(header.length + pixels.length);
+    bytes.set(header);
+    bytes.set(pixels, header.length);
+    c.fingerprint = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  } catch (error) {
+    excluded.add(c.id);
+    unsupported.push(`${c.id} · ${c.name}\n${String(error)}\n${c.sketch}`);
+    el("unsupported-label").textContent = `${unsupported.length} cases excluded by the compiler`;
+    el("unsupported-list").textContent = unsupported.join("\n\n");
+    el("unsupported").hidden = false;
   }
-  el("unsupported-label").textContent = `${unsupported.length} cases excluded by the compiler`;
-  el("unsupported-list").textContent = unsupported.join("\n\n");
-  el("unsupported").hidden = unsupported.length === 0;
-  await sync();
-  if (!pool().some((c) => !judgment(c)) && cases.some((c) => !judgment(c))) state.stage = "all";
-  const changed = cases.find((c) =>
-    state.batch.some((b) => b.id === c.id && b.fingerprint !== c.fingerprint),
-  );
-  const reduction = changed && cases.find((c) => c.relatedCaseId === changed.id && !judgment(c));
+  drawStatus();
+  if (!current)
+    el("position").textContent =
+      `Checking cases… ${cases.filter((c) => c.fingerprint).length} / ${cases.length}`;
+  if (current?.id === c.id) draw();
+  else if (
+    el("app").dataset.reviewReady &&
+    !current &&
+    !state.paused &&
+    pool().includes(c) &&
+    !excluded.has(c.id) &&
+    !judgment(c)
+  )
+    show(c, false);
+}
+async function findUnchecked(): Promise<ReadyCase | undefined> {
+  // Existing reports and unreviewed cases go first; approved cases are checked
+  // afterward. All judgments still use freshly rendered pixels.
+  const candidates = pool();
+  const records = new Map(state.records.map((r) => [r.caseId, r]));
+  const priority = (c: ReadyCase) => (records.get(c.id)?.verdict === "good" ? 1 : 0);
+  candidates.sort((a, b) => priority(a) - priority(b));
+  for (const c of candidates) {
+    await verifyCase(c);
+    if (!excluded.has(c.id) && !judgment(c)) return c;
+  }
+}
+async function start(): Promise<void> {
+  drawStatus();
+  el("actions").hidden = true;
+  el("unsupported").hidden = true;
+  el("unsupported-label").textContent = "0 cases excluded by the compiler";
+  atlas.src = spriteUrl;
+  // Source image, small index, and feedback can travel in parallel.
+  await Promise.all([loadModernInteriorsAtlasIndex(spriteIndexUrl), atlas.decode(), sync()]);
+  assetsReady = true;
+  el("case-name").textContent = "Checking current renders…";
+  let changed: ReadyCase | undefined;
+  for (const c of cases.filter((c) => state.batch.some((b) => b.id === c.id))) {
+    await verifyCase(c);
+    if (c.fingerprint && state.batch.some((b) => b.id === c.id && b.fingerprint !== c.fingerprint))
+      changed ??= c;
+  }
+  const reduction = changed && cases.find((c) => c.relatedCaseId === changed.id);
+  if (reduction) await verifyCase(reduction);
   if (changed) {
     state.paused = false;
     state.batch = [];
@@ -521,17 +605,36 @@ async function start(): Promise<void> {
     state.draft = "";
   }
   const restored = pool().find((c) => c.id === state.current);
-  show(
-    reduction ??
-      changed ??
-      (restored &&
-      (state.paused || state.draft || state.annotation?.pins.length || !judgment(restored))
-        ? restored
-        : undefined) ??
-      nextCase() ??
-      restored,
-    false,
-  );
+  if (restored) await verifyCase(restored);
+  let target =
+    (reduction && !judgment(reduction) ? reduction : undefined) ??
+    changed ??
+    (restored &&
+    !excluded.has(restored.id) &&
+    (state.paused || state.draft || state.annotation?.pins.length || !judgment(restored))
+      ? restored
+      : undefined) ??
+    (await findUnchecked());
+  if (!target && state.stage !== "all") {
+    state.stage = "all";
+    target = await findUnchecked();
+  }
+  show(target ?? restored, false);
+  el("app").dataset.reviewReady = "true";
+  // Revalidate everything for exact category counts, without storing images or
+  // blocking review. Navigation changes the priority of the next scratch render.
+  while (cases.some((c) => !c.fingerprint && !excluded.has(c.id))) {
+    const pending = (c: ReadyCase) => !c.fingerprint && !excluded.has(c.id);
+    const next =
+      (current && pending(current) ? current : undefined) ??
+      pool().find(pending) ??
+      cases.find(pending);
+    if (!next) break;
+    await verifyCase(next);
+  }
+  scratch.width = scratch.height = 0;
+  if (current) drawStatus();
+  else draw();
   el("app").dataset.ready = "true";
   setInterval(() => void sync(), 5000);
 }

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsx scripts/build-review-sprites.ts --check && tsc && vite build",
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",
@@ -15,6 +15,7 @@
     "test:e2e:ui": "playwright test --ui",
     "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts",
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
+    "assets:review": "tsx scripts/build-review-sprites.ts",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts"
   },

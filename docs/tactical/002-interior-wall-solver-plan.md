@@ -711,3 +711,29 @@ Only the two rejected cases change. Geometry tests distinguish attached and free
 ends; browser pixel checks cover the cap-to-trim seam at both heights. The same
 two-failure review loop reopens these changed renders on reload. Next: review
 these two connections before adding mirrored or tightly spaced counterexamples.
+
+### Preserve tall-wall height and make review loading responsive, 2026-09-29
+
+The low south join is approved (184 protected renders). The tall join was
+rejected because flattening its endpoint erased the height difference from the
+low foreground wall. South connections now treat the cutaway as an 8px receiver:
+it covers the low portion of the end while a tall partition retains its 32px
+height step above it. The low approved render is unchanged; only the tall case
+returns for visual review.
+
+The slow-start diagnosis found a full 20 MB source library download, retention
+of 185 generated canvases, and eager rendering/fingerprinting on the UI thread.
+The review now uses a small source-only sprite sheet, one reusable scratch image,
+and an active unmarked image. It prioritizes the reported/current case and yields
+between fresh per-case checks. There is no runtime cache of generated rooms or
+fingerprints. Sprite metadata/crops are rebuilt by `npm run assets:review`, and
+the build rejects stale sprite assets. The complete approved pixel baseline
+checks that repacking preserves rendering exactly.
+
+Category labels now report unchecked and wrong counts, with explicit checking
+counts until existing verdicts have been verified against current pixels. Tests
+cover early interaction, task yielding, small asset requests, fresh hashing on
+reload, counts after changed pixels/undo, and the existing feedback cycle.
+
+Next: review the tall south height step and confirm loading feels responsive on
+the phone before expanding the geometry pool.

@@ -121,6 +121,10 @@ export function currentVerdict(
   caseId: string,
   fingerprint: string,
 ): ReviewFeedback | undefined {
-  const latest = [...records].reverse().find((r) => r.caseId === caseId);
-  return latest?.fingerprint === fingerprint && latest.verdict !== "clear" ? latest : undefined;
+  for (let i = records.length - 1; i >= 0; i--) {
+    const latest = records[i];
+    if (latest?.caseId === caseId)
+      return latest.fingerprint === fingerprint && latest.verdict !== "clear" ? latest : undefined;
+  }
+  return undefined;
 }

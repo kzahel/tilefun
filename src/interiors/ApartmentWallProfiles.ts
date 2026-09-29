@@ -109,10 +109,10 @@ export function buildProfileApartmentPlan(
       [-1, 0, 1].every((dx) => plan.rows[plan.height - 1]?.[w.x + dx] === "#");
     if (attachSouth) {
       const endY = (plan.height - 1) * 4;
-      // A connected cutaway end has no exposed south face. Its cap and side
-      // terminate at the visible shell boundary, independently of wall height.
+      // The low cutaway covers the first 8px of the end. A taller partition
+      // retains its height step above that connection instead of flattening.
       for (let x = w.x * 4 + minX; x <= w.x * 4 + 3; x++) southPorts.add(key(x, endY));
-      const capX = (w.x * 4 + minX) * 8 - WALL_HEIGHTS[w.height] / 4;
+      const capX = (w.x * 4 + minX) * 8 - Math.min(WALL_HEIGHTS[w.height], WALL_HEIGHTS.low) / 4;
       // Write within each owning tile so the next trim tile cannot cover a
       // connection that crosses a 16px boundary.
       for (let x = capX + 1; x < capX + width * 8; x++)
@@ -212,7 +212,7 @@ export function buildProfileApartmentPlan(
     return [
       port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,
       southPorts.has(key(x, y))
-        ? y * 8
+        ? y * 8 - Math.max(0, h - WALL_HEIGHTS.low)
         : y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
     ];
   };
@@ -233,7 +233,9 @@ export function buildProfileApartmentPlan(
       `top:${h}`,
       "top",
     );
-    const south = southPorts.has(key(x, y + 1)) ? h : (columns.get(key(x, y + 1))?.height ?? 0);
+    const south = southPorts.has(key(x, y + 1))
+      ? WALL_HEIGHTS.low
+      : (columns.get(key(x, y + 1))?.height ?? 0);
     for (let z = Math.min(south, h); z < h; z += 8)
       face(
         [

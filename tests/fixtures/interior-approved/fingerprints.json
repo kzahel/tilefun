@@ -913,5 +913,10 @@
     "id": "connection-north-tall",
     "name": "North wall attachment \u00b7 tall partition",
     "fp": "caa55ff6a97c37558305791bef0984a54e5cd060ccd73ef07fe11aeaf4e64da7"
+  },
+  {
+    "id": "connection-south-low",
+    "name": "South cutaway attachment \u00b7 low partition",
+    "fp": "69d20a85dee97205cbbce9be4ea4e281e7bf1ca8aff158751891400eabb05ffd"
   }
 ]

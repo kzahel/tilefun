@@ -153,13 +153,18 @@ describe("wall thickness and end connections", () => {
   it.each([
     "low",
     "tall",
-  ])("joins the %s south cap to the cutaway without an exposed end", (height) => {
+  ])("joins the %s south end while preserving height above the low cutaway", (height) => {
     const map = build(`south-${height}`);
     const points = map.surfaces.flatMap((s) => s.points);
     expect(Math.max(...points.map(([, y]) => y))).toBe(224);
     const tops = map.surfaces.filter((s) => s.plane.startsWith("top:"));
-    expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(224);
-    expect(map.surfaces.some((s) => s.plane === "south:28")).toBe(false);
+    expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(
+      height === "low" ? 224 : 192,
+    );
+    const end = map.surfaces.filter((s) => s.plane === "south:28");
+    expect(end).toHaveLength(height === "low" ? 0 : 4);
+    if (height === "tall")
+      expect(Math.min(...end.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
     expect(map.pixelHeight).toBe(230);
     expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
   });

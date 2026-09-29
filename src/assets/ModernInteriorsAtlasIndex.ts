@@ -65,9 +65,11 @@ export function compareModernInteriorsLayers(
   return a.key.localeCompare(b.key, undefined, { numeric: true });
 }
 
-export async function loadModernInteriorsAtlasIndex(): Promise<void> {
+export async function loadModernInteriorsAtlasIndex(
+  url = "data/modern-interiors-atlas.json",
+): Promise<void> {
   if (_index) return;
-  const res = await fetch("data/modern-interiors-atlas.json");
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load Modern Interiors atlas index: ${res.status}`);
   const index = (await res.json()) as ModernInteriorsAtlasIndex;
 

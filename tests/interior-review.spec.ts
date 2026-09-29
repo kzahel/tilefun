@@ -404,7 +404,7 @@ test("small stress review mixes motifs and shows complete compact renders on a p
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(URL);
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
-  await page.locator("#stage").selectOption({ label: "Small stress cases" });
+  await page.locator("#stage").selectOption("6");
   for (const family of [
     "Adjacent south edges",
     "Adjacent south edges · mirror",
