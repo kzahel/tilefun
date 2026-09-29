@@ -25,6 +25,7 @@ export type ActionName =
   | "paint_unpaint"
   | "toggle_tab"
   // Play mode (discrete)
+  | "enter_place"
   | "throw"
   | "zoom_1"
   | "zoom_2"
@@ -70,6 +71,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "toggle_tab", keys: ["t", "T"] },
   // Play mode actions
   { action: "throw", keys: ["b"] },
+  { action: "enter_place", keys: ["e", "E"] },
   // Play mode zoom presets
   { action: "zoom_1", keys: ["1"] },
   { action: "zoom_2", keys: ["2"] },

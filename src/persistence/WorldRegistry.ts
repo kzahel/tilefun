@@ -151,12 +151,19 @@ export class WorldRegistry implements IWorldRegistry {
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
     });
-    // Delete the per-world database
-    await new Promise<void>((resolve, reject) => {
-      const req = indexedDB.deleteDatabase(dbNameForWorld(id));
-      req.onsuccess = () => resolve();
-      req.onerror = () => reject(req.error);
-      req.onblocked = () => resolve(); // Don't hang if a connection is still open
-    });
+    // Interior instances are virtual children, with separate durable databases.
+    const names = [
+      dbNameForWorld(id),
+      ...(await indexedDB.databases()).flatMap((db) =>
+        db.name?.startsWith(dbNameForWorld(`interior~${id}~`)) ? [db.name] : [],
+      ),
+    ];
+    for (const name of names)
+      await new Promise<void>((resolve, reject) => {
+        const req = indexedDB.deleteDatabase(name);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+        req.onblocked = () => resolve(); // Don't hang if a connection is still open
+      });
   }
 }

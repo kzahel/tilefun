@@ -32,6 +32,16 @@ import { ProceduralProps } from "../generation/ProceduralProps.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import { compileFurniture } from "../interiors/FurnishedInterior.js";
+import {
+  furnitureAsset,
+  INTERIOR_ENTRY,
+  INTERIOR_FLOOR,
+  INTERIOR_WALL_TYPE,
+  type InteriorIdentity,
+  interiorGenerator,
+  interiorPlan,
+} from "../interiors/GameplayInterior.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta } from "../persistence/SaveManager.js";
@@ -183,6 +193,7 @@ export class Realm {
   lastLoadedCamera = { cameraX: 0, cameraY: 0, cameraZoom: 1 };
   lastLoadedPlayerPos = { wx: 0, wy: 0 };
   currentWorldId: string | null = null;
+  interior: InteriorIdentity | null = null;
 
   /**
    * Timestamp (Date.now()) when the last player left this realm, or null if
@@ -249,6 +260,7 @@ export class Realm {
     const persistId = session.profileId || session.clientId;
     const saved = this.saveManager ? await this.saveManager.loadPlayerData(persistId) : null;
 
+    if (this.interior) session.returnLocation = saved?.returnLocation ?? session.returnLocation;
     const spawnX = saved?.x ?? this.lastLoadedPlayerPos.wx;
     const spawnY = saved?.y ?? this.lastLoadedPlayerPos.wy;
     const gems = saved?.gemsCollected ?? this.lastLoadedGems;
@@ -331,6 +343,7 @@ export class Realm {
     if (!this.saveManager) return;
     const persistId = session.profileId || session.clientId;
     this.saveManager.markPlayerDirty(persistId, {
+      ...(this.interior ? { returnLocation: session.returnLocation } : {}),
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
       y: session.player.position.wy,
@@ -651,7 +664,7 @@ export class Realm {
 
     // ── Phase 3: Spawners (per-session, near each player) ──
     for (const session of this.sessions.values()) {
-      if (dormantClientIds.has(session.clientId)) continue;
+      if (dormantClientIds.has(session.clientId) || this.interior) continue;
       if (!session.editorEnabled && !session.debugPaused) {
         this.gemSpawner.update(
           dt,
@@ -709,6 +722,7 @@ export class Realm {
 
   /** Load/unload chunks for the given visible range and compute autotile. */
   updateVisibleChunks(range: ChunkRange): void {
+    if (this.interior) range = { minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 };
     const initialWarmLoad = this.world.chunks.loadedCount === 0;
     const maxLoads =
       this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
@@ -722,7 +736,10 @@ export class Realm {
     this.world.updateLoadedChunks(range, maxLoads);
     this.world.computeAutotile(this.blendGraph, maxAutotile);
 
-    if (this.generation.type === "regional" && this.generation.version !== "regional-v1") {
+    if (
+      this.interior ||
+      (this.generation.type === "regional" && this.generation.version !== "regional-v1")
+    ) {
       this.proceduralProps.reconcile(
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
@@ -768,7 +785,10 @@ export class Realm {
   }
 
   realizeProceduralProps(): void {
-    if (this.generation.type === "regional" && this.generation.version !== "regional-v1")
+    if (
+      this.interior ||
+      (this.generation.type === "regional" && this.generation.version !== "regional-v1")
+    )
       this.proceduralProps.reconcile(
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
@@ -869,10 +889,38 @@ export class Realm {
         break;
 
       case "edit-move-prop":
+        if (this.interior) {
+          const prop = this.propManager.props.find((p) => p.id === msg.propId);
+          if (!prop || prop.type === INTERIOR_WALL_TYPE) break;
+          const { plan } = interiorPlan(this.interior);
+          try {
+            compileFurniture(
+              plan,
+              this.propManager.props.flatMap((p) => {
+                const asset = furnitureAsset(p.type);
+                return asset
+                  ? [
+                      {
+                        id: String(p.id),
+                        asset,
+                        x: p.id === msg.propId ? msg.wx : p.position.wx,
+                        y: p.id === msg.propId ? msg.wy : p.position.wy,
+                      },
+                    ]
+                  : [];
+              }),
+              INTERIOR_FLOOR,
+            );
+          } catch {
+            break;
+          }
+        }
         this.propManager.move(msg.propId, msg.wx, msg.wy);
         break;
 
       case "edit-delete-prop":
+        if (this.propManager.props.find((p) => p.id === msg.propId)?.type === INTERIOR_WALL_TYPE)
+          break;
         this.propManager.remove(msg.propId);
         this.saveManager?.markMetaDirty();
         break;
@@ -938,8 +986,9 @@ export class Realm {
     worldId: string,
     registry: IWorldRegistry,
     createStore: (id: string) => PersistenceStore,
+    overrideMeta?: WorldMeta,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
-    const worldMeta = await registry.getWorld(worldId);
+    const worldMeta = overrideMeta ?? (await registry.getWorld(worldId));
     if (!worldMeta) throw new Error("World not found.");
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
     // Close previous save manager
@@ -949,7 +998,11 @@ export class Realm {
     }
 
     // Create fresh world state with the correct generation strategy
-    this.world = new World(this.buildStrategy(worldMeta));
+    this.interior = worldMeta.interior ?? null;
+    const strategy = this.buildStrategy(worldMeta);
+    if (this.interior)
+      this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
+    this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
@@ -969,6 +1022,15 @@ export class Realm {
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
+    if (
+      this.interior &&
+      savedMeta?.interior &&
+      (savedMeta.interior.version !== this.interior.version ||
+        savedMeta.interior.featureId !== this.interior.featureId ||
+        savedMeta.interior.parentWorldId !== this.interior.parentWorldId ||
+        savedMeta.interior.floor !== this.interior.floor)
+    )
+      throw new Error("Unsupported saved interior identity.");
     const savedChunks = await this.saveManager.loadChunks();
 
     let cameraX = 0;
@@ -1014,15 +1076,25 @@ export class Realm {
         cameraX = playerX;
         cameraY = playerY;
       }
-      spawnInitialChickens(
-        5,
-        this.world,
-        this.entityManager,
-        this.generation.type === "regional" ? playerX : 0,
-        this.generation.type === "regional" ? playerY : 0,
-      );
+      if (!this.interior)
+        spawnInitialChickens(
+          5,
+          this.world,
+          this.entityManager,
+          this.generation.type === "regional" ? playerX : 0,
+          this.generation.type === "regional" ? playerY : 0,
+        );
     }
 
+    if (this.interior) {
+      playerX = INTERIOR_ENTRY.wx;
+      playerY = INTERIOR_ENTRY.wy;
+      cameraX = playerX;
+      cameraY = playerY;
+      const wall = createProp(INTERIOR_WALL_TYPE, 0, 0);
+      wall.proceduralId = "interior:boundary";
+      this.propManager.add(wall);
+    }
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);
     this.fishSpawner.reset(this.entityManager);
@@ -1043,7 +1115,7 @@ export class Realm {
     };
 
     this.currentWorldId = worldId;
-    await registry.updateLastPlayed(worldId);
+    await registry.updateLastPlayed(this.interior?.parentWorldId ?? worldId);
 
     // Store loaded positions for addPlayer() to use
     this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
@@ -1053,6 +1125,10 @@ export class Realm {
     this.clientDeltaStates.clear();
 
     return { cameraX, cameraY, cameraZoom };
+  }
+
+  async flushAsync(): Promise<void> {
+    await this.saveManager?.flushAsync();
   }
 
   flush(): void {
@@ -1529,6 +1605,7 @@ export class Realm {
 
     return {
       ...this.proceduralProps.save(),
+      ...(this.interior ? { interior: this.interior } : {}),
       playerX: player?.position.wx ?? 0,
       playerY: player?.position.wy ?? 0,
       cameraX,

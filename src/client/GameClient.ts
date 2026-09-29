@@ -53,6 +53,7 @@ import {
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
+import { DoorControl } from "../ui/DoorControl.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { World } from "../world/World.js";
@@ -131,6 +132,7 @@ export class GameClient {
 
   /** Realm list received while in lobby (multiplayer connect flow). */
   private lobbyRealmList: RealmInfo[] | null = null;
+  private doorControl: DoorControl;
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
   /** Player profile (display name, id). */
@@ -237,12 +239,14 @@ export class GameClient {
           remoteView.bufferMessage(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
           if (msg.generation) this.showWorldIdentity(msg.generation);
+          remoteView.interior = msg.interior ?? null;
+          this.canvas.dataset.interior = msg.interior ? JSON.stringify(msg.interior) : "";
           console.log(
             `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
           );
           if (msg.worldId) {
             this.mainMenu.currentWorldId = msg.worldId;
-            sessionStorage.setItem(LAST_WORLD_KEY, msg.worldId);
+            sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
           }
           remoteView.clear();
           if (this.hmrCameraRestored) {
@@ -289,6 +293,8 @@ export class GameClient {
             this.lobbyRealmList = msg.realms;
           }
         } else if (msg.type === "realm-left") {
+          remoteView.interior = null;
+          this.canvas.dataset.interior = "";
           remoteView.clear();
         } else if (msg.type === "realm-player-count") {
           this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
@@ -332,6 +338,20 @@ export class GameClient {
       this.stateView = new LocalStateView(server);
     }
 
+    this.doorControl = new DoorControl(async (request) => {
+      await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+      if (!this.serialized) {
+        const session = this.localServer.getLocalSession();
+        this.camera.snapTo(session.cameraX, session.cameraY);
+        this.camera.requestSnap();
+        this.mainMenu.currentWorldId = session.realmId;
+        this.showWorldIdentity(this.localServer.worldGeneration);
+        this.canvas.dataset.interior = this.localServer.worldInterior
+          ? JSON.stringify(this.localServer.worldInterior)
+          : "";
+      }
+    });
+    this.actions.on("enter_place", () => this.doorControl.activate());
     this.loop = new GameLoop({
       update: (dt) => {
         this.time.elapsed += dt;
@@ -348,6 +368,13 @@ export class GameClient {
         // Tick client-side sprite animations (animTimer/frameCol not serialized).
         this.remoteView?.tickAnimations(dt);
         this.scenes.update(dt);
+        this.doorControl.update(
+          this.stateView,
+          this.initDone &&
+            !this.scenes.has(MenuScene) &&
+            !this.scenes.has(CatalogScene) &&
+            !this.scenes.has(InteriorCatalogScene),
+        );
       },
       render: (alpha) => {
         this.time.alpha = alpha;
@@ -694,6 +721,7 @@ export class GameClient {
   }
 
   destroy(): void {
+    this.doorControl.destroy();
     this.loop.stop();
     this.gcFlushServer();
     this.transport.close();

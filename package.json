@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsx scripts/build-review-sprites.ts --check && tsc && vite build",
+    "build": "tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsc && vite build",
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",

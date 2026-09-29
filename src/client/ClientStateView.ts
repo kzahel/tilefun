@@ -50,6 +50,7 @@ export interface ExtrapolationStats {
 }
 
 export interface ClientStateView {
+  readonly interior?: import("../interiors/GameplayInterior.js").InteriorIdentity | null;
   readonly world: World;
   readonly entities: readonly Entity[];
   readonly props: readonly Prop[];
@@ -91,6 +92,9 @@ export interface ClientStateView {
 export class LocalStateView implements ClientStateView {
   constructor(private readonly server: GameServer) {}
 
+  get interior() {
+    return this.server.worldInterior;
+  }
   get world(): World {
     return this.server.world;
   }
@@ -141,6 +145,7 @@ interface ExtrapolationSample extends ExtrapolationGhost {
  * JSON serialization — no shared object references with the server.
  */
 export class RemoteStateView implements ClientStateView {
+  interior: import("../interiors/GameplayInterior.js").InteriorIdentity | null = null;
   private _world: World;
   private _entityMap: Map<number, Entity> = new Map();
   private _entities: Entity[] = [];

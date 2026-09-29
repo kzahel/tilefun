@@ -3,6 +3,7 @@ import { aabbOverlapsPropWalls, aabbOverlapsSolid, getEntityAABB } from "../enti
 import { createPlayer } from "../entities/Player.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
+import { INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Realm } from "./Realm.js";
 
@@ -25,8 +26,9 @@ export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: n
   const cx = Math.floor(arrival.x / CHUNK_SIZE),
     cy = Math.floor(arrival.y / CHUNK_SIZE);
   // Explicit bounded warm-up; do not evict chunks belonging to other players.
-  for (let y = cy - 3; y <= cy + 3; y++)
-    for (let x = cx - 3; x <= cx + 3; x++) realm.world.getChunk(x, y);
+  const radius = realm.interior ? 1 : 3;
+  for (let y = cy - radius; y <= cy + radius; y++)
+    for (let x = cx - radius; x <= cx + radius; x++) realm.world.getChunk(x, y);
   realm.realizeProceduralProps();
   const player = createPlayer(0, 0);
   const collider = player.collider;
@@ -34,6 +36,16 @@ export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: n
   const test = (x: number, y: number) => {
     const position = { wx: x * TILE_SIZE, wy: y * TILE_SIZE };
     const aabb = getEntityAABB(position, collider);
+    if (realm.interior) {
+      const floor = INTERIOR_FLOOR;
+      const inside =
+        aabb.left >= floor.x &&
+        aabb.right <= floor.x + floor.width &&
+        aabb.top >= floor.y &&
+        aabb.bottom <= floor.y + floor.height;
+      const doorway = aabb.left >= 64 && aabb.right <= 96 && aabb.top >= 128 && aabb.bottom <= 176;
+      if (!inside && !doorway) return null;
+    }
     if (
       aabbOverlapsSolid(
         aabb,

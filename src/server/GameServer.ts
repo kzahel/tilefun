@@ -5,11 +5,22 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { baseGameMod } from "../game/base-game.js";
 import {
+  createDescriptor,
   descriptorFromMetadata,
   type GenerationRequest,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
+import { DistrictSource } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
+import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import {
+  exteriorEntrance,
+  INTERIOR_ENTRY,
+  INTERIOR_EXIT,
+  type InteriorIdentity,
+  interiorRealmId,
+  parseInteriorId,
+} from "../interiors/GameplayInterior.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -93,6 +104,9 @@ export class GameServer {
     return realm;
   }
 
+  get worldInterior() {
+    return this.activeRealm.interior;
+  }
   get worldGeneration() {
     return this.activeRealm.generation;
   }
@@ -235,6 +249,7 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "world-loaded",
             generation: realm.generation,
+            ...(realm.interior ? { interior: realm.interior } : {}),
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: existingSession.player.position.wx,
             cameraY: existingSession.player.position.wy,
@@ -271,6 +286,7 @@ export class GameServer {
           this.transport.send(clientId, {
             type: "world-loaded",
             generation: realm.generation,
+            ...(realm.interior ? { interior: realm.interior } : {}),
             ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
             cameraX: session.player.position.wx,
             cameraY: session.player.position.wy,
@@ -441,7 +457,12 @@ export class GameServer {
       realm.tickRate = this.tickRate;
       realm.physicsMult = this._physicsMult;
       try {
-        await realm.loadWorld(worldId, this.registry, this.createStore);
+        await realm.loadWorld(
+          worldId,
+          this.registry,
+          this.createStore,
+          await this.realmMetadata(worldId),
+        );
         realm.idleSince = Date.now();
         this.realms.set(worldId, realm);
         return realm;
@@ -478,6 +499,114 @@ export class GameServer {
     return cam;
   }
 
+  private async realmMetadata(worldId: string): Promise<WorldMeta | undefined> {
+    const known = await this.registry.getWorld(worldId);
+    if (known) return known;
+    const parsed = parseInteriorId(worldId);
+    if (!parsed) return undefined;
+    const parent = await this.registry.getWorld(parsed.parentWorldId);
+    if (!parent) throw new Error("Parent world not found.");
+    const generation = descriptorFromMetadata(parent);
+    if (generation.type !== "regional" || generation.version === "regional-v1")
+      throw new Error("This generator has no enterable building plans.");
+    const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
+    if (!match) throw new Error("Invalid building owner.");
+    const source = new DistrictSource(regionalWorld(generation.seed));
+    const lot = source
+      .owner(Number(match[1]), Number(match[2]))
+      ?.blocks.flatMap((b) => b.lots)
+      .find((l) => l.id === parsed.featureId);
+    if (!lot) throw new Error("Building is absent from the pinned district plan.");
+    const interior: InteriorIdentity = {
+      version: "interior-v1",
+      ...parsed,
+      buildingType: lot.buildingType,
+      floor: 0,
+      returnX: lot.entrance.x,
+      returnY: lot.entrance.y,
+    };
+    return {
+      ...parent,
+      id: worldId,
+      name: lot.buildingType,
+      generation: createDescriptor("flat", generation.seed),
+      interior,
+    };
+  }
+
+  private async enterBuilding(
+    clientId: string,
+    session: PlayerSession,
+    featureId: string,
+  ): Promise<void> {
+    if (session.transitioning) throw new Error("A realm transition is already running.");
+    session.transitioning = true;
+    try {
+      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+      if (!realm || realm.interior || !realm.currentWorldId)
+        throw new Error("No exterior world selected.");
+      realm.realizeProceduralProps();
+      const prop = realm.propManager.props.find((p) => p.proceduralId === featureId);
+      const door = prop ? exteriorEntrance(prop) : null;
+      if (
+        !door ||
+        Math.hypot(session.player.position.wx - door.wx, session.player.position.wy - door.wy) >
+          32 ||
+        (session.player.wz ?? 0) > 8
+      )
+        throw new Error("Stand near the building entrance to enter.");
+      const worldId = interiorRealmId(realm.currentWorldId, featureId);
+      const destination = await this.getOrCreateRealm(worldId);
+      const returnLocation = {
+        worldId: realm.currentWorldId,
+        x: door.wx / 16,
+        y: door.wy / 16,
+        generation: realm.generation,
+      };
+      await this.movePlayerToRealm(
+        clientId,
+        session,
+        worldId,
+        {
+          x: INTERIOR_ENTRY.wx / 16,
+          y: INTERIOR_ENTRY.wy / 16,
+          generation: destination.generation,
+        },
+        true,
+      );
+      session.returnLocation = returnLocation;
+      destination.savePlayerData(session);
+    } finally {
+      session.transitioning = false;
+    }
+  }
+  private async exitBuilding(clientId: string, session: PlayerSession): Promise<void> {
+    if (session.transitioning) throw new Error("A realm transition is already running.");
+    session.transitioning = true;
+    try {
+      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+      if (!realm?.interior) throw new Error("You are not in an interior.");
+      if (
+        Math.hypot(
+          session.player.position.wx - INTERIOR_EXIT.wx,
+          session.player.position.wy - INTERIOR_EXIT.wy,
+        ) > 40
+      )
+        throw new Error("Return to the interior doorway to leave.");
+      const saved = session.returnLocation;
+      const parent = await this.getOrCreateRealm(realm.interior.parentWorldId);
+      const position = saved ?? {
+        worldId: realm.interior.parentWorldId,
+        x: realm.interior.returnX,
+        y: realm.interior.returnY,
+        generation: parent.generation,
+      };
+      await this.movePlayerToRealm(clientId, session, position.worldId, position);
+      session.returnLocation = null;
+    } finally {
+      session.transitioning = false;
+    }
+  }
   /**
    * Move a single player to a different realm/world.
    * Creates the target realm if not already loaded.
@@ -487,9 +616,12 @@ export class GameServer {
     session: PlayerSession,
     worldId: string,
     arrival?: Arrival,
+    allowInterior = false,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
     // Validate/load the destination before removing a player from a live realm.
     const targetRealm = await this.getOrCreateRealm(worldId);
+    if (targetRealm.interior && !allowInterior)
+      throw new Error("Enter this interior through its building door.");
     const position = arrival ? safeArrival(targetRealm, arrival) : undefined;
     // Remove from current realm
     if (session.realmId) {
@@ -507,6 +639,11 @@ export class GameServer {
       session.cameraX = position.wx;
       session.cameraY = position.wy;
       targetRealm.clearClientRevisions(clientId);
+      session.inputQueue = [];
+      session.gameplaySession.lastSafePosition = position;
+      const cx = Math.floor(position.wx / 256),
+        cy = Math.floor(position.wy / 256);
+      session.visibleRange = { minCx: cx - 2, minCy: cy - 2, maxCx: cx + 2, maxCy: cy + 2 };
     }
 
     return {
@@ -576,34 +713,41 @@ export class GameServer {
   }
 
   async deleteWorld(id: string): Promise<void> {
-    const realm = this.realms.get(id);
-    if (realm) {
-      // Boot any players in the realm back to the default realm
-      if (realm.sessions.size > 0 && this.defaultRealmId && id !== this.defaultRealmId) {
-        const sessionsToMove = [...realm.sessions.values()];
-        for (const session of sessionsToMove) {
-          await this.movePlayerToRealm(session.clientId, session, this.defaultRealmId);
+    const affected = [...this.realms.entries()].filter(
+      ([key, realm]) => key === id || realm.interior?.parentWorldId === id,
+    );
+    const fallback =
+      this.defaultRealmId && this.defaultRealmId !== id
+        ? this.defaultRealmId
+        : ((await this.registry.listWorlds()).find((w) => w.id !== id)?.id ?? null);
+    for (const [, realm] of affected)
+      for (const session of [...realm.sessions.values()]) {
+        if (fallback) {
+          await this.movePlayerToRealm(session.clientId, session, fallback);
+          const target = this.realms.get(fallback);
           this.transport.send(session.clientId, {
             type: "player-assigned",
             entityId: session.player.id,
           });
           this.transport.send(session.clientId, {
             type: "world-loaded",
-            generation:
-              this.realms.get(this.defaultRealmId)?.generation ?? this.activeRealm.generation,
-            worldId: this.defaultRealmId,
-            cameraX: session.player.position.wx,
-            cameraY: session.player.position.wy,
+            worldId: fallback,
+            generation: target?.generation ?? descriptorFromMetadata(),
+            cameraX: session.cameraX,
+            cameraY: session.cameraY,
             cameraZoom: session.cameraZoom,
           });
+        } else {
+          realm.removePlayer(session.clientId);
+          this.transport.send(session.clientId, { type: "realm-left", requestId: 0 });
         }
       }
-
-      // Close the SaveManager connection BEFORE deleting the database,
-      // otherwise indexedDB.deleteDatabase() blocks on the open connection.
+    for (const [key, realm] of affected) {
+      await realm.flushAsync();
       realm.destroy();
-      this.realms.delete(id);
+      this.realms.delete(key);
     }
+    if (this.defaultRealmId === id) this.defaultRealmId = fallback;
     await this.registry.deleteWorld(id);
   }
 
@@ -678,6 +822,36 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "enter-building":
+      case "exit-building": {
+        const operation =
+          msg.type === "enter-building"
+            ? this.enterBuilding(clientId, session, msg.featureId)
+            : this.exitBuilding(clientId, session);
+        operation
+          .then(() => {
+            const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+            this.transport.send(clientId, { type: "player-assigned", entityId: session.player.id });
+            this.transport.send(clientId, {
+              type: "realm-joined",
+              requestId: msg.requestId,
+              worldId: session.realmId ?? "",
+              generation: realm?.generation ?? this.activeRealm.generation,
+              interior: realm?.interior ?? undefined,
+              cameraX: session.cameraX,
+              cameraY: session.cameraY,
+              cameraZoom: session.cameraZoom,
+            });
+          })
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: String(error),
+            }),
+          );
+        return;
+      }
       case "identify":
         if (msg.profileId) {
           session.profileId = msg.profileId;
@@ -723,6 +897,7 @@ export class GameServer {
               type: "world-loaded",
               requestId: msg.requestId,
               worldId: msg.worldId,
+              interior: this.realms.get(msg.worldId)?.interior ?? undefined,
               generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
               cameraX: cam.cameraX,
               cameraY: cam.cameraY,
@@ -766,6 +941,7 @@ export class GameServer {
               type: "realm-joined",
               requestId: msg.requestId,
               worldId: msg.worldId,
+              interior: this.realms.get(msg.worldId)?.interior ?? undefined,
               generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
               cameraX: cam.cameraX,
               cameraY: cam.cameraY,
@@ -820,12 +996,20 @@ export class GameServer {
         return;
 
       case "delete-world":
-        this.deleteWorld(msg.worldId).then(() => {
-          this.transport.send(clientId, {
-            type: "world-deleted",
-            requestId: msg.requestId,
-          });
-        });
+        this.deleteWorld(msg.worldId)
+          .then(() => {
+            this.transport.send(clientId, {
+              type: "world-deleted",
+              requestId: msg.requestId,
+            });
+          })
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: String(error),
+            }),
+          );
         return;
 
       case "list-worlds":

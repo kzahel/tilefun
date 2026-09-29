@@ -26,6 +26,8 @@ export class PlayerSession {
 
   /** Which realm this session is in (null = lobby, not in any realm). */
   realmId: string | null = null;
+  returnLocation: ({ worldId: string } & import("./SafeArrival.js").Arrival) | null = null;
+  transitioning = false;
 
   /** Queued inputs from client (drained each tick). */
   inputQueue: {

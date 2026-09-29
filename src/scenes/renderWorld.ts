@@ -7,6 +7,7 @@ import { collectScene } from "../rendering/collectScene.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
+import { renderInterior } from "./renderInterior.js";
 
 // ── 3D debug renderer (lazy-loaded) ──
 
@@ -64,6 +65,7 @@ export function renderWorld(gc: GameContext): void {
 
   const visible = camera.getVisibleChunkRange();
 
+  if (stateView.interior) return;
   // Terrain + autotile + details (baked into chunk cache)
   tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible);
 
@@ -82,6 +84,10 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
   const { ctx, camera, stateView, sheets, tileRenderer } = gc;
   if (sheets.size === 0) return;
 
+  if (stateView.interior) {
+    renderInterior(gc, alpha, extraParticles ?? []);
+    return;
+  }
   const visible = camera.getVisibleChunkRange();
   const grassSheet = sheets.get("grass-blades");
   const extrapolate = gc.console.cvars.get("cl_extrapolate")?.get() === true;

@@ -169,12 +169,18 @@ class TestTransport implements IServerTransport {
 async function createTestSetup() {
   const transport = new TestTransport();
   const registry = new MemoryRegistry();
-  const server = new GameServer(transport, {
-    registry,
-    createStore: () => new MemoryStore(),
-  });
+  const stores = new Map<string, MemoryStore>();
+  const createStore = (id: string) => {
+    let store = stores.get(id);
+    if (!store) {
+      store = new MemoryStore();
+      stores.set(id, store);
+    }
+    return store;
+  };
+  const server = new GameServer(transport, { registry, createStore });
   await server.init();
-  return { server, transport, registry };
+  return { server, transport, registry, stores, createStore };
 }
 
 function firstMessage<T>(messages: readonly T[], label: string): T {
@@ -614,4 +620,96 @@ it("Play here checks identity and realized walls, and live inspection preserves 
     server.inspectWorld(meta.id, [], { minX: 0, minY: 0, maxX: 1000, maxY: 1000 }),
   ).rejects.toThrow(/cap/);
   server.destroy();
+});
+
+it("building doors share persistent furnished realms and return to the right exterior", async () => {
+  const { server, transport, registry, createStore } = await createTestSetup();
+  transport.connect("local");
+  await new Promise((r) => setTimeout(r, 0));
+  const generation = createDescriptor("regional", 2026);
+  const meta = await registry.createWorld(
+    "Home district",
+    undefined,
+    undefined,
+    undefined,
+    generation,
+  );
+  await server.loadWorld(meta.id, { x: 300, y: 519, generation });
+  const prop = server.propManager.props.find(
+    (p) => p.type.startsWith("prop-regional-apartment-") && p.proceduralId,
+  );
+  if (!prop?.proceduralId) throw new Error("No apartment");
+  const { exteriorEntrance } = await import("../interiors/GameplayInterior.js");
+  const door = exteriorEntrance(prop);
+  if (!door) throw new Error("No door");
+  await server.loadWorld(meta.id, { x: door.wx / 16, y: door.wy / 16, generation });
+  transport.clientSend("local", {
+    type: "enter-building",
+    requestId: 50,
+    featureId: prop.proceduralId,
+  });
+  await new Promise((r) => setTimeout(r, 15));
+  const inside = transport.messagesOfType("local", "realm-joined").at(-1);
+  expect(inside?.interior?.featureId).toBe(prop.proceduralId);
+  expect(server.worldInterior?.version).toBe("interior-v1");
+  const fixture = server.propManager.props.find((p) => p.proceduralId === "fixture:bed");
+  if (!fixture) throw new Error("No bed");
+  expect(fixture.collider?.walkableTop).toBe(true);
+  expect(fixture.collider?.zHeight).toBe(8);
+  transport.connect("two");
+  await new Promise((r) => setTimeout(r, 0));
+  transport.clientSend("two", {
+    type: "join-realm",
+    requestId: 51,
+    worldId: meta.id,
+    arrival: { x: door.wx / 16, y: door.wy / 16, generation },
+  });
+  await new Promise((r) => setTimeout(r, 10));
+  transport.clientSend("two", {
+    type: "enter-building",
+    requestId: 52,
+    featureId: prop.proceduralId,
+  });
+  await new Promise((r) => setTimeout(r, 10));
+  expect(transport.messagesOfType("two", "realm-joined").at(-1)?.worldId).toBe(inside?.worldId);
+  transport.clientSend("local", { type: "edit-delete-prop", propId: fixture.id });
+  server.flush();
+  await new Promise((r) => setTimeout(r, 0));
+  transport.clientSend("local", { type: "exit-building", requestId: 53 });
+  await new Promise((r) => setTimeout(r, 10));
+  expect(server.worldInterior).toBeNull();
+  expect(server.worldGeneration).toEqual(generation);
+  expect(server.getLocalSession().player.position).toEqual(door);
+  transport.clientSend("local", {
+    type: "join-realm",
+    requestId: 54,
+    worldId: inside?.worldId ?? "",
+  });
+  await new Promise((r) => setTimeout(r, 5));
+  expect(transport.messagesOfType("local", "request-error").at(-1)?.message).toMatch(/door/);
+  expect(server.worldGeneration).toEqual(generation);
+  expect((await server.listWorlds()).some((w) => w.id.startsWith("interior~"))).toBe(false);
+  server.destroy();
+  const transport2 = new TestTransport(),
+    reopened = new GameServer(transport2, { registry, createStore });
+  await reopened.init();
+  transport2.connect("local");
+  await new Promise((r) => setTimeout(r, 0));
+  await reopened.loadWorld(meta.id, { x: door.wx / 16, y: door.wy / 16, generation });
+  transport2.clientSend("local", {
+    type: "enter-building",
+    requestId: 55,
+    featureId: prop.proceduralId,
+  });
+  await new Promise((r) => setTimeout(r, 10));
+  expect(reopened.worldInterior?.featureId).toBe(prop.proceduralId);
+  expect(reopened.propManager.props.some((p) => p.proceduralId === "fixture:bed")).toBe(false);
+  expect(new Set(reopened.propManager.props.map((p) => p.proceduralId)).size).toBe(
+    reopened.propManager.props.length,
+  );
+  await reopened.deleteWorld(meta.id);
+  expect(reopened.worldInterior).toBeNull();
+  expect((await reopened.listWorlds()).some((w) => w.id === meta.id)).toBe(false);
+  expect(transport2.messagesOfType("local", "world-loaded").at(-1)?.worldId).not.toBe(meta.id);
+  reopened.destroy();
 });

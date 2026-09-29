@@ -127,7 +127,9 @@ export type ClientMessage =
   | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival }
-  | { type: "leave-realm"; requestId: number };
+  | { type: "leave-realm"; requestId: number }
+  | { type: "enter-building"; requestId: number; featureId: string }
+  | { type: "exit-building"; requestId: number };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -285,6 +287,7 @@ export type ServerMessage =
   | SyncMessage
   | {
       type: "world-loaded";
+      interior?: import("../interiors/GameplayInterior.js").InteriorIdentity | undefined;
       generation?: GenerationDescriptor;
       requestId?: number;
       worldId?: string;
@@ -301,6 +304,7 @@ export type ServerMessage =
   | { type: "realm-list"; requestId?: number; realms: RealmInfo[] }
   | {
       type: "realm-joined";
+      interior?: import("../interiors/GameplayInterior.js").InteriorIdentity | undefined;
       generation?: GenerationDescriptor;
       requestId: number;
       worldId: string;

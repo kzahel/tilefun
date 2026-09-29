@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { existsSync, mkdirSync, renameSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, renameSync, rmSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
@@ -91,6 +91,12 @@ export class FsWorldRegistry implements IWorldRegistry {
   async deleteWorld(id: string): Promise<void> {
     this.worlds = this.worlds.filter((w) => w.id !== id);
     await this.persist();
+    const worldsDir = join(this.dataDir, "worlds");
+    if (existsSync(worldsDir))
+      for (const name of readdirSync(worldsDir)) {
+        if (name.startsWith(`interior~${id}~`))
+          rmSync(join(worldsDir, name), { recursive: true, force: true });
+      }
     // Remove the world's data directory
     const worldDir = join(this.dataDir, "worlds", id);
     if (existsSync(worldDir)) {

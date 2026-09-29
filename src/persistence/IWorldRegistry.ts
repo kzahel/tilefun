@@ -7,6 +7,7 @@ import type { RoadGenParams } from "../generation/RoadGenerator.js";
 export type WorldType = "generated" | "flat" | "island" | "regional";
 
 export interface WorldMeta {
+  readonly interior?: import("../interiors/GameplayInterior.js").InteriorIdentity;
   readonly generation?: GenerationDescriptor;
   id: string;
   name: string;

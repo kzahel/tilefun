@@ -20,6 +20,7 @@ export interface SerializedEntity {
 }
 
 export interface SavedMeta {
+  interior?: import("../interiors/GameplayInterior.js").InteriorIdentity;
   deletedProceduralIds?: string[];
   proceduralEdits?: SerializedEntity[];
   playerX: number;
@@ -34,6 +35,7 @@ export interface SavedMeta {
 }
 
 export interface SavedPlayerData {
+  returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;
   x: number;
   y: number;
@@ -57,6 +59,8 @@ export class SaveManager {
   private dirtyPlayers = new Map<string, SavedPlayerData>();
   private metaDirty = false;
   private saving = false;
+  private pending: Promise<void> = Promise.resolve();
+  private saveFailed = false;
   private getChunk: GetChunkFn | null = null;
   private getMeta: GetMetaFn | null = null;
 
@@ -153,6 +157,18 @@ export class SaveManager {
     }
   }
 
+  /** Drain pending writes before deleting a world or closing a durable store. */
+  async flushAsync(): Promise<void> {
+    this.flush();
+    await this.pending;
+    if (this.saveFailed) throw new Error("Could not save world state.");
+    while (this.hasDirty) {
+      this.flush();
+      await this.pending;
+      if (this.saveFailed) throw new Error("Could not save world state.");
+    }
+  }
+
   /** Callback invoked after each save with the chunk keys that were written. */
   onChunksSaved: ((keys: string[], getChunk: GetChunkFn) => void) | null = null;
 
@@ -200,7 +216,8 @@ export class SaveManager {
       entries.push({ collection: STORE_META, key: "state", value: this.getMeta() });
     }
 
-    this.store.save(entries).then(
+    this.saveFailed = false;
+    this.pending = this.store.save(entries).then(
       () => {
         this.saving = false;
         if (this.onChunksSaved && this.getChunk) {
@@ -209,6 +226,7 @@ export class SaveManager {
       },
       () => {
         this.saving = false;
+        this.saveFailed = true;
         // Re-mark as dirty so next save attempt includes them
         for (const key of chunkKeys) this.dirtyChunks.add(key);
         for (const [id, data] of playerEntries) {

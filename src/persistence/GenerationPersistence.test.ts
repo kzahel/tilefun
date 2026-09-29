@@ -1,4 +1,4 @@
-import { mkdtemp, rm } from "node:fs/promises";
+import { access, mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, it } from "vitest";
@@ -89,4 +89,25 @@ it("authority resolves an omitted seed once and a resolved descriptor requires n
     }),
   ).toEqual(descriptor);
   expect(calls).toBe(1);
+});
+
+it("deleting a parent removes only its own persisted interior instances", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "tilefun-interior-cleanup-"));
+  const registry = new FsWorldRegistry(directory);
+  try {
+    await registry.open();
+    const parent = await registry.createWorld("Parent"),
+      other = await registry.createWorld("Other");
+    const child = join(directory, "worlds", `interior~${parent.id}~settlement%3A0%3A0~0`);
+    const unrelated = join(directory, "worlds", `interior~${other.id}~settlement%3A0%3A0~0`);
+    await mkdir(child, { recursive: true });
+    await mkdir(unrelated, { recursive: true });
+    await registry.deleteWorld(parent.id);
+    await expect(access(child)).rejects.toThrow();
+    await expect(access(unrelated)).resolves.toBeUndefined();
+    expect((await registry.listWorlds()).map((w) => w.id)).toEqual([other.id]);
+  } finally {
+    registry.close();
+    await rm(directory, { recursive: true, force: true });
+  }
 });

@@ -57,6 +57,7 @@ export function collectScene(
   particles: ParticleItem[],
   hasGrass: boolean,
   extrapolationGhosts?: readonly ExtrapolationGhostItem[],
+  drawProps?: ReadonlySet<number>,
 ): SceneItem[] {
   const items: SceneItem[] = [];
   const ghostByEntityId =
@@ -183,6 +184,7 @@ export function collectScene(
 
   // --- Props ---
   for (const p of props) {
+    if (drawProps && !drawProps.has(p.id)) continue;
     const sw = p.sprite.spriteWidth;
     const sh = p.sprite.spriteHeight;
     const halfW = sw / 2;

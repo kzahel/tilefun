@@ -2,6 +2,12 @@ import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasInd
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import {
+  furnitureAsset,
+  INTERIOR_WALL_TYPE,
+  interiorProp,
+  interiorWalls,
+} from "../interiors/GameplayInterior.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -478,6 +484,7 @@ export function getMaterialForPropType(type: string): MaterialType | undefined {
 
 /** Look up static wall segments for a prop type (from the definition, not serialized). */
 export function getWallsForPropType(type: string): PropCollider[] | null {
+  if (type === INTERIOR_WALL_TYPE) return interiorWalls();
   const recipe = buildingRecipe(type);
   if (recipe)
     return [
@@ -495,6 +502,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const interior = interiorProp(type, wx, wy);
+  if (interior) return interior;
   const recipe = buildingRecipe(type);
   if (recipe)
     return {
@@ -555,6 +564,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (type === INTERIOR_WALL_TYPE || furnitureAsset(type)) return true;
   if (buildingRecipe(type)) return true;
   if (type.startsWith(ATLAS_PREFIX)) {
     if (!isAtlasLoaded()) return false;

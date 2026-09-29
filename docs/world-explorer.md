@@ -223,3 +223,18 @@ chunk does not respawn deleted buildings or duplicate a neighbor's placement.
 Earlier Classic worlds retain their legacy structure restoration behavior.
 The next milestone adds persistent interior realms and broadens countryside
 realization; physical phone measurements remain outstanding.
+
+### Building interiors
+
+In Regional v2, approach the marked south door of an apartment, shop, or village
+home. **Enter · E** opens a furnished room; **Return to street · E** uses the
+same authoritative safe-arrival path to return to that door. The touch button
+works without a keyboard. Rooms reuse the existing interior wall/furniture art,
+depth ordering, and finite-height furniture collision.
+
+An interior is a versioned, stable child instance of its parent world and lot;
+two players use the same instance. Furniture deletion/movement persists separately
+from disposable generated furniture. Child rooms do not clutter the world list,
+and deleting a parent removes its stored rooms. Reloading the game resumes the
+parent world; entering its door again restores the room. Initial rooms have one
+floor. Shops, apartments, and country homes use separate audited furniture recipes.

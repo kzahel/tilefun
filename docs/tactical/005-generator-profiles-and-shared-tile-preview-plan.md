@@ -413,9 +413,17 @@ Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it
   990 unit tests, and the complete browser suite pass; the browser arrival test
   creates, deletes, inspects, and rejoins the same persisted world.
 
+- Slice E, interiors: stable versioned child realms reuse the native wall and
+  furniture systems. Apartment/shop/home doors support keyboard and touch entry;
+  the authority validates proximity and resolves the return position. Furniture
+  edits persist across child unload and server/browser reload; direct child joins
+  are rejected. Multiplayer entry shares one room, parent deletion cleans up
+  children, and persistence writes drain before deletion. Rooms have one floor;
+  a game reload resumes the parent and preserves the room for reentry.
+
 ## Next action
 
-A–D are implemented. Continue **slice E** with persistent enterable interiors,
-then farms, woods, wildlife, and simple inhabitants.
+A–D and the interior portion of E are implemented. Continue **slice E** with
+farms, woods, wildlife, district variation, and simple inhabitants.
 Record measured caps and any changed contracts in this document and update
 [the explorer checkpoint guide](../world-explorer.md) after each accepted slice.
