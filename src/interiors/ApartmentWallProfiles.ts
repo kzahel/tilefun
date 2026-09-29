@@ -1,5 +1,5 @@
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
-import type { FloorPlan } from "./ApartmentFloorPlan.js";
+import { type FloorPlan, parseFloorPlan } from "./ApartmentFloorPlan.js";
 import type { InteriorSurface, LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 export type WallHeight = "low" | "normal" | "tall";
@@ -27,14 +27,29 @@ export function buildProfileApartmentPlan(
   plan: FloorPlan,
   options: WallProfileOptions,
 ): LayeredInteriorMap & { surfaces: InteriorSurface[] } {
-  const map = buildLayeredApartmentPlan(plan);
+  const selected = new Map(options.walls.map((w) => [key(w.x, w.y), w]));
+  if (selected.size !== options.walls.length) throw new Error("Duplicate profile wall");
+  const profileOpening = (x: number, y: number) =>
+    plan.rows[y]?.[x] === "+" && (selected.has(key(x - 1, y)) || selected.has(key(x + 1, y)));
+  // The legacy renderer owns the surrounding room, not the replaced branches.
+  // Otherwise its junction face survives outside the selected profile cells.
+  const roomPlan = selected.size
+    ? parseFloorPlan(
+        plan.rows
+          .map((row, y) =>
+            row
+              .map((cell, x) => (selected.has(key(x, y)) || profileOpening(x, y) ? "L" : cell))
+              .join(""),
+          )
+          .join("\n"),
+      )
+    : plan;
+  const map = buildLayeredApartmentPlan(roomPlan);
   const cellAt = (x: number, y: number) => {
     const cell = map.cells[y]?.[x];
     if (!cell) throw new Error(`Profile cell ${x},${y} outside map`);
     return cell;
   };
-  const selected = new Map(options.walls.map((w) => [key(w.x, w.y), w]));
-  if (selected.size !== options.walls.length) throw new Error("Duplicate profile wall");
   const columns = new Map<string, { x: number; y: number; height: number }>();
   for (let y = 0; y < plan.height; y++)
     for (let x = 0; x < plan.width; x++) {
@@ -64,10 +79,14 @@ export function buildProfileApartmentPlan(
         cell.wall = [];
         cell.foreground = [];
         cell.floor = [{ key: "room-builder/floors/c01-r31" }];
+        cell.semantic = "wall";
       }
     const n = selected.has(key(w.x, w.y - 1));
-    const e = selected.has(key(w.x + 1, w.y)),
-      west = selected.has(key(w.x - 1, w.y));
+    const verticalShell = (x: number) => [-1, 0, 1].every((dy) => plan.rows[w.y + dy]?.[x] === "#");
+    const attachWest = w.x === 1 && verticalShell(0);
+    const attachEast = w.x === plan.width - 2 && verticalShell(plan.width - 1);
+    const e = selected.has(key(w.x + 1, w.y)) || attachEast,
+      west = selected.has(key(w.x - 1, w.y)) || attachWest;
     for (let gy = 0; gy < 4; gy++)
       for (let gx = 0; gx < 4; gx++) {
         if (!((gx === 2 && (gy === 3 || n)) || (gy === 3 && ((west && gx <= 2) || (e && gx >= 2)))))
@@ -76,6 +95,15 @@ export function buildProfileApartmentPlan(
           y = w.y * 4 + gy;
         columns.set(key(x, y), { x, y, height: WALL_HEIGHTS[w.height] });
       }
+    // Extend the physical band to the room-facing shell, rather than leaving
+    // half a sketch cell of floor between the two rendering systems.
+    const bridgeY = w.y * 4 + 3;
+    for (const x of attachWest
+      ? [2, 3]
+      : attachEast
+        ? [plan.width * 4 - 4, plan.width * 4 - 3, plan.width * 4 - 2]
+        : [])
+      columns.set(key(x, bridgeY), { x, y: bridgeY, height: WALL_HEIGHTS[w.height] });
   }
   const surfaces: InteriorSurface[] = [];
   const project = (x: number, y: number, h: number): Point => [x * 8 - h / 4, y * 8 - h];

@@ -80,12 +80,12 @@ failures as usual; the full 66-case category is a coverage pool, not a checklist
 
 ### Wall heights and arches
 
-Open `interior-review.html?stage=7` for the next 12 appearance candidates: low,
+Open `interior-review.html?stage=7` for the 14 height/arch cases: low,
 normal, and tall partitions, a native arch, and small mixed-height counterexamples.
 Height marks in the plan identify the changed walls; the floor palette is fixed.
 Two wrong marks still pause the batch, and notes/pins remain optional.
 
-The 163 approved legacy renders are preserved in
+The 163 approved legacy renders and ten approved height/arch renders are preserved in
 `tests/fixtures/interior-approved`; a browser test checks their exact pixels.
 The height sampler is opt-in and does not replace the workbench's approved wall
 renderer. Height specifications are included in feedback for reproducibility.

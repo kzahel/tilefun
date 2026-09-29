@@ -94,5 +94,22 @@ export function profileReviewCases(): ProfileCase[] {
       true,
     );
   }
+  for (const [sourceId, height] of [
+    ["profile-door-false", "low"],
+    ["profile-door-true", "tall"],
+  ]) {
+    const source = results.find((c) => c.id === sourceId);
+    if (!source) throw new Error("Missing attachment source");
+    results.push({
+      ...source,
+      id: `profile-door-east-${height}`,
+      name: `East wall attachment · ${height} wall beside opening`,
+      sketch: source.sketch
+        .split("\n")
+        .map((row) => [...row].reverse().join(""))
+        .join("\n"),
+      profiles: { walls: source.profiles.walls.map((w) => ({ ...w, x: 7 - w.x })) },
+    });
+  }
   return results;
 }

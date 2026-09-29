@@ -611,3 +611,30 @@ visually approved by automated tests.
 
 Next: use the quick review loop on the sampler, settle the projection/end treatment,
 then add thin-to-thick joins and legacy-wall attachment using the accepted profiles.
+
+### Connect profile branches to the room shell, 2026-09-29
+
+Ten sampler cases were individually approved: all three heights, the native arch,
+both steps, both bends, and both T junctions. Their original pixels and matching
+feedback fingerprints are now included in the 173-image approved baseline.
+
+The two rejected doorway cases exposed an attachment bug. The legacy compiler
+still saw the new partition as a full-height wall, leaving its T-junction face
+in the adjacent shell cell. The profile mesh separately stopped at its selected
+cell's center, so neither its height nor its footprint met that old branch.
+
+Profile rendering now compiles the surrounding room with the replaced branches
+removed, restores their semantic wall cells, and owns the complete branch surface.
+At straight west/east exterior walls, its band extends to the room-facing shell.
+This supports the reported low/tall connections without retaining the old full
+face or leaving a floor gap. Openings retain their full clear semantic cells.
+
+Only the two rejected existing renders change. Two new right-side counterparts
+exercise the opposite attachment; the sampler now has 14 cases. Pixel checks
+cover the cap at each join and the exposed floor above the low branch. The full
+approved baseline protects all 173 prior approvals. Refresh returns to the changed
+doorway reports using the existing two-failure loop.
+
+This adds straight side-shell attachment, not arbitrary junctions between the two
+renderers. Next: approve these four attachments, then add thickness transitions
+and north/south shell attachment with explicit connection geometry.

@@ -813,5 +813,55 @@
     "id": "review-5-29624761",
     "name": "Offset rooms",
     "fp": "4a019c2b8a197941ede3a7e157467d835889f5ebb625753b5be93726c51fb6a6"
+  },
+  {
+    "id": "profile-straight-normal",
+    "name": "Height sampler \u00b7 normal partition",
+    "fp": "b02682e0d6335f879680972c0386e4520a78e754283b2427d24846cab0a1f778"
+  },
+  {
+    "id": "profile-straight-low",
+    "name": "Height sampler \u00b7 low partition",
+    "fp": "de0568782eafd49a6ad12bf068b03edea696c7ea303ac9f2919da42838b88a98"
+  },
+  {
+    "id": "profile-straight-tall",
+    "name": "Height sampler \u00b7 tall partition",
+    "fp": "45df8d908df7ab50987268e6ba391ee72daa7f181d9616f4743a92bbccb72ef8"
+  },
+  {
+    "id": "profile-arch",
+    "name": "Opening sampler \u00b7 native stone arch",
+    "fp": "922d89d05449fed6a0d6b2dfb0803098c68c7051bbb450db1091e151c699bd4c"
+  },
+  {
+    "id": "profile-step-false",
+    "name": "Height change \u00b7 low meets normal",
+    "fp": "ca9ad392c93d575cdfac9c4970c8791fd2a01e5b37b5ee6a622bc4185a7f4eb6"
+  },
+  {
+    "id": "profile-bend-false",
+    "name": "Height change \u00b7 low corner into tall",
+    "fp": "cf85d9545f519e4f7ff863d1bd9dd0c6ce99c50d301e21e34faf3f11726eb31a"
+  },
+  {
+    "id": "profile-tee-false",
+    "name": "Height change \u00b7 low branch at normal/tall T",
+    "fp": "3efb7b2fb808d3db208b8c49837c8cab92c672b9109dcb90a31fbf5817d72098"
+  },
+  {
+    "id": "profile-step-true",
+    "name": "Height change \u00b7 low meets normal \u00b7 mirror",
+    "fp": "42c740b94ef34f2f370e13933f4f671e0400bad38d445aae65cc9ef57bcbfed6"
+  },
+  {
+    "id": "profile-bend-true",
+    "name": "Height change \u00b7 low corner into tall \u00b7 mirror",
+    "fp": "cd765d6627031b93d2f592eaa3831ee3f32108fcca28f4d1bef4a78d450e3984"
+  },
+  {
+    "id": "profile-tee-true",
+    "name": "Height change \u00b7 low branch at normal/tall T \u00b7 mirror",
+    "fp": "e86cf4ece740d89aa22c9950c2fe754af0606a58ec79ff7c059c62d047776a9f"
   }
 ]

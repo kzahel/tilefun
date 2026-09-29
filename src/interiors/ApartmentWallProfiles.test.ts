@@ -5,6 +5,27 @@ import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
+  it.each([
+    "profile-door-false",
+    "profile-door-true",
+  ])("joins %s to a straight room shell without a legacy branch", (id) => {
+    const c = profileReviewCases().find((c) => c.id === id);
+    if (!c) throw new Error("Missing attachment fixture");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    // The old compiler emitted a full-height T here even when the branch was low.
+    for (const y of [6, 7])
+      expect(map.cells[y]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+    const height = id.endsWith("false") ? 8 : 40;
+    expect(
+      map.surfaces.some(
+        (s) =>
+          s.plane === `top:${height}` &&
+          s.points.some(([x, y]) => x === 16 - height / 4 && y === 120 - height),
+      ),
+    ).toBe(true);
+    for (const y of [6, 7])
+      for (const x of [6, 7]) expect(map.cells[y]?.[x]?.semantic).toBe("opening");
+  });
   it("changes elevation without changing the footprint or wall semantics", () => {
     const cases = profileReviewCases().slice(0, 3);
     const maps = cases.map((c) => buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles));
