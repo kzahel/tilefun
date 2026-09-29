@@ -91,7 +91,9 @@ describe("review coverage", () => {
     expect(cases.length).toBeGreaterThan(60);
     expect(new Set(cases.map((c) => c.id)).size).toBe(cases.length);
     const identity = (c: (typeof cases)[number]) =>
-      c.sketch.replace(/[BKTH]/g, "L") + JSON.stringify(c.profiles ?? null);
+      c.sketch.replace(/[BKTH]/g, "L") +
+      JSON.stringify(c.profiles ?? null) +
+      JSON.stringify(c.furniture ?? null);
     expect(new Set(cases.map(identity)).size).toBe(cases.length);
     expect(new Set(cases.map((c) => c.stage)).size).toBe(REVIEW_STAGES.length);
     for (const c of cases) {

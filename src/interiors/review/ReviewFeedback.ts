@@ -1,4 +1,5 @@
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
+import { type FurniturePlacement, parseFurniturePlacements } from "../FurnitureCatalog.js";
 
 /** Pixel coordinates in the original render; emoji cells span 32px. */
 export interface ReviewPin {
@@ -42,6 +43,8 @@ export interface ReviewFeedback {
   screenshot?: string;
   pins?: ReviewPin[];
   profiles?: WallProfileOptions;
+  furniture?: FurniturePlacement[];
+  furnitureCatalogVersion?: number;
 }
 export function parseReviewFeedback(value: unknown): ReviewFeedback {
   if (!value || typeof value !== "object") throw new Error("Invalid feedback");
@@ -102,7 +105,18 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
       ...(p.arch ? { arch: { x: p.arch.x, y: p.arch.y } } : {}),
     };
   }
+  if (
+    v.furniture !== undefined &&
+    (!Number.isInteger(v.furnitureCatalogVersion) || Number(v.furnitureCatalogVersion) < 1)
+  )
+    throw new Error("Invalid furniture catalog version");
   return {
+    ...(v.furniture !== undefined
+      ? {
+          furniture: parseFurniturePlacements(v.furniture),
+          furnitureCatalogVersion: v.furnitureCatalogVersion as number,
+        }
+      : {}),
     id: v.id as string,
     caseId: v.caseId as string,
     fingerprint: v.fingerprint as string,

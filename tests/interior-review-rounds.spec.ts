@@ -134,9 +134,14 @@ function approvedRecords(includeInteractions = false) {
     }));
 }
 
-for (const stage of [13, 14]) {
+for (const stage of [13, 14, 15]) {
   const stageCases = reviewCases().filter((c) => c.stage === stage);
-  const label = stage === 13 ? "Nearby doors & junctions" : "Generated small counterexamples";
+  const label =
+    stage === 13
+      ? "Nearby doors & junctions"
+      : stage === 14
+        ? "Generated small counterexamples"
+        : "Furniture catalog";
   test(`stage ${stage} provides eight phone-sized candidates and pauses after two reports`, async ({
     page,
   }) => {

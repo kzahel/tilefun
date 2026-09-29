@@ -5,6 +5,7 @@ import {
   type ProfileGeometry,
   type WallProfileOptions,
 } from "../ApartmentWallProfiles.js";
+import { compileFurniture } from "../FurnishedInterior.js";
 import type { LayeredInteriorMap } from "../LayeredInteriorMap.js";
 import type { ReviewCase } from "./ReviewCases.js";
 
@@ -81,6 +82,7 @@ export function auditGeometry(map: AuditedMap): AuditIssue[] {
 export function auditCase(c: ReviewCase): AuditIssue[] {
   try {
     const plan = parseFloorPlan(c.sketch);
+    if (c.furniture) compileFurniture(plan, c.furniture);
     const map: AuditedMap = c.profiles
       ? buildProfileApartmentPlan(plan, c.profiles, true)
       : buildLayeredApartmentPlan(plan);

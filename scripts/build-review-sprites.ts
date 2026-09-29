@@ -7,6 +7,7 @@ import pngjs from "pngjs";
 import { buildLayeredApartmentPlan } from "../src/interiors/ApartmentArchitecture.js";
 import { parseFloorPlan } from "../src/interiors/ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../src/interiors/ApartmentWallProfiles.js";
+import { furnitureDefinition } from "../src/interiors/FurnitureCatalog.js";
 import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 
 const { PNG } = pngjs;
@@ -26,6 +27,7 @@ function use(key: string, width?: number, height?: number) {
 }
 use("room-builder/3d-walls/c08-r01", 1, 1);
 for (const c of reviewCases()) {
+  for (const item of c.furniture ?? []) use(furnitureDefinition(item.asset).key);
   const plan = parseFloorPlan(c.sketch);
   const map = c.profiles
     ? buildProfileApartmentPlan(plan, c.profiles)

@@ -25,7 +25,7 @@ function revised(c: ReviewCase, rows: string[][], walls = c.profiles?.walls): Re
 }
 /** Supported reductions delete bands/openings and trim empty interior rows/columns. */
 export function smallerCases(c: ReviewCase): ReviewCase[] {
-  if (!c.profiles || c.profiles.arch) return [];
+  if (!c.profiles || c.profiles.arch || c.furniture) return [];
   const rows = c.sketch.split("\n").map((r) => [...r]),
     walls = c.profiles.walls;
   const results: ReviewCase[] = [];
@@ -97,8 +97,8 @@ export function reduceFailure(
   stillFails: (candidate: ReviewCase) => boolean,
   budget = 500,
 ) {
-  if (!c.profiles || c.profiles.arch)
-    throw new Error("Reduction currently supports profile walls without arches");
+  if (!c.profiles || c.profiles.arch || c.furniture)
+    throw new Error("Reduction currently supports unfurnished profile walls without arches");
   if (!Number.isInteger(budget) || budget < 1) throw new Error("Invalid reduction budget");
   if (!stillFails(c)) throw new Error("Original case does not satisfy the failure predicate");
   let current = c,

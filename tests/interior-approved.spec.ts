@@ -1,5 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { furnitureSignature } from "../src/interiors/FurnishedInterior.js";
+import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 
 const baseline = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
@@ -87,7 +89,7 @@ test(`all ${baseline.length} approved interiors retain their exact rendered pixe
   await page.goto("/tilefun/interior-review.html");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const actual = await page.evaluate(
-    async (ids) => {
+    async ({ ids, furniture }) => {
       const wanted = new Set(ids),
         visited = new Set<string>();
       const results: { id: string; fp: string }[] = [];
@@ -100,7 +102,9 @@ test(`all ${baseline.length} approved interiors retain their exact rendered pixe
         if (visited.has(id)) throw new Error("An approved case disappeared from the review pool");
         visited.add(id);
         const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-        const header = new TextEncoder().encode(`${sketch}\n${canvas.width},${canvas.height}\n`);
+        const header = new TextEncoder().encode(
+          `${sketch}\n${canvas.width},${canvas.height}\n${furniture[id] ?? ""}`,
+        );
         const bytes = new Uint8Array(header.length + pixels.length);
         bytes.set(header);
         bytes.set(pixels, header.length);
@@ -112,7 +116,14 @@ test(`all ${baseline.length} approved interiors retain their exact rendered pixe
       }
       return results;
     },
-    baseline.map((r) => r.id),
+    {
+      ids: baseline.map((r) => r.id),
+      furniture: Object.fromEntries(
+        reviewCases()
+          .filter((c) => c.furniture)
+          .map((c) => [c.id, furnitureSignature(c.furniture ?? [])]),
+      ),
+    },
   );
   expect(actual).toEqual(baseline.map(({ id, fp }) => ({ id, fp })));
 });

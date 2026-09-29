@@ -372,3 +372,22 @@ footer button {
   font-size: 12px;
   color: #ffcf57;
 }
+
+#furniture-tools {
+  grid-column: 1 / -1;
+  font-size: 12px;
+}
+#furniture-tools label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 12px 5px 0;
+}
+#furniture-tools ul {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+#footprint-legend {
+  color: #b5c7dd;
+  margin: 6px 0;
+}

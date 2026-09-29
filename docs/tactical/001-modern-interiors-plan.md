@@ -189,6 +189,9 @@ Status: in progress
 Wall compiler architecture and continued visual review are now detailed in
 [the wall solver and rapid review plan](002-interior-wall-solver-plan.md).
 
+The first separately placeable furniture catalog and its adapted review workflow
+are detailed in [the furniture plan](003-interior-furniture-plan.md).
+
 Floor-plan-driven prototype:
 
 - `src/interiors/ApartmentFloorPlan.ts` parses an editable character grid: `L` living, `B` bedroom, `K` kitchen, `T` bath, `H` hall, `#` wall, `+` passage, and space outside. `ApartmentArchitecture.ts` expands each sketch cell into a two-by-two group of 16-pixel atlas tiles so shared walls can use one visible side-wall face and dividers can use two source rows.

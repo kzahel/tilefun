@@ -2,6 +2,13 @@ import { loadModernInteriorsAtlasIndex } from "../../assets/ModernInteriorsAtlas
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
+import {
+  compileFurniture,
+  drawFurnishedInterior,
+  drawFurnitureFootprints,
+  furnitureSignature,
+} from "../FurnishedInterior.js";
+import { FURNITURE_CATALOG_VERSION } from "../FurnitureCatalog.js";
 import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import { REVIEW_STAGES, type ReviewCase, reviewCases } from "./ReviewCases.js";
 import {
@@ -97,7 +104,7 @@ root.innerHTML = `
   <div class="progress"><span id="position">Preparing cases…</span><span id="counts"></span></div>
   <section class="case" id="case">
     <div class="render-panel"><h2 id="case-name">Loading atlas…</h2><div id="render-wrap"><canvas id="render" aria-label="Generated interior"></canvas></div></div>
-    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend" id="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
+    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend" id="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><div id="furniture-tools" hidden><label><input id="furniture-plan" type="checkbox" checked> Furniture on plan</label><label><input id="footprints" type="checkbox"> Footprints &amp; access</label><details><summary>Objects in this room</summary><ul id="furniture-list"></ul></details><p id="footprint-legend" hidden>Pink: solid · Green: rug · Gold: supported item · Blue: access space</p></div><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
   </section>
   <section id="pause" hidden><h2>Ready for the next fix.</h2><p>Your two reports are captured; the save status is above. Say “ready” in chat to start the next fix—I can read saved feedback directly. Changed rooms will return for review.</p><button id="continue">Keep reviewing</button> <button id="refresh-review">Check for updates</button></section>
   <div id="actions"><p class="pin-hint">Tap a block in the render or floor plan to pin it to your report.</p><div id="pins" aria-label="Pinned blocks"></div><label class="note-label">Optional note <span>N to type · Enter to mark wrong</span><input id="note" maxlength="2000" placeholder="e.g. bottom-left corner" autocomplete="off" /></label><div class="buttons"><button id="wrong" class="wrong">Wrong <kbd>X</kbd></button><button id="good" class="good">Looks right <kbd>Space</kbd></button><button id="skip">Skip <kbd>→</kbd></button></div></div>
@@ -237,6 +244,17 @@ function draw(): void {
     T: "🟦",
     " ": "",
   };
+  const furnished = current.furniture
+    ? compileFurniture(parseFloorPlan(current.sketch), current.furniture)
+    : [];
+  el("furniture-tools").hidden = !current.furniture;
+  el("furniture-list").replaceChildren(
+    ...furnished.map((o) => {
+      const li = document.createElement("li");
+      li.textContent = `${o.definition.emoji} ${o.definition.name}${o.parent ? ` on ${o.parent.definition.name.toLowerCase()}` : ""}`;
+      return li;
+    }),
+  );
   for (const [y, row] of current.sketch.split("\n").entries()) {
     const line = document.createElement("div");
     line.className = "plan-row";
@@ -257,6 +275,15 @@ function draw(): void {
       if (profile) {
         cell.title = `${profile.height}, ${profile.thickness ?? "thin"} wall`;
         cell.classList.toggle("thick-wall", profile.thickness === "thick");
+      }
+      if (el<HTMLInputElement>("furniture-plan").checked) {
+        const items = furnished.filter(
+          (o) => !o.parent && Math.floor(o.x / 32) === x && Math.floor((o.y - 1) / 32) === y,
+        );
+        if (items.length) {
+          cell.textContent = items.at(-1)?.definition.emoji ?? cell.textContent;
+          cell.title = items.map((o) => o.definition.name).join(", ");
+        }
       }
       line.append(cell);
     }
@@ -284,6 +311,15 @@ function drawPins(): void {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   ctx.drawImage(activeImage, 0, 0);
+  const footprints = el<HTMLInputElement>("footprints").checked && !!current.furniture;
+  el("footprint-legend").hidden = !footprints;
+  if (footprints && current.furniture)
+    drawFurnitureFootprints(
+      ctx,
+      parseFloorPlan(current.sketch),
+      current.furniture,
+      current.contentOffsetY,
+    );
   const pins = state.annotation?.pins ?? [];
   const list = el("pins");
   list.replaceChildren();
@@ -320,6 +356,8 @@ function drawPins(): void {
     list.append(button);
   }
 }
+el("footprints").addEventListener("change", drawPins);
+el("furniture-plan").addEventListener("change", draw);
 function revealPin(pin: ReviewPin): void {
   const wrap = el("render-wrap");
   const bounds = canvas.getBoundingClientRect();
@@ -355,7 +393,7 @@ function resizeCanvas(): void {
   // scale. Large apartments retain the scrollable viewport.
   wrap.style.height =
     window.matchMedia("(max-width: 700px)").matches && canvas.width <= 288 && canvas.height <= 288
-      ? `${Math.max(220, canvas.height + 32)}px`
+      ? `${Math.max(220, canvas.height * (current.furniture ? Math.min(2, Math.max(1, Math.floor((wrap.clientWidth - 32) / canvas.width))) : 1) + 32)}px`
       : "";
   const width = wrap.clientWidth - 32;
   const maxHeight = el("render-wrap").clientHeight - 32;
@@ -429,6 +467,9 @@ function vote(verdict: "good" | "wrong"): void {
     name: voted.name,
     sketch: voted.sketch,
     ...(voted.profiles ? { profiles: voted.profiles } : {}),
+    ...(voted.furniture
+      ? { furniture: voted.furniture, furnitureCatalogVersion: FURNITURE_CATALOG_VERSION }
+      : {}),
     verdict,
     note: note.value.trim(),
     createdAt: new Date().toISOString(),
@@ -553,7 +594,8 @@ function renderCase(fixture: ReadyCase, image: HTMLCanvasElement): void {
   if (!ctx) throw new Error("Canvas is unavailable");
   ctx.fillStyle = "#171e2a";
   ctx.fillRect(0, 0, image.width, image.height);
-  drawLayeredInteriorMap(ctx, atlas, map);
+  if (fixture.furniture) drawFurnishedInterior(ctx, atlas, map, plan, fixture.furniture);
+  else drawLayeredInteriorMap(ctx, atlas, map);
 }
 // A real task boundary (not a resolved Promise) gives input and painting a turn.
 const yieldToBrowser = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
@@ -565,7 +607,9 @@ async function verifyCase(c: ReadyCase): Promise<void> {
     const ctx = scratch.getContext("2d");
     if (!ctx) throw new Error("Canvas is unavailable");
     const pixels = ctx.getImageData(0, 0, scratch.width, scratch.height).data;
-    const header = new TextEncoder().encode(`${c.sketch}\n${scratch.width},${scratch.height}\n`);
+    const header = new TextEncoder().encode(
+      `${c.sketch}\n${scratch.width},${scratch.height}\n${c.furniture ? furnitureSignature(c.furniture) : ""}`,
+    );
     const bytes = new Uint8Array(header.length + pixels.length);
     bytes.set(header);
     bytes.set(pixels, header.length);

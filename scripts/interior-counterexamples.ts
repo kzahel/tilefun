@@ -63,6 +63,7 @@ if (command === "search") {
         sketch: report.sketch,
         stage: 14,
         ...(report.profiles ? { profiles: report.profiles } : {}),
+        ...(report.furniture ? { furniture: report.furniture } : {}),
       }
     : file
       ? JSON.parse(fs.readFileSync(file, "utf8"))

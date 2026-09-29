@@ -1,9 +1,10 @@
 import { APARTMENT_EXAMPLES, type PlanCell } from "../ApartmentFloorPlan.js";
-
 import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFixtures.js";
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
+import type { FurniturePlacement } from "../FurnitureCatalog.js";
 import { boundaryReviewCases } from "./BoundaryReviewCases.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
+import { furnitureReviewCases } from "./FurnitureReviewCases.js";
 import { generatedReviewCases } from "./GeneratedReviewCases.js";
 import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { nearbyReviewCases } from "./NearbyReviewCases.js";
@@ -25,6 +26,7 @@ export const REVIEW_STAGES = [
   "North & south attachments",
   "Nearby doors & junctions",
   "Generated small counterexamples",
+  "Furniture catalog",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -33,6 +35,7 @@ export interface ReviewCase {
   sketch: string;
   relatedCaseId?: string;
   profiles?: WallProfileOptions;
+  furniture?: FurniturePlacement[];
 }
 type Grid = PlanCell[][];
 const rectangle = (w: number, h: number, floor: PlanCell = "L"): Grid =>
@@ -272,5 +275,6 @@ export function reviewCases(): ReviewCase[] {
     ...boundaryReviewCases(),
     ...nearbyReviewCases(),
     ...generatedReviewCases(),
+    ...furnitureReviewCases(),
   ];
 }

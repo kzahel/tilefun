@@ -112,6 +112,7 @@ export function caseIdentity(c: ReviewCase): string {
       .map((w) => [w.x, w.y, w.height, w.thickness ?? "thin"])
       .sort((a, b) => String(a).localeCompare(String(b))),
     c.profiles?.arch,
+    ...(c.furniture ? [c.furniture] : []),
   ]);
 }
 

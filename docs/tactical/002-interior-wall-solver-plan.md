@@ -923,3 +923,10 @@ All 225 approved images retain their exact fingerprints. Loading tests confirm
 small source sprites, cooperative verification, and fresh hashes on reload. The
 public phone smoke shows eight unchecked cases and no horizontal overflow.
 Biome reports the existing 65 warnings and five infos, with no new diagnostics.
+
+### Wall review stable; move to furniture, 2026-09-29
+
+The user approved all 233 wall cases, including the generated round, and asked to
+move on to furnishing. Their exact renders are protected. Continue with the
+[curated furniture catalog and layered scene plan](003-interior-furniture-plan.md),
+reopening wall work only when a concrete furnished-scene failure warrants it.

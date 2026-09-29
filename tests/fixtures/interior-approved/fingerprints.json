@@ -1123,5 +1123,45 @@
     "id": "nearby-loop-door-mirror",
     "name": "Small wall loop \u00b7 opening beside a corner \u00b7 mirror",
     "fp": "5aeec4bb727786d51737f0b05f26dd6cc4f8874e6589e5db9a7ff7ebf0a029ca"
+  },
+  {
+    "id": "probe-v1-65",
+    "name": "Loop with offset opening \u00b7 8\u00d78",
+    "fp": "445fbc5f34be799bab2f81bed83e94d8d6c4234d75502a929d22b115b12aeefa"
+  },
+  {
+    "id": "probe-v1-677",
+    "name": "Loop with offset opening \u00b7 8\u00d78 \u00b7 mirror",
+    "fp": "bada94bb4d3b3de2082b7b51fd0b21a2ad1e57c7a03ffab217bf4b92da5aaf58"
+  },
+  {
+    "id": "probe-v1-267",
+    "name": "Door between short returns \u00b7 7\u00d77",
+    "fp": "d67d53bf468587e22893e7b6f953714f1e945a4cf73c415d6a3de0e61424b600"
+  },
+  {
+    "id": "probe-v1-987",
+    "name": "Door between short returns \u00b7 7\u00d77 \u00b7 mirror",
+    "fp": "448baba785dda43df014e75a31e5a35572b9f1d9a69e2dbea6fced3537a02ab9"
+  },
+  {
+    "id": "probe-v1-832",
+    "name": "Paired junctions \u00b7 8\u00d78 \u00b7 mirror",
+    "fp": "41c2196ab0e9f5fa4380108d2a4ad6c7579b1149403af42089d419fd80a1e13d"
+  },
+  {
+    "id": "probe-v1-112",
+    "name": "Paired junctions \u00b7 8\u00d78",
+    "fp": "0f48771dfe66580b984b4ba779ae3fe428a6df799eb272114a49b43576d40c85"
+  },
+  {
+    "id": "probe-v1-254",
+    "name": "Closely spaced room doors \u00b7 7\u00d77",
+    "fp": "3cd42bc3a81379272c4f454545651094717de13769aa583ab62b89e043c0ff54"
+  },
+  {
+    "id": "probe-v1-938",
+    "name": "Closely spaced room doors \u00b7 7\u00d77 \u00b7 mirror",
+    "fp": "31ce9fc6840a3bc69753c4ee060c135c13bcaef204cb8de11d19a4cb2f26f4c0"
   }
 ]

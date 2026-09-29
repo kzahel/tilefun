@@ -80,3 +80,9 @@ junction, and loop candidates remain unapproved until human review.
 All 225 cases passed after 2dbe80f. The eight nearby-case captures match the latest
 good verdicts and now join the active baseline. Stage 14's eight generated
 counterexamples remain outside the baseline until human review.
+
+All 233 wall cases passed after b707e54. The eight generated cases have matching
+good verdicts and now join the active baseline, with no changed pixels. Stage 15
+introduces furniture review; these new images and placement metadata remain
+unapproved. Furniture fingerprints also include their placements and the used
+catalog definitions, so changing an invisible footprint requires fresh review.
