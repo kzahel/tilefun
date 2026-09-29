@@ -76,3 +76,7 @@ attachments. Their latest approved captures now complete the active baseline.
 The four pending hashes moved into `superseded-fingerprints.json` for historical
 verdict tests; there are no pending reapprovals. Stage 13's eight nearby door,
 junction, and loop candidates remain unapproved until human review.
+
+All 225 cases passed after 2dbe80f. The eight nearby-case captures match the latest
+good verdicts and now join the active baseline. Stage 14's eight generated
+counterexamples remain outside the baseline until human review.

@@ -17,6 +17,12 @@ export interface WallProfileOptions {
   walls: ProfileWall[];
   arch?: { x: number; y: number };
 }
+/** Optional physical provenance for offline audits; never used to draw or cache. */
+export interface ProfileGeometry {
+  columns: { x: number; y: number; height: number }[];
+  faces: { x: number; y: number; bottom: number; top: number; axis: "top" | "south" | "east" }[];
+  covered: { x: number; y: number; height: number; axis: "south" | "east" }[];
+}
 type Point = [number, number];
 const wall = (col: number, row: number) =>
   `room-builder/3d-walls/c${String(col).padStart(2, "0")}-r${String(row).padStart(2, "0")}`;
@@ -30,7 +36,8 @@ const key = (x: number, y: number) => `${x},${y}`;
 export function buildProfileApartmentPlan(
   plan: FloorPlan,
   options: WallProfileOptions,
-): LayeredInteriorMap & { surfaces: InteriorSurface[] } {
+  auditGeometry = false,
+): LayeredInteriorMap & { surfaces: InteriorSurface[]; profileGeometry?: ProfileGeometry } {
   const selected = new Map(options.walls.map((w) => [key(w.x, w.y), w]));
   if (selected.size !== options.walls.length) throw new Error("Duplicate profile wall");
   const profileOpening = (x: number, y: number) =>
@@ -229,6 +236,22 @@ export function buildProfileApartmentPlan(
     }
   }
   const surfaces: InteriorSurface[] = [];
+  const geometry: ProfileGeometry | undefined = auditGeometry
+    ? {
+        columns: [...columns.values()],
+        faces: [],
+        covered: [
+          ...[...eastPorts].map(([point, port]) => {
+            const [x = 0, y = 0] = point.split(",").map(Number);
+            return { x, y, height: port.height, axis: "east" as const };
+          }),
+          ...[...southPorts].map((point) => {
+            const [x = 0, y = 0] = point.split(",").map(Number);
+            return { x, y, height: WALL_HEIGHTS.normal, axis: "south" as const };
+          }),
+        ],
+      }
+    : undefined;
   const project = (x: number, y: number, h: number): Point => {
     const port = eastPorts.get(key(x, y)) ?? westPorts.get(key(x, y));
     const north = northPorts.get(key(x, y));
@@ -243,7 +266,16 @@ export function buildProfileApartmentPlan(
         : y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
     ];
   };
-  function face(points: Point[], plane: string, kind: "top" | "south" | "east") {
+  function face(
+    points: Point[],
+    plane: string,
+    kind: "top" | "south" | "east",
+    x: number,
+    y: number,
+    bottom: number,
+    top: number,
+  ) {
+    geometry?.faces.push({ x, y, bottom, top, axis: kind });
     surfaces.push({
       points,
       plane,
@@ -259,6 +291,10 @@ export function buildProfileApartmentPlan(
       [project(x, y, h), project(x + 1, y, h), project(x + 1, y + 1, h), project(x, y + 1, h)],
       `top:${h}`,
       "top",
+      x,
+      y,
+      h,
+      h,
     );
     const south = southPorts.has(key(x, y + 1))
       ? WALL_HEIGHTS.normal
@@ -273,6 +309,10 @@ export function buildProfileApartmentPlan(
         ],
         `south:${y + 1}`,
         "south",
+        x,
+        y,
+        z,
+        z + 8,
       );
     const east = eastPorts.get(key(x + 1, y))?.height ?? columns.get(key(x + 1, y))?.height ?? 0;
     for (let z = Math.min(east, h); z < h; z += 8)
@@ -285,6 +325,10 @@ export function buildProfileApartmentPlan(
         ],
         `east:${x + 1}`,
         "east",
+        x,
+        y,
+        z,
+        z + 8,
       );
   }
   const edgeId = (s: InteriorSurface, a: Point, b: Point) =>
@@ -328,5 +372,5 @@ export function buildProfileApartmentPlan(
       offsetY: 17,
     });
   }
-  return { ...map, surfaces };
+  return { ...map, surfaces, ...(geometry ? { profileGeometry: geometry } : {}) };
 }

@@ -1083,5 +1083,45 @@
     "id": "boundary-south-tall-thick",
     "name": "South cutaway \u00b7 tall, thick partition",
     "fp": "2125ad1f60c6f13dff5d741d11075d7da6610c1efd1ff7e4c86e9b14c1eebe0e"
+  },
+  {
+    "id": "nearby-corner-door",
+    "name": "Door beside an outer corner \u00b7 stepped room",
+    "fp": "cb088ad6d4dc839f840da15bff2ba05c42e2759920d9ca6119fd7b3d444a671d"
+  },
+  {
+    "id": "nearby-corner-door-mirror",
+    "name": "Door beside an outer corner \u00b7 stepped room \u00b7 mirror",
+    "fp": "9b22de2357bfa0d70d574486244963a36e7914ab52312d27969543e725b8afb9"
+  },
+  {
+    "id": "nearby-width-door",
+    "name": "Door one cell from a thickness change",
+    "fp": "98e79af969d91707eff32a378e940f43899c11d092be4636a8d4256fff533900"
+  },
+  {
+    "id": "nearby-width-door-mirror",
+    "name": "Door one cell from a thickness change \u00b7 mirror",
+    "fp": "208c6403b83db8eda234aff036c401a91977b5bea53d2fcea5a03c0b617a57c3"
+  },
+  {
+    "id": "nearby-paired-tees-same",
+    "name": "Two T junctions \u00b7 one cell apart \u00b7 same side",
+    "fp": "ec73513323594f5e08c2eaefba9bb43dc6ed0589f5987b45309144f659423818"
+  },
+  {
+    "id": "nearby-paired-tees-opposite",
+    "name": "Two T junctions \u00b7 one cell apart \u00b7 opposite sides",
+    "fp": "a163ddc2d5c8b2cd9d842432f791eb9cb685e407e3a49189aa93007695433501"
+  },
+  {
+    "id": "nearby-loop-door",
+    "name": "Small wall loop \u00b7 opening beside a corner",
+    "fp": "99f34f95df4829100090531a0e09ebdae278831b000f5f86e63e6356efa2a019"
+  },
+  {
+    "id": "nearby-loop-door-mirror",
+    "name": "Small wall loop \u00b7 opening beside a corner \u00b7 mirror",
+    "fp": "5aeec4bb727786d51737f0b05f26dd6cc4f8874e6589e5db9a7ff7ebf0a029ca"
   }
 ]

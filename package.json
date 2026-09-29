@@ -16,6 +16,7 @@
     "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts",
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
     "assets:review": "tsx scripts/build-review-sprites.ts",
+    "interiors:counterexamples": "tsx scripts/interior-counterexamples.ts",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts"
   },

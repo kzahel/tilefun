@@ -893,3 +893,33 @@ to change to present this round.
 Review at `interior-review.html?stage=13&unchecked=1`. After this round settles,
 automate enumeration and selection of distinct small interactions so the next
 counterexamples expand coverage without flooding the human review queue.
+
+### Automated compact counterexample selection, 2026-09-29
+
+All 225 current renders match good verdicts and are protected by the regression
+baseline. Stage 14 adds eight cases selected by an offline, deterministic search
+of 1,152 parameter combinations. Selection removes duplicate and disconnected
+inputs and favors new local interactions, with two candidates from each of four
+families. The browser builds only the selected sketches from stable seeds; it
+never runs enumeration, structural auditing, or reduction. Rendering still uses
+fresh fingerprints and the shared sprite sheet, with no generated-image cache.
+
+The new audit records optional physical face provenance and checks exposure,
+bounds, connected authored floors, and clear doorways. Fault-injection tests make
+sure missing, duplicate, internal, and out-of-bounds faces and blocked doors are
+detected. This does not replace visual seam review. Structural counterexamples
+can be reduced automatically; visual reductions preserve pinned neighborhoods
+and explicitly require human confirmation. See
+[the commands and guarantees](../interior-counterexamples.md).
+
+Review at `interior-review.html?stage=14&unchecked=1`. Keep the existing two-report
+pause. Use failures to refine shared wall rules and then select the next compact
+round; do not expand the human queue to the full search corpus. After these
+mixed-height/width interactions settle, extend generation to new motifs (such as
+shell attachments and irregular outer boundaries) before increasing room size.
+
+Validation: typecheck, 928 unit tests, build, and all 82 browser tests passed.
+All 225 approved images retain their exact fingerprints. Loading tests confirm
+small source sprites, cooperative verification, and fresh hashes on reload. The
+public phone smoke shows eight unchecked cases and no horizontal overflow.
+Biome reports the existing 65 warnings and five infos, with no new diagnostics.

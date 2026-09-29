@@ -4,6 +4,7 @@ import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFix
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
 import { boundaryReviewCases } from "./BoundaryReviewCases.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
+import { generatedReviewCases } from "./GeneratedReviewCases.js";
 import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { nearbyReviewCases } from "./NearbyReviewCases.js";
 import { profileReviewCases } from "./ProfileReviewCases.js";
@@ -23,6 +24,7 @@ export const REVIEW_STAGES = [
   "Connected room layouts",
   "North & south attachments",
   "Nearby doors & junctions",
+  "Generated small counterexamples",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -269,5 +271,6 @@ export function reviewCases(): ReviewCase[] {
     ...interactionReviewCases(),
     ...boundaryReviewCases(),
     ...nearbyReviewCases(),
+    ...generatedReviewCases(),
   ];
 }
