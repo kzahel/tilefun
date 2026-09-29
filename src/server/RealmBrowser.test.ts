@@ -564,3 +564,54 @@ it("direct local consumers follow the local player into the chosen generator rea
   ).toBe(0);
   server.destroy();
 });
+
+it("Play here checks identity and realized walls, and live inspection preserves deletions and moves", async () => {
+  const { server, transport, registry } = await createTestSetup();
+  transport.connect("local");
+  await new Promise((r) => setTimeout(r, 0));
+  const generation = createDescriptor("regional", 2026);
+  const meta = await registry.createWorld("District", undefined, undefined, undefined, generation);
+  await server.loadWorld(meta.id, { x: 300, y: 519, generation });
+  const initial = server.getLocalSession().player.position;
+  expect(Math.hypot(initial.wx / 16 - 300, initial.wy / 16 - 519)).toBeLessThanOrEqual(46);
+  const props = server.propManager.props.filter((p) => p.proceduralId);
+  expect(props.length).toBeGreaterThan(0);
+  const building = props.find((p) => p.type.includes("apartment"));
+  if (!building) throw new Error("Missing apartment");
+  await server.loadWorld(meta.id, {
+    x: building.position.wx / 16,
+    y: (building.position.wy - 32) / 16,
+    generation,
+  });
+  const player = server.getLocalSession().player;
+  const { aabbOverlapsPropWalls, getEntityAABB } = await import("../entities/collision.js");
+  const collider = player.collider;
+  if (!collider) throw new Error("Missing collider");
+  expect(
+    aabbOverlapsPropWalls(getEntityAABB(player.position, collider), building.position, building),
+  ).toBe(false);
+  transport.clientSend("local", { type: "edit-delete-prop", propId: building.id });
+  const moved = server.propManager.props.find((p) => p.proceduralId);
+  if (!moved) throw new Error("Missing other prop");
+  transport.clientSend("local", { type: "edit-move-prop", propId: moved.id, wx: 4800, wy: 8304 });
+  const snapshot = await server.inspectWorld(meta.id, [{ cx: 18, cy: 32 }], {
+    minX: 260,
+    minY: 490,
+    maxX: 350,
+    maxY: 570,
+  });
+  expect(snapshot.coverage).toBe("live authority");
+  expect(snapshot.deleted).toContain(building.proceduralId);
+  expect(snapshot.props.find((p) => p.proceduralId === moved.proceduralId)).toMatchObject({
+    wx: 4800,
+    wy: 8304,
+  });
+  await expect(
+    server.loadWorld(meta.id, { x: 300, y: 519, generation: createDescriptor("regional", 99) }),
+  ).rejects.toThrow(/identity/);
+  expect(server.worldGeneration).toEqual(generation);
+  await expect(
+    server.inspectWorld(meta.id, [], { minX: 0, minY: 0, maxX: 1000, maxY: 1000 }),
+  ).rejects.toThrow(/cap/);
+  server.destroy();
+});

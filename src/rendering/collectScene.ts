@@ -49,7 +49,7 @@ function lerpPos(
 export function collectScene(
   entities: readonly Entity[],
   props: readonly Prop[],
-  world: World,
+  world: Pick<World, "getHeightAt" | "getChunkIfLoaded" | "getRoadAt">,
   camera: Camera,
   visible: ChunkRange,
   alpha: number,
@@ -199,7 +199,7 @@ export function collectScene(
     const ty = Math.floor(p.position.wy / TILE_SIZE);
     const elevOffset = world.getHeightAt(tx, ty) * ELEVATION_PX;
 
-    items.push({
+    const baseItem = {
       kind: "sprite",
       sortKey: p.position.wy,
       wx: p.position.wx,
@@ -217,7 +217,16 @@ export function collectScene(
       shadowWidth: 0,
       shadowTerrainZ: 0,
       flashHidden: false,
-    } satisfies SpriteItem);
+    } satisfies SpriteItem;
+    if (p.sprite.parts) {
+      for (const part of p.sprite.parts)
+        items.push({
+          ...baseItem,
+          ...part,
+          wx: p.position.wx + part.dx,
+          wy: p.position.wy + part.dy,
+        });
+    } else items.push(baseItem);
   }
 
   // --- Grass blades ---

@@ -6,6 +6,7 @@ import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
+import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog, serverLogError } from "./serverLog.js";
 
 function getLanAddress(): string | null {
@@ -32,6 +33,17 @@ export function tilefunServer(dataDir = "./data"): Plugin {
     name: "tilefun-server",
 
     configureServer(viteServer) {
+      viteServer.middlewares.use((req, res, next) => {
+        if (!server) {
+          next();
+          return;
+        }
+        void inspectionHttp(server, req, res)
+          .then((handled) => {
+            if (!handled) next();
+          })
+          .catch(next);
+      });
       // Vite calls this after the HTTP server is created but before listening.
       // httpServer is available after the server starts, so we use the hook.
       viteServer.httpServer?.on("listening", async () => {

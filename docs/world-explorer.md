@@ -119,7 +119,7 @@ The agreed next sequence is recorded in
 [Tactical 005: generator profiles and shared tile preview](tactical/005-generator-profiles-and-shared-tile-preview-plan.md).
 First freeze Classic and establish shared generator selection/realization; then
 add configurable zoom into real tiles; then support generator type/seed/settings
-in actual game creation and persistence. The current checkpoint implements A–C. Explorer and gameplay will consume one implementation
+in actual game creation and persistence. The current checkpoint implements A–D. Explorer and gameplay will consume one implementation
 per selected generator, with the existing terrain/scene pipeline reused.
 
 After those slices, Tactical 004's slice 2 refines Ferngrove into a connected
@@ -132,8 +132,7 @@ roads/structures, and both world registries/protocol paths. Before the later
 building/arrival slice, define stable procedural object provenance and
 deletion/move overlays so regeneration preserves saved changes. **Play here**
 requires authoritative safe-spawn resolution; inspecting a saved world carries
-its explicit world ID and obtains saved overlays from that authority. None of
-those new game/persistence paths are enabled at this checkpoint.
+its explicit world ID and obtains saved overlays from that authority. Those paths are now enabled; see the district checkpoint below.
 
 ## Real-tile preview checkpoint (Tactical 005 B)
 
@@ -191,3 +190,36 @@ remain the next D milestone. Unit tests cover filesystem reloads and edited
 terrain for all types, authoritative random-seed resolution, concurrent joins,
 invalid versions, and direct local consumers. Browser tests create and reopen all
 four types through IndexedDB and verify the explorer handoff.
+
+## District and saved-world checkpoint (Tactical 005 D)
+
+New Regional worlds default to **regional-v2**: connected streets and alleys,
+sidewalk crossings, apartment/shop lots, entrance paths, and playground parks.
+Real building facades assemble audited rectangles from the existing ME atlas.
+Map lots/entrances and exact props come from one district plan; the worker and
+game consume the same generator and scene renderer. Revision selectors retain
+the terrain-only v1 option, and old full descriptors/alias links remain pinned.
+
+**Play here** carries the camera position in tile coordinates and the complete
+descriptor into the normal game creation/selection flow. The authority validates
+identity, realizes terrain/props in a bounded neighborhood, and finds a position
+clear of water/solid terrain and building walls within 32 tiles. Failure is
+reported without moving the player out of the current realm. Saved-world links
+include an explicit world ID; selecting that world applies the same check.
+
+The game menu has **Inspect saved world** links. The explorer source selector
+also lists local worlds, or server worlds when opened with `server=host:port`.
+Exact saved views overlay terrain edits and stable procedural deletion/move
+records. Local inspection says **saved snapshot** and explicitly excludes live or
+unflushed changes. The server's read-only bounded HTTP inspection reports
+**live authority** for active realms, including unflushed changes. Broad map
+views stay procedural and are labelled accordingly. **Refresh saved view**
+releases the bounded footprint and requests current data. Unavailable saved
+coverage reports an error rather than pretending to show the authoritative world.
+
+Generated Regional props are disposable residency. Saves store only tombstones,
+moved prop records, and manually placed objects, so revisiting an unloaded
+chunk does not respawn deleted buildings or duplicate a neighbor's placement.
+Earlier Classic worlds retain their legacy structure restoration behavior.
+The next milestone adds persistent interior realms and broadens countryside
+realization; physical phone measurements remain outstanding.

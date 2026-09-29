@@ -5,7 +5,9 @@ import type {
   GenerationDescriptor,
   GenerationRequest,
 } from "../generation/GenerationDescriptor.js";
+import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { Arrival } from "../server/SafeArrival.js";
 import type { EntityDelta } from "./entityDelta.js";
 
 // ---- Realm browser types ----
@@ -87,6 +89,7 @@ export type ClientMessage =
     }
   | { type: "edit-delete-entity"; entityId: number }
   | { type: "edit-delete-prop"; propId: number }
+  | { type: "edit-move-prop"; propId: number; wx: number; wy: number }
   | { type: "edit-clear-terrain"; terrainId: number }
   | { type: "edit-clear-roads" }
   | { type: "set-editor-mode"; enabled: boolean }
@@ -100,7 +103,7 @@ export type ClientMessage =
     }
   | { type: "flush" }
   | { type: "invalidate-all-chunks" }
-  | { type: "load-world"; requestId: number; worldId: string }
+  | { type: "load-world"; requestId: number; worldId: string; arrival?: Arrival }
   | {
       type: "create-world";
       requestId: number;
@@ -123,7 +126,7 @@ export type ClientMessage =
   | { type: "throw-ball"; dirX: number; dirY: number; force: number }
   | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
-  | { type: "join-realm"; requestId: number; worldId: string }
+  | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival }
   | { type: "leave-realm"; requestId: number };
 
 // ---- Snapshot types for serialized state sync ----
@@ -161,10 +164,12 @@ export interface EntitySnapshot {
 }
 
 export interface PropSnapshot {
+  proceduralId?: string;
   id: number;
   type: string;
   position: { wx: number; wy: number };
   sprite: {
+    parts?: readonly FacadePiece[];
     sheetKey: string;
     frameCol: number;
     frameRow: number;

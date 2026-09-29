@@ -9,9 +9,16 @@ import {
   type GenerationRequest,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
+import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
+import {
+  type InspectionSnapshot,
+  inspectionOverlays,
+  readInspection,
+  validateInspection,
+} from "../persistence/WorldInspection.js";
 import {
   dbNameForWorld,
   type WorldMeta,
@@ -23,6 +30,7 @@ import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
+import { type Arrival, safeArrival } from "./SafeArrival.js";
 import { ServerLoop } from "./ServerLoop.js";
 import type { WorldAPIImpl } from "./WorldAPI.js";
 
@@ -118,6 +126,44 @@ export class GameServer {
     defaultRealm.currentWorldId = "__default__";
     this.realms.set("__default__", defaultRealm);
     this.defaultRealmId = "__default__";
+  }
+
+  async inspectWorld(
+    worldId: string,
+    coordinates: { cx: number; cy: number }[],
+    bounds: Bounds,
+  ): Promise<InspectionSnapshot> {
+    validateInspection(coordinates, bounds);
+    const meta = await this.registry.getWorld(worldId);
+    if (!meta) throw new Error("World not found.");
+    const generation = descriptorFromMetadata(meta);
+    const live = this.realms.get(worldId);
+    const store = this.createStore(worldId);
+    await store.open();
+    try {
+      const snapshot = await readInspection(store, generation, coordinates, bounds);
+      if (live) {
+        const overlay = live.inspectionState();
+        Object.assign(snapshot, inspectionOverlays(generation, bounds, overlay));
+        for (const c of coordinates) {
+          const chunk = live.world.getChunkIfLoaded(c.cx, c.cy);
+          if (!chunk) continue;
+          snapshot.chunks = snapshot.chunks.filter(
+            (saved) => saved.cx !== c.cx || saved.cy !== c.cy,
+          );
+          snapshot.chunks.push({
+            ...c,
+            subgrid: Array.from(chunk.subgrid),
+            roadGrid: Array.from(chunk.roadGrid),
+            heightGrid: Array.from(chunk.heightGrid),
+          });
+        }
+        snapshot.coverage = "live authority";
+      }
+      return snapshot;
+    } finally {
+      store.close();
+    }
   }
 
   /** Initialize the server-side console engine with server commands. */
@@ -396,6 +442,7 @@ export class GameServer {
       realm.physicsMult = this._physicsMult;
       try {
         await realm.loadWorld(worldId, this.registry, this.createStore);
+        realm.idleSince = Date.now();
         this.realms.set(worldId, realm);
         return realm;
       } catch (error) {
@@ -439,9 +486,11 @@ export class GameServer {
     clientId: string,
     session: PlayerSession,
     worldId: string,
+    arrival?: Arrival,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
     // Validate/load the destination before removing a player from a live realm.
     const targetRealm = await this.getOrCreateRealm(worldId);
+    const position = arrival ? safeArrival(targetRealm, arrival) : undefined;
     // Remove from current realm
     if (session.realmId) {
       const oldRealm = this.realms.get(session.realmId);
@@ -453,6 +502,12 @@ export class GameServer {
 
     // Add player to target realm (loads per-player saved data)
     await targetRealm.addPlayer(session);
+    if (position) {
+      session.player.position = position;
+      session.cameraX = position.wx;
+      session.cameraY = position.wy;
+      targetRealm.clearClientRevisions(clientId);
+    }
 
     return {
       cameraX: session.player.position.wx,
@@ -500,10 +555,11 @@ export class GameServer {
    */
   async loadWorld(
     worldId: string,
+    arrival?: Arrival,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
     const localSession = this.sessions.get("local");
     if (localSession) {
-      return this.movePlayerToRealm("local", localSession, worldId);
+      return this.movePlayerToRealm("local", localSession, worldId, arrival);
     }
     // Fallback: load into default realm (no sessions yet)
     return this.loadWorldIntoDefaultRealm(worldId);
@@ -657,7 +713,7 @@ export class GameServer {
 
       case "load-world":
         // Per-player realm switching: only move the requesting player
-        this.movePlayerToRealm(clientId, session, msg.worldId)
+        this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival)
           .then((cam) => {
             this.transport.send(clientId, {
               type: "player-assigned",
@@ -697,7 +753,7 @@ export class GameServer {
         console.log(
           `[tilefun:server] join-realm: client=${clientId} old=${oldRealmId} new=${msg.worldId} editorEnabled=${session.editorEnabled}`,
         );
-        this.movePlayerToRealm(clientId, session, msg.worldId)
+        this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival)
           .then((cam) => {
             console.log(
               `[tilefun:server] join-realm complete: client=${clientId} player.id=${session.player.id} editorEnabled=${session.editorEnabled} realmId=${session.realmId}`,

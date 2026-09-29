@@ -21,6 +21,8 @@ export interface Overlays {
   roads: boolean;
   settlements: boolean;
   boundaries: boolean;
+  lots: boolean;
+  entrances: boolean;
 }
 
 export const DEFAULT_VIEW: ViewState = { x: 300, y: 519, zoom: 0.42 };
@@ -30,6 +32,8 @@ export const DEFAULT_OVERLAYS: Overlays = {
   roads: true,
   settlements: true,
   boundaries: false,
+  lots: true,
+  entrances: true,
 };
 export const MIN_ZOOM = 0.0005;
 export const MAX_ZOOM = 64;

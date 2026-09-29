@@ -97,14 +97,14 @@ test("review advances to unchecked cases, persists verdicts, and exports reprodu
   await page.goto(explorer);
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   await page.getByRole("button", { name: "Looks good" }).click();
-  await expect(page.locator("#remaining")).toHaveText("2 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("4 unchecked");
   await expect(page.locator(".case-button.active")).toContainText("Across a cell boundary");
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   await page
     .getByRole("textbox", { name: "Review note" })
     .fill("The transition needs a less rectangular woodland edge.");
   await page.getByRole("button", { name: "Report", exact: false }).click();
-  await expect(page.locator("#remaining")).toHaveText("1 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("3 unchecked");
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export review notes" }).click();
   const download = await downloadPromise;
@@ -122,7 +122,7 @@ test("review advances to unchecked cases, persists verdicts, and exports reprodu
   expect(exported.records[1].bounds.minX).toBeLessThan(0);
   expect(exported.records[1].location).toContain("zoom=");
   await page.reload();
-  await expect(page.locator("#remaining")).toHaveText("1 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("3 unchecked");
 });
 
 test("phone touch navigation remains responsive with a throttled CPU", async ({ page }) => {

@@ -139,6 +139,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
 
 export function serializeProp(p: Prop): PropSnapshot {
   return {
+    ...(p.proceduralId ? { proceduralId: p.proceduralId } : {}),
     id: p.id,
     type: p.type,
     position: { ...p.position },
@@ -149,6 +150,7 @@ export function serializeProp(p: Prop): PropSnapshot {
 
 export function deserializeProp(s: PropSnapshot): Prop {
   return {
+    ...(s.proceduralId ? { proceduralId: s.proceduralId } : {}),
     id: s.id,
     type: s.type,
     position: { ...s.position },

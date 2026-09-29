@@ -14,11 +14,14 @@ const SAVE_DEBOUNCE_MS = 2000;
 
 export interface SerializedEntity {
   type: string;
+  proceduralId?: string;
   wx: number;
   wy: number;
 }
 
 export interface SavedMeta {
+  deletedProceduralIds?: string[];
+  proceduralEdits?: SerializedEntity[];
   playerX: number;
   playerY: number;
   cameraX: number;

@@ -1,6 +1,7 @@
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { DistrictStrategy } from "./regional/DistrictStrategy.js";
 import { RegionalStrategy } from "./regional/RegionalStrategy.js";
 import { regionalWorld } from "./regional/WorldDescriptor.js";
 import { generateStructuresForChunk, type StructurePlacement } from "./StructureGenerator.js";
@@ -35,11 +36,19 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
         terrain: new FlatStrategy(),
         placements: () => ({ placements: [], newIntersectionKeys: [] }),
       };
-    case "regional":
+    case "regional": {
+      const terrain =
+        descriptor.version === "regional-v1"
+          ? new RegionalStrategy(regionalWorld(descriptor.seed))
+          : new DistrictStrategy(regionalWorld(descriptor.seed));
       return {
         descriptor,
-        terrain: new RegionalStrategy(regionalWorld(descriptor.seed)),
-        placements: () => ({ placements: [], newIntersectionKeys: [] }),
+        terrain,
+        placements: (cx, cy) => ({
+          placements: terrain instanceof DistrictStrategy ? terrain.placements(cx, cy) : [],
+          newIntersectionKeys: [],
+        }),
       };
+    }
   }
 }

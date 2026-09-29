@@ -10,6 +10,7 @@ function chunkKey(cx: number, cy: number): string {
 /** Simple store for static props. No update loop — props don't tick. */
 export class PropManager {
   readonly props: Prop[] = [];
+  onEdit: ((prop: Prop, deleted: boolean) => void) | null = null;
   private nextId = 1;
   private chunkIndex = new Map<string, Prop[]>();
   /** Monotonic revision counter — incremented on add/remove for delta sync. */
@@ -100,7 +101,7 @@ export class PropManager {
     return prop;
   }
 
-  remove(id: number): boolean {
+  remove(id: number, persist = true): boolean {
     const idx = this.props.findIndex((p) => p.id === id);
     if (idx < 0) return false;
     const prop = this.props[idx];
@@ -113,6 +114,21 @@ export class PropManager {
         this.unindexProp(chunkKey(cx, cy), prop);
       }
     }
+    if (persist) this.onEdit?.(prop, true);
+    return true;
+  }
+
+  move(id: number, wx: number, wy: number): boolean {
+    if (!Number.isFinite(wx) || !Number.isFinite(wy)) return false;
+    const prop = this.props.find((p) => p.id === id);
+    if (!prop) return false;
+    this.remove(id, false);
+    prop.position = { wx, wy };
+    const next = this.nextId;
+    this.nextId = id;
+    this.add(prop);
+    this.nextId = next;
+    this.onEdit?.(prop, false);
     return true;
   }
 

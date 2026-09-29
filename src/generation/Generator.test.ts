@@ -91,3 +91,21 @@ describe("generation identity", () => {
     expect(() => seedFromText("4294967296")).toThrow();
   });
 });
+
+it("keeps terrain-only Regional v1 frozen after adding districts", () => {
+  for (const [seed, cx, cy, hash] of [
+    [2026, 18, 32, "f995683a204d69ec394c4b7c74f4ac8d2e407e0772c08401d123ff03045b3264"],
+    [42, -10, -10, "b374cb44f26dad7a00cc188dd0b0ad2f8026f9233cbdab459c4b830e0f1474bf"],
+  ] as const) {
+    const chunk = new Chunk();
+    const generator = createGenerator({
+      type: "regional",
+      version: "regional-v1",
+      seed,
+      preset: "temperate-v1",
+    });
+    generator.terrain.generate(chunk, cx, cy);
+    expect(hashChunk(chunk)).toBe(hash);
+    expect(generator.placements(cx, cy, new Set()).placements).toEqual([]);
+  }
+});

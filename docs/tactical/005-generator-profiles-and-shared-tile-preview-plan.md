@@ -398,9 +398,24 @@ Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it
   browser creation/reload/handoff tests pass for every generator. Build and all
   111 browser tests pass; lint has only existing warnings.
 
+- Slice D: Regional v2 adds connected avenues/local streets/alleys, sidewalk
+  crossings, south-facing stable lots, apartment/shop source-atlas facade recipes,
+  and parks. Both hosts use shared placement and scene rendering. Procedural
+  props have durable deletion/move overlays and bounded disposable residency.
+  Play here checks identity and resolves a safe arrival within 32 tiles before
+  leaving the old realm. Local saved inspection labels persisted snapshots;
+  server HTTP inspection reads bounded chunks and includes live realm edits.
+  Source selection, refresh, revision selection, and saved-world links are wired
+  into the explorer/game menu. Regional v1 and legacy generators remain pinned.
+  Verification includes district connectivity/entrances/seams, overlay eviction
+  and restoration, live authority inspection, and browser create/delete/reload
+  arrival. Art was visually inspected against the original atlas. Typecheck,
+  990 unit tests, and the complete browser suite pass; the browser arrival test
+  creates, deletes, inspects, and rejoins the same persisted world.
+
 ## Next action
 
-A–C are implemented. Continue **slice D** with the connected district, audited
-building recipes, saved overlays, and authoritative Play here, then continue E.
+A–D are implemented. Continue **slice E** with persistent enterable interiors,
+then farms, woods, wildlife, and simple inhabitants.
 Record measured caps and any changed contracts in this document and update
 [the explorer checkpoint guide](../world-explorer.md) after each accepted slice.

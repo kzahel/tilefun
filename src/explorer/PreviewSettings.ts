@@ -49,6 +49,10 @@ export function explorerUrl(
       overlays,
     ),
   );
+  for (const key of ["worldId", "server"]) {
+    const value = new URL(base).searchParams.get(key);
+    if (value) url.searchParams.set(key, value);
+  }
   url.searchParams.set("generation", JSON.stringify(resolveDescriptor(generation)));
   url.searchParams.set("mode", preview.mode);
   url.searchParams.set("detailZoom", String(preview.detailZoom));
@@ -79,7 +83,16 @@ export function parseExplorerLocation(base: string): {
     sampleBudget: Number(url.searchParams.get("budget") ?? DEFAULT_PREVIEW.sampleBudget),
   });
   return {
-    generation: generation ?? createDescriptor("regional", old.world.seed),
+    generation:
+      generation ??
+      (new URL(base).searchParams.has("version") || new URL(base).searchParams.has("profile")
+        ? resolveDescriptor({
+            type: "regional",
+            version: "regional-v1",
+            seed: old.world.seed,
+            preset: "temperate-v1",
+          })
+        : createDescriptor("regional", old.world.seed)),
     view: old.view,
     overlays: old.overlays,
     preview,

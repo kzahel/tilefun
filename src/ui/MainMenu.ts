@@ -5,6 +5,7 @@ import {
   type GenerationDescriptor,
   type GenerationRequest,
   type GeneratorChoice,
+  REGIONAL_REVISIONS,
   resolveDescriptor,
   seedFromText,
 } from "../generation/GenerationDescriptor.js";
@@ -77,7 +78,12 @@ export class MainMenu {
     this.overlay.appendChild(title);
 
     const explorerLink = document.createElement("a");
-    explorerLink.href = `${import.meta.env.BASE_URL}world-explorer.html`;
+    const explorerUrl = new URL(`${import.meta.env.BASE_URL}world-explorer.html`, location.href);
+    const serverParam = new URL(location.href).searchParams.get("server");
+    if (serverParam) explorerUrl.searchParams.set("server", serverParam);
+    else if (new URL(location.href).searchParams.has("multiplayer"))
+      explorerUrl.searchParams.set("server", `${location.host}/ws`);
+    explorerLink.href = explorerUrl.href;
     explorerLink.textContent = "World atlas · regional preview ↗";
     explorerLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
     this.overlay.appendChild(explorerLink);
@@ -156,6 +162,21 @@ export class MainMenu {
     } catch (error) {
       this.showCreationError(String(error));
     }
+    const revisionRow = document.createElement("label");
+    revisionRow.textContent = "Regional revision ";
+    const revisionSelect = document.createElement("select");
+    revisionSelect.setAttribute("aria-label", "Regional revision");
+    for (const revision of REGIONAL_REVISIONS)
+      revisionSelect.add(new Option(revision.label, revision.version));
+    revisionSelect.value =
+      imported?.type === "regional" ? imported.version : createDescriptor("regional", 42).version;
+    revisionRow.append(revisionSelect);
+    revisionSelect.addEventListener("keydown", (event) => event.stopPropagation());
+    const showRevision = () => {
+      revisionRow.style.display = typeSelect.value === "regional" ? "block" : "none";
+    };
+    typeSelect.addEventListener("change", showRevision);
+    showRevision();
     const settingsRow = document.createElement("div");
     settingsRow.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; font:12px monospace;";
     const roads = imported?.type === "classic" ? { ...imported.roads } : { ...DEFAULT_ROAD_PARAMS };
@@ -202,8 +223,21 @@ export class MainMenu {
             ? imported.seed
             : seedFromText(seedVal)
           : undefined;
-        const generation: GenerationRequest =
-          seed === undefined ? { choice, roads } : createDescriptor(choice, seed, roads);
+        let generation: GenerationRequest =
+          seed === undefined
+            ? {
+                choice,
+                roads,
+                ...(choice === "regional"
+                  ? { version: revisionSelect.value as GenerationDescriptor["version"] }
+                  : {}),
+              }
+            : createDescriptor(choice, seed, roads);
+        if (choice === "regional" && "type" in generation && generation.type === "regional")
+          generation = resolveDescriptor({
+            ...generation,
+            version: revisionSelect.value,
+          } as GenerationDescriptor);
         this.creationError.textContent = "";
         this.onCreate?.(name, choice === "classic" ? "generated" : choice, seed, generation);
       } catch (error) {
@@ -223,7 +257,7 @@ export class MainMenu {
     });
     seedInput.addEventListener("keyup", (e) => e.stopPropagation());
 
-    newSection.append(nameRow, optRow, settingsRow, this.creationError);
+    newSection.append(nameRow, optRow, revisionRow, settingsRow, this.creationError);
     this.overlay.appendChild(newSection);
 
     // Hosting info section (hidden unless hosting)
@@ -471,7 +505,20 @@ export class MainMenu {
     generationEl.style.cssText = "font:12px monospace; color:#b8d0b8;";
     if (realm.generation)
       generationEl.textContent = `${descriptorChoice(realm.generation)} · seed ${realm.generation.seed} · ${realm.generation.version}`;
-    info.append(nameRow, generationEl, timeEl);
+    const inspect = document.createElement("a");
+    const inspectUrl = new URL(`${import.meta.env.BASE_URL}world-explorer.html`, location.href);
+    inspectUrl.searchParams.set("worldId", realm.id);
+    if (realm.generation)
+      inspectUrl.searchParams.set("generation", JSON.stringify(realm.generation));
+    const serverParam = new URL(location.href).searchParams.get("server");
+    if (serverParam) inspectUrl.searchParams.set("server", serverParam);
+    else if (new URL(location.href).searchParams.has("multiplayer"))
+      inspectUrl.searchParams.set("server", `${location.host}/ws`);
+    inspect.href = inspectUrl.href;
+    inspect.textContent = "Inspect saved world ↗";
+    inspect.style.cssText = "color:#d8bd87;font:12px monospace";
+    inspect.onclick = (event) => event.stopPropagation();
+    info.append(nameRow, generationEl, timeEl, inspect);
 
     // Delete button with 2-click confirm
     const delBtn = document.createElement("button");

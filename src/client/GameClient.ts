@@ -496,10 +496,20 @@ export class GameClient {
     // Serialized mode: camera was already set by "world-loaded" message
     // sent during onConnect (fires before init() runs)
 
+    const handoffParams = new URL(location.href).searchParams;
+    const handoffWorldId = handoffParams.get("worldId");
+    let handoffArrival: import("../server/SafeArrival.js").Arrival | undefined;
+    try {
+      const raw = handoffParams.get("arrival");
+      if (raw) handoffArrival = JSON.parse(raw);
+    } catch {
+      this.mainMenu.showCreationError("Invalid explorer arrival.");
+    }
+
     // Set up menu callbacks
     this.mainMenu.onSelect = (id) => {
       // Already on this world — just close the menu
-      if (this.mainMenu.currentWorldId === id) {
+      if (this.mainMenu.currentWorldId === id && !handoffArrival) {
         if (this.scenes.has(MenuScene)) this.scenes.pop();
         return;
       }
@@ -509,19 +519,25 @@ export class GameClient {
           type: "join-realm",
           requestId: this.nextRequestId++,
           worldId: id,
-        }).then(() => {
-          if (this.scenes.has(MenuScene)) this.scenes.pop();
-        });
+          ...(handoffWorldId === id && handoffArrival ? { arrival: handoffArrival } : {}),
+        })
+          .then(() => {
+            if (this.scenes.has(MenuScene)) this.scenes.pop();
+          })
+          .catch((error) => this.mainMenu.showCreationError(String(error)));
       } else {
-        this.localServer.loadWorld(id).then((cam) => {
-          this.mainMenu.currentWorldId = id;
-          this.showWorldIdentity(this.localServer.worldGeneration);
-          this.camera.snapTo(cam.cameraX, cam.cameraY);
-          this.camera.zoom = cam.cameraZoom;
-          this.camera.requestSnap();
-          this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-          if (this.scenes.has(MenuScene)) this.scenes.pop();
-        });
+        this.localServer
+          .loadWorld(id, handoffWorldId === id ? handoffArrival : undefined)
+          .then((cam) => {
+            this.mainMenu.currentWorldId = id;
+            this.showWorldIdentity(this.localServer.worldGeneration);
+            this.camera.snapTo(cam.cameraX, cam.cameraY);
+            this.camera.zoom = cam.cameraZoom;
+            this.camera.requestSnap();
+            this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+            if (this.scenes.has(MenuScene)) this.scenes.pop();
+          })
+          .catch((error) => this.mainMenu.showCreationError(String(error)));
       }
     };
     this.mainMenu.onCreate = (name, worldType, seed, generation) => {
@@ -540,6 +556,7 @@ export class GameClient {
               type: "join-realm",
               requestId: this.nextRequestId++,
               worldId: resp.meta.id,
+              ...(!handoffWorldId && handoffArrival ? { arrival: handoffArrival } : {}),
             });
           })
           .then(() => {
@@ -550,15 +567,17 @@ export class GameClient {
         this.localServer
           .createWorld(name, worldType, seed, generation)
           .then((meta) => {
-            return this.localServer.loadWorld(meta.id).then((cam) => {
-              this.mainMenu.currentWorldId = meta.id;
-              this.showWorldIdentity(this.localServer.worldGeneration);
-              this.camera.snapTo(cam.cameraX, cam.cameraY);
-              this.camera.zoom = cam.cameraZoom;
-              this.camera.requestSnap();
-              this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-              if (this.scenes.has(MenuScene)) this.scenes.pop();
-            });
+            return this.localServer
+              .loadWorld(meta.id, !handoffWorldId ? handoffArrival : undefined)
+              .then((cam) => {
+                this.mainMenu.currentWorldId = meta.id;
+                this.showWorldIdentity(this.localServer.worldGeneration);
+                this.camera.snapTo(cam.cameraX, cam.cameraY);
+                this.camera.zoom = cam.cameraZoom;
+                this.camera.requestSnap();
+                this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+                if (this.scenes.has(MenuScene)) this.scenes.pop();
+              });
           })
           .catch((error) => this.mainMenu.showCreationError(String(error)));
       }
@@ -650,7 +669,10 @@ export class GameClient {
     this.loop.start();
     this.canvas.dataset.ready = "true";
     if (!this.serialized) this.showWorldIdentity(this.localServer.worldGeneration);
-    if (new URL(location.href).searchParams.has("generation") && !this.scenes.has(MenuScene))
+    if (
+      (new URL(location.href).searchParams.has("generation") || handoffWorldId) &&
+      !this.scenes.has(MenuScene)
+    )
       await this.toggleMenu();
   }
 

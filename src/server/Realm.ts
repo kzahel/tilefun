@@ -28,6 +28,7 @@ import { PropManager } from "../entities/PropManager.js";
 import { TentSpawner } from "../entities/TentSpawner.js";
 import { descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
+import { ProceduralProps } from "../generation/ProceduralProps.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
@@ -165,6 +166,7 @@ export class Realm {
   }
   /** Tracks processed road intersections/segments for structure generation. */
   private processedStructureKeys = new Set<string>();
+  private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */
   readonly sessions = new Map<string, PlayerSession>();
@@ -205,6 +207,9 @@ export class Realm {
     this.world = new World();
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.proceduralProps = new ProceduralProps(this.propManager, () =>
+      this.saveManager?.markMetaDirty(),
+    );
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
     this.terrainEditor = new TerrainEditor(this.world, () => {}, this.adjacency);
@@ -717,6 +722,13 @@ export class Realm {
     this.world.updateLoadedChunks(range, maxLoads);
     this.world.computeAutotile(this.blendGraph, maxAutotile);
 
+    if (this.generation.type === "regional" && this.generation.version !== "regional-v1") {
+      this.proceduralProps.reconcile(
+        this.generator,
+        [...this.world.chunks.entries()].map(([key]) => key),
+      );
+      return;
+    }
     // Generate structures for newly loaded chunks (only for worlds with roads)
     if (this.generator.descriptor.type !== "flat") {
       for (const [key] of this.world.chunks.entries()) {
@@ -738,6 +750,29 @@ export class Realm {
         }
       }
     }
+  }
+
+  inspectionState(): SavedMeta {
+    return {
+      ...this.proceduralProps.save(),
+      playerX: 0,
+      playerY: 0,
+      cameraX: 0,
+      cameraY: 0,
+      cameraZoom: 1,
+      nextEntityId: 1,
+      entities: this.propManager.props
+        .filter((p) => !p.proceduralId)
+        .map((p) => ({ type: p.type, wx: p.position.wx, wy: p.position.wy })),
+    };
+  }
+
+  realizeProceduralProps(): void {
+    if (this.generation.type === "regional" && this.generation.version !== "regional-v1")
+      this.proceduralProps.reconcile(
+        this.generator,
+        [...this.world.chunks.entries()].map(([key]) => key),
+      );
   }
 
   /** Mark all chunks for re-render (debug mode changes). */
@@ -833,6 +868,10 @@ export class Realm {
         }
         break;
 
+      case "edit-move-prop":
+        this.propManager.move(msg.propId, msg.wx, msg.wy);
+        break;
+
       case "edit-delete-prop":
         this.propManager.remove(msg.propId);
         this.saveManager?.markMetaDirty();
@@ -913,6 +952,9 @@ export class Realm {
     this.world = new World(this.buildStrategy(worldMeta));
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.proceduralProps = new ProceduralProps(this.propManager, () =>
+      this.saveManager?.markMetaDirty(),
+    );
 
     // Open persistence for this world
     const store = createStore(worldId);
@@ -936,8 +978,9 @@ export class Realm {
     let playerY = 0;
 
     console.log(`[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`);
-    if (savedMeta && savedChunks.size > 0) {
-      this.world.chunks.setSavedData(savedChunks);
+    this.world.chunks.setSavedData(savedChunks);
+    if (savedMeta) {
+      this.proceduralProps.restore(savedMeta);
       cameraX = savedMeta.cameraX;
       cameraY = savedMeta.cameraY;
       cameraZoom = savedMeta.cameraZoom;
@@ -1480,10 +1523,12 @@ export class Realm {
       wy: e.position.wy,
     }));
     for (const p of this.propManager.props) {
+      if (p.proceduralId) continue;
       entities.push({ type: p.type, wx: p.position.wx, wy: p.position.wy });
     }
 
     return {
+      ...this.proceduralProps.save(),
       playerX: player?.position.wx ?? 0,
       playerY: player?.position.wy ?? 0,
       cameraX,

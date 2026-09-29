@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../../config/constants.js";
 import { Chunk } from "../../world/Chunk.js";
-import { createDescriptor } from "../GenerationDescriptor.js";
+
 import { createGenerator } from "../Generator.js";
 import { plannedElevation, QUERY_LIMITS, queryRegion } from "./RegionalPlanner.js";
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";
@@ -15,7 +15,12 @@ describe("Regional realization", () => {
     [100, -81],
   ] as const)
     it(`shares borders at ${cx},${cy}`, () => {
-      const generator = createGenerator(createDescriptor("regional", 2026));
+      const generator = createGenerator({
+        type: "regional",
+        seed: 2026,
+        version: "regional-v1",
+        preset: "temperate-v1",
+      });
       const a = new Chunk();
       const east = new Chunk();
       const south = new Chunk();
@@ -30,7 +35,12 @@ describe("Regional realization", () => {
     });
   it("uses the overview water/shore thresholds and supported terrain chain", () => {
     const world = regionalWorld(2026);
-    const generator = createGenerator(createDescriptor("regional", world.seed));
+    const generator = createGenerator({
+      type: "regional",
+      seed: world.seed,
+      version: "regional-v1",
+      preset: "temperate-v1",
+    });
     for (const [cx, cy] of [
       [-10, -10],
       [50, 20],

@@ -1,9 +1,19 @@
-import { type GameAssets, loadTerrainAssets } from "../assets/GameAssets.js";
+import {
+  closeAssets,
+  type GameAssets,
+  loadSceneAssets,
+  loadTerrainAssets,
+} from "../assets/GameAssets.js";
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { CHUNK_SIZE, PIXEL_SCALE, TILE_SIZE } from "../config/constants.js";
+import type { Prop } from "../entities/Prop.js";
+import { createProp } from "../entities/PropFactories.js";
 import { descriptorKey, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Camera } from "../rendering/Camera.js";
+import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import type { Chunk } from "../world/Chunk.js";
 import { type ChunkData, hydrateChunk } from "../world/ChunkData.js";
@@ -16,6 +26,10 @@ import type { ViewState } from "./ViewState.js";
 export class TilePreview {
   private chunks = new Map<string, Chunk>();
   private wanted = new Set<string>();
+  private props: Prop[] = [];
+  private propsReady = false;
+  private propsSerial = 0;
+  private visibleKey = "";
   private key = "";
   private active = false;
   private disposed = false;
@@ -60,6 +74,11 @@ export class TilePreview {
       minCy: Math.max(cy - r, Math.floor((view.y - height / (2 * view.zoom)) / CHUNK_SIZE)),
       maxCy: Math.min(cy + r, Math.floor((view.y + height / (2 * view.zoom)) / CHUNK_SIZE)),
     };
+    const visibleKey = JSON.stringify(this.visible);
+    if (visibleKey !== this.visibleKey) {
+      this.visibleKey = visibleKey;
+      this.propsReady = false;
+    }
     this.wanted.clear();
     const missing: { cx: number; cy: number }[] = [];
     // One chunk halo gives the exact autotiler and road renderer their neighbors.
@@ -83,12 +102,35 @@ export class TilePreview {
     this.updateStats();
     return missing;
   }
-  accept(chunks: { cx: number; cy: number; data: ChunkData }[]): void {
+  get featureIds(): string[] {
+    return this.props.flatMap((prop) => (prop.proceduralId ? [prop.proceduralId] : []));
+  }
+  get footprint() {
+    return this.active
+      ? {
+          minX: this.visible.minCx * CHUNK_SIZE - 20,
+          minY: this.visible.minCy * CHUNK_SIZE - 20,
+          maxX: (this.visible.maxCx + 1) * CHUNK_SIZE + 20,
+          maxY: (this.visible.maxCy + 1) * CHUNK_SIZE + 20,
+        }
+      : undefined;
+  }
+  accept(
+    chunks: { cx: number; cy: number; data: ChunkData }[],
+    placements: StructurePlacement[] = [],
+  ): void {
     if (!this.active || this.disposed) return;
     for (const item of chunks) {
       const key = `${item.cx},${item.cy}`;
       if (this.wanted.has(key)) this.chunks.set(key, hydrateChunk(item.data));
     }
+    this.props = placements.map((placement, index) => {
+      const prop = createProp(placement.propType, placement.wx, placement.wy);
+      prop.id = index + 1;
+      if (placement.featureId) prop.proceduralId = placement.featureId;
+      return prop;
+    });
+    this.loadProps();
     const start = performance.now();
     for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++) {
       for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
@@ -121,30 +163,30 @@ export class TilePreview {
     this.camera.y = view.y * TILE_SIZE;
     this.camera.zoom = view.zoom / (TILE_SIZE * PIXEL_SCALE);
     this.camera.setViewport(width, height);
-    this.renderer.drawTerrain(
-      ctx,
-      this.camera,
-      {
-        getChunkIfLoaded: (cx, cy) => this.chunks.get(`${cx},${cy}`),
-        getRoadAt: (tx, ty) =>
-          this.chunks
-            .get(`${Math.floor(tx / CHUNK_SIZE)},${Math.floor(ty / CHUNK_SIZE)}`)
-            ?.getRoad(
-              ((tx % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
-              ((ty % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
-            ) ?? 0,
-      },
-      this.assets.sheets,
-      this.visible,
-      true,
-      32,
-    );
+    const world = {
+      getChunkIfLoaded: (cx: number, cy: number) => this.chunks.get(`${cx},${cy}`),
+      getRoadAt: (tx: number, ty: number) =>
+        this.chunks
+          .get(`${Math.floor(tx / CHUNK_SIZE)},${Math.floor(ty / CHUNK_SIZE)}`)
+          ?.getRoad(
+            ((tx % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
+            ((ty % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
+          ) ?? 0,
+      getHeightAt: () => 0,
+    };
+    ctx.save();
+    if (!this.propsReady) {
+      ctx.beginPath();
+      ctx.clip();
+    }
+    this.renderer.drawTerrain(ctx, this.camera, world, this.assets.sheets, this.visible, true, 32);
+    ctx.restore();
     let pending = false;
     this.stats.ready = 0;
     for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++) {
       for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
         const chunk = this.chunks.get(`${cx},${cy}`);
-        const ready = !!chunk?.renderCache && !chunk.dirty;
+        const ready = !!chunk?.renderCache && !chunk.dirty && this.propsReady;
         if (ready) this.stats.ready++;
         else if (chunk) pending = true;
         if (coverage) {
@@ -159,6 +201,35 @@ export class TilePreview {
         }
       }
     }
+    if (this.propsReady) {
+      ctx.save();
+      ctx.beginPath();
+      for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++)
+        for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
+          const chunk = this.chunks.get(`${cx},${cy}`);
+          if (chunk?.renderCache && !chunk.dirty) {
+            const { sx, sy } = this.camera.worldToScreen(
+              cx * CHUNK_SIZE * TILE_SIZE,
+              cy * CHUNK_SIZE * TILE_SIZE,
+            );
+            ctx.rect(sx, sy, CHUNK_SIZE * view.zoom + 1, CHUNK_SIZE * view.zoom + 1);
+          }
+        }
+      ctx.clip();
+      const items = collectScene(
+        [],
+        this.props,
+        world,
+        this.camera,
+        this.visible,
+        1,
+        this.renderer,
+        [],
+        false,
+      );
+      drawScene2D(ctx, this.camera, items, this.assets.sheets, undefined);
+      ctx.restore();
+    }
     this.updateStats();
     ctx.restore();
     return pending;
@@ -168,17 +239,44 @@ export class TilePreview {
     const start = performance.now();
     this.loading = loadTerrainAssets(this.graph)
       .then((assets) => {
-        if (this.disposed) return;
+        if (this.disposed) {
+          closeAssets(assets);
+          return;
+        }
         this.assets = assets;
         this.renderer.setBlendSheets(assets.blendSheets, this.graph);
         this.renderer.setVariants(assets.variants);
         this.renderer.setRoadSheets(assets.sheets);
         this.stats.assetsMs = performance.now() - start;
+        this.loadProps();
         this.changed();
       })
       .catch((error) => {
         this.stats.error = String(error);
         this.loading = null;
+        this.changed();
+      });
+  }
+  private loadProps(): void {
+    if (!this.assets) return;
+    const serial = ++this.propsSerial;
+    const assets = this.assets;
+    const keys = new Set(this.props.map((prop) => prop.sprite.sheetKey));
+    this.propsReady = [...keys].every((key) => assets.sheets.has(key));
+    if (this.propsReady) return;
+    void loadSceneAssets(assets, keys)
+      .then(() => {
+        if (this.disposed) {
+          closeAssets(assets);
+          return;
+        }
+        if (serial === this.propsSerial) {
+          this.propsReady = true;
+          this.changed();
+        }
+      })
+      .catch((error) => {
+        this.stats.error = String(error);
         this.changed();
       });
   }
@@ -200,6 +298,9 @@ export class TilePreview {
   private releaseChunks(): void {
     for (const chunk of this.chunks.values()) chunk.renderCache = null;
     this.chunks.clear();
+    this.props = [];
+    this.propsReady = false;
+    this.propsSerial++;
     this.wanted.clear();
     this.renderer = new TileRenderer();
     if (this.assets) {
@@ -211,9 +312,13 @@ export class TilePreview {
     this.stats.ready = 0;
     this.stats.bytes = 0;
   }
+  reset(): void {
+    this.releaseChunks();
+  }
   dispose(): void {
     this.disposed = true;
     this.releaseChunks();
+    if (this.assets) closeAssets(this.assets);
     this.assets = null;
   }
 }

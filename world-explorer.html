@@ -11,12 +11,13 @@
       <header class="topbar">
         <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">▧</span> TILEFUN <span class="brand-divider">/</span> <span class="brand-title">World atlas</span></a>
         <span class="preview-badge">PROCEDURAL PREVIEW</span>
-        <a id="create-world" class="create-world" href="./">Create this world ↗</a><button id="share" type="button">Copy location ↗</button>
+        <a id="create-world" class="create-world" href="./">Create this world ↗</a><a id="play-here" class="create-world" href="./">Play here ↗</a><button id="share" type="button">Copy location ↗</button>
       </header>
       <main class="workspace">
         <aside class="sidebar" aria-label="Explorer controls">
           <div class="intro"><span class="eyebrow">REGIONAL STUDY / 01</span><h1>A world takes shape.</h1><p>Follow the landscape. Find a place.<br />See how the pieces connect.</p></div>
-          <form id="seed-form" class="seed-form"><label for="generator">World type</label><select id="generator" aria-label="World type"></select><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
+          <form id="seed-form" class="seed-form"><label for="generator">World type</label><select id="generator" aria-label="World type"></select><label>Regional revision<select id="regional-revision" aria-label="Regional revision"></select></label><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
+          <label for="world-source">Preview source</label><select id="world-source" aria-label="Preview source"><option value="">Procedural world</option></select><button id="refresh-snapshot" type="button">Refresh saved view</button><p id="source-coverage" class="muted">Procedural preview · no saved edits</p>
           <fieldset class="layers"><legend>Terrain preview</legend>
             <label for="display-mode">Display<select id="display-mode"><option value="auto">Auto</option><option value="map">Map</option><option value="tiles">Tiles</option><option value="coverage">Coverage</option></select></label>
             <label for="detail-zoom">Tiles above zoom<input id="detail-zoom" type="number" min="2" max="32" step="1" /></label>
@@ -29,14 +30,16 @@
             <label><span><i class="swatch settlement"></i>Settlements</span><input type="checkbox" data-layer="settlements" checked /></label>
             <label><span><i class="swatch road"></i>Major connections</span><input type="checkbox" data-layer="roads" checked /></label>
             <label><span><i class="swatch boundary"></i>Planning boundaries</span><input type="checkbox" data-layer="boundaries" /></label>
+            <label><span>Lots & parks</span><input type="checkbox" data-layer="lots" checked /></label>
+            <label><span>Entrances</span><input type="checkbox" data-layer="entrances" checked /></label>
           </fieldset>
-          <section class="review"><div class="section-heading"><h2>Three places to look</h2><span id="remaining">3 unchecked</span></div><div id="review-cases"></div>
+          <section class="review"><div class="section-heading"><h2>Places to look</h2><span id="remaining">5 unchecked</span></div><div id="review-cases"></div>
             <div class="review-actions"><button id="approve" type="button">Looks good →</button><button id="report" type="button">Report →</button></div>
             <input id="review-note" placeholder="Optional note for a report" aria-label="Review note" maxlength="2000" />
             <button id="export-review" class="text-button" type="button">Export review notes ↓</button>
           </section>
           <section id="inspection" class="inspection" aria-live="polite"><span class="eyebrow">FEATURE INSPECTOR</span><h2>Pick a place on the map</h2><p>Tap a settlement or a connection to inspect its identity and reservation.</p></section>
-          <p class="scope-note">Zoom into actual terrain tiles. Preview and gameplay share each generator. Building art and saved-world inspection arrive in later slices.</p>
+          <p class="scope-note">Zoom into actual terrain tiles. Preview and gameplay share each generator. Districts use the game’s building sprites. Play here carries this location to a safe authoritative arrival.</p>
         </aside>
         <section class="map-stage" aria-label="Regional world map">
           <canvas id="map" aria-label="World map. Drag to pan, scroll or pinch to zoom. Arrow keys pan; plus and minus zoom." tabindex="0"></canvas>

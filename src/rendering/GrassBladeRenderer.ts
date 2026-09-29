@@ -112,7 +112,7 @@ let _debugLogged = false;
  * Returns renderer-agnostic GrassItem[] with pre-computed sway + push angles.
  */
 export function collectGrassBladeItems(
-  world: World,
+  world: Pick<World, "getChunkIfLoaded">,
   entityPositions: readonly { position: { wx: number; wy: number } }[],
   visible: ChunkRange,
   viewport: WorldViewport,

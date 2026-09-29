@@ -18,10 +18,15 @@ export type GenerationDescriptor =
     }
   | {
       readonly type: "regional";
-      readonly version: "regional-v1";
+      readonly version: "regional-v1" | "regional-v2";
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
+
+export const REGIONAL_REVISIONS = [
+  { version: "regional-v1", label: "Terrain only (v1)" },
+  { version: "regional-v2", label: "Districts (v2)" },
+] as const;
 
 export const GENERATOR_CATALOG = [
   { choice: "classic", label: "Classic", overview: true, settlements: false },
@@ -95,7 +100,7 @@ export function resolveDescriptor(value: GenerationDescriptor): GenerationDescri
       return Object.freeze({ type: "flat", version: "flat-v1", seed: value.seed, preset: "grass" });
     case "regional":
       if (
-        value.version !== "regional-v1" ||
+        !["regional-v1", "regional-v2"].includes(value.version) ||
         value.preset !== "temperate-v1" ||
         !Number.isInteger(value.seed) ||
         value.seed < 0 ||
@@ -104,7 +109,7 @@ export function resolveDescriptor(value: GenerationDescriptor): GenerationDescri
         break;
       return Object.freeze({
         type: "regional",
-        version: "regional-v1",
+        version: value.version,
         seed: value.seed,
         preset: "temperate-v1",
       });
@@ -132,7 +137,7 @@ export function createDescriptor(
     case "regional":
       return resolveDescriptor({
         type: "regional",
-        version: "regional-v1",
+        version: "regional-v2",
         seed,
         preset: "temperate-v1",
       });
@@ -152,6 +157,13 @@ export function descriptorFromMetadata(meta?: {
   const oldType = meta?.worldType ?? "generated";
   if (!["generated", "classic", "island", "flat", "regional"].includes(oldType))
     throw new Error("Unsupported world type.");
+  if (oldType === "regional")
+    return resolveDescriptor({
+      type: "regional",
+      version: "regional-v1",
+      seed: meta?.seed ?? 42,
+      preset: "temperate-v1",
+    });
   return createDescriptor(
     oldType === "generated" ? "classic" : (oldType as GeneratorChoice),
     meta?.seed ?? 42,
@@ -169,13 +181,20 @@ export function descriptorKey(descriptor: GenerationDescriptor): string {
 /** Creation intent allows a blank seed; only the authority resolves randomness. */
 export type GenerationRequest =
   | GenerationDescriptor
-  | { choice: GeneratorChoice; seed?: number; roads?: RoadGenParams };
+  | {
+      choice: GeneratorChoice;
+      seed?: number;
+      roads?: RoadGenParams;
+      version?: GenerationDescriptor["version"];
+    };
 export function resolveCreation(
   request: GenerationRequest,
   randomSeed: () => number = () => Math.floor(Math.random() * 2147483647),
 ): GenerationDescriptor {
   if (!request || typeof request !== "object") throw new Error("Invalid generation request.");
-  return "type" in request
-    ? resolveDescriptor(request)
-    : createDescriptor(request.choice, request.seed ?? randomSeed(), request.roads);
+  if ("type" in request) return resolveDescriptor(request);
+  const descriptor = createDescriptor(request.choice, request.seed ?? randomSeed(), request.roads);
+  return request.version
+    ? resolveDescriptor({ ...descriptor, version: request.version } as GenerationDescriptor)
+    : descriptor;
 }

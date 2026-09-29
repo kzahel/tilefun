@@ -39,6 +39,7 @@ interface SettlementTemplate {
 
 /** Result: a concrete prop to place in the world. */
 export interface StructurePlacement {
+  featureId?: string;
   propType: string;
   wx: number;
   wy: number;

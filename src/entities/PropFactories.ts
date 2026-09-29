@@ -1,6 +1,7 @@
 import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
+import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -477,12 +478,42 @@ export function getMaterialForPropType(type: string): MaterialType | undefined {
 
 /** Look up static wall segments for a prop type (from the definition, not serialized). */
 export function getWallsForPropType(type: string): PropCollider[] | null {
+  const recipe = buildingRecipe(type);
+  if (recipe)
+    return [
+      {
+        offsetX: 0,
+        offsetY: 0,
+        width: recipe.width,
+        height: recipe.groundDepth,
+        zHeight: recipe.height,
+      },
+    ];
   const def = PROP_DEFS[type];
   if (!def?.walls) return null;
   return def.walls.map((w) => ({ ...w }));
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const recipe = buildingRecipe(type);
+  if (recipe)
+    return {
+      id: 0,
+      type,
+      position: { wx, wy },
+      sprite: {
+        sheetKey: "me-complete",
+        frameCol: 150,
+        frameRow: 135,
+        spriteWidth: recipe.width,
+        spriteHeight: recipe.height,
+        parts: recipe.parts,
+      },
+      collider: null,
+      walls: getWallsForPropType(type),
+      isProp: true,
+    };
+
   if (type.startsWith(ATLAS_PREFIX)) {
     const atlasKey = type.slice(ATLAS_PREFIX.length);
     const sprite = getAtlasSprites()[atlasKey];
@@ -524,6 +555,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (buildingRecipe(type)) return true;
   if (type.startsWith(ATLAS_PREFIX)) {
     if (!isAtlasLoaded()) return false;
     return type.slice(ATLAS_PREFIX.length) in getAtlasSprites();

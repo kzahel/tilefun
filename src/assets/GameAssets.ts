@@ -164,3 +164,42 @@ function registerTileVariants(variants: TileVariants): void {
   // --- GrassLight: brighter green tiles (cols 7-11, rows 1-5) ---
   variants.addRect("GrassLight", 7, 1, 5, 5);
 }
+
+const sceneLoads = new WeakMap<GameAssets, Map<string, Promise<void>>>();
+const closedAssets = new WeakSet<GameAssets>();
+/** Lazy source sprites for a diagnostic scene, using gameplay's exact manifest. */
+export async function loadSceneAssets(
+  assets: GameAssets,
+  keys: ReadonlySet<string>,
+): Promise<void> {
+  if (closedAssets.has(assets)) return;
+  let loads = sceneLoads.get(assets);
+  if (!loads) {
+    loads = new Map();
+    sceneLoads.set(assets, loads);
+  }
+  const work: Promise<void>[] = [];
+  for (const entry of SPRITE_MANIFEST) {
+    if (!keys.has(entry.key) || assets.sheets.has(entry.key)) continue;
+    let pending = loads.get(entry.key);
+    if (!pending) {
+      pending = loadImage(entry.path)
+        .then((image) => {
+          if (closedAssets.has(assets)) image.close();
+          else assets.sheets.set(entry.key, new Spritesheet(image, entry.w, entry.h));
+        })
+        .finally(() => loads?.delete(entry.key));
+      loads.set(entry.key, pending);
+    }
+    work.push(pending);
+  }
+  await Promise.all(work);
+}
+export function closeAssets(assets: GameAssets): void {
+  closedAssets.add(assets);
+  for (const image of new Set([...assets.sheets.values()].map((sheet) => sheet.image))) {
+    if (image instanceof ImageBitmap) image.close();
+  }
+  assets.sheets.clear();
+  assets.blendSheets.length = 0;
+}

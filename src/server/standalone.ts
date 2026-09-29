@@ -7,6 +7,7 @@ import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
+import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
 
 const PORT = parseInt(process.env.PORT ?? "3001", 10);
@@ -39,7 +40,8 @@ const MIME_TYPES: Record<string, string> = {
 // The Vite build uses base: "/tilefun/" so all assets are under that path.
 const BASE_PATH = "/tilefun/";
 
-const httpServer = createServer((req, res) => {
+const httpServer = createServer(async (req, res) => {
+  if (await inspectionHttp(server, req, res)) return;
   const url = req.url ?? "/";
 
   // Redirect root to the base path

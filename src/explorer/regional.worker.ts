@@ -1,5 +1,8 @@
+import { deriveTerrain } from "../generation/deriveTerrain.js";
+import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { normalizeGeneration, overviewSteps } from "../generation/Overview.js";
+import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Chunk } from "../world/Chunk.js";
 import { chunkData, chunkDataTransfers } from "../world/ChunkData.js";
 import type { WorkerRequest, WorkerResponse } from "./workerProtocol.js";
@@ -16,6 +19,12 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
   const start = performance.now();
   let computeMs = 0;
   try {
+    if (
+      message.snapshot &&
+      descriptorKey(message.snapshot.generation) !==
+        descriptorKey(normalizeGeneration(message.world))
+    )
+      throw new Error("Saved world identity differs from the preview.");
     const query = overviewSteps(message.world, message.request);
     while (!job.cancelled) {
       const sliceStart = performance.now();
@@ -44,10 +53,55 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             const terrainStart = performance.now();
             const chunk = new Chunk();
             generator.terrain.generate(chunk, coordinate.cx, coordinate.cy);
+            const saved = message.snapshot?.chunks.find(
+              (c) => c.cx === coordinate.cx && c.cy === coordinate.cy,
+            );
+            if (saved) {
+              if (
+                saved.subgrid.length !== 1089 ||
+                saved.roadGrid.length !== 256 ||
+                saved.heightGrid.length !== 256
+              )
+                throw new Error("Invalid saved chunk buffers.");
+              chunk.subgrid.set(saved.subgrid);
+              chunk.roadGrid.set(saved.roadGrid);
+              chunk.heightGrid.set(saved.heightGrid);
+              deriveTerrain(chunk);
+            }
             chunks.push({ ...coordinate, data: chunkData(chunk) });
             terrainMs += performance.now() - terrainStart;
             await new Promise<void>((resolve) => setTimeout(resolve, 0));
           }
+        }
+        const placements = new Map<string, StructurePlacement>();
+        if (message.footprint) {
+          const b = message.footprint;
+          if (
+            !Object.values(b).every(Number.isFinite) ||
+            b.maxX <= b.minX ||
+            b.maxY <= b.minY ||
+            b.maxX - b.minX > 160 ||
+            b.maxY - b.minY > 160
+          )
+            throw new Error("Exact placement footprint exceeds its cap.");
+          const generator = createGenerator(normalizeGeneration(message.world));
+          for (let cy = Math.floor(b.minY / 16); cy <= Math.floor(b.maxY / 16); cy++) {
+            for (let cx = Math.floor(b.minX / 16); cx <= Math.floor(b.maxX / 16); cx++) {
+              for (const p of generator.placements(cx, cy, new Set()).placements) {
+                const id = p.featureId ?? `classic:${p.propType}:${p.wx}:${p.wy}`;
+                placements.set(id, { ...p, featureId: id });
+                if (placements.size > 512)
+                  throw new Error("Exact placement count exceeds its cap.");
+              }
+            }
+            if (job.cancelled) break;
+            await new Promise<void>((resolve) => setTimeout(resolve, 0));
+          }
+        }
+        for (const id of message.snapshot?.deleted ?? []) placements.delete(id);
+        for (const [i, p] of (message.snapshot?.props ?? []).entries()) {
+          const id = p.proceduralId ?? `saved:${i}:${p.type}:${p.wx}:${p.wy}`;
+          placements.set(id, { featureId: id, propType: p.type, wx: p.wx, wy: p.wy });
         }
         if (job.cancelled) {
           port.postMessage({ type: "cancelled", id: message.id });
@@ -60,6 +114,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             result,
             chunks,
             terrainMs,
+            placements: [...placements.values()],
             computeMs,
             elapsedMs: performance.now() - start,
             finishedAt: performance.timeOrigin + performance.now(),

@@ -1,3 +1,4 @@
+import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 export interface PropCollider {
   offsetX: number;
   offsetY: number;
@@ -19,9 +20,11 @@ export interface PropCollider {
  */
 export interface Prop {
   id: number;
+  proceduralId?: string;
   type: string;
   position: { wx: number; wy: number };
   sprite: {
+    parts?: readonly FacadePiece[];
     sheetKey: string;
     frameCol: number;
     frameRow: number;

@@ -1,5 +1,5 @@
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
-import type { RegionalRequest } from "../generation/regional/RegionalPlanner.js";
+import type { Bounds, RegionalRequest } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { WorkerRequest, WorkerResponse } from "./workerProtocol.js";
 
@@ -51,10 +51,20 @@ export class QueryClient {
     world: RegionalWorld | GenerationDescriptor,
     request: RegionalRequest,
     exact?: { cx: number; cy: number }[],
+    footprint?: Bounds,
+    snapshot?: import("../persistence/WorldInspection.js").InspectionSnapshot,
   ): void {
     if (this.disposed) return;
     this.invalidate();
-    this.pending = { type: "query", id: this.wanted, world, request, ...(exact ? { exact } : {}) };
+    this.pending = {
+      type: "query",
+      id: this.wanted,
+      world,
+      request,
+      ...(exact ? { exact } : {}),
+      ...(footprint ? { footprint } : {}),
+      ...(snapshot ? { snapshot } : {}),
+    };
     this.dispatch();
   }
 

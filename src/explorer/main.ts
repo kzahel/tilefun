@@ -1,14 +1,20 @@
 import {
   createDescriptor,
   descriptorChoice,
+  descriptorFromMetadata,
   descriptorKey,
   GENERATOR_CATALOG,
   type GeneratorChoice,
+  REGIONAL_REVISIONS,
+  resolveDescriptor,
 } from "../generation/GenerationDescriptor.js";
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
 import { QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
 import { regionalWorld, seedFromText } from "../generation/regional/WorldDescriptor.js";
-import { featureAt, type MapFeature, MapRenderer } from "./MapRenderer.js";
+import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
+import { type InspectionSnapshot, readInspection } from "../persistence/WorldInspection.js";
+import { dbNameForWorld, WorldRegistry } from "../persistence/WorldRegistry.js";
+import { featureAt, type MapFeature, MapRenderer, mapFeatures } from "./MapRenderer.js";
 import { DEFAULT_PREVIEW, explorerUrl, parseExplorerLocation } from "./PreviewSettings.js";
 import { QueryClient } from "./QueryClient.js";
 import { TilePreview } from "./TilePreview.js";
@@ -67,6 +73,95 @@ let transferMs = 0;
 let firstViewMs = 0;
 let terrainMs = 0;
 const tilePreview = new TilePreview(requestDraw);
+let savedWorldId = new URL(location.href).searchParams.get("worldId");
+const serverAddress = new URL(location.href).searchParams.get("server");
+let querySerial = 0;
+function apiUrl(path: string): URL {
+  return new URL(
+    path,
+    serverAddress ? `${location.protocol}//${serverAddress.replace(/\/ws$/, "")}` : location.origin,
+  );
+}
+async function snapshotFor(
+  coordinates: { cx: number; cy: number }[],
+  bounds: import("../generation/regional/RegionalPlanner.js").Bounds,
+): Promise<InspectionSnapshot | undefined> {
+  if (!savedWorldId) return undefined;
+  if (serverAddress) {
+    const url = apiUrl("/api/world-preview");
+    url.searchParams.set("worldId", savedWorldId);
+    url.searchParams.set("chunks", JSON.stringify(coordinates));
+    url.searchParams.set("bounds", JSON.stringify(bounds));
+    const response = await fetch(url);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error ?? "Saved inspection unavailable.");
+    return data;
+  }
+  const store = new IdbPersistenceStore(dbNameForWorld(savedWorldId), [
+    "chunks",
+    "meta",
+    "players",
+  ]);
+  await store.open();
+  try {
+    return await readInspection(store, generation, coordinates, bounds);
+  } finally {
+    store.close();
+  }
+}
+async function refreshSources(): Promise<void> {
+  const registry = new WorldRegistry();
+  let worlds: import("../persistence/WorldRegistry.js").WorldMeta[];
+  if (serverAddress) {
+    const response = await fetch(apiUrl("/api/world-list"));
+    if (!response.ok) throw new Error("Server world list unavailable.");
+    worlds = await response.json();
+  } else {
+    await registry.open();
+    try {
+      worlds = await registry.listWorlds();
+    } finally {
+      registry.close();
+    }
+  }
+  const select = element<HTMLSelectElement>("#world-source");
+  select.replaceChildren(new Option("Procedural world", ""));
+  for (const meta of worlds) select.add(new Option(meta.name, meta.id));
+  if (savedWorldId) {
+    const meta = worlds.find((w) => w.id === savedWorldId);
+    if (!meta) throw new Error("Saved world is unavailable from this authority.");
+    generation = descriptorFromMetadata(meta);
+    select.value = meta.id;
+    syncSource();
+    changedView(true);
+  }
+  select.onchange = () => {
+    savedWorldId = select.value || null;
+    if (savedWorldId) {
+      const meta = worlds.find((w) => w.id === savedWorldId);
+      if (meta) generation = descriptorFromMetadata(meta);
+    }
+    const url = new URL(location.href);
+    if (savedWorldId) url.searchParams.set("worldId", savedWorldId);
+    else url.searchParams.delete("worldId");
+    history.replaceState(null, "", url);
+    tilePreview.reset();
+    syncSource();
+    changedView(true);
+  };
+}
+function syncSource(): void {
+  element<HTMLSelectElement>("#generator").value = descriptorChoice(generation);
+  seedInput.value = String(generation.seed);
+  element<HTMLSelectElement>("#generator").disabled = !!savedWorldId;
+  seedInput.disabled = !!savedWorldId;
+  element<HTMLSelectElement>("#regional-revision").value = generation.version;
+  element<HTMLSelectElement>("#regional-revision").disabled = !!savedWorldId;
+  element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
+  element("#source-coverage").textContent = savedWorldId
+    ? "Saved world · zoom into tiles to inspect edits"
+    : "Procedural preview · no saved edits";
+}
 
 function notify(message: string): void {
   element("#notice").textContent = message;
@@ -87,13 +182,11 @@ const client = new QueryClient(worker, (response) => {
   if (response.type !== "result") return;
   result = response.result;
   terrainMs = response.terrainMs;
-  tilePreview.accept(response.chunks);
+  tilePreview.accept(response.chunks, response.placements);
   computeMs = response.computeMs;
   elapsedMs = response.elapsedMs;
   transferMs = Math.max(0, performance.timeOrigin + performance.now() - response.finishedAt);
-  if (selected)
-    selected =
-      [...result.settlements, ...result.connections].find((f) => f.id === selected?.id) ?? null;
+  if (selected) selected = mapFeatures(result).find((f) => f.id === selected?.id) ?? null;
   loading.hidden = true;
   app.dataset.settled = "true";
   app.dataset.seed = String(result.world.seed);
@@ -154,7 +247,9 @@ function updateInspection(): void {
   description.textContent =
     selected.kind === "connection"
       ? "A reserved orthogonal corridor. Unsupported water crossings are rejected."
-      : `${selected.kind === "city" ? "City" : "Village"} reservation with a dry buildable core. Blocks and entrances will refine this same place.`;
+      : selected.kind === "lot"
+        ? `South-facing ${selected.buildingType} with a planned entrance at ${selected.entrance.x}, ${selected.entrance.y}.`
+        : `${selected.kind === "city" ? "City" : "Village"} reservation with a dry buildable core. Blocks and entrances will refine this same place.`;
   inspector.append(title, description);
   const b = selected.bounds;
   const entries =
@@ -196,6 +291,7 @@ function requestDraw(): void {
     const start = performance.now();
     renderer.draw(canvas, width, height, view, overlays, result, selected?.id ?? null);
     const pendingTiles = tilePreview.draw(canvas, width, height, view, preview.mode === "coverage");
+    app.dataset.propIds = JSON.stringify(tilePreview.featureIds);
     app.dataset.tileReady = String(tilePreview.stats.ready);
     app.dataset.tileResident = String(tilePreview.stats.resident);
     app.dataset.tileBytes = String(tilePreview.stats.bytes);
@@ -221,10 +317,27 @@ function requestDraw(): void {
   });
 }
 
-function requestQuery(): void {
+async function requestQuery(): Promise<void> {
   if (disposed || locationError) return;
   requestTimer = 0;
   const exact = tilePreview.prepare(generation, view, width, height, preview);
+  const serial = ++querySerial;
+  const footprint = tilePreview.footprint;
+  let snapshot: InspectionSnapshot | undefined;
+  try {
+    if (footprint) snapshot = await snapshotFor(exact, footprint);
+    if (serial !== querySerial || disposed) return;
+    element("#source-coverage").textContent = snapshot
+      ? `${snapshot.coverage} · ${snapshot.coverage === "saved snapshot" ? "live/unflushed changes unavailable" : "includes live edits"} · ${snapshot.capturedAt}`
+      : savedWorldId
+        ? "Map is procedural; saved edits appear in tiles"
+        : "Procedural preview · no saved edits";
+  } catch (error) {
+    if (serial !== querySerial) return;
+    element("#source-coverage").textContent = `Saved coverage unavailable: ${String(error)}`;
+    app.dataset.error = String(error);
+    return;
+  }
   client.submit(
     generation,
     {
@@ -234,14 +347,21 @@ function requestQuery(): void {
       limits: { ...QUERY_LIMITS, maxSamples: preview.sampleBudget },
     },
     exact,
+    footprint,
+    snapshot,
   );
   updateDiagnostics();
 }
 
 function changedView(immediate = false): void {
+  querySerial++;
   const gameUrl = new URL("./", location.href);
+  if (serverAddress) gameUrl.searchParams.set("server", serverAddress);
+  if (savedWorldId) gameUrl.searchParams.set("worldId", savedWorldId);
   gameUrl.searchParams.set("generation", JSON.stringify(generation));
   element<HTMLAnchorElement>("#create-world").href = gameUrl.href;
+  gameUrl.searchParams.set("arrival", JSON.stringify({ x: view.x, y: view.y, generation }));
+  element<HTMLAnchorElement>("#play-here").href = gameUrl.href;
   client.invalidate();
   app.dataset.settled = "false";
   requestDraw();
@@ -415,7 +535,16 @@ for (const checkbox of document.querySelectorAll<HTMLInputElement>("[data-layer]
     requestDraw();
   };
 }
+const revisionSelect = element<HTMLSelectElement>("#regional-revision");
+for (const revision of REGIONAL_REVISIONS)
+  revisionSelect.add(new Option(revision.label, revision.version));
+revisionSelect.value =
+  generation.type === "regional" ? generation.version : createDescriptor("regional", 42).version;
 const generatorSelect = element<HTMLSelectElement>("#generator");
+const showRevision = () => {
+  revisionSelect.parentElement?.toggleAttribute("hidden", generatorSelect.value !== "regional");
+};
+generatorSelect.addEventListener("change", showRevision);
 for (const entry of GENERATOR_CATALOG) {
   const option = document.createElement("option");
   option.value = entry.choice;
@@ -423,6 +552,7 @@ for (const entry of GENERATOR_CATALOG) {
   generatorSelect.append(option);
 }
 generatorSelect.value = descriptorChoice(generation);
+showRevision();
 element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
 const modeSelect = element<HTMLSelectElement>("#display-mode");
 modeSelect.value = preview.mode;
@@ -450,11 +580,17 @@ for (const [id, key] of [
 seedInput.value = String(generation.seed);
 element<HTMLFormElement>("#seed-form").onsubmit = (event) => {
   event.preventDefault();
+  if (savedWorldId) return;
   try {
     generation = createDescriptor(
       element<HTMLSelectElement>("#generator").value as GeneratorChoice,
       seedFromText(seedInput.value),
     );
+    if (generation.type === "regional")
+      generation = resolveDescriptor({
+        ...generation,
+        version: revisionSelect.value,
+      } as typeof generation);
     world = regionalWorld(generation.type === "regional" ? generation.seed : 2026);
     element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
     locationError = null;
@@ -494,6 +630,8 @@ const cases: { id: string; title: string; view: ViewState }[] = [
   { id: "settlement-transition", title: "City / countryside", view: DEFAULT_VIEW },
   { id: "planning-boundary", title: "Across a cell boundary", view: { x: 0, y: 512, zoom: 0.65 } },
   { id: "broad-landscape", title: "The wider landscape", view: { x: 300, y: 519, zoom: 0.035 } },
+  { id: "district-streets", title: "Blocks & entrances", view: { x: 300, y: 519, zoom: 3 } },
+  { id: "district-art", title: "Apartments & park", view: { x: 275, y: 544, zoom: 16 } },
 ];
 interface ReviewRecord {
   generation?: typeof generation;
@@ -533,7 +671,10 @@ try {
   notify("Review storage is unavailable. You can still export this session's notes.");
 }
 function reviewKey(caseId: string): string {
-  return generation.type === "regional" && preview.mode === "auto" && view.zoom < preview.detailZoom
+  return generation.type === "regional" &&
+    generation.version === "regional-v1" &&
+    preview.mode === "auto" &&
+    view.zoom < preview.detailZoom
     ? `${world.generatorVersion}:${world.profile}:${world.seed}:${caseId}`
     : `${descriptorKey(generation)}:${preview.mode}:${preview.detailZoom}:${preview.radius}:${caseId}`;
 }
@@ -662,3 +803,17 @@ document.addEventListener("visibilitychange", () => {
     clearTimeout(requestTimer);
   } else if (!disposed) changedView(true);
 });
+
+void refreshSources().catch((error) => {
+  element("#source-coverage").textContent = String(error);
+  if (savedWorldId) {
+    locationError = String(error);
+    client.invalidate();
+    tilePreview.reset();
+  }
+});
+
+element("#refresh-snapshot").onclick = () => {
+  tilePreview.reset();
+  changedView(true);
+};

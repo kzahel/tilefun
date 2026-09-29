@@ -1,4 +1,6 @@
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
+import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import type { DistrictLot } from "../generation/regional/DistrictPlanner.js";
 import {
   type Connection,
   LandCover,
@@ -8,7 +10,34 @@ import {
 } from "../generation/regional/RegionalPlanner.js";
 import type { Overlays, ViewState } from "./ViewState.js";
 
-export type MapFeature = Settlement | Connection;
+export type LotFeature = DistrictLot & {
+  kind: "lot";
+  name: string;
+  center: Point;
+  owner: { cx: number; cy: number };
+};
+export type MapFeature = Settlement | Connection | LotFeature;
+export function mapFeatures(result: RegionalResult): MapFeature[] {
+  return [
+    ...result.settlements,
+    ...result.connections,
+    ...(result.districts ?? []).flatMap((plan) => {
+      const settlement = result.settlements.find((s) => s.id === plan.settlementId);
+      return plan.blocks.flatMap((block) =>
+        block.lots.map((lot) => ({
+          ...lot,
+          kind: "lot" as const,
+          name: lot.buildingType
+            .replace("prop-regional-", "")
+            .replace("prop-", "")
+            .replaceAll("-", " "),
+          center: lot.anchor,
+          owner: settlement?.owner ?? { cx: 0, cy: 0 },
+        })),
+      );
+    }),
+  ];
+}
 const COLORS = [
   [64, 116, 135],
   [215, 212, 167],
@@ -100,6 +129,67 @@ export class MapRenderer {
         ctx.lineWidth = Math.max(2, road.width * view.zoom - 1);
         ctx.stroke();
       }
+    }
+    for (const plan of result.districts ?? []) {
+      if (overlays.roads)
+        for (const street of plan.streets) {
+          ctx.beginPath();
+          street.points.forEach((p, i) => {
+            if (i) ctx.lineTo(sx(p.x), sy(p.y));
+            else ctx.moveTo(sx(p.x), sy(p.y));
+          });
+          ctx.strokeStyle = "#aaa796";
+          ctx.lineWidth = (street.width + street.sidewalk * 2) * view.zoom;
+          ctx.stroke();
+          ctx.strokeStyle = "#5a6062";
+          ctx.lineWidth = street.width * view.zoom;
+          ctx.stroke();
+        }
+      if (overlays.lots) {
+        const p = plan.park;
+        ctx.fillStyle = "#84a469";
+        ctx.fillRect(
+          sx(p.minX),
+          sy(p.minY),
+          (p.maxX - p.minX) * view.zoom,
+          (p.maxY - p.minY) * view.zoom,
+        );
+        for (const block of plan.blocks)
+          for (const lot of block.lots) {
+            const recipe = buildingRecipe(lot.buildingType);
+            const w = (recipe?.width ?? 288) / 16,
+              d = (recipe?.groundDepth ?? 80) / 16;
+            ctx.fillStyle = selectedId === lot.id ? "#aa553a" : "#d2bd97";
+            ctx.strokeStyle = "#786654";
+            ctx.lineWidth = 1;
+            ctx.fillRect(
+              sx(lot.anchor.x - w / 2),
+              sy(lot.anchor.y - d),
+              w * view.zoom,
+              d * view.zoom,
+            );
+            ctx.strokeRect(
+              sx(lot.anchor.x - w / 2),
+              sy(lot.anchor.y - d),
+              w * view.zoom,
+              d * view.zoom,
+            );
+          }
+      }
+      if (overlays.entrances && view.zoom >= 1)
+        for (const block of plan.blocks)
+          for (const lot of block.lots) {
+            ctx.fillStyle = "#992f26";
+            ctx.beginPath();
+            ctx.arc(
+              sx(lot.entrance.x),
+              sy(lot.entrance.y),
+              Math.max(2, view.zoom / 3),
+              0,
+              Math.PI * 2,
+            );
+            ctx.fill();
+          }
     }
     if (overlays.settlements) {
       for (const settlement of result.settlements) {
@@ -195,6 +285,17 @@ export function featureAt(
   zoom: number,
   overlays: Overlays,
 ): MapFeature | null {
+  if (overlays.lots && zoom >= 0.5) {
+    const lot = mapFeatures(result).find(
+      (f) =>
+        f.kind === "lot" &&
+        point.x >= f.bounds.minX &&
+        point.x < f.bounds.maxX &&
+        point.y >= f.bounds.minY &&
+        point.y < f.bounds.maxY,
+    );
+    if (lot) return lot;
+  }
   if (overlays.settlements) {
     const settlement = result.settlements.find(
       (s) =>
