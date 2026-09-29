@@ -73,7 +73,7 @@ for (const fixture of [
   { id: "profile-door-false", cap: [20, 116], floor: [20, 98, 52] },
   { id: "profile-door-true", cap: [20, 84], floor: [] },
   { id: "profile-door-east-low", cap: [230, 116], floor: [232, 98, 200] },
-  { id: "profile-door-east-tall", cap: [230, 84], floor: [] },
+  { id: "profile-door-east-tall", cap: [246, 84], floor: [] },
 ])
   test(`profile attaches to the room shell in ${fixture.id}`, async ({ page }) => {
     await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));

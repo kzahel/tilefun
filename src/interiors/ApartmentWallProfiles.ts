@@ -1,5 +1,6 @@
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { type FloorPlan, parseFloorPlan } from "./ApartmentFloorPlan.js";
+import { verticalWallProfile } from "./ApartmentWallAlignment.js";
 import type { InteriorSurface, LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 export type WallHeight = "low" | "normal" | "tall";
@@ -51,6 +52,7 @@ export function buildProfileApartmentPlan(
     return cell;
   };
   const columns = new Map<string, { x: number; y: number; height: number }>();
+  const eastPorts = new Map<string, { height: number; faceX: number; railX: number }>();
   for (let y = 0; y < plan.height; y++)
     for (let x = 0; x < plan.width; x++) {
       if (
@@ -104,9 +106,39 @@ export function buildProfileApartmentPlan(
         ? [plan.width * 4 - 4, plan.width * 4 - 3, plan.width * 4 - 2]
         : [])
       columns.set(key(x, bridgeY), { x, y: bridgeY, height: WALL_HEIGHTS[w.height] });
+    if (attachEast) {
+      const h = WALL_HEIGHTS[w.height];
+      const end = plan.width * 4 - 1;
+      const railX =
+        (plan.width - 1) * 32 + verticalWallProfile(roomPlan, plan.width - 1, w.y).railX;
+      const faceX = railX - 9;
+      // A shallow end already overlaps the shell's visible face. A taller end
+      // projects into the room and must meet the shell's opposite-facing rail,
+      // not expose its own east face as if it were a freestanding wall.
+      if (end * 8 - h / 4 < faceX) {
+        const port = { height: h, faceX, railX };
+        eastPorts.set(key(end, bridgeY), port);
+        eastPorts.set(key(end, bridgeY + 1), port);
+        const topY = bridgeY * 8 - h;
+        cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
+          key: wall(10, 2),
+          cropX: 2,
+          cropWidth: 1,
+          cropHeight: 7,
+          offsetX: (railX % 16) - 2,
+          offsetY: (topY % 16) + 1,
+        });
+      }
+    }
   }
   const surfaces: InteriorSurface[] = [];
-  const project = (x: number, y: number, h: number): Point => [x * 8 - h / 4, y * 8 - h];
+  const project = (x: number, y: number, h: number): Point => {
+    const port = eastPorts.get(key(x, y));
+    return [
+      port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,
+      y * 8 - h,
+    ];
+  };
   function face(points: Point[], plane: string, kind: "top" | "south" | "east") {
     surfaces.push({
       points,
@@ -136,7 +168,7 @@ export function buildProfileApartmentPlan(
         `south:${y + 1}`,
         "south",
       );
-    const east = columns.get(key(x + 1, y))?.height ?? 0;
+    const east = eastPorts.has(key(x + 1, y)) ? h : (columns.get(key(x + 1, y))?.height ?? 0);
     for (let z = Math.min(east, h); z < h; z += 8)
       face(
         [

@@ -850,6 +850,11 @@
     "fp": "3efb7b2fb808d3db208b8c49837c8cab92c672b9109dcb90a31fbf5817d72098"
   },
   {
+    "id": "profile-door-false",
+    "name": "Opening beside a height change",
+    "fp": "c1f66e977f5b57396e16372922fda62ab7b237d08540be1fcfe1522dba7715fd"
+  },
+  {
     "id": "profile-step-true",
     "name": "Height change \u00b7 low meets normal \u00b7 mirror",
     "fp": "42c740b94ef34f2f370e13933f4f671e0400bad38d445aae65cc9ef57bcbfed6"
@@ -863,5 +868,15 @@
     "id": "profile-tee-true",
     "name": "Height change \u00b7 low branch at normal/tall T \u00b7 mirror",
     "fp": "e86cf4ece740d89aa22c9950c2fe754af0606a58ec79ff7c059c62d047776a9f"
+  },
+  {
+    "id": "profile-door-true",
+    "name": "Opening beside a height change \u00b7 mirror",
+    "fp": "e69a2142be4782033594d4b6edce2a6a51a7dcbcadbda0354aa758c83e6c7f66"
+  },
+  {
+    "id": "profile-door-east-low",
+    "name": "East wall attachment \u00b7 low wall beside opening",
+    "fp": "2fc390ab5f2a054eb46568aad7464517187ae638f01967afb9d43a1adb7c5b5e"
   }
 ]

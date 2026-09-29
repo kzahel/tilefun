@@ -5,6 +5,20 @@ import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
+  it("matches the tall east attachment to the shell's inward-facing perspective", () => {
+    const c = profileReviewCases().find((c) => c.id === "profile-door-east-tall");
+    if (!c) throw new Error("Missing east attachment fixture");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    const top = map.surfaces.filter((s) => s.plane === "top:40");
+    expect(top.some((s) => s.points.some(([x, y]) => x === 249 && y === 80))).toBe(true);
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "south:16" && s.points.some(([x, y]) => x === 240 && y === 128),
+      ),
+    ).toBe(true);
+    // The connected end must not emit the sloping exposed face of a free end.
+    expect(map.surfaces.some((s) => s.plane === "east:31")).toBe(false);
+  });
   it.each([
     "profile-door-false",
     "profile-door-true",

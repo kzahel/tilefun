@@ -12,3 +12,7 @@ must return to the human review cycle before its baseline is replaced.
 Ten height/arch sampler renders were added after individual approvals on
 2026-09-29 (source commit 3431db0). The two rejected doorway attachments are not
 in this baseline. There are now 173 approved renders.
+
+Three side-wall attachment renders were added after individual approvals on
+2026-09-29 (source commit 49f3974). The tall east attachment remains outside
+the baseline pending review. The baseline now contains 176 approved renders.

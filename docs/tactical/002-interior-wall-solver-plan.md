@@ -638,3 +638,23 @@ doorway reports using the existing two-failure loop.
 This adds straight side-shell attachment, not arbitrary junctions between the two
 renderers. Next: approve these four attachments, then add thickness transitions
 and north/south shell attachment with explicit connection geometry.
+
+### Match the tall east connection's perspective, 2026-09-29
+
+Both repaired west connections and the low east connection were approved. Their
+matching pixels are now saved, bringing the baseline to 176 renders. The remaining
+tall east case was rejected for a perspective mismatch at the room wall.
+
+The free-end projection displaced the tall cap into the room, short of the shell's
+visible side face, and emitted an east-facing end where the two walls should join.
+The east connection now checks that projected overlap. When the cap would miss
+the shell, a connection adapter runs from its room-facing base to its inward-facing
+rail; the covered end face is omitted and the cap joins the existing white rail.
+The accepted shallow connection already overlaps the visible face and is unchanged.
+This is a local adapter between the two existing projections, not a global camera
+change or permission to change accepted free-standing profiles.
+
+Only the rejected tall east render changes. Geometry checks cover the rail/base
+endpoints and absent exposed end face; a pixel check covers the newly connected
+cap. Next: review this one remaining attachment, then continue thickness and
+north/south attachment coverage.
