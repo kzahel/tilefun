@@ -15,6 +15,7 @@ import {
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
 import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH } from "../FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
+import { motionSceneSignature, motionVerdict, nextUncheckedScene } from "../MotionReview.js";
 import spriteIndexUrl from "../review/assets/review-sprites.json?url";
 import spriteUrl from "../review/assets/review-sprites.png?url";
 import { parseReviewFeedback, type ReviewFeedback } from "../review/ReviewFeedback.js";
@@ -25,6 +26,7 @@ if (!root) throw new Error("Missing app");
 root.innerHTML = `<header><a href="./interior-review.html?stage=15">← Review</a><span id="sync" role="status">Loading…</span></header>
 <h1>Furniture in motion</h1><p>Walk behind and in front. Check what actually blocks your feet.</p>
 <div class="toolbar"><label>Scene <select id="scene">${MOTION_SCENES.map((s) => `<option value="${s.id}">${s.name}</option>`).join("")}</select></label><button id="reset">Reset scene</button></div>
+<div class="toolbar"><span id="review-counts"></span><button id="next-unchecked">Next unchecked</button></div>
 <div id="viewport"><canvas id="room" tabindex="0" aria-label="Furniture movement test"></canvas></div>
 <div class="toolbar"><label><input id="collisions" type="checkbox" checked> Collision</label><label><input id="bounds" type="checkbox"> Sprite bounds</label><label><input id="depth" type="checkbox"> Draw-order guides</label></div>
 <p class="legend">Pink: solid volume · Green: landable top · Cyan: player volume</p>
@@ -118,23 +120,78 @@ function selection() {
   return o;
 }
 function sceneSignature() {
-  return JSON.stringify({
-    version: FURNITURE_PHYSICS_VERSION,
-    sketch: MOTION_SKETCH,
-    furniture: furnitureSignature(model.furniture),
-    bodies: model.bodies,
-    gravityScale: model.gravityScale,
-  });
+  return motionSceneSignature(model.furniture, model.bodies, model.gravityScale);
+}
+function makeModel(id: string, reset = false) {
+  const preset = MOTION_SCENES.find((s) => s.id === id) ?? defaultScene();
+  let next: FurnitureMotion;
+  try {
+    next = new FurnitureMotion(
+      !reset && saved[preset.id] ? (saved[preset.id] ?? preset.furniture) : preset.furniture,
+      reset ? undefined : savedPhysics[preset.id]?.bodies,
+    );
+  } catch {
+    next = new FurnitureMotion(preset.furniture);
+  }
+  const gravity = reset ? 1 : (savedPhysics[preset.id]?.gravityScale ?? 1);
+  next.gravityScale = [1, 0.5, 0.25, 0.1].includes(gravity) ? gravity : 1;
+  return next;
+}
+function verdictFor(id: string) {
+  const value = id === scene.value ? model : makeModel(id);
+  return motionVerdict(
+    records,
+    id,
+    motionSceneSignature(value.furniture, value.bodies, value.gravityScale),
+  );
 }
 function grade() {
-  const latest = records.filter((r) => r.caseId === `furniture-motion-${scene.value}`).at(-1);
+  const verdict = verdictFor(scene.value);
   el("grade").textContent =
-    latest?.playtest?.sceneSignature === sceneSignature()
-      ? latest.verdict === "good"
-        ? "✓ Looks good — this layout and physics settings"
-        : "Issue reported for this layout and physics settings"
-      : "Unchecked — this layout and physics settings";
+    verdict === "good"
+      ? "✓ Looks good — this layout and physics settings"
+      : verdict === "wrong"
+        ? "Issue reported for this layout and physics settings"
+        : "Unchecked — this layout and physics settings";
+  let unchecked = 0,
+    approved = 0,
+    reported = 0;
+  for (const preset of MOTION_SCENES) {
+    const v = verdictFor(preset.id);
+    if (v === "unchecked") unchecked++;
+    else if (v === "good") approved++;
+    else reported++;
+    const option = [...scene.options].find((o) => o.value === preset.id);
+    if (option)
+      option.textContent = `${v === "good" ? "✓" : v === "wrong" ? "!" : "○"} ${preset.name}`;
+  }
+  el("review-counts").textContent =
+    `${unchecked} unchecked · ${approved} approved · ${reported} reported`;
+  el<HTMLButtonElement>("next-unchecked").disabled = !nextUncheckedScene(
+    MOTION_SCENES.map((s) => s.id),
+    scene.value,
+    (id) => verdictFor(id) === "unchecked",
+  );
 }
+function advance() {
+  const next = nextUncheckedScene(
+    MOTION_SCENES.map((s) => s.id),
+    scene.value,
+    (id) => verdictFor(id) === "unchecked",
+  );
+  if (next) {
+    scene.value = next;
+    load();
+    el("viewport").scrollIntoView({ block: "nearest" });
+    status("Next unchecked set. Walk, jump, then approve or report an issue.");
+  } else
+    status(
+      MOTION_SCENES.some((s) => verdictFor(s.id) === "wrong")
+        ? "No unchecked sets left. Reported issues are ready for a fix."
+        : "All sets approved. You’re done with this batch.",
+    );
+}
+el("next-unchecked").onclick = advance;
 function remember(row: ReviewFeedback) {
   const { screenshot: _screenshot, ...metadata } = row;
   const merged = new Map(records.map((r) => [r.id, r]));
@@ -154,9 +211,11 @@ function fields() {
   el<HTMLInputElement>("x").value = String(o.x);
   el<HTMLInputElement>("y").value = String(o.y);
   el("dimensions").textContent =
-    `Solid ${o.footprint.width}×${o.footprint.height}px · Sprite ${o.definition.size.join("×")}px`;
+    `${o.definition.blocking ? "Solid" : "Nonblocking"} ${o.footprint.width}×${o.footprint.height}px · Sprite ${o.definition.size.join("×")}px`;
   const body = model.bodies[o.placement.id];
   el("dimensions").textContent += body ? ` · Height ${body.height}px` : "";
+  el("physics-controls").hidden = !body;
+  el<HTMLButtonElement>("circle").disabled = o.definition.layer === "wall";
   if (body) {
     el<HTMLInputElement>("height").value = String(body.height);
     el<HTMLInputElement>("landable").checked = body.walkableTop;
@@ -181,16 +240,7 @@ function load(reset = false) {
   held = [0, 0];
   jumpHeld = false;
   const preset = MOTION_SCENES.find((s) => s.id === scene.value) ?? defaultScene();
-  try {
-    model = new FurnitureMotion(
-      !reset && saved[preset.id] ? (saved[preset.id] ?? preset.furniture) : preset.furniture,
-      reset ? undefined : savedPhysics[preset.id]?.bodies,
-    );
-  } catch {
-    model = new FurnitureMotion(preset.furniture);
-  }
-  const gravity = reset ? 1 : (savedPhysics[preset.id]?.gravityScale ?? 1);
-  model.gravityScale = [1, 0.5, 0.25, 0.1].includes(gravity) ? gravity : 1;
+  model = makeModel(preset.id, reset);
   el<HTMLSelectElement>("gravity").value = String(model.gravityScale);
   if (reset) persist();
   object.replaceChildren(
@@ -713,15 +763,32 @@ async function submit(verdict: "good" | "wrong") {
     outbox.push(row);
     remember(row);
     const stored = storeOutbox();
-    el<HTMLInputElement>("note").value = "";
+    if (scene.value === sceneId) el<HTMLInputElement>("note").value = "";
     status(
       stored
         ? verdict === "good"
-          ? "Looks good recorded. Try the next scene when ready."
+          ? "Looks good recorded."
           : "Issue captured. Say ‘ready’ in chat when you want me to check it."
         : "Issue captured in memory. Keep this page open until the report is saved.",
     );
-    await sync();
+    if (stored) {
+      if (
+        verdict === "good" &&
+        scene.value === sceneId &&
+        sceneSignature() === playtest.sceneSignature
+      )
+        advance();
+      void sync();
+    } else {
+      await sync();
+      if (
+        !outbox.some((r) => r.id === row.id) &&
+        verdict === "good" &&
+        scene.value === sceneId &&
+        sceneSignature() === playtest.sceneSignature
+      )
+        advance();
+    }
   } finally {
     button.disabled = false;
     el<HTMLButtonElement>("good").disabled = false;
@@ -764,7 +831,15 @@ async function start() {
   el("app").dataset.ready = "true";
   for (const row of outbox) remember(row);
   void sync();
-  void loadVerdicts();
+  const initialScene = scene.value;
+  void loadVerdicts().then(() => {
+    if (
+      requested === "next" &&
+      scene.value === initialScene &&
+      verdictFor(scene.value) !== "unchecked"
+    )
+      advance();
+  });
 }
 void start().catch((error) => status(`Could not start: ${String(error)}`));
 setInterval(() => {

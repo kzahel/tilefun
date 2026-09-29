@@ -32,6 +32,67 @@ export const MOTION_SCENES = [
       { id: "stool", asset: "stool", x: 80, y: 92 },
     ],
   },
+  {
+    id: "bedside",
+    name: "Single bed, bedside table and lamp",
+    furniture: [
+      { id: "bed", asset: "single-bed", x: 64, y: 90 },
+      { id: "side-table", asset: "side-table", x: 100, y: 76 },
+      { id: "lamp", asset: "table-lamp", x: 8, y: 12, on: "side-table" },
+    ],
+  },
+  {
+    id: "dresser",
+    name: "Low dresser and mirror",
+    furniture: [
+      { id: "dresser", asset: "dresser", x: 80, y: 88 },
+      { id: "mirror", asset: "table-mirror", x: 16, y: 14, on: "dresser" },
+    ],
+  },
+  {
+    id: "tree",
+    name: "Potted tree",
+    furniture: [{ id: "tree", asset: "potted-tree", x: 80, y: 88 }],
+  },
+  {
+    id: "floor-lamp",
+    name: "Tall floor lamp",
+    furniture: [{ id: "lamp", asset: "floor-lamp", x: 80, y: 88 }],
+  },
+  {
+    id: "hearth",
+    name: "Fireplace and log rack",
+    furniture: [
+      { id: "fireplace", asset: "fireplace", x: 68, y: 84 },
+      { id: "logs", asset: "log-rack", x: 112, y: 84 },
+    ],
+  },
+  {
+    id: "rug-stool",
+    name: "Stool on a rug",
+    furniture: [
+      { id: "stool", asset: "stool", x: 80, y: 88 },
+      { id: "rug", asset: "rug", x: 80, y: 100 },
+    ],
+  },
+  {
+    id: "wall-display",
+    name: "Dresser beneath wall art",
+    furniture: [
+      { id: "dresser", asset: "dresser", x: 80, y: 80 },
+      { id: "picture", asset: "wall-picture", x: 80, y: 28 },
+    ],
+  },
+  {
+    id: "seating-corner",
+    name: "Stool, rug, plant and floor lamp",
+    furniture: [
+      { id: "stool", asset: "stool", x: 80, y: 96 },
+      { id: "tree", asset: "potted-tree", x: 52, y: 68 },
+      { id: "lamp", asset: "floor-lamp", x: 110, y: 72 },
+      { id: "rug", asset: "rug", x: 80, y: 104 },
+    ],
+  },
 ] satisfies { id: string; name: string; furniture: FurniturePlacement[] }[];
 
 /** Convert curated floor rectangles to the same bottom-centred colliders used by game props. */
@@ -226,9 +287,29 @@ export class FurnitureMotion {
   /** Small deterministic 2px path grid; only the game collision adapter decides passability. */
   pathTo(x: number, y: number): [number, number][] | null {
     const snap = (v: number) => Math.round(v / 2) * 2;
-    const start: [number, number] = [snap(this.player.position.wx), snap(this.player.position.wy)],
-      target: [number, number] = [snap(x), snap(y)];
-    if (!this.canStand(...start) || !this.canStand(...target)) return null;
+    const start: [number, number] = [snap(this.player.position.wx), snap(this.player.position.wy)];
+    let target: [number, number] = [snap(x), snap(y)];
+    // Waypoint following may turn within one physics step of a grid node. Keep a
+    // 1px margin so a legal exact-edge path cannot clip an odd-width prop corner.
+    const clear = (x: number, y: number) =>
+      [-1, 1].every((dx) => [-1, 1].every((dy) => this.canStand(x + dx, y + dy)));
+    if (!clear(...start)) return null;
+    if (!clear(...target)) {
+      // A nearby item can touch an orbit target (e.g. the stool in front of a
+      // table). Choose the nearest clear 2px node, without moving the player.
+      const candidates: [number, number][] = [];
+      for (let dx = -4; dx <= 4; dx += 2)
+        for (let dy = -4; dy <= 4; dy += 2) candidates.push([target[0] + dx, target[1] + dy]);
+      const nearby = candidates
+        .sort(
+          (a, b) =>
+            Math.hypot(a[0] - target[0], a[1] - target[1]) -
+            Math.hypot(b[0] - target[0], b[1] - target[1]),
+        )
+        .find((p) => clear(...p));
+      if (!nearby) return null;
+      target = nearby;
+    }
     const key = (p: [number, number]) => `${p[0]},${p[1]}`;
     const queue: [number, number][] = [start],
       parents = new Map<string, [number, number] | null>([[key(start), null]]);
@@ -251,7 +332,7 @@ export class FurnitureMotion {
         [-2, 0],
       ] as const) {
         const next: [number, number] = [current[0] + dx, current[1] + dy];
-        if (!parents.has(key(next)) && this.canStand(...next)) {
+        if (!parents.has(key(next)) && clear(...next)) {
           parents.set(key(next), current);
           queue.push(next);
         }

@@ -228,3 +228,56 @@ collision, airborne reset, persisted good verdicts and their invalidation,
 phone jump cancellation, and keeping very high jumps visible. The public phone
 smoke test visibly landed on the wardrobe at Z=32. The exact 234-image static
 baseline still passes. Biome retains 65 warnings and five infos.
+
+## Eight more runtime sets and automatic review advance, 2026-09-29
+
+The bunk, wardrobe, and worktable sets have explicit good runtime verdicts with
+matching default configurations. Their exact signatures are protected in
+`tests/fixtures/furniture-motion-approved.json`; the current three approvals stay
+valid. New sets extend the existing source-inspected catalog rather than adding
+color-only variations:
+
+- Single bed, bedside table, and supported lamp.
+- Low dresser with a supported mirror.
+- Potted tree, with a small solid footprint beneath the taller sprite.
+- Tall floor lamp.
+- Fireplace with a separate low log rack.
+- Stool on a nonblocking rug.
+- Dresser beneath north-wall artwork.
+- Stool and rug between a plant and floor lamp.
+
+The 11 movement sets now exercise all 16 catalog assets. The seven newly exercised
+solid assets have provisional runtime heights; tree, lamp, and fireplace tops are
+not landable. These remain editable and unapproved until reviewed. Rugs and wall
+art show their nonblocking status and hide physical-height controls. Wall art has
+no automatic orbit action because its anchor is outside the floor area.
+
+Looks good first persists its full report in the offline outbox, then immediately
+advances to the next unchecked set without waiting for the network. Previously
+approved and reported sets are skipped, the search wraps once, and the last
+approval shows batch completion instead of cycling back. Reports stay on the
+current set so notes and follow-up inspection remain easy. If local persistence
+fails, advance waits for a successful server save. The picker marks each set with
+its verdict; counts show unchecked, approved, and reported totals. Next unchecked
+also permits manual skipping. `?scene=next` opens the next pending set after saved
+verdicts load. Editing a configuration still invalidates only its matching grade.
+
+All new default circuits use actual collision-aware walking. The narrower plant
+revealed an exact-edge corner issue in waypoint following; route nodes now have a
+1px clearance margin, and obstructed orbit targets can choose a clear node within
+4px. Manual movement keeps the exact physical collider. This affects the optional
+automatic route only, not approved geometry or physical behavior.
+
+Next: review these eight sets for height, occlusion, and spacing. After that, add
+new source-inspected furniture families beyond this initial catalog, especially
+seating and kitchen/storage furniture, using the same small runtime scenes.
+
+Validation: 950 unit tests, typecheck, and production build pass. All 100 browser
+cases are verified: the initial full run passed 98; the furniture suite rerun
+verified all 11 automatic circuits after the route correction, and the remaining
+phone pointer test passed after scrolling its control and canvas into view. The
+queue test covers offline advance/retry, preserving the three approvals, all eight
+new approvals, and final completion without looping. All 234 static image
+baselines remain exact. The public phone page loads the next new scene with
+8 unchecked / 3 approved, and all eight new renders were visually inspected.
+Biome retains the existing 65 warnings and five infos.

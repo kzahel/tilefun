@@ -10,6 +10,13 @@ export const FURNITURE_BODIES: FurnitureBodies = {
   wardrobe: { height: 32, walkableTop: true },
   worktable: { height: 10, walkableTop: true },
   stool: { height: 10, walkableTop: true },
+  "single-bed": { height: 8, walkableTop: true },
+  "side-table": { height: 10, walkableTop: true },
+  dresser: { height: 12, walkableTop: true },
+  "potted-tree": { height: 32, walkableTop: false },
+  "floor-lamp": { height: 32, walkableTop: false },
+  fireplace: { height: 26, walkableTop: false },
+  "log-rack": { height: 14, walkableTop: true },
 };
 export function parseFurnitureBodies(value: unknown): FurnitureBodies {
   if (!value || typeof value !== "object" || Array.isArray(value))

@@ -1,0 +1,44 @@
+import { readFileSync } from "node:fs";
+import { describe, expect, it } from "vitest";
+import { FURNITURE_CATALOG } from "./FurnitureCatalog.js";
+import { FurnitureMotion, MOTION_SCENES } from "./FurnitureMotion.js";
+import { motionSceneSignature, nextUncheckedScene } from "./MotionReview.js";
+
+describe("movement review catalog", () => {
+  it("preserves the three explicitly approved scene configurations", () => {
+    const approved = JSON.parse(
+      readFileSync("tests/fixtures/furniture-motion-approved.json", "utf8"),
+    ) as { id: string; sceneSignature: string }[];
+    expect(approved).toHaveLength(3);
+    for (const row of approved) {
+      const preset = MOTION_SCENES.find((s) => s.id === row.id);
+      if (!preset) throw new Error("Missing approved scene");
+      const model = new FurnitureMotion(preset.furniture);
+      expect(motionSceneSignature(model.furniture, model.bodies, model.gravityScale)).toBe(
+        row.sceneSignature,
+      );
+    }
+  });
+  it("covers the whole curated catalog with valid physics and visible sprites", () => {
+    const used = new Set<string>();
+    for (const preset of MOTION_SCENES) {
+      const model = new FurnitureMotion(preset.furniture);
+      for (const o of model.objects) {
+        used.add(o.definition.id);
+        expect(o.origin[0]).toBeGreaterThanOrEqual(0);
+        expect(o.origin[1]).toBeGreaterThanOrEqual(0);
+        expect(o.origin[0] + o.definition.size[0]).toBeLessThanOrEqual(160);
+        expect(o.origin[1] + o.definition.size[1]).toBeLessThanOrEqual(model.map.pixelHeight);
+        if (o.definition.blocking) expect(model.bodies[o.placement.id]?.height).toBeGreaterThan(0);
+      }
+    }
+    expect([...used].sort()).toEqual(FURNITURE_CATALOG.map((d) => d.id).sort());
+  });
+  it("skips checked scenes, wraps, and stops when nothing else is unchecked", () => {
+    const ids = ["bed", "lamp", "tree", "rug"];
+    expect(nextUncheckedScene(ids, "bed", (id) => id === "rug")).toBe("rug");
+    expect(nextUncheckedScene(ids, "rug", (id) => id === "lamp")).toBe("lamp");
+    expect(nextUncheckedScene(ids, "rug", (id) => id === "rug")).toBeUndefined();
+    expect(nextUncheckedScene(ids, "bed", () => false)).toBeUndefined();
+  });
+});

@@ -1,4 +1,6 @@
+import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { MOTION_SCENES } from "../src/interiors/FurnitureMotion.js";
 
 test("shared movement stops at furniture, supports precise placement, and saves a reproducible report", async ({
   page,
@@ -48,18 +50,23 @@ test("shared movement stops at furniture, supports precise placement, and saves 
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
 });
 
-test("automatic walks finish in all three scenes without console errors", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (e) => errors.push(e.message));
-  await page.route("**/api/interior-review", (r) => r.fulfill({ json: { saved: true } }));
-  await page.goto("/tilefun/furniture-playtest.html");
-  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
-  for (const scene of ["bunk", "wardrobe", "worktable"]) {
-    await page.locator("#scene").selectOption(scene);
-    await page.locator("#circle").click();
-    await expect(page.locator("#status")).toContainText("Walk complete", { timeout: 20000 });
-  }
-  expect(errors).toEqual([]);
+test.describe("automatic walk for each furniture set", () => {
+  test.describe.configure({ mode: "parallel" });
+  for (const scene of MOTION_SCENES)
+    test(scene.name, async ({ page }) => {
+      const errors: string[] = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await page.route("**/api/interior-review", (r) => r.fulfill({ json: [] }));
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(`/tilefun/furniture-playtest.html?scene=${scene.id}`);
+      await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+      await page.locator("#circle").click();
+      await expect(page.locator("#status")).toContainText("Walk complete", { timeout: 20000 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(
+        false,
+      );
+      expect(errors).toEqual([]);
+    });
 });
 
 test("direction controls release and dragging selects actual sprite pixels", async ({ page }) => {
@@ -67,6 +74,7 @@ test("direction controls release and dragging selects actual sprite pixels", asy
   await page.goto("/tilefun/furniture-playtest.html?scene=worktable");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const right = page.getByRole("button", { name: "Walk right", exact: true });
+  await right.evaluate((el) => el.scrollIntoView({ block: "center" }));
   const b = await right.boundingBox();
   if (!b) throw new Error("Missing control");
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
@@ -79,8 +87,9 @@ test("direction controls release and dragging selects actual sprite pixels", asy
   await page.waitForTimeout(100);
   expect(await page.locator("#room").getAttribute("data-player-x")).toBe(x);
   await page.locator("#mode").selectOption("place");
-  const canvas = page.locator("#room"),
-    box = await canvas.boundingBox();
+  const canvas = page.locator("#room");
+  await canvas.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const box = await canvas.boundingBox();
   if (!box) throw new Error("Missing canvas");
   const scale = box.width / 160;
   // Table's opaque top, at native (80,57), not its transparent padded image edge.
@@ -127,6 +136,8 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
   await expect(canvas).toHaveAttribute("data-player-z", "32");
   await expect(page.locator("#position")).toContainText("On object");
   await page.locator("#good").click();
+  await expect(page.locator("#scene")).not.toHaveValue("wardrobe");
+  await page.locator("#scene").selectOption("wardrobe");
   await expect(page.locator("#grade")).toContainText("✓ Looks good");
   expect(posts[0]?.verdict).toBe("good");
   expect(posts[0]?.playtest).toMatchObject({
@@ -144,6 +155,8 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
   await expect(page.locator("#status")).toHaveText("Collision height updated.");
   await expect(page.locator("#grade")).toContainText("Unchecked");
   await page.locator("#good").click();
+  await expect(page.locator("#scene")).not.toHaveValue("wardrobe");
+  await page.locator("#scene").selectOption("wardrobe");
   await expect(page.locator("#grade")).toContainText("✓ Looks good");
   expect(posts.at(-1)?.playtest).toMatchObject({
     bodies: { wardrobe: { height: 40, walkableTop: true } },
@@ -162,7 +175,7 @@ test("phone jump control releases on cancellation and high jumps stay in view", 
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await page.locator("#gravity").selectOption("0.1");
   const jump = page.locator("#jump");
-  await jump.scrollIntoViewIfNeeded();
+  await jump.evaluate((el) => el.scrollIntoView({ block: "center" }));
   const b = await jump.boundingBox();
   if (!b) throw new Error("Missing jump control");
   await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
@@ -175,4 +188,84 @@ test("phone jump control releases on cancellation and high jumps stay in view", 
   await expect(page.locator("#room")).toHaveAttribute("data-airborne", "false", { timeout: 8000 });
   await expect(page.locator("#room")).toHaveAttribute("data-player-z", "0");
   await expect(page.locator("#room")).toHaveAttribute("data-view-offset-y", "0");
+});
+
+test("approval advances past checked sets offline and finishes the new batch without looping", async ({
+  page,
+}) => {
+  const approved = JSON.parse(
+    readFileSync("tests/fixtures/furniture-motion-approved.json", "utf8"),
+  ) as { id: string; sceneSignature: string }[];
+  const records = approved.map((r) => {
+    const config = JSON.parse(r.sceneSignature);
+    const furniture = JSON.parse(config.furniture).placements;
+    return {
+      id: `approved-${r.id}`,
+      caseId: `furniture-motion-${r.id}`,
+      name: r.id,
+      fingerprint: "a".repeat(64),
+      verdict: "good",
+      note: "",
+      sketch: config.sketch,
+      createdAt: "2026-09-29T15:30:00Z",
+      furniture,
+      furnitureCatalogVersion: 1,
+      playtest: {
+        playerX: 80,
+        playerY: 120,
+        facing: 0,
+        selected: furniture[0].id,
+        mode: "walk",
+        sceneSignature: r.sceneSignature,
+      },
+    };
+  });
+  const posts: Record<string, unknown>[] = [];
+  let offline = true;
+  await page.route("**/api/interior-review", async (r) => {
+    if (r.request().method() === "GET") {
+      await r.fulfill({ json: records });
+      return;
+    }
+    posts.push(r.request().postDataJSON());
+    await r.fulfill({ status: offline ? 503 : 200, json: { saved: !offline } });
+  });
+  await page.goto("/tilefun/furniture-playtest.html?scene=next");
+  await expect(page.locator("#scene")).toHaveValue("bedside");
+  await expect(page.locator("#review-counts")).toHaveText("8 unchecked · 3 approved · 0 reported");
+  await page.locator("#good").click();
+  await expect(page.locator("#scene")).toHaveValue("dresser");
+  await expect(page.locator("#sync")).toContainText("pending");
+  expect(posts[0]?.caseId).toBe("furniture-motion-bedside");
+  const id = posts[0]?.id;
+  offline = false;
+  await page.reload();
+  await expect(page.locator("#sync")).toHaveText("Reports saved");
+  expect(posts.at(-1)?.id).toBe(id);
+  for (const scene of [
+    "dresser",
+    "tree",
+    "floor-lamp",
+    "hearth",
+    "rug-stool",
+    "wall-display",
+    "seating-corner",
+  ]) {
+    await expect(page.locator("#scene")).toHaveValue(scene);
+    await page.locator("#good").click();
+    await expect(page.locator("#scene")).not.toHaveValue(
+      scene === "seating-corner" ? "bunk" : scene,
+    );
+  }
+  await expect(page.locator("#status")).toContainText("All sets approved");
+  await expect(page.locator("#review-counts")).toHaveText("0 unchecked · 11 approved · 0 reported");
+  await expect(page.locator("#next-unchecked")).toBeDisabled();
+  await page.locator("#scene").selectOption("rug-stool");
+  await page.locator("#object").selectOption("rug");
+  await expect(page.locator("#physics-controls")).toBeHidden();
+  await expect(page.locator("#dimensions")).toContainText("Nonblocking");
+  await page.locator("#scene").selectOption("wall-display");
+  await page.locator("#object").selectOption("picture");
+  await expect(page.locator("#physics-controls")).toBeHidden();
+  await expect(page.locator("#circle")).toBeDisabled();
 });
