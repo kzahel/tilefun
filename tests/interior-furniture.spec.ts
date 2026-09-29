@@ -10,16 +10,18 @@ test("furniture review preserves layered placements and hashes the clean image p
   const baseline = JSON.parse(
     readFileSync("tests/fixtures/interior-approved/fingerprints.json", "utf8"),
   ) as { id: string; fp: string; name: string }[];
-  const records: Record<string, unknown>[] = baseline.map((r, i) => ({
-    id: `good-${i}`,
-    caseId: r.id,
-    name: r.name,
-    sketch: "",
-    fingerprint: r.fp,
-    verdict: "good",
-    note: "",
-    createdAt: "2026-09-29T00:00:00Z",
-  }));
+  const records: Record<string, unknown>[] = baseline
+    .filter((r) => !r.id.startsWith("furniture-"))
+    .map((r, i) => ({
+      id: `good-${i}`,
+      caseId: r.id,
+      name: r.name,
+      sketch: "",
+      fingerprint: r.fp,
+      verdict: "good",
+      note: "",
+      createdAt: "2026-09-29T00:00:00Z",
+    }));
   const posts: Record<string, unknown>[] = [];
   await page.route("**/api/interior-review", async (route) => {
     if (route.request().method() === "POST") {
@@ -57,10 +59,9 @@ test("furniture review preserves layered placements and hashes the clean image p
     .update(Buffer.from(image.pixels))
     .digest("hex");
   const plan = page.locator("#plan");
-  await expect(plan).toContainText("🛏️");
-  await page.locator("#furniture-plan").uncheck();
+
   await expect(plan).not.toContainText("🛏️");
-  await page.locator("#furniture-plan").check();
+  await expect(page.locator("#movement-test")).toHaveAttribute("href", /furniture-playtest/);
   const clean = await page
     .locator("#render")
     .evaluate((el) => (el as HTMLCanvasElement).toDataURL());

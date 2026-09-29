@@ -45,6 +45,14 @@ export interface ReviewFeedback {
   profiles?: WallProfileOptions;
   furniture?: FurniturePlacement[];
   furnitureCatalogVersion?: number;
+  /** Runtime movement report, separate from static catalog approval. */
+  playtest?: {
+    playerX: number;
+    playerY: number;
+    facing: number;
+    selected: string;
+    mode: "walk" | "place";
+  };
 }
 export function parseReviewFeedback(value: unknown): ReviewFeedback {
   if (!value || typeof value !== "object") throw new Error("Invalid feedback");
@@ -110,7 +118,31 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
     (!Number.isInteger(v.furnitureCatalogVersion) || Number(v.furnitureCatalogVersion) < 1)
   )
     throw new Error("Invalid furniture catalog version");
+  let playtest: ReviewFeedback["playtest"];
+  if (v.playtest !== undefined) {
+    const p = v.playtest as NonNullable<ReviewFeedback["playtest"]>;
+    if (
+      !p ||
+      !v.furniture ||
+      ![p.playerX, p.playerY].every((n) => Number.isFinite(n) && n >= 0 && n <= 2560) ||
+      !Number.isInteger(p.facing) ||
+      p.facing < 0 ||
+      p.facing > 3 ||
+      typeof p.selected !== "string" ||
+      !/^[a-z0-9-]{1,80}$/.test(p.selected) ||
+      !["walk", "place"].includes(p.mode)
+    )
+      throw new Error("Invalid playtest context");
+    playtest = {
+      playerX: p.playerX,
+      playerY: p.playerY,
+      facing: p.facing,
+      selected: p.selected,
+      mode: p.mode,
+    };
+  }
   return {
+    ...(playtest ? { playtest } : {}),
     ...(v.furniture !== undefined
       ? {
           furniture: parseFurniturePlacements(v.furniture),

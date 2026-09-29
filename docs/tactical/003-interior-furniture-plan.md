@@ -120,3 +120,64 @@ phone layout, support metadata in saved feedback, overlay-independent approval
 hashes, reload behavior, and the two-report pause. The public page shows eight
 unchecked furniture cases without horizontal overflow. Biome retains the existing
 65 warnings and five infos; no new diagnostics were introduced.
+
+## Pivot from static approval to movement, 2026-09-29
+
+Feedback on the bunk/wardrobe and worktable cases said the sprites looked
+reasonable, but the coarse emoji positions could not communicate usable bounding
+boxes, precise placement, or behind/in-front occlusion. Static furniture review
+is now on hold. Furniture emoji are removed from the architecture sketch, and the
+review page links prominently to `furniture-playtest.html`.
+
+The new movement scene uses `createPlayer`, `stepPlayerFromInput` (the shared
+server/client movement implementation), and `aabbOverlapsPropWalls`. Catalog
+footprints convert to ordinary game prop colliders. The character retains the
+game's 10×6px foot collider and 16×16 sprite. Furniture is never converted into
+blocked 32px sketch cells. This first sealed rectangular room has explicit inner
+pixel bounds; these are shared by movement and furniture placement. Thus usable
+floor inside the coarse border sketch cells remains accessible. General wall
+collision generation and overworld portals remain future work.
+
+Three small scenes isolate a bunk bed, wardrobe, and table/plant/stool group. The
+stool is closer to the table than in the original static case. Arrow/WASD or
+holdable phone controls move the player. **Walk around object** finds routes on a
+2px grid using the full player collider, then follows them through actual game
+physics, without teleporting or disabling collision. The preset circuits pass
+behind and in front of each object. **Place furniture** supports alpha-aware
+sprite selection, dragging, integer X/Y inputs, and 1px nudges. Support children
+move with their parent. Invalid placements and placements overlapping the player
+are rejected; layouts persist locally and Reset restores the preset.
+
+Diagnostic views deliberately separate three things:
+
+- Collision shows only real blocking prop boxes and the player's foot box.
+  The standing/access planning rectangles are not presented as movement blockers.
+- Sprite bounds show the image extent, including transparent padding.
+- Depth lines show the feet-based drawing order. Actors can enter the order
+  between furniture groups, but never split a table from its supported items.
+
+The player is drawn using the game Canvas2D sprite renderer. Static furniture
+rendering uses the same shared ordering function with no actors, preserving its
+pixels. Jumping, sitting, climbing onto furniture, and arbitrary vertical
+occlusion are not implemented or implied by this ground-walking test. This is an
+isolated runtime harness using real movement code, not yet an enterable world
+interior.
+
+**Report issue** saves a screenshot, exact separate placements, player position,
+facing, selected object, mode, and optional note to the existing feedback inbox.
+Movement reports use distinct `furniture-motion-*` IDs; they are not catalog
+approvals. The offline outbox retries with the same ID after reload. Asset alpha
+lookup caches source sprite pixels only; room images and generated fingerprints
+are not cached. No new static review permutations are added.
+
+Next: use movement reports to refine the actual footprints and drawing order.
+Then integrate the resulting adapter with enterable indoor scenes. Return to
+furniture arrangement generation after these interactions are trustworthy.
+
+Validation: typecheck, production build, 944 unit tests, and all 87 browser tests
+pass. The browser suite covers real collision stops, one-pixel moves, alpha-aware
+dragging, completed automatic walks in all three presets, phone layout, persisted
+placements, and offline report retries. All 233 approved wall renders remain
+identical. The explicitly approved bedside scene also matches its saved verdict
+and joins the regression baseline (234 images total); no other furniture case is
+promoted. Biome remains at the existing 65 warnings and five infos.

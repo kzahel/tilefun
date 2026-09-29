@@ -1,0 +1,146 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #e9edf3;
+  background: #101621;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 740px;
+  margin: auto;
+  padding: 16px;
+}
+header,
+.toolbar,
+.pad {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+header {
+  justify-content: space-between;
+  font-size: 13px;
+}
+a {
+  color: #b3caf1;
+}
+h1 {
+  font-size: 24px;
+  margin: 16px 0 6px;
+}
+p {
+  font-size: 13px;
+  color: #b8c9dc;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+select {
+  background: #223348;
+  border: 1px solid #53718f;
+  color: inherit;
+  border-radius: 7px;
+  padding: 9px;
+  cursor: pointer;
+}
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+canvas:focus-visible {
+  outline: 2px solid #75e4ff;
+  outline-offset: 2px;
+}
+label {
+  font-size: 13px;
+}
+input[type="number"] {
+  width: 70px;
+}
+input[type="number"],
+input[type="text"],
+#note {
+  padding: 8px;
+  border: 1px solid #53718f;
+  border-radius: 5px;
+  background: #152538;
+  color: inherit;
+}
+#viewport {
+  background: #171e2a;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  margin: 12px 0;
+  border: 1px solid #344b65;
+  border-radius: 8px;
+  overflow: auto;
+}
+canvas {
+  image-rendering: pixelated;
+  touch-action: none;
+  max-width: 100%;
+}
+.toolbar {
+  margin: 10px 0;
+}
+.pad button {
+  min-width: 54px;
+  min-height: 44px;
+  touch-action: none;
+  user-select: none;
+}
+.legend,
+#dimensions,
+#position {
+  font-size: 11px;
+  color: #b3c5da;
+}
+#status {
+  min-height: 20px;
+  color: #ffe09d;
+}
+.report {
+  margin-top: 12px;
+  border-top: 1px solid #344b65;
+  padding-top: 12px;
+}
+.report label {
+  display: block;
+}
+#note {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+}
+#report {
+  background: #58303a;
+  width: 100%;
+}
+[hidden] {
+  display: none;
+}
+@media (max-width: 500px) {
+  main {
+    padding: 12px;
+  }
+  .toolbar {
+    gap: 8px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .report p {
+    font-size: 11px;
+  }
+}

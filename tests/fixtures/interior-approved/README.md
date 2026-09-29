@@ -86,3 +86,9 @@ good verdicts and now join the active baseline, with no changed pixels. Stage 15
 introduces furniture review; these new images and placement metadata remain
 unapproved. Furniture fingerprints also include their placements and the used
 catalog definitions, so changing an invisible footprint requires fresh review.
+
+The single-bed/bedside scene was approved after 2986679. Its current pixels and
+catalog metadata match that explicit good verdict and join the 233 unchanged
+wall baselines (234 total). Other furniture cases remain unapproved. Static
+furniture grading is now on hold while movement, collision, and occlusion are
+reviewed in the separate playtest; movement reports never create approvals.

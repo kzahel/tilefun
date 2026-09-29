@@ -37,6 +37,7 @@ const contains = (outer: FurnitureRect, inner: FurnitureRect) =>
 export function compileFurniture(
   plan: FloorPlan,
   input: readonly FurniturePlacement[],
+  floorBounds?: FurnitureRect,
 ): PlacedFurniture[] {
   const placements = parseFurniturePlacements(input);
   const resolved = new Map<string, PlacedFurniture>(),
@@ -75,6 +76,7 @@ export function compileFurniture(
   };
   const objects = placements.map(resolve);
   const onFloor = (r: FurnitureRect) => {
+    if (floorBounds) return contains(floorBounds, r);
     for (let y = Math.floor(r.y / 32); y <= Math.floor((r.y + r.height - 1) / 32); y++)
       for (let x = Math.floor(r.x / 32); x <= Math.floor((r.x + r.width - 1) / 32); x++)
         if (!"LBKTH".includes(plan.rows[y]?.[x] ?? "!")) return false;
@@ -132,6 +134,29 @@ export function furnitureDrawOrder(objects: PlacedFurniture[]): PlacedFurniture[
   return order;
 }
 
+export interface FurnitureActor {
+  id: string;
+  depth: number;
+  draw: (ctx: CanvasRenderingContext2D) => void;
+}
+/** Actors sort at their feet, without splitting a table from its supported items. */
+export function furnishedSceneOrder(
+  objects: PlacedFurniture[],
+  actors: readonly FurnitureActor[],
+): (PlacedFurniture | FurnitureActor)[] {
+  const pending = [...actors].sort((a, b) => a.depth - b.depth || a.id.localeCompare(b.id));
+  const result: (PlacedFurniture | FurnitureActor)[] = [];
+  for (const o of furnitureDrawOrder(objects)) {
+    if (o.definition.layer === "standing" && !o.parent)
+      while (pending[0] && pending[0].depth < o.depth) {
+        const actor = pending.shift();
+        if (actor) result.push(actor);
+      }
+    result.push(o);
+  }
+  return [...result, ...pending];
+}
+
 /** Metadata changes also reopen furniture verdicts, even when pixels stay identical. */
 export function furnitureSignature(placements: readonly FurniturePlacement[]): string {
   return JSON.stringify({
@@ -148,11 +173,13 @@ export function drawFurnishedInterior(
   map: LayeredInteriorMap,
   plan: FloorPlan,
   placements: readonly FurniturePlacement[],
+  actors: readonly FurnitureActor[] = [],
+  floorBounds?: FurnitureRect,
 ): void {
   for (let y = 1; y < plan.height - 1; y++)
     if (plan.rows[y]?.slice(1, -1).some((c) => c === "#" || c === " "))
       throw new Error("Furniture catalog scenes currently require an open room shell");
-  const objects = furnitureDrawOrder(compileFurniture(plan, placements));
+  const objects = furnitureDrawOrder(compileFurniture(plan, placements, floorBounds));
   for (const o of objects) {
     const [x, y] = o.origin;
     if (
@@ -179,7 +206,10 @@ export function drawFurnishedInterior(
   ctx.save();
   ctx.imageSmoothingEnabled = false;
   ctx.translate(0, map.contentOffsetY ?? 0);
-  for (const o of objects.filter((o) => o.definition.layer !== "floor")) draw(o);
+  for (const item of furnishedSceneOrder(objects, actors)) {
+    if ("draw" in item) item.draw(ctx);
+    else if (item.definition.layer !== "floor") draw(item);
+  }
   ctx.restore();
 }
 
@@ -189,11 +219,12 @@ export function drawFurnitureFootprints(
   plan: FloorPlan,
   placements: readonly FurniturePlacement[],
   offsetY = 0,
+  floorBounds?: FurnitureRect,
 ): void {
   ctx.save();
   ctx.translate(0, offsetY);
   ctx.lineWidth = 1;
-  for (const o of compileFurniture(plan, placements)) {
+  for (const o of compileFurniture(plan, placements, floorBounds)) {
     if (o.definition.layer === "wall") continue;
     const r = o.footprint;
     ctx.strokeStyle = o.parent ? "#ffd36a" : o.definition.blocking ? "#ff719a" : "#70dfbf";

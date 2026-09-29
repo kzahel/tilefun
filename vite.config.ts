@@ -22,6 +22,7 @@ export default defineConfig({
         main: resolve(root, "index.html"),
         interiorWorkbench: resolve(root, "interior-workbench.html"),
         interiorReview: resolve(root, "interior-review.html"),
+        furniturePlaytest: resolve(root, "furniture-playtest.html"),
       },
     },
   },

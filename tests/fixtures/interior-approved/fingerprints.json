@@ -1163,5 +1163,10 @@
     "id": "probe-v1-938",
     "name": "Closely spaced room doors \u00b7 7\u00d77 \u00b7 mirror",
     "fp": "31ce9fc6840a3bc69753c4ee060c135c13bcaef204cb8de11d19a4cb2f26f4c0"
+  },
+  {
+    "id": "furniture-bedside",
+    "name": "Single bed \u00b7 bedside table and lamp",
+    "fp": "00611c66fb34757f4bf0f01ef06d4011874d785be494d57bb95eb93d00c59040"
   }
 ]

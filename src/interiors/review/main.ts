@@ -100,11 +100,12 @@ root.innerHTML = `
 <header><a href="./interior-workbench.html">← Workbench</a><span>INDOOR REVIEW</span><span id="sync" role="status">Connecting…</span></header>
 <main>
   <div class="heading"><div><h1>Does this room look right?</h1><p>One key per room. Two mistakes are enough to start a fix.</p></div><label>Cases <select id="stage"><option value="all">Small → complex</option>${REVIEW_STAGES.map((s, i) => `<option value="${i}">${s}</option>`).join("")}</select></label></div>
+  <p id="furniture-shift" hidden>Static furniture review is on hold while we check movement and placement. <a href="./furniture-playtest.html">Open the movement test →</a></p>
   <label class="review-filter"><input type="checkbox" id="unchecked-only"> Unchecked only</label>
   <div class="progress"><span id="position">Preparing cases…</span><span id="counts"></span></div>
   <section class="case" id="case">
     <div class="render-panel"><h2 id="case-name">Loading atlas…</h2><div id="render-wrap"><canvas id="render" aria-label="Generated interior"></canvas></div></div>
-    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend" id="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><div id="furniture-tools" hidden><label><input id="furniture-plan" type="checkbox" checked> Furniture on plan</label><label><input id="footprints" type="checkbox"> Footprints &amp; access</label><details><summary>Objects in this room</summary><ul id="furniture-list"></ul></details><p id="footprint-legend" hidden>Pink: solid · Green: rug · Gold: supported item · Blue: access space</p></div><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
+    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend" id="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><div id="furniture-tools" hidden><p>Furniture placement is reviewed in motion. The sketch below describes architecture only.</p><a id="movement-test" href="./furniture-playtest.html">Open movement &amp; placement test →</a><label><input id="footprints" type="checkbox"> Footprints &amp; access</label><details><summary>Objects in this room</summary><ul id="furniture-list"></ul></details><p id="footprint-legend" hidden>Pink: solid · Green: rug · Gold: supported item · Blue: access space</p></div><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
   </section>
   <section id="pause" hidden><h2>Ready for the next fix.</h2><p>Your two reports are captured; the save status is above. Say “ready” in chat to start the next fix—I can read saved feedback directly. Changed rooms will return for review.</p><button id="continue">Keep reviewing</button> <button id="refresh-review">Check for updates</button></section>
   <div id="actions"><p class="pin-hint">Tap a block in the render or floor plan to pin it to your report.</p><div id="pins" aria-label="Pinned blocks"></div><label class="note-label">Optional note <span>N to type · Enter to mark wrong</span><input id="note" maxlength="2000" placeholder="e.g. bottom-left corner" autocomplete="off" /></label><div class="buttons"><button id="wrong" class="wrong">Wrong <kbd>X</kbd></button><button id="good" class="good">Looks right <kbd>Space</kbd></button><button id="skip">Skip <kbd>→</kbd></button></div></div>
@@ -170,6 +171,7 @@ function show(next: ReadyCase | undefined, push = true): void {
   draw();
 }
 function drawStatus(): void {
+  el("furniture-shift").hidden = state.stage !== "15" && !current?.furniture;
   const fresh = () => ({ reviewed: 0, unchecked: 0, checking: 0, wrong: 0 });
   const totals = [fresh(), ...REVIEW_STAGES.map(fresh)];
   for (const c of cases) {
@@ -248,6 +250,8 @@ function draw(): void {
     ? compileFurniture(parseFloorPlan(current.sketch), current.furniture)
     : [];
   el("furniture-tools").hidden = !current.furniture;
+  el<HTMLAnchorElement>("movement-test").href =
+    `./furniture-playtest.html?scene=${current.id === "furniture-worktable" ? "worktable" : "bunk"}`;
   el("furniture-list").replaceChildren(
     ...furnished.map((o) => {
       const li = document.createElement("li");
@@ -275,15 +279,6 @@ function draw(): void {
       if (profile) {
         cell.title = `${profile.height}, ${profile.thickness ?? "thin"} wall`;
         cell.classList.toggle("thick-wall", profile.thickness === "thick");
-      }
-      if (el<HTMLInputElement>("furniture-plan").checked) {
-        const items = furnished.filter(
-          (o) => !o.parent && Math.floor(o.x / 32) === x && Math.floor((o.y - 1) / 32) === y,
-        );
-        if (items.length) {
-          cell.textContent = items.at(-1)?.definition.emoji ?? cell.textContent;
-          cell.title = items.map((o) => o.definition.name).join(", ");
-        }
       }
       line.append(cell);
     }
@@ -357,7 +352,7 @@ function drawPins(): void {
   }
 }
 el("footprints").addEventListener("change", drawPins);
-el("furniture-plan").addEventListener("change", draw);
+
 function revealPin(pin: ReviewPin): void {
   const wrap = el("render-wrap");
   const bounds = canvas.getBoundingClientRect();
