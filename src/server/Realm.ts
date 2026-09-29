@@ -1128,10 +1128,12 @@ export class Realm {
   }
 
   async flushAsync(): Promise<void> {
+    this.saveManager?.markMetaDirty();
     await this.saveManager?.flushAsync();
   }
 
   flush(): void {
+    this.saveManager?.markMetaDirty();
     this.saveManager?.flush();
   }
 

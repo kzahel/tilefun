@@ -628,6 +628,7 @@ export class GameServer {
       const oldRealm = this.realms.get(session.realmId);
       if (oldRealm) {
         oldRealm.removePlayer(clientId);
+        await oldRealm.flushAsync();
         this.tryUnloadRealm(session.realmId);
       }
     }
@@ -646,6 +647,8 @@ export class GameServer {
       session.visibleRange = { minCx: cx - 2, minCy: cy - 2, maxCx: cx + 2, maxCy: cy + 2 };
     }
 
+    targetRealm.savePlayerData(session);
+    await targetRealm.flushAsync();
     return {
       cameraX: session.player.position.wx,
       cameraY: session.player.position.wy,
