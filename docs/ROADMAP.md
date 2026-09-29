@@ -1,5 +1,10 @@
 # Roadmap
 
+## Regional Generation and World Explorer
+
+- Follow the [world explorer and regional generation plan](tactical/004-world-explorer-and-regional-generation-plan.md): shared regional planning, a fast overview, procedural city districts, and a path into playable neighborhoods and interiors.
+- First step: bounded regional queries and a seed-driven explorer, without generating full chunks at overview scale.
+
 ## Asset Protection
 - Obfuscate purchased asset files (Modern Exteriors, Modern Interiors, Sprout Lands) so they aren't directly browsable/downloadable from the public GitHub repo
 - Approach: store XOR-encoded `.enc` files in git, decode to `.png` at build time into a gitignored folder
