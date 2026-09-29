@@ -114,15 +114,23 @@ from an unsupported version. Visual captures cover desktop, phone, and overview.
 
 ## Next slice gates
 
-Slice 2 refines Ferngrove into a connected district with streets, varied blocks,
-lots, a park, and apartment/shop footprints. Inspect the minimum apartment and
-shop recipes before accepting lot widths and facings.
+The agreed next sequence is recorded in
+[Tactical 005: generator profiles and shared tile preview](tactical/005-generator-profiles-and-shared-tile-preview-plan.md).
+First freeze Classic and establish shared generator selection/realization; then
+add configurable zoom into real tiles; then support generator type/seed/settings
+in actual game creation and persistence. The current checkpoint does not yet
+implement those features. Explorer and gameplay will consume one implementation
+per selected generator, with the existing terrain/scene pipeline reused.
 
-Before slice 3, wire the complete descriptor into both world registries and the
-server protocol, with missing versions selecting the legacy generator. Planned
-worlds must replace the old roads/structures where applicable. Define stable
-procedural object provenance and deletion/move overlays before regeneration can
-affect saved props. A seed preview should create a matching new world when
-entering play; inspecting a saved world must carry its explicit world ID and
-obtain authoritative saved changes. None of those game/persistence paths are
-enabled at this checkpoint.
+After those slices, Tactical 004's slice 2 refines Ferngrove into a connected
+district with streets, varied blocks, lots, a park, and apartment/shop footprints.
+Inspect the minimum apartment and shop recipes before accepting lot widths and
+facings.
+
+Tactical 005's A–C slices establish descriptor compatibility, generator-owned
+roads/structures, and both world registries/protocol paths. Before the later
+building/arrival slice, define stable procedural object provenance and
+deletion/move overlays so regeneration preserves saved changes. **Play here**
+requires authoritative safe-spawn resolution; inspecting a saved world carries
+its explicit world ID and obtains saved overlays from that authority. None of
+those new game/persistence paths are enabled at this checkpoint.

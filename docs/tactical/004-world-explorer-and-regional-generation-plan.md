@@ -5,6 +5,13 @@ regional explorer and shared bounded query module are available. City districts,
 tile realization, and entering play remain future work. See
 [the checkpoint guide](../world-explorer.md) for the demo, contracts, and evidence.
 
+The next work is sequenced by
+[Tactical 005: generator profiles and shared tile preview](005-generator-profiles-and-shared-tile-preview-plan.md):
+freeze Classic, establish shared generator selection/realization, add configurable
+real-tile zoom, then expose type/seed selection in gameplay. That work precedes
+the district implementation below. This document continues to own the city,
+building, interior, and broader-world milestones.
+
 ## Outcome
 
 Build an explorable world with recognizable places: apartment and shopping
@@ -261,6 +268,8 @@ Keep those choices explicit rather than embedding assumptions in many layers.
 
 The current review checkpoint is **slice 1**: seed 2026 in the standalone world
 explorer, with a reproducible city/countryside/woodland layout, a boundary view,
-and a bounded broad overview. The next implementation step after regional review
-is **slice 2**: refine Ferngrove into the first connected city district and prove
-the minimum apartment/shop asset recipes before accepting lot geometry.
+and a bounded broad overview. The immediate next step is **Tactical 005 slice A**,
+followed by real-tile preview and actual game generator selection in its B–C
+slices. Then return to this plan's **slice 2**: refine Ferngrove into the first
+connected city district and prove the minimum apartment/shop asset recipes
+before accepting lot geometry.
