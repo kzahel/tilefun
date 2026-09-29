@@ -102,3 +102,8 @@ the north/west. Explicit thickness also makes a horizontal opening exactly one
 The same two-failure pause applies. This is a separate opt-in round; all 177
 previously approved renders retain their exact pixels. The new cases are visual
 candidates, not accepted baselines or a general gameplay collision system.
+
+The four thickness cases and both north attachments have since been approved and
+added to the baseline (183 renders total). The south attachments now join the
+foreground cap without an exposed free end. Reload returns the two changed
+south cases for review; the six unchanged approvals remain current.

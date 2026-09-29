@@ -20,3 +20,8 @@ the baseline pending review. The baseline now contains 176 approved renders.
 The tall east attachment was approved on 2026-09-29 (source commit 9d4a6a9).
 Its captured pixels match the saved good verdict exactly. All 177 existing
 cases are now protected; thickness/end-join candidates require new review.
+
+Six thickness/end-join cases were approved on 2026-09-29 (source commit fcb2a93):
+the straight, L, T, and doorway thickness cases and both north attachments.
+Their saved good fingerprints match the captured PNGs. The baseline now protects
+183 renders; the two rejected south attachments remain outside it.

@@ -162,3 +162,39 @@ for (const fixture of [
     expect(pixels.cap).toEqual([pixels.cap[0], pixels.cap[0], pixels.cap[0], 255]);
     if (pixels.floor.length) expect(pixels.floor[0]).toEqual(pixels.floor[1]);
   });
+
+for (const [height, capX] of [
+  ["low", 114],
+  ["tall", 106],
+] as const)
+  test(`${height} south partition opens into the cutaway without a visible end face`, async ({
+    page,
+  }) => {
+    await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
+    await page.addInitScript(
+      (height) =>
+        localStorage.setItem(
+          "tilefun.indoor-review.v1",
+          JSON.stringify({
+            current: `connection-south-${height}`,
+            stage: "8",
+            records: [],
+            outbox: [],
+            batch: [],
+            paused: false,
+            draft: "",
+            annotation: null,
+          }),
+        ),
+      height,
+    );
+    await page.goto("/tilefun/interior-review.html?stage=8");
+    await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+    await expect(page.locator("#case-id")).toHaveText(`connection-south-${height}`);
+    const seam = await page.locator("#render").evaluate((element, x) => {
+      const ctx = (element as HTMLCanvasElement).getContext("2d");
+      if (!ctx) throw new Error("Missing canvas");
+      return [210, 219, 223, 224, 225].map((y) => Array.from(ctx.getImageData(x, y, 1, 1).data));
+    }, capX);
+    expect(seam).toEqual(Array(5).fill([248, 248, 248, 255]));
+  });

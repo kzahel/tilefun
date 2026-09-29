@@ -883,5 +883,35 @@
     "id": "profile-door-east-tall",
     "name": "East wall attachment \u00b7 tall wall beside opening",
     "fp": "8743b548c98ed754bc40e3a714600a785b0d21700d7e719d164ed07b6c6644a4"
+  },
+  {
+    "id": "connection-straight",
+    "name": "Thickness \u00b7 thin meets thick",
+    "fp": "4ebde18da55c97455b57635b03d9983f7ac09edbe34a296efe195c425669b876"
+  },
+  {
+    "id": "connection-bend",
+    "name": "Thickness \u00b7 thin arm into thick corner",
+    "fp": "063f4a5ef9750c239be7b4afc77508eb665d8f0f1f4aa4e1464242b9defea7d3"
+  },
+  {
+    "id": "connection-tee",
+    "name": "Thickness \u00b7 thin branches, thick stem",
+    "fp": "c2d9cff231c62ee7febb1574258b0fa19232aad3c59b7d81e3840e5f779cac15"
+  },
+  {
+    "id": "connection-door",
+    "name": "Thickness \u00b7 full-width opening through thick wall",
+    "fp": "f76795880f670333c8587f119390001814a5c0c5f7c947b6fb0131c0b15fc9c9"
+  },
+  {
+    "id": "connection-north-low",
+    "name": "North wall attachment \u00b7 low partition",
+    "fp": "d217bc27f49011ba6a15d5153630cd15207ca295d0150722d721c03e8945b3c3"
+  },
+  {
+    "id": "connection-north-tall",
+    "name": "North wall attachment \u00b7 tall partition",
+    "fp": "caa55ff6a97c37558305791bef0984a54e5cd060ccd73ef07fe11aeaf4e64da7"
   }
 ]

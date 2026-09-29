@@ -691,3 +691,23 @@ accepted joins with mirrored L/T shapes, short returns and adjacent doors before
 combining height and width transitions. Generalize supported connection rules
 from that evidence. Keep appearance review separate from future collision and
 navigation footprints; the current semantic wall cells remain conservative.
+
+### Join south partitions to the foreground cutaway, 2026-09-29
+
+The four thickness cases and both north attachments were approved. Their exact
+rendered pixels now bring the baseline to 183. Both south cases were rejected:
+the low end should not be visible from below, and the tall end looked detached
+from the bottom wall.
+
+Reaching the shell's ground boundary was insufficient: the ordinary extrusion
+still projected its cap back by its height and emitted a full south-facing end.
+A straight south-shell connection now owns that termination. Its cap and side
+meet the visible cutaway boundary, and the covered south face is omitted. The
+cap opens into the white foreground trim, with each opening pixel written in its
+own trim tile so tile boundaries cannot cover part of the join. Freestanding
+ends retain their exposed faces and ordinary projection.
+
+Only the two rejected cases change. Geometry tests distinguish attached and free
+ends; browser pixel checks cover the cap-to-trim seam at both heights. The same
+two-failure review loop reopens these changed renders on reload. Next: review
+these two connections before adding mirrored or tightly spaced counterexamples.

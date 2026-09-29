@@ -150,12 +150,33 @@ describe("wall thickness and end connections", () => {
       expect(se[1]).toBeGreaterThan(ne[1]);
     }
   });
-  it.each(["low", "tall"])("ends the %s south partition exactly at the cutaway", (height) => {
+  it.each([
+    "low",
+    "tall",
+  ])("joins the %s south cap to the cutaway without an exposed end", (height) => {
     const map = build(`south-${height}`);
     const points = map.surfaces.flatMap((s) => s.points);
     expect(Math.max(...points.map(([, y]) => y))).toBe(224);
+    const tops = map.surfaces.filter((s) => s.plane.startsWith("top:"));
+    expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(224);
+    expect(map.surfaces.some((s) => s.plane === "south:28")).toBe(false);
     expect(map.pixelHeight).toBe(230);
     expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
+  });
+  it.each([
+    "low",
+    "tall",
+  ])("retains the exposed %s end when a partition stops before the shell", (height) => {
+    const c = fixture(`south-${height}`);
+    const sketch = c.sketch
+      .split("\n")
+      .map((row, y) => (y === 6 ? row.replace("#LL#LLL#", "#LLLLLL#") : row))
+      .join("\n");
+    const map = buildProfileApartmentPlan(parseFloorPlan(sketch), {
+      walls: c.profiles.walls.filter((w) => w.y < 6),
+    });
+    expect(map.surfaces.some((s) => s.plane === "south:24")).toBe(true);
+    expect(Math.max(...map.surfaces.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
   });
   it("persists explicit thickness and rejects unsupported width specifications", () => {
     const c = fixture("straight");

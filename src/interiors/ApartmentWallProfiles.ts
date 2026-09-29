@@ -57,6 +57,7 @@ export function buildProfileApartmentPlan(
   const columns = new Map<string, { x: number; y: number; height: number }>();
   const eastPorts = new Map<string, { height: number; faceX: number; railX: number }>();
   const northPorts = new Map<string, { height: number; lift: number }>();
+  const southPorts = new Set<string>();
   for (let y = 0; y < plan.height; y++)
     for (let x = 0; x < plan.width; x++) {
       if (
@@ -103,6 +104,26 @@ export function buildProfileApartmentPlan(
     const width = WALL_THICKNESSES[w.thickness ?? "thin"] / 8;
     const minX = 3 - width,
       minY = 4 - width;
+    const attachSouth =
+      w.y === plan.height - 2 &&
+      [-1, 0, 1].every((dx) => plan.rows[plan.height - 1]?.[w.x + dx] === "#");
+    if (attachSouth) {
+      const endY = (plan.height - 1) * 4;
+      // A connected cutaway end has no exposed south face. Its cap and side
+      // terminate at the visible shell boundary, independently of wall height.
+      for (let x = w.x * 4 + minX; x <= w.x * 4 + 3; x++) southPorts.add(key(x, endY));
+      const capX = (w.x * 4 + minX) * 8 - WALL_HEIGHTS[w.height] / 4;
+      // Write within each owning tile so the next trim tile cannot cover a
+      // connection that crosses a 16px boundary.
+      for (let x = capX + 1; x < capX + width * 8; x++)
+        cellAt(Math.floor(x / 16), endY / 2).foreground.push({
+          key: wall(10, 2),
+          cropX: 2,
+          cropWidth: 1,
+          cropHeight: 1,
+          offsetX: (x % 16) - 2,
+        });
+    }
     const verticalShell = (x: number) => [-1, 0, 1].every((dy) => plan.rows[w.y + dy]?.[x] === "#");
     const attachWest = w.x === 1 && verticalShell(0);
     const attachEast = w.x === plan.width - 2 && verticalShell(plan.width - 1);
@@ -190,7 +211,9 @@ export function buildProfileApartmentPlan(
     const north = northPorts.get(key(x, y));
     return [
       port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,
-      y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
+      southPorts.has(key(x, y))
+        ? y * 8
+        : y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
     ];
   };
   function face(points: Point[], plane: string, kind: "top" | "south" | "east") {
@@ -210,7 +233,7 @@ export function buildProfileApartmentPlan(
       `top:${h}`,
       "top",
     );
-    const south = columns.get(key(x, y + 1))?.height ?? 0;
+    const south = southPorts.has(key(x, y + 1)) ? h : (columns.get(key(x, y + 1))?.height ?? 0);
     for (let z = Math.min(south, h); z < h; z += 8)
       face(
         [
