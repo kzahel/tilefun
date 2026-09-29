@@ -8,7 +8,9 @@ import {
   type DistrictPlan,
   type DistrictStreet,
   districtForSettlement,
+  settledDistrict,
 } from "./DistrictPlanner.js";
+import { pathDistance } from "./PlanGeometry.js";
 import { type Bounds, intersects, REGION_SIZE, settlementForOwner } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
@@ -19,27 +21,25 @@ export interface FeaturePlacement extends StructurePlacement {
 const within = (b: Bounds, x: number, y: number) =>
   x >= b.minX && x < b.maxX && y >= b.minY && y < b.maxY;
 export function streetDistance(street: DistrictStreet, x: number, y: number): number {
-  let distance = Infinity;
-  for (let i = 1; i < street.points.length; i++) {
-    const a = street.points[i - 1],
-      b = street.points[i];
-    if (!a || !b) continue;
-    const px = Math.max(Math.min(a.x, b.x), Math.min(Math.max(a.x, b.x), x));
-    const py = Math.max(Math.min(a.y, b.y), Math.min(Math.max(a.y, b.y), y));
-    distance = Math.min(distance, Math.hypot(x - px, y - py));
-  }
-  return distance;
+  return pathDistance(street.points, x, y);
 }
 
 /** A bounded owner cache is disposable working memory, never a generated world atlas. */
 export class DistrictSource {
   private owners = new Map<string, DistrictPlan | null>();
-  constructor(readonly world: RegionalWorld) {}
+  constructor(
+    readonly world: RegionalWorld,
+    readonly settled = false,
+  ) {}
   owner(cx: number, cy: number): DistrictPlan | null {
     const key = `${cx},${cy}`;
     if (this.owners.has(key)) return this.owners.get(key) ?? null;
     const settlement = settlementForOwner(this.world, cx, cy);
-    const plan = settlement ? districtForSettlement(settlement, this.world.seed) : null;
+    const plan = settlement
+      ? this.settled
+        ? settledDistrict(settlement, this.world.seed)
+        : districtForSettlement(settlement, this.world.seed)
+      : null;
     this.owners.set(key, plan);
     if (this.owners.size > 16) this.owners.delete(this.owners.keys().next().value ?? "");
     return plan;
@@ -133,9 +133,9 @@ function surface(plan: DistrictPlan, x: number, y: number): { terrain: TerrainId
 
 export class DistrictStrategy extends RegionalStrategy {
   readonly districts: DistrictSource;
-  constructor(world: RegionalWorld) {
+  constructor(world: RegionalWorld, settled = false) {
     super(world);
-    this.districts = new DistrictSource(world);
+    this.districts = new DistrictSource(world, settled);
   }
   override generate(chunk: Chunk, cx: number, cy: number): void {
     super.generate(chunk, cx, cy);

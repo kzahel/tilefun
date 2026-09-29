@@ -1,6 +1,6 @@
 # Generator profiles and shared tile preview
 
-Status: implementation in progress, September 29, 2026.
+Status: slices A–E implemented, September 30, 2026. Physical phone profiling remains outstanding.
 The regional map checkpoint in commit `6d388bb` has been reviewed positively.
 This plan records the next work and its handoff to the remaining world-building
 work in [Tactical 004](004-world-explorer-and-regional-generation-plan.md).
@@ -421,9 +421,45 @@ Rust/Wasm, 3D meshing, clipmap/depth architecture, or a runtime dependency on it
   children, and persistence writes drain before deletion. Rooms have one floor;
   a game reload resumes the parent and preserves the room for reentry.
 
-## Next action
+- Slice E, broader world: Regional v3 composes frozen v2 topology with market,
+  garden, and residential styles. Admitted dry farms connect to village avenues;
+  woodland loops include trees, picnic space, and wildlife. New native-object
+  recipes avoid reinterpreting mislabeled legacy sprites. Stable actor plans feed
+  the explorer's static poses and authoritative route AI through the same factory;
+  movement uses existing physics/collision/animation. Generated residency is
+  disposable, actor removals persist as shared feature tombstones, and active
+  server inspection includes live actor positions. Routes reset to canonical
+  starts after unload/reload; daily schedules are deferred.
 
-A–D and the interior portion of E are implemented. Continue **slice E** with
-farms, woods, wildlife, district variation, and simple inhabitants.
-Record measured caps and any changed contracts in this document and update
-[the explorer checkpoint guide](../world-explorer.md) after each accepted slice.
+- Final lifecycle fixes: transition saves drain before completion and snapshot
+  baselines reset after asynchronous saves. Empty realms retain their last player
+  arrival for parent-world reload. Graceful server shutdown drains filesystem
+  writes. HTTP inspection supports cross-origin read-only requests. Multiple
+  distant players stream independent neighborhoods instead of their bounding
+  rectangle; generated actors/props follow those same loaded chunks.
+
+## Current review checkpoint and next work
+
+A–E are implemented. The compact explorer round includes district streets/art,
+farm/village access, and woodland trails. Start with seed 2026, then compare other
+seeds and the retained v1/v2 revisions. Apartment, shop, and home entry has one
+versioned ground-floor room per lot, with persistent furniture edits and per-player
+return locations. Reload resumes the parent; reentry restores the room.
+
+Validation includes frozen Classic/Island/Flat and v1/v2 fixtures, actual worker
+terrain/prop/actor parity, physical clearance along planned actor routes, eviction
+and tombstones, IndexedDB/filesystem reload, and two browser clients sharing a room
+across server restart. Final typecheck, 1,002 unit tests, build, and all 119 browser tests pass.
+Lint/format has only existing warnings. Captured source-art views were inspected; browser phone layout,
+touch navigation, throttled CPU, and sustained bounded detail checks are automated.
+Physical representative-phone profiling has not been measured.
+
+Working bounds remain 81 detailed chunks (at most 49 painted), a 160-tile scene
+query footprint, 512 props, and 128 preview/inspection actors. Owner caches are
+bounded (16 districts, 64 countryside cells); there is no generated atlas.
+Authority actor residency follows loaded neighborhoods and retains an occupied
+mount while its rider travels. The explorer shows static poses, not a second
+simulation. See [the checkpoint guide](../world-explorer.md) for measured timings
+and remaining product choices. Next: user visual review and density/composition
+iteration; additional floors, more room layouts, schedules, traffic, and economies
+are separate future work.

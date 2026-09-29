@@ -1,4 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
+import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 
 /**
@@ -30,6 +31,10 @@ export function tickAllAI(
         entity.velocity.vx = 0;
         entity.velocity.vy = 0;
       }
+      continue;
+    }
+    if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
+      updateRouteAI(entity, dt);
       continue;
     }
     if (entity.wanderAI.chaseRange || entity.wanderAI.following || entity.wanderAI.befriendable) {

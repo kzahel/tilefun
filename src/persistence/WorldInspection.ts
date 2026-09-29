@@ -1,4 +1,5 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { actorPlacements } from "../generation/ActorPlacements.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
@@ -18,6 +19,7 @@ export interface InspectionSnapshot {
   chunks: InspectionChunk[];
   deleted: string[];
   props: SerializedEntity[];
+  actors?: SerializedEntity[];
   coverage: "live authority" | "saved snapshot";
   capturedAt: string;
 }
@@ -78,8 +80,9 @@ export function inspectionOverlays(
   generation: GenerationDescriptor,
   bounds: Bounds,
   meta: SavedMeta | null,
-): Pick<InspectionSnapshot, "deleted" | "props"> {
+): Pick<InspectionSnapshot, "deleted" | "props" | "actors"> {
   const candidates = new Set(inspectionPlacements(generation, bounds).map((p) => p.featureId));
+  for (const a of actorPlacements(createGenerator(generation), bounds)) candidates.add(a.featureId);
   const inBounds = (p: SerializedEntity) =>
     p.wx >= bounds.minX * TILE_SIZE - 320 &&
     p.wx <= bounds.maxX * TILE_SIZE + 320 &&
@@ -97,7 +100,11 @@ export function inspectionOverlays(
   ];
   if (props.length > 512 || deleted.length > 1024)
     throw new Error("Saved inspection exceeds its prop cap.");
-  return { deleted, props };
+  const actors = (meta?.entities ?? [])
+    .filter((p) => !p.type.startsWith("prop-") && p.type !== "player")
+    .filter(inBounds);
+  if (actors.length > 128) throw new Error("Saved inspection exceeds its actor cap.");
+  return { deleted, props, actors };
 }
 export async function readInspection(
   store: PersistenceStore,

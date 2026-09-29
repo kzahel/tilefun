@@ -1,4 +1,5 @@
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import type { ActorPlacement } from "../generation/Generator.js";
 import type { OverviewResult } from "../generation/Overview.js";
 import type { Bounds, RegionalRequest } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
@@ -26,6 +27,7 @@ export type WorkerResponse =
       chunks: { cx: number; cy: number; data: ChunkData }[];
       terrainMs: number;
       placements: StructurePlacement[];
+      actors?: ActorPlacement[];
       computeMs: number;
       elapsedMs: number;
       finishedAt: number;

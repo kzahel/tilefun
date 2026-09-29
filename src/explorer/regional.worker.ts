@@ -1,3 +1,4 @@
+import { actorPlacements } from "../generation/ActorPlacements.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
@@ -98,6 +99,20 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             await new Promise<void>((resolve) => setTimeout(resolve, 0));
           }
         }
+        const actors = new Map(
+          (message.footprint
+            ? actorPlacements(
+                createGenerator(normalizeGeneration(message.world)),
+                message.footprint,
+              )
+            : []
+          ).map((a) => [a.featureId, a]),
+        );
+        for (const id of message.snapshot?.deleted ?? []) actors.delete(id);
+        for (const [i, a] of (message.snapshot?.actors ?? []).entries()) {
+          const id = a.proceduralId ?? `saved-actor:${i}:${a.type}:${a.wx}:${a.wy}`;
+          actors.set(id, { featureId: id, type: a.type, wx: a.wx, wy: a.wy, route: [] });
+        }
         for (const id of message.snapshot?.deleted ?? []) placements.delete(id);
         for (const [i, p] of (message.snapshot?.props ?? []).entries()) {
           const id = p.proceduralId ?? `saved:${i}:${p.type}:${p.wx}:${p.wy}`;
@@ -115,6 +130,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             chunks,
             terrainMs,
             placements: [...placements.values()],
+            actors: [...actors.values()],
             computeMs,
             elapsedMs: performance.now() - start,
             finishedAt: performance.timeOrigin + performance.now(),

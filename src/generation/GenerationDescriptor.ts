@@ -18,7 +18,7 @@ export type GenerationDescriptor =
     }
   | {
       readonly type: "regional";
-      readonly version: "regional-v1" | "regional-v2";
+      readonly version: "regional-v1" | "regional-v2" | "regional-v3";
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
@@ -26,6 +26,7 @@ export type GenerationDescriptor =
 export const REGIONAL_REVISIONS = [
   { version: "regional-v1", label: "Terrain only (v1)" },
   { version: "regional-v2", label: "Districts (v2)" },
+  { version: "regional-v3", label: "Settled world (v3)" },
 ] as const;
 
 export const GENERATOR_CATALOG = [
@@ -100,7 +101,7 @@ export function resolveDescriptor(value: GenerationDescriptor): GenerationDescri
       return Object.freeze({ type: "flat", version: "flat-v1", seed: value.seed, preset: "grass" });
     case "regional":
       if (
-        !["regional-v1", "regional-v2"].includes(value.version) ||
+        !["regional-v1", "regional-v2", "regional-v3"].includes(value.version) ||
         value.preset !== "temperate-v1" ||
         !Number.isInteger(value.seed) ||
         value.seed < 0 ||
@@ -137,7 +138,7 @@ export function createDescriptor(
     case "regional":
       return resolveDescriptor({
         type: "regional",
-        version: "regional-v2",
+        version: "regional-v3",
         seed,
         preset: "temperate-v1",
       });

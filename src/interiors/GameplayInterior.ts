@@ -22,6 +22,7 @@ export interface InteriorIdentity {
 }
 export const INTERIOR_ENTRY = { wx: 80, wy: 120 };
 export const INTERIOR_EXIT = { wx: 80, wy: 144 };
+export const INTERIOR_DOORWAY = { x: 64, y: 128, width: 32, height: 32 };
 export const INTERIOR_FLOOR = { x: 8, y: 32, width: 144, height: 96 };
 export const FURNITURE_PROP_PREFIX = "prop-interior-furniture:";
 export const INTERIOR_WALL_TYPE = "prop-interior-wall";
@@ -97,9 +98,9 @@ export function interiorWalls(): PropCollider[] {
     { offsetX: 80, offsetY: 32, width: 144, height: 16, zHeight: 64 },
     { offsetX: 36, offsetY: 144, width: 56, height: 16, zHeight: 64 },
     { offsetX: 124, offsetY: 144, width: 56, height: 16, zHeight: 64 },
-    { offsetX: 56, offsetY: 176, width: 16, height: 48, zHeight: 64 },
-    { offsetX: 104, offsetY: 176, width: 16, height: 48, zHeight: 64 },
-    { offsetX: 80, offsetY: 192, width: 32, height: 16, zHeight: 64 },
+    { offsetX: 56, offsetY: 160, width: 16, height: 32, zHeight: 64 },
+    { offsetX: 104, offsetY: 160, width: 16, height: 32, zHeight: 64 },
+    { offsetX: 80, offsetY: 176, width: 32, height: 16, zHeight: 64 },
   ];
 }
 export function interiorProp(type: string, wx: number, wy: number): Prop | null {

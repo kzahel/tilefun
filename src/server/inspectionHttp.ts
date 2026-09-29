@@ -8,6 +8,13 @@ export async function inspectionHttp(
 ): Promise<boolean> {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (!url.pathname.startsWith("/api/world-")) return false;
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  if (req.method === "OPTIONS") {
+    res.statusCode = 204;
+    res.end();
+    return true;
+  }
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Cache-Control", "no-store");
   try {

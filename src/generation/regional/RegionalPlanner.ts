@@ -79,6 +79,10 @@ function hash(cx: number, cy: number, seed: number, salt: number): number {
   return ((h ^ (h >>> 16)) >>> 0) / 2 ** 32;
 }
 
+export function plannedMoisture(world: RegionalWorld, x: number, y: number): number {
+  return fbm(x / 1100, y / 1100, world.seed + 2801, 2);
+}
+
 /** The regional geographic spine; local realization must consume these constraints. */
 export function naturalElevation(world: RegionalWorld, x: number, y: number): number {
   return (
@@ -280,7 +284,7 @@ export function* regionalQuerySteps(
       const y = grid.y + (row + 0.5) * grid.step;
       const index = row * grid.width + col;
       const e = plannedElevation(world, x, y);
-      const m = fbm(x / 1100, y / 1100, world.seed + 2801, 2);
+      const m = plannedMoisture(world, x, y);
       elevation[index] = e;
       moisture[index] = m;
       cover[index] =

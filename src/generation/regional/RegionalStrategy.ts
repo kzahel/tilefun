@@ -4,22 +4,14 @@ import { RoadType } from "../../road/RoadType.js";
 import { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import type { TerrainStrategy } from "../TerrainStrategy.js";
+import { pathDistance } from "./PlanGeometry.js";
 import { type Connection, plannedElevation, QUERY_LIMITS, queryRegion } from "./RegionalPlanner.js";
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Distance to orthogonal segments. Shared corridor identity comes from the planner. */
 export function corridorDistance(connection: Connection, x: number, y: number): number {
-  let distance = Infinity;
-  for (let i = 1; i < connection.points.length; i++) {
-    const a = connection.points[i - 1];
-    const b = connection.points[i];
-    if (!a || !b) continue;
-    const px = Math.max(Math.min(a.x, b.x), Math.min(Math.max(a.x, b.x), x));
-    const py = Math.max(Math.min(a.y, b.y), Math.min(Math.max(a.y, b.y), y));
-    distance = Math.min(distance, Math.hypot(x - px, y - py));
-  }
-  return distance;
+  return pathDistance(connection.points, x, y);
 }
 
 /** Independent regional realization; no Onion terrain or legacy road generator. */

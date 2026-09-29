@@ -1,6 +1,7 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { type CountryPlan, CountrySource } from "./regional/CountrysidePlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
 import { DistrictSource } from "./regional/DistrictStrategy.js";
 import {
@@ -16,6 +17,7 @@ import { type RegionalWorld, regionalWorld, validateWorld } from "./regional/Wor
 export type OverviewResult = Omit<RegionalResult, "world"> & {
   world: GenerationDescriptor | RegionalWorld;
   districts?: DistrictPlan[];
+  countryside?: CountryPlan[];
 };
 export function normalizeGeneration(
   world: GenerationDescriptor | RegionalWorld,
@@ -38,7 +40,10 @@ export function* overviewSteps(
   const descriptor = normalizeGeneration(input);
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
-    const source = new DistrictSource(regionalWorld(descriptor.seed));
+    const source = new DistrictSource(
+      regionalWorld(descriptor.seed),
+      descriptor.version === "regional-v3",
+    );
     const districts: DistrictPlan[] = [];
     if (
       descriptor.version !== "regional-v1" &&
@@ -67,7 +72,21 @@ export function* overviewSteps(
         plan.blocks.reduce((v, block) => v + block.lots.length, 0),
       0,
     );
-    return { ...result, world: descriptor, districts };
+    const countryside: CountryPlan[] = [];
+    if (
+      descriptor.version === "regional-v3" &&
+      result.detail === "region" &&
+      result.grid.step <= 16
+    ) {
+      for (const plan of new CountrySource(regionalWorld(descriptor.seed)).query(request.bounds)) {
+        const count = 1 + plan.paths.length + plan.props.length + plan.actors.length;
+        if (result.stats.features + count > request.limits.maxFeatures) break;
+        countryside.push(plan);
+        result.stats.features += count;
+        yield;
+      }
+    }
+    return { ...result, world: descriptor, districts, countryside };
   }
   validateRequest(request);
   const grid = makeGrid(request.bounds, request.sampleStep, request.limits.maxSamples);

@@ -97,14 +97,14 @@ test("review advances to unchecked cases, persists verdicts, and exports reprodu
   await page.goto(explorer);
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   await page.getByRole("button", { name: "Looks good" }).click();
-  await expect(page.locator("#remaining")).toHaveText("4 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("6 unchecked");
   await expect(page.locator(".case-button.active")).toContainText("Across a cell boundary");
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   await page
     .getByRole("textbox", { name: "Review note" })
     .fill("The transition needs a less rectangular woodland edge.");
   await page.getByRole("button", { name: "Report", exact: false }).click();
-  await expect(page.locator("#remaining")).toHaveText("3 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("5 unchecked");
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export review notes" }).click();
   const download = await downloadPromise;
@@ -122,7 +122,7 @@ test("review advances to unchecked cases, persists verdicts, and exports reprodu
   expect(exported.records[1].bounds.minX).toBeLessThan(0);
   expect(exported.records[1].location).toContain("zoom=");
   await page.reload();
-  await expect(page.locator("#remaining")).toHaveText("3 unchecked");
+  await expect(page.locator("#remaining")).toHaveText("5 unchecked");
 });
 
 test("phone touch navigation remains responsive with a throttled CPU", async ({ page }) => {
@@ -145,9 +145,9 @@ test("phone touch navigation remains responsive with a throttled CPU", async ({ 
   const touch = (x: number, y: number) => ({ x: box.x + x, y: box.y + y, id: 1 });
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchStart",
-    touchPoints: [touch(170, 270)],
+    touchPoints: [touch(170, 210)],
   });
-  await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [touch(250, 270)] });
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [touch(250, 210)] });
   await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
   await expect(map).not.toHaveAttribute("data-x", "300.000");
   await expect(app).toHaveAttribute("data-settled", "true");
@@ -155,15 +155,15 @@ test("phone touch navigation remains responsive with a throttled CPU", async ({ 
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchStart",
     touchPoints: [
-      { ...touch(140, 260), id: 1 },
-      { ...touch(230, 260), id: 2 },
+      { ...touch(140, 200), id: 1 },
+      { ...touch(230, 200), id: 2 },
     ],
   });
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchMove",
     touchPoints: [
-      { ...touch(110, 260), id: 1 },
-      { ...touch(260, 260), id: 2 },
+      { ...touch(110, 200), id: 1 },
+      { ...touch(260, 200), id: 2 },
     ],
   });
   await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });

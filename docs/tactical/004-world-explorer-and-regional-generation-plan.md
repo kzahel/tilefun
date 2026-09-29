@@ -1,16 +1,15 @@
 # World explorer and regional generation
 
-Status: slice 1 implemented for review, September 29, 2026. The standalone
-regional explorer and shared bounded query module are available. City districts,
-tile realization, and entering play remain future work. See
-[the checkpoint guide](../world-explorer.md) for the demo, contracts, and evidence.
+Status: milestones 1–5 implemented, September 30, 2026. The explorer, game,
+and authority share versioned generation and source-art realization. Regional v2
+provides districts and enterable buildings; v3 adds farms, woodland trails,
+wildlife, district styles, and inhabitants. Classic/Island/Flat and earlier
+Regional revisions remain pinned. See [the checkpoint guide](../world-explorer.md)
+for demo locations, contracts, limits, and verification.
 
-The next work is sequenced by
-[Tactical 005: generator profiles and shared tile preview](005-generator-profiles-and-shared-tile-preview-plan.md):
-freeze Classic, establish shared generator selection/realization, add configurable
-real-tile zoom, then expose type/seed selection in gameplay. That work precedes
-the district implementation below. This document continues to own the city,
-building, interior, and broader-world milestones.
+[Tactical 005](005-generator-profiles-and-shared-tile-preview-plan.md) records the
+shared generation refactor and implementation evidence. The milestones below
+remain the design rationale; their initial implementation is complete.
 
 ## Outcome
 
@@ -266,10 +265,11 @@ first measurements. Decide the first supported building facings from inspected
 art, and the interior storage/realm mapping from existing game constraints.
 Keep those choices explicit rather than embedding assumptions in many layers.
 
-The current review checkpoint is **slice 1**: seed 2026 in the standalone world
-explorer, with a reproducible city/countryside/woodland layout, a boundary view,
-and a bounded broad overview. The immediate next step is **Tactical 005 slice A**,
-followed by real-tile preview and actual game generator selection in its B–C
-slices. Then return to this plan's **slice 2**: refine Ferngrove into the first
-connected city district and prove the minimum apartment/shop asset recipes
-before accepting lot geometry.
+The current checkpoint includes **all five milestones**. Review seed 2026's
+city district, apartment/shop/home doors, Brookvale's farm at `(677, 1320)`, and
+the woodland loop near `(-985, -985)`. Use Auto/Map/Tiles/Coverage and Play here
+to compare the shared plans with gameplay. Existing user verdicts remain separate
+from new revision identities. The next product decision is to tune density,
+place composition, and interior variety from these compact review cases. Deep
+schedules/traffic/economies remain outside this milestone. Representative physical
+phone profiling is still outstanding; desktop throttling is separate evidence.

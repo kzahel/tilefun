@@ -19,7 +19,8 @@
     "interiors:counterexamples": "tsx scripts/interior-counterexamples.ts",
     "explorer:bench": "tsx scripts/benchmark-regional.ts",
     "dev:server": "tsx --watch src/server/standalone.ts",
-    "start:server": "tsx src/server/standalone.ts"
+    "start:server": "tsx src/server/standalone.ts",
+    "generation:bench": "tsx scripts/benchmark-generation.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",

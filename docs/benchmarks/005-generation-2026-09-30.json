@@ -1,0 +1,186 @@
+{
+  "recordedOn": "2026-09-30",
+  "scope": "Desktop Node production factory, seed 2026; excludes source images, rendering, transfers, and physical phone measurements. First fixture iteration versus 20 warm iterations.",
+  "samples": [
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v1",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "district",
+      "coldMs": 5.41,
+      "medianMs": 0.93,
+      "p95Ms": 1.29,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v1",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "farm",
+      "coldMs": 0.8,
+      "medianMs": 0.83,
+      "p95Ms": 0.91,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v1",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "woodland",
+      "coldMs": 0.79,
+      "medianMs": 0.65,
+      "p95Ms": 0.68,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v1",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "negative-coast",
+      "coldMs": 0.68,
+      "medianMs": 0.63,
+      "p95Ms": 0.69,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v2",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "district",
+      "coldMs": 3.49,
+      "medianMs": 1.71,
+      "p95Ms": 2.05,
+      "props": 1,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v2",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "farm",
+      "coldMs": 1.06,
+      "medianMs": 0.94,
+      "p95Ms": 0.98,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v2",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "woodland",
+      "coldMs": 0.79,
+      "medianMs": 0.74,
+      "p95Ms": 0.8,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v2",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "negative-coast",
+      "coldMs": 0.76,
+      "medianMs": 0.74,
+      "p95Ms": 0.83,
+      "props": 0,
+      "actors": 0,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v3",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "district",
+      "coldMs": 4.04,
+      "medianMs": 1.57,
+      "p95Ms": 1.72,
+      "props": 1,
+      "actors": 1,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v3",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "farm",
+      "coldMs": 2.74,
+      "medianMs": 1.64,
+      "p95Ms": 1.76,
+      "props": 24,
+      "actors": 1,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v3",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "woodland",
+      "coldMs": 3.45,
+      "medianMs": 1.28,
+      "p95Ms": 1.5,
+      "props": 3,
+      "actors": 1,
+      "bytes": 9025
+    },
+    {
+      "descriptor": {
+        "type": "regional",
+        "version": "regional-v3",
+        "seed": 2026,
+        "preset": "temperate-v1"
+      },
+      "fixture": "negative-coast",
+      "coldMs": 4.16,
+      "medianMs": 1.34,
+      "p95Ms": 1.47,
+      "props": 4,
+      "actors": 0,
+      "bytes": 9025
+    }
+  ]
+}

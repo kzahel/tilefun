@@ -1,5 +1,6 @@
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import type { CountryPlan } from "../generation/regional/CountrysidePlanner.js";
 import type { DistrictLot } from "../generation/regional/DistrictPlanner.js";
 import {
   type Connection,
@@ -16,11 +17,12 @@ export type LotFeature = DistrictLot & {
   center: Point;
   owner: { cx: number; cy: number };
 };
-export type MapFeature = Settlement | Connection | LotFeature;
+export type MapFeature = Settlement | Connection | LotFeature | CountryPlan;
 export function mapFeatures(result: RegionalResult): MapFeature[] {
   return [
     ...result.settlements,
     ...result.connections,
+    ...(result.countryside ?? []),
     ...(result.districts ?? []).flatMap((plan) => {
       const settlement = result.settlements.find((s) => s.id === plan.settlementId);
       return plan.blocks.flatMap((block) =>
@@ -129,6 +131,31 @@ export class MapRenderer {
         ctx.lineWidth = Math.max(2, road.width * view.zoom - 1);
         ctx.stroke();
       }
+    }
+    for (const plan of result.countryside ?? []) {
+      const b = plan.bounds;
+      if (overlays.lots) {
+        ctx.fillStyle = plan.kind === "farm" ? "#bc9a59" : "#759268";
+        ctx.globalAlpha = 0.28;
+        ctx.fillRect(
+          sx(b.minX),
+          sy(b.minY),
+          (b.maxX - b.minX) * view.zoom,
+          (b.maxY - b.minY) * view.zoom,
+        );
+        ctx.globalAlpha = 1;
+      }
+      if (overlays.roads)
+        for (const path of plan.paths) {
+          ctx.beginPath();
+          path.forEach((p, i) => {
+            if (i) ctx.lineTo(sx(p.x), sy(p.y));
+            else ctx.moveTo(sx(p.x), sy(p.y));
+          });
+          ctx.strokeStyle = "#b49b70";
+          ctx.lineWidth = Math.max(1, 2.5 * view.zoom);
+          ctx.stroke();
+        }
     }
     for (const plan of result.districts ?? []) {
       if (overlays.roads)
@@ -305,6 +332,16 @@ export function featureAt(
         point.y < s.bounds.maxY,
     );
     if (settlement) return settlement;
+  }
+  if (overlays.landUse) {
+    const country = result.countryside?.find(
+      (p) =>
+        point.x >= p.bounds.minX &&
+        point.x < p.bounds.maxX &&
+        point.y >= p.bounds.minY &&
+        point.y < p.bounds.maxY,
+    );
+    if (country) return country;
   }
   if (overlays.roads) {
     for (const road of result.connections) {

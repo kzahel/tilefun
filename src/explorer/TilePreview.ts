@@ -7,9 +7,12 @@ import {
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { CHUNK_SIZE, PIXEL_SCALE, TILE_SIZE } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
+import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
 import { descriptorKey, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import type { ActorPlacement } from "../generation/Generator.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
@@ -27,6 +30,7 @@ export class TilePreview {
   private chunks = new Map<string, Chunk>();
   private wanted = new Set<string>();
   private props: Prop[] = [];
+  private actors: Entity[] = [];
   private propsReady = false;
   private propsSerial = 0;
   private visibleKey = "";
@@ -115,9 +119,22 @@ export class TilePreview {
         }
       : undefined;
   }
+  get complete(): boolean {
+    return (
+      this.active &&
+      this.propsReady &&
+      this.stats.ready ===
+        (this.visible.maxCx - this.visible.minCx + 1) *
+          (this.visible.maxCy - this.visible.minCy + 1)
+    );
+  }
+  get actorIds(): string[] {
+    return this.actors.flatMap((e) => (e.proceduralId ? [e.proceduralId] : []));
+  }
   accept(
     chunks: { cx: number; cy: number; data: ChunkData }[],
     placements: StructurePlacement[] = [],
+    actors: ActorPlacement[] = [],
   ): void {
     if (!this.active || this.disposed) return;
     for (const item of chunks) {
@@ -129,6 +146,14 @@ export class TilePreview {
       prop.id = index + 1;
       if (placement.featureId) prop.proceduralId = placement.featureId;
       return prop;
+    });
+    this.actors = actors.map((p, index) => {
+      const factory = ENTITY_FACTORIES[p.type];
+      if (!factory) throw new Error(`Unsupported actor ${p.type}`);
+      const e = factory(p.wx, p.wy);
+      e.id = 100000 + index;
+      e.proceduralId = p.featureId;
+      return e;
     });
     this.loadProps();
     const start = performance.now();
@@ -217,7 +242,7 @@ export class TilePreview {
         }
       ctx.clip();
       const items = collectScene(
-        [],
+        this.actors,
         this.props,
         world,
         this.camera,
@@ -261,7 +286,10 @@ export class TilePreview {
     if (!this.assets) return;
     const serial = ++this.propsSerial;
     const assets = this.assets;
-    const keys = new Set(this.props.map((prop) => prop.sprite.sheetKey));
+    const keys = new Set([
+      ...this.props.map((prop) => prop.sprite.sheetKey),
+      ...this.actors.flatMap((e) => (e.sprite ? [e.sprite.sheetKey] : [])),
+    ]);
     this.propsReady = [...keys].every((key) => assets.sheets.has(key));
     if (this.propsReady) return;
     void loadSceneAssets(assets, keys)
@@ -287,6 +315,7 @@ export class TilePreview {
         total +
         chunk.subgrid.byteLength +
         chunk.terrain.byteLength +
+        chunk.detail.byteLength +
         chunk.collision.byteLength +
         chunk.roadGrid.byteLength +
         chunk.heightGrid.byteLength +
@@ -299,6 +328,7 @@ export class TilePreview {
     for (const chunk of this.chunks.values()) chunk.renderCache = null;
     this.chunks.clear();
     this.props = [];
+    this.actors = [];
     this.propsReady = false;
     this.propsSerial++;
     this.wanted.clear();

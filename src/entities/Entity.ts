@@ -90,6 +90,15 @@ export interface WanderAIComponent {
 }
 
 export interface Entity {
+  /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */
+  proceduralId?: string;
+  routeAI?: {
+    points: readonly PositionComponent[];
+    index: number;
+    pause: number;
+    blocked: number;
+    last: PositionComponent;
+  };
   id: number;
   type: string;
   position: PositionComponent;

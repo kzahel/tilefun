@@ -59,6 +59,18 @@ describe("gameplay interior adapters", () => {
           ),
         ),
       ).toBe(true);
+      // South doorway floor is two native tiles deep; its end blocks departure into the void.
+      const boundary = props.find((p) => p.type === INTERIOR_WALL_TYPE);
+      if (!boundary) throw new Error("No room boundary");
+      expect(
+        aabbOverlapsPropWalls(
+          getEntityAABB({ wx: 80, wy: 164 }, collider),
+          boundary.position,
+          boundary,
+          0,
+          12,
+        ),
+      ).toBe(true);
       const id = interiorRealmId(identity.parentWorldId, identity.featureId);
       expect(parseInteriorId(id)).toEqual({
         parentWorldId: identity.parentWorldId,

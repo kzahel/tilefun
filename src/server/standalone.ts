@@ -118,8 +118,12 @@ httpServer.listen(PORT, () => {
 });
 
 // Graceful shutdown
-function shutdown() {
+let shuttingDown = false;
+async function shutdown() {
+  if (shuttingDown) return;
+  shuttingDown = true;
   serverLog("Shutting down...");
+  await server.flushAsync();
   server.destroy();
   httpServer.close();
   process.exit(0);

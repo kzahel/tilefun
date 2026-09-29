@@ -10,9 +10,9 @@ import {
   type GenerationRequest,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
-import { DistrictSource } from "../generation/regional/DistrictStrategy.js";
+import { createGenerator } from "../generation/Generator.js";
+import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
-import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import {
   exteriorEntrance,
   INTERIOR_ENTRY,
@@ -511,7 +511,10 @@ export class GameServer {
       throw new Error("This generator has no enterable building plans.");
     const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
     if (!match) throw new Error("Invalid building owner.");
-    const source = new DistrictSource(regionalWorld(generation.seed));
+    const terrain = createGenerator(generation).terrain;
+    if (!(terrain instanceof DistrictStrategy))
+      throw new Error("World has no enterable districts.");
+    const source = terrain.districts;
     const lot = source
       .owner(Number(match[1]), Number(match[2]))
       ?.blocks.flatMap((b) => b.lots)
@@ -649,6 +652,8 @@ export class GameServer {
 
     targetRealm.savePlayerData(session);
     await targetRealm.flushAsync();
+    // Ticks during the save may have emitted baselines the join response clears.
+    targetRealm.clearClientRevisions(clientId);
     return {
       cameraX: session.player.position.wx,
       cameraY: session.player.position.wy,
@@ -796,6 +801,10 @@ export class GameServer {
       if (dormantIds.has(cid)) continue;
       this.transport.send(cid, { type: "chat", sender, text });
     }
+  }
+
+  async flushAsync(): Promise<void> {
+    for (const realm of this.realms.values()) await realm.flushAsync();
   }
 
   flush(): void {

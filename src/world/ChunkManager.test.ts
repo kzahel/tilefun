@@ -79,3 +79,21 @@ describe("ChunkManager", () => {
     expect(mgr.get(99, 99)).toBeUndefined();
   });
 });
+
+it("streams independent distant player neighborhoods without filling the intervening rectangle", () => {
+  const mgr = new ChunkManager();
+  mgr.setGenerator(new FlatStrategy());
+  const near = { minCx: 0, minCy: 0, maxCx: 1, maxCy: 1 },
+    far = { minCx: 10000, minCy: -10000, maxCx: 10001, maxCy: -9999 };
+  mgr.updateLoadedChunks([near, far]);
+  expect(mgr.get(0, 0)).toBeDefined();
+  expect(mgr.get(10000, -10000)).toBeDefined();
+  expect(mgr.get(5000, -5000)).toBeUndefined();
+  expect(mgr.loadedCount).toBeLessThan(200);
+  const count = mgr.loadedCount;
+  mgr.updateLoadedChunks([near, near, far]);
+  expect(mgr.loadedCount).toBe(count);
+  mgr.updateLoadedChunks(near);
+  expect(mgr.get(10000, -10000)).toBeUndefined();
+  expect(mgr.get(0, 0)).toBeDefined();
+});

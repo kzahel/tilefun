@@ -25,6 +25,7 @@ export interface DistrictBlock {
   lots: DistrictLot[];
 }
 export interface DistrictPlan {
+  style?: "market" | "garden" | "residential";
   id: string;
   settlementId: string;
   bounds: Bounds;
@@ -177,4 +178,27 @@ export function districtForSettlement(settlement: Settlement, seed: number): Dis
     blocks,
     park,
   };
+}
+
+/** A new revision composes the frozen block planner instead of rewriting its topology. */
+export function settledDistrict(settlement: Settlement, seed: number): DistrictPlan {
+  const plan = districtForSettlement(settlement, seed);
+  const n = Math.floor(edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 997) * 3);
+  const style = (["market", "garden", "residential"] as const)[n] ?? "residential";
+  if (settlement.kind === "city")
+    for (const block of plan.blocks) {
+      if (style === "garden" && block.kind === "homes")
+        block.lots = block.lots.filter((_, i) => i % 2 === 0);
+      if (style === "market" && block.kind === "homes")
+        for (const [i, lot] of block.lots.entries())
+          if (i % 3 === 0) {
+            lot.buildingType = "prop-regional-bakery";
+            const recipe = buildingRecipe(lot.buildingType);
+            lot.entrance = {
+              x: lot.anchor.x + (recipe?.entrance.dx ?? 0) / TILE_SIZE,
+              y: lot.anchor.y + (recipe?.entrance.dy ?? 8) / TILE_SIZE,
+            };
+          }
+    }
+  return { ...plan, style };
 }

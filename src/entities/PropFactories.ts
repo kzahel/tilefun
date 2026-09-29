@@ -95,6 +95,39 @@ function makeStairSteps(config: {
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
+  // Audited objects.png recipes for v3; leave legacy labels/rectangles frozen.
+  "prop-regional-seedling": {
+    sheetKey: "objects",
+    col: 5,
+    row: 1,
+    width: 16,
+    height: 16,
+    collider: null,
+  },
+  "prop-regional-berries": {
+    sheetKey: "objects",
+    col: 4,
+    row: 3,
+    width: 16,
+    height: 16,
+    collider: null,
+  },
+  "prop-regional-mushroom": {
+    sheetKey: "objects",
+    col: 6,
+    row: 0,
+    width: 16,
+    height: 16,
+    collider: null,
+  },
+  "prop-regional-sunflower": {
+    sheetKey: "objects",
+    col: 8,
+    row: 2,
+    width: 16,
+    height: 32,
+    collider: null,
+  },
   "prop-flower-red": { sheetKey: "objects", col: 1, row: 2, width: 16, height: 16, collider: null },
   "prop-flower-yellow": {
     sheetKey: "objects",

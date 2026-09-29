@@ -129,47 +129,43 @@ export class ChunkManager {
    * Load chunks within RENDER_DISTANCE of the visible range,
    * unload chunks beyond UNLOAD_DISTANCE.
    */
-  updateLoadedChunks(visible: ChunkRange, maxChunkLoads = Number.POSITIVE_INFINITY): void {
-    // Load chunks within render distance
-    const loadMinCx = visible.minCx - RENDER_DISTANCE;
-    const loadMaxCx = visible.maxCx + RENDER_DISTANCE;
-    const loadMinCy = visible.minCy - RENDER_DISTANCE;
-    const loadMaxCy = visible.maxCy + RENDER_DISTANCE;
-    const centerCx = (visible.minCx + visible.maxCx) * 0.5;
-    const centerCy = (visible.minCy + visible.maxCy) * 0.5;
-    const missing: { cx: number; cy: number; dist: number }[] = [];
-
-    for (let cy = loadMinCy; cy <= loadMaxCy; cy++) {
-      for (let cx = loadMinCx; cx <= loadMaxCx; cx++) {
-        if (this.get(cx, cy)) continue;
-        const dist = Math.abs(cx - centerCx) + Math.abs(cy - centerCy);
-        missing.push({ cx, cy, dist });
-      }
+  updateLoadedChunks(
+    visible: ChunkRange | readonly ChunkRange[],
+    maxChunkLoads = Number.POSITIVE_INFINITY,
+  ): void {
+    const ranges = "minCx" in visible ? [visible] : visible;
+    const missing = new Map<string, { cx: number; cy: number; dist: number }>();
+    for (const range of ranges) {
+      const centerCx = (range.minCx + range.maxCx) * 0.5,
+        centerCy = (range.minCy + range.maxCy) * 0.5;
+      for (let cy = range.minCy - RENDER_DISTANCE; cy <= range.maxCy + RENDER_DISTANCE; cy++)
+        for (let cx = range.minCx - RENDER_DISTANCE; cx <= range.maxCx + RENDER_DISTANCE; cx++) {
+          if (this.get(cx, cy)) continue;
+          const key = `${cx},${cy}`,
+            dist = Math.abs(cx - centerCx) + Math.abs(cy - centerCy),
+            prior = missing.get(key);
+          if (!prior || dist < prior.dist) missing.set(key, { cx, cy, dist });
+        }
     }
-
-    if (missing.length > 0) {
-      missing.sort((a, b) => a.dist - b.dist);
-      const loadLimit = Math.max(0, Math.floor(maxChunkLoads));
-      const count = Math.min(loadLimit, missing.length);
-      for (let i = 0; i < count; i++) {
-        const c = missing[i];
-        if (c) this.getOrCreate(c.cx, c.cy);
-      }
+    const ordered = [...missing.values()].sort((a, b) => a.dist - b.dist);
+    const count = Math.min(Math.max(0, Math.floor(maxChunkLoads)), ordered.length);
+    for (let i = 0; i < count; i++) {
+      const c = ordered[i];
+      if (c) this.getOrCreate(c.cx, c.cy);
     }
-
-    // Unload chunks beyond unload distance
-    const unloadMinCx = visible.minCx - UNLOAD_DISTANCE;
-    const unloadMaxCx = visible.maxCx + UNLOAD_DISTANCE;
-    const unloadMinCy = visible.minCy - UNLOAD_DISTANCE;
-    const unloadMaxCy = visible.maxCy + UNLOAD_DISTANCE;
-
-    for (const [key] of this.chunks) {
-      const commaIdx = key.indexOf(",");
-      const cx = Number(key.slice(0, commaIdx));
-      const cy = Number(key.slice(commaIdx + 1));
-      if (cx < unloadMinCx || cx > unloadMaxCx || cy < unloadMinCy || cy > unloadMaxCy) {
+    // Keep each player's neighborhood independently; never fill the rectangle between distant players.
+    for (const key of this.chunks.keys()) {
+      const [cx = 0, cy = 0] = key.split(",").map(Number);
+      if (
+        !ranges.some(
+          (r) =>
+            cx >= r.minCx - UNLOAD_DISTANCE &&
+            cx <= r.maxCx + UNLOAD_DISTANCE &&
+            cy >= r.minCy - UNLOAD_DISTANCE &&
+            cy <= r.maxCy + UNLOAD_DISTANCE,
+        )
+      )
         this.chunks.delete(key);
-      }
     }
   }
 

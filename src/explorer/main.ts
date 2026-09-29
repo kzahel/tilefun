@@ -182,7 +182,7 @@ const client = new QueryClient(worker, (response) => {
   if (response.type !== "result") return;
   result = response.result;
   terrainMs = response.terrainMs;
-  tilePreview.accept(response.chunks, response.placements);
+  tilePreview.accept(response.chunks, response.placements, response.actors);
   computeMs = response.computeMs;
   elapsedMs = response.elapsedMs;
   transferMs = Math.max(0, performance.timeOrigin + performance.now() - response.finishedAt);
@@ -249,7 +249,11 @@ function updateInspection(): void {
       ? "A reserved orthogonal corridor. Unsupported water crossings are rejected."
       : selected.kind === "lot"
         ? `South-facing ${selected.buildingType} with a planned entrance at ${selected.entrance.x}, ${selected.entrance.y}.`
-        : `${selected.kind === "city" ? "City" : "Village"} reservation with a dry buildable core. Blocks and entrances will refine this same place.`;
+        : selected.kind === "farm"
+          ? "An admitted dry field with a connected village lane, crops, and farm animals."
+          : selected.kind === "woodland"
+            ? "A dry woodland loop with trees, picnic space, and wildlife."
+            : `${selected.kind === "city" ? "City" : "Village"} reservation with a dry buildable core. Blocks and entrances will refine this same place.`;
   inspector.append(title, description);
   const b = selected.bounds;
   const entries =
@@ -292,7 +296,9 @@ function requestDraw(): void {
     renderer.draw(canvas, width, height, view, overlays, result, selected?.id ?? null);
     const pendingTiles = tilePreview.draw(canvas, width, height, view, preview.mode === "coverage");
     app.dataset.propIds = JSON.stringify(tilePreview.featureIds);
+    app.dataset.actorIds = JSON.stringify(tilePreview.actorIds);
     app.dataset.tileReady = String(tilePreview.stats.ready);
+    app.dataset.tileComplete = String(tilePreview.complete);
     app.dataset.tileResident = String(tilePreview.stats.resident);
     app.dataset.tileBytes = String(tilePreview.stats.bytes);
     app.dataset.generator = descriptorChoice(generation);
@@ -314,6 +320,7 @@ function requestDraw(): void {
     const length = (desired / magnitude >= 5 ? 5 : desired / magnitude >= 2 ? 2 : 1) * magnitude;
     element("#scale-label").textContent = `${length.toLocaleString()} tiles`;
     element("#scale-line").style.width = `${length * view.zoom}px`;
+    updateDiagnostics();
   });
 }
 
@@ -386,6 +393,7 @@ function updateDiagnostics(): void {
     `Plan ${computeMs.toFixed(1)} ms CPU · ${elapsedMs.toFixed(1)} ms elapsed`,
     `Transfer ${transferMs.toFixed(1)} ms · draw ${drawMs.toFixed(1)} ms (max ${maxDrawMs.toFixed(1)})`,
     `Samples ${stats?.samples.toLocaleString() ?? "—"} · owners ${stats?.owners ?? "—"} · features ${stats?.features ?? "—"}`,
+    `Actors ${tilePreview.actorIds.length} · static preview poses (game authority runs routes)`,
     `Detail ${tilePreview.stats.ready} ready / ${tilePreview.stats.resident} resident (cap 81) · buffers ${(bytes / 1024).toFixed(0)} KiB`,
     `Terrain ${terrainMs.toFixed(1)} ms · autotile ${tilePreview.stats.autotileMs.toFixed(1)} ms · detail memory ${(tilePreview.stats.bytes / 1024 / 1024).toFixed(1)} MiB`,
     `Terrain assets ${tilePreview.stats.assetsMs.toFixed(0)} ms${tilePreview.stats.error ? ` · ${tilePreview.stats.error}` : ""}`,
@@ -632,6 +640,8 @@ const cases: { id: string; title: string; view: ViewState }[] = [
   { id: "broad-landscape", title: "The wider landscape", view: { x: 300, y: 519, zoom: 0.035 } },
   { id: "district-streets", title: "Blocks & entrances", view: { x: 300, y: 519, zoom: 3 } },
   { id: "district-art", title: "Apartments & park", view: { x: 275, y: 544, zoom: 16 } },
+  { id: "farm-lane-v3", title: "Farm & village lane · v3", view: { x: 677, y: 1320, zoom: 16 } },
+  { id: "woodland-loop-v3", title: "Woodland trail · v3", view: { x: -985, y: -985, zoom: 12 } },
 ];
 interface ReviewRecord {
   generation?: typeof generation;

@@ -398,6 +398,7 @@ h2 {
   margin-top: 3px;
 }
 .diagnostics {
+  pointer-events: none;
   position: absolute;
   bottom: 66px;
   left: 27px;
@@ -410,6 +411,7 @@ h2 {
   min-width: 237px;
 }
 .diagnostics summary {
+  pointer-events: auto;
   cursor: pointer;
   color: #bacbb8;
 }

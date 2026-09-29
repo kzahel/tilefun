@@ -27,6 +27,7 @@ import { onWanderBlocked } from "./wanderAI.js";
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
+  onRemove?: (entity: Entity) => void;
   readonly entities: Entity[] = [];
   readonly spatialHash = new SpatialHash();
   private nextId = 1;
@@ -373,11 +374,14 @@ export class EntityManager {
   }
 
   /** Remove an entity by id. Returns true if found and removed. */
-  remove(id: number): boolean {
+  remove(id: number, persist = true): boolean {
     const idx = this.entities.findIndex((e) => e.id === id);
     if (idx < 0) return false;
     const entity = this.entities[idx];
-    if (entity) this.spatialHash.remove(entity);
+    if (entity) {
+      this.spatialHash.remove(entity);
+      if (persist) this.onRemove?.(entity);
+    }
     this.entities.splice(idx, 1);
     return true;
   }

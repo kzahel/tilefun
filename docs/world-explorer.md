@@ -1,9 +1,10 @@
 # World explorer checkpoint
 
-The first regional slice of [Tactical 004](tactical/004-world-explorer-and-regional-generation-plan.md)
+The completed regional checkpoint from [Tactical 004](tactical/004-world-explorer-and-regional-generation-plan.md)
 is available at `/tilefun/world-explorer.html`. The game menu also links to it.
-Tactical 005 A–C adds shared versioned generators, configurable real-tile
-preview, and game type/seed/settings selection with pinned persistence. No saved
+Tactical 005 A–E adds shared versioned generators, configurable real-tile
+preview, game type/seed/settings selection, districts, persistent interiors, and
+inhabited countryside. No saved
 world is changed by opening the explorer.
 
 ## Run and review
@@ -16,8 +17,8 @@ Open `http://localhost:5173/tilefun/world-explorer.html`. For a standalone previ
 without the development game server, use `npm run build && npm run preview` and
 open the same path at port 4173.
 
-Start with seed **2026**, centered on Ferngrove. The three review buttons show
-the city/countryside view, a planning-cell boundary, and the wider landscape.
+Start with seed **2026**, centered on Ferngrove. The seven review buttons cover
+regional context, boundaries, district streets/art, farms, and woodland trails.
 Drag or use arrow keys to pan. Scroll, pinch, or use the zoom buttons to zoom.
 Tap a settlement or connection to inspect its stable ID, ownership, and bounds.
 Toggle layers to separate geography, vegetation/rural land, settlement
@@ -32,14 +33,15 @@ version, profile, seed, and case. Generated maps are never stored.
 
 The useful review question at this checkpoint is whether the region makes sense:
 settlement scale and spacing, countryside/woods/water transitions, connection
-placement, and continuity while panning across a cell boundary. Real terrain/major roads are now available through tile zoom; apartment art and
-local street layouts are subsequent checkpoints.
+placement, and continuity while panning across a cell boundary. Real terrain, roads, buildings, props, and static inhabitants appear in tile mode.
+Play here connects the same location to authoritative gameplay.
 
 ## Shared contracts
 
-- `RegionalWorld` is immutable seed + `regional-v1` + `temperate-v1`. The profile
-  currently fixes all generation settings. Future settings that affect output
-  must become part of that descriptor. Unsupported links fail explicitly.
+- `GenerationDescriptor` is the authoritative immutable type/version/seed/preset
+  identity. Regional v1/v2/v3 share a geographic spine represented by the internal
+  `RegionalWorld` helper. Geography, placements, links, and saves resolve through
+  the complete descriptor. Unsupported revisions fail explicitly.
 - Planner positions are **tiles**, distinct from gameplay's world pixels.
   Cell division floors negative coordinates. The prototype supports query bounds
   within ±16,777,216 tiles; navigation is conservatively bounded inside that.
@@ -113,26 +115,16 @@ checks cover feature inspection, no game assets or sockets, broad-query limits,
 rapid navigation/seed changes, touch drag/pinch, export/persistence, and recovery
 from an unsupported version. Visual captures cover desktop, phone, and overview.
 
-## Next slice gates
+## Original slice gates (completed)
 
-The agreed next sequence is recorded in
-[Tactical 005: generator profiles and shared tile preview](tactical/005-generator-profiles-and-shared-tile-preview-plan.md).
-First freeze Classic and establish shared generator selection/realization; then
-add configurable zoom into real tiles; then support generator type/seed/settings
-in actual game creation and persistence. The current checkpoint implements A–D. Explorer and gameplay will consume one implementation
-per selected generator, with the existing terrain/scene pipeline reused.
-
-After those slices, Tactical 004's slice 2 refines Ferngrove into a connected
-district with streets, varied blocks, lots, a park, and apartment/shop footprints.
-Inspect the minimum apartment and shop recipes before accepting lot widths and
-facings.
-
-Tactical 005's A–C slices establish descriptor compatibility, generator-owned
-roads/structures, and both world registries/protocol paths. Before the later
-building/arrival slice, define stable procedural object provenance and
-deletion/move overlays so regeneration preserves saved changes. **Play here**
-requires authoritative safe-spawn resolution; inspecting a saved world carries
-its explicit world ID and obtains saved overlays from that authority. Those paths are now enabled; see the district checkpoint below.
+The sequence recorded in
+[Tactical 005](tactical/005-generator-profiles-and-shared-tile-preview-plan.md)
+is complete through A–E: frozen Classic behavior; shared generator selection,
+realization, and tile preview; game settings/persistence; planned districts and
+source art; safe Play here and saved inspection; then persistent interiors,
+countryside, and inhabitants. Stable provenance and deletion/move overlays keep
+saved changes separate from generated residency. Later sections record each
+checkpoint and the retained revision contracts.
 
 ## Real-tile preview checkpoint (Tactical 005 B)
 
@@ -156,7 +148,7 @@ Terrain assets load lazily using the same manifest, variants, autotiling, and
 `TileRenderer` as gameplay. No gameplay realm or simulation is created. Regional
 uses its own geography/material sampler and admitted major corridors; Classic's
 captured terrain and placement fixtures remain unchanged. Regional district
-streets, vegetation, and buildings are the later D–E slices.
+streets, vegetation, and buildings were added by D–E, described below.
 
 New share links/reports include the immutable generation descriptor and preview
 configuration. Existing regional links still resolve `regional-v1` /
@@ -193,7 +185,7 @@ four types through IndexedDB and verify the explorer handoff.
 
 ## District and saved-world checkpoint (Tactical 005 D)
 
-New Regional worlds default to **regional-v2**: connected streets and alleys,
+Regional **regional-v2** provides: connected streets and alleys,
 sidewalk crossings, apartment/shop lots, entrance paths, and playground parks.
 Real building facades assemble audited rectangles from the existing ME atlas.
 Map lots/entrances and exact props come from one district plan; the worker and
@@ -221,12 +213,12 @@ Generated Regional props are disposable residency. Saves store only tombstones,
 moved prop records, and manually placed objects, so revisiting an unloaded
 chunk does not respawn deleted buildings or duplicate a neighbor's placement.
 Earlier Classic worlds retain their legacy structure restoration behavior.
-The next milestone adds persistent interior realms and broadens countryside
-realization; physical phone measurements remain outstanding.
+The completed interior/countryside milestone is described below; physical phone
+measurements remain outstanding.
 
 ### Building interiors
 
-In Regional v2, approach the marked south door of an apartment, shop, or village
+In Regional v2 or v3, approach the marked south door of an apartment, shop, or village
 home. **Enter · E** opens a furnished room; **Return to street · E** uses the
 same authoritative safe-arrival path to return to that door. The touch button
 works without a keyboard. Rooms reuse the existing interior wall/furniture art,
@@ -238,3 +230,64 @@ from disposable generated furniture. Child rooms do not clutter the world list,
 and deleting a parent removes its stored rooms. Reloading the game resumes the
 parent world; entering its door again restores the room. Initial rooms have one
 floor. Shops, apartments, and country homes use separate audited furniture recipes.
+
+
+### Settled world checkpoint (Regional v3)
+
+New Regional worlds default to **Settled world (v3)**. Terrain-only v1 and district
+v2 remain selectable; existing descriptors, saves, and full links stay pinned.
+The frozen v2 terrain/placement fixture protects the older district revision.
+
+For seed **2026**, use these explorer locations (tile coordinates):
+
+| Review | Center | Zoom |
+| --- | --- | --- |
+| City blocks, apartments, and shops | 300, 519 | 3 map / 16 tiles |
+| Brookvale village and farm lane | 677, 1320 | 16 tiles |
+| Woodland loop, picnic space, and crow | -985, -985 | 12 tiles |
+
+The compact review round includes these structural cases. **Play here** applies
+the same descriptor/location in the game. Farms use seedlings, berries,
+sunflowers, a shed, a farmer, a cow, and a chicken. Woodland trails admit only dry
+loops and clear road/building reservations. City owners vary between market,
+garden, and residential styles using the shared district plan.
+
+Actor placement and short destinations come from the selected generator.
+The explorer renders static poses; the authority moves actors using ordinary
+entity physics and collision. Obstruction by players/edits causes a pause and
+route retry/reversal, without teleporting. Generated actors reload at their
+canonical route starts. Deleting an actor creates a durable tombstone, which
+saved inspection honors. Daily schedules, traffic, and economies are deferred.
+Distant multiplayer clients keep independent streaming neighborhoods; the space
+between them is not generated merely because both players are present.
+
+Audited new source recipes use `objects.png`: seedling `(80,16,16,16)`, berries
+`(64,48,16,16)`, mushroom `(96,0,16,16)`, and sunflower `(128,32,16,32)`.
+Existing oak/picnic/shed and person/cow/chicken/crow manifests supply the other
+native art. Legacy object labels/rectangles stay frozen for Classic compatibility.
+
+`npm run generation:bench` measures the production factory (terrain, placements,
+and actors) without images or rendering. A September 30 workspace run for v3
+reported warm medians **1.28–1.64 ms/chunk**, p95 **1.47–1.76 ms/chunk**,
+and first fixture iterations **2.74–4.16 ms**. Each measured chunk used
+9,025 data bytes in its subgrid/terrain/detail/road/height/collision/blend arrays.
+[The raw benchmark record](benchmarks/005-generation-2026-09-30.json) includes
+all retained Regional revisions and fixture counts. These timings are desktop evidence.
+The ready farm browser capture measured 49 resident chunks, 25 painted chunks,
+6.6 MiB of detail buffers/caches, 113 ms terrain work, 3.8 ms autotiling, 197 ms
+cold terrain assets, 0.8 ms draw, and 519 ms first view. The woodland capture
+measured 42 resident / 20 painted and 5.3 MiB. Source images are shared/lazy and
+excluded from those chunk-cache figures. The explorer publishes stages and a
+complete-footprint flag; captures wait for completed caches and sprite assets.
+
+Read-only server inspection uses `/api/world-list` and `/api/world-preview`, with
+GET/OPTIONS CORS support for an explorer hosted separately from its authority.
+A two-client browser test checks live inspection, shared apartment entry,
+cross-client deletion, and furniture restoration after a graceful filesystem
+server restart. Local IndexedDB tests cover furniture movement/deletion and
+reload both outside and inside a room. Browser phone/touch/throttling and sustained
+navigation checks pass; **physical phone profiling remains unmeasured**.
+
+The next review should focus on density, village/farm composition, forest variety,
+and room variety. More floors and richer inhabitant behavior can then be scoped
+from these proven contracts.

@@ -3,11 +3,20 @@ import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescri
 import { OnionStrategy } from "./OnionStrategy.js";
 import { DistrictStrategy } from "./regional/DistrictStrategy.js";
 import { RegionalStrategy } from "./regional/RegionalStrategy.js";
+import { SettledStrategy } from "./regional/SettledStrategy.js";
 import { regionalWorld } from "./regional/WorldDescriptor.js";
 import { generateStructuresForChunk, type StructurePlacement } from "./StructureGenerator.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
 
+export interface ActorPlacement {
+  readonly featureId: string;
+  readonly type: string;
+  readonly wx: number;
+  readonly wy: number;
+  readonly route: readonly { wx: number; wy: number }[];
+}
 export interface WorldGenerator {
+  actors?(cx: number, cy: number): ActorPlacement[];
   readonly descriptor: GenerationDescriptor;
   readonly terrain: TerrainStrategy;
   placements(
@@ -40,10 +49,15 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
       const terrain =
         descriptor.version === "regional-v1"
           ? new RegionalStrategy(regionalWorld(descriptor.seed))
-          : new DistrictStrategy(regionalWorld(descriptor.seed));
+          : descriptor.version === "regional-v2"
+            ? new DistrictStrategy(regionalWorld(descriptor.seed))
+            : new SettledStrategy(regionalWorld(descriptor.seed));
       return {
         descriptor,
         terrain,
+        ...(terrain instanceof SettledStrategy
+          ? { actors: (cx: number, cy: number) => terrain.actors(cx, cy) }
+          : {}),
         placements: (cx, cy) => ({
           placements: terrain instanceof DistrictStrategy ? terrain.placements(cx, cy) : [],
           newIntersectionKeys: [],

@@ -3,7 +3,7 @@ import { aabbOverlapsPropWalls, aabbOverlapsSolid, getEntityAABB } from "../enti
 import { createPlayer } from "../entities/Player.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
-import { INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
+import { INTERIOR_DOORWAY, INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Realm } from "./Realm.js";
 
@@ -43,7 +43,12 @@ export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: n
         aabb.right <= floor.x + floor.width &&
         aabb.top >= floor.y &&
         aabb.bottom <= floor.y + floor.height;
-      const doorway = aabb.left >= 64 && aabb.right <= 96 && aabb.top >= 128 && aabb.bottom <= 176;
+      const door = INTERIOR_DOORWAY;
+      const doorway =
+        aabb.left >= door.x &&
+        aabb.right <= door.x + door.width &&
+        aabb.top >= door.y &&
+        aabb.bottom <= door.y + door.height;
       if (!inside && !doorway) return null;
     }
     if (

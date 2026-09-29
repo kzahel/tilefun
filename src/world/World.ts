@@ -99,7 +99,10 @@ export class World {
   }
 
   /** Update chunk loading/unloading based on visible range. */
-  updateLoadedChunks(visible: ChunkRange, maxChunkLoads = Number.POSITIVE_INFINITY): void {
+  updateLoadedChunks(
+    visible: ChunkRange | readonly ChunkRange[],
+    maxChunkLoads = Number.POSITIVE_INFINITY,
+  ): void {
     this.chunks.updateLoadedChunks(visible, maxChunkLoads);
   }
 

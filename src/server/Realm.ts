@@ -28,6 +28,7 @@ import { PropManager } from "../entities/PropManager.js";
 import { TentSpawner } from "../entities/TentSpawner.js";
 import { descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
+import { ProceduralActors } from "../generation/ProceduralActors.js";
 import { ProceduralProps } from "../generation/ProceduralProps.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
@@ -176,6 +177,7 @@ export class Realm {
   }
   /** Tracks processed road intersections/segments for structure generation. */
   private processedStructureKeys = new Set<string>();
+  private proceduralActors!: ProceduralActors;
   private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */
@@ -220,6 +222,11 @@ export class Realm {
     this.propManager = new PropManager();
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
+    );
+    this.proceduralActors = new ProceduralActors(
+      this.entityManager,
+      this.proceduralProps.deleted,
+      () => this.saveManager?.markMetaDirty(),
     );
     this.blendGraph = new BlendGraph();
     this.adjacency = new TerrainAdjacency(this.blendGraph);
@@ -323,6 +330,14 @@ export class Realm {
       this.dismountPlayer(session);
     }
 
+    // Preserve a fallback arrival even when the last player leaves this realm.
+    this.lastLoadedPlayerPos = { ...session.player.position };
+    this.lastLoadedCamera = {
+      cameraX: session.cameraX,
+      cameraY: session.cameraY,
+      cameraZoom: session.cameraZoom,
+    };
+    this.lastLoadedGems = session.gameplaySession.gemsCollected;
     // Persist per-player data before removing
     this.savePlayerData(session);
 
@@ -664,7 +679,12 @@ export class Realm {
 
     // ── Phase 3: Spawners (per-session, near each player) ──
     for (const session of this.sessions.values()) {
-      if (dormantClientIds.has(session.clientId) || this.interior) continue;
+      if (
+        dormantClientIds.has(session.clientId) ||
+        this.interior ||
+        (this.generation.type === "regional" && this.generation.version === "regional-v3")
+      )
+        continue;
       if (!session.editorEnabled && !session.debugPaused) {
         this.gemSpawner.update(
           dt,
@@ -689,26 +709,10 @@ export class Realm {
 
     // Broadcast state to all clients (serialized mode)
     if (broadcasting) {
-      // Compute the union of all sessions' visible ranges so that one
-      // session's updateVisibleChunks can't unload another session's chunks.
-      let unionRange: ChunkRange | null = null;
-      for (const session of this.sessions.values()) {
-        if (dormantClientIds.has(session.clientId)) continue;
-        const r = session.visibleRange;
-        if (r) {
-          if (!unionRange) {
-            unionRange = { minCx: r.minCx, minCy: r.minCy, maxCx: r.maxCx, maxCy: r.maxCy };
-          } else {
-            unionRange.minCx = Math.min(unionRange.minCx, r.minCx);
-            unionRange.minCy = Math.min(unionRange.minCy, r.minCy);
-            unionRange.maxCx = Math.max(unionRange.maxCx, r.maxCx);
-            unionRange.maxCy = Math.max(unionRange.maxCy, r.maxCy);
-          }
-        }
-      }
-      if (unionRange) {
-        this.updateVisibleChunks(unionRange);
-      }
+      const ranges = [...this.sessions.values()]
+        .filter((s) => !dormantClientIds.has(s.clientId))
+        .map((s) => s.visibleRange);
+      if (ranges.length) this.updateVisibleChunks(ranges);
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId)) continue;
@@ -721,7 +725,7 @@ export class Realm {
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */
-  updateVisibleChunks(range: ChunkRange): void {
+  updateVisibleChunks(range: ChunkRange | readonly ChunkRange[]): void {
     if (this.interior) range = { minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 };
     const initialWarmLoad = this.world.chunks.loadedCount === 0;
     const maxLoads =
@@ -741,6 +745,10 @@ export class Realm {
       (this.generation.type === "regional" && this.generation.version !== "regional-v1")
     ) {
       this.proceduralProps.reconcile(
+        this.generator,
+        [...this.world.chunks.entries()].map(([key]) => key),
+      );
+      this.proceduralActors?.reconcile(
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
       );
@@ -778,9 +786,19 @@ export class Realm {
       cameraY: 0,
       cameraZoom: 1,
       nextEntityId: 1,
-      entities: this.propManager.props
-        .filter((p) => !p.proceduralId)
-        .map((p) => ({ type: p.type, wx: p.position.wx, wy: p.position.wy })),
+      entities: [
+        ...this.entityManager.entities
+          .filter((e) => e.type !== "player")
+          .map((e) => ({
+            type: e.type,
+            wx: e.position.wx,
+            wy: e.position.wy,
+            ...(e.proceduralId ? { proceduralId: e.proceduralId } : {}),
+          })),
+        ...this.propManager.props
+          .filter((p) => !p.proceduralId)
+          .map((p) => ({ type: p.type, wx: p.position.wx, wy: p.position.wy })),
+      ],
     };
   }
 
@@ -793,6 +811,13 @@ export class Realm {
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
       );
+  }
+
+  realizeProceduralActors(): void {
+    this.proceduralActors?.reconcile(
+      this.generator,
+      [...this.world.chunks.entries()].map(([key]) => key),
+    );
   }
 
   /** Mark all chunks for re-render (debug mode changes). */
@@ -1009,6 +1034,12 @@ export class Realm {
       this.saveManager?.markMetaDirty(),
     );
 
+    this.proceduralActors = new ProceduralActors(
+      this.entityManager,
+      this.proceduralProps.deleted,
+      () => this.saveManager?.markMetaDirty(),
+    );
+
     // Open persistence for this world
     const store = createStore(worldId);
     this.saveManager = new SaveManager(store);
@@ -1076,7 +1107,10 @@ export class Realm {
         cameraX = playerX;
         cameraY = playerY;
       }
-      if (!this.interior)
+      if (
+        !this.interior &&
+        !(this.generation.type === "regional" && this.generation.version === "regional-v3")
+      )
         spawnInitialChickens(
           5,
           this.world,
@@ -1576,10 +1610,10 @@ export class Realm {
 
   private buildSaveMeta(): SavedMeta {
     // Use first session's camera (single-player for now)
-    let cameraX = 0;
-    let cameraY = 0;
-    let cameraZoom = 1;
-    let gemsCollected = 0;
+    let cameraX = this.lastLoadedCamera.cameraX;
+    let cameraY = this.lastLoadedCamera.cameraY;
+    let cameraZoom = this.lastLoadedCamera.cameraZoom;
+    let gemsCollected = this.lastLoadedGems;
     let player: Entity | undefined;
 
     for (const session of this.sessions.values()) {
@@ -1595,11 +1629,13 @@ export class Realm {
       }
     }
 
-    const entities = this.entityManager.entities.map((e) => ({
-      type: e.type,
-      wx: e.position.wx,
-      wy: e.position.wy,
-    }));
+    const entities = this.entityManager.entities
+      .filter((e) => !e.proceduralId)
+      .map((e) => ({
+        type: e.type,
+        wx: e.position.wx,
+        wy: e.position.wy,
+      }));
     for (const p of this.propManager.props) {
       if (p.proceduralId) continue;
       entities.push({ type: p.type, wx: p.position.wx, wy: p.position.wy });
@@ -1608,8 +1644,8 @@ export class Realm {
     return {
       ...this.proceduralProps.save(),
       ...(this.interior ? { interior: this.interior } : {}),
-      playerX: player?.position.wx ?? 0,
-      playerY: player?.position.wy ?? 0,
+      playerX: player?.position.wx ?? this.lastLoadedPlayerPos.wx,
+      playerY: player?.position.wy ?? this.lastLoadedPlayerPos.wy,
       cameraX,
       cameraY,
       cameraZoom,
