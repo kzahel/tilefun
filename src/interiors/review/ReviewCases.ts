@@ -5,6 +5,7 @@ import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
 import { boundaryReviewCases } from "./BoundaryReviewCases.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
 import { interactionReviewCases } from "./InteractionReviewCases.js";
+import { nearbyReviewCases } from "./NearbyReviewCases.js";
 import { profileReviewCases } from "./ProfileReviewCases.js";
 
 export const REVIEW_STAGES = [
@@ -21,6 +22,7 @@ export const REVIEW_STAGES = [
   "Mixed heights & thickness",
   "Connected room layouts",
   "North & south attachments",
+  "Nearby doors & junctions",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -266,5 +268,6 @@ export function reviewCases(): ReviewCase[] {
     ...connectionReviewCases(),
     ...interactionReviewCases(),
     ...boundaryReviewCases(),
+    ...nearbyReviewCases(),
   ];
 }

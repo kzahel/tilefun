@@ -134,6 +134,60 @@ function approvedRecords(includeInteractions = false) {
     }));
 }
 
+test("nearby constraints provide eight phone-sized candidates and pause after two reports", async ({
+  page,
+}) => {
+  const records: Record<string, unknown>[] = approvedRecords(true);
+  const posts: Record<string, unknown>[] = [];
+  await page.route("**/api/interior-review", async (route) => {
+    if (route.request().method() === "POST") {
+      const row = route.request().postDataJSON();
+      posts.push(row);
+      records.push(row);
+      await route.fulfill({ json: { saved: true } });
+    } else await route.fulfill({ json: records });
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tilefun/interior-review.html?stage=13&unchecked=1");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator('#stage option[value="all"]')).toHaveText(
+    "Small → complex — 8 unchecked",
+  );
+  await expect(page.locator('#stage option[value="13"]')).toHaveText(
+    "Nearby doors & junctions — 8 unchecked",
+  );
+  await expect(page.locator("#unsupported-label")).toHaveText("0 cases excluded by the compiler");
+  const visited = new Set<string>();
+  for (let i = 0; i < 8; i++) {
+    const id = (await page.locator("#case-id").textContent()) ?? "";
+    expect(id).toMatch(/^nearby-/);
+    expect(visited.has(id)).toBe(false);
+    visited.add(id);
+    const size = await page.locator("#render").evaluate((el) => ({
+      width: (el as HTMLCanvasElement).width,
+      height: (el as HTMLCanvasElement).height,
+      overflow: document.documentElement.scrollWidth > innerWidth,
+    }));
+    expect(size.width).toBeLessThanOrEqual(256);
+    expect(size.height).toBeLessThanOrEqual(256);
+    expect(size.overflow).toBe(false);
+    await page.locator("#skip").click();
+  }
+  await page.reload();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#case-id")).toHaveText("nearby-corner-door");
+  await page.locator("#wrong").click();
+  await expect(page.locator("#case-id")).toHaveText("nearby-corner-door-mirror");
+  await page.waitForTimeout(180);
+  await page.locator("#wrong").click();
+  await expect(page.locator("#pause")).toBeVisible();
+  await expect(page.locator('#stage option[value="13"]')).toHaveText(
+    "Nearby doors & junctions — 6 unchecked · 2 wrong",
+  );
+  await expect.poll(() => posts.length).toBe(2);
+  expect(posts.every((r) => r.screenshot && r.sketch && r.note === "")).toBe(true);
+});
+
 test("eight boundary cases fit a phone and retain category counts", async ({ page }) => {
   const records = approvedRecords(true).filter((r) => !r.caseId.startsWith("boundary-"));
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));

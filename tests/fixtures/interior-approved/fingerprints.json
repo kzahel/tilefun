@@ -910,9 +910,19 @@
     "fp": "d217bc27f49011ba6a15d5153630cd15207ca295d0150722d721c03e8945b3c3"
   },
   {
+    "id": "connection-north-tall",
+    "name": "North wall attachment \u00b7 tall partition",
+    "fp": "01145409f6062b75cab7417f05b97a3ebaa3d5c806bd12d8aa9834af648408de"
+  },
+  {
     "id": "connection-south-low",
     "name": "South cutaway attachment \u00b7 low partition",
     "fp": "69d20a85dee97205cbbce9be4ea4e281e7bf1ca8aff158751891400eabb05ffd"
+  },
+  {
+    "id": "connection-south-tall",
+    "name": "South cutaway attachment \u00b7 tall partition",
+    "fp": "808f1840d35106486e2627c9ed50b9921b9ab632b124ce69eee6947bfd837b25"
   },
   {
     "id": "interaction-bend-reverse-mirror",
@@ -985,6 +995,16 @@
     "fp": "0c269bf3ee095a76484d10896b853e2685ef9670d53ad71d829d742ad797f1e2"
   },
   {
+    "id": "interaction-mixed-north",
+    "name": "Thick north join with a low approach",
+    "fp": "0c9a2ddfa3b70ca15b7c5f2a41bed341c55889f00c7a50eb8186003206833397"
+  },
+  {
+    "id": "interaction-mixed-south",
+    "name": "Thick south join with a low approach",
+    "fp": "e4d4a3ea8678696357f4b13e59e40911923d0de97a9e0170f8dcebeead0f5d03"
+  },
+  {
     "id": "interaction-two-rooms",
     "name": "Two rooms \u00b7 door between different wall profiles",
     "fp": "1b1da98f4bbf8aa4e3bb8b7cbbbf67681b7e1aa5aebaa528310d1f271e900abc"
@@ -1038,5 +1058,30 @@
     "id": "boundary-north-low-thick",
     "name": "North wall \u00b7 low, thick partition",
     "fp": "5c18a3a0d1e93fd159d01f6bdd575c1f1cf64d7bf554e76ea98ceaf76d1c2e93"
+  },
+  {
+    "id": "boundary-north-tall-thick",
+    "name": "North wall \u00b7 tall, thick partition",
+    "fp": "0123ff10682b7a4842dd7123a189bad43272ab4dc952b18663202e38e87997bc"
+  },
+  {
+    "id": "boundary-south-normal-thin",
+    "name": "South cutaway \u00b7 normal, thin partition",
+    "fp": "ba8cc4c6de568bfb4ce7bc184f6f26b9d7f0aa30c42ea71235e727e5d6d4564e"
+  },
+  {
+    "id": "boundary-south-normal-thick",
+    "name": "South cutaway \u00b7 normal, thick partition",
+    "fp": "55763fc5c210bc87fd2d51b9eb05583b0f55cd6044f8e71f1e2c4b94389b9ada"
+  },
+  {
+    "id": "boundary-south-low-thick",
+    "name": "South cutaway \u00b7 low, thick partition",
+    "fp": "bf86340d804d0a50e738ee4806785851bde4f83437bc837da43f4007d68fb02a"
+  },
+  {
+    "id": "boundary-south-tall-thick",
+    "name": "South cutaway \u00b7 tall, thick partition",
+    "fp": "2125ad1f60c6f13dff5d741d11075d7da6610c1efd1ff7e4c86e9b14c1eebe0e"
   }
 ]

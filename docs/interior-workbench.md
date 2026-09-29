@@ -191,3 +191,10 @@ Normal south walls join the cutaway continuously; tall ones retain the physical
 height difference above that normal wall. This reopens four earlier tall
 attachments. Refresh shows nine unchecked cases, while 208 approved images stay
 unchanged. The rejected reports remain the first priority after reload.
+
+All 217 cases have now passed and their latest approved images are protected.
+The next category, **Nearby doors & junctions** (`?stage=13&unchecked=1`), contains
+eight candidates: corner-adjacent doors, doors near thickness changes, closely
+spaced T junctions, and small wall loops. Mirrored cases exercise both handed
+connections. Each complete render fits within 256px; the floor remains wood.
+Only these eight new cases are unchecked, and two failures still pause the round.

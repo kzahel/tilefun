@@ -70,3 +70,9 @@ cutaway height. That shared correction reopens `connection-north-tall`,
 Their historical PNGs remain untouched, with hashes in `pending-reapproval.json`.
 The active baseline protects 208 unchanged renders; changed versions still need
 human review.
+
+All 217 cases passed after ca8115f, including the two reports and four reopened
+attachments. Their latest approved captures now complete the active baseline.
+The four pending hashes moved into `superseded-fingerprints.json` for historical
+verdict tests; there are no pending reapprovals. Stage 13's eight nearby door,
+junction, and loop candidates remain unapproved until human review.

@@ -867,3 +867,29 @@ unchanged, including the three newly accepted north cases. Review the two report
 first, then the three remaining boundary candidates and four reopened cases:
 nine unchecked in total. Geometry, seam pixels, overhang visibility, and pin
 persistence are covered by regression checks.
+
+### Nearby constraints: doors, paired junctions, and loops, 2026-09-29
+
+All 217 current renders now match good verdicts and are saved in the active
+regression baseline. No pending reapprovals remain. Stage 13 introduces exactly
+eight small counterexamples, keeping the established one-click/two-failure loop:
+
+- A north doorway directly beside the convex outer corner of a stepped room,
+  plus its mirror. These exercise native wall/corner/door assemblies together.
+- A doorway one cell from a thin-to-thick transition, plus its mirror. The thick
+  section beside the opening has only one cell to satisfy both connections.
+- Two T junctions separated by one intervening cell, with branches on the same
+  side or opposite sides. One stem is thick; the connected spine remains thin.
+- A small wall loop with a doorway beside a corner, plus its mirror. A thick
+  side meets thin walls around the same enclosed region.
+
+The sketches are 7×7 or 8×8 and use only wood floors. All room floors are reachable
+through the authored openings or around wall ends. Automated checks cover unique
+case identities, compilation, geometry bounds, floor connectivity, phone layout,
+eight unchecked cases, reload behavior, and the two-report pause. All 217 prior
+images remain byte-for-byte unchanged; no rendering rules or source sprites need
+to change to present this round.
+
+Review at `interior-review.html?stage=13&unchecked=1`. After this round settles,
+automate enumeration and selection of distinct small interactions so the next
+counterexamples expand coverage without flooding the human review queue.
