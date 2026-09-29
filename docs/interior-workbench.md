@@ -170,3 +170,10 @@ case and the two-room composition); their previous reference images remain
 archived pending review. Refresh shows nine unchecked cases: two repaired
 reports, those two reopened approvals, and five unreviewed layouts. The other
 200 approved images are unchanged.
+
+The three-room repair and short-return composition then passed. The next fix
+uses the shell's normal height at side connections: low east walls end within its
+face, and tall walls retain their rise above its rail. It reopens three older
+low/tall attachment approvals as well as the two new reports. Refresh shows
+ten unchecked cases, with 199 current approvals preserved exactly. Historical
+references remain archived until fresh review approves their changed versions.

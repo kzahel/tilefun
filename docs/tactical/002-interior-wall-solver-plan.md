@@ -796,3 +796,26 @@ are marked approved automatically. The other 200 approved renders are unchanged.
 Geometry and pixel checks cover both reported joins, including the thick cap's
 tile-row crossing. Next: recheck the reports and two reopened approvals, then the
 five remaining unreviewed compositions. The two-report pause stays in place.
+
+### Use shell elevation at side connections, 2026-09-29
+
+The normal-height three-room join and short-return composition passed. New
+reports flagged the low east end in the offset hall and the tall west end in the
+mirrored two-room layout. The adapters had treated each incoming wall's own
+height as the shell height: low east walls retained free ends, while tall caps
+met the normal rail without showing a height step.
+
+Side connections now use the shell's 24px height as their reference. East caps
+below that height terminate within the shell face, and covered end faces are
+removed. Above that height, west/east caps continue beyond the normal rail using
+the existing quarter-pixel horizontal projection per pixel of elevation. Only
+the 16px above a normal shell emits an exposed tall east end. Normal-height joins
+keep their accepted pixels, and low west joins retain their accepted placement.
+
+Three older low/tall sampler approvals must reopen because they used the same
+faulty connection; their old references remain archived rather than being
+replaced. With the two new approvals, 199 current images remain protected. Five
+historical approvals are pending recheck in total. Tests cover the relative cap
+positions for all three heights on both sides, exposed versus covered end faces,
+and the two reported pixels. Next: review the repaired reports first, then the
+reopened attachments and remaining compositions. Ten cases are unchecked.

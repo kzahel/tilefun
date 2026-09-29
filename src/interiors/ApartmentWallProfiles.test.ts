@@ -8,6 +8,37 @@ import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
   it.each([
+    ["west", "low", 14],
+    ["west", "normal", 6],
+    ["west", "tall", 2],
+    ["east", "low", 243],
+    ["east", "normal", 249],
+    ["east", "tall", 253],
+  ] as const)("preserves the %s %s height relative to the shell", (side, height, capX) => {
+    const c = interactionReviewCases().find(
+      (c) => c.id === `interaction-thick-shell${side === "east" ? "-mirror" : ""}`,
+    );
+    if (!c) throw new Error("Missing side connection");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), {
+      walls: c.profiles.walls.map((w) => ({ ...w, height, thickness: "thin" })),
+    });
+    const elevation = { low: 8, normal: 24, tall: 40 }[height];
+    expect(
+      map.surfaces.some(
+        (s) =>
+          s.plane === `top:${elevation}` &&
+          s.points.some(([x, y]) => x === capX && y === 120 - elevation),
+      ),
+    ).toBe(true);
+    if (side === "east") {
+      const end = map.surfaces.filter((s) => s.plane === "east:31");
+      expect(end).toHaveLength(height === "tall" ? 2 : 0);
+      // Only the 16px above the normal shell can expose a free end.
+      if (height === "tall")
+        expect(end.flatMap((s) => s.points).every(([x, y]) => x >= 249 && y <= 104)).toBe(true);
+    }
+  });
+  it.each([
     ["interaction-three-rooms", 96],
     ["interaction-offset-hall", 88],
   ] as const)("joins normal west caps to the shell rail in %s", (id, topY) => {
@@ -55,14 +86,14 @@ describe("experimental wall profiles", () => {
     if (!c) throw new Error("Missing east attachment fixture");
     const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
     const top = map.surfaces.filter((s) => s.plane === "top:40");
-    expect(top.some((s) => s.points.some(([x, y]) => x === 249 && y === 80))).toBe(true);
+    expect(top.some((s) => s.points.some(([x, y]) => x === 253 && y === 80))).toBe(true);
     expect(
       map.surfaces.some(
         (s) => s.plane === "south:16" && s.points.some(([x, y]) => x === 240 && y === 128),
       ),
     ).toBe(true);
-    // The connected end must not emit the sloping exposed face of a free end.
-    expect(map.surfaces.some((s) => s.plane === "east:31")).toBe(false);
+    // Only the part above the normal shell is an exposed end.
+    expect(map.surfaces.filter((s) => s.plane === "east:31")).toHaveLength(2);
   });
   it.each([
     "profile-door-false",
@@ -79,7 +110,7 @@ describe("experimental wall profiles", () => {
       map.surfaces.some(
         (s) =>
           s.plane === `top:${height}` &&
-          s.points.some(([x, y]) => x === 16 - height / 4 && y === 120 - height),
+          s.points.some(([x, y]) => x === (height === 40 ? 2 : 14) && y === 120 - height),
       ),
     ).toBe(true);
     for (const y of [6, 7])

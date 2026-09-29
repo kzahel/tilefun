@@ -870,21 +870,6 @@
     "fp": "e86cf4ece740d89aa22c9950c2fe754af0606a58ec79ff7c059c62d047776a9f"
   },
   {
-    "id": "profile-door-true",
-    "name": "Opening beside a height change \u00b7 mirror",
-    "fp": "e69a2142be4782033594d4b6edce2a6a51a7dcbcadbda0354aa758c83e6c7f66"
-  },
-  {
-    "id": "profile-door-east-low",
-    "name": "East wall attachment \u00b7 low wall beside opening",
-    "fp": "2fc390ab5f2a054eb46568aad7464517187ae638f01967afb9d43a1adb7c5b5e"
-  },
-  {
-    "id": "profile-door-east-tall",
-    "name": "East wall attachment \u00b7 tall wall beside opening",
-    "fp": "8743b548c98ed754bc40e3a714600a785b0d21700d7e719d164ed07b6c6644a4"
-  },
-  {
     "id": "connection-straight",
     "name": "Thickness \u00b7 thin meets thick",
     "fp": "4ebde18da55c97455b57635b03d9983f7ac09edbe34a296efe195c425669b876"
@@ -998,5 +983,15 @@
     "id": "interaction-mixed-south",
     "name": "Thick south join with a low approach",
     "fp": "95d3af16534a37765471e179a458d9b4e680ab9bf9e08fd432d974a5f15a37ab"
+  },
+  {
+    "id": "interaction-three-rooms",
+    "name": "Three rooms \u00b7 two doors and a thick low stem",
+    "fp": "2b9bd3dce6168bb7bb5db6be58697cdfcff205d0298a7b976ce555ff0fde225d"
+  },
+  {
+    "id": "interaction-room-returns",
+    "name": "Connected rooms \u00b7 short returns beside two doors",
+    "fp": "02f89cc16b8f8a69fd0c7494bfb105599ad8ec25abe6468e1aed9d1ecc618259"
   }
 ]

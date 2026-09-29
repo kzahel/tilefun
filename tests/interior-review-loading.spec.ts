@@ -121,9 +121,7 @@ test("category counts verify old verdicts, distinguish wrong from unchecked, and
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const option = page.locator('#stage option[value="8"]');
   await expect(option).toHaveText("Thickness & end joins — 2 unchecked");
-  await expect(page.locator('#stage option[value="7"]')).toHaveText(
-    "Wall heights & arches — 0 unchecked · ✓",
-  );
+  await expect(page.locator('#stage option[value="0"]')).toHaveText("Tiny rooms — 0 unchecked · ✓");
   await page.locator("#stage").selectOption("8");
   await expect(page.locator("#case-id")).toHaveText("connection-straight");
   await page.locator("#good").click();

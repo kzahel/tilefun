@@ -8,5 +8,20 @@
     "id": "interaction-two-rooms",
     "name": "Two rooms \u00b7 door between different wall profiles",
     "fp": "744c7cfc540cf3493c7fa8be8157732fbf26cb6349e1dd1bb42ddb2e0d3ae0bf"
+  },
+  {
+    "id": "profile-door-true",
+    "name": "Opening beside a height change \u00b7 mirror",
+    "fp": "e69a2142be4782033594d4b6edce2a6a51a7dcbcadbda0354aa758c83e6c7f66"
+  },
+  {
+    "id": "profile-door-east-low",
+    "name": "East wall attachment \u00b7 low wall beside opening",
+    "fp": "2fc390ab5f2a054eb46568aad7464517187ae638f01967afb9d43a1adb7c5b5e"
+  },
+  {
+    "id": "profile-door-east-tall",
+    "name": "East wall attachment \u00b7 tall wall beside opening",
+    "fp": "8743b548c98ed754bc40e3a714600a785b0d21700d7e719d164ed07b6c6644a4"
   }
 ]

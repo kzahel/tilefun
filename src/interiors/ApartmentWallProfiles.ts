@@ -165,21 +165,21 @@ export function buildProfileApartmentPlan(
       const h = WALL_HEIGHTS[w.height];
       const railX = verticalWallProfile(roomPlan, 0, w.y).railX + 6;
       const faceX = railX + 10;
-      // A normal-height cap otherwise stops within the shell face and reads
-      // as a lower wall. Join raised caps to its inner rail; the tall profile
-      // already meets that rail under the ordinary projection.
-      if (h > WALL_HEIGHTS.low && 16 - h / 4 > railX) {
-        const port = { height: h, faceX, railX };
+      // The shell is normal height. Taller partitions project above its rail
+      // instead of treating that rail as their own top elevation.
+      if (h > WALL_HEIGHTS.low) {
+        const port = { height: WALL_HEIGHTS.normal, faceX, railX };
         for (let y = bridgeY; y <= bridgeY + width; y++) westPorts.set(key(2, y), port);
         const topY = bridgeY * 8 - h;
-        cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
-          key: wall(10, 2),
-          cropX: 2,
-          cropWidth: 1,
-          cropHeight: width * 8 - 1,
-          offsetX: (railX % 16) - 2,
-          offsetY: (topY % 16) + 1,
-        });
+        if (h === WALL_HEIGHTS.normal)
+          cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
+            key: wall(10, 2),
+            cropX: 2,
+            cropWidth: 1,
+            cropHeight: width * 8 - 1,
+            offsetX: (railX % 16) - 2,
+            offsetY: (topY % 16) + 1,
+          });
       }
     }
     if (attachEast) {
@@ -188,21 +188,21 @@ export function buildProfileApartmentPlan(
       const railX =
         (plan.width - 1) * 32 + verticalWallProfile(roomPlan, plan.width - 1, w.y).railX;
       const faceX = railX - 9;
-      // Only a low cutaway uses the shallow overlap. Normal and tall partitions
-      // must meet the shell's inward-facing rail and hide their covered end.
-      // Projected overlap alone does not imply that the two faces agree.
-      if (h > WALL_HEIGHTS.low) {
-        const port = { height: h, faceX, railX };
+      // All heights share the shell's elevation reference. A low cap ends in
+      // its face; a tall cap rises beyond its rail and exposes only the excess.
+      {
+        const port = { height: WALL_HEIGHTS.normal, faceX, railX };
         for (let y = bridgeY; y <= bridgeY + width; y++) eastPorts.set(key(end, y), port);
         const topY = bridgeY * 8 - h;
-        cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
-          key: wall(10, 2),
-          cropX: 2,
-          cropWidth: 1,
-          cropHeight: width * 8 - 1,
-          offsetX: (railX % 16) - 2,
-          offsetY: (topY % 16) + 1,
-        });
+        if (h === WALL_HEIGHTS.normal)
+          cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
+            key: wall(10, 2),
+            cropX: 2,
+            cropWidth: 1,
+            cropHeight: width * 8 - 1,
+            offsetX: (railX % 16) - 2,
+            offsetY: (topY % 16) + 1,
+          });
       }
     }
     if (attachNorth) {
@@ -232,7 +232,11 @@ export function buildProfileApartmentPlan(
     const port = eastPorts.get(key(x, y)) ?? westPorts.get(key(x, y));
     const north = northPorts.get(key(x, y));
     return [
-      port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,
+      port
+        ? port.faceX +
+          Math.round(((port.railX - port.faceX) * Math.min(h, port.height)) / port.height) +
+          (Math.sign(port.railX - port.faceX) * Math.max(0, h - port.height)) / 4
+        : x * 8 - h / 4,
       southPorts.has(key(x, y))
         ? y * 8 - Math.max(0, h - WALL_HEIGHTS.low)
         : y * 8 - h + (north ? Math.round((north.lift * h) / north.height) : 0),
@@ -269,7 +273,7 @@ export function buildProfileApartmentPlan(
         `south:${y + 1}`,
         "south",
       );
-    const east = eastPorts.has(key(x + 1, y)) ? h : (columns.get(key(x + 1, y))?.height ?? 0);
+    const east = eastPorts.get(key(x + 1, y))?.height ?? columns.get(key(x + 1, y))?.height ?? 0;
     for (let z = Math.min(east, h); z < h; z += 8)
       face(
         [

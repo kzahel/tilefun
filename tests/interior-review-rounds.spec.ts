@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 
 const approved = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
@@ -11,7 +12,7 @@ const pending = JSON.parse(
   ),
 ) as { id: string; name: string; fp: string }[];
 
-test("changed west connections reopen their historical approvals", async ({ page }) => {
+test("changed side connections reopen their historical approvals", async ({ page }) => {
   await page.route("**/api/interior-review", (route) =>
     route.fulfill({
       json: pending.map((r) => ({
@@ -29,17 +30,22 @@ test("changed west connections reopen their historical approvals", async ({ page
   const reopened = [
     ["interaction-thick-shell", "9"],
     ["interaction-two-rooms", "11"],
+    ["profile-door-true", "7"],
+    ["profile-door-east-low", "7"],
+    ["profile-door-east-tall", "7"],
   ] as const;
   await page.addInitScript((cases) => {
     const stage = new URL(location.href).searchParams.get("stage");
-    const current = cases.find(([, s]) => s === stage)?.[0];
+    const current =
+      new URL(location.href).searchParams.get("testCase") ??
+      cases.find(([, s]) => s === stage)?.[0];
     localStorage.setItem(
       "tilefun.indoor-review.v1",
       JSON.stringify({ current, stage, records: [], outbox: [], batch: [], draft: "" }),
     );
   }, reopened);
   for (const [current, stage] of reopened) {
-    await page.goto(`/tilefun/interior-review.html?stage=${stage}&unchecked=1`);
+    await page.goto(`/tilefun/interior-review.html?stage=${stage}&unchecked=1&testCase=${current}`);
     await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
     await expect(page.locator("#case-id")).toHaveText(current);
     await expect(page.locator("#verdict")).toContainText("Changed since your last verdict");
@@ -124,7 +130,7 @@ test("three new eight-case rounds fit a phone and preserve the two-report pause"
   await page.goto("/tilefun/interior-review.html?stage=9&unchecked=1");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator('#stage option[value="all"]')).toHaveText(
-    "Small → complex — 24 unchecked",
+    `Small → complex — ${reviewCases().length - records.length} unchecked`,
   );
   await expect(page.locator("#unsupported-label")).toHaveText("0 cases excluded by the compiler");
   const visited = new Set<string>();

@@ -5,6 +5,40 @@ const baseline = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; fp: string }[];
 
+for (const [id, x, y, expected] of [
+  ["interaction-two-rooms-mirror", 5, 94, 204],
+  ["interaction-offset-hall", 278, 182, 180],
+] as const)
+  test(`shell-relative height and occlusion in ${id}`, async ({ page }) => {
+    await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
+    await page.addInitScript((current) => {
+      localStorage.setItem(
+        "tilefun.indoor-review.v1",
+        JSON.stringify({
+          current,
+          stage: "11",
+          records: [],
+          outbox: [],
+          batch: [],
+          draft: "",
+        }),
+      );
+    }, id);
+    await page.goto("/tilefun/interior-review.html?stage=11");
+    await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+    await expect(page.locator("#case-id")).toHaveText(id);
+    const pixel = await page.locator("#render").evaluate(
+      (el, { x, y }) => {
+        const ctx = (el as HTMLCanvasElement).getContext("2d");
+        if (!ctx) throw new Error("Missing canvas");
+        return Array.from(ctx.getImageData(x, y, 1, 1).data);
+      },
+      { x, y },
+    );
+    // The tall face covers the rail; the low end reveals the shell behind it.
+    expect(pixel).toEqual([expected, expected, expected, 255]);
+  });
+
 for (const [id, stage, top, side, x] of [
   ["interaction-thick-shell-mirror", "9", 88, "east", 249],
   ["interaction-three-rooms", "11", 96, "east", 249],

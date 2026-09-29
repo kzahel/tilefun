@@ -47,3 +47,11 @@ Correcting that shared join intentionally changes `interaction-thick-shell` and
 old fingerprints in `pending-reapproval.json`; they are not approvals of the new
 renders. The active baseline protects 200 unchanged images. Restore these two to
 the active manifest only after fresh human approval with matching pixels.
+
+After 0aaad89, the three-room layout and short-return composition were approved
+and captured with matching verdicts. Low east and tall west reports then exposed
+the need for a shared normal-height reference at side connections. That fix also
+reopens `profile-door-true`, `profile-door-east-low`, and `profile-door-east-tall`.
+Their old images remain untouched and their fingerprints join the pending file.
+The active baseline now protects 199 unchanged renders; five historical approvals
+await recheck. No changed render has been automatically approved.
