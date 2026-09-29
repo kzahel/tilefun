@@ -1,3 +1,5 @@
+import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
+
 /** Pixel coordinates in the original render; emoji cells span 32px. */
 export interface ReviewPin {
   x: number;
@@ -38,6 +40,7 @@ export interface ReviewFeedback {
   createdAt: string;
   screenshot?: string;
   pins?: ReviewPin[];
+  profiles?: WallProfileOptions;
 }
 export function parseReviewFeedback(value: unknown): ReviewFeedback {
   if (!value || typeof value !== "object") throw new Error("Invalid feedback");
@@ -68,6 +71,27 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
       !/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(v.screenshot))
   )
     throw new Error("Invalid screenshot");
+  let profiles: WallProfileOptions | undefined;
+  if (v.profiles !== undefined) {
+    const p = v.profiles as WallProfileOptions;
+    const rows = (v.sketch as string).split("\n");
+    const at = (x: number, y: number, char: string) =>
+      Number.isInteger(x) && Number.isInteger(y) && rows[y]?.[x] === char;
+    if (
+      !p ||
+      !Array.isArray(p.walls) ||
+      p.walls.length > 4800 ||
+      p.walls.some(
+        (w) => !w || !at(w.x, w.y, "#") || !["low", "normal", "tall"].includes(w.height),
+      ) ||
+      (p.arch !== undefined && (!p.arch || !at(p.arch.x, p.arch.y, "+")))
+    )
+      throw new Error("Invalid wall profiles");
+    profiles = {
+      walls: p.walls.map(({ x, y, height }) => ({ x, y, height })),
+      ...(p.arch ? { arch: { x: p.arch.x, y: p.arch.y } } : {}),
+    };
+  }
   return {
     id: v.id as string,
     caseId: v.caseId as string,
@@ -78,6 +102,7 @@ export function parseReviewFeedback(value: unknown): ReviewFeedback {
     name: v.name as string,
     createdAt: v.createdAt as string,
     ...(v.pins !== undefined ? { pins: parseReviewPins(v.pins, v.sketch as string) } : {}),
+    ...(profiles ? { profiles } : {}),
     ...(typeof v.screenshot === "string" ? { screenshot: v.screenshot } : {}),
   };
 }

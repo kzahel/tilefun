@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
+import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
 import { REVIEW_STAGES, reviewCases } from "./ReviewCases.js";
 import { currentVerdict, parseReviewFeedback, type ReviewFeedback } from "./ReviewFeedback.js";
 
@@ -10,11 +11,18 @@ describe("review coverage", () => {
     expect(cases).toEqual(reviewCases());
     expect(cases.length).toBeGreaterThan(60);
     expect(new Set(cases.map((c) => c.id)).size).toBe(cases.length);
-    expect(new Set(cases.map((c) => c.sketch)).size).toBe(cases.length);
-    expect(new Set(cases.map((c) => c.sketch.replace(/[BKTH]/g, "L"))).size).toBe(cases.length);
+    const identity = (c: (typeof cases)[number]) =>
+      c.sketch.replace(/[BKTH]/g, "L") + JSON.stringify(c.profiles ?? null);
+    expect(new Set(cases.map(identity)).size).toBe(cases.length);
     expect(new Set(cases.map((c) => c.stage)).size).toBe(REVIEW_STAGES.length);
     for (const c of cases) {
-      expect(() => buildLayeredApartmentPlan(parseFloorPlan(c.sketch)), c.name).not.toThrow();
+      expect(
+        () =>
+          c.profiles
+            ? buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles)
+            : buildLayeredApartmentPlan(parseFloorPlan(c.sketch)),
+        c.name,
+      ).not.toThrow();
     }
     const smallest = parseFloorPlan(cases[0]?.sketch ?? "");
     expect([smallest.width, smallest.height]).toEqual([3, 3]);

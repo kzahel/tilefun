@@ -1,6 +1,8 @@
 import { APARTMENT_EXAMPLES, type PlanCell } from "../ApartmentFloorPlan.js";
 
 import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFixtures.js";
+import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
+import { profileReviewCases } from "./ProfileReviewCases.js";
 
 export const REVIEW_STAGES = [
   "Tiny rooms",
@@ -10,6 +12,7 @@ export const REVIEW_STAGES = [
   "Junctions",
   "Apartments",
   "Small stress cases",
+  "Wall heights & arches",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -17,6 +20,7 @@ export interface ReviewCase {
   stage: number;
   sketch: string;
   relatedCaseId?: string;
+  profiles?: WallProfileOptions;
 }
 type Grid = PlanCell[][];
 const rectangle = (w: number, h: number, floor: PlanCell = "L"): Grid =>
@@ -248,5 +252,5 @@ export function reviewCases(): ReviewCase[] {
       );
   }
   for (const item of APARTMENT_EXAMPLES) add(5, item.name, item.sketch);
-  return result;
+  return [...result, ...profileReviewCases()];
 }

@@ -1,6 +1,7 @@
 import { loadModernInteriorsAtlasIndex } from "../../assets/ModernInteriorsAtlasIndex.js";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
+import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
 import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import { REVIEW_STAGES, type ReviewCase, reviewCases } from "./ReviewCases.js";
 import {
@@ -64,6 +65,20 @@ try {
   state = { ...initial, annotation: null };
   /* Start fresh if browser storage cannot be read. */
 }
+const requestedStage = new URL(location.href).searchParams.get("stage");
+if (
+  requestedStage !== null &&
+  String(Number(requestedStage)) === requestedStage &&
+  REVIEW_STAGES[Number(requestedStage)] &&
+  requestedStage !== state.stage
+) {
+  state.stage = requestedStage;
+  state.current = "";
+  state.paused = false;
+  state.batch = [];
+  state.draft = "";
+  state.annotation = null;
+}
 const root = document.getElementById("app");
 if (!root) throw new Error("Review root is missing");
 root.innerHTML = `
@@ -73,11 +88,11 @@ root.innerHTML = `
   <div class="progress"><span id="position">Preparing cases…</span><span id="counts"></span></div>
   <section class="case" id="case">
     <div class="render-panel"><h2 id="case-name">Loading atlas…</h2><div id="render-wrap"><canvas id="render" aria-label="Generated interior"></canvas></div></div>
-    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
+    <aside><h2>Floor plan</h2><div id="plan" aria-label="Emoji floor plan"></div><p class="legend" id="legend">🧱 Wall　🚪 Door<br>🟫 Wood　🟦 Tile</p><p id="verdict"></p><details><summary>Sketch / case ID</summary><code id="case-id"></code><pre id="sketch"></pre></details></aside>
   </section>
   <section id="pause" hidden><h2>Ready for the next fix.</h2><p>Your two reports are captured; the save status is above. Say “ready” in chat to start the next fix—I can read saved feedback directly. Changed rooms will return for review.</p><button id="continue">Keep reviewing</button> <button id="refresh-review">Check for updates</button></section>
   <div id="actions"><p class="pin-hint">Tap a block in the render or floor plan to pin it to your report.</p><div id="pins" aria-label="Pinned blocks"></div><label class="note-label">Optional note <span>N to type · Enter to mark wrong</span><input id="note" maxlength="2000" placeholder="e.g. bottom-left corner" autocomplete="off" /></label><div class="buttons"><button id="wrong" class="wrong">Wrong <kbd>X</kbd></button><button id="good" class="good">Looks right <kbd>Space</kbd></button><button id="skip">Skip <kbd>→</kbd></button></div></div>
-  <footer><button id="previous">← Previous</button><button id="undo">Undo verdict</button><span id="hint">Review judges appearance; these cases are not pre-approved.</span></footer>
+  <footer><button id="previous">← Previous</button><button id="undo">Undo verdict</button><button id="reload-review">Check for updates</button><span id="hint">Review judges appearance; these cases are not pre-approved.</span></footer>
   <details id="unsupported"><summary id="unsupported-label">Compiler exclusions</summary><pre id="unsupported-list"></pre></details>
 </main>`;
 function el<T extends HTMLElement = HTMLElement>(id: string): T {
@@ -143,6 +158,9 @@ function draw(): void {
   el("position").textContent =
     `${REVIEW_STAGES[current.stage]} · ${available.findIndex((c) => c.id === current?.id) + 1} of ${available.length}`;
   el("case-name").textContent = current.name;
+  el("legend").textContent = current.profiles
+    ? "▂ Low wall · ▅ Normal wall · █ Tall wall · 🚪 Opening"
+    : "🧱 Wall · 🚪 Door · 🟫 Wood · 🟦 Tile";
   el("case-id").textContent = current.id;
   el("sketch").textContent = current.sketch;
   const plan = el("plan");
@@ -170,7 +188,11 @@ function draw(): void {
         addPin({ x: x * 32, y: y * 32, size: 32 }, true);
         cell.blur();
       };
-      cell.textContent = symbols[char] ?? char;
+      const profile = current.profiles?.walls.find((w) => w.x === x && w.y === y);
+      cell.textContent = profile
+        ? { low: "▂", normal: "▅", tall: "█" }[profile.height]
+        : (symbols[char] ?? char);
+      if (profile) cell.title = `${profile.height} wall`;
       line.append(cell);
     }
     plan.append(line);
@@ -336,6 +358,7 @@ function vote(verdict: "good" | "wrong"): void {
     fingerprint: voted.fingerprint,
     name: voted.name,
     sketch: voted.sketch,
+    ...(voted.profiles ? { profiles: voted.profiles } : {}),
     verdict,
     note: note.value.trim(),
     createdAt: new Date().toISOString(),
@@ -397,6 +420,7 @@ el("continue").onclick = () => {
   show(nextCase(current?.id));
 };
 el("refresh-review").onclick = () => location.reload();
+el("reload-review").onclick = () => location.reload();
 stage.onchange = () => {
   state.stage = stage.value;
   state.draft = "";
@@ -450,7 +474,10 @@ async function start(): Promise<void> {
   const unsupported: string[] = [];
   for (const fixture of reviewCases()) {
     try {
-      const map = buildLayeredApartmentPlan(parseFloorPlan(fixture.sketch));
+      const parsed = parseFloorPlan(fixture.sketch);
+      const map = fixture.profiles
+        ? buildProfileApartmentPlan(parsed, fixture.profiles)
+        : buildLayeredApartmentPlan(parsed);
       const image = document.createElement("canvas");
       image.width = map.width * 16;
       image.height = map.pixelHeight;
@@ -479,6 +506,7 @@ async function start(): Promise<void> {
   el("unsupported-list").textContent = unsupported.join("\n\n");
   el("unsupported").hidden = unsupported.length === 0;
   await sync();
+  if (!pool().some((c) => !judgment(c)) && cases.some((c) => !judgment(c))) state.stage = "all";
   const changed = cases.find((c) =>
     state.batch.some((b) => b.id === c.id && b.fingerprint !== c.fingerprint),
   );

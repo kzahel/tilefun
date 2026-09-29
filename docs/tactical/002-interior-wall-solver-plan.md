@@ -576,3 +576,38 @@ plan change; all prior approvals remain pixel-identical, and the pool stays at
 opposing-face and straight-doorway candidates. Solver implication: outline
 ownership belongs to the boundary of a joined surface, not each atlas piece or
 each independently replaced half-cell.
+
+### Approved baseline and first height sampler, 2026-09-29
+
+The reviewer accepted the remaining mass, opposing-face, doorway, and apartment
+cases and then confirmed the complete set. Commit `f802863` preserves the completed
+wall/review work. `tests/fixtures/interior-approved` saves all 163 rendered PNGs
+and their exact review fingerprints. A browser test traverses those cases without
+posting feedback and checks every fingerprint. Baselines require human approval
+to change; the new candidates are not added to them.
+
+The new **Wall heights & arches** stage contains 12 candidates: the same isolated
+partition at three heights, a native stone arch, and handed height steps, bends,
+T junctions, and openings beside height changes. The direct review URL accepts
+`?stage=7`. The two-failure pause, optional pins/notes, and pixel-based verdict
+invalidation remain in use. Check for updates is also available outside the pause.
+
+`ApartmentWallProfiles.ts` is an opt-in interior sampler, separate from the
+approved legacy compiler. It introduces an explicit 8px wall footprint grid and
+8/24/40px elevations. Connected bands form a union; exposed top/south/east faces
+are emitted with atlas-sampled gray materials. Coplanar face edges cancel before
+integer scan conversion, avoiding internal tile outlines and antialiasing seams.
+The camera projection and footprint remain fixed when height changes. The native
+arch frame is used at its authored size. Profile specifications travel with saved
+feedback, so a report reproduces height choices as well as the emoji sketch.
+
+Scope: these are appearance candidates for isolated interior partitions. They
+are not a replacement for approved apartment rendering, a general collision
+footprint implementation, an arbitrary-width wall editor, or a finished constraint
+solver. Legacy semantic wall cells remain conservative. Exterior height changes,
+attachment to legacy walls, thick profiles, and additional arch orientations need
+explicit coverage after the profile appearance is accepted. No candidate is
+visually approved by automated tests.
+
+Next: use the quick review loop on the sampler, settle the projection/end treatment,
+then add thin-to-thick joins and legacy-wall attachment using the accepted profiles.
