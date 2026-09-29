@@ -30,7 +30,7 @@ root.innerHTML = `<header><a href="./interior-review.html?stage=15">← Review</
 <div id="viewport"><canvas id="room" tabindex="0" aria-label="Furniture movement test"></canvas></div>
 <div class="toolbar"><label><input id="collisions" type="checkbox" checked> Collision</label><label><input id="bounds" type="checkbox"> Sprite bounds</label><label><input id="depth" type="checkbox"> Draw-order guides</label></div>
 <p class="legend">Pink: solid volume · Green: landable top · Cyan: player volume</p>
-<p id="depth-help" hidden>Yellow lines mark drawing order, not object height. Jumping raises the player’s drawing priority, as in the game. Collision boxes show actual heights.</p>
+<p id="depth-help" hidden>Yellow lines mark drawing order, not object height. Characters above an object’s top draw in front of it, as in the game. Collision boxes show actual heights.</p>
 <div class="toolbar"><label>Gravity <select id="gravity"><option value="1">Normal · 1×</option><option value="0.5">Low · 0.5×</option><option value="0.25">Very low · 0.25×</option><option value="0.1">Test tall objects · 0.1×</option></select></label></div>
 <div class="toolbar"><label>Mode <select id="mode"><option value="walk">Walk</option><option value="place">Place furniture</option></select></label><button id="circle">Walk around object</button><button id="home">Reset player</button></div>
 <div id="walk-controls"><p>Arrow keys / WASD to move, hold Space to jump. Lower gravity reaches taller objects.</p><div class="pad"><button data-dx="-1" data-dy="0" aria-label="Walk left">←</button><button data-dx="0" data-dy="-1" aria-label="Walk up">↑</button><button data-dx="0" data-dy="1" aria-label="Walk down">↓</button><button data-dx="1" data-dy="0" aria-label="Walk right">→</button><button id="jump">Jump</button></div></div>
@@ -476,7 +476,7 @@ function draw() {
   ctx.translate(0, viewOffsetY);
   const item: SpriteItem = {
     kind: "sprite",
-    sortKey: p.position.wy + (p.wz ?? 0),
+    sortKey: model.playerDepth(),
     wx: p.position.wx,
     wy: p.position.wy,
     zOffset: p.wz ?? 0,
@@ -502,7 +502,7 @@ function draw() {
     [
       {
         id: "player",
-        depth: p.position.wy + (p.wz ?? 0),
+        depth: model.playerDepth(),
         draw: (c) => drawScene2D(c, camera, [item], sheets, undefined),
       },
     ],
@@ -574,7 +574,7 @@ function draw() {
       ctx.stroke();
     }
     ctx.fillStyle = "#62efff";
-    ctx.fillRect(Math.floor(p.position.wx) - 7, Math.floor(p.position.wy + (p.wz ?? 0)), 14, 1);
+    ctx.fillRect(Math.floor(p.position.wx) - 7, Math.floor(model.playerDepth()), 14, 1);
   }
   if (mode.value === "place") {
     const o = selection();
@@ -593,6 +593,7 @@ function draw() {
   canvas.dataset.viewOffsetY = String(viewOffsetY);
   canvas.dataset.playerX = p.position.wx.toFixed(3);
   canvas.dataset.playerY = p.position.wy.toFixed(3);
+  canvas.dataset.playerDepth = String(model.playerDepth());
   canvas.dataset.playerZ = String(p.wz ?? 0);
   canvas.dataset.groundZ = String(p.groundZ ?? 0);
   canvas.dataset.airborne = String(p.jumpVZ !== undefined);

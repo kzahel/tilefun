@@ -281,3 +281,40 @@ new approvals, and final completion without looping. All 234 static image
 baselines remain exact. The public phone page loads the next new scene with
 8 unchecked / 3 approved, and all eight new renders were visually inspected.
 Biome retains the existing 65 warnings and five infos.
+
+## Standing on long, low furniture, 2026-09-29
+
+The bedside report described the player drawing behind the bed while standing
+on it. The captured report was taken after moving off the bed; a fresh jump onto
+the rear of the bed reproduced the issue. The previous Y+Z sort key was copied
+from the live game, where the same heuristic can fail for long, low platforms:
+at Y=64, Z=8, the player's key 72 was behind the bed's ground anchor at Y=90.
+
+`rendering/propDepth.ts` now provides the shared correction. When the player's
+footprint overlaps a finite prop volume and its feet are at or above that top,
+its sort key must be after the prop. Below-top and nonoverlapping ordering retain
+the previous Y+Z behavior. Raised bases, compound prop walls, and interpolated
+render positions are respected. Infinite-height walls do not become platforms.
+The live scene collector, its prediction ghosts, and the furniture movement test
+all use the helper. Prop boxes are compiled once per live scene collection, not
+once per entity. Collision, physical heights, and sprite placement are unchanged.
+
+Only the bedside and worktable sets contain low/deep bodies affected by this
+correction. Their runtime signatures now include a support-depth render revision,
+so the bed report and previous worktable approval reopen. The nine unaffected
+explicit approvals have matching protected signatures. Old bedside/worktable
+signatures remain in `furniture-motion-reopened.json` for invalidation tests.
+Static catalog and wall approvals remain unchanged.
+
+Next review: jump onto the rear of the single bed, then recheck the worktable's
+back edge. These are the only two unchecked sets. After those pass, continue with
+new furniture families rather than repeating the unaffected catalog scenes.
+
+Validation: 956 unit tests, all 101 browser tests, typecheck, and production build
+pass. The new browser regression performs a real jump and walks to the bed's rear,
+then compares every opaque idle-player pixel against the source sprite: none are
+occluded. Unit tests cover the entire bed top, ground/below-top behavior, raised
+bases, compound walls, live-game collection, and prediction ghosts. All 234 static
+image baselines pass. The public phone smoke shows the player standing visibly at
+Z=8 on the rear of the bed, with 2 unchecked / 9 approved sets. Biome remains at
+65 warnings and five infos.

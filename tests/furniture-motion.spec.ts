@@ -1,6 +1,6 @@
-import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-import { MOTION_SCENES } from "../src/interiors/FurnitureMotion.js";
+import { FurnitureMotion, MOTION_SCENES } from "../src/interiors/FurnitureMotion.js";
+import { motionSceneSignature } from "../src/interiors/MotionReview.js";
 
 test("shared movement stops at furniture, supports precise placement, and saves a reproducible report", async ({
   page,
@@ -193,9 +193,13 @@ test("phone jump control releases on cancellation and high jumps stay in view", 
 test("approval advances past checked sets offline and finishes the new batch without looping", async ({
   page,
 }) => {
-  const approved = JSON.parse(
-    readFileSync("tests/fixtures/furniture-motion-approved.json", "utf8"),
-  ) as { id: string; sceneSignature: string }[];
+  const approved = MOTION_SCENES.slice(0, 3).map((s) => {
+    const m = new FurnitureMotion(s.furniture);
+    return {
+      id: s.id,
+      sceneSignature: motionSceneSignature(m.furniture, m.bodies, m.gravityScale),
+    };
+  });
   const records = approved.map((r) => {
     const config = JSON.parse(r.sceneSignature);
     const furniture = JSON.parse(config.furniture).placements;
@@ -268,4 +272,55 @@ test("approval advances past checked sets offline and finishes the new batch wit
   await page.locator("#object").selectOption("picture");
   await expect(page.locator("#physics-controls")).toBeHidden();
   await expect(page.locator("#circle")).toBeDisabled();
+});
+
+test("the full player sprite remains visible at the back of the bed after landing", async ({
+  page,
+}, testInfo) => {
+  await page.route("**/api/interior-review", (r) => r.fulfill({ json: [] }));
+  await page.goto("/tilefun/furniture-playtest.html?scene=bedside");
+  const canvas = page.locator("#room");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await page.locator("#collisions").uncheck();
+  await canvas.focus();
+  await page.keyboard.down("ArrowLeft");
+  await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerX) < 64);
+  await page.keyboard.up("ArrowLeft");
+  await page.keyboard.down("Space");
+  await page.keyboard.down("ArrowUp");
+  await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerY) < 66);
+  await page.keyboard.up("ArrowUp");
+  await page.keyboard.up("Space");
+  await expect(canvas).toHaveAttribute("data-player-z", "8");
+  await expect(canvas).toHaveAttribute("data-airborne", "false");
+  await page.waitForTimeout(150); // Idle animation returns to frame zero.
+  const pixels = await canvas.evaluate(async (el) => {
+    const c = el as HTMLCanvasElement;
+    const x = Math.floor(Number(c.dataset.playerX) - 8);
+    const y = Math.floor(Number(c.dataset.playerY) - Number(c.dataset.playerZ) - 16);
+    const source = new Image();
+    source.src = "/tilefun/assets/sprites/player.png";
+    await source.decode();
+    const expected = document.createElement("canvas");
+    expected.width = 16;
+    expected.height = 16;
+    const ctx = expected.getContext("2d");
+    if (!ctx) throw new Error("Missing context");
+    ctx.drawImage(source, 0, 16, 16, 16, 0, 0, 16, 16); // Idle, facing up.
+    const reference = ctx.getImageData(0, 0, 16, 16).data;
+    const actual = c.getContext("2d")?.getImageData(x, y, 16, 16).data;
+    if (!actual) throw new Error("Missing pixels");
+    let opaque = 0,
+      mismatches = 0;
+    for (let i = 0; i < reference.length; i += 4)
+      if (reference[i + 3] === 255) {
+        opaque++;
+        if ([0, 1, 2, 3].some((k) => reference[i + k] !== actual[i + k])) mismatches++;
+      }
+    return { opaque, mismatches, depth: Number(c.dataset.playerDepth) };
+  });
+  expect(pixels.opaque).toBeGreaterThan(30);
+  expect(pixels.mismatches).toBe(0);
+  expect(pixels.depth).toBeGreaterThan(90);
+  await canvas.screenshot({ path: testInfo.outputPath("standing-on-bed.png") });
 });

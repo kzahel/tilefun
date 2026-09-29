@@ -5,16 +5,30 @@ import { FurnitureMotion, MOTION_SCENES } from "./FurnitureMotion.js";
 import { motionSceneSignature, nextUncheckedScene } from "./MotionReview.js";
 
 describe("movement review catalog", () => {
-  it("preserves the three explicitly approved scene configurations", () => {
+  it("preserves the nine unaffected explicitly approved scene configurations", () => {
     const approved = JSON.parse(
       readFileSync("tests/fixtures/furniture-motion-approved.json", "utf8"),
     ) as { id: string; sceneSignature: string }[];
-    expect(approved).toHaveLength(3);
+    expect(approved).toHaveLength(9);
     for (const row of approved) {
       const preset = MOTION_SCENES.find((s) => s.id === row.id);
       if (!preset) throw new Error("Missing approved scene");
       const model = new FurnitureMotion(preset.furniture);
       expect(motionSceneSignature(model.furniture, model.bodies, model.gravityScale)).toBe(
+        row.sceneSignature,
+      );
+    }
+  });
+  it("reopens the bed report and the affected worktable approval", () => {
+    const reopened = JSON.parse(
+      readFileSync("tests/fixtures/furniture-motion-reopened.json", "utf8"),
+    ) as { id: string; sceneSignature: string }[];
+    expect(reopened.map((r) => r.id).sort()).toEqual(["bedside", "worktable"]);
+    for (const row of reopened) {
+      const preset = MOTION_SCENES.find((s) => s.id === row.id);
+      if (!preset) throw new Error("Missing scene");
+      const m = new FurnitureMotion(preset.furniture);
+      expect(motionSceneSignature(m.furniture, m.bodies, m.gravityScale)).not.toBe(
         row.sceneSignature,
       );
     }

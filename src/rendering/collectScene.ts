@@ -1,18 +1,19 @@
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 import { collectGrassBladeItems } from "./GrassBladeRenderer.js";
+import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TileRenderer } from "./TileRenderer.js";
 
 /**
  * Interpolation factor for Z_SORT_FACTOR:
- * 1px of Z counts the same as 1px of Y depth — enough to draw entities
- * above the prop they're standing on, without being so aggressive that
- * ground-level entities in front incorrectly sort behind elevated ones.
+ * Baseline Y+Z ordering. Explicit prop-top overlap below handles long, low
+ * surfaces that this heuristic alone cannot order correctly.
  */
 const Z_SORT_FACTOR = 1;
 
@@ -69,6 +70,8 @@ export function collectScene(
   // Small margin for rendering effects not captured by sprite bounds
   const M = 16;
 
+  const depthSurfaces = propDepthSurfaces(props);
+
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite) continue;
@@ -109,7 +112,12 @@ export function collectScene(
     const shadowTerrainZ = world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
 
     // Sort key
-    const sortKey = pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR;
+    const sortKey = depthAboveProps(
+      pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
+      e.collider ? getEntityAABB(pos, e.collider) : null,
+      zOffset,
+      depthSurfaces,
+    );
 
     items.push({
       kind: "sprite",
@@ -147,7 +155,12 @@ export function collectScene(
 
       items.push({
         kind: "sprite",
-        sortKey: ghost.wy + (e.sortOffsetY ?? 0) + (ghost.wz ?? e.wz ?? 0) * Z_SORT_FACTOR,
+        sortKey: depthAboveProps(
+          ghost.wy + (e.sortOffsetY ?? 0) + (ghost.wz ?? e.wz ?? 0) * Z_SORT_FACTOR,
+          e.collider ? getEntityAABB({ wx: ghost.wx, wy: ghost.wy }, e.collider) : null,
+          ghostZOffset,
+          depthSurfaces,
+        ),
         wx: ghost.wx,
         wy: ghost.wy,
         zOffset: ghostZOffset,

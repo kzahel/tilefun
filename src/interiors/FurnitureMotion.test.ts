@@ -141,6 +141,28 @@ describe("furniture in shared game physics", () => {
     expect(m.bodies.wardrobe).toEqual({ height: 48, walkableTop: false });
     expect(() => m.setBody("wardrobe", { height: NaN, walkableTop: true })).toThrow();
   });
+  it("keeps the player in front across the full bed top and behind at ground level", () => {
+    const m = scene("bedside");
+    const order = () =>
+      furnishedSceneOrder(m.objects, [
+        { id: "player", depth: m.playerDepth(), draw: () => {} },
+      ]).map((o) => ("placement" in o ? o.placement.id : o.id));
+    for (const y of [64, 68, 74, 80, 88]) {
+      m.player.position = { wx: 64, wy: y };
+      m.player.wz = 8;
+      m.player.groundZ = 8;
+      m.step(0, 0);
+      expect(m.player.wz).toBe(8);
+      expect(order().indexOf("player")).toBeGreaterThan(order().indexOf("bed"));
+    }
+    m.player.position = { wx: 64, wy: 60 };
+    m.player.wz = 0;
+    expect(order().indexOf("player")).toBeLessThan(order().indexOf("bed"));
+    const table = scene("worktable");
+    table.player.position = { wx: 80, wy: 61 };
+    table.player.wz = 10;
+    expect(table.playerDepth()).toBeGreaterThan(72);
+  });
   it("saves movement context without confusing it with a static approval", () => {
     const m = scene("bunk");
     const report = {

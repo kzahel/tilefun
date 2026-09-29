@@ -1,5 +1,5 @@
 import { furnitureSignature } from "./FurnishedInterior.js";
-import type { FurniturePlacement } from "./FurnitureCatalog.js";
+import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
 import { MOTION_SKETCH } from "./FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "./FurniturePhysics.js";
 import type { ReviewFeedback } from "./review/ReviewFeedback.js";
@@ -16,6 +16,14 @@ export function motionSceneSignature(
     furniture: furnitureSignature(furniture),
     bodies,
     gravityScale,
+    // Only low, deep bodies can change order under this rendering fix. Keep
+    // approvals for unaffected tall/short objects, including custom heights.
+    ...(furniture.some((p) => {
+      const body = bodies[p.id];
+      return body && body.height + furnitureDefinition(p.asset).footprint.y < 0;
+    })
+      ? { supportDepthVersion: 1 }
+      : {}),
   });
 }
 export function motionVerdict(

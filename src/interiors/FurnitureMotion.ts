@@ -4,6 +4,7 @@ import type { PropCollider } from "../entities/Prop.js";
 import type { Movement } from "../input/ActionManager.js";
 import type { MovementContext } from "../physics/MovementContext.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
+import { depthAboveProps, propDepthSurfaces } from "../rendering/propDepth.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { compileFurniture, type PlacedFurniture } from "./FurnishedInterior.js";
@@ -186,6 +187,22 @@ export class FurnitureMotion {
     const collider = this.player.collider;
     if (!collider) throw new Error("Missing player collider");
     return getEntityAABB(this.player.position, collider);
+  }
+  /** Same support-aware draw ordering used by the live game's scene collector. */
+  playerDepth(): number {
+    const z = this.player.wz ?? 0;
+    return depthAboveProps(
+      this.player.position.wy + z,
+      this.playerBounds(),
+      z,
+      propDepthSurfaces(
+        this.objects.map((o) => ({
+          position: { wx: o.x, wy: o.y },
+          collider: furnitureCollider(o.definition, this.bodies[o.placement.id]),
+          walls: null,
+        })),
+      ),
+    );
   }
   collisionBoxes(): { id: string; bounds: AABB; height: number; walkableTop: boolean }[] {
     return this.objects.flatMap((o) => {
