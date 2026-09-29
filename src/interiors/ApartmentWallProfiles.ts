@@ -56,6 +56,7 @@ export function buildProfileApartmentPlan(
   };
   const columns = new Map<string, { x: number; y: number; height: number }>();
   const eastPorts = new Map<string, { height: number; faceX: number; railX: number }>();
+  const westPorts = new Map<string, { height: number; faceX: number; railX: number }>();
   const northPorts = new Map<string, { height: number; lift: number }>();
   const southPorts = new Set<string>();
   for (let y = 0; y < plan.height; y++)
@@ -160,6 +161,27 @@ export function buildProfileApartmentPlan(
         : [])
       for (let y = bridgeY; y < bridgeY + width; y++)
         columns.set(key(x, y), { x, y, height: WALL_HEIGHTS[w.height] });
+    if (attachWest) {
+      const h = WALL_HEIGHTS[w.height];
+      const railX = verticalWallProfile(roomPlan, 0, w.y).railX + 6;
+      const faceX = railX + 10;
+      // A normal-height cap otherwise stops within the shell face and reads
+      // as a lower wall. Join raised caps to its inner rail; the tall profile
+      // already meets that rail under the ordinary projection.
+      if (h > WALL_HEIGHTS.low && 16 - h / 4 > railX) {
+        const port = { height: h, faceX, railX };
+        for (let y = bridgeY; y <= bridgeY + width; y++) westPorts.set(key(2, y), port);
+        const topY = bridgeY * 8 - h;
+        cellAt(Math.floor(railX / 16), Math.floor(topY / 16)).foreground.push({
+          key: wall(10, 2),
+          cropX: 2,
+          cropWidth: 1,
+          cropHeight: width * 8 - 1,
+          offsetX: (railX % 16) - 2,
+          offsetY: (topY % 16) + 1,
+        });
+      }
+    }
     if (attachEast) {
       const h = WALL_HEIGHTS[w.height];
       const end = plan.width * 4 - 1;
@@ -207,7 +229,7 @@ export function buildProfileApartmentPlan(
   }
   const surfaces: InteriorSurface[] = [];
   const project = (x: number, y: number, h: number): Point => {
-    const port = eastPorts.get(key(x, y));
+    const port = eastPorts.get(key(x, y)) ?? westPorts.get(key(x, y));
     const north = northPorts.get(key(x, y));
     return [
       port ? port.faceX + Math.round(((port.railX - port.faceX) * h) / port.height) : x * 8 - h / 4,

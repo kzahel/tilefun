@@ -8,6 +8,30 @@ import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
   it.each([
+    ["interaction-three-rooms", 96],
+    ["interaction-offset-hall", 88],
+  ] as const)("joins normal west caps to the shell rail in %s", (id, topY) => {
+    const c = interactionReviewCases().find((c) => c.id === id);
+    if (!c) throw new Error("Missing normal west attachment");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "top:24" && s.points.some(([x, y]) => x === 6 && y === topY),
+      ),
+    ).toBe(true);
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "south:16" && s.points.some(([x, y]) => x === 16 && y === 128),
+      ),
+    ).toBe(true);
+    // The connection adapter must preserve the partition's 24px face height.
+    expect(
+      map.surfaces.some(
+        (s) => s.plane === "south:16" && s.points.some(([x, y]) => x === 6 && y === 104),
+      ),
+    ).toBe(true);
+  });
+  it.each([
     ["interaction-thick-shell-mirror", 88],
     ["interaction-three-rooms", 96],
   ] as const)("connects the normal-height east face to the shell in %s", (id, topY) => {

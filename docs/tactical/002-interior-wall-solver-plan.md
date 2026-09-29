@@ -775,3 +775,24 @@ that share the same connection. No approved pixels change. Geometry checks cover
 thin/thick rail and base endpoints; browser checks cover the complete cap seam,
 including a thick cap spanning a tile-row boundary. Next: recheck the two reports,
 then continue through the remaining room layouts.
+
+### Connect normal west caps to the shell rail, 2026-09-29
+
+The corrected thick east attachment passed review. The three-room and offset-hall
+reports then identified a normal-height mismatch at their west attachments. The
+24px profile's generic shear ended its cap at x=10, inside the shell's face; the
+native inner cap edge is x=6. The apparent height difference was a disconnected
+top edge, not an incorrect partition elevation.
+
+A west connection adapter now joins raised caps that stop short of the native
+rail. It keeps the base at x=16 and the face height at 24px, and opens the covered
+rail edge across the cap width. Low cutaways and tall caps that already reach the
+rail retain their approved projection. Thin and thick caps use the same rule.
+
+This intentionally reopens two prior approvals that contain the same defect:
+the west thick-shell interaction and two-room composition. Their historical
+images/fingerprints are retained separately pending reapproval; no new pixels
+are marked approved automatically. The other 200 approved renders are unchanged.
+Geometry and pixel checks cover both reported joins, including the thick cap's
+tile-row crossing. Next: recheck the reports and two reopened approvals, then the
+five remaining unreviewed compositions. The two-report pause stays in place.

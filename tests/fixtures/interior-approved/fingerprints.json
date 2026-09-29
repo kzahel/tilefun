@@ -945,11 +945,6 @@
     "fp": "7189068ca76a1136f1c085522d374eedb7c5e41cecce673ebd25c6736a5c0ec0"
   },
   {
-    "id": "interaction-thick-shell",
-    "name": "Thick partition meets the side wall",
-    "fp": "810e3220f5c9ba4a36424164db358d2973a6079d8cc110c69b67a1e987841087"
-  },
-  {
     "id": "interaction-corner-door-mirror",
     "name": "Door immediately beside a thick corner \u00b7 mirror",
     "fp": "4fc537c846b385790138ac65f7af0e0b01804cb86374041d02fd05e3967a38e7"
@@ -958,6 +953,11 @@
     "id": "interaction-short-return-mirror",
     "name": "One-cell return between width changes \u00b7 mirror",
     "fp": "0d2a5a6ee10bf97c051ba00195be486eaae3d61f30414095f84cce0d354b38e5"
+  },
+  {
+    "id": "interaction-thick-shell-mirror",
+    "name": "Thick partition meets the side wall \u00b7 mirror",
+    "fp": "b61f22908c430eadf0a0c88cca0f2dbab1b94925b2f30b34835227345f8349cd"
   },
   {
     "id": "interaction-mixed-step",
@@ -998,10 +998,5 @@
     "id": "interaction-mixed-south",
     "name": "Thick south join with a low approach",
     "fp": "95d3af16534a37765471e179a458d9b4e680ab9bf9e08fd432d974a5f15a37ab"
-  },
-  {
-    "id": "interaction-two-rooms",
-    "name": "Two rooms \u00b7 door between different wall profiles",
-    "fp": "744c7cfc540cf3493c7fa8be8157732fbf26cb6349e1dd1bb42ddb2e0d3ae0bf"
   }
 ]

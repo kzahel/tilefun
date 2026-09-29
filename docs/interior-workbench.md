@@ -162,3 +162,11 @@ unreviewed room compositions also receive the shared fix. Existing approvals
 remain current. The unchecked-only position counter now updates as background
 verification finishes, so it reflects the remaining cases without reselecting a
 category.
+
+The next review accepted the east thick-shell correction and reported normal
+west joins that appeared lower than the shell. Those caps now reach the shell's
+inner top rail. This shared fix reopens two older approvals (the west thick-shell
+case and the two-room composition); their previous reference images remain
+archived pending review. Refresh shows nine unchecked cases: two repaired
+reports, those two reopened approvals, and five unreviewed layouts. The other
+200 approved images are unchanged.

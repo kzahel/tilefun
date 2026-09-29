@@ -39,3 +39,11 @@ seven small interactions, all eight mixed-profile cases, and the first two-room
 composition. Each capture matches its good verdict. The baseline now protects
 201 renders; the rejected normal-height east attachments and remaining six room
 compositions still require review.
+
+The repaired east thick-wall connection was approved after commit 214d8fd.
+The next reports identified normal west caps stopping inside the shell face.
+Correcting that shared join intentionally changes `interaction-thick-shell` and
+`interaction-two-rooms`. Their historical approved PNGs are retained, with the
+old fingerprints in `pending-reapproval.json`; they are not approvals of the new
+renders. The active baseline protects 200 unchanged images. Restore these two to
+the active manifest only after fresh human approval with matching pixels.

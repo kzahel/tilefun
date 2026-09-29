@@ -5,11 +5,13 @@ const baseline = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; fp: string }[];
 
-for (const [id, stage, top] of [
-  ["interaction-thick-shell-mirror", "9", 88],
-  ["interaction-three-rooms", "11", 96],
+for (const [id, stage, top, side, x] of [
+  ["interaction-thick-shell-mirror", "9", 88, "east", 249],
+  ["interaction-three-rooms", "11", 96, "east", 249],
+  ["interaction-three-rooms", "11", 96, "west", 6],
+  ["interaction-offset-hall", "11", 88, "west", 6],
 ] as const)
-  test(`normal-height east cap joins the room rail in ${id}`, async ({ page }) => {
+  test(`normal-height ${side} cap joins the room rail in ${id}`, async ({ page }) => {
     await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
     await page.addInitScript(
       ({ id, stage }) =>
@@ -31,13 +33,16 @@ for (const [id, stage, top] of [
     await page.goto(`/tilefun/interior-review.html?stage=${stage}`);
     await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
     await expect(page.locator("#case-id")).toHaveText(id);
-    const cap = await page.locator("#render").evaluate((el, top) => {
-      const ctx = (el as HTMLCanvasElement).getContext("2d");
-      if (!ctx) throw new Error("Missing render");
-      return Array.from({ length: 103 - top }, (_, i) =>
-        Array.from(ctx.getImageData(249, top + 1 + i, 1, 1).data),
-      );
-    }, top);
+    const cap = await page.locator("#render").evaluate(
+      (el, { top, x }) => {
+        const ctx = (el as HTMLCanvasElement).getContext("2d");
+        if (!ctx) throw new Error("Missing render");
+        return Array.from({ length: 103 - top }, (_, i) =>
+          Array.from(ctx.getImageData(x, top + 1 + i, 1, 1).data),
+        );
+      },
+      { top, x },
+    );
     expect(cap).toEqual(Array(103 - top).fill([248, 248, 248, 255]));
   });
 

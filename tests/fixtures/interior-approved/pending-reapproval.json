@@ -1,0 +1,12 @@
+[
+  {
+    "id": "interaction-thick-shell",
+    "name": "Thick partition meets the side wall",
+    "fp": "810e3220f5c9ba4a36424164db358d2973a6079d8cc110c69b67a1e987841087"
+  },
+  {
+    "id": "interaction-two-rooms",
+    "name": "Two rooms \u00b7 door between different wall profiles",
+    "fp": "744c7cfc540cf3493c7fa8be8157732fbf26cb6349e1dd1bb42ddb2e0d3ae0bf"
+  }
+]

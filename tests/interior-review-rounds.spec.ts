@@ -4,6 +4,49 @@ import { expect, test } from "@playwright/test";
 const approved = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; name: string; fp: string }[];
+const pending = JSON.parse(
+  readFileSync(
+    new URL("./fixtures/interior-approved/pending-reapproval.json", import.meta.url),
+    "utf8",
+  ),
+) as { id: string; name: string; fp: string }[];
+
+test("changed west connections reopen their historical approvals", async ({ page }) => {
+  await page.route("**/api/interior-review", (route) =>
+    route.fulfill({
+      json: pending.map((r) => ({
+        id: `historical-${r.id}`,
+        caseId: r.id,
+        name: r.name,
+        sketch: "",
+        fingerprint: r.fp,
+        verdict: "good",
+        note: "",
+        createdAt: "2026-09-29T00:00:00Z",
+      })),
+    }),
+  );
+  const reopened = [
+    ["interaction-thick-shell", "9"],
+    ["interaction-two-rooms", "11"],
+  ] as const;
+  await page.addInitScript((cases) => {
+    const stage = new URL(location.href).searchParams.get("stage");
+    const current = cases.find(([, s]) => s === stage)?.[0];
+    localStorage.setItem(
+      "tilefun.indoor-review.v1",
+      JSON.stringify({ current, stage, records: [], outbox: [], batch: [], draft: "" }),
+    );
+  }, reopened);
+  for (const [current, stage] of reopened) {
+    await page.goto(`/tilefun/interior-review.html?stage=${stage}&unchecked=1`);
+    await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+    await expect(page.locator("#case-id")).toHaveText(current);
+    await expect(page.locator("#verdict")).toContainText("Changed since your last verdict");
+    await expect(page.locator("#good")).toBeEnabled();
+  }
+});
+
 function approvedRecords(includeInteractions = false) {
   // Keep this scenario's three new rounds ungraded as the real baseline grows.
   return approved
@@ -23,16 +66,16 @@ function approvedRecords(includeInteractions = false) {
 test("unchecked position updates after background verification without changing categories", async ({
   page,
 }) => {
-  const caseId = "interaction-thick-shell-mirror";
+  const caseId = "interaction-mixed-step";
   const records = approvedRecords(true).filter((r) => r.caseId !== caseId);
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
   await page.addInitScript((current) => {
     localStorage.setItem(
       "tilefun.indoor-review.v1",
-      JSON.stringify({ current, stage: "9", records: [], outbox: [], batch: [], draft: "" }),
+      JSON.stringify({ current, stage: "10", records: [], outbox: [], batch: [], draft: "" }),
     );
   }, caseId);
-  await page.goto("/tilefun/interior-review.html?stage=9&unchecked=1");
+  await page.goto("/tilefun/interior-review.html?stage=10&unchecked=1");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#case-id")).toHaveText(caseId);
   await expect(page.locator("#position")).toContainText("1 of 1");
