@@ -1,7 +1,9 @@
 # World explorer and regional generation
 
-Status: proposed implementation plan, September 29, 2026. This document describes
-future work; the explorer and regional planner are not implemented yet.
+Status: slice 1 implemented for review, September 29, 2026. The standalone
+regional explorer and shared bounded query module are available. City districts,
+tile realization, and entering play remain future work. See
+[the checkpoint guide](../world-explorer.md) for the demo, contracts, and evidence.
 
 ## Outcome
 
@@ -257,6 +259,8 @@ first measurements. Decide the first supported building facings from inspected
 art, and the interior storage/realm mapping from existing game constraints.
 Keep those choices explicit rather than embedding assumptions in many layers.
 
-The next implementation step is **slice 1**: a shared regional query module and
-a lightweight explorer showing one reproducible city/rural/wild layout, with
-measured generation cost and no full-chunk work at regional zoom.
+The current review checkpoint is **slice 1**: seed 2026 in the standalone world
+explorer, with a reproducible city/countryside/woodland layout, a boundary view,
+and a bounded broad overview. The next implementation step after regional review
+is **slice 2**: refine Ferngrove into the first connected city district and prove
+the minimum apartment/shop asset recipes before accepting lot geometry.

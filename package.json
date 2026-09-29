@@ -17,6 +17,7 @@
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
     "assets:review": "tsx scripts/build-review-sprites.ts",
     "interiors:counterexamples": "tsx scripts/interior-counterexamples.ts",
+    "explorer:bench": "tsx scripts/benchmark-regional.ts",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts"
   },

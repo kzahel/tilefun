@@ -73,6 +73,12 @@ export class MainMenu {
     title.textContent = "TILEFUN";
     this.overlay.appendChild(title);
 
+    const explorerLink = document.createElement("a");
+    explorerLink.href = `${import.meta.env.BASE_URL}world-explorer.html`;
+    explorerLink.textContent = "World atlas · regional preview ↗";
+    explorerLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
+    this.overlay.appendChild(explorerLink);
+
     this.listEl = document.createElement("div");
     this.listEl.style.cssText =
       "display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; width: 320px;";

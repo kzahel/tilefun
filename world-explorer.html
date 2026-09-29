@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#192c27" />
+    <title>World Atlas · Tilefun</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">▧</span> TILEFUN <span class="brand-divider">/</span> <span class="brand-title">World atlas</span></a>
+        <span class="preview-badge">PROCEDURAL PREVIEW</span>
+        <button id="share" type="button">Copy location ↗</button>
+      </header>
+      <main class="workspace">
+        <aside class="sidebar" aria-label="Explorer controls">
+          <div class="intro"><span class="eyebrow">REGIONAL STUDY / 01</span><h1>A world takes shape.</h1><p>Follow the landscape. Find a place.<br />See how the pieces connect.</p></div>
+          <form id="seed-form" class="seed-form"><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
+          <fieldset class="layers"><legend>Map layers</legend>
+            <label><span><i class="swatch geography"></i>Geography</span><input type="checkbox" data-layer="geography" checked /></label>
+            <label><span><i class="swatch land-use"></i>Rural land & woods</span><input type="checkbox" data-layer="landUse" checked /></label>
+            <label><span><i class="swatch settlement"></i>Settlements</span><input type="checkbox" data-layer="settlements" checked /></label>
+            <label><span><i class="swatch road"></i>Major connections</span><input type="checkbox" data-layer="roads" checked /></label>
+            <label><span><i class="swatch boundary"></i>Planning boundaries</span><input type="checkbox" data-layer="boundaries" /></label>
+          </fieldset>
+          <section class="review"><div class="section-heading"><h2>Three places to look</h2><span id="remaining">3 unchecked</span></div><div id="review-cases"></div>
+            <div class="review-actions"><button id="approve" type="button">Looks good →</button><button id="report" type="button">Report →</button></div>
+            <input id="review-note" placeholder="Optional note for a report" aria-label="Review note" maxlength="2000" />
+            <button id="export-review" class="text-button" type="button">Export review notes ↓</button>
+          </section>
+          <section id="inspection" class="inspection" aria-live="polite"><span class="eyebrow">FEATURE INSPECTOR</span><h2>Pick a place on the map</h2><p>Tap a settlement or a connection to inspect its identity and reservation.</p></section>
+          <p class="scope-note">This is the shared regional plan. Streets, building art, saved edits, and entering play arrive in later slices.</p>
+        </aside>
+        <section class="map-stage" aria-label="Regional world map">
+          <canvas id="map" aria-label="World map. Drag to pan, scroll or pinch to zoom. Arrow keys pan; plus and minus zoom." tabindex="0"></canvas>
+          <div class="map-heading"><span class="eyebrow">EXPLORE / <span id="map-mode">REGION</span></span><h2 id="map-title">Ferngrove & the surrounding land</h2><p id="map-subtitle">Settlement reservations · countryside · wild land</p></div>
+          <div class="map-tools"><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="home" type="button" aria-label="Return to starting region">⌂</button></div>
+          <span class="north" aria-hidden="true">↑<br />N</span>
+          <div class="map-footer"><span id="coordinates"></span><div class="scale"><span id="scale-label"></span><div id="scale-line"></div></div></div>
+          <div id="loading" class="loading" role="status">Drawing the first regional view…</div>
+          <details class="diagnostics" open><summary>Generation diagnostics <span id="queue-status">idle</span></summary><div id="diagnostics"></div></details>
+        </section>
+      </main>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <input id="location-link" aria-label="Shareable location" readonly hidden />
+    </div>
+    <script type="module" src="/src/explorer/main.ts"></script>
+  </body>
+</html>
