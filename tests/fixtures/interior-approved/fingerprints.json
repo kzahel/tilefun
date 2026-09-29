@@ -870,6 +870,21 @@
     "fp": "e86cf4ece740d89aa22c9950c2fe754af0606a58ec79ff7c059c62d047776a9f"
   },
   {
+    "id": "profile-door-true",
+    "name": "Opening beside a height change \u00b7 mirror",
+    "fp": "3d6742ac982d8eeec43f72c500dbb5b6b1cd75eadd2f175ae4522c284a1a80f1"
+  },
+  {
+    "id": "profile-door-east-low",
+    "name": "East wall attachment \u00b7 low wall beside opening",
+    "fp": "b1dcac5f18db506d56bded001646c06f73fa52115a4617d8cb808717d2c9adc1"
+  },
+  {
+    "id": "profile-door-east-tall",
+    "name": "East wall attachment \u00b7 tall wall beside opening",
+    "fp": "9b53bee5d22b47c2a3471411ca930bb3f782d6968abdaa536a51e51faed26115"
+  },
+  {
     "id": "connection-straight",
     "name": "Thickness \u00b7 thin meets thick",
     "fp": "4ebde18da55c97455b57635b03d9983f7ac09edbe34a296efe195c425669b876"
@@ -930,6 +945,11 @@
     "fp": "7189068ca76a1136f1c085522d374eedb7c5e41cecce673ebd25c6736a5c0ec0"
   },
   {
+    "id": "interaction-thick-shell",
+    "name": "Thick partition meets the side wall",
+    "fp": "82551a200f2e2a9e7d0911620bc374ee95572f2160c32df75b37edf8248084b8"
+  },
+  {
     "id": "interaction-corner-door-mirror",
     "name": "Door immediately beside a thick corner \u00b7 mirror",
     "fp": "4fc537c846b385790138ac65f7af0e0b01804cb86374041d02fd05e3967a38e7"
@@ -985,13 +1005,43 @@
     "fp": "95d3af16534a37765471e179a458d9b4e680ab9bf9e08fd432d974a5f15a37ab"
   },
   {
+    "id": "interaction-two-rooms",
+    "name": "Two rooms \u00b7 door between different wall profiles",
+    "fp": "1b1da98f4bbf8aa4e3bb8b7cbbbf67681b7e1aa5aebaa528310d1f271e900abc"
+  },
+  {
     "id": "interaction-three-rooms",
     "name": "Three rooms \u00b7 two doors and a thick low stem",
     "fp": "2b9bd3dce6168bb7bb5db6be58697cdfcff205d0298a7b976ce555ff0fde225d"
   },
   {
+    "id": "interaction-offset-hall",
+    "name": "Three spaces \u00b7 narrow hall with offset doors",
+    "fp": "9ebe499aa9a1d031f403ef3eb7035c46135bff328b3e46fa78454a7fe2532dfd"
+  },
+  {
     "id": "interaction-room-returns",
     "name": "Connected rooms \u00b7 short returns beside two doors",
     "fp": "02f89cc16b8f8a69fd0c7494bfb105599ad8ec25abe6468e1aed9d1ecc618259"
+  },
+  {
+    "id": "interaction-two-rooms-mirror",
+    "name": "Two rooms \u00b7 door between different wall profiles \u00b7 mirror",
+    "fp": "eb6e502963fc507f647b6ea26f5aeb19f52837ef58d121362cbe4215280c129b"
+  },
+  {
+    "id": "interaction-three-rooms-mirror",
+    "name": "Three rooms \u00b7 two doors and a thick low stem \u00b7 mirror",
+    "fp": "68a9781b3193a2ef61abbbf0d85da06c8ea7444c54a0b893f5e7d1e8ca97d465"
+  },
+  {
+    "id": "interaction-offset-hall-mirror",
+    "name": "Three spaces \u00b7 narrow hall with offset doors \u00b7 mirror",
+    "fp": "dd2ae6fb06830ce3fcaf35abb91b7436b18d1d92a8a671419b4fa7f83573f06d"
+  },
+  {
+    "id": "interaction-room-returns-mirror",
+    "name": "Connected rooms \u00b7 short returns beside two doors \u00b7 mirror",
+    "fp": "36c5f6c992205efd86eed89848fb59c0ed0e1033a9cc15e701b655fb2e4ad8e8"
   }
 ]

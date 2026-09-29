@@ -819,3 +819,26 @@ historical approvals are pending recheck in total. Tests cover the relative cap
 positions for all three heights on both sides, exposed versus covered end faces,
 and the two reported pixels. Next: review the repaired reports first, then the
 reopened attachments and remaining compositions. Ten cases are unchecked.
+
+### Complete the north/south attachment matrix, 2026-09-29
+
+The user approved every current render: 209 of 209 fingerprints match good
+verdicts. All ten outstanding images were promoted to the regression baseline;
+the formerly pending hashes remain as historical inputs for verdict-expiry tests.
+
+Stage 12 adds exactly eight candidates: normal/thin and low/normal/tall thick
+partitions at both the north shell and south cutaway. Together with the four
+previously approved low/tall thin attachments, this covers all twelve combinations
+of side, height, and width. Each new sketch is 7×7 with one three-cell partition
+and the same wood floor, producing a complete 224×198 render. Preview inspection
+exposed a 3px gap at normal north caps: their attachment now meets the native cap
+at y=5 and blends back to the ordinary projection within the first cell, as tall
+caps already do. This changes only the two new normal north candidates; all 209
+approved images stay unchanged. No generated-render caches are introduced, and
+the source sprite sheet is reused.
+
+Review at `interior-review.html?stage=12&unchecked=1`. One or two failures are
+enough; passing structural bounds and screenshot checks does not approve their
+appearance. After this round, target compact door/corner and nearby-junction
+counterexamples, then automate selection of distinct generated interactions so
+human review remains small and high signal.

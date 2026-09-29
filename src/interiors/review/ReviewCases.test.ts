@@ -2,11 +2,39 @@ import { describe, expect, it } from "vitest";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
+import { boundaryReviewCases } from "./BoundaryReviewCases.js";
+import { connectionReviewCases } from "./ConnectionReviewCases.js";
 import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { REVIEW_STAGES, reviewCases } from "./ReviewCases.js";
 import { currentVerdict, parseReviewFeedback, type ReviewFeedback } from "./ReviewFeedback.js";
 
 describe("review coverage", () => {
+  it("completes all twelve north/south height and width combinations in compact cases", () => {
+    const cases = boundaryReviewCases();
+    expect(cases).toHaveLength(8);
+    const combinations = new Set<string>();
+    const attachments = [
+      ...cases,
+      ...connectionReviewCases().filter((c) => /connection-(north|south)-/.test(c.id)),
+    ];
+    for (const c of attachments) {
+      const side = c.id.includes("north") ? "north" : "south";
+      const w = c.profiles.walls[0];
+      if (!w) throw new Error("Empty attachment");
+      combinations.add(`${side}-${w.height}-${w.thickness ?? "thin"}`);
+      const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+      expect(map.width * 16).toBeLessThanOrEqual(256);
+      expect(map.pixelHeight).toBeLessThanOrEqual(256);
+      for (const s of map.surfaces)
+        for (const [x, y] of s.points) {
+          expect(x, c.id).toBeGreaterThanOrEqual(0);
+          expect(x, c.id).toBeLessThan(map.width * 16);
+          expect(y, c.id).toBeGreaterThanOrEqual(0);
+          expect(y, c.id).toBeLessThan(map.pixelHeight);
+        }
+    }
+    expect(combinations.size).toBe(12);
+  });
   it("adds three compact eight-case rounds with connected whole-room floor plans", () => {
     const cases = interactionReviewCases();
     for (const stage of [9, 10, 11]) expect(cases.filter((c) => c.stage === stage)).toHaveLength(8);

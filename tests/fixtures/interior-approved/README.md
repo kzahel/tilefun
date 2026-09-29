@@ -55,3 +55,9 @@ reopens `profile-door-true`, `profile-door-east-low`, and `profile-door-east-tal
 Their old images remain untouched and their fingerprints join the pending file.
 The active baseline now protects 199 unchanged renders; five historical approvals
 await recheck. No changed render has been automatically approved.
+
+All 209 cases were approved after 4f667b6. The ten outstanding captures now match
+their latest good verdicts, including all five reopened attachments. There are
+no pending reapprovals. `superseded-fingerprints.json` retains older hashes solely
+to test that changed renders invalidate historical verdicts. Stage 12 adds eight
+new boundary candidates; those remain outside the approved baseline.

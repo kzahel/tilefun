@@ -207,7 +207,7 @@ export function buildProfileApartmentPlan(
     }
     if (attachNorth) {
       const h = WALL_HEIGHTS[w.height];
-      const lift = Math.max(0, 5 - (32 - h));
+      const lift = h >= WALL_HEIGHTS.normal ? 5 - (32 - h) : 0;
       if (lift) {
         // The native north cap ends at y=5. Blend its connection back into the
         // ordinary projection over the first cell, keeping every segment monotone.

@@ -1,12 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "./ApartmentWallProfiles.js";
+import { boundaryReviewCases } from "./review/BoundaryReviewCases.js";
 import { connectionReviewCases } from "./review/ConnectionReviewCases.js";
 import { interactionReviewCases } from "./review/InteractionReviewCases.js";
 import { profileReviewCases } from "./review/ProfileReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
 describe("experimental wall profiles", () => {
+  it.each(["thin", "thick"])("joins a normal %s north cap to the native rail", (thickness) => {
+    const c = boundaryReviewCases().find((c) => c.id === `boundary-north-normal-${thickness}`);
+    if (!c) throw new Error("Missing normal north fixture");
+    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+    const tops = map.surfaces.filter((s) => s.plane === "top:24");
+    expect(Math.min(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(5);
+    // Connection blending must finish in the first cell, preserving the rest.
+    expect(tops.some((s) => s.points.some(([, y]) => y === 40))).toBe(true);
+  });
   it.each([
     ["west", "low", 14],
     ["west", "normal", 6],

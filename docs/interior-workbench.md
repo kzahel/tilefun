@@ -177,3 +177,10 @@ face, and tall walls retain their rise above its rail. It reopens three older
 low/tall attachment approvals as well as the two new reports. Refresh shows
 ten unchecked cases, with 199 current approvals preserved exactly. Historical
 references remain archived until fresh review approves their changed versions.
+
+All 209 cases have now passed review and are protected by exact image references.
+The next eight-case category is **North & south attachments** (`?stage=12&unchecked=1`):
+normal thin walls, then normal/low/tall thick walls at each boundary. These 7×7
+sketches fit a 224px canvas and complete the height/width matrix alongside earlier
+thin-wall approvals. Only the eight new candidates are unchecked; the same
+one-click review and two-report pause apply.

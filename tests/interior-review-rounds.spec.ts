@@ -5,9 +5,9 @@ import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 const approved = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
 ) as { id: string; name: string; fp: string }[];
-const pending = JSON.parse(
+const superseded = JSON.parse(
   readFileSync(
-    new URL("./fixtures/interior-approved/pending-reapproval.json", import.meta.url),
+    new URL("./fixtures/interior-approved/superseded-fingerprints.json", import.meta.url),
     "utf8",
   ),
 ) as { id: string; name: string; fp: string }[];
@@ -15,7 +15,7 @@ const pending = JSON.parse(
 test("changed side connections reopen their historical approvals", async ({ page }) => {
   await page.route("**/api/interior-review", (route) =>
     route.fulfill({
-      json: pending.map((r) => ({
+      json: superseded.map((r) => ({
         id: `historical-${r.id}`,
         caseId: r.id,
         name: r.name,
@@ -68,6 +68,46 @@ function approvedRecords(includeInteractions = false) {
       createdAt: "2026-09-29T00:00:00Z",
     }));
 }
+
+test("eight boundary cases are the only unchecked cases and fit a phone", async ({ page }) => {
+  const records = approvedRecords(true);
+  await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/tilefun/interior-review.html?stage=12&unchecked=1");
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator('#stage option[value="all"]')).toHaveText(
+    "Small → complex — 8 unchecked",
+  );
+  await expect(page.locator('#stage option[value="12"]')).toHaveText(
+    "North & south attachments — 8 unchecked",
+  );
+  await expect(page.locator("#unsupported-label")).toHaveText("0 cases excluded by the compiler");
+  const visited = new Set<string>();
+  for (let i = 0; i < 8; i++) {
+    const id = (await page.locator("#case-id").textContent()) ?? "";
+    expect(id).toMatch(/^boundary-(north|south)-(low|normal|tall)-(thin|thick)$/);
+    expect(visited.has(id)).toBe(false);
+    visited.add(id);
+    const size = await page.locator("#render").evaluate((el) => ({
+      width: (el as HTMLCanvasElement).width,
+      height: (el as HTMLCanvasElement).height,
+      overflow: document.documentElement.scrollWidth > innerWidth,
+    }));
+    expect(size).toEqual({ width: 224, height: 198, overflow: false });
+    if (id.startsWith("boundary-north-normal")) {
+      const seam = await page.locator("#render").evaluate((el) => {
+        const ctx = (el as HTMLCanvasElement).getContext("2d");
+        if (!ctx) throw new Error("Missing canvas");
+        return Array.from(ctx.getImageData(110, 5, 1, 1).data);
+      });
+      expect(seam).toEqual([248, 248, 248, 255]);
+    }
+    await page.locator("#skip").click();
+  }
+  await page.reload();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#case-id")).toHaveText("boundary-north-normal-thin");
+});
 
 test("unchecked position updates after background verification without changing categories", async ({
   page,

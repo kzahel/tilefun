@@ -2,6 +2,7 @@ import { APARTMENT_EXAMPLES, type PlanCell } from "../ApartmentFloorPlan.js";
 
 import { APARTMENT_JOIN_FIXTURES, WIDE_WALL_FIXTURES } from "../ApartmentJoinFixtures.js";
 import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
+import { boundaryReviewCases } from "./BoundaryReviewCases.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
 import { interactionReviewCases } from "./InteractionReviewCases.js";
 import { profileReviewCases } from "./ProfileReviewCases.js";
@@ -19,6 +20,7 @@ export const REVIEW_STAGES = [
   "Small profile interactions",
   "Mixed heights & thickness",
   "Connected room layouts",
+  "North & south attachments",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -263,5 +265,6 @@ export function reviewCases(): ReviewCase[] {
     ...profileReviewCases(),
     ...connectionReviewCases(),
     ...interactionReviewCases(),
+    ...boundaryReviewCases(),
   ];
 }
