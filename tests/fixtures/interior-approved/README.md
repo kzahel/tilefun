@@ -3,9 +3,23 @@
 The first 163 renders were accepted by the reviewer on 2026-09-29. They capture the
 legacy renderer after the connected wall-mass outline fixes (commit f802863).
 `fingerprints.json` hashes the sketch, canvas dimensions, and RGBA pixels exactly
-as the review page does. PNGs retain the actual visual reference.
+as the review page does. These hashes record the historical approvals; PNGs are
+the actual visual regression references. Browser/OS differences in translucent
+shadow compositing can change an exact hash without changing the appearance.
 
-The browser regression test checks every baseline case without posting feedback.
+The browser regression test compares every baseline case's native-resolution
+canvas PNG without posting feedback. It uses Playwright's perceived-color
+threshold of 0.01 (well below the default 0.2) with zero differing pixels allowed
+above that threshold. This tolerates tiny shadow-rounding differences while
+retaining checks for changed geometry, occlusion, dimensions, and appearance.
+Targeted geometry tests still assert exact pixel colors. Failures include actual,
+expected, and diff images in the HTML report and CI artifacts.
+
+Functional review scenarios seed approvals from freshly rendered fingerprints in
+an isolated context in the test browser, independently of these visual baselines.
+Explicit stale-verdict scenarios still verify that changed fingerprints reopen
+approvals. Production verdict matching continues to use exact fingerprints.
+
 Do not regenerate this directory to make a failing test pass. A changed image
 must return to the human review cycle before its baseline is replaced.
 

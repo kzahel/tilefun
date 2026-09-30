@@ -1,10 +1,5 @@
-import { readFileSync } from "node:fs";
-import { expect, test } from "@playwright/test";
 import { reviewCases } from "../src/interiors/review/ReviewCases.js";
-
-const approved = JSON.parse(
-  readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
-) as { id: string; name: string; fp: string }[];
+import { expect, test } from "./helpers/interior-review.js";
 
 test("review starts before verification finishes, uses only small sprites, and recomputes on reload", async ({
   page,
@@ -94,18 +89,13 @@ test("review starts before verification finishes, uses only small sprites, and r
 
 test("category counts verify old verdicts, distinguish wrong from unchecked, and follow undo", async ({
   page,
+  reviewRecords,
 }) => {
-  const records: Record<string, unknown>[] = approved
-    .filter((r) => r.id !== "connection-south-tall")
-    .map((r, i) => ({
-      id: `approved-${i}`,
-      caseId: r.id,
-      name: r.name,
-      sketch: "",
-      fingerprint: r.id === "connection-straight" ? "0".repeat(64) : r.fp,
-      verdict: "good",
-      note: "",
-      createdAt: "2026-09-29T00:00:00Z",
+  const records = reviewRecords
+    .filter((r) => r.caseId !== "connection-south-tall")
+    .map((r) => ({
+      ...r,
+      fingerprint: r.caseId === "connection-straight" ? "0".repeat(64) : r.fingerprint,
     }));
   await page.route("**/api/interior-review", async (route) => {
     if (route.request().method() === "POST") {

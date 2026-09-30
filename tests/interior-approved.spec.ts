@@ -1,11 +1,41 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-import { furnitureSignature } from "../src/interiors/FurnishedInterior.js";
-import { reviewCases } from "../src/interiors/review/ReviewCases.js";
+// @ts-expect-error pngjs has no bundled declarations
+import pngjs from "pngjs";
+import { captureReviewRenders } from "./helpers/interior-review.js";
 
 const baseline = JSON.parse(
   readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
-) as { id: string; fp: string }[];
+) as { id: string }[];
+
+const visualOptions = { threshold: 0.01, maxDiffPixels: 0 };
+
+test("visual comparison tolerates color rounding but rejects missing geometry and size changes", () => {
+  const { PNG } = pngjs;
+  const image = PNG.sync.read(
+    readFileSync(new URL("./fixtures/interior-approved/profile-arch.png", import.meta.url)),
+  );
+  // A one-channel rounding difference is harmless, even under a zero-pixel budget.
+  image.data[0] += 1;
+  expect(PNG.sync.write(image)).toMatchSnapshot("profile-arch.png", visualOptions);
+  // A large color change inside a flat region must still count as a mismatch.
+  const offset = (10 * image.width + 10) * 4;
+  const original = image.data[offset];
+  image.data[offset] = 255;
+  expect(PNG.sync.write(image)).not.toMatchSnapshot("profile-arch.png", visualOptions);
+  image.data[offset] = original;
+  // Removing the arch entirely must fail, without consuming a percentage budget.
+  for (let y = 81; y < 136; y++)
+    for (let x = 96; x < 128; x++) {
+      const offset = (y * image.width + x) * 4;
+      image.data[offset] = 23;
+      image.data[offset + 1] = 30;
+      image.data[offset + 2] = 42;
+    }
+  expect(PNG.sync.write(image)).not.toMatchSnapshot("profile-arch.png", visualOptions);
+  const resized = new PNG({ width: image.width + 1, height: image.height });
+  expect(PNG.sync.write(resized)).not.toMatchSnapshot("profile-arch.png", visualOptions);
+});
 
 for (const [id, x, y, expected] of [
   ["interaction-two-rooms-mirror", 5, 94, 204],
@@ -82,50 +112,22 @@ for (const [id, stage, top, side, x] of [
     expect(cap).toEqual(Array(103 - top).fill([248, 248, 248, 255]));
   });
 
-test(`all ${baseline.length} approved interiors retain their exact rendered pixels`, async ({
+test(`all ${baseline.length} approved interiors match their visual references`, async ({
   page,
 }) => {
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: [] }));
-  await page.goto("/tilefun/interior-review.html");
-  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
-  const actual = await page.evaluate(
-    async ({ ids, furniture }) => {
-      const wanted = new Set(ids),
-        visited = new Set<string>();
-      const results: { id: string; fp: string }[] = [];
-      while (results.length < wanted.size) {
-        const canvas = document.querySelector<HTMLCanvasElement>("#render");
-        const id = document.querySelector("#case-id")?.textContent;
-        const sketch = document.querySelector("#sketch")?.textContent;
-        const ctx = canvas?.getContext("2d");
-        if (!canvas || !ctx || !id || !sketch) throw new Error("Missing review canvas");
-        if (visited.has(id)) throw new Error("An approved case disappeared from the review pool");
-        visited.add(id);
-        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-        const header = new TextEncoder().encode(
-          `${sketch}\n${canvas.width},${canvas.height}\n${furniture[id] ?? ""}`,
-        );
-        const bytes = new Uint8Array(header.length + pixels.length);
-        bytes.set(header);
-        bytes.set(pixels, header.length);
-        const fp = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-          .map((b) => b.toString(16).padStart(2, "0"))
-          .join("");
-        if (wanted.has(id)) results.push({ id, fp });
-        document.querySelector<HTMLButtonElement>("#skip")?.click();
-      }
-      return results;
-    },
-    {
-      ids: baseline.map((r) => r.id),
-      furniture: Object.fromEntries(
-        reviewCases()
-          .filter((c) => c.furniture)
-          .map((c) => [c.id, furnitureSignature(c.furniture ?? [])]),
-      ),
-    },
+  const renders = await captureReviewRenders(
+    page,
+    baseline.map((r) => r.id),
+    true,
   );
-  expect(actual).toEqual(baseline.map(({ id, fp }) => ({ id, fp })));
+  for (const { id, png } of renders) {
+    // Compare native canvas pixels, not CSS-scaled screenshots. Allow only tiny
+    // perceived color changes from platform shadow blending; no larger changes.
+    expect
+      .soft(Buffer.from(png.split(",")[1] ?? "", "base64"), id)
+      .toMatchSnapshot(`${id}.png`, visualOptions);
+  }
 });
 
 test("height sampler is compact and preserves the two-failure review cycle", async ({ page }) => {

@@ -1,27 +1,13 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { expect, test } from "@playwright/test";
 import { furnitureSignature } from "../src/interiors/FurnishedInterior.js";
 import { furnitureReviewCases } from "../src/interiors/review/FurnitureReviewCases.js";
+import { expect, test } from "./helpers/interior-review.js";
 
 test("furniture review preserves layered placements and hashes the clean image plus catalog metadata", async ({
   page,
+  reviewRecords,
 }) => {
-  const baseline = JSON.parse(
-    readFileSync("tests/fixtures/interior-approved/fingerprints.json", "utf8"),
-  ) as { id: string; fp: string; name: string }[];
-  const records: Record<string, unknown>[] = baseline
-    .filter((r) => !r.id.startsWith("furniture-"))
-    .map((r, i) => ({
-      id: `good-${i}`,
-      caseId: r.id,
-      name: r.name,
-      sketch: "",
-      fingerprint: r.fp,
-      verdict: "good",
-      note: "",
-      createdAt: "2026-09-29T00:00:00Z",
-    }));
+  const records = reviewRecords.filter((r) => !r.caseId.startsWith("furniture-"));
   const posts: Record<string, unknown>[] = [];
   await page.route("**/api/interior-review", async (route) => {
     if (route.request().method() === "POST") {

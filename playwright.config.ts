@@ -3,6 +3,10 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   timeout: 30_000,
+  reporter: [["list"], ["html", { open: "never" }]],
+  snapshotPathTemplate: "{testDir}/fixtures/interior-approved/{arg}{ext}",
+  // New/changed visual references require human review, never an automatic write.
+  updateSnapshots: "none",
   use: {
     baseURL: "http://localhost:4174",
     screenshot: "only-on-failure",

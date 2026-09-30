@@ -86,7 +86,10 @@ Height marks in the plan identify the changed walls; the floor palette is fixed.
 Two wrong marks still pause the batch, and notes/pins remain optional.
 
 The 163 approved legacy renders and fourteen approved height/arch renders are preserved in
-`tests/fixtures/interior-approved`; a browser test checks their exact pixels.
+`tests/fixtures/interior-approved`; a browser test compares their native-resolution
+PNGs with a small perceived-color tolerance for platform shadow rounding. Larger
+pixel differences and canvas size changes still fail; targeted join and occlusion
+tests retain exact pixel assertions.
 The height sampler is opt-in and does not replace the workbench's approved wall
 renderer. Height specifications are included in feedback for reproducibility.
 

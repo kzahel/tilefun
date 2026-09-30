@@ -1,10 +1,8 @@
 import { readFileSync } from "node:fs";
-import { expect, test } from "@playwright/test";
 import { reviewCases } from "../src/interiors/review/ReviewCases.js";
+import type { ReviewFeedback } from "../src/interiors/review/ReviewFeedback.js";
+import { expect, test } from "./helpers/interior-review.js";
 
-const approved = JSON.parse(
-  readFileSync(new URL("./fixtures/interior-approved/fingerprints.json", import.meta.url), "utf8"),
-) as { id: string; name: string; fp: string }[];
 const superseded = JSON.parse(
   readFileSync(
     new URL("./fixtures/interior-approved/superseded-fingerprints.json", import.meta.url),
@@ -118,20 +116,9 @@ test("changed side connections reopen their historical approvals", async ({ page
   }
 });
 
-function approvedRecords(includeInteractions = false) {
-  // Keep this scenario's three new rounds ungraded as the real baseline grows.
-  return approved
-    .filter((r) => includeInteractions || !r.id.startsWith("interaction-"))
-    .map((r, i) => ({
-      id: `approved-${i}`,
-      caseId: r.id,
-      name: r.name,
-      sketch: "",
-      fingerprint: r.fp,
-      verdict: "good",
-      note: "",
-      createdAt: "2026-09-29T00:00:00Z",
-    }));
+function withoutInteractions(records: ReviewFeedback[]) {
+  // This scenario leaves the three interaction rounds ungraded.
+  return records.filter((r) => !r.caseId.startsWith("interaction-"));
 }
 
 for (const stage of [13, 14, 15]) {
@@ -144,10 +131,9 @@ for (const stage of [13, 14, 15]) {
         : "Furniture catalog";
   test(`stage ${stage} provides eight phone-sized candidates and pauses after two reports`, async ({
     page,
+    reviewRecords,
   }) => {
-    const records: Record<string, unknown>[] = approvedRecords(true).filter(
-      (r) => !stageCases.some((c) => c.id === r.caseId),
-    );
+    const records = reviewRecords.filter((r) => !stageCases.some((c) => c.id === r.caseId));
     const posts: Record<string, unknown>[] = [];
     await page.route("**/api/interior-review", async (route) => {
       if (route.request().method() === "POST") {
@@ -199,8 +185,11 @@ for (const stage of [13, 14, 15]) {
   });
 }
 
-test("eight boundary cases fit a phone and retain category counts", async ({ page }) => {
-  const records = approvedRecords(true).filter((r) => !r.caseId.startsWith("boundary-"));
+test("eight boundary cases fit a phone and retain category counts", async ({
+  page,
+  reviewRecords,
+}) => {
+  const records = reviewRecords.filter((r) => !r.caseId.startsWith("boundary-"));
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/tilefun/interior-review.html?stage=12&unchecked=1");
@@ -245,9 +234,10 @@ test("eight boundary cases fit a phone and retain category counts", async ({ pag
 
 test("unchecked position updates after background verification without changing categories", async ({
   page,
+  reviewRecords,
 }) => {
   const caseId = "interaction-thick-shell-mirror";
-  const records = approvedRecords(true).filter((r) => r.caseId !== caseId);
+  const records = reviewRecords.filter((r) => r.caseId !== caseId);
   await page.route("**/api/interior-review", (route) => route.fulfill({ json: records }));
   await page.addInitScript((current) => {
     localStorage.setItem(
@@ -263,8 +253,11 @@ test("unchecked position updates after background verification without changing 
 
 test("unchecked filter hides completed categories, supports browsing grades, and survives reload", async ({
   page,
+  reviewRecords,
 }) => {
-  await page.route("**/api/interior-review", (route) => route.fulfill({ json: approvedRecords() }));
+  await page.route("**/api/interior-review", (route) =>
+    route.fulfill({ json: withoutInteractions(reviewRecords) }),
+  );
   await page.goto("/tilefun/interior-review.html?stage=9");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#unchecked-only")).toBeChecked();
@@ -289,8 +282,9 @@ test("unchecked filter hides completed categories, supports browsing grades, and
 
 test("three new eight-case rounds fit a phone and preserve the two-report pause", async ({
   page,
+  reviewRecords,
 }) => {
-  const records: Record<string, unknown>[] = approvedRecords();
+  const records = withoutInteractions(reviewRecords);
   const posts: Record<string, unknown>[] = [];
   await page.route("**/api/interior-review", async (route) => {
     if (route.request().method() === "POST") {
