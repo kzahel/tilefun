@@ -24,6 +24,9 @@ export function drawBuildingShowcase(
   canvas.height = (maxY - minY) * 2;
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Missing building canvas");
+  // Resizing resets context state. Match gameplay's nearest-neighbor sampling
+  // so transparent atlas gutters cannot bleed into adjoining facade pieces.
+  ctx.imageSmoothingEnabled = false;
   const camera = new Camera();
   camera.setViewport(canvas.width, canvas.height);
   camera.zoom = 2 / PIXEL_SCALE;

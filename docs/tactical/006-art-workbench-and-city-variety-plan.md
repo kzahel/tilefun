@@ -83,6 +83,14 @@ Follow-up validation: typecheck/build and 1,060 unit tests pass; all 138 browser
 tests passed, with all 14 lab/workbench checks rerun after the final draft and
 target-preservation fixes. The feedback form's phone layout was inspected.
 
+The first composition feedback identified dark seams between facade strips.
+The lab's resized canvas had reset to smooth image sampling, blending
+transparent atlas gutters into opaque sprite edges. Resetting nearest-neighbor
+sampling after every resize fixes this. A regression failed on the old preview
+and now checks exact source RGBA at the join before/after redraw. Typecheck,
+build, 1,060 unit tests, and all 139 browser tests pass; corrected captures were
+visually reviewed.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially

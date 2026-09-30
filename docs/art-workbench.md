@@ -123,6 +123,9 @@ stage rather than a second city generator. The narrow window-only strip is
 combined with a door-bearing wing for a standalone flat-front apartment. Hotel
 entry art and shop signs retain their own placement/layering. Native source
 bounds and the exact selected PNG fingerprint are tested.
+The preview resets nearest-neighbor canvas sampling after each resize, matching
+gameplay. A pixel-level browser regression checks adjoining facade edges
+against the opaque source pixels, including after a redraw.
 
 These are **candidates** for human review. The frozen Regional v1/v2/v3 district
 lists do not spawn them; height variation does not promise playable upper
