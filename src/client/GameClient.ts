@@ -44,6 +44,7 @@ import { PlayScene } from "../scenes/PlayScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
+import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import {
   ACTIVE_PROFILE_KEY,
   HMR_KEY,
@@ -59,6 +60,7 @@ import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
+import { RequestBroker } from "./RequestBroker.js";
 
 export interface GameClientOptions {
   mode?: "local" | "serialized";
@@ -121,11 +123,8 @@ export class GameClient {
 
   /** Request/response correlation for serialized mode. */
   private nextRequestId = 1;
-  private pendingRequests = new Map<
-    number,
-    { resolve: (value: ServerMessage) => void; reject: (error: Error) => void }
-  >();
-  /** Last visible range key sent to server (serialized mode). */
+  private readonly requests: RequestBroker;
+
   private lastVisibleRangeKey: string | null = null;
   /** Last debug flag key sent to server (serialized mode). */
   private lastDebugStateKey: string | null = null;
@@ -160,6 +159,8 @@ export class GameClient {
     this.ctx = ctx;
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
     this.transport = this.netEmulatedTransport;
+    this.requests = new RequestBroker((message) => this.transport.send(message));
+    this.transport.onDisconnect?.(() => this.requests.disconnect());
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
@@ -203,7 +204,7 @@ export class GameClient {
     this.time = new Time();
     this.consoleEngine = new ConsoleEngine();
     this.consoleEngine.rconSend = async (command: string) => {
-      const resp = await this.gcSendRequest<{ output: string[]; error?: boolean }>({
+      const resp = await this.gcSendRequest({
         type: "rcon",
         requestId: this.nextRequestId++,
         command,
@@ -276,11 +277,11 @@ export class GameClient {
               msg.realms.find((r) => r.playerCount > 0) ||
               msg.realms[0]!;
             this.autoJoinRealm = false; // only auto-join once
-            this.gcSendRequest({
+            void this.gcSendRequest({
               type: "join-realm",
               requestId: this.nextRequestId++,
               worldId: target.id,
-            });
+            }).catch((error) => this.mainMenu.showCreationError(String(error)));
           } else if (!isRequestResponse && this.initDone) {
             // Unsolicited broadcast — show realm browser immediately
             if (!this.scenes.has(MenuScene)) {
@@ -314,15 +315,7 @@ export class GameClient {
           this.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
         }
 
-        // Resolve pending request/response promises
-        if ("requestId" in msg && msg.requestId !== undefined) {
-          const pending = this.pendingRequests.get(msg.requestId);
-          if (pending) {
-            this.pendingRequests.delete(msg.requestId);
-            if (msg.type === "request-error") pending.reject(new Error(msg.message));
-            else pending.resolve(msg);
-          }
-        }
+        this.requests.receive(msg);
       });
 
       // Send profile identity to server (profileId for persistence, displayName for labels)
@@ -336,6 +329,7 @@ export class GameClient {
     } else {
       if (!server) throw new Error("Local mode requires a GameServer instance");
       this.stateView = new LocalStateView(server);
+      this.transport.onMessage((message) => this.requests.receive(message));
     }
 
     this.doorControl = new DoorControl(async (request) => {
@@ -577,7 +571,7 @@ export class GameClient {
         if (worldType !== undefined) msg.worldType = worldType;
         if (seed !== undefined) msg.seed = seed;
         if (generation !== undefined) msg.generation = generation;
-        this.gcSendRequest<{ meta: { id: string } }>(msg)
+        this.gcSendRequest(msg)
           .then((resp) => {
             return this.gcSendRequest({
               type: "join-realm",
@@ -616,7 +610,7 @@ export class GameClient {
           requestId: this.nextRequestId++,
           worldId: id,
         });
-        const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
+        const resp = await this.gcSendRequest({
           type: "list-realms",
           requestId: this.nextRequestId++,
         });
@@ -724,6 +718,7 @@ export class GameClient {
     this.doorControl.destroy();
     this.loop.stop();
     this.gcFlushServer();
+    this.requests.dispose();
     this.transport.close();
     this.scenes.clear();
     this.actions.detach();
@@ -745,7 +740,9 @@ export class GameClient {
       if (this.scenes.has(MenuScene)) {
         this.scenes.pop();
       } else {
-        this.toggleMenu();
+        void this.toggleMenu().catch((error) =>
+          this.consoleEngine.output.printError(String(error)),
+        );
       }
     });
     this.actions.on("toggle_debug", () => {
@@ -798,7 +795,7 @@ export class GameClient {
     try {
       this.gcFlushServer();
       if (this.serialized) {
-        const resp = await this.gcSendRequest<{ realms: RealmInfo[] }>({
+        const resp = await this.gcSendRequest({
           type: "list-realms",
           requestId: this.nextRequestId++,
         });
@@ -867,14 +864,8 @@ export class GameClient {
   // ---- Helpers (also exposed via GameContext) ----
 
   /** Send a request and return a promise resolved when the server responds with matching requestId. */
-  private gcSendRequest<T>(msg: ClientMessage & { requestId: number }): Promise<T> {
-    return new Promise((resolve, reject) => {
-      this.pendingRequests.set(msg.requestId, {
-        resolve: (value) => resolve(value as unknown as T),
-        reject,
-      });
-      this.transport.send(msg);
-    });
+  private gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
+    return this.requests.send(msg);
   }
 
   private showWorldIdentity(generation: GenerationDescriptor): void {
@@ -987,7 +978,7 @@ export class GameClient {
         return client.xrManager.active;
       },
       flushServer: () => this.gcFlushServer(),
-      sendRequest: <T>(msg: ClientMessage & { requestId: number }) => this.gcSendRequest<T>(msg),
+      sendRequest: <R extends RequestMessage>(msg: R) => this.gcSendRequest(msg),
       sendVisibleRange: (force?: boolean) => this.gcSendVisibleRange(force),
       sendDebugState: (paused: boolean, noclip: boolean, force?: boolean) =>
         this.gcSendDebugState(paused, noclip, force),

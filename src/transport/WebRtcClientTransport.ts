@@ -38,6 +38,7 @@ export class WebRtcClientTransport implements IClientTransport {
   private readonly ws: WebSocket;
   private closed = false;
   private entitiesFallbackLogged = false;
+  private disconnectHandler: (() => void) | null = null;
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
   private readyResolvers: { resolve: () => void; reject: (err: Error) => void } | null = null;
   private readyDone = false;
@@ -76,6 +77,7 @@ export class WebRtcClientTransport implements IClientTransport {
     this.syncDc.onclose = () => {
       if (!this.closed) {
         console.warn("[tilefun] WebRTC sync datachannel closed");
+        this.disconnectHandler?.();
       }
     };
 
@@ -94,6 +96,7 @@ export class WebRtcClientTransport implements IClientTransport {
       console.log(`[tilefun] WebRTC dedicated state: ${this.pc.connectionState}`);
       if (this.pc.connectionState === "failed") {
         this.rejectReady(new Error("WebRTC connection failed"));
+        this.disconnectHandler?.();
       }
     };
 
@@ -144,6 +147,10 @@ export class WebRtcClientTransport implements IClientTransport {
     if (classifyClientMessageChannel(msg) !== "sync") return;
     if (this.syncDc.readyState !== "open") return;
     this.syncDc.send(encodeClientMessage(msg));
+  }
+
+  onDisconnect(handler: () => void): void {
+    this.disconnectHandler = handler;
   }
 
   onMessage(handler: (msg: ServerMessage) => void): void {

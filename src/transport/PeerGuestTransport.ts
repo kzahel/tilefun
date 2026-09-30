@@ -27,6 +27,7 @@ export type PeerGuestStatus =
 export class PeerGuestTransport implements IClientTransport {
   private peer: Peer;
   private conn: ReturnType<Peer["connect"]> | null = null;
+  private disconnectHandler: (() => void) | null = null;
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
   private pendingMessages: ServerMessage[] = [];
   private destroyed = false;
@@ -147,6 +148,7 @@ export class PeerGuestTransport implements IClientTransport {
 
     this.conn.on("close", () => {
       console.warn("[tilefun] P2P DataChannel closed");
+      if (!this.destroyed) this.disconnectHandler?.();
       this.tryReconnect();
     });
 
@@ -198,6 +200,10 @@ export class PeerGuestTransport implements IClientTransport {
     if (this.conn?.open) {
       this.conn.send(encodeClientMessage(msg));
     }
+  }
+
+  onDisconnect(handler: () => void): void {
+    this.disconnectHandler = handler;
   }
 
   onMessage(handler: (msg: ServerMessage) => void): void {

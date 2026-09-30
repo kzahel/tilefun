@@ -27,12 +27,17 @@ const DEFAULT_CONFIG: NetEmulationConfig = {
  */
 export class NetEmulatedClientTransport implements IClientTransport {
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
+  private disconnectHandler: (() => void) | null = null;
   private config: NetEmulationConfig = { ...DEFAULT_CONFIG };
   private closed = false;
   private pendingTimers = new Set<ReturnType<typeof setTimeout>>();
 
   constructor(private readonly base: IClientTransport) {
     this.base.onMessage((msg) => this.handleIncoming(msg));
+    this.base.onDisconnect?.(() => {
+      this.clearPendingTimers();
+      if (!this.closed) this.disconnectHandler?.();
+    });
   }
 
   setConfig(config: Partial<NetEmulationConfig>): void {
@@ -77,13 +82,20 @@ export class NetEmulatedClientTransport implements IClientTransport {
     this.messageHandler = handler;
   }
 
+  onDisconnect(handler: () => void): void {
+    this.disconnectHandler = handler;
+  }
+
+  private clearPendingTimers(): void {
+    for (const timer of this.pendingTimers) clearTimeout(timer);
+    this.pendingTimers.clear();
+  }
+
   close(): void {
     if (this.closed) return;
     this.closed = true;
-    for (const timer of this.pendingTimers) {
-      clearTimeout(timer);
-    }
-    this.pendingTimers.clear();
+    this.clearPendingTimers();
+    this.disconnectHandler?.();
     this.base.close();
   }
 

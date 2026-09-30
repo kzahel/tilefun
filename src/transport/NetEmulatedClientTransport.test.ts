@@ -7,6 +7,7 @@ class MockClientTransport implements IClientTransport {
   sent: ClientMessage[] = [];
   closed = false;
   bytesReceived = 1234;
+  private disconnectHandler: (() => void) | null = null;
   private handler: ((msg: ServerMessage) => void) | null = null;
 
   send(msg: ClientMessage): void {
@@ -15,6 +16,14 @@ class MockClientTransport implements IClientTransport {
 
   onMessage(handler: (msg: ServerMessage) => void): void {
     this.handler = handler;
+  }
+
+  onDisconnect(handler: () => void): void {
+    this.disconnectHandler = handler;
+  }
+
+  disconnect(): void {
+    this.disconnectHandler?.();
   }
 
   emit(msg: ServerMessage): void {
@@ -115,4 +124,31 @@ describe("NetEmulatedClientTransport", () => {
     expect(base.closed).toBe(true);
     expect(onMsg).toHaveBeenCalledTimes(0);
   });
+});
+
+it("forwards connection loss immediately, discards delayed traffic, and supports recovery", () => {
+  vi.useFakeTimers();
+  try {
+    const base = new MockClientTransport();
+    const netem = new NetEmulatedClientTransport(base);
+    netem.setConfig({ enabled: true, txLatencyMs: 100, rxLatencyMs: 100 });
+    const received = vi.fn();
+    const disconnected = vi.fn();
+    netem.onMessage(received);
+    netem.onDisconnect(disconnected);
+    netem.send(makeClientMsg(1));
+    base.emit(makeServerMsg(1));
+    base.disconnect();
+    expect(disconnected).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(100);
+    expect(base.sent).toHaveLength(0);
+    expect(received).not.toHaveBeenCalled();
+    base.emit(makeServerMsg(2));
+    vi.advanceTimersByTime(100);
+    expect(received).toHaveBeenCalledWith(makeServerMsg(2));
+    netem.close();
+    expect(disconnected).toHaveBeenCalledTimes(2);
+  } finally {
+    vi.useRealTimers();
+  }
 });

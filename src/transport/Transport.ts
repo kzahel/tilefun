@@ -10,6 +10,8 @@ export interface ClientTransportDebugInfo {
 export interface IClientTransport {
   send(msg: ClientMessage): void;
   onMessage(handler: (msg: ServerMessage) => void): void;
+  /** Notify callers when the game connection closes (reconnecting transports may recover). */
+  onDisconnect?(handler: () => void): void;
   close(): void;
   /** Cumulative bytes received from the server (for net stats display). */
   readonly bytesReceived?: number;

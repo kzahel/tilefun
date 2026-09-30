@@ -15,7 +15,7 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
-import type { ClientMessage } from "../shared/protocol.js";
+import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import type { ChatHUD } from "../ui/ChatHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
@@ -74,7 +74,7 @@ export interface GameContext {
 
   // Helper methods
   flushServer(): void;
-  sendRequest<T>(msg: ClientMessage & { requestId: number }): Promise<T>;
+  sendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>>;
   sendVisibleRange(force?: boolean): void;
   sendDebugState(paused: boolean, noclip: boolean, force?: boolean): void;
 }

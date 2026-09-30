@@ -8,6 +8,7 @@ import type { IClientTransport } from "./Transport.js";
  */
 export class WebSocketClientTransport implements IClientTransport {
   private ws: WebSocket;
+  private disconnectHandler: (() => void) | null = null;
   private messageHandler: ((msg: ServerMessage) => void) | null = null;
   bytesReceived = 0;
 
@@ -24,6 +25,7 @@ export class WebSocketClientTransport implements IClientTransport {
         console.error("[tilefun] Bad server message:", err);
       }
     };
+    this.ws.onclose = () => this.disconnectHandler?.();
     this.ws.onerror = (event) => {
       console.error("[tilefun] WebSocket error:", event);
     };
@@ -46,6 +48,10 @@ export class WebSocketClientTransport implements IClientTransport {
     if (this.ws.readyState === WebSocket.OPEN) {
       this.ws.send(encodeClientMessage(msg));
     }
+  }
+
+  onDisconnect(handler: () => void): void {
+    this.disconnectHandler = handler;
   }
 
   onMessage(handler: (msg: ServerMessage) => void): void {
