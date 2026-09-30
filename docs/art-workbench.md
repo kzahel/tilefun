@@ -64,7 +64,7 @@ of collision, door placement, perspective, or a new generator version.
 
 ## Inventory and coverage
 
-`public/data/art-catalog.json` describes 91 PNG sheets and currently 356 recorded
+`public/data/art-catalog.json` describes 91 PNG sheets and currently 511 recorded
 source uses. Both major atlas indexes are reused directly, rather than copied
 into a second slicing catalog: 4,816 matched Exteriors slices and 19,493 packed
 Interiors entries. **Indexed** means the original slicing/index exists and can
@@ -101,7 +101,7 @@ pages instead of a full-atlas-sized canvas or thousands of DOM thumbnails.
 
 The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html?scene=mixed)
 composes the first source-audited candidates from the dense-city note. There are
-22 prefab configurations: bay-window, flat-front, and compact apartments;
+22 prefab configurations: bay-front, extended bay-front, and wide bay-front apartments;
 hotels; and bakery, butcher, bait, ice-cream, and fitness storefronts with
 mixed-use variants. Apartment, retail, and hotel blocks align frontage at
 native dimensions with a mix of heights. Select an individual building, inspect
@@ -119,10 +119,22 @@ Both tools share the persistent outbox/transport and source-verification code.
 `CityBuildingPrefabs.ts` supplies the source art, piece offsets, bounds, and
 entrances. The lab calls the same `createProp`, `collectScene`, and
 `drawScene2D` pipeline that gameplay uses. The terrain is a diagnostic pavement
-stage rather than a second city generator. The narrow window-only strip is
-combined with a door-bearing wing for a standalone flat-front apartment. Hotel
-entry art and shop signs retain their own placement/layering. Native source
-bounds and the exact selected PNG fingerprint are tested.
+stage rather than a second city generator. Explicit facade sockets distinguish
+the closed left bay, open infill, and closed right entrance. Complete chains
+must close both ends and match internal attachments. The vendor's large top
+sprites are split into roof and wall bands; all roof sections share a datum.
+Detached roof-access sprites are deferred accessories, not required caps.
+Storefronts replace a ground-floor bay in a complete mixed-use facade, retain
+the upper bay window trim, and have a separate residential entrance. The main
+storefront art already includes its edges; adjacent extension strips are not
+appended as duplicate caps. Bare storefront entries were retired; old `-1`
+review bookmarks open the complete two-level building. Apartment candidate IDs
+remain bookmarkable, with updated names and composition hashes. Saved notes
+keep their original context and flag changed compositions when opened in the
+lab. Frozen generator recipes retain their old outputs.
+Hotel entry art and shop signs retain their own placement/layering. Native
+source bounds and the exact selected PNG fingerprint are tested. The lab's
+**Facade attachments & roof** panel exposes the topology for review.
 The preview resets nearest-neighbor canvas sampling after each resize, matching
 gameplay. A pixel-level browser regression checks adjoining facade edges
 against the opaque source pixels, including after a redraw.

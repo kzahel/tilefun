@@ -5,6 +5,7 @@ import {
   CITY_BUILDING_PREFABS,
   CITY_PREFAB_SOURCE,
   cityPrefabBlock,
+  resolveCityPrefabType,
 } from "../generation/regional/CityBuildingPrefabs.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
@@ -18,8 +19,9 @@ const scene = $<HTMLSelectElement>("scene"),
   canvas = $<HTMLCanvasElement>("building");
 const params = new URLSearchParams(location.search);
 select.replaceChildren(...CITY_BUILDING_PREFABS.map((p) => new Option(p.name, p.type)));
-if (CITY_BUILDING_PREFABS.some((p) => p.type === params.get("prefab")))
-  select.value = params.get("prefab") ?? "";
+const requestedType = params.get("prefab") ?? "";
+const resolvedType = resolveCityPrefabType(requestedType);
+if (CITY_BUILDING_PREFABS.some((p) => p.type === resolvedType)) select.value = resolvedType;
 if (["single", "residential", "mixed", "hotel"].includes(params.get("scene") ?? ""))
   scene.value = params.get("scene") ?? "single";
 const catalog = await loadJSON<ArtCatalog>("data/art-catalog.json");
@@ -107,6 +109,20 @@ function renderFeedbackNotes() {
       pending.textContent = "Pending server save";
       article.append(pending);
     }
+    const review = required(row.buildingReview);
+    const current = review.prefabIds.map((id) =>
+      CITY_BUILDING_PREFABS.find((p) => p.type === resolveCityPrefabType(id)),
+    );
+    if (current.every((p) => p !== undefined))
+      void sha256(new TextEncoder().encode(JSON.stringify(current))).then((revision) => {
+        if (revision !== review.revision) {
+          const changed = document.createElement("p");
+          changed.className = "muted";
+          changed.textContent =
+            "Composition changed since this note. The link opens the current candidate.";
+          article.append(changed);
+        }
+      });
     container.append(article);
   }
 }
@@ -211,6 +227,24 @@ function render() {
   $("facts").textContent =
     `${stats.width}×${stats.height} native stage pixels · ${stats.parts} shared sprite pieces${scene.value === "single" ? ` · footprint ${prefab.width}×${prefab.groundDepth}` : ""}`;
   $("recipe-id").textContent = prefab.type;
+  $("assembly-summary").textContent =
+    scene.value === "single"
+      ? `Complete facade · both ends closed · ${prefab.topology.modules.length} connected section(s) · shared roof datum`
+      : "Complete building assemblies with closed exterior ends and independently assembled roof decks.";
+  $("bookmark-notice").textContent =
+    requestedType !== resolvedType && select.value === resolvedType
+      ? "The old storefront-only link now shows a complete building with apartments and a residential entrance."
+      : "";
+  const topology = $("topology");
+  topology.replaceChildren();
+  for (const m of prefab.topology.modules) {
+    const row = document.createElement("p");
+    row.textContent = `${m.id}: ${m.width}px · left ${m.left === "closed" ? "closed end" : "attachment"} · right ${m.right === "closed" ? "closed end" : "attachment"}`;
+    topology.append(row);
+  }
+  const roofRow = document.createElement("p");
+  roofRow.textContent = `Roof deck: ${prefab.topology.roof.depth}px deep; all sections share a base ${Math.abs(prefab.topology.roof.datum)}px above the street.`;
+  topology.append(roofRow);
   const sourceUrl = new URL("art-workbench.html", location.href);
   sourceUrl.searchParams.set("sheet", CITY_PREFAB_SOURCE.sheetId);
   const xs = prefab.parts.map((p) => p.frameCol * 16),

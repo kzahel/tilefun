@@ -91,6 +91,30 @@ and now checks exact source RGBA at the join before/after redraw. Typecheck,
 build, 1,060 unit tests, and all 139 browser tests pass; corrected captures were
 visually reviewed.
 
+Single-building review correction: five notes identified mismatched roof heights,
+an exposed entrance wing, bare/repeated storefront edges, and an open bay end.
+Condo 4 now has explicit closed-left bay, open infill, and closed-right entrance
+modules. Complete chains reject open exterior ends and incompatible sockets;
+each roof band shares one datum and depth. The vendor top sprites already
+contain a full roof deck, so detached roof-access sprites are deferred rather
+than stacked above it. The three apartment choices are now closed bay-front
+chains with zero, one, or two infills, at 2/3/5 levels.
+
+Storefronts have complete 2/3-level mixed-use compositions, a separate residential
+entrance, retained bay-window trim across the vendor floor split, and one main
+shop front without the duplicated extension strips. Old storefront-only review
+URLs map to the complete two-level version. Candidate apartment IDs remain
+bookmarkable, with revised names and hashes; saved notes keep their original
+context and flag changed compositions. The lab exposes attachment topology and
+roof facts for human review. This supersedes the initial flat-front/compact and
+storefront-only compositions above. The inventory now records 511 source uses.
+Validation: typecheck/build, all 1,062 unit tests, and all 141 browser tests pass.
+Tests reject open-ended/reordered chains and incompatible roof bands, verify
+closed topology and single storefront placement, preserve source-pixel joins,
+and exercise old review bookmarks. Desktop single-building/block and emulated
+phone captures were inspected. These remain visual candidates pending review;
+the older world revisions and district recipe list remain frozen.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially
