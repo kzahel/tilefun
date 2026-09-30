@@ -1,6 +1,26 @@
 # Client-Server Architecture for Tilefun
 
-## Architecture Overview
+## Current implementation boundaries
+
+The sections below retain the original client/server extraction plan as historical
+context. The current implementation has these additional boundaries:
+
+- `GameServer` coordinates connections, world management, and active realms.
+- `RealmTransitions` owns one guarded transfer lifecycle for menu navigation and
+  building doors. It prepares the destination and saves the source before
+  detaching the player, restores the original live entity on destination-save
+  failure, and clears replication baselines before completing a transfer.
+- `Realm` owns simulation, editing, generated residency, and persistence;
+  `RealmReplicator` owns per-client delta state and builds frame/sync messages.
+- `RequestBroker` correlates requests with the response types declared in
+  `shared/requests.ts`. It checks responses, bounds waiting to 30 seconds, and
+  rejects pending calls on disconnect or destruction. Reconnecting transports
+  can make fresh requests after a disconnect.
+- The explorer uses `SavedWorldSource` for local/remote saved-world reads and
+  `ReviewStore` for durable verdicts and session-only export fallback. Navigation,
+  controls, and rendering remain in its entry point.
+
+## Original architecture overview
 
 Split the monolithic `Game.ts` (977 lines) into three layers:
 

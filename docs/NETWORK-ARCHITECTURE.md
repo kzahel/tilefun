@@ -47,7 +47,11 @@ Key files:
 - `src/shared/entityTypeIndex.ts` — entity type string ↔ u8 index mapping
 - `src/shared/serialization.ts` — entity/prop/chunk serialization
 - `src/shared/entityDelta.ts` — entity delta diff/apply
-- `src/server/Realm.ts` — per-client game state building (`buildMessages`)
+- `src/server/Realm.ts` — world simulation and replication scheduling
+- `src/server/RealmReplicator.ts` — per-client baselines and frame/sync message building
+- `src/server/RealmTransitions.ts` — serialized player transfers with persistence failure recovery
+- `src/shared/requests.ts` — request-to-response type mapping
+- `src/client/RequestBroker.ts` — request correlation, response checks, timeouts, and disconnect cleanup
 - `src/transport/` — all transport implementations
 - `src/transport/webrtcChannels.ts` — channel classification/routing policy
 - `src/client/ClientStateView.ts` — client state application (`RemoteStateView`)

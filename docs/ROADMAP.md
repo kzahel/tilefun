@@ -2,8 +2,10 @@
 
 ## Regional Generation and World Explorer
 
-- Follow the [world explorer and regional generation plan](tactical/004-world-explorer-and-regional-generation-plan.md): shared regional planning, a fast overview, procedural city districts, and a path into playable neighborhoods and interiors.
-- First step: bounded regional queries and a seed-driven explorer, without generating full chunks at overview scale.
+- Implemented: versioned Classic/Island/Flat/Regional generators, bounded map and exact tile previews, shared district and countryside plans, authoritative Play here arrivals, persistent building interiors, and generated inhabitants. See the [regional plan](tactical/004-world-explorer-and-regional-generation-plan.md) and [generator plan](tactical/005-generator-profiles-and-shared-tile-preview-plan.md) for implementation evidence.
+- Next: visual review of seed 2026 and other seeds, followed by density/composition tuning. Use the [checkpoint guide](world-explorer.md).
+- Still outstanding: profiling on a representative physical phone; automated phone layouts and desktop CPU throttling are separate evidence.
+- Future extensions: additional floors, room layouts, inhabitants' schedules, traffic, and economies.
 
 ## Asset Protection
 - Obfuscate purchased asset files (Modern Exteriors, Modern Interiors, Sprout Lands) so they aren't directly browsable/downloadable from the public GitHub repo
@@ -13,27 +15,25 @@
 ## Gameplay
 - Enterable structures: custom collision shapes so player can walk inside playground tubes
 - Entity polish: more behaviors, mass-spawn UX, entity persistence improvements
-- Props system: placeable static objects (trees, flowers, furniture, fences, signs) — distinct from entities and terrain
+- Build on the existing terrain/prop/furniture editors with more curated placeable objects
 - Specialized natural brushes: tree formation brush, garden plot prefab, forest cluster stamp
 
 ## World Management
-- Create new world, switch between saved worlds (menu UI)
-- Safety net for destructive actions (clear world)
-- Basic menu system beyond debug panel + play/edit toggle
+
+- Implemented: world creation with pinned generator settings, saved-world switching, naming, deletion with confirmation, and multiplayer realm browsing.
+- Remaining: a safety net for destructive terrain/world-clearing actions, beyond the existing world-deletion confirmation.
 
 ## Terrain
 - Beach chain: deep water → shallow → sand → sand_light → grass via 4-sheet chain
 - Water animation: animated water autotile overlay
 
 ## Multiplayer
-- LAN co-op: parent edits world while kid plays in it
-- Internet multiplayer over WebSocket (state sync, conflict resolution, auth, NAT traversal) — prerequisite for below
-- WebRTC unreliable data channel for internet play (optional, progressive enhancement)
-  - Rust sidecar using [webrtc-unreliable](https://github.com/kyren/webrtc-unreliable) — single static binary, no Node native deps
-  - Proxies only UDP-like position/movement packets; all reliable state stays on WebSocket
-  - Client connects WebSocket first (always works), optionally negotiates data channel through Rust bridge, falls back gracefully
-  - Avoids TCP head-of-line blocking at 30-100ms RTT; not needed for LAN
-  - Node WebRTC bindings (node-datachannel etc.) are fragile C++ deps — Rust binary is cleaner
+
+- Implemented: collaborative editing and co-op through browser-hosted P2P or a dedicated server, WebSocket transport, and optional dedicated WebRTC with reliable sync and an unreliable entity channel. See the [network architecture](NETWORK-ARCHITECTURE.md).
+- Next: validate dedicated dual-channel WebRTC under more real-world network conditions and improve connection/reconnection UX.
+- Future public-server work: authentication and access controls; existing player profile identity is separate from authentication.
+- Revisit native WebRTC dependency/deployment tradeoffs when choosing supported hosting targets.
 
 ## UX / Accessibility
-- Simplified controls for young children (single-finger input, touch, gamepad)
+- Implemented: touch joystick/buttons and gamepad input.
+- Next: simplify the interaction flow for young children, including single-finger input where appropriate.
