@@ -13,7 +13,6 @@ export default defineConfig({
   plugins: [useHttps && basicSsl(), tilefunServer(), interiorReviewPlugin()].filter(Boolean),
   server: {
     host: true, // listen on all interfaces, not just localhost
-    allowedHosts: true, // allow any hostname
   },
   clearScreen: false,
   build: {

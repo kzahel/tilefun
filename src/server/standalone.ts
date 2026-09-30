@@ -1,14 +1,16 @@
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { createServer } from "node:http";
-import { extname, join } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
+import { worldDirectory } from "../persistence/fsPaths.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
 import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
+import { serveStatic } from "./staticFiles.js";
 
 const PORT = parseInt(process.env.PORT ?? "3001", 10);
 const DATA_DIR = process.env.DATA_DIR ?? "./data";
@@ -21,21 +23,6 @@ const thisFile = fileURLToPath(import.meta.url);
 const projectRoot = join(thisFile, "..", "..", "..");
 const distDir = join(projectRoot, "dist");
 const hasDistDir = existsSync(distDir);
-
-const MIME_TYPES: Record<string, string> = {
-  ".html": "text/html",
-  ".js": "application/javascript",
-  ".css": "text/css",
-  ".json": "application/json",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".gif": "image/gif",
-  ".svg": "image/svg+xml",
-  ".ico": "image/x-icon",
-  ".woff": "font/woff",
-  ".woff2": "font/woff2",
-  ".map": "application/json",
-};
 
 // The Vite build uses base: "/tilefun/" so all assets are under that path.
 const BASE_PATH = "/tilefun/";
@@ -51,35 +38,7 @@ const httpServer = createServer(async (req, res) => {
     return;
   }
 
-  // Serve static files from dist/
-  if (hasDistDir && url.startsWith(BASE_PATH)) {
-    const relativePath = url.slice(BASE_PATH.length).split("?")[0] ?? "";
-    const filePath = join(distDir, relativePath || "index.html");
-
-    // If it's a directory or empty path, serve index.html
-    let resolvedPath = filePath;
-    if (existsSync(filePath) && statSync(filePath).isDirectory()) {
-      resolvedPath = join(filePath, "index.html");
-    }
-
-    if (existsSync(resolvedPath) && statSync(resolvedPath).isFile()) {
-      const ext = extname(resolvedPath);
-      const contentType = MIME_TYPES[ext] ?? "application/octet-stream";
-      const content = readFileSync(resolvedPath);
-      res.writeHead(200, { "Content-Type": contentType });
-      res.end(content);
-      return;
-    }
-
-    // SPA fallback: serve index.html for non-file routes
-    const indexPath = join(distDir, "index.html");
-    if (existsSync(indexPath)) {
-      const content = readFileSync(indexPath);
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(content);
-      return;
-    }
-  }
+  if (serveStatic(req, res, distDir, BASE_PATH)) return;
 
   res.writeHead(404);
   res.end("Not Found");
@@ -94,7 +53,7 @@ const transport = await createTransport();
 const server = new GameServer(transport, {
   registry: new FsWorldRegistry(DATA_DIR),
   createStore: (worldId) =>
-    new FsPersistenceStore(join(DATA_DIR, "worlds", worldId), ["chunks", "meta", "players"]),
+    new FsPersistenceStore(worldDirectory(DATA_DIR, worldId), ["chunks", "meta", "players"]),
 });
 
 await server.init();

@@ -8,6 +8,7 @@ import {
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
+import { containedPath, worldDirectory } from "./fsPaths.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
 
 /**
@@ -89,16 +90,18 @@ export class FsWorldRegistry implements IWorldRegistry {
   }
 
   async deleteWorld(id: string): Promise<void> {
+    const worldDir = worldDirectory(this.dataDir, id);
+    if (!this.worlds.some((world) => world.id === id)) throw new Error("World not found.");
+    const worldsDir = containedPath(this.dataDir, "worlds");
+    const interiors = existsSync(worldsDir)
+      ? readdirSync(worldsDir)
+          .filter((name) => name.startsWith(`interior~${id}~`))
+          .map((name) => worldDirectory(this.dataDir, name))
+      : [];
     this.worlds = this.worlds.filter((w) => w.id !== id);
     await this.persist();
-    const worldsDir = join(this.dataDir, "worlds");
-    if (existsSync(worldsDir))
-      for (const name of readdirSync(worldsDir)) {
-        if (name.startsWith(`interior~${id}~`))
-          rmSync(join(worldsDir, name), { recursive: true, force: true });
-      }
+    for (const directory of interiors) rmSync(directory, { recursive: true, force: true });
     // Remove the world's data directory
-    const worldDir = join(this.dataDir, "worlds", id);
     if (existsSync(worldDir)) {
       rmSync(worldDir, { recursive: true });
     }

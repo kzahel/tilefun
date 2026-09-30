@@ -1,8 +1,8 @@
 import { networkInterfaces } from "node:os";
-import { join } from "node:path";
 import type { Plugin } from "vite";
 import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
+import { worldDirectory } from "../persistence/fsPaths.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { GameServer } from "./GameServer.js";
@@ -61,7 +61,7 @@ export function tilefunServer(dataDir = "./data"): Plugin {
           server = new GameServer(transport, {
             registry: new FsWorldRegistry(dataDir),
             createStore: (worldId) =>
-              new FsPersistenceStore(join(dataDir, "worlds", worldId), [
+              new FsPersistenceStore(worldDirectory(dataDir, worldId), [
                 "chunks",
                 "meta",
                 "players",
