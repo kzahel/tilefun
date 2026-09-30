@@ -16,7 +16,7 @@ export default defineConfig({
   },
   clearScreen: false,
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         main: resolve(root, "index.html"),
         worldExplorer: resolve(root, "world-explorer.html"),
@@ -25,8 +25,5 @@ export default defineConfig({
         furniturePlaytest: resolve(root, "furniture-playtest.html"),
       },
     },
-  },
-  test: {
-    include: ["src/**/*.test.ts"],
   },
 });

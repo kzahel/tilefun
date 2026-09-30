@@ -4,7 +4,7 @@ import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { Chunk } from "../world/Chunk.js";
 import { chunkData, hydrateChunk } from "../world/ChunkData.js";
 import { ChunkManager } from "../world/ChunkManager.js";
-import fixtures from "./classic-fixtures.json";
+import fixtures from "./classic-fixtures.json" with { type: "json" };
 import {
   createDescriptor,
   descriptorFromMetadata,

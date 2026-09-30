@@ -9,7 +9,7 @@ import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { compileFurniture } from "./FurnishedInterior.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
 import { furnitureCollider } from "./FurnitureMotion.js";
-import sources from "./gameplay-furniture-sources.json";
+import sources from "./gameplay-furniture-sources.json" with { type: "json" };
 
 export interface InteriorIdentity {
   readonly version: "interior-v1";

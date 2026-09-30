@@ -59,3 +59,11 @@ request bytes, and limits each listing to 100 entries. Its heartbeat is still
 an unauthenticated public endpoint. Production abuse controls and ownership
 verification require a separate design; KV's eventual consistency cannot enforce
 atomic room ownership or strong request rate limits.
+
+The toolchain uses Vite 8 with Rolldown, Vitest 5, and TypeScript 7. Unit tests
+have their own Vitest configuration and do not instantiate the development game
+server plugins. The build typechecks without emitting intermediate JavaScript
+into Vite's output directory. Node type declarations deliberately stay on the
+Node 24 line to match CI, even when a newer declaration major is available.
+Native WebRTC 0.33 uses platform binary packages; browser integration tests cover
+both dedicated transports and the Three.js debug renderer.
