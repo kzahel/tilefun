@@ -31,7 +31,10 @@ declare module "node-datachannel" {
   }
 
   export interface NodeDataChannelModuleLike {
-    initLogger?(level: string): void;
+    initLogger?(
+      level: "Verbose" | "Debug" | "Info" | "Warning" | "Error" | "Fatal",
+      callback?: (level: string, message: string) => void,
+    ): void;
     cleanup?(): void;
     PeerConnection: new (
       name: string,

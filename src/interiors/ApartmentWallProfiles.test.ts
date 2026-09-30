@@ -113,27 +113,27 @@ describe("experimental wall profiles", () => {
     // Only the part above the normal shell is an exposed end.
     expect(map.surfaces.filter((s) => s.plane === "east:31")).toHaveLength(2);
   });
-  it.each([
-    "profile-door-false",
-    "profile-door-true",
-  ])("joins %s to a straight room shell without a legacy branch", (id) => {
-    const c = profileReviewCases().find((c) => c.id === id);
-    if (!c) throw new Error("Missing attachment fixture");
-    const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
-    // The old compiler emitted a full-height T here even when the branch was low.
-    for (const y of [6, 7])
-      expect(map.cells[y]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
-    const height = id.endsWith("false") ? 8 : 40;
-    expect(
-      map.surfaces.some(
-        (s) =>
-          s.plane === `top:${height}` &&
-          s.points.some(([x, y]) => x === (height === 40 ? 2 : 14) && y === 120 - height),
-      ),
-    ).toBe(true);
-    for (const y of [6, 7])
-      for (const x of [6, 7]) expect(map.cells[y]?.[x]?.semantic).toBe("opening");
-  });
+  it.each(["profile-door-false", "profile-door-true"])(
+    "joins %s to a straight room shell without a legacy branch",
+    (id) => {
+      const c = profileReviewCases().find((c) => c.id === id);
+      if (!c) throw new Error("Missing attachment fixture");
+      const map = buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles);
+      // The old compiler emitted a full-height T here even when the branch was low.
+      for (const y of [6, 7])
+        expect(map.cells[y]?.[0]?.wall[0]?.key).toBe("room-builder/3d-walls/c10-r02");
+      const height = id.endsWith("false") ? 8 : 40;
+      expect(
+        map.surfaces.some(
+          (s) =>
+            s.plane === `top:${height}` &&
+            s.points.some(([x, y]) => x === (height === 40 ? 2 : 14) && y === 120 - height),
+        ),
+      ).toBe(true);
+      for (const y of [6, 7])
+        for (const x of [6, 7]) expect(map.cells[y]?.[x]?.semantic).toBe("opening");
+    },
+  );
   it("changes elevation without changing the footprint or wall semantics", () => {
     const cases = profileReviewCases().slice(0, 3);
     const maps = cases.map((c) => buildProfileApartmentPlan(parseFloorPlan(c.sketch), c.profiles));
@@ -245,39 +245,39 @@ describe("wall thickness and end connections", () => {
       expect(se[1]).toBeGreaterThan(ne[1]);
     }
   });
-  it.each([
-    "low",
-    "tall",
-  ])("joins the %s south end while preserving height above the low cutaway", (height) => {
-    const map = build(`south-${height}`);
-    const points = map.surfaces.flatMap((s) => s.points);
-    expect(Math.max(...points.map(([, y]) => y))).toBe(224);
-    const tops = map.surfaces.filter((s) => s.plane.startsWith("top:"));
-    expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(
-      height === "low" ? 224 : 208,
-    );
-    const end = map.surfaces.filter((s) => s.plane === "south:28");
-    expect(end).toHaveLength(height === "low" ? 0 : 2);
-    if (height === "tall")
-      expect(Math.min(...end.flatMap((s) => s.points.map(([, y]) => y)))).toBe(208);
-    expect(map.pixelHeight).toBe(230);
-    expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
-  });
-  it.each([
-    "low",
-    "tall",
-  ])("retains the exposed %s end when a partition stops before the shell", (height) => {
-    const c = fixture(`south-${height}`);
-    const sketch = c.sketch
-      .split("\n")
-      .map((row, y) => (y === 6 ? row.replace("#LL#LLL#", "#LLLLLL#") : row))
-      .join("\n");
-    const map = buildProfileApartmentPlan(parseFloorPlan(sketch), {
-      walls: c.profiles.walls.filter((w) => w.y < 6),
-    });
-    expect(map.surfaces.some((s) => s.plane === "south:24")).toBe(true);
-    expect(Math.max(...map.surfaces.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
-  });
+  it.each(["low", "tall"])(
+    "joins the %s south end while preserving height above the low cutaway",
+    (height) => {
+      const map = build(`south-${height}`);
+      const points = map.surfaces.flatMap((s) => s.points);
+      expect(Math.max(...points.map(([, y]) => y))).toBe(224);
+      const tops = map.surfaces.filter((s) => s.plane.startsWith("top:"));
+      expect(Math.max(...tops.flatMap((s) => s.points.map(([, y]) => y)))).toBe(
+        height === "low" ? 224 : 208,
+      );
+      const end = map.surfaces.filter((s) => s.plane === "south:28");
+      expect(end).toHaveLength(height === "low" ? 0 : 2);
+      if (height === "tall")
+        expect(Math.min(...end.flatMap((s) => s.points.map(([, y]) => y)))).toBe(208);
+      expect(map.pixelHeight).toBe(230);
+      expect(map.cells[14]?.[6]?.foreground.length).toBeGreaterThan(0);
+    },
+  );
+  it.each(["low", "tall"])(
+    "retains the exposed %s end when a partition stops before the shell",
+    (height) => {
+      const c = fixture(`south-${height}`);
+      const sketch = c.sketch
+        .split("\n")
+        .map((row, y) => (y === 6 ? row.replace("#LL#LLL#", "#LLLLLL#") : row))
+        .join("\n");
+      const map = buildProfileApartmentPlan(parseFloorPlan(sketch), {
+        walls: c.profiles.walls.filter((w) => w.y < 6),
+      });
+      expect(map.surfaces.some((s) => s.plane === "south:24")).toBe(true);
+      expect(Math.max(...map.surfaces.flatMap((s) => s.points.map(([, y]) => y)))).toBe(192);
+    },
+  );
   it("persists explicit thickness and rejects unsupported width specifications", () => {
     const c = fixture("straight");
     const r = {

@@ -85,7 +85,9 @@ export class WebRtcServerTransport implements IServerTransport {
       "stun:stun.l.google.com:19302",
       "stun:stun1.l.google.com:19302",
     ];
-    this.ndc.initLogger?.("warn");
+    this.ndc.initLogger?.("Warning", (_level, message) => {
+      console.warn(`[tilefun] WebRTC: ${message}`);
+    });
 
     if (options.path) {
       this.wss = new WebSocketServer({ noServer: true });
@@ -326,7 +328,7 @@ export class WebRtcServerTransport implements IServerTransport {
       if (msg.type === "offer") {
         client.peer.setRemoteDescription?.(msg.sdp, "offer");
       } else if (msg.type === "candidate" && msg.candidate) {
-        client.peer.addRemoteCandidate?.(msg.candidate, msg.sdpMid);
+        client.peer.addRemoteCandidate?.(msg.candidate, msg.sdpMid ?? "0");
       }
     } catch (err) {
       console.error(`[tilefun] WebRTC signaling error for ${clientId}:`, err);

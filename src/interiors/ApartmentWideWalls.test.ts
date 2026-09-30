@@ -5,32 +5,32 @@ import { CONFLICTING_WALL_FIXTURE, WIDE_WALL_FIXTURES } from "./ApartmentJoinFix
 import { wallFacingConstraint } from "./ApartmentWallAlignment.js";
 
 describe("two-sided and thick wall coverage", () => {
-  it.each([
-    false,
-    true,
-  ])("keeps a low branch shallow beside a continuing wall (mirror=%s)", (mirror) => {
-    const rows = WIDE_WALL_FIXTURES[0].sketch.split("\n");
-    const width = Math.max(...rows.map((row) => row.length));
-    const sketch = rows
-      .map((row) => (mirror ? [...row.padEnd(width)].reverse().join("") : row))
-      .join("\n");
-    const map = buildLayeredApartmentPlan(parseFloorPlan(sketch));
-    const x = mirror ? (width - 3) * 2 + 1 : 4;
-    // Below the six-pixel incoming cutaway, this exterior half has only its
-    // vertical top rail, with neither a projected face nor a floor under it.
-    for (const y of [10, 11]) {
-      const cell = map.cells[y]?.[x];
-      expect(cell?.floor).toEqual([]);
-      expect(cell?.wall).toHaveLength(1);
-      expect(cell?.wall[0]).toMatchObject({ cropX: mirror ? 0 : 9, cropWidth: 7 });
-    }
-    expect(map.cells[10]?.[x]?.foreground).toContainEqual({
-      key: "room-builder/3d-walls/c11-r05",
-      cropX: mirror ? 6 : 0,
-      cropWidth: 10,
-      cropHeight: 6,
-    });
-  });
+  it.each([false, true])(
+    "keeps a low branch shallow beside a continuing wall (mirror=%s)",
+    (mirror) => {
+      const rows = WIDE_WALL_FIXTURES[0].sketch.split("\n");
+      const width = Math.max(...rows.map((row) => row.length));
+      const sketch = rows
+        .map((row) => (mirror ? [...row.padEnd(width)].reverse().join("") : row))
+        .join("\n");
+      const map = buildLayeredApartmentPlan(parseFloorPlan(sketch));
+      const x = mirror ? (width - 3) * 2 + 1 : 4;
+      // Below the six-pixel incoming cutaway, this exterior half has only its
+      // vertical top rail, with neither a projected face nor a floor under it.
+      for (const y of [10, 11]) {
+        const cell = map.cells[y]?.[x];
+        expect(cell?.floor).toEqual([]);
+        expect(cell?.wall).toHaveLength(1);
+        expect(cell?.wall[0]).toMatchObject({ cropX: mirror ? 0 : 9, cropWidth: 7 });
+      }
+      expect(map.cells[10]?.[x]?.foreground).toContainEqual({
+        key: "room-builder/3d-walls/c11-r05",
+        cropX: mirror ? 6 : 0,
+        cropWidth: 10,
+        cropHeight: 6,
+      });
+    },
+  );
   it("keeps both room-facing surfaces inside a conflicting wall footprint", () => {
     const plan = parseFloorPlan(CONFLICTING_WALL_FIXTURE);
     const map = buildLayeredApartmentPlan(plan);

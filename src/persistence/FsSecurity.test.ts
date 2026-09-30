@@ -22,25 +22,20 @@ describe("filesystem containment", () => {
     await rm(directory, { recursive: true, force: true });
   });
 
-  it.each([
-    "../sentinel",
-    "..",
-    "",
-    "/tmp",
-    "..\\sentinel",
-    "C:\\sentinel",
-    "unknown",
-  ])("rejects deletion of unregistered or unsafe ID %j without changing metadata or files", async (id) => {
-    const world = await registry.createWorld("Keep");
-    const sentinel = join(data, "sentinel");
-    await mkdir(sentinel);
-    await writeFile(join(sentinel, "keep.txt"), "keep");
-    const metadata = await readFile(join(data, "registry.json"), "utf8");
-    await expect(registry.deleteWorld(id)).rejects.toThrow();
-    expect(await readFile(join(data, "registry.json"), "utf8")).toBe(metadata);
-    expect(await readFile(join(sentinel, "keep.txt"), "utf8")).toBe("keep");
-    expect(await registry.getWorld(world.id)).toBeDefined();
-  });
+  it.each(["../sentinel", "..", "", "/tmp", "..\\sentinel", "C:\\sentinel", "unknown"])(
+    "rejects deletion of unregistered or unsafe ID %j without changing metadata or files",
+    async (id) => {
+      const world = await registry.createWorld("Keep");
+      const sentinel = join(data, "sentinel");
+      await mkdir(sentinel);
+      await writeFile(join(sentinel, "keep.txt"), "keep");
+      const metadata = await readFile(join(data, "registry.json"), "utf8");
+      await expect(registry.deleteWorld(id)).rejects.toThrow();
+      expect(await readFile(join(data, "registry.json"), "utf8")).toBe(metadata);
+      expect(await readFile(join(sentinel, "keep.txt"), "utf8")).toBe("keep");
+      expect(await registry.getWorld(world.id)).toBeDefined();
+    },
+  );
 
   it("deletes a registered world and retains unrelated storage", async () => {
     const world = await registry.createWorld("Delete");
