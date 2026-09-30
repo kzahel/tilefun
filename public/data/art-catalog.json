@@ -5705,10 +5705,10 @@
       "id": "recipe:prop-city-v1-bakery-2:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-bakery-2 · piece 1",
       "kind": "recipe",
@@ -5723,10 +5723,10 @@
       "id": "recipe:prop-city-v1-bakery-2:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-bakery-2 · piece 2",
       "kind": "recipe",
@@ -5741,210 +5741,12 @@
       "id": "recipe:prop-city-v1-bakery-2:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 3",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:3",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-bakery-2 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-2:13",
-      "sheetId": "me-complete",
-      "rect": [
         1120,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-bakery-2 · piece 14",
+      "label": "prop-city-v1-bakery-2 · piece 3",
       "kind": "recipe",
       "consumers": [
         {
@@ -5957,10 +5759,10 @@
       "id": "recipe:prop-city-v1-bakery-3:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-bakery-3 · piece 1",
       "kind": "recipe",
@@ -5975,10 +5777,10 @@
       "id": "recipe:prop-city-v1-bakery-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-bakery-3 · piece 2",
       "kind": "recipe",
@@ -5993,10 +5795,10 @@
       "id": "recipe:prop-city-v1-bakery-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
+        2544,
+        1984,
         112,
-        48
+        64
       ],
       "label": "prop-city-v1-bakery-3 · piece 3",
       "kind": "recipe",
@@ -6011,228 +5813,12 @@
       "id": "recipe:prop-city-v1-bakery-3:3",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2080,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2080,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:13",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 14",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:14",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-bakery-3 · piece 15",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bakery-3:15",
-      "sheetId": "me-complete",
-      "rect": [
         1120,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-bakery-3 · piece 16",
+      "label": "prop-city-v1-bakery-3 · piece 4",
       "kind": "recipe",
       "consumers": [
         {
@@ -6245,10 +5831,10 @@
       "id": "recipe:prop-city-v1-butcher-2:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-butcher-2 · piece 1",
       "kind": "recipe",
@@ -6263,10 +5849,10 @@
       "id": "recipe:prop-city-v1-butcher-2:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-butcher-2 · piece 2",
       "kind": "recipe",
@@ -6281,210 +5867,12 @@
       "id": "recipe:prop-city-v1-butcher-2:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 3",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:3",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-butcher-2 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-2:13",
-      "sheetId": "me-complete",
-      "rect": [
         1280,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-butcher-2 · piece 14",
+      "label": "prop-city-v1-butcher-2 · piece 3",
       "kind": "recipe",
       "consumers": [
         {
@@ -6497,10 +5885,10 @@
       "id": "recipe:prop-city-v1-butcher-3:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-butcher-3 · piece 1",
       "kind": "recipe",
@@ -6515,10 +5903,10 @@
       "id": "recipe:prop-city-v1-butcher-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-butcher-3 · piece 2",
       "kind": "recipe",
@@ -6533,10 +5921,10 @@
       "id": "recipe:prop-city-v1-butcher-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
+        2544,
+        1984,
         112,
-        48
+        64
       ],
       "label": "prop-city-v1-butcher-3 · piece 3",
       "kind": "recipe",
@@ -6551,228 +5939,12 @@
       "id": "recipe:prop-city-v1-butcher-3:3",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2080,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2080,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:13",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 14",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:14",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-butcher-3 · piece 15",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-butcher-3:15",
-      "sheetId": "me-complete",
-      "rect": [
         1280,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-butcher-3 · piece 16",
+      "label": "prop-city-v1-butcher-3 · piece 4",
       "kind": "recipe",
       "consumers": [
         {
@@ -6785,10 +5957,10 @@
       "id": "recipe:prop-city-v1-bait-2:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-bait-2 · piece 1",
       "kind": "recipe",
@@ -6803,10 +5975,10 @@
       "id": "recipe:prop-city-v1-bait-2:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-bait-2 · piece 2",
       "kind": "recipe",
@@ -6821,210 +5993,12 @@
       "id": "recipe:prop-city-v1-bait-2:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-bait-2 · piece 3",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:3",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bait-2 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-bait-2 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-bait-2 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-2:13",
-      "sheetId": "me-complete",
-      "rect": [
         1440,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-bait-2 · piece 14",
+      "label": "prop-city-v1-bait-2 · piece 3",
       "kind": "recipe",
       "consumers": [
         {
@@ -7037,10 +6011,10 @@
       "id": "recipe:prop-city-v1-bait-3:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-bait-3 · piece 1",
       "kind": "recipe",
@@ -7055,10 +6029,10 @@
       "id": "recipe:prop-city-v1-bait-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-bait-3 · piece 2",
       "kind": "recipe",
@@ -7073,10 +6047,10 @@
       "id": "recipe:prop-city-v1-bait-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
+        2544,
+        1984,
         112,
-        48
+        64
       ],
       "label": "prop-city-v1-bait-3 · piece 3",
       "kind": "recipe",
@@ -7091,228 +6065,12 @@
       "id": "recipe:prop-city-v1-bait-3:3",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2080,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-bait-3 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bait-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2080,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-bait-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-bait-3 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:13",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 14",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:14",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-bait-3 · piece 15",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-bait-3:15",
-      "sheetId": "me-complete",
-      "rect": [
         1440,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-bait-3 · piece 16",
+      "label": "prop-city-v1-bait-3 · piece 4",
       "kind": "recipe",
       "consumers": [
         {
@@ -7325,10 +6083,10 @@
       "id": "recipe:prop-city-v1-ice-cream-2:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-ice-cream-2 · piece 1",
       "kind": "recipe",
@@ -7343,10 +6101,10 @@
       "id": "recipe:prop-city-v1-ice-cream-2:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-ice-cream-2 · piece 2",
       "kind": "recipe",
@@ -7361,210 +6119,12 @@
       "id": "recipe:prop-city-v1-ice-cream-2:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 3",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:3",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-2 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-2:13",
-      "sheetId": "me-complete",
-      "rect": [
         1600,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-ice-cream-2 · piece 14",
+      "label": "prop-city-v1-ice-cream-2 · piece 3",
       "kind": "recipe",
       "consumers": [
         {
@@ -7577,10 +6137,10 @@
       "id": "recipe:prop-city-v1-ice-cream-3:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-ice-cream-3 · piece 1",
       "kind": "recipe",
@@ -7595,10 +6155,10 @@
       "id": "recipe:prop-city-v1-ice-cream-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-ice-cream-3 · piece 2",
       "kind": "recipe",
@@ -7613,10 +6173,10 @@
       "id": "recipe:prop-city-v1-ice-cream-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
+        2544,
+        1984,
         112,
-        48
+        64
       ],
       "label": "prop-city-v1-ice-cream-3 · piece 3",
       "kind": "recipe",
@@ -7631,228 +6191,12 @@
       "id": "recipe:prop-city-v1-ice-cream-3:3",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2080,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2080,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:13",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 14",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:14",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-ice-cream-3 · piece 15",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-ice-cream-3:15",
-      "sheetId": "me-complete",
-      "rect": [
         1600,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-ice-cream-3 · piece 16",
+      "label": "prop-city-v1-ice-cream-3 · piece 4",
       "kind": "recipe",
       "consumers": [
         {
@@ -7865,10 +6209,10 @@
       "id": "recipe:prop-city-v1-gym-2:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-gym-2 · piece 1",
       "kind": "recipe",
@@ -7883,10 +6227,10 @@
       "id": "recipe:prop-city-v1-gym-2:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-gym-2 · piece 2",
       "kind": "recipe",
@@ -7901,210 +6245,12 @@
       "id": "recipe:prop-city-v1-gym-2:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-gym-2 · piece 3",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:3",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-gym-2 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-gym-2 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-gym-2 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-2:13",
-      "sheetId": "me-complete",
-      "rect": [
         1760,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-gym-2 · piece 14",
+      "label": "prop-city-v1-gym-2 · piece 3",
       "kind": "recipe",
       "consumers": [
         {
@@ -8117,10 +6263,10 @@
       "id": "recipe:prop-city-v1-gym-3:0",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        1904,
+        2256,
+        1936,
         112,
-        112
+        96
       ],
       "label": "prop-city-v1-gym-3 · piece 1",
       "kind": "recipe",
@@ -8135,10 +6281,10 @@
       "id": "recipe:prop-city-v1-gym-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1312,
-        1904,
-        80,
-        112
+        2544,
+        1984,
+        112,
+        64
       ],
       "label": "prop-city-v1-gym-3 · piece 2",
       "kind": "recipe",
@@ -8153,10 +6299,10 @@
       "id": "recipe:prop-city-v1-gym-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2016,
+        2544,
+        1984,
         112,
-        48
+        64
       ],
       "label": "prop-city-v1-gym-3 · piece 3",
       "kind": "recipe",
@@ -8171,228 +6317,12 @@
       "id": "recipe:prop-city-v1-gym-3:3",
       "sheetId": "me-complete",
       "rect": [
-        1104,
-        2080,
-        112,
-        48
-      ],
-      "label": "prop-city-v1-gym-3 · piece 4",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:4",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2016,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-gym-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2080,
-        80,
-        48
-      ],
-      "label": "prop-city-v1-gym-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1312,
-        2144,
-        80,
-        80
-      ],
-      "label": "prop-city-v1-gym-3 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:7",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:9",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:10",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 11",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:11",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 12",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:12",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 13",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:13",
-      "sheetId": "me-complete",
-      "rect": [
-        1280,
-        2096,
-        16,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 14",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:14",
-      "sheetId": "me-complete",
-      "rect": [
-        1104,
-        2144,
-        112,
-        32
-      ],
-      "label": "prop-city-v1-gym-3 · piece 15",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-gym-3:15",
-      "sheetId": "me-complete",
-      "rect": [
         1760,
         2384,
         112,
         80
       ],
-      "label": "prop-city-v1-gym-3 · piece 16",
+      "label": "prop-city-v1-gym-3 · piece 4",
       "kind": "recipe",
       "consumers": [
         {

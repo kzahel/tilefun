@@ -6,27 +6,38 @@ import { exteriorEntrance } from "../../interiors/GameplayInterior.js";
 import { BUILDING_RECIPES, buildingRecipe } from "./BuildingRecipes.js";
 import {
   CITY_BUILDING_PREFABS,
+  CITY_COMMERCIAL_ENVELOPE,
   CITY_PREFAB_SOURCE,
   CONDO_FACADE_MODULES,
   cityPrefabBlock,
   resolveCityPrefabType,
   validateFacadeTopology,
+  validateStorefrontEnvelope,
 } from "./CityBuildingPrefabs.js";
 
 describe("source-audited city prefab candidates", () => {
-  it("pins every sampled pixel to the user's exact selected image and region", () => {
+  it("pins sampled pixels to the selected image and explicitly audited source regions", () => {
     expect(
       createHash("sha256")
         .update(readFileSync("public/assets/tilesets/me-complete.png"))
         .digest("hex"),
     ).toBe(CITY_PREFAB_SOURCE.fingerprint);
-    const [x, y, w, h] = CITY_PREFAB_SOURCE.rect;
+    const regions = [
+      CITY_PREFAB_SOURCE.rect,
+      CITY_COMMERCIAL_ENVELOPE.roof,
+      CITY_COMMERCIAL_ENVELOPE.floor,
+    ];
     for (const prefab of CITY_BUILDING_PREFABS)
       for (const p of prefab.parts) {
-        expect(p.frameCol * 16).toBeGreaterThanOrEqual(x);
-        expect(p.frameRow * 16).toBeGreaterThanOrEqual(y);
-        expect(p.frameCol * 16 + p.spriteWidth).toBeLessThanOrEqual(x + w);
-        expect(p.frameRow * 16 + p.spriteHeight).toBeLessThanOrEqual(y + h);
+        expect(
+          regions.some(
+            ([x, y, w, h]) =>
+              p.frameCol * 16 >= x &&
+              p.frameRow * 16 >= y &&
+              p.frameCol * 16 + p.spriteWidth <= x + w &&
+              p.frameRow * 16 + p.spriteHeight <= y + h,
+          ),
+        ).toBe(true);
       }
   });
   it("keeps the frozen district list and shares new candidate lookup, composition, and geometry", () => {
@@ -98,11 +109,26 @@ describe("source-audited city prefab candidates", () => {
       expect(store).toHaveLength(1);
       expect(store[0]?.spriteWidth).toBe(112);
       expect(prefab.parts.some((p) => p.frameRow * 16 === 2416)).toBe(false);
-      expect(prefab.parts.some((p) => p.frameCol * 16 === 1312 && p.frameRow * 16 === 2144)).toBe(
+      expect(prefab.profile).toBe("flat-front");
+      expect(prefab.parts).toHaveLength(prefab.floors + 1);
+      expect(prefab.parts.every((p) => p.dx === 0 && p.spriteWidth === store[0]?.spriteWidth)).toBe(
         true,
       );
+      expect(prefab.topology.modules.map((m) => m.id)).toEqual(["modular-commercial"]);
     }
     expect(resolveCityPrefabType("prop-city-v1-bakery-1")).toBe("prop-city-v1-bakery-2");
     expect(resolveCityPrefabType("prop-city-v1-ice-cream-1")).toBe("prop-city-v1-ice-cream-2");
+  });
+  it("rejects projecting facades, mismatched widths, and wrong ground datums for shops", () => {
+    const store = [1120, 2384, 112, 80] as const;
+    expect(() => validateStorefrontEnvelope(CITY_COMMERCIAL_ENVELOPE, store)).not.toThrow();
+    for (const e of [
+      { ...CITY_COMMERCIAL_ENVELOPE, profile: "bay-front" as const },
+      { ...CITY_COMMERCIAL_ENVELOPE, family: "condo-4" },
+      { ...CITY_COMMERCIAL_ENVELOPE, roof: [2256, 1936, 144, 96] as const },
+      { ...CITY_COMMERCIAL_ENVELOPE, floor: [2544, 1984, 80, 64] as const },
+      { ...CITY_COMMERCIAL_ENVELOPE, groundHeight: 80 },
+    ])
+      expect(() => validateStorefrontEnvelope(e, store)).toThrow("matching flat commercial");
   });
 });

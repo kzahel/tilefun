@@ -256,8 +256,8 @@ test("complete single buildings explain topology and old storefront links open a
     .filter({ hasText: "Facade attachments & roof" })
     .locator("summary")
     .click();
-  await expect(page.locator("#topology")).toContainText("condo-4-left-bay");
-  await expect(page.locator("#topology")).toContainText("condo-4-right-entrance");
+  await expect(page.locator("#topology")).toContainText("modular-commercial");
+  await expect(page.locator("#topology")).toContainText("same flat frontage");
   await expect(page.locator("#topology")).toContainText("all sections share a base");
   expect(page.url()).toContain("prefab=prop-city-v1-bakery-2");
   for (const type of [

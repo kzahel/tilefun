@@ -115,6 +115,21 @@ and exercise old review bookmarks. Desktop single-building/block and emulated
 phone captures were inspected. These remain visual candidates pending review;
 the older world revisions and district recipe list remain frozen.
 
+Storefront fit correction: follow-up note `a4d00bc8-7f0d-4211-96fa-f094ae1c77a4`
+rejected the bay-front mixed-use composition. Flat shop art cannot replace the
+projecting bay ground module with a brick patch. Shops now use the matching
+flat `Floor_Modular_Building` family: native 112px storefront, 64px upper floors,
+96px roof, and a 48px ground-wall datum. The detached sign is the only overhang;
+the Condo facade and filler/trim patches are removed from shop recipes.
+Roof_1 `[2256,1936,112,96]` and Middle_Floor_1 `[2544,1984,112,64]` are additional
+audited source regions outside the original selection, recorded explicitly and
+pinned to its PNG revision. Profile/width/datum validation rejects incompatible
+shop envelopes. Door approaches now follow each individual storefront. This
+supersedes the shop composition above; the current inventory has 396 uses.
+Validation: typecheck/build, 1,063 unit tests, and all 141 browser tests pass.
+Single bakery/ice-cream compositions and block/phone captures were visually
+reviewed. The storefront-fit note remains in progress for human visual review.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially

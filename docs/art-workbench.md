@@ -64,7 +64,7 @@ of collision, door placement, perspective, or a new generator version.
 
 ## Inventory and coverage
 
-`public/data/art-catalog.json` describes 91 PNG sheets and currently 511 recorded
+`public/data/art-catalog.json` describes 91 PNG sheets and currently 396 recorded
 source uses. Both major atlas indexes are reused directly, rather than copied
 into a second slicing catalog: 4,816 matched Exteriors slices and 19,493 packed
 Interiors entries. **Indexed** means the original slicing/index exists and can
@@ -124,10 +124,17 @@ the closed left bay, open infill, and closed right entrance. Complete chains
 must close both ends and match internal attachments. The vendor's large top
 sprites are split into roof and wall bands; all roof sections share a datum.
 Detached roof-access sprites are deferred accessories, not required caps.
-Storefronts replace a ground-floor bay in a complete mixed-use facade, retain
-the upper bay window trim, and have a separate residential entrance. The main
-storefront art already includes its edges; adjacent extension strips are not
-appended as duplicate caps. Bare storefront entries were retired; old `-1`
+Storefronts use the flat `Floor_Modular_Building` family, with the same 112px
+frontage for shop, upper walls, and roof. Ground walls are 48px high, upper
+floors are 64px high, and shop signs overhang the ground wall. Each shop has its
+own door approach position. The projecting Condo 4 family is incompatible with
+these flat shop fronts; the earlier bay/brick-fill attempt was removed.
+The additional audited source regions are `Roof_1` at `[2256,1936,112,96]` and
+`Middle_Floor_1` at `[2544,1984,112,64]`, pinned to the same original PNG. These
+regions extend the original shortlist, and are explicitly recorded in
+`CITY_COMMERCIAL_ENVELOPE`. Tests reject incompatible profiles, widths, and
+ground datums. The main storefront art already includes its edges; adjacent
+extension strips are not appended as duplicate caps. Bare storefront entries were retired; old `-1`
 review bookmarks open the complete two-level building. Apartment candidate IDs
 remain bookmarkable, with updated names and composition hashes. Saved notes
 keep their original context and flag changed compositions when opened in the

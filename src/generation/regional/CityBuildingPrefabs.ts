@@ -31,6 +31,7 @@ export interface CityBuildingPrefab extends BuildingRecipe {
   floors: number;
   review: "candidate";
   topology: BuildingTopology;
+  profile: "bay-front" | "flat-front";
 }
 const part = (x: number, y: number, w: number, h: number, dx: number, dy: number): FacadePiece => ({
   frameCol: x / 16,
@@ -128,6 +129,7 @@ function condo(style: "bay" | "narrow" | "wide", floors: number): CityBuildingPr
     type: `prop-city-v1-condo-${style}-${floors}`,
     name: `${style === "bay" ? "Bay-front" : style === "narrow" ? "Extended bay-front" : "Wide bay-front"} apartments · ${floors} levels`,
     family: "condo-4",
+    profile: "bay-front",
     floors,
     review: "candidate",
     kind: "apartment",
@@ -147,6 +149,7 @@ function hotel(floors: number): CityBuildingPrefab {
     type: `prop-city-v1-hotel-${floors}`,
     name: `Hotel · ${floors} levels`,
     family: "hotel",
+    profile: "flat-front",
     floors,
     review: "candidate",
     kind: "apartment",
@@ -163,39 +166,72 @@ function hotel(floors: number): CityBuildingPrefab {
   };
 }
 const SHOPS = [
-  { id: "bakery", name: "Bakery", x: 1120, y: 2384 },
-  { id: "butcher", name: "Butcher", x: 1280, y: 2384 },
-  { id: "bait", name: "Bait shop", x: 1440, y: 2384 },
-  { id: "ice-cream", name: "Ice cream", x: 1600, y: 2384 },
-  { id: "gym", name: "Fitness", x: 1760, y: 2384 },
+  { id: "bakery", name: "Bakery", x: 1120, y: 2384, entrance: 40 },
+  { id: "butcher", name: "Butcher", x: 1280, y: 2384, entrance: -16 },
+  { id: "bait", name: "Bait shop", x: 1440, y: 2384, entrance: 0 },
+  { id: "ice-cream", name: "Ice cream", x: 1600, y: 2384, entrance: 0 },
+  { id: "gym", name: "Fitness", x: 1760, y: 2384, entrance: 40 },
 ] as const;
+export interface StorefrontEnvelope {
+  family: string;
+  profile: "flat-front" | "bay-front";
+  groundHeight: number;
+  roof: SourceRect;
+  floor: SourceRect;
+}
+/** Additional source audit: Floor_Modular_Building Roof_1 and Middle_Floor_1.
+ * These lie outside the original shortlist; retain their exact source regions
+ * rather than claiming that the first annotation selected them.
+ */
+export const CITY_COMMERCIAL_ENVELOPE = {
+  family: "modular-commercial",
+  profile: "flat-front",
+  groundHeight: 48,
+  roof: [2256, 1936, 112, 96],
+  floor: [2544, 1984, 112, 64],
+} as const satisfies StorefrontEnvelope;
+export function validateStorefrontEnvelope(envelope: StorefrontEnvelope, store: SourceRect): void {
+  if (
+    envelope.family !== "modular-commercial" ||
+    envelope.profile !== "flat-front" ||
+    envelope.groundHeight !== 48 ||
+    envelope.roof[2] !== store[2] ||
+    envelope.floor[2] !== store[2]
+  )
+    throw new Error("Storefront requires a matching flat commercial envelope and ground datum");
+}
 function shop(s: (typeof SHOPS)[number], floors: number): CityBuildingPrefab {
-  const assembled = composeFacade(
-    [CONDO_FACADE_MODULES.bay, CONDO_FACADE_MODULES.entrance],
-    floors,
-  );
-  // The main storefront already contains its edges. The adjacent 16px vendor
-  // sprites are extension variants, not end caps. Keep a separate residential
-  // entrance and fill the 32px sign-overhang band with an opaque native brick tile.
-  const parts = assembled.parts.filter((p) => !(p.dy === 0 && p.dx === -40));
-  for (let i = 0; i < 7; i++) parts.push(part(1280, 2096, 16, 32, -88 + i * 16, -48));
-  // The projecting bay windows cross the vendor's floor split. Retain their
-  // lower trim/cornice above the storefront when replacing the ground module.
-  parts.push(part(1104, 2144, 112, 32, -40, -48));
-  parts.push(part(s.x, s.y, 112, 80, -40, 0));
+  const e = CITY_COMMERCIAL_ENVELOPE;
+  const store: SourceRect = [s.x, s.y, 112, 80];
+  validateStorefrontEnvelope(e, store);
+  const roofDatum = -e.groundHeight - (floors - 1) * e.floor[3];
+  const roof = [sourcePart(e.roof, 0, roofDatum)];
+  const parts = [...roof];
+  for (let i = 0; i < floors - 1; i++)
+    parts.push(sourcePart(e.floor, 0, -e.groundHeight - i * e.floor[3]));
+  // Only the native shop sign overhangs its 48px ground wall. Draw it last;
+  // the roof and all floors have the same flat, 112px frontage as the shop.
+  parts.push(sourcePart(store, 0, 0));
   return {
-    ...assembled,
     parts,
     type: `prop-city-v1-${s.id}-${floors}`,
     name: `${s.name} + apartments · ${floors} levels`,
     family: "storefront",
+    profile: e.profile,
     floors,
     review: "candidate",
     kind: "shop",
     facing: "south",
-    height: 112 - assembled.topology.roof.datum,
-    groundDepth: 32,
-    entrance: { dx: 0, dy: 24 },
+    width: store[2],
+    height: e.roof[3] - roofDatum,
+    groundDepth: 48,
+    entrance: { dx: s.entrance, dy: 32 },
+    topology: {
+      modules: [
+        { id: e.family, x: -store[2] / 2, width: store[2], left: "closed", right: "closed" },
+      ],
+      roof: { datum: roofDatum, depth: e.roof[3], parts: roof },
+    },
   };
 }
 export const CITY_BUILDING_PREFABS: readonly CityBuildingPrefab[] = [

@@ -229,11 +229,11 @@ function render() {
   $("recipe-id").textContent = prefab.type;
   $("assembly-summary").textContent =
     scene.value === "single"
-      ? `Complete facade · both ends closed · ${prefab.topology.modules.length} connected section(s) · shared roof datum`
+      ? `Complete facade · both ends closed · ${prefab.profile === "flat-front" ? "flat frontage" : "bay frontage"} · ${prefab.topology.modules.length} connected section(s) · shared roof datum`
       : "Complete building assemblies with closed exterior ends and independently assembled roof decks.";
   $("bookmark-notice").textContent =
     requestedType !== resolvedType && select.value === resolvedType
-      ? "The old storefront-only link now shows a complete building with apartments and a residential entrance."
+      ? "The old storefront-only link now shows a complete building with apartments."
       : "";
   const topology = $("topology");
   topology.replaceChildren();
@@ -245,6 +245,12 @@ function render() {
   const roofRow = document.createElement("p");
   roofRow.textContent = `Roof deck: ${prefab.topology.roof.depth}px deep; all sections share a base ${Math.abs(prefab.topology.roof.datum)}px above the street.`;
   topology.append(roofRow);
+  if (prefab.family === "storefront") {
+    const front = document.createElement("p");
+    front.textContent =
+      "Shop, upper walls, and roof share the same flat frontage and native width. The sign overhangs the ground-floor wall.";
+    topology.append(front);
+  }
   const sourceUrl = new URL("art-workbench.html", location.href);
   sourceUrl.searchParams.set("sheet", CITY_PREFAB_SOURCE.sheetId);
   const xs = prefab.parts.map((p) => p.frameCol * 16),
