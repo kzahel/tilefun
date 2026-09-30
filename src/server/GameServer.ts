@@ -60,6 +60,8 @@ const CURSOR_COLORS = [
 export interface GameServerDeps {
   registry: IWorldRegistry;
   createStore: (worldId: string) => PersistenceStore;
+  /** Node hosts supply an explicit policy; in-browser hosts keep trusted co-op. */
+  authorizeAdmin?: (clientId: string, token?: string) => boolean;
 }
 
 export class GameServer {
@@ -82,6 +84,7 @@ export class GameServer {
   private readonly transport: IServerTransport;
   private readonly registry: IWorldRegistry;
   private readonly createStore: (worldId: string) => PersistenceStore;
+  private readonly authorizeAdmin: (clientId: string, token?: string) => boolean;
   private loop: ServerLoop | null = null;
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
@@ -140,6 +143,7 @@ export class GameServer {
 
   constructor(transport: IServerTransport, deps?: GameServerDeps) {
     this.transport = transport;
+    this.authorizeAdmin = deps?.authorizeAdmin ?? (() => true);
     this.registry = deps?.registry ?? new WorldRegistry();
     this.createStore =
       deps?.createStore ??
@@ -830,6 +834,33 @@ export class GameServer {
     const session = this.sessions.get(clientId);
     if (!session) return;
 
+    // Chat shares the RCON channel but carries no administrative capability.
+    const privileged =
+      msg.type === "create-world" ||
+      msg.type === "delete-world" ||
+      msg.type === "rename-world" ||
+      (msg.type === "rcon" &&
+        (typeof msg.command !== "string" || !/^\/?say(?:\s|$)/i.test(msg.command.trim())));
+    if (
+      privileged &&
+      !this.authorizeAdmin(clientId, "adminToken" in msg ? msg.adminToken : undefined)
+    ) {
+      this.transport.send(clientId, {
+        type: "request-error",
+        requestId: "requestId" in msg ? msg.requestId : 0,
+        message: "Server administration requires an admin token.",
+      });
+      return;
+    }
+    if (msg.type === "rcon" && (typeof msg.command !== "string" || msg.command.length > 2048)) {
+      this.transport.send(clientId, {
+        type: "request-error",
+        requestId: msg.requestId,
+        message: "Invalid console command.",
+      });
+      return;
+    }
+
     // Global messages handled by GameServer
     switch (msg.type) {
       case "enter-building":
@@ -977,9 +1008,11 @@ export class GameServer {
         const output: string[] = [];
         if (this.serverConsole) {
           this.serverConsole.rconSenderName = session.displayName || clientId;
-          const lines = this.serverConsole.execServer(msg.command);
-          this.serverConsole.rconSenderName = null;
-          output.push(...lines);
+          try {
+            output.push(...this.serverConsole.execServer(msg.command));
+          } finally {
+            this.serverConsole.rconSenderName = null;
+          }
         } else {
           output.push("Server console not initialized");
         }

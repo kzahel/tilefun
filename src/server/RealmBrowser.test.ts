@@ -166,7 +166,7 @@ class TestTransport implements IServerTransport {
   }
 }
 
-async function createTestSetup() {
+async function createTestSetup(authorizeAdmin?: (clientId: string, token?: string) => boolean) {
   const transport = new TestTransport();
   const registry = new MemoryRegistry();
   const stores = new Map<string, MemoryStore>();
@@ -178,7 +178,11 @@ async function createTestSetup() {
     }
     return store;
   };
-  const server = new GameServer(transport, { registry, createStore });
+  const server = new GameServer(transport, {
+    registry,
+    createStore,
+    ...(authorizeAdmin ? { authorizeAdmin } : {}),
+  });
   await server.init();
   return { server, transport, registry, stores, createStore };
 }
@@ -773,4 +777,68 @@ describe("realm transition lifecycle", () => {
       server.destroy();
     }
   });
+});
+
+it("remote administration requires authorization while ordinary chat and realm browsing remain available", async () => {
+  const { server, transport, registry } = await createTestSetup(
+    (_clientId, token) => token === "secret",
+  );
+  try {
+    transport.connect("guest");
+    const before = await registry.listWorlds();
+    const worldId = before[0]?.id;
+    if (!worldId) throw new Error("No default world");
+    for (const message of [
+      { type: "create-world", requestId: 1, name: "Unauthorized" },
+      { type: "rename-world", requestId: 2, worldId, name: "Unauthorized" },
+      { type: "delete-world", requestId: 3, worldId },
+      { type: "rcon", requestId: 4, command: "sv_speed 99" },
+    ] satisfies ClientMessage[])
+      transport.clientSend("guest", message);
+    // Omitting requestId must never bypass authorization on a decoded JSON message.
+    transport.clientSend("guest", { type: "rcon", command: "sv_speed 99" } as ClientMessage);
+    expect(transport.messagesOfType("guest", "request-error")).toHaveLength(5);
+    expect(await registry.listWorlds()).toEqual(before);
+    expect(server.speedMultiplier).toBe(1);
+    transport.clientSend("guest", { type: "rcon", requestId: 5, command: "say Hello" });
+    expect(transport.messagesOfType("guest", "rcon-response").at(-1)?.output.join(" ")).toContain(
+      "Hello",
+    );
+    transport.clientSend("guest", {
+      type: "rcon",
+      requestId: 6,
+      command: "sv_speed 2",
+      adminToken: "secret",
+    });
+    expect(server.speedMultiplier).toBe(2);
+    transport.clientSend("guest", {
+      type: "rename-world",
+      requestId: 7,
+      worldId,
+      name: "Authorized",
+      adminToken: "secret",
+    });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect((await registry.getWorld(worldId))?.name).toBe("Authorized");
+    transport.clientSend("guest", {
+      type: "create-world",
+      requestId: 8,
+      name: "Authorized",
+      adminToken: "secret",
+    });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const created = transport.messagesOfType("guest", "world-created").at(-1)?.meta;
+    expect(created).toBeDefined();
+    if (!created) throw new Error("No created world");
+    transport.clientSend("guest", {
+      type: "delete-world",
+      requestId: 9,
+      worldId: created.id,
+      adminToken: "secret",
+    });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(await registry.getWorld(created.id)).toBeUndefined();
+  } finally {
+    server.destroy();
+  }
 });

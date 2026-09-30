@@ -7,6 +7,7 @@ import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { worldDirectory } from "../persistence/fsPaths.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
+import { adminAuthorization } from "./adminAuthorization.js";
 import { GameServer } from "./GameServer.js";
 import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
@@ -16,6 +17,7 @@ const PORT = parseInt(process.env.PORT ?? "3001", 10);
 const DATA_DIR = process.env.DATA_DIR ?? "./data";
 const NET_TRANSPORT = (process.env.NET_TRANSPORT ?? "ws").toLowerCase();
 const RTC_SIGNAL_PATH = process.env.RTC_SIGNAL_PATH ?? "/rtc-signal";
+const authorizeAdmin = adminAuthorization();
 
 // Resolve dist/ directory (Vite build output) relative to project root
 const thisFile = fileURLToPath(import.meta.url);
@@ -51,6 +53,7 @@ const transport = await createTransport();
 
 // Create game server with filesystem persistence
 const server = new GameServer(transport, {
+  authorizeAdmin,
   registry: new FsWorldRegistry(DATA_DIR),
   createStore: (worldId) =>
     new FsPersistenceStore(worldDirectory(DATA_DIR, worldId), ["chunks", "meta", "players"]),

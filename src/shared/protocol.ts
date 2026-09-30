@@ -111,11 +111,12 @@ export type ClientMessage =
       generation?: GenerationRequest;
       worldType?: WorldType;
       seed?: number;
+      adminToken?: string;
     }
-  | { type: "delete-world"; requestId: number; worldId: string }
+  | { type: "delete-world"; requestId: number; worldId: string; adminToken?: string }
   | { type: "list-worlds"; requestId: number }
-  | { type: "rename-world"; requestId: number; worldId: string; name: string }
-  | { type: "rcon"; requestId: number; command: string }
+  | { type: "rename-world"; requestId: number; worldId: string; name: string; adminToken?: string }
+  | { type: "rcon"; requestId: number; command: string; adminToken?: string }
   | {
       type: "editor-cursor";
       tileX: number;

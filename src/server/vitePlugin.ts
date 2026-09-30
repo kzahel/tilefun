@@ -5,6 +5,7 @@ import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { worldDirectory } from "../persistence/fsPaths.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
+import { adminAuthorization } from "./adminAuthorization.js";
 import { GameServer } from "./GameServer.js";
 import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog, serverLogError } from "./serverLog.js";
@@ -28,6 +29,7 @@ function getLanAddress(): string | null {
 export function tilefunServer(dataDir = "./data"): Plugin {
   let server: GameServer | null = null;
   const netTransport = (process.env.NET_TRANSPORT ?? "ws").toLowerCase();
+  const authorizeAdmin = adminAuthorization();
 
   return {
     name: "tilefun-server",
@@ -59,6 +61,7 @@ export function tilefunServer(dataDir = "./data"): Plugin {
             netTransport,
           );
           server = new GameServer(transport, {
+            authorizeAdmin,
             registry: new FsWorldRegistry(dataDir),
             createStore: (worldId) =>
               new FsPersistenceStore(worldDirectory(dataDir, worldId), [

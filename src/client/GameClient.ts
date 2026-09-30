@@ -59,6 +59,7 @@ import { MainMenu } from "../ui/MainMenu.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
+import { takeAdminToken } from "./adminToken.js";
 import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
 import { RequestBroker } from "./RequestBroker.js";
 
@@ -140,6 +141,7 @@ export class GameClient {
   private profileStore: GameClientOptions["profileStore"];
   /** The client ID used for the server connection (for debug display). */
   private clientId: string;
+  private readonly adminToken: string | undefined;
 
   /** Access the server instance (local mode only). Throws if null (serialized mode). */
   private get localServer(): GameServer {
@@ -153,6 +155,9 @@ export class GameClient {
     server: GameServer | null,
     options?: GameClientOptions,
   ) {
+    const admin = takeAdminToken(new URL(window.location.href));
+    this.adminToken = admin.token;
+    if (admin.token !== undefined) window.history.replaceState(window.history.state, "", admin.url);
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Failed to get 2D context");
     this.canvas = canvas;
@@ -604,31 +609,35 @@ export class GameClient {
       }
     };
     this.mainMenu.onDelete = async (id) => {
-      if (this.serialized) {
-        await this.gcSendRequest({
-          type: "delete-world",
-          requestId: this.nextRequestId++,
-          worldId: id,
-        });
-        const resp = await this.gcSendRequest({
-          type: "list-realms",
-          requestId: this.nextRequestId++,
-        });
-        this.mainMenu.show(resp.realms);
-      } else {
-        await this.localServer.deleteWorld(id);
-        const worlds = await this.localServer.listWorlds();
-        this.mainMenu.show(GameClient.toRealmInfoList(worlds));
+      try {
+        if (this.serialized) {
+          await this.gcSendRequest({
+            type: "delete-world",
+            requestId: this.nextRequestId++,
+            worldId: id,
+          });
+          const resp = await this.gcSendRequest({
+            type: "list-realms",
+            requestId: this.nextRequestId++,
+          });
+          this.mainMenu.show(resp.realms);
+        } else {
+          await this.localServer.deleteWorld(id);
+          const worlds = await this.localServer.listWorlds();
+          this.mainMenu.show(GameClient.toRealmInfoList(worlds));
+        }
+      } catch (error) {
+        this.mainMenu.showCreationError(String(error));
       }
     };
     this.mainMenu.onRename = (id, name) => {
       if (this.serialized) {
-        this.transport.send({
+        void this.gcSendRequest({
           type: "rename-world",
           requestId: this.nextRequestId++,
           worldId: id,
           name,
-        });
+        }).catch((error) => this.mainMenu.showCreationError(String(error)));
       } else {
         this.localServer.renameWorld(id, name);
       }
@@ -865,6 +874,11 @@ export class GameClient {
 
   /** Send a request and return a promise resolved when the server responds with matching requestId. */
   private gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
+    if (
+      this.adminToken &&
+      ["create-world", "delete-world", "rename-world", "rcon"].includes(msg.type)
+    )
+      return this.requests.send({ ...msg, adminToken: this.adminToken });
     return this.requests.send(msg);
   }
 
