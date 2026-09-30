@@ -107,4 +107,33 @@ describe("machine art note inbox", () => {
       await new Promise<void>((resolve) => server.close(() => resolve()));
     }
   });
+  it("preserves building review context through replies and rejects retargeting and unsafe links", async () => {
+    const s = await store();
+    const buildingReview = {
+      scene: "mixed",
+      prefabIds: ["prop-city-v1-bakery-3"],
+      revision: "a".repeat(64),
+      url: "/tilefun/building-lab.html?scene=mixed&prefab=prop-city-v1-bakery-3",
+    };
+    await s.append({ ...row, buildingReview });
+    await s.append({
+      ...row,
+      buildingReview,
+      id: "reply-1",
+      reply: "Reviewing the shop sign",
+      status: "in-progress",
+    });
+    expect((await s.records()).at(-1)?.buildingReview).toEqual(buildingReview);
+    await expect(
+      s.append({ ...row, id: "reply-2", buildingReview: { ...buildingReview, scene: "hotel" } }),
+    ).rejects.toThrow("selection cannot change");
+    await expect(
+      s.append({
+        ...row,
+        id: "bad-url",
+        threadId: "bad-url",
+        buildingReview: { ...buildingReview, url: "javascript:alert(1)" },
+      }),
+    ).rejects.toThrow("Invalid building review");
+  });
 });

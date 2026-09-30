@@ -73,6 +73,16 @@ suite passed 135 tests; after the final door-wing composition adjustment, all
 20 affected building-lab, art-workbench, world-creation, and gameplay checks
 passed again. Desktop and emulated phone captures were visually inspected.
 
+Review follow-up: the building lab now has a **Leave feedback** form below the
+preview for a whole block or one building. Notes and replies use the same inbox
+as source annotations, with shared outbox/retry and PNG-verification code.
+Threads preserve scene/recipe IDs, a recipe-definition hash, and a preview URL;
+drafts and offline submissions stay with their original target. This removes
+the need to manually copy a recipe ID into a source-sheet annotation.
+Follow-up validation: typecheck/build and 1,060 unit tests pass; all 138 browser
+tests passed, with all 14 lab/workbench checks rerun after the final draft and
+target-preservation fixes. The feedback form's phone layout was inspected.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially

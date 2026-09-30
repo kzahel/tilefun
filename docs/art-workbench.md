@@ -106,7 +106,15 @@ hotels; and bakery, butcher, bait, ice-cream, and fitness storefronts with
 mixed-use variants. Apartment, retail, and hotel blocks align frontage at
 native dimensions with a mix of heights. Select an individual building, inspect
 its source pieces, or toggle shared footprints/entrance approach positions.
-Links preserve the scene and prefab ID. Name that recipe ID in art feedback.
+Links preserve the scene and prefab ID. **Leave feedback** sits directly below
+the preview: choose **Whole block** or an individual building in **About**, type
+a note, then press **Save feedback**. The shared inbox captures the target scene,
+recipe IDs, recipe-definition hash, source rectangle, and verified PNG revision
+automatically. **Building feedback & replies** shows saved requests and agent
+replies; use **Refresh feedback** to fetch updates. Drafts stay with their target;
+offline submissions retain their original context and retry after reconnect.
+The art workbench's Notes list and `npm run art:notes` read these same threads.
+Both tools share the persistent outbox/transport and source-verification code.
 
 `CityBuildingPrefabs.ts` supplies the source art, piece offsets, bounds, and
 entrances. The lab calls the same `createProp`, `collectScene`, and

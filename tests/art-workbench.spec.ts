@@ -50,6 +50,9 @@ test("saves notes on the machine for a second browser and resolves the same thre
   const note = page.locator("#notes article").filter({ hasText: label });
   await expect(note).toBeVisible();
   await expect(page.locator("#sync")).toHaveText("Server inbox up to date.");
+  await page.reload();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#note")).toHaveValue("");
   const second = await browser.newContext();
   try {
     const other = await second.newPage();

@@ -11,7 +11,9 @@ import {
   snapRegion,
   validateRect,
 } from "./ArtCatalog.js";
-import { type ArtNote, latestArtNotes, parseArtNote } from "./ArtNotes.js";
+import { ArtNoteInbox } from "./ArtNoteInbox.js";
+import type { ArtNote } from "./ArtNotes.js";
+import { loadVerifiedArtImage } from "./ArtSource.js";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const catalog = await fetchJson<ArtCatalog>("data/art-catalog.json");
@@ -24,8 +26,7 @@ const sheetSelect = $<HTMLSelectElement>("sheet"),
   theme = $<HTMLSelectElement>("theme"),
   filter = $<HTMLSelectElement>("filter");
 const noteInput = $<HTMLTextAreaElement>("note");
-const API = "api/art-notes",
-  STORAGE = "tilefun.art-workbench.v1";
+const STORAGE = "tilefun.art-workbench.v1";
 let stored: {
   sheetId?: string;
   selection?: ArtRect;
@@ -38,14 +39,8 @@ try {
 } catch {
   /* Corrupt local state must not block browsing. */
 }
-const outbox: ArtNote[] = (stored.outbox ?? []).flatMap((v) => {
-  try {
-    return [parseArtNote(v, catalog)];
-  } catch {
-    return [];
-  }
-});
-let records: ArtNote[] = stored.records ?? [];
+const inbox = new ArtNoteInbox(catalog, STORAGE);
+const outbox = inbox.outbox;
 let sheet: ArtSheet,
   image: HTMLImageElement | null = null,
   slices: ArtSlice[] = [],
@@ -56,9 +51,7 @@ let selection: ArtRect | null = null,
   loadToken = 0,
   resultLimit = 60,
   regionMode = false;
-let flushing = false,
-  refreshPending = false,
-  saveProblem = "";
+let saveProblem = "";
 const sheetCache = new Map<string, ArtSlice[]>();
 function text(tag: string, value: string, className?: string): HTMLElement {
   const el = document.createElement(tag);
@@ -81,7 +74,13 @@ function persist(): void {
   try {
     localStorage.setItem(
       STORAGE,
-      JSON.stringify({ sheetId: sheet?.id, selection, note: noteInput.value, outbox, records }),
+      JSON.stringify({
+        sheetId: sheet?.id,
+        selection,
+        note: noteInput.value,
+        outbox,
+        records: inbox.records,
+      }),
     );
     saveProblem = "";
   } catch {
@@ -90,52 +89,22 @@ function persist(): void {
 }
 function updateSync(message = ""): void {
   $("sync").textContent =
-    saveProblem ||
-    (outbox.length
-      ? `${outbox.length} note event(s) pending server save${message ? ` · ${message}` : ""}`
-      : message || "All notes saved on this machine.");
+    saveProblem || inbox.storageProblem || (outbox.length ? inbox.status : message || inbox.status);
 }
 async function sync(): Promise<void> {
-  if (flushing) {
-    refreshPending = true;
-    return;
-  }
-  flushing = true;
-  try {
-    while (outbox[0]) {
-      const row = outbox[0];
-      await fetchJson(API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(row),
-      });
-      outbox.shift();
-      persist();
-    }
-    records = await fetchJson<ArtNote[]>(API);
-    persist();
-    updateSync("Server inbox up to date.");
-  } catch (error) {
-    updateSync(`will retry · ${error instanceof Error ? error.message : "offline"}`);
-  } finally {
-    flushing = false;
-    renderNotes();
-    if (refreshPending) {
-      refreshPending = false;
-      void sync();
-    }
-  }
+  await inbox.sync();
 }
 function currentNotes(): ArtNote[] {
-  return latestArtNotes([...records, ...outbox]);
+  return inbox.notes;
 }
 function enqueue(row: ArtNote): void {
-  outbox.push(row);
+  inbox.enqueue(row);
   persist();
+}
+inbox.onchange = () => {
   renderNotes();
   updateSync();
-  void sync();
-}
+};
 function shareUrl(): string {
   const url = new URL(location.href);
   url.search = "";
@@ -324,30 +293,9 @@ async function loadSheet(id: string, rect?: ArtRect): Promise<void> {
   $("canvas-message").textContent = "Loading source sheet…";
   draw();
   renderSelection();
-  const loadedImage = new Image();
-  async function decodeVerifiedImage() {
-    const response = await fetch(next.image);
-    if (!response.ok) throw new Error(`Image server returned ${response.status}`);
-    const bytes = await response.arrayBuffer();
-    const digest = await crypto.subtle.digest("SHA-256", bytes);
-    const fingerprint = [...new Uint8Array(digest)]
-      .map((n) => n.toString(16).padStart(2, "0"))
-      .join("");
-    if (fingerprint !== next.fingerprint)
-      throw new Error("Source image changed. Refresh the art inventory before annotating it.");
-    const url = URL.createObjectURL(new Blob([bytes], { type: "image/png" }));
-    try {
-      loadedImage.src = url;
-      await loadedImage.decode();
-      if (loadedImage.naturalWidth !== next.width || loadedImage.naturalHeight !== next.height)
-        throw new Error("Source dimensions changed");
-    } finally {
-      URL.revokeObjectURL(url);
-    }
-  }
   try {
-    const [, entries] = await Promise.all([
-      decodeVerifiedImage(),
+    const [loadedImage, entries] = await Promise.all([
+      loadVerifiedArtImage(next),
       next.index
         ? sheetCache.has(id)
           ? Promise.resolve(required(sheetCache.get(id)))
@@ -399,6 +347,12 @@ function renderNotes(): void {
       text("p", row.note),
       text("small", `${source?.name ?? row.sheetId} · ${row.rect.join(", ")}`),
     );
+    if (row.buildingReview) {
+      const link = document.createElement("a");
+      link.href = row.buildingReview.url;
+      link.textContent = `Review ${row.buildingReview.scene}: ${row.buildingReview.prefabIds.join(", ")}`;
+      article.append(link);
+    }
     if (source?.fingerprint !== row.fingerprint)
       article.append(
         text(

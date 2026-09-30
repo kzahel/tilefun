@@ -24,6 +24,10 @@ if (args[0] === "set-status") {
   else {
     const catalog = await store.catalog();
     for (const row of selected) {
+      if (row.buildingReview)
+        console.log(
+          `Building review: ${row.buildingReview.url}\nrecipes=${row.buildingReview.prefabIds.join(", ")}\ncomposition=${row.buildingReview.revision}`,
+        );
       const sheet = catalog.sheets.find((s) => s.id === row.sheetId);
       console.log(
         `\n${row.threadId} [${row.status}/${row.intent}]\n${sheet?.image ?? row.sheetId} rect=${JSON.stringify(row.rect)}\nrevision=${row.fingerprint}${sheet?.fingerprint !== row.fingerprint ? " (CHANGED SOURCE)" : ""}\nslices=${row.sliceKeys.join(", ")}\n${row.note}${row.reply ? `\nReply: ${row.reply}` : ""}`,

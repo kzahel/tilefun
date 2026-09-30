@@ -1,6 +1,13 @@
 import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
+export interface BuildingReview {
+  scene: "single" | "residential" | "mixed" | "hotel";
+  prefabIds: string[];
+  /** Hash of the composed recipe definitions, independent of the PNG revision. */
+  revision: string;
+  url: string;
+}
 export interface ArtNote {
   id: string;
   threadId: string;
@@ -14,6 +21,30 @@ export interface ArtNote {
   note: string;
   reply: string;
   createdAt: string;
+  buildingReview?: BuildingReview;
+}
+function parseBuildingReview(value: unknown): BuildingReview {
+  if (!value || typeof value !== "object") throw new Error("Invalid building review");
+  const v = value as Record<string, unknown>;
+  if (
+    !["single", "residential", "mixed", "hotel"].includes(v.scene as string) ||
+    !Array.isArray(v.prefabIds) ||
+    !v.prefabIds.length ||
+    v.prefabIds.length > 30 ||
+    v.prefabIds.some((id) => typeof id !== "string" || !/^prop-city-[a-z0-9-]{1,100}$/.test(id)) ||
+    typeof v.revision !== "string" ||
+    !/^[a-f0-9]{64}$/.test(v.revision) ||
+    typeof v.url !== "string" ||
+    v.url.length > 2000 ||
+    !/^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url)
+  )
+    throw new Error("Invalid building review");
+  return {
+    scene: v.scene as BuildingReview["scene"],
+    prefabIds: [...v.prefabIds],
+    revision: v.revision,
+    url: v.url,
+  };
 }
 export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
   if (!value || typeof value !== "object") throw new Error("Invalid art note");
@@ -74,6 +105,9 @@ export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
     note: v.note,
     reply: v.reply,
     createdAt: v.createdAt,
+    ...(v.buildingReview === undefined
+      ? {}
+      : { buildingReview: parseBuildingReview(v.buildingReview) }),
   };
 }
 export function latestArtNotes(records: readonly ArtNote[]): ArtNote[] {
@@ -86,6 +120,7 @@ export function sameArtTarget(a: ArtNote, b: ArtNote): boolean {
     JSON.stringify(a.sheetSize) === JSON.stringify(b.sheetSize) &&
     a.sheetId === b.sheetId &&
     a.fingerprint === b.fingerprint &&
-    JSON.stringify(a.rect) === JSON.stringify(b.rect)
+    JSON.stringify(a.rect) === JSON.stringify(b.rect) &&
+    JSON.stringify(a.buildingReview) === JSON.stringify(b.buildingReview)
   );
 }

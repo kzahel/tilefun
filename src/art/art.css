@@ -504,3 +504,28 @@ nav {
 .building-stage canvas {
   margin: 0 auto;
 }
+
+.building-feedback {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  max-width: 850px;
+}
+.building-feedback h2 {
+  margin-top: 0;
+}
+.building-feedback textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: vertical;
+}
+.building-feedback select {
+  max-width: 100%;
+}
+.building-feedback article {
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
