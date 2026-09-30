@@ -8,6 +8,7 @@ import { worldDirectory } from "../persistence/fsPaths.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { adminAuthorization } from "./adminAuthorization.js";
+import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
 import { GameServer } from "./GameServer.js";
 import { inspectionHttp } from "./inspectionHttp.js";
 import { initServerLog, installCrashHandlers, serverLog } from "./serverLog.js";
@@ -29,7 +30,15 @@ const hasDistDir = existsSync(distDir);
 // The Vite build uses base: "/tilefun/" so all assets are under that path.
 const BASE_PATH = "/tilefun/";
 
+const handleArtNotes = artNotesHandler(
+  new ArtNoteStore(
+    process.env.ART_NOTES_DIR ?? join(DATA_DIR, "art-notes"),
+    join(hasDistDir ? distDir : join(projectRoot, "public"), "data/art-catalog.json"),
+  ),
+);
+
 const httpServer = createServer(async (req, res) => {
+  if (await handleArtNotes(req, res)) return;
   if (await inspectionHttp(server, req, res)) return;
   const url = req.url ?? "/";
 

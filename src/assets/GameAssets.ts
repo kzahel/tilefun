@@ -12,7 +12,7 @@ export interface GameAssets {
 }
 
 /** Sprite asset manifest: key → { path, width, height }. */
-const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
+export const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
   {
     key: "player",
     path: "assets/sprites/player.png",
@@ -126,7 +126,7 @@ export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets
  * Register base fill variant tiles from the ME Complete Tileset.
  * Group names match TerrainId enum keys (e.g. "Grass", "DirtWarm").
  */
-function registerTileVariants(variants: TileVariants): void {
+export function registerTileVariants(variants: Pick<TileVariants, "addTiles" | "addRect">): void {
   // --- Grass: tiles matching ME autotile grass color (71, 151, 87) ---
   // Region A (cols 51-63, rows 1-7): terrain section grass variants
   variants.addTiles("Grass", [

@@ -87,6 +87,11 @@ export class MainMenu {
     explorerLink.textContent = "World atlas · regional preview ↗";
     explorerLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
     this.overlay.appendChild(explorerLink);
+    const artLink = document.createElement("a");
+    artLink.href = `${import.meta.env.BASE_URL}art-workbench.html`;
+    artLink.textContent = "Art workbench · tiles & notes ↗";
+    artLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
+    this.overlay.appendChild(artLink);
 
     this.listEl = document.createElement("div");
     this.listEl.style.cssText =

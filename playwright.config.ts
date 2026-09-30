@@ -10,7 +10,10 @@ export default defineConfig({
   webServer: {
     // Keep test persistence separate from any developer preview on port 4173.
     command: "npm run preview -- --port 4174 --strictPort",
-    env: { INTERIOR_REVIEW_DIR: "test-results/interior-review-feedback" },
+    env: {
+      INTERIOR_REVIEW_DIR: "test-results/interior-review-feedback",
+      ART_NOTES_DIR: "test-results/art-notes",
+    },
     port: 4174,
     reuseExistingServer: false,
   },

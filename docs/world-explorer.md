@@ -7,6 +7,10 @@ preview, game type/seed/settings selection, districts, persistent interiors, and
 inhabited countryside. No saved
 world is changed by opening the explorer.
 
+The explorer sidebar also links to the [art workbench](art-workbench.md), where
+source tiles can be inspected, traced to recorded systems, and annotated for
+future building recipes.
+
 ## Run and review
 
 ```sh

@@ -615,6 +615,15 @@ export function getPropSheetInfo(
   return { sheetKey: def.sheetKey, col: def.col, row: def.row };
 }
 
+/** Read-only source facts for art inventory; rectangles come from gameplay definitions. */
+export function getPropSourceDefinitions() {
+  return Object.entries(PROP_DEFS).map(([type, def]) => ({
+    type,
+    sheetKey: def.sheetKey,
+    rect: [def.col * 16, def.row * 16, def.width, def.height] as [number, number, number, number],
+  }));
+}
+
 /** Prop palette metadata for the editor UI. */
 export interface PropPaletteEntry {
   type: string;

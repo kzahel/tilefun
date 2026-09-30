@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#192c27"/><title>Art Workbench · Tilefun</title></head>
+<body><div id="app">
+<header><a class="brand" href="./">TILEFUN <span>/ Art workbench</span></a><nav><a href="world-explorer.html">World explorer ↗</a><button type="button" id="copy-link">Copy selection link</button></nav></header>
+<main>
+<aside class="browser"><h1>Find the next city.</h1><p class="muted">Explore source art, trace its uses, and leave a note for the next building or pattern.</p>
+<label>Tileset<select id="sheet" aria-label="Tileset"></select></label>
+<div class="shortcuts"><button type="button" id="apartments">City apartments</button><button type="button" id="terraces">Existing house props</button><button type="button" id="facades">Current facades</button></div>
+<label>Search slices & uses<input id="search" type="search" placeholder="House, balcony, garden…"/></label>
+<label>Theme<select id="theme"><option value="">All themes</option></select></label>
+<label>Show<select id="filter"><option value="all">All named slices & uses</option><option value="uses">Recorded uses</option><option value="indexed">Indexed slices</option><option value="unclaimed">Slices without a recorded use</option></select></label>
+<p id="counts" class="muted"></p><section id="results" aria-label="Source slices"></section><button type="button" id="more" hidden>Show more</button>
+</aside>
+<section class="viewer"><div class="toolbar"><button type="button" id="pan" aria-pressed="true">Pan / tap</button><button type="button" id="select-region" aria-pressed="false">Select region</button><button type="button" id="zoom-out" aria-label="Zoom out">−</button><output id="zoom">100%</output><button type="button" id="zoom-in" aria-label="Zoom in">+</button><button type="button" id="fit">Whole sheet</button><label class="inline"><input id="overlays" type="checkbox" checked/> Uses</label></div>
+<div id="viewport"><canvas id="atlas" tabindex="0" aria-label="Tileset canvas. Drag to pan, tap to select a tile. Select region to drag a rectangle."></canvas><div id="canvas-message">Loading source sheet…</div></div>
+<div class="legend"><span class="use-key">Recorded use</span><span class="slice-key">Indexed slice</span><span class="selection-key">Selection</span><span>Scroll or pinch to zoom · arrows to pan</span></div>
+<p id="sheet-detail" class="muted"></p>
+</section>
+<aside class="inspector"><h2>Selection</h2><p id="coordinates">Tap a tile, select a region, or choose a slice.</p><canvas id="crop" width="1" height="1" aria-label="Selected art preview"></canvas><div id="selection-info"></div>
+<form id="note-form"><label>Turn this into<select id="intent"><option value="building">Building / prefab</option><option value="pattern">Reusable pattern</option><option value="prop">Prop / asset</option><option value="terrain">Terrain</option><option value="other">Something else</option></select></label><label>Your note<textarea id="note" rows="4" maxlength="4000" placeholder="SF-style apartments, shop below, entrances here…" required></textarea></label><button id="save-note" type="submit" disabled>Save note</button></form>
+<p id="sync" role="status">Connecting to note inbox…</p><div class="inbox-header"><h2>Notes</h2><button type="button" id="refresh">Refresh</button></div><label>Status<select id="note-filter"><option value="pending">Pending</option><option value="in-progress">In progress</option><option value="resolved">Resolved</option><option value="all">All notes</option></select></label><div id="notes"></div><button type="button" id="export">Export notes</button>
+</aside></main></div><script type="module" src="/src/art/main.ts"></script></body></html>

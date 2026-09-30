@@ -8,7 +8,7 @@
     "test:worker": "vitest run --config vitest.worker.config.ts",
     "check:worker": "npm run test:worker && npm --prefix worker run build:check",
     "dev": "vite",
-    "build": "tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsc --noEmit && vite build",
+    "build": "tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsx scripts/build-art-catalog.ts --check && tsc --noEmit && vite build",
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",
@@ -23,7 +23,9 @@
     "explorer:bench": "tsx scripts/benchmark-regional.ts",
     "dev:server": "tsx --watch src/server/standalone.ts",
     "start:server": "tsx src/server/standalone.ts",
-    "generation:bench": "tsx scripts/benchmark-generation.ts"
+    "generation:bench": "tsx scripts/benchmark-generation.ts",
+    "art:catalog": "tsx scripts/build-art-catalog.ts",
+    "art:notes": "tsx scripts/art-notes.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
