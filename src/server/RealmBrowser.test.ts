@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   createDescriptor,
   type GenerationDescriptor,
@@ -712,4 +712,65 @@ it("building doors share persistent furnished realms and return to the right ext
   expect((await reopened.listWorlds()).some((w) => w.id === meta.id)).toBe(false);
   expect(transport2.messagesOfType("local", "world-loaded").at(-1)?.worldId).not.toBe(meta.id);
   reopened.destroy();
+});
+
+describe("realm transition lifecycle", () => {
+  it("rejects overlapping joins, loads, doors, and leave requests for one player", async () => {
+    const { server, transport, registry } = await createTestSetup();
+    try {
+      transport.connect("one");
+      const target = await registry.createWorld("Target", "flat");
+      transport.clientSend("one", { type: "join-realm", requestId: 101, worldId: target.id });
+      transport.clientSend("one", { type: "load-world", requestId: 102, worldId: target.id });
+      transport.clientSend("one", { type: "enter-building", requestId: 103, featureId: "absent" });
+      transport.clientSend("one", { type: "leave-realm", requestId: 104 });
+      await vi.waitFor(() =>
+        expect(transport.messagesOfType("one", "realm-joined")).toHaveLength(1),
+      );
+      expect(
+        transport
+          .messagesOfType("one", "request-error")
+          .map((m) => m.requestId)
+          .sort(),
+      ).toEqual([102, 103, 104]);
+      expect([...server.getSessions()][0]?.transitioning).toBe(false);
+    } finally {
+      server.destroy();
+    }
+  });
+
+  it.each([
+    "source save",
+    "destination read",
+    "destination save",
+  ] as const)("preserves the original player and allows retry after a failed %s", async (failure) => {
+    const { server, transport, registry, createStore } = await createTestSetup();
+    try {
+      transport.connect("local");
+      await vi.waitFor(() => expect(server.getLocalSession().realmId).not.toBeNull());
+      const session = server.getLocalSession();
+      const sourceId = session.realmId ?? "";
+      const target = await registry.createWorld("Target", "flat");
+      await server.loadWorld(target.id);
+      await server.loadWorld(sourceId);
+      const player = session.player;
+      const position = { ...player.position };
+      const store = createStore(failure === "source save" ? sourceId : target.id);
+      const spy =
+        failure === "destination read"
+          ? vi.spyOn(store, "get").mockRejectedValueOnce(new Error("Read failed"))
+          : vi.spyOn(store, "save").mockRejectedValueOnce(new Error("Save failed"));
+      await expect(server.loadWorld(target.id)).rejects.toThrow();
+      expect(session.realmId).toBe(sourceId);
+      expect(session.player).toBe(player);
+      expect(session.player.position).toEqual(position);
+      expect(server.entityManager.entities).toContain(player);
+      expect(session.transitioning).toBe(false);
+      spy.mockRestore();
+      await server.loadWorld(target.id);
+      expect(session.realmId).toBe(target.id);
+    } finally {
+      server.destroy();
+    }
+  });
 });

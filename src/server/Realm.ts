@@ -45,7 +45,7 @@ import {
 } from "../interiors/GameplayInterior.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
-import type { SavedMeta } from "../persistence/SaveManager.js";
+import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
@@ -249,7 +249,12 @@ export class Realm {
    * Add a player to this realm: create player entity, set up session state,
    * add to realm sessions map. Loads per-player data if available.
    */
-  async addPlayer(session: PlayerSession): Promise<void> {
+  async preparePlayer(session: PlayerSession): Promise<SavedPlayerData | null> {
+    const persistId = session.profileId || session.clientId;
+    return this.saveManager ? this.saveManager.loadPlayerData(persistId) : null;
+  }
+
+  async addPlayer(session: PlayerSession, prepared?: SavedPlayerData | null): Promise<void> {
     // Evict any existing session in this realm with the same profileId (race-condition safety net)
     if (session.profileId) {
       for (const [otherId, other] of this.sessions) {
@@ -264,8 +269,12 @@ export class Realm {
     }
 
     // Try to load per-player saved data (prefer stable profileId over session clientId)
-    const persistId = session.profileId || session.clientId;
-    const saved = this.saveManager ? await this.saveManager.loadPlayerData(persistId) : null;
+    const saved =
+      prepared === undefined
+        ? this.saveManager
+          ? await this.preparePlayer(session)
+          : null
+        : prepared;
 
     if (this.interior) session.returnLocation = saved?.returnLocation ?? session.returnLocation;
     const spawnX = saved?.x ?? this.lastLoadedPlayerPos.wx;
@@ -351,6 +360,16 @@ export class Realm {
     if (this.sessions.size === 0) {
       this.idleSince = Date.now();
     }
+  }
+
+  /** Reattach the original live player after an aborted transfer, preserving its entity ID. */
+  restorePlayer(session: PlayerSession): void {
+    this.entityManager.restore(session.player);
+    this.sessions.set(session.clientId, session);
+    this.clearClientRevisions(session.clientId);
+    this.playerNamesRevision++;
+    this.idleSince = null;
+    this.savePlayerData(session);
   }
 
   /** Mark per-player data dirty so it gets persisted on next save tick. */
@@ -715,7 +734,7 @@ export class Realm {
       if (ranges.length) this.updateVisibleChunks(ranges);
 
       for (const session of this.sessions.values()) {
-        if (dormantClientIds.has(session.clientId)) continue;
+        if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
         const messages = this.buildMessages(session.clientId);
         for (const msg of messages) {
           transport.send(session.clientId, msg);

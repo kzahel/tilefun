@@ -41,7 +41,8 @@ import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
-import { type Arrival, safeArrival } from "./SafeArrival.js";
+import { RealmTransitions } from "./RealmTransitions.js";
+import type { Arrival } from "./SafeArrival.js";
 import { ServerLoop } from "./ServerLoop.js";
 import type { WorldAPIImpl } from "./WorldAPI.js";
 
@@ -92,6 +93,16 @@ export class GameServer {
   /** How long an empty (non-default) realm stays loaded before being destroyed. */
   private static readonly REALM_IDLE_TIMEOUT_MS = 5 * 60 * 1000;
   private serverConsole: ConsoleEngine | null = null;
+  private readonly transitions = new RealmTransitions(
+    (id) => this.realms.get(id),
+    (oldId, newId) => {
+      if (oldId) {
+        this.tryUnloadRealm(oldId);
+        this.broadcastRealmPlayerCount(oldId);
+      }
+      if (newId !== oldId) this.broadcastRealmPlayerCount(newId);
+    },
+  );
 
   // ── Delegation getters for backward compatibility ──
   // External code (LocalStateView, tests, serverCommands) accesses these fields.
@@ -538,13 +549,11 @@ export class GameServer {
   }
 
   private async enterBuilding(
-    clientId: string,
+    _clientId: string,
     session: PlayerSession,
     featureId: string,
   ): Promise<void> {
-    if (session.transitioning) throw new Error("A realm transition is already running.");
-    session.transitioning = true;
-    try {
+    await this.transitions.move(session, async () => {
       const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
       if (!realm || realm.interior || !realm.currentWorldId)
         throw new Error("No exterior world selected.");
@@ -558,35 +567,29 @@ export class GameServer {
         (session.player.wz ?? 0) > 8
       )
         throw new Error("Stand near the building entrance to enter.");
-      const worldId = interiorRealmId(realm.currentWorldId, featureId);
-      const destination = await this.getOrCreateRealm(worldId);
-      const returnLocation = {
-        worldId: realm.currentWorldId,
-        x: door.wx / 16,
-        y: door.wy / 16,
-        generation: realm.generation,
-      };
-      await this.movePlayerToRealm(
-        clientId,
-        session,
-        worldId,
-        {
+      const destination = await this.getOrCreateRealm(
+        interiorRealmId(realm.currentWorldId, featureId),
+      );
+      return {
+        realm: destination,
+        allowInterior: true,
+        arrival: {
           x: INTERIOR_ENTRY.wx / 16,
           y: INTERIOR_ENTRY.wy / 16,
           generation: destination.generation,
         },
-        true,
-      );
-      session.returnLocation = returnLocation;
-      destination.savePlayerData(session);
-    } finally {
-      session.transitioning = false;
-    }
+        returnLocation: {
+          worldId: realm.currentWorldId,
+          x: door.wx / 16,
+          y: door.wy / 16,
+          generation: realm.generation,
+        },
+      };
+    });
   }
-  private async exitBuilding(clientId: string, session: PlayerSession): Promise<void> {
-    if (session.transitioning) throw new Error("A realm transition is already running.");
-    session.transitioning = true;
-    try {
+
+  private async exitBuilding(_clientId: string, session: PlayerSession): Promise<void> {
+    await this.transitions.move(session, async () => {
       const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
       if (!realm?.interior) throw new Error("You are not in an interior.");
       if (
@@ -596,69 +599,64 @@ export class GameServer {
         ) > 40
       )
         throw new Error("Return to the interior doorway to leave.");
-      const saved = session.returnLocation;
       const parent = await this.getOrCreateRealm(realm.interior.parentWorldId);
-      const position = saved ?? {
+      const position = session.returnLocation ?? {
         worldId: realm.interior.parentWorldId,
         x: realm.interior.returnX,
         y: realm.interior.returnY,
         generation: parent.generation,
       };
-      await this.movePlayerToRealm(clientId, session, position.worldId, position);
-      session.returnLocation = null;
-    } finally {
-      session.transitioning = false;
-    }
+      return {
+        realm: await this.getOrCreateRealm(position.worldId),
+        arrival: position,
+        returnLocation: null,
+      };
+    });
   }
-  /**
-   * Move a single player to a different realm/world.
-   * Creates the target realm if not already loaded.
-   */
-  private async movePlayerToRealm(
-    clientId: string,
+
+  private movePlayerToRealm(
+    _clientId: string,
     session: PlayerSession,
     worldId: string,
     arrival?: Arrival,
-    allowInterior = false,
-  ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
-    // Validate/load the destination before removing a player from a live realm.
-    const targetRealm = await this.getOrCreateRealm(worldId);
-    if (targetRealm.interior && !allowInterior)
-      throw new Error("Enter this interior through its building door.");
-    const position = arrival ? safeArrival(targetRealm, arrival) : undefined;
-    // Remove from current realm
-    if (session.realmId) {
-      const oldRealm = this.realms.get(session.realmId);
-      if (oldRealm) {
-        oldRealm.removePlayer(clientId);
-        await oldRealm.flushAsync();
-        this.tryUnloadRealm(session.realmId);
-      }
-    }
+  ) {
+    return this.transitions.move(session, async () => ({
+      realm: await this.getOrCreateRealm(worldId),
+      ...(arrival ? { arrival } : {}),
+      returnLocation: null,
+    }));
+  }
 
-    // Add player to target realm (loads per-player saved data)
-    await targetRealm.addPlayer(session);
-    if (position) {
-      session.player.position = position;
-      session.cameraX = position.wx;
-      session.cameraY = position.wy;
-      targetRealm.clearClientRevisions(clientId);
-      session.inputQueue = [];
-      session.gameplaySession.lastSafePosition = position;
-      const cx = Math.floor(position.wx / 256),
-        cy = Math.floor(position.wy / 256);
-      session.visibleRange = { minCx: cx - 2, minCy: cy - 2, maxCx: cx + 2, maxCy: cy + 2 };
-    }
-
-    targetRealm.savePlayerData(session);
-    await targetRealm.flushAsync();
-    // Ticks during the save may have emitted baselines the join response clears.
-    targetRealm.clearClientRevisions(clientId);
-    return {
-      cameraX: session.player.position.wx,
-      cameraY: session.player.position.wy,
-      cameraZoom: session.cameraZoom,
-    };
+  private respondToTransition(
+    clientId: string,
+    session: PlayerSession,
+    requestId: number,
+    type: "world-loaded" | "realm-joined",
+    operation: Promise<unknown>,
+  ): void {
+    void operation
+      .then(() => {
+        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+        if (!realm) throw new Error("Destination realm unavailable.");
+        this.transport.send(clientId, { type: "player-assigned", entityId: session.player.id });
+        this.transport.send(clientId, {
+          type,
+          requestId,
+          worldId: session.realmId ?? "",
+          generation: realm.generation,
+          interior: realm.interior ?? undefined,
+          cameraX: session.player.position.wx,
+          cameraY: session.player.position.wy,
+          cameraZoom: session.cameraZoom,
+        });
+      })
+      .catch((error) =>
+        this.transport.send(clientId, {
+          type: "request-error",
+          requestId,
+          message: error instanceof Error ? error.message : String(error),
+        }),
+      );
   }
 
   /**
@@ -840,28 +838,7 @@ export class GameServer {
           msg.type === "enter-building"
             ? this.enterBuilding(clientId, session, msg.featureId)
             : this.exitBuilding(clientId, session);
-        operation
-          .then(() => {
-            const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-            this.transport.send(clientId, { type: "player-assigned", entityId: session.player.id });
-            this.transport.send(clientId, {
-              type: "realm-joined",
-              requestId: msg.requestId,
-              worldId: session.realmId ?? "",
-              generation: realm?.generation ?? this.activeRealm.generation,
-              interior: realm?.interior ?? undefined,
-              cameraX: session.cameraX,
-              cameraY: session.cameraY,
-              cameraZoom: session.cameraZoom,
-            });
-          })
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: String(error),
-            }),
-          );
+        this.respondToTransition(clientId, session, msg.requestId, "realm-joined", operation);
         return;
       }
       case "identify":
@@ -898,82 +875,35 @@ export class GameServer {
         return;
 
       case "load-world":
-        // Per-player realm switching: only move the requesting player
-        this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival)
-          .then((cam) => {
-            this.transport.send(clientId, {
-              type: "player-assigned",
-              entityId: session.player.id,
-            });
-            this.transport.send(clientId, {
-              type: "world-loaded",
-              requestId: msg.requestId,
-              worldId: msg.worldId,
-              interior: this.realms.get(msg.worldId)?.interior ?? undefined,
-              generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
-              cameraX: cam.cameraX,
-              cameraY: cam.cameraY,
-              cameraZoom: cam.cameraZoom,
-            });
-          })
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: String(error),
-            }),
-          );
+      case "join-realm":
+        this.respondToTransition(
+          clientId,
+          session,
+          msg.requestId,
+          msg.type === "load-world" ? "world-loaded" : "realm-joined",
+          this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival),
+        );
         return;
 
       case "list-realms":
-        this.buildRealmList().then((realms) => {
+        void this.buildRealmList().then((realms) =>
           this.transport.send(clientId, {
             type: "realm-list",
             requestId: msg.requestId,
             realms,
-          });
-        });
-        return;
-
-      case "join-realm": {
-        const oldRealmId = session.realmId;
-        console.log(
-          `[tilefun:server] join-realm: client=${clientId} old=${oldRealmId} new=${msg.worldId} editorEnabled=${session.editorEnabled}`,
+          }),
         );
-        this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival)
-          .then((cam) => {
-            console.log(
-              `[tilefun:server] join-realm complete: client=${clientId} player.id=${session.player.id} editorEnabled=${session.editorEnabled} realmId=${session.realmId}`,
-            );
-            this.transport.send(clientId, {
-              type: "player-assigned",
-              entityId: session.player.id,
-            });
-            this.transport.send(clientId, {
-              type: "realm-joined",
-              requestId: msg.requestId,
-              worldId: msg.worldId,
-              interior: this.realms.get(msg.worldId)?.interior ?? undefined,
-              generation: this.realms.get(msg.worldId)?.generation ?? this.activeRealm.generation,
-              cameraX: cam.cameraX,
-              cameraY: cam.cameraY,
-              cameraZoom: cam.cameraZoom,
-            });
-            // Broadcast updated player counts for old and new realms
-            if (oldRealmId) this.broadcastRealmPlayerCount(oldRealmId);
-            this.broadcastRealmPlayerCount(msg.worldId);
-          })
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: String(error),
-            }),
-          );
         return;
-      }
 
       case "leave-realm":
+        if (session.transitioning) {
+          this.transport.send(clientId, {
+            type: "request-error",
+            requestId: msg.requestId,
+            message: "A realm transition is already running.",
+          });
+          return;
+        }
         if (session.realmId) {
           const leftRealmId = session.realmId;
           const realm = this.realms.get(leftRealmId);

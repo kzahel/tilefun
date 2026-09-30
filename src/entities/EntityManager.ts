@@ -54,6 +54,15 @@ export class EntityManager {
     return entity;
   }
 
+  /** Restore a detached entity with its existing identity (for an aborted realm transfer). */
+  restore(entity: Entity): void {
+    if (this.entities.some((existing) => existing.id === entity.id))
+      throw new Error(`Entity ${entity.id} is already present.`);
+    this.entities.push(entity);
+    this.spatialHash.insert(entity);
+    this.nextId = Math.max(this.nextId, entity.id + 1);
+  }
+
   /**
    * Update all entities: apply velocity with collision, tick animation.
    * @param players One or more player entities. In local mode this is a
