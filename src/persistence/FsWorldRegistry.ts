@@ -1,7 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, renameSync, rmSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
 import {
   descriptorFromMetadata,
   type GenerationRequest,
@@ -21,13 +20,13 @@ export class FsWorldRegistry implements IWorldRegistry {
   private writes: Promise<void> = Promise.resolve();
 
   constructor(private readonly dataDir: string) {
-    this.registryPath = join(dataDir, "registry.json");
+    this.registryPath = containedPath(dataDir, "registry.json");
   }
 
   async open(): Promise<void> {
     mkdirSync(this.dataDir, { recursive: true });
     try {
-      const data = await readFile(this.registryPath, "utf-8");
+      const data = await readFile(containedPath(this.dataDir, "registry.json"), "utf-8");
       this.worlds = JSON.parse(data) as WorldMeta[];
     } catch {
       this.worlds = [];
@@ -113,7 +112,7 @@ export class FsWorldRegistry implements IWorldRegistry {
     const write = this.writes
       .catch(() => {})
       .then(async () => {
-        const tmpPath = `${this.registryPath}.tmp`;
+        const tmpPath = containedPath(this.dataDir, "registry.json.tmp");
         await writeFile(tmpPath, snapshot);
         renameSync(tmpPath, this.registryPath);
       });

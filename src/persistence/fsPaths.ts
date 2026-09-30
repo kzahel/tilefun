@@ -1,4 +1,4 @@
-import { existsSync, realpathSync } from "node:fs";
+import { lstatSync, realpathSync } from "node:fs";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 
 function contains(root: string, candidate: string): boolean {
@@ -13,9 +13,11 @@ export function containedPath(root: string, path: string): string {
   const resolvedRoot = resolve(root);
   const candidate = resolve(resolvedRoot, path);
   if (!contains(resolvedRoot, candidate)) throw new Error("Path outside storage root.");
-  if (existsSync(resolvedRoot)) {
+  // lstat also sees dangling symlinks; existsSync would miss them before a write.
+  const exists = (path: string) => lstatSync(path, { throwIfNoEntry: false }) !== undefined;
+  if (exists(resolvedRoot)) {
     let ancestor = candidate;
-    while (!existsSync(ancestor) && ancestor !== resolvedRoot) ancestor = dirname(ancestor);
+    while (!exists(ancestor) && ancestor !== resolvedRoot) ancestor = dirname(ancestor);
     if (!contains(realpathSync(resolvedRoot), realpathSync(ancestor)))
       throw new Error("Symlink outside storage root.");
   }

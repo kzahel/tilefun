@@ -71,4 +71,15 @@ describe("filesystem containment", () => {
     ).rejects.toThrow();
     await expect(store.getAll("../outside")).rejects.toThrow();
   });
+
+  it("rejects a dangling temporary-file symlink before writing outside storage", async () => {
+    const store = new FsPersistenceStore(data, ["players"]);
+    await store.open();
+    const outside = join(directory, "outside.v8");
+    await symlink(outside, join(data, "players", "profile.v8.tmp"), "file");
+    await expect(
+      store.save([{ collection: "players", key: "profile", value: {} }]),
+    ).rejects.toThrow();
+    expect(existsSync(outside)).toBe(false);
+  });
 });
