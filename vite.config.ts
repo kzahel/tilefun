@@ -28,6 +28,7 @@ export default defineConfig({
         main: resolve(root, "index.html"),
         worldExplorer: resolve(root, "world-explorer.html"),
         artWorkbench: resolve(root, "art-workbench.html"),
+        buildingLab: resolve(root, "building-lab.html"),
         interiorWorkbench: resolve(root, "interior-workbench.html"),
         interiorReview: resolve(root, "interior-review.html"),
         furniturePlaytest: resolve(root, "furniture-playtest.html"),

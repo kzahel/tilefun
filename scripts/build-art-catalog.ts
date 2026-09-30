@@ -14,6 +14,7 @@ import { BlendGraph } from "../src/autotile/BlendGraph.js";
 import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
+import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
@@ -142,7 +143,7 @@ function add(
 }
 for (const def of getPropSourceDefinitions())
   add(`prop:${def.type}`, def.sheetKey, def.rect, def.type, "prop", references.get(def.type) ?? []);
-for (const recipe of BUILDING_RECIPES)
+for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS])
   for (const [n, part] of recipe.parts.entries())
     add(
       `recipe:${recipe.type}:${n}`,
@@ -152,8 +153,12 @@ for (const recipe of BUILDING_RECIPES)
       "recipe",
       [
         {
-          system: "Regional district facades",
-          source: "src/generation/regional/BuildingRecipes.ts",
+          system: recipe.type.startsWith("prop-city-v1-")
+            ? "City prefab showcase (candidate)"
+            : "Regional district facades",
+          source: recipe.type.startsWith("prop-city-v1-")
+            ? "src/generation/regional/CityBuildingPrefabs.ts"
+            : "src/generation/regional/BuildingRecipes.ts",
         },
         ...(references.get(recipe.type) ?? []),
       ],

@@ -1,7 +1,7 @@
 # Art workbench and denser, varied cities
 
-Status: first art workbench implemented 2026-09-30; new city profiles and
-building families remain planned.
+Status: art workbench and first shared building prefab/block showcase implemented
+2026-09-30; human composition review and new city profiles remain planned.
 
 ## Motivation
 
@@ -45,7 +45,35 @@ pass, with 1,053 unit tests and all 128 browser tests green. Desktop and phone
 layout captures were visually inspected; phone input checks use browser touch
 emulation, not a physical device.
 
-## 2. Audit candidate building families
+## 2. Audit candidate building families — first showcase implemented
+
+The first dense-city note selects source rectangle `[1104, 1808, 1136, 864]` in
+the pinned Exteriors PNG. `CityBuildingPrefabs.ts` records that selection's
+fingerprint and note ID and supplies 22 shared candidate configurations.
+The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html?scene=mixed)
+shows three apartment forms, hotels, and five retail fronts, with height and
+mixed-use variants plus apartment/retail/hotel block examples. There is no
+baked facade atlas: source parts pass through the ordinary prop factory,
+scene collector, and game renderer. Source-use inventory now includes these
+candidate recipes, with a distinct showcase system label.
+
+The 64px window strip is a facade wing, not a standalone home. The flat-front
+prefab combines it with an 80px door strip; hotel entrance carpet is a separate
+piece. Ground storefronts draw after upper facades so their projecting signs
+remain visible. Block frontages use native widths, without stretching art.
+Bounds, approach positions, source rectangle/fingerprint, and preservation of
+the frozen district recipe list are checked. Single/scene links preserve IDs;
+source links point back into the art workbench. Starter coverage does not yet
+include every sign, storefront variant, or accessory in the broad selection.
+The original note remains in progress while composition review and city
+integration are outstanding.
+
+Validation: typecheck, build, and all 1,059 unit tests pass. The full browser
+suite passed 135 tests; after the final door-wing composition adjustment, all
+20 affected building-lab, art-workbench, world-creation, and gameplay checks
+passed again. Desktop and emulated phone captures were visually inspected.
+
+Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially
 Condo 4's floor/roof/ground pieces and Condo 7–9's balconies/fire escapes; also
@@ -122,5 +150,6 @@ with evidence. Desktop mobile layout is not a substitute for physical phone
 profiling. Final acceptance includes human style review and an actual game
 visit from the exact explorer preview, with unchanged older revisions.
 
-The immediate next checkpoint is a reviewed shortlist of apartment/facade art,
-followed by a small shared building showcase before changing city generation.
+The immediate next checkpoint is human review of the shared building/block
+showcase, then promotion of approved families into a new pinned dense-city
+profile. Existing generators remain frozen.

@@ -1,3 +1,5 @@
+import { CITY_BUILDING_PREFABS } from "./CityBuildingPrefabs.js";
+
 /** Audited ME modular facade recipes. Source rectangles remain in the original atlas. */
 export interface FacadePiece {
   frameCol: number;
@@ -65,5 +67,8 @@ export const BUILDING_RECIPES: readonly BuildingRecipe[] = [
   facade("prop-regional-shop-apartment", 1, true),
 ];
 export function buildingRecipe(type: string): BuildingRecipe | undefined {
-  return BUILDING_RECIPES.find((recipe) => recipe.type === type);
+  return (
+    BUILDING_RECIPES.find((recipe) => recipe.type === type) ??
+    CITY_BUILDING_PREFABS.find((recipe) => recipe.type === type)
+  );
 }

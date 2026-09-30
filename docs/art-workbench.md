@@ -64,7 +64,7 @@ of collision, door placement, perspective, or a new generator version.
 
 ## Inventory and coverage
 
-`public/data/art-catalog.json` describes 91 PNG sheets and currently 228 recorded
+`public/data/art-catalog.json` describes 91 PNG sheets and currently 356 recorded
 source uses. Both major atlas indexes are reused directly, rather than copied
 into a second slicing catalog: 4,816 matched Exteriors slices and 19,493 packed
 Interiors entries. **Indexed** means the original slicing/index exists and can
@@ -96,6 +96,31 @@ retargeted. The initial implementation does not archive old PNG binaries;
 retrieve the corresponding repository revision for an exact historical image.
 The tool uses a viewport-sized canvas, lazy indexes, and bounded search-result
 pages instead of a full-atlas-sized canvas or thousands of DOM thumbnails.
+
+## Building prefab showcase
+
+The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html?scene=mixed)
+composes the first source-audited candidates from the dense-city note. There are
+22 prefab configurations: bay-window, flat-front, and compact apartments;
+hotels; and bakery, butcher, bait, ice-cream, and fitness storefronts with
+mixed-use variants. Apartment, retail, and hotel blocks align frontage at
+native dimensions with a mix of heights. Select an individual building, inspect
+its source pieces, or toggle shared footprints/entrance approach positions.
+Links preserve the scene and prefab ID. Name that recipe ID in art feedback.
+
+`CityBuildingPrefabs.ts` supplies the source art, piece offsets, bounds, and
+entrances. The lab calls the same `createProp`, `collectScene`, and
+`drawScene2D` pipeline that gameplay uses. The terrain is a diagnostic pavement
+stage rather than a second city generator. The narrow window-only strip is
+combined with a door-bearing wing for a standalone flat-front apartment. Hotel
+entry art and shop signs retain their own placement/layering. Native source
+bounds and the exact selected PNG fingerprint are tested.
+
+These are **candidates** for human review. The frozen Regional v1/v2/v3 district
+lists do not spawn them; height variation does not promise playable upper
+floors. Starter coverage includes the main Condo 4/Hotel families and five
+shop fronts from the selected rectangle; remaining signs, commercial fronts,
+and accessories can expand the library after this review.
 
 ## Next work
 
