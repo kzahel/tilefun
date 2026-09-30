@@ -25,11 +25,13 @@ export class RealmTransitions {
       if (target.interior && !allowInterior)
         throw new Error("Enter this interior through its building door.");
       const position = arrival ? safeArrival(target, arrival) : undefined;
-      const prepared = await target.preparePlayer(session);
       const oldId = session.realmId;
       const source = oldId ? this.findRealm(oldId) : undefined;
+      // Same-world travel must read the latest live progress, not an older save.
+      if (source === target) await source.flushAsync();
+      const prepared = await target.preparePlayer(session);
       // A failed source save or destination read must leave the source player attached.
-      if (source) await source.flushAsync();
+      if (source && source !== target) await source.flushAsync();
       source?.removePlayer(session.clientId);
       // Capture after dismounting; the original entity identity survives rollback.
       const previous = { ...session, realmId: oldId };

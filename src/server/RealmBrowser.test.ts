@@ -656,6 +656,16 @@ it("building doors share persistent furnished realms and return to the right ext
   const inside = transport.messagesOfType("local", "realm-joined").at(-1);
   expect(inside?.interior?.featureId).toBe(prop.proceduralId);
   expect(server.worldInterior?.version).toBe("interior-v1");
+  transport.clientSend("local", { type: "get-world-map", requestId: 500 });
+  await vi.waitFor(() => expect(transport.messagesOfType("local", "world-map")).toHaveLength(1));
+  const interiorMap = transport.messagesOfType("local", "world-map")[0];
+  expect(interiorMap?.worldId).toBe(meta.id);
+  expect(interiorMap?.generation).toEqual(generation);
+  expect(interiorMap?.players.find((p) => p.self)).toMatchObject({
+    x: door.wx / 16,
+    y: door.wy / 16,
+    indoors: true,
+  });
   const fixture = server.propManager.props.find((p) => p.proceduralId === "fixture:bed");
   if (!fixture) throw new Error("No bed");
   expect(fixture.collider?.walkableTop).toBe(true);
@@ -684,6 +694,16 @@ it("building doors share persistent furnished realms and return to the right ext
   expect(server.worldInterior).toBeNull();
   expect(server.worldGeneration).toEqual(generation);
   expect(server.getLocalSession().player.position).toEqual(door);
+  transport.clientSend("local", { type: "get-world-map", requestId: 501 });
+  await vi.waitFor(() => expect(transport.messagesOfType("local", "world-map")).toHaveLength(2));
+  const outsideMap = transport.messagesOfType("local", "world-map").at(-1);
+  expect(outsideMap?.players).toHaveLength(2);
+  expect(new Set(outsideMap?.players.map((p) => p.playerNumber)).size).toBe(2);
+  expect(outsideMap?.players.find((p) => !p.self)).toMatchObject({
+    x: door.wx / 16,
+    y: door.wy / 16,
+    indoors: true,
+  });
   transport.clientSend("local", {
     type: "join-realm",
     requestId: 54,
@@ -776,6 +796,99 @@ describe("realm transition lifecycle", () => {
       }
     },
   );
+});
+
+describe("in-game world map", () => {
+  it("same-world fast travel preserves unsaved progress and validates arrival before moving", async () => {
+    const { server, transport, registry } = await createTestSetup(() => false);
+    try {
+      transport.connect("local");
+      await vi.waitFor(() => expect(server.getLocalSession().realmId).not.toBeNull());
+      const world = await registry.createWorld("Travel", "flat", 42);
+      await server.loadWorld(world.id);
+      const session = server.getLocalSession();
+      session.gameplaySession.gemsCollected = 7;
+      session.cameraZoom = 2;
+      const generation = createDescriptor("flat", 42);
+      await server.loadWorld(world.id, { x: 100, y: -200, generation });
+      expect(session.gameplaySession.gemsCollected).toBe(7);
+      expect(session.cameraZoom).toBe(2);
+      expect(session.player.position).toEqual({ wx: 1600, wy: -3200 });
+      const player = session.player;
+      await expect(server.loadWorld(world.id, { x: Number.NaN, y: 0, generation })).rejects.toThrow(
+        /coordinates/,
+      );
+      await expect(
+        server.loadWorld(world.id, { x: 0, y: 0, generation: createDescriptor("flat", 99) }),
+      ).rejects.toThrow(/identity/);
+      expect(session.player).toBe(player);
+      expect(session.player.position).toEqual({ wx: 1600, wy: -3200 });
+      expect(session.gameplaySession.gemsCollected).toBe(7);
+    } finally {
+      server.destroy();
+    }
+  });
+  it("returns live same-world players beyond the camera range and drops dormant/other-world players", async () => {
+    const { server, transport, registry } = await createTestSetup(() => false);
+    try {
+      const world = await registry.createWorld("Map world", "flat", 42);
+      const elsewhere = await registry.createWorld("Elsewhere", "flat", 43);
+      for (const id of ["one", "two", "other"]) {
+        transport.connect(id);
+        transport.clientSend(id, {
+          type: "join-realm",
+          requestId: 1,
+          worldId: id === "other" ? elsewhere.id : world.id,
+        });
+      }
+      await vi.waitFor(() => expect([...server.getSessions()].every((s) => s.realmId)).toBe(true));
+      const distant = [...server.getSessions()].find((s) => s.clientId === "two");
+      if (!distant) throw new Error("Missing distant player");
+      distant.player.position = { wx: 64_000, wy: -32_000 };
+      transport.clientSend("one", { type: "get-world-map", requestId: 2 });
+      await vi.waitFor(() => expect(transport.messagesOfType("one", "world-map")).toHaveLength(1));
+      const map = firstMessage(transport.messagesOfType("one", "world-map"), "world-map");
+      expect(map.worldId).toBe(world.id);
+      expect(map.name).toBe("Map world");
+      expect(map.generation).toEqual(createDescriptor("flat", 42));
+      expect(map.players).toHaveLength(2);
+      expect(map.players.filter((p) => p.self)).toHaveLength(1);
+      expect(map.players.find((p) => !p.self)).toMatchObject({ x: 4000, y: -2000, indoors: false });
+      distant.player.position.wx += 160;
+      transport.clientSend("one", { type: "get-world-map", requestId: 3 });
+      await vi.waitFor(() => expect(transport.messagesOfType("one", "world-map")).toHaveLength(2));
+      expect(
+        transport
+          .messagesOfType("one", "world-map")
+          .at(-1)
+          ?.players.find((p) => !p.self)?.x,
+      ).toBe(4010);
+      transport.disconnect("two");
+      transport.clientSend("one", { type: "get-world-map", requestId: 4 });
+      await vi.waitFor(() => expect(transport.messagesOfType("one", "world-map")).toHaveLength(3));
+      expect(transport.messagesOfType("one", "world-map").at(-1)?.players).toHaveLength(1);
+    } finally {
+      server.destroy();
+    }
+  });
+
+  it("rejects lobby map requests rather than exposing an arbitrary world", async () => {
+    const { server, transport } = await createTestSetup();
+    try {
+      transport.connect("visitor");
+      transport.clientSend("visitor", { type: "get-world-map", requestId: 7 });
+      await vi.waitFor(() =>
+        expect(transport.messagesOfType("visitor", "request-error")).toHaveLength(1),
+      );
+      expect(transport.messagesOfType("visitor", "request-error")[0]).toMatchObject({
+        requestId: 7,
+        message: "Join a world before opening the map.",
+      });
+      expect(transport.messagesOfType("visitor", "world-map")).toHaveLength(0);
+    } finally {
+      server.destroy();
+    }
+  });
 });
 
 it("remote administration requires authorization while ordinary chat and realm browsing remain available", async () => {

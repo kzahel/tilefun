@@ -127,6 +127,7 @@ export type ClientMessage =
   | { type: "throw-ball"; dirX: number; dirY: number; force: number }
   | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
+  | { type: "get-world-map"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival }
   | { type: "leave-realm"; requestId: number }
   | { type: "enter-building"; requestId: number; featureId: string }
@@ -190,6 +191,28 @@ export interface RemoteEditorCursor {
   tileY: number;
   editorTab: string;
   brushMode: string;
+}
+
+/** Tile coordinates for connected players, independent of camera interest ranges. */
+export interface WorldMapPlayer {
+  /** Stable across realm changes; entity IDs are only unique within one realm. */
+  playerNumber: number;
+  entityId: number;
+  name: string;
+  color: string;
+  x: number;
+  y: number;
+  self: boolean;
+  indoors: boolean;
+}
+
+export interface WorldMapMessage {
+  type: "world-map";
+  requestId: number;
+  worldId: string;
+  name: string;
+  generation: GenerationDescriptor;
+  players: WorldMapPlayer[];
 }
 
 /** Physics CVar values that affect client-side prediction. */
@@ -283,6 +306,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 
 export type ServerMessage =
   | { type: "player-assigned"; entityId: number }
+  | WorldMapMessage
   | { type: "kicked"; reason: string }
   | FrameMessage
   | SyncMessage

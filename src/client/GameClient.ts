@@ -42,6 +42,7 @@ import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
+import { WorldMapScene } from "../scenes/WorldMapScene.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
@@ -57,6 +58,7 @@ import { ChatHUD } from "../ui/ChatHUD.js";
 import { DoorControl } from "../ui/DoorControl.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
+import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { takeAdminToken } from "./adminToken.js";
@@ -92,6 +94,8 @@ export class GameClient {
   private editorModel: EditorModel;
   private editorPanel: EditorPanel;
   private mainMenu: MainMenu;
+  private worldMap: WorldMap;
+  private mapButton: HTMLButtonElement | null = null;
   private propCatalog: PropCatalog;
   private interiorCatalog: InteriorCatalog;
   private stateView: ClientStateView;
@@ -192,6 +196,20 @@ export class GameClient {
     this.editorPanel = new EditorPanel(this.editorModel);
     this.editorModel.onCollapse = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
+    this.worldMap = new WorldMap({
+      snapshot: () =>
+        this.gcSendRequest({ type: "get-world-map", requestId: this.nextRequestId++ }),
+      travel: (map, point) =>
+        this.gcSendRequest({
+          type: "join-realm",
+          requestId: this.nextRequestId++,
+          worldId: map.worldId,
+          arrival: { ...point, generation: map.generation },
+        }),
+      close: () => {
+        if (this.scenes.current instanceof WorldMapScene) this.scenes.pop();
+      },
+    });
     this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
     this.interiorCatalog = new InteriorCatalog();
@@ -370,6 +388,7 @@ export class GameClient {
         this.doorControl.update(
           this.stateView,
           this.initDone &&
+            !this.scenes.has(WorldMapScene) &&
             !this.scenes.has(MenuScene) &&
             !this.scenes.has(CatalogScene) &&
             !this.scenes.has(InteriorCatalogScene),
@@ -730,6 +749,8 @@ export class GameClient {
     this.requests.dispose();
     this.transport.close();
     this.scenes.clear();
+    this.worldMap.destroy();
+    this.mapButton?.remove();
     this.actions.detach();
     this.consoleUI.destroy();
   }
@@ -737,7 +758,12 @@ export class GameClient {
   // ---- Actions ----
 
   private bindActions(): void {
+    this.actions.on("toggle_world_map", () => this.toggleWorldMap());
     this.actions.on("toggle_menu", () => {
+      if (this.scenes.current instanceof WorldMapScene) {
+        this.scenes.pop();
+        return;
+      }
       if (this.scenes.has(CatalogScene)) {
         this.scenes.pop();
         return;
@@ -756,6 +782,7 @@ export class GameClient {
     });
     this.actions.on("toggle_debug", () => {
       if (
+        this.scenes.has(WorldMapScene) ||
         this.scenes.has(MenuScene) ||
         this.scenes.has(CatalogScene) ||
         this.scenes.has(InteriorCatalogScene)
@@ -767,6 +794,7 @@ export class GameClient {
     });
     this.actions.on("toggle_editor", () => {
       if (
+        this.scenes.has(WorldMapScene) ||
         this.scenes.has(MenuScene) ||
         this.scenes.has(CatalogScene) ||
         this.scenes.has(InteriorCatalogScene)
@@ -780,6 +808,7 @@ export class GameClient {
     });
     this.actions.on("toggle_base_mode", () => {
       if (
+        this.scenes.has(WorldMapScene) ||
         this.scenes.has(MenuScene) ||
         this.scenes.has(CatalogScene) ||
         this.scenes.has(InteriorCatalogScene)
@@ -796,6 +825,16 @@ export class GameClient {
     } else {
       this.scenes.replace(new EditScene());
     }
+  }
+
+  private toggleWorldMap(): void {
+    if (this.scenes.current instanceof WorldMapScene) {
+      this.scenes.pop();
+      return;
+    }
+    if (!(this.scenes.current instanceof PlayScene || this.scenes.current instanceof EditScene))
+      return;
+    this.scenes.push(new WorldMapScene(this.worldMap));
   }
 
   private async toggleMenu(): Promise<void> {
@@ -1051,6 +1090,19 @@ export class GameClient {
       if (panelOpen) closePanel();
       else openPanel();
     });
+
+    const mapBtn = document.createElement("button");
+    mapBtn.textContent = "Map · G";
+    mapBtn.setAttribute("aria-label", "Open world map");
+    mapBtn.setAttribute("data-testid", "open-world-map");
+    mapBtn.style.cssText =
+      "position:fixed;top:8px;right:8px;z-index:90;min-height:44px;padding:8px 14px;color:#fff;background:#243a32;border:1px solid #9ab59c;border-radius:6px;font:14px system-ui;cursor:pointer;";
+    mapBtn.onclick = () => {
+      closePanel();
+      this.toggleWorldMap();
+    };
+    document.body.append(mapBtn);
+    this.mapButton = mapBtn;
 
     // Menu items
     const editBtn = document.createElement("button");

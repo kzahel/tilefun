@@ -11,6 +11,27 @@ The explorer sidebar also links to the [art workbench](art-workbench.md), where
 source tiles can be inspected, traced to recorded systems, and annotated for
 future building recipes.
 
+## In-game world map
+
+While playing, click **Map · G** in the top right or press **G**. The overlay
+stays on the current game connection. Drag (or use arrow keys) to pan, pinch or
+scroll to zoom, and use **Find me** to recenter. Player dots and name buttons
+update once a second while the map is open, including players outside the camera
+range. Click a player's name to center on them. Indoor players appear at their
+building entrance; disconnected players disappear from the roster.
+
+Hold a location for 650 ms with a finger or mouse to fast travel in the same
+world. Dragging, pinching, cancelling a touch, or closing the map cancels the
+hold. The server chooses walkable ground within 32 tiles, rejecting water,
+solid buildings, invalid coordinates, and mismatched generation identities.
+Failed travel leaves the map open with an error; successful travel returns to
+the game. Travel from an interior returns to the exterior world. **Escape**, **G**,
+or **Close map** dismisses the overlay without travelling.
+
+The map is a terrain overview from the current world's pinned generator,
+with authoritative player positions. Saved terrain edits are inspected through
+the standalone explorer's exact tile view.
+
 ## Run and review
 
 ```sh

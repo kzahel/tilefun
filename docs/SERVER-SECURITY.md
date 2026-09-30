@@ -5,6 +5,11 @@ guests. Guests can play, edit terrain, browse existing worlds, and chat. Creatin
 renaming, or deleting worlds and running server console commands require an admin
 token. Browser-hosted local and peer-to-peer games retain trusted co-op behavior.
 
+The in-game map is available to guests already in a world. Its roster includes
+only connected players in that world (including its interiors), independently
+of camera visibility. Fast travel uses the existing validated realm arrival
+path and requires no admin token; it is a normal co-op gameplay capability.
+
 Set `TILEFUN_ADMIN_TOKEN` to a randomly generated secret of at least 32 characters
 before starting a Node server. For example, generate a value with
 `node -e 'console.log(require("node:crypto").randomBytes(32).toString("hex"))'`

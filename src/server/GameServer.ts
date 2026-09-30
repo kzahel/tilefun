@@ -1,5 +1,5 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { TICK_RATE } from "../config/constants.js";
+import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
@@ -37,7 +37,7 @@ import {
   type WorldType,
 } from "../persistence/WorldRegistry.js";
 import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
-import type { ClientMessage, RealmInfo } from "../shared/protocol.js";
+import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
@@ -364,6 +364,45 @@ export class GameServer {
   /** Check if a session is dormant (disconnected, awaiting reconnect). */
   isDormant(clientId: string): boolean {
     return this.dormantSessions.has(clientId);
+  }
+
+  /** A world-scoped roster: never expose other worlds or disconnected sessions. */
+  private async worldMap(session: PlayerSession, requestId: number): Promise<WorldMapMessage> {
+    const current = session.realmId ? this.realms.get(session.realmId) : undefined;
+    const worldId = current?.interior?.parentWorldId ?? session.realmId;
+    if (!current || !worldId) throw new Error("Join a world before opening the map.");
+    if (session.transitioning) throw new Error("Wait for travel to finish before opening the map.");
+    const meta = await this.registry.getWorld(worldId);
+    if (!meta) throw new Error("World unavailable.");
+    if (session.realmId !== current.currentWorldId)
+      throw new Error("The world changed. Reopen the map.");
+    const players: WorldMapMessage["players"] = [];
+    for (const other of this.sessions.values()) {
+      if (this.isDormant(other.clientId) || !other.realmId || other.transitioning) continue;
+      const realm = this.realms.get(other.realmId);
+      const indoors = realm?.interior?.parentWorldId === worldId;
+      if (other.realmId !== worldId && !indoors) continue;
+      const position = indoors ? other.returnLocation : null;
+      if (indoors && !position) continue;
+      players.push({
+        playerNumber: other.playerNumber,
+        entityId: other.player.id,
+        name: other.displayName,
+        color: other.cursorColor,
+        x: position ? position.x : other.player.position.wx / TILE_SIZE,
+        y: position ? position.y : other.player.position.wy / TILE_SIZE,
+        self: other === session,
+        indoors,
+      });
+    }
+    return {
+      type: "world-map",
+      requestId,
+      worldId,
+      name: meta.name,
+      generation: descriptorFromMetadata(meta),
+      players,
+    };
   }
 
   getLocalSession(): PlayerSession {
@@ -863,6 +902,17 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "get-world-map":
+        void this.worldMap(session, msg.requestId)
+          .then((map) => this.transport.send(clientId, map))
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: error instanceof Error ? error.message : String(error),
+            }),
+          );
+        return;
       case "enter-building":
       case "exit-building": {
         const operation =

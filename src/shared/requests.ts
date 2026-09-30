@@ -10,6 +10,7 @@ const RESPONSES = {
   "rename-world": "world-renamed",
   rcon: "rcon-response",
   "list-realms": "realm-list",
+  "get-world-map": "world-map",
   "join-realm": "realm-joined",
   "leave-realm": "realm-left",
   "enter-building": "realm-joined",
