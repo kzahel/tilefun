@@ -19,8 +19,9 @@ The token works with both WebSocket and WebRTC transports.
 
 For a trusted household/LAN session, `TILEFUN_TRUSTED_COOP=1` explicitly allows
 all connected players to administer the server. A configured admin token takes
-precedence over that setting. Vite still accepts localhost and direct LAN IPs;
-custom development hostnames must be added explicitly using Vite's
+precedence over that setting. Vite accepts localhost, direct LAN IPs, and the
+configured development hostname `tilefun.graehlarts.com`. Other custom
+development hostnames must be added explicitly using Vite's
 `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` environment variable.
 
 Filesystem storage rejects world IDs containing path separators and prevents
