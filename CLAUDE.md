@@ -26,6 +26,10 @@ The live deployment at `https://tilefun.graehlarts.com/tilefun/` serves this
 checkout through Vite. Use that origin for human review links; isolated local
 preview servers are for automated validation.
 
+The central tool directory is `/tilefun/tools.html`, linked as
+Indexes / atlases / labs from the game sidebar and world menu. Keep new tools
+and useful shortcuts discoverable there, with descriptions and a return link.
+
 The art workbench is at `/tilefun/art-workbench.html`. See
 `docs/art-workbench.md` for source-use inventory coverage and the shared note
 inbox. Read pending art requests with `npm run art:notes`; notes persist in

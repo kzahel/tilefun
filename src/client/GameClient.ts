@@ -1164,7 +1164,12 @@ export class GameClient {
       window.location.href = "interior-workbench.html";
     });
 
-    panel.append(editBtn, menuBtn, debugBtn, propEditorBtn, interiorsBtn, workbenchBtn);
+    const toolsLink = document.createElement("a");
+    toolsLink.href = `${import.meta.env.BASE_URL}tools.html`;
+    toolsLink.textContent = "Indexes / atlases / labs";
+    toolsLink.setAttribute("data-testid", "open-tools-index");
+    toolsLink.style.cssText = `${MENU_BTN_STYLE} display: block; text-decoration: none;`;
+    panel.append(editBtn, menuBtn, toolsLink, debugBtn, propEditorBtn, interiorsBtn, workbenchBtn);
 
     // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
     const vrBtn = document.createElement("button");

@@ -110,6 +110,12 @@ function shareUrl(): string {
   url.search = "";
   url.searchParams.set("sheet", sheet.id);
   if (selection) url.searchParams.set("rect", selection.join(","));
+  else url.searchParams.set("view", "sheet");
+  if (search.value) url.searchParams.set("q", search.value);
+  if (theme.value) url.searchParams.set("theme", theme.value);
+  if (filter.value !== "all") url.searchParams.set("filter", filter.value);
+  if ($<HTMLSelectElement>("note-filter").value !== "pending")
+    url.searchParams.set("noteStatus", $<HTMLSelectElement>("note-filter").value);
   return url.href;
 }
 function setSelection(rect: ArtRect | null, focus = false): void {
@@ -405,6 +411,7 @@ for (const input of [search, theme, filter])
   input.addEventListener("input", () => {
     resultLimit = 60;
     renderResults();
+    history.replaceState(null, "", shareUrl());
   });
 $("more").onclick = () => {
   resultLimit += 60;
@@ -582,7 +589,10 @@ $("note-form").addEventListener("submit", (e) => {
   enqueue(row);
 });
 $("refresh").onclick = () => void sync();
-$("note-filter").onchange = renderNotes;
+$("note-filter").onchange = () => {
+  renderNotes();
+  history.replaceState(null, "", shareUrl());
+};
 $("export").onclick = () => {
   const blob = new Blob([JSON.stringify({ version: 1, notes: currentNotes(), outbox }, null, 2)], {
     type: "application/json",
@@ -599,6 +609,12 @@ setInterval(() => {
   if (outbox.length) void sync();
 }, 15000);
 const params = new URLSearchParams(location.search);
+search.value = params.get("q") ?? "";
+if ([...filter.options].some((o) => o.value === params.get("filter")))
+  filter.value = params.get("filter") ?? "all";
+const noteFilter = $<HTMLSelectElement>("note-filter");
+if ([...noteFilter.options].some((o) => o.value === params.get("noteStatus")))
+  noteFilter.value = params.get("noteStatus") ?? "pending";
 let initialRect: ArtRect | undefined;
 try {
   const value = params.get("rect");
@@ -607,7 +623,12 @@ try {
       value.split(",").map(Number),
       required(catalog.sheets.find((s) => s.id === params.get("sheet"))),
     );
-  else if (stored.selection) initialRect = stored.selection;
+  else if (
+    params.get("view") !== "sheet" &&
+    (!params.has("sheet") || params.get("sheet") === stored.sheetId) &&
+    stored.selection
+  )
+    initialRect = stored.selection;
 } catch {
   /* Invalid bookmarks open the full sheet. */
 }
@@ -619,5 +640,9 @@ await loadSheet(
       : "me-complete",
   initialRect,
 );
+if ([...theme.options].some((o) => o.value === params.get("theme")))
+  theme.value = params.get("theme") ?? "";
+renderResults();
+history.replaceState(null, "", shareUrl());
 renderNotes();
 void sync();

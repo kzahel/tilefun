@@ -23,7 +23,7 @@ import "./playtest.css";
 
 const root = document.getElementById("app");
 if (!root) throw new Error("Missing app");
-root.innerHTML = `<header><a href="./interior-review.html?stage=15">← Review</a><span id="sync" role="status">Loading…</span></header>
+root.innerHTML = `<header><a href="./tools.html">Indexes & atlases</a><a href="./interior-review.html?stage=15">← Review</a><span id="sync" role="status">Loading…</span></header>
 <h1>Furniture in motion</h1><p>Walk behind and in front. Check what actually blocks your feet.</p>
 <div class="toolbar"><label>Scene <select id="scene">${MOTION_SCENES.map((s) => `<option value="${s.id}">${s.name}</option>`).join("")}</select></label><button id="reset">Reset scene</button></div>
 <div class="toolbar"><span id="review-counts"></span><button id="next-unchecked">Next unchecked</button></div>

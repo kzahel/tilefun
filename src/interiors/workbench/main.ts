@@ -57,6 +57,7 @@ app.innerHTML = `
     <button id="export-fixture" data-testid="export-fixture">Export</button>
     <button id="import-fixture">Import</button>
     <input id="import-file" type="file" accept="application/json,.json" hidden />
+    <a href="./tools.html">Indexes & atlases ↗</a>
     <a href="./interior-review.html">Quick review ↗</a>
     <a href="./?panel=interiors">Atlas catalog ↗</a>
   </header>

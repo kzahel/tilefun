@@ -227,7 +227,12 @@ export class InteriorCatalog {
     closeBtn.addEventListener("click", () => this.requestClose());
     header.appendChild(closeBtn);
 
-    this.overlay.appendChild(header);
+    const toolsLink = document.createElement("a");
+    toolsLink.href = "tools.html";
+    toolsLink.textContent = "Indexes & atlases →";
+    toolsLink.style.cssText =
+      "display:block; padding:8px 12px; color:#e9c36c; font:12px monospace; flex-shrink:0;";
+    this.overlay.append(header, toolsLink);
 
     const body = document.createElement("div");
     body.style.cssText = BODY_STYLE;

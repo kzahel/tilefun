@@ -97,7 +97,7 @@ if (requestedFilter === "1" || requestedFilter === "0")
 const root = document.getElementById("app");
 if (!root) throw new Error("Review root is missing");
 root.innerHTML = `
-<header><a href="./interior-workbench.html">← Workbench</a><span>INDOOR REVIEW</span><span id="sync" role="status">Connecting…</span></header>
+<header><a href="./tools.html">Indexes & atlases</a><span>INDOOR REVIEW</span><span id="sync" role="status">Connecting…</span></header>
 <main>
   <div class="heading"><div><h1>Does this room look right?</h1><p>One key per room. Two mistakes are enough to start a fix.</p></div><label>Cases <select id="stage"><option value="all">Small → complex</option>${REVIEW_STAGES.map((s, i) => `<option value="${i}">${s}</option>`).join("")}</select></label></div>
   <p id="furniture-shift" hidden>Static furniture review is on hold while we check movement and placement. <a href="./furniture-playtest.html">Open the movement test →</a></p>

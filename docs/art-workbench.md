@@ -1,7 +1,18 @@
 # Art workbench
 
+Start from [Indexes, atlases & labs](https://tilefun.graehlarts.com/tilefun/tools.html),
+linked from the game's hamburger sidebar and world menu. The index describes all
+nine tools and has shortcuts for source sheets, city art, review categories,
+and map/tile previews. Tool headers and the in-game catalogs link back there.
+
+The giant [complete Modern Exteriors sheet](https://tilefun.graehlarts.com/tilefun/art-workbench.html?sheet=me-complete&view=sheet)
+opens at whole-sheet scale, ignoring the browser's previous selection. Use
+Select region to highlight art, Save note for a shared comment, and Copy selection
+link to share it. Shortcuts support `sheet`, `rect`, `q`, `theme`, `filter`, and
+`noteStatus`; search/filter state survives reload and selection links.
+
 Open [the live workbench](https://tilefun.graehlarts.com/tilefun/art-workbench.html).
-This deployment serves the checkout through Vite. The game menu and world
+This deployment serves the checkout through Vite. The central index and world
 explorer link to the workbench. Local development uses the same
 `/tilefun/art-workbench.html` path.
 
