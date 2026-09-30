@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
+import { buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import type { CityBuildingPrefab } from "../generation/regional/CityBuildingPrefabs.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
@@ -16,9 +17,10 @@ export function drawBuildingShowcase(
   sheet: Spritesheet,
   geometry: boolean,
 ) {
-  const minX = Math.min(...placements.map((p) => p.wx - p.prefab.width / 2)) - 24;
-  const maxX = Math.max(...placements.map((p) => p.wx + p.prefab.width / 2)) + 24;
-  const minY = Math.min(...placements.map((p) => p.wy - p.prefab.height)) - 24;
+  const bounds = placements.map((p) => ({ ...buildingVisualBounds(p.prefab), wx: p.wx, wy: p.wy }));
+  const minX = Math.min(...bounds.map((p) => p.wx + p.minX)) - 24;
+  const maxX = Math.max(...bounds.map((p) => p.wx + p.maxX)) + 24;
+  const minY = Math.min(...bounds.map((p) => p.wy + p.minY)) - 24;
   const maxY = 64;
   canvas.width = (maxX - minX) * 2;
   canvas.height = (maxY - minY) * 2;

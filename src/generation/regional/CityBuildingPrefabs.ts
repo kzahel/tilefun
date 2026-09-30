@@ -32,6 +32,25 @@ export interface CityBuildingPrefab extends BuildingRecipe {
   review: "candidate";
   topology: BuildingTopology;
   profile: "bay-front" | "flat-front";
+  hotelSign?: HotelSign;
+}
+export type HotelSign = "none" | "roof" | "side";
+/** The atlas index lists only the thin Hotel_Modular_4 trim, omitting this
+ * full top band. Its chimney strip shares a row with unrelated car pixels;
+ * slice chimneys separately instead of sampling that gutter. Signboards are
+ * accessories, not part of the wall footprint.
+ * Audited against the original PNG for hotel feedback e35a30f8-e0b4-46f1-8496-46b8ef36989c.
+ */
+export const CITY_HOTEL_ART = {
+  roof: [1904, 1824, 272, 32],
+  leftChimney: [1952, 1808, 32, 16],
+  rightChimney: [2112, 1808, 32, 16],
+  trim: [1904, 1872, 272, 16],
+  roofSign: [1968, 1744, 144, 64],
+  sideSign: [2192, 1952, 48, 176],
+} as const satisfies Record<string, SourceRect>;
+export function hotelPrefabType(floors: number, sign: HotelSign): string {
+  return `prop-city-v1-hotel-${floors}${sign === "none" ? "" : `-${sign}-sign`}`;
 }
 const part = (x: number, y: number, w: number, h: number, dx: number, dy: number): FacadePiece => ({
   frameCol: x / 16,
@@ -139,15 +158,26 @@ function condo(style: "bay" | "narrow" | "wide", floors: number): CityBuildingPr
     entrance: { dx: assembled.width / 2 - 32, dy: 24 },
   };
 }
-function hotel(floors: number): CityBuildingPrefab {
+function hotel(floors: number, sign: HotelSign = "none"): CityBuildingPrefab {
   const repeat = floors - 3;
-  const roof = [part(1904, 1872, 272, 16, 0, -144 - repeat * 64 - 112)];
-  const parts = [...roof, part(1904, 1904, 272, 112, 0, -144 - repeat * 64)];
+  const roofDatum = -272 - repeat * 64;
+  const roof = [sourcePart(CITY_HOTEL_ART.roof, 0, roofDatum)];
+  const parts = [
+    ...roof,
+    sourcePart(CITY_HOTEL_ART.leftChimney, -72, roofDatum - 32),
+    sourcePart(CITY_HOTEL_ART.rightChimney, 88, roofDatum - 32),
+    sourcePart(CITY_HOTEL_ART.trim, 0, roofDatum + 16),
+    part(1904, 1904, 272, 112, 0, -144 - repeat * 64),
+  ];
   for (let i = 0; i < repeat; i++) parts.push(part(1904, 2032, 272, 64, 0, -144 - i * 64));
   parts.push(part(1904, 2112, 272, 144, 0, 0), part(2016, 2256, 48, 32, 0, 16));
+  // The center parapet is 16px below the side columns; overlap 8px for
+  // the sign's transparent bottom padding and its base to sit on the wall.
+  if (sign === "roof") parts.push(sourcePart(CITY_HOTEL_ART.roofSign, 0, roofDatum - 8));
+  if (sign === "side") parts.push(sourcePart(CITY_HOTEL_ART.sideSign, 160, -80 - repeat * 64));
   return {
-    type: `prop-city-v1-hotel-${floors}`,
-    name: `Hotel · ${floors} levels`,
+    type: hotelPrefabType(floors, sign),
+    name: `Hotel · ${floors} levels · ${sign === "none" ? "no sign" : `${sign === "roof" ? "rooftop" : "side"} sign`}`,
     family: "hotel",
     profile: "flat-front",
     floors,
@@ -155,13 +185,14 @@ function hotel(floors: number): CityBuildingPrefab {
     kind: "apartment",
     facing: "south",
     width: 272,
-    height: 272 + repeat * 64,
+    height: Math.max(...parts.map((p) => p.spriteHeight - p.dy)),
+    hotelSign: sign,
     groundDepth: 32,
     entrance: { dx: 0, dy: 24 },
     parts,
     topology: {
       modules: [{ id: "hotel", x: -136, width: 272, left: "closed", right: "closed" }],
-      roof: { datum: -144 - repeat * 64 - 112, depth: 16, parts: roof },
+      roof: { datum: roofDatum, depth: 32, parts: roof },
     },
   };
 }
@@ -238,7 +269,9 @@ export const CITY_BUILDING_PREFABS: readonly CityBuildingPrefab[] = [
   ...(["bay", "narrow", "wide"] as const).flatMap((style) =>
     [2, 3, 5].map((floors) => condo(style, floors)),
   ),
-  ...[3, 4, 6].map(hotel),
+  ...[3, 4, 6].flatMap((floors) =>
+    (["none", "roof", "side"] as const).map((sign) => hotel(floors, sign)),
+  ),
   ...SHOPS.flatMap((s) => [2, 3].map((floors) => shop(s, floors))),
 ];
 /** Retired storefront-only review links lead to the complete two-level composition. */

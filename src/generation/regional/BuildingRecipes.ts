@@ -20,6 +20,15 @@ export interface BuildingRecipe {
   entrance: { dx: number; dy: number };
   parts: readonly FacadePiece[];
 }
+/** Art extents are independent of ground collision and doorway geometry. */
+export function buildingVisualBounds(recipe: BuildingRecipe) {
+  return {
+    minX: Math.min(...recipe.parts.map((p) => p.dx - p.spriteWidth / 2)),
+    maxX: Math.max(...recipe.parts.map((p) => p.dx + p.spriteWidth / 2)),
+    minY: Math.min(...recipe.parts.map((p) => p.dy - p.spriteHeight)),
+    maxY: Math.max(...recipe.parts.map((p) => p.dy)),
+  };
+}
 function piece(x: number, y: number, w: number, h: number, dx: number, dy: number): FacadePiece {
   return { frameCol: x / 16, frameRow: y / 16, spriteWidth: w, spriteHeight: h, dx, dy };
 }

@@ -3,10 +3,11 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { createProp, getWallsForPropType } from "../../entities/PropFactories.js";
 import { exteriorEntrance } from "../../interiors/GameplayInterior.js";
-import { BUILDING_RECIPES, buildingRecipe } from "./BuildingRecipes.js";
+import { BUILDING_RECIPES, buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
 import {
   CITY_BUILDING_PREFABS,
   CITY_COMMERCIAL_ENVELOPE,
+  CITY_HOTEL_ART,
   CITY_PREFAB_SOURCE,
   CONDO_FACADE_MODULES,
   cityPrefabBlock,
@@ -26,6 +27,7 @@ describe("source-audited city prefab candidates", () => {
       CITY_PREFAB_SOURCE.rect,
       CITY_COMMERCIAL_ENVELOPE.roof,
       CITY_COMMERCIAL_ENVELOPE.floor,
+      ...Object.values(CITY_HOTEL_ART),
     ];
     for (const prefab of CITY_BUILDING_PREFABS)
       for (const p of prefab.parts) {
@@ -54,10 +56,29 @@ describe("source-audited city prefab candidates", () => {
       expect(getWallsForPropType(prefab.type)?.[0]?.width).toBe(prefab.width);
       expect(exteriorEntrance(prop)).toEqual({ wx: prefab.entrance.dx, wy: prefab.entrance.dy });
       expect(prefab.height).toBe(Math.max(...prefab.parts.map((p) => p.spriteHeight - p.dy)));
+      const bounds = buildingVisualBounds(prefab);
       for (const p of prefab.parts) {
-        expect(Math.abs(p.dx) + p.spriteWidth / 2).toBeLessThanOrEqual(prefab.width / 2);
+        expect(Math.abs(p.dx) + p.spriteWidth / 2).toBeLessThanOrEqual(prop.sprite.spriteWidth / 2);
         expect(p.dy).toBeLessThanOrEqual(16);
       }
+      expect(bounds.minY).toBe(-prefab.height);
+    }
+  });
+  it("restores the full hotel roof and keeps optional signage out of the ground footprint", () => {
+    const hotels = CITY_BUILDING_PREFABS.filter((p) => p.family === "hotel");
+    expect(hotels).toHaveLength(9);
+    for (const p of hotels) {
+      expect(p.parts.some((s) => s.frameRow * 16 === 1824 && s.spriteHeight === 32)).toBe(true);
+      expect(p.parts.filter((s) => s.frameRow * 16 === 1808)).toHaveLength(2);
+      const signs = p.parts.filter((s) => s.frameRow * 16 === 1744 || s.frameCol * 16 === 2192);
+      expect(signs).toHaveLength(p.hotelSign === "none" ? 0 : 1);
+      const bounds = buildingVisualBounds(p);
+      expect(bounds.maxX).toBe(p.hotelSign === "side" ? 184 : 136);
+      expect(p.width).toBe(272);
+      expect(p.groundDepth).toBe(32);
+      expect(p.entrance).toEqual({ dx: 0, dy: 24 });
+      expect(p.height).toBe(320 + (p.floors - 3) * 64 + (p.hotelSign === "roof" ? 24 : 0));
+      expect(getWallsForPropType(p.type)?.[0]?.width).toBe(272);
     }
   });
   it("aligns adjacent frontage without overlapping ground bounds and keeps approach doors outside walls", () => {

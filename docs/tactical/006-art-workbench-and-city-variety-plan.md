@@ -148,6 +148,24 @@ empty queues, undo, changed-appearance reentry, and phone navigation/voting for
 all 25 previews without scrolling. Desktop/phone captures were inspected; the
 public Building Lab loads the queue and inbox without browser errors.
 
+Hotel review checkpoint (2026-09-30): ready batch
+`e35a30f8-e0b4-46f1-8496-46b8ef36989c` restores the missing full top band and
+chimney caps. The caps are sliced separately to exclude a car in the atlas
+gutter. No-sign, rooftop-sign, and right-side-sign shared recipes are available
+for each 3/4/6-level hotel; the Hotel sign selector preserves height choice,
+recipe bookmarks, independent drafts, and exact variant approvals. Shared art
+bounds frame the preview and preserve offscreen sign culling without enlarging
+the wall footprint or moving the entrance. Approved apartment/shop recipe
+definitions remain unchanged, and frozen generators still do not select these
+candidates. There are now 28 individual previews plus three block cases and
+461 inventoried source uses. The hotel thread stays in progress for human
+review. Validation: typecheck/build and Biome pass; 1,073 unit tests and all 153
+browser tests pass, including source pixels, clean gutters, optional sign
+culling, variant drafts/approval isolation, and phone voting. Desktop/phone
+captures and the live deployment were checked. Next: review the corrected
+hotel/sign variants, then promote approved families into the new dense-city
+profile.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially

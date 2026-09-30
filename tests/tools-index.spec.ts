@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-const index = "/tilefun/tools.html";
 test("game sidebar opens the central index and each listed destination is served", async ({
   page,
 }) => {

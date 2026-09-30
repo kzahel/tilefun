@@ -1027,7 +1027,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:636"
+          "source": "src/entities/PropFactories.ts:639"
         },
         {
           "system": "World generation",
@@ -1053,7 +1053,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:637"
+          "source": "src/entities/PropFactories.ts:640"
         }
       ]
     },
@@ -1075,7 +1075,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:638"
+          "source": "src/entities/PropFactories.ts:641"
         }
       ]
     },
@@ -1097,7 +1097,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:641"
+          "source": "src/entities/PropFactories.ts:644"
         }
       ]
     },
@@ -1119,7 +1119,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:642"
+          "source": "src/entities/PropFactories.ts:645"
         }
       ]
     },
@@ -1141,7 +1141,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:639"
+          "source": "src/entities/PropFactories.ts:642"
         }
       ]
     },
@@ -1163,7 +1163,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:640"
+          "source": "src/entities/PropFactories.ts:643"
         }
       ]
     },
@@ -1185,7 +1185,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:643"
+          "source": "src/entities/PropFactories.ts:646"
         }
       ]
     },
@@ -1207,7 +1207,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:644"
+          "source": "src/entities/PropFactories.ts:647"
         }
       ]
     },
@@ -1229,7 +1229,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:645"
+          "source": "src/entities/PropFactories.ts:648"
         }
       ]
     },
@@ -1251,7 +1251,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:646"
+          "source": "src/entities/PropFactories.ts:649"
         }
       ]
     },
@@ -1281,7 +1281,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:648"
+          "source": "src/entities/PropFactories.ts:651"
         },
         {
           "system": "Gameplay",
@@ -1327,7 +1327,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:649"
+          "source": "src/entities/PropFactories.ts:652"
         },
         {
           "system": "Gameplay",
@@ -1369,7 +1369,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:650"
+          "source": "src/entities/PropFactories.ts:653"
         }
       ]
     },
@@ -1399,7 +1399,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:651"
+          "source": "src/entities/PropFactories.ts:654"
         }
       ]
     },
@@ -1429,7 +1429,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:652"
+          "source": "src/entities/PropFactories.ts:655"
         }
       ]
     },
@@ -1459,7 +1459,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:653"
+          "source": "src/entities/PropFactories.ts:656"
         },
         {
           "system": "World generation",
@@ -1509,7 +1509,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:654"
+          "source": "src/entities/PropFactories.ts:657"
         }
       ]
     },
@@ -1539,7 +1539,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:655"
+          "source": "src/entities/PropFactories.ts:658"
         },
         {
           "system": "World generation",
@@ -1585,7 +1585,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:656"
+          "source": "src/entities/PropFactories.ts:659"
         },
         {
           "system": "World generation",
@@ -1619,7 +1619,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:657"
+          "source": "src/entities/PropFactories.ts:660"
         }
       ]
     },
@@ -1649,7 +1649,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:658"
+          "source": "src/entities/PropFactories.ts:661"
         },
         {
           "system": "World generation",
@@ -1683,7 +1683,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:659"
+          "source": "src/entities/PropFactories.ts:662"
         }
       ]
     },
@@ -1713,7 +1713,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:660"
+          "source": "src/entities/PropFactories.ts:663"
         }
       ]
     },
@@ -1743,7 +1743,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:661"
+          "source": "src/entities/PropFactories.ts:664"
         },
         {
           "system": "World generation",
@@ -1777,7 +1777,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:662"
+          "source": "src/entities/PropFactories.ts:665"
         }
       ]
     },
@@ -1807,7 +1807,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:663"
+          "source": "src/entities/PropFactories.ts:666"
         }
       ]
     },
@@ -1837,7 +1837,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:664"
+          "source": "src/entities/PropFactories.ts:667"
         }
       ]
     },
@@ -1867,7 +1867,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:665"
+          "source": "src/entities/PropFactories.ts:668"
         }
       ]
     },
@@ -1897,7 +1897,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:666"
+          "source": "src/entities/PropFactories.ts:669"
         }
       ]
     },
@@ -1919,7 +1919,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:668"
+          "source": "src/entities/PropFactories.ts:671"
         },
         {
           "system": "World generation",
@@ -1945,7 +1945,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:669"
+          "source": "src/entities/PropFactories.ts:672"
         },
         {
           "system": "World generation",
@@ -1971,7 +1971,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:670"
+          "source": "src/entities/PropFactories.ts:673"
         },
         {
           "system": "World generation",
@@ -1997,7 +1997,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:671"
+          "source": "src/entities/PropFactories.ts:674"
         },
         {
           "system": "World generation",
@@ -2023,7 +2023,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:672"
+          "source": "src/entities/PropFactories.ts:675"
         },
         {
           "system": "World generation",
@@ -2049,7 +2049,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:673"
+          "source": "src/entities/PropFactories.ts:676"
         },
         {
           "system": "World generation",
@@ -2075,7 +2075,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:674"
+          "source": "src/entities/PropFactories.ts:677"
         },
         {
           "system": "World generation",
@@ -2121,7 +2121,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:675"
+          "source": "src/entities/PropFactories.ts:678"
         },
         {
           "system": "World generation",
@@ -2147,7 +2147,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:676"
+          "source": "src/entities/PropFactories.ts:679"
         },
         {
           "system": "World generation",
@@ -2209,7 +2209,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:677"
+          "source": "src/entities/PropFactories.ts:680"
         },
         {
           "system": "World generation",
@@ -2263,7 +2263,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:678"
+          "source": "src/entities/PropFactories.ts:681"
         },
         {
           "system": "World generation",
@@ -2301,7 +2301,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:679"
+          "source": "src/entities/PropFactories.ts:682"
         },
         {
           "system": "World generation",
@@ -2331,7 +2331,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:680"
+          "source": "src/entities/PropFactories.ts:683"
         },
         {
           "system": "World generation",
@@ -2365,7 +2365,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2391,7 +2391,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2417,7 +2417,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2443,7 +2443,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2469,7 +2469,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2495,7 +2495,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2521,7 +2521,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2547,7 +2547,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2573,7 +2573,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:64"
+          "source": "src/generation/regional/BuildingRecipes.ts:73"
         },
         {
           "system": "World generation",
@@ -2599,7 +2599,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2625,7 +2625,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2651,7 +2651,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2677,7 +2677,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2703,7 +2703,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2729,7 +2729,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2755,7 +2755,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2781,7 +2781,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2807,7 +2807,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2833,7 +2833,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2859,7 +2859,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2885,7 +2885,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:65"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
@@ -2911,7 +2911,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2941,7 +2941,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2971,7 +2971,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -3001,7 +3001,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -3031,7 +3031,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -3061,7 +3061,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:66"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -3091,7 +3091,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3117,7 +3117,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3143,7 +3143,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3169,7 +3169,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3195,7 +3195,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3221,7 +3221,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3247,7 +3247,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3273,7 +3273,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3299,7 +3299,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:67"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -5418,9 +5418,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        1824,
         272,
-        16
+        32
       ],
       "label": "prop-city-v1-hotel-3 · piece 1",
       "kind": "recipe",
@@ -5435,10 +5435,10 @@
       "id": "recipe:prop-city-v1-hotel-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
+        1952,
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-3 · piece 2",
       "kind": "recipe",
@@ -5453,10 +5453,10 @@
       "id": "recipe:prop-city-v1-hotel-3:2",
       "sheetId": "me-complete",
       "rect": [
-        1904,
         2112,
-        272,
-        144
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-3 · piece 3",
       "kind": "recipe",
@@ -5471,12 +5471,354 @@
       "id": "recipe:prop-city-v1-hotel-3:3",
       "sheetId": "me-complete",
       "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-3 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-3 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3:6",
+      "sheetId": "me-complete",
+      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-3 · piece 4",
+      "label": "prop-city-v1-hotel-3 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-roof-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1968,
+        1744,
+        144,
+        64
+      ],
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-3-side-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        2192,
+        1952,
+        48,
+        176
+      ],
+      "label": "prop-city-v1-hotel-3-side-sign · piece 8",
       "kind": "recipe",
       "consumers": [
         {
@@ -5490,9 +5832,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        1824,
         272,
-        16
+        32
       ],
       "label": "prop-city-v1-hotel-4 · piece 1",
       "kind": "recipe",
@@ -5507,10 +5849,10 @@
       "id": "recipe:prop-city-v1-hotel-4:1",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
+        1952,
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-4 · piece 2",
       "kind": "recipe",
@@ -5525,10 +5867,10 @@
       "id": "recipe:prop-city-v1-hotel-4:2",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2112,
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-4 · piece 3",
       "kind": "recipe",
@@ -5544,9 +5886,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2112,
+        1872,
         272,
-        144
+        16
       ],
       "label": "prop-city-v1-hotel-4 · piece 4",
       "kind": "recipe",
@@ -5561,12 +5903,390 @@
       "id": "recipe:prop-city-v1-hotel-4:4",
       "sheetId": "me-complete",
       "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-4 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-4 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-4 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4:7",
+      "sheetId": "me-complete",
+      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-4 · piece 5",
+      "label": "prop-city-v1-hotel-4 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-roof-sign:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1968,
+        1744,
+        144,
+        64
+      ],
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-4-side-sign:8",
+      "sheetId": "me-complete",
+      "rect": [
+        2192,
+        1952,
+        48,
+        176
+      ],
+      "label": "prop-city-v1-hotel-4-side-sign · piece 9",
       "kind": "recipe",
       "consumers": [
         {
@@ -5580,9 +6300,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        1824,
         272,
-        16
+        32
       ],
       "label": "prop-city-v1-hotel-6 · piece 1",
       "kind": "recipe",
@@ -5597,10 +6317,10 @@
       "id": "recipe:prop-city-v1-hotel-6:1",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
+        1952,
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-6 · piece 2",
       "kind": "recipe",
@@ -5615,10 +6335,10 @@
       "id": "recipe:prop-city-v1-hotel-6:2",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2112,
+        1808,
+        32,
+        16
       ],
       "label": "prop-city-v1-hotel-6 · piece 3",
       "kind": "recipe",
@@ -5634,9 +6354,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2032,
+        1872,
         272,
-        64
+        16
       ],
       "label": "prop-city-v1-hotel-6 · piece 4",
       "kind": "recipe",
@@ -5652,9 +6372,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2032,
+        1904,
         272,
-        64
+        112
       ],
       "label": "prop-city-v1-hotel-6 · piece 5",
       "kind": "recipe",
@@ -5670,9 +6390,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2112,
+        2032,
         272,
-        144
+        64
       ],
       "label": "prop-city-v1-hotel-6 · piece 6",
       "kind": "recipe",
@@ -5687,12 +6407,462 @@
       "id": "recipe:prop-city-v1-hotel-6:6",
       "sheetId": "me-complete",
       "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-6 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6:9",
+      "sheetId": "me-complete",
+      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-6 · piece 7",
+      "label": "prop-city-v1-hotel-6 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:9",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-roof-sign:10",
+      "sheetId": "me-complete",
+      "rect": [
+        1968,
+        1744,
+        144,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1952,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2112,
+        1808,
+        32,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:9",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City prefab showcase (candidate)",
+          "source": "src/generation/regional/CityBuildingPrefabs.ts"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-v1-hotel-6-side-sign:10",
+      "sheetId": "me-complete",
+      "rect": [
+        2192,
+        1952,
+        48,
+        176
+      ],
+      "label": "prop-city-v1-hotel-6-side-sign · piece 11",
       "kind": "recipe",
       "consumers": [
         {
@@ -9619,7 +10789,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:648"
+          "source": "src/entities/PropFactories.ts:651"
         },
         {
           "system": "Gameplay",
@@ -9669,7 +10839,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:649"
+          "source": "src/entities/PropFactories.ts:652"
         },
         {
           "system": "Gameplay",
@@ -9715,7 +10885,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:650"
+          "source": "src/entities/PropFactories.ts:653"
         }
       ]
     },
@@ -9749,7 +10919,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:651"
+          "source": "src/entities/PropFactories.ts:654"
         }
       ]
     },
@@ -9783,7 +10953,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:652"
+          "source": "src/entities/PropFactories.ts:655"
         }
       ]
     },
@@ -9817,7 +10987,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:653"
+          "source": "src/entities/PropFactories.ts:656"
         },
         {
           "system": "World generation",
@@ -9871,7 +11041,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:654"
+          "source": "src/entities/PropFactories.ts:657"
         }
       ]
     },
@@ -9905,7 +11075,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:655"
+          "source": "src/entities/PropFactories.ts:658"
         },
         {
           "system": "World generation",
@@ -9955,7 +11125,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:656"
+          "source": "src/entities/PropFactories.ts:659"
         },
         {
           "system": "World generation",
@@ -9993,7 +11163,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:657"
+          "source": "src/entities/PropFactories.ts:660"
         }
       ]
     },
@@ -10027,7 +11197,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:658"
+          "source": "src/entities/PropFactories.ts:661"
         },
         {
           "system": "World generation",
@@ -10065,7 +11235,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:659"
+          "source": "src/entities/PropFactories.ts:662"
         }
       ]
     },
@@ -10099,7 +11269,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:660"
+          "source": "src/entities/PropFactories.ts:663"
         }
       ]
     },
@@ -10133,7 +11303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:661"
+          "source": "src/entities/PropFactories.ts:664"
         },
         {
           "system": "World generation",
@@ -10171,7 +11341,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:662"
+          "source": "src/entities/PropFactories.ts:665"
         }
       ]
     },
@@ -10205,7 +11375,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:663"
+          "source": "src/entities/PropFactories.ts:666"
         }
       ]
     },
@@ -10239,7 +11409,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:664"
+          "source": "src/entities/PropFactories.ts:667"
         }
       ]
     },
@@ -10273,7 +11443,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:665"
+          "source": "src/entities/PropFactories.ts:668"
         }
       ]
     },
@@ -10307,7 +11477,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:666"
+          "source": "src/entities/PropFactories.ts:669"
         }
       ]
     },

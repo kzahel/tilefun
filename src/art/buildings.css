@@ -58,6 +58,19 @@
   font-size: 21px;
   margin: 0;
 }
+#hotel-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+#hotel-options[hidden] {
+  display: none;
+}
+#hotel-sign {
+  padding: 6px 8px;
+}
 #review-verdict {
   color: var(--accent);
   font-size: 13px;
@@ -210,6 +223,9 @@
   }
   .building-stage {
     height: clamp(110px, calc(100dvh - 560px), 400px);
+  }
+  .building-preview:has(#hotel-options:not([hidden])) .building-stage {
+    height: clamp(110px, calc(100dvh - 610px), 350px);
   }
   .building-preview h2 {
     font-size: 18px;

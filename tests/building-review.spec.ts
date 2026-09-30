@@ -1,7 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
+import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
 
+const candidateCount = CITY_BUILDING_PREFABS.length + 3;
 const URL = "/tilefun/building-lab.html";
 test("one-tap review hides approvals, persists, pauses after two reports, and can undo", async ({
   page,
@@ -120,7 +122,7 @@ test("phone navigation and voting are visible without scrolling", async ({ page 
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: "/tmp/tilefun-building-review-phone.png", fullPage: true });
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < candidateCount; i++) {
     await page.locator("#next-building").click();
     expect(await page.evaluate(() => scrollY)).toBe(0);
     const buttons = await page.locator("#reject-building").boundingBox();
@@ -149,16 +151,16 @@ test("an exhausted queue stays empty after reload and decisions are readable fro
   try {
     await page.goto(URL);
     await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
-    for (let i = 0; i < 25; i++) await page.locator("#approve-building").click();
+    for (let i = 0; i < candidateCount; i++) await page.locator("#approve-building").click();
     await expect(page.locator("#review-empty")).toBeVisible();
     await expect(page.locator("#queue-sync")).toHaveText("Server inbox up to date.");
-    expect(saved).toHaveLength(25);
+    expect(saved).toHaveLength(candidateCount);
     await page.reload();
     await expect(page.locator("#review-empty")).toBeVisible();
     const other = await context.newPage();
     await other.goto(URL);
     await expect(other.locator("#review-empty")).toBeVisible();
-    await expect(other.locator("#review-progress")).toContainText("25 approved");
+    await expect(other.locator("#review-progress")).toContainText(`${candidateCount} approved`);
     await other.locator("#show-all-buildings").click();
     await expect(other.locator("#review-verdict")).toContainText("Approved");
     await other.locator("#undo-building").click();

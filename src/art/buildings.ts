@@ -6,6 +6,8 @@ import {
   CITY_BUILDING_PREFABS,
   CITY_PREFAB_SOURCE,
   cityPrefabBlock,
+  type HotelSign,
+  hotelPrefabType,
   resolveCityPrefabType,
 } from "../generation/regional/CityBuildingPrefabs.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
@@ -18,6 +20,7 @@ import { drawBuildingShowcase } from "./BuildingShowcase.js";
 const $ = <T extends HTMLElement>(id: string) => required(document.getElementById(id)) as T;
 const scene = $<HTMLSelectElement>("scene"),
   select = $<HTMLSelectElement>("prefab"),
+  hotelSign = $<HTMLSelectElement>("hotel-sign"),
   canvas = $<HTMLCanvasElement>("building");
 const params = new URLSearchParams(location.search);
 select.replaceChildren(...CITY_BUILDING_PREFABS.map((p) => new Option(p.name, p.type)));
@@ -266,6 +269,8 @@ function render() {
     scene.value === "single"
       ? prefab.name
       : `${scene.selectedOptions[0]?.textContent} · ${placements.length} prefabs`;
+  $("hotel-options").hidden = scene.value !== "single" || prefab.family !== "hotel";
+  hotelSign.value = prefab.hotelSign ?? "none";
   $("facts").textContent =
     `${stats.width}×${stats.height} native stage pixels · ${stats.parts} shared sprite pieces${scene.value === "single" ? ` · footprint ${prefab.width}×${prefab.groundDepth}` : ""}`;
   $("recipe-id").textContent = prefab.type;
@@ -292,6 +297,11 @@ function render() {
     front.textContent =
       "Shop, upper walls, and roof share the same flat frontage and native width. The sign overhangs the ground-floor wall.";
     topology.append(front);
+  }
+  if (prefab.family === "hotel") {
+    const signage = document.createElement("p");
+    signage.textContent = `Full hotel top plus separate trim. Sign: ${prefab.hotelSign}. Signage changes art bounds; the 272px wall footprint and entrance stay fixed.`;
+    topology.append(signage);
   }
   const sourceUrl = new URL("art-workbench.html", location.href);
   sourceUrl.searchParams.set("sheet", CITY_PREFAB_SOURCE.sheetId);
@@ -346,6 +356,12 @@ for (const control of [$("geometry"), $("scale")]) control.addEventListener("cha
 scene.addEventListener("change", showSelection);
 select.addEventListener("change", () => {
   scene.value = "single";
+  showSelection();
+});
+hotelSign.addEventListener("change", () => {
+  const prefab = required(CITY_BUILDING_PREFABS.find((p) => p.type === select.value));
+  if (scene.value !== "single" || prefab.family !== "hotel") return;
+  select.value = hotelPrefabType(prefab.floors, hotelSign.value as HotelSign);
   showSelection();
 });
 

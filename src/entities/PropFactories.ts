@@ -1,7 +1,7 @@
 import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasIndex.js";
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
-import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import {
   furnitureAsset,
   INTERIOR_WALL_TYPE,
@@ -538,7 +538,8 @@ export function createProp(type: string, wx: number, wy: number): Prop {
   const interior = interiorProp(type, wx, wy);
   if (interior) return interior;
   const recipe = buildingRecipe(type);
-  if (recipe)
+  if (recipe) {
+    const bounds = buildingVisualBounds(recipe);
     return {
       id: 0,
       type,
@@ -547,7 +548,8 @@ export function createProp(type: string, wx: number, wy: number): Prop {
         sheetKey: "me-complete",
         frameCol: 150,
         frameRow: 135,
-        spriteWidth: recipe.width,
+        // Culling is centered on the feet; include asymmetric accessories.
+        spriteWidth: Math.max(Math.abs(bounds.minX), Math.abs(bounds.maxX)) * 2,
         spriteHeight: recipe.height,
         parts: recipe.parts,
       },
@@ -555,6 +557,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
       walls: getWallsForPropType(type),
       isProp: true,
     };
+  }
 
   if (type.startsWith(ATLAS_PREFIX)) {
     const atlasKey = type.slice(ATLAS_PREFIX.length);

@@ -111,7 +111,7 @@ pages instead of a full-atlas-sized canvas or thousands of DOM thumbnails.
 ## Building prefab showcase
 
 The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html)
-composes the source-audited candidates from the dense-city note: 22 individual
+composes the source-audited candidates from the dense-city note: 28 individual
 prefabs and three block arrangements. The queue starts with **Unchecked**.
 Use **Previous / Next** to move through candidates without reopening a dropdown
 or scrolling. The preview fits its stage; review controls sit alongside it on
@@ -169,6 +169,21 @@ review bookmarks open the complete two-level building. Apartment candidate IDs
 remain bookmarkable, with updated names and composition hashes. Saved notes
 keep their original context and flag changed compositions when opened in the
 lab. Frozen generator recipes retain their old outputs.
+Hotels now include the full top band `[1904,1824,272,32]` with two chimney caps
+`[1952,1808,32,16]` / `[2112,1808,32,16]` (missing from the vendor atlas index;
+split to exclude adjacent car pixels) and the separate 16px `Hotel_Modular_4`
+trim. `CITY_HOTEL_ART` records that audit and the optional signboards:
+rooftop `[1968,1744,144,64]` and
+right-side `[2192,1952,48,176]`. Each 3/4/6-level hotel has no-sign, rooftop-sign,
+and side-sign shared recipes. **Hotel sign** switches between them above the
+preview, preserving the floor count and a bookmarkable recipe ID. The existing
+unsuffixed hotel IDs mean no sign; new IDs end in `-roof-sign` / `-side-sign`.
+Each variant has its own review and draft. Restoring the roof reopens old hotel
+judgments; apartment and shop recipes stay unchanged. The hotel block uses the
+no-sign variant, so side signage does not overlap a neighboring facade.
+`buildingVisualBounds` derives art extents from shared pieces for both preview
+framing and gameplay culling, including the projecting side sign. Hotel wall
+footprints remain 272×32 with the same doorway regardless of signage.
 Hotel entry art and shop signs retain their own placement/layering. Native
 source bounds and the exact selected PNG fingerprint are tested. The lab's
 **Facade attachments & roof** panel exposes the topology for review.
