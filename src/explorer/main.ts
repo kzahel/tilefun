@@ -2,7 +2,6 @@ import {
   createDescriptor,
   descriptorChoice,
   descriptorFromMetadata,
-  descriptorKey,
   GENERATOR_CATALOG,
   type GeneratorChoice,
   REGIONAL_REVISIONS,
@@ -11,12 +10,12 @@ import {
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
 import { QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
 import { regionalWorld, seedFromText } from "../generation/regional/WorldDescriptor.js";
-import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
-import { type InspectionSnapshot, readInspection } from "../persistence/WorldInspection.js";
-import { dbNameForWorld, WorldRegistry } from "../persistence/WorldRegistry.js";
+import type { InspectionSnapshot } from "../persistence/WorldInspection.js";
 import { featureAt, type MapFeature, MapRenderer, mapFeatures } from "./MapRenderer.js";
 import { DEFAULT_PREVIEW, explorerUrl, parseExplorerLocation } from "./PreviewSettings.js";
 import { QueryClient } from "./QueryClient.js";
+import { type ReviewRecord, ReviewStore, reviewKey } from "./ReviewStore.js";
+import { SavedWorldSource } from "./SavedWorldSource.js";
 import { TilePreview } from "./TilePreview.js";
 import {
   clampView,
@@ -74,56 +73,19 @@ let firstViewMs = 0;
 let terrainMs = 0;
 const tilePreview = new TilePreview(requestDraw);
 let savedWorldId = new URL(location.href).searchParams.get("worldId");
-const serverAddress = new URL(location.href).searchParams.get("server");
+const savedSource = new SavedWorldSource(location.href);
+const serverAddress = savedSource.serverAddress;
 let querySerial = 0;
-function apiUrl(path: string): URL {
-  return new URL(
-    path,
-    serverAddress ? `${location.protocol}//${serverAddress.replace(/\/ws$/, "")}` : location.origin,
-  );
-}
 async function snapshotFor(
   coordinates: { cx: number; cy: number }[],
   bounds: import("../generation/regional/RegionalPlanner.js").Bounds,
 ): Promise<InspectionSnapshot | undefined> {
-  if (!savedWorldId) return undefined;
-  if (serverAddress) {
-    const url = apiUrl("/api/world-preview");
-    url.searchParams.set("worldId", savedWorldId);
-    url.searchParams.set("chunks", JSON.stringify(coordinates));
-    url.searchParams.set("bounds", JSON.stringify(bounds));
-    const response = await fetch(url);
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error ?? "Saved inspection unavailable.");
-    return data;
-  }
-  const store = new IdbPersistenceStore(dbNameForWorld(savedWorldId), [
-    "chunks",
-    "meta",
-    "players",
-  ]);
-  await store.open();
-  try {
-    return await readInspection(store, generation, coordinates, bounds);
-  } finally {
-    store.close();
-  }
+  return savedWorldId
+    ? savedSource.snapshot(savedWorldId, generation, coordinates, bounds)
+    : undefined;
 }
 async function refreshSources(): Promise<void> {
-  const registry = new WorldRegistry();
-  let worlds: import("../persistence/WorldRegistry.js").WorldMeta[];
-  if (serverAddress) {
-    const response = await fetch(apiUrl("/api/world-list"));
-    if (!response.ok) throw new Error("Server world list unavailable.");
-    worlds = await response.json();
-  } else {
-    await registry.open();
-    try {
-      worlds = await registry.listWorlds();
-    } finally {
-      registry.close();
-    }
-  }
+  const worlds = await savedSource.listWorlds();
   const select = element<HTMLSelectElement>("#world-source");
   select.replaceChildren(new Option("Procedural world", ""));
   for (const meta of worlds) select.add(new Option(meta.name, meta.id));
@@ -643,57 +605,19 @@ const cases: { id: string; title: string; view: ViewState }[] = [
   { id: "farm-lane-v3", title: "Farm & village lane · v3", view: { x: 677, y: 1320, zoom: 16 } },
   { id: "woodland-loop-v3", title: "Woodland trail · v3", view: { x: -985, y: -985, zoom: 12 } },
 ];
-interface ReviewRecord {
-  generation?: typeof generation;
-  preview?: typeof preview;
-  caseId: string;
-  world: typeof world;
-  view: ViewState;
-  bounds: ReturnType<typeof visibleBounds>;
-  detail: string;
-  overlays: Overlays;
-  featureId: string | null;
-  verdict: "approved" | "reported";
-  note: string;
-  location: string;
-  createdAt: string;
-}
-const REVIEW_KEY = "tilefun:regional-review:v1";
-const reviews: Record<string, ReviewRecord> = {};
+const reviews = new ReviewStore(() => localStorage);
 let currentCase = 0;
-try {
-  const stored: unknown = JSON.parse(localStorage.getItem(REVIEW_KEY) ?? "{}");
-  if (stored && typeof stored === "object" && !Array.isArray(stored)) {
-    for (const [key, record] of Object.entries(stored)) {
-      if (
-        record &&
-        typeof record === "object" &&
-        "world" in record &&
-        "caseId" in record &&
-        "verdict" in record &&
-        record.world
-      ) {
-        reviews[key] = record as ReviewRecord;
-      }
-    }
-  }
-} catch {
+if (!reviews.load())
   notify("Review storage is unavailable. You can still export this session's notes.");
-}
-function reviewKey(caseId: string): string {
-  return generation.type === "regional" &&
-    generation.version === "regional-v1" &&
-    preview.mode === "auto" &&
-    view.zoom < preview.detailZoom
-    ? `${world.generatorVersion}:${world.profile}:${world.seed}:${caseId}`
-    : `${descriptorKey(generation)}:${preview.mode}:${preview.detailZoom}:${preview.radius}:${caseId}`;
+function currentReviewKey(caseId: string): string {
+  return reviewKey(caseId, { generation, world, preview, view });
 }
 function updateReview(): void {
   const container = element("#review-cases");
   container.replaceChildren();
   let remaining = 0;
   cases.forEach((reviewCase, index) => {
-    const record = reviews[reviewKey(reviewCase.id)];
+    const record = reviews.get(currentReviewKey(reviewCase.id));
     if (!record) remaining++;
     const button = document.createElement("button");
     button.type = "button";
@@ -725,7 +649,7 @@ function recordReview(verdict: ReviewRecord["verdict"]): void {
   }
   const reviewCase = cases[currentCase];
   if (!reviewCase) return;
-  reviews[reviewKey(reviewCase.id)] = {
+  const persisted = reviews.record(currentReviewKey(reviewCase.id), {
     caseId: reviewCase.id,
     world: { ...world },
     generation,
@@ -739,33 +663,25 @@ function recordReview(verdict: ReviewRecord["verdict"]): void {
     note: noteInput.value.trim(),
     location: explorerUrl(location.href, generation, view, overlays, preview),
     createdAt: new Date().toISOString(),
-  };
-  try {
-    localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+  });
+  if (persisted) {
     notify(
       verdict === "approved"
         ? "Approved. Moving to the next unchecked place."
         : "Report recorded. You can stop here and export your notes.",
     );
-  } catch {
+  } else {
     notify("Saved for this session only. Export your notes before leaving.");
   }
   noteInput.value = "";
-  const next = cases.findIndex((c) => !reviews[reviewKey(c.id)]);
+  const next = cases.findIndex((c) => !reviews.get(currentReviewKey(c.id)));
   if (next >= 0) visitCase(next);
   else updateReview();
 }
 element("#approve").onclick = () => recordReview("approved");
 element("#report").onclick = () => recordReview("reported");
 element("#export-review").onclick = () => {
-  const records = Object.values(reviews).filter((r) =>
-    r.generation
-      ? descriptorKey(r.generation) === descriptorKey(generation)
-      : generation.type === "regional" &&
-        r.world.seed === world.seed &&
-        r.world.generatorVersion === world.generatorVersion &&
-        r.world.profile === world.profile,
-  );
+  const records = reviews.forWorld(generation, world);
   const url = URL.createObjectURL(
     new Blob([JSON.stringify({ formatVersion: 1, records }, null, 2)], {
       type: "application/json",
