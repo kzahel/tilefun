@@ -99,22 +99,41 @@ pages instead of a full-atlas-sized canvas or thousands of DOM thumbnails.
 
 ## Building prefab showcase
 
-The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html?scene=mixed)
-composes the first source-audited candidates from the dense-city note. There are
-22 prefab configurations: bay-front, extended bay-front, and wide bay-front apartments;
-hotels; and bakery, butcher, bait, ice-cream, and fitness storefronts with
-mixed-use variants. Apartment, retail, and hotel blocks align frontage at
-native dimensions with a mix of heights. Select an individual building, inspect
-its source pieces, or toggle shared footprints/entrance approach positions.
-Links preserve the scene and prefab ID. **Leave feedback** sits directly below
-the preview: choose **Whole block** or an individual building in **About**, type
-a note, then press **Save feedback**. The shared inbox captures the target scene,
-recipe IDs, recipe-definition hash, source rectangle, and verified PNG revision
-automatically. **Building feedback & replies** shows saved requests and agent
-replies; use **Refresh feedback** to fetch updates. Drafts stay with their target;
-offline submissions retain their original context and retry after reconnect.
-The art workbench's Notes list and `npm run art:notes` read these same threads.
-Both tools share the persistent outbox/transport and source-verification code.
+The [building lab](https://tilefun.graehlarts.com/tilefun/building-lab.html)
+composes the source-audited candidates from the dense-city note: 22 individual
+prefabs and three block arrangements. The queue starts with **Unchecked**.
+Use **Previous / Next** to move through candidates without reopening a dropdown
+or scrolling. The preview fits its stage; review controls sit alongside it on
+desktop and immediately below it on phones. The scene and building selectors
+remain available for an explicit jump, and links preserve both IDs.
+
+- **Looks right** records your approval and advances. Approved candidates are
+  hidden from Unchecked; **Show → Approved / All candidates** brings them back.
+- **Needs changes** requires a reason, records a report, and advances. Reported
+  candidates also leave Unchecked. After two reports the lab pauses, showing
+  both reasons and the server save status. Say **“ready” in chat** when you want
+  the agent to fix the batch. **Keep reviewing** starts another batch without
+  discarding the reports; **Check for updates** reloads the latest compositions.
+- **Undo last review** reopens the last judged candidate. Arrow keys navigate,
+  Space approves, and X requests changes when focus is outside form controls.
+- **Save feedback** leaves an ordinary note without judging or advancing. On a
+  block, choose **Whole block** or jump to an individual building with **Note
+  about**. **Building feedback & replies** shows the shared history.
+
+Decisions persist in the shared art inbox and are visible from another browser.
+Batch/pause state and target-specific drafts persist in the current browser.
+Offline submissions keep their exact target and retry after reconnect; check
+**pending server save** before telling the agent the batch is ready.
+
+Each note pins the scene, recipe IDs, recipe-definition hash, source rectangle,
+and verified PNG revision. Judgments also pin the unannotated rendered pixels
+and their human decision time. Source, recipe, or rendered appearance changes
+return a candidate to Unchecked. View scale and diagnostic geometry overlays do
+not invalidate approval. Resolving a note or adding an agent reply is separate
+from approving a building; neither hides an unchecked candidate. Old ordinary
+feedback is preserved and never backfilled as approval. The art workbench and
+`npm run art:notes` read these same threads; both tools reuse the persistent
+outbox/transport and source-verification code.
 
 `CityBuildingPrefabs.ts` supplies the source art, piece offsets, bounds, and
 entrances. The lab calls the same `createProp`, `collectScene`, and

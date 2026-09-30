@@ -6,7 +6,14 @@ export interface BuildingReview {
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
+  /** Unannotated game-rendered pixels, unaffected by preview scale or overlays. */
+  renderFingerprint?: string;
   url: string;
+}
+export interface BuildingVerdict {
+  value: "approved" | "changes" | "clear";
+  /** Human decision time; agent replies must preserve this ordering. */
+  createdAt: string;
 }
 export interface ArtNote {
   id: string;
@@ -22,6 +29,7 @@ export interface ArtNote {
   reply: string;
   createdAt: string;
   buildingReview?: BuildingReview;
+  buildingVerdict?: BuildingVerdict;
 }
 function parseBuildingReview(value: unknown): BuildingReview {
   if (!value || typeof value !== "object") throw new Error("Invalid building review");
@@ -34,6 +42,8 @@ function parseBuildingReview(value: unknown): BuildingReview {
     v.prefabIds.some((id) => typeof id !== "string" || !/^prop-city-[a-z0-9-]{1,100}$/.test(id)) ||
     typeof v.revision !== "string" ||
     !/^[a-f0-9]{64}$/.test(v.revision) ||
+    (v.renderFingerprint !== undefined &&
+      (typeof v.renderFingerprint !== "string" || !/^[a-f0-9]{64}$/.test(v.renderFingerprint))) ||
     typeof v.url !== "string" ||
     v.url.length > 2000 ||
     !/^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url)
@@ -43,6 +53,9 @@ function parseBuildingReview(value: unknown): BuildingReview {
     scene: v.scene as BuildingReview["scene"],
     prefabIds: [...v.prefabIds],
     revision: v.revision,
+    ...(v.renderFingerprint === undefined
+      ? {}
+      : { renderFingerprint: v.renderFingerprint as string }),
     url: v.url,
   };
 }
@@ -92,6 +105,21 @@ export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
     !Number.isFinite(Date.parse(v.createdAt))
   )
     throw new Error("Invalid note date");
+  const review = v.buildingReview === undefined ? undefined : parseBuildingReview(v.buildingReview);
+  let verdict: BuildingVerdict | undefined;
+  if (v.buildingVerdict !== undefined) {
+    const judgment = v.buildingVerdict as Partial<BuildingVerdict> | null;
+    if (
+      !review?.renderFingerprint ||
+      !judgment ||
+      !["approved", "changes", "clear"].includes(judgment.value ?? "") ||
+      typeof judgment.createdAt !== "string" ||
+      judgment.createdAt.length > 40 ||
+      !Number.isFinite(Date.parse(judgment.createdAt))
+    )
+      throw new Error("Invalid building verdict");
+    verdict = { value: judgment.value as BuildingVerdict["value"], createdAt: judgment.createdAt };
+  }
   return {
     id: v.id as string,
     threadId: v.threadId as string,
@@ -105,9 +133,8 @@ export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
     note: v.note,
     reply: v.reply,
     createdAt: v.createdAt,
-    ...(v.buildingReview === undefined
-      ? {}
-      : { buildingReview: parseBuildingReview(v.buildingReview) }),
+    ...(review === undefined ? {} : { buildingReview: review }),
+    ...(verdict === undefined ? {} : { buildingVerdict: verdict }),
   };
 }
 export function latestArtNotes(records: readonly ArtNote[]): ArtNote[] {
@@ -121,6 +148,7 @@ export function sameArtTarget(a: ArtNote, b: ArtNote): boolean {
     a.sheetId === b.sheetId &&
     a.fingerprint === b.fingerprint &&
     JSON.stringify(a.rect) === JSON.stringify(b.rect) &&
-    JSON.stringify(a.buildingReview) === JSON.stringify(b.buildingReview)
+    JSON.stringify(a.buildingReview) === JSON.stringify(b.buildingReview) &&
+    JSON.stringify(a.buildingVerdict) === JSON.stringify(b.buildingVerdict)
   );
 }

@@ -52,6 +52,37 @@ describe("machine art note inbox", () => {
     });
     expect((await restored.records()).at(-1)?.reply).toContain("rowhouse kit");
   });
+  it("persists explicit approvals and preserves human decisions when agents reply", async () => {
+    const s = await store();
+    const approval = {
+      ...row,
+      status: "resolved",
+      buildingReview: {
+        scene: "single",
+        prefabIds: ["prop-city-v1-bakery-2"],
+        revision: "a".repeat(64),
+        renderFingerprint: "b".repeat(64),
+        url: "/tilefun/building-lab.html?scene=single&prefab=prop-city-v1-bakery-2",
+      },
+      buildingVerdict: { value: "approved", createdAt: row.createdAt },
+    };
+    await s.append(approval);
+    await s.append({
+      ...approval,
+      id: "agent-reply",
+      reply: "Approval recorded",
+      createdAt: "2026-09-30T13:00:00Z",
+    });
+    const restored = new ArtNoteStore(s.directory);
+    expect((await restored.records()).at(-1)?.buildingVerdict).toEqual(approval.buildingVerdict);
+    await expect(
+      s.append({
+        ...approval,
+        id: "cannot-change-verdict",
+        buildingVerdict: { ...approval.buildingVerdict, value: "changes" },
+      }),
+    ).rejects.toThrow("selection cannot change");
+  });
   it("rejects retargeting or conflicting retry IDs without poisoning subsequent saves", async () => {
     const s = await store();
     await s.append(row);

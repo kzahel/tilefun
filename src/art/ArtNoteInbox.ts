@@ -76,11 +76,14 @@ export class ArtNoteInbox {
     };
     try {
       while (this.outbox[0]) {
+        const row = this.outbox[0];
         await request({
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(this.outbox[0]),
+          body: JSON.stringify(row),
         });
+        // A successful POST is durable even if the following GET goes offline.
+        this.records = latestArtNotes([...this.records, row]);
         this.outbox.shift();
         this.persist();
       }

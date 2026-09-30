@@ -1,0 +1,256 @@
+/* The review stage and its decisions stay together; diagnostic details follow. */
+.building-page {
+  display: block;
+  max-width: 1300px;
+  margin: auto;
+  padding: 24px;
+  min-height: 0;
+}
+.building-intro h1 {
+  font-size: 30px;
+}
+.building-intro p {
+  font-size: 15px;
+}
+.review-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+}
+.review-toolbar label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+#review-progress {
+  flex: 1;
+  color: var(--muted);
+  font-size: 13px;
+}
+.queue-save-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.queue-save-status p {
+  flex: 1;
+  margin: 0;
+  font-size: 12px;
+}
+.queue-save-status button {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+.building-review-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+}
+.building-preview {
+  min-width: 0;
+}
+.building-preview h2 {
+  font-size: 21px;
+  margin: 0;
+}
+#review-verdict {
+  color: var(--accent);
+  font-size: 13px;
+  margin: 8px 0;
+}
+#bookmark-notice:empty {
+  display: none;
+}
+.building-stage {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #20302a;
+  height: min(65dvh, 680px);
+  display: flex;
+  align-items: center;
+}
+.building-stage canvas {
+  display: block;
+  height: auto;
+  image-rendering: pixelated;
+  max-width: none;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.building-stage #loading {
+  padding: 12px;
+}
+.building-stage #loading:empty {
+  display: none;
+}
+.building-feedback {
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  align-self: start;
+  min-width: 0;
+}
+.building-feedback h2 {
+  margin-top: 0;
+}
+.building-feedback label {
+  display: block;
+  font-size: 13px;
+}
+.building-feedback textarea {
+  width: 100%;
+  resize: vertical;
+}
+.building-feedback select {
+  max-width: 100%;
+}
+.building-feedback .review-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.review-actions button {
+  flex: 1;
+}
+.building-feedback .muted {
+  font-size: 12px;
+}
+.building-feedback #feedback-sync {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.feedback-target-label {
+  margin: 12px 0 8px;
+}
+.feedback-target-label select {
+  width: 100%;
+}
+.building-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.building-controls label {
+  min-width: 100%;
+  max-width: 100%;
+}
+.building-controls select {
+  width: 100%;
+}
+.building-controls input {
+  width: auto;
+}
+.building-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.building-picks:empty {
+  display: none;
+}
+.building-picks button {
+  font-size: 12px;
+}
+.review-pause {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+}
+.review-pause h2 {
+  margin-top: 0;
+}
+.review-pause li {
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+#building-feedback-history {
+  margin-top: 20px;
+}
+#building-notes article {
+  border-top: 1px solid var(--line);
+  padding: 12px 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.building-info {
+  max-width: 850px;
+  margin-top: 24px;
+}
+.building-info #recipe-id {
+  font: 12px monospace;
+  color: var(--accent);
+}
+.building-info #pieces p {
+  font: 12px monospace;
+  overflow-wrap: anywhere;
+}
+.building-review-layout[hidden],
+.review-pause[hidden] {
+  display: none;
+}
+@media (max-width: 800px) {
+  .building-page {
+    padding: 12px;
+  }
+  .building-review-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .building-stage {
+    height: clamp(110px, calc(100dvh - 560px), 400px);
+  }
+  .building-preview h2 {
+    font-size: 18px;
+  }
+  .building-intro h1 {
+    font-size: 22px;
+  }
+  .building-intro p {
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .building-feedback {
+    padding: 10px;
+  }
+  .building-feedback h2 {
+    display: none;
+  }
+  .review-toolbar {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    margin: 10px 0;
+  }
+  .review-toolbar button,
+  .review-toolbar select {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .review-toolbar label {
+    min-width: 0;
+  }
+  .review-toolbar label select {
+    width: 100%;
+  }
+  .review-toolbar #review-progress {
+    grid-column: 1 / 3;
+  }
+  #undo-building {
+    grid-column: 3;
+    font-size: 11px;
+  }
+  .building-feedback #review-help {
+    margin: 6px 0;
+  }
+}

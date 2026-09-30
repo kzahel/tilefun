@@ -1,4 +1,5 @@
 import "./art.css";
+import "./buildings.css";
 import { loadJSON } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import {
@@ -9,8 +10,9 @@ import {
 } from "../generation/regional/CityBuildingPrefabs.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
-import type { ArtNote, BuildingReview } from "./ArtNotes.js";
+import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
 import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";
+import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "./BuildingShowcase.js";
 
 const $ = <T extends HTMLElement>(id: string) => required(document.getElementById(id)) as T;
@@ -32,6 +34,7 @@ const target = $<HTMLSelectElement>("feedback-target");
 const save = $<HTMLButtonElement>("save-building-note");
 let placements: ReturnType<typeof cityPrefabBlock> = [];
 let verified = false;
+let queueReady = false;
 let sending = false;
 let draftKey = "";
 let feedbackScene = "";
@@ -55,12 +58,12 @@ function persistDrafts() {
       "Draft storage is full. Keep this page open until feedback is saved.";
   }
 }
-function currentTarget() {
-  const prefabs =
-    target.value === "block"
-      ? placements.map((p) => p.prefab)
-      : [required(placements.find((p) => p.prefab.type === target.value)).prefab];
-  const kind = target.value === "block" ? (scene.value as BuildingReview["scene"]) : "single";
+function currentTarget(displayed = false) {
+  const whole = displayed || target.value === "block";
+  const prefabs = whole
+    ? placements.map((p) => p.prefab)
+    : [required(placements.find((p) => p.prefab.type === target.value)).prefab];
+  const kind = whole ? (scene.value as BuildingReview["scene"]) : "single";
   const url = new URL("building-lab.html", location.href);
   url.searchParams.set("scene", kind);
   url.searchParams.set("prefab", required(prefabs[0]).type);
@@ -78,6 +81,7 @@ function currentTarget() {
 }
 function updateFeedbackTarget() {
   const context = currentTarget();
+  noteInput.setCustomValidity("");
   draftKey = `${context.scene}:${context.prefabs.map((p) => p.type).join(",")}`;
   noteInput.value = typeof drafts[draftKey] === "string" ? required(drafts[draftKey]) : "";
   $("feedback-context").textContent =
@@ -95,7 +99,7 @@ function renderFeedbackNotes() {
     article.dataset.thread = row.threadId;
     const heading = document.createElement("a");
     heading.href = required(row.buildingReview).url;
-    heading.textContent = `${row.status} · ${required(row.buildingReview).scene} · ${required(row.buildingReview).prefabIds.join(", ")}`;
+    heading.textContent = `${row.buildingVerdict ? `${row.buildingVerdict.value === "clear" ? "reopened" : row.buildingVerdict.value} · ` : ""}${row.status} · ${required(row.buildingReview).scene} · ${required(row.buildingReview).prefabIds.join(", ")}`;
     const body = document.createElement("p");
     body.textContent = row.note;
     article.append(heading, body);
@@ -126,65 +130,107 @@ function renderFeedbackNotes() {
     container.append(article);
   }
 }
-inbox.onchange = renderFeedbackNotes;
+inbox.onchange = () => {
+  renderFeedbackNotes();
+  if (queueReady) updateQueue();
+};
 noteInput.oninput = () => {
+  noteInput.setCustomValidity("");
   drafts[draftKey] = noteInput.value;
   persistDrafts();
 };
-target.onchange = updateFeedbackTarget;
-$("building-note-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!verified || sending || !noteInput.value.trim()) return;
-  const context = currentTarget(),
-    note = noteInput.value.trim(),
+target.onchange = () => {
+  if (scene.value !== "single" && target.value !== "block") {
+    select.value = target.value;
+    scene.value = "single";
+    showSelection();
+  } else updateFeedbackTarget();
+};
+async function saveFeedback(verdict?: BuildingVerdict["value"]) {
+  if (!verified || sending || (paused && verdict !== "clear")) return;
+  if ((!verdict || verdict === "changes") && !noteInput.value.trim()) {
+    noteInput.setCustomValidity("Please leave a reason for the changes.");
+    noteInput.reportValidity();
+    noteInput.focus();
+    return;
+  }
+  const context = currentTarget(!!verdict),
+    note =
+      noteInput.value.trim() ||
+      (verdict === "approved" ? "Approved this candidate." : "Reopened for review."),
     key = draftKey;
   sending = true;
-  save.disabled = true;
-  void (async () => {
-    try {
-      const revision = await sha256(new TextEncoder().encode(JSON.stringify(context.prefabs)));
-      const id = crypto.randomUUID();
-      const row: ArtNote = {
-        id,
-        threadId: id,
-        sheetId: source.id,
-        fingerprint: source.fingerprint,
-        sheetSize: [source.width, source.height],
-        rect: context.rect,
-        sliceKeys: [],
-        intent: "building",
-        status: "pending",
-        note,
-        reply: "",
-        createdAt: new Date().toISOString(),
-        buildingReview: {
-          scene: context.scene,
-          prefabIds: context.prefabs.map((p) => p.type),
-          revision,
-          url: context.url,
-        },
-      };
-      inbox.enqueue(row);
-      if (drafts[key]?.trim() === note) delete drafts[key];
-      if (key === draftKey && noteInput.value.trim() === note) noteInput.value = "";
-      persistDrafts();
-      $<HTMLDetailsElement>("building-feedback-history").open = true;
-    } catch (error) {
-      $("feedback-sync").textContent =
-        `Could not queue feedback: ${error instanceof Error ? error.message : String(error)}`;
-    } finally {
-      sending = false;
-      save.disabled = !verified;
-    }
-  })();
+  updateQueue();
+  try {
+    const revision = await sha256(new TextEncoder().encode(JSON.stringify(context.prefabs)));
+    const id = crypto.randomUUID();
+    const createdAt = new Date().toISOString();
+    const candidate = candidates.find(
+      (c) =>
+        c.key ===
+        buildingCaseKey({ scene: context.scene, prefabIds: context.prefabs.map((p) => p.type) }),
+    );
+    const row: ArtNote = {
+      id,
+      threadId: id,
+      sheetId: source.id,
+      fingerprint: source.fingerprint,
+      sheetSize: [source.width, source.height],
+      rect: context.rect,
+      sliceKeys: [],
+      intent: "building",
+      status: verdict === "approved" || verdict === "clear" ? "resolved" : "pending",
+      note,
+      reply: "",
+      createdAt,
+      buildingReview: {
+        scene: context.scene,
+        prefabIds: context.prefabs.map((p) => p.type),
+        revision,
+        url: context.url,
+        ...(candidate ? { renderFingerprint: candidate.review.renderFingerprint } : {}),
+      },
+      ...(verdict ? { buildingVerdict: { value: verdict, createdAt } } : {}),
+    };
+    inbox.enqueue(row);
+    if (drafts[key]?.trim() === note) delete drafts[key];
+    if (key === draftKey && noteInput.value.trim() === note) noteInput.value = "";
+    persistDrafts();
+    if (verdict && candidate) {
+      batch = batch.filter((entry) => entry.key !== candidate.key);
+      if (verdict === "changes")
+        batch.push({
+          key: candidate.key,
+          fingerprint: required(candidate.review.renderFingerprint),
+          threadId: id,
+        });
+      paused = batch.length >= 2;
+      persistReview();
+      if (!paused) navigate(1);
+    } else $<HTMLDetailsElement>("building-feedback-history").open = true;
+  } catch (error) {
+    $("feedback-sync").textContent =
+      `Could not queue feedback: ${error instanceof Error ? error.message : String(error)}`;
+  } finally {
+    // Absorb a double tap before the next candidate becomes actionable.
+    if (verdict) await new Promise((resolve) => setTimeout(resolve, 160));
+    sending = false;
+    updateQueue();
+  }
+}
+$("building-note-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  void saveFeedback();
 });
+$("approve-building").onclick = () => void saveFeedback("approved");
+$("reject-building").onclick = () => void saveFeedback("changes");
 $("refresh-building-notes").onclick = () => void inbox.sync();
 window.addEventListener("online", () => void inbox.sync());
 setInterval(() => {
   if (inbox.outbox.length) void inbox.sync();
 }, 15000);
 renderFeedbackNotes();
-void inbox.sync();
+const initialSync = inbox.sync();
 let sheet: Spritesheet;
 try {
   if (source.fingerprint !== CITY_PREFAB_SOURCE.fingerprint)
@@ -214,11 +260,7 @@ function render() {
     sheet,
     $<HTMLInputElement>("geometry").checked,
   );
-  const scale = $<HTMLSelectElement>("scale").value;
-  canvas.style.width =
-    scale === "fit"
-      ? `min(100%, ${stats.width * 2}px)`
-      : `${stats.width * (scale === "large" ? 2 : 1)}px`;
+  fitPreview();
   $("loading").textContent = "";
   $("name").textContent =
     scene.value === "single"
@@ -263,14 +305,14 @@ function render() {
   $<HTMLAnchorElement>("source-link").href = sourceUrl.href;
   const picks = $("block-buildings");
   picks.replaceChildren();
-  for (const p of placements) {
+  for (const p of scene.value === "single" ? [] : placements) {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = p.prefab.name;
     button.onclick = () => {
       select.value = p.prefab.type;
       scene.value = "single";
-      render();
+      showSelection();
     };
     picks.append(button);
   }
@@ -297,11 +339,315 @@ function render() {
     target.value = previousTarget;
   feedbackScene = scene.value;
   updateFeedbackTarget();
+  updateQueue();
+  persistReview();
 }
-for (const control of [scene, $("geometry"), $("scale")])
-  control.addEventListener("change", render);
+for (const control of [$("geometry"), $("scale")]) control.addEventListener("change", render);
+scene.addEventListener("change", showSelection);
 select.addEventListener("change", () => {
   scene.value = "single";
-  render();
+  showSelection();
 });
+
+interface Candidate {
+  key: string;
+  name: string;
+  scene: BuildingReview["scene"];
+  prefab: string;
+  review: BuildingReview;
+}
+interface BatchEntry {
+  key: string;
+  fingerprint: string;
+  threadId: string;
+}
+const candidates: Candidate[] = [];
+const filter = $<HTMLSelectElement>("review-filter");
+let batch: BatchEntry[] = [];
+let paused = false;
+let storedSelection = "";
+try {
+  const stored = JSON.parse(localStorage.getItem("tilefun.building-review.v1") ?? "{}");
+  if (["unchecked", "all", "approved", "changes"].includes(stored.filter))
+    filter.value = stored.filter;
+  if (Array.isArray(stored.batch))
+    batch = stored.batch
+      .filter(
+        (e: BatchEntry) =>
+          e &&
+          typeof e.key === "string" &&
+          typeof e.fingerprint === "string" &&
+          typeof e.threadId === "string",
+      )
+      .slice(-2);
+  paused = !!stored.paused;
+  if (typeof stored.selected === "string") storedSelection = stored.selected;
+} catch {
+  /* Ignore corrupt review state. */
+}
+function persistReview() {
+  try {
+    localStorage.setItem(
+      "tilefun.building-review.v1",
+      JSON.stringify({ filter: filter.value, batch, paused, selected: selectedKey() }),
+    );
+  } catch {
+    $("feedback-sync").textContent = "Review navigation could not be saved in this browser.";
+  }
+}
+function selectedKey() {
+  return scene.value === "single" ? `single:${select.value}` : `block:${scene.value}`;
+}
+function verdictFor(candidate: Candidate) {
+  return currentBuildingVerdict(inbox.notes, source.fingerprint, candidate.review);
+}
+function queue() {
+  return candidates.filter((candidate) => {
+    const verdict = verdictFor(candidate);
+    return (
+      filter.value === "all" || (filter.value === "unchecked" ? !verdict : verdict === filter.value)
+    );
+  });
+}
+function fitPreview() {
+  const stage = required(canvas.parentElement);
+  const scale = $<HTMLSelectElement>("scale").value;
+  const width =
+    scale === "fit"
+      ? Math.min(
+          stage.clientWidth - 2,
+          ((stage.clientHeight - 2) * canvas.width) / canvas.height,
+          canvas.width,
+        )
+      : canvas.width / (scale === "native" ? 2 : 1);
+  canvas.style.width = `${Math.max(1, width)}px`;
+}
+new ResizeObserver(fitPreview).observe(required(canvas.parentElement));
+function updateQueue() {
+  const visible = queue();
+  const approved = candidates.filter((c) => verdictFor(c) === "approved").length;
+  const changes = candidates.filter((c) => verdictFor(c) === "changes").length;
+  const index = visible.findIndex((c) => c.key === selectedKey());
+  if (queueReady && !sending && !paused && index < 0 && visible[0]) {
+    openCandidate(visible[0]);
+    return;
+  }
+  $("review-progress").textContent =
+    `${index < 0 ? 0 : index + 1}/${visible.length} · ${approved} approved · ${changes} need changes`;
+  const empty = verified && !visible.length;
+  $("review-empty").hidden = !empty || paused;
+  $("empty-summary").textContent =
+    `${approved} approved and ${changes} need changes. Changed candidates will return to Unchecked.`;
+  $("review-pause").hidden = !paused;
+  required(document.querySelector<HTMLElement>(".building-review-layout")).hidden = empty || paused;
+  const candidate = candidates.find((c) => c.key === selectedKey());
+  const verdict = candidate && verdictFor(candidate);
+  $("review-verdict").textContent =
+    verdict === "approved"
+      ? "Approved · this appearance"
+      : verdict === "changes"
+        ? "Needs changes · report saved"
+        : "Unchecked · this appearance";
+  for (const id of ["previous-building", "next-building"])
+    $<HTMLButtonElement>(id).disabled = !verified || sending || paused || visible.length < 2;
+  for (const id of ["approve-building", "reject-building", "save-building-note"])
+    $<HTMLButtonElement>(id).disabled = !verified || sending || paused || empty;
+  $<HTMLButtonElement>("undo-building").disabled = sending || !latestDecision();
+  const list = $("review-batch");
+  list.replaceChildren(
+    ...batch.map((entry) => {
+      const item = document.createElement("li");
+      const row = inbox.notes.find((r) => r.threadId === entry.threadId);
+      item.textContent = `${candidates.find((c) => c.key === entry.key)?.name ?? entry.key}: ${row?.note ?? "Report saved"}`;
+      return item;
+    }),
+  );
+  // Keep server status visible even when the review stage is paused or exhausted.
+  $("queue-sync").textContent = inbox.status;
+}
+function openCandidate(candidate: Candidate) {
+  scene.value = candidate.scene;
+  select.value = candidate.prefab;
+  render();
+}
+function navigate(direction: number) {
+  const visible = queue();
+  if (!visible.length) {
+    updateQueue();
+    return;
+  }
+  const current = candidates.findIndex((c) => c.key === selectedKey());
+  for (let step = 1; step <= candidates.length; step++) {
+    const candidate =
+      candidates[(current + direction * step + candidates.length) % candidates.length];
+    if (candidate && visible.includes(candidate)) {
+      openCandidate(candidate);
+      return;
+    }
+  }
+}
+function showSelection() {
+  // An explicit jump is allowed to inspect a reviewed item.
+  const candidate = candidates.find((c) => c.key === selectedKey());
+  if (candidate && !queue().includes(candidate)) {
+    filter.value = "all";
+    persistReview();
+  }
+  render();
+}
+function latestDecision() {
+  const sorted = inbox.notes
+    .filter((r) => r.buildingVerdict && r.buildingReview)
+    .sort(
+      (a, b) =>
+        Date.parse(required(b.buildingVerdict).createdAt) -
+        Date.parse(required(a.buildingVerdict).createdAt),
+    );
+  const seen = new Set<string>();
+  for (const row of sorted) {
+    const key = buildingCaseKey(required(row.buildingReview));
+    if (seen.has(key)) continue;
+    seen.add(key);
+    if (row.buildingVerdict?.value !== "clear") return row;
+  }
+  return undefined;
+}
+$("previous-building").onclick = () => navigate(-1);
+$("next-building").onclick = () => navigate(1);
+filter.onchange = () => {
+  persistReview();
+  if (!queue().some((c) => c.key === selectedKey())) {
+    const first = queue()[0];
+    if (first) openCandidate(first);
+  }
+  updateQueue();
+};
+$("show-all-buildings").onclick = () => {
+  filter.value = "all";
+  filter.onchange?.(new Event("change"));
+  fitPreview();
+};
+$("continue-review").onclick = () => {
+  paused = false;
+  batch = [];
+  persistReview();
+  navigate(1);
+  updateQueue();
+  fitPreview();
+};
+$("check-building-updates").onclick = () => location.reload();
+$("undo-building").onclick = () => {
+  if (sending) return;
+  const previous = latestDecision();
+  if (!previous?.buildingReview || previous.buildingVerdict?.value === "clear") return;
+  sending = true;
+  const id = crypto.randomUUID(),
+    createdAt = new Date().toISOString();
+  inbox.enqueue({
+    ...previous,
+    id,
+    threadId: id,
+    status: "resolved",
+    reply: "",
+    note: "Reopened for review.",
+    createdAt,
+    buildingVerdict: { value: "clear", createdAt },
+  });
+  batch = batch.filter((e) => e.key !== buildingCaseKey(required(previous.buildingReview)));
+  paused = false;
+  filter.value = "unchecked";
+  persistReview();
+  const candidate = candidates.find(
+    (c) => c.key === buildingCaseKey(required(previous.buildingReview)),
+  );
+  if (candidate) openCandidate(candidate);
+  updateQueue();
+  fitPreview();
+  setTimeout(() => {
+    sending = false;
+    updateQueue();
+  }, 160);
+};
+document.addEventListener("keydown", (event) => {
+  if (
+    (event.target instanceof HTMLElement &&
+      (event.target.closest("input,textarea,select,button,a") || event.target.isContentEditable)) ||
+    event.altKey ||
+    event.ctrlKey ||
+    event.metaKey ||
+    event.repeat ||
+    sending ||
+    paused
+  )
+    return;
+  if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+    event.preventDefault();
+    navigate(event.key === "ArrowRight" ? 1 : -1);
+  } else if (event.code === "Space") {
+    event.preventDefault();
+    void saveFeedback("approved");
+  } else if (event.key.toLowerCase() === "x") {
+    event.preventDefault();
+    void saveFeedback("changes");
+  }
+});
+const hashCanvas = document.createElement("canvas");
+for (const entry of [
+  ...CITY_BUILDING_PREFABS.map((p) => ({ scene: "single" as const, prefab: p, name: p.name })),
+  ...(["residential", "mixed", "hotel"] as const).map((s) => ({
+    scene: s,
+    prefab: required(cityPrefabBlock(s)[0]).prefab,
+    name: `${s} block`,
+  })),
+]) {
+  const items =
+    entry.scene === "single"
+      ? [{ prefab: entry.prefab, wx: 0, wy: 0 }]
+      : cityPrefabBlock(entry.scene);
+  drawBuildingShowcase(hashCanvas, items, sheet, false);
+  const pixels = required(hashCanvas.getContext("2d")).getImageData(
+    0,
+    0,
+    hashCanvas.width,
+    hashCanvas.height,
+  ).data;
+  const pixelHash = await sha256(pixels);
+  const review: BuildingReview = {
+    scene: entry.scene,
+    prefabIds: items.map((p) => p.prefab.type),
+    revision: await sha256(new TextEncoder().encode(JSON.stringify(items.map((p) => p.prefab)))),
+    renderFingerprint: await sha256(
+      new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
+    ),
+    url: `/tilefun/building-lab.html?scene=${entry.scene}&prefab=${entry.prefab.type}`,
+  };
+  candidates.push({
+    key: buildingCaseKey(review),
+    name: entry.name,
+    scene: entry.scene,
+    prefab: entry.prefab.type,
+    review,
+  });
+}
+await initialSync;
+queueReady = true;
+batch = batch.filter((entry) => {
+  const candidate = candidates.find((c) => c.key === entry.key);
+  return (
+    candidate?.review.renderFingerprint === entry.fingerprint && verdictFor(candidate) === "changes"
+  );
+});
+if (batch.length < 2) paused = false;
+if (!paused && !queue().some((c) => c.key === selectedKey())) {
+  if ((params.has("scene") || params.has("prefab")) && storedSelection !== selectedKey())
+    filter.value = "all";
+  else {
+    const first = queue()[0];
+    if (first) {
+      scene.value = first.scene;
+      select.value = first.prefab;
+    }
+  }
+}
+persistReview();
 render();

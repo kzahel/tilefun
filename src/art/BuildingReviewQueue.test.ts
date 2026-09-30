@@ -1,0 +1,96 @@
+import { readFileSync } from "node:fs";
+import { describe, expect, it } from "vitest";
+import { type ArtCatalog, required } from "./ArtCatalog.js";
+import { type ArtNote, type BuildingReview, parseArtNote, sameArtTarget } from "./ArtNotes.js";
+import { currentBuildingVerdict } from "./BuildingReviewQueue.js";
+
+const catalog = JSON.parse(readFileSync("public/data/art-catalog.json", "utf8")) as ArtCatalog;
+const sheet = required(catalog.sheets[0]);
+const review: BuildingReview = {
+  scene: "single",
+  prefabIds: ["prop-city-v1-bakery-2"],
+  revision: "a".repeat(64),
+  renderFingerprint: "b".repeat(64),
+  url: "/tilefun/building-lab.html?scene=single&prefab=prop-city-v1-bakery-2",
+};
+function decision(value: "approved" | "changes" | "clear", day = 1): ArtNote {
+  const createdAt = `2026-09-${String(day).padStart(2, "0")}T12:00:00Z`;
+  return {
+    id: `n-${day}`,
+    threadId: `t-${day}`,
+    sheetId: sheet.id,
+    fingerprint: sheet.fingerprint,
+    sheetSize: [sheet.width, sheet.height],
+    rect: [0, 0, 16, 16],
+    sliceKeys: [],
+    intent: "building",
+    status: value === "changes" ? "pending" : "resolved",
+    note: "Human review",
+    reply: "",
+    createdAt,
+    buildingReview: review,
+    buildingVerdict: { value, createdAt },
+  };
+}
+describe("building approval identities", () => {
+  it("does not infer human approval from an ordinary resolved note", () => {
+    const { buildingVerdict: _, ...note } = decision("approved");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
+  });
+  it("invalidates a judgment when art, recipe, or rendered pixels change", () => {
+    const note = decision("approved");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBe("approved");
+    expect(currentBuildingVerdict([note], "c".repeat(64), review)).toBeUndefined();
+    expect(
+      currentBuildingVerdict([note], sheet.fingerprint, { ...review, revision: "c".repeat(64) }),
+    ).toBeUndefined();
+    expect(
+      currentBuildingVerdict([note], sheet.fingerprint, {
+        ...review,
+        renderFingerprint: "c".repeat(64),
+      }),
+    ).toBeUndefined();
+  });
+  it("keeps decisions ordered by human time despite later agent replies", () => {
+    const approval = {
+      ...decision("approved", 1),
+      createdAt: "2026-09-30T12:00:00Z",
+      reply: "Older approval updated later",
+    };
+    const changes = {
+      ...decision("changes", 2),
+      status: "resolved" as const,
+      reply: "Fixed; waiting for human review",
+    };
+    expect(currentBuildingVerdict([changes, approval], sheet.fingerprint, review)).toBe("changes");
+  });
+  it("undo reopens a candidate and never resurrects an older matching approval", () => {
+    expect(
+      currentBuildingVerdict(
+        [decision("approved"), decision("clear", 2)],
+        sheet.fingerprint,
+        review,
+      ),
+    ).toBeUndefined();
+    const changed = {
+      ...decision("changes", 2),
+      buildingReview: { ...review, revision: "c".repeat(64) },
+    };
+    expect(
+      currentBuildingVerdict([decision("approved"), changed], sheet.fingerprint, review),
+    ).toBeUndefined();
+  });
+  it("round trips verdicts and prevents replies from changing them", () => {
+    const note = decision("approved");
+    expect(parseArtNote(note, catalog)).toEqual(note);
+    expect(sameArtTarget(note, { ...note, status: "in-progress", reply: "Reply" })).toBe(true);
+    expect(sameArtTarget(note, decision("changes"))).toBe(false);
+    const { renderFingerprint: _, ...oldReview } = review;
+    expect(() => parseArtNote({ ...note, buildingReview: oldReview }, catalog)).toThrow(
+      "Invalid building verdict",
+    );
+    expect(() =>
+      parseArtNote({ ...note, buildingVerdict: { value: "approved", createdAt: "bad" } }, catalog),
+    ).toThrow("Invalid building verdict");
+  });
+});

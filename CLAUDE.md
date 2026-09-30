@@ -32,3 +32,9 @@ inbox. Read pending art requests with `npm run art:notes`; notes persist in
 ignored `data/art-notes/notes.ndjson`. Update status/reply after acting on the
 exact recorded source revision/selection. Run `npm run art:catalog` after asset
 source definitions change; the build verifies the generated inventory.
+
+Building Lab review uses an unchecked queue with explicit human approvals.
+Two Needs changes reports pause a batch; wait for the user to say “ready” in
+chat before implementing that batch's art fixes. Read the saved reasons with
+`npm run art:notes`. Agent replies/status changes do not count as approval;
+changed recipes or rendered pixels return to review. See `docs/art-workbench.md`.

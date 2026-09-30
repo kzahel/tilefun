@@ -130,6 +130,24 @@ Validation: typecheck/build, 1,063 unit tests, and all 141 browser tests pass.
 Single bakery/ice-cream compositions and block/phone captures were visually
 reviewed. The storefront-fit note remains in progress for human visual review.
 
+Building review workflow checkpoint (2026-09-30): the lab now has one-tap
+Previous/Next, an Unchecked queue, Looks right/Needs changes decisions, and Undo.
+A report requires a reason; two reports pause and retain the batch across reload.
+The user says “ready” in chat before the agent acts on the reports. Approvals and
+reports live in the same persistent art inbox as source annotations, with exact
+source, recipe, and unannotated render fingerprints. Changed appearances return
+to Unchecked; agent replies/resolution never imply human approval. Reviewed
+candidates remain accessible with All/Approved/Needs changes filters. Desktop
+and phone layouts keep voting with the fitted preview. This changes the review
+workflow, not the candidate art or frozen generator lists. Next: review the
+current candidates, fix ready batches, then promote approved families into the
+new dense-city profile described below.
+Validation: typecheck/build and Biome pass; 1,070 unit tests and all 146 browser
+tests pass. Coverage includes offline/reload persistence, shared decisions,
+empty queues, undo, changed-appearance reentry, and phone navigation/voting for
+all 25 previews without scrolling. Desktop/phone captures were inspected; the
+public Building Lab loads the queue and inbox without browser errors.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially
