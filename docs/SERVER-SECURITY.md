@@ -34,3 +34,28 @@ editing open to guests. Public hosting also needs connection admission, abuse
 limits, and authenticated player identity; the profile/connection UUID is not an
 authentication credential. The world inspection HTTP endpoints remain public and
 read-only so that the explorer can inspect a remote server.
+
+Use Node 24 LTS (`nvm use`) and npm 11.19 or newer for development. Node 22.12+
+and current even-numbered releases are also supported. The Node and WebXR types
+are direct dependencies so typechecking does not depend on incidental packages.
+
+Run `npm ci` and `npm ci --prefix worker`, then `npm run typecheck`, `npm test`,
+`npm run check:worker`, `npm run check`, and `npm run build`. For browser/network
+changes, install bundled Chromium with `npx playwright install chromium` and run
+`npm run test:e2e`. `check:worker` tests the room directory and bundles the Worker
+with a dry run; it does not deploy it.
+
+Dependabot checks both npm package trees and pinned GitHub Actions every week.
+CI rejects high/critical audit findings in either tree. Both package manifests
+also pin the reviewed dependency versions whose installation scripts may run.
+After reviewing an update to those packages, use `npm install-scripts approve
+PACKAGE` in its package directory to update that allowlist. Do not approve all
+dependency scripts indiscriminately. An optional native WebRTC dependency is
+only useful when its binding can load; a successful npm install alone is not
+proof that it works.
+
+The public room directory validates names, host names, player counts, IDs, and
+request bytes, and limits each listing to 100 entries. Its heartbeat is still
+an unauthenticated public endpoint. Production abuse controls and ownership
+verification require a separate design; KV's eventual consistency cannot enforce
+atomic room ownership or strong request rate limits.
