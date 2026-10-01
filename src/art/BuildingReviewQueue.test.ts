@@ -94,6 +94,34 @@ describe("building approval identities", () => {
       sameArtTarget(note, { ...note, buildingReview: { ...surface, surfaceRecipe: "changed" } }),
     ).toBe(false);
   });
+  it("round trips district reviews and scopes them to the exact pinned scene", () => {
+    const district: BuildingReview = {
+      ...review,
+      scene: "district",
+      caseId: "district-v1-neighborhood",
+      districtRecipe: "dense-district-v1",
+      prefabIds: ["prop-city-dense-v1-bakery-3"],
+      propTypes: ["prop-street-lamp"],
+      url: "/tilefun/building-lab.html?run=districts&case=district-v1-neighborhood",
+    };
+    const note = { ...decision("approved"), buildingReview: district };
+    expect(parseArtNote(note, catalog)).toEqual(note);
+    expect(buildingCaseKey(district)).toBe("district:district-v1-neighborhood");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, district)).toBe("approved");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
+    for (const change of [
+      { caseId: undefined },
+      { districtRecipe: "unknown" },
+      { surfaceRecipe: "city-surfaces-v1" },
+      { prefabIds: [] },
+      { propTypes: undefined },
+      { url: "/tilefun/building-lab.html?run=surfaces&case=district-v1-neighborhood" },
+      { url: "/tilefun/building-lab.html?run=districts&case=district-v1-green" },
+    ])
+      expect(() =>
+        parseArtNote({ ...note, buildingReview: { ...district, ...change } }, catalog),
+      ).toThrow();
+  });
   it("does not infer human approval from an ordinary resolved note", () => {
     const { buildingVerdict: _, ...note } = decision("approved");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();

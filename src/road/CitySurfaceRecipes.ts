@@ -1,5 +1,5 @@
-/** Audited source pixels shared by surface previews and future district generation.
- * This candidate bank is deliberately separate from the frozen RoadType renderer.
+/** Audited source pixels shared by surface previews and dense district generation.
+ * The neutral tile lookup is pinned by regional-v4; changes need a new bank/version.
  */
 export const CITY_SURFACE_SOURCE = {
   sheetId: "me-complete",
@@ -21,6 +21,8 @@ export interface CitySurfaceCase {
   layout: "straight" | "vertical" | "boulevard" | "corner" | "tee" | "cross";
   roadWidth: number;
   palette: "neutral" | "warm" | "original";
+  /** A lead-in keeps the center divider legible before the raised island. */
+  medianApproach?: "guided";
 }
 export const CITY_SURFACE_CASES: readonly CitySurfaceCase[] = [
   {
@@ -50,6 +52,7 @@ export const CITY_SURFACE_CASES: readonly CitySurfaceCase[] = [
   {
     id: "surface-v1-boulevard",
     name: "Divided boulevard",
+    medianApproach: "guided",
     layout: "boulevard",
     roadWidth: 12,
     palette: "neutral",
@@ -212,10 +215,10 @@ export function composeCitySurface(c: CitySurfaceCase): SurfacePiece[] {
   if (c.layout === "boulevard") {
     // The rounded 32px island is authored separately from the rectangular bank.
     // Repeat only its middle; retain each original end cap and south curb shadow.
-    for (let x = 6; x < 26; x++)
+    for (let x = 9; x < 23; x++)
       add(
         "Raised median",
-        x === 6 ? 224 : x === 25 ? 272 : 240,
+        x === 9 ? 224 : x === 22 ? 272 : 240,
         96,
         16,
         32,
@@ -223,6 +226,10 @@ export function composeCitySurface(c: CitySurfaceCase): SurfacePiece[] {
         11 * 16,
         "median",
       );
+    if (c.medianApproach === "guided") {
+      for (const x of [0, 2, 4, 6, 8, 23, 25, 27, 29, 31])
+        add("Median centerline approach", 32, 64, 16, 16, x * 16, 12 * 16 - 8, "paint");
+    }
   } else if (c.roadWidth >= 6) {
     for (let x = 0; x < SURFACE_COLS; x += 2)
       if (

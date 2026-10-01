@@ -2,6 +2,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
 import { type CountryPlan, CountrySource } from "./regional/CountrysidePlanner.js";
+import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
 import { DistrictSource } from "./regional/DistrictStrategy.js";
 import {
@@ -40,10 +41,10 @@ export function* overviewSteps(
   const descriptor = normalizeGeneration(input);
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
-    const source = new DistrictSource(
-      regionalWorld(descriptor.seed),
-      descriptor.version === "regional-v3",
-    );
+    const source =
+      descriptor.version === "regional-v4"
+        ? new DenseDistrictSource(regionalWorld(descriptor.seed))
+        : new DistrictSource(regionalWorld(descriptor.seed), descriptor.version === "regional-v3");
     const districts: DistrictPlan[] = [];
     if (
       descriptor.version !== "regional-v1" &&
@@ -57,7 +58,8 @@ export function* overviewSteps(
         const count =
           plan.streets.length +
           plan.blocks.length +
-          plan.blocks.reduce((n, block) => n + block.lots.length, 0);
+          plan.blocks.reduce((n, block) => n + block.lots.length, 0) +
+          (plan.actors?.length ?? 0);
         if (features + count > request.limits.maxFeatures) break;
         districts.push(plan);
         features += count;
@@ -69,7 +71,8 @@ export function* overviewSteps(
         n +
         plan.streets.length +
         plan.blocks.length +
-        plan.blocks.reduce((v, block) => v + block.lots.length, 0),
+        plan.blocks.reduce((v, block) => v + block.lots.length, 0) +
+        (plan.actors?.length ?? 0),
       0,
     );
     const countryside: CountryPlan[] = [];

@@ -1605,6 +1605,10 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:88"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
         }
       ]
@@ -2209,7 +2213,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:134"
+          "source": "src/generation/regional/DistrictPlanner.ts:137"
         },
         {
           "system": "World generation",
@@ -2313,6 +2317,10 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:84"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:217"
         },
         {
@@ -2380,6 +2388,10 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:183"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:89"
         },
         {
           "system": "World generation",
@@ -2463,6 +2475,10 @@
         },
         {
           "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:90"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/SettledStrategy.ts:85"
         }
       ]
@@ -2519,11 +2535,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2545,11 +2561,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2571,11 +2587,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2597,11 +2613,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2623,11 +2639,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2649,11 +2665,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2675,11 +2691,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2701,11 +2717,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2727,11 +2743,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:73"
+          "source": "src/generation/regional/BuildingRecipes.ts:74"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
+          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -2753,11 +2769,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2779,11 +2795,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2805,11 +2821,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2831,11 +2847,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2857,11 +2873,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2883,11 +2899,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2909,11 +2925,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2935,11 +2951,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2961,11 +2977,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -2987,11 +3003,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -3013,11 +3029,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -3039,11 +3055,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
+          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -3065,15 +3081,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3095,15 +3111,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3125,15 +3141,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3155,15 +3171,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3185,15 +3201,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3215,15 +3231,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:129"
+          "source": "src/generation/regional/DistrictPlanner.ts:132"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:195"
+          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -3245,11 +3261,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3271,11 +3287,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3297,11 +3313,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3323,11 +3339,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3349,11 +3365,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3375,11 +3391,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3401,11 +3417,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3427,11 +3443,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -3453,11 +3469,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:130"
+          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -7344,6 +7360,1086 @@
       ]
     },
     {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        1904,
+        112,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1904,
+        80,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2016,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2144,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2016,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-3:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2144,
+        80,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-bay-3 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        1904,
+        112,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        1904,
+        64,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1904,
+        80,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2016,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2144,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2016,
+        64,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:9",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:10",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:11",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:12",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2144,
+        64,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 13",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:13",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2016,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 14",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:14",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 15",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:15",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 16",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:16",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 17",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-narrow-5:17",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2144,
+        80,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-narrow-5 · piece 18",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        1904,
+        112,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1904,
+        80,
+        112
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2016,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2144,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2016,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:9",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:10",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-condo-bay-5:11",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2144,
+        80,
+        80
+      ],
+      "label": "prop-city-dense-v1-condo-bay-5 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1824,
+        272,
+        32
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1872,
+        272,
+        16
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1904,
+        272,
+        112
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2032,
+        272,
+        64
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        2112,
+        272,
+        144
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:5",
+      "sheetId": "me-complete",
+      "rect": [
+        2016,
+        2256,
+        48,
+        32
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-hotel-4-roof-sign:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1968,
+        1744,
+        144,
+        64
+      ],
+      "label": "prop-city-dense-v1-hotel-4-roof-sign · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-bakery-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-dense-v1-bakery-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-bakery-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-bakery-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-bakery-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-bakery-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-bakery-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        2384,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-bakery-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-butcher-2:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-dense-v1-butcher-2 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-butcher-2:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-butcher-2 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-butcher-2:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        2384,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-butcher-2 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-ice-cream-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-dense-v1-ice-cream-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-ice-cream-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-ice-cream-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-ice-cream-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-ice-cream-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-ice-cream-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1600,
+        2384,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-ice-cream-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-gym-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-dense-v1-gym-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-gym-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-gym-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-gym-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-dense-v1-gym-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-dense-v1-gym-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1760,
+        2384,
+        112,
+        80
+      ],
+      "label": "prop-city-dense-v1-gym-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
       "id": "surface:city-v1:96:1984:16:16",
       "sheetId": "me-complete",
       "rect": [
@@ -8186,6 +9282,490 @@
         {
           "system": "Road foundation review (candidate)",
           "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:96:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:96:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1984,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:32:1968:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1968,
+        16,
+        8
+      ],
+      "label": "Dense city surface v1 · Center line · top",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:32:1976:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1976,
+        16,
+        8
+      ],
+      "label": "Dense city surface v1 · Center line · bottom",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:1984:8:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1984,
+        8,
+        16
+      ],
+      "label": "Dense city surface v1 · Center line · left",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:24:1984:8:16",
+      "sheetId": "me-complete",
+      "rect": [
+        24,
+        1984,
+        8,
+        16
+      ],
+      "label": "Dense city surface v1 · Center line · right",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:64:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1984,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Crossing · left",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:80:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1984,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Crossing · right",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:2016:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2016,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Crossing · top",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:2032:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2032,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Crossing · bottom",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:96:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1952,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:112:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:112:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1952,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:32:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1952,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:32:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:64:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1920,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1920,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:64:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1952,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:64:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1952,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:16:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:dense-v1:80:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1904,
+        16,
+        16
+      ],
+      "label": "Dense city surface v1 · Asphalt fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Dense districts (regional-v4, promoted)",
+          "source": "src/road/DenseCitySurface.ts"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
         }
       ]
     },
@@ -10331,11 +11911,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:755"
+          "source": "src/server/Realm.ts:756"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1047"
+          "source": "src/server/Realm.ts:1048"
         }
       ]
     },
@@ -11210,6 +12790,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:132"
         }
       ]
     },
@@ -11692,6 +13276,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:206"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:88"
         },
         {
           "system": "World generation",

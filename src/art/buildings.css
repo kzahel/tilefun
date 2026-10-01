@@ -71,7 +71,8 @@
 #scene-options[hidden],
 #prefab-options[hidden],
 #street-options[hidden],
-#surface-options[hidden] {
+#surface-options[hidden],
+#district-options[hidden] {
   display: none;
 }
 #hotel-sign {

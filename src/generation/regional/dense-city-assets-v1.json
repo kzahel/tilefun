@@ -1,0 +1,611 @@
+{
+  "version": "dense-city-assets-v1",
+  "source": {
+    "sheetId": "me-complete",
+    "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "rect": [1104, 1808, 1136, 864],
+    "noteId": "d9263255-88a1-4f83-90fb-e50fbfb5c3b7"
+  },
+  "buildings": [
+    {
+      "sourceType": "prop-city-v1-condo-bay-3",
+      "type": "prop-city-dense-v1-condo-bay-3",
+      "kind": "apartment",
+      "facing": "south",
+      "width": 192,
+      "height": 288,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 64,
+        "dy": 24
+      },
+      "parts": [
+        {
+          "frameCol": 69,
+          "frameRow": 119,
+          "spriteWidth": 112,
+          "spriteHeight": 112,
+          "dx": -40,
+          "dy": -176
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 119,
+          "spriteWidth": 80,
+          "spriteHeight": 112,
+          "dx": 56,
+          "dy": -176
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 126,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -128
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -80
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 134,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": -40,
+          "dy": 0
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 126,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -128
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -80
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 134,
+          "spriteWidth": 80,
+          "spriteHeight": 80,
+          "dx": 56,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-condo-narrow-5",
+      "type": "prop-city-dense-v1-condo-narrow-5",
+      "kind": "apartment",
+      "facing": "south",
+      "width": 256,
+      "height": 384,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 96,
+        "dy": 24
+      },
+      "parts": [
+        {
+          "frameCol": 69,
+          "frameRow": 119,
+          "spriteWidth": 112,
+          "spriteHeight": 112,
+          "dx": -72,
+          "dy": -272
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 119,
+          "spriteWidth": 64,
+          "spriteHeight": 112,
+          "dx": 16,
+          "dy": -272
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 119,
+          "spriteWidth": 80,
+          "spriteHeight": 112,
+          "dx": 88,
+          "dy": -272
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 126,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -72,
+          "dy": -224
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -72,
+          "dy": -80
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -72,
+          "dy": -128
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -72,
+          "dy": -176
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 134,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": -72,
+          "dy": 0
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 126,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 16,
+          "dy": -224
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 16,
+          "dy": -80
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 16,
+          "dy": -128
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 16,
+          "dy": -176
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 134,
+          "spriteWidth": 64,
+          "spriteHeight": 80,
+          "dx": 16,
+          "dy": 0
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 126,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 88,
+          "dy": -224
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 88,
+          "dy": -80
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 88,
+          "dy": -128
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 88,
+          "dy": -176
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 134,
+          "spriteWidth": 80,
+          "spriteHeight": 80,
+          "dx": 88,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-condo-bay-5",
+      "type": "prop-city-dense-v1-condo-bay-5",
+      "kind": "apartment",
+      "facing": "south",
+      "width": 192,
+      "height": 384,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 64,
+        "dy": 24
+      },
+      "parts": [
+        {
+          "frameCol": 69,
+          "frameRow": 119,
+          "spriteWidth": 112,
+          "spriteHeight": 112,
+          "dx": -40,
+          "dy": -272
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 119,
+          "spriteWidth": 80,
+          "spriteHeight": 112,
+          "dx": 56,
+          "dy": -272
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 126,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -224
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -80
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -128
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -40,
+          "dy": -176
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 134,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": -40,
+          "dy": 0
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 126,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -224
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -80
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -128
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 56,
+          "dy": -176
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 134,
+          "spriteWidth": 80,
+          "spriteHeight": 80,
+          "dx": 56,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-hotel-4-roof-sign",
+      "type": "prop-city-dense-v1-hotel-4-roof-sign",
+      "kind": "apartment",
+      "facing": "south",
+      "width": 272,
+      "height": 408,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 0,
+        "dy": 24
+      },
+      "parts": [
+        {
+          "frameCol": 119,
+          "frameRow": 114,
+          "spriteWidth": 272,
+          "spriteHeight": 32,
+          "dx": 0,
+          "dy": -336
+        },
+        {
+          "frameCol": 119,
+          "frameRow": 117,
+          "spriteWidth": 272,
+          "spriteHeight": 16,
+          "dx": 0,
+          "dy": -320
+        },
+        {
+          "frameCol": 119,
+          "frameRow": 119,
+          "spriteWidth": 272,
+          "spriteHeight": 112,
+          "dx": 0,
+          "dy": -208
+        },
+        {
+          "frameCol": 119,
+          "frameRow": 127,
+          "spriteWidth": 272,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -144
+        },
+        {
+          "frameCol": 119,
+          "frameRow": 132,
+          "spriteWidth": 272,
+          "spriteHeight": 144,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frameCol": 126,
+          "frameRow": 141,
+          "spriteWidth": 48,
+          "spriteHeight": 32,
+          "dx": 0,
+          "dy": 16
+        },
+        {
+          "frameCol": 123,
+          "frameRow": 109,
+          "spriteWidth": 144,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -344
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-bakery-3",
+      "type": "prop-city-dense-v1-bakery-3",
+      "kind": "shop",
+      "facing": "south",
+      "width": 112,
+      "height": 272,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": 40,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -176
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 70,
+          "frameRow": 149,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": 0,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-butcher-2",
+      "type": "prop-city-dense-v1-butcher-2",
+      "kind": "shop",
+      "facing": "south",
+      "width": 112,
+      "height": 208,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": -16,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 80,
+          "frameRow": 149,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": 0,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-ice-cream-3",
+      "type": "prop-city-dense-v1-ice-cream-3",
+      "kind": "shop",
+      "facing": "south",
+      "width": 112,
+      "height": 272,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": 0,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -176
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 100,
+          "frameRow": 149,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": 0,
+          "dy": 0
+        }
+      ]
+    },
+    {
+      "sourceType": "prop-city-v1-gym-3",
+      "type": "prop-city-dense-v1-gym-3",
+      "kind": "shop",
+      "facing": "south",
+      "width": 112,
+      "height": 272,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": 40,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -176
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 110,
+          "frameRow": 149,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": 0,
+          "dy": 0
+        }
+      ]
+    }
+  ]
+}

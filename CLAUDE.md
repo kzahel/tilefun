@@ -52,6 +52,22 @@ The next district milestones are in `docs/tactical/007-dense-city-districts-and-
 Road foundation review is `/tilefun/building-lab.html?run=surfaces`, with nine
 source-backed width/curb/crossing/divider scenes, its own queue/pause, and shared
 `src/road/CitySurfaceRecipes.ts` composition. It is a candidate surface contract
-for the next district revision; frozen worlds are unchanged. Review surfaces
-before adding more props/dense blocks. Surface notes carry a case ID and
+for regional-v4; earlier world revisions are unchanged. The approved neutral
+lookup is now promoted, while the revised divider remains a candidate. Surface
+notes carry a case ID and
 `surfaceRecipe`, with no fake building or prop IDs.
+
+Dense neighborhood review is `/tilefun/building-lab.html?run=districts`, with
+three views of one real `regional-v4` world (seed 2026, tile 300,519). The lab,
+explorer and game use the same plan, pinned building factories and terrain
+renderer. The explorer link supports Play here; preview walkers are initial
+poses, while the game simulates the planned routes. Review/navigation/pause
+remain independent of the other runs. District notes carry `districtRecipe`,
+case ID, promoted building IDs and prop types. Keep new runs indexed in tools.
+
+`src/generation/regional/dense-city-assets-v1.json` is an immutable promotion
+snapshot, not build output. Do not regenerate it from changing review candidates.
+Regional v4 pins the neutral surface lookup and persistent RoadType IDs 5–14;
+its geometry, assets, surface choices and realized fixtures have freeze tests.
+Future output changes require a new revision and promoted IDs/bank. The default
+regional choice remains v3; choose Dense districts (v4) explicitly for this demo.

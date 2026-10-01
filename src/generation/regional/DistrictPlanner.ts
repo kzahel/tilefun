@@ -1,4 +1,5 @@
 import { TILE_SIZE } from "../../config/constants.js";
+import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import { buildingRecipe } from "./BuildingRecipes.js";
 import type { Bounds, Point, Settlement } from "./RegionalPlanner.js";
@@ -25,6 +26,8 @@ export interface DistrictBlock {
   lots: DistrictLot[];
 }
 export interface DistrictPlan {
+  /** Optional planned routes; absent in frozen v2/v3 plan records. */
+  readonly actors?: ActorPlacement[];
   style?: "market" | "garden" | "residential";
   id: string;
   settlementId: string;

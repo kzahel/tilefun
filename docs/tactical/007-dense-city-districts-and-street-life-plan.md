@@ -1,8 +1,10 @@
 # Dense city districts and street life
 
-Status: phase-0 street starter and road foundation reviews implemented,
-2026-10-01; road surfaces are now the priority human checkpoint. The user accepted the building showcase in chat after hotel panel
-removal (`b81d3b4`). District generation and simulation phases remain planned.
+Status: phase-1 playable dense neighborhood ready for human review, 2026-10-01.
+Eight road foundation scenes are approved; the revised divider is unchecked.
+The first `regional-v4` checkpoint has three views and an explorer/game visit.
+Phases 2–7 remain planned. The user accepted the building showcase in chat after
+hotel panel removal (`b81d3b4`); the original review history remains intact.
 
 This is the next implementation roadmap after
 [Tactical 006](006-art-workbench-and-city-variety-plan.md). That document keeps
@@ -22,7 +24,7 @@ Start with a convincing playable neighborhood using the art we have. Expand
 props and building families as each place needs them. Auditing the entire
 spritesheet is not a prerequisite for the first city block.
 
-## What exists and what needs to change
+## Baseline before phase 1
 
 - `CityBuildingPrefabs.ts` has 28 reviewed showcase configurations: bay-front
   apartments, hotels with optional signage, and five shop/apartment families.
@@ -276,10 +278,9 @@ save/reload tombstones and exact explorer-to-game initial-state parity.
 Preview and authoritative runtime positions can differ after simulation starts;
 compare identical initial state or controlled simulation time.
 
-**Recommended next implementation:** approve/fix the road foundation first.
-Then carry the accepted surfaces and existing building/prop palette into the
-shared playable dense-block slice. Furnish its curb and parking in phase 2
-before broadening public spaces and building families.
+**Next checkpoint:** review the playable dense neighborhood and changed divider
+recorded below, then handle the ready-batch fixes. After acceptance, phase 2
+furnishes the curb and parking before broadening public spaces/building families.
 
 
 ## Phase-0 checkpoint — first review run (2026-10-01)
@@ -353,3 +354,74 @@ queues, offline pause/reload/undo, changed-appearance reopening and real inbox
 round trips. The inventory has 497 source uses. The live deployment shows all
 nine cases with phone navigation and voting in view; no live test feedback or
 approvals were submitted.
+
+## Phase-1 checkpoint — playable dense neighborhood (2026-10-01)
+
+The user reviewed all nine surface cases, approved eight and reported the
+boulevard divider as too abrupt. After “Proceed with next,” its raised island
+was shortened and given source-backed dashed lead-ins. Only that case reopens;
+the other eight recipe and rendered fingerprints are preserved. The divider
+remains a review candidate, outside this first district's surface palette.
+
+[Review the dense neighborhood](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=districts).
+Three views cover one generated two-by-two neighborhood: the whole place,
+apartment/shop frontage and central crossing, and the hotel/pocket green.
+The existing queue, drafts, hiding approved cases, next/previous, offline inbox,
+undo and two-report pause are reused with independent run state. Follow its
+explorer link, then **Play here**, to visit the actual neighborhood. The central
+index links both the run and the explicit v4 explorer bookmark.
+
+The pinned descriptor is `{type: regional, version: regional-v4, seed: 2026,
+preset: temperate-v1}`, centered at tile **300,519**. There are eight building
+lots, six connected street segments, continuous sidewalks/crossings, four block
+loops plus a crossing walker, and one pocket green using existing tree, bench
+and fountain art. All facades face south. Buildings fit their native art
+extents; front approaches connect to sidewalks and use normal shared doors,
+colliders and persistent apartment/shop interiors. Only small seeded height
+variation is introduced here, not a full district-profile catalogue.
+
+`DenseDistrictPlanner.ts` owns the same plan for overview, real chunks,
+placement queries, interiors and actor routes. The actual cached TileRenderer
+uses the approved neutral `CitySurfaceRecipes.ts` lookup with cell-contained
+paint clips from `DenseCitySurface.ts`. Persistent roadGrid IDs 0–4 retain their
+meaning; 5–14 pin these new surfaces. Game and explorer reuse the renderer,
+normal prop/actor factories, authoritative movement and procedural residency.
+The review lab also renders ordinary generated chunks, rather than drawing its
+own street/building implementation. Geometry draws native-art reservations,
+doors, factory colliders and shared routes. Preview actors are labeled initial
+poses; animation is in the game.
+
+`dense-city-assets-v1.json` promotes eight reviewed building variants under
+new immutable `prop-city-dense-v1-*` identities, including optional roof-sign
+hotel art. This is a checked-in snapshot, never regenerated during builds.
+Mutable candidate edits cannot alter a saved v4 facade/collider/door. The
+inventory identifies these promoted building pieces and exact surface clips,
+including their generation/render consumers. New realization changes require
+a new pinned revision; do not update v4's freeze fixtures to accommodate fixes.
+
+Classic/island and regional v1/v2/v3 remain unchanged; v3 remains the default.
+The new choice appears in the existing game/explorer revision pickers and
+resolved descriptors work through worker and saved-world boundaries. V4 uses
+v1 regional geography outside its compact settlement core; v3 farm/woodland
+content, complete regional road joins, fully varied town/city profiles, curb
+ramps, general crowd routing and populated parks are still later milestones.
+Existing detail, prop and actor caps remain in place. No new approvals were
+created by the agent.
+
+Validation: typecheck/build and Biome pass (74 existing warnings); 1,091 unit
+tests and all 168 browser tests pass. The inventory has 579 source uses. The
+live deployment’s emulated phone preview shows three unchecked views and keeps voting in view; the
+road queue shows only the changed divider, with eight approvals preserved.
+No live test judgments or new feedback threads were submitted. Source captures inspected for all
+three neighborhood views and the changed divider. Tests check pinned asset/
+surface choices, old/new realization signatures, native lot/door clearances,
+actual factory collisions along complete walker routes, negative owners, chunk
+seams, tall cross-chunk residency, actual park/street sprite bounds, tombstones, browser phone navigation, review
+isolation/offline pause, inbox round trips, actual explorer-worker/game buffers
+and placements, moving game pedestrians, shop/apartment entry, and saved edits.
+The v3 baseline signature was additionally checked against the prior commit.
+Eight approved road scenes pass exact composition/render fingerprint checks.
+
+**Next:** human review of these three views and the changed divider, then the
+ready-batch fixes. After acceptance, phase 2 adds intentional furnishing zones
+and curb/lot parking before expanding park/square and commercial families.

@@ -5,6 +5,17 @@ export enum RoadType {
   Sidewalk = 2,
   LineWhite = 3,
   LineYellow = 4,
+  // Pinned city-surfaces-v1 semantic cells. Existing IDs remain frozen.
+  CityAsphalt = 5,
+  CityPavement = 6,
+  CityLineHTop = 7,
+  CityLineHBottom = 8,
+  CityLineVLeft = 9,
+  CityLineVRight = 10,
+  CityCrossHLeft = 11,
+  CityCrossHRight = 12,
+  CityCrossVTop = 13,
+  CityCrossVBottom = 14,
 }
 
 /** True if the road type is any non-None road (draws asphalt base). */

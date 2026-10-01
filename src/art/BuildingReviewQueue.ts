@@ -3,7 +3,7 @@ import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
 export function buildingCaseKey(
   review: Pick<BuildingReview, "scene" | "prefabIds" | "caseId">,
 ): string {
-  if (review.scene === "street" || review.scene === "surface")
+  if (review.scene === "street" || review.scene === "surface" || review.scene === "district")
     return `${review.scene}:${review.caseId}`;
   return review.scene === "single"
     ? `single:${review.prefabIds.join(",")}`

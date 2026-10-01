@@ -1,6 +1,7 @@
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { DenseDistrictStrategy } from "./regional/DenseDistrictStrategy.js";
 import { DistrictStrategy } from "./regional/DistrictStrategy.js";
 import { RegionalStrategy } from "./regional/RegionalStrategy.js";
 import { SettledStrategy } from "./regional/SettledStrategy.js";
@@ -46,16 +47,26 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
         placements: () => ({ placements: [], newIntersectionKeys: [] }),
       };
     case "regional": {
-      const terrain =
-        descriptor.version === "regional-v1"
-          ? new RegionalStrategy(regionalWorld(descriptor.seed))
-          : descriptor.version === "regional-v2"
-            ? new DistrictStrategy(regionalWorld(descriptor.seed))
-            : new SettledStrategy(regionalWorld(descriptor.seed));
+      const world = regionalWorld(descriptor.seed);
+      let terrain: RegionalStrategy;
+      switch (descriptor.version) {
+        case "regional-v1":
+          terrain = new RegionalStrategy(world);
+          break;
+        case "regional-v2":
+          terrain = new DistrictStrategy(world);
+          break;
+        case "regional-v3":
+          terrain = new SettledStrategy(world);
+          break;
+        case "regional-v4":
+          terrain = new DenseDistrictStrategy(world);
+          break;
+      }
       return {
         descriptor,
         terrain,
-        ...(terrain instanceof SettledStrategy
+        ...(terrain instanceof SettledStrategy || terrain instanceof DenseDistrictStrategy
           ? { actors: (cx: number, cy: number) => terrain.actors(cx, cy) }
           : {}),
         placements: (cx, cy) => ({

@@ -6,14 +6,27 @@ import { inspectionPlacements } from "../src/persistence/WorldInspection.js";
 import { Chunk } from "../src/world/Chunk.js";
 import { chunkData } from "../src/world/ChunkData.js";
 
-const generation = createDescriptor("regional", 2026);
+const baselineGeneration = createDescriptor("regional", 2026);
 for (const fixture of [
   { name: "farm", x: 677, y: 1320, actor: "farm:0:1:cow" },
   { name: "woodland", x: -985, y: -985, actor: "woodland:-8:-8:crow" },
+  {
+    name: "dense",
+    x: 300,
+    y: 519,
+    actor: "settlement:0:0:crossing:walker",
+    generation: {
+      type: "regional",
+      version: "regional-v4",
+      seed: 2026,
+      preset: "temperate-v1",
+    } as const,
+  },
 ]) {
   test(`shared ${fixture.name} tiles, props, and actors render and match the actual worker`, async ({
     page,
   }) => {
+    const generation = "generation" in fixture ? fixture.generation : baselineGeneration;
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.setViewportSize({ width: 1440, height: 1000 });

@@ -204,6 +204,9 @@ and accessories can expand the library after this review.
 See [Tactical 006](tactical/006-art-workbench-and-city-variety-plan.md) for the
 progression from annotated source art to audited building recipes and denser,
 varied city profiles using shared explorer/game realization.
+[Tactical 007](tactical/007-dense-city-districts-and-street-life-plan.md) records
+the current playable dense-neighborhood review and remaining street/parking,
+park/square, architecture, market and crowd phases.
 
 ## Street starter review
 
@@ -255,3 +258,42 @@ for backwards compatibility; no building IDs stand in for terrain. Source-use
 inventory labels every sampled surface rect as a candidate, with direct atlas
 links in the review. `CitySurfaceRecipes.ts` owns composition for reuse in the
 next district renderer; this checkpoint does not change existing worldgen.
+
+## Playable dense neighborhood review
+
+Open [Dense neighborhood review](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=districts),
+linked from the central index. Three independently reviewed windows show the
+whole neighborhood, apartment/shop frontage, and hotel/pocket green. They are
+views of one actual `regional-v4` seed-2026 world at tile 300,519, not separately
+assembled art fixtures. **Explore / play this neighborhood** opens the existing
+explorer with the complete descriptor; **Play here** enters the same generator.
+
+The shared Building Lab controls preserve drafts, next/previous, approval hiding,
+offline feedback, undo and two-report pause. Notes identify `scene: district`,
+`districtRecipe: dense-district-v1`, the case, promoted building IDs, prop types,
+composition hash and unannotated render fingerprint. They do not approve the
+underlying building or road cases. CLI and source-atlas history link back to the
+exact view. The three new views initially have no human approvals.
+
+Geometry shows reserved native-art lots/doors, actual factory colliders, and
+planned pedestrian routes. Walkers in the preview are initial poses; gameplay
+uses existing authoritative waypoint movement and collision. Shops/apartments
+use existing persistent interiors. Rear/side space stays landscaped because
+these building elevations face south. The pocket green is deliberately sparse;
+parking, furnishing zones and more varied public-space recipes follow review.
+
+`dense-city-assets-v1.json` pins eight previously reviewed building variants,
+source fingerprint and native pieces under `prop-city-dense-v1-*` IDs. Builds
+never regenerate this snapshot from editable candidates. The catalogue labels
+these pieces and promoted neutral surface clips as **Dense districts
+(regional-v4, promoted)** and links the manifest/composer/renderer. Existing
+review candidates remain separately labeled. The divider feedback changed
+only its candidate scene; the eight other approved road scenes retain their
+exact composition and rendered fingerprints. The divider is not generated
+by the first dense district.
+
+Classic/island and Regional v1/v2/v3 remain frozen. Regional v4 explicitly uses
+the original regional geography outside a compact four-block settlement core;
+it does not include v3's farms/woodlands, broader city-profile variation or final
+regional-road joins. The default stays v3. Future appearance/layout changes must
+use a new pinned revision so saved v4 worlds do not silently change.

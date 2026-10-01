@@ -11,6 +11,7 @@ import {
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
 } from "../config/constants.js";
+import { denseCitySurfacePieces, isCitySurface } from "../road/DenseCitySurface.js";
 import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
 import { getRoadSheetKey, isRoad, RoadType } from "../road/RoadType.js";
 import type { Chunk } from "../world/Chunk.js";
@@ -19,6 +20,7 @@ import { getTileDef, TileId } from "../world/TileRegistry.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import type { ElevationItem } from "./SceneItem.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
@@ -356,7 +358,17 @@ export class TileRenderer {
 
         // 4. Road layer (asphalt base + overlay autotile)
         const road = chunk.getRoad(lx, ly);
-        if (isRoad(road)) {
+        if (isCitySurface(road) && getGlobalRoad) {
+          const sheet = sheets.get("me-complete");
+          if (sheet)
+            drawCitySurfacePieces(
+              offCtx,
+              sheet,
+              denseCitySurfacePieces(road, baseTx + lx, baseTy + ly, getGlobalRoad),
+              baseTx * TILE_SIZE,
+              baseTy * TILE_SIZE,
+            );
+        } else if (isRoad(road)) {
           // Draw asphalt base fill from complete tileset (col=0, row=5)
           if (variants) {
             variants.sheet.drawTile(offCtx, 0, 5, dx, dy, 1);

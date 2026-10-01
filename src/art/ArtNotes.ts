@@ -2,11 +2,12 @@ import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
 export interface BuildingReview {
-  scene: "single" | "residential" | "mixed" | "hotel" | "street" | "surface";
+  scene: "single" | "residential" | "mixed" | "hotel" | "street" | "surface" | "district";
   /** Stable context identity for a surface or street scene, independent of its building. */
   caseId?: string;
   propTypes?: string[];
   surfaceRecipe?: string;
+  districtRecipe?: "dense-district-v1";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -39,7 +40,9 @@ function parseBuildingReview(value: unknown): BuildingReview {
   if (!value || typeof value !== "object") throw new Error("Invalid building review");
   const v = value as Record<string, unknown>;
   if (
-    !["single", "residential", "mixed", "hotel", "street", "surface"].includes(v.scene as string) ||
+    !["single", "residential", "mixed", "hotel", "street", "surface", "district"].includes(
+      v.scene as string,
+    ) ||
     !Array.isArray(v.prefabIds) ||
     (v.scene === "surface" ? v.prefabIds.length !== 0 : !v.prefabIds.length) ||
     v.prefabIds.length > 30 ||
@@ -53,6 +56,8 @@ function parseBuildingReview(value: unknown): BuildingReview {
     !/^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url)
   )
     throw new Error("Invalid building review");
+  if (v.scene !== "district" && v.districtRecipe !== undefined)
+    throw new Error("Invalid district recipe context");
   if (v.scene === "street") {
     if (v.surfaceRecipe !== undefined) throw new Error("Invalid street recipe context");
     if (
@@ -78,7 +83,26 @@ function parseBuildingReview(value: unknown): BuildingReview {
       url.searchParams.get("case") !== v.caseId
     )
       throw new Error("Invalid surface review context");
-  } else if (v.caseId !== undefined || v.propTypes !== undefined || v.surfaceRecipe !== undefined)
+  } else if (v.scene === "district") {
+    const url = new URL(v.url, "https://tilefun.invalid");
+    if (
+      typeof v.caseId !== "string" ||
+      !/^district-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
+      v.districtRecipe !== "dense-district-v1" ||
+      v.surfaceRecipe !== undefined ||
+      !Array.isArray(v.propTypes) ||
+      v.propTypes.length > 64 ||
+      v.propTypes.some((id) => typeof id !== "string" || !/^prop-[a-z0-9-]{1,100}$/.test(id)) ||
+      url.searchParams.get("run") !== "districts" ||
+      url.searchParams.get("case") !== v.caseId
+    )
+      throw new Error("Invalid district review context");
+  } else if (
+    v.caseId !== undefined ||
+    v.propTypes !== undefined ||
+    v.surfaceRecipe !== undefined ||
+    v.districtRecipe !== undefined
+  )
     throw new Error("Invalid building review context");
   return {
     scene: v.scene as BuildingReview["scene"],
@@ -87,6 +111,13 @@ function parseBuildingReview(value: unknown): BuildingReview {
       : {}),
     ...(v.scene === "surface"
       ? { caseId: v.caseId as string, surfaceRecipe: v.surfaceRecipe as string }
+      : {}),
+    ...(v.scene === "district"
+      ? {
+          caseId: v.caseId as string,
+          districtRecipe: "dense-district-v1" as const,
+          propTypes: [...(v.propTypes as string[])],
+        }
       : {}),
     prefabIds: [...v.prefabIds],
     revision: v.revision,

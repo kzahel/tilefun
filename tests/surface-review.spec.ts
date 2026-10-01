@@ -1,7 +1,13 @@
+import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
 import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
-import { CITY_SURFACE_CASES, composeCitySurface } from "../src/road/CitySurfaceRecipes.js";
+import {
+  CITY_SURFACE_CASES,
+  citySurfaceComposition,
+  composeCitySurface,
+} from "../src/road/CitySurfaceRecipes.js";
+import approvedSurfaces from "./fixtures/road-foundation-v1.json" with { type: "json" };
 
 const URL = "/tilefun/building-lab.html?run=surfaces";
 const ready = '#app[data-ready="true"]';
@@ -26,6 +32,26 @@ test("all surface recipes render exact source pixels and keep phone review contr
     await expect(page.locator("#recipe-id")).toHaveText(c.id);
     await expect(page.locator("#name")).toHaveText(c.name);
     const pieces = composeCitySurface(c);
+    const approved = approvedSurfaces[c.id as keyof typeof approvedSurfaces];
+    if (approved) {
+      expect(
+        createHash("sha256")
+          .update(JSON.stringify(citySurfaceComposition(c)))
+          .digest("hex"),
+      ).toBe(approved.revision);
+      const fingerprint = await page.locator("#building").evaluate(async (el) => {
+        const canvas = el as HTMLCanvasElement;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("Missing canvas");
+        const sha = async (value: BufferSource) =>
+          [...new Uint8Array(await crypto.subtle.digest("SHA-256", value))]
+            .map((v) => v.toString(16).padStart(2, "0"))
+            .join("");
+        const pixels = await sha(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
+        return sha(new TextEncoder().encode(`${canvas.width}:${canvas.height}:${pixels}`));
+      });
+      expect(fingerprint).toBe(approved.renderFingerprint);
+    }
     // Composite the canonical placements independently at native resolution and
     // compare every unannotated pixel with the visible scaled preview.
     expect(

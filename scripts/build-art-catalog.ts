@@ -15,8 +15,10 @@ import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
+import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 import { CITY_SURFACE_CASES, composeCitySurface } from "../src/road/CitySurfaceRecipes.js";
+import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
 
@@ -146,7 +148,7 @@ function add(
 }
 for (const def of getPropSourceDefinitions())
   add(`prop:${def.type}`, def.sheetKey, def.rect, def.type, "prop", references.get(def.type) ?? []);
-for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS])
+for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS, ...DENSE_CITY_BUILDINGS])
   for (const [n, part] of recipe.parts.entries())
     add(
       `recipe:${recipe.type}:${n}`,
@@ -156,12 +158,16 @@ for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS])
       "recipe",
       [
         {
-          system: recipe.type.startsWith("prop-city-v1-")
-            ? "City prefab showcase (candidate)"
-            : "Regional district facades",
-          source: recipe.type.startsWith("prop-city-v1-")
-            ? "src/generation/regional/CityBuildingPrefabs.ts"
-            : "src/generation/regional/BuildingRecipes.ts",
+          system: recipe.type.startsWith("prop-city-dense-v1-")
+            ? "Dense districts (regional-v4, promoted)"
+            : recipe.type.startsWith("prop-city-v1-")
+              ? "City prefab showcase (candidate)"
+              : "Regional district facades",
+          source: recipe.type.startsWith("prop-city-dense-v1-")
+            ? "src/generation/regional/dense-city-assets-v1.json"
+            : recipe.type.startsWith("prop-city-v1-")
+              ? "src/generation/regional/CityBuildingPrefabs.ts"
+              : "src/generation/regional/BuildingRecipes.ts",
         },
         ...(references.get(recipe.type) ?? []),
       ],
@@ -179,6 +185,38 @@ for (const [key, piece] of surfaceTiles)
     `City surface candidate · ${piece.label}`,
     "terrain",
     [{ system: "Road foundation review (candidate)", source: "src/road/CitySurfaceRecipes.ts" }],
+  );
+// Inventory the exact promoted cell clips, including every audited curb join.
+const denseTiles = new Map<string, ReturnType<typeof denseCitySurfacePieces>[number]>();
+const neighbors = [
+  [-1, -1],
+  [0, -1],
+  [1, -1],
+  [-1, 0],
+  [1, 0],
+  [-1, 1],
+  [0, 1],
+  [1, 1],
+];
+for (let mask = 0; mask < 256; mask++)
+  for (let type = 5; type <= 14; type++)
+    for (const p of denseCitySurfacePieces(type, 0, 0, (x, y) => {
+      if (!x && !y) return type;
+      const i = neighbors.findIndex((p) => p[0] === x && p[1] === y);
+      return i >= 0 && mask & (1 << i) ? 5 : 6;
+    }))
+      denseTiles.set(p.rect.join(":"), p);
+for (const [key, p] of denseTiles)
+  add(
+    `surface:dense-v1:${key}`,
+    "me-complete",
+    p.rect,
+    `Dense city surface v1 · ${p.label}`,
+    "terrain",
+    [
+      { system: "Dense districts (regional-v4, promoted)", source: "src/road/DenseCitySurface.ts" },
+      { system: "Game / real-tile preview renderer", source: "src/rendering/TileRenderer.ts" },
+    ],
   );
 registerTileVariants({
   addTiles(group, coords) {
