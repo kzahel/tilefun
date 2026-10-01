@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#18352d" />
+    <title>Tiger Walk Demo · Tilefun</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header><a href="../../tools.html">← Indexes &amp; atlases</a><span>TILEFUN / CHARACTER STUDY 01</span><a href="../../">Return to game →</a></header>
+    <main>
+      <p class="eyebrow">A LITTLE TIGER, ON THE MOVE</p>
+      <h1>Four paws. Four directions.</h1>
+      <p class="intro">A walking tiger with a striped, swishing tail. Take it for a stroll with WASD, the arrow keys, or the buttons below.</p>
+      <div class="badges"><span>32-pixel sprites</span><span>4 directions</span><span>8 poses per walk</span></div>
+      <div class="layout">
+        <section class="stage-card" aria-label="Walk around">
+          <div class="card-heading"><h2>The little garden</h2><output id="status" aria-live="off">Loading tiger…</output></div>
+          <canvas id="garden" width="384" height="224" tabindex="0" aria-label="Tiger movement demo. Use WASD or arrow keys to walk."></canvas>
+          <div class="controls">
+            <fieldset class="pad" aria-label="Movement controls"><button type="button" data-direction="up" aria-label="Walk up">↑</button><button type="button" data-direction="left" aria-label="Walk left">←</button><button type="button" data-direction="down" aria-label="Walk down">↓</button><button type="button" data-direction="right" aria-label="Walk right">→</button></fieldset>
+            <label><input id="patrol" type="checkbox" checked /> Stroll automatically</label>
+            <button type="button" id="reset">Reset position</button>
+          </div>
+          <p class="hint">Hold a direction to walk. Release it to stand still.</p>
+        </section>
+        <section class="cycle-card" aria-label="Directional walk cycles">
+          <div class="card-heading"><h2>Every angle</h2><label class="switch"><input id="animate" type="checkbox" checked /> Animate</label></div>
+          <div class="directions"><figure><canvas width="32" height="32" data-row="0" aria-label="Down-facing walk cycle"></canvas><figcaption>Down / front</figcaption></figure><figure><canvas width="32" height="32" data-row="1" aria-label="Up-facing walk cycle"></canvas><figcaption>Up / back</figcaption></figure><figure><canvas width="32" height="32" data-row="2" aria-label="Left-facing walk cycle"></canvas><figcaption>Left</figcaption></figure><figure><canvas width="32" height="32" data-row="3" aria-label="Right-facing walk cycle"></canvas><figcaption>Right</figcaption></figure></div>
+          <div class="tempo"><label for="fps">Animation tempo</label><input id="fps" type="range" min="4" max="12" value="8" /><output id="fps-label" for="fps">8 fps</output></div>
+        </section>
+      </div>
+      <footer><a href="contact-sheet.png">All 32 poses →</a><a href="tiger-walk.png">Transparent sprite sheet →</a><a href="walk-preview.gif">Animated preview →</a><span class="credit">Original Blender character · an art demo</span></footer>
+      <p id="error" role="alert" hidden></p>
+    </main>
+    <script src="demo.js" type="module"></script>
+  </body>
+</html>

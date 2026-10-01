@@ -6,6 +6,8 @@ playwright-report/
 Sprout-Lands-Tilemap-addon/
 screenshot*.png
 /assets
+/skills/
+*.blend1
 .DS_Store
 *.tiled-project
 *.tiled-session

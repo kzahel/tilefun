@@ -56,9 +56,11 @@ which browser-local state is visible.
 | Packed Modern Interiors atlas and index | `public/assets/tilesets/modern-interiors-atlas.png`, `public/data/modern-interiors-atlas.json` | Yes |
 | Room-review sprite subset | `src/interiors/review/assets/review-sprites.png` and `.json` | Yes |
 | Other runtime sprites, props, tiles and audio | `public/assets/` | Yes |
+| Blender tiger walk demo, editable source and builder | `public/demos/blender-tiger/`, `art-source/blender/`, `scripts/blender/` | Yes; see [the workflow guide](blender-pixel-characters.md) |
 | Art inventory and source-use tracking | `public/data/art-catalog.json` and `scripts/build-art-catalog.ts` | Yes |
 | Building/street/surface recipes and pinned dense-city assets | `src/generation/regional/`, `src/road/` | Yes |
 | Downloaded original packs | Root `assets/`, ZIPs, `Sprout-Lands-Tilemap-addon/` | No; gitignored |
+| Local skill checkouts and art experiments | Root `skills/` | No; gitignored; reproducible tiger sources and final demo are committed separately |
 | Shared notes, review events and filesystem worlds | Root `data/` or configured data directories | No; gitignored |
 | Browser drafts, queues, editable fixtures and local worlds | Local Storage / IndexedDB for each browser origin | No; outside the checkout |
 

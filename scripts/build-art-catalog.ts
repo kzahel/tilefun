@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { basename, join } from "node:path";
+import { basename, join, sep } from "node:path";
 import {
   type ArtCatalog,
   type ArtRect,
@@ -25,7 +25,9 @@ import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegis
 function files(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true })
     .flatMap((entry) =>
-      entry.isDirectory() ? files(join(dir, entry.name)) : [join(dir, entry.name)],
+      entry.isDirectory()
+        ? files(join(dir, entry.name))
+        : [join(dir, entry.name).split(sep).join("/")],
     )
     .sort();
 }

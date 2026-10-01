@@ -9,7 +9,7 @@ test("game sidebar opens the central index and each listed destination is served
   await page.getByTestId("open-tools-index").click();
   await expect(page).toHaveURL(/\/tilefun\/tools.html$/);
   await expect(page.getByRole("heading", { name: "Indexes, atlases & labs." })).toBeVisible();
-  await expect(page.locator(".cards article")).toHaveCount(9);
+  await expect(page.locator(".cards article")).toHaveCount(10);
   const destinations = await page
     .locator("main a[href]")
     .evaluateAll((links) => [
