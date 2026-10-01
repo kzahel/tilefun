@@ -3,7 +3,7 @@
 ## Regional Generation and World Explorer
 
 - Implemented: versioned Classic/Island/Flat/Regional generators, bounded map and exact tile previews, shared district and countryside plans, authoritative Play here arrivals, persistent building interiors, and generated inhabitants. See the [regional plan](tactical/004-world-explorer-and-regional-generation-plan.md) and [generator plan](tactical/005-generator-profiles-and-shared-tile-preview-plan.md) for implementation evidence.
-- Next: visual review of seed 2026 and other seeds, followed by density/composition tuning. Use the [checkpoint guide](world-explorer.md).
+- Next: a playable dense city block, then street furniture/parking, parks and squares, larger commercial buildings, farmers markets and richer pedestrian life. See the [phased city plan](tactical/007-dense-city-districts-and-street-life-plan.md) and [checkpoint guide](world-explorer.md).
 - Still outstanding: profiling on a representative physical phone; automated phone layouts and desktop CPU throttling are separate evidence.
 - Future extensions: additional floors, room layouts, inhabitants' schedules, traffic, and economies.
 

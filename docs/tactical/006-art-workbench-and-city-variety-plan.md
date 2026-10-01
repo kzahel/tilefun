@@ -1,7 +1,10 @@
 # Art workbench and denser, varied cities
 
-Status: art workbench and first shared building prefab/block showcase implemented
-2026-09-30; human composition review and new city profiles remain planned.
+Status: art workbench and shared building prefab/block showcase implemented.
+Current compositions accepted in chat on 2026-10-01 after hotel panel removal.
+New district generation remains planned in
+[Tactical 007](007-dense-city-districts-and-street-life-plan.md), the active phased
+roadmap for streets, parking, public spaces, larger buildings and pedestrians.
 
 ## Motivation
 
@@ -259,6 +262,8 @@ with evidence. Desktop mobile layout is not a substitute for physical phone
 profiling. Final acceptance includes human style review and an actual game
 visit from the exact explorer preview, with unchanged older revisions.
 
-The immediate next checkpoint is human review of the shared building/block
-showcase, then promotion of approved families into a new pinned dense-city
-profile. Existing generators remain frozen.
+The current building/block showcase has been accepted in chat. The next
+checkpoint is a playable dense block using shared city planning and the current
+building palette, as specified in
+[Tactical 007](007-dense-city-districts-and-street-life-plan.md). Existing
+generators remain frozen.
