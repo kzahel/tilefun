@@ -405,7 +405,8 @@ resolved descriptors work through worker and saved-world boundaries. V4 uses
 v1 regional geography outside its compact settlement core; v3 farm/woodland
 content, complete regional road joins, fully varied town/city profiles, curb
 ramps, general crowd routing and populated parks are still later milestones.
-Existing detail, prop and actor caps remain in place. No new approvals were
+Existing detail, prop and actor caps remain in place; each review window also
+loads at most 81 chunks, including the normal renderer halo. No new approvals were
 created by the agent.
 
 Validation: typecheck/build and Biome pass (74 existing warnings); 1,091 unit

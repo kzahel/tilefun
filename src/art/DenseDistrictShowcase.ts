@@ -120,12 +120,9 @@ export function drawDenseDistrictShowcase(
   camera.zoom = 1 / PIXEL_SCALE;
   camera.snapTo((b.minX + b.maxX) * 8, (b.minY + b.maxY) * 8);
   const range = camera.getVisibleChunkRange();
-  world.updateLoadedChunks({
-    minCx: range.minCx - 1,
-    minCy: range.minCy - 1,
-    maxCx: range.maxCx + 1,
-    maxCy: range.maxCy + 1,
-  });
+  // ChunkManager already adds the one-chunk render halo. Passing an expanded
+  // range here would load a second halo and exceed the 81-chunk preview budget.
+  world.updateLoadedChunks(range);
   world.computeAutotile(graph);
   const renderer = new TileRenderer();
   renderer.setBlendSheets(assets.blendSheets, graph);
@@ -180,6 +177,7 @@ export function drawDenseDistrictShowcase(
     }
   }
   return {
+    chunks: world.chunks.loadedCount,
     width,
     height,
     parts: props.reduce((n, p) => n + (p.sprite.parts?.length ?? 1), 0),

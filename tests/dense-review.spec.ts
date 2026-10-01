@@ -26,6 +26,9 @@ test("three real district views share review navigation and fit phone controls",
     await page.locator("#district-case").selectOption(c.id);
     await expect(page.locator("#recipe-id")).toHaveText(c.id);
     await expect(page.locator("#facts")).toContainText("buildings");
+    const chunks = Number(await page.locator("#building").getAttribute("data-chunks"));
+    expect(chunks).toBeGreaterThan(0);
+    expect(chunks).toBeLessThanOrEqual(81);
     const png = await page
       .locator("#building")
       .evaluate((el) => (el as HTMLCanvasElement).toDataURL());

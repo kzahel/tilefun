@@ -715,6 +715,7 @@ function renderDistrict() {
   $("app").dataset.ready = "true";
   canvas.dataset.parts = String(stats.parts);
   canvas.dataset.prefabs = String(stats.buildings);
+  canvas.dataset.chunks = String(stats.chunks);
   target.replaceChildren(new Option("This neighborhood view", "block"));
   feedbackScene = "district";
   updateFeedbackTarget();
