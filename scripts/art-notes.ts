@@ -26,7 +26,7 @@ if (args[0] === "set-status") {
     for (const row of selected) {
       if (row.buildingReview)
         console.log(
-          `Building review: ${row.buildingReview.url}\nrecipes=${row.buildingReview.prefabIds.join(", ")}\ncomposition=${row.buildingReview.revision}${row.buildingVerdict ? `\nverdict=${row.buildingVerdict.value} at ${row.buildingVerdict.createdAt}` : ""}${row.buildingReview.renderFingerprint ? `\nrender=${row.buildingReview.renderFingerprint}` : ""}`,
+          `${row.buildingReview.scene === "street" ? `Street review (${row.buildingReview.caseId})` : "Building review"}: ${row.buildingReview.url}\nrecipes=${row.buildingReview.prefabIds.join(", ")}${row.buildingReview.propTypes ? `\nprops=${row.buildingReview.propTypes.join(", ")}` : ""}\ncomposition=${row.buildingReview.revision}${row.buildingVerdict ? `\nverdict=${row.buildingVerdict.value} at ${row.buildingVerdict.createdAt}` : ""}${row.buildingReview.renderFingerprint ? `\nrender=${row.buildingReview.renderFingerprint}` : ""}`,
         );
       const sheet = catalog.sheets.find((s) => s.id === row.sheetId);
       console.log(

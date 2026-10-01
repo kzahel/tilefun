@@ -61,13 +61,15 @@ for (const path of files("src").filter(
     i++;
     if (quote === "`") continue;
     const line = source.slice(0, start).split("\n").length;
-    const system = path.startsWith("src/generation/")
-      ? "World generation"
-      : path.startsWith("src/interiors/")
-        ? "Interiors"
-        : path.startsWith("src/editor/") || path.startsWith("src/scenes/")
-          ? "Editor"
-          : "Gameplay";
+    const system = path.endsWith("/StreetRecipes.ts")
+      ? "Street starter review (candidate)"
+      : path.startsWith("src/generation/")
+        ? "World generation"
+        : path.startsWith("src/interiors/")
+          ? "Interiors"
+          : path.startsWith("src/editor/") || path.startsWith("src/scenes/")
+            ? "Editor"
+            : "Gameplay";
     const refs = references.get(value) ?? [];
     refs.push({ system, source: `${path}:${line}` });
     references.set(value, refs);

@@ -68,6 +68,11 @@
 #hotel-options[hidden] {
   display: none;
 }
+#scene-options[hidden],
+#prefab-options[hidden],
+#street-options[hidden] {
+  display: none;
+}
 #hotel-sign {
   padding: 6px 8px;
 }

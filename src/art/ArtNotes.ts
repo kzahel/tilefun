@@ -2,7 +2,10 @@ import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
 export interface BuildingReview {
-  scene: "single" | "residential" | "mixed" | "hotel";
+  scene: "single" | "residential" | "mixed" | "hotel" | "street";
+  /** Stable context identity for a street scene, independent of its building. */
+  caseId?: string;
+  propTypes?: string[];
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -35,7 +38,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
   if (!value || typeof value !== "object") throw new Error("Invalid building review");
   const v = value as Record<string, unknown>;
   if (
-    !["single", "residential", "mixed", "hotel"].includes(v.scene as string) ||
+    !["single", "residential", "mixed", "hotel", "street"].includes(v.scene as string) ||
     !Array.isArray(v.prefabIds) ||
     !v.prefabIds.length ||
     v.prefabIds.length > 30 ||
@@ -49,8 +52,26 @@ function parseBuildingReview(value: unknown): BuildingReview {
     !/^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url)
   )
     throw new Error("Invalid building review");
+  if (v.scene === "street") {
+    if (
+      typeof v.caseId !== "string" ||
+      !/^street-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
+      !Array.isArray(v.propTypes) ||
+      v.propTypes.length > 64 ||
+      v.propTypes.some((id) => typeof id !== "string" || !/^prop-[a-z0-9-]{1,100}$/.test(id)) ||
+      !v.url.includes("run=streets")
+    )
+      throw new Error("Invalid street review");
+    const url = new URL(v.url, "https://tilefun.invalid");
+    if (url.searchParams.get("case") !== v.caseId || url.searchParams.get("run") !== "streets")
+      throw new Error("Street review URL does not match case");
+  } else if (v.caseId !== undefined || v.propTypes !== undefined)
+    throw new Error("Invalid building review context");
   return {
     scene: v.scene as BuildingReview["scene"],
+    ...(v.scene === "street"
+      ? { caseId: v.caseId as string, propTypes: [...(v.propTypes as string[])] }
+      : {}),
     prefabIds: [...v.prefabIds],
     revision: v.revision,
     ...(v.renderFingerprint === undefined

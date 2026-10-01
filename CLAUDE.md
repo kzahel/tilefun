@@ -42,3 +42,9 @@ Two Needs changes reports pause a batch; wait for the user to say “ready” in
 chat before implementing that batch's art fixes. Read the saved reasons with
 `npm run art:notes`. Agent replies/status changes do not count as approval;
 changed recipes or rendered pixels return to review. See `docs/art-workbench.md`.
+
+The street starter review is `/tilefun/building-lab.html?run=streets`, with six
+phase-0 furniture cases and its own navigation/pause state. It uses the same
+art inbox and review loop; CLI notes include the street case and prop types.
+These props are available for editing/review, not yet selected by city worldgen.
+The next district milestones are in `docs/tactical/007-dense-city-districts-and-street-life-plan.md`.

@@ -356,7 +356,7 @@ function renderNotes(): void {
     if (row.buildingReview) {
       const link = document.createElement("a");
       link.href = row.buildingReview.url;
-      link.textContent = `Review ${row.buildingReview.scene}: ${row.buildingReview.prefabIds.join(", ")}`;
+      link.textContent = `Review ${row.buildingReview.caseId ?? row.buildingReview.scene}: ${row.buildingReview.prefabIds.join(", ")}`;
       article.append(link);
     }
     if (source?.fingerprint !== row.fingerprint)

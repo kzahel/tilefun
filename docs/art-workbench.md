@@ -204,3 +204,37 @@ and accessories can expand the library after this review.
 See [Tactical 006](tactical/006-art-workbench-and-city-variety-plan.md) for the
 progression from annotated source art to audited building recipes and denser,
 varied city profiles using shared explorer/game realization.
+
+## Street starter review
+
+The [street starter run](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=streets)
+shares the Building Lab page, note inbox, source verification, verdict handling,
+offline outbox, and approve/report/pause workflow. Its six cases cover parking
+pay stations, lighting/bollards, bins, seating/planters, stationary cars, and a
+combined commercial sidewalk. Review navigation/filter/pause state is scoped
+to this run; building decisions remain independent. Undo targets the current
+run. Direct links preserve `run=streets&case=street-v1-…`.
+
+This is phase 0 of [Tactical 007](tactical/007-dense-city-districts-and-street-life-plan.md).
+It frames the shop's lower floors for street-level context. Pavement bands and
+parking outlines are a diagnostic stage; generated streets, walking NPCs, and
+a playable district follow after this palette review. Geometry shows the 40px
+walking strip in green, the shop approach in gold, and actual game collision in
+red. Furniture colliders fit the curb zone; cars fit their parking bays. The
+normal game factories and scene renderer draw all sprite pieces.
+
+`StreetRecipes.ts` owns seven new source-audited prop definitions and six place
+cases. The gameplay factory, editor palette, art inventory and scene review use
+those definitions; frozen generators do not select them. Existing lamps/benches
+are reused. Each new prop records its vendor slice, native size, facing, zone,
+collider and material. Source references are labeled **Street starter review
+(candidate)** rather than claiming that world generation already uses them.
+
+For backward compatibility street notes extend the existing `buildingReview`
+record with `scene: "street"`, an immutable `caseId`, and the `propTypes` used
+alongside `prefabIds`. The definition hash includes the entire scene and realized
+building/prop geometry. Verdicts pin unannotated rendered pixels as before.
+Scene IDs and source/recipe/render revisions keep approvals independent even
+when two scenes use the same building. Saved feedback, atlas links and
+`npm run art:notes` expose the street case and prop identities. A changed scene
+returns to Unchecked; an agent reply never creates approval.

@@ -2,6 +2,7 @@ import "./art.css";
 import "./buildings.css";
 import { loadJSON } from "../assets/AssetLoader.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { createProp, PROP_PALETTE } from "../entities/PropFactories.js";
 import {
   CITY_BUILDING_PREFABS,
   CITY_PREFAB_SOURCE,
@@ -10,12 +11,14 @@ import {
   hotelPrefabType,
   resolveCityPrefabType,
 } from "../generation/regional/CityBuildingPrefabs.js";
+import { STREET_REVIEW_SCENES, type StreetScene } from "../generation/regional/StreetRecipes.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
 import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
 import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";
 import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "./BuildingShowcase.js";
+import { drawStreetShowcase } from "./StreetShowcase.js";
 
 const $ = <T extends HTMLElement>(id: string) => required(document.getElementById(id)) as T;
 const scene = $<HTMLSelectElement>("scene"),
@@ -23,11 +26,55 @@ const scene = $<HTMLSelectElement>("scene"),
   hotelSign = $<HTMLSelectElement>("hotel-sign"),
   canvas = $<HTMLCanvasElement>("building");
 const params = new URLSearchParams(location.search);
+const streetRun = params.get("run") === "streets";
+const reviewStorage = streetRun ? "tilefun.street-review.v1" : "tilefun.building-review.v1";
+const streetSelect = $<HTMLSelectElement>("street-case");
+streetSelect.replaceChildren(...STREET_REVIEW_SCENES.map((s) => new Option(s.name, s.id)));
+if (STREET_REVIEW_SCENES.some((s) => s.id === params.get("case")))
+  streetSelect.value = params.get("case") ?? "";
+function currentStreet(): StreetScene {
+  return required(STREET_REVIEW_SCENES.find((s) => s.id === streetSelect.value));
+}
+function streetComposition(s: StreetScene) {
+  return {
+    scene: s,
+    building: required(CITY_BUILDING_PREFABS.find((p) => p.type === s.buildingType)),
+    props: s.props.map((p) => createProp(p.type, p.wx, p.wy)),
+  };
+}
+function reviewSourceRects(
+  prefabs: readonly (typeof CITY_BUILDING_PREFABS)[number][],
+  street?: StreetScene,
+): ArtRect[] {
+  return [
+    ...prefabs.flatMap((p) =>
+      p.parts.map(
+        (s) => [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect,
+      ),
+    ),
+    ...(street?.props.map((p) => {
+      const s = createProp(p.type, p.wx, p.wy).sprite;
+      return [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect;
+    }) ?? []),
+  ];
+}
+if (streetRun) {
+  scene.add(new Option("Street starter", "street"));
+  scene.value = "street";
+  $("scene-options").hidden = true;
+  $("prefab-options").hidden = true;
+  $("street-options").hidden = false;
+  required(document.querySelector(".building-intro h1")).textContent =
+    "Review the street starter palette.";
+  required(document.querySelector(".building-intro p")).textContent =
+    "Street-level views: approve the props and spacing. Two reports pause until “ready” in chat.";
+  canvas.setAttribute("aria-label", "Street furniture scene");
+}
 select.replaceChildren(...CITY_BUILDING_PREFABS.map((p) => new Option(p.name, p.type)));
 const requestedType = params.get("prefab") ?? "";
 const resolvedType = resolveCityPrefabType(requestedType);
 if (CITY_BUILDING_PREFABS.some((p) => p.type === resolvedType)) select.value = resolvedType;
-if (["single", "residential", "mixed", "hotel"].includes(params.get("scene") ?? ""))
+if (!streetRun && ["single", "residential", "mixed", "hotel"].includes(params.get("scene") ?? ""))
   scene.value = params.get("scene") ?? "single";
 const catalog = await loadJSON<ArtCatalog>("data/art-catalog.json");
 const source = required(catalog.sheets.find((s) => s.id === CITY_PREFAB_SOURCE.sheetId));
@@ -62,21 +109,28 @@ function persistDrafts() {
   }
 }
 function currentTarget(displayed = false) {
-  const whole = displayed || target.value === "block";
+  const whole = streetRun || displayed || target.value === "block";
   const prefabs = whole
     ? placements.map((p) => p.prefab)
     : [required(placements.find((p) => p.prefab.type === target.value)).prefab];
-  const kind = whole ? (scene.value as BuildingReview["scene"]) : "single";
+  const kind = streetRun ? "street" : whole ? (scene.value as BuildingReview["scene"]) : "single";
+  const street = streetRun ? currentStreet() : undefined;
   const url = new URL("building-lab.html", location.href);
   url.searchParams.set("scene", kind);
   url.searchParams.set("prefab", required(prefabs[0]).type);
-  const parts = prefabs.flatMap((p) => p.parts);
-  const x = Math.min(...parts.map((p) => p.frameCol * 16));
-  const y = Math.min(...parts.map((p) => p.frameRow * 16));
-  const ex = Math.max(...parts.map((p) => p.frameCol * 16 + p.spriteWidth));
-  const ey = Math.max(...parts.map((p) => p.frameRow * 16 + p.spriteHeight));
+  if (street) {
+    url.search = "";
+    url.searchParams.set("run", "streets");
+    url.searchParams.set("case", street.id);
+  }
+  const rects = reviewSourceRects(prefabs, street);
+  const x = Math.min(...rects.map((p) => p[0])),
+    y = Math.min(...rects.map((p) => p[1]));
+  const ex = Math.max(...rects.map((p) => p[0] + p[2])),
+    ey = Math.max(...rects.map((p) => p[1] + p[3]));
   return {
     prefabs,
+    street,
     scene: kind,
     url: url.pathname + url.search,
     rect: [x, y, ex - x, ey - y] as ArtRect,
@@ -85,10 +139,12 @@ function currentTarget(displayed = false) {
 function updateFeedbackTarget() {
   const context = currentTarget();
   noteInput.setCustomValidity("");
-  draftKey = `${context.scene}:${context.prefabs.map((p) => p.type).join(",")}`;
+  draftKey = context.street
+    ? `street:${context.street.id}`
+    : `${context.scene}:${context.prefabs.map((p) => p.type).join(",")}`;
   noteInput.value = typeof drafts[draftKey] === "string" ? required(drafts[draftKey]) : "";
   $("feedback-context").textContent =
-    `Saved with this ${context.scene === "single" ? "building" : "block"}, its recipe IDs, and source revision. I can read it from the shared inbox.`;
+    `Saved with this ${context.street ? "street scene" : context.scene === "single" ? "building" : "block"}, its recipe IDs, and source revision. I can read it from the shared inbox.`;
   save.disabled = !verified || sending;
 }
 function renderFeedbackNotes() {
@@ -102,7 +158,7 @@ function renderFeedbackNotes() {
     article.dataset.thread = row.threadId;
     const heading = document.createElement("a");
     heading.href = required(row.buildingReview).url;
-    heading.textContent = `${row.buildingVerdict ? `${row.buildingVerdict.value === "clear" ? "reopened" : row.buildingVerdict.value} · ` : ""}${row.status} · ${required(row.buildingReview).scene} · ${required(row.buildingReview).prefabIds.join(", ")}`;
+    heading.textContent = `${row.buildingVerdict ? `${row.buildingVerdict.value === "clear" ? "reopened" : row.buildingVerdict.value} · ` : ""}${row.status} · ${required(row.buildingReview).caseId ?? required(row.buildingReview).scene} · ${required(row.buildingReview).prefabIds.join(", ")}`;
     const body = document.createElement("p");
     body.textContent = row.note;
     article.append(heading, body);
@@ -120,7 +176,7 @@ function renderFeedbackNotes() {
     const current = review.prefabIds.map((id) =>
       CITY_BUILDING_PREFABS.find((p) => p.type === resolveCityPrefabType(id)),
     );
-    if (current.every((p) => p !== undefined))
+    if (review.scene !== "street" && current.every((p) => p !== undefined))
       void sha256(new TextEncoder().encode(JSON.stringify(current))).then((revision) => {
         if (revision !== review.revision) {
           const changed = document.createElement("p");
@@ -130,6 +186,15 @@ function renderFeedbackNotes() {
           article.append(changed);
         }
       });
+    if (review.scene === "street" && queueReady) {
+      const candidate = candidates.find((c) => c.key === buildingCaseKey(review));
+      if (candidate && candidate.review.revision !== review.revision) {
+        const changed = document.createElement("p");
+        changed.textContent =
+          "Scene changed since this note. The link opens the current candidate.";
+        article.append(changed);
+      }
+    }
     container.append(article);
   }
 }
@@ -165,13 +230,21 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
   sending = true;
   updateQueue();
   try {
-    const revision = await sha256(new TextEncoder().encode(JSON.stringify(context.prefabs)));
+    const revision = await sha256(
+      new TextEncoder().encode(
+        JSON.stringify(context.street ? streetComposition(context.street) : context.prefabs),
+      ),
+    );
     const id = crypto.randomUUID();
     const createdAt = new Date().toISOString();
     const candidate = candidates.find(
       (c) =>
         c.key ===
-        buildingCaseKey({ scene: context.scene, prefabIds: context.prefabs.map((p) => p.type) }),
+        buildingCaseKey({
+          scene: context.scene,
+          prefabIds: context.prefabs.map((p) => p.type),
+          ...(context.street ? { caseId: context.street.id } : {}),
+        }),
     );
     const row: ArtNote = {
       id,
@@ -181,13 +254,19 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
       sheetSize: [source.width, source.height],
       rect: context.rect,
       sliceKeys: [],
-      intent: "building",
+      intent: context.street ? "pattern" : "building",
       status: verdict === "approved" || verdict === "clear" ? "resolved" : "pending",
       note,
       reply: "",
       createdAt,
       buildingReview: {
         scene: context.scene,
+        ...(context.street
+          ? {
+              caseId: context.street.id,
+              propTypes: [...new Set(context.street.props.map((p) => p.type))],
+            }
+          : {}),
         prefabIds: context.prefabs.map((p) => p.type),
         revision,
         url: context.url,
@@ -248,34 +327,34 @@ try {
   throw error;
 }
 function render() {
+  if (streetRun) select.value = currentStreet().buildingType;
   let prefab = required(CITY_BUILDING_PREFABS.find((p) => p.type === select.value));
   placements =
-    scene.value === "single"
+    scene.value === "single" || streetRun
       ? [{ prefab, wx: 0, wy: 0 }]
       : cityPrefabBlock(scene.value as "residential" | "mixed" | "hotel");
   if (!placements.some((p) => p.prefab.type === prefab.type)) {
     prefab = required(placements[0]).prefab;
     select.value = prefab.type;
   }
-  const stats = drawBuildingShowcase(
-    canvas,
-    placements,
-    sheet,
-    $<HTMLInputElement>("geometry").checked,
-  );
+  const stats = streetRun
+    ? drawStreetShowcase(canvas, currentStreet(), sheet, $<HTMLInputElement>("geometry").checked)
+    : drawBuildingShowcase(canvas, placements, sheet, $<HTMLInputElement>("geometry").checked);
   fitPreview();
   $("loading").textContent = "";
-  $("name").textContent =
-    scene.value === "single"
+  $("name").textContent = streetRun
+    ? currentStreet().name
+    : scene.value === "single"
       ? prefab.name
       : `${scene.selectedOptions[0]?.textContent} · ${placements.length} prefabs`;
   $("hotel-options").hidden = scene.value !== "single" || prefab.family !== "hotel";
   hotelSign.value = prefab.hotelSign ?? "none";
   $("facts").textContent =
     `${stats.width}×${stats.height} native stage pixels · ${stats.parts} shared sprite pieces${scene.value === "single" ? ` · footprint ${prefab.width}×${prefab.groundDepth}` : ""}`;
-  $("recipe-id").textContent = prefab.type;
-  $("assembly-summary").textContent =
-    scene.value === "single"
+  $("recipe-id").textContent = streetRun ? currentStreet().id : prefab.type;
+  $("assembly-summary").textContent = streetRun
+    ? currentStreet().prompt
+    : scene.value === "single"
       ? `Complete facade · both ends closed · ${prefab.profile === "flat-front" ? "flat frontage" : "bay frontage"} · ${prefab.topology.modules.length} connected section(s) · shared roof datum`
       : "Complete building assemblies with closed exterior ends and independently assembled roof decks.";
   $("bookmark-notice").textContent =
@@ -305,17 +384,16 @@ function render() {
   }
   const sourceUrl = new URL("art-workbench.html", location.href);
   sourceUrl.searchParams.set("sheet", CITY_PREFAB_SOURCE.sheetId);
-  const xs = prefab.parts.map((p) => p.frameCol * 16),
-    ys = prefab.parts.map((p) => p.frameRow * 16);
-  const x = Math.min(...xs),
-    y = Math.min(...ys),
-    ex = Math.max(...prefab.parts.map((p) => p.frameCol * 16 + p.spriteWidth)),
-    ey = Math.max(...prefab.parts.map((p) => p.frameRow * 16 + p.spriteHeight));
+  const rects = reviewSourceRects([prefab], streetRun ? currentStreet() : undefined);
+  const x = Math.min(...rects.map((p) => p[0])),
+    y = Math.min(...rects.map((p) => p[1]));
+  const ex = Math.max(...rects.map((p) => p[0] + p[2])),
+    ey = Math.max(...rects.map((p) => p[1] + p[3]));
   sourceUrl.searchParams.set("rect", [x, y, ex - x, ey - y].join(","));
   $<HTMLAnchorElement>("source-link").href = sourceUrl.href;
   const picks = $("block-buildings");
   picks.replaceChildren();
-  for (const p of scene.value === "single" ? [] : placements) {
+  for (const p of scene.value === "single" || streetRun ? [] : placements) {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = p.prefab.name;
@@ -333,17 +411,56 @@ function render() {
     row.textContent = `Source [${p.frameCol * 16}, ${p.frameRow * 16}, ${p.spriteWidth}, ${p.spriteHeight}] → center ${p.dx}, bottom ${p.dy}`;
     pieces.append(row);
   }
+  if (streetRun) {
+    for (const p of currentStreet().props) {
+      const sprite = createProp(p.type, p.wx, p.wy).sprite;
+      const link = document.createElement("a");
+      const u = new URL("art-workbench.html", location.href);
+      u.searchParams.set("sheet", CITY_PREFAB_SOURCE.sheetId);
+      u.searchParams.set(
+        "rect",
+        [sprite.frameCol * 16, sprite.frameRow * 16, sprite.spriteWidth, sprite.spriteHeight].join(
+          ",",
+        ),
+      );
+      link.href = u.href;
+      link.textContent = `${PROP_PALETTE.find((entry) => entry.type === p.type)?.label ?? p.type} · inspect source`;
+      const row = document.createElement("p");
+      row.append(link);
+      pieces.append(row);
+    }
+    $("facts").textContent =
+      `${stats.width}×${stats.height} native stage pixels · ${currentStreet().props.length} street props · 40px clear walking strip`;
+    $("topology").textContent =
+      "Green: clear walking strip. Gold: door approach. Red: actual game collision. Surface bands and parking paint are diagnostic; this is the starter palette, not yet a generated city.";
+    $("source-link").textContent = "Inspect this scene’s source art ↗";
+    required($("topology").parentElement?.querySelector("summary")).textContent =
+      "Placement & clearances";
+    required($("pieces").parentElement?.querySelector("summary")).textContent =
+      "Props & source links";
+    $<HTMLTextAreaElement>("building-note").placeholder = currentStreet().prompt;
+  }
   const url = new URL(location.href);
-  url.searchParams.set("scene", scene.value);
-  url.searchParams.set("prefab", prefab.type);
+  if (streetRun) {
+    url.searchParams.delete("scene");
+    url.searchParams.delete("prefab");
+    url.searchParams.set("case", currentStreet().id);
+  } else {
+    url.searchParams.set("scene", scene.value);
+    url.searchParams.set("prefab", prefab.type);
+  }
   history.replaceState(null, "", url);
   $("app").dataset.ready = "true";
   canvas.dataset.parts = String(stats.parts);
   canvas.dataset.prefabs = String(placements.length);
   const previousTarget = feedbackScene === scene.value ? target.value : "";
   target.replaceChildren(
-    ...(scene.value === "single" ? [] : [new Option("Whole block", "block")]),
-    ...placements.map((p) => new Option(p.prefab.name, p.prefab.type)),
+    ...(streetRun
+      ? [new Option("This street scene", "block")]
+      : [
+          ...(scene.value === "single" ? [] : [new Option("Whole block", "block")]),
+          ...placements.map((p) => new Option(p.prefab.name, p.prefab.type)),
+        ]),
   );
   if ([...target.options].some((option) => option.value === previousTarget))
     target.value = previousTarget;
@@ -352,6 +469,7 @@ function render() {
   updateQueue();
   persistReview();
 }
+streetSelect.addEventListener("change", showSelection);
 for (const control of [$("geometry"), $("scale")]) control.addEventListener("change", render);
 scene.addEventListener("change", showSelection);
 select.addEventListener("change", () => {
@@ -383,7 +501,7 @@ let batch: BatchEntry[] = [];
 let paused = false;
 let storedSelection = "";
 try {
-  const stored = JSON.parse(localStorage.getItem("tilefun.building-review.v1") ?? "{}");
+  const stored = JSON.parse(localStorage.getItem(reviewStorage) ?? "{}");
   if (["unchecked", "all", "approved", "changes"].includes(stored.filter))
     filter.value = stored.filter;
   if (Array.isArray(stored.batch))
@@ -404,7 +522,7 @@ try {
 function persistReview() {
   try {
     localStorage.setItem(
-      "tilefun.building-review.v1",
+      reviewStorage,
       JSON.stringify({ filter: filter.value, batch, paused, selected: selectedKey() }),
     );
   } catch {
@@ -412,7 +530,11 @@ function persistReview() {
   }
 }
 function selectedKey() {
-  return scene.value === "single" ? `single:${select.value}` : `block:${scene.value}`;
+  return streetRun
+    ? `street:${streetSelect.value}`
+    : scene.value === "single"
+      ? `single:${select.value}`
+      : `block:${scene.value}`;
 }
 function verdictFor(candidate: Candidate) {
   return currentBuildingVerdict(inbox.notes, source.fingerprint, candidate.review);
@@ -484,6 +606,7 @@ function updateQueue() {
 function openCandidate(candidate: Candidate) {
   scene.value = candidate.scene;
   select.value = candidate.prefab;
+  if (candidate.review.caseId) streetSelect.value = candidate.review.caseId;
   render();
 }
 function navigate(direction: number) {
@@ -513,7 +636,12 @@ function showSelection() {
 }
 function latestDecision() {
   const sorted = inbox.notes
-    .filter((r) => r.buildingVerdict && r.buildingReview)
+    .filter(
+      (r) =>
+        r.buildingVerdict &&
+        r.buildingReview &&
+        candidates.some((c) => c.key === buildingCaseKey(required(r.buildingReview))),
+    )
     .sort(
       (a, b) =>
         Date.parse(required(b.buildingVerdict).createdAt) -
@@ -608,45 +736,76 @@ document.addEventListener("keydown", (event) => {
   }
 });
 const hashCanvas = document.createElement("canvas");
-for (const entry of [
-  ...CITY_BUILDING_PREFABS.map((p) => ({ scene: "single" as const, prefab: p, name: p.name })),
-  ...(["residential", "mixed", "hotel"] as const).map((s) => ({
-    scene: s,
-    prefab: required(cityPrefabBlock(s)[0]).prefab,
-    name: `${s} block`,
-  })),
-]) {
-  const items =
-    entry.scene === "single"
-      ? [{ prefab: entry.prefab, wx: 0, wy: 0 }]
-      : cityPrefabBlock(entry.scene);
-  drawBuildingShowcase(hashCanvas, items, sheet, false);
-  const pixels = required(hashCanvas.getContext("2d")).getImageData(
-    0,
-    0,
-    hashCanvas.width,
-    hashCanvas.height,
-  ).data;
-  const pixelHash = await sha256(pixels);
-  const review: BuildingReview = {
-    scene: entry.scene,
-    prefabIds: items.map((p) => p.prefab.type),
-    revision: await sha256(new TextEncoder().encode(JSON.stringify(items.map((p) => p.prefab)))),
-    renderFingerprint: await sha256(
-      new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
-    ),
-    url: `/tilefun/building-lab.html?scene=${entry.scene}&prefab=${entry.prefab.type}`,
-  };
-  candidates.push({
-    key: buildingCaseKey(review),
-    name: entry.name,
-    scene: entry.scene,
-    prefab: entry.prefab.type,
-    review,
-  });
-}
+if (!streetRun)
+  for (const entry of [
+    ...CITY_BUILDING_PREFABS.map((p) => ({ scene: "single" as const, prefab: p, name: p.name })),
+    ...(["residential", "mixed", "hotel"] as const).map((s) => ({
+      scene: s,
+      prefab: required(cityPrefabBlock(s)[0]).prefab,
+      name: `${s} block`,
+    })),
+  ]) {
+    const items =
+      entry.scene === "single"
+        ? [{ prefab: entry.prefab, wx: 0, wy: 0 }]
+        : cityPrefabBlock(entry.scene);
+    drawBuildingShowcase(hashCanvas, items, sheet, false);
+    const pixels = required(hashCanvas.getContext("2d")).getImageData(
+      0,
+      0,
+      hashCanvas.width,
+      hashCanvas.height,
+    ).data;
+    const pixelHash = await sha256(pixels);
+    const review: BuildingReview = {
+      scene: entry.scene,
+      prefabIds: items.map((p) => p.prefab.type),
+      revision: await sha256(new TextEncoder().encode(JSON.stringify(items.map((p) => p.prefab)))),
+      renderFingerprint: await sha256(
+        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
+      ),
+      url: `/tilefun/building-lab.html?scene=${entry.scene}&prefab=${entry.prefab.type}`,
+    };
+    candidates.push({
+      key: buildingCaseKey(review),
+      name: entry.name,
+      scene: entry.scene,
+      prefab: entry.prefab.type,
+      review,
+    });
+  }
+if (streetRun)
+  for (const entry of STREET_REVIEW_SCENES) {
+    drawStreetShowcase(hashCanvas, entry, sheet, false);
+    const pixels = required(hashCanvas.getContext("2d")).getImageData(
+      0,
+      0,
+      hashCanvas.width,
+      hashCanvas.height,
+    ).data;
+    const pixelHash = await sha256(pixels);
+    const review: BuildingReview = {
+      scene: "street",
+      caseId: entry.id,
+      prefabIds: [entry.buildingType],
+      propTypes: [...new Set(entry.props.map((p) => p.type))],
+      revision: await sha256(new TextEncoder().encode(JSON.stringify(streetComposition(entry)))),
+      renderFingerprint: await sha256(
+        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
+      ),
+      url: `/tilefun/building-lab.html?run=streets&case=${entry.id}`,
+    };
+    candidates.push({
+      key: buildingCaseKey(review),
+      name: entry.name,
+      scene: "street",
+      prefab: entry.buildingType,
+      review,
+    });
+  }
 await initialSync;
 queueReady = true;
+renderFeedbackNotes();
 batch = batch.filter((entry) => {
   const candidate = candidates.find((c) => c.key === entry.key);
   return (
@@ -655,13 +814,17 @@ batch = batch.filter((entry) => {
 });
 if (batch.length < 2) paused = false;
 if (!paused && !queue().some((c) => c.key === selectedKey())) {
-  if ((params.has("scene") || params.has("prefab")) && storedSelection !== selectedKey())
+  if (
+    (params.has("scene") || params.has("prefab") || params.has("case")) &&
+    storedSelection !== selectedKey()
+  )
     filter.value = "all";
   else {
     const first = queue()[0];
     if (first) {
       scene.value = first.scene;
       select.value = first.prefab;
+      if (first.review.caseId) streetSelect.value = first.review.caseId;
     }
   }
 }

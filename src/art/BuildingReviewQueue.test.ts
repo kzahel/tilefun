@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { type ArtCatalog, required } from "./ArtCatalog.js";
 import { type ArtNote, type BuildingReview, parseArtNote, sameArtTarget } from "./ArtNotes.js";
-import { currentBuildingVerdict } from "./BuildingReviewQueue.js";
+import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 
 const catalog = JSON.parse(readFileSync("public/data/art-catalog.json", "utf8")) as ArtCatalog;
 const sheet = required(catalog.sheets[0]);
@@ -33,6 +33,38 @@ function decision(value: "approved" | "changes" | "clear", day = 1): ArtNote {
   };
 }
 describe("building approval identities", () => {
+  it("round trips street context and keeps scene approvals independent of their shared building", () => {
+    const street: BuildingReview = {
+      ...review,
+      scene: "street",
+      caseId: "street-v1-meters",
+      propTypes: ["prop-city-street-v1-meter"],
+      url: "/tilefun/building-lab.html?run=streets&case=street-v1-meters",
+    };
+    const note = { ...decision("approved"), buildingReview: street };
+    expect(parseArtNote(note, catalog)).toEqual(note);
+    expect(buildingCaseKey(street)).toBe("street:street-v1-meters");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, street)).toBe("approved");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
+    expect(
+      currentBuildingVerdict([note], sheet.fingerprint, { ...street, caseId: "street-v1-bins" }),
+    ).toBeUndefined();
+    for (const change of [
+      { caseId: undefined },
+      { propTypes: undefined },
+      { url: "/tilefun/building-lab.html?run=streets&case=street-v1-bins" },
+      { url: "/tilefun/building-lab.html?run=streets-other&case=street-v1-meters" },
+    ])
+      expect(() =>
+        parseArtNote({ ...note, buildingReview: { ...street, ...change } }, catalog),
+      ).toThrow();
+    expect(
+      sameArtTarget(note, {
+        ...note,
+        buildingReview: { ...street, propTypes: ["prop-city-street-v1-bin-blue"] },
+      }),
+    ).toBe(false);
+  });
   it("does not infer human approval from an ordinary resolved note", () => {
     const { buildingVerdict: _, ...note } = decision("approved");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();

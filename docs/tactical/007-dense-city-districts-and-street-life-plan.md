@@ -1,8 +1,8 @@
 # Dense city districts and street life
 
-Status: planning, 2026-10-01. The user accepted the current building showcase
-in chat after the hotel panel removal (`b81d3b4`). No district generation or
-simulation changes are implemented by this document.
+Status: phase-0 street starter review implemented, 2026-10-01; awaiting human
+review. The user accepted the building showcase in chat after hotel panel
+removal (`b81d3b4`). District generation and simulation phases remain planned.
 
 This is the next implementation roadmap after
 [Tactical 006](006-art-workbench-and-city-variety-plan.md). That document keeps
@@ -279,3 +279,33 @@ compare identical initial state or controlled simulation time.
 slice, using the current building palette and existing park/street art. Add the
 first missing props only when that scene needs them. Then furnish its curb and
 parking in phase 2 before broadening public spaces and building families.
+
+
+## Phase-0 checkpoint — first review run (2026-10-01)
+
+[Review the street starter](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=streets).
+Six street-level scenes review meters, lamps/bollards, bins, seating/planters,
+stationary parking, and a combined sidewalk using one existing bakery frontage.
+Seven new prop definitions use exact atlas slices and the normal game factory,
+editor palette and renderer. Existing lamps and benches are reused. The case
+recipes reserve a clear 40px walking strip, shop approach and parking bays.
+The surface is a diagnostic stage; real district streets and walking simulation
+are not claimed at this checkpoint.
+
+The existing Building Lab UI now supports a separate street run with the same
+shared feedback transport, fingerprints, offline submissions, approvals, undo,
+next/previous and two-report pause. Notes identify the whole case and its prop
+types; direct source links identify each sampled sprite. Review state is scoped
+to the run, and existing building approvals remain independent. No approval
+events are synthesized. The central tool index links the run.
+
+Validation: typecheck/build and Biome pass; 1,076 unit tests and all 157 browser
+tests pass. Tests check exact indexed source rectangles, shared editor/game
+factory geometry, clear walking/approach zones, parking containment, independent
+scene verdicts, offline pause/reload/undo, real note API round trips and atlas
+links. All six street scenes and phone/geometry captures were inspected. The
+live deployment loads all six unchecked cases and keeps phone voting in view.
+The inventory has 450 source uses, with candidate street references labeled.
+
+Next: human approve/comment review of this palette; fix ready batches, then
+begin the shared playable dense-block slice with the accepted props.

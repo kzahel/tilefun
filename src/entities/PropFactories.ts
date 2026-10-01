@@ -2,6 +2,7 @@ import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasInd
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
+import { STREET_PROP_RECIPES } from "../generation/regional/StreetRecipes.js";
 import {
   furnitureAsset,
   INTERIOR_WALL_TYPE,
@@ -95,6 +96,20 @@ function makeStairSteps(config: {
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
+  ...Object.fromEntries(
+    STREET_PROP_RECIPES.map((p) => [
+      p.type,
+      {
+        sheetKey: "me-complete",
+        col: p.rect[0] / 16,
+        row: p.rect[1] / 16,
+        width: p.rect[2],
+        height: p.rect[3],
+        collider: p.collider,
+        material: p.material,
+      },
+    ]),
+  ),
   // Audited objects.png recipes for v3; leave legacy labels/rectangles frozen.
   "prop-regional-seedling": {
     sheetKey: "objects",
@@ -636,6 +651,14 @@ export interface PropPaletteEntry {
 }
 
 export const PROP_PALETTE: PropPaletteEntry[] = [
+  ...STREET_PROP_RECIPES.map(
+    (p): PropPaletteEntry => ({
+      type: p.type,
+      label: p.label,
+      color: "#8fa5a0",
+      category: "building",
+    }),
+  ),
   { type: "prop-flower-red", label: "Red Flower", color: "#e04040", category: "nature" },
   { type: "prop-flower-yellow", label: "Ylw Flower", color: "#e0d040", category: "nature" },
   { type: "prop-sunflower", label: "Sunflower", color: "#f0c020", category: "nature" },
