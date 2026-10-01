@@ -5435,9 +5435,9 @@
       "id": "recipe:prop-city-v1-hotel-3:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-3 · piece 2",
@@ -5453,10 +5453,10 @@
       "id": "recipe:prop-city-v1-hotel-3:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-3 · piece 3",
       "kind": "recipe",
@@ -5472,9 +5472,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2112,
         272,
-        16
+        144
       ],
       "label": "prop-city-v1-hotel-3 · piece 4",
       "kind": "recipe",
@@ -5489,48 +5489,12 @@
       "id": "recipe:prop-city-v1-hotel-3:4",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
-      ],
-      "label": "prop-city-v1-hotel-3 · piece 5",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3:5",
-      "sheetId": "me-complete",
-      "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-3 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3:6",
-      "sheetId": "me-complete",
-      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-3 · piece 7",
+      "label": "prop-city-v1-hotel-3 · piece 5",
       "kind": "recipe",
       "consumers": [
         {
@@ -5561,9 +5525,9 @@
       "id": "recipe:prop-city-v1-hotel-3-roof-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-3-roof-sign · piece 2",
@@ -5579,10 +5543,10 @@
       "id": "recipe:prop-city-v1-hotel-3-roof-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-3-roof-sign · piece 3",
       "kind": "recipe",
@@ -5598,9 +5562,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2112,
         272,
-        16
+        144
       ],
       "label": "prop-city-v1-hotel-3-roof-sign · piece 4",
       "kind": "recipe",
@@ -5615,10 +5579,10 @@
       "id": "recipe:prop-city-v1-hotel-3-roof-sign:4",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-3-roof-sign · piece 5",
       "kind": "recipe",
@@ -5633,48 +5597,12 @@
       "id": "recipe:prop-city-v1-hotel-3-roof-sign:5",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-3-roof-sign · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3-roof-sign:6",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-3-roof-sign · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3-roof-sign:7",
-      "sheetId": "me-complete",
-      "rect": [
         1968,
         1744,
         144,
         64
       ],
-      "label": "prop-city-v1-hotel-3-roof-sign · piece 8",
+      "label": "prop-city-v1-hotel-3-roof-sign · piece 6",
       "kind": "recipe",
       "consumers": [
         {
@@ -5705,9 +5633,9 @@
       "id": "recipe:prop-city-v1-hotel-3-side-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-3-side-sign · piece 2",
@@ -5723,10 +5651,10 @@
       "id": "recipe:prop-city-v1-hotel-3-side-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-3-side-sign · piece 3",
       "kind": "recipe",
@@ -5742,9 +5670,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2112,
         272,
-        16
+        144
       ],
       "label": "prop-city-v1-hotel-3-side-sign · piece 4",
       "kind": "recipe",
@@ -5759,10 +5687,10 @@
       "id": "recipe:prop-city-v1-hotel-3-side-sign:4",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        1904,
-        272,
-        112
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-3-side-sign · piece 5",
       "kind": "recipe",
@@ -5777,48 +5705,12 @@
       "id": "recipe:prop-city-v1-hotel-3-side-sign:5",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-3-side-sign · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3-side-sign:6",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-3-side-sign · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-3-side-sign:7",
-      "sheetId": "me-complete",
-      "rect": [
         2192,
         1952,
         48,
         176
       ],
-      "label": "prop-city-v1-hotel-3-side-sign · piece 8",
+      "label": "prop-city-v1-hotel-3-side-sign · piece 6",
       "kind": "recipe",
       "consumers": [
         {
@@ -5849,9 +5741,9 @@
       "id": "recipe:prop-city-v1-hotel-4:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-4 · piece 2",
@@ -5867,10 +5759,10 @@
       "id": "recipe:prop-city-v1-hotel-4:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-4 · piece 3",
       "kind": "recipe",
@@ -5886,9 +5778,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-4 · piece 4",
       "kind": "recipe",
@@ -5904,9 +5796,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2112,
         272,
-        112
+        144
       ],
       "label": "prop-city-v1-hotel-4 · piece 5",
       "kind": "recipe",
@@ -5921,48 +5813,12 @@
       "id": "recipe:prop-city-v1-hotel-4:5",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
-      ],
-      "label": "prop-city-v1-hotel-4 · piece 6",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4:6",
-      "sheetId": "me-complete",
-      "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-4 · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4:7",
-      "sheetId": "me-complete",
-      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-4 · piece 8",
+      "label": "prop-city-v1-hotel-4 · piece 6",
       "kind": "recipe",
       "consumers": [
         {
@@ -5993,9 +5849,9 @@
       "id": "recipe:prop-city-v1-hotel-4-roof-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-4-roof-sign · piece 2",
@@ -6011,10 +5867,10 @@
       "id": "recipe:prop-city-v1-hotel-4-roof-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-4-roof-sign · piece 3",
       "kind": "recipe",
@@ -6030,9 +5886,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-4-roof-sign · piece 4",
       "kind": "recipe",
@@ -6048,9 +5904,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2112,
         272,
-        112
+        144
       ],
       "label": "prop-city-v1-hotel-4-roof-sign · piece 5",
       "kind": "recipe",
@@ -6065,10 +5921,10 @@
       "id": "recipe:prop-city-v1-hotel-4-roof-sign:5",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-4-roof-sign · piece 6",
       "kind": "recipe",
@@ -6083,48 +5939,12 @@
       "id": "recipe:prop-city-v1-hotel-4-roof-sign:6",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-4-roof-sign · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4-roof-sign:7",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-4-roof-sign · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4-roof-sign:8",
-      "sheetId": "me-complete",
-      "rect": [
         1968,
         1744,
         144,
         64
       ],
-      "label": "prop-city-v1-hotel-4-roof-sign · piece 9",
+      "label": "prop-city-v1-hotel-4-roof-sign · piece 7",
       "kind": "recipe",
       "consumers": [
         {
@@ -6155,9 +5975,9 @@
       "id": "recipe:prop-city-v1-hotel-4-side-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-4-side-sign · piece 2",
@@ -6173,10 +5993,10 @@
       "id": "recipe:prop-city-v1-hotel-4-side-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-4-side-sign · piece 3",
       "kind": "recipe",
@@ -6192,9 +6012,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-4-side-sign · piece 4",
       "kind": "recipe",
@@ -6210,9 +6030,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2112,
         272,
-        112
+        144
       ],
       "label": "prop-city-v1-hotel-4-side-sign · piece 5",
       "kind": "recipe",
@@ -6227,10 +6047,10 @@
       "id": "recipe:prop-city-v1-hotel-4-side-sign:5",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-4-side-sign · piece 6",
       "kind": "recipe",
@@ -6245,48 +6065,12 @@
       "id": "recipe:prop-city-v1-hotel-4-side-sign:6",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-4-side-sign · piece 7",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4-side-sign:7",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-4-side-sign · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-4-side-sign:8",
-      "sheetId": "me-complete",
-      "rect": [
         2192,
         1952,
         48,
         176
       ],
-      "label": "prop-city-v1-hotel-4-side-sign · piece 9",
+      "label": "prop-city-v1-hotel-4-side-sign · piece 7",
       "kind": "recipe",
       "consumers": [
         {
@@ -6317,9 +6101,9 @@
       "id": "recipe:prop-city-v1-hotel-6:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-6 · piece 2",
@@ -6335,10 +6119,10 @@
       "id": "recipe:prop-city-v1-hotel-6:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-6 · piece 3",
       "kind": "recipe",
@@ -6354,9 +6138,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-6 · piece 4",
       "kind": "recipe",
@@ -6372,9 +6156,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2032,
         272,
-        112
+        64
       ],
       "label": "prop-city-v1-hotel-6 · piece 5",
       "kind": "recipe",
@@ -6408,9 +6192,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2032,
+        2112,
         272,
-        64
+        144
       ],
       "label": "prop-city-v1-hotel-6 · piece 7",
       "kind": "recipe",
@@ -6425,48 +6209,12 @@
       "id": "recipe:prop-city-v1-hotel-6:7",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
-      ],
-      "label": "prop-city-v1-hotel-6 · piece 8",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6:8",
-      "sheetId": "me-complete",
-      "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-6 · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6:9",
-      "sheetId": "me-complete",
-      "rect": [
         2016,
         2256,
         48,
         32
       ],
-      "label": "prop-city-v1-hotel-6 · piece 10",
+      "label": "prop-city-v1-hotel-6 · piece 8",
       "kind": "recipe",
       "consumers": [
         {
@@ -6497,9 +6245,9 @@
       "id": "recipe:prop-city-v1-hotel-6-roof-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 2",
@@ -6515,10 +6263,10 @@
       "id": "recipe:prop-city-v1-hotel-6-roof-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 3",
       "kind": "recipe",
@@ -6534,9 +6282,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 4",
       "kind": "recipe",
@@ -6552,9 +6300,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2032,
         272,
-        112
+        64
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 5",
       "kind": "recipe",
@@ -6588,9 +6336,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2032,
+        2112,
         272,
-        64
+        144
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 7",
       "kind": "recipe",
@@ -6605,10 +6353,10 @@
       "id": "recipe:prop-city-v1-hotel-6-roof-sign:7",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-6-roof-sign · piece 8",
       "kind": "recipe",
@@ -6623,48 +6371,12 @@
       "id": "recipe:prop-city-v1-hotel-6-roof-sign:8",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-6-roof-sign · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6-roof-sign:9",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-6-roof-sign · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6-roof-sign:10",
-      "sheetId": "me-complete",
-      "rect": [
         1968,
         1744,
         144,
         64
       ],
-      "label": "prop-city-v1-hotel-6-roof-sign · piece 11",
+      "label": "prop-city-v1-hotel-6-roof-sign · piece 9",
       "kind": "recipe",
       "consumers": [
         {
@@ -6695,9 +6407,9 @@
       "id": "recipe:prop-city-v1-hotel-6-side-sign:1",
       "sheetId": "me-complete",
       "rect": [
-        1952,
-        1808,
-        32,
+        1904,
+        1872,
+        272,
         16
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 2",
@@ -6713,10 +6425,10 @@
       "id": "recipe:prop-city-v1-hotel-6-side-sign:2",
       "sheetId": "me-complete",
       "rect": [
-        2112,
-        1808,
-        32,
-        16
+        1904,
+        1904,
+        272,
+        112
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 3",
       "kind": "recipe",
@@ -6732,9 +6444,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1872,
+        2032,
         272,
-        16
+        64
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 4",
       "kind": "recipe",
@@ -6750,9 +6462,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        1904,
+        2032,
         272,
-        112
+        64
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 5",
       "kind": "recipe",
@@ -6786,9 +6498,9 @@
       "sheetId": "me-complete",
       "rect": [
         1904,
-        2032,
+        2112,
         272,
-        64
+        144
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 7",
       "kind": "recipe",
@@ -6803,10 +6515,10 @@
       "id": "recipe:prop-city-v1-hotel-6-side-sign:7",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2032,
-        272,
-        64
+        2016,
+        2256,
+        48,
+        32
       ],
       "label": "prop-city-v1-hotel-6-side-sign · piece 8",
       "kind": "recipe",
@@ -6821,48 +6533,12 @@
       "id": "recipe:prop-city-v1-hotel-6-side-sign:8",
       "sheetId": "me-complete",
       "rect": [
-        1904,
-        2112,
-        272,
-        144
-      ],
-      "label": "prop-city-v1-hotel-6-side-sign · piece 9",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6-side-sign:9",
-      "sheetId": "me-complete",
-      "rect": [
-        2016,
-        2256,
-        48,
-        32
-      ],
-      "label": "prop-city-v1-hotel-6-side-sign · piece 10",
-      "kind": "recipe",
-      "consumers": [
-        {
-          "system": "City prefab showcase (candidate)",
-          "source": "src/generation/regional/CityBuildingPrefabs.ts"
-        }
-      ]
-    },
-    {
-      "id": "recipe:prop-city-v1-hotel-6-side-sign:10",
-      "sheetId": "me-complete",
-      "rect": [
         2192,
         1952,
         48,
         176
       ],
-      "label": "prop-city-v1-hotel-6-side-sign · piece 11",
+      "label": "prop-city-v1-hotel-6-side-sign · piece 9",
       "kind": "recipe",
       "consumers": [
         {

@@ -166,6 +166,22 @@ captures and the live deployment were checked. Next: review the corrected
 hotel/sign variants, then promote approved families into the new dense-city
 profile.
 
+Hotel panel follow-up (2026-10-01): clarified reports
+`256122f1-18cf-4785-ba66-818e5792c2a9` and
+`95f2f1a9-da05-41cc-a801-b92f27cd82c4` both concern the two small floating roof
+panels, not the HOTEL signs. On the user's instruction, the panels at
+`[1952,1808,32,16]` and `[2112,1808,32,16]` are removed from all hotel recipes.
+The prior chimney label was an assumption; their identity/attachment is still
+uncertain, so any reintroduction requires a separate audit. Roof body, trim,
+sign pieces/offsets, wall footprints, doors, and other building families are
+unchanged. Shared bounds shrink naturally; affected hotel/block reviews reopen
+for human judgment. The inventory now has 443 active source uses. Typecheck,
+build, Biome, 1,073 unit tests, and all 153 browser tests pass. Source-pixel
+checks cover the vacated panel locations and preserve sign art across all
+height variants. Built preview captures and the live deployment were checked.
+Next: review the simpler hotel tops and continue toward
+the dense-city profile using approved families.
+
 Next audit work:
 
 Use the human pending notes as the shortlist. Start with Condo 1–9, especially

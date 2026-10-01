@@ -69,7 +69,7 @@ describe("source-audited city prefab candidates", () => {
     expect(hotels).toHaveLength(9);
     for (const p of hotels) {
       expect(p.parts.some((s) => s.frameRow * 16 === 1824 && s.spriteHeight === 32)).toBe(true);
-      expect(p.parts.filter((s) => s.frameRow * 16 === 1808)).toHaveLength(2);
+      expect(p.parts.filter((s) => s.frameRow * 16 === 1808)).toHaveLength(0);
       const signs = p.parts.filter((s) => s.frameRow * 16 === 1744 || s.frameCol * 16 === 2192);
       expect(signs).toHaveLength(p.hotelSign === "none" ? 0 : 1);
       const bounds = buildingVisualBounds(p);
@@ -77,7 +77,7 @@ describe("source-audited city prefab candidates", () => {
       expect(p.width).toBe(272);
       expect(p.groundDepth).toBe(32);
       expect(p.entrance).toEqual({ dx: 0, dy: 24 });
-      expect(p.height).toBe(320 + (p.floors - 3) * 64 + (p.hotelSign === "roof" ? 24 : 0));
+      expect(p.height).toBe(304 + (p.floors - 3) * 64 + (p.hotelSign === "roof" ? 40 : 0));
       expect(getWallsForPropType(p.type)?.[0]?.width).toBe(272);
     }
   });

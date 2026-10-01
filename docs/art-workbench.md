@@ -169,10 +169,12 @@ review bookmarks open the complete two-level building. Apartment candidate IDs
 remain bookmarkable, with updated names and composition hashes. Saved notes
 keep their original context and flag changed compositions when opened in the
 lab. Frozen generator recipes retain their old outputs.
-Hotels now include the full top band `[1904,1824,272,32]` with two chimney caps
-`[1952,1808,32,16]` / `[2112,1808,32,16]` (missing from the vendor atlas index;
-split to exclude adjacent car pixels) and the separate 16px `Hotel_Modular_4`
-trim. `CITY_HOTEL_ART` records that audit and the optional signboards:
+Hotels include the full top band `[1904,1824,272,32]` (missing from the vendor
+atlas index) and the separate 16px `Hotel_Modular_4` trim. The detached panels
+at `[1952,1808,32,16]` / `[2112,1808,32,16]` are omitted following human feedback;
+their identity and proper attachment remain uncertain. They can be revisited
+as optional accessories after an art audit. `CITY_HOTEL_ART` records the active
+source regions and optional signboards:
 rooftop `[1968,1744,144,64]` and
 right-side `[2192,1952,48,176]`. Each 3/4/6-level hotel has no-sign, rooftop-sign,
 and side-sign shared recipes. **Hotel sign** switches between them above the

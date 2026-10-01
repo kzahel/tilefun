@@ -36,15 +36,13 @@ export interface CityBuildingPrefab extends BuildingRecipe {
 }
 export type HotelSign = "none" | "roof" | "side";
 /** The atlas index lists only the thin Hotel_Modular_4 trim, omitting this
- * full top band. Its chimney strip shares a row with unrelated car pixels;
- * slice chimneys separately instead of sampling that gutter. Signboards are
- * accessories, not part of the wall footprint.
+ * full top band. The two detached panels above it are deferred accessories:
+ * their identity/attachment is uncertain and the user requested their removal.
+ * Signboards are accessories, not part of the wall footprint.
  * Audited against the original PNG for hotel feedback e35a30f8-e0b4-46f1-8496-46b8ef36989c.
  */
 export const CITY_HOTEL_ART = {
   roof: [1904, 1824, 272, 32],
-  leftChimney: [1952, 1808, 32, 16],
-  rightChimney: [2112, 1808, 32, 16],
   trim: [1904, 1872, 272, 16],
   roofSign: [1968, 1744, 144, 64],
   sideSign: [2192, 1952, 48, 176],
@@ -164,8 +162,6 @@ function hotel(floors: number, sign: HotelSign = "none"): CityBuildingPrefab {
   const roof = [sourcePart(CITY_HOTEL_ART.roof, 0, roofDatum)];
   const parts = [
     ...roof,
-    sourcePart(CITY_HOTEL_ART.leftChimney, -72, roofDatum - 32),
-    sourcePart(CITY_HOTEL_ART.rightChimney, 88, roofDatum - 32),
     sourcePart(CITY_HOTEL_ART.trim, 0, roofDatum + 16),
     part(1904, 1904, 272, 112, 0, -144 - repeat * 64),
   ];

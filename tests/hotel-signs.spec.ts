@@ -88,6 +88,24 @@ for (const floors of [3, 4, 6]) {
               if (JSON.stringify(actual) !== JSON.stringify([32, 48, 42, 255]))
                 failures.push(`Contaminated roof gutter: ${actual}`);
             }
+          // The detached panels are omitted. The rooftop sign can cover
+          // part of the left panel's old location; sample the exposed areas.
+          for (const panelX of [-88, 72])
+            for (let y = 0; y < 16; y += 4)
+              for (let x = 0; x < 32; x += 4) {
+                if (pieces.some((s) => s.frameRow * 16 === 1744) && panelX === -88 && x >= 16)
+                  continue;
+                const actual = [
+                  ...ctx.getImageData(
+                    (panelX + x - bounds.minX + 24) * 2,
+                    baseline + (roof.dy - 48 + y) * 2,
+                    1,
+                    1,
+                  ).data,
+                ];
+                if (JSON.stringify(actual) !== JSON.stringify([32, 48, 42, 255]))
+                  failures.push(`Detached roof panel: ${actual}`);
+              }
           return { checked, failures };
         },
         { bounds, pieces },
@@ -134,7 +152,7 @@ test("hotel sign variants own their drafts and approvals; mobile review stays in
   await page.locator("#approve-building").click();
   await expect(page.locator("#queue-sync")).toHaveText("Server inbox up to date.");
   expect(saved[0]?.buildingReview?.prefabIds).toEqual([hotelPrefabType(3, "side")]);
-  expect(saved[0]?.rect).toEqual([1904, 1808, 336, 480]);
+  expect(saved[0]?.rect).toEqual([1904, 1824, 336, 464]);
   await page.locator("#prefab").selectOption(hotelPrefabType(3, "side"));
   await expect(page.locator("#review-verdict")).toContainText("Approved");
   await page.locator("#hotel-sign").selectOption("roof");
