@@ -48,3 +48,10 @@ phase-0 furniture cases and its own navigation/pause state. It uses the same
 art inbox and review loop; CLI notes include the street case and prop types.
 These props are available for editing/review, not yet selected by city worldgen.
 The next district milestones are in `docs/tactical/007-dense-city-districts-and-street-life-plan.md`.
+
+Road foundation review is `/tilefun/building-lab.html?run=surfaces`, with nine
+source-backed width/curb/crossing/divider scenes, its own queue/pause, and shared
+`src/road/CitySurfaceRecipes.ts` composition. It is a candidate surface contract
+for the next district revision; frozen worlds are unchanged. Review surfaces
+before adding more props/dense blocks. Surface notes carry a case ID and
+`surfaceRecipe`, with no fake building or prop IDs.

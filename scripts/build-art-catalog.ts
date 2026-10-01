@@ -16,6 +16,7 @@ import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
+import { CITY_SURFACE_CASES, composeCitySurface } from "../src/road/CitySurfaceRecipes.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
 
@@ -165,6 +166,20 @@ for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS])
         ...(references.get(recipe.type) ?? []),
       ],
     );
+const surfaceTiles = new Map(
+  CITY_SURFACE_CASES.flatMap((c) =>
+    composeCitySurface(c).map((p) => [p.rect.join(":"), p] as const),
+  ),
+);
+for (const [key, piece] of surfaceTiles)
+  add(
+    `surface:city-v1:${key}`,
+    "me-complete",
+    piece.rect,
+    `City surface candidate · ${piece.label}`,
+    "terrain",
+    [{ system: "Road foundation review (candidate)", source: "src/road/CitySurfaceRecipes.ts" }],
+  );
 registerTileVariants({
   addTiles(group, coords) {
     for (const [i, c] of coords.entries())

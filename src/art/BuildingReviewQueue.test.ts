@@ -65,6 +65,35 @@ describe("building approval identities", () => {
       }),
     ).toBe(false);
   });
+  it("round trips terrain-only reviews and rejects ambiguous or mismatched targets", () => {
+    const surface: BuildingReview = {
+      ...review,
+      scene: "surface",
+      prefabIds: [],
+      caseId: "surface-v1-narrow",
+      surfaceRecipe: "city-surfaces-v1",
+      url: "/tilefun/building-lab.html?run=surfaces&case=surface-v1-narrow",
+    };
+    const note = { ...decision("approved"), buildingReview: surface };
+    expect(parseArtNote(note, catalog)).toEqual(note);
+    expect(buildingCaseKey(surface)).toBe("surface:surface-v1-narrow");
+    expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
+    for (const change of [
+      { prefabIds: ["prop-city-v1-bakery-2"] },
+      { caseId: undefined },
+      { surfaceRecipe: undefined },
+      { surfaceRecipe: "unknown" },
+      { propTypes: [] },
+      { url: "/tilefun/building-lab.html?run=streets&case=surface-v1-narrow" },
+      { url: "/tilefun/building-lab.html?run=surfaces&case=surface-v1-other" },
+    ])
+      expect(() =>
+        parseArtNote({ ...note, buildingReview: { ...surface, ...change } }, catalog),
+      ).toThrow();
+    expect(
+      sameArtTarget(note, { ...note, buildingReview: { ...surface, surfaceRecipe: "changed" } }),
+    ).toBe(false);
+  });
   it("does not infer human approval from an ordinary resolved note", () => {
     const { buildingVerdict: _, ...note } = decision("approved");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();

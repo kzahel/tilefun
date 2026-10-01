@@ -1,7 +1,7 @@
 # Dense city districts and street life
 
-Status: phase-0 street starter review implemented, 2026-10-01; awaiting human
-review. The user accepted the building showcase in chat after hotel panel
+Status: phase-0 street starter and road foundation reviews implemented,
+2026-10-01; road surfaces are now the priority human checkpoint. The user accepted the building showcase in chat after hotel panel
 removal (`b81d3b4`). District generation and simulation phases remain planned.
 
 This is the next implementation roadmap after
@@ -100,7 +100,8 @@ claiming four-sided blocks. Mirroring cannot invent a missing elevation.
 
 | Phase | Deliverable | Review checkpoint |
 | --- | --- | --- |
-| 0. Starter palette and placement facts | A small curated set of street/park props with source links, facings, anchors, collision and clearance facts | Review one furnished sidewalk strip with a building entrance |
+| 0a. Road foundation | Shared source-backed asphalt, pavement, curb joins, crossings, widths and raised divider recipes | Review the nine road scenes before dense blocks or more props |
+| 0b. Starter palette and placement facts | A small curated set of street/park props with source links, facings, anchors, collision and clearance facts | Review one furnished sidewalk strip with a building entrance |
 | 1. Playable dense block | New pinned city revision, shared street/block/lot planning, existing building families, connected sidewalks and crossings, a few walkers | Inspect a compact neighborhood in the explorer and play at the same location |
 | 2. Streets and parking | Curbs, meters, lamps, signs, parked cars, curb bays and a small parking lot | Walk a busy commercial street and cross an intersection without blocked doors or sidewalks |
 | 3. Parks and squares | Pocket park, neighborhood park, plaza, then a connected large park | Compare different public spaces embedded in dense surroundings |
@@ -275,10 +276,10 @@ save/reload tombstones and exact explorer-to-game initial-state parity.
 Preview and authoritative runtime positions can differ after simulation starts;
 compare identical initial state or controlled simulation time.
 
-**Recommended next implementation:** phases 0–1 as a small playable dense-block
-slice, using the current building palette and existing park/street art. Add the
-first missing props only when that scene needs them. Then furnish its curb and
-parking in phase 2 before broadening public spaces and building families.
+**Recommended next implementation:** approve/fix the road foundation first.
+Then carry the accepted surfaces and existing building/prop palette into the
+shared playable dense-block slice. Furnish its curb and parking in phase 2
+before broadening public spaces and building families.
 
 
 ## Phase-0 checkpoint — first review run (2026-10-01)
@@ -307,5 +308,48 @@ links. All six street scenes and phone/geometry captures were inspected. The
 live deployment loads all six unchecked cases and keeps phone voting in view.
 The inventory has 450 source uses, with candidate street references labeled.
 
-Next: human approve/comment review of this palette; fix ready batches, then
-begin the shared playable dense-block slice with the accepted props.
+The user found the props reasonable but requested road/sidewalk work first.
+Keep this palette available; prioritize the following surface checkpoint.
+
+
+## Phase-0a checkpoint — road foundation (2026-10-01)
+
+[Review the road foundation](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=surfaces).
+The user redirected work before further props: prove a convincing base canvas
+with narrow and two-lane roads, center dividers, sidewalks, curbs, corners and
+intersections. The two source notes are `ce4b4882-0078-451d-b89b-bb4f24ef7acc`
+(`[512,16,288,288]`) and `e06455c5-5473-4ba8-8a10-aa0ac3e660f6`
+(`[0,1904,384,352]`) on `me-complete` revision
+`1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737`.
+
+Nine cases cover a narrow street, horizontal/vertical two-lane streets, a
+divided boulevard, a turn, T/four-way intersections, neighboring warm pavement,
+and the first selected bank for comparison. `src/road/CitySurfaceRecipes.ts`
+owns source rectangles, continuous road occupancy and surface composition; the
+lab only draws those placements. Asphalt, paint and curb shading are original
+PNG pixels. No props obscure the surface review. Street corners currently use
+the audited square motif; the raised median uses original rounded end caps.
+
+This is a candidate surface contract, not a change to existing saved worlds.
+After human review, the next district revision must consume this composer (or
+its promoted version) in the game's chunk renderer and explorer, rather than
+recreating it in either UI. Retain the source/recipe/render fingerprint review
+contract and add cross-chunk seam and explorer/game parity checks at that step.
+Curb ramps, rounded street corners, crossing behavior and pedestrian path
+clearances still need dedicated slices; these crossings stop short of curbs.
+
+The existing approve/report/undo/next/previous workflow is reused. Surface
+records have their own case IDs, empty building lists and a surface recipe ID;
+they never approve a building or prop scene. Run navigation and two-report
+pause are independent. Source-use inventory identifies candidate surface tiles.
+Next: human road review and ready-batch fixes, then the first shared dense block.
+
+Validation: typecheck, build and Biome pass; 1,081 unit tests and all 160 browser
+tests pass. Native source captures cover every case. Tests verify opaque pinned
+source pixels, full base coverage, paint containment, both kinds of curb corner,
+consistent neighbor queries across chunk boundaries, negative-coordinate fill
+parity, exact review renders, phone controls, per-case drafts, independent
+queues, offline pause/reload/undo, changed-appearance reopening and real inbox
+round trips. The inventory has 497 source uses. The live deployment shows all
+nine cases with phone navigation and voting in view; no live test feedback or
+approvals were submitted.

@@ -238,3 +238,20 @@ Scene IDs and source/recipe/render revisions keep approvals independent even
 when two scenes use the same building. Saved feedback, atlas links and
 `npm run art:notes` expose the street case and prop identities. A changed scene
 returns to Unchecked; an agent reply never creates approval.
+
+
+### Road foundation review
+
+[Road foundation](https://tilefun.graehlarts.com/tilefun/building-lab.html?run=surfaces)
+is linked from the central tools index. Nine cases compare road widths, curb
+joins, crossings and a rounded raised median using the two annotated source
+banks and neighboring warm pavement. It reuses Building Lab's review controls,
+shared inbox, offline saving, exact appearance invalidation and two-report
+pause, with independent navigation. No agent-generated approval events.
+
+Surface records use `buildingReview.scene: "surface"`, a `surface-v1-*` case ID,
+`surfaceRecipe: "city-surfaces-v1"` and `prefabIds: []`. The field name remains
+for backwards compatibility; no building IDs stand in for terrain. Source-use
+inventory labels every sampled surface rect as a candidate, with direct atlas
+links in the review. `CitySurfaceRecipes.ts` owns composition for reuse in the
+next district renderer; this checkpoint does not change existing worldgen.

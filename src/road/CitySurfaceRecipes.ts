@@ -1,0 +1,256 @@
+/** Audited source pixels shared by surface previews and future district generation.
+ * This candidate bank is deliberately separate from the frozen RoadType renderer.
+ */
+export const CITY_SURFACE_SOURCE = {
+  sheetId: "me-complete",
+  fingerprint: "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  notes: ["ce4b4882-0078-451d-b89b-bb4f24ef7acc", "e06455c5-5473-4ba8-8a10-aa0ac3e660f6"],
+} as const;
+export type SurfaceRect = readonly [number, number, number, number];
+export interface SurfacePiece {
+  label: string;
+  rect: SurfaceRect;
+  x: number;
+  y: number;
+  role: "road" | "pavement" | "curb" | "paint" | "median";
+}
+export interface CitySurfaceCase {
+  id: string;
+  name: string;
+  prompt: string;
+  layout: "straight" | "vertical" | "boulevard" | "corner" | "tee" | "cross";
+  roadWidth: number;
+  palette: "neutral" | "warm" | "original";
+}
+export const CITY_SURFACE_CASES: readonly CitySurfaceCase[] = [
+  {
+    id: "surface-v1-narrow",
+    name: "Narrow neighborhood street",
+    layout: "straight",
+    roadWidth: 4,
+    palette: "neutral",
+    prompt: "Review the narrow roadway, pavement texture, and both curb edges.",
+  },
+  {
+    id: "surface-v1-two-lane",
+    name: "Two-lane street & crossing",
+    layout: "straight",
+    roadWidth: 8,
+    palette: "neutral",
+    prompt: "Review the lane divider, zebra crossing, and shaded curb joins.",
+  },
+  {
+    id: "surface-v1-vertical",
+    name: "Two-lane street · north–south",
+    layout: "vertical",
+    roadWidth: 8,
+    palette: "neutral",
+    prompt: "Check the vertical curb edges and crossing against the horizontal street.",
+  },
+  {
+    id: "surface-v1-boulevard",
+    name: "Divided boulevard",
+    layout: "boulevard",
+    roadWidth: 12,
+    palette: "neutral",
+    prompt: "Review the rounded raised center divider and the road space on each side.",
+  },
+  {
+    id: "surface-v1-corner",
+    name: "Neighborhood corner",
+    layout: "corner",
+    roadWidth: 6,
+    palette: "neutral",
+    prompt: "Review the inside and outside curb corners and the turn.",
+  },
+  {
+    id: "surface-v1-tee",
+    name: "T intersection",
+    layout: "tee",
+    roadWidth: 6,
+    palette: "neutral",
+    prompt: "Check pavement continuity, curb corners, and the three approaches.",
+  },
+  {
+    id: "surface-v1-cross",
+    name: "Four-way intersection",
+    layout: "cross",
+    roadWidth: 8,
+    palette: "neutral",
+    prompt: "Review the four corner joins, crossings, and open intersection center.",
+  },
+  {
+    id: "surface-v1-warm",
+    name: "Four-way intersection · warm pavement",
+    layout: "cross",
+    roadWidth: 8,
+    palette: "warm",
+    prompt: "Compare this neighboring warm pavement bank with the neutral intersection.",
+  },
+  {
+    id: "surface-v1-original",
+    name: "Two-lane street · first selection",
+    layout: "straight",
+    roadWidth: 8,
+    palette: "original",
+    prompt: "Compare the first selected pavement/road bank with the newer neutral bank.",
+  },
+];
+export const SURFACE_COLS = 32;
+export const SURFACE_ROWS = 24;
+
+/** Unbounded occupancy is intentional: preview boundaries do not create end caps.
+ * Districts can use this same query across chunk boundaries.
+ */
+export function citySurfaceRoadAt(c: CitySurfaceCase, x: number, y: number): boolean {
+  const left = 16 - c.roadWidth / 2,
+    right = 16 + c.roadWidth / 2;
+  const top = 12 - c.roadWidth / 2,
+    bottom = 12 + c.roadWidth / 2;
+  const h = y >= top && y < bottom,
+    v = x >= left && x < right;
+  switch (c.layout) {
+    case "vertical":
+      return v;
+    case "corner":
+      return (h && x < right) || (v && y >= top);
+    case "tee":
+      return h || (v && y >= top);
+    case "cross":
+      return h || v;
+    default:
+      return h;
+  }
+}
+function bank(palette: CitySurfaceCase["palette"]): [number, number] {
+  return palette === "original" ? [512, 16] : palette === "warm" ? [416, 1904] : [0, 1904];
+}
+/** Neighbor query may span loaded chunks; tile choice never depends on view bounds.
+ * Supports the reviewed wide connected streets, not isolated one-cell slivers.
+ */
+export function citySurfaceTileAt(
+  palette: CitySurfaceCase["palette"],
+  x: number,
+  y: number,
+  road: (x: number, y: number) => boolean,
+): SurfacePiece {
+  const [bx, by] = bank(palette);
+  if (!road(x, y)) {
+    return {
+      label: "Pavement fill",
+      rect: [bx + 96 + (((x % 2) + 2) % 2) * 16, by + 80 + (((y % 2) + 2) % 2) * 16, 16, 16],
+      x: x * 16,
+      y: y * 16,
+      role: "pavement",
+    };
+  }
+  // Curb pixels live on the asphalt side in this 4×4 vendor motif.
+  const n = !road(x, y - 1),
+    s = !road(x, y + 1),
+    w = !road(x - 1, y),
+    e = !road(x + 1, y);
+  let rx = 80,
+    ry = 0;
+  if ((n || s) && (w || e)) {
+    // Concave pavement corner: road touches two pavement sides. The inverted
+    // vendor motif has full curb runs on both edges, unlike a convex end cap.
+    rx = w ? 96 : 112;
+    ry = n ? 0 : 48;
+  } else if (n || s || w || e) {
+    rx = w ? 64 : e ? 16 : 32;
+    ry = n ? 48 : s ? 0 : 16;
+  } else {
+    const nw = !road(x - 1, y - 1),
+      ne = !road(x + 1, y - 1),
+      sw = !road(x - 1, y + 1),
+      se = !road(x + 1, y + 1);
+    if (nw || ne || sw || se) {
+      rx = nw || sw ? 64 : 16;
+      ry = nw || ne ? 48 : 0;
+    }
+  }
+  return {
+    label: rx === 80 ? "Asphalt fill" : "Curb join",
+    rect: [bx + rx, by + ry, 16, 16],
+    x: x * 16,
+    y: y * 16,
+    role: rx === 80 ? "road" : "curb",
+  };
+}
+
+/** Every piece is original PNG art, including paint. No rotated curbs, CSS surfaces,
+ * random fills, or independent lab-only tiling. Coordinates are native world pixels.
+ */
+export function composeCitySurface(c: CitySurfaceCase): SurfacePiece[] {
+  const pieces: SurfacePiece[] = [];
+  const [bx, by] = bank(c.palette);
+  const add = (
+    label: string,
+    rx: number,
+    ry: number,
+    w: number,
+    h: number,
+    x: number,
+    y: number,
+    role: SurfacePiece["role"],
+  ) => pieces.push({ label, rect: [bx + rx, by + ry, w, h], x, y, role });
+  const road = (x: number, y: number) => citySurfaceRoadAt(c, x, y);
+  for (let y = 0; y < SURFACE_ROWS; y++)
+    for (let x = 0; x < SURFACE_COLS; x++) pieces.push(citySurfaceTileAt(c.palette, x, y, road));
+  const top = 12 - c.roadWidth / 2,
+    bottom = 12 + c.roadWidth / 2;
+  const left = 16 - c.roadWidth / 2,
+    right = 16 + c.roadWidth / 2;
+  const horizontalCrossing = (x: number) => {
+    for (let y = top + 1; y < bottom - 1; y++)
+      add("Crosswalk · across horizontal road", 64, 80, 32, 16, x * 16, y * 16, "paint");
+  };
+  const verticalCrossing = (y: number) => {
+    for (let x = left + 1; x < right - 1; x++)
+      add("Crosswalk · across vertical road", 16, 112, 16, 32, x * 16, y * 16, "paint");
+  };
+  if (c.layout === "boulevard") {
+    // The rounded 32px island is authored separately from the rectangular bank.
+    // Repeat only its middle; retain each original end cap and south curb shadow.
+    for (let x = 6; x < 26; x++)
+      add(
+        "Raised median",
+        x === 6 ? 224 : x === 25 ? 272 : 240,
+        96,
+        16,
+        32,
+        x * 16,
+        11 * 16,
+        "median",
+      );
+  } else if (c.roadWidth >= 6) {
+    for (let x = 0; x < SURFACE_COLS; x += 2)
+      if (
+        c.layout !== "vertical" &&
+        (c.layout === "straight" || x < left - 2 || (c.layout !== "corner" && x >= right + 2))
+      )
+        add("Dashed center line · horizontal", 32, 64, 16, 16, x * 16, 12 * 16 - 8, "paint");
+    if (["vertical", "corner", "tee", "cross"].includes(c.layout))
+      for (let y = 0; y < SURFACE_ROWS; y += 2)
+        if (c.layout === "vertical" || y >= bottom + 2 || (c.layout === "cross" && y < top - 2))
+          add("Dashed center line · vertical", 16, 80, 16, 16, 16 * 16 - 8, y * 16, "paint");
+    if (c.layout === "straight") horizontalCrossing(8);
+    if (c.layout === "vertical") verticalCrossing(6);
+    if (c.layout === "cross" || c.layout === "tee") {
+      horizontalCrossing(left - 3);
+      horizontalCrossing(right + 1);
+      verticalCrossing(bottom + 1);
+      if (c.layout === "cross") verticalCrossing(top - 3);
+    }
+  }
+  return pieces;
+}
+export function citySurfaceComposition(c: CitySurfaceCase) {
+  return {
+    source: CITY_SURFACE_SOURCE,
+    columns: SURFACE_COLS,
+    rows: SURFACE_ROWS,
+    case: c,
+    pieces: composeCitySurface(c),
+  };
+}

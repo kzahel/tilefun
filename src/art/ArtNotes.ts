@@ -2,10 +2,11 @@ import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
 export interface BuildingReview {
-  scene: "single" | "residential" | "mixed" | "hotel" | "street";
-  /** Stable context identity for a street scene, independent of its building. */
+  scene: "single" | "residential" | "mixed" | "hotel" | "street" | "surface";
+  /** Stable context identity for a surface or street scene, independent of its building. */
   caseId?: string;
   propTypes?: string[];
+  surfaceRecipe?: string;
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -38,9 +39,9 @@ function parseBuildingReview(value: unknown): BuildingReview {
   if (!value || typeof value !== "object") throw new Error("Invalid building review");
   const v = value as Record<string, unknown>;
   if (
-    !["single", "residential", "mixed", "hotel", "street"].includes(v.scene as string) ||
+    !["single", "residential", "mixed", "hotel", "street", "surface"].includes(v.scene as string) ||
     !Array.isArray(v.prefabIds) ||
-    !v.prefabIds.length ||
+    (v.scene === "surface" ? v.prefabIds.length !== 0 : !v.prefabIds.length) ||
     v.prefabIds.length > 30 ||
     v.prefabIds.some((id) => typeof id !== "string" || !/^prop-city-[a-z0-9-]{1,100}$/.test(id)) ||
     typeof v.revision !== "string" ||
@@ -53,6 +54,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
   )
     throw new Error("Invalid building review");
   if (v.scene === "street") {
+    if (v.surfaceRecipe !== undefined) throw new Error("Invalid street recipe context");
     if (
       typeof v.caseId !== "string" ||
       !/^street-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
@@ -65,12 +67,26 @@ function parseBuildingReview(value: unknown): BuildingReview {
     const url = new URL(v.url, "https://tilefun.invalid");
     if (url.searchParams.get("case") !== v.caseId || url.searchParams.get("run") !== "streets")
       throw new Error("Street review URL does not match case");
-  } else if (v.caseId !== undefined || v.propTypes !== undefined)
+  } else if (v.scene === "surface") {
+    const url = new URL(v.url, "https://tilefun.invalid");
+    if (
+      typeof v.caseId !== "string" ||
+      !/^surface-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
+      v.surfaceRecipe !== "city-surfaces-v1" ||
+      v.propTypes !== undefined ||
+      url.searchParams.get("run") !== "surfaces" ||
+      url.searchParams.get("case") !== v.caseId
+    )
+      throw new Error("Invalid surface review context");
+  } else if (v.caseId !== undefined || v.propTypes !== undefined || v.surfaceRecipe !== undefined)
     throw new Error("Invalid building review context");
   return {
     scene: v.scene as BuildingReview["scene"],
     ...(v.scene === "street"
       ? { caseId: v.caseId as string, propTypes: [...(v.propTypes as string[])] }
+      : {}),
+    ...(v.scene === "surface"
+      ? { caseId: v.caseId as string, surfaceRecipe: v.surfaceRecipe as string }
       : {}),
     prefabIds: [...v.prefabIds],
     revision: v.revision,

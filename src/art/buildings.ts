@@ -12,6 +12,12 @@ import {
   resolveCityPrefabType,
 } from "../generation/regional/CityBuildingPrefabs.js";
 import { STREET_REVIEW_SCENES, type StreetScene } from "../generation/regional/StreetRecipes.js";
+import {
+  CITY_SURFACE_CASES,
+  CITY_SURFACE_SOURCE,
+  citySurfaceComposition,
+  composeCitySurface,
+} from "../road/CitySurfaceRecipes.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
 import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
@@ -19,6 +25,7 @@ import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";
 import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "./BuildingShowcase.js";
 import { drawStreetShowcase } from "./StreetShowcase.js";
+import { drawSurfaceShowcase } from "./SurfaceShowcase.js";
 
 const $ = <T extends HTMLElement>(id: string) => required(document.getElementById(id)) as T;
 const scene = $<HTMLSelectElement>("scene"),
@@ -27,7 +34,19 @@ const scene = $<HTMLSelectElement>("scene"),
   canvas = $<HTMLCanvasElement>("building");
 const params = new URLSearchParams(location.search);
 const streetRun = params.get("run") === "streets";
-const reviewStorage = streetRun ? "tilefun.street-review.v1" : "tilefun.building-review.v1";
+const surfaceRun = params.get("run") === "surfaces";
+const reviewStorage = surfaceRun
+  ? "tilefun.surface-review.v1"
+  : streetRun
+    ? "tilefun.street-review.v1"
+    : "tilefun.building-review.v1";
+const surfaceSelect = $<HTMLSelectElement>("surface-case");
+surfaceSelect.replaceChildren(...CITY_SURFACE_CASES.map((s) => new Option(s.name, s.id)));
+if (CITY_SURFACE_CASES.some((s) => s.id === params.get("case")))
+  surfaceSelect.value = params.get("case") ?? "";
+function currentSurface() {
+  return required(CITY_SURFACE_CASES.find((s) => s.id === surfaceSelect.value));
+}
 const streetSelect = $<HTMLSelectElement>("street-case");
 streetSelect.replaceChildren(...STREET_REVIEW_SCENES.map((s) => new Option(s.name, s.id)));
 if (STREET_REVIEW_SCENES.some((s) => s.id === params.get("case")))
@@ -70,11 +89,34 @@ if (streetRun) {
     "Street-level views: approve the props and spacing. Two reports pause until “ready” in chat.";
   canvas.setAttribute("aria-label", "Street furniture scene");
 }
+if (surfaceRun) {
+  scene.add(new Option("Road foundation", "surface"));
+  scene.value = "surface";
+  $("scene-options").hidden = true;
+  $("prefab-options").hidden = true;
+  $("surface-options").hidden = false;
+  required(document.querySelector(".building-intro h1")).textContent =
+    "Review the road foundation.";
+  required(document.querySelector(".building-intro p")).textContent =
+    "Road widths, curbs, crossings & dividers. Two reports pause until “ready” in chat.";
+  canvas.setAttribute("aria-label", "Road foundation scene");
+  document.title = "Road foundation review · Tilefun";
+  required(document.querySelector(".brand span")).textContent = "/ Road foundation";
+  required($("building-feedback-history").querySelector("summary")).textContent =
+    "Art feedback & replies (all scenes)";
+  $("preview-explanation").textContent =
+    "Source-backed surface candidates. Review this base canvas before building dense city blocks on it.";
+  required(required($("geometry").parentElement).lastChild).textContent = "Tile grid";
+}
 select.replaceChildren(...CITY_BUILDING_PREFABS.map((p) => new Option(p.name, p.type)));
 const requestedType = params.get("prefab") ?? "";
 const resolvedType = resolveCityPrefabType(requestedType);
 if (CITY_BUILDING_PREFABS.some((p) => p.type === resolvedType)) select.value = resolvedType;
-if (!streetRun && ["single", "residential", "mixed", "hotel"].includes(params.get("scene") ?? ""))
+if (
+  !streetRun &&
+  !surfaceRun &&
+  ["single", "residential", "mixed", "hotel"].includes(params.get("scene") ?? "")
+)
   scene.value = params.get("scene") ?? "single";
 const catalog = await loadJSON<ArtCatalog>("data/art-catalog.json");
 const source = required(catalog.sheets.find((s) => s.id === CITY_PREFAB_SOURCE.sheetId));
@@ -109,21 +151,37 @@ function persistDrafts() {
   }
 }
 function currentTarget(displayed = false) {
-  const whole = streetRun || displayed || target.value === "block";
-  const prefabs = whole
-    ? placements.map((p) => p.prefab)
-    : [required(placements.find((p) => p.prefab.type === target.value)).prefab];
-  const kind = streetRun ? "street" : whole ? (scene.value as BuildingReview["scene"]) : "single";
+  const whole = surfaceRun || streetRun || displayed || target.value === "block";
+  const prefabs = surfaceRun
+    ? []
+    : whole
+      ? placements.map((p) => p.prefab)
+      : [required(placements.find((p) => p.prefab.type === target.value)).prefab];
+  const kind = surfaceRun
+    ? "surface"
+    : streetRun
+      ? "street"
+      : whole
+        ? (scene.value as BuildingReview["scene"])
+        : "single";
   const street = streetRun ? currentStreet() : undefined;
   const url = new URL("building-lab.html", location.href);
   url.searchParams.set("scene", kind);
-  url.searchParams.set("prefab", required(prefabs[0]).type);
+  if (prefabs[0]) url.searchParams.set("prefab", prefabs[0].type);
   if (street) {
     url.search = "";
     url.searchParams.set("run", "streets");
     url.searchParams.set("case", street.id);
   }
-  const rects = reviewSourceRects(prefabs, street);
+  const surface = surfaceRun ? currentSurface() : undefined;
+  if (surface) {
+    url.search = "";
+    url.searchParams.set("run", "surfaces");
+    url.searchParams.set("case", surface.id);
+  }
+  const rects = surface
+    ? composeCitySurface(surface).map((p) => p.rect)
+    : reviewSourceRects(prefabs, street);
   const x = Math.min(...rects.map((p) => p[0])),
     y = Math.min(...rects.map((p) => p[1]));
   const ex = Math.max(...rects.map((p) => p[0] + p[2])),
@@ -131,6 +189,7 @@ function currentTarget(displayed = false) {
   return {
     prefabs,
     street,
+    surface,
     scene: kind,
     url: url.pathname + url.search,
     rect: [x, y, ex - x, ey - y] as ArtRect,
@@ -139,12 +198,14 @@ function currentTarget(displayed = false) {
 function updateFeedbackTarget() {
   const context = currentTarget();
   noteInput.setCustomValidity("");
-  draftKey = context.street
-    ? `street:${context.street.id}`
-    : `${context.scene}:${context.prefabs.map((p) => p.type).join(",")}`;
+  draftKey = context.surface
+    ? `surface:${context.surface.id}`
+    : context.street
+      ? `street:${context.street.id}`
+      : `${context.scene}:${context.prefabs.map((p) => p.type).join(",")}`;
   noteInput.value = typeof drafts[draftKey] === "string" ? required(drafts[draftKey]) : "";
   $("feedback-context").textContent =
-    `Saved with this ${context.street ? "street scene" : context.scene === "single" ? "building" : "block"}, its recipe IDs, and source revision. I can read it from the shared inbox.`;
+    `Saved with this ${context.surface ? "road scene" : context.street ? "street scene" : context.scene === "single" ? "building" : "block"}, its recipe IDs, and source revision. I can read it from the shared inbox.`;
   save.disabled = !verified || sending;
 }
 function renderFeedbackNotes() {
@@ -158,7 +219,7 @@ function renderFeedbackNotes() {
     article.dataset.thread = row.threadId;
     const heading = document.createElement("a");
     heading.href = required(row.buildingReview).url;
-    heading.textContent = `${row.buildingVerdict ? `${row.buildingVerdict.value === "clear" ? "reopened" : row.buildingVerdict.value} · ` : ""}${row.status} · ${required(row.buildingReview).caseId ?? required(row.buildingReview).scene} · ${required(row.buildingReview).prefabIds.join(", ")}`;
+    heading.textContent = `${row.buildingVerdict ? `${row.buildingVerdict.value === "clear" ? "reopened" : row.buildingVerdict.value} · ` : ""}${row.status} · ${required(row.buildingReview).caseId ?? required(row.buildingReview).scene} · ${required(row.buildingReview).surfaceRecipe ?? required(row.buildingReview).prefabIds.join(", ")}`;
     const body = document.createElement("p");
     body.textContent = row.note;
     article.append(heading, body);
@@ -176,7 +237,11 @@ function renderFeedbackNotes() {
     const current = review.prefabIds.map((id) =>
       CITY_BUILDING_PREFABS.find((p) => p.type === resolveCityPrefabType(id)),
     );
-    if (review.scene !== "street" && current.every((p) => p !== undefined))
+    if (
+      review.scene !== "surface" &&
+      review.scene !== "street" &&
+      current.every((p) => p !== undefined)
+    )
       void sha256(new TextEncoder().encode(JSON.stringify(current))).then((revision) => {
         if (revision !== review.revision) {
           const changed = document.createElement("p");
@@ -186,7 +251,7 @@ function renderFeedbackNotes() {
           article.append(changed);
         }
       });
-    if (review.scene === "street" && queueReady) {
+    if ((review.scene === "street" || review.scene === "surface") && queueReady) {
       const candidate = candidates.find((c) => c.key === buildingCaseKey(review));
       if (candidate && candidate.review.revision !== review.revision) {
         const changed = document.createElement("p");
@@ -232,7 +297,13 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
   try {
     const revision = await sha256(
       new TextEncoder().encode(
-        JSON.stringify(context.street ? streetComposition(context.street) : context.prefabs),
+        JSON.stringify(
+          context.surface
+            ? citySurfaceComposition(context.surface)
+            : context.street
+              ? streetComposition(context.street)
+              : context.prefabs,
+        ),
       ),
     );
     const id = crypto.randomUUID();
@@ -243,7 +314,11 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
         buildingCaseKey({
           scene: context.scene,
           prefabIds: context.prefabs.map((p) => p.type),
-          ...(context.street ? { caseId: context.street.id } : {}),
+          ...(context.surface
+            ? { caseId: context.surface.id }
+            : context.street
+              ? { caseId: context.street.id }
+              : {}),
         }),
     );
     const row: ArtNote = {
@@ -254,7 +329,7 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
       sheetSize: [source.width, source.height],
       rect: context.rect,
       sliceKeys: [],
-      intent: context.street ? "pattern" : "building",
+      intent: context.surface ? "terrain" : context.street ? "pattern" : "building",
       status: verdict === "approved" || verdict === "clear" ? "resolved" : "pending",
       note,
       reply: "",
@@ -266,6 +341,9 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
               caseId: context.street.id,
               propTypes: [...new Set(context.street.props.map((p) => p.type))],
             }
+          : {}),
+        ...(context.surface
+          ? { caseId: context.surface.id, surfaceRecipe: "city-surfaces-v1" }
           : {}),
         prefabIds: context.prefabs.map((p) => p.type),
         revision,
@@ -315,7 +393,10 @@ renderFeedbackNotes();
 const initialSync = inbox.sync();
 let sheet: Spritesheet;
 try {
-  if (source.fingerprint !== CITY_PREFAB_SOURCE.fingerprint)
+  if (
+    source.fingerprint !==
+    (surfaceRun ? CITY_SURFACE_SOURCE.fingerprint : CITY_PREFAB_SOURCE.fingerprint)
+  )
     throw new Error(
       "Building recipes reference a different source revision. Update the recipes before reviewing.",
     );
@@ -327,6 +408,10 @@ try {
   throw error;
 }
 function render() {
+  if (surfaceRun) {
+    renderSurface();
+    return;
+  }
   if (streetRun) select.value = currentStreet().buildingType;
   let prefab = required(CITY_BUILDING_PREFABS.find((p) => p.type === select.value));
   placements =
@@ -469,6 +554,65 @@ function render() {
   updateQueue();
   persistReview();
 }
+function renderSurface() {
+  placements = [];
+  const c = currentSurface(),
+    pieces = composeCitySurface(c);
+  const stats = drawSurfaceShowcase(canvas, c, sheet, $<HTMLInputElement>("geometry").checked);
+  fitPreview();
+  $("loading").textContent = "";
+  $("name").textContent = c.name;
+  $("hotel-options").hidden = true;
+  $("facts").textContent =
+    `${stats.width}×${stats.height} native pixels · ${c.roadWidth * 16}px roadway · ${c.palette} pavement`;
+  $("recipe-id").textContent = c.id;
+  $("assembly-summary").textContent = c.prompt;
+  $("bookmark-notice").textContent = "";
+  $("block-buildings").replaceChildren();
+  $("topology").textContent =
+    "Original asphalt, pavement, curb shading and paint tiles. Square curb corners; rounded raised median. Crossings currently stop before the curb: ramps and accessibility come after this surface review. This shared surface recipe is a candidate for the next district revision; existing worlds keep their surfaces.";
+  required($("topology").parentElement?.querySelector("summary")).textContent =
+    "Surface construction";
+  required($("pieces").parentElement?.querySelector("summary")).textContent =
+    "Tiles & source links";
+  $("pieces").replaceChildren();
+  const unique = new Map(pieces.map((p) => [p.rect.join(","), p]));
+  for (const p of unique.values()) {
+    const row = document.createElement("p"),
+      link = document.createElement("a");
+    const u = new URL("art-workbench.html", location.href);
+    u.searchParams.set("sheet", CITY_SURFACE_SOURCE.sheetId);
+    u.searchParams.set("rect", p.rect.join(","));
+    link.href = u.href;
+    link.textContent = `${p.label} · [${p.rect.join(", ")}]`;
+    row.append(link);
+    $("pieces").append(row);
+  }
+  const selection =
+    c.palette === "original"
+      ? [512, 16, 288, 288]
+      : c.palette === "warm"
+        ? [416, 1904, 384, 352]
+        : [0, 1904, 384, 352];
+  const sourceUrl = new URL("art-workbench.html", location.href);
+  sourceUrl.searchParams.set("sheet", CITY_SURFACE_SOURCE.sheetId);
+  sourceUrl.searchParams.set("rect", selection.join(","));
+  $<HTMLAnchorElement>("source-link").href = sourceUrl.href;
+  $("source-link").textContent = "Inspect the selected road bank ↗";
+  noteInput.placeholder = c.prompt;
+  const url = new URL(location.href);
+  url.searchParams.set("case", c.id);
+  history.replaceState(null, "", url);
+  $("app").dataset.ready = "true";
+  canvas.dataset.parts = String(stats.parts);
+  canvas.dataset.prefabs = "0";
+  target.replaceChildren(new Option("This road scene", "block"));
+  feedbackScene = "surface";
+  updateFeedbackTarget();
+  updateQueue();
+  persistReview();
+}
+surfaceSelect.addEventListener("change", showSelection);
 streetSelect.addEventListener("change", showSelection);
 for (const control of [$("geometry"), $("scale")]) control.addEventListener("change", render);
 scene.addEventListener("change", showSelection);
@@ -530,11 +674,13 @@ function persistReview() {
   }
 }
 function selectedKey() {
-  return streetRun
-    ? `street:${streetSelect.value}`
-    : scene.value === "single"
-      ? `single:${select.value}`
-      : `block:${scene.value}`;
+  return surfaceRun
+    ? `surface:${surfaceSelect.value}`
+    : streetRun
+      ? `street:${streetSelect.value}`
+      : scene.value === "single"
+        ? `single:${select.value}`
+        : `block:${scene.value}`;
 }
 function verdictFor(candidate: Candidate) {
   return currentBuildingVerdict(inbox.notes, source.fingerprint, candidate.review);
@@ -606,7 +752,8 @@ function updateQueue() {
 function openCandidate(candidate: Candidate) {
   scene.value = candidate.scene;
   select.value = candidate.prefab;
-  if (candidate.review.caseId) streetSelect.value = candidate.review.caseId;
+  if (candidate.review.caseId)
+    (surfaceRun ? surfaceSelect : streetSelect).value = candidate.review.caseId;
   render();
 }
 function navigate(direction: number) {
@@ -736,7 +883,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 const hashCanvas = document.createElement("canvas");
-if (!streetRun)
+if (!streetRun && !surfaceRun)
   for (const entry of [
     ...CITY_BUILDING_PREFABS.map((p) => ({ scene: "single" as const, prefab: p, name: p.name })),
     ...(["residential", "mixed", "hotel"] as const).map((s) => ({
@@ -803,6 +950,37 @@ if (streetRun)
       review,
     });
   }
+if (surfaceRun)
+  for (const entry of CITY_SURFACE_CASES) {
+    drawSurfaceShowcase(hashCanvas, entry, sheet, false);
+    const pixels = required(hashCanvas.getContext("2d")).getImageData(
+      0,
+      0,
+      hashCanvas.width,
+      hashCanvas.height,
+    ).data;
+    const pixelHash = await sha256(pixels);
+    const review: BuildingReview = {
+      scene: "surface",
+      caseId: entry.id,
+      prefabIds: [],
+      surfaceRecipe: "city-surfaces-v1",
+      revision: await sha256(
+        new TextEncoder().encode(JSON.stringify(citySurfaceComposition(entry))),
+      ),
+      renderFingerprint: await sha256(
+        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
+      ),
+      url: `/tilefun/building-lab.html?run=surfaces&case=${entry.id}`,
+    };
+    candidates.push({
+      key: buildingCaseKey(review),
+      name: entry.name,
+      scene: "surface",
+      prefab: "",
+      review,
+    });
+  }
 await initialSync;
 queueReady = true;
 renderFeedbackNotes();
@@ -824,7 +1002,8 @@ if (!paused && !queue().some((c) => c.key === selectedKey())) {
     if (first) {
       scene.value = first.scene;
       select.value = first.prefab;
-      if (first.review.caseId) streetSelect.value = first.review.caseId;
+      if (first.review.caseId)
+        (surfaceRun ? surfaceSelect : streetSelect).value = first.review.caseId;
     }
   }
 }
