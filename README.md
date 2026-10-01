@@ -8,6 +8,13 @@ A creative-mode-first 2D tile game — paint terrain, place entities, hit play, 
 
 <video src="https://github.com/user-attachments/assets/038140dd-e987-4f71-8ec4-8fa5425dba1d" controls muted playsinline width="400"></video>
 
+## Development setup
+
+The runtime art and tool assets are checked in; a fresh clone can run without
+restoring the original downloaded packs. See [Fresh-machine setup, assets and
+local data](docs/setup-and-local-data.md) for dependency installation, build/test
+commands, source-pack rebuilds, and transferring review history and local state.
+
 ## Features
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it

@@ -20,6 +20,13 @@ For changes that affect rendering or integration, also run E2E tests:
 npm run build && npx playwright test
 ```
 
+## Setup and data portability
+
+See `docs/setup-and-local-data.md` for fresh-machine dependencies, committed
+versus ignored art, regeneration inputs, and review/browser/world data transfer.
+Normal builds use committed assets. Keep NDJSON histories and local state out
+of Git; copying server logs does not copy browser drafts, outboxes or worlds.
+
 ## Public preview and art feedback
 
 The live deployment at `https://tilefun.graehlarts.com/tilefun/` serves this

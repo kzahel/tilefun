@@ -40,6 +40,10 @@ in-progress, resolved, reopen, and source-selection navigation. Refresh fetches
 agent replies and status changes. Export downloads the current notes and any
 unsent events.
 
+For a second machine, see [setup and local-data transfer](setup-and-local-data.md).
+It distinguishes committed atlas assets from original packs, and explains how
+to preserve full server review history, pending browser feedback and drafts.
+
 ## Shared feedback
 
 Notes are posted to `/tilefun/api/art-notes` and appended to the ignored
