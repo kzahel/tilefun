@@ -10,6 +10,7 @@ from pathlib import Path
 
 import bpy
 from mathutils import Vector
+from bpy_extras.object_utils import world_to_camera_view
 
 REPO = Path(__file__).resolve().parents[2]
 RAW = REPO / "data" / "blender-tiger" / "raw"
@@ -303,18 +304,36 @@ for screen in bpy.data.screens:
             area.spaces.active.shading.type = "MATERIAL"
 # Save just this studio and its dependencies, never unrelated live-session scenes.
 bpy.data.libraries.write(str(SOURCE),{scene},fake_user=True,compress=True)
+# Keep the editable 3D eyes in the source. Sprite eyes are authored as stable
+# pixel clusters by the packer, rather than resampled separately every pose.
+for obj in meshes:
+    if obj.name.startswith("Eye"):
+        obj.hide_render = True
+eye_anchors = {}
 for direction,angle in DIRECTIONS:
     rig.rotation_euler.z = angle
+    eye_anchors[direction] = []
     for frame in ([1] if PREVIEW else range(1,FRAMES+1)):
         scene.frame_set(frame)
+        bpy.context.view_layer.update()
+        # One head-bound anchor per view keeps the front eye spacing constant.
+        # Side views expose only the near eye; the back view has no face marks.
+        point = Vector((0, -.435, 1.83)) if direction in ("down", "up") else Vector((.18 if direction == "left" else -.18, -.30, 1.83))
+        head_transform = rig.pose.bones["head"].matrix @ armature.bones["head"].matrix_local.inverted()
+        projected = world_to_camera_view(scene, camera, rig.matrix_world @ head_transform @ point)
+        eye_anchors[direction].append([math.floor(projected.x*SIZE), math.floor((1-projected.y)*SIZE)])
         scene.render.filepath = str(RAW/f"{direction}-{frame:02}.png")
         bpy.ops.render.render(write_still=True)
+for obj in meshes:
+    if obj.name.startswith("Eye"):
+        obj.hide_render = False
 rig.rotation_euler.z = 0
 scene.frame_set(1)
 report = {"frameWidth":SIZE,"frameHeight":SIZE,"renderWidth":SIZE*4,"frameCount":FRAMES,"fps":FPS,
           "directions":[d for d,_ in DIRECTIONS],"palette":["#"+c for c in PALETTE],
           "pivot":[16,27],"tailDeformation":round(tail_displacement,4),
           "blenderVersion":bpy.app.version_string,"bones":len(armature.bones),
+          "eyeAnchors":eye_anchors,
           "source":"Original procedural tiger; Blender rig, geometry and materials"}
 (RAW.parent/"render.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
 print(json.dumps(report))

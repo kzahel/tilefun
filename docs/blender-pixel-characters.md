@@ -50,11 +50,37 @@ or textures were used in the tiger.
 5. **Finish the pixel pass.** Map every frame to the same twelve-color palette,
    threshold alpha, add a one-pixel exterior outline, and keep the complete
    canvas and pivot. Do not independently crop frames or optimize each frame's
-   palette. Use nearest-neighbor scaling in the browser.
+   palette. Use nearest-neighbor scaling in the browser. Author important face
+   features as fixed pixel clusters instead of letting subpixel 3D sampling
+   decide their shapes on each frame; the eye treatment below is an example.
 6. **Inspect motion and export.** Check all directions in a pose sheet and
    continuous playback, then test moving/stopping in the garden. Verify real
    tail vertex deformation, distinct poses, padding, alpha, sprite dimensions
    and GIF duration. The source contains just this studio and its dependencies.
+
+### Keep the eyes consistent
+
+The first batch had apparent dithering in the eyes, despite using no dithering
+algorithm. Tiny pupil/highlight geometry crossed sample boundaries as the head
+moved; palette mapping amplified those changes. Increasing render resolution
+alone did not preserve the intended feature from pose to pose.
+
+The revised builder keeps the editable eyes in the `.blend`, hides them for
+sprite rendering, and exports a projected head anchor for each pose and view.
+The packer snaps that anchor to whole pixels and draws a deliberately authored
+3x3 front eye or 2x3 profile eye: a solid dark pupil, warm cream socket and one
+fixed pale catchlight. Both front eyes share one anchor and fixed spacing;
+profile views show one near eye, and the rear view has none. The complete eye
+patch includes orange background pixels so leftover rendered detail cannot
+change its shape. Only its location changes during the walk.
+
+This is a hybrid workflow: Blender supplies pose, volume and lighting, while
+the pixel pass makes explicit decisions about features that must stay readable.
+To start, draw one small feature template per facing view, attach it to an
+appropriate bone/surface anchor, and inspect the whole loop at native size.
+The packer also reads back the encoded sheet and verifies identical eye shapes
+and colors in every pose after accounting for translation. Other shaded edges
+and markings still use the rendered result and can vary between poses.
 
 The earlier tornado used the same broad pipeline: procedural 3D geometry,
 periodic motion, fixed camera, shared palette and PNG packing. Its working
@@ -105,7 +131,8 @@ session, but actual MCP scene creation, inspection and rendering succeeded.
 - `data/blender-tiger/`: ignored raw renders and diagnostic reports.
 
 The demo is a sprite workflow proof, not a replacement player asset or a full
-3D character export. At 32px, facial details still simplify and some edge pixels
-change across poses. Review at native size and in motion. Next, compare it at
+3D character export. Eyes now retain their authored pixel clusters; other facial
+details still simplify and some edge pixels change across poses. Review at
+native size and in motion. Next, compare it at
 the game's actual 16px player scale and tune silhouette, stride and palette
 before considering gameplay integration.

@@ -8,6 +8,7 @@ screenshot*.png
 /assets
 /skills/
 *.blend1
+__pycache__/
 .DS_Store
 *.tiled-project
 *.tiled-session

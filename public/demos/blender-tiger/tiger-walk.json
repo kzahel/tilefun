@@ -40,6 +40,7 @@
     "#ec9990"
   ],
   "source": "art-source/blender/tiger.blend",
+  "eyeFinish": "fixed pixel clusters at projected, integer-snapped head anchors",
   "builder": "scripts/blender/build_tiger.py",
   "blenderVersion": "5.2.2 LTS"
 }
