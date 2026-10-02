@@ -31,6 +31,10 @@ it("retains an acknowledged POST across a failed refresh and reload without send
   vi.stubGlobal(
     "fetch",
     vi.fn(async (_url, init?: RequestInit) => {
+      if (_url === "/tilefun/api/auth/session")
+        return new Response(
+          JSON.stringify({ authenticated: true, configured: true, csrfToken: "test" }),
+        );
       if (init?.method === "POST") {
         posts++;
         return new Response('{"saved":true}');

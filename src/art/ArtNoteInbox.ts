@@ -1,3 +1,4 @@
+import { workshopFetch } from "../workshop/AuthClient.js";
 import type { ArtCatalog } from "./ArtCatalog.js";
 import { type ArtNote, latestArtNotes, parseArtNote } from "./ArtNotes.js";
 
@@ -70,7 +71,7 @@ export class ArtNoteInbox {
     }
     this.flushing = true;
     const request = async (init?: RequestInit) => {
-      const response = await fetch("api/art-notes", init);
+      const response = await workshopFetch("/tilefun/api/art-notes", init);
       if (!response.ok) throw new Error(`Server returned ${response.status}`);
       return response.json();
     };

@@ -18,8 +18,11 @@ npm run dev
 ```
 
 Open the `/tilefun/` URL printed by Vite, normally
-`http://localhost:5173/tilefun/`. The tool directory is
-`http://localhost:5173/tilefun/tools.html`, also linked from the game sidebar.
+`http://localhost:5173/tilefun/`. The workspace is
+`http://localhost:5173/tilefun/workshop.html`, also linked from the game sidebar.
+Run `npm run workshop:auth -- setup` for a local owner account; credentials are
+written privately to `data/workshop/initial-login.txt`. See
+[Workshop setup and API](tilefun-workshop.md). Old `tools.html` bookmarks work.
 The worker install supplies the Cloudflare types needed by `npm run typecheck`;
 it is not needed simply to run the browser game/labs. No Cloudflare deployment
 is required for those local tools.
@@ -41,7 +44,7 @@ Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
 
 The shared human review deployment is
-<https://tilefun.graehlarts.com/tilefun/tools.html>. Visiting that deployment
+<https://tilefun.graehlarts.com/tilefun/workshop.html>. Visiting that deployment
 from another machine uses its existing server inbox; running a local clone
 creates a separate inbox. Changing origin (host, port or HTTP/HTTPS) also changes
 which browser-local state is visible.
@@ -80,6 +83,7 @@ saved feedback were copied into that build.
 | Command | Inputs | Needs ignored originals? |
 | --- | --- | --- |
 | `npm run build` | Committed assets, indexes and recipe definitions; checks generated files | No |
+| `npm run workshop:manifest` | Committed art and shared renderers; Playwright Chromium | No |
 | `npm run art:catalog` | Committed sheets/indexes and source-use definitions | No |
 | `npm run assets:review` | Committed Interiors atlas and index | No |
 | `npx tsx scripts/build-gameplay-furniture.ts` | Committed Interiors index and furniture catalogue | No |
@@ -104,12 +108,18 @@ These append-only files hold the server records:
 | --- | --- | --- |
 | Art notes and Building Lab building/street/surface/district approvals/reports | `data/art-notes/notes.ndjson` | `ART_NOTES_DIR` |
 | Room Builder and Furniture Movement Lab reviews, including stored screenshots | `data/interior-review/feedback.ndjson` | `INTERIOR_REVIEW_DIR` |
+| Workshop commands and discussion | `data/workshop/events.ndjson` | `WORKSHOP_DATA_DIR` |
 
-Vite development and `npm run preview` provide both review APIs. The standalone
-Node server provides the art-notes API; it does not currently provide the
-room/furniture review API. Static hosting of `dist/` alone provides neither.
-On the standalone server, art notes default to `DATA_DIR/art-notes`; the Vite
-art/room inbox defaults above are independent of `DATA_DIR`.
+Vite development, `npm run preview` and standalone Node provide the same
+protected art/interior/Workshop APIs. Static hosting of `dist/` alone provides
+none. Standalone defaults all private directories beneath `DATA_DIR`; Vite uses
+the defaults above. Explicit overrides take precedence.
+
+Copy all three histories together, while writes are stopped. Workshop commands
+materialize events in the original stores; preserving both avoids lost discussion
+or retry identity. Exclude `sessions.json`, `owner.json` and `initial-login.txt`
+from review archives. Configure the new machine's own login; sessions do not
+travel with feedback. Those auth files are private and gitignored.
 
 Start both machines on the same repository revision to compare review state;
 then use the following one-time transfer into a fresh destination:
@@ -124,18 +134,19 @@ then use the following one-time transfer into a fresh destination:
 3. Put the copies at the destination paths above, then start Vite/preview there.
    If the destination already has feedback, preserve its files separately;
    this recipe is a restore into an empty inbox, not an automatic merge.
-4. Open the review pages and refresh feedback. Verify the notes and approval
+4. Sign in, open the Workshop and refresh feedback. Verify the notes and approval
    counts. Approvals apply only when case/source/recipe/render fingerprints
    still match. A legitimately changed appearance remains unchecked.
 
-For the default directories, these shell examples archive and restore both
-inboxes. Omit an inbox name if that directory does not exist. Transfer the
+For the default directories, these shell examples archive and restore the three
+histories. Omit a path if it does not exist. Transfer the
 archive between machines yourself, placing it in the destination’s `data/`
 directory. Keeping the archive under `data/` also keeps it gitignored.
 
 ```sh
 # On the source, from the repository root, while feedback writes are stopped:
-tar -czf data/tilefun-review-history.tgz -C data art-notes interior-review
+# Include only the Workshop history, never credentials/sessions:
+tar -czf data/tilefun-review-history.tgz -C data art-notes interior-review workshop/events.ndjson
 
 # On the destination, from its repository root, with fresh/empty inboxes:
 mkdir -p data
@@ -170,6 +181,7 @@ values before replacing them. This is a manual transfer, not cross-origin sync.
 
 | Tool/state | Local Storage keys |
 | --- | --- |
+| Workshop drafts, pins, per-batch queues and native outbox | `tilefun.workshop.v1` |
 | Art Workbench view, drafts, cached notes and outbox | `tilefun.art-workbench.v1` |
 | Building Lab shared feedback cache/outbox and note drafts | `tilefun.building-feedback.v1`, `tilefun.building-drafts.v1` |
 | Building, street, surface and district queue selection/pause | `tilefun.building-review.v1`, `tilefun.street-review.v1`, `tilefun.surface-review.v1`, `tilefun.district-review.v1` |

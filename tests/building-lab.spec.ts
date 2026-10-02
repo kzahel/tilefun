@@ -89,7 +89,7 @@ test("leaves block and building feedback directly, shares it with the workbench,
   });
   expect(row.buildingReview.revision).toMatch(/^[a-f0-9]{64}$/);
   expect(row.rect).toHaveLength(4);
-  const second = await browser.newContext();
+  const second = await browser.newContext({ storageState: "test-results/workshop-session.json" });
   try {
     const other = await second.newPage();
     await other.goto("/tilefun/art-workbench.html");
@@ -100,6 +100,10 @@ test("leaves block and building feedback directly, shares it with the workbench,
       /building-lab.html\?scene=residential/,
     );
     const response = await other.request.post("/tilefun/api/art-notes", {
+      headers: {
+        "X-Workshop-CSRF": (await (await other.request.get("/tilefun/api/auth/session")).json())
+          .csrfToken,
+      },
       data: {
         ...row,
         id: crypto.randomUUID(),

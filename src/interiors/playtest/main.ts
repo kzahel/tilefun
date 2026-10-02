@@ -7,6 +7,7 @@ import { PIXEL_SCALE, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../../config/cons
 import { Camera } from "../../rendering/Camera.js";
 import { drawScene2D } from "../../rendering/Canvas2DRenderer.js";
 import type { SpriteItem } from "../../rendering/SceneItem.js";
+import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import {
   drawFurnishedInterior,
   furnitureDrawOrder,
@@ -693,7 +694,7 @@ async function sync() {
   try {
     while (outbox.length) {
       const row = outbox[0];
-      const response = await fetch("/tilefun/api/interior-review", {
+      const response = await workshopFetch("/tilefun/api/interior-review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(row),
@@ -703,8 +704,11 @@ async function sync() {
       storeOutbox();
     }
     el("sync").textContent = "Reports saved";
-  } catch {
-    el("sync").textContent = `Offline · ${outbox.length} report(s) pending`;
+  } catch (error) {
+    el("sync").textContent =
+      error instanceof SignInRequired
+        ? error.message
+        : `Offline · ${outbox.length} report(s) pending`;
   } finally {
     syncing = false;
   }
@@ -799,7 +803,7 @@ el("report").onclick = () => void submit("wrong");
 el("good").onclick = () => void submit("good");
 async function loadVerdicts() {
   try {
-    const response = await fetch("/tilefun/api/interior-review", { cache: "no-store" });
+    const response = await workshopFetch("/tilefun/api/interior-review", { cache: "no-store" });
     if (!response.ok) return;
     const rows: unknown = await response.json();
     if (Array.isArray(rows))

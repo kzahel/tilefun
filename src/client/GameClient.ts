@@ -1165,8 +1165,8 @@ export class GameClient {
     });
 
     const toolsLink = document.createElement("a");
-    toolsLink.href = `${import.meta.env.BASE_URL}tools.html`;
-    toolsLink.textContent = "Indexes / atlases / labs";
+    toolsLink.href = `${import.meta.env.BASE_URL}workshop.html`;
+    toolsLink.textContent = "Tilefun Workshop";
     toolsLink.setAttribute("data-testid", "open-tools-index");
     toolsLink.style.cssText = `${MENU_BTN_STYLE} display: block; text-decoration: none;`;
     panel.append(editBtn, menuBtn, toolsLink, debugBtn, propEditorBtn, interiorsBtn, workbenchBtn);

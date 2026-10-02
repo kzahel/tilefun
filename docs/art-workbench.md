@@ -1,5 +1,10 @@
 # Art workbench
 
+The central [Tilefun Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html)
+now combines source annotations, all review batches, requests and full history.
+Shared feedback requires owner login; old tool URLs and browser drafts/outboxes
+remain supported. See [Workshop setup and API](tilefun-workshop.md).
+
 Start from [Indexes, atlases & labs](https://tilefun.graehlarts.com/tilefun/tools.html),
 linked from the game's hamburger sidebar and world menu. The index describes all
 nine tools and has shortcuts for source sheets, city art, review categories,

@@ -15,6 +15,12 @@ restoring the original downloaded packs. See [Fresh-machine setup, assets and
 local data](docs/setup-and-local-data.md) for dependency installation, build/test
 commands, source-pack rebuilds, and transferring review history and local state.
 
+## Tilefun Workshop
+
+[Open Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html) for the
+global review inbox, source-art annotations, requests, history and all tools.
+Owner login protects feedback. See [Workshop usage, setup and API](docs/tilefun-workshop.md).
+
 ## Features
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it

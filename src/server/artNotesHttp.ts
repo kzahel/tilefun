@@ -4,6 +4,7 @@ import { join } from "node:path";
 import type { Plugin } from "vite";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { type ArtNote, latestArtNotes, parseArtNote, sameArtTarget } from "../art/ArtNotes.js";
+import { HttpError, jsonResponse, WorkshopAuth } from "./workshopAuth.js";
 
 export class ArtNoteStore {
   private writes = Promise.resolve();
@@ -96,13 +97,23 @@ export function artNotesHandler(store = new ArtNoteStore()) {
   };
 }
 export function artNotesPlugin(): Plugin {
-  const handle = artNotesHandler();
+  const handle = artNotesHandler(),
+    auth = new WorkshopAuth();
   const middleware = (req: IncomingMessage, res: ServerResponse, next: () => void) => {
-    void handle(req, res)
-      .then((handled) => {
-        if (!handled) next();
-      })
-      .catch(next);
+    if (req.url?.split("?")[0] !== "/tilefun/api/art-notes") {
+      next();
+      return;
+    }
+    void auth
+      .require(req, req.method !== "GET")
+      .then(() => handle(req, res))
+      .catch((error) =>
+        jsonResponse(
+          res,
+          { error: error instanceof Error ? error.message : "Unauthorized" },
+          error instanceof HttpError ? error.status : 500,
+        ),
+      );
   };
   return {
     name: "art-notes",

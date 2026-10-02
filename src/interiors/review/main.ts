@@ -1,15 +1,8 @@
 import { loadModernInteriorsAtlasIndex } from "../../assets/ModernInteriorsAtlasIndex.js";
-import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
+import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
-import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
-import {
-  compileFurniture,
-  drawFurnishedInterior,
-  drawFurnitureFootprints,
-  furnitureSignature,
-} from "../FurnishedInterior.js";
+import { compileFurniture, drawFurnitureFootprints } from "../FurnishedInterior.js";
 import { FURNITURE_CATALOG_VERSION } from "../FurnitureCatalog.js";
-import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import { REVIEW_STAGES, type ReviewCase, reviewCases } from "./ReviewCases.js";
 import {
   currentVerdict,
@@ -18,6 +11,7 @@ import {
   type ReviewFeedback,
   type ReviewPin,
 } from "./ReviewFeedback.js";
+import { interiorFingerprint, renderInteriorCandidate } from "./ReviewRender.js";
 import "./review.css";
 import spriteIndexUrl from "./assets/review-sprites.json?url";
 import spriteUrl from "./assets/review-sprites.png?url";
@@ -406,7 +400,7 @@ async function sync(): Promise<void> {
     while (state.outbox.length) {
       const row = state.outbox[0];
       if (!row) break;
-      const response = await fetch(API, {
+      const response = await workshopFetch(API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(row),
@@ -415,7 +409,7 @@ async function sync(): Promise<void> {
       state.outbox = state.outbox.filter((r) => r.id !== row.id);
       save();
     }
-    const response = await fetch(API, { cache: "no-store" });
+    const response = await workshopFetch(API, { cache: "no-store" });
     if (!response.ok) throw new Error("Inbox unavailable");
     const remote = ((await response.json()) as unknown[]).map(parseReviewFeedback);
     // A verdict entered while GET was in flight must win over the earlier server snapshot.
@@ -432,10 +426,13 @@ async function sync(): Promise<void> {
         ? "Saving…"
         : "Saved to server";
     if (current) draw();
-  } catch {
-    el("sync").textContent = storageError
-      ? "Not saved — keep this page open and reconnect"
-      : `Offline · ${state.outbox.length} pending · retrying automatically`;
+  } catch (error) {
+    el("sync").textContent =
+      error instanceof SignInRequired
+        ? error.message
+        : storageError
+          ? "Not saved — keep this page open and reconnect"
+          : `Offline · ${state.outbox.length} pending · retrying automatically`;
   } finally {
     syncing = false;
   }
@@ -578,19 +575,8 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("resize", resizeCanvas);
 
 function renderCase(fixture: ReadyCase, image: HTMLCanvasElement): void {
-  const plan = parseFloorPlan(fixture.sketch);
-  const map = fixture.profiles
-    ? buildProfileApartmentPlan(plan, fixture.profiles)
-    : buildLayeredApartmentPlan(plan);
-  image.width = map.width * 16;
-  image.height = map.pixelHeight;
+  const map = renderInteriorCandidate(image, fixture, atlas);
   fixture.contentOffsetY = map.contentOffsetY ?? 0;
-  const ctx = image.getContext("2d", { willReadFrequently: image === scratch });
-  if (!ctx) throw new Error("Canvas is unavailable");
-  ctx.fillStyle = "#171e2a";
-  ctx.fillRect(0, 0, image.width, image.height);
-  if (fixture.furniture) drawFurnishedInterior(ctx, atlas, map, plan, fixture.furniture);
-  else drawLayeredInteriorMap(ctx, atlas, map);
 }
 // A real task boundary (not a resolved Promise) gives input and painting a turn.
 const yieldToBrowser = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
@@ -599,18 +585,7 @@ async function verifyCase(c: ReadyCase): Promise<void> {
   await yieldToBrowser();
   try {
     renderCase(c, scratch);
-    const ctx = scratch.getContext("2d");
-    if (!ctx) throw new Error("Canvas is unavailable");
-    const pixels = ctx.getImageData(0, 0, scratch.width, scratch.height).data;
-    const header = new TextEncoder().encode(
-      `${c.sketch}\n${scratch.width},${scratch.height}\n${c.furniture ? furnitureSignature(c.furniture) : ""}`,
-    );
-    const bytes = new Uint8Array(header.length + pixels.length);
-    bytes.set(header);
-    bytes.set(pixels, header.length);
-    c.fingerprint = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
+    c.fingerprint = await interiorFingerprint(scratch, c);
   } catch (error) {
     excluded.add(c.id);
     unsupported.push(`${c.id} · ${c.name}\n${String(error)}\n${c.sketch}`);

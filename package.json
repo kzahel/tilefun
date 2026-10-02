@@ -8,7 +8,7 @@
     "test:worker": "vitest run --config vitest.worker.config.ts",
     "check:worker": "npm run test:worker && npm --prefix worker run build:check",
     "dev": "vite",
-    "build": "tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsx scripts/build-art-catalog.ts --check && tsc --noEmit && vite build",
+    "build": "tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsx scripts/build-art-catalog.ts --check && tsx scripts/build-workshop-manifest.ts --check && tsc --noEmit && vite build",
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",
@@ -25,17 +25,23 @@
     "start:server": "tsx src/server/standalone.ts",
     "generation:bench": "tsx scripts/benchmark-generation.ts",
     "art:catalog": "tsx scripts/build-art-catalog.ts",
-    "art:notes": "tsx scripts/art-notes.ts"
+    "art:notes": "tsx scripts/art-notes.ts",
+    "workshop:manifest": "tsx scripts/build-workshop-manifest.ts",
+    "workshop:auth": "tsx scripts/workshop-auth.ts",
+    "workshop:inbox": "tsx scripts/workshop-inbox.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
     "@playwright/test": "^1.63.0",
     "@types/node": "^24.19.0",
     "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/three": "^0.186.0",
     "@types/webxr": "^0.5.24",
     "@types/ws": "^8.18.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
     "pngjs": "^7.0.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
@@ -43,10 +49,15 @@
     "vitest": "^5.0.2"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.104.0",
     "peerjs": "^1.5.5",
     "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router": "^8.4.0",
     "three": "^0.186.1",
-    "ws": "^8.22.0"
+    "ws": "^8.22.0",
+    "zustand": "^5.0.15"
   },
   "optionalDependencies": {
     "node-datachannel": "^0.33.4"

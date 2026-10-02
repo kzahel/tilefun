@@ -303,6 +303,7 @@ export class XRSessionManager {
       0,
     );
     gl.viewport(sub.viewport.x, sub.viewport.y, sub.viewport.width, sub.viewport.height);
+    // biome-ignore lint/correctness/useHookAtTopLevel: WebGL useProgram is not a React hook.
     gl.useProgram(this.program);
     gl.bindVertexArray(this.vao);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);

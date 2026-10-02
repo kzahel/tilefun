@@ -88,8 +88,8 @@ export class MainMenu {
     explorerLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
     this.overlay.appendChild(explorerLink);
     const toolsLink = document.createElement("a");
-    toolsLink.href = `${import.meta.env.BASE_URL}tools.html`;
-    toolsLink.textContent = "Indexes / atlases / labs ↗";
+    toolsLink.href = `${import.meta.env.BASE_URL}workshop.html`;
+    toolsLink.textContent = "Tilefun Workshop ↗";
     toolsLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
     this.overlay.appendChild(toolsLink);
 

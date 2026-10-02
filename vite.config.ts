@@ -1,10 +1,11 @@
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import basicSsl from "@vitejs/plugin-basic-ssl";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { artNotesPlugin } from "./src/server/artNotesHttp.js";
-import { interiorReviewPlugin } from "./src/server/interiorReviewPlugin.js";
+import { privateDataPlugin } from "./src/server/privateDataPlugin.js";
 import { tilefunServer } from "./src/server/vitePlugin.js";
+import { workshopPlugin } from "./src/server/workshopService.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const useHttps = process.env.HTTPS === "1";
@@ -12,10 +13,11 @@ const useHttps = process.env.HTTPS === "1";
 export default defineConfig({
   base: "/tilefun/",
   plugins: [
+    privateDataPlugin(root),
     useHttps && basicSsl(),
     tilefunServer(),
-    interiorReviewPlugin(),
-    artNotesPlugin(),
+    workshopPlugin(),
+    react(),
   ].filter(Boolean),
   server: {
     host: true, // listen on all interfaces, not just localhost
@@ -27,6 +29,7 @@ export default defineConfig({
       input: {
         main: resolve(root, "index.html"),
         tools: resolve(root, "tools.html"),
+        workshop: resolve(root, "workshop.html"),
         worldExplorer: resolve(root, "world-explorer.html"),
         artWorkbench: resolve(root, "art-workbench.html"),
         buildingLab: resolve(root, "building-lab.html"),

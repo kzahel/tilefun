@@ -1,0 +1,555 @@
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import {
+  type ArtCatalog,
+  type ArtRect,
+  inflateSlices,
+  intersects,
+  required,
+  snapRegion,
+  validateRect,
+} from "../art/ArtCatalog.js";
+import { ART_INTENTS, type ArtNote } from "../art/ArtNotes.js";
+import { loadVerifiedArtImage } from "../art/ArtSource.js";
+import { ErrorMessage, threadPath } from "./App.js";
+import { workshopJson } from "./AuthClient.js";
+import { useSession } from "./WorkshopQueries.js";
+import { legacyValue, useWorkspace } from "./WorkspaceStore.js";
+
+export default function SourcePage() {
+  const catalog = useQuery({
+    queryKey: ["art-catalog"],
+    queryFn: async () => {
+      const response = await fetch("/tilefun/data/art-catalog.json");
+      if (!response.ok) throw new Error("Art inventory unavailable");
+      return response.json() as Promise<ArtCatalog>;
+    },
+  });
+  if (!catalog.data) return <ErrorMessage error={catalog.error} />;
+  return <SourceBrowser catalog={catalog.data} />;
+}
+function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
+  const location = useLocation(),
+    navigate = useNavigate(),
+    session = useSession(),
+    canvas = useRef<HTMLCanvasElement>(null),
+    stage = useRef<HTMLDivElement>(null),
+    crop = useRef<HTMLCanvasElement>(null);
+  const params = new URLSearchParams(location.search),
+    stored = useRef(legacyValue("tilefun.art-workbench.v1")).current;
+  const sheet = required(
+    catalog.sheets.find((s) => s.id === params.get("sheet")) ??
+      catalog.sheets.find((s) => s.id === stored.sheetId) ??
+      catalog.sheets.find((s) => s.id === "me-complete") ??
+      catalog.sheets[0],
+  );
+  const [selection, setSelection] = useState<ArtRect | null>(null),
+    [search, setSearch] = useState(params.get("q") ?? ""),
+    [filter, setFilter] = useState(params.get("filter") ?? "all"),
+    [intent, setIntent] = useState<ArtNote["intent"]>("other"),
+    [zoom, setZoom] = useState(1),
+    [camera, setCamera] = useState({ x: 0, y: 0 }),
+    [mode, setMode] = useState("select"),
+    [error, setError] = useState(""),
+    [copied, setCopied] = useState(false),
+    [saved, setSaved] = useState(false),
+    [viewSize, setViewSize] = useState({ width: 800, height: 500 });
+  const drag = useRef<{
+    x: number;
+    y: number;
+    clientX: number;
+    clientY: number;
+    camera: { x: number; y: number };
+  } | null>(null);
+  const draftKey = `source:${sheet.id}`,
+    drafts = useWorkspace((s) => s.drafts),
+    draft = drafts[draftKey] ?? "";
+  const image = useQuery({
+    queryKey: ["source-image", sheet.id, sheet.fingerprint],
+    queryFn: () => loadVerifiedArtImage(sheet),
+    staleTime: Infinity,
+  });
+  const index = useQuery({
+    queryKey: ["source-index", sheet.id, sheet.index],
+    queryFn: async () => {
+      const response = await fetch(required(sheet.index));
+      if (!response.ok) throw new Error("Slice index unavailable");
+      return inflateSlices(sheet, await response.json());
+    },
+    enabled: !!sheet.index,
+    staleTime: Infinity,
+  });
+  const notes = useQuery({
+    queryKey: ["workshop", "art-notes"],
+    queryFn: () => workshopJson<ArtNote[]>("art-notes"),
+    enabled: session.data?.authenticated === true,
+    refetchInterval: 30_000,
+  });
+  useEffect(() => {
+    const node = canvas.current;
+    if (!node) return;
+    const stop = (event: WheelEvent) => event.preventDefault();
+    node.addEventListener("wheel", stop, { passive: false });
+    return () => node.removeEventListener("wheel", stop);
+  }, []);
+  useEffect(() => {
+    if (!stage.current) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = Math.max(240, Math.round(entries[0]?.contentRect.width ?? 800));
+      setViewSize({ width, height: window.innerWidth < 700 ? 430 : 560 });
+    });
+    observer.observe(stage.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const p = new URLSearchParams(location.search),
+      raw = p.get("rect");
+    let rect: ArtRect | null = null;
+    try {
+      if (raw) rect = validateRect(raw.split(",").map(Number), sheet);
+      else if (!p.has("view") && stored.sheetId === sheet.id && stored.selection)
+        rect = validateRect(stored.selection, sheet);
+    } catch {
+      setError("The saved selection no longer fits this sheet.");
+    }
+    const savedIntent =
+      useWorkspace.getState().drafts[`intent:${draftKey}`] ??
+      (stored.sheetId === sheet.id ? stored.intent : "other");
+    setIntent(
+      ART_INTENTS.includes(savedIntent as ArtNote["intent"])
+        ? (savedIntent as ArtNote["intent"])
+        : "other",
+    );
+    setSelection(rect);
+    setSearch(p.get("q") ?? "");
+    setFilter(p.get("filter") ?? "all");
+    setCopied(false);
+    setSaved(false);
+    if (rect) {
+      setZoom(Math.min(4, Math.max(1, (viewSize.width - 64) / rect[2])));
+      setCamera({ x: Math.max(0, rect[0] - 32), y: Math.max(0, rect[1] - 32) });
+    } else {
+      setZoom(Math.max(0.08, Math.min(1, viewSize.width / sheet.width)));
+      setCamera({ x: 0, y: 0 });
+    }
+    if (useWorkspace.getState().drafts[draftKey] === undefined)
+      useWorkspace
+        .getState()
+        .setDraft(
+          draftKey,
+          stored.sheetId === sheet.id && typeof stored.note === "string" ? stored.note : "",
+        );
+  }, [sheet, stored, draftKey, location.search, viewSize.width]);
+  useEffect(() => {
+    const ctx = canvas.current?.getContext("2d");
+    if (!ctx || !canvas.current) return;
+    canvas.current.width = viewSize.width;
+    canvas.current.height = viewSize.height;
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = "#c9cec5";
+    ctx.fillRect(0, 0, viewSize.width, viewSize.height);
+    if (image.data)
+      ctx.drawImage(
+        image.data,
+        -camera.x * zoom,
+        -camera.y * zoom,
+        sheet.width * zoom,
+        sheet.height * zoom,
+      );
+    if (selection) {
+      ctx.fillStyle = "#f4ba4233";
+      ctx.fillRect(
+        (selection[0] - camera.x) * zoom,
+        (selection[1] - camera.y) * zoom,
+        selection[2] * zoom,
+        selection[3] * zoom,
+      );
+      ctx.strokeStyle = "#f5b83e";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(
+        (selection[0] - camera.x) * zoom,
+        (selection[1] - camera.y) * zoom,
+        selection[2] * zoom,
+        selection[3] * zoom,
+      );
+    }
+  }, [image.data, sheet, selection, zoom, camera, viewSize]);
+  useEffect(() => {
+    if (!crop.current || !selection || !image.data) return;
+    const [x, y, w, h] = selection;
+    crop.current.width = w;
+    crop.current.height = h;
+    const ctx = required(crop.current.getContext("2d"));
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(image.data, x, y, w, h, 0, 0, w, h);
+  }, [image.data, selection]);
+  function share(rect: ArtRect | null = selection) {
+    const p = new URLSearchParams({ sheet: sheet.id });
+    if (rect) p.set("rect", rect.join(","));
+    else p.set("view", "sheet");
+    if (search) p.set("q", search);
+    if (filter !== "all") p.set("filter", filter);
+    return `/tool/art?${p}`;
+  }
+  function selectRect(rect: ArtRect) {
+    setSelection(rect);
+    setCamera({ x: Math.max(0, rect[0] - 32), y: Math.max(0, rect[1] - 32) });
+    setZoom(Math.min(4, Math.max(1, (viewSize.width - 64) / rect[2])));
+    navigate(share(rect), { replace: true });
+  }
+  function setDraft(value: string) {
+    useWorkspace.getState().setDraft(draftKey, value);
+    setSaved(false);
+    try {
+      localStorage.setItem(
+        "tilefun.art-workbench.v1",
+        JSON.stringify({
+          ...legacyValue("tilefun.art-workbench.v1"),
+          sheetId: sheet.id,
+          selection,
+          note: value,
+          intent,
+        }),
+      );
+    } catch {
+      /* The Workshop persisted copy remains available. */
+    }
+  }
+  const allSlices = index.data ?? [],
+    uses = catalog.usages.filter((u) => u.sheetId === sheet.id),
+    selectedUses = selection ? uses.filter((u) => intersects(u.rect, selection)) : [],
+    selectedSlices = selection ? allSlices.filter((s) => intersects(s.rect, selection)) : [];
+  const filtered = allSlices.filter(
+    (s) =>
+      (!search || `${s.name} ${s.theme}`.toLowerCase().includes(search.toLowerCase())) &&
+      (filter !== "uses" || uses.some((u) => intersects(u.rect, s.rect))),
+  );
+  const point = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    const r = event.currentTarget.getBoundingClientRect();
+    return {
+      x: Math.min(
+        sheet.width - 1,
+        Math.max(0, camera.x + ((event.clientX - r.left) * viewSize.width) / r.width / zoom),
+      ),
+      y: Math.min(
+        sheet.height - 1,
+        Math.max(0, camera.y + ((event.clientY - r.top) * viewSize.height) / r.height / zoom),
+      ),
+    };
+  };
+  function save() {
+    if (!selection || !draft.trim()) {
+      setError("Select source art and write a note first.");
+      return;
+    }
+    if (!image.data) {
+      setError("Wait for the source image to be verified.");
+      return;
+    }
+    useWorkspace.getState().enqueue({
+      id: crypto.randomUUID(),
+      type: "source",
+      sheetId: sheet.id,
+      fingerprint: sheet.fingerprint,
+      rect: selection,
+      sliceKeys: selectedSlices.slice(0, 40).map((s) => s.key),
+      intent,
+      note: draft.trim(),
+    });
+    setDraft("");
+    setSaved(true);
+    setError("");
+  }
+  return (
+    <section className="source-page">
+      <div className="page-heading">
+        <div>
+          <p className="eyebrow">SOURCE ART → ASSETS</p>
+          <h1>Art workbench</h1>
+          <p>Select tiles or regions, see their recorded uses, and leave a shared request.</p>
+        </div>
+        <a href={`/tilefun/art-workbench.html${location.search}`} target="_blank" rel="noreferrer">
+          Original workbench ↗
+        </a>
+      </div>
+      <div className="source-toolbar">
+        <label>
+          Sheet
+          <select
+            aria-label="Sheet"
+            value={sheet.id}
+            onChange={(e) =>
+              navigate(`/tool/art?sheet=${encodeURIComponent(e.target.value)}&view=sheet`)
+            }
+          >
+            {catalog.sheets.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Search slices
+          <input
+            aria-label="Search slices"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Condo, hotel, sidewalk…"
+          />
+        </label>
+        <label>
+          Show
+          <select aria-label="Show" value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <option value="all">All indexed slices</option>
+            <option value="indexed">Named slices</option>
+            <option value="uses">Recorded uses</option>
+          </select>
+        </label>
+      </div>
+      <div className="source-layout">
+        <div>
+          <div className="source-stage" ref={stage}>
+            <canvas
+              ref={canvas}
+              aria-label="Source spritesheet"
+              style={{ touchAction: "none" }}
+              onPointerDown={(event) => {
+                event.currentTarget.setPointerCapture(event.pointerId);
+                const p = point(event);
+                drag.current = { ...p, clientX: event.clientX, clientY: event.clientY, camera };
+                if (mode === "select") setSelection(snapRegion(p, p, sheet));
+              }}
+              onPointerMove={(event) => {
+                const start = drag.current;
+                if (!start) return;
+                if (mode === "pan")
+                  setCamera({
+                    x: Math.min(
+                      sheet.width,
+                      Math.max(0, start.camera.x - (event.clientX - start.clientX) / zoom),
+                    ),
+                    y: Math.min(
+                      sheet.height,
+                      Math.max(0, start.camera.y - (event.clientY - start.clientY) / zoom),
+                    ),
+                  });
+                else {
+                  try {
+                    setSelection(snapRegion(start, point(event), sheet));
+                  } catch {
+                    /* Ignore boundary movement. */
+                  }
+                }
+              }}
+              onPointerUp={(event) => {
+                if (!drag.current) return;
+                const rect =
+                  mode === "select" ? snapRegion(drag.current, point(event), sheet) : selection;
+                drag.current = null;
+                if (mode === "select" && rect) {
+                  setSelection(rect);
+                  navigate(share(rect), { replace: true });
+                }
+              }}
+              onPointerCancel={() => {
+                drag.current = null;
+              }}
+              onWheel={(event) => {
+                const r = event.currentTarget.getBoundingClientRect(),
+                  x = ((event.clientX - r.left) * viewSize.width) / r.width,
+                  y = ((event.clientY - r.top) * viewSize.height) / r.height,
+                  next = Math.max(0.08, Math.min(16, zoom * (event.deltaY < 0 ? 1.2 : 1 / 1.2)));
+                setCamera({
+                  x: Math.max(0, camera.x + x / zoom - x / next),
+                  y: Math.max(0, camera.y + y / zoom - y / next),
+                });
+                setZoom(next);
+              }}
+            />
+          </div>
+          <div className="preview-controls">
+            <label>
+              Tool
+              <select aria-label="Tool" value={mode} onChange={(e) => setMode(e.target.value)}>
+                <option value="select">Select region</option>
+                <option value="pan">Pan sheet</option>
+              </select>
+            </label>
+            <button type="button" onClick={() => setZoom(Math.min(16, zoom * 1.5))}>
+              Zoom +
+            </button>
+            <button type="button" onClick={() => setZoom(Math.max(0.08, zoom / 1.5))}>
+              Zoom −
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setZoom(viewSize.width / sheet.width);
+                setCamera({ x: 0, y: 0 });
+              }}
+            >
+              Fit width
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setSelection(null);
+                navigate(share(null), { replace: true });
+              }}
+            >
+              Clear selection
+            </button>
+          </div>
+          <p className="muted">
+            {sheet.width} × {sheet.height} pixels · {allSlices.length} named slices · {uses.length}{" "}
+            recorded uses
+          </p>
+          <ErrorMessage error={image.error ?? index.error ?? error} />
+          <details className="slice-results" open={!!search}>
+            <summary>Named slices ({filtered.length})</summary>
+            <div>
+              {filtered.slice(0, 100).map((s) => (
+                <button type="button" key={s.key} onClick={() => selectRect(s.rect)}>
+                  {s.name}
+                  <small>
+                    {s.theme} · {s.rect.join(", ")}
+                  </small>
+                </button>
+              ))}
+            </div>
+            {filtered.length > 100 ? <p>Refine search to see more slices.</p> : null}
+          </details>
+        </div>
+        <aside className="source-inspector">
+          <h2>Your selection</h2>
+          {selection ? (
+            <>
+              <code>{selection.join(", ")}</code>
+              <div className="source-crop">
+                <canvas ref={crop} aria-label="Selected source art" />
+              </div>
+              <button
+                type="button"
+                onClick={() =>
+                  void navigator.clipboard
+                    .writeText(`${window.location.origin}/tilefun/workshop.html#${share()}`)
+                    .then(() => setCopied(true))
+                    .catch(() =>
+                      setError("Clipboard unavailable. Copy the current address instead."),
+                    )
+                }
+              >
+                {copied ? "Link copied" : "Copy selection link"}
+              </button>
+            </>
+          ) : (
+            <p>Tap a tile or drag a region in the sheet.</p>
+          )}
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              save();
+            }}
+          >
+            <label>
+              Use / intent
+              <select
+                aria-label="Use / intent"
+                value={intent}
+                onChange={(e) => {
+                  const value = e.target.value as ArtNote["intent"];
+                  setIntent(value);
+                  useWorkspace.getState().setDraft(`intent:${draftKey}`, value);
+                  try {
+                    localStorage.setItem(
+                      "tilefun.art-workbench.v1",
+                      JSON.stringify({
+                        ...legacyValue("tilefun.art-workbench.v1"),
+                        sheetId: sheet.id,
+                        selection,
+                        note: draft,
+                        intent: value,
+                      }),
+                    );
+                  } catch {
+                    /* Workshop persisted copy */
+                  }
+                }}
+              >
+                {ART_INTENTS.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Note
+              <textarea
+                aria-label="Note"
+                value={draft}
+                maxLength={3500}
+                onChange={(e) => setDraft(e.target.value)}
+                placeholder="What could we make from these tiles?"
+              />
+            </label>
+            <button
+              type="submit"
+              className="primary"
+              disabled={!selection || !image.data || !session.data?.authenticated}
+            >
+              Save shared note
+            </button>
+            {!session.data?.authenticated ? (
+              <Link to={`/login?returnTo=${encodeURIComponent("/tool/art" + location.search)}`}>
+                Sign in to annotate →
+              </Link>
+            ) : null}
+            {saved ? <p role="status">Note queued for the shared inbox.</p> : null}
+          </form>
+          <details open>
+            <summary>Recorded uses ({selectedUses.length})</summary>
+            {selectedUses.map((u) => (
+              <article key={u.id}>
+                <strong>{u.label}</strong>
+                <p>
+                  {u.kind} · {u.consumers.map((c) => c.system).join(", ")}
+                </p>
+              </article>
+            ))}
+            {selection && !selectedUses.length ? (
+              <p>No recorded use overlaps this selection.</p>
+            ) : null}
+          </details>
+          <details>
+            <summary>Named slices ({selectedSlices.length})</summary>
+            {selectedSlices.slice(0, 30).map((s) => (
+              <button type="button" key={s.key} onClick={() => selectRect(s.rect)}>
+                {s.name}
+              </button>
+            ))}
+          </details>
+          <details open>
+            <summary>Shared notes here</summary>
+            {notes.data
+              ?.filter(
+                (n) => n.sheetId === sheet.id && (!selection || intersects(n.rect, selection)),
+              )
+              .slice(-12)
+              .reverse()
+              .map((n) => (
+                <article key={n.threadId}>
+                  <Link to={threadPath(`art:${n.threadId}`)}>
+                    {n.status} · {n.note}
+                  </Link>
+                  {n.reply ? <p>{n.reply}</p> : null}
+                </article>
+              ))}
+          </details>
+        </aside>
+      </div>
+    </section>
+  );
+}

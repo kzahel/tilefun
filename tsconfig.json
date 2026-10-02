@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "jsx": "react-jsx"
   },
   "include": ["src", "demo"]
 }

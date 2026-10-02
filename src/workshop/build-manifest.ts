@@ -1,0 +1,45 @@
+import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import { loadVerifiedArtImage } from "../art/ArtSource.js";
+import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
+import { Spritesheet } from "../assets/Spritesheet.js";
+import { BlendGraph } from "../autotile/BlendGraph.js";
+import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
+import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
+import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import type { WorkshopCandidate } from "./WorkshopTypes.js";
+
+const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) => r.json())) as ArtCatalog;
+const source = required(catalog.sheets.find((s) => s.id === "me-complete"));
+const assets = await loadTerrainAssets(new BlendGraph());
+assets.sheets.set(
+  "me-complete",
+  new Spritesheet(await createImageBitmap(await loadVerifiedArtImage(source)), 16, 16),
+);
+try {
+  const canvas = document.createElement("canvas"),
+    candidates: WorkshopCandidate[] = [];
+  for (const definition of artReviewDefinitions())
+    candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
+  candidates.push(...(await buildInteriorCandidates()));
+  Object.assign(window, {
+    workshopManifest: {
+      version: 1,
+      tools: WORKSHOP_TOOLS,
+      batches: [
+        ...CITY_BATCHES,
+        ...INTERIOR_BATCHES,
+        {
+          id: "motion",
+          name: "Furniture movement sets",
+          description:
+            "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
+          toolId: "motion",
+        },
+      ],
+      candidates,
+    },
+    workshopManifestReady: true,
+  });
+} finally {
+  closeAssets(assets);
+}

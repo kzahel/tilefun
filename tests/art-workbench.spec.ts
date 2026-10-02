@@ -53,7 +53,7 @@ test("saves notes on the machine for a second browser and resolves the same thre
   await page.reload();
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await expect(page.locator("#note")).toHaveValue("");
-  const second = await browser.newContext();
+  const second = await browser.newContext({ storageState: "test-results/workshop-session.json" });
   try {
     const other = await second.newPage();
     await other.goto(URL);
@@ -61,6 +61,7 @@ test("saves notes on the machine for a second browser and resolves the same thre
     await expect(shared).toBeVisible();
     await shared.getByRole("button", { name: "Resolve", exact: true }).click();
     await expect(shared).toHaveCount(0);
+    await expect(other.locator("#sync")).toHaveText("Server inbox up to date.");
     await page.locator("#refresh").click();
     await expect(note).toHaveCount(0);
     await page.locator("#note-filter").selectOption("resolved");

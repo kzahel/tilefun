@@ -123,6 +123,7 @@ test("surface verdicts use independent recipe identities, pause after two report
   await expect(page.locator(ready)).toBeVisible();
   await page.locator("#approve-building").click();
   await expect(page.locator("#review-progress")).toContainText("1 approved");
+  await expect.poll(() => notes.length).toBe(1);
   expect(notes[0]?.buildingReview).toMatchObject({
     scene: "surface",
     caseId: "surface-v1-narrow",

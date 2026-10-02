@@ -33,9 +33,16 @@ The live deployment at `https://tilefun.graehlarts.com/tilefun/` serves this
 checkout through Vite. Use that origin for human review links; isolated local
 preview servers are for automated validation.
 
-The central tool directory is `/tilefun/tools.html`, linked as
-Indexes / atlases / labs from the game sidebar and world menu. Keep new tools
-and useful shortcuts discoverable there, with descriptions and a return link.
+The central workspace is `/tilefun/workshop.html`, linked as Tilefun Workshop
+from the game sidebar and world menu. It includes all review batches, requests,
+activity/history and tools. Register new batches/candidates so zero-event work
+appears in the global inbox. Old `/tilefun/tools.html` and lab links still work.
+See `docs/tilefun-workshop.md` for login, shared APIs and data. Use
+`npm run workshop:inbox` for the combined trusted local read. Private API reads
+and all new/legacy writes require the owner cookie and CSRF token; never commit
+owner/session files. Tests use isolated auth/data and Playwright Chromium.
+After render/recipe/input changes run `npm run art:catalog` then
+`npm run workshop:manifest`; build checks both. Do not synthesize approvals.
 
 The art workbench is at `/tilefun/art-workbench.html`. See
 `docs/art-workbench.md` for source-use inventory coverage and the shared note

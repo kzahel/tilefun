@@ -11895,15 +11895,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:483"
+          "source": "src/interiors/playtest/main.ts:484"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:504"
+          "source": "src/interiors/playtest/main.ts:505"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:827"
+          "source": "src/interiors/playtest/main.ts:831"
         },
         {
           "system": "Gameplay",

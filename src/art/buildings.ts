@@ -1,3 +1,4 @@
+import { canvasFingerprint, streetComposition } from "../workshop/ReviewCandidates.js";
 import "./art.css";
 import "./buildings.css";
 import { loadJSON } from "../assets/AssetLoader.js";
@@ -76,13 +77,6 @@ if (STREET_REVIEW_SCENES.some((s) => s.id === params.get("case")))
   streetSelect.value = params.get("case") ?? "";
 function currentStreet(): StreetScene {
   return required(STREET_REVIEW_SCENES.find((s) => s.id === streetSelect.value));
-}
-function streetComposition(s: StreetScene) {
-  return {
-    scene: s,
-    building: required(CITY_BUILDING_PREFABS.find((p) => p.type === s.buildingType)),
-    props: s.props.map((p) => createProp(p.type, p.wx, p.wy)),
-  };
 }
 function reviewSourceRects(prefabs: readonly BuildingRecipe[], street?: StreetScene): ArtRect[] {
   return [
@@ -1069,20 +1063,11 @@ if (!streetRun && !surfaceRun && !districtRun)
         ? [{ prefab: entry.prefab, wx: 0, wy: 0 }]
         : cityPrefabBlock(entry.scene);
     drawBuildingShowcase(hashCanvas, items, sheet, false);
-    const pixels = required(hashCanvas.getContext("2d")).getImageData(
-      0,
-      0,
-      hashCanvas.width,
-      hashCanvas.height,
-    ).data;
-    const pixelHash = await sha256(pixels);
     const review: BuildingReview = {
       scene: entry.scene,
       prefabIds: items.map((p) => p.prefab.type),
       revision: await sha256(new TextEncoder().encode(JSON.stringify(items.map((p) => p.prefab)))),
-      renderFingerprint: await sha256(
-        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
-      ),
+      renderFingerprint: await canvasFingerprint(hashCanvas),
       url: `/tilefun/building-lab.html?scene=${entry.scene}&prefab=${entry.prefab.type}`,
     };
     candidates.push({
@@ -1096,22 +1081,13 @@ if (!streetRun && !surfaceRun && !districtRun)
 if (streetRun)
   for (const entry of STREET_REVIEW_SCENES) {
     drawStreetShowcase(hashCanvas, entry, sheet, false);
-    const pixels = required(hashCanvas.getContext("2d")).getImageData(
-      0,
-      0,
-      hashCanvas.width,
-      hashCanvas.height,
-    ).data;
-    const pixelHash = await sha256(pixels);
     const review: BuildingReview = {
       scene: "street",
       caseId: entry.id,
       prefabIds: [entry.buildingType],
       propTypes: [...new Set(entry.props.map((p) => p.type))],
       revision: await sha256(new TextEncoder().encode(JSON.stringify(streetComposition(entry)))),
-      renderFingerprint: await sha256(
-        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
-      ),
+      renderFingerprint: await canvasFingerprint(hashCanvas),
       url: `/tilefun/building-lab.html?run=streets&case=${entry.id}`,
     };
     candidates.push({
@@ -1125,13 +1101,6 @@ if (streetRun)
 if (surfaceRun)
   for (const entry of CITY_SURFACE_CASES) {
     drawSurfaceShowcase(hashCanvas, entry, sheet, false);
-    const pixels = required(hashCanvas.getContext("2d")).getImageData(
-      0,
-      0,
-      hashCanvas.width,
-      hashCanvas.height,
-    ).data;
-    const pixelHash = await sha256(pixels);
     const review: BuildingReview = {
       scene: "surface",
       caseId: entry.id,
@@ -1140,9 +1109,7 @@ if (surfaceRun)
       revision: await sha256(
         new TextEncoder().encode(JSON.stringify(citySurfaceComposition(entry))),
       ),
-      renderFingerprint: await sha256(
-        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
-      ),
+      renderFingerprint: await canvasFingerprint(hashCanvas),
       url: `/tilefun/building-lab.html?run=surfaces&case=${entry.id}`,
     };
     candidates.push({
@@ -1156,13 +1123,6 @@ if (surfaceRun)
 if (districtRun)
   for (const s of districtScenes) {
     drawDenseDistrictShowcase(hashCanvas, s, required(districtAssets), false);
-    const pixels = required(hashCanvas.getContext("2d")).getImageData(
-      0,
-      0,
-      hashCanvas.width,
-      hashCanvas.height,
-    ).data;
-    const pixelHash = await sha256(pixels);
     const review: BuildingReview = {
       scene: "district",
       caseId: s.definition.id,
@@ -1170,9 +1130,7 @@ if (districtRun)
       prefabIds: denseReviewPrefabs(s).map((p) => p.type),
       propTypes: s.props.map((p) => p.type),
       revision: await sha256(new TextEncoder().encode(JSON.stringify(denseReviewComposition(s)))),
-      renderFingerprint: await sha256(
-        new TextEncoder().encode(`${hashCanvas.width}:${hashCanvas.height}:${pixelHash}`),
-      ),
+      renderFingerprint: await canvasFingerprint(hashCanvas),
       url: `/tilefun/building-lab.html?run=districts&case=${s.definition.id}`,
     };
     candidates.push({

@@ -1,8 +1,12 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
-    "includes": ["**", "!dist", "!test-results", "!**/*.tsx"]
+    "includes": ["**", "!dist", "!test-results", "!ME complete tileset.tsx"]
   },
   "linter": {
     "enabled": true,
@@ -33,8 +37,10 @@
   },
   "overrides": [
     {
-      "includes": ["public/data/art-catalog.json"],
-      "formatter": { "enabled": false }
+      "includes": ["public/data/art-catalog.json", "public/data/workshop-manifest.json"],
+      "formatter": {
+        "enabled": false
+      }
     },
     {
       "includes": ["demo/**"],

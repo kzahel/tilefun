@@ -7,9 +7,10 @@ test("game sidebar opens the central index and each listed destination is served
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByTestId("open-tools-index").click();
-  await expect(page).toHaveURL(/\/tilefun\/tools.html$/);
-  await expect(page.getByRole("heading", { name: "Indexes, atlases & labs." })).toBeVisible();
-  await expect(page.locator(".cards article")).toHaveCount(11);
+  await expect(page).toHaveURL(/\/tilefun\/workshop.html$/);
+  await page.getByRole("link", { name: "All tools", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Find your tool." })).toBeVisible();
+  await expect(page.locator(".tool-card")).toHaveCount(14);
   const destinations = await page
     .locator("main a[href]")
     .evaluateAll((links) => [
