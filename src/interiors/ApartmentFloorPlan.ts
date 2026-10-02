@@ -67,10 +67,15 @@ function insideMask(rows: PlanCell[][], width: number): boolean[][] {
   );
 }
 
-export function parseFloorPlan(source: string): FloorPlan {
+export function parseFloorPlan(
+  source: string,
+  options: { preserveBounds?: boolean } = {},
+): FloorPlan {
   const lines = source.replace(/\r/g, "").split("\n");
-  while (lines[0]?.trim() === "") lines.shift();
-  while (lines.at(-1)?.trim() === "") lines.pop();
+  if (!options.preserveBounds) {
+    while (lines[0]?.trim() === "") lines.shift();
+    while (lines.at(-1)?.trim() === "") lines.pop();
+  }
   const width = Math.max(0, ...lines.map((line) => line.length));
   if (width < 3 || lines.length < 3 || width > 80 || lines.length > 60) {
     throw new Error("Plan must be between 3×3 and 80×60 cells");

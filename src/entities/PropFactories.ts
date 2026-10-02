@@ -11,6 +11,7 @@ import {
   interiorProp,
   interiorWalls,
 } from "../interiors/GameplayInterior.js";
+import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -554,6 +555,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const length = treeRunLength(type);
+  if (length !== null) return treeRunProp(length, wx, wy);
   const outdoor = outdoorRuntimeProp(type, wx, wy);
   if (outdoor) return outdoor;
   const interior = interiorProp(type, wx, wy);
@@ -621,6 +624,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (treeRunLength(type) !== null) return true;
   if (outdoorRuntimeAsset(type)) return true;
   if (type === INTERIOR_WALL_TYPE || furnitureAsset(type)) return true;
   if (buildingRecipe(type)) return true;
