@@ -100,3 +100,33 @@ Chromium and ignored test data. Never write synthetic human approvals.
 First human review: source caps/repeat joins, fence collision overlays, row
 snapping/erase splitting, room rectangles/door validation, and terrain/road parity.
 The next phase begins after feedback is addressed and candidate art is approved.
+
+## Delivered checkpoint — 2026-10-02
+
+Phases 1–3 are implemented. Foundation commit: `35e108e`; native Workshop/game
+integration: `4a3e6bf`, followed by viewport/navigation verification polish.
+
+- [Draw patterns](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/patterns)
+  has all four backend adapters, direct room rectangles/partitions/doors, atomic
+  preview/history, portable drafts and phone fitting.
+- [Review the tree kit](https://tilefun.graehlarts.com/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-short)
+  starts five globally indexed cases. The broadleaf source caps/repeat are mapped;
+  the other marked fenced-tree variants remain follow-on kits.
+- The game Patterns tab uses the same row resolver, compiler and source pieces.
+  Terrain/road input shares integer interpolation; city surface brushes use the
+  existing persistent road IDs and neighborhood rendering.
+- All 322 earlier candidate records are unchanged. The five additions remain
+  unchecked; generated worlds/banks and human approvals were not altered.
+
+Validation: all three TypeScript configurations, 1,162 unit tests, Biome (existing
+warnings only), source catalog/manifest checks and production build passed. The
+full browser run passed 227 cases and found one stale assertion expecting 15 tools
+instead of 16. After correcting it and adding a phone-fit case, all eight targeted
+pattern/navigation cases passed (229 distinct browser cases covered). The live
+checkout on port 5174 rendered the studio and exact review with no browser errors;
+its public deployment serves that same checkout. Filesystem and browser reloads
+restore tree art/collision, and undo rejects conflicting row edits.
+
+Next: human review of these brushes/cap seams/footprints, then phase 4's editable
+gameplay room plans and reviewed-kit promotion. Playground tubes and the remaining
+fenced/overlapping-tree variants follow through the same registry and review loop.

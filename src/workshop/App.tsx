@@ -246,10 +246,16 @@ export function App() {
           ).map((tool) => (
             <NavLink key={tool.id} to={`/tool/${tool.id}`}>
               {tool.name}
-              {["review", "adapter"].includes(tool.mode) &&
-              ["buildings", "roads", "districts", "streets", "rooms", "motion"].includes(
-                tool.id,
-              ) ? (
+              {(["review", "adapter"].includes(tool.mode) || tool.id === "patterns") &&
+              [
+                "patterns",
+                "buildings",
+                "roads",
+                "districts",
+                "streets",
+                "rooms",
+                "motion",
+              ].includes(tool.id) ? (
                 <span className="nav-count">
                   {(inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter(
                     (c) =>

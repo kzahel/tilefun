@@ -116,6 +116,7 @@ function PatternStudio({
       zoom: family === "rooms-v1" ? 1 : 2,
     }),
     [size, setSize] = useState({ width: 800, height: 560 });
+  const initiallyFitted = useRef(false);
   const drag = useRef<{
     id: number;
     pan: boolean;
@@ -151,15 +152,30 @@ function PatternStudio({
   useEffect(() => {
     if (!container.current) return;
     const observer = new ResizeObserver(([e]) => {
-      if (e)
+      if (e) {
         setSize({
           width: Math.round(e.contentRect.width),
           height: Math.round(e.contentRect.height),
         });
+        if (!initiallyFitted.current && e.contentRect.width > 0 && e.contentRect.height > 0) {
+          initiallyFitted.current = true;
+          setView((v) => ({
+            ...v,
+            zoom: Math.max(
+              0.25,
+              Math.min(
+                v.zoom,
+                e.contentRect.width / (doc.width * gridSize + 64),
+                e.contentRect.height / (doc.height * gridSize + 64),
+              ),
+            ),
+          }));
+        }
+      }
     });
     observer.observe(container.current);
     return () => observer.disconnect();
-  }, []);
+  }, [doc.width, doc.height, gridSize]);
   function changed() {
     setDoc(history.current.current);
     setRevision((r) => r + 1);

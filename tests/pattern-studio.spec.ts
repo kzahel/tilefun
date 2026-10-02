@@ -177,3 +177,28 @@ test("game row brush uses the same compiler, exposes host history and restores a
   await expect.poll(async () => (await rows()).length).toBe(1);
   expect(errors).toEqual([]);
 });
+
+test("phone studio initially fits its full grid and Shift dragging pans past the edges", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(base);
+  const c = page.getByTestId("pattern-canvas");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  const b = await c.boundingBox(),
+    v = await camera(c);
+  if (!b) throw new Error("Missing canvas");
+  expect(v.zoom * 24 * 32).toBeLessThan(b.width);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await c.scrollIntoViewIfNeeded();
+  const box = await c.boundingBox();
+  if (!box) throw new Error("Missing canvas");
+  await page.keyboard.down("Shift");
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 220, box.y + box.height / 2 + 100);
+  await page.mouse.up();
+  await page.keyboard.up("Shift");
+  expect((await camera(c)).x).toBeLessThan(0);
+  await page.screenshot({ path: "/tmp/tilefun-pattern-phone.png", fullPage: true });
+});
