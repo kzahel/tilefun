@@ -268,3 +268,37 @@ The overview builder reads the completed registry and committed sheets, without
 rewriting previous characters. Regenerating bear alone also preserves their
 sources/exports. Future additions should author separate species masters, inspect
 all poses at both scales, and publish only complete records.
+
+## Three-way Blender / 32px / 16px comparison
+
+`three-way-comparison.png` shows the original tiger and all five new characters,
+with four directions in each of three columns: the original Blender render,
+authored 32px and separately authored native16. Pixel previews use nearest-neighbor
+scaling and have actual-size samples underneath. Additional lossless PNGs
+`three-way-comparison-pose-3.png`, `three-way-comparison-pose-5.png` and
+`three-way-comparison-pose-7.png` show the other matched walk poses.
+
+Only the tiger has a 3D model. The other five rows explicitly show the shared
+tiger pose reference, not a species-specific 3D predecessor. The reference was
+rendered again from the unchanged `art-source/blender/tiger.blend`, with its
+original geometry, lighting, camera and visible 3D eyes at 128px. It has no
+palette mapping, pixel eye patches or authored finish. Its retained sheet and
+metadata are `public/demos/blender-tiger/tiger-reference-3d.png` and `.json`.
+PNG preserves the continuous render colors without GIF palette quantization.
+
+Regenerate the comparison from committed images:
+
+```sh
+uv run --with pillow python scripts/blender/preview_character_stages.py
+```
+
+To refresh the reference itself, render the saved scene without saving changes,
+then pack the raw frames from ignored `data/blender-tiger/comparison-reference/`:
+
+```sh
+blender --background art-source/blender/tiger.blend --python-exit-code 1 --python scripts/blender/render_tiger_reference.py
+uv run --with pillow python scripts/blender/preview_character_stages.py --pack-reference
+```
+
+The sheet exporter verifies source dimensions and lossless PNG round trips.
+Original sprite sheets, masters, pose guides and the Blender source are untouched.

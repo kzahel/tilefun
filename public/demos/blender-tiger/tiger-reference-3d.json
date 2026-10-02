@@ -1,0 +1,10 @@
+{
+  "image": "tiger-reference-3d.png",
+  "frameWidth": 128,
+  "frameHeight": 128,
+  "frames": [1, 3, 5, 7],
+  "directions": ["down", "up", "left", "right"],
+  "source": "art-source/blender/tiger.blend",
+  "renderer": "scripts/blender/render_tiger_reference.py",
+  "description": "Original tiger geometry, camera, lighting and 3D eyes. No palette mapping, pixel eye patch or authored finish. Other characters reuse its projected pose guides; they have no separate 3D models."
+}
