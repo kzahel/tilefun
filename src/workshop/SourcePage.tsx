@@ -51,19 +51,26 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     [search, setSearch] = useState(params.get("q") ?? ""),
     [filter, setFilter] = useState(params.get("filter") ?? "all"),
     [intent, setIntent] = useState<ArtNote["intent"]>("other"),
-    [zoom, setZoom] = useState(1),
-    [camera, setCamera] = useState({ x: 0, y: 0 }),
+    [view, setView] = useState({ x: 0, y: 0, zoom: 1 }),
     [mode, setMode] = useState("select"),
     [error, setError] = useState(""),
     [copied, setCopied] = useState(false),
     [saved, setSaved] = useState(false),
-    [viewSize, setViewSize] = useState({ width: 800, height: 500 });
+    [viewSize, setViewSize] = useState({ width: 0, height: 560 });
+  // Store the world point at the viewport center. Zoom never changes this point.
+  const { zoom } = view,
+    camera = view,
+    positionedTarget = useRef(""),
+    localTarget = useRef<string | null>(null);
   const drag = useRef<{
     x: number;
     y: number;
     clientX: number;
     clientY: number;
     camera: { x: number; y: number };
+    zoom: number;
+    pan: boolean;
+    pointerId: number;
   } | null>(null);
   const draftKey = `source:${sheet.id}`,
     drafts = useWorkspace((s) => s.drafts),
@@ -92,7 +99,18 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
   useEffect(() => {
     const node = canvas.current;
     if (!node) return;
-    const stop = (event: WheelEvent) => event.preventDefault();
+    const stop = (event: WheelEvent) => {
+      event.preventDefault();
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? node.clientHeight : 1;
+      const delta = Math.max(-200, Math.min(200, (event.deltaY || event.deltaX) * unit));
+      if (!delta) return;
+      // A wheel gesture only changes scale, even with horizontal trackpad jitter.
+      drag.current = null;
+      setView((old) => ({
+        ...old,
+        zoom: Math.max(0.03, Math.min(16, old.zoom * Math.exp(-delta * 0.003))),
+      }));
+    };
     node.addEventListener("wheel", stop, { passive: false });
     return () => node.removeEventListener("wheel", stop);
   }, []);
@@ -106,6 +124,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
+    if (!viewSize.width) return;
     const p = new URLSearchParams(location.search),
       raw = p.get("rect");
     let rect: ArtRect | null = null;
@@ -129,12 +148,24 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     setFilter(p.get("filter") ?? "all");
     setCopied(false);
     setSaved(false);
-    if (rect) {
-      setZoom(Math.min(4, Math.max(1, (viewSize.width - 64) / rect[2])));
-      setCamera({ x: Math.max(0, rect[0] - 32), y: Math.max(0, rect[1] - 32) });
-    } else {
-      setZoom(Math.max(0.08, Math.min(1, viewSize.width / sheet.width)));
-      setCamera({ x: 0, y: 0 });
+    const target = `${sheet.id}:${rect?.join(",") ?? "sheet"}`;
+    if (positionedTarget.current !== target) {
+      const preserveView = localTarget.current === target;
+      positionedTarget.current = target;
+      localTarget.current = null;
+      if (!preserveView) {
+        const zoom = rect
+          ? Math.max(
+              0.03,
+              Math.min(4, (viewSize.width - 64) / rect[2], (viewSize.height - 64) / rect[3]),
+            )
+          : viewSize.width / sheet.width;
+        setView({
+          zoom,
+          x: rect ? rect[0] + rect[2] / 2 : sheet.width / 2,
+          y: rect ? rect[1] + rect[3] / 2 : viewSize.height / (2 * zoom),
+        });
+      }
     }
     if (useWorkspace.getState().drafts[draftKey] === undefined)
       useWorkspace
@@ -143,7 +174,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
           draftKey,
           stored.sheetId === sheet.id && typeof stored.note === "string" ? stored.note : "",
         );
-  }, [sheet, stored, draftKey, location.search, viewSize.width]);
+  }, [sheet, stored, draftKey, location.search, viewSize]);
   useEffect(() => {
     const ctx = canvas.current?.getContext("2d");
     if (!ctx || !canvas.current) return;
@@ -152,27 +183,23 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#c9cec5";
     ctx.fillRect(0, 0, viewSize.width, viewSize.height);
+    const left = camera.x - viewSize.width / (2 * zoom),
+      top = camera.y - viewSize.height / (2 * zoom);
     if (image.data)
-      ctx.drawImage(
-        image.data,
-        -camera.x * zoom,
-        -camera.y * zoom,
-        sheet.width * zoom,
-        sheet.height * zoom,
-      );
+      ctx.drawImage(image.data, -left * zoom, -top * zoom, sheet.width * zoom, sheet.height * zoom);
     if (selection) {
       ctx.fillStyle = "#f4ba4233";
       ctx.fillRect(
-        (selection[0] - camera.x) * zoom,
-        (selection[1] - camera.y) * zoom,
+        (selection[0] - left) * zoom,
+        (selection[1] - top) * zoom,
         selection[2] * zoom,
         selection[3] * zoom,
       );
       ctx.strokeStyle = "#f5b83e";
       ctx.lineWidth = 2;
       ctx.strokeRect(
-        (selection[0] - camera.x) * zoom,
-        (selection[1] - camera.y) * zoom,
+        (selection[0] - left) * zoom,
+        (selection[1] - top) * zoom,
         selection[2] * zoom,
         selection[3] * zoom,
       );
@@ -181,13 +208,13 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
       ctx.fillStyle = "#ed416055";
       for (const r of outdoor.data.catalog.coverage.gaps) {
         if (
-          r[0] + r[2] < camera.x ||
-          r[1] + r[3] < camera.y ||
-          r[0] > camera.x + viewSize.width / zoom ||
-          r[1] > camera.y + viewSize.height / zoom
+          r[0] + r[2] < left ||
+          r[1] + r[3] < top ||
+          r[0] > left + viewSize.width / zoom ||
+          r[1] > top + viewSize.height / zoom
         )
           continue;
-        ctx.fillRect((r[0] - camera.x) * zoom, (r[1] - camera.y) * zoom, r[2] * zoom, r[3] * zoom);
+        ctx.fillRect((r[0] - left) * zoom, (r[1] - top) * zoom, r[2] * zoom, r[3] * zoom);
       }
     }
   }, [image.data, sheet, selection, zoom, camera, viewSize, coverage, outdoor.data]);
@@ -211,9 +238,27 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
   }
   function selectRect(rect: ArtRect) {
     setSelection(rect);
-    setCamera({ x: Math.max(0, rect[0] - 32), y: Math.max(0, rect[1] - 32) });
-    setZoom(Math.min(4, Math.max(1, (viewSize.width - 64) / rect[2])));
-    navigate(share(rect), { replace: true });
+    setView({
+      x: rect[0] + rect[2] / 2,
+      y: rect[1] + rect[3] / 2,
+      zoom: Math.max(
+        0.03,
+        Math.min(4, (viewSize.width - 64) / rect[2], (viewSize.height - 64) / rect[3]),
+      ),
+    });
+    updateSelectionLink(rect);
+  }
+  function updateSelectionLink(rect: ArtRect | null) {
+    const path = share(rect);
+    // Publishing a local selection must not reposition the viewport.
+    // Keep the last acknowledged route until React commits this navigation.
+    // A resize during that transition must not refocus the old selection.
+    localTarget.current = `${sheet.id}:${rect?.join(",") ?? "sheet"}`;
+    navigate(path, { replace: true });
+  }
+  function zoomBy(factor: number) {
+    drag.current = null;
+    setView((old) => ({ ...old, zoom: Math.max(0.03, Math.min(16, old.zoom * factor)) }));
   }
   function setDraft(value: string) {
     useWorkspace.getState().setDraft(draftKey, value);
@@ -247,11 +292,19 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     return {
       x: Math.min(
         sheet.width - 1,
-        Math.max(0, camera.x + ((event.clientX - r.left) * viewSize.width) / r.width / zoom),
+        Math.max(
+          0,
+          camera.x +
+            (((event.clientX - r.left) * viewSize.width) / r.width - viewSize.width / 2) / zoom,
+        ),
       ),
       y: Math.min(
         sheet.height - 1,
-        Math.max(0, camera.y + ((event.clientY - r.top) * viewSize.height) / r.height / zoom),
+        Math.max(
+          0,
+          camera.y +
+            (((event.clientY - r.top) * viewSize.height) / r.height - viewSize.height / 2) / zoom,
+        ),
       ),
     };
   };
@@ -331,28 +384,47 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
             <canvas
               ref={canvas}
               aria-label="Source spritesheet"
-              style={{ touchAction: "none" }}
+              data-center-x={camera.x}
+              data-center-y={camera.y}
+              data-zoom={zoom}
+              data-source-ready={!!image.data && viewSize.width > 0}
+              style={{ touchAction: "none", cursor: mode === "pan" ? "grab" : "crosshair" }}
               onPointerDown={(event) => {
+                if (event.button !== 0 && event.button !== 1) return;
+                event.preventDefault();
                 event.currentTarget.setPointerCapture(event.pointerId);
-                const p = point(event);
-                drag.current = { ...p, clientX: event.clientX, clientY: event.clientY, camera };
-                if (mode === "select") setSelection(snapRegion(p, p, sheet));
+                const p = point(event),
+                  pan = mode === "pan" || event.button === 1;
+                drag.current = {
+                  ...p,
+                  clientX: event.clientX,
+                  clientY: event.clientY,
+                  camera,
+                  zoom,
+                  pan,
+                  pointerId: event.pointerId,
+                };
+                if (!pan) setSelection(snapRegion(p, p, sheet));
               }}
               onPointerMove={(event) => {
                 const start = drag.current;
-                if (!start) return;
-                if (mode === "pan")
-                  setCamera({
-                    x: Math.min(
-                      sheet.width,
-                      Math.max(0, start.camera.x - (event.clientX - start.clientX) / zoom),
-                    ),
-                    y: Math.min(
-                      sheet.height,
-                      Math.max(0, start.camera.y - (event.clientY - start.clientY) / zoom),
-                    ),
-                  });
-                else {
+                if (!start || start.pointerId !== event.pointerId) return;
+                if (start.pan) {
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  setView((old) => ({
+                    ...old,
+                    x:
+                      start.camera.x -
+                      ((event.clientX - start.clientX) * viewSize.width) /
+                        bounds.width /
+                        start.zoom,
+                    y:
+                      start.camera.y -
+                      ((event.clientY - start.clientY) * viewSize.height) /
+                        bounds.height /
+                        start.zoom,
+                  }));
+                } else {
                   try {
                     setSelection(snapRegion(start, point(event), sheet));
                   } catch {
@@ -361,28 +433,20 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
                 }
               }}
               onPointerUp={(event) => {
-                if (!drag.current) return;
-                const rect =
-                  mode === "select" ? snapRegion(drag.current, point(event), sheet) : selection;
+                const start = drag.current;
+                if (!start || start.pointerId !== event.pointerId) return;
                 drag.current = null;
-                if (mode === "select" && rect) {
+                if (!start.pan) {
+                  const rect = snapRegion(start, point(event), sheet);
                   setSelection(rect);
-                  navigate(share(rect), { replace: true });
+                  updateSelectionLink(rect);
                 }
               }}
               onPointerCancel={() => {
                 drag.current = null;
               }}
-              onWheel={(event) => {
-                const r = event.currentTarget.getBoundingClientRect(),
-                  x = ((event.clientX - r.left) * viewSize.width) / r.width,
-                  y = ((event.clientY - r.top) * viewSize.height) / r.height,
-                  next = Math.max(0.08, Math.min(16, zoom * (event.deltaY < 0 ? 1.2 : 1 / 1.2)));
-                setCamera({
-                  x: Math.max(0, camera.x + x / zoom - x / next),
-                  y: Math.max(0, camera.y + y / zoom - y / next),
-                });
-                setZoom(next);
+              onLostPointerCapture={() => {
+                drag.current = null;
               }}
             />
           </div>
@@ -404,17 +468,17 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
                 <option value="pan">Pan sheet</option>
               </select>
             </label>
-            <button type="button" onClick={() => setZoom(Math.min(16, zoom * 1.5))}>
+            <button type="button" onClick={() => zoomBy(1.5)}>
               Zoom +
             </button>
-            <button type="button" onClick={() => setZoom(Math.max(0.08, zoom / 1.5))}>
+            <button type="button" onClick={() => zoomBy(1 / 1.5)}>
               Zoom −
             </button>
             <button
               type="button"
               onClick={() => {
-                setZoom(viewSize.width / sheet.width);
-                setCamera({ x: 0, y: 0 });
+                const zoom = viewSize.width / sheet.width;
+                setView({ x: sheet.width / 2, y: viewSize.height / (2 * zoom), zoom });
               }}
             >
               Fit width
@@ -423,12 +487,16 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
               type="button"
               onClick={() => {
                 setSelection(null);
-                navigate(share(null), { replace: true });
+                updateSelectionLink(null);
               }}
             >
               Clear selection
             </button>
           </div>
+          <p className="muted">
+            {Math.round(zoom * 100)}% · Wheel or Zoom buttons keep the view center fixed. Drag in
+            Pan mode, or hold the middle mouse button to pan.
+          </p>
           {coverage && sheet.id === "me-complete" && outdoor.data ? (
             <p className="notice compact">
               Pink marks occupied cells without named slices.{" "}

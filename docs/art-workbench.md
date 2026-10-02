@@ -5,6 +5,13 @@ now combines source annotations, all review batches, requests and full history.
 Shared feedback requires owner login; old tool URLs and browser drafts/outboxes
 remain supported. See [Workshop setup and API](tilefun-workshop.md).
 
+Workshop's native Source art viewport keeps the same source point at its center
+when using the wheel or Zoom buttons. Wheel gestures only zoom. Drag with Pan
+sheet selected, or hold the middle mouse button, to pan freely beyond any sheet
+edge. Selecting or clearing a region and resizing the viewport preserve the
+camera; opening a different selection link centers that region. Fit width
+explicitly returns to the sheet's top and width overview.
+
 Start from [Indexes, atlases & labs](https://tilefun.graehlarts.com/tilefun/tools.html),
 linked from the game's hamburger sidebar and world menu. The index describes all
 nine tools and has shortcuts for source sheets, city art, review categories,
