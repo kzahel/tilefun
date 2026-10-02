@@ -45,7 +45,7 @@ export function renderPatternDocument(
   ctx.imageSmoothingEnabled = false;
   if (doc.family === "rooms-v1") {
     const map = buildLayeredApartmentPlan(
-      parseFloorPlan(roomSketch(doc), { preserveBounds: true }),
+      parseFloorPlan(roomSketch(doc), { preserveBounds: true, allowUnreachable: true }),
     );
     drawLayeredInteriorMap(ctx, roomAtlas, map);
   } else {

@@ -9,7 +9,15 @@ import { CITY_REVIEW_RUNS } from "./CityReviewRuns.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
 export interface BuildingReview {
-  scene: "single" | "residential" | "mixed" | "hotel" | "street" | "surface" | "district";
+  scene:
+    | "single"
+    | "residential"
+    | "mixed"
+    | "hotel"
+    | "street"
+    | "surface"
+    | "district"
+    | "pattern";
   /** Stable context identity for a surface or street scene, independent of its building. */
   caseId?: string;
   propTypes?: string[];
@@ -56,11 +64,18 @@ function parseBuildingReview(value: unknown): BuildingReview {
   if (!value || typeof value !== "object") throw new Error("Invalid building review");
   const v = value as Record<string, unknown>;
   if (
-    !["single", "residential", "mixed", "hotel", "street", "surface", "district"].includes(
-      v.scene as string,
-    ) ||
+    ![
+      "single",
+      "residential",
+      "mixed",
+      "hotel",
+      "street",
+      "surface",
+      "district",
+      "pattern",
+    ].includes(v.scene as string) ||
     !Array.isArray(v.prefabIds) ||
-    (v.scene === "surface"
+    (v.scene === "surface" || v.scene === "pattern"
       ? v.prefabIds.length !== 0
       : v.scene !== "district" && !v.prefabIds.length) ||
     v.prefabIds.length > 30 ||
@@ -71,12 +86,24 @@ function parseBuildingReview(value: unknown): BuildingReview {
       (typeof v.renderFingerprint !== "string" || !/^[a-f0-9]{64}$/.test(v.renderFingerprint))) ||
     typeof v.url !== "string" ||
     v.url.length > 2000 ||
-    !/^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url)
+    !(v.scene === "pattern"
+      ? /^\/tilefun\/workshop\.html#\/review\/pattern%3A[a-z0-9-]+$/.test(v.url)
+      : /^\/tilefun\/building-lab\.html\?[^\s#]*$/.test(v.url))
   )
     throw new Error("Invalid building review");
   if (v.scene !== "district" && v.districtRecipe !== undefined)
     throw new Error("Invalid district recipe context");
-  if (v.scene === "street") {
+  if (v.scene === "pattern") {
+    if (
+      typeof v.caseId !== "string" ||
+      !/^fenced-trees-v1-[a-z-]+$/.test(v.caseId) ||
+      v.url !== `/tilefun/workshop.html#/review/pattern%3A${v.caseId}` ||
+      v.propTypes !== undefined ||
+      v.surfaceRecipe !== undefined ||
+      v.districtRecipe !== undefined
+    )
+      throw new Error("Invalid pattern review context");
+  } else if (v.scene === "street") {
     if (v.surfaceRecipe !== undefined) throw new Error("Invalid street recipe context");
     if (
       typeof v.caseId !== "string" ||
@@ -145,6 +172,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
           propTypes: [...(v.propTypes as string[])],
         }
       : {}),
+    ...(v.scene === "pattern" ? { caseId: v.caseId as string } : {}),
     prefabIds: [...v.prefabIds],
     revision: v.revision,
     ...(v.renderFingerprint === undefined

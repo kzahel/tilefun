@@ -161,3 +161,41 @@ describe("GameServer", () => {
     expect(session.editorEnabled).toBe(false);
   });
 });
+
+describe("pattern commands", () => {
+  it("returns validation and history status on the real transport and requires editor mode", () => {
+    const { server, transport } = createTestServer();
+    const messages: import("../shared/protocol.js").ServerMessage[] = [];
+    transport.clientSide.onMessage((m) => messages.push(m));
+    transport.clientSide.send({
+      type: "edit-pattern",
+      start: { x: 100, y: 100 },
+      end: { x: 110, y: 102 },
+      erase: false,
+    });
+    expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
+    expect(messages.at(-1)).toEqual({
+      type: "pattern-edit-status",
+      error: "",
+      canUndo: true,
+      canRedo: false,
+    });
+    transport.clientSide.send({ type: "edit-pattern-history", direction: "undo" });
+    expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(0);
+    transport.clientSide.send({ type: "edit-pattern-history", direction: "redo" });
+    expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
+    transport.clientSide.send({ type: "set-editor-mode", enabled: false });
+    transport.clientSide.send({
+      type: "edit-pattern",
+      start: { x: 100, y: 101 },
+      end: { x: 110, y: 101 },
+      erase: false,
+    });
+    expect(messages.at(-1)).toMatchObject({
+      type: "pattern-edit-status",
+      error: expect.stringContaining("editor"),
+    });
+    expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
+    server.destroy();
+  });
+});

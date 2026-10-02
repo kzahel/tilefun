@@ -7,7 +7,7 @@ still work and provide a return link.
 Workshop uses React, TypeScript, React Router, Zustand and TanStack Query with
 Vite. The game, terrain generators, sprite factories and renderers are shared
 TypeScript modules. Buildings, roads, streets, districts, room reviews and source
-annotations have native Workshop views. The room editor, movement playtest,
+annotations and Pattern studio have native Workshop views. The room editor, movement playtest,
 world explorer and smaller demos run through same-origin iframe adapters so their
 existing input/event loops stay isolated. This is a deliberate first release;
 those editor controllers can become components later.
@@ -51,6 +51,45 @@ Expired login or an offline server retains submissions; signing back in retries
 with the original IDs. Drafts and room pins survive navigation/reload. Browser
 storage failures show a warning and export action; keep the tab open until saves
 finish. Unsynced drafts/outboxes belong to that browser origin, not Git.
+
+## Pattern studio
+
+Open [Pattern studio](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/patterns)
+from the sidebar. Four families draw on actual art: rooms, fenced-tree strips,
+terrain and city surfaces. A gesture previews from the current document and
+commits once on release. Invalid doors or unsupported tree fragments are rejected
+without changing history. Disconnected room drafts are allowed with a warning;
+playable prefabs still require strict entrance reachability.
+
+Wheel input zooms about the viewport center without panning. Hold Shift to pan
+with drag or wheel; middle-button drag also pans. Focus the canvas for arrow-key
+panning and Ctrl/Cmd Z (Shift for redo). Escape cancels the current stroke.
+Use Fit, grid/geometry overlays, erase and undo/redo to inspect joins. Fenced-tree
+strokes snap east/west to their starting row, with the fence facing south. The v1
+candidate kit requires 4–128 cells per connected run; an erased gap must leave
+supported ends. Ground collision is distinct from canopy overhang.
+
+The **Fenced tree pattern kit** batch has five fixed review cases in the global
+inbox, with the same approve/comment/next and two-report pause workflow as other
+batches. Reviews pin source, rule/document revision and rendered pixels. Editable
+drafts are separate and never confer approval. The source-art inspector links
+recorded cap/repeat uses back to Pattern studio.
+
+Drafts live under `tilefun.pattern-drafts.v1:FAMILY` in browser Local Storage.
+Export/import JSON to transfer them; they are not shared server documents. The
+family is versioned, cells are semantic intent, and the compiler derives art.
+Keep matching kit/compiler revisions when moving documents.
+
+The outdoor game editor now exposes a **Patterns** tab for the same fenced-tree
+kit, including erase/split, row-stroke undo/redo and host validation. City asphalt
+and City paving use the existing Road tab/backend. Tree runs persist through
+ordinary world props with versioned identities and derived collision, and replicate
+normally to other players. Undo refuses to overwrite a row changed since the
+stroke. Room plans can be drawn in Workshop now; authoritative gameplay room
+editing/furniture reconciliation is a later phase. Existing game terrain/road
+queues remain incremental, without whole-gesture undo in this checkpoint.
+
+See [the phased plan](tactical/011-shared-pattern-brushes-and-room-drawing.md).
 
 ## Owner login
 

@@ -23,6 +23,7 @@ import {
 import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
+import { FENCED_TREES } from "../src/patterns/FencedTrees.js";
 import {
   CITY_GEOMETRY_CASES,
   CITY_SURFACE_CASES,
@@ -389,6 +390,21 @@ for (const def of FURNITURE_CATALOG)
       ...(references.get(def.id) ?? []),
     ],
   );
+for (const [part, rect] of Object.entries(FENCED_TREES.sources))
+  add(
+    `pattern:${FENCED_TREES.id}:${part}`,
+    "me-complete",
+    [...rect] as ArtRect,
+    `${FENCED_TREES.name} · ${part} (candidate)`,
+    "recipe",
+    [
+      {
+        system: "Pattern studio and game row brush (candidate)",
+        source: "src/patterns/FencedTrees.ts",
+      },
+    ],
+  );
+
 for (const [key, consumers] of references)
   if (key.startsWith("room-builder/") && interiors.has(key))
     add(

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { parseFloorPlan } from "../interiors/ApartmentFloorPlan.js";
 import { RoadType } from "../road/RoadType.js";
 import { compileTreeRun, treeRunLength, treeRunProp, treeRuns } from "./FencedTrees.js";
 import { DocumentHistory, gridLine, strokeCells } from "./GridStroke.js";
@@ -6,6 +7,7 @@ import {
   applyPatternEdit,
   exampleDocument,
   parsePatternDocument,
+  roomDraftWarning,
   roomSketch,
 } from "./PatternDocument.js";
 import { patternWorld } from "./PatternRuntime.js";
@@ -104,4 +106,23 @@ describe("pattern adapters", () => {
     expect(world.getRoadAt(5, 7)).toBe(RoadType.CityAsphalt);
     expect(() => parsePatternDocument({ ...d, cells: [{ x: 0, y: 0, value: 255 }] })).toThrow();
   });
+});
+
+it("supports disconnected draft rooms while strict gameplay parsing still rejects them", () => {
+  const initial = exampleDocument("rooms-v1");
+  const next = applyPatternEdit(initial, {
+    path: [
+      { x: 13, y: 3 },
+      { x: 21, y: 10 },
+    ],
+    shape: "rectangle",
+    value: "B",
+    roomRectangle: true,
+    erase: false,
+  });
+  expect(next.cells.length).toBeGreaterThan(initial.cells.length);
+  expect(roomDraftWarning(next)).toContain("cannot be reached");
+  expect(() => parseFloorPlan(roomSketch(next), { preserveBounds: true })).toThrow(
+    "cannot be reached",
+  );
 });

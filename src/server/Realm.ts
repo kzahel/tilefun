@@ -42,6 +42,7 @@ import {
   interiorGenerator,
   interiorPlan,
 } from "../interiors/GameplayInterior.js";
+import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
@@ -95,6 +96,7 @@ export class Realm {
   world: World;
   entityManager: EntityManager;
   propManager: PropManager;
+  treeBrush: TreeBrushEditor;
   worldAPI: WorldAPIImpl;
   readonly blendGraph: BlendGraph;
 
@@ -155,6 +157,7 @@ export class Realm {
     this.world = new World();
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
     );
@@ -266,6 +269,7 @@ export class Realm {
    * The session object itself is NOT deleted — it stays in GameServer's global map.
    */
   removePlayer(clientId: string): void {
+    this.treeBrush.forget(clientId);
     const session = this.sessions.get(clientId);
     if (!session) return;
 
@@ -1004,6 +1008,7 @@ export class Realm {
     this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
     );

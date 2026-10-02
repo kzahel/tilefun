@@ -1,7 +1,14 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { RoadType } from "../road/RoadType.js";
 
-export type EditorTab = "natural" | "road" | "structure" | "entities" | "props" | "elevation";
+export type EditorTab =
+  | "natural"
+  | "road"
+  | "structure"
+  | "entities"
+  | "props"
+  | "elevation"
+  | "patterns";
 
 export interface PaletteEntry {
   terrainId: TerrainId;
@@ -37,6 +44,8 @@ export interface RoadPaletteEntry {
 }
 
 export const ROAD_PALETTE: RoadPaletteEntry[] = [
+  { roadType: RoadType.CityAsphalt, label: "City asphalt", color: "#3b4042" },
+  { roadType: RoadType.CityPavement, label: "City paving", color: "#aeb5b2" },
   { roadType: RoadType.Asphalt, label: "Asphalt", color: "#4a4a50" },
   { roadType: RoadType.Sidewalk, label: "Sidewalk", color: "#b0aaaa" },
   { roadType: RoadType.LineWhite, label: "White", color: "#e0e0e0" },
@@ -86,6 +95,7 @@ export const ALL_TABS: EditorTab[] = [
   "entities",
   "props",
   "elevation",
+  "patterns",
 ];
 export const TERRAIN_TABS: EditorTab[] = ["natural", "road", "structure"];
 

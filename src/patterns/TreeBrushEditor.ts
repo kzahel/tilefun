@@ -1,7 +1,7 @@
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Prop } from "../entities/Prop.js";
 import type { PropManager } from "../entities/PropManager.js";
-import { type TreeRun, treeRunCells, treeRunLength, treeRunProp, treeRuns } from "./FencedTrees.js";
+import { editTreeRuns, type TreeRun, treeRunLength, treeRunProp } from "./FencedTrees.js";
 import { type GridPoint, strokeCells } from "./GridStroke.js";
 export interface TreeBrushCommand {
   start: GridPoint;
@@ -80,12 +80,7 @@ export class TreeBrushEditor {
       const points = strokeCells([command.start, command.end], "horizontal"),
         y = command.start.y,
         before = this.row(y).runs;
-      const cells = new Map(treeRunCells(before).map((p) => [`${p.x},${p.y}`, p]));
-      for (const p of points)
-        if (command.erase) cells.delete(`${p.x},${p.y}`);
-        else cells.set(`${p.x},${p.y}`, p);
-      if (cells.size > 4096) throw new Error("Too many tree anchors in this row");
-      const after = treeRuns([...cells.values()]);
+      const after = editTreeRuns(before, points, command.erase);
       if (JSON.stringify(before) !== JSON.stringify(after)) {
         this.replace(y, after);
         const h = this.history(client);

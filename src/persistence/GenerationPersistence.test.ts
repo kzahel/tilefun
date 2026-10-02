@@ -112,3 +112,41 @@ it("deleting a parent removes only its own persisted interior instances", async 
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+it("saves semantic tree run identities and restores their compiled art and collision", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "tilefun-pattern-save-")),
+    registry = new FsWorldRegistry(directory),
+    realm = new Realm([]);
+  try {
+    await registry.open();
+    const meta = await registry.createWorld(
+      "Pattern save",
+      undefined,
+      undefined,
+      undefined,
+      createDescriptor("flat", 2026),
+    );
+    const store = () =>
+      new FsPersistenceStore(join(directory, meta.id), ["meta", "chunks", "players"]);
+    await realm.loadWorld(meta.id, registry, store);
+    expect(
+      realm.treeBrush.edit("editor", { start: { x: -3, y: 2 }, end: { x: 10, y: 2 }, erase: false })
+        .error,
+    ).toBe("");
+    const before = realm.propManager.props.filter((p) => p.type.startsWith("pattern:"));
+    expect(before).toHaveLength(1);
+    await realm.saveManager?.flushAsync();
+    await realm.loadWorld(meta.id, registry, store);
+    const after = realm.propManager.props.filter((p) => p.type.startsWith("pattern:"));
+    expect(after).toHaveLength(1);
+    expect(after[0]?.type).toBe(before[0]?.type);
+    expect(after[0]?.sprite).toEqual(before[0]?.sprite);
+    expect(after[0]?.collider).toEqual(before[0]?.collider);
+    expect(after[0]?.position).toEqual(before[0]?.position);
+    expect(realm.treeBrush.status("editor").canUndo).toBe(false);
+  } finally {
+    realm.destroy();
+    registry.close();
+    await rm(directory, { recursive: true, force: true });
+  }
+});

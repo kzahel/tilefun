@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "patterns",
+    name: "Pattern studio",
+    description:
+      "Draw rooms, horizontal fenced trees, terrain and city surfaces on real tiles. Shared semantic rules, gesture previews, history and portable drafts.",
+    url: "workshop.html#/tool/patterns",
+    mode: "source",
+  },
+  {
     id: "outdoor",
     name: "Outdoor assets",
     description:
@@ -117,6 +125,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "patterns",
+    name: "Fenced tree pattern kit",
+    description:
+      "Five source-backed cap/repeat, erase/split and independent-row cases. Candidate art and ground footprint shared with the game brush.",
+    toolId: "patterns",
+  },
   ...Object.entries(CITY_REVIEW_RUNS).map(([id, r]) => ({
     id,
     name: r.name,

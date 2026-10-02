@@ -63,7 +63,9 @@ export function roomSketch(doc: PatternDocument): string {
 }
 export function validatePatternDocument(doc: PatternDocument): void {
   if (doc.family === "rooms-v1")
-    buildLayeredApartmentPlan(parseFloorPlan(roomSketch(doc), { preserveBounds: true }));
+    buildLayeredApartmentPlan(
+      parseFloorPlan(roomSketch(doc), { preserveBounds: true, allowUnreachable: true }),
+    );
   if (doc.family === "fenced-trees-v1") treeRuns(doc.cells);
 }
 export function parsePatternDocument(raw: unknown): PatternDocument {
@@ -208,4 +210,15 @@ export function exampleDocument(family: PatternFamily): PatternDocument {
       erase: false,
     });
   return d;
+}
+
+/** Draft rooms may be disconnected while being drawn; promotion must pass strict topology. */
+export function roomDraftWarning(doc: PatternDocument): string {
+  if (doc.family !== "rooms-v1") return "";
+  try {
+    const plan = parseFloorPlan(roomSketch(doc), { preserveBounds: true });
+    return plan.rooms.length && !plan.entrances.length ? "Draft has no exterior entrance yet." : "";
+  } catch (e) {
+    return e instanceof Error ? e.message : String(e);
+  }
 }

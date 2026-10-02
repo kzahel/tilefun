@@ -1087,6 +1087,16 @@ export class GameServer {
     if (!session.realmId) return;
     const realm = this.realms.get(session.realmId);
     if (!realm) return;
+    if (msg.type === "edit-pattern" || msg.type === "edit-pattern-history") {
+      const status =
+        !session.editorEnabled || realm.interior
+          ? realm.treeBrush.status(clientId, "Outdoor pattern editing requires the outdoor editor.")
+          : msg.type === "edit-pattern"
+            ? realm.treeBrush.edit(clientId, msg)
+            : realm.treeBrush.travel(clientId, msg.direction);
+      this.transport.send(clientId, { type: "pattern-edit-status", ...status });
+      return;
+    }
     realm.handleMessage(clientId, session, msg);
   }
 }

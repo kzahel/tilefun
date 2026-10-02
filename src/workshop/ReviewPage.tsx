@@ -9,6 +9,7 @@ import {
   loadReviewAtlas,
   renderInteriorCandidate,
 } from "./InteriorCandidates.js";
+import { buildPatternCandidate, renderPatternCandidate } from "./PatternCandidates.js";
 import { PreviewViewport } from "./PreviewViewport.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
@@ -191,7 +192,18 @@ function ReviewCase({
     let cancelled = false;
     const render = async () => {
       const temporary = document.createElement("canvas");
-      if (c.kind === "art") {
+      if (c.kind === "pattern") {
+        const { assets, catalog } = await reviewAssets();
+        const actual = await buildPatternCandidate(
+          temporary,
+          c.id.replace(/^pattern:/, ""),
+          assets,
+          catalog,
+        );
+        if (actual.fingerprint !== c.fingerprint || actual.review?.revision !== c.review?.revision)
+          throw new Error("Pattern changed. Regenerate the manifest before reviewing.");
+        if (geometry) renderPatternCandidate(temporary, c.id, assets, true);
+      } else if (c.kind === "art") {
         const definition = required(artReviewDefinitions().find((d) => d.id === c.id)),
           { assets, catalog } = await reviewAssets();
         const actual = await buildArtCandidate(temporary, definition, assets, catalog);
@@ -460,7 +472,7 @@ function ReviewCase({
               ) : null
             }
             controls={
-              c.kind === "art" ? (
+              c.kind === "art" || c.kind === "pattern" ? (
                 <label>
                   <input
                     type="checkbox"
@@ -592,6 +604,14 @@ function ReviewCase({
             </Link>
           ) : null}
 
+          {c.kind === "pattern" ? (
+            <Link
+              className="button"
+              to={`/tool/patterns?family=fenced-trees-v1&case=${c.review?.caseId}`}
+            >
+              Draw with this kit →
+            </Link>
+          ) : null}
           {c.art ? (
             <LegacyLink
               url={`/tilefun/art-workbench.html?sheet=${c.art.sheetId}&rect=${c.art.rect.join(",")}`}

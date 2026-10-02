@@ -682,6 +682,11 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
             {selectedUses.map((u) => (
               <article key={u.id}>
                 <strong>{u.label}</strong>
+                {u.id.startsWith("pattern:fenced-trees-v1:") ? (
+                  <p>
+                    <Link to="/tool/patterns?family=fenced-trees-v1">Draw this pattern →</Link>
+                  </p>
+                ) : null}
                 <p>
                   {u.kind} · {u.consumers.map((c) => c.system).join(", ")}
                 </p>

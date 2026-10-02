@@ -27,6 +27,7 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
+const PatternPage = lazy(() => import("./PatternPage.js"));
 const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
 const ScenePage = lazy(() => import("./ScenePage.js"));
 export const reviewPath = (id: string) => `/review/${encodeURIComponent(id)}`;
@@ -229,6 +230,7 @@ export function App() {
           <p className="nav-heading">MAKE & EXPLORE</p>
           {WORKSHOP_TOOLS.filter((tool) =>
             [
+              "patterns",
               "outdoor",
               "art",
               "buildings",
@@ -909,6 +911,7 @@ function ToolPage() {
     tool = WORKSHOP_TOOLS.find((t) => t.id === toolId),
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
+  if (tool.id === "patterns") return <PatternPage />;
   if (tool.id === "outdoor") return <OutdoorPage />;
   if (tool.mode === "source") return <SourcePage />;
   if (tool.mode === "review")

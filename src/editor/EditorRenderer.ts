@@ -1,4 +1,6 @@
+import type { Spritesheet } from "../assets/Spritesheet.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { compileTreeRun } from "../patterns/FencedTrees.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { RemoteEditorCursor } from "../shared/protocol.js";
 import type { World } from "../world/World.js";
@@ -28,12 +30,54 @@ export function drawEditorOverlay(
   model: EditorModel,
   visible: ChunkRange,
   world?: World,
+  sheets?: Map<string, Spritesheet>,
 ): void {
   drawEditorGrid(ctx, camera, visible);
   if (model.editorTab === "elevation" && world) {
     drawElevationOverlay(ctx, camera, world, visible);
   }
   drawCursorHighlight(ctx, camera, editorMode, model);
+  if (model.editorTab === "patterns") {
+    const preview = editorMode.getPatternPreview(),
+      sheet = sheets?.get("me-complete");
+    if (preview) {
+      ctx.save();
+      ctx.globalAlpha = 0.55;
+      if (sheet)
+        for (const run of preview.runs)
+          for (const p of compileTreeRun(run.length)) {
+            const pos = camera.worldToScreen(
+              run.x * 16 + run.length * 8 + p.dx - p.spriteWidth / 2,
+              (run.y + 1) * 16 - p.spriteHeight,
+            );
+            ctx.drawImage(
+              sheet.image,
+              p.frameCol * 16,
+              p.frameRow * 16,
+              p.spriteWidth,
+              p.spriteHeight,
+              pos.sx,
+              pos.sy,
+              p.spriteWidth * camera.scale,
+              p.spriteHeight * camera.scale,
+            );
+          }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = preview.error ? "#ff555560" : preview.erase ? "#ffae5550" : "#8bd1c050";
+      for (const p of preview.points) {
+        const pos = camera.worldToScreen(p.x * 16, p.y * 16);
+        ctx.fillRect(pos.sx, pos.sy, 16 * camera.scale, 16 * camera.scale);
+      }
+      if (preview.error) {
+        ctx.fillStyle = "#201410dd";
+        ctx.fillRect(12, 12, Math.min(ctx.canvas.width - 24, 800), 38);
+        ctx.fillStyle = "#ffa090";
+        ctx.font = "14px monospace";
+        ctx.fillText(preview.error, 20, 36);
+      }
+      ctx.restore();
+    }
+  }
 }
 
 function drawEditorGrid(ctx: CanvasRenderingContext2D, camera: Camera, visible: ChunkRange): void {

@@ -2,6 +2,9 @@ import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import { editTreeRuns, type TreeRun, treeRunLength } from "../patterns/FencedTrees.js";
+import { type GridPoint, gridLine, strokeCells } from "../patterns/GridStroke.js";
+import type { TreeBrushCommand } from "../patterns/TreeBrushEditor.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { EditorModel } from "./EditorModel.js";
 
@@ -73,6 +76,52 @@ export class EditorMode {
   /** True while right-click is held for temporary unpaint. */
   rightClickUnpaint = false;
   private panStart = { sx: 0, sy: 0, camX: 0, camY: 0 };
+  private pendingPatterns: TreeBrushCommand[] = [];
+  private patternStroke: TreeBrushCommand | null = null;
+  consumePendingPatterns(): TreeBrushCommand[] {
+    const result = this.pendingPatterns;
+    this.pendingPatterns = [];
+    return result;
+  }
+  getPatternPreview(): {
+    runs: TreeRun[];
+    points: GridPoint[];
+    error: string;
+    erase: boolean;
+  } | null {
+    const stroke = this.patternStroke;
+    if (!stroke) return null;
+    let points: GridPoint[] = [];
+    try {
+      points = strokeCells([stroke.start, stroke.end], "horizontal");
+      const row = this.props
+        .filter(
+          (p) => treeRunLength(p.type) !== null && p.position.wy === (stroke.start.y + 1) * 16,
+        )
+        .map((p) => ({
+          x: (p.position.wx - (treeRunLength(p.type) ?? 0) * 8) / 16,
+          y: stroke.start.y,
+          length: treeRunLength(p.type) ?? 0,
+        }));
+      return {
+        runs: editTreeRuns(row, points, stroke.erase),
+        points,
+        error: "",
+        erase: stroke.erase,
+      };
+    } catch (e) {
+      return {
+        runs: [],
+        points,
+        error: e instanceof Error ? e.message : String(e),
+        erase: stroke.erase,
+      };
+    }
+  }
+  private finishPattern(cancel = false): void {
+    if (this.patternStroke && !cancel) this.pendingPatterns.push(this.patternStroke);
+    this.patternStroke = null;
+  }
   private lastPaintedTile = { tx: -Infinity, ty: -Infinity };
   private lastPaintedSubgrid = { gsx: -Infinity, gsy: -Infinity };
   private lastPaintedCorner = { gsx: -Infinity, gsy: -Infinity };
@@ -148,6 +197,8 @@ export class EditorMode {
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
     this.isPainting = false;
     this.isPanning = false;
+    this.finishPattern(true);
+    this.cancelTouchPaint();
     this.activeTouches.clear();
   }
 
@@ -316,6 +367,17 @@ export class EditorMode {
   }
 
   private paintAt(sx: number, sy: number): void {
+    if (this.model.editorTab === "patterns") {
+      const { tx, ty } = this.screenToTile(sx, sy);
+      if (!this.patternStroke)
+        this.patternStroke = {
+          start: { x: tx, y: ty },
+          end: { x: tx, y: ty },
+          erase: this.rightClickUnpaint || this.model.paintMode === "unpaint",
+        };
+      else this.patternStroke.end = { x: tx, y: this.patternStroke.start.y };
+      return;
+    }
     if (this.model.editorTab === "road") {
       this.paintRoadAt(sx, sy);
       return;
@@ -354,41 +416,61 @@ export class EditorMode {
   private paintRoadAt(sx: number, sy: number): void {
     const { tx, ty } = this.screenToTile(sx, sy);
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
+    const line = Number.isFinite(this.lastPaintedTile.tx)
+      ? gridLine(
+          { x: this.lastPaintedTile.tx, y: this.lastPaintedTile.ty },
+          { x: tx, y: ty },
+        ).slice(1)
+      : [{ x: tx, y: ty }];
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingRoadEdits.push({ tx, ty, roadType: this.model.selectedRoadType });
+    for (const p of line)
+      this.pendingRoadEdits.push({ tx: p.x, ty: p.y, roadType: this.model.selectedRoadType });
   }
 
   private paintTileAt(sx: number, sy: number): void {
     const { tx, ty } = this.screenToTile(sx, sy);
     if (tx === this.lastPaintedTile.tx && ty === this.lastPaintedTile.ty) return;
+    const line = Number.isFinite(this.lastPaintedTile.tx)
+      ? gridLine(
+          { x: this.lastPaintedTile.tx, y: this.lastPaintedTile.ty },
+          { x: tx, y: ty },
+        ).slice(1)
+      : [{ x: tx, y: ty }];
     this.lastPaintedTile.tx = tx;
     this.lastPaintedTile.ty = ty;
-    this.pendingTileEdits.push({ tx, ty, terrainId: this.model.selectedTerrain });
+    for (const p of line)
+      this.pendingTileEdits.push({ tx: p.x, ty: p.y, terrainId: this.model.selectedTerrain });
   }
 
   private paintSubgridAt(sx: number, sy: number): void {
     const { gsx, gsy } = this.screenToSubgrid(sx, sy);
     if (gsx === this.lastPaintedSubgrid.gsx && gsy === this.lastPaintedSubgrid.gsy) return;
+    const line = Number.isFinite(this.lastPaintedSubgrid.gsx)
+      ? gridLine(
+          { x: this.lastPaintedSubgrid.gsx, y: this.lastPaintedSubgrid.gsy },
+          { x: gsx, y: gsy },
+        ).slice(1)
+      : [{ x: gsx, y: gsy }];
     this.lastPaintedSubgrid.gsx = gsx;
     this.lastPaintedSubgrid.gsy = gsy;
-    this.pendingSubgridEdits.push({
-      gsx,
-      gsy,
-      terrainId: this.model.selectedTerrain,
-    });
+    for (const p of line)
+      this.pendingSubgridEdits.push({ gsx: p.x, gsy: p.y, terrainId: this.model.selectedTerrain });
   }
 
   private paintCornerAt(sx: number, sy: number): void {
     const { gsx, gsy } = this.screenToCorner(sx, sy);
     if (gsx === this.lastPaintedCorner.gsx && gsy === this.lastPaintedCorner.gsy) return;
+    const line = Number.isFinite(this.lastPaintedCorner.gsx)
+      ? gridLine(
+          { x: this.lastPaintedCorner.gsx, y: this.lastPaintedCorner.gsy },
+          { x: gsx, y: gsy },
+        ).slice(1)
+      : [{ x: gsx, y: gsy }];
     this.lastPaintedCorner.gsx = gsx;
     this.lastPaintedCorner.gsy = gsy;
-    this.pendingCornerEdits.push({
-      gsx,
-      gsy,
-      terrainId: this.model.selectedTerrain,
-    });
+    for (const p of line)
+      this.pendingCornerEdits.push({ gsx: p.x, gsy: p.y, terrainId: this.model.selectedTerrain });
   }
 
   private updateCursor(sx: number, sy: number): void {
@@ -477,6 +559,7 @@ export class EditorMode {
   }
 
   private handleMouseUp(_e: MouseEvent): void {
+    this.finishPattern();
     this.isPainting = false;
     this.isPanning = false;
     this.rightClickUnpaint = false;
@@ -528,6 +611,7 @@ export class EditorMode {
     } else if (this.activeTouches.size >= 2) {
       // Second finger arrived — cancel deferred paint and start pinch/pan
       this.cancelTouchPaint();
+      this.finishPattern(true);
       this.wasPinching = true;
       this.startPinch();
     }
@@ -576,6 +660,7 @@ export class EditorMode {
       if (this.touchPaintStart) {
         this.commitTouchPaint();
       }
+      this.finishPattern(e.type === "touchcancel");
       this.wasPinching = false;
     } else if (this.activeTouches.size === 1) {
       // 2→1 fingers — reset paint dedup but don't start painting (still part of gesture)

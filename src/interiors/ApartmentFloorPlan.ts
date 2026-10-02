@@ -69,7 +69,7 @@ function insideMask(rows: PlanCell[][], width: number): boolean[][] {
 
 export function parseFloorPlan(
   source: string,
-  options: { preserveBounds?: boolean } = {},
+  options: { preserveBounds?: boolean; allowUnreachable?: boolean } = {},
 ): FloorPlan {
   const lines = source.replace(/\r/g, "").split("\n");
   if (!options.preserveBounds) {
@@ -108,7 +108,7 @@ export function parseFloorPlan(
   const inside = insideMask(rows, width);
   // A standalone room or an in-progress sketch can be useful without an
   // exterior entrance. Only check reachability when one is present.
-  if (entrances.length === 0)
+  if (entrances.length === 0 || options.allowUnreachable)
     return { width, height: rows.length, rows, inside, rooms: [...rooms], entrances };
 
   const visited = new Set<string>();

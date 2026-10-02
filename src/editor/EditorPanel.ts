@@ -65,6 +65,10 @@ export class EditorPanel {
   private readonly autoButtons: HTMLButtonElement[] = [];
   private readonly terrainWrappers: HTMLDivElement[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
+  private readonly patternRow: HTMLDivElement;
+  private readonly patternStatus: HTMLSpanElement;
+  private readonly patternUndo: HTMLButtonElement;
+  private readonly patternRedo: HTMLButtonElement;
   private readonly propsRow: HTMLDivElement;
   private readonly propButtons: HTMLButtonElement[] = [];
   private readonly deleteButtons: HTMLButtonElement[] = [];
@@ -124,6 +128,7 @@ export class EditorPanel {
         entities: "\ud83d\udc25",
         props: "\ud83c\udf32",
         elevation: "\u26f0\ufe0f",
+        patterns: "▥",
       };
       const TAB_LABELS: Record<EditorTab, string> = {
         natural: "Natural",
@@ -132,6 +137,7 @@ export class EditorPanel {
         entities: "Entities",
         props: "Props",
         elevation: "Elevation",
+        patterns: "Patterns",
       };
       const icon = document.createElement("span");
       icon.style.fontSize = "15px";
@@ -301,6 +307,34 @@ export class EditorPanel {
 
     this.container.appendChild(this.propsRow);
 
+    this.patternRow = document.createElement("div");
+    this.patternRow.style.cssText = ROW_STYLE;
+    this.patternRow.appendChild(this.makeLabel("Fenced trees v1 · candidate"));
+    const erase = document.createElement("button");
+    erase.textContent = "Paint / erase";
+    erase.style.cssText = BTN_STYLE;
+    erase.onclick = () =>
+      this.model.setPaintMode(this.model.paintMode === "positive" ? "unpaint" : "positive");
+    this.patternRow.appendChild(erase);
+    this.patternUndo = document.createElement("button");
+    this.patternUndo.textContent = "Undo row stroke";
+    this.patternUndo.style.cssText = BTN_STYLE;
+    this.patternUndo.onclick = () => this.model.onPatternHistory?.("undo");
+    this.patternRow.appendChild(this.patternUndo);
+    this.patternRedo = document.createElement("button");
+    this.patternRedo.textContent = "Redo row stroke";
+    this.patternRedo.style.cssText = BTN_STYLE;
+    this.patternRedo.onclick = () => this.model.onPatternHistory?.("redo");
+    this.patternRow.appendChild(this.patternRedo);
+    const studio = document.createElement("a");
+    studio.href = "/tilefun/workshop.html#/tool/patterns?family=fenced-trees-v1";
+    studio.textContent = "Pattern studio ↗";
+    studio.style.color = "#8cf";
+    this.patternRow.appendChild(studio);
+    this.patternStatus = document.createElement("span");
+    this.patternStatus.setAttribute("role", "status");
+    this.patternRow.appendChild(this.patternStatus);
+    this.container.appendChild(this.patternRow);
     // --- Elevation row ---
     this.elevationRow = document.createElement("div");
     this.elevationRow.style.cssText = ROW_STYLE;
@@ -353,6 +387,13 @@ export class EditorPanel {
 
   /** Synchronize all DOM state from the model. */
   private syncFromModel(): void {
+    this.patternRow.style.display = this.model.editorTab === "patterns" ? "flex" : "none";
+    this.patternStatus.textContent =
+      this.model.patternError ||
+      `${this.model.paintMode === "unpaint" ? "Erase" : "Paint"}: drag a horizontal row (4–128 cells). Right click erases. Fence faces south.`;
+    this.patternStatus.style.color = this.model.patternError ? "#ffa090" : "#ccc";
+    this.patternUndo.disabled = !this.model.patternCanUndo;
+    this.patternRedo.disabled = !this.model.patternCanRedo;
     this.updateTabDisplay();
     this.updateBrushModeButtons();
     this.updatePaintModeButtons();

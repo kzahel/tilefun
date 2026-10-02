@@ -499,3 +499,37 @@ it("persists exact asset metadata and canonical world annotations across retries
   ).rejects.toThrow("selection cannot change");
   expect((await f.service().inbox()).requests).toHaveLength(2);
 });
+
+it("pattern kit judgments use the global queue and preserve exact rule/pixel identities", async () => {
+  const f = await fixture();
+  await f.login();
+  const c = manifest.candidates.find((c) => c.kind === "pattern");
+  if (!c) throw new Error("Missing pattern candidate");
+  const e = {
+    id: "pattern-approval-test",
+    type: "review",
+    candidateId: c.id,
+    fingerprint: c.fingerprint,
+    verdict: "approved",
+    note: "Caps and fence checked.",
+  };
+  expect((await f.event(e)).status).toBe(200);
+  const inbox = await (await f.request("/tilefun/api/workshop/inbox")).json();
+  expect(inbox.candidates.find((r: { id: string }) => r.id === c.id).state).toBe("approved");
+  expect(
+    (await f.event({ ...e, id: "pattern-stale-test", fingerprint: "0".repeat(64) })).status,
+  ).toBe(409);
+  expect(
+    (
+      await f.event({
+        ...e,
+        id: "pattern-change-test",
+        verdict: "changes",
+        note: "Right join needs work.",
+      })
+    ).status,
+  ).toBe(200);
+  f.restart();
+  const next = await (await f.request("/tilefun/api/workshop/inbox")).json();
+  expect(next.candidates.find((r: { id: string }) => r.id === c.id).state).toBe("changes");
+});

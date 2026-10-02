@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "patterns",
+      "name": "Pattern studio",
+      "description": "Draw rooms, horizontal fenced trees, terrain and city surfaces on real tiles. Shared semantic rules, gesture previews, history and portable drafts.",
+      "url": "workshop.html#/tool/patterns",
+      "mode": "source"
+    },
+    {
       "id": "outdoor",
       "name": "Outdoor assets",
       "description": "Semantic Modern Exteriors families, atlas coverage, editable placement geometry and shared asset review.",
@@ -108,6 +115,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "patterns",
+      "name": "Fenced tree pattern kit",
+      "description": "Five source-backed cap/repeat, erase/split and independent-row cases. Candidate art and ground footprint shared with the game brush.",
+      "toolId": "patterns"
+    },
     {
       "id": "pedestrians",
       "name": "People & destinations",
@@ -4255,6 +4268,216 @@
             "prop-oak-tree",
             "prop-garden-fountain"
           ]
+        }
+      }
+    },
+    {
+      "id": "pattern:fenced-trees-v1-short",
+      "batchId": "patterns",
+      "name": "Tree strip · minimum caps",
+      "prompt": "Review the cap/repeat joins and south fence. Geometry shows the candidate ground footprint. Source art and game brush share this compiler.",
+      "kind": "pattern",
+      "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-short",
+      "fingerprint": "81236c4684e1668e8d85b9e236bdaa4072c2916c53576aab259503adb3f3a9e9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "fenced-trees-v1-short",
+        "prefabIds": [],
+        "revision": "e677779eab00202c9413872ecc6cc14e3bd30c9f716405690687d08b886d03b3",
+        "renderFingerprint": "81236c4684e1668e8d85b9e236bdaa4072c2916c53576aab259503adb3f3a9e9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-short"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          1568,
+          0,
+          208,
+          96
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "fenced-trees-v1-short",
+          "prefabIds": [],
+          "revision": "e677779eab00202c9413872ecc6cc14e3bd30c9f716405690687d08b886d03b3",
+          "renderFingerprint": "81236c4684e1668e8d85b9e236bdaa4072c2916c53576aab259503adb3f3a9e9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-short"
+        }
+      }
+    },
+    {
+      "id": "pattern:fenced-trees-v1-repeat",
+      "batchId": "patterns",
+      "name": "Tree strip · full repeat",
+      "prompt": "Review the cap/repeat joins and south fence. Geometry shows the candidate ground footprint. Source art and game brush share this compiler.",
+      "kind": "pattern",
+      "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-repeat",
+      "fingerprint": "897318b1d724a311fad862d2a6dcb8980dc93a943342cc8fd88d138fd1770160",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "fenced-trees-v1-repeat",
+        "prefabIds": [],
+        "revision": "a1e438b2a1ba924457a3f620f255d79c39ef1f22e0f7b1d87635165a76f0d954",
+        "renderFingerprint": "897318b1d724a311fad862d2a6dcb8980dc93a943342cc8fd88d138fd1770160",
+        "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-repeat"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          1568,
+          0,
+          208,
+          96
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "fenced-trees-v1-repeat",
+          "prefabIds": [],
+          "revision": "a1e438b2a1ba924457a3f620f255d79c39ef1f22e0f7b1d87635165a76f0d954",
+          "renderFingerprint": "897318b1d724a311fad862d2a6dcb8980dc93a943342cc8fd88d138fd1770160",
+          "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-repeat"
+        }
+      }
+    },
+    {
+      "id": "pattern:fenced-trees-v1-long",
+      "batchId": "patterns",
+      "name": "Tree strip · extended repeat",
+      "prompt": "Review the cap/repeat joins and south fence. Geometry shows the candidate ground footprint. Source art and game brush share this compiler.",
+      "kind": "pattern",
+      "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-long",
+      "fingerprint": "d23d1bf5fa8d7b0e3343c6c3dd63b302479eeae18c623f8fc9ef1d5844da8dc2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "fenced-trees-v1-long",
+        "prefabIds": [],
+        "revision": "46eb52f13d7a18a287ee94437637436301d2c0c8f28ed170018ea82114fc8553",
+        "renderFingerprint": "d23d1bf5fa8d7b0e3343c6c3dd63b302479eeae18c623f8fc9ef1d5844da8dc2",
+        "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-long"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          1568,
+          0,
+          208,
+          96
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "fenced-trees-v1-long",
+          "prefabIds": [],
+          "revision": "46eb52f13d7a18a287ee94437637436301d2c0c8f28ed170018ea82114fc8553",
+          "renderFingerprint": "d23d1bf5fa8d7b0e3343c6c3dd63b302479eeae18c623f8fc9ef1d5844da8dc2",
+          "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-long"
+        }
+      }
+    },
+    {
+      "id": "pattern:fenced-trees-v1-split",
+      "batchId": "patterns",
+      "name": "Tree strip · erased middle / new ends",
+      "prompt": "Review the cap/repeat joins and south fence. Geometry shows the candidate ground footprint. Source art and game brush share this compiler.",
+      "kind": "pattern",
+      "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-split",
+      "fingerprint": "5c713873bc12ea2894a8fd89012fe24761d5f3ffba13de12422f3682384dd792",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "fenced-trees-v1-split",
+        "prefabIds": [],
+        "revision": "8e1e751b2836a006466339cf022ca20804f6bd3125b27cdcafb25b4391ecafb5",
+        "renderFingerprint": "5c713873bc12ea2894a8fd89012fe24761d5f3ffba13de12422f3682384dd792",
+        "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-split"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          1568,
+          0,
+          208,
+          96
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "fenced-trees-v1-split",
+          "prefabIds": [],
+          "revision": "8e1e751b2836a006466339cf022ca20804f6bd3125b27cdcafb25b4391ecafb5",
+          "renderFingerprint": "5c713873bc12ea2894a8fd89012fe24761d5f3ffba13de12422f3682384dd792",
+          "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-split"
+        }
+      }
+    },
+    {
+      "id": "pattern:fenced-trees-v1-parallel",
+      "batchId": "patterns",
+      "name": "Tree strips · independent adjacent rows",
+      "prompt": "Review the cap/repeat joins and south fence. Geometry shows the candidate ground footprint. Source art and game brush share this compiler.",
+      "kind": "pattern",
+      "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-parallel",
+      "fingerprint": "3ae1acc3ab73817f78952d7885f84f9d458547a8b46582171cb94d5c86c6e974",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "fenced-trees-v1-parallel",
+        "prefabIds": [],
+        "revision": "ab8da9ba8cb808f93476ae5ef5205a1212555b875986ff4e1fc1039d92b1b35a",
+        "renderFingerprint": "3ae1acc3ab73817f78952d7885f84f9d458547a8b46582171cb94d5c86c6e974",
+        "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-parallel"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          1568,
+          0,
+          208,
+          96
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "fenced-trees-v1-parallel",
+          "prefabIds": [],
+          "revision": "ab8da9ba8cb808f93476ae5ef5205a1212555b875986ff4e1fc1039d92b1b35a",
+          "renderFingerprint": "3ae1acc3ab73817f78952d7885f84f9d458547a8b46582171cb94d5c86c6e974",
+          "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-parallel"
         }
       }
     },
@@ -10484,5 +10707,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "00181dc8a1d252df56bc86f1048f376b0bedcceb30ec9973900f35f980d796f4"
+  "inputDigest": "6137665613a0a564d9291abe10bec1a036d9277c19ccb280bb09b56ae60a71a0"
 }

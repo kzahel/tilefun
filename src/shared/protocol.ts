@@ -26,6 +26,13 @@ export interface RealmInfo {
 
 export type ClientMessage =
   | {
+      type: "edit-pattern";
+      start: { x: number; y: number };
+      end: { x: number; y: number };
+      erase: boolean;
+    }
+  | { type: "edit-pattern-history"; direction: "undo" | "redo" }
+  | {
       type: "player-input";
       seq: number;
       dx: number;
@@ -305,6 +312,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 // ---- Server → Client messages ----
 
 export type ServerMessage =
+  | ({ type: "pattern-edit-status" } & import("../patterns/TreeBrushEditor.js").TreeBrushStatus)
   | { type: "player-assigned"; entityId: number }
   | WorldMapMessage
   | { type: "kicked"; reason: string }

@@ -238,6 +238,13 @@ export class GameClient {
     this.chatHUD = new ChatHUD();
     this.audioManager = new AudioManager();
 
+    this.editorModel.onPatternHistory = (direction) =>
+      this.transport.send({ type: "edit-pattern-history", direction });
+    const routePatternStatus = (msg: ServerMessage) => {
+      if (msg.type === "pattern-edit-status") this.editorModel.setPatternStatus(msg);
+      else if (msg.type === "world-loaded" || msg.type === "realm-joined")
+        this.editorModel.setPatternStatus({ error: "", canUndo: false, canRedo: false });
+    };
     if (this.serialized) {
       // Client-side world with no generator (chunks populated from server messages)
       const clientWorld = new World(new FlatStrategy());
@@ -247,6 +254,7 @@ export class GameClient {
 
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
+        routePatternStatus(msg);
         // Domain-specific handlers first — buffer frame/sync messages for deferred
         // application during client update tick (prevents async entity
         // position changes that desync camera and entity interpolation)
@@ -352,7 +360,10 @@ export class GameClient {
     } else {
       if (!server) throw new Error("Local mode requires a GameServer instance");
       this.stateView = new LocalStateView(server);
-      this.transport.onMessage((message) => this.requests.receive(message));
+      this.transport.onMessage((message) => {
+        routePatternStatus(message);
+        this.requests.receive(message);
+      });
     }
 
     this.doorControl = new DoorControl(async (request) => {

@@ -14,6 +14,10 @@ export class EditorModel {
   selectedEntityType = "chicken";
   selectedPropType = "prop-flower-red";
   deleteMode = false;
+  patternError = "";
+  patternCanUndo = false;
+  patternCanRedo = false;
+  onPatternHistory: ((direction: "undo" | "redo") => void) | null = null;
   selectedElevation = 1;
   elevationGridSize = 1;
 
@@ -49,6 +53,12 @@ export class EditorModel {
     return typeof this.subgridShape === "number" ? this.subgridShape : 1;
   }
 
+  setPatternStatus(status: { error: string; canUndo: boolean; canRedo: boolean }): void {
+    this.patternError = status.error;
+    this.patternCanUndo = status.canUndo;
+    this.patternCanRedo = status.canRedo;
+    this.notify();
+  }
   // --- Mutation methods ---
 
   setTab(tab: EditorTab): void {

@@ -31,6 +31,7 @@ export async function workshopInputDigest(root = ".") {
     "public/data/modern-interiors-atlas.json",
     "src/workshop/ReviewCandidates.ts",
     "src/workshop/InteriorCandidates.ts",
+    "src/workshop/PatternCandidates.ts",
     "src/workshop/ToolRegistry.ts",
   );
   const hash = createHash("sha256");

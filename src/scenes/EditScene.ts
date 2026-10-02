@@ -148,6 +148,9 @@ export class EditScene implements GameScene {
       });
     }
 
+    for (const stroke of gc.editorMode.consumePendingPatterns())
+      gc.transport.send({ type: "edit-pattern", ...stroke });
+
     // Apply road edits
     for (const edit of gc.editorMode.consumePendingRoadEdits()) {
       gc.transport.send({
@@ -281,6 +284,7 @@ export class EditScene implements GameScene {
       gc.editorModel,
       visible,
       gc.stateView.world,
+      gc.sheets,
     );
 
     // Draw other players' editor cursors

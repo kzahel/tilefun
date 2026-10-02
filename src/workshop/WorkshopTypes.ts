@@ -22,7 +22,7 @@ export interface WorkshopCandidate {
   name: string;
   prompt: string;
   url: string;
-  kind: "art" | "interior" | "motion";
+  kind: "art" | "interior" | "motion" | "pattern";
   /** Handoff derived from the candidate's actual world generation and location. */
   exploreUrl?: string;
   fingerprint: string;

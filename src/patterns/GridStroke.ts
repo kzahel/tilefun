@@ -88,7 +88,7 @@ export class DocumentHistory<T> {
   }
   undo(): T {
     const next = this.past.pop();
-    if (next) {
+    if (next !== undefined) {
       this.future.push(this.current);
       this.current = next;
     }
@@ -96,7 +96,7 @@ export class DocumentHistory<T> {
   }
   redo(): T {
     const next = this.future.pop();
-    if (next) {
+    if (next !== undefined) {
       this.past.push(this.current);
       this.current = next;
     }

@@ -4,6 +4,7 @@ import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
+import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
@@ -20,6 +21,8 @@ try {
     candidates: WorkshopCandidate[] = [];
   for (const definition of artReviewDefinitions())
     candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
+  for (const c of TREE_PATTERN_CASES)
+    candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
   candidates.push(...(await buildInteriorCandidates()));
   Object.assign(window, {
     workshopManifest: {

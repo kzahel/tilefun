@@ -79,10 +79,13 @@ export function compileTreeRun(length: number): FacadePiece[] {
     dx: left + w / 2 - length * 8,
     dy: 0,
   });
+  const { left, repeat, right } = FENCED_TREES.sources;
   return [
-    piece(1568, 48, -16),
-    ...Array.from({ length: length - 4 }, (_, i) => piece(1632 + (i % 5) * 16, 16, 32 + i * 16)),
-    piece(1728, 48, (length - 2) * 16),
+    piece(left[0], left[2], -16),
+    ...Array.from({ length: length - 4 }, (_, i) =>
+      piece(repeat[0] + (i % (repeat[2] / 16)) * 16, 16, 32 + i * 16),
+    ),
+    piece(right[0], right[2], (length - 2) * 16),
   ];
 }
 /** Normal game Prop: ordinary chunk indexing, collision, save/load and replication. */
@@ -103,4 +106,18 @@ export function treeRunProp(length: number, wx: number, wy: number): Prop {
     collider: { offsetX: 0, offsetY: 0, width: length * 16, height: 16 },
     walls: null,
   };
+}
+
+/** Shared intent mutation for game preview and authoritative row transactions. */
+export function editTreeRuns(
+  before: readonly TreeRun[],
+  points: readonly GridPoint[],
+  erase: boolean,
+): TreeRun[] {
+  const cells = new Map(treeRunCells(before).map((p) => [`${p.x},${p.y}`, p]));
+  for (const p of points)
+    if (erase) cells.delete(`${p.x},${p.y}`);
+    else cells.set(`${p.x},${p.y}`, p);
+  if (cells.size > 4096) throw new Error("Too many tree anchors in this row");
+  return treeRuns([...cells.values()]);
 }

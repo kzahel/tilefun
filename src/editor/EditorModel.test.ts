@@ -38,14 +38,14 @@ describe("EditorModel", () => {
   it("toggleTab cycles through all tabs", () => {
     const model = new EditorModel();
     const visited: string[] = [model.editorTab];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       model.toggleTab();
       visited.push(model.editorTab);
     }
-    // Should cycle back to start after 6 toggles
-    expect(visited[0]).toBe(visited[6]);
-    // Should have visited all 6 unique tabs
-    expect(new Set(visited).size).toBe(6);
+    // Should cycle back to start after 7 toggles
+    expect(visited[0]).toBe(visited[7]);
+    // Should have visited all 7 unique tabs
+    expect(new Set(visited).size).toBe(7);
   });
 
   it("toggleMode cycles through all brush modes", () => {

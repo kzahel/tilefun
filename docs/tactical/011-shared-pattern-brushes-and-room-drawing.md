@@ -23,7 +23,8 @@ constraint solver. All committed art must be sufficient for a fresh clone.
   Validate the complete proposed edit before accepting it. Undo restores intent.
 - Rooms use 32px plan cells and the existing apartment compiler; render cells are
   16px. Rectangle creates perimeter walls and room floor; wall/floor/door/erase
-  edit the plan directly. Invalid door topology is explained before commit.
+  edit the plan directly. Invalid door topology is explained before commit. Disconnected draft rooms are
+  allowed with a visible warning; gameplay promotion must pass strict reachability.
 - Tree strips use 16px ground anchors, east/west connections only and a south
   fence. A gesture snaps to its starting row. Separate rows may coexist. Source
   left/right pieces and repeating middle pieces must be inspected, with minimum
@@ -60,7 +61,10 @@ city asphalt/pavement through the existing road backend. Add a fenced-tree row
 brush using the same compiler as Workshop. Host validates a whole snapped stroke
 and updates affected runs atomically; persistent versioned run identity recreates
 sprites/collision through normal prop save/load and multiplayer snapshots.
-Allow erase/split and explicit undo/redo for tree strokes, isolated per editor
+Existing game terrain/road queues remain incremental; whole-gesture undo for
+those backends requires a later protocol extension. Workshop histories and tree
+transactions operate on complete gestures now. Allow erase/split and explicit
+undo/redo for tree strokes, isolated per editor
 session and cleared on realm changes. No changes to generated city banks.
 
 ### 4. Follow-on room/worldgen integration (after brush review)
@@ -82,6 +86,10 @@ approved patterns using reservations/paths from the district planner. Pattern
 registry/source-use links should be visible from atlas selections.
 
 ## Validation and review
+
+Workshop drafts use a bounded complete replay through the existing backend;
+terrain/road runtime edits retain their existing neighborhood invalidation. The
+first checkpoint does not introduce a new incremental room compiler.
 
 Run all three typechecks, unit tests, Biome, regenerated source catalog and
 Workshop manifest, production build and full Playwright suite. New browser tests
