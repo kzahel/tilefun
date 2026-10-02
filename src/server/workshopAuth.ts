@@ -66,12 +66,28 @@ async function verifyPassword(password: string, hash: string) {
 }
 const digest = (s: string) => createHash("sha256").update(s).digest("hex");
 
+/** Require both the actual TCP peer and the requested host to be loopback.
+ * Reverse-proxied public traffic often has a loopback peer, so never trust
+ * forwarded requests or the socket address alone for local access.
+ */
+export function isDirectLocalRequest(req: IncomingMessage): boolean {
+  const peer = req.socket.remoteAddress;
+  return (
+    (peer === "127.0.0.1" || peer === "::1" || peer === "::ffff:127.0.0.1") &&
+    /^(localhost|127\.0\.0\.1|\[::1\])(?::[0-9]{1,5})?$/i.test(req.headers.host ?? "") &&
+    ["forwarded", "x-forwarded-for", "x-forwarded-host", "x-forwarded-proto"].every(
+      (key) => req.headers[key] === undefined,
+    )
+  );
+}
+
 export class WorkshopAuth {
   private queue = Promise.resolve();
   private attempts = new Map<string, { count: number; until: number }>();
   constructor(
     readonly directory = process.env.WORKSHOP_AUTH_DIR ?? "data/workshop",
     private publicOrigin = process.env.WORKSHOP_PUBLIC_ORIGIN,
+    private localAuthBypass = process.env.WORKSHOP_LOCAL_AUTH_BYPASS !== "0",
   ) {}
   async config(): Promise<OwnerConfig | null> {
     try {
@@ -92,7 +108,7 @@ export class WorkshopAuth {
     }
   }
   private origin(req: IncomingMessage) {
-    if (this.publicOrigin) return new URL(this.publicOrigin).origin;
+    if (this.publicOrigin && !this.localAccess(req)) return new URL(this.publicOrigin).origin;
     const host = req.headers.host ?? "";
     // This deployment terminates TLS upstream. Do not trust arbitrary forwarded headers.
     const secure =
@@ -139,8 +155,19 @@ export class WorkshopAuth {
     this.queue = operation.catch(() => {});
     await operation;
   }
+  private localAccess(req: IncomingMessage) {
+    return this.localAuthBypass && isDirectLocalRequest(req);
+  }
   async session(req: IncomingMessage): Promise<WorkshopSession> {
     const config = await this.config();
+    if (this.localAccess(req))
+      return {
+        authenticated: true,
+        configured: !!config,
+        owner: "local",
+        csrfToken: "local",
+        local: true,
+      };
     if (!config) return { authenticated: false, configured: false };
     const token = this.token(req),
       session = token ? (await this.sessions())[digest(token)] : undefined;
@@ -190,7 +217,12 @@ export class WorkshopAuth {
             delete values[digest(token)];
           });
         res.setHeader("Set-Cookie", this.cookie(req, "", 0));
-        jsonResponse(res, { authenticated: false, configured: true });
+        jsonResponse(
+          res,
+          this.localAccess(req)
+            ? await this.session(req)
+            : { authenticated: false, configured: true },
+        );
         return true;
       }
       if (path !== "/tilefun/api/auth/login") throw new HttpError(404, "Unknown auth endpoint");

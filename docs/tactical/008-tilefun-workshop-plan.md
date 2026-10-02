@@ -153,3 +153,40 @@ views, then a new road batch for curves, islands and divided intersections.
 Keep regional-v4 and its promoted assets frozen; new output requires a new
 revision/bank. Continue the city furnishing/parking/park phases after those
 foundations have been reviewed.
+
+
+## Local access and normal-browser rendering correction — 2026-10-02
+
+A human screenshot exposed a district preview fingerprint mismatch that the
+original headless-shell checks missed. The recipe matched, but normal Chromium
+resampled one-pixel chunk overscan and shadow ellipse edges differently. The
+issue was reproduced in bundled full Chromium, both headed and new headless,
+at retina scale. Approval previews now use native-size chunk draws and integer
+pixel shadows through options on the existing shared renderers. Gameplay's
+rendering defaults and frozen regional-v4 generation remain unchanged. Only the
+three district preview pixel identities changed; other candidates retain their
+identities. Exact approval validation remains enabled.
+
+Direct localhost now opens Workshop without an owner login. A bypass requires
+both a loopback socket peer and a literal localhost/loopback host, with no proxy
+forwarding headers. Public/LAN and reverse-proxied requests retain authentication.
+Origin and CSRF checks remain for local writes, and private file serving remains
+blocked. `WORKSHOP_LOCAL_AUTH_BYPASS=0` disables the exception; automated login
+checks use that setting. Local access is labeled in the shared header.
+
+Regression coverage includes loopback/host/forwarding rejection, local writes
+and cross-site/CSRF rejection, plus all three district hashes in full Chromium
+at 2× device scale. The actual localhost workspace is checked without credentials,
+and the public endpoint still rejects anonymous feedback reads. No human notes
+or approvals are created by the verification.
+
+Validation: all three typechecks, 1,123 unit tests, production build and Biome
+passed (existing lint warnings remain). All 195 browser checks passed: 194 in
+the full suite and the remaining movement check after replacing an immediate
+feedback POST assertion with polling for the actual request. Browser concurrency
+is capped at two workers to prevent resource contention with the live preview;
+the previous seven-worker run timed out while several pages were still loading.
+The headed localhost check rendered all three districts without credentials,
+confirmed the manifest is current and retained 31 building and nine road
+approvals. Both human NDJSON histories remained unchanged. The public inbox
+returned 401 anonymously.

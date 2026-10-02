@@ -20,8 +20,9 @@ npm run dev
 Open the `/tilefun/` URL printed by Vite, normally
 `http://localhost:5173/tilefun/`. The workspace is
 `http://localhost:5173/tilefun/workshop.html`, also linked from the game sidebar.
-Run `npm run workshop:auth -- setup` for a local owner account; credentials are
-written privately to `data/workshop/initial-login.txt`. See
+Direct localhost access needs no login. Run `npm run workshop:auth -- setup`
+for access through public/LAN hosts; credentials are written privately to
+`data/workshop/initial-login.txt`. See
 [Workshop setup and API](tilefun-workshop.md). Old `tools.html` bookmarks work.
 The worker install supplies the Cloudflare types needed by `npm run typecheck`;
 it is not needed simply to run the browser game/labs. No Cloudflare deployment

@@ -90,6 +90,7 @@ export class TileRenderer {
     visible: ChunkRange,
     readyOnly = false,
     cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
+    chunkOverscanPixels = 1,
   ): void {
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
     const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
@@ -142,8 +143,15 @@ export class TileRenderer {
           ? chunk.renderCache
           : (chunk.renderCache ?? this.cacheBuildStates.get(key)?.canvas);
         if (drawCache) {
-          // Draw 1px oversize to prevent sub-pixel seams between chunks
-          ctx.drawImage(drawCache, sx, sy, chunkScreenSize + 1, chunkScreenSize + 1);
+          // Gameplay overscans to cover sub-pixel seams while zooming. Native
+          // pixel review uses zero: 256→257 resampling differs by raster backend.
+          ctx.drawImage(
+            drawCache,
+            sx,
+            sy,
+            chunkScreenSize + chunkOverscanPixels,
+            chunkScreenSize + chunkOverscanPixels,
+          );
         }
       }
     }

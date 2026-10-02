@@ -27,7 +27,11 @@ if (embedded) {
   const status = () =>
     void sessionRequest()
       .then((s) => {
-        login.textContent = s.authenticated ? `Signed in · ${s.owner}` : "Sign in to save feedback";
+        login.textContent = s.local
+          ? "Local access"
+          : s.authenticated
+            ? `Signed in · ${s.owner}`
+            : "Sign in to save feedback";
       })
       .catch(() => {
         login.textContent = "Login unavailable";

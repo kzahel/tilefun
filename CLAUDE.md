@@ -38,9 +38,13 @@ from the game sidebar and world menu. It includes all review batches, requests,
 activity/history and tools. Register new batches/candidates so zero-event work
 appears in the global inbox. Old `/tilefun/tools.html` and lab links still work.
 See `docs/tilefun-workshop.md` for login, shared APIs and data. Use
-`npm run workshop:inbox` for the combined trusted local read. Private API reads
-and all new/legacy writes require the owner cookie and CSRF token; never commit
-owner/session files. Tests use isolated auth/data and Playwright Chromium.
+`npm run workshop:inbox` for the combined trusted local read. Public/LAN private
+API reads require the owner cookie; new/legacy writes also require its CSRF
+token. Never commit owner/session files. Direct localhost with a loopback peer
+and no forwarding headers skips login (CSRF/origin checks remain). Set
+`WORKSHOP_LOCAL_AUTH_BYPASS=0` to exercise login locally; auth/browser tests do
+this explicitly. Tests use isolated auth/data and Playwright Chromium, including
+full Chromium GPU rendering for district fingerprint parity.
 After render/recipe/input changes run `npm run art:catalog` then
 `npm run workshop:manifest`; build checks both. Do not synthesize approvals.
 

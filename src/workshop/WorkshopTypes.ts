@@ -83,6 +83,7 @@ export type WorkshopEvent =
     }
   | { id: string; type: "reply"; threadId: string; reply: string; status: ArtNote["status"] };
 export interface WorkshopSession {
+  local?: boolean;
   authenticated: boolean;
   configured: boolean;
   csrfToken?: string;

@@ -44,8 +44,18 @@ finish. Unsynced drafts/outboxes belong to that browser origin, not Git.
 
 ## Owner login
 
-Public game/art rendering stays accessible. Private feedback reads and **all**
-new and legacy writes require the owner cookie. There is no registration.
+Public game/art rendering stays accessible. On public and LAN hosts, private
+feedback reads and **all** new and legacy writes require the owner cookie.
+There is no registration.
+
+Direct localhost access skips login automatically: `localhost`, `127.0.0.1` and
+`[::1]`, with a loopback TCP peer and no forwarded headers. The header shows
+**Local access**. This works even before an owner account is configured. Public
+reverse-proxy traffic requires login even when the proxy's TCP peer is loopback;
+the host and forwarded headers prevent a bypass. Local writes retain same-origin
+and CSRF checks. Set `WORKSHOP_LOCAL_AUTH_BYPASS=0` to require login locally too;
+auth/browser tests use this setting explicitly. Private runtime files remain
+blocked on every host.
 
 ```sh
 npm run workshop:auth -- status
@@ -61,8 +71,8 @@ The username defaults to `owner`; set `WORKSHOP_OWNER` to override. For scripted
 setup, pass a password of at least 16 characters in `WORKSHOP_SETUP_PASSWORD`
 in the environment, never as a CLI argument.
 `WORKSHOP_AUTH_DIR` selects another private directory. No configured account
-means private APIs fail closed. HTTPS deployments must preserve the public Host
-or set `WORKSHOP_PUBLIC_ORIGIN` to their exact external origin. The existing
+means public/LAN private APIs fail closed. HTTPS deployments must preserve the
+public Host or set `WORKSHOP_PUBLIC_ORIGIN` to their exact external origin. The existing
 `tilefun.graehlarts.com` host uses Secure cookies with upstream TLS.
 
 Passwords use salted scrypt. Opaque sessions are stored server-side by token hash,
@@ -126,8 +136,13 @@ npm run art:notes -- --status=all
 `ToolRegistry.ts` defines tools and city batches. `ReviewCandidates.ts` derives
 city cases from actual recipes; `InteriorCandidates.ts` derives room/movement
 cases from existing fixtures. The legacy/native city canvas hash and room
-render/fingerprint helpers are shared. A real headless Chromium pass builds
-`public/data/workshop-manifest.json`, including every candidate before it has
+render/fingerprint helpers are shared. District approval previews draw chunk
+caches at native size with deterministic pixel shadows. This avoids GPU versus
+headless differences in nearest-neighbor overscan and ellipse antialiasing.
+Gameplay retains its existing overscan and smooth shadows; review uses explicit
+options on the same renderers. Normal Chromium at retina scale is included in
+the browser regression tests, alongside the default headless-shell. A real
+headless Chromium pass builds `public/data/workshop-manifest.json`, including every candidate before it has
 received feedback. It contains public definitions and identities, never notes,
 passwords or approvals.
 

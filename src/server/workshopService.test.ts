@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
-import { createServer } from "node:http";
+import { createServer, request as httpRequest } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -21,7 +21,7 @@ const cleanups: (() => Promise<void>)[] = [];
 afterEach(async () => {
   for (const cleanup of cleanups.splice(0)) await cleanup();
 });
-async function fixture(configured = true, stale = false) {
+async function fixture(configured = true, stale = false, localBypass = false) {
   const directory = await mkdtemp(join(tmpdir(), "tilefun-workshop-")),
     authDir = join(directory, "auth");
   await mkdir(authDir);
@@ -38,7 +38,7 @@ async function fixture(configured = true, stale = false) {
   const options = {
     directory,
     manifestPath,
-    auth: new WorkshopAuth(authDir),
+    auth: new WorkshopAuth(authDir, undefined, localBypass),
     art: new ArtNoteStore(join(directory, "art")),
     interiors: new InteriorReviewStore(join(directory, "interiors")),
   };
@@ -105,6 +105,71 @@ const candidate = manifest.candidates.find((c) => c.batchId === "roads");
 if (!candidate) throw new Error("No road fixture");
 
 describe("Workshop API and login boundaries", () => {
+  it("allows direct local review without login but protects public/proxied hosts and cross-site writes", async () => {
+    const f = await fixture(false, false, true);
+    expect(await (await f.request("/tilefun/api/auth/session")).json()).toMatchObject({
+      authenticated: true,
+      configured: false,
+      local: true,
+      csrfToken: "local",
+    });
+    for (const api of ["art-notes", "interior-review", "workshop/inbox"]) {
+      expect((await f.request(`/tilefun/api/${api}`)).status).toBe(200);
+      expect(
+        await new Promise<number>((resolve, reject) => {
+          const req = httpRequest(
+            `${f.base}/tilefun/api/${api}`,
+            { headers: { Host: "tilefun.graehlarts.com" } },
+            (res) => {
+              res.resume();
+              resolve(res.statusCode ?? 0);
+            },
+          );
+          req.on("error", reject);
+          req.end();
+        }),
+      ).toBe(401);
+      expect(
+        (
+          await f.request(`/tilefun/api/${api}`, undefined, {
+            "X-Forwarded-Host": "tilefun.graehlarts.com",
+          })
+        ).status,
+      ).toBe(401);
+    }
+    const body = {
+      id: "local-source",
+      type: "source",
+      sheetId: "me-complete",
+      fingerprint: candidate.sourceFingerprint,
+      rect: [0, 0, 16, 16],
+      sliceKeys: [],
+      intent: "terrain",
+      note: "Local request",
+    };
+    expect((await f.request("/tilefun/api/workshop/events", body)).status).toBe(403);
+    expect(
+      (
+        await f.request("/tilefun/api/workshop/events", body, {
+          "X-Workshop-CSRF": "local",
+          Origin: "https://random.example",
+        })
+      ).status,
+    ).toBe(403);
+    expect(
+      (
+        await f.request("/tilefun/api/workshop/events", body, {
+          "X-Workshop-CSRF": "local",
+          "Sec-Fetch-Site": "cross-site",
+        })
+      ).status,
+    ).toBe(403);
+    expect(
+      (await f.request("/tilefun/api/workshop/events", body, { "X-Workshop-CSRF": "local" }))
+        .status,
+    ).toBe(200);
+    expect(await f.service().art.records()).toHaveLength(1);
+  });
   it("fails closed without configuration and protects new and legacy reads/writes", async () => {
     const f = await fixture(false);
     expect(await (await f.request("/tilefun/api/auth/session")).json()).toEqual({

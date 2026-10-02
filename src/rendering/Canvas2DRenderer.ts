@@ -14,10 +14,11 @@ export function drawScene2D(
   items: SceneItem[],
   sheets: Map<string, Spritesheet>,
   grassSheet: Spritesheet | undefined,
+  pixelExactShadows = false,
 ): void {
   // Shadow pre-pass: draw ground shadows before all sprites so they appear
   // behind props (e.g. table shadow peeks out at edges, not on top)
-  drawShadows(ctx, camera, items);
+  drawShadows(ctx, camera, items, pixelExactShadows);
 
   // Main draw pass
   for (const item of items) {
@@ -26,7 +27,7 @@ export function drawScene2D(
         // Draw elevated shadows inline so they appear on top of the
         // elevation surface tile rather than being covered by it.
         if (item.hasShadow && !item.flashHidden && item.shadowTerrainZ > 0) {
-          drawOneShadow(ctx, camera, item);
+          drawOneShadow(ctx, camera, item, pixelExactShadows);
         }
         drawSprite(ctx, camera, item, sheets);
         break;
@@ -44,11 +45,26 @@ export function drawScene2D(
 }
 
 /** Draw a single entity shadow ellipse. */
-function drawOneShadow(ctx: CanvasRenderingContext2D, camera: Camera, item: SpriteItem): void {
+function drawOneShadow(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  item: SpriteItem,
+  pixelExactShadows: boolean,
+): void {
   const shadowW = item.shadowWidth * camera.scale;
   const shadowH = shadowW * 0.35;
   const terrainOffset = item.shadowTerrainZ * camera.scale;
   const feetScreen = camera.worldToScreen(item.wx, item.shadowFeetWy);
+  if (pixelExactShadows) {
+    drawPixelShadow(
+      ctx,
+      Math.floor(feetScreen.sx),
+      Math.floor(feetScreen.sy - terrainOffset),
+      shadowW / 2,
+      shadowH / 2,
+    );
+    return;
+  }
   ctx.save();
   ctx.globalAlpha = 0.3;
   ctx.fillStyle = "#000";
@@ -66,17 +82,56 @@ function drawOneShadow(ctx: CanvasRenderingContext2D, camera: Camera, item: Spri
   ctx.restore();
 }
 
+/** Native-pixel approval rendering must avoid backend-dependent ellipse
+ * antialiasing and alpha rounding. Integer pixels and explicit source-over math
+ * give the same result in GPU Chromium, headless-shell and other browsers.
+ * Gameplay retains its existing smooth shadows.
+ */
+function drawPixelShadow(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+) {
+  if (rx <= 0 || ry <= 0) return;
+  const left = Math.max(0, Math.floor(cx - rx)),
+    top = Math.max(0, Math.floor(cy - ry)),
+    right = Math.min(ctx.canvas.width, Math.ceil(cx + rx)),
+    bottom = Math.min(ctx.canvas.height, Math.ceil(cy + ry));
+  if (right <= left || bottom <= top) return;
+  const image = ctx.getImageData(left, top, right - left, bottom - top);
+  for (let y = top; y < bottom; y++)
+    for (let x = left; x < right; x++) {
+      if (((x + 0.5 - cx) / rx) ** 2 + ((y + 0.5 - cy) / ry) ** 2 > 1) continue;
+      const i = ((y - top) * image.width + x - left) * 4,
+        oldAlpha = image.data[i + 3] ?? 0;
+      const alpha = 77 + Math.round((oldAlpha * 178) / 255);
+      for (let channel = 0; channel < 3; channel++)
+        image.data[i + channel] = Math.round(
+          ((image.data[i + channel] ?? 0) * oldAlpha * 178) / (alpha * 255),
+        );
+      image.data[i + 3] = alpha;
+    }
+  ctx.putImageData(image, left, top);
+}
+
 /**
  * Pre-pass: draw shadows for entities on flat terrain only.
  * Elevated shadows are drawn inline in the main pass (after the elevation
  * tile surface so they aren't covered up).
  */
-function drawShadows(ctx: CanvasRenderingContext2D, camera: Camera, items: SceneItem[]): void {
+function drawShadows(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  items: SceneItem[],
+  pixelExactShadows: boolean,
+): void {
   for (const item of items) {
     if (item.kind !== "sprite" || !item.hasShadow || item.flashHidden) continue;
     // Skip elevated shadows — they'll be drawn inline in the main pass
     if (item.shadowTerrainZ > 0) continue;
-    drawOneShadow(ctx, camera, item);
+    drawOneShadow(ctx, camera, item, pixelExactShadows);
   }
 }
 

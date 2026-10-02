@@ -109,7 +109,9 @@ export function drawDenseDistrictShowcase(
     height = (b.maxY - b.minY) * 16;
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext("2d");
+  // Approval hashes must use the same raster path in normal GPU-backed
+  // browsers and headless builds (chunk overscan and ellipse edge rounding).
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
   if (!ctx) throw new Error("Missing district canvas");
   ctx.imageSmoothingEnabled = false;
   const generator = createGenerator(s.generation),
@@ -128,7 +130,7 @@ export function drawDenseDistrictShowcase(
   renderer.setBlendSheets(assets.blendSheets, graph);
   renderer.setVariants(assets.variants);
   renderer.setRoadSheets(assets.sheets);
-  renderer.drawTerrain(ctx, camera, world, assets.sheets, range, false, 4096);
+  renderer.drawTerrain(ctx, camera, world, assets.sheets, range, false, 4096, 0);
   const props = s.props.map((p, i) => ({ ...p, id: i + 1 })),
     entities = s.actors.map((a, i) => {
       const factory = ENTITY_FACTORIES[a.type];
@@ -141,6 +143,7 @@ export function drawDenseDistrictShowcase(
     collectScene(entities, props, world, camera, range, 1, renderer, [], false),
     assets.sheets,
     undefined,
+    true,
   );
   if (geometry) {
     ctx.lineWidth = 1;

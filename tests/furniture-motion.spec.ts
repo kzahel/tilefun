@@ -139,7 +139,7 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
   await expect(page.locator("#scene")).not.toHaveValue("wardrobe");
   await page.locator("#scene").selectOption("wardrobe");
   await expect(page.locator("#grade")).toContainText("✓ Looks good");
-  expect(posts[0]?.verdict).toBe("good");
+  await expect.poll(() => posts[0]?.verdict).toBe("good");
   expect(posts[0]?.playtest).toMatchObject({
     playerZ: 32,
     groundZ: 32,
@@ -158,9 +158,11 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
   await expect(page.locator("#scene")).not.toHaveValue("wardrobe");
   await page.locator("#scene").selectOption("wardrobe");
   await expect(page.locator("#grade")).toContainText("✓ Looks good");
-  expect(posts.at(-1)?.playtest).toMatchObject({
-    bodies: { wardrobe: { height: 40, walkableTop: true } },
-  });
+  await expect
+    .poll(() => posts.at(-1)?.playtest)
+    .toMatchObject({
+      bodies: { wardrobe: { height: 40, walkableTop: true } },
+    });
   await page.locator("#gravity").selectOption("1");
   await expect(page.locator("#grade")).toContainText("Unchecked");
   await page.locator("#depth").check();

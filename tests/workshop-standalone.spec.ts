@@ -37,6 +37,7 @@ test("standalone serves Workshop login, native reviews and both protected compat
         PORT: "4195",
         NET_TRANSPORT: "ws",
         DATA_DIR: directory,
+        WORKSHOP_LOCAL_AUTH_BYPASS: "0",
         WORKSHOP_AUTH_DIR: authDirectory,
         WORKSHOP_DATA_DIR: authDirectory,
         ART_NOTES_DIR: join(directory, "art-notes"),

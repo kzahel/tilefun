@@ -4,6 +4,9 @@ export default defineConfig({
   testDir: "./tests",
   globalSetup: "./tests/workshop-setup.ts",
   timeout: 30_000,
+  // Canvas-heavy labs and full Chromium compete for CPU/GPU with the live game.
+  // Bound concurrency so readiness assertions exercise behavior, not contention.
+  workers: 2,
   reporter: [["list"], ["html", { open: "never" }]],
   snapshotPathTemplate: "{testDir}/fixtures/interior-approved/{arg}{ext}",
   // New/changed visual references require human review, never an automatic write.
@@ -19,6 +22,7 @@ export default defineConfig({
     env: {
       INTERIOR_REVIEW_DIR: "test-results/interior-review-feedback",
       ART_NOTES_DIR: "test-results/art-notes",
+      WORKSHOP_LOCAL_AUTH_BYPASS: "0",
       WORKSHOP_AUTH_DIR: "test-results/workshop-auth",
       WORKSHOP_DATA_DIR: "test-results/workshop",
       WORKSHOP_SETUP_PASSWORD: "tilefun-workshop-browser-test-only",

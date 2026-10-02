@@ -190,10 +190,12 @@ export function App() {
         <div className="session-controls">
           {session.data?.authenticated ? (
             <>
-              <span>{session.data.owner}</span>
-              <button type="button" onClick={() => void logout()}>
-                Sign out
-              </button>
+              <span>{session.data.local ? "Local access" : session.data.owner}</span>
+              {session.data.local ? null : (
+                <button type="button" onClick={() => void logout()}>
+                  Sign out
+                </button>
+              )}
             </>
           ) : (
             <Link to="/login">Sign in</Link>
