@@ -7,13 +7,15 @@ import { createProp } from "../entities/PropFactories.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import { createGenerator } from "../generation/Generator.js";
+import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { CITY_ARCHITECTURE_ASSETS } from "../generation/regional/CityArchitectureAssets.js";
 import type { CityPlacesPlan } from "../generation/regional/CityPlacesPlanner.js";
 import {
   COMMERCIAL_CITY_ASSETS,
   COMMERCIAL_SURFACE_CELLS,
 } from "../generation/regional/CommercialCityAssets.js";
 import type { CommercialDistrictPlan } from "../generation/regional/CommercialDistrictPlanner.js";
-import { DENSE_CITY_ASSETS, denseBuilding } from "../generation/regional/DenseCityAssets.js";
+import { DENSE_CITY_ASSETS } from "../generation/regional/DenseCityAssets.js";
 import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { Camera } from "../rendering/Camera.js";
@@ -95,7 +97,40 @@ export const PUBLIC_DEMO_GENERATION: GenerationDescriptor = {
   ...DENSE_DEMO_GENERATION,
   version: "regional-v8",
 };
+export const ARCHITECTURE_DEMO_GENERATION: GenerationDescriptor = {
+  ...DENSE_DEMO_GENERATION,
+  version: "regional-v9",
+};
 export const CITY_PLACES_REVIEW_CASES = [
+  {
+    id: "district-v9-architecture",
+    name: "Residential & commercial neighborhood",
+    prompt:
+      "Review the wide apartment frontage and office/services building beside the park and public square.",
+    window: "whole",
+    generation: ARCHITECTURE_DEMO_GENERATION,
+    run: "architecture",
+  },
+  {
+    id: "district-v9-residential",
+    name: "Wide residential frontage",
+    prompt:
+      "Check native bay/infill/entrance joins, closed roof edges and the paved approaches to both apartment doors.",
+    window: "place",
+    crop: [-43, -41, -2, 3],
+    generation: ARCHITECTURE_DEMO_GENERATION,
+    run: "architecture",
+  },
+  {
+    id: "district-v9-office",
+    name: "Office, services & shops",
+    prompt:
+      "Check the native office/services lobby, roof/floor closure and contrasting shop heights. All doors connect to the shared sidewalk.",
+    window: "place",
+    crop: [2, -40, 43, 3],
+    generation: ARCHITECTURE_DEMO_GENERATION,
+    run: "architecture",
+  },
   {
     id: "district-v8-public-block",
     name: "Public spaces neighborhood",
@@ -227,14 +262,27 @@ export function denseReviewComposition(s: DenseReviewScene) {
     ...(s.generation.version === "regional-v6" || s.plan.recipe.startsWith("city-places-")
       ? { commercialAssets: COMMERCIAL_CITY_ASSETS }
       : {}),
+    ...(s.plan.recipe === "city-places-v9" ? { architectureAssets: CITY_ARCHITECTURE_ASSETS } : {}),
     props: s.props,
     actors: s.actors,
   };
 }
 export function denseReviewPrefabs(s: DenseReviewScene) {
   return [
-    ...new Set(s.props.filter((p) => p.type.startsWith("prop-city-dense-v1-")).map((p) => p.type)),
-  ].map(denseBuilding);
+    ...new Set(
+      s.props
+        .filter(
+          (p) =>
+            p.type.startsWith("prop-city-dense-v1-") ||
+            p.type.startsWith("prop-city-architecture-v1-"),
+        )
+        .map((p) => p.type),
+    ),
+  ].map((type) => {
+    const recipe = buildingRecipe(type);
+    if (!recipe) throw new Error(`Missing review building ${type}`);
+    return recipe;
+  });
 }
 export function denseReviewSourceRects(s: DenseReviewScene): ArtRect[] {
   const rects: ArtRect[] = denseReviewPrefabs(s).flatMap((p) =>

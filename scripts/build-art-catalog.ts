@@ -14,6 +14,7 @@ import { BlendGraph } from "../src/autotile/BlendGraph.js";
 import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
+import { CITY_ARCHITECTURE_BUILDINGS } from "../src/generation/regional/CityArchitectureAssets.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
 import {
   COMMERCIAL_STREET_PROPS,
@@ -170,7 +171,12 @@ for (const def of getPropSourceDefinitions())
         ]
       : []),
   ]);
-for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS, ...DENSE_CITY_BUILDINGS])
+for (const recipe of [
+  ...BUILDING_RECIPES,
+  ...CITY_BUILDING_PREFABS,
+  ...DENSE_CITY_BUILDINGS,
+  ...CITY_ARCHITECTURE_BUILDINGS,
+])
   for (const [n, part] of recipe.parts.entries())
     add(
       `recipe:${recipe.type}:${n}`,
@@ -180,16 +186,20 @@ for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS, ...DENSE_CI
       "recipe",
       [
         {
-          system: recipe.type.startsWith("prop-city-dense-v1-")
-            ? "Dense districts (regional-v4, promoted)"
-            : recipe.type.startsWith("prop-city-v1-")
-              ? "City prefab showcase (candidate)"
-              : "Regional district facades",
-          source: recipe.type.startsWith("prop-city-dense-v1-")
-            ? "src/generation/regional/dense-city-assets-v1.json"
-            : recipe.type.startsWith("prop-city-v1-")
-              ? "src/generation/regional/CityBuildingPrefabs.ts"
-              : "src/generation/regional/BuildingRecipes.ts",
+          system: recipe.type.startsWith("prop-city-architecture-v1-")
+            ? "City architecture (regional-v9, candidate)"
+            : recipe.type.startsWith("prop-city-dense-v1-")
+              ? "Dense districts (regional-v4, promoted)"
+              : recipe.type.startsWith("prop-city-v1-")
+                ? "City prefab showcase (candidate)"
+                : "Regional district facades",
+          source: recipe.type.startsWith("prop-city-architecture-v1-")
+            ? "src/generation/regional/city-architecture-assets-v1.json"
+            : recipe.type.startsWith("prop-city-dense-v1-")
+              ? "src/generation/regional/dense-city-assets-v1.json"
+              : recipe.type.startsWith("prop-city-v1-")
+                ? "src/generation/regional/CityBuildingPrefabs.ts"
+                : "src/generation/regional/BuildingRecipes.ts",
         },
         ...(references.get(recipe.type) ?? []),
       ],

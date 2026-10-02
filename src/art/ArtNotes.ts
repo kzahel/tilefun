@@ -13,7 +13,8 @@ export interface BuildingReview {
     | "dense-district-v2"
     | "commercial-district-v1"
     | "city-places-v7"
-    | "city-places-v8";
+    | "city-places-v8"
+    | "city-places-v9";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;

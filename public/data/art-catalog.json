@@ -1057,7 +1057,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:80"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:81"
         },
         {
           "system": "World generation",
@@ -1755,7 +1755,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:88"
         },
         {
           "system": "World generation",
@@ -1763,7 +1763,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:103"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:106"
         },
         {
           "system": "World generation",
@@ -2511,7 +2511,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:99"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:102"
         },
         {
           "system": "World generation",
@@ -2593,7 +2593,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:104"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:107"
         },
         {
           "system": "World generation",
@@ -2693,7 +2693,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:105"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:108"
         },
         {
           "system": "World generation",
@@ -2753,7 +2753,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2779,7 +2779,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2805,7 +2805,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2831,7 +2831,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2857,7 +2857,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2883,7 +2883,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2909,7 +2909,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2935,7 +2935,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2961,7 +2961,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:74"
+          "source": "src/generation/regional/BuildingRecipes.ts:75"
         },
         {
           "system": "World generation",
@@ -2987,7 +2987,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3013,7 +3013,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3039,7 +3039,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3065,7 +3065,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3091,7 +3091,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3117,7 +3117,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3143,7 +3143,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3169,7 +3169,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3195,7 +3195,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3221,7 +3221,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3247,7 +3247,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3273,7 +3273,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:75"
+          "source": "src/generation/regional/BuildingRecipes.ts:76"
         },
         {
           "system": "World generation",
@@ -3299,7 +3299,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3329,7 +3329,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3359,7 +3359,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3389,7 +3389,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3419,7 +3419,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3449,7 +3449,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:76"
+          "source": "src/generation/regional/BuildingRecipes.ts:77"
         },
         {
           "system": "World generation",
@@ -3479,7 +3479,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3505,7 +3505,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3531,7 +3531,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3557,7 +3557,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3583,7 +3583,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3609,7 +3609,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3635,7 +3635,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3661,7 +3661,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -3687,7 +3687,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/BuildingRecipes.ts:77"
+          "source": "src/generation/regional/BuildingRecipes.ts:78"
         },
         {
           "system": "World generation",
@@ -8402,6 +8402,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
         }
       ]
     },
@@ -8420,6 +8424,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
         }
       ]
     },
@@ -8438,6 +8446,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
         }
       ]
     },
@@ -8456,6 +8468,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
         }
       ]
     },
@@ -8528,6 +8544,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:22"
         }
       ]
     },
@@ -8546,6 +8566,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:22"
         }
       ]
     },
@@ -8564,6 +8588,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:22"
         }
       ]
     },
@@ -8582,6 +8610,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityArchitecturePlanner.ts:22"
         }
       ]
     },
@@ -8654,6 +8686,1212 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        1904,
+        112,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        1904,
+        64,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        1904,
+        64,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1904,
+        80,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2016,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2144,
+        112,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2016,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:9",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2144,
+        64,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:10",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2016,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:11",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:12",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2144,
+        64,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 13",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:13",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2016,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 14",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:14",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 15",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-3:15",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2144,
+        80,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-3 · piece 16",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:0",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        1904,
+        112,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:1",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        1904,
+        64,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:2",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        1904,
+        64,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:3",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1904,
+        80,
+        112
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:4",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2016,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:5",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:6",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:7",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2080,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:8",
+      "sheetId": "me-complete",
+      "rect": [
+        1104,
+        2144,
+        112,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:9",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2016,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:10",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:11",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:12",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 13",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:13",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2144,
+        64,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 14",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:14",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2016,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 15",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:15",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 16",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:16",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 17",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:17",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2080,
+        64,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 18",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:18",
+      "sheetId": "me-complete",
+      "rect": [
+        1232,
+        2144,
+        64,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 19",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:19",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2016,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 20",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:20",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 21",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:21",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 22",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:22",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2080,
+        80,
+        48
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 23",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-condo-wide-5:23",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        2144,
+        80,
+        80
+      ],
+      "label": "prop-city-architecture-v1-condo-wide-5 · piece 24",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2240,
+        1936,
+        16,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2368,
+        1936,
+        16,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:3",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:4",
+      "sheetId": "me-complete",
+      "rect": [
+        2528,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:5",
+      "sheetId": "me-complete",
+      "rect": [
+        2656,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:6",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:7",
+      "sheetId": "me-complete",
+      "rect": [
+        2528,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:8",
+      "sheetId": "me-complete",
+      "rect": [
+        2656,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:9",
+      "sheetId": "me-complete",
+      "rect": [
+        2400,
+        2224,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:10",
+      "sheetId": "me-complete",
+      "rect": [
+        2384,
+        2224,
+        16,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-3:11",
+      "sheetId": "me-complete",
+      "rect": [
+        2512,
+        2224,
+        16,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-3 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:0",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 1",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:1",
+      "sheetId": "me-complete",
+      "rect": [
+        2240,
+        1936,
+        16,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 2",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:2",
+      "sheetId": "me-complete",
+      "rect": [
+        2368,
+        1936,
+        16,
+        96
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 3",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:3",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 4",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:4",
+      "sheetId": "me-complete",
+      "rect": [
+        2528,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 5",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:5",
+      "sheetId": "me-complete",
+      "rect": [
+        2656,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 6",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:6",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 7",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:7",
+      "sheetId": "me-complete",
+      "rect": [
+        2528,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 8",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:8",
+      "sheetId": "me-complete",
+      "rect": [
+        2656,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 9",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:9",
+      "sheetId": "me-complete",
+      "rect": [
+        2544,
+        1984,
+        112,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 10",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:10",
+      "sheetId": "me-complete",
+      "rect": [
+        2528,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 11",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:11",
+      "sheetId": "me-complete",
+      "rect": [
+        2656,
+        1984,
+        16,
+        64
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 12",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:12",
+      "sheetId": "me-complete",
+      "rect": [
+        2400,
+        2224,
+        112,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 13",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:13",
+      "sheetId": "me-complete",
+      "rect": [
+        2384,
+        2224,
+        16,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 14",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "recipe:prop-city-architecture-v1-office-4:14",
+      "sheetId": "me-complete",
+      "rect": [
+        2512,
+        2224,
+        16,
+        48
+      ],
+      "label": "prop-city-architecture-v1-office-4 · piece 15",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "City architecture (regional-v9, candidate)",
+          "source": "src/generation/regional/city-architecture-assets-v1.json"
         }
       ]
     },
@@ -14245,11 +15483,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:763"
+          "source": "src/server/Realm.ts:764"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1055"
+          "source": "src/server/Realm.ts:1056"
         }
       ]
     },
@@ -15131,7 +16369,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:152"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:153"
         }
       ]
     },
@@ -15613,7 +16851,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:88"
         },
         {
           "system": "World generation",
@@ -15621,7 +16859,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:103"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:106"
         },
         {
           "system": "World generation",

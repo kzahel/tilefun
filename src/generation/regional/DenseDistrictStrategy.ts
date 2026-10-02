@@ -66,7 +66,7 @@ export class DenseDistrictStrategy extends DistrictStrategy {
     for (const plan of this.districts.query(search)) {
       for (const block of plan.blocks)
         for (const lot of block.lots) {
-          const art = buildingVisualBounds(denseBuilding(lot.buildingType));
+          const art = buildingVisualBounds(this.building(lot.buildingType));
           if (
             intersects(bounds, {
               minX: lot.anchor.x + art.minX / 16,
@@ -85,6 +85,9 @@ export class DenseDistrictStrategy extends DistrictStrategy {
       for (const p of this.furnishings(plan)) add(p.featureId, p.propType, p.wx / 16, p.wy / 16);
     }
     return props;
+  }
+  protected building(type: string) {
+    return denseBuilding(type);
   }
   protected surface(plan: DenseDistrictPlan, x: number, y: number): number {
     return denseSurfaceAt(plan, x, y);

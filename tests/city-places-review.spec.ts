@@ -2,6 +2,8 @@ import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { CITY_REVIEW_RUNS } from "../src/art/CityReviewRuns.js";
 import { CITY_PLACES_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
+import { CityPlacesSource } from "../src/generation/regional/CityPlacesPlanner.js";
+import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
 for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
   test(`${run} is indexed with exact feedback, phone controls and independent review state`, async ({
@@ -74,6 +76,18 @@ for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
       "data-generation",
       JSON.stringify(generation),
     );
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const g = (
+            document.querySelector("#game") as unknown as {
+              __game: import("../src/client/GameClient.js").GameClient;
+            }
+          ).__game;
+          return g.stateView.props.some((p) => p.proceduralId?.includes(":city-places-"));
+        }),
+      )
+      .toBe(true);
     const result = await page.evaluate(() => {
       const g = (
         document.querySelector("#game") as unknown as {
@@ -110,3 +124,30 @@ for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
       .toBe(false);
   });
 }
+
+for (const kind of ["office", "condo-wide"])
+  test(`v9 ${kind} can enter and return through its audited approach`, async ({ page }) => {
+    const plan = new CityPlacesSource(regionalWorld(2026), 9).owner(0, 0);
+    const lot = plan?.blocks.flatMap((b) => b.lots).find((l) => l.buildingType.includes(kind));
+    if (!lot) throw Error("Missing architecture lot");
+    const generation = {
+      type: "regional",
+      version: "regional-v9",
+      seed: 2026,
+      preset: "temperate-v1",
+    };
+    const arrival = { x: lot.entrance.x, y: lot.entrance.y, generation };
+    await page.goto(
+      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    );
+    await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByRole("button", { name: /^Enter (shop|apartment)/ })).toBeVisible();
+    await page.keyboard.press("e");
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
+    await page.getByRole("button", { name: "Return to street" }).click();
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
+    await expect(page.locator("#game")).toHaveAttribute(
+      "data-generation",
+      JSON.stringify(generation),
+    );
+  });

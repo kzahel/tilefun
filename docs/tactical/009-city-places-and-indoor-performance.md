@@ -75,3 +75,15 @@ layouts are ready. Record completed slices and remaining scope here.
   demo remains separately visitable in frozen v7. Native props and surface IDs
   are reused. Clear paths/doors and all actor routes are checked against actual
   collider geometry at positive/negative owners and two seeds.
+
+- `388f22b`: public-space slice committed; 1,135 unit tests and five targeted
+  browser checks passed. All 312 earlier candidates retained their identities.
+- Architecture candidate: regional-v9 / Workshop batch `architecture` has three
+  views. Wider three/five-level bay-front apartments use the audited native
+  closed module chain; a three/four-level office/services building uses native
+  glass lobby, matching flat roof/caps and brick floors/caps. Two shop families
+  accompany it, with seeded heights and spacing computed from native widths.
+  `city-architecture-assets-v1.json` pins four candidate recipes and doorway
+  facts; it contains no invented approvals. Source-use catalogue entries label
+  these as candidate generation assets. Geometry and native pixels were inspected;
+  office and residential interiors both pass entry/return browser checks.

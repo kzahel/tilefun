@@ -726,7 +726,9 @@ function renderDistrict() {
   required($("topology").parentElement?.querySelector("summary")).textContent =
     "Lots, doors & walking routes";
   required($("pieces").parentElement?.querySelector("summary")).textContent =
-    "Promoted buildings & source art";
+    placeMeta?.version === "regional-v9"
+      ? "Pinned candidate buildings & source art"
+      : "Promoted buildings & source art";
   $("pieces").replaceChildren();
   for (const p of denseReviewPrefabs(s)) {
     const row = document.createElement("p"),

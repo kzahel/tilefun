@@ -102,6 +102,12 @@
   ],
   "batches": [
     {
+      "id": "architecture",
+      "name": "Varied city architecture",
+      "description": "Playable regional-v9 places, shared with the explorer and game.",
+      "toolId": "districts"
+    },
+    {
       "id": "parks",
       "name": "Parks & squares",
       "description": "Playable regional-v8 places, shared with the explorer and game.",
@@ -3139,6 +3145,257 @@
             "prop-bench",
             "prop-city-dense-v1-ice-cream-3",
             "prop-city-dense-v1-gym-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v9-architecture",
+      "batchId": "architecture",
+      "name": "Residential & commercial neighborhood",
+      "prompt": "Review the wide apartment frontage and office/services building beside the park and public square.",
+      "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-architecture",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v9%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "7c68449ba9bb807f7d0624158745bd587425be7d11f6d9fdb0cf48e1312418f5",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-condo-wide-5",
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-architecture",
+        "revision": "745423b692afd42bbf7acd936c7b65773574cab38acb3715884293e65cd36541",
+        "renderFingerprint": "7c68449ba9bb807f7d0624158745bd587425be7d11f6d9fdb0cf48e1312418f5",
+        "caseId": "district-v9-architecture",
+        "districtRecipe": "city-places-v9",
+        "propTypes": [
+          "prop-city-architecture-v1-condo-wide-5",
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-seesaw",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-bench",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2656,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-condo-wide-5",
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-architecture",
+          "revision": "745423b692afd42bbf7acd936c7b65773574cab38acb3715884293e65cd36541",
+          "renderFingerprint": "7c68449ba9bb807f7d0624158745bd587425be7d11f6d9fdb0cf48e1312418f5",
+          "caseId": "district-v9-architecture",
+          "districtRecipe": "city-places-v9",
+          "propTypes": [
+            "prop-city-architecture-v1-condo-wide-5",
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-seesaw",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-bench",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v9-residential",
+      "batchId": "architecture",
+      "name": "Wide residential frontage",
+      "prompt": "Check native bay/infill/entrance joins, closed roof edges and the paved approaches to both apartment doors.",
+      "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-residential",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v9%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "8cf1c5218c85de17f58e409fbd93dbe29bff4c5bbdb91f83c7fb0bae31a9ceb9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-condo-wide-5"
+        ],
+        "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-residential",
+        "revision": "46d43b5714f8796a37ca809ebd9d8ec8c9dda737d22ba1e5afbf6fcce4fb8580",
+        "renderFingerprint": "8cf1c5218c85de17f58e409fbd93dbe29bff4c5bbdb91f83c7fb0bae31a9ceb9",
+        "caseId": "district-v9-residential",
+        "districtRecipe": "city-places-v9",
+        "propTypes": [
+          "prop-city-architecture-v1-condo-wide-5"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1904,
+          1376,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-condo-wide-5"
+          ],
+          "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-residential",
+          "revision": "46d43b5714f8796a37ca809ebd9d8ec8c9dda737d22ba1e5afbf6fcce4fb8580",
+          "renderFingerprint": "8cf1c5218c85de17f58e409fbd93dbe29bff4c5bbdb91f83c7fb0bae31a9ceb9",
+          "caseId": "district-v9-residential",
+          "districtRecipe": "city-places-v9",
+          "propTypes": [
+            "prop-city-architecture-v1-condo-wide-5"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v9-office",
+      "batchId": "architecture",
+      "name": "Office, services & shops",
+      "prompt": "Check the native office/services lobby, roof/floor closure and contrasting shop heights. All doors connect to the shared sidewalk.",
+      "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-office",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v9%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "dcfbf160783fbffb5999c6b2aabbda846f6b1863746c6e8b57b2ed46e9c3a91c",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-office",
+        "revision": "f3f93ce301aa6519c9d48315e6c3a87ca3e308ac745394a4c3181008e23afd68",
+        "renderFingerprint": "dcfbf160783fbffb5999c6b2aabbda846f6b1863746c6e8b57b2ed46e9c3a91c",
+        "caseId": "district-v9-office",
+        "districtRecipe": "city-places-v9",
+        "propTypes": [
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2656,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=architecture&case=district-v9-office",
+          "revision": "f3f93ce301aa6519c9d48315e6c3a87ca3e308ac745394a4c3181008e23afd68",
+          "renderFingerprint": "dcfbf160783fbffb5999c6b2aabbda846f6b1863746c6e8b57b2ed46e9c3a91c",
+          "caseId": "district-v9-office",
+          "districtRecipe": "city-places-v9",
+          "propTypes": [
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
             "prop-city-commercial-v1-meter",
             "prop-city-commercial-v1-car-east",
             "prop-city-commercial-v1-bin-blue",
@@ -9937,5 +10194,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "f9196b02f0a58d59c445fc642c87f7b47fc97fa4235702c955815f5b8cbcd29e"
+  "inputDigest": "4e0a7a45e754786cda36b0698a841a7493415ced17f1b061cbd02028ebb1f715"
 }

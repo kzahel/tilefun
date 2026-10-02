@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { required } from "../../art/ArtCatalog.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
@@ -16,7 +17,7 @@ const descriptor = {
   preset: "temperate-v1",
 } as const;
 it("realizes parking access, native bays and deterministic unique features across chunks", () => {
-  for (const revision of ["regional-v7", "regional-v8"] as const)
+  for (const revision of ["regional-v7", "regional-v8", "regional-v9"] as const)
     for (const seed of [2026, 42]) {
       const g = createGenerator({ ...descriptor, seed, version: revision });
       if (!(g.terrain instanceof CityPlacesStrategy)) throw Error("Wrong dispatch");
@@ -110,4 +111,19 @@ it("freezes the v8 public-place plan", () => {
       .update(JSON.stringify(g.terrain.districts.owner(0, 0)))
       .digest("hex"),
   ).toBe("35c0dd381c1f13e10b09c21a0f514a4a82a8422b277dc02c1034ccab344f2f02");
+});
+
+it("freezes v9 architecture and the native candidate recipe bank", () => {
+  const g = createGenerator({ ...descriptor, version: "regional-v9" });
+  if (!(g.terrain instanceof CityPlacesStrategy)) throw Error();
+  expect(
+    createHash("sha256")
+      .update(JSON.stringify(g.terrain.districts.owner(0, 0)))
+      .digest("hex"),
+  ).toBe("4feff35620e9fc939576415fa73c5c814e9d45c3d89f357b2566ce4b02dc7fe1");
+  expect(
+    createHash("sha256")
+      .update(readFileSync("src/generation/regional/city-architecture-assets-v1.json"))
+      .digest("hex"),
+  ).toBe("3d92d0ed05edf6aa5c82b91ed2410b4aa3efd18c2221e952866bba33f9bb6df0");
 });

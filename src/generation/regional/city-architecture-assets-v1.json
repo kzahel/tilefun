@@ -1,0 +1,815 @@
+{
+  "id": "city-architecture-assets-v1",
+  "review": "candidate",
+  "source": {
+    "sheetId": "me-complete",
+    "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "audit": "Wide condo uses the audited closed bay/infill/entrance chain. Office/services uses native Roof_1+caps, Middle_Floor_1+caps and Ground_Floor_Condo_2+caps; glass lobby centered at source 2456,2272. South-facing native pixels; no rotation, mirroring or stretched facade pieces. New compositions await human review.",
+  "buildings": [
+    {
+      "width": 320,
+      "topology": {
+        "modules": [
+          {
+            "id": "condo-4-left-bay",
+            "x": -160,
+            "width": 112,
+            "left": "closed",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-infill",
+            "x": -48,
+            "width": 64,
+            "left": "condo-4",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-infill",
+            "x": 16,
+            "width": 64,
+            "left": "condo-4",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-right-entrance",
+            "x": 80,
+            "width": 80,
+            "left": "condo-4",
+            "right": "closed"
+          }
+        ],
+        "roof": {
+          "datum": -176,
+          "depth": 112,
+          "parts": [
+            {
+              "frameCol": 69,
+              "frameRow": 119,
+              "spriteWidth": 112,
+              "spriteHeight": 112,
+              "dx": -104,
+              "dy": -176
+            },
+            {
+              "frameCol": 77,
+              "frameRow": 119,
+              "spriteWidth": 64,
+              "spriteHeight": 112,
+              "dx": -16,
+              "dy": -176
+            },
+            {
+              "frameCol": 77,
+              "frameRow": 119,
+              "spriteWidth": 64,
+              "spriteHeight": 112,
+              "dx": 48,
+              "dy": -176
+            },
+            {
+              "frameCol": 82,
+              "frameRow": 119,
+              "spriteWidth": 80,
+              "spriteHeight": 112,
+              "dx": 120,
+              "dy": -176
+            }
+          ]
+        }
+      },
+      "parts": [
+        {
+          "frameCol": 69,
+          "frameRow": 119,
+          "spriteWidth": 112,
+          "spriteHeight": 112,
+          "dx": -104,
+          "dy": -176
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 119,
+          "spriteWidth": 64,
+          "spriteHeight": 112,
+          "dx": -16,
+          "dy": -176
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 119,
+          "spriteWidth": 64,
+          "spriteHeight": 112,
+          "dx": 48,
+          "dy": -176
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 119,
+          "spriteWidth": 80,
+          "spriteHeight": 112,
+          "dx": 120,
+          "dy": -176
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 126,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -128
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -80
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 134,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": -104,
+          "dy": 0
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 126,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -128
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -80
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 134,
+          "spriteWidth": 64,
+          "spriteHeight": 80,
+          "dx": -16,
+          "dy": 0
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 126,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -128
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -80
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 134,
+          "spriteWidth": 64,
+          "spriteHeight": 80,
+          "dx": 48,
+          "dy": 0
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 126,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -128
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -80
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 134,
+          "spriteWidth": 80,
+          "spriteHeight": 80,
+          "dx": 120,
+          "dy": 0
+        }
+      ],
+      "type": "prop-city-architecture-v1-condo-wide-3",
+      "name": "Wide bay-front apartments · 3 levels",
+      "family": "condo-4",
+      "profile": "bay-front",
+      "floors": 3,
+      "review": "candidate",
+      "kind": "apartment",
+      "facing": "south",
+      "height": 288,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 128,
+        "dy": 24
+      },
+      "sourceType": "prop-city-v1-condo-wide-3",
+      "doorways": [
+        {
+          "id": "bay",
+          "dx": -112,
+          "dy": 0,
+          "width": 32,
+          "primary": false
+        },
+        {
+          "id": "arched",
+          "dx": 104,
+          "dy": -16,
+          "width": 32,
+          "primary": true
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "topology": {
+        "modules": [
+          {
+            "id": "condo-4-left-bay",
+            "x": -160,
+            "width": 112,
+            "left": "closed",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-infill",
+            "x": -48,
+            "width": 64,
+            "left": "condo-4",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-infill",
+            "x": 16,
+            "width": 64,
+            "left": "condo-4",
+            "right": "condo-4"
+          },
+          {
+            "id": "condo-4-right-entrance",
+            "x": 80,
+            "width": 80,
+            "left": "condo-4",
+            "right": "closed"
+          }
+        ],
+        "roof": {
+          "datum": -272,
+          "depth": 112,
+          "parts": [
+            {
+              "frameCol": 69,
+              "frameRow": 119,
+              "spriteWidth": 112,
+              "spriteHeight": 112,
+              "dx": -104,
+              "dy": -272
+            },
+            {
+              "frameCol": 77,
+              "frameRow": 119,
+              "spriteWidth": 64,
+              "spriteHeight": 112,
+              "dx": -16,
+              "dy": -272
+            },
+            {
+              "frameCol": 77,
+              "frameRow": 119,
+              "spriteWidth": 64,
+              "spriteHeight": 112,
+              "dx": 48,
+              "dy": -272
+            },
+            {
+              "frameCol": 82,
+              "frameRow": 119,
+              "spriteWidth": 80,
+              "spriteHeight": 112,
+              "dx": 120,
+              "dy": -272
+            }
+          ]
+        }
+      },
+      "parts": [
+        {
+          "frameCol": 69,
+          "frameRow": 119,
+          "spriteWidth": 112,
+          "spriteHeight": 112,
+          "dx": -104,
+          "dy": -272
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 119,
+          "spriteWidth": 64,
+          "spriteHeight": 112,
+          "dx": -16,
+          "dy": -272
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 119,
+          "spriteWidth": 64,
+          "spriteHeight": 112,
+          "dx": 48,
+          "dy": -272
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 119,
+          "spriteWidth": 80,
+          "spriteHeight": 112,
+          "dx": 120,
+          "dy": -272
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 126,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -224
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -80
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -128
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 130,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": -104,
+          "dy": -176
+        },
+        {
+          "frameCol": 69,
+          "frameRow": 134,
+          "spriteWidth": 112,
+          "spriteHeight": 80,
+          "dx": -104,
+          "dy": 0
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 126,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -224
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -80
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -128
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": -16,
+          "dy": -176
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 134,
+          "spriteWidth": 64,
+          "spriteHeight": 80,
+          "dx": -16,
+          "dy": 0
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 126,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -224
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -80
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -128
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 130,
+          "spriteWidth": 64,
+          "spriteHeight": 48,
+          "dx": 48,
+          "dy": -176
+        },
+        {
+          "frameCol": 77,
+          "frameRow": 134,
+          "spriteWidth": 64,
+          "spriteHeight": 80,
+          "dx": 48,
+          "dy": 0
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 126,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -224
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -80
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -128
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 130,
+          "spriteWidth": 80,
+          "spriteHeight": 48,
+          "dx": 120,
+          "dy": -176
+        },
+        {
+          "frameCol": 82,
+          "frameRow": 134,
+          "spriteWidth": 80,
+          "spriteHeight": 80,
+          "dx": 120,
+          "dy": 0
+        }
+      ],
+      "type": "prop-city-architecture-v1-condo-wide-5",
+      "name": "Wide bay-front apartments · 5 levels",
+      "family": "condo-4",
+      "profile": "bay-front",
+      "floors": 5,
+      "review": "candidate",
+      "kind": "apartment",
+      "facing": "south",
+      "height": 384,
+      "groundDepth": 32,
+      "entrance": {
+        "dx": 128,
+        "dy": 24
+      },
+      "sourceType": "prop-city-v1-condo-wide-5",
+      "doorways": [
+        {
+          "id": "bay",
+          "dx": -112,
+          "dy": 0,
+          "width": 32,
+          "primary": false
+        },
+        {
+          "id": "arched",
+          "dx": 104,
+          "dy": -16,
+          "width": 32,
+          "primary": true
+        }
+      ]
+    },
+    {
+      "type": "prop-city-architecture-v1-office-3",
+      "name": "Office & services · 3 levels",
+      "kind": "shop",
+      "facing": "south",
+      "family": "modular-commercial",
+      "profile": "flat-front",
+      "floors": 3,
+      "review": "candidate",
+      "width": 144,
+      "height": 272,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": 0,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -176
+        },
+        {
+          "frameCol": 140,
+          "frameRow": 121,
+          "spriteWidth": 16,
+          "spriteHeight": 96,
+          "dx": -64,
+          "dy": -176
+        },
+        {
+          "frameCol": 148,
+          "frameRow": 121,
+          "spriteWidth": 16,
+          "spriteHeight": 96,
+          "dx": 64,
+          "dy": -176
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 158,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": -64,
+          "dy": -48
+        },
+        {
+          "frameCol": 166,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": 64,
+          "dy": -48
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 158,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": -64,
+          "dy": -112
+        },
+        {
+          "frameCol": 166,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": 64,
+          "dy": -112
+        },
+        {
+          "frameCol": 150,
+          "frameRow": 139,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frameCol": 149,
+          "frameRow": 139,
+          "spriteWidth": 16,
+          "spriteHeight": 48,
+          "dx": -64,
+          "dy": 0
+        },
+        {
+          "frameCol": 157,
+          "frameRow": 139,
+          "spriteWidth": 16,
+          "spriteHeight": 48,
+          "dx": 64,
+          "dy": 0
+        }
+      ],
+      "doorways": [
+        {
+          "id": "office-lobby",
+          "dx": 0,
+          "dy": 0,
+          "width": 32,
+          "primary": true
+        }
+      ]
+    },
+    {
+      "type": "prop-city-architecture-v1-office-4",
+      "name": "Office & services · 4 levels",
+      "kind": "shop",
+      "facing": "south",
+      "family": "modular-commercial",
+      "profile": "flat-front",
+      "floors": 4,
+      "review": "candidate",
+      "width": 144,
+      "height": 336,
+      "groundDepth": 48,
+      "entrance": {
+        "dx": 0,
+        "dy": 32
+      },
+      "parts": [
+        {
+          "frameCol": 141,
+          "frameRow": 121,
+          "spriteWidth": 112,
+          "spriteHeight": 96,
+          "dx": 0,
+          "dy": -240
+        },
+        {
+          "frameCol": 140,
+          "frameRow": 121,
+          "spriteWidth": 16,
+          "spriteHeight": 96,
+          "dx": -64,
+          "dy": -240
+        },
+        {
+          "frameCol": 148,
+          "frameRow": 121,
+          "spriteWidth": 16,
+          "spriteHeight": 96,
+          "dx": 64,
+          "dy": -240
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -48
+        },
+        {
+          "frameCol": 158,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": -64,
+          "dy": -48
+        },
+        {
+          "frameCol": 166,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": 64,
+          "dy": -48
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -112
+        },
+        {
+          "frameCol": 158,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": -64,
+          "dy": -112
+        },
+        {
+          "frameCol": 166,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": 64,
+          "dy": -112
+        },
+        {
+          "frameCol": 159,
+          "frameRow": 124,
+          "spriteWidth": 112,
+          "spriteHeight": 64,
+          "dx": 0,
+          "dy": -176
+        },
+        {
+          "frameCol": 158,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": -64,
+          "dy": -176
+        },
+        {
+          "frameCol": 166,
+          "frameRow": 124,
+          "spriteWidth": 16,
+          "spriteHeight": 64,
+          "dx": 64,
+          "dy": -176
+        },
+        {
+          "frameCol": 150,
+          "frameRow": 139,
+          "spriteWidth": 112,
+          "spriteHeight": 48,
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "frameCol": 149,
+          "frameRow": 139,
+          "spriteWidth": 16,
+          "spriteHeight": 48,
+          "dx": -64,
+          "dy": 0
+        },
+        {
+          "frameCol": 157,
+          "frameRow": 139,
+          "spriteWidth": 16,
+          "spriteHeight": 48,
+          "dx": 64,
+          "dy": 0
+        }
+      ],
+      "doorways": [
+        {
+          "id": "office-lobby",
+          "dx": 0,
+          "dy": 0,
+          "width": 32,
+          "primary": true
+        }
+      ]
+    }
+  ]
+}

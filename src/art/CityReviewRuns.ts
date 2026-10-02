@@ -1,5 +1,10 @@
 /** Shared routing metadata for independent city review queues. */
 export const CITY_REVIEW_RUNS = {
+  architecture: {
+    name: "Varied city architecture",
+    version: "regional-v9",
+    recipe: "city-places-v9",
+  },
   parks: { name: "Parks & squares", version: "regional-v8", recipe: "city-places-v8" },
   parking: { name: "Small parking lots", version: "regional-v7", recipe: "city-places-v7" },
 } as const;

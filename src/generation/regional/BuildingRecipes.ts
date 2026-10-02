@@ -1,3 +1,4 @@
+import { CITY_ARCHITECTURE_BUILDINGS } from "./CityArchitectureAssets.js";
 import { CITY_BUILDING_PREFABS } from "./CityBuildingPrefabs.js";
 import { DENSE_CITY_BUILDINGS } from "./DenseCityAssets.js";
 
@@ -80,6 +81,7 @@ export function buildingRecipe(type: string): BuildingRecipe | undefined {
   return (
     BUILDING_RECIPES.find((recipe) => recipe.type === type) ??
     DENSE_CITY_BUILDINGS.find((recipe) => recipe.type === type) ??
+    CITY_ARCHITECTURE_BUILDINGS.find((recipe) => recipe.type === type) ??
     CITY_BUILDING_PREFABS.find((recipe) => recipe.type === type)
   );
 }

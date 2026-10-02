@@ -1,3 +1,4 @@
+import { buildingRecipe } from "./BuildingRecipes.js";
 import {
   type CityPlacesPlan,
   type CityPlacesRevision,
@@ -12,6 +13,11 @@ export class CityPlacesStrategy extends DenseDistrictStrategy {
   constructor(world: RegionalWorld, revision: CityPlacesRevision) {
     super(world);
     this.districts = new CityPlacesSource(world, revision);
+  }
+  protected override building(type: string) {
+    const recipe = buildingRecipe(type);
+    if (!recipe) throw new Error(`Missing city recipe: ${type}`);
+    return recipe;
   }
   protected override surface(plan: DenseDistrictPlan, x: number, y: number) {
     return cityPlacesSurfaceAt(plan as CityPlacesPlan, x, y);

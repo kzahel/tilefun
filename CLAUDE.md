@@ -136,3 +136,10 @@ pocket park beside apartments, neighborhood park with loop paths and play area,
 and a square with open market reserve. Place recipes live in
 `PublicSpaceRecipes.ts`; clear paths and paving are distinct facts. Saved v8
 output and earlier review identities stay pinned. These views await approval.
+
+Varied architecture candidates use regional-v9 / `run=architecture` (three
+Workshop views). `city-architecture-assets-v1.json` pins new wide residential
+and office/services recipes, source rectangles and doorway facts. This is a
+candidate bank, not an approval promotion. Never regenerate in builds. Shared
+building factories, interiors, planner and surface realization consume it;
+source use is indexed. Saved v9 and prior revisions remain frozen.

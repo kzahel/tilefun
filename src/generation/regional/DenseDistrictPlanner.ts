@@ -14,7 +14,8 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "dense-district-v2"
     | "commercial-district-v1"
     | "city-places-v7"
-    | "city-places-v8";
+    | "city-places-v8"
+    | "city-places-v9";
   readonly center: { x: number; y: number };
   readonly actors: ActorPlacement[];
   /** Absent in frozen v4. Threshold-to-sidewalk connections belong to v5. */

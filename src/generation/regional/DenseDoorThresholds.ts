@@ -1,4 +1,5 @@
 import type { BuildingRecipe } from "./BuildingRecipes.js";
+import { CITY_ARCHITECTURE_BUILDINGS } from "./CityArchitectureAssets.js";
 
 /** Native ME doorway/last-step edges audited on the pinned source sheet.
  * Coordinates refer to source pixels, not interaction positions or whole-facade
@@ -39,6 +40,8 @@ const SOURCE_DOORS = [
 ] as const;
 
 export function denseDoorThresholds(recipe: BuildingRecipe) {
+  const pinned = CITY_ARCHITECTURE_BUILDINGS.find((r) => r.type === recipe.type);
+  if (pinned) return pinned.doorways;
   const thresholds = recipe.parts.flatMap((part) => {
     const source = SOURCE_DOORS.find(
       (s) =>
