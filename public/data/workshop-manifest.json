@@ -102,6 +102,12 @@
   ],
   "batches": [
     {
+      "id": "parks",
+      "name": "Parks & squares",
+      "description": "Playable regional-v8 places, shared with the explorer and game.",
+      "toolId": "districts"
+    },
+    {
       "id": "parking",
       "name": "Small parking lots",
       "description": "Playable regional-v7 places, shared with the explorer and game.",
@@ -3138,6 +3144,338 @@
             "prop-city-commercial-v1-bin-blue",
             "prop-city-commercial-v1-planter",
             "prop-street-lamp"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v8-public-block",
+      "batchId": "parks",
+      "name": "Public spaces neighborhood",
+      "prompt": "Compare three public spaces beside housing and shops. All paths and furniture are actual generated placements.",
+      "url": "/tilefun/building-lab.html?run=parks&case=district-v8-public-block",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v8%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "4d9c68cf8ba8160f9a2ab750787474383bae962b0649ef09f5455936a2b1a308",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=parks&case=district-v8-public-block",
+        "revision": "853f1efd838faf7bfb86146607e94669247f80634917c0ae0a8daa029abbb618",
+        "renderFingerprint": "4d9c68cf8ba8160f9a2ab750787474383bae962b0649ef09f5455936a2b1a308",
+        "caseId": "district-v8-public-block",
+        "districtRecipe": "city-places-v8",
+        "propTypes": [
+          "prop-oak-tree",
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-commercial-v1-planter",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-bench",
+          "prop-oak-tree",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-seesaw",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-bench",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2640,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=parks&case=district-v8-public-block",
+          "revision": "853f1efd838faf7bfb86146607e94669247f80634917c0ae0a8daa029abbb618",
+          "renderFingerprint": "4d9c68cf8ba8160f9a2ab750787474383bae962b0649ef09f5455936a2b1a308",
+          "caseId": "district-v8-public-block",
+          "districtRecipe": "city-places-v8",
+          "propTypes": [
+            "prop-oak-tree",
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-commercial-v1-planter",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-bench",
+            "prop-oak-tree",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-seesaw",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-bench",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v8-pocket",
+      "batchId": "parks",
+      "name": "Pocket park beside apartments",
+      "prompt": "Review the compact planted park, seating and paths beside the apartment frontage.",
+      "url": "/tilefun/building-lab.html?run=parks&case=district-v8-pocket",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v8%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "f043e83ef9069e9028fb3c4b919c8981f0d970455379b80d698f18d354821d10",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-condo-bay-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=parks&case=district-v8-pocket",
+        "revision": "ddd5035c93188861d28430ab16c8553d47029b7bec2d1e4af1f87d50c721f229",
+        "renderFingerprint": "f043e83ef9069e9028fb3c4b919c8981f0d970455379b80d698f18d354821d10",
+        "caseId": "district-v8-pocket",
+        "districtRecipe": "city-places-v8",
+        "propTypes": [
+          "prop-oak-tree",
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-commercial-v1-planter",
+          "prop-bench",
+          "prop-oak-tree"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          1376,
+          2208
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-condo-bay-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=parks&case=district-v8-pocket",
+          "revision": "ddd5035c93188861d28430ab16c8553d47029b7bec2d1e4af1f87d50c721f229",
+          "renderFingerprint": "f043e83ef9069e9028fb3c4b919c8981f0d970455379b80d698f18d354821d10",
+          "caseId": "district-v8-pocket",
+          "districtRecipe": "city-places-v8",
+          "propTypes": [
+            "prop-oak-tree",
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-commercial-v1-planter",
+            "prop-bench",
+            "prop-oak-tree"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v8-park",
+      "batchId": "parks",
+      "name": "Neighborhood park & play area",
+      "prompt": "Review connected loop paths, open lawn, tree shade, seating and the play area. Paths must leave space for people.",
+      "url": "/tilefun/building-lab.html?run=parks&case=district-v8-park",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v8%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "5d6cde52cd7db88f53d438037c54161b3d42e5af7599cf350034c40052f1f09f",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=parks&case=district-v8-park",
+        "revision": "743e3357e81b638499cf1fd4fc150c5969fdd3591ef0e55214cc126a1ad209ff",
+        "renderFingerprint": "5d6cde52cd7db88f53d438037c54161b3d42e5af7599cf350034c40052f1f09f",
+        "caseId": "district-v8-park",
+        "districtRecipe": "city-places-v8",
+        "propTypes": [
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-seesaw",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          176,
+          272,
+          1904
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=parks&case=district-v8-park",
+          "revision": "743e3357e81b638499cf1fd4fc150c5969fdd3591ef0e55214cc126a1ad209ff",
+          "renderFingerprint": "5d6cde52cd7db88f53d438037c54161b3d42e5af7599cf350034c40052f1f09f",
+          "caseId": "district-v8-park",
+          "districtRecipe": "city-places-v8",
+          "propTypes": [
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-seesaw",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v8-square",
+      "batchId": "parks",
+      "name": "Public square & market reserve",
+      "prompt": "Review perimeter seating, a clear through route and the open center reserved for a future market.",
+      "url": "/tilefun/building-lab.html?run=parks&case=district-v8-square",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v8%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "894ff1c7691ae1d3314d22339a2efca87bd16a3b97bbb4927a0a43b176c98bb4",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=parks&case=district-v8-square",
+        "revision": "d59ecf2e19220d45b05a915edfeebc5605ec2a2f90866dc5b98242acbe978c49",
+        "renderFingerprint": "894ff1c7691ae1d3314d22339a2efca87bd16a3b97bbb4927a0a43b176c98bb4",
+        "caseId": "district-v8-square",
+        "districtRecipe": "city-places-v8",
+        "propTypes": [
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-bench",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          1296,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=parks&case=district-v8-square",
+          "revision": "d59ecf2e19220d45b05a915edfeebc5605ec2a2f90866dc5b98242acbe978c49",
+          "renderFingerprint": "894ff1c7691ae1d3314d22339a2efca87bd16a3b97bbb4927a0a43b176c98bb4",
+          "caseId": "district-v8-square",
+          "districtRecipe": "city-places-v8",
+          "propTypes": [
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-bench",
+            "prop-bench"
           ]
         }
       }
@@ -9599,5 +9937,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "4bf87d3c0adbabcf68eb57c3200231a69a5f6f849281f60d27269649950c8876"
+  "inputDigest": "f9196b02f0a58d59c445fc642c87f7b47fc97fa4235702c955815f5b8cbcd29e"
 }

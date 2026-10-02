@@ -91,7 +91,49 @@ export const PARKING_DEMO_GENERATION: GenerationDescriptor = {
   ...DENSE_DEMO_GENERATION,
   version: "regional-v7",
 };
+export const PUBLIC_DEMO_GENERATION: GenerationDescriptor = {
+  ...DENSE_DEMO_GENERATION,
+  version: "regional-v8",
+};
 export const CITY_PLACES_REVIEW_CASES = [
+  {
+    id: "district-v8-public-block",
+    name: "Public spaces neighborhood",
+    prompt:
+      "Compare three public spaces beside housing and shops. All paths and furniture are actual generated placements.",
+    window: "whole",
+    generation: PUBLIC_DEMO_GENERATION,
+    run: "parks",
+  },
+  {
+    id: "district-v8-pocket",
+    name: "Pocket park beside apartments",
+    prompt: "Review the compact planted park, seating and paths beside the apartment frontage.",
+    window: "place",
+    crop: [-42, -38, -4, 1],
+    generation: PUBLIC_DEMO_GENERATION,
+    run: "parks",
+  },
+  {
+    id: "district-v8-park",
+    name: "Neighborhood park & play area",
+    prompt:
+      "Review connected loop paths, open lawn, tree shade, seating and the play area. Paths must leave space for people.",
+    window: "place",
+    crop: [-42, 2, -3, 43],
+    generation: PUBLIC_DEMO_GENERATION,
+    run: "parks",
+  },
+  {
+    id: "district-v8-square",
+    name: "Public square & market reserve",
+    prompt:
+      "Review perimeter seating, a clear through route and the open center reserved for a future market.",
+    window: "place",
+    crop: [3, 2, 43, 43],
+    generation: PUBLIC_DEMO_GENERATION,
+    run: "parks",
+  },
   {
     id: "district-v7-parking-block",
     name: "Shops beside a parking lot",
@@ -182,7 +224,7 @@ export function denseReviewComposition(s: DenseReviewScene) {
     bounds: s.bounds,
     plan: s.plan,
     assets: DENSE_CITY_ASSETS,
-    ...(s.generation.version === "regional-v6" || s.plan.recipe === "city-places-v7"
+    ...(s.generation.version === "regional-v6" || s.plan.recipe.startsWith("city-places-")
       ? { commercialAssets: COMMERCIAL_CITY_ASSETS }
       : {}),
     props: s.props,
@@ -200,7 +242,7 @@ export function denseReviewSourceRects(s: DenseReviewScene): ArtRect[] {
       (p) => [p.frameCol * 16, p.frameRow * 16, p.spriteWidth, p.spriteHeight] as ArtRect,
     ),
   );
-  if (s.generation.version === "regional-v6" || s.plan.recipe === "city-places-v7") {
+  if (s.generation.version === "regional-v6" || s.plan.recipe.startsWith("city-places-")) {
     rects.push(
       ...COMMERCIAL_SURFACE_CELLS.flatMap((cell) => cell.map((p) => [...p.rect] as ArtRect)),
     );

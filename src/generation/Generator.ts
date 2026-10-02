@@ -67,6 +67,9 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
         case "regional-v5":
           terrain = new DenseDistrictStrategy(world, true);
           break;
+        case "regional-v8":
+          terrain = new CityPlacesStrategy(world, 8);
+          break;
         case "regional-v7":
           terrain = new CityPlacesStrategy(world, 7);
           break;

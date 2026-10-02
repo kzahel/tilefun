@@ -65,3 +65,13 @@ layouts are ready. Record completed slices and remaining scope here.
   seeded occupancy, perimeter planting, six-tile driving access and a separate
   clear walking entrance. The southwest building lots are reserved for this
   place; approved v6 stays unchanged. Uses existing surface IDs 15–75 and art.
+
+- `eaba2f6`: parking-lot slice committed; 1,134 unit tests and three targeted
+  browser checks passed. All 309 previous candidate identities are unchanged.
+- Public spaces candidate: regional-v8 reserves a pocket park beside one native
+  apartment, a neighborhood park with connected loop paths, seating and play
+  area, and a paved square. Four independent views are in Workshop batch `parks`.
+  The square's central cross and open market reserve stay clear. The parking
+  demo remains separately visitable in frozen v7. Native props and surface IDs
+  are reused. Clear paths/doors and all actor routes are checked against actual
+  collider geometry at positive/negative owners and two seeds.

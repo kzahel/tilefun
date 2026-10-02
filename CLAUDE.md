@@ -130,3 +130,9 @@ saved v7 output is frozen. Reviews without buildings can have empty prefab IDs.
 Gameplay interiors cache native static floor/wall layers per active room;
 furniture edits and actor depth remain live. `npm run interiors:bench -- --headed`
 checks pixel parity and measures the isolated path through bundled Chromium.
+
+Parks & squares candidates use regional-v8 / `run=parks` (four Workshop views):
+pocket park beside apartments, neighborhood park with loop paths and play area,
+and a square with open market reserve. Place recipes live in
+`PublicSpaceRecipes.ts`; clear paths and paving are distinct facts. Saved v8
+output and earlier review identities stay pinned. These views await approval.

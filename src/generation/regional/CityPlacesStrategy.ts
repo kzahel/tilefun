@@ -20,7 +20,9 @@ export class CityPlacesStrategy extends DenseDistrictStrategy {
     const p = plan as CityPlacesPlan;
     return [
       ...p.commercial.furniture,
-      ...super.furnishings(plan).filter((p) => p.featureId.includes(":green:")),
+      ...(p.recipe === "city-places-v7"
+        ? super.furnishings(plan).filter((p) => p.featureId.includes(":green:"))
+        : []),
       ...p.places.flatMap((p) => p.furniture),
     ];
   }

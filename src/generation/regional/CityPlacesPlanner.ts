@@ -15,12 +15,14 @@ import {
   insideDenseBounds,
 } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
+import { publicSpace } from "./PublicSpaceRecipes.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
-export type CityPlacesRevision = 7;
+export type CityPlacesRevision = 7 | 8;
 export interface CityPlace {
   id: string;
-  kind: "parking-lot";
+  kind: "parking-lot" | "pocket-park" | "neighborhood-park" | "square";
+  paving?: Bounds[];
   bounds: Bounds;
   driving: Bounds[];
   paths: Bounds[];
@@ -30,7 +32,7 @@ export interface CityPlace {
   entrances: { x: number; y: number; mode: "walking" | "driving" }[];
 }
 export interface CityPlacesPlan extends DenseDistrictPlan {
-  recipe: "city-places-v7";
+  recipe: "city-places-v7" | "city-places-v8";
   commercial: CommercialDistrictPlan["commercial"];
   places: CityPlace[];
 }
@@ -126,6 +128,54 @@ export function cityPlacesDistrict(
   const overlays = base.commercial.overlays.filter(
     (p) => !(p.x / 16 >= x - 12 && p.x / 16 <= x + 2 && p.y / 16 >= y + 16 && p.y / 16 <= y + 28),
   );
+  if (revision >= 8) {
+    const nw = base.blocks.find((b) => b.id.endsWith(":0:0"));
+    const home = nw?.lots[0];
+    if (!home) throw new Error("Missing public-space residential frontage");
+    const dx = x - 14 - home.anchor.x;
+    const moved = {
+      ...home,
+      anchor: { ...home.anchor, x: home.anchor.x + dx },
+      entrance: { ...home.entrance, x: home.entrance.x + dx },
+      bounds: { ...home.bounds, minX: home.bounds.minX + dx, maxX: home.bounds.maxX + dx },
+    };
+    const publicBlocks = blocks.map((b) => (b.id === nw.id ? { ...b, lots: [moved] } : b));
+    const remaining = new Set(publicBlocks.flatMap((b) => b.lots.map((l) => l.id)));
+    return {
+      ...base,
+      id,
+      recipe: "city-places-v8",
+      blocks: publicBlocks,
+      entrancePaths: (base.entrancePaths ?? [])
+        .filter((p) => remaining.has(p.lotId))
+        .map((p) =>
+          p.lotId === home.id
+            ? {
+                ...p,
+                threshold: { ...p.threshold, x: p.threshold.x + dx },
+                sidewalk: { ...p.sidewalk, x: p.sidewalk.x + dx },
+                bounds: { ...p.bounds, minX: p.bounds.minX + dx, maxX: p.bounds.maxX + dx },
+              }
+            : p,
+        ),
+      commercial: base.commercial,
+      places: [
+        publicSpace(`${id}:pocket`, "pocket-park", {
+          minX: x - 37,
+          minY: y - 33,
+          maxX: x - 23,
+          maxY: y - 10,
+        }),
+        publicSpace(`${id}:park`, "neighborhood-park", {
+          minX: x - 37,
+          minY: y + 10,
+          maxX: x - 8,
+          maxY: y + 33,
+        }),
+        publicSpace(`${id}:square`, "square", base.park),
+      ],
+    };
+  }
   return {
     ...base,
     id,
@@ -142,7 +192,9 @@ export function cityPlacesSurfaceAt(plan: CityPlacesPlan, x: number, y: number):
     plan.places.some((p) => p.driving.some((b) => insideDenseBounds(b, x, y)));
   const paved =
     road(x, y) ||
-    plan.places.some((p) => p.paths.some((b) => insideDenseBounds(b, x, y))) ||
+    plan.places.some((p) =>
+      [...p.paths, ...(p.paving ?? [])].some((b) => insideDenseBounds(b, x, y)),
+    ) ||
     commercialDistrictSurfaceAt(plan as unknown as CommercialDistrictPlan, x, y) !== RoadType.None;
   return paved
     ? commercialSurfaceAt(x, y, road, [

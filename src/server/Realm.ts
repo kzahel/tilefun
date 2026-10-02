@@ -637,9 +637,14 @@ export class Realm {
         dormantClientIds.has(session.clientId) ||
         this.interior ||
         (this.generation.type === "regional" &&
-          ["regional-v3", "regional-v4", "regional-v5", "regional-v6", "regional-v7"].includes(
-            this.generation.version,
-          ))
+          [
+            "regional-v3",
+            "regional-v4",
+            "regional-v5",
+            "regional-v6",
+            "regional-v7",
+            "regional-v8",
+          ].includes(this.generation.version))
       )
         continue;
       if (!session.editorEnabled && !session.debugPaused) {
@@ -1078,9 +1083,14 @@ export class Realm {
         !this.interior &&
         !(
           this.generation.type === "regional" &&
-          ["regional-v3", "regional-v4", "regional-v5", "regional-v6", "regional-v7"].includes(
-            this.generation.version,
-          )
+          [
+            "regional-v3",
+            "regional-v4",
+            "regional-v5",
+            "regional-v6",
+            "regional-v7",
+            "regional-v8",
+          ].includes(this.generation.version)
         )
       )
         spawnInitialChickens(

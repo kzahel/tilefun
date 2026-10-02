@@ -1057,7 +1057,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:78"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:80"
         },
         {
           "system": "World generation",
@@ -1122,6 +1122,10 @@
           "source": "src/generation/regional/CommercialDistrictPlanner.ts:153"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:49"
+        },
+        {
           "system": "Commercial streets (regional-v6, promoted)",
           "source": "src/generation/regional/commercial-city-assets-v1.json"
         }
@@ -1142,6 +1146,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CommercialDistrictPlanner.ts:154"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:33"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:47"
         },
         {
           "system": "Commercial streets (regional-v6, promoted)",
@@ -1743,7 +1755,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:85"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
         },
         {
           "system": "World generation",
@@ -1756,6 +1768,30 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:30"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:35"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:36"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:37"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:38"
         }
       ]
     },
@@ -1960,6 +1996,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:686"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:41"
         }
       ]
     },
@@ -2478,6 +2518,10 @@
           "source": "src/generation/regional/DistrictStrategy.ts:217"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:50"
+        },
+        {
           "system": "Street starter review (candidate)",
           "source": "src/generation/regional/StreetRecipes.ts:138"
         },
@@ -2554,6 +2598,22 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:211"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:32"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:39"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:40"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:46"
         },
         {
           "system": "Street starter review (candidate)",
@@ -14185,11 +14245,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:758"
+          "source": "src/server/Realm.ts:763"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1050"
+          "source": "src/server/Realm.ts:1055"
         }
       ]
     },
@@ -15071,7 +15131,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:151"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:152"
         }
       ]
     },
@@ -15553,7 +15613,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:85"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
         },
         {
           "system": "World generation",
@@ -15566,6 +15626,30 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:30"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:31"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:35"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:36"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:37"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:38"
         }
       ]
     },
@@ -15794,6 +15878,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:686"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/PublicSpaceRecipes.ts:41"
         }
       ]
     },
