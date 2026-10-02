@@ -16,10 +16,12 @@ import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
 import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
+import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 import { CITY_SURFACE_CASES, composeCitySurface } from "../src/road/CitySurfaceRecipes.js";
 import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
+import { composeStreetStarterSurface } from "../src/road/StreetStarterSurface.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
 
 function files(dir: string): string[] {
@@ -179,6 +181,20 @@ const surfaceTiles = new Map(
     composeCitySurface(c).map((p) => [p.rect.join(":"), p] as const),
   ),
 );
+const streetTiles = new Map(
+  STREET_REVIEW_SCENES.flatMap((c) =>
+    composeStreetStarterSurface(c.bounds).map((p) => [p.rect.join(":"), p] as const),
+  ),
+);
+for (const [key, piece] of streetTiles)
+  add(
+    `surface:street-starter-v1:${key}`,
+    "me-complete",
+    piece.rect,
+    `Street starter · ${piece.label}`,
+    "terrain",
+    [{ system: "Street starter review (candidate)", source: "src/road/StreetStarterSurface.ts" }],
+  );
 for (const [key, piece] of surfaceTiles)
   add(
     `surface:city-v1:${key}`,

@@ -5,12 +5,14 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { StreetRect, StreetScene } from "../generation/regional/StreetRecipes.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { drawCitySurfacePieces } from "../rendering/CitySurfaceRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
+import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
 import { World } from "../world/World.js";
 
-/** Phase-0 furniture stage. Surface bands are diagnostics, sprites/collision
- * use the actual game factories and renderer; this is not a district generator.
+/** Phase-0 furniture stage. Surfaces reuse the dense city composer; sprites and
+ * collision use the game factories/renderer. This is not a district generator.
  */
 export function drawStreetShowcase(
   canvas: HTMLCanvasElement,
@@ -34,12 +36,7 @@ export function drawStreetShowcase(
   };
   ctx.fillStyle = "#20302a";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#83958c";
-  ctx.fillRect(...rect({ ...b, minY: 0, maxY: 96 }));
-  ctx.fillStyle = "#b8b9a6";
-  ctx.fillRect(...rect({ ...b, minY: 88, maxY: 96 }));
-  ctx.fillStyle = "#394341";
-  ctx.fillRect(...rect({ ...b, minY: 96 }));
+  drawCitySurfacePieces(ctx, sheet, composeStreetStarterSurface(b), b.minX, b.minY, 2);
   ctx.strokeStyle = "#d3cba7";
   ctx.lineWidth = 2;
   for (const bay of scene.parking) ctx.strokeRect(...rect(bay));

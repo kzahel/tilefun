@@ -23,6 +23,7 @@ import {
   citySurfaceComposition,
   composeCitySurface,
 } from "../road/CitySurfaceRecipes.js";
+import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
 import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
 import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
@@ -89,6 +90,9 @@ function reviewSourceRects(prefabs: readonly BuildingRecipe[], street?: StreetSc
       const s = createProp(p.type, p.wx, p.wy).sprite;
       return [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect;
     }) ?? []),
+    ...(street
+      ? composeStreetStarterSurface(street.bounds).map((p) => [...p.rect] as ArtRect)
+      : []),
   ];
 }
 if (streetRun) {
@@ -612,7 +616,7 @@ function render() {
     $("facts").textContent =
       `${stats.width}×${stats.height} native stage pixels · ${currentStreet().props.length} street props · 40px clear walking strip`;
     $("topology").textContent =
-      "Green: clear walking strip. Gold: door approach. Red: actual game collision. Surface bands and parking paint are diagnostic; this is the starter palette, not yet a generated city.";
+      "The pavement, asphalt and curbs use the same source tiles and composer as the dense neighborhood. Green: clear walking strip. Gold: door approach. Red: actual game collision. Parking outlines remain placement guides; this palette is not yet a generated city.";
     $("source-link").textContent = "Inspect this scene’s source art ↗";
     required($("topology").parentElement?.querySelector("summary")).textContent =
       "Placement & clearances";

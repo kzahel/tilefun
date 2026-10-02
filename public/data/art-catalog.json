@@ -8440,6 +8440,114 @@
       ]
     },
     {
+      "id": "surface:street-starter-v1:112:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1984,
+        16,
+        16
+      ],
+      "label": "Street starter · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:street-starter-v1:96:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1984,
+        16,
+        16
+      ],
+      "label": "Street starter · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:street-starter-v1:112:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        2000,
+        16,
+        16
+      ],
+      "label": "Street starter · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:street-starter-v1:96:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        2000,
+        16,
+        16
+      ],
+      "label": "Street starter · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:street-starter-v1:32:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1952,
+        16,
+        16
+      ],
+      "label": "Street starter · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:street-starter-v1:80:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1904,
+        16,
+        16
+      ],
+      "label": "Street starter · Asphalt fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Street starter review (candidate)",
+          "source": "src/road/StreetStarterSurface.ts"
+        }
+      ]
+    },
+    {
       "id": "surface:city-v1:96:1984:16:16",
       "sheetId": "me-complete",
       "rect": [

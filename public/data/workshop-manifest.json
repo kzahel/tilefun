@@ -2016,7 +2016,7 @@
       "prompt": "Check the pay-station art, curb placement and spacing beside the parking bays.",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-meters",
       "kind": "art",
-      "fingerprint": "b7688a6ee82f04790241d1bb89bc691de2cf4954b787569f1a0979e3376eb0f7",
+      "fingerprint": "ff18157ffd2f1d006c9102f0aa03c2acda8b67e348dd59452fe335f2579880bb",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2024,8 +2024,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-meters",
-        "revision": "5da1f1280a0e96ad7acd855903aa5b585489d5f1560e7613e2966939fe5a9577",
-        "renderFingerprint": "b7688a6ee82f04790241d1bb89bc691de2cf4954b787569f1a0979e3376eb0f7",
+        "revision": "7a8088f8f851e63d15038186a9d35fa6fbc302bf450ee953d1766f2f8759f15e",
+        "renderFingerprint": "ff18157ffd2f1d006c9102f0aa03c2acda8b67e348dd59452fe335f2579880bb",
         "caseId": "street-v1-meters",
         "propTypes": [
           "prop-city-street-v1-meter"
@@ -2039,9 +2039,9 @@
           8224
         ],
         "rect": [
-          816,
+          32,
           224,
-          1840,
+          2624,
           2240
         ],
         "sliceKeys": [],
@@ -2052,8 +2052,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-meters",
-          "revision": "5da1f1280a0e96ad7acd855903aa5b585489d5f1560e7613e2966939fe5a9577",
-          "renderFingerprint": "b7688a6ee82f04790241d1bb89bc691de2cf4954b787569f1a0979e3376eb0f7",
+          "revision": "7a8088f8f851e63d15038186a9d35fa6fbc302bf450ee953d1766f2f8759f15e",
+          "renderFingerprint": "ff18157ffd2f1d006c9102f0aa03c2acda8b67e348dd59452fe335f2579880bb",
           "caseId": "street-v1-meters",
           "propTypes": [
             "prop-city-street-v1-meter"
@@ -2068,7 +2068,7 @@
       "prompt": "Check lamp scale and the small bollards at the curb. Keep the door approach open.",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-lighting",
       "kind": "art",
-      "fingerprint": "1a333455330e5efca090f189296d46667043130bc6b898f9acdbf3765cc9722d",
+      "fingerprint": "cfd32faef17ea107d37071a7994ff93b886bd789b607446db00c7cb7a5ec344e",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2076,8 +2076,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-lighting",
-        "revision": "1550a6ed9680b14a24c1777076543b8f816e760a5de444af7647c50b79f714c7",
-        "renderFingerprint": "1a333455330e5efca090f189296d46667043130bc6b898f9acdbf3765cc9722d",
+        "revision": "77a0dea20b74936820c9e92c995d79709b9cc54591985f51553a13fba44cce68",
+        "renderFingerprint": "cfd32faef17ea107d37071a7994ff93b886bd789b607446db00c7cb7a5ec344e",
         "caseId": "street-v1-lighting",
         "propTypes": [
           "prop-street-lamp",
@@ -2105,8 +2105,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-lighting",
-          "revision": "1550a6ed9680b14a24c1777076543b8f816e760a5de444af7647c50b79f714c7",
-          "renderFingerprint": "1a333455330e5efca090f189296d46667043130bc6b898f9acdbf3765cc9722d",
+          "revision": "77a0dea20b74936820c9e92c995d79709b9cc54591985f51553a13fba44cce68",
+          "renderFingerprint": "cfd32faef17ea107d37071a7994ff93b886bd789b607446db00c7cb7a5ec344e",
           "caseId": "street-v1-lighting",
           "propTypes": [
             "prop-street-lamp",
@@ -2122,7 +2122,7 @@
       "prompt": "Check the two bin colors, facing and ground placement. Do these suit this sidewalk?",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-bins",
       "kind": "art",
-      "fingerprint": "e40c22f6f400c6063e141fd0293ffbe33d2a2d4b5f07860db1f00a7eefd9341d",
+      "fingerprint": "8cce10e171e182bdd14cc4687093a2f8fc152d3a400035f9b3bfb353564939c2",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2130,8 +2130,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-bins",
-        "revision": "cb6afe5cb7d1227b940b0cfa094a0653156bb4c07b3c1dc0b911be6f39cfa721",
-        "renderFingerprint": "e40c22f6f400c6063e141fd0293ffbe33d2a2d4b5f07860db1f00a7eefd9341d",
+        "revision": "011180be3a70fcb2c6e56f59abc8bd2e468a0abba6180f32a72a220f07b0d6c0",
+        "renderFingerprint": "8cce10e171e182bdd14cc4687093a2f8fc152d3a400035f9b3bfb353564939c2",
         "caseId": "street-v1-bins",
         "propTypes": [
           "prop-city-street-v1-bin-black",
@@ -2146,10 +2146,10 @@
           8224
         ],
         "rect": [
-          1120,
-          1936,
-          1536,
-          2192
+          32,
+          1904,
+          2624,
+          2224
         ],
         "sliceKeys": [],
         "intent": "pattern",
@@ -2159,8 +2159,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-bins",
-          "revision": "cb6afe5cb7d1227b940b0cfa094a0653156bb4c07b3c1dc0b911be6f39cfa721",
-          "renderFingerprint": "e40c22f6f400c6063e141fd0293ffbe33d2a2d4b5f07860db1f00a7eefd9341d",
+          "revision": "011180be3a70fcb2c6e56f59abc8bd2e468a0abba6180f32a72a220f07b0d6c0",
+          "renderFingerprint": "8cce10e171e182bdd14cc4687093a2f8fc152d3a400035f9b3bfb353564939c2",
           "caseId": "street-v1-bins",
           "propTypes": [
             "prop-city-street-v1-bin-black",
@@ -2176,7 +2176,7 @@
       "prompt": "Check the bench and planter art together, with an open walking strip behind them.",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-seating",
       "kind": "art",
-      "fingerprint": "80e6ea5c9e18a0f510dcf755b27fdefd2888df7b1aac1517ece00eefd4ed5ca4",
+      "fingerprint": "c2d1a9f2795df73de37be23bab35018b1eff5bc85a21f0fa865458b3c7b70bf4",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2184,8 +2184,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-seating",
-        "revision": "4b39293ff35f164362f69a2f34e4dbcc47aefaa16fcd7420c551bce06e32cbdc",
-        "renderFingerprint": "80e6ea5c9e18a0f510dcf755b27fdefd2888df7b1aac1517ece00eefd4ed5ca4",
+        "revision": "d2e40ad1349cbcdd2eb118087a7d97e74ffa0f7a933854e7b5a7a064c0af7936",
+        "renderFingerprint": "c2d1a9f2795df73de37be23bab35018b1eff5bc85a21f0fa865458b3c7b70bf4",
         "caseId": "street-v1-seating",
         "propTypes": [
           "prop-bench",
@@ -2200,9 +2200,9 @@
           8224
         ],
         "rect": [
-          80,
+          32,
           16,
-          2576,
+          2624,
           2448
         ],
         "sliceKeys": [],
@@ -2213,8 +2213,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-seating",
-          "revision": "4b39293ff35f164362f69a2f34e4dbcc47aefaa16fcd7420c551bce06e32cbdc",
-          "renderFingerprint": "80e6ea5c9e18a0f510dcf755b27fdefd2888df7b1aac1517ece00eefd4ed5ca4",
+          "revision": "d2e40ad1349cbcdd2eb118087a7d97e74ffa0f7a933854e7b5a7a064c0af7936",
+          "renderFingerprint": "c2d1a9f2795df73de37be23bab35018b1eff5bc85a21f0fa865458b3c7b70bf4",
           "caseId": "street-v1-seating",
           "propTypes": [
             "prop-bench",
@@ -2230,7 +2230,7 @@
       "prompt": "Check both native sedan orientations, their size, and how they sit in the bays. Cars are stationary.",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-parking",
       "kind": "art",
-      "fingerprint": "a83792997172025b00166329f832043ad84700764b691599a5e1e4fe686612e3",
+      "fingerprint": "0e53a29e939eda2aa0bde23d6afbf4f9b06b9fe2231540f4005235f5bf954ad1",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2238,8 +2238,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-parking",
-        "revision": "2b8b78d65d3cc1dcd1a6fa2bf5981a29c9061c7ec62044b416a18a1139df0b08",
-        "renderFingerprint": "a83792997172025b00166329f832043ad84700764b691599a5e1e4fe686612e3",
+        "revision": "73757c91ec9a9ba4d35bd95018e5d97d2d7df74a5e29b5b96dcdf733dafdd27e",
+        "renderFingerprint": "0e53a29e939eda2aa0bde23d6afbf4f9b06b9fe2231540f4005235f5bf954ad1",
         "caseId": "street-v1-parking",
         "propTypes": [
           "prop-city-street-v1-car-west",
@@ -2255,9 +2255,9 @@
           8224
         ],
         "rect": [
-          512,
+          32,
           224,
-          2144,
+          2624,
           5376
         ],
         "sliceKeys": [],
@@ -2268,8 +2268,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-parking",
-          "revision": "2b8b78d65d3cc1dcd1a6fa2bf5981a29c9061c7ec62044b416a18a1139df0b08",
-          "renderFingerprint": "a83792997172025b00166329f832043ad84700764b691599a5e1e4fe686612e3",
+          "revision": "73757c91ec9a9ba4d35bd95018e5d97d2d7df74a5e29b5b96dcdf733dafdd27e",
+          "renderFingerprint": "0e53a29e939eda2aa0bde23d6afbf4f9b06b9fe2231540f4005235f5bf954ad1",
           "caseId": "street-v1-parking",
           "propTypes": [
             "prop-city-street-v1-car-west",
@@ -2286,7 +2286,7 @@
       "prompt": "Check the overall composition: furniture at the curb, a clear sidewalk and shop approach, and parked cars.",
       "url": "/tilefun/building-lab.html?run=streets&case=street-v1-combined",
       "kind": "art",
-      "fingerprint": "9ea00e48bddc7f6c17d99aba63099ff6eb771942cf44ccf419f5c009d5ae80a7",
+      "fingerprint": "893edfb032ec3dde998146555143d9051a6bc3199c0b1871fee353a720ec5601",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "street",
@@ -2294,8 +2294,8 @@
           "prop-city-v1-bakery-2"
         ],
         "url": "/tilefun/building-lab.html?run=streets&case=street-v1-combined",
-        "revision": "554986a457579c512d49273080e26c42bde1c66fa535e405bb5f73dcf8de1ab0",
-        "renderFingerprint": "9ea00e48bddc7f6c17d99aba63099ff6eb771942cf44ccf419f5c009d5ae80a7",
+        "revision": "bec161d3d14e3b8aedc291a337096b0bd84301dd1401e3ee87ac49962bf23108",
+        "renderFingerprint": "893edfb032ec3dde998146555143d9051a6bc3199c0b1871fee353a720ec5601",
         "caseId": "street-v1-combined",
         "propTypes": [
           "prop-street-lamp",
@@ -2315,9 +2315,9 @@
           8224
         ],
         "rect": [
-          80,
+          32,
           16,
-          2576,
+          2624,
           5584
         ],
         "sliceKeys": [],
@@ -2328,8 +2328,8 @@
             "prop-city-v1-bakery-2"
           ],
           "url": "/tilefun/building-lab.html?run=streets&case=street-v1-combined",
-          "revision": "554986a457579c512d49273080e26c42bde1c66fa535e405bb5f73dcf8de1ab0",
-          "renderFingerprint": "9ea00e48bddc7f6c17d99aba63099ff6eb771942cf44ccf419f5c009d5ae80a7",
+          "revision": "bec161d3d14e3b8aedc291a337096b0bd84301dd1401e3ee87ac49962bf23108",
+          "renderFingerprint": "893edfb032ec3dde998146555143d9051a6bc3199c0b1871fee353a720ec5601",
           "caseId": "street-v1-combined",
           "propTypes": [
             "prop-street-lamp",
@@ -8824,5 +8824,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "4d9b56d842fab25a8d0b98418f4820419ef35ffcf48239169ec40cee1a664917"
+  "inputDigest": "9caac0b137390f2c9c7ab5b96740fd83d18048455369b0baff502df155a35f08"
 }

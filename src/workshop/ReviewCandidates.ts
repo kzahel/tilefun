@@ -25,11 +25,16 @@ import {
   citySurfaceComposition,
   composeCitySurface,
 } from "../road/CitySurfaceRecipes.js";
+import {
+  composeStreetStarterSurface,
+  STREET_STARTER_SURFACE,
+} from "../road/StreetStarterSurface.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export function streetComposition(scene: StreetScene) {
   return {
     scene,
+    surface: { ...STREET_STARTER_SURFACE, pieces: composeStreetStarterSurface(scene.bounds) },
     building: required(CITY_BUILDING_PREFABS.find((p) => p.type === scene.buildingType)),
     props: scene.props.map((p) => createProp(p.type, p.wx, p.wy)),
   };
@@ -118,6 +123,9 @@ export function artReviewContext(d: ArtReviewDefinition) {
           const s = createProp(p.type, p.wx, p.wy).sprite;
           return [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect;
         }) ?? []),
+        ...(street
+          ? composeStreetStarterSurface(street.bounds).map((p) => [...p.rect] as ArtRect)
+          : []),
       ];
   const x = Math.min(...rects.map((r) => r[0])),
     y = Math.min(...rects.map((r) => r[1]));

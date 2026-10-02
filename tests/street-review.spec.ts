@@ -2,9 +2,54 @@ import { expect, test } from "@playwright/test";
 import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
+import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
+import { RoadType } from "../src/road/RoadType.js";
 
 const URL = "/tilefun/building-lab.html?run=streets";
 const ready = '#app[data-ready="true"]';
+
+test("street starter renders the dense neighborhood's source pavement, curb and asphalt pixels", async ({
+  page,
+}) => {
+  await page.route("**/api/art-notes", (r) => r.fulfill({ json: [] }));
+  await page.goto(URL);
+  await expect(page.locator(ready)).toBeVisible();
+  const query = (_x: number, y: number) => (y >= 6 ? RoadType.CityAsphalt : RoadType.CityPavement);
+  // The gap between parking bays is free of guide paint and furniture.
+  const samples = [3, 6, 10].map((y) =>
+    required(denseCitySurfacePieces(query(-1, y), -1, y, query)[0]),
+  );
+  const scene = required(STREET_REVIEW_SCENES[0]);
+  const matches = await page.locator("#building").evaluate(
+    async (el, { samples, bounds }) => {
+      const actual = (el as HTMLCanvasElement).getContext("2d");
+      if (!actual) throw new Error("Missing preview canvas");
+      const image = new Image();
+      image.src = "/tilefun/assets/tilesets/me-complete.png";
+      await image.decode();
+      const tile = document.createElement("canvas");
+      tile.width = tile.height = 32;
+      const expected = tile.getContext("2d");
+      if (!expected) throw new Error("Missing source canvas");
+      expected.imageSmoothingEnabled = false;
+      return samples.map((p) => {
+        const [sx, sy, width, height] = p.rect;
+        expected.clearRect(0, 0, 32, 32);
+        expected.drawImage(image, sx, sy, width, height, 0, 0, 32, 32);
+        const a = actual.getImageData(
+          (p.x - bounds.minX) * 2,
+          (p.y - bounds.minY) * 2,
+          32,
+          32,
+        ).data;
+        const b = expected.getImageData(0, 0, 32, 32).data;
+        return a.every((v, i) => v === b[i]);
+      });
+    },
+    { samples, bounds: scene.bounds },
+  );
+  expect(matches).toEqual([true, true, true]);
+});
 
 test("street starter renders every shared scene, source links and mobile review in view", async ({
   page,

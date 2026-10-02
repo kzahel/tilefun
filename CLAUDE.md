@@ -64,7 +64,9 @@ changed recipes or rendered pixels return to review. See `docs/art-workbench.md`
 The street starter review is `/tilefun/building-lab.html?run=streets`, with six
 phase-0 furniture cases and its own navigation/pause state. It uses the same
 art inbox and review loop; CLI notes include the street case and prop types.
-These props are available for editing/review, not yet selected by city worldgen.
+The stage now uses the dense neighborhood's shared pavement/asphalt/curb
+composer; parking outlines are placement guides. These props are available for
+editing/review, not yet selected by city worldgen.
 The next district milestones are in `docs/tactical/007-dense-city-districts-and-street-life-plan.md`.
 
 Road foundation review is `/tilefun/building-lab.html?run=surfaces`, with nine

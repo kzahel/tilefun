@@ -460,3 +460,16 @@ v4 remains the default until human review. Changed district renders return to
 review, with previous feedback retained and unrelated approvals preserved.
 After this correction is accepted, continue the curved-road/island batch and
 intentional furnishing/parking milestones above.
+
+## Street starter surface correction — 2026-10-02
+
+The six furniture review scenes now use the dense neighborhood's pinned neutral
+paving, asphalt and curb composition instead of flat diagnostic color bands.
+`StreetStarterSurface` queries `denseCitySurfacePieces` across the full stage;
+unbounded road occupancy keeps cropped edges from creating curb end caps.
+Both labs and Workshop use the shared renderer, and surface pieces are recorded
+in the source-use catalog and exact review composition. Furniture positions,
+walking clearances and parking guides are retained. All six changed appearances
+return to human review; road, building and district approvals remain intact.
+Review this palette before promoting intentional street furnishing into city
+generation.
