@@ -13,6 +13,7 @@ import {
   loadReviewAtlas,
   renderInteriorCandidate,
 } from "./InteriorCandidates.js";
+import { PreviewViewport } from "./PreviewViewport.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
@@ -121,26 +122,15 @@ function ReviewCase({
   const navigate = useNavigate(),
     location = useLocation(),
     canvas = useRef<HTMLCanvasElement>(null),
-    textarea = useRef<HTMLTextAreaElement>(null),
-    stage = useRef<HTMLDivElement>(null);
+    textarea = useRef<HTMLTextAreaElement>(null);
   const outbox = useWorkspace((s) => s.outbox),
     queue = useWorkspace((s) => s.queues[c.batchId]),
     drafts = useWorkspace((s) => s.drafts);
   const [geometry, setGeometry] = useState(false),
-    [scale, setScale] = useState("fit"),
     [ready, setReady] = useState(""),
     [error, setError] = useState(""),
     [pins, setPins] = useState<{ x: number; y: number; size: 16 | 32 }[]>([]),
-    [dimensions, setDimensions] = useState({ width: 1, height: 1 }),
-    [stageSize, setStageSize] = useState({ width: 1, height: 1 });
-  useEffect(() => {
-    if (!stage.current) return;
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry) setStageSize({ width: entry.contentRect.width, height: entry.contentRect.height });
-    });
-    observer.observe(stage.current);
-    return () => observer.disconnect();
-  }, []);
+    [dimensions, setDimensions] = useState({ width: 1, height: 1 });
   const rows = allCandidates
     .filter((candidate) => candidate.batchId === c.batchId)
     .map((candidate) => optimisticSummary(candidate, outbox));
@@ -367,6 +357,7 @@ function ReviewCase({
   useEffect(() => {
     const key = (event: KeyboardEvent) => {
       if (
+        event.defaultPrevented ||
         (event.target instanceof HTMLElement &&
           (event.target.closest("input,textarea,select,button,a") ||
             event.target.isContentEditable)) ||
@@ -481,95 +472,76 @@ function ReviewCase({
       ) : null}
       <div className="review-content" hidden={q.paused || !visible.length}>
         <div className="native-preview">
-          <div ref={stage} className={`canvas-stage ${scale}`}>
-            <div
-              className="canvas-stack"
-              style={{
-                width:
-                  scale === "fit"
-                    ? Math.max(
-                        1,
-                        Math.min(
-                          stageSize.width,
-                          (stageSize.height * dimensions.width) / dimensions.height,
-                        ),
-                      )
-                    : dimensions.width * (scale === "large" ? 2 : 1),
-                flexShrink: 0,
+          <PreviewViewport
+            key={c.id}
+            width={dimensions.width}
+            height={dimensions.height}
+            status={
+              ready !== c.id && !error ? (
+                <p role="status">Checking the exact current render…</p>
+              ) : null
+            }
+            controls={
+              c.kind === "art" ? (
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={geometry}
+                    onChange={(e) => setGeometry(e.target.checked)}
+                  />{" "}
+                  Geometry / routes
+                </label>
+              ) : (
+                <span>Tap the render to pin a problem.</span>
+              )
+            }
+          >
+            <canvas
+              ref={canvas}
+              aria-label="Candidate preview"
+              onClick={(event) => {
+                if (c.kind !== "interior" || !canVote) return;
+                const bounds = event.currentTarget.getBoundingClientRect(),
+                  x =
+                    Math.floor(
+                      ((event.clientX - bounds.left) * dimensions.width) / bounds.width / 16,
+                    ) * 16,
+                  y =
+                    Math.floor(
+                      ((event.clientY - bounds.top) * dimensions.height) / bounds.height / 16,
+                    ) * 16;
+                if (
+                  x < 0 ||
+                  y < 0 ||
+                  y >= (c.interior?.sketch.split("\n").length ?? 0) * 32 ||
+                  pins.length >= 20
+                )
+                  return;
+                if (!pins.some((p) => p.x === x && p.y === y))
+                  changePins([...pins, { x, y, size: 16 }]);
               }}
-            >
-              <canvas
-                ref={canvas}
-                aria-label="Candidate preview"
-                onClick={(event) => {
-                  if (c.kind !== "interior" || !canVote) return;
-                  const bounds = event.currentTarget.getBoundingClientRect(),
-                    x =
-                      Math.floor(
-                        ((event.clientX - bounds.left) * dimensions.width) / bounds.width / 16,
-                      ) * 16,
-                    y =
-                      Math.floor(
-                        ((event.clientY - bounds.top) * dimensions.height) / bounds.height / 16,
-                      ) * 16;
-                  if (
-                    x < 0 ||
-                    y < 0 ||
-                    y >= (c.interior?.sketch.split("\n").length ?? 0) * 32 ||
-                    pins.length >= 20
-                  )
-                    return;
-                  if (!pins.some((p) => p.x === x && p.y === y))
-                    changePins([...pins, { x, y, size: 16 }]);
-                }}
-              />
-              {pins.length ? (
-                <svg
-                  aria-label="Report pins"
-                  viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-                  className="pin-overlay"
-                >
-                  {pins.map((p) => (
-                    <rect
-                      key={`${p.x},${p.y}`}
-                      x={p.x}
-                      y={p.y}
-                      width={p.size}
-                      height={p.size}
-                      fill="#ff665533"
-                      stroke="#ff6655"
-                      strokeWidth="1"
-                    />
-                  ))}
-                </svg>
-              ) : null}
-            </div>
-          </div>
-          {ready !== c.id && !error ? (
-            <p role="status">Checking the exact current render…</p>
-          ) : null}
-          <div className="preview-controls">
-            {c.kind === "art" ? (
-              <label>
-                <input
-                  type="checkbox"
-                  checked={geometry}
-                  onChange={(e) => setGeometry(e.target.checked)}
-                />{" "}
-                Geometry / routes
-              </label>
-            ) : (
-              <span>Tap the render to pin a problem.</span>
-            )}
-            <label>
-              Scale
-              <select aria-label="Scale" value={scale} onChange={(e) => setScale(e.target.value)}>
-                <option value="fit">Fit preview</option>
-                <option value="native">Native pixels</option>
-                <option value="large">2× pixels</option>
-              </select>
-            </label>
-          </div>
+            />
+            {pins.length ? (
+              <svg
+                aria-label="Report pins"
+                viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+                className="pin-overlay"
+              >
+                {pins.map((p) => (
+                  <rect
+                    key={`${p.x},${p.y}`}
+                    x={p.x}
+                    y={p.y}
+                    width={p.size}
+                    height={p.size}
+                    fill="#ff665533"
+                    stroke="#ff6655"
+                    strokeWidth="1"
+                  />
+                ))}
+              </svg>
+            ) : null}
+          </PreviewViewport>
         </div>
         <aside className="review-inspector">
           <h2>Your review</h2>

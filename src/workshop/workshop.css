@@ -544,19 +544,22 @@ time {
   background: #dde2d4;
   border: 1px solid #c7d1bc;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   min-height: 360px;
   height: min(62vh, 620px);
-  padding: 18px;
-  overflow: auto;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+.canvas-stage.dragging {
+  cursor: grabbing;
 }
 .canvas-stack {
-  position: relative;
-  width: 100%;
-  display: inline-block;
-  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
 }
 .canvas-stack canvas {
   display: block;
@@ -565,16 +568,6 @@ time {
   width: 100%;
   height: auto;
   image-rendering: pixelated;
-}
-.canvas-stage.native .canvas-stack,
-.canvas-stage.large .canvas-stack {
-  max-height: none;
-  flex-shrink: 0;
-}
-.canvas-stage.native canvas,
-.canvas-stage.large canvas {
-  width: 100%;
-  max-height: none;
 }
 .pin-overlay {
   position: absolute;
@@ -597,6 +590,14 @@ time {
 }
 .preview-controls select {
   width: auto;
+}
+.preview-controls button {
+  min-width: 40px;
+  min-height: 40px;
+}
+.preview-help {
+  width: 100%;
+  color: #60735d;
 }
 .review-inspector,
 .source-inspector {
@@ -955,7 +956,6 @@ time {
   .canvas-stage {
     height: 340px;
     min-height: 260px;
-    padding: 8px;
   }
   .canvas-stack canvas {
     max-height: none;
