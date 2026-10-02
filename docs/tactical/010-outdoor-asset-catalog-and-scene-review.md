@@ -1,6 +1,6 @@
 # Outdoor asset catalog and scene review
 
-Status: implementation in progress. Extends Workshop, its authenticated event
+Status: delivered for human review. Extends Workshop, its authenticated event
 API and shared art inbox. Approved art and saved world revisions stay frozen.
 
 ## Accepted scope
@@ -68,3 +68,27 @@ plaza seating/shade and a market using the shared placement reservations.
 - Default neighborhood navigation uses one whole scene per batch. Earlier crops
   and their human decisions remain accessible; all earlier feedback stays intact.
   Source and world annotations are distinct targets throughout display and CLI.
+- `8ffe9b0`: native asset review, geometry testing and neighborhood annotations.
+  All 1,149 unit tests, all three typechecks, production build and all 221 browser
+  tests passed. This includes isolated persistence, offline retry, authentication,
+  source revision checks, production collision and phone layouts. All 322 prior
+  candidate records and scene appearances remain unchanged.
+- Verified the live checkout through localhost without login and the public
+  deployment's catalog through bundled Playwright Chromium: both load without
+  page errors. Public catalog bytes match the committed artifact. Inspected
+  desktop and phone captures. No test annotations were written to human data.
+- Human metadata decisions retain their original timestamp through status
+  replies. A changed committed definition is visible again for review rather
+  than being overwritten by a stale correction or hidden by an old approval.
+
+Review entry points on the live deployment:
+
+- [Outdoor asset catalog](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/outdoor)
+- [Complete sheet and coverage gaps](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/art?sheet=me-complete&view=sheet&coverage=gaps)
+- [Neighborhood location notes](https://tilefun.graehlarts.com/tilefun/workshop.html#/scene/district-v10-destinations)
+
+Next human pass: review the five seating/shade/market/planting candidates, then
+use Select area / pin on the square and Browse props to suggest. Saved scene
+notes join Requests & fixes and preserve exact source/metadata references.
+After that pass, promote accepted definitions and implement the pending square
+and grass-edge changes in a new generation revision.
