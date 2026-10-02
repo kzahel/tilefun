@@ -18,7 +18,7 @@
     {
       "id": "roads",
       "name": "Roads & sidewalks",
-      "description": "Widths, curbs, intersections, crossings and raised dividers.",
+      "description": "Approved road foundation plus new curved curbs, refuge crossings and parking bays in the Road geometry batch.",
       "url": "building-lab.html?run=surfaces",
       "mode": "review"
     },
@@ -101,6 +101,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "roads-geometry",
+      "name": "Road geometry",
+      "description": "Four new cases: curved curbs, pedestrian refuge, crossing approaches and parking bays.",
+      "toolId": "roads"
+    },
     {
       "id": "buildings",
       "name": "Building recipes & blocks",
@@ -2006,6 +2012,182 @@
           "renderFingerprint": "4c16ae8481195e5c4f6febef2ef7f081bc4293b7b729d0a61e2ca064cca4a2ad",
           "caseId": "surface-v1-original",
           "surfaceRecipe": "city-surfaces-v1"
+        }
+      }
+    },
+    {
+      "id": "surface:surface-v2-rounded",
+      "batchId": "roads-geometry",
+      "name": "Rounded intersection curbs",
+      "prompt": "Check all four curved curb joins against the straight sidewalks and road edges.",
+      "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
+      "kind": "art",
+      "fingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "surface",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
+        "revision": "4b2cda9817c47cda47d746ea6ae5e09df8d827955a0685207eccd814ffe7d8a0",
+        "renderFingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+        "caseId": "surface-v2-rounded",
+        "surfaceRecipe": "city-surfaces-v2"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1904,
+          288,
+          112
+        ],
+        "sliceKeys": [],
+        "intent": "terrain",
+        "buildingReview": {
+          "scene": "surface",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
+          "revision": "4b2cda9817c47cda47d746ea6ae5e09df8d827955a0685207eccd814ffe7d8a0",
+          "renderFingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+          "caseId": "surface-v2-rounded",
+          "surfaceRecipe": "city-surfaces-v2"
+        }
+      }
+    },
+    {
+      "id": "surface:surface-v2-refuge",
+      "batchId": "roads-geometry",
+      "name": "Crossing with a pedestrian refuge",
+      "prompt": "Check the capped island, open central landing and crossings on both sides.",
+      "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-refuge",
+      "kind": "art",
+      "fingerprint": "a8c83b60af375896dd5bfcef41b3e4bf8376fa2a0fb7853d11cd113f6301fac6",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "surface",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-refuge",
+        "revision": "ee917ffc6a35244b7cc2e4cfad82eda519fe58169f8c5cbb873bf8b83418409c",
+        "renderFingerprint": "a8c83b60af375896dd5bfcef41b3e4bf8376fa2a0fb7853d11cd113f6301fac6",
+        "caseId": "surface-v2-refuge",
+        "surfaceRecipe": "city-surfaces-v2"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          32,
+          1904,
+          256,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "terrain",
+        "buildingReview": {
+          "scene": "surface",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-refuge",
+          "revision": "ee917ffc6a35244b7cc2e4cfad82eda519fe58169f8c5cbb873bf8b83418409c",
+          "renderFingerprint": "a8c83b60af375896dd5bfcef41b3e4bf8376fa2a0fb7853d11cd113f6301fac6",
+          "caseId": "surface-v2-refuge",
+          "surfaceRecipe": "city-surfaces-v2"
+        }
+      }
+    },
+    {
+      "id": "surface:surface-v2-approaches",
+      "batchId": "roads-geometry",
+      "name": "Crossings & curb extensions",
+      "prompt": "Check how the crossings meet the wider sidewalk approaches and the shortened crossing distance.",
+      "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
+      "kind": "art",
+      "fingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "surface",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
+        "revision": "8df2bd0d1696251fbc538a3e37ddf103a6c9d6464777acd4b3b61f83b4678476",
+        "renderFingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+        "caseId": "surface-v2-approaches",
+        "surfaceRecipe": "city-surfaces-v2"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1904,
+          288,
+          112
+        ],
+        "sliceKeys": [],
+        "intent": "terrain",
+        "buildingReview": {
+          "scene": "surface",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
+          "revision": "8df2bd0d1696251fbc538a3e37ddf103a6c9d6464777acd4b3b61f83b4678476",
+          "renderFingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+          "caseId": "surface-v2-approaches",
+          "surfaceRecipe": "city-surfaces-v2"
+        }
+      }
+    },
+    {
+      "id": "surface:surface-v2-parking",
+      "batchId": "roads-geometry",
+      "name": "Curbside parking bays",
+      "prompt": "Check the native parking markings, curb joins, sidewalk gaps and clear driving lanes. Cars and meters come after this surface review.",
+      "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
+      "kind": "art",
+      "fingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "surface",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
+        "revision": "2435098596b6c17b73265a65774a8bf82a1da95d068cfc0248eecbfef15e18ef",
+        "renderFingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+        "caseId": "surface-v2-parking",
+        "surfaceRecipe": "city-surfaces-v2"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1904,
+          288,
+          176
+        ],
+        "sliceKeys": [],
+        "intent": "terrain",
+        "buildingReview": {
+          "scene": "surface",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
+          "revision": "2435098596b6c17b73265a65774a8bf82a1da95d068cfc0248eecbfef15e18ef",
+          "renderFingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+          "caseId": "surface-v2-parking",
+          "surfaceRecipe": "city-surfaces-v2"
         }
       }
     },
@@ -8824,5 +9006,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "9caac0b137390f2c9c7ab5b96740fd83d18048455369b0baff502df155a35f08"
+  "inputDigest": "8afdb55efb5b2706c34a5e853e15ed50cb6346567b139cd71ae24b85513aa5c4"
 }

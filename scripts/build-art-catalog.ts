@@ -18,7 +18,11 @@ import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPr
 import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
-import { CITY_SURFACE_CASES, composeCitySurface } from "../src/road/CitySurfaceRecipes.js";
+import {
+  CITY_GEOMETRY_CASES,
+  CITY_SURFACE_CASES,
+  composeCitySurface,
+} from "../src/road/CitySurfaceRecipes.js";
 import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { composeStreetStarterSurface } from "../src/road/StreetStarterSurface.js";
@@ -181,6 +185,20 @@ const surfaceTiles = new Map(
     composeCitySurface(c).map((p) => [p.rect.join(":"), p] as const),
   ),
 );
+const geometryTiles = new Map(
+  CITY_GEOMETRY_CASES.flatMap((c) =>
+    composeCitySurface(c).map((p) => [p.rect.join(":"), p] as const),
+  ),
+);
+for (const [key, piece] of geometryTiles)
+  add(
+    `surface:city-v2:${key}`,
+    "me-complete",
+    piece.rect,
+    `Road geometry candidate · ${piece.label}`,
+    "terrain",
+    [{ system: "Road geometry review (candidate)", source: "src/road/CitySurfaceRecipes.ts" }],
+  );
 const streetTiles = new Map(
   STREET_REVIEW_SCENES.flatMap((c) =>
     composeStreetStarterSurface(c.bounds).map((p) => [p.rect.join(":"), p] as const),

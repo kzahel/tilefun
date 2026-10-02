@@ -45,7 +45,7 @@ if (embedded) {
   const tool = current.pathname.endsWith("art-workbench.html")
     ? "art"
     : current.pathname.endsWith("building-lab.html")
-      ? params.get("run") === "surfaces"
+      ? ["surfaces", "road-geometry"].includes(params.get("run") ?? "")
         ? "roads"
         : params.get("run") === "districts"
           ? "districts"

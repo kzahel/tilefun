@@ -5,8 +5,11 @@ import { PNG } from "pngjs";
 import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import {
+  ALL_CITY_SURFACE_CASES,
+  CITY_GEOMETRY_CASES,
   CITY_SURFACE_CASES,
   CITY_SURFACE_SOURCE,
+  cityGeometryPlan,
   citySurfaceRoadAt,
   citySurfaceTileAt,
   composeCitySurface,
@@ -17,10 +20,35 @@ import {
 const bytes = readFileSync("public/assets/tilesets/me-complete.png");
 const image = PNG.sync.read(bytes);
 describe("shared candidate city surfaces", () => {
+  it("reserves an unpainted connected refuge and parking spaces away from the crossing", () => {
+    const refuge = required(CITY_GEOMETRY_CASES.find((c) => c.geometry === "refuge"));
+    const landing = required(cityGeometryPlan(refuge).refuge);
+    const pieces = composeCitySurface(refuge);
+    expect(pieces.filter((p) => p.label === "Open refuge landing")).toHaveLength(4);
+    for (const p of pieces.filter((p) => p.role === "paint")) {
+      const [, , w, h] = p.rect;
+      expect(
+        p.x < landing.maxX &&
+          p.x + w > landing.minX &&
+          p.y < landing.maxY &&
+          p.y + h > landing.minY,
+      ).toBe(false);
+    }
+    const parking = cityGeometryPlan(
+      required(CITY_GEOMETRY_CASES.find((c) => c.geometry === "parking")),
+    );
+    expect(parking.parking).toHaveLength(3);
+    for (const bay of parking.parking) {
+      expect(bay.maxX - bay.minX).toBe(80);
+      expect(bay.maxY - bay.minY).toBe(32);
+      for (const crossing of parking.crossings)
+        expect(bay.maxX <= crossing.x || bay.minX >= crossing.x + crossing.width).toBe(true);
+    }
+  });
   it("pins both annotated banks and selects opaque source art within them", () => {
     expect(createHash("sha256").update(bytes).digest("hex")).toBe(CITY_SURFACE_SOURCE.fingerprint);
     const checked = new Set<string>();
-    for (const c of CITY_SURFACE_CASES)
+    for (const c of ALL_CITY_SURFACE_CASES)
       for (const p of composeCitySurface(c)) {
         const [x, y, w, h] = p.rect,
           key = p.rect.join(",");
@@ -38,7 +66,7 @@ describe("shared candidate city surfaces", () => {
       }
   });
   it("covers the canvas exactly once before paint and keeps all paint on road", () => {
-    for (const c of CITY_SURFACE_CASES) {
+    for (const c of ALL_CITY_SURFACE_CASES) {
       const pieces = composeCitySurface(c),
         base = pieces.filter((p) => !["paint", "median"].includes(p.role));
       expect(base).toHaveLength(SURFACE_COLS * SURFACE_ROWS);

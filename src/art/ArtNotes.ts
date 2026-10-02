@@ -77,9 +77,10 @@ function parseBuildingReview(value: unknown): BuildingReview {
     if (
       typeof v.caseId !== "string" ||
       !/^surface-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
-      v.surfaceRecipe !== "city-surfaces-v1" ||
+      !["city-surfaces-v1", "city-surfaces-v2"].includes(v.surfaceRecipe as string) ||
       v.propTypes !== undefined ||
-      url.searchParams.get("run") !== "surfaces" ||
+      url.searchParams.get("run") !==
+        (v.surfaceRecipe === "city-surfaces-v2" ? "road-geometry" : "surfaces") ||
       url.searchParams.get("case") !== v.caseId
     )
       throw new Error("Invalid surface review context");

@@ -8440,6 +8440,456 @@
       ]
     },
     {
+      "id": "surface:city-v2:96:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1984,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:112:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1984,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:64:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:80:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Asphalt fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:16:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:96:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        2000,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:112:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        2000,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:32:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:224:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Native curved curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:288:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        288,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Native curved curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:32:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:224:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Native curved curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:288:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        288,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Native curved curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:224:2000:16:32",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        2000,
+        16,
+        32
+      ],
+      "label": "Road geometry candidate · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:240:2000:16:32",
+      "sheetId": "me-complete",
+      "rect": [
+        240,
+        2000,
+        16,
+        32
+      ],
+      "label": "Road geometry candidate · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:272:2000:16:32",
+      "sheetId": "me-complete",
+      "rect": [
+        272,
+        2000,
+        16,
+        32
+      ],
+      "label": "Road geometry candidate · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:64:1968:32:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1968,
+        32,
+        16
+      ],
+      "label": "Road geometry candidate · Crossing entry at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:64:1984:32:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1984,
+        32,
+        16
+      ],
+      "label": "Road geometry candidate · Zebra crossing",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:64:1984:32:8",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1984,
+        32,
+        8
+      ],
+      "label": "Road geometry candidate · Crossing exit at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:32:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1968,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Dashed lane divider",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:112:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:96:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:112:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:96:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:16:2048:80:32",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2048,
+        80,
+        32
+      ],
+      "label": "Road geometry candidate · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
       "id": "surface:street-starter-v1:112:1984:16:16",
       "sheetId": "me-complete",
       "rect": [

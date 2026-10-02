@@ -12,7 +12,7 @@ import {
 } from "react-router";
 import { workshopJson } from "./AuthClient.js";
 import { flushLegacyOutboxes, legacyPendingCount } from "./LegacyOutboxes.js";
-import { WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import { reviewToolOwnsBatch, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { useInbox, useManifest, useSession } from "./WorkshopQueries.js";
 import type {
   CandidateSummary,
@@ -233,9 +233,8 @@ export function App() {
                 <span className="nav-count">
                   {inbox.data?.candidates.filter(
                     (c) =>
-                      (tool.id === "rooms"
-                        ? c.batchId.startsWith("rooms-")
-                        : c.batchId === tool.id) && ["unchecked", "changed"].includes(c.state),
+                      reviewToolOwnsBatch(tool.id, c.batchId) &&
+                      ["unchecked", "changed"].includes(c.state),
                   ).length ?? "—"}
                 </span>
               ) : null}
@@ -905,7 +904,7 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
     navigate = useNavigate();
   const candidates =
     inbox.data?.candidates.filter((c) =>
-      toolId === "rooms" ? c.batchId.startsWith("rooms-") : c.batchId === toolId,
+      reviewToolOwnsBatch(toolId, c.batchId, manifest.data?.batches),
     ) ?? [];
   useEffect(() => {
     const p = new URLSearchParams(query);
@@ -968,7 +967,7 @@ export function legacyDestination(url: string, manifest?: WorkshopManifest) {
     ? WORKSHOP_TOOLS.find(
         (t) =>
           t.id ===
-          (parsed.searchParams.get("run") === "surfaces"
+          (["surfaces", "road-geometry"].includes(parsed.searchParams.get("run") ?? "")
             ? "roads"
             : parsed.searchParams.get("run") === "districts"
               ? "districts"

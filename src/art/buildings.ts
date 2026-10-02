@@ -18,9 +18,11 @@ import {
 import { DENSE_CITY_ASSETS } from "../generation/regional/DenseCityAssets.js";
 import { STREET_REVIEW_SCENES, type StreetScene } from "../generation/regional/StreetRecipes.js";
 import {
+  CITY_GEOMETRY_CASES,
   CITY_SURFACE_CASES,
   CITY_SURFACE_SOURCE,
   citySurfaceComposition,
+  citySurfaceRecipe,
   composeCitySurface,
 } from "../road/CitySurfaceRecipes.js";
 import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
@@ -47,12 +49,17 @@ const scene = $<HTMLSelectElement>("scene"),
   canvas = $<HTMLCanvasElement>("building");
 const params = new URLSearchParams(location.search);
 const streetRun = params.get("run") === "streets";
-const surfaceRun = params.get("run") === "surfaces";
+const geometryRun = params.get("run") === "road-geometry";
+const surfaceRun = params.get("run") === "surfaces" || geometryRun;
+const surfaceRunName = geometryRun ? "road-geometry" : "surfaces";
+const surfaceCases = geometryRun ? CITY_GEOMETRY_CASES : CITY_SURFACE_CASES;
 const districtRun = params.get("run") === "districts";
 const reviewStorage = districtRun
   ? "tilefun.district-review.v1"
   : surfaceRun
-    ? "tilefun.surface-review.v1"
+    ? geometryRun
+      ? "tilefun.surface-geometry-review.v2"
+      : "tilefun.surface-review.v1"
     : streetRun
       ? "tilefun.street-review.v1"
       : "tilefun.building-review.v1";
@@ -66,11 +73,11 @@ function currentDistrict() {
 }
 let districtAssets: GameAssets | undefined;
 const surfaceSelect = $<HTMLSelectElement>("surface-case");
-surfaceSelect.replaceChildren(...CITY_SURFACE_CASES.map((s) => new Option(s.name, s.id)));
-if (CITY_SURFACE_CASES.some((s) => s.id === params.get("case")))
+surfaceSelect.replaceChildren(...surfaceCases.map((s) => new Option(s.name, s.id)));
+if (surfaceCases.some((s) => s.id === params.get("case")))
   surfaceSelect.value = params.get("case") ?? "";
 function currentSurface() {
-  return required(CITY_SURFACE_CASES.find((s) => s.id === surfaceSelect.value));
+  return required(surfaceCases.find((s) => s.id === surfaceSelect.value));
 }
 const streetSelect = $<HTMLSelectElement>("street-case");
 streetSelect.replaceChildren(...STREET_REVIEW_SCENES.map((s) => new Option(s.name, s.id)));
@@ -124,6 +131,15 @@ if (surfaceRun) {
     "Art feedback & replies (all scenes)";
   $("preview-explanation").textContent =
     "Source-backed surface candidates. Review this base canvas before building dense city blocks on it.";
+  if (geometryRun) {
+    required(document.querySelector(".building-intro h1")).textContent =
+      "Review the road geometry.";
+    required(document.querySelector(".building-intro p")).textContent =
+      "Curved curbs, pedestrian refuge, crossing approaches & parking bays. Two reports pause until “ready” in chat.";
+    canvas.setAttribute("aria-label", "Road geometry scene");
+    document.title = "Road geometry review · Tilefun";
+    required(document.querySelector(".brand span")).textContent = "/ Road geometry";
+  }
   required(required($("geometry").parentElement).lastChild).textContent = "Tile grid";
 }
 if (districtRun) {
@@ -229,7 +245,7 @@ function currentTarget(displayed = false) {
   const surface = surfaceRun ? currentSurface() : undefined;
   if (surface) {
     url.search = "";
-    url.searchParams.set("run", "surfaces");
+    url.searchParams.set("run", surfaceRunName);
     url.searchParams.set("case", surface.id);
   }
   const rects = surface
@@ -413,7 +429,7 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
             }
           : {}),
         ...(context.surface
-          ? { caseId: context.surface.id, surfaceRecipe: "city-surfaces-v1" }
+          ? { caseId: context.surface.id, surfaceRecipe: citySurfaceRecipe(context.surface) }
           : {}),
         ...(context.district
           ? {
@@ -735,8 +751,9 @@ function renderSurface() {
   $("assembly-summary").textContent = c.prompt;
   $("bookmark-notice").textContent = "";
   $("block-buildings").replaceChildren();
-  $("topology").textContent =
-    "Original asphalt, pavement, curb shading and paint tiles. Square curb corners; rounded raised median. Crossings currently stop before the curb: ramps and accessibility come after this surface review. This shared surface recipe is a candidate for the next district revision; existing worlds keep their surfaces.";
+  $("topology").textContent = c.geometry
+    ? "Native curved curb pieces, capped islands, crossing ends and parking markings. Review these surfaces before furnishing them. The crossing approaches preserve curb shading; accessible ramp geometry is still a later step."
+    : "Original asphalt, pavement, curb shading and paint tiles. Square curb corners; rounded raised median. Crossings currently stop before the curb: ramps and accessibility come after this surface review. This shared surface recipe is a candidate for the next district revision; existing worlds keep their surfaces.";
   required($("topology").parentElement?.querySelector("summary")).textContent =
     "Surface construction";
   required($("pieces").parentElement?.querySelector("summary")).textContent =
@@ -1103,18 +1120,18 @@ if (streetRun)
     });
   }
 if (surfaceRun)
-  for (const entry of CITY_SURFACE_CASES) {
+  for (const entry of surfaceCases) {
     drawSurfaceShowcase(hashCanvas, entry, sheet, false);
     const review: BuildingReview = {
       scene: "surface",
       caseId: entry.id,
       prefabIds: [],
-      surfaceRecipe: "city-surfaces-v1",
+      surfaceRecipe: citySurfaceRecipe(entry),
       revision: await sha256(
         new TextEncoder().encode(JSON.stringify(citySurfaceComposition(entry))),
       ),
       renderFingerprint: await canvasFingerprint(hashCanvas),
-      url: `/tilefun/building-lab.html?run=surfaces&case=${entry.id}`,
+      url: `/tilefun/building-lab.html?run=${surfaceRunName}&case=${entry.id}`,
     };
     candidates.push({
       key: buildingCaseKey(review),

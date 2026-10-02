@@ -76,6 +76,16 @@ describe("building approval identities", () => {
     };
     const note = { ...decision("approved"), buildingReview: surface };
     expect(parseArtNote(note, catalog)).toEqual(note);
+    const geometry = {
+      ...note,
+      buildingReview: {
+        ...surface,
+        caseId: "surface-v2-rounded",
+        surfaceRecipe: "city-surfaces-v2",
+        url: "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
+      },
+    };
+    expect(parseArtNote(geometry, catalog)).toEqual(geometry);
     expect(buildingCaseKey(surface)).toBe("surface:surface-v1-narrow");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
     for (const change of [

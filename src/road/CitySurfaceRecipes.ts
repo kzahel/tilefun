@@ -23,6 +23,8 @@ export interface CitySurfaceCase {
   palette: "neutral" | "warm" | "original";
   /** A lead-in keeps the center divider legible before the raised island. */
   medianApproach?: "guided";
+  /** New review geometry. Omitted in every frozen foundation recipe. */
+  geometry?: "rounded" | "refuge" | "approaches" | "parking";
 }
 export const CITY_SURFACE_CASES: readonly CitySurfaceCase[] = [
   {
@@ -102,6 +104,109 @@ export const CITY_SURFACE_CASES: readonly CitySurfaceCase[] = [
 export const SURFACE_COLS = 32;
 export const SURFACE_ROWS = 24;
 
+export const CITY_GEOMETRY_CASES: readonly CitySurfaceCase[] = [
+  {
+    id: "surface-v2-rounded",
+    name: "Rounded intersection curbs",
+    layout: "cross",
+    roadWidth: 8,
+    palette: "neutral",
+    geometry: "rounded",
+    prompt: "Check all four curved curb joins against the straight sidewalks and road edges.",
+  },
+  {
+    id: "surface-v2-refuge",
+    name: "Crossing with a pedestrian refuge",
+    layout: "straight",
+    roadWidth: 12,
+    palette: "neutral",
+    geometry: "refuge",
+    prompt: "Check the capped island, open central landing and crossings on both sides.",
+  },
+  {
+    id: "surface-v2-approaches",
+    name: "Crossings & curb extensions",
+    layout: "straight",
+    roadWidth: 8,
+    palette: "neutral",
+    geometry: "approaches",
+    prompt:
+      "Check how the crossings meet the wider sidewalk approaches and the shortened crossing distance.",
+  },
+  {
+    id: "surface-v2-parking",
+    name: "Curbside parking bays",
+    layout: "straight",
+    roadWidth: 8,
+    palette: "neutral",
+    geometry: "parking",
+    prompt:
+      "Check the native parking markings, curb joins, sidewalk gaps and clear driving lanes. Cars and meters come after this surface review.",
+  },
+];
+export const ALL_CITY_SURFACE_CASES = [...CITY_SURFACE_CASES, ...CITY_GEOMETRY_CASES];
+export const citySurfaceRecipe = (c: CitySurfaceCase) =>
+  c.geometry ? "city-surfaces-v2" : "city-surfaces-v1";
+
+/** Reusable place facts, in native pixels. These reserve space for the next
+ * furnishing slice; no cars or props are painted into the surface. */
+export function cityGeometryPlan(c: CitySurfaceCase) {
+  const top = 12 - c.roadWidth / 2,
+    bottom = 12 + c.roadWidth / 2;
+  const crossings =
+    c.geometry === "refuge"
+      ? [15]
+      : c.geometry === "approaches"
+        ? [8, 22]
+        : c.geometry === "parking"
+          ? [27]
+          : [];
+  return {
+    sidewalkExtensions:
+      c.geometry === "approaches"
+        ? [7, 21].flatMap((x) =>
+            [top, bottom - 2].map((y) => ({
+              minX: x * 16,
+              maxX: (x + 4) * 16,
+              minY: y * 16,
+              maxY: (y + 2) * 16,
+            })),
+          )
+        : c.geometry === "parking"
+          ? [8, 15, 22].map((x) => ({
+              minX: x * 16,
+              maxX: (x + 2) * 16,
+              minY: top * 16,
+              maxY: (top + 2) * 16,
+            }))
+          : [],
+    crossings: crossings.map((x) => ({
+      x: x * 16,
+      width: 32,
+      top: (c.geometry === "approaches" ? top + 2 : top) * 16,
+      bottom: (c.geometry === "approaches" ? bottom - 2 : bottom) * 16,
+    })),
+    islands:
+      c.geometry === "refuge"
+        ? [{ minX: 6 * 16, maxX: 26 * 16, minY: 11 * 16, maxY: 13 * 16 }]
+        : [],
+    refuge:
+      c.geometry === "refuge"
+        ? { minX: 15 * 16, maxX: 17 * 16, minY: 11 * 16, maxY: 13 * 16 }
+        : null,
+    parking:
+      c.geometry === "parking"
+        ? [3, 10, 17].map((x) => ({
+            minX: x * 16,
+            maxX: (x + 5) * 16,
+            minY: top * 16,
+            maxY: (top + 2) * 16,
+            facing: "east-west" as const,
+          }))
+        : [],
+  };
+}
+
 /** Unbounded occupancy is intentional: preview boundaries do not create end caps.
  * Districts can use this same query across chunk boundaries.
  */
@@ -112,6 +217,14 @@ export function citySurfaceRoadAt(c: CitySurfaceCase, x: number, y: number): boo
     bottom = 12 + c.roadWidth / 2;
   const h = y >= top && y < bottom,
     v = x >= left && x < right;
+  if (
+    c.geometry &&
+    h &&
+    cityGeometryPlan(c).sidewalkExtensions.some(
+      (b) => x * 16 >= b.minX && x * 16 < b.maxX && y * 16 >= b.minY && y * 16 < b.maxY,
+    )
+  )
+    return false;
   switch (c.layout) {
     case "vertical":
       return v;
@@ -185,6 +298,7 @@ export function citySurfaceTileAt(
  * random fills, or independent lab-only tiling. Coordinates are native world pixels.
  */
 export function composeCitySurface(c: CitySurfaceCase): SurfacePiece[] {
+  if (c.geometry) return composeCityGeometry(c);
   const pieces: SurfacePiece[] = [];
   const [bx, by] = bank(c.palette);
   const add = (
@@ -258,6 +372,79 @@ export function citySurfaceComposition(c: CitySurfaceCase) {
     columns: SURFACE_COLS,
     rows: SURFACE_ROWS,
     case: c,
+    ...(c.geometry ? { geometry: cityGeometryPlan(c) } : {}),
     pieces: composeCitySurface(c),
   };
+}
+
+/** Source audit: native quarter-curbs (224/288,1920/1952), 32px island
+ * caps/middle (224/240/272,2000), crossing entry (64,1968), and marked 80×32
+ * bays (16,2048). Clips keep authored orientation, scale and south shadows.
+ * The v1 lookup and its frozen consumers never call this composition. */
+function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
+  const pieces: SurfacePiece[] = [],
+    plan = cityGeometryPlan(c);
+  const road = (x: number, y: number) => citySurfaceRoadAt(c, x, y);
+  const add = (
+    label: string,
+    rect: SurfaceRect,
+    x: number,
+    y: number,
+    role: SurfacePiece["role"],
+  ) => pieces.push({ label, rect, x, y, role });
+  for (let y = 0; y < SURFACE_ROWS; y++)
+    for (let x = 0; x < SURFACE_COLS; x++) {
+      const p = citySurfaceTileAt("neutral", x, y, road);
+      if (road(x, y) && road(x - 1, y) && road(x + 1, y) && road(x, y - 1) && road(x, y + 1)) {
+        const nw = !road(x - 1, y - 1),
+          ne = !road(x + 1, y - 1),
+          sw = !road(x - 1, y + 1),
+          se = !road(x + 1, y + 1);
+        if (nw || ne || sw || se) {
+          p.rect = [nw || sw ? 224 : 288, nw || ne ? 1952 : 1920, 16, 16];
+          p.label = "Native curved curb join";
+        }
+      }
+      pieces.push(p);
+    }
+  for (const island of plan.islands)
+    for (let x = island.minX; x < island.maxX; x += 16) {
+      if (plan.refuge && x >= plan.refuge.minX && x < plan.refuge.maxX) {
+        for (let y = island.minY; y < island.maxY; y += 16) {
+          const p = citySurfaceTileAt("neutral", x / 16, y / 16, () => false);
+          pieces.push({ ...p, label: "Open refuge landing", role: "median" });
+        }
+      } else
+        add(
+          "Capped pedestrian island",
+          [x === island.minX ? 224 : x === island.maxX - 16 ? 272 : 240, 2000, 16, 32],
+          x,
+          island.minY,
+          "median",
+        );
+    }
+  for (const crossing of plan.crossings) {
+    // Keep the south-facing curb shadow; paint only its road-side half.
+    add("Crossing entry at sidewalk", [64, 1968, 32, 16], crossing.x, crossing.top, "paint");
+    for (let y = crossing.top + 16; y < crossing.bottom - 16; y += 16) {
+      if (plan.refuge && y >= plan.refuge.minY && y < plan.refuge.maxY) continue;
+      add("Zebra crossing", [64, 1984, 32, 16], crossing.x, y, "paint");
+    }
+    add("Crossing exit at sidewalk", [64, 1984, 32, 8], crossing.x, crossing.bottom - 16, "paint");
+  }
+  for (const bay of plan.parking)
+    add("Marked curbside parking bay", [16, 2048, 80, 32], bay.minX, bay.minY, "paint");
+  if (c.geometry !== "rounded")
+    for (let x = 0; x < SURFACE_COLS; x += 2) {
+      if (c.geometry === "refuge" && x >= 5 && x < 27) continue;
+      if (plan.crossings.some((p) => x * 16 >= p.x - 32 && x * 16 < p.x + p.width + 32)) continue;
+      add(
+        "Dashed lane divider",
+        [32, 1968, 16, 16],
+        x * 16,
+        (c.geometry === "parking" ? 13 : 12) * 16 - 8,
+        "paint",
+      );
+    }
+  return pieces;
 }

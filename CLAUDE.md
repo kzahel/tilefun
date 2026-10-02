@@ -78,6 +78,15 @@ for a future promotion; v4 still pins its original neutral bank. Surface
 notes carry a case ID and
 `surfaceRecipe`, with no fake building or prop IDs.
 
+The separate Road geometry batch has four new candidates at
+`/tilefun/building-lab.html?run=road-geometry`: native curved curb joins,
+pedestrian refuge, crossing approaches and curbside parking bays. These use
+`city-surfaces-v2` in the same composer/renderer; place facts record crossings,
+sidewalk extensions, island/landing bounds and parking reservations. Its
+review queue and pause state are independent of the nine approved foundation
+scenes. All cases are indexed in Workshop, including Roads sidebar counts.
+This batch awaits human review and is not promoted into a saved-world generator.
+
 Dense neighborhood review is `/tilefun/building-lab.html?run=districts`, with
 three views of one real `regional-v5` review world (seed 2026, tile 300,519). The lab,
 explorer and game use the same plan, pinned building factories and terrain

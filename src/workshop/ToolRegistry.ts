@@ -19,7 +19,8 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
     id: "roads",
     name: "Roads & sidewalks",
-    description: "Widths, curbs, intersections, crossings and raised dividers.",
+    description:
+      "Approved road foundation plus new curved curbs, refuge crossings and parking bays in the Road geometry batch.",
     url: "building-lab.html?run=surfaces",
     mode: "review",
   },
@@ -108,6 +109,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
   {
+    id: "roads-geometry",
+    name: "Road geometry",
+    description:
+      "Four new cases: curved curbs, pedestrian refuge, crossing approaches and parking bays.",
+    toolId: "roads",
+  },
+  {
     id: "buildings",
     name: "Building recipes & blocks",
     description: "Existing apartment, hotel and storefront candidates.",
@@ -134,4 +142,14 @@ export const CITY_BATCHES: ReviewBatch[] = [
 ];
 export function workshopHref(tool: string, query = ""): string {
   return `/tilefun/workshop.html#/tool/${encodeURIComponent(tool)}${query ? `?${query.replace(/^\?/, "")}` : ""}`;
+}
+
+export function reviewToolOwnsBatch(
+  tool: string,
+  batch: string,
+  batches: readonly ReviewBatch[] = CITY_BATCHES,
+) {
+  return tool === "rooms"
+    ? batch.startsWith("rooms-")
+    : batch === tool || batches.some((b) => b.id === batch && b.toolId === tool);
 }

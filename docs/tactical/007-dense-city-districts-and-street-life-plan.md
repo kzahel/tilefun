@@ -473,3 +473,35 @@ walking clearances and parking guides are retained. All six changed appearances
 return to human review; road, building and district approvals remain intact.
 Review this palette before promoting intentional street furnishing into city
 generation.
+
+## Road geometry review checkpoint — 2026-10-02
+
+The next four-case batch is **Road geometry** in Workshop, also available at
+`building-lab.html?run=road-geometry`. It has independent navigation, drafts,
+approval/report/pause state and exact source/render identities. The previous
+nine road scenes, six street scenes and three district views retain their
+approvals. Both road batches appear under Roads & sidewalks and in the global
+inbox, with a master-index shortcut to the new batch.
+
+Cases: rounded four-way curb joins; a capped pedestrian island with an open
+central refuge landing; two crossings with sidewalk extensions; and three
+native curbside parking bays with sidewalk gaps and a separate crossing.
+All surfaces reuse `CitySurfaceRecipes` and `CitySurfaceRenderer`. Source art
+is pinned to the committed complete sheet: quarter-curbs at x224/x288,
+y1920/y1952; island caps/middle at x224/x240/x272,y2000; crossing entry at
+x64,y1968 and paint at x64,y1984; marked 80×32 parking bay at x16,y2048.
+These exact clips have source-use inventory entries and clickable atlas links.
+No curb is rotated, mirrored or stretched. Crossing approaches preserve the
+authored curb shading; modeled accessible ramps remain a later milestone.
+
+`city-surfaces-v2` records shared crossing, sidewalk-extension, island/refuge
+and parking bounds alongside the source pieces. This is a review candidate,
+not a change to frozen v4/v5 output or their promoted bank. After human review,
+promote accepted geometry and placement reservations into a new generated
+commercial-block revision, then add the approved furniture and parked cars.
+
+Validation: typechecks, production build and Biome pass (74 existing warnings);
+1,126 unit tests and all 202 browser tests pass. Checks cover opaque source
+clips, exact preview pixels, refuge/parking reservations, phone layout, feedback
+round trips, independent pause state and all nine approved foundation renders.
+All 301 existing Workshop candidate identities remain unchanged.

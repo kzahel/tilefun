@@ -21,8 +21,9 @@ import {
 } from "../generation/regional/CityBuildingPrefabs.js";
 import { STREET_REVIEW_SCENES, type StreetScene } from "../generation/regional/StreetRecipes.js";
 import {
-  CITY_SURFACE_CASES,
+  ALL_CITY_SURFACE_CASES,
   citySurfaceComposition,
+  citySurfaceRecipe,
   composeCitySurface,
 } from "../road/CitySurfaceRecipes.js";
 import {
@@ -57,13 +58,13 @@ export function artReviewDefinitions() {
       prefab: "",
       url: `/tilefun/building-lab.html?scene=${scene}&prefab=${required(cityPrefabBlock(scene)[0]).prefab.type}`,
     })),
-    ...CITY_SURFACE_CASES.map((c) => ({
+    ...ALL_CITY_SURFACE_CASES.map((c) => ({
       id: `surface:${c.id}`,
-      batchId: "roads",
+      batchId: c.geometry ? "roads-geometry" : "roads",
       name: c.name,
       scene: "surface" as const,
       prefab: c.id,
-      url: `/tilefun/building-lab.html?run=surfaces&case=${c.id}`,
+      url: `/tilefun/building-lab.html?run=${c.geometry ? "road-geometry" : "surfaces"}&case=${c.id}`,
     })),
     ...STREET_REVIEW_SCENES.map((c) => ({
       id: `street:${c.id}`,
@@ -86,7 +87,9 @@ export function artReviewDefinitions() {
 export type ArtReviewDefinition = ReturnType<typeof artReviewDefinitions>[number];
 export function artReviewContext(d: ArtReviewDefinition) {
   const surface =
-    d.scene === "surface" ? required(CITY_SURFACE_CASES.find((c) => c.id === d.prefab)) : undefined;
+    d.scene === "surface"
+      ? required(ALL_CITY_SURFACE_CASES.find((c) => c.id === d.prefab))
+      : undefined;
   const street =
     d.scene === "street"
       ? required(STREET_REVIEW_SCENES.find((c) => c.id === d.prefab))
@@ -197,7 +200,9 @@ export async function buildArtCandidate(
     url: d.url,
     revision: await sha256(new TextEncoder().encode(JSON.stringify(context.composition))),
     renderFingerprint: await canvasFingerprint(canvas),
-    ...(context.surface ? { caseId: context.surface.id, surfaceRecipe: "city-surfaces-v1" } : {}),
+    ...(context.surface
+      ? { caseId: context.surface.id, surfaceRecipe: citySurfaceRecipe(context.surface) }
+      : {}),
     ...(context.street
       ? {
           caseId: context.street.id,
