@@ -76,5 +76,6 @@ case ID, promoted building IDs and prop types. Keep new runs indexed in tools.
 snapshot, not build output. Do not regenerate it from changing review candidates.
 Regional v4 pins the neutral surface lookup and persistent RoadType IDs 5–14;
 its geometry, assets, surface choices and realized fixtures have freeze tests.
-Future output changes require a new revision and promoted IDs/bank. The default
-regional choice remains v3; choose Dense districts (v4) explicitly for this demo.
+Future output changes require a new revision and promoted IDs/bank. New worlds
+default to Procedural regional with Dense districts (v4); older generators and
+regional revisions remain available with legacy/old labels.

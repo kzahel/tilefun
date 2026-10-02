@@ -1,12 +1,16 @@
 import { expect, test } from "@playwright/test";
 import { actorPlacements } from "../src/generation/ActorPlacements.js";
-import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { createGenerator } from "../src/generation/Generator.js";
 import { inspectionPlacements } from "../src/persistence/WorldInspection.js";
 import { Chunk } from "../src/world/Chunk.js";
 import { chunkData } from "../src/world/ChunkData.js";
 
-const baselineGeneration = createDescriptor("regional", 2026);
+const baselineGeneration = {
+  type: "regional",
+  version: "regional-v3",
+  seed: 2026,
+  preset: "temperate-v1",
+} as const;
 for (const fixture of [
   { name: "farm", x: 677, y: 1320, actor: "farm:0:1:cow" },
   { name: "woodland", x: -985, y: -985, actor: "woodland:-8:-8:crow" },

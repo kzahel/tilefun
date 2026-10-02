@@ -82,6 +82,7 @@ it("authority resolves an omitted seed once and a resolved descriptor requires n
     return 17;
   });
   expect(descriptor.seed).toBe(17);
+  expect(descriptor.version).toBe("regional-v4");
   expect(
     resolveCreation(descriptor, () => {
       calls++;

@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { DistrictSource } from "../src/generation/regional/DistrictStrategy.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
@@ -17,7 +16,12 @@ for (const kind of ["apartment", "shop", "home"] as const)
             : l.buildingType.startsWith("prop-regional-apartment-"),
       );
     if (!lot) throw new Error(`Missing ${kind} checkpoint`);
-    const generation = createDescriptor("regional", 2026),
+    const generation = {
+        type: "regional",
+        version: "regional-v3",
+        seed: 2026,
+        preset: "temperate-v1",
+      } as const,
       arrival = { x: lot.entrance.x, y: lot.entrance.y, generation };
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));

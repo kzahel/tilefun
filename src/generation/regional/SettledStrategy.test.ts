@@ -22,9 +22,19 @@ import { DistrictSource } from "./DistrictStrategy.js";
 import { QUERY_LIMITS } from "./RegionalPlanner.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
+const settledGeneration = {
+  type: "regional",
+  version: "regional-v3",
+  seed: 2026,
+  preset: "temperate-v1",
+} as const;
+
 it("freezes v2 terrain and placements independently of the new default revision", () => {
   const generator = createGenerator(
-    resolveDescriptor({ ...createDescriptor("regional", 2026), version: "regional-v2" } as never),
+    resolveDescriptor({
+      ...settledGeneration,
+      version: "regional-v2",
+    } as never),
   );
   const h = createHash("sha256");
   for (const [cx = 0, cy = 0] of [
@@ -52,7 +62,7 @@ it("admitted country plans have deterministic owners, shared features, and bound
     const first = source.query(p.bounds).find((v) => v.id === p.id);
     source.query({ minX: 3000, minY: 3000, maxX: 3040, maxY: 3040 });
     expect(source.query(p.bounds).find((v) => v.id === p.id)).toEqual(first);
-    const steps = overviewSteps(createDescriptor("regional", 2026), {
+    const steps = overviewSteps(settledGeneration, {
       bounds: p.bounds,
       detail: "region",
       sampleStep: 4,
@@ -74,7 +84,7 @@ it("admitted country plans have deterministic owners, shared features, and bound
   expect([...styles].sort()).toEqual(["garden", "market", "residential"]);
 });
 it("v3 keeps shared half-tile borders at farms, woods, city edges, and negative coordinates", () => {
-  const g = createGenerator(createDescriptor("regional", 2026));
+  const g = createGenerator(settledGeneration);
   for (const [cx = 0, cy = 0] of [
     [42, 82],
     [-60, -60],
@@ -94,7 +104,7 @@ it("v3 keeps shared half-tile borders at farms, woods, city edges, and negative 
   }
 });
 it("planned actor routes are navigable against the actual generated terrain and prop walls", () => {
-  const g = createGenerator(createDescriptor("regional", 2026)),
+  const g = createGenerator(settledGeneration),
     world = new World(g.terrain),
     props = new PropManager(),
     seen = new Set<string>();
@@ -152,7 +162,7 @@ it("planned actor routes are navigable against the actual generated terrain and 
   }
 });
 it("generated actor eviction is disposable, removal is durable, and routes use normal physics", () => {
-  const g = createGenerator(createDescriptor("regional", 2026)),
+  const g = createGenerator(settledGeneration),
     manager = new EntityManager(),
     deleted = new Set<string>();
   let dirty = 0;

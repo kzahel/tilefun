@@ -1,6 +1,43 @@
 import { expect, test } from "@playwright/test";
 import { createDescriptor, resolveDescriptor } from "../src/generation/GenerationDescriptor.js";
 
+test("new worlds default to procedural regional v4 and clearly label older choices", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  const initial = JSON.parse(
+    (await page.locator("#game").getAttribute("data-generation")) ?? "null",
+  );
+  expect(initial).toMatchObject({ type: "regional", version: "regional-v4" });
+  await page.keyboard.press("Escape");
+  const type = page.getByRole("combobox", { name: "World type" });
+  const revision = page.getByRole("combobox", { name: "Regional revision" });
+  await expect(type).toHaveValue("regional");
+  await expect(revision).toHaveValue("regional-v4");
+  await expect(type.locator("option")).toHaveText([
+    "Procedural regional",
+    "Classic (legacy)",
+    "Island (legacy)",
+    "Flat (legacy)",
+  ]);
+  await expect(revision.locator("option")).toHaveText([
+    "Dense districts (v4)",
+    "Settled world (v3, legacy)",
+    "Districts (v2, old)",
+    "Terrain only (v1, old)",
+  ]);
+  await page.getByRole("textbox", { name: "World seed" }).fill("2026");
+  await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.locator("#game")).toHaveAttribute(
+    "data-generation",
+    JSON.stringify(createDescriptor("regional", 2026)),
+  );
+  await page.goto("/tilefun/world-explorer.html");
+  await expect(type).toHaveValue("regional");
+  await expect(revision).toHaveValue("regional-v4");
+});
+
 test("game creates and reopens every generator with the pinned descriptor in IndexedDB", async ({
   page,
 }) => {
@@ -69,7 +106,12 @@ test("explorer handoff preserves settings and game reports an invalid seed", asy
 test("Play here creates at the preview location and saved inspection includes a deleted building", async ({
   page,
 }) => {
-  const generation = createDescriptor("regional", 2026);
+  const generation = {
+    type: "regional",
+    version: "regional-v3",
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(
     `/tilefun/world-explorer.html?generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,

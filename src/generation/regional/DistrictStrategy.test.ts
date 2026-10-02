@@ -4,11 +4,17 @@ import { createPlayer } from "../../entities/Player.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { PropManager } from "../../entities/PropManager.js";
 import { Chunk } from "../../world/Chunk.js";
-import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
 import { DistrictSource, streetDistance } from "./DistrictStrategy.js";
 import { regionalWorld } from "./WorldDescriptor.js";
+
+const settledGeneration = {
+  type: "regional",
+  version: "regional-v3",
+  seed: 2026,
+  preset: "temperate-v1",
+} as const;
 
 describe("district realization", () => {
   it("plans dry connected streets and accessible, nonoverlapping ground footprints across owners", () => {
@@ -66,7 +72,7 @@ describe("district realization", () => {
     expect(villages).toBeGreaterThan(0);
   });
   it("has order-independent chunk borders and stable placement IDs", () => {
-    const gen = createGenerator(createDescriptor("regional", 2026));
+    const gen = createGenerator(settledGeneration);
     for (const [cx, cy] of [
       [18, 32],
       [-18, -32],
@@ -83,7 +89,7 @@ describe("district realization", () => {
     }
   });
   it("deduplicates, evicts, and restores deleted/moved procedural props without serializing the generated world", () => {
-    const gen = createGenerator(createDescriptor("regional", 2026));
+    const gen = createGenerator(settledGeneration);
     const source = new DistrictSource(regionalWorld(2026));
     const plan = source.owner(0, 1);
     if (!plan) throw new Error("Missing review district");

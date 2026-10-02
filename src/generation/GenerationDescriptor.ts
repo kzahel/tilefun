@@ -24,17 +24,17 @@ export type GenerationDescriptor =
     };
 
 export const REGIONAL_REVISIONS = [
-  { version: "regional-v1", label: "Terrain only (v1)" },
-  { version: "regional-v2", label: "Districts (v2)" },
-  { version: "regional-v3", label: "Settled world (v3)" },
   { version: "regional-v4", label: "Dense districts (v4)" },
+  { version: "regional-v3", label: "Settled world (v3, legacy)" },
+  { version: "regional-v2", label: "Districts (v2, old)" },
+  { version: "regional-v1", label: "Terrain only (v1, old)" },
 ] as const;
 
 export const GENERATOR_CATALOG = [
-  { choice: "classic", label: "Classic", overview: true, settlements: false },
-  { choice: "island", label: "Island", overview: true, settlements: false },
-  { choice: "flat", label: "Flat", overview: true, settlements: false },
-  { choice: "regional", label: "Regional", overview: true, settlements: true },
+  { choice: "regional", label: "Procedural regional", overview: true, settlements: true },
+  { choice: "classic", label: "Classic (legacy)", overview: true, settlements: false },
+  { choice: "island", label: "Island (legacy)", overview: true, settlements: false },
+  { choice: "flat", label: "Flat (legacy)", overview: true, settlements: false },
 ] as const;
 
 /** Shared text seed convention. Random/omitted seeds are resolved by the authority. */
@@ -139,7 +139,7 @@ export function createDescriptor(
     case "regional":
       return resolveDescriptor({
         type: "regional",
-        version: "regional-v3",
+        version: "regional-v4",
         seed,
         preset: "temperate-v1",
       });

@@ -225,7 +225,7 @@ export class GameServer {
       await this.loadWorldIntoDefaultRealm(firstWorld.id);
     } else {
       console.warn("[tilefun] no worlds found in registry — creating new world");
-      const meta = await this.registry.createWorld("My World");
+      const meta = await this.createWorld("My World", undefined, undefined, { choice: "regional" });
       await this.loadWorldIntoDefaultRealm(meta.id);
     }
   }

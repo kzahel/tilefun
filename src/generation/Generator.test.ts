@@ -77,6 +77,7 @@ describe("frozen legacy generation", () => {
 describe("generation identity", () => {
   it("pins versions and rejects unsupported external values", () => {
     const regional = createDescriptor("regional", 2026);
+    expect(regional.version).toBe("regional-v4");
     expect(Object.isFrozen(regional)).toBe(true);
     expect(() =>
       resolveDescriptor({ ...regional, version: "future" } as unknown as GenerationDescriptor),

@@ -579,7 +579,12 @@ it("Play here checks identity and realized walls, and live inspection preserves 
   const { server, transport, registry } = await createTestSetup();
   transport.connect("local");
   await new Promise((r) => setTimeout(r, 0));
-  const generation = createDescriptor("regional", 2026);
+  const generation = {
+    type: "regional",
+    version: "regional-v3",
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
   const meta = await registry.createWorld("District", undefined, undefined, undefined, generation);
   await server.loadWorld(meta.id, { x: 300, y: 519, generation });
   const initial = server.getLocalSession().player.position;
@@ -630,7 +635,12 @@ it("building doors share persistent furnished realms and return to the right ext
   const { server, transport, registry, createStore } = await createTestSetup();
   transport.connect("local");
   await new Promise((r) => setTimeout(r, 0));
-  const generation = createDescriptor("regional", 2026);
+  const generation = {
+    type: "regional",
+    version: "regional-v3",
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
   const meta = await registry.createWorld(
     "Home district",
     undefined,

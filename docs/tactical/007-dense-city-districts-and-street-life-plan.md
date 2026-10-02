@@ -399,7 +399,8 @@ inventory identifies these promoted building pieces and exact surface clips,
 including their generation/render consumers. New realization changes require
 a new pinned revision; do not update v4's freeze fixtures to accommodate fixes.
 
-Classic/island and regional v1/v2/v3 remain unchanged; v3 remains the default.
+Classic/island and regional v1/v2/v3 remain unchanged; new worlds default to
+Procedural regional / Dense districts (v4).
 The new choice appears in the existing game/explorer revision pickers and
 resolved descriptors work through worker and saved-world boundaries. V4 uses
 v1 regional geography outside its compact settlement core; v3 farm/woodland

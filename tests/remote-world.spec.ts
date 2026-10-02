@@ -3,7 +3,6 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, test } from "@playwright/test";
-import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { createGenerator } from "../src/generation/Generator.js";
 import { DistrictStrategy } from "../src/generation/regional/DistrictStrategy.js";
 import { FsWorldRegistry } from "../src/persistence/FsWorldRegistry.js";
@@ -16,7 +15,12 @@ test("two clients share a persistent interior and cross-origin explorer reads li
   test.setTimeout(60_000);
   const directory = await mkdtemp(join(tmpdir(), "tilefun-network-check-"));
   const registry = new FsWorldRegistry(directory),
-    generation = createDescriptor("regional", 2026);
+    generation = {
+      type: "regional",
+      version: "regional-v3",
+      seed: 2026,
+      preset: "temperate-v1",
+    } as const;
   let child: ChildProcess | undefined;
   const start = async () => {
     child = spawn(process.execPath, ["--import", "tsx", "src/server/standalone.ts"], {

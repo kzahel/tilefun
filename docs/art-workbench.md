@@ -299,5 +299,6 @@ by the first dense district.
 Classic/island and Regional v1/v2/v3 remain frozen. Regional v4 explicitly uses
 the original regional geography outside a compact four-block settlement core;
 it does not include v3's farms/woodlands, broader city-profile variation or final
-regional-road joins. The default stays v3. Future appearance/layout changes must
-use a new pinned revision so saved v4 worlds do not silently change.
+regional-road joins. New worlds default to Procedural regional / Dense districts
+(v4). Future appearance/layout changes must use a new pinned revision so saved
+v4 worlds do not silently change.
