@@ -1,6 +1,6 @@
 # Tilefun Workshop
 
-Status: implementation in progress, 2026-10-02.
+Status: implemented and deployed, 2026-10-02.
 
 ## Goal and first release
 
@@ -110,3 +110,46 @@ ramps, with new batches automatically discoverable in the Workshop. Then resume
 city furnishing, parking and public-space phases from tactical 007. Multiple
 accounts/roles, SQLite indexing, push notifications and deeper editor-controller
 componentization are follow-on work, not prerequisites for this release.
+
+
+## Delivered checkpoint
+
+Implementation commit: `595da66`.
+
+- Shared React workspace with 14 tools, 21 batches and 301 registered candidates:
+  31 buildings/blocks, nine roads, six street cases, three real districts,
+  241 room cases and 11 movement configurations. No compiler exclusions.
+- Native source annotations and exact render review, global requests, activity,
+  full history/replies, independent pause/queues, previous/next/jump, room pins,
+  retained drafts/intent, and native/legacy retry outboxes.
+- Owner login protects new and old APIs on Vite dev/preview and standalone Node.
+  Private runtime files are denied through Vite's source/file access, including
+  encoded and symlink paths. Missing owner configuration fails closed.
+- Editors and explorer retain their functional controls through same-origin
+  adapters. Existing bookmarks, IDs and historical decisions remain compatible.
+- Setup, API, backups and registry generation are documented in
+  [Workshop usage and operations](../tilefun-workshop.md). A trusted local
+  `npm run workshop:inbox` reads the same combined projection.
+
+Validation: all three typechecks, 1,101 unit tests, production build and Biome
+(no errors, 74 pre-existing warnings). The final full browser suite covers
+194 tests, including standalone login/compatibility routes, phone controls,
+exact rendered identities, unseen/changed discovery, independent pause/reopen,
+source requests/replies, legacy draft/pin/outbox import, and expiry/offline retries.
+Command replay is tested after removing materialized compatibility rows to
+simulate an interrupted write, preserving exact timestamps and verdicts.
+
+Live HTTPS login/logout and phone inbox, district and full-sheet annotation
+views were checked using isolated Playwright Chromium. Private paths returned
+403, anonymous feedback access returned 401, and cookies were Secure/HttpOnly.
+Both human review histories remained byte-size unchanged during the read-only
+checks. All 31 building approvals and all nine road approvals are preserved;
+three neighborhood views and six street starter cases remain unchecked. No
+live test notes or human approvals were created. Owner credentials remain in
+private ignored configuration; sessions and passwords are not committed.
+
+Next checkpoint: human Workshop/navigation review and the three dense-neighborhood
+views, then a new road batch for curves, islands and divided intersections.
+Keep regional-v4 and its promoted assets frozen; new output requires a new
+revision/bank. Continue the city furnishing/parking/park phases after those
+foundations have been reviewed.

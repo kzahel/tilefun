@@ -67,7 +67,8 @@ Road foundation review is `/tilefun/building-lab.html?run=surfaces`, with nine
 source-backed width/curb/crossing/divider scenes, its own queue/pause, and shared
 `src/road/CitySurfaceRecipes.ts` composition. It is a candidate surface contract
 for regional-v4; earlier world revisions are unchanged. The approved neutral
-lookup is now promoted, while the revised divider remains a candidate. Surface
+lookup is now promoted, and all nine road review scenes have human approval. The divider is reviewed art
+for a future promotion; v4 still pins its original neutral bank. Surface
 notes carry a case ID and
 `surfaceRecipe`, with no fake building or prop IDs.
 

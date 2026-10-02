@@ -427,3 +427,19 @@ Eight approved road scenes pass exact composition/render fingerprint checks.
 **Next:** human review of these three views and the changed divider, then the
 ready-batch fixes. After acceptance, phase 2 adds intentional furnishing zones
 and curb/lot parking before expanding park/square and commercial families.
+
+
+## Workshop checkpoint — 2026-10-02
+
+[Tilefun Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html) now shows
+all review batches and unresolved requests in one workspace, including cases
+that have no feedback. All nine road foundation scenes have human approval,
+including the revised divider; the three dense-neighborhood views remain
+unchecked. The older “Next” paragraph above describes the prior checkpoint.
+Use the Workshop inbox for current state. Regional-v4's promoted bank remains
+frozen; review approval alone does not alter saved-world generation.
+
+See [Workshop implementation and follow-on plan](008-tilefun-workshop-plan.md)
+and [Workshop operations](../tilefun-workshop.md). Next art work is the curved
+road/island/intersection batch, followed by intentional furnishing and parking,
+then parks/squares and varied commercial families, through the same human review loop.
