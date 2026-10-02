@@ -276,6 +276,13 @@ all poses at both scales, and publish only complete records.
 
 ## Three-way Blender / 32px / 16px comparison
 
+`three-way-comparison.gif` animates all three stages side by side with matching
+poses 1, 3, 5 and 7, at 4 fps in a one-second loop. It uses one shared palette,
+without dithering. Every authored 32px/native16 color and label/background color
+is reserved exactly; only the continuous-tone Blender render is reduced to fit
+GIF's 256-color limit. The exporter verifies unchanged authored panels and
+decodes all four GIF frames to check pixels, labels, disposal, timing and loop.
+
 `three-way-comparison.png` shows the original tiger and all five new characters,
 with four directions in each of three columns: the original Blender render,
 authored 32px and separately authored native16. Pixel previews use nearest-neighbor

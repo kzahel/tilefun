@@ -36,9 +36,11 @@ def pack_reference():
     }, indent=2) + "\n", encoding="utf-8")
 
 
-def compose(pose, names, sheets, reference):
+def compose(pose, names, sheets, reference, gif=False):
     canvas = Image.new("RGB", (WIDTH, HEADER + len(names) * ROW_HEIGHT + 56), BG)
     draw = ImageDraw.Draw(canvas)
+    if gif:
+        draw.fontmode = "1"
     title = ImageFont.load_default(size=25)
     heading = ImageFont.load_default(size=19)
     body = ImageFont.load_default(size=15)
@@ -69,6 +71,50 @@ def compose(pose, names, sheets, reference):
     return canvas
 
 
+def export_gif(names, sheets, reference):
+    # Reserve every authored sprite color, background and label color exactly.
+    # Only the continuous-tone Blender reference needs GIF palette reduction.
+    colors = {BG, TEXT, (239, 243, 240)}
+    for sheet in sheets.values():
+        colors.update(pixel[:3] for pixel in sheet.get_flattened_data() if pixel[3])
+    exact = sorted(colors)
+    assert len(exact) < 256
+    studio = Image.new("RGB", reference.size, (239, 243, 240))
+    studio.paste(reference, (0, 0), reference)
+    remaining = 256 - len(exact)
+    render_palette = studio.quantize(colors=remaining, dither=Image.Dither.NONE)
+    palette = Image.new("P", (1, 1))
+    palette.putpalette([channel for color in exact for channel in color] + render_palette.getpalette()[:remaining * 3])
+    exact_indices = {color: index for index, color in enumerate(exact)}
+    encoded = []
+    for pose in range(4):
+        frame = compose(pose, names, sheets, reference, gif=True)
+        indexed = frame.quantize(palette=palette, dither=Image.Dither.NONE)
+        # Pillow's color lookup can approximate very similar palette entries.
+        # Override reserved colors so no authored pixel or label can change.
+        pixels = bytearray(indexed.tobytes())
+        for index, color in enumerate(frame.get_flattened_data()):
+            if color in exact_indices:
+                pixels[index] = exact_indices[color]
+        indexed.frombytes(bytes(pixels))
+        rgb = indexed.convert("RGB")
+        for row in range(len(names)):
+            y = HEADER + row * ROW_HEIGHT
+            for x in STAGE_X[1:]:
+                area = (x, y, x + 536, y + ROW_HEIGHT - 6)
+                assert rgb.crop(area).tobytes() == frame.crop(area).tobytes(), "Authored pixels changed"
+        encoded.append(indexed)
+    path = OUT / "three-way-comparison.gif"
+    encoded[0].save(path, save_all=True, append_images=encoded[1:], duration=250, loop=0, disposal=1, optimize=False)
+    with Image.open(path) as gif:
+        assert gif.n_frames == 4 and gif.info["loop"] == 0
+        for pose in range(4):
+            gif.seek(pose)
+            assert gif.info["duration"] == 250
+            assert gif.convert("RGB").tobytes() == encoded[pose].convert("RGB").tobytes(), "GIF disposal changed frame pixels"
+    print("Validated three-way GIF: 4 poses / 4fps / 1s loop; exact authored pixels and labels; one shared undithered render palette")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pack-reference", action="store_true")
@@ -97,7 +143,8 @@ def main():
         frame.save(path)
         with Image.open(path) as encoded:
             assert encoded.convert("RGB").tobytes() == frame.tobytes()
-    print("Exported four lossless comparison sheets: real Tiger 3D reference, authored32, native16; all six characters/four directions")
+    export_gif(names, sheets, reference)
+    print("Exported four lossless comparison sheets and looping GIF: real Tiger 3D reference, authored32, native16; all six characters/four directions")
 
 
 if __name__ == "__main__":
