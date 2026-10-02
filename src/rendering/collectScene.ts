@@ -203,7 +203,7 @@ export function collectScene(
 
     const baseItem = {
       kind: "sprite",
-      sortKey: p.position.wy,
+      sortKey: p.position.wy + (p.sortOffsetY ?? 0),
       wx: p.position.wx,
       wy: p.position.wy,
       zOffset: elevOffset,

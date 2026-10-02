@@ -23,6 +23,8 @@ export interface Prop {
   proceduralId?: string;
   type: string;
   position: { wx: number; wy: number };
+  /** Explicit asset depth datum; omitted for all legacy props. */
+  sortOffsetY?: number;
   sprite: {
     parts?: readonly FacadePiece[];
     sheetKey: string;

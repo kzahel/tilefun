@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "assets": [
+    {
+      "id": "me:1952:128:48:32",
+      "rect": [
+        1952,
+        128,
+        48,
+        32
+      ],
+      "metadata": {
+        "name": "Picnic table with attached benches",
+        "category": "seating",
+        "kind": "prop",
+        "tags": [
+          "seating",
+          "Camping"
+        ],
+        "settings": [
+          "park",
+          "square",
+          "market"
+        ],
+        "facing": "unknown",
+        "anchor": [
+          24,
+          32
+        ],
+        "footprint": [
+          -22,
+          -14,
+          44,
+          12
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "width": 44,
+            "height": 12,
+            "zHeight": 18
+          }
+        ],
+        "depthOffset": 0
+      }
+    },
+    {
+      "id": "me:80:208:48:32",
+      "rect": [
+        80,
+        208,
+        48,
+        32
+      ],
+      "metadata": {
+        "name": "Wide city bench",
+        "category": "seating",
+        "kind": "prop",
+        "tags": [
+          "seating",
+          "City Props"
+        ],
+        "settings": [
+          "park",
+          "square",
+          "sidewalk"
+        ],
+        "facing": "unknown",
+        "anchor": [
+          24,
+          32
+        ],
+        "footprint": [
+          -22,
+          -14,
+          44,
+          12
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "width": 44,
+            "height": 12,
+            "zHeight": 14
+          }
+        ],
+        "depthOffset": 0
+      }
+    },
+    {
+      "id": "me:1264:2720:48:48",
+      "rect": [
+        1264,
+        2720,
+        48,
+        48
+      ],
+      "metadata": {
+        "name": "Striped-awning street food cart",
+        "category": "market",
+        "kind": "prop",
+        "tags": [
+          "planting",
+          "Vehicles"
+        ],
+        "settings": [
+          "square",
+          "market",
+          "sidewalk"
+        ],
+        "facing": "unknown",
+        "anchor": [
+          24,
+          48
+        ],
+        "footprint": [
+          -20,
+          -22,
+          40,
+          18
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": -4,
+            "width": 40,
+            "height": 18,
+            "zHeight": 32
+          }
+        ],
+        "depthOffset": 0
+      }
+    },
+    {
+      "id": "me:400:5152:48:64",
+      "rect": [
+        400,
+        5152,
+        48,
+        64
+      ],
+      "metadata": {
+        "name": "Open blue parasol",
+        "category": "shade",
+        "kind": "prop",
+        "tags": [
+          "shade",
+          "Beach"
+        ],
+        "settings": [
+          "square",
+          "park",
+          "café"
+        ],
+        "facing": "unknown",
+        "anchor": [
+          24,
+          64
+        ],
+        "footprint": [
+          -4,
+          -10,
+          8,
+          8
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "width": 8,
+            "height": 8,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": 0
+      }
+    },
+    {
+      "id": "me:256:96:48:64",
+      "rect": [
+        256,
+        96,
+        48,
+        64
+      ],
+      "metadata": {
+        "name": "City shade tree · broad crown",
+        "category": "planting",
+        "kind": "prop",
+        "tags": [
+          "planting",
+          "City Props"
+        ],
+        "settings": [
+          "park",
+          "square",
+          "sidewalk"
+        ],
+        "facing": "unknown",
+        "anchor": [
+          24,
+          64
+        ],
+        "footprint": [
+          -6,
+          -12,
+          12,
+          10
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": -2,
+            "width": 12,
+            "height": 10,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "key": "ME_Singles_Camping_16x16_Benched_Table_3",
+      "name": "Picnic table with attached benches",
+      "category": "seating",
+      "settings": ["park", "square", "market"],
+      "footprint": [-22, -14, 44, 12],
+      "colliders": [{ "offsetX": 0, "offsetY": -2, "width": 44, "height": 12, "zHeight": 18 }]
+    },
+    {
+      "key": "ME_Singles_City_Props_16x16_Bench_2",
+      "name": "Wide city bench",
+      "category": "seating",
+      "settings": ["park", "square", "sidewalk"],
+      "footprint": [-22, -14, 44, 12],
+      "colliders": [{ "offsetX": 0, "offsetY": -2, "width": 44, "height": 12, "zHeight": 14 }]
+    },
+    {
+      "key": "ME_Singles_Vehicles_16x16_Street_Food_Cart_1",
+      "name": "Striped-awning street food cart",
+      "category": "market",
+      "settings": ["square", "market", "sidewalk"],
+      "footprint": [-20, -22, 40, 18],
+      "colliders": [{ "offsetX": 0, "offsetY": -4, "width": 40, "height": 18, "zHeight": 32 }]
+    },
+    {
+      "key": "21_Beach_16x16_Blue_Beach_Umbrella_Opened",
+      "name": "Open blue parasol",
+      "category": "shade",
+      "settings": ["square", "park", "café"],
+      "footprint": [-4, -10, 8, 8],
+      "colliders": [{ "offsetX": 0, "offsetY": -2, "width": 8, "height": 8, "zHeight": 48 }]
+    },
+    {
+      "key": "ME_Singles_City_Props_16x16_Tree_11",
+      "name": "City shade tree · broad crown",
+      "category": "planting",
+      "settings": ["park", "square", "sidewalk"],
+      "footprint": [-6, -12, 12, 10],
+      "colliders": [{ "offsetX": 0, "offsetY": -2, "width": 12, "height": 10, "zHeight": 48 }]
+    }
+  ]
+}
