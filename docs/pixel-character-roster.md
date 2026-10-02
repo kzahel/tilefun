@@ -3,8 +3,8 @@
 The [Pixel Character Gallery](https://tilefun.graehlarts.com/tilefun/demos/pixel-characters/)
 is a standalone sprite study, discoverable from the root tool directory. It
 shares no runtime art with the game and leaves the Tiger Walk Demo untouched.
-Only finished characters appear in its generated registry. Squirrel and bear
-are planned additions for subsequent sessions.
+Only finished characters appear in its generated registry. Bear is a planned
+addition for a subsequent session.
 
 ## Workflow and reproducible commands
 
@@ -163,9 +163,44 @@ There are no third-party character models or textures.
   symlink EPERM baseline in `src/server/staticFiles.test.ts` and
   `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
 
+## Squirrel
+
+- Design: upright russet squirrel with small rounded ears, a short cream muzzle,
+  a pear-shaped cream belly and compact russet paws. Separate front/back/profile
+  head and torso masters at 32px and native16 use eight shared colors and broad
+  flat shadows. The large curved tail has a thick lobe, a concave inner edge,
+  stepped fur clusters and a tapered root; it remains distinct at native16.
+- Reused rig/guide: `art-source/blender/tiger.blend`, through committed
+  `art-source/pixel-tiger/pose-guides.json` frames 1, 3, 5 and 7. Authored pixel
+  patterns composed with Pillow; no new Blender model or Aseprite painting.
+  The head/body sit forward to reserve plume space. Compact opposing forepaw
+  swings and wider profile contacts give connected, visible limb motion.
+  Two tail drawings at each size sway with per-pose anchors, behind the face.
+  The optional generator `tail.patterns` path is justified by this bushy anatomy;
+  existing ribbon-tail and tailless exports retain identical sprite pixels.
+- Editable source: `art-source/pixel-characters/squirrel.json`. Regenerate exactly:
+  `uv run --with pillow python scripts/blender/finish_characters.py --character squirrel`.
+- Outputs: `public/demos/pixel-characters/squirrel-32.png`, `squirrel-16.png`,
+  `squirrel.json`, `squirrel-contact-sheet.png`, `squirrel-preview.gif`, and the
+  completed `characters.json` registry. Browser captures in the same directory:
+  `squirrel-gallery-desktop.png`, `squirrel-gallery-phone.png` and
+  `squirrel-gallery-native16-phone.png`.
+- Review: all directions and four poses inspected enlarged and at actual size,
+  plus directional GIF frames and desktop/mobile gallery captures. Export checks
+  cover whole-head stability, connected silhouettes, palette, binary alpha,
+  padding, four distinct poses and the one-second loop. E2E coverage selects the
+  squirrel, checks exact directional sheet pixels at both sizes, walks/releases/
+  resets in all directions and advances through all four poses at both sizes.
+- Validation: `npx tsc --noEmit`, `npx biome check --write .` and
+  `npm run build` passed with existing warnings; unrelated art-catalog formatting
+  was restored. `npx playwright test --workers=2`: **181 passed, 1 skipped**.
+  `npm test`: **1080 passed, 1 failed, 10 skipped**, matching the known Windows
+  symlink EPERM baseline in `src/server/staticFiles.test.ts` and
+  `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
+
 ## Add the next character
 
-For the squirrel, add `art-source/pixel-characters/squirrel.json`, with unique `id`, `name`,
+For the bear, add `art-source/pixel-characters/bear.json`, with unique `id`, `name`,
 `description`, `provenance`, `poseGuides`, `palette`, `tail`, `limbs`, `32` and
 `16` records. Use the cat as a schema example, but author species-specific
 head/torso/limb patterns and motion overrides. Pattern keys are `front`, `back`,
@@ -174,10 +209,13 @@ Rows may contain readability spaces. `poseOverrides` has four records per
 direction, merged over the guide samples; omitted overrides retain guide values.
 Tail and limb color fields name palette symbols. All paths are repo-relative.
 Set `tail` to `null` for characters without a visible tail, such as the person.
+For broad appendages, the squirrel demonstrates `tail.patterns`: four pattern
+names per direction, referring to drawings in each size record, placed at each
+pose's `tailCenter` (32px guide coordinates). Right-facing drawings mirror.
 
-Run `uv run --with pillow python scripts/blender/finish_characters.py --character squirrel`.
+Run `uv run --with pillow python scripts/blender/finish_characters.py --character bear`.
 The generator scans all source records and adds completed exports to
 `characters.json`. No gallery edit is needed. Inspect all poses/motion at both
-sizes, append a Squirrel entry here, run repo checks and commit only the squirrel work.
+sizes, append a Bear entry here, run repo checks and commit only the bear work.
 Later additions use the same route. Keep the tiger and existing characters'
 exports unchanged unless their task specifically calls for revising them.

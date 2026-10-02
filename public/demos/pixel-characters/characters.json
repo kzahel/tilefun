@@ -23,6 +23,14 @@
       "metadata": "person.json",
       "contactSheet": "person-contact-sheet.png",
       "preview": "person-preview.gif"
+    },
+    {
+      "id": "squirrel",
+      "name": "Russet Squirrel",
+      "description": "An upright russet squirrel with rounded ears, a cream belly, small paws and a large bushy curved tail.",
+      "metadata": "squirrel.json",
+      "contactSheet": "squirrel-contact-sheet.png",
+      "preview": "squirrel-preview.gif"
     }
   ]
 }

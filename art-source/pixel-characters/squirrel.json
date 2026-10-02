@@ -1,0 +1,304 @@
+{
+  "id": "squirrel",
+  "name": "Russet Squirrel",
+  "description": "An upright russet squirrel with rounded ears, a cream belly, small paws and a large bushy curved tail.",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "provenance": "Original squirrel front/back/profile masters and separate native16 drawings composed using tiger.blend frames 1, 3, 5, 7. Compact forepaws, narrower head, pear-shaped belly and wider profile contacts adapt the existing guide rig. Broad fur-cluster tail drawings replace the thin guide ribbon, with two authored sway shapes and per-pose placement. No new Blender modeling or Aseprite painting.",
+  "palette": {
+    "b": "#553021",
+    "s": "#89432b",
+    "r": "#bd5930",
+    "h": "#e28745",
+    "w": "#f7dfae",
+    "g": "#cfad79",
+    "k": "#282328",
+    "p": "#d99b81"
+  },
+  "limbs": {
+    "outline": "b",
+    "fill": "r",
+    "profileForegroundArm": 1
+  },
+  "32": {
+    "front": [
+      ".bb.....bb.",
+      "bhrb...bssb",
+      "brprbbbpssb",
+      ".brhhrrssb.",
+      ".brrrrrssb.",
+      "brwkrkwrssb",
+      "brrkrrkrssb",
+      "brgwwkwwgsb",
+      ".bgwwwwwgb.",
+      "..bgwgwgb..",
+      "...bbbbb..."
+    ],
+    "back": [
+      ".bb.....bb.",
+      "bhrb...bssb",
+      "brhrbbbrssb",
+      ".brhhrrssb.",
+      ".brhrrrssb.",
+      "brrhrrrsssb",
+      "brrrrrrsssb",
+      "brrrrrssssb",
+      ".brrrssssb.",
+      "..brssssb..",
+      "...bbbbb..."
+    ],
+    "profile": [
+      ".....bb....",
+      "....bhrb...",
+      "...brprsb..",
+      "..brhhrrsb.",
+      ".brrrrrssb.",
+      ".brwkrsssb.",
+      "bgrkrrsssb.",
+      "kgwwrrsssb.",
+      "bgwgwsssb..",
+      ".bgwsssb...",
+      "..bbbbb...."
+    ],
+    "body": [
+      "..bbbbb..",
+      ".brwwwsb.",
+      "brwwwwwsb",
+      "brwwwwwsb",
+      "brgwwwwsb",
+      "brrgwwgsb",
+      ".brrggsb.",
+      ".brrsssb.",
+      "..bbbbb.."
+    ],
+    "backBody": [
+      "..bbbbb..",
+      ".brhrrsb.",
+      "brhrrrrsb",
+      "brhrrrssb",
+      "brrrrrssb",
+      "brrrrsssb",
+      ".brrsssb.",
+      ".brssssb.",
+      "..bbbbb.."
+    ],
+    "sideBody": [
+      "..bbbb..",
+      ".bwrrsb.",
+      "bwgrrrsb",
+      "bwgrrrsb",
+      "bwgrrssb",
+      "bggrrssb",
+      ".brsssb.",
+      ".brsssb.",
+      "..bbbb.."
+    ],
+    "arm": [".bb.", "bhrb", "brrb", "bssb", ".bb."],
+    "foot": [".bbb.", "brrsb", "bhrsb", "bbbbb"],
+    "tailA": [
+      "....bbbbb...",
+      "..bbhhhrrb..",
+      ".bhhhhrrrsb.",
+      "bhhhrrrrrssb",
+      "bhhrrrrrrssb",
+      "brrrrrrrrssb",
+      ".brrbrrrrssb",
+      "..bb.brrrssb",
+      ".....brrrssb",
+      "....brrrrssb",
+      "....brrrrsb.",
+      "...brrrrssb.",
+      "...brrrssb..",
+      "..brrrsssb..",
+      "..brrrssb...",
+      ".brrrssb....",
+      "brrrssb.....",
+      "brrssb......",
+      ".bbbb......."
+    ],
+    "tailB": [
+      "...bbbbb....",
+      ".bbhhhrrb...",
+      "bhhhhrrrrb..",
+      "bhhrrrrrssb.",
+      "bhrrrrrrrssb",
+      "brrrrrrrrssb",
+      ".brbrrrrrssb",
+      "..b.brrrrssb",
+      "....brrrrssb",
+      "....brrrssb.",
+      "...brrrrssb.",
+      "...brrrsssb.",
+      "..brrrrssb..",
+      "..brrrssb...",
+      ".brrrrssb...",
+      ".brrrssb....",
+      "brrrssb.....",
+      "brrssb......",
+      ".bbbb......."
+    ]
+  },
+  "16": {
+    "front": [".b...b.", "brbbbsb", "brrrssb", "bkrrkrb", "bgwkwgb", ".bwwwb.", "..bbb.."],
+    "back": [".b...b.", "bhbbbsb", "bhrrssb", "brrrssb", "brrsssb", ".brssb.", "..bbb.."],
+    "profile": ["...bb..", "..bhrb.", ".brrrsb", ".bkrssb", "kgwrssb", ".bwgssb", "..bbbb."],
+    "body": [".bbb.", "brwwb", "bwwwb", "brwgb", ".bsb."],
+    "backBody": [".bbb.", "bhrrb", "brrsb", "brssb", ".bsb."],
+    "sideBody": [".bbb.", "bwrsb", "bwrsb", "bgrsb", ".bbb."],
+    "arm": ["bb", "rr", "bs"],
+    "foot": ["brb", "bbb"],
+    "tailA": [
+      "..bbb.",
+      ".bhhrb",
+      "bhrrsb",
+      ".brrsb",
+      "..brsb",
+      "..brsb",
+      ".brrsb",
+      ".brsb.",
+      "brrb..",
+      "bbb..."
+    ],
+    "tailB": [
+      ".bbb..",
+      "bhhrb.",
+      "bhrrsb",
+      "brrrsb",
+      ".brrsb",
+      "..brsb",
+      ".brrsb",
+      ".brsb.",
+      "brrb..",
+      "bbb..."
+    ]
+  },
+  "poseOverrides": {
+    "down": [
+      {
+        "head": [14, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[10, 21], [18, 19]],
+        "feet": [[12, 25], [16, 27]]
+      },
+      {
+        "head": [14, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[10, 21], [18, 19]],
+        "feet": [[12, 25], [16, 26]]
+      },
+      {
+        "head": [14, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[10, 19], [18, 21]],
+        "feet": [[12, 27], [16, 25]]
+      },
+      {
+        "head": [14, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[10, 19], [18, 21]],
+        "feet": [[12, 26], [16, 25]]
+      }
+    ],
+    "up": [
+      {
+        "head": [14, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[10, 21], [18, 19]],
+        "feet": [[12, 25], [16, 27]]
+      },
+      {
+        "head": [14, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[10, 21], [18, 19]],
+        "feet": [[12, 25], [16, 26]]
+      },
+      {
+        "head": [14, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[10, 19], [18, 21]],
+        "feet": [[12, 27], [16, 25]]
+      },
+      {
+        "head": [14, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[10, 19], [18, 21]],
+        "feet": [[12, 26], [16, 25]]
+      }
+    ],
+    "left": [
+      {
+        "head": [13, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[11, 19], [17, 22]],
+        "feet": [[17, 25], [11, 27]]
+      },
+      {
+        "head": [13, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[11, 19], [17, 21]],
+        "feet": [[13, 24], [15, 27]]
+      },
+      {
+        "head": [13, 10],
+        "body": [14, 19],
+        "tailCenter": [24, 14],
+        "hands": [[16, 19], [12, 22]],
+        "feet": [[11, 25], [18, 27]]
+      },
+      {
+        "head": [13, 9],
+        "body": [14, 18],
+        "tailCenter": [24, 13],
+        "hands": [[16, 19], [12, 21]],
+        "feet": [[15, 27], [13, 24]]
+      }
+    ],
+    "right": [
+      {
+        "head": [19, 10],
+        "body": [18, 19],
+        "tailCenter": [8, 14],
+        "hands": [[21, 19], [15, 22]],
+        "feet": [[15, 25], [21, 27]]
+      },
+      {
+        "head": [19, 9],
+        "body": [18, 18],
+        "tailCenter": [8, 13],
+        "hands": [[21, 19], [15, 21]],
+        "feet": [[19, 24], [17, 27]]
+      },
+      {
+        "head": [19, 10],
+        "body": [18, 19],
+        "tailCenter": [8, 14],
+        "hands": [[16, 19], [20, 22]],
+        "feet": [[21, 25], [14, 27]]
+      },
+      {
+        "head": [19, 9],
+        "body": [18, 18],
+        "tailCenter": [8, 13],
+        "hands": [[16, 19], [20, 21]],
+        "feet": [[17, 27], [19, 24]]
+      }
+    ]
+  },
+  "tail": {
+    "patterns": {
+      "down": ["tailA", "tailB", "tailA", "tailB"],
+      "up": ["tailA", "tailB", "tailA", "tailB"],
+      "left": ["tailA", "tailB", "tailA", "tailB"],
+      "right": ["tailA", "tailB", "tailA", "tailB"]
+    }
+  }
+}

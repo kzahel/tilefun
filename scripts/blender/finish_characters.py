@@ -53,7 +53,12 @@ def compose(art, palette, size, direction, pose):
         return piece, xy
 
     tail = art.get("tail")
-    if tail:
+    if tail and "patterns" in tail:
+        # Broad furry appendages need authored clusters, not a joint ribbon.
+        # Draw behind the character; the complete head remains the top layer.
+        name = tail["patterns"][direction][(pose["blenderFrame"] - 1) // 2]
+        paste(name, pose["tailCenter"])
+    elif tail:
         joints = [position(point) for point in pose["tail"]]
         draw.line(joints, fill=palette[tail["outline"]], width=3 if size == 32 else 1)
         draw.line(joints, fill=palette[tail["fill"]], width=1)
