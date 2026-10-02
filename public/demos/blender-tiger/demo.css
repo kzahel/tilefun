@@ -67,7 +67,8 @@ h1 {
   gap: 22px;
 }
 .stage-card,
-.cycle-card {
+.cycle-card,
+.compare-card {
   background: #fcfaf3;
   border: 1px solid #dcd8c9;
   border-radius: 16px;
@@ -156,8 +157,8 @@ figure {
   padding: 8px;
 }
 figure canvas {
-  width: 112px;
-  height: 112px;
+  width: 128px;
+  height: 128px;
   max-width: 100%;
   background-image: conic-gradient(#e0e5d6 25%, transparent 0 50%, #e0e5d6 0 75%, transparent 0);
   background-size: 16px 16px;
@@ -191,6 +192,52 @@ footer .credit {
   color: #74806c;
   margin-left: auto;
 }
+.art-controls,
+.finish-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 20px 0;
+  font-size: 13px;
+}
+.art-controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+select {
+  font: inherit;
+  color: inherit;
+  padding: 8px;
+  border: 1px solid #d2d7c8;
+  border-radius: 7px;
+  background: #fcfaf3;
+}
+.compare-card {
+  margin-top: 22px;
+}
+.compare-card label {
+  font-size: 12px;
+}
+.comparisons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 18px 18px;
+}
+.comparisons canvas {
+  width: 160px;
+  height: 80px;
+}
+.comparisons.actual canvas {
+  width: 80px;
+  height: 40px;
+}
+@media (max-width: 1100px) {
+  .comparisons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 @media (max-width: 740px) {
   header span {
     display: none;
@@ -207,5 +254,8 @@ footer .credit {
   }
   footer .credit {
     margin-left: 0;
+  }
+  .comparisons {
+    grid-template-columns: 1fr;
   }
 }

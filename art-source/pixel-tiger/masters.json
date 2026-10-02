@@ -1,0 +1,125 @@
+{
+  "palette": {
+    "b": "#9b492e",
+    "s": "#c56b32",
+    "o": "#eb983e",
+    "l": "#ffd06c",
+    "c": "#ffe4aa",
+    "w": "#fff2d0",
+    "k": "#292334",
+    "p": "#ec9990"
+  },
+  "32": {
+    "front": [
+      "b b . . . . . . . . . . . b b",
+      "b p b . . . . . . . . . b p b",
+      "b o l b b b b b b b b b l o b",
+      "b o l l l l l l l l l l l o b",
+      "b o l l o k o k o k o l l o b",
+      "b o o l l k l k l k l l o o b",
+      "b k o c w k o o o k w c o k b",
+      "b o k c k k o o o k k c k o b",
+      "b k o o c c c p c c c o o k b",
+      "b o o c w w c k c w w c o o b",
+      ". b s c c c k c k c c c s b .",
+      ". . b s o c c c c c o s b . .",
+      ". . . b b b b b b b b b . . ."
+    ],
+    "back": [
+      "b b . . . . . . . . . . . b b",
+      "b o b . . . . . . . . . b o b",
+      "b o l b b b b b b b b b l o b",
+      "b o l l l l l l l l l l l o b",
+      "b o l l l l l l l l l o o s b",
+      "b o l k k k l l l k k k o s b",
+      "b o o o o o o o o o o o o s b",
+      "b s o o k k k k k k k o s s b",
+      "b s o o o o o o o o o o s s b",
+      "b s s k k k o o o k k k s s b",
+      ". b s o o o o o o o o o s b .",
+      ". . b s s o o o o o s s b . .",
+      ". . . b b b b b b b b b . . ."
+    ],
+    "profile": [
+      ". . . . . b b . . . . . . . .",
+      ". . . . b p o b . . . . . . .",
+      ". . . b o l l o b b . . . . .",
+      ". . b l l l l o o s b . . . .",
+      ". b l l l l o o o s b . . . .",
+      ". b l c w k o k k s b . . . .",
+      ". b o c k k o o s s b . . . .",
+      "b p c c c o k k o s b . . . .",
+      "b c w c k c o o s s b . . . .",
+      ". b c c c o k k s b . . . . .",
+      ". . b s o o o o s b . . . . .",
+      ". . . b b b b b b . . . . . .",
+      ". . . . . . . . . . . . . . ."
+    ],
+    "body": [
+      ". . b b b b b . .",
+      ". b o c c c o b .",
+      "b k o c w c o k b",
+      "b o o c w c o s b",
+      "b k o c c c o k b",
+      ". b s c c c s b .",
+      ". b o s s s o b .",
+      ". . b b b b b . ."
+    ],
+    "backBody": [
+      ". . b b b b b . .",
+      ". b o l l l o b .",
+      "b o k k k k k s b",
+      "b o o o o o o s b",
+      "b s k k k k k s b",
+      ". b o o o o s b .",
+      ". b s s s s s b .",
+      ". . b b b b b . ."
+    ],
+    "sideBody": [
+      ". . b b b b .",
+      ". b c o o s b",
+      "b c c k k s b",
+      "b c o o o s b",
+      "b c o k k s b",
+      ". b s o s b .",
+      ". b s s s b .",
+      ". . b b b . ."
+    ],
+    "arm": [". b b .", "b l s b", "b k k b", "b o s b", "b c c b", ". b b ."],
+    "foot": [". b b b .", "b o o s b", "b o k k b", "b o o s b", "b c c c b", ". b b b ."]
+  },
+  "16": {
+    "front": [
+      "b . . . . . b",
+      "o b b b b b o",
+      "o l k l k o s",
+      "b w k o k w b",
+      "o c c p c c s",
+      ". b c k c b .",
+      ". . b b b . ."
+    ],
+    "back": [
+      "b . . . . . b",
+      "o b b b b b o",
+      "o l l l l o s",
+      "o k k o k k s",
+      "o o o o o o s",
+      ". b k k k b .",
+      ". . b b b . ."
+    ],
+    "profile": [
+      ". . . b . . .",
+      ". . b o b . .",
+      ". b l o s b .",
+      "b w k o k b .",
+      "p c c o s b .",
+      ". b c k s b .",
+      ". . b b b . ."
+    ],
+    "body": [". b b b .", "b o c o b", "b k c k b", ". b s b ."],
+    "backBody": [". b b b .", "b o k o b", "b k o k b", ". b s b ."],
+    "sideBody": [". b b .", "b c o b", "b c k b", ". b b ."],
+    "arm": ["b b", "o k", "c b"],
+    "foot": ["b o b", "b c b"]
+  }
+}

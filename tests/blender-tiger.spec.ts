@@ -6,6 +6,7 @@ test("tiger walks in all directions and stops when input is released", async ({ 
   await page.goto("/tilefun/demos/blender-tiger/");
   const garden = page.locator("#garden");
   await expect(garden).toHaveAttribute("data-ready", "true");
+  await expect(garden).toHaveAttribute("data-style", "pixels");
   await page.locator("#patrol").uncheck();
   await garden.focus();
   for (const [key, direction, axis, sign] of [
@@ -27,6 +28,48 @@ test("tiger walks in all directions and stops when input is released", async ({ 
     expect(await garden.getAttribute(`data-${axis}`)).toBe(stopped);
   }
   expect(errors).toEqual([]);
+});
+
+test("both art styles and native sizes load real sprites and comparison can show actual pixels", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/demos/blender-tiger/");
+  const garden = page.locator("#garden");
+  await expect(garden).toHaveAttribute("data-ready", "true");
+  await page.locator("#patrol").uncheck();
+  await page.locator("#animate").uncheck();
+  const images = new Set<string>();
+  for (const style of ["pixels", "render"]) {
+    for (const size of ["32", "16"]) {
+      await page.locator("#art-style").selectOption(style);
+      await page.locator("#sprite-size").selectOption(size);
+      await expect(garden).toHaveAttribute("data-style", style);
+      await expect(garden).toHaveAttribute("data-size", size);
+      await expect(page.locator("#fps-label")).toHaveText(style === "pixels" ? "4 fps" : "8 fps");
+      images.add(await garden.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL()));
+    }
+  }
+  expect(images.size).toBe(4);
+  await page.locator("#native-scale").check();
+  const comparison = page.locator("canvas[data-compare='0']");
+  await expect(comparison).toHaveCSS("width", "80px");
+  await page.locator("#art-style").selectOption("pixels");
+  await expect(garden).toHaveAttribute("data-style", "pixels");
+  // Verify actual displayed pixels match the independently loaded 16px sheet.
+  expect(
+    await page.locator("canvas[data-row='0']").evaluate(async (canvas: HTMLCanvasElement) => {
+      const image = new Image();
+      image.src = "tiger-finished-16.png";
+      await image.decode();
+      const expected = document.createElement("canvas");
+      expected.width = expected.height = 32;
+      const ctx = expected.getContext("2d");
+      if (!ctx) throw new Error("Canvas 2D context unavailable");
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(image, 0, 0, 16, 16, 0, 0, 32, 32);
+      return expected.toDataURL() === canvas.toDataURL();
+    }),
+  ).toBe(true);
 });
 
 test("direction buttons move the tiger and the mobile layout fits", async ({ page }) => {

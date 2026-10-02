@@ -13,7 +13,8 @@
       <p class="eyebrow">A LITTLE TIGER, ON THE MOVE</p>
       <h1>Four paws. Four directions.</h1>
       <p class="intro">A walking tiger with a striped, swishing tail. Take it for a stroll with WASD, the arrow keys, or the buttons below.</p>
-      <div class="badges"><span>32-pixel sprites</span><span>4 directions</span><span>8 poses per walk</span></div>
+      <div class="badges"><span>32px + native 16px</span><span>4 directions</span><span>4 authored walk poses</span></div>
+      <div class="art-controls"><label for="art-style">Character style <select id="art-style"><option value="pixels">Pixel finish · 4 poses</option><option value="render">Blender render · 8 poses</option></select></label><label for="sprite-size">Sprite detail <select id="sprite-size"><option value="32">32 pixels</option><option value="16">16 pixels</option></select></label></div>
       <div class="layout">
         <section class="stage-card" aria-label="Walk around">
           <div class="card-heading"><h2>The little garden</h2><output id="status" aria-live="off">Loading tiger…</output></div>
@@ -28,9 +29,15 @@
         <section class="cycle-card" aria-label="Directional walk cycles">
           <div class="card-heading"><h2>Every angle</h2><label class="switch"><input id="animate" type="checkbox" checked /> Animate</label></div>
           <div class="directions"><figure><canvas width="32" height="32" data-row="0" aria-label="Down-facing walk cycle"></canvas><figcaption>Down / front</figcaption></figure><figure><canvas width="32" height="32" data-row="1" aria-label="Up-facing walk cycle"></canvas><figcaption>Up / back</figcaption></figure><figure><canvas width="32" height="32" data-row="2" aria-label="Left-facing walk cycle"></canvas><figcaption>Left</figcaption></figure><figure><canvas width="32" height="32" data-row="3" aria-label="Right-facing walk cycle"></canvas><figcaption>Right</figcaption></figure></div>
-          <div class="tempo"><label for="fps">Animation tempo</label><input id="fps" type="range" min="4" max="12" value="8" /><output id="fps-label" for="fps">8 fps</output></div>
+          <div class="tempo"><label for="fps">Walk tempo</label><input id="fps" type="range" min="4" max="12" value="8" /><output id="fps-label" for="fps">4 fps</output></div>
         </section>
       </div>
+      <section class="compare-card" aria-label="Compare the character art">
+        <div class="card-heading"><h2>Render → pixel finish</h2><label><input id="native-scale" type="checkbox" /> Actual pixel size</label></div>
+        <p class="hint">Compare the same walk poses. The finished version uses eight colors and consistent face, stripe and shadow shapes. At 16px, the render is downsampled; the finish is drawn separately.</p>
+        <div class="comparisons"><figure><canvas width="80" height="40" data-compare="0" aria-label="Front render and pixel finish comparison"></canvas><figcaption>Front · render / finish</figcaption></figure><figure><canvas width="80" height="40" data-compare="1" aria-label="Back render and pixel finish comparison"></canvas><figcaption>Back · render / finish</figcaption></figure><figure><canvas width="80" height="40" data-compare="2" aria-label="Left render and pixel finish comparison"></canvas><figcaption>Left · render / finish</figcaption></figure><figure><canvas width="80" height="40" data-compare="3" aria-label="Right render and pixel finish comparison"></canvas><figcaption>Right · render / finish</figcaption></figure></div>
+      </section>
+      <div class="finish-links"><a href="finished-contact-sheet.png">All finished poses →</a><a href="finish-comparison.gif">Animated comparison →</a><a href="tiger-finished-32.png">32px finished sheet →</a><a href="tiger-finished-16.png">Native 16px sheet →</a></div>
       <footer><a href="contact-sheet.png">All 32 poses →</a><a href="tiger-walk.png">Transparent sprite sheet →</a><a href="walk-preview.gif">Animated preview →</a><span class="credit">Original Blender character · an art demo</span></footer>
       <p id="error" role="alert" hidden></p>
     </main>

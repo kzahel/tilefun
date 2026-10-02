@@ -1,0 +1,77 @@
+{
+  "versions": {
+    "32": {
+      "image": "tiger-finished-32.png",
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "pivot": [16, 27],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "sheetSha256": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a"
+    },
+    "16": {
+      "image": "tiger-finished-16.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "pivot": [8, 14],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "sheetSha256": "15c5ab20af02ddc48dc811521eda3f11fe6515f8b5765cbbe30673706cf30052"
+    }
+  },
+  "palette": {
+    "b": "#9b492e",
+    "s": "#c56b32",
+    "o": "#eb983e",
+    "l": "#ffd06c",
+    "c": "#ffe4aa",
+    "w": "#fff2d0",
+    "k": "#292334",
+    "p": "#ec9990"
+  },
+  "sourceFrames": [1, 3, 5, 7],
+  "source": "art-source/pixel-tiger/masters.json",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "builder": "scripts/blender/finish_tiger.py",
+  "method": "authored pixel parts composed using four Blender pose guides; separate 16px drawings"
+}

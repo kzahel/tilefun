@@ -1,7 +1,9 @@
 # Blender to pixel characters
 
 The Tiger Walk Demo is a standalone character study: an upright tiger, four facing directions,
-eight walk poses per direction, and a moving striped tail. It is linked from
+and a moving striped tail. It now compares the eight-pose Blender render with
+a four-pose authored pixel finish at 32px and a separately drawn 16px version.
+It is linked from
 the [tool directory](https://tilefun.graehlarts.com/tilefun/tools.html).
 Start Vite and open `/tilefun/demos/blender-tiger/`. On a deployment running
 this revision, use the [shared demo URL](https://tilefun.graehlarts.com/tilefun/demos/blender-tiger/).
@@ -82,6 +84,66 @@ The packer also reads back the encoded sheet and verifies identical eye shapes
 and colors in every pose after accounting for translation. Other shaded edges
 and markings still use the rendered result and can vary between poses.
 
+### Redraw the whole character from pose guides
+
+The second experiment uses the rig for movement and authored pixel drawings
+for the entire visible character. This follows the broad 3D-reference workflow
+described by [BlazBlue's developers](https://www.gamedeveloper.com/business/dodging-striking-winning-the-arc-system-works-interview)
+and the combination of rendered poses and pixel-art expressions/shadows in
+[KOF XIII's producer interview](https://blog.playstation.com/2011/11/01/the-king-of-fighters-xiii-interview-fighting-its-way-back-to-the-throne/).
+Those describe professional pipelines; our experiment uses reusable text pixel
+patterns and Pillow composition. The same Blender skills supplied the existing
+rig and pose source. The redraw is explicitly authored art, rather than a skill
+or shader automatically making the aesthetic decisions.
+
+1. **Choose four key poses.** Sample Blender frames 1, 3, 5 and 7. Export integer
+   screen positions for the head, torso, feet, hands and five tail joints into
+   `art-source/pixel-tiger/pose-guides.json`. Keep the saved rig as the motion
+   source; the exporter opens it and writes guides without saving over it.
+2. **Draw the parts once at the target grid.** In `masters.json`, each letter
+   is one exact palette color and `.` is transparent. Spaces just aid reading.
+   Draw the front, back and profile head, then torso, arms and feet. The right
+   profile mirrors the left drawing. Use eight colors, a warm brown outline,
+   broad shadow shapes, clear stripes, cream muzzle and fixed face details.
+3. **Compose the four poses.** Place these drawings using the projected rig
+   anchors. Connect legs to their feet and rebuild the tail as an integer-grid
+   ribbon with broad bands. Spread the front/back tail curl outward because
+   the wider drawn head would hide the original projected curl. These are
+   deliberate silhouette choices. Baked shading moves with each drawing;
+   profile shading mirrors with the profile rather than simulating new light.
+4. **Author 16px separately.** Its smaller patterns simplify eyes, stripes,
+   muzzle and limbs. Half-up coordinate rounding retains small contact/lift
+   differences, and passing poses receive a one-pixel head bob. This avoids
+   losing the walk to downsampling. The original render's 16px comparison is
+   nearest-neighbor downsampled, with that distinction stated in the demo.
+5. **Inspect and retain both versions.** Both four-pose finishes run at 4 fps
+   by default, giving a one-second loop. The comparison samples the same four
+   Blender poses at that cadence; garden mode retains the original render's
+   full eight poses at 8 fps. Both share the same travel rate. Use Actual pixel
+   size to inspect the selected art at 1:1, then compare enlarged motion.
+
+The finish step requires only committed sources and Pillow:
+
+```sh
+uv run --with pillow python scripts/blender/finish_tiger.py
+```
+
+To refresh the pose guides after editing the rig:
+
+```sh
+blender --background art-source/blender/tiger.blend --python-exit-code 1 --python scripts/blender/export_tiger_guides.py
+uv run --with pillow python scripts/blender/finish_tiger.py
+```
+
+The generator checks four distinct poses in every direction at both sizes,
+binary alpha, eight-color palette membership, padding and unchanged full head
+drawings across poses. This protects silhouette details, muzzle and markings
+as well as the eyes. It exports the two sheets, metadata, a pose sheet and a
+four-direction comparison GIF. The browser test verifies switching between
+both styles/sizes changes the rendered pixels, and that displayed native 16px
+art matches its actual sheet. The four-pose motion is deliberately economical;
+arm/leg drawings translate rather than changing shape during the swing.
+
 The earlier tornado used the same broad pipeline: procedural 3D geometry,
 periodic motion, fixed camera, shared palette and PNG packing. Its working
 files remain local under `skills/blender-pixel-tornado/`; this character study
@@ -124,15 +186,18 @@ session, but actual MCP scene creation, inspection and rendering succeeded.
 
 - `scripts/blender/build_tiger.py`: model, rig, animation and rendering.
 - `scripts/blender/pack_tiger.py`: pixel pass, packing, previews and validation.
+- `scripts/blender/export_tiger_guides.py`: projected four-pose rig references.
+- `scripts/blender/finish_tiger.py`: authored part composition and comparisons.
+- `art-source/pixel-tiger/`: editable 32px/16px pixel patterns and pose guides.
 - `art-source/blender/tiger.blend`: portable editable scene, with materials and
   keyed animation; no external textures.
 - `public/demos/blender-tiger/`: playable preview, 256x128 transparent sheet,
-  frame metadata, GIF and contact sheet.
+  frame metadata, GIF and contact sheet; 128x128 finished 32px sheet and 64x64
+  native 16px sheet, with their comparison assets.
 - `data/blender-tiger/`: ignored raw renders and diagnostic reports.
 
 The demo is a sprite workflow proof, not a replacement player asset or a full
-3D character export. Eyes now retain their authored pixel clusters; other facial
-details still simplify and some edge pixels change across poses. Review at
-native size and in motion. Next, compare it at
-the game's actual 16px player scale and tune silhouette, stride and palette
-before considering gameplay integration.
+3D character export. The original render stabilizes eyes; the authored finish
+stabilizes the complete head and baked markings. Its four-pose movement uses
+translated drawings and a simplified tail. Review both native sizes in motion,
+then tune limb pose drawings and stride before considering gameplay integration.

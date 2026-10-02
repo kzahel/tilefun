@@ -56,7 +56,7 @@ which browser-local state is visible.
 | Packed Modern Interiors atlas and index | `public/assets/tilesets/modern-interiors-atlas.png`, `public/data/modern-interiors-atlas.json` | Yes |
 | Room-review sprite subset | `src/interiors/review/assets/review-sprites.png` and `.json` | Yes |
 | Other runtime sprites, props, tiles and audio | `public/assets/` | Yes |
-| Blender tiger walk demo, editable source and builder | `public/demos/blender-tiger/`, `art-source/blender/`, `scripts/blender/` | Yes; see [the workflow guide](blender-pixel-characters.md) |
+| Blender tiger walk demo, pixel masters, editable source and builders | `public/demos/blender-tiger/`, `art-source/blender/`, `art-source/pixel-tiger/`, `scripts/blender/` | Yes; see [the workflow guide](blender-pixel-characters.md) |
 | Art inventory and source-use tracking | `public/data/art-catalog.json` and `scripts/build-art-catalog.ts` | Yes |
 | Building/street/surface recipes and pinned dense-city assets | `src/generation/regional/`, `src/road/` | Yes |
 | Downloaded original packs | Root `assets/`, ZIPs, `Sprout-Lands-Tilemap-addon/` | No; gitignored |
