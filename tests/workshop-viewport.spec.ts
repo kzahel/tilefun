@@ -54,22 +54,49 @@ test("district camera zooms at the cursor, pans without scrolling or changing pi
   await expect
     .poll(async () => Number(await frame.getAttribute("data-preview-y")))
     .toBeCloseTo(y + 45, 3);
-  await page.keyboard.down("Shift");
-  await page.mouse.wheel(0, 80);
-  await page.keyboard.up("Shift");
+  await page.mouse.move(point.x, point.y);
+  // Real touchpads include deltaX jitter, and Shift can convert scrolling to
+  // horizontal-only events. Every variant must zoom around the same tile.
+  for (const gesture of [
+    { dx: 4, dy: 30, shift: false },
+    { dx: 40, dy: 30, shift: false },
+    { dx: 0, dy: 80, shift: true },
+    { dx: 45, dy: 0, shift: true },
+  ]) {
+    const anchor = await position();
+    const zoom = Number(await frame.getAttribute("data-preview-zoom"));
+    if (gesture.shift) await page.keyboard.down("Shift");
+    await page.mouse.wheel(gesture.dx, gesture.dy);
+    if (gesture.shift) await page.keyboard.up("Shift");
+    await expect
+      .poll(async () => Number(await frame.getAttribute("data-preview-zoom")))
+      .toBeLessThan(zoom);
+    const next = await position();
+    expect(next.x).toBeCloseTo(anchor.x, 3);
+    expect(next.y).toBeCloseTo(anchor.y, 3);
+    expect(await page.evaluate(() => scrollY)).toBe(scroll);
+  }
+  const middleX = Number(await frame.getAttribute("data-preview-x")),
+    middleY = Number(await frame.getAttribute("data-preview-y")),
+    middleZoom = Number(await frame.getAttribute("data-preview-zoom"));
+  await page.mouse.down({ button: "middle" });
+  await page.mouse.move(point.x + 50, point.y + 25, { steps: 5 });
+  await page.mouse.up({ button: "middle" });
   await expect
     .poll(async () => Number(await frame.getAttribute("data-preview-x")))
-    .toBeCloseTo(x - 10, 3);
-  await page.mouse.wheel(40, 30);
+    .toBeCloseTo(middleX + 50, 3);
   await expect
     .poll(async () => Number(await frame.getAttribute("data-preview-y")))
-    .toBeCloseTo(y + 15, 3);
+    .toBeCloseTo(middleY + 25, 3);
+  expect(Number(await frame.getAttribute("data-preview-zoom"))).toBe(middleZoom);
+  await page.mouse.move(point.x + 80, point.y + 55);
+  expect(await page.evaluate(() => scrollY)).toBe(scroll);
   const candidate = await page.locator(".review-page").getAttribute("data-candidate");
   await frame.focus();
   await page.keyboard.press("ArrowLeft");
   await expect
     .poll(async () => Number(await frame.getAttribute("data-preview-x")))
-    .toBeCloseTo(x + 30, 3);
+    .toBeCloseTo(middleX + 130, 3);
   await expect(page.locator(".review-page")).toHaveAttribute("data-candidate", candidate ?? "");
   expect(await canvas.evaluate((node) => (node as HTMLCanvasElement).toDataURL())).toBe(original);
   await expect(page.getByRole("button", { name: "Looks right ✓", exact: true })).toBeEnabled();

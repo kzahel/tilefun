@@ -31,10 +31,12 @@ also accept block pins. Two reports pause that batch. Say **ready** in chat when
 ready for the agent to implement the reported fixes. Changed pixels/recipes
 return to review. The agent must never manufacture human approvals.
 
-Review previews support wheel zoom around the cursor, mouse/touch dragging to
-pan, Shift+wheel horizontal panning and two-axis trackpad panning. Ctrl/Cmd+wheel
-also zooms. Use the zoom buttons or scale choices for precise inspection; **Fit**
-recenters the whole candidate. With the preview focused, arrow keys pan,
+Review previews support wheel/two-finger scroll zoom around the cursor. Panning
+uses one-finger click-and-drag on a touchpad, left/middle-button mouse dragging,
+or touchscreen dragging. Wheel input always zooms, including diagonal,
+horizontal-only and Shift+wheel events; it never switches to panning.
+Ctrl/Cmd+wheel also zooms. Use the zoom buttons or scale choices for precise
+inspection; **Fit** recenters the whole candidate. With the preview focused, arrow keys pan,
 plus/minus zoom and Home fits. Each candidate starts fitted. Room taps still pin
 the original tile after zoom/pan; dragging never adds a pin. These camera controls
 change only the displayed view, preserving the candidate's exact render identity.

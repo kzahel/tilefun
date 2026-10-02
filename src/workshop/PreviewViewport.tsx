@@ -87,32 +87,24 @@ export function PreviewViewport({
       event.preventDefault();
       const old = current.current;
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? node.clientHeight : 1;
-      if (event.shiftKey || (event.deltaX !== 0 && !event.ctrlKey && !event.metaKey)) {
-        const horizontal = event.shiftKey && event.deltaX === 0 ? event.deltaY : event.deltaX;
-        const next = {
-          ...old,
-          x: old.x - horizontal * unit,
-          y: old.y - (event.shiftKey && event.deltaX === 0 ? 0 : event.deltaY * unit),
-        };
-        current.current = next;
-        setCustom(next);
-      } else {
-        const bounds = node.getBoundingClientRect();
-        const x = event.clientX - bounds.left - node.clientLeft;
-        const y = event.clientY - bounds.top - node.clientTop;
-        const delta = Math.max(-200, Math.min(200, event.deltaY * unit));
-        const zoom = Math.max(
-          Math.min(limits.current, 1) / 4,
-          Math.min(16, old.zoom * Math.exp(-delta * 0.003)),
-        );
-        const next = {
-          zoom,
-          x: x - ((x - old.x) * zoom) / old.zoom,
-          y: y - ((y - old.y) * zoom) / old.zoom,
-        };
-        current.current = next;
-        setCustom(next);
-      }
+      const bounds = node.getBoundingClientRect();
+      const x = event.clientX - bounds.left - node.clientLeft;
+      const y = event.clientY - bounds.top - node.clientTop;
+      // Two-finger scrolling often includes horizontal jitter. It must stay a
+      // zoom gesture throughout, never switch to panning. Shifted/horizontal-only
+      // wheel events zoom too; panning requires an actual pointer drag.
+      const delta = Math.max(-200, Math.min(200, (event.deltaY || event.deltaX) * unit));
+      const zoom = Math.max(
+        Math.min(limits.current, 1) / 4,
+        Math.min(16, old.zoom * Math.exp(-delta * 0.003)),
+      );
+      const next = {
+        zoom,
+        x: x - ((x - old.x) * zoom) / old.zoom,
+        y: y - ((y - old.y) * zoom) / old.zoom,
+      };
+      current.current = next;
+      setCustom(next);
       setPreset("custom");
     };
     node.addEventListener("wheel", wheel, { passive: false });
@@ -237,7 +229,9 @@ export function PreviewViewport({
         <button type="button" onClick={() => selectScale("fit")}>
           Fit
         </button>
-        <span className="preview-help">Wheel to zoom · Drag to pan · Shift+wheel to pan</span>
+        <span className="preview-help">
+          Scroll to zoom · Click-drag or middle-button drag to pan
+        </span>
       </div>
     </>
   );
