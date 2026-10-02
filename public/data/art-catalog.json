@@ -1044,6 +1044,144 @@
       ]
     },
     {
+      "id": "prop:prop-city-commercial-v1-meter",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        224,
+        16,
+        32
+      ],
+      "label": "prop-city-commercial-v1-meter",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:146"
+        },
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-bollard",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        288,
+        16,
+        32
+      ],
+      "label": "prop-city-commercial-v1-bollard",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-bin-black",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        4048,
+        32,
+        32
+      ],
+      "label": "prop-city-commercial-v1-bin-black",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-bin-blue",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        4096,
+        32,
+        32
+      ],
+      "label": "prop-city-commercial-v1-bin-blue",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:153"
+        },
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-planter",
+      "sheetId": "me-complete",
+      "rect": [
+        448,
+        16,
+        32,
+        16
+      ],
+      "label": "prop-city-commercial-v1-planter",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:154"
+        },
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-car-west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5552,
+        80,
+        48
+      ],
+      "label": "prop-city-commercial-v1-car-west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-city-commercial-v1-car-east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5504,
+        80,
+        48
+      ],
+      "label": "prop-city-commercial-v1-car-east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        }
+      ]
+    },
+    {
       "id": "prop:prop-regional-seedling",
       "sheetId": "objects",
       "rect": [
@@ -1057,7 +1195,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:114"
+          "source": "src/entities/PropFactories.ts:115"
         },
         {
           "system": "World generation",
@@ -1079,7 +1217,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:122"
+          "source": "src/entities/PropFactories.ts:123"
         },
         {
           "system": "World generation",
@@ -1101,7 +1239,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:130"
+          "source": "src/entities/PropFactories.ts:131"
         },
         {
           "system": "World generation",
@@ -1123,7 +1261,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:138"
+          "source": "src/entities/PropFactories.ts:139"
         },
         {
           "system": "World generation",
@@ -1149,11 +1287,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:146"
+          "source": "src/entities/PropFactories.ts:147"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:662"
+          "source": "src/entities/PropFactories.ts:663"
         },
         {
           "system": "World generation",
@@ -1175,11 +1313,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:147"
+          "source": "src/entities/PropFactories.ts:148"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:663"
+          "source": "src/entities/PropFactories.ts:664"
         }
       ]
     },
@@ -1197,11 +1335,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:155"
+          "source": "src/entities/PropFactories.ts:156"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:664"
+          "source": "src/entities/PropFactories.ts:665"
         }
       ]
     },
@@ -1219,11 +1357,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:156"
+          "source": "src/entities/PropFactories.ts:157"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:667"
+          "source": "src/entities/PropFactories.ts:668"
         }
       ]
     },
@@ -1241,11 +1379,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:165"
+          "source": "src/entities/PropFactories.ts:166"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:668"
+          "source": "src/entities/PropFactories.ts:669"
         }
       ]
     },
@@ -1263,11 +1401,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:174"
+          "source": "src/entities/PropFactories.ts:175"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:665"
+          "source": "src/entities/PropFactories.ts:666"
         }
       ]
     },
@@ -1285,11 +1423,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:175"
+          "source": "src/entities/PropFactories.ts:176"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:666"
+          "source": "src/entities/PropFactories.ts:667"
         }
       ]
     },
@@ -1307,11 +1445,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:176"
+          "source": "src/entities/PropFactories.ts:177"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:669"
+          "source": "src/entities/PropFactories.ts:670"
         }
       ]
     },
@@ -1329,11 +1467,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:177"
+          "source": "src/entities/PropFactories.ts:178"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:670"
+          "source": "src/entities/PropFactories.ts:671"
         }
       ]
     },
@@ -1351,11 +1489,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:178"
+          "source": "src/entities/PropFactories.ts:179"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:671"
+          "source": "src/entities/PropFactories.ts:672"
         }
       ]
     },
@@ -1373,11 +1511,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:179"
+          "source": "src/entities/PropFactories.ts:180"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:672"
+          "source": "src/entities/PropFactories.ts:673"
         }
       ]
     },
@@ -1399,15 +1537,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:181"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:182"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:674"
+          "source": "src/entities/PropFactories.ts:183"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:675"
         },
         {
           "system": "Gameplay",
@@ -1445,15 +1583,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:190"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:191"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:675"
+          "source": "src/entities/PropFactories.ts:192"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:676"
         },
         {
           "system": "Gameplay",
@@ -1487,15 +1625,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:199"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:200"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:676"
+          "source": "src/entities/PropFactories.ts:201"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:677"
         }
       ]
     },
@@ -1517,15 +1655,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:207"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:208"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:677"
+          "source": "src/entities/PropFactories.ts:209"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:678"
         }
       ]
     },
@@ -1547,15 +1685,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:215"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:678"
+          "source": "src/entities/PropFactories.ts:217"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:679"
         }
       ]
     },
@@ -1577,15 +1715,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:239"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:240"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:679"
+          "source": "src/entities/PropFactories.ts:241"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:680"
         },
         {
           "system": "World generation",
@@ -1605,7 +1743,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:88"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:103"
         },
         {
           "system": "World generation",
@@ -1631,15 +1769,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:263"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:264"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:680"
+          "source": "src/entities/PropFactories.ts:265"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:681"
         }
       ]
     },
@@ -1661,15 +1799,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:272"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:273"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:681"
+          "source": "src/entities/PropFactories.ts:274"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:682"
         },
         {
           "system": "World generation",
@@ -1707,15 +1845,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:281"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:282"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:682"
+          "source": "src/entities/PropFactories.ts:283"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:683"
         },
         {
           "system": "World generation",
@@ -1741,15 +1879,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:291"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:292"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:683"
+          "source": "src/entities/PropFactories.ts:293"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:684"
         }
       ]
     },
@@ -1771,15 +1909,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:302"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:303"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:684"
+          "source": "src/entities/PropFactories.ts:304"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:685"
         },
         {
           "system": "World generation",
@@ -1805,15 +1943,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:311"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:312"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:685"
+          "source": "src/entities/PropFactories.ts:313"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:686"
         }
       ]
     },
@@ -1835,15 +1973,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:322"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:686"
+          "source": "src/entities/PropFactories.ts:323"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:687"
         }
       ]
     },
@@ -1865,15 +2003,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:330"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:331"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:687"
+          "source": "src/entities/PropFactories.ts:332"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:688"
         },
         {
           "system": "World generation",
@@ -1899,15 +2037,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:339"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:688"
+          "source": "src/entities/PropFactories.ts:341"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:689"
         }
       ]
     },
@@ -1929,15 +2067,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:353"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:354"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:689"
+          "source": "src/entities/PropFactories.ts:355"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:690"
         }
       ]
     },
@@ -1959,15 +2097,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:367"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:690"
+          "source": "src/entities/PropFactories.ts:369"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:691"
         }
       ]
     },
@@ -1989,15 +2127,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:383"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:691"
+          "source": "src/entities/PropFactories.ts:384"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:692"
         }
       ]
     },
@@ -2019,15 +2157,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:391"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:692"
+          "source": "src/entities/PropFactories.ts:393"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:693"
         }
       ]
     },
@@ -2045,11 +2183,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:400"
+          "source": "src/entities/PropFactories.ts:401"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:694"
+          "source": "src/entities/PropFactories.ts:695"
         },
         {
           "system": "World generation",
@@ -2071,11 +2209,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:410"
+          "source": "src/entities/PropFactories.ts:411"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:695"
+          "source": "src/entities/PropFactories.ts:696"
         },
         {
           "system": "World generation",
@@ -2097,11 +2235,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:420"
+          "source": "src/entities/PropFactories.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:696"
+          "source": "src/entities/PropFactories.ts:697"
         },
         {
           "system": "World generation",
@@ -2123,11 +2261,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:430"
+          "source": "src/entities/PropFactories.ts:431"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:697"
+          "source": "src/entities/PropFactories.ts:698"
         },
         {
           "system": "World generation",
@@ -2149,11 +2287,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:440"
+          "source": "src/entities/PropFactories.ts:441"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:698"
+          "source": "src/entities/PropFactories.ts:699"
         },
         {
           "system": "World generation",
@@ -2175,11 +2313,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:450"
+          "source": "src/entities/PropFactories.ts:451"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:699"
+          "source": "src/entities/PropFactories.ts:700"
         },
         {
           "system": "World generation",
@@ -2201,11 +2339,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:460"
+          "source": "src/entities/PropFactories.ts:461"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:700"
+          "source": "src/entities/PropFactories.ts:701"
         },
         {
           "system": "World generation",
@@ -2247,11 +2385,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:470"
+          "source": "src/entities/PropFactories.ts:471"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:701"
+          "source": "src/entities/PropFactories.ts:702"
         },
         {
           "system": "World generation",
@@ -2273,11 +2411,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:481"
+          "source": "src/entities/PropFactories.ts:482"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:702"
+          "source": "src/entities/PropFactories.ts:703"
         },
         {
           "system": "World generation",
@@ -2317,7 +2455,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:84"
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:150"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:151"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:99"
         },
         {
           "system": "World generation",
@@ -2355,11 +2501,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:490"
+          "source": "src/entities/PropFactories.ts:491"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:703"
+          "source": "src/entities/PropFactories.ts:704"
         },
         {
           "system": "World generation",
@@ -2391,7 +2537,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:89"
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:152"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:104"
         },
         {
           "system": "World generation",
@@ -2425,11 +2575,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:499"
+          "source": "src/entities/PropFactories.ts:500"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:704"
+          "source": "src/entities/PropFactories.ts:705"
         },
         {
           "system": "World generation",
@@ -2463,11 +2613,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:508"
+          "source": "src/entities/PropFactories.ts:509"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:705"
+          "source": "src/entities/PropFactories.ts:706"
         },
         {
           "system": "World generation",
@@ -2475,7 +2625,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:90"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:105"
         },
         {
           "system": "World generation",
@@ -2497,11 +2647,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:517"
+          "source": "src/entities/PropFactories.ts:518"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:706"
+          "source": "src/entities/PropFactories.ts:707"
         },
         {
           "system": "World generation",
@@ -10544,6 +10694,1348 @@
       ]
     },
     {
+      "id": "surface:commercial-v1:96:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1984,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:96:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:96:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:112:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:112:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Curb join",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Asphalt fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:112:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1984,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:96:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        2000,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:112:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        2000,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Pavement fill",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:192:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:208:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:144:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:160:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1952,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:192:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:208:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:144:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:160:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:192:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:208:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:144:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:160:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1904,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:192:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:208:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:144:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:160:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1920,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Crossing entry at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1968,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Crossing entry at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1984,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Zebra crossing",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:1984:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1984,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Zebra crossing",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:1968:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1968,
+        16,
+        8
+      ],
+      "label": "Commercial street surface · Dashed lane divider",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:224:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        2000,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:240:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        240,
+        2000,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:272:2000:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        272,
+        2000,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:1976:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1976,
+        16,
+        8
+      ],
+      "label": "Commercial street surface · Dashed lane divider",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:224:2016:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        2016,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:240:2016:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        240,
+        2016,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:272:2016:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        272,
+        2016,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Capped pedestrian island",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:1984:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1984,
+        16,
+        8
+      ],
+      "label": "Commercial street surface · Crossing exit at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:1984:16:8",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1984,
+        16,
+        8
+      ],
+      "label": "Commercial street surface · Crossing exit at sidewalk",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:2048:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2048,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:2048:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        2048,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:48:2048:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        48,
+        2048,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:2048:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        2048,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:2048:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        2048,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:2064:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2064,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:32:2064:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        2064,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:48:2064:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        48,
+        2064,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:64:2064:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        2064,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:80:2064:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        2064,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Marked curbside parking bay",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:1984:8:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1984,
+        8,
+        16
+      ],
+      "label": "Commercial street surface · Center line · left",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:24:1984:8:16",
+      "sheetId": "me-complete",
+      "rect": [
+        24,
+        1984,
+        8,
+        16
+      ],
+      "label": "Commercial street surface · Center line · right",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:2016:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2016,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Crossing · top",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:commercial-v1:16:2032:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2032,
+        16,
+        16
+      ],
+      "label": "Commercial street surface · Crossing · bottom",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Commercial streets (regional-v6, promoted)",
+          "source": "src/generation/regional/commercial-city-assets-v1.json"
+        },
+        {
+          "system": "Game / real-tile preview renderer",
+          "source": "src/rendering/TileRenderer.ts"
+        }
+      ]
+    },
+    {
       "id": "variant:Grass:52:2:0",
       "sheetId": "me-complete",
       "rect": [
@@ -12685,11 +14177,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:756"
+          "source": "src/server/Realm.ts:758"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1048"
+          "source": "src/server/Realm.ts:1050"
         }
       ]
     },
@@ -13567,7 +15059,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:141"
+          "source": "src/generation/regional/CommercialDistrictPlanner.ts:165"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:147"
         }
       ]
     },
@@ -13827,15 +15323,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:181"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:182"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:674"
+          "source": "src/entities/PropFactories.ts:183"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:675"
         },
         {
           "system": "Gameplay",
@@ -13877,15 +15373,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:190"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:191"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:675"
+          "source": "src/entities/PropFactories.ts:192"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:676"
         },
         {
           "system": "Gameplay",
@@ -13923,15 +15419,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:199"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:200"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:676"
+          "source": "src/entities/PropFactories.ts:201"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:677"
         }
       ]
     },
@@ -13957,15 +15453,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:207"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:208"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:677"
+          "source": "src/entities/PropFactories.ts:209"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:678"
         }
       ]
     },
@@ -13991,15 +15487,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:215"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:678"
+          "source": "src/entities/PropFactories.ts:217"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:679"
         }
       ]
     },
@@ -14025,15 +15521,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:239"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:240"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:679"
+          "source": "src/entities/PropFactories.ts:241"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:680"
         },
         {
           "system": "World generation",
@@ -14053,7 +15549,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:88"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:103"
         },
         {
           "system": "World generation",
@@ -14083,15 +15579,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:263"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:264"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:680"
+          "source": "src/entities/PropFactories.ts:265"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:681"
         }
       ]
     },
@@ -14117,15 +15613,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:272"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:273"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:681"
+          "source": "src/entities/PropFactories.ts:274"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:682"
         },
         {
           "system": "World generation",
@@ -14167,15 +15663,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:281"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:282"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:682"
+          "source": "src/entities/PropFactories.ts:283"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:683"
         },
         {
           "system": "World generation",
@@ -14205,15 +15701,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:291"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:292"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:683"
+          "source": "src/entities/PropFactories.ts:293"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:684"
         }
       ]
     },
@@ -14239,15 +15735,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:302"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:303"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:684"
+          "source": "src/entities/PropFactories.ts:304"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:685"
         },
         {
           "system": "World generation",
@@ -14277,15 +15773,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:311"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:312"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:685"
+          "source": "src/entities/PropFactories.ts:313"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:686"
         }
       ]
     },
@@ -14311,15 +15807,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:322"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:686"
+          "source": "src/entities/PropFactories.ts:323"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:687"
         }
       ]
     },
@@ -14345,15 +15841,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:330"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:331"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:687"
+          "source": "src/entities/PropFactories.ts:332"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:688"
         },
         {
           "system": "World generation",
@@ -14383,15 +15879,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:339"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:688"
+          "source": "src/entities/PropFactories.ts:341"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:689"
         }
       ]
     },
@@ -14417,15 +15913,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:353"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:354"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:689"
+          "source": "src/entities/PropFactories.ts:355"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:690"
         }
       ]
     },
@@ -14451,15 +15947,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:367"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:690"
+          "source": "src/entities/PropFactories.ts:369"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:691"
         }
       ]
     },
@@ -14485,15 +15981,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:383"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:691"
+          "source": "src/entities/PropFactories.ts:384"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:692"
         }
       ]
     },
@@ -14519,15 +16015,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:391"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:692"
+          "source": "src/entities/PropFactories.ts:393"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:693"
         }
       ]
     },

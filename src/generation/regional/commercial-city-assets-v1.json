@@ -1,0 +1,1518 @@
+{
+  "id": "commercial-city-assets-v1",
+  "source": {
+    "sheetId": "me-complete",
+    "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "notes": ["ce4b4882-0078-451d-b89b-bb4f24ef7acc", "e06455c5-5473-4ba8-8a10-aa0ac3e660f6"]
+  },
+  "approvals": [
+    {
+      "candidateId": "surface:surface-v2-rounded",
+      "revision": "f959f0a40c0c733849cc1c3804410990d065c757fc45a08aaea5030c3603443d",
+      "pixels": "f6a3eef6706816c02b81c33a43e5373be766b7117e785e112e8f572f4272bed9",
+      "threadId": "ba2b532b-c0b5-48f1-babc-0faa8129ecfb",
+      "approvedAt": "2026-10-02T14:17:10.037Z"
+    },
+    {
+      "candidateId": "surface:surface-v2-refuge",
+      "revision": "ee917ffc6a35244b7cc2e4cfad82eda519fe58169f8c5cbb873bf8b83418409c",
+      "pixels": "a8c83b60af375896dd5bfcef41b3e4bf8376fa2a0fb7853d11cd113f6301fac6",
+      "threadId": "b0bbb084-11d4-4342-a148-af20f6c99701",
+      "approvedAt": "2026-10-02T14:03:43.651Z"
+    },
+    {
+      "candidateId": "surface:surface-v2-approaches",
+      "revision": "33eb7e6fcc66ff9b5d955e21101c2abbabfc77fb7d8e1d571364d0ce51f7bc5c",
+      "pixels": "964edc71a60d0df3b5b78594331ca0521b364dafda20a324dad8d33594d1cc60",
+      "threadId": "089ecd76-b2db-45c3-a5d0-b2a4c7def490",
+      "approvedAt": "2026-10-02T14:17:06.106Z"
+    },
+    {
+      "candidateId": "surface:surface-v2-parking",
+      "revision": "2892121612ba15e267ededd26fc4f8bfcf59776cefe0fc7ee36b4a7e4e830fbe",
+      "pixels": "574835ee423af4279f0b4c7b678d36935d001f062abddb426773f66cd08ae658",
+      "threadId": "aaeec348-7b69-4825-8d81-1d8aaba2ff8f",
+      "approvedAt": "2026-10-02T14:17:08.963Z"
+    },
+    {
+      "candidateId": "street:street-v1-meters",
+      "revision": "7a8088f8f851e63d15038186a9d35fa6fbc302bf450ee953d1766f2f8759f15e",
+      "pixels": "ff18157ffd2f1d006c9102f0aa03c2acda8b67e348dd59452fe335f2579880bb",
+      "threadId": "3e0a7609-9dc0-423f-b132-dcedaea6c4e2",
+      "approvedAt": "2026-10-02T13:34:19.416Z"
+    },
+    {
+      "candidateId": "street:street-v1-lighting",
+      "revision": "77a0dea20b74936820c9e92c995d79709b9cc54591985f51553a13fba44cce68",
+      "pixels": "cfd32faef17ea107d37071a7994ff93b886bd789b607446db00c7cb7a5ec344e",
+      "threadId": "9be397f4-8544-445f-94cc-b4ddb6e5b05e",
+      "approvedAt": "2026-10-02T13:34:20.350Z"
+    },
+    {
+      "candidateId": "street:street-v1-bins",
+      "revision": "011180be3a70fcb2c6e56f59abc8bd2e468a0abba6180f32a72a220f07b0d6c0",
+      "pixels": "8cce10e171e182bdd14cc4687093a2f8fc152d3a400035f9b3bfb353564939c2",
+      "threadId": "79e09019-013f-4539-8016-e6865305bde2",
+      "approvedAt": "2026-10-02T13:34:20.956Z"
+    },
+    {
+      "candidateId": "street:street-v1-seating",
+      "revision": "d2e40ad1349cbcdd2eb118087a7d97e74ffa0f7a933854e7b5a7a064c0af7936",
+      "pixels": "c2d1a9f2795df73de37be23bab35018b1eff5bc85a21f0fa865458b3c7b70bf4",
+      "threadId": "eaae4030-47d8-4852-b88f-648e9956a6f2",
+      "approvedAt": "2026-10-02T13:34:21.584Z"
+    },
+    {
+      "candidateId": "street:street-v1-parking",
+      "revision": "73757c91ec9a9ba4d35bd95018e5d97d2d7df74a5e29b5b96dcdf733dafdd27e",
+      "pixels": "0e53a29e939eda2aa0bde23d6afbf4f9b06b9fe2231540f4005235f5bf954ad1",
+      "threadId": "132267ce-1f44-402d-96ff-fe5dedaac0af",
+      "approvedAt": "2026-10-02T13:34:22.456Z"
+    },
+    {
+      "candidateId": "street:street-v1-combined",
+      "revision": "bec161d3d14e3b8aedc291a337096b0bd84301dd1401e3ee87ac49962bf23108",
+      "pixels": "893edfb032ec3dde998146555143d9051a6bc3199c0b1871fee353a720ec5601",
+      "threadId": "aaf2841e-5a40-4fff-b506-834cf237a026",
+      "approvedAt": "2026-10-02T13:34:23.454Z"
+    }
+  ],
+  "roadStart": 15,
+  "neutral": [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 5, 5, 6, 6, 5, 5, 6, 6,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4, 4,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 5, 5, 6, 6, 5, 5, 6, 6,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 3, 3, 8, 8, 3, 3, 8, 8,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 5, 5, 9, 9, 5, 5, 9, 10,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 3, 3, 8, 8, 3, 3, 8, 8,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 5, 5, 9, 11, 5, 5, 9,
+    12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4,
+    4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 5, 5, 6, 6, 5, 5, 6,
+    6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 4, 4, 3, 3, 4,
+    4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 1, 1, 2, 2, 5, 5, 6, 6, 5, 5, 6,
+    6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 3, 3, 8, 8, 3, 3, 8,
+    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 5, 5, 9, 9, 5, 5, 9,
+    10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 3, 3, 8, 8, 3, 3, 8,
+    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 7, 7, 1, 1, 7, 7, 5, 5, 9, 11, 5, 5, 9,
+    13
+  ],
+  "corners": [[-1, -1, 192, 1952], [1, -1, 144, 1952], [-1, 1, 192, 1904], [1, 1, 144, 1904]],
+  "cells": [
+    [
+      {
+        "label": "Pavement fill",
+        "rect": [96, 1984, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "pavement"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [96, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [96, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [112, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [112, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [32, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [32, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [64, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [16, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [64, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [64, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [16, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [16, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Asphalt fill",
+        "rect": [80, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "road"
+      }
+    ],
+    [
+      {
+        "label": "Pavement fill",
+        "rect": [112, 1984, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "pavement"
+      }
+    ],
+    [
+      {
+        "label": "Pavement fill",
+        "rect": [96, 2000, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "pavement"
+      }
+    ],
+    [
+      {
+        "label": "Pavement fill",
+        "rect": [112, 2000, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "pavement"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [192, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [208, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [144, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [160, 1952, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [192, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [208, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [144, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [160, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [192, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [208, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [144, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [160, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [192, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [208, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [144, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Rounded pavement corner",
+        "rect": [160, 1920, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      }
+    ],
+    [
+      {
+        "label": "Crossing entry at sidewalk",
+        "rect": [64, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Crossing entry at sidewalk",
+        "rect": [80, 1968, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Zebra crossing",
+        "rect": [64, 1984, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Zebra crossing",
+        "rect": [80, 1984, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Asphalt fill",
+        "rect": [80, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "road"
+      },
+      {
+        "label": "Dashed lane divider",
+        "rect": [32, 1968, 16, 8],
+        "x": 0,
+        "y": 8,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [224, 2000, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [240, 2000, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [272, 2000, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Asphalt fill",
+        "rect": [80, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "road"
+      },
+      {
+        "label": "Dashed lane divider",
+        "rect": [32, 1976, 16, 8],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [224, 2016, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [240, 2016, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Capped pedestrian island",
+        "rect": [272, 2016, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "median"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [32, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      },
+      {
+        "label": "Crossing exit at sidewalk",
+        "rect": [64, 1984, 16, 8],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Curb join",
+        "rect": [32, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "curb"
+      },
+      {
+        "label": "Crossing exit at sidewalk",
+        "rect": [80, 1984, 16, 8],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [16, 2048, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [32, 2048, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [48, 2048, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [64, 2048, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [80, 2048, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [16, 2064, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [32, 2064, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [48, 2064, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [64, 2064, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Marked curbside parking bay",
+        "rect": [80, 2064, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Asphalt fill",
+        "rect": [80, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "road"
+      },
+      {
+        "label": "Center line · left",
+        "rect": [16, 1984, 8, 16],
+        "x": 8,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Asphalt fill",
+        "rect": [80, 1904, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "road"
+      },
+      {
+        "label": "Center line · right",
+        "rect": [24, 1984, 8, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Crossing · top",
+        "rect": [16, 2016, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ],
+    [
+      {
+        "label": "Crossing · bottom",
+        "rect": [16, 2032, 16, 16],
+        "x": 0,
+        "y": 0,
+        "role": "paint"
+      }
+    ]
+  ],
+  "templates": [
+    {
+      "caseId": "surface-v2-rounded",
+      "geometry": {
+        "sidewalkExtensions": [],
+        "crossings": [],
+        "islands": [],
+        "refuge": null,
+        "parking": []
+      },
+      "overlays": []
+    },
+    {
+      "caseId": "surface-v2-refuge",
+      "geometry": {
+        "sidewalkExtensions": [],
+        "crossings": [
+          {
+            "x": 240,
+            "width": 32,
+            "top": 96,
+            "bottom": 288
+          }
+        ],
+        "islands": [
+          {
+            "minX": 96,
+            "maxX": 416,
+            "minY": 176,
+            "maxY": 208
+          }
+        ],
+        "refuge": {
+          "minX": 240,
+          "maxX": 272,
+          "minY": 176,
+          "maxY": 208
+        },
+        "parking": []
+      },
+      "overlays": [
+        {
+          "label": "Capped pedestrian island",
+          "rect": [224, 2000, 16, 32],
+          "x": 96,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 112,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 128,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 144,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 160,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 176,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 192,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 208,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 224,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Open refuge landing",
+          "rect": [112, 2000, 16, 16],
+          "x": 240,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Open refuge landing",
+          "rect": [112, 1984, 16, 16],
+          "x": 240,
+          "y": 192,
+          "role": "median"
+        },
+        {
+          "label": "Open refuge landing",
+          "rect": [96, 2000, 16, 16],
+          "x": 256,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Open refuge landing",
+          "rect": [96, 1984, 16, 16],
+          "x": 256,
+          "y": 192,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 272,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 288,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 304,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 320,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 336,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 352,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 368,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [240, 2000, 16, 32],
+          "x": 384,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Capped pedestrian island",
+          "rect": [272, 2000, 16, 32],
+          "x": 400,
+          "y": 176,
+          "role": "median"
+        },
+        {
+          "label": "Crossing entry at sidewalk",
+          "rect": [64, 1968, 32, 16],
+          "x": 240,
+          "y": 96,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 112,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 128,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 144,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 160,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 208,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 224,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 240,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 240,
+          "y": 256,
+          "role": "paint"
+        },
+        {
+          "label": "Crossing exit at sidewalk",
+          "rect": [64, 1984, 32, 8],
+          "x": 240,
+          "y": 272,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 0,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 32,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 64,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 448,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 480,
+          "y": 184,
+          "role": "paint"
+        }
+      ]
+    },
+    {
+      "caseId": "surface-v2-approaches",
+      "geometry": {
+        "sidewalkExtensions": [
+          {
+            "minX": 112,
+            "maxX": 176,
+            "minY": 128,
+            "maxY": 160
+          },
+          {
+            "minX": 112,
+            "maxX": 176,
+            "minY": 224,
+            "maxY": 256
+          },
+          {
+            "minX": 336,
+            "maxX": 400,
+            "minY": 128,
+            "maxY": 160
+          },
+          {
+            "minX": 336,
+            "maxX": 400,
+            "minY": 224,
+            "maxY": 256
+          }
+        ],
+        "crossings": [
+          {
+            "x": 128,
+            "width": 32,
+            "top": 160,
+            "bottom": 224
+          },
+          {
+            "x": 352,
+            "width": 32,
+            "top": 160,
+            "bottom": 224
+          }
+        ],
+        "islands": [],
+        "refuge": null,
+        "parking": []
+      },
+      "overlays": [
+        {
+          "label": "Crossing entry at sidewalk",
+          "rect": [64, 1968, 32, 16],
+          "x": 128,
+          "y": 160,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 128,
+          "y": 176,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 128,
+          "y": 192,
+          "role": "paint"
+        },
+        {
+          "label": "Crossing exit at sidewalk",
+          "rect": [64, 1984, 32, 8],
+          "x": 128,
+          "y": 208,
+          "role": "paint"
+        },
+        {
+          "label": "Crossing entry at sidewalk",
+          "rect": [64, 1968, 32, 16],
+          "x": 352,
+          "y": 160,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 352,
+          "y": 176,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 352,
+          "y": 192,
+          "role": "paint"
+        },
+        {
+          "label": "Crossing exit at sidewalk",
+          "rect": [64, 1984, 32, 8],
+          "x": 352,
+          "y": 208,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 0,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 32,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 64,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 192,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 224,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 256,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 288,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 416,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 448,
+          "y": 184,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 480,
+          "y": 184,
+          "role": "paint"
+        }
+      ]
+    },
+    {
+      "caseId": "surface-v2-parking",
+      "geometry": {
+        "sidewalkExtensions": [
+          {
+            "minX": 128,
+            "maxX": 160,
+            "minY": 128,
+            "maxY": 160
+          },
+          {
+            "minX": 240,
+            "maxX": 272,
+            "minY": 128,
+            "maxY": 160
+          },
+          {
+            "minX": 352,
+            "maxX": 384,
+            "minY": 128,
+            "maxY": 160
+          }
+        ],
+        "crossings": [
+          {
+            "x": 432,
+            "width": 32,
+            "top": 128,
+            "bottom": 256
+          }
+        ],
+        "islands": [],
+        "refuge": null,
+        "parking": [
+          {
+            "minX": 48,
+            "maxX": 128,
+            "minY": 128,
+            "maxY": 160,
+            "facing": "east-west"
+          },
+          {
+            "minX": 160,
+            "maxX": 240,
+            "minY": 128,
+            "maxY": 160,
+            "facing": "east-west"
+          },
+          {
+            "minX": 272,
+            "maxX": 352,
+            "minY": 128,
+            "maxY": 160,
+            "facing": "east-west"
+          }
+        ]
+      },
+      "overlays": [
+        {
+          "label": "Crossing entry at sidewalk",
+          "rect": [64, 1968, 32, 16],
+          "x": 432,
+          "y": 128,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 144,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 160,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 176,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 192,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 208,
+          "role": "paint"
+        },
+        {
+          "label": "Zebra crossing",
+          "rect": [64, 1984, 32, 16],
+          "x": 432,
+          "y": 224,
+          "role": "paint"
+        },
+        {
+          "label": "Crossing exit at sidewalk",
+          "rect": [64, 1984, 32, 8],
+          "x": 432,
+          "y": 240,
+          "role": "paint"
+        },
+        {
+          "label": "Marked curbside parking bay",
+          "rect": [16, 2048, 80, 32],
+          "x": 48,
+          "y": 128,
+          "role": "paint"
+        },
+        {
+          "label": "Marked curbside parking bay",
+          "rect": [16, 2048, 80, 32],
+          "x": 160,
+          "y": 128,
+          "role": "paint"
+        },
+        {
+          "label": "Marked curbside parking bay",
+          "rect": [16, 2048, 80, 32],
+          "x": 272,
+          "y": 128,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 0,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 32,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 64,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 96,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 128,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 160,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 192,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 224,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 256,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 288,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 320,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 352,
+          "y": 200,
+          "role": "paint"
+        },
+        {
+          "label": "Dashed lane divider",
+          "rect": [32, 1968, 16, 16],
+          "x": 384,
+          "y": 200,
+          "role": "paint"
+        }
+      ]
+    }
+  ],
+  "props": [
+    {
+      "type": "prop-city-commercial-v1-meter",
+      "label": "Parking pay station",
+      "sourceName": "Parking_Meter_1",
+      "rect": [816, 224, 16, 32],
+      "facing": "south",
+      "zone": "furnishing",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -4,
+        "width": 10,
+        "height": 8
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-meter"
+    },
+    {
+      "type": "prop-city-commercial-v1-bollard",
+      "label": "Metal bollard",
+      "sourceName": "Pole_1",
+      "rect": [16, 288, 16, 32],
+      "facing": "south",
+      "zone": "furnishing",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -3,
+        "width": 6,
+        "height": 6
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-bollard"
+    },
+    {
+      "type": "prop-city-commercial-v1-bin-black",
+      "label": "Black street bin",
+      "sourceName": "Black_Closed_Trash_Can",
+      "rect": [1280, 4048, 32, 32],
+      "facing": "south",
+      "zone": "furnishing",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -4,
+        "width": 24,
+        "height": 12
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-bin-black"
+    },
+    {
+      "type": "prop-city-commercial-v1-bin-blue",
+      "label": "Blue street bin",
+      "sourceName": "Blue_Closed_Trash_Can",
+      "rect": [1280, 4096, 32, 32],
+      "facing": "south",
+      "zone": "furnishing",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -4,
+        "width": 24,
+        "height": 12
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-bin-blue"
+    },
+    {
+      "type": "prop-city-commercial-v1-planter",
+      "label": "Flower planter",
+      "sourceName": "Flower_Bush_1",
+      "rect": [448, 16, 32, 16],
+      "facing": "south",
+      "zone": "furnishing",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -4,
+        "width": 28,
+        "height": 8,
+        "zHeight": 12
+      },
+      "material": "wood",
+      "sourceType": "prop-city-street-v1-planter"
+    },
+    {
+      "type": "prop-city-commercial-v1-car-west",
+      "label": "Parked sedan · west",
+      "sourceName": "Car_Left_12",
+      "rect": [512, 5552, 80, 48],
+      "facing": "west",
+      "zone": "parking",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -10,
+        "width": 72,
+        "height": 24,
+        "zHeight": 32
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-car-west"
+    },
+    {
+      "type": "prop-city-commercial-v1-car-east",
+      "label": "Parked sedan · east",
+      "sourceName": "Car_Right_12",
+      "rect": [512, 5504, 80, 48],
+      "facing": "east",
+      "zone": "parking",
+      "collider": {
+        "offsetX": 0,
+        "offsetY": -10,
+        "width": 72,
+        "height": 24,
+        "zHeight": 32
+      },
+      "material": "metal",
+      "sourceType": "prop-city-street-v1-car-east"
+    }
+  ]
+}

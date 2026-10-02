@@ -23,7 +23,8 @@ export type GenerationDescriptor =
         | "regional-v2"
         | "regional-v3"
         | "regional-v4"
-        | "regional-v5";
+        | "regional-v5"
+        | "regional-v6";
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
@@ -31,6 +32,7 @@ export type GenerationDescriptor =
 export const REGIONAL_REVISIONS = [
   { version: "regional-v4", label: "Dense districts (v4)" },
   { version: "regional-v5", label: "Connected entrances (v5, review)" },
+  { version: "regional-v6", label: "Commercial streets (v6, review)" },
   { version: "regional-v3", label: "Settled world (v3, legacy)" },
   { version: "regional-v2", label: "Districts (v2, old)" },
   { version: "regional-v1", label: "Terrain only (v1, old)" },

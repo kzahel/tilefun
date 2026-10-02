@@ -1,9 +1,10 @@
 # Dense city districts and street life
 
-Status: phase-1 playable dense neighborhood ready for human review, 2026-10-01.
-Eight road foundation scenes are approved; the revised divider is unchecked.
-The first `regional-v4` checkpoint has three views and an explorer/game visit.
-Phases 2–7 remain planned. The user accepted the building showcase in chat after
+Status: the phase-1 neighborhood, nine road foundation scenes, four road geometry
+scenes and six street starter scenes are approved, 2026-10-02. The phase-2
+commercial streets and curbside parking checkpoint is implemented in
+`regional-v6`, with four new views awaiting review and an explorer/game visit.
+Parking lots and phases 3–7 remain planned. The user accepted the building showcase in chat after
 hotel panel removal (`b81d3b4`); the original review history remains intact.
 
 This is the next implementation roadmap after
@@ -532,3 +533,63 @@ with the unchanged refuge. The two original curb reports are resolved against
 those exact new render identities. Next: promote this reviewed geometry and its
 placement reservations into a new generated commercial-block revision, then
 stage the approved furniture and parked cars for the next review batch.
+
+## Commercial streets and parking checkpoint — 2026-10-02
+
+The **Commercial streets & parking** Workshop batch has four independent review
+views: whole neighborhood, shop frontage, refuge crossing and parked cars/bays.
+Its master-index shortcut and Dense neighborhoods sidebar entry lead to the same
+candidates; `building-lab.html?run=commercial` is the legacy entry. Approvals hide
+completed views, Next/Previous navigate, and two Needs changes reports pause
+this batch until “ready” without pausing any earlier batch.
+
+This is one actual `regional-v6` district (seed 2026, owner 0,0, center 300,519),
+not four handcrafted scenes. The generator shares the dense block/frontage
+planner, audited doors and paths, ordinary props, chunk renderer and walkers.
+The commercial profile widens the central east–west avenue to twelve tiles and
+sidewalks to four. It has three north-side 80×32px marked bays, two seeded static
+cars with native east/west art, three pay stations, lamps, seating, bin and
+planter. A west refuge has a clear central landing; east sidewalk extensions
+shorten the crossing. Reserved walking strips remain behind curb furnishings,
+and all doorway approaches stay open. Cars are static props, not traffic AI.
+
+The city plan owns crossing, refuge, bay/occupancy/facing, sidewalk extension,
+walking/furnishing bounds and stable furniture/actor identities before chunks
+are realized. Source clips are cut into persistent cell-sized layers; the shared
+renderer draws those exact layers in Workshop, the explorer and the game. The
+review and generated curbs/crossings share unbounded corner and crossing helpers.
+Native clips retain authored orientation, scale and south-facing shading.
+
+`commercial-city-assets-v1.json` is a manual, immutable promotion of the four
+approved geometry renders and six approved street-palette renders, with their
+exact composition/pixel identities and human decision references. It also pins
+the neutral neighbor lookup, full native corner clips, placement template art
+and seven prop/collider recipes under new promoted type IDs. Its 61 cell recipes
+occupy persistent roadGrid IDs 15–75, within the existing byte storage and
+save/worker/network transfer path. Never regenerate this snapshot in builds.
+Saved v6 worlds are frozen; changing their output requires a new revision.
+V1–v5, the promoted dense building bank, default v4 and all 305 previous Workshop
+candidate identities are retained. New commercial compositions require human
+approval; palette promotion does not approve their new combined placement.
+
+Explore/Play here carries the actual v6 descriptor and location. V6 is also a
+selectable Regional revision in new-world creation and the explorer. All four
+preview windows stay within the 81-chunk budget, with 21 unique props and six
+walkers in the whole district. The explorer shows initial actor poses; gameplay
+runs the same routes. Geometry mode shows lots/doors, real colliders, clear
+walking strips, reserved bays, crossings/refuge and routes.
+
+Next after review: a small parking-lot place recipe with access and pedestrian
+clearance, then pocket/neighborhood parks and a paved square. Regional boundary
+connections, varied land-use profiles and richer pedestrian behavior remain
+later phases; the v6 checkpoint reuses the existing owner-local settlement
+admission and geography outside the compact district.
+
+Validation: typechecks, production build and Biome pass (74 existing warnings).
+All 1,132 unit tests and 205 browser tests pass. Checks pin the bank and generated
+v6 output at positive/negative owners, verify source opacity and exact GPU/retina
+preview fingerprints, bay/door/walkway clearances, clear actor routes, unique
+feature identities, chunk realization and saved car/meter edits. Phone review,
+feedback round trips and independent pause state are exercised. All four views
+were visually checked in Playwright Chromium. Debug colliders now use the same
+AABB helper as gameplay, rather than the older vertically offset overlay.

@@ -47,7 +47,7 @@ if (embedded) {
     : current.pathname.endsWith("building-lab.html")
       ? ["surfaces", "road-geometry"].includes(params.get("run") ?? "")
         ? "roads"
-        : params.get("run") === "districts"
+        : ["districts", "commercial"].includes(params.get("run") ?? "")
           ? "districts"
           : params.get("run") === "streets"
             ? "streets"

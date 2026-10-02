@@ -11,6 +11,7 @@ import {
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
 } from "../config/constants.js";
+import { commercialSurfacePieces, isCommercialSurface } from "../road/CommercialCitySurface.js";
 import { denseCitySurfacePieces, isCitySurface } from "../road/DenseCitySurface.js";
 import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
 import { getRoadSheetKey, isRoad, RoadType } from "../road/RoadType.js";
@@ -366,13 +367,17 @@ export class TileRenderer {
 
         // 4. Road layer (asphalt base + overlay autotile)
         const road = chunk.getRoad(lx, ly);
-        if (isCitySurface(road) && getGlobalRoad) {
+        if (isCommercialSurface(road) || (isCitySurface(road) && getGlobalRoad)) {
           const sheet = sheets.get("me-complete");
           if (sheet)
             drawCitySurfacePieces(
               offCtx,
               sheet,
-              denseCitySurfacePieces(road, baseTx + lx, baseTy + ly, getGlobalRoad),
+              isCommercialSurface(road)
+                ? commercialSurfacePieces(road, baseTx + lx, baseTy + ly)
+                : getGlobalRoad
+                  ? denseCitySurfacePieces(road, baseTx + lx, baseTy + ly, getGlobalRoad)
+                  : [],
               baseTx * TILE_SIZE,
               baseTy * TILE_SIZE,
             );

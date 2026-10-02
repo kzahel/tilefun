@@ -4,10 +4,12 @@ import { sha256 } from "../art/ArtSource.js";
 import { buildingCaseKey } from "../art/BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "../art/BuildingShowcase.js";
 import {
-  DENSE_REVIEW_CASES,
+  ALL_DENSE_REVIEW_CASES,
   denseReviewComposition,
   denseReviewPrefabs,
+  denseReviewRun,
   denseReviewScene,
+  denseReviewSourceRects,
   drawDenseDistrictShowcase,
 } from "../art/DenseDistrictShowcase.js";
 import { drawStreetShowcase } from "../art/StreetShowcase.js";
@@ -74,13 +76,13 @@ export function artReviewDefinitions() {
       prefab: c.id,
       url: `/tilefun/building-lab.html?run=streets&case=${c.id}`,
     })),
-    ...DENSE_REVIEW_CASES.map((c) => ({
+    ...ALL_DENSE_REVIEW_CASES.map((c) => ({
       id: `district:${c.id}`,
-      batchId: "districts",
+      batchId: denseReviewRun(c) === "commercial" ? "commercial" : "districts",
       name: c.name,
       scene: "district" as const,
       prefab: c.id,
-      url: `/tilefun/building-lab.html?run=districts&case=${c.id}`,
+      url: `/tilefun/building-lab.html?run=${denseReviewRun(c)}&case=${c.id}`,
     })),
   ];
 }
@@ -96,7 +98,7 @@ export function artReviewContext(d: ArtReviewDefinition) {
       : undefined;
   const district =
     d.scene === "district"
-      ? denseReviewScene(required(DENSE_REVIEW_CASES.find((c) => c.id === d.prefab)))
+      ? denseReviewScene(required(ALL_DENSE_REVIEW_CASES.find((c) => c.id === d.prefab)))
       : undefined;
   const prefabs = district
     ? denseReviewPrefabs(district)
@@ -116,20 +118,22 @@ export function artReviewContext(d: ArtReviewDefinition) {
         : prefabs;
   const rects: ArtRect[] = surface
     ? composeCitySurface(surface).map((p) => [...p.rect])
-    : [
-        ...prefabs.flatMap((p) =>
-          p.parts.map(
-            (s) => [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect,
+    : district
+      ? denseReviewSourceRects(district)
+      : [
+          ...prefabs.flatMap((p) =>
+            p.parts.map(
+              (s) => [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect,
+            ),
           ),
-        ),
-        ...(street?.props.map((p) => {
-          const s = createProp(p.type, p.wx, p.wy).sprite;
-          return [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect;
-        }) ?? []),
-        ...(street
-          ? composeStreetStarterSurface(street.bounds).map((p) => [...p.rect] as ArtRect)
-          : []),
-      ];
+          ...(street?.props.map((p) => {
+            const s = createProp(p.type, p.wx, p.wy).sprite;
+            return [s.frameCol * 16, s.frameRow * 16, s.spriteWidth, s.spriteHeight] as ArtRect;
+          }) ?? []),
+          ...(street
+            ? composeStreetStarterSurface(street.bounds).map((p) => [...p.rect] as ArtRect)
+            : []),
+        ];
   const x = Math.min(...rects.map((r) => r[0])),
     y = Math.min(...rects.map((r) => r[1]));
   const rect: ArtRect = [

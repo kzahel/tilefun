@@ -15,6 +15,10 @@ import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
+import {
+  COMMERCIAL_STREET_PROPS,
+  COMMERCIAL_SURFACE_CELLS,
+} from "../src/generation/regional/CommercialCityAssets.js";
 import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
@@ -155,7 +159,17 @@ function add(
   usages.push({ id, sheetId: sheet.id, rect: validateRect(rect, sheet), label, kind, consumers });
 }
 for (const def of getPropSourceDefinitions())
-  add(`prop:${def.type}`, def.sheetKey, def.rect, def.type, "prop", references.get(def.type) ?? []);
+  add(`prop:${def.type}`, def.sheetKey, def.rect, def.type, "prop", [
+    ...(references.get(def.type) ?? []),
+    ...(COMMERCIAL_STREET_PROPS.some((p) => p.type === def.type)
+      ? [
+          {
+            system: "Commercial streets (regional-v6, promoted)",
+            source: "src/generation/regional/commercial-city-assets-v1.json",
+          },
+        ]
+      : []),
+  ]);
 for (const recipe of [...BUILDING_RECIPES, ...CITY_BUILDING_PREFABS, ...DENSE_CITY_BUILDINGS])
   for (const [n, part] of recipe.parts.entries())
     add(
@@ -251,6 +265,24 @@ for (const [key, p] of denseTiles)
     "terrain",
     [
       { system: "Dense districts (regional-v4, promoted)", source: "src/road/DenseCitySurface.ts" },
+      { system: "Game / real-tile preview renderer", source: "src/rendering/TileRenderer.ts" },
+    ],
+  );
+const commercialTiles = new Map(
+  COMMERCIAL_SURFACE_CELLS.flatMap((cell) => cell.map((p) => [p.rect.join(":"), p] as const)),
+);
+for (const [key, p] of commercialTiles)
+  add(
+    `surface:commercial-v1:${key}`,
+    "me-complete",
+    p.rect,
+    `Commercial street surface · ${p.label}`,
+    "terrain",
+    [
+      {
+        system: "Commercial streets (regional-v6, promoted)",
+        source: "src/generation/regional/commercial-city-assets-v1.json",
+      },
       { system: "Game / real-tile preview renderer", source: "src/rendering/TileRenderer.ts" },
     ],
   );

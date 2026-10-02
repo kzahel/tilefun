@@ -1,11 +1,17 @@
 import type { GameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { PIXEL_SCALE } from "../config/constants.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { createProp } from "../entities/PropFactories.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import { createGenerator } from "../generation/Generator.js";
+import {
+  COMMERCIAL_CITY_ASSETS,
+  COMMERCIAL_SURFACE_CELLS,
+} from "../generation/regional/CommercialCityAssets.js";
+import type { CommercialDistrictPlan } from "../generation/regional/CommercialDistrictPlanner.js";
 import { DENSE_CITY_ASSETS, denseBuilding } from "../generation/regional/DenseCityAssets.js";
 import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
@@ -14,6 +20,7 @@ import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { World } from "../world/World.js";
+import type { ArtRect } from "./ArtCatalog.js";
 
 export const DENSE_DEMO_GENERATION: GenerationDescriptor = {
   type: "regional",
@@ -41,10 +48,52 @@ export const DENSE_REVIEW_CASES = [
     window: "green",
   },
 ] as const;
-export type DenseReviewCase = (typeof DENSE_REVIEW_CASES)[number];
+export const COMMERCIAL_DEMO_GENERATION: GenerationDescriptor = {
+  ...DENSE_DEMO_GENERATION,
+  version: "regional-v6",
+};
+export const COMMERCIAL_REVIEW_CASES = [
+  {
+    id: "district-v2-commercial",
+    name: "Commercial neighborhood",
+    prompt:
+      "Review the wider avenue, commercial frontage, refuge crossing and furnished parking bays together.",
+    window: "whole",
+    generation: COMMERCIAL_DEMO_GENERATION,
+  },
+  {
+    id: "district-v2-frontage",
+    name: "Shops & furnished sidewalk",
+    prompt:
+      "Check shop approaches, a clear walking strip behind the meters and seating, and the shorter east crossing.",
+    window: "commercial",
+    generation: COMMERCIAL_DEMO_GENERATION,
+  },
+  {
+    id: "district-v2-refuge",
+    name: "Avenue & refuge crossing",
+    prompt:
+      "Check the rounded intersection, capped island and open pedestrian landing. The game runs the same crossing route.",
+    window: "refuge",
+    generation: COMMERCIAL_DEMO_GENERATION,
+  },
+  {
+    id: "district-v2-parking",
+    name: "Parked cars & curb bays",
+    prompt:
+      "Check native car scale and facing, marked occupied/empty bays, meters, curb extensions and sidewalk clearance.",
+    window: "parking",
+    generation: COMMERCIAL_DEMO_GENERATION,
+  },
+] as const;
+export const ALL_DENSE_REVIEW_CASES = [...DENSE_REVIEW_CASES, ...COMMERCIAL_REVIEW_CASES];
+export type DenseReviewCase = (typeof ALL_DENSE_REVIEW_CASES)[number];
+export const denseReviewRun = (c: DenseReviewCase) =>
+  "generation" in c ? "commercial" : "districts";
 /** These views select windows of the actual generator, never separate placements. */
 export function denseReviewScene(c: DenseReviewCase) {
-  const generator = createGenerator(DENSE_DEMO_GENERATION);
+  const generation = "generation" in c ? c.generation : DENSE_DEMO_GENERATION;
+  const generator = createGenerator(generation);
   if (!(generator.terrain instanceof DenseDistrictStrategy))
     throw new Error("Missing dense generator");
   const plan = generator.terrain.districts.owner(0, 0);
@@ -55,7 +104,13 @@ export function denseReviewScene(c: DenseReviewCase) {
       ? { minX: x - 50, minY: y - 46, maxX: x + 50, maxY: y + 46 }
       : c.window === "frontage"
         ? { minX: x - 43, minY: y - 39, maxX: x + 43, maxY: y + 5 }
-        : { minX: x - 43, minY: y - 7, maxX: x + 43, maxY: y + 44 };
+        : c.window === "commercial"
+          ? { minX: x + 4, minY: y - 34, maxX: x + 44, maxY: y + 12 }
+          : c.window === "refuge"
+            ? { minX: x - 40, minY: y - 18, maxX: x - 4, maxY: y + 18 }
+            : c.window === "parking"
+              ? { minX: x + 7, minY: y - 16, maxX: x + 40, maxY: y + 8 }
+              : { minX: x - 43, minY: y - 7, maxX: x + 43, maxY: y + 44 };
   const props = new Map<string, ReturnType<typeof createProp>>(),
     actors = new Map<string, ActorPlacement>();
   for (let cy = Math.floor(bounds.minY / 16); cy <= Math.floor(bounds.maxY / 16); cy++)
@@ -70,7 +125,7 @@ export function denseReviewScene(c: DenseReviewCase) {
     }
   return {
     definition: c,
-    generation: DENSE_DEMO_GENERATION,
+    generation,
     plan,
     bounds,
     props: [...props.values()],
@@ -85,6 +140,7 @@ export function denseReviewComposition(s: DenseReviewScene) {
     bounds: s.bounds,
     plan: s.plan,
     assets: DENSE_CITY_ASSETS,
+    ...(s.generation.version === "regional-v6" ? { commercialAssets: COMMERCIAL_CITY_ASSETS } : {}),
     props: s.props,
     actors: s.actors,
   };
@@ -93,6 +149,26 @@ export function denseReviewPrefabs(s: DenseReviewScene) {
   return [
     ...new Set(s.props.filter((p) => p.type.startsWith("prop-city-dense-v1-")).map((p) => p.type)),
   ].map(denseBuilding);
+}
+export function denseReviewSourceRects(s: DenseReviewScene): ArtRect[] {
+  const rects: ArtRect[] = denseReviewPrefabs(s).flatMap((p) =>
+    p.parts.map(
+      (p) => [p.frameCol * 16, p.frameRow * 16, p.spriteWidth, p.spriteHeight] as ArtRect,
+    ),
+  );
+  if (s.generation.version === "regional-v6") {
+    rects.push(
+      ...COMMERCIAL_SURFACE_CELLS.flatMap((cell) => cell.map((p) => [...p.rect] as ArtRect)),
+    );
+    for (const p of s.props.filter((p) => p.sprite.sheetKey === "me-complete" && !p.sprite.parts))
+      rects.push([
+        p.sprite.frameCol * 16,
+        p.sprite.frameRow * 16,
+        p.sprite.spriteWidth,
+        p.sprite.spriteHeight,
+      ]);
+  }
+  return rects;
 }
 
 /** Real chunks, game autotiling, game cached terrain renderer and normal entity
@@ -160,13 +236,27 @@ export function drawDenseDistrictShowcase(
       }
     ctx.strokeStyle = "#ff8282";
     for (const p of props)
-      for (const w of p.walls ?? (p.collider ? [p.collider] : []))
+      for (const w of p.walls ?? (p.collider ? [p.collider] : [])) {
+        const bounds = getEntityAABB(p.position, w);
         rect({
-          minX: (p.position.wx + w.offsetX - w.width / 2) / 16,
-          minY: (p.position.wy + w.offsetY - w.height) / 16,
-          maxX: (p.position.wx + w.offsetX + w.width / 2) / 16,
-          maxY: (p.position.wy + w.offsetY) / 16,
+          minX: bounds.left / 16,
+          minY: bounds.top / 16,
+          maxX: bounds.right / 16,
+          maxY: bounds.bottom / 16,
         });
+      }
+    if (s.plan.recipe === "commercial-district-v1") {
+      const facts = (s.plan as CommercialDistrictPlan).commercial;
+      ctx.strokeStyle = "#68dfff";
+      for (const p of facts.parking) rect(p.bounds);
+      ctx.strokeStyle = "#77f6ba";
+      for (const b of facts.walkways) rect(b);
+      ctx.strokeStyle = "#bf8aff";
+      for (const c of facts.crossings) {
+        rect(c.bounds);
+        if (c.landing) rect(c.landing);
+      }
+    }
     ctx.strokeStyle = "#77f6ba";
     for (const a of s.actors) {
       ctx.beginPath();

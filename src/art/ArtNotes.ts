@@ -7,7 +7,7 @@ export interface BuildingReview {
   caseId?: string;
   propTypes?: string[];
   surfaceRecipe?: string;
-  districtRecipe?: "dense-district-v1" | "dense-district-v2";
+  districtRecipe?: "dense-district-v1" | "dense-district-v2" | "commercial-district-v1";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -89,12 +89,15 @@ function parseBuildingReview(value: unknown): BuildingReview {
     if (
       typeof v.caseId !== "string" ||
       !/^district-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
-      !["dense-district-v1", "dense-district-v2"].includes(v.districtRecipe as string) ||
+      !["dense-district-v1", "dense-district-v2", "commercial-district-v1"].includes(
+        v.districtRecipe as string,
+      ) ||
       v.surfaceRecipe !== undefined ||
       !Array.isArray(v.propTypes) ||
       v.propTypes.length > 64 ||
       v.propTypes.some((id) => typeof id !== "string" || !/^prop-[a-z0-9-]{1,100}$/.test(id)) ||
-      url.searchParams.get("run") !== "districts" ||
+      url.searchParams.get("run") !==
+        (v.districtRecipe === "commercial-district-v1" ? "commercial" : "districts") ||
       url.searchParams.get("case") !== v.caseId
     )
       throw new Error("Invalid district review context");

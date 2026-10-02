@@ -969,7 +969,7 @@ export function legacyDestination(url: string, manifest?: WorkshopManifest) {
           t.id ===
           (["surfaces", "road-geometry"].includes(parsed.searchParams.get("run") ?? "")
             ? "roads"
-            : parsed.searchParams.get("run") === "districts"
+            : ["districts", "commercial"].includes(parsed.searchParams.get("run") ?? "")
               ? "districts"
               : parsed.searchParams.get("run") === "streets"
                 ? "streets"

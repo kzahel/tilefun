@@ -102,6 +102,12 @@
   ],
   "batches": [
     {
+      "id": "commercial",
+      "name": "Commercial streets & parking",
+      "description": "Four views of a playable regional-v6 neighborhood: shops, clear sidewalks, refuge crossing, meters and parked cars.",
+      "toolId": "districts"
+    },
+    {
       "id": "roads-geometry",
       "name": "Road geometry",
       "description": "Four new cases: curved curbs, pedestrian refuge, crossing approaches and parking bays.",
@@ -2776,6 +2782,356 @@
             "prop-oak-tree",
             "prop-garden-fountain",
             "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v2-commercial",
+      "batchId": "commercial",
+      "name": "Commercial neighborhood",
+      "prompt": "Review the wider avenue, commercial frontage, refuge crossing and furnished parking bays together.",
+      "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-commercial",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v6%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "31be00f6f59cf5b5359a6e1d708d4c5f41c28e86a53f4a5f3301fddcbaad1c13",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-city-dense-v1-hotel-4-roof-sign"
+        ],
+        "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-commercial",
+        "revision": "c38e221f5ab1b04de5f28bfc2a3f8e4ba606f96121f5f301528a38b9b768ee7b",
+        "renderFingerprint": "31be00f6f59cf5b5359a6e1d708d4c5f41c28e86a53f4a5f3301fddcbaad1c13",
+        "caseId": "district-v2-commercial",
+        "districtRecipe": "commercial-district-v1",
+        "propTypes": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-dense-v1-hotel-4-roof-sign",
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-oak-tree",
+          "prop-garden-fountain",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2640,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-city-dense-v1-hotel-4-roof-sign"
+          ],
+          "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-commercial",
+          "revision": "c38e221f5ab1b04de5f28bfc2a3f8e4ba606f96121f5f301528a38b9b768ee7b",
+          "renderFingerprint": "31be00f6f59cf5b5359a6e1d708d4c5f41c28e86a53f4a5f3301fddcbaad1c13",
+          "caseId": "district-v2-commercial",
+          "districtRecipe": "commercial-district-v1",
+          "propTypes": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-dense-v1-hotel-4-roof-sign",
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-oak-tree",
+            "prop-garden-fountain",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v2-frontage",
+      "batchId": "commercial",
+      "name": "Shops & furnished sidewalk",
+      "prompt": "Check shop approaches, a clear walking strip behind the meters and seating, and the shorter east crossing.",
+      "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-frontage",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v6%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "05fd547ad0b13ae25f283f5780e2256b2059b0afd86ead56f2bb0af0cf0bff4e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-frontage",
+        "revision": "850bd00b1301ae914cf5d4657b4b022e02012cc582ff29c98412c44ddb548253",
+        "renderFingerprint": "05fd547ad0b13ae25f283f5780e2256b2059b0afd86ead56f2bb0af0cf0bff4e",
+        "caseId": "district-v2-frontage",
+        "districtRecipe": "commercial-district-v1",
+        "propTypes": [
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-oak-tree",
+          "prop-garden-fountain"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2640,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-frontage",
+          "revision": "850bd00b1301ae914cf5d4657b4b022e02012cc582ff29c98412c44ddb548253",
+          "renderFingerprint": "05fd547ad0b13ae25f283f5780e2256b2059b0afd86ead56f2bb0af0cf0bff4e",
+          "caseId": "district-v2-frontage",
+          "districtRecipe": "commercial-district-v1",
+          "propTypes": [
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-oak-tree",
+            "prop-garden-fountain"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v2-refuge",
+      "batchId": "commercial",
+      "name": "Avenue & refuge crossing",
+      "prompt": "Check the rounded intersection, capped island and open pedestrian landing. The game runs the same crossing route.",
+      "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-refuge",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v6%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "9854c7d2849e79fb963589606f05e98d231254f673554c02e338964b0307d1e7",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-hotel-4-roof-sign"
+        ],
+        "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-refuge",
+        "revision": "6486ead8b38009cf65e23561d49b5176738e318875aa955cd8a07b14de597375",
+        "renderFingerprint": "9854c7d2849e79fb963589606f05e98d231254f673554c02e338964b0307d1e7",
+        "caseId": "district-v2-refuge",
+        "districtRecipe": "commercial-district-v1",
+        "propTypes": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-hotel-4-roof-sign",
+          "prop-city-dense-v1-condo-bay-3"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1744,
+          2160,
+          544
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-hotel-4-roof-sign"
+          ],
+          "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-refuge",
+          "revision": "6486ead8b38009cf65e23561d49b5176738e318875aa955cd8a07b14de597375",
+          "renderFingerprint": "9854c7d2849e79fb963589606f05e98d231254f673554c02e338964b0307d1e7",
+          "caseId": "district-v2-refuge",
+          "districtRecipe": "commercial-district-v1",
+          "propTypes": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-hotel-4-roof-sign",
+            "prop-city-dense-v1-condo-bay-3"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v2-parking",
+      "batchId": "commercial",
+      "name": "Parked cars & curb bays",
+      "prompt": "Check native car scale and facing, marked occupied/empty bays, meters, curb extensions and sidewalk clearance.",
+      "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-parking",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v6%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "940e387875d5c2f9bfa3192a2af339d06f827b94ccd12d87f95baea5fc86d273",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-parking",
+        "revision": "7c3a3c92c62a9f00b414b40dac3d134a78d30de39fc684055d233b49ff9d9979",
+        "renderFingerprint": "940e387875d5c2f9bfa3192a2af339d06f827b94ccd12d87f95baea5fc86d273",
+        "caseId": "district-v2-parking",
+        "districtRecipe": "commercial-district-v1",
+        "propTypes": [
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2640,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=commercial&case=district-v2-parking",
+          "revision": "7c3a3c92c62a9f00b414b40dac3d134a78d30de39fc684055d233b49ff9d9979",
+          "renderFingerprint": "940e387875d5c2f9bfa3192a2af339d06f827b94ccd12d87f95baea5fc86d273",
+          "caseId": "district-v2-parking",
+          "districtRecipe": "commercial-district-v1",
+          "propTypes": [
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp"
           ]
         }
       }
@@ -9006,5 +9362,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "3b196191b6f7690aff3f5423172f6415472fc43ec24457910ee15cc1715e3250"
+  "inputDigest": "b14090037a040f1c74b742e7e751abebcea8d18d71b6442bd41798c42953bd31"
 }

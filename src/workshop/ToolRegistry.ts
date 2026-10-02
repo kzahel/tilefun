@@ -109,6 +109,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
   {
+    id: "commercial",
+    name: "Commercial streets & parking",
+    description:
+      "Four views of a playable regional-v6 neighborhood: shops, clear sidewalks, refuge crossing, meters and parked cars.",
+    toolId: "districts",
+  },
+  {
     id: "roads-geometry",
     name: "Road geometry",
     description:

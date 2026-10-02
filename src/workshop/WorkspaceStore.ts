@@ -88,9 +88,11 @@ export const queueStorageKey = (batch: string) =>
       ? "tilefun.surface-review.v1"
       : batch === "districts"
         ? "tilefun.district-review.v1"
-        : batch === "streets"
-          ? "tilefun.street-review.v1"
-          : "tilefun.building-review.v1";
+        : batch === "commercial"
+          ? "tilefun.commercial-review.v1"
+          : batch === "streets"
+            ? "tilefun.street-review.v1"
+            : "tilefun.building-review.v1";
 export function initialQueue(batch: string): ReviewQueue {
   const value = legacyValue(queueStorageKey(batch));
   const filter = ["unchecked", "all", "approved", "changes"].includes(String(value.filter))

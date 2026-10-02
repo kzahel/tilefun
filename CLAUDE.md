@@ -85,7 +85,21 @@ pedestrian refuge, crossing approaches and curbside parking bays. These use
 sidewalk extensions, island/landing bounds and parking reservations. Its
 review queue and pause state are independent of the nine approved foundation
 scenes. All cases are indexed in Workshop, including Roads sidebar counts.
-This batch awaits human review and is not promoted into a saved-world generator.
+All four cases are approved. Their exact art is promoted into regional-v6's
+immutable commercial surface bank; the original review scenes remain unchanged.
+
+Commercial street review is `/tilefun/building-lab.html?run=commercial`, with
+four views of one `regional-v6` world (seed 2026, tile 300,519). Workshop has a
+separate Commercial streets & parking batch under Dense neighborhoods. It shares
+the dense planner, ordinary chunk/prop renderer, explorer and game handoff.
+The wider avenue includes a refuge, shorter east crossing, marked bays, two
+stationary cars, meters and curb furniture, with reserved clear walking strips.
+Notes use `commercial-district-v1` and the commercial run; its queue/pause is
+independent. Geometry overlays show bays, crossings, doors, colliders and routes.
+`commercial-city-assets-v1.json` pins ten exact human approvals, prop geometry
+and 61 opaque source cell recipes (persistent roadGrid IDs 15–75). Never
+regenerate it in builds. Saved v6 output is frozen too; later changes need a new
+revision/bank. New worlds still default to v4. The four new views await review.
 
 Dense neighborhood review is `/tilefun/building-lab.html?run=districts`, with
 three views of one real `regional-v5` review world (seed 2026, tile 300,519). The lab,

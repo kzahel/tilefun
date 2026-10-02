@@ -24,6 +24,7 @@ test("new worlds default to procedural regional v4 and clearly label older choic
   await expect(revision.locator("option")).toHaveText([
     "Dense districts (v4)",
     "Connected entrances (v5, review)",
+    "Commercial streets (v6, review)",
     "Settled world (v3, legacy)",
     "Districts (v2, old)",
     "Terrain only (v1, old)",
@@ -44,12 +45,19 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  for (const choice of ["classic", "island", "flat", "regional", "regional-v5"] as const) {
-    const worldType = choice === "regional-v5" ? "regional" : choice;
-    const generation =
-      choice === "regional-v5"
-        ? resolveDescriptor({ ...createDescriptor("regional", 2026), version: "regional-v5" })
-        : createDescriptor(choice, 2026);
+  for (const choice of [
+    "classic",
+    "island",
+    "flat",
+    "regional",
+    "regional-v5",
+    "regional-v6",
+  ] as const) {
+    const revision = choice === "regional-v5" || choice === "regional-v6";
+    const worldType = revision ? "regional" : choice;
+    const generation = revision
+      ? resolveDescriptor({ ...createDescriptor("regional", 2026), version: choice })
+      : createDescriptor(choice, 2026);
     await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");

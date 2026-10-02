@@ -20,7 +20,9 @@ test("GPU Chromium at retina scale renders every district with the registered pi
     const page = await context.newPage();
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    for (const candidate of manifest.candidates.filter((c) => c.batchId === "districts")) {
+    for (const candidate of manifest.candidates.filter((c) =>
+      ["districts", "commercial"].includes(c.batchId),
+    )) {
       await page.goto(
         `/tilefun/workshop.html#/review/${encodeURIComponent(candidate.id)}?show=all`,
       );

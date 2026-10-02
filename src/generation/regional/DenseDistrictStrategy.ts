@@ -6,7 +6,11 @@ import { deriveTerrain } from "../deriveTerrain.js";
 import type { ActorPlacement } from "../Generator.js";
 import { buildingVisualBounds } from "./BuildingRecipes.js";
 import { denseBuilding } from "./DenseCityAssets.js";
-import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";
+import {
+  type DenseDistrictPlan,
+  DenseDistrictSource,
+  denseSurfaceAt,
+} from "./DenseDistrictPlanner.js";
 import { DistrictStrategy, type FeaturePlacement } from "./DistrictStrategy.js";
 import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
@@ -38,7 +42,7 @@ export class DenseDistrictStrategy extends DistrictStrategy {
           y = baseY + ly,
           plan = this.districts.at(x, y);
         if (plan) {
-          chunk.setRoad(lx, ly, denseSurfaceAt(plan, x, y));
+          chunk.setRoad(lx, ly, this.surface(plan, x, y));
           chunk.setHeight(lx, ly, 0);
         }
       }
@@ -78,17 +82,27 @@ export class DenseDistrictStrategy extends DistrictStrategy {
               wy: lot.anchor.y * 16,
             });
         }
-      const { x, y } = plan.center;
-      for (const dx of [-14, 14])
-        for (const dy of [-4.5, 4.5])
-          add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
-      const p = plan.park,
-        px = (p.minX + p.maxX) / 2,
-        py = (p.minY + p.maxY) / 2;
-      add(`${plan.id}:green:tree`, "prop-oak-tree", p.minX + 5, p.minY + 8);
-      add(`${plan.id}:green:bench`, "prop-bench", px + 5, p.maxY - 5);
-      add(`${plan.id}:green:fountain`, "prop-garden-fountain", px - 5, py + 5);
+      for (const p of this.furnishings(plan)) add(p.featureId, p.propType, p.wx / 16, p.wy / 16);
     }
+    return props;
+  }
+  protected surface(plan: DenseDistrictPlan, x: number, y: number): number {
+    return denseSurfaceAt(plan, x, y);
+  }
+  protected furnishings(plan: DenseDistrictPlan): FeaturePlacement[] {
+    const props: FeaturePlacement[] = [],
+      { x, y } = plan.center;
+    const add = (featureId: string, propType: string, x: number, y: number) =>
+      props.push({ featureId, propType, wx: x * 16, wy: y * 16 });
+    for (const dx of [-14, 14])
+      for (const dy of [-4.5, 4.5])
+        add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
+    const p = plan.park,
+      px = (p.minX + p.maxX) / 2,
+      py = (p.minY + p.maxY) / 2;
+    add(`${plan.id}:green:tree`, "prop-oak-tree", p.minX + 5, p.minY + 8);
+    add(`${plan.id}:green:bench`, "prop-bench", px + 5, p.maxY - 5);
+    add(`${plan.id}:green:fountain`, "prop-garden-fountain", px - 5, py + 5);
     return props;
   }
   actors(cx: number, cy: number): ActorPlacement[] {

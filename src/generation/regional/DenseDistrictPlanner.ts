@@ -9,7 +9,7 @@ import { DistrictSource } from "./DistrictStrategy.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
 export interface DenseDistrictPlan extends DistrictPlan {
-  readonly recipe: "dense-district-v1" | "dense-district-v2";
+  readonly recipe: "dense-district-v1" | "dense-district-v2" | "commercial-district-v1";
   readonly center: { x: number; y: number };
   readonly actors: ActorPlacement[];
   /** Absent in frozen v4. Threshold-to-sidewalk connections belong to v5. */
@@ -33,7 +33,11 @@ const type = (suffix: string) => `prop-city-dense-v1-${suffix}`;
 /** A compact 2×2 place recipe, then seeded family choice. All art faces south;
  * rear/side gaps remain landscaped rather than inventing rotated elevations.
  */
-export function denseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
+export function denseDistrict(
+  settlement: Settlement,
+  seed: number,
+  commercial = false,
+): DenseDistrictPlan {
   const { x, y } = settlement.center;
   const xs = [x - 44, x, x + 44],
     ys = [y - 40, y, y + 40];
@@ -47,7 +51,7 @@ export function denseDistrict(settlement: Settlement, seed: number): DenseDistri
         { x: sx, y: bounds.maxY },
       ],
       width: sx === x ? 8 : 6,
-      sidewalk: 3,
+      sidewalk: commercial ? 4 : 3,
       kind: sx === x ? "avenue" : "street",
     });
   for (const sy of ys)
@@ -57,8 +61,8 @@ export function denseDistrict(settlement: Settlement, seed: number): DenseDistri
         { x: bounds.minX, y: sy },
         { x: bounds.maxX, y: sy },
       ],
-      width: sy === y ? 8 : 6,
-      sidewalk: 3,
+      width: sy === y ? (commercial ? 12 : 8) : 6,
+      sidewalk: commercial ? 4 : 3,
       kind: sy === y ? "avenue" : "street",
     });
   const blocks: DistrictBlock[] = [],
@@ -72,13 +76,14 @@ export function denseDistrict(settlement: Settlement, seed: number): DenseDistri
         bottom = item(ys, row + 1);
       const hl = left === x ? 4 : 3,
         hr = right === x ? 4 : 3,
-        ht = top === y ? 4 : 3,
-        hb = bottom === y ? 4 : 3;
+        ht = top === y ? (commercial ? 6 : 4) : 3,
+        hb = bottom === y ? (commercial ? 6 : 4) : 3;
+      const sidewalk = commercial ? 4 : 3;
       const b = {
-        minX: left + hl + 3,
-        maxX: right - hr - 3,
-        minY: top + ht + 3,
-        maxY: bottom - hb - 3,
+        minX: left + hl + sidewalk,
+        maxX: right - hr - sidewalk,
+        minY: top + ht + sidewalk,
+        maxY: bottom - hb - sidewalk,
       };
       const id = `${settlement.id}:block:${col}:${row}`;
       const kind = row === 1 && col === 1 ? "park" : row === 0 && col === 1 ? "shops" : "homes";
@@ -122,11 +127,12 @@ export function denseDistrict(settlement: Settlement, seed: number): DenseDistri
         }
       }
       blocks.push(block);
+      const walk = commercial ? 2.5 : 1.5;
       const route = [
-        { wx: (left + hl + 1.5) * 16, wy: (top + ht + 1.5) * 16 },
-        { wx: (right - hr - 1.5) * 16, wy: (top + ht + 1.5) * 16 },
-        { wx: (right - hr - 1.5) * 16, wy: (bottom - hb - 1.5) * 16 },
-        { wx: (left + hl + 1.5) * 16, wy: (bottom - hb - 1.5) * 16 },
+        { wx: (left + hl + walk) * 16, wy: (top + ht + walk) * 16 },
+        { wx: (right - hr - walk) * 16, wy: (top + ht + walk) * 16 },
+        { wx: (right - hr - walk) * 16, wy: (bottom - hb - walk) * 16 },
+        { wx: (left + hl + walk) * 16, wy: (bottom - hb - walk) * 16 },
       ];
       actors.push({
         featureId: `${id}:walker`,
@@ -193,8 +199,12 @@ export class DenseDistrictSource extends DistrictSource {
  * Interaction positions are outside collision and cannot stand in for the art's
  * door threshold. Start under the facade/last step and overlap the real sidewalk.
  */
-export function connectedDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
-  const plan = denseDistrict(settlement, seed);
+export function connectedDenseDistrict(
+  settlement: Settlement,
+  seed: number,
+  commercial = false,
+): DenseDistrictPlan {
+  const plan = denseDistrict(settlement, seed, commercial);
   const blocks = plan.blocks.map((block) => ({
     ...block,
     lots: block.lots.map((lot) => {

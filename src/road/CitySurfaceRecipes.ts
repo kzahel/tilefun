@@ -377,33 +377,43 @@ export function citySurfaceComposition(c: CitySurfaceCase) {
   };
 }
 
-/** Rounded pavement corners span the pavement cell, both adjoining road-edge
- * cells and the diagonal road cell. Keep all four native clips together so
- * the curve and its south shadow join the straight curbs on each side.
- */
-export function cityRoundedCornerPatches(road: (x: number, y: number) => boolean) {
-  const patches: SurfacePiece[] = [];
-  for (let y = 0; y < SURFACE_ROWS; y++)
-    for (let x = 0; x < SURFACE_COLS; x++) {
-      if (!road(x, y) || !road(x - 1, y) || !road(x + 1, y) || !road(x, y - 1) || !road(x, y + 1))
-        continue;
-      for (const [dx, dy, sx, sy] of [
-        [-1, -1, 192, 1952],
-        [1, -1, 144, 1952],
-        [-1, 1, 192, 1904],
-        [1, 1, 144, 1904],
-      ] as const) {
-        if (road(x + dx, y + dy)) continue;
-        patches.push({
+/** Rounded pavement corners span four cells. Use the same unbounded lookup in
+ * generated streets and reviewed scenes. Read neighboring corner anchors
+ * so a four-cell patch remains identical across chunk boundaries. */
+export function cityRoundedTileAt(
+  x: number,
+  y: number,
+  road: (x: number, y: number) => boolean,
+  corners: readonly (readonly [number, number, number, number])[] = [
+    [-1, -1, 192, 1952],
+    [1, -1, 144, 1952],
+    [-1, 1, 192, 1904],
+    [1, 1, 144, 1904],
+  ],
+): SurfacePiece | undefined {
+  for (const [dx, dy, sx, sy] of corners)
+    for (const ax of [x, x - dx])
+      for (const ay of [y, y - dy]) {
+        if (
+          !road(ax, ay) ||
+          !road(ax - 1, ay) ||
+          !road(ax + 1, ay) ||
+          !road(ax, ay - 1) ||
+          !road(ax, ay + 1) ||
+          road(ax + dx, ay + dy)
+        )
+          continue;
+        const left = ax + Math.min(0, dx),
+          top = ay + Math.min(0, dy);
+        return {
           label: "Rounded pavement corner",
-          rect: [sx, sy, 32, 32],
-          x: (x + Math.min(0, dx)) * 16,
-          y: (y + Math.min(0, dy)) * 16,
+          rect: [sx + (x - left) * 16, sy + (y - top) * 16, 16, 16],
+          x: x * 16,
+          y: y * 16,
           role: "curb",
-        });
+        };
       }
-    }
-  return patches;
+  return undefined;
 }
 
 /** Source audit: native 32×32 pavement corners (144/192,1904/1952), island
@@ -414,7 +424,6 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
   const pieces: SurfacePiece[] = [],
     plan = cityGeometryPlan(c);
   const road = (x: number, y: number) => citySurfaceRoadAt(c, x, y);
-  const corners = cityRoundedCornerPatches(road);
   const add = (
     label: string,
     rect: SurfaceRect,
@@ -425,11 +434,9 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
   for (let y = 0; y < SURFACE_ROWS; y++)
     for (let x = 0; x < SURFACE_COLS; x++) {
       const p = citySurfaceTileAt("neutral", x, y, road);
-      const corner = corners.find(
-        (c) => x * 16 >= c.x && x * 16 < c.x + 32 && y * 16 >= c.y && y * 16 < c.y + 32,
-      );
+      const corner = cityRoundedTileAt(x, y, road);
       if (corner) {
-        p.rect = [corner.rect[0] + x * 16 - corner.x, corner.rect[1] + y * 16 - corner.y, 16, 16];
+        p.rect = corner.rect;
         p.label = corner.label;
         p.role = "curb";
       }
@@ -451,15 +458,7 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
           "median",
         );
     }
-  for (const crossing of plan.crossings) {
-    // Keep the south-facing curb shadow; paint only its road-side half.
-    add("Crossing entry at sidewalk", [64, 1968, 32, 16], crossing.x, crossing.top, "paint");
-    for (let y = crossing.top + 16; y < crossing.bottom - 16; y += 16) {
-      if (plan.refuge && y >= plan.refuge.minY && y < plan.refuge.maxY) continue;
-      add("Zebra crossing", [64, 1984, 32, 16], crossing.x, y, "paint");
-    }
-    add("Crossing exit at sidewalk", [64, 1984, 32, 8], crossing.x, crossing.bottom - 16, "paint");
-  }
+  pieces.push(...cityCrossingPieces(plan.crossings, plan.refuge));
   for (const bay of plan.parking)
     add("Marked curbside parking bay", [16, 2048, 80, 32], bay.minX, bay.minY, "paint");
   if (c.geometry !== "rounded")
@@ -474,5 +473,40 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
         "paint",
       );
     }
+  return pieces;
+}
+
+/** Same crossing placement for reviewed surfaces and promoted place recipes.
+ * Pin source clips in a promoted bank while sharing placement and shadow rules. */
+export function cityCrossingPieces(
+  crossings: readonly { x: number; width: number; top: number; bottom: number }[],
+  refuge: { minY: number; maxY: number } | null = null,
+  clips: { entry: SurfaceRect; stripe: SurfaceRect; exit: SurfaceRect } = {
+    entry: [64, 1968, 32, 16],
+    stripe: [64, 1984, 32, 16],
+    exit: [64, 1984, 32, 8],
+  },
+): SurfacePiece[] {
+  const pieces: SurfacePiece[] = [];
+  for (const crossing of crossings) {
+    pieces.push({
+      label: "Crossing entry at sidewalk",
+      rect: clips.entry,
+      x: crossing.x,
+      y: crossing.top,
+      role: "paint",
+    });
+    for (let y = crossing.top + 16; y < crossing.bottom - 16; y += 16) {
+      if (refuge && y >= refuge.minY && y < refuge.maxY) continue;
+      pieces.push({ label: "Zebra crossing", rect: clips.stripe, x: crossing.x, y, role: "paint" });
+    }
+    pieces.push({
+      label: "Crossing exit at sidewalk",
+      rect: clips.exit,
+      x: crossing.x,
+      y: crossing.bottom - 16,
+      role: "paint",
+    });
+  }
   return pieces;
 }

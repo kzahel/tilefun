@@ -1,6 +1,7 @@
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { CommercialDistrictStrategy } from "./regional/CommercialDistrictStrategy.js";
 import { DenseDistrictStrategy } from "./regional/DenseDistrictStrategy.js";
 import { DistrictStrategy } from "./regional/DistrictStrategy.js";
 import { RegionalStrategy } from "./regional/RegionalStrategy.js";
@@ -64,6 +65,9 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
           break;
         case "regional-v5":
           terrain = new DenseDistrictStrategy(world, true);
+          break;
+        case "regional-v6":
+          terrain = new CommercialDistrictStrategy(world);
           break;
       }
       return {

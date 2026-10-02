@@ -16,6 +16,8 @@ export enum RoadType {
   CityCrossHRight = 12,
   CityCrossVTop = 13,
   CityCrossVBottom = 14,
+  // 15–75: immutable commercial-city-assets-v1 cell bank (regional-v6).
+  CommercialStart = 15,
 }
 
 /** True if the road type is any non-None road (draws asphalt base). */

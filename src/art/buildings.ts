@@ -33,10 +33,12 @@ import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";
 import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "./BuildingShowcase.js";
 import {
+  COMMERCIAL_REVIEW_CASES,
   DENSE_REVIEW_CASES,
   denseReviewComposition,
   denseReviewPrefabs,
   denseReviewScene,
+  denseReviewSourceRects,
   drawDenseDistrictShowcase,
 } from "./DenseDistrictShowcase.js";
 import { drawStreetShowcase } from "./StreetShowcase.js";
@@ -53,9 +55,14 @@ const geometryRun = params.get("run") === "road-geometry";
 const surfaceRun = params.get("run") === "surfaces" || geometryRun;
 const surfaceRunName = geometryRun ? "road-geometry" : "surfaces";
 const surfaceCases = geometryRun ? CITY_GEOMETRY_CASES : CITY_SURFACE_CASES;
-const districtRun = params.get("run") === "districts";
+const commercialRun = params.get("run") === "commercial";
+const districtRun = params.get("run") === "districts" || commercialRun;
+const districtRunName = commercialRun ? "commercial" : "districts";
+const districtCases = commercialRun ? COMMERCIAL_REVIEW_CASES : DENSE_REVIEW_CASES;
 const reviewStorage = districtRun
-  ? "tilefun.district-review.v1"
+  ? commercialRun
+    ? "tilefun.commercial-review.v1"
+    : "tilefun.district-review.v1"
   : surfaceRun
     ? geometryRun
       ? "tilefun.surface-geometry-review.v2"
@@ -64,10 +71,10 @@ const reviewStorage = districtRun
       ? "tilefun.street-review.v1"
       : "tilefun.building-review.v1";
 const districtSelect = $<HTMLSelectElement>("district-case");
-districtSelect.replaceChildren(...DENSE_REVIEW_CASES.map((c) => new Option(c.name, c.id)));
-if (DENSE_REVIEW_CASES.some((c) => c.id === params.get("case")))
+districtSelect.replaceChildren(...districtCases.map((c) => new Option(c.name, c.id)));
+if (districtCases.some((c) => c.id === params.get("case")))
   districtSelect.value = params.get("case") ?? "";
-const districtScenes = districtRun ? DENSE_REVIEW_CASES.map(denseReviewScene) : [];
+const districtScenes = districtRun ? districtCases.map(denseReviewScene) : [];
 function currentDistrict() {
   return required(districtScenes.find((s) => s.definition.id === districtSelect.value));
 }
@@ -148,17 +155,23 @@ if (districtRun) {
   $("scene-options").hidden = true;
   $("prefab-options").hidden = true;
   $("district-options").hidden = false;
-  required(document.querySelector(".building-intro h1")).textContent =
-    "Review the first dense neighborhood.";
-  required(document.querySelector(".building-intro p")).textContent =
-    "Three views of one playable neighborhood. Two reports pause until “ready” in chat.";
+  required(document.querySelector(".building-intro h1")).textContent = commercialRun
+    ? "Review commercial streets."
+    : "Review the first dense neighborhood.";
+  required(document.querySelector(".building-intro p")).textContent = commercialRun
+    ? "Four views of one playable commercial block. Two reports pause until “ready” in chat."
+    : "Three views of one playable neighborhood. Two reports pause until “ready” in chat.";
   canvas.setAttribute("aria-label", "Generated dense neighborhood");
-  document.title = "Dense district review · Tilefun";
-  required(document.querySelector(".brand span")).textContent = "/ Dense district";
+  document.title = commercialRun
+    ? "Commercial street review · Tilefun"
+    : "Dense district review · Tilefun";
+  required(document.querySelector(".brand span")).textContent = commercialRun
+    ? "/ Commercial streets"
+    : "/ Dense district";
   required($("building-feedback-history").querySelector("summary")).textContent =
     "Art feedback & replies (all scenes)";
   $("preview-explanation").textContent =
-    "These are actual regional-v5 chunks and placements. People show initial poses here; the game runs their routes.";
+    `These are actual ${commercialRun ? "regional-v6" : "regional-v5"} chunks and placements. People show initial poses here; the game runs their routes.`;
   required(required($("geometry").parentElement).lastChild).textContent = "Lots, doors & routes";
   const play = document.createElement("a");
   play.id = "district-play";
@@ -239,7 +252,7 @@ function currentTarget(displayed = false) {
   const district = districtRun ? currentDistrict() : undefined;
   if (district) {
     url.search = "";
-    url.searchParams.set("run", "districts");
+    url.searchParams.set("run", districtRunName);
     url.searchParams.set("case", district.definition.id);
   }
   const surface = surfaceRun ? currentSurface() : undefined;
@@ -250,7 +263,9 @@ function currentTarget(displayed = false) {
   }
   const rects = surface
     ? composeCitySurface(surface).map((p) => p.rect)
-    : reviewSourceRects(prefabs, street);
+    : district
+      ? denseReviewSourceRects(district)
+      : reviewSourceRects(prefabs, street);
   const x = Math.min(...rects.map((p) => p[0])),
     y = Math.min(...rects.map((p) => p[1]));
   const ex = Math.max(...rects.map((p) => p[0] + p[2])),
@@ -710,6 +725,27 @@ function renderDistrict() {
     row.append(link);
     $("pieces").append(row);
   }
+  if (commercialRun) {
+    for (const p of s.props.filter((p) => p.type.startsWith("prop-city-commercial-v1-"))) {
+      const row = document.createElement("p"),
+        link = document.createElement("a"),
+        sprite = p.sprite;
+      const u = new URL("art-workbench.html", location.href);
+      u.searchParams.set("sheet", source.id);
+      u.searchParams.set(
+        "rect",
+        [sprite.frameCol * 16, sprite.frameRow * 16, sprite.spriteWidth, sprite.spriteHeight].join(
+          ",",
+        ),
+      );
+      link.href = u.href;
+      link.textContent = p.type;
+      row.append(link);
+      $("pieces").append(row);
+    }
+    $("topology").textContent +=
+      " Cyan: reserved parking bays. Purple: crossings and refuge landing. Green rectangles: clear walking strips behind curb furniture. Cars are stationary.";
+  }
   const explore = new URL("world-explorer.html", location.href);
   explore.searchParams.set("generation", JSON.stringify(s.generation));
   explore.searchParams.set("x", String(s.plan.center.x));
@@ -1152,7 +1188,7 @@ if (districtRun)
       propTypes: s.props.map((p) => p.type),
       revision: await sha256(new TextEncoder().encode(JSON.stringify(denseReviewComposition(s)))),
       renderFingerprint: await canvasFingerprint(hashCanvas),
-      url: `/tilefun/building-lab.html?run=districts&case=${s.definition.id}`,
+      url: `/tilefun/building-lab.html?run=${districtRunName}&case=${s.definition.id}`,
     };
     candidates.push({
       key: buildingCaseKey(review),

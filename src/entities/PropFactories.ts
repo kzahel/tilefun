@@ -2,6 +2,7 @@ import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasInd
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
+import { COMMERCIAL_STREET_PROPS } from "../generation/regional/CommercialCityAssets.js";
 import { STREET_PROP_RECIPES } from "../generation/regional/StreetRecipes.js";
 import {
   furnitureAsset,
@@ -97,7 +98,7 @@ function makeStairSteps(config: {
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
   ...Object.fromEntries(
-    STREET_PROP_RECIPES.map((p) => [
+    [...STREET_PROP_RECIPES, ...COMMERCIAL_STREET_PROPS].map((p) => [
       p.type,
       {
         sheetKey: "me-complete",
@@ -651,7 +652,7 @@ export interface PropPaletteEntry {
 }
 
 export const PROP_PALETTE: PropPaletteEntry[] = [
-  ...STREET_PROP_RECIPES.map(
+  ...[...STREET_PROP_RECIPES, ...COMMERCIAL_STREET_PROPS].map(
     (p): PropPaletteEntry => ({
       type: p.type,
       label: p.label,
