@@ -112,3 +112,62 @@ test("atlas can pan past every edge, zoom there, and select without snapping the
   expect((await view(canvas)).x).toBe(1408);
   await page.screenshot({ path: "/tmp/tilefun-source-viewport-phone.png" });
 });
+
+test("Shift temporarily pans and focused arrows navigate without changing selections or text input", async ({
+  page,
+}) => {
+  await page.goto(`${workbench}&rect=2160,1872,16,16`);
+  const canvas = page.getByLabel("Source spritesheet", { exact: true });
+  await expect(canvas).toHaveAttribute("data-source-ready", "true");
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox();
+  if (!box) throw new Error("Missing atlas viewport");
+  const start = await view(canvas),
+    url = page.url();
+  await page.keyboard.down("Shift");
+  await expect(canvas).toHaveCSS("cursor", "grab");
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width / 2 + 80, box.y + box.height / 2 + 40);
+  await page.mouse.up();
+  expect(await view(canvas)).toEqual({ ...start, x: start.x - 20, y: start.y - 10 });
+  await expect(page.getByLabel("Tool", { exact: true })).toHaveValue("select");
+  expect(page.url()).toBe(url);
+  await page.keyboard.up("Shift");
+  await expect(canvas).toHaveCSS("cursor", "crosshair");
+  const pan = await view(canvas),
+    scroll = await page.evaluate(() => window.scrollY);
+  await page.keyboard.press("ArrowLeft");
+  await page.keyboard.press("ArrowUp");
+  expect(await view(canvas)).toEqual({ ...pan, x: pan.x - 20, y: pan.y - 20 });
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("ArrowDown");
+  expect(await view(canvas)).toEqual(pan);
+  await page.keyboard.press("Shift+ArrowRight");
+  expect(await view(canvas)).toEqual({ ...pan, x: pan.x + 60 });
+  expect(await page.evaluate(() => window.scrollY)).toBe(scroll);
+  expect(page.url()).toBe(url);
+  // Shift-wheel pans along both trackpad axes without changing scale.
+  const beforeWheel = await view(canvas);
+  await canvas.dispatchEvent("wheel", { deltaX: 40, deltaY: 80, shiftKey: true });
+  await expect
+    .poll(() => view(canvas))
+    .toEqual({ ...beforeWheel, x: beforeWheel.x + 10, y: beforeWheel.y + 20 });
+  await canvas.dispatchEvent("wheel", { deltaY: -20 });
+  await expect.poll(async () => (await view(canvas)).zoom).toBeGreaterThan(beforeWheel.zoom);
+  expect(await view(canvas)).toMatchObject({ x: beforeWheel.x + 10, y: beforeWheel.y + 20 });
+  // Arrow keys in editable controls retain their ordinary caret behavior.
+  await page.getByLabel("Note", { exact: true }).fill("Temporary draft");
+  const beforeEditing = await view(canvas);
+  await page.keyboard.press("ArrowLeft");
+  await page.keyboard.press("Shift+ArrowUp");
+  expect(await view(canvas)).toEqual(beforeEditing);
+  await page.getByLabel("Search slices", { exact: true }).fill("bench");
+  await page.keyboard.press("ArrowDown");
+  expect(await view(canvas)).toEqual(beforeEditing);
+  // Release Shift returns to selecting tiles, preserving the panned camera.
+  await canvas.scrollIntoViewIfNeeded();
+  await canvas.click({ position: { x: box.width / 2, y: box.height / 2 } });
+  await expect(page).not.toHaveURL(url);
+  expect(await view(canvas)).toEqual(beforeEditing);
+});

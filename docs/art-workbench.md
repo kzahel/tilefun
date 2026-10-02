@@ -6,10 +6,13 @@ Shared feedback requires owner login; old tool URLs and browser drafts/outboxes
 remain supported. See [Workshop setup and API](tilefun-workshop.md).
 
 Workshop's native Source art viewport keeps the same source point at its center
-when using the wheel or Zoom buttons. Wheel gestures only zoom. Drag with Pan
-sheet selected, or hold the middle mouse button, to pan freely beyond any sheet
-edge. Selecting or clearing a region and resizing the viewport preserve the
-camera; opening a different selection link centers that region. Fit width
+when using the unmodified wheel or Zoom buttons. Hold Shift to pan with a drag
+or wheel; releasing Shift restores ordinary selection and wheel zoom. Pan sheet
+mode and middle-drag also pan freely beyond any sheet edge. Click or Tab to focus
+the canvas, then use arrow keys to pan (Shift + arrows moves faster). These keys
+do not pan while editing notes or search. Selecting or clearing a region and
+resizing the viewport preserve the camera; opening a different selection link
+centers that region. Fit width
 explicitly returns to the sheet's top and width overview.
 
 Start from [Indexes, atlases & labs](https://tilefun.graehlarts.com/tilefun/tools.html),

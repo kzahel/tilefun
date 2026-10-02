@@ -667,6 +667,10 @@ time {
   width: 100%;
   image-rendering: pixelated;
 }
+.source-stage > canvas:focus-visible {
+  outline: 2px solid #34795d;
+  outline-offset: -3px;
+}
 .source-inspector form {
   display: flex;
   flex-direction: column;

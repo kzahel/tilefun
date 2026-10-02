@@ -53,6 +53,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     [intent, setIntent] = useState<ArtNote["intent"]>("other"),
     [view, setView] = useState({ x: 0, y: 0, zoom: 1 }),
     [mode, setMode] = useState("select"),
+    [shiftHeld, setShiftHeld] = useState(false),
     [error, setError] = useState(""),
     [copied, setCopied] = useState(false),
     [saved, setSaved] = useState(false),
@@ -102,9 +103,18 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     const stop = (event: WheelEvent) => {
       event.preventDefault();
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? node.clientHeight : 1;
+      if (event.shiftKey && !event.ctrlKey) {
+        drag.current = null;
+        setView((old) => ({
+          ...old,
+          x: old.x + (event.deltaX * unit) / old.zoom,
+          y: old.y + (event.deltaY * unit) / old.zoom,
+        }));
+        return;
+      }
       const delta = Math.max(-200, Math.min(200, (event.deltaY || event.deltaX) * unit));
       if (!delta) return;
-      // A wheel gesture only changes scale, even with horizontal trackpad jitter.
+      // Unmodified wheel gestures only change scale, including horizontal jitter.
       drag.current = null;
       setView((old) => ({
         ...old,
@@ -113,6 +123,20 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     };
     node.addEventListener("wheel", stop, { passive: false });
     return () => node.removeEventListener("wheel", stop);
+  }, []);
+  useEffect(() => {
+    const shift = (event: KeyboardEvent) => {
+      if (event.key === "Shift") setShiftHeld(event.shiftKey);
+    };
+    const blur = () => setShiftHeld(false);
+    window.addEventListener("keydown", shift);
+    window.addEventListener("keyup", shift);
+    window.addEventListener("blur", blur);
+    return () => {
+      window.removeEventListener("keydown", shift);
+      window.removeEventListener("keyup", shift);
+      window.removeEventListener("blur", blur);
+    };
   }, []);
   useEffect(() => {
     if (!stage.current) return;
@@ -384,17 +408,42 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
             <canvas
               ref={canvas}
               aria-label="Source spritesheet"
+              aria-describedby="source-navigation-help"
+              tabIndex={0}
               data-center-x={camera.x}
               data-center-y={camera.y}
               data-zoom={zoom}
               data-source-ready={!!image.data && viewSize.width > 0}
-              style={{ touchAction: "none", cursor: mode === "pan" ? "grab" : "crosshair" }}
+              style={{
+                touchAction: "none",
+                cursor: mode === "pan" || shiftHeld ? "grab" : "crosshair",
+              }}
+              onKeyDown={(event) => {
+                if (event.ctrlKey || event.metaKey || event.altKey) return;
+                const direction: Record<string, [number, number]> = {
+                  ArrowLeft: [-1, 0],
+                  ArrowRight: [1, 0],
+                  ArrowUp: [0, -1],
+                  ArrowDown: [0, 1],
+                };
+                const offset = direction[event.key];
+                if (!offset) return;
+                event.preventDefault();
+                event.stopPropagation();
+                drag.current = null;
+                setView((old) => ({
+                  ...old,
+                  x: old.x + (offset[0] * 80 * (event.shiftKey ? 3 : 1)) / old.zoom,
+                  y: old.y + (offset[1] * 80 * (event.shiftKey ? 3 : 1)) / old.zoom,
+                }));
+              }}
               onPointerDown={(event) => {
                 if (event.button !== 0 && event.button !== 1) return;
                 event.preventDefault();
+                event.currentTarget.focus({ preventScroll: true });
                 event.currentTarget.setPointerCapture(event.pointerId);
                 const p = point(event),
-                  pan = mode === "pan" || event.button === 1;
+                  pan = mode === "pan" || event.button === 1 || event.shiftKey;
                 drag.current = {
                   ...p,
                   clientX: event.clientX,
@@ -493,9 +542,10 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
               Clear selection
             </button>
           </div>
-          <p className="muted">
-            {Math.round(zoom * 100)}% · Wheel or Zoom buttons keep the view center fixed. Drag in
-            Pan mode, or hold the middle mouse button to pan.
+          <p className="muted" id="source-navigation-help">
+            {Math.round(zoom * 100)}% · Wheel or Zoom buttons keep the view center fixed. Hold Shift
+            to pan with a drag or wheel. Middle-drag also pans. Click the sheet, then use arrow keys
+            to pan; Shift + arrows moves faster.
           </p>
           {coverage && sheet.id === "me-complete" && outdoor.data ? (
             <p className="notice compact">
