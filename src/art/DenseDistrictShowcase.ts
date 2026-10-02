@@ -17,7 +17,7 @@ import { World } from "../world/World.js";
 
 export const DENSE_DEMO_GENERATION: GenerationDescriptor = {
   type: "regional",
-  version: "regional-v4",
+  version: "regional-v5",
   seed: 2026,
   preset: "temperate-v1",
 };

@@ -3,14 +3,23 @@ import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import { denseBuilding } from "./DenseCityAssets.js";
+import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlanner.js";
 import { DistrictSource } from "./DistrictStrategy.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
 export interface DenseDistrictPlan extends DistrictPlan {
-  readonly recipe: "dense-district-v1";
+  readonly recipe: "dense-district-v1" | "dense-district-v2";
   readonly center: { x: number; y: number };
   readonly actors: ActorPlacement[];
+  /** Absent in frozen v4. Threshold-to-sidewalk connections belong to v5. */
+  readonly entrancePaths?: readonly {
+    lotId: string;
+    doorId: string;
+    bounds: Bounds;
+    threshold: { x: number; y: number };
+    sidewalk: { x: number; y: number };
+  }[];
 }
 export const insideDenseBounds = (b: Bounds, x: number, y: number) =>
   x >= b.minX && x < b.maxX && y >= b.minY && y < b.maxY;
@@ -153,11 +162,21 @@ export function denseDistrict(settlement: Settlement, seed: number): DenseDistri
 
 export class DenseDistrictSource extends DistrictSource {
   private cache = new Map<string, DenseDistrictPlan | null>();
+  constructor(
+    world: DistrictSource["world"],
+    private readonly connectEntrances = false,
+  ) {
+    super(world);
+  }
   override owner(cx: number, cy: number): DenseDistrictPlan | null {
     const key = `${cx},${cy}`;
     if (this.cache.has(key)) return this.cache.get(key) ?? null;
     const settlement = settlementForOwner(this.world, cx, cy),
-      plan = settlement ? denseDistrict(settlement, this.world.seed) : null;
+      plan = settlement
+        ? this.connectEntrances
+          ? connectedDenseDistrict(settlement, this.world.seed)
+          : denseDistrict(settlement, this.world.seed)
+        : null;
     this.cache.set(key, plan);
     if (this.cache.size > 16) this.cache.delete(this.cache.keys().next().value ?? "");
     return plan;
@@ -168,6 +187,63 @@ export class DenseDistrictSource extends DistrictSource {
   override query(bounds: Bounds): DenseDistrictPlan[] {
     return super.query(bounds) as DenseDistrictPlan[];
   }
+}
+
+/** Reuse the pinned building layout; revise approach paving and doorway alignment.
+ * Interaction positions are outside collision and cannot stand in for the art's
+ * door threshold. Start under the facade/last step and overlap the real sidewalk.
+ */
+export function connectedDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
+  const plan = denseDistrict(settlement, seed);
+  const blocks = plan.blocks.map((block) => ({
+    ...block,
+    lots: block.lots.map((lot) => {
+      const primary = denseDoorThresholds(denseBuilding(lot.buildingType)).find((d) => d.primary);
+      if (!primary) throw new Error(`Missing primary doorway for ${lot.id}`);
+      return { ...lot, entrance: { ...lot.entrance, x: lot.anchor.x + primary.dx / TILE_SIZE } };
+    }),
+  }));
+  const entrancePaths = blocks.flatMap((block) =>
+    block.lots.flatMap((lot) => {
+      const doors = denseDoorThresholds(denseBuilding(lot.buildingType));
+      const street = plan.streets.find(
+        (s) =>
+          item(s.points, 0).y === item(s.points, 1).y &&
+          item(s.points, 0).y > lot.anchor.y &&
+          item(s.points, 0).y - s.width / 2 - s.sidewalk === block.bounds.maxY,
+      );
+      if (!street) throw new Error(`No sidewalk for ${lot.id}`);
+      return doors.map((door) => {
+        const threshold = {
+          x: lot.anchor.x + door.dx / TILE_SIZE,
+          y: lot.anchor.y + door.dy / TILE_SIZE,
+        };
+        const sidewalk = {
+          x: threshold.x,
+          y: item(street.points, 0).y - street.width / 2 - street.sidewalk,
+        };
+        return {
+          lotId: lot.id,
+          doorId: door.id,
+          threshold,
+          sidewalk,
+          bounds: {
+            minX: Math.floor(threshold.x - door.width / TILE_SIZE / 2),
+            maxX: Math.ceil(threshold.x + door.width / TILE_SIZE / 2),
+            minY: threshold.y - 1,
+            maxY: sidewalk.y + 1,
+          },
+        };
+      });
+    }),
+  );
+  return {
+    ...plan,
+    recipe: "dense-district-v2",
+    id: `${settlement.id}:dense-district-v2`,
+    blocks,
+    entrancePaths,
+  };
 }
 /** Surface facts are encoded in the existing persistent roadGrid; the shared
  * tile composer/renderer resolves their original art in both game and preview.
@@ -241,14 +317,19 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
     })
   )
     return RoadType.CityPavement;
-  for (const b of plan.blocks)
-    for (const lot of b.lots)
-      if (
-        Math.abs(x + 0.5 - lot.entrance.x) < 1.5 &&
-        y + 0.5 >= lot.entrance.y - 1 &&
-        y < lot.entrance.y + 4
-      )
-        return RoadType.CityPavement;
+  if (plan.entrancePaths) {
+    if (plan.entrancePaths.some((p) => insideDenseBounds(p.bounds, x + 0.5, y + 0.5)))
+      return RoadType.CityPavement;
+  } else {
+    for (const b of plan.blocks)
+      for (const lot of b.lots)
+        if (
+          Math.abs(x + 0.5 - lot.entrance.x) < 1.5 &&
+          y + 0.5 >= lot.entrance.y - 1 &&
+          y < lot.entrance.y + 4
+        )
+          return RoadType.CityPavement;
+  }
   const p = plan.park,
     px = (p.minX + p.maxX) / 2,
     py = (p.minY + p.maxY) / 2;

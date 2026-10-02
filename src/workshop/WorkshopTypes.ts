@@ -21,6 +21,8 @@ export interface WorkshopCandidate {
   prompt: string;
   url: string;
   kind: "art" | "interior" | "motion";
+  /** Handoff derived from the candidate's actual world generation and location. */
+  exploreUrl?: string;
   fingerprint: string;
   sourceFingerprint?: string;
   review?: BuildingReview;

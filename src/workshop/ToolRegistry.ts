@@ -122,7 +122,7 @@ export const CITY_BATCHES: ReviewBatch[] = [
   {
     id: "districts",
     name: "First dense neighborhood",
-    description: "Three views of one playable regional-v4 neighborhood.",
+    description: "Three views of a regional-v5 neighborhood with connected door approaches.",
     toolId: "districts",
   },
   {

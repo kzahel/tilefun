@@ -107,6 +107,11 @@ describe("building approval identities", () => {
     const note = { ...decision("approved"), buildingReview: district };
     expect(parseArtNote(note, catalog)).toEqual(note);
     expect(buildingCaseKey(district)).toBe("district:district-v1-neighborhood");
+    const revised = {
+      ...note,
+      buildingReview: { ...district, districtRecipe: "dense-district-v2" as const },
+    };
+    expect(parseArtNote(revised, catalog)).toEqual(revised);
     expect(currentBuildingVerdict([note], sheet.fingerprint, district)).toBe("approved");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
     for (const change of [

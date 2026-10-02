@@ -116,7 +116,7 @@
     {
       "id": "districts",
       "name": "First dense neighborhood",
-      "description": "Three views of one playable regional-v4 neighborhood.",
+      "description": "Three views of a regional-v5 neighborhood with connected door approaches.",
       "toolId": "districts"
     },
     {
@@ -2350,7 +2350,8 @@
       "prompt": "Review the overall density, building scale, connected streets and pocket green.",
       "url": "/tilefun/building-lab.html?run=districts&case=district-v1-neighborhood",
       "kind": "art",
-      "fingerprint": "4d579c252dab1085bef89f7f341dfe119e46aebe074da9f824df88998b15f565",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v5%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "8025ad4d1d67117764713c04234d741b51464fe853aaec76a7cc905f2257cacc",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "district",
@@ -2364,10 +2365,10 @@
           "prop-city-dense-v1-hotel-4-roof-sign"
         ],
         "url": "/tilefun/building-lab.html?run=districts&case=district-v1-neighborhood",
-        "revision": "86ddebf37d39bc716b5134121107d61cc18669dcaada6361db99c946405226d8",
-        "renderFingerprint": "4d579c252dab1085bef89f7f341dfe119e46aebe074da9f824df88998b15f565",
+        "revision": "69077252d7088187154cfa99cd795d1fb7c06d8fd5669cc52051f424067ecaac",
+        "renderFingerprint": "8025ad4d1d67117764713c04234d741b51464fe853aaec76a7cc905f2257cacc",
         "caseId": "district-v1-neighborhood",
-        "districtRecipe": "dense-district-v1",
+        "districtRecipe": "dense-district-v2",
         "propTypes": [
           "prop-city-dense-v1-condo-bay-3",
           "prop-city-dense-v1-condo-narrow-5",
@@ -2413,10 +2414,10 @@
             "prop-city-dense-v1-hotel-4-roof-sign"
           ],
           "url": "/tilefun/building-lab.html?run=districts&case=district-v1-neighborhood",
-          "revision": "86ddebf37d39bc716b5134121107d61cc18669dcaada6361db99c946405226d8",
-          "renderFingerprint": "4d579c252dab1085bef89f7f341dfe119e46aebe074da9f824df88998b15f565",
+          "revision": "69077252d7088187154cfa99cd795d1fb7c06d8fd5669cc52051f424067ecaac",
+          "renderFingerprint": "8025ad4d1d67117764713c04234d741b51464fe853aaec76a7cc905f2257cacc",
           "caseId": "district-v1-neighborhood",
-          "districtRecipe": "dense-district-v1",
+          "districtRecipe": "dense-district-v2",
           "propTypes": [
             "prop-city-dense-v1-condo-bay-3",
             "prop-city-dense-v1-condo-narrow-5",
@@ -2444,7 +2445,8 @@
       "prompt": "Review how the south-facing frontages meet the sidewalk and central intersection.",
       "url": "/tilefun/building-lab.html?run=districts&case=district-v1-frontage",
       "kind": "art",
-      "fingerprint": "ad8b29e47b35a2fc63d81de47b8ec89e868b89e3375bee8dcf9380a0d603ec57",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v5%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "7ef25ab84c18278f83e6787718d879db55cd40394a9d8b8ea58cb94d66b2e766",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "district",
@@ -2458,10 +2460,10 @@
           "prop-city-dense-v1-hotel-4-roof-sign"
         ],
         "url": "/tilefun/building-lab.html?run=districts&case=district-v1-frontage",
-        "revision": "acc5aa0e7210a3f1fab581cf6a24e579a686237919bfdb691454c4044154d850",
-        "renderFingerprint": "ad8b29e47b35a2fc63d81de47b8ec89e868b89e3375bee8dcf9380a0d603ec57",
+        "revision": "ddef2baa66d76a1248fe314cd3dd3ca5221af9368c46495c0077d50413eee620",
+        "renderFingerprint": "7ef25ab84c18278f83e6787718d879db55cd40394a9d8b8ea58cb94d66b2e766",
         "caseId": "district-v1-frontage",
-        "districtRecipe": "dense-district-v1",
+        "districtRecipe": "dense-district-v2",
         "propTypes": [
           "prop-city-dense-v1-condo-bay-3",
           "prop-city-dense-v1-condo-narrow-5",
@@ -2503,10 +2505,10 @@
             "prop-city-dense-v1-hotel-4-roof-sign"
           ],
           "url": "/tilefun/building-lab.html?run=districts&case=district-v1-frontage",
-          "revision": "acc5aa0e7210a3f1fab581cf6a24e579a686237919bfdb691454c4044154d850",
-          "renderFingerprint": "ad8b29e47b35a2fc63d81de47b8ec89e868b89e3375bee8dcf9380a0d603ec57",
+          "revision": "ddef2baa66d76a1248fe314cd3dd3ca5221af9368c46495c0077d50413eee620",
+          "renderFingerprint": "7ef25ab84c18278f83e6787718d879db55cd40394a9d8b8ea58cb94d66b2e766",
           "caseId": "district-v1-frontage",
-          "districtRecipe": "dense-district-v1",
+          "districtRecipe": "dense-district-v2",
           "propTypes": [
             "prop-city-dense-v1-condo-bay-3",
             "prop-city-dense-v1-condo-narrow-5",
@@ -2530,7 +2532,8 @@
       "prompt": "Review the hotel scale, park edge and clear walking routes around the green.",
       "url": "/tilefun/building-lab.html?run=districts&case=district-v1-green",
       "kind": "art",
-      "fingerprint": "f8093bb6d55c6333d39995c768280c0f8b68d90ad06fddeeb733acef3c742134",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v5%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "03b3dacad7ff8e1021872a4a0bb7ff413c6478fa7cd9a36daa141b7ce3f205e3",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "district",
@@ -2539,10 +2542,10 @@
           "prop-city-dense-v1-condo-bay-3"
         ],
         "url": "/tilefun/building-lab.html?run=districts&case=district-v1-green",
-        "revision": "84044e79e322c06be060a2fd8cd2b0057abff9416c48bd18a41a793fe85a7967",
-        "renderFingerprint": "f8093bb6d55c6333d39995c768280c0f8b68d90ad06fddeeb733acef3c742134",
+        "revision": "871cd59757b8536805ff2450cac8efc46c8c7eda76294ceecebeeebd5ad8109a",
+        "renderFingerprint": "03b3dacad7ff8e1021872a4a0bb7ff413c6478fa7cd9a36daa141b7ce3f205e3",
         "caseId": "district-v1-green",
-        "districtRecipe": "dense-district-v1",
+        "districtRecipe": "dense-district-v2",
         "propTypes": [
           "prop-city-dense-v1-hotel-4-roof-sign",
           "prop-street-lamp",
@@ -2577,10 +2580,10 @@
             "prop-city-dense-v1-condo-bay-3"
           ],
           "url": "/tilefun/building-lab.html?run=districts&case=district-v1-green",
-          "revision": "84044e79e322c06be060a2fd8cd2b0057abff9416c48bd18a41a793fe85a7967",
-          "renderFingerprint": "f8093bb6d55c6333d39995c768280c0f8b68d90ad06fddeeb733acef3c742134",
+          "revision": "871cd59757b8536805ff2450cac8efc46c8c7eda76294ceecebeeebd5ad8109a",
+          "renderFingerprint": "03b3dacad7ff8e1021872a4a0bb7ff413c6478fa7cd9a36daa141b7ce3f205e3",
           "caseId": "district-v1-green",
-          "districtRecipe": "dense-district-v1",
+          "districtRecipe": "dense-district-v2",
           "propTypes": [
             "prop-city-dense-v1-hotel-4-roof-sign",
             "prop-street-lamp",
@@ -8821,5 +8824,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "1dfea7c33b75f967db6db5489b398bad4c9f900e6e762cb7b78a8f4e33ce2487"
+  "inputDigest": "4d9b56d842fab25a8d0b98418f4820419ef35ffcf48239169ec40cee1a664917"
 }

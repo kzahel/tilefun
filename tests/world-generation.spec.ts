@@ -23,6 +23,7 @@ test("new worlds default to procedural regional v4 and clearly label older choic
   ]);
   await expect(revision.locator("option")).toHaveText([
     "Dense districts (v4)",
+    "Connected entrances (v5, review)",
     "Settled world (v3, legacy)",
     "Districts (v2, old)",
     "Terrain only (v1, old)",
@@ -43,16 +44,20 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  for (const choice of ["classic", "island", "flat", "regional"] as const) {
-    const generation = createDescriptor(choice, 2026);
+  for (const choice of ["classic", "island", "flat", "regional", "regional-v5"] as const) {
+    const worldType = choice === "regional-v5" ? "regional" : choice;
+    const generation =
+      choice === "regional-v5"
+        ? resolveDescriptor({ ...createDescriptor("regional", 2026), version: "regional-v5" })
+        : createDescriptor(choice, 2026);
     await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");
-    await expect(page.getByRole("combobox", { name: "World type" })).toHaveValue(choice);
+    await expect(page.getByRole("combobox", { name: "World type" })).toHaveValue(worldType);
     await expect(page.getByRole("textbox", { name: "World seed" })).toHaveValue("2026");
     await page.getByPlaceholder("World name...").fill(`${choice} checkpoint`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
-    await expect(canvas).toHaveAttribute("data-generator", choice);
+    await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-seed", "2026");
     await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();
     const metadata = await page.evaluate(async () => {
@@ -79,11 +84,11 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     expect(meta?.worldType).toBeUndefined();
     await page.goto("/tilefun/");
     await expect(canvas).toHaveAttribute("data-ready", "true");
-    await expect(canvas).toHaveAttribute("data-generator", choice);
+    await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-generation", JSON.stringify(generation));
     await page.keyboard.press("Escape");
     await expect(
-      page.getByText(`${choice} · seed 2026 · ${generation.version}`, { exact: true }),
+      page.getByText(`${worldType} · seed 2026 · ${generation.version}`, { exact: true }),
     ).toBeVisible();
   }
   expect(errors).toEqual([]);

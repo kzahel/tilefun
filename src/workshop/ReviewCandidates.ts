@@ -199,7 +199,7 @@ export async function buildArtCandidate(
     ...(context.district
       ? {
           caseId: context.district.definition.id,
-          districtRecipe: "dense-district-v1" as const,
+          districtRecipe: context.district.plan.recipe,
           propTypes: context.district.props.map((p) => p.type),
         }
       : {}),
@@ -215,6 +215,17 @@ export async function buildArtCandidate(
       "Review the assembled art, frontage and source-piece fit.",
     url: d.url,
     kind: "art",
+    ...(context.district
+      ? {
+          exploreUrl: `/tool/explorer?${new URLSearchParams({
+            generation: JSON.stringify(context.district.generation),
+            x: String(context.district.plan.center.x),
+            y: String(context.district.plan.center.y),
+            zoom: "12",
+            mode: "tiles",
+          })}`,
+        }
+      : {}),
     fingerprint: required(review.renderFingerprint),
     sourceFingerprint: source.fingerprint,
     review,

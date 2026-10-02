@@ -77,12 +77,17 @@ notes carry a case ID and
 `surfaceRecipe`, with no fake building or prop IDs.
 
 Dense neighborhood review is `/tilefun/building-lab.html?run=districts`, with
-three views of one real `regional-v4` world (seed 2026, tile 300,519). The lab,
+three views of one real `regional-v5` review world (seed 2026, tile 300,519). The lab,
 explorer and game use the same plan, pinned building factories and terrain
 renderer. The explorer link supports Play here; preview walkers are initial
 poses, while the game simulates the planned routes. Review/navigation/pause
 remain independent of the other runs. District notes carry `districtRecipe`,
 case ID, promoted building IDs and prop types. Keep new runs indexed in tools.
+V5 reuses the v4 placements/assets, aligns the plan's primary doorway with its
+source art, and paves every visible door/step threshold to the street sidewalk,
+including secondary condo and butcher entrances. V4 remains frozen and the default for new
+worlds until the v5 review is approved. Explorer/game handoffs must carry the
+candidate's actual generation descriptor, never a hardcoded prior revision.
 
 `src/generation/regional/dense-city-assets-v1.json` is an immutable promotion
 snapshot, not build output. Do not regenerate it from changing review candidates.

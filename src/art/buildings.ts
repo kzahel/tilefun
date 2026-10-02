@@ -138,7 +138,7 @@ if (districtRun) {
   required($("building-feedback-history").querySelector("summary")).textContent =
     "Art feedback & replies (all scenes)";
   $("preview-explanation").textContent =
-    "These are actual regional-v4 chunks and placements. People show initial poses here; the game runs their routes.";
+    "These are actual regional-v5 chunks and placements. People show initial poses here; the game runs their routes.";
   required(required($("geometry").parentElement).lastChild).textContent = "Lots, doors & routes";
   const play = document.createElement("a");
   play.id = "district-play";
@@ -414,7 +414,7 @@ async function saveFeedback(verdict?: BuildingVerdict["value"]) {
         ...(context.district
           ? {
               caseId: context.district.definition.id,
-              districtRecipe: "dense-district-v1" as const,
+              districtRecipe: context.district.plan.recipe,
               propTypes: context.district.props.map((p) => p.type),
             }
           : {}),
@@ -1126,7 +1126,7 @@ if (districtRun)
     const review: BuildingReview = {
       scene: "district",
       caseId: s.definition.id,
-      districtRecipe: "dense-district-v1",
+      districtRecipe: s.plan.recipe,
       prefabIds: denseReviewPrefabs(s).map((p) => p.type),
       propTypes: s.props.map((p) => p.type),
       revision: await sha256(new TextEncoder().encode(JSON.stringify(denseReviewComposition(s)))),

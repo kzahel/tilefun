@@ -172,3 +172,13 @@ See [the implementation plan](tactical/008-tilefun-workshop-plan.md) and
 [setup/data portability](setup-and-local-data.md). Future city art remains governed
 by [the dense-city plan](tactical/007-dense-city-districts-and-street-life-plan.md),
 including frozen regional-v4 assets.
+
+The current district review and its Explore / play link use `regional-v5`
+(seed 2026, tile 300,519), with continuous pavement from the visible door/step
+thresholds to the street sidewalks, including secondary condo and butcher doors.
+Door thresholds are audited against the pinned source frames; player interaction
+offsets are not used as the paving edge. V4 remains unchanged for saved worlds and
+the default for new worlds; v5 is selectable as **Connected entrances (v5, review)**
+while awaiting human review. The Workshop handoff is generated from the actual
+candidate descriptor and center. Agent replies to the original note do not
+approve the changed district pixels.

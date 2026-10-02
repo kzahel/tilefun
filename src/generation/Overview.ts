@@ -42,8 +42,11 @@ export function* overviewSteps(
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
     const source =
-      descriptor.version === "regional-v4"
-        ? new DenseDistrictSource(regionalWorld(descriptor.seed))
+      descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
+        ? new DenseDistrictSource(
+            regionalWorld(descriptor.seed),
+            descriptor.version === "regional-v5",
+          )
         : new DistrictSource(regionalWorld(descriptor.seed), descriptor.version === "regional-v3");
     const districts: DistrictPlan[] = [];
     if (

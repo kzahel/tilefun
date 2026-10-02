@@ -49,7 +49,7 @@ test("three real district views share review navigation and fit phone controls",
   }
   await page.locator("#geometry").check();
   await page.screenshot({ path: "/tmp/tilefun-dense-debug.png", fullPage: true });
-  await expect(page.locator("#district-play")).toHaveAttribute("href", /regional-v4/);
+  await expect(page.locator("#district-play")).toHaveAttribute("href", /regional-v5/);
   expect(errors).toEqual([]);
 });
 test("district judgments pause independently, sync offline feedback, and reopen changed scenes", async ({
@@ -72,7 +72,7 @@ test("district judgments pause independently, sync offline feedback, and reopen 
   expect(notes[0]?.buildingReview).toMatchObject({
     scene: "district",
     caseId: "district-v1-neighborhood",
-    districtRecipe: "dense-district-v1",
+    districtRecipe: "dense-district-v2",
     prefabIds: expect.arrayContaining(["prop-city-dense-v1-bakery-3"]),
     renderFingerprint: expect.stringMatching(/^[a-f0-9]{64}$/),
   });
@@ -113,7 +113,7 @@ test("district notes round trip through the isolated inbox and are discoverable 
   const notes = (await (await request.get("/tilefun/api/art-notes")).json()) as ArtNote[];
   expect(notes.find((n) => n.note === marker)?.buildingReview).toMatchObject({
     scene: "district",
-    districtRecipe: "dense-district-v1",
+    districtRecipe: "dense-district-v2",
     caseId: "district-v1-neighborhood",
   });
   await page.goto("/tilefun/art-workbench.html?sheet=me-complete");
@@ -130,7 +130,7 @@ test("Play here uses the dense descriptor, real street cells, and moving planned
   const app = page.locator("#app");
   await expect(app).toHaveAttribute("data-settled", "true");
   await expect(app).toHaveAttribute("data-tile-complete", "true");
-  await expect(page.locator("#regional-revision")).toHaveValue("regional-v4");
+  await expect(page.locator("#regional-revision")).toHaveValue("regional-v5");
   await page.getByRole("link", { name: "Play here" }).click();
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute(
@@ -248,7 +248,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
     )
     .toEqual({ deleted: true, actorDeleted: true, wx: changed.wx, wy: changed.wy });
 });
-const plan = required(new DenseDistrictSource(regionalWorld(2026)).owner(0, 0));
+const plan = required(new DenseDistrictSource(regionalWorld(2026), true).owner(0, 0));
 for (const kind of ["shop", "apartment"] as const)
   test(`promoted dense ${kind} enters and returns through the shared interior`, async ({
     page,

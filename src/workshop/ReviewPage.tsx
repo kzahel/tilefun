@@ -618,11 +618,7 @@ function ReviewCase({
           <a href={c.url} target="_blank" rel="noreferrer">
             Original lab view ↗
           </a>
-          {c.batchId === "districts" ? (
-            <Link to="/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v4%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles">
-              Explore / play this neighborhood →
-            </Link>
-          ) : null}
+          {c.exploreUrl ? <Link to={c.exploreUrl}>Explore / play this neighborhood →</Link> : null}
           {c.interior ? (
             <details>
               <summary>Floor plan & case</summary>

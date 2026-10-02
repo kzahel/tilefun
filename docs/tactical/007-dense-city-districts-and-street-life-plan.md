@@ -443,3 +443,20 @@ See [Workshop implementation and follow-on plan](008-tilefun-workshop-plan.md)
 and [Workshop operations](../tilefun-workshop.md). Next art work is the curved
 road/island/intersection batch, followed by intentional furnishing and parking,
 then parks/squares and varied commercial families, through the same human review loop.
+
+## Doorway connections — 2026-10-02
+
+The district feedback “the sidewalk doesn't go to the doors” is addressed in
+`regional-v5` / `dense-district-v2`. V4's frozen output and promoted asset bank
+stay unchanged. V5 reuses its layout and art, with threshold-to-sidewalk paving
+for all twelve visible entrances in the checkpoint. Condo bay and arched doors
+and both butcher doors have their own connections. Native source-frame doorway
+metadata supplies the paving edges and corrects the primary entrance alignment
+in the plan; the player approach point no longer determines where paving begins.
+
+The three district views use v5, and their explorer / Play here links carry that
+same descriptor. V5 is selectable in the game as Connected entrances (v5, review);
+v4 remains the default until human review. Changed district renders return to
+review, with previous feedback retained and unrelated approvals preserved.
+After this correction is accepted, continue the curved-road/island batch and
+intentional furnishing/parking milestones above.

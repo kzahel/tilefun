@@ -7,7 +7,7 @@ export interface BuildingReview {
   caseId?: string;
   propTypes?: string[];
   surfaceRecipe?: string;
-  districtRecipe?: "dense-district-v1";
+  districtRecipe?: "dense-district-v1" | "dense-district-v2";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -88,7 +88,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
     if (
       typeof v.caseId !== "string" ||
       !/^district-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
-      v.districtRecipe !== "dense-district-v1" ||
+      !["dense-district-v1", "dense-district-v2"].includes(v.districtRecipe as string) ||
       v.surfaceRecipe !== undefined ||
       !Array.isArray(v.propTypes) ||
       v.propTypes.length > 64 ||
@@ -115,7 +115,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
     ...(v.scene === "district"
       ? {
           caseId: v.caseId as string,
-          districtRecipe: "dense-district-v1" as const,
+          districtRecipe: v.districtRecipe as NonNullable<BuildingReview["districtRecipe"]>,
           propTypes: [...(v.propTypes as string[])],
         }
       : {}),

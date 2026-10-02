@@ -15,6 +15,18 @@ for (const fixture of [
   { name: "farm", x: 677, y: 1320, actor: "farm:0:1:cow" },
   { name: "woodland", x: -985, y: -985, actor: "woodland:-8:-8:crow" },
   {
+    name: "dense-connected",
+    x: 300,
+    y: 519,
+    actor: "settlement:0:0:crossing:walker",
+    generation: {
+      type: "regional",
+      version: "regional-v5",
+      seed: 2026,
+      preset: "temperate-v1",
+    } as const,
+  },
+  {
     name: "dense",
     x: 300,
     y: 519,

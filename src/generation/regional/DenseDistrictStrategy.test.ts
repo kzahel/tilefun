@@ -18,9 +18,10 @@ import { actorPlacements } from "../ActorPlacements.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
 import { buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
-import { DENSE_CITY_ASSETS, DENSE_CITY_BUILDINGS } from "./DenseCityAssets.js";
-import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
+import { DENSE_CITY_ASSETS, DENSE_CITY_BUILDINGS, denseBuilding } from "./DenseCityAssets.js";
+import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { DenseDistrictStrategy } from "./DenseDistrictStrategy.js";
+import { denseDoorThresholds } from "./DenseDoorThresholds.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
 const generation = {
@@ -128,6 +129,84 @@ describe("pinned dense district revision", () => {
       const again = source.owner(cx, cy);
       expect(hash(again)).toBe(hash(plan));
     }
+  });
+  it("v5 paves every door threshold through its interaction point to the street sidewalk without moving the pinned buildings", () => {
+    let reproducedV4Gap = false;
+    for (const seed of [2026, 42]) {
+      const oldSource = new DenseDistrictSource(regionalWorld(seed));
+      const source = new DenseDistrictSource(regionalWorld(seed), true);
+      const g = createGenerator({ ...generation, seed, version: "regional-v5" });
+      for (const [cx, cy] of [
+        [0, 0],
+        [-1, -1],
+        [1, 1],
+      ] as const) {
+        const plan = source.owner(cx, cy),
+          old = oldSource.owner(cx, cy);
+        if (!plan || !old) continue;
+        expect(plan.recipe).toBe("dense-district-v2");
+        expect(plan.streets).toEqual(old.streets);
+        expect(plan.actors).toEqual(old.actors);
+        const lots = plan.blocks.flatMap((b) => b.lots);
+        expect(plan.entrancePaths).toHaveLength(
+          lots.reduce((n, l) => n + denseDoorThresholds(denseBuilding(l.buildingType)).length, 0),
+        );
+        for (const lot of lots) {
+          const previous = required(old.blocks.flatMap((b) => b.lots).find((l) => l.id === lot.id));
+          expect(lot.anchor).toEqual(previous.anchor);
+          expect(lot.bounds).toEqual(previous.bounds);
+          expect(lot.buildingType).toBe(previous.buildingType);
+        }
+        for (const path of plan.entrancePaths ?? []) {
+          const lot = required(lots.find((l) => l.id === path.lotId));
+          const x = Math.floor(path.threshold.x),
+            firstY = Math.floor(path.threshold.y);
+          reproducedV4Gap ||= denseSurfaceAt(old, x, firstY) === RoadType.None;
+          // Inspect realized roadGrid cells, including chunk boundaries, rather
+          // than only checking that the planner emits a connector rectangle.
+          for (let y = firstY; y <= path.sidewalk.y + 1; y++) {
+            const chunk = new Chunk();
+            const chunkX = Math.floor(x / 16),
+              chunkY = Math.floor(y / 16);
+            g.terrain.generate(chunk, chunkX, chunkY);
+            expect(
+              chunk.getRoad(x - chunkX * 16, y - chunkY * 16),
+              `${lot.id} gap at ${x},${y}`,
+            ).toBe(RoadType.CityPavement);
+          }
+          expect(denseSurfaceAt(plan, Math.floor(lot.entrance.x), Math.floor(lot.entrance.y))).toBe(
+            RoadType.CityPavement,
+          );
+          const prop = createProp(lot.buildingType, lot.anchor.x * 16, lot.anchor.y * 16);
+          for (let y = lot.entrance.y; y <= path.sidewalk.y + 1; y += 0.25) {
+            const player = {
+              left: path.threshold.x * 16 - 4,
+              right: path.threshold.x * 16 + 4,
+              top: y * 16 - 4,
+              bottom: y * 16 + 4,
+            };
+            expect(
+              aabbOverlapsPropWalls(player, prop.position, prop, 0),
+              `${lot.id} approach blocked`,
+            ).toBe(false);
+          }
+        }
+      }
+    }
+    expect(reproducedV4Gap).toBe(true);
+  });
+  it("audits both condo doors from native ground modules instead of guessed interaction offsets", () => {
+    expect(denseDoorThresholds(denseBuilding("prop-city-dense-v1-condo-bay-3"))).toEqual([
+      { id: "bay", dx: -48, dy: 0, width: 32, primary: false },
+      { id: "arched", dx: 40, dy: -16, width: 32, primary: true },
+    ]);
+    expect(denseDoorThresholds(denseBuilding("prop-city-dense-v1-condo-narrow-5"))).toEqual([
+      { id: "bay", dx: -80, dy: 0, width: 32, primary: false },
+      { id: "arched", dx: 72, dy: -16, width: 32, primary: true },
+    ]);
+    expect(denseDoorThresholds(denseBuilding("prop-city-dense-v1-butcher-2"))).toHaveLength(2);
+    for (const recipe of DENSE_CITY_BUILDINGS)
+      expect(denseDoorThresholds(recipe).filter((d) => d.primary)).toHaveLength(1);
   });
   it("routes people along physically clear sidewalks and a painted crossing", () => {
     const g = createGenerator(generation),

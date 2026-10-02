@@ -12,15 +12,15 @@ import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
-/** Pinned revision 4: dense place realization, immutable promoted facades,
- * source-backed road surfaces, and validated sidewalk/crossing actor plans.
+/** Shared dense realization. V4 is frozen; v5 adds threshold-to-sidewalk paths
+ * while reusing its promoted facades, streets, placements and walking routes.
  */
 export class DenseDistrictStrategy extends DistrictStrategy {
   override readonly districts: DenseDistrictSource;
   private readonly geography: RegionalStrategy;
-  constructor(world: RegionalWorld) {
+  constructor(world: RegionalWorld, connectEntrances = false) {
     super(world);
-    this.districts = new DenseDistrictSource(world);
+    this.districts = new DenseDistrictSource(world, connectEntrances);
     this.geography = new RegionalStrategy(world);
   }
   override generate(chunk: Chunk, cx: number, cy: number): void {
