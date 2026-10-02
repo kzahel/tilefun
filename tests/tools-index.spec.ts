@@ -9,7 +9,7 @@ test("game sidebar opens the central index and each listed destination is served
   await page.getByTestId("open-tools-index").click();
   await expect(page).toHaveURL(/\/tilefun\/tools.html$/);
   await expect(page.getByRole("heading", { name: "Indexes, atlases & labs." })).toBeVisible();
-  await expect(page.locator(".cards article")).toHaveCount(10);
+  await expect(page.locator(".cards article")).toHaveCount(11);
   const destinations = await page
     .locator("main a[href]")
     .evaluateAll((links) => [
@@ -72,6 +72,7 @@ test("tools and both in-game catalogs provide a return path to the index", async
     "interior-review.html?stage=0&unchecked=1",
     "furniture-playtest.html",
     "world-explorer.html",
+    "demos/pixel-characters/",
     "assets/tilesets/me-autotile-viewer.html",
     "?panel=props",
     "?panel=interiors&interiorSource=room_builder_tile",

@@ -1,0 +1,12 @@
+{
+  "characters": [
+    {
+      "id": "cat",
+      "name": "Tuxedo Cat",
+      "description": "An upright charcoal cat with a white bib, mittens, green eyes and a hooked tail.",
+      "metadata": "cat.json",
+      "contactSheet": "cat-contact-sheet.png",
+      "preview": "cat-preview.gif"
+    }
+  ]
+}

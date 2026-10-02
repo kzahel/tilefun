@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#24313c" />
+    <title>Pixel Character Gallery · Tilefun</title>
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body>
+    <header><a href="../../tools.html">← Indexes &amp; atlases</a><span>TILEFUN / PIXEL CHARACTERS</span><a href="../../">Return to game →</a></header>
+    <main>
+      <p class="eyebrow">SMALL CHARACTERS, BIG PERSONALITIES</p>
+      <h1>Meet the pixel roster.</h1>
+      <p class="intro">Original pixel patterns, set in motion with Blender pose guides. Explore every angle, then take a little walk.</p>
+      <div class="selectors">
+        <label for="character">Character <select id="character" disabled></select></label>
+        <label for="sprite-size">Sprite detail <select id="sprite-size" disabled><option value="32">32px</option><option value="16">Native 16px · separately authored</option></select></label>
+      </div>
+      <p id="description">Loading the roster…</p>
+      <p id="error" role="alert" hidden></p>
+      <div class="layout">
+        <section class="card" aria-label="Walk around">
+          <div class="card-heading"><h2>Take a stroll</h2><output id="status" aria-live="off">Loading sprites…</output></div>
+          <canvas id="garden" width="384" height="224" tabindex="0" aria-label="Character movement. Focus here and use WASD or arrow keys to walk."></canvas>
+          <div class="controls">
+            <fieldset class="pad" aria-label="Movement controls"><button type="button" data-direction="up" aria-label="Walk up">↑</button><button type="button" data-direction="left" aria-label="Walk left">←</button><button type="button" data-direction="down" aria-label="Walk down">↓</button><button type="button" data-direction="right" aria-label="Walk right">→</button></fieldset>
+            <button type="button" id="reset">Reset position</button>
+          </div>
+          <p class="hint">Hold WASD, an arrow key, or a direction button. Release to stand still.</p>
+        </section>
+        <section class="card" aria-label="Directional walk cycles">
+          <div class="card-heading"><h2>Every angle</h2><label><input id="animate" type="checkbox" checked /> Animate</label></div>
+          <div class="directions">
+            <figure><canvas width="32" height="32" data-row="0" aria-label="Down-facing walk cycle"></canvas><figcaption>Down / front</figcaption></figure>
+            <figure><canvas width="32" height="32" data-row="1" aria-label="Up-facing walk cycle"></canvas><figcaption>Up / back</figcaption></figure>
+            <figure><canvas width="32" height="32" data-row="2" aria-label="Left-facing walk cycle"></canvas><figcaption>Left</figcaption></figure>
+            <figure><canvas width="32" height="32" data-row="3" aria-label="Right-facing walk cycle"></canvas><figcaption>Right</figcaption></figure>
+          </div>
+          <div class="detail"><label><input id="native-scale" type="checkbox" /> Actual pixel size</label><span>4 poses · 4 fps · 1 second</span></div>
+          <p class="hint">The full head stays consistent through each walk. Native 16px uses its own simplified patterns.</p>
+        </section>
+      </div>
+      <nav id="downloads" aria-label="Character sources and previews" hidden><a id="contact-link" href="characters.json">All poses →</a><a id="preview-link" href="characters.json">Animated preview →</a><a id="sheet-link" href="characters.json">Transparent sheet →</a><a id="metadata-link" href="characters.json">Frame metadata →</a></nav>
+      <footer>Original authored pixel patterns · four Blender reference poses · a standalone art study</footer>
+    </main>
+    <script src="gallery.js" type="module"></script>
+  </body>
+</html>

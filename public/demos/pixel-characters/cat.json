@@ -1,0 +1,103 @@
+{
+  "id": "cat",
+  "name": "Tuxedo Cat",
+  "versions": {
+    "32": {
+      "image": "cat-32.png",
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "durationMs": 1000,
+      "pivot": [16, 27],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "headAnchors": {
+        "down": [[10, 4], [10, 3], [10, 4], [10, 3]],
+        "up": [[10, 4], [10, 3], [10, 4], [10, 3]],
+        "left": [[11, 4], [11, 3], [11, 4], [11, 3]],
+        "right": [[11, 4], [11, 3], [11, 4], [11, 3]]
+      },
+      "sheetSha256": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99"
+    },
+    "16": {
+      "image": "cat-16.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "durationMs": 1000,
+      "pivot": [8, 14],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "headAnchors": {
+        "down": [[5, 2], [5, 1], [5, 2], [5, 1]],
+        "up": [[5, 2], [5, 1], [5, 2], [5, 1]],
+        "left": [[5, 2], [5, 1], [5, 2], [5, 1]],
+        "right": [[5, 2], [5, 1], [5, 2], [5, 1]]
+      },
+      "sheetSha256": "1bb9f818126aa4e0d35cf7fd7820efe71ce88f1ffb3f5fb8d3250179fe12d9ed"
+    }
+  },
+  "palette": {
+    "k": "#191f2b",
+    "s": "#303846",
+    "c": "#4b5663",
+    "h": "#69747e",
+    "w": "#f3f1df",
+    "g": "#b5c5bf",
+    "e": "#a8d56c",
+    "p": "#d88d92"
+  },
+  "source": "art-source/pixel-characters/cat.json",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "rig": "art-source/blender/tiger.blend",
+  "sourceFrames": [1, 3, 5, 7],
+  "provenance": "Original pixel patterns; contacts, arm swing and bob reuse tiger.blend frames 1, 3, 5, 7. Tail joints deliberately redrawn as a cat hook. No new Blender model.",
+  "builder": "scripts/blender/finish_characters.py",
+  "method": "programmatically composed authored pixel patterns using Blender pose guides; separate native16 patterns",
+  "validation": {
+    "binaryAlpha": true,
+    "paletteMembership": true,
+    "padding": true,
+    "distinctPosesPerDirection": 4,
+    "wholeHeadsStable": true,
+    "connectedSilhouettes": true
+  }
+}

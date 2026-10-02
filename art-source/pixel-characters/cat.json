@@ -1,0 +1,134 @@
+{
+  "id": "cat",
+  "name": "Tuxedo Cat",
+  "description": "An upright charcoal cat with a white bib, mittens, green eyes and a hooked tail.",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "provenance": "Original pixel patterns; contacts, arm swing and bob reuse tiger.blend frames 1, 3, 5, 7. Tail joints deliberately redrawn as a cat hook. No new Blender model.",
+  "palette": {
+    "k": "#191f2b",
+    "s": "#303846",
+    "c": "#4b5663",
+    "h": "#69747e",
+    "w": "#f3f1df",
+    "g": "#b5c5bf",
+    "e": "#a8d56c",
+    "p": "#d88d92"
+  },
+  "tail": { "outline": "k", "fill": "c", "tip": "s" },
+  "limbs": { "outline": "k", "fill": "c" },
+  "poseOverrides": {
+    "down": [
+      { "tail": [[17, 21], [23, 21], [26, 18], [26, 15], [24, 14]] },
+      { "tail": [[17, 20], [23, 20], [27, 17], [27, 14], [25, 13]] },
+      { "tail": [[17, 21], [24, 22], [28, 19], [28, 16], [26, 15]] },
+      { "tail": [[17, 20], [24, 20], [27, 17], [27, 15], [25, 14]] }
+    ],
+    "up": [
+      { "tail": [[15, 22], [9, 22], [6, 19], [6, 16], [8, 15]] },
+      { "tail": [[15, 21], [9, 21], [5, 18], [5, 15], [7, 14]] },
+      { "tail": [[15, 22], [8, 23], [4, 20], [4, 17], [6, 16]] },
+      { "tail": [[15, 21], [8, 21], [5, 18], [5, 16], [7, 15]] }
+    ],
+    "left": [
+      { "tail": [[18, 21], [23, 21], [27, 18], [27, 14], [25, 13]] },
+      { "tail": [[18, 20], [23, 20], [26, 17], [26, 14], [24, 13]] },
+      { "tail": [[18, 21], [24, 22], [28, 19], [28, 16], [26, 15]] },
+      { "tail": [[18, 20], [23, 21], [27, 19], [28, 15], [26, 14]] }
+    ],
+    "right": [
+      { "tail": [[14, 21], [9, 21], [5, 18], [5, 14], [7, 13]] },
+      { "tail": [[14, 20], [9, 20], [6, 17], [6, 14], [8, 13]] },
+      { "tail": [[14, 21], [8, 22], [4, 19], [4, 16], [6, 15]] },
+      { "tail": [[14, 20], [9, 21], [5, 19], [4, 15], [6, 14]] }
+    ]
+  },
+  "32": {
+    "front": [
+      "k...........k",
+      "kck.......ksk",
+      "kcpsk...kpssk",
+      "kccsskkkssssk",
+      "kcchcccsssssk",
+      "kcccccwcssssk",
+      "kcwekewekcssk",
+      "kcckkwwwkkssk",
+      "kcgwwpwwwgssk",
+      ".kgwwwkwwwgk.",
+      ".ksgwkwkwgsk.",
+      "..ksgwwwgsk..",
+      "...kkkkkkk..."
+    ],
+    "back": [
+      "k...........k",
+      "kck.......ksk",
+      "kcchk...kcssk",
+      "kccchkkkcsssk",
+      "kcchhcccssssk",
+      "kcccccccssssk",
+      "kcccccccssssk",
+      "kccccccsssssk",
+      "kccccsssssssk",
+      ".kccsssssssk.",
+      ".kcssssssssk.",
+      "..ksssssssk..",
+      "...kkkkkkk..."
+    ],
+    "profile": [
+      ".....k.....",
+      "....kck....",
+      "...kcpck...",
+      "..kccpssk..",
+      ".kcchccssk.",
+      ".kcccccssk.",
+      ".kwekccssk.",
+      "kkwkkccssk.",
+      "kpwwgcsssk.",
+      "kwwkwcsssk.",
+      ".kgwwgssk..",
+      "..kgwssk...",
+      "...kkkk...."
+    ],
+    "body": [
+      "..kkkkk..",
+      ".kcwwwsk.",
+      "kcwwwwwsk",
+      "kcgwwwgsk",
+      "kccgwgssk",
+      ".kccgssk.",
+      ".kcssssk.",
+      "..kkkkk.."
+    ],
+    "backBody": [
+      "..kkkkk..",
+      ".kchcssk.",
+      "kcchcsssk",
+      "kccccsssk",
+      "kcccssssk",
+      ".kcssssk.",
+      ".ksssssk.",
+      "..kkkkk.."
+    ],
+    "sideBody": [
+      "..kkkk.",
+      ".kwccsk",
+      "kwgccsk",
+      "kwgccsk",
+      "kgccssk",
+      ".kcssk.",
+      ".ksssk.",
+      "..kkk.."
+    ],
+    "arm": [".kk.", "kcsk", "kcsk", "kgwk", "kwwk", ".kk."],
+    "foot": [".kkk.", "kcssk", "kgwgk", "kwwwk", ".kkk."]
+  },
+  "16": {
+    "front": ["k.....k", "cck.kss", "kccwssk", "kekwkek", "kgwpwgk", ".kwkwk.", "..kkk.."],
+    "back": ["k.....k", "cck.kss", "kcchssk", "kcccssk", "kccsssk", ".ksssk.", "..kkk.."],
+    "profile": ["...k...", "..kck..", ".kpcsk.", "kekcsk.", "pwwssk.", ".kwsk..", "..kk..."],
+    "body": [".kkk.", "kcwsk", "kgwgk", ".ksk."],
+    "backBody": [".kkk.", "kccsk", "kcssk", ".ksk."],
+    "sideBody": [".kk.", "kwsk", "kgsk", ".kk."],
+    "arm": ["kk", "cs", "ww"],
+    "foot": ["ksk", "kww"]
+  }
+}
