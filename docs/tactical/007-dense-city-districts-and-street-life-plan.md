@@ -525,3 +525,10 @@ three cases remain candidates until the next human review.
 Validation: all 1,127 unit tests and 202 browser tests pass, as do typechecks,
 production build and Biome (74 existing warnings). Visually inspected all three
 revised previews in Playwright Chromium; only their candidate identities changed.
+
+The subsequent human review approved the corrected junction, approaches and
+parking renders at 14:17 UTC, completing all four geometry approvals together
+with the unchanged refuge. The two original curb reports are resolved against
+those exact new render identities. Next: promote this reviewed geometry and its
+placement reservations into a new generated commercial-block revision, then
+stage the approved furniture and parked cars for the next review batch.
