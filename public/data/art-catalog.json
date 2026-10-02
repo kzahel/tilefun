@@ -8566,6 +8566,78 @@
       ]
     },
     {
+      "id": "surface:city-v2:192:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:208:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:144:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:160:1952:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1952,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
       "id": "surface:city-v2:32:1952:16:16",
       "sheetId": "me-complete",
       "rect": [
@@ -8584,15 +8656,15 @@
       ]
     },
     {
-      "id": "surface:city-v2:224:1952:16:16",
+      "id": "surface:city-v2:192:1968:16:16",
       "sheetId": "me-complete",
       "rect": [
-        224,
-        1952,
+        192,
+        1968,
         16,
         16
       ],
-      "label": "Road geometry candidate · Native curved curb join",
+      "label": "Road geometry candidate · Rounded pavement corner",
       "kind": "terrain",
       "consumers": [
         {
@@ -8602,15 +8674,51 @@
       ]
     },
     {
-      "id": "surface:city-v2:288:1952:16:16",
+      "id": "surface:city-v2:208:1968:16:16",
       "sheetId": "me-complete",
       "rect": [
-        288,
-        1952,
+        208,
+        1968,
         16,
         16
       ],
-      "label": "Road geometry candidate · Native curved curb join",
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:144:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1968,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:160:1968:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1968,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
       "kind": "terrain",
       "consumers": [
         {
@@ -8638,15 +8746,15 @@
       ]
     },
     {
-      "id": "surface:city-v2:224:1920:16:16",
+      "id": "surface:city-v2:192:1904:16:16",
       "sheetId": "me-complete",
       "rect": [
-        224,
-        1920,
+        192,
+        1904,
         16,
         16
       ],
-      "label": "Road geometry candidate · Native curved curb join",
+      "label": "Road geometry candidate · Rounded pavement corner",
       "kind": "terrain",
       "consumers": [
         {
@@ -8656,15 +8764,123 @@
       ]
     },
     {
-      "id": "surface:city-v2:288:1920:16:16",
+      "id": "surface:city-v2:208:1904:16:16",
       "sheetId": "me-complete",
       "rect": [
-        288,
+        208,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:144:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:160:1904:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1904,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:192:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        192,
         1920,
         16,
         16
       ],
-      "label": "Road geometry candidate · Native curved curb join",
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:208:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:144:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        144,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
+      "kind": "terrain",
+      "consumers": [
+        {
+          "system": "Road geometry review (candidate)",
+          "source": "src/road/CitySurfaceRecipes.ts"
+        }
+      ]
+    },
+    {
+      "id": "surface:city-v2:160:1920:16:16",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1920,
+        16,
+        16
+      ],
+      "label": "Road geometry candidate · Rounded pavement corner",
       "kind": "terrain",
       "consumers": [
         {

@@ -487,8 +487,8 @@ Cases: rounded four-way curb joins; a capped pedestrian island with an open
 central refuge landing; two crossings with sidewalk extensions; and three
 native curbside parking bays with sidewalk gaps and a separate crossing.
 All surfaces reuse `CitySurfaceRecipes` and `CitySurfaceRenderer`. Source art
-is pinned to the committed complete sheet: quarter-curbs at x224/x288,
-y1920/y1952; island caps/middle at x224/x240/x272,y2000; crossing entry at
+is pinned to the committed complete sheet: whole 32×32 pavement corners at
+x144/x192,y1904/y1952; island caps/middle at x224/x240/x272,y2000; crossing entry at
 x64,y1968 and paint at x64,y1984; marked 80×32 parking bay at x16,y2048.
 These exact clips have source-use inventory entries and clickable atlas links.
 No curb is rotated, mirrored or stretched. Crossing approaches preserve the
@@ -505,3 +505,23 @@ Validation: typechecks, production build and Biome pass (74 existing warnings);
 clips, exact preview pixels, refuge/parking reservations, phone layout, feedback
 round trips, independent pause state and all nine approved foundation renders.
 All 301 existing Workshop candidate identities remain unchanged.
+
+### Curved curb correction after review — 2026-10-02
+
+The junction and crossing approaches received Needs changes reports because
+the curved curbs bent in the wrong direction. The first composition replaced
+only a diagonal road cell with a quarter-curb. The corrected composer places
+each complete native 32×32 corner across the pavement cell, two adjoining
+road-edge cells and diagonal road cell. This keeps the pavement outline,
+straight curb joins and south-facing shadow together in their authored orientation.
+The parking scene shares this correction and remains available for review; the
+approved refuge and all 301 earlier candidates retain their exact identities.
+
+A regression check compares all four complete junction corners against their
+audited source pixels. Original human reports remain attached to the prior
+render identities; agent replies do not approve the revised candidates. These
+three cases remain candidates until the next human review.
+
+Validation: all 1,127 unit tests and 202 browser tests pass, as do typechecks,
+production build and Biome (74 existing warnings). Visually inspected all three
+revised previews in Playwright Chromium; only their candidate identities changed.

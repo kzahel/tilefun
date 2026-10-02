@@ -2022,14 +2022,14 @@
       "prompt": "Check all four curved curb joins against the straight sidewalks and road edges.",
       "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
       "kind": "art",
-      "fingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+      "fingerprint": "f6a3eef6706816c02b81c33a43e5373be766b7117e785e112e8f572f4272bed9",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "surface",
         "prefabIds": [],
         "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
-        "revision": "4b2cda9817c47cda47d746ea6ae5e09df8d827955a0685207eccd814ffe7d8a0",
-        "renderFingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+        "revision": "f959f0a40c0c733849cc1c3804410990d065c757fc45a08aaea5030c3603443d",
+        "renderFingerprint": "f6a3eef6706816c02b81c33a43e5373be766b7117e785e112e8f572f4272bed9",
         "caseId": "surface-v2-rounded",
         "surfaceRecipe": "city-surfaces-v2"
       },
@@ -2043,7 +2043,7 @@
         "rect": [
           16,
           1904,
-          288,
+          208,
           112
         ],
         "sliceKeys": [],
@@ -2052,8 +2052,8 @@
           "scene": "surface",
           "prefabIds": [],
           "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-rounded",
-          "revision": "4b2cda9817c47cda47d746ea6ae5e09df8d827955a0685207eccd814ffe7d8a0",
-          "renderFingerprint": "7aeb1598ea823c47603cf9a95a2b5b587e6d757ccff885ad5044bf699c3ee6ee",
+          "revision": "f959f0a40c0c733849cc1c3804410990d065c757fc45a08aaea5030c3603443d",
+          "renderFingerprint": "f6a3eef6706816c02b81c33a43e5373be766b7117e785e112e8f572f4272bed9",
           "caseId": "surface-v2-rounded",
           "surfaceRecipe": "city-surfaces-v2"
         }
@@ -2110,14 +2110,14 @@
       "prompt": "Check how the crossings meet the wider sidewalk approaches and the shortened crossing distance.",
       "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
       "kind": "art",
-      "fingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+      "fingerprint": "964edc71a60d0df3b5b78594331ca0521b364dafda20a324dad8d33594d1cc60",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "surface",
         "prefabIds": [],
         "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
-        "revision": "8df2bd0d1696251fbc538a3e37ddf103a6c9d6464777acd4b3b61f83b4678476",
-        "renderFingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+        "revision": "33eb7e6fcc66ff9b5d955e21101c2abbabfc77fb7d8e1d571364d0ce51f7bc5c",
+        "renderFingerprint": "964edc71a60d0df3b5b78594331ca0521b364dafda20a324dad8d33594d1cc60",
         "caseId": "surface-v2-approaches",
         "surfaceRecipe": "city-surfaces-v2"
       },
@@ -2129,9 +2129,9 @@
           8224
         ],
         "rect": [
-          16,
+          32,
           1904,
-          288,
+          192,
           112
         ],
         "sliceKeys": [],
@@ -2140,8 +2140,8 @@
           "scene": "surface",
           "prefabIds": [],
           "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-approaches",
-          "revision": "8df2bd0d1696251fbc538a3e37ddf103a6c9d6464777acd4b3b61f83b4678476",
-          "renderFingerprint": "97ff427c9e8f28a68ae734a4979f1c384f29345a2ec0e4db50942f80ce0b04f6",
+          "revision": "33eb7e6fcc66ff9b5d955e21101c2abbabfc77fb7d8e1d571364d0ce51f7bc5c",
+          "renderFingerprint": "964edc71a60d0df3b5b78594331ca0521b364dafda20a324dad8d33594d1cc60",
           "caseId": "surface-v2-approaches",
           "surfaceRecipe": "city-surfaces-v2"
         }
@@ -2154,14 +2154,14 @@
       "prompt": "Check the native parking markings, curb joins, sidewalk gaps and clear driving lanes. Cars and meters come after this surface review.",
       "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
       "kind": "art",
-      "fingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+      "fingerprint": "574835ee423af4279f0b4c7b678d36935d001f062abddb426773f66cd08ae658",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "review": {
         "scene": "surface",
         "prefabIds": [],
         "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
-        "revision": "2435098596b6c17b73265a65774a8bf82a1da95d068cfc0248eecbfef15e18ef",
-        "renderFingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+        "revision": "2892121612ba15e267ededd26fc4f8bfcf59776cefe0fc7ee36b4a7e4e830fbe",
+        "renderFingerprint": "574835ee423af4279f0b4c7b678d36935d001f062abddb426773f66cd08ae658",
         "caseId": "surface-v2-parking",
         "surfaceRecipe": "city-surfaces-v2"
       },
@@ -2175,7 +2175,7 @@
         "rect": [
           16,
           1904,
-          288,
+          208,
           176
         ],
         "sliceKeys": [],
@@ -2184,8 +2184,8 @@
           "scene": "surface",
           "prefabIds": [],
           "url": "/tilefun/building-lab.html?run=road-geometry&case=surface-v2-parking",
-          "revision": "2435098596b6c17b73265a65774a8bf82a1da95d068cfc0248eecbfef15e18ef",
-          "renderFingerprint": "d0957a59761a6a1dafb0fc01c1e5f574d113f71ba3f9b427f4514a54f67a4cb2",
+          "revision": "2892121612ba15e267ededd26fc4f8bfcf59776cefe0fc7ee36b4a7e4e830fbe",
+          "renderFingerprint": "574835ee423af4279f0b4c7b678d36935d001f062abddb426773f66cd08ae658",
           "caseId": "surface-v2-parking",
           "surfaceRecipe": "city-surfaces-v2"
         }
@@ -9006,5 +9006,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "8afdb55efb5b2706c34a5e853e15ed50cb6346567b139cd71ae24b85513aa5c4"
+  "inputDigest": "3b196191b6f7690aff3f5423172f6415472fc43ec24457910ee15cc1715e3250"
 }

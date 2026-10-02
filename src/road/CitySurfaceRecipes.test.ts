@@ -20,6 +20,41 @@ import {
 const bytes = readFileSync("public/assets/tilesets/me-complete.png");
 const image = PNG.sync.read(bytes);
 describe("shared candidate city surfaces", () => {
+  it("keeps each rounded junction's pavement, adjoining curbs and shadow together", () => {
+    const pieces = composeCitySurface(
+      required(CITY_GEOMETRY_CASES.find((c) => c.geometry === "rounded")),
+    );
+    // Audited whole corners: replacing just the diagonal road cell bends the
+    // curb into the intersection and disconnects it from the straight edges.
+    for (const [worldX, worldY, sourceX, sourceY] of [
+      [11 * 16, 7 * 16, 192, 1952],
+      [19 * 16, 7 * 16, 144, 1952],
+      [11 * 16, 15 * 16, 192, 1904],
+      [19 * 16, 15 * 16, 144, 1904],
+    ] as const) {
+      const actual = Buffer.alloc(32 * 32 * 4),
+        expected = Buffer.alloc(actual.length);
+      for (let y = 0; y < 32; y++) {
+        const sourceOffset = ((sourceY + y) * image.width + sourceX) * 4;
+        image.data.copy(expected, y * 32 * 4, sourceOffset, sourceOffset + 32 * 4);
+      }
+      for (const p of pieces.filter(
+        (p) => p.x >= worldX && p.x < worldX + 32 && p.y >= worldY && p.y < worldY + 32,
+      )) {
+        const [sx, sy, w, h] = p.rect;
+        for (let y = 0; y < h; y++) {
+          const sourceOffset = ((sy + y) * image.width + sx) * 4;
+          image.data.copy(
+            actual,
+            ((p.y - worldY + y) * 32 + p.x - worldX) * 4,
+            sourceOffset,
+            sourceOffset + w * 4,
+          );
+        }
+      }
+      expect(actual).toEqual(expected);
+    }
+  });
   it("reserves an unpainted connected refuge and parking spaces away from the crossing", () => {
     const refuge = required(CITY_GEOMETRY_CASES.find((c) => c.geometry === "refuge"));
     const landing = required(cityGeometryPlan(refuge).refuge);

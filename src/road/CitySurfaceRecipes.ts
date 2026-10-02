@@ -377,7 +377,36 @@ export function citySurfaceComposition(c: CitySurfaceCase) {
   };
 }
 
-/** Source audit: native quarter-curbs (224/288,1920/1952), 32px island
+/** Rounded pavement corners span the pavement cell, both adjoining road-edge
+ * cells and the diagonal road cell. Keep all four native clips together so
+ * the curve and its south shadow join the straight curbs on each side.
+ */
+export function cityRoundedCornerPatches(road: (x: number, y: number) => boolean) {
+  const patches: SurfacePiece[] = [];
+  for (let y = 0; y < SURFACE_ROWS; y++)
+    for (let x = 0; x < SURFACE_COLS; x++) {
+      if (!road(x, y) || !road(x - 1, y) || !road(x + 1, y) || !road(x, y - 1) || !road(x, y + 1))
+        continue;
+      for (const [dx, dy, sx, sy] of [
+        [-1, -1, 192, 1952],
+        [1, -1, 144, 1952],
+        [-1, 1, 192, 1904],
+        [1, 1, 144, 1904],
+      ] as const) {
+        if (road(x + dx, y + dy)) continue;
+        patches.push({
+          label: "Rounded pavement corner",
+          rect: [sx, sy, 32, 32],
+          x: (x + Math.min(0, dx)) * 16,
+          y: (y + Math.min(0, dy)) * 16,
+          role: "curb",
+        });
+      }
+    }
+  return patches;
+}
+
+/** Source audit: native 32×32 pavement corners (144/192,1904/1952), island
  * caps/middle (224/240/272,2000), crossing entry (64,1968), and marked 80×32
  * bays (16,2048). Clips keep authored orientation, scale and south shadows.
  * The v1 lookup and its frozen consumers never call this composition. */
@@ -385,6 +414,7 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
   const pieces: SurfacePiece[] = [],
     plan = cityGeometryPlan(c);
   const road = (x: number, y: number) => citySurfaceRoadAt(c, x, y);
+  const corners = cityRoundedCornerPatches(road);
   const add = (
     label: string,
     rect: SurfaceRect,
@@ -395,15 +425,13 @@ function composeCityGeometry(c: CitySurfaceCase): SurfacePiece[] {
   for (let y = 0; y < SURFACE_ROWS; y++)
     for (let x = 0; x < SURFACE_COLS; x++) {
       const p = citySurfaceTileAt("neutral", x, y, road);
-      if (road(x, y) && road(x - 1, y) && road(x + 1, y) && road(x, y - 1) && road(x, y + 1)) {
-        const nw = !road(x - 1, y - 1),
-          ne = !road(x + 1, y - 1),
-          sw = !road(x - 1, y + 1),
-          se = !road(x + 1, y + 1);
-        if (nw || ne || sw || se) {
-          p.rect = [nw || sw ? 224 : 288, nw || ne ? 1952 : 1920, 16, 16];
-          p.label = "Native curved curb join";
-        }
+      const corner = corners.find(
+        (c) => x * 16 >= c.x && x * 16 < c.x + 32 && y * 16 >= c.y && y * 16 < c.y + 32,
+      );
+      if (corner) {
+        p.rect = [corner.rect[0] + x * 16 - corner.x, corner.rect[1] + y * 16 - corner.y, 16, 16];
+        p.label = corner.label;
+        p.role = "curb";
       }
       pieces.push(p);
     }
