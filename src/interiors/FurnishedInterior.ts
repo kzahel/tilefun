@@ -176,6 +176,17 @@ export function drawFurnishedInterior(
   actors: readonly FurnitureActor[] = [],
   floorBounds?: FurnitureRect,
 ): void {
+  const objects = prepareFurnishedInterior(map, plan, placements, floorBounds);
+  drawPreparedFurnishedInterior(ctx, atlas, map, objects, actors);
+}
+
+/** Validation belongs to changed room state, rather than every animation frame. */
+export function prepareFurnishedInterior(
+  map: LayeredInteriorMap,
+  plan: FloorPlan,
+  placements: readonly FurniturePlacement[],
+  floorBounds?: FurnitureRect,
+): PlacedFurniture[] {
   for (let y = 1; y < plan.height - 1; y++)
     if (plan.rows[y]?.slice(1, -1).some((c) => c === "#" || c === " "))
       throw new Error("Furniture catalog scenes currently require an open room shell");
@@ -190,19 +201,32 @@ export function drawFurnishedInterior(
     )
       throw new Error(`Furniture sprite leaves viewport: ${o.placement.id}`);
   }
+  return objects;
+}
+
+export function drawPreparedFurnishedInterior(
+  ctx: CanvasRenderingContext2D,
+  atlas: CanvasImageSource,
+  map: LayeredInteriorMap,
+  objects: PlacedFurniture[],
+  actors: readonly FurnitureActor[] = [],
+  shellLayers?: { floor: CanvasImageSource; walls: CanvasImageSource },
+): void {
   const draw = (o: PlacedFurniture) => {
     const entry = getModernInteriorsEntry(o.definition.key);
     if (!entry || entry.rect[2] !== o.definition.size[0] || entry.rect[3] !== o.definition.size[1])
       throw new Error(`Invalid furniture sprite: ${o.definition.id}`);
     ctx.drawImage(atlas, ...entry.rect, ...o.origin, ...o.definition.size);
   };
-  drawLayeredInteriorMap(ctx, atlas, map, ["floor"]);
+  if (shellLayers) ctx.drawImage(shellLayers.floor, 0, 0);
+  else drawLayeredInteriorMap(ctx, atlas, map, ["floor"]);
   ctx.save();
   ctx.imageSmoothingEnabled = false;
   ctx.translate(0, map.contentOffsetY ?? 0);
   for (const o of objects.filter((o) => o.definition.layer === "floor")) draw(o);
   ctx.restore();
-  drawLayeredInteriorMap(ctx, atlas, map, ["wall", "foreground", "objects"]);
+  if (shellLayers) ctx.drawImage(shellLayers.walls, 0, 0);
+  else drawLayeredInteriorMap(ctx, atlas, map, ["wall", "foreground", "objects"]);
   ctx.save();
   ctx.imageSmoothingEnabled = false;
   ctx.translate(0, map.contentOffsetY ?? 0);

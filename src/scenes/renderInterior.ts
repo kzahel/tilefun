@@ -1,6 +1,6 @@
 import { PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
-import { drawFurnishedInterior } from "../interiors/FurnishedInterior.js";
+import { CachedInteriorRenderer } from "../interiors/CachedInteriorRenderer.js";
 import {
   furnitureAsset,
   INTERIOR_FLOOR,
@@ -13,7 +13,8 @@ import { collectScene } from "../rendering/collectScene.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
 
 let lastKey = "";
-let shell: ReturnType<typeof interiorPlan> | null = null;
+let renderer: CachedInteriorRenderer | null = null;
+let lastAtlas: CanvasImageSource | null = null;
 const nativeCamera = new Camera();
 nativeCamera.zoom = 1 / PIXEL_SCALE;
 
@@ -24,11 +25,13 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
   const atlas = gc.sheets.get("modern-interiors");
   if (!atlas) return;
   const key = JSON.stringify(identity);
-  if (key !== lastKey) {
-    shell = interiorPlan(identity);
+  if (key !== lastKey || atlas.image !== lastAtlas) {
+    const shell = interiorPlan(identity);
+    renderer = new CachedInteriorRenderer(atlas.image, shell.map, shell.plan, INTERIOR_FLOOR);
+    lastAtlas = atlas.image;
     lastKey = key;
   }
-  if (!shell) return;
+  if (!renderer) return;
   const placements = gc.stateView.props.flatMap((prop) => {
     const asset = furnitureAsset(prop.type);
     return asset
@@ -70,14 +73,6 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
   gc.ctx.save();
   gc.ctx.translate(origin.sx, origin.sy);
   gc.ctx.scale(gc.camera.scale, gc.camera.scale);
-  drawFurnishedInterior(
-    gc.ctx,
-    atlas.image,
-    shell.map,
-    shell.plan,
-    placements,
-    actors,
-    INTERIOR_FLOOR,
-  );
+  renderer.draw(gc.ctx, placements, actors);
   gc.ctx.restore();
 }
