@@ -33,6 +33,10 @@
   },
   "overrides": [
     {
+      "includes": ["public/data/art-catalog.json"],
+      "formatter": { "enabled": false }
+    },
+    {
       "includes": ["demo/**"],
       "linter": {
         "rules": {
