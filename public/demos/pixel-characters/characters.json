@@ -7,6 +7,14 @@
       "metadata": "cat.json",
       "contactSheet": "cat-contact-sheet.png",
       "preview": "cat-preview.gif"
+    },
+    {
+      "id": "dog",
+      "name": "Floppy Dog",
+      "description": "A friendly cream-and-brown dog with floppy ears, a rounded snout, broad paws and a short wagging tail.",
+      "metadata": "dog.json",
+      "contactSheet": "dog-contact-sheet.png",
+      "preview": "dog-preview.gif"
     }
   ]
 }

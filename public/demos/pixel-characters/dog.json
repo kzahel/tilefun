@@ -1,0 +1,103 @@
+{
+  "id": "dog",
+  "name": "Floppy Dog",
+  "versions": {
+    "32": {
+      "image": "dog-32.png",
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "durationMs": 1000,
+      "pivot": [16, 27],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "headAnchors": {
+        "down": [[9, 4], [9, 3], [9, 4], [9, 3]],
+        "up": [[9, 4], [9, 3], [9, 4], [9, 3]],
+        "left": [[8, 4], [8, 3], [8, 4], [8, 3]],
+        "right": [[10, 4], [10, 3], [10, 4], [10, 3]]
+      },
+      "sheetSha256": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200"
+    },
+    "16": {
+      "image": "dog-16.png",
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "columns": 4,
+      "rows": 4,
+      "fps": 4,
+      "durationMs": 1000,
+      "pivot": [8, 14],
+      "loop": true,
+      "directions": {
+        "down": {
+          "row": 0,
+          "frames": 4
+        },
+        "up": {
+          "row": 1,
+          "frames": 4
+        },
+        "left": {
+          "row": 2,
+          "frames": 4
+        },
+        "right": {
+          "row": 3,
+          "frames": 4
+        }
+      },
+      "headAnchors": {
+        "down": [[4, 2], [4, 1], [4, 2], [4, 1]],
+        "up": [[4, 2], [4, 1], [4, 2], [4, 1]],
+        "left": [[4, 2], [4, 1], [4, 2], [4, 1]],
+        "right": [[5, 2], [5, 1], [5, 2], [5, 1]]
+      },
+      "sheetSha256": "8c509c82a7c9860ff4d449b916e94265bc704d1cfe24fcecf53388e142a54fc6"
+    }
+  },
+  "palette": {
+    "b": "#50382d",
+    "s": "#79503a",
+    "c": "#ae7750",
+    "h": "#d19b65",
+    "w": "#fff0cd",
+    "g": "#d8bf95",
+    "k": "#26232a",
+    "p": "#dc8d83"
+  },
+  "source": "art-source/pixel-characters/dog.json",
+  "poseGuides": "art-source/pixel-tiger/pose-guides.json",
+  "rig": "art-source/blender/tiger.blend",
+  "sourceFrames": [1, 3, 5, 7],
+  "provenance": "Original dog pixel patterns composed from tiger.blend frames 1, 3, 5, 7. Wider front/back paw contacts, forward profile head and short wagging tail paths adapt the existing guide rig. Separate native16 drawings; no new Blender model or Aseprite painting.",
+  "builder": "scripts/blender/finish_characters.py",
+  "method": "programmatically composed authored pixel patterns using Blender pose guides; separate native16 patterns",
+  "validation": {
+    "binaryAlpha": true,
+    "paletteMembership": true,
+    "padding": true,
+    "distinctPosesPerDirection": 4,
+    "wholeHeadsStable": true,
+    "connectedSilhouettes": true
+  }
+}

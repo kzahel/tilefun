@@ -43,61 +43,103 @@ test("gallery publishes completed records and displays both independently author
   await page.screenshot({ path: "test-results/pixel-characters-desktop.png", fullPage: true });
 });
 
-test("character selector switches registry records without needing gallery code changes", async ({
+test("character selector loads the completed dog and renders its own sheets in every direction", async ({
   page,
 }) => {
-  // A second test-only catalog record exercises future additions without publishing unfinished art.
-  const response = await page.request.get(`${url}characters.json`);
-  const registry = await response.json();
-  const cat = registry.characters.find((record: { id: string }) => record.id === "cat");
-  registry.characters.push({
-    ...cat,
-    id: "cat-test-study",
-    name: "Cat test study",
-    description: "Selector fixture",
-  });
-  await page.route("**/pixel-characters/characters.json", (route) =>
-    route.fulfill({ json: registry }),
-  );
   await page.goto(url);
   const garden = page.locator("#garden");
   await expect(garden).toHaveAttribute("data-ready", "true");
-  await page.locator("#character").selectOption("cat-test-study");
-  await expect(garden).toHaveAttribute("data-character", "cat-test-study");
-  await expect(page.locator("#description")).toHaveText("Selector fixture");
+  await page.locator("#animate").uncheck();
+  const front = page.locator('canvas[data-row="0"]');
+  const catPixels = await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
+  await page.locator("#character").selectOption("dog");
+  await expect(garden).toHaveAttribute("data-character", "dog");
+  await expect(page.locator("#description")).toContainText("short wagging tail");
+  expect(await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL())).not.toBe(
+    catPixels,
+  );
+  await expect(page.locator("#contact-link")).toHaveAttribute("href", "dog-contact-sheet.png");
+  await expect(page.locator("#preview-link")).toHaveAttribute("href", "dog-preview.gif");
+  await page.screenshot({ path: "test-results/dog-gallery-desktop.png", fullPage: true });
+  for (const size of [16, 32]) {
+    await page.locator("#sprite-size").selectOption(String(size));
+    await expect(garden).toHaveAttribute("data-size", String(size));
+    await expect(page.locator("#sheet-link")).toHaveAttribute("href", `dog-${size}.png`);
+    // Every directional card must use the selected dog's real source row.
+    await expect
+      .poll(() =>
+        page.locator("canvas[data-row]").evaluateAll(async (canvases, size) => {
+          const image = new Image();
+          image.src = `dog-${size}.png`;
+          await image.decode();
+          return canvases.every((element) => {
+            const canvas = element as HTMLCanvasElement;
+            const expected = document.createElement("canvas");
+            expected.width = expected.height = size;
+            expected
+              .getContext("2d")
+              ?.drawImage(
+                image,
+                0,
+                Number(canvas.dataset.row) * size,
+                size,
+                size,
+                0,
+                0,
+                size,
+                size,
+              );
+            return canvas.toDataURL() === expected.toDataURL();
+          });
+        }, size),
+      )
+      .toBe(true);
+  }
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.screenshot({ path: "test-results/dog-gallery-phone.png", fullPage: true });
+  await page.locator("#sprite-size").selectOption("16");
+  await page.locator("#native-scale").check();
+  await expect(front).toHaveCSS("width", "16px");
+  await page.screenshot({ path: "test-results/dog-gallery-native16-phone.png", fullPage: true });
   await page.locator("#character").selectOption("cat");
   await expect(garden).toHaveAttribute("data-character", "cat");
   await expect(page.locator("#error")).toBeHidden();
 });
 
-test("keyboard movement covers every direction, stops on release and resets", async ({ page }) => {
-  await page.goto(url);
-  const garden = page.locator("#garden");
-  await expect(garden).toHaveAttribute("data-ready", "true");
-  await garden.focus();
-  for (const [key, facing, axis, sign] of [
-    ["ArrowRight", "right", "x", 1],
-    ["a", "left", "x", -1],
-    ["ArrowDown", "down", "y", 1],
-    ["w", "up", "y", -1],
-  ] as const) {
-    const before = Number(await garden.getAttribute(`data-${axis}`));
-    await page.keyboard.down(key);
-    await expect(garden).toHaveAttribute("data-facing", facing);
-    await expect
-      .poll(async () => (Number(await garden.getAttribute(`data-${axis}`)) - before) * sign)
-      .toBeGreaterThan(2);
-    await page.keyboard.up(key);
-    await expect(page.locator("#status")).toHaveText(`Standing ${facing}`);
-    const stopped = await garden.getAttribute(`data-${axis}`);
-    await page.waitForTimeout(150);
-    expect(await garden.getAttribute(`data-${axis}`)).toBe(stopped);
-  }
-  await page.locator("#reset").click();
-  await expect(garden).toHaveAttribute("data-x", "192.00");
-  await expect(garden).toHaveAttribute("data-y", "146.00");
-  await expect(garden).toHaveAttribute("data-facing", "down");
-});
+for (const character of ["cat", "dog"]) {
+  test(`${character} keyboard movement covers every direction, stops on release and resets`, async ({
+    page,
+  }) => {
+    await page.goto(url);
+    const garden = page.locator("#garden");
+    await expect(garden).toHaveAttribute("data-ready", "true");
+    await page.locator("#character").selectOption(character);
+    await expect(garden).toHaveAttribute("data-character", character);
+    await garden.focus();
+    for (const [key, facing, axis, sign] of [
+      ["ArrowRight", "right", "x", 1],
+      ["a", "left", "x", -1],
+      ["ArrowDown", "down", "y", 1],
+      ["w", "up", "y", -1],
+    ] as const) {
+      const before = Number(await garden.getAttribute(`data-${axis}`));
+      await page.keyboard.down(key);
+      await expect(garden).toHaveAttribute("data-facing", facing);
+      await expect
+        .poll(async () => (Number(await garden.getAttribute(`data-${axis}`)) - before) * sign)
+        .toBeGreaterThan(2);
+      await page.keyboard.up(key);
+      await expect(page.locator("#status")).toHaveText(`Standing ${facing}`);
+      const stopped = await garden.getAttribute(`data-${axis}`);
+      await page.waitForTimeout(150);
+      expect(await garden.getAttribute(`data-${axis}`)).toBe(stopped);
+    }
+    await page.locator("#reset").click();
+    await expect(garden).toHaveAttribute("data-x", "192.00");
+    await expect(garden).toHaveAttribute("data-y", "146.00");
+    await expect(garden).toHaveAttribute("data-facing", "down");
+  });
+}
 
 test("touch movement releases cleanly and the small mobile layout fits", async ({
   browser,

@@ -3,7 +3,7 @@
 The [Pixel Character Gallery](https://tilefun.graehlarts.com/tilefun/demos/pixel-characters/)
 is a standalone sprite study, discoverable from the root tool directory. It
 shares no runtime art with the game and leaves the Tiger Walk Demo untouched.
-Only finished characters appear in its generated registry. Dog, person,
+Only finished characters appear in its generated registry. Person,
 squirrel and bear are planned additions for subsequent sessions.
 
 ## Workflow and reproducible commands
@@ -99,9 +99,40 @@ There are no third-party character models or textures.
   `src/server/staticFiles.test.ts` and `src/persistence/FsSecurity.test.ts`;
   those unrelated tests were left unchanged.
 
+## Dog
+
+- Design: friendly upright cream-and-brown dog, rounded crown, long brown
+  hanging ears, asymmetric eye patch, broad dark nose, projecting rounded
+  profile snout, cream chest and broad paws. Front/back/profile masters and
+  the simplified native16 drawings are authored separately; facial pixels
+  move as one complete head. Eight shared colors, broad flat shadows.
+- Reused guide source: `art-source/pixel-tiger/pose-guides.json`, from
+  `art-source/blender/tiger.blend` frames 1, 3, 5 and 7. No new Blender model
+  or Aseprite painting. Front/back contacts are widened for a planted dog
+  stance; profile strides are spread and the head sits one guide pixel
+  forward. Short, low tail paths wag visibly outside the back/profile body
+  silhouette. The shared generator needed no changes.
+- Editable source: `art-source/pixel-characters/dog.json`. Regenerate exactly:
+  `uv run --with pillow python scripts/blender/finish_characters.py --character dog`.
+- Outputs: `public/demos/pixel-characters/dog-32.png`, `dog-16.png`, `dog.json`,
+  `dog-contact-sheet.png`, `dog-preview.gif`, and the completed `characters.json`
+  registry. Retained browser review captures: `dog-gallery-desktop.png`,
+  `dog-gallery-phone.png`, `dog-gallery-native16-phone.png` in the same directory.
+- Review: all directions and four poses inspected enlarged and at native
+  scale, plus desktop/mobile gallery captures. Export checks protect connected
+  limbs, whole heads, palette, binary alpha, padding and one-second loops.
+  E2E checks select the real dog, compare every directional card to its source
+  at both sizes, and walk/release/reset in all four directions.
+- Validation: `npx tsc --noEmit`, `npx biome check --write .` and
+  `npm run build` passed (existing warnings); the unrelated art-catalog
+  formatting was restored. `npx playwright test --workers=2`: **176 passed,
+  1 skipped**. `npm test`: **1080 passed, 1 failed, 10 skipped**, matching the
+  existing Windows symlink EPERM baseline in `src/server/staticFiles.test.ts`
+  and `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
+
 ## Add the next character
 
-For the dog, add `art-source/pixel-characters/dog.json`, with unique `id`, `name`,
+For the person, add `art-source/pixel-characters/person.json`, with unique `id`, `name`,
 `description`, `provenance`, `poseGuides`, `palette`, `tail`, `limbs`, `32` and
 `16` records. Use the cat as a schema example, but author species-specific
 head/torso/limb patterns and motion overrides. Pattern keys are `front`, `back`,
@@ -111,9 +142,9 @@ direction, merged over the guide samples; omitted overrides retain guide values.
 Tail and limb color fields name palette symbols. All paths are repo-relative.
 Set `tail` to `null` for characters without a visible tail, such as the person.
 
-Run `uv run --with pillow python scripts/blender/finish_characters.py --character dog`.
+Run `uv run --with pillow python scripts/blender/finish_characters.py --character person`.
 The generator scans all source records and adds completed exports to
 `characters.json`. No gallery edit is needed. Inspect all poses/motion at both
-sizes, append a Dog entry here, run repo checks and commit only the dog work.
+sizes, append a Person entry here, run repo checks and commit only the person work.
 Later additions use the same route. Keep the tiger and existing characters'
 exports unchanged unless their task specifically calls for revising them.
