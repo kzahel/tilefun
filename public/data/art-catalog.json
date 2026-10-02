@@ -1057,7 +1057,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:81"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:83"
         },
         {
           "system": "World generation",
@@ -1755,7 +1755,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:88"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:90"
         },
         {
           "system": "World generation",
@@ -2415,7 +2415,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:45"
+          "source": "src/ui/DoorControl.ts:46"
         }
       ]
     },
@@ -2586,6 +2586,10 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:183"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityWalkGraph.ts:123"
         },
         {
           "system": "World generation",
@@ -15483,11 +15487,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:764"
+          "source": "src/server/Realm.ts:765"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1056"
+          "source": "src/server/Realm.ts:1057"
         }
       ]
     },
@@ -16369,7 +16373,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:153"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:154"
         }
       ]
     },
@@ -16851,7 +16855,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:88"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:90"
         },
         {
           "system": "World generation",

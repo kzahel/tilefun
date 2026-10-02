@@ -14,7 +14,8 @@ export interface BuildingReview {
     | "commercial-district-v1"
     | "city-places-v7"
     | "city-places-v8"
-    | "city-places-v9";
+    | "city-places-v9"
+    | "city-places-v10";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;

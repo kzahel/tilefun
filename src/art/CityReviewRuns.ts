@@ -1,5 +1,10 @@
 /** Shared routing metadata for independent city review queues. */
 export const CITY_REVIEW_RUNS = {
+  pedestrians: {
+    name: "People & destinations",
+    version: "regional-v10",
+    recipe: "city-places-v10",
+  },
   architecture: {
     name: "Varied city architecture",
     version: "regional-v9",

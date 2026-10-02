@@ -26,7 +26,8 @@ export function updateRouteAI(entity: Entity, dt: number): void {
   if (distance <= 2 || route.blocked > 2) {
     route.index =
       (route.index + (route.blocked > 2 ? route.points.length - 1 : 1)) % route.points.length;
-    route.pause = 1.5;
+    route.pause = route.blocked > 2 ? 1.5 : Math.max(0, Math.min(30, target.waitSeconds ?? 1.5));
+    if (entity.sprite) entity.sprite.moving = false;
     route.blocked = 0;
     ai.state = "idle";
     return;

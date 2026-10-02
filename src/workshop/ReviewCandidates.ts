@@ -236,8 +236,8 @@ export async function buildArtCandidate(
       ? {
           exploreUrl: `/tool/explorer?${new URLSearchParams({
             generation: JSON.stringify(context.district.generation),
-            x: String(context.district.plan.center.x),
-            y: String(context.district.plan.center.y),
+            x: String(context.district.arrival.x),
+            y: String(context.district.arrival.y),
             zoom: "12",
             mode: "tiles",
           })}`,

@@ -645,6 +645,7 @@ export class Realm {
             "regional-v7",
             "regional-v8",
             "regional-v9",
+            "regional-v10",
           ].includes(this.generation.version))
       )
         continue;
@@ -1092,6 +1093,7 @@ export class Realm {
             "regional-v7",
             "regional-v8",
             "regional-v9",
+            "regional-v10",
           ].includes(this.generation.version)
         )
       )

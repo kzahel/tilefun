@@ -143,3 +143,14 @@ and office/services recipes, source rectangles and doorway facts. This is a
 candidate bank, not an approval promotion. Never regenerate in builds. Shared
 building factories, interiors, planner and surface realization consume it;
 source use is indexed. Saved v9 and prior revisions remain frozen.
+
+People & destinations candidates use regional-v10 / `run=pedestrians` (three
+Workshop views). `CityWalkGraph.ts` compiles bounded trips between doors and
+public seating through the two admitted crossings. Four block walkers and eight
+visitors use normal route AI/collision, with longer destination waits. Preview
+actors stay initial poses; Play here simulates them. Seating access is reserved
+in the city plan. Saved v10 and all earlier versions remain frozen. These views
+await human review; thirteen new city views total are staged across v7–v10.
+`npm run gameplay:bench -- --headed` measures indoor/outdoor gameplay frames and
+checks room movement/return in isolated bundled Chromium. Both measured paths
+held 8.3ms median frame intervals after caching; the user's device needs review.

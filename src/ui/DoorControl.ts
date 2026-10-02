@@ -1,4 +1,5 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
+import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { exteriorEntrance, INTERIOR_EXIT } from "../interiors/GameplayInterior.js";
 
 type DoorRequest = { type: "enter-building"; featureId: string } | { type: "exit-building" };
@@ -44,7 +45,7 @@ export class DoorControl {
           label =
             prop.type === "prop-country-house"
               ? "Enter home · E"
-              : prop.type.includes("bakery") || prop.type.includes("shop")
+              : buildingRecipe(prop.type)?.kind === "shop"
                 ? "Enter shop · E"
                 : "Enter apartment · E";
         }

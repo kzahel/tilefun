@@ -11,6 +11,12 @@ export interface PositionComponent {
   wy: number;
 }
 
+export interface RouteWaypoint extends PositionComponent {
+  /** Optional destination wait; absent keeps legacy route timing. */
+  waitSeconds?: number;
+  destinationId?: string;
+}
+
 export interface VelocityComponent {
   vx: number;
   vy: number;
@@ -93,7 +99,7 @@ export interface Entity {
   /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */
   proceduralId?: string;
   routeAI?: {
-    points: readonly PositionComponent[];
+    points: readonly RouteWaypoint[];
     index: number;
     pause: number;
     blocked: number;

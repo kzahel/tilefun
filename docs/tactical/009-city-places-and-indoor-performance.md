@@ -87,3 +87,58 @@ layouts are ready. Record completed slices and remaining scope here.
   facts; it contains no invented approvals. Source-use catalogue entries label
   these as candidate generation assets. Geometry and native pixels were inspected;
   office and residential interiors both pass entry/return browser checks.
+
+- `580cfb5`: architecture slice committed; 1,136 unit tests passed. Nine relevant
+  GPU/review/handoff/entry checks passed across the slice's verification runs.
+  All 316 earlier review identities remained unchanged.
+- Destination candidate: regional-v10 / Workshop batch `pedestrians` adds three
+  views and a bounded walk graph. Four block walkers accompany eight visitors
+  taking trips between housing and park seating or shops and square seating.
+  Door and seating destinations pause for four to ten seconds; intermediate
+  waypoints continue immediately. Only the two reviewed north/south crossings
+  admit street trips. East/west trips across the central vertical street await
+  audited crossing art. Graph search occurs at planning time (64-node/96-edge
+  cap), not per tick. Edited obstructions use the existing bounded pause/return
+  behavior. No schedules, traffic AI or trading mechanics are implied.
+  Park/square views' Explore links focus their actual public space; geometry
+  marks destination anchors and reserved approaches. Preview people remain
+  initial poses; gameplay runs the production movement and collision system.
+
+Final integration validation: all three TypeScript configurations pass, all
+1,142 unit tests and 216 browser tests pass, and the production build succeeds.
+Biome reports only existing warnings. The 81 interior pixel comparisons pass;
+the live deployment's manifest matches the checkout. All 319 candidates present
+before the destination slice retain their exact identities, and all earlier
+human approvals remain intact. Browser checks cover each new batch's feedback,
+explorer/game handoff, saved edits, architecture interior entry/return, and
+destination visitor movement and deletion persistence. No original source packs
+or new untracked art are needed for these additions.
+
+## Performance verification
+
+The final static-shell diagnostic passes 81 exact pixel comparisons across home,
+shop and apartment rooms, at three integer scales, with edited/deleted furniture
+and actors crossing furniture depth. Draw calls remain 96 -> 5 for the measured
+home. `npm run gameplay:bench -- --headed` checks a live v10 office entry,
+indoor movement and return in an isolated bundled Chromium profile. In the
+measured run, both outside and inside had 8.3ms median frame intervals and
+about 10.3ms p95; whole-scene render submission medians were 0.6ms outside and
+0.2ms inside (p95 0.8ms and 0.3ms respectively). No browser errors occurred.
+This fixes demonstrated repeated rendering work; the user's device still needs
+confirmation. Fresh entry asset upload and network conditions are not excluded
+by these steady-state measurements. Door prompts now use recipe kind, so the
+new office/services building is labeled as a shop rather than an apartment.
+
+## Next human checkpoint
+
+All four accepted implementation milestones are staged together: 13 new
+unchecked views in four independent Workshop batches. Existing approvals are
+intact; no human approvals were manufactured. Review parking, then public spaces,
+architecture and destination activity. Saved v7–v10 layouts and candidate asset
+bank signatures are frozen independently. Candidate revisions remain explicitly
+selectable, while new-world default v4 is unchanged pending human review.
+
+After acceptance, the next place milestone is a farmers market using the square's
+reserved center and clear access routes. A connected multiblock park, additional
+frontage orientations, east/west crossing art, richer rerouting/schedules and
+moving traffic remain the roadmap's later work.

@@ -1,3 +1,4 @@
+import type { RouteWaypoint } from "../entities/Entity.js";
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
@@ -16,7 +17,7 @@ export interface ActorPlacement {
   readonly type: string;
   readonly wx: number;
   readonly wy: number;
-  readonly route: readonly { wx: number; wy: number }[];
+  readonly route: readonly RouteWaypoint[];
 }
 export interface WorldGenerator {
   actors?(cx: number, cy: number): ActorPlacement[];
@@ -66,6 +67,9 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
           break;
         case "regional-v5":
           terrain = new DenseDistrictStrategy(world, true);
+          break;
+        case "regional-v10":
+          terrain = new CityPlacesStrategy(world, 10);
           break;
         case "regional-v9":
           terrain = new CityPlacesStrategy(world, 9);

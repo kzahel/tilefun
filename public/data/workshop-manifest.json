@@ -102,6 +102,12 @@
   ],
   "batches": [
     {
+      "id": "pedestrians",
+      "name": "People & destinations",
+      "description": "Playable regional-v10 places, shared with the explorer and game.",
+      "toolId": "districts"
+    },
+    {
       "id": "architecture",
       "name": "Varied city architecture",
       "description": "Playable regional-v9 places, shared with the explorer and game.",
@@ -3150,6 +3156,283 @@
             "prop-city-commercial-v1-bin-blue",
             "prop-city-commercial-v1-planter",
             "prop-street-lamp"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v10-destinations",
+      "batchId": "pedestrians",
+      "name": "People between city places",
+      "prompt": "Review the busier neighborhood. People show initial poses here; Explore / Play here runs twelve people, including eight trips between doors and public seating.",
+      "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-destinations",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v10%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "aab0b45d4f519dba544dc4272190f60ee89ec1cc7266b203fb07eb9c83cc72e6",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-condo-wide-5",
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-destinations",
+        "revision": "7d4cf6020a570c26ef36097a20a578f1e375dbf8652e0b34cef2bb42b40d8299",
+        "renderFingerprint": "aab0b45d4f519dba544dc4272190f60ee89ec1cc7266b203fb07eb9c83cc72e6",
+        "caseId": "district-v10-destinations",
+        "districtRecipe": "city-places-v10",
+        "propTypes": [
+          "prop-city-architecture-v1-condo-wide-5",
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-seesaw",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-bench",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2656,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-condo-wide-5",
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-destinations",
+          "revision": "7d4cf6020a570c26ef36097a20a578f1e375dbf8652e0b34cef2bb42b40d8299",
+          "renderFingerprint": "aab0b45d4f519dba544dc4272190f60ee89ec1cc7266b203fb07eb9c83cc72e6",
+          "caseId": "district-v10-destinations",
+          "districtRecipe": "city-places-v10",
+          "propTypes": [
+            "prop-city-architecture-v1-condo-wide-5",
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-seesaw",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-bench",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v10-park-visitors",
+      "batchId": "pedestrians",
+      "name": "Homes, refuge & park visitors",
+      "prompt": "Play here to watch home-to-park trips across the admitted refuge crossing, with pauses at seating. Geometry shows the reserved seating approaches and routes.",
+      "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-park-visitors",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v10%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=277&y=540&zoom=12&mode=tiles",
+      "fingerprint": "6c75f47ffbd89c529a5b8379bddda885a4bfeb7b1ae7499d3542b226cc44e7fd",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-condo-wide-5"
+        ],
+        "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-park-visitors",
+        "revision": "bac0e3b2768734faa72f94cedfcbf9fcc8bf36e3c6f45c6414eea48b0281d1bf",
+        "renderFingerprint": "6c75f47ffbd89c529a5b8379bddda885a4bfeb7b1ae7499d3542b226cc44e7fd",
+        "caseId": "district-v10-park-visitors",
+        "districtRecipe": "city-places-v10",
+        "propTypes": [
+          "prop-city-architecture-v1-condo-wide-5",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench",
+          "prop-seesaw",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          176,
+          1376,
+          2048
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-condo-wide-5"
+          ],
+          "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-park-visitors",
+          "revision": "bac0e3b2768734faa72f94cedfcbf9fcc8bf36e3c6f45c6414eea48b0281d1bf",
+          "renderFingerprint": "6c75f47ffbd89c529a5b8379bddda885a4bfeb7b1ae7499d3542b226cc44e7fd",
+          "caseId": "district-v10-park-visitors",
+          "districtRecipe": "city-places-v10",
+          "propTypes": [
+            "prop-city-architecture-v1-condo-wide-5",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench",
+            "prop-seesaw",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v10-square-visitors",
+      "batchId": "pedestrians",
+      "name": "Shops, square & seating",
+      "prompt": "Play here to watch shop-to-square trips across the short east crossing, with destination pauses. The square keeps clear circulation and an open future-market reserve.",
+      "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-square-visitors",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v10%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=322&y=540&zoom=12&mode=tiles",
+      "fingerprint": "c1fb8e93683ef5539b086fe5d6785e84fbf4a68f8eccfb78d0b6f93dd07fd9fe",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-architecture-v1-office-3",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-square-visitors",
+        "revision": "8e8e028b28d4f0051d5998514bd8b69fb71c3215e0c33065dfc6e9eb0006e0eb",
+        "renderFingerprint": "c1fb8e93683ef5539b086fe5d6785e84fbf4a68f8eccfb78d0b6f93dd07fd9fe",
+        "caseId": "district-v10-square-visitors",
+        "districtRecipe": "city-places-v10",
+        "propTypes": [
+          "prop-city-architecture-v1-office-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-city-commercial-v1-planter",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-bench",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2656,
+          5536
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-architecture-v1-office-3",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=pedestrians&case=district-v10-square-visitors",
+          "revision": "8e8e028b28d4f0051d5998514bd8b69fb71c3215e0c33065dfc6e9eb0006e0eb",
+          "renderFingerprint": "c1fb8e93683ef5539b086fe5d6785e84fbf4a68f8eccfb78d0b6f93dd07fd9fe",
+          "caseId": "district-v10-square-visitors",
+          "districtRecipe": "city-places-v10",
+          "propTypes": [
+            "prop-city-architecture-v1-office-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-city-commercial-v1-planter",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-bench",
+            "prop-bench"
           ]
         }
       }
@@ -10194,5 +10477,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "4e0a7a45e754786cda36b0698a841a7493415ced17f1b061cbd02028ebb1f715"
+  "inputDigest": "69b9322851025b6791a096efc61449c8007051e76ea89b9aeea564a37e371c2d"
 }

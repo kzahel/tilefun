@@ -726,7 +726,7 @@ function renderDistrict() {
   required($("topology").parentElement?.querySelector("summary")).textContent =
     "Lots, doors & walking routes";
   required($("pieces").parentElement?.querySelector("summary")).textContent =
-    placeMeta?.version === "regional-v9"
+    placeMeta?.version === "regional-v9" || placeMeta?.version === "regional-v10"
       ? "Pinned candidate buildings & source art"
       : "Promoted buildings & source art";
   $("pieces").replaceChildren();
@@ -768,8 +768,8 @@ function renderDistrict() {
   }
   const explore = new URL("world-explorer.html", location.href);
   explore.searchParams.set("generation", JSON.stringify(s.generation));
-  explore.searchParams.set("x", String(s.plan.center.x));
-  explore.searchParams.set("y", String(s.plan.center.y));
+  explore.searchParams.set("x", String(s.arrival.x));
+  explore.searchParams.set("y", String(s.arrival.y));
   explore.searchParams.set("zoom", "12");
   explore.searchParams.set("mode", "tiles");
   $<HTMLAnchorElement>("district-play").href = explore.href;

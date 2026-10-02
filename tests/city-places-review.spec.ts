@@ -1,5 +1,6 @@
 import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
+import { required } from "../src/art/ArtCatalog.js";
 import { CITY_REVIEW_RUNS } from "../src/art/CityReviewRuns.js";
 import { CITY_PLACES_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
 import { CityPlacesSource } from "../src/generation/regional/CityPlacesPlanner.js";
@@ -32,14 +33,14 @@ for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
         "next-building",
         "previous-building",
       ]) {
-        const b = await page.locator(`#${id}`).boundingBox();
+        const b = required(await page.locator(`#${id}`).boundingBox());
         expect(b).toBeTruthy();
-        expect(b!.y + b!.height).toBeLessThanOrEqual(844);
+        expect(b.y + b.height).toBeLessThanOrEqual(844);
       }
       const png = await page
         .locator("#building")
         .evaluate((c) => (c as HTMLCanvasElement).toDataURL());
-      writeFileSync(`/tmp/tilefun-${c.id}.png`, Buffer.from(png.split(",")[1]!, "base64"));
+      writeFileSync(`/tmp/tilefun-${c.id}.png`, Buffer.from(required(png.split(",")[1]), "base64"));
       await expect(page.locator("#district-play")).toHaveAttribute(
         "href",
         new RegExp(meta.version),
@@ -52,7 +53,7 @@ for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
       buildingReview: { districtRecipe: meta.recipe, url: expect.stringContaining(`run=${run}`) },
     });
     await page.goto(
-      `/tilefun/workshop.html#/review/district%3A${CITY_PLACES_REVIEW_CASES.find((c) => c.run === run)!.id}`,
+      `/tilefun/workshop.html#/review/district%3A${required(CITY_PLACES_REVIEW_CASES.find((c) => c.run === run)).id}`,
     );
     await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
     await expect(page.getByRole("button", { name: "Looks right ✓", exact: true })).toBeEnabled();
@@ -141,7 +142,9 @@ for (const kind of ["office", "condo-wide"])
       `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
-    await expect(page.getByRole("button", { name: /^Enter (shop|apartment)/ })).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: kind === "office" ? /^Enter shop/ : /^Enter apartment/ }),
+    ).toBeVisible();
     await page.keyboard.press("e");
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
     await page.getByRole("button", { name: "Return to street" }).click();
@@ -151,3 +154,82 @@ for (const kind of ["office", "condo-wide"])
       JSON.stringify(generation),
     );
   });
+
+test("destination visitors move in gameplay and their deletion survives explorer inspection and reopen", async ({
+  page,
+}) => {
+  const generation = {
+    type: "regional",
+    version: "regional-v10",
+    seed: 2026,
+    preset: "temperate-v1",
+  };
+  await page.goto(
+    `/tilefun/world-explorer.html?generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,
+  );
+  await expect(page.locator("#app")).toHaveAttribute("data-tile-complete", "true");
+  await page.getByRole("link", { name: "Play here" }).click();
+  await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.locator("#game")).toHaveAttribute(
+    "data-generation",
+    JSON.stringify(generation),
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (
+          document.querySelector("#game") as unknown as {
+            __game: import("../src/client/GameClient.js").GameClient;
+          }
+        ).__game;
+        return g.stateView.props.some((p) => p.type.startsWith("prop-city-architecture-v1-"));
+      }),
+    )
+    .toBe(true);
+  const read = () =>
+    page.evaluate(() => {
+      const g = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      return g.stateView.entities
+        .filter((e) => e.type === "person7")
+        .map((e) => ({ id: e.id, ...e.position }));
+    });
+  await expect.poll(async () => (await read()).length).toBe(1);
+  const before = (await read())[0];
+  if (!before) throw Error("Missing destination visitor");
+  await expect
+    .poll(async () => {
+      const a = (await read())[0];
+      return a ? Math.hypot(a.wx - before.wx, a.wy - before.wy) : 0;
+    })
+    .toBeGreaterThan(8);
+  const changed = await page.evaluate((id) => {
+    const g = (
+      document.querySelector("#game") as unknown as {
+        __game: import("../src/client/GameClient.js").GameClient;
+      }
+    ).__game;
+    g.transport.send({ type: "edit-delete-entity", entityId: id });
+    g.transport.send({ type: "flush" });
+    return g.mainMenu.currentWorldId;
+  }, before.id);
+  await page.goto(
+    `/tilefun/world-explorer.html?worldId=${changed}&generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,
+  );
+  await expect(page.locator("#app")).toHaveAttribute("data-tile-complete", "true");
+  await expect
+    .poll(async () =>
+      JSON.parse((await page.locator("#app").getAttribute("data-actor-ids")) ?? "[]"),
+    )
+    .not.toContain("settlement:0:0:city-places-v10:visitor:0");
+  await page.getByRole("link", { name: "Play here" }).click();
+  await expect(page.locator("#game")).toHaveAttribute(
+    "data-generation",
+    JSON.stringify(generation),
+  );
+  await expect.poll(async () => (await read()).length).toBe(0);
+  await page.screenshot({ path: "/tmp/tilefun-city-destinations-game.png" });
+});

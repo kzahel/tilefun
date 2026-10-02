@@ -27,7 +27,8 @@ export type GenerationDescriptor =
         | "regional-v6"
         | "regional-v7"
         | "regional-v8"
-        | "regional-v9";
+        | "regional-v9"
+        | "regional-v10";
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
@@ -35,6 +36,7 @@ export type GenerationDescriptor =
 export const REGIONAL_REVISIONS = [
   { version: "regional-v4", label: "Dense districts (v4)" },
   { version: "regional-v5", label: "Connected entrances (v5, review)" },
+  { version: "regional-v10", label: "City destinations (v10, review)" },
   { version: "regional-v9", label: "Varied architecture (v9, review)" },
   { version: "regional-v8", label: "Parks & squares (v8, review)" },
   { version: "regional-v7", label: "Parking lots (v7, review)" },

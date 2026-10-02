@@ -44,23 +44,25 @@ export function* overviewSteps(
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
     const source =
-      descriptor.version === "regional-v9"
-        ? new CityPlacesSource(regionalWorld(descriptor.seed), 9)
-        : descriptor.version === "regional-v8"
-          ? new CityPlacesSource(regionalWorld(descriptor.seed), 8)
-          : descriptor.version === "regional-v7"
-            ? new CityPlacesSource(regionalWorld(descriptor.seed), 7)
-            : descriptor.version === "regional-v6"
-              ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
-              : descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
-                ? new DenseDistrictSource(
-                    regionalWorld(descriptor.seed),
-                    descriptor.version === "regional-v5",
-                  )
-                : new DistrictSource(
-                    regionalWorld(descriptor.seed),
-                    descriptor.version === "regional-v3",
-                  );
+      descriptor.version === "regional-v10"
+        ? new CityPlacesSource(regionalWorld(descriptor.seed), 10)
+        : descriptor.version === "regional-v9"
+          ? new CityPlacesSource(regionalWorld(descriptor.seed), 9)
+          : descriptor.version === "regional-v8"
+            ? new CityPlacesSource(regionalWorld(descriptor.seed), 8)
+            : descriptor.version === "regional-v7"
+              ? new CityPlacesSource(regionalWorld(descriptor.seed), 7)
+              : descriptor.version === "regional-v6"
+                ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
+                : descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
+                  ? new DenseDistrictSource(
+                      regionalWorld(descriptor.seed),
+                      descriptor.version === "regional-v5",
+                    )
+                  : new DistrictSource(
+                      regionalWorld(descriptor.seed),
+                      descriptor.version === "regional-v3",
+                    );
     const districts: DistrictPlan[] = [];
     if (
       descriptor.version !== "regional-v1" &&

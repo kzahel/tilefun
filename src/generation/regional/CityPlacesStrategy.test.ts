@@ -16,8 +16,9 @@ const descriptor = {
   seed: 2026,
   preset: "temperate-v1",
 } as const;
-it("realizes parking access, native bays and deterministic unique features across chunks", () => {
-  for (const revision of ["regional-v7", "regional-v8", "regional-v9"] as const)
+it.each(["regional-v7", "regional-v8", "regional-v9", "regional-v10"] as const)(
+  "realizes clear paths, native features and deterministic chunks (%s)",
+  (revision) => {
     for (const seed of [2026, 42]) {
       const g = createGenerator({ ...descriptor, seed, version: revision });
       if (!(g.terrain instanceof CityPlacesStrategy)) throw Error("Wrong dispatch");
@@ -92,7 +93,8 @@ it("realizes parking access, native bays and deterministic unique features acros
         }
       }
     }
-});
+  },
+);
 it("freezes the v7 owner-local plan independently of the approved v6", () => {
   const g = createGenerator(descriptor);
   if (!(g.terrain instanceof CityPlacesStrategy)) throw Error();
@@ -126,4 +128,14 @@ it("freezes v9 architecture and the native candidate recipe bank", () => {
       .update(readFileSync("src/generation/regional/city-architecture-assets-v1.json"))
       .digest("hex"),
   ).toBe("3d92d0ed05edf6aa5c82b91ed2410b4aa3efd18c2221e952866bba33f9bb6df0");
+});
+
+it("freezes the v10 destination plan and route facts", () => {
+  const g = createGenerator({ ...descriptor, version: "regional-v10" });
+  if (!(g.terrain instanceof CityPlacesStrategy)) throw Error();
+  expect(
+    createHash("sha256")
+      .update(JSON.stringify(g.terrain.districts.owner(0, 0)))
+      .digest("hex"),
+  ).toBe("620e78f5e256b4facd11de5e36bea33a6866e91be5b5ddd465328be7d0cc3746");
 });

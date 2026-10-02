@@ -3,6 +3,7 @@ import { commercialSurfaceAt } from "../../road/CommercialCitySurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import { edgeHash } from "../RoadGenerator.js";
 import { architectureDistrict } from "./CityArchitecturePlanner.js";
+import { type CityWalkGraph, pedestrianDistrict } from "./CityWalkGraph.js";
 import { COMMERCIAL_CITY_ASSETS } from "./CommercialCityAssets.js";
 import {
   type CommercialDistrictPlan,
@@ -19,7 +20,7 @@ import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { publicSpace } from "./PublicSpaceRecipes.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
-export type CityPlacesRevision = 7 | 8 | 9;
+export type CityPlacesRevision = 7 | 8 | 9 | 10;
 export interface CityPlace {
   id: string;
   kind: "parking-lot" | "pocket-park" | "neighborhood-park" | "square";
@@ -33,7 +34,8 @@ export interface CityPlace {
   entrances: { x: number; y: number; mode: "walking" | "driving" }[];
 }
 export interface CityPlacesPlan extends DenseDistrictPlan {
-  recipe: "city-places-v7" | "city-places-v8" | "city-places-v9";
+  recipe: "city-places-v7" | "city-places-v8" | "city-places-v9" | "city-places-v10";
+  walkGraph?: CityWalkGraph;
   commercial: CommercialDistrictPlan["commercial"];
   places: CityPlace[];
 }
@@ -115,6 +117,7 @@ export function cityPlacesDistrict(
   seed: number,
   revision: CityPlacesRevision,
 ): CityPlacesPlan {
+  if (revision === 10) return pedestrianDistrict(cityPlacesDistrict(settlement, seed, 9), seed);
   if (revision === 9)
     return architectureDistrict(
       cityPlacesDistrict(settlement, seed, 8),

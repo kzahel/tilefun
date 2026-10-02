@@ -24,6 +24,10 @@ test("new worlds default to procedural regional v4 and clearly label older choic
   await expect(revision.locator("option")).toHaveText([
     "Dense districts (v4)",
     "Connected entrances (v5, review)",
+    "City destinations (v10, review)",
+    "Varied architecture (v9, review)",
+    "Parks & squares (v8, review)",
+    "Parking lots (v7, review)",
     "Commercial streets (v6, review)",
     "Settled world (v3, legacy)",
     "Districts (v2, old)",
@@ -45,6 +49,7 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
+  test.setTimeout(60_000);
   for (const choice of [
     "classic",
     "island",
@@ -52,8 +57,18 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     "regional",
     "regional-v5",
     "regional-v6",
+    "regional-v7",
+    "regional-v8",
+    "regional-v9",
+    "regional-v10",
   ] as const) {
-    const revision = choice === "regional-v5" || choice === "regional-v6";
+    const revision =
+      choice === "regional-v5" ||
+      choice === "regional-v6" ||
+      choice === "regional-v7" ||
+      choice === "regional-v8" ||
+      choice === "regional-v9" ||
+      choice === "regional-v10";
     const worldType = revision ? "regional" : choice;
     const generation = revision
       ? resolveDescriptor({ ...createDescriptor("regional", 2026), version: choice })

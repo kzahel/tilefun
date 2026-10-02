@@ -101,7 +101,42 @@ export const ARCHITECTURE_DEMO_GENERATION: GenerationDescriptor = {
   ...DENSE_DEMO_GENERATION,
   version: "regional-v9",
 };
+export const PEDESTRIAN_DEMO_GENERATION: GenerationDescriptor = {
+  ...DENSE_DEMO_GENERATION,
+  version: "regional-v10",
+};
 export const CITY_PLACES_REVIEW_CASES = [
+  {
+    id: "district-v10-destinations",
+    name: "People between city places",
+    prompt:
+      "Review the busier neighborhood. People show initial poses here; Explore / Play here runs twelve people, including eight trips between doors and public seating.",
+    window: "whole",
+    generation: PEDESTRIAN_DEMO_GENERATION,
+    run: "pedestrians",
+  },
+  {
+    id: "district-v10-park-visitors",
+    arrival: [-23, 21],
+    name: "Homes, refuge & park visitors",
+    prompt:
+      "Play here to watch home-to-park trips across the admitted refuge crossing, with pauses at seating. Geometry shows the reserved seating approaches and routes.",
+    window: "place",
+    crop: [-42, -15, -3, 43],
+    generation: PEDESTRIAN_DEMO_GENERATION,
+    run: "pedestrians",
+  },
+  {
+    id: "district-v10-square-visitors",
+    arrival: [22, 21],
+    name: "Shops, square & seating",
+    prompt:
+      "Play here to watch shop-to-square trips across the short east crossing, with destination pauses. The square keeps clear circulation and an open future-market reserve.",
+    window: "place",
+    crop: [3, -16, 43, 43],
+    generation: PEDESTRIAN_DEMO_GENERATION,
+    run: "pedestrians",
+  },
   {
     id: "district-v9-architecture",
     name: "Residential & commercial neighborhood",
@@ -247,6 +282,7 @@ export function denseReviewScene(c: DenseReviewCase) {
     generation,
     plan,
     bounds,
+    arrival: "arrival" in c ? { x: x + c.arrival[0], y: y + c.arrival[1] } : { x, y },
     props: [...props.values()],
     actors: [...actors.values()],
   };
@@ -262,7 +298,9 @@ export function denseReviewComposition(s: DenseReviewScene) {
     ...(s.generation.version === "regional-v6" || s.plan.recipe.startsWith("city-places-")
       ? { commercialAssets: COMMERCIAL_CITY_ASSETS }
       : {}),
-    ...(s.plan.recipe === "city-places-v9" ? { architectureAssets: CITY_ARCHITECTURE_ASSETS } : {}),
+    ...(s.plan.recipe === "city-places-v9" || s.plan.recipe === "city-places-v10"
+      ? { architectureAssets: CITY_ARCHITECTURE_ASSETS }
+      : {}),
     props: s.props,
     actors: s.actors,
   };
@@ -401,6 +439,13 @@ export function drawDenseDistrictShowcase(
         ctx.strokeStyle = "#efb770";
         for (const lane of place.driving) rect(lane);
       }
+    if ("walkGraph" in s.plan)
+      for (const node of (s.plan as CityPlacesPlan).walkGraph?.nodes ?? []) {
+        if (!node.destination) continue;
+        const at = camera.worldToScreen(node.wx, node.wy);
+        ctx.fillStyle = "#68dfff";
+        ctx.fillRect(at.sx - 2, at.sy - 2, 4, 4);
+      }
     ctx.strokeStyle = "#77f6ba";
     for (const a of s.actors) {
       ctx.beginPath();
@@ -418,6 +463,8 @@ export function drawDenseDistrictShowcase(
     width,
     height,
     parts: props.reduce((n, p) => n + (p.sprite.parts?.length ?? 1), 0),
-    buildings: props.filter((p) => p.type.startsWith("prop-city-dense")).length,
+    buildings: props.filter(
+      (p) => p.type.startsWith("prop-city-dense") || p.type.startsWith("prop-city-architecture"),
+    ).length,
   };
 }

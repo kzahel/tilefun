@@ -4,7 +4,7 @@ Status: the phase-1 neighborhood, nine road foundation scenes, four road geometr
 scenes and six street starter scenes are approved, 2026-10-02. The phase-2
 commercial streets and curbside parking checkpoint is implemented in
 `regional-v6`, with all four views human-approved and an explorer/game visit.
-The small parking-lot checkpoint is staged in regional-v7; see [009](009-city-places-and-indoor-performance.md) for current deliveries. Phases 3–7 remain planned. The user accepted the building showcase in chat after
+The small parking-lot checkpoint is staged in regional-v7; see [009](009-city-places-and-indoor-performance.md) for current deliveries. Parks/squares, varied architecture and basic destination trips are now staged in v8–v10; human review, farmers markets, connected large parks and broader phase-7 work remain. The user accepted the building showcase in chat after
 hotel panel removal (`b81d3b4`); the original review history remains intact.
 
 This is the next implementation roadmap after
