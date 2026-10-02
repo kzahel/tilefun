@@ -1,6 +1,14 @@
 {
   "characters": [
     {
+      "id": "bear",
+      "name": "Brown Bear",
+      "description": "A friendly stocky brown bear with small round ears, a tan muzzle, big paws and a tiny tail.",
+      "metadata": "bear.json",
+      "contactSheet": "bear-contact-sheet.png",
+      "preview": "bear-preview.gif"
+    },
+    {
       "id": "cat",
       "name": "Tuxedo Cat",
       "description": "An upright charcoal cat with a white bib, mittens, green eyes and a hooked tail.",

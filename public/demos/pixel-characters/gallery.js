@@ -228,6 +228,7 @@ try {
     throw new Error("No completed characters are available");
   registry = data.characters;
   for (const record of registry) characterSelect.add(new Option(record.name, record.id));
+  if (registry.some((record) => record.id === "cat")) characterSelect.value = "cat";
   characterSelect.disabled = false;
   await selectCharacter();
 } catch (reason) {

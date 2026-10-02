@@ -11,7 +11,21 @@ test("gallery publishes completed records and displays both independently author
   const garden = page.locator("#garden");
   await expect(garden).toHaveAttribute("data-ready", "true");
   const registry = await (await page.request.get(`${url}characters.json`)).json();
+  expect(registry.characters.map((record: { id: string }) => record.id).sort()).toEqual([
+    "bear",
+    "cat",
+    "dog",
+    "person",
+    "squirrel",
+  ]);
   await expect(page.locator("#character option")).toHaveCount(registry.characters.length);
+  await expect(page.locator("#character")).toHaveValue("cat");
+  await expect(garden).toHaveAttribute("data-character", "cat");
+  await expect(page.getByRole("link", { name: "Watch all five characters" })).toHaveAttribute(
+    "href",
+    "roster-preview.gif",
+  );
+  expect((await page.request.get(`${url}roster-preview.gif`)).ok()).toBe(true);
   await page.locator("#character").selectOption("cat");
   await expect(garden).toHaveAttribute("data-character", "cat");
   await page.locator("#animate").uncheck();
@@ -47,6 +61,7 @@ for (const [character, description] of [
   ["dog", "short wagging tail"],
   ["person", "canvas backpack"],
   ["squirrel", "large bushy curved tail"],
+  ["bear", "tiny tail"],
 ] as const) {
   test(`character selector loads the completed ${character} and renders its own sheets in every direction`, async ({
     page,
@@ -124,7 +139,7 @@ for (const [character, description] of [
   });
 }
 
-for (const character of ["cat", "dog", "person", "squirrel"]) {
+for (const character of ["cat", "dog", "person", "squirrel", "bear"]) {
   test(`${character} keyboard movement covers every direction, stops on release and resets`, async ({
     page,
   }) => {
@@ -146,7 +161,7 @@ for (const character of ["cat", "dog", "person", "squirrel"]) {
       await expect
         .poll(async () => (Number(await garden.getAttribute(`data-${axis}`)) - before) * sign)
         .toBeGreaterThan(2);
-      if ((character === "person" || character === "squirrel") && key === "ArrowRight") {
+      if (["person", "squirrel", "bear"].includes(character) && key === "ArrowRight") {
         // Real movement must advance through every exported walk pose before looping.
         for (const frame of [1, 2, 3, 0])
           await expect(garden).toHaveAttribute("data-frame", String(frame));
@@ -164,23 +179,27 @@ for (const character of ["cat", "dog", "person", "squirrel"]) {
   });
 }
 
-test("squirrel native16 walk plays all four poses at the default four fps", async ({ page }) => {
-  await page.goto(url);
-  const garden = page.locator("#garden");
-  await expect(garden).toHaveAttribute("data-ready", "true");
-  await page.locator("#character").selectOption("squirrel");
-  await expect(garden).toHaveAttribute("data-character", "squirrel");
-  await page.locator("#sprite-size").selectOption("16");
-  await expect(garden).toHaveAttribute("data-size", "16");
-  await garden.focus();
-  await page.keyboard.down("ArrowLeft");
-  await expect(garden).toHaveAttribute("data-facing", "left");
-  for (const frame of [1, 2, 3, 0])
-    await expect(garden).toHaveAttribute("data-frame", String(frame));
-  await page.keyboard.up("ArrowLeft");
-  await expect(page.locator("#status")).toHaveText("Standing left");
-  await expect(garden).toHaveAttribute("data-frame", "0");
-});
+for (const character of ["squirrel", "bear"]) {
+  test(`${character} native16 walk plays all four poses at the default four fps`, async ({
+    page,
+  }) => {
+    await page.goto(url);
+    const garden = page.locator("#garden");
+    await expect(garden).toHaveAttribute("data-ready", "true");
+    await page.locator("#character").selectOption(character);
+    await expect(garden).toHaveAttribute("data-character", character);
+    await page.locator("#sprite-size").selectOption("16");
+    await expect(garden).toHaveAttribute("data-size", "16");
+    await garden.focus();
+    await page.keyboard.down("ArrowLeft");
+    await expect(garden).toHaveAttribute("data-facing", "left");
+    for (const frame of [1, 2, 3, 0])
+      await expect(garden).toHaveAttribute("data-frame", String(frame));
+    await page.keyboard.up("ArrowLeft");
+    await expect(page.locator("#status")).toHaveText("Standing left");
+    await expect(garden).toHaveAttribute("data-frame", "0");
+  });
+}
 
 test("touch movement releases cleanly and the small mobile layout fits", async ({
   browser,

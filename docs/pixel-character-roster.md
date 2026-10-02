@@ -3,8 +3,14 @@
 The [Pixel Character Gallery](https://tilefun.graehlarts.com/tilefun/demos/pixel-characters/)
 is a standalone sprite study, discoverable from the root tool directory. It
 shares no runtime art with the game and leaves the Tiger Walk Demo untouched.
-Only finished characters appear in its generated registry. Bear is a planned
-addition for a subsequent session.
+The final five-character roster is complete: cat, dog, person, squirrel and bear.
+Only completed exports appear in its generated registry. Tuxedo Cat remains the
+explicit gallery default, independent of source filename sorting.
+
+These five additions were made in sequential Yep Anywhere Codex gpt-6.1-sol
+sessions with high effort and bypassPermissions, each committed before the next
+started. This note records workflow provenance; raw session state and logs are
+not checked in.
 
 ## Workflow and reproducible commands
 
@@ -20,6 +26,8 @@ authored rather than downsampled.
 uv run --with pillow python scripts/blender/finish_characters.py
 # Export only one character; leave other character sheets/previews untouched:
 uv run --with pillow python scripts/blender/finish_characters.py --character cat
+# Export the labeled final roster GIF/overview from completed sheets only:
+uv run --with pillow python scripts/blender/preview_character_roster.py
 # Run the standalone gallery locally:
 npm run dev
 ```
@@ -198,24 +206,65 @@ There are no third-party character models or textures.
   symlink EPERM baseline in `src/server/staticFiles.test.ts` and
   `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
 
-## Add the next character
+## Bear
 
-For the bear, add `art-source/pixel-characters/bear.json`, with unique `id`, `name`,
-`description`, `provenance`, `poseGuides`, `palette`, `tail`, `limbs`, `32` and
-`16` records. Use the cat as a schema example, but author species-specific
-head/torso/limb patterns and motion overrides. Pattern keys are `front`, `back`,
-`profile`, `body`, `backBody`, `sideBody`, `arm`, `foot`; `.` means transparent.
-Rows may contain readability spaces. `poseOverrides` has four records per
-direction, merged over the guide samples; omitted overrides retain guide values.
-Tail and limb color fields name palette symbols. All paths are repo-relative.
-Set `tail` to `null` for characters without a visible tail, such as the person.
-For broad appendages, the squirrel demonstrates `tail.patterns`: four pattern
-names per direction, referring to drawings in each size record, placed at each
-pose's `tailCenter` (32px guide coordinates). Right-facing drawings mirror.
+- Design: friendly stocky brown bear, small round ears, broad rounded head,
+  tan muzzle, thick compact torso, short arms, big paws and a tiny tail. Separate
+  front/back/profile masters at both sizes use eight shared colors and broad
+  flat shadows. Native16 has rounded ear clusters and a broad muzzle/body,
+  distinct from the dog’s hanging ears and the cat’s triangular ears.
+- Reused rig/guide: `art-source/blender/tiger.blend`, through committed
+  `art-source/pixel-tiger/pose-guides.json` frames 1, 3, 5 and 7. Authored pixel
+  patterns composed using Pillow; no new Blender modeling or Aseprite painting.
+  Wide paw contacts, low foot lifts, short opposing arm swings and a level 32px
+  head give a heavier planted cadence. Native16 keeps a one-pixel passing bob.
+  A small authored profile stub and baked back-body rump tail replace the long
+  rig tail. Existing generator anatomy options suffice; previous art is intact.
+- Editable source: `art-source/pixel-characters/bear.json`. Regenerate exactly:
+  `uv run --with pillow python scripts/blender/finish_characters.py --character bear`.
+- Outputs: `public/demos/pixel-characters/bear-32.png`, `bear-16.png`, `bear.json`,
+  `bear-contact-sheet.png`, `bear-preview.gif`, and the final `characters.json`.
+  Browser captures: `bear-gallery-desktop.png`, `bear-gallery-phone.png` and
+  `bear-gallery-native16-phone.png` in the same directory.
+- Review: all sixteen poses at both sizes inspected enlarged and at actual size,
+  every GIF pose and the complete five-character overview reviewed. Export checks
+  cover whole-head stability, connected limbs, palette, binary alpha, padding,
+  unique poses and one-second loops. Gallery E2E selects the bear, checks exact
+  directional sheet pixels at both sizes, walks/releases/resets in all directions,
+  advances through all four poses at both sizes and preserves the cat default.
+- Validation: `npx tsc --noEmit`, `npx biome check --write .` and
+  `npm run build` passed with existing warnings; unrelated art-catalog formatting
+  was restored. `npx playwright test --workers=2`: **184 passed, 1 skipped**.
+  Refreshed final build and focused gallery suite: **14 passed**.
+  `npm test`: **1080 passed, 1 failed, 10 skipped**, matching the known Windows
+  symlink EPERM baseline in `src/server/staticFiles.test.ts` and
+  `src/persistence/FsSecurity.test.ts`; no unrelated fixes. Bear sprite/review
+  exports regenerate byte-identically; all four encoded roster GIF frames
+  preserve the exact composed sprite and label pixels with a shared palette.
 
-Run `uv run --with pillow python scripts/blender/finish_characters.py --character bear`.
-The generator scans all source records and adds completed exports to
-`characters.json`. No gallery edit is needed. Inspect all poses/motion at both
-sizes, append a Bear entry here, run repo checks and commit only the bear work.
-Later additions use the same route. Keep the tiger and existing characters'
-exports unchanged unless their task specifically calls for revising them.
+## Final five-character review artifacts
+
+All paths below are relative to `public/demos/pixel-characters/`.
+
+| Character | Animated preview | All poses at both sizes |
+| --- | --- | --- |
+| Tuxedo Cat | `cat-preview.gif` | `cat-contact-sheet.png` |
+| Floppy Dog | `dog-preview.gif` | `dog-contact-sheet.png` |
+| Trail Explorer | `person-preview.gif` | `person-contact-sheet.png` |
+| Russet Squirrel | `squirrel-preview.gif` | `squirrel-contact-sheet.png` |
+| Brown Bear | `bear-preview.gif` | `bear-contact-sheet.png` |
+
+`roster-preview.gif` is the final labeled combined review: columns **cat, dog,
+person, squirrel, bear**; rows **down, up, left, right**. Each cell shows enlarged
+32px and independently authored native16, with actual-size samples underneath.
+Four frames at 250ms each give a looping one-second walk. `roster-overview.png`
+is its first-pose still. Both are linked from the gallery. Regenerate exactly:
+
+```sh
+uv run --with pillow python scripts/blender/preview_character_roster.py
+```
+
+The overview builder reads the completed registry and committed sheets, without
+rewriting previous characters. Regenerating bear alone also preserves their
+sources/exports. Future additions should author separate species masters, inspect
+all poses at both scales, and publish only complete records.
