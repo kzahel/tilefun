@@ -3,8 +3,8 @@
 The [Pixel Character Gallery](https://tilefun.graehlarts.com/tilefun/demos/pixel-characters/)
 is a standalone sprite study, discoverable from the root tool directory. It
 shares no runtime art with the game and leaves the Tiger Walk Demo untouched.
-Only finished characters appear in its generated registry. Person,
-squirrel and bear are planned additions for subsequent sessions.
+Only finished characters appear in its generated registry. Squirrel and bear
+are planned additions for subsequent sessions.
 
 ## Workflow and reproducible commands
 
@@ -130,9 +130,42 @@ There are no third-party character models or textures.
   existing Windows symlink EPERM baseline in `src/server/staticFiles.test.ts`
   and `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
 
+## Person
+
+- Design: original friendly human trail explorer, short swept brown hair,
+  warm skin, teal zip jacket, canvas backpack, dark brown trousers and boots.
+  Separate front/back/profile head and clothing masters at both sizes; native16
+  retains two front eyes, a human profile, jacket straps and the backpack.
+  Ten shared colors and broad flat shadows; no animal features or tail.
+- Reused guide: `art-source/pixel-tiger/pose-guides.json`, exported from
+  `art-source/blender/tiger.blend` frames 1, 3, 5 and 7. This is authored pixel
+  composition with Pillow, with no new Blender model or Aseprite painting.
+  Narrow human front/back contacts, wider profile strides and opposite arm
+  swings adapt the rig. Optional `armFill` and `profileForegroundArm` keep teal
+  sleeves distinct from trousers and the near arm visible over the backpack.
+  Existing cat/dog pixel exports remain unchanged under these optional fields.
+- Editable source: `art-source/pixel-characters/person.json`. Regenerate exactly:
+  `uv run --with pillow python scripts/blender/finish_characters.py --character person`.
+- Outputs: `public/demos/pixel-characters/person-32.png`, `person-16.png`,
+  `person.json`, `person-contact-sheet.png`, `person-preview.gif`, and the
+  completed `characters.json` registry. Browser review captures in that same
+  directory: `person-gallery-desktop.png`, `person-gallery-phone.png` and
+  `person-gallery-native16-phone.png`.
+- Review: all directions and poses inspected enlarged and at actual size.
+  Export checks cover whole-head stability, connected limbs, binary alpha,
+  palette, padding, four distinct poses and the one-second loop. Gallery E2E
+  coverage selects the person, checks exact directional pixels at both sizes,
+  walks in all directions, advances through all four poses, releases and resets.
+- Validation: `npx tsc --noEmit`, `npx biome check --write .` and
+  `npm run build` passed (existing warnings); unrelated art-catalog formatting
+  was restored. `npx playwright test --workers=2`: **178 passed, 1 skipped**.
+  `npm test`: **1080 passed, 1 failed, 10 skipped**, matching the known Windows
+  symlink EPERM baseline in `src/server/staticFiles.test.ts` and
+  `src/persistence/FsSecurity.test.ts`; no unrelated fixes.
+
 ## Add the next character
 
-For the person, add `art-source/pixel-characters/person.json`, with unique `id`, `name`,
+For the squirrel, add `art-source/pixel-characters/squirrel.json`, with unique `id`, `name`,
 `description`, `provenance`, `poseGuides`, `palette`, `tail`, `limbs`, `32` and
 `16` records. Use the cat as a schema example, but author species-specific
 head/torso/limb patterns and motion overrides. Pattern keys are `front`, `back`,
@@ -142,9 +175,9 @@ direction, merged over the guide samples; omitted overrides retain guide values.
 Tail and limb color fields name palette symbols. All paths are repo-relative.
 Set `tail` to `null` for characters without a visible tail, such as the person.
 
-Run `uv run --with pillow python scripts/blender/finish_characters.py --character person`.
+Run `uv run --with pillow python scripts/blender/finish_characters.py --character squirrel`.
 The generator scans all source records and adds completed exports to
 `characters.json`. No gallery edit is needed. Inspect all poses/motion at both
-sizes, append a Person entry here, run repo checks and commit only the person work.
+sizes, append a Squirrel entry here, run repo checks and commit only the squirrel work.
 Later additions use the same route. Keep the tiger and existing characters'
 exports unchanged unless their task specifically calls for revising them.

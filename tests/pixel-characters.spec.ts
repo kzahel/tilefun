@@ -43,70 +43,87 @@ test("gallery publishes completed records and displays both independently author
   await page.screenshot({ path: "test-results/pixel-characters-desktop.png", fullPage: true });
 });
 
-test("character selector loads the completed dog and renders its own sheets in every direction", async ({
-  page,
-}) => {
-  await page.goto(url);
-  const garden = page.locator("#garden");
-  await expect(garden).toHaveAttribute("data-ready", "true");
-  await page.locator("#animate").uncheck();
-  const front = page.locator('canvas[data-row="0"]');
-  const catPixels = await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
-  await page.locator("#character").selectOption("dog");
-  await expect(garden).toHaveAttribute("data-character", "dog");
-  await expect(page.locator("#description")).toContainText("short wagging tail");
-  expect(await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL())).not.toBe(
-    catPixels,
-  );
-  await expect(page.locator("#contact-link")).toHaveAttribute("href", "dog-contact-sheet.png");
-  await expect(page.locator("#preview-link")).toHaveAttribute("href", "dog-preview.gif");
-  await page.screenshot({ path: "test-results/dog-gallery-desktop.png", fullPage: true });
-  for (const size of [16, 32]) {
-    await page.locator("#sprite-size").selectOption(String(size));
-    await expect(garden).toHaveAttribute("data-size", String(size));
-    await expect(page.locator("#sheet-link")).toHaveAttribute("href", `dog-${size}.png`);
-    // Every directional card must use the selected dog's real source row.
-    await expect
-      .poll(() =>
-        page.locator("canvas[data-row]").evaluateAll(async (canvases, size) => {
-          const image = new Image();
-          image.src = `dog-${size}.png`;
-          await image.decode();
-          return canvases.every((element) => {
-            const canvas = element as HTMLCanvasElement;
-            const expected = document.createElement("canvas");
-            expected.width = expected.height = size;
-            expected
-              .getContext("2d")
-              ?.drawImage(
-                image,
-                0,
-                Number(canvas.dataset.row) * size,
-                size,
-                size,
-                0,
-                0,
-                size,
-                size,
-              );
-            return canvas.toDataURL() === expected.toDataURL();
-          });
-        }, size),
-      )
-      .toBe(true);
-  }
-  await page.setViewportSize({ width: 360, height: 800 });
-  await page.screenshot({ path: "test-results/dog-gallery-phone.png", fullPage: true });
-  await page.locator("#sprite-size").selectOption("16");
-  await page.locator("#native-scale").check();
-  await expect(front).toHaveCSS("width", "16px");
-  await page.screenshot({ path: "test-results/dog-gallery-native16-phone.png", fullPage: true });
-  await page.locator("#character").selectOption("cat");
-  await expect(garden).toHaveAttribute("data-character", "cat");
-  await expect(page.locator("#error")).toBeHidden();
-});
+for (const [character, description] of [
+  ["dog", "short wagging tail"],
+  ["person", "canvas backpack"],
+] as const) {
+  test(`character selector loads the completed ${character} and renders its own sheets in every direction`, async ({
+    page,
+  }) => {
+    await page.goto(url);
+    const garden = page.locator("#garden");
+    await expect(garden).toHaveAttribute("data-ready", "true");
+    await page.locator("#animate").uncheck();
+    const front = page.locator('canvas[data-row="0"]');
+    const catPixels = await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
+    await page.locator("#character").selectOption(character);
+    await expect(garden).toHaveAttribute("data-character", character);
+    await expect(page.locator("#description")).toContainText(description);
+    expect(await front.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL())).not.toBe(
+      catPixels,
+    );
+    await expect(page.locator("#contact-link")).toHaveAttribute(
+      "href",
+      `${character}-contact-sheet.png`,
+    );
+    await expect(page.locator("#preview-link")).toHaveAttribute("href", `${character}-preview.gif`);
+    await page.screenshot({
+      path: `test-results/${character}-gallery-desktop.png`,
+      fullPage: true,
+    });
+    for (const size of [16, 32]) {
+      await page.locator("#sprite-size").selectOption(String(size));
+      await expect(garden).toHaveAttribute("data-size", String(size));
+      await expect(page.locator("#sheet-link")).toHaveAttribute("href", `${character}-${size}.png`);
+      // Every directional card must use the selected character's real source row.
+      await expect
+        .poll(() =>
+          page.locator("canvas[data-row]").evaluateAll(
+            async (canvases, { size, character }) => {
+              const image = new Image();
+              image.src = `${character}-${size}.png`;
+              await image.decode();
+              return canvases.every((element) => {
+                const canvas = element as HTMLCanvasElement;
+                const expected = document.createElement("canvas");
+                expected.width = expected.height = size;
+                expected
+                  .getContext("2d")
+                  ?.drawImage(
+                    image,
+                    0,
+                    Number(canvas.dataset.row) * size,
+                    size,
+                    size,
+                    0,
+                    0,
+                    size,
+                    size,
+                  );
+                return canvas.toDataURL() === expected.toDataURL();
+              });
+            },
+            { size, character },
+          ),
+        )
+        .toBe(true);
+    }
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.screenshot({ path: `test-results/${character}-gallery-phone.png`, fullPage: true });
+    await page.locator("#sprite-size").selectOption("16");
+    await page.locator("#native-scale").check();
+    await expect(front).toHaveCSS("width", "16px");
+    await page.screenshot({
+      path: `test-results/${character}-gallery-native16-phone.png`,
+      fullPage: true,
+    });
+    await page.locator("#character").selectOption("cat");
+    await expect(garden).toHaveAttribute("data-character", "cat");
+    await expect(page.locator("#error")).toBeHidden();
+  });
+}
 
-for (const character of ["cat", "dog"]) {
+for (const character of ["cat", "dog", "person"]) {
   test(`${character} keyboard movement covers every direction, stops on release and resets`, async ({
     page,
   }) => {
@@ -128,6 +145,11 @@ for (const character of ["cat", "dog"]) {
       await expect
         .poll(async () => (Number(await garden.getAttribute(`data-${axis}`)) - before) * sign)
         .toBeGreaterThan(2);
+      if (character === "person" && key === "ArrowRight") {
+        // Real movement must advance through every exported walk pose before looping.
+        for (const frame of [1, 2, 3, 0])
+          await expect(garden).toHaveAttribute("data-frame", String(frame));
+      }
       await page.keyboard.up(key);
       await expect(page.locator("#status")).toHaveText(`Standing ${facing}`);
       const stopped = await garden.getAttribute(`data-${axis}`);

@@ -67,15 +67,24 @@ def compose(art, palette, size, direction, pose):
         if size == 32:
             draw.line([(bx, by + 1), (fx, fy - 1)], fill=palette[limb["fill"]], width=1)
         paste("foot", foot, (0, -1 if size == 32 else 0))
-    for hand in sorted(pose["hands"], key=lambda point: point[1]):
+    def draw_arm(hand):
         hx, hy = position(hand)
         shoulder = (bx + (2 if hx > bx else -2) if size == 32 else bx, by - 1)
         draw.line([shoulder, (hx, hy - 1)], fill=palette[limb["outline"]], width=3 if size == 32 else 1)
         if size == 32:
-            draw.line([shoulder, (hx, hy - 1)], fill=palette[limb["fill"]], width=1)
+            # Clothed characters can use jacket sleeves over different trouser legs.
+            draw.line([shoulder, (hx, hy - 1)], fill=palette[limb.get("armFill", limb["fill"])], width=1)
         paste("arm", hand, (0, -2 if size == 32 else -1))
+
+    # A human's near sleeve must swing in front of the jacket/backpack in profile.
+    near_arm = limb.get("profileForegroundArm") if direction in ("left", "right") else None
+    for index, hand in sorted(enumerate(pose["hands"]), key=lambda item: item[1][1]):
+        if index != near_arm:
+            draw_arm(hand)
     body = "body" if direction == "down" else "backBody" if direction == "up" else "sideBody"
     paste(body, pose["body"])
+    if near_arm is not None:
+        draw_arm(pose["hands"][near_arm])
     head = "front" if direction == "down" else "back" if direction == "up" else "profile"
     bob = -1 if size == 16 and pose["blenderFrame"] in (3, 7) else 0
     head_piece, head_xy = paste(head, pose["head"], (0, bob))

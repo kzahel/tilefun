@@ -15,6 +15,14 @@
       "metadata": "dog.json",
       "contactSheet": "dog-contact-sheet.png",
       "preview": "dog-preview.gif"
+    },
+    {
+      "id": "person",
+      "name": "Trail Explorer",
+      "description": "A friendly human explorer with short brown hair, a teal jacket, canvas backpack, dark trousers and sturdy boots.",
+      "metadata": "person.json",
+      "contactSheet": "person-contact-sheet.png",
+      "preview": "person-preview.gif"
     }
   ]
 }
