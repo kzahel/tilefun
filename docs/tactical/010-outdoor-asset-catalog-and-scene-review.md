@@ -50,3 +50,21 @@ Review catalog semantics and geometry, then annotate the square with preferred
 assets. Existing grass-overlap and sparse-square requests remain pending until
 scene changes are delivered. Next: promote accepted metadata, compose structured
 plaza seating/shade and a market using the shared placement reservations.
+
+## Delivered checkpoint
+
+- `42f901c`: deterministic atlas audit and shared candidate geometry. All 1,145
+  unit tests, all three typechecks and production build passed; all 322 existing
+  review candidates retained their exact identities.
+- Catalog includes 4,624 distinct rectangles / 4,816 names. All 56,647 occupied
+  source cells are accounted for: 39,677 indexed, 16,970 explicitly unmapped.
+  This exposes substantial remaining semantic work rather than claiming complete
+  human-verified names or guessed colliders. Five detailed geometry candidates
+  are ready for review; remaining families can be corrected incrementally.
+- Native metadata browsing/editing, source gap proposals, production movement
+  testing, exact authenticated metadata events and neighborhood location/asset
+  suggestions are implemented. Corrections show in the catalog immediately.
+  Existing generation and scene pixels remain unchanged.
+- Default neighborhood navigation uses one whole scene per batch. Earlier crops
+  and their human decisions remain accessible; all earlier feedback stays intact.
+  Source and world annotations are distinct targets throughout display and CLI.

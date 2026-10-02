@@ -15,12 +15,16 @@ export function PreviewViewport({
   children,
   controls,
   status,
+  selecting = false,
+  focus,
 }: {
   width: number;
   height: number;
   children: ReactNode;
   controls: ReactNode;
   status: ReactNode;
+  selecting?: boolean;
+  focus?: { x: number; y: number; width: number; height: number; key: string } | undefined;
 }) {
   const stage = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 1, height: 1 });
@@ -79,6 +83,19 @@ export function PreviewViewport({
     setCustom(null);
   }, [width, height]);
   useEffect(() => {
+    if (!focus || size.width <= 1) return;
+    const zoom = Math.max(
+      0.02,
+      Math.min(8, (size.width - 32) / focus.width, (size.height - 32) / focus.height),
+    );
+    setCustom({
+      zoom,
+      x: (size.width - focus.width * zoom) / 2 - focus.x * zoom,
+      y: (size.height - focus.height * zoom) / 2 - focus.y * zoom,
+    });
+    setPreset("custom");
+  }, [focus, size]);
+  useEffect(() => {
     const node = stage.current;
     if (!node) return;
     // React's delegated wheel listener is passive. Own this listener so the
@@ -123,6 +140,7 @@ export function PreviewViewport({
         data-preview-x={view.x}
         data-preview-y={view.y}
         onPointerDown={(event) => {
+          if (selecting && event.button === 0) return;
           if (drag.current || (event.button !== 0 && event.button !== 1)) return;
           moved.current = false;
           drag.current = {

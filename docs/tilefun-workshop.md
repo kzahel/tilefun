@@ -182,3 +182,22 @@ the default for new worlds; v5 is selectable as **Connected entrances (v5, revie
 while awaiting human review. The Workshop handoff is generated from the actual
 candidate descriptor and center. Agent replies to the original note do not
 approve the changed district pixels.
+
+The native Outdoor assets tool (`#/tool/outdoor`) browses committed semantic
+catalog/coverage outputs and shared human metadata proposals. Workshop events
+add two authenticated variants alongside source/review/reply:
+
+- `asset`: source rectangle/fingerprint, catalog revision, exact metadata,
+  verdict (`note`, `approved`, `changes`) and comment. Saved as an `ArtNote`
+  `assetAnnotation`, with immutable original decision time and metadata hash.
+- `scene`: whole-neighborhood candidate/fingerprint, world-pixel rectangle,
+  feature IDs, up to twelve exact asset suggestions and a comment. The server
+  derives generation, seed and world bounds from the registered scene and
+  validates the selection and source/metadata revisions. Saved as an `ArtNote`
+  `sceneAnnotation`; it is not a source-sheet selection or an approval.
+
+These use the existing append-only Workshop command log and art inbox, restart
+replay, idempotent event IDs, owner login/CSRF, browser drafts and outbox. They
+appear in Requests, Activity and full thread history, and `npm run art:notes`
+prints their metadata/world targets for agent consumption. Shared annotations
+remain ignored local state; the public catalog contains committed definitions.

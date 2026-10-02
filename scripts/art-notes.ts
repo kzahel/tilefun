@@ -24,6 +24,14 @@ if (args[0] === "set-status") {
   else {
     const catalog = await store.catalog();
     for (const row of selected) {
+      if (row.assetAnnotation)
+        console.log(
+          `Asset ${row.assetAnnotation.assetId}: ${row.assetAnnotation.verdict}\nmetadata=${JSON.stringify(row.assetAnnotation.metadata)}\nrevision=${row.assetAnnotation.metadataFingerprint}`,
+        );
+      if (row.sceneAnnotation)
+        console.log(
+          `Neighborhood ${row.sceneAnnotation.candidateId}\ngeneration=${JSON.stringify(row.sceneAnnotation.generation)}\nworldPixels=${JSON.stringify(row.sceneAnnotation.rect)}\nfeatures=${row.sceneAnnotation.featureIds.join(", ")}\nsuggestedAssets=${JSON.stringify(row.sceneAnnotation.suggestions)}`,
+        );
       if (row.buildingReview)
         console.log(
           `${row.buildingReview.scene === "district" ? `District review (${row.buildingReview.caseId})` : row.buildingReview.scene === "surface" ? `Surface review (${row.buildingReview.caseId})` : row.buildingReview.scene === "street" ? `Street review (${row.buildingReview.caseId})` : "Building review"}: ${row.buildingReview.url}\nrecipes=${row.buildingReview.surfaceRecipe ?? row.buildingReview.prefabIds.join(", ")}${row.buildingReview.propTypes ? `\nprops=${row.buildingReview.propTypes.join(", ")}` : ""}\ncomposition=${row.buildingReview.revision}${row.buildingVerdict ? `\nverdict=${row.buildingVerdict.value} at ${row.buildingVerdict.createdAt}` : ""}${row.buildingReview.renderFingerprint ? `\nrender=${row.buildingReview.renderFingerprint}` : ""}`,

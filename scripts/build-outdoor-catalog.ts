@@ -153,7 +153,7 @@ const outputs = [
   ],
 ] as const;
 for (const [path, value] of outputs) {
-  const content = JSON.stringify(value, null, 2) + "\n";
+  const content = `${JSON.stringify(value, null, path === "public/data/outdoor-catalog.json" ? undefined : 2)}\n`;
   if (process.argv.includes("--check")) {
     if (readFileSync(path, "utf8") !== content)
       throw new Error(`Stale ${path}; run npm run assets:outdoor`);

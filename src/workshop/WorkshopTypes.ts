@@ -1,4 +1,6 @@
+import type { AssetSuggestion } from "../art/ArtAnnotations.js";
 import type { ArtNote, BuildingReview } from "../art/ArtNotes.js";
+import type { OutdoorMetadata } from "../assets/outdoor/OutdoorCatalog.js";
 import type { ReviewFeedback } from "../interiors/review/ReviewFeedback.js";
 
 export interface WorkshopTool {
@@ -64,6 +66,26 @@ export interface WorkshopActivity extends WorkshopThread {
   verdict?: string;
 }
 export type WorkshopEvent =
+  | {
+      id: string;
+      type: "asset";
+      rect: [number, number, number, number];
+      fingerprint: string;
+      catalogRevision: string;
+      metadata: OutdoorMetadata;
+      verdict: "note" | "approved" | "changes";
+      note: string;
+    }
+  | {
+      id: string;
+      type: "scene";
+      candidateId: string;
+      fingerprint: string;
+      rect: [number, number, number, number];
+      featureIds: string[];
+      suggestions: AssetSuggestion[];
+      note: string;
+    }
   | {
       id: string;
       type: "review";

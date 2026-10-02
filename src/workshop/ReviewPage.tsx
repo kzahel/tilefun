@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
-import { loadVerifiedArtImage } from "../art/ArtSource.js";
-import { type GameAssets, loadTerrainAssets } from "../assets/GameAssets.js";
-import { Spritesheet } from "../assets/Spritesheet.js";
-import { BlendGraph } from "../autotile/BlendGraph.js";
+import { required } from "../art/ArtCatalog.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
 import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./App.js";
@@ -14,7 +10,9 @@ import {
   renderInteriorCandidate,
 } from "./InteriorCandidates.js";
 import { PreviewViewport } from "./PreviewViewport.js";
+import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
+import { primaryScene, scenePath } from "./SceneReview.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
 import {
@@ -26,26 +24,6 @@ import {
   useWorkspace,
 } from "./WorkspaceStore.js";
 
-let assetsPromise: Promise<{ assets: GameAssets; catalog: ArtCatalog }> | undefined;
-async function reviewAssets() {
-  if (assetsPromise) return assetsPromise;
-  assetsPromise = (async () => {
-    const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) =>
-      r.json(),
-    )) as ArtCatalog;
-    const source = required(catalog.sheets.find((s) => s.id === "me-complete"));
-    const [assets, image] = await Promise.all([
-      loadTerrainAssets(new BlendGraph()),
-      loadVerifiedArtImage(source),
-    ]);
-    assets.sheets.set("me-complete", new Spritesheet(await createImageBitmap(image), 16, 16));
-    return { assets, catalog };
-  })().catch((error) => {
-    assetsPromise = undefined;
-    throw error;
-  });
-  return assetsPromise;
-}
 function optimisticSummary(c: CandidateSummary, events: WorkshopEvent[]): CandidateSummary {
   const e = events
     .filter(
@@ -608,6 +586,12 @@ function ReviewCase({
               ))}
             </select>
           </label>
+          {primaryScene(c) ? (
+            <Link className="button" to={scenePath(c)}>
+              Open neighborhood workspace →
+            </Link>
+          ) : null}
+
           {c.art ? (
             <LegacyLink
               url={`/tilefun/art-workbench.html?sheet=${c.art.sheetId}&rect=${c.art.rect.join(",")}`}

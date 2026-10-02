@@ -1,5 +1,5 @@
 import { type OutdoorAsset, type OutdoorMetadata, outdoorProp } from "./OutdoorCatalog.js";
-import bank from "./outdoor-runtime-v1.json";
+import bank from "./outdoor-runtime-v1.json" with { type: "json" };
 
 const assets = bank.assets as {
   id: string;

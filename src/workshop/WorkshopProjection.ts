@@ -61,12 +61,22 @@ export function artThread(row: ArtNote): WorkshopThread {
   return {
     id: `art:${row.threadId}`,
     kind: "art",
-    name: row.buildingReview?.caseId ?? row.buildingReview?.prefabIds.join(", ") ?? row.sheetId,
+    name:
+      row.assetAnnotation?.metadata.name ??
+      row.sceneAnnotation?.candidateId.replace("district:", "") ??
+      row.buildingReview?.caseId ??
+      row.buildingReview?.prefabIds.join(", ") ??
+      row.sheetId,
     note: row.note,
     reply: row.reply,
     status: row.status,
     createdAt: row.createdAt,
     url:
+      (row.sceneAnnotation
+        ? `/tilefun/workshop.html#/scene/${encodeURIComponent(row.sceneAnnotation.candidateId.replace("district:", ""))}?note=${row.threadId}`
+        : row.assetAnnotation
+          ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
+          : undefined) ??
       row.buildingReview?.url ??
       `/tilefun/art-workbench.html?sheet=${encodeURIComponent(row.sheetId)}&rect=${row.rect.join(",")}`,
     ...(row.buildingReview ? { caseId: buildingCaseKey(row.buildingReview) } : {}),
@@ -103,6 +113,7 @@ export function projectActivity(art: ArtNote[], interiors: ReviewFeedback[]): Wo
       ...artThread(row),
       eventId: row.id,
       ...(row.buildingVerdict ? { verdict: row.buildingVerdict.value } : {}),
+      ...(row.assetAnnotation ? { verdict: row.assetAnnotation.verdict } : {}),
     })),
     ...interiors.map((row) => ({ ...interiorThread(row), eventId: row.id, verdict: row.verdict })),
   ].sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.eventId.localeCompare(a.eventId));

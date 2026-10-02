@@ -25,7 +25,7 @@ test("commercial batch is indexed, fits phone review and pauses independently", 
     return r.fulfill({ json: r.request().method() === "POST" ? { saved: true } : rows });
   });
   await page.goto("/tilefun/workshop.html");
-  await expect(page.locator('[data-batch="commercial"]')).toContainText("4 unchecked");
+  await expect(page.locator('[data-batch="commercial"]')).toContainText("1 unchecked");
   await page.goto("/tilefun/workshop.html#/tool/districts");
   await expect(
     page.getByRole("heading", { name: "Commercial streets & parking", exact: true }),

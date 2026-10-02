@@ -273,7 +273,12 @@ function draw(): void {
     for (const u of uses) outline(u.rect, "#83d6a4aa", 1);
   }
   for (const n of currentNotes())
-    if (n.sheetId === sheet.id && n.fingerprint === sheet.fingerprint && n.status !== "resolved")
+    if (
+      !n.sceneAnnotation &&
+      n.sheetId === sheet.id &&
+      n.fingerprint === sheet.fingerprint &&
+      n.status !== "resolved"
+    )
       outline(n.rect, "#e49bc6", 2);
   if (selection) {
     ctx.fillStyle = "#e9c36c22";
@@ -351,7 +356,12 @@ function renderNotes(): void {
     article.append(
       text("strong", `${row.intent} · ${row.status}`),
       text("p", row.note),
-      text("small", `${source?.name ?? row.sheetId} · ${row.rect.join(", ")}`),
+      text(
+        "small",
+        row.sceneAnnotation
+          ? `World pixels · ${row.sceneAnnotation.rect.join(", ")}`
+          : `${source?.name ?? row.sheetId} · ${row.rect.join(", ")}`,
+      ),
     );
     if (row.buildingReview) {
       const link = document.createElement("a");
@@ -374,6 +384,12 @@ function renderNotes(): void {
     actions.className = "actions";
     actions.append(
       button("View selection", () => {
+        if (row.sceneAnnotation) {
+          location.assign(
+            `/tilefun/workshop.html#/scene/${encodeURIComponent(row.sceneAnnotation.candidateId.replace("district:", ""))}?note=${row.threadId}`,
+          );
+          return;
+        }
         search.value = "";
         filter.value = "all";
         void loadSheet(row.sheetId, row.rect);

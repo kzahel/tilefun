@@ -392,3 +392,110 @@ describe("Workshop API and login boundaries", () => {
     expect(await f.service().art.records()).toHaveLength(0);
   });
 });
+
+it("persists exact asset metadata and canonical world annotations across retries and restart", async () => {
+  const f = await fixture();
+  await f.login();
+  const bank = JSON.parse(
+    readFileSync("public/data/outdoor-catalog.json", "utf8"),
+  ) as import("../assets/outdoor/OutdoorCatalog.js").OutdoorCatalog;
+  const asset = bank.assets.find((a) => a.evidence === "candidate")!;
+  const event = {
+    id: "outdoor-metadata-test",
+    type: "asset",
+    rect: asset.rect,
+    fingerprint: bank.sourceFingerprint,
+    catalogRevision: bank.revision,
+    metadata: asset.metadata,
+    verdict: "note",
+    note: "Use this cart in the square",
+  };
+  expect((await f.event(event)).status).toBe(200);
+  expect((await f.event(event)).status).toBe(200);
+  let rows = await f.service().art.records();
+  expect(rows).toHaveLength(1);
+  expect(rows[0]?.assetAnnotation?.metadata).toEqual(asset.metadata);
+  f.restart();
+  expect((await f.service().inbox()).requests[0]?.name).toBe(asset.metadata.name);
+  const { createHash } = await import("node:crypto");
+  const { ALL_DENSE_REVIEW_CASES, denseReviewScene } = await import(
+    "../art/DenseDistrictShowcase.js"
+  );
+  const definition = ALL_DENSE_REVIEW_CASES.find((c) => c.id === "district-v10-destinations")!;
+  const scene = denseReviewScene(definition),
+    c = manifest.candidates.find((c) => c.id === `district:${definition.id}`)!;
+  const selection = [scene.plan.center.x * 16, scene.plan.center.y * 16, 32, 32];
+  const suggestion = {
+    assetId: asset.id,
+    rect: asset.rect,
+    sourceFingerprint: bank.sourceFingerprint,
+    metadata: asset.metadata,
+    metadataFingerprint: createHash("sha256").update(JSON.stringify(asset.metadata)).digest("hex"),
+  };
+  const feedback = {
+    id: "outdoor-scene-test",
+    type: "scene",
+    candidateId: c.id,
+    fingerprint: c.fingerprint,
+    rect: selection,
+    featureIds: [],
+    suggestions: [suggestion],
+    note: "Tables and shade here",
+  };
+  expect((await f.event(feedback)).status).toBe(200);
+  expect(
+    (await f.event({ ...feedback, id: "bad-scene-region", rect: [0, 0, 32, 32] })).status,
+  ).toBe(400);
+  expect(
+    (
+      await f.event({
+        ...feedback,
+        id: "bad-scene-source",
+        suggestions: [{ ...suggestion, sourceFingerprint: "0".repeat(64) }],
+      })
+    ).status,
+  ).toBe(409);
+  expect(
+    (
+      await f.event({
+        ...feedback,
+        id: "bad-scene-payload",
+        suggestions: [{ ...suggestion, metadataFingerprint: "0".repeat(64) }],
+      })
+    ).status,
+  ).toBe(409);
+  expect(
+    (await f.event({ ...feedback, id: "bad-scene-feature", featureIds: ["invented-building"] }))
+      .status,
+  ).toBe(400);
+  expect(
+    (await f.event({ ...event, id: "bad-asset-revision", catalogRevision: "0".repeat(64) })).status,
+  ).toBe(409);
+  expect(
+    (
+      await f.event({
+        ...event,
+        id: "bad-asset-anchor",
+        metadata: { ...asset.metadata, anchor: [-1, 0] },
+      })
+    ).status,
+  ).toBe(400);
+  f.restart();
+  rows = await f.service().art.records();
+  expect(rows).toHaveLength(2);
+  expect(rows[1]?.sceneAnnotation?.generation).toEqual(scene.generation);
+  expect(rows[1]?.sceneAnnotation?.rect).toEqual(selection);
+  expect(rows[1]?.sceneAnnotation?.suggestions).toEqual([suggestion]);
+  const original = rows[1]!;
+  await expect(
+    f.service().art.append({
+      ...original,
+      id: "retarget-world",
+      sceneAnnotation: {
+        ...original.sceneAnnotation!,
+        rect: [selection[0]!, selection[1]!, 16, 16],
+      },
+    }),
+  ).rejects.toThrow("selection cannot change");
+  expect((await f.service().inbox()).requests).toHaveLength(2);
+});

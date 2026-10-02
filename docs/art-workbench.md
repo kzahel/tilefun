@@ -307,3 +307,47 @@ it does not include v3's farms/woodlands, broader city-profile variation or fina
 regional-road joins. New worlds default to Procedural regional / Dense districts
 (v4). Future appearance/layout changes must use a new pinned revision so saved
 v4 worlds do not silently change.
+
+## Outdoor semantic catalog and neighborhood annotations
+
+[Outdoor assets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/outdoor)
+is a native Workshop tool. It groups exact source-rectangle aliases and variant
+families, with bounded thumbnail pages and category/setting/review filters.
+All 4,816 names map to 4,624 distinct rectangles. The committed PNG audit accounts
+for 56,647 occupied 16px cells: 39,677 indexed and 16,970 explicit gap cells.
+The old 1,408 unmatched singles are reported separately, not counted as atlas
+objects. Inferred names/categories are not semantic approval or proof that a
+slice is a standalone prop.
+
+**Inspect atlas coverage** highlights gaps in the source workbench. Select any
+region and use **Name / review this asset** to create a shared semantic proposal.
+Original keys stay visible. Names, tags, settings, kind and facing can be edited.
+Anchor, footprint, collision shapes and depth offset have separate fields. Null
+collision means unknown; an empty shape list means explicitly nonblocking.
+**Placement & collision geometry** includes a walker using production props,
+collision resolution, scene collection and Canvas2D drawing. Candidate geometry
+is exposed for a picnic table, city bench, food cart, parasol and shade tree.
+None of it is automatically approved or selected by pinned generation.
+
+Save correction, Approve metadata and Needs changes record exact metadata with
+source/catalog/metadata revisions in the authenticated art inbox. Approval
+requires known kind and collision behavior. Browser drafts/outboxes survive
+reload and offline saves. Agent status replies preserve original human decision
+order. Human proposals appear in the catalog immediately, including new regions;
+they do not alter runtime definitions until explicitly promoted into a committed
+asset version. Candidate geometry and future promotion must retain saved-world
+versioning: changing a used geometry bank requires a new asset revision.
+
+Neighborhood review now defaults to one full scene per batch in Workshop.
+Cropped appearances remain historical records; named buttons zoom within the
+whole scene without extra approval tasks. Select area / pin lets a tap or drag
+choose a tile-aligned world region. Browse props to suggest attaches exact source
+rectangles and metadata snapshots. Save location note records world pixels,
+generation/seed, scene fingerprint and intersecting feature IDs. Whole-scene
+approval is independent of each location thread's status. Earlier crop feedback
+is listed alongside the new comments, with zoom and history links.
+
+Run `npm run assets:outdoor` to regenerate the deterministic catalog and bounded
+candidate runtime bank from committed inputs; no ignored source packs are needed.
+Production builds verify both outputs. See
+[the implementation plan](tactical/010-outdoor-asset-catalog-and-scene-review.md).

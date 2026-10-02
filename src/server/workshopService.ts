@@ -20,6 +20,7 @@ import type {
 } from "../workshop/WorkshopTypes.js";
 import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
 import { InteriorReviewStore, interiorReviewHandler } from "./interiorReviewPlugin.js";
+import { outdoorAnnotation } from "./outdoorAnnotations.js";
 import { HttpError, jsonBody, jsonResponse, WorkshopAuth } from "./workshopAuth.js";
 import { loadWorkshopManifest, workshopInputDigest } from "./workshopManifest.js";
 
@@ -102,7 +103,7 @@ export class WorkshopService {
       typeof e !== "object" ||
       typeof e.id !== "string" ||
       !/^[a-zA-Z0-9-]{1,100}$/.test(e.id) ||
-      !["source", "review", "reply"].includes(e.type)
+      !["source", "review", "reply", "asset", "scene"].includes(e.type)
     )
       throw new HttpError(400, "Invalid Workshop event");
     const operation = this.queue.then(async () => {
@@ -119,7 +120,17 @@ export class WorkshopService {
       const createdAt = new Date().toISOString(),
         command: Command = { event: e, createdAt, author: owner };
       const [art, interiors] = await Promise.all([this.art.records(), this.interiors.records()]);
-      if (e.type === "source") {
+      if (e.type === "asset" || e.type === "scene") {
+        const { manifest, current } = await this.manifest();
+        command.art = await outdoorAnnotation(
+          e,
+          await this.art.catalog(),
+          manifest.candidates,
+          current,
+          createdAt,
+          this.options.root,
+        );
+      } else if (e.type === "source") {
         const catalog = await this.art.catalog(),
           sheet = catalog.sheets.find((s) => s.id === e.sheetId);
         if (!sheet || sheet.fingerprint !== e.fingerprint)

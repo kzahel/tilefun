@@ -1,3 +1,9 @@
+import {
+  type AssetAnnotation,
+  parseAssetAnnotation,
+  parseSceneAnnotation,
+  type SceneAnnotation,
+} from "./ArtAnnotations.js";
 import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
 import { CITY_REVIEW_RUNS } from "./CityReviewRuns.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
@@ -29,6 +35,8 @@ export interface BuildingVerdict {
   createdAt: string;
 }
 export interface ArtNote {
+  assetAnnotation?: AssetAnnotation;
+  sceneAnnotation?: SceneAnnotation;
   id: string;
   threadId: string;
   sheetId: string;
@@ -221,6 +229,12 @@ export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
     createdAt: v.createdAt,
     ...(review === undefined ? {} : { buildingReview: review }),
     ...(verdict === undefined ? {} : { buildingVerdict: verdict }),
+    ...(v.assetAnnotation === undefined
+      ? {}
+      : { assetAnnotation: parseAssetAnnotation(v.assetAnnotation, rect) }),
+    ...(v.sceneAnnotation === undefined
+      ? {}
+      : { sceneAnnotation: parseSceneAnnotation(v.sceneAnnotation, { width, height }) }),
   };
 }
 export function latestArtNotes(records: readonly ArtNote[]): ArtNote[] {
@@ -235,6 +249,8 @@ export function sameArtTarget(a: ArtNote, b: ArtNote): boolean {
     a.fingerprint === b.fingerprint &&
     JSON.stringify(a.rect) === JSON.stringify(b.rect) &&
     JSON.stringify(a.buildingReview) === JSON.stringify(b.buildingReview) &&
-    JSON.stringify(a.buildingVerdict) === JSON.stringify(b.buildingVerdict)
+    JSON.stringify(a.buildingVerdict) === JSON.stringify(b.buildingVerdict) &&
+    JSON.stringify(a.assetAnnotation) === JSON.stringify(b.assetAnnotation) &&
+    JSON.stringify(a.sceneAnnotation) === JSON.stringify(b.sceneAnnotation)
   );
 }

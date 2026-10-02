@@ -14,6 +14,7 @@ import { ART_INTENTS, type ArtNote } from "../art/ArtNotes.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { ErrorMessage, threadPath } from "./App.js";
 import { workshopJson } from "./AuthClient.js";
+import { useOutdoorCatalog } from "./OutdoorQueries.js";
 import { useSession } from "./WorkshopQueries.js";
 import { legacyValue, useWorkspace } from "./WorkspaceStore.js";
 
@@ -30,6 +31,7 @@ export default function SourcePage() {
   return <SourceBrowser catalog={catalog.data} />;
 }
 function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
+  const outdoor = useOutdoorCatalog();
   const location = useLocation(),
     navigate = useNavigate(),
     session = useSession(),
@@ -45,6 +47,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
       catalog.sheets[0],
   );
   const [selection, setSelection] = useState<ArtRect | null>(null),
+    [coverage, setCoverage] = useState(params.get("coverage") === "gaps"),
     [search, setSearch] = useState(params.get("q") ?? ""),
     [filter, setFilter] = useState(params.get("filter") ?? "all"),
     [intent, setIntent] = useState<ArtNote["intent"]>("other"),
@@ -174,7 +177,20 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
         selection[3] * zoom,
       );
     }
-  }, [image.data, sheet, selection, zoom, camera, viewSize]);
+    if (coverage && sheet.id === "me-complete" && outdoor.data) {
+      ctx.fillStyle = "#ed416055";
+      for (const r of outdoor.data.catalog.coverage.gaps) {
+        if (
+          r[0] + r[2] < camera.x ||
+          r[1] + r[3] < camera.y ||
+          r[0] > camera.x + viewSize.width / zoom ||
+          r[1] > camera.y + viewSize.height / zoom
+        )
+          continue;
+        ctx.fillRect((r[0] - camera.x) * zoom, (r[1] - camera.y) * zoom, r[2] * zoom, r[3] * zoom);
+      }
+    }
+  }, [image.data, sheet, selection, zoom, camera, viewSize, coverage, outdoor.data]);
   useEffect(() => {
     if (!crop.current || !selection || !image.data) return;
     const [x, y, w, h] = selection;
@@ -190,6 +206,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     else p.set("view", "sheet");
     if (search) p.set("q", search);
     if (filter !== "all") p.set("filter", filter);
+    if (coverage) p.set("coverage", "gaps");
     return `/tool/art?${p}`;
   }
   function selectRect(rect: ArtRect) {
@@ -370,6 +387,16 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
             />
           </div>
           <div className="preview-controls">
+            {sheet.id === "me-complete" ? (
+              <label>
+                <input
+                  type="checkbox"
+                  checked={coverage}
+                  onChange={(e) => setCoverage(e.target.checked)}
+                />{" "}
+                Highlight atlas gaps
+              </label>
+            ) : null}
             <label>
               Tool
               <select aria-label="Tool" value={mode} onChange={(e) => setMode(e.target.value)}>
@@ -402,6 +429,24 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
               Clear selection
             </button>
           </div>
+          {coverage && sheet.id === "me-complete" && outdoor.data ? (
+            <p className="notice compact">
+              Pink marks occupied cells without named slices.{" "}
+              {outdoor.data.catalog.coverage.gapCells.toLocaleString()} gap cells remain; select a
+              region to name it in the Outdoor catalog.{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  const gaps = outdoor.data!.catalog.coverage.gaps;
+                  const index = gaps.findIndex((r) => selection && r.join() === selection.join());
+                  const next = gaps[(index + 1) % gaps.length];
+                  if (next) selectRect(next);
+                }}
+              >
+                Next unmapped region →
+              </button>
+            </p>
+          ) : null}
           <p className="muted">
             {sheet.width} × {sheet.height} pixels · {allSlices.length} named slices · {uses.length}{" "}
             recorded uses
@@ -427,6 +472,11 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
           {selection ? (
             <>
               <code>{selection.join(", ")}</code>
+              {sheet.id === "me-complete" ? (
+                <Link className="button" to={`/tool/outdoor?rect=${selection.join(",")}`}>
+                  Name / review this asset →
+                </Link>
+              ) : null}
               <div className="source-crop">
                 <canvas ref={crop} aria-label="Selected source art" />
               </div>
@@ -535,7 +585,10 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
             <summary>Shared notes here</summary>
             {notes.data
               ?.filter(
-                (n) => n.sheetId === sheet.id && (!selection || intersects(n.rect, selection)),
+                (n) =>
+                  !n.sceneAnnotation &&
+                  n.sheetId === sheet.id &&
+                  (!selection || intersects(n.rect, selection)),
               )
               .slice(-12)
               .reverse()

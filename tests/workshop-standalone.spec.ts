@@ -23,7 +23,7 @@ test("standalone serves Workshop login, native reviews and both protected compat
     }),
     { mode: 0o600 },
   );
-  const base = "http://localhost:4195";
+  const base = "http://localhost:4196";
   let child: ChildProcess | undefined;
   const context = await browser.newContext({
     baseURL: base,
@@ -34,7 +34,7 @@ test("standalone serves Workshop login, native reviews and both protected compat
       cwd: process.cwd(),
       env: {
         ...process.env,
-        PORT: "4195",
+        PORT: "4196",
         NET_TRANSPORT: "ws",
         DATA_DIR: directory,
         WORKSHOP_LOCAL_AUTH_BYPASS: "0",

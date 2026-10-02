@@ -13,6 +13,7 @@ import {
 import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import { workshopJson } from "./AuthClient.js";
 import { flushLegacyOutboxes, legacyPendingCount } from "./LegacyOutboxes.js";
+import { primaryScene, reviewUnits, scenePath } from "./SceneReview.js";
 import { reviewToolOwnsBatch, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { useInbox, useManifest, useSession } from "./WorkshopQueries.js";
 import type {
@@ -26,6 +27,8 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
+const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
+const ScenePage = lazy(() => import("./ScenePage.js"));
 export const reviewPath = (id: string) => `/review/${encodeURIComponent(id)}`;
 export const threadPath = (id: string) => `/thread/${encodeURIComponent(id)}`;
 export function candidateLabel(c: CandidateSummary) {
@@ -213,7 +216,7 @@ export function App() {
           <NavLink to="/" end>
             Review inbox{" "}
             <span className="nav-count">
-              {inbox.data?.candidates.filter(
+              {(inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter(
                 (c) => c.state === "unchecked" || c.state === "changed",
               ).length ?? "—"}
             </span>
@@ -224,7 +227,21 @@ export function App() {
           <NavLink to="/activity">Activity & history</NavLink>
           <NavLink to="/tools">All tools</NavLink>
           <p className="nav-heading">MAKE & EXPLORE</p>
-          {WORKSHOP_TOOLS.slice(0, 10).map((tool) => (
+          {WORKSHOP_TOOLS.filter((tool) =>
+            [
+              "outdoor",
+              "art",
+              "buildings",
+              "roads",
+              "districts",
+              "streets",
+              "rooms",
+              "motion",
+              "indoor",
+              "explorer",
+              "autotiles",
+            ].includes(tool.id),
+          ).map((tool) => (
             <NavLink key={tool.id} to={`/tool/${tool.id}`}>
               {tool.name}
               {["review", "adapter"].includes(tool.mode) &&
@@ -232,7 +249,7 @@ export function App() {
                 tool.id,
               ) ? (
                 <span className="nav-count">
-                  {inbox.data?.candidates.filter(
+                  {(inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter(
                     (c) =>
                       reviewToolOwnsBatch(tool.id, c.batchId) &&
                       ["unchecked", "changed"].includes(c.state),
@@ -330,6 +347,14 @@ export function App() {
               />
               <Route path="/tools" element={<ToolsPage />} />
               <Route path="/tool/:tool" element={<ToolPage />} />
+              <Route
+                path="/scene/:id"
+                element={
+                  <AuthGate>
+                    <ScenePage />
+                  </AuthGate>
+                }
+              />
               <Route
                 path="/review/:id"
                 element={
@@ -455,7 +480,7 @@ function InboxPage() {
     [area, setArea] = useState("all");
   if (inbox.isPending || manifest.isPending) return <p role="status">Loading review batches…</p>;
   if (!inbox.data || !manifest.data) return <ErrorMessage error={inbox.error ?? manifest.error} />;
-  const candidates = inbox.data.candidates,
+  const candidates = reviewUnits(inbox.data.candidates),
     batches = manifest.data.batches.filter(
       (b) =>
         area === "all" ||
@@ -547,7 +572,10 @@ function InboxPage() {
                 <span className="tag">
                   {WORKSHOP_TOOLS.find((t) => t.id === batch.toolId)?.name}
                 </span>
-                <span>{rows.filter((c) => !c.excluded).length} cases</span>
+                <span>
+                  {rows.filter((c) => !c.excluded).length}{" "}
+                  {rows.some(primaryScene) ? "neighborhood" : "cases"}
+                </span>
               </div>
               <h2>{batch.name}</h2>
               <p>{batch.description}</p>
@@ -569,7 +597,7 @@ function InboxPage() {
                   to={
                     first.kind === "motion"
                       ? `/tool/motion?${new URL(first.url, location.origin).searchParams}`
-                      : reviewPath(first.id) +
+                      : scenePath(first) +
                         (!pending.length && filter !== "changes" ? "?show=all" : "")
                   }
                 >
@@ -881,6 +909,7 @@ function ToolPage() {
     tool = WORKSHOP_TOOLS.find((t) => t.id === toolId),
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
+  if (tool.id === "outdoor") return <OutdoorPage />;
   if (tool.mode === "source") return <SourcePage />;
   if (tool.mode === "review")
     return (
@@ -904,7 +933,7 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
     manifest = useManifest(),
     navigate = useNavigate();
   const candidates =
-    inbox.data?.candidates.filter((c) =>
+    (inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter((c) =>
       reviewToolOwnsBatch(toolId, c.batchId, manifest.data?.batches),
     ) ?? [];
   useEffect(() => {
@@ -917,7 +946,10 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
           c.review?.scene === (p.get("scene") ?? "single")) ||
         (p.get("scene") && c.review?.scene === p.get("scene") && p.get("scene") !== "single"),
     );
-    if (target) navigate(reviewPath(target.id) + "?show=all", { replace: true });
+    if (target)
+      navigate(primaryScene(target) ? scenePath(target) : reviewPath(target.id) + "?show=all", {
+        replace: true,
+      });
   }, [query, candidates, navigate]);
   if (!inbox.data || !manifest.data) return <ErrorMessage error={inbox.error ?? manifest.error} />;
   const tool = WORKSHOP_TOOLS.find((t) => t.id === toolId);
@@ -939,7 +971,7 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
               {candidates
                 .filter((c) => c.batchId === b.id)
                 .map((c) => (
-                  <Link key={c.id} to={reviewPath(c.id) + "?show=all"}>
+                  <Link key={c.id} to={scenePath(c) + (primaryScene(c) ? "" : "?show=all")}>
                     <span>{c.name}</span>
                     <span className={`state ${c.state}`}>{candidateLabel(c)}</span>
                   </Link>
@@ -953,6 +985,8 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
 export function legacyDestination(url: string, manifest?: WorkshopManifest) {
   const parsed = new URL(url, `${location.origin}/tilefun/`);
   if (parsed.origin !== location.origin || !parsed.pathname.startsWith("/tilefun/")) return null;
+  if (parsed.pathname.endsWith("workshop.html") && parsed.hash.startsWith("#/"))
+    return parsed.hash.slice(1);
   const candidate = manifest?.candidates.find(
     (c) =>
       new URL(c.url, location.origin).pathname === parsed.pathname &&
@@ -963,7 +997,8 @@ export function legacyDestination(url: string, manifest?: WorkshopManifest) {
         (["mixed", "residential", "hotel"].includes(c.review?.scene ?? "") &&
           parsed.searchParams.get("scene") === c.review?.scene)),
   );
-  if (candidate) return reviewPath(candidate.id) + "?show=all";
+  if (candidate)
+    return primaryScene(candidate) ? scenePath(candidate) : reviewPath(candidate.id) + "?show=all";
   const tool = parsed.pathname.endsWith("building-lab.html")
     ? WORKSHOP_TOOLS.find(
         (t) =>

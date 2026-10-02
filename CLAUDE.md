@@ -154,3 +154,19 @@ await human review; thirteen new city views total are staged across v7–v10.
 `npm run gameplay:bench -- --headed` measures indoor/outdoor gameplay frames and
 checks room movement/return in isolated bundled Chromium. Both measured paths
 held 8.3ms median frame intervals after caching; the user's device needs review.
+
+Outdoor asset semantics and scene-location feedback continue in
+`docs/tactical/010-outdoor-asset-catalog-and-scene-review.md`. Workshop's Outdoor
+assets tool is native React (`#/tool/outdoor`); coverage inspection uses Source
+art. `npm run assets:outdoor` builds/verifies committed-source coverage, rectangle
+aliases and candidate geometry. Unknown collision stays unknown; runtime atlas
+props and saved generations are unchanged. Detailed candidate geometry is shared
+with production Prop/collision/renderer code under new explicit asset identities.
+Human metadata proposals/approvals and scene notes use authenticated Workshop
+`asset`/`scene` events and the existing ignored art inbox. Read their exact snapshots
+with `npm run art:notes`; do not promote inferred labels/colliders automatically.
+Status replies must preserve original metadata decision time. New used geometry
+revisions need distinct asset versions. Neighborhoods default to one whole scene
+per batch (`#/scene/CASE_ID`); crops are zoom shortcuts and retain old decisions.
+World annotations record pixels, generation/seed and exact asset suggestions;
+never interpret their compatibility source pointer as the scene location.

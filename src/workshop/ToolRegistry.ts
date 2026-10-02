@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "outdoor",
+    name: "Outdoor assets",
+    description:
+      "Semantic Modern Exteriors families, atlas coverage, editable placement geometry and shared asset review.",
+    url: "workshop.html#/tool/outdoor",
+    mode: "source",
+  },
+  {
     id: "art",
     name: "Source art",
     description:
@@ -112,14 +120,14 @@ export const CITY_BATCHES: ReviewBatch[] = [
   ...Object.entries(CITY_REVIEW_RUNS).map(([id, r]) => ({
     id,
     name: r.name,
-    description: `Playable ${r.version} places, shared with the explorer and game.`,
+    description: `One ${r.version} neighborhood, with zoom shortcuts and location notes. Shared with the explorer and game.`,
     toolId: "districts",
   })),
   {
     id: "commercial",
     name: "Commercial streets & parking",
     description:
-      "Four views of a playable regional-v6 neighborhood: shops, clear sidewalks, refuge crossing, meters and parked cars.",
+      "One playable regional-v6 neighborhood with shops, crossings and parking. Zoom shortcuts retain earlier crop history.",
     toolId: "districts",
   },
   {
@@ -144,7 +152,7 @@ export const CITY_BATCHES: ReviewBatch[] = [
   {
     id: "districts",
     name: "First dense neighborhood",
-    description: "Three views of a regional-v5 neighborhood with connected door approaches.",
+    description: "One regional-v5 neighborhood with connected door approaches and zoom shortcuts.",
     toolId: "districts",
   },
   {

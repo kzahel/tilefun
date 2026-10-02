@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "outdoor",
+      "name": "Outdoor assets",
+      "description": "Semantic Modern Exteriors families, atlas coverage, editable placement geometry and shared asset review.",
+      "url": "workshop.html#/tool/outdoor",
+      "mode": "source"
+    },
+    {
       "id": "art",
       "name": "Source art",
       "description": "All source sheets, named slices and recorded uses. Select tiles and leave requests.",
@@ -104,31 +111,31 @@
     {
       "id": "pedestrians",
       "name": "People & destinations",
-      "description": "Playable regional-v10 places, shared with the explorer and game.",
+      "description": "One regional-v10 neighborhood, with zoom shortcuts and location notes. Shared with the explorer and game.",
       "toolId": "districts"
     },
     {
       "id": "architecture",
       "name": "Varied city architecture",
-      "description": "Playable regional-v9 places, shared with the explorer and game.",
+      "description": "One regional-v9 neighborhood, with zoom shortcuts and location notes. Shared with the explorer and game.",
       "toolId": "districts"
     },
     {
       "id": "parks",
       "name": "Parks & squares",
-      "description": "Playable regional-v8 places, shared with the explorer and game.",
+      "description": "One regional-v8 neighborhood, with zoom shortcuts and location notes. Shared with the explorer and game.",
       "toolId": "districts"
     },
     {
       "id": "parking",
       "name": "Small parking lots",
-      "description": "Playable regional-v7 places, shared with the explorer and game.",
+      "description": "One regional-v7 neighborhood, with zoom shortcuts and location notes. Shared with the explorer and game.",
       "toolId": "districts"
     },
     {
       "id": "commercial",
       "name": "Commercial streets & parking",
-      "description": "Four views of a playable regional-v6 neighborhood: shops, clear sidewalks, refuge crossing, meters and parked cars.",
+      "description": "One playable regional-v6 neighborhood with shops, crossings and parking. Zoom shortcuts retain earlier crop history.",
       "toolId": "districts"
     },
     {
@@ -152,7 +159,7 @@
     {
       "id": "districts",
       "name": "First dense neighborhood",
-      "description": "Three views of a regional-v5 neighborhood with connected door approaches.",
+      "description": "One regional-v5 neighborhood with connected door approaches and zoom shortcuts.",
       "toolId": "districts"
     },
     {
@@ -10477,5 +10484,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "2510243281ccb51cb388c004a531c14c8e63b7f746bb8082a74d6851ca44d3db"
+  "inputDigest": "00181dc8a1d252df56bc86f1048f376b0bedcceb30ec9973900f35f980d796f4"
 }
