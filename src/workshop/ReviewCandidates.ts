@@ -78,7 +78,7 @@ export function artReviewDefinitions() {
     })),
     ...ALL_DENSE_REVIEW_CASES.map((c) => ({
       id: `district:${c.id}`,
-      batchId: denseReviewRun(c) === "commercial" ? "commercial" : "districts",
+      batchId: denseReviewRun(c),
       name: c.name,
       scene: "district" as const,
       prefab: c.id,

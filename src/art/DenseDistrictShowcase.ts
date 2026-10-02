@@ -7,6 +7,7 @@ import { createProp } from "../entities/PropFactories.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import { createGenerator } from "../generation/Generator.js";
+import type { CityPlacesPlan } from "../generation/regional/CityPlacesPlanner.js";
 import {
   COMMERCIAL_CITY_ASSETS,
   COMMERCIAL_SURFACE_CELLS,
@@ -86,10 +87,49 @@ export const COMMERCIAL_REVIEW_CASES = [
     generation: COMMERCIAL_DEMO_GENERATION,
   },
 ] as const;
-export const ALL_DENSE_REVIEW_CASES = [...DENSE_REVIEW_CASES, ...COMMERCIAL_REVIEW_CASES];
+export const PARKING_DEMO_GENERATION: GenerationDescriptor = {
+  ...DENSE_DEMO_GENERATION,
+  version: "regional-v7",
+};
+export const CITY_PLACES_REVIEW_CASES = [
+  {
+    id: "district-v7-parking-block",
+    name: "Shops beside a parking lot",
+    prompt:
+      "Review the parking lot in the actual commercial neighborhood, with planted edges and a separate walking entrance.",
+    window: "whole",
+    generation: PARKING_DEMO_GENERATION,
+    run: "parking",
+  },
+  {
+    id: "district-v7-parking-lot",
+    name: "Marked lot & planted edge",
+    prompt:
+      "Check native parking spaces, occupied and empty bays, car scale and the south pedestrian path.",
+    window: "place",
+    crop: [-40, 6, -3, 39],
+    generation: PARKING_DEMO_GENERATION,
+    run: "parking",
+  },
+  {
+    id: "district-v7-parking-access",
+    name: "Driving entrance & pedestrian access",
+    prompt:
+      "Check the six-tile driving entrance and separate three-tile walking connection to the street sidewalk. Geometry shows both reservations.",
+    window: "place",
+    crop: [-27, 14, 5, 41],
+    generation: PARKING_DEMO_GENERATION,
+    run: "parking",
+  },
+] as const;
+export const ALL_DENSE_REVIEW_CASES = [
+  ...DENSE_REVIEW_CASES,
+  ...COMMERCIAL_REVIEW_CASES,
+  ...CITY_PLACES_REVIEW_CASES,
+];
 export type DenseReviewCase = (typeof ALL_DENSE_REVIEW_CASES)[number];
 export const denseReviewRun = (c: DenseReviewCase) =>
-  "generation" in c ? "commercial" : "districts";
+  "run" in c ? c.run : "generation" in c ? "commercial" : "districts";
 /** These views select windows of the actual generator, never separate placements. */
 export function denseReviewScene(c: DenseReviewCase) {
   const generation = "generation" in c ? c.generation : DENSE_DEMO_GENERATION;
@@ -100,17 +140,19 @@ export function denseReviewScene(c: DenseReviewCase) {
   if (!plan) throw new Error("Missing dense checkpoint");
   const { x, y } = plan.center;
   const bounds: Bounds =
-    c.window === "whole"
-      ? { minX: x - 50, minY: y - 46, maxX: x + 50, maxY: y + 46 }
-      : c.window === "frontage"
-        ? { minX: x - 43, minY: y - 39, maxX: x + 43, maxY: y + 5 }
-        : c.window === "commercial"
-          ? { minX: x + 4, minY: y - 34, maxX: x + 44, maxY: y + 12 }
-          : c.window === "refuge"
-            ? { minX: x - 40, minY: y - 18, maxX: x - 4, maxY: y + 18 }
-            : c.window === "parking"
-              ? { minX: x + 7, minY: y - 16, maxX: x + 40, maxY: y + 8 }
-              : { minX: x - 43, minY: y - 7, maxX: x + 43, maxY: y + 44 };
+    "crop" in c
+      ? { minX: x + c.crop[0], minY: y + c.crop[1], maxX: x + c.crop[2], maxY: y + c.crop[3] }
+      : c.window === "whole"
+        ? { minX: x - 50, minY: y - 46, maxX: x + 50, maxY: y + 46 }
+        : c.window === "frontage"
+          ? { minX: x - 43, minY: y - 39, maxX: x + 43, maxY: y + 5 }
+          : c.window === "commercial"
+            ? { minX: x + 4, minY: y - 34, maxX: x + 44, maxY: y + 12 }
+            : c.window === "refuge"
+              ? { minX: x - 40, minY: y - 18, maxX: x - 4, maxY: y + 18 }
+              : c.window === "parking"
+                ? { minX: x + 7, minY: y - 16, maxX: x + 40, maxY: y + 8 }
+                : { minX: x - 43, minY: y - 7, maxX: x + 43, maxY: y + 44 };
   const props = new Map<string, ReturnType<typeof createProp>>(),
     actors = new Map<string, ActorPlacement>();
   for (let cy = Math.floor(bounds.minY / 16); cy <= Math.floor(bounds.maxY / 16); cy++)
@@ -140,7 +182,9 @@ export function denseReviewComposition(s: DenseReviewScene) {
     bounds: s.bounds,
     plan: s.plan,
     assets: DENSE_CITY_ASSETS,
-    ...(s.generation.version === "regional-v6" ? { commercialAssets: COMMERCIAL_CITY_ASSETS } : {}),
+    ...(s.generation.version === "regional-v6" || s.plan.recipe === "city-places-v7"
+      ? { commercialAssets: COMMERCIAL_CITY_ASSETS }
+      : {}),
     props: s.props,
     actors: s.actors,
   };
@@ -156,7 +200,7 @@ export function denseReviewSourceRects(s: DenseReviewScene): ArtRect[] {
       (p) => [p.frameCol * 16, p.frameRow * 16, p.spriteWidth, p.spriteHeight] as ArtRect,
     ),
   );
-  if (s.generation.version === "regional-v6") {
+  if (s.generation.version === "regional-v6" || s.plan.recipe === "city-places-v7") {
     rects.push(
       ...COMMERCIAL_SURFACE_CELLS.flatMap((cell) => cell.map((p) => [...p.rect] as ArtRect)),
     );
@@ -257,6 +301,16 @@ export function drawDenseDistrictShowcase(
         if (c.landing) rect(c.landing);
       }
     }
+    if ("places" in s.plan)
+      for (const place of (s.plan as CityPlacesPlan).places) {
+        ctx.strokeStyle = "#68dfff";
+        rect(place.bounds);
+        for (const bay of place.bays) rect(bay.bounds);
+        ctx.strokeStyle = "#77f6ba";
+        for (const path of place.paths) rect(path);
+        ctx.strokeStyle = "#efb770";
+        for (const lane of place.driving) rect(lane);
+      }
     ctx.strokeStyle = "#77f6ba";
     for (const a of s.actors) {
       ctx.beginPath();

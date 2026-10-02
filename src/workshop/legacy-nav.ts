@@ -1,3 +1,4 @@
+import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import { sessionRequest } from "./AuthClient.js";
 import { workshopHref } from "./ToolRegistry.js";
 
@@ -47,7 +48,8 @@ if (embedded) {
     : current.pathname.endsWith("building-lab.html")
       ? ["surfaces", "road-geometry"].includes(params.get("run") ?? "")
         ? "roads"
-        : ["districts", "commercial"].includes(params.get("run") ?? "")
+        : ["districts", "commercial"].includes(params.get("run") ?? "") ||
+            isCityReviewRun(params.get("run") ?? "")
           ? "districts"
           : params.get("run") === "streets"
             ? "streets"

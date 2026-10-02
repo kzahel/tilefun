@@ -99,7 +99,7 @@ independent. Geometry overlays show bays, crossings, doors, colliders and routes
 `commercial-city-assets-v1.json` pins ten exact human approvals, prop geometry
 and 61 opaque source cell recipes (persistent roadGrid IDs 15–75). Never
 regenerate it in builds. Saved v6 output is frozen too; later changes need a new
-revision/bank. New worlds still default to v4. The four new views await review.
+revision/bank. New worlds still default to v4. All four commercial views are human-approved.
 
 Dense neighborhood review is `/tilefun/building-lab.html?run=districts`, with
 three views of one real `regional-v5` review world (seed 2026, tile 300,519). The lab,
@@ -121,3 +121,12 @@ its geometry, assets, surface choices and realized fixtures have freeze tests.
 Future output changes require a new revision and promoted IDs/bank. New worlds
 default to Procedural regional with Dense districts (v4); older generators and
 regional revisions remain available with legacy/old labels.
+
+City places continue in `docs/tactical/009-city-places-and-indoor-performance.md`.
+Small parking lots use regional-v7 and Workshop batch `parking` (three views),
+also `building-lab.html?run=parking`. Place facts reserve driving access and a
+separate clear pedestrian connection. These candidates await human review;
+saved v7 output is frozen. Reviews without buildings can have empty prefab IDs.
+Gameplay interiors cache native static floor/wall layers per active room;
+furniture edits and actor depth remain live. `npm run interiors:bench -- --headed`
+checks pixel parity and measures the isolated path through bundled Chromium.

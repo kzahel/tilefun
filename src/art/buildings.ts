@@ -1,4 +1,5 @@
 import { canvasFingerprint, streetComposition } from "../workshop/ReviewCandidates.js";
+import { CITY_REVIEW_RUNS, isCityReviewRun } from "./CityReviewRuns.js";
 import "./art.css";
 import "./buildings.css";
 import { loadJSON } from "../assets/AssetLoader.js";
@@ -33,6 +34,7 @@ import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";
 import { buildingCaseKey, currentBuildingVerdict } from "./BuildingReviewQueue.js";
 import { drawBuildingShowcase } from "./BuildingShowcase.js";
 import {
+  CITY_PLACES_REVIEW_CASES,
   COMMERCIAL_REVIEW_CASES,
   DENSE_REVIEW_CASES,
   denseReviewComposition,
@@ -56,20 +58,28 @@ const surfaceRun = params.get("run") === "surfaces" || geometryRun;
 const surfaceRunName = geometryRun ? "road-geometry" : "surfaces";
 const surfaceCases = geometryRun ? CITY_GEOMETRY_CASES : CITY_SURFACE_CASES;
 const commercialRun = params.get("run") === "commercial";
-const districtRun = params.get("run") === "districts" || commercialRun;
-const districtRunName = commercialRun ? "commercial" : "districts";
-const districtCases = commercialRun ? COMMERCIAL_REVIEW_CASES : DENSE_REVIEW_CASES;
-const reviewStorage = districtRun
-  ? commercialRun
-    ? "tilefun.commercial-review.v1"
-    : "tilefun.district-review.v1"
-  : surfaceRun
-    ? geometryRun
-      ? "tilefun.surface-geometry-review.v2"
-      : "tilefun.surface-review.v1"
-    : streetRun
-      ? "tilefun.street-review.v1"
-      : "tilefun.building-review.v1";
+const placeRun = params.get("run") ?? "";
+const placeMeta = isCityReviewRun(placeRun) ? CITY_REVIEW_RUNS[placeRun] : undefined;
+const districtRun = params.get("run") === "districts" || commercialRun || !!placeMeta;
+const districtRunName = placeMeta ? placeRun : commercialRun ? "commercial" : "districts";
+const districtCases = placeMeta
+  ? CITY_PLACES_REVIEW_CASES.filter((c) => c.run === placeRun)
+  : commercialRun
+    ? COMMERCIAL_REVIEW_CASES
+    : DENSE_REVIEW_CASES;
+const reviewStorage = placeMeta
+  ? `tilefun.${placeRun}-review.v1`
+  : districtRun
+    ? commercialRun
+      ? "tilefun.commercial-review.v1"
+      : "tilefun.district-review.v1"
+    : surfaceRun
+      ? geometryRun
+        ? "tilefun.surface-geometry-review.v2"
+        : "tilefun.surface-review.v1"
+      : streetRun
+        ? "tilefun.street-review.v1"
+        : "tilefun.building-review.v1";
 const districtSelect = $<HTMLSelectElement>("district-case");
 districtSelect.replaceChildren(...districtCases.map((c) => new Option(c.name, c.id)));
 if (districtCases.some((c) => c.id === params.get("case")))
@@ -155,23 +165,31 @@ if (districtRun) {
   $("scene-options").hidden = true;
   $("prefab-options").hidden = true;
   $("district-options").hidden = false;
-  required(document.querySelector(".building-intro h1")).textContent = commercialRun
-    ? "Review commercial streets."
-    : "Review the first dense neighborhood.";
-  required(document.querySelector(".building-intro p")).textContent = commercialRun
-    ? "Four views of one playable commercial block. Two reports pause until “ready” in chat."
-    : "Three views of one playable neighborhood. Two reports pause until “ready” in chat.";
+  required(document.querySelector(".building-intro h1")).textContent = placeMeta
+    ? `Review ${placeMeta.name.toLowerCase()}.`
+    : commercialRun
+      ? "Review commercial streets."
+      : "Review the first dense neighborhood.";
+  required(document.querySelector(".building-intro p")).textContent = placeMeta
+    ? `${districtCases.length} views of real generated places. Two reports pause until “ready” in chat.`
+    : commercialRun
+      ? "Four views of one playable commercial block. Two reports pause until “ready” in chat."
+      : "Three views of one playable neighborhood. Two reports pause until “ready” in chat.";
   canvas.setAttribute("aria-label", "Generated dense neighborhood");
-  document.title = commercialRun
-    ? "Commercial street review · Tilefun"
-    : "Dense district review · Tilefun";
-  required(document.querySelector(".brand span")).textContent = commercialRun
-    ? "/ Commercial streets"
-    : "/ Dense district";
+  document.title = placeMeta
+    ? `${placeMeta.name} review · Tilefun`
+    : commercialRun
+      ? "Commercial street review · Tilefun"
+      : "Dense district review · Tilefun";
+  required(document.querySelector(".brand span")).textContent = placeMeta
+    ? `/ ${placeMeta.name}`
+    : commercialRun
+      ? "/ Commercial streets"
+      : "/ Dense district";
   required($("building-feedback-history").querySelector("summary")).textContent =
     "Art feedback & replies (all scenes)";
   $("preview-explanation").textContent =
-    `These are actual ${commercialRun ? "regional-v6" : "regional-v5"} chunks and placements. People show initial poses here; the game runs their routes.`;
+    `These are actual ${placeMeta?.version ?? (commercialRun ? "regional-v6" : "regional-v5")} chunks and placements. People show initial poses here; the game runs their routes.`;
   required(required($("geometry").parentElement).lastChild).textContent = "Lots, doors & routes";
   const play = document.createElement("a");
   play.id = "district-play";
@@ -725,7 +743,7 @@ function renderDistrict() {
     row.append(link);
     $("pieces").append(row);
   }
-  if (commercialRun) {
+  if (commercialRun || placeMeta) {
     for (const p of s.props.filter((p) => p.type.startsWith("prop-city-commercial-v1-"))) {
       const row = document.createElement("p"),
         link = document.createElement("a"),

@@ -1,6 +1,7 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { CityPlacesSource } from "./regional/CityPlacesPlanner.js";
 import { CommercialDistrictSource } from "./regional/CommercialDistrictPlanner.js";
 import { type CountryPlan, CountrySource } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
@@ -43,17 +44,19 @@ export function* overviewSteps(
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
     const source =
-      descriptor.version === "regional-v6"
-        ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
-        : descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
-          ? new DenseDistrictSource(
-              regionalWorld(descriptor.seed),
-              descriptor.version === "regional-v5",
-            )
-          : new DistrictSource(
-              regionalWorld(descriptor.seed),
-              descriptor.version === "regional-v3",
-            );
+      descriptor.version === "regional-v7"
+        ? new CityPlacesSource(regionalWorld(descriptor.seed), 7)
+        : descriptor.version === "regional-v6"
+          ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
+          : descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
+            ? new DenseDistrictSource(
+                regionalWorld(descriptor.seed),
+                descriptor.version === "regional-v5",
+              )
+            : new DistrictSource(
+                regionalWorld(descriptor.seed),
+                descriptor.version === "regional-v3",
+              );
     const districts: DistrictPlan[] = [];
     if (
       descriptor.version !== "regional-v1" &&

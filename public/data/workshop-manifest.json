@@ -102,6 +102,12 @@
   ],
   "batches": [
     {
+      "id": "parking",
+      "name": "Small parking lots",
+      "description": "Playable regional-v7 places, shared with the explorer and game.",
+      "toolId": "districts"
+    },
+    {
       "id": "commercial",
       "name": "Commercial streets & parking",
       "description": "Four views of a playable regional-v6 neighborhood: shops, clear sidewalks, refuge crossing, meters and parked cars.",
@@ -3132,6 +3138,237 @@
             "prop-city-commercial-v1-bin-blue",
             "prop-city-commercial-v1-planter",
             "prop-street-lamp"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v7-parking-block",
+      "batchId": "parking",
+      "name": "Shops beside a parking lot",
+      "prompt": "Review the parking lot in the actual commercial neighborhood, with planted edges and a separate walking entrance.",
+      "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-block",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v7%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "fd755464f6322613ee096b36a6504046a0ad67eee91e2c0569c66998ea8efca7",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3"
+        ],
+        "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-block",
+        "revision": "19bf06bcb20b5070854893637e5d33dae94ab75529ac5d3991f776801f7c2a6e",
+        "renderFingerprint": "fd755464f6322613ee096b36a6504046a0ad67eee91e2c0569c66998ea8efca7",
+        "caseId": "district-v7-parking-block",
+        "districtRecipe": "city-places-v7",
+        "propTypes": [
+          "prop-city-dense-v1-condo-bay-3",
+          "prop-city-dense-v1-condo-narrow-5",
+          "prop-city-dense-v1-bakery-3",
+          "prop-city-dense-v1-butcher-2",
+          "prop-city-dense-v1-ice-cream-3",
+          "prop-city-dense-v1-gym-3",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter",
+          "prop-street-lamp",
+          "prop-bench",
+          "prop-city-commercial-v1-meter",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-bin-blue",
+          "prop-city-commercial-v1-planter",
+          "prop-street-lamp",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-city-commercial-v1-car-west",
+          "prop-city-commercial-v1-car-west",
+          "prop-city-commercial-v1-car-east",
+          "prop-oak-tree",
+          "prop-garden-fountain",
+          "prop-city-commercial-v1-meter",
+          "prop-bench"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          16,
+          2640,
+          5584
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3"
+          ],
+          "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-block",
+          "revision": "19bf06bcb20b5070854893637e5d33dae94ab75529ac5d3991f776801f7c2a6e",
+          "renderFingerprint": "fd755464f6322613ee096b36a6504046a0ad67eee91e2c0569c66998ea8efca7",
+          "caseId": "district-v7-parking-block",
+          "districtRecipe": "city-places-v7",
+          "propTypes": [
+            "prop-city-dense-v1-condo-bay-3",
+            "prop-city-dense-v1-condo-narrow-5",
+            "prop-city-dense-v1-bakery-3",
+            "prop-city-dense-v1-butcher-2",
+            "prop-city-dense-v1-ice-cream-3",
+            "prop-city-dense-v1-gym-3",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter",
+            "prop-street-lamp",
+            "prop-bench",
+            "prop-city-commercial-v1-meter",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-bin-blue",
+            "prop-city-commercial-v1-planter",
+            "prop-street-lamp",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-city-commercial-v1-car-west",
+            "prop-city-commercial-v1-car-west",
+            "prop-city-commercial-v1-car-east",
+            "prop-oak-tree",
+            "prop-garden-fountain",
+            "prop-city-commercial-v1-meter",
+            "prop-bench"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v7-parking-lot",
+      "batchId": "parking",
+      "name": "Marked lot & planted edge",
+      "prompt": "Check native parking spaces, occupied and empty bays, car scale and the south pedestrian path.",
+      "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-lot",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v7%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "952ade35a04e4bb766b187eac05acd7195502b1d9a1d1fa14d3d91612adf45d4",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-lot",
+        "revision": "fba5a044ec627fa29ac81fafeaf5d8f290b12ba6e5c967ca125b1e2c483c307b",
+        "renderFingerprint": "952ade35a04e4bb766b187eac05acd7195502b1d9a1d1fa14d3d91612adf45d4",
+        "caseId": "district-v7-parking-lot",
+        "districtRecipe": "city-places-v7",
+        "propTypes": [
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-city-commercial-v1-car-west",
+          "prop-city-commercial-v1-car-west",
+          "prop-city-commercial-v1-car-east",
+          "prop-city-commercial-v1-meter"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          224,
+          816,
+          5376
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-lot",
+          "revision": "fba5a044ec627fa29ac81fafeaf5d8f290b12ba6e5c967ca125b1e2c483c307b",
+          "renderFingerprint": "952ade35a04e4bb766b187eac05acd7195502b1d9a1d1fa14d3d91612adf45d4",
+          "caseId": "district-v7-parking-lot",
+          "districtRecipe": "city-places-v7",
+          "propTypes": [
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-city-commercial-v1-car-west",
+            "prop-city-commercial-v1-car-west",
+            "prop-city-commercial-v1-car-east",
+            "prop-city-commercial-v1-meter"
+          ]
+        }
+      }
+    },
+    {
+      "id": "district:district-v7-parking-access",
+      "batchId": "parking",
+      "name": "Driving entrance & pedestrian access",
+      "prompt": "Check the six-tile driving entrance and separate three-tile walking connection to the street sidewalk. Geometry shows both reservations.",
+      "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-access",
+      "kind": "art",
+      "exploreUrl": "/tool/explorer?generation=%7B%22type%22%3A%22regional%22%2C%22version%22%3A%22regional-v7%22%2C%22seed%22%3A2026%2C%22preset%22%3A%22temperate-v1%22%7D&x=300&y=519&zoom=12&mode=tiles",
+      "fingerprint": "fd58f2cb05578e1ec426be896c449863d23171438087b7c04a7c464e354176a0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "district",
+        "prefabIds": [],
+        "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-access",
+        "revision": "47b41294713e88bfce15219097d02efe00cf336704432795e06158668340e7ac",
+        "renderFingerprint": "fd58f2cb05578e1ec426be896c449863d23171438087b7c04a7c464e354176a0",
+        "caseId": "district-v7-parking-access",
+        "districtRecipe": "city-places-v7",
+        "propTypes": [
+          "prop-city-commercial-v1-car-east",
+          "prop-oak-tree",
+          "prop-oak-tree",
+          "prop-garden-fountain"
+        ]
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          16,
+          1904,
+          576,
+          3648
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "district",
+          "prefabIds": [],
+          "url": "/tilefun/building-lab.html?run=parking&case=district-v7-parking-access",
+          "revision": "47b41294713e88bfce15219097d02efe00cf336704432795e06158668340e7ac",
+          "renderFingerprint": "fd58f2cb05578e1ec426be896c449863d23171438087b7c04a7c464e354176a0",
+          "caseId": "district-v7-parking-access",
+          "districtRecipe": "city-places-v7",
+          "propTypes": [
+            "prop-city-commercial-v1-car-east",
+            "prop-oak-tree",
+            "prop-oak-tree",
+            "prop-garden-fountain"
           ]
         }
       }
@@ -9362,5 +9599,5 @@
       "sceneSignature": "{\"version\":1,\"sketch\":\"#####\\n#LLL#\\n#LLL#\\n#LLL#\\n#####\",\"furniture\":\"{\\\"version\\\":1,\\\"placements\\\":[{\\\"id\\\":\\\"lamp\\\",\\\"asset\\\":\\\"floor-lamp\\\",\\\"x\\\":110,\\\"y\\\":72},{\\\"id\\\":\\\"rug\\\",\\\"asset\\\":\\\"rug\\\",\\\"x\\\":80,\\\"y\\\":104},{\\\"id\\\":\\\"stool\\\",\\\"asset\\\":\\\"stool\\\",\\\"x\\\":80,\\\"y\\\":96},{\\\"id\\\":\\\"tree\\\",\\\"asset\\\":\\\"potted-tree\\\",\\\"x\\\":52,\\\"y\\\":68}],\\\"definitions\\\":[{\\\"id\\\":\\\"floor-lamp\\\",\\\"name\\\":\\\"Floor lamp\\\",\\\"emoji\\\":\\\"💡\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-79\\\",\\\"size\\\":[16,48],\\\"anchor\\\":[8,41],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-6,\\\"width\\\":12,\\\"height\\\":6},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"potted-tree\\\",\\\"name\\\":\\\"Potted tree\\\",\\\"emoji\\\":\\\"🪴\\\",\\\"key\\\":\\\"single/normal/living-room/living-room-singles-13\\\",\\\"size\\\":[32,48],\\\"anchor\\\":[16,40],\\\"footprint\\\":{\\\"x\\\":-7,\\\"y\\\":-8,\\\"width\\\":14,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\"},{\\\"id\\\":\\\"rug\\\",\\\"name\\\":\\\"Square rug\\\",\\\"emoji\\\":\\\"🟫\\\",\\\"key\\\":\\\"single/normal/bedroom/bedroom-singles-385\\\",\\\"size\\\":[32,32],\\\"anchor\\\":[16,32],\\\"footprint\\\":{\\\"x\\\":-16,\\\"y\\\":-32,\\\"width\\\":32,\\\"height\\\":32},\\\"layer\\\":\\\"floor\\\",\\\"blocking\\\":false,\\\"facing\\\":\\\"none\\\"},{\\\"id\\\":\\\"stool\\\",\\\"name\\\":\\\"Wooden stool\\\",\\\"emoji\\\":\\\"🪑\\\",\\\"key\\\":\\\"single/normal/art/art-singles-30\\\",\\\"size\\\":[16,32],\\\"anchor\\\":[8,25],\\\"footprint\\\":{\\\"x\\\":-6,\\\"y\\\":-8,\\\"width\\\":12,\\\"height\\\":8},\\\"layer\\\":\\\"standing\\\",\\\"blocking\\\":true,\\\"facing\\\":\\\"south\\\",\\\"access\\\":{\\\"x\\\":-6,\\\"y\\\":0,\\\"width\\\":12,\\\"height\\\":12}}]}\",\"bodies\":{\"stool\":{\"height\":10,\"walkableTop\":true},\"tree\":{\"height\":32,\"walkableTop\":false},\"lamp\":{\"height\":32,\"walkableTop\":false}},\"gravityScale\":1}"
     }
   ],
-  "inputDigest": "57f19cee668073f602277943e7be5f82e417629a4a97f240a39dd8e1c0fee48c"
+  "inputDigest": "4bf87d3c0adbabcf68eb57c3200231a69a5f6f849281f60d27269649950c8876"
 }

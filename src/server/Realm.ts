@@ -637,7 +637,7 @@ export class Realm {
         dormantClientIds.has(session.clientId) ||
         this.interior ||
         (this.generation.type === "regional" &&
-          ["regional-v3", "regional-v4", "regional-v5", "regional-v6"].includes(
+          ["regional-v3", "regional-v4", "regional-v5", "regional-v6", "regional-v7"].includes(
             this.generation.version,
           ))
       )
@@ -1078,7 +1078,7 @@ export class Realm {
         !this.interior &&
         !(
           this.generation.type === "regional" &&
-          ["regional-v3", "regional-v4", "regional-v5", "regional-v6"].includes(
+          ["regional-v3", "regional-v4", "regional-v5", "regional-v6", "regional-v7"].includes(
             this.generation.version,
           )
         )

@@ -9,7 +9,11 @@ import { DistrictSource } from "./DistrictStrategy.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
 export interface DenseDistrictPlan extends DistrictPlan {
-  readonly recipe: "dense-district-v1" | "dense-district-v2" | "commercial-district-v1";
+  readonly recipe:
+    | "dense-district-v1"
+    | "dense-district-v2"
+    | "commercial-district-v1"
+    | "city-places-v7";
   readonly center: { x: number; y: number };
   readonly actors: ActorPlacement[];
   /** Absent in frozen v4. Threshold-to-sidewalk connections belong to v5. */

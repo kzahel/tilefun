@@ -1,4 +1,5 @@
 import { type ArtCatalog, type ArtRect, validateRect } from "./ArtCatalog.js";
+import { CITY_REVIEW_RUNS } from "./CityReviewRuns.js";
 export const ART_INTENTS = ["building", "pattern", "prop", "terrain", "other"] as const;
 export const ART_STATUSES = ["pending", "in-progress", "resolved"] as const;
 export interface BuildingReview {
@@ -7,7 +8,11 @@ export interface BuildingReview {
   caseId?: string;
   propTypes?: string[];
   surfaceRecipe?: string;
-  districtRecipe?: "dense-district-v1" | "dense-district-v2" | "commercial-district-v1";
+  districtRecipe?:
+    | "dense-district-v1"
+    | "dense-district-v2"
+    | "commercial-district-v1"
+    | "city-places-v7";
   prefabIds: string[];
   /** Hash of the composed recipe definitions, independent of the PNG revision. */
   revision: string;
@@ -44,7 +49,9 @@ function parseBuildingReview(value: unknown): BuildingReview {
       v.scene as string,
     ) ||
     !Array.isArray(v.prefabIds) ||
-    (v.scene === "surface" ? v.prefabIds.length !== 0 : !v.prefabIds.length) ||
+    (v.scene === "surface"
+      ? v.prefabIds.length !== 0
+      : v.scene !== "district" && !v.prefabIds.length) ||
     v.prefabIds.length > 30 ||
     v.prefabIds.some((id) => typeof id !== "string" || !/^prop-city-[a-z0-9-]{1,100}$/.test(id)) ||
     typeof v.revision !== "string" ||
@@ -89,15 +96,19 @@ function parseBuildingReview(value: unknown): BuildingReview {
     if (
       typeof v.caseId !== "string" ||
       !/^district-v[0-9]+-[a-z0-9-]{1,100}$/.test(v.caseId) ||
-      !["dense-district-v1", "dense-district-v2", "commercial-district-v1"].includes(
-        v.districtRecipe as string,
-      ) ||
+      ![
+        "dense-district-v1",
+        "dense-district-v2",
+        "commercial-district-v1",
+        ...Object.values(CITY_REVIEW_RUNS).map((r) => r.recipe),
+      ].includes(v.districtRecipe as string) ||
       v.surfaceRecipe !== undefined ||
       !Array.isArray(v.propTypes) ||
       v.propTypes.length > 64 ||
       v.propTypes.some((id) => typeof id !== "string" || !/^prop-[a-z0-9-]{1,100}$/.test(id)) ||
       url.searchParams.get("run") !==
-        (v.districtRecipe === "commercial-district-v1" ? "commercial" : "districts") ||
+        (Object.entries(CITY_REVIEW_RUNS).find(([, r]) => r.recipe === v.districtRecipe)?.[0] ??
+          (v.districtRecipe === "commercial-district-v1" ? "commercial" : "districts")) ||
       url.searchParams.get("case") !== v.caseId
     )
       throw new Error("Invalid district review context");

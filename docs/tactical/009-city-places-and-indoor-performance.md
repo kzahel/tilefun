@@ -55,3 +55,13 @@ Run the complete browser suite after integration. Verify door/path clearance,
 unique feature identities, negative owners, seed stability, preview residency,
 explorer/game parity and save/reopen behavior. Freeze generated signatures once
 layouts are ready. Record completed slices and remaining scope here.
+
+## Completed slices
+
+- `d4bc9f4`: indoor static-layer caching and this delivery plan. All 1,132 unit
+  tests and 19 targeted browser tests passed, including room entry/return,
+  movement/jump and approved interior visuals; 27 cache parity checks passed.
+- Parking lot candidate: regional-v7 has three Workshop views, six native spaces,
+  seeded occupancy, perimeter planting, six-tile driving access and a separate
+  clear walking entrance. The southwest building lots are reserved for this
+  place; approved v6 stays unchanged. Uses existing surface IDs 15–75 and art.

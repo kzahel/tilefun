@@ -1057,6 +1057,10 @@
       "consumers": [
         {
           "system": "World generation",
+          "source": "src/generation/regional/CityPlacesPlanner.ts:78"
+        },
+        {
+          "system": "World generation",
           "source": "src/generation/regional/CommercialDistrictPlanner.ts:146"
         },
         {
@@ -1736,6 +1740,10 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:171"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityPlacesPlanner.ts:85"
         },
         {
           "system": "World generation",
@@ -15063,7 +15071,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:147"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:151"
         }
       ]
     },
@@ -15542,6 +15550,10 @@
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:171"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/CityPlacesPlanner.ts:85"
         },
         {
           "system": "World generation",

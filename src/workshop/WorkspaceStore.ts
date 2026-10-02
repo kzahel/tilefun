@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import type { WorkshopEvent } from "./WorkshopTypes.js";
 
 export interface ReviewQueue {
@@ -82,17 +83,19 @@ export function legacyValue(key: string): Record<string, unknown> {
   }
 }
 export const queueStorageKey = (batch: string) =>
-  batch.startsWith("rooms-")
-    ? "tilefun.indoor-review.v1"
-    : batch === "roads"
-      ? "tilefun.surface-review.v1"
-      : batch === "districts"
-        ? "tilefun.district-review.v1"
-        : batch === "commercial"
-          ? "tilefun.commercial-review.v1"
-          : batch === "streets"
-            ? "tilefun.street-review.v1"
-            : "tilefun.building-review.v1";
+  isCityReviewRun(batch)
+    ? `tilefun.${batch}-review.v1`
+    : batch.startsWith("rooms-")
+      ? "tilefun.indoor-review.v1"
+      : batch === "roads"
+        ? "tilefun.surface-review.v1"
+        : batch === "districts"
+          ? "tilefun.district-review.v1"
+          : batch === "commercial"
+            ? "tilefun.commercial-review.v1"
+            : batch === "streets"
+              ? "tilefun.street-review.v1"
+              : "tilefun.building-review.v1";
 export function initialQueue(batch: string): ReviewQueue {
   const value = legacyValue(queueStorageKey(batch));
   const filter = ["unchecked", "all", "approved", "changes"].includes(String(value.filter))

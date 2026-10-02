@@ -122,13 +122,16 @@ describe("building approval identities", () => {
       buildingReview: { ...district, districtRecipe: "dense-district-v2" as const },
     };
     expect(parseArtNote(revised, catalog)).toEqual(revised);
+    expect(
+      parseArtNote({ ...note, buildingReview: { ...district, prefabIds: [] } }, catalog)
+        .buildingReview?.prefabIds,
+    ).toEqual([]);
     expect(currentBuildingVerdict([note], sheet.fingerprint, district)).toBe("approved");
     expect(currentBuildingVerdict([note], sheet.fingerprint, review)).toBeUndefined();
     for (const change of [
       { caseId: undefined },
       { districtRecipe: "unknown" },
       { surfaceRecipe: "city-surfaces-v1" },
-      { prefabIds: [] },
       { propTypes: undefined },
       { url: "/tilefun/building-lab.html?run=surfaces&case=district-v1-neighborhood" },
       { url: "/tilefun/building-lab.html?run=districts&case=district-v1-green" },

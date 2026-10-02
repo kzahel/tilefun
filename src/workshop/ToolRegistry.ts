@@ -1,3 +1,4 @@
+import { CITY_REVIEW_RUNS } from "../art/CityReviewRuns.js";
 import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
@@ -108,6 +109,12 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  ...Object.entries(CITY_REVIEW_RUNS).map(([id, r]) => ({
+    id,
+    name: r.name,
+    description: `Playable ${r.version} places, shared with the explorer and game.`,
+    toolId: "districts",
+  })),
   {
     id: "commercial",
     name: "Commercial streets & parking",

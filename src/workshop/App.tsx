@@ -10,6 +10,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router";
+import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import { workshopJson } from "./AuthClient.js";
 import { flushLegacyOutboxes, legacyPendingCount } from "./LegacyOutboxes.js";
 import { reviewToolOwnsBatch, WORKSHOP_TOOLS } from "./ToolRegistry.js";
@@ -969,7 +970,8 @@ export function legacyDestination(url: string, manifest?: WorkshopManifest) {
           t.id ===
           (["surfaces", "road-geometry"].includes(parsed.searchParams.get("run") ?? "")
             ? "roads"
-            : ["districts", "commercial"].includes(parsed.searchParams.get("run") ?? "")
+            : ["districts", "commercial"].includes(parsed.searchParams.get("run") ?? "") ||
+                isCityReviewRun(parsed.searchParams.get("run") ?? "")
               ? "districts"
               : parsed.searchParams.get("run") === "streets"
                 ? "streets"
