@@ -3,8 +3,8 @@
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache
-identity/lifetime fixed and gameplay grass frame storage reused; remaining scene/
-terrain-scheduler allocation and raster scheduling are follow-up work.
+identity/lifetime fixed, gameplay grass frame storage and terrain scheduler records
+reused; remaining scene allocation and raster scheduling are follow-up work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence. Detailed
@@ -37,6 +37,12 @@ the remaining recommendations are not implemented fixes.
   and pooled grass records are borrowed for synchronous drawing. Release the
   list after drawing and clear storage on realm changes/teardown. Grass pools
   have retention caps and shrink after sustained underuse; excess still renders.
+- Terrain preparation updates resident records in place and borrows them in a
+  reusable job list. Visitation stamps replace the per-frame membership set.
+  Membership and priorities still refresh every frame, including zero-work-budget
+  frames; departing chunks and reset/error paths release references and surfaces.
+  Visible holes, visible replacements and approaching halo work keep their order,
+  with the same 2 ms deadline and 128-row ceiling.
 
 ## Evidence and validation
 
@@ -75,8 +81,11 @@ raster scheduling remain justified; this is not a universal hitch diagnosis.
 Grass position/item storage now reuses warm buffers. A fixed 600-frame synthetic
 workload reduced sampled allocations from 64.3 MB to 13.5 MB (about 79%) with
 identical grass output; this excludes rendering and is not a phone FPS claim.
-Continue with terrain-scheduler job/set/resident bookkeeping, then static
-prop/elevation metadata and remaining scene allocations. The grass cache lifetime
+Terrain scheduler bookkeeping now also reuses storage: an 80-chunk synthetic
+probe reduced sampled allocations about 71% for ready chunks and 52% for pending
+chunks, with identical job ordering. Coordinate strings, iteration and sorting
+still allocate; these measurements exclude raster work.
+Continue with static prop/elevation metadata and remaining scene allocations. The grass cache lifetime
 fix is complete; a synthetic post-GC probe verifies that discarded chunk placements no
 longer accumulate. Phone traversal still has occasional missed frames, so this
 does not resolve the reported hitch. Move canvas resources out of world chunks and scene

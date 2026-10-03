@@ -36,6 +36,21 @@ interface CacheBuildState {
   rowOrder: number[];
 }
 
+interface TerrainResident {
+  key: string;
+  cx: number;
+  cy: number;
+  chunk: Chunk;
+  pendingSince: number | null;
+  visited: boolean;
+  priority: number;
+  distance: number;
+}
+
+function compareTerrainJobs(a: TerrainResident, b: TerrainResident): number {
+  return a.priority - b.priority || a.distance - b.distance || a.cy - b.cy || a.cx - b.cx;
+}
+
 /** Compute the current water animation frame index from a timestamp. */
 export function getWaterFrame(nowMs: number): number {
   return Math.floor(nowMs / WATER_FRAME_DURATION_MS) % WATER_FRAME_COUNT;
@@ -60,8 +75,14 @@ export class TileRenderer {
   /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
-  private readonly resident = new Map<string, { chunk: Chunk; pendingSince: number | null }>();
-  private lastCamera: { x: number; y: number } | null = null;
+  private readonly resident = new Map<string, TerrainResident>();
+  // Jobs borrow resident records only during prepareTerrain; no separate record pool.
+  private readonly terrainJobs: TerrainResident[] = [];
+  private visitStamp = false;
+  private schedulerRecordsCreated = 0;
+  private hasLastCamera = false;
+  private lastCameraX = 0;
+  private lastCameraY = 0;
   private preparedRows = 0;
 
   constructor(private readonly now: () => number = () => performance.now()) {}
@@ -74,7 +95,8 @@ export class TileRenderer {
     }
     this.resident.clear();
     this.cacheBuildStates.clear();
-    this.lastCamera = null;
+    this.terrainJobs.length = 0;
+    this.hasLastCamera = false;
     this.preparedRows = 0;
   }
 
@@ -92,99 +114,103 @@ export class TileRenderer {
   ): void {
     const started = this.now();
     const deadline = started + Math.max(0, timeBudgetMs);
-    const dx = this.lastCamera ? camera.x - this.lastCamera.x : 0;
-    const dy = this.lastCamera ? camera.y - this.lastCamera.y : 0;
+    const dx = this.hasLastCamera ? camera.x - this.lastCameraX : 0;
+    const dy = this.hasLastCamera ? camera.y - this.lastCameraY : 0;
     const length = Math.hypot(dx, dy);
     const aheadX = camera.x + (length ? (dx / length) * CHUNK_NATIVE_PX : 0);
     const aheadY = camera.y + (length ? (dy / length) * CHUNK_NATIVE_PX : 0);
-    this.lastCamera = { x: camera.x, y: camera.y };
-    const wanted = new Set<string>();
-    const jobs: {
-      key: string;
-      cx: number;
-      cy: number;
-      chunk: Chunk;
-      priority: number;
-      distance: number;
-    }[] = [];
-    for (let cy = visible.minCy - RENDER_DISTANCE; cy <= visible.maxCy + RENDER_DISTANCE; cy++) {
-      for (let cx = visible.minCx - RENDER_DISTANCE; cx <= visible.maxCx + RENDER_DISTANCE; cx++) {
-        const chunk = world.getChunkIfLoaded(cx, cy);
-        if (!chunk) continue;
-        const key = `${cx},${cy}`;
-        wanted.add(key);
-        const prior = this.resident.get(key);
-        if (prior && prior.chunk !== chunk) {
-          prior.chunk.renderCache = null;
-          this.cacheBuildStates.delete(key);
-        }
-        const pending = chunk.dirty || !chunk.renderCache;
-        this.resident.set(key, {
-          chunk,
-          pendingSince: pending
-            ? prior?.chunk === chunk
-              ? (prior.pendingSince ?? started)
-              : started
-            : null,
-        });
-        if (!pending) continue;
-        const onScreen =
-          cx >= visible.minCx && cx <= visible.maxCx && cy >= visible.minCy && cy <= visible.maxCy;
-        jobs.push({
-          key,
-          cx,
-          cy,
-          chunk,
-          priority: onScreen ? (chunk.renderCache ? 1 : 0) : 2,
-          distance: Math.hypot(
+    this.lastCameraX = camera.x;
+    this.lastCameraY = camera.y;
+    this.hasLastCamera = true;
+    const visited = !this.visitStamp;
+    this.visitStamp = visited;
+    const jobs = this.terrainJobs;
+    try {
+      for (let cy = visible.minCy - RENDER_DISTANCE; cy <= visible.maxCy + RENDER_DISTANCE; cy++) {
+        for (
+          let cx = visible.minCx - RENDER_DISTANCE;
+          cx <= visible.maxCx + RENDER_DISTANCE;
+          cx++
+        ) {
+          const chunk = world.getChunkIfLoaded(cx, cy);
+          if (!chunk) continue;
+          const key = `${cx},${cy}`;
+          let entry = this.resident.get(key);
+          if (!entry) {
+            entry = { key, cx, cy, chunk, pendingSince: null, visited, priority: 0, distance: 0 };
+            this.resident.set(key, entry);
+            this.schedulerRecordsCreated++;
+          } else if (entry.chunk !== chunk) {
+            entry.chunk.renderCache = null;
+            this.cacheBuildStates.delete(key);
+            entry.chunk = chunk;
+            entry.pendingSince = null;
+          }
+          entry.visited = visited;
+          const pending = chunk.dirty || !chunk.renderCache;
+          entry.pendingSince = pending ? (entry.pendingSince ?? started) : null;
+          if (!pending) continue;
+          const onScreen =
+            cx >= visible.minCx &&
+            cx <= visible.maxCx &&
+            cy >= visible.minCy &&
+            cy <= visible.maxCy;
+          entry.priority = onScreen ? (chunk.renderCache ? 1 : 0) : 2;
+          entry.distance = Math.hypot(
             (cx + 0.5) * CHUNK_NATIVE_PX - aheadX,
             (cy + 0.5) * CHUNK_NATIVE_PX - aheadY,
-          ),
-        });
-      }
-    }
-    for (const [key, entry] of this.resident) {
-      if (wanted.has(key)) continue;
-      entry.chunk.renderCache = null;
-      entry.chunk.dirty = true;
-      this.resident.delete(key);
-      this.cacheBuildStates.delete(key);
-    }
-    // Also discard work made through another rendering path before preparation.
-    for (const key of this.cacheBuildStates.keys())
-      if (!wanted.has(key)) this.cacheBuildStates.delete(key);
-    jobs.sort(
-      (a, b) => a.priority - b.priority || a.distance - b.distance || a.cy - b.cy || a.cx - b.cx,
-    );
-    let remaining = Math.max(0, Math.floor(rowBudget));
-    const initial = remaining;
-    const roadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
-    for (const job of jobs) {
-      if (remaining <= 0 || this.now() >= deadline) break;
-      const focalRow = Math.max(
-        0,
-        Math.min(CHUNK_SIZE - 1, Math.floor((camera.y - job.cy * CHUNK_NATIVE_PX) / TILE_SIZE)),
-      );
-      remaining = this.advanceCacheBuild(
-        job.key,
-        job.chunk,
-        job.cx,
-        job.cy,
-        sheets,
-        remaining,
-        focalRow,
-        roadAt,
-        deadline,
-      );
-      if (!job.chunk.dirty) {
-        const entry = this.resident.get(job.key);
-        if (entry?.pendingSince !== null && entry?.pendingSince !== undefined) {
-          performanceMetrics.record("client.cacheLatency", this.now() - entry.pendingSince);
-          entry.pendingSince = null;
+          );
+          jobs.push(entry);
         }
       }
+      for (const entry of this.resident.values()) {
+        if (entry.visited === visited) continue;
+        const key = entry.key;
+        entry.chunk.renderCache = null;
+        entry.chunk.dirty = true;
+        this.resident.delete(key);
+        this.cacheBuildStates.delete(key);
+      }
+      // Also discard work made through another rendering path before preparation.
+      for (const key of this.cacheBuildStates.keys())
+        if (!this.resident.has(key)) this.cacheBuildStates.delete(key);
+      jobs.sort(compareTerrainJobs);
+      let remaining = Math.max(0, Math.floor(rowBudget));
+      const initial = remaining;
+      const roadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
+      for (const job of jobs) {
+        if (remaining <= 0 || this.now() >= deadline) break;
+        const focalRow = Math.max(
+          0,
+          Math.min(CHUNK_SIZE - 1, Math.floor((camera.y - job.cy * CHUNK_NATIVE_PX) / TILE_SIZE)),
+        );
+        remaining = this.advanceCacheBuild(
+          job.key,
+          job.chunk,
+          job.cx,
+          job.cy,
+          sheets,
+          remaining,
+          focalRow,
+          roadAt,
+          deadline,
+        );
+        if (!job.chunk.dirty) {
+          if (job.pendingSince !== null) {
+            performanceMetrics.record("client.cacheLatency", this.now() - job.pendingSince);
+            job.pendingSince = null;
+          }
+        }
+      }
+      this.preparedRows = initial - remaining;
+    } catch (error) {
+      // An incomplete membership scan must not leave stamps for the next pass.
+      this.clear();
+      throw error;
+    } finally {
+      // Release borrowed chunk references even if cache drawing throws.
+      jobs.length = 0;
     }
-    this.preparedRows = initial - remaining;
   }
 
   getDiagnostics() {
@@ -200,6 +226,8 @@ export class TileRenderer {
     }
     return {
       resident: this.resident.size,
+      schedulerRecordsCreated: this.schedulerRecordsCreated,
+      queuedJobs: this.terrainJobs.length,
       building: this.cacheBuildStates.size,
       pending,
       oldestMs,

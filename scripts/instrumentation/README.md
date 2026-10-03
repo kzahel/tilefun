@@ -21,6 +21,16 @@ animation times, including push angles and iteration order. The script also
 works on the pre-pooling collector for before/after captures. This synthetic
 workload excludes drawing, streaming, sorting, prediction and simulation.
 
+## Terrain scheduler allocation
+
+Run `node scripts/instrumentation/terrain-scheduler-allocation.mjs` from the
+repository root. It samples 3,000 frames after a 60-frame warmup with 80 ready
+chunks, then with 80 pending chunks. Zero row budget isolates membership and
+job bookkeeping from raster work. A separate ordered-job hash covers camera
+reversals and changes in old imagery availability. Bundled Chromium's sampling
+includes collected objects; byte counts are estimates, not FPS/timing gates.
+The script also works against the pre-reuse scheduler for before/after captures.
+
 ## Protocol instrumentation
 
 Temporary scripts for auditing which messages still go through JSON fallback (`0xFF`) and roughly how large they are.

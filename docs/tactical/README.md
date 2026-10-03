@@ -24,7 +24,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [010 Outdoor assets](010-outdoor-asset-catalog-and-scene-review.md) | Catalog/metadata/scene feedback delivered for review; [art review topic](../topics/art-review.md) |
 | [011 Patterns and rooms](011-shared-pattern-brushes-and-room-drawing.md) | Shared drawing and saved gameplay room edits delivered; review/import/promotion remain |
 | [012 Streaming and Worker](012-streaming-performance-and-local-server-worker.md) | Delivered with desktop/Android evidence; raster scheduling follow-up in [performance topic](../topics/performance.md) |
-| [013 Renderer and allocation audit](013-renderer-boundary-and-allocation-audit.md) | Audit, grass cache lifetime and frame reuse complete; scheduler allocation and renderer-boundary slices next; [performance topic](../topics/performance.md) |
+| [013 Renderer and allocation audit](013-renderer-boundary-and-allocation-audit.md) | Audit, grass cache lifetime, frame reuse and scheduler storage complete; static scene metadata and renderer-boundary slices next; [performance topic](../topics/performance.md) |
 | [014 WebRTC delivery validation](014-webrtc-delivery-validation.md) | Pre-fix audit; bounded fix delivered in 015; [networking topic](../topics/multiplayer-networking.md) |
 | [015 WebRTC ordered delivery](015-webrtc-ordered-delivery.md) | Reliable routing fixes audited defects; broader investigation deferred; [networking topic](../topics/multiplayer-networking.md) |
 | [016 Play ideas](016-play-ideas.md) | Delivered: hold-to-speak ideas, spoken proofreading, screenshots and private Workshop management; [play ideas topic](../topics/play-ideas.md) |

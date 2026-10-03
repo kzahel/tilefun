@@ -1,6 +1,6 @@
 # Renderer boundary and walking allocation audit
 
-Status: audit, grass cache identity/lifetime and grass frame reuse completed 2026-10-03;
+Status: audit, grass cache identity/lifetime, grass frame and scheduler storage reuse completed 2026-10-03;
 remaining implementation slices below are proposed.
 Owner: [performance](../topics/performance.md).
 
@@ -389,3 +389,73 @@ comment added during validation made its manifest digest stale. After final
 inventory regeneration/build, that isolated check passes (1.8 seconds). The full
 suite was not repeated after the digest refresh; runtime behavior is unchanged
 from the build used by the other 248 passing checks.
+
+
+## Implementation record: terrain scheduler storage reuse
+
+The third slice keeps one mutable record per resident coordinate. Pending jobs
+borrow these records in one renderer-owned array; completed/evicted records are
+not retained in a separate pool. An alternating visitation stamp replaces the
+per-frame wanted set, and scalar camera history replaces the camera object.
+The job list drops references after each preparation, including exceptions;
+reset clears resident and partial-build state. An interrupted scan clears
+residency so a stale stamp cannot keep a departed chunk on a later pass.
+
+Every frame still scans the loaded camera halo and updates pending state and
+camera-dependent distance. Chunk arrivals, unloads, replacement objects, edits,
+and direction reversals are detected even when the visible range stays fixed.
+Replacement resets pending age and cancels old partial work; continuing work
+keeps its age. Priority tiers, distance/tie ordering, the 2 ms CPU deadline,
+128-row cap and canvas creation policy are unchanged. The additional diagnostics
+count lifetime resident-record creation and current borrowed jobs; after a
+preparation the borrowed count is zero. Records remain bounded by the loaded
+visible range plus halo, with no evicted-chunk free list.
+
+Five new unit cases cover warm reuse and membership changes at zero budget,
+pending age through replacement/edits, reversal and priority tiers, fallback
+partial-work cleanup, and drawing-error recovery/reset. Existing row-budget,
+deadline, revision restart and residency-bound cases remain in place.
+
+The reproducible
+[`terrain-scheduler-allocation.mjs`](../../scripts/instrumentation/terrain-scheduler-allocation.mjs)
+probe warms 60 frames across 80 loaded chunks, then samples 3,000 frames in
+bundled Chromium 153.0.8010.12. Ready chunks fall from 38,329,772 to 11,014,520
+sampled bytes (71% less); all-pending chunks fall from 71,556,060 to 34,643,372
+(52% less). Both after scenarios create exactly 80 resident records including
+warmup. A separate 20-frame priority probe changes camera direction and old
+imagery availability; its complete ordered-job hash matches the baseline.
+Sampling includes collected objects and is approximate. A zero row budget
+isolates bookkeeping from raster work; coordinate strings, iteration, sort
+scratch/comparisons and JS array backing storage can still allocate. These
+numbers establish no phone FPS gain or complete hitch fix.
+
+[Sanitized evidence](../benchmarks/013-terrain-scheduler-reuse.json) records the
+allocation samples and traversal summaries. Baseline revision is `8a058ca`;
+the candidate is that revision plus this scheduler slice. Shared-checkout
+vehicle/Workshop edits interrupted the first typecheck/build attempt, so the
+final code checks and browser/phone validation use a temporary detached checkout
+of that baseline plus only this change. The first desktop traversal used the
+shared checkout and passed; its context is recorded separately in the evidence.
+
+Next: cache static prop depth/collision and elevation descriptors with explicit
+content invalidation, keeping dynamic depth sorting intact. Raster submission
+limits remain a separate measured follow-up; this slice changes no production
+work policy or promoted pixels.
+
+The post-change Pixel 7a / Android 17 / Chrome 154.0.8037.57 touch smoke passes
+`--assert-ready` on v4 and v10. Walk/sprint/reverse have zero missing or unfinished
+visible terrain frames and 16.7–16.8 ms interval p95. There are still individual
+intervals over 25 ms (v4: 1/1/6; v10: 1/1/9 for walk/sprint/reverse). Cold entry
+has missing/unfinished terrain (v4: 3/18 frames; v10: 3/22), consistent with the
+separate cold-entry follow-up. This is one post-change run, with host validation
+running concurrently, not a controlled before/after timing experiment. The
+runner removed its test tab/origin data; task USB routes were removed and the
+final device doctor reported ready/unlocked.
+
+Validation: all three typechecks, 1,221 unit tests, and Biome pass (the existing
+122 warnings / 32 informational diagnostics remain). Art catalog and Workshop
+manifest regeneration plus production build pass; the isolated inventory changes
+only its source digest, with identical candidate metadata. The complete browser
+suite passes 256 checks with one existing skip. Desktop and physical-phone
+streaming runners both pass `--assert-ready`. No shared vehicle/Workshop source
+or candidate changes are included in this slice's commit.
