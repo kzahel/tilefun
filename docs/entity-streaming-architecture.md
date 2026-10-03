@@ -51,6 +51,42 @@ errors. They do not decide whether an NPC exists, simulate it, or independently
 merge game data. Clients receive replicas; they do not fetch authoritative
 entity records from storage.
 
+### One server implementation, injected host adapters
+
+This is a required invariant for every phase: the integrated browser server,
+browser P2P host and dedicated Node server execute the **same authoritative
+server modules**, not separate implementations that merely implement matching
+interfaces. Extend the existing `GameServer`/`Realm` core. Do not introduce a
+`BrowserRealm`, `NodeRealm` or platform-specific persistence coordinator.
+
+Keep these responsibilities shared: simulation and AI, ticket aggregation,
+readiness, loading/eviction decisions, durable codecs and identity, dirty
+revisions, batching/coalescing, save scheduling, retry/backpressure policy,
+flush/close barriers, transitions and replication message construction.
+
+Host entry points assemble narrowly typed dependencies:
+
+| Boundary | Platform-specific responsibility |
+| --- | --- |
+| Storage executor and world catalog | IndexedDB or SQLite record/index/transaction operations and catalog IO; report typed completions/capabilities to shared policy. |
+| Transport | Worker messages, WebSocket or WebRTC delivery behind the shared protocol/transport contract. |
+| Host lifecycle and scheduling | Browser visibility or process signals, timer wakeups and storage-worker startup. Request shared pause/flush/close operations; do not implement a second save or simulation loop. |
+| Platform services | Writer-lock primitives, monotonic clock/ID entropy, logging and host access-policy hooks where required. |
+
+Admission limits and supported storage durability may be explicit capabilities
+or configuration; they cannot silently select a second algorithm. Given the
+same seed, commands, simulation steps and configuration, hosts must obey the
+same gameplay and persistence semantics. Wall-clock IO completion times and
+browser/process lifecycle events naturally differ.
+
+Today `GameServer` already accepts transport, registry and store dependencies,
+but also imports browser implementations as constructor defaults. During the
+refactor, move concrete adapter construction to host composition entry points
+and make required dependencies explicit. Shared domain code must not import
+IndexedDB, SQL, filesystem or DOM implementations or branch on host type to
+decide gameplay/save behavior. Adapter interfaces should reflect demonstrated
+needs, rather than a framework for hypothetical hosts.
+
 The shared coordinator submits requests and integrates completions on server
 turns. No synchronous SQLite work blocks the simulation loop. Browser code
 yields to IndexedDB callbacks instead of pretending asynchronous IO is

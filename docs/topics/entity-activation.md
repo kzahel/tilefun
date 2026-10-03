@@ -28,6 +28,12 @@ lists; individual records and reduced-rate AI are deliberate Tilefun choices.
 [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
 parent sequence. This decision is documentation only, not implemented behavior.
 
+All hosts must execute the same authoritative server and persistence coordinator;
+only injected host adapters differ. The
+[shared implementation boundary](../entity-streaming-architecture.md#one-server-implementation-injected-host-adapters)
+is a required architecture and validation constraint, including removal of
+browser adapter defaults from the shared server during the refactor.
+
 ## Current behavior
 
 Source audit on 2026-10-03; these are implementation findings, not measured

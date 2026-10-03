@@ -25,6 +25,12 @@ that one commit can safely deliver the entire refactor.
 
 ## Sequence
 
+All phases preserve [one authoritative implementation](../entity-streaming-architecture.md#one-server-implementation-injected-host-adapters).
+In A, inventory host dependencies and define the required ports. In B, move
+browser defaults out of `GameServer` into composition entry points while adding
+the storage adapters. Shared coordination, save scheduling and lifecycle barriers
+must not be reimplemented in either adapter or host wrapper.
+
 | Phase | Work and dependency | Delivered benefit / exit gate |
 | --- | --- | --- |
 | A: Baseline and minimum contract | Measure current save serialization/writes, startup reads and retained actor/terrain counts. Define durable IDs, per-kind field inventories, revisioned record envelope, atomic mutation and async completion semantics. Memory/fault executor; no production behavior change yet. | Reproducible amplification baseline and contract tests for revision races, atomic groups and errors. Keep this prerequisite bounded. |
@@ -61,6 +67,7 @@ thresholds. Scenarios below are proposed tests, not existing passing evidence.
 | Activity boundaries | Full/reduced/sleep crossings, balls/projectiles, collision pairs, parented groups, follower targets, fast bodies, camera pan/zoom, distant/overlapping players, session disconnect and debug pause. No missing-terrain integration or wall-clock catch-up. |
 | Failure and pressure | Slow/failed reads, quota/disk-full writes, lock contention, shutdown during a save and process termination around commits. Durable state is retained or explicitly backpressured; reads cannot starve writes. Verify restart consistency and SQLite integrity; distinguish committed data from unacknowledged recent edits. |
 | Platform parity | Run real IndexedDB in bundled Playwright Chromium and real SQLite through the Node adapter. Shared memory tests alone do not prove either transaction lifecycle. Single-player Worker, browser host and dedicated server follow the same semantic fixtures. |
+| Shared implementation boundary | Verify all host entry points assemble the same server/coordinator classes; shared domain modules have no concrete platform-adapter imports. Run common command/step fixtures through each host adapter and compare semantic outcomes, allowing documented IO timing/durability differences. Matching APIs over duplicated server logic does not satisfy this gate. |
 | Replication | Interest exit is not death. Reentry publishes exactly one actor. Delayed messages cannot address a retired incarnation; local and remote transports agree. |
 
 Each runtime slice runs `npm run typecheck`, `npm test`, `npm run check` and
