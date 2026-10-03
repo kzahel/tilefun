@@ -1,5 +1,5 @@
-// Bounded real-game traversal. Owns an isolated Vite server and bundled Chromium;
-// no installed browser, persistent profile, user world, or public server needed.
+// Bounded real-game traversal. Defaults to isolated Vite + bundled Chromium.
+// --cdp attaches to a physical phone's Chrome, using only a new test tab/origin.
 import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
@@ -19,6 +19,13 @@ const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
 const versions = option("versions", "regional-v4,regional-v10").split(",");
 const cpuRate = Number(option("cpu", "1"));
+const endpoint = option("cdp", "");
+const port = Number(option("port", "0"));
+const touch = process.argv.includes("--touch");
+if (endpoint && (process.env.TILEFUN_DEV_URL || !port || cpuRate !== 1))
+  throw Error(
+    "Physical-device CDP requires a dedicated --port, no existing server and no CPU emulation",
+  );
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-bench-"));
 for (const key of [
   "WORKSHOP_AUTH_DIR",
@@ -28,16 +35,19 @@ for (const key of [
 ])
   process.env[key] = path.join(temp, key);
 let server, browser;
+let devicePage, deviceSession, testOrigin;
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   dirty: !!execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
   date: new Date().toISOString(),
-  platform: `${os.platform()} ${os.release()} ${os.arch()}`,
-  cpu: os.cpus()[0]?.model,
-  headed,
+  platform: endpoint ? "physical-device" : `${os.platform()} ${os.release()} ${os.arch()}`,
+  cpu: endpoint ? undefined : os.cpus()[0]?.model,
+  device: endpoint ? option("device", "unspecified physical device") : undefined,
+  headed: endpoint ? true : headed,
+  input: touch ? "touch joystick and sprint button" : "keyboard",
   instrumentation,
   cpuRate,
-  viewport: { width: 1280, height: 900 },
+  viewport: endpoint ? null : { width: 1280, height: 900 },
   fixtures: [],
 };
 try {
@@ -48,21 +58,29 @@ try {
       configFile: false,
       base: "/tilefun/",
       plugins: [react()],
-      server: { host: "127.0.0.1", port: 0, hmr: false },
+      server: { host: "127.0.0.1", port, strictPort: true, hmr: false },
       logLevel: "error",
     });
     await server.listen();
     origin = `http://127.0.0.1:${server.httpServer.address().port}/tilefun`;
   }
-  browser = await chromium.launch({ headless: !headed });
+  testOrigin = new URL(origin).origin;
+  browser = endpoint
+    ? await chromium.connectOverCDP(endpoint, { noDefaults: true })
+    : await chromium.launch({ headless: !headed });
   report.browser = browser.version();
   for (const version of versions) {
-    const context = await browser.newContext({ viewport: report.viewport });
+    const context = endpoint
+      ? browser.contexts()[0]
+      : await browser.newContext({ viewport: report.viewport, hasTouch: touch });
     const page = await context.newPage();
+    if (endpoint) devicePage = page;
+    await page.bringToFront();
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     const cdp = await context.newCDPSession(page);
-    await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
+    if (endpoint) deviceSession = cdp;
+    else await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
     await page.goto(`${origin}/tools.html`);
     const arrival = await page.evaluate(async (version) => {
       const generation = { type: "regional", version, seed: 2026, preset: "temperate-v1" };
@@ -81,6 +99,46 @@ try {
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await page.waitForFunction(() => document.querySelector("#game").dataset.ready === "true");
+    const display = await page.evaluate(() => ({
+      viewport: { width: innerWidth, height: innerHeight },
+      screen: { width: screen.width, height: screen.height },
+      devicePixelRatio,
+      maxTouchPoints: navigator.maxTouchPoints,
+      userAgent: navigator.userAgent,
+      canvas: {
+        width: document.querySelector("#game").width,
+        height: document.querySelector("#game").height,
+      },
+    }));
+    if (endpoint) report.viewport = display.viewport;
+    const move = async (direction, sprint = false, initial = false) => {
+      if (!touch) return;
+      const points = await page.evaluate(
+        ({ direction, sprint, initial }) => {
+          const g = document.querySelector("#game").__game;
+          const b = g.canvas.getBoundingClientRect();
+          const base = { x: Math.min(140, b.width * 0.35), y: b.height * 0.6 };
+          const points = [
+            { id: 0, x: b.x + base.x + (initial ? 0 : direction * 50), y: b.y + base.y },
+          ];
+          if (sprint) {
+            const p = g.touchButtons.getPositions()[2];
+            points.push({
+              id: 1,
+              x: b.x + (p.x * b.width) / g.canvas.width,
+              y: b.y + (p.y * b.height) / g.canvas.height,
+            });
+          }
+          return points;
+        },
+        { direction, sprint, initial },
+      );
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: initial || sprint ? "touchStart" : "touchMove",
+        touchPoints: points,
+      });
+      if (initial) await move(direction);
+    };
     const sample = async (name, count) => {
       const data = await page.evaluate(
         async ({ count }) => {
@@ -223,21 +281,35 @@ try {
     samples.push(await sample("cold", 120));
     await page.screenshot({ path: path.join(output, `${version}-settled.png`) });
     samples.push(await sample("standing", 120));
-    await page.keyboard.down("ArrowLeft");
+    if (touch) await move(-1, false, true);
+    else await page.keyboard.down("ArrowLeft");
     samples.push(await sample("walk", 180));
-    await page.keyboard.down("Shift");
+    if (touch) await move(-1, true);
+    else await page.keyboard.down("Shift");
     const sprint = await sample("sprint", 300);
     samples.push(sprint);
-    await page.keyboard.up("ArrowLeft");
-    await page.keyboard.down("ArrowRight");
+    if (touch) {
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await move(1, false, true);
+      await move(1, true);
+    } else {
+      await page.keyboard.up("ArrowLeft");
+      await page.keyboard.down("ArrowRight");
+    }
     samples.push(await sample("reverse", 300));
-    await page.keyboard.up("ArrowRight");
-    await page.keyboard.up("Shift");
+    if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    else {
+      await page.keyboard.up("ArrowRight");
+      await page.keyboard.up("Shift");
+    }
     await page.evaluate(() => {
       document.querySelector("#game").__game.debugPanel.setZoom(0.5);
     });
     samples.push(await sample("zoom-out", 180));
     await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
+    // Keep measurements available even when a coverage assertion fails.
+    report.fixtures.push({ version, arrival, display, samples, errors });
+    await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
     if (Math.abs(sprint.displacement.x) < 256 || sprint.visitedChunks < 6)
       throw Error(`${version}: traversal failed to cross terrain (${sprint.displacement.x}px)`);
     if (errors.length) throw Error(errors.join("\n"));
@@ -246,12 +318,24 @@ try {
         if (s.missingDataFrames || s.incompleteCacheFrames)
           throw Error(`${version}/${s.name}: visible terrain was not ready`);
     }
-    report.fixtures.push({ version, arrival, samples, errors });
-    await context.close();
+    if (endpoint) {
+      await page.goto("about:blank");
+      await cdp.send("Storage.clearDataForOrigin", { origin: testOrigin, storageTypes: "all" });
+      await page.close();
+      devicePage = deviceSession = undefined;
+    } else await context.close();
   }
   await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${path.join(output, "report.json")}`);
 } finally {
+  if (devicePage) {
+    await devicePage.goto("about:blank").catch(() => {});
+    await deviceSession
+      ?.send("Storage.clearDataForOrigin", { origin: testOrigin, storageTypes: "all" })
+      .catch(() => {});
+    await devicePage.close().catch(() => {});
+  }
+  // connectOverCDP.close disconnects; it does not close the phone's Chrome.
   await browser?.close();
   await server?.close();
   await rm(temp, { recursive: true, force: true });
