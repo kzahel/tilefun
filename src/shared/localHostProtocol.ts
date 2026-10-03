@@ -14,6 +14,7 @@ export interface LocalHostDiagnostics {
   channel: ReturnType<OrderedWorkerChannel<LocalHostPacket>["diagnostics"]>;
   ticks: number;
   hidden: boolean;
+  persistence?: import("../server/GameServer.js").GameServer["persistenceDiagnostics"];
 }
 export type LocalHostBoot =
   | { kind: "init"; metrics: boolean }

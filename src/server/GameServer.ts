@@ -31,11 +31,13 @@ import {
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
+import { SAVE_FORMAT } from "../persistence/SaveFormat.js";
 import {
   type InspectionSnapshot,
   readInspection,
   validateInspection,
 } from "../persistence/WorldInspection.js";
+import { WorldStorePool } from "../persistence/WorldStorePool.js";
 import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -65,6 +67,38 @@ export interface GameServerDeps {
 }
 
 export class GameServer {
+  teleport(session: PlayerSession, wx: number, wy: number): void {
+    const realm = this.realms.get(session.realmId ?? "");
+    if (
+      !realm ||
+      !Number.isFinite(wx) ||
+      !Number.isFinite(wy) ||
+      Math.abs(wx) > 2 ** 28 ||
+      Math.abs(wy) > 2 ** 28
+    )
+      throw new Error("Invalid teleport destination.");
+    const move = async () => {
+      await realm.ensureReady({
+        minCx: Math.floor(wx / 256) - 3,
+        maxCx: Math.floor(wx / 256) + 3,
+        minCy: Math.floor(wy / 256) - 3,
+        maxCy: Math.floor(wy / 256) + 3,
+      });
+      if (session.realmId !== realm.currentWorldId || session.retired) return;
+      session.player.position = { wx, wy };
+      realm.savePlayerData(session);
+    };
+    void this.trackOperation(move()).catch((error) =>
+      this.transport.send(session.clientId, {
+        type: "storage-status",
+        paused: false,
+        message: String(error),
+      }),
+    );
+  }
+  get persistenceDiagnostics() {
+    return [...this.realms.values()].map((realm) => realm.persistenceDiagnostics);
+  }
   completedTicks = 0;
   onLoopError: ((error: unknown) => void) | undefined;
   private readonly pendingOperations = new Set<Promise<unknown>>();
@@ -95,6 +129,7 @@ export class GameServer {
 
   /** All active realms, keyed by worldId. */
   private readonly realms = new Map<string, Realm>();
+  private readonly retiringRealms = new Map<string, Promise<void>>();
   private readonly loadingRealms = new Map<string, Promise<Realm>>();
   /** The default realm's worldId (set during init, used for new connections). */
   private defaultRealmId: string | null = null;
@@ -171,7 +206,8 @@ export class GameServer {
     this.transport = transport;
     this.authorizeAdmin = deps.authorizeAdmin ?? (() => true);
     this.registry = deps.registry;
-    this.createStore = deps.createStore;
+    const stores = new WorldStorePool(deps.createStore);
+    this.createStore = (id) => stores.realm(id, parseInteriorId(id)?.parentWorldId ?? id);
     // Create a default realm (will be loaded with a world in init() or loadWorld())
     const defaultRealm = new Realm([baseGameMod]);
     // Use a sentinel key until a real world is loaded
@@ -242,7 +278,7 @@ export class GameServer {
 
     // Load most recent world, or create a default one
     const worlds = await this.registry.listWorlds();
-    const firstWorld = worlds.find((world) => world.saveFormat === 2);
+    const firstWorld = worlds.find((world) => world.saveFormat === SAVE_FORMAT);
     if (firstWorld) {
       console.log("[tilefun] loading existing world:", firstWorld.id, firstWorld.name);
       await this.loadWorldIntoDefaultRealm(firstWorld.id);
@@ -580,8 +616,13 @@ export class GameServer {
    * Otherwise, creates a new Realm and loads the world into it.
    */
   private async getOrCreateRealm(worldId: string): Promise<Realm> {
+    const retiring = this.retiringRealms.get(worldId);
+    if (retiring) await retiring;
     const existing = this.realms.get(worldId);
-    if (existing) return existing;
+    if (existing) {
+      if (!existing.sessions.size) existing.idleSince = Date.now();
+      return existing;
+    }
 
     const pending = this.loadingRealms.get(worldId);
     if (pending) return pending;
@@ -770,7 +811,7 @@ export class GameServer {
   private async realmMetadata(worldId: string): Promise<WorldMeta | undefined> {
     const known = await this.registry.getWorld(worldId);
     if (known) {
-      if (known.saveFormat !== 2)
+      if (known.saveFormat !== SAVE_FORMAT)
         throw new Error(
           "This world uses an incompatible save format. Create a new world or explicitly delete it.",
         );
@@ -780,7 +821,8 @@ export class GameServer {
     if (!parsed) return undefined;
     const parent = await this.registry.getWorld(parsed.parentWorldId);
     if (!parent) throw new Error("Parent world not found.");
-    if (parent.saveFormat !== 2) throw new Error("Parent world uses an incompatible save format.");
+    if (parent.saveFormat !== SAVE_FORMAT)
+      throw new Error("Parent world uses an incompatible save format.");
     const generation = descriptorFromMetadata(parent);
     if (generation.type !== "regional" || generation.version === "regional-v1")
       throw new Error("This generator has no enterable building plans.");
@@ -977,13 +1019,21 @@ export class GameServer {
       if (now - realm.idleSince >= GameServer.REALM_IDLE_TIMEOUT_MS) {
         console.log(`[tilefun] unloading idle realm: ${worldId}`);
         realm.idleSince = null;
-        void this.trackOperation(
-          realm.flushAsync().then(async () => {
+        const retiring = (async () => {
+          try {
+            await realm.flushAsync();
             if (realm.sessions.size) return;
             await realm.destroy();
             this.realms.delete(worldId);
-          }),
-        ).catch((error) => this.onLoopError?.(error));
+          } catch (error) {
+            realm.idleSince = Date.now();
+            throw error;
+          }
+        })();
+        this.retiringRealms.set(worldId, retiring);
+        void this.trackOperation(retiring.finally(() => this.retiringRealms.delete(worldId))).catch(
+          (error) => this.onLoopError?.(error),
+        );
       }
     }
   }
@@ -1343,32 +1393,55 @@ export class GameServer {
     if (!session.realmId || session.transitioning) return;
     const realm = this.realms.get(session.realmId);
     if (!realm) return;
-    if (msg.type === "edit-room" || msg.type === "edit-room-history") {
-      const editor = realm.roomEditor;
-      const status =
-        !editor || !session.editorEnabled || msg.roomId !== realm.currentWorldId
-          ? {
-              error: "Room editing requires the indoor editor.",
-              canUndo: false,
-              canRedo: false,
-              revision: editor?.state.revision ?? 0,
-            }
-          : msg.type === "edit-room"
-            ? editor.edit(clientId, msg.expectedRevision, msg.edit)
-            : editor.travel(clientId, msg.expectedRevision, msg.direction);
-      this.transport.send(clientId, { type: "room-edit-status", ...status });
-      return;
-    }
-    if (msg.type === "edit-pattern" || msg.type === "edit-pattern-history") {
-      const status =
-        !session.editorEnabled || realm.interior
-          ? realm.treeBrush.status(clientId, "Outdoor pattern editing requires the outdoor editor.")
-          : msg.type === "edit-pattern"
-            ? realm.treeBrush.edit(clientId, msg)
-            : realm.treeBrush.travel(clientId, msg.direction);
-      this.transport.send(clientId, { type: "pattern-edit-status", ...status });
-      return;
-    }
-    realm.handleMessage(clientId, session, msg);
+    const dispatch = () => {
+      if (msg.type === "edit-room" || msg.type === "edit-room-history") {
+        const editor = realm.roomEditor;
+        const status =
+          !editor || !session.editorEnabled || msg.roomId !== realm.currentWorldId
+            ? {
+                error: "Room editing requires the indoor editor.",
+                canUndo: false,
+                canRedo: false,
+                revision: editor?.state.revision ?? 0,
+              }
+            : msg.type === "edit-room"
+              ? editor.edit(clientId, msg.expectedRevision, msg.edit)
+              : editor.travel(clientId, msg.expectedRevision, msg.direction);
+        this.transport.send(clientId, { type: "room-edit-status", ...status });
+        return;
+      }
+      if (msg.type === "edit-pattern" || msg.type === "edit-pattern-history") {
+        const status =
+          !session.editorEnabled || realm.interior
+            ? realm.treeBrush.status(
+                clientId,
+                "Outdoor pattern editing requires the outdoor editor.",
+              )
+            : msg.type === "edit-pattern"
+              ? realm.treeBrush.edit(clientId, msg)
+              : realm.treeBrush.travel(clientId, msg.direction);
+        this.transport.send(clientId, { type: "pattern-edit-status", ...status });
+        return;
+      }
+      realm.handleMessage(clientId, session, msg);
+    };
+    if (
+      msg.type.startsWith("edit-") ||
+      msg.type === "throw-ball" ||
+      msg.type === "player-interact"
+    ) {
+      const report = (error: unknown) =>
+        this.transport.send(clientId, {
+          type: "storage-status",
+          paused: false,
+          message: error instanceof Error ? error.message : "The edit could not be applied.",
+        });
+      try {
+        const pending = realm.admitMutation(session, msg, dispatch);
+        if (pending) void this.trackOperation(pending).catch(report);
+      } catch (error) {
+        report(error);
+      }
+    } else dispatch();
   }
 }

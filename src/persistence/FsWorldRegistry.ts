@@ -9,6 +9,7 @@ import {
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import { containedPath, worldDirectory } from "./fsPaths.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
+import { SAVE_FORMAT } from "./SaveFormat.js";
 
 /**
  * Filesystem implementation of IWorldRegistry for Node.js.
@@ -61,7 +62,7 @@ export class FsWorldRegistry implements IWorldRegistry {
         });
     const now = Date.now();
     const meta: WorldMeta = {
-      saveFormat: 2,
+      saveFormat: SAVE_FORMAT,
       id: randomUUID(),
       name,
       createdAt: now,

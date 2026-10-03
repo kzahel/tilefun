@@ -32,7 +32,7 @@ export class RealmRecords {
   private children = new Map<number, Set<Entity>>();
   private parentOf = new WeakMap<Entity, number>();
 
-  scope(actor: Entity | Prop): string {
+  root(actor: Entity | Prop): Entity | Prop {
     let root = actor;
     const seen = new Set<number>();
     while (!("isProp" in root) && root.parentId !== undefined) {
@@ -42,7 +42,29 @@ export class RealmRecords {
       if (!parent || parent.type === "player") break;
       root = parent;
     }
-    return actorScope(root.position);
+    return root;
+  }
+
+  scope(actor: Entity | Prop): string {
+    return actorScope(this.root(actor).position);
+  }
+  get isHydrating(): boolean {
+    return this.hydrating;
+  }
+  group(actor: Entity): Entity[] {
+    const root = this.root(actor);
+    if ("isProp" in root) return [actor];
+    const result: Entity[] = [],
+      queue = [root];
+    while (queue.length) {
+      const current = queue.pop();
+      if (!current) break;
+      if (result.length >= 64 || result.includes(current))
+        throw new Error("Attachment group exceeds its limit.");
+      result.push(current);
+      queue.push(...(this.children.get(current.id) ?? []));
+    }
+    return result;
   }
 
   private unindex(actor: Entity | Prop): void {

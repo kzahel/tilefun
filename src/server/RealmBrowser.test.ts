@@ -9,6 +9,7 @@ import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
+import { SAVE_FORMAT } from "../persistence/SaveFormat.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
@@ -40,7 +41,7 @@ class MemoryRegistry implements IWorldRegistry {
   ): Promise<WorldMeta> {
     const now = Date.now();
     const meta: WorldMeta = {
-      saveFormat: 2,
+      saveFormat: SAVE_FORMAT,
       id: `world-${this.nextId++}`,
       name,
       createdAt: now,
@@ -1146,13 +1147,14 @@ describe("durable player location", () => {
         saved.realmId = `interior~${setup.meta.id}~settlement%3A0%3A0%3Ablock%3A999%3A999%3Alot%3A999~0`;
         await store.save([{ collection: "players", key: restoreProfile.profileId, value: saved }]);
       } else {
-        const roomStore = setup.createStore(saved.realmId);
+        const roomStore = setup.createStore(saved.parentWorldId);
+        const collection = JSON.stringify([saved.realmId, "meta"]);
         const meta = (await roomStore.get(
-          "meta",
+          collection,
           "state",
         )) as import("../persistence/SaveManager.js").SavedMeta;
         await roomStore.save([
-          { collection: "meta", key: "state", value: { ...meta, roomPlan: { version: 99 } } },
+          { collection, key: "state", value: { ...meta, roomPlan: { version: 99 } } },
         ]);
       }
       await setup.server.destroy();
@@ -1518,9 +1520,9 @@ it("keeps saved city room geometry and furniture while admitting the second exte
   const cell = room.document.cells.find((c) => c.x === 3 && c.y === 3);
   if (cell) cell.value = "L";
   room.revision = 4;
-  await setup.createStore(id).save([
+  await setup.createStore(meta.id).save([
     {
-      collection: "meta",
+      collection: JSON.stringify([id, "meta"]),
       key: "state",
       value: {
         cameraX: 80,
@@ -1550,7 +1552,11 @@ it("keeps saved city room geometry and furniture while admitting the second exte
     expect(server.getLocalSession().player.position).toEqual({ wx: 80, wy: 120 });
     await server.flushAsync();
     expect(
-      ((await setup.createStore(id).get("meta", "state")) as { roomPlan: unknown }).roomPlan,
+      (
+        (await setup.createStore(meta.id).get(JSON.stringify([id, "meta"]), "state")) as {
+          roomPlan: unknown;
+        }
+      ).roomPlan,
     ).toEqual(room);
     expect(
       server.propManager.props.filter((p) => p.type.startsWith("prop-interior-furniture:")),

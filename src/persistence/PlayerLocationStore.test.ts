@@ -3,12 +3,12 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, it, vi } from "vitest";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
-import { FsPersistenceStore } from "./FsPersistenceStore.js";
 import { type PlayerLocation, PlayerLocationStore } from "./PlayerLocationStore.js";
+import { SqlitePersistenceStore } from "./SqlitePersistenceStore.js";
 
 it("orders complete location records, isolates profiles and reopens after a failed write and retry", async () => {
   const dir = await mkdtemp(join(tmpdir(), "tilefun-player-location-"));
-  const store = new FsPersistenceStore(dir, ["players"]);
+  const store = new SqlitePersistenceStore(dir);
   const locations = new PlayerLocationStore(store);
   const location: PlayerLocation = {
     version: 1,
@@ -26,13 +26,14 @@ it("orders complete location records, isolates profiles and reopens after a fail
     const first = locations.save("one", { ...location, realmId: "intermediate" });
     const second = locations.save("one", { ...location, realmId: "final" });
     await Promise.all([first, second, locations.save("two", location)]);
-    const reopened = new PlayerLocationStore(new FsPersistenceStore(dir, ["players"]));
+    await locations.close();
+    const reopened = new PlayerLocationStore(new SqlitePersistenceStore(dir));
     expect(await reopened.load("one")).toEqual({ ...location, realmId: "final" });
     expect(await reopened.load("two")).toEqual(location);
     expect(await reopened.load("missing")).toBeNull();
-    reopened.close();
+    await reopened.close();
   } finally {
-    locations.close();
+    await locations.close();
     await rm(dir, { recursive: true, force: true });
   }
 });

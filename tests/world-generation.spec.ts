@@ -196,7 +196,7 @@ test("Play here creates at the preview location and saved inspection includes a 
     .poll(async () =>
       page.evaluate(async (id) => {
         const db = await new Promise<IDBDatabase>((r) => {
-          const req = indexedDB.open(`tilefun-world-${id}-records-v2`);
+          const req = indexedDB.open(`tilefun-world-${id}-records-v3`);
           req.onsuccess = () => r(req.result);
         });
         try {

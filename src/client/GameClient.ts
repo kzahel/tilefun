@@ -90,6 +90,29 @@ export interface GameClientOptions {
 }
 
 export class GameClient {
+  private storagePaused = false;
+  private storageNotice: HTMLDivElement | undefined;
+  private storageNoticeTimer: ReturnType<typeof setTimeout> | undefined;
+  private showStorageStatus(message: string, paused: boolean): void {
+    this.storagePaused = paused;
+    clearTimeout(this.storageNoticeTimer);
+    if (!message) {
+      this.storageNotice?.remove();
+      this.storageNotice = undefined;
+      return;
+    }
+    const notice = this.storageNotice ?? document.createElement("div");
+    notice.dataset.testid = "storage-status";
+    notice.setAttribute("role", "status");
+    notice.style.cssText =
+      "position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10000;background:#312619;color:#fff;padding:12px 20px;border:1px solid #edbd73;border-radius:8px;max-width:85vw;text-align:center;font:16px sans-serif;pointer-events:none";
+    notice.textContent = message;
+    document.body.append(notice);
+    this.storageNotice = notice;
+    if (!paused)
+      this.storageNoticeTimer = setTimeout(() => this.showStorageStatus("", false), 6000);
+  }
+
   readonly performanceMetrics = performanceMetrics;
   private canvas: HTMLCanvasElement;
   private stopIdeaDelivery: (() => void) | undefined;
@@ -268,6 +291,7 @@ export class GameClient {
       );
     };
     const routePatternStatus = (msg: ServerMessage) => {
+      if (msg.type === "storage-status") this.showStorageStatus(msg.message, msg.paused);
       if (msg.type === "pattern-edit-status" || msg.type === "room-edit-status")
         this.editorModel.setPatternStatus(msg);
       else if (msg.type === "world-loaded" || msg.type === "realm-joined")
@@ -821,6 +845,7 @@ export class GameClient {
   }
 
   destroy(): void {
+    this.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
     this.tileRenderer.clear();
     this.sceneFrame.clear();
@@ -1062,6 +1087,9 @@ export class GameClient {
     // always reflect the latest value from GameClient.
     const client = this;
     return {
+      get storagePaused() {
+        return client.storagePaused;
+      },
       canvas: this.canvas,
       ctx: this.ctx,
       camera: this.camera,

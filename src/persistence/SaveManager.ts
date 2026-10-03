@@ -1,4 +1,7 @@
+import { PERSISTENCE_BUDGET } from "./PersistenceBudget.js";
 import type { PersistenceStore, SaveEntry } from "./PersistenceStore.js";
+import { SAVE_FORMAT } from "./SaveFormat.js";
+import { RealmStore } from "./WorldStorePool.js";
 
 const STORE_CHUNKS = "chunks";
 const STORE_META = "meta";
@@ -13,20 +16,24 @@ export interface SerializedEntity {
 }
 
 export interface SavedMeta {
-  traffic?: import("../traffic/TrafficSystem.js").SavedTraffic[];
   roomPlan?: import("../interiors/GameplayRoom.js").GameplayRoomState;
   interior?: import("../interiors/GameplayInterior.js").InteriorIdentity;
-  deletedProceduralIds?: string[];
-  proceduralEdits?: SerializedEntity[];
   playerX: number;
   playerY: number;
   cameraX: number;
   cameraY: number;
   cameraZoom: number;
-  entities?: SerializedEntity[];
-  nextEntityId?: number;
   /** Total gems collected (absent in older saves → defaults to 0). */
   gemsCollected?: number;
+}
+
+/** Bounded inspection DTO; never persisted as a world-wide actor snapshot. */
+export interface InspectionState extends SavedMeta {
+  traffic?: import("../traffic/TrafficSystem.js").SavedTraffic[];
+  deletedProceduralIds?: string[];
+  proceduralEdits?: SerializedEntity[];
+  entities?: SerializedEntity[];
+  nextEntityId?: number;
 }
 
 export interface SavedPlayerData {
@@ -47,6 +54,11 @@ export interface SavedChunkData {
   heightGrid: Uint8Array;
 }
 
+interface SaveBatch {
+  entries: SaveEntry[];
+  restore: () => void;
+}
+
 type GetChunkFn = (key: string) => SavedChunkData | undefined;
 type GetMetaFn = () => SavedMeta;
 
@@ -64,6 +76,26 @@ export class SaveManager {
   private getMeta: GetMetaFn | null = null;
 
   constructor(readonly store: PersistenceStore) {}
+  get dirtyCount(): number {
+    return (
+      this.dirtyRecords.size +
+      this.dirtyChunks.size +
+      this.dirtyPlayers.size +
+      Number(this.metaDirty)
+    );
+  }
+  get pressured(): boolean {
+    return (
+      this.saveFailed ||
+      this.store.health.failed ||
+      this.store.health.pendingRecords >= PERSISTENCE_BUDGET.dirtySoftLimit ||
+      this.store.health.pendingBytes >= PERSISTENCE_BUDGET.scopeBytes ||
+      this.dirtyCount >= PERSISTENCE_BUDGET.dirtySoftLimit
+    );
+  }
+  get diagnostics() {
+    return { ...this.store.health, dirtyRecords: this.dirtyCount, paused: this.pressured };
+  }
 
   /** Bind the data accessors once so scheduleSave/flush can use them. */
   bind(getChunk: GetChunkFn, getMeta: GetMetaFn): void {
@@ -74,11 +106,30 @@ export class SaveManager {
   async open(): Promise<void> {
     await this.store.open();
     const version = (await this.store.get("meta", "__format")) as { version: number } | undefined;
-    if (version && version.version !== 2)
+    if (version && version.version !== SAVE_FORMAT)
       throw new Error(
         "This world uses an incompatible save format. Create a new world or explicitly delete the old one.",
       );
-    await this.store.save([{ collection: "meta", key: "__format", value: { version: 2 } }]);
+    await this.store.save([
+      { collection: "meta", key: "__format", value: { version: SAVE_FORMAT } },
+    ]);
+  }
+
+  /** Roll back dirty bookkeeping when synchronous chunk publication fails. */
+  publishing<T>(publish: () => T): T {
+    const records = new Map(this.dirtyRecords),
+      chunks = new Set(this.dirtyChunks),
+      players = new Map(this.dirtyPlayers),
+      meta = this.metaDirty;
+    try {
+      return publish();
+    } catch (error) {
+      this.dirtyRecords = records;
+      this.dirtyChunks = chunks;
+      this.dirtyPlayers = players;
+      this.metaDirty = meta;
+      throw error;
+    }
   }
 
   markRecordDirty(collection: string, key: string, snapshot: () => SaveEntry): void {
@@ -181,102 +232,128 @@ export class SaveManager {
     }
   }
 
-  /** Drain pending writes before deleting a world or closing a durable store. */
+  /** Finite barrier for mutations preceding this call; live producers may continue. */
   async flushAsync(): Promise<void> {
-    this.flush();
-    await this.pending;
-    if (this.saveFailed) throw new Error("Could not save world state.", { cause: this.saveError });
-    while (this.hasDirty) {
-      this.flush();
-      await this.pending;
-      if (this.saveFailed)
-        throw new Error("Could not save world state.", { cause: this.saveError });
-    }
+    await this.flushSnapshot();
   }
 
-  /** Callback invoked after each save with the chunk keys that were written. */
-  onChunksSaved: ((keys: string[], getChunk: GetChunkFn) => void) | null = null;
+  /** Related realm changes in one physical world share one atomic commit. */
+  static async flushTogether(managers: readonly SaveManager[]): Promise<void> {
+    const unique = [...new Set(managers)];
+    if (!unique.length) return;
+    await Promise.all(unique.map((manager) => manager.pending));
+    const first = unique[0]?.store;
+    if (
+      !(first instanceof RealmStore) ||
+      unique.some(
+        (manager) =>
+          !(manager.store instanceof RealmStore) || manager.store.physical !== first.physical,
+      )
+    ) {
+      await Promise.all(unique.map((manager) => manager.flushSnapshot()));
+      return;
+    }
+    const batches: { manager: SaveManager; batch: SaveBatch }[] = [];
+    try {
+      for (const manager of unique) {
+        const batch = manager.capture();
+        if (batch) batches.push({ manager, batch });
+      }
+    } catch (error) {
+      for (const { manager, batch } of batches) manager.failed(batch, error);
+      throw error;
+    }
+    const entries = batches.flatMap(({ manager, batch }) =>
+      (manager.store as RealmStore).encode(batch.entries),
+    );
+    if (!entries.length) return;
+    const saving = first.physical.save(entries);
+    for (const { manager, batch } of batches) manager.follow(batch, saving);
+    await Promise.all(batches.map(({ manager }) => manager.pending));
+    for (const { manager } of batches)
+      if (manager.saveFailed)
+        throw new Error("Could not save realm transfer.", { cause: manager.saveError });
+  }
 
-  private doSave(): void {
-    if (this.saving) return;
-    if (!this.getChunk || !this.getMeta) return;
-    if (!this.hasDirty) return;
-
-    this.saving = true;
-    const recordEntries = this.dirtyRecords;
-    this.dirtyRecords = new Map();
-    const chunkKeys = [...this.dirtyChunks];
-    this.dirtyChunks.clear();
-    const playerEntries = new Map(this.dirtyPlayers);
-    this.dirtyPlayers.clear();
-    const saveMeta = this.metaDirty;
-    this.metaDirty = false;
-
-    const getChunk = this.getChunk,
-      getMeta = this.getMeta;
-    const snapshots = new Map<string, SavedChunkData>();
-    this.pending = Promise.resolve()
-      .then(async () => {
-        const entries: SaveEntry[] = [...recordEntries.values()].map((snapshot) => snapshot());
-
-        for (const key of chunkKeys) {
-          const data = getChunk(key);
-          if (data) {
-            const record: {
-              subgrid: ArrayBuffer;
-              roadGrid?: ArrayBuffer;
-              heightGrid?: ArrayBuffer;
-            } = {
-              subgrid: new Uint8Array(data.subgrid).buffer,
-            };
-            // Only store roadGrid if it has non-zero data
-            if (data.roadGrid.some((v) => v !== 0)) {
-              record.roadGrid = new Uint8Array(data.roadGrid).buffer;
-            }
-            if (data.heightGrid.some((v) => v !== 0)) {
-              record.heightGrid = new Uint8Array(data.heightGrid).buffer;
-            }
-            snapshots.set(key, {
-              subgrid: new Uint8Array(record.subgrid),
-              roadGrid: new Uint8Array(data.roadGrid),
-              heightGrid: new Uint8Array(data.heightGrid),
-            });
-            entries.push({ collection: STORE_CHUNKS, key, value: record });
-          }
-        }
-
-        for (const [playerId, data] of playerEntries) {
-          entries.push({ collection: STORE_PLAYERS, key: playerId, value: data });
-        }
-
-        if (saveMeta) {
-          entries.push({ collection: STORE_META, key: "state", value: getMeta() });
-        }
-
+  private failed(batch: SaveBatch, error: unknown): void {
+    batch.restore();
+    this.saving = false;
+    this.saveFailed = true;
+    this.saveError = error;
+    this.scheduleSave();
+  }
+  private follow(batch: SaveBatch, saving: Promise<void>): void {
+    this.pending = saving.then(
+      () => {
+        this.saving = false;
         this.saveFailed = false;
-        await this.store.save(entries);
-      })
-      .then(
-        () => {
-          this.saving = false;
-          if (this.onChunksSaved && this.getChunk) {
-            this.onChunksSaved(chunkKeys, (key) => snapshots.get(key));
-          }
-        },
-        (error) => {
-          this.saving = false;
-          this.saveError = error;
-          this.saveFailed = true;
-          for (const [key, snapshot] of recordEntries)
-            if (!this.dirtyRecords.has(key)) this.dirtyRecords.set(key, snapshot);
-          // Re-mark as dirty so next save attempt includes them
-          for (const key of chunkKeys) this.dirtyChunks.add(key);
-          for (const [id, data] of playerEntries) {
-            if (!this.dirtyPlayers.has(id)) this.dirtyPlayers.set(id, data);
-          }
-          if (saveMeta) this.metaDirty = true;
-        },
-      );
+        this.saveError = undefined;
+      },
+      (error) => this.failed(batch, error),
+    );
+  }
+  private doSave(): void {
+    let batch: SaveBatch | undefined;
+    try {
+      batch = this.capture();
+    } catch (error) {
+      this.saveFailed = true;
+      this.saveError = error;
+      this.scheduleSave();
+      return;
+    }
+    if (batch) this.follow(batch, this.store.save(batch.entries));
+  }
+
+  private capture(): SaveBatch | undefined {
+    if (this.saving || !this.getChunk || !this.getMeta || !this.hasDirty) return undefined;
+    this.saving = true;
+    const records = this.dirtyRecords,
+      chunks = this.dirtyChunks,
+      players = this.dirtyPlayers,
+      meta = this.metaDirty;
+    this.dirtyRecords = new Map();
+    this.dirtyChunks = new Set();
+    this.dirtyPlayers = new Map();
+    this.metaDirty = false;
+    const batch: SaveBatch = {
+      entries: [],
+      restore: () => {
+        for (const [key, snapshot] of records)
+          if (!this.dirtyRecords.has(key)) this.dirtyRecords.set(key, snapshot);
+        for (const key of chunks) this.dirtyChunks.add(key);
+        for (const [key, data] of players)
+          if (!this.dirtyPlayers.has(key)) this.dirtyPlayers.set(key, data);
+        this.metaDirty ||= meta;
+      },
+    };
+    try {
+      for (const snapshot of records.values()) batch.entries.push(snapshot());
+      for (const key of chunks) {
+        const data = this.getChunk(key);
+        if (!data) throw new Error(`Dirty chunk ${key} was released before saving.`);
+        batch.entries.push({
+          collection: STORE_CHUNKS,
+          key,
+          value: {
+            subgrid: new Uint8Array(data.subgrid).buffer,
+            ...(data.roadGrid.some((v) => v !== 0)
+              ? { roadGrid: new Uint8Array(data.roadGrid).buffer }
+              : {}),
+            ...(data.heightGrid.some((v) => v !== 0)
+              ? { heightGrid: new Uint8Array(data.heightGrid).buffer }
+              : {}),
+          },
+        });
+      }
+      for (const [key, value] of players)
+        batch.entries.push({ collection: STORE_PLAYERS, key, value });
+      if (meta) batch.entries.push({ collection: STORE_META, key: "state", value: this.getMeta() });
+      return batch;
+    } catch (error) {
+      this.failed(batch, error);
+      throw error;
+    }
   }
 
   async clear(): Promise<void> {
@@ -296,6 +373,5 @@ export class SaveManager {
     this.metaDirty = false;
     this.getChunk = null;
     this.getMeta = null;
-    this.onChunksSaved = null;
   }
 }

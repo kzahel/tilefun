@@ -20,6 +20,8 @@ export async function inspectionHttp(
   try {
     if (req.method !== "GET") throw new Error("Use GET for world inspection.");
     if (url.pathname === "/api/world-list") res.end(JSON.stringify(await server.listWorlds()));
+    else if (url.pathname === "/api/world-storage")
+      res.end(JSON.stringify(server.persistenceDiagnostics));
     else if (url.pathname === "/api/world-preview") {
       const coordinates = JSON.parse(url.searchParams.get("chunks") ?? "[]");
       const bounds = JSON.parse(url.searchParams.get("bounds") ?? "null");

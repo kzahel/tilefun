@@ -327,6 +327,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 // ---- Server → Client messages ----
 
 export type ServerMessage =
+  | { type: "storage-status"; paused: boolean; message: string }
   | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)
   | ({ type: "pattern-edit-status" } & import("../patterns/TreeBrushEditor.js").TreeBrushStatus)
   | { type: "player-assigned"; entityId: number }

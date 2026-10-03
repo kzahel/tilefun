@@ -24,6 +24,16 @@ function getCVar(engine: ConsoleEngine, name: string) {
 }
 
 export function registerServerCommands(engine: ConsoleEngine, server: GameServer): void {
+  engine.commands.register({
+    name: "storage_stats",
+    description: "Show streaming and persistence budgets",
+    args: [],
+    category: "sv",
+    serverSide: true,
+    execute: (_args, out) => {
+      for (const realm of server.persistenceDiagnostics) out(JSON.stringify(realm));
+    },
+  });
   // ── Server CVars (from shared defs) ──
   for (const def of SERVER_CVAR_DEFS) {
     engine.cvars.register(def);
@@ -203,9 +213,8 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
         out("No player session");
         return;
       }
-      session.player.position.wx = args.x as number;
-      session.player.position.wy = args.y as number;
-      out(`Teleported to (${args.x}, ${args.y})`);
+      server.teleport(session, args.x as number, args.y as number);
+      out(`Loading teleport destination (${args.x}, ${args.y})`);
     },
   });
 

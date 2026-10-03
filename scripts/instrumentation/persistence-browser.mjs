@@ -85,6 +85,19 @@ try {
     bytes: [1, 2, 3],
     deleted: true,
   });
+  const lifecycle = await page.evaluate(async () => {
+    const { IdbPersistenceStore } = await import("/src/persistence/IdbPersistenceStore.ts");
+    const { streamingConformance } = await import("/src/persistence/StreamingConformance.ts");
+    const { RECORD_DATABASE_SUFFIX } = await import("/src/persistence/SaveFormat.ts");
+    const name = `tilefun-lifecycle-${crypto.randomUUID()}`;
+    try {
+      return await streamingConformance(() => new IdbPersistenceStore(name));
+    } finally {
+      indexedDB.deleteDatabase(`${name}${RECORD_DATABASE_SUFFIX}`);
+    }
+  });
+  assert.equal(lifecycle.chunksVisited, 1000);
+  console.log(JSON.stringify({ backend: "IndexedDB", ...lifecycle }));
   console.log(
     "IndexedDB conformance passed: atomic abort, writer lease, spatial move, typed payload, reopen, delete.",
   );

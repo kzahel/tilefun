@@ -37,6 +37,8 @@ export class EntityHandle {
 
   setPosition(wx: number, wy: number): void {
     if (!this.alive) return;
+    if (this.entityManager.canPlace?.(wx, wy) === false)
+      throw new Error("Position is outside ready terrain.");
     this.entity.position.wx = wx;
     this.entity.position.wy = wy;
   }
@@ -155,8 +157,16 @@ export class EntityHandle {
 
   setParent(parentId: number, offsetX = 0, offsetY = 0): void {
     if (!this.alive) return;
+    if (
+      ![offsetX, offsetY].every(Number.isFinite) ||
+      Math.abs(offsetX) > 512 ||
+      Math.abs(offsetY) > 512
+    )
+      throw new Error("Attachment offset exceeds its dependency budget.");
     let parent = this.entityManager.byId.get(parentId);
     if (!parent) throw new Error("Attachment target is not resident.");
+    if (parent.type === "player" && this.entity.type !== "player")
+      throw new Error("Persistent actors cannot attach to a transient player record.");
     const seen = new Set<number>([this.id]);
     while (parent) {
       if (seen.has(parent.id)) throw new Error("Cyclic attachment.");
@@ -164,6 +174,23 @@ export class EntityHandle {
       parent =
         parent.parentId === undefined ? undefined : this.entityManager.byId.get(parent.parentId);
     }
+    if (seen.size > 32) throw new Error("Attachment chain is too deep.");
+    const root = [...seen].at(-1);
+    let groupSize = 1;
+    for (const candidate of this.entityManager.entities) {
+      let current: Entity | undefined = candidate;
+      for (let depth = 0; current && depth < 64; depth++) {
+        if (current.id === root) {
+          groupSize++;
+          break;
+        }
+        current =
+          current.parentId === undefined
+            ? undefined
+            : this.entityManager.byId.get(current.parentId);
+      }
+    }
+    if (groupSize > 64) throw new Error("Attachment group is too large.");
     this.entity.parentId = parentId;
     this.entity.localOffsetX = offsetX;
     this.entity.localOffsetY = offsetY;
@@ -171,9 +198,9 @@ export class EntityHandle {
 
   clearParent(): void {
     if (!this.alive) return;
-    delete this.entity.parentId;
-    delete this.entity.localOffsetX;
-    delete this.entity.localOffsetY;
+    Reflect.set(this.entity, "parentId", undefined);
+    Reflect.set(this.entity, "localOffsetX", undefined);
+    Reflect.set(this.entity, "localOffsetY", undefined);
     this.entityManager.onMutation?.(this.entity);
   }
 
@@ -307,7 +334,7 @@ export class PlayerHandle extends EntityHandle {
     this.entity.localOffsetX = 0;
     this.entity.localOffsetY = 0;
     this.entity.jumpZ = 10;
-    delete this.entity.jumpVZ;
+    Reflect.set(this.entity, "jumpVZ", undefined);
     this.entity.noShadow = true;
     this.session.mountId = target.id;
     if (target.aiState !== null) target.setAIState("ridden");
@@ -334,9 +361,9 @@ export class PlayerHandle extends EntityHandle {
   dismount(): void {
     if (!this.alive || this.session.mountId === null) return;
     const mountEntity = this.entityManager.entities.find((e) => e.id === this.session.mountId);
-    delete this.entity.parentId;
-    delete this.entity.localOffsetX;
-    delete this.entity.localOffsetY;
+    Reflect.set(this.entity, "parentId", undefined);
+    Reflect.set(this.entity, "localOffsetX", undefined);
+    Reflect.set(this.entity, "localOffsetY", undefined);
     this.entityManager.onMutation?.(this.entity);
     delete this.entity.noShadow;
     this.session.mountId = null;

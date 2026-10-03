@@ -82,7 +82,7 @@ export class RealmTransitions {
           session.visibleRange = { minCx: cx - 2, minCy: cy - 2, maxCx: cx + 2, maxCy: cy + 2 };
         }
         target.savePlayerData(session);
-        await target.flushAsync();
+        await target.flushTransfer(source);
         await this.commit(session, target);
       } catch (error) {
         if (target.sessions.get(session.clientId) === session)

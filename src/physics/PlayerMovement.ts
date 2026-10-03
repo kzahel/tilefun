@@ -515,8 +515,8 @@ export function tickJumpGravity(
     entity.groundZ = groundZ;
     if (entity.wz <= groundZ) {
       entity.wz = groundZ;
-      delete entity.jumpVZ;
-      delete entity.jumpZ;
+      Reflect.set(entity, "jumpVZ", undefined);
+      Reflect.set(entity, "jumpZ", undefined);
       return { landed: true, groundZ };
     }
     entity.jumpZ = entity.wz - groundZ;

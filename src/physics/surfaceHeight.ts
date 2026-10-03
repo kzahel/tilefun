@@ -195,14 +195,14 @@ export function applyGroundTracking(
     if (entity.wz > groundZ && canFall) {
       if (entity.wz - groundZ <= STEP_UP_THRESHOLD) {
         entity.wz = groundZ;
-        delete entity.jumpZ;
+        Reflect.set(entity, "jumpZ", undefined);
       } else {
         entity.jumpVZ = 0;
         entity.jumpZ = entity.wz - groundZ;
       }
     } else if (entity.jumpVZ === undefined) {
       entity.wz = groundZ;
-      delete entity.jumpZ;
+      Reflect.set(entity, "jumpZ", undefined);
     }
   }
 }

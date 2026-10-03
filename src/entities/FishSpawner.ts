@@ -29,7 +29,7 @@ export class FishSpawner {
   }
 
   update(dt: number, visibleRange: ChunkRange, entityManager: EntityManager, world: World): void {
-    this.despawnOffscreen(visibleRange, entityManager);
+    this.despawnOffscreen(visibleRange, entityManager, !world.chunks.managed);
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       this.spawnTimer = SPAWN_INTERVAL;
@@ -51,6 +51,12 @@ export class FishSpawner {
         candidates.push({ cx, cy });
       }
     }
+    if (world.chunks.managed) {
+      for (let i = candidates.length - 1; i >= 0; i--) {
+        const candidate = candidates[i];
+        if (candidate && !world.chunks.get(candidate.cx, candidate.cy)) candidates.splice(i, 1);
+      }
+    }
     if (candidates.length === 0) return;
 
     const choice = candidates[Math.floor(Math.random() * candidates.length)];
@@ -69,17 +75,24 @@ export class FishSpawner {
     this.trackedIds.add(fish.id);
   }
 
-  private despawnOffscreen(visible: ChunkRange, entityManager: EntityManager): void {
+  private despawnOffscreen(
+    visible: ChunkRange,
+    entityManager: EntityManager,
+    allowDespawn: boolean,
+  ): void {
     const toRemove: number[] = [];
     for (const id of this.trackedIds) {
-      const entity = entityManager.entities.find((e) => e.id === id);
+      const entity = entityManager.byId.get(id);
       if (!entity) {
         toRemove.push(id);
         continue;
       }
       const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX);
       const cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
-      if (cx < visible.minCx || cx > visible.maxCx || cy < visible.minCy || cy > visible.maxCy) {
+      if (
+        allowDespawn &&
+        (cx < visible.minCx || cx > visible.maxCx || cy < visible.minCy || cy > visible.maxCy)
+      ) {
         entityManager.remove(id);
         toRemove.push(id);
       }

@@ -58,7 +58,8 @@ for door identities, reload guarantees and content boundaries.
 coordinator over IndexedDB or SQLite on a Node IO worker. GameServer receives
 required host dependencies; concrete browser adapters live in the browser host
 composition module. SaveManager tracks dirty records and owns flush barriers;
-registries own world metadata. Format 2 uses individual actor/prop records and
+registries own world metadata. Format 3 uses one physical world container with outdoor/interior namespaces,
+individual actor/prop/traffic records and
 transactional spatial indices; existing worlds are incompatible and are not migrated. [Setup and local data](setup-and-local-data.md) distinguishes
 saved worlds from browser review drafts and server feedback histories.
 

@@ -14,6 +14,7 @@ export interface ActorRecord {
   wy: number;
   proceduralId?: string;
   originScope?: string;
+  spawnTimer?: number;
   parent?: string;
   state: Partial<Entity>;
 }
@@ -58,6 +59,9 @@ export function encodeActor(actor: Entity | Prop, parent?: Entity): ActorRecord 
       wy: actor.position.wy,
       ...(actor.proceduralId ? { proceduralId: actor.proceduralId } : {}),
       ...(parent ? { parent: durableId(parent) } : {}),
+      ...("isProp" in actor && actor.spawnTimer !== undefined
+        ? { spawnTimer: actor.spawnTimer }
+        : {}),
       state,
     }),
   ) as ActorRecord;
@@ -86,6 +90,7 @@ export function decodeActor(record: ActorRecord): Entity | Prop {
     actor.wanderAI.state = "idle";
     actor.wanderAI.timer = 1;
   }
+  if ("isProp" in actor && record.spawnTimer !== undefined) actor.spawnTimer = record.spawnTimer;
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;
   return actor;
@@ -118,7 +123,9 @@ export function observeActor(actor: Entity | Prop, changed: () => void): void {
     return proxy;
   };
   const fields =
-    "isProp" in actor ? ["position"] : ["position", "parentId", ...DURABLE_ENTITY_FIELDS];
+    "isProp" in actor
+      ? ["position", "spawnTimer"]
+      : ["position", "parentId", ...DURABLE_ENTITY_FIELDS];
   for (const field of fields) {
     let value = observe(Reflect.get(actor, field));
     Object.defineProperty(actor, field, {

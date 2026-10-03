@@ -234,7 +234,9 @@ class EntityAPIImpl implements EntityAPI {
   spawn(type: string, wx: number, wy: number): EntityHandle | null {
     const factory = ENTITY_FACTORIES[type];
     if (!factory) return null;
-    const entity = this.em.spawn(factory(wx, wy));
+    const candidate = factory(wx, wy);
+    if (this.em.canSpawn?.(candidate) === false) return null;
+    const entity = this.em.spawn(candidate);
     this.tagService.notifySpawn(entity);
     return new EntityHandle(entity, this.em);
   }
@@ -283,6 +285,7 @@ class PropAPIImpl implements PropAPI {
   place(type: string, wx: number, wy: number): PropHandle | null {
     if (!isPropType(type)) return null;
     const prop = createProp(type, wx, wy);
+    if (this.pm.canAdd?.(prop) === false) return null;
     this.pm.add(prop);
     return new PropHandle(prop, this.pm);
   }
@@ -292,13 +295,13 @@ class PropAPIImpl implements PropAPI {
   }
 
   find(id: number): PropHandle | null {
-    const prop = this.pm.props.find((p) => p.id === id);
+    const prop = this.pm.queryProps.find((p) => p.id === id);
     if (!prop) return null;
     return new PropHandle(prop, this.pm);
   }
 
   all(): PropHandle[] {
-    return this.pm.props.map((p) => new PropHandle(p, this.pm));
+    return this.pm.queryProps.map((p) => new PropHandle(p, this.pm));
   }
 }
 

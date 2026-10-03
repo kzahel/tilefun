@@ -3043,19 +3043,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:12"
+          "source": "src/entities/TentSpawner.ts:49"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:48"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:63"
+          "source": "src/entities/TentSpawner.ts:64"
         },
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:159"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/StreamingConformance.ts:101"
         }
       ]
     },
@@ -3089,11 +3089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:12"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:48"
+          "source": "src/entities/TentSpawner.ts:49"
         },
         {
           "system": "World generation",
@@ -21345,11 +21341,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:184"
+          "source": "src/console/serverCommands.ts:194"
         },
         {
           "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:257"
+          "source": "src/console/serverCommands.ts:266"
         },
         {
           "system": "Editor",
@@ -21385,11 +21381,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:94"
+          "source": "src/persistence/RealmRecords.ts:116"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/StreamingConformance.ts:50"
         },
         {
           "system": "Gameplay",
           "source": "src/persistence/WorldInspection.ts:106"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/EntityHandle.ts:168"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/EntityHandle.ts:168"
         },
         {
           "system": "Gameplay",
@@ -21401,23 +21409,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:950"
+          "source": "src/server/Realm.ts:1048"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1803"
+          "source": "src/server/Realm.ts:1959"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:88"
+          "source": "src/server/RealmStreaming.ts:130"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:134"
+          "source": "src/server/RealmStreaming.ts:181"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:135"
+          "source": "src/server/RealmStreaming.ts:182"
         },
         {
           "system": "Gameplay",
@@ -22081,7 +22089,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:669"
+          "source": "src/scenes/PlayScene.ts:672"
         }
       ]
     },
@@ -22591,19 +22599,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:12"
+          "source": "src/entities/TentSpawner.ts:49"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:48"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:63"
+          "source": "src/entities/TentSpawner.ts:64"
         },
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:159"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/StreamingConformance.ts:101"
         }
       ]
     },
@@ -22641,11 +22649,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:12"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/entities/TentSpawner.ts:48"
+          "source": "src/entities/TentSpawner.ts:49"
         },
         {
           "system": "World generation",

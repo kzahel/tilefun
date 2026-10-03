@@ -14,6 +14,22 @@ export interface SaveEntry {
  * Implemented by the shared record facade over IndexedDB or SQLite executors.
  */
 export interface PersistenceStore {
+  readonly health: {
+    pendingRecords: number;
+    pendingBytes: number;
+    failed: boolean;
+    oldestPendingMs: number;
+    metrics: {
+      commits: number;
+      recordsWritten: number;
+      bytesWritten: number;
+      highWaterBytes: number;
+      highWaterRecords: number;
+      indexPages: number;
+      lastCommitMs: number;
+      maxCommitMs: number;
+    };
+  };
   open(): Promise<void>;
   close(): void | Promise<void>;
 

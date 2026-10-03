@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs";
+import { lstatSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { deserialize, serialize } from "node:v8";
@@ -16,6 +16,17 @@ let scanScope;
 // released by process death. No stale PID files or platform-specific flock API.
 function open() {
   mkdirSync(workerData.directory, { recursive: true });
+  for (const name of [
+    "writer.sqlite",
+    "writer.sqlite-journal",
+    "records.sqlite",
+    "records.sqlite-wal",
+    "records.sqlite-shm",
+    "records.sqlite-journal",
+  ]) {
+    if (lstatSync(join(workerData.directory, name), { throwIfNoEntry: false })?.isSymbolicLink())
+      throw new Error("Symlink database files are not supported.");
+  }
   lease = new DatabaseSync(join(workerData.directory, "writer.sqlite"));
   try {
     lease.exec("PRAGMA busy_timeout=0; BEGIN EXCLUSIVE;");

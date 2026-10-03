@@ -3,9 +3,9 @@ import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { FsPersistenceStore } from "./FsPersistenceStore.js";
 import { FsWorldRegistry } from "./FsWorldRegistry.js";
 import { worldDirectory } from "./fsPaths.js";
+import { SqlitePersistenceStore } from "./SqlitePersistenceStore.js";
 
 describe("filesystem containment", () => {
   let directory: string;
@@ -54,32 +54,26 @@ describe("filesystem containment", () => {
     await mkdir(outside);
     await symlink(outside, join(data, "worlds"), "junction");
     expect(() => worldDirectory(data, "world-1")).toThrow(/Symlink/);
-    const store = new FsPersistenceStore(data, ["players"]);
-    await symlink(outside, join(data, "players"), "junction");
-    await expect(store.open()).rejects.toThrow(/Symlink/);
-    await expect(
-      store.save([{ collection: "players", key: "profile", value: {} }]),
-    ).rejects.toThrow();
-    await expect(store.get("players", "profile")).rejects.toThrow();
   });
 
   it("rejects collections outside the configured set", async () => {
-    const store = new FsPersistenceStore(data, ["players"]);
+    const store = new SqlitePersistenceStore(data);
     await store.open();
     await expect(
       store.save([{ collection: "../outside", key: "profile", value: {} }]),
     ).rejects.toThrow();
     await expect(store.getAll("../outside")).rejects.toThrow();
+    await store.close();
   });
 
-  it("rejects a dangling temporary-file symlink before writing outside storage", async () => {
-    const store = new FsPersistenceStore(data, ["players"]);
-    await store.open();
-    const outside = join(directory, "outside.v8");
-    await symlink(outside, join(data, "players", "profile.v8.tmp"), "file");
-    await expect(
-      store.save([{ collection: "players", key: "profile", value: {} }]),
-    ).rejects.toThrow();
-    expect(existsSync(outside)).toBe(false);
-  });
+  it.each(["records.sqlite", "writer.sqlite", "records.sqlite-wal"])(
+    "rejects dangling database symlink %s before opening",
+    async (name) => {
+      const store = new SqlitePersistenceStore(data);
+      const outside = join(directory, "outside.sqlite");
+      await symlink(outside, join(data, name), "file");
+      await expect(store.open()).rejects.toThrow(/Symlink/);
+      expect(existsSync(outside)).toBe(false);
+    },
+  );
 });

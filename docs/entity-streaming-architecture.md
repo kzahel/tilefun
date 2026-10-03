@@ -3,7 +3,8 @@
 Status: implementation in progress, 2026-10-03.
 The user authorized end-to-end implementation and a new save format without
 compatibility with existing worlds. Incremental records and lazy residency are
-implemented; world-container, traffic and pressure completion remain in 026.
+implemented, including world containers, traffic and pressure admission.
+026 is completing integration validation and the final lifecycle audit.
 This document records the selected contract; [the topic](topics/entity-activation.md) owns actual delivery
 status, [the research](research/entity-streaming-reference.md) distinguishes
 Minecraft/mclone evidence from Tilefun choices, and

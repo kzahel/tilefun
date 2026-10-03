@@ -12,6 +12,15 @@ const entityTypeNames = () => Object.keys(ENTITY_FACTORIES);
 export function registerServerCommandStubs(engine: ConsoleEngine): void {
   const noop = () => {};
 
+  engine.commands.register({
+    name: "storage_stats",
+    description: "Show streaming and persistence budgets",
+    args: [],
+    category: "sv",
+    serverSide: true,
+    execute: noop,
+  });
+
   // Server CVar stubs (autocomplete + help; actual values live on the server)
   for (const def of SERVER_CVAR_DEFS) {
     engine.cvars.register(def);

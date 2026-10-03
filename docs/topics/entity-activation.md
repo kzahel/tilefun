@@ -2,7 +2,8 @@
 
 Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
-World-container/traffic completion and pressure budgets are in progress.
+World containers, traffic records and pressure admission are implemented; final
+integration validation is in progress.
 Updated: 2026-10-03.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
@@ -26,7 +27,8 @@ inspected Minecraft Java 1.17.1 and mclone sources. Java uses chunk-sized entity
 lists; individual records and reduced-rate AI are deliberate Tilefun choices.
 [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
 parent sequence. Runtime delivery includes [020](../tactical/020-shared-record-persistence.md) and
-[021](../tactical/021-incremental-world-records.md); residency and scheduling remain transitional.
+[021](../tactical/021-incremental-world-records.md); [024](../tactical/024-interest-and-residency.md) and
+[026](../tactical/026-persistence-completion.md) complete residency and scheduling.
 
 All hosts must execute the same authoritative server and persistence coordinator;
 only injected host adapters differ. The
@@ -59,18 +61,14 @@ IDs change on return; durable IDs and root-scoped attachment records do not.
 1,000-chunk bounded-retention evidence, real browser/Node integration and the
 concurrent spatial-query fix discovered during that integration.
 
-## Remaining delivery gaps
+## Completion validation
 
-[026](../tactical/026-persistence-completion.md) completes the parent plan:
-
-- Consolidate outdoor/interior stores into one world writer and transaction
-  boundary, retaining the authoritative player-location recovery protocol.
-- Replace the bounded traffic metadata array with indexed durable traffic
-  records and origin suppression; validate roof passengers across eviction.
-- Bound decoded payloads and producer admission as well as physical queues;
-  pause/report storage pressure before accepted dirty state can grow indefinitely.
-- Finish attachment dependency tickets, spawner/script lifecycle coverage and
-  shutdown/rejoin fencing; test dense scenes and sustained real-adapter travel.
+[026](../tactical/026-persistence-completion.md) records the current checkpoint:
+outdoor/interior namespaces share one writer, transfers have an atomic world
+snapshot and durable recovery pointer, traffic uses spatial records, and pressure
+pauses producers with visible feedback. Actual IndexedDB and SQLite each pass
+the same 1,000-chunk travel/restart fixture. Full browser/streaming regression
+and the final lifecycle audit remain in progress.
 
 Dense active crowds still produce collision-pair and rendering costs. Bounded
 unloading is not proof of acceptable performance for arbitrarily dense nearby

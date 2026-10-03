@@ -7,6 +7,7 @@ export interface ResidencyHooks<T> {
   save: (key: string) => Promise<void>;
   canRelease: (key: string) => boolean;
   release: (key: string) => void;
+  canLoad?: () => boolean;
 }
 interface Holder {
   token: number;
@@ -75,7 +76,7 @@ export class ChunkResidency<T> {
     this.pump();
   }
   private pump(): void {
-    if (this.closed) return;
+    if (this.closed || this.hooks.canLoad?.() === false) return;
     for (const key of this.desired.keys()) {
       if (this.loads >= this.limits.loads) break;
       const old = this.holders.get(key);

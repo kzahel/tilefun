@@ -6,6 +6,7 @@ import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
+import { samplePath } from "./LaneGraph.js";
 import { TRAFFIC_DEMO_GENERATION } from "./TrafficScene.js";
 
 it("persists a moving roof passenger, restores the ride, and removes a disconnected passenger", async () => {
@@ -44,6 +45,13 @@ it("persists a moving roof passenger, restores the ride, and removes a disconnec
         (l) => !l.intercity && l.path.length > 500,
       ),
     );
+    const pose = samplePath(lane.path, 160);
+    await realm.ensureReady({
+      minCx: Math.floor(pose.x / 256) - 1,
+      maxCx: Math.floor(pose.x / 256) + 1,
+      minCy: Math.floor(pose.y / 256) - 1,
+      maxCy: Math.floor(pose.y / 256) + 1,
+    });
     const car = traffic.add("compact-1", lane, 160);
     const session = new PlayerSession("rider");
     session.editorEnabled = false;

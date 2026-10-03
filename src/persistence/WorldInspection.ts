@@ -7,7 +7,7 @@ import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import type { ActorRecord } from "./ActorRecords.js";
 import type { PersistenceStore } from "./PersistenceStore.js";
 import type { FeatureRecord } from "./RealmRecords.js";
-import type { SavedMeta, SerializedEntity } from "./SaveManager.js";
+import type { InspectionState, SavedMeta, SerializedEntity } from "./SaveManager.js";
 
 export interface InspectionChunk {
   cx: number;
@@ -81,7 +81,7 @@ export function inspectionPlacements(
 export function inspectionOverlays(
   generation: GenerationDescriptor,
   bounds: Bounds,
-  meta: SavedMeta | null,
+  meta: InspectionState | null,
 ): Pick<InspectionSnapshot, "deleted" | "props" | "actors"> {
   const candidates = new Set(inspectionPlacements(generation, bounds).map((p) => p.featureId));
   for (const a of actorPlacements(createGenerator(generation), bounds)) candidates.add(a.featureId);

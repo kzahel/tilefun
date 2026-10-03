@@ -28,6 +28,9 @@ import { onWanderBlocked } from "./wanderAI.js";
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
+  canPlace?: (wx: number, wy: number) => boolean;
+  canSpawn?: (entity: Entity) => boolean;
+  beforeSpawn?: (entity: Entity) => void;
   onSpawn?: (entity: Entity) => void;
   onDespawn?: (entity: Entity, destroyed: boolean) => void;
   onRemove?: (entity: Entity) => void;
@@ -58,6 +61,7 @@ export class EntityManager {
 
   /** Add an entity to the world. Assigns a unique id. */
   spawn(entity: Entity): Entity {
+    this.beforeSpawn?.(entity);
     entity.id = this.nextId++;
     this.entities.push(entity);
     this.byId.set(entity.id, entity);
@@ -375,9 +379,9 @@ export class EntityManager {
         const parent = byId.get(e.parentId);
         if (!parent) {
           // Parent removed — auto-detach
-          delete e.parentId;
-          delete e.localOffsetX;
-          delete e.localOffsetY;
+          Reflect.set(e, "parentId", undefined);
+          Reflect.set(e, "localOffsetX", undefined);
+          Reflect.set(e, "localOffsetY", undefined);
           remaining--;
           continue;
         }

@@ -23,6 +23,15 @@ export class RecordPersistenceStore implements PersistenceStore {
   ) {
     this.coordinator = new PersistenceCoordinator(executor);
   }
+  get health() {
+    return {
+      oldestPendingMs: this.coordinator.oldestPendingMs,
+      metrics: { ...this.coordinator.metrics },
+      pendingRecords: this.coordinator.pendingRecords,
+      pendingBytes: this.coordinator.pendingBytes,
+      failed: this.coordinator.error !== undefined,
+    };
+  }
   async open(): Promise<void> {
     if (this.closing) {
       await this.closing;
@@ -32,7 +41,10 @@ export class RecordPersistenceStore implements PersistenceStore {
     await this.executor.open();
   }
   close(): Promise<void> {
-    this.closing ??= this.coordinator.close();
+    this.closing ??= this.coordinator.close().catch((error) => {
+      this.closing = undefined;
+      throw error;
+    });
     return this.closing;
   }
   private validate(collection: string): void {

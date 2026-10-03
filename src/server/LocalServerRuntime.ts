@@ -15,6 +15,7 @@ export interface LocalAuthority {
   flushAsync(): Promise<void>;
   destroy(): void | Promise<void>;
   completedTicks: number;
+  readonly persistenceDiagnostics?: GameServer["persistenceDiagnostics"];
   onLoopError: ((error: unknown) => void) | undefined;
 }
 
@@ -149,6 +150,7 @@ export class LocalServerRuntime {
           channel: this.channel.diagnostics(),
           ticks: this.server.completedTicks,
           hidden: this.hidden,
+          persistence: this.server.persistenceDiagnostics ?? [],
         };
         this.channel.send({ type: "result", id: packet.id, diagnostics });
         break;

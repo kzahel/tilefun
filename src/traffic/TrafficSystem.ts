@@ -9,6 +9,7 @@ import {
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
+import { actorScope } from "../persistence/ActorRecords.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import {
@@ -30,6 +31,14 @@ import {
 } from "./Vehicle.js";
 
 export interface SavedTraffic {
+  persistentId?: string;
+  originScope?: string;
+  wx?: number;
+  wy?: number;
+  speed?: number;
+  blockedSeconds?: number;
+  vx?: number;
+  vy?: number;
   identity: string;
   model: string;
   laneId: string;
@@ -63,6 +72,10 @@ function hash(s: string) {
 /** Server-owned, bounded traffic. Vehicles are ordinary replicated entities;
  * route state stays authoritative and is disposable outside all player interests. */
 export class TrafficSystem {
+  managed = false;
+  onChange?: (state: TrafficState, destroyed: boolean) => void;
+  onRestore?: (state: TrafficState, record: SavedTraffic) => void;
+  canSpawn: (identity: string, wx: number, wy: number) => boolean = () => true;
   readonly states = new Map<number, TrafficState>();
   readonly reservations = new Map<string, number>();
   visibleRanges: readonly ChunkRange[] = [];
@@ -84,11 +97,29 @@ export class TrafficSystem {
     readonly entities: EntityManager,
     readonly props: PropManager,
     readonly strategy: TrafficStrategy,
-  ) {}
-  add(model: string, lane: Lane, distance = 0): TrafficState {
-    const pose = samplePath(lane.path, distance),
-      entity = createVehicle(model, pose.x, pose.y, pose.direction);
-    entity.proceduralId = `traffic-v1:${lane.id}:${model}`;
+  ) {
+    entities.removalListeners.add((entity, destroyed) => {
+      const state = this.states.get(entity.id);
+      if (!state) return;
+      for (const [node, owner] of this.reservations)
+        if (owner === entity.id) this.reservations.delete(node);
+      this.states.delete(entity.id);
+      if (destroyed) this.onChange?.(state, true);
+    });
+  }
+  identity(model: string, lane: Lane, distance: number): string {
+    const pose = samplePath(lane.path, distance);
+    return `traffic-v1:${lane.id}:${model}:${actorScope({ wx: pose.x, wy: pose.y })}`;
+  }
+  add(
+    model: string,
+    lane: Lane,
+    distance = 0,
+    persist = true,
+    pose = samplePath(lane.path, distance),
+  ): TrafficState {
+    const entity = createVehicle(model, pose.x, pose.y, pose.direction);
+    entity.proceduralId = this.identity(model, lane, distance);
     this.entities.spawn(entity);
     const s: TrafficState = {
       entity,
@@ -103,6 +134,7 @@ export class TrafficSystem {
       blockedSeconds: 0,
     };
     this.states.set(entity.id, s);
+    if (persist) this.onChange?.(s, false);
     return s;
   }
   private network(s: TrafficState): LaneGraph {
@@ -119,7 +151,7 @@ export class TrafficSystem {
     const local = choices.filter((l) => !l.intercity);
     const pool =
       local.length && hash(`${s.entity.proceduralId}:${s.choices}`) % 8 !== 0 ? local : choices;
-    s.next = pool[hash(`${s.lane.id}:${s.entity.id}:${s.choices}`) % pool.length];
+    s.next = pool[hash(`${s.lane.id}:${s.entity.proceduralId}:${s.choices}`) % pool.length];
   }
   private pose(s: TrafficState, ahead: number) {
     const p = s.turn ?? s.lane.path,
@@ -306,6 +338,7 @@ export class TrafficSystem {
         }
       }
       this.entities.spatialHash.update(s.entity);
+      this.onChange?.(s, false);
     }
   }
   private remove(s: TrafficState) {
@@ -316,41 +349,77 @@ export class TrafficSystem {
     this.states.delete(s.entity.id);
     this.entities.remove(s.entity.id, false);
   }
-  save(): SavedTraffic[] {
-    return [...this.states.values()].map((s) => ({
+  snapshot(s: TrafficState): SavedTraffic {
+    return {
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
       laneId: s.lane.id,
       nextId: s.next?.id ?? null,
       x: s.lane.a.x,
       y: s.lane.a.y,
+      wx: s.entity.position.wx,
+      wy: s.entity.position.wy,
       distance: s.distance,
       turning: !!s.turn,
       choices: s.choices,
-    }));
+      speed: s.speed,
+      blockedSeconds: s.blockedSeconds,
+      vx: s.entity.velocity?.vx ?? 0,
+      vy: s.entity.velocity?.vy ?? 0,
+    };
   }
-  restore(records: readonly SavedTraffic[]) {
-    for (const r of records.slice(0, 32)) {
+  save(): SavedTraffic[] {
+    return [...this.states.values()].map((s) => this.snapshot(s));
+  }
+  /** Resolve and validate the complete batch before changing live traffic. */
+  prepareRestore(records: readonly SavedTraffic[]) {
+    const identities = new Set([...this.states.values()].map((s) => s.entity.proceduralId));
+    const reserved = new Set(this.reservations.keys());
+    return records.flatMap((r) => {
+      if (identities.has(r.identity)) return [];
       if (
         !TRAFFIC_MODELS.includes(r.model) ||
-        ![r.x, r.y, r.distance, r.choices].every(Number.isFinite) ||
+        ![
+          r.x,
+          r.y,
+          r.distance,
+          r.choices,
+          r.speed ?? 0,
+          r.blockedSeconds ?? 0,
+          r.vx ?? 0,
+          r.vy ?? 0,
+        ].every(Number.isFinite) ||
         Math.abs(r.x) > 2 ** 28 ||
         Math.abs(r.y) > 2 ** 28 ||
         typeof r.identity !== "string"
       )
-        continue;
+        throw new Error("Invalid saved traffic record.");
       const graph = this.strategy.trafficNetwork(r.x, r.y),
         lane = graph.lanes.get(r.laneId);
-      if (!lane) continue;
+      if (!lane) throw new Error("Saved traffic lane is unavailable.");
       const next = r.nextId
         ? nextLanes(graph, lane, vehicleRoadWidth(`vehicle-v1:${r.model}`)).find(
             (l) => l.id === r.nextId,
           )
         : undefined;
-      if (r.turning && (!next || this.reservations.has(lane.to))) continue;
+      if (r.nextId && !next) throw new Error("Saved traffic successor is unavailable.");
+      if (r.turning && (!next || reserved.has(lane.to)))
+        throw new Error("Saved traffic reservation conflicts.");
       const activePath = r.turning && next ? turnPath(lane, next) : lane.path;
-      if (r.distance < 0 || r.distance > activePath.length) continue;
-      const s = this.add(r.model, lane, 0);
+      if (r.distance < 0 || r.distance > activePath.length || (r.speed ?? 0) < 0)
+        throw new Error("Invalid saved traffic progress.");
+      if (r.turning) reserved.add(lane.to);
+      identities.add(r.identity);
+      return [{ r, lane, next, activePath }];
+    });
+  }
+  restore(records: readonly SavedTraffic[]) {
+    const prepared = this.prepareRestore(records);
+    for (const { r, lane, next, activePath } of prepared) {
+      const s = this.add(r.model, lane, r.distance, false, samplePath(activePath, r.distance));
+      s.speed = r.speed ?? 0;
+      s.blockedSeconds = r.blockedSeconds ?? 0;
+      s.entity.velocity = { vx: r.vx ?? 0, vy: r.vy ?? 0 };
       s.next = next;
       s.choices = Math.max(0, Math.floor(r.choices));
       s.entity.proceduralId = r.identity;
@@ -364,12 +433,14 @@ export class TrafficSystem {
       s.entity.position = { wx: pose.x, wy: pose.y };
       applyVehicleFacing(s.entity, pose.direction);
       this.entities.spatialHash.update(s.entity);
+      this.onRestore?.(s, r);
     }
   }
   private populate(players: readonly Entity[]) {
     if (!players.length) return;
     for (const s of this.states.values())
       if (
+        !this.managed &&
         !this.visible(s.entity.position.wx, s.entity.position.wy) &&
         players.every(
           (p) =>
@@ -422,13 +493,14 @@ export class TrafficSystem {
         });
         if (!available.length) continue;
         const model = required(available[hash(lane.id) % available.length]);
-        const id = `traffic-v1:${lane.id}:${model}`;
+        const id = this.identity(model, lane, spawnDistance(lane));
+        if (!this.canSpawn(id, sample.x, sample.y)) continue;
         if (
           (this.retired.get(id) ?? 0) > this.time ||
           [...this.states.values()].some((s) => s.entity.proceduralId === id)
         )
           continue;
-        const s = this.add(model, lane, spawnDistance(lane));
+        const s = this.add(model, lane, spawnDistance(lane), false);
         if (
           this.blocked(s, 0) ||
           this.entities.entities.some(
@@ -439,7 +511,7 @@ export class TrafficSystem {
         ) {
           this.states.delete(s.entity.id);
           this.entities.remove(s.entity.id, false);
-        }
+        } else this.onChange?.(s, false);
       }
     }
   }

@@ -211,13 +211,13 @@ the browser's supported procedure, keeping the same origin, or continue using
 the original browser. Opening a different port/domain will show separate state.
 A seed/revision explorer link reproduces initial generation, not saved edits,
 deletions, interiors or player progress. Current player locations are stored in
-`tilefun-world-__player_locations__-records-v2` (IndexedDB), separately from per-world visit
+`tilefun-world-__player_locations__-records-v3` (IndexedDB), separately from per-world visit
 history. Include this database when migrating browser state.
 
 Server-hosted worlds use filesystem state: `data/registry.json` and
 `data/worlds/` by default. Each realm stores transactional records in
 `records.sqlite` with its WAL and a separate `writer.sqlite` lease database.
-Browser world record databases use the `-records-v2` suffix. Format 2 intentionally
+Browser world record databases use the `-records-v3` suffix. Format 3 intentionally
 does not load old saves; create a new world to use the new runtime. For the standalone server, `DATA_DIR` changes that
 root; the Vite game server currently uses `./data`. Stop the game server before
 copying its registry and complete worlds directory together, and restore them
@@ -231,6 +231,6 @@ player profile.
 
 Gameplay room edits are saved with the world, as versioned `roomPlan` interior
 metadata; they are not Workshop notes or `tilefun.pattern-drafts.v1` browser drafts.
-Copy/export the world store (including interior realms and procedural furniture
+Copy/export the world container (including its interior namespaces and procedural furniture
 edits) to transfer playable edits. A seed/revision link reproduces the generated
 starting room, not its edited plan. See [gameplay room controls](tilefun-workshop.md#editing-gameplay-rooms).

@@ -29,6 +29,7 @@ describe("shared persistence coordination", () => {
     expect(store.records.size).toBe(0);
     gate.resolve();
     await saving;
+    await coordinator.flush();
     expect((await store.read("actors", "a"))?.value).toEqual({ x: 2 });
     expect(store.recordsWritten).toBe(2);
     expect(coordinator.dirty).toBe(false);
@@ -161,4 +162,47 @@ it("returns a newer committed edit instead of an older point-read completion", a
   await coordinator.flush();
   gate.resolve();
   expect((await loading)?.value).toBe(2);
+});
+
+it("acknowledges an earlier flush while a later writer is still blocked", async () => {
+  const executor = new MemoryRecordStore(),
+    coordinator = new PersistenceCoordinator(executor);
+  let releaseFirst = () => {},
+    releaseSecond = () => {},
+    firstStarted = () => {},
+    secondStarted = () => {};
+  const firstGate = new Promise<void>((resolve) => {
+    releaseFirst = resolve;
+  });
+  const secondGate = new Promise<void>((resolve) => {
+    releaseSecond = resolve;
+  });
+  const firstEntered = new Promise<void>((resolve) => {
+    firstStarted = resolve;
+  });
+  const secondEntered = new Promise<void>((resolve) => {
+    secondStarted = resolve;
+  });
+  let commits = 0;
+  executor.beforeCommit = async () => {
+    if (++commits === 1) {
+      firstStarted();
+      await firstGate;
+    } else {
+      secondStarted();
+      await secondGate;
+    }
+  };
+  coordinator.stage([{ put: { collection: "entities", key: "a", revision: 0, value: 1 } }]);
+  const first = coordinator.flush();
+  await firstEntered;
+  coordinator.stage([{ put: { collection: "entities", key: "b", revision: 0, value: 2 } }]);
+  const second = coordinator.flush();
+  releaseFirst();
+  await first;
+  await secondEntered;
+  expect(await executor.read("entities", "b")).toBeUndefined();
+  releaseSecond();
+  await second;
+  await coordinator.close();
 });

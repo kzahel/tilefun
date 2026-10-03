@@ -2,7 +2,7 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
 import type { PropManager } from "../entities/PropManager.js";
-import type { SavedMeta, SerializedEntity } from "../persistence/SaveManager.js";
+import type { InspectionState, SerializedEntity } from "../persistence/SaveManager.js";
 import type { WorldGenerator } from "./Generator.js";
 
 /** Durable edits are separate from disposable generated residency. */
@@ -31,7 +31,7 @@ export class ProceduralProps {
       this.dirty();
     };
   }
-  restore(meta: SavedMeta): void {
+  restore(meta: InspectionState): void {
     for (const id of meta.deletedProceduralIds ?? []) this.deleted.add(id);
     for (const edit of meta.proceduralEdits ?? [])
       if (edit.proceduralId) this.edits.set(edit.proceduralId, edit);
@@ -85,7 +85,7 @@ export class ProceduralProps {
   forget(key: string): void {
     this.processed.delete(key);
   }
-  save(): Pick<SavedMeta, "deletedProceduralIds" | "proceduralEdits"> {
+  save(): Pick<InspectionState, "deletedProceduralIds" | "proceduralEdits"> {
     return {
       deletedProceduralIds: [...this.deleted].sort(),
       proceduralEdits: [...this.edits.values()].sort((a, b) =>

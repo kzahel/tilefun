@@ -43,3 +43,58 @@ it("SQLite persists indexed records, rolls back batches and holds a process-safe
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+it("recovers committed WAL records and rolls back an interrupted transaction after process death", async () => {
+  const { spawn } = await import("node:child_process");
+  const directory = await mkdtemp(join(tmpdir(), "tilefun-crash-"));
+  const runCrash = (code: string) =>
+    new Promise<void>((resolve, reject) => {
+      const child = spawn(
+        process.execPath,
+        ["--experimental-sqlite", "--input-type=module", "-e", code],
+        { stdio: ["ignore", "ignore", "pipe"] },
+      );
+      let stderr = "";
+      child.stderr.on("data", (data) => {
+        stderr += String(data);
+      });
+      child.on("error", reject);
+      child.on("exit", (_code, signal) =>
+        signal === "SIGKILL" ? resolve() : reject(Error(stderr)),
+      );
+    });
+  const workerURL = new URL("./sqlite-record-worker.mjs", import.meta.url).href;
+  const committed = {
+    collection: "actors",
+    key: "durable",
+    scope: "0,0",
+    revision: 1,
+    value: { x: 17 },
+  };
+  const store = new SqliteRecordStore(directory);
+  try {
+    await runCrash(`import { Worker } from 'node:worker_threads';
+      const worker = new Worker(new URL(${JSON.stringify(workerURL)}), { workerData: { directory: ${JSON.stringify(directory)} }, execArgv: ['--experimental-sqlite'] });
+      worker.on('error', (error) => { console.error(error); process.exit(1); });
+      worker.on('message', (message) => { if (message.error) { console.error(message.error); process.exit(1); }
+        if (message.id === 1) worker.postMessage({ id: 2, operation: 'commit', value: [{ put: ${JSON.stringify(committed)} }] });
+        else process.kill(process.pid, 'SIGKILL'); });
+      worker.postMessage({ id: 1, operation: 'open' });`);
+    await runCrash(`import { DatabaseSync } from 'node:sqlite'; import { serialize } from 'node:v8';
+      const db = new DatabaseSync(${JSON.stringify(join(directory, "records.sqlite"))});
+      db.exec('BEGIN IMMEDIATE');
+      db.prepare('INSERT INTO records VALUES (?,?,?,?)').run('actors', 'uncommitted', '0,0', serialize({ ...${JSON.stringify(committed)}, key: 'uncommitted' }));
+      process.kill(process.pid, 'SIGKILL');`);
+    await store.open();
+    expect(await store.read("actors", "durable")).toEqual(committed);
+    expect(await store.read("actors", "uncommitted")).toBeUndefined();
+    await store.close();
+    const { DatabaseSync } = await import("node:sqlite");
+    const db = new DatabaseSync(join(directory, "records.sqlite"));
+    expect(db.prepare("PRAGMA integrity_check").get()?.integrity_check).toBe("ok");
+    db.close();
+  } finally {
+    await store.close();
+    await rm(directory, { recursive: true, force: true });
+  }
+});

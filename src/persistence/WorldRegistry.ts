@@ -6,6 +6,7 @@ import {
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
+import { RECORD_DATABASE_SUFFIX, SAVE_FORMAT } from "./SaveFormat.js";
 
 export type { WorldMeta, WorldType } from "./IWorldRegistry.js";
 
@@ -89,7 +90,7 @@ export class WorldRegistry implements IWorldRegistry {
         });
     const now = Date.now();
     const meta: WorldMeta = {
-      saveFormat: 2,
+      saveFormat: SAVE_FORMAT,
       id: generateUUID(),
       name,
       createdAt: now,
@@ -152,10 +153,11 @@ export class WorldRegistry implements IWorldRegistry {
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
     });
-    // Interior instances are virtual children, with separate durable databases.
+    // Current interiors share the world container. Explicit deletion also cleans older layouts.
     const names = [
       dbNameForWorld(id),
       `${dbNameForWorld(id)}-records-v2`,
+      `${dbNameForWorld(id)}${RECORD_DATABASE_SUFFIX}`,
       ...(await indexedDB.databases()).flatMap((db) =>
         db.name?.startsWith(dbNameForWorld(`interior~${id}~`)) ? [db.name] : [],
       ),

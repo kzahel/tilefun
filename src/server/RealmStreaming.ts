@@ -1,9 +1,13 @@
 import { CHUNK_SIZE_PX, RENDER_DISTANCE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { type ActorRecord, actorScope, decodeActor } from "../persistence/ActorRecords.js";
+import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { FeatureRecord, RealmRecords } from "../persistence/RealmRecords.js";
 import type { SavedChunkData, SaveManager } from "../persistence/SaveManager.js";
+import type { TrafficRecords } from "../persistence/TrafficRecords.js";
+import type { SavedTraffic } from "../traffic/TrafficSystem.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { ChunkResidency } from "./ChunkResidency.js";
@@ -15,6 +19,7 @@ interface ChunkPayload {
   actors: ActorRecord[];
   features: FeatureRecord[];
   seeded: boolean;
+  traffic: SavedTraffic[];
 }
 
 /** Shared authority lifecycle, independent of Worker/Node and the durable executor. */
@@ -32,16 +37,22 @@ export class RealmStreaming {
     readonly hydrateFeatures: (records: FeatureRecord[]) => void,
     readonly forgetFeatures: (records: FeatureRecord[], key: string) => void,
     readonly generate: (key: string, seeded: boolean) => void,
+    readonly traffic?: TrafficRecords,
   ) {
     world.chunks.managed = true;
     this.residency = new ChunkResidency({
+      canLoad: () =>
+        !saves.pressured &&
+        records.entities.entities.length < PERSISTENCE_BUDGET.actors &&
+        props.props.length < PERSISTENCE_BUDGET.props,
       load: async (key) => {
-        const [terrain, entities, props, features, origin] = await Promise.all([
+        const [terrain, entities, props, features, origin, vehicles] = await Promise.all([
           saves.loadChunk(key),
           saves.loadRecords("entities", key),
           saves.loadRecords("props", key),
           saves.loadRecords("features", key),
           saves.store.get("actorOrigins", key),
+          saves.loadRecords("traffic", key),
         ]);
         const actors = [...entities.values(), ...props.values()] as ActorRecord[];
         // Validate a complete group before publishing any live objects.
@@ -64,30 +75,62 @@ export class RealmStreaming {
           actors,
           features: [...features.values()] as FeatureRecord[],
           seeded: !!origin,
+          traffic: [...vehicles.values()] as SavedTraffic[],
         };
       },
       publish: (key, payload) => {
+        if (
+          records.entities.entities.length + payload.actors.length + payload.traffic.length >
+            PERSISTENCE_BUDGET.actors ||
+          props.props.length + payload.actors.length > PERSISTENCE_BUDGET.props
+        )
+          throw new Error("Actor residency budget exceeded.");
         const [cx = 0, cy = 0] = key.split(",").map(Number);
-        world.chunks.admit(cx, cy, payload.terrain);
-        for (const feature of payload.features) records.features.set(feature.id, feature);
-        hydrateFeatures(payload.features);
-        records.restore(payload.actors);
-        generate(key, payload.seeded);
-        if (!payload.seeded)
-          saves.markRecordDirty("actorOrigins", key, () => ({
-            collection: "actorOrigins",
-            key,
-            scope: key,
-            value: { seeded: true },
-          }));
+        traffic?.validate(payload.traffic);
+        const oldEntities = new Set(records.entities.byId.keys()),
+          oldProps = new Set(props.props.map((p) => p.id)),
+          oldFeatures = new Map(records.features);
+        saves.publishing(() => {
+          try {
+            world.chunks.admit(cx, cy, payload.terrain);
+            for (const feature of payload.features) records.features.set(feature.id, feature);
+            hydrateFeatures(payload.features);
+            records.restore(payload.actors);
+            traffic?.restore(payload.traffic);
+            generate(key, payload.seeded);
+            if (!payload.seeded)
+              saves.markRecordDirty("actorOrigins", key, () => ({
+                collection: "actorOrigins",
+                key,
+                scope: key,
+                value: { seeded: true },
+              }));
+          } catch (error) {
+            for (const actor of [...records.entities.entities])
+              if (!oldEntities.has(actor.id)) records.entities.remove(actor.id, false);
+            for (const prop of [...props.props])
+              if (!oldProps.has(prop.id)) props.remove(prop.id, false);
+            forgetFeatures(
+              [...records.features.values()].filter((f) => !oldFeatures.has(f.id)),
+              key,
+            );
+            records.features.clear();
+            for (const [id, feature] of oldFeatures) records.features.set(id, feature);
+            hydrateFeatures([...oldFeatures.values()].filter((f) => f.scope === key));
+            world.chunks.remove(key);
+            throw error;
+          }
+        });
       },
       save: () => saves.flushSnapshot(),
       canRelease: (key) =>
         !saves.dirtyInScope(key) &&
         !records.entities.entities.some(
-          (e) => e.type === "player" && actorScope(e.position) === key,
+          (e) =>
+            e.type === "player" && (actorScope(e.position) === key || records.scope(e) === key),
         ),
       release: (key) => {
+        traffic?.release(key);
         for (const actor of [...(records.buckets.get(key) ?? [])]) {
           if ("isProp" in actor) props.remove(actor.id, false);
           else records.entities.remove(actor.id, false);
@@ -104,6 +147,10 @@ export class RealmStreaming {
         forgetFeatures(features, key);
         for (const feature of features) records.features.delete(feature.id);
         world.chunks.remove(key);
+        for (const feature of records.features.values()) {
+          const [fx = 0, fy = 0] = feature.scope.split(",").map(Number);
+          if (!world.chunks.get(fx, fy)) records.features.delete(feature.id);
+        }
       },
     });
   }
@@ -136,11 +183,19 @@ export class RealmStreaming {
       ]);
     }
     this.interest.retainOwners(owners, "player:");
+    const active = this.interest.demand(Date.now());
+    this.interest.set("attachments", recordsDependencyTickets(this.records, active));
     this.pump();
   }
   private pump(): void {
     this.demand = this.interest.demand(Date.now());
     this.residency.reconcile(this.demand);
+  }
+  rangeReady(range: ChunkRange): boolean {
+    for (let cy = range.minCy; cy <= range.maxCy; cy++)
+      for (let cx = range.minCx; cx <= range.maxCx; cx++)
+        if (!this.residency.ready(`${cx},${cy}`)) return false;
+    return true;
   }
   async ensure(range: ChunkRange): Promise<void> {
     if (this.closed) throw new Error("Realm is closing.");
@@ -160,13 +215,13 @@ export class RealmStreaming {
       ]);
     }
   }
-  supported(entity: Entity, dt = 1 / 60): boolean {
+  supported(entity: Entity | Prop, dt = 1 / 60): boolean {
     const p = entity.position,
       c = entity.collider;
     const reach = Math.max(
       32,
-      Math.abs(entity.velocity?.vx ?? 0) * dt,
-      Math.abs(entity.velocity?.vy ?? 0) * dt,
+      Math.abs(("velocity" in entity ? entity.velocity?.vx : 0) ?? 0) * dt,
+      Math.abs(("velocity" in entity ? entity.velocity?.vy : 0) ?? 0) * dt,
       c?.width ?? 0,
       c?.height ?? 0,
     );
@@ -183,4 +238,17 @@ export class RealmStreaming {
     this.closed = true;
     await this.residency.close();
   }
+}
+
+function recordsDependencyTickets(records: RealmRecords, demand: Map<string, ChunkDemand>) {
+  const keys = new Set<string>();
+  for (const [scope, actors] of records.buckets) {
+    if (!demand.get(scope)?.activity) continue;
+    for (const actor of actors)
+      if ("parentId" in actor && actor.parentId !== undefined) keys.add(actorScope(actor.position));
+  }
+  return [...keys].map((key) => {
+    const [cx = 0, cy = 0] = key.split(",").map(Number);
+    return { range: around(cx, cy, 1), activity: 0 as const, reason: "dependency" as const };
+  });
 }

@@ -9,6 +9,12 @@ function chunkKey(cx: number, cy: number): string {
 
 /** Simple store for static props. No update loop — props don't tick. */
 export class PropManager {
+  simulationProps: readonly Prop[] | undefined;
+  get queryProps(): readonly Prop[] {
+    return this.simulationProps ?? this.props;
+  }
+  canAdd?: (prop: Prop) => boolean;
+  beforeAdd?: (prop: Prop) => void;
   onAdd?: (prop: Prop) => void;
   onChange?: (prop: Prop, deleted: boolean) => void;
   onDespawn?: (prop: Prop) => void;
@@ -92,6 +98,7 @@ export class PropManager {
   }
 
   add(prop: Prop): Prop {
+    this.beforeAdd?.(prop);
     prop.id = this.nextId++;
     this.props.push(prop);
     this.revision++;

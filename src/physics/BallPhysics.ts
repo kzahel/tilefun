@@ -98,8 +98,8 @@ export function tickBallPhysics(
         if (impactSpeed < BOUNCE_STOP_VZ) {
           // Ball stops bouncing
           ball.wz = groundZ;
-          delete ball.jumpVZ;
-          delete ball.jumpZ;
+          Reflect.set(ball, "jumpVZ", undefined);
+          Reflect.set(ball, "jumpZ", undefined);
           // Friction: decelerate horizontal velocity
           ball.velocity.vx *= 0.9;
           ball.velocity.vy *= 0.9;
@@ -128,7 +128,7 @@ export function tickBallPhysics(
       const groundZ = getSurfaceZ(ball.position.wx, ball.position.wy, getHeight);
       ball.groundZ = groundZ;
       if (ball.wz !== undefined) ball.wz = groundZ;
-      delete ball.jumpZ;
+      Reflect.set(ball, "jumpZ", undefined);
       ball.velocity.vx *= 1 - 3 * dt;
       ball.velocity.vy *= 1 - 3 * dt;
       const hSpeed = Math.sqrt(

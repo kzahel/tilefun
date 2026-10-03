@@ -153,7 +153,9 @@ describe("generated road traffic", () => {
     );
     restored.restore(records);
     expect([...restored.states.values()].map((s) => s.entity.position)).toEqual(positions);
-    expect([...restored.states.values()].every((s) => s.speed === 0)).toBe(true);
+    expect([...restored.states.values()].map((s) => s.speed)).toEqual(
+      records.map((record) => record.speed),
+    );
     expect(restored.save()).toEqual(records);
   });
   it("does not ignore a jumping player below the roof or drive onto edited/unloaded road", () => {
@@ -217,4 +219,17 @@ describe("generated road traffic", () => {
     expect(f.car.choices).toBeGreaterThan(0);
     expect(second.choices).toBeGreaterThan(0);
   });
+});
+
+it("validates an entire saved traffic batch before publishing any vehicle", () => {
+  const f = fixture();
+  const record = f.traffic.save()[0]!;
+  const count = f.traffic.states.size;
+  expect(() =>
+    f.traffic.restore([
+      { ...record, identity: "copy" },
+      { ...record, identity: "invalid", laneId: "missing" },
+    ]),
+  ).toThrow(/lane/);
+  expect(f.traffic.states.size).toBe(count);
 });

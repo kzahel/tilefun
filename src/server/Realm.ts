@@ -53,10 +53,12 @@ import {
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import { actorScope } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
+import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { RealmRecords } from "../persistence/RealmRecords.js";
-import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
+import type { InspectionState, SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
+import { TrafficRecords } from "../persistence/TrafficRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import {
@@ -82,6 +84,8 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { around } from "./InterestManager.js";
+import { MutationQueue } from "./MutationQueue.js";
+import { mutationRange } from "./MutationRange.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
@@ -108,6 +112,49 @@ function mergePlayerStepOutcomes(
  * GameServer coordinates active realms; RealmReplicator owns their client baselines.
  */
 export class Realm {
+  get persistenceDiagnostics() {
+    return {
+      realmId: this.currentWorldId,
+      loadedChunks: this.world.chunks.loadedCount,
+      actors: this.entityManager.entities.length,
+      activeActors: this.previousActive.size,
+      props: this.propManager.props.length,
+      features: this.records?.features.size ?? 0,
+      holders: this.streaming?.residency.holders.size ?? 0,
+      queuedEdits: this.mutations.count,
+      residency: { ...this.streaming?.residency.metrics },
+      storage: this.saveManager?.diagnostics ?? null,
+    };
+  }
+  readonly mutations = new MutationQueue();
+  private storageNotified = new WeakMap<PlayerSession, boolean>();
+
+  admitMutation(
+    session: PlayerSession,
+    msg: ClientMessage,
+    mutate: () => void,
+  ): Promise<void> | undefined {
+    const check = () => {
+      if (session.retired || session.transitioning || session.realmId !== this.currentWorldId)
+        throw new Error("The edit belongs to a realm you have left.");
+      if (this.saveManager?.pressured)
+        throw new Error("Saving is delayed. Please try the edit again when play resumes.");
+    };
+    check();
+    const range = mutationRange(msg, session, this.treeBrush);
+    const ready = !range || !this.streaming || this.streaming.rangeReady(range);
+    return this.mutations.run(
+      ready,
+      async () => {
+        if (range) await this.streaming?.ensure(range);
+      },
+      () => {
+        check();
+        mutate();
+      },
+    );
+  }
+
   world: World;
   entityManager: EntityManager;
   propManager: PropManager;
@@ -450,6 +497,19 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
   ): void {
     this.tickCounter++;
+    const storagePaused = this.saveManager?.pressured ?? false;
+    if (storagePaused) this.saveManager?.flush();
+    for (const session of this.sessions.values()) {
+      if ((this.storageNotified.get(session) ?? false) === storagePaused) continue;
+      this.storageNotified.set(session, storagePaused);
+      transport.send(session.clientId, {
+        type: "storage-status",
+        paused: storagePaused,
+        message: storagePaused
+          ? "Saving is delayed. Play will resume when your changes are safe."
+          : "",
+      });
+    }
     if (this.streaming)
       this.streaming.update(
         [...this.sessions.values()]
@@ -468,6 +528,13 @@ export class Realm {
         continue;
 
       if (this.streaming && !this.streaming.supported(session.player, dt)) continue;
+
+      if (storagePaused) {
+        session.lastProcessedInputSeq =
+          session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
+        session.inputQueue = [];
+        continue;
+      }
 
       // ── Mount bookkeeping: auto-dismount if mount entity was removed ──
       if (session.gameplaySession.mountId !== null) {
@@ -650,6 +717,7 @@ export class Realm {
     // caused N entity updates per tick — doubling/tripling movement speed.
     const activeSessions = [...this.sessions.values()].filter(
       (s) =>
+        !storagePaused &&
         !s.debugPaused &&
         !s.transitioning &&
         !s.retired &&
@@ -680,6 +748,12 @@ export class Realm {
         const active = [...entityTickDts.keys()];
         const decisions = this.streaming ? this.decisionDts(entityTickDts, stepDt) : entityTickDts;
         this.entityManager.simulationEntities = active;
+        this.propManager.simulationProps = this.propManager.props.filter(
+          (prop) =>
+            !this.streaming ||
+            ((this.streaming.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
+              this.streaming.supported(prop, stepDt)),
+        );
         tickAllAI(active, playerPositions, decisions, Math.random);
 
         // ── TickService.preSimulation ──
@@ -776,6 +850,7 @@ export class Realm {
         // ── OverlapService detection ──
         this.worldAPI.overlap.tick();
         this.entityManager.simulationEntities = undefined;
+        this.propManager.simulationProps = undefined;
       }
 
       // Restore noclip colliders
@@ -804,6 +879,8 @@ export class Realm {
       )
         continue;
       if (
+        !storagePaused &&
+        this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 100 &&
         !session.editorEnabled &&
         !session.debugPaused &&
         (!this.streaming || this.streaming.supported(session.player, dt))
@@ -822,11 +899,32 @@ export class Realm {
           this.entityManager,
           this.world,
         );
-        this.fishSpawner.update(dt, session.visibleRange, this.entityManager, this.world);
-        this.tentSpawner.update(dt, this.propManager, this.entityManager);
+        const playerRange = this.streaming
+          ? around(
+              Math.floor(session.player.position.wx / CHUNK_SIZE_PX),
+              Math.floor(session.player.position.wy / CHUNK_SIZE_PX),
+              4,
+            )
+          : session.visibleRange;
+        this.fishSpawner.update(dt, playerRange, this.entityManager, this.world);
       }
     }
 
+    if (
+      this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 100 &&
+      !this.interior &&
+      (this.generation.type !== "regional" || this.generation.version === "regional-v1") &&
+      activeSessions.some((session) => !session.editorEnabled)
+    ) {
+      const activeProps = this.streaming
+        ? this.propManager.props.filter(
+            (prop) =>
+              (this.streaming?.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
+              this.streaming?.supported(prop, dt),
+          )
+        : this.propManager.props;
+      this.tentSpawner.update(dt, this.propManager, this.entityManager, activeProps);
+    }
     for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
 
@@ -935,7 +1033,7 @@ export class Realm {
     }
   }
 
-  inspectionState(): SavedMeta {
+  inspectionState(): InspectionState {
     return {
       ...this.proceduralProps.save(),
       ...(this.traffic ? { traffic: this.traffic.save() } : {}),
@@ -1224,6 +1322,31 @@ export class Realm {
     this.saveManager = new SaveManager(store);
     this.records = new RealmRecords(this.entityManager, this.propManager, this.saveManager);
     this.entityManager.removalListeners.add((entity) => this.previousActive.delete(entity));
+    this.entityManager.canPlace = (wx, wy) =>
+      Number.isFinite(wx) &&
+      Number.isFinite(wy) &&
+      !!this.world.chunks.get(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX));
+    this.entityManager.canSpawn = (entity) =>
+      this.entityManager.entities.length < PERSISTENCE_BUDGET.actors &&
+      !this.saveManager?.pressured &&
+      this.entityManager.canPlace?.(entity.position.wx, entity.position.wy) !== false;
+    this.propManager.canAdd = (prop) =>
+      this.propManager.props.length < PERSISTENCE_BUDGET.props &&
+      !this.saveManager?.pressured &&
+      this.entityManager.canPlace?.(prop.position.wx, prop.position.wy) !== false;
+    this.entityManager.beforeSpawn = (entity) => {
+      if (
+        !this.records?.isHydrating &&
+        this.entityManager.canPlace?.(entity.position.wx, entity.position.wy) === false
+      )
+        throw new Error("Cannot spawn outside ready terrain.");
+      if (this.entityManager.entities.length >= PERSISTENCE_BUDGET.actors)
+        throw new Error("Local actor limit reached.");
+    };
+    this.propManager.beforeAdd = () => {
+      if (this.propManager.props.length >= PERSISTENCE_BUDGET.props)
+        throw new Error("Local prop limit reached.");
+    };
     this.proceduralActors.persistent = true;
     this.proceduralActors.canGenerate = (id) => !this.records?.features.has(id);
     this.terrainEditor = new TerrainEditor(
@@ -1255,6 +1378,9 @@ export class Realm {
       () => this.buildSaveMeta(),
     );
     this.proceduralProps.managed = true;
+    const trafficRecords = this.traffic
+      ? new TrafficRecords(this.traffic, this.records, this.saveManager)
+      : undefined;
     this.streaming = new RealmStreaming(
       this.world,
       this.records,
@@ -1289,7 +1415,17 @@ export class Realm {
         }
         if (!seeded) this.proceduralActors.reconcile(this.generator, [key]);
       },
+      trafficRecords,
     );
+
+    if (this.traffic)
+      this.traffic.canSpawn = (id, wx, wy) =>
+        !this.records?.features.has(id) &&
+        !this.saveManager?.pressured &&
+        this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 16 &&
+        !!this.streaming?.rangeReady(
+          around(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX), 1),
+        );
 
     let cameraX = 0;
     let cameraY = 0;
@@ -1297,14 +1433,15 @@ export class Realm {
     let playerX = 0;
     let playerY = 0;
 
-    console.log(`[tilefun] loadWorld ${worldId}: lazy format-2 records, meta=${!!savedMeta}`);
+    console.log(
+      `[tilefun] loadWorld ${worldId}: lazy world-container records, meta=${!!savedMeta}`,
+    );
     if (savedMeta) {
       cameraX = savedMeta.cameraX;
       cameraY = savedMeta.cameraY;
       cameraZoom = savedMeta.cameraZoom;
       playerX = savedMeta.playerX;
       playerY = savedMeta.playerY;
-      if (Array.isArray(savedMeta.traffic)) this.traffic?.restore(savedMeta.traffic);
       this.lastLoadedGems = savedMeta.gemsCollected ?? 0;
     } else {
       this.lastLoadedGems = 0;
@@ -1406,9 +1543,21 @@ export class Realm {
   }
 
   async flushAsync(): Promise<void> {
+    await this.mutations.drain();
     for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
     await this.saveManager?.flushAsync();
+  }
+
+  async flushTransfer(source: Realm | undefined): Promise<void> {
+    const realms = [...new Set([source, this])].filter((realm): realm is Realm => !!realm);
+    for (const realm of realms) {
+      for (const session of realm.sessions.values()) realm.savePlayerData(session);
+      realm.saveManager?.markMetaDirty();
+    }
+    await SaveManager.flushTogether(
+      realms.flatMap((realm) => (realm.saveManager ? [realm.saveManager] : [])),
+    );
   }
 
   flush(): void {
@@ -1419,6 +1568,7 @@ export class Realm {
 
   /** Teardown mods and close persistence. */
   async destroy(): Promise<void> {
+    await this.mutations.drain();
     for (const teardown of this.modTeardowns.values()) {
       teardown();
     }
@@ -1439,9 +1589,9 @@ export class Realm {
     const mount = this.entityManager.entities.find((e) => e.id === mountId);
 
     // Clear parent relationship
-    delete session.player.parentId;
-    delete session.player.localOffsetX;
-    delete session.player.localOffsetY;
+    Reflect.set(session.player, "parentId", undefined);
+    Reflect.set(session.player, "localOffsetX", undefined);
+    Reflect.set(session.player, "localOffsetY", undefined);
     session.gameplaySession.lastDismountedId = mountId;
     session.gameplaySession.mountId = null;
 
@@ -1510,7 +1660,7 @@ export class Realm {
       // which may include the cow's own walkable surface height, double-counting).
       player.wz = (entity.wz ?? 0) + 10;
       player.jumpZ = 10;
-      delete player.jumpVZ;
+      Reflect.set(player, "jumpVZ", undefined);
       player.noShadow = true; // cow's shadow is bigger
       if (entity.wanderAI) {
         entity.wanderAI.state = "ridden";
@@ -1572,8 +1722,8 @@ export class Realm {
         p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
         p.groundZ = p.wz;
       }
-      delete p.jumpVZ;
-      delete p.jumpZ;
+      Reflect.set(p, "jumpVZ", undefined);
+      Reflect.set(p, "jumpZ", undefined);
       // Brief invincibility flash so the respawn is visible.
       session.gameplaySession.invincibilityTimer = 0.75;
       return;
@@ -1646,7 +1796,7 @@ export class Realm {
     let player: Entity | undefined;
 
     for (const session of this.sessions.values()) {
-      // Use first session for realm-level meta (backward compat)
+      // Use the first session for the bounded default spawn/camera hint
       if (!player) {
         cameraX = session.cameraX;
         cameraY = session.cameraY;
@@ -1657,7 +1807,6 @@ export class Realm {
     }
 
     return {
-      ...(this.traffic ? { traffic: this.traffic.save() } : {}),
       ...(this.interior
         ? { interior: this.interior, ...(this.roomState ? { roomPlan: this.roomState } : {}) }
         : {}),
@@ -1710,10 +1859,17 @@ export class Realm {
   ): Map<Entity, number> {
     const result = new Map<Entity, number>();
     if (this.streaming && this.records) {
+      const groups = new Set<number>();
       for (const [key, demand] of this.streaming.demand) {
         if (!demand.activity || !this.streaming.residency.ready(key)) continue;
         for (const actor of this.records.buckets.get(key) ?? []) {
-          if (!("isProp" in actor) && this.streaming.supported(actor, dt)) result.set(actor, dt);
+          if ("isProp" in actor) continue;
+          const root = this.records.root(actor);
+          if (groups.has(root.id)) continue;
+          groups.add(root.id);
+          const group = this.records.group(actor);
+          if (group.every((member) => this.streaming?.supported(member, dt)))
+            for (const member of group) result.set(member, dt);
         }
       }
       for (const session of sessions)

@@ -20,6 +20,8 @@ export interface PropCollider {
  */
 export interface Prop {
   persistentId?: string;
+  /** Frozen gameplay countdown; distinct from transient animation state. */
+  spawnTimer?: number;
   id: number;
   proceduralId?: string;
   type: string;

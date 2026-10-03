@@ -41,34 +41,46 @@ export class InterestManager {
   }
   demand(now: number): Map<string, ChunkDemand> {
     const result = new Map<string, ChunkDemand>();
+    const ranked: InterestTicket[] = [];
     for (const [owner, tickets] of this.tickets) {
       const live = tickets.filter((ticket) => ticket.expires === undefined || ticket.expires > now);
       if (!live.length) {
         this.tickets.delete(owner);
         continue;
       }
-      for (const ticket of live) {
-        const r = ticket.range;
-        const centerX = (r.minCx + r.maxCx) / 2,
-          centerY = (r.minCy + r.maxCy) / 2;
-        for (let cy = r.minCy; cy <= r.maxCy; cy++)
-          for (let cx = r.minCx; cx <= r.maxCx; cx++) {
-            const key = `${cx},${cy}`;
-            const priority =
-              (ticket.reason === "arrival" ? -1000 : ticket.activity === 2 ? -100 : 0) +
-              Math.abs(cx - centerX) +
-              Math.abs(cy - centerY);
-            const previous = result.get(key);
-            result.set(key, {
-              cx,
-              cy,
-              activity: Math.max(previous?.activity ?? 0, ticket.activity) as Activity,
-              priority: Math.min(previous?.priority ?? Infinity, priority),
-            });
-            if (result.size > this.maxChunks)
-              throw new Error("Combined interest exceeds the chunk budget.");
-          }
-      }
+      ranked.push(...live);
+    }
+    const rank = (ticket: InterestTicket) =>
+      ticket.reason === "arrival"
+        ? -1000
+        : ticket.activity === 2
+          ? -100
+          : ticket.activity === 1
+            ? -50
+            : ticket.reason === "dependency"
+              ? -25
+              : 0;
+    ranked.sort((a, b) => rank(a) - rank(b));
+    for (const ticket of ranked) {
+      const r = ticket.range;
+      const centerX = (r.minCx + r.maxCx) / 2,
+        centerY = (r.minCy + r.maxCy) / 2;
+      for (let cy = r.minCy; cy <= r.maxCy; cy++)
+        for (let cx = r.minCx; cx <= r.maxCx; cx++) {
+          const key = `${cx},${cy}`;
+          const priority =
+            (ticket.reason === "arrival" ? -1000 : ticket.activity === 2 ? -100 : 0) +
+            Math.abs(cx - centerX) +
+            Math.abs(cy - centerY);
+          const previous = result.get(key);
+          if (!previous && result.size >= this.maxChunks) continue;
+          result.set(key, {
+            cx,
+            cy,
+            activity: Math.max(previous?.activity ?? 0, ticket.activity) as Activity,
+            priority: Math.min(previous?.priority ?? Infinity, priority),
+          });
+        }
     }
     return new Map([...result].sort((a, b) => a[1].priority - b[1].priority));
   }

@@ -230,7 +230,9 @@ export class PlayScene implements GameScene {
 
     // Player movement input — quantize dx/dy so prediction uses the same
     // values the server will see after binary decoding (no misprediction drift).
-    const rawMovement = gc.actions.getMovement();
+    const rawMovement = gc.storagePaused
+      ? { dx: 0, dy: 0, sprinting: false, jump: false }
+      : gc.actions.getMovement();
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump);
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
     const commandDt = commandDtMs / 1000;
@@ -254,10 +256,10 @@ export class PlayScene implements GameScene {
     });
 
     // Throw charge tracking
-    const throwHeld = gc.actions.isHeld("throw");
+    const throwHeld = !gc.storagePaused && gc.actions.isHeld("throw");
     if (throwHeld) {
       this.throwChargeTime += dt;
-    } else if (this.wasThrowHeld) {
+    } else if (this.wasThrowHeld && !gc.storagePaused) {
       // Released — throw the ball
       const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
       let dirX = 0;
@@ -348,14 +350,15 @@ export class PlayScene implements GameScene {
         }
 
         // Store current input for future reconciliation, then predict.
-        this.predictor.storeInput(seq, movement, commandDt);
-        this.predictor.update(
-          commandDt,
-          movement,
-          gc.stateView.world,
-          gc.stateView.props,
-          gc.stateView.entities,
-        );
+        if (!gc.storagePaused) this.predictor.storeInput(seq, movement, commandDt);
+        if (!gc.storagePaused)
+          this.predictor.update(
+            commandDt,
+            movement,
+            gc.stateView.world,
+            gc.stateView.props,
+            gc.stateView.entities,
+          );
       }
 
       // Camera follows predicted player position (stateView.playerEntity

@@ -28,6 +28,7 @@ import type { Time } from "./Time.js";
  * Constructed once by GameClient and passed to SceneManager.
  */
 export interface GameContext {
+  readonly storagePaused?: boolean;
   readonly canvas: HTMLCanvasElement;
   readonly ctx: CanvasRenderingContext2D;
   readonly camera: Camera;

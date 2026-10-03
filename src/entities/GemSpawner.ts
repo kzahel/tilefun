@@ -45,7 +45,7 @@ export class GemSpawner {
     entityManager: EntityManager,
     world: World,
   ): void {
-    this.despawnFar(player, entityManager);
+    this.despawnFar(player, entityManager, !world.chunks.managed);
 
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
@@ -90,6 +90,12 @@ export class GemSpawner {
       }
     }
 
+    if (world.chunks.managed) {
+      for (let i = candidates.length - 1; i >= 0; i--) {
+        const candidate = candidates[i];
+        if (candidate && !world.chunks.get(candidate.cx, candidate.cy)) candidates.splice(i, 1);
+      }
+    }
     if (candidates.length === 0) return;
 
     const choice = candidates[Math.floor(Math.random() * candidates.length)];
@@ -107,14 +113,14 @@ export class GemSpawner {
     this.chunkGemMap.set(chunkKey(choice.cx, choice.cy), gem.id);
   }
 
-  private despawnFar(player: Entity, entityManager: EntityManager): void {
+  private despawnFar(player: Entity, entityManager: EntityManager, allowDespawn: boolean): void {
     const playerCx = Math.floor(player.position.wx / CHUNK_SIZE_PX);
     const playerCy = Math.floor(player.position.wy / CHUNK_SIZE_PX);
 
     const toRemove: string[] = [];
     for (const [key, gemId] of this.chunkGemMap) {
       // Check if gem still exists (may have been collected)
-      const gem = entityManager.entities.find((e) => e.id === gemId);
+      const gem = entityManager.byId.get(gemId);
       if (!gem) {
         toRemove.push(key);
         continue;
@@ -122,7 +128,7 @@ export class GemSpawner {
       const gemCx = Math.floor(gem.position.wx / CHUNK_SIZE_PX);
       const gemCy = Math.floor(gem.position.wy / CHUNK_SIZE_PX);
       const dist = Math.max(Math.abs(gemCx - playerCx), Math.abs(gemCy - playerCy));
-      if (dist > DESPAWN_DISTANCE) {
+      if (allowDespawn && dist > DESPAWN_DISTANCE) {
         entityManager.remove(gemId);
         toRemove.push(key);
       }

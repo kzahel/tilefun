@@ -39,7 +39,7 @@ export class BaddieSpawner {
     entityManager: EntityManager,
     world: World,
   ): void {
-    this.despawnFar(player, entityManager);
+    this.despawnFar(player, entityManager, !world.chunks.managed);
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       this.spawnTimer = SPAWN_INTERVAL;
@@ -77,6 +77,12 @@ export class BaddieSpawner {
         candidates.push({ cx, cy });
       }
     }
+    if (world.chunks.managed) {
+      for (let i = candidates.length - 1; i >= 0; i--) {
+        const candidate = candidates[i];
+        if (candidate && !world.chunks.get(candidate.cx, candidate.cy)) candidates.splice(i, 1);
+      }
+    }
     if (candidates.length === 0) return;
 
     const choice = candidates[Math.floor(Math.random() * candidates.length)];
@@ -93,13 +99,13 @@ export class BaddieSpawner {
     this.trackedIds.add(baddie.id);
   }
 
-  private despawnFar(player: Entity, entityManager: EntityManager): void {
+  private despawnFar(player: Entity, entityManager: EntityManager, allowDespawn: boolean): void {
     const playerCx = Math.floor(player.position.wx / CHUNK_SIZE_PX);
     const playerCy = Math.floor(player.position.wy / CHUNK_SIZE_PX);
 
     const toRemove: number[] = [];
     for (const id of this.trackedIds) {
-      const entity = entityManager.entities.find((e) => e.id === id);
+      const entity = entityManager.byId.get(id);
       if (!entity) {
         toRemove.push(id);
         continue;
@@ -107,7 +113,7 @@ export class BaddieSpawner {
       const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX);
       const cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
       const dist = Math.max(Math.abs(cx - playerCx), Math.abs(cy - playerCy));
-      if (dist > DESPAWN_DISTANCE) {
+      if (allowDespawn && dist > DESPAWN_DISTANCE) {
         entityManager.remove(id);
         toRemove.push(id);
       }
