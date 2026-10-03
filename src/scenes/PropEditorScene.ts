@@ -232,34 +232,33 @@ export class PropEditorScene implements GameScene {
 
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
-    const { ctx, camera, sheets } = gc;
-
-    ctx.save();
-    ctx.fillStyle = "#5a8a32";
-    ctx.fillRect(0, 0, gc.canvas.width, gc.canvas.height);
-    ctx.restore();
-
-    for (const prop of this.props) {
-      const sheet = sheets.get(prop.sprite.sheetKey);
-      if (!sheet) continue;
-      const { spriteWidth, spriteHeight, frameCol, frameRow } = prop.sprite;
-      const halfW = spriteWidth / 2;
-      const screen = camera.worldToScreen(
-        prop.position.wx - halfW,
-        prop.position.wy - spriteHeight,
-      );
-      const region = sheet.getRegion(frameCol, frameRow);
-      ctx.drawImage(
-        sheet.image,
-        region.x,
-        region.y,
-        spriteWidth,
-        spriteHeight,
-        Math.floor(screen.sx),
-        Math.floor(screen.sy),
-        spriteWidth * camera.scale,
-        spriteHeight * camera.scale,
-      );
+    const { ctx, camera } = gc;
+    gc.renderer.submit(camera, { kind: "clear", color: "#5a8a32" });
+    const overlays = gc.sceneFrame.overlays;
+    overlays.begin();
+    try {
+      for (const prop of this.props) {
+        const metadata = gc.spriteCatalog.get(prop.sprite.sheetKey);
+        if (!metadata) continue;
+        const { spriteWidth, spriteHeight, frameCol, frameRow } = prop.sprite;
+        const screen = camera.worldToScreen(
+          prop.position.wx - spriteWidth / 2,
+          prop.position.wy - spriteHeight,
+        );
+        const draw = overlays.next("sprite");
+        draw.sheetKey = prop.sprite.sheetKey;
+        draw.srcX = frameCol * metadata.tileWidth;
+        draw.srcY = frameRow * metadata.tileHeight;
+        draw.srcWidth = spriteWidth;
+        draw.srcHeight = spriteHeight;
+        draw.x = Math.floor(screen.sx);
+        draw.y = Math.floor(screen.sy);
+        draw.width = spriteWidth * camera.scale;
+        draw.height = spriteHeight * camera.scale;
+      }
+      gc.renderer.submit(camera, { kind: "overlay", items: overlays.items });
+    } finally {
+      overlays.release();
     }
 
     drawCollisionBoxes(ctx, camera, [], this.props);

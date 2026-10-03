@@ -219,7 +219,7 @@ test("Play here creates at the preview location and saved inspection includes a 
           for (let cy = range.minCy; cy <= range.maxCy; cy++)
             for (let cx = range.minCx; cx <= range.maxCx; cx++) {
               const chunk = game.stateView.world.getChunkIfLoaded(cx, cy);
-              if (!game.tileRenderer.isTerrainReady(chunk)) return false;
+              if (!game.renderer.isTerrainReady(chunk)) return false;
             }
           return true;
         }),

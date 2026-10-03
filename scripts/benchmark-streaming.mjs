@@ -236,7 +236,7 @@ try {
                 visited.add(`${cx},${cy}`);
                 const chunk = game.stateView.world.getChunkIfLoaded(cx, cy);
                 if (!chunk) missing++;
-                else if (!game.tileRenderer.hasTerrain(chunk)) incomplete++;
+                else if (!game.renderer.hasTerrain(chunk)) incomplete++;
               }
             if (missing) missingDataFrames++;
             if (incomplete) incompleteCacheFrames++;
@@ -291,7 +291,7 @@ try {
             inputAckMs: summary(ackTimes),
             maxAckGap,
             predictionResimulationErrorPx: summary(corrections),
-            cache: game.tileRenderer.getDiagnostics?.() ?? null,
+            cache: game.renderer.getDiagnostics?.() ?? null,
             frames: summary(frames),
             renderMs: summary(renders),
             updateMs: summary(updates),
@@ -366,11 +366,11 @@ try {
     await page.evaluate(
       ({ pausePreparation, rowBudget }) => {
         const game = document.querySelector("#game").__game;
-        if (pausePreparation) game.tileRenderer.prepareTerrain = () => {};
+        if (pausePreparation) game.renderer.prepareTerrain = () => {};
         else if (rowBudget) {
-          const prepare = game.tileRenderer.prepareTerrain.bind(game.tileRenderer);
-          game.tileRenderer.prepareTerrain = (camera, world, sheets, visible) =>
-            prepare(camera, world, sheets, visible, 2, rowBudget);
+          const prepare = game.renderer.prepareTerrain.bind(game.renderer);
+          game.renderer.prepareTerrain = (camera, world, visible) =>
+            prepare(camera, world, visible, { timeBudgetMs: 2, rowBudget });
         }
         game.debugPanel.setZoom(0.5);
       },

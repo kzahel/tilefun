@@ -1,12 +1,20 @@
+import type { GameAssets } from "../assets/GameAssets.js";
 import { createSpriteCatalog, type SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { BlendGraph } from "../autotile/BlendGraph.js";
 import type { InteriorContent } from "../interiors/InteriorPresentation.js";
+import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { Camera } from "./Camera.js";
 import { drawScene2D } from "./Canvas2DRenderer.js";
 import { CanvasInteriorResources } from "./CanvasInteriorResources.js";
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
-import type { RenderBackend, RenderPass, RenderView } from "./RenderFrame.js";
+import type {
+  RenderBackend,
+  RenderPass,
+  RenderView,
+  TerrainPreparationOptions,
+} from "./RenderFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
 
@@ -14,6 +22,7 @@ import { TileRenderer } from "./TileRenderer.js";
 export class CanvasRenderBackend implements RenderBackend {
   private readonly camera = new Camera();
   assets: SpriteCatalog;
+  private disposed = false;
   private interior: CanvasInteriorResources | null = null;
 
   constructor(
@@ -25,13 +34,14 @@ export class CanvasRenderBackend implements RenderBackend {
   }
 
   setAssets(sheets: Map<string, Spritesheet>): void {
+    this.assertLive();
     this.sheets = sheets;
     this.assets = createSpriteCatalog(sheets);
-    this.terrain.invalidateAssets();
-    this.interior = null;
+    this.invalidateAssets();
   }
 
   prepareInterior(content: InteriorContent): void {
+    this.assertLive();
     if (this.interior?.contentId === content.id) return;
     const atlas = this.sheets.get("modern-interiors");
     this.interior = atlas ? new CanvasInteriorResources(atlas.image, content) : null;
@@ -46,11 +56,25 @@ export class CanvasRenderBackend implements RenderBackend {
     return camera;
   }
 
-  prepareTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange): void {
-    this.terrain.prepareTerrain(this.setView(view), world, this.sheets, visible);
+  prepareTerrain(
+    view: RenderView,
+    world: TerrainRenderWorld,
+    visible: ChunkRange,
+    options?: TerrainPreparationOptions,
+  ): void {
+    this.assertLive();
+    this.terrain.prepareTerrain(
+      this.setView(view),
+      world,
+      this.sheets,
+      visible,
+      options?.timeBudgetMs,
+      options?.rowBudget,
+    );
   }
 
   collectTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange) {
+    this.assertLive();
     return this.terrain.collectTerrainDraws(
       this.setView(view),
       world,
@@ -62,10 +86,12 @@ export class CanvasRenderBackend implements RenderBackend {
   }
 
   collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange) {
+    this.assertLive();
     return this.terrain.collectElevationItems(world, visible);
   }
 
   submit(view: RenderView, pass: RenderPass): void {
+    this.assertLive();
     const ctx = this.ctx;
     const camera = this.setView(view);
     ctx.imageSmoothingEnabled = false;
@@ -109,6 +135,61 @@ export class CanvasRenderBackend implements RenderBackend {
         );
         break;
     }
+  }
+
+  /** Source decoding/configuration belongs to platform composition. */
+  configureAssets(assets: GameAssets, graph: BlendGraph): void {
+    this.assertLive();
+    this.terrain.setBlendSheets(assets.blendSheets, graph);
+    this.terrain.setRoadSheets(assets.sheets);
+    this.terrain.setVariants(assets.variants);
+    this.setAssets(assets.sheets);
+  }
+
+  isTerrainReady(chunk: Chunk | undefined): boolean {
+    return this.terrain.isTerrainReady(chunk);
+  }
+  hasTerrain(chunk: Chunk | undefined): boolean {
+    return this.terrain.hasTerrain(chunk);
+  }
+  releaseChunk(chunk: Chunk): void {
+    this.terrain.releaseChunk(chunk);
+  }
+  getDiagnostics() {
+    return this.terrain.getDiagnostics();
+  }
+
+  resize(width: number, height: number): void {
+    this.assertLive();
+    const canvas = this.ctx.canvas;
+    if (canvas.width !== width) canvas.width = width;
+    if (canvas.height !== height) canvas.height = height;
+    // Native terrain/room resources are independent of viewport size.
+  }
+
+  invalidateAssets(): void {
+    this.assertLive();
+    this.terrain.invalidateAssets();
+    this.interior = null;
+  }
+
+  recover(): void {
+    this.assertLive();
+    this.clear();
+  }
+
+  dispose(): void {
+    if (this.disposed) return;
+    this.clear();
+    // Decoded sources are borrowed from the host and may still serve UI/other
+    // backends. Release references, never close another owner's shared bitmap.
+    this.sheets = new Map();
+    this.assets = new Map();
+    this.disposed = true;
+  }
+
+  private assertLive(): void {
+    if (this.disposed) throw Error("Renderer is disposed");
   }
 
   clear(): void {

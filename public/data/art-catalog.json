@@ -22141,7 +22141,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:675"
+          "source": "src/scenes/PlayScene.ts:676"
         }
       ]
     },
@@ -23393,11 +23393,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CanvasRenderBackend.ts:105"
+          "source": "src/rendering/CanvasRenderBackend.ts:131"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:110"
+          "source": "src/scenes/renderWorld.ts:66"
         }
       ]
     },

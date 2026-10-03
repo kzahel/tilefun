@@ -40,6 +40,29 @@ describe("backend-independent frame submission", () => {
     ]);
     const renderer: RenderBackend = {
       assets,
+      isTerrainReady() {
+        return true;
+      },
+      hasTerrain() {
+        return true;
+      },
+      releaseChunk() {},
+      getDiagnostics() {
+        return {
+          resident: 0,
+          schedulerRecordsCreated: 0,
+          queuedJobs: 0,
+          building: 0,
+          pending: 0,
+          oldestMs: 0,
+          rowsLastFrame: 0,
+          surfaceBytes: 0,
+        };
+      },
+      resize() {},
+      invalidateAssets() {},
+      recover() {},
+      dispose() {},
       prepareInterior() {},
       prepareTerrain() {
         passes.push("prepare");

@@ -10,7 +10,8 @@ import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
-import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
+import { renderEntities, renderWorld } from "./renderWorld.js";
 
 /**
  * Play mode scene.

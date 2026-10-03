@@ -1,5 +1,4 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
-import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { AudioManager } from "../audio/AudioManager.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import type { DoorPresentation } from "../client/DoorPresentation.js";
@@ -17,7 +16,6 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
-import type { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -35,15 +33,14 @@ export interface GameContext {
   readonly realmId?: string | null;
   readonly storagePaused?: boolean;
   readonly canvas: HTMLCanvasElement;
+  /** Independent HUD/touch/debug UI surface, supplied by platform composition. */
   readonly ctx: CanvasRenderingContext2D;
   readonly camera: Camera;
   readonly actions: ActionManager;
   readonly stateView: ClientStateView;
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
-  readonly sheets: Map<string, Spritesheet>;
   readonly renderer: RenderBackend;
-  readonly tileRenderer: TileRenderer;
   readonly sceneFrame: SceneFrame;
   readonly audioManager: AudioManager;
 

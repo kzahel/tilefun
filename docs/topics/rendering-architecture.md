@@ -91,8 +91,9 @@ asset changes, eviction, stale handles and reset. Use the existing bundled
 Chromium runners and immutable review references; no new reference approvals
 are implied by a refactor.
 
-Current implementation still exposes legacy Canvas resources in `GameContext`;
-`Spritesheet` is now a Canvas resource wrapper with separate neutral metadata.
+`GameContext` now exposes a neutral renderer and asset catalog. Its Canvas context
+is explicitly an independent HUD/touch/debug UI surface supplied by the platform
+host. `Spritesheet` is a Canvas resource wrapper with separate neutral metadata.
 Indoor actor callbacks have been removed. These are explicit remaining boundaries, not a claim that the
 production renderer is already interchangeable.
 
@@ -178,8 +179,8 @@ Editor overlays now use explicit pooled geometry through the same backend;
 brush, preview and remote-cursor drawing operations. Indoor frames now use
 the same submission interface, as described below. Terrain placement
 selection currently lives with the concrete cache and must become shared
-presentation policy during final boundary cleanup. `GameContext` still exposes
-legacy Canvas resources for those consumers and independent UI/debug rendering.
+presentation policy during final boundary cleanup. `GameContext` no longer exposes concrete terrain renderers or sheets; independent
+UI/debug rendering has an explicit platform-owned context.
 
 ## Indoor frame data
 
@@ -197,3 +198,19 @@ are neutral modules; raster functions live in `CanvasInteriorMap`. Native Canvas
 review/uncached reference adapters still exist and share these rules.
 [031](../tactical/031-interior-frame-data.md) records exact room pixel parity,
 resource ownership tests and ordinary/edited-room movement evidence.
+
+## Platform host and lifecycle
+
+`GameClientOptions.renderHostFactory` selects a `RenderHost`: neutral backend,
+independent UI context, asset setup, resize, frame-start UI clearing and disposal.
+Canvas is the default implementation; gameplay orchestration does not construct
+or configure TileRenderer. A GPU host can supply a separate UI overlay without
+changing physics, editing or presentation rules.
+
+`RenderBackend` exposes readiness, diagnostics, resource invalidation, resize,
+recovery and disposal. Resize keeps native static caches. Asset invalidation
+keeps completed terrain fallback while replacement builds; recovery/reset clears
+terrain and rooms. Disposal is idempotent, rejects further rendering/preparation
+and drops source references without closing images borrowed from another owner.
+[032](../tactical/032-renderer-host-lifecycle.md) records lifecycle and integration
+validation. Explorer/native reference composition remains the next migration.

@@ -56,9 +56,9 @@ slices. If still awaiting activation, do not begin implementation.
 ## Progress checkpoint
 
 - **Activation:** 2026-10-03: “go ahead proceed fully end to end autonomously committing as you go.”
-- **Overall state:** R1/R2 delivered; sprite metadata prerequisite delivered; backend host/lifecycle next.
-- **Active child tactical:** [031 Interior frame data](031-interior-frame-data.md).
-- **Next action:** implement renderer composition/lifecycle (032), then remaining consumer migration.
+- **Overall state:** R1/R2 and backend host/lifecycle delivered; shared terrain placement and remaining consumers next.
+- **Active child tactical:** [032 Renderer host lifecycle](032-renderer-host-lifecycle.md).
+- **Next action:** implement shared terrain placement and remaining consumer migration (033).
 - **Blockers:** none known; device availability and current checkout must be
   checked when implementation starts.
 - **Completion evidence:** pending the gates below.
@@ -77,7 +77,7 @@ Completed foundations, recorded in [Tactical 013](013-renderer-boundary-and-allo
 | ID | Outcome and dependencies | Exit evidence | State / child / commits |
 | --- | --- | --- | --- |
 | R1 | Define and use a neutral frame contract for outdoor terrain, shadows, sorted scene content and editor overlays. Separate static content updates from camera/dynamic frame data. Builds on the completed foundations. | Real outdoor/editor orchestration submits ordered data; no Canvas objects or draw callbacks cross the contract. Existing phase/depth behavior and reusable frame ownership are preserved. | Done / [029](029-outdoor-frame-contract.md), [030](030-editor-overlay-data.md) / `d613cfd`; `9823673` |
-| R2 | Express indoor floors, actors, furniture and walls through ordered data on the same contract. Depends on R1; split if needed to preserve occlusion safely. | Remove indoor actor draw callbacks; representative rooms, edited furniture and actor/wall crossings retain visual parity and cache reuse. | Done / [031](031-interior-frame-data.md) / commit recorded next checkpoint |
+| R2 | Express indoor floors, actors, furniture and walls through ordered data on the same contract. Depends on R1; split if needed to preserve occlusion safely. | Remove indoor actor draw callbacks; representative rooms, edited furniture and actor/wall crossings retain visual parity and cache reuse. | Done / [031](031-interior-frame-data.md) / `dce609b` |
 | R3 | Separate sprite/atlas descriptions from loaded images. Coordinate IDs and geometry with R1/R2; move earlier if those slices need the catalog first. | Presentation resolves metadata without browser image types. Backends own loaded resources, asset invalidation and stale-resource handling. | Metadata delivered; lifecycle integration remains in R4 / [028](028-sprite-metadata.md) / `fb73fa0` |
 | R4 | Complete one backend interface and migrate gameplay, editor, explorer and review consumers. Depends on R1–R3. Include preparation, resize, invalidation, realm change, disposal and resource recovery ownership. | Consumers select a backend at composition; concrete Canvas renderer access leaves game presentation orchestration. Independent instances and lifecycle transitions do not share or leak resources. | Pending / — / — |
 | R5 | Remove transitional APIs and prove the boundary with a recording backend and final integration/allocation checks. Depends on R1–R4. | Representative outdoor, indoor and editor frames run through the same presentation path without Canvas resources, draw callbacks or simulation mutation. Remaining platform dependencies are inventoried and justified; all completion gates pass. | Pending / — / — |

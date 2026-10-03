@@ -49,6 +49,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [031 Interior frame data](031-interior-frame-data.md) | Delivered: shared room ordering, neutral actors and backend-owned room resources; 81 unchanged pixel cases |
 
+| [032 Renderer host lifecycle](032-renderer-host-lifecycle.md) | Delivered: injected platform host, neutral gameplay context and resource lifecycle; remaining consumers follow |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

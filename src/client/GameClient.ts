@@ -5,7 +5,6 @@ import {
   loadModernInteriorsAtlasIndex,
   MODERN_INTERIORS_SHEET_KEY,
 } from "../assets/ModernInteriorsAtlasIndex.js";
-import { createSpriteCatalog, type SpriteCatalog } from "../assets/SpriteCatalog.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
@@ -27,7 +26,9 @@ import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
+import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
+import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
@@ -48,7 +49,6 @@ import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
 import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
@@ -79,6 +79,8 @@ import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientS
 import { RequestBroker } from "./RequestBroker.js";
 
 export interface GameClientOptions {
+  /** Platform renderer selection; simulation and presentation stay shared. */
+  renderHostFactory?: RenderHostFactory;
   mode?: "local" | "serialized";
   profile?: { id: string; name: string; playerModel?: string };
   profileStore?: {
@@ -123,10 +125,9 @@ export class GameClient {
   private ctx: CanvasRenderingContext2D;
   private camera: Camera;
   private loop: GameLoop;
-  private spriteCatalog: SpriteCatalog = new Map();
   private sheets = new Map<string, Spritesheet>();
-  private renderer: CanvasRenderBackend;
-  private tileRenderer: TileRenderer;
+  private readonly renderHost: RenderHost;
+  private readonly renderer: RenderBackend;
   private readonly sceneFrame = new SceneFrame();
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
@@ -204,10 +205,10 @@ export class GameClient {
     const admin = takeAdminToken(new URL(window.location.href));
     this.adminToken = admin.token;
     if (admin.token !== undefined) window.history.replaceState(window.history.state, "", admin.url);
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Failed to get 2D context");
+    this.renderHost = (options?.renderHostFactory ?? createCanvasRenderHost)(canvas);
+    this.renderer = this.renderHost.renderer;
     this.canvas = canvas;
-    this.ctx = ctx;
+    this.ctx = this.renderHost.uiContext;
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
     this.transport = this.netEmulatedTransport;
     this.requests = new RequestBroker((message) => this.transport.send(message));
@@ -223,8 +224,6 @@ export class GameClient {
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
-    this.tileRenderer = new TileRenderer();
-    this.renderer = new CanvasRenderBackend(this.ctx, this.sheets, this.tileRenderer);
     this.actions = new ActionManager();
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();
@@ -484,7 +483,7 @@ export class GameClient {
           p.id !== -1 &&
           (this.stateView.interior
             ? !!this.stateView.roomState
-            : this.tileRenderer.isTerrainReady(
+            : this.renderer.isTerrainReady(
                 this.stateView.world.chunks.get(
                   Math.floor(p.position.wx / CHUNK_SIZE_PX),
                   Math.floor(p.position.wy / CHUNK_SIZE_PX),
@@ -507,6 +506,7 @@ export class GameClient {
       },
       render: (alpha) => {
         this.time.alpha = alpha;
+        this.renderHost.beginFrame();
         this.scenes.render(alpha);
       },
     });
@@ -649,9 +649,6 @@ export class GameClient {
       // The menu pauses replica application; reflect the accepted appearance immediately.
       applyPlayerModel(this.stateView.playerEntity, model);
     };
-    this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
-    this.tileRenderer.setRoadSheets(this.sheets);
-    this.tileRenderer.setVariants(assets.variants);
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, blendGraph);
     const meComplete = assets.sheets.get("me-complete");
     if (meComplete) this.propCatalog.setImage(meComplete.image);
@@ -663,8 +660,7 @@ export class GameClient {
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
-    this.spriteCatalog = createSpriteCatalog(this.sheets);
-    this.renderer.setAssets(this.sheets);
+    this.renderHost.setAssets(assets, blendGraph);
 
     if (!this.serialized) {
       // Apply loaded world camera position (local mode — direct access)
@@ -885,7 +881,7 @@ export class GameClient {
   destroy(): void {
     this.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
-    this.renderer.clear();
+    this.renderHost.dispose();
     this.sceneFrame.clear();
     this.doorControl.destroy();
     this.doorPresentation.destroy();
@@ -1143,13 +1139,9 @@ export class GameClient {
       stateView: this.stateView,
       transport: this.transport,
       get spriteCatalog() {
-        return client.spriteCatalog;
-      },
-      get sheets() {
-        return client.sheets;
+        return client.renderer.assets;
       },
       renderer: this.renderer,
-      tileRenderer: this.tileRenderer,
       sceneFrame: this.sceneFrame,
       audioManager: this.audioManager,
       editorMode: this.editorMode,
@@ -1419,8 +1411,7 @@ export class GameClient {
   private resize(): void {
     // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
     const rect = this.canvas.getBoundingClientRect();
-    this.canvas.width = Math.round(rect.width);
-    this.canvas.height = Math.round(rect.height);
+    this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
     this.camera.setViewport(this.canvas.width, this.canvas.height);
   }
 

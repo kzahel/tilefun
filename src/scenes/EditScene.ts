@@ -1,6 +1,7 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { collectEditorOverlay, collectRemoteCursors } from "../editor/collectEditorOverlay.js";
-import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
+import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
+import { renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
 

@@ -1,5 +1,6 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { InteriorContent, InteriorDraw } from "../interiors/InteriorPresentation.js";
+import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 import type { SceneItem } from "./SceneItem.js";
@@ -47,16 +48,44 @@ export type RenderPass =
       readonly pixelExactShadows?: boolean;
     };
 
+export interface TerrainPreparationOptions {
+  readonly timeBudgetMs?: number;
+  readonly rowBudget?: number;
+}
+export interface TerrainDiagnostics {
+  resident: number;
+  schedulerRecordsCreated: number;
+  queuedJobs: number;
+  building: number;
+  pending: number;
+  oldestMs: number;
+  rowsLastFrame: number;
+  surfaceBytes: number;
+}
+
 export interface RenderBackend extends TerrainPresentation {
   readonly assets: SpriteCatalog;
   prepareInterior(content: InteriorContent): void;
-  prepareTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange): void;
+  prepareTerrain(
+    view: RenderView,
+    world: TerrainRenderWorld,
+    visible: ChunkRange,
+    options?: TerrainPreparationOptions,
+  ): void;
   collectTerrain(
     view: RenderView,
     world: TerrainRenderWorld,
     visible: ChunkRange,
   ): readonly TerrainDraw[];
   submit(view: RenderView, pass: RenderPass): void;
+  isTerrainReady(chunk: Chunk | undefined): boolean;
+  hasTerrain(chunk: Chunk | undefined): boolean;
+  releaseChunk(chunk: Chunk): void;
+  getDiagnostics(): TerrainDiagnostics;
+  resize(width: number, height: number): void;
+  invalidateAssets(): void;
+  recover(): void;
+  dispose(): void;
   clear(): void;
 }
 

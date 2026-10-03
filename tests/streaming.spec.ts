@@ -23,7 +23,7 @@ for (const version of ["regional-v4", "regional-v10"] as const) {
     await page.waitForFunction(({ x, y }) => {
       // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
       const g = (document.querySelector("#game") as any).__game;
-      const d = g.tileRenderer.getDiagnostics();
+      const d = g.renderer.getDiagnostics();
       return (
         Math.abs(g.stateView.playerEntity.position.wx - x * 16) < 32 &&
         Math.abs(g.stateView.playerEntity.position.wy - y * 16) < 32 &&
@@ -53,9 +53,9 @@ for (const version of ["regional-v4", "regional-v10"] as const) {
               visited.add(`${cx},${cy}`);
               const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
               if (!chunk) missing++;
-              else if (!g.tileRenderer.hasTerrain(chunk)) incomplete++;
+              else if (!g.renderer.hasTerrain(chunk)) incomplete++;
             }
-          const d = g.tileRenderer.getDiagnostics();
+          const d = g.renderer.getDiagnostics();
           const haloArea = (range.maxCx - range.minCx + 3) * (range.maxCy - range.minCy + 3);
           if (d.resident > haloArea || d.rowsLastFrame > 128)
             throw Error(
