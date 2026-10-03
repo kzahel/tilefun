@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { Chunk } from "../world/Chunk.js";
-import { collectGrassBladeItems } from "./GrassBladeRenderer.js";
+import { collectGrassBladeItems, GrassFrameBuffer } from "./GrassBladeRenderer.js";
 
 function chunk(terrain = TerrainId.Grass): Chunk {
   const result = new Chunk();
@@ -81,5 +81,82 @@ describe("grass cache identity and lifetime", () => {
     expect(createHash("sha256").update(JSON.stringify(placements)).digest("hex")).toBe(
       "ba2fa725a0b841c6f36f7fde592bab10ef9fd430ad3b131eb7b4d700d02dd6e6",
     );
+  });
+});
+
+describe("reusable grass frames", () => {
+  it("matches fresh collection through movement, fewer entities, culling and chunk edits", () => {
+    const value = chunk();
+    const world = { getChunkIfLoaded: () => value };
+    const range = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+    const viewport = { minWx: 0, maxWx: 256, minWy: 0, maxWy: 256 };
+    const scratch = new GrassFrameBuffer();
+    const output: ReturnType<typeof collectGrassBladeItems> = [];
+    const entities = [{ position: { wx: 80, wy: 64 } }, { position: { wx: 32, wy: 24 } }];
+    for (let frame = 0; frame < 5; frame++) {
+      if (frame === 1) entities.pop();
+      if (frame === 2) entities.length = 0;
+      if (frame === 3) viewport.minWx = 128;
+      if (frame === 4) {
+        value.roadGrid.fill(1);
+        value.revision++;
+      }
+      output.length = 0;
+      expect(
+        collectGrassBladeItems(world, entities, range, viewport, frame, scratch, output),
+      ).toEqual(collectGrassBladeItems(world, entities, range, viewport, frame));
+    }
+  });
+
+  it("reuses warm records and buffers without sharing them between consumers", () => {
+    const value = chunk();
+    const world = { getChunkIfLoaded: () => value };
+    const range = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+    const viewport = { minWx: 0, maxWx: 256, minWy: 0, maxWy: 256 };
+    const entities = [{ position: { wx: 64, wy: 64 } }];
+    const scratch = new GrassFrameBuffer();
+    const first = collectGrassBladeItems(world, entities, range, viewport, 0, scratch);
+    const other = collectGrassBladeItems(
+      world,
+      entities,
+      range,
+      viewport,
+      0,
+      new GrassFrameBuffer(),
+    );
+    const snapshot = structuredClone(other);
+    const buffers = [scratch.x, scratch.y];
+    const diagnostics = scratch.getDiagnostics();
+    const second = collectGrassBladeItems(world, entities, range, viewport, 1, scratch);
+    expect(second.every((item, i) => item === first[i])).toBe(true);
+    expect(second[0]).not.toBe(other[0]);
+    expect(other).toEqual(snapshot);
+    expect(scratch.x).toBe(buffers[0]);
+    expect(scratch.y).toBe(buffers[1]);
+    expect(scratch.getDiagnostics()).toEqual(diagnostics);
+  });
+
+  it("caps retained storage without dropping oversized output, then shrinks and clears", () => {
+    const scratch = new GrassFrameBuffer();
+    scratch.begin(Array.from({ length: 1025 }, () => ({ position: { wx: 1, wy: 2 } })));
+    const output = Array.from({ length: 9000 }, (_, i) => scratch.next(i, i, i % 4, 0));
+    scratch.end();
+    expect(output).toHaveLength(9000);
+    expect(new Set(output).size).toBe(9000);
+    expect(scratch.getDiagnostics().retainedItems).toBe(8192);
+    expect(scratch.getDiagnostics().positionCapacity).toBe(0);
+    scratch.begin(Array.from({ length: 512 }, () => ({ position: { wx: 1, wy: 2 } })));
+    scratch.end();
+    for (let i = 0; i < 60; i++) {
+      scratch.begin([]);
+      scratch.next(1, 2, 0, 0);
+      scratch.end();
+    }
+    expect(scratch.getDiagnostics().retainedItems).toBe(256);
+    expect(scratch.getDiagnostics().positionCapacity).toBe(32);
+    scratch.clear();
+    expect(scratch.getDiagnostics().retainedItems).toBe(0);
+    expect(scratch.getDiagnostics().positionCapacity).toBe(0);
+    expect(scratch.getDiagnostics().activeItems).toBe(0);
   });
 });

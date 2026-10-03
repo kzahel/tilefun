@@ -72,6 +72,7 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
     false,
     undefined,
     drawProps,
+    gc.sceneFrame,
   );
   const actors = items.map((item, index) => ({
     id: `actor:${index}`,
@@ -83,6 +84,10 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
   gc.ctx.save();
   gc.ctx.translate(origin.sx, origin.sy);
   gc.ctx.scale(gc.camera.scale, gc.camera.scale);
-  renderer.draw(gc.ctx, placements, actors);
-  gc.ctx.restore();
+  try {
+    renderer.draw(gc.ctx, placements, actors);
+  } finally {
+    gc.ctx.restore();
+    gc.sceneFrame.release();
+  }
 }

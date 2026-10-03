@@ -1,6 +1,6 @@
 # Renderer boundary and walking allocation audit
 
-Status: audit and grass cache identity/lifetime fix completed 2026-10-03;
+Status: audit, grass cache identity/lifetime and grass frame reuse completed 2026-10-03;
 remaining implementation slices below are proposed.
 Owner: [performance](../topics/performance.md).
 
@@ -214,9 +214,10 @@ node scripts/analyze-streaming-trace.mjs \
    entries; use post-GC heap evidence rather than adding a strong diagnostic
    collection that would itself retain discarded chunks. Multi-minute gameplay
    memory and thermal coverage remain follow-up work.
-2. Introduce reusable frame/scheduler storage and static prop/elevation metadata,
-   one attributable change at a time. Measure allocation sampling separately
-   from pacing runs; compare standing, sustained travel and revisits.
+2. **Partially completed:** gameplay scene-list and grass frame storage reuse.
+   Continue with scheduler storage and static prop/elevation metadata, one
+   attributable change at a time. Measure allocation sampling separately from
+   pacing runs; compare standing, sustained travel and revisits.
 3. Extract Canvas terrain resource ownership and backend-neutral elevation
    handles, then frame/backend contracts covering both indoor and outdoor scenes.
    Exercise the same contracts in gameplay, editor, explorer and review tools.
@@ -321,3 +322,70 @@ view and includes range/residency values on failure, preserving the existing
 work and residency bounds. All six v4/v10 checks pass again after that correction
 (three serial repetitions per fixture). The full suite was not rerun after this
 test-only correction; its other 242 tests already passed against the same build.
+
+## Implementation record: grass frame storage reuse
+
+The second slice introduces a backend-independent `SceneFrame` owned by each
+`GameClient`. Outdoor and indoor gameplay borrow its scene list for synchronous
+drawing and release it afterward, including draw exceptions. World/realm reset
+and client teardown clear the frame storage. Existing one-shot collector callers
+(including review/explorer callers) keep ownership of their returned records.
+This is a small presentation ownership step; Canvas surfaces still live in
+chunks/elevation items, and sprite/elevation records still allocate.
+
+`GrassFrameBuffer` keeps position arrays and a separate pool of grass records.
+The sorted scene list never reorders the pool. The collector appends grass
+directly into that list, overwrites every scalar of reused records and reads
+only the active entity count. It retains at most 8,192 grass records and position
+buffers for 1,024 entities. Larger workloads draw completely using temporary
+overflow storage. After 60 consecutive underused collections, retained capacity
+shrinks (floors of 256 grass records / 32 entity positions); frames without grass
+release the grass pool immediately. The pool holds no chunk/entity/canvas
+references. Diagnostics allocate only when explicitly read and count storage
+creation to distinguish warm reuse from retained capacity.
+
+Four additional tests cover fresh-versus-reused output through movement,
+shrinking entity lists, culling and edits; warm identity reuse and consumer
+isolation; over-capacity output, shrink and clear; and sorted mixed scene parity
+with particles/elevation plus release and grass-to-indoor transitions. Existing
+placement/order regression coverage remains in place.
+
+The reproducible
+[`grass-frame-allocation.mjs`](../../scripts/instrumentation/grass-frame-allocation.mjs)
+probe warms 60 collections of nine full-grass chunks with 16 entities, then
+samples 600 collections in isolated bundled Chromium 153.0.8010.12. Both versions
+collect 1,055,400 items. Sampling with collected objects included estimates
+64,292,776 bytes before and 13,455,072 bytes after (about 79% less). The after run
+creates only its initial 1,759 grass records and two position buffers, with no
+additional creation during the measured warm frames. Exact full-output hashes
+at three fixed animation times match the old collector, including positions,
+variants, push/sway angles and iteration order. Small metadata/array/iteration
+allocations remain; this is not a zero-allocation path. Reusing a JS array object
+also does not guarantee reuse of its engine-managed backing storage.
+
+One before/after touch pair on Pixel 7a / Android 17 / Chrome 154.0.8037.57 passes
+`--assert-ready` for both v4 and v10 with zero movement readiness gaps and no
+page errors. V10 sprint has eight intervals over 25 ms in both runs, and reverse
+has fourteen in both; its movement p95 ranges from 16.7 to 22.8 ms. V4 reverse
+displacement differs (621 versus 409 px), so fewer slow frames there cannot be
+credited to the optimization. No end-to-end FPS improvement is established.
+Test tabs, isolated origin data and task-owned USB routes were cleaned up; the
+final device doctor reports ready/unlocked.
+
+[Sanitized results](../benchmarks/013-grass-frame-reuse.json) retain allocation
+estimates, parity hashes, storage counters and phone movement summaries. Baseline
+revision is `f7c8300`; the new implementation was measured in the dirty checkout.
+Next slice: reuse terrain-scheduler job/set/resident bookkeeping while preserving
+priority and readiness; then address static prop/elevation data and independently
+measure raster submission policy. No promoted pixels or generation identities
+change in this slice.
+
+Validation: all three typechecks and 1,211 unit tests pass. Biome passes with
+the existing 122 warnings / 32 informational diagnostics. Art catalog and
+Workshop inventory regeneration plus production build pass; Workshop candidate
+metadata is unchanged, with only the input digest updated. The full browser run
+passed 248 checks and blocked one standalone Workshop vote because a source API
+comment added during validation made its manifest digest stale. After final
+inventory regeneration/build, that isolated check passes (1.8 seconds). The full
+suite was not repeated after the digest refresh; runtime behavior is unchanged
+from the build used by the other 248 passing checks.

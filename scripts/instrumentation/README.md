@@ -10,6 +10,17 @@ not a gameplay allocation-rate, phone, GPU-memory or frame-pacing benchmark.
 Small residual heap changes include browser/JIT bookkeeping. See
 [Tactical 013](../../docs/tactical/013-renderer-boundary-and-allocation-audit.md).
 
+## Grass frame allocation
+
+Run `node scripts/instrumentation/grass-frame-allocation.mjs` from the repository
+root. It warms nine resident grass chunks with 16 interacting entities, then
+samples allocations for 600 collections in isolated bundled Chromium. The
+sampling profiler includes objects collected during the sample; byte counts
+are estimates, not timing gates. Three hashes cover exact grass output at fixed
+animation times, including push angles and iteration order. The script also
+works on the pre-pooling collector for before/after captures. This synthetic
+workload excludes drawing, streaming, sorting, prediction and simulation.
+
 ## Protocol instrumentation
 
 Temporary scripts for auditing which messages still go through JSON fallback (`0xFF`) and roughly how large they are.

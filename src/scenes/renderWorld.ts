@@ -112,9 +112,15 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     extraParticles ?? [],
     grassSheet !== undefined,
     debugExtrapolation ? extrapolationGhosts : undefined,
+    undefined,
+    gc.sceneFrame,
   );
 
-  drawScene2D(ctx, camera, items, sheets, grassSheet);
+  try {
+    drawScene2D(ctx, camera, items, sheets, grassSheet);
+  } finally {
+    gc.sceneFrame.release();
+  }
 }
 
 /** FPS state — shared across scenes since it's a global counter. */

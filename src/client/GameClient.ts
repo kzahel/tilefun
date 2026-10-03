@@ -38,6 +38,7 @@ import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
+import { SceneFrame } from "../rendering/SceneFrame.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
@@ -90,6 +91,7 @@ export class GameClient {
   private loop: GameLoop;
   private sheets = new Map<string, Spritesheet>();
   private tileRenderer: TileRenderer;
+  private readonly sceneFrame = new SceneFrame();
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
   private touchButtons: TouchButtons;
@@ -303,6 +305,7 @@ export class GameClient {
           }
           remoteView.clear();
           this.tileRenderer.clear();
+          this.sceneFrame.clear();
           if (this.hmrCameraRestored) {
             // HMR already restored camera — don't let fresh server defaults overwrite it
             this.hmrCameraRestored = false;
@@ -351,6 +354,7 @@ export class GameClient {
           this.canvas.dataset.interior = "";
           remoteView.clear();
           this.tileRenderer.clear();
+          this.sceneFrame.clear();
         } else if (msg.type === "realm-player-count") {
           this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
         } else if (msg.type === "kicked") {
@@ -780,6 +784,7 @@ export class GameClient {
 
   destroy(): void {
     this.tileRenderer.clear();
+    this.sceneFrame.clear();
     this.doorControl.destroy();
     this.loop.stop();
     this.gcFlushServer();
@@ -1027,6 +1032,7 @@ export class GameClient {
         return client.sheets;
       },
       tileRenderer: this.tileRenderer,
+      sceneFrame: this.sceneFrame,
       audioManager: this.audioManager,
       editorMode: this.editorMode,
       editorModel: this.editorModel,

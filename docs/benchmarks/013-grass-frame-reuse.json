@@ -1,0 +1,326 @@
+{
+  "schema": "tilefun-grass-frame-reuse/v1",
+  "baselineRevision": "f7c8300961da15eab589b16b4afc91ed28be2b81",
+  "scope": "Synthetic allocation sampling includes collected objects and is not frame timing. Phone runs are single before/after smoke samples; v4 reverse displacement differs. No end-to-end FPS claim.",
+  "allocation": {
+    "before": {
+      "browser": "153.0.8010.12",
+      "mode": "allocating",
+      "frames": 600,
+      "items": 1055400,
+      "diagnostics": null,
+      "sampledBytes": 64292776,
+      "allocationByFunction": {
+        "collectGrassBladeItems": 64271052,
+        "(V8 API)": 8796,
+        "evaluate": 4668,
+        "isURL": 4160,
+        "next": 4100
+      },
+      "frameHashes": [
+        "b37b983f9539f4ee3647bfdcb27e13817310398784585e2066253db9402676da",
+        "a7a8d2f51e5fe225ca6551f280e1fe27135babd187870eba54fd5fb1dc924242",
+        "4eb101d6f900509e35078bc40ceb7a175fc558666425a79d9785ea27e6ae3e93"
+      ]
+    },
+    "after": {
+      "browser": "153.0.8010.12",
+      "mode": "reused",
+      "frames": 600,
+      "items": 1055400,
+      "diagnostics": {
+        "retainedItems": 1759,
+        "positionCapacity": 32,
+        "activeItems": 1759,
+        "createdItems": 1759,
+        "createdPositionBuffers": 2
+      },
+      "sampledBytes": 13455072,
+      "allocationByFunction": {
+        "appendGrassBladeItems": 13429240,
+        "(V8 API)": 8828,
+        "evaluate": 4668,
+        "isTypedArray": 4120,
+        "entries": 4112,
+        "window.grassProbe": 4104
+      },
+      "frameHashes": [
+        "b37b983f9539f4ee3647bfdcb27e13817310398784585e2066253db9402676da",
+        "a7a8d2f51e5fe225ca6551f280e1fe27135babd187870eba54fd5fb1dc924242",
+        "4eb101d6f900509e35078bc40ceb7a175fc558666425a79d9785ea27e6ae3e93"
+      ]
+    }
+  },
+  "phone": [
+    {
+      "label": "before",
+      "revision": "f7c8300961da15eab589b16b4afc91ed28be2b81",
+      "dirty": false,
+      "date": "2026-10-03T08:50:15.382Z",
+      "browser": "154.0.8037.57",
+      "device": "Pixel 7a / Android 17",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "errors": [],
+          "movement": [
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999891,
+                "p95": 16.799999999999272,
+                "p99": 33.30000000000291,
+                "max": 33.400000000001455
+              },
+              "framesOver25Ms": 3,
+              "displacement": {
+                "x": -225.75146484375,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.700000000000728,
+                "p99": 16.80000000000291,
+                "max": 33.20000000000073
+              },
+              "framesOver25Ms": 1,
+              "displacement": {
+                "x": -741.0547209218748,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 33.30000000000291,
+                "max": 33.400000000001455
+              },
+              "framesOver25Ms": 6,
+              "displacement": {
+                "x": 620.8737355968451,
+                "y": 332.61059845031923
+              },
+              "visitedChunks": 12,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            }
+          ]
+        },
+        {
+          "version": "regional-v10",
+          "errors": [],
+          "movement": [
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999891,
+                "p95": 16.700000000000728,
+                "p99": 16.799999999999272,
+                "max": 16.799999999999272
+              },
+              "framesOver25Ms": 0,
+              "displacement": {
+                "x": -222.07093956249992,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.39999999999782,
+                "max": 33.400000000001455
+              },
+              "framesOver25Ms": 8,
+              "displacement": {
+                "x": -757.9115920312502,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 22.799999999999272,
+                "p99": 33.400000000001455,
+                "max": 33.400000000001455
+              },
+              "framesOver25Ms": 14,
+              "displacement": {
+                "x": 645.1374511718759,
+                "y": 358.35546875
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "after",
+      "revision": "f7c8300961da15eab589b16b4afc91ed28be2b81",
+      "dirty": true,
+      "date": "2026-10-03T08:57:22.328Z",
+      "browser": "154.0.8037.57",
+      "device": "Pixel 7a / Android 17",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "errors": [],
+          "movement": [
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999709,
+                "p95": 16.700000000000728,
+                "p99": 16.900000000001455,
+                "max": 33.29999999999927
+              },
+              "framesOver25Ms": 1,
+              "displacement": {
+                "x": -223.2978515625,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.799999999999272,
+                "max": 16.80000000000291
+              },
+              "framesOver25Ms": 0,
+              "displacement": {
+                "x": -738.6011076406248,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 22.700000000000728
+              },
+              "framesOver25Ms": 0,
+              "displacement": {
+                "x": 408.6993619898076,
+                "y": 532.3034682966972
+              },
+              "visitedChunks": 11,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            }
+          ]
+        },
+        {
+          "version": "regional-v10",
+          "errors": [],
+          "movement": [
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999891,
+                "p95": 16.700000000000728,
+                "p99": 16.80000000000291,
+                "max": 33.29999999999927
+              },
+              "framesOver25Ms": 1,
+              "displacement": {
+                "x": -223.2978515625,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.39999999999782,
+                "max": 33.400000000001455
+              },
+              "framesOver25Ms": 8,
+              "displacement": {
+                "x": -757.5913173125,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 22.69999999999709,
+                "p99": 33.39999999999782,
+                "max": 33.39999999999782
+              },
+              "framesOver25Ms": 14,
+              "displacement": {
+                "x": 647.0178222656259,
+                "y": 358.2041015625
+              },
+              "visitedChunks": 10,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

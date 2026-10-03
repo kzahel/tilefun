@@ -3,7 +3,8 @@
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache
-identity/lifetime fixed; frame allocation and raster scheduling remain follow-up work.
+identity/lifetime fixed and gameplay grass frame storage reused; remaining scene/
+terrain-scheduler allocation and raster scheduling are follow-up work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence. Detailed
@@ -32,6 +33,10 @@ the remaining recommendations are not implemented fixes.
 - Grass placements are weakly cached by chunk object, revision and coordinates.
   The cache cannot retain discarded chunks or reuse another world's equal-revision
   chunk. Generated placement, animation and ordering stay unchanged.
+- Each gameplay client owns a backend-independent `SceneFrame`: its sorted list
+  and pooled grass records are borrowed for synchronous drawing. Release the
+  list after drawing and clear storage on realm changes/teardown. Grass pools
+  have retention caps and shrink after sustained underuse; excess still renders.
 
 ## Evidence and validation
 
@@ -67,9 +72,12 @@ another overlapping about 20 ms of GPU-process work with no main-thread GC.
 owns the evidence and tracing/workload limits. Both allocation reduction and
 raster scheduling remain justified; this is not a universal hitch diagnosis.
 
-Reduce per-frame allocation in scene collection and terrain scheduling, starting
-with reusable grass position/item storage. The grass cache lifetime fix is
-complete; a synthetic post-GC probe verifies that discarded chunk placements no
+Grass position/item storage now reuses warm buffers. A fixed 600-frame synthetic
+workload reduced sampled allocations from 64.3 MB to 13.5 MB (about 79%) with
+identical grass output; this excludes rendering and is not a phone FPS claim.
+Continue with terrain-scheduler job/set/resident bookkeeping, then static
+prop/elevation metadata and remaining scene allocations. The grass cache lifetime
+fix is complete; a synthetic post-GC probe verifies that discarded chunk placements no
 longer accumulate. Phone traversal still has occasional missed frames, so this
 does not resolve the reported hitch. Move canvas resources out of world chunks and scene
 items into backend-owned caches so later renderer replacement does not require

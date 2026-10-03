@@ -5,7 +5,10 @@ import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
-import type { GrassItem } from "./SceneItem.js";
+import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
+import type { GrassItem, SceneItem } from "./SceneItem.js";
+
+export { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 
 interface BladeInstance {
   wx: number;
@@ -114,6 +117,8 @@ let _debugLogged = false;
 /**
  * Collect grass blade scene items for Y-sorted drawing with entities/props.
  * Returns renderer-agnostic GrassItem[] with pre-computed sway + push angles.
+ * A supplied result is appended to. With scratch, records are borrowed until
+ * its next collection; without scratch the caller owns the returned records.
  */
 export function collectGrassBladeItems(
   world: Pick<World, "getChunkIfLoaded">,
@@ -121,8 +126,24 @@ export function collectGrassBladeItems(
   visible: ChunkRange,
   viewport: WorldViewport,
   nowSec: number,
+  scratch = new GrassFrameBuffer(),
+  result: GrassItem[] = [],
 ): GrassItem[] {
-  const result: GrassItem[] = [];
+  appendGrassBladeItems(world, entityPositions, visible, viewport, nowSec, scratch, result);
+  return result;
+}
+
+/** Append in generation order; pooled records are borrowed until scratch is reused. */
+export function appendGrassBladeItems(
+  world: Pick<World, "getChunkIfLoaded">,
+  entityPositions: readonly { position: { wx: number; wy: number } }[],
+  visible: ChunkRange,
+  viewport: WorldViewport,
+  nowSec: number,
+  scratch: GrassFrameBuffer,
+  result: SceneItem[],
+): void {
+  scratch.begin(entityPositions);
   // World-space margin for culling (grass blades are small, 30 world pixels is generous)
   const margin = 30;
 
@@ -154,15 +175,8 @@ export function collectGrassBladeItems(
 
   // Pre-extract entity positions for fast iteration
   const eCount = entityPositions.length;
-  const ewx = new Float64Array(eCount);
-  const ewy = new Float64Array(eCount);
-  for (let i = 0; i < eCount; i++) {
-    const ep = entityPositions[i];
-    if (ep) {
-      ewx[i] = ep.position.wx;
-      ewy[i] = ep.position.wy;
-    }
-  }
+  const ewx = scratch.x;
+  const ewy = scratch.y;
 
   for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
     for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
@@ -216,17 +230,10 @@ export function collectGrassBladeItems(
         // 3. Blend: push overrides sway but keeps a trace of sway for liveliness
         const angle = pushAngle !== 0 ? pushAngle + swayAngle * 0.3 : swayAngle;
 
-        result.push({
-          kind: "grass",
-          sortKey: blade.wy,
-          wx: blade.wx,
-          wy: blade.wy,
-          variant: blade.variant,
-          angle,
-        });
+        result.push(scratch.next(blade.wx, blade.wy, blade.variant, angle));
       }
     }
   }
 
-  return result;
+  scratch.end();
 }

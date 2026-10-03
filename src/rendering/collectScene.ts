@@ -5,8 +5,9 @@ import type { Prop } from "../entities/Prop.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
-import { collectGrassBladeItems } from "./GrassBladeRenderer.js";
+import { appendGrassBladeItems, collectGrassBladeItems } from "./GrassBladeRenderer.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
+import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TileRenderer } from "./TileRenderer.js";
 
@@ -41,7 +42,8 @@ function lerpPos(
 
 /**
  * Collect, cull, interpolate, and Y-sort all visible scene items.
- * Returns a renderer-agnostic SceneItem[] in draw order.
+ * Returns SceneItem[] in draw order. With a frame, the list and grass items are
+ * borrowed until its next collection; consume synchronously and release after drawing.
  *
  * This is the "scene graph" step — it computes what needs to be drawn
  * and where in world-space, without any Canvas2D-specific code.
@@ -58,8 +60,9 @@ export function collectScene(
   hasGrass: boolean,
   extrapolationGhosts?: readonly ExtrapolationGhostItem[],
   drawProps?: ReadonlySet<number>,
+  frame?: SceneFrame,
 ): SceneItem[] {
-  const items: SceneItem[] = [];
+  const items = frame ? frame.begin(hasGrass) : [];
   const ghostByEntityId =
     extrapolationGhosts && extrapolationGhosts.length > 0
       ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
@@ -240,9 +243,11 @@ export function collectScene(
       maxWy: vpBR.wy,
     };
     const nowSec = performance.now() / 1000;
-    const grassItems = collectGrassBladeItems(world, entities, visible, viewport, nowSec);
-    for (const g of grassItems) {
-      items.push(g);
+    if (frame) {
+      appendGrassBladeItems(world, entities, visible, viewport, nowSec, frame.grass, items);
+    } else {
+      const grassItems = collectGrassBladeItems(world, entities, visible, viewport, nowSec);
+      for (const g of grassItems) items.push(g);
     }
   }
 
