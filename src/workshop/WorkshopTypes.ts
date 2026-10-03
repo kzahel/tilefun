@@ -1,6 +1,7 @@
 import type { AssetSuggestion } from "../art/ArtAnnotations.js";
 import type { ArtNote, BuildingReview } from "../art/ArtNotes.js";
 import type { OutdoorMetadata } from "../assets/outdoor/OutdoorCatalog.js";
+import type { VehicleView } from "../assets/vehicles/VehicleCatalog.js";
 import type { ReviewFeedback } from "../interiors/review/ReviewFeedback.js";
 
 export interface WorkshopTool {
@@ -22,7 +23,8 @@ export interface WorkshopCandidate {
   name: string;
   prompt: string;
   url: string;
-  kind: "art" | "interior" | "motion" | "pattern";
+  kind: "art" | "interior" | "motion" | "pattern" | "vehicle";
+  vehicle?: VehicleView;
   /** Handoff derived from the candidate's actual world generation and location. */
   exploreUrl?: string;
   fingerprint: string;
@@ -69,6 +71,8 @@ export type WorkshopEvent =
   | {
       id: string;
       type: "asset";
+      /** Registered vehicle view; catalogRevision pins its candidate fingerprint. */
+      candidateId?: string;
       rect: [number, number, number, number];
       fingerprint: string;
       catalogRevision: string;

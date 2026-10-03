@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "vehicles",
+    name: "Vehicles",
+    description:
+      "Review cars, buses and service trucks in four directions. Adjust ground bounds, physical height and placement; walk around each proposal.",
+    url: "workshop.html#/tool/vehicles",
+    mode: "review",
+  },
+  {
     id: "patterns",
     name: "Pattern studio",
     description:
@@ -125,6 +133,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "vehicles",
+    name: "Vehicle geometry",
+    description:
+      "180 directional sprite and geometry proposals across 45 vehicle sets and equipment states.",
+    toolId: "vehicles",
+  },
   {
     id: "patterns",
     name: "Fenced tree pattern kit",

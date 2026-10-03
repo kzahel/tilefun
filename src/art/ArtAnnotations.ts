@@ -23,6 +23,8 @@ export function selectedSceneFeatures(props: readonly Prop[], rect: ArtRect): Pr
     .slice(0, 40);
 }
 export interface AssetAnnotation {
+  candidateId?: string;
+  candidateFingerprint?: string;
   /** Original human edit/decision time, preserved by status replies. */
   createdAt: string;
   assetId: string;
@@ -68,7 +70,15 @@ export function parseAssetAnnotation(value: unknown, rect: ArtRect): AssetAnnota
   const metadata = parseOutdoorMetadata(v.metadata, rect);
   if (v.verdict === "approved" && (metadata.colliders === null || metadata.kind === "unknown"))
     throw new Error("Define asset kind and collision behavior before approving");
+  if (
+    v.candidateId !== undefined &&
+    (!/^vehicle:[a-z0-9-]+:(north|east|south|west)$/.test(v.candidateId) || !v.candidateFingerprint)
+  )
+    throw new Error("Invalid vehicle candidate reference");
   return {
+    ...(v.candidateId
+      ? { candidateId: v.candidateId, candidateFingerprint: annotationHash(v.candidateFingerprint) }
+      : {}),
     createdAt: v.createdAt,
     assetId: v.assetId,
     catalogRevision: annotationHash(v.catalogRevision),

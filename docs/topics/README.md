@@ -19,6 +19,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | Topic | Scope and next direction |
 | --- | --- |
 | [Play ideas](play-ideas.md) | Hold-to-speak gameplay suggestions, text readback, public submission and private Workshop inbox |
+| [Vehicles](vehicles.md) | Four-direction sprite, ground bounds and height review in Workshop; traffic remains proposed |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |

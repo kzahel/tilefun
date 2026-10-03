@@ -1,7 +1,8 @@
 # Road vehicles: source audit and proposed approach
 
-Checked 2026-10-03. Advice and source preparation only; driving implementation
-has not started. Original Workshop request: `a582d1ba-a290-4e2a-9473-99191dac6d38`
+Checked 2026-10-03. Driving implementation has not started.
+The source audit below now feeds the [Workshop vehicle review](../topics/vehicles.md),
+which has editable bounding boxes/heights and explicit approvals. Original Workshop request: `a582d1ba-a290-4e2a-9473-99191dac6d38`
 (“cars”), selection `[0,1152,208,384]` on `me-complete`.
 
 ## What is ready
@@ -20,8 +21,9 @@ and vehicle IDs. Three related fire-station/building pieces are tracked separate
 Rectangles use native pixels `[x,y,width,height]`; compact side selections retain
 their transparent padding. Every vehicle view also records computed nontransparent
 `visualBounds` relative to its crop, including shadows/equipment; these are not
-ground footprints. This is an audit, not a registered gameplay bank or
-a new composed review batch. No art has been repainted, promoted or approved.
+ground footprints. This file remains a source audit, not a gameplay bank. The separate Workshop
+vehicle candidates now add proposed geometry and three cleaned crop edges for
+human review. No geometry is automatically promoted or approved.
 
 | Family | Variants audited | North/south source size | East/west source size | Runtime readiness |
 | --- | --- | --- | --- | --- |
@@ -132,13 +134,15 @@ crossing, blocked exits, road edits, chunk-boundary traversal and unload/reload,
 and two clients observing the same vehicle. Use the repository's unit, browser
 and streaming checks when that implementation starts.
 
-Audit validation: inspected all six new annotated source regions as well as the
+Source-audit checkpoint before the Workshop UI: inspected all six new annotated source regions as well as the
 original compact/bus and sedan regions; verified the PNG hash/dimensions, all
 180 nonempty in-bounds vehicle rectangles, 129 exact vehicle index references,
 three related indexed pieces and per-view alpha bounds. Existing 52 direction
 rectangles remain unchanged. `npm run typecheck`, all 1,216 unit tests and
-`npm run check` pass (lint retains existing warnings). No runtime, render or
-recipe inputs changed, so no review identities or promotion banks were rebuilt.
+`npm run check` passed at that checkpoint (with existing lint warnings). That
+audit changed no runtime or render inputs. The later Workshop implementation
+and its validation are tracked in the [vehicle topic](../topics/vehicles.md).
 
-Next step: choose the first car and long-vehicle families, then stage a separate
-four-direction/turning art candidate with ground anchors before gameplay work.
+Next step: review sprites, ground bounds, height and sorting in
+[Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles).
+Turning and traffic simulation remain later work.

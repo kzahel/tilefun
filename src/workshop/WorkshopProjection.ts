@@ -16,6 +16,27 @@ export function candidateSummary(
 ): CandidateSummary {
   if (c.excluded) return { ...c, state: "excluded" };
   if (!current) return { ...c, state: "unchecked" };
+  if (c.kind === "vehicle") {
+    const row = latestArtNotes(art)
+      .filter((n) => n.assetAnnotation?.candidateId === c.id)
+      .sort((a, b) =>
+        (a.assetAnnotation?.createdAt ?? "").localeCompare(b.assetAnnotation?.createdAt ?? ""),
+      )
+      .at(-1);
+    const annotation = row?.assetAnnotation;
+    return {
+      ...c,
+      state: !annotation
+        ? "unchecked"
+        : annotation.candidateFingerprint !== c.fingerprint ||
+            row?.fingerprint !== c.sourceFingerprint
+          ? "changed"
+          : annotation.verdict === "note"
+            ? "unchecked"
+            : annotation.verdict,
+      ...(annotation ? { lastDecision: annotation.createdAt } : {}),
+    };
+  }
   if (c.review) {
     const verdict = currentBuildingVerdict(art, c.sourceFingerprint ?? "", c.review);
     const latest = art
@@ -74,9 +95,11 @@ export function artThread(row: ArtNote): WorkshopThread {
     url:
       (row.sceneAnnotation
         ? `/tilefun/workshop.html#/scene/${encodeURIComponent(row.sceneAnnotation.candidateId.replace("district:", ""))}?note=${row.threadId}`
-        : row.assetAnnotation
-          ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
-          : undefined) ??
+        : row.assetAnnotation?.candidateId
+          ? `/tilefun/workshop.html#/tool/vehicles?view=${encodeURIComponent(row.assetAnnotation.candidateId)}`
+          : row.assetAnnotation
+            ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
+            : undefined) ??
       row.buildingReview?.url ??
       `/tilefun/art-workbench.html?sheet=${encodeURIComponent(row.sheetId)}&rect=${row.rect.join(",")}`,
     ...(row.buildingReview ? { caseId: buildingCaseKey(row.buildingReview) } : {}),

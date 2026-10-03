@@ -14,6 +14,7 @@ import {
   outdoorId,
   parseOutdoorMetadata,
 } from "../assets/outdoor/OutdoorCatalog.js";
+import { validateVehicleGeometry } from "../assets/vehicles/VehicleCatalog.js";
 import type { WorkshopCandidate, WorkshopEvent } from "../workshop/WorkshopTypes.js";
 import { HttpError } from "./workshopAuth.js";
 
@@ -47,18 +48,43 @@ export async function outdoorAnnotation(
   if (bank.sourceFingerprint !== sheet.fingerprint)
     throw new HttpError(409, "Outdoor inventory needs rebuilding");
   if (e.type === "asset") {
-    if (e.fingerprint !== sheet.fingerprint || e.catalogRevision !== bank.revision)
+    const vehicle = e.candidateId
+      ? candidates.find((c) => c.id === e.candidateId && c.kind === "vehicle")
+      : undefined;
+    if (
+      e.candidateId &&
+      (!current ||
+        !vehicle?.vehicle ||
+        vehicle.excluded ||
+        vehicle.fingerprint !== e.catalogRevision ||
+        JSON.stringify(vehicle.vehicle.asset.rect) !== JSON.stringify(e.rect))
+    )
+      throw new HttpError(409, "Vehicle candidate changed. Reload before reviewing.");
+    if (e.verdict === "changes" && !e.note.trim())
+      throw new HttpError(400, "Leave a reason for Needs changes");
+    if (
+      e.fingerprint !== sheet.fingerprint ||
+      e.catalogRevision !== (vehicle?.fingerprint ?? bank.revision)
+    )
       throw new HttpError(409, "Asset source or catalog changed. Reload before reviewing.");
     const rect = validateRect(e.rect, sheet),
-      metadata = parseOutdoorMetadata(e.metadata, rect);
+      metadata = vehicle
+        ? validateVehicleGeometry(e.metadata, rect)
+        : parseOutdoorMetadata(e.metadata, rect);
+    if (vehicle?.vehicle && metadata.facing !== vehicle.vehicle.direction)
+      throw new HttpError(400, "Vehicle facing must match the selected view");
     const annotation = parseAssetAnnotation(
       {
         createdAt,
         assetId: outdoorId(rect),
-        catalogRevision: bank.revision,
+        catalogRevision: e.catalogRevision,
+        ...(vehicle ? { candidateId: vehicle.id, candidateFingerprint: vehicle.fingerprint } : {}),
         metadataFingerprint: hash(metadata),
         metadata,
-        baseMetadata: bank.assets.find((a) => a.id === outdoorId(rect))?.metadata ?? null,
+        baseMetadata:
+          vehicle?.vehicle?.asset.metadata ??
+          bank.assets.find((a) => a.id === outdoorId(rect))?.metadata ??
+          null,
         verdict: e.verdict,
       },
       rect,

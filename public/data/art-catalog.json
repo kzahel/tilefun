@@ -14124,6 +14124,3246 @@
       ]
     },
     {
+      "id": "vehicle:compact-1:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1152,
+        32,
+        64
+      ],
+      "label": "Compact 1 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-1:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1152,
+        64,
+        64
+      ],
+      "label": "Compact 1 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-1:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1152,
+        32,
+        64
+      ],
+      "label": "Compact 1 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-1:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1152,
+        64,
+        64
+      ],
+      "label": "Compact 1 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-2:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1216,
+        32,
+        64
+      ],
+      "label": "Compact 2 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-2:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1216,
+        64,
+        64
+      ],
+      "label": "Compact 2 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-2:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1216,
+        32,
+        64
+      ],
+      "label": "Compact 2 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-2:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1216,
+        64,
+        64
+      ],
+      "label": "Compact 2 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-3:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1280,
+        32,
+        64
+      ],
+      "label": "Compact 3 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-3:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1280,
+        64,
+        64
+      ],
+      "label": "Compact 3 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-3:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1280,
+        32,
+        64
+      ],
+      "label": "Compact 3 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-3:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1280,
+        64,
+        64
+      ],
+      "label": "Compact 3 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-4:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1344,
+        32,
+        64
+      ],
+      "label": "Compact 4 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-4:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1344,
+        64,
+        64
+      ],
+      "label": "Compact 4 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-4:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1344,
+        32,
+        64
+      ],
+      "label": "Compact 4 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-4:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1344,
+        64,
+        64
+      ],
+      "label": "Compact 4 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-5:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1408,
+        32,
+        64
+      ],
+      "label": "Compact 5 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-5:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1408,
+        64,
+        64
+      ],
+      "label": "Compact 5 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-5:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1408,
+        32,
+        64
+      ],
+      "label": "Compact 5 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-5:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1408,
+        64,
+        64
+      ],
+      "label": "Compact 5 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-6:north",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1472,
+        32,
+        64
+      ],
+      "label": "Compact 6 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-6:east",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1472,
+        64,
+        64
+      ],
+      "label": "Compact 6 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-6:south",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1472,
+        32,
+        64
+      ],
+      "label": "Compact 6 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:compact-6:west",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1472,
+        64,
+        64
+      ],
+      "label": "Compact 6 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-1:north",
+      "sheetId": "me-complete",
+      "rect": [
+        368,
+        1136,
+        48,
+        112
+      ],
+      "label": "Bus 1 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-1:east",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1200,
+        112,
+        64
+      ],
+      "label": "Bus 1 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-1:south",
+      "sheetId": "me-complete",
+      "rect": [
+        320,
+        1136,
+        48,
+        112
+      ],
+      "label": "Bus 1 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-1:west",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1136,
+        112,
+        64
+      ],
+      "label": "Bus 1 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-2:north",
+      "sheetId": "me-complete",
+      "rect": [
+        576,
+        1136,
+        48,
+        112
+      ],
+      "label": "Bus 2 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-2:east",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1200,
+        112,
+        64
+      ],
+      "label": "Bus 2 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-2:south",
+      "sheetId": "me-complete",
+      "rect": [
+        528,
+        1136,
+        48,
+        112
+      ],
+      "label": "Bus 2 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-2:west",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1136,
+        112,
+        64
+      ],
+      "label": "Bus 2 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-3:north",
+      "sheetId": "me-complete",
+      "rect": [
+        368,
+        1264,
+        48,
+        112
+      ],
+      "label": "Bus 3 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-3:east",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1328,
+        112,
+        64
+      ],
+      "label": "Bus 3 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-3:south",
+      "sheetId": "me-complete",
+      "rect": [
+        320,
+        1264,
+        48,
+        112
+      ],
+      "label": "Bus 3 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-3:west",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1264,
+        112,
+        64
+      ],
+      "label": "Bus 3 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-4:north",
+      "sheetId": "me-complete",
+      "rect": [
+        576,
+        1264,
+        48,
+        112
+      ],
+      "label": "Bus 4 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-4:east",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1328,
+        112,
+        64
+      ],
+      "label": "Bus 4 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-4:south",
+      "sheetId": "me-complete",
+      "rect": [
+        528,
+        1264,
+        48,
+        112
+      ],
+      "label": "Bus 4 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-4:west",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1264,
+        112,
+        64
+      ],
+      "label": "Bus 4 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-5:north",
+      "sheetId": "me-complete",
+      "rect": [
+        368,
+        1392,
+        48,
+        112
+      ],
+      "label": "Bus 5 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-5:east",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1456,
+        112,
+        64
+      ],
+      "label": "Bus 5 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-5:south",
+      "sheetId": "me-complete",
+      "rect": [
+        320,
+        1392,
+        48,
+        112
+      ],
+      "label": "Bus 5 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-5:west",
+      "sheetId": "me-complete",
+      "rect": [
+        208,
+        1392,
+        112,
+        64
+      ],
+      "label": "Bus 5 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-6:north",
+      "sheetId": "me-complete",
+      "rect": [
+        576,
+        1392,
+        48,
+        112
+      ],
+      "label": "Bus 6 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-6:east",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1456,
+        112,
+        64
+      ],
+      "label": "Bus 6 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-6:south",
+      "sheetId": "me-complete",
+      "rect": [
+        528,
+        1392,
+        48,
+        112
+      ],
+      "label": "Bus 6 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:bus-6:west",
+      "sheetId": "me-complete",
+      "rect": [
+        416,
+        1392,
+        112,
+        64
+      ],
+      "label": "Bus 6 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:sedan-12:north",
+      "sheetId": "me-complete",
+      "rect": [
+        640,
+        5520,
+        48,
+        80
+      ],
+      "label": "Car 12 · beige sedan · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:sedan-12:east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5504,
+        80,
+        48
+      ],
+      "label": "Car 12 · beige sedan · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:sedan-12:south",
+      "sheetId": "me-complete",
+      "rect": [
+        592,
+        5520,
+        48,
+        80
+      ],
+      "label": "Car 12 · beige sedan · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:sedan-12:west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5552,
+        80,
+        48
+      ],
+      "label": "Car 12 · beige sedan · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-7:north",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        5520,
+        48,
+        80
+      ],
+      "label": "Car 7 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-7:east",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5504,
+        80,
+        48
+      ],
+      "label": "Car 7 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-7:south",
+      "sheetId": "me-complete",
+      "rect": [
+        944,
+        5520,
+        48,
+        80
+      ],
+      "label": "Car 7 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-7:west",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5552,
+        80,
+        48
+      ],
+      "label": "Car 7 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-8:north",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        5616,
+        48,
+        80
+      ],
+      "label": "Car 8 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-8:east",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5600,
+        80,
+        48
+      ],
+      "label": "Car 8 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-8:south",
+      "sheetId": "me-complete",
+      "rect": [
+        944,
+        5616,
+        48,
+        80
+      ],
+      "label": "Car 8 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-8:west",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5648,
+        80,
+        48
+      ],
+      "label": "Car 8 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-9:north",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 9 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-9:east",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5696,
+        80,
+        48
+      ],
+      "label": "Car 9 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-9:south",
+      "sheetId": "me-complete",
+      "rect": [
+        944,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 9 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-9:west",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5744,
+        80,
+        48
+      ],
+      "label": "Car 9 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-10:north",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 10 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-10:east",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5792,
+        80,
+        48
+      ],
+      "label": "Car 10 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-10:south",
+      "sheetId": "me-complete",
+      "rect": [
+        944,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 10 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-10:west",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5840,
+        80,
+        48
+      ],
+      "label": "Car 10 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-11:north",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 11 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-11:east",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5888,
+        80,
+        48
+      ],
+      "label": "Car 11 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-11:south",
+      "sheetId": "me-complete",
+      "rect": [
+        944,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 11 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-11:west",
+      "sheetId": "me-complete",
+      "rect": [
+        864,
+        5936,
+        80,
+        48
+      ],
+      "label": "Car 11 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-13:north",
+      "sheetId": "me-complete",
+      "rect": [
+        640,
+        5616,
+        48,
+        80
+      ],
+      "label": "Car 13 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-13:east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5600,
+        80,
+        48
+      ],
+      "label": "Car 13 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-13:south",
+      "sheetId": "me-complete",
+      "rect": [
+        592,
+        5616,
+        48,
+        80
+      ],
+      "label": "Car 13 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-13:west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5648,
+        80,
+        48
+      ],
+      "label": "Car 13 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-14:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        5520,
+        48,
+        64
+      ],
+      "label": "Car 14 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-14:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5504,
+        80,
+        48
+      ],
+      "label": "Car 14 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-14:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        5520,
+        48,
+        64
+      ],
+      "label": "Car 14 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-14:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5552,
+        80,
+        48
+      ],
+      "label": "Car 14 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-15:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        5616,
+        48,
+        64
+      ],
+      "label": "Car 15 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-15:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5600,
+        80,
+        48
+      ],
+      "label": "Car 15 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-15:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        5616,
+        48,
+        64
+      ],
+      "label": "Car 15 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-15:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5648,
+        80,
+        48
+      ],
+      "label": "Car 15 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-16:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        5712,
+        48,
+        64
+      ],
+      "label": "Car 16 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-16:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5696,
+        80,
+        48
+      ],
+      "label": "Car 16 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-16:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        5712,
+        48,
+        64
+      ],
+      "label": "Car 16 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-16:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5744,
+        80,
+        48
+      ],
+      "label": "Car 16 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-17:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        5808,
+        48,
+        64
+      ],
+      "label": "Car 17 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-17:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5792,
+        80,
+        48
+      ],
+      "label": "Car 17 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-17:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        5808,
+        48,
+        64
+      ],
+      "label": "Car 17 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-17:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5840,
+        80,
+        48
+      ],
+      "label": "Car 17 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-18:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        5904,
+        48,
+        64
+      ],
+      "label": "Car 18 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-18:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5888,
+        80,
+        48
+      ],
+      "label": "Car 18 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-18:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        5904,
+        48,
+        64
+      ],
+      "label": "Car 18 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-18:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1040,
+        5936,
+        80,
+        48
+      ],
+      "label": "Car 18 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-19:north",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        5520,
+        48,
+        64
+      ],
+      "label": "Car 19 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-19:east",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5504,
+        80,
+        48
+      ],
+      "label": "Car 19 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-19:south",
+      "sheetId": "me-complete",
+      "rect": [
+        768,
+        5520,
+        48,
+        64
+      ],
+      "label": "Car 19 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-19:west",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5552,
+        80,
+        48
+      ],
+      "label": "Car 19 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-20:north",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        5616,
+        48,
+        64
+      ],
+      "label": "Car 20 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-20:east",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5600,
+        80,
+        48
+      ],
+      "label": "Car 20 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-20:south",
+      "sheetId": "me-complete",
+      "rect": [
+        768,
+        5616,
+        48,
+        64
+      ],
+      "label": "Car 20 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-20:west",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5648,
+        80,
+        48
+      ],
+      "label": "Car 20 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-21:north",
+      "sheetId": "me-complete",
+      "rect": [
+        640,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 21 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-21:east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5696,
+        80,
+        48
+      ],
+      "label": "Car 21 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-21:south",
+      "sheetId": "me-complete",
+      "rect": [
+        592,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 21 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-21:west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5744,
+        80,
+        48
+      ],
+      "label": "Car 21 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-22:north",
+      "sheetId": "me-complete",
+      "rect": [
+        640,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 22 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-22:east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5792,
+        80,
+        48
+      ],
+      "label": "Car 22 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-22:south",
+      "sheetId": "me-complete",
+      "rect": [
+        592,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 22 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-22:west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5840,
+        80,
+        48
+      ],
+      "label": "Car 22 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-23:north",
+      "sheetId": "me-complete",
+      "rect": [
+        640,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 23 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-23:east",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5888,
+        80,
+        48
+      ],
+      "label": "Car 23 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-23:south",
+      "sheetId": "me-complete",
+      "rect": [
+        592,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 23 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-23:west",
+      "sheetId": "me-complete",
+      "rect": [
+        512,
+        5936,
+        80,
+        48
+      ],
+      "label": "Car 23 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-24:north",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 24 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-24:east",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5696,
+        80,
+        48
+      ],
+      "label": "Car 24 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-24:south",
+      "sheetId": "me-complete",
+      "rect": [
+        768,
+        5712,
+        48,
+        80
+      ],
+      "label": "Car 24 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-24:west",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5744,
+        80,
+        48
+      ],
+      "label": "Car 24 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-25:north",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 25 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-25:east",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5792,
+        80,
+        48
+      ],
+      "label": "Car 25 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-25:south",
+      "sheetId": "me-complete",
+      "rect": [
+        768,
+        5808,
+        48,
+        80
+      ],
+      "label": "Car 25 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-25:west",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5840,
+        80,
+        48
+      ],
+      "label": "Car 25 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-26:north",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 26 · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-26:east",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5888,
+        80,
+        48
+      ],
+      "label": "Car 26 · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-26:south",
+      "sheetId": "me-complete",
+      "rect": [
+        768,
+        5904,
+        48,
+        80
+      ],
+      "label": "Car 26 · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:car-26:west",
+      "sheetId": "me-complete",
+      "rect": [
+        688,
+        5936,
+        80,
+        48
+      ],
+      "label": "Car 26 · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1024,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · red · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1056,
+        1600,
+        80,
+        48
+      ],
+      "label": "Sedan · red · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:south",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · red · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-red:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1056,
+        1552,
+        80,
+        48
+      ],
+      "label": "Sedan · red · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · beige · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1200,
+        1600,
+        80,
+        48
+      ],
+      "label": "Sedan · beige · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1136,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · beige · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-beige:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1200,
+        1552,
+        80,
+        48
+      ],
+      "label": "Sedan · beige · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · cyan · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1344,
+        1600,
+        80,
+        48
+      ],
+      "label": "Sedan · cyan · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        1568,
+        32,
+        80
+      ],
+      "label": "Sedan · cyan · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-cyan:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1344,
+        1552,
+        80,
+        48
+      ],
+      "label": "Sedan · cyan · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:north",
+      "sheetId": "me-complete",
+      "rect": [
+        880,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · orange · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:east",
+      "sheetId": "me-complete",
+      "rect": [
+        912,
+        1696,
+        80,
+        48
+      ],
+      "label": "Sedan · orange · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:south",
+      "sheetId": "me-complete",
+      "rect": [
+        848,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · orange · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-orange:west",
+      "sheetId": "me-complete",
+      "rect": [
+        912,
+        1648,
+        80,
+        48
+      ],
+      "label": "Sedan · orange · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1024,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · silver · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1056,
+        1696,
+        80,
+        48
+      ],
+      "label": "Sedan · silver · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:south",
+      "sheetId": "me-complete",
+      "rect": [
+        992,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · silver · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-silver:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1056,
+        1648,
+        80,
+        48
+      ],
+      "label": "Sedan · silver · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1168,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · olive · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1200,
+        1696,
+        80,
+        48
+      ],
+      "label": "Sedan · olive · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1136,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · olive · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-olive:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1200,
+        1648,
+        80,
+        48
+      ],
+      "label": "Sedan · olive · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1312,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · dark · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1344,
+        1696,
+        80,
+        48
+      ],
+      "label": "Sedan · dark · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        1664,
+        32,
+        80
+      ],
+      "label": "Sedan · dark · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:unindexed-sedan-dark:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1344,
+        1648,
+        80,
+        48
+      ],
+      "label": "Sedan · dark · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:police-car:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1904,
+        1744,
+        32,
+        80
+      ],
+      "label": "Police car · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:police-car:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1792,
+        1744,
+        80,
+        48
+      ],
+      "label": "Police car · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:police-car:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1872,
+        1744,
+        32,
+        80
+      ],
+      "label": "Police car · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:police-car:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1712,
+        1745,
+        80,
+        47
+      ],
+      "label": "Police car · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:ambulance:north",
+      "sheetId": "me-complete",
+      "rect": [
+        352,
+        1792,
+        48,
+        112
+      ],
+      "label": "Ambulance · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:ambulance:east",
+      "sheetId": "me-complete",
+      "rect": [
+        224,
+        1825,
+        128,
+        79
+      ],
+      "label": "Ambulance · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:ambulance:south",
+      "sheetId": "me-complete",
+      "rect": [
+        48,
+        1792,
+        48,
+        112
+      ],
+      "label": "Ambulance · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:ambulance:west",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1825,
+        128,
+        79
+      ],
+      "label": "Ambulance · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-green:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1456,
+        4144,
+        48,
+        128
+      ],
+      "label": "Garbage truck green · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-green:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        4128,
+        128,
+        80
+      ],
+      "label": "Garbage truck green · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-green:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1408,
+        4144,
+        48,
+        128
+      ],
+      "label": "Garbage truck green · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-green:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        4208,
+        128,
+        80
+      ],
+      "label": "Garbage truck green · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:north",
+      "sheetId": "me-complete",
+      "rect": [
+        1680,
+        4144,
+        48,
+        128
+      ],
+      "label": "Garbage truck orange · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:east",
+      "sheetId": "me-complete",
+      "rect": [
+        1504,
+        4128,
+        128,
+        80
+      ],
+      "label": "Garbage truck orange · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:south",
+      "sheetId": "me-complete",
+      "rect": [
+        1632,
+        4144,
+        48,
+        128
+      ],
+      "label": "Garbage truck orange · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:garbage-truck-orange:west",
+      "sheetId": "me-complete",
+      "rect": [
+        1504,
+        4208,
+        128,
+        80
+      ],
+      "label": "Garbage truck orange · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:north",
+      "sheetId": "me-complete",
+      "rect": [
+        2624,
+        4016,
+        64,
+        160
+      ],
+      "label": "Fire truck · stowed ladder · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:east",
+      "sheetId": "me-complete",
+      "rect": [
+        2416,
+        4096,
+        144,
+        80
+      ],
+      "label": "Fire truck · stowed ladder · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:south",
+      "sheetId": "me-complete",
+      "rect": [
+        2560,
+        4016,
+        64,
+        160
+      ],
+      "label": "Fire truck · stowed ladder · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-1:west",
+      "sheetId": "me-complete",
+      "rect": [
+        2416,
+        4016,
+        144,
+        80
+      ],
+      "label": "Fire truck · stowed ladder · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:north",
+      "sheetId": "me-complete",
+      "rect": [
+        2624,
+        4176,
+        64,
+        160
+      ],
+      "label": "Fire truck · raised ladder · north",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:east",
+      "sheetId": "me-complete",
+      "rect": [
+        2416,
+        4256,
+        144,
+        80
+      ],
+      "label": "Fire truck · raised ladder · east",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:south",
+      "sheetId": "me-complete",
+      "rect": [
+        2560,
+        4176,
+        64,
+        160
+      ],
+      "label": "Fire truck · raised ladder · south",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "vehicle:fire-truck-ladder-2:west",
+      "sheetId": "me-complete",
+      "rect": [
+        2416,
+        4176,
+        144,
+        80
+      ],
+      "label": "Fire truck · raised ladder · west",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Vehicle geometry review (candidate)",
+          "source": "src/assets/vehicles/VehicleCatalog.ts"
+        }
+      ]
+    },
+    {
       "id": "road:2",
       "sheetId": "me21",
       "rect": [

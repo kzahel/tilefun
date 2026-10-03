@@ -33,6 +33,8 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/InteriorCandidates.ts",
     "src/workshop/PatternCandidates.ts",
     "src/workshop/ToolRegistry.ts",
+    "src/workshop/VehicleCandidates.ts",
+    "docs/research/vehicle-source-audit.json",
   );
   const hash = createHash("sha256");
   for (const path of files.sort()) {

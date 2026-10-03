@@ -61,6 +61,12 @@ per batch (`#/scene/CASE_ID`); crops are zoom shortcuts and retain old decisions
 World annotations record pixels, generation/seed and exact asset suggestions;
 never interpret their compatibility source pointer as the scene location.
 
+## Vehicles
+
+The [vehicle topic](vehicles.md) owns the registered 180-view geometry batch,
+editable ground bounds/height, exact approvals and proposed traffic follow-up.
+Open [Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles).
+
 ## Next work
 
 Read `npm run workshop:inbox` and `npm run art:notes` for current feedback;

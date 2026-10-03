@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { required } from "../art/ArtCatalog.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
@@ -63,6 +63,8 @@ export default function ReviewPage() {
         <Link to="/">Return to inbox →</Link>
       </section>
     );
+  if (candidate.kind === "vehicle")
+    return <Navigate to={`/tool/vehicles?view=${encodeURIComponent(candidate.id)}`} replace />;
   if (candidate.kind === "motion")
     return (
       <section className="empty">

@@ -378,7 +378,8 @@ export function workshopPlugin(): Plugin {
       server.watcher.on("all", (_event, path) => {
         if (
           path.replaceAll("\\", "/").includes("/src/") ||
-          path.replaceAll("\\", "/").includes("/public/")
+          path.replaceAll("\\", "/").includes("/public/") ||
+          path.replaceAll("\\", "/").endsWith("/docs/research/vehicle-source-audit.json")
         )
           service.invalidateManifest();
       });

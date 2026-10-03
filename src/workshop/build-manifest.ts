@@ -7,6 +7,7 @@ import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) => r.json())) as ArtCatalog;
@@ -24,6 +25,7 @@ try {
   for (const c of TREE_PATTERN_CASES)
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
   candidates.push(...(await buildInteriorCandidates()));
+  candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));
   Object.assign(window, {
     workshopManifest: {
       version: 1,

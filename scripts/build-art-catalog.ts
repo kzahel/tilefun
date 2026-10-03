@@ -10,6 +10,7 @@ import {
   validateRect,
 } from "../src/art/ArtCatalog.js";
 import { registerTileVariants, SPRITE_MANIFEST } from "../src/assets/GameAssets.js";
+import { VEHICLE_VIEWS } from "../src/assets/vehicles/VehicleCatalog.js";
 import { BlendGraph } from "../src/autotile/BlendGraph.js";
 import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
@@ -330,6 +331,14 @@ for (const sheet of graph.allSheets) {
     "terrain",
     [{ system: "Terrain blends", source: "src/autotile/BlendGraph.ts" }],
   );
+}
+for (const view of VEHICLE_VIEWS) {
+  add(view.id, "me-complete", view.asset.rect, view.asset.metadata.name, "prop", [
+    {
+      system: "Vehicle geometry review (candidate)",
+      source: "src/assets/vehicles/VehicleCatalog.ts",
+    },
+  ]);
 }
 for (const type of [RoadType.Sidewalk, RoadType.LineWhite, RoadType.LineYellow]) {
   const key = required(getRoadSheetKey(type));

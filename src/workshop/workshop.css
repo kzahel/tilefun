@@ -1222,3 +1222,91 @@ time {
 .play-idea-detail dd {
   overflow-wrap: anywhere;
 }
+
+/* Vehicle review keeps the visual proposal alongside its editable geometry. */
+.vehicle-navigation,
+.vehicle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px;
+}
+.vehicle-navigation label {
+  display: grid;
+  gap: 5px;
+}
+.vehicle-directions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+.vehicle-directions button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  gap: 5px;
+  padding: 12px;
+}
+.vehicle-directions button[aria-pressed="true"] {
+  outline: 3px solid var(--accent, #6e9570);
+}
+.vehicle-directions canvas {
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+.vehicle-review-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.vehicle-preview {
+  min-width: 0;
+}
+.vehicle-preview > canvas {
+  width: 100%;
+  image-rendering: pixelated;
+  border-radius: 8px;
+}
+.vehicle-editor {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.vehicle-editor label {
+  display: grid;
+  gap: 5px;
+}
+.vehicle-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.vehicle-fields input {
+  width: 100%;
+  min-width: 0;
+}
+.vehicle-editor textarea {
+  min-height: 90px;
+  width: 100%;
+}
+@media (max-width: 850px) {
+  .vehicle-review-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .vehicle-directions {
+    gap: 5px;
+  }
+  .vehicle-directions button {
+    padding: 7px 3px;
+    font-size: 12px;
+  }
+  .vehicle-navigation select {
+    max-width: 100%;
+  }
+  .vehicle-navigation label {
+    max-width: 100%;
+  }
+}

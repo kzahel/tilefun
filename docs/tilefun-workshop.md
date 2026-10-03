@@ -57,6 +57,16 @@ with the original IDs. Drafts and room pins survive navigation/reload. Browser
 storage failures show a warning and export action; keep the tab open until saves
 finish. Unsynced drafts/outboxes belong to that browser origin, not Git.
 
+## Vehicles
+
+[Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
+shows four directional views per car, bus and service truck. Edit the ground
+bounding box and physical height, inspect the height diagram, and walk around
+the proposal with production collision. Approve each view, save a correction,
+or report changes; drafts and offline saves use the shared Workshop workflow.
+The global Vehicle geometry batch lists every view before feedback exists.
+See [vehicle review](topics/vehicles.md) for identity and promotion contracts.
+
 ## Pattern studio
 
 Open [Pattern studio](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/patterns)

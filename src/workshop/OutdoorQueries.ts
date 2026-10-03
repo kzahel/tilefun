@@ -36,7 +36,12 @@ export function useArtNotes() {
 }
 export function assetNotes(notes: ArtNote[], asset: OutdoorAsset, fingerprint: string) {
   return notes
-    .filter((n) => n.assetAnnotation?.assetId === asset.id && n.fingerprint === fingerprint)
+    .filter(
+      (n) =>
+        !n.assetAnnotation?.candidateId &&
+        n.assetAnnotation?.assetId === asset.id &&
+        n.fingerprint === fingerprint,
+    )
     .sort((a, b) =>
       (a.assetAnnotation?.createdAt ?? a.createdAt).localeCompare(
         b.assetAnnotation?.createdAt ?? b.createdAt,
@@ -51,7 +56,12 @@ export function catalogAssets(catalog: OutdoorCatalog, notes: ArtNote[]) {
       b.assetAnnotation?.createdAt ?? b.createdAt,
     ),
   )) {
-    if (!n.assetAnnotation || n.fingerprint !== catalog.sourceFingerprint) continue;
+    if (
+      !n.assetAnnotation ||
+      n.assetAnnotation.candidateId ||
+      n.fingerprint !== catalog.sourceFingerprint
+    )
+      continue;
     const original = originals.get(n.assetAnnotation.assetId);
     if (
       original &&

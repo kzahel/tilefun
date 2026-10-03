@@ -533,3 +533,74 @@ it("pattern kit judgments use the global queue and preserve exact rule/pixel ide
   const next = await (await f.request("/tilefun/api/workshop/inbox")).json();
   expect(next.candidates.find((r: { id: string }) => r.id === c.id).state).toBe("changes");
 });
+
+it("registers vehicle geometry before feedback and pins edited approvals across restart without affecting outdoor assets", async () => {
+  const f = await fixture();
+  await f.login();
+  const c = manifest.candidates.find((c) => c.kind === "vehicle");
+  if (!c?.vehicle) throw Error("Missing registered vehicle");
+  expect((await f.service().inbox()).candidates.find((r) => r.id === c.id)?.state).toBe(
+    "unchecked",
+  );
+  const metadata = structuredClone(c.vehicle.asset.metadata);
+  if (!metadata.colliders?.[0]) throw Error("Missing proposal");
+  metadata.colliders[0].zHeight = 31;
+  const event = {
+    id: "vehicle-approval-test",
+    type: "asset",
+    candidateId: c.id,
+    rect: c.vehicle.asset.rect,
+    fingerprint: c.sourceFingerprint,
+    catalogRevision: c.fingerprint,
+    metadata,
+    verdict: "approved",
+    note: "Height and ground box reviewed",
+  };
+  expect((await f.event(event)).status).toBe(200);
+  expect((await f.event(event)).status).toBe(200);
+  f.restart();
+  const rows = await f.service().art.records();
+  expect(rows).toHaveLength(1);
+  expect(rows[0]?.assetAnnotation?.metadata.colliders?.[0]?.zHeight).toBe(31);
+  const { catalogAssets } = await import("../workshop/OutdoorQueries.js");
+  const outdoor = JSON.parse(
+    readFileSync("public/data/outdoor-catalog.json", "utf8"),
+  ) as import("../assets/outdoor/OutdoorCatalog.js").OutdoorCatalog;
+  expect(catalogAssets(outdoor, rows).find((a) => a.id === c.vehicle?.asset.id)).toEqual(
+    outdoor.assets.find((a) => a.id === c.vehicle?.asset.id),
+  );
+  const { candidateSummary: summary } = await import("../workshop/WorkshopProjection.js");
+  const otherDirection = manifest.candidates.find(
+    (v) => v.vehicle?.vehicleId === c.vehicle?.vehicleId && v.id !== c.id,
+  );
+  if (!otherDirection) throw Error("Missing other direction");
+  expect(summary(otherDirection, rows, []).state).toBe("unchecked");
+  expect((await f.service().inbox()).candidates.find((r) => r.id === c.id)?.state).toBe("approved");
+  const { candidateSummary } = await import("../workshop/WorkshopProjection.js");
+  expect(candidateSummary({ ...c, fingerprint: "f".repeat(64) }, rows, []).state).toBe("changed");
+  expect(
+    (await f.event({ ...event, id: "vehicle-stale-test", catalogRevision: "0".repeat(64) })).status,
+  ).toBe(409);
+  expect((await f.event({ ...event, id: "vehicle-wrong-rect", rect: [0, 0, 16, 16] })).status).toBe(
+    409,
+  );
+  expect(
+    (await f.event({ ...event, id: "vehicle-no-reason", verdict: "changes", note: "" })).status,
+  ).toBe(400);
+  expect(
+    (
+      await f.event({
+        ...event,
+        id: "vehicle-no-height",
+        metadata: { ...metadata, colliders: [{ offsetX: 0, offsetY: 0, width: 20, height: 10 }] },
+      })
+    ).status,
+  ).toBe(400);
+  expect(
+    (await f.event({ ...event, id: "vehicle-reopen-test", verdict: "note", note: "Recheck" }))
+      .status,
+  ).toBe(200);
+  expect((await f.service().inbox()).candidates.find((r) => r.id === c.id)?.state).toBe(
+    "unchecked",
+  );
+});
