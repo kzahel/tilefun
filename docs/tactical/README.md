@@ -34,10 +34,9 @@ Several early plans contain original unchecked lists superseded by later work.
 | [020 Shared record persistence](020-shared-record-persistence.md) | Phase A contract and deterministic fault tests complete; production adapters follow |
 | [021 Incremental world records](021-incremental-world-records.md) | Delivered: shared coordinator, IndexedDB/SQLite, stable actor records and injected host composition; lazy residency follows |
 | [022 Renderer backend decoupling](022-renderer-backend-decoupling.md) | Prepared parent sequence, awaiting start signal: five milestones, just-in-time children and end-to-end completion gates; [rendering architecture](../topics/rendering-architecture.md) |
-
+| [023 Generated regional railways](023-generated-railways.md) | Proposed parent plan: town stations, paired tracks, structures, branching and high-speed service; [trains topic](../topics/trains.md) |
 | [024 Interest and residency](024-interest-and-residency.md) | Delivered core shared tickets/readiness, lazy indexed hydration, acknowledged eviction and active scheduling; completion gates in 026 |
-
-
+| [025 Railway Workshop previews](025-railway-workshop-previews.md) | Delivered: 32 isolated source/motion/layout previews awaiting human review; [trains topic](../topics/trains.md) |
 | [026 Persistence completion](026-persistence-completion.md) | In progress: shared world containers, traffic records, pressure admission and sustained lifecycle validation |
 
 ## Earlier plans

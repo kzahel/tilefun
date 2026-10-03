@@ -26,6 +26,7 @@ import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 import { FENCED_TREES } from "../src/patterns/FencedTrees.js";
+import railwaySource from "../src/railway/RailwaySource.json" with { type: "json" };
 import {
   CITY_GEOMETRY_CASES,
   CITY_SURFACE_CASES,
@@ -97,6 +98,7 @@ for (const path of files("src").filter(
 const graph = new BlendGraph();
 const imageMap = new Map<string, string>([
   ["me-complete", "assets/tilesets/me-complete.png"],
+  [railwaySource.sheetId, railwaySource.image],
   ["modern-interiors", "assets/tilesets/modern-interiors-atlas.png"],
   ["objects", "assets/tilesets/objects.png"],
   ["grass", "assets/tilesets/grass.png"],
@@ -166,6 +168,13 @@ function add(
   if (!sheet) throw new Error(`Unknown sheet ${sheetId}`);
   usages.push({ id, sheetId: sheet.id, rect: validateRect(rect, sheet), label, kind, consumers });
 }
+for (const [name, entry] of Object.entries(railwaySource.sprites))
+  add(`railway-review:${name}`, railwaySource.sheetId, entry.rect as ArtRect, name, "sprite", [
+    {
+      system: "Railway Workshop source inventory (unapproved)",
+      source: "src/railway/RailwaySource.json",
+    },
+  ]);
 for (const def of getPropSourceDefinitions())
   add(`prop:${def.type}`, def.sheetKey, def.rect, def.type, "prop", [
     ...(references.get(def.type) ?? []),

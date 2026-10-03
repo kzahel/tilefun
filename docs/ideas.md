@@ -38,9 +38,11 @@ Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
 
 - Moving cars that travel along roads. [Source audit and proposed approach](research/road-vehicles.md)
   records four-direction car/bus art and a suggested first slice; driving is not implemented.
-- Trains that travel along train tracks, using the trains, tracks and related
-  sprites in the Modern Exteriors spritesheet. Explore player-built rail routes
-  and riding trains as part of creative play.
+- Generated railways connecting town stations, with two-way local service,
+  longer regional trunks, high-speed lines, forks, bridges and tunnels.
+  [Trains](topics/trains.md) routes the source findings and parent plan. The owner
+  clarified that generated infrastructure is the target, rather than player-built
+  routes; layout and structure feasibility precede runtime implementation.
 - People inside buildings, as well as out on the streets.
 - Families that live in houses, potentially with Sims-style household behavior.
   Explore `~/code/playbox` as a reference before choosing a design.

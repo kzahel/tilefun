@@ -44,3 +44,14 @@ sets, padded to a common ground reference without scaling or mirroring.
 `src/traffic/vehicles-v1.json` records source hash, exact rectangles, approved
 geometry and approval fingerprints. See `docs/research/road-vehicles.md` for the
 source audit. Builds verify this immutable bank; they do not regenerate it.
+
+## Railway Workshop preview atlas
+
+`tilesets/railway-review-v1.png` packs 53 unchanged Modern Exteriors 16×16
+singles by LimeZu. It is an unapproved review source, not a promoted gameplay
+bank. `src/railway/RailwaySource.json` records each original filename, PNG SHA-256,
+packed rectangle and visible bounds. `scripts/pack-railway-review.py` is the
+explicit extraction tool (requires the purchased source pack and Pillow); normal
+builds use the committed atlas and never repack it. Train pieces are not rotated,
+mirrored or resampled. Schematic bridge/access/path shapes in preview scenes are
+labelled layout proposals and are not claimed as vendor artwork.

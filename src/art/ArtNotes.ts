@@ -101,7 +101,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
   if (v.scene === "pattern") {
     if (
       typeof v.caseId !== "string" ||
-      !/^fenced-trees-v1-[a-z-]+$/.test(v.caseId) ||
+      !/^(?:fenced-trees-v1-[a-z-]+|rail-v1-[a-z-]{1,80})$/.test(v.caseId) ||
       v.url !== `/tilefun/workshop.html#/review/pattern%3A${v.caseId}` ||
       v.propTypes !== undefined ||
       v.surfaceRecipe !== undefined ||

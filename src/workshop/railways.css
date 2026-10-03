@@ -1,0 +1,26 @@
+.railway-controls .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.railway-controls .actions label {
+  flex: 1 1 150px;
+  min-width: 0;
+  font-size: 12px;
+}
+.railway-controls .actions input[type="range"] {
+  width: 100%;
+}
+.railway-controls .notice {
+  margin: 8px 0;
+}
+.railway-controls a[aria-current="page"] {
+  background: #d5e6d9;
+  border-color: #245a48;
+}
+.review-page[data-railway="true"] .canvas-stage {
+  min-height: 280px;
+  height: min(48vh, 480px);
+}

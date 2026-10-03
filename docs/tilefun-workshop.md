@@ -79,6 +79,20 @@ or report changes; drafts and offline saves use the shared Workshop workflow.
 The global Vehicle geometry batch lists every view before feedback exists.
 See [vehicle review](topics/vehicles.md) for identity and promotion contracts.
 
+## Railway previews
+
+[Railway previews](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/railways)
+contains four independent review batches: track patterns, five train families in
+four travel directions, station/network plans and bridge/tunnel studies. Moving
+scenes have pause, restart, slow playback and a time slider. Direction buttons
+open the separately reviewed train views; zoom/geometry and tunnel cutaway help
+inspection. Approve or report using the normal exact-version review workflow.
+
+These are isolated proposals before overworld integration. Amber paths and cyan
+structure/access shapes are labelled schematic geometry, not finished art or
+collision. Bend/crossover studies expose the limits of cardinal sprites; station
+boarding and bridges/tunnels are not yet gameplay. See [Trains](topics/trains.md).
+
 ## Pattern studio
 
 Open [Pattern studio](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/patterns)

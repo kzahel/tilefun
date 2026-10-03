@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "sheetId": "railway-review-v1",
+  "image": "assets/tilesets/railway-review-v1.png",
+  "sha256": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+  "width": 1024,
+  "height": 656,
+  "sprites": {
+    "Grey_Rail_Modular_Horizontal": {
+      "rect": [0, 0, 16, 32],
+      "bounds": [0, 1, 16, 31],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Modular_Horizontal.png",
+      "sourceSha256": "b831b59f4f0184489b27ab95d6bddd72252c71a165547d1239e41d7d20bd83c2"
+    },
+    "Grey_Rail_Modular_Vertical": {
+      "rect": [24, 0, 32, 16],
+      "bounds": [1, 0, 31, 16],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Modular_Vertical.png",
+      "sourceSha256": "0f8cbe0a1460b38105d66ecdb9d9ff9c6405b959378c7aa42261d5a0914902cf"
+    },
+    "Grey_Rail_Left_Up_Corner": {
+      "rect": [64, 0, 48, 48],
+      "bounds": [1, 1, 48, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Left_Up_Corner.png",
+      "sourceSha256": "b3ad7cf4cbb9ae381bc713b902c6808d220e5db0e1d11a328e0d37400be1dabe"
+    },
+    "Grey_Rail_Left_Bottom_Corner": {
+      "rect": [120, 0, 48, 48],
+      "bounds": [1, 0, 48, 47],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Left_Bottom_Corner.png",
+      "sourceSha256": "06f4ce76639b9a46c3467090e33eb20316d13029e5547ab3aa225ed4d3594f4f"
+    },
+    "Grey_Rail_Right_Up_Corner": {
+      "rect": [176, 0, 48, 48],
+      "bounds": [0, 1, 47, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Right_Up_Corner.png",
+      "sourceSha256": "9d248c19833c8b67072a7c0cc7312e8bc2c4fecee1f4ed70d815876d33a12c5a"
+    },
+    "Grey_Rail_Right_Bottom_Corner": {
+      "rect": [232, 0, 48, 48],
+      "bounds": [0, 0, 47, 47],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Right_Bottom_Corner.png",
+      "sourceSha256": "47d355c8d87b0b4f8d0e6628e281c50a55760272dbd1628bc37371050a750cd8"
+    },
+    "Grey_Rail_Horizontal_Crossed_Left": {
+      "rect": [288, 0, 64, 96],
+      "bounds": [0, 3, 64, 92],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Horizontal_Crossed_Left.png",
+      "sourceSha256": "e8e5c4cd613122996c40276e922cfcd4e37f3c0467f90c9fb2740b0efee33709"
+    },
+    "Grey_Rail_Horizontal_Crossed_Right": {
+      "rect": [360, 0, 64, 96],
+      "bounds": [0, 4, 64, 92],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Grey_Rail_Horizontal_Crossed_Right.png",
+      "sourceSha256": "26528ab2c64e269c302ecfdbfe03f7cd6ffac564f81239fd1b5d291e94b59450"
+    },
+    "Brown_Rail_Modular_Horizontal": {
+      "rect": [432, 0, 16, 32],
+      "bounds": [0, 1, 16, 30],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Modular_Horizontal.png",
+      "sourceSha256": "6bac5466987687cb878d5b51cd295bf7eb477c8854459d591a3716b44ea1b92a"
+    },
+    "Brown_Rail_Modular_Vertical": {
+      "rect": [456, 0, 32, 16],
+      "bounds": [1, 0, 32, 16],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Modular_Vertical.png",
+      "sourceSha256": "93ab500434abd9fcdd832d7777fd38c3b9afb32a6a863ba4ed8f57142a90dcbe"
+    },
+    "Brown_Rail_Left_Up_Corner": {
+      "rect": [496, 0, 48, 48],
+      "bounds": [2, 1, 48, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Left_Up_Corner.png",
+      "sourceSha256": "13f7fcb762966952753dba99c9fffc104c4e5555f08aeef5b97933e527959a71"
+    },
+    "Brown_Rail_Left_Bottom_Corner": {
+      "rect": [552, 0, 48, 48],
+      "bounds": [2, 0, 48, 46],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Left_Bottom_Corner.png",
+      "sourceSha256": "ea80bb740f059e46e6273db2ddb5d3941cae4ee7f16d768890b3b8d117be0dba"
+    },
+    "Brown_Rail_Right_Up_Corner": {
+      "rect": [608, 0, 48, 48],
+      "bounds": [0, 1, 46, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Right_Up_Corner.png",
+      "sourceSha256": "1be07a1194581d2099c64f8fcc7b3ee585fdbb67fcf626ab663be7c6a9426259"
+    },
+    "Brown_Rail_Right_Bottom_Corner": {
+      "rect": [664, 0, 48, 48],
+      "bounds": [0, 0, 46, 46],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Right_Bottom_Corner.png",
+      "sourceSha256": "4862364f3da8a377a490a4de64f9054b632a32cd4177797204aac73b5f69bae4"
+    },
+    "Brown_Rail_Horizontal_Crossed_Left": {
+      "rect": [720, 0, 64, 96],
+      "bounds": [0, 3, 64, 92],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Horizontal_Crossed_Left.png",
+      "sourceSha256": "c86ef5417d02d24b3ccb5d5398d12d21a5e286d4f46e22be1ce5ee5d8fd65e4e"
+    },
+    "Brown_Rail_Horizontal_Crossed_Right": {
+      "rect": [792, 0, 64, 96],
+      "bounds": [0, 3, 64, 92],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Brown_Rail_Horizontal_Crossed_Right.png",
+      "sourceSha256": "d021f27b159a0d7c0d7b4c7e30e758b01ee9c43cd539ca24be2893710222673f"
+    },
+    "Exterior_Train_Blue_Left": {
+      "rect": [864, 0, 144, 64],
+      "bounds": [8, 1, 144, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Blue_Left.png",
+      "sourceSha256": "e5d0a20f25201db71c2639793040194ab5b7a3ec1f87da4d6a9383d402bcbd3c"
+    },
+    "Exterior_Train_Blue_Middle": {
+      "rect": [0, 104, 160, 64],
+      "bounds": [0, 1, 160, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Blue_Middle.png",
+      "sourceSha256": "4521ffb3f48b79d837546bbe2fc8011a5b98f7cc077e720623b1b1eb229391a4"
+    },
+    "Exterior_Train_Blue_Right": {
+      "rect": [168, 104, 160, 64],
+      "bounds": [0, 1, 160, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Blue_Right.png",
+      "sourceSha256": "8557b170b37189ff617e2a3e4d6fd892c6e4fb5c5fcf3ffb5699b80a2994dfef"
+    },
+    "Train_Blue_Back_Down": {
+      "rect": [336, 104, 48, 112],
+      "bounds": [3, 3, 44, 112],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Blue_Back_Down.png",
+      "sourceSha256": "61cafdde3f6c56a5c930ddaa27432498e39cdb30fdaf7d1a3391a5bbfbabe6bf"
+    },
+    "Train_Blue_Middle_Down": {
+      "rect": [392, 104, 48, 112],
+      "bounds": [3, 0, 44, 112],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Blue_Middle_Down.png",
+      "sourceSha256": "38712eea87e227199104bd5ecf82d4cdbdbc1fcf638c4add29c8ec7240a42f4e"
+    },
+    "Train_Blue_Front_Down": {
+      "rect": [448, 104, 48, 144],
+      "bounds": [3, 0, 44, 143],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Blue_Front_Down.png",
+      "sourceSha256": "656b1487aa8a899cf505e8812fd62e7a9010bc06028c01eeac5e69f26181e0a9"
+    },
+    "Exterior_Train_Green_Left": {
+      "rect": [504, 104, 144, 64],
+      "bounds": [0, 0, 144, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Green_Left.png",
+      "sourceSha256": "44e59d58d47b1c90bfd5fe02de004b897bcdfd22a149032c40a4ae83e8fc4a10"
+    },
+    "Exterior_Train_Green_Middle": {
+      "rect": [656, 104, 160, 64],
+      "bounds": [0, 0, 160, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Green_Middle.png",
+      "sourceSha256": "04c9db594da1ca7493d12fec6ca0a77a64f34f896400593fa2b28a77c7d64dc3"
+    },
+    "Exterior_Train_Green_Right": {
+      "rect": [824, 104, 160, 64],
+      "bounds": [0, 0, 155, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Green_Right.png",
+      "sourceSha256": "4f55a79da63145497137dce36ee4cee4c5e68eea67dd21dd5036eb269473287b"
+    },
+    "Train_Green_Back_Down": {
+      "rect": [0, 256, 48, 112],
+      "bounds": [2, 2, 46, 112],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Green_Back_Down.png",
+      "sourceSha256": "e317ee27abf347999f985e0468297a9ea1d44900409df38c09e6e989c7b2b247"
+    },
+    "Train_Green_Middle_Down": {
+      "rect": [56, 256, 48, 112],
+      "bounds": [2, 0, 46, 112],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Green_Middle_Down.png",
+      "sourceSha256": "1e09cce4d6f1a5b6b3065fa480880b60ed74c0e08f7b964290af643fa437788e"
+    },
+    "Train_Green_Front_Down": {
+      "rect": [112, 256, 48, 144],
+      "bounds": [2, 0, 46, 141],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Green_Front_Down.png",
+      "sourceSha256": "b50593c65b1cb5533428e38562ab527131b3580b41dac1f20750644c1c319f9d"
+    },
+    "Exterior_Train_Orange_Left": {
+      "rect": [168, 256, 160, 64],
+      "bounds": [7, 1, 160, 64],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Orange_Left.png",
+      "sourceSha256": "2731f5a174e30230f0f4ce7fbdf00aac129320ed5101ef7f46586adf685bddcb"
+    },
+    "Exterior_Train_Orange_Middle": {
+      "rect": [336, 256, 160, 64],
+      "bounds": [0, 1, 160, 64],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Orange_Middle.png",
+      "sourceSha256": "4649d6a6eee34134b800baffff8b18d6190be40ce7bc20e1e98c8fd823869b12"
+    },
+    "Exterior_Train_Orange_Right": {
+      "rect": [504, 256, 160, 64],
+      "bounds": [0, 1, 154, 64],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Orange_Right.png",
+      "sourceSha256": "e2d961a1f999c9b08c353b1a836dd0996abc5016e0e6100b9ad8ea1f33da5d3b"
+    },
+    "Train_Orange_Back_Down": {
+      "rect": [672, 256, 48, 160],
+      "bounds": [3, 8, 45, 160],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Orange_Back_Down.png",
+      "sourceSha256": "1a1e11a5dba752b181554923ddb06baebe9fa31174a281aad3f731fb439db38d"
+    },
+    "Train_Orange_Front_Down": {
+      "rect": [728, 256, 48, 160],
+      "bounds": [3, 8, 45, 159],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Orange_Front_Down.png",
+      "sourceSha256": "616c076cc670b273bd3f730c302d876379df303e8944f5d164a58bcd43fc73a7"
+    },
+    "Exterior_Train_Grey_Left": {
+      "rect": [784, 256, 64, 64],
+      "bounds": [13, 0, 64, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Grey_Left.png",
+      "sourceSha256": "a71debab500a2e72d56c9ab171246df303a567f91c3f941ff472fce5e6ca84a6"
+    },
+    "Exterior_Train_Grey_Middle": {
+      "rect": [856, 256, 160, 64],
+      "bounds": [0, 0, 160, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Grey_Middle.png",
+      "sourceSha256": "dccecfe2ba2cf1e41ee52857023d54e927a712d9f2d90db7da219a2136f18532"
+    },
+    "Exterior_Train_Grey_Right": {
+      "rect": [0, 424, 64, 64],
+      "bounds": [0, 0, 58, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_Grey_Right.png",
+      "sourceSha256": "af33a5d0341e005618465e5caa4deff6cb9377e69b30741483473c859a0dbc8f"
+    },
+    "Train_Grey_Back_Down": {
+      "rect": [72, 424, 48, 48],
+      "bounds": [5, 0, 43, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Grey_Back_Down.png",
+      "sourceSha256": "fffa035874b17e233b4463c1a7d70920a825f40e82fc4317a53bc06d1c82f76e"
+    },
+    "Train_Grey_Middle_Down": {
+      "rect": [128, 424, 48, 112],
+      "bounds": [5, 0, 43, 112],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Grey_Middle_Down.png",
+      "sourceSha256": "27c5eef076f98a93272a865ddb2cd11a3db35d1e97623c7d3a572b87f296e2d0"
+    },
+    "Train_Grey_Front_Down": {
+      "rect": [184, 424, 48, 80],
+      "bounds": [5, 0, 43, 74],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_Grey_Front_Down.png",
+      "sourceSha256": "28d9b658a7bb1f8f115c7a3d8b436785c138f899c3d60f354c9b44a464618a90"
+    },
+    "Exterior_Train_White_Left": {
+      "rect": [240, 424, 112, 64],
+      "bounds": [5, 0, 112, 62],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_White_Left.png",
+      "sourceSha256": "96a85a0fdf3213b826ce64529aaf6b5ec61aa2d7ad975232fd95b5721f0365f4"
+    },
+    "Exterior_Train_White_Middle": {
+      "rect": [360, 424, 144, 64],
+      "bounds": [0, 0, 144, 63],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_White_Middle.png",
+      "sourceSha256": "f5b0d9b5378011910a4e2c42adb82b801ac8f3b0cd30be5359dfea96e4f12369"
+    },
+    "Exterior_Train_White_Right": {
+      "rect": [512, 424, 112, 64],
+      "bounds": [0, 0, 111, 62],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Exterior_Train_White_Right.png",
+      "sourceSha256": "6be2a784cd6101d112ee9e9ba5abd444194804b83511ff4e4926c7cfb73921ed"
+    },
+    "Train_White_Back_Down": {
+      "rect": [632, 424, 48, 96],
+      "bounds": [2, 5, 46, 96],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_White_Back_Down.png",
+      "sourceSha256": "5304a88cefd1e54056745549af41e172f989e0425145a0b4191c99b7a9d475b8"
+    },
+    "Train_White_Middle_Down": {
+      "rect": [688, 424, 48, 128],
+      "bounds": [2, 0, 46, 128],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_White_Middle_Down.png",
+      "sourceSha256": "39fe0713ac6bb60c869550f62e2ee14fe6a7f421ef59c978e0080d88d096748e"
+    },
+    "Train_White_Front_Down": {
+      "rect": [744, 424, 48, 96],
+      "bounds": [2, 0, 46, 91],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Train_White_Front_Down.png",
+      "sourceSha256": "603481398de24ca9b4bcbdbda5070415c78c3fe52304a92a3013e092b9ae4180"
+    },
+    "High_Double_Tunnel_Cornice": {
+      "rect": [800, 424, 160, 48],
+      "bounds": [4, 1, 156, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_High_Double_Tunnel_Cornice.png",
+      "sourceSha256": "a2e7341b249f04b251a9b629830665cacce2a6590628c3d365f0a3b2d83d512d"
+    },
+    "High_Single_Tunnel_Cornice": {
+      "rect": [0, 560, 96, 48],
+      "bounds": [4, 1, 92, 48],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_High_Single_Tunnel_Cornice.png",
+      "sourceSha256": "c6f95e1f9e12d2be6779fcdfe295141d953b8a18335fab87f8f248e262ab4aea"
+    },
+    "Small_Tunnel_Left_Side": {
+      "rect": [104, 560, 16, 96],
+      "bounds": [0, 9, 11, 90],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Small_Tunnel_Left_Side.png",
+      "sourceSha256": "3d7a9901ddb28a3e004e2ec44b29e6659fb917a6172eb598dad463de38f15582"
+    },
+    "Small_Tunnel_Right_Side": {
+      "rect": [128, 560, 16, 96],
+      "bounds": [5, 9, 16, 90],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Small_Tunnel_Right_Side.png",
+      "sourceSha256": "b00d3f4766c2cbeb5b62243288ed00689d58e0a0b5cf028a4f82d2571a5817f1"
+    },
+    "Three_Seats_Grey_Bench_Frontal_1": {
+      "rect": [152, 560, 48, 16],
+      "bounds": [1, 1, 47, 14],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Three_Seats_Grey_Bench_Frontal_1.png",
+      "sourceSha256": "63cb23601a851d7b18aec71296d2a2adb167146c2fc06d2600dcb85fd2034d5b"
+    },
+    "Stairs_Complete_1": {
+      "rect": [208, 560, 48, 80],
+      "bounds": [0, 4, 48, 80],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Stairs_Complete_1.png",
+      "sourceSha256": "1b8fdea84b2a7cd686eb7ee7d8a92b7d5e349f1ab926da07b2e554c70890be76"
+    },
+    "Binary_Edge_Middle_Modular_Horizontal_Up_1": {
+      "rect": [264, 560, 16, 16],
+      "bounds": [0, 0, 16, 16],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Binary_Edge_Middle_Modular_Horizontal_Up_1.png",
+      "sourceSha256": "3b4813ce61e798bab9d426077afc2902be0dc62ddafd7d4db8b0aa907ac3e5bb"
+    },
+    "Binary_Edge_Middle_Modular_Horizontal_Down_1": {
+      "rect": [288, 560, 16, 16],
+      "bounds": [0, 0, 16, 16],
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Subway_and_Train_Station_16x16_Binary_Edge_Middle_Modular_Horizontal_Down_1.png",
+      "sourceSha256": "5ab53d2824a43f3c212d68b92ab3ad93c6deca1343dd17e6c79cac63e061ab83"
+    }
+  }
+}

@@ -83,7 +83,7 @@ export function legacyValue(key: string): Record<string, unknown> {
   }
 }
 export const queueStorageKey = (batch: string) =>
-  isCityReviewRun(batch)
+  isCityReviewRun(batch) || batch.startsWith("rail-")
     ? `tilefun.${batch}-review.v1`
     : batch.startsWith("rooms-")
       ? "tilefun.indoor-review.v1"

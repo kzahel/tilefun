@@ -24,7 +24,7 @@ export interface WorkshopCandidate {
   name: string;
   prompt: string;
   url: string;
-  kind: "art" | "interior" | "motion" | "pattern" | "vehicle" | "character";
+  kind: "art" | "interior" | "motion" | "pattern" | "vehicle" | "character" | "railway";
   characterId?: string;
   vehicle?: VehicleView;
   /** Handoff derived from the candidate's actual world generation and location. */

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { required } from "../art/ArtCatalog.js";
+import { reviewContext2D } from "../art/reviewCanvas.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
 import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./App.js";
@@ -11,6 +12,8 @@ import {
 } from "./InteriorCandidates.js";
 import { buildPatternCandidate, renderPatternCandidate } from "./PatternCandidates.js";
 import { PreviewViewport } from "./PreviewViewport.js";
+import { buildRailwayCandidate } from "./RailwayCandidates.js";
+import { RailwayPlayback } from "./RailwayPlayback.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
 import { primaryScene, scenePath } from "./SceneReview.js";
@@ -181,6 +184,7 @@ function ReviewCase({
     const valid = stored.batch.filter((report) =>
       allCandidates.some(
         (row) =>
+          row.batchId === c.batchId &&
           row.id === report.id &&
           row.fingerprint === report.fingerprint &&
           optimisticSummary(row, outbox).state === "changes",
@@ -196,7 +200,11 @@ function ReviewCase({
     let cancelled = false;
     const render = async () => {
       const temporary = document.createElement("canvas");
-      if (c.kind === "pattern") {
+      if (c.kind === "railway") {
+        const actual = await buildRailwayCandidate(temporary, c.id);
+        if (actual.fingerprint !== c.fingerprint || actual.review?.revision !== c.review?.revision)
+          throw new Error("Railway preview changed. Regenerate the manifest before reviewing.");
+      } else if (c.kind === "pattern") {
         const { assets, catalog } = await reviewAssets();
         const actual = await buildPatternCandidate(
           temporary,
@@ -226,7 +234,7 @@ function ReviewCase({
       if (cancelled || !canvas.current) return;
       canvas.current.width = temporary.width;
       canvas.current.height = temporary.height;
-      required(canvas.current.getContext("2d")).drawImage(temporary, 0, 0);
+      reviewContext2D(canvas.current).drawImage(temporary, 0, 0);
       setDimensions({ width: temporary.width, height: temporary.height });
       setReady(c.id);
       setError("");
@@ -380,7 +388,12 @@ function ReviewCase({
   });
   const canVote = ready === c.id && currentManifest && !q.paused && !c.excluded;
   return (
-    <section className="review-page" data-candidate={c.id} data-review-ready={ready === c.id}>
+    <section
+      className="review-page"
+      data-railway={c.kind === "railway"}
+      data-candidate={c.id}
+      data-review-ready={ready === c.id}
+    >
       <Link className="back-link" to="/">
         ← Global review inbox
       </Link>
@@ -466,6 +479,16 @@ function ReviewCase({
       ) : null}
       <div className="review-content" hidden={q.paused || !visible.length}>
         <div className="native-preview">
+          {c.kind === "railway" ? (
+            <RailwayPlayback
+              key={`playback:${c.id}`}
+              id={c.id}
+              canvas={canvas}
+              ready={ready === c.id}
+              geometry={geometry}
+              onError={setError}
+            />
+          ) : null}
           <PreviewViewport
             key={c.id}
             width={dimensions.width}
@@ -476,7 +499,7 @@ function ReviewCase({
               ) : null
             }
             controls={
-              c.kind === "art" || c.kind === "pattern" ? (
+              c.kind === "art" || c.kind === "pattern" || c.kind === "railway" ? (
                 <label>
                   <input
                     type="checkbox"

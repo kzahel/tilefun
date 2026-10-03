@@ -14,6 +14,16 @@
       "indexKind": "exteriors"
     },
     {
+      "id": "railway-review-v1",
+      "name": "railway review v1",
+      "image": "assets/tilesets/railway-review-v1.png",
+      "width": 1024,
+      "height": 656,
+      "tileSize": 16,
+      "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "modern-interiors",
       "name": "Modern Interiors · packed atlas",
       "image": "assets/tilesets/modern-interiors-atlas.png",
@@ -1427,6 +1437,960 @@
     }
   ],
   "usages": [
+    {
+      "id": "railway-review:Grey_Rail_Modular_Horizontal",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        0,
+        0,
+        16,
+        32
+      ],
+      "label": "Grey_Rail_Modular_Horizontal",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Modular_Vertical",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        24,
+        0,
+        32,
+        16
+      ],
+      "label": "Grey_Rail_Modular_Vertical",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Left_Up_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        64,
+        0,
+        48,
+        48
+      ],
+      "label": "Grey_Rail_Left_Up_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Left_Bottom_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        120,
+        0,
+        48,
+        48
+      ],
+      "label": "Grey_Rail_Left_Bottom_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Right_Up_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        176,
+        0,
+        48,
+        48
+      ],
+      "label": "Grey_Rail_Right_Up_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Right_Bottom_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        232,
+        0,
+        48,
+        48
+      ],
+      "label": "Grey_Rail_Right_Bottom_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Horizontal_Crossed_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        288,
+        0,
+        64,
+        96
+      ],
+      "label": "Grey_Rail_Horizontal_Crossed_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Grey_Rail_Horizontal_Crossed_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        360,
+        0,
+        64,
+        96
+      ],
+      "label": "Grey_Rail_Horizontal_Crossed_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Modular_Horizontal",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        432,
+        0,
+        16,
+        32
+      ],
+      "label": "Brown_Rail_Modular_Horizontal",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Modular_Vertical",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        456,
+        0,
+        32,
+        16
+      ],
+      "label": "Brown_Rail_Modular_Vertical",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Left_Up_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        496,
+        0,
+        48,
+        48
+      ],
+      "label": "Brown_Rail_Left_Up_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Left_Bottom_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        552,
+        0,
+        48,
+        48
+      ],
+      "label": "Brown_Rail_Left_Bottom_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Right_Up_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        608,
+        0,
+        48,
+        48
+      ],
+      "label": "Brown_Rail_Right_Up_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Right_Bottom_Corner",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        664,
+        0,
+        48,
+        48
+      ],
+      "label": "Brown_Rail_Right_Bottom_Corner",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Horizontal_Crossed_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        720,
+        0,
+        64,
+        96
+      ],
+      "label": "Brown_Rail_Horizontal_Crossed_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Brown_Rail_Horizontal_Crossed_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        792,
+        0,
+        64,
+        96
+      ],
+      "label": "Brown_Rail_Horizontal_Crossed_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Blue_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        864,
+        0,
+        144,
+        64
+      ],
+      "label": "Exterior_Train_Blue_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Blue_Middle",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        0,
+        104,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Blue_Middle",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Blue_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        168,
+        104,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Blue_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Blue_Back_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        336,
+        104,
+        48,
+        112
+      ],
+      "label": "Train_Blue_Back_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Blue_Middle_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        392,
+        104,
+        48,
+        112
+      ],
+      "label": "Train_Blue_Middle_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Blue_Front_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        448,
+        104,
+        48,
+        144
+      ],
+      "label": "Train_Blue_Front_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Green_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        504,
+        104,
+        144,
+        64
+      ],
+      "label": "Exterior_Train_Green_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Green_Middle",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        656,
+        104,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Green_Middle",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Green_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        824,
+        104,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Green_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Green_Back_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        0,
+        256,
+        48,
+        112
+      ],
+      "label": "Train_Green_Back_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Green_Middle_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        56,
+        256,
+        48,
+        112
+      ],
+      "label": "Train_Green_Middle_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Green_Front_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        112,
+        256,
+        48,
+        144
+      ],
+      "label": "Train_Green_Front_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Orange_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        168,
+        256,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Orange_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Orange_Middle",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        336,
+        256,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Orange_Middle",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Orange_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        504,
+        256,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Orange_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Orange_Back_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        672,
+        256,
+        48,
+        160
+      ],
+      "label": "Train_Orange_Back_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Orange_Front_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        728,
+        256,
+        48,
+        160
+      ],
+      "label": "Train_Orange_Front_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Grey_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        784,
+        256,
+        64,
+        64
+      ],
+      "label": "Exterior_Train_Grey_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Grey_Middle",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        856,
+        256,
+        160,
+        64
+      ],
+      "label": "Exterior_Train_Grey_Middle",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_Grey_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        0,
+        424,
+        64,
+        64
+      ],
+      "label": "Exterior_Train_Grey_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Grey_Back_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        72,
+        424,
+        48,
+        48
+      ],
+      "label": "Train_Grey_Back_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Grey_Middle_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        128,
+        424,
+        48,
+        112
+      ],
+      "label": "Train_Grey_Middle_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_Grey_Front_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        184,
+        424,
+        48,
+        80
+      ],
+      "label": "Train_Grey_Front_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_White_Left",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        240,
+        424,
+        112,
+        64
+      ],
+      "label": "Exterior_Train_White_Left",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_White_Middle",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        360,
+        424,
+        144,
+        64
+      ],
+      "label": "Exterior_Train_White_Middle",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Exterior_Train_White_Right",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        512,
+        424,
+        112,
+        64
+      ],
+      "label": "Exterior_Train_White_Right",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_White_Back_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        632,
+        424,
+        48,
+        96
+      ],
+      "label": "Train_White_Back_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_White_Middle_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        688,
+        424,
+        48,
+        128
+      ],
+      "label": "Train_White_Middle_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Train_White_Front_Down",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        744,
+        424,
+        48,
+        96
+      ],
+      "label": "Train_White_Front_Down",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:High_Double_Tunnel_Cornice",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        800,
+        424,
+        160,
+        48
+      ],
+      "label": "High_Double_Tunnel_Cornice",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:High_Single_Tunnel_Cornice",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        0,
+        560,
+        96,
+        48
+      ],
+      "label": "High_Single_Tunnel_Cornice",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Small_Tunnel_Left_Side",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        104,
+        560,
+        16,
+        96
+      ],
+      "label": "Small_Tunnel_Left_Side",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Small_Tunnel_Right_Side",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        128,
+        560,
+        16,
+        96
+      ],
+      "label": "Small_Tunnel_Right_Side",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Three_Seats_Grey_Bench_Frontal_1",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        152,
+        560,
+        48,
+        16
+      ],
+      "label": "Three_Seats_Grey_Bench_Frontal_1",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Stairs_Complete_1",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        208,
+        560,
+        48,
+        80
+      ],
+      "label": "Stairs_Complete_1",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Binary_Edge_Middle_Modular_Horizontal_Up_1",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        264,
+        560,
+        16,
+        16
+      ],
+      "label": "Binary_Edge_Middle_Modular_Horizontal_Up_1",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
+    {
+      "id": "railway-review:Binary_Edge_Middle_Modular_Horizontal_Down_1",
+      "sheetId": "railway-review-v1",
+      "rect": [
+        288,
+        560,
+        16,
+        16
+      ],
+      "label": "Binary_Edge_Middle_Modular_Horizontal_Down_1",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Railway Workshop source inventory (unapproved)",
+          "source": "src/railway/RailwaySource.json"
+        }
+      ]
+    },
     {
       "id": "prop:prop-city-street-v1-meter",
       "sheetId": "me-complete",

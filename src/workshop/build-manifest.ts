@@ -6,6 +6,7 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
+import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
@@ -25,6 +26,7 @@ try {
     candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
   for (const c of TREE_PATTERN_CASES)
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
+  candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));
   candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));

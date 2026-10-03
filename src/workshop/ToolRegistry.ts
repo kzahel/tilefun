@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "railways",
+    name: "Railway previews",
+    description:
+      "Review rail patterns, five trains in all four directions, station plans and structure studies before overworld integration.",
+    url: "workshop.html#/tool/railways",
+    mode: "review",
+  },
+  {
     id: "traffic",
     name: "Traffic playground",
     description:
@@ -149,6 +157,16 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  ...[
+    { id: "rail-patterns", name: "Railway track patterns" },
+    { id: "rail-trains", name: "Trains · directional motion" },
+    { id: "rail-plans", name: "Railway stations & route plans" },
+    { id: "rail-structures", name: "Railway bridge & tunnel studies" },
+  ].map((b) => ({
+    ...b,
+    description: "Isolated proposals for your review. No overworld railway integration.",
+    toolId: "railways",
+  })),
   {
     id: "character-lab",
     name: "Character movement & geometry",

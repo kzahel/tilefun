@@ -77,6 +77,15 @@ The [vehicle topic](vehicles.md) owns the registered 180-view geometry batch,
 editable ground bounds/height, exact approvals and proposed traffic follow-up.
 Open [Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles).
 
+## Railways
+
+[Railway previews](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/railways)
+registers 32 unapproved source, motion, layout and structure-study candidates.
+[Trains](trains.md) owns scope and the explicit pre-overworld review gate. Moving
+identities pin the source, recipe/motion implementation and deterministic sampled
+frames, with full-Chromium parity. Schematic studies must stay visibly labelled;
+their approval does not imply that physics or a complete art kit exists.
+
 ## Characters
 
 The [character topic](characters.md) owns six registered movement/geometry

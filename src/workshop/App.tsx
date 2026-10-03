@@ -238,6 +238,7 @@ export function App() {
               "patterns",
               "outdoor",
               "traffic",
+              "railways",
               "vehicles",
               "character-lab",
               "art",
@@ -258,6 +259,7 @@ export function App() {
               [
                 "patterns",
                 "traffic",
+                "railways",
                 "vehicles",
                 "character-lab",
                 "buildings",

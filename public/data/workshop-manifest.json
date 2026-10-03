@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "railways",
+      "name": "Railway previews",
+      "description": "Review rail patterns, five trains in all four directions, station plans and structure studies before overworld integration.",
+      "url": "workshop.html#/tool/railways",
+      "mode": "review"
+    },
+    {
       "id": "traffic",
       "name": "Traffic playground",
       "description": "Gentle traffic on generated roads. Test stopping, roof riding, turns and jumping off.",
@@ -136,6 +143,30 @@
     }
   ],
   "batches": [
+    {
+      "id": "rail-patterns",
+      "name": "Railway track patterns",
+      "description": "Isolated proposals for your review. No overworld railway integration.",
+      "toolId": "railways"
+    },
+    {
+      "id": "rail-trains",
+      "name": "Trains · directional motion",
+      "description": "Isolated proposals for your review. No overworld railway integration.",
+      "toolId": "railways"
+    },
+    {
+      "id": "rail-plans",
+      "name": "Railway stations & route plans",
+      "description": "Isolated proposals for your review. No overworld railway integration.",
+      "toolId": "railways"
+    },
+    {
+      "id": "rail-structures",
+      "name": "Railway bridge & tunnel studies",
+      "description": "Isolated proposals for your review. No overworld railway integration.",
+      "toolId": "railways"
+    },
     {
       "id": "character-lab",
       "name": "Character movement & geometry",
@@ -4517,6 +4548,1350 @@
           "revision": "ab8da9ba8cb808f93476ae5ef5205a1212555b875986ff4e1fc1039d92b1b35a",
           "renderFingerprint": "3ae1acc3ab73817f78952d7885f84f9d458547a8b46582171cb94d5c86c6e974",
           "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-parallel"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-rails-grey",
+      "batchId": "rail-patterns",
+      "name": "Grey rails · repeats and paired tracks",
+      "prompt": "Inspect native horizontal/vertical repeats, seams and paired-track spacing. Rail gauge is 32 pixels; orange guides show 16-pixel source cells, not collision bounds.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-grey",
+      "fingerprint": "abfb3c62b64e5f2d15c7991cbeb3401a2e1aec501dfe85435db4d16832756084",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-rails-grey",
+        "prefabIds": [],
+        "revision": "804174d815ff7d593b9e276493ed8d3c9769a3b641d6c7ec7596269cece92944",
+        "renderFingerprint": "abfb3c62b64e5f2d15c7991cbeb3401a2e1aec501dfe85435db4d16832756084",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-grey"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-rails-grey",
+          "prefabIds": [],
+          "revision": "804174d815ff7d593b9e276493ed8d3c9769a3b641d6c7ec7596269cece92944",
+          "renderFingerprint": "abfb3c62b64e5f2d15c7991cbeb3401a2e1aec501dfe85435db4d16832756084",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-grey"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-rails-brown",
+      "batchId": "rail-patterns",
+      "name": "Brown rails · repeats and paired tracks",
+      "prompt": "Inspect native horizontal/vertical repeats, seams and paired-track spacing. Rail gauge is 32 pixels; orange guides show 16-pixel source cells, not collision bounds.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-brown",
+      "fingerprint": "1e01d7b411a98a32eb7abfe8254d9e68968ce45b2fbfcf190e74e8bdea244e09",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-rails-brown",
+        "prefabIds": [],
+        "revision": "e4384489f8f66730a12cde4558868b310972706a31092ec19dee6bc17f698d37",
+        "renderFingerprint": "1e01d7b411a98a32eb7abfe8254d9e68968ce45b2fbfcf190e74e8bdea244e09",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-brown"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-rails-brown",
+          "prefabIds": [],
+          "revision": "e4384489f8f66730a12cde4558868b310972706a31092ec19dee6bc17f698d37",
+          "renderFingerprint": "1e01d7b411a98a32eb7abfe8254d9e68968ce45b2fbfcf190e74e8bdea244e09",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-rails-brown"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-corners",
+      "batchId": "rail-patterns",
+      "name": "Rail corners · all four native bends",
+      "prompt": "These are the supplied 48×48 curved pieces, assembled with straight repeats. Their small radius is not yet suitable for long train cars. Review the joins and art only.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-corners",
+      "fingerprint": "d3aff32e9e128654e5d17453ba9de63472aca16d39d3056b1acdca24cc7ebd97",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-corners",
+        "prefabIds": [],
+        "revision": "b5c0b78bf09606239f8d462ae3c5b9a39028d2404a46b06d6a11f11a84f21e84",
+        "renderFingerprint": "d3aff32e9e128654e5d17453ba9de63472aca16d39d3056b1acdca24cc7ebd97",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-corners"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-corners",
+          "prefabIds": [],
+          "revision": "b5c0b78bf09606239f8d462ae3c5b9a39028d2404a46b06d6a11f11a84f21e84",
+          "renderFingerprint": "d3aff32e9e128654e5d17453ba9de63472aca16d39d3056b1acdca24cc7ebd97",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-corners"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-junction-art",
+      "batchId": "rail-patterns",
+      "name": "Diagonal junction pieces · source comparison",
+      "prompt": "Native grey/brown diagonal assemblies. These are source proposals, not validated moving turnouts. Compare them with the separate crossover motion study.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-junction-art",
+      "fingerprint": "acf9ddedbd488ad1f65ec676c070340c56c5ec5cfd408eba9baba00dc92ee3f3",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-junction-art",
+        "prefabIds": [],
+        "revision": "3bd263827306775ec9efd636b6670510ba8f1bec52ae29244b16d72b1929d163",
+        "renderFingerprint": "acf9ddedbd488ad1f65ec676c070340c56c5ec5cfd408eba9baba00dc92ee3f3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-junction-art"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-junction-art",
+          "prefabIds": [],
+          "revision": "3bd263827306775ec9efd636b6670510ba8f1bec52ae29244b16d72b1929d163",
+          "renderFingerprint": "acf9ddedbd488ad1f65ec676c070340c56c5ec5cfd408eba9baba00dc92ee3f3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-junction-art"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-grey-east",
+      "batchId": "rail-trains",
+      "name": "Grey train · east",
+      "prompt": "Watch the grey composition travel east. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-east",
+      "fingerprint": "909139479134bc0b060785825ba9a8b2fdebaaae21620ca5ee6e284770b9db8e",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-grey-east",
+        "prefabIds": [],
+        "revision": "d7799938b9de6b936bf230cb22b16335c6b3d3abfda5f6e64335ad9c03cdbd9e",
+        "renderFingerprint": "909139479134bc0b060785825ba9a8b2fdebaaae21620ca5ee6e284770b9db8e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-east"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-grey-east",
+          "prefabIds": [],
+          "revision": "d7799938b9de6b936bf230cb22b16335c6b3d3abfda5f6e64335ad9c03cdbd9e",
+          "renderFingerprint": "909139479134bc0b060785825ba9a8b2fdebaaae21620ca5ee6e284770b9db8e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-east"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-grey-west",
+      "batchId": "rail-trains",
+      "name": "Grey train · west",
+      "prompt": "Watch the grey composition travel west. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-west",
+      "fingerprint": "f353844559e84770c82bb14e65f320d3c8f530c80225f2f18f00d014ea119767",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-grey-west",
+        "prefabIds": [],
+        "revision": "1821a9faf8f027cc1f84453d54968796668346b0529e42d685bee68d43d39cb3",
+        "renderFingerprint": "f353844559e84770c82bb14e65f320d3c8f530c80225f2f18f00d014ea119767",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-west"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-grey-west",
+          "prefabIds": [],
+          "revision": "1821a9faf8f027cc1f84453d54968796668346b0529e42d685bee68d43d39cb3",
+          "renderFingerprint": "f353844559e84770c82bb14e65f320d3c8f530c80225f2f18f00d014ea119767",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-west"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-grey-south",
+      "batchId": "rail-trains",
+      "name": "Grey train · south",
+      "prompt": "Watch the grey composition travel south. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-south",
+      "fingerprint": "266fb52c8993454150ad35f945dce53fde32c60436c1e533fdba539773e1be35",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-grey-south",
+        "prefabIds": [],
+        "revision": "f29fe570f7e209200ee450623260ea4ca0300a8aebc97d832637731b56a5e840",
+        "renderFingerprint": "266fb52c8993454150ad35f945dce53fde32c60436c1e533fdba539773e1be35",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-south"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-grey-south",
+          "prefabIds": [],
+          "revision": "f29fe570f7e209200ee450623260ea4ca0300a8aebc97d832637731b56a5e840",
+          "renderFingerprint": "266fb52c8993454150ad35f945dce53fde32c60436c1e533fdba539773e1be35",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-south"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-grey-north",
+      "batchId": "rail-trains",
+      "name": "Grey train · north",
+      "prompt": "Watch the grey composition travel north. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-north",
+      "fingerprint": "394cadeeab4ddb015a57470dca1781d6a007af0b3b7b1e0c9a40a57dfe28c1d9",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-grey-north",
+        "prefabIds": [],
+        "revision": "34fcaf0eeb2fbd9a5936846eba807f2b2227b7af4c78d2f01a825ff82c17e145",
+        "renderFingerprint": "394cadeeab4ddb015a57470dca1781d6a007af0b3b7b1e0c9a40a57dfe28c1d9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-north"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-grey-north",
+          "prefabIds": [],
+          "revision": "34fcaf0eeb2fbd9a5936846eba807f2b2227b7af4c78d2f01a825ff82c17e145",
+          "renderFingerprint": "394cadeeab4ddb015a57470dca1781d6a007af0b3b7b1e0c9a40a57dfe28c1d9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-grey-north"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-blue-east",
+      "batchId": "rail-trains",
+      "name": "Blue train · east",
+      "prompt": "Watch the blue composition travel east. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-east",
+      "fingerprint": "e68be4fd55fe7da25a69228e3ad4b17819725ca70904828e2a46b1b78f8975c3",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-blue-east",
+        "prefabIds": [],
+        "revision": "20c75c7514ce5d106a88c5f05d0d499cb607442132a0b2ba19d841e32ddc89c0",
+        "renderFingerprint": "e68be4fd55fe7da25a69228e3ad4b17819725ca70904828e2a46b1b78f8975c3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-east"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-blue-east",
+          "prefabIds": [],
+          "revision": "20c75c7514ce5d106a88c5f05d0d499cb607442132a0b2ba19d841e32ddc89c0",
+          "renderFingerprint": "e68be4fd55fe7da25a69228e3ad4b17819725ca70904828e2a46b1b78f8975c3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-east"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-blue-west",
+      "batchId": "rail-trains",
+      "name": "Blue train · west",
+      "prompt": "Watch the blue composition travel west. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-west",
+      "fingerprint": "ec70f79326d35646c594c0526405735a009b5aa428468cc45949cb91f1e729da",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-blue-west",
+        "prefabIds": [],
+        "revision": "e4e2b15ad950e0a3cbecfb8432751af9d0ca3fdd06054f5a3899afb61e08170d",
+        "renderFingerprint": "ec70f79326d35646c594c0526405735a009b5aa428468cc45949cb91f1e729da",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-west"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-blue-west",
+          "prefabIds": [],
+          "revision": "e4e2b15ad950e0a3cbecfb8432751af9d0ca3fdd06054f5a3899afb61e08170d",
+          "renderFingerprint": "ec70f79326d35646c594c0526405735a009b5aa428468cc45949cb91f1e729da",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-west"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-blue-south",
+      "batchId": "rail-trains",
+      "name": "Blue train · south",
+      "prompt": "Watch the blue composition travel south. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-south",
+      "fingerprint": "aabbbeacb88bd490de2e5aeadb45aca737200ad6026f9be0cf182373e053722a",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-blue-south",
+        "prefabIds": [],
+        "revision": "210e3bd1bf6d28d9404c94e33f35f1fc6ef57f0d272122cdcc19bb943de4c92f",
+        "renderFingerprint": "aabbbeacb88bd490de2e5aeadb45aca737200ad6026f9be0cf182373e053722a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-south"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-blue-south",
+          "prefabIds": [],
+          "revision": "210e3bd1bf6d28d9404c94e33f35f1fc6ef57f0d272122cdcc19bb943de4c92f",
+          "renderFingerprint": "aabbbeacb88bd490de2e5aeadb45aca737200ad6026f9be0cf182373e053722a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-south"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-blue-north",
+      "batchId": "rail-trains",
+      "name": "Blue train · north",
+      "prompt": "Watch the blue composition travel north. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-north",
+      "fingerprint": "d3907d19dabdeb952fa04d210cc98b0f9a83d5451f3fe70e021bdaddcc0f1d0d",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-blue-north",
+        "prefabIds": [],
+        "revision": "594a1dbf7f5b82cd560f1916d851d614471844266123738d212e4fbc2a44f39b",
+        "renderFingerprint": "d3907d19dabdeb952fa04d210cc98b0f9a83d5451f3fe70e021bdaddcc0f1d0d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-north"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-blue-north",
+          "prefabIds": [],
+          "revision": "594a1dbf7f5b82cd560f1916d851d614471844266123738d212e4fbc2a44f39b",
+          "renderFingerprint": "d3907d19dabdeb952fa04d210cc98b0f9a83d5451f3fe70e021bdaddcc0f1d0d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-blue-north"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-green-east",
+      "batchId": "rail-trains",
+      "name": "Green train · east",
+      "prompt": "Watch the green composition travel east. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-east",
+      "fingerprint": "eec05e24555afcd08efe7d280daaf4ac6c01eeb3a11d8f693ed3c0c09e4e266b",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-green-east",
+        "prefabIds": [],
+        "revision": "bcee9db344c7acd9c61bcb2b32f9d019123e5cd8f59fa59e63d74515562659f2",
+        "renderFingerprint": "eec05e24555afcd08efe7d280daaf4ac6c01eeb3a11d8f693ed3c0c09e4e266b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-east"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-green-east",
+          "prefabIds": [],
+          "revision": "bcee9db344c7acd9c61bcb2b32f9d019123e5cd8f59fa59e63d74515562659f2",
+          "renderFingerprint": "eec05e24555afcd08efe7d280daaf4ac6c01eeb3a11d8f693ed3c0c09e4e266b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-east"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-green-west",
+      "batchId": "rail-trains",
+      "name": "Green train · west",
+      "prompt": "Watch the green composition travel west. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-west",
+      "fingerprint": "881c93fcc06e264614160d9acee0d5d45e87b02b2681cabdd9acc6ce1d2e56cd",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-green-west",
+        "prefabIds": [],
+        "revision": "a32bebcd56b3a223f5a140bbc44c3ecc746ec0484484fd3f1875292c9df3168c",
+        "renderFingerprint": "881c93fcc06e264614160d9acee0d5d45e87b02b2681cabdd9acc6ce1d2e56cd",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-west"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-green-west",
+          "prefabIds": [],
+          "revision": "a32bebcd56b3a223f5a140bbc44c3ecc746ec0484484fd3f1875292c9df3168c",
+          "renderFingerprint": "881c93fcc06e264614160d9acee0d5d45e87b02b2681cabdd9acc6ce1d2e56cd",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-west"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-green-south",
+      "batchId": "rail-trains",
+      "name": "Green train · south",
+      "prompt": "Watch the green composition travel south. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-south",
+      "fingerprint": "3a6c79ba20088c4df8e9118b9bfeade71449936daefe010319f849ad46b882e0",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-green-south",
+        "prefabIds": [],
+        "revision": "e04ddd6dcaf0b57c8f6d85a6f72bb8309de2f8e7c7ee92187f779a88577fec1a",
+        "renderFingerprint": "3a6c79ba20088c4df8e9118b9bfeade71449936daefe010319f849ad46b882e0",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-south"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-green-south",
+          "prefabIds": [],
+          "revision": "e04ddd6dcaf0b57c8f6d85a6f72bb8309de2f8e7c7ee92187f779a88577fec1a",
+          "renderFingerprint": "3a6c79ba20088c4df8e9118b9bfeade71449936daefe010319f849ad46b882e0",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-south"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-green-north",
+      "batchId": "rail-trains",
+      "name": "Green train · north",
+      "prompt": "Watch the green composition travel north. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-north",
+      "fingerprint": "b9b60046838c0edd1875b807f49dcd43553155e7ca544504acef11fa5c31f715",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-green-north",
+        "prefabIds": [],
+        "revision": "6561ecd581ed449b7e11b62e29e7996300d78ab05e5e08166afeb24b54eab85a",
+        "renderFingerprint": "b9b60046838c0edd1875b807f49dcd43553155e7ca544504acef11fa5c31f715",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-north"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-green-north",
+          "prefabIds": [],
+          "revision": "6561ecd581ed449b7e11b62e29e7996300d78ab05e5e08166afeb24b54eab85a",
+          "renderFingerprint": "b9b60046838c0edd1875b807f49dcd43553155e7ca544504acef11fa5c31f715",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-green-north"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-orange-east",
+      "batchId": "rail-trains",
+      "name": "Orange train · east",
+      "prompt": "Watch the orange composition travel east. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Orange has no audited vertical middle piece, so both axes use two end cars only. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-east",
+      "fingerprint": "7daee5909b9fd681ca0f30be5ed3a57458692b94a942a922cd050008a2a69109",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-orange-east",
+        "prefabIds": [],
+        "revision": "b150c66543f2138fae43f66d990e3a9bfadefe23fc7309318455089c516d9a49",
+        "renderFingerprint": "7daee5909b9fd681ca0f30be5ed3a57458692b94a942a922cd050008a2a69109",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-east"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-orange-east",
+          "prefabIds": [],
+          "revision": "b150c66543f2138fae43f66d990e3a9bfadefe23fc7309318455089c516d9a49",
+          "renderFingerprint": "7daee5909b9fd681ca0f30be5ed3a57458692b94a942a922cd050008a2a69109",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-east"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-orange-west",
+      "batchId": "rail-trains",
+      "name": "Orange train · west",
+      "prompt": "Watch the orange composition travel west. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Orange has no audited vertical middle piece, so both axes use two end cars only. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-west",
+      "fingerprint": "e90af852e57cfd0227e5669ce78f16277de71f28d467bfea5ce9c66197fe14ff",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-orange-west",
+        "prefabIds": [],
+        "revision": "57794e7f15369a84be14d9d6b07086c0a8c814880474b3359a9dd1343ea22570",
+        "renderFingerprint": "e90af852e57cfd0227e5669ce78f16277de71f28d467bfea5ce9c66197fe14ff",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-west"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-orange-west",
+          "prefabIds": [],
+          "revision": "57794e7f15369a84be14d9d6b07086c0a8c814880474b3359a9dd1343ea22570",
+          "renderFingerprint": "e90af852e57cfd0227e5669ce78f16277de71f28d467bfea5ce9c66197fe14ff",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-west"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-orange-south",
+      "batchId": "rail-trains",
+      "name": "Orange train · south",
+      "prompt": "Watch the orange composition travel south. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Orange has no audited vertical middle piece, so both axes use two end cars only. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-south",
+      "fingerprint": "fe8bf81303e61081e30061b4fa09af53099fe3c2dc8ded0dbfa7ada1a1ee839d",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-orange-south",
+        "prefabIds": [],
+        "revision": "859ba3463a6ad7f4732d72bb94ede36c33c8771933af90c89b1672f83b5fdbe0",
+        "renderFingerprint": "fe8bf81303e61081e30061b4fa09af53099fe3c2dc8ded0dbfa7ada1a1ee839d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-south"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-orange-south",
+          "prefabIds": [],
+          "revision": "859ba3463a6ad7f4732d72bb94ede36c33c8771933af90c89b1672f83b5fdbe0",
+          "renderFingerprint": "fe8bf81303e61081e30061b4fa09af53099fe3c2dc8ded0dbfa7ada1a1ee839d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-south"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-orange-north",
+      "batchId": "rail-trains",
+      "name": "Orange train · north",
+      "prompt": "Watch the orange composition travel north. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Orange has no audited vertical middle piece, so both axes use two end cars only. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-north",
+      "fingerprint": "3748fec591710acde87fce62964125fad0e6bfe81ec086e9761a4b18be08ac35",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-orange-north",
+        "prefabIds": [],
+        "revision": "067b6177eff413cbe56c0e108e5e1ba4a2abd3ef3dcb42521861df9d7281b2d7",
+        "renderFingerprint": "3748fec591710acde87fce62964125fad0e6bfe81ec086e9761a4b18be08ac35",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-north"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-orange-north",
+          "prefabIds": [],
+          "revision": "067b6177eff413cbe56c0e108e5e1ba4a2abd3ef3dcb42521861df9d7281b2d7",
+          "renderFingerprint": "3748fec591710acde87fce62964125fad0e6bfe81ec086e9761a4b18be08ac35",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-orange-north"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-white-east",
+      "batchId": "rail-trains",
+      "name": "White express · east",
+      "prompt": "Watch the white composition travel east. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-east",
+      "fingerprint": "13b378dc2e5a2fd03c1964071dc8bcf3be5b12baea5195e569e3843b3aa864d8",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-white-east",
+        "prefabIds": [],
+        "revision": "87fc8391235d6a74c8374864a07ba2fe90d387c265f2b7c48bfeba94864b2941",
+        "renderFingerprint": "13b378dc2e5a2fd03c1964071dc8bcf3be5b12baea5195e569e3843b3aa864d8",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-east"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-white-east",
+          "prefabIds": [],
+          "revision": "87fc8391235d6a74c8374864a07ba2fe90d387c265f2b7c48bfeba94864b2941",
+          "renderFingerprint": "13b378dc2e5a2fd03c1964071dc8bcf3be5b12baea5195e569e3843b3aa864d8",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-east"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-white-west",
+      "batchId": "rail-trains",
+      "name": "White express · west",
+      "prompt": "Watch the white composition travel west. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-west",
+      "fingerprint": "bbe20fd2e804445edc5f5fbf687ed45f961ca5da10bbbfb1cd9178a966d0e3a1",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-white-west",
+        "prefabIds": [],
+        "revision": "8806a72459fffae24e07ac0a8c5fb471b504b675604b0a40417fc15fc1b41b34",
+        "renderFingerprint": "bbe20fd2e804445edc5f5fbf687ed45f961ca5da10bbbfb1cd9178a966d0e3a1",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-west"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-white-west",
+          "prefabIds": [],
+          "revision": "8806a72459fffae24e07ac0a8c5fb471b504b675604b0a40417fc15fc1b41b34",
+          "renderFingerprint": "bbe20fd2e804445edc5f5fbf687ed45f961ca5da10bbbfb1cd9178a966d0e3a1",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-west"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-white-south",
+      "batchId": "rail-trains",
+      "name": "White express · south",
+      "prompt": "Watch the white composition travel south. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-south",
+      "fingerprint": "deb536e29182162361be34aaf40c80d3d2f670d6c9ce7a12ae5b1540bba94ab5",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-white-south",
+        "prefabIds": [],
+        "revision": "5373e646b6ca36c67e8e9ca78d322b7fa8bd32095e56cb039eb78f6bc7cb8430",
+        "renderFingerprint": "deb536e29182162361be34aaf40c80d3d2f670d6c9ce7a12ae5b1540bba94ab5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-south"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-white-south",
+          "prefabIds": [],
+          "revision": "5373e646b6ca36c67e8e9ca78d322b7fa8bd32095e56cb039eb78f6bc7cb8430",
+          "renderFingerprint": "deb536e29182162361be34aaf40c80d3d2f670d6c9ce7a12ae5b1540bba94ab5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-south"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-white-north",
+      "batchId": "rail-trains",
+      "name": "White express · north",
+      "prompt": "Watch the white composition travel north. Check ends, couplers, rail alignment and native scale. These are source pieces joined without rotation or mirroring; reversal uses the same physical body. Three source sections form the proposed train. Motion is a visual prototype, not train physics.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-north",
+      "fingerprint": "a5761e5fd9622c6170da384f8e0886c0467de7be886c037bafb0e1d4c0183b5e",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-white-north",
+        "prefabIds": [],
+        "revision": "a679428585b1ff3d5952307aa2c340a26a52c4af527f8f8249602bb4873acc0d",
+        "renderFingerprint": "a5761e5fd9622c6170da384f8e0886c0467de7be886c037bafb0e1d4c0183b5e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-north"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-white-north",
+          "prefabIds": [],
+          "revision": "a679428585b1ff3d5952307aa2c340a26a52c4af527f8f8249602bb4873acc0d",
+          "renderFingerprint": "a5761e5fd9622c6170da384f8e0886c0467de7be886c037bafb0e1d4c0183b5e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-white-north"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-through",
+      "batchId": "rail-plans",
+      "name": "Town through station · stopping services",
+      "prompt": "Paired side platforms with town access from below and a proposed pedestrian overpass at the left. Both trains arrive, dwell at the platforms and continue in their own travel direction. Cyan blocks are proposed access structures, not finished art or collision.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-through",
+      "fingerprint": "4d5b12e3b5af4b194189946aecbfc83d8fcb69da2082c9b749a23e8cbd0855e6",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-through",
+        "prefabIds": [],
+        "revision": "bc69cef46145e0bc137b4e9868d8f8d392af2b66be4d5eee334e486a32059f5a",
+        "renderFingerprint": "4d5b12e3b5af4b194189946aecbfc83d8fcb69da2082c9b749a23e8cbd0855e6",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-through"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-through",
+          "prefabIds": [],
+          "revision": "bc69cef46145e0bc137b4e9868d8f8d392af2b66be4d5eee334e486a32059f5a",
+          "renderFingerprint": "4d5b12e3b5af4b194189946aecbfc83d8fcb69da2082c9b749a23e8cbd0855e6",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-through"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-terminal",
+      "batchId": "rail-plans",
+      "name": "Terminal · reserved crossover and return",
+      "prompt": "A double-ended train arrives, pauses, reverses and crosses to the outbound track. Inspect the throat and train clearance. Amber turnout rails and cyan access are diagram geometry; coupler/facing changes still need your judgment. The body is not teleported between tracks.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-terminal",
+      "fingerprint": "87fa8539b1d7984b320298e47ad3238907267e1556e24d7620f2595d0ecde4f1",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-terminal",
+        "prefabIds": [],
+        "revision": "5c070bdf0136d08323edaa4b7e8848461ee02b49b5a43e4586ead0c526552ea6",
+        "renderFingerprint": "87fa8539b1d7984b320298e47ad3238907267e1556e24d7620f2595d0ecde4f1",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-terminal"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-terminal",
+          "prefabIds": [],
+          "revision": "5c070bdf0136d08323edaa4b7e8848461ee02b49b5a43e4586ead0c526552ea6",
+          "renderFingerprint": "87fa8539b1d7984b320298e47ad3238907267e1556e24d7620f2595d0ecde4f1",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-terminal"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-hub",
+      "batchId": "rail-plans",
+      "name": "Hub · local platforms and express pair",
+      "prompt": "Local trains stop on the lower pair; white express trains pass on the upper pair. Cyan pedestrian access crosses above all four tracks. This is a native-scale layout proposal, not a generated station or a proven bridge.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-hub",
+      "fingerprint": "02e35b8bda0780eae6036274c5648c708317b0e0a39360ec2547ae930f141559",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-hub",
+        "prefabIds": [],
+        "revision": "bf51d43383c0844aa01a93acfbc5e45dee37527f92b65486726e228c6980ffc4",
+        "renderFingerprint": "02e35b8bda0780eae6036274c5648c708317b0e0a39360ec2547ae930f141559",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-hub"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-hub",
+          "prefabIds": [],
+          "revision": "bf51d43383c0844aa01a93acfbc5e45dee37527f92b65486726e228c6980ffc4",
+          "renderFingerprint": "02e35b8bda0780eae6036274c5648c708317b0e0a39360ec2547ae930f141559",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-hub"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-network",
+      "batchId": "rail-plans",
+      "name": "Regional plan · towns, branch and express hubs",
+      "prompt": "Diagram, not a generated world: gold local pair links three towns, a branch serves a fourth, blue express tracks join the two larger hubs. Cyan crossings reserve bridge/tunnel work. Station access and route placement are proposed; no world generation changes are enabled.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-network",
+      "fingerprint": "02458ad09d95ce7cc34970e356f427e217f4db3b7eba68ecd3522554d63698bf",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-network",
+        "prefabIds": [],
+        "revision": "b3906089723084cc48939ffae69106a779fa5ca5939a5d1810a407c288c0fc3b",
+        "renderFingerprint": "02458ad09d95ce7cc34970e356f427e217f4db3b7eba68ecd3522554d63698bf",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-network"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-network",
+          "prefabIds": [],
+          "revision": "b3906089723084cc48939ffae69106a779fa5ca5939a5d1810a407c288c0fc3b",
+          "renderFingerprint": "02458ad09d95ce7cc34970e356f427e217f4db3b7eba68ecd3522554d63698bf",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-network"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-bend",
+      "batchId": "rail-plans",
+      "name": "Long-car bend · cardinal-pose feasibility",
+      "prompt": "An intentionally exposed feasibility test: each section follows the curve at its own distance, using only native horizontal/vertical poses. Watch the gaps, overlap and facing pop. Amber rails are proposed geometry, not finished tile art. Approving this study does not certify a production turning solution.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bend",
+      "fingerprint": "55e68c2f7ee81caec946c6e7017682c32d0c1a29956b262f86fb2b5f1cdc9482",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-bend",
+        "prefabIds": [],
+        "revision": "4766c314e46d4df51a68a9b261f26f4d64e3d7c8f6cd98631967583281ab4fbb",
+        "renderFingerprint": "55e68c2f7ee81caec946c6e7017682c32d0c1a29956b262f86fb2b5f1cdc9482",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bend"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-bend",
+          "prefabIds": [],
+          "revision": "4766c314e46d4df51a68a9b261f26f4d64e3d7c8f6cd98631967583281ab4fbb",
+          "renderFingerprint": "55e68c2f7ee81caec946c6e7017682c32d0c1a29956b262f86fb2b5f1cdc9482",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bend"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-crossover",
+      "batchId": "rail-plans",
+      "name": "Shallow crossover · carriage clearance study",
+      "prompt": "Carriages follow a shallow lane change. With no diagonal train poses, the bodies stay cardinal; inspect the sideways sliding and coupler alignment. Amber switch rails are a schematic gap in the art kit. This is the experiment to review before an overworld terminal.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-crossover",
+      "fingerprint": "d372ab63cee117d3774d020c8627a678294033415029f0f9a4c0451a393a60a9",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-crossover",
+        "prefabIds": [],
+        "revision": "112eb16dbac2bc03509f2611ce47a1324088f13f72633064f042c5bf7bbcf260",
+        "renderFingerprint": "d372ab63cee117d3774d020c8627a678294033415029f0f9a4c0451a393a60a9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-crossover"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-crossover",
+          "prefabIds": [],
+          "revision": "112eb16dbac2bc03509f2611ce47a1324088f13f72633064f042c5bf7bbcf260",
+          "renderFingerprint": "d372ab63cee117d3774d020c8627a678294033415029f0f9a4c0451a393a60a9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-crossover"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-bridge",
+      "batchId": "rail-structures",
+      "name": "Rail bridge · deck, water and clearance proposal",
+      "prompt": "Native train and rails on a proposed blue-grey bridge deck over water. Deck, piers and banks are schematic placeholder geometry: this review is for layout and train clearance, not finished bridge art or underpass physics. No suitable complete rail-bridge kit has been verified.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bridge",
+      "fingerprint": "3759e12603b9b083859ada3fa16e25e8849d7b7a96a55e744ee512ad0c7b8230",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-bridge",
+        "prefabIds": [],
+        "revision": "44856ce37b48181c43056d250c8a166fece66f84709ec981e4cad3bf051c964d",
+        "renderFingerprint": "3759e12603b9b083859ada3fa16e25e8849d7b7a96a55e744ee512ad0c7b8230",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bridge"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-bridge",
+          "prefabIds": [],
+          "revision": "44856ce37b48181c43056d250c8a166fece66f84709ec981e4cad3bf051c964d",
+          "renderFingerprint": "3759e12603b9b083859ada3fa16e25e8849d7b7a96a55e744ee512ad0c7b8230",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-bridge"
+        }
+      }
+    },
+    {
+      "id": "pattern:rail-v1-tunnel",
+      "batchId": "rail-structures",
+      "name": "Tunnel portal · vertical entry and cutaway",
+      "prompt": "Native double tunnel cornice over two vertical tracks. Watch trains enter/leave; cutaway exposes the hidden body. Surrounding mountain and tunnel floor are layout placeholders. Portal fit and visual hiding are reviewable; floor/ceiling collision and rider handling are not implemented.",
+      "kind": "railway",
+      "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-tunnel",
+      "fingerprint": "7da64e68c6799ed93616636cd47744bfd39bc549cfea9fdc549ec892b2352cfd",
+      "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+      "review": {
+        "scene": "pattern",
+        "caseId": "rail-v1-tunnel",
+        "prefabIds": [],
+        "revision": "d31f2537e3da81bb6b73583dad2a32bb05e91221212f4d527a1f89ba548d1e1c",
+        "renderFingerprint": "7da64e68c6799ed93616636cd47744bfd39bc549cfea9fdc549ec892b2352cfd",
+        "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-tunnel"
+      },
+      "art": {
+        "sheetId": "railway-review-v1",
+        "fingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+        "sheetSize": [
+          1024,
+          656
+        ],
+        "rect": [
+          0,
+          0,
+          1024,
+          656
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "rail-v1-tunnel",
+          "prefabIds": [],
+          "revision": "d31f2537e3da81bb6b73583dad2a32bb05e91221212f4d527a1f89ba548d1e1c",
+          "renderFingerprint": "7da64e68c6799ed93616636cd47744bfd39bc549cfea9fdc549ec892b2352cfd",
+          "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-tunnel"
         }
       }
     },
@@ -25290,5 +26665,5 @@
       }
     }
   ],
-  "inputDigest": "e97f4fd2836c6330f711bd511d244c69d491c2d43449ffc452a277cee62512b9"
+  "inputDigest": "d4286f5ed2a9e1e6de578bda1762416bee64685587454813d2e286e231abd4c3"
 }

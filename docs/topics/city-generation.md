@@ -15,6 +15,11 @@ Selectable regional-v11 adds [gentle traffic and roof riding](vehicles.md) using
 v5's frozen dense-neighborhood terrain and a separate approved vehicle bank.
 It does not promote the v7–v10 city candidates or change the default revision.
 
+[Generated railways](trains.md) are planned, not implemented. Their future revision
+must reserve town stations, rail corridors, structure approaches and street/walking
+access together before placing buildings. The railway parent plan owns this new
+work; existing city revisions and promotion banks remain unchanged.
+
 ## Review checkpoints and frozen output
 
 ### Street palette and road foundations
