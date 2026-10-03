@@ -334,9 +334,78 @@ The pattern editor browser assertion now polls committed camera state after
 input rather than racing React's update; its 15 checks also passed across
 three repeated runs. Every streaming lane passes `--assert-ready`.
 
-Next hardware step: repeat these fixtures on a representative physical phone,
-then set timing regression limits from repeated matched runs with measured
-variance. The CI traversal assertions enforce coverage and bounds now; timing
-thresholds should not be inferred from a single desktop run. Browser-hosted
-P2P still uses its existing host; moving it across the same boundary is a future
+The CI traversal assertions enforce coverage and bounds. Browser-hosted P2P
+still uses its existing host; moving it across the same boundary is a future
 extension, not needed for the completed single-player split.
+
+## Physical Android follow-up
+
+The user supplied attached phones for real-device validation. On 2026-10-03,
+the Machine Control Android handheld doctor confirmed an authorized, awake,
+unlocked Pixel 7a. The test used Android 17 (API 37), Chrome 154.0.8037.57,
+portrait orientation, a native 411 × 789 CSS-pixel game viewport and DPR 2.625.
+There was no viewport or CPU emulation. The device was charging; battery
+temperature was 25°C before and 28.5°C afterward, with thermal status 0 afterward.
+This is short-run, plugged-in evidence, not a sustained thermal/battery test.
+
+The runner now accepts `--cdp`, a dedicated `--port`, `--device` and `--touch`.
+It attaches with Playwright's `noDefaults` option, opens only its own test tab,
+preserves the native viewport and drives the real joystick and sprint button
+with CDP touch gestures. It owns an isolated Vite origin, clears only that
+origin's test storage, closes its tab and disconnects without closing Chrome.
+Task-owned USB forwarding was removed afterward; the final device doctor was
+ready. No browser profile, device settings or installed applications changed.
+
+After selecting and checking the phone through Machine Control, arrange private
+ADB reverse forwarding for the benchmark HTTP port and forwarding for Chrome's
+DevTools socket, then run:
+
+```bash
+npm run streaming:bench -- --cdp="$PHONE_CDP_URL" --port="$PHONE_HTTP_PORT" \
+  --device="model / OS" --touch --assert-ready --output="$PHONE_REPORT_DIR"
+```
+
+The USB endpoints and exact device selector stay in local controller state,
+not benchmark reports or Git. Remove those task-owned routes after the run.
+Add `--no-metrics` for the instrumentation comparison. The browser's reduced
+user-agent reports Android 10; the OS version above came from the device's
+system property, not that user-agent.
+
+Three consecutive instrumented captures of both fixtures and a separate v10
+diagnostics-disabled capture ran on clean revision `d8fe0a4`. The
+[complete phone evidence](../benchmarks/012-streaming-android.json) includes
+native display metadata, all stage samples, and the interior check.
+
+| Scenario | v4, three runs | v10, three runs |
+|---|---:|---:|
+| Walking / sprinting / reversal visible gaps | 0 in every sample | 0 in every sample |
+| Movement frame p95 | about 16.8 ms | about 16.8 ms |
+| Sprint render callback p95 | 3.2–3.5 ms | 3.2–3.3 ms |
+| Zoom-out frame p95 | 33.3 ms | 16.8 ms |
+| Cold-entry unfinished-cache frames | 24–28 | 19–20 |
+
+Sprints cover approximately 741–751 world pixels. The diagnostics-disabled v10
+run also has no movement gaps and 16.8 ms movement frame p95; its sprint render
+p95 is 3.3 ms. The existing interior benchmark, adapted temporarily to the same
+native CDP connection and touch input, successfully enters, edits, moves 12.8
+pixels inside, and returns to the street. Outdoor, indoor and edited-room frame
+p95 are 16.7–16.8 ms, with no browser errors. Gameplay screenshots were inspected.
+
+The v4 zoom-out result is repeatable: 10–13 of 180 frame intervals exceed 25 ms,
+with no missing terrain or long tasks. Render callback p95 is only 4.1–4.3 ms
+and update p95 is below 1 ms in those samples. These counters do not identify
+the cause; targeted frame/compositor tracing is the next performance task.
+Cold entry also remains visible work, including 0–3 missing-data frames. It
+should get a separate readiness/presentation treatment. The development server's
+startup/module loading is not a production cold-start benchmark.
+
+Phone and desktop timings are not a matched speed comparison: viewport, input,
+browser and scene population differ. This validates native Android touch play
+and streaming coverage. It does not establish iOS parity, landscape behavior,
+performance on lower-end phones or a universal frame-time gate. No new runtime
+optimization or WASM work was justified by this check.
+
+The runner extension passed all three typechecks, 1,192 unit tests, Biome
+(existing warnings), and an isolated desktop touch traversal in addition to
+the physical-device runs. Runtime sources and approved rendering assets did
+not change in this follow-up.

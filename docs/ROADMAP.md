@@ -3,14 +3,14 @@
 ## Streaming Performance and Single Player Execution
 
 - Implemented: repeatable traversal diagnostics, shared single-player authority in a dedicated browser Worker, bounded ordered transport and terrain cache preparation ahead of the camera. The v4/v10 ordinary traversal has zero missing or unfinished visible chunks; frame p95 remains about 16.7–16.8 ms in the headless desktop captures. See the [performance and Worker plan and evidence](tactical/012-streaming-performance-and-local-server-worker.md).
-- Next: capture matched runs on a representative physical phone and establish hardware-specific timing gates. Cold entry remains separate from ordinary streaming. P2P authority can adopt the same host boundary when needed.
+- Physical Android validated: three Pixel 7a touch traversals per fixture have zero movement gaps and about 16.8 ms frame p95. Next: trace the repeatable v4 zoom-out pacing (33.3 ms p95), improve cold-entry presentation, and broaden device coverage before setting timing gates. P2P authority can adopt the same host boundary when needed.
 - Consider WASM only if measured remaining compute costs or an explicit native/browser sharing requirement justify it.
 
 ## Regional Generation and World Explorer
 
 - Implemented: versioned Classic/Island/Flat/Regional generators, bounded map and exact tile previews, shared district and countryside plans, authoritative Play here arrivals, persistent building interiors, and generated inhabitants. See the [regional plan](tactical/004-world-explorer-and-regional-generation-plan.md) and [generator plan](tactical/005-generator-profiles-and-shared-tile-preview-plan.md) for implementation evidence.
 - Next: a playable dense city block, then street furniture/parking, parks and squares, larger commercial buildings, farmers markets and richer pedestrian life. See the [phased city plan](tactical/007-dense-city-districts-and-street-life-plan.md) and [checkpoint guide](world-explorer.md).
-- Still outstanding: profiling on a representative physical phone; automated phone layouts and desktop CPU throttling are separate evidence.
+- Physical Pixel 7a profiling is recorded in the streaming plan. Lower-end phones, iOS and sustained thermal runs remain additional coverage; automated phone layouts and desktop CPU throttling are separate evidence.
 - Future extensions: additional floors, room layouts, inhabitants' schedules, traffic, and economies.
 
 ## Asset Protection
