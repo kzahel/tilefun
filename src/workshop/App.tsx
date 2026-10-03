@@ -25,6 +25,7 @@ import type {
 } from "./WorkshopTypes.js";
 import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
+const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
@@ -225,6 +226,7 @@ export function App() {
           <NavLink to="/requests">
             Requests & fixes <span className="nav-count">{inbox.data?.requests.length ?? "—"}</span>
           </NavLink>
+          <NavLink to="/play-ideas">💡 Play ideas</NavLink>
           <NavLink to="/activity">Activity & history</NavLink>
           <NavLink to="/tools">All tools</NavLink>
           <p className="nav-heading">MAKE & EXPLORE</p>
@@ -325,6 +327,14 @@ export function App() {
                 element={
                   <AuthGate>
                     <InboxPage />
+                  </AuthGate>
+                }
+              />
+              <Route
+                path="/play-ideas"
+                element={
+                  <AuthGate>
+                    <PlayIdeasPage />
                   </AuthGate>
                 }
               />

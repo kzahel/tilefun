@@ -23,6 +23,9 @@ those editor controllers can become components later.
 - **Requests & fixes:** source-art ideas and Needs changes reports from both old
   feedback stores. Open a thread for original context, full history, screenshots,
   replies and status. Resolving a request never approves the art.
+- **Play ideas:** anonymous gameplay suggestions with text, captured game images,
+  spoken readback and New/Planned/Done status. Only the owner can read or manage
+  them. See [Play ideas](topics/play-ideas.md) for capture, delivery and limits.
 - **Activity:** the combined append-only history, newest first, with pagination.
 - **All tools:** descriptions and useful shortcuts to every registered tool,
   including the complete Modern Exteriors sheet and packed Interiors atlas.
@@ -128,7 +131,9 @@ See [the phased plan](tactical/011-shared-pattern-brushes-and-room-drawing.md).
 ## Owner login
 
 Public game/art rendering stays accessible. On public and LAN hosts, private
-feedback reads and **all** new and legacy writes require the owner cookie.
+feedback reads and all new and legacy **review** writes require the owner cookie.
+The separate public `POST /tilefun/api/play-ideas` endpoint accepts bounded
+anonymous gameplay suggestions; reading or managing those ideas remains private.
 There is no registration.
 
 Direct localhost access skips login automatically: `localhost`, `127.0.0.1` and

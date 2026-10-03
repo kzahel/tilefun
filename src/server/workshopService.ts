@@ -21,6 +21,7 @@ import type {
 import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
 import { InteriorReviewStore, interiorReviewHandler } from "./interiorReviewPlugin.js";
 import { outdoorAnnotation } from "./outdoorAnnotations.js";
+import { PlayIdeasService } from "./playIdeas.js";
 import { HttpError, jsonBody, jsonResponse, WorkshopAuth } from "./workshopAuth.js";
 import { loadWorkshopManifest, workshopInputDigest } from "./workshopManifest.js";
 
@@ -37,6 +38,7 @@ export class WorkshopService {
   private applied = new Set<string>();
   private manifestCache: ReturnType<typeof this.readManifest> | undefined;
   readonly auth: WorkshopAuth;
+  readonly ideas: PlayIdeasService;
   readonly art: ArtNoteStore;
   readonly interiors: InteriorReviewStore;
   constructor(
@@ -52,6 +54,7 @@ export class WorkshopService {
     this.auth = options.auth ?? new WorkshopAuth();
     this.art = options.art ?? new ArtNoteStore();
     this.interiors = options.interiors ?? new InteriorReviewStore();
+    this.ideas = new PlayIdeasService(join(this.directory, "play-ideas"), this.auth);
   }
   private get directory() {
     return this.options.directory ?? process.env.WORKSHOP_DATA_DIR ?? "data/workshop";
@@ -265,6 +268,7 @@ export class WorkshopService {
   }
   async handle(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
     if (await this.auth.handle(req, res)) return true;
+    if (await this.ideas.handle(req, res)) return true;
     const url = new URL(req.url ?? "/", "http://localhost"),
       legacy = ["/tilefun/api/art-notes", "/tilefun/api/interior-review"].includes(url.pathname);
     if (!legacy && !url.pathname.startsWith("/tilefun/api/workshop/")) return false;

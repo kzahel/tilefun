@@ -22,6 +22,9 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
+import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
+import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
+import { IdeaScene } from "../scenes/IdeaScene.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
@@ -86,6 +89,7 @@ export interface GameClientOptions {
 export class GameClient {
   readonly performanceMetrics = performanceMetrics;
   private canvas: HTMLCanvasElement;
+  private stopIdeaDelivery: (() => void) | undefined;
   private ctx: CanvasRenderingContext2D;
   private camera: Camera;
   private loop: GameLoop;
@@ -429,6 +433,7 @@ export class GameClient {
           this.stateView,
           this.initDone &&
             !this.scenes.has(WorldMapScene) &&
+            !this.scenes.has(IdeaScene) &&
             !this.scenes.has(MenuScene) &&
             !this.scenes.has(CatalogScene) &&
             !this.scenes.has(InteriorCatalogScene),
@@ -454,6 +459,7 @@ export class GameClient {
       }
     });
     this.createEditorButton();
+    this.stopIdeaDelivery = startIdeaDelivery();
     this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
     this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
     this.actions.attach();
@@ -783,6 +789,7 @@ export class GameClient {
   }
 
   destroy(): void {
+    this.stopIdeaDelivery?.();
     this.tileRenderer.clear();
     this.sceneFrame.clear();
     this.doorControl.destroy();
@@ -1119,7 +1126,19 @@ export class GameClient {
     `;
 
     let panelOpen = false;
+    let ideaSnapshot: IdeaSnapshot | undefined;
     const openPanel = () => {
+      try {
+        const position = this.stateView.playerEntity.position;
+        ideaSnapshot = captureIdea(
+          this.canvas,
+          this.mainMenu.currentWorldId ?? "",
+          position.wx,
+          position.wy,
+        );
+      } catch {
+        ideaSnapshot = undefined;
+      }
       panelOpen = true;
       backdrop.style.display = "";
       panel.style.transform = "translateX(0)";
@@ -1148,6 +1167,17 @@ export class GameClient {
     this.mapButton = mapBtn;
 
     // Menu items
+    const ideaBtn = document.createElement("button");
+    ideaBtn.textContent = "💡 Idea";
+    ideaBtn.style.cssText = MENU_BTN_STYLE;
+    ideaBtn.onclick = () => {
+      closePanel();
+      if (!ideaSnapshot) {
+        ideaToast("Couldn't take a game picture. Open the menu and try again.");
+        return;
+      }
+      this.scenes.push(new IdeaScene(ideaSnapshot));
+    };
     const editBtn = document.createElement("button");
     editBtn.textContent = "Play";
     editBtn.style.cssText = MENU_BTN_STYLE;
@@ -1212,7 +1242,16 @@ export class GameClient {
     toolsLink.textContent = "Tilefun Workshop";
     toolsLink.setAttribute("data-testid", "open-tools-index");
     toolsLink.style.cssText = `${MENU_BTN_STYLE} display: block; text-decoration: none;`;
-    panel.append(editBtn, menuBtn, toolsLink, debugBtn, propEditorBtn, interiorsBtn, workbenchBtn);
+    panel.append(
+      ideaBtn,
+      editBtn,
+      menuBtn,
+      toolsLink,
+      debugBtn,
+      propEditorBtn,
+      interiorsBtn,
+      workbenchBtn,
+    );
 
     // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
     const vrBtn = document.createElement("button");

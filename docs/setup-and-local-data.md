@@ -103,12 +103,14 @@ for the versioning contract.
 
 ## Transfer shared review history
 
-These append-only files hold the server records:
+These files hold the server records. Review histories are append-only; play ideas
+are individual records whose status can change and which the owner can delete:
 
 | Review system | Default file | Directory override |
 | --- | --- | --- |
 | Art notes and Building Lab building/street/surface/district approvals/reports | `data/art-notes/notes.ndjson` | `ART_NOTES_DIR` |
 | Room Builder and Furniture Movement Lab reviews, including stored screenshots | `data/interior-review/feedback.ndjson` | `INTERIOR_REVIEW_DIR` |
+| Play ideas (text, PNG and status) | `data/workshop/play-ideas/<UUID>.json` | `WORKSHOP_DATA_DIR` parent |
 | Workshop commands and discussion | `data/workshop/events.ndjson` | `WORKSHOP_DATA_DIR` |
 
 Vite development, `npm run preview` and standalone Node provide the same
@@ -116,7 +118,10 @@ protected art/interior/Workshop APIs. Static hosting of `dist/` alone provides
 none. Standalone defaults all private directories beneath `DATA_DIR`; Vite uses
 the defaults above. Explicit overrides take precedence.
 
-Copy all three histories together, while writes are stopped. Workshop commands
+Back up `workshop/play-ideas/` too when transferring gameplay suggestions. It contains
+private text and game pictures, with no credentials or audio.
+
+Copy all three review histories together, while writes are stopped. Workshop commands
 materialize events in the original stores; preserving both avoids lost discussion
 or retry identity. Exclude `sessions.json`, `owner.json` and `initial-login.txt`
 from review archives. Configure the new machine's own login; sessions do not
@@ -182,6 +187,7 @@ values before replacing them. This is a manual transfer, not cross-origin sync.
 
 | Tool/state | Local Storage keys |
 | --- | --- |
+| Play idea unfinished draft | `tilefun.idea-draft.v1` (unsent submissions use IndexedDB `tilefun-play-ideas-v1`) |
 | Workshop drafts, pins, per-batch queues and native outbox | `tilefun.workshop.v1` |
 | Art Workbench view, drafts, cached notes and outbox | `tilefun.art-workbench.v1` |
 | Building Lab shared feedback cache/outbox and note drafts | `tilefun.building-feedback.v1`, `tilefun.building-drafts.v1` |

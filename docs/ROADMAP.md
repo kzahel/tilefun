@@ -13,6 +13,7 @@ implementation scope and evidence.
 | Streaming and execution | Shared single-player Worker authority, terrain preparation, desktop and Pixel 7a traversal evidence | Bound offscreen raster work, improve cold entry and broaden device coverage; [performance](topics/performance.md) |
 | Regional cities | Shared versioned explorer/game generation, approved dense neighborhood and v6 commercial streets | Review thirteen staged v7–v10 parking/park/architecture/pedestrian views; [city generation](topics/city-generation.md) |
 | Workshop and source art | Unified review inbox, authenticated feedback, source catalog and outdoor metadata/scene annotations | Address exact recorded feedback and review candidate geometry; [art review](topics/art-review.md) |
+| Play ideas | Public text/screenshot suggestions, hold-to-speak input, spoken proofreading and private Workshop management | Try recognition and readback on the child's device; [play ideas topic](topics/play-ideas.md) |
 | Patterns and interiors | Shared semantic brushes, persistent gameplay room editing, furniture and static-layer caching | Review gameplay room editing and tree kit; explicit prefab import/promotion next; [patterns and interiors](topics/patterns-and-interiors.md) |
 
 New worlds still default to regional-v4. Later city revisions are selectable

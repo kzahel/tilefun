@@ -12,6 +12,11 @@ const useHttps = process.env.HTTPS === "1";
 
 export default defineConfig({
   base: "/tilefun/",
+  define: {
+    "import.meta.env.VITE_BUILD_ID": JSON.stringify(
+      process.env.VITE_BUILD_ID ?? new Date().toISOString(),
+    ),
+  },
   plugins: [
     privateDataPlugin(root),
     useHttps && basicSsl(),

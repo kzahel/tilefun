@@ -1,0 +1,144 @@
+.idea-dialog {
+  box-sizing: border-box;
+  margin: auto;
+  width: min(540px, calc(100vw - 20px));
+  max-height: calc(100dvh - 20px);
+  overflow-y: auto;
+  padding: 20px;
+  border: 3px solid #e6b84f;
+  border-radius: 24px;
+  background: #fff8e5;
+  color: #273e39;
+  font:
+    18px / 1.4 system-ui,
+    sans-serif;
+  text-align: center;
+  box-shadow: 0 12px 70px #0008;
+}
+.idea-dialog::backdrop {
+  background: #102c38b8;
+}
+.idea-dialog h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+}
+.idea-dialog button,
+.idea-dialog select,
+.idea-dialog textarea {
+  font: inherit;
+}
+.idea-dialog button {
+  min-height: 56px;
+  border-radius: 16px;
+  border: 2px solid #597a6c;
+  padding: 12px 18px;
+  background: #fff;
+  color: #273e39;
+  cursor: pointer;
+}
+.idea-dialog button:focus-visible {
+  outline: 4px solid #5878d5;
+  outline-offset: 3px;
+}
+.idea-dialog button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.idea-picture {
+  max-width: 180px;
+  max-height: 105px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 12px;
+}
+.idea-dialog .idea-mic {
+  width: 100%;
+  min-height: 132px;
+  font-size: 25px;
+  font-weight: 700;
+  background: #f7d575;
+  touch-action: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.idea-mic[data-listening="true"] {
+  background: #e5aab0;
+  animation: idea-pulse 1s ease-in-out infinite alternate;
+}
+@keyframes idea-pulse {
+  to {
+    box-shadow: inset 0 0 0 7px #b84f61;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .idea-mic[data-listening="true"] {
+    animation: none;
+    box-shadow: inset 0 0 0 5px #b84f61;
+  }
+}
+.idea-dialog .idea-bubble {
+  width: 100%;
+  background: #e6f0fb;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.idea-actions {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+}
+.idea-actions button {
+  flex: 1;
+}
+.idea-dialog .idea-send {
+  background: #c8eabf;
+  font-weight: 700;
+}
+.idea-dialog textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100px;
+}
+.idea-dialog details,
+.idea-privacy {
+  font-size: 13px;
+  text-align: left;
+  margin-top: 12px;
+}
+.idea-dialog select {
+  max-width: 100%;
+  margin: 10px;
+}
+.idea-status {
+  min-height: 48px;
+  margin: 12px 0;
+}
+.idea-toast {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 16px;
+  border-radius: 16px;
+  background: #fff8e5;
+  color: #273e39;
+  font: 18px system-ui;
+  box-shadow: 0 4px 25px #0005;
+  max-width: 90vw;
+}
+@media (max-height: 500px) {
+  .idea-dialog {
+    padding: 12px;
+  }
+  .idea-picture {
+    float: right;
+    max-width: 100px;
+    max-height: 64px;
+  }
+  .idea-dialog .idea-mic {
+    min-height: 80px;
+  }
+}

@@ -7,11 +7,21 @@ export class AudioManager {
   private ctx: AudioContext | null = null;
   private buffers = new Map<string, AudioBuffer>();
   private unlocked = false;
+  private master: GainNode | null = null;
+
+  /** Quiet game sounds while the Idea dialog owns the microphone/readback. */
+  setIdeaDucking(enabled: boolean): void {
+    this.ensureContext();
+    if (this.master && this.ctx)
+      this.master.gain.setTargetAtTime(enabled ? 0.1 : 1, this.ctx.currentTime, 0.03);
+  }
 
   /** Create or return the AudioContext. Safe to call multiple times. */
   ensureContext(): AudioContext {
     if (!this.ctx) {
       this.ctx = new AudioContext();
+      this.master = this.ctx.createGain();
+      this.master.connect(this.ctx.destination);
     }
     return this.ctx;
   }
@@ -89,7 +99,7 @@ export class AudioManager {
 
     source.connect(gain);
     gain.connect(panner);
-    panner.connect(this.ctx.destination);
+    panner.connect(this.master ?? this.ctx.destination);
     source.start();
   }
 }

@@ -75,6 +75,17 @@ regenerate them with `npm run assets:app-icons` when it changes.
 Launcher checks cover both Vite dev serving (used by the live site) and production
 preview; public-asset links let Vite apply the deployment prefix exactly once.
 
+## Play ideas
+
+Open the game menu and choose **💡 Idea**. Enable the microphone, hold the big
+button to speak, then release. Tap the resulting words to hear them aloud;
+**Try again** replaces them and **Send** sends the text plus a picture of the game.
+Tilefun stores no audio. Browser speech support varies; typing is also available.
+Unsent ideas stay on the device and retry while the game is open. Submitting needs
+no login; the owner reviews them privately in
+[Workshop → Play ideas](https://tilefun.graehlarts.com/tilefun/workshop.html#/play-ideas).
+See [Play ideas](docs/topics/play-ideas.md) for storage, limits and browser details.
+
 ## Asset Credits
 
 - **Modern Exteriors** by LimeZu — [itch.io](https://limezu.itch.io/modernexteriors)

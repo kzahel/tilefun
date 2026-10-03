@@ -27,6 +27,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [013 Renderer and allocation audit](013-renderer-boundary-and-allocation-audit.md) | Audit, grass cache lifetime and frame reuse complete; scheduler allocation and renderer-boundary slices next; [performance topic](../topics/performance.md) |
 | [014 WebRTC delivery validation](014-webrtc-delivery-validation.md) | Pre-fix audit; bounded fix delivered in 015; [networking topic](../topics/multiplayer-networking.md) |
 | [015 WebRTC ordered delivery](015-webrtc-ordered-delivery.md) | Reliable routing fixes audited defects; broader investigation deferred; [networking topic](../topics/multiplayer-networking.md) |
+| [016 Play ideas](016-play-ideas.md) | Delivered: hold-to-speak ideas, spoken proofreading, screenshots and private Workshop management; [play ideas topic](../topics/play-ideas.md) |
 
 ## Earlier plans
 

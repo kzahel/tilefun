@@ -1200,3 +1200,25 @@ time {
   max-width: 100%;
   max-height: 480px;
 }
+
+.play-idea-list {
+  list-style: none;
+  padding: 0;
+}
+.play-idea-list li {
+  margin: 8px 0;
+}
+.play-idea-list > li > button {
+  width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.play-idea-detail {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid var(--border, #777);
+  border-radius: 12px;
+}
+.play-idea-detail dd {
+  overflow-wrap: anywhere;
+}
