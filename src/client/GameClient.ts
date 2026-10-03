@@ -18,6 +18,7 @@ import { GameLoop } from "../core/GameLoop.js";
 import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
 import { Time } from "../core/Time.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
@@ -81,6 +82,7 @@ export interface GameClientOptions {
 }
 
 export class GameClient {
+  readonly performanceMetrics = performanceMetrics;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private camera: Camera;

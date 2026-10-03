@@ -205,3 +205,19 @@ queues/memory, and normal behavior across lifecycle transitions. Preserve saved
 generation output and existing approved rendering identities. Run repository
 typechecks, unit tests, lint, build and relevant browser coverage for runtime
 slices. Record remaining hardware evidence and implementation decisions here.
+
+## Implementation record
+
+- Baseline harness: `npm run streaming:bench -- --output=/tmp/tilefun-streaming`
+  owns an isolated Vite server and bundled Chromium; `--headed`, `--cpu=4`,
+  `--versions=regional-v10` and `--no-metrics` select comparison lanes.
+  `TILEFUN_DEV_URL` optionally selects an existing development server.
+  Stage timings retain at most 512 samples per name and are disabled by default.
+  `docs/benchmarks/012-streaming-before.json` records the instrumented baseline.
+  Both fixtures traversed approximately 739 pixels during sprinting. V4/v10
+  sprint samples had 36/17 frames without completed visible caches, with no
+  missing chunk data and approximately 16.7/16.8 ms p95 frame intervals.
+  Cold-entry counters include the transition from the initially loaded world;
+  their displacement is a spawn transition, not walking throughput.
+  Baseline validation: all three typechecks, 1,172 unit tests, production build,
+  and 11 browser smoke tests passed. Rendered candidate identities were unchanged.

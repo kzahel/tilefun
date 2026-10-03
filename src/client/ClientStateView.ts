@@ -1,4 +1,5 @@
 import { TICK_RATE } from "../config/constants.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import {
@@ -238,7 +239,9 @@ export class RemoteStateView implements ClientStateView {
     this._stateAppliedThisTick = false;
     if (this._pendingStates.length === 0) return;
     for (const msg of this._pendingStates) {
+      const timing = performanceMetrics.start();
       this.applyMessage(msg);
+      performanceMetrics.end("client.apply", timing);
     }
     this._pendingStates.length = 0;
     this._stateAppliedThisTick = true;

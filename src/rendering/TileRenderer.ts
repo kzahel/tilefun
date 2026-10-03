@@ -11,6 +11,7 @@ import {
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
 } from "../config/constants.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { commercialSurfacePieces, isCommercialSurface } from "../road/CommercialCitySurface.js";
 import { denseCitySurfacePieces, isCitySurface } from "../road/DenseCitySurface.js";
 import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
@@ -237,6 +238,7 @@ export class TileRenderer {
     focalRow: number,
     getGlobalRoad?: (tx: number, ty: number) => number,
   ): number {
+    const timing = performanceMetrics.start();
     let state = this.cacheBuildStates.get(key);
     if (!state) {
       state = {
@@ -279,6 +281,7 @@ export class TileRenderer {
       this.cacheBuildStates.delete(key);
     }
 
+    performanceMetrics.end("client.cache", timing);
     return rowBudget - usedRows;
   }
 

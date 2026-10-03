@@ -1,6 +1,7 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { baseGameMod } from "../game/base-game.js";
@@ -480,12 +481,14 @@ export class GameServer {
 
   /** Run one simulation tick. Iterates ALL active realms. */
   tick(dt: number): void {
+    const timing = performanceMetrics.start();
     const scaledDt = dt * this.timeScale;
     const dormantIds = new Set(this.dormantSessions.keys());
     for (const realm of this.realms.values()) {
       realm.tick(scaledDt, this.transport, this.broadcasting, dormantIds);
     }
     this.checkIdleRealms();
+    performanceMetrics.end("server.tick", timing);
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */

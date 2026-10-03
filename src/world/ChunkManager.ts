@@ -1,4 +1,5 @@
 import { RENDER_DISTANCE, UNLOAD_DISTANCE } from "../config/constants.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { Chunk } from "./Chunk.js";
@@ -172,7 +173,9 @@ export class ChunkManager {
   /** Generate terrain for a chunk using the attached generator. */
   private generate(chunk: Chunk, cx: number, cy: number): void {
     if (this.generator) {
+      const timing = performanceMetrics.start();
       this.generator.generate(chunk, cx, cy);
+      performanceMetrics.end("server.generate", timing);
     }
   }
 

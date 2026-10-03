@@ -1,4 +1,5 @@
 import { GameClient } from "./client/GameClient.js";
+import { performanceMetrics } from "./diagnostics/PerformanceMetrics.js";
 import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
 import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
@@ -27,6 +28,7 @@ const canvas: HTMLCanvasElement = canvasEl;
 // ?join=PEER_ID          → P2P guest: connect to host via WebRTC DataChannel
 // (neither)              → single-player, in-browser server
 const params = new URLSearchParams(window.location.search);
+performanceMetrics.enabled = params.has("perf");
 const serverParam = params.get("server"); // e.g. "localhost:3001"
 const multiplayer = params.has("multiplayer");
 const hostP2P = params.has("host");

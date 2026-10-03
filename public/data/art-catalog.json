@@ -15525,11 +15525,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:134"
+          "source": "src/client/ClientStateView.ts:135"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:579"
+          "source": "src/client/ClientStateView.ts:582"
         },
         {
           "system": "Gameplay",
@@ -15581,11 +15581,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:805"
+          "source": "src/server/Realm.ts:810"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1106"
+          "source": "src/server/Realm.ts:1111"
         }
       ]
     },

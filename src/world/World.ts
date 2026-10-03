@@ -1,6 +1,7 @@
 import { computeChunkSubgridBlend } from "../autotile/Autotiler.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { OnionStrategy } from "../generation/OnionStrategy.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { isRoad } from "../road/RoadType.js";
@@ -111,6 +112,7 @@ export class World {
    * Computes per-tile blend layers from corners using the blend graph.
    */
   computeAutotile(blendGraph: BlendGraph, maxChunks = Number.POSITIVE_INFINITY): void {
+    const timing = performanceMetrics.start();
     const limit = Math.max(0, Math.floor(maxChunks));
     let processed = 0;
     for (const [, chunk] of this.chunks.entries()) {
@@ -123,5 +125,6 @@ export class World {
       chunk.revision++;
       processed++;
     }
+    performanceMetrics.end("server.autotile", timing);
   }
 }

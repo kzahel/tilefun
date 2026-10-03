@@ -31,7 +31,8 @@
     "workshop:auth": "tsx scripts/workshop-auth.ts",
     "workshop:inbox": "tsx scripts/workshop-inbox.ts",
     "interiors:bench": "node scripts/benchmark-interiors.mjs",
-    "gameplay:bench": "node scripts/benchmark-gameplay.mjs"
+    "gameplay:bench": "node scripts/benchmark-gameplay.mjs",
+    "streaming:bench": "node scripts/benchmark-streaming.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

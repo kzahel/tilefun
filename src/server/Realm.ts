@@ -11,6 +11,7 @@ import {
   TICK_RATE,
   TILE_SIZE,
 } from "../config/constants.js";
+import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import { createBall } from "../entities/Ball.js";
@@ -713,6 +714,7 @@ export class Realm {
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
+        const replicationTiming = performanceMetrics.start();
         const messages = this.replication.build(session.clientId, {
           roomState: this.roomState,
           world: this.world,
@@ -725,6 +727,7 @@ export class Realm {
           playerNamesRevision: this.playerNamesRevision,
           editorCursorsRevision: this.editorCursorsRevision,
         });
+        performanceMetrics.end("server.replication", replicationTiming);
         for (const msg of messages) {
           transport.send(session.clientId, msg);
         }
@@ -758,6 +761,7 @@ export class Realm {
       this.interior ||
       (this.generation.type === "regional" && this.generation.version !== "regional-v1")
     ) {
+      const placementTiming = performanceMetrics.start();
       this.proceduralProps.reconcile(
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
@@ -766,6 +770,7 @@ export class Realm {
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
       );
+      performanceMetrics.end("server.placements", placementTiming);
       return;
     }
     // Generate structures for newly loaded chunks (only for worlds with roads)
