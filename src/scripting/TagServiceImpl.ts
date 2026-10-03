@@ -29,6 +29,14 @@ export class TagServiceImpl implements TagService {
 
   constructor(entityManager: EntityManager) {
     this.em = entityManager;
+    this.em.removalListeners.add((entity, destroyed) => {
+      for (const tag of [...(this.entityTags.get(entity.id) ?? [])]) {
+        this.unindexTag(entity.id, tag);
+        if (destroyed) this.fireRemoved(entity, tag);
+      }
+      this.entityTags.delete(entity.id);
+      this.entityRefs.delete(entity.id);
+    });
 
     // Hook into EntityHandle.addTag / removeTag
     this.em.tagChangeHook = {
@@ -63,8 +71,8 @@ export class TagServiceImpl implements TagService {
     if (!ids || ids.size === 0) return [];
     const result: EntityHandle[] = [];
     for (const id of ids) {
-      const entity = this.em.entities.find((e) => e.id === id);
-      if (entity) {
+      const entity = this.em.byId.get(id);
+      if (entity && (!this.em.simulationEntities || this.em.simulationEntities.includes(entity))) {
         result.push(new EntityHandle(entity, this.em));
       }
     }
@@ -121,24 +129,7 @@ export class TagServiceImpl implements TagService {
    * Detect removed entities and fire onTagRemoved. Call once per tick.
    */
   tick(): void {
-    const aliveIds = new Set<number>();
-    for (const e of this.em.entities) {
-      aliveIds.add(e.id);
-    }
-
-    for (const [entityId, tags] of this.entityTags) {
-      if (!aliveIds.has(entityId)) {
-        const entity = this.entityRefs.get(entityId);
-        if (entity) {
-          for (const tag of tags) {
-            this.unindexTag(entityId, tag);
-            this.fireRemoved(entity, tag);
-          }
-        }
-        this.entityTags.delete(entityId);
-        this.entityRefs.delete(entityId);
-      }
-    }
+    // Removal listeners release memberships synchronously, including non-death eviction.
   }
 
   /** Remove all listeners and state. Called on world reload. */

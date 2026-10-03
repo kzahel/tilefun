@@ -109,3 +109,56 @@ describe("shared persistence coordination", () => {
     },
   );
 });
+
+it("reconciles a whole paged scope when moves, deletes and inserts commit during its read", async () => {
+  const store = new MemoryRecordStore();
+  await store.commit(Array.from({ length: 300 }, (_, i) => put(String(i).padStart(4, "0"), i)));
+  const gate = deferred(),
+    started = deferred();
+  const scan = store.scan.bind(store);
+  let first = true;
+  store.scan = async (query) => {
+    const rows = await scan(query);
+    if (first) {
+      first = false;
+      started.resolve();
+      await gate.promise;
+    }
+    return rows;
+  };
+  const coordinator = new PersistenceCoordinator(store);
+  const loading = coordinator.readScope("actors", "realm:0,0");
+  await started.promise;
+  coordinator.stage([
+    { delete: { collection: "actors", key: "0000" } },
+    put("0299", 299, "realm:1,0"),
+    put("0000-new", "new"),
+  ]);
+  await coordinator.flush();
+  gate.resolve();
+  const rows = await loading;
+  expect(rows).toHaveLength(299);
+  expect(rows.some((row) => row.key === "0000" || row.key === "0299")).toBe(false);
+  expect(rows.find((row) => row.key === "0000-new")?.value).toBe("new");
+});
+
+it("returns a newer committed edit instead of an older point-read completion", async () => {
+  const store = new MemoryRecordStore();
+  await store.commit([put("actor", 1)]);
+  const gate = deferred(),
+    started = deferred(),
+    read = store.read.bind(store);
+  store.read = async (collection, key) => {
+    const old = await read(collection, key);
+    started.resolve();
+    await gate.promise;
+    return old;
+  };
+  const coordinator = new PersistenceCoordinator(store);
+  const loading = coordinator.read("actors", "actor");
+  await started.promise;
+  coordinator.stage([put("actor", 2)]);
+  await coordinator.flush();
+  gate.resolve();
+  expect((await loading)?.value).toBe(2);
+});

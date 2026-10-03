@@ -35,7 +35,10 @@ Several early plans contain original unchecked lists superseded by later work.
 | [021 Incremental world records](021-incremental-world-records.md) | Delivered: shared coordinator, IndexedDB/SQLite, stable actor records and injected host composition; lazy residency follows |
 | [022 Renderer backend decoupling](022-renderer-backend-decoupling.md) | Prepared parent sequence, awaiting start signal: five milestones, just-in-time children and end-to-end completion gates; [rendering architecture](../topics/rendering-architecture.md) |
 
-| [024 Interest and residency](024-interest-and-residency.md) | Next: shared tickets/readiness, lazy indexed hydration, acknowledged eviction and complete activity coverage |
+| [024 Interest and residency](024-interest-and-residency.md) | Delivered core shared tickets/readiness, lazy indexed hydration, acknowledged eviction and active scheduling; completion gates in 026 |
+
+
+| [026 Persistence completion](026-persistence-completion.md) | In progress: shared world containers, traffic records, pressure admission and sustained lifecycle validation |
 
 ## Earlier plans
 

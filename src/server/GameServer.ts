@@ -33,7 +33,6 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
 import {
   type InspectionSnapshot,
-  inspectionOverlays,
   readInspection,
   validateInspection,
 } from "../persistence/WorldInspection.js";
@@ -194,10 +193,9 @@ export class GameServer {
     const store = live?.saveManager?.store ?? this.createStore(worldId);
     if (!live?.saveManager) await store.open();
     try {
+      await live?.saveManager?.flushSnapshot();
       const snapshot = await readInspection(store, generation, coordinates, bounds);
       if (live) {
-        const overlay = live.inspectionState();
-        Object.assign(snapshot, inspectionOverlays(generation, bounds, overlay));
         for (const c of coordinates) {
           const chunk = live.world.getChunkIfLoaded(c.cx, c.cy);
           if (!chunk) continue;
@@ -739,7 +737,7 @@ export class GameServer {
               y: saved.player.y / TILE_SIZE,
               generation: realm.generation,
             };
-            safeArrival(realm, arrival);
+            await safeArrival(realm, arrival);
             return {
               realm,
               allowInterior: true,
@@ -757,7 +755,7 @@ export class GameServer {
         const fallback = saved.player.returnLocation;
         if (fallback?.worldId === saved.parentWorldId) {
           try {
-            safeArrival(realm, fallback);
+            await safeArrival(realm, fallback);
             return { realm, arrival: fallback, returnLocation: null };
           } catch {
             /* Use the parent's saved visit if its old doorway is no longer safe. */

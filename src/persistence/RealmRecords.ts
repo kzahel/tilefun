@@ -27,12 +27,69 @@ export class RealmRecords {
   private origins = new WeakMap<Entity | Prop, string>();
   readonly byId = new Map<string, Entity | Prop>();
   readonly features = new Map<string, FeatureRecord>();
+  readonly buckets = new Map<string, Set<Entity | Prop>>();
+  private membership = new WeakMap<Entity | Prop, string>();
+  private children = new Map<number, Set<Entity>>();
+  private parentOf = new WeakMap<Entity, number>();
+
+  scope(actor: Entity | Prop): string {
+    let root = actor;
+    const seen = new Set<number>();
+    while (!("isProp" in root) && root.parentId !== undefined) {
+      if (seen.has(root.id)) throw new Error("Cyclic actor attachment.");
+      seen.add(root.id);
+      const parent = this.entities.byId.get(root.parentId);
+      if (!parent || parent.type === "player") break;
+      root = parent;
+    }
+    return actorScope(root.position);
+  }
+
+  private unindex(actor: Entity | Prop): void {
+    const old = this.membership.get(actor);
+    if (old) {
+      const bucket = this.buckets.get(old);
+      bucket?.delete(actor);
+      if (!bucket?.size) this.buckets.delete(old);
+      this.membership.delete(actor);
+    }
+    if (!("isProp" in actor)) {
+      const parent = this.parentOf.get(actor);
+      if (parent !== undefined) {
+        const children = this.children.get(parent);
+        children?.delete(actor);
+        if (!children?.size) this.children.delete(parent);
+        this.parentOf.delete(actor);
+      }
+    }
+  }
+
+  private index(actor: Entity | Prop): void {
+    const scope = this.scope(actor);
+    if (
+      this.membership.get(actor) === scope &&
+      ("isProp" in actor || this.parentOf.get(actor) === actor.parentId)
+    )
+      return;
+    this.unindex(actor);
+    const bucket = this.buckets.get(scope) ?? new Set();
+    this.buckets.set(scope, bucket);
+    bucket.add(actor);
+    this.membership.set(actor, scope);
+    if (!("isProp" in actor) && actor.parentId !== undefined) {
+      const children = this.children.get(actor.parentId) ?? new Set();
+      this.children.set(actor.parentId, children);
+      children.add(actor);
+      this.parentOf.set(actor, actor.parentId);
+    }
+  }
 
   constructor(
     readonly entities: EntityManager,
     readonly props: PropManager,
     readonly saves: SaveManager,
   ) {
+    entities.onMutation = (entity) => this.changed(entity);
     entities.onSpawn = (entity) => {
       if (entity.type === "player" || entity.type.startsWith("vehicle-v1:")) return;
       this.attach(entity);
@@ -44,7 +101,14 @@ export class RealmRecords {
     entities.onDespawn = (entity, destroyed) => {
       if (!entity.persistentId) return;
       this.byId.delete(entity.persistentId);
+      this.unindex(entity);
       if (destroyed) {
+        for (const child of [...(this.children.get(entity.id) ?? [])]) {
+          Reflect.set(child, "parentId", undefined);
+          Reflect.set(child, "localOffsetX", undefined);
+          Reflect.set(child, "localOffsetY", undefined);
+          this.changed(child);
+        }
         this.remove("entities", entity.persistentId);
         if (entity.proceduralId) this.feature(entity, true, true);
       }
@@ -55,6 +119,10 @@ export class RealmRecords {
         this.attach(prop);
         if (!this.hydrating) this.changed(prop);
       }
+    };
+    props.onDespawn = (prop) => {
+      if (prop.persistentId) this.byId.delete(prop.persistentId);
+      this.unindex(prop);
     };
     props.onChange = (prop, deleted) => {
       if (prop.proceduralId) this.feature(prop, deleted);
@@ -72,6 +140,7 @@ export class RealmRecords {
 
   private attach(actor: Entity | Prop): void {
     this.byId.set(durableId(actor), actor);
+    this.index(actor);
     if (!this.origins.has(actor)) this.origins.set(actor, actorScope(actor.position));
     if (this.observed.has(actor)) return;
     this.observed.add(actor);
@@ -82,19 +151,23 @@ export class RealmRecords {
 
   changed(actor: Entity | Prop): void {
     if (!actor.persistentId || !this.byId.has(actor.persistentId)) return;
+    this.index(actor);
     const collection = "isProp" in actor ? "props" : "entities";
     const key = actor.persistentId;
     this.saves.markRecordDirty(collection, key, () => ({
       collection,
       key,
-      scope: actorScope(actor.position),
-      value: encodeActor(
-        actor,
-        "parentId" in actor
-          ? this.entities.entities.find((e) => e.id === actor.parentId)
-          : undefined,
-      ),
+      scope: this.scope(actor),
+      value: {
+        ...encodeActor(
+          actor,
+          "parentId" in actor ? this.entities.byId.get(actor.parentId ?? -1) : undefined,
+        ),
+        ...(actor.proceduralId ? { originScope: this.origins.get(actor) } : {}),
+      },
     }));
+    if (!("isProp" in actor))
+      for (const child of [...(this.children.get(actor.id) ?? [])]) this.changed(child);
   }
 
   private remove(collection: string, key: string): void {
@@ -135,6 +208,7 @@ export class RealmRecords {
       for (const record of records) {
         if (this.byId.has(record.persistentId)) continue;
         const actor = decodeActor(record);
+        if (record.originScope) this.origins.set(actor, record.originScope);
         if ("isProp" in actor) this.props.add(actor);
         else {
           this.entities.spawn(actor);
@@ -146,7 +220,9 @@ export class RealmRecords {
         if (!target || "isProp" in target)
           throw new Error("Saved attachment target is unavailable.");
         entity.parentId = target.id;
+        this.index(entity);
       }
+      for (const { entity } of parents) this.index(entity);
     } finally {
       this.hydrating = false;
     }

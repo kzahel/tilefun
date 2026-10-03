@@ -36,7 +36,20 @@ export class RecordPersistenceStore implements PersistenceStore {
     return this.closing;
   }
   private validate(collection: string): void {
-    if (!this.collections.includes(collection)) throw new Error("Invalid collection.");
+    let name = collection;
+    if (collection.startsWith("[")) {
+      const namespace = JSON.parse(collection) as unknown;
+      if (
+        !Array.isArray(namespace) ||
+        namespace.length !== 2 ||
+        typeof namespace[0] !== "string" ||
+        !namespace[0] ||
+        typeof namespace[1] !== "string"
+      )
+        throw new Error("Invalid realm namespace.");
+      name = namespace[1];
+    }
+    if (!this.collections.includes(name)) throw new Error("Invalid collection.");
   }
   async get(collection: string, key: string): Promise<unknown> {
     this.validate(collection);
@@ -56,6 +69,19 @@ export class RecordPersistenceStore implements PersistenceStore {
       ...(after === undefined ? {} : { after }),
     });
     return new Map(records.map((r) => [r.key, r.value]));
+  }
+  async readScope(
+    collection: string,
+    scope: string,
+    maximum = 4096,
+  ): Promise<Map<string, unknown>> {
+    this.validate(collection);
+    return new Map(
+      (await this.coordinator.readScope(collection, scope, maximum)).map((record) => [
+        record.key,
+        record.value,
+      ]),
+    );
   }
   /** Administrative/transitional enumeration only; streaming uses bounded scan. */
   async getAll(collection: string): Promise<Map<string, unknown>> {

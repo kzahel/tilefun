@@ -1,9 +1,8 @@
 # Entity activation, AI and unloading
 
 Topic: entity-activation
-Status: overlap separation follows tick selection and accumulated time.
-Incremental persistence, ticket-driven residency and general unloading are
-in progress. Incremental records are live on IndexedDB and SQLite; shared readiness and lazy residency are next.
+Status: incremental persistence and shared lazy residency are implemented.
+World-container/traffic completion and pressure budgets are in progress.
 Updated: 2026-10-03.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
@@ -37,72 +36,45 @@ browser adapter defaults from the shared server during the refactor.
 
 ## Current behavior
 
-Source audit on 2026-10-03; these are implementation findings, not measured
-performance results or a diagnosis of any individual play report.
+The shared [RealmStreaming](../../src/server/RealmStreaming.ts) controller loads
+terrain, actor/prop records and origin overrides before publishing a chunk.
+Player tickets request full AI decisions within 2 chunks, reduced decisions
+within 4 and collision support within 5. Camera tickets add residency without
+activating distant AI. Distant players contribute a union of neighborhoods.
 
-- [Realm.computeEntityTickDtsMulti](../../src/server/Realm.ts) uses each active
-  session's camera-visible chunk range, rather than a radial player-distance
-  test or a loaded-chunk membership check. The most active matching tier wins
-  across sessions. Players always receive a tick entry.
-- Within the visible range plus two chunks, ordinary AI, movement, ground
-  tracking and animation update every tick. The next six chunks use accumulated
-  time every four ticks (normally 15 Hz with the default 60 Hz server rate).
-  Beyond the eight-chunk margin, those passes skip the entity;
-  [tickAllAI](../../src/server/tickAllAI.ts) zeros skipped AI entities' velocity.
-- [ChunkManager](../../src/world/ChunkManager.ts) unloads terrain beyond a
-  three-chunk margin. Consequently, resident entities can still receive
-  reduced-rate simulation after their terrain chunk unloads. Camera movement
-  and zoom can change activity independently of player position.
-- Manually placed entities remain in the realm's entity manager when terrain
-  unloads. [ProceduralActors](../../src/generation/ProceduralActors.ts) previously
-  removed generated route actors when no chunk in their route bounding area is
-  loaded, except actors with a parented rider/child. That path is now disabled for persistent actors until shared save-aware eviction
-  replaces it; placed and generated actors remain resident.
-- Realm AI/physics runs when there is at least one session that is neither
-  debug-paused nor dormant. This is separate from per-entity activation.
-- NPC overlap separation uses the same tick map: omitted NPCs do not enter the
-  separation grid or player-overlap checks. Each selected NPC uses its own
-  accumulated time for pair nudges; player penetration correction remains
-  instantaneous. Existing parented/pre-stepped exclusions, mount handling and
-  wall/Z constraints remain. An omitted NPC still exists in the ordinary
-  collision index; this change is not unloading or removal of solid blockers.
-  [Tactical 018](../tactical/018-tick-aware-npc-separation.md) records the slice.
+Movement remains fixed-step in both active tiers; nominal reduced decision rate
+is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic
+state without wall-clock catch-up. Balls, entity physics, separation, attachments
+and gameplay query/overlap passes receive active memberships. Lifecycle listeners
+release tag references on eviction without reporting a death.
 
-## Known gaps
+Dirty actors, authored props, per-feature overrides and edited terrain save as
+individual transactional records through one coordinator on IndexedDB/SQLite.
+Startup uses local indexed loads. General eviction freezes actors, waits for a
+finite snapshot barrier, rechecks interest and dirty scope, then releases runtime
+objects, collision membership and terrain. Failed writes retain state. Runtime
+IDs change on return; durable IDs and root-scoped attachment records do not.
 
-1. **Inactive does not mean no work.** Tier selection and AI still scan resident
-   entities. [EntityManager.update](../../src/entities/EntityManager.ts) also
-   updates spatial-hash membership for all entities and performs parent-position
-   bookkeeping regardless of tick tier.
-2. **Dense active crowds still cost work.**
-   [separateOverlappingEntities](../../src/entities/collision.ts) now excludes
-   sleeping NPCs, but dense active cells still produce many collision pairs.
-   The separation input list still scans all resident entities.
-3. **Ball physics bypasses the tick map.**
-   [tickBallPhysics](../../src/physics/BallPhysics.ts) scans and simulates resident
-   balls in its own pass. Other gameplay callbacks and overlap services also
-   need an explicit activation-policy audit before claiming a realm-wide sleep
-   guarantee.
-4. **Terrain residency and simulation activity disagree.** The reduced-rate
-   tier extends past terrain retention. Collision/height behavior at that
-   boundary needs tests before changing distances or introducing sleep.
-5. **Placed-entity residency is unbounded by chunk unloading.** Large authored
-   populations can retain memory and scanning costs after the player leaves.
-   Persistence-aware unloading/reactivation is not yet a general facility.
-   Stable IDs and semantic actor records now preserve motion/AI and attachment
-   state, but safe group residency still needs shared readiness and eviction.
-6. **Startup and retention still scale with historical world size.** Startup
-   reads all saved terrain records and hydrates saved actors through paged scans;
-   saved terrain mirrors remain after live chunks unload. Saves are now incremental:
-   dirty actor/prop/feature records replace full metadata lists. Traffic still uses
-   a bounded (maximum 32) metadata array pending its residency integration.
-7. **Production storage now has real atomic batches.** IndexedDB and SQLite
-   execute the same coordinator contract, with pending-read visibility, retained
-   failures and exclusive writer leases. The old filesystem adapter is test-only;
-   no production host uses its independent record replacement. The next slice
-   must propagate storage pressure to simulation/edit admission and attach
-   eviction to acknowledged revisions.
+[024](../tactical/024-interest-and-residency.md) records deterministic fault tests,
+1,000-chunk bounded-retention evidence, real browser/Node integration and the
+concurrent spatial-query fix discovered during that integration.
 
+## Remaining delivery gaps
+
+[026](../tactical/026-persistence-completion.md) completes the parent plan:
+
+- Consolidate outdoor/interior stores into one world writer and transaction
+  boundary, retaining the authoritative player-location recovery protocol.
+- Replace the bounded traffic metadata array with indexed durable traffic
+  records and origin suppression; validate roof passengers across eviction.
+- Bound decoded payloads and producer admission as well as physical queues;
+  pause/report storage pressure before accepted dirty state can grow indefinitely.
+- Finish attachment dependency tickets, spawner/script lifecycle coverage and
+  shutdown/rejoin fencing; test dense scenes and sustained real-adapter travel.
+
+Dense active crowds still produce collision-pair and rendering costs. Bounded
+unloading is not proof of acceptable performance for arbitrarily dense nearby
+populations.
 
 Campfires have no AI: their definition in
 [EntityDefs](../../src/entities/EntityDefs.ts) gives them animation and a solid
@@ -122,8 +94,9 @@ that these activation gaps caused it.
 - [x] Deliver minimum durable identity, semantic codecs, transaction/race tests
   and incremental writes on real IndexedDB and SQLite. One-actor write counts
   remain constant as unchanged population grows; see tactical 021.
-- [ ] Deliver shared tickets/readiness, lazy indexed loads and acknowledged
-  eviction, then complete active-set coverage and reduced-decision scheduling.
+- [x] Deliver shared tickets/readiness, lazy indexed loads, acknowledged eviction
+  and separate reduced decisions from fixed-step motion.
+- [ ] Complete the remaining container/traffic/pressure and lifecycle gates in 026.
   [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) owns phase
   dependencies, acceptance scenarios and failure/pressure gates.
 - [ ] Investigate dense active campfire collision and pickup behavior separately;

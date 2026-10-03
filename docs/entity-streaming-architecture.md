@@ -1,9 +1,10 @@
 # Target entity persistence and streaming architecture
 
-Status: proposed implementation architecture, 2026-10-03. **Not implemented.**
-The user authorized a new save format without compatibility with existing
-worlds and requested research/planning only. This document records the selected
-design direction; [the topic](topics/entity-activation.md) owns actual delivery
+Status: implementation in progress, 2026-10-03.
+The user authorized end-to-end implementation and a new save format without
+compatibility with existing worlds. Incremental records and lazy residency are
+implemented; world-container, traffic and pressure completion remain in 026.
+This document records the selected contract; [the topic](topics/entity-activation.md) owns actual delivery
 status, [the research](research/entity-streaming-reference.md) distinguishes
 Minecraft/mclone evidence from Tilefun choices, and
 [Tactical 019](tactical/019-entity-streaming-and-persistence.md) sequences work.
@@ -79,10 +80,8 @@ same seed, commands, simulation steps and configuration, hosts must obey the
 same gameplay and persistence semantics. Wall-clock IO completion times and
 browser/process lifecycle events naturally differ.
 
-Today `GameServer` already accepts transport, registry and store dependencies,
-but also imports browser implementations as constructor defaults. During the
-refactor, move concrete adapter construction to host composition entry points
-and make required dependencies explicit. Shared domain code must not import
+`GameServer` now requires injected transport, registry and store dependencies.
+Concrete browser adapters live in the browser host composition entry point. Shared domain code must not import
 IndexedDB, SQL, filesystem or DOM implementations or branch on host type to
 decide gameplay/save behavior. Adapter interfaces should reflect demonstrated
 needs, rather than a framework for hypothetical hosts.

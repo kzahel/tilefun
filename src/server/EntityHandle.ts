@@ -155,6 +155,15 @@ export class EntityHandle {
 
   setParent(parentId: number, offsetX = 0, offsetY = 0): void {
     if (!this.alive) return;
+    let parent = this.entityManager.byId.get(parentId);
+    if (!parent) throw new Error("Attachment target is not resident.");
+    const seen = new Set<number>([this.id]);
+    while (parent) {
+      if (seen.has(parent.id)) throw new Error("Cyclic attachment.");
+      seen.add(parent.id);
+      parent =
+        parent.parentId === undefined ? undefined : this.entityManager.byId.get(parent.parentId);
+    }
     this.entity.parentId = parentId;
     this.entity.localOffsetX = offsetX;
     this.entity.localOffsetY = offsetY;
@@ -165,6 +174,7 @@ export class EntityHandle {
     delete this.entity.parentId;
     delete this.entity.localOffsetX;
     delete this.entity.localOffsetY;
+    this.entityManager.onMutation?.(this.entity);
   }
 
   // --- AI ---
@@ -206,7 +216,7 @@ export class EntityHandle {
   }
 
   get alive(): boolean {
-    return this.entityManager.entities.includes(this.entity);
+    return this.entityManager.byId.get(this.id) === this.entity;
   }
 
   // --- Visual effects ---
@@ -327,6 +337,7 @@ export class PlayerHandle extends EntityHandle {
     delete this.entity.parentId;
     delete this.entity.localOffsetX;
     delete this.entity.localOffsetY;
+    this.entityManager.onMutation?.(this.entity);
     delete this.entity.noShadow;
     this.session.mountId = null;
     if (mountEntity) {

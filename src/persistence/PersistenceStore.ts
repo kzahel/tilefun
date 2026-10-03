@@ -11,7 +11,7 @@ export interface SaveEntry {
  * Generic key-value persistence store with named collections.
  * Knows nothing about game data — just stores and retrieves opaque values.
  *
- * Implementations: IdbPersistenceStore (browser), future SqlitePersistenceStore (server).
+ * Implemented by the shared record facade over IndexedDB or SQLite executors.
  */
 export interface PersistenceStore {
   open(): Promise<void>;
@@ -30,6 +30,9 @@ export interface PersistenceStore {
     after?: string,
     limit?: number,
   ): Promise<Map<string, unknown>>;
+
+  /** Bounded whole-scope hydration with concurrent move/delete reconciliation. */
+  readScope(collection: string, scope: string, maximum?: number): Promise<Map<string, unknown>>;
 
   /** Atomically write a batch of entries across any collections. */
   save(entries: SaveEntry[]): Promise<void>;

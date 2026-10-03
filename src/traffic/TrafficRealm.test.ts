@@ -55,6 +55,7 @@ it("persists a moving roof passenger, restores the ride, and removes a disconnec
       cy = Math.floor(car.entity.position.wy / 256);
     session.visibleRange = { minCx: cx - 3, maxCx: cx + 3, minCy: cy - 3, maxCy: cy + 3 };
     realm.updateVisibleChunks(session.visibleRange);
+    await realm.ensureReady(session.visibleRange);
     const start = { ...car.entity.position };
     for (let i = 0; i < 180; i++) {
       session.inputQueue.push({
@@ -75,6 +76,7 @@ it("persists a moving roof passenger, restores the ride, and removes a disconnec
     await realm.flushAsync();
     const saved = realm.playerData(session);
     expect(saved.roofRide?.identity).toBe(car.entity.proceduralId);
+    await realm.destroy();
     await restored.loadWorld(meta.id, registry, () => store);
     const returning = new PlayerSession("rider");
     await restored.addPlayer(returning);
@@ -85,8 +87,8 @@ it("persists a moving roof passenger, restores the ride, and removes a disconnec
     expect(restored.entityManager.entities.some((e) => e.id === returning.player.id)).toBe(false);
     expect(required(restored.traffic).states.size).toBeGreaterThan(0);
   } finally {
-    realm.destroy();
-    restored.destroy();
+    await realm.destroy();
+    await restored.destroy();
     transport.serverSide.close();
   }
 });

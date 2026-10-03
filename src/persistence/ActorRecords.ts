@@ -13,6 +13,7 @@ export interface ActorRecord {
   wx: number;
   wy: number;
   proceduralId?: string;
+  originScope?: string;
   parent?: string;
   state: Partial<Entity>;
 }
@@ -80,6 +81,10 @@ export function decodeActor(record: ActorRecord): Entity | Prop {
       if (Object.hasOwn(record.state, field))
         Object.assign(actor, { [field]: structuredClone(record.state[field]) });
     }
+  }
+  if (!("isProp" in actor) && actor.wanderAI?.state === "ridden") {
+    actor.wanderAI.state = "idle";
+    actor.wanderAI.timer = 1;
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;

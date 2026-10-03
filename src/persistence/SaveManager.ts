@@ -30,6 +30,7 @@ export interface SavedMeta {
 }
 
 export interface SavedPlayerData {
+  mount?: { id: string; offsetX: number; offsetY: number; wz: number; jumpZ: number };
   roofRide?: { identity: string; offsetX: number; offsetY: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;
@@ -86,6 +87,7 @@ export class SaveManager {
   }
 
   async loadRecords(collection: string, scope?: string): Promise<Map<string, unknown>> {
+    if (scope !== undefined) return this.store.readScope(collection, scope);
     const result = new Map<string, unknown>();
     let after: string | undefined;
     for (;;) {
@@ -98,27 +100,30 @@ export class SaveManager {
     }
   }
 
-  async loadChunks(): Promise<
-    Map<string, { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }>
-  > {
-    const raw = await this.store.getAll(STORE_CHUNKS);
-    const result = new Map<
-      string,
-      { subgrid: Uint8Array; roadGrid: Uint8Array | null; heightGrid: Uint8Array | null }
-    >();
-    for (const [key, value] of raw) {
-      const v = value as {
-        subgrid: ArrayBuffer;
-        roadGrid?: ArrayBuffer;
-        heightGrid?: ArrayBuffer;
-      };
-      result.set(key, {
-        subgrid: new Uint8Array(v.subgrid),
-        roadGrid: v.roadGrid ? new Uint8Array(v.roadGrid) : null,
-        heightGrid: v.heightGrid ? new Uint8Array(v.heightGrid) : null,
-      });
-    }
-    return result;
+  async loadChunk(key: string): Promise<SavedChunkData | undefined> {
+    const value = (await this.store.get(STORE_CHUNKS, key)) as
+      | { subgrid: ArrayBuffer; roadGrid?: ArrayBuffer; heightGrid?: ArrayBuffer }
+      | undefined;
+    if (!value) return undefined;
+    return {
+      subgrid: new Uint8Array(value.subgrid),
+      roadGrid: value.roadGrid ? new Uint8Array(value.roadGrid) : new Uint8Array(0),
+      heightGrid: value.heightGrid ? new Uint8Array(value.heightGrid) : new Uint8Array(0),
+    };
+  }
+
+  /** A finite barrier: new mutations made during the write belong to the next save. */
+  async flushSnapshot(): Promise<void> {
+    await this.pending;
+    this.flush();
+    await this.pending;
+    if (this.saveFailed) throw new Error("Could not save world state.", { cause: this.saveError });
+  }
+
+  dirtyInScope(scope: string): boolean {
+    if (this.dirtyChunks.has(scope)) return true;
+    for (const snapshot of this.dirtyRecords.values()) if (snapshot().scope === scope) return true;
+    return false;
   }
 
   async loadMeta(): Promise<SavedMeta | null> {
@@ -207,59 +212,71 @@ export class SaveManager {
     const saveMeta = this.metaDirty;
     this.metaDirty = false;
 
-    const entries: SaveEntry[] = [...recordEntries.values()].map((snapshot) => snapshot());
+    const getChunk = this.getChunk,
+      getMeta = this.getMeta;
+    const snapshots = new Map<string, SavedChunkData>();
+    this.pending = Promise.resolve()
+      .then(async () => {
+        const entries: SaveEntry[] = [...recordEntries.values()].map((snapshot) => snapshot());
 
-    for (const key of chunkKeys) {
-      const data = this.getChunk(key);
-      if (data) {
-        const record: {
-          subgrid: ArrayBuffer;
-          roadGrid?: ArrayBuffer;
-          heightGrid?: ArrayBuffer;
-        } = {
-          subgrid: new Uint8Array(data.subgrid).buffer,
-        };
-        // Only store roadGrid if it has non-zero data
-        if (data.roadGrid.some((v) => v !== 0)) {
-          record.roadGrid = new Uint8Array(data.roadGrid).buffer;
+        for (const key of chunkKeys) {
+          const data = getChunk(key);
+          if (data) {
+            const record: {
+              subgrid: ArrayBuffer;
+              roadGrid?: ArrayBuffer;
+              heightGrid?: ArrayBuffer;
+            } = {
+              subgrid: new Uint8Array(data.subgrid).buffer,
+            };
+            // Only store roadGrid if it has non-zero data
+            if (data.roadGrid.some((v) => v !== 0)) {
+              record.roadGrid = new Uint8Array(data.roadGrid).buffer;
+            }
+            if (data.heightGrid.some((v) => v !== 0)) {
+              record.heightGrid = new Uint8Array(data.heightGrid).buffer;
+            }
+            snapshots.set(key, {
+              subgrid: new Uint8Array(record.subgrid),
+              roadGrid: new Uint8Array(data.roadGrid),
+              heightGrid: new Uint8Array(data.heightGrid),
+            });
+            entries.push({ collection: STORE_CHUNKS, key, value: record });
+          }
         }
-        if (data.heightGrid.some((v) => v !== 0)) {
-          record.heightGrid = new Uint8Array(data.heightGrid).buffer;
-        }
-        entries.push({ collection: STORE_CHUNKS, key, value: record });
-      }
-    }
 
-    for (const [playerId, data] of playerEntries) {
-      entries.push({ collection: STORE_PLAYERS, key: playerId, value: data });
-    }
-
-    if (saveMeta) {
-      entries.push({ collection: STORE_META, key: "state", value: this.getMeta() });
-    }
-
-    this.saveFailed = false;
-    this.pending = this.store.save(entries).then(
-      () => {
-        this.saving = false;
-        if (this.onChunksSaved && this.getChunk) {
-          this.onChunksSaved(chunkKeys, this.getChunk);
+        for (const [playerId, data] of playerEntries) {
+          entries.push({ collection: STORE_PLAYERS, key: playerId, value: data });
         }
-      },
-      (error) => {
-        this.saving = false;
-        this.saveError = error;
-        this.saveFailed = true;
-        for (const [key, snapshot] of recordEntries)
-          if (!this.dirtyRecords.has(key)) this.dirtyRecords.set(key, snapshot);
-        // Re-mark as dirty so next save attempt includes them
-        for (const key of chunkKeys) this.dirtyChunks.add(key);
-        for (const [id, data] of playerEntries) {
-          if (!this.dirtyPlayers.has(id)) this.dirtyPlayers.set(id, data);
+
+        if (saveMeta) {
+          entries.push({ collection: STORE_META, key: "state", value: getMeta() });
         }
-        if (saveMeta) this.metaDirty = true;
-      },
-    );
+
+        this.saveFailed = false;
+        await this.store.save(entries);
+      })
+      .then(
+        () => {
+          this.saving = false;
+          if (this.onChunksSaved && this.getChunk) {
+            this.onChunksSaved(chunkKeys, (key) => snapshots.get(key));
+          }
+        },
+        (error) => {
+          this.saving = false;
+          this.saveError = error;
+          this.saveFailed = true;
+          for (const [key, snapshot] of recordEntries)
+            if (!this.dirtyRecords.has(key)) this.dirtyRecords.set(key, snapshot);
+          // Re-mark as dirty so next save attempt includes them
+          for (const key of chunkKeys) this.dirtyChunks.add(key);
+          for (const [id, data] of playerEntries) {
+            if (!this.dirtyPlayers.has(id)) this.dirtyPlayers.set(id, data);
+          }
+          if (saveMeta) this.metaDirty = true;
+        },
+      );
   }
 
   async clear(): Promise<void> {

@@ -6,16 +6,17 @@ import { createPlayer } from "../entities/Player.js";
 import { tickAllAI } from "./tickAllAI.js";
 
 describe("tickAllAI", () => {
-  it("freezes entities not in the tick map", () => {
+  it("preserves motion and AI state when a decision is not scheduled", () => {
     const far = createChicken(9999, 0);
     far.velocity = { vx: 30, vy: 30 };
     far.id = 1;
 
+    const timer = far.wanderAI?.timer;
     const tickDts = new Map<Entity, number>();
     tickAllAI([far], [{ wx: 0, wy: 0 }], tickDts, Math.random);
 
-    expect(far.velocity.vx).toBe(0);
-    expect(far.velocity.vy).toBe(0);
+    expect(far.velocity).toEqual({ vx: 30, vy: 30 });
+    expect(far.wanderAI?.timer).toBe(timer);
   });
 
   it("runs wander AI for entities in the tick map", () => {

@@ -26,6 +26,7 @@ export class World {
 
   /** Get terrain tile at a global tile position. */
   getTerrain(tx: number, ty: number): TileIdType {
+    if (this.chunks.managed) return this.getTerrainIfLoaded(tx, ty);
     const { cx, cy } = tileToChunk(tx, ty);
     const { lx, ly } = tileToLocal(tx, ty);
     return this.chunks.getOrCreate(cx, cy).getTerrain(lx, ly);
@@ -45,6 +46,7 @@ export class World {
 
   /** Get collision flags at a global tile position. Roads override terrain blocking. */
   getCollision(tx: number, ty: number): number {
+    if (this.chunks.managed) return this.getCollisionIfLoaded(tx, ty);
     const { cx, cy } = tileToChunk(tx, ty);
     const { lx, ly } = tileToLocal(tx, ty);
     const chunk = this.chunks.getOrCreate(cx, cy);

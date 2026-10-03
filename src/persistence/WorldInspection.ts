@@ -136,7 +136,8 @@ export async function readInspection(
         for (const value of page.values()) {
           if (collection === "features") {
             const feature = value as FeatureRecord;
-            if (feature.deleted) deletedProceduralIds.push(feature.id);
+            if (feature.deleted || feature.actor || feature.edit)
+              deletedProceduralIds.push(feature.id);
             if (feature.edit) proceduralEdits.push(feature.edit);
           } else {
             const actor = value as ActorRecord;
@@ -151,6 +152,22 @@ export async function readInspection(
         }
       }
     }
+  }
+  // Routes and large/moved features can originate beyond the spatial preview halo.
+  // Candidate IDs are bounded by the generated preview itself, so look up their
+  // original suppression records directly rather than widening the loaded area.
+  const candidates = new Set(inspectionPlacements(generation, bounds).map((p) => p.featureId));
+  for (const actor of actorPlacements(createGenerator(generation), bounds))
+    candidates.add(actor.featureId);
+  for (const id of candidates) {
+    if (!id) continue;
+    const feature = (await store.get("features", id)) as FeatureRecord | undefined;
+    if (
+      feature &&
+      (feature.deleted || feature.actor || feature.edit) &&
+      !deletedProceduralIds.includes(id)
+    )
+      deletedProceduralIds.push(id);
   }
   for (const c of coordinates) {
     const raw = (await store.get("chunks", `${c.cx},${c.cy}`)) as

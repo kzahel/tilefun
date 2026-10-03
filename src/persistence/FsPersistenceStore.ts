@@ -76,6 +76,10 @@ export class FsPersistenceStore implements PersistenceStore {
     );
   }
 
+  async readScope(): Promise<Map<string, unknown>> {
+    throw new Error("Legacy file store has no spatial index.");
+  }
+
   async save(entries: SaveEntry[]): Promise<void> {
     // Write each entry atomically: write to .tmp, then rename
     const writes = entries.map(async (entry) => {

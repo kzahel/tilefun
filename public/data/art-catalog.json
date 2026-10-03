@@ -20417,7 +20417,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:37"
+          "source": "src/persistence/RealmRecords.ts:42"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/RealmRecords.ts:94"
         },
         {
           "system": "Gameplay",
@@ -20425,11 +20429,31 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/server/InterestManager.ts:7"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/PlayerSession.ts:80"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:885"
+          "source": "src/server/Realm.ts:950"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1803"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmStreaming.ts:88"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmStreaming.ts:134"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmStreaming.ts:135"
         },
         {
           "system": "Gameplay",
@@ -21085,11 +21109,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:37"
+          "source": "src/physics/BallPhysics.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:155"
+          "source": "src/physics/BallPhysics.ts:157"
         },
         {
           "system": "Editor",

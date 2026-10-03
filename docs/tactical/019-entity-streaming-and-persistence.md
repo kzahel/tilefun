@@ -105,6 +105,7 @@ or a single short traversal proof of bounded memory.
 - A delivered in [020](020-shared-record-persistence.md); B delivered in
   [021](021-incremental-world-records.md). Real IndexedDB/SQLite, incremental
   actor writes and shared host injection pass integration gates.
-- Next: [024](024-interest-and-residency.md) implements shared interest/readiness,
-  lazy residency and complete active scheduling. Eager hydration remains until
-  that slice replaces it.
+- [024](024-interest-and-residency.md) delivered shared readiness, lazy indexed
+  residency, acknowledged eviction and active physics/reduced decisions.
+- [026](026-persistence-completion.md) completes world containers, traffic,
+  pressure admission and sustained real-backend/lifecycle validation.

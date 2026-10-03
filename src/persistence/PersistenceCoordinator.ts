@@ -16,7 +16,11 @@ export class PersistenceCoordinator {
   private writing: Promise<void> | undefined;
   private closing = false;
   private sequence = 0;
-  private generation = 0;
+  private queries = new Set<{
+    collection: string;
+    mutations: Map<string, RecordMutation>;
+    overflow: boolean;
+  }>();
   private readers = new Map<string, Set<{ latest?: RecordMutation }>>();
   error: unknown;
   readonly metrics = { commits: 0, recordsWritten: 0, bytesWritten: 0, highWaterBytes: 0 };
@@ -58,7 +62,16 @@ export class PersistenceCoordinator {
       const accepted = next.get(address);
       if (accepted) for (const reader of this.readers.get(address) ?? []) reader.latest = accepted;
     }
-    this.generation++;
+    for (const query of this.queries)
+      for (const mutation of next.values()) {
+        const ref = "put" in mutation ? mutation.put : mutation.delete;
+        if (ref.collection !== query.collection || query.overflow) continue;
+        query.mutations.set(ref.key, mutation);
+        if (query.mutations.size > 8192) {
+          query.overflow = true;
+          query.mutations.clear();
+        }
+      }
     this.metrics.highWaterBytes = Math.max(this.metrics.highWaterBytes, bytes);
   }
 
@@ -81,38 +94,64 @@ export class PersistenceCoordinator {
     }
   }
 
-  /** Merge pending location changes/deletes; caller fences multi-page hydration. */
-  async scan(query: RecordQuery): Promise<StoredRecord[]> {
-    const generation = this.generation;
+  /** A live query token preserves intervening moves/deletes even after commit
+   * removes them from the pending maps. No world-wide version invalidates an
+   * unrelated load. Tokens exist only for the bounded duration of this query. */
+  private async query(
+    query: RecordQuery,
+    maximum: number,
+    entireScope: boolean,
+  ): Promise<StoredRecord[]> {
+    const observer = {
+      collection: query.collection,
+      mutations: new Map<string, RecordMutation>(),
+      overflow: false,
+    };
+    for (const mutation of [...this.inFlight.values(), ...this.pending.values()]) {
+      const ref = "put" in mutation ? mutation.put : mutation.delete;
+      if (ref.collection === query.collection) observer.mutations.set(ref.key, mutation);
+    }
+    this.queries.add(observer);
     const records = new Map<string, StoredRecord>();
     let after = query.after;
-    // Deleted/moved pending records can hide physical rows: fill the requested page.
-    for (;;) {
-      const page = await this.store.scan({ ...query, ...(after === undefined ? {} : { after }) });
-      for (const record of page) records.set(record.key, record);
-      for (const mutation of [...this.inFlight.values(), ...this.pending.values()]) {
-        const ref = "put" in mutation ? mutation.put : mutation.delete;
-        if (ref.collection !== query.collection) continue;
-        records.delete(ref.key);
-        if (
-          "put" in mutation &&
-          (query.scope === undefined || mutation.put.scope === query.scope) &&
-          (query.after === undefined || ref.key > query.after)
-        )
-          records.set(ref.key, mutation.put);
+    try {
+      for (;;) {
+        const page = await this.store.scan({ ...query, ...(after === undefined ? {} : { after }) });
+        for (const record of page) records.set(record.key, record);
+        if (observer.overflow)
+          throw new SavePressureError("Spatial query changed too much; retry after saving.");
+        for (const [key, mutation] of observer.mutations) {
+          records.delete(key);
+          if (
+            "put" in mutation &&
+            (query.scope === undefined || mutation.put.scope === query.scope) &&
+            (query.after === undefined || key > query.after)
+          )
+            records.set(key, mutation.put);
+        }
+        if (entireScope && records.size > maximum)
+          throw new SavePressureError("Chunk exceeds the actor load budget.");
+        const sorted = [...records.keys()].sort();
+        const last = page.at(-1)?.key,
+          cutoff = sorted[maximum - 1];
+        if (page.length < query.limit || (!entireScope && last && cutoff && cutoff <= last)) break;
+        after = last;
       }
-      if (generation !== this.generation) throw new Error("Spatial query superseded; retry.");
-      const sorted = [...records.keys()].sort();
-      const last = page.at(-1)?.key;
-      const cutoff = sorted[query.limit - 1];
-      if (page.length < query.limit || (last && cutoff && cutoff <= last)) break;
-      after = page.at(-1)?.key;
+      return structuredClone(
+        [...records.values()]
+          .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
+          .slice(0, maximum),
+      );
+    } finally {
+      this.queries.delete(observer);
     }
-    return structuredClone(
-      [...records.values()]
-        .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
-        .slice(0, query.limit),
-    );
+  }
+
+  async scan(query: RecordQuery): Promise<StoredRecord[]> {
+    return this.query(query, query.limit, false);
+  }
+  async readScope(collection: string, scope: string, maximum = 4096): Promise<StoredRecord[]> {
+    return this.query({ collection, scope, limit: 256 }, maximum, true);
   }
 
   /** Drains all accepted mutations. Failure retains the newest state for retry. */
@@ -130,7 +169,6 @@ export class PersistenceCoordinator {
       try {
         await this.store.commit([...this.inFlight.values()]);
         this.metrics.commits++;
-        this.generation++;
         this.metrics.recordsWritten += this.inFlight.size;
         this.metrics.bytesWritten += this.bytes(this.inFlight);
         this.error = undefined;

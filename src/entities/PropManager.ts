@@ -11,6 +11,7 @@ function chunkKey(cx: number, cy: number): string {
 export class PropManager {
   onAdd?: (prop: Prop) => void;
   onChange?: (prop: Prop, deleted: boolean) => void;
+  onDespawn?: (prop: Prop) => void;
   readonly props: Prop[] = [];
   onEdit: ((prop: Prop, deleted: boolean) => void) | null = null;
   private nextId = 1;
@@ -121,6 +122,7 @@ export class PropManager {
       this.onEdit?.(prop, true);
       this.onChange?.(prop, true);
     }
+    this.onDespawn?.(prop);
     return true;
   }
 

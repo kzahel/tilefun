@@ -32,6 +32,13 @@ export class EntityManager {
   onDespawn?: (entity: Entity, destroyed: boolean) => void;
   onRemove?: (entity: Entity) => void;
   readonly entities: Entity[] = [];
+  simulationEntities: readonly Entity[] | undefined;
+  onMutation?: (entity: Entity) => void;
+  readonly removalListeners = new Set<(entity: Entity, destroyed: boolean) => void>();
+  get queryEntities(): readonly Entity[] {
+    return this.simulationEntities ?? this.entities;
+  }
+  readonly byId = new Map<number, Entity>();
   readonly spatialHash = new SpatialHash();
   private nextId = 1;
 
@@ -53,6 +60,7 @@ export class EntityManager {
   spawn(entity: Entity): Entity {
     entity.id = this.nextId++;
     this.entities.push(entity);
+    this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
     this.onSpawn?.(entity);
     return entity;
@@ -63,6 +71,7 @@ export class EntityManager {
     if (this.entities.some((existing) => existing.id === entity.id))
       throw new Error(`Entity ${entity.id} is already present.`);
     this.entities.push(entity);
+    this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
     this.nextId = Math.max(this.nextId, entity.id + 1);
   }
@@ -86,9 +95,10 @@ export class EntityManager {
     skipEntityIds?: ReadonlySet<number>,
   ): void {
     const playerSet = new Set(players);
+    const active = entityTickDts ? [...entityTickDts.keys()] : this.entities;
 
     // Save previous positions for render interpolation (only for ticking entities)
-    for (const entity of this.entities) {
+    for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
       entity.prevPosition = { wx: entity.position.wx, wy: entity.position.wy };
     }
@@ -178,7 +188,13 @@ export class EntityManager {
             probMaxCy,
           );
           for (const entity of nearbyEntities) {
-            if (entity === player || !entity.collider || !entity.wanderAI) continue;
+            if (
+              entity === player ||
+              !entity.collider ||
+              !entity.wanderAI ||
+              (entityTickDts && !entityTickDts.has(entity))
+            )
+              continue;
             // Skip push if Z ranges don't overlap
             const eWz = entity.wz ?? 0;
             const eH = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
@@ -224,7 +240,7 @@ export class EntityManager {
     }
 
     // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
-    for (const entity of this.entities) {
+    for (const entity of active) {
       if (playerSet.has(entity) || !entity.velocity) continue;
       if (skipEntityIds?.has(entity.id)) continue;
       if (entity.parentId !== undefined) continue; // parented: position derived from parent
@@ -282,7 +298,7 @@ export class EntityManager {
         );
       };
 
-      for (const entity of this.entities) {
+      for (const entity of active) {
         if (entityTickDts && !entityTickDts.has(entity)) continue;
         if (skipEntityIds?.has(entity.id)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
@@ -298,12 +314,12 @@ export class EntityManager {
     }
 
     // Update spatial hash after all movement (players + NPCs)
-    for (const entity of this.entities) {
+    for (const entity of active) {
       this.spatialHash.update(entity);
     }
 
     // --- Phase 3: Separate overlapping entities (skip parented) ---
-    const unparentedEntities = this.entities.filter(
+    const unparentedEntities = active.filter(
       (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
     );
     separateOverlappingEntities(
@@ -316,10 +332,10 @@ export class EntityManager {
     );
 
     // --- Phase 4: Resolve parented entity positions ---
-    this.resolveParentedPositions(players);
+    this.resolveParentedPositions(players, active);
 
     // --- Phase 5: Tick animations (only for ticking entities) ---
-    for (const entity of this.entities) {
+    for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
       tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
     }
@@ -330,15 +346,18 @@ export class EntityManager {
    * Processes parent-first (topological order) to support nesting.
    * Auto-detaches children whose parent no longer exists.
    */
-  resolveParentedPositions(players: readonly Entity[]): void {
+  resolveParentedPositions(
+    players: readonly Entity[],
+    active: readonly Entity[] = this.entities,
+  ): void {
     // Build id→entity map for O(1) parent lookup (includes players)
     const byId = new Map<number, Entity>();
-    for (const e of this.entities) byId.set(e.id, e);
+    for (const e of active) byId.set(e.id, e);
     for (const p of players) byId.set(p.id, p);
 
     // Count parented entities
     let remaining = 0;
-    for (const e of this.entities) {
+    for (const e of active) {
       if (e.parentId !== undefined) remaining++;
     }
     for (const p of players) {
@@ -347,7 +366,7 @@ export class EntityManager {
     if (remaining === 0) return;
 
     const resolved = new Set<number>();
-    const allEntities = [...this.entities, ...players];
+    const allEntities = [...active, ...players];
 
     // Iterative resolution — max 10 passes for nesting depth (typically 1-2)
     for (let pass = 0; pass < 10 && remaining > 0; pass++) {
@@ -388,9 +407,11 @@ export class EntityManager {
     if (entity) {
       this.spatialHash.remove(entity);
       this.onDespawn?.(entity, persist);
+      for (const listener of this.removalListeners) listener(entity, persist);
       if (persist) this.onRemove?.(entity);
     }
     this.entities.splice(idx, 1);
+    this.byId.delete(id);
     return true;
   }
 

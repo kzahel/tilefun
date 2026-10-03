@@ -244,24 +244,26 @@ class EntityAPIImpl implements EntityAPI {
   }
 
   find(id: number): EntityHandle | null {
-    const entity = this.em.entities.find((e) => e.id === id);
+    const entity = this.em.queryEntities.find((e) => e.id === id);
     if (!entity) return null;
     return new EntityHandle(entity, this.em);
   }
 
   findByType(type: string): EntityHandle[] {
-    return this.em.entities.filter((e) => e.type === type).map((e) => new EntityHandle(e, this.em));
+    return this.em.queryEntities
+      .filter((e) => e.type === type)
+      .map((e) => new EntityHandle(e, this.em));
   }
 
   findByTag(tag: string): EntityHandle[] {
-    return this.em.entities
+    return this.em.queryEntities
       .filter((e) => e.tags?.has(tag))
       .map((e) => new EntityHandle(e, this.em));
   }
 
   findInRadius(wx: number, wy: number, radius: number): EntityHandle[] {
     const r2 = radius * radius;
-    return this.em.entities
+    return this.em.queryEntities
       .filter((e) => {
         const dx = e.position.wx - wx;
         const dy = e.position.wy - wy;
@@ -271,7 +273,7 @@ class EntityAPIImpl implements EntityAPI {
   }
 
   all(): EntityHandle[] {
-    return this.em.entities.map((e) => new EntityHandle(e, this.em));
+    return this.em.queryEntities.map((e) => new EntityHandle(e, this.em));
   }
 }
 

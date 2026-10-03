@@ -7,6 +7,7 @@ import type { WorldGenerator } from "./Generator.js";
 
 /** Durable edits are separate from disposable generated residency. */
 export class ProceduralProps {
+  managed = false;
   readonly deleted = new Set<string>();
   readonly edits = new Map<string, SerializedEntity>();
   private processed = new Set<string>();
@@ -47,13 +48,20 @@ export class ProceduralProps {
       return false;
     };
     for (const prop of [...this.manager.props])
-      if (prop.proceduralId && !visible(prop)) this.manager.remove(prop.id, false);
+      if (!this.managed && prop.proceduralId && !visible(prop)) this.manager.remove(prop.id, false);
     const active = new Set(this.manager.props.map((prop) => prop.proceduralId));
-    for (const key of this.processed) if (!loaded.has(key)) this.processed.delete(key);
+    for (const key of this.processed)
+      if (!this.managed && !loaded.has(key)) this.processed.delete(key);
     for (const key of loaded) {
       if (this.processed.has(key)) continue;
       const [cx = 0, cy = 0] = key.split(",").map(Number);
       for (const placement of generator.placements(cx, cy, new Set()).placements) {
+        if (
+          this.managed &&
+          (Math.floor(placement.wx / CHUNK_SIZE_PX) !== cx ||
+            Math.floor(placement.wy / CHUNK_SIZE_PX) !== cy)
+        )
+          continue;
         const id = placement.featureId;
         if (!id || this.deleted.has(id) || this.edits.has(id) || active.has(id)) continue;
         const prop = createProp(placement.propType, placement.wx, placement.wy);
@@ -63,6 +71,7 @@ export class ProceduralProps {
       }
       this.processed.add(key);
     }
+    if (this.managed) return;
     for (const [id, edit] of this.edits) {
       if (active.has(id) || this.deleted.has(id)) continue;
       const prop = createProp(edit.type, edit.wx, edit.wy);
@@ -72,6 +81,9 @@ export class ProceduralProps {
         active.add(id);
       }
     }
+  }
+  forget(key: string): void {
+    this.processed.delete(key);
   }
   save(): Pick<SavedMeta, "deletedProceduralIds" | "proceduralEdits"> {
     return {

@@ -40,6 +40,11 @@ export class ProceduralActors {
       const [cx = 0, cy = 0] = key.split(",").map(Number);
       for (const p of generator.actors(cx, cy)) {
         if (
+          this.persistent &&
+          (Math.floor(p.wx / CHUNK_SIZE_PX) !== cx || Math.floor(p.wy / CHUNK_SIZE_PX) !== cy)
+        )
+          continue;
+        if (
           active.has(p.featureId) ||
           this.deleted.has(p.featureId) ||
           !this.canGenerate(p.featureId)

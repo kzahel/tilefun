@@ -51,10 +51,10 @@ import {
   validateRoomOccupancy,
 } from "../interiors/GameplayRoom.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
-import type { ActorRecord } from "../persistence/ActorRecords.js";
+import { actorScope } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
-import { type FeatureRecord, RealmRecords } from "../persistence/RealmRecords.js";
+import { RealmRecords } from "../persistence/RealmRecords.js";
 import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
@@ -81,8 +81,10 @@ import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
+import { around } from "./InterestManager.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
+import { RealmStreaming } from "./RealmStreaming.js";
 import { tickAllAI } from "./tickAllAI.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
@@ -117,6 +119,7 @@ export class Realm {
   terrainEditor: TerrainEditor;
   saveManager: SaveManager | null = null;
   records: RealmRecords | null = null;
+  streaming: RealmStreaming | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
   private fishSpawner = new FishSpawner();
@@ -257,6 +260,10 @@ export class Realm {
     const camY = saved?.cameraY ?? this.lastLoadedCamera.cameraY;
     const camZoom = saved?.cameraZoom ?? this.lastLoadedCamera.cameraZoom;
 
+    if (this.streaming)
+      await this.ensureReady(
+        around(Math.floor(spawnX / CHUNK_SIZE_PX), Math.floor(spawnY / CHUNK_SIZE_PX), 3),
+      );
     const player = createPlayer(spawnX, spawnY);
     applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
@@ -292,6 +299,20 @@ export class Realm {
       lastDismountedId: null,
       lastSafePosition: { wx: spawnX, wy: spawnY },
     };
+    const mounted = saved?.mount ? this.records?.byId.get(saved.mount.id) : undefined;
+    if (mounted && !("isProp" in mounted) && saved?.mount) {
+      player.parentId = mounted.id;
+      player.localOffsetX = saved.mount.offsetX;
+      player.localOffsetY = saved.mount.offsetY;
+      player.position = {
+        wx: mounted.position.wx + saved.mount.offsetX,
+        wy: mounted.position.wy + saved.mount.offsetY,
+      };
+      player.wz = saved.mount.wz;
+      player.jumpZ = saved.mount.jumpZ;
+      session.gameplaySession.mountId = mounted.id;
+      if (mounted.wanderAI) mounted.wanderAI.state = "ridden";
+    }
     session.cameraX = camX;
     session.cameraY = camY;
     session.cameraZoom = camZoom;
@@ -376,11 +397,23 @@ export class Realm {
   }
 
   playerData(session: PlayerSession): SavedPlayerData {
+    const mount = this.entityManager.byId.get(session.gameplaySession.mountId ?? -1);
     const support = roofSupport(session.player, this.entityManager.entities);
     const identity = support
       ? this.entityManager.entities.find((e) => e.id === support.id)?.proceduralId
       : undefined;
     return {
+      ...(mount?.persistentId
+        ? {
+            mount: {
+              id: mount.persistentId,
+              offsetX: session.player.localOffsetX ?? 0,
+              offsetY: session.player.localOffsetY ?? 0,
+              wz: session.player.wz ?? 0,
+              jumpZ: session.player.jumpZ ?? 0,
+            },
+          }
+        : {}),
       ...(support && identity
         ? {
             roofRide: {
@@ -403,6 +436,7 @@ export class Realm {
   /** Close persistence if the given worldId matches the currently loaded world. */
   async closePersistenceIfCurrent(worldId: string): Promise<void> {
     if (worldId === this.currentWorldId && this.saveManager) {
+      await this.streaming?.close();
       await this.saveManager.close();
       this.saveManager = null;
     }
@@ -416,6 +450,13 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
   ): void {
     this.tickCounter++;
+    if (this.streaming)
+      this.streaming.update(
+        [...this.sessions.values()]
+          .filter((s) => !dormantClientIds.has(s.clientId))
+          .map((s) => s.visibleRange),
+        [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
+      );
     const movementPhysics = getMovementPhysicsParams();
     const preSteppedEntityIds = new Set<number>();
 
@@ -425,6 +466,8 @@ export class Realm {
     for (const session of this.sessions.values()) {
       if (dormantClientIds.has(session.clientId) || session.transitioning || session.retired)
         continue;
+
+      if (this.streaming && !this.streaming.supported(session.player, dt)) continue;
 
       // ── Mount bookkeeping: auto-dismount if mount entity was removed ──
       if (session.gameplaySession.mountId !== null) {
@@ -606,7 +649,12 @@ export class Realm {
     // Previously this ran inside the per-session loop, meaning N sessions
     // caused N entity updates per tick — doubling/tripling movement speed.
     const activeSessions = [...this.sessions.values()].filter(
-      (s) => !s.debugPaused && !s.transitioning && !s.retired && !dormantClientIds.has(s.clientId),
+      (s) =>
+        !s.debugPaused &&
+        !s.transitioning &&
+        !s.retired &&
+        !dormantClientIds.has(s.clientId) &&
+        (!this.streaming || this.streaming.supported(s.player, dt)),
     );
     if (activeSessions.length > 0) {
       const physicsSteps = Math.max(1, this.physicsMult);
@@ -629,7 +677,10 @@ export class Realm {
 
         // AI: pass nearest player position per entity (for chase/follow)
         const playerPositions = activeSessions.map((s) => s.player.position);
-        tickAllAI(this.entityManager.entities, playerPositions, entityTickDts, Math.random);
+        const active = [...entityTickDts.keys()];
+        const decisions = this.streaming ? this.decisionDts(entityTickDts, stepDt) : entityTickDts;
+        this.entityManager.simulationEntities = active;
+        tickAllAI(active, playerPositions, decisions, Math.random);
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
@@ -654,7 +705,7 @@ export class Realm {
           preSteppedEntityIds,
         );
 
-        this.traffic?.tick(stepDt, players);
+        this.traffic?.tick(stepDt, players, this.streaming ? new Set(active) : undefined);
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {
@@ -703,6 +754,7 @@ export class Realm {
           stepDt,
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
           (tx, ty) => this.world.getHeightAt(tx, ty),
+          active,
         );
 
         for (const entity of entityTickDts.keys()) {
@@ -723,6 +775,7 @@ export class Realm {
 
         // ── OverlapService detection ──
         this.worldAPI.overlap.tick();
+        this.entityManager.simulationEntities = undefined;
       }
 
       // Restore noclip colliders
@@ -750,7 +803,11 @@ export class Realm {
           ].includes(this.generation.version))
       )
         continue;
-      if (!session.editorEnabled && !session.debugPaused) {
+      if (
+        !session.editorEnabled &&
+        !session.debugPaused &&
+        (!this.streaming || this.streaming.supported(session.player, dt))
+      ) {
         this.gemSpawner.update(
           dt,
           session.player,
@@ -778,7 +835,7 @@ export class Realm {
       const ranges = [...this.sessions.values()]
         .filter((s) => !dormantClientIds.has(s.clientId))
         .map((s) => s.visibleRange);
-      if (ranges.length) this.updateVisibleChunks(ranges);
+      if (ranges.length || this.streaming) this.updateVisibleChunks(ranges);
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
@@ -817,6 +874,14 @@ export class Realm {
       const support = this.traffic.supportRanges([...this.sessions.values()].map((s) => s.player));
       if (support.length)
         range = [...(Array.isArray(range) ? range : [range as ChunkRange]), ...support];
+    }
+    if (this.streaming) {
+      this.streaming.update(
+        Array.isArray(range) ? range : [range as ChunkRange],
+        this.sessions.values(),
+      );
+      this.world.computeAutotile(this.blendGraph, MAX_AUTOTILE_CHUNKS_PER_UPDATE);
+      return;
     }
     const initialWarmLoad = this.world.chunks.loadedCount === 0;
     const maxLoads =
@@ -908,6 +973,7 @@ export class Realm {
   }
 
   realizeProceduralActors(): void {
+    if (this.streaming) return;
     this.proceduralActors?.reconcile(
       this.generator,
       [...this.world.chunks.entries()].map(([key]) => key),
@@ -1116,6 +1182,8 @@ export class Realm {
     const worldMeta = overrideMeta ?? (await registry.getWorld(worldId));
     if (!worldMeta) throw new Error("World not found.");
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
+    await this.streaming?.close();
+    this.streaming = null;
     // Close previous save manager
     if (this.saveManager) {
       await this.saveManager.close();
@@ -1155,6 +1223,7 @@ export class Realm {
     const store = createStore(worldId);
     this.saveManager = new SaveManager(store);
     this.records = new RealmRecords(this.entityManager, this.propManager, this.saveManager);
+    this.entityManager.removalListeners.add((entity) => this.previousActive.delete(entity));
     this.proceduralActors.persistent = true;
     this.proceduralActors.canGenerate = (id) => !this.records?.features.has(id);
     this.terrainEditor = new TerrainEditor(
@@ -1181,7 +1250,46 @@ export class Realm {
       this.interior = savedMeta.interior;
       this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
     }
-    const savedChunks = await this.saveManager.loadChunks();
+    this.saveManager.bind(
+      (key) => this.world.chunks.getChunkDataByKey(key),
+      () => this.buildSaveMeta(),
+    );
+    this.proceduralProps.managed = true;
+    this.streaming = new RealmStreaming(
+      this.world,
+      this.records,
+      this.propManager,
+      this.saveManager,
+      (features) => {
+        for (const feature of features) {
+          if (feature.deleted) this.proceduralProps.deleted.add(feature.id);
+          if (feature.edit) this.proceduralProps.edits.set(feature.id, feature.edit);
+        }
+      },
+      (features, key) => {
+        this.proceduralProps.forget(key);
+        for (const feature of features) {
+          this.proceduralProps.deleted.delete(feature.id);
+          this.proceduralProps.edits.delete(feature.id);
+        }
+      },
+      (key, seeded) => {
+        this.proceduralProps.forget(key);
+        if (
+          this.interior ||
+          (this.generation.type === "regional" && this.generation.version !== "regional-v1")
+        ) {
+          this.proceduralProps.reconcile(this.generator, [key]);
+        } else if (!seeded && this.generation.type !== "flat") {
+          const [cx = 0, cy = 0] = key.split(",").map(Number);
+          for (const placement of this.generator.placements(cx, cy, new Set()).placements) {
+            if (actorScope({ wx: placement.wx, wy: placement.wy }) !== key) continue;
+            this.propManager.add(createProp(placement.propType, placement.wx, placement.wy));
+          }
+        }
+        if (!seeded) this.proceduralActors.reconcile(this.generator, [key]);
+      },
+    );
 
     let cameraX = 0;
     let cameraY = 0;
@@ -1189,10 +1297,8 @@ export class Realm {
     let playerX = 0;
     let playerY = 0;
 
-    console.log(`[tilefun] loadWorld ${worldId}: ${savedChunks.size} chunks, meta=${!!savedMeta}`);
-    this.world.chunks.setSavedData(savedChunks);
+    console.log(`[tilefun] loadWorld ${worldId}: lazy format-2 records, meta=${!!savedMeta}`);
     if (savedMeta) {
-      this.proceduralProps.restore(savedMeta);
       cameraX = savedMeta.cameraX;
       cameraY = savedMeta.cameraY;
       cameraZoom = savedMeta.cameraZoom;
@@ -1208,6 +1314,13 @@ export class Realm {
           ? regionalStart(regionalWorld(this.generation.seed))
           : { x: 0, y: 0 };
       const tempPlayer = createPlayer(start.x * TILE_SIZE, start.y * TILE_SIZE);
+      await this.ensureReady(
+        around(
+          Math.floor(tempPlayer.position.wx / CHUNK_SIZE_PX),
+          Math.floor(tempPlayer.position.wy / CHUNK_SIZE_PX),
+          3,
+        ),
+      );
       findWalkableSpawn(tempPlayer, this.world);
       playerX = tempPlayer.position.wx;
       playerY = tempPlayer.position.wy;
@@ -1241,18 +1354,6 @@ export class Realm {
         );
     }
 
-    const features = await this.saveManager.loadRecords("features");
-    for (const [id, value] of features) {
-      const feature = value as FeatureRecord;
-      this.records.features.set(id, feature);
-      if (feature.deleted) this.proceduralProps.deleted.add(id);
-      if (feature.edit) this.proceduralProps.edits.set(id, feature.edit);
-    }
-    this.records.restore([
-      ...((await this.saveManager.loadRecords("entities")).values() as MapIterator<ActorRecord>),
-      ...((await this.saveManager.loadRecords("props")).values() as MapIterator<ActorRecord>),
-    ]);
-
     if (this.interior) {
       playerX = buildingDoor(this.interior).arrival.wx;
       playerY = buildingDoor(this.interior).arrival.wy;
@@ -1279,13 +1380,6 @@ export class Realm {
       (key) => this.world.chunks.getChunkDataByKey(key),
       () => this.buildSaveMeta(),
     );
-    this.saveManager.onChunksSaved = (keys, getChunk) => {
-      for (const key of keys) {
-        const data = getChunk(key);
-        if (data)
-          this.world.chunks.updateSavedChunk(key, data.subgrid, data.roadGrid, data.heightGrid);
-      }
-    };
 
     this.saveManager.markMetaDirty();
     this.currentWorldId = worldId;
@@ -1294,11 +1388,21 @@ export class Realm {
     // Store loaded positions for addPlayer() to use
     this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
     this.lastLoadedPlayerPos = { wx: playerX, wy: playerY };
+    await this.ensureReady(
+      around(Math.floor(playerX / CHUNK_SIZE_PX), Math.floor(playerY / CHUNK_SIZE_PX), 3),
+    );
 
     // Reset per-client delta tracking so all data gets re-sent
     this.replication.clear();
 
     return { cameraX, cameraY, cameraZoom };
+  }
+
+  async ensureReady(range: ChunkRange): Promise<void> {
+    if (this.streaming) await this.streaming.ensure(range);
+    else
+      for (let cy = range.minCy; cy <= range.maxCy; cy++)
+        for (let cx = range.minCx; cx <= range.maxCx; cx++) this.world.getChunk(cx, cy);
   }
 
   async flushAsync(): Promise<void> {
@@ -1319,7 +1423,10 @@ export class Realm {
       teardown();
     }
     this.modTeardowns.clear();
-    await this.saveManager?.close();
+    await this.streaming?.close();
+    const saves = this.saveManager;
+    await saves?.close();
+    if (this.saveManager === saves) this.saveManager = null;
   }
 
   // ---- Riding helpers ----
@@ -1602,6 +1709,24 @@ export class Realm {
     dt: number,
   ): Map<Entity, number> {
     const result = new Map<Entity, number>();
+    if (this.streaming && this.records) {
+      for (const [key, demand] of this.streaming.demand) {
+        if (!demand.activity || !this.streaming.residency.ready(key)) continue;
+        for (const actor of this.records.buckets.get(key) ?? []) {
+          if (!("isProp" in actor) && this.streaming.supported(actor, dt)) result.set(actor, dt);
+        }
+      }
+      for (const session of sessions)
+        if (this.streaming.supported(session.player, dt)) result.set(session.player, dt);
+      for (const state of this.traffic?.states.values() ?? []) {
+        if (
+          this.streaming.demand.get(actorScope(state.entity.position))?.activity &&
+          this.streaming.supported(state.entity, dt)
+        )
+          result.set(state.entity, dt);
+      }
+      return result;
+    }
     const nearBuf = Realm.BROADCAST_BUFFER_CHUNKS;
     const midBuf = nearBuf + Realm.MID_TICK_BUFFER;
     const midInterval = Realm.MID_TICK_FRAMES / this.tickRate;
@@ -1664,6 +1789,29 @@ export class Realm {
     }
 
     return result;
+  }
+
+  private previousActive = new Set<Entity>();
+  private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {
+    const decisions = new Map<Entity, number>();
+    for (const entity of this.previousActive) if (!active.has(entity)) entity.tickAccumulator = 0;
+    this.previousActive = new Set(active.keys());
+    for (const entity of active.keys()) {
+      const activity = this.streaming?.demand.get(
+        this.records?.scope(entity) ?? actorScope(entity.position),
+      )?.activity;
+      if (activity === 2 || entity.type === "player") {
+        decisions.set(entity, dt);
+        entity.tickAccumulator = 0;
+      } else {
+        const accumulated = (entity.tickAccumulator ?? 0) + dt;
+        if (accumulated >= Realm.MID_TICK_FRAMES / this.tickRate) {
+          decisions.set(entity, accumulated);
+          entity.tickAccumulator = 0;
+        } else entity.tickAccumulator = accumulated;
+      }
+    }
+    return decisions;
   }
 
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {

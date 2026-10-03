@@ -8,7 +8,7 @@ import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
  * @param playerPositions One or more player positions. In multiplayer each
  *   entity uses the nearest player for chase/follow/befriend behavior.
  * @param entityTickDts Map of entities to their effective dt for this frame.
- *   Entities not in the map are frozen (velocity zeroed).
+ *   Entities not in the map receive no decision work; velocity is preserved.
  *
  * No DOM deps — can run in Node headless.
  */
@@ -20,19 +20,10 @@ export function tickAllAI(
 ): void {
   // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
-  for (const entity of entities) {
+  for (const [entity, dt] of entityTickDts) {
     if (!entity.wanderAI) continue;
     // Skip ridden entities — their velocity is controlled by the rider's input
     if (entity.wanderAI.state === "ridden") continue;
-    const dt = entityTickDts.get(entity);
-    if (dt === undefined) {
-      // Frozen: zero velocity so entity stops
-      if (entity.velocity) {
-        entity.velocity.vx = 0;
-        entity.velocity.vy = 0;
-      }
-      continue;
-    }
     if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
       updateRouteAI(entity, dt);
       continue;

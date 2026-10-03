@@ -208,7 +208,7 @@ export class TrafficSystem {
     return true;
   }
   /** Called once per physics tick after player input. No wander AI, damage or pushing. */
-  tick(dt: number, players: readonly Entity[]) {
+  tick(dt: number, players: readonly Entity[], active?: ReadonlySet<Entity>) {
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
@@ -220,6 +220,7 @@ export class TrafficSystem {
         this.remove(s);
         continue;
       }
+      if (active && !active.has(s.entity)) continue;
       this.choose(s);
       const end = (s.turn ?? s.lane.path).length;
       const half = Math.max(s.entity.collider?.width ?? 0, s.entity.collider?.height ?? 0) / 2;

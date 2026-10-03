@@ -13,6 +13,8 @@ export interface ChunkRange {
 }
 
 export class ChunkManager {
+  /** Authority requires an acknowledged durable read before generation. */
+  managed = false;
   private chunks = new Map<string, Chunk>();
   private generator: TerrainStrategy | null = null;
   private savedSubgrids = new Map<string, Uint8Array>();
@@ -75,6 +77,7 @@ export class ChunkManager {
     const key = chunkKey(cx, cy);
     let chunk = this.chunks.get(key);
     if (!chunk) {
+      if (this.managed) throw new Error(`Chunk ${key} is not ready.`);
       chunk = new Chunk();
       const saved = this.savedSubgrids.get(key);
       if (saved) {
@@ -98,6 +101,26 @@ export class ChunkManager {
     return chunk;
   }
 
+  /** Publish only after the persistence layer establishes presence or absence. */
+  admit(
+    cx: number,
+    cy: number,
+    data?: { subgrid: Uint8Array; roadGrid?: Uint8Array | null; heightGrid?: Uint8Array | null },
+  ): Chunk {
+    const existing = this.get(cx, cy);
+    if (existing) return existing;
+    const chunk = new Chunk();
+    if (data) {
+      chunk.subgrid.set(data.subgrid);
+      deriveTerrain(chunk);
+      if (data.roadGrid) chunk.roadGrid.set(data.roadGrid);
+      if (data.heightGrid) chunk.heightGrid.set(data.heightGrid);
+    } else this.generate(chunk, cx, cy);
+    this.chunks.set(chunkKey(cx, cy), chunk);
+    this.invalidateNeighborAutotile(cx, cy);
+    return chunk;
+  }
+
   /** Get chunk if it exists (no creation). */
   get(cx: number, cy: number): Chunk | undefined {
     return this.chunks.get(chunkKey(cx, cy));
@@ -113,6 +136,9 @@ export class ChunkManager {
 
   /** Remove a chunk by key. Used by RemoteStateView to unload server-unloaded chunks. */
   remove(key: string): boolean {
+    this.savedSubgrids.delete(key);
+    this.savedRoadGrids.delete(key);
+    this.savedHeightGrids.delete(key);
     return this.chunks.delete(key);
   }
 

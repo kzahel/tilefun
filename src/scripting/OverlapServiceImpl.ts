@@ -64,7 +64,8 @@ export class OverlapServiceImpl implements OverlapService {
     for (const tag of this.exitListeners.keys()) watchedTags.add(tag);
     if (watchedTags.size === 0) return;
 
-    const entities = this.em.entities;
+    const entities = this.em.queryEntities;
+    const active = new Set(entities);
 
     for (const tag of watchedTags) {
       const currentPairs = new Set<string>();
@@ -89,7 +90,7 @@ export class OverlapServiceImpl implements OverlapService {
         const maxCy = Math.floor(selfAABB.bottom / CHUNK_SIZE_PX);
         const nearby = spatialHash.queryRange(minCx - 1, minCy - 1, maxCx + 1, maxCy + 1);
         for (const other of nearby) {
-          if (other === self || !other.collider) continue;
+          if (other === self || !other.collider || !active.has(other)) continue;
           const otherAABB = getEntityAABB(other.position, other.collider);
           if (aabbsOverlap(selfAABB, otherAABB)) {
             currentPairs.add(`${self.id},${other.id}`);

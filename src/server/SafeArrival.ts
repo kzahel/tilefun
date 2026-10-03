@@ -13,7 +13,10 @@ export interface Arrival {
   generation: GenerationDescriptor;
 }
 /** Bounded terrain + realized prop check before a player leaves the old realm. */
-export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: number } {
+export async function safeArrival(
+  realm: Realm,
+  arrival: Arrival,
+): Promise<{ wx: number; wy: number }> {
   if (
     !Number.isFinite(arrival.x) ||
     !Number.isFinite(arrival.y) ||
@@ -27,8 +30,12 @@ export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: n
     cy = Math.floor(arrival.y / CHUNK_SIZE);
   // Explicit bounded warm-up; do not evict chunks belonging to other players.
   const radius = realm.interior ? 1 : 3;
-  for (let y = cy - radius; y <= cy + radius; y++)
-    for (let x = cx - radius; x <= cx + radius; x++) realm.world.getChunk(x, y);
+  await realm.ensureReady({
+    minCx: cx - radius,
+    minCy: cy - radius,
+    maxCx: cx + radius,
+    maxCy: cy + radius,
+  });
   realm.realizeProceduralProps();
   const player = createPlayer(0, 0);
   const collider = player.collider;

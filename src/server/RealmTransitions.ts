@@ -39,7 +39,7 @@ export class RealmTransitions {
       } = await resolve();
       if (target.interior && !allowInterior)
         throw new Error("Enter this interior through its building door.");
-      const position = arrival ? safeArrival(target, arrival) : undefined;
+      const position = arrival ? await safeArrival(target, arrival) : undefined;
       const oldId = session.realmId;
       const source = oldId ? this.findRealm(oldId) : undefined;
       // Same-world travel must read the latest live progress, not an older save.

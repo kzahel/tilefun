@@ -12,6 +12,7 @@ import {
   TILE_SIZE,
 } from "../config/constants.js";
 import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -30,10 +31,11 @@ export function tickBallPhysics(
   dt: number,
   getCollision: (tx: number, ty: number) => number,
   getHeight: (tx: number, ty: number) => number,
+  active: readonly Entity[] = entityManager.entities,
 ): void {
   const toRemove: number[] = [];
 
-  for (const ball of entityManager.entities) {
+  for (const ball of active) {
     if (ball.type !== "ball") continue;
     if (!ball.velocity) continue;
 
