@@ -1,7 +1,7 @@
+import { drawLayeredInteriorMap } from "../rendering/CanvasInteriorMap.js";
 import { buildGenericHomeLayeredMap } from "./GenericHomeGeometry.js";
 import {
   createLayeredInteriorMap,
-  drawLayeredInteriorMap,
   INTERIOR_DRAW_ORDER,
   type LayeredInteriorMap,
   placeInteriorTile,

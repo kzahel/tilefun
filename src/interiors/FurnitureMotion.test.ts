@@ -2,8 +2,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import { getEntityAABB } from "../entities/collision.js";
 import { furnitureRecipe } from "../scenarios/FurnitureRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { furnishedSceneOrder } from "./FurnishedInterior.js";
 import { FURNITURE_CATALOG } from "./FurnitureCatalog.js";
+import { furnishedSceneOrder } from "./FurnitureLayout.js";
 import { FurnitureMotion, furnitureCollider, MOTION_SCENES } from "./FurnitureMotion.js";
 import { FURNITURE_BODIES } from "./FurniturePhysics.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
@@ -100,7 +100,7 @@ describe("furniture in shared game physics", async () => {
   it("keeps a table and its plant together when the player changes depth", async () => {
     const m = scene("worktable");
     const ids = (y: number) =>
-      furnishedSceneOrder(m.objects, [{ id: "player", depth: y, draw: () => {} }]).map((o) =>
+      furnishedSceneOrder(m.objects, [{ id: "player", depth: y }]).map((o) =>
         "placement" in o ? o.placement.id : o.id,
       );
     expect(ids(60)).toEqual(["player", "table", "plant", "stool"]);
@@ -163,9 +163,9 @@ describe("furniture in shared game physics", async () => {
   it("keeps the player in front across the full bed top and behind at ground level", async () => {
     const m = scene("bedside");
     const order = () =>
-      furnishedSceneOrder(m.objects, [
-        { id: "player", depth: m.playerDepth(), draw: () => {} },
-      ]).map((o) => ("placement" in o ? o.placement.id : o.id));
+      furnishedSceneOrder(m.objects, [{ id: "player", depth: m.playerDepth() }]).map((o) =>
+        "placement" in o ? o.placement.id : o.id,
+      );
     for (const y of [64, 68, 74, 80, 88]) {
       m.player.position = { wx: 64, wy: y };
       m.player.wz = 8;

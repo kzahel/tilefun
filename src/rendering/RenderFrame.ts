@@ -1,4 +1,5 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
+import type { InteriorContent, InteriorDraw } from "../interiors/InteriorPresentation.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 import type { SceneItem } from "./SceneItem.js";
@@ -31,6 +32,11 @@ export interface TerrainDraw {
  * ownership/acknowledgment protocol before retaining any part of a frame.
  */
 export type RenderPass =
+  | {
+      readonly kind: "interior";
+      readonly contentId: number;
+      readonly draws: readonly InteriorDraw[];
+    }
   | { readonly kind: "overlay"; readonly items: readonly OverlayDraw[] }
   | { readonly kind: "clear"; readonly color: string }
   | { readonly kind: "terrain"; readonly draws: readonly TerrainDraw[] }
@@ -43,6 +49,7 @@ export type RenderPass =
 
 export interface RenderBackend extends TerrainPresentation {
   readonly assets: SpriteCatalog;
+  prepareInterior(content: InteriorContent): void;
   prepareTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange): void;
   collectTerrain(
     view: RenderView,

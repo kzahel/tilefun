@@ -357,7 +357,7 @@ export class GameClient {
             sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
           }
           remoteView.clear();
-          this.tileRenderer.clear();
+          this.renderer.clear();
           this.sceneFrame.clear();
           if (this.reloadCamera && this.reloadCamera.realmId === msg.worldId) {
             this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
@@ -408,7 +408,7 @@ export class GameClient {
           remoteView.interior = null;
           this.canvas.dataset.interior = "";
           remoteView.clear();
-          this.tileRenderer.clear();
+          this.renderer.clear();
           this.sceneFrame.clear();
         } else if (msg.type === "realm-player-count") {
           this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
@@ -885,7 +885,7 @@ export class GameClient {
   destroy(): void {
     this.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
-    this.tileRenderer.clear();
+    this.renderer.clear();
     this.sceneFrame.clear();
     this.doorControl.destroy();
     this.doorPresentation.destroy();

@@ -1,48 +1,38 @@
-import { PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
-import { CachedInteriorRenderer } from "../interiors/CachedInteriorRenderer.js";
 import {
   furnitureAsset,
   INTERIOR_FLOOR,
   INTERIOR_WALL_TYPE,
 } from "../interiors/GameplayInterior.js";
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
-import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { collectScene } from "../rendering/collectScene.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
-
-let lastKey = "";
-let renderer: CachedInteriorRenderer | null = null;
-let lastAtlas: CanvasImageSource | null = null;
-const nativeCamera = new Camera();
-nativeCamera.zoom = 1 / PIXEL_SCALE;
 
 /** Same wall/furniture renderer; actors come from the production scene collector. */
 export function renderInterior(gc: GameContext, alpha: number, particles: ParticleItem[]): void {
   const identity = gc.stateView.interior;
   if (!identity) return;
-  const atlas = gc.sheets.get("modern-interiors");
-  if (!atlas) return;
+  if (!gc.spriteCatalog.has("modern-interiors")) return;
+  const frame = gc.sceneFrame;
   const preview = gc.editorMode.getRoomPreview();
   const state = gc.stateView.roomState;
   const key = JSON.stringify([identity, preview?.room?.plan.rows ?? state]);
-  if (key !== lastKey || atlas.image !== lastAtlas) {
+  if (key !== frame.interiorKey || !frame.interior) {
     // Realm identity arrives before the room baseline. Render its versioned
     // initial layout until the authoritative saved/edited plan is available.
     const room = preview?.room ?? compileGameplayRoom(identity, state ?? initialRoom(identity));
     const shell = room;
-    renderer = new CachedInteriorRenderer(
-      atlas.image,
+    frame.interior = new InteriorPresentation(
       shell.map,
       shell.plan,
       !room.legacy ? room.furnitureFloor : INTERIOR_FLOOR,
       !room.legacy,
     );
-    lastAtlas = atlas.image;
-    lastKey = key;
+    frame.interiorKey = key;
   }
-  if (!renderer) return;
+  const presentation = frame.interior;
+  if (!presentation) return;
   const placements = gc.stateView.props.flatMap((prop) => {
     const asset = furnitureAsset(prop.type);
     return asset
@@ -69,27 +59,21 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
     gc.camera,
     gc.camera.getVisibleChunkRange(),
     alpha,
-    gc.tileRenderer,
+    gc.renderer,
     particles,
     false,
     undefined,
     drawProps,
     gc.sceneFrame,
   );
-  const actors = items.map((item, index) => ({
-    id: `actor:${index}`,
-    depth: item.sortKey,
-    draw: (ctx: CanvasRenderingContext2D) =>
-      drawScene2D(ctx, nativeCamera, [item], gc.sheets, undefined, false, gc.tileRenderer),
-  }));
-  const origin = gc.camera.worldToScreen(0, 0);
-  gc.ctx.save();
-  gc.ctx.translate(origin.sx, origin.sy);
-  gc.ctx.scale(gc.camera.scale, gc.camera.scale);
   try {
-    renderer.draw(gc.ctx, placements, actors);
+    gc.renderer.prepareInterior(presentation.content);
+    gc.renderer.submit(gc.camera, {
+      kind: "interior",
+      contentId: presentation.content.id,
+      draws: presentation.collect(placements, items),
+    });
   } finally {
-    gc.ctx.restore();
-    gc.sceneFrame.release();
+    frame.release();
   }
 }

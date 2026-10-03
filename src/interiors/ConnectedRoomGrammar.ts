@@ -1,7 +1,7 @@
 import { getModernInteriorsEntry } from "../assets/ModernInteriorsAtlasIndex.js";
+import { drawLayeredInteriorMap } from "../rendering/CanvasInteriorMap.js";
 import {
   createLayeredInteriorMap,
-  drawLayeredInteriorMap,
   type LayeredInteriorMap,
   placeInteriorTile,
 } from "./LayeredInteriorMap.js";

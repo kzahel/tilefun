@@ -1,5 +1,5 @@
-import { furnitureSignature } from "./FurnishedInterior.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
+import { furnitureSignature } from "./FurnitureLayout.js";
 import { MOTION_SKETCH } from "./FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "./FurniturePhysics.js";
 import type { ReviewFeedback } from "./review/ReviewFeedback.js";

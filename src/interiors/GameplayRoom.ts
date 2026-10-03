@@ -11,8 +11,8 @@ import {
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { buildingDoors } from "./BuildingDoors.js";
-import { compileFurniture } from "./FurnishedInterior.js";
 import type { FurnitureRect } from "./FurnitureCatalog.js";
+import { compileFurniture } from "./FurnitureLayout.js";
 import {
   furnitureAsset,
   INTERIOR_FLOOR,

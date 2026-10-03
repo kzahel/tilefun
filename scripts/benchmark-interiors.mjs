@@ -17,6 +17,14 @@ try {
     const image = new Image();
     image.src = "assets/tilesets/modern-interiors-atlas.png";
     await image.decode();
+    const { Spritesheet } = await import(`${root}assets/Spritesheet.ts`);
+    const visitor = document.createElement("canvas");
+    visitor.width = 10;
+    visitor.height = 24;
+    const visitorContext = visitor.getContext("2d");
+    visitorContext.fillStyle = "#ee4499";
+    visitorContext.fillRect(0, 0, 10, 24);
+    const actorAssets = { sheets: new Map([["visitor", new Spritesheet(visitor, 10, 24)]]) };
     const shell = interiorPlan({
       version: "interior-v1",
       floor: 0,
@@ -57,13 +65,28 @@ try {
                 {
                   id: "visitor",
                   depth,
-                  draw(ctx) {
-                    ctx.fillStyle = "#ee4499";
-                    ctx.fillRect(43, depth - 24, 10, 24);
+                  item: {
+                    kind: "sprite",
+                    sortKey: depth,
+                    wx: 48,
+                    wy: depth,
+                    zOffset: 0,
+                    sheetKey: "visitor",
+                    frameCol: 0,
+                    frameRow: 0,
+                    spriteWidth: 10,
+                    spriteHeight: 24,
+                    flipX: false,
+                    drawOffsetY: 0,
+                    hasShadow: false,
+                    shadowFeetWy: depth,
+                    shadowWidth: 10,
+                    shadowTerrainZ: 0,
+                    flashHidden: false,
                   },
                 },
               ];
-              if (cached) renderer.draw(ctx, placements, actors);
+              if (cached) renderer.draw(ctx, placements, actors, actorAssets);
               else
                 drawFurnishedInterior(
                   ctx,
@@ -73,6 +96,7 @@ try {
                   placements,
                   actors,
                   INTERIOR_FLOOR,
+                  actorAssets,
                 );
               return ctx.getImageData(0, 0, 640, 640).data;
             };

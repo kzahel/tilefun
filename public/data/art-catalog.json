@@ -20328,24 +20328,6 @@
       ]
     },
     {
-      "id": "architecture:room-builder/3d-walls/c08-r01",
-      "sheetId": "modern-interiors",
-      "rect": [
-        1456,
-        7918,
-        16,
-        16
-      ],
-      "label": "room-builder/3d-walls/c08-r01",
-      "kind": "architecture",
-      "consumers": [
-        {
-          "system": "Interiors",
-          "source": "src/interiors/LayeredInteriorMap.ts:129"
-        }
-      ]
-    },
-    {
       "id": "architecture:room-builder/3d-walls/c11-r02",
       "sheetId": "modern-interiors",
       "rect": [
@@ -20360,6 +20342,24 @@
         {
           "system": "Interiors",
           "source": "src/interiors/workbench/main.ts:169"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/3d-walls/c08-r01",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1456,
+        7918,
+        16,
+        16
+      ],
+      "label": "room-builder/3d-walls/c08-r01",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/CanvasInteriorMap.ts:56"
         }
       ]
     },
@@ -21405,11 +21405,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:505"
+          "source": "src/interiors/playtest/main.ts:504"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:526"
+          "source": "src/interiors/playtest/main.ts:525"
         },
         {
           "system": "Interiors",
@@ -23393,7 +23393,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CanvasRenderBackend.ts:82"
+          "source": "src/rendering/CanvasRenderBackend.ts:105"
         },
         {
           "system": "Editor",

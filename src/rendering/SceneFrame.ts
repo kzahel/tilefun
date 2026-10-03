@@ -1,3 +1,4 @@
+import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 import { OverlayFrame } from "./OverlayFrame.js";
 import { PropDepthCache } from "./propDepth.js";
@@ -9,6 +10,8 @@ import type { SceneItem } from "./SceneItem.js";
  * Release after drawing so particles and elevation surfaces are not retained.
  */
 export class SceneFrame {
+  interior: InteriorPresentation | null = null;
+  interiorKey = "";
   readonly overlays = new OverlayFrame();
   readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
@@ -22,6 +25,7 @@ export class SceneFrame {
   }
 
   release(): void {
+    this.interior?.release();
     this.overlays.release();
     this.items.length = 0;
     this.drawOrder.length = 0;
@@ -31,6 +35,9 @@ export class SceneFrame {
   clear(): void {
     this.release();
     this.overlays.clear();
+    this.interior?.clear();
+    this.interior = null;
+    this.interiorKey = "";
     this.grass.clear();
     this.propDepth.clear();
   }

@@ -91,8 +91,9 @@ asset changes, eviction, stale handles and reset. Use the existing bundled
 Chromium runners and immutable review references; no new reference approvals
 are implied by a refactor.
 
-Current implementation still exposes Canvas in `GameContext`, `Spritesheet` and
-indoor callbacks. These are explicit remaining boundaries, not a claim that the
+Current implementation still exposes legacy Canvas resources in `GameContext`;
+`Spritesheet` is now a Canvas resource wrapper with separate neutral metadata.
+Indoor actor callbacks have been removed. These are explicit remaining boundaries, not a claim that the
 production renderer is already interchangeable.
 
 ## Completed slice: terrain resource ownership
@@ -174,7 +175,25 @@ records ownership tests, unchanged review identities and traversal coverage.
 
 Editor overlays now use explicit pooled geometry through the same backend;
 [030](../tactical/030-editor-overlay-data.md) records parity with all original
-brush, preview and remote-cursor drawing operations. Indoor callbacks still need migration. Terrain placement
+brush, preview and remote-cursor drawing operations. Indoor frames now use
+the same submission interface, as described below. Terrain placement
 selection currently lives with the concrete cache and must become shared
 presentation policy during final boundary cleanup. `GameContext` still exposes
 legacy Canvas resources for those consumers and independent UI/debug rendering.
+
+## Indoor frame data
+
+`InteriorPresentation` owns furniture/support and wall/actor ordering. It emits
+floor, wall-band, furniture, shadow and actor commands with scalar source/destination
+geometry. Its room-content identity changes with compiled room content, while
+camera motion and actor motion reuse static content. Each client's `SceneFrame`
+owns the presentation cache; release drops dynamic actor references. There is no
+module-global gameplay renderer or per-actor draw callback.
+
+`CanvasInteriorResources` rasterizes the static shell/bands and consumes that
+order. Backend reset and asset replacement discard the room cache; independent
+backends never share room surfaces. `FurnitureLayout` and `LayeredInteriorMap`
+are neutral modules; raster functions live in `CanvasInteriorMap`. Native Canvas
+review/uncached reference adapters still exist and share these rules.
+[031](../tactical/031-interior-frame-data.md) records exact room pixel parity,
+resource ownership tests and ordinary/edited-room movement evidence.

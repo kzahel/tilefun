@@ -7,8 +7,8 @@ import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { type BuildingLayout, buildingLayout } from "./BuildingLayouts.js";
-import { compileFurniture } from "./FurnishedInterior.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
+import { compileFurniture } from "./FurnitureLayout.js";
 import { furnitureCollider } from "./FurniturePhysics.js";
 import sources from "./gameplay-furniture-sources.json" with { type: "json" };
 

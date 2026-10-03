@@ -5,7 +5,7 @@ import {
   type ProfileGeometry,
   type WallProfileOptions,
 } from "../ApartmentWallProfiles.js";
-import { compileFurniture } from "../FurnishedInterior.js";
+import { compileFurniture } from "../FurnitureLayout.js";
 import type { LayeredInteriorMap } from "../LayeredInteriorMap.js";
 import type { ReviewCase } from "./ReviewCases.js";
 

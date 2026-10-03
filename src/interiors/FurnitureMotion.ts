@@ -4,8 +4,8 @@ import type { MovementContext } from "../physics/MovementContext.js";
 import { depthAboveProps, propDepthSurfaces } from "../rendering/propDepth.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
-import { compileFurniture, type PlacedFurniture } from "./FurnishedInterior.js";
 import type { FurniturePlacement } from "./FurnitureCatalog.js";
+import { compileFurniture, type PlacedFurniture } from "./FurnitureLayout.js";
 import {
   FURNITURE_BODIES,
   type FurnitureBodies,

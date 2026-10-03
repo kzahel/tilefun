@@ -1,5 +1,5 @@
+import { drawLayeredInteriorMap } from "../rendering/CanvasInteriorMap.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
-import { drawLayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 export type RoomKind = "L" | "B" | "K" | "T" | "H";
 export type PlanCell = RoomKind | "#" | "+" | " ";

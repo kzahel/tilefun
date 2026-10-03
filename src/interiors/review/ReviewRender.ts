@@ -1,13 +1,13 @@
 import { required } from "../../art/ArtCatalog.js";
 import { sha256 } from "../../art/ArtSource.js";
 import { reviewContext2D } from "../../art/reviewCanvas.js";
+import { drawLayeredInteriorMap } from "../../rendering/CanvasInteriorMap.js";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
 import { CachedInteriorRenderer } from "../CachedInteriorRenderer.js";
 import { drawFurnishedInterior, furnitureSignature } from "../FurnishedInterior.js";
 import { compileGameplayRoom, initialRoom } from "../GameplayRoom.js";
-import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import type { ReviewCase } from "./ReviewCases.js";
 export function renderInteriorCandidate(
   canvas: HTMLCanvasElement,

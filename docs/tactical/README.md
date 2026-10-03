@@ -47,6 +47,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [030 Editor overlay data](030-editor-overlay-data.md) | Delivered: pooled geometry and Canvas-free editor submission; R1 complete |
 
+| [031 Interior frame data](031-interior-frame-data.md) | Delivered: shared room ordering, neutral actors and backend-owned room resources; 81 unchanged pixel cases |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

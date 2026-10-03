@@ -28,27 +28,41 @@ export function drawScene2D(
   for (const entry of order) {
     const item = items[entry < 0 ? -entry - 1 : entry];
     if (!item) continue;
-    if (entry < 0) {
-      if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
-      continue;
+    drawSceneEntry2D(ctx, camera, item, sheets, grassSheet, pixelExactShadows, terrain, entry < 0);
+  }
+}
+
+/** Draw one explicitly ordered body or shadow. No scene ordering policy here. */
+export function drawSceneEntry2D(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  item: SceneItem,
+  sheets: Map<string, Spritesheet>,
+  grassSheet: Spritesheet | undefined,
+  pixelExactShadows = false,
+  terrain?: CanvasTerrainSource,
+  shadow = false,
+): void {
+  if (shadow) {
+    if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
+    return;
+  }
+  switch (item.kind) {
+    case "sprite":
+      drawSprite(ctx, camera, item, sheets);
+      break;
+    case "elevation": {
+      if (!terrain) throw new Error("Elevation drawing requires terrain resources");
+      const image = terrain.resolveTerrainResource(item.terrainResource);
+      if (image) drawElevation(ctx, camera, item, image);
+      break;
     }
-    switch (item.kind) {
-      case "sprite":
-        drawSprite(ctx, camera, item, sheets);
-        break;
-      case "elevation": {
-        if (!terrain) throw new Error("Elevation drawing requires terrain resources");
-        const image = terrain.resolveTerrainResource(item.terrainResource);
-        if (image) drawElevation(ctx, camera, item, image);
-        break;
-      }
-      case "grass":
-        if (grassSheet) drawGrass(ctx, camera, item, grassSheet);
-        break;
-      case "particle":
-        drawParticle(ctx, camera, item);
-        break;
-    }
+    case "grass":
+      if (grassSheet) drawGrass(ctx, camera, item, grassSheet);
+      break;
+    case "particle":
+      drawParticle(ctx, camera, item);
+      break;
   }
 }
 

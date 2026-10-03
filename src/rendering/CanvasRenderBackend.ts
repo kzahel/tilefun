@@ -1,8 +1,10 @@
 import { createSpriteCatalog, type SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { InteriorContent } from "../interiors/InteriorPresentation.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { Camera } from "./Camera.js";
 import { drawScene2D } from "./Canvas2DRenderer.js";
+import { CanvasInteriorResources } from "./CanvasInteriorResources.js";
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import type { RenderBackend, RenderPass, RenderView } from "./RenderFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
@@ -12,6 +14,7 @@ import { TileRenderer } from "./TileRenderer.js";
 export class CanvasRenderBackend implements RenderBackend {
   private readonly camera = new Camera();
   assets: SpriteCatalog;
+  private interior: CanvasInteriorResources | null = null;
 
   constructor(
     private readonly ctx: CanvasRenderingContext2D,
@@ -25,6 +28,13 @@ export class CanvasRenderBackend implements RenderBackend {
     this.sheets = sheets;
     this.assets = createSpriteCatalog(sheets);
     this.terrain.invalidateAssets();
+    this.interior = null;
+  }
+
+  prepareInterior(content: InteriorContent): void {
+    if (this.interior?.contentId === content.id) return;
+    const atlas = this.sheets.get("modern-interiors");
+    this.interior = atlas ? new CanvasInteriorResources(atlas.image, content) : null;
   }
 
   private setView(view: RenderView): Camera {
@@ -60,6 +70,19 @@ export class CanvasRenderBackend implements RenderBackend {
     const camera = this.setView(view);
     ctx.imageSmoothingEnabled = false;
     switch (pass.kind) {
+      case "interior":
+        if (this.interior?.contentId === pass.contentId) {
+          const origin = camera.worldToScreen(0, 0);
+          ctx.save();
+          try {
+            ctx.translate(origin.sx, origin.sy);
+            ctx.scale(camera.scale, camera.scale);
+            this.interior.draw(ctx, pass.draws, this.sheets, this.terrain);
+          } finally {
+            ctx.restore();
+          }
+        }
+        break;
       case "overlay":
         drawOverlayGeometry(ctx, pass.items, this.sheets);
         break;
@@ -90,5 +113,6 @@ export class CanvasRenderBackend implements RenderBackend {
 
   clear(): void {
     this.terrain.clear();
+    this.interior = null;
   }
 }

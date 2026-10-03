@@ -1,13 +1,13 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
-import { compileFurniture, furnitureDrawOrder, furnitureSignature } from "./FurnishedInterior.js";
 import {
   FURNITURE_CATALOG,
   type FurniturePlacement,
   furnitureDefinition,
   parseFurniturePlacements,
 } from "./FurnitureCatalog.js";
+import { compileFurniture, furnitureDrawOrder, furnitureSignature } from "./FurnitureLayout.js";
 import { furnitureReviewCases } from "./review/FurnitureReviewCases.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 

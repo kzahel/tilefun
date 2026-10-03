@@ -4,9 +4,9 @@ import {
   loadModernInteriorsAtlasIndex,
   type ModernInteriorsAtlasEntry,
 } from "../../assets/ModernInteriorsAtlasIndex.js";
+import { drawLayeredInteriorMap } from "../../rendering/CanvasInteriorMap.js";
 import type { PlanCell } from "../ApartmentFloorPlan.js";
 import {
-  drawLayeredInteriorMap,
   INTERIOR_DRAW_ORDER,
   type InteriorLayer,
   type LayeredInteriorMap,

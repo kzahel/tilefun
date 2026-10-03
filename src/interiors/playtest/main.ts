@@ -5,7 +5,6 @@ import {
 import { Spritesheet } from "../../assets/Spritesheet.js";
 import { PIXEL_SCALE, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../../config/constants.js";
 import { Camera } from "../../rendering/Camera.js";
-import { drawScene2D } from "../../rendering/Canvas2DRenderer.js";
 import type { SpriteItem } from "../../rendering/SceneItem.js";
 import { furnitureRecipe } from "../../scenarios/FurnitureRecipe.js";
 import { ScenarioClient } from "../../scenarios/ScenarioClient.js";
@@ -525,10 +524,11 @@ function draw() {
       {
         id: "player",
         depth: model.playerDepth(),
-        draw: (c) => drawScene2D(c, camera, [item], sheets, undefined),
+        item,
       },
     ],
     model.placementArea,
+    { sheets, camera },
   );
   if (el<HTMLInputElement>("collisions").checked) {
     const box = (
