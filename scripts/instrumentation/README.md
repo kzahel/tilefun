@@ -1,5 +1,15 @@
 # Diagnostic probes
 
+## Sleeping NPC separation
+
+Run `npx tsx scripts/instrumentation/entity-separation.ts` from the repository
+root. It compares ungated separation with an empty tick selection over 400
+coincident NPCs, with five warmup and 30 measured passes. Solid terrain keeps
+the control fixture stationary. It asserts that sleeping NPCs make no tile
+collision queries and reports median pass time; this isolates separation and
+does not measure whole-server cost or gameplay FPS. See
+[Tactical 018](../../docs/tactical/018-tick-aware-npc-separation.md).
+
 ## Grass cache retention
 
 Run `node scripts/instrumentation/grass-cache-retention.mjs` from the repository

@@ -216,6 +216,8 @@ const SEPARATION_SPEED = 40;
  * Gently push apart overlapping solid wandering entities using a spatial hash.
  * Also separates entities that overlap with the player (pushing only the entity).
  * Mutates entity positions in place. Respects tile collision (won't push through walls).
+ * With tick durations, only selected entities participate; each NPC's nudge uses
+ * its own elapsed time. Player overlap correction remains penetration-based.
  */
 export function separateOverlappingEntities(
   entities: readonly Entity[],
@@ -223,12 +225,14 @@ export function separateOverlappingEntities(
   dt: number,
   getCollision: (tx: number, ty: number) => number,
   blockMask: number,
+  entityTickDts?: ReadonlyMap<Entity, number>,
 ): void {
   // 1. Bucket eligible entities into a spatial hash (cell size = TILE_SIZE)
   const grid = new Map<number, Entity[]>();
   const pushableEntities: Entity[] = [];
   for (const entity of entities) {
     if (
+      (entityTickDts && !entityTickDts.has(entity)) ||
       players.has(entity) ||
       !entity.collider ||
       entity.collider.solid === false ||
@@ -337,22 +341,25 @@ export function separateOverlappingEntities(
           dy = 0;
           dist = 1;
         }
-        const nudge = (SEPARATION_SPEED * dt * 0.5) / dist;
-        const nx = dx * nudge;
-        const ny = dy * nudge;
+        const nudgeA = (SEPARATION_SPEED * (entityTickDts?.get(a) ?? dt) * 0.5) / dist;
+        const nudgeB = (SEPARATION_SPEED * (entityTickDts?.get(b) ?? dt) * 0.5) / dist;
+        const ax = dx * nudgeA;
+        const ay = dy * nudgeA;
+        const bx = dx * nudgeB;
+        const by = dy * nudgeB;
 
         // Nudge A away (negative direction), check wall collision first
-        const testA = getEntityAABB({ wx: a.position.wx - nx, wy: a.position.wy - ny }, a.collider);
+        const testA = getEntityAABB({ wx: a.position.wx - ax, wy: a.position.wy - ay }, a.collider);
         if (!aabbOverlapsSolid(testA, getCollision, blockMask)) {
-          a.position.wx -= nx;
-          a.position.wy -= ny;
+          a.position.wx -= ax;
+          a.position.wy -= ay;
         }
 
         // Nudge B away (positive direction)
-        const testB = getEntityAABB({ wx: b.position.wx + nx, wy: b.position.wy + ny }, b.collider);
+        const testB = getEntityAABB({ wx: b.position.wx + bx, wy: b.position.wy + by }, b.collider);
         if (!aabbOverlapsSolid(testB, getCollision, blockMask)) {
-          b.position.wx += nx;
-          b.position.wy += ny;
+          b.position.wx += bx;
+          b.position.wy += by;
         }
       }
     }

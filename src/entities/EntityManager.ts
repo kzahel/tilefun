@@ -302,7 +302,14 @@ export class EntityManager {
     const unparentedEntities = this.entities.filter(
       (e) => e.parentId === undefined && !skipEntityIds?.has(e.id),
     );
-    separateOverlappingEntities(unparentedEntities, playerSet, dt, getCollision, blockMask);
+    separateOverlappingEntities(
+      unparentedEntities,
+      playerSet,
+      dt,
+      getCollision,
+      blockMask,
+      entityTickDts,
+    );
 
     // --- Phase 4: Resolve parented entity positions ---
     this.resolveParentedPositions(players);

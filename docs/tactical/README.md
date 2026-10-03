@@ -29,6 +29,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [015 WebRTC ordered delivery](015-webrtc-ordered-delivery.md) | Reliable routing fixes audited defects; broader investigation deferred; [networking topic](../topics/multiplayer-networking.md) |
 | [016 Play ideas](016-play-ideas.md) | Delivered: hold-to-speak ideas, spoken proofreading, screenshots and private Workshop management; [play ideas topic](../topics/play-ideas.md) |
 | [017 Generated traffic and roof riding](017-generated-road-traffic-and-roof-riding.md) | Agreed parent plan; implementation not started; [vehicles topic](../topics/vehicles.md) |
+| [018 Tick-aware NPC separation](018-tick-aware-npc-separation.md) | Sleeping-crowd exclusion and reduced-rate separation; broader unloading remains in the [entity activation topic](../topics/entity-activation.md) |
 
 ## Earlier plans
 

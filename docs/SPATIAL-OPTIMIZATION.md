@@ -17,7 +17,9 @@ it incorrectly describes tick tiers as still wholly pending for today's code.
   Use `computeEntityTickDtsMulti` and its constants for exact policy.
 - [tickAllAI](../src/server/tickAllAI.ts) uses that map and freezes non-ticking
   AI velocity. [EntityManager](../src/entities/EntityManager.ts) gates movement,
-  ground tracking and animation work with the same map.
+  ground tracking, overlap separation and animation work with the same map.
+  Separation buckets only selected NPCs and uses each participant's effective
+  dt for pair nudges; player penetration correction remains instantaneous.
 - Spatial queries also serve overlap checks and replication visibility.
   [RealmReplicator](../src/server/RealmReplicator.ts) includes the controlled player
   and mount even when outside its ordinary nearby query.
@@ -29,7 +31,6 @@ it incorrectly describes tick tiers as still wholly pending for today's code.
 
 Tick gating does not remove every full collection pass: spatial-hash updates,
 parent resolution and the separation input list still traverse entities.
-Separation does not simply use the same effective-dt map as ordinary movement.
 Don't describe dormant entities as doing literally zero work.
 
 The old proposal's exact distances, once-per-second tier assignment, active-only
@@ -38,7 +39,8 @@ streaming/unloading should not be assumed complete from terrain streaming or
 specialized procedural residency paths.
 
 Measure a concrete entity-heavy scenario before choosing further optimizations.
-[Performance](topics/performance.md) owns priority and current evidence;
+[Entity activation](topics/entity-activation.md) owns simulation/unloading gaps;
+[performance](topics/performance.md) owns broader priority and timing evidence;
 [SpatialHash tests](../src/entities/SpatialHash.test.ts),
 [AI tests](../src/server/tickAllAI.test.ts) and
 [replication tests](../src/server/buildGameState.test.ts) cover relevant contracts.

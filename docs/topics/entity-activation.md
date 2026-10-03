@@ -1,8 +1,8 @@
 # Entity activation, AI and unloading
 
 Topic: entity-activation
-Status: known technical debt; source audit complete, measurement and improvements
-not yet implemented.
+Status: overlap separation now follows tick selection and accumulated time;
+general entity unloading and remaining inactive work are open technical debt.
 Updated: 2026-10-03.
 
 Owns simulation activity, NPC residency and the remaining cost of distant entities.
@@ -36,6 +36,13 @@ performance results or a diagnosis of any individual play report.
   therefore does not provide general unloading for placed entities.
 - Realm AI/physics runs when there is at least one session that is neither
   debug-paused nor dormant. This is separate from per-entity activation.
+- NPC overlap separation uses the same tick map: omitted NPCs do not enter the
+  separation grid or player-overlap checks. Each selected NPC uses its own
+  accumulated time for pair nudges; player penetration correction remains
+  instantaneous. Existing parented/pre-stepped exclusions, mount handling and
+  wall/Z constraints remain. An omitted NPC still exists in the ordinary
+  collision index; this change is not unloading or removal of solid blockers.
+  [Tactical 018](../tactical/018-tick-aware-npc-separation.md) records the slice.
 
 ## Known gaps
 
@@ -43,10 +50,10 @@ performance results or a diagnosis of any individual play report.
    entities. [EntityManager.update](../../src/entities/EntityManager.ts) also
    updates spatial-hash membership for all entities and performs parent-position
    bookkeeping regardless of tick tier.
-2. **Overlap separation bypasses the tick map.** Eligible unparented NPCs enter
-   [separateOverlappingEntities](../../src/entities/collision.ts) even when their
-   ordinary movement is frozen. The spatial grid limits pair candidates, but
-   dense cells still produce many pairs; distant NPCs can still be nudged.
+2. **Dense active crowds still cost work.**
+   [separateOverlappingEntities](../../src/entities/collision.ts) now excludes
+   sleeping NPCs, but dense active cells still produce many collision pairs.
+   The separation input list still scans all resident entities.
 3. **Ball physics bypasses the tick map.**
    [tickBallPhysics](../../src/physics/BallPhysics.ts) scans and simulates resident
    balls in its own pass. Other gameplay callbacks and overlap services also
@@ -58,6 +65,10 @@ performance results or a diagnosis of any individual play report.
 5. **Placed-entity residency is unbounded by chunk unloading.** Large authored
    populations can retain memory and scanning costs after the player leaves.
    Persistence-aware unloading/reactivation is not yet a general facility.
+   [SerializedEntity](../../src/persistence/SaveManager.ts) currently contains
+   type, position and optional procedural identity, rather than a complete live
+   NPC snapshot. A lossless unload contract needs stable IDs, relevant runtime
+   state and relationship handling before reusing persistence for eviction.
 
 Campfires have no AI: their definition in
 [EntityDefs](../../src/entities/EntityDefs.ts) gives them animation and a solid
@@ -80,6 +91,9 @@ that these activation gaps caused it.
 - [ ] Bound inactive work using active sets/spatial queries and make separation,
   ball physics and service callbacks honor the chosen policy where appropriate.
   Preserve interactions across activation boundaries.
+- [x] Make NPC separation honor existing tick selection and per-entity elapsed
+  time; cover sleeping/waking crowds, reduced-rate substeps and multiplayer
+  interest. Broader activation-policy changes remain open.
 - [ ] Evaluate persistence-aware unloading for placed entities. Preserve stable
   identity, edits, deletions, parent relationships and saved state; avoid lost
   or duplicated actors when returning to a chunk.
