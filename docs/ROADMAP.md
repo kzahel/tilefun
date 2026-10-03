@@ -3,7 +3,7 @@
 ## Streaming Performance and Single Player Execution
 
 - Implemented: repeatable traversal diagnostics, shared single-player authority in a dedicated browser Worker, bounded ordered transport and terrain cache preparation ahead of the camera. The v4/v10 ordinary traversal has zero missing or unfinished visible chunks; frame p95 remains about 16.7–16.8 ms in the headless desktop captures. See the [performance and Worker plan and evidence](tactical/012-streaming-performance-and-local-server-worker.md).
-- Physical Android validated: three Pixel 7a touch traversals per fixture have zero movement gaps and about 16.8 ms frame p95. Next: trace the repeatable v4 zoom-out pacing (33.3 ms p95), improve cold-entry presentation, and broaden device coverage before setting timing gates. P2P authority can adopt the same host boundary when needed.
+- Physical Android validated: three Pixel 7a touch traversals per fixture have zero movement gaps and about 16.8 ms frame p95. The v4 zoom-out stalls are traced to deferred cache raster work; a benchmark-only two-row limit restores 16.8 ms p95 while completing the caches. Next: bound offscreen preparation work with traversal validation, improve cold-entry presentation, and broaden device coverage before setting timing gates. P2P authority can adopt the same host boundary when needed.
 - Consider WASM only if measured remaining compute costs or an explicit native/browser sharing requirement justify it.
 
 ## Regional Generation and World Explorer

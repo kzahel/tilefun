@@ -391,10 +391,10 @@ native CDP connection and touch input, successfully enters, edits, moves 12.8
 pixels inside, and returns to the street. Outdoor, indoor and edited-room frame
 p95 are 16.7–16.8 ms, with no browser errors. Gameplay screenshots were inspected.
 
-The v4 zoom-out result is repeatable: 10–13 of 180 frame intervals exceed 25 ms,
+The initial v4 zoom-out result is repeatable: 10–13 of 180 frame intervals exceed 25 ms,
 with no missing terrain or long tasks. Render callback p95 is only 4.1–4.3 ms
-and update p95 is below 1 ms in those samples. These counters do not identify
-the cause; targeted frame/compositor tracing is the next performance task.
+and update p95 is below 1 ms in those samples. The counters alone did not
+identify the cause; the focused trace investigation below resolves that gap.
 Cold entry also remains visible work, including 0–3 missing-data frames. It
 should get a separate readiness/presentation treatment. The development server's
 startup/module loading is not a production cold-start benchmark.
@@ -409,3 +409,76 @@ The runner extension passed all three typechecks, 1,192 unit tests, Biome
 (existing warnings), and an isolated desktop touch traversal in addition to
 the physical-device runs. Runtime sources and approved rendering assets did
 not change in this follow-up.
+
+### Zoom-out trace diagnosis
+
+The follow-up used the same Pixel 7a, native portrait viewport, v4 seed 2026,
+touch traversal and zoom 0.5. Runtime code stayed at `7c0a99c`; only the
+diagnostic runner changed during measurement. The
+[numerical trace and control evidence](../benchmarks/012-zoom-trace-analysis.json)
+records that distinction. Raw Chrome traces remain local because they can
+contain unrelated browser metadata.
+
+**Finding:** zoom-out expands the terrain preparation halo. Its additional
+cache painting creates a short burst of deferred Canvas2D raster/submission
+work on Chrome's GPU-process thread. The 2 ms preparation limit measures
+JavaScript-side work and does not bound that downstream work. This is a
+transition burst, not sustained slow rendering at the wider zoom.
+
+In a 600-frame trace, all five missed rAF intervals occur within the first
+~750 ms. They overlap GPU-process command batches of roughly 19–27 ms, while
+the largest overlapping main-thread tasks are about 5–8 ms. The worst GPU
+batch takes 27.2 ms wall time and reports 26.4 ms thread CPU time. Four of the
+five missed intervals have no main-thread GC; the remaining one overlaps
+only 1.6 ms of minor GC. The 11.6 ms major GC happens much later, outside the
+missed intervals. Raster batches drop from 2,637 in the first second to about
+840 per second once preparation settles. These are Chrome thread events,
+not direct measurements of GPU hardware execution or utilization.
+
+Alternating untraced controls isolate the preparation step. Simulation and
+ordinary drawing remain active, with the same six entities and twelve props
+at the checkpoint. Every sample has complete visible terrain.
+
+| Preparation after zoom | >25 ms intervals / 180 frames | Frame p95 | Pending cache work after sample |
+|---|---:|---:|---:|
+| Current policy, run 1 | 11 | 33.3 ms | 0 |
+| Paused, run 1 | 0 | 16.8 ms | 8 |
+| Current policy, run 2 | 12 | 33.3 ms | 0 |
+| Paused, run 2 | 0 | 16.8 ms | 8 |
+| Two-row limit, run 1 | 0 | 16.8 ms | 0 |
+| Two-row limit, run 2 | 1, at sample start | 16.8 ms | 0 |
+
+All following settled-zoom samples have zero >25 ms intervals and frame p95
+16.7–16.8 ms. Pausing is a diagnostic control, not a fix: it leaves future
+terrain preparation unfinished. The two-row override retains the complete
+20-surface, 5 MiB cache residency and finishes all pending work. Its maximum
+observed cache latency increases from 720–739 ms to 1,472–1,572 ms. A separate
+180-frame trace of that override also has zero missed intervals and shows
+the initial raster work spread into the second second. Tracing perturbs
+timings; its longer default capture must not be compared directly against
+the untraced 180-frame p95.
+
+The production follow-up should give offscreen preparation a smaller drawing
+work budget while retaining priority for missing visible terrain. The two-row
+experiment is evidence for that direction, not a universal production setting:
+it was applied only after zoom. Validate ordinary movement, wider viewports,
+edits and cache catch-up before choosing a policy. Moving authority again or
+rewriting its kernels in WASM would not address this measured bottleneck.
+
+The runner supports focused diagnostics:
+
+```bash
+# Add the existing physical-device connection arguments for phone runs.
+npm run streaming:bench -- --versions=regional-v4 --touch --zoom-settled \
+  --trace-stage=zoom-out --trace-frames=600 --output="$TRACE_DIR"
+node scripts/analyze-streaming-trace.mjs \
+  "$TRACE_DIR/regional-v4-zoom-out-trace.json" "$TRACE_DIR/summary.json"
+```
+
+`--frame-timeline` records bounded per-frame timestamps without tracing.
+`--pause-zoom-preparation` and `--zoom-row-budget=2` are explicit diagnostic
+overrides, confined to the ephemeral benchmark page after zoom. The analyzer
+exports task, GC, raster-batch and missed-frame overlap statistics without
+publishing URLs or other raw browser metadata. Both trace summaries were
+checked against the independent rAF samples. All three typechecks, 1,192
+unit tests and Biome pass; no gameplay source or approved assets changed.

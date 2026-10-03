@@ -1,7 +1,7 @@
 // Bounded real-game traversal. Defaults to isolated Vite + bundled Chromium.
 // --cdp attaches to a physical phone's Chrome, using only a new test tab/origin.
 import { execFileSync } from "node:child_process";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, open, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
@@ -22,6 +22,16 @@ const cpuRate = Number(option("cpu", "1"));
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
 const touch = process.argv.includes("--touch");
+const traceStage = option("trace-stage", "");
+const traceFrames = Number(option("trace-frames", "600"));
+const frameTimelineEnabled = process.argv.includes("--frame-timeline");
+const zoomSettled = process.argv.includes("--zoom-settled");
+const pauseZoomPreparation = process.argv.includes("--pause-zoom-preparation");
+const zoomRowBudget = Number(option("zoom-row-budget", "0"));
+if (!Number.isInteger(zoomRowBudget) || zoomRowBudget < 0 || zoomRowBudget > 128)
+  throw Error("--zoom-row-budget must be between 1 and 128, or 0 for the default");
+if (!Number.isInteger(traceFrames) || traceFrames < 1 || traceFrames > 3600)
+  throw Error("--trace-frames must be between 1 and 3600");
 if (endpoint && (process.env.TILEFUN_DEV_URL || !port || cpuRate !== 1))
   throw Error(
     "Physical-device CDP requires a dedicated --port, no existing server and no CPU emulation",
@@ -36,6 +46,7 @@ for (const key of [
   process.env[key] = path.join(temp, key);
 let server, browser;
 let devicePage, deviceSession, testOrigin;
+let activeTraceSession;
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   dirty: !!execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
@@ -45,6 +56,9 @@ const report = {
   device: endpoint ? option("device", "unspecified physical device") : undefined,
   headed: endpoint ? true : headed,
   input: touch ? "touch joystick and sprint button" : "keyboard",
+  ...(traceStage ? { traceStage, traceFrames } : {}),
+  ...(pauseZoomPreparation ? { diagnosticControl: "pause terrain preparation after zoom" } : {}),
+  ...(zoomRowBudget ? { diagnosticZoomRowBudget: zoomRowBudget } : {}),
   instrumentation,
   cpuRate,
   viewport: endpoint ? null : { width: 1280, height: 900 },
@@ -140,8 +154,20 @@ try {
       if (initial) await move(direction);
     };
     const sample = async (name, count) => {
+      const tracing = name === traceStage;
+      let traceComplete;
+      if (tracing) {
+        traceComplete = new Promise((resolve) => cdp.once("Tracing.tracingComplete", resolve));
+        await cdp.send("Tracing.start", {
+          transferMode: "ReturnAsStream",
+          categories:
+            "devtools.timeline,toplevel,blink.user_timing,cc,viz,gpu,v8,disabled-by-default-devtools.timeline,disabled-by-default-devtools.timeline.frame,disabled-by-default-v8.gc",
+        });
+        activeTraceSession = cdp;
+        count = traceFrames;
+      }
       const data = await page.evaluate(
-        async ({ count }) => {
+        async ({ count, tracing, timeline }) => {
           const game = document.querySelector("#game").__game;
           game.performanceMetrics.reset();
           if (game.transport.resetDiagnostics) await game.transport.resetDiagnostics();
@@ -150,6 +176,7 @@ try {
             updates = [],
             visited = new Set(),
             tasks = [];
+          const frameTimeline = [];
           const observer = new PerformanceObserver((list) => {
             for (const e of list.getEntries()) tasks.push(e.duration);
           });
@@ -189,6 +216,8 @@ try {
             const t = performance.now();
             render(alpha);
             renders.push(performance.now() - t);
+            if (tracing)
+              performance.measure("tilefun.render", { start: t, end: performance.now() });
             const r = game.camera.getVisibleChunkRange();
             let missing = 0,
               incomplete = 0;
@@ -226,12 +255,23 @@ try {
             }
           };
           try {
+            if (tracing) performance.mark("tilefun.sample.start");
             let last = await new Promise(requestAnimationFrame);
             for (let i = 0; i < count; i++) {
               const now = await new Promise(requestAnimationFrame);
               frames.push(now - last);
+              if (timeline) {
+                frameTimeline.push({
+                  index: i,
+                  rafMs: now,
+                  callbackMs: performance.now(),
+                  intervalMs: now - last,
+                });
+              }
+              if (tracing) performance.measure("tilefun.frame", { start: last, end: now });
               last = now;
             }
+            if (tracing) performance.mark("tilefun.sample.end");
           } finally {
             callbacks.render = render;
             callbacks.update = update;
@@ -245,6 +285,7 @@ try {
           };
           const after = game.stateView.playerEntity.position;
           return {
+            ...(timeline ? { frameTimeline } : {}),
             renderedFrames: renders.length,
             inputAckMs: summary(ackTimes),
             maxAckGap,
@@ -271,8 +312,27 @@ try {
             heapBytes: performance.memory?.usedJSHeapSize ?? null,
           };
         },
-        { count },
+        { count, tracing, timeline: tracing || frameTimelineEnabled },
       );
+      if (tracing) {
+        await cdp.send("Tracing.end");
+        activeTraceSession = undefined;
+        const { stream } = await traceComplete;
+        // Browser traces can contain unrelated browser metadata. Keep raw files local.
+        const file = await open(path.join(output, `${version}-${name}-trace.json`), "w", 0o600);
+        try {
+          for (;;) {
+            const chunk = await cdp.send("IO.read", { handle: stream, size: 1024 * 1024 });
+            await file.writeFile(
+              chunk.base64Encoded ? Buffer.from(chunk.data, "base64") : chunk.data,
+            );
+            if (chunk.eof) break;
+          }
+        } finally {
+          await file.close();
+          await cdp.send("IO.close", { handle: stream });
+        }
+      }
       const result = { name, ...data };
       console.log(JSON.stringify({ version, ...result }));
       return result;
@@ -302,10 +362,21 @@ try {
       await page.keyboard.up("ArrowRight");
       await page.keyboard.up("Shift");
     }
-    await page.evaluate(() => {
-      document.querySelector("#game").__game.debugPanel.setZoom(0.5);
-    });
+    await page.evaluate(
+      ({ pausePreparation, rowBudget }) => {
+        const game = document.querySelector("#game").__game;
+        if (pausePreparation) game.tileRenderer.prepareTerrain = () => {};
+        else if (rowBudget) {
+          const prepare = game.tileRenderer.prepareTerrain.bind(game.tileRenderer);
+          game.tileRenderer.prepareTerrain = (camera, world, sheets, visible) =>
+            prepare(camera, world, sheets, visible, 2, rowBudget);
+        }
+        game.debugPanel.setZoom(0.5);
+      },
+      { pausePreparation: pauseZoomPreparation, rowBudget: zoomRowBudget },
+    );
     samples.push(await sample("zoom-out", 180));
+    if (zoomSettled) samples.push(await sample("zoom-settled", 180));
     await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
     // Keep measurements available even when a coverage assertion fails.
     report.fixtures.push({ version, arrival, display, samples, errors });
@@ -328,6 +399,7 @@ try {
   await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${path.join(output, "report.json")}`);
 } finally {
+  await activeTraceSession?.send("Tracing.end").catch(() => {});
   if (devicePage) {
     await devicePage.goto("about:blank").catch(() => {});
     await deviceSession
