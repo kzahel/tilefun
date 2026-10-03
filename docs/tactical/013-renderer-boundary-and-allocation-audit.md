@@ -1,6 +1,6 @@
 # Renderer boundary and walking allocation audit
 
-Status: audit, grass cache identity/lifetime, grass frame and scheduler storage reuse completed 2026-10-03;
+Status: audit, grass cache identity/lifetime, grass frame/scheduler storage reuse and prop depth caching completed 2026-10-03;
 remaining implementation slices below are proposed.
 Owner: [performance](../topics/performance.md).
 
@@ -459,3 +459,74 @@ only its source digest, with identical candidate metadata. The complete browser
 suite passes 256 checks with one existing skip. Desktop and physical-phone
 streaming runners both pass `--assert-ready`. No shared vehicle/Workshop source
 or candidate changes are included in this slice's commit.
+
+
+## Implementation record: static prop depth metadata
+
+`SceneFrame` now owns a `PropDepthCache` for gameplay's outdoor and indoor
+collection paths. Each cached prop holds scalar geometry snapshots and the same
+backend-independent world bounds, top Z and depth values previously rebuilt by
+`propDepthSurfaces` every frame. Cache hits reuse those surfaces; collection
+borrows one reusable flat output list. One-shot callers retain the fresh helper
+and own their results. Physics collision queries and gameplay authority are
+unchanged: this caches the collision-derived metadata used for presentation.
+
+Invalidation uses prop object identity plus explicit scalar comparisons of
+position, collider offsets, width/height, base Z and height Z. This catches
+in-place editor changes without relying on a revision that preview/local callers
+do not supply. Compound-wall count/order/content and transitions to/from a
+single collider are checked, including empty walls suppressing the fallback.
+Irrelevant sprite/passability/walkability fields do not rebuild depth metadata.
+The original finite-positive-height rule and array order/duplicates are intact.
+Scalar validation still scans current geometry each frame; a prop sync that
+replaces objects rebuilds those entries, even at equal geometry.
+
+Every collection removes entries for props no longer supplied; there is no free
+list of unloaded props. Reset/teardown clears the map, and a collection error
+clears partial state. Ordinary frame release empties borrowed output but retains
+current metadata. Entries and collider snapshots are bounded by the latest
+supplied prop population/geometry, not a fixed prop count or all historically
+visited chunks. Replacement same-ID props cannot reuse old-world metadata.
+Actor/ghost interpolation, overlap checks and final scene sorting remain dynamic.
+
+Four new tests cover warm surface reuse and independent fresh output; all scalar
+edits, wall changes and finite/infinite/undefined heights; order, duplicates,
+unload/revisit and same-ID replacements; and full scene/ghost parity across
+movement, edits, hidden interior furniture and realm reset. Existing long-bed,
+raised-base, edge-overlap and mixed scene tests continue to cover the depth rule.
+
+[`prop-depth-allocation.mjs`](../../scripts/instrumentation/prop-depth-allocation.mjs)
+compares the unchanged fresh helper (`--fresh`) with the cache, using 400 props
+with two finite surfaces and one infinite wall each. After 60 warmup collections,
+600 sampled collections return 480,000 surfaces in both modes. Bundled Chromium
+153.0.8010.12 estimates 81,021,888 fresh versus 12,360,748 cached allocated bytes
+(about 85% less), including objects collected during sampling. The cache creates
+400 entries and 800 surfaces during warmup and none during the measured steady
+frames. Eight exact output/depth hashes match through position/width/height edits
+and reversed ordering. Five unprofiled batches of 600 collections take
+25.0–28.4 ms fresh and 8.4–8.9 ms cached on this host. Sampling is approximate;
+these synthetic measurements exclude rendering, streaming and simulation and
+do not establish a phone FPS improvement. List backing storage and iteration
+still allocate. [Sanitized evidence](../benchmarks/013-prop-depth-cache.json)
+records the results and base revision.
+
+Validation uses an isolated checkout of `3e4a8e0` plus this slice because the
+shared checkout has concurrent character/Workshop edits. The Android doctor
+reported no attached authorized physical handheld (and its unavailable-device
+reporting path raised an unrelated error), so this slice has no phone capture.
+Next: cache static elevation descriptors per chunk/content version, preserving
+live surface ownership and depth ordering; then revisit remaining scene records
+and measured raster submission limits separately.
+
+The isolated desktop v4/v10 traversal passes `--assert-ready`, with no page
+errors or missing/unfinished visible terrain during walk/sprint/reverse and
+16.7–16.8 ms frame-interval p95. Cold-entry gaps remain (v4: 0 missing/3 unfinished
+frames; v10: 3 missing/2 unfinished). This is a readiness smoke with other host
+validation running concurrently, not a paired end-to-end timing experiment.
+
+Validation: all three typechecks, 1,238 unit tests, and Biome pass. The full lint
+run retains 123 warnings / 32 informational diagnostics; all files changed by this
+slice pass without diagnostics. Art catalog, Workshop manifest and production
+build pass, with identical review candidates and only a changed input digest.
+The complete browser suite passes 268 checks with one existing skip. Desktop
+streaming passes `--assert-ready`; physical Android was unavailable as noted above.

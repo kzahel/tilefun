@@ -4,7 +4,8 @@ Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache
 identity/lifetime fixed, gameplay grass frame storage and terrain scheduler records
-reused; remaining scene allocation and raster scheduling are follow-up work.
+reused; static prop depth metadata cached; remaining scene allocation and raster
+scheduling are follow-up work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence. Detailed
@@ -43,6 +44,13 @@ the remaining recommendations are not implemented fixes.
   frames; departing chunks and reset/error paths release references and surfaces.
   Visible holes, visible replacements and approaching halo work keep their order,
   with the same 2 ms deadline and 128-row ceiling.
+
+- Each `SceneFrame` owns a prop depth cache. Object identity and scalar position/
+  collider comparisons invalidate changed entries, including in-place edits.
+  Each collection evicts props no longer supplied; realm reset/teardown clears
+  all entries. The cache stores backend-independent bounds and height/depth data,
+  and dynamic actor/ghost sorting still runs every frame. One-shot collectors
+  retain their existing independent output ownership.
 
 ## Evidence and validation
 
@@ -91,7 +99,11 @@ Terrain scheduler bookkeeping now also reuses storage: an 80-chunk synthetic
 probe reduced sampled allocations about 71% for ready chunks and 52% for pending
 chunks, with identical job ordering. Coordinate strings, iteration and sorting
 still allocate; these measurements exclude raster work.
-Continue with static prop/elevation metadata and remaining scene allocations. The grass cache lifetime
+Static prop depth metadata now reuses unchanged surfaces. A 400-prop synthetic
+probe reduced sampled collection allocations from 81.0 MB to 12.4 MB (about 85%)
+with identical metadata/depth hashes through edits. This excludes drawing and
+simulation; scalar validation, output-list backing storage and iteration remain.
+Continue with static elevation descriptors and remaining scene allocations. The grass cache lifetime
 fix is complete; a synthetic post-GC probe verifies that discarded chunk placements no
 longer accumulate. Phone traversal still has occasional missed frames, so this
 does not resolve the reported hitch. Move canvas resources out of world chunks and scene

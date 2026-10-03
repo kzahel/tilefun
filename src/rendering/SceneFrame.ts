@@ -1,13 +1,16 @@
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
+import { PropDepthCache } from "./propDepth.js";
 import type { SceneItem } from "./SceneItem.js";
 
 /** One client's synchronous presentation storage, independent of the backend.
  * The list and pooled grass records are borrowed until the next collection.
+ * Prop depth metadata stays resident only for the latest collected props.
  * Release after drawing so particles and elevation surfaces are not retained.
  */
 export class SceneFrame {
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
+  readonly propDepth = new PropDepthCache();
 
   begin(hasGrass: boolean): SceneItem[] {
     this.release();
@@ -17,10 +20,12 @@ export class SceneFrame {
 
   release(): void {
     this.items.length = 0;
+    this.propDepth.release();
   }
 
   clear(): void {
     this.release();
     this.grass.clear();
+    this.propDepth.clear();
   }
 }

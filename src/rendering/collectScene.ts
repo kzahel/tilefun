@@ -74,7 +74,7 @@ export function collectScene(
   // Small margin for rendering effects not captured by sprite bounds
   const M = 16;
 
-  const depthSurfaces = propDepthSurfaces(props);
+  const depthSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
 
   // --- Entities ---
   for (const e of entities) {

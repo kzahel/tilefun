@@ -31,6 +31,16 @@ reversals and changes in old imagery availability. Bundled Chromium's sampling
 includes collected objects; byte counts are estimates, not FPS/timing gates.
 The script also works against the pre-reuse scheduler for before/after captures.
 
+## Prop depth metadata allocation
+
+Run `node scripts/instrumentation/prop-depth-allocation.mjs` from the repository
+root; add `--fresh` to use the unchanged uncached helper. The script warms 60
+collections, then samples 600 over 400 props (two finite surfaces and one infinite
+wall each). It reports storage creation, eight metadata/depth hashes through edits,
+and five unprofiled timing batches. Sampling includes collected objects; the
+synthetic workload excludes raster, streaming and simulation. Use these results
+for allocation/parity evidence, not as an end-to-end FPS or timing gate.
+
 ## Protocol instrumentation
 
 Temporary scripts for auditing which messages still go through JSON fallback (`0xFF`) and roughly how large they are.

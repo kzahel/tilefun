@@ -1,0 +1,334 @@
+{
+  "baseRevision": "3e4a8e0278fb5666c991ce1cde21fbe3cce69edd",
+  "candidate": "baseline plus per-client prop depth cache",
+  "limits": "Synthetic metadata collection only; sampling includes collected objects. CPU samples are five unprofiled 600-collection runs. No FPS claim; no attached authorized Android phone was available.",
+  "allocation": {
+    "fresh": {
+      "browser": "153.0.8010.12",
+      "mode": "fresh",
+      "frames": 600,
+      "collectionMs": [28.399999618530273, 26, 26.200000286102295, 25.699999809265137, 25],
+      "surfaces": 480000,
+      "diagnostics": null,
+      "sampledBytes": 81021888,
+      "allocationByFunction": {
+        "(anonymous)": 53680152,
+        "flatMap": 27163328,
+        "getEntityAABB": 131516,
+        "propDepthSurfaces": 12320,
+        "(V8 API)": 9336,
+        "entries": 8220,
+        "evaluate": 4668,
+        "(BYTECODE_COMPILER)": 4128,
+        "collect": 4116,
+        "innerSerialize": 4104
+      },
+      "frameHashes": [
+        "0d014975cf505b43ee88db793de55e3f7f81ab5d9d2756efee09f7dccf36a60d",
+        "575182f586ed2ebbe3df6c10efe24c49555a2717a811015a2f583da27ce90d2a",
+        "6184197bcd1b00749a6999e394cc560a4823eea6db752d6c6d7f64c773237810",
+        "424ea2f8bbbc653a1dcc097da84f882987f3c04f33ea24978313ff22b0220ec2",
+        "807684684fc8fbb422043489e8a43cb17628a9b0b804ecaf76ab4799bdd405a5",
+        "ed15985efa6734154b85eb04229f8629dec27fa66676279ef878abdc58b7dfdc",
+        "4c7512cfae7891ee4b021a20c9e8c3d45571dc71c0e89ddb9a6b3bc546896aaf",
+        "4673edd8099c33e43cf314ac28675921352caac9538636b59b4a1fc9d8954542"
+      ]
+    },
+    "cached": {
+      "browser": "153.0.8010.12",
+      "mode": "cached",
+      "frames": 600,
+      "collectionMs": [
+        8.400000095367432, 8.400000095367432, 8.5, 8.899999618530273, 8.600000381469727
+      ],
+      "surfaces": 480000,
+      "diagnostics": {
+        "residentProps": 400,
+        "builds": 400,
+        "createdSurfaces": 800,
+        "borrowedSurfaces": 0
+      },
+      "sampledBytes": 12360748,
+      "allocationByFunction": {
+        "collect": 11167276,
+        "next": 1174320,
+        "get": 9816,
+        "evaluate": 9336
+      },
+      "frameHashes": [
+        "0d014975cf505b43ee88db793de55e3f7f81ab5d9d2756efee09f7dccf36a60d",
+        "575182f586ed2ebbe3df6c10efe24c49555a2717a811015a2f583da27ce90d2a",
+        "6184197bcd1b00749a6999e394cc560a4823eea6db752d6c6d7f64c773237810",
+        "424ea2f8bbbc653a1dcc097da84f882987f3c04f33ea24978313ff22b0220ec2",
+        "807684684fc8fbb422043489e8a43cb17628a9b0b804ecaf76ab4799bdd405a5",
+        "ed15985efa6734154b85eb04229f8629dec27fa66676279ef878abdc58b7dfdc",
+        "4c7512cfae7891ee4b021a20c9e8c3d45571dc71c0e89ddb9a6b3bc546896aaf",
+        "4673edd8099c33e43cf314ac28675921352caac9538636b59b4a1fc9d8954542"
+      ]
+    }
+  },
+  "desktopTraversal": {
+    "date": "2026-10-03T11:57:22.142Z",
+    "browser": "153.0.8010.12",
+    "platform": "darwin 25.6.0 arm64",
+    "input": "keyboard",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "fixtures": [
+      {
+        "version": "regional-v4",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000273,
+              "p99": 16.799999999999955,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 3,
+            "maxIncomplete": 8,
+            "longestGapFrames": 3,
+            "displacement": {
+              "x": -6080,
+              "y": 3296
+            }
+          },
+          {
+            "name": "standing",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "name": "walk",
+            "frames": {
+              "count": 180,
+              "p50": 16.699999999999818,
+              "p95": 16.799999999999272,
+              "p99": 16.800000000000182,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -222.07115028125008,
+              "y": 0
+            }
+          },
+          {
+            "name": "sprint",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -738.6009688593749,
+              "y": 0
+            }
+          },
+          {
+            "name": "reverse",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 738.600830078125,
+              "y": 0
+            }
+          },
+          {
+            "name": "zoom-out",
+            "frames": {
+              "count": 180,
+              "p50": 16.700000000000728,
+              "p95": 16.700000000000728,
+              "p99": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ]
+      },
+      {
+        "version": "regional-v10",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.799999999999727,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 3,
+            "incompleteCacheFrames": 2,
+            "maxIncomplete": 5,
+            "longestGapFrames": 5,
+            "displacement": {
+              "x": 14816,
+              "y": -688
+            }
+          },
+          {
+            "name": "standing",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.800000000000182,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "name": "walk",
+            "frames": {
+              "count": 180,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -222.0712890625,
+              "y": 0
+            }
+          },
+          {
+            "name": "sprint",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -738.601318359375,
+              "y": 0
+            }
+          },
+          {
+            "name": "reverse",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 738.6007966562502,
+              "y": 0
+            }
+          },
+          {
+            "name": "zoom-out",
+            "frames": {
+              "count": 180,
+              "p50": 16.69999999999709,
+              "p95": 16.799999999999272,
+              "p99": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "maxIncomplete": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0.0002775624998321291,
+              "y": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
