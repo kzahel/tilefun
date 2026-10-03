@@ -48,7 +48,7 @@ describe("frozen legacy generation", () => {
     createGenerator(createDescriptor("classic", 2026)).terrain.generate(chunk, -1, 2);
     const restored = hydrateChunk(structuredClone(chunkData(chunk)));
     expect(hashChunk(restored)).toBe(hashChunk(chunk));
-    expect(restored.renderCache).toBeNull();
+    expect(restored).not.toHaveProperty("renderCache");
     expect(restored.autotileComputed).toBe(false);
   });
   it("resolves actual missing-field and legacy seed defaults", () => {

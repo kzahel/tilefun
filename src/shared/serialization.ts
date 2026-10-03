@@ -197,6 +197,6 @@ export function applyChunkSnapshot(chunk: Chunk, s: ChunkSnapshot): void {
   chunk.blendLayers.set(s.blendLayers);
   chunk.collision.set(s.collision);
   chunk.revision = s.revision;
-  chunk.dirty = true;
+  chunk.invalidateVisuals();
   chunk.autotileComputed = true;
 }

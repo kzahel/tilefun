@@ -34,9 +34,9 @@ try {
     let renderer;
     window.resetProbe = (pending) => {
       renderer = new TileRenderer(() => 0);
-      for (const chunk of chunks.values()) {
-        chunk.dirty = pending;
-        chunk.renderCache = pending ? null : surface;
+      for (const [key, chunk] of chunks) {
+        const [cx, cy] = key.split(",").map(Number);
+        if (!pending) renderer.resources.publish(chunk, cx, cy, surface);
       }
     };
     window.schedulerProbe = (frames) => {
@@ -58,7 +58,10 @@ try {
         camera.x = 1024 + Math.sin(i) * 64;
         camera.y = 768 + Math.cos(i) * 64;
         const chunk = chunks.get("0,0");
-        chunk.renderCache = i % 2 ? surface : null;
+        if (i % 2) {
+          renderer.resources.publish(chunk, 0, 0, surface);
+          chunk.invalidateVisuals();
+        } else renderer.resources.delete(chunk);
         renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 80);
       }
       return JSON.stringify(order);

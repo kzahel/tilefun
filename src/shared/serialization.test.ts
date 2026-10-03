@@ -313,7 +313,7 @@ describe("Chunk serialization", () => {
     expect(target.blendLayers[0]).toBe(0x00010203);
     expect(target.collision[15]).toBe(1);
     expect(target.revision).toBe(7);
-    expect(target.dirty).toBe(true);
+    expect(target.visualRevision).toBeGreaterThan(0);
     expect(target.autotileComputed).toBe(true);
   });
 

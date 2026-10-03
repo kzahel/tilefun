@@ -133,7 +133,7 @@ export class TerrainEditor {
       chunk.setRoad(lx, ly, paintMode === "positive" ? roadType : 0);
     }
 
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     chunk.revision++;
     const key = chunkKey(cx, cy);
     this.markChunkDirty(key);
@@ -168,7 +168,7 @@ export class TerrainEditor {
     }
 
     chunk.setHeight(lx, ly, height);
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     chunk.revision++;
     this.markChunkDirty(chunkKey(cx, cy));
   }
@@ -184,7 +184,7 @@ export class TerrainEditor {
       chunk.detail.fill(TileId.Empty);
       chunk.fillRoad(0);
       chunk.heightGrid.fill(0);
-      chunk.dirty = true;
+      chunk.invalidateVisuals();
       chunk.autotileComputed = false;
       chunk.revision++;
       this.markChunkDirty(key);
@@ -195,7 +195,7 @@ export class TerrainEditor {
   clearAllRoads(): void {
     for (const [key, chunk] of this.world.chunks.entries()) {
       chunk.fillRoad(0);
-      chunk.dirty = true;
+      chunk.invalidateVisuals();
       chunk.revision++;
       this.markChunkDirty(key);
     }
@@ -205,7 +205,7 @@ export class TerrainEditor {
   invalidateAllChunks(): void {
     for (const [, chunk] of this.world.chunks.entries()) {
       chunk.autotileComputed = false;
-      chunk.dirty = true;
+      chunk.invalidateVisuals();
     }
   }
 
@@ -356,7 +356,7 @@ export class TerrainEditor {
       chunk.setHeight(lx, ly, 0);
     }
 
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     chunk.autotileComputed = false;
 
     if (lx === 0) this.invalidateChunk(cx - 1, cy);
@@ -369,13 +369,13 @@ export class TerrainEditor {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
     if (chunk) {
       chunk.autotileComputed = false;
-      chunk.dirty = true;
+      chunk.invalidateVisuals();
     }
   }
 
   private invalidateChunkRender(cx: number, cy: number): void {
     const chunk = this.world.getChunkIfLoaded(cx, cy);
-    if (chunk) chunk.dirty = true;
+    if (chunk) chunk.invalidateVisuals();
   }
 }
 

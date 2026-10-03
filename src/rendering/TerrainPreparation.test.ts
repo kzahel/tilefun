@@ -55,7 +55,7 @@ describe("terrain preparation", () => {
     const draw = drawing(renderer);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
     expect(draw.mock.calls.every((call) => call[1] === 0 && call[2] === 0)).toBe(true);
-    expect(world.getChunkIfLoaded(0, 0)?.renderCache).toBeTruthy();
+    expect(renderer.getTerrainSurface(world.getChunkIfLoaded(0, 0))).toBeTruthy();
     expect(renderer.getDiagnostics().pending).toBe(8);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 128);
     expect(renderer.getDiagnostics()).toMatchObject({ resident: 9, pending: 0, building: 0 });
@@ -84,18 +84,18 @@ describe("terrain preparation", () => {
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
     const chunk = world.getChunkIfLoaded(0, 0);
     if (!chunk) throw Error("Missing fixture");
-    const original = chunk.renderCache;
+    const original = renderer.getTerrainSurface(chunk);
     chunk.revision++;
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 4);
-    expect(chunk.renderCache).toBe(original);
+    expect(renderer.getTerrainSurface(chunk)).toBe(original);
     chunk.revision++;
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 12);
-    expect(chunk.renderCache).toBe(original);
-    expect(chunk.dirty).toBe(true);
+    expect(renderer.getTerrainSurface(chunk)).toBe(original);
+    expect(renderer.isTerrainReady(chunk)).toBe(false);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 4);
-    expect(chunk.renderCache).not.toBe(original);
-    expect(chunk.dirty).toBe(false);
+    expect(renderer.getTerrainSurface(chunk)).not.toBe(original);
+    expect(renderer.isTerrainReady(chunk)).toBe(true);
     expect(draw).toHaveBeenCalledTimes(36);
   });
 
@@ -107,9 +107,9 @@ describe("terrain preparation", () => {
     const replacement = new Chunk();
     world.chunks.put(0, 0, replacement);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
-    expect(replacement.renderCache).toBeNull();
+    expect(renderer.getTerrainSurface(replacement)).toBeNull();
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
-    expect(replacement.renderCache).toBeTruthy();
+    expect(renderer.getTerrainSurface(replacement)).toBeTruthy();
   });
 
   it("bounds residency when moving and releases surfaces on realm reset", () => {
@@ -118,7 +118,7 @@ describe("terrain preparation", () => {
     drawing(renderer);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 144);
     const old = world.getChunkIfLoaded(0, 0);
-    expect(old?.renderCache).toBeTruthy();
+    expect(renderer.getTerrainSurface(old)).toBeTruthy();
     world.chunks.put(100, 100, new Chunk());
     renderer.prepareTerrain(
       camera,
@@ -128,10 +128,10 @@ describe("terrain preparation", () => {
       Infinity,
       16,
     );
-    expect(old?.renderCache).toBeNull();
+    expect(renderer.getTerrainSurface(old)).toBeNull();
     expect(renderer.getDiagnostics()).toMatchObject({ resident: 1, building: 0, pending: 0 });
     renderer.clear();
-    expect(world.getChunkIfLoaded(100, 100)?.renderCache).toBeNull();
+    expect(renderer.getTerrainSurface(world.getChunkIfLoaded(100, 100))).toBeNull();
     expect(renderer.getDiagnostics()).toMatchObject({ resident: 0, building: 0, surfaceBytes: 0 });
   });
 
@@ -162,13 +162,13 @@ describe("terrain preparation", () => {
     const removed = world.getChunkIfLoaded(1, 0);
     world.chunks.remove("1,0");
     renderer.prepareTerrain(camera, world, sheets, visible, 0, 0);
-    expect(removed?.renderCache).toBeNull();
-    expect(removed?.dirty).toBe(true);
+    expect(renderer.getTerrainSurface(removed)).toBeNull();
+    expect(renderer.isTerrainReady(removed)).toBe(false);
     expect(renderer.getDiagnostics()).toMatchObject({ resident: 8, pending: 0 });
     const arrival = new Chunk();
     world.chunks.put(1, 0, arrival);
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
-    expect(arrival.renderCache).toBeTruthy();
+    expect(renderer.getTerrainSurface(arrival)).toBeTruthy();
     expect(renderer.getDiagnostics()).toMatchObject({
       resident: 9,
       pending: 0,
@@ -185,7 +185,7 @@ describe("terrain preparation", () => {
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 144);
     const chunk = world.getChunkIfLoaded(0, 0);
     if (!chunk) throw Error("Missing fixture");
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     renderer.prepareTerrain(camera, world, sheets, visible, 0, 0);
     now = 30;
     renderer.prepareTerrain(camera, world, sheets, visible, 0, 0);
@@ -193,12 +193,12 @@ describe("terrain preparation", () => {
     const replacement = new Chunk();
     world.chunks.put(0, 0, replacement);
     renderer.prepareTerrain(camera, world, sheets, visible, 0, 0);
-    expect(chunk.renderCache).toBeNull();
+    expect(renderer.getTerrainSurface(chunk)).toBeNull();
     expect(renderer.getDiagnostics()).toMatchObject({ oldestMs: 0, schedulerRecordsCreated: 9 });
     now = 40;
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
     expect(renderer.getDiagnostics()).toMatchObject({ pending: 0 });
-    replacement.dirty = true;
+    replacement.invalidateVisuals();
     now = 70;
     renderer.prepareTerrain(camera, world, sheets, visible, 0, 0);
     expect(renderer.getDiagnostics()).toMatchObject({ pending: 1, oldestMs: 0 });
@@ -217,7 +217,7 @@ describe("terrain preparation", () => {
     expect(draw.mock.calls.at(-1)?.slice(1, 3)).toEqual([-1, 0]);
     const chunk = world.getChunkIfLoaded(0, 0);
     if (!chunk) throw Error("Missing fixture");
-    chunk.dirty = true;
+    chunk.invalidateVisuals();
     // 0,0 has old imagery; the newly visible 1,0 has a hole, despite its distance.
     const wider = { ...visible, maxCx: 1 };
     draw.mockClear();
@@ -268,5 +268,79 @@ describe("terrain preparation", () => {
       queuedJobs: 0,
       surfaceBytes: 0,
     });
+  });
+
+  it("keeps two renderer caches independent across edits, asset changes and teardown", () => {
+    const { camera, world } = scene();
+    const a = new TileRenderer();
+    const b = new TileRenderer();
+    drawing(a);
+    drawing(b);
+    const chunk = world.getChunkIfLoaded(0, 0);
+    if (!chunk) throw Error("Missing fixture");
+    const version = chunk.visualRevision;
+    a.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
+    b.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
+    expect(a.getTerrainSurface(chunk)).not.toBe(b.getTerrainSurface(chunk));
+    expect(chunk.visualRevision).toBe(version);
+    chunk.invalidateVisuals(); // Derived changes need not change replicated revision.
+    a.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
+    expect(a.isTerrainReady(chunk)).toBe(true);
+    expect(b.isTerrainReady(chunk)).toBe(false);
+    b.prepareTerrain(camera, world, sheets, visible, Infinity, 16);
+    expect(b.isTerrainReady(chunk)).toBe(true);
+    const old = a.getTerrainSurface(chunk);
+    a.invalidateAssets();
+    expect(a.isTerrainReady(chunk)).toBe(false);
+    expect(a.getTerrainSurface(chunk)).toBe(old);
+    expect(b.isTerrainReady(chunk)).toBe(true);
+    a.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    a.invalidateAssets();
+    a.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    expect(a.getTerrainSurface(chunk)).toBe(old);
+    a.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    expect(a.getTerrainSurface(chunk)).not.toBe(old);
+    a.clear();
+    expect(b.isTerrainReady(chunk)).toBe(true);
+    expect(chunk.visualRevision).toBe(version + 1);
+  });
+
+  it("restarts partial imagery for local visual changes at equal replicated revision", () => {
+    const { camera, world } = scene();
+    const renderer = new TileRenderer();
+    drawing(renderer);
+    const chunk = world.getChunkIfLoaded(0, 0);
+    if (!chunk) throw Error("Missing fixture");
+    renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    chunk.invalidateVisuals();
+    renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    expect(renderer.getTerrainSurface(chunk)).toBeNull();
+    renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 8);
+    expect(renderer.isTerrainReady(chunk)).toBe(true);
+  });
+
+  it("bounds fallback surfaces when chunk identity changes at a resident coordinate", () => {
+    const { camera, world } = scene();
+    const renderer = new TileRenderer();
+    drawing(renderer);
+    const ctx = {
+      canvas: { width: 256, height: 256 },
+      drawImage: vi.fn(),
+    } as unknown as CanvasRenderingContext2D;
+    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 16);
+    const old = world.getChunkIfLoaded(0, 0);
+    world.chunks.put(0, 0, new Chunk());
+    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 16);
+    expect(renderer.getTerrainSurface(old)).toBeNull();
+    expect(renderer.getDiagnostics().surfaceBytes).toBe(256 * 256 * 4);
+    renderer.prepareTerrain(
+      camera,
+      world,
+      sheets,
+      { minCx: 100, maxCx: 100, minCy: 100, maxCy: 100 },
+      0,
+      0,
+    );
+    expect(renderer.getDiagnostics().surfaceBytes).toBe(0);
   });
 });

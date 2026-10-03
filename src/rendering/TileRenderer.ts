@@ -23,6 +23,7 @@ import { getTileDef, TileId } from "../world/TileRegistry.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import { CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import type { ElevationItem } from "./SceneItem.js";
 
@@ -33,6 +34,8 @@ interface CacheBuildState {
   canvas: OffscreenCanvas;
   nextRowOrderIdx: number;
   revision: number;
+  visualRevision: number;
+  assetRevision: number;
   rowOrder: number[];
 }
 
@@ -73,6 +76,7 @@ export class TileRenderer {
   /** Road overlay autotile sheets keyed by RoadType. */
   private roadSheetMap = new Map<RoadType, Spritesheet>();
   /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
+  private readonly resources = new CanvasTerrainResources();
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
   private readonly resident = new Map<string, TerrainResident>();
@@ -89,10 +93,7 @@ export class TileRenderer {
 
   /** Release surfaces on realm changes and teardown, including half-built jobs. */
   clear(): void {
-    for (const { chunk } of this.resident.values()) {
-      chunk.renderCache = null;
-      chunk.dirty = true;
-    }
+    this.resources.clear();
     this.resident.clear();
     this.cacheBuildStates.clear();
     this.terrainJobs.length = 0;
@@ -141,13 +142,13 @@ export class TileRenderer {
             this.resident.set(key, entry);
             this.schedulerRecordsCreated++;
           } else if (entry.chunk !== chunk) {
-            entry.chunk.renderCache = null;
+            this.resources.delete(entry.chunk);
             this.cacheBuildStates.delete(key);
             entry.chunk = chunk;
             entry.pendingSince = null;
           }
           entry.visited = visited;
-          const pending = chunk.dirty || !chunk.renderCache;
+          const pending = !this.resources.isReady(chunk, cx, cy);
           entry.pendingSince = pending ? (entry.pendingSince ?? started) : null;
           if (!pending) continue;
           const onScreen =
@@ -155,7 +156,7 @@ export class TileRenderer {
             cx <= visible.maxCx &&
             cy >= visible.minCy &&
             cy <= visible.maxCy;
-          entry.priority = onScreen ? (chunk.renderCache ? 1 : 0) : 2;
+          entry.priority = onScreen ? (this.resources.get(chunk) ? 1 : 0) : 2;
           entry.distance = Math.hypot(
             (cx + 0.5) * CHUNK_NATIVE_PX - aheadX,
             (cy + 0.5) * CHUNK_NATIVE_PX - aheadY,
@@ -166,11 +167,11 @@ export class TileRenderer {
       for (const entry of this.resident.values()) {
         if (entry.visited === visited) continue;
         const key = entry.key;
-        entry.chunk.renderCache = null;
-        entry.chunk.dirty = true;
+        this.resources.delete(entry.chunk);
         this.resident.delete(key);
         this.cacheBuildStates.delete(key);
       }
+      this.resources.retainCoordinates(this.resident);
       // Also discard work made through another rendering path before preparation.
       for (const key of this.cacheBuildStates.keys())
         if (!this.resident.has(key)) this.cacheBuildStates.delete(key);
@@ -195,7 +196,7 @@ export class TileRenderer {
           roadAt,
           deadline,
         );
-        if (!job.chunk.dirty) {
+        if (this.resources.isReady(job.chunk, job.cx, job.cy)) {
           if (job.pendingSince !== null) {
             performanceMetrics.record("client.cacheLatency", this.now() - job.pendingSince);
             job.pendingSince = null;
@@ -216,9 +217,8 @@ export class TileRenderer {
   getDiagnostics() {
     let pending = 0,
       oldestMs = 0,
-      surfaces = this.cacheBuildStates.size;
-    for (const { chunk, pendingSince } of this.resident.values()) {
-      if (chunk.renderCache) surfaces++;
+      surfaces = this.cacheBuildStates.size + this.resources.size;
+    for (const { pendingSince } of this.resident.values()) {
       if (pendingSince !== null) {
         pending++;
         oldestMs = Math.max(oldestMs, this.now() - pendingSince);
@@ -236,19 +236,44 @@ export class TileRenderer {
     };
   }
 
+  getTerrainSurface(chunk: Chunk | undefined): OffscreenCanvas | null {
+    return this.resources.get(chunk);
+  }
+
+  isTerrainReady(chunk: Chunk | undefined): boolean {
+    return this.resources.isReady(chunk);
+  }
+
+  releaseChunk(chunk: Chunk): void {
+    this.resources.delete(chunk);
+    for (const [key, entry] of this.resident) if (entry.chunk === chunk) this.resident.delete(key);
+    for (const [key, state] of this.cacheBuildStates)
+      if (state.chunk === chunk) this.cacheBuildStates.delete(key);
+  }
+
+  /** Call after replacing images in the sheets map or changing atlas content. */
+  invalidateAssets(): void {
+    this.resources.invalidateAssets();
+    this.cacheBuildStates.clear();
+  }
+
   /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
+    this.invalidateAssets();
     this.blendSheets = sheets;
     this.blendGraph = graph;
   }
 
   /** Set tile variants for base fill variety. */
   setVariants(variants: TileVariants): void {
+    this.invalidateAssets();
     this.variants = variants;
   }
 
   /** Set road autotile sheets from the loaded sheet map. */
   setRoadSheets(sheets: Map<string, Spritesheet>): void {
+    this.invalidateAssets();
+    this.roadSheetMap.clear();
     for (const rt of [RoadType.Sidewalk, RoadType.LineWhite, RoadType.LineYellow]) {
       const key = getRoadSheetKey(rt);
       if (key) {
@@ -301,7 +326,7 @@ export class TileRenderer {
         }
 
         // Rebuild cache incrementally to avoid single-frame spikes.
-        if ((chunk.dirty || !chunk.renderCache) && rowsRemaining > 0) {
+        if (!this.resources.isReady(chunk, cx, cy) && rowsRemaining > 0) {
           const chunkOriginWy = origin.wy;
           const focalRow = Math.max(
             0,
@@ -321,10 +346,14 @@ export class TileRenderer {
 
         const building = this.cacheBuildStates.get(key);
         const partial =
-          building?.chunk === chunk && building.revision === chunk.revision
+          building?.chunk === chunk &&
+          building.revision === chunk.revision &&
+          building.visualRevision === chunk.visualRevision &&
+          building.assetRevision === this.resources.assetRevision
             ? building.canvas
             : undefined;
-        const drawCache = readyOnly ? chunk.renderCache : (chunk.renderCache ?? partial);
+        const completed = this.resources.get(chunk);
+        const drawCache = readyOnly ? completed : (completed ?? partial);
         if (drawCache) {
           // Gameplay overscans to cover sub-pixel seams while zooming. Native
           // pixel review uses zero: 256→257 resampling differs by raster backend.
@@ -339,6 +368,7 @@ export class TileRenderer {
       }
     }
 
+    if (cacheRowBudget > 0) this.resources.retainCoordinates(visibleKeys);
     for (const key of this.cacheBuildStates.keys()) {
       if (cacheRowBudget > 0 && !visibleKeys.has(key)) this.cacheBuildStates.delete(key);
     }
@@ -356,7 +386,9 @@ export class TileRenderer {
     for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
         const chunk = world.getChunkIfLoaded(cx, cy);
-        if (!chunk?.renderCache) continue;
+        if (!chunk) continue;
+        const surface = this.resources.get(chunk);
+        if (!surface) continue;
 
         // Fast skip: no elevation in this chunk
         let hasElevation = false;
@@ -382,7 +414,7 @@ export class TileRenderer {
               kind: "elevation" as const,
               wx: tileWx,
               wy: tileWy,
-              chunkCache: chunk.renderCache,
+              chunkCache: surface,
               srcX: lx * TILE_SIZE,
               srcY: ly * TILE_SIZE,
               height: h,
@@ -428,12 +460,20 @@ export class TileRenderer {
         canvas: new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
         nextRowOrderIdx: 0,
         revision: chunk.revision,
+        visualRevision: chunk.visualRevision,
+        assetRevision: this.resources.assetRevision,
         rowOrder: this.buildRowOrder(focalRow),
       };
       this.cacheBuildStates.set(key, state);
     }
-    if (state.revision !== chunk.revision) {
+    if (
+      state.revision !== chunk.revision ||
+      state.visualRevision !== chunk.visualRevision ||
+      state.assetRevision !== this.resources.assetRevision
+    ) {
       state.revision = chunk.revision;
+      state.visualRevision = chunk.visualRevision;
+      state.assetRevision = this.resources.assetRevision;
       state.nextRowOrderIdx = 0;
       state.rowOrder = this.buildRowOrder(focalRow);
       const restartCtx = state.canvas.getContext("2d");
@@ -463,8 +503,7 @@ export class TileRenderer {
     }
 
     if (state.nextRowOrderIdx >= state.rowOrder.length) {
-      chunk.renderCache = state.canvas;
-      chunk.dirty = false;
+      this.resources.publish(chunk, cx, cy, state.canvas);
       this.cacheBuildStates.delete(key);
     }
 

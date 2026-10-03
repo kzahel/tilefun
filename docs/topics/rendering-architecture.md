@@ -89,3 +89,21 @@ are implied by a refactor.
 Current implementation still exposes Canvas in `GameContext`, `Spritesheet` and
 indoor callbacks. These are explicit remaining boundaries, not a claim that the
 production renderer is already interchangeable.
+
+## Completed slice: terrain resource ownership
+
+`CanvasTerrainResources` owns completed imagery; `TileRenderer` owns progressive
+jobs, scheduling and lifecycle. `Chunk` has no canvas or backend dirty flag.
+`visualRevision`/`invalidateVisuals()` records coherent local visual changes;
+replicated `revision` remains the network/edit version. Snapshot, autotile and
+editor writers invalidate content, and renderers never acknowledge by mutating
+chunks. Renderer configuration setters invalidate asset-dependent imagery;
+call `invalidateAssets()` after in-place image/atlas replacement.
+
+Explorer disposal/eviction and readiness probes now use renderer APIs. Both
+preparation and fallback drawing bound completed surfaces; a same-coordinate
+replacement cannot accumulate historical chunk objects. Tests cover independent
+renderers, equal-revision derived changes, asset changes during a partial build,
+and fallback eviction. The remaining elevation canvas reference and concrete
+scene-collector dependency are the next slice. Full integrated visual/traversal
+validation is recorded after that extraction below.

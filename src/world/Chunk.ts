@@ -43,12 +43,17 @@ export class Chunk {
   /** Collision bitfield per tile. */
   readonly collision: Uint8Array;
 
-  /** True when the OffscreenCanvas render cache needs rebuilding. */
-  dirty = true;
+  /** Local visual-content version, independent of replicated edit revision.
+   * Bulk/derived grid writers invalidate after completing a coherent update.
+   * Each renderer observes this version independently; drawing never changes it.
+   */
+  visualRevision = 0;
+
+  invalidateVisuals(): void {
+    this.visualRevision++;
+  }
   /** True after the autotile pass has been computed for this chunk. */
   autotileComputed = false;
-  /** Cached pre-rendered chunk canvas (terrain + details at native resolution). */
-  renderCache: OffscreenCanvas | null = null;
 
   /** Road surface per tile (RoadType enum). 0 = no road. */
   readonly roadGrid: Uint8Array;

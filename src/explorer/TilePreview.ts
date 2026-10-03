@@ -99,7 +99,7 @@ export class TilePreview {
     );
     for (const [coordinateKey, chunk] of this.chunks) {
       if (!this.wanted.has(coordinateKey)) {
-        chunk.renderCache = null;
+        this.renderer.releaseChunk(chunk);
         this.chunks.delete(coordinateKey);
       }
     }
@@ -163,7 +163,7 @@ export class TilePreview {
         if (chunk && !chunk.autotileComputed) {
           computeChunkSubgridBlend(chunk, this.graph);
           chunk.autotileComputed = true;
-          chunk.dirty = true;
+          chunk.invalidateVisuals();
         }
       }
     }
@@ -211,7 +211,7 @@ export class TilePreview {
     for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++) {
       for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
         const chunk = this.chunks.get(`${cx},${cy}`);
-        const ready = !!chunk?.renderCache && !chunk.dirty && this.propsReady;
+        const ready = this.renderer.isTerrainReady(chunk) && this.propsReady;
         if (ready) this.stats.ready++;
         else if (chunk) pending = true;
         if (coverage) {
@@ -232,7 +232,7 @@ export class TilePreview {
       for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++)
         for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
           const chunk = this.chunks.get(`${cx},${cy}`);
-          if (chunk?.renderCache && !chunk.dirty) {
+          if (this.renderer.isTerrainReady(chunk)) {
             const { sx, sy } = this.camera.worldToScreen(
               cx * CHUNK_SIZE * TILE_SIZE,
               cy * CHUNK_SIZE * TILE_SIZE,
@@ -320,12 +320,12 @@ export class TilePreview {
         chunk.roadGrid.byteLength +
         chunk.heightGrid.byteLength +
         chunk.blendLayers.byteLength +
-        (chunk.renderCache ? (CHUNK_SIZE * TILE_SIZE) ** 2 * 4 : 0),
+        (this.renderer.getTerrainSurface(chunk) ? (CHUNK_SIZE * TILE_SIZE) ** 2 * 4 : 0),
       0,
     );
   }
   private releaseChunks(): void {
-    for (const chunk of this.chunks.values()) chunk.renderCache = null;
+    for (const chunk of this.chunks.values()) this.renderer.releaseChunk(chunk);
     this.chunks.clear();
     this.props = [];
     this.actors = [];

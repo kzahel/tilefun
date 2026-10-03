@@ -121,7 +121,7 @@ export class World {
 
       computeChunkSubgridBlend(chunk, blendGraph);
       chunk.autotileComputed = true;
-      chunk.dirty = true;
+      chunk.invalidateVisuals();
       chunk.revision++;
       processed++;
     }
