@@ -5,14 +5,15 @@ test.use({ channel: "chromium" });
 // Exercise the real dialog with a deterministic browser speech provider. No microphone/network STT in CI.
 async function speechDouble(
   page: Page,
-  options: { unsupported?: boolean; denied?: boolean; delayed?: boolean } = {},
+  options: { unsupported?: boolean; denied?: boolean; delayed?: boolean; holdFinal?: boolean } = {},
 ) {
   await page.addInitScript((options) => {
     const state = {
       starts: 0,
       stops: 0,
       aborts: 0,
-      tracksStopped: 0,
+      mediaRequests: 0,
+      microphoneActive: false,
       spoken: [] as string[],
       text: "I want to go inside the tent",
       error: "",
@@ -28,16 +29,8 @@ async function speechDouble(
     Object.defineProperty(navigator.mediaDevices, "getUserMedia", {
       configurable: true,
       value: async () => {
-        if (options.denied) throw new Error("Permission denied");
-        return {
-          getTracks: () => [
-            {
-              stop: () => {
-                state.tracksStopped++;
-              },
-            },
-          ],
-        };
+        state.mediaRequests++;
+        throw new Error("Recognition must own microphone access without a separate stream");
       },
     });
     class Recognition {
@@ -51,21 +44,30 @@ async function speechDouble(
       start() {
         state.starts++;
         w.ideaRecognition = this;
-        if (!state.delayed) setTimeout(() => this.onaudiostart?.(), 20);
+        if (options.denied) {
+          setTimeout(() => this.onerror?.({ error: "not-allowed" }), 0);
+        } else if (!state.delayed) setTimeout(() => this.audioStart(), 20);
+      }
+      audioStart() {
+        state.microphoneActive = true;
+        this.onaudiostart?.();
+      }
+      finish() {
+        if (state.error) this.onerror?.({ error: state.error });
+        else
+          this.onresult?.({
+            results: [{ isFinal: !state.interimOnly, 0: { transcript: state.text } }],
+          });
+        this.onend?.();
       }
       stop() {
         state.stops++;
-        setTimeout(() => {
-          if (state.error) this.onerror?.({ error: state.error });
-          else
-            this.onresult?.({
-              results: [{ isFinal: !state.interimOnly, 0: { transcript: state.text } }],
-            });
-          this.onend?.();
-        }, 80);
+        state.microphoneActive = false;
+        if (!options.holdFinal) setTimeout(() => this.finish(), 80);
       }
       abort() {
         state.aborts++;
+        state.microphoneActive = false;
         setTimeout(() => this.onend?.(), 5);
       }
     }
@@ -79,6 +81,19 @@ async function speechDouble(
     });
   }, options);
 }
+async function expectMicrophoneReleased(page: Page) {
+  expect(
+    await page.evaluate(
+      () =>
+        (
+          window as unknown as {
+            ideaTest: { microphoneActive: boolean; mediaRequests: number };
+          }
+        ).ideaTest,
+    ),
+  ).toMatchObject({ microphoneActive: false, mediaRequests: 0 });
+}
+
 async function openIdea(page: Page) {
   await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -109,9 +124,10 @@ async function openIdea(page: Page) {
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "💡 Idea", exact: true }).click();
   await expect(page.getByRole("dialog", { name: "💡 Idea" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Enable microphone" })).toHaveCount(0);
+  await expectMicrophoneReleased(page);
 }
 async function record(page: Page) {
-  await page.getByRole("button", { name: "Enable microphone" }).click();
   const mic = page.getByRole("button", { name: "Hold to speak" });
   const box = await mic.boundingBox();
   if (!box) throw new Error("Missing microphone");
@@ -141,10 +157,15 @@ test("anonymous hold, exact readback, screenshot submission and private Workshop
   expect(
     await page.evaluate(
       () =>
-        (window as unknown as { ideaTest: { spoken: string[]; tracksStopped: number } }).ideaTest,
+        (
+          window as unknown as {
+            ideaTest: { spoken: string[]; microphoneActive: boolean; mediaRequests: number };
+          }
+        ).ideaTest,
     ),
   ).toMatchObject({
-    tracksStopped: 1,
+    microphoneActive: false,
+    mediaRequests: 0,
     spoken: expect.arrayContaining(["I want to go inside the tent"]),
   });
   const requestPromise = page.waitForRequest(
@@ -216,7 +237,6 @@ test("cancel, focus loss, recognition errors and interim results never submit un
 }) => {
   await speechDouble(page);
   await openIdea(page);
-  await page.getByRole("button", { name: "Enable microphone" }).click();
   const mic = page.getByRole("button", { name: "Hold to speak" });
   await mic.focus();
   await page.keyboard.down("Space");
@@ -253,8 +273,10 @@ test("permission denial leaves typing usable and draft restores without triggeri
 }) => {
   await speechDouble(page, { denied: true });
   await openIdea(page);
-  await page.getByRole("button", { name: "Enable microphone" }).click();
-  await expect(page.locator(".idea-status")).toContainText("wasn't allowed");
+  await page.getByRole("button", { name: "Hold to speak" }).focus();
+  await page.keyboard.down("Space");
+  await expect(page.locator(".idea-status")).toContainText("was denied");
+  await page.keyboard.up("Space");
   await page.getByText("Language & typing", { exact: true }).click();
   await page.getByLabel("Type your idea").fill("G for garden, Tab, and a tent");
   await page.getByRole("button", { name: "Back to game" }).click();
@@ -266,12 +288,11 @@ test("permission denial leaves typing usable and draft restores without triggeri
   await expect(page.locator(".idea-picture")).toBeVisible();
 });
 
-test("releasing before the microphone starts aborts and ignores late audio events", async ({
+test("releasing before the microphone starts aborts and shuts down late audio capture", async ({
   page,
 }) => {
   await speechDouble(page, { delayed: true });
   await openIdea(page);
-  await page.getByRole("button", { name: "Enable microphone" }).click();
   const mic = page.getByRole("button", { name: "Hold to speak" });
   await mic.focus();
   await page.keyboard.down("Space");
@@ -280,16 +301,78 @@ test("releasing before the microphone starts aborts and ignores late audio event
   await expect(page.locator(".idea-status")).toContainText("Hold until");
   await page.evaluate(() => {
     (
-      window as unknown as { ideaRecognition: { onaudiostart: () => void } }
-    ).ideaRecognition.onaudiostart();
+      window as unknown as { ideaRecognition: { audioStart: () => void } }
+    ).ideaRecognition.audioStart();
   });
   await expect(page.getByRole("button", { name: "📨 Send", exact: true })).toBeHidden();
   expect(
     await page.evaluate(
       () => (window as unknown as { ideaTest: { aborts: number } }).ideaTest.aborts,
     ),
-  ).toBe(1);
+  ).toBe(2);
+  await expectMicrophoneReleased(page);
 });
+
+test("release turns off the microphone before delayed final words and allows another hold", async ({
+  page,
+}) => {
+  await speechDouble(page, { holdFinal: true });
+  await openIdea(page);
+  const mic = page.getByRole("button", { name: "Hold to speak" });
+  for (const key of ["Space", "Enter"]) {
+    await mic.focus();
+    await page.keyboard.down(key);
+    await expect(page.locator(".idea-status")).toContainText("Listening");
+    expect(
+      await page.evaluate(
+        () =>
+          (window as unknown as { ideaTest: { microphoneActive: boolean } }).ideaTest
+            .microphoneActive,
+      ),
+    ).toBe(true);
+    await page.keyboard.up(key);
+    await expect(page.locator(".idea-status")).toContainText("Finishing");
+    await expectMicrophoneReleased(page);
+    await page.evaluate(() => {
+      (window as unknown as { ideaRecognition: { finish: () => void } }).ideaRecognition.finish();
+    });
+    await expect(page.getByRole("button", { name: "Listen to your idea" })).toContainText(
+      "inside the tent",
+    );
+    await page.getByRole("button", { name: "🎤 Try again" }).click();
+  }
+});
+
+for (const interruption of [
+  "pointercancel",
+  "lostpointercapture",
+  "blur",
+  "hidden",
+  "close",
+] as const) {
+  test(`${interruption} releases microphone capture`, async ({ page }) => {
+    await speechDouble(page);
+    await openIdea(page);
+    const mic = page.getByRole("button", { name: "Hold to speak" });
+    const box = await mic.boundingBox();
+    if (!box) throw new Error("Missing microphone");
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await expect(page.locator(".idea-status")).toContainText("Listening");
+    if (interruption === "close") await page.keyboard.press("Escape");
+    else if (interruption === "blur")
+      await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+    else if (interruption === "hidden") {
+      await page.evaluate(() => {
+        Object.defineProperty(document, "hidden", { configurable: true, value: true });
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+    } else await mic.dispatchEvent(interruption);
+    await expectMicrophoneReleased(page);
+    await page.mouse.up();
+    await expect(page.getByRole("button", { name: "📨 Send", exact: true })).toBeHidden();
+  });
+}
 
 test("sends directly if idea storage is unavailable, retaining the draft if the network also fails", async ({
   page,
@@ -323,20 +406,8 @@ for (const viewport of [
   test.describe(`idea touch ${viewport.width}`, () => {
     test.use({ viewport, isMobile: true, hasTouch: true });
     test("large controls fit and touch hold ends on release", async ({ page }, testInfo) => {
-      await speechDouble(page);
+      await speechDouble(page, { holdFinal: true });
       await openIdea(page);
-      await page.getByRole("button", { name: "Enable microphone" }).tap();
-      // First real touch enters fullscreen after the dialog opened. It must stay
-      // above the fullscreen root, not merely remain present in the DOM.
-      await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(true);
-      await expect
-        .poll(() =>
-          page.locator(".idea-mic").evaluate((el) => {
-            const r = el.getBoundingClientRect();
-            return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
-          }),
-        )
-        .toBe(true);
       const mic = page.getByRole("button", { name: "Hold to speak" });
       const box = await mic.boundingBox();
       if (!box) throw new Error("Missing microphone");
@@ -348,9 +419,27 @@ for (const viewport of [
       });
       await expect(page.locator(".idea-status")).toContainText("Listening");
       await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await expect(page.locator(".idea-status")).toContainText("Finishing");
+      await expectMicrophoneReleased(page);
+      // First real touch enters fullscreen after the dialog opened. It must stay
+      // above the fullscreen root, not merely remain present in the DOM.
+      await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(true);
+      await expect
+        .poll(() =>
+          page.locator(".idea-mic").evaluate((el) => {
+            const r = el.getBoundingClientRect();
+            return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
+          }),
+        )
+        .toBe(true);
+      await expect(page.locator(".idea-status")).toContainText("Finishing");
+      await page.evaluate(() => {
+        (window as unknown as { ideaRecognition: { finish: () => void } }).ideaRecognition.finish();
+      });
       await expect(page.getByRole("button", { name: "Listen to your idea" })).toContainText(
         "inside the tent",
       );
+      await expectMicrophoneReleased(page);
       expect(
         await page.locator(".idea-dialog").evaluate((el) => el.scrollWidth <= el.clientWidth),
       ).toBe(true);

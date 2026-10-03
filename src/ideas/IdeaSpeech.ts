@@ -56,7 +56,17 @@ export class IdeaSpeech {
     recognition.interimResults = true;
     let finalText = "";
     recognition.onaudiostart = () => {
-      if (this.recognition !== recognition || this.state !== "starting") return;
+      // A provider may finish opening the microphone after a release/cancel
+      // during its permission prompt. Close that late capture as well.
+      if (this.recognition !== recognition) {
+        recognition.abort();
+        return;
+      }
+      if (this.state === "finishing") {
+        recognition.stop();
+        return;
+      }
+      if (this.state !== "starting") return;
       this.set("listening", "Listening… let go when you're done.");
       this.ready();
     };
@@ -90,6 +100,8 @@ export class IdeaSpeech {
     };
     this.set("starting", "Getting ready… wait for the chime.");
     try {
+      // Let recognition request permission in the record gesture itself. A
+      // separate getUserMedia stream would have an independent mic lifetime.
       recognition.start();
       this.timer = setTimeout(() => this.stop(), 60_000);
     } catch {
@@ -106,6 +118,8 @@ export class IdeaSpeech {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this.cancel("Speech took too long. Please try again."), 6000);
     try {
+      // stop() ends microphone capture now, while allowing already captured
+      // audio to produce its final transcript during the finishing state.
       this.recognition.stop();
     } catch {
       this.cancel("Please hold and try again.");

@@ -14,10 +14,14 @@ The proposed extension into companion and builder-agent sessions lives in
 - Game hamburger menu → **💡 Idea**. Capture a downscaled game canvas PNG and
   world/realm, generation descriptor, player coordinates, capture time and build
   identifier when that menu opens. This is a game image, not desktop capture.
-- Enable microphone separately, then hold the large button (pointer or Space /
-  Enter) and speak after the chime. Release stops listening and waits for final
-  recognition results. Pointer drift remains captured; cancellation, focus loss,
-  hidden page and closing stop recognition. Recording is limited to 60 seconds;
+- Hold the large button (pointer or Space / Enter) and speak after the chime.
+  That press starts recognition and requests browser microphone permission when
+  needed; there is no separate enable step or independent permission stream.
+  Release stops microphone capture immediately while final recognition results
+  finish processing. Releasing during startup aborts it, including late audio
+  startup events. First-touch fullscreen preserves results pending after release.
+  Pointer drift remains captured; cancellation, focus loss, hidden page and
+  closing stop recognition. Recording is limited to 60 seconds;
   finalization times out after six seconds. Interim words cannot be sent.
 - Tap the transcript bubble to hear the exact submitted text via browser speech
   synthesis. Try again replaces the words. Language defaults to the browser's;
@@ -71,6 +75,13 @@ ideas. The Workshop page is
 `VITE_BUILD_ID` can label a deployment; otherwise Vite supplies its start/build
 UTC timestamp. Context is player-supplied diagnostic evidence, not trusted identity.
 
+`tests/play-ideas.spec.ts` passes 14 browser checks, including recording without
+an enable step, release before delayed final words, late capture after early
+release, pointer cancellation, focus/visibility loss, closing, permission denial
+and first-touch fullscreen in portrait and landscape. These use a deterministic
+speech provider; microphone capture ends on stop/abort in that provider.
+
 Next: try holding, releasing and readback with the child's actual device and
-speech. Automated speech doubles establish UI/lifecycle behavior, not recognition
-quality or browser-provider availability.
+speech, checking that its microphone indicator turns off on release. Automated
+speech doubles establish UI/lifecycle behavior, not recognition quality or
+browser-provider availability.

@@ -77,8 +77,9 @@ preview; public-asset links let Vite apply the deployment prefix exactly once.
 
 ## Play ideas
 
-Open the game menu and choose **💡 Idea**. Enable the microphone, hold the big
-button to speak, then release. Tap the resulting words to hear them aloud;
+Open the game menu and choose **💡 Idea**. Hold the big button to speak, allowing
+microphone access if the browser asks. Release to turn off the microphone and
+finish the words. Tap the resulting words to hear them aloud;
 **Try again** replaces them and **Send** sends the text plus a picture of the game.
 Tilefun stores no audio. Browser speech support varies; typing is also available.
 Unsent ideas stay on the device and retry while the game is open. Submitting needs

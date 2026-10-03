@@ -6,7 +6,6 @@ import { IDEA_TEXT_LIMIT, type PlayIdeaSubmission } from "./PlayIdea.js";
 import "./IdeaDialog.css";
 
 const DRAFT_KEY = "tilefun.idea-draft.v1";
-let microphonePermissionReady = false;
 export function ideaToast(message: string) {
   document.querySelector(".idea-toast")?.remove();
   const toast = document.createElement("div");
@@ -39,10 +38,8 @@ export class IdeaDialog {
   private dialog = document.createElement("dialog");
   private speech: IdeaSpeech;
   private draft: PlayIdeaSubmission;
-  private permissionReady = microphonePermissionReady;
   private closed = false;
   private sending = false;
-  private preparing = false;
   private pointer: number | null = null;
   private keyHeld = false;
   private mic: HTMLButtonElement;
@@ -51,7 +48,6 @@ export class IdeaDialog {
   private text: HTMLTextAreaElement;
   private status: HTMLParagraphElement;
   private language: HTMLSelectElement;
-  private enable: HTMLButtonElement;
   private again: HTMLButtonElement;
   private storageWarning: HTMLParagraphElement;
   private onBlur = () => {
@@ -64,7 +60,11 @@ export class IdeaDialog {
     // Fullscreen promotes its root into the top layer above already-open dialogs.
     // Reopen the same modal so it remains visible and keeps owning input.
     if (this.dialog.open) {
-      this.onBlur();
+      // First-touch fullscreen can arrive just after release. Keep the final
+      // transcript pending while stopping any hold still in progress.
+      this.pointer = null;
+      this.keyHeld = false;
+      this.speech.stop();
       this.dialog.close();
       this.dialog.showModal();
     }
@@ -102,8 +102,7 @@ export class IdeaDialog {
     dialog.innerHTML = `
       <h1 id="idea-title">💡 Idea</h1>
       <img class="idea-picture" alt="The game when you opened the menu">
-      <button type="button" class="idea-enable">🎤 Enable microphone</button>
-      <button type="button" class="idea-mic" aria-label="Hold to speak" disabled>🎤<br>Hold to speak</button>
+      <button type="button" class="idea-mic" aria-label="Hold to speak">🎤<br>Hold to speak</button>
       <p class="idea-status" role="status" aria-live="polite"></p>
       <button type="button" class="idea-bubble" aria-label="Listen to your idea" hidden></button>
       <div class="idea-actions"><button type="button" class="idea-again">🎤 Try again</button><button type="button" class="idea-send" disabled>📨 Send</button></div>
@@ -123,7 +122,6 @@ export class IdeaDialog {
     this.text = get("textarea");
     this.status = get(".idea-status");
     this.language = get("select");
-    this.enable = get(".idea-enable");
     this.again = get(".idea-again");
     this.storageWarning = get(".idea-storage");
     get<HTMLImageElement>(".idea-picture").src = this.draft.screenshot;
@@ -149,11 +147,6 @@ export class IdeaDialog {
       (state, message) => {
         if (this.closed) return;
         this.status.textContent = message;
-        if (message.startsWith("Microphone or speech access was denied")) {
-          microphonePermissionReady = false;
-          this.permissionReady = false;
-          this.enable.hidden = false;
-        }
         this.mic.dataset.listening = String(state === "listening");
         this.render();
       },
@@ -171,9 +164,6 @@ export class IdeaDialog {
       },
       () => this.chime(),
     );
-    this.enable.onclick = () => {
-      void this.prepareMicrophone();
-    };
     this.mic.onpointerdown = (event) => {
       if (
         event.button !== 0 ||
@@ -270,8 +260,7 @@ export class IdeaDialog {
         });
     };
     void refreshPending();
-    const supported = !!recognitionConstructor() && !!navigator.mediaDevices?.getUserMedia;
-    this.enable.hidden = !supported || this.permissionReady;
+    const supported = !!recognitionConstructor();
     if (!supported) {
       get<HTMLDetailsElement>("details").open = true;
       this.status.textContent =
@@ -279,9 +268,7 @@ export class IdeaDialog {
     } else
       this.status.textContent = restored
         ? "Your unfinished idea is here. Tap it to listen."
-        : this.permissionReady
-          ? "Hold the big button. Speak after the chime."
-          : "Enable the microphone, then hold the big button to speak.";
+        : "Hold the big button. Speak after the chime.";
     document.body.append(dialog);
     dialog.showModal();
     this.render();
@@ -300,7 +287,8 @@ export class IdeaDialog {
     this.bubble.textContent = `🔊 ${this.draft.text}`;
     this.bubble.disabled = busy || this.sending;
     // Keep the held button enabled until pointerup, including while starting.
-    this.mic.disabled = !this.permissionReady || this.sending || this.speech?.state === "finishing";
+    this.mic.disabled =
+      !recognitionConstructor() || this.sending || this.speech?.state === "finishing";
     this.text.disabled = busy || this.sending;
     this.language.disabled = busy || this.sending;
     this.again.disabled = busy || this.sending;
@@ -314,33 +302,8 @@ export class IdeaDialog {
         "Couldn't save this draft on the device. Keep this page open until you send it.";
     }
   }
-  private async prepareMicrophone() {
-    if (this.preparing) return;
-    this.preparing = true;
-    this.enable.disabled = true;
-    window.speechSynthesis?.cancel();
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      for (const track of stream.getTracks()) track.stop();
-      if (this.closed) return;
-      this.permissionReady = true;
-      microphonePermissionReady = true;
-      this.enable.hidden = true;
-      this.status.textContent = "Hold the big button. Speak after the chime.";
-      this.render();
-      this.mic.focus();
-      speakIdea("Hold the button. Speak after the chime.", this.draft.language);
-    } catch {
-      if (!this.closed)
-        this.status.textContent =
-          "Microphone access wasn't allowed. Ask a grown-up, or type your idea.";
-    } finally {
-      this.preparing = false;
-      this.enable.disabled = false;
-    }
-  }
   private begin() {
-    if (!this.permissionReady || this.speech.state !== "idle") return;
+    if (this.closed || this.sending || this.speech.state !== "idle") return;
     this.audio.tryResume();
     this.draft.text = "";
     this.text.value = "";
