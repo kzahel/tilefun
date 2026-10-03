@@ -38,6 +38,7 @@ import {
   INTERIOR_ENTRY,
   INTERIOR_WALL_TYPE,
   type InteriorIdentity,
+  InvalidInteriorError,
   interiorGenerator,
 } from "../interiors/GameplayInterior.js";
 import {
@@ -212,29 +213,17 @@ export class Realm {
     this.replication.clearClient(clientId);
   }
 
-  /**
-   * Add a player to this realm: create player entity, set up session state,
-   * add to realm sessions map. Loads per-player data if available.
-   */
+  /** Compiled ground for safe arrivals in edited rooms. */
+  get indoorFloor() {
+    return this.roomGeometry?.onFloor;
+  }
+
   async preparePlayer(session: PlayerSession): Promise<SavedPlayerData | null> {
     const persistId = session.profileId || session.clientId;
     return this.saveManager ? this.saveManager.loadPlayerData(persistId) : null;
   }
 
   async addPlayer(session: PlayerSession, prepared?: SavedPlayerData | null): Promise<void> {
-    // Evict any existing session in this realm with the same profileId (race-condition safety net)
-    if (session.profileId) {
-      for (const [otherId, other] of this.sessions) {
-        if (otherId !== session.clientId && other.profileId === session.profileId) {
-          console.log(
-            `[tilefun:realm] evicting duplicate profileId=${session.profileId} old=${otherId} new=${session.clientId}`,
-          );
-          this.removePlayer(otherId);
-          break;
-        }
-      }
-    }
-
     // Try to load per-player saved data (prefer stable profileId over session clientId)
     const saved =
       prepared === undefined
@@ -345,7 +334,11 @@ export class Realm {
   savePlayerData(session: PlayerSession): void {
     if (!this.saveManager) return;
     const persistId = session.profileId || session.clientId;
-    this.saveManager.markPlayerDirty(persistId, {
+    this.saveManager.markPlayerDirty(persistId, this.playerData(session));
+  }
+
+  playerData(session: PlayerSession): SavedPlayerData {
+    return {
       ...(this.interior ? { returnLocation: session.returnLocation } : {}),
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
@@ -353,7 +346,7 @@ export class Realm {
       cameraX: session.cameraX,
       cameraY: session.cameraY,
       cameraZoom: session.cameraZoom,
-    });
+    };
   }
 
   /** Close persistence if the given worldId matches the currently loaded world. */
@@ -380,7 +373,8 @@ export class Realm {
     // Drain each session's input queue and run full per-input simulation steps.
     // Entities stepped here are skipped in Phase 2 to avoid double simulation.
     for (const session of this.sessions.values()) {
-      if (dormantClientIds.has(session.clientId)) continue;
+      if (dormantClientIds.has(session.clientId) || session.transitioning || session.retired)
+        continue;
 
       // ── Mount bookkeeping: auto-dismount if mount entity was removed ──
       if (session.gameplaySession.mountId !== null) {
@@ -562,7 +556,7 @@ export class Realm {
     // Previously this ran inside the per-session loop, meaning N sessions
     // caused N entity updates per tick — doubling/tripling movement speed.
     const activeSessions = [...this.sessions.values()].filter(
-      (s) => !s.debugPaused && !dormantClientIds.has(s.clientId),
+      (s) => !s.debugPaused && !s.transitioning && !s.retired && !dormantClientIds.has(s.clientId),
     );
     if (activeSessions.length > 0) {
       const physicsSteps = Math.max(1, this.physicsMult);
@@ -1089,7 +1083,9 @@ export class Realm {
         savedMeta.interior.parentWorldId !== this.interior.parentWorldId ||
         savedMeta.interior.floor !== this.interior.floor)
     )
-      throw new Error("Unsupported saved interior identity.");
+      throw new InvalidInteriorError("Unsupported saved interior identity.");
+    if (this.interior && savedMeta?.interior?.doors)
+      this.interior = { ...this.interior, doors: savedMeta.interior.doors };
     const savedChunks = await this.saveManager.loadChunks();
 
     let cameraX = 0;
@@ -1165,11 +1161,15 @@ export class Realm {
       playerY = INTERIOR_ENTRY.wy;
       cameraX = playerX;
       cameraY = playerY;
-      const state = savedMeta?.roomPlan
-        ? parseGameplayRoom(savedMeta.roomPlan)
-        : initialRoom(this.interior);
-      this.installRoom(state);
-      this.roomEditor = new GameplayRoomEditor(state, (next) => this.installRoom(next));
+      try {
+        const state = savedMeta?.roomPlan
+          ? parseGameplayRoom(savedMeta.roomPlan)
+          : initialRoom(this.interior);
+        this.installRoom(state);
+        this.roomEditor = new GameplayRoomEditor(state, (next) => this.installRoom(next));
+      } catch (error) {
+        throw new InvalidInteriorError("Saved interior geometry is invalid.", { cause: error });
+      }
     }
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);

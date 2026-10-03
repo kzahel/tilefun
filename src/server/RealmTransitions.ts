@@ -1,4 +1,5 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
+import type { SavedPlayerData } from "../persistence/SaveManager.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { type Arrival, safeArrival } from "./SafeArrival.js";
@@ -7,6 +8,7 @@ export interface RealmDestination {
   realm: Realm;
   arrival?: Arrival;
   allowInterior?: boolean;
+  savedPlayer?: SavedPlayerData;
   returnLocation?: PlayerSession["returnLocation"];
 }
 
@@ -14,14 +16,27 @@ export interface RealmDestination {
 export class RealmTransitions {
   constructor(
     private readonly findRealm: (id: string) => Realm | undefined,
+    private readonly commit: (session: PlayerSession, realm: Realm) => Promise<void>,
     private readonly moved: (oldId: string | null, newId: string) => void,
   ) {}
 
   async move(session: PlayerSession, resolve: () => Promise<RealmDestination>) {
     if (session.transitioning) throw new Error("A realm transition is already running.");
+    if (session.retired) throw new Error("This player connection was replaced.");
     session.transitioning = true;
+    let finish!: () => void;
+    session.transitionDone = new Promise<void>((resolve) => {
+      finish = resolve;
+    });
     try {
-      const { realm: target, arrival, allowInterior, returnLocation } = await resolve();
+      await session.identityReady;
+      const {
+        realm: target,
+        arrival,
+        allowInterior,
+        returnLocation,
+        savedPlayer,
+      } = await resolve();
       if (target.interior && !allowInterior)
         throw new Error("Enter this interior through its building door.");
       const position = arrival ? safeArrival(target, arrival) : undefined;
@@ -29,12 +44,23 @@ export class RealmTransitions {
       const source = oldId ? this.findRealm(oldId) : undefined;
       // Same-world travel must read the latest live progress, not an older save.
       if (source === target) await source.flushAsync();
-      const prepared = await target.preparePlayer(session);
+      const prepared = savedPlayer ?? (await target.preparePlayer(session));
       // A failed source save or destination read must leave the source player attached.
       if (source && source !== target) await source.flushAsync();
+      if (session.retired) throw new Error("This player connection was replaced.");
       source?.removePlayer(session.clientId);
       // Capture after dismounting; the original entity identity survives rollback.
-      const previous = { ...session, realmId: oldId };
+      const previous = {
+        realmId: oldId,
+        player: session.player,
+        gameplaySession: session.gameplaySession,
+        returnLocation: session.returnLocation,
+        inputQueue: session.inputQueue,
+        cameraX: session.cameraX,
+        cameraY: session.cameraY,
+        cameraZoom: session.cameraZoom,
+        visibleRange: session.visibleRange,
+      };
       try {
         await target.addPlayer(session, prepared);
         if (returnLocation !== undefined) session.returnLocation = returnLocation;
@@ -50,6 +76,7 @@ export class RealmTransitions {
         }
         target.savePlayerData(session);
         await target.flushAsync();
+        await this.commit(session, target);
       } catch (error) {
         if (target.sessions.get(session.clientId) === session)
           target.removePlayer(session.clientId);
@@ -68,6 +95,7 @@ export class RealmTransitions {
       };
     } finally {
       session.transitioning = false;
+      finish();
     }
   }
 }

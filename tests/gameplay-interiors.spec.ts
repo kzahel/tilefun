@@ -132,12 +132,13 @@ for (const kind of ["apartment", "shop", "home"] as const)
         )
         .toBe(88);
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
-      // A reload from inside resumes the same parent doorway rather than an empty realm origin.
+      // A reload resumes the same interior, including the saved furniture.
       await page.goto("/tilefun/");
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       const resumeAfterInterior = page.getByRole("button", { name: "Resume", exact: true });
       if (await resumeAfterInterior.isVisible()) await resumeAfterInterior.click();
-      await expect(enter).toBeVisible();
+      await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
+      await expect.poll(remainingFurniture).toBe(2);
     }
     expect(errors).toEqual([]);
   });

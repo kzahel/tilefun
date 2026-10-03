@@ -141,16 +141,51 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(180);
   await page.keyboard.up("ArrowRight");
   await page.screenshot({ path: "/tmp/tilefun-edited-room-walking.png" });
+  await page.evaluate(() => {
+    const game = (
+      document.querySelector("#game") as unknown as {
+        __game: import("../src/client/GameClient.js").GameClient;
+      }
+    ).__game;
+    game.transport.send({ type: "flush" });
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          new Promise<number>((resolve, reject) => {
+            const open = indexedDB.open("tilefun-world-__player_locations__");
+            open.onerror = () => reject(open.error);
+            open.onsuccess = () => {
+              const db = open.result;
+              const tx = db.transaction("players", "readonly");
+              const read = tx
+                .objectStore("players")
+                .get(localStorage.getItem("tilefun-active-profile") ?? "");
+              read.onsuccess = () => resolve(read.result?.player.x ?? 0);
+              read.onerror = () => reject(read.error);
+              tx.oncomplete = () => db.close();
+            };
+          }),
+      ),
+    )
+    .toBeGreaterThan(180);
   await page.reload();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const resume = page.getByRole("button", { name: "Resume", exact: true });
   await resume.click();
-  await enter(page);
+  await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
   await expect.poll(async () => (await state(page)).room).toEqual(saved);
   await expect
     .poll(async () => (await state(page)).props.find((p) => p.type === "prop-interior-wall")?.walls)
     .toEqual(walls);
   await expect.poll(furnitureCount).toBe(4);
+  await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(180);
+  if ((await state(page)).player.wx > 110) {
+    await page.keyboard.down("ArrowLeft");
+    await expect.poll(async () => (await state(page)).player.wx).toBeLessThan(100);
+    await page.keyboard.up("ArrowLeft");
+  }
   await page.getByRole("button", { name: "Return to street" }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
   expect(errors).toEqual([]);

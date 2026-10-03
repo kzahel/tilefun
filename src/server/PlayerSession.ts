@@ -28,6 +28,10 @@ export class PlayerSession {
   realmId: string | null = null;
   returnLocation: ({ worldId: string } & import("./SafeArrival.js").Arrival) | null = null;
   transitioning = false;
+  /** Profile takeover waits for travel to settle before detaching this session. */
+  transitionDone: Promise<void> = Promise.resolve();
+  identityReady: Promise<void> = Promise.resolve();
+  retired = false;
 
   /** Queued inputs from client (drained each tick). */
   inputQueue: {

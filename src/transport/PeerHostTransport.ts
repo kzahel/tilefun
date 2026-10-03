@@ -6,7 +6,7 @@ import {
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
-import type { IClientTransport, IServerTransport } from "./Transport.js";
+import type { ConnectionIdentity, IClientTransport, IServerTransport } from "./Transport.js";
 import { routeServerMessageChannel } from "./webrtcChannels.js";
 
 const LOCAL_CLIENT_ID = "local";
@@ -26,7 +26,7 @@ export class PeerHostTransport {
 
   private serverMessageHandler: ((clientId: string, msg: ClientMessage) => void) | null = null;
   private clientMessageHandler: ((msg: ServerMessage) => void) | null = null;
-  private connectHandler: ((clientId: string) => void) | null = null;
+  private connectHandler: ((clientId: string, identity?: ConnectionIdentity) => void) | null = null;
   private disconnectHandler: ((clientId: string) => void) | null = null;
   private remoteClients = new Map<string, DataConnection>();
   private remoteEntitiesFallbackLogged = new Set<string>();
@@ -101,7 +101,7 @@ export class PeerHostTransport {
       onMessage(handler: (clientId: string, msg: ClientMessage) => void): void {
         self.serverMessageHandler = handler;
       },
-      onConnect(handler: (clientId: string) => void): void {
+      onConnect(handler: (clientId: string, identity?: ConnectionIdentity) => void): void {
         self.connectHandler = handler;
       },
       onDisconnect(handler: (clientId: string) => void): void {
@@ -155,8 +155,8 @@ export class PeerHostTransport {
   }
 
   /** Fire the connect event for the local host client (like SerializingTransport.triggerConnect). */
-  triggerConnect(): void {
-    this.connectHandler?.(LOCAL_CLIENT_ID);
+  triggerConnect(identity?: ConnectionIdentity): void {
+    this.connectHandler?.(LOCAL_CLIENT_ID, identity);
   }
 
   /** Total player count (remote guests + local host). */

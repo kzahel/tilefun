@@ -210,13 +210,17 @@ export/import UI. To retain them, migrate the browser profile/site data using
 the browser's supported procedure, keeping the same origin, or continue using
 the original browser. Opening a different port/domain will show separate state.
 A seed/revision explorer link reproduces initial generation, not saved edits,
-deletions, interiors or player progress.
+deletions, interiors or player progress. Current player locations are stored in
+`tilefun-world-__player_locations__` (IndexedDB), separately from per-world visit
+history. Include this database when migrating browser state.
 
 Server-hosted worlds use filesystem state: `data/registry.json` and
 `data/worlds/` by default. For the standalone server, `DATA_DIR` changes that
 root; the Vite game server currently uses `./data`. Stop the game server before
 copying its registry and complete worlds directory together, and restore them
-into an empty destination data root. Review-only archives above do not contain
+into an empty destination data root. The reserved `worlds/__player_locations__/`
+directory holds current player locations and must be copied too; it is not a
+playable world. Review-only archives above do not contain
 these worlds. Connecting from another machine to the same running game server
 uses that server's existing worlds; a new browser may still have a new local
 player profile.

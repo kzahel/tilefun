@@ -49,7 +49,17 @@ export function safeArrival(realm: Realm, arrival: Arrival): { wx: number; wy: n
         aabb.right <= door.x + door.width &&
         aabb.top >= door.y &&
         aabb.bottom <= door.y + door.height;
-      if (!inside && !doorway) return null;
+      if (realm.indoorFloor) {
+        if (
+          !realm.indoorFloor({
+            x: aabb.left,
+            y: aabb.top,
+            width: aabb.right - aabb.left,
+            height: aabb.bottom - aabb.top,
+          })
+        )
+          return null;
+      } else if (!inside && !doorway) return null;
     }
     if (
       aabbOverlapsSolid(

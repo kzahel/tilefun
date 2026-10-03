@@ -9,7 +9,7 @@ import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore, SaveEntry } from "../persistence/PersistenceStore.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
-import type { IServerTransport } from "../transport/Transport.js";
+import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
 
 // ---- Test helpers ----
@@ -95,7 +95,7 @@ class MemoryStore implements PersistenceStore {
 /** Multi-client server transport that collects messages per client. */
 class TestTransport implements IServerTransport {
   private messageHandler: ((clientId: string, msg: ClientMessage) => void) | null = null;
-  private connectHandler: ((clientId: string) => void) | null = null;
+  private connectHandler: ((clientId: string, identity?: ConnectionIdentity) => void) | null = null;
   private disconnectHandler: ((clientId: string) => void) | null = null;
 
   /** Collected messages per clientId. */
@@ -120,7 +120,7 @@ class TestTransport implements IServerTransport {
     this.messageHandler = handler;
   }
 
-  onConnect(handler: (clientId: string) => void): void {
+  onConnect(handler: (clientId: string, identity?: ConnectionIdentity) => void): void {
     this.connectHandler = handler;
   }
 
@@ -133,12 +133,12 @@ class TestTransport implements IServerTransport {
   // ---- Test helpers ----
 
   /** Simulate a client connecting. */
-  connect(clientId: string): void {
+  connect(clientId: string, identity?: ConnectionIdentity): void {
     // Ensure message list exists for this client
     if (!this.sent.has(clientId)) {
       this.sent.set(clientId, []);
     }
-    this.connectHandler?.(clientId);
+    this.connectHandler?.(clientId, identity);
   }
 
   /** Simulate a client disconnecting. */
@@ -1043,4 +1043,298 @@ it("remote administration requires authorization while ordinary chat and realm b
   } finally {
     server.destroy();
   }
+});
+
+const restoreProfile = { profileId: "indoor-player", displayName: "Indoor player" };
+async function indoorSetup() {
+  const setup = await createTestSetup();
+  const { server, transport, registry } = setup;
+  transport.connect("local", restoreProfile);
+  await server.settle();
+  const generation = {
+    type: "regional",
+    version: "regional-v3",
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
+  const meta = await registry.createWorld(
+    "Restore district",
+    undefined,
+    undefined,
+    undefined,
+    generation,
+  );
+  await server.loadWorld(meta.id, { x: 300, y: 519, generation });
+  const prop = server.propManager.props.find(
+    (p) => p.type.startsWith("prop-regional-apartment-") && p.proceduralId,
+  );
+  if (!prop?.proceduralId) throw new Error("Missing apartment");
+  const { exteriorEntrance } = await import("../interiors/GameplayInterior.js");
+  const door = exteriorEntrance(prop);
+  if (!door) throw new Error("Missing doorway");
+  await server.loadWorld(meta.id, { x: door.wx / 16, y: door.wy / 16, generation });
+  const enter = async () => {
+    transport.clientSend("local", {
+      type: "enter-building",
+      requestId: 900,
+      featureId: prop.proceduralId ?? "",
+    });
+    await server.settle();
+  };
+  return { ...setup, meta, door, enter, featureId: prop.proceduralId };
+}
+
+describe("durable player location", () => {
+  it("restores solo and fresh multiplayer connections indoors independently of the most recent outdoor world", async () => {
+    const setup = await indoorSetup();
+    await setup.enter();
+    const session = setup.server.getLocalSession();
+    const roomId = session.realmId;
+    session.player.position = { wx: 80, wy: 108 };
+    session.gameplaySession.gemsCollected = 17;
+    await setup.server.flushAsync();
+    await setup.registry.createWorld("Someone else's latest world", "flat");
+    setup.server.destroy();
+    for (const clientId of ["local", "new-tab"]) {
+      const transport = new TestTransport();
+      const server = new GameServer(transport, {
+        registry: setup.registry,
+        createStore: setup.createStore,
+      });
+      try {
+        await server.init();
+        transport.connect(clientId, restoreProfile);
+        if (clientId !== "local") {
+          transport.clientSend(clientId, {
+            type: "join-realm",
+            requestId: 901,
+            worldId: setup.meta.id,
+            resume: true,
+          });
+        }
+        await server.settle();
+        const restored = [...server.getSessions()][0];
+        expect(restored?.realmId).toBe(roomId);
+        expect(restored?.player.position).toEqual({ wx: 80, wy: 108 });
+        expect(restored?.gameplaySession.gemsCollected).toBe(17);
+      } finally {
+        server.destroy();
+      }
+    }
+  });
+
+  it("keeps the original entity and durable location if committing a transfer fails", async () => {
+    const setup = await indoorSetup();
+    const session = setup.server.getLocalSession();
+    const player = session.player;
+    const store = setup.createStore("__player_locations__");
+    const write = vi.spyOn(store, "save").mockRejectedValueOnce(new Error("Location disk failed"));
+    try {
+      await setup.enter();
+      expect(session.realmId).toBe(setup.meta.id);
+      expect(session.player).toBe(player);
+      expect(setup.server.entityManager.entities).toContain(player);
+      expect(setup.transport.messagesOfType("local", "request-error").at(-1)?.message).toMatch(
+        /Location disk failed/,
+      );
+      expect(await store.get("players", restoreProfile.profileId)).toMatchObject({
+        realmId: setup.meta.id,
+      });
+      write.mockRestore();
+      await setup.enter();
+      expect(setup.server.worldInterior).not.toBeNull();
+    } finally {
+      write.mockRestore();
+      setup.server.destroy();
+    }
+  });
+
+  it.each(["missing", "invalid geometry"])(
+    "falls back to the saved parent doorway for a %s interior",
+    async (failure) => {
+      const setup = await indoorSetup();
+      await setup.enter();
+      const store = setup.createStore("__player_locations__");
+      const saved = (await store.get(
+        "players",
+        restoreProfile.profileId,
+      )) as import("../persistence/PlayerLocationStore.js").PlayerLocation;
+      if (failure === "missing") {
+        saved.realmId = `interior~${setup.meta.id}~settlement%3A0%3A0%3Ablock%3A999%3A999%3Alot%3A999~0`;
+        await store.save([{ collection: "players", key: restoreProfile.profileId, value: saved }]);
+      } else {
+        const roomStore = setup.createStore(saved.realmId);
+        const meta = (await roomStore.get(
+          "meta",
+          "state",
+        )) as import("../persistence/SaveManager.js").SavedMeta;
+        await roomStore.save([
+          { collection: "meta", key: "state", value: { ...meta, roomPlan: { version: 99 } } },
+        ]);
+      }
+      setup.server.destroy();
+      const transport = new TestTransport();
+      const server = new GameServer(transport, {
+        registry: setup.registry,
+        createStore: setup.createStore,
+      });
+      try {
+        await server.init();
+        transport.connect("local", restoreProfile);
+        await server.settle();
+        expect(server.worldInterior).toBeNull();
+        expect(server.getLocalSession().realmId).toBe(setup.meta.id);
+        expect(server.getLocalSession().player.position).toEqual(setup.door);
+      } finally {
+        server.destroy();
+      }
+    },
+  );
+
+  it.each([false, true])(
+    "serializes profile takeover behind a pending commit (failure=%s) without ghost players",
+    async (fail) => {
+      const setup = await indoorSetup();
+      const store = setup.createStore("__player_locations__");
+      const original = store.save.bind(store);
+      let release!: () => void;
+      const held = new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      const write = vi.spyOn(store, "save").mockImplementationOnce(async (entries) => {
+        await held;
+        if (fail) throw new Error("Location disk failed during takeover");
+        await original(entries);
+      });
+      try {
+        const entering = setup.enter();
+        await vi.waitFor(() => expect(write).toHaveBeenCalled());
+        setup.transport.connect("replacement");
+        setup.transport.clientSend("replacement", { type: "identify", ...restoreProfile });
+        setup.transport.clientSend("replacement", {
+          type: "join-realm",
+          requestId: 902,
+          worldId: setup.meta.id,
+          resume: true,
+        });
+        expect(setup.transport.messagesOfType("replacement", "realm-joined")).toHaveLength(0);
+        release();
+        await entering;
+        await setup.server.settle();
+        const sessions = [...setup.server.getSessions()];
+        expect(sessions).toHaveLength(1);
+        expect(sessions[0]?.clientId).toBe("replacement");
+        if (fail) expect(sessions[0]?.realmId).toBe(setup.meta.id);
+        else expect(sessions[0]?.realmId).toMatch(/^interior~/);
+        expect(setup.transport.messagesOfType("local", "kicked")).toHaveLength(1);
+        const realms = (
+          setup.server as unknown as { realms: Map<string, import("./Realm.js").Realm> }
+        ).realms;
+        expect([...realms.values()].flatMap((r) => [...r.sessions.values()])).toEqual(sessions);
+        expect(
+          [...realms.values()].flatMap((r) =>
+            r.entityManager.entities.filter((e) => e.type === "player"),
+          ),
+        ).toHaveLength(1);
+      } finally {
+        release();
+        write.mockRestore();
+        await setup.server.settle();
+        setup.server.destroy();
+      }
+    },
+  );
+
+  it("keeps the original connection usable when a takeover save fails", async () => {
+    const setup = await indoorSetup();
+    await setup.enter();
+    const original = setup.server.getLocalSession();
+    const store = setup.createStore("__player_locations__");
+    const save = vi.spyOn(store, "save").mockRejectedValueOnce(new Error("Disk unavailable"));
+    try {
+      setup.transport.connect("replacement");
+      setup.transport.clientSend("replacement", { type: "identify", ...restoreProfile });
+      setup.transport.clientSend("replacement", {
+        type: "join-realm",
+        requestId: 907,
+        worldId: setup.meta.id,
+        resume: true,
+      });
+      await setup.server.settle();
+      expect([...setup.server.getSessions()]).toEqual([original]);
+      expect(original.retired).toBe(false);
+      expect(setup.transport.messagesOfType("local", "kicked")).toHaveLength(0);
+      expect(setup.transport.messagesOfType("replacement", "kicked").at(-1)?.reason).toMatch(
+        /Could not save/,
+      );
+      expect(setup.server.entityManager.entities).toContain(original.player);
+    } finally {
+      save.mockRestore();
+      setup.server.destroy();
+    }
+  });
+
+  it("uses the selected exit connection, regardless of the player's entry door", async () => {
+    const setup = await indoorSetup();
+    try {
+      await setup.enter();
+      const identity = setup.server.worldInterior;
+      if (!identity) throw new Error("Missing interior");
+      const { buildingDoors } = await import("../interiors/BuildingDoors.js");
+      const street = buildingDoors(identity)[0];
+      if (!street) throw new Error("Missing street connection");
+      Object.assign(identity, {
+        doors: [
+          street,
+          {
+            id: "side",
+            outside: { wx: setup.door.wx + 16, wy: setup.door.wy },
+            inside: { wx: 80, wy: 80 },
+            arrival: { wx: 80, wy: 100 },
+          },
+        ],
+      });
+      setup.transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 905,
+        doorId: "absent",
+      });
+      await setup.server.settle();
+      expect(setup.transport.messagesOfType("local", "request-error").at(-1)?.message).toMatch(
+        /Unknown building door/,
+      );
+      setup.server.getLocalSession().player.position = { wx: 80, wy: 144 };
+      setup.transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 906,
+        doorId: "side",
+      });
+      await setup.server.settle();
+      // Selecting a different exit cannot bypass its proximity check.
+      expect(setup.server.worldInterior?.featureId).toBe(setup.featureId);
+      setup.server.getLocalSession().player.position = { wx: 80, wy: 80 };
+      setup.transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 903,
+        doorId: "side",
+      });
+      await setup.server.settle();
+      expect(setup.server.worldInterior).toBeNull();
+      expect(setup.server.getLocalSession().player.position).toEqual({
+        wx: setup.door.wx + 16,
+        wy: setup.door.wy,
+      });
+      setup.transport.clientSend("local", {
+        type: "enter-building",
+        requestId: 904,
+        featureId: setup.featureId,
+        doorId: "side",
+      });
+      await setup.server.settle();
+      expect(setup.server.getLocalSession().player.position).toEqual({ wx: 80, wy: 100 });
+      expect(setup.server.worldInterior?.featureId).toBe(setup.featureId);
+    } finally {
+      setup.server.destroy();
+    }
+  });
 });

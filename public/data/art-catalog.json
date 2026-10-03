@@ -2411,15 +2411,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:33"
+          "source": "src/interiors/GameplayInterior.ts:37"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:75"
+          "source": "src/interiors/GameplayInterior.ts:79"
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:46"
+          "source": "src/ui/DoorControl.ts:56"
         }
       ]
     },
@@ -17811,7 +17811,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:82"
+          "source": "src/interiors/GameplayInterior.ts:86"
         },
         {
           "system": "Interiors",
@@ -17957,11 +17957,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:84"
+          "source": "src/interiors/GameplayInterior.ts:88"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:84"
+          "source": "src/interiors/GameplayInterior.ts:88"
         },
         {
           "system": "Interiors",
@@ -18035,11 +18035,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:83"
+          "source": "src/interiors/GameplayInterior.ts:87"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:83"
+          "source": "src/interiors/GameplayInterior.ts:87"
         },
         {
           "system": "Interiors",
@@ -18085,7 +18085,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:71"
+          "source": "src/interiors/GameplayInterior.ts:75"
         },
         {
           "system": "Interiors",
@@ -18155,15 +18155,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:72"
+          "source": "src/interiors/GameplayInterior.ts:76"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:72"
+          "source": "src/interiors/GameplayInterior.ts:76"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:79"
+          "source": "src/interiors/GameplayInterior.ts:83"
         },
         {
           "system": "Interiors",
@@ -18221,7 +18221,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:73"
+          "source": "src/interiors/GameplayInterior.ts:77"
         },
         {
           "system": "Interiors",
@@ -18313,7 +18313,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:77"
+          "source": "src/interiors/GameplayInterior.ts:81"
         },
         {
           "system": "Interiors",
@@ -18359,7 +18359,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:78"
+          "source": "src/interiors/GameplayInterior.ts:82"
         },
         {
           "system": "Interiors",
@@ -18821,11 +18821,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:810"
+          "source": "src/server/Realm.ts:804"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1111"
+          "source": "src/server/Realm.ts:1107"
         }
       ]
     },

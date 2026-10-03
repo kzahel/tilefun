@@ -10,12 +10,11 @@ import {
 } from "../patterns/PatternDocument.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
+import { buildingDoors } from "./BuildingDoors.js";
 import { compileFurniture } from "./FurnishedInterior.js";
 import type { FurnitureRect } from "./FurnitureCatalog.js";
 import {
   furnitureAsset,
-  INTERIOR_ENTRY,
-  INTERIOR_EXIT,
   INTERIOR_FLOOR,
   type InteriorIdentity,
   interiorPlan,
@@ -172,7 +171,17 @@ export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayR
       rect(width, 0, 32, height),
     );
   }
-  return { plan, map, walls, legacy, onFloor, furnitureFloor, width, height };
+  return {
+    plan,
+    map,
+    walls,
+    legacy,
+    onFloor,
+    furnitureFloor,
+    width,
+    height,
+    doors: buildingDoors(identity),
+  };
 }
 
 /** Reconcile against live furniture and every resident, before any mutation. */
@@ -226,7 +235,11 @@ export function validateRoomOccupancy(
       const id = queue[i] as number,
         x = id % cols,
         y = Math.floor(id / cols);
-      if (Math.hypot(x * step - INTERIOR_EXIT.wx, y * step - INTERIOR_EXIT.wy) <= step) {
+      if (
+        room.doors.some(
+          (door) => Math.hypot(x * step - door.inside.wx, y * step - door.inside.wy) <= step,
+        )
+      ) {
         reached = true;
         break;
       }
@@ -249,8 +262,21 @@ export function validateRoomOccupancy(
     if (!reached) throw new Error("Room edit would block a player's route to the street doorway");
   }
   // Preserve a usable arrival even with no residents (e.g. loading a saved realm).
-  if (!room.onFloor({ x: INTERIOR_ENTRY.wx - 5, y: INTERIOR_ENTRY.wy - 6, width: 10, height: 6 }))
-    throw new Error("Keep the entrance landing clear");
+  for (const door of room.doors) {
+    for (const point of [door.arrival, door.inside]) {
+      const footprint = {
+        left: point.wx - 5,
+        top: point.wy - 6,
+        right: point.wx + 5,
+        bottom: point.wy,
+      };
+      if (
+        !room.onFloor({ x: footprint.left, y: footprint.top, width: 10, height: 6 }) ||
+        obstacles.some((obstacle) => aabbsOverlap(footprint, obstacle))
+      )
+        throw new Error("Keep the entrance landing clear");
+    }
+  }
 }
 
 export class GameplayRoomEditor {

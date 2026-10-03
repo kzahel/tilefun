@@ -25,6 +25,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
+import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
@@ -115,8 +116,7 @@ export class GameClient {
   private server: GameServer | null;
   private serialized: boolean;
   private autoJoinRealm: boolean;
-  /** True after HMR camera restore — prevents server world-loaded from overwriting. */
-  private hmrCameraRestored: boolean;
+  private reloadCamera: ReloadCamera | null;
   private scenes: SceneManager;
   private time: Time;
   private consoleEngine: ConsoleEngine;
@@ -183,8 +183,8 @@ export class GameClient {
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
-    this.hmrCameraRestored = false;
     this.profile = options?.profile ?? null;
+    this.reloadCamera = readReloadCamera(sessionStorage.getItem(HMR_KEY), this.profile?.id ?? null);
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
@@ -278,6 +278,15 @@ export class GameClient {
       this.stateView = remoteView;
       this.remoteView = remoteView;
 
+      // Send profile identity to server (profileId for persistence, displayName for labels)
+      if (this.profile) {
+        this.transport.send({
+          type: "identify",
+          displayName: this.profile.name,
+          profileId: this.profile.id,
+        });
+      }
+
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
         routePatternStatus(msg);
@@ -297,6 +306,7 @@ export class GameClient {
         ) {
           remoteView.bufferMessage(msg);
         } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
+          this.autoJoinRealm = false;
           if (msg.generation) this.showWorldIdentity(msg.generation);
           remoteView.interior = msg.interior ?? null;
           this.canvas.dataset.interior = msg.interior ? JSON.stringify(msg.interior) : "";
@@ -310,9 +320,9 @@ export class GameClient {
           remoteView.clear();
           this.tileRenderer.clear();
           this.sceneFrame.clear();
-          if (this.hmrCameraRestored) {
-            // HMR already restored camera — don't let fresh server defaults overwrite it
-            this.hmrCameraRestored = false;
+          if (this.reloadCamera && this.reloadCamera.realmId === msg.worldId) {
+            this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
+            this.camera.zoom = this.reloadCamera.zoom;
           } else {
             this.camera.snapTo(msg.cameraX, msg.cameraY);
             this.camera.zoom = msg.cameraZoom;
@@ -320,6 +330,7 @@ export class GameClient {
             // switching worlds where the player position differs from saved camera.
             this.camera.requestSnap();
           }
+          this.reloadCamera = null;
           this.gcSendVisibleRange(true);
           this.gcSendDebugState(this.debugPanel.paused, this.debugPanel.noclip, true);
           this.lobbyRealmList = null;
@@ -341,6 +352,7 @@ export class GameClient {
               type: "join-realm",
               requestId: this.nextRequestId++,
               worldId: target.id,
+              resume: true,
             }).catch((error) => this.mainMenu.showCreationError(String(error)));
           } else if (!isRequestResponse && this.initDone) {
             // Unsolicited broadcast — show realm browser immediately
@@ -379,15 +391,6 @@ export class GameClient {
 
         this.requests.receive(msg);
       });
-
-      // Send profile identity to server (profileId for persistence, displayName for labels)
-      if (this.profile) {
-        this.transport.send({
-          type: "identify",
-          displayName: this.profile.name,
-          profileId: this.profile.id,
-        });
-      }
     } else {
       if (!server) throw new Error("Local mode requires a GameServer instance");
       this.stateView = new LocalStateView(server);
@@ -539,9 +542,12 @@ export class GameClient {
         if (typeof hmr.zoom === "number") {
           this.debugPanel.setZoom(hmr.zoom);
         }
-        if (typeof hmr.cameraX === "number" && typeof hmr.cameraY === "number") {
-          this.camera.snapTo(hmr.cameraX, hmr.cameraY);
-          this.hmrCameraRestored = true;
+        if (
+          !this.serialized &&
+          this.reloadCamera?.realmId === this.localServer.getLocalSession().realmId
+        ) {
+          this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
+          this.reloadCamera = null;
         }
       } catch {
         this.scenes.push(new PlayScene());
@@ -779,6 +785,8 @@ export class GameClient {
   /** Save UI state to sessionStorage so it survives Vite HMR reloads. */
   saveHMRState(): void {
     const state = {
+      realmId: this.mainMenu.currentWorldId,
+      profileId: this.profile?.id ?? null,
       isEditMode: this.scenes.current instanceof EditScene,
       debugEnabled: this.debugEnabled,
       zoom: this.debugPanel.zoom,

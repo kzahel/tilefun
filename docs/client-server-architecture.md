@@ -19,7 +19,7 @@ its shared-memory local mode and “future” multiplayer phases are historical.
 Single player starts a dedicated server Worker from [main.ts](../src/main.ts).
 [LocalServerRuntime](../src/server/LocalServerRuntime.ts) owns startup, visibility
 pause/resume, periodic saves and acknowledged shutdown. HMR waits for shutdown
-before replacement. The main thread keeps a replicated client world, prediction
+before replacement; Vite full reload also awaits shutdown before navigation. The main thread keeps a replicated client world, prediction
 and rendering; normal single player does not read live server objects directly.
 
 Browser P2P hosting still runs authority on the main thread. Dedicated Node
@@ -44,9 +44,15 @@ destruction. Reconnected transports can make fresh requests.
 ## Persistence and shared tools
 
 Realm transfers prepare the destination and save the source before detaching a
-player. A destination-save failure restores the original live entity; successful
-transfers reset replication state. Keep menu and building-door transitions on
-this shared path.
+player, then commit the authoritative profile location after the destination is
+saved. Destination/location-save failures restore the original live entity;
+successful transfers reset replication state. Profile takeover and reconnect wait
+for in-flight travel. Keep menu and building-door transitions on this shared path.
+[PlayerLocationStore](../src/persistence/PlayerLocationStore.ts) owns current realm
+and position; per-realm player records remain visit history. Startup restores the
+current location, with validated fallback for unavailable interiors. See the
+[interior topic](topics/patterns-and-interiors.md#player-location-reload-and-building-connections)
+for door identities, reload guarantees and content boundaries.
 
 [PersistenceStore](../src/persistence/PersistenceStore.ts) has IndexedDB and
 filesystem implementations. SaveManager owns writes and migrations; registries

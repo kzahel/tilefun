@@ -147,10 +147,10 @@ export type ClientMessage =
   | { type: "identify"; displayName: string; profileId?: string }
   | { type: "list-realms"; requestId: number }
   | { type: "get-world-map"; requestId: number }
-  | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival }
+  | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival; resume?: boolean }
   | { type: "leave-realm"; requestId: number }
-  | { type: "enter-building"; requestId: number; featureId: string }
-  | { type: "exit-building"; requestId: number };
+  | { type: "enter-building"; requestId: number; featureId: string; doorId?: string }
+  | { type: "exit-building"; requestId: number; doorId?: string };
 
 // ---- Snapshot types for serialized state sync ----
 

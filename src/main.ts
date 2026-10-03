@@ -292,7 +292,7 @@ async function start() {
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
     await server.init();
-    peerHost.triggerConnect();
+    peerHost.triggerConnect({ profileId: profile.id, displayName: profile.name });
     await client.init();
     server.startLoop();
     hostingBanner = new HostingBanner(peerId, {
@@ -476,6 +476,16 @@ window.addEventListener("beforeunload", () => {
 });
 
 if (import.meta.hot) {
+  // Vite awaits this hook before navigation; ordinary beforeunload cannot await a Worker save.
+  import.meta.hot.on("vite:beforeFullReload", async () => {
+    client?.saveHMRState();
+    await localHost?.shutdown();
+    if (server) {
+      server.stopLoop();
+      await server.settle();
+      await server.flushAsync();
+    }
+  });
   import.meta.hot.dispose((data) => {
     disableFirstTouchFullscreen();
     data.localShutdown = localHost?.shutdown();

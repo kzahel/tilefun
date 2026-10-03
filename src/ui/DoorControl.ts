@@ -1,8 +1,11 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
-import { exteriorEntrance, INTERIOR_EXIT } from "../interiors/GameplayInterior.js";
+import { buildingDoors } from "../interiors/BuildingDoors.js";
+import { exteriorEntrance } from "../interiors/GameplayInterior.js";
 
-type DoorRequest = { type: "enter-building"; featureId: string } | { type: "exit-building" };
+type DoorRequest =
+  | { type: "enter-building"; featureId: string; doorId?: string }
+  | { type: "exit-building"; doorId?: string };
 /** Small host control; proximity and realm changes remain authoritative. */
 export class DoorControl {
   private readonly root = document.createElement("div");
@@ -28,9 +31,16 @@ export class DoorControl {
     if (allowed) {
       const p = view.playerEntity.position;
       if (view.interior) {
-        if (Math.hypot(p.wx - INTERIOR_EXIT.wx, p.wy - INTERIOR_EXIT.wy) <= 40) {
-          this.request = { type: "exit-building" };
-          label = "Return to street · E";
+        const door = buildingDoors(view.interior)
+          .map((door) => ({
+            door,
+            distance: Math.hypot(p.wx - door.inside.wx, p.wy - door.inside.wy),
+          }))
+          .filter(({ distance }) => distance <= 40)
+          .sort((a, b) => a.distance - b.distance)[0]?.door;
+        if (door) {
+          this.request = { type: "exit-building", doorId: door.id };
+          label = door.id === "street" ? "Return to street · E" : `Exit ${door.id} · E`;
         }
       } else if ((view.playerEntity.wz ?? 0) <= 8) {
         let best = 32;

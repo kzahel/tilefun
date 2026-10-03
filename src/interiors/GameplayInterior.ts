@@ -11,12 +11,16 @@ import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog
 import { furnitureCollider } from "./FurnitureMotion.js";
 import sources from "./gameplay-furniture-sources.json" with { type: "json" };
 
+export class InvalidInteriorError extends Error {}
+
 export interface InteriorIdentity {
   readonly version: "interior-v1";
   readonly parentWorldId: string;
   readonly featureId: string;
   readonly buildingType: string;
   readonly floor: 0;
+  /** Optional explicit connections; absence preserves the original street doorway. */
+  readonly doors?: readonly import("./BuildingDoors.js").BuildingDoor[];
   readonly returnX: number;
   readonly returnY: number;
 }
