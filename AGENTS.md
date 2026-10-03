@@ -13,6 +13,10 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
   Completed plans are history; use topic and architecture docs for current guidance.
 - [Roadmap](docs/ROADMAP.md) owns near-term direction;
   [ideas](docs/ideas.md) routes the uncommitted backlog and playtester requests.
+- For in-game voice/STT feedback, start with [Play ideas](docs/topics/play-ideas.md):
+  records are in `data/workshop/play-ideas/*.json` (or `WORKSHOP_DATA_DIR/play-ideas/`)
+  and [Workshop → Play ideas](https://tilefun.graehlarts.com/tilefun/workshop.html#/play-ideas).
+  These contain transcripts and screenshots, not audio; `workshop:inbox` does not list them.
 - Update the owning doc when behavior, contracts, evidence or next work changes.
   Create a focused topic when continuity is useful, not for every small edit.
   New tacticals use the next zero-padded number and belong in the tactical index.

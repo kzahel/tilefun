@@ -8,6 +8,11 @@ copying every item into multiple checklists.
 
 ## Gameplay and creation
 
+- [In-game play ideas / voice feedback](topics/play-ideas.md): original STT or
+  typed submissions and game screenshots live in the private
+  [Workshop → Play ideas inbox](https://tilefun.graehlarts.com/tilefun/workshop.html#/play-ideas),
+  backed by `data/workshop/play-ideas/*.json` by default. Read that inbox for
+  new child/playtester feedback; keep private submissions out of Git.
 - [Playtester feedback](todo-from-playtesters.md): flower picking, bouquets and
   trading; autonomous mounts; riding cars; mount protection; ghost limits and
   safe streets. These are recorded requests, not verified implementation status.
