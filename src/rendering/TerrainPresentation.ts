@@ -18,3 +18,13 @@ export interface TerrainPresentation {
 export interface TerrainResourceLookup {
   resourceId(chunk: Chunk, cx: number, cy: number): TerrainResourceId | null;
 }
+
+/** Completed fallback or a current partial build; no concrete image escapes. */
+export interface GroundTerrainResources {
+  groundResourceId(
+    chunk: Chunk,
+    cx: number,
+    cy: number,
+    readyOnly: boolean,
+  ): TerrainResourceId | null;
+}

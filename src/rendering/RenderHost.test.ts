@@ -54,6 +54,15 @@ it("preserves resources across resize, invalidates explicitly, and disposes with
   renderer.resize(512, 256);
   expect(surface.width).toBe(512);
   expect(renderer.isTerrainReady(chunk)).toBe(true);
+  sheets.set("new-sprite", new Spritesheet(image as unknown as ImageBitmap, 16, 16));
+  renderer.addSpriteAssets(sheets);
+  expect(renderer.assets.has("new-sprite")).toBe(true);
+  expect(renderer.isTerrainReady(chunk)).toBe(true);
+  expect(renderer.collectTerrain(camera, world, visible)[0]?.resource).toBe(draws[0]?.resource);
+  const replacement = new Map(sheets);
+  replacement.set("fixture", new Spritesheet(image as unknown as ImageBitmap, 16, 16));
+  expect(() => renderer.addSpriteAssets(replacement)).toThrow("replaced fixture");
+  expect(renderer.isTerrainReady(chunk)).toBe(true);
   renderer.invalidateAssets();
   expect(renderer.hasTerrain(chunk)).toBe(true);
   expect(renderer.isTerrainReady(chunk)).toBe(false);
@@ -67,7 +76,7 @@ it("preserves resources across resize, invalidates explicitly, and disposes with
   renderer.dispose();
   renderer.dispose();
   expect(renderer.assets.size).toBe(0);
-  expect(sheets.size).toBe(1);
+  expect(sheets.size).toBe(2);
   expect(image.close).not.toHaveBeenCalled();
   expect(() => renderer.submit(camera, { kind: "clear", color: "black" })).toThrow("disposed");
   expect(() => renderer.prepareTerrain(camera, world, visible)).toThrow("disposed");

@@ -7,7 +7,7 @@ import { buildLayeredApartmentPlan } from "../interiors/ApartmentArchitecture.js
 import { parseFloorPlan } from "../interiors/ApartmentFloorPlan.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawLayeredInteriorMap } from "../rendering/CanvasInteriorMap.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { World } from "../world/World.js";
 import { compileTreeRun, treeRuns } from "./FencedTrees.js";
 import { familyDefinition, type PatternDocument, roomSketch } from "./PatternDocument.js";
@@ -51,30 +51,25 @@ export function renderPatternDocument(
   } else {
     const world = patternWorld(doc),
       graph = new BlendGraph(),
-      renderer = new TileRenderer(),
+      renderer = new CanvasRenderBackend(ctx, assets.sheets),
       camera = new Camera();
-    renderer.setBlendSheets(assets.blendSheets, graph);
-    renderer.setVariants(assets.variants);
-    renderer.setRoadSheets(assets.sheets);
+    renderer.configureAssets(assets, graph);
     camera.zoom = 1 / 3;
     camera.x = canvas.width / 2;
     camera.y = canvas.height / 2;
     camera.setViewport(canvas.width, canvas.height);
-    renderer.drawTerrain(
-      ctx,
-      camera,
-      world,
-      assets.sheets,
-      {
-        minCx: 0,
-        minCy: 0,
-        maxCx: Math.floor((doc.width - 1) / 16),
-        maxCy: Math.floor((doc.height - 1) / 16),
-      },
-      false,
-      Infinity,
-      0,
-    );
+    const visible = {
+      minCx: 0,
+      minCy: 0,
+      maxCx: Math.floor((doc.width - 1) / 16),
+      maxCy: Math.floor((doc.height - 1) / 16),
+    };
+    renderer.prepareTerrain(camera, world, visible, { scope: "visible", rowBudget: Infinity });
+    renderer.submit(camera, {
+      kind: "terrain",
+      draws: renderer.collectTerrain(camera, world, visible, { overscanPixels: 0 }),
+    });
+    renderer.dispose();
     if (doc.family === "fenced-trees-v1") {
       const sheet = assets.sheets.get("me-complete");
       if (!sheet) throw new Error("Missing exterior sheet");

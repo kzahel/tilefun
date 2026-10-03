@@ -15,9 +15,9 @@ import { descriptorKey, type GenerationDescriptor } from "../generation/Generati
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { Chunk } from "../world/Chunk.js";
 import { type ChunkData, hydrateChunk } from "../world/ChunkData.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
@@ -38,7 +38,11 @@ export class TilePreview {
   private active = false;
   private disposed = false;
   private graph = new BlendGraph();
-  private renderer = new TileRenderer();
+  private renderer: CanvasRenderBackend | null = null;
+  private renderCanvas: HTMLCanvasElement | null = null;
+  private readonly order: number[] = [];
+  private readonly clips: { x: number; y: number; width: number; height: number }[] = [];
+  private readonly clipPool: { x: number; y: number; width: number; height: number }[] = [];
   private assets: GameAssets | null = null;
   private loading: Promise<void> | null = null;
   private camera = new Camera();
@@ -99,7 +103,7 @@ export class TilePreview {
     );
     for (const [coordinateKey, chunk] of this.chunks) {
       if (!this.wanted.has(coordinateKey)) {
-        this.renderer.releaseChunk(chunk);
+        this.renderer?.releaseChunk(chunk);
         this.chunks.delete(coordinateKey);
       }
     }
@@ -180,6 +184,13 @@ export class TilePreview {
     if (!this.active || !this.assets || this.disposed) return false;
     const ctx = canvas.getContext("2d");
     if (!ctx) return false;
+    if (!this.renderer || this.renderCanvas !== canvas) {
+      this.renderer?.dispose();
+      this.renderer = new CanvasRenderBackend(ctx, this.assets.sheets);
+      this.renderer.configureAssets(this.assets, this.graph);
+      this.renderCanvas = canvas;
+    }
+    const renderer = this.renderer;
     const dpr = canvas.width / width;
     ctx.save();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -199,19 +210,18 @@ export class TilePreview {
           ) ?? 0,
       getHeightAt: () => 0,
     };
-    ctx.save();
-    if (!this.propsReady) {
-      ctx.beginPath();
-      ctx.clip();
-    }
-    this.renderer.drawTerrain(ctx, this.camera, world, this.assets.sheets, this.visible, true, 32);
-    ctx.restore();
+    renderer.prepareTerrain(this.camera, world, this.visible, { scope: "visible", rowBudget: 32 });
+    if (this.propsReady)
+      renderer.submit(this.camera, {
+        kind: "terrain",
+        draws: renderer.collectTerrain(this.camera, world, this.visible, { readyOnly: true }),
+      });
     let pending = false;
     this.stats.ready = 0;
     for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++) {
       for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
         const chunk = this.chunks.get(`${cx},${cy}`);
-        const ready = this.renderer.isTerrainReady(chunk) && this.propsReady;
+        const ready = renderer.isTerrainReady(chunk) && this.propsReady;
         if (ready) this.stats.ready++;
         else if (chunk) pending = true;
         if (coverage) {
@@ -227,20 +237,24 @@ export class TilePreview {
       }
     }
     if (this.propsReady) {
-      ctx.save();
-      ctx.beginPath();
+      this.clips.length = 0;
       for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++)
         for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
           const chunk = this.chunks.get(`${cx},${cy}`);
-          if (this.renderer.isTerrainReady(chunk)) {
+          if (renderer.isTerrainReady(chunk)) {
             const { sx, sy } = this.camera.worldToScreen(
               cx * CHUNK_SIZE * TILE_SIZE,
               cy * CHUNK_SIZE * TILE_SIZE,
             );
-            ctx.rect(sx, sy, CHUNK_SIZE * view.zoom + 1, CHUNK_SIZE * view.zoom + 1);
+            const i = this.clips.length;
+            const rect = this.clipPool[i] ?? { x: 0, y: 0, width: 0, height: 0 };
+            if (i < 2048 && !this.clipPool[i]) this.clipPool.push(rect);
+            rect.x = sx;
+            rect.y = sy;
+            rect.width = rect.height = CHUNK_SIZE * view.zoom + 1;
+            this.clips.push(rect);
           }
         }
-      ctx.clip();
       const items = collectScene(
         this.actors,
         this.props,
@@ -252,8 +266,12 @@ export class TilePreview {
         [],
         false,
       );
-      drawScene2D(ctx, this.camera, items, this.assets.sheets, undefined, false, this.renderer);
-      ctx.restore();
+      renderer.submit(this.camera, {
+        kind: "scene",
+        items,
+        order: collectSceneOrder(items, this.order),
+        clipRects: this.clips,
+      });
     }
     this.updateStats();
     ctx.restore();
@@ -269,9 +287,7 @@ export class TilePreview {
           return;
         }
         this.assets = assets;
-        this.renderer.setBlendSheets(assets.blendSheets, this.graph);
-        this.renderer.setVariants(assets.variants);
-        this.renderer.setRoadSheets(assets.sheets);
+
         this.stats.assetsMs = performance.now() - start;
         this.loadProps();
         this.changed();
@@ -291,6 +307,7 @@ export class TilePreview {
       ...this.actors.flatMap((e) => (e.sprite ? [e.sprite.sheetKey] : [])),
     ]);
     this.propsReady = [...keys].every((key) => assets.sheets.has(key));
+    this.renderer?.addSpriteAssets(assets.sheets);
     if (this.propsReady) return;
     void loadSceneAssets(assets, keys)
       .then(() => {
@@ -298,6 +315,7 @@ export class TilePreview {
           closeAssets(assets);
           return;
         }
+        this.renderer?.addSpriteAssets(assets.sheets);
         if (serial === this.propsSerial) {
           this.propsReady = true;
           this.changed();
@@ -320,24 +338,22 @@ export class TilePreview {
         chunk.roadGrid.byteLength +
         chunk.heightGrid.byteLength +
         chunk.blendLayers.byteLength +
-        (this.renderer.getTerrainSurface(chunk) ? (CHUNK_SIZE * TILE_SIZE) ** 2 * 4 : 0),
+        (this.renderer?.hasTerrain(chunk) ? (CHUNK_SIZE * TILE_SIZE) ** 2 * 4 : 0),
       0,
     );
   }
   private releaseChunks(): void {
-    for (const chunk of this.chunks.values()) this.renderer.releaseChunk(chunk);
+    for (const chunk of this.chunks.values()) this.renderer?.releaseChunk(chunk);
     this.chunks.clear();
     this.props = [];
     this.actors = [];
     this.propsReady = false;
     this.propsSerial++;
     this.wanted.clear();
-    this.renderer = new TileRenderer();
-    if (this.assets) {
-      this.renderer.setBlendSheets(this.assets.blendSheets, this.graph);
-      this.renderer.setVariants(this.assets.variants);
-      this.renderer.setRoadSheets(this.assets.sheets);
-    }
+    this.renderer?.clear();
+    this.clips.length = 0;
+    this.clipPool.length = 0;
+    this.order.length = 0;
     this.stats.resident = 0;
     this.stats.ready = 0;
     this.stats.bytes = 0;
@@ -348,6 +364,9 @@ export class TilePreview {
   dispose(): void {
     this.disposed = true;
     this.releaseChunks();
+    this.renderer?.dispose();
+    this.renderer = null;
+    this.renderCanvas = null;
     if (this.assets) closeAssets(this.assets);
     this.assets = null;
   }

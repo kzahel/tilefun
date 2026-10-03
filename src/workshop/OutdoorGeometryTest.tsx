@@ -11,9 +11,9 @@ import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { outdoorRecipe } from "../scenarios/OutdoorRecipe.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 
@@ -103,7 +103,12 @@ export function OutdoorGeometryTest({
       }
       c.dataset.ready = "true";
       const world = scenario.view.world,
-        renderer = new TileRenderer();
+        renderer = new CanvasRenderBackend(ctx, assets.sheets);
+      cleanup = () => {
+        renderer.dispose();
+        scenario.dispose();
+      };
+      const order: number[] = [];
       reset.current = () => {
         void scenario.command({ kind: "teleport", position: { wx: 0, wy: 40 } }).catch((e) => {
           if (active) setError(String(e));
@@ -156,7 +161,12 @@ export function OutdoorGeometryTest({
           [],
           false,
         );
-        drawScene2D(ctx, camera, scene, assets.sheets, undefined, true, renderer);
+        renderer.submit(camera, {
+          kind: "scene",
+          items: scene,
+          order: collectSceneOrder(scene, order),
+          pixelExactShadows: true,
+        });
         const [vx, vy, vw, vh] = asset.visualBounds;
         drawRect([vx - metadata.anchor[0], vy - metadata.anchor[1], vw, vh], "#3472aa");
         if (metadata.footprint) drawRect(metadata.footprint, "#229b61");

@@ -51,6 +51,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [032 Renderer host lifecycle](032-renderer-host-lifecycle.md) | Delivered: injected platform host, neutral gameplay context and resource lifecycle; remaining consumers follow |
 
+| [033 Shared terrain and consumers](033-shared-terrain-and-consumers.md) | Delivered: neutral terrain placement, explorer/native composition and additive assets |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

@@ -26,6 +26,7 @@ import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
 import type { TerrainDraw } from "./RenderFrame.js";
 import type { ElevationItem } from "./SceneItem.js";
+import { TerrainFrame } from "./TerrainFrame.js";
 import type {
   TerrainPresentation,
   TerrainRenderWorld,
@@ -85,8 +86,7 @@ export class TileRenderer implements TerrainPresentation {
   private readonly resources = new CanvasTerrainResources();
   private readonly elevation = new ElevationDescriptorCache();
   private readonly partialResources = new Map<TerrainResourceId, OffscreenCanvas>();
-  private readonly terrainDraws: TerrainDraw[] = [];
-  private readonly terrainDrawPool: TerrainDraw[] = [];
+  private readonly terrainFrame = new TerrainFrame();
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
   private readonly resident = new Map<string, TerrainResident>();
@@ -104,8 +104,7 @@ export class TileRenderer implements TerrainPresentation {
   /** Release surfaces on realm changes and teardown, including half-built jobs. */
   clear(): void {
     this.resources.clear();
-    this.terrainDraws.length = 0;
-    this.terrainDrawPool.length = 0;
+    this.terrainFrame.clear();
     this.elevation.clear();
     this.resident.clear();
     this.clearCacheBuildStates();
@@ -347,7 +346,54 @@ export class TileRenderer implements TerrainPresentation {
     viewportWidth = camera.viewportWidth,
     viewportHeight = camera.viewportHeight,
   ): readonly TerrainDraw[] {
-    this.terrainDraws.length = 0;
+    if (cacheRowBudget > 0)
+      this.prepareVisibleTerrain(
+        camera,
+        world,
+        sheets,
+        visible,
+        cacheRowBudget,
+        viewportWidth,
+        viewportHeight,
+      );
+    return this.terrainFrame.collect(
+      camera,
+      world,
+      this,
+      visible,
+      { readyOnly, overscanPixels: chunkOverscanPixels },
+      viewportWidth,
+      viewportHeight,
+    );
+  }
+
+  groundResourceId(
+    chunk: Chunk,
+    cx: number,
+    cy: number,
+    readyOnly: boolean,
+  ): TerrainResourceId | null {
+    const completed = this.resources.resourceId(chunk, cx, cy);
+    if (completed !== null || readyOnly) return completed;
+    const building = this.cacheBuildStates.get(`${cx},${cy}`);
+    return building?.chunk === chunk &&
+      building.revision === chunk.revision &&
+      building.visualRevision === chunk.visualRevision &&
+      building.assetRevision === this.resources.assetRevision
+      ? building.resourceId
+      : null;
+  }
+
+  /** Visible-only bounded preparation for native reference/explorer surfaces. */
+  prepareVisibleTerrain(
+    camera: Camera,
+    world: TerrainRenderWorld,
+    sheets: Map<string, Spritesheet>,
+    visible: ChunkRange,
+    cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
+    viewportWidth = camera.viewportWidth,
+    viewportHeight = camera.viewportHeight,
+  ): void {
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
     const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
     let rowsRemaining = cacheRowBudget;
@@ -394,36 +440,6 @@ export class TileRenderer implements TerrainPresentation {
             getGlobalRoad,
           );
         }
-
-        const building = this.cacheBuildStates.get(key);
-        const partial =
-          building?.chunk === chunk &&
-          building.revision === chunk.revision &&
-          building.visualRevision === chunk.visualRevision &&
-          building.assetRevision === this.resources.assetRevision
-            ? building.canvas
-            : undefined;
-        const completed = this.resources.get(chunk);
-        const drawCache = readyOnly ? completed : (completed ?? partial);
-        if (drawCache) {
-          // Gameplay overscans to cover sub-pixel seams while zooming. Native
-          // pixel review uses zero: 256→257 resampling differs by raster backend.
-          const resource = completed ? this.resources.resourceId(chunk) : building?.resourceId;
-          if (resource != null) {
-            const index = this.terrainDraws.length;
-            let draw = this.terrainDrawPool[index];
-            if (!draw) {
-              draw = { resource, x: sx, y: sy, width: 0, height: 0 };
-              if (index < 2048) this.terrainDrawPool.push(draw);
-            }
-            draw.resource = resource;
-            draw.x = sx;
-            draw.y = sy;
-            draw.width = chunkScreenSize + chunkOverscanPixels;
-            draw.height = chunkScreenSize + chunkOverscanPixels;
-            this.terrainDraws.push(draw);
-          }
-        }
       }
     }
 
@@ -431,7 +447,6 @@ export class TileRenderer implements TerrainPresentation {
     for (const key of this.cacheBuildStates.keys()) {
       if (cacheRowBudget > 0 && !visibleKeys.has(key)) this.deleteCacheBuildState(key);
     }
-    return this.terrainDraws;
   }
 
   /**

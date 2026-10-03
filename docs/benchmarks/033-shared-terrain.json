@@ -1,0 +1,123 @@
+{
+  "stage": "033 shared terrain placement and consumers",
+  "allocation": {
+    "scope": "Prepared terrain only, same 3000 frames/27000 placements; V8 sampled allocations, not a frame-time or GC-pause claim.",
+    "before": {
+      "browser": "153.0.8010.12",
+      "frames": 3000,
+      "items": 27000,
+      "sampledBytes": 4528388,
+      "allocationByFunction": {
+        "collectTerrainDraws": 1799216,
+        "worldToScreen": 1234868,
+        "add": 855560,
+        "Set": 239028,
+        "getChunkIfLoaded": 155956,
+        "chunkToWorld": 73920,
+        "next": 41060,
+        "window.terrainFrameProbe": 36924,
+        "push": 28956,
+        "(V8 API)": 17068,
+        "keys": 16420,
+        "cos": 12312,
+        "serialize": 8328,
+        "evaluate": 4668,
+        "sin": 4104
+      },
+      "geometryHash": "9036004545afdfb03355801e97004992a1c3bb46722f1cd6330ffd51f1dbf1b0"
+    },
+    "after": {
+      "browser": "153.0.8010.12",
+      "frames": 3000,
+      "items": 27000,
+      "sampledBytes": 1935552,
+      "allocationByFunction": {
+        "collect": 1610000,
+        "getChunkIfLoaded": 143668,
+        "collectTerrainDraws": 73920,
+        "window.terrainFrameProbe": 61556,
+        "push": 37240,
+        "serialize": 5064,
+        "sin": 4104
+      },
+      "geometryHash": "9036004545afdfb03355801e97004992a1c3bb46722f1cd6330ffd51f1dbf1b0"
+    }
+  },
+  "readiness": {
+    "scope": "Coverage only; browser checks overlapped, timings not compared.",
+    "fixtures": [
+      {
+        "version": "regional-v4",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 3
+          },
+          {
+            "name": "standing",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "walk",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "sprint",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "reverse",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "zoom-out",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          }
+        ]
+      },
+      {
+        "version": "regional-v10",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 2
+          },
+          {
+            "name": "standing",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "walk",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "sprint",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "reverse",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          },
+          {
+            "name": "zoom-out",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0
+          }
+        ]
+      }
+    ]
+  }
+}

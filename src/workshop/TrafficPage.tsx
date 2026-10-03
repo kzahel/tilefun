@@ -3,9 +3,9 @@ import { required } from "../art/ArtCatalog.js";
 import { closeAssets, loadGameAssets, loadSceneAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
 
@@ -26,8 +26,9 @@ export default function TrafficPage() {
     if (restart > 0) setPaused(false);
     scene.current = s;
     keys.current.clear();
-    const camera = new Camera(),
-      renderer = new TileRenderer();
+    const camera = new Camera();
+    let renderer: CanvasRenderBackend | null = null;
+    const order: number[] = [];
     camera.setViewport(960, 600);
     camera.zoom = 0.75;
     const center = () =>
@@ -44,6 +45,9 @@ export default function TrafficPage() {
         }
         const c = required(canvas.current),
           ctx = required(c.getContext("2d"));
+        const backend = new CanvasRenderBackend(ctx, assets.sheets);
+        renderer = backend;
+        const visiblePreparation = { scope: "visible" as const };
         c.width = 960;
         c.height = 600;
         c.dataset.ready = "true";
@@ -77,35 +81,36 @@ export default function TrafficPage() {
           loadTimer -= elapsed;
           if (loadTimer <= 0) {
             s.view.world.computeAutotile(blend, 64);
-            void loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type))).catch((e) =>
-              setError(String(e)),
-            );
+            void loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type)))
+              .then(() => {
+                if (alive) backend.addSpriteAssets(assets.sheets);
+              })
+              .catch((e) => {
+                if (alive) setError(String(e));
+              });
             loadTimer = 0.3;
           }
           ctx.imageSmoothingEnabled = false;
           ctx.fillStyle = "#cbd5c3";
           ctx.fillRect(0, 0, c.width, c.height);
-          renderer.prepareTerrain(camera, s.view.world, assets.sheets, range, 4, 256);
-          renderer.drawTerrain(ctx, camera, s.view.world, assets.sheets, range);
-          drawScene2D(
-            ctx,
+          backend.prepareTerrain(camera, s.view.world, range, { timeBudgetMs: 4, rowBudget: 256 });
+          backend.prepareTerrain(camera, s.view.world, range, visiblePreparation);
+          backend.submit(camera, {
+            kind: "terrain",
+            draws: backend.collectTerrain(camera, s.view.world, range),
+          });
+          const items = collectScene(
+            s.view.entities,
+            s.view.props,
+            s.view.world,
             camera,
-            collectScene(
-              s.view.entities,
-              s.view.props,
-              s.view.world,
-              camera,
-              range,
-              1,
-              renderer,
-              [],
-              false,
-            ),
-            assets.sheets,
-            undefined,
+            range,
+            1,
+            backend,
+            [],
             false,
-            renderer,
           );
+          backend.submit(camera, { kind: "scene", items, order: collectSceneOrder(items, order) });
           const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
           c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
           c.dataset.carX = String(car.position.wx);
@@ -129,6 +134,7 @@ export default function TrafficPage() {
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
+      renderer?.dispose();
       window.removeEventListener("blur", release);
       keys.current.clear();
       void pending.then(closeAssets).catch(() => {});

@@ -6,7 +6,7 @@ import type { InteriorContent } from "../interiors/InteriorPresentation.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { Camera } from "./Camera.js";
-import { drawScene2D } from "./Canvas2DRenderer.js";
+import { drawScenePass2D } from "./Canvas2DRenderer.js";
 import { CanvasInteriorResources } from "./CanvasInteriorResources.js";
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import type {
@@ -15,6 +15,7 @@ import type {
   RenderView,
   TerrainPreparationOptions,
 } from "./RenderFrame.js";
+import type { TerrainDrawOptions } from "./TerrainFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
 
@@ -30,14 +31,27 @@ export class CanvasRenderBackend implements RenderBackend {
     private sheets: Map<string, Spritesheet>,
     private readonly terrain = new TileRenderer(),
   ) {
+    this.sheets = new Map(sheets);
     this.assets = createSpriteCatalog(sheets);
   }
 
   setAssets(sheets: Map<string, Spritesheet>): void {
     this.assertLive();
-    this.sheets = sheets;
+    this.sheets = new Map(sheets);
     this.assets = createSpriteCatalog(sheets);
     this.invalidateAssets();
+  }
+
+  /** Add decoded sprite sources without invalidating unchanged terrain. Replacement
+   * must use setAssets/configureAssets so dependent static resources are rebuilt. */
+  addSpriteAssets(sheets: Map<string, Spritesheet>): void {
+    this.assertLive();
+    for (const [key, sheet] of this.sheets) {
+      if (sheets.get(key) !== sheet) throw Error(`Additive asset update replaced ${key}`);
+    }
+    if (sheets.size === this.sheets.size) return;
+    this.sheets = new Map(sheets);
+    this.assets = createSpriteCatalog(sheets);
   }
 
   prepareInterior(content: InteriorContent): void {
@@ -63,6 +77,16 @@ export class CanvasRenderBackend implements RenderBackend {
     options?: TerrainPreparationOptions,
   ): void {
     this.assertLive();
+    if (options?.scope === "visible") {
+      this.terrain.prepareVisibleTerrain(
+        this.setView(view),
+        world,
+        this.sheets,
+        visible,
+        options.rowBudget,
+      );
+      return;
+    }
     this.terrain.prepareTerrain(
       this.setView(view),
       world,
@@ -73,15 +97,21 @@ export class CanvasRenderBackend implements RenderBackend {
     );
   }
 
-  collectTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange) {
+  collectTerrain(
+    view: RenderView,
+    world: TerrainRenderWorld,
+    visible: ChunkRange,
+    options?: TerrainDrawOptions,
+  ) {
     this.assertLive();
     return this.terrain.collectTerrainDraws(
       this.setView(view),
       world,
       this.sheets,
       visible,
-      false,
+      options?.readyOnly ?? false,
       0,
+      options?.overscanPixels ?? 1,
     );
   }
 
@@ -123,15 +153,13 @@ export class CanvasRenderBackend implements RenderBackend {
         }
         break;
       case "scene":
-        drawScene2D(
+        drawScenePass2D(
           ctx,
           camera,
-          pass.items,
+          pass,
           this.sheets,
           this.sheets.get("grass-blades"),
-          pass.pixelExactShadows,
           this.terrain,
-          pass.order,
         );
         break;
     }

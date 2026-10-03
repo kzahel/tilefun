@@ -5,9 +5,9 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import type { CityBuildingPrefab } from "../generation/regional/CityBuildingPrefabs.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { World } from "../world/World.js";
 
 /** Ground is a diagnostic stage; building composition is the exact gameplay pipeline. */
@@ -44,7 +44,7 @@ export function drawBuildingShowcase(
   ctx.fillRect(0, baseline + 100, canvas.width, 3);
   const props = placements.map((p, i) => ({ ...createProp(p.prefab.type, p.wx, p.wy), id: i + 1 }));
   const world = new World(new FlatStrategy());
-  const renderer = new TileRenderer();
+  const renderer = new CanvasRenderBackend(ctx, new Map([["me-complete", sheet]]));
   const items = collectScene(
     [],
     props,
@@ -56,7 +56,8 @@ export function drawBuildingShowcase(
     [],
     false,
   );
-  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined, false, renderer);
+  renderer.submit(camera, { kind: "scene", items, order: collectSceneOrder(items, []) });
+  renderer.dispose();
   if (geometry)
     for (const p of placements) {
       const topLeft = camera.worldToScreen(

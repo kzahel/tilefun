@@ -2,7 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
-import { collectSceneOrder } from "./RenderFrame.js";
+import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
@@ -25,10 +25,48 @@ export function drawScene2D(
   terrain?: CanvasTerrainSource,
   order: readonly number[] = collectSceneOrder(items, []),
 ): void {
-  for (const entry of order) {
-    const item = items[entry < 0 ? -entry - 1 : entry];
-    if (!item) continue;
-    drawSceneEntry2D(ctx, camera, item, sheets, grassSheet, pixelExactShadows, terrain, entry < 0);
+  drawScenePass2D(
+    ctx,
+    camera,
+    { kind: "scene", items, order, pixelExactShadows },
+    sheets,
+    grassSheet,
+    terrain,
+  );
+}
+
+/** Native Canvas references and production consume the same semantic pass. */
+export function drawScenePass2D(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  pass: Extract<RenderPass, { kind: "scene" }>,
+  sheets: Map<string, Spritesheet>,
+  grassSheet: Spritesheet | undefined,
+  terrain?: CanvasTerrainSource,
+): void {
+  if (pass.clipRects) {
+    ctx.save();
+    ctx.beginPath();
+    for (const rect of pass.clipRects) ctx.rect(rect.x, rect.y, rect.width, rect.height);
+    ctx.clip();
+  }
+  try {
+    for (const entry of pass.order) {
+      const item = pass.items[entry < 0 ? -entry - 1 : entry];
+      if (item)
+        drawSceneEntry2D(
+          ctx,
+          camera,
+          item,
+          sheets,
+          grassSheet,
+          pass.pixelExactShadows,
+          terrain,
+          entry < 0,
+        );
+    }
+  } finally {
+    if (pass.clipRects) ctx.restore();
   }
 }
 

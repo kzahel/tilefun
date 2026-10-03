@@ -4,6 +4,7 @@ import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 import type { SceneItem } from "./SceneItem.js";
+import type { TerrainDrawOptions } from "./TerrainFrame.js";
 import type {
   TerrainPresentation,
   TerrainRenderWorld,
@@ -46,9 +47,11 @@ export type RenderPass =
       readonly items: readonly SceneItem[];
       readonly order: readonly number[];
       readonly pixelExactShadows?: boolean;
+      readonly clipRects?: readonly { x: number; y: number; width: number; height: number }[];
     };
 
 export interface TerrainPreparationOptions {
+  readonly scope?: "halo" | "visible";
   readonly timeBudgetMs?: number;
   readonly rowBudget?: number;
 }
@@ -76,6 +79,7 @@ export interface RenderBackend extends TerrainPresentation {
     view: RenderView,
     world: TerrainRenderWorld,
     visible: ChunkRange,
+    options?: TerrainDrawOptions,
   ): readonly TerrainDraw[];
   submit(view: RenderView, pass: RenderPass): void;
   isTerrainReady(chunk: Chunk | undefined): boolean;

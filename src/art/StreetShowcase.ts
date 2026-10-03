@@ -4,10 +4,10 @@ import { createProp } from "../entities/PropFactories.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { StreetRect, StreetScene } from "../generation/regional/StreetRecipes.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { drawCitySurfacePieces } from "../rendering/CitySurfaceRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
 import { World } from "../world/World.js";
 
@@ -44,7 +44,7 @@ export function drawStreetShowcase(
     ...createProp(p.type, p.wx, p.wy),
     id: i + 1,
   }));
-  const renderer = new TileRenderer();
+  const renderer = new CanvasRenderBackend(ctx, new Map([["me-complete", sheet]]));
   const items = collectScene(
     [],
     props,
@@ -56,7 +56,8 @@ export function drawStreetShowcase(
     [],
     false,
   );
-  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined, false, renderer);
+  renderer.submit(camera, { kind: "scene", items, order: collectSceneOrder(items, []) });
+  renderer.dispose();
   if (geometry) {
     ctx.strokeStyle = "#8befb5";
     ctx.strokeRect(...rect(scene.walkway));

@@ -214,3 +214,22 @@ terrain and rooms. Disposal is idempotent, rejects further rendering/preparation
 and drops source references without closing images borrowed from another owner.
 [032](../tactical/032-renderer-host-lifecycle.md) records lifecycle and integration
 validation. Explorer/native reference composition remains the next migration.
+
+## Shared terrain placement and remaining consumers
+
+`TerrainFrame` computes culling, rounding, seam overscan and placements from a
+plain view and resource-ID lookup. Canvas and recording backends share that
+policy. Terrain preparation is separate: gameplay uses the existing bounded halo
+scheduler; explorer/native composition can request visible-only row budgets.
+Explorer scene clipping is a list of rectangles in logical viewport pixels.
+Canvas composition preserves the host transform, including explorer DPR.
+
+All active outdoor consumers now submit semantic passes. Native character review
+retains its source-hashed controller and calls a Canvas reference adapter that
+consumes the same scene-pass schema. Room reference drawing and pattern room
+atlas previews remain explicitly native Canvas compositions. Additive decoded
+sprite updates refresh metadata without rebuilding terrain; replacing an existing
+source must use full invalidation. Borrowed source images remain owned by the
+asset loader, and backend disposal releases its references without closing them.
+See [033](../tactical/033-shared-terrain-and-consumers.md) for parity and allocation
+validation. The remaining step is obsolete API removal and integrated boundary proof.

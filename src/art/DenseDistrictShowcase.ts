@@ -19,9 +19,9 @@ import { DENSE_CITY_ASSETS } from "../generation/regional/DenseCityAssets.js";
 import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { Camera } from "../rendering/Camera.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TileRenderer } from "../rendering/TileRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { World } from "../world/World.js";
 import type { ArtRect } from "./ArtCatalog.js";
 
@@ -374,26 +374,27 @@ export function drawDenseDistrictShowcase(
   // range here would load a second halo and exceed the 81-chunk preview budget.
   world.updateLoadedChunks(range);
   world.computeAutotile(graph);
-  const renderer = new TileRenderer();
-  renderer.setBlendSheets(assets.blendSheets, graph);
-  renderer.setVariants(assets.variants);
-  renderer.setRoadSheets(assets.sheets);
-  renderer.drawTerrain(ctx, camera, world, assets.sheets, range, false, 4096, 0);
+  const renderer = new CanvasRenderBackend(ctx, assets.sheets);
+  renderer.configureAssets(assets, graph);
+  renderer.prepareTerrain(camera, world, range, { scope: "visible", rowBudget: 4096 });
+  renderer.submit(camera, {
+    kind: "terrain",
+    draws: renderer.collectTerrain(camera, world, range, { overscanPixels: 0 }),
+  });
   const props = s.props.map((p, i) => ({ ...p, id: i + 1 })),
     entities = s.actors.map((a, i) => {
       const factory = ENTITY_FACTORIES[a.type];
       if (!factory) throw new Error(a.type);
       return { ...factory(a.wx, a.wy), id: 10000 + i };
     });
-  drawScene2D(
-    ctx,
-    camera,
-    collectScene(entities, props, world, camera, range, 1, renderer, [], false),
-    assets.sheets,
-    undefined,
-    true,
-    renderer,
-  );
+  const items = collectScene(entities, props, world, camera, range, 1, renderer, [], false);
+  renderer.submit(camera, {
+    kind: "scene",
+    items,
+    order: collectSceneOrder(items, []),
+    pixelExactShadows: true,
+  });
+  renderer.dispose();
   if (geometry) {
     ctx.lineWidth = 1;
     const rect = (r: Bounds) => {
