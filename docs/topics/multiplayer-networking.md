@@ -1,8 +1,8 @@
 # Multiplayer networking
 
 Topic: multiplayer-networking
-Status: binary replication and dedicated dual-channel WebRTC implemented;
-broader loss/reordering and reconnect validation remains.
+Status: delivery audit confirms loss/reordering and cross-world stale-frame
+defects. Reliable fallback alone does not repair lost state; reconnect does.
 Updated: 2026-10-03; checked against the current implementation.
 
 Owns ongoing transport/replication decisions and gaps. The
@@ -40,11 +40,27 @@ Protocol coverage lives in [binary codec tests](../../src/shared/binaryCodec.tes
 [channel policy tests](../../src/transport/webrtcChannels.test.ts).
 Worker lifecycle/readiness evidence lives in [performance](performance.md).
 
-Prioritize dedicated WebRTC loss/reordering and reconnect coverage. In
-particular, last-sent deltas and an unreliable channel do not by themselves
-establish recovery after a lost baseline/delta; don't describe this as proven
-loss-tolerant full-snapshot delivery. This cleanup verified the code structure,
-not a new adverse-network capture.
+[Tactical 014](../tactical/014-webrtc-delivery-validation.md) now records actual
+validation and [machine-readable evidence](../benchmarks/014-webrtc-delivery.json).
+Five deterministic acceptance cases fail: lost baseline, final position, exit,
+reversed updates and old-world delivery after a transition clear. Four controls
+pass, including ordered delay, mount/dismount and reconnect. Fourteen of fifteen
+seeded adverse schedules retain divergent state after clean traffic resumes.
+
+Two real dedicated WebRTC browser tests reproduce missing entities, ghost
+entities and cross-world stale baseline acceptance. Both channels are verified
+open; faults touch only entity traffic. Closing the unreliable channel moves
+frames to reliable sync but does not reconstruct previously lost state. Fresh
+reconnect resets baselines and repairs the missing entity.
+
+These are validation-only changes. Five unit tests are explicitly expected
+failures; the browser cases characterize the bugs. A green suite does not mean
+loss tolerance. No OS UDP, WAN/NAT/TURN or physical-device impairment was run.
+
+Next: choose reliable ordered delivery for dependent deltas and lifecycle, or
+implement bounded recovery with correct baseline/field repair and realm epochs.
+Do not treat tick filtering alone as loss recovery. Turn the applicable known
+failures into passing acceptance cases before expanding network coverage.
 
 Bandwidth priority scheduling, unreliable input with resend windows and voice
 remain proposals. Public-server player authentication is separate from the

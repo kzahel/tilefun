@@ -1,0 +1,301 @@
+{
+  "date": "2026-10-03",
+  "runtimeCommit": "50f5255a7650fa422f684dcd234c8a6ea8d61099",
+  "scope": "Validation only; protocol unchanged. Known failures are reproduced, not fixed.",
+  "deterministic": {
+    "sourceCommit": "50f5255a7650fa422f684dcd234c8a6ea8d61099",
+    "scope": "Real GameServer/RealmReplicator/binary codec/RemoteStateView; entity-frame faults only; not UDP impairment",
+    "steps": {
+      "impaired": 240,
+      "initialClean": 120,
+      "recoveryAfterDrain": 120,
+      "tickHz": 60
+    },
+    "results": [
+      {
+        "profile": "ordered-100ms",
+        "seed": 42,
+        "dropped": 0,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": true
+      },
+      {
+        "profile": "ordered-100ms",
+        "seed": 2026,
+        "dropped": 0,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": true
+      },
+      {
+        "profile": "ordered-100ms",
+        "seed": 8675309,
+        "dropped": 0,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": true
+      },
+      {
+        "profile": "loss-1pct",
+        "seed": 42,
+        "dropped": 1,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": true
+      },
+      {
+        "profile": "loss-1pct",
+        "seed": 2026,
+        "dropped": 1,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 1,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-1pct",
+        "seed": 8675309,
+        "dropped": 2,
+        "reordered": 0,
+        "missing": 0,
+        "extra": 1,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-5pct",
+        "seed": 42,
+        "dropped": 12,
+        "reordered": 0,
+        "missing": 1,
+        "extra": 0,
+        "mismatched": 2,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-5pct",
+        "seed": 2026,
+        "dropped": 9,
+        "reordered": 0,
+        "missing": 4,
+        "extra": 1,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-5pct",
+        "seed": 8675309,
+        "dropped": 10,
+        "reordered": 0,
+        "missing": 1,
+        "extra": 2,
+        "mismatched": 1,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-20pct",
+        "seed": 42,
+        "dropped": 44,
+        "reordered": 0,
+        "missing": 4,
+        "extra": 1,
+        "mismatched": 2,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-20pct",
+        "seed": 2026,
+        "dropped": 46,
+        "reordered": 0,
+        "missing": 6,
+        "extra": 4,
+        "mismatched": 2,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "loss-20pct",
+        "seed": 8675309,
+        "dropped": 41,
+        "reordered": 0,
+        "missing": 2,
+        "extra": 4,
+        "mismatched": 3,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "burst-6frames",
+        "seed": 42,
+        "dropped": 48,
+        "reordered": 0,
+        "missing": 8,
+        "extra": 6,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "burst-6frames",
+        "seed": 2026,
+        "dropped": 48,
+        "reordered": 0,
+        "missing": 8,
+        "extra": 6,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "burst-6frames",
+        "seed": 8675309,
+        "dropped": 48,
+        "reordered": 0,
+        "missing": 8,
+        "extra": 6,
+        "mismatched": 0,
+        "maxPositionErrorPx": 0,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "reorder-0to200ms",
+        "seed": 42,
+        "dropped": 0,
+        "reordered": 83,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 1,
+        "maxPositionErrorPx": 1,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "reorder-0to200ms",
+        "seed": 2026,
+        "dropped": 0,
+        "reordered": 88,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 1,
+        "maxPositionErrorPx": 1,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      },
+      {
+        "profile": "reorder-0to200ms",
+        "seed": 8675309,
+        "dropped": 0,
+        "reordered": 83,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 1,
+        "maxPositionErrorPx": 1,
+        "wireBytes": 472459,
+        "convergedAfter120CleanFrames": false
+      }
+    ]
+  },
+  "browser": {
+    "transport": "Dedicated node-datachannel server and two Playwright Chromium contexts on loopback",
+    "faultBoundary": "RTCDataChannel message listener before production binary decoding; reliable sync and input untouched",
+    "cases": [
+      {
+        "scenario": "real dual-channel RTC reproduces lost spawn; fallback does not repair it, reconnect does",
+        "status": "passed",
+        "durationMs": 8004,
+        "observed": {
+          "beforeFallback": {
+            "dropped": 1,
+            "appliedFrames": 246,
+            "entitiesFrames": 275,
+            "syncFrames": 0,
+            "bytes": 627440
+          },
+          "afterFallback": {
+            "dropped": 1,
+            "appliedFrames": 376,
+            "entitiesFrames": 275,
+            "syncFrames": 130,
+            "bytes": 629910
+          },
+          "missingAfter120CleanFrames": true,
+          "missingAfterFallback": true,
+          "reconnectRecovered": true
+        }
+      },
+      {
+        "scenario": "real dual-channel RTC reproduces lost deletion and an old-world baseline crossing a transition",
+        "status": "passed",
+        "durationMs": 7270,
+        "observed": {
+          "dropped": 1,
+          "appliedFrames": 388,
+          "entitiesFrames": 416,
+          "syncFrames": 0,
+          "bytes": 719580,
+          "ghostAfter120CleanFrames": true,
+          "staleWorldBaselineAccepted": true
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "No OS UDP impairment, WAN/NAT/TURN or physical-device measurement.",
+    "Matrix wireBytes counts server encoded traffic including initial chunks, not delivered bandwidth.",
+    "Browser checks characterize known defects; passing them does not certify loss tolerance."
+  ],
+  "verification": {
+    "typecheck": "all three repository configs and additional strict harness/CLI check passed",
+    "unit": {
+      "passed": 1196,
+      "expectedFailures": 5,
+      "files": 117
+    },
+    "browser": {
+      "passed": 242,
+      "includesDefectCharacterizations": true
+    },
+    "build": "passed",
+    "lint": {
+      "newDiagnostics": 0,
+      "existingWarnings": 122,
+      "existingInfos": 32
+    },
+    "runtimeProtocolChanged": false
+  }
+}
