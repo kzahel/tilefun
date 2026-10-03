@@ -48,12 +48,16 @@ export class SavedWorldSource {
       if (!response.ok) throw new Error(data.error ?? "Saved inspection unavailable.");
       return data;
     }
-    const store = new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta", "players"]);
+    const store = new IdbPersistenceStore(
+      dbNameForWorld(worldId),
+      ["chunks", "meta", "players"],
+      true,
+    );
     try {
       await store.open();
       return await readInspection(store, generation, coordinates, bounds);
     } finally {
-      store.close();
+      await store.close();
     }
   }
 }

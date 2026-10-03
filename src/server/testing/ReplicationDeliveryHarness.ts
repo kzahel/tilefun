@@ -6,12 +6,13 @@ import { serializeEntity } from "../../shared/serialization.js";
 import { LocalTransport } from "../../transport/LocalTransport.js";
 import { World } from "../../world/World.js";
 import { GameServer } from "../GameServer.js";
+import { browserServerDependencies } from "../hosts/browser.js";
 
 // Faults apply only to server entity frames. Reliable input/control is untouched.
 // No hand-authored snapshots: GameServer -> RealmReplicator -> binary codec -> replica.
 export function createReplicationRig() {
   const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   const frames: FrameMessage[] = [];
   let wireBytes = 0;
   transport.clientSide.onMessage((message) => {

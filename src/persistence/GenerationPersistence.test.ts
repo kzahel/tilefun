@@ -10,8 +10,8 @@ import {
 } from "../generation/GenerationDescriptor.js";
 import { Realm } from "../server/Realm.js";
 import { Chunk } from "../world/Chunk.js";
-import { FsPersistenceStore } from "./FsPersistenceStore.js";
 import { FsWorldRegistry } from "./FsWorldRegistry.js";
+import { SqlitePersistenceStore } from "./SqlitePersistenceStore.js";
 
 it("filesystem worlds pin complete settings and restore edited terrain across realm and registry reloads", async () => {
   const directory = await mkdtemp(join(tmpdir(), "tilefun-generation-"));
@@ -24,13 +24,13 @@ it("filesystem worlds pin complete settings and restore edited terrain across re
       const meta = await registry.createWorld(choice, undefined, undefined, undefined, generation);
       expect(meta.seed).toBeUndefined();
       expect(meta.worldType).toBeUndefined();
-      const store = () =>
-        new FsPersistenceStore(join(directory, meta.id), ["meta", "chunks", "players"]);
+      const store = () => new SqlitePersistenceStore(join(directory, meta.id));
       await realm.loadWorld(meta.id, registry, store);
       expect(realm.generation).toEqual(generation);
       const edit = new Chunk();
       edit.subgrid.fill(TerrainId.DirtWarm);
       edit.roadGrid.fill(2);
+      await realm.destroy();
       const persistence = store();
       await persistence.open();
       await persistence.save([
@@ -53,6 +53,7 @@ it("filesystem worlds pin complete settings and restore edited terrain across re
           },
         },
       ]);
+      await persistence.close();
       registry.close();
       await registry.open();
       expect((await registry.getWorld(meta.id))?.generation).toEqual(generation);
@@ -70,7 +71,7 @@ it("filesystem worlds pin complete settings and restore edited terrain across re
     ).rejects.toThrow();
     expect((await registry.listWorlds()).length).toBe(before);
   } finally {
-    realm.destroy();
+    await realm.destroy();
     registry.close();
     await rm(directory, { recursive: true, force: true });
   }
@@ -126,13 +127,14 @@ it("saves semantic tree run identities and restores their compiled art and colli
       undefined,
       createDescriptor("flat", 2026),
     );
-    const store = () =>
-      new FsPersistenceStore(join(directory, meta.id), ["meta", "chunks", "players"]);
+    const store = () => new SqlitePersistenceStore(join(directory, meta.id));
     await realm.loadWorld(meta.id, registry, store);
     expect(
       realm.treeBrush.edit("editor", { start: { x: -3, y: 2 }, end: { x: 10, y: 2 }, erase: false })
         .error,
     ).toBe("");
+    expect(realm.treeBrush.travel("editor", "undo").error).toBe("");
+    expect(realm.treeBrush.travel("editor", "redo").error).toBe("");
     const before = realm.propManager.props.filter((p) => p.type.startsWith("pattern:"));
     expect(before).toHaveLength(1);
     await realm.saveManager?.flushAsync();
@@ -145,7 +147,7 @@ it("saves semantic tree run identities and restores their compiled art and colli
     expect(after[0]?.position).toEqual(before[0]?.position);
     expect(realm.treeBrush.status("editor").canUndo).toBe(false);
   } finally {
-    realm.destroy();
+    await realm.destroy();
     registry.close();
     await rm(directory, { recursive: true, force: true });
   }

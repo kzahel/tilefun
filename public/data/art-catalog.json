@@ -20417,7 +20417,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/WorldInspection.ts:104"
+          "source": "src/persistence/RealmRecords.ts:37"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/WorldInspection.ts:106"
         },
         {
           "system": "Gameplay",
@@ -20425,11 +20429,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:872"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/Realm.ts:1187"
+          "source": "src/server/Realm.ts:885"
         },
         {
           "system": "Gameplay",
@@ -20495,11 +20495,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/testing/ReplicationDeliveryHarness.ts:28"
+          "source": "src/server/testing/ReplicationDeliveryHarness.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/testing/ReplicationDeliveryHarness.ts:29"
+          "source": "src/server/testing/ReplicationDeliveryHarness.ts:30"
         }
       ]
     },

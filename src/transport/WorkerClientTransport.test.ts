@@ -31,7 +31,9 @@ function rig(
       events.push("flush");
       await options.flush?.();
     },
-    destroy: () => events.push("destroy"),
+    destroy: () => {
+      events.push("destroy");
+    },
     completedTicks: 0,
     onLoopError: undefined,
   };

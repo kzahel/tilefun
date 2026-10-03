@@ -96,6 +96,8 @@ export interface WanderAIComponent {
 }
 
 export interface Entity {
+  /** Durable identity, independent of this runtime's numeric network ID. */
+  persistentId?: string;
   /** Cosmetic only; player physics always use the player definition. */
   playerModel?: string;
   /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */

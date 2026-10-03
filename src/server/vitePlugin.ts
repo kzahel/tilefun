@@ -1,8 +1,8 @@
 import { networkInterfaces } from "node:os";
 import type { Plugin } from "vite";
-import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { worldDirectory } from "../persistence/fsPaths.js";
+import { SqlitePersistenceStore } from "../persistence/SqlitePersistenceStore.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { adminAuthorization } from "./adminAuthorization.js";
@@ -63,12 +63,7 @@ export function tilefunServer(dataDir = "./data"): Plugin {
           server = new GameServer(transport, {
             authorizeAdmin,
             registry: new FsWorldRegistry(dataDir),
-            createStore: (worldId) =>
-              new FsPersistenceStore(worldDirectory(dataDir, worldId), [
-                "chunks",
-                "meta",
-                "players",
-              ]),
+            createStore: (worldId) => new SqlitePersistenceStore(worldDirectory(dataDir, worldId)),
           });
 
           await server.init();
@@ -99,9 +94,9 @@ export function tilefunServer(dataDir = "./data"): Plugin {
       });
     },
 
-    closeBundle() {
+    async closeBundle() {
       if (server) {
-        server.destroy();
+        await server.destroy();
         server = null;
       }
     },

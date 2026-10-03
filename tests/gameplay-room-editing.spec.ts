@@ -154,15 +154,15 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
       page.evaluate(
         () =>
           new Promise<number>((resolve, reject) => {
-            const open = indexedDB.open("tilefun-world-__player_locations__");
+            const open = indexedDB.open("tilefun-world-__player_locations__-records-v2");
             open.onerror = () => reject(open.error);
             open.onsuccess = () => {
               const db = open.result;
-              const tx = db.transaction("players", "readonly");
+              const tx = db.transaction("records", "readonly");
               const read = tx
-                .objectStore("players")
-                .get(localStorage.getItem("tilefun-active-profile") ?? "");
-              read.onsuccess = () => resolve(read.result?.player.x ?? 0);
+                .objectStore("records")
+                .get(["players", localStorage.getItem("tilefun-active-profile") ?? ""]);
+              read.onsuccess = () => resolve(read.result?.value.player.x ?? 0);
               read.onerror = () => reject(read.error);
               tx.oncomplete = () => db.close();
             };

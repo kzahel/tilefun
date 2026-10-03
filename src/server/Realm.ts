@@ -51,8 +51,10 @@ import {
   validateRoomOccupancy,
 } from "../interiors/GameplayRoom.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
+import type { ActorRecord } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
+import { type FeatureRecord, RealmRecords } from "../persistence/RealmRecords.js";
 import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
@@ -114,6 +116,7 @@ export class Realm {
   private adjacency: TerrainAdjacency;
   terrainEditor: TerrainEditor;
   saveManager: SaveManager | null = null;
+  records: RealmRecords | null = null;
   private gemSpawner = new GemSpawner();
   private baddieSpawner = new BaddieSpawner();
   private fishSpawner = new FishSpawner();
@@ -398,10 +401,9 @@ export class Realm {
   }
 
   /** Close persistence if the given worldId matches the currently loaded world. */
-  closePersistenceIfCurrent(worldId: string): void {
+  async closePersistenceIfCurrent(worldId: string): Promise<void> {
     if (worldId === this.currentWorldId && this.saveManager) {
-      this.saveManager.flush();
-      this.saveManager.close();
+      await this.saveManager.close();
       this.saveManager = null;
     }
   }
@@ -703,6 +705,16 @@ export class Realm {
           (tx, ty) => this.world.getHeightAt(tx, ty),
         );
 
+        for (const entity of entityTickDts.keys()) {
+          if (
+            entity.wanderAI ||
+            entity.routeAI ||
+            entity.velocity ||
+            entity.deathTimer !== undefined
+          )
+            this.records?.changed(entity);
+        }
+
         // ── TickService.postSimulation ──
         this.worldAPI.tick.firePost(stepDt);
 
@@ -758,6 +770,7 @@ export class Realm {
       }
     }
 
+    for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
 
     // Broadcast state to all clients (serialized mode)
@@ -1105,8 +1118,7 @@ export class Realm {
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
     // Close previous save manager
     if (this.saveManager) {
-      this.saveManager.flush();
-      this.saveManager.close();
+      await this.saveManager.close();
     }
 
     // Create fresh world state with the correct generation strategy
@@ -1142,6 +1154,9 @@ export class Realm {
     // Open persistence for this world
     const store = createStore(worldId);
     this.saveManager = new SaveManager(store);
+    this.records = new RealmRecords(this.entityManager, this.propManager, this.saveManager);
+    this.proceduralActors.persistent = true;
+    this.proceduralActors.canGenerate = (id) => !this.records?.features.has(id);
     this.terrainEditor = new TerrainEditor(
       this.world,
       (key) => this.saveManager?.markChunkDirty(key),
@@ -1183,18 +1198,6 @@ export class Realm {
       cameraZoom = savedMeta.cameraZoom;
       playerX = savedMeta.playerX;
       playerY = savedMeta.playerY;
-      for (const se of savedMeta.entities) {
-        if (se.type === "player") continue;
-        if (isPropType(se.type)) {
-          this.propManager.add(createProp(se.type, se.wx, se.wy));
-        } else {
-          const factory = ENTITY_FACTORIES[se.type];
-          if (factory) {
-            this.entityManager.spawn(factory(se.wx, se.wy));
-          }
-        }
-      }
-      this.entityManager.setNextId(savedMeta.nextEntityId);
       if (Array.isArray(savedMeta.traffic)) this.traffic?.restore(savedMeta.traffic);
       this.lastLoadedGems = savedMeta.gemsCollected ?? 0;
     } else {
@@ -1238,6 +1241,18 @@ export class Realm {
         );
     }
 
+    const features = await this.saveManager.loadRecords("features");
+    for (const [id, value] of features) {
+      const feature = value as FeatureRecord;
+      this.records.features.set(id, feature);
+      if (feature.deleted) this.proceduralProps.deleted.add(id);
+      if (feature.edit) this.proceduralProps.edits.set(id, feature.edit);
+    }
+    this.records.restore([
+      ...((await this.saveManager.loadRecords("entities")).values() as MapIterator<ActorRecord>),
+      ...((await this.saveManager.loadRecords("props")).values() as MapIterator<ActorRecord>),
+    ]);
+
     if (this.interior) {
       playerX = buildingDoor(this.interior).arrival.wx;
       playerY = buildingDoor(this.interior).arrival.wy;
@@ -1272,6 +1287,7 @@ export class Realm {
       }
     };
 
+    this.saveManager.markMetaDirty();
     this.currentWorldId = worldId;
     await registry.updateLastPlayed(this.interior?.parentWorldId ?? worldId);
 
@@ -1298,13 +1314,12 @@ export class Realm {
   }
 
   /** Teardown mods and close persistence. */
-  destroy(): void {
+  async destroy(): Promise<void> {
     for (const teardown of this.modTeardowns.values()) {
       teardown();
     }
     this.modTeardowns.clear();
-    this.saveManager?.flush();
-    this.saveManager?.close();
+    await this.saveManager?.close();
   }
 
   // ---- Riding helpers ----
@@ -1524,8 +1539,6 @@ export class Realm {
     let player: Entity | undefined;
 
     for (const session of this.sessions.values()) {
-      // Persist per-player data for all players
-      this.savePlayerData(session);
       // Use first session for realm-level meta (backward compat)
       if (!player) {
         cameraX = session.cameraX;
@@ -1536,20 +1549,7 @@ export class Realm {
       }
     }
 
-    const entities = this.entityManager.entities
-      .filter((e) => !e.proceduralId)
-      .map((e) => ({
-        type: e.type,
-        wx: e.position.wx,
-        wy: e.position.wy,
-      }));
-    for (const p of this.propManager.props) {
-      if (p.proceduralId) continue;
-      entities.push({ type: p.type, wx: p.position.wx, wy: p.position.wy });
-    }
-
     return {
-      ...this.proceduralProps.save(),
       ...(this.traffic ? { traffic: this.traffic.save() } : {}),
       ...(this.interior
         ? { interior: this.interior, ...(this.roomState ? { roomPlan: this.roomState } : {}) }
@@ -1559,8 +1559,6 @@ export class Realm {
       cameraX,
       cameraY,
       cameraZoom,
-      entities,
-      nextEntityId: this.entityManager.getNextId(),
       gemsCollected,
     };
   }

@@ -102,6 +102,9 @@ or a single short traversal proof of bounded memory.
   failures and 35 lint errors outside this documentation change. No unrelated
   runtime files were changed to address those results. Build, browser and
   streaming runs are reserved for implementation changes.
-- Next bounded implementation: A's minimum contract and baseline, followed
-  directly by B's incremental-save vertical slice; actual unloading begins only
-  after the readiness and durability gates above are satisfied.
+- A delivered in [020](020-shared-record-persistence.md); B delivered in
+  [021](021-incremental-world-records.md). Real IndexedDB/SQLite, incremental
+  actor writes and shared host injection pass integration gates.
+- Next: [024](024-interest-and-residency.md) implements shared interest/readiness,
+  lazy residency and complete active scheduling. Eager hydration remains until
+  that slice replaces it.

@@ -8,6 +8,7 @@ import { LocalTransport } from "../transport/LocalTransport.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { tileToChunk, tileToLocal, worldToTile } from "../world/types.js";
 import { GameServer } from "./GameServer.js";
+import { browserServerDependencies } from "./hosts/browser.js";
 
 const IDLE: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
 const RIGHT: Movement = { dx: 1, dy: 0, sprinting: false, jump: false };
@@ -59,7 +60,7 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement, d
 
 function createRig(serverTickHz: number) {
   const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   server.start();
   transport.triggerConnect();
 

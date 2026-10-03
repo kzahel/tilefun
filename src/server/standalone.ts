@@ -2,9 +2,9 @@ import { existsSync } from "node:fs";
 import { createServer } from "node:http";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { FsPersistenceStore } from "../persistence/FsPersistenceStore.js";
 import { FsWorldRegistry } from "../persistence/FsWorldRegistry.js";
 import { worldDirectory } from "../persistence/fsPaths.js";
+import { SqlitePersistenceStore } from "../persistence/SqlitePersistenceStore.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { WebSocketServerTransport } from "../transport/WebSocketServerTransport.js";
 import { adminAuthorization } from "./adminAuthorization.js";
@@ -77,8 +77,7 @@ const transport = await createTransport();
 const server = new GameServer(transport, {
   authorizeAdmin,
   registry: new FsWorldRegistry(DATA_DIR),
-  createStore: (worldId) =>
-    new FsPersistenceStore(worldDirectory(DATA_DIR, worldId), ["chunks", "meta", "players"]),
+  createStore: (worldId) => new SqlitePersistenceStore(worldDirectory(DATA_DIR, worldId)),
 });
 
 await server.init();
@@ -108,7 +107,7 @@ async function shutdown() {
   shuttingDown = true;
   serverLog("Shutting down...");
   await server.flushAsync();
-  server.destroy();
+  await server.destroy();
   httpServer.close();
   process.exit(0);
 }

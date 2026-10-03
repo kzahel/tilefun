@@ -28,8 +28,7 @@ import {
   interiorRealmId,
   parseInteriorId,
 } from "../interiors/GameplayInterior.js";
-import { IdbPersistenceStore } from "../persistence/IdbPersistenceStore.js";
-import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
+import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
 import {
@@ -38,12 +37,6 @@ import {
   readInspection,
   validateInspection,
 } from "../persistence/WorldInspection.js";
-import {
-  dbNameForWorld,
-  type WorldMeta,
-  WorldRegistry,
-  type WorldType,
-} from "../persistence/WorldRegistry.js";
 import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -175,14 +168,11 @@ export class GameServer {
     return this.activeRealm.blendGraph;
   }
 
-  constructor(transport: IServerTransport, deps?: GameServerDeps) {
+  constructor(transport: IServerTransport, deps: GameServerDeps) {
     this.transport = transport;
-    this.authorizeAdmin = deps?.authorizeAdmin ?? (() => true);
-    this.registry = deps?.registry ?? new WorldRegistry();
-    this.createStore =
-      deps?.createStore ??
-      ((worldId) =>
-        new IdbPersistenceStore(dbNameForWorld(worldId), ["chunks", "meta", "players"]));
+    this.authorizeAdmin = deps.authorizeAdmin ?? (() => true);
+    this.registry = deps.registry;
+    this.createStore = deps.createStore;
     // Create a default realm (will be loaded with a world in init() or loadWorld())
     const defaultRealm = new Realm([baseGameMod]);
     // Use a sentinel key until a real world is loaded
@@ -201,8 +191,8 @@ export class GameServer {
     if (!meta) throw new Error("World not found.");
     const generation = descriptorFromMetadata(meta);
     const live = this.realms.get(worldId);
-    const store = this.createStore(worldId);
-    await store.open();
+    const store = live?.saveManager?.store ?? this.createStore(worldId);
+    if (!live?.saveManager) await store.open();
     try {
       const snapshot = await readInspection(store, generation, coordinates, bounds);
       if (live) {
@@ -225,7 +215,7 @@ export class GameServer {
       }
       return snapshot;
     } finally {
-      store.close();
+      if (!live?.saveManager) await store.close();
     }
   }
 
@@ -254,7 +244,7 @@ export class GameServer {
 
     // Load most recent world, or create a default one
     const worlds = await this.registry.listWorlds();
-    const firstWorld = worlds[0];
+    const firstWorld = worlds.find((world) => world.saveFormat === 2);
     if (firstWorld) {
       console.log("[tilefun] loading existing world:", firstWorld.id, firstWorld.name);
       await this.loadWorldIntoDefaultRealm(firstWorld.id);
@@ -612,7 +602,7 @@ export class GameServer {
         this.realms.set(worldId, realm);
         return realm;
       } catch (error) {
-        realm.destroy();
+        await realm.destroy();
         throw error;
       }
     })();
@@ -781,11 +771,18 @@ export class GameServer {
 
   private async realmMetadata(worldId: string): Promise<WorldMeta | undefined> {
     const known = await this.registry.getWorld(worldId);
-    if (known) return known;
+    if (known) {
+      if (known.saveFormat !== 2)
+        throw new Error(
+          "This world uses an incompatible save format. Create a new world or explicitly delete it.",
+        );
+      return known;
+    }
     const parsed = parseInteriorId(worldId);
     if (!parsed) return undefined;
     const parent = await this.registry.getWorld(parsed.parentWorldId);
     if (!parent) throw new Error("Parent world not found.");
+    if (parent.saveFormat !== 2) throw new Error("Parent world uses an incompatible save format.");
     const generation = descriptorFromMetadata(parent);
     if (generation.type !== "regional" || generation.version === "regional-v1")
       throw new Error("This generator has no enterable building plans.");
@@ -981,8 +978,14 @@ export class GameServer {
       if (realm.idleSince === null) continue;
       if (now - realm.idleSince >= GameServer.REALM_IDLE_TIMEOUT_MS) {
         console.log(`[tilefun] unloading idle realm: ${worldId}`);
-        realm.destroy();
-        this.realms.delete(worldId);
+        realm.idleSince = null;
+        void this.trackOperation(
+          realm.flushAsync().then(async () => {
+            if (realm.sessions.size) return;
+            await realm.destroy();
+            this.realms.delete(worldId);
+          }),
+        ).catch((error) => this.onLoopError?.(error));
       }
     }
   }
@@ -1045,7 +1048,7 @@ export class GameServer {
       }
     for (const [key, realm] of affected) {
       await realm.flushAsync();
-      realm.destroy();
+      await realm.destroy();
       this.realms.delete(key);
     }
     if (this.defaultRealmId === id) this.defaultRealmId = fallback;
@@ -1113,17 +1116,15 @@ export class GameServer {
     });
   }
 
-  destroy(): void {
-    for (const timer of this.dormantSessions.values()) {
-      clearTimeout(timer);
-    }
-    this.dormantSessions.clear();
-    for (const realm of this.realms.values()) {
-      realm.destroy();
-    }
-    this.realms.clear();
+  async destroy(): Promise<void> {
     this.stopLoop();
-    this.locations?.close();
+    for (const timer of this.dormantSessions.values()) clearTimeout(timer);
+    this.dormantSessions.clear();
+    await this.settle();
+    for (const realm of this.realms.values()) await realm.destroy();
+    this.realms.clear();
+    await this.locations?.close();
+    this.registry.close();
     this.transport.close();
   }
 

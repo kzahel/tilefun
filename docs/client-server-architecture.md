@@ -54,9 +54,12 @@ current location, with validated fallback for unavailable interiors. See the
 [interior topic](topics/patterns-and-interiors.md#player-location-reload-and-building-connections)
 for door identities, reload guarantees and content boundaries.
 
-[PersistenceStore](../src/persistence/PersistenceStore.ts) has IndexedDB and
-filesystem implementations. SaveManager owns writes and migrations; registries
-own world metadata. [Setup and local data](setup-and-local-data.md) distinguishes
+[PersistenceStore](../src/persistence/PersistenceStore.ts) uses one shared record
+coordinator over IndexedDB or SQLite on a Node IO worker. GameServer receives
+required host dependencies; concrete browser adapters live in the browser host
+composition module. SaveManager tracks dirty records and owns flush barriers;
+registries own world metadata. Format 2 uses individual actor/prop records and
+transactional spatial indices; existing worlds are incompatible and are not migrated. [Setup and local data](setup-and-local-data.md) distinguishes
 saved worlds from browser review drafts and server feedback histories.
 
 The explorer uses SavedWorldSource for local/remote world reads and ReviewStore

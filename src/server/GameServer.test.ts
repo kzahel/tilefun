@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { GameServer } from "./GameServer.js";
+import { browserServerDependencies } from "./hosts/browser.js";
 
 function createTestServer() {
   const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   server.start();
 
   // Manually create a session by triggering connect
@@ -16,7 +17,7 @@ function createTestServer() {
 describe("GameServer", () => {
   it("construction creates World, EntityManager, PropManager", () => {
     const transport = new LocalTransport();
-    const server = new GameServer(transport.serverSide);
+    const server = new GameServer(transport.serverSide, browserServerDependencies());
 
     expect(server.world).toBeDefined();
     expect(server.entityManager).toBeDefined();

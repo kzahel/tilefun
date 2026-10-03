@@ -17,6 +17,7 @@ export class PersistenceCoordinator {
   private closing = false;
   private sequence = 0;
   private generation = 0;
+  private readers = new Map<string, Set<{ latest?: RecordMutation }>>();
   error: unknown;
   readonly metrics = { commits: 0, recordsWritten: 0, bytesWritten: 0, highWaterBytes: 0 };
 
@@ -52,18 +53,32 @@ export class PersistenceCoordinator {
     if (next.size + this.inFlight.size > this.limits.records || bytes > this.limits.bytes)
       throw new SavePressureError("Save queue is full; wait for storage before accepting edits.");
     this.pending = next;
+    for (const mutation of mutations) {
+      const address = mutationAddress(mutation);
+      const accepted = next.get(address);
+      if (accepted) for (const reader of this.readers.get(address) ?? []) reader.latest = accepted;
+    }
     this.generation++;
     this.metrics.highWaterBytes = Math.max(this.metrics.highWaterBytes, bytes);
   }
 
   async read(collection: string, key: string): Promise<StoredRecord | undefined> {
     const address = JSON.stringify([collection, key]);
-    const generation = this.generation;
-    // Recheck after IO: a mutation can arrive while the physical read is pending.
-    const stored = await this.store.read(collection, key);
-    if (generation !== this.generation) throw new Error("Record read superseded; retry.");
     const mutation = this.pending.get(address) ?? this.inFlight.get(address);
-    return mutation ? structuredClone("put" in mutation ? mutation.put : undefined) : stored;
+    if (mutation) return structuredClone("put" in mutation ? mutation.put : undefined);
+    const reader: { latest?: RecordMutation } = {};
+    const readers = this.readers.get(address) ?? new Set();
+    this.readers.set(address, readers);
+    readers.add(reader);
+    try {
+      const stored = await this.store.read(collection, key);
+      return reader.latest
+        ? structuredClone("put" in reader.latest ? reader.latest.put : undefined)
+        : stored;
+    } finally {
+      readers.delete(reader);
+      if (!readers.size) this.readers.delete(address);
+    }
   }
 
   /** Merge pending location changes/deletes; caller fences multi-page hydration. */

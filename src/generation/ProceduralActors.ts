@@ -5,6 +5,8 @@ import type { WorldGenerator } from "./Generator.js";
 
 /** Generated actors are bounded residency; tombstones share stable feature identity with props. */
 export class ProceduralActors {
+  persistent = false;
+  canGenerate: (id: string) => boolean = () => true;
   constructor(
     private manager: EntityManager,
     private deleted: Set<string>,
@@ -21,7 +23,7 @@ export class ProceduralActors {
     if (!generator.actors) return;
     const loaded = new Set(keys);
     for (const entity of [...this.manager.entities])
-      if (entity.proceduralId && entity.routeAI) {
+      if (!this.persistent && entity.proceduralId && entity.routeAI) {
         if (this.manager.entities.some((e) => e.parentId === entity.id)) continue;
         const route = entity.routeAI.points;
         const minCx = Math.floor(Math.min(...route.map((p) => p.wx)) / CHUNK_SIZE_PX),
@@ -37,7 +39,12 @@ export class ProceduralActors {
     for (const key of loaded) {
       const [cx = 0, cy = 0] = key.split(",").map(Number);
       for (const p of generator.actors(cx, cy)) {
-        if (active.has(p.featureId) || this.deleted.has(p.featureId)) continue;
+        if (
+          active.has(p.featureId) ||
+          this.deleted.has(p.featureId) ||
+          !this.canGenerate(p.featureId)
+        )
+          continue;
         const factory = ENTITY_FACTORIES[p.type];
         if (!factory) throw new Error(`Unsupported generated actor: ${p.type}`);
         const entity = factory(p.wx, p.wy);

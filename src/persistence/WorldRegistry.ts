@@ -89,6 +89,7 @@ export class WorldRegistry implements IWorldRegistry {
         });
     const now = Date.now();
     const meta: WorldMeta = {
+      saveFormat: 2,
       id: generateUUID(),
       name,
       createdAt: now,
@@ -154,6 +155,7 @@ export class WorldRegistry implements IWorldRegistry {
     // Interior instances are virtual children, with separate durable databases.
     const names = [
       dbNameForWorld(id),
+      `${dbNameForWorld(id)}-records-v2`,
       ...(await indexedDB.databases()).flatMap((db) =>
         db.name?.startsWith(dbNameForWorld(`interior~${id}~`)) ? [db.name] : [],
       ),

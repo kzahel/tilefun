@@ -211,11 +211,14 @@ the browser's supported procedure, keeping the same origin, or continue using
 the original browser. Opening a different port/domain will show separate state.
 A seed/revision explorer link reproduces initial generation, not saved edits,
 deletions, interiors or player progress. Current player locations are stored in
-`tilefun-world-__player_locations__` (IndexedDB), separately from per-world visit
+`tilefun-world-__player_locations__-records-v2` (IndexedDB), separately from per-world visit
 history. Include this database when migrating browser state.
 
 Server-hosted worlds use filesystem state: `data/registry.json` and
-`data/worlds/` by default. For the standalone server, `DATA_DIR` changes that
+`data/worlds/` by default. Each realm stores transactional records in
+`records.sqlite` with its WAL and a separate `writer.sqlite` lease database.
+Browser world record databases use the `-records-v2` suffix. Format 2 intentionally
+does not load old saves; create a new world to use the new runtime. For the standalone server, `DATA_DIR` changes that
 root; the Vite game server currently uses `./data`. Stop the game server before
 copying its registry and complete worlds directory together, and restore them
 into an empty destination data root. The reserved `worlds/__player_locations__/`

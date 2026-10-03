@@ -10,6 +10,7 @@ import type {
 } from "../shared/protocol.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { GameServer } from "./GameServer.js";
+import { browserServerDependencies } from "./hosts/browser.js";
 
 /** Capture all ServerMessages sent to the local client. */
 function captureMessages(transport: LocalTransport): ServerMessage[] {
@@ -33,7 +34,7 @@ function getSyncOfType<T extends ServerMessage>(messages: ServerMessage[], type:
 function createBroadcastingServer() {
   const transport = new LocalTransport();
   const messages = captureMessages(transport);
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   server.start();
   server.broadcasting = true;
   transport.triggerConnect();

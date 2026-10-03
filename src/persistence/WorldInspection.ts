@@ -4,7 +4,9 @@ import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js
 import { createGenerator } from "../generation/Generator.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
+import type { ActorRecord } from "./ActorRecords.js";
 import type { PersistenceStore } from "./PersistenceStore.js";
+import type { FeatureRecord } from "./RealmRecords.js";
 import type { SavedMeta, SerializedEntity } from "./SaveManager.js";
 
 export interface InspectionChunk {
@@ -115,6 +117,41 @@ export async function readInspection(
   validateInspection(coordinates, bounds);
   const chunks: InspectionChunk[] = [];
   const meta = (await store.get("meta", "state")) as SavedMeta | null;
+  const entities: SerializedEntity[] = [];
+  const deletedProceduralIds: string[] = [];
+  const proceduralEdits: SerializedEntity[] = [];
+  for (
+    let cy = Math.floor(bounds.minY / CHUNK_SIZE) - 2;
+    cy <= Math.floor(bounds.maxY / CHUNK_SIZE) + 2;
+    cy++
+  ) {
+    for (
+      let cx = Math.floor(bounds.minX / CHUNK_SIZE) - 2;
+      cx <= Math.floor(bounds.maxX / CHUNK_SIZE) + 2;
+      cx++
+    ) {
+      for (const collection of ["entities", "props", "features"]) {
+        const page = await store.scan(collection, `${cx},${cy}`, undefined, 1024);
+        if (page.size === 1024) throw new Error("Saved inspection exceeds its record cap.");
+        for (const value of page.values()) {
+          if (collection === "features") {
+            const feature = value as FeatureRecord;
+            if (feature.deleted) deletedProceduralIds.push(feature.id);
+            if (feature.edit) proceduralEdits.push(feature.edit);
+          } else {
+            const actor = value as ActorRecord;
+            // Edited generated props are represented once, at their destination.
+            entities.push({
+              type: actor.type,
+              wx: actor.wx,
+              wy: actor.wy,
+              ...(actor.proceduralId ? { proceduralId: actor.proceduralId } : {}),
+            });
+          }
+        }
+      }
+    }
+  }
   for (const c of coordinates) {
     const raw = (await store.get("chunks", `${c.cx},${c.cy}`)) as
       | { subgrid?: ArrayBuffer; roadGrid?: ArrayBuffer; heightGrid?: ArrayBuffer }
@@ -132,7 +169,19 @@ export async function readInspection(
   return {
     generation,
     chunks,
-    ...inspectionOverlays(generation, bounds, meta),
+    ...inspectionOverlays(generation, bounds, {
+      ...meta,
+      entities,
+      deletedProceduralIds,
+      proceduralEdits: proceduralEdits.filter(
+        (edit) => !entities.some((e) => e.proceduralId === edit.proceduralId),
+      ),
+      playerX: meta?.playerX ?? 0,
+      playerY: meta?.playerY ?? 0,
+      cameraX: meta?.cameraX ?? 0,
+      cameraY: meta?.cameraY ?? 0,
+      cameraZoom: meta?.cameraZoom ?? 1,
+    }),
     coverage: "saved snapshot",
     capturedAt: new Date().toISOString(),
   };

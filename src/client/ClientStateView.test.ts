@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { GameServer } from "../server/GameServer.js";
+import { browserServerDependencies } from "../server/hosts/browser.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { LocalStateView } from "./ClientStateView.js";
 
 function createTestSetup() {
   const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   server.start();
   transport.triggerConnect();
   const view = new LocalStateView(server);

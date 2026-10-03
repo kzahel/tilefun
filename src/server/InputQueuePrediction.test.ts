@@ -7,6 +7,7 @@ import { quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { World } from "../world/World.js";
 import { GameServer } from "./GameServer.js";
+import { browserServerDependencies } from "./hosts/browser.js";
 
 const DT = 1 / TICK_RATE;
 
@@ -15,7 +16,7 @@ const IDLE: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
 
 function createTestServer() {
   const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide);
+  const server = new GameServer(transport.serverSide, browserServerDependencies());
   server.start();
   transport.triggerConnect();
   const session = server.getLocalSession();

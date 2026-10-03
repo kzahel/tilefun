@@ -61,6 +61,7 @@ export class FsWorldRegistry implements IWorldRegistry {
         });
     const now = Date.now();
     const meta: WorldMeta = {
+      saveFormat: 2,
       id: randomUUID(),
       name,
       createdAt: now,

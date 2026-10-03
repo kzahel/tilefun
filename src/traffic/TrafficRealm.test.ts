@@ -1,34 +1,15 @@
 import { expect, it, vi } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
-import type { PersistenceStore } from "../persistence/PersistenceStore.js";
+import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
+import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { TRAFFIC_DEMO_GENERATION } from "./TrafficScene.js";
 
 it("persists a moving roof passenger, restores the ride, and removes a disconnected passenger", async () => {
-  const data = new Map<string, Map<string, unknown>>();
-  const store: PersistenceStore = {
-    async open() {},
-    close() {},
-    async get(c, k) {
-      return data.get(c)?.get(k);
-    },
-    async getAll(c) {
-      return data.get(c) ?? new Map();
-    },
-    async save(entries) {
-      for (const e of entries) {
-        const col = data.get(e.collection) ?? new Map();
-        col.set(e.key, structuredClone(e.value));
-        data.set(e.collection, col);
-      }
-    },
-    async clear() {
-      data.clear();
-    },
-  };
+  const store = new RecordPersistenceStore(new MemoryRecordStore());
   const meta: WorldMeta = {
     id: "traffic",
     name: "Traffic",

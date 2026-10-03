@@ -30,9 +30,12 @@ Several early plans contain original unchecked lists superseded by later work.
 | [016 Play ideas](016-play-ideas.md) | Delivered: hold-to-speak ideas, spoken proofreading, screenshots and private Workshop management; [play ideas topic](../topics/play-ideas.md) |
 | [017 Generated traffic and roof riding](017-generated-road-traffic-and-roof-riding.md) | Delivered selectable v11 traffic, approved sprite bank and roof riding; [vehicles topic](../topics/vehicles.md) |
 | [018 Tick-aware NPC separation](018-tick-aware-npc-separation.md) | Sleeping-crowd exclusion and reduced-rate separation; broader unloading remains in the [entity activation topic](../topics/entity-activation.md) |
-| [019 Entity streaming and persistence](019-entity-streaming-and-persistence.md) | Planned parent sequence, no runtime implementation yet: incremental records, SQLite/IndexedDB, shared tickets/readiness and lazy eviction; [entity activation topic](../topics/entity-activation.md) |
+| [019 Entity streaming and persistence](019-entity-streaming-and-persistence.md) | Active parent sequence, incremental persistence delivered: incremental records, SQLite/IndexedDB, shared tickets/readiness and lazy eviction; [entity activation topic](../topics/entity-activation.md) |
 | [020 Shared record persistence](020-shared-record-persistence.md) | Phase A contract and deterministic fault tests complete; production adapters follow |
+| [021 Incremental world records](021-incremental-world-records.md) | Delivered: shared coordinator, IndexedDB/SQLite, stable actor records and injected host composition; lazy residency follows |
 | [022 Renderer backend decoupling](022-renderer-backend-decoupling.md) | Prepared parent sequence, awaiting start signal: five milestones, just-in-time children and end-to-end completion gates; [rendering architecture](../topics/rendering-architecture.md) |
+
+| [024 Interest and residency](024-interest-and-residency.md) | Next: shared tickets/readiness, lazy indexed hydration, acknowledged eviction and complete activity coverage |
 
 ## Earlier plans
 

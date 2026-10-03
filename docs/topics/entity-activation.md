@@ -3,7 +3,7 @@
 Topic: entity-activation
 Status: overlap separation follows tick selection and accumulated time.
 Incremental persistence, ticket-driven residency and general unloading are
-in progress. The shared record contract and fault tests are implemented; production cutover is next.
+in progress. Incremental records are live on IndexedDB and SQLite; shared readiness and lazy residency are next.
 Updated: 2026-10-03.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
@@ -26,7 +26,8 @@ required save acknowledgements and releases decoded caches as well as actors.
 inspected Minecraft Java 1.17.1 and mclone sources. Java uses chunk-sized entity
 lists; individual records and reduced-rate AI are deliberate Tilefun choices.
 [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
-parent sequence. Runtime delivery has started with [020](../tactical/020-shared-record-persistence.md); the target is not yet production behavior.
+parent sequence. Runtime delivery includes [020](../tactical/020-shared-record-persistence.md) and
+[021](../tactical/021-incremental-world-records.md); residency and scheduling remain transitional.
 
 All hosts must execute the same authoritative server and persistence coordinator;
 only injected host adapters differ. The
@@ -53,10 +54,10 @@ performance results or a diagnosis of any individual play report.
   reduced-rate simulation after their terrain chunk unloads. Camera movement
   and zoom can change activity independently of player position.
 - Manually placed entities remain in the realm's entity manager when terrain
-  unloads. [ProceduralActors](../../src/generation/ProceduralActors.ts) separately
-  removes generated route actors when no chunk in their route bounding area is
-  loaded, except actors with a parented rider/child. Generated actor unloading
-  therefore does not provide general unloading for placed entities.
+  unloads. [ProceduralActors](../../src/generation/ProceduralActors.ts) previously
+  removed generated route actors when no chunk in their route bounding area is
+  loaded, except actors with a parented rider/child. That path is now disabled for persistent actors until shared save-aware eviction
+  replaces it; placed and generated actors remain resident.
 - Realm AI/physics runs when there is at least one session that is neither
   debug-paused nor dormant. This is separate from per-entity activation.
 - NPC overlap separation uses the same tick map: omitted NPCs do not enter the
@@ -88,19 +89,20 @@ performance results or a diagnosis of any individual play report.
 5. **Placed-entity residency is unbounded by chunk unloading.** Large authored
    populations can retain memory and scanning costs after the player leaves.
    Persistence-aware unloading/reactivation is not yet a general facility.
-   [SerializedEntity](../../src/persistence/SaveManager.ts) currently contains
-   type, position and optional procedural identity, rather than a complete live
-   NPC snapshot. A lossless unload contract needs stable IDs, relevant runtime
-   state and relationship handling before reusing persistence for eviction.
-6. **Persistence scales with historical world size.** Metadata saves rebuild the
-   full authored entity/prop list and procedural edit/deletion collections.
-   Startup reads all saved terrain records and hydrates saved actors; saved
-   terrain mirrors remain after live chunks unload. This is not a per-entity
-   incremental save or demand-driven durable load system.
-7. **Storage contracts differ across backends.** The file backend independently
-   replaces each record although the store interface promises an atomic batch.
-   General actor movement, relationships and gameplay transactions need actual
-   cross-record atomicity and distinct missing/error results.
+   Stable IDs and semantic actor records now preserve motion/AI and attachment
+   state, but safe group residency still needs shared readiness and eviction.
+6. **Startup and retention still scale with historical world size.** Startup
+   reads all saved terrain records and hydrates saved actors through paged scans;
+   saved terrain mirrors remain after live chunks unload. Saves are now incremental:
+   dirty actor/prop/feature records replace full metadata lists. Traffic still uses
+   a bounded (maximum 32) metadata array pending its residency integration.
+7. **Production storage now has real atomic batches.** IndexedDB and SQLite
+   execute the same coordinator contract, with pending-read visibility, retained
+   failures and exclusive writer leases. The old filesystem adapter is test-only;
+   no production host uses its independent record replacement. The next slice
+   must propagate storage pressure to simulation/edit admission and attach
+   eviction to acknowledged revisions.
+
 
 Campfires have no AI: their definition in
 [EntityDefs](../../src/entities/EntityDefs.ts) gives them animation and a solid
@@ -117,9 +119,9 @@ that these activation gaps caused it.
   interest. [Tactical 018](../tactical/018-tick-aware-npc-separation.md).
 - [x] Research reference implementations and document the target architecture
   and prioritized parent plan without changing runtime behavior.
-- [ ] Establish a bounded save/read/memory baseline and minimum durable identity,
-  codec and transaction contract; immediately follow with incremental saves on
-  IndexedDB and SQLite. This removes global-list write amplification first.
+- [x] Deliver minimum durable identity, semantic codecs, transaction/race tests
+  and incremental writes on real IndexedDB and SQLite. One-actor write counts
+  remain constant as unchanged population grows; see tactical 021.
 - [ ] Deliver shared tickets/readiness, lazy indexed loads and acknowledged
   eviction, then complete active-set coverage and reduced-decision scheduling.
   [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) owns phase

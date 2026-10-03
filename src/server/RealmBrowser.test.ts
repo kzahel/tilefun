@@ -7,7 +7,8 @@ import {
 } from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
-import type { PersistenceStore, SaveEntry } from "../persistence/PersistenceStore.js";
+import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
+import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
@@ -39,6 +40,7 @@ class MemoryRegistry implements IWorldRegistry {
   ): Promise<WorldMeta> {
     const now = Date.now();
     const meta: WorldMeta = {
+      saveFormat: 2,
       id: `world-${this.nextId++}`,
       name,
       createdAt: now,
@@ -67,28 +69,9 @@ class MemoryRegistry implements IWorldRegistry {
 }
 
 /** In-memory persistence store for tests. */
-class MemoryStore implements PersistenceStore {
-  private data = new Map<string, Map<string, unknown>>();
-  async open(): Promise<void> {}
-  close(): void {}
-  async get(collection: string, key: string): Promise<unknown> {
-    return this.data.get(collection)?.get(key);
-  }
-  async getAll(collection: string): Promise<Map<string, unknown>> {
-    return this.data.get(collection) ?? new Map();
-  }
-  async save(entries: SaveEntry[]): Promise<void> {
-    for (const e of entries) {
-      let col = this.data.get(e.collection);
-      if (!col) {
-        col = new Map();
-        this.data.set(e.collection, col);
-      }
-      col.set(e.key, e.value);
-    }
-  }
-  async clear(): Promise<void> {
-    this.data.clear();
+class MemoryStore extends RecordPersistenceStore {
+  constructor() {
+    super(new MemoryRecordStore());
   }
 }
 
@@ -538,7 +521,7 @@ describe("versioned world creation protocol", () => {
       playerCount: 2,
       generation,
     });
-    server.destroy();
+    await server.destroy();
   });
   it("rejects unsupported descriptors explicitly without creating a fallback world", async () => {
     const { server, transport, registry } = await createTestSetup();
@@ -556,7 +539,7 @@ describe("versioned world creation protocol", () => {
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(transport.messagesOfType("one", "request-error")).toHaveLength(1);
     expect((await registry.listWorlds()).length).toBe(count);
-    server.destroy();
+    await server.destroy();
   });
 });
 
@@ -572,7 +555,7 @@ it("direct local consumers follow the local player into the chosen generator rea
   expect(
     server.world.getCollision(Math.floor(position.wx / 16), Math.floor(position.wy / 16)),
   ).toBe(0);
-  server.destroy();
+  await server.destroy();
 });
 
 it("Play here checks identity and realized walls, and live inspection preserves deletions and moves", async () => {
@@ -628,7 +611,7 @@ it("Play here checks identity and realized walls, and live inspection preserves 
   await expect(
     server.inspectWorld(meta.id, [], { minX: 0, minY: 0, maxX: 1000, maxY: 1000 }),
   ).rejects.toThrow(/cap/);
-  server.destroy();
+  await server.destroy();
 });
 
 it("building doors share persistent furnished realms and return to the right exterior", async () => {
@@ -799,7 +782,7 @@ it("building doors share persistent furnished realms and return to the right ext
   expect(transport.messagesOfType("local", "request-error").at(-1)?.message).toMatch(/door/);
   expect(server.worldGeneration).toEqual(generation);
   expect((await server.listWorlds()).some((w) => w.id.startsWith("interior~"))).toBe(false);
-  server.destroy();
+  await server.destroy();
   const transport2 = new TestTransport(),
     reopened = new GameServer(transport2, { registry, createStore });
   await reopened.init();
@@ -825,7 +808,7 @@ it("building doors share persistent furnished realms and return to the right ext
   expect(reopened.worldInterior).toBeNull();
   expect((await reopened.listWorlds()).some((w) => w.id === meta.id)).toBe(false);
   expect(transport2.messagesOfType("local", "world-loaded").at(-1)?.worldId).not.toBe(meta.id);
-  reopened.destroy();
+  await reopened.destroy();
 });
 
 describe("realm transition lifecycle", () => {
@@ -849,7 +832,7 @@ describe("realm transition lifecycle", () => {
       ).toEqual([102, 103, 104]);
       expect([...server.getSessions()][0]?.transitioning).toBe(false);
     } finally {
-      server.destroy();
+      await server.destroy();
     }
   });
 
@@ -882,7 +865,7 @@ describe("realm transition lifecycle", () => {
         await server.loadWorld(target.id);
         expect(session.realmId).toBe(target.id);
       } finally {
-        server.destroy();
+        await server.destroy();
       }
     },
   );
@@ -915,7 +898,7 @@ describe("in-game world map", () => {
       expect(session.player.position).toEqual({ wx: 1600, wy: -3200 });
       expect(session.gameplaySession.gemsCollected).toBe(7);
     } finally {
-      server.destroy();
+      await server.destroy();
     }
   });
   it("returns live same-world players beyond the camera range and drops dormant/other-world players", async () => {
@@ -958,7 +941,7 @@ describe("in-game world map", () => {
       await vi.waitFor(() => expect(transport.messagesOfType("one", "world-map")).toHaveLength(3));
       expect(transport.messagesOfType("one", "world-map").at(-1)?.players).toHaveLength(1);
     } finally {
-      server.destroy();
+      await server.destroy();
     }
   });
 
@@ -976,7 +959,7 @@ describe("in-game world map", () => {
       });
       expect(transport.messagesOfType("visitor", "world-map")).toHaveLength(0);
     } finally {
-      server.destroy();
+      await server.destroy();
     }
   });
 });
@@ -1041,7 +1024,7 @@ it("remote administration requires authorization while ordinary chat and realm b
     await new Promise((resolve) => setTimeout(resolve, 0));
     expect(await registry.getWorld(created.id)).toBeUndefined();
   } finally {
-    server.destroy();
+    await server.destroy();
   }
 });
 
@@ -1094,7 +1077,7 @@ describe("durable player location", () => {
     session.gameplaySession.gemsCollected = 17;
     await setup.server.flushAsync();
     await setup.registry.createWorld("Someone else's latest world", "flat");
-    setup.server.destroy();
+    await setup.server.destroy();
     for (const clientId of ["local", "new-tab"]) {
       const transport = new TestTransport();
       const server = new GameServer(transport, {
@@ -1118,7 +1101,7 @@ describe("durable player location", () => {
         expect(restored?.player.position).toEqual({ wx: 80, wy: 108 });
         expect(restored?.gameplaySession.gemsCollected).toBe(17);
       } finally {
-        server.destroy();
+        await server.destroy();
       }
     }
   });
@@ -1145,7 +1128,7 @@ describe("durable player location", () => {
       expect(setup.server.worldInterior).not.toBeNull();
     } finally {
       write.mockRestore();
-      setup.server.destroy();
+      await setup.server.destroy();
     }
   });
 
@@ -1172,7 +1155,7 @@ describe("durable player location", () => {
           { collection: "meta", key: "state", value: { ...meta, roomPlan: { version: 99 } } },
         ]);
       }
-      setup.server.destroy();
+      await setup.server.destroy();
       const transport = new TestTransport();
       const server = new GameServer(transport, {
         registry: setup.registry,
@@ -1186,7 +1169,7 @@ describe("durable player location", () => {
         expect(server.getLocalSession().realmId).toBe(setup.meta.id);
         expect(server.getLocalSession().player.position).toEqual(setup.door);
       } finally {
-        server.destroy();
+        await server.destroy();
       }
     },
   );
@@ -1240,7 +1223,7 @@ describe("durable player location", () => {
         release();
         write.mockRestore();
         await setup.server.settle();
-        setup.server.destroy();
+        await setup.server.destroy();
       }
     },
   );
@@ -1270,7 +1253,7 @@ describe("durable player location", () => {
       expect(setup.server.entityManager.entities).toContain(original.player);
     } finally {
       save.mockRestore();
-      setup.server.destroy();
+      await setup.server.destroy();
     }
   });
 
@@ -1334,7 +1317,7 @@ describe("durable player location", () => {
       expect(setup.server.getLocalSession().player.position).toEqual({ wx: 80, wy: 100 });
       expect(setup.server.worldInterior?.featureId).toBe(setup.featureId);
     } finally {
-      setup.server.destroy();
+      await setup.server.destroy();
     }
   });
 });
@@ -1396,7 +1379,7 @@ it("replicates model changes to peers and keeps them across realm travel while r
     expect(session.player.sprite?.sheetKey).toBe("player");
     expect(session.player.collider).toEqual(collider);
   } finally {
-    server.destroy();
+    await server.destroy();
   }
 });
 
@@ -1495,7 +1478,7 @@ for (const building of ["butcher", "condo-bay"])
       await server.settle();
       expect(local.player.position).toEqual(opposite.arrival);
       await server.flushAsync();
-      server.destroy();
+      await server.destroy();
       const resumedTransport = new TestTransport();
       const resumed = new GameServer(resumedTransport, {
         registry: setup.registry,
@@ -1508,10 +1491,10 @@ for (const building of ["butcher", "condo-bay"])
         expect(resumed.worldInterior).toEqual(interior);
         expect(resumed.getLocalSession().player.position).toEqual(opposite.arrival);
       } finally {
-        resumed.destroy();
+        await resumed.destroy();
       }
     } finally {
-      server.destroy();
+      await server.destroy();
     }
   });
 
@@ -1573,6 +1556,6 @@ it("keeps saved city room geometry and furniture while admitting the second exte
       server.propManager.props.filter((p) => p.type.startsWith("prop-interior-furniture:")),
     ).toHaveLength(3);
   } finally {
-    server.destroy();
+    await server.destroy();
   }
 });

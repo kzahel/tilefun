@@ -53,7 +53,8 @@ export class PlayerLocationStore {
     return write;
   }
 
-  close(): void {
-    void this.writes.catch(() => {}).then(() => this.store.close());
+  async close(): Promise<void> {
+    await this.writes.catch(() => {});
+    await this.store.close();
   }
 }

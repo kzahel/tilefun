@@ -6,6 +6,7 @@ import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
 import type { GameServer } from "./server/GameServer.js";
+import { browserServerDependencies } from "./server/hosts/browser.js";
 import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "./shared/storageKeys.js";
 import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
@@ -281,7 +282,7 @@ async function start() {
     const peerId = await peerHost.ready();
     console.log(`[tilefun] Hosting P2P game. Peer ID: ${peerId}`);
     const { GameServer } = await import("./server/GameServer.js");
-    server = new GameServer(peerHost.serverSide);
+    server = new GameServer(peerHost.serverSide, browserServerDependencies());
     client = new GameClient(canvas, peerHost.clientSide, null, {
       mode: "serialized",
       profile,

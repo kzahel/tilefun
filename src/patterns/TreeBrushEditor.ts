@@ -70,7 +70,7 @@ export class TreeBrushEditor {
             );
       }
     }
-    for (const p of old.props) this.props.remove(p.id, false);
+    for (const p of old.props) this.props.remove(p.id);
     for (const p of replacements) this.props.add(p);
     this.markDirty();
   }

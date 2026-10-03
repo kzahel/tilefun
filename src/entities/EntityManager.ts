@@ -28,6 +28,8 @@ import { onWanderBlocked } from "./wanderAI.js";
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
+  onSpawn?: (entity: Entity) => void;
+  onDespawn?: (entity: Entity, destroyed: boolean) => void;
   onRemove?: (entity: Entity) => void;
   readonly entities: Entity[] = [];
   readonly spatialHash = new SpatialHash();
@@ -52,6 +54,7 @@ export class EntityManager {
     entity.id = this.nextId++;
     this.entities.push(entity);
     this.spatialHash.insert(entity);
+    this.onSpawn?.(entity);
     return entity;
   }
 
@@ -384,6 +387,7 @@ export class EntityManager {
     const entity = this.entities[idx];
     if (entity) {
       this.spatialHash.remove(entity);
+      this.onDespawn?.(entity, persist);
       if (persist) this.onRemove?.(entity);
     }
     this.entities.splice(idx, 1);

@@ -19,6 +19,7 @@ export interface PropCollider {
  * Sprite field names match Entity so props can be Y-sort-merged with entities for drawing.
  */
 export interface Prop {
+  persistentId?: string;
   id: number;
   proceduralId?: string;
   type: string;

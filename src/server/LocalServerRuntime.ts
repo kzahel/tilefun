@@ -5,6 +5,7 @@ import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
+import { browserServerDependencies } from "./hosts/browser.js";
 
 export interface LocalAuthority {
   init(): Promise<void>;
@@ -12,7 +13,7 @@ export interface LocalAuthority {
   stopLoop(): void;
   settle(): Promise<void>;
   flushAsync(): Promise<void>;
-  destroy(): void;
+  destroy(): void | Promise<void>;
   completedTicks: number;
   onLoopError: ((error: unknown) => void) | undefined;
 }
@@ -35,7 +36,7 @@ export class LocalServerRuntime {
     post: (message: ChannelEnvelope<LocalHostPacket>, transfer: ArrayBuffer[]) => void,
     private readonly fatal: (error: unknown) => void,
     create: (transport: IServerTransport) => LocalAuthority = (transport) =>
-      new GameServer(transport),
+      new GameServer(transport, browserServerDependencies()),
   ) {
     this.channel = new OrderedWorkerChannel(post);
     const send = (_id: string, message: ServerMessage) => {
@@ -134,14 +135,13 @@ export class LocalServerRuntime {
         this.state = "stopping";
         this.server.stopLoop();
         clearInterval(this.saveTimer);
-        void this.flush().then(
-          () => {
-            this.server.destroy();
+        void this.flush()
+          .then(async () => {
+            await this.server.destroy();
             this.state = "stopped";
             this.channel.send({ type: "result", id: packet.id });
-          },
-          (error) => this.fail(error),
-        );
+          })
+          .catch((error) => this.fail(error));
         break;
       case "diagnostics": {
         const diagnostics: LocalHostDiagnostics = {

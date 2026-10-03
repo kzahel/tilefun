@@ -61,6 +61,21 @@ export class FsPersistenceStore implements PersistenceStore {
     return result;
   }
 
+  async scan(
+    collection: string,
+    scope: string | undefined,
+    after?: string,
+    limit = 256,
+  ): Promise<Map<string, unknown>> {
+    if (scope !== undefined) throw new Error("Legacy file store has no spatial index.");
+    return new Map(
+      [...(await this.getAll(collection))]
+        .filter(([key]) => after === undefined || key > after)
+        .sort(([a], [b]) => (a < b ? -1 : 1))
+        .slice(0, limit),
+    );
+  }
+
   async save(entries: SaveEntry[]): Promise<void> {
     // Write each entry atomically: write to .tmp, then rename
     const writes = entries.map(async (entry) => {

@@ -3,6 +3,8 @@ export interface SaveEntry {
   collection: string;
   key: string;
   value: unknown;
+  scope?: string;
+  deleted?: boolean;
 }
 
 /**
@@ -13,13 +15,21 @@ export interface SaveEntry {
  */
 export interface PersistenceStore {
   open(): Promise<void>;
-  close(): void;
+  close(): void | Promise<void>;
 
   /** Get a single value by collection and key. Returns undefined if not found. */
   get(collection: string, key: string): Promise<unknown>;
 
   /** Get all entries in a collection as a map of key → value. */
   getAll(collection: string): Promise<Map<string, unknown>>;
+
+  /** Bounded spatial page, ordered by record key. */
+  scan(
+    collection: string,
+    scope: string | undefined,
+    after?: string,
+    limit?: number,
+  ): Promise<Map<string, unknown>>;
 
   /** Atomically write a batch of entries across any collections. */
   save(entries: SaveEntry[]): Promise<void>;

@@ -196,13 +196,18 @@ test("Play here creates at the preview location and saved inspection includes a 
     .poll(async () =>
       page.evaluate(async (id) => {
         const db = await new Promise<IDBDatabase>((r) => {
-          const req = indexedDB.open(`tilefun-world-${id}`);
+          const req = indexedDB.open(`tilefun-world-${id}-records-v2`);
           req.onsuccess = () => r(req.result);
         });
         try {
           return await new Promise<string[]>((r) => {
-            const req = db.transaction("meta").objectStore("meta").get("state");
-            req.onsuccess = () => r(req.result?.deletedProceduralIds ?? []);
+            const req = db.transaction("records").objectStore("records").getAll();
+            req.onsuccess = () =>
+              r(
+                req.result
+                  .filter((v) => v.collection === "features" && v.value.deleted)
+                  .map((v) => v.value.id),
+              );
           });
         } finally {
           db.close();

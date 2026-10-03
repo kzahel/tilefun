@@ -1,11 +1,4 @@
-import {
-  applyMigrations,
-  CURRENT_SAVE_VERSION,
-  FORMAT_VERSION_KEY,
-  type FormatVersionRecord,
-  MIGRATIONS,
-} from "./migrations.js";
-import type { PersistenceStore } from "./PersistenceStore.js";
+import type { PersistenceStore, SaveEntry } from "./PersistenceStore.js";
 
 const STORE_CHUNKS = "chunks";
 const STORE_META = "meta";
@@ -30,8 +23,8 @@ export interface SavedMeta {
   cameraX: number;
   cameraY: number;
   cameraZoom: number;
-  entities: SerializedEntity[];
-  nextEntityId: number;
+  entities?: SerializedEntity[];
+  nextEntityId?: number;
   /** Total gems collected (absent in older saves → defaults to 0). */
   gemsCollected?: number;
 }
@@ -58,16 +51,18 @@ type GetMetaFn = () => SavedMeta;
 
 export class SaveManager {
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
+  private dirtyRecords = new Map<string, () => SaveEntry>();
   private dirtyChunks = new Set<string>();
   private dirtyPlayers = new Map<string, SavedPlayerData>();
   private metaDirty = false;
   private saving = false;
   private pending: Promise<void> = Promise.resolve();
   private saveFailed = false;
+  private saveError: unknown;
   private getChunk: GetChunkFn | null = null;
   private getMeta: GetMetaFn | null = null;
 
-  constructor(private readonly store: PersistenceStore) {}
+  constructor(readonly store: PersistenceStore) {}
 
   /** Bind the data accessors once so scheduleSave/flush can use them. */
   bind(getChunk: GetChunkFn, getMeta: GetMetaFn): void {
@@ -77,14 +72,30 @@ export class SaveManager {
 
   async open(): Promise<void> {
     await this.store.open();
-    await this.runMigrations();
-    await this.store.save([
-      {
-        collection: STORE_META,
-        key: FORMAT_VERSION_KEY,
-        value: { version: CURRENT_SAVE_VERSION } satisfies FormatVersionRecord,
-      },
-    ]);
+    const version = (await this.store.get("meta", "__format")) as { version: number } | undefined;
+    if (version && version.version !== 2)
+      throw new Error(
+        "This world uses an incompatible save format. Create a new world or explicitly delete the old one.",
+      );
+    await this.store.save([{ collection: "meta", key: "__format", value: { version: 2 } }]);
+  }
+
+  markRecordDirty(collection: string, key: string, snapshot: () => SaveEntry): void {
+    this.dirtyRecords.set(JSON.stringify([collection, key]), snapshot);
+    this.scheduleSave();
+  }
+
+  async loadRecords(collection: string, scope?: string): Promise<Map<string, unknown>> {
+    const result = new Map<string, unknown>();
+    let after: string | undefined;
+    for (;;) {
+      const page = await this.store.scan(collection, scope, after);
+      for (const [key, value] of page) {
+        result.set(key, value);
+        after = key;
+      }
+      if (page.size < 256) return result;
+    }
   }
 
   async loadChunks(): Promise<
@@ -137,12 +148,17 @@ export class SaveManager {
 
   /** Returns true if there are pending dirty items. */
   get hasDirty(): boolean {
-    return this.dirtyChunks.size > 0 || this.dirtyPlayers.size > 0 || this.metaDirty;
+    return (
+      this.dirtyRecords.size > 0 ||
+      this.dirtyChunks.size > 0 ||
+      this.dirtyPlayers.size > 0 ||
+      this.metaDirty
+    );
   }
 
   /** Schedule a debounced save. */
   private scheduleSave(): void {
-    if (this.saveTimer !== null) clearTimeout(this.saveTimer);
+    if (this.saveTimer !== null) return;
     this.saveTimer = setTimeout(() => {
       this.saveTimer = null;
       this.doSave();
@@ -164,11 +180,12 @@ export class SaveManager {
   async flushAsync(): Promise<void> {
     this.flush();
     await this.pending;
-    if (this.saveFailed) throw new Error("Could not save world state.");
+    if (this.saveFailed) throw new Error("Could not save world state.", { cause: this.saveError });
     while (this.hasDirty) {
       this.flush();
       await this.pending;
-      if (this.saveFailed) throw new Error("Could not save world state.");
+      if (this.saveFailed)
+        throw new Error("Could not save world state.", { cause: this.saveError });
     }
   }
 
@@ -181,6 +198,8 @@ export class SaveManager {
     if (!this.hasDirty) return;
 
     this.saving = true;
+    const recordEntries = this.dirtyRecords;
+    this.dirtyRecords = new Map();
     const chunkKeys = [...this.dirtyChunks];
     this.dirtyChunks.clear();
     const playerEntries = new Map(this.dirtyPlayers);
@@ -188,7 +207,7 @@ export class SaveManager {
     const saveMeta = this.metaDirty;
     this.metaDirty = false;
 
-    const entries: { collection: string; key: string; value: unknown }[] = [];
+    const entries: SaveEntry[] = [...recordEntries.values()].map((snapshot) => snapshot());
 
     for (const key of chunkKeys) {
       const data = this.getChunk(key);
@@ -227,9 +246,12 @@ export class SaveManager {
           this.onChunksSaved(chunkKeys, this.getChunk);
         }
       },
-      () => {
+      (error) => {
         this.saving = false;
+        this.saveError = error;
         this.saveFailed = true;
+        for (const [key, snapshot] of recordEntries)
+          if (!this.dirtyRecords.has(key)) this.dirtyRecords.set(key, snapshot);
         // Re-mark as dirty so next save attempt includes them
         for (const key of chunkKeys) this.dirtyChunks.add(key);
         for (const [id, data] of playerEntries) {
@@ -240,59 +262,18 @@ export class SaveManager {
     );
   }
 
-  private async runMigrations(): Promise<void> {
-    const raw = await this.store.get(STORE_META, FORMAT_VERSION_KEY);
-    const record = raw as FormatVersionRecord | undefined;
-    const version = record?.version ?? 1;
-
-    if (version > CURRENT_SAVE_VERSION) {
-      console.warn(
-        `[tilefun] Save format v${version} is newer than app v${CURRENT_SAVE_VERSION}. ` +
-          "Data may have been saved by a newer version.",
-      );
-      return;
-    }
-    if (version >= CURRENT_SAVE_VERSION) return;
-
-    console.log(
-      `[tilefun] Save format v${version} → v${CURRENT_SAVE_VERSION}, running migrations...`,
-    );
-
-    const rawMeta =
-      ((await this.store.get(STORE_META, "state")) as Record<string, unknown>) ?? null;
-    const rawChunks = (await this.store.getAll(STORE_CHUNKS)) as Map<
-      string,
-      Record<string, unknown>
-    >;
-    const result = applyMigrations(version, rawMeta, rawChunks, MIGRATIONS, CURRENT_SAVE_VERSION);
-
-    const entries: { collection: string; key: string; value: unknown }[] = [];
-    for (const [key, data] of result.chunks) {
-      entries.push({ collection: STORE_CHUNKS, key, value: data });
-    }
-    if (result.meta) {
-      entries.push({ collection: STORE_META, key: "state", value: result.meta });
-    }
-    entries.push({
-      collection: STORE_META,
-      key: FORMAT_VERSION_KEY,
-      value: { version: result.version } satisfies FormatVersionRecord,
-    });
-    await this.store.save(entries);
-
-    console.log(`[tilefun] Migrations complete. Save format is now v${CURRENT_SAVE_VERSION}.`);
-  }
-
   async clear(): Promise<void> {
     await this.store.clear();
   }
 
-  close(): void {
+  async close(): Promise<void> {
+    await this.flushAsync();
     if (this.saveTimer !== null) {
       clearTimeout(this.saveTimer);
       this.saveTimer = null;
     }
-    this.store.close();
+    await this.store.close();
+    this.dirtyRecords.clear();
     this.dirtyChunks.clear();
     this.dirtyPlayers.clear();
     this.metaDirty = false;
