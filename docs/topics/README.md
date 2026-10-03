@@ -23,6 +23,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Performance](performance.md) | Worker authority, traversal readiness, phone evidence and bounded terrain preparation |
+| [Entity activation](entity-activation.md) | AI tick tiers, NPC/placed-entity unloading, inactive simulation costs and technical-debt backlog |
 | [Patterns and interiors](patterns-and-interiors.md) | Shared semantic drawing, saved room edits, furniture and pending kit/import work |
 
 For proposed work without an active implementation, start with

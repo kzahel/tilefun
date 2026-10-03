@@ -71,6 +71,9 @@ choices remain open.
 
 ## Engine, hosting and distribution
 
+- [Entity activation, AI and unloading](topics/entity-activation.md): known
+  technical debt around distant simulation, placed-entity residency and physics
+  passes that bypass AI tick tiers; measurement and improvement backlog.
 - [Engine capability map](ENGINE-ARCHITECTURE-CHECKLIST.md): current foundations
   and remaining infrastructure candidates, with the original checklist archived.
 - Better multiplayer reconnect UX;

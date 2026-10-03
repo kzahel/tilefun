@@ -71,6 +71,12 @@ upload costs or device-specific problems.
 
 ## Next work
 
+[Entity activation, AI and unloading](entity-activation.md) owns the separate
+simulation-debt backlog: tick tiers do not eliminate all distant-entity work,
+and placed entities remain resident after terrain unloads. Its source audit
+does not establish the cause of observed frame hitches; measure dense local
+scenes and distant populations separately before selecting fixes.
+
 The grass-fix follow-up captured a 60-second Pixel 7a traversal with no visible
 terrain gaps and two missed frames: one overlapping a 33 ms main-thread GC,
 another overlapping about 20 ms of GPU-process work with no main-thread GC.
