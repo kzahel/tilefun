@@ -1,4 +1,4 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { SavedPlayerData } from "../persistence/SaveManager.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -67,6 +67,13 @@ export class RealmTransitions {
         session.inputQueue = [];
         if (position) {
           session.player.position = position;
+          // Explicit travel leaves any saved moving-roof support behind.
+          session.player.wz =
+            target.world.getHeightAt(
+              Math.floor(position.wx / TILE_SIZE),
+              Math.floor(position.wy / TILE_SIZE),
+            ) * ELEVATION_PX;
+          session.player.groundZ = session.player.wz;
           session.cameraX = position.wx;
           session.cameraY = position.wy;
           session.gameplaySession.lastSafePosition = position;

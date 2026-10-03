@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "traffic",
+      "name": "Traffic playground",
+      "description": "Gentle traffic on generated roads. Test stopping, roof riding, turns and jumping off.",
+      "url": "workshop.html#/tool/traffic",
+      "mode": "source"
+    },
+    {
       "id": "vehicles",
       "name": "Vehicles",
       "description": "Review cars, buses and service trucks in four directions. Adjust ground bounds, physical height and placement; walk around each proposal.",
@@ -24994,5 +25001,5 @@
       }
     }
   ],
-  "inputDigest": "ad219773dd02fbc961e294ae82b9f52c5eece8ecd399abcfbff7e9fca1142e16"
+  "inputDigest": "2725a027f5e8535aaea0aa0133368f82ff75323048a76dcfa99ac78b5a5df8d5"
 }

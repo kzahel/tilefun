@@ -1,7 +1,7 @@
-# Vehicles: approved geometry and planned traffic
+# Vehicles: generated traffic and roof riding
 
 Topic: vehicles
-Status: All 180 vehicle views and geometry approved; generated-road traffic and roof riding planned, not implemented.
+Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in selectable regional-v11.
 Updated: 2026-10-03.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
@@ -28,7 +28,7 @@ a player keeps the vehicle active across streaming and intercity boundaries.
 
 The first playable milestone combines neighborhood traffic with this complete
 roof-riding interaction. The next review is of behavior scenes and tuning, not
-another per-view approval round. Implementation awaits a separate request.
+another per-view approval round. The user requested implementation on 2026-10-03.
 
 ## Reviewing
 
@@ -38,7 +38,7 @@ anchor and sorting line. One grid cell is 16 world pixels. The ground box has
 editable X, Y, width and depth; physical height is a separate value above the
 road. Anchor and depth sorting are in the expandable controls. These are
 hand-selected family proposals; the saved approved snapshots include any human
-edits and remain separate from committed gameplay defaults until promotion.
+edits; the exact approved set is now pinned in the separate vehicles-v1 gameplay bank.
 
 The walker uses the production prop renderer and collision implementation.
 Use arrows/WASD on the focused scene or the on-screen direction buttons to test
@@ -113,5 +113,50 @@ the generated-road traffic/roof-riding scope above. No additional approval click
 are needed for unchanged snapshots. Roof support areas and turning behavior are
 new implementation concerns, not evidence that the approved bounds need re-review.
 
-Next, when implementation is requested: follow Tactical 017, beginning with exact
-snapshot promotion and a generated-neighborhood traffic/roof-riding demonstration.
+## Runtime contract
+
+- Choose **Gentle traffic & roof rides (v11)** for a new world, or open the
+  [Traffic playground](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/traffic).
+  The playground uses the gameplay controller, generated terrain, props, renderer
+  and shared player physics. Stand ahead, jump toward the stopped car, ride and
+  jump off; a bus shares the wide avenue. Preview speed/gap sliders do not save
+  world settings. Keyboard and touch controls are provided.
+- `vehicles-v1` pins all 180 exact human-approved snapshots, including saved
+  geometry, candidate/metadata fingerprints and decision provenance. Its 45 native
+  four-view sheets are padded to a common ground-center reference. Builds only
+  verify pixels/geometry against the source; they never regenerate this bank.
+  Compact/sedan/police east/west source labels face opposite their headlights:
+  runtime direction selects the opposite approved side frame, without mirroring.
+  The raised ladder pose remains available art but is excluded from traffic.
+  The folded ladder truck is admitted only where the onward street widths fit;
+  it cannot circulate in the tested city network.
+- `regional-v11` adds traffic to the frozen v5 dense-neighborhood terrain contract.
+  It does not change v4's default, v1–v10 saves, parked props or other promotion
+  banks. Semantic city street and regional corridor plans generate right-hand
+  lanes, split junctions and width-limited turns. Painted asphalt creates no lanes.
+- Realm owns movement at 36 world pixels/second (24 through turns), gradual
+  acceleration/braking, footprint sweeps and exclusive junction reservations with
+  clear exits. Cars stop for road-level players, animals, props, edited or unloaded
+  road and other cars. Nearby spatial queries bound obstacle work. Blocked turns
+  can choose another clear legal exit; otherwise cars wait safely.
+- Roofs use a conservative direction-independent standing area inside every
+  approved directional footprint. Shared server/prediction physics carries the
+  rider, permits relative walking, and inherits full vehicle velocity on a jump.
+  A nearby-vehicle hop assist makes approved roofs reachable with Space; ordinary
+  jumps elsewhere retain their settings. Height checks keep a low airborne player
+  blocking the car until their feet clear its body. Roof passengers never mount,
+  steer or suppress normal obstacle braking. Rendering sorts riders over bodies.
+- Traffic is capped at 12 vehicles per player and 32 per realm. Spawn checks exclude
+  every visible camera range and nearby players. Vehicles farther than 2,200px
+  from all players retire only offscreen, with a 30-second repopulation cooldown.
+  Network caching is bounded. Nearby passengers request a three-chunk halo even
+  with the camera elsewhere; this preserves support across corridor boundaries.
+- Saves retain bounded vehicle identity, route/path progress and next turn. Reload
+  rebuilds reservations and resumes from rest; roof riders restore by vehicle
+  identity and relative position. Disconnect removes the passenger without
+  removing the car. Invalid saved route records are discarded safely.
+
+The implementation and validation record is in [Tactical 017](../tactical/017-generated-road-traffic-and-roof-riding.md).
+Next: playtest the Traffic playground and a v11 world for density, turning poses,
+roof size and jump feel. Parking, destinations, boarding and player driving remain
+separate work; no new art/behavior approval has been inferred from implementation.

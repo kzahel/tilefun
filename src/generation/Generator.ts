@@ -1,4 +1,5 @@
 import type { RouteWaypoint } from "../entities/Entity.js";
+import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { FlatStrategy } from "./FlatStrategy.js";
 import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
@@ -53,6 +54,9 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
       const world = regionalWorld(descriptor.seed);
       let terrain: RegionalStrategy;
       switch (descriptor.version) {
+        case "regional-v11":
+          terrain = new TrafficStrategy(world);
+          break;
         case "regional-v1":
           terrain = new RegionalStrategy(world);
           break;

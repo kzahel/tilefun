@@ -3,6 +3,8 @@ import type { AABB } from "../entities/collision.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { ColliderComponent } from "../entities/Entity.js";
 import type { PropCollider } from "../entities/Prop.js";
+import { vehicleRoofBounds } from "../traffic/RoofSupport.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 
 /**
  * Terrain surface height at a world-pixel point, in world pixels.
@@ -207,6 +209,8 @@ export function applyGroundTracking(
 
 /** Minimal entity shape for surface queries. Works with both Entity and EntitySnapshot. */
 export interface EntitySurface {
+  type?: string;
+  velocity?: { vx: number; vy: number } | null;
   id: number;
   position: { wx: number; wy: number };
   collider: ColliderComponent | null;
@@ -300,7 +304,12 @@ export function getHighestWalkableEntitySurfaceZ(
     const topZ = eWz + physH;
     // Only land on surfaces we were at or above before gravity (descended through)
     if (prevWz !== undefined && topZ > prevWz) continue;
-    if (aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))) {
+    if (
+      aabbsOverlap(
+        aabb,
+        isVehicle(e) ? vehicleRoofBounds(e) : getEntityAABB(e.position, e.collider),
+      )
+    ) {
       if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
     }
   }
@@ -327,7 +336,12 @@ export function getWalkableEntitySurfaceZ(
     const topZ = eWz + physH;
     if (entityWz + STEP_UP_THRESHOLD < topZ) continue; // too far below
     if (entityWz > topZ + STEP_UP_THRESHOLD) continue; // too far above
-    if (aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))) {
+    if (
+      aabbsOverlap(
+        aabb,
+        isVehicle(e) ? vehicleRoofBounds(e) : getEntityAABB(e.position, e.collider),
+      )
+    ) {
       if (maxZ === undefined || topZ > maxZ) maxZ = topZ;
     }
   }

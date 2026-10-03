@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "traffic",
+    name: "Traffic playground",
+    description:
+      "Gentle traffic on generated roads. Test stopping, roof riding, turns and jumping off.",
+    url: "workshop.html#/tool/traffic",
+    mode: "source",
+  },
+  {
     id: "vehicles",
     name: "Vehicles",
     description:

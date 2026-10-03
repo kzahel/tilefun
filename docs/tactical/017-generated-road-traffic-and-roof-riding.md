@@ -1,8 +1,7 @@
 # Generated-road traffic and roof riding
 
-Status: agreed plan, 2026-10-03; implementation has not started.
-This is a parent sequencing plan. Recording it does not authorize starting
-gameplay implementation. [Vehicles](../topics/vehicles.md) owns continuing status
+Status: implemented, 2026-10-03, following the user’s explicit implementation request.
+The agreed scope below is preserved; the delivery record follows it. [Vehicles](../topics/vehicles.md) owns continuing status
 and approval checkpoints; the [source audit](../research/road-vehicles.md) owns
 sprite provenance.
 
@@ -159,4 +158,71 @@ scenarios and full Chromium visual checks. Run typechecks, unit tests, lint,
 production build and browser suite; regenerate art catalog/Workshop manifest
 when their render inputs change. Run `npm run streaming:bench -- --assert-ready`
 for the execution/residency work and measure traffic with and without passengers.
-Record results here when delivered; no gameplay acceptance evidence exists yet.
+Record results here when delivered.
+
+
+## Delivery record (2026-10-03)
+
+Delivered `regional-v11`, the immutable `vehicles-v1` sprite/geometry bank,
+server-owned traffic and the Workshop Traffic playground. All 44 driving poses
+are prepared; spawning admits only models with a usable onward route. The folded
+ladder truck cannot traverse the narrower onward streets in the tested city
+network, so it stays out of that traffic population. Raised ladder equipment is excluded.
+The [vehicles topic](../topics/vehicles.md#runtime-contract) owns runtime limits,
+controls, persistence and tuning. Existing generation output/defaults are intact.
+
+Implementation findings:
+
+- Native side-frame labels on compact cars/sedans/police were reversed relative
+  to visible headlights. Mapping travel facing to the exact opposite approved
+  side fixes this without pixel or geometry changes.
+- Normal jump apex was below the approved 24px compact roof. A local vehicle hop
+  assist solves reachability without lowering human-approved physical heights.
+- Corridor/city plan seams created tiny fake junctions. Merging collinear
+  degree-two seams preserves continuous intercity routes. Turns retain node
+  reservations until the entire vehicle clears them.
+- Conservative shared roof bounds maintain support when a four-view sprite and
+  ground footprint change direction. Full support velocity is inherited on jump;
+  these feel/geometry choices are ready for human motion review.
+
+Focused evidence covers stopping before a child, low airborne obstruction,
+normal jumping onto a stopped car, acceleration/turning on a roof, jumping off,
+competing cars/buses at junctions without overlapping, edited/unloaded roads,
+replica snapshot/delta geometry, matching two-client prediction and saved route
+restoration. A real Realm test carries a rider, flushes/reloads the world,
+restores the same vehicle/support offset and disconnects the passenger safely.
+A generated neighborhood sweep confirms circulation and roof continuity for all
+43 road-compatible models, including buses and garbage/fire trucks.
+A generated-terrain journey advances 50,000 fixed steps across a highway and
+back into city streets (11 turns, 18,625px displacement), keeping roof height
+24 throughout and loaded chunks below 150. An additional ten-minute generated
+city traversal completed 25 turns with stable support.
+
+Browser checks exercise the actual stop → jump → land → drive → jump interaction,
+phone controls/layout and v11 world creation/reload through the single-player
+Worker. Desktop and phone playground screenshots were inspected. No test wrote
+human approvals. The bank verifier confirms all 180 approved native crops and
+metadata hashes.
+
+Streaming readiness passed for regional-v4, v10 and v11 using isolated bundled
+Chromium. Walking, sprinting and reversal had no missing terrain or incomplete
+visible cache frames. Detailed [local streaming report](/tmp/tilefun-traffic-streaming/report.json).
+This is desktop evidence, not a phone performance claim. A separate two-minute
+simulation measurement (generation/rendering excluded) recorded p95 physics and
+traffic steps of 0.033ms roadside with 3 cars and 0.123ms riding with 12 cars;
+peak loaded chunk counts were 81 and 130. These are different populations, not
+an isolated estimate of passenger overhead.
+
+Final validation used an export of the staged traffic changes, keeping concurrent
+Character Lab work outside the commit. All three typechecks, 1,261 unit tests,
+lint (existing warnings only) and production build pass. The full browser run
+passed 270 checks with one existing skip; its standalone check reached an orphan
+server from an earlier run and passed on an isolated rerun after that server was
+removed (271 passing browser checks total). The final v11 streaming rerun after
+route-width admission changes again passed readiness with no missing/incomplete
+visible frames during walking, sprinting or reversal. Art inventory and Workshop
+manifest were rebuilt; all 507 prior candidate records/fingerprints are identical.
+
+Next human check:
+play the Traffic playground and a v11 world, particularly bus turns, roof walking
+and jump feel. The default world revision remains v4.

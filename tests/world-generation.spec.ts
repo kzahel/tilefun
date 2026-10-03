@@ -22,6 +22,7 @@ test("new worlds default to procedural regional v4 and clearly label older choic
     "Flat (legacy)",
   ]);
   await expect(revision.locator("option")).toHaveText([
+    "Gentle traffic & roof rides (v11)",
     "Dense districts (v4)",
     "Connected entrances (v5, review)",
     "City destinations (v10, review)",

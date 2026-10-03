@@ -54,10 +54,12 @@ export function* overviewSteps(
               ? new CityPlacesSource(regionalWorld(descriptor.seed), 7)
               : descriptor.version === "regional-v6"
                 ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
-                : descriptor.version === "regional-v4" || descriptor.version === "regional-v5"
+                : descriptor.version === "regional-v4" ||
+                    descriptor.version === "regional-v5" ||
+                    descriptor.version === "regional-v11"
                   ? new DenseDistrictSource(
                       regionalWorld(descriptor.seed),
-                      descriptor.version === "regional-v5",
+                      descriptor.version !== "regional-v4",
                     )
                   : new DistrictSource(
                       regionalWorld(descriptor.seed),

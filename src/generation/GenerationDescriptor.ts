@@ -28,12 +28,14 @@ export type GenerationDescriptor =
         | "regional-v7"
         | "regional-v8"
         | "regional-v9"
-        | "regional-v10";
+        | "regional-v10"
+        | "regional-v11";
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
 
 export const REGIONAL_REVISIONS = [
+  { version: "regional-v11", label: "Gentle traffic & roof rides (v11)" },
   { version: "regional-v4", label: "Dense districts (v4)" },
   { version: "regional-v5", label: "Connected entrances (v5, review)" },
   { version: "regional-v10", label: "City destinations (v10, review)" },

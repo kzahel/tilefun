@@ -1,6 +1,6 @@
 # Asset Sources
 
-All sprites by Cup Nooble (Sprout Lands asset pack).
+Base player and animal sprites by Cup Nooble (Sprout Lands asset pack).
 
 Additional interior art from LimeZu Modern Interiors. Credit required:
 https://limezu.itch.io/moderninteriors
@@ -33,3 +33,14 @@ pack versions have different dimensions and tile arrangements.
 ## Backup files
 
 `*.bak` files are the original basic pack versions before swapping in Maaack equivalents.
+
+## Vehicles (`vehicles/`)
+
+LimeZu Modern Exteriors vehicle art, copied from the committed
+`tilesets/me-complete.png` source. Credit: https://limezu.itch.io/modernexteriors
+
+`*-v1.png` preserves the 180 approved native crops across 45 four-direction
+sets, padded to a common ground reference without scaling or mirroring.
+`src/traffic/vehicles-v1.json` records source hash, exact rectangles, approved
+geometry and approval fingerprints. See `docs/research/road-vehicles.md` for the
+source audit. Builds verify this immutable bank; they do not regenerate it.

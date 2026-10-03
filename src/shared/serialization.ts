@@ -3,6 +3,7 @@ import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { getWallsForPropType } from "../entities/PropFactories.js";
+import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { ChunkSnapshot, EntitySnapshot, PropSnapshot } from "./protocol.js";
 
@@ -132,6 +133,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.parentId !== undefined) result.parentId = s.parentId;
   if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
   if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
+  applyVehicleFacing(result);
   return result;
 }
 

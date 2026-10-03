@@ -11,6 +11,10 @@ contracts; [Tactical 007](../tactical/007-dense-city-districts-and-street-life-p
 is the parent city milestone plan. Consult the live Workshop inbox for decisions
 made after these recorded checkpoints.
 
+Selectable regional-v11 adds [gentle traffic and roof riding](vehicles.md) using
+v5's frozen dense-neighborhood terrain and a separate approved vehicle bank.
+It does not promote the v7–v10 city candidates or change the default revision.
+
 ## Review checkpoints and frozen output
 
 ### Street palette and road foundations

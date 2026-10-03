@@ -71,6 +71,9 @@ import { createMovementContext, createSurfaceSampler } from "../physics/Simulati
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
+import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
+import { TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -122,6 +125,7 @@ export class Realm {
   /** Tracks processed road intersections/segments for structure generation. */
   private processedStructureKeys = new Set<string>();
   private proceduralActors!: ProceduralActors;
+  traffic: TrafficSystem | null = null;
   private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */
@@ -187,6 +191,15 @@ export class Realm {
     this.world = new World();
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.traffic =
+      this.generator?.terrain instanceof TrafficStrategy
+        ? new TrafficSystem(
+            this.world,
+            this.entityManager,
+            this.propManager,
+            this.generator.terrain,
+          )
+        : null;
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -242,6 +255,26 @@ export class Realm {
 
     const player = createPlayer(spawnX, spawnY);
     this.entityManager.spawn(player);
+    const ride = saved?.roofRide;
+    if (
+      ride &&
+      this.traffic &&
+      Number.isFinite(ride.offsetX) &&
+      Number.isFinite(ride.offsetY) &&
+      Math.hypot(ride.offsetX, ride.offsetY) < 40
+    ) {
+      const vehicle = [...this.traffic.states.values()].find(
+        (s) => s.entity.proceduralId === ride.identity,
+      )?.entity;
+      if (vehicle?.collider) {
+        player.position = {
+          wx: vehicle.position.wx + ride.offsetX,
+          wy: vehicle.position.wy + ride.offsetY,
+        };
+        player.wz = vehicle.collider.physicalHeight ?? 0;
+        player.groundZ = player.wz;
+      }
+    }
 
     session.player = player;
     session.gameplaySession = {
@@ -338,7 +371,20 @@ export class Realm {
   }
 
   playerData(session: PlayerSession): SavedPlayerData {
+    const support = roofSupport(session.player, this.entityManager.entities);
+    const identity = support
+      ? this.entityManager.entities.find((e) => e.id === support.id)?.proceduralId
+      : undefined;
     return {
+      ...(support && identity
+        ? {
+            roofRide: {
+              identity,
+              offsetX: session.player.position.wx - support.position.wx,
+              offsetY: session.player.position.wy - support.position.wy,
+            },
+          }
+        : {}),
       ...(this.interior ? { returnLocation: session.returnLocation } : {}),
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
@@ -394,10 +440,10 @@ export class Realm {
         const getRoadAt = (tx: number, ty: number) => this.world.getRoadAt(tx, ty);
         const queryProps = (aabb: { left: number; top: number; right: number; bottom: number }) =>
           this.propManager.getPropsInChunkRange(
-            Math.floor(aabb.left / CHUNK_SIZE_PX),
-            Math.floor(aabb.top / CHUNK_SIZE_PX),
-            Math.floor(aabb.right / CHUNK_SIZE_PX),
-            Math.floor(aabb.bottom / CHUNK_SIZE_PX),
+            Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
+            Math.floor(aabb.top / CHUNK_SIZE_PX) - 1,
+            Math.floor(aabb.right / CHUNK_SIZE_PX) + 1,
+            Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
           );
         const queryEntities = (aabb: {
           left: number;
@@ -406,10 +452,10 @@ export class Realm {
           bottom: number;
         }) =>
           this.entityManager.spatialHash.queryRange(
-            Math.floor(aabb.left / CHUNK_SIZE_PX),
-            Math.floor(aabb.top / CHUNK_SIZE_PX),
-            Math.floor(aabb.right / CHUNK_SIZE_PX),
-            Math.floor(aabb.bottom / CHUNK_SIZE_PX),
+            Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
+            Math.floor(aabb.top / CHUNK_SIZE_PX) - 1,
+            Math.floor(aabb.right / CHUNK_SIZE_PX) + 1,
+            Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
           );
         const sampleSurfaces = createSurfaceSampler({ queryProps, queryEntities });
 
@@ -584,6 +630,16 @@ export class Realm {
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
 
+        for (const vehicle of this.traffic?.states.values() ?? [])
+          preSteppedEntityIds.add(vehicle.entity.id);
+        for (const player of players) {
+          if (preSteppedEntityIds.has(player.id)) continue;
+          const support = roofSupport(player, this.entityManager.entities);
+          if (support?.velocity) {
+            player.position.wx += support.velocity.vx * stepDt;
+            player.position.wy += support.velocity.vy * stepDt;
+          }
+        }
         this.entityManager.update(
           stepDt,
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
@@ -593,6 +649,8 @@ export class Realm {
           (tx, ty) => this.world.getHeightAt(tx, ty),
           preSteppedEntityIds,
         );
+
+        this.traffic?.tick(stepDt, players);
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {
@@ -674,6 +732,7 @@ export class Realm {
             "regional-v8",
             "regional-v9",
             "regional-v10",
+            "regional-v11",
           ].includes(this.generation.version))
       )
         continue;
@@ -738,6 +797,12 @@ export class Realm {
         maxCx: Math.ceil(((this.roomState?.document.width ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
         maxCy: Math.ceil(((this.roomState?.document.height ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
       };
+    if (this.traffic) {
+      this.traffic.visibleRanges = Array.isArray(range) ? range : [range as ChunkRange];
+      const support = this.traffic.supportRanges([...this.sessions.values()].map((s) => s.player));
+      if (support.length)
+        range = [...(Array.isArray(range) ? range : [range as ChunkRange]), ...support];
+    }
     const initialWarmLoad = this.world.chunks.loadedCount === 0;
     const maxLoads =
       this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
@@ -793,6 +858,7 @@ export class Realm {
   inspectionState(): SavedMeta {
     return {
       ...this.proceduralProps.save(),
+      ...(this.traffic ? { traffic: this.traffic.save() } : {}),
       playerX: 0,
       playerY: 0,
       cameraX: 0,
@@ -1051,6 +1117,15 @@ export class Realm {
     this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
+    this.traffic =
+      this.generator?.terrain instanceof TrafficStrategy
+        ? new TrafficSystem(
+            this.world,
+            this.entityManager,
+            this.propManager,
+            this.generator.terrain,
+          )
+        : null;
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -1115,6 +1190,7 @@ export class Realm {
         }
       }
       this.entityManager.setNextId(savedMeta.nextEntityId);
+      if (Array.isArray(savedMeta.traffic)) this.traffic?.restore(savedMeta.traffic);
       this.lastLoadedGems = savedMeta.gemsCollected ?? 0;
     } else {
       this.lastLoadedGems = 0;
@@ -1144,6 +1220,7 @@ export class Realm {
             "regional-v8",
             "regional-v9",
             "regional-v10",
+            "regional-v11",
           ].includes(this.generation.version)
         )
       )
@@ -1468,6 +1545,7 @@ export class Realm {
 
     return {
       ...this.proceduralProps.save(),
+      ...(this.traffic ? { traffic: this.traffic.save() } : {}),
       ...(this.interior
         ? { interior: this.interior, ...(this.roomState ? { roomPlan: this.roomState } : {}) }
         : {}),

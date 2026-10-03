@@ -1,6 +1,7 @@
 # Road vehicles: source audit and proposed approach
 
-Checked 2026-10-03. Driving implementation has not started.
+Source audit checked 2026-10-03. Generated-road traffic is now delivered in
+regional-v11; the original source inventory remains unchanged.
 The gameplay proposal below is historical: the agreed scope and sequencing now
 live in [Tactical 017](../tactical/017-generated-road-traffic-and-roof-riding.md).
 All 180 views and their geometry are approved; generated-road traffic and roof

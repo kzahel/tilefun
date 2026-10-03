@@ -8,7 +8,7 @@
     "test:worker": "vitest run --config vitest.worker.config.ts",
     "check:worker": "npm run test:worker && npm --prefix worker run build:check",
     "dev": "vite",
-    "build": "tsx scripts/build-outdoor-catalog.ts --check && tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsx scripts/build-art-catalog.ts --check && tsx scripts/build-workshop-manifest.ts --check && tsc --noEmit && vite build",
+    "build": "node scripts/check-vehicle-bank.mjs && tsx scripts/build-outdoor-catalog.ts --check && tsx scripts/build-review-sprites.ts --check && tsx scripts/build-gameplay-furniture.ts --check && tsx scripts/build-art-catalog.ts --check && tsx scripts/build-workshop-manifest.ts --check && tsc --noEmit && vite build",
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",

@@ -19,6 +19,8 @@ import {
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
 import { getSurfaceProperties } from "./SurfaceFriction.js";
@@ -306,7 +308,40 @@ export function stepPlayerFromInput(
   physics: MovementPhysicsParams,
   substeps = 1,
 ): PlayerStepResult {
+  const initialSurfaces = sampleSurfaces(entity);
+  const support = ctx.noclip ? undefined : roofSupport(entity, initialSurfaces.entities);
+  const wasGrounded = entity.jumpVZ === undefined;
   let next = applyPlayerInputIntent(entity, input, dt, ctx, state, physics);
+  if (!ctx.noclip && !support && wasGrounded && entity.jumpVZ !== undefined) {
+    // Ordinary jumps peak below approved car roofs. Nearby vehicles provide a
+    // local hop assist; terrain/furniture jumps and approved geometry stay fixed.
+    const nearby = initialSurfaces.entities.filter(
+      (e) =>
+        isVehicle(e) &&
+        e.collider &&
+        Math.hypot(e.position.wx - entity.position.wx, e.position.wy - entity.position.wy) < 100,
+    );
+    const roof = Math.max(
+      0,
+      ...nearby.map((e) => (e.wz ?? 0) + (e.collider?.physicalHeight ?? 0) - (entity.wz ?? 0)),
+    );
+    if (roof > 0 && roof <= 64)
+      entity.jumpVZ = Math.max(
+        entity.jumpVZ,
+        Math.sqrt(2 * JUMP_GRAVITY * physics.gravityScale * (roof + 24)),
+      );
+  }
+  if (support?.velocity && entity.velocity) {
+    if (entity.jumpVZ !== undefined) {
+      entity.velocity.vx += support.velocity.vx;
+      entity.velocity.vy += support.velocity.vy;
+    } else {
+      const relative = entity.velocity;
+      entity.velocity = { ...support.velocity };
+      moveAndCollide(entity, dt, ctx);
+      entity.velocity = relative;
+    }
+  }
   const steps = Math.max(1, Math.floor(substeps));
   const stepDt = dt / steps;
   let landed = false;

@@ -226,6 +226,456 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:compact-1",
+      "name": "vehicle v1:compact 1",
+      "image": "assets/vehicles/compact-1-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "9526c6729f4c631cd86ba5f079b2813a8795510499f00517ad42bf33db11a1f3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:compact-2",
+      "name": "vehicle v1:compact 2",
+      "image": "assets/vehicles/compact-2-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "a9656875ae36035e5f74199049ac50f61aac1ade8d87f55fdcb109bac2e21cdc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:compact-3",
+      "name": "vehicle v1:compact 3",
+      "image": "assets/vehicles/compact-3-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e31bfc1e6871a0b792bbdabacd82a443d2f891719d259f7ce14213a1c4755279",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:compact-4",
+      "name": "vehicle v1:compact 4",
+      "image": "assets/vehicles/compact-4-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "508444e593f331257b86ab6ee089c69b00d9f855a475762f4ed2ae713c199ebf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:compact-5",
+      "name": "vehicle v1:compact 5",
+      "image": "assets/vehicles/compact-5-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "c7ad391f3f863dc83112d01a15834efc5ae3f383807240f04937423bd3d60fd5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:compact-6",
+      "name": "vehicle v1:compact 6",
+      "image": "assets/vehicles/compact-6-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e10ddf78674cf0816b7b7c094f6e6a1ee19d659bbb5e3f39506befa5b389e076",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-1",
+      "name": "vehicle v1:bus 1",
+      "image": "assets/vehicles/bus-1-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "de9b575f8ef243403071107110a71fc1950d3370475230be45b8db415af5bfbf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-2",
+      "name": "vehicle v1:bus 2",
+      "image": "assets/vehicles/bus-2-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "618f5e9479ade76e630e78994b7274640c5d5a58f957473a2fbbd88bb78e2384",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-3",
+      "name": "vehicle v1:bus 3",
+      "image": "assets/vehicles/bus-3-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "4dffb2ece1ac9fe8ae69d01851c525486825777bcc374ef1a4d99bb9bef042ff",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-4",
+      "name": "vehicle v1:bus 4",
+      "image": "assets/vehicles/bus-4-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "796b8a376fd06ca08382fa849e53e2c82dd02fb786a9eb2a4b9ebba9c0c8e53b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-5",
+      "name": "vehicle v1:bus 5",
+      "image": "assets/vehicles/bus-5-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "4273e798725e1ad88c1fcee766c4a32851e6ed3a720c1255dd1697cfd28ad9d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:bus-6",
+      "name": "vehicle v1:bus 6",
+      "image": "assets/vehicles/bus-6-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "fa9816c25e487a3167dde9426a6ac8592a11a537e1983d7e0ae40fdb7dd60b9a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:sedan-12",
+      "name": "vehicle v1:sedan 12",
+      "image": "assets/vehicles/sedan-12-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "0a81e9e21dd6bce633196aa8fb8fa7eddc183efcb8b12af055a44cab65a00056",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-7",
+      "name": "vehicle v1:car 7",
+      "image": "assets/vehicles/car-7-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "22ee3c648b87dcd1d3f43c61fd056235b6ab8ecb7657a32963fe080acdf1a459",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-8",
+      "name": "vehicle v1:car 8",
+      "image": "assets/vehicles/car-8-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e7208da322ede6784bb7f7684c9c734db15318d87dd5bf2fb4036b9d23e4f4d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-9",
+      "name": "vehicle v1:car 9",
+      "image": "assets/vehicles/car-9-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e06bae74194b032bae33e42a17f9577ba44b4138dfd1ebfc6c47109af8ead3c3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-10",
+      "name": "vehicle v1:car 10",
+      "image": "assets/vehicles/car-10-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "062503e6d72bd92e01025d50034016b4bb789d71609df37ba614550628e3d9b5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-11",
+      "name": "vehicle v1:car 11",
+      "image": "assets/vehicles/car-11-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "f73e60eac7c5b16af8c74077efce2dcec5f81fe527240382ec5ce9d2a6318831",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-13",
+      "name": "vehicle v1:car 13",
+      "image": "assets/vehicles/car-13-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "0415d5fd633dbdbc822b701abc631fb33886689b6956ffaf16256214913e28e1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-14",
+      "name": "vehicle v1:car 14",
+      "image": "assets/vehicles/car-14-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "90d5956feb6a874dfa72418b77fc52df4a618b113d60d720dfa45edd2f29aaed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-15",
+      "name": "vehicle v1:car 15",
+      "image": "assets/vehicles/car-15-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2cd3282b235dc3ecf33c400a58776d98d0f88c29940e81b25a7236f72ae0797d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-16",
+      "name": "vehicle v1:car 16",
+      "image": "assets/vehicles/car-16-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "934e0e7e0ae4ca8e089f6d7b5e0943f15073f24dbd447e6ea17a262eb0751d7d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-17",
+      "name": "vehicle v1:car 17",
+      "image": "assets/vehicles/car-17-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "25d9f339dae585d751de820a847e93c0b88bcce91b2c8b107c168d38ec847ce0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-18",
+      "name": "vehicle v1:car 18",
+      "image": "assets/vehicles/car-18-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "c16f49fb5c019be19327a5770dc4dc38dce28c93485d281f10f87e4f9ac1f3b2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-19",
+      "name": "vehicle v1:car 19",
+      "image": "assets/vehicles/car-19-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "de95773597ce23c0509bd32644e182ec1933a6863fab77e322ef6018f522ec36",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-20",
+      "name": "vehicle v1:car 20",
+      "image": "assets/vehicles/car-20-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "5540f718f3fb108ff6174ff6fcc620493f2dcc417d96fbb9401c46a30c1bbe7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-21",
+      "name": "vehicle v1:car 21",
+      "image": "assets/vehicles/car-21-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "dcb74bafd0680b74ae414af517d20455fb3e5c45b6c8dc8d79edc86ffecfeb52",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-22",
+      "name": "vehicle v1:car 22",
+      "image": "assets/vehicles/car-22-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "461fa76eee61a979673a282ab7a81bb5b308e75d356138142b493a1dd723f941",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-23",
+      "name": "vehicle v1:car 23",
+      "image": "assets/vehicles/car-23-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "527303d3ae03efa443da8f4c33ccb1ca5a1c8af376b498074ef2d34ca3bb8f17",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-24",
+      "name": "vehicle v1:car 24",
+      "image": "assets/vehicles/car-24-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "347d6b8a0250461e7ea22d9927bb1679fa9381f7db78f9596cac4b8588bc6376",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-25",
+      "name": "vehicle v1:car 25",
+      "image": "assets/vehicles/car-25-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "4bc49ff176ef8e033f2dc387e24f858367b2df0950740ddb7f848b55a285837b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:car-26",
+      "name": "vehicle v1:car 26",
+      "image": "assets/vehicles/car-26-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "dc2b98b8e56f4f15fab4b9ea8d31b7195e4b538ddc44eb00abad8cb3ef49ae39",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-red",
+      "name": "vehicle v1:unindexed sedan red",
+      "image": "assets/vehicles/unindexed-sedan-red-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "55076d503b01f94e5c8421cfc790f9dd3be20d3032d073d2e82c80607b710421",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-beige",
+      "name": "vehicle v1:unindexed sedan beige",
+      "image": "assets/vehicles/unindexed-sedan-beige-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "8065efa5c9d07e42d13d8fb6d642d4ee6026d4e3fe3979158f9883a51bbc87ce",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-cyan",
+      "name": "vehicle v1:unindexed sedan cyan",
+      "image": "assets/vehicles/unindexed-sedan-cyan-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "e3feafa19a8b6c91bcd79641038762a315b18360479d2891f9320e354116e369",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-orange",
+      "name": "vehicle v1:unindexed sedan orange",
+      "image": "assets/vehicles/unindexed-sedan-orange-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "ff196907f6745f4d7ad813d3ce7967c2dc4ea0c163e05c09ccd9bfe0e9ea8744",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-silver",
+      "name": "vehicle v1:unindexed sedan silver",
+      "image": "assets/vehicles/unindexed-sedan-silver-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "15728983d0accd96d5cf232d01566ca501e4116e8fca56ee34eb66cb00596eb4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-olive",
+      "name": "vehicle v1:unindexed sedan olive",
+      "image": "assets/vehicles/unindexed-sedan-olive-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "3cc059480413c35914a7ae4fae3b8d7ad851f73003165107d882c7c60a66faea",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:unindexed-sedan-dark",
+      "name": "vehicle v1:unindexed sedan dark",
+      "image": "assets/vehicles/unindexed-sedan-dark-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "aee0b55be1f03067dcb9a4ebfb47c925ae093561653c667f88d54a9e07597fe2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:police-car",
+      "name": "vehicle v1:police car",
+      "image": "assets/vehicles/police-car-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "0bf270f6c545e449194a3b89d40e8ae243db0ac485055262ce33b44b69c274f1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:ambulance",
+      "name": "vehicle v1:ambulance",
+      "image": "assets/vehicles/ambulance-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "af20319d0148c3a0cb466fb7352acfb6fe3bd1343d1ffbfaf59a20b4076f1469",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:garbage-truck-green",
+      "name": "vehicle v1:garbage truck green",
+      "image": "assets/vehicles/garbage-truck-green-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "d04ef32af3f6642f00d824985a82878a2be3dc50fdbef0987d70a69aa52f6bcd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:garbage-truck-orange",
+      "name": "vehicle v1:garbage truck orange",
+      "image": "assets/vehicles/garbage-truck-orange-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "30abda02349c9137810915477288fcec84fb93bcf54691e64217a09c364348ab",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:fire-truck-ladder-1",
+      "name": "vehicle v1:fire truck ladder 1",
+      "image": "assets/vehicles/fire-truck-ladder-1-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "f1982c2098a522d3b3b454cc7ef1407fbc86c4078125dde91a657a642d706d76",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:fire-truck-ladder-2",
+      "name": "vehicle v1:fire truck ladder 2",
+      "image": "assets/vehicles/fire-truck-ladder-2-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "422fdf68b4838bd631d0b861a04739f338a2251536be92c18b622be209e0812e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "player",
       "name": "player",
       "image": "assets/sprites/player.png",
@@ -1553,7 +2003,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:52"
+          "source": "src/assets/GameAssets.ts:59"
         },
         {
           "system": "Gameplay",
@@ -1599,7 +2049,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:53"
+          "source": "src/assets/GameAssets.ts:60"
         },
         {
           "system": "Gameplay",
@@ -1641,7 +2091,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:54"
+          "source": "src/assets/GameAssets.ts:61"
         },
         {
           "system": "Gameplay",
@@ -1671,7 +2121,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:55"
+          "source": "src/assets/GameAssets.ts:62"
         },
         {
           "system": "Gameplay",
@@ -1701,7 +2151,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:56"
+          "source": "src/assets/GameAssets.ts:63"
         },
         {
           "system": "Gameplay",
@@ -1731,7 +2181,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:57"
+          "source": "src/assets/GameAssets.ts:64"
         },
         {
           "system": "Gameplay",
@@ -1813,7 +2263,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:58"
+          "source": "src/assets/GameAssets.ts:65"
         },
         {
           "system": "Gameplay",
@@ -1843,7 +2293,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:59"
+          "source": "src/assets/GameAssets.ts:66"
         },
         {
           "system": "Gameplay",
@@ -1889,7 +2339,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:60"
+          "source": "src/assets/GameAssets.ts:67"
         },
         {
           "system": "Gameplay",
@@ -1923,7 +2373,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:62"
+          "source": "src/assets/GameAssets.ts:69"
         },
         {
           "system": "Gameplay",
@@ -1953,7 +2403,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:63"
+          "source": "src/assets/GameAssets.ts:70"
         },
         {
           "system": "Gameplay",
@@ -1987,7 +2437,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:64"
+          "source": "src/assets/GameAssets.ts:71"
         },
         {
           "system": "Gameplay",
@@ -2021,7 +2471,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:65"
+          "source": "src/assets/GameAssets.ts:72"
         },
         {
           "system": "Gameplay",
@@ -2051,7 +2501,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:66"
+          "source": "src/assets/GameAssets.ts:73"
         },
         {
           "system": "Gameplay",
@@ -2085,7 +2535,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:67"
+          "source": "src/assets/GameAssets.ts:74"
         },
         {
           "system": "Gameplay",
@@ -2115,7 +2565,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:68"
+          "source": "src/assets/GameAssets.ts:75"
         },
         {
           "system": "Gameplay",
@@ -2145,7 +2595,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:69"
+          "source": "src/assets/GameAssets.ts:76"
         },
         {
           "system": "Gameplay",
@@ -2175,7 +2625,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:70"
+          "source": "src/assets/GameAssets.ts:77"
         },
         {
           "system": "Gameplay",
@@ -2205,7 +2655,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:71"
+          "source": "src/assets/GameAssets.ts:78"
         },
         {
           "system": "Gameplay",
@@ -18740,6 +19190,820 @@
       ]
     },
     {
+      "id": "sprite:vehicle-v1:compact-1",
+      "sheetId": "vehicle-v1:compact-1",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-1 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:compact-2",
+      "sheetId": "vehicle-v1:compact-2",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-2 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:compact-3",
+      "sheetId": "vehicle-v1:compact-3",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-3 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:compact-4",
+      "sheetId": "vehicle-v1:compact-4",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-4 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:compact-5",
+      "sheetId": "vehicle-v1:compact-5",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-5 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:compact-6",
+      "sheetId": "vehicle-v1:compact-6",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:compact-6 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-1",
+      "sheetId": "vehicle-v1:bus-1",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-1 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-2",
+      "sheetId": "vehicle-v1:bus-2",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-2 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-3",
+      "sheetId": "vehicle-v1:bus-3",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-3 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-4",
+      "sheetId": "vehicle-v1:bus-4",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-4 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-5",
+      "sheetId": "vehicle-v1:bus-5",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-5 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:bus-6",
+      "sheetId": "vehicle-v1:bus-6",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bus-6 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:sedan-12",
+      "sheetId": "vehicle-v1:sedan-12",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:sedan-12 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-7",
+      "sheetId": "vehicle-v1:car-7",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-7 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-8",
+      "sheetId": "vehicle-v1:car-8",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-8 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-9",
+      "sheetId": "vehicle-v1:car-9",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-9 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-10",
+      "sheetId": "vehicle-v1:car-10",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-10 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-11",
+      "sheetId": "vehicle-v1:car-11",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-11 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-13",
+      "sheetId": "vehicle-v1:car-13",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-13 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-14",
+      "sheetId": "vehicle-v1:car-14",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-14 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-15",
+      "sheetId": "vehicle-v1:car-15",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-15 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-16",
+      "sheetId": "vehicle-v1:car-16",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-16 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-17",
+      "sheetId": "vehicle-v1:car-17",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-17 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-18",
+      "sheetId": "vehicle-v1:car-18",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-18 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-19",
+      "sheetId": "vehicle-v1:car-19",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-19 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-20",
+      "sheetId": "vehicle-v1:car-20",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-20 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-21",
+      "sheetId": "vehicle-v1:car-21",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-21 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-22",
+      "sheetId": "vehicle-v1:car-22",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-22 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-23",
+      "sheetId": "vehicle-v1:car-23",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-23 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-24",
+      "sheetId": "vehicle-v1:car-24",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-24 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-25",
+      "sheetId": "vehicle-v1:car-25",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-25 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:car-26",
+      "sheetId": "vehicle-v1:car-26",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:car-26 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-red",
+      "sheetId": "vehicle-v1:unindexed-sedan-red",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-red · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-beige",
+      "sheetId": "vehicle-v1:unindexed-sedan-beige",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-beige · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-cyan",
+      "sheetId": "vehicle-v1:unindexed-sedan-cyan",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-cyan · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-orange",
+      "sheetId": "vehicle-v1:unindexed-sedan-orange",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-orange · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-silver",
+      "sheetId": "vehicle-v1:unindexed-sedan-silver",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-silver · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-olive",
+      "sheetId": "vehicle-v1:unindexed-sedan-olive",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-olive · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:unindexed-sedan-dark",
+      "sheetId": "vehicle-v1:unindexed-sedan-dark",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:unindexed-sedan-dark · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:police-car",
+      "sheetId": "vehicle-v1:police-car",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:police-car · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/Vehicle.ts:48"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:ambulance",
+      "sheetId": "vehicle-v1:ambulance",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:ambulance · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:garbage-truck-green",
+      "sheetId": "vehicle-v1:garbage-truck-green",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:garbage-truck-green · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:garbage-truck-orange",
+      "sheetId": "vehicle-v1:garbage-truck-orange",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:garbage-truck-orange · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:fire-truck-ladder-1",
+      "sheetId": "vehicle-v1:fire-truck-ladder-1",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:fire-truck-ladder-1 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:fire-truck-ladder-2",
+      "sheetId": "vehicle-v1:fire-truck-ladder-2",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:fire-truck-ladder-2 · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:player",
       "sheetId": "player",
       "rect": [
@@ -18757,7 +20021,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:17"
+          "source": "src/assets/GameAssets.ts:24"
         },
         {
           "system": "Gameplay",
@@ -18793,7 +20057,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:139"
+          "source": "src/entities/EntityDefs.ts:141"
         },
         {
           "system": "Gameplay",
@@ -18821,11 +20085,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:804"
+          "source": "src/server/Realm.ts:870"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1107"
+          "source": "src/server/Realm.ts:1182"
         }
       ]
     },
@@ -18847,7 +20111,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:23"
+          "source": "src/assets/GameAssets.ts:30"
         },
         {
           "system": "Gameplay",
@@ -18871,7 +20135,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:179"
+          "source": "src/entities/EntityDefs.ts:181"
         },
         {
           "system": "World generation",
@@ -18905,7 +20169,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:28"
+          "source": "src/assets/GameAssets.ts:35"
         },
         {
           "system": "Gameplay",
@@ -18925,7 +20189,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:208"
+          "source": "src/entities/EntityDefs.ts:210"
         },
         {
           "system": "World generation",
@@ -18951,7 +20215,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:29"
+          "source": "src/assets/GameAssets.ts:36"
         },
         {
           "system": "Editor",
@@ -18959,7 +20223,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:238"
+          "source": "src/entities/EntityDefs.ts:240"
         },
         {
           "system": "Gameplay",
@@ -18989,7 +20253,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:30"
+          "source": "src/assets/GameAssets.ts:37"
         },
         {
           "system": "Editor",
@@ -18997,7 +20261,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:263"
+          "source": "src/entities/EntityDefs.ts:265"
         },
         {
           "system": "Gameplay",
@@ -19027,7 +20291,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:31"
+          "source": "src/assets/GameAssets.ts:38"
         },
         {
           "system": "Editor",
@@ -19035,7 +20299,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:288"
+          "source": "src/entities/EntityDefs.ts:290"
         },
         {
           "system": "Gameplay",
@@ -19069,7 +20333,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:32"
+          "source": "src/assets/GameAssets.ts:39"
         },
         {
           "system": "Editor",
@@ -19077,7 +20341,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:310"
+          "source": "src/entities/EntityDefs.ts:312"
         },
         {
           "system": "Gameplay",
@@ -19111,7 +20375,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:33"
+          "source": "src/assets/GameAssets.ts:40"
         },
         {
           "system": "Editor",
@@ -19119,7 +20383,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:332"
+          "source": "src/entities/EntityDefs.ts:334"
         },
         {
           "system": "Gameplay",
@@ -19153,7 +20417,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:34"
+          "source": "src/assets/GameAssets.ts:41"
         },
         {
           "system": "Gameplay",
@@ -19177,7 +20441,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:354"
+          "source": "src/entities/EntityDefs.ts:356"
         },
         {
           "system": "Gameplay",
@@ -19207,7 +20471,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:35"
+          "source": "src/assets/GameAssets.ts:42"
         },
         {
           "system": "Editor",
@@ -19223,11 +20487,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:451"
+          "source": "src/entities/EntityDefs.ts:453"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:453"
+          "source": "src/entities/EntityDefs.ts:455"
         },
         {
           "system": "Gameplay",
@@ -19253,7 +20517,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:36"
+          "source": "src/assets/GameAssets.ts:43"
         },
         {
           "system": "Editor",
@@ -19269,7 +20533,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:466"
+          "source": "src/entities/EntityDefs.ts:468"
         },
         {
           "system": "World generation",
@@ -19295,7 +20559,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:37"
+          "source": "src/assets/GameAssets.ts:44"
         },
         {
           "system": "Editor",
@@ -19303,7 +20567,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:491"
+          "source": "src/entities/EntityDefs.ts:493"
         },
         {
           "system": "Gameplay",
@@ -19333,7 +20597,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:38"
+          "source": "src/assets/GameAssets.ts:45"
         },
         {
           "system": "Editor",
@@ -19363,7 +20627,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:39"
+          "source": "src/assets/GameAssets.ts:46"
         },
         {
           "system": "Editor",
@@ -19393,7 +20657,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:40"
+          "source": "src/assets/GameAssets.ts:47"
         },
         {
           "system": "Editor",
@@ -19423,7 +20687,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:41"
+          "source": "src/assets/GameAssets.ts:48"
         },
         {
           "system": "Editor",
@@ -19453,7 +20717,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:42"
+          "source": "src/assets/GameAssets.ts:49"
         },
         {
           "system": "Gameplay",
@@ -19465,7 +20729,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:159"
+          "source": "src/entities/EntityDefs.ts:161"
         },
         {
           "system": "Gameplay",
@@ -19499,7 +20763,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:43"
+          "source": "src/assets/GameAssets.ts:50"
         },
         {
           "system": "Editor",
@@ -19507,11 +20771,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:392"
+          "source": "src/entities/EntityDefs.ts:394"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:394"
+          "source": "src/entities/EntityDefs.ts:396"
         },
         {
           "system": "Gameplay",
@@ -19549,7 +20813,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:44"
+          "source": "src/assets/GameAssets.ts:51"
         },
         {
           "system": "Editor",
@@ -19565,11 +20829,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:421"
+          "source": "src/entities/EntityDefs.ts:423"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:423"
+          "source": "src/entities/EntityDefs.ts:425"
         },
         {
           "system": "Gameplay",
@@ -19971,7 +21235,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:52"
+          "source": "src/assets/GameAssets.ts:59"
         },
         {
           "system": "Gameplay",
@@ -20021,7 +21285,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:53"
+          "source": "src/assets/GameAssets.ts:60"
         },
         {
           "system": "Gameplay",
@@ -20067,7 +21331,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:54"
+          "source": "src/assets/GameAssets.ts:61"
         },
         {
           "system": "Gameplay",
@@ -20101,7 +21365,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:55"
+          "source": "src/assets/GameAssets.ts:62"
         },
         {
           "system": "Gameplay",
@@ -20135,7 +21399,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:56"
+          "source": "src/assets/GameAssets.ts:63"
         },
         {
           "system": "Gameplay",
@@ -20169,7 +21433,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:57"
+          "source": "src/assets/GameAssets.ts:64"
         },
         {
           "system": "Gameplay",
@@ -20255,7 +21519,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:58"
+          "source": "src/assets/GameAssets.ts:65"
         },
         {
           "system": "Gameplay",
@@ -20289,7 +21553,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:59"
+          "source": "src/assets/GameAssets.ts:66"
         },
         {
           "system": "Gameplay",
@@ -20339,7 +21603,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:60"
+          "source": "src/assets/GameAssets.ts:67"
         },
         {
           "system": "Gameplay",
@@ -20377,7 +21641,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:62"
+          "source": "src/assets/GameAssets.ts:69"
         },
         {
           "system": "Gameplay",
@@ -20411,7 +21675,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:63"
+          "source": "src/assets/GameAssets.ts:70"
         },
         {
           "system": "Gameplay",
@@ -20449,7 +21713,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:64"
+          "source": "src/assets/GameAssets.ts:71"
         },
         {
           "system": "Gameplay",
@@ -20487,7 +21751,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:65"
+          "source": "src/assets/GameAssets.ts:72"
         },
         {
           "system": "Gameplay",
@@ -20521,7 +21785,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:66"
+          "source": "src/assets/GameAssets.ts:73"
         },
         {
           "system": "Gameplay",
@@ -20559,7 +21823,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:67"
+          "source": "src/assets/GameAssets.ts:74"
         },
         {
           "system": "Gameplay",
@@ -20593,7 +21857,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:68"
+          "source": "src/assets/GameAssets.ts:75"
         },
         {
           "system": "Gameplay",
@@ -20627,7 +21891,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:69"
+          "source": "src/assets/GameAssets.ts:76"
         },
         {
           "system": "Gameplay",
@@ -20661,7 +21925,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:70"
+          "source": "src/assets/GameAssets.ts:77"
         },
         {
           "system": "Gameplay",
@@ -20695,7 +21959,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:71"
+          "source": "src/assets/GameAssets.ts:78"
         },
         {
           "system": "Gameplay",
@@ -20729,7 +21993,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:73"
+          "source": "src/assets/GameAssets.ts:80"
         },
         {
           "system": "Editor",

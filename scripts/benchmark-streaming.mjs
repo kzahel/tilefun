@@ -98,7 +98,8 @@ try {
     await page.goto(`${origin}/tools.html`);
     const arrival = await page.evaluate(async (version) => {
       const generation = { type: "regional", version, seed: 2026, preset: "temperate-v1" };
-      if (version === "regional-v4") return { x: 300, y: 519, generation };
+      if (version === "regional-v4" || version === "regional-v11")
+        return { x: 300, y: 519, generation };
       const { CityPlacesSource } = await import(
         "/tilefun/src/generation/regional/CityPlacesPlanner.ts"
       );

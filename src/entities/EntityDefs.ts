@@ -1,3 +1,4 @@
+import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
 // ---- Static definition types ----
@@ -134,6 +135,7 @@ function wormDef(n: number): EntityDef {
 // ---- ENTITY_DEFS registry ----
 
 export const ENTITY_DEFS: Record<string, EntityDef> = {
+  ...VEHICLE_DEFS,
   player: {
     sprite: {
       sheetKey: "player",

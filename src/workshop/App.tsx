@@ -27,6 +27,7 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
 const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
+const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
@@ -235,6 +236,7 @@ export function App() {
             [
               "patterns",
               "outdoor",
+              "traffic",
               "vehicles",
               "art",
               "buildings",
@@ -253,6 +255,7 @@ export function App() {
               {(["review", "adapter"].includes(tool.mode) || tool.id === "patterns") &&
               [
                 "patterns",
+                "traffic",
                 "vehicles",
                 "buildings",
                 "roads",
@@ -931,6 +934,7 @@ function ToolPage() {
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
   if (tool.id === "patterns") return <PatternPage />;
+  if (tool.id === "traffic") return <TrafficPage />;
   if (tool.id === "vehicles")
     return (
       <AuthGate>

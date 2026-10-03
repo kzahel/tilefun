@@ -20,6 +20,7 @@ export interface SerializedEntity {
 }
 
 export interface SavedMeta {
+  traffic?: import("../traffic/TrafficSystem.js").SavedTraffic[];
   roomPlan?: import("../interiors/GameplayRoom.js").GameplayRoomState;
   interior?: import("../interiors/GameplayInterior.js").InteriorIdentity;
   deletedProceduralIds?: string[];
@@ -36,6 +37,7 @@ export interface SavedMeta {
 }
 
 export interface SavedPlayerData {
+  roofRide?: { identity: string; offsetX: number; offsetY: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;
   x: number;

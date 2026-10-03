@@ -2,6 +2,7 @@ import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
@@ -74,7 +75,21 @@ export function collectScene(
   // Small margin for rendering effects not captured by sprite bounds
   const M = 16;
 
-  const depthSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
+  const propSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
+  const vehicleSurfaces = entities.flatMap((e) =>
+    isVehicle(e) && e.collider
+      ? [
+          {
+            bounds: getEntityAABB(e.position, e.collider),
+            topZ: (e.wz ?? 0) + (e.collider.physicalHeight ?? 0),
+            depth: e.position.wy + (e.sortOffsetY ?? 0),
+          },
+        ]
+      : [],
+  );
+  const depthSurfaces = vehicleSurfaces.length
+    ? [...propSurfaces, ...vehicleSurfaces]
+    : propSurfaces;
 
   // --- Entities ---
   for (const e of entities) {

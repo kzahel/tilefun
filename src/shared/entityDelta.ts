@@ -1,3 +1,4 @@
+import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
  * Entity delta compression — diff and apply functions for per-entity
  * incremental updates. Part of Protocol Phase 3 (entity delta compression).
@@ -216,6 +217,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
       }
     }
   }
+
+  applyVehicleFacing(entity);
 
   if (delta.wanderAIState !== undefined) {
     if (delta.wanderAIState === null) {
