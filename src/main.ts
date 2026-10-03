@@ -4,14 +4,14 @@ import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
 import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
-import { GameServer } from "./server/GameServer.js";
+import type { GameServer } from "./server/GameServer.js";
 import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "./shared/storageKeys.js";
 import { generateUUID } from "./shared/uuid.js";
 import { type PeerGuestStatus, PeerGuestTransport } from "./transport/PeerGuestTransport.js";
 import { PeerHostTransport } from "./transport/PeerHostTransport.js";
-import { SerializingTransport } from "./transport/SerializingTransport.js";
 import { WebRtcClientTransport } from "./transport/WebRtcClientTransport.js";
 import { WebSocketClientTransport } from "./transport/WebSocketClientTransport.js";
+import { WorkerClientTransport } from "./transport/WorkerClientTransport.js";
 import { HostingBanner } from "./ui/HostingBanner.js";
 import { ProfilePicker } from "./ui/ProfilePicker.js";
 
@@ -36,6 +36,7 @@ const joinPeerId = params.get("join");
 
 let client: GameClient;
 let server: GameServer | null = null;
+let localHost: WorkerClientTransport | null = null;
 let hostingBanner: HostingBanner | null = null;
 let roomDirectory: RoomDirectory | null = null;
 
@@ -189,6 +190,7 @@ function createConnectionOverlay(onCancel: () => void) {
 }
 
 async function start() {
+  await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
   const profileStore = new PlayerProfileStore();
   await profileStore.open();
@@ -276,6 +278,7 @@ async function start() {
     const peerHost = new PeerHostTransport(playerId);
     const peerId = await peerHost.ready();
     console.log(`[tilefun] Hosting P2P game. Peer ID: ${peerId}`);
+    const { GameServer } = await import("./server/GameServer.js");
     server = new GameServer(peerHost.serverSide);
     client = new GameClient(canvas, peerHost.clientSide, null, {
       mode: "serialized",
@@ -342,10 +345,15 @@ async function start() {
     (canvas as any).__game = client;
     await client.init();
   } else {
-    // Single-player mode: local server + SerializingTransport
-    const transport = new SerializingTransport();
-    server = new GameServer(transport.serverSide);
-    client = new GameClient(canvas, transport.clientSide, null, {
+    // Same authority and replicated client as remote play, on an independent thread.
+    const transport = new WorkerClientTransport(
+      new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
+      { metrics: performanceMetrics.enabled, onError: showErrorOverlay },
+    );
+    localHost = transport;
+    await transport.ready();
+    transport.connect({ profileId: profile.id, displayName: profile.name });
+    client = new GameClient(canvas, transport, null, {
       mode: "serialized",
       profile,
       profileStore,
@@ -354,11 +362,19 @@ async function start() {
     });
     // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
     (canvas as any).__game = client;
-    await server.init();
-    transport.triggerConnect();
     await client.init();
-    server.startLoop();
+    transport.start();
+    transport.setHidden(document.hidden);
+    document.addEventListener("visibilitychange", syncLocalVisibility);
+    window.addEventListener("pagehide", hideLocalHost);
   }
+}
+
+function syncLocalVisibility(): void {
+  localHost?.setHidden(document.hidden);
+}
+function hideLocalHost(): void {
+  localHost?.setHidden(true);
 }
 
 /** Show a full-screen error overlay with recovery options. */
@@ -458,7 +474,10 @@ window.addEventListener("beforeunload", () => {
 });
 
 if (import.meta.hot) {
-  import.meta.hot.dispose(() => {
+  import.meta.hot.dispose((data) => {
+    data.localShutdown = localHost?.shutdown();
+    document.removeEventListener("visibilitychange", syncLocalVisibility);
+    window.removeEventListener("pagehide", hideLocalHost);
     client?.saveHMRState();
     client?.destroy();
     server?.destroy();

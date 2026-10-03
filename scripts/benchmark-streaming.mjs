@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 
@@ -44,6 +45,9 @@ try {
   let origin = process.env.TILEFUN_DEV_URL;
   if (!origin) {
     server = await createServer({
+      configFile: false,
+      base: "/tilefun/",
+      plugins: [react()],
       server: { host: "127.0.0.1", port: 0, hmr: false },
       logLevel: "error",
     });

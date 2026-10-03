@@ -1204,11 +1204,13 @@ export class Realm {
   }
 
   async flushAsync(): Promise<void> {
+    for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
     await this.saveManager?.flushAsync();
   }
 
   flush(): void {
+    for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
     this.saveManager?.flush();
   }

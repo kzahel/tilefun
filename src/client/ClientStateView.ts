@@ -3,6 +3,7 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import {
+  getMovementPhysicsParams,
   setAccelerate,
   setAirAccelerate,
   setAirWishCap,
@@ -207,6 +208,10 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /** Server tick number from the latest game state. */
+  get physicsParameters() {
+    return getMovementPhysicsParams();
+  }
+
   get serverTick(): number {
     return this._serverTick;
   }
@@ -235,15 +240,23 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /** Apply any buffered messages. Call at the start of each client update tick. */
+  get pendingMessageCount(): number {
+    return this._pendingStates.length;
+  }
+
   applyPending(): void {
     this._stateAppliedThisTick = false;
     if (this._pendingStates.length === 0) return;
+    const until = performance.now() + 2;
+    let applied = 0;
     for (const msg of this._pendingStates) {
       const timing = performanceMetrics.start();
       this.applyMessage(msg);
       performanceMetrics.end("client.apply", timing);
+      applied++;
+      if (applied >= 64 || performance.now() >= until) break;
     }
-    this._pendingStates.length = 0;
+    this._pendingStates.splice(0, applied);
     this._stateAppliedThisTick = true;
   }
 

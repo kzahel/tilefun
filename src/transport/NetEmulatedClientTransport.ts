@@ -40,6 +40,16 @@ export class NetEmulatedClientTransport implements IClientTransport {
     });
   }
 
+  pump(): void {
+    if (!this.closed) this.base.pump?.();
+  }
+  getDiagnostics(): Promise<unknown> {
+    return this.base.getDiagnostics?.() ?? Promise.resolve(null);
+  }
+  resetDiagnostics(): Promise<void> {
+    return this.base.resetDiagnostics?.() ?? Promise.resolve();
+  }
+
   setConfig(config: Partial<NetEmulationConfig>): void {
     this.config = {
       ...this.config,

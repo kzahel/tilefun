@@ -221,3 +221,19 @@ slices. Record remaining hardware evidence and implementation decisions here.
   their displacement is a spawn transition, not walking throughput.
   Baseline validation: all three typechecks, 1,172 unit tests, production build,
   and 11 browser smoke tests passed. Rendered candidate identities were unchanged.
+
+- Worker authority implemented with the shared `GameServer` and `Realm`, an
+  ordered binary channel with one credited batch in flight per direction, bounded
+  receive/apply work, and replication backpressure. Inputs and deltas are never
+  dropped or reordered. Existing command admission already updates view interest
+  without a worldgen drain; no speculative view-message coalescer was needed.
+  Startup identity is supplied before player restore. Visibility pauses local
+  simulation; a five-second checkpoint prevents continuously debounced saves
+  from starving. Shutdown waits for admitted realm operations and durable saves.
+  HMR waits for the prior host's shutdown before starting a replacement.
+  Diagnostics distinguish main-thread and authority work and include queue bounds.
+  All typechecks, 1,182 unit tests and 22 focused browser checks passed, including
+  all generator reopen checks, interior movement/edit persistence, replicated
+  physics settings, and render progress during a 350 ms authority-thread stall.
+  The worker-only v10 traversal still showed unfinished caches, as expected;
+  cache scheduling remains the next independently measured slice.

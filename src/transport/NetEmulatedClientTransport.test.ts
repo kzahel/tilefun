@@ -152,3 +152,18 @@ it("forwards connection loss immediately, discards delayed traffic, and supports
     vi.useRealTimers();
   }
 });
+
+it("forwards a bounded Worker delivery pump through the wrapper", () => {
+  let pumped = 0;
+  const transport = new NetEmulatedClientTransport({
+    send: () => {},
+    onMessage: () => {},
+    close: () => {},
+    pump: () => pumped++,
+  });
+  transport.pump();
+  expect(pumped).toBe(1);
+  transport.close();
+  transport.pump();
+  expect(pumped).toBe(1);
+});

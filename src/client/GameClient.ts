@@ -402,6 +402,7 @@ export class GameClient {
         this.time.elapsed += dt;
         // Apply buffered server state at the start of each client tick so
         // entity position changes are synchronized with camera.savePrev/follow.
+        if (!this.remoteView?.pendingMessageCount) this.transport.pump?.();
         this.remoteView?.applyPending();
         this.editorModel.setIndoorContext(!!this.stateView.interior);
         // Sync tick rate from server — must happen after applyPending so the

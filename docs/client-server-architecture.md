@@ -5,13 +5,17 @@
 The sections below retain the original client/server extraction plan as historical
 context. The current implementation has these additional boundaries:
 
-- Ordinary single player uses `SerializingTransport` and a replicated client
-  view. Client and server still execute on the same browser main thread; binary
-  roundtrips are delivered synchronously. The shared-reference local mode below
-  is historical and does not describe the current default boot path.
-- A dedicated Worker host for the existing single-player server is proposed in
-  the [streaming performance plan](tactical/012-streaming-performance-and-local-server-worker.md).
-  This is an execution-boundary change, not a new authoritative implementation.
+- Ordinary single player runs the shared server in a dedicated browser Worker.
+  `WorkerClientTransport` carries ordered binary messages to the replicated
+  client; one bounded batch per direction stays in flight until consumed.
+  Main-thread decode/apply work is budgeted and server replication observes
+  backpressure. Shared-reference local mode below is historical.
+- `LocalServerRuntime` owns startup, visibility pause/resume, periodic saves and
+  acknowledged shutdown. HMR waits for shutdown before creating a replacement.
+  Single player keeps prediction and rendering on the browser main thread.
+  See the [streaming performance plan](tactical/012-streaming-performance-and-local-server-worker.md).
+  P2P hosting still runs its authority on the main thread; dedicated hosts reuse
+  the same GameServer and Realm implementation.
 - `GameServer` coordinates connections, world management, and active realms.
 - `RealmTransitions` owns one guarded transfer lifecycle for menu navigation and
   building doors. It prepares the destination and saves the source before

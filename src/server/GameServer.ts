@@ -66,6 +66,25 @@ export interface GameServerDeps {
 }
 
 export class GameServer {
+  completedTicks = 0;
+  onLoopError: ((error: unknown) => void) | undefined;
+  private readonly pendingOperations = new Set<Promise<unknown>>();
+
+  /** Track durable/realm operations without holding ordinary command admission. */
+  private trackOperation<T>(operation: Promise<T>): Promise<T> {
+    this.pendingOperations.add(operation);
+    void operation.then(
+      () => this.pendingOperations.delete(operation),
+      () => this.pendingOperations.delete(operation),
+    );
+    return operation;
+  }
+
+  /** Lifecycle fence only: ordinary input and interest never await this. */
+  async settle(): Promise<void> {
+    while (this.pendingOperations.size) await Promise.allSettled([...this.pendingOperations]);
+  }
+
   /** Player speed multiplier (set via sv_speed cvar). */
   speedMultiplier = 1;
   /** Server time scale (set via sv_timescale cvar). */
@@ -240,7 +259,7 @@ export class GameServer {
       this.handleMessage(clientId, msg);
     });
 
-    this.transport.onConnect((clientId) => {
+    this.transport.onConnect((clientId, identity) => {
       // Cancel any dormant cleanup timer for this clientId
       const dormantTimer = this.dormantSessions.get(clientId);
       if (dormantTimer) {
@@ -284,7 +303,8 @@ export class GameServer {
       const session = new PlayerSession(clientId);
       const num = this.nextPlayerNumber++;
       session.playerNumber = num;
-      session.displayName = `Player ${num}`;
+      session.displayName = identity?.displayName ?? `Player ${num}`;
+      if (identity) session.profileId = identity.profileId;
       session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
 
       // Add to global sessions map
@@ -293,7 +313,7 @@ export class GameServer {
       if (clientId === "local") {
         // Single-player: auto-join default realm immediately
         const realm = this.activeRealm;
-        realm.addPlayer(session).then(() => {
+        this.trackOperation(realm.addPlayer(session)).then(() => {
           console.log(
             `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
           );
@@ -316,7 +336,7 @@ export class GameServer {
         // Multiplayer: start in lobby, send realm list
         console.log(`[tilefun] client connected: ${clientId} as ${session.displayName} (lobby)`);
 
-        this.buildRealmList().then((realms) => {
+        this.trackOperation(this.buildRealmList()).then((realms) => {
           this.transport.send(clientId, { type: "realm-list", realms });
         });
       }
@@ -419,9 +439,13 @@ export class GameServer {
   startLoop(): void {
     if (this.loop) return;
     this.broadcasting = true;
-    this.loop = new ServerLoop((dt) => {
-      this.tick(dt);
-    });
+    this.loop = new ServerLoop(
+      (dt) => {
+        this.tick(dt);
+      },
+      this.tickRate,
+      (error) => this.onLoopError?.(error),
+    );
     this.loop.start();
   }
 
@@ -485,8 +509,14 @@ export class GameServer {
     const scaledDt = dt * this.timeScale;
     const dormantIds = new Set(this.dormantSessions.keys());
     for (const realm of this.realms.values()) {
-      realm.tick(scaledDt, this.transport, this.broadcasting, dormantIds);
+      realm.tick(
+        scaledDt,
+        this.transport,
+        this.broadcasting && (this.transport.canSend?.() ?? true),
+        dormantIds,
+      );
     }
+    this.completedTicks++;
     this.checkIdleRealms();
     performanceMetrics.end("server.tick", timing);
   }
@@ -683,7 +713,7 @@ export class GameServer {
     type: "world-loaded" | "realm-joined",
     operation: Promise<unknown>,
   ): void {
-    void operation
+    void this.trackOperation(operation)
       .then(() => {
         const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
         if (!realm) throw new Error("Destination realm unavailable.");
@@ -909,7 +939,7 @@ export class GameServer {
     // Global messages handled by GameServer
     switch (msg.type) {
       case "get-world-map":
-        void this.worldMap(session, msg.requestId)
+        void this.trackOperation(this.worldMap(session, msg.requestId))
           .then((map) => this.transport.send(clientId, map))
           .catch((error) =>
             this.transport.send(clientId, {
@@ -973,7 +1003,7 @@ export class GameServer {
         return;
 
       case "list-realms":
-        void this.buildRealmList().then((realms) =>
+        void this.trackOperation(this.buildRealmList()).then((realms) =>
           this.transport.send(clientId, {
             type: "realm-list",
             requestId: msg.requestId,
@@ -1007,7 +1037,7 @@ export class GameServer {
         return;
 
       case "create-world":
-        this.createWorld(msg.name, msg.worldType, msg.seed, msg.generation)
+        this.trackOperation(this.createWorld(msg.name, msg.worldType, msg.seed, msg.generation))
           .then((meta) => {
             this.transport.send(clientId, {
               type: "world-created",
@@ -1025,7 +1055,7 @@ export class GameServer {
         return;
 
       case "delete-world":
-        this.deleteWorld(msg.worldId)
+        this.trackOperation(this.deleteWorld(msg.worldId))
           .then(() => {
             this.transport.send(clientId, {
               type: "world-deleted",
@@ -1042,7 +1072,7 @@ export class GameServer {
         return;
 
       case "list-worlds":
-        this.listWorlds().then((worlds) => {
+        this.trackOperation(this.listWorlds()).then((worlds) => {
           this.transport.send(clientId, {
             type: "world-list",
             requestId: msg.requestId,
@@ -1052,7 +1082,7 @@ export class GameServer {
         return;
 
       case "rename-world":
-        this.renameWorld(msg.worldId, msg.name).then(() => {
+        this.trackOperation(this.renameWorld(msg.worldId, msg.name)).then(() => {
           this.transport.send(clientId, {
             type: "world-renamed",
             requestId: msg.requestId,

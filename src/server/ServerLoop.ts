@@ -3,15 +3,18 @@ import { serverLogError } from "./serverLog.js";
 
 /**
  * Server-side tick loop using setInterval.
- * Not used in phase 1 local mode (client drives server.tick() directly).
- * Created for future remote mode.
+ * Shared by browser Worker, P2P and dedicated server hosts.
  */
 export class ServerLoop {
   private intervalId: ReturnType<typeof setInterval> | null = null;
   private readonly tickFn: (dt: number) => void;
   private fixedDt: number;
 
-  constructor(tickFn: (dt: number) => void, tickRate = TICK_RATE) {
+  constructor(
+    tickFn: (dt: number) => void,
+    tickRate = TICK_RATE,
+    private readonly onError?: (error: unknown) => void,
+  ) {
     this.tickFn = tickFn;
     this.fixedDt = 1 / tickRate;
   }
@@ -23,6 +26,7 @@ export class ServerLoop {
         this.tickFn(this.fixedDt);
       } catch (err) {
         serverLogError("tick error", err);
+        this.onError?.(err);
       }
     }, this.fixedDt * 1000);
   }
