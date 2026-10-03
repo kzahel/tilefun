@@ -5,6 +5,13 @@
 The sections below retain the original client/server extraction plan as historical
 context. The current implementation has these additional boundaries:
 
+- Ordinary single player uses `SerializingTransport` and a replicated client
+  view. Client and server still execute on the same browser main thread; binary
+  roundtrips are delivered synchronously. The shared-reference local mode below
+  is historical and does not describe the current default boot path.
+- A dedicated Worker host for the existing single-player server is proposed in
+  the [streaming performance plan](tactical/012-streaming-performance-and-local-server-worker.md).
+  This is an execution-boundary change, not a new authoritative implementation.
 - `GameServer` coordinates connections, world management, and active realms.
 - `RealmTransitions` owns one guarded transfer lifecycle for menu navigation and
   building doors. It prepares the destination and saves the source before

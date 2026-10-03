@@ -1,5 +1,11 @@
 # Roadmap
 
+## Streaming Performance and Single Player Execution
+
+- Baseline investigation found unfinished visible terrain caches even with smooth frame pacing. Establish a repeatable traversal benchmark that measures both readiness and frame cost.
+- Proposed first architectural step: host the existing single-player authority in a dedicated browser Worker, preserving the replicated client and shared server implementation. Prepare terrain caches ahead of the camera as a separate improvement. See the [performance and Worker plan](tactical/012-streaming-performance-and-local-server-worker.md).
+- Consider WASM only if measured remaining compute costs or an explicit native/browser sharing requirement justify it.
+
 ## Regional Generation and World Explorer
 
 - Implemented: versioned Classic/Island/Flat/Regional generators, bounded map and exact tile previews, shared district and countryside plans, authoritative Play here arrivals, persistent building interiors, and generated inhabitants. See the [regional plan](tactical/004-world-explorer-and-regional-generation-plan.md) and [generator plan](tactical/005-generator-profiles-and-shared-tile-preview-plan.md) for implementation evidence.
