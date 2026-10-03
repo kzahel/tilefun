@@ -24,7 +24,7 @@ export type { EditorTab };
 const PANEL_STYLE = `
   position: fixed; bottom: 0; left: 0; right: 0;
   background: rgba(0,0,0,0.8); color: #fff;
-  font: 13px monospace; padding: 0;
+  font: 13px monospace;
   border-radius: 6px 6px 0 0; z-index: 100;
   display: none; user-select: none;
   flex-direction: column;
@@ -38,8 +38,8 @@ const BTN_STYLE = `
 
 const TAB_STYLE = `
   padding: 10px 14px; border: none; border-radius: 6px 6px 0 0;
-  font: bold 12px monospace; cursor: pointer; min-height: 40px;
-  display: flex; align-items: center; gap: 5px;
+  font: bold 12px monospace; cursor: pointer; min-height: 44px;
+  display: flex; align-items: center; gap: 5px; flex: 0 0 auto; white-space: nowrap;
 `;
 
 const ROW_STYLE =
@@ -50,6 +50,11 @@ export class EditorPanel {
   private readonly container: HTMLDivElement;
   private readonly model: EditorModel;
   private readonly collapseArrow: HTMLButtonElement;
+  private readonly selectionLabel: HTMLSpanElement;
+  private readonly tabBar: HTMLDivElement;
+  private readonly paletteScroll: HTMLDivElement;
+  private minimized = false;
+  private displayedTab: EditorTab | null = null;
   private readonly tabButtons: Map<EditorTab, HTMLButtonElement> = new Map();
   private readonly toolRow: HTMLDivElement;
   private readonly naturalRow: HTMLDivElement;
@@ -90,38 +95,41 @@ export class EditorPanel {
     this.container = document.createElement("div");
     this.el = this.container;
     this.container.style.cssText = PANEL_STYLE;
+    this.container.className = "editor-panel";
+    this.container.dataset.testid = "editor-panel";
     this.container.style.display = "none";
 
     // Subscribe to model changes
     model.addListener(() => this.syncFromModel());
 
-    // --- Collapse arrow (above tab bar) ---
+    // Minimize tools independently of switching between editing and play.
+    const header = document.createElement("div");
+    header.className = "editor-panel-header";
     this.collapseArrow = document.createElement("button");
-    this.collapseArrow.style.cssText = `
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 28px; border: none; border-radius: 6px 6px 0 0;
-      background: rgba(80,80,80,0.6); color: #ccc; font-size: 22px;
-      cursor: pointer; padding: 0; margin: 0; line-height: 1;
-      transition: background 0.15s, color 0.15s;
-    `;
-    this.collapseArrow.textContent = "\u25bc";
-    this.collapseArrow.title = "Close editor (Tab)";
-    this.collapseArrow.addEventListener("pointerenter", () => {
-      this.collapseArrow.style.background = "rgba(120,120,120,0.8)";
-      this.collapseArrow.style.color = "#fff";
-    });
-    this.collapseArrow.addEventListener("pointerleave", () => {
-      this.collapseArrow.style.background = "rgba(80,80,80,0.6)";
-      this.collapseArrow.style.color = "#ccc";
-    });
+    this.collapseArrow.className = "editor-panel-toggle";
+    this.selectionLabel = document.createElement("span");
+    this.selectionLabel.dataset.testid = "editor-selection";
+    this.collapseArrow.appendChild(this.selectionLabel);
     this.collapseArrow.addEventListener("click", () => {
-      this.model.onCollapse?.();
+      this.minimized = !this.minimized;
+      this.updateTray();
+      this.revealSelectedTab();
     });
-    this.container.appendChild(this.collapseArrow);
+    const play = document.createElement("button");
+    play.className = "editor-panel-play";
+    play.textContent = "Play";
+    play.title = "Return to play (Tab)";
+    play.setAttribute("aria-label", "Exit editor");
+    play.onclick = () => this.model.onExitEditor?.();
+    header.append(this.collapseArrow, play);
+    this.container.appendChild(header);
 
     // --- Tab bar ---
     const tabBar = document.createElement("div");
-    tabBar.style.cssText = "display: flex; flex-wrap: wrap; gap: 3px; padding: 0 8px;";
+    this.tabBar = tabBar;
+    tabBar.className = "editor-tabs";
+    tabBar.dataset.testid = "editor-tabs";
+    tabBar.setAttribute("aria-label", "Editor categories");
     for (const tab of ALL_TABS) {
       const btn = document.createElement("button");
       btn.style.cssText = TAB_STYLE;
@@ -149,10 +157,15 @@ export class EditorPanel {
       btn.appendChild(icon);
       btn.appendChild(document.createTextNode(TAB_LABELS[tab]));
       btn.addEventListener("click", () => this.model.setTab(tab));
+      btn.dataset.editorTab = tab;
       tabBar.appendChild(btn);
       this.tabButtons.set(tab, btn);
     }
     this.container.appendChild(tabBar);
+    this.paletteScroll = document.createElement("div");
+    this.paletteScroll.className = "editor-palette-scroll";
+    this.paletteScroll.dataset.testid = "editor-palette-scroll";
+    this.container.appendChild(this.paletteScroll);
 
     // --- Shared tool row (visible for all terrain tabs) ---
     this.toolRow = document.createElement("div");
@@ -216,17 +229,17 @@ export class EditorPanel {
     this.bridgeButton.addEventListener("click", () => this.model.cycleBridgeDepth());
     this.toolRow.appendChild(this.bridgeButton);
 
-    this.container.appendChild(this.toolRow);
+    this.paletteScroll.appendChild(this.toolRow);
 
     // --- Terrain palette rows ---
     this.naturalRow = this.buildNaturalRow();
-    this.container.appendChild(this.naturalRow);
+    this.paletteScroll.appendChild(this.naturalRow);
 
     this.roadRow = this.buildRoadRow();
-    this.container.appendChild(this.roadRow);
+    this.paletteScroll.appendChild(this.roadRow);
 
     this.structureRow = this.buildTerrainRow(STRUCTURE_PALETTE);
-    this.container.appendChild(this.structureRow);
+    this.paletteScroll.appendChild(this.structureRow);
 
     // --- Entity row ---
     this.entityRow = document.createElement("div");
@@ -254,13 +267,11 @@ export class EditorPanel {
     this.entityRow.appendChild(this.makeSeparator());
     this.entityRow.appendChild(this.buildDeleteButton());
 
-    this.container.appendChild(this.entityRow);
+    this.paletteScroll.appendChild(this.entityRow);
 
     // --- Props row ---
     this.propsRow = document.createElement("div");
     this.propsRow.style.cssText = ROW_STYLE;
-    this.propsRow.style.maxWidth = "90vw";
-    this.propsRow.style.overflowX = "auto";
 
     let lastCategory = "";
     for (const entry of PROP_PALETTE) {
@@ -309,7 +320,7 @@ export class EditorPanel {
     this.propsRow.appendChild(this.makeSeparator());
     this.propsRow.appendChild(this.buildDeleteButton());
 
-    this.container.appendChild(this.propsRow);
+    this.paletteScroll.appendChild(this.propsRow);
 
     this.indoorProps = document.createElement("div");
     this.indoorProps.style.cssText = ROW_STYLE;
@@ -335,7 +346,7 @@ export class EditorPanel {
       this.indoorProps.appendChild(button);
     }
     this.indoorProps.appendChild(this.buildDeleteButton());
-    this.container.appendChild(this.indoorProps);
+    this.paletteScroll.appendChild(this.indoorProps);
     this.roomRow = document.createElement("div");
     this.roomRow.style.cssText = ROW_STYLE;
     for (const [label, value, rectangle] of [
@@ -356,7 +367,7 @@ export class EditorPanel {
       this.roomButtons.push({ button, value, rectangle });
       this.roomRow.appendChild(button);
     }
-    this.container.appendChild(this.roomRow);
+    this.paletteScroll.appendChild(this.roomRow);
     this.patternRow = document.createElement("div");
     this.patternRow.style.cssText = ROW_STYLE;
     const patternLabel = this.makeLabel("Fenced trees v1 · candidate");
@@ -386,7 +397,7 @@ export class EditorPanel {
     this.patternStatus = document.createElement("span");
     this.patternStatus.setAttribute("role", "status");
     this.patternRow.appendChild(this.patternStatus);
-    this.container.appendChild(this.patternRow);
+    this.paletteScroll.appendChild(this.patternRow);
     // --- Elevation row ---
     this.elevationRow = document.createElement("div");
     this.elevationRow.style.cssText = ROW_STYLE;
@@ -430,7 +441,7 @@ export class EditorPanel {
     elevHint.textContent = "Click: set height / Right-click: flatten";
     this.elevationRow.appendChild(elevHint);
 
-    this.container.appendChild(this.elevationRow);
+    this.paletteScroll.appendChild(this.elevationRow);
 
     // Initial sync
     this.syncFromModel();
@@ -486,6 +497,71 @@ export class EditorPanel {
     this.updatePropSelection();
     this.updateElevationSelection();
     this.updateDeleteButtons();
+    this.updateTray();
+    if (this.displayedTab !== this.model.editorTab) {
+      this.displayedTab = this.model.editorTab;
+      this.paletteScroll.scrollTop = 0;
+      this.revealSelectedTab();
+    }
+  }
+
+  private updateTray(): void {
+    this.container.dataset.minimized = String(this.minimized);
+    const action = this.minimized ? "Expand editor tools" : "Minimize editor tools";
+    this.collapseArrow.title = action;
+    this.collapseArrow.setAttribute("aria-label", action);
+    this.collapseArrow.setAttribute("aria-expanded", String(!this.minimized));
+    this.selectionLabel.textContent = this.selectionName();
+  }
+
+  private selectionName(): string {
+    const model = this.model;
+    switch (model.editorTab) {
+      case "props":
+        return model.deleteMode
+          ? "Delete props"
+          : (PROP_PALETTE.find((entry) => entry.type === model.selectedPropType)?.label ??
+              model.selectedPropType
+                .replace(/^(prop-interior-furniture:|prop-|atlas:)/, "")
+                .replace(/[-_]/g, " "));
+      case "entities":
+        return model.deleteMode
+          ? "Delete entities"
+          : (ENTITY_PALETTE.find((entry) => entry.type === model.selectedEntityType)?.label ??
+              "Entities");
+      case "natural":
+        return model.selectedTerrain === null
+          ? "Auto terrain"
+          : (NATURAL_SHEET_PALETTE[model.selectedNaturalIndex]?.label ?? "Natural");
+      case "road":
+        return (
+          ROAD_PALETTE.find((entry) => entry.roadType === model.selectedRoadType)?.label ?? "Road"
+        );
+      case "structure":
+        return (
+          STRUCTURE_PALETTE.find((entry) => entry.terrainId === model.selectedTerrain)?.label ??
+          "Auto terrain"
+        );
+      case "elevation":
+        return `Height ${model.selectedElevation}`;
+      case "patterns":
+        return model.indoor
+          ? model.roomRectangle
+            ? "Room rectangle"
+            : "Room drawing"
+          : "Fenced trees";
+    }
+  }
+
+  private revealSelectedTab(): void {
+    const button = this.tabButtons.get(this.model.editorTab);
+    if (!button || !this.visible || this.minimized) return;
+    const selected = button.getBoundingClientRect();
+    const row = this.tabBar.getBoundingClientRect();
+    if (selected.left < row.left + 8)
+      this.tabBar.scrollLeft -= Math.ceil(row.left + 8 - selected.left);
+    else if (selected.right > row.right - 8)
+      this.tabBar.scrollLeft += Math.ceil(selected.right - row.right + 8);
   }
 
   private buildTerrainRow(palette: PaletteEntry[]): HTMLDivElement {
@@ -758,7 +834,12 @@ export class EditorPanel {
   }
 
   set visible(v: boolean) {
+    if (v && !this.visible) this.minimized = false;
     this.container.style.display = v ? "flex" : "none";
+    if (v) {
+      this.updateTray();
+      this.revealSelectedTab();
+    }
   }
 
   private updateTabDisplay(): void {

@@ -51,7 +51,7 @@ export class EditorModel {
   private listeners: EditorModelListener[] = [];
 
   // --- Callbacks ---
-  onCollapse: (() => void) | null = null;
+  onExitEditor: (() => void) | null = null;
   onOpenCatalog: (() => void) | null = null;
 
   // --- Computed properties ---

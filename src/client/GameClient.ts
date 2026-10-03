@@ -22,6 +22,7 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
+import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
@@ -197,7 +198,7 @@ export class GameClient {
     this.editorModel = new EditorModel();
     this.editorMode = new EditorMode(canvas, this.camera, this.actions, this.editorModel);
     this.editorPanel = new EditorPanel(this.editorModel);
-    this.editorModel.onCollapse = () => this.toggleEditor();
+    this.editorModel.onExitEditor = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
     this.worldMap = new WorldMap({
       snapshot: () =>
@@ -215,6 +216,9 @@ export class GameClient {
     });
     this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
+    this.propCatalog.onClose = () => {
+      if (this.scenes.current instanceof CatalogScene) this.scenes.pop();
+    };
     this.interiorCatalog = new InteriorCatalog();
     this.interiorCatalog.onClose = () => {
       if (this.scenes.has(InteriorCatalogScene)) this.scenes.pop();

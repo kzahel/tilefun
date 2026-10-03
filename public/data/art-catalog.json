@@ -14555,7 +14555,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:317"
+          "source": "src/editor/EditorPanel.ts:328"
         },
         {
           "system": "Interiors",
@@ -14685,7 +14685,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:319"
+          "source": "src/editor/EditorPanel.ts:330"
         },
         {
           "system": "Interiors",
@@ -14771,7 +14771,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:318"
+          "source": "src/editor/EditorPanel.ts:329"
         },
         {
           "system": "Interiors",
@@ -14829,7 +14829,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:320"
+          "source": "src/editor/EditorPanel.ts:331"
         },
         {
           "system": "Interiors",
@@ -14883,7 +14883,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:321"
+          "source": "src/editor/EditorPanel.ts:332"
         },
         {
           "system": "Interiors",
@@ -14961,7 +14961,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:322"
+          "source": "src/editor/EditorPanel.ts:333"
         },
         {
           "system": "Interiors",
@@ -15057,7 +15057,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:323"
+          "source": "src/editor/EditorPanel.ts:334"
         },
         {
           "system": "Interiors",
@@ -15103,7 +15103,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:324"
+          "source": "src/editor/EditorPanel.ts:335"
         },
         {
           "system": "Interiors",

@@ -11,22 +11,25 @@ const OVERLAY_STYLE = `
   display: flex; flex-direction: column;
   font-family: monospace; color: #fff;
   overflow: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 `;
 
 const HEADER_STYLE = `
-  display: flex; align-items: center; gap: 8px;
+  display: flex; flex-direction: column; gap: 8px;
   padding: 8px 12px; border-bottom: 1px solid #444;
   flex-shrink: 0;
 `;
 
 const INPUT_STYLE = `
-  flex: 1; max-width: 300px; font: 14px monospace; padding: 6px 10px;
+  min-width: 0; width: 100%; min-height: 44px; font: 14px monospace; padding: 6px 10px;
   background: rgba(255,255,255,0.1); color: #fff;
   border: 1px solid #888; border-radius: 4px; outline: none;
 `;
 
 const SELECT_STYLE = `
   font: 13px monospace; padding: 6px 8px;
+  min-width: 0; width: 100%; min-height: 44px;
   background: #222; color: #fff;
   border: 1px solid #888; border-radius: 4px;
 `;
@@ -35,6 +38,7 @@ const CLOSE_BTN_STYLE = `
   font: bold 18px monospace; padding: 4px 10px;
   background: none; color: #aaa; border: 1px solid #666;
   border-radius: 4px; cursor: pointer; margin-left: auto;
+  flex-shrink: 0; min-width: 44px; min-height: 44px;
 `;
 
 const GRID_STYLE = `
@@ -42,6 +46,7 @@ const GRID_STYLE = `
   grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
   gap: 4px; padding: 8px;
   overflow-y: auto; flex: 1; min-height: 0;
+  overscroll-behavior: contain;
 `;
 
 const CELL_STYLE = `
@@ -77,45 +82,59 @@ export class PropCatalog {
   private thumbnailsRendered = false;
 
   onSelect: ((propType: string) => void) | null = null;
+  onClose: (() => void) | null = null;
 
   constructor() {
     this.overlay = document.createElement("div");
     this.overlay.style.cssText = OVERLAY_STYLE;
     this.overlay.style.display = "none";
+    this.overlay.dataset.testid = "prop-catalog";
+    this.overlay.setAttribute("role", "dialog");
+    this.overlay.setAttribute("aria-label", "Sprite Catalog");
+    this.overlay.setAttribute("aria-modal", "true");
 
     // Header
     const header = document.createElement("div");
     header.style.cssText = HEADER_STYLE;
+    const titleRow = document.createElement("div");
+    titleRow.style.cssText = "display:flex; align-items:center; gap:8px; min-width:0;";
+    const filters = document.createElement("div");
+    filters.style.cssText =
+      "display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px;";
 
     const title = document.createElement("span");
-    title.style.cssText = "font: bold 16px monospace; color: #8cf; margin-right: 8px;";
+    title.style.cssText = "font: bold 16px monospace; color: #8cf; flex:1; min-width:0;";
     title.textContent = "Sprite Catalog";
-    header.appendChild(title);
+    titleRow.appendChild(title);
 
     this.searchInput = document.createElement("input");
     this.searchInput.type = "text";
     this.searchInput.placeholder = "Search sprites...";
+    this.searchInput.setAttribute("aria-label", "Search sprites");
     this.searchInput.style.cssText = INPUT_STYLE;
-    header.appendChild(this.searchInput);
+    filters.appendChild(this.searchInput);
 
     this.themeSelect = document.createElement("select");
     this.themeSelect.style.cssText = SELECT_STYLE;
+    this.themeSelect.setAttribute("aria-label", "Sprite theme");
     const allOption = document.createElement("option");
     allOption.value = "";
     allOption.textContent = "All themes";
     this.themeSelect.appendChild(allOption);
-    header.appendChild(this.themeSelect);
+    filters.appendChild(this.themeSelect);
 
     this.countLabel = document.createElement("span");
     this.countLabel.style.cssText = "font: 12px monospace; color: #888;";
-    header.appendChild(this.countLabel);
+    titleRow.appendChild(this.countLabel);
 
     const closeBtn = document.createElement("button");
     closeBtn.style.cssText = CLOSE_BTN_STYLE;
     closeBtn.textContent = "\u00d7";
     closeBtn.title = "Close (Escape)";
-    closeBtn.addEventListener("click", () => this.hide());
-    header.appendChild(closeBtn);
+    closeBtn.setAttribute("aria-label", "Close sprite catalog");
+    closeBtn.addEventListener("click", () => this.requestClose());
+    titleRow.appendChild(closeBtn);
+    header.append(titleRow, filters);
 
     const toolsLink = document.createElement("a");
     toolsLink.href = "tools.html";
@@ -151,7 +170,7 @@ export class PropCatalog {
     }
     this.overlay.addEventListener("keydown", (e) => {
       e.stopPropagation();
-      if (e.key === "Escape") this.hide();
+      if (e.key === "Escape") this.requestClose();
     });
 
     document.body.appendChild(this.overlay);
@@ -186,7 +205,13 @@ export class PropCatalog {
       this.renderThumbnails();
       this.thumbnailsRendered = true;
     }
-    this.searchInput.focus();
+    // Touch users can browse immediately without the keyboard covering the grid.
+    if (window.matchMedia("(pointer: fine)").matches) this.searchInput.focus();
+  }
+
+  private requestClose(): void {
+    if (this.onClose) this.onClose();
+    else this.hide();
   }
 
   hide(): void {

@@ -1,0 +1,76 @@
+.editor-panel {
+  max-height: 50dvh;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.editor-panel-header {
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 0;
+  background: #333;
+}
+
+.editor-panel-header button {
+  min-height: 44px;
+  border: 0;
+  color: white;
+  font: bold 13px monospace;
+  cursor: pointer;
+}
+
+.editor-panel-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  background: transparent;
+}
+
+.editor-panel-toggle::before {
+  content: "▼";
+}
+
+.editor-panel-toggle span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.editor-panel-play {
+  flex: 0 0 auto;
+  min-width: 64px;
+  padding: 8px 12px;
+  background: #28553a;
+}
+
+.editor-tabs {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  padding: 0 8px;
+  overflow-x: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-x;
+  scrollbar-width: thin;
+}
+
+.editor-palette-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+.editor-panel[data-minimized="true"] .editor-tabs,
+.editor-panel[data-minimized="true"] .editor-palette-scroll {
+  display: none;
+}
+
+.editor-panel[data-minimized="true"] .editor-panel-toggle::before {
+  content: "▲";
+}

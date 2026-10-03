@@ -55,6 +55,15 @@ it, while still performing the tapped action. There is no extra button. Exiting
 fullscreen keeps it off until the next page load; unavailable or denied fullscreen
 leaves the game playable in the browser. This does not disable OS navigation gestures.
 
+The editor tray uses at most half the visible screen, including its header and
+tabs. Swipe the category tabs horizontally and scroll the palette vertically;
+the tabs stay visible while browsing. Tap the selected-item header to minimize
+the tools and keep placing items, then tap it again to expand. **Play** (or Tab
+on a keyboard) exits editing. The Sprite Atlas has a separate close button that
+returns to editing without opening the mobile keyboard automatically.
+`tests/mobile-editor.spec.ts` checks portrait and landscape layouts, palette
+scrolling, placement with minimized tools, and returning from the Atlas.
+
 Install Tilefun from Chrome's menu (**Install app** / **Add to Home screen**) for a
 home-screen icon that opens the game without browser controls. On iPhone or iPad,
 use Safari's **Share → Add to Home Screen**. The shortcut starts the main game,
