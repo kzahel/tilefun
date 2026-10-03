@@ -29,8 +29,11 @@ export class CanvasTerrainResources {
     return chunk ? (this.surfaces.get(chunk)?.canvas ?? null) : null;
   }
 
-  resourceId(chunk: Chunk): TerrainResourceId | null {
-    return this.surfaces.get(chunk)?.id ?? null;
+  resourceId(chunk: Chunk, cx?: number, cy?: number): TerrainResourceId | null {
+    const entry = this.surfaces.get(chunk);
+    if (!entry || (cx !== undefined && entry.cx !== cx) || (cy !== undefined && entry.cy !== cy))
+      return null;
+    return entry.id;
   }
 
   resolve(id: TerrainResourceId): OffscreenCanvas | null {

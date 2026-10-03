@@ -4,8 +4,9 @@ Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache
 identity/lifetime fixed, gameplay grass frame storage and terrain scheduler records
-reused; static prop depth metadata cached; remaining scene allocation and raster
-scheduling are follow-up work.
+reused; static prop depth and elevation metadata cached; Canvas terrain resources
+removed from world chunks; remaining frame/backend boundaries and raster scheduling
+are follow-up work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence.
@@ -105,12 +106,17 @@ Static prop depth metadata now reuses unchanged surfaces. A 400-prop synthetic
 probe reduced sampled collection allocations from 81.0 MB to 12.4 MB (about 85%)
 with identical metadata/depth hashes through edits. This excludes drawing and
 simulation; scalar validation, output-list backing storage and iteration remain.
-Continue with static elevation descriptors and remaining scene allocations. The grass cache lifetime
+Elevation geometry now caches unchanged chunk descriptors and refers to backend
+resource IDs. The synthetic nine-chunk sample reduced collection allocations
+from 222.9 MB to 46.0 MB (about 79%) with identical geometry; output lists still
+allocate. See [rendering architecture](rendering-architecture.md) for the completed
+resource ownership/handle changes and the remaining frame/backend interface.
+Continue with remaining scene allocations and measured raster submission. The grass cache lifetime
 fix is complete; a synthetic post-GC probe verifies that discarded chunk placements no
 longer accumulate. Phone traversal still has occasional missed frames, so this
-does not resolve the reported hitch. Move canvas resources out of world chunks and scene
-items into backend-owned caches so later renderer replacement does not require
-moving gameplay. The audit records a reproducible stale-grass case and desktop
+does not resolve the reported hitch. Canvas resources now live in renderer-owned caches and elevation items carry
+opaque handles. The full frame/backend interface, asset metadata and indoor
+callbacks remain the next decoupling work. The audit records a reproducible stale-grass case and desktop
 GC events; attribution of the user's intermittent phone hitch remains open.
 
 Bound offscreen preparation work while keeping missing visible terrain first.

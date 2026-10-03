@@ -1,0 +1,309 @@
+{
+  "baselineRevision": "c471375",
+  "candidate": "backend-independent elevation descriptor cache",
+  "limits": "Synthetic collection only; includes collected JS objects but excludes raster, streaming and simulation. Handles are omitted from geometry hashes and separately checked for successful resolution. No FPS or phone claim.",
+  "before": {
+    "browser": "153.0.8010.12",
+    "frames": 600,
+    "items": 2073600,
+    "diagnostics": null,
+    "sampledBytes": 222895820,
+    "allocationByFunction": {
+      "collectElevationItems": 222703944,
+      "push": 148660,
+      "isURL": 12644,
+      "innerSerialize": 8280,
+      "serialize": 5064,
+      "get": 4880,
+      "jsonValue": 4136,
+      "getChunkIfLoaded": 4112,
+      "next": 4100
+    },
+    "geometryHashes": [
+      "ccbb8955d980c438a6b3497072bdcb19749542424d8abca5ff92d88c953c5d5f",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "94ea4e80cda904ba51ceff58c2bbd9a1e2cc5f0aa565f4a6cc1977d7623f491d",
+      "5156abb7d7112cdfb981a5ac1caeda88ff8cbaff237f45897199ebe082aecf36"
+    ]
+  },
+  "after": {
+    "browser": "153.0.8010.12",
+    "frames": 600,
+    "items": 2073600,
+    "diagnostics": {
+      "layoutBuilds": 9,
+      "createdDescriptors": 3456,
+      "createdItems": 3456
+    },
+    "sampledBytes": 45961768,
+    "allocationByFunction": {
+      "collect": 45922420,
+      "get": 17656,
+      "evaluate": 9336,
+      "isURL": 8256,
+      "isTypedArray": 4100
+    },
+    "geometryHashes": [
+      "ccbb8955d980c438a6b3497072bdcb19749542424d8abca5ff92d88c953c5d5f",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "94ea4e80cda904ba51ceff58c2bbd9a1e2cc5f0aa565f4a6cc1977d7623f491d",
+      "5156abb7d7112cdfb981a5ac1caeda88ff8cbaff237f45897199ebe082aecf36"
+    ]
+  },
+  "desktopTraversal": {
+    "date": "2026-10-03T14:34:51.340Z",
+    "browser": "153.0.8010.12",
+    "platform": "darwin 25.6.0 arm64",
+    "input": "keyboard",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "fixtures": [
+      {
+        "version": "regional-v4",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 3,
+            "longestGapFrames": 3,
+            "displacement": {
+              "x": -608,
+              "y": 14336
+            }
+          },
+          {
+            "name": "standing",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "name": "walk",
+            "frames": {
+              "count": 180,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000728,
+              "p99": 16.799999999999272,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -222.0712890625,
+              "y": 0
+            }
+          },
+          {
+            "name": "sprint",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.799999999999272,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -738.601318359375,
+              "y": 0
+            }
+          },
+          {
+            "name": "reverse",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 738.600830078125,
+              "y": 0
+            }
+          },
+          {
+            "name": "zoom-out",
+            "frames": {
+              "count": 180,
+              "p50": 16.69999999999709,
+              "p95": 16.799999999999272,
+              "p99": 16.799999999999272,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ]
+      },
+      {
+        "version": "regional-v10",
+        "errors": [],
+        "samples": [
+          {
+            "name": "cold",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.700000000000273,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 2,
+            "incompleteCacheFrames": 2,
+            "longestGapFrames": 4,
+            "displacement": {
+              "x": 14144,
+              "y": 34944
+            }
+          },
+          {
+            "name": "standing",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.799999999999727,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "name": "walk",
+            "frames": {
+              "count": 180,
+              "p50": 16.699999999999818,
+              "p95": 16.800000000000182,
+              "p99": 16.800000000000182,
+              "max": 16.800000000000182
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -222.0712890625,
+              "y": 0
+            }
+          },
+          {
+            "name": "sprint",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": -738.6012849375002,
+              "y": 0
+            }
+          },
+          {
+            "name": "reverse",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 738.60107421875,
+              "y": 0
+            }
+          },
+          {
+            "name": "zoom-out",
+            "frames": {
+              "count": 180,
+              "p50": 16.700000000000728,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000291,
+              "max": 16.80000000000291
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "longestGapFrames": 0,
+            "displacement": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "schedulerOrderHash": "2588d37fbaaed3e391bb1d678fd9b5beb25bf61925249d66693056cbc8531179",
+  "schedulerOrderMatchesRecordedBaseline": true
+}

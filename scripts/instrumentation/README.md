@@ -39,7 +39,8 @@ chunks, then with 80 pending chunks. Zero row budget isolates membership and
 job bookkeeping from raster work. A separate ordered-job hash covers camera
 reversals and changes in old imagery availability. Bundled Chromium's sampling
 includes collected objects; byte counts are estimates, not FPS/timing gates.
-The script also works against the pre-reuse scheduler for before/after captures.
+Historical before/after scheduler samples used the script at their recorded revisions;
+the current fixture seeds renderer-owned resources after the ownership extraction.
 
 ## Prop depth metadata allocation
 
@@ -50,6 +51,16 @@ wall each). It reports storage creation, eight metadata/depth hashes through edi
 and five unprofiled timing batches. Sampling includes collected objects; the
 synthetic workload excludes raster, streaming and simulation. Use these results
 for allocation/parity evidence, not as an end-to-end FPS or timing gate.
+
+## Elevation descriptor allocation
+
+Run `node scripts/instrumentation/elevation-allocation.mjs` from the repository
+root. Nine chunks with 192 raised tiles each warm for 60 collections, then sample
+600 collections. Five geometry hashes cover content edits, replacement imagery,
+eviction and chunk replacement; emitted handles must resolve. The diagnostic
+seeds the concrete renderer's resource store to isolate collection from raster
+work. It works before/after descriptor caching (after the terrain handle
+extraction). Byte estimates include collected objects and do not measure FPS.
 
 ## Protocol instrumentation
 

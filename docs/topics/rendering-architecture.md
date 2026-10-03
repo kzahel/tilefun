@@ -1,7 +1,8 @@
 # Rendering architecture and backend separation
 
 Topic: rendering-architecture
-Status: target agreed; incremental extraction behind the working Canvas2D renderer.
+Status: terrain ownership, neutral elevation handles and static descriptors extracted;
+complete frame/backend and asset interfaces remain follow-up work.
 Updated: 2026-10-03.
 
 Owns renderer boundaries and resource/frame lifetime contracts. The
@@ -63,15 +64,15 @@ boundaries. Keep the Canvas implementation working through every slice.
 
 ## Implementation sequence
 
-1. Move completed terrain resources out of `Chunk`; retain preparation jobs in
+1. **Complete:** move completed terrain resources out of `Chunk`; retain preparation jobs in
    the renderer. Replace shared backend dirtiness with visual-content versions.
    Migrate readiness diagnostics and explorer lifecycle to renderer APIs.
-2. Replace elevation canvases with opaque resource handles resolved only by the
+2. **Complete:** replace elevation canvases with opaque resource handles resolved only by the
    Canvas backend. Give scene collection a small backend-neutral terrain input.
-3. Cache static elevation descriptors by chunk identity/content and placement,
+3. **Complete:** cache static elevation descriptors by chunk identity/content and placement,
    while binding the current resource at collection time. Verify replacement,
    eviction and realm transitions cannot retain stale canvases.
-4. Introduce the complete frame/backend interface and asset metadata catalog,
+4. **Next:** introduce the complete frame/backend interface and asset metadata catalog,
    including indoor and overlay phases. Remove concrete renderer/Canvas access
    from gameplay presentation orchestration in bounded follow-up slices.
 5. Only then prototype a second backend against measured workloads, comparing
@@ -104,9 +105,9 @@ Explorer disposal/eviction and readiness probes now use renderer APIs. Both
 preparation and fallback drawing bound completed surfaces; a same-coordinate
 replacement cannot accumulate historical chunk objects. Tests cover independent
 renderers, equal-revision derived changes, asset changes during a partial build,
-and fallback eviction. The remaining elevation canvas reference and concrete
-scene-collector dependency are the next slice. Full integrated visual/traversal
-validation is recorded after that extraction below.
+and fallback eviction. The following handle slice removes the elevation canvas reference and concrete
+scene-collector dependency. Integrated visual/traversal evidence is linked in
+the static-descriptor section below.
 
 ## Completed slice: backend-neutral elevation handles
 
@@ -123,3 +124,27 @@ old completed handle usable during catch-up, then publication replaces it.
 Frames must be consumed synchronously before preparation/eviction/reset; handles
 are transient presentation references, not saved-world IDs. Tests cover actual
 Canvas source rectangles, stale-handle skipping and independent renderer IDs.
+
+
+## Completed slice: static elevation descriptors
+
+`ElevationDescriptorCache` accepts world data and a resource-ID lookup, with no
+Canvas dependency. It caches immutable surface/cliff descriptors using weak chunk
+identity, edit/visual versions and placement. Empty chunks are cached too.
+Camera movement reuses geometry; a resource change binds new immutable records
+without rebuilding geometry or changing previously returned records. Collection
+still returns an independently owned list in the original tile/phase order.
+
+No cached descriptor holds a canvas or a strong chunk reference. Backend eviction
+invalidates handles, a missing resource emits no elevation, and renderer reset
+also clears the descriptor cache. Coordinate changes cannot bind imagery from
+the old placement. Low-level grid writers must invalidate completed visual
+updates, as before for terrain. This does not add an asynchronous frame lifetime;
+old handle-bearing frames remain transient synchronous data.
+
+Detailed allocation and integrated validation evidence is recorded in
+[Tactical 013](../tactical/013-renderer-boundary-and-allocation-audit.md#implementation-record-renderer-resource-boundaries).
+The next architectural slice should define the full frame/backend interface,
+starting with outdoor terrain/scene/editor phases and then replacing indoor draw
+callbacks with ordered data. Pair this with a backend-independent sprite metadata
+catalog; keep the current Canvas implementation as the reference renderer.

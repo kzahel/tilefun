@@ -1,7 +1,8 @@
 # Renderer boundary and walking allocation audit
 
-Status: audit, grass cache identity/lifetime, grass frame/scheduler storage reuse and prop depth caching completed 2026-10-03;
-remaining implementation slices below are proposed.
+Status: audit, grass/frame/scheduler/prop/elevation allocation slices and initial
+renderer resource boundaries completed 2026-10-03; full frame/backend and raster
+scheduling work remain follow-ups.
 Owner: [performance](../topics/performance.md).
 
 The report motivating this audit is an occasional phone hitch while walking,
@@ -530,3 +531,67 @@ slice pass without diagnostics. Art catalog, Workshop manifest and production
 build pass, with identical review candidates and only a changed input digest.
 The complete browser suite passes 268 checks with one existing skip. Desktop
 streaming passes `--assert-ready`; physical Android was unavailable as noted above.
+
+
+## Implementation record: renderer resource boundaries
+
+The [rendering architecture topic](../topics/rendering-architecture.md) now owns
+the target shape and current contracts. This series records the target, extracts
+Canvas terrain ownership from world chunks, replaces elevation canvases with
+opaque handles, and caches backend-independent elevation geometry. `Chunk` has
+local visual-content versions rather than renderer-written dirty state. Asset
+changes invalidate each backend independently; old completed imagery remains
+available while replacements prepare. Readiness probes and explorer lifecycle
+use renderer APIs. The preparation deadline and row cap are unchanged.
+
+Resource handles are never recycled across renderer instances or resets during
+the runtime. Rebuild/eviction retires the old image mapping; stale handles skip
+rather than drawing another chunk. `collectScene` consumes `TerrainPresentation`
+instead of importing concrete `TileRenderer`. The complete backend/frame and
+asset metadata interfaces, Canvas access in `GameContext`, and indoor draw
+callbacks remain follow-ups; this is not a complete renderer swap or Rust port.
+
+The independent `ElevationDescriptorCache` keeps weak chunk keys and immutable
+scalar layout records. Content versions and placement invalidate geometry; a
+changed image handle only rebinds output records. It caches empty chunks too and
+never retains canvas objects. Four dedicated layout cases cover warm reuse,
+source rectangles/depth order, edits/replacement/placement/reset, empty/missing
+chunks and imagery rebinding. Terrain ownership tests cover independent
+renderers, local-version restart, asset changes mid-build and fallback eviction.
+Two handle cases cover actual Canvas source resolution and stale/cross-renderer
+identity safety.
+
+The reproducible
+[`elevation-allocation.mjs`](../../scripts/instrumentation/elevation-allocation.mjs)
+probe warms 60 collections of nine chunks with 192 raised tiles per chunk, then
+samples 600 collections in bundled Chromium 153.0.8010.12. Both paths collect
+2,073,600 items. Sampled allocations fall from 222,895,820 to 45,961,768 bytes
+(about 79%). The new path builds nine layouts, 3,456 descriptors and 3,456 bound
+items during warmup, with no additional creation in the steady measured frames.
+Five full-geometry hashes match across unchanged content, edits, imagery
+replacement, eviction and same-coordinate chunk replacement; every emitted handle
+also resolves in the probe. The output list still allocates, and these estimates
+exclude raster, simulation and frame presentation. No FPS gain is established.
+[Sanitized results](../benchmarks/013-elevation-descriptor-cache.json) preserve
+samples and traversal evidence. Baseline for the descriptor comparison is
+`c471375`, after resource ownership/handle extraction.
+
+Post-extraction desktop v4/v10 traversal passes `--assert-ready`, with no page
+errors and zero missing/unfinished visible terrain during walking, sprinting or
+reversal. Movement interval p95 is 16.7–16.8 ms in this smoke run. Cold entry still
+has gaps (v4: 0 missing/3 unfinished frames; v10: 2 missing/2 unfinished). Host
+validation ran concurrently, so this is a readiness check, not an end-to-end
+before/after timing comparison. No physical-phone claim is made for this series.
+The updated scheduler probe also reproduces the previously recorded complete
+priority-order hash after resource ownership extraction; no scheduling-policy
+change is hidden in this refactor.
+
+
+Final integrated validation: all three typechecks, 1,328 unit tests, lint and
+production build pass. Lint retains 123 existing warnings / 32 informational
+diagnostics. Catalog and Workshop manifest regeneration pass; the final candidate
+list and fingerprints match the pre-series inventory, with only input digests
+changing. The full browser suite passes all 282 tests, including normal Chromium
+review parity, explorer readiness, indoor ordering, traffic and realm transitions.
+The desktop streaming runner passes `--assert-ready`. No promotion bank, saved
+generator identity or approval record is changed.

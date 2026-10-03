@@ -40,25 +40,25 @@ export interface SpriteItem {
 }
 
 export interface ElevationItem {
-  kind: "elevation";
-  sortKey: number;
+  readonly kind: "elevation";
+  readonly sortKey: number;
   /**
    * "surface" draws the tile shifted up (background for entities on this level).
    * "cliff" draws the cliff face (occludes entities at lower elevations).
    */
-  phase: "surface" | "cliff";
+  readonly phase: "surface" | "cliff";
   /** Tile top-left world X. */
-  wx: number;
+  readonly wx: number;
   /** Tile top-left world Y. */
-  wy: number;
+  readonly wy: number;
   /** Backend-owned imagery; resolved only while consuming this frame. */
-  terrainResource: TerrainResourceId;
+  readonly terrainResource: TerrainResourceId;
   /** Source X in chunk cache (native pixels). */
-  srcX: number;
+  readonly srcX: number;
   /** Source Y in chunk cache (native pixels). */
-  srcY: number;
+  readonly srcY: number;
   /** Height level (integer, typically 1-3). */
-  height: number;
+  readonly height: number;
 }
 
 export interface GrassItem {

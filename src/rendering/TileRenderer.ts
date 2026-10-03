@@ -5,7 +5,6 @@ import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
-  ELEVATION_PX,
   MAX_CHUNK_CACHE_ROWS_PER_FRAME,
   RENDER_DISTANCE,
   TILE_SIZE,
@@ -24,6 +23,7 @@ import { chunkToWorld } from "../world/types.js";
 import type { Camera } from "./Camera.js";
 import { CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
+import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
   TerrainPresentation,
@@ -81,6 +81,7 @@ export class TileRenderer implements TerrainPresentation {
   private roadSheetMap = new Map<RoadType, Spritesheet>();
   /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
   private readonly resources = new CanvasTerrainResources();
+  private readonly elevation = new ElevationDescriptorCache();
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
   private readonly resident = new Map<string, TerrainResident>();
@@ -98,6 +99,7 @@ export class TileRenderer implements TerrainPresentation {
   /** Release surfaces on realm changes and teardown, including half-built jobs. */
   clear(): void {
     this.resources.clear();
+    this.elevation.clear();
     this.resident.clear();
     this.cacheBuildStates.clear();
     this.terrainJobs.length = 0;
@@ -393,63 +395,11 @@ export class TileRenderer implements TerrainPresentation {
    * on top. Returns renderer-agnostic ElevationItem[] with world-space data.
    */
   collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange): ElevationItem[] {
-    const result: ElevationItem[] = [];
+    return this.elevation.collect(world, visible, this.resources);
+  }
 
-    for (let cy = visible.minCy; cy <= visible.maxCy; cy++) {
-      for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
-        const chunk = world.getChunkIfLoaded(cx, cy);
-        if (!chunk) continue;
-        const terrainResource = this.resources.resourceId(chunk);
-        if (terrainResource === null) continue;
-
-        // Fast skip: no elevation in this chunk
-        let hasElevation = false;
-        for (let i = 0; i < chunk.heightGrid.length; i++) {
-          if (chunk.heightGrid[i] !== 0) {
-            hasElevation = true;
-            break;
-          }
-        }
-        if (!hasElevation) continue;
-
-        const origin = chunkToWorld(cx, cy);
-
-        for (let ly = 0; ly < CHUNK_SIZE; ly++) {
-          for (let lx = 0; lx < CHUNK_SIZE; lx++) {
-            const h = chunk.getHeight(lx, ly);
-            if (h <= 0) continue;
-
-            const globalTy = cy * CHUNK_SIZE + ly;
-            const tileWx = origin.wx + lx * TILE_SIZE;
-            const tileWy = origin.wy + ly * TILE_SIZE;
-            const base = {
-              kind: "elevation" as const,
-              wx: tileWx,
-              wy: tileWy,
-              terrainResource,
-              srcX: lx * TILE_SIZE,
-              srcY: ly * TILE_SIZE,
-              height: h,
-            };
-            // Surface: sorts just before entities at this elevation so they
-            // draw on top of their own ground.
-            result.push({
-              ...base,
-              phase: "surface",
-              sortKey: globalTy * TILE_SIZE + h * ELEVATION_PX - 0.5,
-            });
-            // Cliff face: sorts at the tile's south edge so it occludes
-            // lower-elevation entities approaching from the north.
-            result.push({
-              ...base,
-              phase: "cliff",
-              sortKey: (globalTy + 1) * TILE_SIZE,
-            });
-          }
-        }
-      }
-    }
-    return result;
+  getElevationDiagnostics() {
+    return this.elevation.getDiagnostics();
   }
 
   /** Advance one chunk cache build by up to `rowBudget` rows. */
