@@ -2,7 +2,8 @@
 
 Topic: city-generation
 Status: dense neighborhood and commercial street checkpoints approved; v7–v10
-candidates staged for review. New worlds still default to regional-v4.
+candidates staged for review. New worlds default to the newest registered regional
+revision, currently regional-v11.
 Updated: 2026-10-03.
 
 Owns the current city progression, review identities and immutable generation
@@ -13,7 +14,10 @@ made after these recorded checkpoints.
 
 Selectable regional-v11 adds [gentle traffic and roof riding](vehicles.md) using
 v5's frozen dense-neighborhood terrain and a separate approved vehicle bank.
-It does not promote the v7–v10 city candidates or change the default revision.
+It does not promote the v7–v10 city candidates. The shared creation factory selects
+the highest registered revision number automatically, independent of menu order.
+The game and explorer use that default; explicit links and saved worlds retain
+their pinned descriptors.
 
 [Generated railways](trains.md) are planned, not implemented. Their future revision
 must reserve town stations, rail corridors, structure approaches and street/walking
@@ -64,7 +68,7 @@ independent. Geometry overlays show bays, crossings, doors, colliders and routes
 `commercial-city-assets-v1.json` pins ten exact human approvals, prop geometry
 and 61 opaque source cell recipes (persistent roadGrid IDs 15–75). Never
 regenerate it in builds. Saved v6 output is frozen too; later changes need a new
-revision/bank. New worlds still default to v4. All four commercial views are human-approved.
+revision/bank. All four commercial views are human-approved.
 
 ### Dense neighborhood and default revision
 
@@ -78,8 +82,8 @@ case ID, promoted building IDs and prop types. Keep new runs indexed in tools.
 V5 reuses the v4 placements/assets, aligns the plan's primary doorway with its
 source art, and paves every visible door/step threshold to the street sidewalk,
 including secondary condo and butcher entrances. Tactical 007 records the
-phase-1 neighborhood as approved. V4 remains frozen and the default for new
-worlds; approval alone does not change that default. Explorer/game handoffs must
+phase-1 neighborhood as approved. V4 remains frozen; new worlds follow the newest
+registered revision. Explorer/game handoffs must
 carry the candidate's actual generation descriptor, never a hardcoded prior revision.
 
 `src/generation/regional/dense-city-assets-v1.json` is an immutable promotion
@@ -87,7 +91,8 @@ snapshot, not build output. Do not regenerate it from changing review candidates
 Regional v4 pins the neutral surface lookup and persistent RoadType IDs 5–14;
 its geometry, assets, surface choices and realized fixtures have freeze tests.
 Future output changes require a new revision and promoted IDs/bank. New worlds
-default to Procedural regional with Dense districts (v4); older generators and
+default to Procedural regional with the newest registered revision; older generators
+and
 regional revisions remain available with legacy/old labels.
 
 ### Staged city places (v7–v10)

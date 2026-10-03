@@ -11,6 +11,7 @@ import {
   descriptorKey,
   type GenerationDescriptor,
   type GeneratorChoice,
+  REGIONAL_REVISIONS,
   resolveDescriptor,
   seedFromText,
 } from "./GenerationDescriptor.js";
@@ -77,7 +78,9 @@ describe("frozen legacy generation", () => {
 describe("generation identity", () => {
   it("pins versions and rejects unsupported external values", () => {
     const regional = createDescriptor("regional", 2026);
-    expect(regional.version).toBe("regional-v4");
+    expect(Number(regional.version.split("-v")[1])).toBe(
+      Math.max(...REGIONAL_REVISIONS.map((r) => Number(r.version.split("-v")[1]))),
+    );
     expect(Object.isFrozen(regional)).toBe(true);
     expect(() =>
       resolveDescriptor({ ...regional, version: "future" } as unknown as GenerationDescriptor),

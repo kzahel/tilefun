@@ -262,8 +262,9 @@ floor. Shops, apartments, and country homes use separate audited furniture recip
 
 ### Settled world checkpoint (Regional v3)
 
-New worlds default to **Procedural regional / Dense districts (v4)** in the game
-and explorer. Settled world v3 is labeled legacy; terrain-only v1 and district v2
+New worlds default to **Procedural regional / the newest registered revision**
+in the game and explorer (currently **Gentle traffic & roof rides, v11**). Settled
+world v3 is labeled legacy; terrain-only v1 and district v2
 are labeled old. Classic, Island, and Flat are labeled legacy. Existing
 descriptors, saves, and full links stay pinned.
 The frozen v2 terrain/placement fixture protects the older district revision.

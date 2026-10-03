@@ -48,6 +48,15 @@ export const REGIONAL_REVISIONS = [
   { version: "regional-v1", label: "Terrain only (v1, old)" },
 ] as const;
 
+/** New worlds track the newest registered revision, independent of menu order.
+ * Saved descriptors and explicit revision requests remain pinned. */
+export const LATEST_REGIONAL_REVISION = REGIONAL_REVISIONS.reduce((latest, current) =>
+  Number(current.version.slice("regional-v".length)) >
+  Number(latest.version.slice("regional-v".length))
+    ? current
+    : latest,
+).version;
+
 export const GENERATOR_CATALOG = [
   { choice: "regional", label: "Procedural regional", overview: true, settlements: true },
   { choice: "classic", label: "Classic (legacy)", overview: true, settlements: false },
@@ -157,7 +166,7 @@ export function createDescriptor(
     case "regional":
       return resolveDescriptor({
         type: "regional",
-        version: "regional-v4",
+        version: LATEST_REGIONAL_REVISION,
         seed,
         preset: "temperate-v1",
       });

@@ -1,39 +1,30 @@
 import { expect, test } from "@playwright/test";
-import { createDescriptor, resolveDescriptor } from "../src/generation/GenerationDescriptor.js";
+import {
+  createDescriptor,
+  LATEST_REGIONAL_REVISION,
+  REGIONAL_REVISIONS,
+  resolveDescriptor,
+} from "../src/generation/GenerationDescriptor.js";
 
-test("new worlds default to procedural regional v4 and clearly label older choices", async ({
-  page,
-}) => {
+test("new worlds and the explorer default to the newest regional revision", async ({ page }) => {
   await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const initial = JSON.parse(
     (await page.locator("#game").getAttribute("data-generation")) ?? "null",
   );
-  expect(initial).toMatchObject({ type: "regional", version: "regional-v4" });
+  expect(initial).toMatchObject({ type: "regional", version: LATEST_REGIONAL_REVISION });
   await page.keyboard.press("Escape");
   const type = page.getByRole("combobox", { name: "World type" });
   const revision = page.getByRole("combobox", { name: "Regional revision" });
   await expect(type).toHaveValue("regional");
-  await expect(revision).toHaveValue("regional-v4");
+  await expect(revision).toHaveValue(LATEST_REGIONAL_REVISION);
   await expect(type.locator("option")).toHaveText([
     "Procedural regional",
     "Classic (legacy)",
     "Island (legacy)",
     "Flat (legacy)",
   ]);
-  await expect(revision.locator("option")).toHaveText([
-    "Gentle traffic & roof rides (v11)",
-    "Dense districts (v4)",
-    "Connected entrances (v5, review)",
-    "City destinations (v10, review)",
-    "Varied architecture (v9, review)",
-    "Parks & squares (v8, review)",
-    "Parking lots (v7, review)",
-    "Commercial streets (v6, review)",
-    "Settled world (v3, legacy)",
-    "Districts (v2, old)",
-    "Terrain only (v1, old)",
-  ]);
+  await expect(revision.locator("option")).toHaveText(REGIONAL_REVISIONS.map((r) => r.label));
   await page.getByRole("textbox", { name: "World seed" }).fill("2026");
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute(
@@ -42,7 +33,7 @@ test("new worlds default to procedural regional v4 and clearly label older choic
   );
   await page.goto("/tilefun/world-explorer.html");
   await expect(type).toHaveValue("regional");
-  await expect(revision).toHaveValue("regional-v4");
+  await expect(revision).toHaveValue(LATEST_REGIONAL_REVISION);
 });
 
 test("game creates and reopens every generator with the pinned descriptor in IndexedDB", async ({

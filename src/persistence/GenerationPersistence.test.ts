@@ -6,6 +6,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import {
   createDescriptor,
   type GenerationDescriptor,
+  LATEST_REGIONAL_REVISION,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
 import { Realm } from "../server/Realm.js";
@@ -83,7 +84,7 @@ it("authority resolves an omitted seed once and a resolved descriptor requires n
     return 17;
   });
   expect(descriptor.seed).toBe(17);
-  expect(descriptor.version).toBe("regional-v4");
+  expect(descriptor.version).toBe(LATEST_REGIONAL_REVISION);
   expect(
     resolveCreation(descriptor, () => {
       calls++;
