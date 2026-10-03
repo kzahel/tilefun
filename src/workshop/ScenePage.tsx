@@ -430,7 +430,7 @@ function Neighborhood({
           </div>
           {candidate.exploreUrl ? (
             <Link className="button" to={candidate.exploreUrl}>
-              Explore / play this neighborhood →
+              Explore archived review scene →
             </Link>
           ) : null}
           <Link to="/tool/outdoor">Outdoor asset catalog →</Link>

@@ -38,7 +38,7 @@ import {
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
-import { SAVE_FORMAT } from "../persistence/SaveFormat.js";
+import { recreationGeneration, worldCompatibility } from "../persistence/WorldCompatibility.js";
 import {
   type InspectionSnapshot,
   readInspection,
@@ -285,7 +285,7 @@ export class GameServer {
 
     // Load most recent world, or create a default one
     const worlds = await this.registry.listWorlds();
-    const firstWorld = worlds.find((world) => world.saveFormat === SAVE_FORMAT);
+    const firstWorld = worlds.find((world) => !worldCompatibility(world));
     if (firstWorld) {
       console.log("[tilefun] loading existing world:", firstWorld.id, firstWorld.name);
       await this.loadWorldIntoDefaultRealm(firstWorld.id);
@@ -668,6 +668,7 @@ export class GameServer {
   private async loadWorldIntoDefaultRealm(
     worldId: string,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
+    await this.realmMetadata(worldId);
     const realm = this.activeRealm;
 
     // Re-key in the realms map
@@ -799,7 +800,8 @@ export class GameServer {
           }
       }
       // A removed/invalid interior falls back to its parent, never another player's latest world.
-      if (await this.registry.getWorld(saved.parentWorldId)) {
+      const savedParent = await this.registry.getWorld(saved.parentWorldId);
+      if (savedParent && !worldCompatibility(savedParent)) {
         const realm = await this.getOrCreateRealm(saved.parentWorldId);
         const fallback = saved.player.returnLocation;
         if (fallback?.worldId === saved.parentWorldId) {
@@ -819,20 +821,16 @@ export class GameServer {
   private async realmMetadata(worldId: string): Promise<WorldMeta | undefined> {
     const known = await this.registry.getWorld(worldId);
     if (known) {
-      if (known.saveFormat !== SAVE_FORMAT)
-        throw new Error(
-          "This world uses an incompatible save format. Create a new world or explicitly delete it.",
-        );
+      if (worldCompatibility(known)) throw new Error(worldCompatibility(known));
       return known;
     }
     const parsed = parseInteriorId(worldId);
     if (!parsed) return undefined;
     const parent = await this.registry.getWorld(parsed.parentWorldId);
     if (!parent) throw new Error("Parent world not found.");
-    if (parent.saveFormat !== SAVE_FORMAT)
-      throw new Error("Parent world uses an incompatible save format.");
+    if (worldCompatibility(parent)) throw new Error(worldCompatibility(parent));
     const generation = descriptorFromMetadata(parent);
-    if (generation.type !== "regional" || generation.version === "regional-v1")
+    if (generation.type !== "regional")
       throw new Error("This generator has no enterable building plans.");
     const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
     if (!match) throw new Error("Invalid building owner.");
@@ -1167,6 +1165,18 @@ export class GameServer {
     return this.registry.createWorld(name, worldType, seed, undefined, resolved);
   }
 
+  async recreateWorld(id: string): Promise<WorldMeta> {
+    const previous = await this.registry.getWorld(id);
+    if (!previous) throw new Error("World not found.");
+    // Deliberately keep the original; existing delete-world handles explicit disposal.
+    return this.createWorld(
+      `${previous.name} (recreated)`,
+      undefined,
+      undefined,
+      recreationGeneration(previous),
+    );
+  }
+
   async deleteWorld(id: string): Promise<void> {
     const affected = [...this.realms.entries()].filter(
       ([key, realm]) => key === id || realm.interior?.parentWorldId === id,
@@ -1174,7 +1184,8 @@ export class GameServer {
     const fallback =
       this.defaultRealmId && this.defaultRealmId !== id
         ? this.defaultRealmId
-        : ((await this.registry.listWorlds()).find((w) => w.id !== id)?.id ?? null);
+        : ((await this.registry.listWorlds()).find((w) => w.id !== id && !worldCompatibility(w))
+            ?.id ?? null);
     for (const [, realm] of affected)
       for (const session of [...realm.sessions.values()]) {
         if (fallback) {
@@ -1225,6 +1236,7 @@ export class GameServer {
         createdAt: w.createdAt,
         lastPlayedAt: w.lastPlayedAt,
       };
+      info.incompatibleReason = worldCompatibility(w);
       info.generation = descriptorFromMetadata(w);
       return info;
     });
@@ -1318,6 +1330,7 @@ export class GameServer {
     // Chat shares the RCON channel but carries no administrative capability.
     const privileged =
       msg.type === "create-world" ||
+      msg.type === "recreate-world" ||
       msg.type === "delete-world" ||
       msg.type === "rename-world" ||
       (msg.type === "rcon" &&
@@ -1453,6 +1466,24 @@ export class GameServer {
               type: "request-error",
               requestId: msg.requestId,
               message: error instanceof Error ? error.message : String(error),
+            }),
+          );
+        return;
+
+      case "recreate-world":
+        this.trackOperation(this.recreateWorld(msg.worldId))
+          .then((meta) =>
+            this.transport.send(clientId, {
+              type: "world-created",
+              requestId: msg.requestId,
+              meta,
+            }),
+          )
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: String(error),
             }),
           );
         return;

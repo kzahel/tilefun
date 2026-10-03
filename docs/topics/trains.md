@@ -87,7 +87,9 @@ then long trunks and express service. [Preview slice 025](../tactical/025-railwa
 Use shared server authority, replicated rendering and the current shared
 persistence/residency contract. Existing vehicle approvals do not cover train
 or structure geometry. New exact candidates follow [art review](art-review.md);
-old generators and promoted banks remain immutable.
+promoted banks and exact review snapshots remain immutable. Railway integration
+updates the current generator and bumps its version; retired saves use explicit
+same-seed recreation, as described in [city generation](city-generation.md).
 
 ## Review entry points
 

@@ -1,16 +1,17 @@
 import { expect, type Page, test } from "@playwright/test";
-import { DistrictSource } from "../src/generation/regional/DistrictStrategy.js";
+import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
-const source = new DistrictSource(regionalWorld(2026));
+const source = new DenseDistrictSource(regionalWorld(2026), true);
 const lot = source
   .owner(0, 0)
   ?.blocks.flatMap((b) => b.lots)
-  .find((l) => l.buildingType.startsWith("prop-regional-apartment-"));
+  .find((l) => l.buildingType.includes("condo"));
 if (!lot) throw new Error("Missing apartment checkpoint");
 const generation = {
   type: "regional",
-  version: "regional-v3",
+  version: CURRENT_REGIONAL_VERSION,
   seed: 2026,
   preset: "temperate-v1",
 } as const;
@@ -78,18 +79,20 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
         __game: import("../src/client/GameClient.js").GameClient;
       }
     ).__game;
-    g.camera.snapTo(176, 100);
+    g.camera.snapTo(320, 220);
     g.camera.zoom = 0.6;
   });
   const initial = (await state(page)).room;
+  const entryX = (await state(page)).player.wx;
+  const streetCell: [number, number] = [Math.floor(entryX / 32), 8];
   await page.getByRole("button", { name: "Room rectangle", exact: true }).click();
-  await draw(page, [4, 0], [10, 4]);
+  await draw(page, [10, 4], [16, 8]);
   await expect.poll(async () => (await state(page)).error).toBe("");
   await expect.poll(async () => (await state(page)).room?.revision).toBe(1);
   await page.getByRole("button", { name: "Door", exact: true }).click();
-  await draw(page, [4, 3]);
+  await draw(page, [10, 7]);
   await expect.poll(async () => (await state(page)).room?.revision).toBe(2);
-  expect((await state(page)).room?.document.cells.find((c) => c.x === 4 && c.y === 3)?.value).toBe(
+  expect((await state(page)).room?.document.cells.find((c) => c.x === 10 && c.y === 7)?.value).toBe(
     "+",
   );
   await page.screenshot({ path: "/tmp/tilefun-editable-gameplay-room.png" });
@@ -106,22 +109,22 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
     (await state(page)).props.filter((p) => p.type.startsWith("prop-interior-furniture:")).length;
   await page.getByRole("button", { name: "Props", exact: false }).click();
   await page.getByRole("button", { name: "stool", exact: true }).click();
-  await draw(page, [6, 2]);
-  await expect.poll(furnitureCount).toBe(4);
+  await draw(page, [12, 6]);
+  await expect.poll(furnitureCount).toBe(7);
   await page.getByRole("button", { name: "Delete", exact: true }).click();
-  await draw(page, [6, 2]);
-  await expect.poll(furnitureCount).toBe(3);
+  await draw(page, [12, 6]);
+  await expect.poll(furnitureCount).toBe(6);
   await page.getByRole("button", { name: "stool", exact: true }).click();
-  await draw(page, [6, 2]);
-  await expect.poll(furnitureCount).toBe(4);
+  await draw(page, [12, 6]);
+  await expect.poll(furnitureCount).toBe(7);
   await page.getByRole("button", { name: "Rooms", exact: false }).click();
   // Invalid erasure cannot remove the street doorway or enter history.
-  await draw(page, [2, 4]); // selected Door, same protected door = no-op
+  await draw(page, streetCell); // selected Door, same protected door = no-op
   await page.getByRole("button", { name: "Paint / erase", exact: true }).click();
-  await draw(page, [2, 4]);
+  await draw(page, streetCell);
   await expect.poll(async () => (await state(page)).error).toMatch(/doorway/);
   expect((await state(page)).room?.revision).toBe(6);
-  await draw(page, [1, 2]);
+  await draw(page, [2, 2]);
   await expect.poll(async () => (await state(page)).error).toMatch(/Furniture/);
   expect((await state(page)).room?.revision).toBe(6);
   const saved = (await state(page)).room;
@@ -138,7 +141,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await page.keyboard.press("Tab");
   // Walk through the actual new vertical doorway, then into the extension.
   await page.keyboard.down("ArrowRight");
-  await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(180);
+  await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
   await page.keyboard.up("ArrowRight");
   await page.screenshot({ path: "/tmp/tilefun-edited-room-walking.png" });
   await page.evaluate(() => {
@@ -169,7 +172,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
           }),
       ),
     )
-    .toBeGreaterThan(180);
+    .toBeGreaterThan(360);
   await page.reload();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const resume = page.getByRole("button", { name: "Resume", exact: true });
@@ -179,11 +182,11 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect
     .poll(async () => (await state(page)).props.find((p) => p.type === "prop-interior-wall")?.walls)
     .toEqual(walls);
-  await expect.poll(furnitureCount).toBe(4);
-  await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(180);
-  if ((await state(page)).player.wx > 110) {
+  await expect.poll(furnitureCount).toBe(7);
+  await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
+  if ((await state(page)).player.wx > entryX + 10) {
     await page.keyboard.down("ArrowLeft");
-    await expect.poll(async () => (await state(page)).player.wx).toBeLessThan(100);
+    await expect.poll(async () => (await state(page)).player.wx).toBeLessThan(entryX + 10);
     await page.keyboard.up("ArrowLeft");
   }
   await page.getByRole("button", { name: "Return to street" }).click();

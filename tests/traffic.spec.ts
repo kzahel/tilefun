@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { ClientStateView } from "../src/client/ClientStateView.js";
+import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 
 test.use({ channel: "chromium" });
 test("generated traffic stops, supports a real jump onto its roof, and continues driving", async ({
@@ -49,7 +50,7 @@ test("traffic playground fits phones and touch directions release on cancellatio
 test("traffic revision creates a real Worker world and survives reload", async ({ page }) => {
   const generation = {
     type: "regional",
-    version: "regional-v11",
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   };

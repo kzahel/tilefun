@@ -6,13 +6,7 @@ import {
 import { createGenerator } from "../src/generation/Generator.js";
 import { Chunk } from "../src/world/Chunk.js";
 
-for (const version of [
-  "regional-v1",
-  "regional-v2",
-  "regional-v3",
-  "regional-v4",
-  "regional-v10",
-] as const) {
+for (const version of [createDescriptor("regional", 2026).version]) {
   const descriptor = resolveDescriptor({
     ...createDescriptor("regional", 2026),
     version,

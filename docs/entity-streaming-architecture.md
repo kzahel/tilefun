@@ -27,8 +27,9 @@ insufficient. There is no initial file-backend requirement.
 Use a new versioned save namespace/schema. Do not build legacy readers,
 migrations or dual-write paths. Present old worlds as incompatible with an
 explicit reset/delete workflow; do not silently reinterpret or erase them.
-This save-format decision does not change immutable generator revisions or
-approved art identities.
+Generator incompatibility uses the same explicit recreation policy; see
+[city generation](topics/city-generation.md). Exact review and approved art identities
+remain immutable.
 
 ## Ownership
 

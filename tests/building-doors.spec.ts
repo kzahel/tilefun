@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
@@ -20,7 +21,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     if (!secondary) throw new Error("Missing second entrance");
     const generation = {
       type: "regional",
-      version: "regional-v5",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     };
@@ -102,7 +103,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     if (!door) throw new Error("Missing second door");
     const generation = {
       type: "regional",
-      version: "regional-v5",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     };

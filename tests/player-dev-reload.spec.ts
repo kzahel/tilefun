@@ -1,8 +1,10 @@
 import { expect, test } from "@playwright/test";
 import react from "@vitejs/plugin-react";
 import { createServer } from "vite";
-import { DistrictSource } from "../src/generation/regional/DistrictStrategy.js";
+import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { buildingDoors } from "../src/interiors/BuildingDoors.js";
 
 // Exercise the actual Vite event (including its awaited lifecycle hook), without editing source.
 test("dev full reload restores the indoor player and scopes the editor camera to its realm", async ({
@@ -21,14 +23,14 @@ test("dev full reload restores the indoor player and scopes the editor camera to
     const address = server.httpServer?.address();
     if (!address || typeof address === "string") throw new Error("Missing test server port");
     const origin = `http://127.0.0.1:${address.port}/tilefun/`;
-    const lot = new DistrictSource(regionalWorld(2026))
+    const lot = new DenseDistrictSource(regionalWorld(2026), true)
       .owner(0, 0)
       ?.blocks.flatMap((b) => b.lots)
-      .find((l) => l.buildingType.startsWith("prop-regional-apartment-"));
+      .find((l) => l.buildingType.includes("condo"));
     if (!lot) throw new Error("Missing apartment");
     const generation = {
       type: "regional",
-      version: "regional-v3",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     };
@@ -56,8 +58,14 @@ test("dev full reload restores the indoor player and scopes the editor camera to
           interior: game.stateView.interior,
         };
       });
+    const identity = (await state()).interior;
+    if (!identity) throw new Error("Missing interior identity");
+    const street = buildingDoors(identity).find((door) => door.id === "street");
+    if (!street) throw new Error("Missing street entrance");
+    await expect.poll(async () => (await state()).player.wy).toBeCloseTo(street.arrival.wy, 0);
+    const entryY = street.arrival.wy;
     await page.keyboard.down("ArrowUp");
-    await expect.poll(async () => (await state()).player.wy).toBeLessThan(112);
+    await expect.poll(async () => (await state()).player.wy).toBeLessThan(entryY - 40);
     await page.keyboard.up("ArrowUp");
     await page.keyboard.press("Tab");
     await page.evaluate(() => {
@@ -131,7 +139,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     if (!lot) throw new Error("Missing butcher");
     const generation = {
       type: "regional",
-      version: "regional-v5",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     };

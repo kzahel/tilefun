@@ -15,6 +15,7 @@ import { RoadType } from "../../road/RoadType.js";
 import { Chunk } from "../../world/Chunk.js";
 import { World } from "../../world/World.js";
 import { actorPlacements } from "../ActorPlacements.js";
+import { CURRENT_REGIONAL_VERSION } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
 import { buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
@@ -26,37 +27,13 @@ import { regionalWorld } from "./WorldDescriptor.js";
 
 const generation = {
   type: "regional",
-  version: "regional-v4",
+  version: CURRENT_REGIONAL_VERSION,
   seed: 2026,
   preset: "temperate-v1",
 } as const;
 const hash = (v: unknown) => createHash("sha256").update(JSON.stringify(v)).digest("hex");
-describe("pinned dense district revision", () => {
-  it("freezes v3 independently and pins the first v4 realization", () => {
-    for (const [version, expected] of [
-      ["regional-v3", "d4cbb46289d77be4cec1506cf266e36a876711ee12b40e71b4d4d858330a4b1a"],
-      ["regional-v4", "d2ad2c98bb0c8943692557c0feaef53bb3c151440b2c8d5976e4227160d5478c"],
-    ] as const) {
-      const g = createGenerator({ ...generation, version }),
-        h = createHash("sha256");
-      for (const [cx, cy] of [
-        [18, 32],
-        [23, 32],
-        [-4, -9],
-        [0, 0],
-        [42, 82],
-        [-63, -62],
-      ] as const) {
-        const c = new Chunk();
-        g.terrain.generate(c, cx, cy);
-        h.update(c.subgrid);
-        h.update(c.roadGrid);
-        h.update(c.heightGrid);
-        h.update(JSON.stringify(g.placements(cx, cy, new Set())));
-        h.update(JSON.stringify(g.actors?.(cx, cy) ?? []));
-      }
-      expect(h.digest("hex")).toBe(expected);
-    }
+describe("current dense districts and approved art", () => {
+  it("retains the exact promoted art bank", () => {
     expect(hash(DENSE_CITY_ASSETS)).toBe(
       "292d5025f800e99ad40a5e0788c7d36bf19849343b1c78589c6b78fda00e84c3",
     );
@@ -130,38 +107,26 @@ describe("pinned dense district revision", () => {
       expect(hash(again)).toBe(hash(plan));
     }
   });
-  it("v5 paves every door threshold through its interaction point to the street sidewalk without moving the pinned buildings", () => {
-    let reproducedV4Gap = false;
+  it("paves every door threshold through its interaction point to the street sidewalk", () => {
     for (const seed of [2026, 42]) {
-      const oldSource = new DenseDistrictSource(regionalWorld(seed));
       const source = new DenseDistrictSource(regionalWorld(seed), true);
-      const g = createGenerator({ ...generation, seed, version: "regional-v5" });
+      const g = createGenerator({ ...generation, seed, version: CURRENT_REGIONAL_VERSION });
       for (const [cx, cy] of [
         [0, 0],
         [-1, -1],
         [1, 1],
       ] as const) {
-        const plan = source.owner(cx, cy),
-          old = oldSource.owner(cx, cy);
-        if (!plan || !old) continue;
+        const plan = source.owner(cx, cy);
+        if (!plan) continue;
         expect(plan.recipe).toBe("dense-district-v2");
-        expect(plan.streets).toEqual(old.streets);
-        expect(plan.actors).toEqual(old.actors);
         const lots = plan.blocks.flatMap((b) => b.lots);
         expect(plan.entrancePaths).toHaveLength(
           lots.reduce((n, l) => n + denseDoorThresholds(denseBuilding(l.buildingType)).length, 0),
         );
-        for (const lot of lots) {
-          const previous = required(old.blocks.flatMap((b) => b.lots).find((l) => l.id === lot.id));
-          expect(lot.anchor).toEqual(previous.anchor);
-          expect(lot.bounds).toEqual(previous.bounds);
-          expect(lot.buildingType).toBe(previous.buildingType);
-        }
         for (const path of plan.entrancePaths ?? []) {
           const lot = required(lots.find((l) => l.id === path.lotId));
           const x = Math.floor(path.threshold.x),
             firstY = Math.floor(path.threshold.y);
-          reproducedV4Gap ||= denseSurfaceAt(old, x, firstY) === RoadType.None;
           // Inspect realized roadGrid cells, including chunk boundaries, rather
           // than only checking that the planner emits a connector rectangle.
           for (let y = firstY; y <= path.sidewalk.y + 1; y++) {
@@ -193,7 +158,6 @@ describe("pinned dense district revision", () => {
         }
       }
     }
-    expect(reproducedV4Gap).toBe(true);
   });
   it("audits both condo doors from native ground modules instead of guessed interaction offsets", () => {
     expect(denseDoorThresholds(denseBuilding("prop-city-dense-v1-condo-bay-3"))).toEqual([

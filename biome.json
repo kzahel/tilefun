@@ -41,7 +41,8 @@
         "public/data/art-catalog.json",
         "public/data/workshop-manifest.json",
         "public/data/outdoor-catalog.json",
-        "src/assets/outdoor/outdoor-runtime-v1.json"
+        "src/assets/outdoor/outdoor-runtime-v1.json",
+        "src/art/city-review-snapshots-v1.json"
       ],
       "formatter": {
         "enabled": false

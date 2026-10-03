@@ -101,8 +101,10 @@ If an obstacle cannot be crossed with supported spans/approaches, use a bounded
 deterministic alternate alignment or a deliberate connected terminal/service
 boundary. Never leave a half-bridge or a rail edge pointing into unsupported
 terrain. A corridor may be called continuous only after this topology validates.
-Existing regional revisions and approved banks stay frozen; select a new revision
-at implementation time rather than assuming the next version number is free.
+Generation policy updated 2026-10-03: compose into the single current generator
+and bump its version at implementation time. Retired saves require explicit
+same-seed recreation; approved banks and exact review snapshots stay immutable.
+See [city generation](../topics/city-generation.md).
 
 ## Station and crossing layouts
 

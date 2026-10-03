@@ -194,7 +194,7 @@ if (districtRun) {
   const play = document.createElement("a");
   play.id = "district-play";
   play.className = "button";
-  play.textContent = "Explore / play this neighborhood ↗";
+  play.textContent = "Explore archived review scene ↗";
   $("source-link").parentElement?.prepend(play);
 }
 select.replaceChildren(...CITY_BUILDING_PREFABS.map((p) => new Option(p.name, p.type)));

@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { MemoryRecordStore } from "./MemoryRecordStore.js";
 import { RecordPersistenceStore } from "./RecordPersistenceStore.js";
 import { readInspection } from "./WorldInspection.js";
@@ -24,7 +25,7 @@ it("suppresses a generated preview actor whose tombstone belongs to a distant bi
     store,
     {
       type: "regional",
-      version: "regional-v5",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     },

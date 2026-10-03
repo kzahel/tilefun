@@ -4,6 +4,7 @@ import {
   descriptorFromMetadata,
   GENERATOR_CATALOG,
   type GeneratorChoice,
+  isCurrentGeneration,
   REGIONAL_REVISIONS,
   resolveDescriptor,
 } from "../generation/GenerationDescriptor.js";
@@ -326,10 +327,20 @@ function changedView(immediate = false): void {
   querySerial++;
   const gameUrl = new URL("./", location.href);
   if (serverAddress) gameUrl.searchParams.set("server", serverAddress);
-  if (savedWorldId) gameUrl.searchParams.set("worldId", savedWorldId);
-  gameUrl.searchParams.set("generation", JSON.stringify(generation));
+  if (savedWorldId && isCurrentGeneration(generation))
+    gameUrl.searchParams.set("worldId", savedWorldId);
+  const playable = isCurrentGeneration(generation);
+  const target = playable ? generation : createDescriptor("regional", generation.seed);
+  gameUrl.searchParams.set("generation", JSON.stringify(target));
   element<HTMLAnchorElement>("#create-world").href = gameUrl.href;
-  gameUrl.searchParams.set("arrival", JSON.stringify({ x: view.x, y: view.y, generation }));
+  if (playable)
+    gameUrl.searchParams.set("arrival", JSON.stringify({ x: view.x, y: view.y, generation }));
+  element("#play-here").textContent = playable
+    ? "Play here"
+    : "Create current world with this seed";
+  element("#play-here").title = playable
+    ? ""
+    : "Archived review scene. The current generator creates a different world; this layout is not playable.";
   element<HTMLAnchorElement>("#play-here").href = gameUrl.href;
   client.invalidate();
   app.dataset.settled = "false";
@@ -508,6 +519,8 @@ for (const checkbox of document.querySelectorAll<HTMLInputElement>("[data-layer]
 const revisionSelect = element<HTMLSelectElement>("#regional-revision");
 for (const revision of REGIONAL_REVISIONS)
   revisionSelect.add(new Option(revision.label, revision.version));
+if (!isCurrentGeneration(generation))
+  revisionSelect.add(new Option(`Archived review (${generation.version})`, generation.version));
 revisionSelect.value =
   generation.type === "regional" ? generation.version : createDescriptor("regional", 42).version;
 const generatorSelect = element<HTMLSelectElement>("#generator");

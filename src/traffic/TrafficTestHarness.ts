@@ -4,6 +4,7 @@ import { Direction } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { PropManager } from "../entities/PropManager.js";
+import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { ProceduralProps } from "../generation/ProceduralProps.js";
 import type { Movement } from "../input/ActionManager.js";
@@ -16,7 +17,7 @@ import { TrafficSystem } from "./TrafficSystem.js";
 
 export const TRAFFIC_DEMO_GENERATION = {
   type: "regional",
-  version: "regional-v11",
+  version: CURRENT_REGIONAL_VERSION,
   seed: 2026,
   preset: "temperate-v1",
 } as const;

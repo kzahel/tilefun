@@ -1,12 +1,14 @@
 import { TerrainId } from "../autotile/TerrainId.js";
-import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
+import {
+  createDescriptor,
+  type GenerationDescriptor,
+  requireCurrentGeneration,
+  resolveDescriptor,
+} from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
-import { CityPlacesSource } from "./regional/CityPlacesPlanner.js";
-import { CommercialDistrictSource } from "./regional/CommercialDistrictPlanner.js";
-import { type CountryPlan, CountrySource } from "./regional/CountrysidePlanner.js";
+import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
-import { DistrictSource } from "./regional/DistrictStrategy.js";
 import {
   LandCover,
   makeGrid,
@@ -27,12 +29,7 @@ export function normalizeGeneration(
 ): GenerationDescriptor {
   if ("type" in world) return resolveDescriptor(world);
   validateWorld(world);
-  return resolveDescriptor({
-    type: "regional",
-    version: "regional-v1",
-    seed: world.seed,
-    preset: "temperate-v1",
-  });
+  return createDescriptor("regional", world.seed);
 }
 
 /** Cheap world queries never realize chunks; all terrain classes use production samplers. */
@@ -40,37 +37,12 @@ export function* overviewSteps(
   input: GenerationDescriptor | RegionalWorld,
   request: RegionalRequest,
 ): Generator<void, OverviewResult> {
-  const descriptor = normalizeGeneration(input);
+  const descriptor = requireCurrentGeneration(normalizeGeneration(input));
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
-    const source =
-      descriptor.version === "regional-v10"
-        ? new CityPlacesSource(regionalWorld(descriptor.seed), 10)
-        : descriptor.version === "regional-v9"
-          ? new CityPlacesSource(regionalWorld(descriptor.seed), 9)
-          : descriptor.version === "regional-v8"
-            ? new CityPlacesSource(regionalWorld(descriptor.seed), 8)
-            : descriptor.version === "regional-v7"
-              ? new CityPlacesSource(regionalWorld(descriptor.seed), 7)
-              : descriptor.version === "regional-v6"
-                ? new CommercialDistrictSource(regionalWorld(descriptor.seed))
-                : descriptor.version === "regional-v4" ||
-                    descriptor.version === "regional-v5" ||
-                    descriptor.version === "regional-v11"
-                  ? new DenseDistrictSource(
-                      regionalWorld(descriptor.seed),
-                      descriptor.version !== "regional-v4",
-                    )
-                  : new DistrictSource(
-                      regionalWorld(descriptor.seed),
-                      descriptor.version === "regional-v3",
-                    );
+    const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
     const districts: DistrictPlan[] = [];
-    if (
-      descriptor.version !== "regional-v1" &&
-      result.detail === "region" &&
-      result.grid.step <= 16
-    ) {
+    if (result.detail === "region" && result.grid.step <= 16) {
       let features = result.stats.features;
       for (const settlement of result.settlements) {
         const plan = source.owner(settlement.owner.cx, settlement.owner.cy);
@@ -96,19 +68,6 @@ export function* overviewSteps(
       0,
     );
     const countryside: CountryPlan[] = [];
-    if (
-      descriptor.version === "regional-v3" &&
-      result.detail === "region" &&
-      result.grid.step <= 16
-    ) {
-      for (const plan of new CountrySource(regionalWorld(descriptor.seed)).query(request.bounds)) {
-        const count = 1 + plan.paths.length + plan.props.length + plan.actors.length;
-        if (result.stats.features + count > request.limits.maxFeatures) break;
-        countryside.push(plan);
-        result.stats.features += count;
-        yield;
-      }
-    }
     return { ...result, world: descriptor, districts, countryside };
   }
   validateRequest(request);

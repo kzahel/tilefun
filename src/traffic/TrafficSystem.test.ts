@@ -5,6 +5,7 @@ import { Direction } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { PropManager } from "../entities/PropManager.js";
+import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
@@ -77,16 +78,13 @@ describe("generated road traffic", () => {
     expect(client.collider).toEqual(car.collider);
     expect(client.noShadow).toBe(true);
   });
-  it("keeps traffic off frozen revisions and provides a connected semantic network in v11", () => {
+  it("provides a connected semantic traffic network in the current generator", () => {
     const descriptor = {
       type: "regional",
-      version: "regional-v11",
+      version: CURRENT_REGIONAL_VERSION,
       seed: 2026,
       preset: "temperate-v1",
     } as const;
-    expect(createGenerator({ ...descriptor, version: "regional-v5" }).terrain).not.toBeInstanceOf(
-      TrafficStrategy,
-    );
     const strategy = createGenerator(descriptor).terrain as TrafficStrategy;
     const graph = strategy.trafficNetwork(300 * 16, 519 * 16);
     expect(graph.lanes.size).toBeGreaterThan(50);

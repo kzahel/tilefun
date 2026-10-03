@@ -6,7 +6,7 @@ import {
 } from "../generation/regional/RegionalPlanner.js";
 import { buildLaneGraph, generatedSegments, type LaneGraph } from "./LaneGraph.js";
 
-/** New identity, frozen v5 terrain/art plus generated traffic. No prior output changes. */
+/** Current regional composition: connected town plans, terrain and road traffic. */
 export class TrafficStrategy extends DenseDistrictStrategy {
   private networks = new Map<string, LaneGraph>();
   constructor(world: ConstructorParameters<typeof DenseDistrictStrategy>[0]) {

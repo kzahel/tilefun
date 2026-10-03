@@ -19,7 +19,7 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "city-places-v10";
   readonly center: { x: number; y: number };
   readonly actors: ActorPlacement[];
-  /** Absent in frozen v4. Threshold-to-sidewalk connections belong to v5. */
+  /** Optional threshold-to-sidewalk connections; enabled for current gameplay. */
   readonly entrancePaths?: readonly {
     lotId: string;
     doorId: string;

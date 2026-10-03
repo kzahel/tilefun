@@ -1,14 +1,8 @@
 import type { RouteWaypoint } from "../entities/Entity.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { FlatStrategy } from "./FlatStrategy.js";
-import { type GenerationDescriptor, resolveDescriptor } from "./GenerationDescriptor.js";
+import { type GenerationDescriptor, requireCurrentGeneration } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
-import { CityPlacesStrategy } from "./regional/CityPlacesStrategy.js";
-import { CommercialDistrictStrategy } from "./regional/CommercialDistrictStrategy.js";
-import { DenseDistrictStrategy } from "./regional/DenseDistrictStrategy.js";
-import { DistrictStrategy } from "./regional/DistrictStrategy.js";
-import { RegionalStrategy } from "./regional/RegionalStrategy.js";
-import { SettledStrategy } from "./regional/SettledStrategy.js";
 import { regionalWorld } from "./regional/WorldDescriptor.js";
 import { generateStructuresForChunk, type StructurePlacement } from "./StructureGenerator.js";
 import type { TerrainStrategy } from "./TerrainStrategy.js";
@@ -33,7 +27,7 @@ export interface WorldGenerator {
 
 /** Shared factory. Hosts do not select terrain or structure implementations. */
 export function createGenerator(input: GenerationDescriptor): WorldGenerator {
-  const descriptor = resolveDescriptor(input);
+  const descriptor = requireCurrentGeneration(input);
   switch (descriptor.type) {
     case "classic": {
       const radius = descriptor.preset === "island" ? 12 : 0;
@@ -52,50 +46,13 @@ export function createGenerator(input: GenerationDescriptor): WorldGenerator {
       };
     case "regional": {
       const world = regionalWorld(descriptor.seed);
-      let terrain: RegionalStrategy;
-      switch (descriptor.version) {
-        case "regional-v11":
-          terrain = new TrafficStrategy(world);
-          break;
-        case "regional-v1":
-          terrain = new RegionalStrategy(world);
-          break;
-        case "regional-v2":
-          terrain = new DistrictStrategy(world);
-          break;
-        case "regional-v3":
-          terrain = new SettledStrategy(world);
-          break;
-        case "regional-v4":
-          terrain = new DenseDistrictStrategy(world);
-          break;
-        case "regional-v5":
-          terrain = new DenseDistrictStrategy(world, true);
-          break;
-        case "regional-v10":
-          terrain = new CityPlacesStrategy(world, 10);
-          break;
-        case "regional-v9":
-          terrain = new CityPlacesStrategy(world, 9);
-          break;
-        case "regional-v8":
-          terrain = new CityPlacesStrategy(world, 8);
-          break;
-        case "regional-v7":
-          terrain = new CityPlacesStrategy(world, 7);
-          break;
-        case "regional-v6":
-          terrain = new CommercialDistrictStrategy(world);
-          break;
-      }
+      const terrain = new TrafficStrategy(world);
       return {
         descriptor,
         terrain,
-        ...(terrain instanceof SettledStrategy || terrain instanceof DenseDistrictStrategy
-          ? { actors: (cx: number, cy: number) => terrain.actors(cx, cy) }
-          : {}),
+        actors: (cx, cy) => terrain.actors(cx, cy),
         placements: (cx, cy) => ({
-          placements: terrain instanceof DistrictStrategy ? terrain.placements(cx, cy) : [],
+          placements: terrain.placements(cx, cy),
           newIntersectionKeys: [],
         }),
       };

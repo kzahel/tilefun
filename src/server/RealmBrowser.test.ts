@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+  CURRENT_REGIONAL_VERSION,
   createDescriptor,
   type GenerationDescriptor,
   type GenerationRequest,
@@ -565,7 +566,7 @@ it("Play here checks identity and realized walls, and live inspection preserves 
   await new Promise((r) => setTimeout(r, 0));
   const generation = {
     type: "regional",
-    version: "regional-v3",
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -575,7 +576,7 @@ it("Play here checks identity and realized walls, and live inspection preserves 
   expect(Math.hypot(initial.wx / 16 - 300, initial.wy / 16 - 519)).toBeLessThanOrEqual(46);
   const props = server.propManager.props.filter((p) => p.proceduralId);
   expect(props.length).toBeGreaterThan(0);
-  const building = props.find((p) => p.type.includes("apartment"));
+  const building = props.find((p) => p.type.includes("condo"));
   if (!building) throw new Error("Missing apartment");
   await server.loadWorld(meta.id, {
     x: building.position.wx / 16,
@@ -621,7 +622,7 @@ it("building doors share persistent furnished realms and return to the right ext
   await new Promise((r) => setTimeout(r, 0));
   const generation = {
     type: "regional",
-    version: "regional-v3",
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -634,7 +635,7 @@ it("building doors share persistent furnished realms and return to the right ext
   );
   await server.loadWorld(meta.id, { x: 300, y: 519, generation });
   const prop = server.propManager.props.find(
-    (p) => p.type.startsWith("prop-regional-apartment-") && p.proceduralId,
+    (p) => p.type.startsWith("prop-city-dense-v1-condo") && p.proceduralId,
   );
   if (!prop?.proceduralId) throw new Error("No apartment");
   const { exteriorEntrance } = await import("../interiors/GameplayInterior.js");
@@ -976,6 +977,7 @@ it("remote administration requires authorization while ordinary chat and realm b
     if (!worldId) throw new Error("No default world");
     for (const message of [
       { type: "create-world", requestId: 1, name: "Unauthorized" },
+      { type: "recreate-world", requestId: 11, worldId },
       { type: "rename-world", requestId: 2, worldId, name: "Unauthorized" },
       { type: "delete-world", requestId: 3, worldId },
       { type: "rcon", requestId: 4, command: "sv_speed 99" },
@@ -983,7 +985,7 @@ it("remote administration requires authorization while ordinary chat and realm b
       transport.clientSend("guest", message);
     // Omitting requestId must never bypass authorization on a decoded JSON message.
     transport.clientSend("guest", { type: "rcon", command: "sv_speed 99" } as ClientMessage);
-    expect(transport.messagesOfType("guest", "request-error")).toHaveLength(5);
+    expect(transport.messagesOfType("guest", "request-error")).toHaveLength(6);
     expect(await registry.listWorlds()).toEqual(before);
     expect(server.speedMultiplier).toBe(1);
     transport.clientSend("guest", { type: "rcon", requestId: 5, command: "say Hello" });
@@ -1037,7 +1039,7 @@ async function indoorSetup() {
   await server.settle();
   const generation = {
     type: "regional",
-    version: "regional-v3",
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -1050,7 +1052,7 @@ async function indoorSetup() {
   );
   await server.loadWorld(meta.id, { x: 300, y: 519, generation });
   const prop = server.propManager.props.find(
-    (p) => p.type.startsWith("prop-regional-apartment-") && p.proceduralId,
+    (p) => p.type.startsWith("prop-city-dense-v1-condo") && p.proceduralId,
   );
   if (!prop?.proceduralId) throw new Error("Missing apartment");
   const { exteriorEntrance } = await import("../interiors/GameplayInterior.js");
@@ -1297,7 +1299,7 @@ describe("durable player location", () => {
       const identity = setup.server.worldInterior;
       if (!identity) throw new Error("Missing interior");
       const { buildingDoors } = await import("../interiors/BuildingDoors.js");
-      const street = buildingDoors(identity)[0];
+      const street = buildingDoors(identity).find((door) => door.id === "street");
       if (!street) throw new Error("Missing street connection");
       Object.assign(identity, {
         doors: [
@@ -1423,7 +1425,7 @@ async function cityDoorSetup(building = "butcher") {
   const { exteriorDoors } = await import("../interiors/BuildingDoors.js");
   const generation = {
     type: "regional",
-    version: "regional-v5",
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -1683,5 +1685,44 @@ it("automatic doors validate intent and freeze the source while another player k
   expect(motions[1]?.to).toEqual(session.player.position);
   expect(session.realmId).not.toBe(meta.id);
   expect(session.doorArrivalUntil).toBeGreaterThan(Date.now());
+  await server.destroy();
+});
+
+it("lists retired worlds without opening them and recreates into a clean container with the same seed", async () => {
+  const { server, registry, transport, createStore } = await createTestSetup();
+  const old = await registry.createWorld("Old town", "flat", 2026);
+  Object.assign(old, {
+    generation: { type: "regional", version: "regional-v5", seed: 2026, preset: "temperate-v1" },
+  });
+  const store = createStore(old.id);
+  await store.open();
+  await store.save([
+    {
+      collection: "entities",
+      key: "old-npc",
+      scope: "0,0",
+      value: { marker: "must not transfer" },
+    },
+  ]);
+  transport.connect("reviewer");
+  transport.clientSend("reviewer", { type: "list-realms", requestId: 990 });
+  await vi.waitFor(() =>
+    expect(
+      transport
+        .messagesOfType("reviewer", "realm-list")
+        .at(-1)
+        ?.realms.find((r) => r.id === old.id)?.incompatibleReason,
+    ).toMatch(/retired/i),
+  );
+  await expect(server.loadWorld(old.id)).rejects.toThrow(/retired/i);
+  const fresh = await server.recreateWorld(old.id);
+  expect(fresh.id).not.toBe(old.id);
+  expect(fresh.generation).toEqual(createDescriptor("regional", 2026));
+  expect(await registry.getWorld(old.id)).toEqual(old);
+  const clean = createStore(fresh.id);
+  await clean.open();
+  expect(await clean.get("entities", "old-npc")).toBeUndefined();
+  expect(await store.get("entities", "old-npc")).toEqual({ marker: "must not transfer" });
+  await expect(server.loadWorld(fresh.id)).resolves.toBeDefined();
   await server.destroy();
 });

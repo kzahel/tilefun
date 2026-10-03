@@ -2,9 +2,8 @@ import { describe, expect, it } from "vitest";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { CHUNK_SIZE } from "../../config/constants.js";
 import { Chunk } from "../../world/Chunk.js";
-
-import { createGenerator } from "../Generator.js";
 import { plannedElevation, QUERY_LIMITS, queryRegion } from "./RegionalPlanner.js";
+import { RegionalStrategy } from "./RegionalStrategy.js";
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
@@ -15,39 +14,28 @@ describe("Regional realization", () => {
     [100, -81],
   ] as const)
     it(`shares borders at ${cx},${cy}`, () => {
-      const generator = createGenerator({
-        type: "regional",
-        seed: 2026,
-        version: "regional-v1",
-        preset: "temperate-v1",
-      });
+      const terrain = new RegionalStrategy(regionalWorld(2026));
       const a = new Chunk();
       const east = new Chunk();
       const south = new Chunk();
-      generator.terrain.generate(a, cx, cy);
-      generator.terrain.generate(east, cx + 1, cy);
-      generator.terrain.generate(south, cx, cy + 1);
+      terrain.generate(a, cx, cy);
+      terrain.generate(east, cx + 1, cy);
+      terrain.generate(south, cx, cy + 1);
       for (let i = 0; i < Chunk.SUBGRID_SIZE; i++) {
         expect(a.getSubgrid(Chunk.SUBGRID_SIZE - 1, i)).toBe(east.getSubgrid(0, i));
         expect(a.getSubgrid(i, Chunk.SUBGRID_SIZE - 1)).toBe(south.getSubgrid(i, 0));
       }
-      expect(generator.placements(cx, cy, new Set()).placements).toEqual([]);
     });
   it("uses the overview water/shore thresholds and supported terrain chain", () => {
     const world = regionalWorld(2026);
-    const generator = createGenerator({
-      type: "regional",
-      seed: world.seed,
-      version: "regional-v1",
-      preset: "temperate-v1",
-    });
+    const terrain = new RegionalStrategy(regionalWorld(2026));
     for (const [cx, cy] of [
       [-10, -10],
       [50, 20],
       [0, 0],
     ] as const) {
       const chunk = new Chunk();
-      generator.terrain.generate(chunk, cx, cy);
+      terrain.generate(chunk, cx, cy);
       for (let ly = 0; ly < CHUNK_SIZE; ly++)
         for (let lx = 0; lx < CHUNK_SIZE; lx++) {
           const elevation = plannedElevation(

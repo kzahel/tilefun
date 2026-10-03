@@ -18,44 +18,29 @@ export type GenerationDescriptor =
     }
   | {
       readonly type: "regional";
-      readonly version:
-        | "regional-v1"
-        | "regional-v2"
-        | "regional-v3"
-        | "regional-v4"
-        | "regional-v5"
-        | "regional-v6"
-        | "regional-v7"
-        | "regional-v8"
-        | "regional-v9"
-        | "regional-v10"
-        | "regional-v11";
+      readonly version: `regional-v${number}`;
       readonly seed: number;
       readonly preset: "temperate-v1";
     };
 
+/** Bump when generation output changes; older saves are recreated, not emulated. */
+export const CURRENT_REGIONAL_VERSION = "regional-v12" as const;
 export const REGIONAL_REVISIONS = [
-  { version: "regional-v11", label: "Gentle traffic & roof rides (v11)" },
-  { version: "regional-v4", label: "Dense districts (v4)" },
-  { version: "regional-v5", label: "Connected entrances (v5, review)" },
-  { version: "regional-v10", label: "City destinations (v10, review)" },
-  { version: "regional-v9", label: "Varied architecture (v9, review)" },
-  { version: "regional-v8", label: "Parks & squares (v8, review)" },
-  { version: "regional-v7", label: "Parking lots (v7, review)" },
-  { version: "regional-v6", label: "Commercial streets (v6, review)" },
-  { version: "regional-v3", label: "Settled world (v3, legacy)" },
-  { version: "regional-v2", label: "Districts (v2, old)" },
-  { version: "regional-v1", label: "Terrain only (v1, old)" },
+  { version: CURRENT_REGIONAL_VERSION, label: "Current regional" },
 ] as const;
+export const LATEST_REGIONAL_REVISION = CURRENT_REGIONAL_VERSION;
 
-/** New worlds track the newest registered revision, independent of menu order.
- * Saved descriptors and explicit revision requests remain pinned. */
-export const LATEST_REGIONAL_REVISION = REGIONAL_REVISIONS.reduce((latest, current) =>
-  Number(current.version.slice("regional-v".length)) >
-  Number(latest.version.slice("regional-v".length))
-    ? current
-    : latest,
-).version;
+export function isCurrentGeneration(descriptor: GenerationDescriptor): boolean {
+  return descriptor.type !== "regional" || descriptor.version === CURRENT_REGIONAL_VERSION;
+}
+export function requireCurrentGeneration(descriptor: GenerationDescriptor): GenerationDescriptor {
+  const resolved = resolveDescriptor(descriptor);
+  if (!isCurrentGeneration(resolved))
+    throw new Error(
+      "This world uses a retired generator. Recreate it with the current generator and the same seed.",
+    );
+  return resolved;
+}
 
 export const GENERATOR_CATALOG = [
   { choice: "regional", label: "Procedural regional", overview: true, settlements: true },
@@ -129,7 +114,7 @@ export function resolveDescriptor(value: GenerationDescriptor): GenerationDescri
       return Object.freeze({ type: "flat", version: "flat-v1", seed: value.seed, preset: "grass" });
     case "regional":
       if (
-        !REGIONAL_REVISIONS.some((r) => r.version === value.version) ||
+        !/^regional-v[1-9][0-9]*$/.test(value.version) ||
         value.preset !== "temperate-v1" ||
         !Number.isInteger(value.seed) ||
         value.seed < 0 ||
@@ -221,9 +206,9 @@ export function resolveCreation(
   randomSeed: () => number = () => Math.floor(Math.random() * 2147483647),
 ): GenerationDescriptor {
   if (!request || typeof request !== "object") throw new Error("Invalid generation request.");
-  if ("type" in request) return resolveDescriptor(request);
+  if ("type" in request) return requireCurrentGeneration(request);
   const descriptor = createDescriptor(request.choice, request.seed ?? randomSeed(), request.roads);
   return request.version
-    ? resolveDescriptor({ ...descriptor, version: request.version } as GenerationDescriptor)
+    ? requireCurrentGeneration({ ...descriptor, version: request.version } as GenerationDescriptor)
     : descriptor;
 }

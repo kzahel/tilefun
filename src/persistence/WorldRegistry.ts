@@ -1,8 +1,4 @@
-import {
-  descriptorFromMetadata,
-  type GenerationRequest,
-  resolveCreation,
-} from "../generation/GenerationDescriptor.js";
+import { type GenerationRequest, resolveCreation } from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
@@ -83,10 +79,10 @@ export class WorldRegistry implements IWorldRegistry {
     if (!db) throw new Error("Registry not open");
     const resolved = generation
       ? resolveCreation(generation)
-      : descriptorFromMetadata({
-          worldType,
+      : resolveCreation({
+          choice: worldType === "generated" ? "classic" : worldType,
           seed: seed ?? Math.floor(Math.random() * 2147483647),
-          ...(roadParams ? { roadParams } : {}),
+          ...(roadParams ? { roads: roadParams } : {}),
         });
     const now = Date.now();
     const meta: WorldMeta = {

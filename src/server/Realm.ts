@@ -898,18 +898,7 @@ export class Realm {
         this.options.ambientSpawns === false ||
         dormantClientIds.has(session.clientId) ||
         this.interior ||
-        (this.generation.type === "regional" &&
-          [
-            "regional-v3",
-            "regional-v4",
-            "regional-v5",
-            "regional-v6",
-            "regional-v7",
-            "regional-v8",
-            "regional-v9",
-            "regional-v10",
-            "regional-v11",
-          ].includes(this.generation.version))
+        this.generation.type === "regional"
       )
         continue;
       if (
@@ -948,7 +937,7 @@ export class Realm {
       this.options.ambientSpawns !== false &&
       this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 100 &&
       !this.interior &&
-      (this.generation.type !== "regional" || this.generation.version === "regional-v1") &&
+      this.generation.type !== "regional" &&
       activeSessions.some((session) => !session.editorEnabled)
     ) {
       const activeProps = this.streaming
@@ -1034,10 +1023,7 @@ export class Realm {
     this.world.updateLoadedChunks(range, maxLoads);
     this.world.computeAutotile(this.blendGraph, maxAutotile);
 
-    if (
-      this.interior ||
-      (this.generation.type === "regional" && this.generation.version !== "regional-v1")
-    ) {
+    if (this.interior || this.generation.type === "regional") {
       const placementTiming = performanceMetrics.start();
       this.proceduralProps.reconcile(
         this.generator,
@@ -1100,10 +1086,7 @@ export class Realm {
   }
 
   realizeProceduralProps(): void {
-    if (
-      this.interior ||
-      (this.generation.type === "regional" && this.generation.version !== "regional-v1")
-    )
+    if (this.interior || this.generation.type === "regional")
       this.proceduralProps.reconcile(
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
@@ -1457,10 +1440,7 @@ export class Realm {
       },
       (key, seeded) => {
         this.proceduralProps.forget(key);
-        if (
-          this.interior ||
-          (this.generation.type === "regional" && this.generation.version !== "regional-v1")
-        ) {
+        if (this.interior || this.generation.type === "regional") {
           this.proceduralProps.reconcile(this.generator, [key]);
         } else if (!seeded && this.generation.type !== "flat") {
           const [cx = 0, cy = 0] = key.split(",").map(Number);
@@ -1524,28 +1504,9 @@ export class Realm {
       if (
         this.options.ambientSpawns !== false &&
         !this.interior &&
-        !(
-          this.generation.type === "regional" &&
-          [
-            "regional-v3",
-            "regional-v4",
-            "regional-v5",
-            "regional-v6",
-            "regional-v7",
-            "regional-v8",
-            "regional-v9",
-            "regional-v10",
-            "regional-v11",
-          ].includes(this.generation.version)
-        )
+        !(this.generation.type === "regional")
       )
-        spawnInitialChickens(
-          5,
-          this.world,
-          this.entityManager,
-          this.generation.type === "regional" ? playerX : 0,
-          this.generation.type === "regional" ? playerY : 0,
-        );
+        spawnInitialChickens(5, this.world, this.entityManager, 0, 0);
     }
 
     if (this.interior) {

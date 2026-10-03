@@ -55,6 +55,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [034 Renderer completion](034-renderer-completion.md) | Complete: dependency guards, recording backend and integrated/device validation |
 
+| [035 Current world generation](035-current-world-generation.md) | One evolving regional generator, explicit same-seed recreation and finite archived city reviews |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

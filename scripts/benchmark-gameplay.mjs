@@ -10,24 +10,25 @@ try {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(`${origin}/tools.html`);
   const arrival = await page.evaluate(async () => {
-    const { CityPlacesSource } = await import(
-      "/tilefun/src/generation/regional/CityPlacesPlanner.ts"
+    const { DenseDistrictSource } = await import(
+      "/tilefun/src/generation/regional/DenseDistrictPlanner.ts"
     );
     const { regionalWorld } = await import("/tilefun/src/generation/regional/WorldDescriptor.ts");
-    const p = new CityPlacesSource(regionalWorld(2026), 10).owner(0, 0);
-    const lot = p.blocks.flatMap((b) => b.lots).find((l) => l.buildingType.includes("office"));
-    if (!lot) throw Error("Missing office checkpoint");
+    const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
+    const p = new DenseDistrictSource(regionalWorld(2026), true).owner(0, 0);
+    const lot = p.blocks.flatMap((b) => b.lots).find((l) => l.buildingType.includes("condo"));
+    if (!lot) throw Error("Missing apartment checkpoint");
     return {
       x: lot.entrance.x,
       y: lot.entrance.y,
-      generation: { type: "regional", version: "regional-v10", seed: 2026, preset: "temperate-v1" },
+      generation: createDescriptor("regional", 2026),
     };
   });
   await page.goto(
     `${origin}/?generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
-  await page.getByRole("button", { name: /^Enter shop/ }).waitFor();
+  await page.getByRole("button", { name: /^Enter apartment/ }).waitFor();
   const sample = () =>
     page.evaluate(async () => {
       const game = document.querySelector("#game").__game;

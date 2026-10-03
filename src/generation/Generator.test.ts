@@ -12,6 +12,7 @@ import {
   type GenerationDescriptor,
   type GeneratorChoice,
   REGIONAL_REVISIONS,
+  resolveCreation,
   resolveDescriptor,
   seedFromText,
 } from "./GenerationDescriptor.js";
@@ -96,20 +97,40 @@ describe("generation identity", () => {
   });
 });
 
-it("keeps terrain-only Regional v1 frozen after adding districts", () => {
-  for (const [seed, cx, cy, hash] of [
-    [2026, 18, 32, "f995683a204d69ec394c4b7c74f4ac8d2e407e0772c08401d123ff03045b3264"],
-    [42, -10, -10, "b374cb44f26dad7a00cc188dd0b0ad2f8026f9233cbdab459c4b830e0f1474bf"],
-  ] as const) {
-    const chunk = new Chunk();
-    const generator = createGenerator({
+it("retires prior regional worlds without silently upgrading their terrain", () => {
+  for (let revision = 1; revision <= 11; revision++) {
+    const old = resolveDescriptor({
       type: "regional",
-      version: "regional-v1",
-      seed,
+      version: `regional-v${revision}`,
+      seed: 2026,
       preset: "temperate-v1",
     });
-    generator.terrain.generate(chunk, cx, cy);
-    expect(hashChunk(chunk)).toBe(hash);
-    expect(generator.placements(cx, cy, new Set()).placements).toEqual([]);
+    expect(() => createGenerator(old)).toThrow(/retired generator/);
+    expect(() => resolveCreation(old)).toThrow(/retired generator/);
   }
+});
+it("replays current terrain and placements independently of chunk request order", () => {
+  const generation = createDescriptor("regional", 2026);
+  const coords = [
+    [18, 32],
+    [19, 32],
+    [-4, -9],
+    [0, 0],
+  ] as const;
+  const sample = (reverse: boolean) => {
+    const g = createGenerator(generation),
+      result = new Map<string, string>();
+    for (const [cx, cy] of reverse ? [...coords].reverse() : coords) {
+      const c = new Chunk();
+      g.terrain.generate(c, cx, cy);
+      result.set(
+        `${cx},${cy}`,
+        hashChunk(c) +
+          JSON.stringify(g.placements(cx, cy, new Set())) +
+          JSON.stringify(g.actors?.(cx, cy)),
+      );
+    }
+    return result;
+  };
+  expect(sample(false)).toEqual(sample(true));
 });

@@ -17,7 +17,7 @@ const option = (key, fallback) =>
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
-const versions = option("versions", "regional-v4,regional-v10").split(",");
+const versions = option("versions", "current").split(",");
 const cpuRate = Number(option("cpu", "1"));
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
@@ -97,23 +97,27 @@ try {
     else await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
     await page.goto(`${origin}/tools.html`);
     const arrival = await page.evaluate(async (version) => {
-      const generation = { type: "regional", version, seed: 2026, preset: "temperate-v1" };
-      if (version === "regional-v4" || version === "regional-v11")
-        return { x: 300, y: 519, generation };
-      const { CityPlacesSource } = await import(
-        "/tilefun/src/generation/regional/CityPlacesPlanner.ts"
-      );
-      const { regionalWorld } = await import("/tilefun/src/generation/regional/WorldDescriptor.ts");
-      const plan = new CityPlacesSource(regionalWorld(2026), 10).owner(0, 0);
-      const lot = plan.blocks.flatMap((b) => b.lots).find((l) => l.buildingType.includes("office"));
-      if (!lot) throw Error("Missing office checkpoint");
-      return { x: lot.entrance.x, y: lot.entrance.y, generation };
+      const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
+      const generation = createDescriptor("regional", 2026);
+      if (version !== "current" && version !== generation.version)
+        throw Error("Retired generator: use --versions=current");
+      return { x: 300, y: 519, generation };
     }, version);
     await page.goto(
       `${origin}/?nogamepad&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
-    await page.waitForFunction(() => document.querySelector("#game").dataset.ready === "true");
+    await page.waitForFunction((arrival) => {
+      const canvas = document.querySelector("#game"),
+        game = canvas.__game;
+      const p = game.stateView.playerEntity.position;
+      return (
+        canvas.dataset.ready === "true" &&
+        canvas.dataset.generation === JSON.stringify(arrival.generation) &&
+        !game.mainMenu.visible &&
+        Math.hypot(p.wx / 16 - arrival.x, p.wy / 16 - arrival.y) <= 46
+      );
+    }, arrival);
     const display = await page.evaluate(() => ({
       viewport: { width: innerWidth, height: innerHeight },
       screen: { width: screen.width, height: screen.height },

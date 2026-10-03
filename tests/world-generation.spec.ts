@@ -2,8 +2,6 @@ import { expect, test } from "@playwright/test";
 import {
   createDescriptor,
   LATEST_REGIONAL_REVISION,
-  REGIONAL_REVISIONS,
-  resolveDescriptor,
 } from "../src/generation/GenerationDescriptor.js";
 
 test("new worlds and the explorer default to the newest regional revision", async ({ page }) => {
@@ -17,14 +15,13 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   const type = page.getByRole("combobox", { name: "World type" });
   const revision = page.getByRole("combobox", { name: "Regional revision" });
   await expect(type).toHaveValue("regional");
-  await expect(revision).toHaveValue(LATEST_REGIONAL_REVISION);
+  await expect(revision).toHaveCount(0);
   await expect(type.locator("option")).toHaveText([
     "Procedural regional",
     "Classic (legacy)",
     "Island (legacy)",
     "Flat (legacy)",
   ]);
-  await expect(revision.locator("option")).toHaveText(REGIONAL_REVISIONS.map((r) => r.label));
   await page.getByRole("textbox", { name: "World seed" }).fill("2026");
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute(
@@ -42,29 +39,9 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   test.setTimeout(60_000);
-  for (const choice of [
-    "classic",
-    "island",
-    "flat",
-    "regional",
-    "regional-v5",
-    "regional-v6",
-    "regional-v7",
-    "regional-v8",
-    "regional-v9",
-    "regional-v10",
-  ] as const) {
-    const revision =
-      choice === "regional-v5" ||
-      choice === "regional-v6" ||
-      choice === "regional-v7" ||
-      choice === "regional-v8" ||
-      choice === "regional-v9" ||
-      choice === "regional-v10";
-    const worldType = revision ? "regional" : choice;
-    const generation = revision
-      ? resolveDescriptor({ ...createDescriptor("regional", 2026), version: choice })
-      : createDescriptor(choice, 2026);
+  for (const choice of ["classic", "island", "flat", "regional"] as const) {
+    const worldType = choice;
+    const generation = createDescriptor(choice, 2026);
     await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");
@@ -128,7 +105,7 @@ test("Play here creates at the preview location and saved inspection includes a 
 }) => {
   const generation = {
     type: "regional",
-    version: "regional-v3",
+    version: LATEST_REGIONAL_REVISION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -148,7 +125,11 @@ test("Play here creates at the preview location and saved inspection includes a 
   await page.getByRole("link", { name: "Play here" }).click();
   await page.getByPlaceholder("World name...").fill("Play here district");
   await page.getByRole("button", { name: "New World", exact: true }).click();
-  await expect(page.locator("#game")).toHaveAttribute("data-generator", "regional");
+  await expect(page.getByRole("button", { name: "New World", exact: true })).toBeHidden();
+  await expect(page.locator("#game")).toHaveAttribute(
+    "data-generation",
+    JSON.stringify(generation),
+  );
   await expect
     .poll(async () =>
       page.evaluate(
@@ -157,8 +138,7 @@ test("Play here creates at the preview location and saved inspection includes a 
             document.querySelector("#game") as unknown as {
               __game: import("../src/client/GameClient.js").GameClient;
             }
-          ).__game.stateView.props.filter((p) => p.proceduralId && p.type.includes("apartment"))
-            .length,
+          ).__game.stateView.props.filter((p) => p.proceduralId && p.type.includes("condo")).length,
       ),
     )
     .toBeGreaterThan(0);
@@ -169,9 +149,7 @@ test("Play here creates at the preview location and saved inspection includes a 
       }
     ).__game;
     const p = game.stateView.playerEntity.position;
-    const building = game.stateView.props.find(
-      (p) => p.proceduralId && p.type.includes("apartment"),
-    );
+    const building = game.stateView.props.find((p) => p.proceduralId && p.type.includes("condo"));
     if (!building) throw new Error("No realized building");
     game.transport.send({ type: "edit-delete-prop", propId: building.id });
     game.transport.send({ type: "flush" });
@@ -264,20 +242,14 @@ test("Play here creates at the preview location and saved inspection includes a 
   expect(ids).not.toContain(info.featureId);
 });
 
-test("older Regional explorer revisions remain pinned during game creation", async ({ page }) => {
+test("retired URL descriptors cannot create historical worlds", async ({ page }) => {
   const generation = {
     type: "regional",
-    seed: 2026,
     version: "regional-v1",
+    seed: 2026,
     preset: "temperate-v1",
-  } as const;
+  };
   await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
-  await expect(page.getByRole("combobox", { name: "Regional revision" })).toHaveValue(
-    "regional-v1",
-  );
-  await page.getByRole("button", { name: "New World", exact: true }).click();
-  await expect(page.locator("#game")).toHaveAttribute(
-    "data-generation",
-    JSON.stringify(resolveDescriptor(generation)),
-  );
+  await expect(page.getByRole("alert")).toContainText("retired generator");
+  await expect(page.getByRole("combobox", { name: "Regional revision" })).toHaveCount(0);
 });

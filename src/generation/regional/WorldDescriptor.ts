@@ -1,4 +1,5 @@
-/** Immutable identity. Changing any generation rule requires a new version. */
+/** Internal geography profile, not the saved-world compatibility version.
+ * Output changes bump CURRENT_REGIONAL_VERSION in GenerationDescriptor.ts. */
 export interface RegionalWorld {
   readonly seed: number;
   readonly generatorVersion: "regional-v1";

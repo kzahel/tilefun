@@ -1,15 +1,16 @@
 import { expect, it } from "vitest";
 import { required } from "../../art/ArtCatalog.js";
+import { CityPlacesStrategy } from "../../art/studies/CityPlacesStrategy.js";
+import { studyGenerator } from "../../art/studies/StudyGenerator.js";
 import { aabbOverlapsPropWalls, resolveCollision } from "../../entities/collision.js";
 import { ENTITY_FACTORIES } from "../../entities/EntityFactories.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { updateRouteAI } from "../../entities/routeAI.js";
 import { CollisionFlag } from "../../world/TileRegistry.js";
 import { World } from "../../world/World.js";
-import { createGenerator } from "../Generator.js";
 import { cityPlacesSurfaceAt } from "./CityPlacesPlanner.js";
-import { CityPlacesStrategy } from "./CityPlacesStrategy.js";
 import { walkTrip } from "./CityWalkGraph.js";
+import { regionalWorld } from "./WorldDescriptor.js";
 
 const descriptor = {
   type: "regional",
@@ -18,7 +19,7 @@ const descriptor = {
   preset: "temperate-v1",
 } as const;
 it("admits crossings explicitly, reserves continuous access and serves four destination roles", () => {
-  const g = createGenerator(descriptor);
+  const g = studyGenerator(new CityPlacesStrategy(regionalWorld(descriptor.seed), 10));
   if (!(g.terrain instanceof CityPlacesStrategy)) throw Error();
   const p = required(g.terrain.districts.owner(0, 0)),
     graph = required(p.walkGraph);
@@ -48,7 +49,7 @@ it("admits crossings explicitly, reserves continuous access and serves four dest
   expect(() => walkTrip(graph, "unknown", "other")).toThrow("Disconnected");
 });
 it("completes every destination trip with real collision and waits; blocked trips pause and return", () => {
-  const g = createGenerator(descriptor);
+  const g = studyGenerator(new CityPlacesStrategy(regionalWorld(descriptor.seed), 10));
   if (!(g.terrain instanceof CityPlacesStrategy)) throw Error();
   const plan = required(g.terrain.districts.owner(0, 0)),
     world = new World(g.terrain),

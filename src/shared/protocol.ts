@@ -18,6 +18,7 @@ export interface RealmInfo {
   playerCount: number;
   worldType?: WorldType;
   generation?: GenerationDescriptor;
+  incompatibleReason?: string | undefined;
   createdAt: number;
   lastPlayedAt: number;
 }
@@ -132,6 +133,7 @@ export type ClientMessage =
       seed?: number;
       adminToken?: string;
     }
+  | { type: "recreate-world"; requestId: number; worldId: string; adminToken?: string }
   | { type: "delete-world"; requestId: number; worldId: string; adminToken?: string }
   | { type: "list-worlds"; requestId: number }
   | { type: "rename-world"; requestId: number; worldId: string; name: string; adminToken?: string }

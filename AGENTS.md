@@ -30,10 +30,11 @@ Single-player authority runs in a Worker using the shared server implementation;
 prediction and rendering remain on the main thread. Read
 [client/server boundaries](docs/client-server-architecture.md) for ownership.
 
-Saved generator revisions, promoted asset banks and exact approved review art
-are immutable. Output changes need new revisions/identities; never regenerate
-promotion banks during builds. Read [city generation](docs/topics/city-generation.md)
-before changing generation or promotions.
+Maintain one current regional generator. Bump its version when output changes;
+retired worlds require explicit same-seed recreation, not historical emulation.
+Promoted asset banks and exact review snapshots remain immutable; never regenerate
+them during builds. Read [city generation](docs/topics/city-generation.md) before
+changing generation or promotions.
 
 Normal builds use committed assets. Keep credentials, owner/session files,
 NDJSON histories and local state out of Git. Server logs do not include browser

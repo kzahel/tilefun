@@ -5,7 +5,7 @@ import {
   type GenerationDescriptor,
   type GenerationRequest,
   type GeneratorChoice,
-  REGIONAL_REVISIONS,
+  requireCurrentGeneration,
   resolveDescriptor,
   seedFromText,
 } from "../generation/GenerationDescriptor.js";
@@ -63,6 +63,7 @@ export class MainMenu {
   onCreate:
     | ((name: string, worldType: WorldType, seed?: number, generation?: GenerationRequest) => void)
     | null = null;
+  onRecreate: ((id: string) => void) | null = null;
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
   onClose: (() => void) | null = null;
@@ -162,7 +163,7 @@ export class MainMenu {
     try {
       const serialized = new URL(location.href).searchParams.get("generation");
       if (serialized) {
-        imported = resolveDescriptor(JSON.parse(serialized));
+        imported = requireCurrentGeneration(resolveDescriptor(JSON.parse(serialized)));
         typeSelect.value = descriptorChoice(imported);
         seedInput.value = String(imported.seed);
         nameInput.value = "Explorer world";
@@ -170,21 +171,6 @@ export class MainMenu {
     } catch (error) {
       this.showCreationError(String(error));
     }
-    const revisionRow = document.createElement("label");
-    revisionRow.textContent = "Regional revision ";
-    const revisionSelect = document.createElement("select");
-    revisionSelect.setAttribute("aria-label", "Regional revision");
-    for (const revision of REGIONAL_REVISIONS)
-      revisionSelect.add(new Option(revision.label, revision.version));
-    revisionSelect.value =
-      imported?.type === "regional" ? imported.version : createDescriptor("regional", 42).version;
-    revisionRow.append(revisionSelect);
-    revisionSelect.addEventListener("keydown", (event) => event.stopPropagation());
-    const showRevision = () => {
-      revisionRow.style.display = typeSelect.value === "regional" ? "block" : "none";
-    };
-    typeSelect.addEventListener("change", showRevision);
-    showRevision();
     const settingsRow = document.createElement("div");
     settingsRow.style.cssText = "display:flex; flex-wrap:wrap; gap:8px; font:12px monospace;";
     const roads = imported?.type === "classic" ? { ...imported.roads } : { ...DEFAULT_ROAD_PARAMS };
@@ -231,21 +217,8 @@ export class MainMenu {
             ? imported.seed
             : seedFromText(seedVal)
           : undefined;
-        let generation: GenerationRequest =
-          seed === undefined
-            ? {
-                choice,
-                roads,
-                ...(choice === "regional"
-                  ? { version: revisionSelect.value as GenerationDescriptor["version"] }
-                  : {}),
-              }
-            : createDescriptor(choice, seed, roads);
-        if (choice === "regional" && "type" in generation && generation.type === "regional")
-          generation = resolveDescriptor({
-            ...generation,
-            version: revisionSelect.value,
-          } as GenerationDescriptor);
+        const generation: GenerationRequest =
+          seed === undefined ? { choice, roads } : createDescriptor(choice, seed, roads);
         this.creationError.textContent = "";
         this.onCreate?.(name, choice === "classic" ? "generated" : choice, seed, generation);
       } catch (error) {
@@ -265,7 +238,7 @@ export class MainMenu {
     });
     seedInput.addEventListener("keyup", (e) => e.stopPropagation());
 
-    newSection.append(nameRow, optRow, revisionRow, settingsRow, this.creationError);
+    newSection.append(nameRow, optRow, settingsRow, this.creationError);
     this.overlay.appendChild(newSection);
 
     // Hosting info section (hidden unless hosting)
@@ -559,11 +532,30 @@ export class MainMenu {
       }, 2000);
     });
 
+    if (realm.incompatibleReason) {
+      const reason = document.createElement("p");
+      reason.textContent = realm.incompatibleReason;
+      reason.style.cssText = "color:#edc680;font:12px monospace;margin:6px 0;";
+      const recreate = document.createElement("button");
+      recreate.textContent = "Recreate with same seed";
+      recreate.style.cssText = BTN_STYLE;
+      recreate.title =
+        "Create a fresh world using the current generator. The old world is kept; edits and saved characters are not copied.";
+      recreate.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.onRecreate?.(realm.id);
+      });
+      const explanation = document.createElement("small");
+      explanation.textContent =
+        "Starts fresh. Old world kept; edits and characters are not copied.";
+      info.append(reason, recreate, explanation);
+      inspect.remove();
+    }
     card.append(info, delBtn);
 
     // Click card to select world
     card.addEventListener("click", () => {
-      this.onSelect?.(realm.id);
+      if (!realm.incompatibleReason) this.onSelect?.(realm.id);
     });
 
     return card;

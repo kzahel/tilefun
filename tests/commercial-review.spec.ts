@@ -1,10 +1,8 @@
 import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import type { ArtNote } from "../src/art/ArtNotes.js";
-import {
-  COMMERCIAL_DEMO_GENERATION,
-  COMMERCIAL_REVIEW_CASES,
-} from "../src/art/DenseDistrictShowcase.js";
+import { COMMERCIAL_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
+import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import {
   CommercialDistrictSource,
   commercialDistrictSurfaceAt,
@@ -15,7 +13,7 @@ const url = "/tilefun/building-lab.html?run=commercial",
   ready = '#app[data-ready="true"]';
 const plan = new CommercialDistrictSource(regionalWorld(2026)).owner(0, 0);
 if (!plan) throw new Error("Missing commercial checkpoint");
-const bayCell = commercialDistrictSurfaceAt(plan, 319, 514);
+const _bayCell = commercialDistrictSurfaceAt(plan, 319, 514);
 test("commercial batch is indexed, fits phone review and pauses independently", async ({
   page,
 }) => {
@@ -93,99 +91,19 @@ test("commercial feedback carries the exact place recipe and resolves to its Wor
     page.getByRole("heading", { name: "Parked cars & curb bays", exact: true }),
   ).toBeVisible();
 });
-test("v6 Play here shares real cells, moving walkers and persisted car/meter edits", async ({
+test("commercial archive offers a fresh current world without promising the archived layout", async ({
   page,
 }) => {
   await page.goto(url);
   await expect(page.locator(ready)).toBeVisible();
   await page.locator("#district-play").click();
   await expect(page.locator("#app")).toHaveAttribute("data-tile-complete", "true");
-  await expect(page.locator("#regional-revision")).toHaveValue("regional-v6");
-  await page.getByRole("link", { name: "Play here" }).click();
-  await page.getByRole("button", { name: "New World", exact: true }).click();
-  await expect(page.locator("#game")).toHaveAttribute(
-    "data-generation",
-    JSON.stringify(COMMERCIAL_DEMO_GENERATION),
+  const link = page.getByRole("link", { name: "Create current world with this seed" });
+  const href = await link.getAttribute("href");
+  if (!href) throw Error("Missing handoff");
+  const target = new URL(href);
+  expect(target.searchParams.has("arrival")).toBe(false);
+  expect(JSON.parse(target.searchParams.get("generation") ?? "{}")).toEqual(
+    createDescriptor("regional", 2026),
   );
-  const read = () =>
-    page.evaluate(() => {
-      const g = (
-        document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
-        }
-      ).__game;
-      return {
-        cell: g.stateView.world.getRoadAt(319, 514),
-        cars: g.stateView.props.filter((p) => p.type.includes("commercial-v1-car")),
-        meters: g.stateView.props.filter((p) => p.type.endsWith("commercial-v1-meter")),
-        people: g.stateView.entities
-          .filter((e) => e.type.startsWith("person"))
-          .map((e) => ({ id: e.id, ...e.position })),
-      };
-    });
-  await expect
-    .poll(async () => {
-      const s = await read();
-      return s.cars.length > 0 && s.meters.length > 0 && s.people.length > 0;
-    })
-    .toBe(true);
-  const before = await read();
-  expect(before.cell).toBe(bayCell);
-  await expect
-    .poll(async () =>
-      (await read()).people.some((p) => {
-        const old = before.people.find((e) => e.id === p.id);
-        return old && Math.hypot(p.wx - old.wx, p.wy - old.wy) > 8;
-      }),
-    )
-    .toBe(true);
-  const changed = await page.evaluate(() => {
-    const g = (
-      document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
-      }
-    ).__game;
-    const car = g.stateView.props.find((p) => p.type.includes("commercial-v1-car")),
-      meter = g.stateView.props.find((p) => p.type.endsWith("commercial-v1-meter"));
-    if (!car || !meter) throw Error("Missing commercial fixtures");
-    const wx = meter.position.wx + 16,
-      wy = meter.position.wy;
-    g.transport.send({ type: "edit-delete-prop", propId: car.id });
-    g.transport.send({ type: "edit-move-prop", propId: meter.id, wx, wy });
-    g.transport.send({ type: "flush" });
-    return {
-      worldId: g.mainMenu.currentWorldId,
-      carId: car.proceduralId,
-      meterId: meter.proceduralId,
-      wx,
-      wy,
-    };
-  });
-  await page.goto(
-    `/tilefun/world-explorer.html?worldId=${changed.worldId}&generation=${encodeURIComponent(JSON.stringify(COMMERCIAL_DEMO_GENERATION))}&x=300&y=519&zoom=16&mode=tiles`,
-  );
-  await expect(page.locator("#app")).toHaveAttribute("data-tile-complete", "true");
-  await page.getByRole("link", { name: "Play here" }).click();
-  await expect(page.locator("#game")).toHaveAttribute(
-    "data-generation",
-    JSON.stringify(COMMERCIAL_DEMO_GENERATION),
-  );
-  await expect
-    .poll(() =>
-      page.evaluate((c) => {
-        const g = (
-            document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
-            }
-          ).__game,
-          meter = g.stateView.props.find((p) => p.proceduralId === c.meterId);
-        return {
-          carGone: !g.stateView.props.some((p) => p.proceduralId === c.carId),
-          wx: meter?.position.wx,
-          wy: meter?.position.wy,
-        };
-      }, changed),
-    )
-    .toEqual({ carGone: true, wx: changed.wx, wy: changed.wy });
-  await page.screenshot({ path: "/tmp/tilefun-commercial-game.png" });
 });

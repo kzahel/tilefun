@@ -1,13 +1,14 @@
-import { buildingRecipe } from "./BuildingRecipes.js";
+/** Authoring study only. Playable worlds use the current regional generator. */
+import { buildingRecipe } from "../../generation/regional/BuildingRecipes.js";
 import {
   type CityPlacesPlan,
   type CityPlacesRevision,
   CityPlacesSource,
   cityPlacesSurfaceAt,
-} from "./CityPlacesPlanner.js";
-import type { DenseDistrictPlan } from "./DenseDistrictPlanner.js";
-import { DenseDistrictStrategy } from "./DenseDistrictStrategy.js";
-import type { RegionalWorld } from "./WorldDescriptor.js";
+} from "../../generation/regional/CityPlacesPlanner.js";
+import type { DenseDistrictPlan } from "../../generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictStrategy } from "../../generation/regional/DenseDistrictStrategy.js";
+import type { RegionalWorld } from "../../generation/regional/WorldDescriptor.js";
 export class CityPlacesStrategy extends DenseDistrictStrategy {
   override readonly districts: CityPlacesSource;
   constructor(world: RegionalWorld, revision: CityPlacesRevision) {

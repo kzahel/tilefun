@@ -4,14 +4,16 @@ import { createPlayer } from "../../entities/Player.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { PropManager } from "../../entities/PropManager.js";
 import { Chunk } from "../../world/Chunk.js";
+import { CURRENT_REGIONAL_VERSION } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
+import type { DenseDistrictStrategy } from "./DenseDistrictStrategy.js";
 import { DistrictSource, streetDistance } from "./DistrictStrategy.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
 const settledGeneration = {
   type: "regional",
-  version: "regional-v3",
+  version: CURRENT_REGIONAL_VERSION,
   seed: 2026,
   preset: "temperate-v1",
 } as const;
@@ -90,8 +92,8 @@ describe("district realization", () => {
   });
   it("deduplicates, evicts, and restores deleted/moved procedural props without serializing the generated world", () => {
     const gen = createGenerator(settledGeneration);
-    const source = new DistrictSource(regionalWorld(2026));
-    const plan = source.owner(0, 1);
+    const source = (gen.terrain as DenseDistrictStrategy).districts;
+    const plan = source.owner(0, 0);
     if (!plan) throw new Error("Missing review district");
     const lot = plan.blocks.flatMap((b) => b.lots)[0];
     if (!lot) throw new Error("Missing lot");

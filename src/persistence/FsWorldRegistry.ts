@@ -1,11 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readdirSync, renameSync, rmSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
-import {
-  descriptorFromMetadata,
-  type GenerationRequest,
-  resolveCreation,
-} from "../generation/GenerationDescriptor.js";
+import { type GenerationRequest, resolveCreation } from "../generation/GenerationDescriptor.js";
 import type { RoadGenParams } from "../generation/RoadGenerator.js";
 import { containedPath, worldDirectory } from "./fsPaths.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "./IWorldRegistry.js";
@@ -55,10 +51,10 @@ export class FsWorldRegistry implements IWorldRegistry {
   ): Promise<WorldMeta> {
     const resolved = generation
       ? resolveCreation(generation)
-      : descriptorFromMetadata({
-          worldType,
+      : resolveCreation({
+          choice: worldType === "generated" ? "classic" : worldType,
           seed: seed ?? Math.floor(Math.random() * 2147483647),
-          ...(roadParams ? { roadParams } : {}),
+          ...(roadParams ? { roads: roadParams } : {}),
         });
     const now = Date.now();
     const meta: WorldMeta = {

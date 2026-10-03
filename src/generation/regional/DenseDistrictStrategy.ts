@@ -16,8 +16,8 @@ import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
-/** Shared dense realization. V4 is frozen; v5 adds threshold-to-sidewalk paths
- * while reusing its promoted facades, streets, placements and walking routes.
+/** Shared dense realization using promoted facades, streets and walking routes.
+ * Current gameplay enables threshold connections; authoring studies can omit them.
  */
 export class DenseDistrictStrategy extends DistrictStrategy {
   override readonly districts: DenseDistrictSource;

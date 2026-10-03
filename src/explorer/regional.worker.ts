@@ -1,8 +1,11 @@
+import {
+  createPreviewGenerator as createGenerator,
+  previewOverviewSteps as overviewSteps,
+} from "../art/CityReviewArchive.js";
 import { actorPlacements } from "../generation/ActorPlacements.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
-import { createGenerator } from "../generation/Generator.js";
-import { normalizeGeneration, overviewSteps } from "../generation/Overview.js";
+import { normalizeGeneration } from "../generation/Overview.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Chunk } from "../world/Chunk.js";
 import { chunkData, chunkDataTransfers } from "../world/ChunkData.js";

@@ -2,7 +2,8 @@ import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
-import { DENSE_DEMO_GENERATION, DENSE_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
+import { DENSE_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
+import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
@@ -121,7 +122,7 @@ test("district notes round trip through the isolated inbox and are discoverable 
     page.locator('a[href*="run=districts"][href*="district-v1-neighborhood"]').first(),
   ).toBeVisible();
 });
-test("Play here uses the dense descriptor, real street cells, and moving planned walkers", async ({
+test("archived dense review hands off to current gameplay with moving planned walkers", async ({
   page,
 }) => {
   await page.goto(url);
@@ -131,11 +132,11 @@ test("Play here uses the dense descriptor, real street cells, and moving planned
   await expect(app).toHaveAttribute("data-settled", "true");
   await expect(app).toHaveAttribute("data-tile-complete", "true");
   await expect(page.locator("#regional-revision")).toHaveValue("regional-v5");
-  await page.getByRole("link", { name: "Play here" }).click();
+  await page.getByRole("link", { name: "Create current world with this seed" }).click();
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
-    JSON.stringify(DENSE_DEMO_GENERATION),
+    JSON.stringify(createDescriptor("regional", 2026)),
   );
   const read = () =>
     page.evaluate(() => {
@@ -163,7 +164,7 @@ test("Play here uses the dense descriptor, real street cells, and moving planned
 test("dense building edits and actor tombstones survive saved-world inspection and resume", async ({
   page,
 }) => {
-  const generation = DENSE_DEMO_GENERATION;
+  const generation = createDescriptor("regional", 2026);
   await page.goto(
     `/tilefun/world-explorer.html?generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,
   );
@@ -273,9 +274,13 @@ for (const kind of ["shop", "apartment"] as const)
           kind === "shop" ? l.buildingType.includes("bakery") : l.buildingType.includes("condo"),
         ),
     );
-    const arrival = { x: lot.entrance.x, y: lot.entrance.y, generation: DENSE_DEMO_GENERATION };
+    const arrival = {
+      x: lot.entrance.x,
+      y: lot.entrance.y,
+      generation: createDescriptor("regional", 2026),
+    };
     await page.goto(
-      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(DENSE_DEMO_GENERATION))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(createDescriptor("regional", 2026)))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     const enter = page.getByRole("button", { name: new RegExp(`Enter ${kind}`) });

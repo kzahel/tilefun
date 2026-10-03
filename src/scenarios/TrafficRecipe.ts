@@ -1,13 +1,14 @@
 import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { samplePath } from "../traffic/LaneGraph.js";
 import type { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export const TRAFFIC_DEMO_GENERATION = {
   type: "regional",
-  version: "regional-v11",
+  version: CURRENT_REGIONAL_VERSION,
   seed: 2026,
   preset: "temperate-v1",
 } as const;

@@ -26,6 +26,7 @@ import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
+import { worldCompatibility } from "../persistence/WorldCompatibility.js";
 import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
@@ -377,14 +378,15 @@ export class GameClient {
           // a gcSendRequest (e.g. from toggleMenu) — the requestId resolver
           // below will deliver it to the caller, which pushes MenuScene itself.
           const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
-          if (this.autoJoinRealm && msg.realms.length > 0) {
+          const playableRealms = msg.realms.filter((realm) => !realm.incompatibleReason);
+          if (this.autoJoinRealm && playableRealms.length > 0) {
             // Auto-join: prefer the last world this tab was in (survives HMR /
             // server restart), falling back to the most active realm.
             const lastWorldId = sessionStorage.getItem(LAST_WORLD_KEY);
             const target =
-              (lastWorldId && msg.realms.find((r) => r.id === lastWorldId)) ||
-              msg.realms.find((r) => r.playerCount > 0) ||
-              msg.realms[0]!;
+              (lastWorldId && playableRealms.find((r) => r.id === lastWorldId)) ||
+              playableRealms.find((r) => r.playerCount > 0) ||
+              playableRealms[0]!;
             this.autoJoinRealm = false; // only auto-join once
             void this.gcSendRequest({
               type: "join-realm",
@@ -761,6 +763,34 @@ export class GameClient {
           .catch((error) => this.mainMenu.showCreationError(String(error)));
       }
     };
+    this.mainMenu.onRecreate = async (id) => {
+      try {
+        if (this.serialized) {
+          const response = await this.gcSendRequest({
+            type: "recreate-world",
+            requestId: this.nextRequestId++,
+            worldId: id,
+          });
+          await this.gcSendRequest({
+            type: "join-realm",
+            requestId: this.nextRequestId++,
+            worldId: response.meta.id,
+          });
+        } else {
+          const meta = await this.localServer.recreateWorld(id);
+          const camera = await this.localServer.loadWorld(meta.id);
+          this.mainMenu.currentWorldId = meta.id;
+          this.showWorldIdentity(this.localServer.worldGeneration);
+          this.camera.snapTo(camera.cameraX, camera.cameraY);
+          this.camera.zoom = camera.cameraZoom;
+          this.camera.requestSnap();
+          this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
+        }
+        if (this.scenes.has(MenuScene)) this.scenes.pop();
+      } catch (error) {
+        this.mainMenu.showCreationError(String(error));
+      }
+    };
     this.mainMenu.onDelete = async (id) => {
       try {
         if (this.serialized) {
@@ -1060,7 +1090,7 @@ export class GameClient {
   private gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
     if (
       this.adminToken &&
-      ["create-world", "delete-world", "rename-world", "rcon"].includes(msg.type)
+      ["create-world", "recreate-world", "delete-world", "rename-world", "rcon"].includes(msg.type)
     )
       return this.requests.send({ ...msg, adminToken: this.adminToken });
     return this.requests.send(msg);
@@ -1082,6 +1112,7 @@ export class GameClient {
         createdAt: w.createdAt,
         lastPlayedAt: w.lastPlayedAt,
       };
+      info.incompatibleReason = worldCompatibility(w);
       info.generation = descriptorFromMetadata(w);
       return info;
     });

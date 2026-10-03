@@ -6,6 +6,7 @@ const RESPONSES = {
   "set-player-model": "player-model-set",
   "load-world": "world-loaded",
   "create-world": "world-created",
+  "recreate-world": "world-created",
   "delete-world": "world-deleted",
   "list-worlds": "world-list",
   "rename-world": "world-renamed",

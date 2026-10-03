@@ -649,7 +649,7 @@ function ReviewCase({
           <a href={c.url} target="_blank" rel="noreferrer">
             Original lab view ↗
           </a>
-          {c.exploreUrl ? <Link to={c.exploreUrl}>Explore / play this neighborhood →</Link> : null}
+          {c.exploreUrl ? <Link to={c.exploreUrl}>Explore archived review scene →</Link> : null}
           {c.interior ? (
             <details>
               <summary>Floor plan & case</summary>

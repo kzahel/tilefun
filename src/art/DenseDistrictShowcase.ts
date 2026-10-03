@@ -3,10 +3,7 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
-import { createProp } from "../entities/PropFactories.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
-import type { ActorPlacement } from "../generation/Generator.js";
-import { createGenerator } from "../generation/Generator.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { CITY_ARCHITECTURE_ASSETS } from "../generation/regional/CityArchitectureAssets.js";
 import type { CityPlacesPlan } from "../generation/regional/CityPlacesPlanner.js";
@@ -16,7 +13,6 @@ import {
 } from "../generation/regional/CommercialCityAssets.js";
 import type { CommercialDistrictPlan } from "../generation/regional/CommercialDistrictPlanner.js";
 import { DENSE_CITY_ASSETS } from "../generation/regional/DenseCityAssets.js";
-import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { Camera } from "../rendering/Camera.js";
 import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
@@ -24,6 +20,7 @@ import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { World } from "../world/World.js";
 import type { ArtRect } from "./ArtCatalog.js";
+import { archivedCityScene, createPreviewGenerator } from "./CityReviewArchive.js";
 
 export const DENSE_DEMO_GENERATION: GenerationDescriptor = {
   type: "regional",
@@ -242,50 +239,9 @@ export const ALL_DENSE_REVIEW_CASES = [
 export type DenseReviewCase = (typeof ALL_DENSE_REVIEW_CASES)[number];
 export const denseReviewRun = (c: DenseReviewCase) =>
   "run" in c ? c.run : "generation" in c ? "commercial" : "districts";
-/** These views select windows of the actual generator, never separate placements. */
+/** Fixed review scenes stay independent of evolving playable world generation. */
 export function denseReviewScene(c: DenseReviewCase) {
-  const generation = "generation" in c ? c.generation : DENSE_DEMO_GENERATION;
-  const generator = createGenerator(generation);
-  if (!(generator.terrain instanceof DenseDistrictStrategy))
-    throw new Error("Missing dense generator");
-  const plan = generator.terrain.districts.owner(0, 0);
-  if (!plan) throw new Error("Missing dense checkpoint");
-  const { x, y } = plan.center;
-  const bounds: Bounds =
-    "crop" in c
-      ? { minX: x + c.crop[0], minY: y + c.crop[1], maxX: x + c.crop[2], maxY: y + c.crop[3] }
-      : c.window === "whole"
-        ? { minX: x - 50, minY: y - 46, maxX: x + 50, maxY: y + 46 }
-        : c.window === "frontage"
-          ? { minX: x - 43, minY: y - 39, maxX: x + 43, maxY: y + 5 }
-          : c.window === "commercial"
-            ? { minX: x + 4, minY: y - 34, maxX: x + 44, maxY: y + 12 }
-            : c.window === "refuge"
-              ? { minX: x - 40, minY: y - 18, maxX: x - 4, maxY: y + 18 }
-              : c.window === "parking"
-                ? { minX: x + 7, minY: y - 16, maxX: x + 40, maxY: y + 8 }
-                : { minX: x - 43, minY: y - 7, maxX: x + 43, maxY: y + 44 };
-  const props = new Map<string, ReturnType<typeof createProp>>(),
-    actors = new Map<string, ActorPlacement>();
-  for (let cy = Math.floor(bounds.minY / 16); cy <= Math.floor(bounds.maxY / 16); cy++)
-    for (let cx = Math.floor(bounds.minX / 16); cx <= Math.floor(bounds.maxX / 16); cx++) {
-      for (const p of generator.placements(cx, cy, new Set()).placements) {
-        if (!p.featureId) throw new Error("Missing feature ID");
-        const prop = createProp(p.propType, p.wx, p.wy);
-        prop.proceduralId = p.featureId;
-        props.set(p.featureId, prop);
-      }
-      for (const a of generator.actors?.(cx, cy) ?? []) actors.set(a.featureId, a);
-    }
-  return {
-    definition: c,
-    generation,
-    plan,
-    bounds,
-    arrival: "arrival" in c ? { x: x + c.arrival[0], y: y + c.arrival[1] } : { x, y },
-    props: [...props.values()],
-    actors: [...actors.values()],
-  };
+  return { definition: c, ...archivedCityScene(c.id) };
 }
 export type DenseReviewScene = ReturnType<typeof denseReviewScene>;
 export function denseReviewComposition(s: DenseReviewScene) {
@@ -362,7 +318,7 @@ export function drawDenseDistrictShowcase(
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
   if (!ctx) throw new Error("Missing district canvas");
   ctx.imageSmoothingEnabled = false;
-  const generator = createGenerator(s.generation),
+  const generator = createPreviewGenerator(s.generation),
     world = new World(generator.terrain),
     graph = new BlendGraph();
   const camera = new Camera();

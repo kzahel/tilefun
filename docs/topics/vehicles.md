@@ -1,7 +1,7 @@
 # Vehicles: generated traffic and roof riding
 
 Topic: vehicles
-Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in selectable regional-v11.
+Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in the current regional generator (regional-v12).
 Updated: 2026-10-03.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
@@ -116,7 +116,7 @@ new implementation concerns, not evidence that the approved bounds need re-revie
 
 ## Runtime contract
 
-- Choose **Gentle traffic & roof rides (v11)** for a new world, or open the
+- Choose **Procedural regional** for a new world, or open the
   [Traffic playground](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/traffic).
   The playground uses the gameplay controller, generated terrain, props, renderer
   and shared player physics. Stand ahead, jump toward the stopped car, ride and
@@ -131,9 +131,10 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   The raised ladder pose remains available art but is excluded from traffic.
   The folded ladder truck is admitted only where the onward street widths fit;
   it cannot circulate in the tested city network.
-- `regional-v11` adds traffic to the frozen v5 dense-neighborhood terrain contract.
-  It does not change v4's default, v1–v10 saves, parked props or other promotion
-  banks. Semantic city street and regional corridor plans generate right-hand
+- The current regional generator composes traffic with connected dense-neighborhood
+  terrain. Retired regional saves use explicit same-seed recreation; see
+  [city generation](city-generation.md).
+  Semantic city street and regional corridor plans generate right-hand
   lanes, split junctions and width-limited turns. Painted asphalt creates no lanes.
 - Realm owns movement at 36 world pixels/second (24 through turns), gradual
   acceleration/braking, footprint sweeps and exclusive junction reservations with
@@ -159,7 +160,7 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   removing the car. Invalid saved route records are discarded safely.
 
 The implementation and validation record is in [Tactical 017](../tactical/017-generated-road-traffic-and-roof-riding.md).
-Next: playtest the Traffic playground and a v11 world for density, turning poses,
+Next: playtest the Traffic playground and a current regional world for density, turning poses,
 roof size and jump feel. Parking, destinations, boarding and player driving remain
 separate work; no new art/behavior approval has been inferred from implementation.
 

@@ -1,24 +1,21 @@
 import { expect, test } from "@playwright/test";
-import { DistrictSource } from "../src/generation/regional/DistrictStrategy.js";
+import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
-const source = new DistrictSource(regionalWorld(2026));
-for (const kind of ["apartment", "shop", "home"] as const)
+const source = new DenseDistrictSource(regionalWorld(2026), true);
+for (const kind of ["apartment", "shop"] as const)
   test(`enters and returns from the shared ${kind} interior`, async ({ page }) => {
-    const plan = source.owner(0, kind === "home" ? 1 : 0);
+    const plan = source.owner(0, 0);
     const lot = plan?.blocks
       .flatMap((b) => b.lots)
       .find((l) =>
-        kind === "home"
-          ? l.buildingType === "prop-country-house"
-          : kind === "shop"
-            ? l.buildingType.includes("bakery") || l.buildingType.includes("shop")
-            : l.buildingType.startsWith("prop-regional-apartment-"),
+        kind === "shop" ? l.buildingType.includes("butcher") : l.buildingType.includes("condo"),
       );
     if (!lot) throw new Error(`Missing ${kind} checkpoint`);
     const generation = {
         type: "regional",
-        version: "regional-v3",
+        version: CURRENT_REGIONAL_VERSION,
         seed: 2026,
         preset: "temperate-v1",
       } as const,
@@ -46,7 +43,7 @@ for (const kind of ["apartment", "shop", "home"] as const)
               .length,
         ),
       )
-      .toBe(3);
+      .toBe(kind === "apartment" ? 6 : 5);
     await page.screenshot({ path: `/tmp/tilefun-gameplay-interior-${kind}.png` });
     if (kind === "apartment") {
       const player = () =>
@@ -94,7 +91,7 @@ for (const kind of ["apartment", "shop", "home"] as const)
           return game.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
             .length;
         });
-      await expect.poll(remainingFurniture).toBe(3);
+      await expect.poll(remainingFurniture).toBe(kind === "apartment" ? 6 : 5);
       await page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
@@ -105,11 +102,11 @@ for (const kind of ["apartment", "shop", "home"] as const)
         if (!bed) throw new Error("Missing bed");
         const table = game.stateView.props.find((p) => p.proceduralId === "fixture:side-table");
         if (!table) throw new Error("Missing side table");
-        game.transport.send({ type: "edit-move-prop", propId: table.id, wx: 88, wy: 70 });
+        game.transport.send({ type: "edit-move-prop", propId: table.id, wx: 120, wy: 112 });
         game.transport.send({ type: "edit-delete-prop", propId: bed.id });
         game.transport.send({ type: "flush" });
       });
-      await expect.poll(remainingFurniture).toBe(2);
+      await expect.poll(remainingFurniture).toBe(5);
       await page.getByRole("button", { name: "Return to street" }).click();
       await page.goto("/tilefun/");
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -117,7 +114,7 @@ for (const kind of ["apartment", "shop", "home"] as const)
       if (await resume.isVisible()) await resume.click();
       await expect(enter).toBeVisible();
       await enter.click();
-      await expect.poll(remainingFurniture).toBe(2);
+      await expect.poll(remainingFurniture).toBe(5);
       await expect
         .poll(() =>
           page.evaluate(
@@ -130,7 +127,7 @@ for (const kind of ["apartment", "shop", "home"] as const)
                 ?.position.wx,
           ),
         )
-        .toBe(88);
+        .toBe(120);
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
       // A reload resumes the same interior, including the saved furniture.
       await page.goto("/tilefun/");
@@ -138,7 +135,7 @@ for (const kind of ["apartment", "shop", "home"] as const)
       const resumeAfterInterior = page.getByRole("button", { name: "Resume", exact: true });
       if (await resumeAfterInterior.isVisible()) await resumeAfterInterior.click();
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
-      await expect.poll(remainingFurniture).toBe(2);
+      await expect.poll(remainingFurniture).toBe(5);
     }
     expect(errors).toEqual([]);
   });

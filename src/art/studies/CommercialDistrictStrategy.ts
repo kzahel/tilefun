@@ -1,12 +1,13 @@
+/** Authoring study only. Playable worlds use the current regional generator. */
 import {
   type CommercialDistrictPlan,
   CommercialDistrictSource,
   commercialDistrictSurfaceAt,
-} from "./CommercialDistrictPlanner.js";
-import type { DenseDistrictPlan } from "./DenseDistrictPlanner.js";
-import { DenseDistrictStrategy } from "./DenseDistrictStrategy.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
-import type { RegionalWorld } from "./WorldDescriptor.js";
+} from "../../generation/regional/CommercialDistrictPlanner.js";
+import type { DenseDistrictPlan } from "../../generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictStrategy } from "../../generation/regional/DenseDistrictStrategy.js";
+import type { FeaturePlacement } from "../../generation/regional/DistrictStrategy.js";
+import type { RegionalWorld } from "../../generation/regional/WorldDescriptor.js";
 
 export class CommercialDistrictStrategy extends DenseDistrictStrategy {
   override readonly districts: CommercialDistrictSource;

@@ -4182,10 +4182,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/DenseDistrictStrategy.ts:108"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/SettledStrategy.ts:85"
         }
       ]
     },
@@ -21461,11 +21457,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1088"
+          "source": "src/server/Realm.ts:1074"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2026"
+          "source": "src/server/Realm.ts:1987"
         },
         {
           "system": "Gameplay",
