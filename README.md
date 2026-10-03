@@ -55,6 +55,15 @@ it, while still performing the tapped action. There is no extra button. Exiting
 fullscreen keeps it off until the next page load; unavailable or denied fullscreen
 leaves the game playable in the browser. This does not disable OS navigation gestures.
 
+Install Tilefun from Chrome's menu (**Install app** / **Add to Home screen**) for a
+home-screen icon that opens the game without browser controls. On iPhone or iPad,
+use Safari's **Share → Add to Home Screen**. The shortcut starts the main game,
+not a temporary multiplayer invitation. Mobile first-tap fullscreen still applies.
+This is an online launcher: there is no service worker, offline download or custom
+asset cache, and installation does not sync saved worlds across devices. The app
+manifest and launch paths stay within `/tilefun/`. Launcher icons reuse the favicon;
+regenerate them with `npm run assets:app-icons` when it changes.
+
 ## Asset Credits
 
 - **Modern Exteriors** by LimeZu — [itch.io](https://limezu.itch.io/modernexteriors)

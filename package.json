@@ -18,6 +18,7 @@
     "test:e2e:ui": "playwright test --ui",
     "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts",
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
+    "assets:app-icons": "node scripts/build-app-icons.mjs",
     "assets:review": "tsx scripts/build-review-sprites.ts",
     "interiors:counterexamples": "tsx scripts/interior-counterexamples.ts",
     "explorer:bench": "tsx scripts/benchmark-regional.ts",
