@@ -8,6 +8,9 @@ copying every item into multiple checklists.
 
 ## Gameplay and creation
 
+- [Voice agents and child-directed development](topics/voice-agents.md): proposed
+  companion NPC and voice-driven builder sessions; the first direction to explore
+  is turning a child's request into development, clarification and playable changes.
 - [In-game play ideas / voice feedback](topics/play-ideas.md): original STT or
   typed submissions and game screenshots live in the private
   [Workshop → Play ideas inbox](https://tilefun.graehlarts.com/tilefun/workshop.html#/play-ideas),

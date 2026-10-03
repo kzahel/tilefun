@@ -6,6 +6,8 @@ Updated: 2026-10-03.
 
 Owns child-friendly gameplay suggestions and their private Workshop inbox.
 The delivery plan and test evidence live in [Tactical 016](../tactical/016-play-ideas.md).
+The proposed extension into companion and builder-agent sessions lives in
+[Voice agents](voice-agents.md); current submissions remain feedback only.
 
 ## Experience and contracts
 
