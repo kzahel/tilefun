@@ -11,7 +11,10 @@ export function drawVehicleDiagram(
     h = asset.rect[3];
   canvas.width = 640;
   canvas.height = 420;
-  const ctx = canvas.getContext("2d");
+  // Use the same CPU raster path for the manifest, fresh verification canvases
+  // and visible review. GPU antialiasing otherwise changes the fingerprint in
+  // normal Chromium, even though the source art and geometry are unchanged.
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
   if (!ctx) throw new Error("Canvas unavailable");
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = "#edf1e9";

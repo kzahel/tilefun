@@ -1,7 +1,7 @@
 # Vehicle sprite and geometry review
 
 Topic: vehicles
-Status: Workshop geometry candidates ready for human review; driving is not implemented.
+Status: All 180 vehicle views human-approved in Workshop; driving is not implemented.
 Updated: 2026-10-03.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
@@ -45,6 +45,10 @@ The shared Workshop outbox handles offline retry and pending-save status.
 - `VehicleDiagram.ts` is shared by the manifest and UI. Each candidate fingerprint
   pins the verified source PNG, directional definition, geometry and diagram pixels.
   The UI checks its render against the manifest before enabling submission.
+  Both render with a CPU canvas (`willReadFrequently`) so normal Chromium's GPU
+  antialiasing cannot falsely invalidate unchanged art. Browser coverage checks
+  all 180 fresh view verifications in full Chromium at retina scale, plus rejection
+  of a deliberately mismatched fingerprint.
 - Authenticated `asset` events include the vehicle candidate ID and fingerprint.
   The server validates the current candidate, exact source rectangle, direction,
   ground box and finite positive height. Saved annotations contain the complete
@@ -74,6 +78,17 @@ inspected; the live deployment serves the 180-view manifest and the live local
 review renders with enabled controls and no page errors. Test feedback used only
 isolated data; no human approvals were written.
 
-Next: human review of wheel contact, dimensions, height, clipping and sorting.
-After accepted geometry is promoted, implement the separately proposed bounded
-traffic loop only when requested.
+Approval verification fix: reproduced false appearance changes in full Chromium
+(headed and headless) while the headless shell matched the manifest. Explicit CPU
+rasterization restores parity without changing any of the 507 existing candidate
+fingerprints. Typechecks, 1,229 unit tests, lint, build and all 265 browser tests
+pass. The live first compact-car view now enables approval in full Chromium.
+
+Human review checkpoint (2026-10-03): the user reported completing the vehicle
+batch, and `npm run workshop:inbox` confirms 180 approved, zero unchecked, zero
+changed and zero Needs changes. Exact accepted geometry remains in the shared
+feedback records; this checkpoint does not promote the original default proposals.
+
+Next: promote the exact human-approved sprite/geometry snapshots to new gameplay
+identities when requested, then implement the separately proposed bounded traffic
+loop only when requested.
