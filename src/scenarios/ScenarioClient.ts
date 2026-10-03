@@ -20,17 +20,25 @@ export class ScenarioClient {
   readonly predictor: PlayerPredictor;
   readonly ready: Promise<void>;
   handles: Record<string, number> = {};
+  traffic: ScenarioResponse["traffic"];
   private worker = new Worker(new URL("./scenario.worker.ts", import.meta.url), { type: "module" });
-  private pending = new Map<number, { resolve: () => void; reject: (e: Error) => void }>();
+  private pending = new Map<
+    number,
+    { resolve: () => void; reject: (e: Error) => void; reset: boolean }
+  >();
   private id = 0;
   private seq = 0;
   private inFlight = 0;
+  private controls = 0;
   private closed = false;
   private loaded = false;
   private failure: Error | undefined;
   constructor(readonly recipe: ScenarioRecipe) {
     const physics = scenarioPhysics(recipe.physics);
-    this.predictor = new PlayerPredictor(() => physics);
+    this.predictor = new PlayerPredictor(
+      () => physics,
+      () => 1,
+    );
     this.view.setPredictor(this.predictor);
     this.worker.onmessage = (event: MessageEvent<ScenarioResponse>) => {
       const response = event.data,
@@ -40,7 +48,9 @@ export class ScenarioClient {
         pending?.reject(new Error(response.error));
         return;
       }
+      if (pending?.reset) this.view.clear();
       this.handles = response.handles;
+      this.traffic = response.traffic;
       for (const packet of response.frames) {
         const message = decodeServerMessage(packet);
         // Lab settings are session-scoped; never write the page's global CVars.
@@ -54,7 +64,7 @@ export class ScenarioClient {
       const player = this.view.serverPlayerEntity;
       if (player.id !== -1) {
         applyScenarioAppearance(player, this.recipe.player);
-        if (!this.predictor.player || this.predictor.player.id !== player.id)
+        if (pending?.reset || !this.predictor.player || this.predictor.player.id !== player.id)
           this.predictor.reset(player);
         else
           this.predictor.reconcile(
@@ -72,6 +82,7 @@ export class ScenarioClient {
     this.ready = this.request({ kind: "open", recipe }).then(() => {
       this.loaded = true;
     });
+    void this.ready.catch(() => {});
   }
   private fail(error: Error) {
     this.failure = error;
@@ -82,14 +93,18 @@ export class ScenarioClient {
     if (this.closed) return Promise.reject(new Error("Scenario is closed"));
     const id = ++this.id;
     return new Promise((resolve, reject) => {
-      this.pending.set(id, { resolve, reject });
+      this.pending.set(id, {
+        resolve,
+        reject,
+        reset: request.kind === "reload" || request.kind === "reset",
+      });
       this.worker.postMessage({ ...request, id });
     });
   }
   /** Bounded outstanding commands prevent a hidden/sluggish tab accumulating simulation debt. */
   step(input: Movement, dt = 1 / 60, range?: ChunkRange): void {
     if (this.failure) throw this.failure;
-    if (!this.loaded || this.closed || this.inFlight >= 6) return;
+    if (!this.loaded || this.closed || this.controls > 0 || this.inFlight >= 6) return;
     const length = Math.max(1, Math.hypot(input.dx, input.dy));
     const movement = {
       ...input,
@@ -98,6 +113,7 @@ export class ScenarioClient {
     };
     const seconds = quantizeInputDtMs(Math.min(dt, 0.1) * 1000) / 1000;
     if (!seconds) return;
+    this.view.tickAnimations(seconds);
     predictInput(
       this.predictor,
       ++this.seq,
@@ -113,15 +129,25 @@ export class ScenarioClient {
       .finally(() => this.inFlight--);
   }
   async command(command: ScenarioCommand) {
-    await this.ready;
-    await this.request({ kind: "command", command });
-    this.predictor.reset(this.view.serverPlayerEntity);
+    this.controls++;
+    try {
+      await this.ready;
+      await this.request({ kind: "command", command });
+      this.predictor.reset(this.view.serverPlayerEntity);
+    } finally {
+      this.controls--;
+    }
   }
-  async reload() {
-    await this.ready;
-    await this.request({ kind: "reload" });
-    this.seq = 0;
-    this.predictor.reset(this.view.serverPlayerEntity);
+  async reload(reset = false) {
+    this.controls++;
+    try {
+      await this.ready;
+      await this.request({ kind: reset ? "reset" : "reload" });
+      this.seq = 0;
+      this.predictor.reset(this.view.serverPlayerEntity);
+    } finally {
+      this.controls--;
+    }
   }
   dispose() {
     if (this.closed) return;

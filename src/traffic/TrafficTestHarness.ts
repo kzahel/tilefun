@@ -20,9 +20,9 @@ export const TRAFFIC_DEMO_GENERATION = {
   seed: 2026,
   preset: "temperate-v1",
 } as const;
-/** A local driving playground assembled from the same generation, traffic and
- * player movement implementations as Realm. Never writes a world or approvals. */
-export class TrafficScene {
+/** Low-level synchronous stress harness for lane/streaming unit tests only.
+ * Interactive labs and integration tests use ScenarioSession. */
+export class TrafficTestHarness {
   readonly generator = createGenerator(TRAFFIC_DEMO_GENERATION);
   readonly strategy = this.generator.terrain as TrafficStrategy;
   readonly world = new World(this.strategy);

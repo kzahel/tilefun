@@ -59,3 +59,10 @@ The standard game continues to use the shared components extracted for labs.
 - Plan recorded before implementation. Repository persistence has advanced since
   scoping: format-3 memory record storage and required GameServer dependencies
   already exist and will be reused.
+
+- Foundation committed as `88309a8`: memory records, shared Realm options,
+  scoped persisted prop definitions, Worker host and production client predictor.
+- Traffic migrated to the Worker client. Four edge regressions reproduce the
+  old roof/body mismatch and pass with full body-top support. Existing generated
+  braking/jump/ride browser checks pass. The synchronous lane stress harness is
+  test-only; no interactive page imports it.

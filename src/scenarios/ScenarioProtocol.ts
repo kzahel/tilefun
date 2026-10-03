@@ -11,11 +11,13 @@ export type ScenarioRequest = { id: number } & (
   | { kind: "step"; input: Movement; dt: number; range?: ChunkRange }
   | { kind: "command"; command: ScenarioCommand }
   | { kind: "reload" }
+  | { kind: "reset" }
   | { kind: "close" }
 );
 export type ScenarioResponse = {
   id: number;
   frames: ArrayBuffer[];
   handles: Record<string, number>;
+  traffic?: { speed: number; waiting: string; count: number };
   error?: string;
 };

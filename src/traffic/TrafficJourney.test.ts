@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { nextLanes } from "./LaneGraph.js";
-import { TrafficScene } from "./TrafficScene.js";
+import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import { TRAFFIC_MODELS, vehicleRoadWidth } from "./Vehicle.js";
 
 it("carries a passenger along an intercity corridor back into city streets with bounded residency", () => {
-  const scene = new TrafficScene();
+  const scene = new TrafficTestHarness();
   for (const s of scene.traffic.states.values()) scene.entities.remove(s.entity.id, false);
   scene.traffic.states.clear();
   const graph = scene.strategy.trafficNetwork(4800, 8304);
@@ -40,7 +40,7 @@ it("carries a passenger along an intercity corridor back into city streets with 
 it("all admitted vehicle families turn on actual generated roads with stable roof support", () => {
   let admitted = 0;
   for (const model of TRAFFIC_MODELS) {
-    const scene = new TrafficScene(),
+    const scene = new TrafficTestHarness(),
       lane = scene.car.lane;
     const width = vehicleRoadWidth(`vehicle-v1:${model}`);
     const graph = scene.strategy.trafficNetwork(lane.a.x, lane.a.y);

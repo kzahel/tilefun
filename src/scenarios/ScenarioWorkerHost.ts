@@ -20,6 +20,9 @@ export class ScenarioWorkerHost {
             case "command":
               await session.command(request.command);
               break;
+            case "reset":
+              await session.reset();
+              break;
             case "reload":
               await session.reload();
               break;
@@ -29,7 +32,17 @@ export class ScenarioWorkerHost {
               break;
           }
         }
+        const car = this.session?.realm.traffic?.states.get(this.session.handles.car ?? -1);
         return {
+          ...(car
+            ? {
+                traffic: {
+                  speed: car.speed,
+                  waiting: car.waiting,
+                  count: this.session?.realm.traffic?.states.size ?? 0,
+                },
+              }
+            : {}),
           id: request.id,
           frames: this.session?.frames() ?? [],
           handles: { ...this.session?.handles },

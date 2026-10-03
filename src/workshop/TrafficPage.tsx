@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { closeAssets, loadGameAssets, loadSceneAssets } from "../assets/GameAssets.js";
+import { BlendGraph } from "../autotile/BlendGraph.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { TRAFFIC_DEMO_GENERATION, TrafficScene } from "../traffic/TrafficScene.js";
+import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
 
 export default function TrafficPage() {
   const canvas = useRef<HTMLCanvasElement>(null),
-    scene = useRef<TrafficScene | null>(null),
+    scene = useRef<ScenarioClient | null>(null),
     keys = useRef(new Set<string>());
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
@@ -19,7 +21,8 @@ export default function TrafficPage() {
   useEffect(() => {
     let alive = true,
       raf = 0;
-    const s = new TrafficScene();
+    const s = new ScenarioClient(trafficRecipe());
+    const blend = new BlendGraph();
     if (restart > 0) setPaused(false);
     scene.current = s;
     keys.current.clear();
@@ -27,13 +30,14 @@ export default function TrafficPage() {
       renderer = new TileRenderer();
     camera.setViewport(960, 600);
     camera.zoom = 0.75;
-    const center = () => camera.snapTo(s.player.position.wx, s.player.position.wy - 12);
-    center();
-    s.load(camera.getVisibleChunkRange());
-    const pending = loadGameAssets(s.blend);
+    const center = () =>
+      camera.snapTo(s.view.playerEntity.position.wx, s.view.playerEntity.position.wy - 12);
+    const pending = loadGameAssets(blend);
     void pending
       .then(async (assets) => {
-        await loadSceneAssets(assets, new Set(s.props.props.map((p) => p.type)));
+        await s.ready;
+        center();
+        await loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type)));
         if (!alive) {
           closeAssets(assets);
           return;
@@ -53,22 +57,27 @@ export default function TrafficPage() {
           if (!pause.current) accumulator += elapsed;
           while (accumulator >= 1 / 60) {
             const k = keys.current;
-            s.step({
-              dx:
-                Number(k.has("ArrowRight") || k.has("d")) -
-                Number(k.has("ArrowLeft") || k.has("a")),
-              dy: Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
-              jump: k.has(" "),
-              sprinting: false,
-            });
+            s.step(
+              {
+                dx:
+                  Number(k.has("ArrowRight") || k.has("d")) -
+                  Number(k.has("ArrowLeft") || k.has("a")),
+                dy:
+                  Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
+                jump: k.has(" "),
+                sprinting: false,
+              },
+              1 / 60,
+              camera.getVisibleChunkRange(),
+            );
             accumulator -= 1 / 60;
           }
           center();
           const range = camera.getVisibleChunkRange();
           loadTimer -= elapsed;
           if (loadTimer <= 0) {
-            s.load(range);
-            void loadSceneAssets(assets, new Set(s.props.props.map((p) => p.type))).catch((e) =>
+            s.view.world.computeAutotile(blend, 64);
+            void loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type))).catch((e) =>
               setError(String(e)),
             );
             loadTimer = 0.3;
@@ -76,15 +85,15 @@ export default function TrafficPage() {
           ctx.imageSmoothingEnabled = false;
           ctx.fillStyle = "#cbd5c3";
           ctx.fillRect(0, 0, c.width, c.height);
-          renderer.prepareTerrain(camera, s.world, assets.sheets, range, 4, 256);
-          renderer.drawTerrain(ctx, camera, s.world, assets.sheets, range);
+          renderer.prepareTerrain(camera, s.view.world, assets.sheets, range, 4, 256);
+          renderer.drawTerrain(ctx, camera, s.view.world, assets.sheets, range);
           drawScene2D(
             ctx,
             camera,
             collectScene(
-              s.entities.entities,
-              s.props.props,
-              s.world,
+              s.view.entities,
+              s.view.props,
+              s.view.world,
               camera,
               range,
               1,
@@ -97,14 +106,17 @@ export default function TrafficPage() {
             false,
             renderer,
           );
-          c.dataset.playerZ = String(s.player.wz ?? 0);
-          c.dataset.carX = String(s.car.entity.position.wx);
-          c.dataset.carY = String(s.car.entity.position.wy);
-          c.dataset.speed = String(s.car.speed);
-          c.dataset.waiting = s.car.waiting;
-          c.dataset.cars = String(s.traffic.states.size);
-          c.dataset.playerX = String(s.player.position.wx);
-          c.dataset.playerY = String(s.player.position.wy);
+          const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
+          c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
+          c.dataset.carX = String(car.position.wx);
+          c.dataset.carY = String(car.position.wy);
+          c.dataset.speed = String(s.traffic?.speed ?? 0);
+          c.dataset.waiting = s.traffic?.waiting ?? "";
+          c.dataset.cars = String(
+            s.view.entities.filter((e) => e.type.startsWith("vehicle-v1:")).length,
+          );
+          c.dataset.playerX = String(s.view.playerEntity.position.wx);
+          c.dataset.playerY = String(s.view.playerEntity.position.wy);
           raf = requestAnimationFrame(frame);
         };
         raf = requestAnimationFrame(frame);
@@ -120,6 +132,7 @@ export default function TrafficPage() {
       window.removeEventListener("blur", release);
       keys.current.clear();
       void pending.then(closeAssets).catch(() => {});
+      s.dispose();
       scene.current = null;
     };
   }, [restart]);
@@ -148,7 +161,9 @@ export default function TrafficPage() {
         <button
           type="button"
           onClick={() => {
-            scene.current?.standAhead();
+            void scene.current
+              ?.command({ kind: "traffic-position", roof: false })
+              .catch((e) => setError(String(e)));
             canvas.current?.focus();
           }}
         >
@@ -157,7 +172,9 @@ export default function TrafficPage() {
         <button
           type="button"
           onClick={() => {
-            scene.current?.standOnRoof();
+            void scene.current
+              ?.command({ kind: "traffic-position", roof: true })
+              .catch((e) => setError(String(e)));
             canvas.current?.focus();
           }}
         >
@@ -181,7 +198,9 @@ export default function TrafficPage() {
             max="60"
             defaultValue="36"
             onChange={(e) => {
-              if (scene.current) scene.current.traffic.settings.speed = Number(e.target.value);
+              void scene.current
+                ?.command({ kind: "traffic-settings", speed: Number(e.target.value) })
+                .catch((e) => setError(String(e)));
             }}
           />
         </label>
@@ -195,7 +214,9 @@ export default function TrafficPage() {
             max="32"
             defaultValue="12"
             onChange={(e) => {
-              if (scene.current) scene.current.traffic.settings.gap = Number(e.target.value);
+              void scene.current
+                ?.command({ kind: "traffic-settings", gap: Number(e.target.value) })
+                .catch((e) => setError(String(e)));
             }}
           />
         </label>

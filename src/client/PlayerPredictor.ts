@@ -96,7 +96,10 @@ interface ReconcileReplayStats {
  * position is derived from the mount + local offset.
  */
 export class PlayerPredictor {
-  constructor(private readonly physics = getMovementPhysicsParams) {}
+  constructor(
+    private readonly physics = getMovementPhysicsParams,
+    private readonly physicsMult = getServerPhysicsMult,
+  ) {}
 
   /** The predicted player entity. */
   private predicted: Entity | null = null;
@@ -734,7 +737,7 @@ export class PlayerPredictor {
           getHeight,
           sampleSurfaces,
           this.predicted,
-          getServerPhysicsMult(),
+          this.physicsMult(),
         );
       }
 
@@ -776,7 +779,7 @@ export class PlayerPredictor {
           sampleSurfaces,
           nextState,
           physics,
-          getServerPhysicsMult(),
+          this.physicsMult(),
         );
         nextState = stepResult.jumpState;
       }

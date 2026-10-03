@@ -40,10 +40,11 @@ road. Anchor and depth sorting are in the expandable controls. These are
 hand-selected family proposals; the saved approved snapshots include any human
 edits; the exact approved set is now pinned in the separate vehicles-v1 gameplay bank.
 
-The walker uses the production prop renderer and collision implementation.
+The walker uses a memory-backed Realm in a Worker, the gameplay client predictor
+and production prop renderer. See [Gameplay scenarios](gameplay-scenarios.md).
 Use arrows/WASD on the focused scene or the on-screen direction buttons to test
 walking around, in front of and behind the vehicle. The diagram's raised pink
-box visualizes physical height; the walker itself stays at ground level.
+box visualizes physical height; Space also exercises jumping and the candidate’s physical height.
 
 **Approve view** saves the exact selected sprite and edited geometry and advances.
 **Needs changes** requires a reason; two reports pause this vehicle batch.
@@ -139,8 +140,9 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   clear exits. Cars stop for road-level players, animals, props, edited or unloaded
   road and other cars. Nearby spatial queries bound obstacle work. Blocked turns
   can choose another clear legal exit; otherwise cars wait safely.
-- Roofs use a conservative direction-independent standing area inside every
-  approved directional footprint. Shared server/prediction physics carries the
+- Roof support covers the current approved body footprint, including its front
+  and rear. The former small central support let walkers fall into the solid
+  hood/trunk and become trapped; shared server/prediction support fixes this. Shared server/prediction physics carries the
   rider, permits relative walking, and inherits full vehicle velocity on a jump.
   A nearby-vehicle hop assist makes approved roofs reachable with Space; ordinary
   jumps elsewhere retain their settings. Height checks keep a low airborne player
@@ -160,3 +162,7 @@ The implementation and validation record is in [Tactical 017](../tactical/017-ge
 Next: playtest the Traffic playground and a v11 world for density, turning poses,
 roof size and jump feel. Parking, destinations, boarding and player driving remain
 separate work; no new art/behavior approval has been inferred from implementation.
+
+The Traffic playground now runs `TrafficRecipe` through `ScenarioSession` in a
+Worker, with binary replicas and normal player prediction. All four walk-off
+edges, braking and roof rides are covered by real-Realm integration tests.

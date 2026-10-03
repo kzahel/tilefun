@@ -27,6 +27,7 @@ export class ScenarioSession {
   player!: PlayerSession;
   readonly handles: Record<string, number> = {};
   private seq = 0;
+  private identities: Record<string, string> = {};
   private closed = false;
   private constructor(readonly recipe: ScenarioRecipe) {
     if (recipe.version !== 1) throw new Error("Unsupported scenario recipe");
@@ -89,6 +90,8 @@ export class ScenarioSession {
         type: "player",
       });
     }
+    this.player.player.wanderAI = null;
+    delete this.player.player.routeAI;
     applyScenarioAppearance(this.player.player, this.recipe.player);
     await this.ready();
     if (fresh) {
@@ -101,9 +104,16 @@ export class ScenarioSession {
           .trafficNetwork(fixture.x, fixture.y)
           .lanes.get(fixture.laneId);
         if (!traffic || !lane) throw new Error(`Missing scenario lane ${fixture.laneId}`);
-        this.handles[fixture.name] = traffic.add(fixture.model, lane, fixture.distance).entity.id;
+        const car = traffic.add(fixture.model, lane, fixture.distance).entity;
+        this.handles[fixture.name] = car.id;
+        if (car.proceduralId) this.identities[fixture.name] = car.proceduralId;
       }
     }
+    if (!fresh)
+      for (const [name, identity] of Object.entries(this.identities)) {
+        const entity = this.realm.entityManager.entities.find((e) => e.proceduralId === identity);
+        if (entity) this.handles[name] = entity.id;
+      }
     this.realm.entityManager.spatialHash.update(this.player.player);
   }
   async ready(range?: ChunkRange) {
@@ -135,7 +145,12 @@ export class ScenarioSession {
     );
     if (message.type !== "player-input") throw new Error("Invalid input codec");
     this.player.inputQueue.push(message);
-    this.realm.tick(dt, this.transport.serverSide, false, new Set());
+    this.realm.tick(
+      (message.dtMs ?? dt * 1000) / 1000,
+      this.transport.serverSide,
+      false,
+      new Set(),
+    );
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
@@ -151,7 +166,7 @@ export class ScenarioSession {
       Object.assign(settings, command);
       return;
     }
-    let position,
+    let position: { wx: number; wy: number },
       z = 0;
     if (command.kind === "traffic-position") {
       const car = this.realm.entityManager.entities.find((e) => e.id === this.handles.car);
@@ -181,7 +196,19 @@ export class ScenarioSession {
   frames(): ArrayBuffer[] {
     return this.realm.replicate(this.player.clientId).map(encodeServerMessage);
   }
+  async reset() {
+    if (this.closed) throw new Error("Scenario is closed");
+    await this.realm.destroy();
+    this.records.records.clear();
+    this.store = new RecordPersistenceStore(this.records);
+    this.seq = 0;
+    this.randomState = this.recipe.generation.seed;
+    for (const name of Object.keys(this.handles)) delete this.handles[name];
+    this.identities = {};
+    await this.open(true);
+  }
   async reload() {
+    if (this.closed) throw new Error("Scenario is closed");
     await this.realm.flushAsync();
     await this.realm.destroy();
     this.seq = 0;

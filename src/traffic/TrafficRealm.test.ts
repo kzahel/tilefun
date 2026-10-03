@@ -3,11 +3,11 @@ import { required } from "../art/ArtCatalog.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
+import { TRAFFIC_DEMO_GENERATION } from "../scenarios/TrafficRecipe.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { samplePath } from "./LaneGraph.js";
-import { TRAFFIC_DEMO_GENERATION } from "./TrafficScene.js";
 
 it("persists a moving roof passenger, restores the ride, and removes a disconnected passenger", async () => {
   const store = new RecordPersistenceStore(new MemoryRecordStore());

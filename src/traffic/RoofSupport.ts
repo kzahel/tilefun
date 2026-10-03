@@ -1,16 +1,13 @@
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntitySurface } from "../physics/surfaceHeight.js";
-import { isVehicle, vehicleRoofSize } from "./Vehicle.js";
+import { isVehicle } from "./Vehicle.js";
 
 export function vehicleRoofBounds(e: EntitySurface) {
-  const size = vehicleRoofSize(e.type ?? "");
-  return {
-    left: e.position.wx - size / 2,
-    right: e.position.wx + size / 2,
-    top: e.position.wy - size / 2,
-    bottom: e.position.wy + size / 2,
-  };
+  // Every solid part of the body must support feet at its top plane. A smaller
+  // roof let walkers fall inside the hood/trunk and become trapped by side collision.
+  if (!e.collider) throw new Error("Vehicle has no collider");
+  return getEntityAABB(e.position, e.collider);
 }
 export function roofSupport(
   entity: Entity,
