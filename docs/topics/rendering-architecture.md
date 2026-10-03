@@ -172,7 +172,9 @@ are borrowed synchronously with a bounded record pool, and partial terrain handl
 retire on restart/replacement/publication/reset. [029](../tactical/029-outdoor-frame-contract.md)
 records ownership tests, unchanged review identities and traversal coverage.
 
-Editor overlays and indoor callbacks still need migration. Terrain placement
+Editor overlays now use explicit pooled geometry through the same backend;
+[030](../tactical/030-editor-overlay-data.md) records parity with all original
+brush, preview and remote-cursor drawing operations. Indoor callbacks still need migration. Terrain placement
 selection currently lives with the concrete cache and must become shared
 presentation policy during final boundary cleanup. `GameContext` still exposes
 legacy Canvas resources for those consumers and independent UI/debug rendering.

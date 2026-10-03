@@ -23393,7 +23393,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CanvasRenderBackend.ts:78"
+          "source": "src/rendering/CanvasRenderBackend.ts:82"
         },
         {
           "system": "Editor",

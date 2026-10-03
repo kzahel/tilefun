@@ -1,5 +1,5 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import { drawEditorOverlay, drawRemoteCursors } from "../editor/EditorRenderer.js";
+import { collectEditorOverlay, collectRemoteCursors } from "../editor/collectEditorOverlay.js";
 import { render3DDebug, renderDebugOverlay, renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
@@ -289,18 +289,23 @@ export class EditScene implements GameScene {
     // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
     const visible = gc.camera.getVisibleChunkRange();
     if (gc.stateView.interior) renderEntities(gc, alpha);
-    drawEditorOverlay(
-      gc.ctx,
-      gc.camera,
-      gc.editorMode,
-      gc.editorModel,
-      visible,
-      gc.stateView.world,
-      gc.sheets,
-    );
-
-    // Draw other players' editor cursors
-    drawRemoteCursors(gc.ctx, gc.camera, gc.stateView.remoteCursors);
+    const overlays = gc.sceneFrame.overlays;
+    overlays.begin();
+    try {
+      collectEditorOverlay(
+        overlays,
+        gc.camera,
+        gc.editorMode,
+        gc.editorModel,
+        visible,
+        gc.stateView.world,
+        gc.spriteCatalog,
+      );
+      collectRemoteCursors(overlays, gc.camera, gc.stateView.remoteCursors);
+      gc.renderer.submit(gc.camera, { kind: "overlay", items: overlays.items });
+    } finally {
+      overlays.release();
+    }
 
     if (!gc.stateView.interior) renderEntities(gc, alpha);
     renderDebugOverlay(gc);

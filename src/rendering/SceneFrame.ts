@@ -1,4 +1,5 @@
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
+import { OverlayFrame } from "./OverlayFrame.js";
 import { PropDepthCache } from "./propDepth.js";
 import type { SceneItem } from "./SceneItem.js";
 
@@ -8,6 +9,7 @@ import type { SceneItem } from "./SceneItem.js";
  * Release after drawing so particles and elevation surfaces are not retained.
  */
 export class SceneFrame {
+  readonly overlays = new OverlayFrame();
   readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
@@ -20,6 +22,7 @@ export class SceneFrame {
   }
 
   release(): void {
+    this.overlays.release();
     this.items.length = 0;
     this.drawOrder.length = 0;
     this.propDepth.release();
@@ -27,6 +30,7 @@ export class SceneFrame {
 
   clear(): void {
     this.release();
+    this.overlays.clear();
     this.grass.clear();
     this.propDepth.clear();
   }

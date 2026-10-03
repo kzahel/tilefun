@@ -1,5 +1,6 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
+import type { OverlayDraw } from "./OverlayFrame.js";
 import type { SceneItem } from "./SceneItem.js";
 import type {
   TerrainPresentation,
@@ -30,6 +31,7 @@ export interface TerrainDraw {
  * ownership/acknowledgment protocol before retaining any part of a frame.
  */
 export type RenderPass =
+  | { readonly kind: "overlay"; readonly items: readonly OverlayDraw[] }
   | { readonly kind: "clear"; readonly color: string }
   | { readonly kind: "terrain"; readonly draws: readonly TerrainDraw[] }
   | {

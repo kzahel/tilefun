@@ -45,6 +45,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [029 Outdoor frame contract](029-outdoor-frame-contract.md) | Delivered: resource placements, explicit shadow ordering and production backend submission; editor overlays follow |
 
+| [030 Editor overlay data](030-editor-overlay-data.md) | Delivered: pooled geometry and Canvas-free editor submission; R1 complete |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

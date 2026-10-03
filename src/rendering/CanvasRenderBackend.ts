@@ -3,6 +3,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { Camera } from "./Camera.js";
 import { drawScene2D } from "./Canvas2DRenderer.js";
+import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import type { RenderBackend, RenderPass, RenderView } from "./RenderFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
@@ -59,6 +60,9 @@ export class CanvasRenderBackend implements RenderBackend {
     const camera = this.setView(view);
     ctx.imageSmoothingEnabled = false;
     switch (pass.kind) {
+      case "overlay":
+        drawOverlayGeometry(ctx, pass.items, this.sheets);
+        break;
       case "clear":
         ctx.fillStyle = pass.color;
         ctx.fillRect(0, 0, view.viewportWidth, view.viewportHeight);
