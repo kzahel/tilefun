@@ -1,15 +1,32 @@
 # Entity activation, AI and unloading
 
 Topic: entity-activation
-Status: overlap separation now follows tick selection and accumulated time;
-general entity unloading and remaining inactive work are open technical debt.
+Status: overlap separation follows tick selection and accumulated time.
+Incremental persistence, ticket-driven residency and general unloading are
+designed/planned; the runtime refactor has not started.
 Updated: 2026-10-03.
 
-Owns simulation activity, NPC residency and the remaining cost of distant entities.
+Owns simulation activity, actor persistence/residency and the cost of distant entities.
 [Performance](performance.md) owns broader timing evidence and renderer work;
 [client/server architecture](../client-server-architecture.md) owns execution
 boundaries. Single-player authority runs in a browser Worker using the shared
 server implementation, so moving work to that Worker does not eliminate it.
+
+## Selected direction
+
+The 2026-10-03 request authorizes a new save format without existing-world
+compatibility. The [target architecture](../entity-streaming-architecture.md)
+defines individual durable entity/prop records with spatial indices, shared
+asynchronous persistence policy, IndexedDB for browser authority and SQLite
+for Node. It separates ticket demand, data readiness, replication and simulation;
+sleeping actors freeze without wall-clock catch-up. Actual eviction waits for
+required save acknowledgements and releases decoded caches as well as actors.
+
+[Reference research](../research/entity-streaming-reference.md) records the
+inspected Minecraft Java 1.17.1 and mclone sources. Java uses chunk-sized entity
+lists; individual records and reduced-rate AI are deliberate Tilefun choices.
+[Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
+parent sequence. This decision is documentation only, not implemented behavior.
 
 ## Current behavior
 
@@ -69,6 +86,15 @@ performance results or a diagnosis of any individual play report.
    type, position and optional procedural identity, rather than a complete live
    NPC snapshot. A lossless unload contract needs stable IDs, relevant runtime
    state and relationship handling before reusing persistence for eviction.
+6. **Persistence scales with historical world size.** Metadata saves rebuild the
+   full authored entity/prop list and procedural edit/deletion collections.
+   Startup reads all saved terrain records and hydrates saved actors; saved
+   terrain mirrors remain after live chunks unload. This is not a per-entity
+   incremental save or demand-driven durable load system.
+7. **Storage contracts differ across backends.** The file backend independently
+   replaces each record although the store interface promises an atomic batch.
+   General actor movement, relationships and gameplay transactions need actual
+   cross-record atomicity and distinct missing/error results.
 
 Campfires have no AI: their definition in
 [EntityDefs](../../src/entities/EntityDefs.ts) gives them animation and a solid
@@ -78,33 +104,25 @@ crowding. Original reports and pictures remain in the private
 [Play ideas inbox](play-ideas.md), not in Git. A reported symptom is not evidence
 that these activation gaps caused it.
 
-## Follow-up backlog
+## Delivery and next work
 
-- [ ] Build a repeatable headless simulation benchmark with placed NPCs, static
-  campfires and balls, varying both population and density. Compare nearby,
-  reduced-rate, far and unloaded-terrain locations. Separate Worker simulation,
-  replication, client rendering and memory measurements.
-- [ ] Define one explicit activation policy and documented exceptions: camera
-  interest versus player proximity, loaded terrain, multiplayer union, riders,
-  followers, projectiles and gameplay callbacks. Decide whether sleeping actors
-  freeze or advance elapsed time when reactivated.
-- [ ] Bound inactive work using active sets/spatial queries and make separation,
-  ball physics and service callbacks honor the chosen policy where appropriate.
-  Preserve interactions across activation boundaries.
 - [x] Make NPC separation honor existing tick selection and per-entity elapsed
   time; cover sleeping/waking crowds, reduced-rate substeps and multiplayer
-  interest. Broader activation-policy changes remain open.
-- [ ] Evaluate persistence-aware unloading for placed entities. Preserve stable
-  identity, edits, deletions, parent relationships and saved state; avoid lost
-  or duplicated actors when returning to a chunk.
-- [ ] Add regression coverage for tier crossings, unloaded terrain, overlapping
-  far NPCs, balls, camera pan/zoom, distant multiplayer players, mounted/following
-  actors and save/reload/reactivation. Existing
-  [AI tests](../../src/server/tickAllAI.test.ts) cover skipping the AI pass, not
-  complete simulation sleep.
+  interest. [Tactical 018](../tactical/018-tick-aware-npc-separation.md).
+- [x] Research reference implementations and document the target architecture
+  and prioritized parent plan without changing runtime behavior.
+- [ ] Establish a bounded save/read/memory baseline and minimum durable identity,
+  codec and transaction contract; immediately follow with incremental saves on
+  IndexedDB and SQLite. This removes global-list write amplification first.
+- [ ] Deliver shared tickets/readiness, lazy indexed loads and acknowledged
+  eviction, then complete active-set coverage and reduced-decision scheduling.
+  [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) owns phase
+  dependencies, acceptance scenarios and failure/pressure gates.
+- [ ] Investigate dense active campfire collision and pickup behavior separately;
+  general distant-entity unloading does not establish the cause of that symptom.
 
-Start with baseline measurements and the activation contract. Create a bounded
-tactical when an implementation slice is selected; this backlog does not commit
-to a particular unloading design. Execution changes require the standard checks
+Create bounded child tacticals as implementation slices are selected. Existing
+[AI tests](../../src/server/tickAllAI.test.ts) cover skipping the AI pass, not
+complete simulation sleep. Execution changes require the standard checks
 and `npm run streaming:bench -- --assert-ready` in addition to focused regression
 tests; see [performance validation](performance.md#evidence-and-validation).

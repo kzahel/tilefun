@@ -11,6 +11,7 @@ implementation scope and evidence.
 | Area | Delivered | Next checkpoint / owner |
 | --- | --- | --- |
 | Streaming and execution | Shared single-player Worker authority, terrain preparation, desktop and Pixel 7a traversal evidence | Bound offscreen raster work, improve cold entry and broaden device coverage; [performance](topics/performance.md) |
+| Entity persistence and unloading | Tick-aware NPC separation; target architecture researched and documented | Incremental entity saves first, then shared tickets/readiness, lazy residency and eviction; [entity activation](topics/entity-activation.md), [planned sequence](tactical/019-entity-streaming-and-persistence.md) |
 | Regional cities | Shared versioned explorer/game generation, approved dense neighborhood and v6 commercial streets | Review thirteen staged v7–v10 parking/park/architecture/pedestrian views; [city generation](topics/city-generation.md) |
 | Road vehicles | All 180 directional views and geometry approved | Planned gentle generated-road traffic and roof riding; implementation not started; [vehicles](topics/vehicles.md) |
 | Workshop and source art | Unified review inbox, authenticated feedback, source catalog and outdoor metadata/scene annotations | Address exact recorded feedback and review candidate geometry; [art review](topics/art-review.md) |
