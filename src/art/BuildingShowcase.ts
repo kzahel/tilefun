@@ -44,6 +44,7 @@ export function drawBuildingShowcase(
   ctx.fillRect(0, baseline + 100, canvas.width, 3);
   const props = placements.map((p, i) => ({ ...createProp(p.prefab.type, p.wx, p.wy), id: i + 1 }));
   const world = new World(new FlatStrategy());
+  const renderer = new TileRenderer();
   const items = collectScene(
     [],
     props,
@@ -51,11 +52,11 @@ export function drawBuildingShowcase(
     camera,
     camera.getVisibleChunkRange(),
     1,
-    new TileRenderer(),
+    renderer,
     [],
     false,
   );
-  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined);
+  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined, false, renderer);
   if (geometry)
     for (const p of placements) {
       const topLeft = camera.worldToScreen(

@@ -236,7 +236,7 @@ try {
                 visited.add(`${cx},${cy}`);
                 const chunk = game.stateView.world.getChunkIfLoaded(cx, cy);
                 if (!chunk) missing++;
-                else if (!game.tileRenderer.getTerrainSurface(chunk)) incomplete++;
+                else if (!game.tileRenderer.hasTerrain(chunk)) incomplete++;
               }
             if (missing) missingDataFrames++;
             if (incomplete) incompleteCacheFrames++;

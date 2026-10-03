@@ -1,6 +1,11 @@
 import type { Chunk } from "../world/Chunk.js";
+import type { TerrainResourceId } from "./TerrainPresentation.js";
+
+// Process-local identities are never recycled across renderers or resets.
+let nextResourceId = 1;
 
 interface TerrainSurface {
+  id: TerrainResourceId;
   canvas: OffscreenCanvas;
   revision: number;
   visualRevision: number;
@@ -13,6 +18,7 @@ interface TerrainSurface {
 export class CanvasTerrainResources {
   private readonly surfaces = new Map<Chunk, TerrainSurface>();
   private readonly coordinates = new Map<string, Chunk>();
+  private readonly images = new Map<TerrainResourceId, OffscreenCanvas>();
   assetRevision = 0;
 
   get size(): number {
@@ -21,6 +27,14 @@ export class CanvasTerrainResources {
 
   get(chunk: Chunk | undefined): OffscreenCanvas | null {
     return chunk ? (this.surfaces.get(chunk)?.canvas ?? null) : null;
+  }
+
+  resourceId(chunk: Chunk): TerrainResourceId | null {
+    return this.surfaces.get(chunk)?.id ?? null;
+  }
+
+  resolve(id: TerrainResourceId): OffscreenCanvas | null {
+    return this.images.get(id) ?? null;
   }
 
   isReady(chunk: Chunk | undefined, cx?: number, cy?: number): boolean {
@@ -42,7 +56,10 @@ export class CanvasTerrainResources {
     if (previous && previous !== chunk) this.delete(previous);
     this.delete(chunk);
     this.coordinates.set(key, chunk);
+    const id = nextResourceId++ as TerrainResourceId;
+    this.images.set(id, canvas);
     this.surfaces.set(chunk, {
+      id,
       canvas,
       cx,
       cy,
@@ -54,7 +71,10 @@ export class CanvasTerrainResources {
 
   delete(chunk: Chunk): void {
     const entry = this.surfaces.get(chunk);
-    if (entry) this.coordinates.delete(`${entry.cx},${entry.cy}`);
+    if (entry) {
+      this.coordinates.delete(`${entry.cx},${entry.cy}`);
+      this.images.delete(entry.id);
+    }
     this.surfaces.delete(chunk);
   }
 
@@ -69,5 +89,6 @@ export class CanvasTerrainResources {
   clear(): void {
     this.surfaces.clear();
     this.coordinates.clear();
+    this.images.clear();
   }
 }

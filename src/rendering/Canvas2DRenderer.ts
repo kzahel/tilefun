@@ -3,6 +3,12 @@ import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
+import type { TerrainResourceId } from "./TerrainPresentation.js";
+
+/** Canvas-specific resource resolution stays on the drawing side of the boundary. */
+export interface CanvasTerrainSource {
+  resolveTerrainResource(id: TerrainResourceId): CanvasImageSource | null;
+}
 
 /**
  * Draw a pre-sorted scene item list onto a Canvas2D context.
@@ -15,6 +21,7 @@ export function drawScene2D(
   sheets: Map<string, Spritesheet>,
   grassSheet: Spritesheet | undefined,
   pixelExactShadows = false,
+  terrain?: CanvasTerrainSource,
 ): void {
   // Shadow pre-pass: draw ground shadows before all sprites so they appear
   // behind props (e.g. table shadow peeks out at edges, not on top)
@@ -31,9 +38,12 @@ export function drawScene2D(
         }
         drawSprite(ctx, camera, item, sheets);
         break;
-      case "elevation":
-        drawElevation(ctx, camera, item);
+      case "elevation": {
+        if (!terrain) throw new Error("Elevation drawing requires terrain resources");
+        const image = terrain.resolveTerrainResource(item.terrainResource);
+        if (image) drawElevation(ctx, camera, item, image);
         break;
+      }
       case "grass":
         if (grassSheet) drawGrass(ctx, camera, item, grassSheet);
         break;
@@ -193,7 +203,12 @@ function drawSprite(
   ctx.restore();
 }
 
-function drawElevation(ctx: CanvasRenderingContext2D, camera: Camera, item: ElevationItem): void {
+function drawElevation(
+  ctx: CanvasRenderingContext2D,
+  camera: Camera,
+  item: ElevationItem,
+  image: CanvasImageSource,
+): void {
   const tileScreenSize = TILE_SIZE * camera.scale;
   const screen = camera.worldToScreen(item.wx, item.wy);
   const tileSx = Math.round(screen.sx);
@@ -203,7 +218,7 @@ function drawElevation(ctx: CanvasRenderingContext2D, camera: Camera, item: Elev
   if (item.phase === "surface") {
     // Elevated tile shifted up
     ctx.drawImage(
-      item.chunkCache,
+      image,
       item.srcX,
       item.srcY,
       TILE_SIZE,
@@ -221,7 +236,7 @@ function drawElevation(ctx: CanvasRenderingContext2D, camera: Camera, item: Elev
   } else {
     // Cliff face: stretch bottom 1px row downward
     ctx.drawImage(
-      item.chunkCache,
+      image,
       item.srcX,
       item.srcY + TILE_SIZE - 1,
       TILE_SIZE,

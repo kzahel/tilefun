@@ -10,7 +10,7 @@ import { appendGrassBladeItems, collectGrassBladeItems } from "./GrassBladeRende
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
-import type { TileRenderer } from "./TileRenderer.js";
+import type { TerrainPresentation } from "./TerrainPresentation.js";
 
 /**
  * Interpolation factor for Z_SORT_FACTOR:
@@ -56,7 +56,7 @@ export function collectScene(
   camera: Camera,
   visible: ChunkRange,
   alpha: number,
-  tileRenderer: TileRenderer,
+  terrain: TerrainPresentation,
   particles: ParticleItem[],
   hasGrass: boolean,
   extrapolationGhosts?: readonly ExtrapolationGhostItem[],
@@ -267,7 +267,7 @@ export function collectScene(
   }
 
   // --- Elevation tiles ---
-  const elevItems = tileRenderer.collectElevationItems(world, visible);
+  const elevItems = terrain.collectElevationItems(world, visible);
   for (const elev of elevItems) {
     items.push(elev);
   }

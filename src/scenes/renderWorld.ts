@@ -117,7 +117,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
   );
 
   try {
-    drawScene2D(ctx, camera, items, sheets, grassSheet);
+    drawScene2D(ctx, camera, items, sheets, grassSheet, false, tileRenderer);
   } finally {
     gc.sceneFrame.release();
   }

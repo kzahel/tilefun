@@ -21,11 +21,15 @@ import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { getTileDef, TileId } from "../world/TileRegistry.js";
 import { chunkToWorld } from "../world/types.js";
-import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 import { CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import type { ElevationItem } from "./SceneItem.js";
+import type {
+  TerrainPresentation,
+  TerrainRenderWorld,
+  TerrainResourceId,
+} from "./TerrainPresentation.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
 
@@ -64,9 +68,9 @@ export function getWaterFrame(nowMs: number): number {
  * at native resolution (256x256), then drawn scaled to the main canvas.
  * Includes both terrain (with autotile) and detail layers in the cache.
  */
-export type TerrainRenderWorld = Pick<World, "getRoadAt" | "getChunkIfLoaded">;
+export type { TerrainRenderWorld } from "./TerrainPresentation.js";
 
-export class TileRenderer {
+export class TileRenderer implements TerrainPresentation {
   /** Indexed sheets array (index matches BlendEntry.sheetIndex). */
   private blendSheets: Spritesheet[] = [];
   /** BlendGraph for base fill lookups. */
@@ -240,6 +244,14 @@ export class TileRenderer {
     return this.resources.get(chunk);
   }
 
+  hasTerrain(chunk: Chunk | undefined): boolean {
+    return this.resources.get(chunk) !== null;
+  }
+
+  resolveTerrainResource(id: TerrainResourceId): OffscreenCanvas | null {
+    return this.resources.resolve(id);
+  }
+
   isTerrainReady(chunk: Chunk | undefined): boolean {
     return this.resources.isReady(chunk);
   }
@@ -387,8 +399,8 @@ export class TileRenderer {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
         const chunk = world.getChunkIfLoaded(cx, cy);
         if (!chunk) continue;
-        const surface = this.resources.get(chunk);
-        if (!surface) continue;
+        const terrainResource = this.resources.resourceId(chunk);
+        if (terrainResource === null) continue;
 
         // Fast skip: no elevation in this chunk
         let hasElevation = false;
@@ -414,7 +426,7 @@ export class TileRenderer {
               kind: "elevation" as const,
               wx: tileWx,
               wy: tileWy,
-              chunkCache: surface,
+              terrainResource,
               srcX: lx * TILE_SIZE,
               srcY: ly * TILE_SIZE,
               height: h,

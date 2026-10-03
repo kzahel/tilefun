@@ -44,6 +44,7 @@ export function drawStreetShowcase(
     ...createProp(p.type, p.wx, p.wy),
     id: i + 1,
   }));
+  const renderer = new TileRenderer();
   const items = collectScene(
     [],
     props,
@@ -51,11 +52,11 @@ export function drawStreetShowcase(
     camera,
     camera.getVisibleChunkRange(),
     1,
-    new TileRenderer(),
+    renderer,
     [],
     false,
   );
-  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined);
+  drawScene2D(ctx, camera, items, new Map([["me-complete", sheet]]), undefined, false, renderer);
   if (geometry) {
     ctx.strokeStyle = "#8befb5";
     ctx.strokeRect(...rect(scene.walkway));

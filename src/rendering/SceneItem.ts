@@ -1,3 +1,5 @@
+import type { TerrainResourceId } from "./TerrainPresentation.js";
+
 /**
  * Discriminated union of all visual items that participate in Y-sorted
  * scene rendering. All positions are world-space (world pixels).
@@ -49,8 +51,8 @@ export interface ElevationItem {
   wx: number;
   /** Tile top-left world Y. */
   wy: number;
-  /** Reference to the chunk's OffscreenCanvas cache. */
-  chunkCache: OffscreenCanvas;
+  /** Backend-owned imagery; resolved only while consuming this frame. */
+  terrainResource: TerrainResourceId;
   /** Source X in chunk cache (native pixels). */
   srcX: number;
   /** Source Y in chunk cache (native pixels). */

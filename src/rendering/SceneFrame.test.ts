@@ -6,6 +6,7 @@ import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { ElevationItem, ParticleItem } from "./SceneItem.js";
+import type { TerrainResourceId } from "./TerrainPresentation.js";
 import type { TileRenderer } from "./TileRenderer.js";
 
 afterEach(() => vi.restoreAllMocks());
@@ -27,7 +28,7 @@ it("preserves sorted mixed scenes across borrowed frames and releases surface/pa
     sortKey: 80,
     wx: 32,
     wy: 64,
-    chunkCache: {} as OffscreenCanvas,
+    terrainResource: 1 as TerrainResourceId,
     srcX: 0,
     srcY: 0,
     height: 1,

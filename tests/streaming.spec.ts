@@ -53,7 +53,7 @@ for (const version of ["regional-v4", "regional-v10"] as const) {
               visited.add(`${cx},${cy}`);
               const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
               if (!chunk) missing++;
-              else if (!g.tileRenderer.getTerrainSurface(chunk)) incomplete++;
+              else if (!g.tileRenderer.hasTerrain(chunk)) incomplete++;
             }
           const d = g.tileRenderer.getDiagnostics();
           const haloArea = (range.maxCx - range.minCx + 3) * (range.maxCy - range.minCy + 3);

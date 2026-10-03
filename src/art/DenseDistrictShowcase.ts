@@ -392,6 +392,7 @@ export function drawDenseDistrictShowcase(
     assets.sheets,
     undefined,
     true,
+    renderer,
   );
   if (geometry) {
     ctx.lineWidth = 1;

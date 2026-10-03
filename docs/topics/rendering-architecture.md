@@ -107,3 +107,19 @@ renderers, equal-revision derived changes, asset changes during a partial build,
 and fallback eviction. The remaining elevation canvas reference and concrete
 scene-collector dependency are the next slice. Full integrated visual/traversal
 validation is recorded after that extraction below.
+
+## Completed slice: backend-neutral elevation handles
+
+`TerrainPresentation` is the scene collector's narrow terrain input; collection
+no longer imports concrete `TileRenderer`. `SceneItem` contains no Canvas types.
+Elevation records carry a `TerrainResourceId`, and `CanvasTerrainSource` resolves
+it only in `drawScene2D`. Gameplay, explorer, geometry review, district
+review and traffic playground pass their own renderer's resolver.
+
+Publishing replacement imagery retires the prior handle. IDs are never reused
+across renderer instances or clears during the runtime; a stale/cross-backend
+handle resolves to nothing, never another image. Asset invalidation leaves the
+old completed handle usable during catch-up, then publication replaces it.
+Frames must be consumed synchronously before preparation/eviction/reset; handles
+are transient presentation references, not saved-world IDs. Tests cover actual
+Canvas source rectangles, stale-handle skipping and independent renderer IDs.

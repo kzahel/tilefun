@@ -94,6 +94,8 @@ export default function TrafficPage() {
             ),
             assets.sheets,
             undefined,
+            false,
+            renderer,
           );
           c.dataset.playerZ = String(s.player.wz ?? 0);
           c.dataset.carX = String(s.car.entity.position.wx);

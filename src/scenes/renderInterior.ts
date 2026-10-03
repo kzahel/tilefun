@@ -79,7 +79,7 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
     id: `actor:${index}`,
     depth: item.sortKey,
     draw: (ctx: CanvasRenderingContext2D) =>
-      drawScene2D(ctx, nativeCamera, [item], gc.sheets, undefined),
+      drawScene2D(ctx, nativeCamera, [item], gc.sheets, undefined, false, gc.tileRenderer),
   }));
   const origin = gc.camera.worldToScreen(0, 0);
   gc.ctx.save();

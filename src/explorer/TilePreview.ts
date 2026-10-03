@@ -252,7 +252,7 @@ export class TilePreview {
         [],
         false,
       );
-      drawScene2D(ctx, this.camera, items, this.assets.sheets, undefined);
+      drawScene2D(ctx, this.camera, items, this.assets.sheets, undefined, false, this.renderer);
       ctx.restore();
     }
     this.updateStats();

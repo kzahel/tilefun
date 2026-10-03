@@ -146,7 +146,7 @@ export function OutdoorGeometryTest({
           [],
           false,
         );
-        drawScene2D(ctx, camera, scene, assets.sheets, undefined, true);
+        drawScene2D(ctx, camera, scene, assets.sheets, undefined, true, renderer);
         const [vx, vy, vw, vh] = asset.visualBounds;
         drawRect([vx - metadata.anchor[0], vy - metadata.anchor[1], vw, vh], "#3472aa");
         if (metadata.footprint) drawRect(metadata.footprint, "#229b61");
