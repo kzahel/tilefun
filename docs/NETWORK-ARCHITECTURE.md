@@ -11,9 +11,11 @@ For wire protocol research (QW, Source, Roblox comparisons), see
 ## Current State (Phases 1-6 complete)
 
 Every tick at 60 Hz, the server builds per-client messages sent over a single
-reliable ordered channel (WebSocket, WebRTC reliable data channel, or in-memory
-`SerializingTransport`). Messages are binary-encoded (ArrayBuffer) with a JSON
-fallback for infrequent message types.
+reliable ordered channel (WebSocket, WebRTC reliable data channel, or local
+`WorkerClientTransport`). Local replication defers when its bounded channel is
+backpressured; simulation continues and delta baselines advance only on delivery
+admission. Messages are binary-encoded (ArrayBuffer) with a JSON fallback for
+infrequent message types.
 
 **Completed optimizations** (Phases 1-5):
 
@@ -552,11 +554,18 @@ decision is in the transport layer, not the protocol layer.
 5. Server routes `frame` to `entities`, all required state/control to `sync`
 6. If `entities` is unavailable, `frame` falls back to `sync` and logs once
 
-### Local (Same Browser Tab)
+### Local (Dedicated Worker in the Same Browser Tab)
 
-1. `SerializingTransport` — in-memory JSON roundtrip
-2. Zero latency, validates serialization correctness
-3. No network involved — used for single-player and development
+1. `WorkerClientTransport` transfers owned binary buffers to a Worker hosting the
+   shared `GameServer` and `Realm`; the main thread holds a predicted client replica.
+2. Each direction has one credited batch in flight, bounded queues and bounded
+   consumption per pump. Delivery is asynchronous and preserves input/delta order.
+3. Startup, visibility pause/resume, periodic saves and acknowledged shutdown
+   have explicit lifecycle handling. No network process is needed.
+4. `SerializingTransport` remains the synchronous binary loopback for tests and
+   other in-process hosts.
+
+See the [implementation and measurements](tactical/012-streaming-performance-and-local-server-worker.md).
 
 ## Phase 6 Testing Notes
 

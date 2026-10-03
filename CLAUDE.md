@@ -14,6 +14,11 @@ npm test                  # unit tests (vitest)
 npx biome check --write . # lint + format
 ```
 
+Single-player authority runs in a Worker with the shared server implementation.
+For streaming or execution changes, use `npm run streaming:bench -- --assert-ready`
+and the scenarios and measurement limits in
+`docs/tactical/012-streaming-performance-and-local-server-worker.md`.
+
 For changes that affect rendering or integration, also run E2E tests:
 
 ```bash

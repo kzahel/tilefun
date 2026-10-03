@@ -15,6 +15,11 @@ restoring the original downloaded packs. See [Fresh-machine setup, assets and
 local data](docs/setup-and-local-data.md) for dependency installation, build/test
 commands, source-pack rebuilds, and transferring review history and local state.
 
+Single-player authority runs in a dedicated Worker; the main thread handles the
+client replica, prediction and rendering. Run `npm run streaming:bench -- --assert-ready`
+for isolated real-game traversal checks, or add `--headed` / `--cpu=4` for other
+measurement lanes. See the [performance plan and recorded results](docs/tactical/012-streaming-performance-and-local-server-worker.md).
+
 ## Tilefun Workshop
 
 [Open Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html) for the

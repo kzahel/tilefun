@@ -2,8 +2,8 @@
 
 ## Streaming Performance and Single Player Execution
 
-- Baseline investigation found unfinished visible terrain caches even with smooth frame pacing. Establish a repeatable traversal benchmark that measures both readiness and frame cost.
-- Proposed first architectural step: host the existing single-player authority in a dedicated browser Worker, preserving the replicated client and shared server implementation. Prepare terrain caches ahead of the camera as a separate improvement. See the [performance and Worker plan](tactical/012-streaming-performance-and-local-server-worker.md).
+- Implemented: repeatable traversal diagnostics, shared single-player authority in a dedicated browser Worker, bounded ordered transport and terrain cache preparation ahead of the camera. The v4/v10 ordinary traversal has zero missing or unfinished visible chunks; frame p95 remains about 16.7–16.8 ms in the headless desktop captures. See the [performance and Worker plan and evidence](tactical/012-streaming-performance-and-local-server-worker.md).
+- Next: capture matched runs on a representative physical phone and establish hardware-specific timing gates. Cold entry remains separate from ordinary streaming. P2P authority can adopt the same host boundary when needed.
 - Consider WASM only if measured remaining compute costs or an explicit native/browser sharing requirement justify it.
 
 ## Regional Generation and World Explorer

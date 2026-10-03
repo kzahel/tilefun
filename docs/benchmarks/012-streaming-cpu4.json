@@ -1,0 +1,1257 @@
+{
+  "revision": "3b8c2bd76a942571dc3a2d2d0ca6a4a58285cdcb",
+  "dirty": false,
+  "date": "2026-10-03T03:21:28.821Z",
+  "platform": "darwin 25.6.0 arm64",
+  "cpu": "Apple M4 Pro",
+  "headed": false,
+  "instrumentation": true,
+  "cpuRate": 4,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "fixtures": [
+    {
+      "version": "regional-v10",
+      "arrival": {
+        "x": 314,
+        "y": 509,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v10",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "inputAckMs": {
+            "count": 83,
+            "p50": 58.5,
+            "p95": 75.09999990463257,
+            "p99": 78.5,
+            "max": 78.5
+          },
+          "maxAckGap": 5,
+          "predictionResimulationErrorPx": {
+            "count": 83,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 7.900000095367432,
+            "p95": 10.200000286102295,
+            "p99": 10.799999713897705,
+            "max": 11.300000190734863
+          },
+          "updateMs": {
+            "count": 117,
+            "p50": 0.5,
+            "p95": 1.5999999046325684,
+            "p99": 3,
+            "max": 14.099999904632568
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 3,
+          "incompleteCacheFrames": 11,
+          "maxIncomplete": 6,
+          "longestGapFrames": 14,
+          "maxLoaded": 49,
+          "maxBuffered": 0,
+          "visitedChunks": 12,
+          "displacement": {
+            "x": 32016,
+            "y": -13120
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {
+            "client.decode": {
+              "count": 156,
+              "totalMs": 10.30000114440918,
+              "maxMs": 5.299999713897705,
+              "retained": 156,
+              "p50Ms": 0,
+              "p95Ms": 0.3000001907348633,
+              "p99Ms": 0.7000002861022949
+            },
+            "client.apply": {
+              "count": 152,
+              "totalMs": 5.80000114440918,
+              "maxMs": 1,
+              "retained": 152,
+              "p50Ms": 0,
+              "p95Ms": 0.20000028610229492,
+              "p99Ms": 0.8000001907348633
+            },
+            "client.cache": {
+              "count": 80,
+              "totalMs": 114.10000133514404,
+              "maxMs": 2.5999999046325684,
+              "retained": 80,
+              "p50Ms": 1.3000001907348633,
+              "p95Ms": 2.4000000953674316,
+              "p99Ms": 2.5999999046325684
+            },
+            "client.cacheLatency": {
+              "count": 32,
+              "totalMs": 11224.499998569489,
+              "maxMs": 736.0999999046326,
+              "retained": 32,
+              "p50Ms": 369.19999980926514,
+              "p95Ms": 718.9000000953674,
+              "p99Ms": 736.0999999046326
+            },
+            "client.encode": {
+              "count": 119,
+              "totalMs": 2.3999996185302734,
+              "maxMs": 0.6999998092651367,
+              "retained": 119,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.5
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.generate": {
+                  "count": 48,
+                  "totalMs": 82.69999980926514,
+                  "maxMs": 3.3999996185302734,
+                  "retained": 48,
+                  "p50Ms": 1.799999713897705,
+                  "p95Ms": 2.5999999046325684,
+                  "p99Ms": 3.3999996185302734
+                },
+                "server.autotile": {
+                  "count": 128,
+                  "totalMs": 2,
+                  "maxMs": 0.20000028610229492,
+                  "retained": 128,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.20000028610229492
+                },
+                "server.placements": {
+                  "count": 128,
+                  "totalMs": 22.400004386901855,
+                  "maxMs": 0.5,
+                  "retained": 128,
+                  "p50Ms": 0.19999980926513672,
+                  "p95Ms": 0.3000001907348633,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.tick": {
+                  "count": 128,
+                  "totalMs": 56.90000009536743,
+                  "maxMs": 4.099999904632568,
+                  "retained": 128,
+                  "p50Ms": 0.40000009536743164,
+                  "p95Ms": 0.6999998092651367,
+                  "p99Ms": 1
+                },
+                "server.encode": {
+                  "count": 154,
+                  "totalMs": 2.600001335144043,
+                  "maxMs": 0.6000003814697266,
+                  "retained": 154,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.20000028610229492
+                },
+                "server.replication": {
+                  "count": 127,
+                  "totalMs": 6.499998569488525,
+                  "maxMs": 2.5,
+                  "retained": 127,
+                  "p50Ms": 0,
+                  "p95Ms": 0.19999980926513672,
+                  "p99Ms": 0.20000028610229492
+                },
+                "server.decode": {
+                  "count": 119,
+                  "totalMs": 0.5000004768371582,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 119,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.10000038146972656
+                }
+              },
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 211,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 167,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "inputAckMs": {
+            "count": 112,
+            "p50": 40.90000009536743,
+            "p95": 57.700000286102295,
+            "p99": 58.700000286102295,
+            "max": 59.799999713897705
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 114,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.800000000000182,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 6.299999713897705,
+            "p95": 8,
+            "p99": 8.799999713897705,
+            "max": 8.899999618530273
+          },
+          "updateMs": {
+            "count": 121,
+            "p50": 0.10000038146972656,
+            "p95": 0.7000002861022949,
+            "p99": 0.9000000953674316,
+            "max": 0.9000000953674316
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 6,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {
+            "client.decode": {
+              "count": 129,
+              "totalMs": 0.6999998092651367,
+              "maxMs": 0.19999980926513672,
+              "retained": 129,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.10000038146972656
+            },
+            "client.apply": {
+              "count": 129,
+              "totalMs": 1.900001049041748,
+              "maxMs": 0.5999999046325684,
+              "retained": 129,
+              "p50Ms": 0,
+              "p95Ms": 0.10000038146972656,
+              "p99Ms": 0.3000001907348633
+            },
+            "client.encode": {
+              "count": 123,
+              "totalMs": 2.099998950958252,
+              "maxMs": 0.8000001907348633,
+              "retained": 123,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.39999961853027344
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.autotile": {
+                  "count": 129,
+                  "totalMs": 0.3000001907348633,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 129,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.09999990463256836
+                },
+                "server.placements": {
+                  "count": 129,
+                  "totalMs": 18.500001907348633,
+                  "maxMs": 0.3000001907348633,
+                  "retained": 129,
+                  "p50Ms": 0.10000038146972656,
+                  "p95Ms": 0.20000028610229492,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.replication": {
+                  "count": 129,
+                  "totalMs": 2.1000008583068848,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 129,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.encode": {
+                  "count": 129,
+                  "totalMs": 1.299999713897705,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 129,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.tick": {
+                  "count": 129,
+                  "totalMs": 35.00000524520874,
+                  "maxMs": 0.5,
+                  "retained": 129,
+                  "p50Ms": 0.3000001907348633,
+                  "p95Ms": 0.40000009536743164,
+                  "p99Ms": 0.40000009536743164
+                },
+                "server.decode": {
+                  "count": 123,
+                  "totalMs": 0.19999980926513672,
+                  "maxMs": 0.09999990463256836,
+                  "retained": 123,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.09999990463256836
+                }
+              },
+              "channel": {
+                "queued": 1,
+                "queuedBytes": 211,
+                "inFlight": 1,
+                "inFlightBytes": 211,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 302,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "inputAckMs": {
+            "count": 168,
+            "p50": 41.200000286102295,
+            "p95": 58.5,
+            "p99": 84.59999990463257,
+            "max": 93.2999997138977
+          },
+          "maxAckGap": 5,
+          "predictionResimulationErrorPx": {
+            "count": 171,
+            "p50": 0.00013878124991606455,
+            "p95": 0.00034950000008393545,
+            "p99": 0.00034950000008393545,
+            "max": 0.00034950000008393545
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 50
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 6.799999713897705,
+            "p95": 7.699999809265137,
+            "p99": 8.199999809265137,
+            "max": 8.400000095367432
+          },
+          "updateMs": {
+            "count": 183,
+            "p50": 0.5,
+            "p95": 0.9000000953674316,
+            "p99": 1.1999998092651367,
+            "max": 1.1999998092651367
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 1,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 8,
+          "displacement": {
+            "x": -224.52490234375,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {
+            "client.decode": {
+              "count": 197,
+              "totalMs": 7.199999809265137,
+              "maxMs": 0.7000002861022949,
+              "retained": 197,
+              "p50Ms": 0,
+              "p95Ms": 0.19999980926513672,
+              "p99Ms": 0.6999998092651367
+            },
+            "client.apply": {
+              "count": 197,
+              "totalMs": 3.9999990463256836,
+              "maxMs": 0.5999999046325684,
+              "retained": 197,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.5999999046325684
+            },
+            "client.encode": {
+              "count": 187,
+              "totalMs": 1.5000009536743164,
+              "maxMs": 0.2999997138977051,
+              "retained": 187,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.10000038146972656
+            },
+            "client.cache": {
+              "count": 11,
+              "totalMs": 15.399999618530273,
+              "maxMs": 2.299999713897705,
+              "retained": 11,
+              "p50Ms": 1.4000000953674316,
+              "p95Ms": 2.299999713897705,
+              "p99Ms": 2.299999713897705
+            },
+            "client.cacheLatency": {
+              "count": 4,
+              "totalMs": 316.50000047683716,
+              "maxMs": 117.40000009536743,
+              "retained": 4,
+              "p50Ms": 99.90000009536743,
+              "p95Ms": 117.40000009536743,
+              "p99Ms": 117.40000009536743
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.autotile": {
+                  "count": 192,
+                  "totalMs": 0.39999961853027344,
+                  "maxMs": 0.09999990463256836,
+                  "retained": 192,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.09999990463256836
+                },
+                "server.placements": {
+                  "count": 192,
+                  "totalMs": 30.200005531311035,
+                  "maxMs": 0.3000001907348633,
+                  "retained": 192,
+                  "p50Ms": 0.19999980926513672,
+                  "p95Ms": 0.20000028610229492,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.replication": {
+                  "count": 192,
+                  "totalMs": 3.799999237060547,
+                  "maxMs": 0.20000028610229492,
+                  "retained": 192,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.encode": {
+                  "count": 196,
+                  "totalMs": 1.8999996185302734,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 196,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.tick": {
+                  "count": 192,
+                  "totalMs": 63.20000410079956,
+                  "maxMs": 0.5999999046325684,
+                  "retained": 192,
+                  "p50Ms": 0.3000001907348633,
+                  "p95Ms": 0.40000009536743164,
+                  "p99Ms": 0.5
+                },
+                "server.decode": {
+                  "count": 187,
+                  "totalMs": 0.9000000953674316,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 187,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.10000038146972656
+                }
+              },
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 260,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 496,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "inputAckMs": {
+            "count": 286,
+            "p50": 38.39999961853027,
+            "p95": 55.69999980926514,
+            "p99": 56.799999713897705,
+            "max": 57.90000009536743
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 288,
+            "p50": 0.0002107187501678709,
+            "p95": 0.0002775624998321291,
+            "p99": 0.0004214375003357418,
+            "max": 0.0004214375003357418
+          },
+          "cache": {
+            "resident": 16,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          },
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 4.299999713897705,
+            "p95": 5.800000190734863,
+            "p99": 6.099999904632568,
+            "max": 6.900000095367432
+          },
+          "updateMs": {
+            "count": 301,
+            "p50": 0.19999980926513672,
+            "p95": 0.7999997138977051,
+            "p99": 0.9000000953674316,
+            "max": 1.5
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 10,
+          "displacement": {
+            "x": -738.600830078125,
+            "y": 0
+          },
+          "entities": 5,
+          "props": 8,
+          "mainThread": {
+            "client.decode": {
+              "count": 333,
+              "totalMs": 4.900001049041748,
+              "maxMs": 0.8000001907348633,
+              "retained": 333,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.20000028610229492
+            },
+            "client.apply": {
+              "count": 333,
+              "totalMs": 3.4000015258789062,
+              "maxMs": 0.5999999046325684,
+              "retained": 333,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.10000038146972656
+            },
+            "client.encode": {
+              "count": 308,
+              "totalMs": 1.6000003814697266,
+              "maxMs": 0.8000001907348633,
+              "retained": 308,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.09999990463256836
+            },
+            "client.cache": {
+              "count": 37,
+              "totalMs": 47.89999961853027,
+              "maxMs": 2.4000000953674316,
+              "retained": 37,
+              "p50Ms": 1.3000001907348633,
+              "p95Ms": 2.3999996185302734,
+              "p99Ms": 2.4000000953674316
+            },
+            "client.cacheLatency": {
+              "count": 16,
+              "totalMs": 1632.199999332428,
+              "maxMs": 199.90000009536743,
+              "retained": 16,
+              "p50Ms": 115.89999961853027,
+              "p95Ms": 199.90000009536743,
+              "p99Ms": 199.90000009536743
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.decode": {
+                  "count": 308,
+                  "totalMs": 0.3000001907348633,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 308,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0
+                },
+                "server.autotile": {
+                  "count": 315,
+                  "totalMs": 0.9000000953674316,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 315,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.09999990463256836
+                },
+                "server.placements": {
+                  "count": 315,
+                  "totalMs": 45.20000457763672,
+                  "maxMs": 0.3000001907348633,
+                  "retained": 315,
+                  "p50Ms": 0.10000038146972656,
+                  "p95Ms": 0.20000028610229492,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.replication": {
+                  "count": 315,
+                  "totalMs": 6.3000030517578125,
+                  "maxMs": 0.19999980926513672,
+                  "retained": 315,
+                  "p50Ms": 0,
+                  "p95Ms": 0.10000038146972656,
+                  "p99Ms": 0.19999980926513672
+                },
+                "server.encode": {
+                  "count": 332,
+                  "totalMs": 1.9999995231628418,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 332,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.09999990463256836
+                },
+                "server.tick": {
+                  "count": 315,
+                  "totalMs": 89.10000371932983,
+                  "maxMs": 5.400000095367432,
+                  "retained": 315,
+                  "p50Ms": 0.2999997138977051,
+                  "p95Ms": 0.40000009536743164,
+                  "p99Ms": 0.5
+                },
+                "server.generate": {
+                  "count": 8,
+                  "totalMs": 8.09999942779541,
+                  "maxMs": 1.200000286102295,
+                  "retained": 8,
+                  "p50Ms": 1.0999999046325684,
+                  "p95Ms": 1.200000286102295,
+                  "p99Ms": 1.200000286102295
+                }
+              },
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 121,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 814,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "inputAckMs": {
+            "count": 285,
+            "p50": 38.30000019073486,
+            "p95": 55.09999990463257,
+            "p99": 56.200000286102295,
+            "max": 57.30000019073486
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 287,
+            "p50": 0.0002107187501678709,
+            "p95": 0.0002775624998321291,
+            "p99": 0.0002775624998321291,
+            "max": 0.0004214375003357418
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 4.099999904632568,
+            "p95": 6.5,
+            "p99": 6.800000190734863,
+            "max": 7.799999713897705
+          },
+          "updateMs": {
+            "count": 301,
+            "p50": 0.10000038146972656,
+            "p95": 0.7000002861022949,
+            "p99": 1.0999999046325684,
+            "max": 1.6999998092651367
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 10,
+          "displacement": {
+            "x": 738.6007966562502,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 25,
+          "mainThread": {
+            "client.encode": {
+              "count": 309,
+              "totalMs": 0.4999995231628418,
+              "maxMs": 0.19999980926513672,
+              "retained": 309,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.09999990463256836
+            },
+            "client.decode": {
+              "count": 330,
+              "totalMs": 3.500000476837158,
+              "maxMs": 0.8000001907348633,
+              "retained": 330,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.2999997138977051
+            },
+            "client.apply": {
+              "count": 330,
+              "totalMs": 11.599996089935303,
+              "maxMs": 0.8000001907348633,
+              "retained": 330,
+              "p50Ms": 0,
+              "p95Ms": 0.19999980926513672,
+              "p99Ms": 0.6999998092651367
+            },
+            "client.cache": {
+              "count": 43,
+              "totalMs": 59.59999942779541,
+              "maxMs": 2.5999999046325684,
+              "retained": 43,
+              "p50Ms": 1.4000000953674316,
+              "p95Ms": 2.1999998092651367,
+              "p99Ms": 2.5999999046325684
+            },
+            "client.cacheLatency": {
+              "count": 17,
+              "totalMs": 1392.699999332428,
+              "maxMs": 249.80000019073486,
+              "retained": 17,
+              "p50Ms": 53.39999961853027,
+              "p95Ms": 249.80000019073486,
+              "p99Ms": 249.80000019073486
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.decode": {
+                  "count": 309,
+                  "totalMs": 0.20000076293945312,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 309,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0
+                },
+                "server.autotile": {
+                  "count": 316,
+                  "totalMs": 0.20000028610229492,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 316,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0
+                },
+                "server.placements": {
+                  "count": 316,
+                  "totalMs": 36.60000038146973,
+                  "maxMs": 0.2999997138977051,
+                  "retained": 316,
+                  "p50Ms": 0.09999990463256836,
+                  "p95Ms": 0.20000028610229492,
+                  "p99Ms": 0.20000028610229492
+                },
+                "server.replication": {
+                  "count": 316,
+                  "totalMs": 5.699999809265137,
+                  "maxMs": 0.5,
+                  "retained": 316,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.encode": {
+                  "count": 330,
+                  "totalMs": 2.6999993324279785,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 330,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.tick": {
+                  "count": 316,
+                  "totalMs": 73.49999952316284,
+                  "maxMs": 7.800000190734863,
+                  "retained": 316,
+                  "p50Ms": 0.19999980926513672,
+                  "p95Ms": 0.3000001907348633,
+                  "p99Ms": 0.5
+                },
+                "server.generate": {
+                  "count": 4,
+                  "totalMs": 7.200000286102295,
+                  "maxMs": 2.3000001907348633,
+                  "retained": 4,
+                  "p50Ms": 1.8000001907348633,
+                  "p95Ms": 2.3000001907348633,
+                  "p99Ms": 2.3000001907348633
+                }
+              },
+              "channel": {
+                "queued": 1,
+                "queuedBytes": 218,
+                "inFlight": 1,
+                "inFlightBytes": 218,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 1133,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "inputAckMs": {
+            "count": 170,
+            "p50": 56.19999980926514,
+            "p95": 60.299999713897705,
+            "p99": 63.80000019073486,
+            "max": 64.59999990463257
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 172,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 30,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 7864320
+          },
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.799999999999272
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 7.5,
+            "p95": 10.699999809265137,
+            "p99": 11.800000190734863,
+            "max": 12.899999618530273
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 0.09999990463256836,
+            "p95": 0.6999998092651367,
+            "p99": 1,
+            "max": 2.700000286102295
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 30,
+          "maxBuffered": 0,
+          "visitedChunks": 12,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 26,
+          "mainThread": {
+            "client.encode": {
+              "count": 186,
+              "totalMs": 0.09999990463256836,
+              "maxMs": 0.09999990463256836,
+              "retained": 186,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "client.decode": {
+              "count": 201,
+              "totalMs": 3.1999998092651367,
+              "maxMs": 0.9000000953674316,
+              "retained": 201,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.3000001907348633
+            },
+            "client.apply": {
+              "count": 201,
+              "totalMs": 3.5,
+              "maxMs": 0.7000002861022949,
+              "retained": 201,
+              "p50Ms": 0,
+              "p95Ms": 0.09999990463256836,
+              "p99Ms": 0.5
+            },
+            "client.cache": {
+              "count": 35,
+              "totalMs": 44.49999952316284,
+              "maxMs": 2.5,
+              "retained": 35,
+              "p50Ms": 1.3000001907348633,
+              "p95Ms": 2.4000000953674316,
+              "p99Ms": 2.5
+            },
+            "client.cacheLatency": {
+              "count": 15,
+              "totalMs": 2896.7999968528748,
+              "maxMs": 332.2999997138977,
+              "retained": 15,
+              "p50Ms": 214.7999997138977,
+              "p95Ms": 332.2999997138977,
+              "p99Ms": 332.2999997138977
+            }
+          },
+          "host": {
+            "authority": {
+              "timings": {
+                "server.decode": {
+                  "count": 186,
+                  "totalMs": 0.19999980926513672,
+                  "maxMs": 0.09999990463256836,
+                  "retained": 186,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0.09999990463256836
+                },
+                "server.generate": {
+                  "count": 6,
+                  "totalMs": 9.5,
+                  "maxMs": 1.8000001907348633,
+                  "retained": 6,
+                  "p50Ms": 1.700000286102295,
+                  "p95Ms": 1.8000001907348633,
+                  "p99Ms": 1.8000001907348633
+                },
+                "server.autotile": {
+                  "count": 191,
+                  "totalMs": 0.09999990463256836,
+                  "maxMs": 0.09999990463256836,
+                  "retained": 191,
+                  "p50Ms": 0,
+                  "p95Ms": 0,
+                  "p99Ms": 0
+                },
+                "server.placements": {
+                  "count": 191,
+                  "totalMs": 29.299999713897705,
+                  "maxMs": 0.3000001907348633,
+                  "retained": 191,
+                  "p50Ms": 0.19999980926513672,
+                  "p95Ms": 0.20000028610229492,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.replication": {
+                  "count": 191,
+                  "totalMs": 3.59999942779541,
+                  "maxMs": 0.5999999046325684,
+                  "retained": 191,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.3000001907348633
+                },
+                "server.encode": {
+                  "count": 200,
+                  "totalMs": 1.1999998092651367,
+                  "maxMs": 0.10000038146972656,
+                  "retained": 200,
+                  "p50Ms": 0,
+                  "p95Ms": 0.09999990463256836,
+                  "p99Ms": 0.10000038146972656
+                },
+                "server.tick": {
+                  "count": 191,
+                  "totalMs": 59.10000228881836,
+                  "maxMs": 7.699999809265137,
+                  "retained": 191,
+                  "p50Ms": 0.2999997138977051,
+                  "p95Ms": 0.40000009536743164,
+                  "p99Ms": 3.6999998092651367
+                }
+              },
+              "channel": {
+                "queued": 1,
+                "queuedBytes": 212,
+                "inFlight": 1,
+                "inFlightBytes": 212,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 518090,
+                "highWaterCount": 40
+              },
+              "ticks": 1327,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 4
+            },
+            "state": "ready"
+          },
+          "heapBytes": 35100000
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "browser": "153.0.8010.12"
+}

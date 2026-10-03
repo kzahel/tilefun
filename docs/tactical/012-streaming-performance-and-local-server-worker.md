@@ -1,19 +1,20 @@
 # Streaming performance and single player server worker
 
-Status: implementation authorized, 2026-10-03. Deliver both plans autonomously
-end to end, committing coherent slices and retaining the shared server model.
+Status: implemented, 2026-10-03. The baseline, Worker authority and terrain
+preparation shipped in separate commits, retaining the shared server model.
 
 The player sometimes sees blank terrain while walking. The agreed starting
 point is a repeatable performance baseline that measures terrain readiness as
-well as frame pacing. The proposed highest-value architectural follow-up is to
-move the existing single-player server into a dedicated browser Worker, keeping
-authoritative simulation and generation off the render thread. Implement that boundary with parity and lifecycle checks. A WASM core remains conditional on
-measured need; it is not required for this split.
+well as frame pacing. The architectural follow-up moves the existing
+single-player server into a dedicated browser Worker, keeping authoritative
+simulation and generation off the render thread, with parity and lifecycle
+checks. A WASM core remains conditional on measured need; these results do not
+justify introducing it.
 
 ## Observed behavior and exploratory baseline
 
-Inspection found two independent stages: chunk data generation and construction
-of the chunk's Canvas2D render cache. In ordinary single-player gameplay both
+Before this implementation, inspection found two independent stages: chunk data
+generation and construction of the chunk's Canvas2D render cache. In ordinary single-player gameplay both
 execute on the browser main thread. The data loader includes a one-chunk halo,
 but `TileRenderer.drawTerrain` starts cache construction only for chunks that
 reach the viewport. Its global budget is four tile rows per rendered frame;
@@ -60,10 +61,10 @@ was temporary and the checkout was not pinned against concurrent development.
 Capture reproducible revision/browser/device metadata in the permanent harness
 before using these numbers for regression decisions.
 
-## Existing foundations and testing gaps
+## Starting foundations and testing gaps
 
-- `main.ts` already creates `GameClient` in serialized mode with no server
-  reference. `SerializingTransport` binary-encodes and decodes each message,
+- Before this implementation, `main.ts` already created `GameClient` in
+  serialized mode with no server reference. `SerializingTransport` binary-encodes and decodes each message,
   then invokes the other endpoint synchronously on the same thread.
 - `GameServer` coordinates realms and connections. `Realm` owns authority,
   simulation, generation, edits, and saves. `RealmReplicator` owns client deltas.
@@ -236,7 +237,7 @@ slices. Record remaining hardware evidence and implementation decisions here.
   all generator reopen checks, interior movement/edit persistence, replicated
   physics settings, and render progress during a 350 ms authority-thread stall.
   The worker-only v10 traversal still showed unfinished caches, as expected;
-  cache scheduling remains the next independently measured slice.
+  the following slice isolates cache scheduling's contribution.
 
 - Terrain preparation now works in the loaded one-chunk halo before drawing,
   prioritizing visible gaps and then distance in the direction of travel.
@@ -248,13 +249,94 @@ slices. Record remaining hardware evidence and implementation decisions here.
   identities, eviction and completion. Both real-game traversal tests passed
   with zero missing or unfinished visible chunks while sprinting and returning.
   All 327 Workshop candidate records remain byte-equivalent after regeneration.
-  The full browser run passed 234 tests and exposed a test assertion comparing
-  a pre-fence predicted pose to a saved authoritative pose one input later.
-  The persistence test now freezes authority and consumes its final replica
-  before asserting exact restore; all nine worker checks passed across three
-  repeated runs. A clean full-suite rerun follows.
+  Persistence checks freeze authority and consume its final replica before
+  asserting exact restore, avoiding comparisons against an earlier predicted
+  pose. Worker lifecycle checks passed across three repeated browser runs.
 
 The original baseline's zoom sample directly assigned camera zoom, which the
 play scene overwrites. Its zoom row is not valid zoom-transition evidence.
 The permanent runner now uses the gameplay zoom control. Movement comparisons
 use the same seed, arrival, viewport, input and sample windows as before.
+
+## Final evidence and limits
+
+Final captures use clean revision `3b8c2bd`, Apple M4 Pro / macOS and bundled
+Chromium 153.0.8010.12, at 1280 by 900. Full environment details and samples are
+in the committed JSON. Performance captures ran sequentially, outside the test
+suite. The normal headless before/after sprint covers approximately 739 world
+pixels, 15/10 visible chunks for v4/v10, and the same endpoint entity/prop counts.
+
+| Fixture / lane | Sprint unfinished frames before → after | Sprint frame p95 | Sprint input acknowledgment p95 |
+|---|---:|---:|---:|
+| v4, headless | 36 → 0 | 16.7 ms | 51.6 ms |
+| v10, headless | 17 → 0 | 16.7 ms | 51.4 ms |
+| v10, 4× page CPU throttling | — → 0 | 16.7 ms | 55.7 ms |
+| v10, diagnostics disabled | — → 0 | 16.8 ms | 51.9 ms |
+| v10, headed | — → 0 | 9.3 ms | 42.2 ms |
+
+All final lanes also have zero missing data or unfinished visible caches during
+walking and reversal. The headed lane samples the same frame count at a faster
+display cadence, so its sprint covers 368 pixels; it is presentation evidence,
+not a matched throughput comparison. The final zoom-out samples have no gaps.
+Cold entry still exposes short readiness gaps: v4 has three frames with missing
+data and three with unfinished caches; v10 has two unfinished-cache frames in
+the normal lane. At 4× page throttling v10 has three missing-data frames and
+eleven unfinished-cache frames. These categories can overlap.
+
+- [Before](../benchmarks/012-streaming-before.json) and
+  [after](../benchmarks/012-streaming-after.json): matching normal traversal.
+- [Page CPU throttling](../benchmarks/012-streaming-cpu4.json),
+  [diagnostics disabled](../benchmarks/012-streaming-no-metrics.json), and
+  [headed presentation](../benchmarks/012-streaming-headed.json).
+- [Interior entry/edit/return](../benchmarks/012-gameplay-after.json): outdoor,
+  indoor and edited-room frame p95 all approximately 16.8 ms; indoor movement
+  and return succeeded, with no browser errors.
+
+The normal sprint's authority tick p95 is 0.5 ms in both fixtures; generation
+samples are at most 1.4 ms. Those timings now live in the Worker. A deliberate
+350 ms Worker stall in the browser integration test leaves main-thread animation
+frames advancing and verifies authority recovers afterward. Normal sprint input
+sequence lag peaks at three, and sampled prediction resimulation error stays
+below 0.001 world pixels. This supports the split without a WASM rewrite or an
+additional generation Worker pool.
+
+Queue high-water marks include browser delivery ownership, not just local
+arrays. Normal captures stay below 0.6 MiB and 20 messages on the authority
+side, against hard bounds of 16 MiB and 1,024 messages per outbound direction.
+One batch per direction is in flight. Replica application and transport pumps
+use 2 ms / 64-message budgets; individual messages are atomic. Terrain
+preparation uses 2 ms / 128-row budgets with an atomic row, so elapsed limits
+are soft at that granularity. Cache residency follows the viewport plus one
+chunk of halo and releases surfaces outside it. Sampled completed cache
+surfaces occupy roughly 4–8 MiB of logical RGBA storage; this is not process or
+GPU memory. Pending replacements can temporarily add a second surface.
+
+Timing diagnostics are disabled by default (`?perf` enables them), bounded to
+32 timing names and 512 retained samples per name. Counts, totals and maxima
+cover the sample window; stage percentiles cover retained samples. The
+diagnostics-disabled lane retains the external traversal sampler and shows
+similar frame pacing. Its render timings are noisier than the enabled run,
+so one pair does not establish a precise instrumentation overhead percentage.
+Readiness counters describe whole chunk caches, not exact blank pixel area.
+CDP page throttling does not establish equivalent Worker throttling or physical
+phone performance, and none of these measurements captures GPU completion.
+
+Functional checks cover ordering, credit and memory bounds, delta preservation
+under backpressure, physics synchronization and prediction, real Worker startup
+and failure, pause/resume, durable shutdown/reopen, terrain scheduling and
+revision cancellation, all saved generator revisions, and interior edits.
+Approved assets and all 327 Workshop candidate records are unchanged.
+
+Final validation: all three TypeScript projects pass; 1,192 unit tests across
+116 files pass; production build and all 235 browser tests pass. Biome passes
+with the repository's existing 122 warnings and 32 informational findings.
+The pattern editor browser assertion now polls committed camera state after
+input rather than racing React's update; its 15 checks also passed across
+three repeated runs. Every streaming lane passes `--assert-ready`.
+
+Next hardware step: repeat these fixtures on a representative physical phone,
+then set timing regression limits from repeated matched runs with measured
+variance. The CI traversal assertions enforce coverage and bounds now; timing
+thresholds should not be inferred from a single desktop run. Browser-hosted
+P2P still uses its existing host; moving it across the same boundary is a future
+extension, not needed for the completed single-player split.

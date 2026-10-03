@@ -1,0 +1,633 @@
+{
+  "revision": "3b8c2bd76a942571dc3a2d2d0ca6a4a58285cdcb",
+  "dirty": false,
+  "date": "2026-10-03T03:22:00.741Z",
+  "platform": "darwin 25.6.0 arm64",
+  "cpu": "Apple M4 Pro",
+  "headed": false,
+  "instrumentation": false,
+  "cpuRate": 1,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "fixtures": [
+    {
+      "version": "regional-v10",
+      "arrival": {
+        "x": 314,
+        "y": 509,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v10",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "inputAckMs": {
+            "count": 92,
+            "p50": 35.90000009536743,
+            "p95": 68.40000009536743,
+            "p99": 86.10000038146973,
+            "max": 86.10000038146973
+          },
+          "maxAckGap": 4,
+          "predictionResimulationErrorPx": {
+            "count": 92,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999727,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 1.8000001907348633,
+            "p95": 3.4000000953674316,
+            "p99": 4,
+            "max": 4.200000286102295
+          },
+          "updateMs": {
+            "count": 116,
+            "p50": 0.19999980926513672,
+            "p95": 0.5,
+            "p99": 0.8000001907348633,
+            "max": 3.700000286102295
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 3,
+          "incompleteCacheFrames": 2,
+          "maxIncomplete": 4,
+          "longestGapFrames": 5,
+          "maxLoaded": 49,
+          "maxBuffered": 0,
+          "visitedChunks": 12,
+          "displacement": {
+            "x": -21760,
+            "y": 14080
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 2,
+                "inFlightBytes": 422,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 127,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "inputAckMs": {
+            "count": 112,
+            "p50": 36.299999713897705,
+            "p95": 53.30000019073486,
+            "p99": 54.59999990463257,
+            "max": 56.200000286102295
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 114,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 2.5,
+            "p95": 3.5999999046325684,
+            "p99": 4.599999904632568,
+            "max": 4.699999809265137
+          },
+          "updateMs": {
+            "count": 121,
+            "p50": 0.09999990463256836,
+            "p95": 0.2999997138977051,
+            "p99": 0.40000009536743164,
+            "max": 0.5999999046325684
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 6,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 211,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 259,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "inputAckMs": {
+            "count": 171,
+            "p50": 35.90000009536743,
+            "p95": 53.5,
+            "p99": 54.5,
+            "max": 56.30000019073486
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 173,
+            "p50": 0.00013878124991606455,
+            "p95": 0.00034950000008393545,
+            "p99": 0.00034950000008393545,
+            "max": 0.00034950000008393545
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 180,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "p99": 16.800000000000182,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.700000286102295,
+            "p95": 3.5,
+            "p99": 4.700000286102295,
+            "max": 5.5
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 0.19999980926513672,
+            "p95": 0.2999997138977051,
+            "p99": 0.5,
+            "max": 0.5
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 8,
+          "displacement": {
+            "x": -222.07115028125008,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 27,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 2,
+                "inFlightBytes": 520,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 452,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "inputAckMs": {
+            "count": 284,
+            "p50": 34.90000009536743,
+            "p95": 51.90000009536743,
+            "p99": 53.40000009536743,
+            "max": 54.59999990463257
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 286,
+            "p50": 0.0002107187501678709,
+            "p95": 0.0002775624998321291,
+            "p99": 0.0002775624998321291,
+            "max": 0.0004214375003357418
+          },
+          "cache": {
+            "resident": 16,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          },
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.200000286102295,
+            "p95": 3.1999998092651367,
+            "p99": 4,
+            "max": 4.799999713897705
+          },
+          "updateMs": {
+            "count": 301,
+            "p50": 0.10000038146972656,
+            "p95": 0.39999961853027344,
+            "p99": 0.5,
+            "max": 0.7000002861022949
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 10,
+          "displacement": {
+            "x": -738.601318359375,
+            "y": 0
+          },
+          "entities": 5,
+          "props": 8,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 1,
+                "queuedBytes": 121,
+                "inFlight": 1,
+                "inFlightBytes": 121,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 770,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "inputAckMs": {
+            "count": 286,
+            "p50": 35.09999990463257,
+            "p95": 52.80000019073486,
+            "p99": 54.19999980926514,
+            "max": 55.19999980926514
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 289,
+            "p50": 0.0002107187501678709,
+            "p95": 0.0002775624998321291,
+            "p99": 0.0002775624998321291,
+            "max": 0.0004214375003357418
+          },
+          "cache": {
+            "resident": 20,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          },
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.3000001907348633,
+            "p95": 3.5999999046325684,
+            "p99": 4,
+            "max": 4.199999809265137
+          },
+          "updateMs": {
+            "count": 301,
+            "p50": 0.10000038146972656,
+            "p95": 0.40000009536743164,
+            "p99": 0.6000003814697266,
+            "max": 0.7000002861022949
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 20,
+          "maxBuffered": 0,
+          "visitedChunks": 10,
+          "displacement": {
+            "x": 738.6010407968752,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 25,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 218,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 1087,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "inputAckMs": {
+            "count": 171,
+            "p50": 37,
+            "p95": 53.80000019073486,
+            "p99": 54.90000009536743,
+            "max": 54.90000009536743
+          },
+          "maxAckGap": 3,
+          "predictionResimulationErrorPx": {
+            "count": 173,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "cache": {
+            "resident": 30,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 7864320
+          },
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 3.3000001907348633,
+            "p95": 4,
+            "p99": 4.299999713897705,
+            "max": 4.300000190734863
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 0.09999990463256836,
+            "p95": 0.20000028610229492,
+            "p99": 0.3000001907348633,
+            "max": 0.6000003814697266
+          },
+          "longTasksMs": {
+            "count": 0,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0,
+            "max": 0
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "maxIncomplete": 0,
+          "longestGapFrames": 0,
+          "maxLoaded": 32,
+          "maxBuffered": 0,
+          "visitedChunks": 12,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "entities": 13,
+          "props": 26,
+          "mainThread": {},
+          "host": {
+            "authority": {
+              "timings": {},
+              "channel": {
+                "queued": 0,
+                "queuedBytes": 0,
+                "inFlight": 1,
+                "inFlightBytes": 212,
+                "incoming": 0,
+                "oldestIncomingMs": 0,
+                "highWaterBytes": 498960,
+                "highWaterCount": 16
+              },
+              "ticks": 1280,
+              "hidden": false
+            },
+            "clientChannel": {
+              "queued": 1,
+              "queuedBytes": 10,
+              "inFlight": 0,
+              "inFlightBytes": 0,
+              "incoming": 0,
+              "oldestIncomingMs": 0,
+              "highWaterBytes": 207,
+              "highWaterCount": 3
+            },
+            "state": "ready"
+          },
+          "heapBytes": 42100000
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "browser": "153.0.8010.12"
+}
