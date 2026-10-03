@@ -31,10 +31,11 @@ ordinary rendering.
 
 Live settings adjust vertical sprite offset, depth sorting offset, collider
 X/Y offsets, ground width/depth, physical height, walk speed and animation FPS.
-The test scene uses production `collectScene`/`drawScene2D`, `moveAndCollide`,
-shared movement queries, surface tracking, gravity and the shared animation
-clock. Direct normalized test input intentionally sets travel speed without the
-player's acceleration/sprint controller; it is not yet a player-model selector.
+The test scene now runs a memory-backed Realm in a Worker with the gameplay
+player controller, binary replication and client prediction. Candidate geometry,
+walk speed and animation FPS are scoped to that session. Drawing still uses
+`collectScene`/`drawScene2D`; the static pose fixture has no simulation loop.
+See [Gameplay scenarios](gameplay-scenarios.md).
 
 The fixture has a wall, 16px passage, 4/8/12px passable steps (the existing
 playground stair convention), a beam with 20px clearance and the current player
@@ -47,7 +48,9 @@ game's center/bottom convention, not an image bounding box.
 Six zero-event candidates are registered in the global inbox. Candidate identity
 pins source PNG bytes, default settings, sixteen rendered pose/fixture snapshots
 (without platform-dependent text labels)
-and the test controller, collision, surface, gravity and animation source.
+and the recipe, Realm host, collision, surface, gravity and animation source.
+The runtime migration changes these behavior identities and reopens review;
+the immutable approved-v1 gameplay bank and saved human decisions remain intact.
 Images are verified before display; stale inventories disable saves.
 
 Save settings / reopen, Approve character and Needs changes use authenticated

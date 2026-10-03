@@ -34,6 +34,8 @@ export class ScenarioSession {
     recipe.props.forEach((p, i) => {
       p.type = `scenario-prop-${i}`;
     });
+    if (recipe.actors?.some((e) => e.type === "player"))
+      throw new Error("Use recipe.player for the controlled actor");
     this.physics = scenarioPhysics(recipe.physics);
     this.randomState = recipe.generation.seed;
   }
@@ -163,7 +165,8 @@ export class ScenarioSession {
         if (value !== undefined && (!Number.isFinite(value) || value < 1 || value > 100))
           throw new Error("Invalid traffic setting");
       }
-      Object.assign(settings, command);
+      if (command.speed !== undefined) settings.speed = command.speed;
+      if (command.gap !== undefined) settings.gap = command.gap;
       return;
     }
     let position: { wx: number; wy: number },

@@ -1,18 +1,16 @@
 import { type AABB, aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
-import type { PropCollider } from "../entities/Prop.js";
-import type { Movement } from "../input/ActionManager.js";
 import type { MovementContext } from "../physics/MovementContext.js";
-import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
 import { depthAboveProps, propDepthSurfaces } from "../rendering/propDepth.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { compileFurniture, type PlacedFurniture } from "./FurnishedInterior.js";
-import type { FurnitureDefinition, FurniturePlacement } from "./FurnitureCatalog.js";
+import type { FurniturePlacement } from "./FurnitureCatalog.js";
 import {
   FURNITURE_BODIES,
   type FurnitureBodies,
   type FurnitureBody,
+  furnitureCollider,
   parseFurnitureBodies,
 } from "./FurniturePhysics.js";
 
@@ -96,23 +94,7 @@ export const MOTION_SCENES = [
   },
 ] satisfies { id: string; name: string; furniture: FurniturePlacement[] }[];
 
-/** Convert curated floor rectangles to the same bottom-centred colliders used by game props. */
-export function furnitureCollider(
-  d: FurnitureDefinition,
-  body = FURNITURE_BODIES[d.id],
-): PropCollider | null {
-  if (!d.blocking) return null;
-  if (!body) throw new Error(`No reviewed physics candidate for ${d.id}`);
-  const r = d.footprint;
-  return {
-    zHeight: body.height,
-    walkableTop: body.walkableTop,
-    offsetX: r.x + r.width / 2,
-    offsetY: r.y + r.height,
-    width: r.width,
-    height: r.height,
-  };
-}
+export { furnitureCollider } from "./FurniturePhysics.js";
 
 export class FurnitureMotion {
   readonly plan = parseFloorPlan(MOTION_SKETCH);
@@ -126,7 +108,6 @@ export class FurnitureMotion {
   readonly floor = { left: 8, top: 32, right: 152, bottom: 128 };
   readonly placementArea = { x: 8, y: 32, width: 144, height: 96 };
   readonly context: MovementContext;
-  private jumpState = { jumpConsumed: false, lastJumpHeld: false };
   constructor(furniture: readonly FurniturePlacement[], bodies?: FurnitureBodies) {
     this.furniture = structuredClone([...furniture]);
     this.objects = compileFurniture(this.plan, this.furniture, this.placementArea);
@@ -219,42 +200,6 @@ export class FurnitureMotion {
         : [];
     });
   }
-  /** Reuse the exact player input/physics step used by client prediction and the server. */
-  step(dx: number, dy: number, dt = 1 / 120, jump = false): void {
-    const length = Math.hypot(dx, dy),
-      scale = Math.max(1, length);
-    const input: Movement = { dx: dx / scale, dy: dy / scale, sprinting: false, jump };
-    this.jumpState = stepPlayerFromInput(
-      this.player,
-      input,
-      Math.min(dt, 1 / 120),
-      this.context,
-      () => 0,
-      () => ({
-        props: this.objects.map((o) => ({
-          position: { wx: o.x, wy: o.y },
-          collider: furnitureCollider(o.definition, this.bodies[o.placement.id]),
-          walls: null,
-        })),
-        entities: [],
-      }),
-      this.jumpState,
-      { ...getMovementPhysicsParams(), gravityScale: this.gravityScale },
-    ).jumpState;
-    const sprite = this.player.sprite;
-    if (sprite) {
-      if (sprite.moving) {
-        sprite.animTimer += dt * 1000;
-        if (sprite.animTimer >= sprite.frameDuration) {
-          sprite.animTimer %= sprite.frameDuration;
-          sprite.frameCol = (sprite.frameCol + 1) % sprite.frameCount;
-        }
-      } else {
-        sprite.animTimer = 0;
-        sprite.frameCol = 0;
-      }
-    }
-  }
   moveObject(id: string, x: number, y: number): void {
     const previous = this.furniture,
       oldObjects = this.objects;
@@ -299,7 +244,6 @@ export class FurnitureMotion {
     this.player.groundZ = 0;
     delete this.player.jumpZ;
     delete this.player.jumpVZ;
-    this.jumpState = { jumpConsumed: false, lastJumpHeld: false };
   }
   /** Small deterministic 2px path grid; only the game collision adapter decides passability. */
   pathTo(x: number, y: number): [number, number][] | null {

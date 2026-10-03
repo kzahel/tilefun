@@ -28,7 +28,8 @@ test("outdoor catalog bounds DOM, saves exact corrections and runs production mo
   await page.waitForTimeout(950);
   await page.keyboard.up("ArrowUp");
   const stopped = Number(await canvas.getAttribute("data-player-y"));
-  expect(stopped).toBeGreaterThanOrEqual(3);
+  // Binary positions and prediction reconciliation have subpixel precision.
+  expect(stopped).toBeGreaterThanOrEqual(2.99);
   expect(stopped).toBeLessThan(14);
   await canvas.focus();
   await page.keyboard.down("ArrowLeft");

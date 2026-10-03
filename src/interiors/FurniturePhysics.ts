@@ -1,10 +1,12 @@
+import type { PropCollider } from "../entities/Prop.js";
+import type { FurnitureDefinition } from "./FurnitureCatalog.js";
 /** Provisional runtime shapes for the movement-review scenes, independent of static approvals. */
 export interface FurnitureBody {
   height: number;
   walkableTop: boolean;
 }
 export type FurnitureBodies = Record<string, FurnitureBody>;
-export const FURNITURE_PHYSICS_VERSION = 1;
+export const FURNITURE_PHYSICS_VERSION = 2;
 export const FURNITURE_BODIES: FurnitureBodies = {
   "bunk-bed": { height: 24, walkableTop: true },
   wardrobe: { height: 32, walkableTop: true },
@@ -37,4 +39,22 @@ export function parseFurnitureBodies(value: unknown): FurnitureBodies {
       return [id, { height: body.height, walkableTop: body.walkableTop }];
     }),
   );
+}
+
+/** Convert curated floor rectangles to the same bottom-centred colliders used by game props. */
+export function furnitureCollider(
+  d: FurnitureDefinition,
+  body = FURNITURE_BODIES[d.id],
+): PropCollider | null {
+  if (!d.blocking) return null;
+  if (!body) throw new Error(`No reviewed physics candidate for ${d.id}`);
+  const r = d.footprint;
+  return {
+    zHeight: body.height,
+    walkableTop: body.walkableTop,
+    offsetX: r.x + r.width / 2,
+    offsetY: r.y + r.height,
+    width: r.width,
+    height: r.height,
+  };
 }

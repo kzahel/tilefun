@@ -7,6 +7,8 @@ import { PIXEL_SCALE, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../../config/cons
 import { Camera } from "../../rendering/Camera.js";
 import { drawScene2D } from "../../rendering/Canvas2DRenderer.js";
 import type { SpriteItem } from "../../rendering/SceneItem.js";
+import { furnitureRecipe } from "../../scenarios/FurnitureRecipe.js";
+import { ScenarioClient } from "../../scenarios/ScenarioClient.js";
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import {
   drawFurnishedInterior,
@@ -234,6 +236,20 @@ function persist() {
     status("Placement works, but browser storage is full; reload will lose it.");
   }
 }
+let scenario: ScenarioClient | undefined;
+function restartSimulation() {
+  scenario?.dispose();
+  const next = new ScenarioClient(furnitureRecipe(model));
+  scenario = next;
+  void next.ready
+    .then(() => {
+      dirty = true;
+    })
+    .catch((error) => {
+      if (scenario === next) status(String(error));
+    });
+}
+window.addEventListener("pagehide", () => scenario?.dispose());
 function load(reset = false) {
   stop();
   placementError = "";
@@ -242,6 +258,7 @@ function load(reset = false) {
   jumpHeld = false;
   const preset = MOTION_SCENES.find((s) => s.id === scene.value) ?? defaultScene();
   model = makeModel(preset.id, reset);
+  restartSimulation();
   el<HTMLSelectElement>("gravity").value = String(model.gravityScale);
   if (reset) persist();
   object.replaceChildren(
@@ -273,6 +290,7 @@ function moveObject(x: number, y: number) {
   stop();
   try {
     model.moveObject(object.value, x, y);
+    restartSimulation();
     persist();
     fields();
     placementError = "";
@@ -315,6 +333,7 @@ el("home").onclick = () => {
   clearInput();
   try {
     model.resetPlayer();
+    restartSimulation();
     dirty = true;
     status("Player reset.");
   } catch (error) {
@@ -323,6 +342,7 @@ el("home").onclick = () => {
 };
 el("gravity").onchange = () => {
   model.gravityScale = Number(el<HTMLSelectElement>("gravity").value);
+  restartSimulation();
   persist();
   grade();
 };
@@ -336,6 +356,7 @@ el("apply-height").onclick = () => {
     persist();
     fields();
     placementError = "";
+    restartSimulation();
     status("Collision height updated.");
   } catch (error) {
     placementError = String(error);
@@ -657,7 +678,15 @@ function frame(now: number) {
       oldFacing = model.player.sprite?.frameRow,
       oldZ = model.player.wz,
       oldAirborne = model.player.jumpVZ !== undefined;
-    model.step(dx, dy, 1 / 120, mode.value === "walk" && (jumpHeld || keys.has("Space")));
+    scenario?.step(
+      { dx, dy, sprinting: false, jump: mode.value === "walk" && (jumpHeld || keys.has("Space")) },
+      1 / 120,
+    );
+    if (scenario?.predictor.player) {
+      const next = scenario.view.playerEntity;
+      Object.assign(model.player, structuredClone(next));
+      if (next.jumpVZ === undefined) delete model.player.jumpVZ;
+    }
     const moved = Math.hypot(model.player.position.wx - wx, model.player.position.wy - wy);
     if (circling && (dx || dy)) {
       stuck = moved < 0.001 ? stuck + 1 : 0;

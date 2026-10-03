@@ -8,14 +8,14 @@ import {
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { TileVariants } from "../assets/TileVariants.js";
 import { PIXEL_SCALE } from "../config/constants.js";
-import { aabbOverlapsPropWalls, getEntityAABB, resolveCollision } from "../entities/collision.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
-import { createGenerator } from "../generation/Generator.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
-import { World } from "../world/World.js";
+import { outdoorRecipe } from "../scenarios/OutdoorRecipe.js";
+import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 
 const testAssets = new WeakMap<HTMLImageElement, Promise<GameAssets>>();
 function geometryAssets(image: HTMLImageElement) {
@@ -74,18 +74,26 @@ export function OutdoorGeometryTest({
       camera.setViewport(c.width, c.height);
       camera.zoom = scale / PIXEL_SCALE;
       camera.snapTo(0, -asset.rect[3] / 3);
-      const world = new World(
-          createGenerator({ type: "flat", version: "flat-v1", seed: 1, preset: "grass" }).terrain,
-        ),
+      const scenario = new ScenarioClient(outdoorRecipe(asset, metadata));
+      cleanup = () => scenario.dispose();
+      await scenario.ready;
+      if (!active) {
+        scenario.dispose();
+        return;
+      }
+      const world = scenario.view.world,
         renderer = new TileRenderer();
       reset.current = () => {
-        player.position.wx = 0;
-        player.position.wy = 40;
+        void scenario
+          .command({ kind: "teleport", position: { wx: 0, wy: 40 } })
+          .catch((e) => setError(String(e)));
       };
       const down = (e: KeyboardEvent) => {
         if (c !== document.activeElement) return;
         if (
-          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d"].includes(e.key)
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
+            e.key,
+          )
         ) {
           keys.current.add(e.key);
           e.preventDefault();
@@ -111,16 +119,12 @@ export function OutdoorGeometryTest({
           dx /= len;
           dy /= len;
         }
-        const blocked = resolveCollision(
-          player,
-          dx * 60 * dt,
-          dy * 60 * dt,
-          () => 0,
-          0,
-          (box) => aabbOverlapsPropWalls(box, prop.position, prop, 0, 24),
-        );
-        player.position.wx = Math.max(-width / 2 + 8, Math.min(width / 2 - 8, player.position.wx));
-        player.position.wy = Math.max(-height + 40, Math.min(70, player.position.wy));
+        const before = { ...player.position };
+        scenario.step({ dx, dy, jump: keys.current.has(" "), sprinting: false }, dt);
+        Object.assign(player, structuredClone(scenario.view.playerEntity));
+        const blocked =
+          !!(dx || dy) &&
+          Math.hypot(player.position.wx - before.wx, player.position.wy - before.wy) < 0.01;
         c.dataset.playerX = String(player.position.wx);
         c.dataset.playerY = String(player.position.wy);
         c.dataset.blocked = String(blocked);
@@ -169,6 +173,7 @@ export function OutdoorGeometryTest({
       };
       frame = requestAnimationFrame(tick);
       cleanup = () => {
+        scenario.dispose();
         c.removeEventListener("keydown", down);
         window.removeEventListener("keyup", up);
       };

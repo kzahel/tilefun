@@ -7,6 +7,9 @@ import collisionSource from "../entities/collision.ts?raw";
 import animationSource from "../entities/spriteAnimation.ts?raw";
 import physicsSource from "../physics/PlayerMovement.ts?raw";
 import surfaceSource from "../physics/surfaceHeight.ts?raw";
+import scenarioSource from "../scenarios/CharacterRecipe.ts?raw";
+import hostSource from "../scenarios/ScenarioSession.ts?raw";
+import realmSource from "../server/Realm.ts?raw";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 /** All sixteen poses rendered with production anchoring, shadows and fixture depth. */
@@ -38,7 +41,14 @@ export async function buildCharacterCandidate(def: CharacterDefinition, catalog:
         poses: hashes,
         controller: await sha256(
           new TextEncoder().encode(
-            controllerSource + physicsSource + surfaceSource + collisionSource + animationSource,
+            controllerSource +
+              scenarioSource +
+              realmSource +
+              hostSource +
+              physicsSource +
+              surfaceSource +
+              collisionSource +
+              animationSource,
           ),
         ),
       }),

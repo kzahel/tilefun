@@ -4,23 +4,15 @@ import type { GameAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
-import { Direction, type Entity } from "../entities/Entity.js";
+import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
-import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import { createGenerator } from "../generation/Generator.js";
-import {
-  getMovementPhysicsParams,
-  initiateJump,
-  moveAndCollide,
-  tickJumpGravity,
-} from "../physics/PlayerMovement.js";
-import { createMovementContext } from "../physics/SimulationEnvironment.js";
-import { applyGroundTracking, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
+import { CHARACTER_TEST_BLOCKS, characterObstacles } from "../scenarios/CharacterRecipe.js";
 import { World } from "../world/World.js";
 import {
   type CharacterDefinition,
@@ -28,16 +20,8 @@ import {
   createCharacterEntity,
 } from "./CharacterCatalog.js";
 
-/** Bounded fixture: a wall, 16px passage, three 4px steps, and 20px overhead clearance. */
-export const CHARACTER_TEST_BLOCKS = [
-  { x: -64, y: -25, w: 32, d: 10, z: 32, base: 0, name: "Wall" },
-  { x: 48, y: -25, w: 24, d: 10, z: 32, base: 0, name: "16px gap" },
-  { x: 88, y: -25, w: 24, d: 10, z: 32, base: 0, name: "" },
-  { x: -72, y: 48, w: 16, d: 24, z: 4, base: 0, name: "Steps" },
-  { x: -56, y: 48, w: 16, d: 24, z: 8, base: 0, name: "" },
-  { x: -40, y: 48, w: 16, d: 24, z: 12, base: 0, name: "" },
-  { x: 68, y: 50, w: 48, d: 12, z: 8, base: 20, name: "20px clearance" },
-] as const;
+export { CHARACTER_TEST_BLOCKS } from "../scenarios/CharacterRecipe.js";
+
 export class CharacterTestScene {
   readonly actor: Entity;
   readonly reference = createPlayer(-105, 6);
@@ -48,7 +32,6 @@ export class CharacterTestScene {
     createGenerator({ type: "flat", version: "flat-v1", seed: 1, preset: "grass" }).terrain,
   );
   private readonly tiles = new TileRenderer();
-  private jumping = false;
   constructor(
     readonly definition: CharacterDefinition,
     public settings: CharacterSettings,
@@ -74,30 +57,7 @@ export class CharacterTestScene {
       ctx.strokeRect(0.5, 0.5, b.w - 1, b.d + b.z - 1);
       const key = `character-test-block-${i}`;
       this.sheets.set(key, new Spritesheet(c, c.width, c.height));
-      this.props.push({
-        id: i + 10,
-        type: key,
-        position: { wx: b.x, wy: b.y },
-        sprite: {
-          sheetKey: key,
-          spriteWidth: c.width,
-          spriteHeight: c.height,
-          frameCol: 0,
-          frameRow: 0,
-        },
-        collider: {
-          offsetX: 0,
-          offsetY: 0,
-          width: b.w,
-          height: b.d,
-          zHeight: b.z,
-          zBase: b.base,
-          walkableTop: true,
-          passable: i >= 3 && i <= 5,
-        },
-        walls: null,
-        isProp: true,
-      });
+      this.props.push(required(characterObstacles()[i]));
     }
   }
   update(settings: CharacterSettings) {
@@ -115,50 +75,6 @@ export class CharacterTestScene {
     delete this.actor.jumpVZ;
     delete this.actor.jumpZ;
     delete this.actor.groundZ;
-    this.jumping = false;
-  }
-  step(dx: number, dy: number, jump: boolean, dt: number) {
-    const a = this.actor,
-      sprite = required(a.sprite),
-      length = Math.hypot(dx, dy);
-    if (length > 1) {
-      dx /= length;
-      dy /= length;
-    }
-    required(a.velocity).vx = dx * this.settings.speed;
-    required(a.velocity).vy = dy * this.settings.speed;
-    sprite.moving = !!length;
-    if (length)
-      sprite.frameRow = sprite.direction =
-        Math.abs(dx) >= Math.abs(dy)
-          ? dx > 0
-            ? Direction.Right
-            : Direction.Left
-          : dy > 0
-            ? Direction.Down
-            : Direction.Up;
-    const physics = getMovementPhysicsParams();
-    if (jump && !this.jumping && a.jumpVZ === undefined) initiateJump(a, physics);
-    this.jumping = jump;
-    const ctx = createMovementContext({
-      movingEntity: a,
-      excludeIds: new Set([a.id]),
-      queryEntities: () => [this.reference],
-      queryProps: () => this.props,
-      getCollision: () => 0,
-      getHeight: () => 0,
-      noclip: false,
-    });
-    moveAndCollide(a, dt, ctx);
-    applyGroundTracking(
-      a,
-      resolveGroundZForTracking(a, () => 0, this.props, [this.reference]),
-      true,
-    );
-    tickJumpGravity(a, dt, () => 0, physics, this.props, [this.reference]);
-    a.position.wx = Math.max(-126, Math.min(126, a.position.wx));
-    a.position.wy = Math.max(-58, Math.min(70, a.position.wy));
-    tickSpriteAnimation(a, dt);
   }
   draw(canvas: HTMLCanvasElement, overlays: boolean, zoom: number, labels = true) {
     if (canvas.width !== 288 * zoom) canvas.width = 288 * zoom;

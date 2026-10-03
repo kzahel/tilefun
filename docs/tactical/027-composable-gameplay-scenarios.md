@@ -32,8 +32,8 @@ a fresh world; reload retains memory records. Ordinary worlds are untouched.
   storage and scheduling; browser and tests execute the same domain modules.
 - Browser labs run authority in a Worker. Client objects are replicas, never live
   authoritative references. Inputs and tuning cross an explicit message boundary.
-- Recipes carry initial world/room content, actors, props, settings, camera and
-  named fixture handles. Reusable fixtures emit data, not update callbacks.
+- Recipes carry initial world/room content, actors, props, settings and named
+  fixture handles. Cameras and review overlays stay in the presentation adapter. Reusable fixtures emit data, not update callbacks.
 - Tests explicitly advance fixed steps, await storage/readiness and observe
   semantic state. Seeded simulation randomness and controlled clocks apply where
   exercised; no claim of determinism from generator seed alone.
@@ -66,3 +66,12 @@ The standard game continues to use the shared components extracted for labs.
   old roof/body mismatch and pass with full body-top support. Existing generated
   braking/jump/ride browser checks pass. The synchronous lane stress harness is
   test-only; no interactive page imports it.
+
+- Furniture motion, outdoor/vehicle geometry and characters now use the same
+  Worker client. FurnitureMotion and CharacterTestScene are layout/render models
+  with no step loop. Shared furniture collider compilation moved to FurniturePhysics.
+- Character behavior fingerprints include recipe/Realm/host sources. Furniture
+  motion version 2 reopens older behavior approvals without editing decisions or
+  frozen art. Existing exact static image tests remain in the browser suite.
+- First browser pass: 26/28; fixed the missing replica animation tick and adopted
+  a 0.01px assertion tolerance for serialized outdoor collision positions.

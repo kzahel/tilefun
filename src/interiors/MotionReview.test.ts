@@ -5,7 +5,7 @@ import { FurnitureMotion, MOTION_SCENES } from "./FurnitureMotion.js";
 import { motionSceneSignature, nextUncheckedScene } from "./MotionReview.js";
 
 describe("movement review catalog", () => {
-  it("preserves the nine unaffected explicitly approved scene configurations", () => {
+  it("reopens older motion approvals when switching to the authoritative Worker runtime", () => {
     const approved = JSON.parse(
       readFileSync("tests/fixtures/furniture-motion-approved.json", "utf8"),
     ) as { id: string; sceneSignature: string }[];
@@ -14,7 +14,7 @@ describe("movement review catalog", () => {
       const preset = MOTION_SCENES.find((s) => s.id === row.id);
       if (!preset) throw new Error("Missing approved scene");
       const model = new FurnitureMotion(preset.furniture);
-      expect(motionSceneSignature(model.furniture, model.bodies, model.gravityScale)).toBe(
+      expect(motionSceneSignature(model.furniture, model.bodies, model.gravityScale)).not.toBe(
         row.sceneSignature,
       );
     }

@@ -9,7 +9,7 @@ import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { type BuildingLayout, buildingLayout } from "./BuildingLayouts.js";
 import { compileFurniture } from "./FurnishedInterior.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
-import { furnitureCollider } from "./FurnitureMotion.js";
+import { furnitureCollider } from "./FurniturePhysics.js";
 import sources from "./gameplay-furniture-sources.json" with { type: "json" };
 
 export class InvalidInteriorError extends Error {}

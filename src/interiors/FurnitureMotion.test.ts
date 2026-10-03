@@ -1,18 +1,37 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { getEntityAABB } from "../entities/collision.js";
+import { furnitureRecipe } from "../scenarios/FurnitureRecipe.js";
+import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { furnishedSceneOrder } from "./FurnishedInterior.js";
 import { FURNITURE_CATALOG } from "./FurnitureCatalog.js";
 import { FurnitureMotion, furnitureCollider, MOTION_SCENES } from "./FurnitureMotion.js";
 import { FURNITURE_BODIES } from "./FurniturePhysics.js";
 import { parseReviewFeedback } from "./review/ReviewFeedback.js";
 
+const sessions = new Map<FurnitureMotion, ScenarioSession>();
+afterEach(async () => {
+  for (const session of sessions.values()) await session.close();
+  sessions.clear();
+});
+async function step(m: FurnitureMotion, dx: number, dy: number, dt = 1 / 120, jump = false) {
+  let session = sessions.get(m);
+  if (!session) {
+    session = await ScenarioSession.create(furnitureRecipe(m));
+    sessions.set(m, session);
+  }
+  const player = session.player.player;
+  Object.assign(player, structuredClone(m.player), { id: player.id, type: "player" });
+  await session.step({ dx, dy, jump, sprinting: false }, dt);
+  Object.assign(m.player, JSON.parse(JSON.stringify(player)));
+  if (player.jumpVZ === undefined) delete m.player.jumpVZ;
+}
 const scene = (id: string) => {
   const s = MOTION_SCENES.find((s) => s.id === id);
   if (!s) throw new Error("Missing scene");
   return new FurnitureMotion(s.furniture);
 };
-describe("furniture in shared game physics", () => {
-  it("converts ground footprints to game prop colliders without including sprite padding", () => {
+describe("furniture in shared game physics", async () => {
+  it("converts ground footprints to game prop colliders without including sprite padding", async () => {
     for (const d of FURNITURE_CATALOG.filter((d) => !d.blocking || FURNITURE_BODIES[d.id])) {
       const c = furnitureCollider(d);
       if (!d.blocking) {
@@ -29,23 +48,23 @@ describe("furniture in shared game physics", () => {
       });
     }
   });
-  it("stops at the actual footprint from front and back and slides along its side", () => {
+  it("stops at the actual footprint from front and back and slides along its side", async () => {
     const m = scene("wardrobe");
     m.player.position = { wx: 80, wy: 112 };
-    for (let i = 0; i < 100; i++) m.step(0, -1);
+    for (let i = 0; i < 100; i++) await step(m, 0, -1);
     expect(m.player.position.wy).toBeGreaterThanOrEqual(94);
     expect(m.player.position.wy).toBeLessThan(95);
     const first = m.player.position.wy;
-    for (let i = 0; i < 20; i++) m.step(1, -1);
+    for (let i = 0; i < 20; i++) await step(m, 1, -1);
     expect(m.player.position.wx).toBeGreaterThan(85);
     expect(m.player.position.wy).toBeGreaterThanOrEqual(94);
     expect(m.player.position.wy).toBeLessThanOrEqual(first);
     m.player.position = { wx: 80, wy: 50 };
-    for (let i = 0; i < 100; i++) m.step(0, 1);
+    for (let i = 0; i < 100; i++) await step(m, 0, 1);
     expect(m.player.position.wy).toBeLessThanOrEqual(76);
     expect(m.player.position.wy).toBeGreaterThan(75);
   });
-  it("permits walking on rendered floor within a wall sketch cell", () => {
+  it("permits walking on rendered floor within a wall sketch cell", async () => {
     const m = scene("bunk");
     expect(m.canStand(20, 80)).toBe(true);
     expect(m.canStand(12, 80)).toBe(false);
@@ -56,7 +75,7 @@ describe("furniture in shared game physics", () => {
     expect(wardrobe.collisionBoxes()[0]?.bounds.left).toBe(8);
     expect(() => wardrobe.moveObject("wardrobe", 21, 88)).toThrow(/floor/);
   });
-  it("moves furniture by one pixel, carries supported items, and rejects overlap with the player", () => {
+  it("moves furniture by one pixel, carries supported items, and rejects overlap with the player", async () => {
     const m = scene("worktable"),
       plant = m.objects.find((o) => o.placement.id === "plant");
     const x = plant?.x;
@@ -66,7 +85,7 @@ describe("furniture in shared game physics", () => {
     expect(() => bunk.moveObject("bunk", 80, 116)).toThrow(/player/);
     expect(bunk.furniture[0]?.y).toBe(88);
   });
-  it("finds clear routes around each preset, using the full player collider", () => {
+  it("finds clear routes around each preset, using the full player collider", async () => {
     for (const s of MOTION_SCENES) {
       const m = new FurnitureMotion(s.furniture);
       const id = m.furniture[0]?.id;
@@ -78,7 +97,7 @@ describe("furniture in shared game physics", () => {
       }
     }
   });
-  it("keeps a table and its plant together when the player changes depth", () => {
+  it("keeps a table and its plant together when the player changes depth", async () => {
     const m = scene("worktable");
     const ids = (y: number) =>
       furnishedSceneOrder(m.objects, [{ id: "player", depth: y, draw: () => {} }]).map((o) =>
@@ -88,12 +107,12 @@ describe("furniture in shared game physics", () => {
     expect(ids(80)).toEqual(["table", "plant", "player", "stool"]);
     expect(ids(110)).toEqual(["table", "plant", "stool", "player"]);
   });
-  it("restores a safe player spawn after saved furniture covers the default start", () => {
+  it("restores a safe player spawn after saved furniture covers the default start", async () => {
     const m = new FurnitureMotion([{ id: "bunk", asset: "bunk-bed", x: 80, y: 116 }]);
     expect(m.canStand(m.player.position.wx, m.player.position.wy)).toBe(true);
     expect(m.player.position).not.toEqual({ wx: 80, wy: 120 });
   });
-  it("lands on finite-height furniture, stays on top, and falls when walking off", () => {
+  it("lands on finite-height furniture, stays on top, and falls when walking off", async () => {
     const m = scene("wardrobe");
     m.gravityScale = 0.25;
     // Approach from directly in front; walk toward it only after clearing its top.
@@ -101,47 +120,47 @@ describe("furniture in shared game physics", () => {
     let maxZ = 0;
     for (let i = 0; i < 500; i++) {
       const z = m.player.wz ?? 0;
-      m.step(0, z > 34 && m.player.position.wy > 84 ? -1 : 0, 1 / 120, true);
+      await step(m, 0, z > 34 && m.player.position.wy > 84 ? -1 : 0, 1 / 120, true);
       maxZ = Math.max(maxZ, m.player.wz ?? 0);
     }
     expect(maxZ).toBeGreaterThan(32);
     expect(m.player.wz).toBe(32);
     expect(m.player.jumpVZ).toBeUndefined();
-    for (let i = 0; i < 30; i++) m.step(0, 0);
+    for (let i = 0; i < 30; i++) await step(m, 0, 0);
     expect(m.player.wz).toBe(32);
     expect(() => m.setBody("wardrobe", { height: 40, walkableTop: true })).toThrow(/overlap/);
-    for (let i = 0; i < 180; i++) m.step(1, 0);
+    for (let i = 0; i < 180; i++) await step(m, 1, 0);
     expect(m.player.wz).toBe(0);
     expect(m.player.jumpVZ).toBeUndefined();
   });
-  it("normal gravity cannot clear the wardrobe, while lower gravity can", () => {
-    const peak = (gravity: number) => {
+  it("normal gravity cannot clear the wardrobe, while lower gravity can", async () => {
+    const peak = async (gravity: number) => {
       const m = scene("wardrobe");
       m.gravityScale = gravity;
       let highest = 0;
       for (let i = 0; i < 600; i++) {
-        m.step(0, 0, 1 / 120, true);
+        await step(m, 0, 0, 1 / 120, true);
         highest = Math.max(highest, m.player.wz ?? 0);
       }
       return highest;
     };
-    expect(peak(1)).toBeLessThan(32);
-    expect(peak(0.25)).toBeGreaterThan(64);
+    expect(await peak(1)).toBeLessThan(32);
+    expect(await peak(0.25)).toBeGreaterThan(64);
   });
-  it("height edits alter Z collision and reset clears airborne state", () => {
+  it("height edits alter Z collision and reset clears airborne state", async () => {
     const m = scene("wardrobe");
     expect(m.canStand(80, 84, 31)).toBe(false);
     expect(m.canStand(80, 84, 32)).toBe(true);
     m.setBody("wardrobe", { height: 48, walkableTop: false });
     expect(m.canStand(80, 84, 32)).toBe(false);
-    m.step(0, 0, 1 / 120, true);
+    await step(m, 0, 0, 1 / 120, true);
     m.resetPlayer();
     expect(m.player.wz).toBe(0);
     expect(m.player.jumpVZ).toBeUndefined();
     expect(m.bodies.wardrobe).toEqual({ height: 48, walkableTop: false });
     expect(() => m.setBody("wardrobe", { height: NaN, walkableTop: true })).toThrow();
   });
-  it("keeps the player in front across the full bed top and behind at ground level", () => {
+  it("keeps the player in front across the full bed top and behind at ground level", async () => {
     const m = scene("bedside");
     const order = () =>
       furnishedSceneOrder(m.objects, [
@@ -151,7 +170,7 @@ describe("furniture in shared game physics", () => {
       m.player.position = { wx: 64, wy: y };
       m.player.wz = 8;
       m.player.groundZ = 8;
-      m.step(0, 0);
+      await step(m, 0, 0);
       expect(m.player.wz).toBe(8);
       expect(order().indexOf("player")).toBeGreaterThan(order().indexOf("bed"));
     }
@@ -163,7 +182,7 @@ describe("furniture in shared game physics", () => {
     table.player.wz = 10;
     expect(table.playerDepth()).toBeGreaterThan(72);
   });
-  it("saves movement context without confusing it with a static approval", () => {
+  it("saves movement context without confusing it with a static approval", async () => {
     const m = scene("bunk");
     const report = {
       id: "test",

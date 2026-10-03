@@ -11,6 +11,8 @@ import {
   parseCharacterSettings,
 } from "../characters/CharacterCatalog.js";
 import { CharacterTestScene } from "../characters/CharacterTestScene.js";
+import { characterRecipe } from "../scenarios/CharacterRecipe.js";
+import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 import { ErrorMessage } from "./App.js";
 import { buildCharacterCandidate } from "./CharacterCandidates.js";
 import { useArtNotes } from "./OutdoorQueries.js";
@@ -176,14 +178,23 @@ function CharacterInspector({
     pointers = useRef(new Map<number, string>());
   const latest = useRef({ settings, overlays, zoom, cycle });
   latest.current = { settings, overlays, zoom, cycle };
+  const simulation = useRef<ScenarioClient | null>(null);
   const note = drafts[`note:${key}`] ?? "";
   useEffect(() => {
     useWorkspace.getState().setDraft(key, JSON.stringify(settings));
   }, [key, settings]);
   useEffect(() => {
     scene.current?.update(settings);
+    if (scene.current) {
+      simulation.current?.dispose();
+      const next = new ScenarioClient(characterRecipe(def, settings));
+      simulation.current = next;
+      void next.ready.catch((e) => {
+        if (simulation.current === next) setError(String(e));
+      });
+    }
     setMessage("");
-  }, [settings]);
+  }, [settings, def]);
   useEffect(() => {
     let active = true,
       frame = 0;
@@ -211,6 +222,13 @@ function CharacterInspector({
         built.image,
         built.player,
       );
+      const session = new ScenarioClient(characterRecipe(def, latest.current.settings));
+      simulation.current = session;
+      await session.ready;
+      if (!active) {
+        session.dispose();
+        return;
+      }
       setReady(true);
       let last = performance.now(),
         elapsed = 0,
@@ -229,12 +247,20 @@ function CharacterInspector({
           Number(held.has("arrowdown") || held.has("s")) -
           Number(held.has("arrowup") || held.has("w"));
         while (accumulator >= 1 / 60) {
-          scene.current.step(
-            latest.current.cycle ? 0 : dx,
-            latest.current.cycle ? 0 : dy,
-            held.has(" "),
+          simulation.current?.step(
+            {
+              dx: latest.current.cycle ? 0 : dx,
+              dy: latest.current.cycle ? 0 : dy,
+              jump: held.has(" "),
+              sprinting: false,
+            },
             1 / 60,
           );
+          const actor = simulation.current?.predictor.player;
+          if (actor) {
+            Object.assign(scene.current.actor, structuredClone(actor));
+            if (actor.jumpVZ === undefined) delete scene.current.actor.jumpVZ;
+          }
           accumulator -= 1 / 60;
         }
         if (latest.current.cycle) {
@@ -253,6 +279,8 @@ function CharacterInspector({
     return () => {
       active = false;
       cancelAnimationFrame(frame);
+      simulation.current?.dispose();
+      simulation.current = null;
       scene.current = null;
       release();
       window.removeEventListener("keyup", up);
@@ -354,7 +382,9 @@ function CharacterInspector({
               onClick={() => {
                 keys.current.clear();
                 pointers.current.clear();
-                scene.current?.reset();
+                void simulation.current
+                  ?.command({ kind: "teleport", position: { wx: 0, wy: 8 } })
+                  .catch((e) => setError(String(e)));
               }}
             >
               Reset position

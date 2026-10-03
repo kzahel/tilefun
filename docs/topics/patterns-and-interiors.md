@@ -119,6 +119,15 @@ Use [counterexample search](../interior-counterexamples.md) for reproducible
 wall failures and [art review](art-review.md) for exact approvals and pause rules.
 Rendering evidence and runners are routed through [performance](performance.md).
 
+## Shared motion lab runtime
+
+Furniture motion now compiles its layouts to ordinary props and runs a memory-backed
+Realm in a Worker through [Gameplay scenarios](gameplay-scenarios.md). The layout
+model keeps placement validation, path targets and review rendering; it has no
+private player simulation. Physics version 2 reopens previous motion judgments
+while retaining exact historical approvals and static art. Gameplay collider
+compilation lives in FurniturePhysics, independent of the lab model.
+
 ## Next work
 
 Review the four playable building layouts and try both entrances in co-op, then add
