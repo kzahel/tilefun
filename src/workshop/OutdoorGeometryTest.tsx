@@ -55,6 +55,26 @@ export function OutdoorGeometryTest({
       frame = 0;
     let cleanup = () => {};
     setError("");
+    reset.current = () => {};
+    if (canvas.current) {
+      canvas.current.dataset.ready = "false";
+      delete canvas.current.dataset.playerX;
+      delete canvas.current.dataset.playerY;
+    }
+    const down = (e: KeyboardEvent) => {
+      if (canvas.current !== document.activeElement) return;
+      if (
+        ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(e.key)
+      ) {
+        keys.current.add(e.key);
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    const up = (e: KeyboardEvent) => keys.current.delete(e.key);
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+
     void (async () => {
       const assets = await geometryAssets(image);
       if (!active || !canvas.current) return;
@@ -81,28 +101,14 @@ export function OutdoorGeometryTest({
         scenario.dispose();
         return;
       }
+      c.dataset.ready = "true";
       const world = scenario.view.world,
         renderer = new TileRenderer();
       reset.current = () => {
-        void scenario
-          .command({ kind: "teleport", position: { wx: 0, wy: 40 } })
-          .catch((e) => setError(String(e)));
+        void scenario.command({ kind: "teleport", position: { wx: 0, wy: 40 } }).catch((e) => {
+          if (active) setError(String(e));
+        });
       };
-      const down = (e: KeyboardEvent) => {
-        if (c !== document.activeElement) return;
-        if (
-          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
-            e.key,
-          )
-        ) {
-          keys.current.add(e.key);
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      };
-      const up = (e: KeyboardEvent) => keys.current.delete(e.key);
-      c.addEventListener("keydown", down);
-      window.addEventListener("keyup", up);
       let last = performance.now();
       const tick = (now: number) => {
         if (!active) return;
@@ -174,15 +180,17 @@ export function OutdoorGeometryTest({
       frame = requestAnimationFrame(tick);
       cleanup = () => {
         scenario.dispose();
-        c.removeEventListener("keydown", down);
-        window.removeEventListener("keyup", up);
       };
-    })().catch((e) => setError(String(e)));
+    })().catch((e) => {
+      if (active) setError(String(e));
+    });
     return () => {
       active = false;
       cancelAnimationFrame(frame);
       keys.current.clear();
       cleanup();
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
     };
   }, [asset, metadata, image]);
   const press = (k: string) => keys.current.add(k),

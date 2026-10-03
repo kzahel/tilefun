@@ -1,6 +1,6 @@
 # Gameplay scenarios
 
-Status: shared recipe/runtime implemented, 2026-10-03. Final validation in progress.
+Status: shared recipe/runtime delivered and validated, 2026-10-03.
 
 Interactive Workshop examples run the production `Realm`, `baseGameMod`, streaming,
 record persistence, binary replication and `PlayerPredictor`. The temporary host
@@ -42,6 +42,8 @@ placement controls and static review painting. FurnitureMotion and CharacterTest
 are layout/render models without movement loops. The former synchronous traffic
 loop is `TrafficTestHarness`, imported only by low-level lane stress tests.
 Static art/rail diagrams and frozen approval renders remain render fixtures.
+The original exported pixel-character galleries remain art-only pose/movement
+viewers; Character lab is the gameplay physics validation surface.
 
 ## Headless integration usage
 

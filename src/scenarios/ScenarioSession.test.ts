@@ -45,3 +45,32 @@ it("rejects invalid scoped settings", async () => {
     ScenarioSession.create({ ...recipe, physics: { gravityScale: NaN } }),
   ).rejects.toThrow("Invalid scenario physics");
 });
+it("keeps candidate geometry and gravity local across simultaneous sessions and reload", async () => {
+  const narrow = structuredClone(recipe),
+    wide = structuredClone(recipe);
+  if (!narrow.player.collider || !wide.player.collider) throw new Error("Missing player collider");
+  narrow.player.collider.width = 4;
+  wide.player.collider.width = 20;
+  narrow.physics = { gravityScale: 0.25 };
+  wide.physics = { gravityScale: 1 };
+  const a = await ScenarioSession.create(narrow),
+    b = await ScenarioSession.create(wide);
+  try {
+    for (let i = 0; i < 35; i++) {
+      const input = { dx: 0, dy: 0, jump: true, sprinting: false };
+      await a.step(input);
+      await b.step(input);
+    }
+    expect(a.player.player.wz ?? 0).toBeGreaterThan((b.player.player.wz ?? 0) + 20);
+    expect(a.player.player.collider?.width).toBe(4);
+    expect(b.player.player.collider?.width).toBe(20);
+    await a.reload();
+    expect(a.player.player.collider?.width).toBe(4);
+    expect(b.player.player.collider?.width).toBe(20);
+    expect(recipe.player.collider?.width).not.toBe(4);
+    expect(recipe.player.collider?.width).not.toBe(20);
+  } finally {
+    await a.close();
+    await b.close();
+  }
+});

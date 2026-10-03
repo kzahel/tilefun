@@ -1,6 +1,6 @@
 # Composable gameplay scenarios
 
-Status: implementation authorized, 2026-10-03. Work in progress.
+Status: complete, 2026-10-03.
 Owner: [Gameplay scenarios](../topics/gameplay-scenarios.md).
 
 ## Outcome
@@ -75,3 +75,31 @@ The standard game continues to use the shared components extracted for labs.
   frozen art. Existing exact static image tests remain in the browser suite.
 - First browser pass: 26/28; fixed the missing replica animation tick and adopted
   a 0.01px assertion tolerance for serialized outdoor collision positions.
+
+- Traffic migration committed as `8402d67`; remaining labs and review inventories
+  committed as `4992a8d`. Final lifecycle fix discards obsolete async preview errors,
+  invalidates old readiness attributes and captures input during Worker startup.
+
+## Final validation
+
+- `npm run typecheck`: passed for browser, Node authority and Worker projects.
+- `npm test`: 149 files / 1,380 tests passed, including concurrent candidate
+  geometry/gravity isolation through reload and actual-Realm junction riding.
+- `npm run check`: passed; 124 existing warnings and 32 informational diagnostics.
+- `npm run art:catalog`, `npm run workshop:manifest`, `npm run build`: passed.
+  Manifest comparison confirms exactly 17 changed behavior identities (11 furniture
+  motion, six characters); no vehicle identities or promoted banks changed.
+- Full `npx playwright test`: 288 passed, one geometry-preview replacement race
+  found. After correcting stale async errors/readiness/input ownership, all nine
+  vehicle, outdoor and lifecycle browser tests passed on the rebuilt application.
+  No outstanding test failure remains. Existing static approval images were not updated.
+- `npm run streaming:bench -- --assert-ready`: passed for regional-v4 and v10,
+  with no steady-state missing-data frames and maximum measured prediction replay
+  error below 0.000422px. v10 cold start had two missing-data frames within the
+  runner's cold-start allowance; this is not a claim of zero cold-start gaps.
+- `git diff --check`: passed. Browser tests use isolated Workshop auth/data and
+  bundled Chromium. The lifecycle test verifies zero remaining Workers on exit
+  and no new IndexedDB databases.
+
+The next step is human movement-feel review of the migrated labs; additional small
+scenarios can now compose data and reuse the same host and integration assertions.

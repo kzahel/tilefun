@@ -39,7 +39,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [025 Railway Workshop previews](025-railway-workshop-previews.md) | Delivered: 32 isolated source/motion/layout previews awaiting human review; [trains topic](../topics/trains.md) |
 | [026 Persistence completion](026-persistence-completion.md) | Complete: shared world containers, traffic records, pressure admission, recovery and sustained lifecycle validation |
 
-| [027 Composable gameplay scenarios](027-composable-gameplay-scenarios.md) | In progress: shared recipes, memory-backed authority and interactive lab migrations |
+| [027 Composable gameplay scenarios](027-composable-gameplay-scenarios.md) | Complete: shared recipes, memory-backed authority and interactive lab migrations |
 
 ## Earlier plans
 
