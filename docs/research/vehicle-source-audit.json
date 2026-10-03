@@ -22,28 +22,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_1",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1152, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1152, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_1",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1152, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -55,28 +59,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_2",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1216, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1216, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_2",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1216, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -88,28 +96,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_3",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1280, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1280, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_3",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1280, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -121,28 +133,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_4",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1344, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1344, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_4",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1344, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -154,28 +170,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_5",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1408, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1408, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_5",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1408, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -187,28 +207,32 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_6",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "east": {
           "rect": [96, 1472, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 26, 61, 37]
         },
         "south": {
           "rect": [160, 1472, 32, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_6",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 6, 32, 57]
         },
         "west": {
           "rect": [0, 1472, 64, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 27, 61, 37]
         }
       }
     },
@@ -220,28 +244,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [4, 0, 41, 106]
         },
         "east": {
           "rect": [208, 1200, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_1",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [320, 1136, 48, 112],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_1",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 5, 42, 107]
         },
         "west": {
           "rect": [208, 1136, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_1",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         }
       }
     },
@@ -253,28 +281,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [4, 0, 41, 106]
         },
         "east": {
           "rect": [416, 1200, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_2",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [528, 1136, 48, 112],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_2",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 5, 42, 107]
         },
         "west": {
           "rect": [416, 1136, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_2",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         }
       }
     },
@@ -286,28 +318,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [4, 0, 41, 106]
         },
         "east": {
           "rect": [208, 1328, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_3",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [320, 1264, 48, 112],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_3",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 5, 42, 107]
         },
         "west": {
           "rect": [208, 1264, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_3",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         }
       }
     },
@@ -319,28 +355,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [4, 0, 41, 106]
         },
         "east": {
           "rect": [416, 1328, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_4",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [528, 1264, 48, 112],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_4",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 5, 42, 107]
         },
         "west": {
           "rect": [416, 1264, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_4",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         }
       }
     },
@@ -352,28 +392,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [5, 0, 40, 106]
         },
         "east": {
           "rect": [208, 1456, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_5",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [320, 1392, 48, 112],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_5",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [3, 5, 42, 107]
         },
         "west": {
           "rect": [208, 1392, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_5",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         }
       }
     },
@@ -385,28 +429,32 @@
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [4, 0, 40, 106]
         },
         "east": {
           "rect": [416, 1456, 112, 64],
           "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_6",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 2, 111, 62]
         },
         "south": {
           "rect": [528, 1392, 48, 112],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [2, 5, 42, 107]
         },
         "west": {
           "rect": [416, 1392, 112, 64],
           "indexKey": null,
           "evidence": "manual-source-selection",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [0, 2, 111, 62]
         }
       }
     },
@@ -418,30 +466,1311 @@
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_12",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
         },
         "east": {
           "rect": [512, 5504, 80, 48],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_12",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
         },
         "south": {
           "rect": [592, 5520, 48, 80],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_12",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
         },
         "west": {
           "rect": [512, 5552, 80, 48],
           "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_12",
           "evidence": "indexed-and-visually-audited",
           "groundAnchor": null,
-          "groundFootprint": null
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-7",
+      "directions": {
+        "north": {
+          "rect": [992, 5520, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_7",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [864, 5504, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_7",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [944, 5520, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_7",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [864, 5552, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_7",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-8",
+      "directions": {
+        "north": {
+          "rect": [992, 5616, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_8",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [864, 5600, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_8",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [944, 5616, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_8",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [864, 5648, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_8",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-9",
+      "directions": {
+        "north": {
+          "rect": [992, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_9",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [864, 5696, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_9",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [944, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_9",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [864, 5744, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_9",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-10",
+      "directions": {
+        "north": {
+          "rect": [992, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_10",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [864, 5792, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_10",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [944, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_10",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [864, 5840, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_10",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-11",
+      "directions": {
+        "north": {
+          "rect": [992, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_11",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [864, 5888, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_11",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [944, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_11",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [864, 5936, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_11",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-13",
+      "directions": {
+        "north": {
+          "rect": [640, 5616, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_13",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 37, 72]
+        },
+        "east": {
+          "rect": [512, 5600, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_13",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 8, 77, 40]
+        },
+        "south": {
+          "rect": [592, 5616, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_13",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 37, 71]
+        },
+        "west": {
+          "rect": [512, 5648, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_13",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 8, 77, 40]
+        }
+      }
+    },
+    {
+      "id": "car-14",
+      "directions": {
+        "north": {
+          "rect": [1168, 5520, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_14",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [1040, 5504, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_14",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [1120, 5520, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_14",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [1040, 5552, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-15",
+      "directions": {
+        "north": {
+          "rect": [1168, 5616, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_15",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [1040, 5600, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_15",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [1120, 5616, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_15",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [1040, 5648, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_15",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-16",
+      "directions": {
+        "north": {
+          "rect": [1168, 5712, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_16",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [1040, 5696, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_16",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [1120, 5712, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_16",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [1040, 5744, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_16",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-17",
+      "directions": {
+        "north": {
+          "rect": [1168, 5808, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_17",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [1040, 5792, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_17",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [1120, 5808, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_17",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [1040, 5840, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_17",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-18",
+      "directions": {
+        "north": {
+          "rect": [1168, 5904, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_18",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [1040, 5888, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_18",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [1120, 5904, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_18",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [1040, 5936, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_18",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-19",
+      "directions": {
+        "north": {
+          "rect": [816, 5520, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_19",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [688, 5504, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_19",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [768, 5520, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_19",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [688, 5552, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_19",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-20",
+      "directions": {
+        "north": {
+          "rect": [816, 5616, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_20",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "east": {
+          "rect": [688, 5600, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_20",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        },
+        "south": {
+          "rect": [768, 5616, 48, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_20",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 1, 35, 62]
+        },
+        "west": {
+          "rect": [688, 5648, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_20",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [7, 11, 66, 37]
+        }
+      }
+    },
+    {
+      "id": "car-21",
+      "directions": {
+        "north": {
+          "rect": [640, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_21",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [512, 5696, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_21",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [592, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_21",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [512, 5744, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "car-22",
+      "directions": {
+        "north": {
+          "rect": [640, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_22",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [512, 5792, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_22",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [592, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_22",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [512, 5840, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_22",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "car-23",
+      "directions": {
+        "north": {
+          "rect": [640, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_23",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [512, 5888, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_23",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [592, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_23",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [512, 5936, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_23",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "car-24",
+      "directions": {
+        "north": {
+          "rect": [816, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_24",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [688, 5696, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_24",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [768, 5712, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_24",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [688, 5744, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "car-25",
+      "directions": {
+        "north": {
+          "rect": [816, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_25",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [688, 5792, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_25",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [768, 5808, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_25",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [688, 5840, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_25",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "car-26",
+      "directions": {
+        "north": {
+          "rect": [816, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_26",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 67]
+        },
+        "east": {
+          "rect": [688, 5888, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_26",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 9, 71, 39]
+        },
+        "south": {
+          "rect": [768, 5904, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_26",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 8, 37, 66]
+        },
+        "west": {
+          "rect": [688, 5936, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_26",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 9, 71, 39]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-red",
+      "directions": {
+        "north": {
+          "rect": [1024, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [1056, 1600, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [992, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [1056, 1552, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-beige",
+      "directions": {
+        "north": {
+          "rect": [1168, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [1200, 1600, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [1136, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [1200, 1552, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-cyan",
+      "directions": {
+        "north": {
+          "rect": [1312, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [1344, 1600, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [1280, 1568, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [1344, 1552, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-orange",
+      "directions": {
+        "north": {
+          "rect": [880, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [912, 1696, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [848, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [912, 1648, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-silver",
+      "directions": {
+        "north": {
+          "rect": [1024, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [1056, 1696, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [992, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [1056, 1648, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-olive",
+      "directions": {
+        "north": {
+          "rect": [1168, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "east": {
+          "rect": [1200, 1696, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 12, 77, 36]
+        },
+        "south": {
+          "rect": [1136, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 32, 72]
+        },
+        "west": {
+          "rect": [1200, 1648, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 12, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "unindexed-sedan-dark",
+      "directions": {
+        "north": {
+          "rect": [1312, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 4, 32, 72]
+        },
+        "east": {
+          "rect": [1344, 1696, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 6, 77, 36]
+        },
+        "south": {
+          "rect": [1280, 1664, 32, 80],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 4, 32, 72]
+        },
+        "west": {
+          "rect": [1344, 1648, 80, 48],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [3, 6, 77, 36]
+        }
+      }
+    },
+    {
+      "id": "police-car",
+      "directions": {
+        "north": {
+          "rect": [1904, 1744, 32, 80],
+          "indexKey": "ME_Singles_Police_Station_16x16_Police_Car_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 4, 32, 72]
+        },
+        "east": {
+          "rect": [1792, 1744, 80, 48],
+          "indexKey": "ME_Singles_Police_Station_16x16_Police_Car_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 10, 77, 38]
+        },
+        "south": {
+          "rect": [1872, 1744, 32, 80],
+          "indexKey": "ME_Singles_Police_Station_16x16_Police_Car_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 4, 32, 72]
+        },
+        "west": {
+          "rect": [1712, 1744, 80, 48],
+          "indexKey": "ME_Singles_Police_Station_16x16_Police_Car_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 10, 77, 38],
+          "preparationIssue": "Indexed crop includes a thin neighboring-source fragment at its top border. Review a tighter clip before rendering; do not use alpha bounds as the vehicle footprint."
+        }
+      }
+    },
+    {
+      "id": "ambulance",
+      "notes": "One complete four-direction vehicle; vendor direction suffix numbers differ. Neighboring body/roof pieces are not extra complete driving variants.",
+      "directions": {
+        "north": {
+          "rect": [352, 1792, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Ambulance_Up_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 3, 48, 100]
+        },
+        "east": {
+          "rect": [224, 1824, 128, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Ambulance_Right_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [9, 13, 114, 67],
+          "preparationIssue": "Indexed crop includes a thin neighboring-source fragment at its top border. Review a tighter clip before rendering; do not use alpha bounds as the vehicle footprint."
+        },
+        "south": {
+          "rect": [48, 1792, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Ambulance_Down_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 2, 48, 110]
+        },
+        "west": {
+          "rect": [96, 1824, 128, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Ambulance_Left_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 13, 114, 67],
+          "preparationIssue": "Indexed crop includes a thin neighboring-source fragment at its top border. Review a tighter clip before rendering; do not use alpha bounds as the vehicle footprint."
+        }
+      }
+    },
+    {
+      "id": "garbage-truck-green",
+      "directions": {
+        "north": {
+          "rect": [1456, 4144, 48, 128],
+          "indexKey": "ME_Singles_City_Props_16x16_Green_Trash_Truck_Up",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 6, 42, 118]
+        },
+        "east": {
+          "rect": [1280, 4128, 128, 80],
+          "indexKey": "ME_Singles_City_Props_16x16_Green_Trash_Truck_Right",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [8, 4, 116, 76]
+        },
+        "south": {
+          "rect": [1408, 4144, 48, 128],
+          "indexKey": "ME_Singles_City_Props_16x16_Green_Trash_Truck_Down",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 4, 44, 120]
+        },
+        "west": {
+          "rect": [1280, 4208, 128, 80],
+          "indexKey": "ME_Singles_City_Props_16x16_Green_Trash_Truck_Left",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 4, 116, 76]
+        }
+      }
+    },
+    {
+      "id": "garbage-truck-orange",
+      "directions": {
+        "north": {
+          "rect": [1680, 4144, 48, 128],
+          "indexKey": "ME_Singles_City_Props_16x16_Orange_Trash_Truck_Up",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [4, 6, 42, 118]
+        },
+        "east": {
+          "rect": [1504, 4128, 128, 80],
+          "indexKey": "ME_Singles_City_Props_16x16_Orange_Trash_Truck_Right",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [12, 4, 116, 76]
+        },
+        "south": {
+          "rect": [1632, 4144, 48, 128],
+          "indexKey": "ME_Singles_City_Props_16x16_Orange_Trash_Truck_Down",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [2, 4, 44, 120]
+        },
+        "west": {
+          "rect": [1504, 4208, 128, 80],
+          "indexKey": "ME_Singles_City_Props_16x16_Orange_Trash_Truck_Left",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [1, 4, 115, 76]
+        }
+      }
+    },
+    {
+      "id": "fire-truck-ladder-1",
+      "equipmentState": "vendor-ladder-1",
+      "notes": "Stowed-ladder candidate for traffic; geometry unreviewed.",
+      "directions": {
+        "north": {
+          "rect": [2624, 4016, 64, 160],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_1_Up",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [6, 14, 53, 145]
+        },
+        "east": {
+          "rect": [2416, 4096, 144, 80],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_1_Right",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 10, 144, 70]
+        },
+        "south": {
+          "rect": [2560, 4016, 64, 160],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_1_Down",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 6, 53, 153]
+        },
+        "west": {
+          "rect": [2416, 4016, 144, 80],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_1_Left",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 10, 144, 70]
+        }
+      }
+    },
+    {
+      "id": "fire-truck-ladder-2",
+      "equipmentState": "vendor-ladder-2",
+      "notes": "Raised-ladder side views: equipment state, not a second vehicle model. Stationary-use candidate until clearance is reviewed.",
+      "directions": {
+        "north": {
+          "rect": [2624, 4176, 64, 160],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_2_Up",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [6, 14, 53, 145]
+        },
+        "east": {
+          "rect": [2416, 4256, 144, 80],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_2_Right",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 1, 144, 79]
+        },
+        "south": {
+          "rect": [2560, 4176, 64, 160],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_2_Down",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [5, 5, 53, 154]
+        },
+        "west": {
+          "rect": [2416, 4176, 144, 80],
+          "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Ladder_2_Left",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null,
+          "visualBounds": [0, 1, 144, 79]
         }
       }
     }
-  ]
+  ],
+  "additionalNotes": [
+    {
+      "threadId": "3d203d1e-d328-4d19-898f-bd17146caa2e",
+      "rect": [1712, 1744, 224, 80],
+      "variantIds": ["police-car"]
+    },
+    {
+      "threadId": "4f49d343-809d-41c2-bc3d-e2fa6f842c2d",
+      "rect": [848, 1552, 576, 192],
+      "variantIds": [
+        "unindexed-sedan-red",
+        "unindexed-sedan-beige",
+        "unindexed-sedan-cyan",
+        "unindexed-sedan-orange",
+        "unindexed-sedan-silver",
+        "unindexed-sedan-olive",
+        "unindexed-sedan-dark"
+      ]
+    },
+    {
+      "threadId": "accafb5b-cfc1-4a3e-b348-8f34eaae4292",
+      "rect": [0, 1792, 448, 112],
+      "variantIds": ["ambulance"]
+    },
+    {
+      "threadId": "fb1fa4d9-d87d-4e81-a613-54bfa9d5a5cf",
+      "rect": [512, 5504, 704, 480],
+      "variantIds": [
+        "car-7",
+        "car-8",
+        "car-9",
+        "car-10",
+        "car-11",
+        "sedan-12",
+        "car-13",
+        "car-14",
+        "car-15",
+        "car-16",
+        "car-17",
+        "car-18",
+        "car-19",
+        "car-20",
+        "car-21",
+        "car-22",
+        "car-23",
+        "car-24",
+        "car-25",
+        "car-26"
+      ]
+    },
+    {
+      "threadId": "1adeadaa-f8ad-4e28-afb9-a48ac60a048b",
+      "rect": [2160, 4000, 528, 336],
+      "variantIds": ["fire-truck-ladder-1", "fire-truck-ladder-2"]
+    },
+    {
+      "threadId": "d5459e68-4120-41cd-831b-8d41ff503dbd",
+      "rect": [1280, 4128, 448, 160],
+      "variantIds": ["garbage-truck-green", "garbage-truck-orange"]
+    }
+  ],
+  "relatedSourcePieces": [
+    {
+      "id": "fire-station-building",
+      "noteThreadId": "1adeadaa-f8ad-4e28-afb9-a48ac60a048b",
+      "rect": [2160, 4016, 256, 240],
+      "indexKey": "ME_Singles_Fire_Station_16x16_Building",
+      "role": "building-source-only; no prefab, doorway or collision prepared"
+    },
+    {
+      "id": "fire-truck-building-back-left",
+      "noteThreadId": "1adeadaa-f8ad-4e28-afb9-a48ac60a048b",
+      "rect": [2224, 4256, 64, 80],
+      "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Back_Building_Left",
+      "role": "partial truck in building; not a complete driving view"
+    },
+    {
+      "id": "fire-truck-building-back-right",
+      "noteThreadId": "1adeadaa-f8ad-4e28-afb9-a48ac60a048b",
+      "rect": [2160, 4256, 64, 80],
+      "indexKey": "ME_Singles_Fire_Station_16x16_Fire_Truck_Back_Building_Right",
+      "role": "partial truck in building; not a complete driving view"
+    }
+  ],
+  "visualBoundsConvention": "Nontransparent pixel bounds [x,y,width,height] relative to each source crop; includes shadows and equipment; not ground collision geometry"
 }
