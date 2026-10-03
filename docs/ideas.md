@@ -28,7 +28,8 @@ copying every item into multiple checklists.
 
 Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
 
-- Moving cars that travel along roads.
+- Moving cars that travel along roads. [Source audit and proposed approach](research/road-vehicles.md)
+  records four-direction car/bus art and a suggested first slice; driving is not implemented.
 - People inside buildings, as well as out on the streets.
 - Families that live in houses, potentially with Sims-style household behavior.
   Explore `~/code/playbox` as a reference before choosing a design.

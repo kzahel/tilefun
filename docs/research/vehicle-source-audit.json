@@ -1,0 +1,447 @@
+{
+  "version": 1,
+  "status": "source-audit-only; unapproved; no runtime registration",
+  "source": {
+    "sheetId": "me-complete",
+    "path": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "width": 2816,
+    "height": 8224
+  },
+  "originalNote": {
+    "threadId": "a582d1ba-a290-4e2a-9473-99191dac6d38",
+    "rect": [0, 1152, 208, 384]
+  },
+  "coordinates": "Native source pixels [x,y,width,height]; cardinal world-facing directions; padded selections are not ground footprints",
+  "variants": [
+    {
+      "id": "compact-1",
+      "directions": {
+        "north": {
+          "rect": [64, 1152, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1152, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1152, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1152, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "compact-2",
+      "directions": {
+        "north": {
+          "rect": [64, 1216, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1216, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1216, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1216, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "compact-3",
+      "directions": {
+        "north": {
+          "rect": [64, 1280, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1280, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1280, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1280, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "compact-4",
+      "directions": {
+        "north": {
+          "rect": [64, 1344, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1344, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1344, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1344, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "compact-5",
+      "directions": {
+        "north": {
+          "rect": [64, 1408, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_5",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1408, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1408, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_5",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1408, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "compact-6",
+      "directions": {
+        "north": {
+          "rect": [64, 1472, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_6",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [96, 1472, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [160, 1472, 32, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_6",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [0, 1472, 64, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-1",
+      "directions": {
+        "north": {
+          "rect": [368, 1136, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [208, 1200, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [320, 1136, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [208, 1136, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_1",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-2",
+      "directions": {
+        "north": {
+          "rect": [576, 1136, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [416, 1200, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [528, 1136, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [416, 1136, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_2",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-3",
+      "directions": {
+        "north": {
+          "rect": [368, 1264, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [208, 1328, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [320, 1264, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [208, 1264, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_3",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-4",
+      "directions": {
+        "north": {
+          "rect": [576, 1264, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [416, 1328, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [528, 1264, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [416, 1264, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_4",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-5",
+      "directions": {
+        "north": {
+          "rect": [368, 1392, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [208, 1456, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_5",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [320, 1392, 48, 112],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Down_5",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [208, 1392, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Left_5",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "bus-6",
+      "directions": {
+        "north": {
+          "rect": [576, 1392, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [416, 1456, 112, 64],
+          "indexKey": "ME_Singles_Vehicles_16x16_Bus_Right_6",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [528, 1392, 48, 112],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [416, 1392, 112, 64],
+          "indexKey": null,
+          "evidence": "manual-source-selection",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    },
+    {
+      "id": "sedan-12",
+      "directions": {
+        "north": {
+          "rect": [640, 5520, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Up_12",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "east": {
+          "rect": [512, 5504, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Right_12",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "south": {
+          "rect": [592, 5520, 48, 80],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Down_12",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        },
+        "west": {
+          "rect": [512, 5552, 80, 48],
+          "indexKey": "ME_Singles_Vehicles_16x16_Car_Left_12",
+          "evidence": "indexed-and-visually-audited",
+          "groundAnchor": null,
+          "groundFootprint": null
+        }
+      }
+    }
+  ]
+}
