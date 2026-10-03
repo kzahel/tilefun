@@ -20,6 +20,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | --- | --- |
 | [Play ideas](play-ideas.md) | Hold-to-speak gameplay suggestions, text readback, public submission and private Workshop inbox |
 | [Voice agents](voice-agents.md) | Proposed companion NPC and child-directed builder sessions; live development and reload experience |
+| [Gameplay scenarios](gameplay-scenarios.md) | Shared runtime recipes for interactive labs and integration tests |
 | [Vehicles](vehicles.md) | Approved vehicle bank, generated traffic, roof riding and Workshop playground |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
