@@ -20,6 +20,11 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
   metadata. [Serialization](../../src/shared/serialization.ts) carries dynamic
   state and reconstructs full entities; animation frame/timer and AI timer are
   not sent as in the original SpriteDef proposal.
+- Player appearances use validated `set-player-model` requests and optional
+  `SpriteState.model` in baselines/deltas; absence resets the classic appearance.
+  The binary model list is append-only. See [characters](characters.md) for
+  profile persistence and the cosmetic-only physics contract. Registry expansion
+  changes sorted entity wire indices, so deploy matching clients and servers.
 - [binaryCodec](../../src/shared/binaryCodec.ts) handles frame, player-input and
   chunk binary encoding with JSON envelopes for other message types. Consult
   code/tests for sizes; old JSON bandwidth estimates are historical.

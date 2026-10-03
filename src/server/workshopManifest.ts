@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { CHARACTERS } from "../characters/CharacterCatalog.js";
 import type { WorkshopManifest } from "../workshop/WorkshopTypes.js";
 
 /** Broad render inputs are intentional: renderer/physics edits must reopen affected
@@ -26,6 +27,7 @@ export async function workshopInputDigest(root = ".") {
       !["src/art/buildings.ts", "src/art/ArtNoteInbox.ts"].includes(p),
   );
   await walk("public/assets", (p) => p.endsWith(".png") || p.endsWith(".json"));
+  files.push(...CHARACTERS.map((c) => `public/${c.image}`));
   files.push(
     "public/data/art-catalog.json",
     "public/data/modern-interiors-atlas.json",
@@ -34,6 +36,7 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/PatternCandidates.ts",
     "src/workshop/ToolRegistry.ts",
     "src/workshop/VehicleCandidates.ts",
+    "src/workshop/CharacterCandidates.ts",
     "docs/research/vehicle-source-audit.json",
   );
   const hash = createHash("sha256");

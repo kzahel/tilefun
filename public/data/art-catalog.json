@@ -226,6 +226,66 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "character-tiger-v1",
+      "name": "character tiger v1",
+      "image": "demos/blender-tiger/tiger-finished-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
+      "id": "character-cat-v1",
+      "name": "character cat v1",
+      "image": "demos/pixel-characters/cat-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
+      "id": "character-dog-v1",
+      "name": "character dog v1",
+      "image": "demos/pixel-characters/dog-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
+      "id": "character-person-v1",
+      "name": "character person v1",
+      "image": "demos/pixel-characters/person-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
+      "id": "character-squirrel-v1",
+      "name": "character squirrel v1",
+      "image": "demos/pixel-characters/squirrel-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "03d5f92be37d50b8fd1c1a1f40171bf491085bc2d750b32d01f3165b46eb8c9d",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
+      "id": "character-bear-v1",
+      "name": "character bear v1",
+      "image": "demos/pixel-characters/bear-32.png",
+      "width": 128,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
+      "source": "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)"
+    },
+    {
       "id": "vehicle-v1:compact-1",
       "name": "vehicle v1:compact 1",
       "image": "assets/vehicles/compact-1-v1.png",
@@ -2003,7 +2063,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:59"
+          "source": "src/assets/GameAssets.ts:66"
         },
         {
           "system": "Gameplay",
@@ -2049,7 +2109,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:60"
+          "source": "src/assets/GameAssets.ts:67"
         },
         {
           "system": "Gameplay",
@@ -2091,7 +2151,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:61"
+          "source": "src/assets/GameAssets.ts:68"
         },
         {
           "system": "Gameplay",
@@ -2121,7 +2181,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:62"
+          "source": "src/assets/GameAssets.ts:69"
         },
         {
           "system": "Gameplay",
@@ -2151,7 +2211,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:63"
+          "source": "src/assets/GameAssets.ts:70"
         },
         {
           "system": "Gameplay",
@@ -2181,7 +2241,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:64"
+          "source": "src/assets/GameAssets.ts:71"
         },
         {
           "system": "Gameplay",
@@ -2263,7 +2323,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:65"
+          "source": "src/assets/GameAssets.ts:72"
         },
         {
           "system": "Gameplay",
@@ -2293,7 +2353,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:66"
+          "source": "src/assets/GameAssets.ts:73"
         },
         {
           "system": "Gameplay",
@@ -2339,7 +2399,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:67"
+          "source": "src/assets/GameAssets.ts:74"
         },
         {
           "system": "Gameplay",
@@ -2373,7 +2433,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:69"
+          "source": "src/assets/GameAssets.ts:76"
         },
         {
           "system": "Gameplay",
@@ -2403,7 +2463,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:70"
+          "source": "src/assets/GameAssets.ts:77"
         },
         {
           "system": "Gameplay",
@@ -2437,7 +2497,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:71"
+          "source": "src/assets/GameAssets.ts:78"
         },
         {
           "system": "Gameplay",
@@ -2471,7 +2531,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:72"
+          "source": "src/assets/GameAssets.ts:79"
         },
         {
           "system": "Gameplay",
@@ -2501,7 +2561,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:73"
+          "source": "src/assets/GameAssets.ts:80"
         },
         {
           "system": "Gameplay",
@@ -2535,7 +2595,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:74"
+          "source": "src/assets/GameAssets.ts:81"
         },
         {
           "system": "Gameplay",
@@ -2565,7 +2625,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:75"
+          "source": "src/assets/GameAssets.ts:82"
         },
         {
           "system": "Gameplay",
@@ -2595,7 +2655,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:76"
+          "source": "src/assets/GameAssets.ts:83"
         },
         {
           "system": "Gameplay",
@@ -2625,7 +2685,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:77"
+          "source": "src/assets/GameAssets.ts:84"
         },
         {
           "system": "Gameplay",
@@ -2655,7 +2715,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:78"
+          "source": "src/assets/GameAssets.ts:85"
         },
         {
           "system": "Gameplay",
@@ -19190,6 +19250,114 @@
       ]
     },
     {
+      "id": "sprite:character-tiger-v1",
+      "sheetId": "character-tiger-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-tiger-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:character-cat-v1",
+      "sheetId": "character-cat-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-cat-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:character-dog-v1",
+      "sheetId": "character-dog-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-dog-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:character-person-v1",
+      "sheetId": "character-person-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-person-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:character-squirrel-v1",
+      "sheetId": "character-squirrel-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-squirrel-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:character-bear-v1",
+      "sheetId": "character-bear-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "character-bear-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:vehicle-v1:compact-1",
       "sheetId": "vehicle-v1:compact-1",
       "rect": [
@@ -20021,11 +20189,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:24"
+          "source": "src/assets/GameAssets.ts:31"
         },
         {
           "system": "Gameplay",
           "source": "src/audio/FootstepSystem.ts:30"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/CharacterTestScene.ts:62"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:7"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:19"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:24"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:28"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/characters/PlayerModels.ts:29"
         },
         {
           "system": "Gameplay",
@@ -20041,7 +20233,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:474"
+          "source": "src/client/PlayerPredictor.ts:477"
         },
         {
           "system": "Gameplay",
@@ -20057,7 +20249,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:141"
+          "source": "src/entities/EntityDefs.ts:145"
         },
         {
           "system": "Gameplay",
@@ -20085,11 +20277,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:870"
+          "source": "src/server/PlayerSession.ts:80"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1182"
+          "source": "src/server/Realm.ts:872"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1184"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/shared/serialization.ts:24"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/ui/PlayerModelPicker.ts:50"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/workshop/CharacterCandidates.ts:17"
         }
       ]
     },
@@ -20111,7 +20319,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:30"
+          "source": "src/assets/GameAssets.ts:37"
         },
         {
           "system": "Gameplay",
@@ -20123,7 +20331,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:67"
+          "source": "src/editor/EditorPalettes.ts:69"
         },
         {
           "system": "Gameplay",
@@ -20135,7 +20343,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:181"
+          "source": "src/entities/EntityDefs.ts:185"
         },
         {
           "system": "World generation",
@@ -20169,7 +20377,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:35"
+          "source": "src/assets/GameAssets.ts:42"
         },
         {
           "system": "Gameplay",
@@ -20177,7 +20385,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:68"
+          "source": "src/editor/EditorPalettes.ts:70"
         },
         {
           "system": "Gameplay",
@@ -20189,7 +20397,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:210"
+          "source": "src/entities/EntityDefs.ts:214"
         },
         {
           "system": "World generation",
@@ -20215,15 +20423,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:36"
+          "source": "src/assets/GameAssets.ts:43"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:69"
+          "source": "src/editor/EditorPalettes.ts:71"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:240"
+          "source": "src/entities/EntityDefs.ts:244"
         },
         {
           "system": "Gameplay",
@@ -20253,15 +20461,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:37"
+          "source": "src/assets/GameAssets.ts:44"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:70"
+          "source": "src/editor/EditorPalettes.ts:72"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:265"
+          "source": "src/entities/EntityDefs.ts:269"
         },
         {
           "system": "Gameplay",
@@ -20291,15 +20499,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:38"
+          "source": "src/assets/GameAssets.ts:45"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:73"
+          "source": "src/editor/EditorPalettes.ts:75"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:290"
+          "source": "src/entities/EntityDefs.ts:294"
         },
         {
           "system": "Gameplay",
@@ -20333,15 +20541,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:39"
+          "source": "src/assets/GameAssets.ts:46"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:74"
+          "source": "src/editor/EditorPalettes.ts:76"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:312"
+          "source": "src/entities/EntityDefs.ts:316"
         },
         {
           "system": "Gameplay",
@@ -20375,15 +20583,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:40"
+          "source": "src/assets/GameAssets.ts:47"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:75"
+          "source": "src/editor/EditorPalettes.ts:77"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:334"
+          "source": "src/entities/EntityDefs.ts:338"
         },
         {
           "system": "Gameplay",
@@ -20417,7 +20625,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:41"
+          "source": "src/assets/GameAssets.ts:48"
         },
         {
           "system": "Gameplay",
@@ -20425,7 +20633,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:76"
+          "source": "src/editor/EditorPalettes.ts:78"
         },
         {
           "system": "Gameplay",
@@ -20441,7 +20649,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:356"
+          "source": "src/entities/EntityDefs.ts:360"
         },
         {
           "system": "Gameplay",
@@ -20471,11 +20679,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:42"
+          "source": "src/assets/GameAssets.ts:49"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:77"
+          "source": "src/editor/EditorPalettes.ts:79"
         },
         {
           "system": "Gameplay",
@@ -20487,15 +20695,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:453"
+          "source": "src/entities/EntityDefs.ts:457"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:455"
+          "source": "src/entities/EntityDefs.ts:459"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:51"
+          "source": "src/entities/EntityFactories.ts:53"
         }
       ]
     },
@@ -20517,11 +20725,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:43"
+          "source": "src/assets/GameAssets.ts:50"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:71"
+          "source": "src/editor/EditorPalettes.ts:73"
         },
         {
           "system": "Gameplay",
@@ -20533,7 +20741,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:468"
+          "source": "src/entities/EntityDefs.ts:472"
         },
         {
           "system": "World generation",
@@ -20559,15 +20767,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:44"
+          "source": "src/assets/GameAssets.ts:51"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:72"
+          "source": "src/editor/EditorPalettes.ts:74"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:493"
+          "source": "src/entities/EntityDefs.ts:497"
         },
         {
           "system": "Gameplay",
@@ -20597,11 +20805,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:45"
+          "source": "src/assets/GameAssets.ts:52"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:78"
+          "source": "src/editor/EditorPalettes.ts:80"
         },
         {
           "system": "Gameplay",
@@ -20627,11 +20835,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:46"
+          "source": "src/assets/GameAssets.ts:53"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:79"
+          "source": "src/editor/EditorPalettes.ts:81"
         },
         {
           "system": "Gameplay",
@@ -20657,11 +20865,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:47"
+          "source": "src/assets/GameAssets.ts:54"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:80"
+          "source": "src/editor/EditorPalettes.ts:82"
         },
         {
           "system": "Gameplay",
@@ -20687,11 +20895,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:48"
+          "source": "src/assets/GameAssets.ts:55"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:81"
+          "source": "src/editor/EditorPalettes.ts:83"
         },
         {
           "system": "Gameplay",
@@ -20717,7 +20925,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:49"
+          "source": "src/assets/GameAssets.ts:56"
         },
         {
           "system": "Gameplay",
@@ -20729,7 +20937,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:161"
+          "source": "src/entities/EntityDefs.ts:165"
         },
         {
           "system": "Gameplay",
@@ -20763,23 +20971,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:50"
+          "source": "src/assets/GameAssets.ts:57"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:82"
+          "source": "src/editor/EditorPalettes.ts:84"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:394"
+          "source": "src/entities/EntityDefs.ts:398"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:396"
+          "source": "src/entities/EntityDefs.ts:400"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:49"
+          "source": "src/entities/EntityFactories.ts:51"
         },
         {
           "system": "Gameplay",
@@ -20813,11 +21021,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:51"
+          "source": "src/assets/GameAssets.ts:58"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:83"
+          "source": "src/editor/EditorPalettes.ts:85"
         },
         {
           "system": "Gameplay",
@@ -20829,15 +21037,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:423"
+          "source": "src/entities/EntityDefs.ts:427"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:425"
+          "source": "src/entities/EntityDefs.ts:429"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:50"
+          "source": "src/entities/EntityFactories.ts:52"
         },
         {
           "system": "Gameplay",
@@ -21235,7 +21443,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:59"
+          "source": "src/assets/GameAssets.ts:66"
         },
         {
           "system": "Gameplay",
@@ -21285,7 +21493,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:60"
+          "source": "src/assets/GameAssets.ts:67"
         },
         {
           "system": "Gameplay",
@@ -21331,7 +21539,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:61"
+          "source": "src/assets/GameAssets.ts:68"
         },
         {
           "system": "Gameplay",
@@ -21365,7 +21573,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:62"
+          "source": "src/assets/GameAssets.ts:69"
         },
         {
           "system": "Gameplay",
@@ -21399,7 +21607,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:63"
+          "source": "src/assets/GameAssets.ts:70"
         },
         {
           "system": "Gameplay",
@@ -21433,7 +21641,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:64"
+          "source": "src/assets/GameAssets.ts:71"
         },
         {
           "system": "Gameplay",
@@ -21519,7 +21727,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:65"
+          "source": "src/assets/GameAssets.ts:72"
         },
         {
           "system": "Gameplay",
@@ -21553,7 +21761,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:66"
+          "source": "src/assets/GameAssets.ts:73"
         },
         {
           "system": "Gameplay",
@@ -21603,7 +21811,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:67"
+          "source": "src/assets/GameAssets.ts:74"
         },
         {
           "system": "Gameplay",
@@ -21641,7 +21849,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:69"
+          "source": "src/assets/GameAssets.ts:76"
         },
         {
           "system": "Gameplay",
@@ -21675,7 +21883,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:70"
+          "source": "src/assets/GameAssets.ts:77"
         },
         {
           "system": "Gameplay",
@@ -21713,7 +21921,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:71"
+          "source": "src/assets/GameAssets.ts:78"
         },
         {
           "system": "Gameplay",
@@ -21751,7 +21959,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:72"
+          "source": "src/assets/GameAssets.ts:79"
         },
         {
           "system": "Gameplay",
@@ -21785,7 +21993,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:73"
+          "source": "src/assets/GameAssets.ts:80"
         },
         {
           "system": "Gameplay",
@@ -21823,7 +22031,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:74"
+          "source": "src/assets/GameAssets.ts:81"
         },
         {
           "system": "Gameplay",
@@ -21857,7 +22065,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:75"
+          "source": "src/assets/GameAssets.ts:82"
         },
         {
           "system": "Gameplay",
@@ -21891,7 +22099,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:76"
+          "source": "src/assets/GameAssets.ts:83"
         },
         {
           "system": "Gameplay",
@@ -21925,7 +22133,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:77"
+          "source": "src/assets/GameAssets.ts:84"
         },
         {
           "system": "Gameplay",
@@ -21959,7 +22167,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:78"
+          "source": "src/assets/GameAssets.ts:85"
         },
         {
           "system": "Gameplay",
@@ -21993,11 +22201,119 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:80"
+          "source": "src/assets/GameAssets.ts:87"
         },
         {
           "system": "Editor",
           "source": "src/scenes/renderWorld.ts:93"
+        }
+      ]
+    },
+    {
+      "id": "character:tiger",
+      "sheetId": "character-tiger-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Tiger",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "character:cat",
+      "sheetId": "character-cat-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Tuxedo Cat",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "character:dog",
+      "sheetId": "character-dog-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Floppy Dog",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "character:person",
+      "sheetId": "character-person-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Trail Explorer",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "character:squirrel",
+      "sheetId": "character-squirrel-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Russet Squirrel",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
+        }
+      ]
+    },
+    {
+      "id": "character:bear",
+      "sheetId": "character-bear-v1",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "label": "Brown Bear",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Workshop character candidate",
+          "source": "src/characters/CharacterCatalog.ts"
         }
       ]
     }

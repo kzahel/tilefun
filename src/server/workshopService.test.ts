@@ -604,3 +604,68 @@ it("registers vehicle geometry before feedback and pins edited approvals across 
     "unchecked",
   );
 });
+
+it("saves exact character settings, replays idempotently and rejects stale or invalid proposals", async () => {
+  const f = await fixture();
+  await f.login();
+  const c = manifest.candidates.find((c) => c.id === "character:tiger");
+  expect(c).toBeDefined();
+  const settings = {
+    drawOffsetY: 6,
+    sortOffsetY: 0,
+    offsetX: 0,
+    offsetY: 0,
+    width: 11,
+    depth: 6,
+    physicalHeight: 23,
+    speed: 24,
+    fps: 5,
+  };
+  const e = {
+    id: "test-character-approval",
+    type: "character",
+    candidateId: c?.id,
+    fingerprint: c?.fingerprint,
+    verdict: "approved",
+    note: "Feet and movement checked",
+    settings,
+  };
+  expect(
+    (await f.event({ ...e, id: "invalid-geometry", settings: { ...settings, width: -1 } })).status,
+  ).toBe(400);
+  expect((await f.event({ ...e, id: "stale-character", fingerprint: "0".repeat(64) })).status).toBe(
+    409,
+  );
+  expect((await f.event({ ...e, id: "empty-report", verdict: "changes", note: "" })).status).toBe(
+    400,
+  );
+  expect((await f.event(e)).status).toBe(200);
+  f.restart();
+  expect((await f.event(e)).status).toBe(200);
+  const rows = await (await f.request("/tilefun/api/art-notes")).json();
+  const saved = rows.filter((n: { id: string }) => n.id === e.id);
+  expect(saved).toHaveLength(1);
+  expect(saved[0].characterAnnotation.settings).toEqual(settings);
+  const revision = saved[0].characterAnnotation.settingsFingerprint;
+  expect(revision).toMatch(/^[a-f0-9]{64}$/);
+  let inbox = await (await f.request("/tilefun/api/workshop/inbox")).json();
+  expect(inbox.candidates.find((v: { id: string }) => v.id === c?.id)?.state).toBe("approved");
+  expect(
+    (
+      await f.event({
+        ...e,
+        id: "changed-character-settings",
+        verdict: "note",
+        settings: { ...settings, width: 12 },
+      })
+    ).status,
+  ).toBe(200);
+  inbox = await (await f.request("/tilefun/api/workshop/inbox")).json();
+  expect(inbox.candidates.find((v: { id: string }) => v.id === c?.id)?.state).toBe("unchecked");
+  const edited = await (await f.request("/tilefun/api/art-notes")).json();
+  expect(
+    edited.find((n: { id: string }) => n.id === "changed-character-settings").characterAnnotation
+      .settingsFingerprint,
+  ).not.toBe(revision);
+  expect((await f.event({ ...e, settings: { ...settings, width: 12 } })).status).toBe(409);
+});

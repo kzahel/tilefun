@@ -1,0 +1,158 @@
+[
+  {
+    "id": "tiger",
+    "name": "Tiger",
+    "sheetKey": "character-tiger-v1",
+    "image": "demos/blender-tiger/tiger-finished-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 10,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "d3b16370cf0b5c7e6e1f6acf9a3cc34f09ed9bc899da8755b8e83aeb17b8b316",
+      "sourceFingerprint": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a",
+      "settingsFingerprint": "534c6840a763cee2a490d6f4d8684d2be5231a12a83404c38f0b57fa0aa12dc9",
+      "approvedAt": "2026-10-03T11:03:11.747Z"
+    }
+  },
+  {
+    "id": "cat",
+    "name": "Tuxedo Cat",
+    "sheetKey": "character-cat-v1",
+    "image": "demos/pixel-characters/cat-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 10,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "66f4151e437f57fffd8f354560e896378471c64563421d8d899a316a260d6f4f",
+      "sourceFingerprint": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99",
+      "settingsFingerprint": "4fb8274ae7ba2694354e409f33757c6c2eac3f2511fcb378b43260a0c75ae822",
+      "approvedAt": "2026-10-03T11:03:22.221Z"
+    }
+  },
+  {
+    "id": "dog",
+    "name": "Floppy Dog",
+    "sheetKey": "character-dog-v1",
+    "image": "demos/pixel-characters/dog-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 10,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "5dde3dd193ac8713cd733b1642452a222dca54e824ea36476fe9ab04e3e7bc80",
+      "sourceFingerprint": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200",
+      "settingsFingerprint": "61b1a3e2052d90b7cc51a62295153a2c7bf26219b155d56fba75195a34505869",
+      "approvedAt": "2026-10-03T11:03:31.619Z"
+    }
+  },
+  {
+    "id": "person",
+    "name": "Trail Explorer",
+    "sheetKey": "character-person-v1",
+    "image": "demos/pixel-characters/person-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 10,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "12f288a57ab0360a51830ca7279da171cd02b722a8310e343175721b2c984439",
+      "sourceFingerprint": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+      "settingsFingerprint": "0e190af546149af238f12829fbe3f08570fd528703cc0690dc0a5d5aad37c932",
+      "approvedAt": "2026-10-03T11:03:36.493Z"
+    }
+  },
+  {
+    "id": "squirrel",
+    "name": "Russet Squirrel",
+    "sheetKey": "character-squirrel-v1",
+    "image": "demos/pixel-characters/squirrel-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 10,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "a771e7695c6d3fc08ce8f029e5885de423a016eae4719229989a8ba390d0c4f5",
+      "sourceFingerprint": "03d5f92be37d50b8fd1c1a1f40171bf491085bc2d750b32d01f3165b46eb8c9d",
+      "settingsFingerprint": "72688af8a16ecd7c2dc09e3e3662853efc023727e216e991de15636aef92c726",
+      "approvedAt": "2026-10-03T11:03:46.170Z"
+    }
+  },
+  {
+    "id": "bear",
+    "name": "Brown Bear",
+    "sheetKey": "character-bear-v1",
+    "image": "demos/pixel-characters/bear-32.png",
+    "frameSize": 32,
+    "frameCount": 4,
+    "playerEligible": true,
+    "defaults": {
+      "drawOffsetY": 5,
+      "sortOffsetY": 0,
+      "offsetX": 0,
+      "offsetY": 0,
+      "width": 14,
+      "depth": 6,
+      "physicalHeight": 24,
+      "speed": 20,
+      "fps": 4
+    },
+    "approval": {
+      "candidateFingerprint": "c0ab5fa731c7672ad3dd625836a9dda23b00077223640bbcf029b94af0963a30",
+      "sourceFingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
+      "settingsFingerprint": "bd124f1e29c213490d5fe97af6f79b3a4bf2fa53714d3406e9338d22f68ba6c9",
+      "approvedAt": "2026-10-03T11:03:54.332Z"
+    }
+  }
+]

@@ -1,4 +1,5 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { loadImage } from "./AssetLoader.js";
@@ -14,6 +15,12 @@ export interface GameAssets {
 
 /** Sprite asset manifest: key → { path, width, height }. */
 export const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
+  ...PROMOTED_CHARACTERS.map((c) => ({
+    key: c.sheetKey,
+    path: c.image,
+    w: c.frameSize,
+    h: c.frameSize,
+  })),
   ...VEHICLE_MODELS.map((id) => ({
     key: `vehicle-v1:${id}`,
     path: `assets/vehicles/${id}-v1.png`,

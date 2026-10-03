@@ -412,6 +412,9 @@ export class PlayerPredictor {
 
     // Copy server-authoritative state that we don't predict
     this.predicted.id = serverPlayer.id;
+    if (serverPlayer.playerModel !== undefined)
+      this.predicted.playerModel = serverPlayer.playerModel;
+    else delete this.predicted.playerModel;
     this.predicted.collider = serverPlayer.collider;
     // Sprite: copy structural fields (sheet, dimensions) from server, but
     // preserve predicted animation state (moving, direction, frameRow,
@@ -795,6 +798,7 @@ export class PlayerPredictor {
       collider: serverPlayer.collider ? { ...serverPlayer.collider } : null,
       wanderAI: serverPlayer.wanderAI ? { ...serverPlayer.wanderAI } : null,
     };
+    if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
     if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;
     if (serverPlayer.jumpVZ !== undefined) clone.jumpVZ = serverPlayer.jumpVZ;

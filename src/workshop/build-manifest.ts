@@ -3,6 +3,7 @@ import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
@@ -25,6 +26,7 @@ try {
   for (const c of TREE_PATTERN_CASES)
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
   candidates.push(...(await buildInteriorCandidates()));
+  candidates.push(...(await buildCharacterCandidates(catalog)));
   candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));
   Object.assign(window, {
     workshopManifest: {

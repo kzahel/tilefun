@@ -24,6 +24,10 @@ if (args[0] === "set-status") {
   else {
     const catalog = await store.catalog();
     for (const row of selected) {
+      if (row.characterAnnotation)
+        console.log(
+          `Character ${row.characterAnnotation.candidateId}: ${row.characterAnnotation.verdict}\nsettings=${JSON.stringify(row.characterAnnotation.settings)}\nrevision=${row.characterAnnotation.settingsFingerprint}`,
+        );
       if (row.assetAnnotation)
         console.log(
           `Asset ${row.assetAnnotation.assetId}: ${row.assetAnnotation.verdict}\nmetadata=${JSON.stringify(row.assetAnnotation.metadata)}\nrevision=${row.assetAnnotation.metadataFingerprint}`,

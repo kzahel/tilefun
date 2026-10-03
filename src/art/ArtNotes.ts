@@ -1,4 +1,8 @@
 import {
+  type CharacterAnnotation,
+  parseCharacterAnnotation,
+} from "../characters/CharacterReview.js";
+import {
   type AssetAnnotation,
   parseAssetAnnotation,
   parseSceneAnnotation,
@@ -43,6 +47,7 @@ export interface BuildingVerdict {
   createdAt: string;
 }
 export interface ArtNote {
+  characterAnnotation?: CharacterAnnotation;
   assetAnnotation?: AssetAnnotation;
   sceneAnnotation?: SceneAnnotation;
   id: string;
@@ -257,6 +262,9 @@ export function parseArtNote(value: unknown, catalog: ArtCatalog): ArtNote {
     createdAt: v.createdAt,
     ...(review === undefined ? {} : { buildingReview: review }),
     ...(verdict === undefined ? {} : { buildingVerdict: verdict }),
+    ...(v.characterAnnotation === undefined
+      ? {}
+      : { characterAnnotation: parseCharacterAnnotation(v.characterAnnotation) }),
     ...(v.assetAnnotation === undefined
       ? {}
       : { assetAnnotation: parseAssetAnnotation(v.assetAnnotation, rect) }),
@@ -278,6 +286,7 @@ export function sameArtTarget(a: ArtNote, b: ArtNote): boolean {
     JSON.stringify(a.rect) === JSON.stringify(b.rect) &&
     JSON.stringify(a.buildingReview) === JSON.stringify(b.buildingReview) &&
     JSON.stringify(a.buildingVerdict) === JSON.stringify(b.buildingVerdict) &&
+    JSON.stringify(a.characterAnnotation) === JSON.stringify(b.characterAnnotation) &&
     JSON.stringify(a.assetAnnotation) === JSON.stringify(b.assetAnnotation) &&
     JSON.stringify(a.sceneAnnotation) === JSON.stringify(b.sceneAnnotation)
   );

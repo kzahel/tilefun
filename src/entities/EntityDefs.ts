@@ -1,3 +1,4 @@
+import { CHARACTER_ENTITY_DEFS } from "../characters/PromotedCharacters.js";
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
@@ -54,6 +55,8 @@ export interface EntityDef {
  * computes animation locally from `moving`, `frameDuration`, and `frameCount`.
  */
 export interface SpriteState {
+  /** Cosmetic player model; absent means the classic player. */
+  model?: string;
   direction: Direction;
   moving: boolean;
   frameRow: number;
@@ -135,6 +138,7 @@ function wormDef(n: number): EntityDef {
 // ---- ENTITY_DEFS registry ----
 
 export const ENTITY_DEFS: Record<string, EntityDef> = {
+  ...CHARACTER_ENTITY_DEFS,
   ...VEHICLE_DEFS,
   player: {
     sprite: {

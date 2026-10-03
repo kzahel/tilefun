@@ -57,6 +57,18 @@ with the original IDs. Drafts and room pins survive navigation/reload. Browser
 storage failures show a warning and export action; keep the tab open until saves
 finish. Unsynced drafts/outboxes belong to that browser origin, not Git.
 
+## Character lab
+
+[Character lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/character-lab)
+lets you walk the six new 32px characters with arrows/WASD or touch buttons,
+jump, cycle poses, and tune vertical alignment, collision bounds, height,
+depth sorting, speed and animation. Test the wall, narrow gap, stairs and
+clearance beam using production rendering/collision. Save settings, approve the
+exact proposal, or report changes; browser drafts and offline saves are retained.
+All six approved characters now appear in Entities and the main-menu Character
+picker. Workshop drafts do not change the pinned gameplay settings. See the
+[character topic](topics/characters.md) for contracts and follow-up work.
+
 ## Vehicles
 
 [Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
@@ -250,6 +262,11 @@ npm run workshop:manifest
 npm run build
 ```
 
+Before publishing, manifest generation also compares character and vehicle
+fingerprints in normal Chromium at retina scale with the headless-shell results.
+It rejects mismatches or inputs changed during generation. This catches false
+appearance errors that a source-digest check alone cannot detect.
+
 Manifest generation needs the project Playwright Chromium (`npx playwright
 install chromium`) and committed runtime art, not the ignored original packs.
 Build and API checks detect changed inputs. A stale registry disables judgments
@@ -278,6 +295,9 @@ add two authenticated variants alongside source/review/reply:
 - `asset`: source rectangle/fingerprint, catalog revision, exact metadata,
   verdict (`note`, `approved`, `changes`) and comment. Saved as an `ArtNote`
   `assetAnnotation`, with immutable original decision time and metadata hash.
+- `character`: registered character/source identity, exact validated movement and
+  geometry settings, verdict and feedback; stored as an ArtNote `characterAnnotation`
+  with a server-derived settings hash and original decision time.
 - `scene`: whole-neighborhood candidate/fingerprint, world-pixel rectangle,
   feature IDs, up to twelve exact asset suggestions and a comment. The server
   derives generation, seed and world bounds from the registered scene and

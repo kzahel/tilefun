@@ -1,0 +1,75 @@
+.character-page {
+  min-width: 0;
+}
+.character-page > label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.character-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+.character-stage,
+.character-settings {
+  min-width: 0;
+}
+.character-scroll {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--line, #ccc);
+  border-radius: 10px;
+  background: #d4dfcc;
+}
+.character-scroll canvas {
+  display: block;
+  image-rendering: pixelated;
+  max-width: none;
+}
+.character-scroll canvas:focus {
+  outline: 3px solid #5189d4;
+  outline-offset: -3px;
+}
+.character-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.character-controls button {
+  min-height: 44px;
+}
+.character-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.character-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.character-settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.character-settings input,
+.character-settings textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.character-settings textarea {
+  min-height: 90px;
+}
+@media (max-width: 900px) {
+  .character-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

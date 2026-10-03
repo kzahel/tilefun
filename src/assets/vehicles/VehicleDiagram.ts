@@ -1,3 +1,4 @@
+import { reviewContext2D } from "../../art/reviewCanvas.js";
 import type { OutdoorAsset, OutdoorMetadata } from "../outdoor/OutdoorCatalog.js";
 
 /** Deterministic source/ground/height diagram shared by manifest and review UI. */
@@ -11,11 +12,7 @@ export function drawVehicleDiagram(
     h = asset.rect[3];
   canvas.width = 640;
   canvas.height = 420;
-  // Use the same CPU raster path for the manifest, fresh verification canvases
-  // and visible review. GPU antialiasing otherwise changes the fingerprint in
-  // normal Chromium, even though the source art and geometry are unchanged.
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) throw new Error("Canvas unavailable");
+  const ctx = reviewContext2D(canvas);
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = "#edf1e9";
   ctx.fillRect(0, 0, canvas.width, canvas.height);

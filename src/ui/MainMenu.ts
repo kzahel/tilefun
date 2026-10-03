@@ -14,6 +14,7 @@ import type { WorldType } from "../persistence/WorldRegistry.js";
 import type { RoomDirectory, RoomInfo } from "../rooms/RoomDirectory.js";
 import type { RealmInfo } from "../shared/protocol.js";
 import { createHostingButtons, createQRCode, type HostingInfo } from "./HostingBanner.js";
+import { PlayerModelPicker } from "./PlayerModelPicker.js";
 import { relativeTime } from "./relativeTime.js";
 
 const OVERLAY_STYLE = `
@@ -44,6 +45,7 @@ const BTN_STYLE = `
 `;
 
 export class MainMenu {
+  readonly characterPicker = new PlayerModelPicker();
   private overlay: HTMLDivElement;
   private listEl: HTMLDivElement;
   private worldCount = 0;
@@ -93,6 +95,7 @@ export class MainMenu {
     toolsLink.style.cssText = "color: #d8bd87; font: 12px monospace; margin-bottom: 20px;";
     this.overlay.appendChild(toolsLink);
 
+    this.overlay.appendChild(this.characterPicker.element);
     this.listEl = document.createElement("div");
     this.listEl.style.cssText =
       "display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; width: 320px;";
@@ -360,6 +363,7 @@ export class MainMenu {
   }
 
   show(realms: RealmInfo[]): void {
+    this.characterPicker.setVisible(true);
     this.worldCount = realms.length;
     this.currentRealms = realms;
     this.playerCountBadges.clear();
@@ -403,6 +407,7 @@ export class MainMenu {
   }
 
   hide(): void {
+    this.characterPicker.setVisible(false);
     this.overlay.style.display = "none";
   }
 

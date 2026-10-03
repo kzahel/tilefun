@@ -9,6 +9,7 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { applyPlayerModel, normalizePlayerModel } from "../characters/PlayerModels.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
 import { registerClientCommands } from "../console/clientCommands.js";
@@ -75,10 +76,11 @@ import { RequestBroker } from "./RequestBroker.js";
 
 export interface GameClientOptions {
   mode?: "local" | "serialized";
-  profile?: { id: string; name: string };
+  profile?: { id: string; name: string; playerModel?: string };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
+    updateProfile?(id: string, updates: { playerModel: string }): Promise<void>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
   /** When true, auto-join the first active realm instead of showing the realm list. */
@@ -150,7 +152,7 @@ export class GameClient {
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
   /** Player profile (display name, id). */
-  private profile: { id: string; name: string } | null = null;
+  private profile: { id: string; name: string; playerModel?: string } | null = null;
   /** Profile store for listing/creating profiles (Switch Player). */
   private profileStore: GameClientOptions["profileStore"];
   /** The client ID used for the server connection (for debug display). */
@@ -284,6 +286,7 @@ export class GameClient {
           type: "identify",
           displayName: this.profile.name,
           profileId: this.profile.id,
+          playerModel: normalizePlayerModel(this.profile.playerModel),
         });
       }
 
@@ -565,6 +568,27 @@ export class GameClient {
       this.audioManager.preload(buildFootstepManifest()),
     ]);
     this.sheets = assets.sheets;
+    this.mainMenu.characterPicker.setAssets(this.sheets, this.profile?.playerModel);
+    this.mainMenu.characterPicker.onSelect = async (model) => {
+      const previous = normalizePlayerModel(this.profile?.playerModel);
+      // Persist before acknowledging the UI; restore the preference if authority rejects it.
+      if (this.profile && this.profileStore?.updateProfile)
+        await this.profileStore.updateProfile(this.profile.id, { playerModel: model });
+      try {
+        await this.gcSendRequest({
+          type: "set-player-model",
+          requestId: this.nextRequestId++,
+          model,
+        });
+      } catch (error) {
+        if (this.profile && this.profileStore?.updateProfile)
+          await this.profileStore.updateProfile(this.profile.id, { playerModel: previous });
+        throw error;
+      }
+      if (this.profile) this.profile.playerModel = model;
+      // The menu pauses replica application; reflect the accepted appearance immediately.
+      applyPlayerModel(this.stateView.playerEntity, model);
+    };
     this.tileRenderer.setBlendSheets(assets.blendSheets, blendGraph);
     this.tileRenderer.setRoadSheets(this.sheets);
     this.tileRenderer.setVariants(assets.variants);
@@ -810,6 +834,7 @@ export class GameClient {
     this.mapButton?.remove();
     this.actions.detach();
     this.consoleUI.destroy();
+    this.mainMenu.characterPicker.destroy();
   }
 
   // ---- Actions ----

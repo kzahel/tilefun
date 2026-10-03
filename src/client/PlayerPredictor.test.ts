@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { applyPlayerModel } from "../characters/PlayerModels.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
@@ -158,4 +159,24 @@ describe("PlayerPredictor mount wz tracking", () => {
     expect(predictor.mount).toBeNull();
     expect(predictor.player?.wz).toBe(0);
   });
+});
+
+it("keeps model identity and sprite structure through prediction resets and reconciliation", () => {
+  const server = createPlayer(0, 0);
+  server.id = 1;
+  const predictor = new PlayerPredictor();
+  const world = new World(new FlatStrategy());
+  applyPlayerModel(server, "character-bear-v1");
+  predictor.reset(server);
+  expect(predictor.player?.playerModel).toBe("character-bear-v1");
+  expect(predictor.player?.sprite?.drawOffsetY).toBe(5);
+  applyPlayerModel(server, "person1");
+  predictor.reconcile(server, 0, world, [], []);
+  expect(predictor.player?.playerModel).toBe("person1");
+  expect(predictor.player?.sprite?.frameCount).toBe(6);
+  expect(predictor.player?.collider).toEqual(createPlayer(0, 0).collider);
+  applyPlayerModel(server, "player");
+  predictor.reconcile(server, 0, world, [], []);
+  expect(predictor.player?.playerModel).toBeUndefined();
+  expect(predictor.player?.sprite?.sheetKey).toBe("player");
 });

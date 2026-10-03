@@ -27,6 +27,7 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
 const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
+const CharactersPage = lazy(() => import("./CharactersPage.js"));
 const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
@@ -238,6 +239,7 @@ export function App() {
               "outdoor",
               "traffic",
               "vehicles",
+              "character-lab",
               "art",
               "buildings",
               "roads",
@@ -257,6 +259,7 @@ export function App() {
                 "patterns",
                 "traffic",
                 "vehicles",
+                "character-lab",
                 "buildings",
                 "roads",
                 "districts",
@@ -934,6 +937,12 @@ function ToolPage() {
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
   if (tool.id === "patterns") return <PatternPage />;
+  if (tool.id === "character-lab")
+    return (
+      <AuthGate>
+        <CharactersPage />
+      </AuthGate>
+    );
   if (tool.id === "traffic") return <TrafficPage />;
   if (tool.id === "vehicles")
     return (

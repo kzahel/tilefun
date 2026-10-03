@@ -1,8 +1,13 @@
 # Pixel character roster
 
+The authored 32px roster and tiger now have a [Workshop Character lab](topics/characters.md)
+for movement, grounding and collision review. All six approved 32px models are
+available in Entities and the main-menu player picker; the original gallery and
+source art below are unchanged.
+
 The [Pixel Character Gallery](https://tilefun.graehlarts.com/tilefun/demos/pixel-characters/)
 is a standalone sprite study, discoverable from the root tool directory. It
-shares no runtime art with the game and leaves the Tiger Walk Demo untouched.
+now supplies the exact approved 32px art to the game and leaves the Tiger Walk Demo untouched.
 The final five-character roster is complete: cat, dog, person, squirrel and bear.
 Only completed exports appear in its generated registry. Tuxedo Cat remains the
 explicit gallery default, independent of source filename sorting.

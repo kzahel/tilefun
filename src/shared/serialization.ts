@@ -1,3 +1,4 @@
+import { applyPlayerModel } from "../characters/PlayerModels.js";
 import type { Entity } from "../entities/Entity.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
@@ -20,6 +21,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
       moving: e.sprite.moving,
       frameRow: e.sprite.frameRow,
     };
+    if (e.type === "player" && e.playerModel) spriteState.model = e.playerModel;
     if (e.sprite.flipX !== undefined) spriteState.flipX = e.sprite.flipX;
     // Only include frameDuration when it differs from the def
     if (def?.sprite && e.sprite.frameDuration !== def.sprite.frameDuration) {
@@ -133,6 +135,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.parentId !== undefined) result.parentId = s.parentId;
   if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
   if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
+  applyPlayerModel(result, s.spriteState?.model);
   applyVehicleFacing(result);
   return result;
 }

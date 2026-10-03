@@ -1,4 +1,5 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
+import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { RoadType } from "../road/RoadType.js";
 
 export type EditorTab =
@@ -64,6 +65,7 @@ export interface EntityPaletteEntry {
 }
 
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
+  ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: "chicken", label: "Chicken", color: "#f0c040" },
   { type: "cow", label: "Cow", color: "#d4a880" },
   { type: "pigeon", label: "Pigeon", color: "#8888cc" },

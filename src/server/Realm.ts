@@ -1,5 +1,6 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
+import { applyPlayerModel } from "../characters/PlayerModels.js";
 import {
   CHUNK_SIZE_PX,
   JUMP_VELOCITY,
@@ -254,6 +255,7 @@ export class Realm {
     const camZoom = saved?.cameraZoom ?? this.lastLoadedCamera.cameraZoom;
 
     const player = createPlayer(spawnX, spawnY);
+    applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
     const ride = saved?.roofRide;
     if (

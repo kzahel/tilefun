@@ -11,6 +11,14 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     mode: "source",
   },
   {
+    id: "character-lab",
+    name: "Character lab",
+    description:
+      "Walk the six new characters. Tune feet, collision bounds, height, depth and animation; save exact review settings.",
+    url: "workshop.html#/tool/character-lab",
+    mode: "review",
+  },
+  {
     id: "vehicles",
     name: "Vehicles",
     description:
@@ -141,6 +149,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "character-lab",
+    name: "Character movement & geometry",
+    description:
+      "Six authored 32px character proposals. Validate motion, alignment and physical geometry before gameplay integration.",
+    toolId: "character-lab",
+  },
   {
     id: "vehicles",
     name: "Vehicle geometry",

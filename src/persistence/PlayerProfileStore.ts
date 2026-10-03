@@ -5,6 +5,7 @@ export interface PlayerProfile {
   name: string;
   pin: string | null;
   createdAt: number;
+  playerModel?: string;
 }
 
 const PROFILE_DB = "tilefun-profiles";
@@ -87,7 +88,7 @@ export class PlayerProfileStore {
 
   async updateProfile(
     id: string,
-    updates: Partial<Pick<PlayerProfile, "name" | "pin">>,
+    updates: Partial<Pick<PlayerProfile, "name" | "pin" | "playerModel">>,
   ): Promise<void> {
     const db = this.db;
     if (!db) return;
@@ -100,6 +101,7 @@ export class PlayerProfileStore {
         if (profile) {
           if (updates.name !== undefined) profile.name = updates.name;
           if (updates.pin !== undefined) profile.pin = updates.pin;
+          if (updates.playerModel !== undefined) profile.playerModel = updates.playerModel;
           store.put(profile);
         }
       };

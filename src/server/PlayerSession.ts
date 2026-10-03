@@ -77,6 +77,7 @@ export class PlayerSession {
 
   /** Stable profile ID for player data persistence (separate from clientId). */
   profileId: string | null = null;
+  playerModel = "player";
 
   /** Timestamp (ms) when this session was created. */
   connectedAt = Date.now();

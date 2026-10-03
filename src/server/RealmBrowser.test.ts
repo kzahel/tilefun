@@ -1338,3 +1338,64 @@ describe("durable player location", () => {
     }
   });
 });
+
+it("replicates model changes to peers and keeps them across realm travel while rejecting invalid models", async () => {
+  const { server, transport, registry } = await createTestSetup();
+  server.broadcasting = true;
+  try {
+    transport.connect("local");
+    await vi.waitFor(() => expect(server.getLocalSession().realmId).toBeTruthy());
+    const session = server.getLocalSession();
+    const collider = structuredClone(session.player.collider);
+    if (!session.realmId) throw new Error("Missing realm");
+    transport.connect("viewer");
+    transport.clientSend("viewer", {
+      type: "join-realm",
+      requestId: 91,
+      worldId: session.realmId,
+    });
+    await vi.waitFor(() =>
+      expect(transport.messagesOfType("viewer", "realm-joined")).toHaveLength(1),
+    );
+    transport.clientSend("viewer", {
+      type: "visible-range",
+      ...session.visibleRange,
+    });
+    server.tick(1 / 60);
+    transport.clientSend("local", {
+      type: "set-player-model",
+      requestId: 92,
+      model: "character-person-v1",
+    });
+    expect(transport.messagesOfType("local", "player-model-set")[0]?.model).toBe(
+      "character-person-v1",
+    );
+    expect(session.player.collider).toEqual(collider);
+    server.tick(1 / 60);
+    expect(
+      transport
+        .messagesOfType("viewer", "frame")
+        .some(
+          (f) =>
+            f.entityDeltas?.some(
+              (d) => d.id === session.player.id && d.spriteState?.model === "character-person-v1",
+            ) ||
+            f.entityBaselines?.some(
+              (d) => d.id === session.player.id && d.spriteState?.model === "character-person-v1",
+            ),
+        ),
+    ).toBe(true);
+    const other = await registry.createWorld("Model travel", "flat");
+    transport.clientSend("local", { type: "join-realm", requestId: 93, worldId: other.id });
+    await vi.waitFor(() => expect(session.realmId).toBe(other.id));
+    expect(session.player.sprite?.sheetKey).toBe("character-person-v1");
+    transport.clientSend("local", { type: "set-player-model", requestId: 94, model: "campfire" });
+    expect(transport.messagesOfType("local", "request-error").at(-1)?.requestId).toBe(94);
+    expect(session.player.sprite?.sheetKey).toBe("character-person-v1");
+    transport.clientSend("local", { type: "set-player-model", requestId: 95, model: "player" });
+    expect(session.player.sprite?.sheetKey).toBe("player");
+    expect(session.player.collider).toEqual(collider);
+  } finally {
+    server.destroy();
+  }
+});

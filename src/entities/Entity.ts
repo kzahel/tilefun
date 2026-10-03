@@ -96,6 +96,8 @@ export interface WanderAIComponent {
 }
 
 export interface Entity {
+  /** Cosmetic only; player physics always use the player definition. */
+  playerModel?: string;
   /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */
   proceduralId?: string;
   routeAI?: {

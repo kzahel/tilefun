@@ -75,6 +75,14 @@ regenerate them with `npm run assets:app-icons` when it changes.
 Launcher checks cover both Vite dev serving (used by the live site) and production
 preview; public-asset links let Vite apply the deployment prefix exactly once.
 
+## Characters
+
+Open **Edit → Entities** to place Tiger, Tuxedo Cat, Floppy Dog, Trail Explorer,
+Russet Squirrel and Brown Bear. They wander using their approved Workshop settings.
+Choose **Character** in the main menu for animated player previews; your choice
+is remembered per browser profile and visible to co-op players. Model choice
+keeps the same player movement and collision rules.
+
 ## Play ideas
 
 Open the game menu and choose **💡 Idea**. Hold the big button to speak, allowing

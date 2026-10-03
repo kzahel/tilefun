@@ -63,6 +63,8 @@ export default function ReviewPage() {
         <Link to="/">Return to inbox →</Link>
       </section>
     );
+  if (candidate.kind === "character")
+    return <Navigate to={`/tool/character-lab?character=${candidate.characterId}`} replace />;
   if (candidate.kind === "vehicle")
     return <Navigate to={`/tool/vehicles?view=${encodeURIComponent(candidate.id)}`} replace />;
   if (candidate.kind === "motion")

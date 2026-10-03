@@ -1,3 +1,4 @@
+import { applyPlayerModel } from "../characters/PlayerModels.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
  * Entity delta compression — diff and apply functions for per-entity
@@ -96,7 +97,8 @@ function spriteStatesEqual(a: SpriteState | null, b: SpriteState | null): boolea
     a.moving === b.moving &&
     a.frameRow === b.frameRow &&
     a.flipX === b.flipX &&
-    a.frameDuration === b.frameDuration
+    a.frameDuration === b.frameDuration &&
+    a.model === b.model
   );
 }
 
@@ -218,6 +220,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
     }
   }
 
+  if (delta.spriteState) applyPlayerModel(entity, delta.spriteState.model);
   applyVehicleFacing(entity);
 
   if (delta.wanderAIState !== undefined) {

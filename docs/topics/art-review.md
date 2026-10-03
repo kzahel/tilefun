@@ -30,6 +30,16 @@ full Chromium GPU rendering for district fingerprint parity.
 After render/recipe/input changes run `npm run art:catalog` then
 `npm run workshop:manifest`; build checks both. Do not synthesize approvals.
 
+Exact canvas fingerprints must use `reviewContext2D` from the **first** context
+acquisition, including intermediate sprite canvases. Default GPU and CPU canvas
+rasterization can disagree despite identical source art; a current manifest digest
+does not prove browser parity. Keep platform-dependent text out of hashed art.
+Manifest generation compares fresh character/vehicle identities in headless-shell
+and normal Chromium at retina scale before writing, and rejects concurrent input
+changes. New review kinds need equivalent normal-browser verification in addition
+to ordinary headless tests. A rebuilt manifest alone cannot fix nondeterministic
+rendering.
+
 The art workbench is at `/tilefun/art-workbench.html`. See
 [art workbench guide](../art-workbench.md) for source-use inventory coverage and the shared note
 inbox. Read pending art requests with `npm run art:notes`; notes persist in
@@ -66,6 +76,14 @@ never interpret their compatibility source pointer as the scene location.
 The [vehicle topic](vehicles.md) owns the registered 180-view geometry batch,
 editable ground bounds/height, exact approvals and proposed traffic follow-up.
 Open [Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles).
+
+## Characters
+
+The [character topic](characters.md) owns six registered movement/geometry
+candidates, live tuning and exact shared settings reviews in
+[Character lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/character-lab).
+The six human-approved source/settings snapshots are promoted to Entities and
+the player picker; future Workshop drafts remain separate from gameplay.
 
 ## Next work
 

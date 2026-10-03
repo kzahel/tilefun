@@ -144,7 +144,8 @@ export type ClientMessage =
       brushMode: string;
     }
   | { type: "throw-ball"; dirX: number; dirY: number; force: number }
-  | { type: "identify"; displayName: string; profileId?: string }
+  | { type: "identify"; displayName: string; profileId?: string; playerModel?: string }
+  | { type: "set-player-model"; requestId: number; model: string }
   | { type: "list-realms"; requestId: number }
   | { type: "get-world-map"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival; resume?: boolean }
@@ -361,5 +362,6 @@ export type ServerMessage =
       cameraZoom: number;
     }
   | { type: "realm-left"; requestId: number }
+  | { type: "player-model-set"; requestId: number; model: string }
   | { type: "realm-player-count"; worldId: string; count: number }
   | { type: "chat"; sender: string; text: string };

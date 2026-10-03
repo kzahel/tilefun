@@ -10,6 +10,7 @@
  * All multi-byte values are little-endian. All offsets measured in bytes.
  */
 
+import { PLAYER_MODELS } from "../characters/PlayerModels.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import type { EntityDelta } from "./entityDelta.js";
 import { ENTITY_TYPE_LIST, ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
@@ -105,8 +106,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 // ---- FrameMessage binary codec ----
 
 const FRAME_HEADER_SIZE = 19; // 1 tag + 4 serverTick + 4 lastInput + 4 playerEntity + 2+2+2 counts
-const MAX_BASELINE_SIZE = 15 + 8 + 4 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~60 bytes
-const MAX_DELTA_SIZE = 8 + 8 + 4 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~55 bytes
+const MAX_BASELINE_SIZE = 15 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~60 bytes
+const MAX_DELTA_SIZE = 8 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~55 bytes
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -701,6 +702,7 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
 // Byte 0: direction (bits 0-1) | moving (bit 2) | flipX (bit 3) | hasFrameDuration (bit 4)
 // Byte 1: frameRow (u8)
 // Optional bytes 2-3: frameDuration (u16, only if hasFrameDuration)
+// Flag bit 5: model index (u8), following frameDuration when present.
 
 function writeSpriteState(view: DataView, off: number, ss: SpriteState): number {
   let flags = (ss.direction as number) & 0x03;
@@ -708,6 +710,7 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
   if (ss.flipX) flags |= 0x08;
   const hasFrameDuration = ss.frameDuration !== undefined;
   if (hasFrameDuration) flags |= 0x10;
+  if (ss.model !== undefined) flags |= 0x20;
 
   view.setUint8(off, flags);
   off += 1;
@@ -716,6 +719,11 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
   if (hasFrameDuration) {
     view.setUint16(off, ss.frameDuration!, true);
     off += 2;
+  }
+  if (ss.model !== undefined) {
+    const model = PLAYER_MODELS.findIndex((m) => m.id === ss.model);
+    if (model < 0) throw new Error("Unknown player model");
+    view.setUint8(off++, model);
   }
   return off;
 }
@@ -735,6 +743,11 @@ function readSpriteState(view: DataView, off: number): [SpriteState, number] {
   if (flags & 0x10) {
     ss.frameDuration = view.getUint16(off, true);
     off += 2;
+  }
+  if (flags & 0x20) {
+    const model = PLAYER_MODELS[view.getUint8(off++)];
+    if (!model) throw new Error("Unknown player model");
+    ss.model = model.id;
   }
   return [ss, off];
 }

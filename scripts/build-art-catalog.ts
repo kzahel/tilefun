@@ -13,6 +13,7 @@ import { registerTileVariants, SPRITE_MANIFEST } from "../src/assets/GameAssets.
 import { VEHICLE_VIEWS } from "../src/assets/vehicles/VehicleCatalog.js";
 import { BlendGraph } from "../src/autotile/BlendGraph.js";
 import { ALL_TERRAIN_IDS, TerrainId } from "../src/autotile/TerrainId.js";
+import { CHARACTERS } from "../src/characters/CharacterCatalog.js";
 import { getPropSourceDefinitions } from "../src/entities/PropFactories.js";
 import { BUILDING_RECIPES } from "../src/generation/regional/BuildingRecipes.js";
 import { CITY_ARCHITECTURE_BUILDINGS } from "../src/generation/regional/CityArchitectureAssets.js";
@@ -103,6 +104,7 @@ const imageMap = new Map<string, string>([
   ["water", "assets/tilesets/water.png"],
   ...graph.allSheets.map((s) => [s.sheetKey, s.assetPath] as [string, string]),
   ...SPRITE_MANIFEST.map((s) => [s.key, s.path] as [string, string]),
+  ...CHARACTERS.map((c) => [c.sheetKey, c.image] as [string, string]),
 ]);
 // Browse every extracted autotile, including those not currently registered with BlendGraph.
 for (const path of files("public/assets/tilesets").filter((p) => /me-autotile-\d+\.png$/.test(p))) {
@@ -128,6 +130,9 @@ const sheets: ArtSheet[] = [...imageMap].map(([id, image]) => {
     fingerprint: createHash("sha256").update(bytes).digest("hex"),
     source: "public/assets/SOURCES.md",
   };
+  if (id.startsWith("character-"))
+    sheet.source =
+      "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)";
   if (id === "me-complete")
     Object.assign(sheet, {
       source: "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
@@ -437,6 +442,12 @@ for (const sprite of SPRITE_MANIFEST) {
       ...(references.get(sprite.key) ?? []),
     ],
   );
+}
+for (const c of CHARACTERS) {
+  const sheet = required(sheets.find((s) => s.id === c.sheetKey));
+  add(`character:${c.id}`, c.sheetKey, [0, 0, sheet.width, sheet.height], c.name, "sprite", [
+    { system: "Workshop character candidate", source: "src/characters/CharacterCatalog.ts" },
+  ]);
 }
 const catalog: ArtCatalog = { version: 1, sheets, usages };
 const output = `${JSON.stringify(catalog, null, 2)}\n`;

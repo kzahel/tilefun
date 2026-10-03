@@ -19,6 +19,7 @@ import type {
   WorkshopThread,
 } from "../workshop/WorkshopTypes.js";
 import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
+import { characterAnnotation } from "./characterAnnotations.js";
 import { InteriorReviewStore, interiorReviewHandler } from "./interiorReviewPlugin.js";
 import { outdoorAnnotation } from "./outdoorAnnotations.js";
 import { PlayIdeasService } from "./playIdeas.js";
@@ -106,7 +107,7 @@ export class WorkshopService {
       typeof e !== "object" ||
       typeof e.id !== "string" ||
       !/^[a-zA-Z0-9-]{1,100}$/.test(e.id) ||
-      !["source", "review", "reply", "asset", "scene"].includes(e.type)
+      !["source", "review", "reply", "asset", "scene", "character"].includes(e.type)
     )
       throw new HttpError(400, "Invalid Workshop event");
     const operation = this.queue.then(async () => {
@@ -123,7 +124,16 @@ export class WorkshopService {
       const createdAt = new Date().toISOString(),
         command: Command = { event: e, createdAt, author: owner };
       const [art, interiors] = await Promise.all([this.art.records(), this.interiors.records()]);
-      if (e.type === "asset" || e.type === "scene") {
+      if (e.type === "character") {
+        const { manifest, current } = await this.manifest();
+        command.art = characterAnnotation(
+          e,
+          await this.art.catalog(),
+          manifest.candidates,
+          current,
+          createdAt,
+        );
+      } else if (e.type === "asset" || e.type === "scene") {
         const { manifest, current } = await this.manifest();
         command.art = await outdoorAnnotation(
           e,

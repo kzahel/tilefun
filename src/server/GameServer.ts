@@ -1,4 +1,9 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import {
+  applyPlayerModel,
+  isPlayerModel,
+  normalizePlayerModel,
+} from "../characters/PlayerModels.js";
 import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
@@ -1171,6 +1176,27 @@ export class GameServer {
       }
       case "identify":
         this.identify(session, msg.profileId, msg.displayName);
+        if (!msg.profileId || session.profileId === msg.profileId) {
+          session.playerModel = normalizePlayerModel(msg.playerModel);
+          if (session.player) applyPlayerModel(session.player, session.playerModel);
+        }
+        return;
+      case "set-player-model":
+        if (!isPlayerModel(msg.model)) {
+          this.transport.send(clientId, {
+            type: "request-error",
+            requestId: msg.requestId,
+            message: "Unknown player model.",
+          });
+          return;
+        }
+        session.playerModel = msg.model;
+        if (session.player) applyPlayerModel(session.player, msg.model);
+        this.transport.send(clientId, {
+          type: "player-model-set",
+          requestId: msg.requestId,
+          model: msg.model,
+        });
         return;
       case "flush":
         this.flush();

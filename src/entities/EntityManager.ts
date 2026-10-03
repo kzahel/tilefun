@@ -21,6 +21,7 @@ import type { Entity } from "./Entity.js";
 import { ENTITY_DEFS } from "./EntityDefs.js";
 import type { PropManager } from "./PropManager.js";
 import { SpatialHash } from "./SpatialHash.js";
+import { tickSpriteAnimation } from "./spriteAnimation.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
 /** Player speed multiplier while pushing an entity. */
@@ -317,20 +318,7 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of this.entities) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      const sprite = entity.sprite;
-      if (sprite && sprite.frameCount > 1) {
-        const entityDt = entityTickDts?.get(entity) ?? dt;
-        if (sprite.moving) {
-          sprite.animTimer += entityDt * 1000;
-          if (sprite.animTimer >= sprite.frameDuration) {
-            sprite.animTimer -= sprite.frameDuration;
-            sprite.frameCol = (sprite.frameCol + 1) % sprite.frameCount;
-          }
-        } else {
-          sprite.frameCol = 0;
-          sprite.animTimer = 0;
-        }
-      }
+      tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
     }
   }
 

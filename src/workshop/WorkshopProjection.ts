@@ -16,6 +16,28 @@ export function candidateSummary(
 ): CandidateSummary {
   if (c.excluded) return { ...c, state: "excluded" };
   if (!current) return { ...c, state: "unchecked" };
+  if (c.kind === "character") {
+    const row = latestArtNotes(art)
+      .filter((n) => n.characterAnnotation?.candidateId === c.id)
+      .sort((a, b) =>
+        (a.characterAnnotation?.createdAt ?? "").localeCompare(
+          b.characterAnnotation?.createdAt ?? "",
+        ),
+      )
+      .at(-1);
+    const a = row?.characterAnnotation;
+    return {
+      ...c,
+      state: !a
+        ? "unchecked"
+        : a.candidateFingerprint !== c.fingerprint || row?.fingerprint !== c.sourceFingerprint
+          ? "changed"
+          : a.verdict === "note"
+            ? "unchecked"
+            : a.verdict,
+      ...(a ? { lastDecision: a.createdAt } : {}),
+    };
+  }
   if (c.kind === "vehicle") {
     const row = latestArtNotes(art)
       .filter((n) => n.assetAnnotation?.candidateId === c.id)
@@ -83,6 +105,7 @@ export function artThread(row: ArtNote): WorkshopThread {
     id: `art:${row.threadId}`,
     kind: "art",
     name:
+      row.characterAnnotation?.candidateId.replace("character:", "") ??
       row.assetAnnotation?.metadata.name ??
       row.sceneAnnotation?.candidateId.replace("district:", "") ??
       row.buildingReview?.caseId ??
@@ -93,13 +116,15 @@ export function artThread(row: ArtNote): WorkshopThread {
     status: row.status,
     createdAt: row.createdAt,
     url:
-      (row.sceneAnnotation
-        ? `/tilefun/workshop.html#/scene/${encodeURIComponent(row.sceneAnnotation.candidateId.replace("district:", ""))}?note=${row.threadId}`
-        : row.assetAnnotation?.candidateId
-          ? `/tilefun/workshop.html#/tool/vehicles?view=${encodeURIComponent(row.assetAnnotation.candidateId)}`
-          : row.assetAnnotation
-            ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
-            : undefined) ??
+      (row.characterAnnotation
+        ? `/tilefun/workshop.html#/tool/character-lab?character=${encodeURIComponent(row.characterAnnotation.candidateId.replace("character:", ""))}`
+        : row.sceneAnnotation
+          ? `/tilefun/workshop.html#/scene/${encodeURIComponent(row.sceneAnnotation.candidateId.replace("district:", ""))}?note=${row.threadId}`
+          : row.assetAnnotation?.candidateId
+            ? `/tilefun/workshop.html#/tool/vehicles?view=${encodeURIComponent(row.assetAnnotation.candidateId)}`
+            : row.assetAnnotation
+              ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
+              : undefined) ??
       row.buildingReview?.url ??
       `/tilefun/art-workbench.html?sheet=${encodeURIComponent(row.sheetId)}&rect=${row.rect.join(",")}`,
     ...(row.buildingReview ? { caseId: buildingCaseKey(row.buildingReview) } : {}),
@@ -136,6 +161,7 @@ export function projectActivity(art: ArtNote[], interiors: ReviewFeedback[]): Wo
       ...artThread(row),
       eventId: row.id,
       ...(row.buildingVerdict ? { verdict: row.buildingVerdict.value } : {}),
+      ...(row.characterAnnotation ? { verdict: row.characterAnnotation.verdict } : {}),
       ...(row.assetAnnotation ? { verdict: row.assetAnnotation.verdict } : {}),
     })),
     ...interiors.map((row) => ({ ...interiorThread(row), eventId: row.id, verdict: row.verdict })),

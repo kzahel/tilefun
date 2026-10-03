@@ -21,6 +21,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Play ideas](play-ideas.md) | Hold-to-speak gameplay suggestions, text readback, public submission and private Workshop inbox |
 | [Voice agents](voice-agents.md) | Proposed companion NPC and child-directed builder sessions; live development and reload experience |
 | [Vehicles](vehicles.md) | Approved vehicle bank, generated traffic, roof riding and Workshop playground |
+| [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |

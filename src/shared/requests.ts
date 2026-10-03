@@ -3,6 +3,7 @@ import type { ClientMessage, ServerMessage } from "./protocol.js";
 export type RequestMessage = Extract<ClientMessage, { requestId: number }>;
 
 const RESPONSES = {
+  "set-player-model": "player-model-set",
   "load-world": "world-loaded",
   "create-world": "world-created",
   "delete-world": "world-deleted",
