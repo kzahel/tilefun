@@ -8,6 +8,7 @@ import type { SceneItem } from "./SceneItem.js";
  * Release after drawing so particles and elevation surfaces are not retained.
  */
 export class SceneFrame {
+  readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
@@ -20,6 +21,7 @@ export class SceneFrame {
 
   release(): void {
     this.items.length = 0;
+    this.drawOrder.length = 0;
     this.propDepth.release();
   }
 

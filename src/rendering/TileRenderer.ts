@@ -21,9 +21,10 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import { getTileDef, TileId } from "../world/TileRegistry.js";
 import { chunkToWorld } from "../world/types.js";
 import type { Camera } from "./Camera.js";
-import { CanvasTerrainResources } from "./CanvasTerrainResources.js";
+import { allocateTerrainResourceId, CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
+import type { TerrainDraw } from "./RenderFrame.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
   TerrainPresentation,
@@ -34,6 +35,7 @@ import type {
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
 
 interface CacheBuildState {
+  resourceId: TerrainResourceId;
   chunk: Chunk;
   canvas: OffscreenCanvas;
   nextRowOrderIdx: number;
@@ -82,6 +84,9 @@ export class TileRenderer implements TerrainPresentation {
   /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
   private readonly resources = new CanvasTerrainResources();
   private readonly elevation = new ElevationDescriptorCache();
+  private readonly partialResources = new Map<TerrainResourceId, OffscreenCanvas>();
+  private readonly terrainDraws: TerrainDraw[] = [];
+  private readonly terrainDrawPool: TerrainDraw[] = [];
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
   private readonly resident = new Map<string, TerrainResident>();
@@ -99,9 +104,11 @@ export class TileRenderer implements TerrainPresentation {
   /** Release surfaces on realm changes and teardown, including half-built jobs. */
   clear(): void {
     this.resources.clear();
+    this.terrainDraws.length = 0;
+    this.terrainDrawPool.length = 0;
     this.elevation.clear();
     this.resident.clear();
-    this.cacheBuildStates.clear();
+    this.clearCacheBuildStates();
     this.terrainJobs.length = 0;
     this.hasLastCamera = false;
     this.preparedRows = 0;
@@ -149,7 +156,7 @@ export class TileRenderer implements TerrainPresentation {
             this.schedulerRecordsCreated++;
           } else if (entry.chunk !== chunk) {
             this.resources.delete(entry.chunk);
-            this.cacheBuildStates.delete(key);
+            this.deleteCacheBuildState(key);
             entry.chunk = chunk;
             entry.pendingSince = null;
           }
@@ -175,12 +182,12 @@ export class TileRenderer implements TerrainPresentation {
         const key = entry.key;
         this.resources.delete(entry.chunk);
         this.resident.delete(key);
-        this.cacheBuildStates.delete(key);
+        this.deleteCacheBuildState(key);
       }
       this.resources.retainCoordinates(this.resident);
       // Also discard work made through another rendering path before preparation.
       for (const key of this.cacheBuildStates.keys())
-        if (!this.resident.has(key)) this.cacheBuildStates.delete(key);
+        if (!this.resident.has(key)) this.deleteCacheBuildState(key);
       jobs.sort(compareTerrainJobs);
       let remaining = Math.max(0, Math.floor(rowBudget));
       const initial = remaining;
@@ -251,7 +258,7 @@ export class TileRenderer implements TerrainPresentation {
   }
 
   resolveTerrainResource(id: TerrainResourceId): OffscreenCanvas | null {
-    return this.resources.resolve(id);
+    return this.resources.resolve(id) ?? this.partialResources.get(id) ?? null;
   }
 
   isTerrainReady(chunk: Chunk | undefined): boolean {
@@ -262,13 +269,13 @@ export class TileRenderer implements TerrainPresentation {
     this.resources.delete(chunk);
     for (const [key, entry] of this.resident) if (entry.chunk === chunk) this.resident.delete(key);
     for (const [key, state] of this.cacheBuildStates)
-      if (state.chunk === chunk) this.cacheBuildStates.delete(key);
+      if (state.chunk === chunk) this.deleteCacheBuildState(key);
   }
 
   /** Call after replacing images in the sheets map or changing atlas content. */
   invalidateAssets(): void {
     this.resources.invalidateAssets();
-    this.cacheBuildStates.clear();
+    this.clearCacheBuildStates();
   }
 
   /** Set the blend sheets and graph for the renderer. */
@@ -311,6 +318,36 @@ export class TileRenderer implements TerrainPresentation {
     cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
     chunkOverscanPixels = 1,
   ): void {
+    const draws = this.collectTerrainDraws(
+      camera,
+      world,
+      sheets,
+      visible,
+      readyOnly,
+      cacheRowBudget,
+      chunkOverscanPixels,
+      ctx.canvas.width,
+      ctx.canvas.height,
+    );
+    for (const draw of draws) {
+      const image = this.resolveTerrainResource(draw.resource);
+      if (image) ctx.drawImage(image, draw.x, draw.y, draw.width, draw.height);
+    }
+  }
+
+  /** Borrowed placement buffer; valid until the next collection or clear. */
+  collectTerrainDraws(
+    camera: Camera,
+    world: TerrainRenderWorld,
+    sheets: Map<string, Spritesheet>,
+    visible: ChunkRange,
+    readyOnly = false,
+    cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
+    chunkOverscanPixels = 1,
+    viewportWidth = camera.viewportWidth,
+    viewportHeight = camera.viewportHeight,
+  ): readonly TerrainDraw[] {
+    this.terrainDraws.length = 0;
     const chunkScreenSize = CHUNK_SIZE * TILE_SIZE * camera.scale;
     const getGlobalRoad = (tx: number, ty: number) => world.getRoadAt(tx, ty);
     let rowsRemaining = cacheRowBudget;
@@ -333,8 +370,8 @@ export class TileRenderer implements TerrainPresentation {
         if (
           sx + chunkScreenSize < 0 ||
           sy + chunkScreenSize < 0 ||
-          sx > ctx.canvas.width ||
-          sy > ctx.canvas.height
+          sx > viewportWidth ||
+          sy > viewportHeight
         ) {
           continue;
         }
@@ -371,21 +408,30 @@ export class TileRenderer implements TerrainPresentation {
         if (drawCache) {
           // Gameplay overscans to cover sub-pixel seams while zooming. Native
           // pixel review uses zero: 256→257 resampling differs by raster backend.
-          ctx.drawImage(
-            drawCache,
-            sx,
-            sy,
-            chunkScreenSize + chunkOverscanPixels,
-            chunkScreenSize + chunkOverscanPixels,
-          );
+          const resource = completed ? this.resources.resourceId(chunk) : building?.resourceId;
+          if (resource != null) {
+            const index = this.terrainDraws.length;
+            let draw = this.terrainDrawPool[index];
+            if (!draw) {
+              draw = { resource, x: sx, y: sy, width: 0, height: 0 };
+              if (index < 2048) this.terrainDrawPool.push(draw);
+            }
+            draw.resource = resource;
+            draw.x = sx;
+            draw.y = sy;
+            draw.width = chunkScreenSize + chunkOverscanPixels;
+            draw.height = chunkScreenSize + chunkOverscanPixels;
+            this.terrainDraws.push(draw);
+          }
         }
       }
     }
 
     if (cacheRowBudget > 0) this.resources.retainCoordinates(visibleKeys);
     for (const key of this.cacheBuildStates.keys()) {
-      if (cacheRowBudget > 0 && !visibleKeys.has(key)) this.cacheBuildStates.delete(key);
+      if (cacheRowBudget > 0 && !visibleKeys.has(key)) this.deleteCacheBuildState(key);
     }
+    return this.terrainDraws;
   }
 
   /**
@@ -400,6 +446,17 @@ export class TileRenderer implements TerrainPresentation {
 
   getElevationDiagnostics() {
     return this.elevation.getDiagnostics();
+  }
+
+  private deleteCacheBuildState(key: string): void {
+    const state = this.cacheBuildStates.get(key);
+    if (state) this.partialResources.delete(state.resourceId);
+    this.cacheBuildStates.delete(key);
+  }
+
+  private clearCacheBuildStates(): void {
+    this.cacheBuildStates.clear();
+    this.partialResources.clear();
   }
 
   /** Advance one chunk cache build by up to `rowBudget` rows. */
@@ -417,7 +474,9 @@ export class TileRenderer implements TerrainPresentation {
     const timing = performanceMetrics.start();
     let state = this.cacheBuildStates.get(key);
     if (!state || state.chunk !== chunk) {
+      this.deleteCacheBuildState(key);
       state = {
+        resourceId: allocateTerrainResourceId(),
         chunk,
         canvas: new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
         nextRowOrderIdx: 0,
@@ -427,12 +486,16 @@ export class TileRenderer implements TerrainPresentation {
         rowOrder: this.buildRowOrder(focalRow),
       };
       this.cacheBuildStates.set(key, state);
+      this.partialResources.set(state.resourceId, state.canvas);
     }
     if (
       state.revision !== chunk.revision ||
       state.visualRevision !== chunk.visualRevision ||
       state.assetRevision !== this.resources.assetRevision
     ) {
+      this.partialResources.delete(state.resourceId);
+      state.resourceId = allocateTerrainResourceId();
+      this.partialResources.set(state.resourceId, state.canvas);
       state.revision = chunk.revision;
       state.visualRevision = chunk.visualRevision;
       state.assetRevision = this.resources.assetRevision;
@@ -466,7 +529,7 @@ export class TileRenderer implements TerrainPresentation {
 
     if (state.nextRowOrderIdx >= state.rowOrder.length) {
       this.resources.publish(chunk, cx, cy, state.canvas);
-      this.cacheBuildStates.delete(key);
+      this.deleteCacheBuildState(key);
     }
 
     performanceMetrics.end("client.cache", timing);

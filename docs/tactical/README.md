@@ -43,6 +43,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [028 Sprite metadata](028-sprite-metadata.md) | R3 prerequisite: neutral sprite descriptions and gameplay asset catalog; [renderer parent](022-renderer-backend-decoupling.md) |
 
+| [029 Outdoor frame contract](029-outdoor-frame-contract.md) | Delivered: resource placements, explicit shadow ordering and production backend submission; editor overlays follow |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

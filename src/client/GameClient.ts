@@ -27,6 +27,7 @@ import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
+import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
@@ -124,6 +125,7 @@ export class GameClient {
   private loop: GameLoop;
   private spriteCatalog: SpriteCatalog = new Map();
   private sheets = new Map<string, Spritesheet>();
+  private renderer: CanvasRenderBackend;
   private tileRenderer: TileRenderer;
   private readonly sceneFrame = new SceneFrame();
   private actions: ActionManager;
@@ -222,6 +224,7 @@ export class GameClient {
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
     this.tileRenderer = new TileRenderer();
+    this.renderer = new CanvasRenderBackend(this.ctx, this.sheets, this.tileRenderer);
     this.actions = new ActionManager();
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();
@@ -661,6 +664,7 @@ export class GameClient {
     this.gemSpriteCanvas = generateGemSprite();
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
     this.spriteCatalog = createSpriteCatalog(this.sheets);
+    this.renderer.setAssets(this.sheets);
 
     if (!this.serialized) {
       // Apply loaded world camera position (local mode — direct access)
@@ -1144,6 +1148,7 @@ export class GameClient {
       get sheets() {
         return client.sheets;
       },
+      renderer: this.renderer,
       tileRenderer: this.tileRenderer,
       sceneFrame: this.sceneFrame,
       audioManager: this.audioManager,

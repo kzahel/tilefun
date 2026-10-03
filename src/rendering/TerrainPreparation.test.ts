@@ -344,3 +344,37 @@ describe("terrain preparation", () => {
     expect(renderer.getDiagnostics().surfaceBytes).toBe(0);
   });
 });
+
+it("submits reusable neutral placements and retires partial identities on restart, replacement and clear", () => {
+  const { camera, world } = scene();
+  const renderer = new TileRenderer();
+  drawing(renderer);
+  const collect = (budget = 4, readyOnly = false) =>
+    renderer.collectTerrainDraws(camera, world, sheets, visible, readyOnly, budget);
+  const first = collect();
+  const draw = first[0];
+  if (!draw) throw Error("Missing partial placement");
+  const id = draw.resource;
+  expect(draw).toMatchObject({ x: 0, y: 0, width: 257, height: 257 });
+  expect(renderer.resolveTerrainResource(id)).not.toBeNull();
+  expect(collect(0)[0]).toBe(draw);
+  expect(collect(0, true)).toEqual([]);
+  const chunk = world.getChunkIfLoaded(0, 0);
+  if (!chunk) throw Error("Missing chunk");
+  chunk.invalidateVisuals();
+  expect(collect(0)).toEqual([]); // stale partial pixels must not be submitted
+  collect();
+  expect(renderer.resolveTerrainResource(id)).toBeNull();
+  const secondId = draw.resource;
+  world.chunks.put(0, 0, new Chunk());
+  collect();
+  expect(renderer.resolveTerrainResource(secondId)).toBeNull();
+  const replacementId = draw.resource;
+  collect(16);
+  expect(renderer.resolveTerrainResource(replacementId)).toBeNull();
+  expect(renderer.isTerrainReady(world.getChunkIfLoaded(0, 0))).toBe(true);
+  const completeId = draw.resource;
+  renderer.clear();
+  expect(first).toEqual([]);
+  expect(renderer.resolveTerrainResource(completeId)).toBeNull();
+});

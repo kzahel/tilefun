@@ -2,9 +2,9 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
-import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
+import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
 import { renderInterior } from "./renderInterior.js";
@@ -53,13 +53,8 @@ export function render3DDebug(gc: GameContext): void {
  * Draws: canvas clear, terrain, elevation, entities/props (y-sorted).
  */
 export function renderWorld(gc: GameContext): void {
-  const { ctx, canvas, camera, stateView, sheets, tileRenderer } = gc;
-
-  ctx.imageSmoothingEnabled = false;
-
-  // Clear
-  ctx.fillStyle = "#1a1a2e";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const { camera, stateView, renderer } = gc;
+  renderer.submit(camera, { kind: "clear", color: "#1a1a2e" });
 
   if (gc.spriteCatalog.size === 0) return;
 
@@ -67,8 +62,11 @@ export function renderWorld(gc: GameContext): void {
 
   if (stateView.interior) return;
   // Terrain + autotile + details (baked into chunk cache)
-  tileRenderer.prepareTerrain(camera, stateView.world, sheets, visible);
-  tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible, false, 0);
+  renderer.prepareTerrain(camera, stateView.world, visible);
+  renderer.submit(camera, {
+    kind: "terrain",
+    draws: renderer.collectTerrain(camera, stateView.world, visible),
+  });
 
   // Elevation is drawn interleaved with entities via collectScene
   // (moved from a separate pass so cliffs properly occlude entities behind them)
@@ -82,7 +80,7 @@ export function renderWorld(gc: GameContext): void {
  * Collects a renderer-agnostic SceneItem[], then draws via Canvas2D backend.
  */
 export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: ParticleItem[]): void {
-  const { ctx, camera, stateView, sheets, tileRenderer } = gc;
+  const { camera, stateView, renderer } = gc;
   if (gc.spriteCatalog.size === 0) return;
 
   if (stateView.interior) {
@@ -90,7 +88,6 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     return;
   }
   const visible = camera.getVisibleChunkRange();
-  const grassSheet = sheets.get("grass-blades");
   const extrapolate = gc.console.cvars.get("cl_extrapolate")?.get() === true;
   const debugExtrapolation = gc.console.cvars.get("cl_debugextrapolation")?.get() === true;
   const extrapolateAmountRaw = gc.console.cvars.get("cl_extrapolate_amount")?.get();
@@ -108,7 +105,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     camera,
     visible,
     alpha,
-    tileRenderer,
+    renderer,
     extraParticles ?? [],
     gc.spriteCatalog.has("grass-blades"),
     debugExtrapolation ? extrapolationGhosts : undefined,
@@ -118,7 +115,11 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
 
   gc.doorPresentation?.appendOverlays(items, gc.realmId ?? null);
   try {
-    drawScene2D(ctx, camera, items, sheets, grassSheet, false, tileRenderer);
+    renderer.submit(camera, {
+      kind: "scene",
+      items,
+      order: collectSceneOrder(items, gc.sceneFrame.drawOrder),
+    });
   } finally {
     gc.sceneFrame.release();
   }

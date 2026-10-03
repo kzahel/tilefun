@@ -23392,12 +23392,12 @@
           "source": "src/assets/GameAssets.ts:88"
         },
         {
-          "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:93"
+          "system": "Gameplay",
+          "source": "src/rendering/CanvasRenderBackend.ts:78"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:113"
+          "source": "src/scenes/renderWorld.ts:110"
         }
       ]
     },

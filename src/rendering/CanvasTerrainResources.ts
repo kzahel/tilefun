@@ -3,6 +3,9 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 // Process-local identities are never recycled across renderers or resets.
 let nextResourceId = 1;
+export function allocateTerrainResourceId(): TerrainResourceId {
+  return nextResourceId++ as TerrainResourceId;
+}
 
 interface TerrainSurface {
   id: TerrainResourceId;
@@ -59,7 +62,7 @@ export class CanvasTerrainResources {
     if (previous && previous !== chunk) this.delete(previous);
     this.delete(chunk);
     this.coordinates.set(key, chunk);
-    const id = nextResourceId++ as TerrainResourceId;
+    const id = allocateTerrainResourceId();
     this.images.set(id, canvas);
     this.surfaces.set(chunk, {
       id,

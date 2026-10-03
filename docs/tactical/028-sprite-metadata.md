@@ -31,7 +31,7 @@ Typechecks, 1,389 unit tests and lint pass (existing warnings). The first unit
 run overlapped manifest regeneration; rerunning after generation passes. Art
 catalog and manifest regenerated, production build passes, and all 551 candidate
 records are byte-equivalent as parsed JSON to the pre-slice manifest. Full browser
-validation passes: 290 passed and one pre-existing skipped test.
+validation passes: 293 passed.
 
 [Allocation baseline](../benchmarks/022-renderer-baseline.json): 600 elevation
 frames retain nine layouts/3,456 descriptors; 3,000-frame terrain workloads retain

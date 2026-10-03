@@ -1,0 +1,122 @@
+{
+  "revision": "fb73fa03348ca1690014123a215e7035649b83b9",
+  "dirty": true,
+  "date": "2026-10-03T19:32:35.108Z",
+  "platform": "darwin 25.6.0 arm64",
+  "browser": "153.0.8010.12",
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "scope": "029 outdoor frame submission; coverage gate only. Browser suite overlapped part of the run; timings are not a performance comparison.",
+  "fixtures": [
+    {
+      "version": "regional-v4",
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 3,
+          "renderedFrames": 121,
+          "maxLoaded": 49,
+          "visitedChunks": 15
+        },
+        {
+          "name": "standing",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 121,
+          "maxLoaded": 25,
+          "visitedChunks": 9
+        },
+        {
+          "name": "walk",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 181,
+          "maxLoaded": 25,
+          "visitedChunks": 9
+        },
+        {
+          "name": "sprint",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 301,
+          "maxLoaded": 25,
+          "visitedChunks": 15
+        },
+        {
+          "name": "reverse",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 301,
+          "maxLoaded": 25,
+          "visitedChunks": 15
+        },
+        {
+          "name": "zoom-out",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 181,
+          "maxLoaded": 30,
+          "visitedChunks": 12
+        }
+      ]
+    },
+    {
+      "version": "regional-v10",
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "missingDataFrames": 3,
+          "incompleteCacheFrames": 2,
+          "renderedFrames": 121,
+          "maxLoaded": 49,
+          "visitedChunks": 12
+        },
+        {
+          "name": "standing",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 121,
+          "maxLoaded": 20,
+          "visitedChunks": 6
+        },
+        {
+          "name": "walk",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 181,
+          "maxLoaded": 20,
+          "visitedChunks": 8
+        },
+        {
+          "name": "sprint",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 301,
+          "maxLoaded": 20,
+          "visitedChunks": 10
+        },
+        {
+          "name": "reverse",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 301,
+          "maxLoaded": 20,
+          "visitedChunks": 10
+        },
+        {
+          "name": "zoom-out",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "renderedFrames": 181,
+          "maxLoaded": 30,
+          "visitedChunks": 12
+        }
+      ]
+    }
+  ]
+}

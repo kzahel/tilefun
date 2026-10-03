@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
+import { collectSceneOrder } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
@@ -17,25 +18,22 @@ export interface CanvasTerrainSource {
 export function drawScene2D(
   ctx: CanvasRenderingContext2D,
   camera: Camera,
-  items: SceneItem[],
+  items: readonly SceneItem[],
   sheets: Map<string, Spritesheet>,
   grassSheet: Spritesheet | undefined,
   pixelExactShadows = false,
   terrain?: CanvasTerrainSource,
+  order: readonly number[] = collectSceneOrder(items, []),
 ): void {
-  // Shadow pre-pass: draw ground shadows before all sprites so they appear
-  // behind props (e.g. table shadow peeks out at edges, not on top)
-  drawShadows(ctx, camera, items, pixelExactShadows);
-
-  // Main draw pass
-  for (const item of items) {
+  for (const entry of order) {
+    const item = items[entry < 0 ? -entry - 1 : entry];
+    if (!item) continue;
+    if (entry < 0) {
+      if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
+      continue;
+    }
     switch (item.kind) {
       case "sprite":
-        // Draw elevated shadows inline so they appear on top of the
-        // elevation surface tile rather than being covered by it.
-        if (item.hasShadow && !item.flashHidden && item.shadowTerrainZ > 0) {
-          drawOneShadow(ctx, camera, item, pixelExactShadows);
-        }
         drawSprite(ctx, camera, item, sheets);
         break;
       case "elevation": {
@@ -124,25 +122,6 @@ function drawPixelShadow(
       image.data[i + 3] = alpha;
     }
   ctx.putImageData(image, left, top);
-}
-
-/**
- * Pre-pass: draw shadows for entities on flat terrain only.
- * Elevated shadows are drawn inline in the main pass (after the elevation
- * tile surface so they aren't covered up).
- */
-function drawShadows(
-  ctx: CanvasRenderingContext2D,
-  camera: Camera,
-  items: SceneItem[],
-  pixelExactShadows: boolean,
-): void {
-  for (const item of items) {
-    if (item.kind !== "sprite" || !item.hasShadow || item.flashHidden) continue;
-    // Skip elevated shadows — they'll be drawn inline in the main pass
-    if (item.shadowTerrainZ > 0) continue;
-    drawOneShadow(ctx, camera, item, pixelExactShadows);
-  }
 }
 
 function drawSprite(

@@ -161,3 +161,18 @@ that metadata for source rectangles. GameClient projects the catalog once after
 asset loading, including procedural sprites; resource replacement must refresh
 the catalog. Gameplay availability checks now use metadata. Concrete sheet access
 for drawing remains until the frame/backend consumer migration.
+
+## Outdoor frame submission
+
+`RenderBackend` accepts data-only view parameters and semantic `RenderPass`
+batches. Production outdoor rendering submits clear, prepared terrain placements
+and explicitly ordered scene entries. `collectSceneOrder` owns ground/elevated
+shadow sequencing; the Canvas backend only consumes it. Terrain placement buffers
+are borrowed synchronously with a bounded record pool, and partial terrain handles
+retire on restart/replacement/publication/reset. [029](../tactical/029-outdoor-frame-contract.md)
+records ownership tests, unchanged review identities and traversal coverage.
+
+Editor overlays and indoor callbacks still need migration. Terrain placement
+selection currently lives with the concrete cache and must become shared
+presentation policy during final boundary cleanup. `GameContext` still exposes
+legacy Canvas resources for those consumers and independent UI/debug rendering.

@@ -15,6 +15,7 @@ import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
+import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
 import type { TileRenderer } from "../rendering/TileRenderer.js";
 import type { GameServer } from "../server/GameServer.js";
@@ -41,6 +42,7 @@ export interface GameContext {
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
   readonly sheets: Map<string, Spritesheet>;
+  readonly renderer: RenderBackend;
   readonly tileRenderer: TileRenderer;
   readonly sceneFrame: SceneFrame;
   readonly audioManager: AudioManager;
