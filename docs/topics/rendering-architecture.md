@@ -1,19 +1,16 @@
 # Rendering architecture and backend separation
 
 Topic: rendering-architecture
-Status: terrain ownership, neutral elevation handles and static descriptors extracted;
-complete frame/backend and asset interfaces are being implemented under the activated end-to-end plan.
+Status: complete backend/presentation separation, recording proof and integrated
+desktop/Android validation delivered; Canvas2D remains production.
 Updated: 2026-10-03.
 
-Owns renderer boundaries and resource/frame lifetime contracts. The
-[performance topic](performance.md) owns timing and allocation evidence;
-[Tactical 013](../tactical/013-renderer-boundary-and-allocation-audit.md) records
-the original audit and completed allocation work. The [client/server architecture](../client-server-architecture.md)
-continues to own authority and prediction.
-[Parent Tactical 022](../tactical/022-renderer-backend-decoupling.md) tracks the
-remaining milestones, activation, just-in-time slice planning and completion gates.
+Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
+owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
+owns authority and prediction. [Parent 022](../tactical/022-renderer-backend-decoupling.md)
+tracks this refactor and its completion gates.
 
-## Desired architecture
+## Architecture
 
 ```text
 Worker simulation → replicated world + client prediction
@@ -24,212 +21,133 @@ Worker simulation → replicated world + client prediction
                        Canvas2D now / GPU backend later
 ```
 
-World chunks contain tile grids and content versions, never canvases or GPU
-objects. Presentation code computes interpolation, culling and depth ordering;
-it does not advance simulation. The backend owns image/texture/buffer allocation,
-partial preparation, upload, eviction, resize, recovery and teardown. Multiple
-renderers must be able to view one world without consuming each other's dirty
-flags or sharing backend resources.
+World chunks contain tile grids and content versions, never graphics resources.
+Presentation computes interpolation, visibility and ordering without advancing
+simulation. `RenderBackend` receives plain view values and semantic passes:
+clear, terrain placements, ordered scene bodies/shadows, indoor commands and
+editor overlay geometry. It owns preparation, resource lookup, invalidation,
+eviction, resize, recovery and teardown. It does not decide depth/shadow order.
 
-Scene data identifies resources, source rectangles and world-space geometry.
-It must not embed canvas/image objects or draw callbacks. Asset metadata (stable
-IDs, dimensions and sprite regions) is separate from the backend's loaded images.
-The eventual frame interface covers terrain, ground shadows, ordered actors/
-elevation/grass/particles, indoor wall/furniture interleaving, and editor/overlay
-phases. Gameplay, editor, explorer and review tools share these contracts.
+`GameClientOptions.renderHostFactory` is the production selection point.
+`RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
+independent HUD/touch/debug context. Canvas2D remains the default. A GPU host can
+supply a separate UI overlay without changing physics, generation, editing or
+presentation policy. GameClient asset loading, procedural sprite creation and
+platform input/UI wiring remain application composition responsibilities.
 
-Static grids and descriptors update on content changes. Camera movement changes
-view/transforms and dynamic instances; it must not regenerate static tile grids.
-Use reusable frame storage with explicit synchronous borrowing today. An async
-backend must copy data or acknowledge buffer ownership before reuse. Resource
-IDs must not alias after eviction, realm changes or backend replacement.
+## Data and resource contracts
 
-A GPU backend should accept batches and retain buffers, updating changed ranges.
-Avoid a generic wrapper around every Canvas call. Rust/WASM execution and graphics
-API selection are independent later decisions; neither is required for these
-boundaries. Keep the Canvas implementation working through every slice.
+- `SpriteCatalog` exposes immutable image/tile dimensions and sprite-region
+  geometry without loaded images or draw methods. Stable sheet keys connect
+  scene data to backend assets. Canvas `Spritesheet` wraps decoded sources.
+- `TerrainFrame` computes culling, pixel rounding and seam overscan from scalar
+  view data and a resource-ID lookup. Camera-only movement reuses prepared
+  resources and a bounded placement pool. Canvas and the recording backend use
+  the same builder.
+- `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own
+  outdoor interpolation, visibility and shadow/body ordering. Ground shadows
+  precede bodies; elevated shadows immediately precede their associated body.
+- `ElevationDescriptorCache` caches static geometry by weak chunk identity,
+  placement and edit/visual revisions. Binding a new resource creates new
+  immutable records, leaving prior records unchanged. Empty chunks are cached.
+- `InteriorPresentation` owns floor/furniture/support/wall/actor ordering and
+  emits scalar layer, source/destination and actor commands. Static content has
+  a separate identity; camera and actor movement reuse it. No actor draw
+  callbacks cross the interface. `CanvasInteriorResources` owns raster shells
+  and wall bands and consumes the supplied order.
+- `OverlayFrame` and `collectEditorOverlay` emit pooled geometry with explicit
+  style values. Scene clips are rectangle lists in logical viewport pixels.
+  The Canvas implementation preserves the host transform, including explorer DPR.
 
-## Invalidation and visual invariants
+Frames are **borrowed synchronously until submission returns**. Preparation,
+eviction, reset and buffer reuse must not overlap consumption. A retaining or
+asynchronous GPU backend must copy data or add explicit ownership acknowledgment
+before using it beyond that lifetime. Resource IDs are transient presentation
+references, never saved-world IDs. Released IDs must never resolve to new images;
+Canvas IDs are process-local, monotonic and unique across backend instances.
 
-- Distinguish replicated edit revision from local visual-content invalidation.
-  Snapshot application, derived autotiling and editor updates invalidate all
-  observing renderers without a renderer writing back into world data.
-- Track chunk identity and placement plus content versions. Replacing a chunk at
-  equal revision must discard its old partial work and resource identity.
-- Asset/atlas/variant changes explicitly invalidate backend terrain resources.
-- Preserve old completed imagery while replacements build, visible-hole priority,
-  preparation deadlines/row caps, and bounded residency. Eviction affects only
-  the owning renderer.
-- Preserve equal-depth ordering, nearest-neighbor sampling, shadows, clipping,
-  tile seams, multipart sprites and indoor actor/wall occlusion. Exact approved
-  art stays immutable; a refactor must not silently create new review pixels.
+Decoded source images are borrowed from the platform asset loader. Each backend
+owns its derived terrain/room surfaces (or future textures/buffers) and references
+to those sources. Disposal drops those references without closing another owner's
+images. Additive sprite arrival refreshes metadata without rebuilding unchanged
+terrain; replacing an existing source uses full invalidation. In-place image
+changes require explicit invalidation.
 
-## Implementation sequence
+## Invalidation and lifecycle
 
-1. **Complete:** move completed terrain resources out of `Chunk`; retain preparation jobs in
-   the renderer. Replace shared backend dirtiness with visual-content versions.
-   Migrate readiness diagnostics and explorer lifecycle to renderer APIs.
-2. **Complete:** replace elevation canvases with opaque resource handles resolved only by the
-   Canvas backend. Give scene collection a small backend-neutral terrain input.
-3. **Complete:** cache static elevation descriptors by chunk identity/content and placement,
-   while binding the current resource at collection time. Verify replacement,
-   eviction and realm transitions cannot retain stale canvases.
-4. **Next:** introduce the complete frame/backend interface and asset metadata catalog,
-   including indoor and overlay phases. Remove concrete renderer/Canvas access
-   from gameplay presentation orchestration in bounded follow-up slices.
-   [Parent Tactical 022](../tactical/022-renderer-backend-decoupling.md) owns their
-   sequencing and progress; implementation is active, beginning with asset metadata.
-5. Only then prototype a second backend against measured workloads, comparing
-   crossings/copies, startup, memory, device recovery and frame presentation.
+Replicated `revision` and local `visualRevision` are distinct. Snapshot application,
+autotiling and coherent editor updates invalidate content; renderers never consume
+a shared dirty flag or write acknowledgment into chunks. Identity and placement
+matter even when a replacement chunk has the same numeric revision.
 
-## Acceptance and evidence
+Partial builds are usable only while identity, content and asset revisions match.
+Restart, replacement, publication, eviction and reset retire partial handles.
+Completed old imagery remains a fallback during a rebuild; `isTerrainReady`
+requires current revisions, while completed-only placement can use that fallback.
+Publishing new imagery retires the old completed handle. Resource caches and
+progressive jobs belong to one backend; another view of the same world is independent.
 
-Run typechecks, unit tests, lint, catalog/manifest regeneration, production build,
-full browser checks and streaming readiness. Add ownership/invalidation tests
-for independent renderers, equal-revision replacement, partial-build restart,
-asset changes, eviction, stale handles and reset. Use the existing bundled
-Chromium runners and immutable review references; no new reference approvals
-are implied by a refactor.
+Normal gameplay retains its existing bounded halo preparation, visible-hole
+priority and time/row budgets. Explorer and native review request explicit
+visible-only row budgets. Viewport resize preserves native static caches. Realm
+reset and context recovery clear terrain and rooms; context restoration triggers
+recovery through the Canvas host. Disposal is idempotent, detaches host listeners
+and rejects further rendering/preparation. Scene-frame release drops actor,
+particle, prop and overlay references; retained pools have explicit bounds.
 
-`GameContext` now exposes a neutral renderer and asset catalog. Its Canvas context
-is explicitly an independent HUD/touch/debug UI surface supplied by the platform
-host. `Spritesheet` is a Canvas resource wrapper with separate neutral metadata.
-Indoor actor callbacks have been removed. These are explicit remaining boundaries, not a claim that the
-production renderer is already interchangeable.
+## Consumer and platform dependency inventory
 
-## Completed slice: terrain resource ownership
+| Surface | Boundary / intentional graphics dependency |
+| --- | --- |
+| Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
+| Explorer | Canvas selected in `TilePreview` composition; explicit preparation/submission, ready-chunk clips and lifecycle |
+| Traffic, outdoor geometry, building/street/district reviews | Canvas selected at each platform entry; shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
+| Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
+| Indoor review/reference and furniture playtest | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
+| Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
+| HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
+| Optional Three.js diagnostics | Separate debug renderer, dynamically selected outside gameplay presentation |
+| Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
-`CanvasTerrainResources` owns completed imagery; `TileRenderer` owns progressive
-jobs, scheduling and lifecycle. `Chunk` has no canvas or backend dirty flag.
-`visualRevision`/`invalidateVisuals()` records coherent local visual changes;
-replicated `revision` remains the network/edit version. Snapshot, autotile and
-editor writers invalidate content, and renderers never acknowledge by mutating
-chunks. Renderer configuration setters invalidate asset-dependent imagery;
-call `invalidateAssets()` after in-place image/atlas replacement.
+`TileRenderer` is now an internal Canvas terrain preparation/resource component.
+The old combined terrain draw API and furniture metadata re-export aliases are
+removed. The small native reference adapters above are permanent, explicit
+composition choices, not hidden alternative gameplay pipelines.
 
-Explorer disposal/eviction and readiness probes now use renderer APIs. Both
-preparation and fallback drawing bound completed surfaces; a same-coordinate
-replacement cannot accumulate historical chunk objects. Tests cover independent
-renderers, equal-revision derived changes, asset changes during a partial build,
-and fallback eviction. The following handle slice removes the elevation canvas reference and concrete
-scene-collector dependency. Integrated visual/traversal evidence is linked in
-the static-descriptor section below.
+## Evidence and limits
 
-## Completed slice: backend-neutral elevation handles
+[034](../tactical/034-renderer-completion.md) owns final integrated evidence.
+The recording backend runs the actual outdoor/editor/indoor entry points with no
+Canvas context, using shared terrain/elevation builders. It checks data-only
+submissions, synchronous copying/release, static reuse, independent handles,
+content/asset replacement, realm recovery and unchanged simulation inputs.
+Dependency tests guard concrete graphics imports/types in neutral modules and
+keep backend selection in platform composition.
 
-`TerrainPresentation` is the scene collector's narrow terrain input; collection
-no longer imports concrete `TileRenderer`. `SceneItem` contains no Canvas types.
-Elevation records carry a `TerrainResourceId`, and `CanvasTerrainSource` resolves
-it only in `drawScene2D`. Gameplay, explorer, geometry review, district
-review and traffic playground pass their own renderer's resolver.
+Earlier delivery evidence:
 
-Publishing replacement imagery retires the prior handle. IDs are never reused
-across renderer instances or clears during the runtime; a stale/cross-backend
-handle resolves to nothing, never another image. Asset invalidation leaves the
-old completed handle usable during catch-up, then publication replaces it.
-Frames must be consumed synchronously before preparation/eviction/reset; handles
-are transient presentation references, not saved-world IDs. Tests cover actual
-Canvas source rectangles, stale-handle skipping and independent renderer IDs.
+- [013](../tactical/013-renderer-boundary-and-allocation-audit.md): terrain ownership,
+  neutral handles and static elevation descriptors.
+- [028](../tactical/028-sprite-metadata.md): independent metadata catalog.
+- [029](../tactical/029-outdoor-frame-contract.md) and
+  [030](../tactical/030-editor-overlay-data.md): outdoor semantic passes and exact
+  effective-operation parity for 16 editor cases.
+- [031](../tactical/031-interior-frame-data.md): indoor commands and 81 exact room
+  pixel hashes, including wall crossings and edited-room gameplay.
+- [032](../tactical/032-renderer-host-lifecycle.md): host injection and lifecycle.
+- [033](../tactical/033-shared-terrain-and-consumers.md): remaining consumers,
+  unchanged review identities and lower allocation for matched terrain placement.
 
+A recording backend proves the data boundary, not GPU raster parity or performance.
+No Rust/WASM/WebGPU engine has been implemented. Intermittent phone hitches and
+cold-entry presentation remain separate measured performance work.
 
-## Completed slice: static elevation descriptors
+## Next architecture experiment
 
-`ElevationDescriptorCache` accepts world data and a resource-ID lookup, with no
-Canvas dependency. It caches immutable surface/cliff descriptors using weak chunk
-identity, edit/visual versions and placement. Empty chunks are cached too.
-Camera movement reuses geometry; a resource change binds new immutable records
-without rebuilding geometry or changing previously returned records. Collection
-still returns an independently owned list in the original tile/phase order.
-
-No cached descriptor holds a canvas or a strong chunk reference. Backend eviction
-invalidates handles, a missing resource emits no elevation, and renderer reset
-also clears the descriptor cache. Coordinate changes cannot bind imagery from
-the old placement. Low-level grid writers must invalidate completed visual
-updates, as before for terrain. This does not add an asynchronous frame lifetime;
-old handle-bearing frames remain transient synchronous data.
-
-Detailed allocation and integrated validation evidence is recorded in
-[Tactical 013](../tactical/013-renderer-boundary-and-allocation-audit.md#implementation-record-renderer-resource-boundaries).
-The next architectural slice should define the full frame/backend interface,
-starting with outdoor terrain/scene/editor phases and then replacing indoor draw
-callbacks with ordered data. Pair this with a backend-independent sprite metadata
-catalog; keep the current Canvas implementation as the reference renderer.
-
-## Sprite metadata prerequisite
-
-`SpriteCatalog` exposes immutable dimensions and tile-region geometry without
-images or drawing methods. Canvas `Spritesheet` owns the loaded image and uses
-that metadata for source rectangles. GameClient projects the catalog once after
-asset loading, including procedural sprites; resource replacement must refresh
-the catalog. Gameplay availability checks now use metadata. Concrete sheet access
-for drawing remains until the frame/backend consumer migration.
-
-## Outdoor frame submission
-
-`RenderBackend` accepts data-only view parameters and semantic `RenderPass`
-batches. Production outdoor rendering submits clear, prepared terrain placements
-and explicitly ordered scene entries. `collectSceneOrder` owns ground/elevated
-shadow sequencing; the Canvas backend only consumes it. Terrain placement buffers
-are borrowed synchronously with a bounded record pool, and partial terrain handles
-retire on restart/replacement/publication/reset. [029](../tactical/029-outdoor-frame-contract.md)
-records ownership tests, unchanged review identities and traversal coverage.
-
-Editor overlays now use explicit pooled geometry through the same backend;
-[030](../tactical/030-editor-overlay-data.md) records parity with all original
-brush, preview and remote-cursor drawing operations. Indoor frames now use
-the same submission interface, as described below. Terrain placement
-selection currently lives with the concrete cache and must become shared
-presentation policy during final boundary cleanup. `GameContext` no longer exposes concrete terrain renderers or sheets; independent
-UI/debug rendering has an explicit platform-owned context.
-
-## Indoor frame data
-
-`InteriorPresentation` owns furniture/support and wall/actor ordering. It emits
-floor, wall-band, furniture, shadow and actor commands with scalar source/destination
-geometry. Its room-content identity changes with compiled room content, while
-camera motion and actor motion reuse static content. Each client's `SceneFrame`
-owns the presentation cache; release drops dynamic actor references. There is no
-module-global gameplay renderer or per-actor draw callback.
-
-`CanvasInteriorResources` rasterizes the static shell/bands and consumes that
-order. Backend reset and asset replacement discard the room cache; independent
-backends never share room surfaces. `FurnitureLayout` and `LayeredInteriorMap`
-are neutral modules; raster functions live in `CanvasInteriorMap`. Native Canvas
-review/uncached reference adapters still exist and share these rules.
-[031](../tactical/031-interior-frame-data.md) records exact room pixel parity,
-resource ownership tests and ordinary/edited-room movement evidence.
-
-## Platform host and lifecycle
-
-`GameClientOptions.renderHostFactory` selects a `RenderHost`: neutral backend,
-independent UI context, asset setup, resize, frame-start UI clearing and disposal.
-Canvas is the default implementation; gameplay orchestration does not construct
-or configure TileRenderer. A GPU host can supply a separate UI overlay without
-changing physics, editing or presentation rules.
-
-`RenderBackend` exposes readiness, diagnostics, resource invalidation, resize,
-recovery and disposal. Resize keeps native static caches. Asset invalidation
-keeps completed terrain fallback while replacement builds; recovery/reset clears
-terrain and rooms. Disposal is idempotent, rejects further rendering/preparation
-and drops source references without closing images borrowed from another owner.
-[032](../tactical/032-renderer-host-lifecycle.md) records lifecycle and integration
-validation. Explorer/native reference composition remains the next migration.
-
-## Shared terrain placement and remaining consumers
-
-`TerrainFrame` computes culling, rounding, seam overscan and placements from a
-plain view and resource-ID lookup. Canvas and recording backends share that
-policy. Terrain preparation is separate: gameplay uses the existing bounded halo
-scheduler; explorer/native composition can request visible-only row budgets.
-Explorer scene clipping is a list of rectangles in logical viewport pixels.
-Canvas composition preserves the host transform, including explorer DPR.
-
-All active outdoor consumers now submit semantic passes. Native character review
-retains its source-hashed controller and calls a Canvas reference adapter that
-consumes the same scene-pass schema. Room reference drawing and pattern room
-atlas previews remain explicitly native Canvas compositions. Additive decoded
-sprite updates refresh metadata without rebuilding terrain; replacing an existing
-source must use full invalidation. Borrowed source images remain owned by the
-asset loader, and backend disposal releases its references without closing them.
-See [033](../tactical/033-shared-terrain-and-consumers.md) for parity and allocation
-validation. The remaining step is obsolete API removal and integrated boundary proof.
+Build a bounded second-backend prototype behind `RenderHost`, starting with a
+representative terrain/sprite scene. Reuse presentation builders and compare
+pixel/depth behavior, copied/uploaded bytes, startup, memory, loss/recovery and
+actual device presentation. Preserve the Canvas reference and immutable approvals.
+Only then decide whether broader WebGPU adoption or a Rust/WASM component pays
+for its crossings and maintenance cost. Graphics API and execution language are
+independent choices; neither requires rewriting simulation.

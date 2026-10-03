@@ -1,6 +1,6 @@
 # 022 — Renderer backend decoupling
 
-Status: **active; authorized end to end**.
+Status: **complete**.
 Created: 2026-10-03. This is a parent sequencing and progress plan.
 Owner: [rendering architecture](../topics/rendering-architecture.md).
 Measurement owner: [performance](../topics/performance.md).
@@ -15,9 +15,9 @@ generation, editing rules, visibility or depth-ordering logic.
 
 The architecture topic owns the durable contracts and visual invariants. This
 parent owns sequence, progress and completion gates; child tacticals own detailed
-implementation plans and evidence. Five remaining milestones are expected to
-need roughly **4–6 delivery slices**, but passing the gates determines completion,
-not the number of commits. Split or reorder work when inspection justifies it.
+implementation plans and evidence. The five milestones were delivered in **seven slices** (original estimate 4–6).
+Metadata, overlays and remaining consumers received separate slices to preserve
+visual and resource-lifetime invariants; completion is determined by the gates.
 
 This plan does not include implementing WebGPU/wgpu, porting to Rust/WASM,
 rewriting simulation or persistence, changing approved art, deploying the game,
@@ -56,12 +56,12 @@ slices. If still awaiting activation, do not begin implementation.
 ## Progress checkpoint
 
 - **Activation:** 2026-10-03: “go ahead proceed fully end to end autonomously committing as you go.”
-- **Overall state:** R1–R4 delivered; final boundary proof and integrated validation next.
-- **Active child tactical:** [033 Shared terrain and consumers](033-shared-terrain-and-consumers.md).
-- **Next action:** remove obsolete APIs, guard dependencies and run final recording/device validation (034).
-- **Blockers:** none known; device availability and current checkout must be
-  checked when implementation starts.
-- **Completion evidence:** pending the gates below.
+- **Overall state:** R1–R5 complete; all completion gates satisfied.
+- **Final child tactical:** [034 Renderer completion](034-renderer-completion.md).
+- **Next action:** optional bounded second-backend prototype; no further implementation remains in this plan.
+- **Blockers:** none.
+- **Completion evidence:** [034 delivery record](034-renderer-completion.md#delivery-and-validation) and
+  [machine-readable results](../benchmarks/034-renderer-completion.json).
 
 Completed foundations, recorded in [Tactical 013](013-renderer-boundary-and-allocation-audit.md#implementation-record-renderer-resource-boundaries):
 
@@ -78,9 +78,9 @@ Completed foundations, recorded in [Tactical 013](013-renderer-boundary-and-allo
 | --- | --- | --- | --- |
 | R1 | Define and use a neutral frame contract for outdoor terrain, shadows, sorted scene content and editor overlays. Separate static content updates from camera/dynamic frame data. Builds on the completed foundations. | Real outdoor/editor orchestration submits ordered data; no Canvas objects or draw callbacks cross the contract. Existing phase/depth behavior and reusable frame ownership are preserved. | Done / [029](029-outdoor-frame-contract.md), [030](030-editor-overlay-data.md) / `d613cfd`; `9823673` |
 | R2 | Express indoor floors, actors, furniture and walls through ordered data on the same contract. Depends on R1; split if needed to preserve occlusion safely. | Remove indoor actor draw callbacks; representative rooms, edited furniture and actor/wall crossings retain visual parity and cache reuse. | Done / [031](031-interior-frame-data.md) / `dce609b` |
-| R3 | Separate sprite/atlas descriptions from loaded images. Coordinate IDs and geometry with R1/R2; move earlier if those slices need the catalog first. | Presentation resolves metadata without browser image types. Backends own loaded resources, asset invalidation and stale-resource handling. | Done / [028](028-sprite-metadata.md), [032](032-renderer-host-lifecycle.md), [033](033-shared-terrain-and-consumers.md) / `fb73fa0`; `2d86c08`; current slice |
-| R4 | Complete one backend interface and migrate gameplay, editor, explorer and review consumers. Depends on R1–R3. Include preparation, resize, invalidation, realm change, disposal and resource recovery ownership. | Consumers select a backend at composition; concrete Canvas renderer access leaves game presentation orchestration. Independent instances and lifecycle transitions do not share or leak resources. | Done / [032](032-renderer-host-lifecycle.md), [033](033-shared-terrain-and-consumers.md) / `2d86c08`; current slice |
-| R5 | Remove transitional APIs and prove the boundary with a recording backend and final integration/allocation checks. Depends on R1–R4. | Representative outdoor, indoor and editor frames run through the same presentation path without Canvas resources, draw callbacks or simulation mutation. Remaining platform dependencies are inventoried and justified; all completion gates pass. | Pending / — / — |
+| R3 | Separate sprite/atlas descriptions from loaded images. Coordinate IDs and geometry with R1/R2; move earlier if those slices need the catalog first. | Presentation resolves metadata without browser image types. Backends own loaded resources, asset invalidation and stale-resource handling. | Done / [028](028-sprite-metadata.md), [032](032-renderer-host-lifecycle.md), [033](033-shared-terrain-and-consumers.md) / `fb73fa0`; `2d86c08`; `c14dcc7` |
+| R4 | Complete one backend interface and migrate gameplay, editor, explorer and review consumers. Depends on R1–R3. Include preparation, resize, invalidation, realm change, disposal and resource recovery ownership. | Consumers select a backend at composition; concrete Canvas renderer access leaves game presentation orchestration. Independent instances and lifecycle transitions do not share or leak resources. | Done / [032](032-renderer-host-lifecycle.md), [033](033-shared-terrain-and-consumers.md) / `2d86c08`; `c14dcc7` |
+| R5 | Remove transitional APIs and prove the boundary with a recording backend and final integration/allocation checks. Depends on R1–R4. | Representative outdoor, indoor and editor frames run through the same presentation path without Canvas resources, draw callbacks or simulation mutation. Remaining platform dependencies are inventoried and justified; all completion gates pass. | Done / [034](034-renderer-completion.md) / final delivery commit |
 
 Each milestone row must link its actual child tactical(s), delivered commits and
 evidence as work proceeds. Use pending, planning, implementing, validating, done
@@ -115,27 +115,27 @@ remaining coupling; nominal milestone completion is not sufficient.
 
 ## Completion gates
 
-- [ ] Production outdoor, indoor and editor presentation emits backend-neutral
+- [x] Production outdoor, indoor and editor presentation emits backend-neutral
   ordered data, covering terrain, shadows, actors, elevation, grass, particles,
   walls/furniture and overlays. Ordering lives outside the backend.
-- [ ] Static terrain/asset updates are versioned separately from dynamic frame
+- [x] Static terrain/asset updates are versioned separately from dynamic frame
   data. Camera-only movement reuses static geometry/resources; frame borrowing
   and future asynchronous ownership requirements are explicit.
-- [ ] Sprite metadata is independent of loaded images. Backends own concrete
+- [x] Sprite metadata is independent of loaded images. Backends own concrete
   image/texture/buffer resources, preparation and complete lifecycle handling.
-- [ ] Gameplay, editor, explorer and applicable review rendering use the same
+- [x] Gameplay, editor, explorer and applicable review rendering use the same
   contracts. Remaining Canvas dependencies are confined to implementations,
   platform composition or explicitly documented independent UI/debug surfaces;
   exceptions must not conceal game presentation coupling.
-- [ ] Transitional adapters and obsolete APIs are removed. A dependency check
+- [x] Transitional adapters and obsolete APIs are removed. A dependency check
   guards forbidden imports/types, and a recording backend exercises the actual
   presentation path for representative frames and lifecycle/resource updates.
-- [ ] Existing visual invariants and immutable review identities are preserved.
+- [x] Existing visual invariants and immutable review identities are preserved.
   Independent renderers, equal-revision replacement, asset changes, partial
   builds, eviction, stale handles and realm resets have relevant passing checks.
-- [ ] Integrated checks pass, allocation/retention comparisons show no unexplained
+- [x] Integrated checks pass, allocation/retention comparisons show no unexplained
   regression for equivalent work, and device evidence/limitations are recorded.
-- [ ] All children, topic status, this checkpoint and index reflect actual delivery;
+- [x] All children, topic status, this checkpoint and index reflect actual delivery;
   changes are committed and any separate follow-up is explicitly scoped.
 
 For each runtime slice run `npm run typecheck`, `npm test` and `npm run check`,
@@ -171,3 +171,10 @@ fallback imagery; don't trade readiness for a better frame-time number.
 
 - R1 split: 029 delivers terrain/scene submission; editor overlay geometry follows
   as a bounded child. This preserves the current phase order while migrating.
+
+
+- Final delivery: all five milestones completed across 028–034. Fresh validation
+  passes 1,420 unit tests, 293 browser tests, typechecks/lint/build and desktop plus
+  physical Android v4/v10/v11 readiness. All 551 immutable candidate records and
+  81 room pixel cases remain unchanged. See 034 for allocation variation, native
+  composition exceptions, device conditions and explicitly separate follow-ups.

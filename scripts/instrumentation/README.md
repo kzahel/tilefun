@@ -106,3 +106,20 @@ recovery window. `--expect-known-gaps` permits a characterization run without
 changing the recorded result. Current failures and real WebRTC browser checks
 are documented in [Tactical 014](../../docs/tactical/014-webrtc-delivery-validation.md).
 This models application-frame faults, not UDP/SCTP congestion or WAN behavior.
+
+
+## Renderer boundary probes
+
+Run from the repository root with `node scripts/instrumentation/<name>.mjs`:
+
+- `terrain-frame-allocation`: matched moving-camera placement, resource handles,
+  allocation sampling and geometry hash; excludes preparation and drawing.
+- `elevation-allocation`: static descriptor reuse and geometry hashes.
+- `terrain-scheduler-allocation`: ready/pending residency bookkeeping and job order.
+- `grass-frame-allocation` / `grass-cache-retention`: warm frame pools and discarded
+  chunk lifetime, with explicit GC only between retention batches.
+
+Each owns an isolated Vite origin and bundled Chromium and closes both on exit.
+V8 sampling is not an allocation census or a frame-pacing measurement. Compare
+work counts, hashes, cache counters and source revisions alongside sampled bytes.
+See [renderer completion](../../docs/tactical/034-renderer-completion.md).

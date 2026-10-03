@@ -15,13 +15,14 @@ import type {
   RenderView,
   TerrainPreparationOptions,
 } from "./RenderFrame.js";
-import type { TerrainDrawOptions } from "./TerrainFrame.js";
+import { type TerrainDrawOptions, TerrainFrame } from "./TerrainFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
 
 /** Canvas resources and projection helpers never escape through RenderBackend. */
 export class CanvasRenderBackend implements RenderBackend {
   private readonly camera = new Camera();
+  private readonly terrainFrame = new TerrainFrame();
   assets: SpriteCatalog;
   private disposed = false;
   private interior: CanvasInteriorResources | null = null;
@@ -104,15 +105,7 @@ export class CanvasRenderBackend implements RenderBackend {
     options?: TerrainDrawOptions,
   ) {
     this.assertLive();
-    return this.terrain.collectTerrainDraws(
-      this.setView(view),
-      world,
-      this.sheets,
-      visible,
-      options?.readyOnly ?? false,
-      0,
-      options?.overscanPixels ?? 1,
-    );
+    return this.terrainFrame.collect(view, world, this.terrain, visible, options);
   }
 
   collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange) {
@@ -222,6 +215,7 @@ export class CanvasRenderBackend implements RenderBackend {
 
   clear(): void {
     this.terrain.clear();
+    this.terrainFrame.clear();
     this.interior = null;
   }
 }

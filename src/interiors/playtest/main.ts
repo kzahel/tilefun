@@ -9,12 +9,9 @@ import type { SpriteItem } from "../../rendering/SceneItem.js";
 import { furnitureRecipe } from "../../scenarios/FurnitureRecipe.js";
 import { ScenarioClient } from "../../scenarios/ScenarioClient.js";
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
-import {
-  drawFurnishedInterior,
-  furnitureDrawOrder,
-  furnitureSignature,
-} from "../FurnishedInterior.js";
+import { drawFurnishedInterior } from "../FurnishedInterior.js";
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
+import { furnitureDrawOrder, furnitureSignature } from "../FurnitureLayout.js";
 import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH } from "../FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
 import { motionSceneSignature, motionVerdict, nextUncheckedScene } from "../MotionReview.js";

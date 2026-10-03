@@ -6,7 +6,8 @@ import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
 import { CachedInteriorRenderer } from "../CachedInteriorRenderer.js";
-import { drawFurnishedInterior, furnitureSignature } from "../FurnishedInterior.js";
+import { drawFurnishedInterior } from "../FurnishedInterior.js";
+import { furnitureSignature } from "../FurnitureLayout.js";
 import { compileGameplayRoom, initialRoom } from "../GameplayRoom.js";
 import type { ReviewCase } from "./ReviewCases.js";
 export function renderInteriorCandidate(

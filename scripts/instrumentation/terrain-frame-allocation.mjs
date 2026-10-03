@@ -23,9 +23,10 @@ try {
     const { Chunk } = await import("/tilefun/src/world/Chunk.ts");
     const { Camera } = await import("/tilefun/src/rendering/Camera.ts");
     const { TileRenderer } = await import("/tilefun/src/rendering/TileRenderer.ts");
+    const { TerrainFrame } = await import("/tilefun/src/rendering/TerrainFrame.ts");
+    const frame = new TerrainFrame();
     const renderer = new TileRenderer(),
-      chunks = new Map(),
-      sheets = new Map();
+      chunks = new Map();
     for (let y = -1; y <= 1; y++)
       for (let x = -1; x <= 1; x++) {
         const chunk = new Chunk();
@@ -43,7 +44,7 @@ try {
       for (let i = 0; i < frames; i++) {
         view.x = 128 + Math.sin(i * 0.01) * 16;
         view.y = 128 + Math.cos(i * 0.01) * 16;
-        const draws = renderer.collectTerrainDraws(view, world, sheets, range, false, 0);
+        const draws = frame.collect(view, world, renderer, range);
         items += draws.length;
         if (parity) geometry.push(draws.map(({ resource: _id, ...r }) => r));
       }

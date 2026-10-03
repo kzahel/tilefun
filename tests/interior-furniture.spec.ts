@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { furnitureSignature } from "../src/interiors/FurnishedInterior.js";
+import { furnitureSignature } from "../src/interiors/FurnitureLayout.js";
 import { furnitureReviewCases } from "../src/interiors/review/FurnitureReviewCases.js";
 import { expect, test } from "./helpers/interior-review.js";
 

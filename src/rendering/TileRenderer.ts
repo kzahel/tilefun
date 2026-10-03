@@ -24,9 +24,7 @@ import type { Camera } from "./Camera.js";
 import { allocateTerrainResourceId, CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
-import type { TerrainDraw } from "./RenderFrame.js";
 import type { ElevationItem } from "./SceneItem.js";
-import { TerrainFrame } from "./TerrainFrame.js";
 import type {
   TerrainPresentation,
   TerrainRenderWorld,
@@ -71,8 +69,6 @@ export function getWaterFrame(nowMs: number): number {
  * at native resolution (256x256), then drawn scaled to the main canvas.
  * Includes both terrain (with autotile) and detail layers in the cache.
  */
-export type { TerrainRenderWorld } from "./TerrainPresentation.js";
-
 export class TileRenderer implements TerrainPresentation {
   /** Indexed sheets array (index matches BlendEntry.sheetIndex). */
   private blendSheets: Spritesheet[] = [];
@@ -86,7 +82,6 @@ export class TileRenderer implements TerrainPresentation {
   private readonly resources = new CanvasTerrainResources();
   private readonly elevation = new ElevationDescriptorCache();
   private readonly partialResources = new Map<TerrainResourceId, OffscreenCanvas>();
-  private readonly terrainFrame = new TerrainFrame();
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
   private readonly resident = new Map<string, TerrainResident>();
@@ -104,7 +99,6 @@ export class TileRenderer implements TerrainPresentation {
   /** Release surfaces on realm changes and teardown, including half-built jobs. */
   clear(): void {
     this.resources.clear();
-    this.terrainFrame.clear();
     this.elevation.clear();
     this.resident.clear();
     this.clearCacheBuildStates();
@@ -301,70 +295,6 @@ export class TileRenderer implements TerrainPresentation {
         if (sheet) this.roadSheetMap.set(rt, sheet);
       }
     }
-  }
-
-  /**
-   * Draw all visible chunks from their cached OffscreenCanvas.
-   * All layers (water base, autotile, details) are baked into the cache.
-   */
-  drawTerrain(
-    ctx: CanvasRenderingContext2D,
-    camera: Camera,
-    world: TerrainRenderWorld,
-    sheets: Map<string, Spritesheet>,
-    visible: ChunkRange,
-    readyOnly = false,
-    cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
-    chunkOverscanPixels = 1,
-  ): void {
-    const draws = this.collectTerrainDraws(
-      camera,
-      world,
-      sheets,
-      visible,
-      readyOnly,
-      cacheRowBudget,
-      chunkOverscanPixels,
-      ctx.canvas.width,
-      ctx.canvas.height,
-    );
-    for (const draw of draws) {
-      const image = this.resolveTerrainResource(draw.resource);
-      if (image) ctx.drawImage(image, draw.x, draw.y, draw.width, draw.height);
-    }
-  }
-
-  /** Borrowed placement buffer; valid until the next collection or clear. */
-  collectTerrainDraws(
-    camera: Camera,
-    world: TerrainRenderWorld,
-    sheets: Map<string, Spritesheet>,
-    visible: ChunkRange,
-    readyOnly = false,
-    cacheRowBudget = MAX_CHUNK_CACHE_ROWS_PER_FRAME,
-    chunkOverscanPixels = 1,
-    viewportWidth = camera.viewportWidth,
-    viewportHeight = camera.viewportHeight,
-  ): readonly TerrainDraw[] {
-    if (cacheRowBudget > 0)
-      this.prepareVisibleTerrain(
-        camera,
-        world,
-        sheets,
-        visible,
-        cacheRowBudget,
-        viewportWidth,
-        viewportHeight,
-      );
-    return this.terrainFrame.collect(
-      camera,
-      world,
-      this,
-      visible,
-      { readyOnly, overscanPixels: chunkOverscanPixels },
-      viewportWidth,
-      viewportHeight,
-    );
   }
 
   groundResourceId(

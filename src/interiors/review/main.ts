@@ -1,8 +1,9 @@
 import { loadModernInteriorsAtlasIndex } from "../../assets/ModernInteriorsAtlasIndex.js";
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
-import { compileFurniture, drawFurnitureFootprints } from "../FurnishedInterior.js";
+import { drawFurnitureFootprints } from "../FurnishedInterior.js";
 import { FURNITURE_CATALOG_VERSION } from "../FurnitureCatalog.js";
+import { compileFurniture } from "../FurnitureLayout.js";
 import { REVIEW_STAGES, type ReviewCase, reviewCases } from "./ReviewCases.js";
 import {
   currentVerdict,

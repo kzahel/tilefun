@@ -5,8 +5,8 @@ Status: shared Worker authority and terrain preparation implemented; physical
 Android traversal validated; renderer/allocation audit complete; grass cache
 identity/lifetime fixed, gameplay grass frame storage and terrain scheduler records
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
-removed from world chunks; remaining frame/backend boundaries and raster scheduling
-are follow-up work.
+removed from world chunks; neutral frame/backend separation delivered, with raster
+scheduling and cold-entry presentation remaining as separate performance work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence.
@@ -110,13 +110,13 @@ Elevation geometry now caches unchanged chunk descriptors and refers to backend
 resource IDs. The synthetic nine-chunk sample reduced collection allocations
 from 222.9 MB to 46.0 MB (about 79%) with identical geometry; output lists still
 allocate. See [rendering architecture](rendering-architecture.md) for the completed
-resource ownership/handle changes and the remaining frame/backend interface.
+resource ownership, handles and completed frame/backend interface.
 Continue with remaining scene allocations and measured raster submission. The grass cache lifetime
 fix is complete; a synthetic post-GC probe verifies that discarded chunk placements no
 longer accumulate. Phone traversal still has occasional missed frames, so this
 does not resolve the reported hitch. Canvas resources now live in renderer-owned caches and elevation items carry
-opaque handles. The full frame/backend interface, asset metadata and indoor
-callbacks remain the next decoupling work. The audit records a reproducible stale-grass case and desktop
+opaque handles. The complete frame/backend interface and asset metadata are separated; indoor
+actor callbacks are replaced by ordered data. The audit records a reproducible stale-grass case and desktop
 GC events; attribution of the user's intermittent phone hitch remains open.
 
 Bound offscreen preparation work while keeping missing visible terrain first.
@@ -124,3 +124,24 @@ Validate movement, wide viewports, edits and cache catch-up before choosing a
 production policy. Improve cold-entry presentation and broaden lower-end phone,
 iOS and thermal coverage before setting timing gates. P2P can adopt the host
 boundary when needed; moving authority again would not fix measured raster work.
+
+
+## Renderer decoupling completion evidence
+
+[Parent 022](../tactical/022-renderer-backend-decoupling.md) and
+[final evidence](../benchmarks/034-renderer-completion.json) record the completed
+boundary and integration checks. Shared terrain placement removes per-frame
+coordinate/projection objects and a visibility set from the no-preparation path.
+The matched 3,000-frame/27,000-placement sample fell from 4.53 MB to 1.69 MB;
+geometry hashes match. This is sampled CPU allocation, not an FPS claim.
+Elevation descriptor counts/hashes and scheduler order/record counts remain
+unchanged; their allocation totals are close to the pre-series baseline.
+
+Final Pixel 7a touch traversal covers v4, v10 and current v11: zero missing-data
+or incomplete-cache frames in walking, sprinting, reversal and zoom-out. Movement
+frame p95 is 16.7–16.8 ms. Cold entry retains 22–24 unfinished-cache frames and
+0–3 missing-data frames. Ordinary and edited rooms both show 16.7 ms frame p95;
+touch movement advances 12.8 pixels, and return to the street succeeds. No page
+errors occurred. The phone was charging, about 30.5–30.8°C during traversal,
+thermal status 0 afterward. This short run does not establish sustained thermal,
+lower-end device or iOS performance, and does not close the intermittent-hitch issue.

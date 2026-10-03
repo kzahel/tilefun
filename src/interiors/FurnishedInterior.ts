@@ -15,16 +15,6 @@ import {
 } from "./FurnitureLayout.js";
 import type { LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
-export {
-  compileFurniture,
-  furnishedSceneOrder,
-  furnitureDrawOrder,
-  furnitureOverlaps,
-  furnitureSignature,
-  type PlacedFurniture,
-  prepareFurnishedInterior,
-} from "./FurnitureLayout.js";
-
 /** Neutral actor data; legacy Canvas composition adapters never accept callbacks. */
 export interface FurnitureActor {
   id: string;

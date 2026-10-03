@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
+import { TerrainFrame } from "./TerrainFrame.js";
 import { TileRenderer } from "./TileRenderer.js";
 
 class Surface {
@@ -144,11 +145,7 @@ describe("terrain preparation", () => {
     draw.mockClear();
     renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 1);
     expect(draw.mock.calls[0]?.slice(1, 3)).toEqual([1, 0]);
-    const ctx = {
-      canvas: { width: 256, height: 256 },
-      drawImage: vi.fn(),
-    } as unknown as CanvasRenderingContext2D;
-    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 0);
+    new TerrainFrame().collect(camera, world, renderer, visible);
     expect(renderer.getDiagnostics().building).toBe(1);
   });
 
@@ -231,11 +228,7 @@ describe("terrain preparation", () => {
     const { camera, world } = scene();
     const renderer = new TileRenderer();
     drawing(renderer);
-    const ctx = {
-      canvas: { width: 256, height: 256 },
-      drawImage: vi.fn(),
-    } as unknown as CanvasRenderingContext2D;
-    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 1);
+    renderer.prepareVisibleTerrain(camera, world, sheets, visible, 1);
     expect(renderer.getDiagnostics()).toMatchObject({ resident: 0, building: 1 });
     renderer.prepareTerrain(
       camera,
@@ -323,14 +316,10 @@ describe("terrain preparation", () => {
     const { camera, world } = scene();
     const renderer = new TileRenderer();
     drawing(renderer);
-    const ctx = {
-      canvas: { width: 256, height: 256 },
-      drawImage: vi.fn(),
-    } as unknown as CanvasRenderingContext2D;
-    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 16);
+    renderer.prepareVisibleTerrain(camera, world, sheets, visible, 16);
     const old = world.getChunkIfLoaded(0, 0);
     world.chunks.put(0, 0, new Chunk());
-    renderer.drawTerrain(ctx, camera, world, sheets, visible, false, 16);
+    renderer.prepareVisibleTerrain(camera, world, sheets, visible, 16);
     expect(renderer.getTerrainSurface(old)).toBeNull();
     expect(renderer.getDiagnostics().surfaceBytes).toBe(256 * 256 * 4);
     renderer.prepareTerrain(
@@ -349,8 +338,11 @@ it("submits reusable neutral placements and retires partial identities on restar
   const { camera, world } = scene();
   const renderer = new TileRenderer();
   drawing(renderer);
-  const collect = (budget = 4, readyOnly = false) =>
-    renderer.collectTerrainDraws(camera, world, sheets, visible, readyOnly, budget);
+  const frame = new TerrainFrame();
+  const collect = (budget = 4, readyOnly = false) => {
+    if (budget > 0) renderer.prepareVisibleTerrain(camera, world, sheets, visible, budget);
+    return frame.collect(camera, world, renderer, visible, { readyOnly });
+  };
   const first = collect();
   const draw = first[0];
   if (!draw) throw Error("Missing partial placement");
@@ -375,6 +367,7 @@ it("submits reusable neutral placements and retires partial identities on restar
   expect(renderer.isTerrainReady(world.getChunkIfLoaded(0, 0))).toBe(true);
   const completeId = draw.resource;
   renderer.clear();
+  frame.clear();
   expect(first).toEqual([]);
   expect(renderer.resolveTerrainResource(completeId)).toBeNull();
 });

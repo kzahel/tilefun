@@ -21405,15 +21405,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:504"
+          "source": "src/interiors/playtest/main.ts:501"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:525"
+          "source": "src/interiors/playtest/main.ts:522"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:860"
+          "source": "src/interiors/playtest/main.ts:857"
         },
         {
           "system": "Gameplay",
@@ -23393,7 +23393,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CanvasRenderBackend.ts:161"
+          "source": "src/rendering/CanvasRenderBackend.ts:154"
         },
         {
           "system": "Editor",

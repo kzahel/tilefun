@@ -1,5 +1,5 @@
 import { test as base, expect, type Page } from "@playwright/test";
-import { furnitureSignature } from "../../src/interiors/FurnishedInterior.js";
+import { furnitureSignature } from "../../src/interiors/FurnitureLayout.js";
 import { reviewCases } from "../../src/interiors/review/ReviewCases.js";
 import type { ReviewFeedback } from "../../src/interiors/review/ReviewFeedback.js";
 
