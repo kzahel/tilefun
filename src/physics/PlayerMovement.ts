@@ -36,6 +36,8 @@ import {
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
 export interface MovementPhysicsParams {
+  walkSpeed?: number;
+  walkFrameDuration?: number;
   revision: number;
   gravityScale: number;
   friction: number;
@@ -656,7 +658,8 @@ export function applyMovementPhysics(
     const len = Math.sqrt(dx * dx + dy * dy);
     const wishdirX = dx / len;
     const wishdirY = dy / len;
-    const baseSpeed = input.sprinting ? PLAYER_SPEED * PLAYER_SPRINT_MULTIPLIER : PLAYER_SPEED;
+    const walkSpeed = physics.walkSpeed ?? PLAYER_SPEED;
+    const baseSpeed = input.sprinting ? walkSpeed * PLAYER_SPRINT_MULTIPLIER : walkSpeed;
     const wishspeed = baseSpeed * surface.speedMult;
     if (airborne && !physics.platformerAir) {
       applyAirAcceleration(
@@ -677,8 +680,8 @@ export function applyMovementPhysics(
   if (entity.sprite) {
     entity.sprite.moving = moving;
     entity.sprite.frameDuration = input.sprinting
-      ? PLAYER_FRAME_DURATION / PLAYER_SPRINT_MULTIPLIER
-      : PLAYER_FRAME_DURATION;
+      ? (physics.walkFrameDuration ?? PLAYER_FRAME_DURATION) / PLAYER_SPRINT_MULTIPLIER
+      : (physics.walkFrameDuration ?? PLAYER_FRAME_DURATION);
     if (moving) {
       if (Math.abs(dx) >= Math.abs(dy)) {
         entity.sprite.direction = dx > 0 ? Direction.Right : Direction.Left;

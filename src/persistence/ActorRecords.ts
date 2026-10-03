@@ -67,7 +67,9 @@ export function encodeActor(actor: Entity | Prop, parent?: Entity): ActorRecord 
   ) as ActorRecord;
 }
 
-export function decodeActor(record: ActorRecord): Entity | Prop {
+export type ActorDefinitions = ReadonlyMap<string, Entity | Prop>;
+
+export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions): Entity | Prop {
   if (
     record.version !== 2 ||
     !record.persistentId ||
@@ -81,7 +83,18 @@ export function decodeActor(record: ActorRecord): Entity | Prop {
   )
     throw new Error("Invalid saved actor record.");
   let actor: Entity | Prop;
-  if (record.kind === "prop") actor = createProp(record.type, record.wx, record.wy);
+  const template = definitions?.get(record.type);
+  if (template) {
+    actor = structuredClone(template);
+    actor.position = { wx: record.wx, wy: record.wy };
+    if ((record.kind === "prop") !== "isProp" in actor)
+      throw new Error("Actor definition kind mismatch");
+    if (!("isProp" in actor))
+      for (const field of DURABLE_ENTITY_FIELDS) {
+        if (Object.hasOwn(record.state, field))
+          Object.assign(actor, { [field]: structuredClone(record.state[field]) });
+      }
+  } else if (record.kind === "prop") actor = createProp(record.type, record.wx, record.wy);
   else {
     const factory = ENTITY_FACTORIES[record.type];
     if (!factory) throw new Error(`Unsupported saved actor kind: ${record.type}`);

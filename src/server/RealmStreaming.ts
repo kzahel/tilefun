@@ -60,7 +60,7 @@ export class RealmStreaming {
         if (byId.size !== actors.length) throw new Error("Duplicate durable actor identity.");
         const groups = new Map<string, number>();
         for (const actor of actors) {
-          decodeActor(actor);
+          decodeActor(actor, records.definitions);
           const seen = new Set<string>([actor.persistentId]);
           let root = actor;
           while (root.parent) {

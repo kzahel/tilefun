@@ -126,6 +126,7 @@ export class RealmRecords {
     readonly entities: EntityManager,
     readonly props: PropManager,
     readonly saves: SaveManager,
+    readonly definitions?: import("./ActorRecords.js").ActorDefinitions,
   ) {
     entities.onMutation = (entity) => this.changed(entity);
     entities.onSpawn = (entity) => {
@@ -245,7 +246,7 @@ export class RealmRecords {
     try {
       for (const record of records) {
         if (this.byId.has(record.persistentId)) continue;
-        const actor = decodeActor(record);
+        const actor = decodeActor(record, this.definitions);
         if (record.originScope) this.origins.set(actor, record.originScope);
         if ("isProp" in actor) this.props.add(actor);
         else {

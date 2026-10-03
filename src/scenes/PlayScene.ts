@@ -2,6 +2,7 @@ import { AmbientSystem } from "../audio/AmbientSystem.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
+import { predictInput } from "../client/predictInput.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
@@ -350,11 +351,12 @@ export class PlayScene implements GameScene {
         }
 
         // Store current input for future reconciliation, then predict.
-        if (!gc.storagePaused) this.predictor.storeInput(seq, movement, commandDt);
         if (!gc.storagePaused)
-          this.predictor.update(
-            commandDt,
+          predictInput(
+            this.predictor,
+            seq,
             movement,
+            commandDt,
             gc.stateView.world,
             gc.stateView.props,
             gc.stateView.entities,

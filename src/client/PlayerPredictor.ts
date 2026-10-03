@@ -96,6 +96,8 @@ interface ReconcileReplayStats {
  * position is derived from the mount + local offset.
  */
 export class PlayerPredictor {
+  constructor(private readonly physics = getMovementPhysicsParams) {}
+
   /** The predicted player entity. */
   private predicted: Entity | null = null;
 
@@ -178,7 +180,7 @@ export class PlayerPredictor {
     if (this.inputBuffer.length >= INPUT_BUFFER_SIZE) {
       this.inputBuffer.shift();
     }
-    this.inputBuffer.push({ seq, movement, dt, physics: getMovementPhysicsParams() });
+    this.inputBuffer.push({ seq, movement, dt, physics: this.physics() });
   }
 
   /**
@@ -208,7 +210,7 @@ export class PlayerPredictor {
       };
     }
 
-    this.applyInput(movement, dt, world, props, entities, getMovementPhysicsParams());
+    this.applyInput(movement, dt, world, props, entities, this.physics());
   }
 
   /**
@@ -259,7 +261,7 @@ export class PlayerPredictor {
       dtAvg: 0,
       dtSpread: 0,
       revisions: [],
-      currentRevision: getMovementPhysicsParams().revision,
+      currentRevision: this.physics().revision,
       hasMixedRevisions: false,
       hasRevisionMismatch: false,
     };
@@ -583,7 +585,7 @@ export class PlayerPredictor {
   }
 
   private collectReplayStats(): ReconcileReplayStats {
-    const currentRevision = getMovementPhysicsParams().revision;
+    const currentRevision = this.physics().revision;
     const count = this.inputBuffer.length;
     if (count === 0) {
       return {

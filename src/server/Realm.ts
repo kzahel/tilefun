@@ -111,6 +111,13 @@ function mergePlayerStepOutcomes(
  *
  * GameServer coordinates active realms; RealmReplicator owns their client baselines.
  */
+export interface RealmOptions {
+  definitions?: import("../persistence/ActorRecords.js").ActorDefinitions;
+  physics?: () => import("../physics/PlayerMovement.js").MovementPhysicsParams;
+  random?: () => number;
+  ambientSpawns?: boolean;
+}
+
 export class Realm {
   get persistenceDiagnostics() {
     return {
@@ -240,7 +247,10 @@ export class Realm {
   private static readonly MID_TICK_BUFFER = 6;
   private static readonly MID_TICK_FRAMES = 4;
 
-  constructor(mods: Mod[]) {
+  constructor(
+    mods: Mod[],
+    private readonly options: RealmOptions = {},
+  ) {
     this.mods = mods;
     this.world = new World();
     this.entityManager = new EntityManager();
@@ -529,7 +539,7 @@ export class Realm {
           .map((s) => s.visibleRange),
         [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
       );
-    const movementPhysics = getMovementPhysicsParams();
+    const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
     const preSteppedEntityIds = new Set<number>();
 
     // ── Phase 1: Process player inputs (per-session) ──
@@ -766,7 +776,7 @@ export class Realm {
             ((this.streaming.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
               this.streaming.supported(prop, stepDt)),
         );
-        tickAllAI(active, playerPositions, decisions, Math.random);
+        tickAllAI(active, playerPositions, decisions, this.options.random ?? Math.random);
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
@@ -874,6 +884,7 @@ export class Realm {
     // ── Phase 3: Spawners (per-session, near each player) ──
     for (const session of this.sessions.values()) {
       if (
+        this.options.ambientSpawns === false ||
         dormantClientIds.has(session.clientId) ||
         this.interior ||
         (this.generation.type === "regional" &&
@@ -923,6 +934,7 @@ export class Realm {
     }
 
     if (
+      this.options.ambientSpawns !== false &&
       this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 100 &&
       !this.interior &&
       (this.generation.type !== "regional" || this.generation.version === "regional-v1") &&
@@ -950,24 +962,29 @@ export class Realm {
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
         const replicationTiming = performanceMetrics.start();
-        const messages = this.replication.build(session.clientId, {
-          roomState: this.roomState,
-          world: this.world,
-          entityManager: this.entityManager,
-          propManager: this.propManager,
-          sessions: this.sessions,
-          tickCounter: this.tickCounter,
-          tickRate: this.tickRate,
-          physicsMult: this.physicsMult,
-          playerNamesRevision: this.playerNamesRevision,
-          editorCursorsRevision: this.editorCursorsRevision,
-        });
+        const messages = this.replicate(session.clientId);
         performanceMetrics.end("server.replication", replicationTiming);
         for (const msg of messages) {
           transport.send(session.clientId, msg);
         }
       }
     }
+  }
+
+  /** Shared replication entry point for scheduled and manually stepped hosts. */
+  replicate(clientId: string) {
+    return this.replication.build(clientId, {
+      roomState: this.roomState,
+      world: this.world,
+      entityManager: this.entityManager,
+      propManager: this.propManager,
+      sessions: this.sessions,
+      tickCounter: this.tickCounter,
+      tickRate: this.tickRate,
+      physicsMult: this.physicsMult,
+      playerNamesRevision: this.playerNamesRevision,
+      editorCursorsRevision: this.editorCursorsRevision,
+    });
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */
@@ -1135,8 +1152,8 @@ export class Realm {
         const player = session.player;
         const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
         // Add random jitter so consecutive throws spread out
-        const speedJitter = 1 + (Math.random() - 0.5) * 0.15; // ±7.5% speed
-        const angleJitter = (Math.random() - 0.5) * 0.18; // ±~5° direction
+        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // ±7.5% speed
+        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // ±~5° direction
         const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
         const jitteredSpeed = speed * speedJitter;
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
@@ -1342,7 +1359,12 @@ export class Realm {
     // Open persistence for this world
     const store = createStore(worldId);
     this.saveManager = new SaveManager(store);
-    this.records = new RealmRecords(this.entityManager, this.propManager, this.saveManager);
+    this.records = new RealmRecords(
+      this.entityManager,
+      this.propManager,
+      this.saveManager,
+      this.options.definitions,
+    );
     this.entityManager.removalListeners.add((entity) => this.previousActive.delete(entity));
     this.entityManager.canPlace = (wx, wy) =>
       Number.isFinite(wx) &&
@@ -1488,6 +1510,7 @@ export class Realm {
         cameraY = playerY;
       }
       if (
+        this.options.ambientSpawns !== false &&
         !this.interior &&
         !(
           this.generation.type === "regional" &&
