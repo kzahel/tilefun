@@ -1,15 +1,34 @@
-# Vehicle sprite and geometry review
+# Vehicles: approved geometry and planned traffic
 
 Topic: vehicles
-Status: All 180 vehicle views human-approved in Workshop; driving is not implemented.
+Status: All 180 vehicle views and geometry approved; generated-road traffic and roof riding planned, not implemented.
 Updated: 2026-10-03.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
 is the review entry point, linked from the sidebar, All tools and the global
 Vehicle geometry batch. It registers all 180 directions across 45 sets (including
 two fire-truck ladder states), even with no feedback. The original
-[source audit and driving proposal](../research/road-vehicles.md) owns provenance
-and the proposed later traffic architecture.
+[source audit](../research/road-vehicles.md) owns provenance. The agreed
+[traffic and roof-riding plan](../tactical/017-generated-road-traffic-and-roof-riding.md)
+owns implementation sequencing and acceptance.
+
+## Agreed gameplay direction
+
+Gentle autonomous traffic uses procedurally generated roads only: mostly city
+circulation, with occasional intercity trips. Cars keep spacing, yield at
+intersections and stop for players/animals without collision damage. Painted
+roads, player driving, parking, shop visits and passengers entering/exiting cars
+are deferred.
+
+A player can stand in front of a car to stop it, jump onto its roof, and ride
+away when the road is clear. The roof is a moving support surface, not a driver
+seat. A roof passenger does not itself stop the car and can walk or jump off;
+an airborne player in front of the bumper still needs safe clearance. Carrying
+a player keeps the vehicle active across streaming and intercity boundaries.
+
+The first playable milestone combines neighborhood traffic with this complete
+roof-riding interaction. The next review is of behavior scenes and tuning, not
+another per-view approval round. Implementation awaits a separate request.
 
 ## Reviewing
 
@@ -18,7 +37,8 @@ The diagram shows the native sprite crop, ground bounding box, physical height,
 anchor and sorting line. One grid cell is 16 world pixels. The ground box has
 editable X, Y, width and depth; physical height is a separate value above the
 road. Anchor and depth sorting are in the expandable controls. These are
-hand-selected family proposals, not accepted collision or gameplay defaults.
+hand-selected family proposals; the saved approved snapshots include any human
+edits and remain separate from committed gameplay defaults until promotion.
 
 The walker uses the production prop renderer and collision implementation.
 Use arrows/WASD on the focused scene or the on-screen direction buttons to test
@@ -41,7 +61,7 @@ The shared Workshop outbox handles offline retry and pending-save status.
   existing parked-car props, generators or promotion banks.
 - Three new candidate crops remove one stray top row from the police west and
   ambulance side rectangles. Original source pixels and audited rectangles remain
-  intact. These new crops require human review like every other vehicle view.
+  intact. These crops were included in the completed human vehicle review.
 - `VehicleDiagram.ts` is shared by the manifest and UI. Each candidate fingerprint
   pins the verified source PNG, directional definition, geometry and diagram pixels.
   The UI checks its render against the manifest before enabling submission.
@@ -88,7 +108,10 @@ Human review checkpoint (2026-10-03): the user reported completing the vehicle
 batch, and `npm run workshop:inbox` confirms 180 approved, zero unchecked, zero
 changed and zero Needs changes. Exact accepted geometry remains in the shared
 feedback records; this checkpoint does not promote the original default proposals.
+The user subsequently explicitly confirmed geometry approval as well and agreed
+the generated-road traffic/roof-riding scope above. No additional approval clicks
+are needed for unchanged snapshots. Roof support areas and turning behavior are
+new implementation concerns, not evidence that the approved bounds need re-review.
 
-Next: promote the exact human-approved sprite/geometry snapshots to new gameplay
-identities when requested, then implement the separately proposed bounded traffic
-loop only when requested.
+Next, when implementation is requested: follow Tactical 017, beginning with exact
+snapshot promotion and a generated-neighborhood traffic/roof-riding demonstration.

@@ -1,6 +1,10 @@
 # Road vehicles: source audit and proposed approach
 
 Checked 2026-10-03. Driving implementation has not started.
+The gameplay proposal below is historical: the agreed scope and sequencing now
+live in [Tactical 017](../tactical/017-generated-road-traffic-and-roof-riding.md).
+All 180 views and their geometry are approved; generated-road traffic and roof
+riding come first, with player driving and painted-road support deferred.
 The source audit below now feeds the [Workshop vehicle review](../topics/vehicles.md),
 which has editable bounding boxes/heights and explicit approvals. Original Workshop request: `a582d1ba-a290-4e2a-9473-99191dac6d38`
 (“cars”), selection `[0,1152,208,384]` on `me-complete`.
@@ -143,6 +147,5 @@ rectangles remain unchanged. `npm run typecheck`, all 1,216 unit tests and
 audit changed no runtime or render inputs. The later Workshop implementation
 and its validation are tracked in the [vehicle topic](../topics/vehicles.md).
 
-Next step: review sprites, ground bounds, height and sorting in
-[Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles).
-Turning and traffic simulation remain later work.
+The later sprite/geometry review is complete; see the [vehicle topic](../topics/vehicles.md)
+for the approval checkpoint. Implementation remains pending under Tactical 017.
