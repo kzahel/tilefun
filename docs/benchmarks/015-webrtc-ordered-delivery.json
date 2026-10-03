@@ -1,0 +1,313 @@
+{
+  "sourceCommit": "c19d82b112588b2de28428b8d69d5f87804f71bc",
+  "sourceDirty": true,
+  "policy": "production-ordered-sync",
+  "scope": "Real replication/codec; channel model with bounded 30-tick loss delay on sync and drops/reordering on entities; not UDP/SCTP impairment",
+  "steps": {
+    "impaired": 240,
+    "initialClean": 120,
+    "recoveryAfterDrain": 120,
+    "tickHz": 60
+  },
+  "results": [
+    {
+      "profile": "ordered-100ms",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "ordered-100ms",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "ordered-100ms",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-1pct",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 1,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-1pct",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 1,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-1pct",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 2,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-5pct",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 12,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-5pct",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 9,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-5pct",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 10,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-20pct",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 44,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-20pct",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 46,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "loss-20pct",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 41,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "burst-6frames",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 48,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "burst-6frames",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 48,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "burst-6frames",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 48,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "reorder-0to200ms",
+      "seed": 42,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "reorder-0to200ms",
+      "seed": 2026,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    },
+    {
+      "profile": "reorder-0to200ms",
+      "seed": 8675309,
+      "dropped": 0,
+      "delayedByLoss": 0,
+      "reordered": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "maxPositionErrorPx": 0,
+      "wireBytes": 472459,
+      "convergedAfter120CleanFrames": true
+    }
+  ],
+  "browser": {
+    "scope": "Real standalone WebRTC server, two isolated bundled Chromium contexts, application receive hooks; loopback only",
+    "scenarios": [
+      {
+        "scenario": "reliable RTC delivers spawns with unreliable faults armed, channel closure and reconnect",
+        "status": "passed",
+        "durationMs": 7325,
+        "observed": {
+          "beforeClosure": {
+            "dropped": 0,
+            "appliedFrames": 209,
+            "entitiesFrames": 0,
+            "syncFrames": 239,
+            "bytes": 982630
+          },
+          "afterClosure": {
+            "dropped": 0,
+            "appliedFrames": 332,
+            "entitiesFrames": 0,
+            "syncFrames": 362,
+            "bytes": 984967
+          },
+          "reconnectConverged": true
+        }
+      },
+      {
+        "scenario": "reliable RTC delivers exits and orders a world reset behind delayed old-world baselines",
+        "status": "passed",
+        "durationMs": 6721,
+        "observed": {
+          "dropped": 0,
+          "appliedFrames": 351,
+          "entitiesFrames": 0,
+          "syncFrames": 389,
+          "bytes": 1445541,
+          "heldMessages": 90,
+          "staleWorldEntities": 0
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Reliable lane loss is modeled as bounded delay; this is not SCTP/UDP impairment or latency measurement.",
+    "No WAN/NAT/TURN, congestion, mobile or cross-browser validation.",
+    "wireBytes counts encoded server traffic, not delivered bandwidth."
+  ],
+  "verification": {
+    "typecheck": "all three repository configs and strict standalone harness/CLI check passed",
+    "unit": {
+      "passed": 1207,
+      "files": 118,
+      "deliveryExpectedFailures": 0
+    },
+    "browser": {
+      "passed": 243,
+      "includesDeliveryRegressions": true
+    },
+    "build": "passed",
+    "lint": {
+      "newDiagnostics": 0,
+      "existingWarnings": 122,
+      "existingInfos": 32
+    },
+    "runtimeProtocolChanged": true
+  }
+}

@@ -57,9 +57,8 @@ interface WebRtcServerTransportOptions {
  *
  * Design:
  * - Signaling: WebSocket (offer/answer + ICE candidates)
- * - Game data: dual data channels on one peer connection
- *   - entities: unordered + maxRetransmits=0 (frame hot path)
- *   - sync: ordered + reliable (all sync/control + client->server)
+ * - Game data: reliable ordered sync for all frames, control and client input.
+ * - Optional legacy entities channel is accepted but not used for server delivery.
  * - Message payloads: existing binary protocol (encodeServerMessage/decodeClientMessage)
  */
 export class WebRtcServerTransport implements IServerTransport {
@@ -293,7 +292,7 @@ export class WebRtcServerTransport implements IServerTransport {
     });
 
     dc.onMessage?.((_data) => {
-      // Phase 6 keeps client->server traffic on reliable sync.
+      // All client->server traffic uses reliable sync.
     });
 
     dc.onClosed?.(() => {
@@ -445,7 +444,7 @@ export class WebRtcServerTransport implements IServerTransport {
   private logEntitiesFallbackOnce(clientId: string, client: ClientState, reason: string): void {
     if (client.entitiesFallbackLogged) return;
     client.entitiesFallbackLogged = true;
-    console.warn(`[tilefun] WebRTC ${clientId}: falling back to sync channel (${reason})`);
+    console.warn(`[tilefun] WebRTC ${clientId}: using reliable sync (${reason})`);
   }
 
   private buildPackets(encoded: Uint8Array, maxPayload: number): Uint8Array[] {

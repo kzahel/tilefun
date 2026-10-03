@@ -11,14 +11,14 @@ import {
 } from "./webrtcChannels.js";
 
 describe("webrtcChannels", () => {
-  it("routes frame messages to entities channel", () => {
+  it("routes dependent entity frames to reliable ordered sync", () => {
     const frame: ServerMessage = {
       type: "frame",
       serverTick: 1,
       lastProcessedInputSeq: 0,
       playerEntityId: 7,
     };
-    expect(classifyServerMessageChannel(frame)).toBe("entities");
+    expect(classifyServerMessageChannel(frame)).toBe("sync");
   });
 
   it("routes sync/control messages to sync channel", () => {
@@ -36,7 +36,7 @@ describe("webrtcChannels", () => {
     expect(classifyServerMessageChannel(controlMsg)).toBe("sync");
   });
 
-  it("keeps all client messages on reliable sync channel for phase 6", () => {
+  it("keeps all client messages on reliable sync channel", () => {
     const input: ClientMessage = {
       type: "player-input",
       seq: 1,
@@ -56,7 +56,7 @@ describe("webrtcChannels", () => {
     expect(classifyClientMessageChannel(terrainEdit)).toBe("sync");
   });
 
-  it("falls back frame routing to sync when entities channel is unavailable", () => {
+  it("keeps frames on sync regardless of entities channel availability", () => {
     const frame: ServerMessage = {
       type: "frame",
       serverTick: 1,
@@ -64,13 +64,13 @@ describe("webrtcChannels", () => {
       playerEntityId: 7,
     };
     expect(routeServerMessageChannel(frame, false)).toEqual({
-      preferred: "entities",
+      preferred: "sync",
       channel: "sync",
-      fellBack: true,
+      fellBack: false,
     });
     expect(routeServerMessageChannel(frame, true)).toEqual({
-      preferred: "entities",
-      channel: "entities",
+      preferred: "sync",
+      channel: "sync",
       fellBack: false,
     });
   });

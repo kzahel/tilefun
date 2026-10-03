@@ -38,7 +38,7 @@ copying every item into multiple checklists.
 
 - [Engine capability map](ENGINE-ARCHITECTURE-CHECKLIST.md): current foundations
   and remaining infrastructure candidates, with the original checklist archived.
-- Broader dedicated dual-channel WebRTC testing and better reconnect UX;
+- Better multiplayer reconnect UX;
   public-server authentication/access controls and hosting dependency tradeoffs.
   See [networking status](topics/multiplayer-networking.md) and
   [server security](SERVER-SECURITY.md).
@@ -47,6 +47,24 @@ copying every item into multiple checklists.
   real DRM, and is not the current committed-assets build workflow.
 - P2P Worker hosting or WASM only when justified by measured needs; see
   [performance](topics/performance.md).
+
+## Deferred networking investigation
+
+Explicitly deferred after the [ordered-delivery fix](tactical/015-webrtc-ordered-delivery.md).
+Current gameplay uses reliable ordered sync; this investigation is not a release
+condition for the bounded bug fix. [Networking](topics/multiplayer-networking.md)
+owns the current contract and evidence.
+
+- Measure latency, congestion and large-transfer blocking before considering a
+  return to unreliable entity traffic. Reopen when real play shows a problem.
+- If justified, design recoverable baselines, entity lifecycle/field repair,
+  ordering rules and realm/session epochs together. Tick filtering alone cannot
+  repair missing state; maintain the existing regression cases as acceptance gates.
+- Broaden testing to OS-level UDP impairment, WAN/NAT/TURN paths, mobile devices
+  and supported browsers. The current loopback and channel-model tests do not
+  establish those results.
+- Evaluate bandwidth scheduling and unreliable input with resend windows only
+  against measured needs; keep them out of the current correctness patch.
 
 When choosing an idea, verify its current state, state the intended outcome in
 the relevant topic, and create a bounded tactical if the work needs a plan.

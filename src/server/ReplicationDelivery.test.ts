@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { FrameMessage } from "../shared/protocol.js";
 import { createReplicationRig } from "./testing/ReplicationDeliveryHarness.js";
+import { ReplicationDeliveryQueue } from "./testing/ReplicationDeliveryQueue.js";
 
 let rig: ReturnType<typeof createReplicationRig>;
 beforeEach(() => {
@@ -59,50 +60,70 @@ describe("replication delivery controls", () => {
   });
 });
 
-// Acceptance assertions, initially run without .fails to establish the defects.
-// Each must be converted to a normal passing test when recovery is implemented.
-// Recovery deadline: 120 clean authoritative frames (2 simulated seconds).
-describe("known unreliable-channel convergence gaps", () => {
-  it.fails("recovers a lost initial baseline after traffic becomes reliable", () => {
-    rig.tick();
-    rig.chicken.position.wx = 100; // Subsequent delta cannot create the missing entity.
-    rig.settle();
-    expect(rig.state(rig.view)).toEqual(rig.state(rig.control));
-  });
+// Faults enter before channel delivery. Sync must preserve every dependent message
+// and its order, including world resets; arbitrary post-SCTP drops are not supported.
+describe("reliable replication delivery regressions", () => {
+  function delivery() {
+    return new ReplicationDeliveryQueue((message) => {
+      if (message.type === "frame") rig.view.applyFrame(message);
+      else if (message.type === "world-loaded") rig.view.clear();
+    });
+  }
 
-  it.fails("recovers a lost final position update even if the entity stops", () => {
-    rig.view.applyFrame(rig.tick());
+  it("delays an initial baseline and its dependent updates together", () => {
+    const queue = delivery();
+    queue.enqueue(rig.tick(), 0, 0, true);
     rig.chicken.position.wx = 100;
-    rig.tick();
+    queue.enqueue(rig.tick(), 1);
+    queue.drain(1);
+    expect(rig.view.entities).toEqual([]);
+    queue.drain(31);
+    expect(rig.state(rig.view)).toEqual(rig.state(rig.control));
+    expect(queue.dropped).toBe(0);
+    expect(queue.delayedByLoss).toBe(1);
+  });
+
+  it("delivers a delayed final position even after the entity stops", () => {
+    rig.view.applyFrame(rig.tick());
+    const queue = delivery();
+    rig.chicken.position.wx = 100;
+    queue.enqueue(rig.tick(), 0, 0, true);
+    queue.enqueue(rig.tick(), 1);
+    queue.drain(31);
     rig.settle();
     expect(rig.state(rig.view)).toEqual(rig.state(rig.control));
   });
 
-  it.fails("recovers a lost exit without retaining a ghost entity", () => {
+  it("delivers a delayed exit without retaining a ghost", () => {
     rig.view.applyFrame(rig.tick());
+    const queue = delivery();
     rig.transport.clientSide.send({ type: "edit-delete-entity", entityId: rig.chicken.id });
-    rig.tick();
+    queue.enqueue(rig.tick(), 0, 0, true);
+    queue.enqueue(rig.tick(), 1);
+    queue.drain(31);
     rig.settle();
     expect(rig.state(rig.view)).toEqual(rig.state(rig.control));
   });
 
-  it.fails("does not regress final position when two updates arrive in reverse order", () => {
+  it("prevents a newer update overtaking a delayed older update", () => {
     rig.view.applyFrame(rig.tick());
+    const queue = delivery();
     rig.chicken.position.wx = 100;
-    const older = rig.tick();
+    queue.enqueue(rig.tick(), 0, 12);
     rig.chicken.position.wx = 120;
-    const newer = rig.tick();
-    rig.view.applyFrame(newer);
-    rig.view.applyFrame(older);
+    queue.enqueue(rig.tick(), 1);
+    queue.drain(1);
+    queue.drain(12);
     rig.settle();
     expect(rig.state(rig.view)).toEqual(rig.state(rig.control));
   });
 
-  it.fails("rejects a delayed old-realm baseline after the client transition clear", () => {
-    const stale = rig.tick();
-    rig.view.applyFrame(stale);
-    rig.view.clear(); // Same replica reset used by GameClient on world-loaded/realm-joined.
-    rig.view.applyFrame(stale);
+  it("keeps a world reset behind delayed old-world frames on the same stream", () => {
+    const queue = delivery();
+    queue.enqueue(rig.tick(), 0, 12);
+    queue.enqueue({ type: "world-loaded", cameraX: 0, cameraY: 0, cameraZoom: 1 }, 1);
+    queue.drain(1);
+    queue.drain(12);
     expect(rig.view.entities).toEqual([]);
   });
 });

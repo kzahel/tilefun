@@ -1,8 +1,8 @@
 # Multiplayer networking
 
 Topic: multiplayer-networking
-Status: delivery audit confirms loss/reordering and cross-world stale-frame
-defects. Reliable fallback alone does not repair lost state; reconnect does.
+Status: dependent entity frames and world transitions use reliable ordered sync.
+The bounded correctness fix is complete; broader network investigation is deferred.
 Updated: 2026-10-03; checked against the current implementation.
 
 Owns ongoing transport/replication decisions and gaps. The
@@ -23,10 +23,14 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 - [binaryCodec](../../src/shared/binaryCodec.ts) handles frame, player-input and
   chunk binary encoding with JSON envelopes for other message types. Consult
   code/tests for sizes; old JSON bandwidth estimates are historical.
-- [Channel policy](../../src/transport/webrtcChannels.ts) sends dedicated WebRTC
-  frames over unordered/unreliable `entities` when available, falling back to
-  reliable `sync`. All client messages and server sync/control stay reliable.
-  PeerJS host/guest remain sync-only; WebSocket and local Worker are ordered.
+- [Channel policy](../../src/transport/webrtcChannels.ts) sends all server and
+  client gameplay messages over reliable ordered `sync`, including frame
+  baselines, field deltas, exits and world/realm transitions. The optional legacy
+  `entities` channel remains negotiated but current servers never send frames
+  there. PeerJS uses the same policy; WebSocket and local Worker are ordered.
+- Reliability may delay later updates behind a lost packet or a large chunk
+  transfer. This is the accepted correctness-first tradeoff; frames cannot be
+  dropped/coalesced without changing the dependent-delta protocol.
 - Worker replication is bounded/backpressured. The client applies frame deltas
   sequentially; it cannot discard an intermediate delta as if each frame were a
   complete snapshot. Realm transfers clear replication baselines.
@@ -40,27 +44,35 @@ Protocol coverage lives in [binary codec tests](../../src/shared/binaryCodec.tes
 [channel policy tests](../../src/transport/webrtcChannels.test.ts).
 Worker lifecycle/readiness evidence lives in [performance](performance.md).
 
-[Tactical 014](../tactical/014-webrtc-delivery-validation.md) now records actual
-validation and [machine-readable evidence](../benchmarks/014-webrtc-delivery.json).
-Five deterministic acceptance cases fail: lost baseline, final position, exit,
-reversed updates and old-world delivery after a transition clear. Four controls
-pass, including ordered delay, mount/dismount and reconnect. Fourteen of fifteen
-seeded adverse schedules retain divergent state after clean traffic resumes.
+[Tactical 014](../tactical/014-webrtc-delivery-validation.md) preserves the pre-fix
+loss/reordering audit and evidence. Its five known failures motivated
+[Tactical 015](../tactical/015-webrtc-ordered-delivery.md): ordered routing and
+passing regressions for baselines, final positions, exits, reordered updates
+and delayed old-world frames crossing a transition.
 
-Two real dedicated WebRTC browser tests reproduce missing entities, ghost
-entities and cross-world stale baseline acceptance. Both channels are verified
-open; faults touch only entity traffic. Closing the unreliable channel moves
-frames to reliable sync but does not reconstruct previously lost state. Fresh
-reconnect resets baselines and repairs the missing entity.
+The delivery harness models channel semantics: loss adds bounded delay on sync,
+while unreliable traffic can drop/reorder. All 18 seeded production-policy runs
+converge. This is a protocol/channel model, not measured SCTP loss performance.
+The CLI's `--legacy-unreliable --expect-known-gaps` mode reproduces the old gaps.
+Real dedicated WebRTC browser tests assert frames actually arrive on reliable
+sync even with the optional unreliable channel open and faults armed. They also
+hold/release the whole sync stream across a real world transition, and exercise
+optional-channel closure and reconnect. No expected-failure annotations remain
+in the delivery regression tests.
 
-These are validation-only changes. Five unit tests are explicitly expected
-failures; the browser cases characterize the bugs. A green suite does not mean
-loss tolerance. No OS UDP, WAN/NAT/TURN or physical-device impairment was run.
+Deploy the updated server/host and reconnect existing clients to reset baselines;
+changing routing cannot reconstruct state already lost in an old session. An old
+server can still send unsafe unreliable frames to a compatible client, so a
+client-only update does not apply this fix.
 
-Next: choose reliable ordered delivery for dependent deltas and lifecycle, or
-implement bounded recovery with correct baseline/field repair and realm epochs.
-Do not treat tick filtering alone as loss recovery. Turn the applicable known
-failures into passing acceptance cases before expanding network coverage.
+## Deferred work
+
+The [networking investigation backlog](../ideas.md#deferred-networking-investigation)
+owns OS UDP impairment, WAN/NAT/TURN, congestion, mobile/cross-browser coverage
+and any future unreliable protocol. Reopen that work if measured latency or
+connection failures justify it; it is not a prerequisite for this bounded fix.
+Tick filtering alone does not repair lost fields. A future unreliable design
+needs recoverable baselines, lifecycle/field repair and realm/session isolation.
 
 Bandwidth priority scheduling, unreliable input with resend windows and voice
 remain proposals. Public-server player authentication is separate from the

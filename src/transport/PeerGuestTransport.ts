@@ -223,7 +223,7 @@ export class PeerGuestTransport implements IClientTransport {
 
   getDebugInfo() {
     const dcState = this.conn?.open ? "open" : "closed";
-    return { transport: `WebRTC P2P sync-only fallback (${dcState})` };
+    return { transport: `WebRTC P2P ordered sync (${dcState})` };
   }
 
   private emitStatus(status: PeerGuestStatus, detail?: string): void {
@@ -233,8 +233,6 @@ export class PeerGuestTransport implements IClientTransport {
   private logSingleChannelFallbackOnce(): void {
     if (this.singleChannelFallbackLogged) return;
     this.singleChannelFallbackLogged = true;
-    console.warn(
-      "[tilefun] PeerJS guest transport uses a single reliable channel (Phase 6 entities-channel fallback)",
-    );
+    console.warn("[tilefun] PeerJS guest transport uses a single reliable channel (ordered sync)");
   }
 }

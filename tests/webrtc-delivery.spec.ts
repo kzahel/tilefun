@@ -21,7 +21,7 @@ declare global {
   }
 }
 
-const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
+const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
 const PORT = 4194;
 let child: ChildProcess;
 let directory: string;
@@ -182,7 +182,7 @@ async function receipt(page: Page) {
   }));
 }
 
-test("real dual-channel RTC reproduces lost spawn; fallback does not repair it, reconnect does", async ({
+test("reliable RTC delivers spawns with unreliable faults armed, channel closure and reconnect", async ({
   browser,
   page,
 }, info) => {
@@ -197,27 +197,24 @@ test("real dual-channel RTC reproduces lost spawn; fallback does not repair it, 
     await enter(healthy, world);
     await clearChickens(healthy);
     await expect.poll(() => chickens(page)).toEqual([]);
-    await cleanFrames(page, 15);
-    expect(await chickens(page)).toEqual([]);
     await page.evaluate(() => {
       window.__rtcProbe.mode = "drop-baseline";
     });
     await send(healthy, { type: "edit-spawn", entityType: "chicken", wx: 50, wy: 50 });
     await expect.poll(() => chickens(healthy)).toHaveLength(1);
-    await expect.poll(() => page.evaluate(() => window.__rtcProbe.dropped)).toBe(1);
+    await expect.poll(() => chickens(page)).toEqual(await chickens(healthy));
     await cleanFrames(page);
-    expect(await chickens(page), "Confirmed defect: lost baseline does not recover").toEqual([]);
-    const beforeFallback = await receipt(page);
+    const beforeClosure = await receipt(page);
+    expect(beforeClosure.dropped).toBe(0);
+    expect(beforeClosure.entitiesFrames).toBe(0);
+    expect(beforeClosure.syncFrames).toBeGreaterThan(0);
     await page.evaluate(() =>
       window.__rtcProbe.channels.find((c) => c.label === "entities")?.close(),
     );
-    await expect.poll(() => page.evaluate(() => window.__rtcProbe.syncFrames)).toBeGreaterThan(0);
     await cleanFrames(page);
-    expect(
-      await chickens(page),
-      "Fallback changes channel, but doesn't resend the lost baseline",
-    ).toEqual([]);
-    const afterFallback = await receipt(page);
+    expect(await chickens(page)).toEqual(await chickens(healthy));
+    const afterClosure = await receipt(page);
+    expect(afterClosure.syncFrames).toBeGreaterThan(beforeClosure.syncFrames);
     await page.reload();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(() => chickens(page)).toEqual(await chickens(healthy));
@@ -227,13 +224,7 @@ test("real dual-channel RTC reproduces lost spawn; fallback does not repair it, 
     await expect.poll(() => chickens(page)).toEqual([]);
     await expect.poll(() => chickens(healthy)).toEqual([]);
     await info.attach("delivery-evidence", {
-      body: JSON.stringify({
-        beforeFallback,
-        afterFallback,
-        missingAfter120CleanFrames: true,
-        missingAfterFallback: true,
-        reconnectRecovered: true,
-      }),
+      body: JSON.stringify({ beforeClosure, afterClosure, reconnectConverged: true }),
       contentType: "application/json",
     });
   } finally {
@@ -241,7 +232,7 @@ test("real dual-channel RTC reproduces lost spawn; fallback does not repair it, 
   }
 });
 
-test("real dual-channel RTC reproduces lost deletion and an old-world baseline crossing a transition", async ({
+test("reliable RTC delivers exits and orders a world reset behind delayed old-world baselines", async ({
   browser,
   page,
 }, info) => {
@@ -265,30 +256,62 @@ test("real dual-channel RTC reproduces lost deletion and an old-world baseline c
     });
     await send(healthy, { type: "edit-delete-entity", entityId: id });
     await expect.poll(() => chickens(healthy)).toEqual([]);
-    await expect.poll(() => page.evaluate(() => window.__rtcProbe.dropped)).toBe(1);
+    await expect.poll(() => chickens(page)).toEqual([]);
     await cleanFrames(page);
-    expect(await chickens(page), "Confirmed defect: lost exit leaves a ghost").toEqual([id]);
+    expect((await receipt(page)).dropped).toBe(0);
+    const destination = await createWorld(healthy);
     await page.evaluate(() => {
-      window.__rtcProbe.mode = "hold-baseline";
+      window.__rtcProbe.mode = "hold-sync";
     });
     await send(healthy, { type: "edit-spawn", entityType: "chicken", wx: 70, wy: 50 });
-    await expect.poll(() => page.evaluate(() => window.__rtcProbe.held.length)).toBe(1);
-    const destination = await createWorld(healthy);
-    await enter(page, destination);
-    await clearChickens(page);
+    await expect.poll(() => chickens(healthy)).toHaveLength(1);
+    const oldIds = await chickens(healthy);
+    // Hold the entire ordered stream, including control and fragments. A baseline
+    // is definitely waiting before we request the transition on reliable input.
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          window.__rtcProbe.held.some(({ event }) => {
+            if (!(event.data instanceof ArrayBuffer) || event.data.byteLength < 19) return false;
+            const data = new DataView(event.data);
+            return data.getUint8(0) === 0x01 && data.getUint16(13, true) > 0;
+          }),
+        ),
+      )
+      .toBe(true);
     expect(await chickens(page)).toEqual([]);
+    await send(page, {
+      type: "join-realm",
+      requestId: 900001,
+      worldId: destination,
+      arrival: { x: 0, y: 0, generation },
+    });
+    // realm-joined is a small JSON envelope; do not release until the real server
+    // has queued the reset behind that baseline on the same channel.
+    await expect
+      .poll(() =>
+        page.evaluate(() =>
+          window.__rtcProbe.held.some(({ event }) => {
+            if (!(event.data instanceof ArrayBuffer) || event.data.byteLength < 2) return false;
+            const data = new Uint8Array(event.data);
+            return (
+              data[0] === 0xff &&
+              JSON.parse(new TextDecoder().decode(data.subarray(1))).type === "realm-joined"
+            );
+          }),
+        ),
+      )
+      .toBe(true);
+    const heldMessages = await page.evaluate(() => window.__rtcProbe.held.length);
     await page.evaluate(() => window.__rtcProbe.release());
     await cleanFrames(page);
-    expect(
-      await chickens(page),
-      "Confirmed defect: stale old-world baseline survives in new world",
-    ).toHaveLength(1);
+    expect((await chickens(page)).some((id) => oldIds.includes(id))).toBe(false);
+    const delivery = await receipt(page);
+    expect(delivery.entitiesFrames).toBe(0);
+    expect(delivery.syncFrames).toBeGreaterThan(0);
+    expect(delivery.dropped).toBe(0);
     await info.attach("delivery-evidence", {
-      body: JSON.stringify({
-        ...(await receipt(page)),
-        ghostAfter120CleanFrames: true,
-        staleWorldBaselineAccepted: true,
-      }),
+      body: JSON.stringify({ ...delivery, heldMessages, staleWorldEntities: 0 }),
       contentType: "application/json",
     });
   } finally {

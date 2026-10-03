@@ -171,9 +171,8 @@ export class WebRtcClientTransport implements IClientTransport {
   getDebugInfo() {
     const syncState = this.syncDc.readyState;
     const entitiesState = this.entitiesDc?.readyState ?? "unavailable";
-    const mode = entitiesState === "open" ? "dual-channel" : "sync-only";
     return {
-      transport: `WebRTC dedicated ${mode} (${this.pc.connectionState}/sync:${syncState}/entities:${entitiesState})`,
+      transport: `WebRTC dedicated ordered sync (${this.pc.connectionState}/sync:${syncState}/entities:${entitiesState})`,
       rttMs: this.lastRttMs,
     };
   }
@@ -186,7 +185,9 @@ export class WebRtcClientTransport implements IClientTransport {
       });
       dc.binaryType = "arraybuffer";
       dc.onopen = () => {
-        console.log("[tilefun] WebRTC dedicated entities channel open (unordered/unreliable)");
+        console.log(
+          "[tilefun] WebRTC dedicated legacy entities channel open (unused by current servers)",
+        );
       };
       dc.onmessage = (event) => {
         this.consumeData(event.data, "entities");
@@ -202,7 +203,7 @@ export class WebRtcClientTransport implements IClientTransport {
       return dc;
     } catch (err) {
       this.logEntitiesFallbackOnce(
-        `entities datachannel unavailable, falling back to reliable sync only (${err instanceof Error ? err.message : String(err)})`,
+        `optional entities datachannel unavailable; using reliable sync (${err instanceof Error ? err.message : String(err)})`,
       );
       return null;
     }

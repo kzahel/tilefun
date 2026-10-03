@@ -13,14 +13,15 @@ export interface RoutedServerMessageChannel {
 }
 
 /**
- * Frame hot-path messages are candidates for the unreliable entities channel.
- * Everything else must stay on reliable/ordered sync.
+ * Entity frames contain dependent, last-sent deltas (including baselines/exits).
+ * Keep them on the same reliable ordered stream as world/realm transitions.
+ * The optional entities channel remains negotiated for compatibility only.
  */
-export function classifyServerMessageChannel(msg: ServerMessage): WebRtcGameplayChannel {
-  return msg.type === "frame" ? "entities" : "sync";
+export function classifyServerMessageChannel(_msg: ServerMessage): WebRtcGameplayChannel {
+  return "sync";
 }
 
-/** Phase 6 keeps all client→server traffic reliable/ordered. */
+/** All client→server traffic is reliable/ordered. */
 export function classifyClientMessageChannel(_msg: ClientMessage): WebRtcGameplayChannel {
   return "sync";
 }

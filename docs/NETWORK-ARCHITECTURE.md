@@ -15,17 +15,23 @@ owns current status, code/test entry points and remaining reliability work.
 [Client/server architecture](client-server-architecture.md) owns host boundaries.
 
 The slow-field split, static entity definitions, frame/sync separation, entity
-field deltas, binary encoding and dedicated dual-channel routing are implemented.
-Dedicated WebRTC prefers unordered/unreliable `entities` for server frames;
-client input and server sync/control use reliable `sync`. PeerJS remains
-sync-only. WebSocket and local Worker delivery are ordered. Worker replication
-defers under backpressure without stopping simulation.
+field deltas and binary encoding are implemented. Dedicated WebRTC now sends
+**all gameplay over reliable ordered `sync`**, including server entity frames
+and world/realm transitions. The optional legacy `entities` channel is accepted
+but unused by current servers. PeerJS is also sync-only. WebSocket and local
+Worker delivery are ordered. Worker replication defers under backpressure
+without stopping simulation.
 
-Entity deltas use last-sent state, not acknowledged snapshot baselines. Frame
-loss/reordering recovery must be validated before claiming reliable convergence
-on the unreliable channel. Channel routing tests alone do not establish it.
+Entity deltas use last-sent state, not acknowledged snapshot baselines. The
+[delivery audit](tactical/014-webrtc-delivery-validation.md) confirmed permanent
+state loss and cross-world leaks under unreliable delivery; the
+[bounded fix](tactical/015-webrtc-ordered-delivery.md) retires that routing.
+Reliable delivery can increase latency under loss or large transfers; optimizing
+that tradeoff and real-world impairment testing are explicitly
+[deferred](ideas.md#deferred-networking-investigation).
 
 The sections below preserve transport rationale and the phased design history.
+The Phase 6 dual-channel frame policy is superseded by the current contract above.
 Per-phase encodings and bandwidth estimates describe those milestones, not a
 fresh end-to-end measurement. Voice, bandwidth scheduling and unreliable input
 resend windows are proposals. External protocol/platform comparisons have not
@@ -541,14 +547,14 @@ decision is in the transport layer, not the protocol layer.
 
 See the [implementation and measurements](tactical/012-streaming-performance-and-local-server-worker.md).
 
-## Phase 6 Testing Notes
+## Current transport smoke checks
 
 ### Dev mode (Vite + plugin server)
 
 1. Run `npm run dev`
 2. Open `http://localhost:5173/?multiplayer&transport=webrtc`
-3. Confirm overlay debug transport shows `WebRTC dedicated dual-channel`
-   (or `sync-only` fallback if entities channel is unavailable)
+3. Confirm overlay debug transport shows `WebRTC dedicated ordered sync`
+   regardless of whether the optional legacy entities channel is available.
 4. Verify initial chunk/world sync succeeds and gameplay runs without runtime
    errors
 
@@ -561,7 +567,7 @@ See the [implementation and measurements](tactical/012-streaming-performance-and
 4. Validate:
    - `frame` traffic stays smooth
    - world/chunk sync and control messages remain reliable
-   - fallback to sync logs once if entities channel is unavailable
+   - closing the optional entities channel does not change frame delivery
 
 ---
 

@@ -1,5 +1,11 @@
 # WebRTC delivery validation
 
+Historical pre-fix record at commit `d00e103`. The following findings and commands
+refer to that revision. [Tactical 015](015-webrtc-ordered-delivery.md) supersedes
+its runtime status with reliable ordered routing and passing regressions. The
+current CLI reproduces the old schedules with `--legacy-unreliable
+--expect-known-gaps`; the current tests enforce the new reliable contract.
+
 Status: validation delivered, 2026-10-03. Five deterministic acceptance failures
 are confirmed; real dedicated WebRTC reproduces lost spawn/deletion and stale
 world delivery. Runtime protocol behavior is unchanged. Continuing owner:

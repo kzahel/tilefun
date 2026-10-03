@@ -2,7 +2,7 @@ import type { Page } from "@playwright/test";
 
 export interface RtcProbe {
   channels: RTCDataChannel[];
-  mode: "pass" | "drop-baseline" | "drop-exit" | "hold-baseline";
+  mode: "pass" | "drop-baseline" | "drop-exit" | "hold-baseline" | "hold-sync";
   dropped: number;
   appliedFrames: number;
   entitiesFrames: number;
@@ -19,7 +19,7 @@ declare global {
 }
 
 /** Test-only interception at the actual RTC receive boundary, before production decoding.
- * Reliable sync/input is never dropped. This is message loss, not UDP/SCTP emulation.
+ * Reliable sync/input is never dropped; hold-sync delays the whole receive stream. This is message loss, not UDP/SCTP emulation.
  */
 export async function installRtcProbe(page: Page): Promise<void> {
   await page.addInitScript(() => {
@@ -33,6 +33,7 @@ export async function installRtcProbe(page: Page): Promise<void> {
       bytes: 0,
       held: [],
       release() {
+        this.mode = "pass";
         for (const { channel, event } of this.held.splice(0)) {
           channel.onmessage?.call(channel, event);
         }
@@ -45,6 +46,10 @@ export async function installRtcProbe(page: Page): Promise<void> {
       probe.channels.push(channel);
       // Registered before WebRtcClientTransport assigns onmessage.
       channel.addEventListener("message", (event: MessageEvent) => {
+        if (label === "sync" && probe.mode === "hold-sync") {
+          event.stopImmediatePropagation();
+          probe.held.push({ channel, event });
+        }
         if (!(event.data instanceof ArrayBuffer)) return;
         probe.bytes += event.data.byteLength;
         const bytes = new DataView(event.data);

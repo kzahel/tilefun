@@ -59,7 +59,7 @@ export class PeerHostTransport {
         self.closed = true;
       },
       getDebugInfo() {
-        return { transport: "Host local (P2P guests: WebRTC sync-only fallback)" };
+        return { transport: "Host local (P2P guests: WebRTC ordered sync)" };
       },
     };
 
@@ -226,7 +226,7 @@ export class PeerHostTransport {
     if (this.remoteEntitiesFallbackLogged.has(clientId)) return;
     this.remoteEntitiesFallbackLogged.add(clientId);
     console.warn(
-      `[tilefun] PeerJS host transport for ${clientId} uses a single reliable channel (Phase 6 entities-channel fallback)`,
+      `[tilefun] PeerJS host transport for ${clientId} uses a single reliable channel (ordered sync)`,
     );
   }
 }

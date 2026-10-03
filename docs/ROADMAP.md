@@ -25,8 +25,10 @@ Workshop inbox for decisions after the documented checkpoints.
   variety and richer street life. The [parent city plan](tactical/007-dense-city-districts-and-street-life-plan.md)
   records the sequence and deferred scope.
 - Multiplayer already supports collaborative editing, browser-hosted P2P and
-  dedicated servers. Next opportunities are real-world dual-channel WebRTC
-  loss/reordering validation and connection/reconnection UX. Public-server
+  dedicated servers. Dependent WebRTC updates now use reliable ordered delivery
+  to prevent the audited missing/ghost/stale-world defects. Broader network
+  investigation is [deferred](ideas.md#deferred-networking-investigation);
+  connection/reconnection UX remains an opportunity. Public-server
   authentication remains separate from player profile identity; see
   [networking status](topics/multiplayer-networking.md).
 - Build on the existing terrain, prop, furniture and room editors with curated

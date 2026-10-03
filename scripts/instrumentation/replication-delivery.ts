@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { createReplicationRig } from "../../src/server/testing/ReplicationDeliveryHarness.js";
-import type { FrameMessage } from "../../src/shared/protocol.js";
+import { ReplicationDeliveryQueue } from "../../src/server/testing/ReplicationDeliveryQueue.js";
 
 // Seeded application-message schedules, not a model of UDP/SCTP congestion.
 const profiles = [
@@ -13,6 +13,7 @@ const profiles = [
   { name: "burst-6frames", loss: 0, jitter: false, burst: true },
   { name: "reorder-0to200ms", loss: 0, jitter: true, burst: false },
 ];
+const legacyUnreliableFrames = process.argv.includes("--legacy-unreliable");
 const results = [];
 for (const profile of profiles) {
   for (const seed of [42, 2026, 8675309]) {
@@ -22,17 +23,16 @@ for (const profile of profiles) {
       rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
       return rng / 2 ** 32;
     };
-    const pending: Array<{ due: number; order: number; frame: FrameMessage }> = [];
-    let dropped = 0;
     let reordered = 0;
     let lastTick = 0;
     let positionError = 0;
     const spawned: number[] = [];
-    const deliver = (frame: FrameMessage) => {
+    const queue = new ReplicationDeliveryQueue((frame) => {
+      if (frame.type !== "frame") return;
       if (frame.serverTick < lastTick) reordered++;
       lastTick = frame.serverTick;
       rig.view.applyFrame(frame);
-    };
+    }, legacyUnreliableFrames);
     try {
       for (let tick = 0; tick < 360; tick++) {
         if (tick < 40) {
@@ -62,21 +62,15 @@ for (const profile of profiles) {
         const frame = rig.tick();
         const impaired = tick < 240;
         const drop = impaired && (random() < profile.loss || (profile.burst && tick % 30 < 6));
-        if (drop) dropped++;
-        else
-          pending.push({
-            frame,
-            order: tick,
-            due: tick + (impaired ? (profile.jitter ? Math.floor(random() * 13) : 6) : 0),
-          });
-        // Reliable lane preserves FIFO even while its artificial latency is removed.
-        if (profile.jitter) pending.sort((a, b) => a.due - b.due || a.order - b.order);
-        while (pending[0] && pending[0].due <= tick) {
-          const item = pending.shift();
-          if (item) deliver(item.frame);
-        }
+        queue.enqueue(
+          frame,
+          tick,
+          impaired ? (profile.jitter ? Math.floor(random() * 13) : 6) : 0,
+          drop,
+        );
+        queue.drain(tick);
       }
-      for (const item of pending) deliver(item.frame);
+      queue.drain(Number.POSITIVE_INFINITY);
       // An additional clean window starts only after every delayed packet has drained.
       rig.settle(120);
       const expected = rig.state(rig.control);
@@ -104,7 +98,8 @@ for (const profile of profiles) {
       results.push({
         profile: profile.name,
         seed,
-        dropped,
+        dropped: queue.dropped,
+        delayedByLoss: queue.delayedByLoss,
         reordered,
         missing,
         extra,
@@ -120,8 +115,10 @@ for (const profile of profiles) {
 }
 const report = {
   sourceCommit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+  sourceDirty: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim() !== "",
+  policy: legacyUnreliableFrames ? "legacy-unreliable" : "production-ordered-sync",
   scope:
-    "Real GameServer/RealmReplicator/binary codec/RemoteStateView; entity-frame faults only; not UDP impairment",
+    "Real replication/codec; channel model with bounded 30-tick loss delay on sync and drops/reordering on entities; not UDP/SCTP impairment",
   steps: { impaired: 240, initialClean: 120, recoveryAfterDrain: 120, tickHz: 60 },
   results,
 };
