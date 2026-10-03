@@ -86,7 +86,7 @@ export default function ReviewPage() {
   return (
     <ReviewCase
       candidate={candidate}
-      currentManifest={inbox.data.manifestCurrent}
+      currentManifest={inbox.data.reviewAllowed ?? inbox.data.manifestCurrent}
       allCandidates={inbox.data.candidates}
       batchName={
         manifest.data.batches.find((b) => b.id === candidate.batchId)?.name ?? candidate.batchId

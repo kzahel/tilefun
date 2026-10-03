@@ -44,6 +44,8 @@ export class WorkshopService {
   readonly interiors: InteriorReviewStore;
   constructor(
     readonly options: {
+      /** Vite development only: exact candidate checks still apply. */
+      allowStaleManifest?: boolean;
       directory?: string;
       manifestPath?: string;
       root?: string;
@@ -65,9 +67,11 @@ export class WorkshopService {
   }
   private async readManifest() {
     const manifest = await loadWorkshopManifest(this.options.manifestPath);
+    const current = manifest.inputDigest === (await workshopInputDigest(this.options.root));
     return {
       manifest,
-      current: manifest.inputDigest === (await workshopInputDigest(this.options.root)),
+      current,
+      reviewAllowed: current || this.options.allowStaleManifest === true,
     };
   }
   private manifest() {
@@ -125,21 +129,21 @@ export class WorkshopService {
         command: Command = { event: e, createdAt, author: owner };
       const [art, interiors] = await Promise.all([this.art.records(), this.interiors.records()]);
       if (e.type === "character") {
-        const { manifest, current } = await this.manifest();
+        const { manifest, reviewAllowed } = await this.manifest();
         command.art = characterAnnotation(
           e,
           await this.art.catalog(),
           manifest.candidates,
-          current,
+          reviewAllowed,
           createdAt,
         );
       } else if (e.type === "asset" || e.type === "scene") {
-        const { manifest, current } = await this.manifest();
+        const { manifest, reviewAllowed } = await this.manifest();
         command.art = await outdoorAnnotation(
           e,
           await this.art.catalog(),
           manifest.candidates,
-          current,
+          reviewAllowed,
           createdAt,
           this.options.root,
         );
@@ -168,9 +172,14 @@ export class WorkshopService {
           catalog,
         );
       } else if (e.type === "review") {
-        const { manifest, current } = await this.manifest(),
+        const { manifest, reviewAllowed } = await this.manifest(),
           candidate = manifest.candidates.find((c) => c.id === e.candidateId);
-        if (!current || !candidate || candidate.excluded || candidate.fingerprint !== e.fingerprint)
+        if (
+          !reviewAllowed ||
+          !candidate ||
+          candidate.excluded ||
+          candidate.fingerprint !== e.fingerprint
+        )
           throw new HttpError(409, "Candidate changed. Reload the current review.");
         if (
           !["approved", "changes", "clear"].includes(e.verdict) ||
@@ -254,7 +263,7 @@ export class WorkshopService {
   /** Trusted local read for the agent CLI; HTTP callers authenticate in handle. */
   async inbox(): Promise<WorkshopInbox> {
     const commands = await this.settledCommands();
-    const [{ manifest, current }, art, interiors] = await Promise.all([
+    const [{ manifest, current, reviewAllowed }, art, interiors] = await Promise.all([
       this.manifest(),
       this.art.records(),
       this.interiors.records(),
@@ -272,7 +281,10 @@ export class WorkshopService {
       .filter((t) => t.status !== "resolved");
     return {
       manifestCurrent: current,
-      candidates: manifest.candidates.map((c) => candidateSummary(c, art, interiors, current)),
+      reviewAllowed,
+      candidates: manifest.candidates.map((c) =>
+        candidateSummary(c, art, interiors, reviewAllowed),
+      ),
       requests,
     };
   }
@@ -299,8 +311,8 @@ export class WorkshopService {
       if (req.method !== "GET") throw new HttpError(405, "Use GET");
       const commands = await this.settledCommands();
       if (url.pathname === "/tilefun/api/workshop/manifest") {
-        const { manifest, current } = await this.manifest();
-        jsonResponse(res, { ...manifest, current });
+        const { manifest, current, reviewAllowed } = await this.manifest();
+        jsonResponse(res, { ...manifest, current, reviewAllowed });
         return true;
       }
       const [art, interiors] = await Promise.all([this.art.records(), this.interiors.records()]);
@@ -372,19 +384,20 @@ export class WorkshopService {
   }
 }
 export function workshopPlugin(): Plugin {
-  const service = new WorkshopService();
-  const middleware = (req: IncomingMessage, res: ServerResponse, next: () => void) => {
-    void service
-      .handle(req, res)
-      .then((handled) => {
-        if (!handled) next();
-      })
-      .catch(next);
-  };
+  const middleware =
+    (service: WorkshopService) => (req: IncomingMessage, res: ServerResponse, next: () => void) => {
+      void service
+        .handle(req, res)
+        .then((handled) => {
+          if (!handled) next();
+        })
+        .catch(next);
+    };
   return {
     name: "tilefun-workshop",
     configureServer(server) {
-      server.middlewares.use(middleware);
+      const service = new WorkshopService({ allowStaleManifest: true });
+      server.middlewares.use(middleware(service));
       server.watcher.on("all", (_event, path) => {
         if (
           path.replaceAll("\\", "/").includes("/src/") ||
@@ -395,7 +408,7 @@ export function workshopPlugin(): Plugin {
       });
     },
     configurePreviewServer(server) {
-      server.middlewares.use(middleware);
+      server.middlewares.use(middleware(new WorkshopService()));
     },
   };
 }

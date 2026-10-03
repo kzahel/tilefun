@@ -44,7 +44,12 @@ export default function VehiclesPage() {
     queue = useWorkspace((s) => s.queues.vehicles) ?? emptyQueue;
   const candidates = manifest.data?.candidates.filter((c) => c.kind === "vehicle") ?? [];
   const rows = candidates.map((c) => {
-    const state = candidateSummary(c, notes.data ?? [], [], manifest.data?.current);
+    const state = candidateSummary(
+      c,
+      notes.data ?? [],
+      [],
+      manifest.data?.reviewAllowed ?? manifest.data?.current,
+    );
     const pending = outbox
       .filter(
         (e): e is Extract<WorkshopEvent, { type: "asset" }> =>
@@ -125,7 +130,7 @@ export default function VehiclesPage() {
         {rows.filter((c) => c.state === "approved").length} / {rows.length} views approved ·{" "}
         {vehicleIds.length} vehicle sets
       </p>
-      {!manifest.data.current ? (
+      {!(manifest.data.reviewAllowed ?? manifest.data.current) ? (
         <p role="alert">Review inputs changed. Rebuild the Workshop manifest before saving.</p>
       ) : null}
       <div className="vehicle-navigation">
@@ -239,7 +244,7 @@ export default function VehiclesPage() {
         image={art.data.image}
         baseline={baseline}
         review={latest}
-        current={manifest.data.current}
+        current={manifest.data.reviewAllowed ?? manifest.data.current}
         paused={queue.paused}
         afterSave={afterSave}
       />

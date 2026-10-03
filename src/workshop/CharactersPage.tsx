@@ -37,7 +37,9 @@ export default function CharactersPage() {
       </>
     );
   const candidates = manifest.data.candidates.filter((c) => c.kind === "character");
-  const rows = candidates.map((c) => candidateSummary(c, notes.data, [], manifest.data.current));
+  const rows = candidates.map((c) =>
+    candidateSummary(c, notes.data, [], manifest.data.reviewAllowed ?? manifest.data.current),
+  );
   const selected = new URLSearchParams(location.search).get("character") ?? "tiger";
   const def = CHARACTERS.find((c) => c.id === selected) ?? required(CHARACTERS[0]);
   const candidate = candidates.find((c) => c.characterId === def.id);
@@ -101,7 +103,7 @@ export default function CharactersPage() {
           ))}
         </select>
       </label>
-      {!manifest.data.current ? (
+      {!(manifest.data.reviewAllowed ?? manifest.data.current) ? (
         <p role="alert">Review inputs changed. Rebuild the Workshop manifest before saving.</p>
       ) : null}
       {queue.paused ? (
@@ -129,7 +131,7 @@ export default function CharactersPage() {
         candidate={candidate}
         baseline={pending?.settings ?? saved?.settings ?? def.defaults}
         verdict={state ?? "unchecked"}
-        current={manifest.data.current}
+        current={manifest.data.reviewAllowed ?? manifest.data.current}
         paused={queue.paused}
         afterSave={afterSave}
       />

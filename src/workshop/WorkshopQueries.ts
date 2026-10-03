@@ -21,7 +21,10 @@ export function useManifest() {
   const session = useSession();
   return useQuery({
     queryKey: ["workshop", "manifest"],
-    queryFn: () => workshopJson<WorkshopManifest & { current: boolean }>("workshop/manifest"),
+    queryFn: () =>
+      workshopJson<WorkshopManifest & { current: boolean; reviewAllowed?: boolean }>(
+        "workshop/manifest",
+      ),
     enabled: session.data?.authenticated === true,
   });
 }

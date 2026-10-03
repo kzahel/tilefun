@@ -34,7 +34,7 @@ export default function ScenePage() {
       key={`${id}:${candidate.fingerprint}`}
       id={id}
       candidate={candidate}
-      current={!!inbox.data?.manifestCurrent}
+      current={!!(inbox.data?.reviewAllowed ?? inbox.data?.manifestCurrent)}
       focusId={new URLSearchParams(location.search).get("focus") ?? ""}
       noteId={new URLSearchParams(location.search).get("note") ?? ""}
       notes={notes.data ?? []}

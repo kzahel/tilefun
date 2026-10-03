@@ -36,6 +36,11 @@ also accept block pins. Two reports pause that batch. Say **ready** in chat when
 ready for the agent to implement the reported fixes. Changed pixels/recipes
 return to review. The agent must never manufacture human approvals.
 
+When reviewing on the development server, unrelated code edits no longer disable
+voting. The inbox may say development is continuing; each preview must still
+match its saved review version. A changed preview still requires regeneration.
+Production/preview serving retains the broad source freshness requirement.
+
 Review previews support wheel/two-finger scroll zoom around the cursor. Panning
 uses one-finger click-and-drag on a touchpad, left/middle-button mouse dragging,
 or touchscreen dragging. Wheel input always zooms, including diagonal,

@@ -1,10 +1,11 @@
 import { WorkshopService } from "../src/server/workshopService.js";
 
-const inbox = await new WorkshopService().inbox();
+// Match the local development Workshop's projection of exact saved decisions.
+const inbox = await new WorkshopService({ allowStaleManifest: true }).inbox();
 if (process.argv.includes("--json")) console.log(JSON.stringify(inbox, null, 2));
 else {
   console.log(
-    `Workshop manifest: ${inbox.manifestCurrent ? "current" : "STALE — regenerate before review"}`,
+    `Workshop manifest: ${inbox.manifestCurrent ? "current" : "STALE — strict review blocked; development permits exact preview review"}`,
   );
   for (const batch of [...new Set(inbox.candidates.map((c) => c.batchId))]) {
     const rows = inbox.candidates.filter((c) => c.batchId === batch);

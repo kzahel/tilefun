@@ -27,6 +27,22 @@ and no forwarding headers skips login (CSRF/origin checks remain). Set
 `WORKSHOP_LOCAL_AUTH_BYPASS=0` to exercise login locally; auth/browser tests do
 this explicitly. Tests use isolated auth/data and Playwright Chromium, including
 full Chromium GPU rendering for district fingerprint parity.
+In Vite development, the broad source digest is advisory so concurrent agents
+can edit unrelated code while the owner reviews. The inbox reports actual
+`manifestCurrent` separately from server `reviewAllowed` policy. Individual
+browser preview/source checks and submitted candidate fingerprints still apply;
+a changed preview remains blocked. Existing decisions stay attached to their exact
+registered identity. Vite preview, standalone serving, manifest generation and
+production build checks remain strict. Do not treat the development exception as
+permission to promote changed or unreviewed pixels.
+The trusted `workshop:inbox` CLI uses the development projection, preserving saved
+decision states while still reporting broad source drift separately.
+Validated 2026-10-03 in an isolated source snapshot: typecheck, lint, build,
+1,361 unit tests and 287 browser tests passed (one browser test skipped). API
+coverage rejects mismatched identities while accepting exact development reviews;
+browser coverage keeps changed previews blocked despite the development exception.
+Read-only live phone verification confirmed voting with stale broad inputs.
+
 After render/recipe/input changes run `npm run art:catalog` then
 `npm run workshop:manifest`; build checks both. Do not synthesize approvals.
 

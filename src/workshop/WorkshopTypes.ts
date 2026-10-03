@@ -61,7 +61,10 @@ export interface WorkshopThread {
   caseId?: string;
 }
 export interface WorkshopInbox {
+  /** Broad source digest matches the generated manifest (diagnostic, even in dev). */
   manifestCurrent: boolean;
+  /** Server policy; exact candidate verification is still required in the browser. */
+  reviewAllowed?: boolean;
   candidates: CandidateSummary[];
   requests: WorkshopThread[];
 }

@@ -21,7 +21,12 @@ const cleanups: (() => Promise<void>)[] = [];
 afterEach(async () => {
   for (const cleanup of cleanups.splice(0)) await cleanup();
 });
-async function fixture(configured = true, stale = false, localBypass = false) {
+async function fixture(
+  configured = true,
+  stale = false,
+  localBypass = false,
+  allowStaleManifest = false,
+) {
   const directory = await mkdtemp(join(tmpdir(), "tilefun-workshop-")),
     authDir = join(directory, "auth");
   await mkdir(authDir);
@@ -36,6 +41,7 @@ async function fixture(configured = true, stale = false, localBypass = false) {
     JSON.stringify({ ...manifest, inputDigest: stale ? "0".repeat(64) : digest }),
   );
   const options = {
+    allowStaleManifest,
     directory,
     manifestPath,
     auth: new WorkshopAuth(authDir, undefined, localBypass),
@@ -354,6 +360,36 @@ describe("Workshop API and login boundaries", () => {
     expect(legacy[0].screenshot).toBeUndefined();
     const thread = await (await f.request(`/tilefun/api/workshop/threads/interior:${c.id}`)).json();
     expect(thread.history.at(-1).screenshot).toBe(screenshot);
+  });
+  it("permits exact saved identities during development despite unrelated source edits", async () => {
+    const f = await fixture(true, true, false, true);
+    await f.login();
+    const decision = {
+      id: "dev-review",
+      type: "review",
+      candidateId: candidate.id,
+      fingerprint: candidate.fingerprint,
+      verdict: "approved",
+      note: "Isolated test",
+    };
+    expect(
+      (await f.event({ ...decision, id: "dev-wrong", fingerprint: "0".repeat(64) })).status,
+    ).toBe(409);
+    expect((await f.event({ ...decision, id: "dev-missing", candidateId: "missing" })).status).toBe(
+      409,
+    );
+    expect((await f.event(decision)).status).toBe(200);
+    f.restart();
+    const inbox = await (await f.request("/tilefun/api/workshop/inbox")).json();
+    expect(inbox).toMatchObject({ manifestCurrent: false, reviewAllowed: true });
+    expect(inbox.candidates.find((c: { id: string }) => c.id === candidate.id).state).toBe(
+      "approved",
+    );
+    expect(await (await f.request("/tilefun/api/workshop/manifest")).json()).toMatchObject({
+      current: false,
+      reviewAllowed: true,
+    });
+    expect(await f.service().art.records()).toHaveLength(1);
   });
   it("refuses stale or excluded candidates, validates source targets, and cannot traverse files", async () => {
     const f = await fixture(true, true);

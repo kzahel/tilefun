@@ -553,10 +553,14 @@ function InboxPage() {
           <span>requests & fixes</span>
         </Link>
       </div>
-      {!inbox.data.manifestCurrent ? (
+      {!(inbox.data.reviewAllowed ?? inbox.data.manifestCurrent) ? (
         <p className="notice error">
           Candidate inputs changed since the last manifest render. Review is paused until the
           current manifest is generated; stale approvals are not counted.
+        </p>
+      ) : !inbox.data.manifestCurrent ? (
+        <p className="notice">
+          Development is continuing. You can review previews that still match their saved version.
         </p>
       ) : null}
       <div className="filter-row">
