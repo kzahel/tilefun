@@ -1,3 +1,4 @@
+import { reviewContext2D } from "../art/reviewCanvas.js";
 import type { FloorPlan } from "./ApartmentFloorPlan.js";
 import {
   compileFurniture,
@@ -25,6 +26,7 @@ export class CachedInteriorRenderer {
     private readonly plan: FloorPlan,
     private readonly floorBounds?: FurnitureRect | ((rect: FurnitureRect) => boolean),
     private readonly editable = false,
+    review = false,
   ) {
     const raster = (layers: readonly InteriorLayer[]) => {
       const canvas = document.createElement("canvas");
@@ -32,7 +34,7 @@ export class CachedInteriorRenderer {
       // The nominal review viewport crops the south doorway. Gameplay also
       // draws that protruding threshold, so retain the complete cell extent.
       canvas.height = Math.max(map.pixelHeight, map.height * 16 + (map.contentOffsetY ?? 0));
-      const ctx = canvas.getContext("2d");
+      const ctx = review ? reviewContext2D(canvas) : canvas.getContext("2d");
       if (!ctx) throw new Error("Missing interior layer canvas");
       drawLayeredInteriorMap(ctx, atlas, map, layers);
       return canvas;
@@ -53,7 +55,7 @@ export class CachedInteriorRenderer {
         const canvas = document.createElement("canvas");
         canvas.width = map.width * 16;
         canvas.height = 64;
-        const ctx = canvas.getContext("2d");
+        const ctx = review ? reviewContext2D(canvas) : canvas.getContext("2d");
         if (!ctx) throw new Error("Missing wall band canvas");
         ctx.translate(0, 16);
         drawLayeredInteriorMap(

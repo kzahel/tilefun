@@ -34,9 +34,9 @@ import { ProceduralProps } from "../generation/ProceduralProps.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import { buildingDoor } from "../interiors/BuildingDoors.js";
 import {
   furnitureAsset,
-  INTERIOR_ENTRY,
   INTERIOR_WALL_TYPE,
   type InteriorIdentity,
   InvalidInteriorError,
@@ -1161,8 +1161,11 @@ export class Realm {
         savedMeta.interior.floor !== this.interior.floor)
     )
       throw new InvalidInteriorError("Unsupported saved interior identity.");
-    if (this.interior && savedMeta?.interior?.doors)
-      this.interior = { ...this.interior, doors: savedMeta.interior.doors };
+    if (this.interior && savedMeta?.interior) {
+      // A previously visited room owns its identity, layout and connections.
+      this.interior = savedMeta.interior;
+      this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
+    }
     const savedChunks = await this.saveManager.loadChunks();
 
     let cameraX = 0;
@@ -1236,8 +1239,8 @@ export class Realm {
     }
 
     if (this.interior) {
-      playerX = INTERIOR_ENTRY.wx;
-      playerY = INTERIOR_ENTRY.wy;
+      playerX = buildingDoor(this.interior).arrival.wx;
+      playerY = buildingDoor(this.interior).arrival.wy;
       cameraX = playerX;
       cameraY = playerY;
       try {

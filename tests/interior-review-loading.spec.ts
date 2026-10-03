@@ -68,7 +68,9 @@ test("review starts before verification finishes, uses only small sprites, and r
     expect(result.probe.hashes).toBe(reviewCases().length);
     expect(result.probe.firstHashes).toBeLessThan(10);
     expect(result.probe.lastTicks - result.probe.firstTicks).toBeGreaterThan(20);
-    expect(result.probe.canvases).toBe(2); // active unmarked image + scratch, besides the HTML display canvas
+    // Active image + scratch, plus bounded gameplay floor/wall-band caches for
+    // the four new building layouts. Verification must not retain a canvas per case.
+    expect(result.probe.canvases).toBeLessThan(64);
     expect(result.resources.some((r) => r.name.includes("modern-interiors-atlas"))).toBe(false);
     const sprites = result.resources.filter((r) => r.name.includes("review-sprites"));
     expect(sprites.length).toBeGreaterThan(0);

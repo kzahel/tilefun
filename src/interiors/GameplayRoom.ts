@@ -62,15 +62,24 @@ export function parseGameplayRoom(input: unknown): GameplayRoomState {
  * The complement is compacted into collision rectangles, including voids. */
 export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayRoomState) {
   const original = initialRoom(identity);
-  const legacy = JSON.stringify(state.document) === JSON.stringify(original.document);
+  const legacy =
+    !identity.layout && JSON.stringify(state.document) === JSON.stringify(original.document);
   const plan = legacy
     ? interiorPlan(identity).plan
     : parseFloorPlan(roomSketch(state.document), { preserveBounds: true, allowUnreachable: true });
-  if (plan.rows[4]?.[2] !== "+" || !"LBKTH".includes(plan.rows[3]?.[2] ?? "!"))
-    throw new Error("Keep the original street doorway and its entrance floor at 2,4 and 2,3");
-  if (plan.entrances.some((p) => p.x !== 2 || p.y !== 4))
+  const doors = buildingDoors(identity);
+  const entrances = identity.layout
+    ? doors.map((door) => ({
+        x: Math.floor(door.inside.wx / 32),
+        y: Math.floor(door.inside.wy / 32),
+      }))
+    : [{ x: 2, y: 4 }];
+  for (const { x, y } of entrances)
+    if (plan.rows[y]?.[x] !== "+" || !"LBKTH".includes(plan.rows[y - 1]?.[x] ?? "!"))
+      throw new Error(`Keep the street doorway and its entrance floor at ${x},${y}`);
+  if (plan.entrances.some((p) => !entrances.some((e) => e.x === p.x && e.y === p.y)))
     throw new Error(
-      "Only the original street doorway may open onto the void. Interior doors must connect two rooms.",
+      "Only connected street doorways may open onto the void. Interior doors must connect two rooms.",
     );
   const map = buildLayeredApartmentPlan(plan);
   const width = state.document.width * 32,
@@ -110,7 +119,7 @@ export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayR
         if (
           cell.semantic === "wall" &&
           plan.rows[Math.floor(y / 2)]?.[Math.floor(x / 2)] === "+" &&
-          !(Math.floor(x / 2) === 2 && Math.floor(y / 2) === 4)
+          !(!identity.layout && Math.floor(x / 2) === 2 && Math.floor(y / 2) === 4)
         )
           fill({ x: x * 16, y: y * 16, width: 16, height: 16 }, 0);
       });
@@ -210,7 +219,11 @@ export function validateRoomOccupancy(
       !obstacles.some((o) => aabbsOverlap(a, o))
     );
   };
-  for (const player of players) {
+  const anchors = room.doors.map((door) => ({
+    position: door.arrival,
+    collider: { offsetX: 0, offsetY: 0, width: 10, height: 6 },
+  }));
+  for (const player of [...players, ...anchors]) {
     const collider = player.collider;
     if (!collider) continue;
     if (!clear(player.position.wx, player.position.wy, collider))
@@ -231,15 +244,15 @@ export function validateRoomOccupancy(
     queue.push(start);
     seen[start] = 1;
     let reached = false;
+    const reachedDoors = new Set<string>();
     for (let i = 0; i < queue.length; i++) {
       const id = queue[i] as number,
         x = id % cols,
         y = Math.floor(id / cols);
-      if (
-        room.doors.some(
-          (door) => Math.hypot(x * step - door.inside.wx, y * step - door.inside.wy) <= step,
-        )
-      ) {
+      for (const door of room.doors)
+        if (Math.hypot(x * step - door.inside.wx, y * step - door.inside.wy) <= step)
+          reachedDoors.add(door.id);
+      if (room.doors.every((door) => reachedDoors.has(door.id))) {
         reached = true;
         break;
       }

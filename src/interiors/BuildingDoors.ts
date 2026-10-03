@@ -1,5 +1,9 @@
 import { TILE_SIZE } from "../config/constants.js";
+import type { Prop } from "../entities/Prop.js";
+import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { denseDoorThresholds } from "../generation/regional/DenseDoorThresholds.js";
 import {
+  exteriorEntrance,
   INTERIOR_ENTRY,
   INTERIOR_EXIT,
   type InteriorIdentity,
@@ -60,4 +64,40 @@ export function buildingDoor(identity: InteriorIdentity, id = "street"): DoorCon
   const door = buildingDoors(identity).find((door) => door.id === id);
   if (!door) throw new Error("Unknown building door.");
   return door;
+}
+
+/** Runtime connections read pinned facade facts without changing generated outdoor output. */
+export function exteriorDoors(prop: Pick<Prop, "type" | "position">) {
+  const primary = exteriorEntrance(prop);
+  if (!primary) return [];
+  const recipe = buildingRecipe(prop.type);
+  const doors = [{ id: "street", outside: primary }];
+  if (recipe && prop.type.startsWith("prop-city-")) {
+    for (const door of denseDoorThresholds(recipe)) {
+      if (door.primary) continue;
+      doors.push({ id: door.id, outside: { wx: prop.position.wx + door.dx, wy: primary.wy } });
+    }
+  }
+  return doors;
+}
+
+/** New city rooms use one versioned layout and one connection per visible street door. */
+export function withBuildingLayout(
+  identity: InteriorIdentity,
+  position: Prop["position"],
+): InteriorIdentity {
+  if (!identity.buildingType.startsWith("prop-city-")) return identity;
+  const doors = exteriorDoors({ type: identity.buildingType, position }).sort(
+    (a, b) => a.outside.wx - b.outside.wx,
+  );
+  if (doors.length > 2) throw new Error("Unsupported building doorway count");
+  return {
+    ...identity,
+    layout: buildingRecipe(identity.buildingType)?.kind === "shop" ? "shop-v2" : "apartment-v2",
+    doors: doors.map((door, i) => ({
+      ...door,
+      inside: { wx: (i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 + 16 },
+      arrival: { wx: (i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 - 8 },
+    })),
+  };
 }

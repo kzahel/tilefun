@@ -2921,15 +2921,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:37"
+          "source": "src/interiors/GameplayInterior.ts:39"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:79"
+          "source": "src/interiors/GameplayInterior.ts:91"
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:56"
+          "source": "src/ui/DoorControl.ts:58"
         }
       ]
     },
@@ -8110,6 +8110,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8128,6 +8132,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8146,6 +8154,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8164,6 +8176,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8182,6 +8198,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8200,6 +8220,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8218,6 +8242,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8236,6 +8264,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:16"
         }
       ]
     },
@@ -8794,6 +8826,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8812,6 +8848,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8830,6 +8870,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8848,6 +8892,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8866,6 +8914,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8884,6 +8936,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8902,6 +8958,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:26"
         }
       ]
     },
@@ -8924,6 +8984,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:21"
         }
       ]
     },
@@ -8946,6 +9010,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:21"
         }
       ]
     },
@@ -8968,6 +9036,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:21"
         }
       ]
     },
@@ -8990,6 +9062,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CityArchitecturePlanner.ts:21"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:21"
         }
       ]
     },
@@ -9008,6 +9084,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:11"
         }
       ]
     },
@@ -9026,6 +9106,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:11"
         }
       ]
     },
@@ -9044,6 +9128,10 @@
         {
           "system": "Dense districts (regional-v4, promoted)",
           "source": "src/generation/regional/dense-city-assets-v1.json"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/review/BuildingLayoutReviewCases.ts:11"
         }
       ]
     },
@@ -18309,6 +18397,10 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:38"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:61"
         },
         {
@@ -18321,7 +18413,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:86"
+          "source": "src/interiors/GameplayInterior.ts:98"
         },
         {
           "system": "Interiors",
@@ -18439,6 +18531,18 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:39"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:39"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:47"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:94"
         },
         {
@@ -18467,11 +18571,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:88"
+          "source": "src/interiors/GameplayInterior.ts:100"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:88"
+          "source": "src/interiors/GameplayInterior.ts:100"
         },
         {
           "system": "Interiors",
@@ -18525,6 +18629,14 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:40"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:40"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:105"
         },
         {
@@ -18545,11 +18657,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:87"
+          "source": "src/interiors/GameplayInterior.ts:99"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:87"
+          "source": "src/interiors/GameplayInterior.ts:99"
         },
         {
           "system": "Interiors",
@@ -18583,6 +18695,18 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:41"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:46"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:48"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:116"
         },
         {
@@ -18595,7 +18719,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:75"
+          "source": "src/interiors/GameplayInterior.ts:87"
         },
         {
           "system": "Interiors",
@@ -18637,6 +18761,18 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:42"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:49"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:49"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:126"
         },
         {
@@ -18665,15 +18801,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:76"
+          "source": "src/interiors/GameplayInterior.ts:88"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:76"
+          "source": "src/interiors/GameplayInterior.ts:88"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:83"
+          "source": "src/interiors/GameplayInterior.ts:95"
         },
         {
           "system": "Interiors",
@@ -18715,6 +18851,14 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:43"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:50"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:130"
         },
         {
@@ -18731,7 +18875,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:77"
+          "source": "src/interiors/GameplayInterior.ts:89"
         },
         {
           "system": "Interiors",
@@ -18823,7 +18967,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:81"
+          "source": "src/interiors/GameplayInterior.ts:93"
         },
         {
           "system": "Interiors",
@@ -18869,7 +19013,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:82"
+          "source": "src/interiors/GameplayInterior.ts:94"
         },
         {
           "system": "Interiors",
@@ -20285,7 +20429,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1184"
+          "source": "src/server/Realm.ts:1187"
         },
         {
           "system": "Gameplay",

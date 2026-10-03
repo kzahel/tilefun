@@ -35,10 +35,28 @@ connections into the realm; they do not create separate instances.
 Legacy identities resolve to the existing `street` connection. Explicit saved
 connections can share one interior; leaving uses the selected door's endpoint,
 not the player's entry history. The original street connection stays required.
-Current generated layouts and the outdoor door control still expose their one
-primary entrance. Additional authored exterior openings, outdoor discovery of
-secondary connections, and floors require a later content/editor slice; this
-change does not alter frozen generators, approved art or existing room boundaries.
+Newly visited city buildings (`prop-city-*`) use saved `shop-v2` or
+`apartment-v2` layouts. Shops have a sales floor and preparation room; apartments
+have a bedroom, kitchen, living area and shared entrance hall. Audited facade
+thresholds expose both butcher doors and the bay/arched apartment entrances.
+Their left-to-right order matches the indoor south-wall openings. Both players
+and empty arrival landings must retain a route to every exit after room edits.
+
+The primary connection keeps the ID `street`; secondary IDs come from the pinned
+facade facts (`butcher-right`, `bay`). Controls select the nearest doorway and
+the server validates its ID and proximity. Outdoor endpoints follow a moved
+building when its prop is available. No outdoor generator, facade art, promotion
+bank or existing approved review image changes.
+
+Previously visited rooms retain their saved identity, furniture, edits and single
+street exit. Either visible exterior entrance can enter such a room at its original
+landing; adding a second physical opening would require an explicit room migration.
+Older regional/country-house recipes retain their original compact interiors.
+Upper floors and per-building authored variants remain future work.
+
+Four new layout cases are registered, unchecked, in Workshop's **Playable building
+layouts** batch (`rooms-16`). This is a runtime content change using existing art,
+not a human approval of those new furnished compositions.
 
 `PlayerLocationStore` owns one durable current-location record per profile
 (falling back to connection ID for legacy callers), separate from each realm's
@@ -75,6 +93,17 @@ failure, takeover during successful/failed commits and explicit exit selection;
 `PlayerLocationStore.test.ts` checks filesystem reopening and ordered retries.
 `player-dev-reload.spec.ts` sends the real Vite full-reload event; gameplay interior
 and room-editing browser tests cover saved furniture and expanded-room restoration.
+`BuildingLayouts.test.ts` checks every pinned city facade's door geometry and
+furnished connectivity; `RealmBrowser.test.ts` additionally checks simultaneous
+entry through different doors, selected exits, restart and legacy city saves.
+`building-doors.spec.ts` walks across both new layouts with real input, exits at
+the opposite outdoor door and reloads in the same interior. The renderer also
+handles the interval between receiving the realm identity and its room baseline.
+
+Validation (2026-10-03): typechecks, 1,319 unit tests, 282 browser tests, build,
+lint (existing warnings) and streaming readiness passed. All 513 prior Workshop
+candidate records remain unchanged; the four new cases have no compiler exclusions
+and match their hashes in normal Chromium at retina scale.
 
 ## Earlier interior work
 
@@ -92,7 +121,7 @@ Rendering evidence and runners are routed through [performance](performance.md).
 
 ## Next work
 
-Review room editing, doorway constraints and partitions in gameplay, then add
+Review the four playable building layouts and try both entrances in co-op, then add
 explicit Workshop-to-game prefab promotion/import with reviewed doorway and
 occupancy contracts. The five fenced-tree kit cases were delivered unchecked;
 consult the inbox before promotion. Additional tree variants, playground tubes

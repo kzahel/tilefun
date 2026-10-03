@@ -311,6 +311,12 @@
       "toolId": "rooms"
     },
     {
+      "id": "rooms-16",
+      "name": "Playable building layouts",
+      "description": "Generated interior cases rendered with the shared room compiler.",
+      "toolId": "rooms"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -10624,6 +10630,210 @@
             "asset": "wall-picture",
             "x": 128,
             "y": 28
+          }
+        ],
+        "furnitureCatalogVersion": 1
+      }
+    },
+    {
+      "id": "building-layout-v2-butcher",
+      "batchId": "rooms-16",
+      "name": "Butcher · sales floor and preparation room · two entrances",
+      "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
+      "url": "/tilefun/interior-review.html?stage=16&unchecked=0&case=building-layout-v2-butcher",
+      "kind": "interior",
+      "fingerprint": "53445ca8fd08212fef6109c6ddec8e8e402398b7b28f382a7d15df4a9a5f2f72",
+      "interior": {
+        "caseId": "building-layout-v2-butcher",
+        "name": "Butcher · sales floor and preparation room · two entrances",
+        "sketch": "###########\n#KKKKKKKKK#\n#KKKKKKKKK#\n#####+#####\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n##+#####+##",
+        "fingerprint": "53445ca8fd08212fef6109c6ddec8e8e402398b7b28f382a7d15df4a9a5f2f72",
+        "furniture": [
+          {
+            "id": "prep-table",
+            "asset": "worktable",
+            "x": 112,
+            "y": 72
+          },
+          {
+            "id": "storage",
+            "asset": "dresser",
+            "x": 256,
+            "y": 72
+          },
+          {
+            "id": "counter",
+            "asset": "worktable",
+            "x": 160,
+            "y": 180
+          },
+          {
+            "id": "stool",
+            "asset": "stool",
+            "x": 208,
+            "y": 200
+          },
+          {
+            "id": "plant",
+            "asset": "potted-tree",
+            "x": 304,
+            "y": 184
+          }
+        ],
+        "furnitureCatalogVersion": 1
+      }
+    },
+    {
+      "id": "building-layout-v2-bay-apartment",
+      "batchId": "rooms-16",
+      "name": "Bay apartment · bedroom, kitchen and shared hall · two entrances",
+      "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
+      "url": "/tilefun/interior-review.html?stage=16&unchecked=0&case=building-layout-v2-bay-apartment",
+      "kind": "interior",
+      "fingerprint": "5149a5da43a9f51c5f4d641111fd81813976a56006c24283b41a247f731f21e8",
+      "interior": {
+        "caseId": "building-layout-v2-bay-apartment",
+        "name": "Bay apartment · bedroom, kitchen and shared hall · two entrances",
+        "sketch": "###########\n#BBBB#KKKK#\n#BBBB#KKKK#\n#BBBB+KKKK#\n##+####+###\n#LLLLLLLLL#\n#LLLLLLLLL#\n#HHHHHHHHH#\n##+#####+##",
+        "fingerprint": "5149a5da43a9f51c5f4d641111fd81813976a56006c24283b41a247f731f21e8",
+        "furniture": [
+          {
+            "id": "bed",
+            "asset": "single-bed",
+            "x": 64,
+            "y": 92
+          },
+          {
+            "id": "dresser",
+            "asset": "dresser",
+            "x": 112,
+            "y": 72
+          },
+          {
+            "id": "side-table",
+            "asset": "side-table",
+            "x": 40,
+            "y": 74
+          },
+          {
+            "id": "table",
+            "asset": "worktable",
+            "x": 256,
+            "y": 80
+          },
+          {
+            "id": "chair",
+            "asset": "stool",
+            "x": 192,
+            "y": 202
+          },
+          {
+            "id": "plant",
+            "asset": "potted-tree",
+            "x": 304,
+            "y": 200
+          }
+        ],
+        "furnitureCatalogVersion": 1
+      }
+    },
+    {
+      "id": "building-layout-v2-shop",
+      "batchId": "rooms-16",
+      "name": "Shop · sales floor and preparation room · one entrance",
+      "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
+      "url": "/tilefun/interior-review.html?stage=16&unchecked=0&case=building-layout-v2-shop",
+      "kind": "interior",
+      "fingerprint": "7692e3e08b677c54bd022dc8f3dff9462f4c0a24b1b960a0b313341c97e0463e",
+      "interior": {
+        "caseId": "building-layout-v2-shop",
+        "name": "Shop · sales floor and preparation room · one entrance",
+        "sketch": "###########\n#KKKKKKKKK#\n#KKKKKKKKK#\n#####+#####\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n##+########",
+        "fingerprint": "7692e3e08b677c54bd022dc8f3dff9462f4c0a24b1b960a0b313341c97e0463e",
+        "furniture": [
+          {
+            "id": "prep-table",
+            "asset": "worktable",
+            "x": 112,
+            "y": 72
+          },
+          {
+            "id": "storage",
+            "asset": "dresser",
+            "x": 256,
+            "y": 72
+          },
+          {
+            "id": "counter",
+            "asset": "worktable",
+            "x": 160,
+            "y": 180
+          },
+          {
+            "id": "stool",
+            "asset": "stool",
+            "x": 208,
+            "y": 200
+          },
+          {
+            "id": "plant",
+            "asset": "potted-tree",
+            "x": 304,
+            "y": 184
+          }
+        ],
+        "furnitureCatalogVersion": 1
+      }
+    },
+    {
+      "id": "building-layout-v2-apartment",
+      "batchId": "rooms-16",
+      "name": "Apartment · bedroom, kitchen and shared hall · one entrance",
+      "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
+      "url": "/tilefun/interior-review.html?stage=16&unchecked=0&case=building-layout-v2-apartment",
+      "kind": "interior",
+      "fingerprint": "1e1000ddf7b21aa6c2d24853f58f1d1a73e3a7b73cb8d8ff6b574ed889d5b9a9",
+      "interior": {
+        "caseId": "building-layout-v2-apartment",
+        "name": "Apartment · bedroom, kitchen and shared hall · one entrance",
+        "sketch": "###########\n#BBBB#KKKK#\n#BBBB#KKKK#\n#BBBB+KKKK#\n##+####+###\n#LLLLLLLLL#\n#LLLLLLLLL#\n#HHHHHHHHH#\n##+########",
+        "fingerprint": "1e1000ddf7b21aa6c2d24853f58f1d1a73e3a7b73cb8d8ff6b574ed889d5b9a9",
+        "furniture": [
+          {
+            "id": "bed",
+            "asset": "single-bed",
+            "x": 64,
+            "y": 92
+          },
+          {
+            "id": "dresser",
+            "asset": "dresser",
+            "x": 112,
+            "y": 72
+          },
+          {
+            "id": "side-table",
+            "asset": "side-table",
+            "x": 40,
+            "y": 74
+          },
+          {
+            "id": "table",
+            "asset": "worktable",
+            "x": 256,
+            "y": 80
+          },
+          {
+            "id": "chair",
+            "asset": "stool",
+            "x": 192,
+            "y": 202
+          },
+          {
+            "id": "plant",
+            "asset": "potted-tree",
+            "x": 304,
+            "y": 200
           }
         ],
         "furnitureCatalogVersion": 1
@@ -25080,5 +25290,5 @@
       }
     }
   ],
-  "inputDigest": "3ed9c25e87134c9b4d0c74a0b54b998e60ba6d4884de12e8b800160a6e011724"
+  "inputDigest": "13f16577c80aedbde1a299ede96afecd30034711bf62a4a8563bf93a3f9492a2"
 }

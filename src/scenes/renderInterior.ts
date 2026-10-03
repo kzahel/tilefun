@@ -5,9 +5,8 @@ import {
   furnitureAsset,
   INTERIOR_FLOOR,
   INTERIOR_WALL_TYPE,
-  interiorPlan,
 } from "../interiors/GameplayInterior.js";
-import { compileGameplayRoom } from "../interiors/GameplayRoom.js";
+import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
@@ -29,14 +28,16 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
   const state = gc.stateView.roomState;
   const key = JSON.stringify([identity, preview?.room?.plan.rows ?? state]);
   if (key !== lastKey || atlas.image !== lastAtlas) {
-    const room = preview?.room ?? (state ? compileGameplayRoom(identity, state) : null);
-    const shell = room ?? interiorPlan(identity);
+    // Realm identity arrives before the room baseline. Render its versioned
+    // initial layout until the authoritative saved/edited plan is available.
+    const room = preview?.room ?? compileGameplayRoom(identity, state ?? initialRoom(identity));
+    const shell = room;
     renderer = new CachedInteriorRenderer(
       atlas.image,
       shell.map,
       shell.plan,
-      room?.legacy === false ? room.furnitureFloor : INTERIOR_FLOOR,
-      room?.legacy === false,
+      !room.legacy ? room.furnitureFloor : INTERIOR_FLOOR,
+      !room.legacy,
     );
     lastAtlas = atlas.image;
     lastKey = key;

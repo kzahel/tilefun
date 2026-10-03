@@ -54,7 +54,7 @@ if (process.argv.includes("--check")) {
         Reflect.get(window, "workshopManifest"),
       )) as WorkshopManifest;
       const checks = (manifest as WorkshopManifest).candidates.filter(
-        (c) => c.kind === "character" || c.kind === "vehicle",
+        (c) => c.kind === "character" || c.kind === "vehicle" || c.batchId === "rooms-16",
       );
       const mismatches = checks.filter(
         (c) => normal.candidates.find((n) => n.id === c.id)?.fingerprint !== c.fingerprint,
@@ -64,7 +64,7 @@ if (process.argv.includes("--check")) {
           `Review raster mismatch in normal Chromium: ${mismatches.map((c) => c.id).join(", ")}. Fix canvas determinism before rebuilding.`,
         );
       console.log(
-        `Verified ${checks.length} character/vehicle identities in normal Chromium at retina scale.`,
+        `Verified ${checks.length} character/vehicle/building-layout identities in normal Chromium at retina scale.`,
       );
     } finally {
       await normalBrowser.close();

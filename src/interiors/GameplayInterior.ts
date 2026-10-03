@@ -6,6 +6,7 @@ import type { WorldGenerator } from "../generation/Generator.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
+import { type BuildingLayout, buildingLayout } from "./BuildingLayouts.js";
 import { compileFurniture } from "./FurnishedInterior.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
 import { furnitureCollider } from "./FurnitureMotion.js";
@@ -19,6 +20,7 @@ export interface InteriorIdentity {
   readonly featureId: string;
   readonly buildingType: string;
   readonly floor: 0;
+  readonly layout?: BuildingLayout;
   /** Optional explicit connections; absence preserves the original street doorway. */
   readonly doors?: readonly import("./BuildingDoors.js").BuildingDoor[];
   readonly returnX: number;
@@ -65,6 +67,16 @@ export function interiorPlan(identity: InteriorIdentity) {
     !exteriorEntrance({ type: identity.buildingType, position: { wx: 0, wy: 0 } })
   )
     throw new Error("Unsupported interior recipe.");
+  if (identity.layout) {
+    const { sketch, furniture } = buildingLayout(identity);
+    const plan = parseFloorPlan(sketch);
+    return {
+      plan,
+      map: buildLayeredApartmentPlan(plan),
+      furniture,
+      objects: compileFurniture(plan, furniture),
+    };
+  }
   const shop = buildingRecipe(identity.buildingType)?.kind === "shop";
   const cell = shop ? "K" : "L";
   const plan = parseFloorPlan(

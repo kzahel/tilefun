@@ -165,7 +165,8 @@ function show(next: ReadyCase | undefined, push = true): void {
   draw();
 }
 function drawStatus(): void {
-  el("furniture-shift").hidden = state.stage !== "15" && !current?.furniture;
+  el("furniture-shift").hidden =
+    !!current?.building || (state.stage !== "15" && !current?.furniture);
   const fresh = () => ({ reviewed: 0, unchecked: 0, checking: 0, wrong: 0 });
   const totals = [fresh(), ...REVIEW_STAGES.map(fresh)];
   for (const c of cases) {
@@ -243,7 +244,7 @@ function draw(): void {
   const furnished = current.furniture
     ? compileFurniture(parseFloorPlan(current.sketch), current.furniture)
     : [];
-  el("furniture-tools").hidden = !current.furniture;
+  el("furniture-tools").hidden = !current.furniture || !!current.building;
   el<HTMLAnchorElement>("movement-test").href =
     `./furniture-playtest.html?scene=${current.id === "furniture-worktable" ? "worktable" : "bunk"}`;
   el("furniture-list").replaceChildren(

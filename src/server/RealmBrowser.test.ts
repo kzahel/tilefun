@@ -1399,3 +1399,180 @@ it("replicates model changes to peers and keeps them across realm travel while r
     server.destroy();
   }
 });
+
+async function cityDoorSetup(building = "butcher") {
+  const setup = await createTestSetup();
+  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictPlanner.js");
+  const { regionalWorld } = await import("../generation/regional/WorldDescriptor.js");
+  const { exteriorDoors } = await import("../interiors/BuildingDoors.js");
+  const generation = {
+    type: "regional",
+    version: "regional-v5",
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
+  const lot = new DenseDistrictSource(regionalWorld(2026), true)
+    .owner(0, 0)
+    ?.blocks.flatMap((b) => b.lots)
+    .find((l) => l.buildingType.includes(building));
+  if (!lot) throw new Error("Missing city building");
+  setup.transport.connect("local", restoreProfile);
+  await setup.server.settle();
+  const meta = await setup.registry.createWorld(
+    "Two doors",
+    undefined,
+    undefined,
+    undefined,
+    generation,
+  );
+  await setup.server.loadWorld(meta.id, { ...lot.entrance, generation });
+  const prop = setup.server.propManager.props.find((p) => p.proceduralId === lot.id);
+  if (!prop) throw new Error("Missing city facade");
+  return { ...setup, meta, lot, generation, doors: exteriorDoors(prop) };
+}
+
+for (const building of ["butcher", "condo-bay"])
+  it(`${building} doors share a realm across concurrent entry, opposite exits and restart`, async () => {
+    const setup = await cityDoorSetup(building);
+    const { server, transport, meta, generation, lot, doors } = setup;
+    const { buildingDoors } = await import("../interiors/BuildingDoors.js");
+    try {
+      expect(doors).toHaveLength(2);
+      transport.connect("guest", { profileId: "second-city-player", displayName: "Guest" });
+      await server.settle();
+      const secondary = doors[1];
+      if (!secondary) throw new Error("Missing secondary door");
+      transport.clientSend("guest", {
+        type: "join-realm",
+        requestId: 2010,
+        worldId: meta.id,
+        arrival: { x: secondary.outside.wx / 16, y: secondary.outside.wy / 16, generation },
+      });
+      await server.settle();
+      transport.clientSend("local", { type: "enter-building", requestId: 2011, featureId: lot.id });
+      transport.clientSend("guest", {
+        type: "enter-building",
+        requestId: 2012,
+        featureId: lot.id,
+        doorId: secondary.id,
+      });
+      await server.settle();
+      const local = server.getLocalSession();
+      const guest = [...server.getSessions()].find((s) => s.clientId === "guest");
+      const interior = server.worldInterior;
+      expect(interior?.layout).toBe(building === "butcher" ? "shop-v2" : "apartment-v2");
+      if (!interior) throw new Error("Missing interior");
+      expect(local.realmId).toBe(guest?.realmId);
+      const connections = buildingDoors(interior);
+      expect(local.player.position).toEqual(connections.find((d) => d.id === "street")?.arrival);
+      expect(guest?.player.position).toEqual(
+        connections.find((d) => d.id === secondary.id)?.arrival,
+      );
+      const opposite = connections.find((d) => d.id === secondary.id);
+      if (!opposite) throw new Error("Missing opposite exit");
+      transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 2013,
+        doorId: secondary.id,
+      });
+      await server.settle();
+      expect(local.realmId).toBe(guest?.realmId); // Far-away exit is rejected.
+      local.player.position = { ...opposite.inside };
+      transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 2014,
+        doorId: secondary.id,
+      });
+      await server.settle();
+      expect(server.worldInterior).toBeNull();
+      expect(local.player.position).toEqual(secondary.outside);
+      transport.clientSend("local", {
+        type: "enter-building",
+        requestId: 2015,
+        featureId: lot.id,
+        doorId: secondary.id,
+      });
+      await server.settle();
+      expect(local.player.position).toEqual(opposite.arrival);
+      await server.flushAsync();
+      server.destroy();
+      const resumedTransport = new TestTransport();
+      const resumed = new GameServer(resumedTransport, {
+        registry: setup.registry,
+        createStore: setup.createStore,
+      });
+      try {
+        await resumed.init();
+        resumedTransport.connect("local", restoreProfile);
+        await resumed.settle();
+        expect(resumed.worldInterior).toEqual(interior);
+        expect(resumed.getLocalSession().player.position).toEqual(opposite.arrival);
+      } finally {
+        resumed.destroy();
+      }
+    } finally {
+      server.destroy();
+    }
+  });
+
+it("keeps saved city room geometry and furniture while admitting the second exterior entrance", async () => {
+  const setup = await cityDoorSetup();
+  const { interiorRealmId } = await import("../interiors/GameplayInterior.js");
+  const { initialRoom } = await import("../interiors/GameplayRoom.js");
+  const { server, transport, lot, meta, doors } = setup;
+  const id = interiorRealmId(meta.id, lot.id);
+  const identity = {
+    version: "interior-v1",
+    parentWorldId: meta.id,
+    featureId: lot.id,
+    buildingType: lot.buildingType,
+    floor: 0,
+    returnX: lot.entrance.x,
+    returnY: lot.entrance.y,
+  } as const;
+  // A pre-layout save, including an authored room edit.
+  const room = initialRoom(identity);
+  const cell = room.document.cells.find((c) => c.x === 3 && c.y === 3);
+  if (cell) cell.value = "L";
+  room.revision = 4;
+  await setup.createStore(id).save([
+    {
+      collection: "meta",
+      key: "state",
+      value: {
+        cameraX: 80,
+        cameraY: 120,
+        cameraZoom: 1,
+        playerX: 80,
+        playerY: 120,
+        entities: [],
+        nextEntityId: 1,
+        interior: identity,
+        roomPlan: room,
+      },
+    },
+  ]);
+  try {
+    const secondary = doors[1];
+    if (!secondary) throw new Error("Missing secondary door");
+    server.getLocalSession().player.position = secondary.outside;
+    transport.clientSend("local", {
+      type: "enter-building",
+      requestId: 2020,
+      featureId: lot.id,
+      doorId: secondary.id,
+    });
+    await server.settle();
+    expect(server.worldInterior).toEqual(identity);
+    expect(server.getLocalSession().player.position).toEqual({ wx: 80, wy: 120 });
+    await server.flushAsync();
+    expect(
+      ((await setup.createStore(id).get("meta", "state")) as { roomPlan: unknown }).roomPlan,
+    ).toEqual(room);
+    expect(
+      server.propManager.props.filter((p) => p.type.startsWith("prop-interior-furniture:")),
+    ).toHaveLength(3);
+  } finally {
+    server.destroy();
+  }
+});

@@ -1,9 +1,12 @@
 import { required } from "../../art/ArtCatalog.js";
 import { sha256 } from "../../art/ArtSource.js";
+import { reviewContext2D } from "../../art/reviewCanvas.js";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";
+import { CachedInteriorRenderer } from "../CachedInteriorRenderer.js";
 import { drawFurnishedInterior, furnitureSignature } from "../FurnishedInterior.js";
+import { compileGameplayRoom, initialRoom } from "../GameplayRoom.js";
 import { drawLayeredInteriorMap } from "../LayeredInteriorMap.js";
 import type { ReviewCase } from "./ReviewCases.js";
 export function renderInteriorCandidate(
@@ -11,6 +14,19 @@ export function renderInteriorCandidate(
   c: ReviewCase,
   atlas: HTMLImageElement,
 ) {
+  if (c.building) {
+    const room = compileGameplayRoom(c.building, initialRoom(c.building));
+    canvas.width = parseFloorPlan(c.sketch).width * 32;
+    canvas.height = 10 * 32;
+    const ctx = reviewContext2D(canvas);
+    ctx.fillStyle = "#171e2a";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    new CachedInteriorRenderer(atlas, room.map, room.plan, room.furnitureFloor, true, true).draw(
+      ctx,
+      c.furniture ?? [],
+    );
+    return room.map;
+  }
   const plan = parseFloorPlan(c.sketch),
     map = c.profiles
       ? buildProfileApartmentPlan(plan, c.profiles)

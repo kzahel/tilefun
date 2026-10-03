@@ -1,7 +1,6 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
-import { buildingDoors } from "../interiors/BuildingDoors.js";
-import { exteriorEntrance } from "../interiors/GameplayInterior.js";
+import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 
 type DoorRequest =
   | { type: "enter-building"; featureId: string; doorId?: string }
@@ -40,24 +39,28 @@ export class DoorControl {
           .sort((a, b) => a.distance - b.distance)[0]?.door;
         if (door) {
           this.request = { type: "exit-building", doorId: door.id };
-          label = door.id === "street" ? "Return to street · E" : `Exit ${door.id} · E`;
+          label = "Return to street · E";
         }
       } else if ((view.playerEntity.wz ?? 0) <= 8) {
         let best = 32;
         for (const prop of view.props) {
           if (!prop.proceduralId) continue;
-          const door = exteriorEntrance(prop);
-          if (!door) continue;
-          const distance = Math.hypot(p.wx - door.wx, p.wy - door.wy);
-          if (distance > best) continue;
-          best = distance;
-          this.request = { type: "enter-building", featureId: prop.proceduralId };
-          label =
-            prop.type === "prop-country-house"
-              ? "Enter home · E"
-              : buildingRecipe(prop.type)?.kind === "shop"
-                ? "Enter shop · E"
-                : "Enter apartment · E";
+          for (const door of exteriorDoors(prop)) {
+            const distance = Math.hypot(p.wx - door.outside.wx, p.wy - door.outside.wy);
+            if (distance > best) continue;
+            best = distance;
+            this.request = {
+              type: "enter-building",
+              featureId: prop.proceduralId,
+              doorId: door.id,
+            };
+            label =
+              prop.type === "prop-country-house"
+                ? "Enter home · E"
+                : buildingRecipe(prop.type)?.kind === "shop"
+                  ? "Enter shop · E"
+                  : "Enter apartment · E";
+          }
         }
       }
     }

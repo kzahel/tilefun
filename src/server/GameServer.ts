@@ -20,7 +20,7 @@ import {
 import { createGenerator } from "../generation/Generator.js";
 import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
-import { buildingDoor } from "../interiors/BuildingDoors.js";
+import { buildingDoor, exteriorDoors, withBuildingLayout } from "../interiors/BuildingDoors.js";
 import {
   exteriorEntrance,
   type InteriorIdentity,
@@ -800,14 +800,17 @@ export class GameServer {
       ?.blocks.flatMap((b) => b.lots)
       .find((l) => l.id === parsed.featureId);
     if (!lot) throw new Error("Building is absent from the pinned district plan.");
-    const interior: InteriorIdentity = {
-      version: "interior-v1",
-      ...parsed,
-      buildingType: lot.buildingType,
-      floor: 0,
-      returnX: lot.entrance.x,
-      returnY: lot.entrance.y,
-    };
+    const interior: InteriorIdentity = withBuildingLayout(
+      {
+        version: "interior-v1",
+        ...parsed,
+        buildingType: lot.buildingType,
+        floor: 0,
+        returnX: lot.entrance.x,
+        returnY: lot.entrance.y,
+      },
+      { wx: lot.anchor.x * TILE_SIZE, wy: lot.anchor.y * TILE_SIZE },
+    );
     return {
       ...parent,
       id: worldId,
@@ -834,9 +837,15 @@ export class GameServer {
         interiorRealmId(realm.currentWorldId, featureId),
       );
       if (!destination.interior) throw new Error("Building interior unavailable.");
-      const connection = buildingDoor(destination.interior, doorId);
+      // Older rooms keep their single physical exit. A newly discoverable facade
+      // door can still enter that saved room through its original landing.
+      const legacyAlias =
+        !destination.interior.layout &&
+        !destination.interior.doors?.some((door) => door.id === doorId) &&
+        exteriorDoors(prop).some((door) => door.id === doorId);
+      const connection = buildingDoor(destination.interior, legacyAlias ? "street" : doorId);
       const door =
-        doorId === "street" ? (exteriorEntrance(prop) ?? connection.outside) : connection.outside;
+        exteriorDoors(prop).find((door) => door.id === doorId)?.outside ?? connection.outside;
       if (
         Math.hypot(session.player.position.wx - door.wx, session.player.position.wy - door.wy) >
           32 ||
@@ -883,9 +892,8 @@ export class GameServer {
         (p) => p.proceduralId === realm.interior?.featureId,
       );
       const outside =
-        doorId === "street" && prop
-          ? (exteriorEntrance(prop) ?? connection.outside)
-          : connection.outside;
+        (prop ? exteriorDoors(prop).find((door) => door.id === doorId)?.outside : undefined) ??
+        connection.outside;
       const position = {
         worldId: connection.outsideRealmId,
         x: outside.wx / TILE_SIZE,
