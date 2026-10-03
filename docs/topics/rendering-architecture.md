@@ -2,7 +2,8 @@
 
 Topic: rendering-architecture
 Status: terrain ownership, neutral elevation handles and static descriptors extracted;
-complete frame/backend and asset interfaces remain follow-up work.
+complete frame/backend and asset interfaces have a prepared end-to-end plan,
+awaiting the user's start signal.
 Updated: 2026-10-03.
 
 Owns renderer boundaries and resource/frame lifetime contracts. The
@@ -10,6 +11,8 @@ Owns renderer boundaries and resource/frame lifetime contracts. The
 [Tactical 013](../tactical/013-renderer-boundary-and-allocation-audit.md) records
 the original audit and completed allocation work. The [client/server architecture](../client-server-architecture.md)
 continues to own authority and prediction.
+[Parent Tactical 022](../tactical/022-renderer-backend-decoupling.md) tracks the
+remaining milestones, activation, just-in-time slice planning and completion gates.
 
 ## Desired architecture
 
@@ -75,6 +78,8 @@ boundaries. Keep the Canvas implementation working through every slice.
 4. **Next:** introduce the complete frame/backend interface and asset metadata catalog,
    including indoor and overlay phases. Remove concrete renderer/Canvas access
    from gameplay presentation orchestration in bounded follow-up slices.
+   [Parent Tactical 022](../tactical/022-renderer-backend-decoupling.md) owns their
+   sequencing and progress; implementation is prepared but not yet activated.
 5. Only then prototype a second backend against measured workloads, comparing
    crossings/copies, startup, memory, device recovery and frame presentation.
 

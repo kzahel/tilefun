@@ -31,8 +31,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [017 Generated traffic and roof riding](017-generated-road-traffic-and-roof-riding.md) | Delivered selectable v11 traffic, approved sprite bank and roof riding; [vehicles topic](../topics/vehicles.md) |
 | [018 Tick-aware NPC separation](018-tick-aware-npc-separation.md) | Sleeping-crowd exclusion and reduced-rate separation; broader unloading remains in the [entity activation topic](../topics/entity-activation.md) |
 | [019 Entity streaming and persistence](019-entity-streaming-and-persistence.md) | Planned parent sequence, no runtime implementation yet: incremental records, SQLite/IndexedDB, shared tickets/readiness and lazy eviction; [entity activation topic](../topics/entity-activation.md) |
-
 | [020 Shared record persistence](020-shared-record-persistence.md) | Phase A contract and deterministic fault tests complete; production adapters follow |
+| [022 Renderer backend decoupling](022-renderer-backend-decoupling.md) | Prepared parent sequence, awaiting start signal: five milestones, just-in-time children and end-to-end completion gates; [rendering architecture](../topics/rendering-architecture.md) |
 
 ## Earlier plans
 
