@@ -50,6 +50,11 @@ Owner login protects feedback. See [Workshop usage, setup and API](docs/tilefun-
 - **Roblox-inspired experience API** — Streamlined server-side scripting with tags, events, tick hooks, and overlap detection. Core sample experiences demonstrate the API; creative sandbox is the base gameplay mode. See the [vision doc](docs/VISION.md) for the full roadmap (creature collector, farming sim, tycoon, and more)
 - **Player profiles & persistence** — Worlds and player data saved to IndexedDB in the browser, or to disk when running the dedicated Node server
 
+On touch-first devices, the first tap requests fullscreen when the browser supports
+it, while still performing the tapped action. There is no extra button. Exiting
+fullscreen keeps it off until the next page load; unavailable or denied fullscreen
+leaves the game playable in the browser. This does not disable OS navigation gestures.
+
 ## Asset Credits
 
 - **Modern Exteriors** by LimeZu — [itch.io](https://limezu.itch.io/modernexteriors)

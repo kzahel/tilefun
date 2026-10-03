@@ -1,5 +1,6 @@
 import { GameClient } from "./client/GameClient.js";
 import { performanceMetrics } from "./diagnostics/PerformanceMetrics.js";
+import { enableFirstTouchFullscreen } from "./input/firstTouchFullscreen.js";
 import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
 import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
@@ -18,6 +19,7 @@ import { ProfilePicker } from "./ui/ProfilePicker.js";
 const canvasEl = document.getElementById("game") as HTMLCanvasElement | null;
 if (!canvasEl) throw new Error("Canvas element #game not found");
 const canvas: HTMLCanvasElement = canvasEl;
+const disableFirstTouchFullscreen = enableFirstTouchFullscreen();
 
 // ?server=host:port      → connect to a specific standalone server
 // ?multiplayer           → connect to game server on same host (Vite plugin uses /ws path)
@@ -475,6 +477,7 @@ window.addEventListener("beforeunload", () => {
 
 if (import.meta.hot) {
   import.meta.hot.dispose((data) => {
+    disableFirstTouchFullscreen();
     data.localShutdown = localHost?.shutdown();
     document.removeEventListener("visibilitychange", syncLocalVisibility);
     window.removeEventListener("pagehide", hideLocalHost);
