@@ -101,6 +101,20 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect.poll(async () => (await state(page)).room?.revision).toBe(5);
   await page.keyboard.press("ControlOrMeta+Shift+z");
   await expect.poll(async () => (await state(page)).room?.revision).toBe(6);
+  // Furniture lives in the edited floor, through the actual indoor palette.
+  const furnitureCount = async () =>
+    (await state(page)).props.filter((p) => p.type.startsWith("prop-interior-furniture:")).length;
+  await page.getByRole("button", { name: "Props", exact: false }).click();
+  await page.getByRole("button", { name: "stool", exact: true }).click();
+  await draw(page, [6, 2]);
+  await expect.poll(furnitureCount).toBe(4);
+  await page.getByRole("button", { name: "Delete", exact: true }).click();
+  await draw(page, [6, 2]);
+  await expect.poll(furnitureCount).toBe(3);
+  await page.getByRole("button", { name: "stool", exact: true }).click();
+  await draw(page, [6, 2]);
+  await expect.poll(furnitureCount).toBe(4);
+  await page.getByRole("button", { name: "Rooms", exact: false }).click();
   // Invalid erasure cannot remove the street doorway or enter history.
   await draw(page, [2, 4]); // selected Door, same protected door = no-op
   await page.getByRole("button", { name: "Paint / erase", exact: true }).click();
@@ -136,6 +150,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect
     .poll(async () => (await state(page)).props.find((p) => p.type === "prop-interior-wall")?.walls)
     .toEqual(walls);
+  await expect.poll(furnitureCount).toBe(4);
   await page.getByRole("button", { name: "Return to street" }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
   expect(errors).toEqual([]);

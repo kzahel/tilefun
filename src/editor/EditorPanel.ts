@@ -329,6 +329,7 @@ export class EditorPanel {
       button.style.cssText = BTN_STYLE;
       button.onclick = () => {
         this.model.selectedPropType = `prop-interior-furniture:${asset}`;
+        this.model.deleteMode = false;
         this.syncFromModel();
       };
       this.indoorProps.appendChild(button);
