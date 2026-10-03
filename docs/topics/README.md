@@ -20,6 +20,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | --- | --- |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
+| [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Performance](performance.md) | Worker authority, traversal readiness, phone evidence and bounded terrain preparation |
 | [Patterns and interiors](patterns-and-interiors.md) | Shared semantic drawing, saved room edits, furniture and pending kit/import work |
 

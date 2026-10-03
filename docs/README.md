@@ -35,16 +35,16 @@ completion from an old unchecked checklist. Existing guide filenames stay stable
 | Workshop, login and feedback APIs | [Workshop](tilefun-workshop.md), [art workbench](art-workbench.md) |
 | World exploration and generation | [World explorer](world-explorer.md), [city topic](topics/city-generation.md) |
 | Rooms, furniture and drawing | [Interior workbench](interior-workbench.md), [counterexample search](interior-counterexamples.md), [editing topic](topics/patterns-and-interiors.md) |
-| Authority, transport and hosting | [Client/server](client-server-architecture.md), [network](NETWORK-ARCHITECTURE.md), [server security](SERVER-SECURITY.md) |
+| Authority, transport and hosting | [Client/server](client-server-architecture.md), [network design](NETWORK-ARCHITECTURE.md), [networking topic](topics/multiplayer-networking.md), [server security](SERVER-SECURITY.md) |
 | Simulation and prediction | [3D physics](3D-PHYSICS-DESIGN.md), [riding debugging](RIDING-DEBUG.md), [prediction lessons](hard-won-knowledge.md), [spatial optimization](SPATIAL-OPTIMIZATION.md) |
 | Experiences and scripting | [Scripting API design](SCRIPTING-API-DESIGN.md), [vision](VISION.md) |
 | Art and characters | [Sprite inventory](SPRITE-INVENTORY.md), [Blender workflow](blender-pixel-characters.md), [character roster](pixel-character-roster.md), [asset credits](../public/assets/SOURCES.md) |
 | Product possibilities | [Vision](VISION.md), [competitive analysis](COMPETITIVE-ANALYSIS.md), [ideas](ideas.md) |
 
-Some older architecture/design docs mix the original proposal with implemented
-behavior. Follow their explicit current-state sections and verify old claims
-against code before treating a proposed phase as remaining work. The
-[tactical index](tactical/README.md#earlier-plans) also routes unnumbered plans.
+Current architecture guides have been separated from their original proposals.
+The [archive index](archive/README.md) maps preserved plans/investigations to
+current owners. Earlier speculative interfaces and bug hypotheses remain useful
+history, not instructions to implement or confirmed present-day failures.
 
 ## Research and history
 
@@ -52,6 +52,7 @@ against code before treating a proposed phase as remaining work. The
 - [Roblox economy and ownership](research/roblox-economy-and-ownership.md)
 - [Roblox VR/XR API](research/roblox-vr-xr-api.md)
 - [WebXR support](research/webxr-vr-support.md)
+- [Archive index and current replacements](archive/README.md)
 - [Archived physics drift plan](archive/physics-sim-drift-reduction-plan.md)
 - [Instrumentation tools](../scripts/instrumentation/README.md)
 

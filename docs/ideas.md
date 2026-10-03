@@ -36,12 +36,11 @@ copying every item into multiple checklists.
 
 ## Engine, hosting and distribution
 
-- [Engine architecture checklist](ENGINE-ARCHITECTURE-CHECKLIST.md): historical
-  infrastructure proposals. Check newer topics/code before assuming a gap;
-  for example, shared pattern/room undo has since shipped.
+- [Engine capability map](ENGINE-ARCHITECTURE-CHECKLIST.md): current foundations
+  and remaining infrastructure candidates, with the original checklist archived.
 - Broader dedicated dual-channel WebRTC testing and better reconnect UX;
   public-server authentication/access controls and hosting dependency tradeoffs.
-  See [network architecture](NETWORK-ARCHITECTURE.md) and
+  See [networking status](topics/multiplayer-networking.md) and
   [server security](SERVER-SECURITY.md).
 - Asset obfuscation proposal: store purchased art as XOR-encoded `.enc` files
   and decode to ignored PNGs during builds. This was a backlog idea, offers no

@@ -8,55 +8,28 @@ For wire protocol research (QW, Source, Roblox comparisons), see
 
 ---
 
-## Current State (Phases 1-6 complete)
+## Current implementation
 
-Every tick at 60 Hz, the server builds per-client messages sent over a single
-reliable ordered channel (WebSocket, WebRTC reliable data channel, or local
-`WorkerClientTransport`). Local replication defers when its bounded channel is
-backpressured; simulation continues and delta baselines advance only on delivery
-admission. Messages are binary-encoded (ArrayBuffer) with a JSON fallback for
-infrequent message types.
+Checked 2026-10-03. [Multiplayer networking](topics/multiplayer-networking.md)
+owns current status, code/test entry points and remaining reliability work.
+[Client/server architecture](client-server-architecture.md) owns host boundaries.
 
-**Completed optimizations** (Phases 1-5):
+The slow-field split, static entity definitions, frame/sync separation, entity
+field deltas, binary encoding and dedicated dual-channel routing are implemented.
+Dedicated WebRTC prefers unordered/unreliable `entities` for server frames;
+client input and server sync/control use reliable `sync`. PeerJS remains
+sync-only. WebSocket and local Worker delivery are ordered. Worker replication
+defers under backpressure without stopping simulation.
 
-1. **Delta fields** (Phase 1): Slow-changing fields (props, CVars, player names,
-   editor cursors, session state) are tracked per-client and only sent on change.
-2. **SpriteDef registry** (Phase 2): Static entity metadata (sprite dimensions,
-   collider shapes, AI config) factored into `ENTITY_DEFS`. Only dynamic state
-   (`SpriteState`, `WanderAIState`) is serialized. Collider eliminated from wire.
-3. **Message type split** (Phase 3): `FrameMessage` (per-tick entity data) +
-   typed sync events (`SyncSession`, `SyncChunks`, `SyncProps`, `SyncCVars`,
-   `SyncPlayerNames`, `SyncEditorCursors`). Ready for channel routing (Phase 6).
-4. **Entity delta compression** (Phase 4): Server tracks `lastSentEntities` per
-   client. New entities get full baselines, changed entities get field-level
-   deltas, removed entities get exit IDs. Idle entities = 0 bytes.
-5. **Binary encoding** (Phase 5): `FrameMessage`, `player-input`, and
-   `SyncChunksMessage` use DataView/ArrayBuffer encoding. Entity type strings
-   mapped to u8 indices, SpriteState packed into 2-4 bytes, WanderAIState into
-   3 bytes. Chunk data sent as raw typed array bytes. Remaining message types
-   use a JSON fallback envelope (0xFF tag byte + UTF-8 JSON). ~3-5x reduction
-   on top of delta compression.
+Entity deltas use last-sent state, not acknowledged snapshot baselines. Frame
+loss/reordering recovery must be validated before claiming reliable convergence
+on the unreliable channel. Channel routing tests alone do not establish it.
 
-**Steady-state cost**: ~10-15 KB/s per client with 50 entities (down from
-~1.8 MB/s pre-optimization). Idle frame = 19 bytes at 60 Hz = 1.1 KB/s.
-
-**Current focus**: validate dual-channel dedicated WebRTC in more real-world
-network conditions.
-
-Key files:
-- `src/shared/protocol.ts` — message types, snapshot shapes
-- `src/shared/binaryCodec.ts` — binary encode/decode for all message types
-- `src/shared/entityTypeIndex.ts` — entity type string ↔ u8 index mapping
-- `src/shared/serialization.ts` — entity/prop/chunk serialization
-- `src/shared/entityDelta.ts` — entity delta diff/apply
-- `src/server/Realm.ts` — world simulation and replication scheduling
-- `src/server/RealmReplicator.ts` — per-client baselines and frame/sync message building
-- `src/server/RealmTransitions.ts` — serialized player transfers with persistence failure recovery
-- `src/shared/requests.ts` — request-to-response type mapping
-- `src/client/RequestBroker.ts` — request correlation, response checks, timeouts, and disconnect cleanup
-- `src/transport/` — all transport implementations
-- `src/transport/webrtcChannels.ts` — channel classification/routing policy
-- `src/client/ClientStateView.ts` — client state application (`RemoteStateView`)
+The sections below preserve transport rationale and the phased design history.
+Per-phase encodings and bandwidth estimates describe those milestones, not a
+fresh end-to-end measurement. Voice, bandwidth scheduling and unreliable input
+resend windows are proposals. External protocol/platform comparisons have not
+been revalidated by this documentation cleanup.
 
 ---
 
@@ -142,7 +115,7 @@ RTCPeerConnection (one per client-server pair)
        ├── DTLS → SCTP
        │    ├── Channel 0: "entities" (unreliable, unordered)
        │    │     Entity snapshots, tick counters — the per-tick hot path.
-       │    │     Loss-tolerant: next tick overwrites. ~60 Hz.
+       │    │     Delta updates; loss recovery needs validation. ~60 Hz.
        │    │
        │    ├── Channel 1: "sync" (reliable, ordered)
        │    │     Chunk data, props, CVars, player names, editor cursors,
@@ -243,8 +216,9 @@ fragmentation and retransmission automatically.
 
 ## Protocol Evolution Roadmap
 
-Each step builds on the previous. The delta tracking infrastructure carries
-forward through all phases.
+Historical sequence: phases 1–6 have implementations; phase 7 remains a
+proposal. The delta tracking infrastructure carries forward, but the original
+per-phase transport/encoding descriptions are not current deployment guidance.
 
 ### Phase 1: Delta Fields on GameStateMessage ✅
 
@@ -294,7 +268,7 @@ Per-entity delta protocol:
 - Client maintains persistent `_entityMap` and applies deltas in-place
 - Client-side animation (animTimer/frameCol) not serialized — computed locally
 
-- **Transport**: Single channel (but designed for unreliable tolerance)
+- **Transport**: Single channel at this milestone; last-sent deltas require ordered application
 - **Encoding**: JSON or binary
 - **Impact**: 80-90% reduction in entity data. 50 idle chickens = 0 bytes.
 
@@ -371,7 +345,7 @@ next tick.
 
 ---
 
-## Voice Chat Architecture
+## Voice Chat Architecture (proposal; not implemented)
 
 WebRTC was built for voice/video chat (Google Hangouts). Voice is the primary
 use case, not an afterthought. Adding it to an existing game PeerConnection

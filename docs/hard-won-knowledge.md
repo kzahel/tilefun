@@ -1,5 +1,10 @@
 # Hard-Won Knowledge
 
+Historical debugging evidence. Current input-step, height and prediction owners
+are documented in [physics](3D-PHYSICS-DESIGN.md) and
+[riding diagnostics](RIDING-DEBUG.md). The old file layout and clock workaround
+below describe that investigation, not the entire current movement contract.
+
 ## Client-Side Prediction Jitter on High Refresh Rate Displays
 
 **Date**: Feb 2025

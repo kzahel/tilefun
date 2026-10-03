@@ -27,13 +27,14 @@ Several early plans contain original unchecked lists superseded by later work.
 
 ## Earlier plans
 
-These predate the numbered convention. Keep their existing URLs; inspect current
-code and later evidence before interpreting proposed phases as pending work.
+These predate the numbered convention. Their original bodies are preserved in
+[the archive](../archive/README.md); their established URLs now route current
+architecture or implementation status.
 
-- [SpriteDef split](../SPRITEDEF-SPLIT-PLAN.md)
-- [Wire protocol delta optimization](../WIRE-PROTOCOL-DELTA-PLAN.md)
-- [3D physics design](../3D-PHYSICS-DESIGN.md)
-- [Spatial optimization](../SPATIAL-OPTIMIZATION.md)
-- [Client/server extraction and current boundaries](../client-server-architecture.md)
-- [Scripting API design and phases](../SCRIPTING-API-DESIGN.md)
+- [SpriteDef split — implemented](../SPRITEDEF-SPLIT-PLAN.md)
+- [Slow-field protocol deltas — implemented/evolved](../WIRE-PROTOCOL-DELTA-PLAN.md)
+- [Current physics architecture](../3D-PHYSICS-DESIGN.md)
+- [Current spatial indexing/tick scheduling](../SPATIAL-OPTIMIZATION.md)
+- [Current client/server boundaries](../client-server-architecture.md)
+- [Current trusted scripting API](../SCRIPTING-API-DESIGN.md)
 - [Archived physics drift plan](../archive/physics-sim-drift-reduction-plan.md)

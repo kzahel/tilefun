@@ -26,8 +26,9 @@ Workshop inbox for decisions after the documented checkpoints.
   records the sequence and deferred scope.
 - Multiplayer already supports collaborative editing, browser-hosted P2P and
   dedicated servers. Next opportunities are real-world dual-channel WebRTC
-  validation and connection/reconnection UX. Public-server authentication remains
-  separate from player profile identity; see [network architecture](NETWORK-ARCHITECTURE.md).
+  loss/reordering validation and connection/reconnection UX. Public-server
+  authentication remains separate from player profile identity; see
+  [networking status](topics/multiplayer-networking.md).
 - Build on the existing terrain, prop, furniture and room editors with curated
   content and simpler child-friendly interactions. Saved-world naming, switching
   and deletion confirmation exist; broader destructive-edit safety remains open.
