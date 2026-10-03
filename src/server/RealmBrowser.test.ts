@@ -696,6 +696,82 @@ it("building doors share persistent furnished realms and return to the right ext
   });
   await new Promise((r) => setTimeout(r, 10));
   expect(transport.messagesOfType("two", "realm-joined").at(-1)?.worldId).toBe(inside?.worldId);
+  // Whole-room transactions share one authoritative plan; stale strokes and
+  // history cannot overwrite a second editor, and late clients receive the plan.
+  server.broadcasting = true;
+  const roomId = inside?.worldId;
+  if (!roomId) throw new Error("Missing interior realm ID");
+  transport.clientSend("local", { type: "set-editor-mode", enabled: true });
+  transport.clientSend("two", { type: "set-editor-mode", enabled: true });
+  const roomEdit = {
+    path: [
+      { x: 4, y: 2 },
+      { x: 8, y: 3 },
+    ],
+    shape: "rectangle",
+    value: "L",
+    erase: false,
+  } as const;
+  transport.clientSend("local", { type: "edit-room", roomId, expectedRevision: 0, edit: roomEdit });
+  expect(transport.messagesOfType("local", "room-edit-status").at(-1)?.error).toBe("");
+  expect(server.worldRoomState?.revision).toBe(1);
+  server.tick(1 / 60);
+  expect(
+    JSON.parse(JSON.stringify(transport.messagesOfType("two", "sync-room").at(-1)?.room)),
+  ).toEqual(server.worldRoomState);
+  const serializedBoundary = transport
+    .messagesOfType("two", "sync-props")
+    .at(-1)
+    ?.props.find((p) => p.type === "prop-interior-wall");
+  expect(serializedBoundary?.walls?.length).toBeGreaterThan(8);
+  transport.clientSend("two", { type: "edit-room", roomId, expectedRevision: 0, edit: roomEdit });
+  expect(transport.messagesOfType("two", "room-edit-status").at(-1)?.error).toMatch(/changed/);
+  transport.clientSend("two", {
+    type: "edit-room",
+    roomId: "another-room",
+    expectedRevision: 1,
+    edit: roomEdit,
+  });
+  expect(transport.messagesOfType("two", "room-edit-status").at(-1)?.error).not.toBe("");
+  expect(server.worldRoomState?.revision).toBe(1);
+  transport.clientSend("two", {
+    type: "edit-room",
+    roomId,
+    expectedRevision: 1,
+    edit: { ...roomEdit, shape: "free", path: [{ x: 5, y: 2 }], value: "K" },
+  });
+  expect(server.worldRoomState?.revision).toBe(2);
+  transport.clientSend("local", {
+    type: "edit-room-history",
+    roomId,
+    expectedRevision: 2,
+    direction: "undo",
+  });
+  expect(transport.messagesOfType("local", "room-edit-status").at(-1)?.error).toMatch(/overwrite/);
+  transport.clientSend("two", {
+    type: "edit-room-history",
+    roomId,
+    expectedRevision: 2,
+    direction: "undo",
+  });
+  transport.clientSend("local", {
+    type: "edit-room-history",
+    roomId,
+    expectedRevision: 3,
+    direction: "undo",
+  });
+  transport.clientSend("local", {
+    type: "edit-room-history",
+    roomId,
+    expectedRevision: 4,
+    direction: "redo",
+  });
+  expect(server.worldRoomState?.revision).toBe(5);
+  const savedRoom = JSON.parse(JSON.stringify(server.worldRoomState));
+  transport.clientSend("local", { type: "set-editor-mode", enabled: false });
+  transport.clientSend("local", { type: "edit-room", roomId, expectedRevision: 5, edit: roomEdit });
+  expect(transport.messagesOfType("local", "room-edit-status").at(-1)?.error).not.toBe("");
+  transport.clientSend("local", { type: "set-editor-mode", enabled: true });
   transport.clientSend("local", { type: "edit-delete-prop", propId: fixture.id });
   server.flush();
   await new Promise((r) => setTimeout(r, 0));
@@ -737,6 +813,10 @@ it("building doors share persistent furnished realms and return to the right ext
   });
   await new Promise((r) => setTimeout(r, 10));
   expect(reopened.worldInterior?.featureId).toBe(prop.proceduralId);
+  expect(reopened.worldRoomState).toEqual(savedRoom);
+  expect(reopened.propManager.props.find((p) => p.type === "prop-interior-wall")?.walls).toEqual(
+    serializedBoundary?.walls,
+  );
   expect(reopened.propManager.props.some((p) => p.proceduralId === "fixture:bed")).toBe(false);
   expect(new Set(reopened.propManager.props.map((p) => p.proceduralId)).size).toBe(
     reopened.propManager.props.length,

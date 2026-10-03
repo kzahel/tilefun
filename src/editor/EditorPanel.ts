@@ -65,6 +65,10 @@ export class EditorPanel {
   private readonly autoButtons: HTMLButtonElement[] = [];
   private readonly terrainWrappers: HTMLDivElement[] = [];
   private readonly entityButtons: HTMLButtonElement[] = [];
+  private readonly roomRow: HTMLDivElement;
+  private readonly roomButtons: { button: HTMLButtonElement; value: string; rectangle: boolean }[] =
+    [];
+  private readonly indoorProps: HTMLDivElement;
   private readonly patternRow: HTMLDivElement;
   private readonly patternStatus: HTMLSpanElement;
   private readonly patternUndo: HTMLButtonElement;
@@ -307,9 +311,56 @@ export class EditorPanel {
 
     this.container.appendChild(this.propsRow);
 
+    this.indoorProps = document.createElement("div");
+    this.indoorProps.style.cssText = ROW_STYLE;
+    for (const asset of [
+      "single-bed",
+      "side-table",
+      "dresser",
+      "worktable",
+      "stool",
+      "potted-tree",
+      "fireplace",
+      "log-rack",
+    ]) {
+      const button = document.createElement("button");
+      button.textContent = asset;
+      button.dataset.furnitureType = `prop-interior-furniture:${asset}`;
+      button.style.cssText = BTN_STYLE;
+      button.onclick = () => {
+        this.model.selectedPropType = `prop-interior-furniture:${asset}`;
+        this.syncFromModel();
+      };
+      this.indoorProps.appendChild(button);
+    }
+    this.indoorProps.appendChild(this.buildDeleteButton());
+    this.container.appendChild(this.indoorProps);
+    this.roomRow = document.createElement("div");
+    this.roomRow.style.cssText = ROW_STYLE;
+    for (const [label, value, rectangle] of [
+      ["Floor", "L", false],
+      ["Kitchen floor", "K", false],
+      ["Wall", "#", false],
+      ["Door", "+", false],
+      ["Room rectangle", "L", true],
+    ] as const) {
+      const button = document.createElement("button");
+      button.textContent = label;
+      button.style.cssText = BTN_STYLE;
+      button.onclick = () => {
+        this.model.roomValue = value;
+        this.model.roomRectangle = rectangle;
+        this.model.setPaintMode("positive");
+      };
+      this.roomButtons.push({ button, value, rectangle });
+      this.roomRow.appendChild(button);
+    }
+    this.container.appendChild(this.roomRow);
     this.patternRow = document.createElement("div");
     this.patternRow.style.cssText = ROW_STYLE;
-    this.patternRow.appendChild(this.makeLabel("Fenced trees v1 · candidate"));
+    const patternLabel = this.makeLabel("Fenced trees v1 · candidate");
+    patternLabel.dataset.patternLabel = "true";
+    this.patternRow.appendChild(patternLabel);
     const erase = document.createElement("button");
     erase.textContent = "Paint / erase";
     erase.style.cssText = BTN_STYLE;
@@ -388,9 +439,37 @@ export class EditorPanel {
   /** Synchronize all DOM state from the model. */
   private syncFromModel(): void {
     this.patternRow.style.display = this.model.editorTab === "patterns" ? "flex" : "none";
+    this.roomRow.style.display =
+      this.model.indoor && this.model.editorTab === "patterns" ? "flex" : "none";
+    this.indoorProps.style.display =
+      this.model.indoor && this.model.editorTab === "props" ? "flex" : "none";
+    for (const button of this.indoorProps.querySelectorAll<HTMLButtonElement>(
+      "[data-furniture-type]",
+    ))
+      button.style.borderColor =
+        button.dataset.furnitureType === this.model.selectedPropType ? "#8cf" : "#888";
+    for (const [tab, button] of this.tabButtons) {
+      if (tab === "patterns" && button.lastChild)
+        button.lastChild.textContent = this.model.indoor ? "Rooms" : "Patterns";
+    }
+    for (const { button, value, rectangle } of this.roomButtons)
+      button.style.borderColor =
+        this.model.roomValue === value && this.model.roomRectangle === rectangle ? "#8cf" : "#888";
+    const label = this.patternRow.querySelector<HTMLElement>("[data-pattern-label]");
+    if (label)
+      label.textContent = this.model.indoor
+        ? "Live room · 32px grid"
+        : "Fenced trees v1 · candidate";
+    this.patternUndo.textContent = this.model.indoor ? "Undo room stroke" : "Undo row stroke";
+    this.patternRedo.textContent = this.model.indoor ? "Redo room stroke" : "Redo row stroke";
+    const studio = this.patternRow.querySelector<HTMLAnchorElement>("a");
+    if (studio)
+      studio.href = `/tilefun/workshop.html#/tool/patterns?family=${this.model.indoor ? "rooms-v1" : "fenced-trees-v1"}`;
     this.patternStatus.textContent =
       this.model.patternError ||
-      `${this.model.paintMode === "unpaint" ? "Erase" : "Paint"}: drag a horizontal row (4–128 cells). Right click erases. Fence faces south.`;
+      (this.model.indoor
+        ? `${this.model.paintMode === "unpaint" ? "Erase" : "Draw"}: drag on the room. Right click erases; Shift/middle drag pans. Street entrance is protected. Move furniture clear before changing its floor.`
+        : `${this.model.paintMode === "unpaint" ? "Erase" : "Paint"}: drag a horizontal row (4–128 cells). Right click erases. Fence faces south.`);
     this.patternStatus.style.color = this.model.patternError ? "#ffa090" : "#ccc";
     this.patternUndo.disabled = !this.model.patternCanUndo;
     this.patternRedo.disabled = !this.model.patternCanRedo;
@@ -686,6 +765,8 @@ export class EditorPanel {
     const inactive = "background: #222; color: #888;";
     for (const [tab, btn] of this.tabButtons) {
       btn.style.cssText = TAB_STYLE + (tab === this.model.editorTab ? active : inactive);
+      btn.style.display =
+        !this.model.indoor || tab === "patterns" || tab === "props" ? "flex" : "none";
     }
     // Road tab uses tile-only painting — hide tool row (brush modes, subgrid tools)
     const isTerrainTab = TERRAIN_TABS.includes(this.model.editorTab);
@@ -695,7 +776,8 @@ export class EditorPanel {
     this.roadRow.style.display = isRoad ? "flex" : "none";
     this.structureRow.style.display = this.model.editorTab === "structure" ? "flex" : "none";
     this.entityRow.style.display = this.model.editorTab === "entities" ? "flex" : "none";
-    this.propsRow.style.display = this.model.editorTab === "props" ? "flex" : "none";
+    this.propsRow.style.display =
+      !this.model.indoor && this.model.editorTab === "props" ? "flex" : "none";
     this.elevationRow.style.display = this.model.editorTab === "elevation" ? "flex" : "none";
   }
 

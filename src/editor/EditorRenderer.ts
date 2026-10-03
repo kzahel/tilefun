@@ -32,11 +32,56 @@ export function drawEditorOverlay(
   world?: World,
   sheets?: Map<string, Spritesheet>,
 ): void {
-  drawEditorGrid(ctx, camera, visible);
+  if (!model.indoor) drawEditorGrid(ctx, camera, visible);
   if (model.editorTab === "elevation" && world) {
     drawElevationOverlay(ctx, camera, world, visible);
   }
-  drawCursorHighlight(ctx, camera, editorMode, model);
+  if (!model.indoor) drawCursorHighlight(ctx, camera, editorMode, model);
+  if (model.indoor && model.editorTab === "patterns") {
+    const preview = editorMode.getRoomPreview();
+    ctx.save();
+    ctx.strokeStyle = "#8bcbff80";
+    const doc = editorMode.roomState?.document;
+    if (doc) {
+      for (let x = 0; x <= doc.width; x++) {
+        const a = camera.worldToScreen(x * 32, 0),
+          b = camera.worldToScreen(x * 32, doc.height * 32);
+        ctx.beginPath();
+        ctx.moveTo(a.sx, a.sy);
+        ctx.lineTo(b.sx, b.sy);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= doc.height; y++) {
+        const a = camera.worldToScreen(0, y * 32),
+          b = camera.worldToScreen(doc.width * 32, y * 32);
+        ctx.beginPath();
+        ctx.moveTo(a.sx, a.sy);
+        ctx.lineTo(b.sx, b.sy);
+        ctx.stroke();
+      }
+    }
+    ctx.fillStyle = preview?.error
+      ? "#ff555560"
+      : model.effectivePaintMode === "unpaint"
+        ? "#ffae5550"
+        : "#8bd1c030";
+    const points = preview?.points ?? [
+      { x: Math.floor(editorMode.cursorTileX / 2), y: Math.floor(editorMode.cursorTileY / 2) },
+    ];
+    for (const p of points) {
+      const pos = camera.worldToScreen(p.x * 32, p.y * 32);
+      ctx.fillRect(pos.sx, pos.sy, 32 * camera.scale, 32 * camera.scale);
+    }
+    if (preview?.error) {
+      ctx.fillStyle = "#201410dd";
+      ctx.fillRect(12, 12, Math.min(ctx.canvas.width - 24, 900), 38);
+      ctx.fillStyle = "#ffa090";
+      ctx.font = "14px monospace";
+      ctx.fillText(preview.error, 20, 36);
+    }
+    ctx.restore();
+    return;
+  }
   if (model.editorTab === "patterns") {
     const preview = editorMode.getPatternPreview(),
       sheet = sheets?.get("me-complete");

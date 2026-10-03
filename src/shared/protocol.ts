@@ -26,6 +26,18 @@ export interface RealmInfo {
 
 export type ClientMessage =
   | {
+      type: "edit-room";
+      roomId: string;
+      expectedRevision: number;
+      edit: import("../patterns/PatternDocument.js").PatternEdit;
+    }
+  | {
+      type: "edit-room-history";
+      roomId: string;
+      expectedRevision: number;
+      direction: "undo" | "redo";
+    }
+  | {
       type: "edit-pattern";
       start: { x: number; y: number };
       end: { x: number; y: number };
@@ -189,6 +201,7 @@ export interface PropSnapshot {
   };
   collider: PropCollider | null;
   sortOffsetY?: number;
+  walls?: PropCollider[];
 }
 
 export interface RemoteEditorCursor {
@@ -298,6 +311,7 @@ export interface SyncEditorCursorsMessage {
 }
 
 export type SyncMessage =
+  | { type: "sync-room"; room: import("../interiors/GameplayRoom.js").GameplayRoomState | null }
   | SyncSessionMessage
   | SyncInvincibilityMessage
   | SyncChunksMessage
@@ -312,6 +326,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 // ---- Server → Client messages ----
 
 export type ServerMessage =
+  | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)
   | ({ type: "pattern-edit-status" } & import("../patterns/TreeBrushEditor.js").TreeBrushStatus)
   | { type: "player-assigned"; entityId: number }
   | WorldMapMessage

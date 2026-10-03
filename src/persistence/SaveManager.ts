@@ -20,6 +20,7 @@ export interface SerializedEntity {
 }
 
 export interface SavedMeta {
+  roomPlan?: import("../interiors/GameplayRoom.js").GameplayRoomState;
   interior?: import("../interiors/GameplayInterior.js").InteriorIdentity;
   deletedProceduralIds?: string[];
   proceduralEdits?: SerializedEntity[];

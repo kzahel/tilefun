@@ -139,6 +139,9 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
 
 export function serializeProp(p: Prop): PropSnapshot {
   return {
+    ...(p.type === "prop-interior-wall" && p.walls
+      ? { walls: p.walls.map((w) => ({ ...w })) }
+      : {}),
     ...(p.proceduralId ? { proceduralId: p.proceduralId } : {}),
     id: p.id,
     type: p.type,
@@ -156,7 +159,7 @@ export function deserializeProp(s: PropSnapshot): Prop {
     position: { ...s.position },
     sprite: { ...s.sprite },
     collider: s.collider ? { ...s.collider } : null,
-    walls: getWallsForPropType(s.type),
+    walls: s.walls ? s.walls.map((w) => ({ ...w })) : getWallsForPropType(s.type),
     isProp: true,
   };
 }

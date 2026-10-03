@@ -121,6 +121,9 @@ export class GameServer {
   get worldInterior() {
     return this.activeRealm.interior;
   }
+  get worldRoomState() {
+    return this.activeRealm.roomState;
+  }
   get worldGeneration() {
     return this.activeRealm.generation;
   }
@@ -1087,6 +1090,22 @@ export class GameServer {
     if (!session.realmId) return;
     const realm = this.realms.get(session.realmId);
     if (!realm) return;
+    if (msg.type === "edit-room" || msg.type === "edit-room-history") {
+      const editor = realm.roomEditor;
+      const status =
+        !editor || !session.editorEnabled || msg.roomId !== realm.currentWorldId
+          ? {
+              error: "Room editing requires the indoor editor.",
+              canUndo: false,
+              canRedo: false,
+              revision: editor?.state.revision ?? 0,
+            }
+          : msg.type === "edit-room"
+            ? editor.edit(clientId, msg.expectedRevision, msg.edit)
+            : editor.travel(clientId, msg.expectedRevision, msg.direction);
+      this.transport.send(clientId, { type: "room-edit-status", ...status });
+      return;
+    }
     if (msg.type === "edit-pattern" || msg.type === "edit-pattern-history") {
       const status =
         !session.editorEnabled || realm.interior

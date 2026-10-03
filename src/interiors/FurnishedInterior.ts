@@ -37,7 +37,7 @@ const contains = (outer: FurnitureRect, inner: FurnitureRect) =>
 export function compileFurniture(
   plan: FloorPlan,
   input: readonly FurniturePlacement[],
-  floorBounds?: FurnitureRect,
+  floorBounds?: FurnitureRect | ((rect: FurnitureRect) => boolean),
 ): PlacedFurniture[] {
   const placements = parseFurniturePlacements(input);
   const resolved = new Map<string, PlacedFurniture>(),
@@ -76,6 +76,7 @@ export function compileFurniture(
   };
   const objects = placements.map(resolve);
   const onFloor = (r: FurnitureRect) => {
+    if (typeof floorBounds === "function") return floorBounds(r);
     if (floorBounds) return contains(floorBounds, r);
     for (let y = Math.floor(r.y / 32); y <= Math.floor((r.y + r.height - 1) / 32); y++)
       for (let x = Math.floor(r.x / 32); x <= Math.floor((r.x + r.width - 1) / 32); x++)

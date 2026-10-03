@@ -85,9 +85,41 @@ kit, including erase/split, row-stroke undo/redo and host validation. City aspha
 and City paving use the existing Road tab/backend. Tree runs persist through
 ordinary world props with versioned identities and derived collision, and replicate
 normally to other players. Undo refuses to overwrite a row changed since the
-stroke. Room plans can be drawn in Workshop now; authoritative gameplay room
-editing/furniture reconciliation is a later phase. Existing game terrain/road
-queues remain incremental, without whole-gesture undo in this checkpoint.
+stroke. Inside a building, the editor switches to **Rooms** and an indoor
+furniture palette. Room strokes use the same `rooms-v1` document, interpolation,
+rectangle operation and apartment compiler as Workshop. Existing game terrain/road
+queues remain incremental, without whole-gesture undo.
+
+## Editing gameplay rooms
+
+Enter a building in [the game](https://tilefun.graehlarts.com/tilefun/), then press
+Tab or click Edit. **Rooms** offers floor, kitchen floor, wall, door and room
+rectangle brushes on a 32px semantic grid. Drag to preview; releasing commits a
+whole stroke. Right click or Paint / erase removes cells. Shift/middle drag and
+arrow keys pan; wheel zooms. Undo/redo buttons and Ctrl/Cmd Z / Shift Z operate on
+whole room strokes; Escape cancels a stroke. **Props** places the supported indoor
+furniture; use Delete or the existing Prop Editor to remove/move furniture.
+
+For a first extension, draw a room rectangle beside the original room: from cell
+4,0 to 10,4, sharing its east wall. Add a door at 4,3, then return to Play and walk
+right through it. The current art requires two vertical wall cells above a side
+door; invalid placements explain that constraint. Unconnected draft rooms can be
+built before adding doors. Every current resident must retain a physical route to
+the original street entrance, and the entrance/landing cannot be erased.
+Furniture footprints and access areas must remain on usable floor and clear of
+doors; edits that would invalidate them are rejected without deleting furniture.
+
+Each interior realm saves a versioned `roomPlan` in its world metadata, alongside
+existing furniture edits. The host owns revisions and broadcasts the same plan
+and derived collision to clients. Stale strokes and conflicting undo are rejected;
+undo also rechecks current furniture/players. Histories are session-local and clear
+on leaving/reloading. The renderer caches static shell/depth bands per changed plan;
+furniture and actors stay live. Old interiors keep their original recipe and
+boundary until edited, and undo back to their starting document restores that path.
+Workshop browser drafts remain separate from saved gameplay plans; the Studio link
+opens its independent drafting tool. Prefab promotion/worldgen is still a follow-on
+review step. `npm run gameplay:bench -- --headed --edited-room` compares edited and
+original room performance in isolated bundled Chromium.
 
 See [the phased plan](tactical/011-shared-pattern-brushes-and-room-drawing.md).
 

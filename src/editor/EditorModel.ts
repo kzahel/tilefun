@@ -14,6 +14,19 @@ export class EditorModel {
   selectedEntityType = "chicken";
   selectedPropType = "prop-flower-red";
   deleteMode = false;
+  indoor = false;
+  private outdoorPropType = "prop-flower-red";
+  roomValue = "L";
+  roomRectangle = false;
+  setIndoorContext(indoor: boolean): void {
+    if (this.indoor === indoor) return;
+    if (indoor) {
+      this.outdoorPropType = this.selectedPropType;
+      this.selectedPropType = "prop-interior-furniture:stool";
+    } else this.selectedPropType = this.outdoorPropType;
+    this.indoor = indoor;
+    this.setTab(indoor ? "patterns" : "natural");
+  }
   patternError = "";
   patternCanUndo = false;
   patternCanRedo = false;
@@ -62,6 +75,7 @@ export class EditorModel {
   // --- Mutation methods ---
 
   setTab(tab: EditorTab): void {
+    if (this.indoor && tab !== "patterns" && tab !== "props") return;
     this.editorTab = tab;
     this.deleteMode = false;
     // Non-natural tabs don't expose brush/paint controls — reset to defaults
@@ -73,6 +87,10 @@ export class EditorModel {
   }
 
   toggleTab(): void {
+    if (this.indoor) {
+      this.setTab(this.editorTab === "patterns" ? "props" : "patterns");
+      return;
+    }
     const idx = ALL_TABS.indexOf(this.editorTab);
     this.setTab(ALL_TABS[(idx + 1) % ALL_TABS.length] ?? "natural");
   }

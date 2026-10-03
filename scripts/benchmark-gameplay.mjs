@@ -68,6 +68,37 @@ try {
     document.querySelector("#game").dataset.interior.includes("interior-v1"),
   );
   const indoor = await sample();
+  let editedIndoor;
+  if (process.argv.includes("--edited-room")) {
+    await page.waitForFunction(
+      () => document.querySelector("#game").__game.stateView.roomState !== null,
+    );
+    await page.evaluate(async () => {
+      const game = document.querySelector("#game").__game;
+      const { interiorRealmId } = await import("/tilefun/src/interiors/GameplayInterior.ts");
+      const identity = game.stateView.interior;
+      game.transport.send({ type: "set-editor-mode", enabled: true });
+      game.transport.send({
+        type: "edit-room",
+        roomId: interiorRealmId(identity.parentWorldId, identity.featureId),
+        expectedRevision: game.stateView.roomState.revision,
+        edit: {
+          path: [
+            { x: 4, y: 2 },
+            { x: 8, y: 3 },
+          ],
+          shape: "rectangle",
+          value: "K",
+          erase: false,
+        },
+      });
+      game.transport.send({ type: "set-editor-mode", enabled: false });
+    });
+    await page.waitForFunction(
+      () => document.querySelector("#game").__game.stateView.roomState.revision === 1,
+    );
+    editedIndoor = await sample();
+  }
   const before = await page.evaluate(() => ({
     ...document.querySelector("#game").__game.stateView.playerEntity.position,
   }));
@@ -82,7 +113,13 @@ try {
   if (errors.length) throw Error(errors.join("\n"));
   if (after.wx <= before.wx + 4) throw Error("Interior movement did not respond");
   console.log(
-    JSON.stringify({ outdoor, indoor, indoorMovementPixels: after.wx - before.wx, errors }),
+    JSON.stringify({
+      outdoor,
+      indoor,
+      ...(editedIndoor ? { editedIndoor } : {}),
+      indoorMovementPixels: after.wx - before.wx,
+      errors,
+    }),
   );
 } finally {
   await browser.close();

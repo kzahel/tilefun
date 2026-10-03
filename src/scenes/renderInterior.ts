@@ -7,6 +7,7 @@ import {
   INTERIOR_WALL_TYPE,
   interiorPlan,
 } from "../interiors/GameplayInterior.js";
+import { compileGameplayRoom } from "../interiors/GameplayRoom.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
@@ -24,10 +25,19 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
   if (!identity) return;
   const atlas = gc.sheets.get("modern-interiors");
   if (!atlas) return;
-  const key = JSON.stringify(identity);
+  const preview = gc.editorMode.getRoomPreview();
+  const state = gc.stateView.roomState;
+  const key = JSON.stringify([identity, preview?.room?.plan.rows ?? state]);
   if (key !== lastKey || atlas.image !== lastAtlas) {
-    const shell = interiorPlan(identity);
-    renderer = new CachedInteriorRenderer(atlas.image, shell.map, shell.plan, INTERIOR_FLOOR);
+    const room = preview?.room ?? (state ? compileGameplayRoom(identity, state) : null);
+    const shell = room ?? interiorPlan(identity);
+    renderer = new CachedInteriorRenderer(
+      atlas.image,
+      shell.map,
+      shell.plan,
+      room?.legacy === false ? room.furnitureFloor : INTERIOR_FLOOR,
+      room?.legacy === false,
+    );
     lastAtlas = atlas.image;
     lastKey = key;
   }

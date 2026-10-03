@@ -214,3 +214,10 @@ into an empty destination data root. Review-only archives above do not contain
 these worlds. Connecting from another machine to the same running game server
 uses that server's existing worlds; a new browser may still have a new local
 player profile.
+
+
+Gameplay room edits are saved with the world, as versioned `roomPlan` interior
+metadata; they are not Workshop notes or `tilefun.pattern-drafts.v1` browser drafts.
+Copy/export the world store (including interior realms and procedural furniture
+edits) to transfer playable edits. A seed/revision link reproduces the generated
+starting room, not its edited plan. See [gameplay room controls](tilefun-workshop.md#editing-gameplay-rooms).

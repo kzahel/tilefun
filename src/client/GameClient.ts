@@ -32,6 +32,7 @@ import {
 import { ActionManager } from "../input/ActionManager.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
+import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
@@ -238,10 +239,23 @@ export class GameClient {
     this.chatHUD = new ChatHUD();
     this.audioManager = new AudioManager();
 
-    this.editorModel.onPatternHistory = (direction) =>
-      this.transport.send({ type: "edit-pattern-history", direction });
+    this.editorModel.onPatternHistory = (direction) => {
+      const room = this.stateView.roomState;
+      const identity = this.stateView.interior;
+      this.transport.send(
+        room && identity
+          ? {
+              type: "edit-room-history",
+              roomId: interiorRealmId(identity.parentWorldId, identity.featureId),
+              expectedRevision: room.revision,
+              direction,
+            }
+          : { type: "edit-pattern-history", direction },
+      );
+    };
     const routePatternStatus = (msg: ServerMessage) => {
-      if (msg.type === "pattern-edit-status") this.editorModel.setPatternStatus(msg);
+      if (msg.type === "pattern-edit-status" || msg.type === "room-edit-status")
+        this.editorModel.setPatternStatus(msg);
       else if (msg.type === "world-loaded" || msg.type === "realm-joined")
         this.editorModel.setPatternStatus({ error: "", canUndo: false, canRedo: false });
     };
@@ -260,6 +274,7 @@ export class GameClient {
         // position changes that desync camera and entity interpolation)
         if (
           msg.type === "frame" ||
+          msg.type === "sync-room" ||
           msg.type === "sync-session" ||
           msg.type === "sync-invincibility" ||
           msg.type === "sync-chunks" ||
@@ -386,6 +401,7 @@ export class GameClient {
         // Apply buffered server state at the start of each client tick so
         // entity position changes are synchronized with camera.savePrev/follow.
         this.remoteView?.applyPending();
+        this.editorModel.setIndoorContext(!!this.stateView.interior);
         // Sync tick rate from server — must happen after applyPending so the
         // new CVar value is available, but before scene update so prediction
         // runs at the correct rate next frame.

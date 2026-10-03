@@ -1302,6 +1302,10 @@
           "source": "src/editor/EditorModel.ts:15"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorModel.ts:18"
+        },
+        {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:149"
         },
@@ -14550,6 +14554,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:317"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:61"
         },
@@ -14676,6 +14684,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:319"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:94"
         },
@@ -14758,6 +14770,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:318"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:105"
         },
@@ -14812,6 +14828,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:320"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:116"
         },
@@ -14860,6 +14880,10 @@
         {
           "system": "Furniture catalog / workbench / gameplay interiors",
           "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:321"
         },
         {
           "system": "Interiors",
@@ -14934,6 +14958,10 @@
         {
           "system": "Furniture catalog / workbench / gameplay interiors",
           "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:322"
         },
         {
           "system": "Interiors",
@@ -15028,6 +15056,10 @@
           "source": "src/interiors/FurnitureCatalog.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:323"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/FurnitureCatalog.ts:150"
         },
@@ -15068,6 +15100,10 @@
         {
           "system": "Furniture catalog / workbench / gameplay interiors",
           "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Editor",
+          "source": "src/editor/EditorPanel.ts:324"
         },
         {
           "system": "Interiors",
@@ -15489,11 +15525,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:130"
+          "source": "src/client/ClientStateView.ts:134"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:570"
+          "source": "src/client/ClientStateView.ts:579"
         },
         {
           "system": "Gameplay",
@@ -15510,6 +15546,10 @@
         {
           "system": "Gameplay",
           "source": "src/console/serverCommands.ts:257"
+        },
+        {
+          "system": "Editor",
+          "source": "src/editor/EditorMode.ts:89"
         },
         {
           "system": "Gameplay",
@@ -15541,11 +15581,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:769"
+          "source": "src/server/Realm.ts:805"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1062"
+          "source": "src/server/Realm.ts:1106"
         }
       ]
     },

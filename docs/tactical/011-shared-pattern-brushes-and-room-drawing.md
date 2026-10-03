@@ -130,3 +130,59 @@ restore tree art/collision, and undo rejects conflicting row edits.
 Next: human review of these brushes/cap seams/footprints, then phase 4's editable
 gameplay room plans and reviewed-kit promotion. Playground tubes and the remaining
 fenced/overlapping-tree variants follow through the same registry and review loop.
+
+
+## Delivered gameplay-room checkpoint — 2026-10-03
+
+The gameplay-room portion of phase 4 is implemented. Enter any supported building
+and open the game editor: Rooms draws directly on the actual interior, while Props
+uses the supported indoor furniture palette. The same semantic room document and
+brush operations drive Workshop and gameplay; no second architecture solver was
+introduced. The existing legacy Indoor Workbench remains available for tile-level
+experiments; Pattern studio is the shared semantic drawing surface.
+
+- Each interior realm owns `GameplayRoomState` (`version: 1`, monotonic revision,
+  `rooms-v1` document), saved as optional `SavedMeta.roomPlan`. Old saves need no
+  migration and retain their original shell/boundary until edited. Editable canvases
+  start at 24×16 semantic cells; the shared schema remains bounded at 48×32.
+- Whole gestures commit atomically. Commands include the interior ID and expected
+  revision. Host validation, per-editor undo/redo (50 strokes), stale/conflict checks
+  and session cleanup prevent delayed or conflicting edits overwriting a room.
+- The apartment compiler's floor strips and jambs derive usable ground; its void
+  complement becomes compact, chunk-indexed collision rectangles. Interior boundary
+  snapshots carry the actual rectangles for prediction. The room plan replicates
+  initially and on revision changes, not every frame. All needed interior chunks
+  load for expanded plans.
+- The original street door/arrival landing is reserved. Draft rooms may be isolated
+  while being built, matching Workshop; current residents must remain on usable ground
+  with a footprint-sized route out. Furniture footprints, access and doorway exclusion
+  use the existing furniture validator through a compiled-floor predicate. Invalid
+  edits/undo reject atomically; no furniture is silently removed. Supported furniture
+  spawn/move also uses these constraints. Walkable furniture tops remain traversable.
+- Static floor/wall bands cache per changed plan. Edited partitions participate in
+  ground-depth ordering with live furniture/actors. Host ground geometry also caches
+  per plan; furniture moves do not rebuild the shell. The legacy rendering path and
+  all 327 Workshop review candidates retain their existing identities/pixels.
+- Editor controls include preview, erase, room rectangle, floor/material, wall and
+  constrained doors, buttons/keyboard undo, Escape/blur/pinch cancellation and
+  Shift/middle pan. Outdoor terrain/road/elevation controls stay outside interiors.
+
+Validation passed all three TypeScript configurations, 1,171 unit tests (112 files),
+all 230 Playwright cases, Biome (existing warnings only), and production
+inventory/manifest/build checks. The new browser flow draws
+an adjoining room and side passage, tests history and invalid edits, walks through
+the real collision, and reloads the saved plan/geometry. Server integration covers
+multiple editors, binary-compatible snapshots, conflict rejection and persistent
+reopening. Browser drafts and gameplay worlds remain distinct stores.
+
+`npm run gameplay:bench -- --headed --edited-room` measures the original and edited
+room alongside outdoor gameplay in isolated bundled Chromium. On this checkout,
+both indoor paths held an 8.3ms median frame interval and about 0.3ms median render
+cost (edited render p95 1.0–1.4ms across two runs), with responsive movement and no
+browser errors.
+These are local measurements, not a claim about every device.
+
+Next: review room editing/door constraints and partitions in gameplay, then provide
+explicit Workshop-to-game prefab promotion/import with reviewed doorway/occupancy
+contracts. Tree-kit approval/promotion, new worldgen revisions and additional
+pattern families remain separate milestones; this checkpoint does not promote art.

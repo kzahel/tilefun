@@ -29,6 +29,7 @@ import type { PlayerSession } from "./PlayerSession.js";
 const BROADCAST_BUFFER_CHUNKS = 2;
 
 interface ReplicationSource {
+  readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
   readonly world: World;
   readonly entityManager: EntityManager;
   readonly propManager: PropManager;
@@ -50,6 +51,7 @@ interface ClientDeltaState {
   mountEntityId: number | null;
 
   // Objects — last-sent revision counter
+  roomRevision: number;
   propRevision: number;
   propRangeKey: string;
   cvarsRevision: number;
@@ -72,6 +74,7 @@ function createClientDeltaState(): ClientDeltaState {
     invincibilityTimer: -1,
     editorEnabled: false, // will differ from true default → forces first send
     mountEntityId: -2 as number | null, // impossible entity ID → forces first send
+    roomRevision: -2,
     propRevision: -1,
     propRangeKey: "",
     cvarsRevision: -1,
@@ -255,6 +258,12 @@ export class RealmReplicator {
         syncChunks.chunkUpdates = chunkUpdates;
       }
       messages.push(syncChunks);
+    }
+
+    const roomRevision = source.roomState?.revision ?? -1;
+    if (roomRevision !== delta.roomRevision) {
+      messages.push({ type: "sync-room", room: source.roomState ?? null });
+      delta.roomRevision = roomRevision;
     }
 
     // Sync: props

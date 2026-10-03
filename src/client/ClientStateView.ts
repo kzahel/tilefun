@@ -50,6 +50,7 @@ export interface ExtrapolationStats {
 }
 
 export interface ClientStateView {
+  readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
   readonly interior?: import("../interiors/GameplayInterior.js").InteriorIdentity | null;
   readonly world: World;
   readonly entities: readonly Entity[];
@@ -92,6 +93,9 @@ export interface ClientStateView {
 export class LocalStateView implements ClientStateView {
   constructor(private readonly server: GameServer) {}
 
+  get roomState() {
+    return this.server.worldRoomState;
+  }
   get interior() {
     return this.server.worldInterior;
   }
@@ -145,6 +149,7 @@ interface ExtrapolationSample extends ExtrapolationGhost {
  * JSON serialization — no shared object references with the server.
  */
 export class RemoteStateView implements ClientStateView {
+  roomState: import("../interiors/GameplayRoom.js").GameplayRoomState | null = null;
   interior: import("../interiors/GameplayInterior.js").InteriorIdentity | null = null;
   private _world: World;
   private _entityMap: Map<number, Entity> = new Map();
@@ -244,6 +249,9 @@ export class RemoteStateView implements ClientStateView {
     switch (msg.type) {
       case "frame":
         this.applyFrame(msg);
+        break;
+      case "sync-room":
+        this.roomState = msg.room;
         break;
       case "sync-session":
         this.applySyncSession(msg);
@@ -411,6 +419,7 @@ export class RemoteStateView implements ClientStateView {
 
   /** Clear all cached state (e.g., when switching worlds). */
   clear(): void {
+    this.roomState = null;
     console.log(
       `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingStates=${this._pendingStates.length}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
     );

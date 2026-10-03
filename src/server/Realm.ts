@@ -32,16 +32,21 @@ import { ProceduralProps } from "../generation/ProceduralProps.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
-import { compileFurniture } from "../interiors/FurnishedInterior.js";
 import {
   furnitureAsset,
   INTERIOR_ENTRY,
-  INTERIOR_FLOOR,
   INTERIOR_WALL_TYPE,
   type InteriorIdentity,
   interiorGenerator,
-  interiorPlan,
 } from "../interiors/GameplayInterior.js";
+import {
+  compileGameplayRoom,
+  GameplayRoomEditor,
+  type GameplayRoomState,
+  initialRoom,
+  parseGameplayRoom,
+  validateRoomOccupancy,
+} from "../interiors/GameplayRoom.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -133,6 +138,29 @@ export class Realm {
   lastLoadedPlayerPos = { wx: 0, wy: 0 };
   currentWorldId: string | null = null;
   interior: InteriorIdentity | null = null;
+  roomEditor: GameplayRoomEditor | null = null;
+  private roomGeometry: ReturnType<typeof compileGameplayRoom> | null = null;
+  get roomState() {
+    return this.roomEditor?.state ?? null;
+  }
+
+  private installRoom(state: GameplayRoomState): void {
+    if (!this.interior) throw new Error("Room editing requires an interior");
+    const room = compileGameplayRoom(this.interior, state);
+    validateRoomOccupancy(
+      room,
+      this.propManager.props,
+      [...this.sessions.values()].map((s) => s.player),
+    );
+    const old = this.propManager.props.find((p) => p.type === INTERIOR_WALL_TYPE);
+    if (old) this.propManager.remove(old.id, false);
+    const wall = createProp(INTERIOR_WALL_TYPE, 0, 0);
+    wall.walls = room.walls;
+    wall.proceduralId = "interior:boundary";
+    this.propManager.add(wall);
+    this.roomGeometry = room;
+    this.saveManager?.markMetaDirty();
+  }
 
   /**
    * Timestamp (Date.now()) when the last player left this realm, or null if
@@ -270,6 +298,7 @@ export class Realm {
    */
   removePlayer(clientId: string): void {
     this.treeBrush.forget(clientId);
+    this.roomEditor?.forget(clientId);
     const session = this.sessions.get(clientId);
     if (!session) return;
 
@@ -685,6 +714,7 @@ export class Realm {
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
         const messages = this.replication.build(session.clientId, {
+          roomState: this.roomState,
           world: this.world,
           entityManager: this.entityManager,
           propManager: this.propManager,
@@ -704,7 +734,13 @@ export class Realm {
 
   /** Load/unload chunks for the given visible range and compute autotile. */
   updateVisibleChunks(range: ChunkRange | readonly ChunkRange[]): void {
-    if (this.interior) range = { minCx: 0, minCy: 0, maxCx: 0, maxCy: 0 };
+    if (this.interior)
+      range = {
+        minCx: 0,
+        minCy: 0,
+        maxCx: Math.ceil(((this.roomState?.document.width ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
+        maxCy: Math.ceil(((this.roomState?.document.height ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
+      };
     const initialWarmLoad = this.world.chunks.loadedCount === 0;
     const maxLoads =
       this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
@@ -805,6 +841,19 @@ export class Realm {
 
   /** Handle a realm-scoped client message. */
   handleMessage(_clientId: string, session: PlayerSession, msg: ClientMessage): void {
+    if (
+      this.interior &&
+      [
+        "edit-terrain-tile",
+        "edit-terrain-subgrid",
+        "edit-terrain-corner",
+        "edit-road",
+        "edit-elevation",
+        "edit-clear-terrain",
+        "edit-clear-roads",
+      ].includes(msg.type)
+    )
+      return;
     switch (msg.type) {
       case "player-input":
         session.inputQueue.push({
@@ -895,24 +944,17 @@ export class Realm {
         if (this.interior) {
           const prop = this.propManager.props.find((p) => p.id === msg.propId);
           if (!prop || prop.type === INTERIOR_WALL_TYPE) break;
-          const { plan } = interiorPlan(this.interior);
+          if (!this.roomState) break;
+          const room = this.roomGeometry;
+          if (!room) break;
           try {
-            compileFurniture(
-              plan,
-              this.propManager.props.flatMap((p) => {
-                const asset = furnitureAsset(p.type);
-                return asset
-                  ? [
-                      {
-                        id: String(p.id),
-                        asset,
-                        x: p.id === msg.propId ? msg.wx : p.position.wx,
-                        y: p.id === msg.propId ? msg.wy : p.position.wy,
-                      },
-                    ]
-                  : [];
-              }),
-              INTERIOR_FLOOR,
+            const proposed = this.propManager.props.map((p) =>
+              p.id === msg.propId ? { ...p, position: { wx: msg.wx, wy: msg.wy } } : p,
+            );
+            validateRoomOccupancy(
+              room,
+              proposed,
+              [...this.sessions.values()].map((s) => s.player),
             );
           } catch {
             break;
@@ -1002,6 +1044,8 @@ export class Realm {
 
     // Create fresh world state with the correct generation strategy
     this.interior = worldMeta.interior ?? null;
+    this.roomEditor = null;
+    this.roomGeometry = null;
     const strategy = this.buildStrategy(worldMeta);
     if (this.interior)
       this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
@@ -1116,9 +1160,11 @@ export class Realm {
       playerY = INTERIOR_ENTRY.wy;
       cameraX = playerX;
       cameraY = playerY;
-      const wall = createProp(INTERIOR_WALL_TYPE, 0, 0);
-      wall.proceduralId = "interior:boundary";
-      this.propManager.add(wall);
+      const state = savedMeta?.roomPlan
+        ? parseGameplayRoom(savedMeta.roomPlan)
+        : initialRoom(this.interior);
+      this.installRoom(state);
+      this.roomEditor = new GameplayRoomEditor(state, (next) => this.installRoom(next));
     }
     this.gemSpawner.reset(this.entityManager);
     this.baddieSpawner.reset(this.entityManager);
@@ -1345,8 +1391,20 @@ export class Realm {
   /** Build per-tick frame + on-change sync events for a specific client. */
   private handleSpawn(entityType: string, wx: number, wy: number): void {
     let changed = false;
+    if (this.interior && (!furnitureAsset(entityType) || !this.roomState)) return;
     if (isPropType(entityType)) {
       const prop = createProp(entityType, wx, wy);
+      if (this.interior && this.roomGeometry) {
+        try {
+          validateRoomOccupancy(
+            this.roomGeometry,
+            [...this.propManager.props, prop],
+            [...this.sessions.values()].map((s) => s.player),
+          );
+        } catch {
+          return;
+        }
+      }
       // Skip if the new prop's collider would overlap an existing prop
       if (
         prop.collider &&
@@ -1403,7 +1461,9 @@ export class Realm {
 
     return {
       ...this.proceduralProps.save(),
-      ...(this.interior ? { interior: this.interior } : {}),
+      ...(this.interior
+        ? { interior: this.interior, ...(this.roomState ? { roomPlan: this.roomState } : {}) }
+        : {}),
       playerX: player?.position.wx ?? this.lastLoadedPlayerPos.wx,
       playerY: player?.position.wy ?? this.lastLoadedPlayerPos.wy,
       cameraX,

@@ -25,6 +25,9 @@ export class EditScene implements GameScene {
   private static readonly CURSOR_SEND_INTERVAL = 1 / 20; // 20 Hz max
 
   onEnter(gc: GameContext): void {
+    gc.editorModel.setIndoorContext(!!gc.stateView.interior);
+    gc.editorMode.roomState = gc.stateView.roomState ?? null;
+    gc.editorMode.interior = gc.stateView.interior ?? null;
     gc.editorMode.attach();
     gc.editorPanel.visible = true;
     if (gc.editorButton) gc.editorButton.textContent = "Play";
@@ -54,6 +57,9 @@ export class EditScene implements GameScene {
   }
 
   onResume(gc: GameContext): void {
+    gc.editorModel.setIndoorContext(!!gc.stateView.interior);
+    gc.editorMode.roomState = gc.stateView.roomState ?? null;
+    gc.editorMode.interior = gc.stateView.interior ?? null;
     gc.editorMode.attach();
     gc.editorPanel.visible = true;
 
@@ -100,6 +106,8 @@ export class EditScene implements GameScene {
     gc.editorModel.setTemporaryUnpaint(gc.editorMode.rightClickUnpaint);
     gc.editorMode.entities = gc.stateView.entities as import("../entities/Entity.js").Entity[];
     gc.editorMode.props = gc.stateView.props as import("../entities/Prop.js").Prop[];
+    gc.editorMode.roomState = gc.stateView.roomState ?? null;
+    gc.editorMode.interior = gc.stateView.interior ?? null;
     gc.editorMode.update(dt);
 
     const paintMode = gc.editorModel.effectivePaintMode;
@@ -147,6 +155,9 @@ export class EditScene implements GameScene {
         bridgeDepth,
       });
     }
+
+    for (const stroke of gc.editorMode.consumePendingRooms())
+      gc.transport.send({ type: "edit-room", ...stroke });
 
     for (const stroke of gc.editorMode.consumePendingPatterns())
       gc.transport.send({ type: "edit-pattern", ...stroke });
@@ -277,6 +288,7 @@ export class EditScene implements GameScene {
 
     // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
     const visible = gc.camera.getVisibleChunkRange();
+    if (gc.stateView.interior) renderEntities(gc, alpha);
     drawEditorOverlay(
       gc.ctx,
       gc.camera,
@@ -290,7 +302,7 @@ export class EditScene implements GameScene {
     // Draw other players' editor cursors
     drawRemoteCursors(gc.ctx, gc.camera, gc.stateView.remoteCursors);
 
-    renderEntities(gc, alpha);
+    if (!gc.stateView.interior) renderEntities(gc, alpha);
     renderDebugOverlay(gc);
     render3DDebug(gc);
     gc.camera.restoreActual();

@@ -2,8 +2,15 @@ import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import { type InteriorIdentity, interiorRealmId } from "../interiors/GameplayInterior.js";
+import {
+  compileGameplayRoom,
+  type GameplayRoomState,
+  validateRoomOccupancy,
+} from "../interiors/GameplayRoom.js";
 import { editTreeRuns, type TreeRun, treeRunLength } from "../patterns/FencedTrees.js";
 import { type GridPoint, gridLine, strokeCells } from "../patterns/GridStroke.js";
+import { applyPatternEdit, type PatternEdit } from "../patterns/PatternDocument.js";
 import type { TreeBrushCommand } from "../patterns/TreeBrushEditor.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { EditorModel } from "./EditorModel.js";
@@ -44,6 +51,49 @@ export interface PendingEntitySpawn {
 export class EditorMode {
   /** Reference to live entities for right-click deletion lookup. */
   entities: readonly Entity[] = [];
+  roomState: GameplayRoomState | null = null;
+  interior: InteriorIdentity | null = null;
+  private roomStroke: { roomId: string; expectedRevision: number; edit: PatternEdit } | null = null;
+  private pendingRooms: { roomId: string; expectedRevision: number; edit: PatternEdit }[] = [];
+  private roomPreviewKey = "";
+  private roomPreview: {
+    room: ReturnType<typeof compileGameplayRoom> | null;
+    points: GridPoint[];
+    error: string;
+  } | null = null;
+  consumePendingRooms() {
+    const result = this.pendingRooms;
+    this.pendingRooms = [];
+    return result;
+  }
+  getRoomPreview() {
+    if (
+      !this.roomStroke ||
+      !this.roomState ||
+      !this.interior ||
+      this.roomStroke.roomId !==
+        interiorRealmId(this.interior.parentWorldId, this.interior.featureId)
+    )
+      return null;
+    const key = JSON.stringify([this.roomStroke, this.roomState.revision]);
+    if (key === this.roomPreviewKey) return this.roomPreview;
+    this.roomPreviewKey = key;
+    let points: GridPoint[] = [];
+    try {
+      points = strokeCells(this.roomStroke.edit.path, this.roomStroke.edit.shape);
+      const document = applyPatternEdit(this.roomState.document, this.roomStroke.edit);
+      const room = compileGameplayRoom(this.interior, { ...this.roomState, document });
+      validateRoomOccupancy(
+        room,
+        this.props,
+        this.entities.filter((e) => e.type === "player"),
+      );
+      this.roomPreview = { room, points, error: "" };
+    } catch (e) {
+      this.roomPreview = { room: null, points, error: e instanceof Error ? e.message : String(e) };
+    }
+    return this.roomPreview;
+  }
   /** Reference to live props for right-click deletion lookup. */
   props: readonly Prop[] = [];
 
@@ -119,6 +169,10 @@ export class EditorMode {
     }
   }
   private finishPattern(cancel = false): void {
+    if (this.roomStroke && !cancel) this.pendingRooms.push(this.roomStroke);
+    this.roomStroke = null;
+    this.roomPreviewKey = "";
+    this.roomPreview = null;
     if (this.patternStroke && !cancel) this.pendingPatterns.push(this.patternStroke);
     this.patternStroke = null;
   }
@@ -139,6 +193,30 @@ export class EditorMode {
   private wasPinching = false;
 
   // Bound handlers for attach/detach
+  private readonly onKeyDown = (e: KeyboardEvent) => {
+    if ((e.target as HTMLElement | null)?.closest("input,textarea,select,[contenteditable=true]"))
+      return;
+    if (e.key === "Escape") {
+      this.finishPattern(true);
+      this.isPainting = false;
+      this.cancelTouchPaint();
+    }
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      e.key.toLowerCase() === "z" &&
+      this.model.editorTab === "patterns"
+    ) {
+      e.preventDefault();
+      this.model.onPatternHistory?.(e.shiftKey ? "redo" : "undo");
+    }
+  };
+  private readonly onBlur = () => {
+    this.finishPattern(true);
+    this.isPainting = false;
+    this.isPanning = false;
+    this.rightClickUnpaint = false;
+    this.cancelTouchPaint();
+  };
   private readonly onMouseDown: (e: MouseEvent) => void;
   private readonly onMouseMove: (e: MouseEvent) => void;
   private readonly onMouseUp: (e: MouseEvent) => void;
@@ -170,6 +248,8 @@ export class EditorMode {
   }
 
   attach(): void {
+    window.addEventListener("keydown", this.onKeyDown);
+    window.addEventListener("blur", this.onBlur);
     this.canvas.addEventListener("mousedown", this.onMouseDown);
     this.canvas.addEventListener("mousemove", this.onMouseMove);
     window.addEventListener("mouseup", this.onMouseUp);
@@ -186,6 +266,8 @@ export class EditorMode {
   }
 
   detach(): void {
+    window.removeEventListener("keydown", this.onKeyDown);
+    window.removeEventListener("blur", this.onBlur);
     this.canvas.removeEventListener("mousedown", this.onMouseDown);
     this.canvas.removeEventListener("mousemove", this.onMouseMove);
     window.removeEventListener("mouseup", this.onMouseUp);
@@ -198,6 +280,7 @@ export class EditorMode {
     this.isPainting = false;
     this.isPanning = false;
     this.finishPattern(true);
+    this.pendingRooms = [];
     this.cancelTouchPaint();
     this.activeTouches.clear();
   }
@@ -367,6 +450,31 @@ export class EditorMode {
   }
 
   private paintAt(sx: number, sy: number): void {
+    if (this.model.editorTab === "patterns" && this.model.indoor) {
+      if (!this.roomState || !this.interior) return;
+      const { wx, wy } = this.screenToWorld(sx, sy),
+        point = { x: Math.floor(wx / 32), y: Math.floor(wy / 32) };
+      if (!this.roomStroke)
+        this.roomStroke = {
+          roomId: interiorRealmId(this.interior.parentWorldId, this.interior.featureId),
+          expectedRevision: this.roomState.revision,
+          edit: {
+            path: [point],
+            shape: this.model.roomRectangle ? "rectangle" : "free",
+            value: this.model.roomValue,
+            erase: this.rightClickUnpaint || this.model.paintMode === "unpaint",
+            roomRectangle: this.model.roomRectangle,
+          },
+        };
+      else {
+        const path = this.roomStroke.edit.path;
+        if (this.roomStroke.edit.shape === "rectangle")
+          this.roomStroke.edit.path = [path[0] as GridPoint, point];
+        else if (path.at(-1)?.x !== point.x || path.at(-1)?.y !== point.y)
+          this.roomStroke.edit.path = [...path, point];
+      }
+      return;
+    }
     if (this.model.editorTab === "patterns") {
       const { tx, ty } = this.screenToTile(sx, sy);
       if (!this.patternStroke)
@@ -494,7 +602,7 @@ export class EditorMode {
     const { sx, sy } = this.canvasCoords(e);
 
     // Middle button or space+left = pan (always, regardless of tab)
-    if (e.button === 1 || (e.button === 0 && this.actions.isHeld("pan_modifier"))) {
+    if (e.button === 1 || (e.button === 0 && (e.shiftKey || this.actions.isHeld("pan_modifier")))) {
       this.isPanning = true;
       this.panStart = {
         sx: e.clientX,
