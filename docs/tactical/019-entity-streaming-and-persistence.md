@@ -1,7 +1,7 @@
 # 019 — Incremental persistence and entity streaming
 
-Status: **planned parent sequence; implementation not started**.
-Created: 2026-10-03. Scope of this task is research and documentation only.
+Status: **implementation in progress**, authorized end to end after the design review.
+Created: 2026-10-03. Bounded slices are planned just in time and committed after validation.
 Owner: [entity activation](../topics/entity-activation.md).
 Contract: [target architecture](../entity-streaming-architecture.md).
 Evidence: [Java Minecraft and mclone research](../research/entity-streaming-reference.md).

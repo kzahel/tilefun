@@ -32,6 +32,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [018 Tick-aware NPC separation](018-tick-aware-npc-separation.md) | Sleeping-crowd exclusion and reduced-rate separation; broader unloading remains in the [entity activation topic](../topics/entity-activation.md) |
 | [019 Entity streaming and persistence](019-entity-streaming-and-persistence.md) | Planned parent sequence, no runtime implementation yet: incremental records, SQLite/IndexedDB, shared tickets/readiness and lazy eviction; [entity activation topic](../topics/entity-activation.md) |
 
+| [020 Shared record persistence](020-shared-record-persistence.md) | Phase A contract and deterministic fault tests complete; production adapters follow |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

@@ -3,7 +3,7 @@
 Topic: entity-activation
 Status: overlap separation follows tick selection and accumulated time.
 Incremental persistence, ticket-driven residency and general unloading are
-designed/planned; the runtime refactor has not started.
+in progress. The shared record contract and fault tests are implemented; production cutover is next.
 Updated: 2026-10-03.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
@@ -26,7 +26,7 @@ required save acknowledgements and releases decoded caches as well as actors.
 inspected Minecraft Java 1.17.1 and mclone sources. Java uses chunk-sized entity
 lists; individual records and reduced-rate AI are deliberate Tilefun choices.
 [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
-parent sequence. This decision is documentation only, not implemented behavior.
+parent sequence. Runtime delivery has started with [020](../tactical/020-shared-record-persistence.md); the target is not yet production behavior.
 
 All hosts must execute the same authoritative server and persistence coordinator;
 only injected host adapters differ. The
