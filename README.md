@@ -63,6 +63,8 @@ This is an online launcher: there is no service worker, offline download or cust
 asset cache, and installation does not sync saved worlds across devices. The app
 manifest and launch paths stay within `/tilefun/`. Launcher icons reuse the favicon;
 regenerate them with `npm run assets:app-icons` when it changes.
+Launcher checks cover both Vite dev serving (used by the live site) and production
+preview; public-asset links let Vite apply the deployment prefix exactly once.
 
 ## Asset Credits
 
