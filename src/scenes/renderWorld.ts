@@ -102,7 +102,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
       : undefined;
 
   const items = collectScene(
-    stateView.entities,
+    gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities,
     stateView.props,
     stateView.world,
     camera,
@@ -116,6 +116,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     gc.sceneFrame,
   );
 
+  gc.doorPresentation?.appendOverlays(items, gc.realmId ?? null);
   try {
     drawScene2D(ctx, camera, items, sheets, grassSheet, false, tileRenderer);
   } finally {

@@ -549,6 +549,12 @@ export class Realm {
       if (dormantClientIds.has(session.clientId) || session.transitioning || session.retired)
         continue;
 
+      if (Date.now() < session.doorArrivalUntil) {
+        session.lastProcessedInputSeq =
+          session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
+        session.inputQueue = [];
+        continue;
+      }
       if (!this.sessionSupported(session, dt)) continue;
 
       if (storagePaused) {
@@ -742,6 +748,7 @@ export class Realm {
         !storagePaused &&
         !s.debugPaused &&
         !s.transitioning &&
+        Date.now() >= s.doorArrivalUntil &&
         !s.retired &&
         !dormantClientIds.has(s.clientId) &&
         this.sessionSupported(s, dt),
@@ -764,6 +771,10 @@ export class Realm {
       for (let step = 0; step < physicsSteps; step++) {
         // Merge entity tick tiers across all active sessions' visible ranges.
         const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
+        for (const session of this.sessions.values()) {
+          if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
+            entityTickDts.delete(session.player);
+        }
 
         // AI: pass nearest player position per entity (for chase/follow)
         const playerPositions = activeSessions.map((s) => s.player.position);
@@ -1129,6 +1140,7 @@ export class Realm {
       return;
     switch (msg.type) {
       case "player-input":
+        session.doorIntent = { dx: msg.dx, dy: msg.dy, at: Date.now() };
         if (session.editorEnabled) {
           session.lastProcessedInputSeq = msg.seq;
           break;

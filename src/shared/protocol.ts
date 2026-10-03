@@ -150,8 +150,14 @@ export type ClientMessage =
   | { type: "get-world-map"; requestId: number }
   | { type: "join-realm"; requestId: number; worldId: string; arrival?: Arrival; resume?: boolean }
   | { type: "leave-realm"; requestId: number }
-  | { type: "enter-building"; requestId: number; featureId: string; doorId?: string }
-  | { type: "exit-building"; requestId: number; doorId?: string };
+  | {
+      type: "enter-building";
+      requestId: number;
+      featureId: string;
+      doorId?: string;
+      walkThrough?: boolean;
+    }
+  | { type: "exit-building"; requestId: number; doorId?: string; walkThrough?: boolean };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -327,6 +333,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 // ---- Server → Client messages ----
 
 export type ServerMessage =
+  | import("../interiors/DoorTraversal.js").DoorMotion
   | { type: "storage-status"; paused: boolean; message: string }
   | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)
   | ({ type: "pattern-edit-status" } & import("../patterns/TreeBrushEditor.js").TreeBrushStatus)

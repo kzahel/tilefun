@@ -22,6 +22,13 @@ import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { buildingDoor, exteriorDoors, withBuildingLayout } from "../interiors/BuildingDoors.js";
 import {
+  atDoorThreshold,
+  DOOR_FADE_MS,
+  DOOR_WALK_MS,
+  type DoorMotion,
+  towardDoor,
+} from "../interiors/DoorTraversal.js";
+import {
   exteriorEntrance,
   type InteriorIdentity,
   InvalidInteriorError,
@@ -863,7 +870,9 @@ export class GameServer {
     session: PlayerSession,
     featureId: string,
     doorId = "street",
+    walkThrough = false,
   ): Promise<void> {
+    let overlay: DoorMotion["overlay"];
     await this.transitions.move(session, async () => {
       const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
       if (!realm || realm.interior || !realm.currentWorldId)
@@ -871,6 +880,11 @@ export class GameServer {
       realm.realizeProceduralProps();
       const prop = realm.propManager.props.find((p) => p.proceduralId === featureId);
       if (!prop || !exteriorEntrance(prop)) throw new Error("Building is unavailable.");
+      if (walkThrough) {
+        const threshold = exteriorDoors(prop).find((d) => d.id === doorId)?.outside;
+        if (!threshold) throw new Error("Unknown building door.");
+        this.validateDoorApproach(session, threshold, true);
+      }
       const destination = await this.getOrCreateRealm(
         interiorRealmId(realm.currentWorldId, featureId),
       );
@@ -890,7 +904,17 @@ export class GameServer {
         (session.player.wz ?? 0) > 8
       )
         throw new Error("Stand near the building entrance to enter.");
+      if (walkThrough) {
+        if (prop.type.includes("butcher"))
+          overlay = { kind: "butcher", wx: door.wx, wy: prop.position.wy };
+      }
       return {
+        ...(walkThrough
+          ? {
+              beforeTransfer: () =>
+                this.departDoor(session, { wx: door.wx, wy: door.wy - 24 }, overlay),
+            }
+          : {}),
         realm: destination,
         allowInterior: true,
         arrival: {
@@ -906,13 +930,16 @@ export class GameServer {
         },
       };
     });
+    if (walkThrough) this.arriveDoor(session, true);
   }
 
   private async exitBuilding(
     _clientId: string,
     session: PlayerSession,
     doorId = "street",
+    walkThrough = false,
   ): Promise<void> {
+    let overlay: DoorMotion["overlay"];
     await this.transitions.move(session, async () => {
       const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
       if (!realm?.interior) throw new Error("You are not in an interior.");
@@ -924,6 +951,7 @@ export class GameServer {
         ) > 40
       )
         throw new Error("Return to the interior doorway to leave.");
+      if (walkThrough) this.validateDoorApproach(session, connection.inside, false);
       const parent = await this.getOrCreateRealm(realm.interior.parentWorldId);
       parent.realizeProceduralProps();
       const prop = parent.propManager.props.find(
@@ -932,6 +960,8 @@ export class GameServer {
       const outside =
         (prop ? exteriorDoors(prop).find((door) => door.id === doorId)?.outside : undefined) ??
         connection.outside;
+      if (prop?.type.includes("butcher"))
+        overlay = { kind: "butcher", wx: outside.wx, wy: prop.position.wy };
       const position = {
         worldId: connection.outsideRealmId,
         x: outside.wx / TILE_SIZE,
@@ -939,11 +969,83 @@ export class GameServer {
         generation: parent.generation,
       };
       return {
+        ...(walkThrough
+          ? {
+              beforeTransfer: () =>
+                this.departDoor(session, {
+                  wx: connection.inside.wx,
+                  wy: connection.inside.wy + 16,
+                }),
+            }
+          : {}),
         realm: await this.getOrCreateRealm(position.worldId),
         arrival: position,
         returnLocation: null,
       };
     });
+    if (walkThrough) this.arriveDoor(session, false, overlay);
+  }
+
+  private validateDoorApproach(
+    session: PlayerSession,
+    door: { wx: number; wy: number },
+    entering: boolean,
+  ) {
+    if (
+      session.editorEnabled ||
+      session.gameplaySession.mountId !== null ||
+      Date.now() < session.doorArrivalUntil ||
+      (session.player.wz ?? 0) > 1 ||
+      Date.now() - session.doorIntent.at > 500 ||
+      !towardDoor(session.doorIntent.dx, session.doorIntent.dy, entering) ||
+      // Allow one tile of prediction lead along the approach, never sideways.
+      !atDoorThreshold(session.player.position, door, entering, TILE_SIZE)
+    )
+      throw new Error("Walk toward the doorway to enter.");
+  }
+  private sendDoorMotion(
+    session: PlayerSession,
+    phase: DoorMotion["phase"],
+    from: DoorMotion["from"],
+    to: DoorMotion["to"],
+    overlay?: DoorMotion["overlay"],
+  ) {
+    for (const recipient of this.sessions.values()) {
+      if (recipient.realmId !== session.realmId || recipient.retired) continue;
+      this.transport.send(recipient.clientId, {
+        type: "door-motion",
+        phase,
+        actorId: session.player.id,
+        actorClientId: session.clientId,
+        realmId: session.realmId ?? "",
+        self: recipient === session,
+        from,
+        to,
+        duration: DOOR_WALK_MS,
+        ...(overlay ? { overlay } : {}),
+      });
+    }
+  }
+  private async departDoor(
+    session: PlayerSession,
+    to: DoorMotion["to"],
+    overlay?: DoorMotion["overlay"],
+  ) {
+    const from = { ...session.player.position };
+    session.player.velocity = { vx: 0, vy: 0 };
+    session.inputQueue = [];
+    this.sendDoorMotion(session, "depart", from, to, overlay);
+    // Presentation only: durable authority remains at the collision-checked source.
+    // This bounded wait also settles during dev reload/shutdown; it needs no simulation ticks.
+    await new Promise((resolve) => setTimeout(resolve, DOOR_WALK_MS + DOOR_FADE_MS));
+  }
+  private arriveDoor(session: PlayerSession, entering: boolean, overlay?: DoorMotion["overlay"]) {
+    const to = { ...session.player.position };
+    const from = { wx: to.wx, wy: to.wy + (entering ? 16 : -16) };
+    session.doorArrivalUntil = Date.now() + DOOR_WALK_MS + DOOR_FADE_MS;
+    session.inputQueue = [];
+    session.player.velocity = { vx: 0, vy: 0 };
+    this.sendDoorMotion(session, "arrive", from, to, overlay);
   }
 
   private movePlayerToRealm(
@@ -1257,8 +1359,8 @@ export class GameServer {
       case "exit-building": {
         const operation =
           msg.type === "enter-building"
-            ? this.enterBuilding(clientId, session, msg.featureId, msg.doorId)
-            : this.exitBuilding(clientId, session, msg.doorId);
+            ? this.enterBuilding(clientId, session, msg.featureId, msg.doorId, msg.walkThrough)
+            : this.exitBuilding(clientId, session, msg.doorId, msg.walkThrough);
         this.respondToTransition(clientId, session, msg.requestId, "realm-joined", operation);
         return;
       }
@@ -1424,6 +1526,12 @@ export class GameServer {
     if (!session.realmId || session.transitioning) return;
     const realm = this.realms.get(session.realmId);
     if (!realm) return;
+    if (
+      Date.now() < session.doorArrivalUntil &&
+      msg.type.startsWith("player-") &&
+      msg.type !== "player-input"
+    )
+      return;
     const dispatch = () => {
       if (msg.type === "edit-room" || msg.type === "edit-room-history") {
         const editor = realm.roomEditor;

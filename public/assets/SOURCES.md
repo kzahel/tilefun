@@ -55,3 +55,11 @@ explicit extraction tool (requires the purchased source pack and Pillow); normal
 builds use the committed atlas and never repack it. Train pieces are not rotated,
 mirrored or resampled. Schematic bridge/access/path shapes in preview scenes are
 labelled layout proposals and are not claimed as vendor artwork.
+
+## Door animation overlay v1
+
+`sprites/door-butcher-v1.png` is an unchanged copy of Modern Exteriors 16x16
+`Animated_16x16/Animated_sheets_16x16/Floor_Modular_Buildings_1_Door_Butcher_16x16.png`.
+It contains fourteen 16×32 frames (opening then closing). Its closed panel matches
+`me-complete.png` at (1312,2432,16,32); runtime overlays preserve the frozen facade.
+New Workshop `doorways-v1` candidates review each entrance independently.

@@ -15,6 +15,7 @@ export interface GameAssets {
 
 /** Sprite asset manifest: key → { path, width, height }. */
 export const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
+  { key: "door-butcher-v1", path: "assets/sprites/door-butcher-v1.png", w: 16, h: 32 },
   ...PROMOTED_CHARACTERS.map((c) => ({
     key: c.sheetKey,
     path: c.image,

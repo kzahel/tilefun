@@ -135,3 +135,49 @@ explicit Workshop-to-game prefab promotion/import with reviewed doorway and
 occupancy contracts. The five fenced-tree kit cases were delivered unchecked;
 consult the inbox before promotion. Additional tree variants, playground tubes
 and new furniture families remain separate candidates, not implicit approvals.
+
+## Automatic doorway traversal
+
+Walking straight toward a door now enters/exits without pressing E. The trigger
+is a narrow 16px-wide threshold with 100ms of directional intent; passing sideways,
+standing nearby and editor movement do not trigger it. Reload/spawn, arrival and
+an attempted crossing require leaving the nearby doorway before another automatic
+crossing. E/the button remain available for explicit interaction.
+
+The existing building/door connection selects the shared interior and exact exit.
+The server validates grounded, unmounted play-mode movement and proximity (allowing
+one tile of prediction lead along the approach, never sideways), prepares
+the destination and saves the source, then broadcasts a 400ms cosmetic walk and
+waits 180ms for the local fade. Authority stays at the safe source throughout that
+walk. Only the existing transactional realm transfer changes the saved location.
+After commit, clients wait for the destination player/room baseline (or outdoor
+terrain cache), fade in and show a one-tile arrival walk to the validated landing.
+Guided poses never modify collision, prediction or persistence. Source players are
+excluded from peer-driven simulation while travelling; arrival briefly suppresses
+movement and interactions. Failed requests, disconnects and a bounded presentation
+timeout release the fade/input lock. Dev reload still awaits the transfer lifecycle.
+
+The butcher's two doors use the exact matching Modern Exteriors opening/closing
+sheet as independent overlays, without modifying frozen facade pixels or generator
+identities. Peers see the door/walk, while only the traveller sees the fade; concurrent
+users keep a shared door open. Both apartment entrances have automatic travel and
+fades, but retain static facade panels: the available condo animation sheets do not
+match those pinned panels. Matching apartment art is the next visual extension.
+
+New unchecked Workshop `doorways-v1` candidates show all 14 frames against each
+butcher entrance. Existing static review identities remain unchanged. The six character
+motion identities refresh because their review contract includes the shared Realm
+controller source; their source art is unchanged. Evidence includes
+`DoorTraversal.test.ts`, `DoorPresentation.test.ts`, `RealmBrowser.test.ts`, real-input
+`building-doors.spec.ts` and a real Vite reload during departure in
+`player-dev-reload.spec.ts`.
+
+Validation (2026-10-03): all 293 browser tests passed, followed by eight focused
+building/reload checks after the final approach-tolerance and visual endpoint
+refinement. The 1,387-test unit suite passed; a later concurrent run hit two
+five-second timeouts in furniture/city generation, whose 20 tests passed when
+rerun separately. Typechecks, build, lint (existing warnings), art inventory and
+Workshop raster parity passed. Streaming v4/v10 walking, sprinting and reversal
+had zero missing-data or unfinished-cache frames (`--assert-ready` passed).
+Next: review the two butcher animation candidates, then source or author matching
+apartment door panels under new review identities.

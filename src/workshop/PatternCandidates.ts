@@ -5,6 +5,7 @@ import type { GameAssets } from "../assets/GameAssets.js";
 import { FENCED_TREES } from "../patterns/FencedTrees.js";
 import { applyPatternEdit, type PatternDocument } from "../patterns/PatternDocument.js";
 import { renderPatternDocument } from "../patterns/PatternRuntime.js";
+import { buildDoorCandidate } from "./DoorCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export const TREE_PATTERN_CASES = [
@@ -87,6 +88,7 @@ export function renderPatternCandidate(
   assets: GameAssets,
   geometry = false,
 ) {
+  if (id.replace(/^pattern:/, "").startsWith("door-")) return;
   renderPatternDocument(
     canvas,
     treeCaseDocument(id.replace(/^pattern:/, "")),
@@ -101,6 +103,7 @@ export async function buildPatternCandidate(
   assets: GameAssets,
   catalog: ArtCatalog,
 ): Promise<WorkshopCandidate> {
+  if (id.startsWith("door-")) return buildDoorCandidate(canvas, id, assets, catalog);
   const c = required(TREE_PATTERN_CASES.find((c) => c.id === id)),
     source = required(catalog.sheets.find((s) => s.id === "me-complete"));
   if (source.fingerprint !== FENCED_TREES.sourceFingerprint)

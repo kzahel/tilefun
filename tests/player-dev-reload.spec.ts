@@ -105,3 +105,70 @@ test("dev full reload restores the indoor player and scopes the editor camera to
     await server.close();
   }
 });
+
+test("dev reload during the guided doorway walk settles into the saved destination", async ({
+  page,
+}) => {
+  test.setTimeout(60_000);
+  const server = await createServer({
+    configFile: false,
+    base: "/tilefun/",
+    plugins: [react()],
+    server: { host: "127.0.0.1", port: 0 },
+    logLevel: "error",
+  });
+  try {
+    await server.listen();
+    const address = server.httpServer?.address();
+    if (!address || typeof address === "string") throw new Error("Missing port");
+    const { DenseDistrictSource } = await import(
+      "../src/generation/regional/DenseDistrictPlanner.js"
+    );
+    const lot = new DenseDistrictSource(regionalWorld(2026), true)
+      .owner(0, 0)
+      ?.blocks.flatMap((b) => b.lots)
+      .find((l) => l.buildingType.includes("butcher"));
+    if (!lot) throw new Error("Missing butcher");
+    const generation = {
+      type: "regional",
+      version: "regional-v5",
+      seed: 2026,
+      preset: "temperate-v1",
+    };
+    const arrival = { x: lot.entrance.x, y: lot.entrance.y + 3, generation };
+    await page.goto(
+      `http://127.0.0.1:${address.port}/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    );
+    await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await page.keyboard.press("Tab");
+    await page.keyboard.down("ArrowUp");
+    await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "depart");
+    await page.keyboard.up("ArrowUp");
+    await page.evaluate(() => history.replaceState(null, "", "/tilefun/"));
+    const navigation = page.waitForEvent("framenavigated", {
+      predicate: (frame) => frame === page.mainFrame(),
+    });
+    server.ws.send({ type: "full-reload", path: "*" });
+    await navigation;
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
+    await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "idle");
+    const result = await page.evaluate(() => {
+      const game = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      return {
+        position: (game.stateView as import("../src/client/ClientStateView.js").RemoteStateView)
+          .serverPlayerEntity.position,
+        door: game.stateView.interior?.doors?.find((d) => d.id === "street"),
+      };
+    });
+    expect(result.position).toEqual(result.door?.arrival);
+  } finally {
+    await page.goto("about:blank");
+    await server.close();
+  }
+});

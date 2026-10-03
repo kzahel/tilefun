@@ -58,7 +58,8 @@ if (process.argv.includes("--check")) {
           c.kind === "character" ||
           c.kind === "vehicle" ||
           c.kind === "railway" ||
-          c.batchId === "rooms-16",
+          c.batchId === "rooms-16" ||
+          c.batchId === "doorways-v1",
       );
       const mismatches = checks.filter(
         (c) => normal.candidates.find((n) => n.id === c.id)?.fingerprint !== c.fingerprint,

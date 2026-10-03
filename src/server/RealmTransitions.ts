@@ -6,6 +6,7 @@ import { type Arrival, safeArrival } from "./SafeArrival.js";
 
 export interface RealmDestination {
   realm: Realm;
+  beforeTransfer?: () => Promise<void>;
   arrival?: Arrival;
   allowInterior?: boolean;
   savedPlayer?: SavedPlayerData;
@@ -36,6 +37,7 @@ export class RealmTransitions {
         allowInterior,
         returnLocation,
         savedPlayer,
+        beforeTransfer,
       } = await resolve();
       if (target.interior && !allowInterior)
         throw new Error("Enter this interior through its building door.");
@@ -47,6 +49,8 @@ export class RealmTransitions {
       const prepared = savedPlayer ?? (await target.preparePlayer(session));
       // A failed source save or destination read must leave the source player attached.
       if (source && source !== target) await source.flushAsync();
+      if (session.retired) throw new Error("This player connection was replaced.");
+      await beforeTransfer?.();
       if (session.retired) throw new Error("This player connection was replaced.");
       source?.removePlayer(session.clientId);
       // Capture after dismounting; the original entity identity survives rollback.

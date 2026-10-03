@@ -62,7 +62,8 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
       .map((p) => p.id),
   );
   const items = collectScene(
-    gc.stateView.entities,
+    gc.doorPresentation?.entities(gc.stateView.entities, gc.realmId ?? null) ??
+      gc.stateView.entities,
     gc.stateView.props,
     gc.stateView.world,
     gc.camera,

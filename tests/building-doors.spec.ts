@@ -87,3 +87,65 @@ test("all four playable layouts have usable Workshop previews", async ({ page })
     await expect(page.getByRole("button", { name: "Looks right ✓", exact: true })).toBeEnabled();
   }
 });
+
+for (const kind of ["butcher", "condo-bay"]) {
+  test(`${kind}: automatic walk-through, fade, arrival and reload latch`, async ({ page }) => {
+    const lot = new DenseDistrictSource(regionalWorld(2026), true)
+      .owner(0, 0)
+      ?.blocks.flatMap((b) => b.lots)
+      .find((l) => l.buildingType.includes(kind));
+    if (!lot) throw new Error("Missing building");
+    const door = exteriorDoors({
+      type: lot.buildingType,
+      position: { wx: lot.anchor.x * 16, wy: lot.anchor.y * 16 },
+    })[1];
+    if (!door) throw new Error("Missing second door");
+    const generation = {
+      type: "regional",
+      version: "regional-v5",
+      seed: 2026,
+      preset: "temperate-v1",
+    };
+    const arrival = { x: door.outside.wx / 16, y: (door.outside.wy + 48) / 16, generation };
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto(
+      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    );
+    await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    // New worlds open in the editor; walk-through is deliberately play-only.
+    await page.keyboard.press("Tab");
+    await page.keyboard.down("ArrowUp");
+    const fade = page.locator('[data-door-fade="true"]');
+    await expect(fade).toHaveAttribute("data-stage", "depart");
+    await page.keyboard.up("ArrowUp");
+    await page.screenshot({ path: `/tmp/tilefun-auto-door-${kind}-opening.png` });
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
+    await expect(fade).toHaveAttribute("data-stage", "idle");
+    await page.screenshot({ path: `/tmp/tilefun-auto-door-${kind}.png` });
+    // The arrival latch requires walking clear before attempting the reverse trip.
+    await page.keyboard.down("ArrowUp");
+    await page.waitForTimeout(300);
+    await page.keyboard.up("ArrowUp");
+    await page.keyboard.down("ArrowDown");
+    await expect(fade).toHaveAttribute("data-stage", "depart");
+    await page.keyboard.up("ArrowDown");
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
+    await expect(fade).toHaveAttribute("data-stage", "idle");
+    await page.reload();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await page.keyboard.down("ArrowUp");
+    await page.waitForTimeout(450);
+    await page.keyboard.up("ArrowUp");
+    await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
+    expect(errors).toEqual([]);
+  });
+}
+
+test("door animation candidates match the registered preview", async ({ page }) => {
+  for (const side of ["left", "right"]) {
+    await page.goto(`/tilefun/workshop.html#/review/pattern:door-butcher-v1-${side}?show=all`);
+    await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
+  }
+});

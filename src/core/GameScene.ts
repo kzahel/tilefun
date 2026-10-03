@@ -1,6 +1,7 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { AudioManager } from "../audio/AudioManager.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
+import type { DoorPresentation } from "../client/DoorPresentation.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
@@ -28,6 +29,8 @@ import type { Time } from "./Time.js";
  * Constructed once by GameClient and passed to SceneManager.
  */
 export interface GameContext {
+  readonly doorPresentation?: DoorPresentation;
+  readonly realmId?: string | null;
   readonly storagePaused?: boolean;
   readonly canvas: HTMLCanvasElement;
   readonly ctx: CanvasRenderingContext2D;

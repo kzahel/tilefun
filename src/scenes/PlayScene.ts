@@ -231,10 +231,11 @@ export class PlayScene implements GameScene {
 
     // Player movement input — quantize dx/dy so prediction uses the same
     // values the server will see after binary decoding (no misprediction drift).
-    const rawMovement = gc.storagePaused
+    const inputLocked = gc.storagePaused || gc.doorPresentation?.busy;
+    const rawMovement = inputLocked
       ? { dx: 0, dy: 0, sprinting: false, jump: false }
       : gc.actions.getMovement();
-    const jumpPressed = this.consumeJumpPressed(rawMovement.jump);
+    const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
     const commandDt = commandDtMs / 1000;
     const movement = {
@@ -257,10 +258,10 @@ export class PlayScene implements GameScene {
     });
 
     // Throw charge tracking
-    const throwHeld = !gc.storagePaused && gc.actions.isHeld("throw");
+    const throwHeld = !inputLocked && gc.actions.isHeld("throw");
     if (throwHeld) {
       this.throwChargeTime += dt;
-    } else if (this.wasThrowHeld && !gc.storagePaused) {
+    } else if (this.wasThrowHeld && !inputLocked) {
       // Released — throw the ball
       const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
       let dirX = 0;
@@ -314,7 +315,7 @@ export class PlayScene implements GameScene {
         if (remoteView.stateAppliedThisTick) {
           const serverPlayer = remoteView.serverPlayerEntity;
           if (serverPlayer.id !== -1) {
-            if (!this.predictor.player) {
+            if (!this.predictor.player || gc.doorPresentation?.busy) {
               const serverMount =
                 remoteView.mountEntityId !== undefined
                   ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
@@ -351,7 +352,7 @@ export class PlayScene implements GameScene {
         }
 
         // Store current input for future reconciliation, then predict.
-        if (!gc.storagePaused)
+        if (!inputLocked)
           predictInput(
             this.predictor,
             seq,

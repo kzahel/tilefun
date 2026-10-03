@@ -1625,3 +1625,63 @@ it("reports an idle world's save failure without pausing a healthy world's playe
     await setup.server.destroy();
   }
 });
+
+it("automatic doors validate intent and freeze the source while another player keeps the realm ticking", async () => {
+  const { server, transport, meta, lot, doors } = await cityDoorSetup();
+  const session = server.getLocalSession();
+  const door = doors[0];
+  if (!door) throw new Error("Missing door");
+  transport.connect("observer", { profileId: "door-observer", displayName: "Observer" });
+  await server.settle();
+  transport.clientSend("observer", { type: "join-realm", requestId: 2399, worldId: meta.id });
+  await server.settle();
+  // The client can predict up to one tile ahead of the latest authoritative tick.
+  session.player.position = { wx: door.outside.wx, wy: door.outside.wy + 20 };
+  session.editorEnabled = false;
+  transport.clientSend("local", {
+    type: "enter-building",
+    requestId: 2400,
+    featureId: lot.id,
+    walkThrough: true,
+  });
+  await server.settle();
+  expect(transport.messagesOfType("local", "request-error").some((m) => m.requestId === 2400)).toBe(
+    true,
+  );
+  expect(session.realmId).toBe(meta.id);
+  session.doorIntent = { dx: 0, dy: -1, at: Date.now() };
+  const sourcePlayer = session.player;
+  const sourcePosition = { ...sourcePlayer.position };
+  transport.clientSend("local", {
+    type: "enter-building",
+    requestId: 2401,
+    featureId: lot.id,
+    walkThrough: true,
+  });
+  await vi.waitFor(() => expect(transport.messagesOfType("local", "door-motion")).toHaveLength(1));
+  expect(session.transitioning).toBe(true);
+  for (let tick = 0; tick < 3; tick++) server.tick(1 / 60);
+  expect(sourcePlayer.position).toEqual(sourcePosition);
+  expect(transport.messagesOfType("observer", "door-motion")).toEqual([
+    expect.objectContaining({ phase: "depart", self: false, realmId: meta.id }),
+  ]);
+  transport.clientSend("local", {
+    type: "enter-building",
+    requestId: 2402,
+    featureId: lot.id,
+    walkThrough: true,
+  });
+  await server.settle();
+  expect(transport.messagesOfType("local", "request-error").some((m) => m.requestId === 2402)).toBe(
+    true,
+  );
+  const motions = transport.messagesOfType("local", "door-motion");
+  expect(motions.map((m) => m.phase)).toEqual(["depart", "arrive"]);
+  expect(motions.every((m) => m.self)).toBe(true);
+  expect(motions[0]?.overlay?.kind).toBe("butcher");
+  expect(motions[0]?.to).toEqual({ wx: door.outside.wx, wy: door.outside.wy - 24 });
+  expect(motions[1]?.to).toEqual(session.player.position);
+  expect(session.realmId).not.toBe(meta.id);
+  expect(session.doorArrivalUntil).toBeGreaterThan(Date.now());
+  await server.destroy();
+});

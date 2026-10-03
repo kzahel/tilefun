@@ -10,6 +10,7 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { applyPlayerModel, normalizePlayerModel } from "../characters/PlayerModels.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
 import { registerClientCommands } from "../console/clientCommands.js";
@@ -26,6 +27,7 @@ import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
+import { DoorPresentation } from "./DoorPresentation.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
@@ -172,6 +174,7 @@ export class GameClient {
   /** Realm list received while in lobby (multiplayer connect flow). */
   private lobbyRealmList: RealmInfo[] | null = null;
   private doorControl: DoorControl;
+  private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
   /** Player profile (display name, id). */
@@ -204,7 +207,10 @@ export class GameClient {
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
     this.transport = this.netEmulatedTransport;
     this.requests = new RequestBroker((message) => this.transport.send(message));
-    this.transport.onDisconnect?.(() => this.requests.disconnect());
+    this.transport.onDisconnect?.(() => {
+      this.requests.disconnect();
+      this.doorPresentation.cancel();
+    });
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
@@ -317,6 +323,7 @@ export class GameClient {
       // Route server messages to RemoteStateView
       this.transport.onMessage((msg: ServerMessage) => {
         routePatternStatus(msg);
+        if (msg.type === "door-motion") this.doorPresentation.receive(msg);
         // Domain-specific handlers first — buffer frame/sync messages for deferred
         // application during client update tick (prevents async entity
         // position changes that desync camera and entity interpolation)
@@ -423,12 +430,20 @@ export class GameClient {
       this.stateView = new LocalStateView(server);
       this.transport.onMessage((message) => {
         routePatternStatus(message);
+        if (message.type === "door-motion") this.doorPresentation.receive(message);
         this.requests.receive(message);
       });
     }
 
     this.doorControl = new DoorControl(async (request) => {
-      await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+      if (this.doorPresentation.busy) return;
+      if (request.walkThrough) this.doorPresentation.begin();
+      try {
+        await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+      } catch (error) {
+        this.doorPresentation.cancel();
+        throw error;
+      }
       if (!this.serialized) {
         const session = this.localServer.getLocalSession();
         this.camera.snapTo(session.cameraX, session.cameraY);
@@ -459,14 +474,30 @@ export class GameClient {
         // Tick client-side sprite animations (animTimer/frameCol not serialized).
         this.remoteView?.tickAnimations(dt);
         this.scenes.update(dt);
+        const p = this.remoteView?.serverPlayerEntity ?? this.stateView.playerEntity;
+        const ready =
+          p.id !== -1 &&
+          (this.stateView.interior
+            ? !!this.stateView.roomState
+            : this.tileRenderer.isTerrainReady(
+                this.stateView.world.chunks.get(
+                  Math.floor(p.position.wx / CHUNK_SIZE_PX),
+                  Math.floor(p.position.wy / CHUNK_SIZE_PX),
+                ),
+              ));
+        this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
         this.doorControl.update(
           this.stateView,
           this.initDone &&
+            ready &&
             !this.scenes.has(WorldMapScene) &&
             !this.scenes.has(IdeaScene) &&
             !this.scenes.has(MenuScene) &&
             !this.scenes.has(CatalogScene) &&
             !this.scenes.has(InteriorCatalogScene),
+          this.actions.getMovement(),
+          dt,
+          this.doorPresentation.busy,
         );
       },
       render: (alpha) => {
@@ -850,6 +881,7 @@ export class GameClient {
     this.tileRenderer.clear();
     this.sceneFrame.clear();
     this.doorControl.destroy();
+    this.doorPresentation.destroy();
     this.loop.stop();
     this.gcFlushServer();
     this.requests.dispose();
@@ -927,6 +959,7 @@ export class GameClient {
   }
 
   private toggleEditor(): void {
+    if (this.doorPresentation.busy) return;
     if (this.scenes.current instanceof EditScene) {
       this.scenes.replace(new PlayScene());
     } else {
@@ -935,6 +968,7 @@ export class GameClient {
   }
 
   private toggleWorldMap(): void {
+    if (this.doorPresentation.busy) return;
     if (this.scenes.current instanceof WorldMapScene) {
       this.scenes.pop();
       return;
@@ -945,6 +979,7 @@ export class GameClient {
   }
 
   private async toggleMenu(): Promise<void> {
+    if (this.doorPresentation.busy) return;
     if (this.menuOpening) return;
     this.menuOpening = true;
     try {
@@ -1087,6 +1122,10 @@ export class GameClient {
     // always reflect the latest value from GameClient.
     const client = this;
     return {
+      doorPresentation: this.doorPresentation,
+      get realmId() {
+        return client.mainMenu.currentWorldId;
+      },
       get storagePaused() {
         return client.storagePaused;
       },

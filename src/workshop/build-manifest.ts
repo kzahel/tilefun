@@ -4,6 +4,7 @@ import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { buildCharacterCandidates } from "./CharacterCandidates.js";
+import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
@@ -26,6 +27,8 @@ try {
     candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
   for (const c of TREE_PATTERN_CASES)
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
+  for (const id of DOOR_CASES)
+    candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));
@@ -36,6 +39,12 @@ try {
       tools: WORKSHOP_TOOLS,
       batches: [
         ...CITY_BATCHES,
+        {
+          id: "doorways-v1",
+          name: "Door opening animations",
+          description: "Exact facade overlays; walk-through travel in game.",
+          toolId: "buildings",
+        },
         ...INTERIOR_BATCHES,
         {
           id: "motion",

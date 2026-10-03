@@ -28,6 +28,8 @@ export class PlayerSession {
   realmId: string | null = null;
   returnLocation: ({ worldId: string } & import("./SafeArrival.js").Arrival) | null = null;
   transitioning = false;
+  doorArrivalUntil = 0;
+  doorIntent = { dx: 0, dy: 0, at: 0 };
   /** Profile takeover waits for travel to settle before detaching this session. */
   transitionDone: Promise<void> = Promise.resolve();
   identityReady: Promise<void> = Promise.resolve();
