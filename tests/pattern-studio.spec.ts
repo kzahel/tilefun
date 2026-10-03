@@ -86,9 +86,9 @@ test("rooms draw directly on art, reject invalid doors and keep a stable zoom/pa
   expect(await camera(c)).toMatchObject({ x: before.x, y: before.y });
   await c.focus();
   await page.keyboard.press("ArrowLeft");
-  expect((await camera(c)).x).toBeLessThan(before.x);
+  await expect.poll(async () => (await camera(c)).x).toBeLessThan(before.x);
   await c.dispatchEvent("wheel", { deltaY: 70, shiftKey: true });
-  expect((await camera(c)).y).toBeGreaterThan(before.y);
+  await expect.poll(async () => (await camera(c)).y).toBeGreaterThan(before.y);
   await c.screenshot({ path: "/tmp/tilefun-pattern-rooms.png" });
   const document = {
     version: 1,
