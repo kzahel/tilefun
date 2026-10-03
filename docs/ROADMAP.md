@@ -1,45 +1,36 @@
 # Roadmap
 
-## Streaming Performance and Single Player Execution
+Direction as of 2026-10-03. This is a short project overview; the linked topics
+own current status and next work. Ideas are not commitments: see the
+[backlog](ideas.md), [playtester feedback](todo-from-playtesters.md) and
+[long-term vision](VISION.md). [Tactical plans](tactical/README.md) preserve
+implementation scope and evidence.
 
-- Implemented: repeatable traversal diagnostics, shared single-player authority in a dedicated browser Worker, bounded ordered transport and terrain cache preparation ahead of the camera. The v4/v10 ordinary traversal has zero missing or unfinished visible chunks; frame p95 remains about 16.7–16.8 ms in the headless desktop captures. See the [performance and Worker plan and evidence](tactical/012-streaming-performance-and-local-server-worker.md).
-- Physical Android validated: three Pixel 7a touch traversals per fixture have zero movement gaps and about 16.8 ms frame p95. The v4 zoom-out stalls are traced to deferred cache raster work; a benchmark-only two-row limit restores 16.8 ms p95 while completing the caches. Next: bound offscreen preparation work with traversal validation, improve cold-entry presentation, and broaden device coverage before setting timing gates. P2P authority can adopt the same host boundary when needed.
-- Consider WASM only if measured remaining compute costs or an explicit native/browser sharing requirement justify it.
+## Current work and next checkpoints
 
-## Regional Generation and World Explorer
+| Area | Delivered | Next checkpoint / owner |
+| --- | --- | --- |
+| Streaming and execution | Shared single-player Worker authority, terrain preparation, desktop and Pixel 7a traversal evidence | Bound offscreen raster work, improve cold entry and broaden device coverage; [performance](topics/performance.md) |
+| Regional cities | Shared versioned explorer/game generation, approved dense neighborhood and v6 commercial streets | Review thirteen staged v7–v10 parking/park/architecture/pedestrian views; [city generation](topics/city-generation.md) |
+| Workshop and source art | Unified review inbox, authenticated feedback, source catalog and outdoor metadata/scene annotations | Address exact recorded feedback and review candidate geometry; [art review](topics/art-review.md) |
+| Patterns and interiors | Shared semantic brushes, persistent gameplay room editing, furniture and static-layer caching | Review gameplay room editing and tree kit; explicit prefab import/promotion next; [patterns and interiors](topics/patterns-and-interiors.md) |
 
-- Implemented: versioned Classic/Island/Flat/Regional generators, bounded map and exact tile previews, shared district and countryside plans, authoritative Play here arrivals, persistent building interiors, and generated inhabitants. See the [regional plan](tactical/004-world-explorer-and-regional-generation-plan.md) and [generator plan](tactical/005-generator-profiles-and-shared-tile-preview-plan.md) for implementation evidence.
-- Next: a playable dense city block, then street furniture/parking, parks and squares, larger commercial buildings, farmers markets and richer pedestrian life. See the [phased city plan](tactical/007-dense-city-districts-and-street-life-plan.md) and [checkpoint guide](world-explorer.md).
-- Physical Pixel 7a profiling is recorded in the streaming plan. Lower-end phones, iOS and sustained thermal runs remain additional coverage; automated phone layouts and desktop CPU throttling are separate evidence.
-- Future extensions: additional floors, room layouts, inhabitants' schedules, traffic, and economies.
+New worlds still default to regional-v4. Later city revisions are selectable
+candidates; delivering them does not imply approval or promotion. Read the live
+Workshop inbox for decisions after the documented checkpoints.
 
-## Asset Protection
-- Obfuscate purchased asset files (Modern Exteriors, Modern Interiors, Sprout Lands) so they aren't directly browsable/downloadable from the public GitHub repo
-- Approach: store XOR-encoded `.enc` files in git, decode to `.png` at build time into a gitignored folder
-- Not real DRM — just "don't be the lowest-hanging fruit"
+## Continuing product direction
 
-## Gameplay
-- Enterable structures: custom collision shapes so player can walk inside playground tubes
-- Entity polish: more behaviors, mass-spawn UX, entity persistence improvements
-- Build on the existing terrain/prop/furniture editors with more curated placeable objects
-- Specialized natural brushes: tree formation brush, garden plot prefab, forest cluster stamp
+- After city candidate acceptance: farmers markets, then broader parks, frontage
+  variety and richer street life. The [parent city plan](tactical/007-dense-city-districts-and-street-life-plan.md)
+  records the sequence and deferred scope.
+- Multiplayer already supports collaborative editing, browser-hosted P2P and
+  dedicated servers. Next opportunities are real-world dual-channel WebRTC
+  validation and connection/reconnection UX. Public-server authentication remains
+  separate from player profile identity; see [network architecture](NETWORK-ARCHITECTURE.md).
+- Build on the existing terrain, prop, furniture and room editors with curated
+  content and simpler child-friendly interactions. Saved-world naming, switching
+  and deletion confirmation exist; broader destructive-edit safety remains open.
 
-## World Management
-
-- Implemented: world creation with pinned generator settings, saved-world switching, naming, deletion with confirmation, and multiplayer realm browsing.
-- Remaining: a safety net for destructive terrain/world-clearing actions, beyond the existing world-deletion confirmation.
-
-## Terrain
-- Beach chain: deep water → shallow → sand → sand_light → grass via 4-sheet chain
-- Water animation: animated water autotile overlay
-
-## Multiplayer
-
-- Implemented: collaborative editing and co-op through browser-hosted P2P or a dedicated server, WebSocket transport, and optional dedicated WebRTC with reliable sync and an unreliable entity channel. See the [network architecture](NETWORK-ARCHITECTURE.md).
-- Next: validate dedicated dual-channel WebRTC under more real-world network conditions and improve connection/reconnection UX.
-- Future public-server work: authentication and access controls; existing player profile identity is separate from authentication.
-- Revisit native WebRTC dependency/deployment tradeoffs when choosing supported hosting targets.
-
-## UX / Accessibility
-- Implemented: touch joystick/buttons and gamepad input.
-- Next: simplify the interaction flow for young children, including single-finger input where appropriate.
+Other gameplay, terrain, visual effects, asset protection and platform ideas live
+in the [ideas index](ideas.md), with their original sources and caveats.

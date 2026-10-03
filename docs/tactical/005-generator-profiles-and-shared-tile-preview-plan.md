@@ -1,5 +1,9 @@
 # Generator profiles and shared tile preview
 
+Later evidence: physical Pixel 7a profiling was completed in
+[Tactical 012](012-streaming-performance-and-local-server-worker.md).
+The original checkpoint and remaining-device notes below are historical.
+
 Status: slices A–E implemented, September 30, 2026. Physical phone profiling remains outstanding.
 The regional map checkpoint in commit `6d388bb` has been reviewed positively.
 This plan records the next work and its handoff to the remaining world-building

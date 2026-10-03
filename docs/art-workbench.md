@@ -1,5 +1,8 @@
 # Art workbench
 
+Current review and metadata contracts: [art review topic](topics/art-review.md).
+City checkpoints and promotion banks: [city generation](topics/city-generation.md).
+
 The central [Tilefun Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html)
 now combines source annotations, all review batches, requests and full history.
 Shared feedback requires owner login; old tool URLs and browser drafts/outboxes

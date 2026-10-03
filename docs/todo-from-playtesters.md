@@ -1,5 +1,9 @@
 # Playtester Feedback
 
+Original feedback is preserved below. See [ideas](ideas.md) for the broader
+backlog and [roadmap](ROADMAP.md) for current direction. Items here are requests,
+not a verified list of missing features.
+
 ## From daughter (Feb 2025)
 
 - Pick flowers and sell them for diamonds

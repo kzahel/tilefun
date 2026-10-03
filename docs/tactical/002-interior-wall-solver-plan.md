@@ -1,5 +1,9 @@
 # Interior wall solver and rapid visual review
 
+Current checkpoint: all 233 wall cases were approved on 2026-09-29; see the
+final status entry below. Earlier status/next-step sections are execution history.
+Continuing work: [patterns and interiors](../topics/patterns-and-interiors.md).
+
 Status: proposed architecture; review loop operating; first compact stress set added.
 Date: 2026-09-28.
 

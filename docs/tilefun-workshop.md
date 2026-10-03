@@ -1,5 +1,7 @@
 # Tilefun Workshop
 
+Current agent review contracts: [art review topic](topics/art-review.md).
+
 Open [Tilefun Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html).
 The game sidebar and world menu link here. The old tool index and HTML bookmarks
 still work and provide a return link.

@@ -1,5 +1,9 @@
 # 001 Modern Interiors Plan
 
+Historical parent plan: original phase labels below have not been reconciled
+with all later deliveries. Read [patterns and interiors](../topics/patterns-and-interiors.md)
+for current state and the later wall, furniture and gameplay-room work.
+
 ## Goal
 
 Build first-class indoor apartment support using the Modern Interiors asset pack. The end state is enterable buildings from the overworld, indoor maps with explicit architectural and furnishing layers, and procedural apartment generation from curated prefab room metadata.

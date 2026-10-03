@@ -1,5 +1,8 @@
 # World explorer checkpoint
 
+Current city review/promotion status: [city generation](topics/city-generation.md).
+Current performance direction: [performance](topics/performance.md).
+
 The completed regional checkpoint from [Tactical 004](tactical/004-world-explorer-and-regional-generation-plan.md)
 is available at `/tilefun/world-explorer.html`. The game menu also links to it.
 Tactical 005 A–E adds shared versioned generators, configurable real-tile

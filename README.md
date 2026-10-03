@@ -8,6 +8,13 @@ A creative-mode-first 2D tile game — paint terrain, place entities, hit play, 
 
 <video src="https://github.com/user-attachments/assets/038140dd-e987-4f71-8ec4-8fa5425dba1d" controls muted playsinline width="400"></video>
 
+## Documentation
+
+Start with the [docs map](docs/README.md), [roadmap](docs/ROADMAP.md) or
+[ideas and playtester backlog](docs/ideas.md). [Topics](docs/topics/README.md)
+track current decisions and next work; [tacticals](docs/tactical/README.md)
+record bounded implementation plans. Agent guidance lives in [AGENTS.md](AGENTS.md).
+
 ## Development setup
 
 The runtime art and tool assets are checked in; a fresh clone can run without
