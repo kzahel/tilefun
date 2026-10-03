@@ -864,3 +864,26 @@ describe("RemoteStateView extrapolation debug sampling", () => {
     nowSpy.mockRestore();
   });
 });
+
+it("bounds each apply pass without dropping dependent entity deltas", () => {
+  const view = new RemoteStateView(new World(new FlatStrategy()));
+  view.bufferMessage(
+    makeFrame({ serverTick: 1, entityBaselines: [makeTestEntity(1, 0, 0)], playerEntityId: 1 }),
+  );
+  for (let tick = 2; tick <= 130; tick++)
+    view.bufferMessage(
+      makeFrame({
+        serverTick: tick,
+        entityDeltas: [{ id: 1, position: { wx: tick, wy: 0 } }],
+        playerEntityId: 1,
+      }),
+    );
+  view.applyPending();
+  expect(view.pendingMessageCount).toBeGreaterThanOrEqual(66);
+  expect(view.serverTick).toBeLessThanOrEqual(64);
+  let passes = 0;
+  while (view.pendingMessageCount && passes++ < 130) view.applyPending();
+  expect(view.pendingMessageCount).toBe(0);
+  expect(view.serverTick).toBe(130);
+  expect(view.entities[0]?.position.wx).toBe(130);
+});

@@ -67,7 +67,8 @@ export function renderWorld(gc: GameContext): void {
 
   if (stateView.interior) return;
   // Terrain + autotile + details (baked into chunk cache)
-  tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible);
+  tileRenderer.prepareTerrain(camera, stateView.world, sheets, visible);
+  tileRenderer.drawTerrain(ctx, camera, stateView.world, sheets, visible, false, 0);
 
   // Elevation is drawn interleaved with entities via collectScene
   // (moved from a separate pass so cliffs properly occlude entities behind them)

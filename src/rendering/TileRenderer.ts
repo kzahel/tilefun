@@ -7,6 +7,7 @@ import {
   CHUNK_SIZE,
   ELEVATION_PX,
   MAX_CHUNK_CACHE_ROWS_PER_FRAME,
+  RENDER_DISTANCE,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -28,6 +29,7 @@ import type { ElevationItem } from "./SceneItem.js";
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
 
 interface CacheBuildState {
+  chunk: Chunk;
   canvas: OffscreenCanvas;
   nextRowOrderIdx: number;
   revision: number;
@@ -57,6 +59,154 @@ export class TileRenderer {
   private roadSheetMap = new Map<RoadType, Spritesheet>();
   /** Progressive chunk cache rebuilds in progress (keyed by "cx,cy"). */
   private cacheBuildStates = new Map<string, CacheBuildState>();
+
+  private readonly resident = new Map<string, { chunk: Chunk; pendingSince: number | null }>();
+  private lastCamera: { x: number; y: number } | null = null;
+  private preparedRows = 0;
+
+  constructor(private readonly now: () => number = () => performance.now()) {}
+
+  /** Release surfaces on realm changes and teardown, including half-built jobs. */
+  clear(): void {
+    for (const { chunk } of this.resident.values()) {
+      chunk.renderCache = null;
+      chunk.dirty = true;
+    }
+    this.resident.clear();
+    this.cacheBuildStates.clear();
+    this.lastCamera = null;
+    this.preparedRows = 0;
+  }
+
+  /** Prepare the loaded camera halo before drawing. Residency is bounded by
+   * (visible width + 2R) * (visible height + 2R), with at most an old surface
+   * plus a replacement surface per chunk. No offscreen terrain is generated.
+   */
+  prepareTerrain(
+    camera: Camera,
+    world: TerrainRenderWorld,
+    sheets: Map<string, Spritesheet>,
+    visible: ChunkRange,
+    timeBudgetMs = 2,
+    rowBudget = 128,
+  ): void {
+    const started = this.now();
+    const deadline = started + Math.max(0, timeBudgetMs);
+    const dx = this.lastCamera ? camera.x - this.lastCamera.x : 0;
+    const dy = this.lastCamera ? camera.y - this.lastCamera.y : 0;
+    const length = Math.hypot(dx, dy);
+    const aheadX = camera.x + (length ? (dx / length) * CHUNK_NATIVE_PX : 0);
+    const aheadY = camera.y + (length ? (dy / length) * CHUNK_NATIVE_PX : 0);
+    this.lastCamera = { x: camera.x, y: camera.y };
+    const wanted = new Set<string>();
+    const jobs: {
+      key: string;
+      cx: number;
+      cy: number;
+      chunk: Chunk;
+      priority: number;
+      distance: number;
+    }[] = [];
+    for (let cy = visible.minCy - RENDER_DISTANCE; cy <= visible.maxCy + RENDER_DISTANCE; cy++) {
+      for (let cx = visible.minCx - RENDER_DISTANCE; cx <= visible.maxCx + RENDER_DISTANCE; cx++) {
+        const chunk = world.getChunkIfLoaded(cx, cy);
+        if (!chunk) continue;
+        const key = `${cx},${cy}`;
+        wanted.add(key);
+        const prior = this.resident.get(key);
+        if (prior && prior.chunk !== chunk) {
+          prior.chunk.renderCache = null;
+          this.cacheBuildStates.delete(key);
+        }
+        const pending = chunk.dirty || !chunk.renderCache;
+        this.resident.set(key, {
+          chunk,
+          pendingSince: pending
+            ? prior?.chunk === chunk
+              ? (prior.pendingSince ?? started)
+              : started
+            : null,
+        });
+        if (!pending) continue;
+        const onScreen =
+          cx >= visible.minCx && cx <= visible.maxCx && cy >= visible.minCy && cy <= visible.maxCy;
+        jobs.push({
+          key,
+          cx,
+          cy,
+          chunk,
+          priority: onScreen ? (chunk.renderCache ? 1 : 0) : 2,
+          distance: Math.hypot(
+            (cx + 0.5) * CHUNK_NATIVE_PX - aheadX,
+            (cy + 0.5) * CHUNK_NATIVE_PX - aheadY,
+          ),
+        });
+      }
+    }
+    for (const [key, entry] of this.resident) {
+      if (wanted.has(key)) continue;
+      entry.chunk.renderCache = null;
+      entry.chunk.dirty = true;
+      this.resident.delete(key);
+      this.cacheBuildStates.delete(key);
+    }
+    // Also discard work made through another rendering path before preparation.
+    for (const key of this.cacheBuildStates.keys())
+      if (!wanted.has(key)) this.cacheBuildStates.delete(key);
+    jobs.sort(
+      (a, b) => a.priority - b.priority || a.distance - b.distance || a.cy - b.cy || a.cx - b.cx,
+    );
+    let remaining = Math.max(0, Math.floor(rowBudget));
+    const initial = remaining;
+    const roadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
+    for (const job of jobs) {
+      if (remaining <= 0 || this.now() >= deadline) break;
+      const focalRow = Math.max(
+        0,
+        Math.min(CHUNK_SIZE - 1, Math.floor((camera.y - job.cy * CHUNK_NATIVE_PX) / TILE_SIZE)),
+      );
+      remaining = this.advanceCacheBuild(
+        job.key,
+        job.chunk,
+        job.cx,
+        job.cy,
+        sheets,
+        remaining,
+        focalRow,
+        roadAt,
+        deadline,
+      );
+      if (!job.chunk.dirty) {
+        const entry = this.resident.get(job.key);
+        if (entry?.pendingSince !== null && entry?.pendingSince !== undefined) {
+          performanceMetrics.record("client.cacheLatency", this.now() - entry.pendingSince);
+          entry.pendingSince = null;
+        }
+      }
+    }
+    this.preparedRows = initial - remaining;
+  }
+
+  getDiagnostics() {
+    let pending = 0,
+      oldestMs = 0,
+      surfaces = this.cacheBuildStates.size;
+    for (const { chunk, pendingSince } of this.resident.values()) {
+      if (chunk.renderCache) surfaces++;
+      if (pendingSince !== null) {
+        pending++;
+        oldestMs = Math.max(oldestMs, this.now() - pendingSince);
+      }
+    }
+    return {
+      resident: this.resident.size,
+      building: this.cacheBuildStates.size,
+      pending,
+      oldestMs,
+      rowsLastFrame: this.preparedRows,
+      surfaceBytes: surfaces * CHUNK_NATIVE_PX * CHUNK_NATIVE_PX * 4,
+    };
+  }
 
   /** Set the blend sheets and graph for the renderer. */
   setBlendSheets(sheets: Spritesheet[], graph: BlendGraph): void {
@@ -141,9 +291,12 @@ export class TileRenderer {
           );
         }
 
-        const drawCache = readyOnly
-          ? chunk.renderCache
-          : (chunk.renderCache ?? this.cacheBuildStates.get(key)?.canvas);
+        const building = this.cacheBuildStates.get(key);
+        const partial =
+          building?.chunk === chunk && building.revision === chunk.revision
+            ? building.canvas
+            : undefined;
+        const drawCache = readyOnly ? chunk.renderCache : (chunk.renderCache ?? partial);
         if (drawCache) {
           // Gameplay overscans to cover sub-pixel seams while zooming. Native
           // pixel review uses zero: 256→257 resampling differs by raster backend.
@@ -159,7 +312,7 @@ export class TileRenderer {
     }
 
     for (const key of this.cacheBuildStates.keys()) {
-      if (!visibleKeys.has(key)) this.cacheBuildStates.delete(key);
+      if (cacheRowBudget > 0 && !visibleKeys.has(key)) this.cacheBuildStates.delete(key);
     }
   }
 
@@ -237,11 +390,13 @@ export class TileRenderer {
     rowBudget: number,
     focalRow: number,
     getGlobalRoad?: (tx: number, ty: number) => number,
+    deadline = Number.POSITIVE_INFINITY,
   ): number {
     const timing = performanceMetrics.start();
     let state = this.cacheBuildStates.get(key);
-    if (!state) {
+    if (!state || state.chunk !== chunk) {
       state = {
+        chunk,
         canvas: new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
         nextRowOrderIdx: 0,
         revision: chunk.revision,
@@ -267,7 +422,11 @@ export class TileRenderer {
     const offCtx = state.canvas.getContext("2d");
     if (!offCtx) return rowBudget;
     let usedRows = 0;
-    while (usedRows < rowBudget && state.nextRowOrderIdx < state.rowOrder.length) {
+    while (
+      usedRows < rowBudget &&
+      state.nextRowOrderIdx < state.rowOrder.length &&
+      (usedRows === 0 || this.now() < deadline)
+    ) {
       const ly = state.rowOrder[state.nextRowOrderIdx];
       state.nextRowOrderIdx++;
       if (ly === undefined) continue;

@@ -155,3 +155,29 @@ describe("local server Worker lifecycle", () => {
     expect(r.endpoint.onmessage).toBeNull();
   });
 });
+
+it("fails a save fence explicitly rather than acknowledging lost edits", async () => {
+  const r = rig({
+    flush: async () => {
+      throw Error("disk unavailable");
+    },
+  });
+  await r.client.ready();
+  await expect(r.client.shutdown()).rejects.toThrow("disk unavailable");
+  expect(r.errors).toHaveLength(1);
+  expect(r.events).not.toContain("destroy");
+  expect(r.events).toContain("terminate");
+});
+
+it("times out a Worker that never reaches readiness", async () => {
+  const endpoint: WorkerEndpoint = {
+    postMessage: () => {},
+    terminate: vi.fn(),
+    onmessage: null,
+    onerror: null,
+    onmessageerror: null,
+  };
+  const client = new WorkerClientTransport(endpoint, { timeoutMs: 10 });
+  await expect(client.ready()).rejects.toThrow("startup timed out");
+  expect(endpoint.terminate).toHaveBeenCalledTimes(1);
+});

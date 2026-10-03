@@ -88,8 +88,15 @@ test("Worker saves player and edits before shutdown and restores them on reopen"
     // biome-ignore lint/suspicious/noExplicitAny: test hook
     const g = (document.querySelector("#game") as any).__game;
     g.transport.send({ type: "set-editor-mode", enabled: false });
-    const position = { ...g.stateView.playerEntity.position };
-    await g.netEmulatedTransport.base.shutdown();
+    const host = g.netEmulatedTransport.base;
+    // Freeze authority, then consume its final replica before comparing durable
+    // state. A pre-fence predicted pose may legitimately be one input ahead.
+    g.loop.stop();
+    host.setHidden(true);
+    await host.flush();
+    while (g.remoteView.pendingMessageCount) g.remoteView.applyPending();
+    const position = { ...g.remoteView.serverPlayerEntity.position };
+    await host.shutdown();
     return position;
   });
   await page.goto("/tilefun/?nogamepad");

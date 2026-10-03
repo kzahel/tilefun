@@ -100,6 +100,21 @@ try {
             render = callbacks.render,
             update = callbacks.update;
           const before = { ...game.stateView.playerEntity.position };
+          const sent = new Map(),
+            ackTimes = [],
+            corrections = [];
+          const send = game.transport.send;
+          let lastSent = game.stateView.lastProcessedInputSeq,
+            lastAck = lastSent,
+            maxAckGap = 0;
+          game.transport.send = (message) => {
+            if (message.type === "player-input") {
+              sent.set(message.seq, performance.now());
+              lastSent = message.seq;
+              if (sent.size > 1024) sent.delete(sent.keys().next().value);
+            }
+            return send.call(game.transport, message);
+          };
           let missingDataFrames = 0,
             incompleteCacheFrames = 0,
             maxIncomplete = 0,
@@ -141,7 +156,16 @@ try {
             longestGapFrames = Math.max(longestGapFrames, currentGap);
             maxIncomplete = Math.max(maxIncomplete, incomplete);
             maxLoaded = Math.max(maxLoaded, game.stateView.world.chunks.loadedCount);
-            maxBuffered = Math.max(maxBuffered, game.remoteView?._pendingStates?.length ?? 0);
+            maxBuffered = Math.max(maxBuffered, game.remoteView?.pendingMessageCount ?? 0);
+            const ack = game.stateView.lastProcessedInputSeq;
+            maxAckGap = Math.max(maxAckGap, lastSent - ack);
+            if (ack !== lastAck) {
+              if (sent.has(ack)) ackTimes.push(performance.now() - sent.get(ack));
+              for (const seq of sent.keys()) if (seq <= ack) sent.delete(seq);
+              const diagnostic = game.stateView.predictionDiagnostics;
+              if (diagnostic) corrections.push(diagnostic.resimPosErr);
+              lastAck = ack;
+            }
           };
           try {
             let last = await new Promise(requestAnimationFrame);
@@ -153,6 +177,7 @@ try {
           } finally {
             callbacks.render = render;
             callbacks.update = update;
+            game.transport.send = send;
             observer.disconnect();
           }
           const summary = (values) => {
@@ -162,6 +187,11 @@ try {
           };
           const after = game.stateView.playerEntity.position;
           return {
+            renderedFrames: renders.length,
+            inputAckMs: summary(ackTimes),
+            maxAckGap,
+            predictionResimulationErrorPx: summary(corrections),
+            cache: game.tileRenderer.getDiagnostics?.() ?? null,
             frames: summary(frames),
             renderMs: summary(renders),
             updateMs: summary(updates),
@@ -204,13 +234,18 @@ try {
     await page.keyboard.up("ArrowRight");
     await page.keyboard.up("Shift");
     await page.evaluate(() => {
-      document.querySelector("#game").__game.camera.zoom *= 0.6;
+      document.querySelector("#game").__game.debugPanel.setZoom(0.5);
     });
     samples.push(await sample("zoom-out", 180));
     await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
     if (Math.abs(sprint.displacement.x) < 256 || sprint.visitedChunks < 6)
       throw Error(`${version}: traversal failed to cross terrain (${sprint.displacement.x}px)`);
     if (errors.length) throw Error(errors.join("\n"));
+    if (process.argv.includes("--assert-ready")) {
+      for (const s of samples.filter((s) => ["walk", "sprint", "reverse"].includes(s.name)))
+        if (s.missingDataFrames || s.incompleteCacheFrames)
+          throw Error(`${version}/${s.name}: visible terrain was not ready`);
+    }
     report.fixtures.push({ version, arrival, samples, errors });
     await context.close();
   }

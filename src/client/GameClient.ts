@@ -298,6 +298,7 @@ export class GameClient {
             sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
           }
           remoteView.clear();
+          this.tileRenderer.clear();
           if (this.hmrCameraRestored) {
             // HMR already restored camera — don't let fresh server defaults overwrite it
             this.hmrCameraRestored = false;
@@ -345,6 +346,7 @@ export class GameClient {
           remoteView.interior = null;
           this.canvas.dataset.interior = "";
           remoteView.clear();
+          this.tileRenderer.clear();
         } else if (msg.type === "realm-player-count") {
           this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
         } else if (msg.type === "kicked") {
@@ -773,6 +775,7 @@ export class GameClient {
   }
 
   destroy(): void {
+    this.tileRenderer.clear();
     this.doorControl.destroy();
     this.loop.stop();
     this.gcFlushServer();

@@ -237,3 +237,24 @@ slices. Record remaining hardware evidence and implementation decisions here.
   physics settings, and render progress during a 350 ms authority-thread stall.
   The worker-only v10 traversal still showed unfinished caches, as expected;
   cache scheduling remains the next independently measured slice.
+
+- Terrain preparation now works in the loaded one-chunk halo before drawing,
+  prioritizing visible gaps and then distance in the direction of travel.
+  It checks a 2 ms deadline between rows and caps work at 128 rows per render.
+  Completed surfaces remain visible during revision rebuilds; chunk object
+  identity prevents stale partial surfaces crossing world/reload boundaries.
+  Residency follows the camera halo and is released on realm changes/teardown.
+  Tests cover timing/count bounds, prioritization, revisions, replacement chunk
+  identities, eviction and completion. Both real-game traversal tests passed
+  with zero missing or unfinished visible chunks while sprinting and returning.
+  All 327 Workshop candidate records remain byte-equivalent after regeneration.
+  The full browser run passed 234 tests and exposed a test assertion comparing
+  a pre-fence predicted pose to a saved authoritative pose one input later.
+  The persistence test now freezes authority and consumes its final replica
+  before asserting exact restore; all nine worker checks passed across three
+  repeated runs. A clean full-suite rerun follows.
+
+The original baseline's zoom sample directly assigned camera zoom, which the
+play scene overwrites. Its zoom row is not valid zoom-transition evidence.
+The permanent runner now uses the gameplay zoom control. Movement comparisons
+use the same seed, arrival, viewport, input and sample windows as before.

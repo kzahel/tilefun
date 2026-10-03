@@ -199,3 +199,38 @@ describe("pattern commands", () => {
     server.destroy();
   });
 });
+
+it("continues simulation under replication backpressure and publishes the next valid baseline", async () => {
+  const { server, transport } = createTestServer();
+  await server.settle();
+  const session = server.getLocalSession();
+  session.editorEnabled = false;
+  session.debugNoclip = true;
+  server.broadcasting = true;
+  let writable = false;
+  transport.serverSide.canSend = () => writable;
+  const messages: import("../shared/protocol.js").ServerMessage[] = [];
+  transport.clientSide.onMessage((message) => messages.push(message));
+  const before = session.player.position.wx;
+  transport.clientSide.send({
+    type: "player-input",
+    seq: 1,
+    dx: 1,
+    dy: 0,
+    sprinting: false,
+    jump: false,
+    dtMs: 16,
+  });
+  server.tick(1 / 60);
+  expect(session.player.position.wx).toBeGreaterThan(before);
+  expect(messages).toEqual([]);
+  writable = true;
+  server.tick(1 / 60);
+  const frame = messages.find((message) => message.type === "frame");
+  expect(
+    frame?.type === "frame" &&
+      frame.entityBaselines?.some((entity) => entity.id === session.player.id),
+  ).toBe(true);
+  expect(server.completedTicks).toBe(2);
+  server.destroy();
+});
