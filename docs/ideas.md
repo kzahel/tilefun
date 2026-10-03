@@ -21,8 +21,37 @@ copying every item into multiple checklists.
   and further tree families. Current drawing work lives in
   [patterns and interiors](topics/patterns-and-interiors.md).
 - City follow-ons: farmers markets, connected large parks, more frontage
-  orientations, additional floors/room layouts, schedules and moving traffic. See
+  orientations and additional room layouts. See the living-world ideas below and
   [city generation](topics/city-generation.md) for dependencies and review gates.
+
+## Living world and inhabitants
+
+Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
+
+- Moving cars that travel along roads.
+- People inside buildings, as well as out on the streets.
+- Families that live in houses, potentially with Sims-style household behavior.
+  Explore `~/code/playbox` as a reference before choosing a design.
+- Multi-floor buildings with steps/stairs and elevators connecting floors.
+- Weather patterns and day/night cycles; possibly seasons as a later extension.
+- Naturally spawning wildlife, taking inspiration from the ecology in
+  `~/code/mclone`.
+- More art and wildlife characters, aiming for breadth comparable to mclone's
+  Blender-made roster. Use `~/code/mclone` as a reference for both variety and
+  the Blender workflow; new Tilefun art still follows the existing
+  [art review](topics/art-review.md) process.
+
+## Local multiplayer and controllers
+
+Ideas requested by the project owner on 2026-10-03; the play mode and camera
+choices remain open.
+
+- Local multiplayer with split-screen or a shared screen.
+- For shared-screen play, explore automatic following and rubber-banding to
+  keep players together.
+- Controller support suitable for local co-op. Optional gamepad support already
+  exists according to the [README](../README.md); assess and extend it for these
+  play modes rather than treating controller input as wholly new work.
 
 ## Presentation and usability
 
