@@ -8,7 +8,9 @@ reused; static prop depth metadata cached; remaining scene allocation and raster
 scheduling are follow-up work.
 Updated: 2026-10-03.
 
-Owns current performance direction and the limits of the evidence. Detailed
+Owns current performance direction and the limits of the evidence.
+[Rendering architecture](rendering-architecture.md) owns the desired backend
+boundaries and incremental decoupling sequence. Detailed
 captures and execution history live in
 [Tactical 012](../tactical/012-streaming-performance-and-local-server-worker.md).
 The [renderer/allocation audit](../tactical/013-renderer-boundary-and-allocation-audit.md)
