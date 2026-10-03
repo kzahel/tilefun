@@ -2,12 +2,17 @@
 
 Topic: performance
 Status: shared Worker authority and terrain preparation implemented; physical
-Android traversal validated; zoom-out raster scheduling remains follow-up work.
+Android traversal validated; renderer/allocation audit complete; grass cache
+identity/lifetime fixed; frame allocation and raster scheduling remain follow-up work.
 Updated: 2026-10-03.
 
 Owns current performance direction and the limits of the evidence. Detailed
 captures and execution history live in
 [Tactical 012](../tactical/012-streaming-performance-and-local-server-worker.md).
+The [renderer/allocation audit](../tactical/013-renderer-boundary-and-allocation-audit.md)
+owns the 2026-10-03 walking-hitch investigation, concrete allocation sites and
+proposed renderer boundary. Its implementation record tracks completed slices;
+the remaining recommendations are not implemented fixes.
 
 ## Current state and contracts
 
@@ -24,6 +29,9 @@ captures and execution history live in
   for edited-room behavior.
 - Keep benchmark overrides separate from production policies. WASM is conditional
   on measured compute need or an explicit native/browser sharing requirement.
+- Grass placements are weakly cached by chunk object, revision and coordinates.
+  The cache cannot retain discarded chunks or reuse another world's equal-revision
+  chunk. Generated placement, animation and ordering stay unchanged.
 
 ## Evidence and validation
 
@@ -51,6 +59,22 @@ ordinary/edited-room movement, but steady-state captures do not exclude initial
 upload costs or device-specific problems.
 
 ## Next work
+
+The grass-fix follow-up captured a 60-second Pixel 7a traversal with no visible
+terrain gaps and two missed frames: one overlapping a 33 ms main-thread GC,
+another overlapping about 20 ms of GPU-process work with no main-thread GC.
+[Tactical 013](../tactical/013-renderer-boundary-and-allocation-audit.md#implementation-record-grass-cache-identity-and-lifetime)
+owns the evidence and tracing/workload limits. Both allocation reduction and
+raster scheduling remain justified; this is not a universal hitch diagnosis.
+
+Reduce per-frame allocation in scene collection and terrain scheduling, starting
+with reusable grass position/item storage. The grass cache lifetime fix is
+complete; a synthetic post-GC probe verifies that discarded chunk placements no
+longer accumulate. Phone traversal still has occasional missed frames, so this
+does not resolve the reported hitch. Move canvas resources out of world chunks and scene
+items into backend-owned caches so later renderer replacement does not require
+moving gameplay. The audit records a reproducible stale-grass case and desktop
+GC events; attribution of the user's intermittent phone hitch remains open.
 
 Bound offscreen preparation work while keeping missing visible terrain first.
 Validate movement, wide viewports, edits and cache catch-up before choosing a

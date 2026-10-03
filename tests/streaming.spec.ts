@@ -42,7 +42,12 @@ for (const version of ["regional-v4", "regional-v10"] as const) {
         const visited = new Set<string>();
         for (let i = 0; i < 210; i++) {
           await new Promise(requestAnimationFrame);
+          // PlayScene restores the simulation camera after rendering. Inspect
+          // the same interpolated view that prepared the last frame's caches;
+          // its halo can be a column wider at a chunk boundary.
+          g.camera.applyInterpolation(g.time.alpha);
           const range = g.camera.getVisibleChunkRange();
+          g.camera.restoreActual();
           for (let cy = range.minCy; cy <= range.maxCy; cy++)
             for (let cx = range.minCx; cx <= range.maxCx; cx++) {
               visited.add(`${cx},${cy}`);
@@ -53,7 +58,9 @@ for (const version of ["regional-v4", "regional-v10"] as const) {
           const d = g.tileRenderer.getDiagnostics();
           const haloArea = (range.maxCx - range.minCx + 3) * (range.maxCy - range.minCy + 3);
           if (d.resident > haloArea || d.rowsLastFrame > 128)
-            throw Error("Preparation exceeded its work/residency bound");
+            throw Error(
+              `Preparation exceeded its work/residency bound: ${JSON.stringify({ range, haloArea, ...d })}`,
+            );
           maxSurfaces = Math.max(maxSurfaces, d.surfaceBytes);
         }
         return {

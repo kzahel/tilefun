@@ -1,4 +1,16 @@
-# Protocol Instrumentation
+# Diagnostic probes
+
+## Grass cache retention
+
+Run `node scripts/instrumentation/grass-cache-retention.mjs` from the repository
+root. It uses isolated bundled Chromium and a minimal Vite page, generates two
+batches of 1,000 discarded chunks, and reports heap usage after explicit GC.
+The blade counts check equal work. This diagnoses retained cache memory; it is
+not a gameplay allocation-rate, phone, GPU-memory or frame-pacing benchmark.
+Small residual heap changes include browser/JIT bookkeeping. See
+[Tactical 013](../../docs/tactical/013-renderer-boundary-and-allocation-audit.md).
+
+## Protocol instrumentation
 
 Temporary scripts for auditing which messages still go through JSON fallback (`0xFF`) and roughly how large they are.
 

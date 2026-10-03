@@ -1,0 +1,1307 @@
+{
+  "schema": "tilefun-grass-cache-validation/v1",
+  "scope": "Cache identity/lifetime fix. Phone smoke pair is not a timing gate or matched performance claim. Long capture has tracing overhead; event overlap does not prove every reported hitch has the same cause.",
+  "retention": {
+    "before": {
+      "browser": "153.0.8010.12",
+      "chunksPerPass": 1000,
+      "blades": 179761,
+      "moreBlades": 178903,
+      "heapBefore": 787708,
+      "heapAfterFirst": 11904088,
+      "heapAfterSecond": 22896920,
+      "firstRetainedBytes": 11116380,
+      "secondRetainedBytes": 10992832
+    },
+    "after": {
+      "browser": "153.0.8010.12",
+      "chunksPerPass": 1000,
+      "blades": 179761,
+      "moreBlades": 178903,
+      "heapBefore": 689404,
+      "heapAfterFirst": 701752,
+      "heapAfterSecond": 704416,
+      "firstRetainedBytes": 12348,
+      "secondRetainedBytes": 2664
+    }
+  },
+  "phone": [
+    {
+      "revision": "19e332e8c559fd5f4bd996a4b6c3727d9c79c1df",
+      "dirty": true,
+      "date": "2026-10-03T07:52:32.401Z",
+      "platform": "physical-device",
+      "device": "Pixel 7a / Android 17",
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "instrumentation": true,
+      "label": "before",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "arrival": {
+            "x": 300,
+            "y": 519,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v4",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "samples": [
+            {
+              "name": "cold",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2,
+                "p95": 3,
+                "p99": 3.2999999821186066,
+                "max": 3.300000011920929
+              },
+              "framesOver25Ms": 2,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 21,
+              "displacement": {
+                "x": -2272,
+                "y": 14128
+              },
+              "visitedChunks": 6,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "standing",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.700000000000728,
+                "p99": 16.80000000000109,
+                "max": 16.80000000000109
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 0.5999999940395355,
+                "p95": 0.800000011920929,
+                "p99": 0.9000000059604645,
+                "max": 0.9000000059604645
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 33.29999999999927
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 0.800000011920929,
+                "p95": 2.800000011920929,
+                "p99": 4.800000011920929,
+                "max": 5.4000000059604645
+              },
+              "framesOver25Ms": 1,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -223.2978515625,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.799999999999272,
+                "max": 33.29999999999927
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.399999976158142,
+                "p95": 3.100000023841858,
+                "p99": 4.0999999940395355,
+                "max": 4.399999976158142
+              },
+              "framesOver25Ms": 1,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -741.0546875,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "entities": 3,
+              "props": 6
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 33.39999999999782,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.5,
+                "p95": 3.4000000059604645,
+                "p99": 3.7999999821186066,
+                "max": 4.9000000059604645
+              },
+              "framesOver25Ms": 6,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 620.8742165522463,
+                "y": 332.61080378914994
+              },
+              "visitedChunks": 12,
+              "entities": 3,
+              "props": 6
+            },
+            {
+              "name": "zoom-out",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.29999999999927
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 2.5999999940395355,
+                "p95": 3.9000000059604645,
+                "p99": 4.300000011920929,
+                "max": 4.600000023841858
+              },
+              "framesOver25Ms": 2,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -7.325848855543882e-6,
+                "y": 0.00020533883071038872
+              },
+              "visitedChunks": 6,
+              "entities": 4,
+              "props": 6
+            }
+          ]
+        },
+        {
+          "version": "regional-v10",
+          "arrival": {
+            "x": 314,
+            "y": 509,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v10",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "samples": [
+            {
+              "name": "cold",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 33.30000000000109,
+                "p99": 33.399999999999636,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.7000000178813934,
+                "p95": 4.300000011920929,
+                "p99": 4.699999988079071,
+                "max": 4.9000000059604645
+              },
+              "framesOver25Ms": 13,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 3,
+              "incompleteCacheFrames": 18,
+              "displacement": {
+                "x": -864,
+                "y": -17712
+              },
+              "visitedChunks": 6,
+              "entities": 11,
+              "props": 24
+            },
+            {
+              "name": "standing",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000109,
+                "max": 16.899999999999636
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.100000023841858,
+                "p95": 2.699999988079071,
+                "p99": 3.4000000059604645,
+                "max": 3.4000000059604645
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 2,
+              "entities": 11,
+              "props": 24
+            },
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.39999999999782,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 2,
+                "p95": 3.4000000059604645,
+                "p99": 4.100000023841858,
+                "max": 4.5999999940395355
+              },
+              "framesOver25Ms": 2,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -224.52490234375,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "entities": 13,
+              "props": 27
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 33.20000000000073,
+                "max": 33.29999999999927
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.4000000059604645,
+                "p95": 3.199999988079071,
+                "p99": 3.7000000178813934,
+                "max": 3.9000000059604645
+              },
+              "framesOver25Ms": 3,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -745.962646484375,
+                "y": 0
+              },
+              "visitedChunks": 8,
+              "entities": 5,
+              "props": 8
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.400000000001455,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 0.7999999821186066,
+                "p95": 2.5999999940395355,
+                "p99": 2.9000000059604645,
+                "max": 3.2000000178813934
+              },
+              "framesOver25Ms": 9,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 638.7421875000009,
+                "y": 353.7705078125
+              },
+              "visitedChunks": 10,
+              "entities": 11,
+              "props": 17
+            },
+            {
+              "name": "zoom-out",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 33.400000000001455,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 1.800000011920929,
+                "p95": 3.2999999821186066,
+                "p99": 3.699999988079071,
+                "max": 4.4000000059604645
+              },
+              "framesOver25Ms": 5,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "entities": 11,
+              "props": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "revision": "19e332e8c559fd5f4bd996a4b6c3727d9c79c1df",
+      "dirty": true,
+      "date": "2026-10-03T07:55:38.202Z",
+      "platform": "physical-device",
+      "device": "Pixel 7a / Android 17",
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "instrumentation": true,
+      "label": "after",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "arrival": {
+            "x": 300,
+            "y": 519,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v4",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "samples": [
+            {
+              "name": "cold",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.80000000000109,
+                "p99": 33.399999999999636,
+                "max": 33.399999999999636
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.199999988079071,
+                "p95": 3,
+                "p99": 3.199999988079071,
+                "max": 3.2999999821186066
+              },
+              "framesOver25Ms": 3,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 2,
+              "incompleteCacheFrames": 26,
+              "displacement": {
+                "x": -2064,
+                "y": 2848
+              },
+              "visitedChunks": 8,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "standing",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.799999999999272,
+                "p99": 16.799999999999272,
+                "max": 16.80000000000109
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 0.699999988079071,
+                "p95": 0.9000000059604645,
+                "p99": 1,
+                "max": 1.2999999821186066
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 49.900000000001455
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 0.9000000059604645,
+                "p95": 2.5999999940395355,
+                "p99": 4,
+                "max": 4.5
+              },
+              "framesOver25Ms": 1,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -224.52490234375,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 33.29999999999927
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.2000000178813934,
+                "p95": 3.199999988079071,
+                "p99": 3.7000000178813934,
+                "max": 5
+              },
+              "framesOver25Ms": 1,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -741.054931640625,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "entities": 3,
+              "props": 6
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.4000000059604645,
+                "p95": 3.2000000178813934,
+                "p99": 3.7000000178813934,
+                "max": 4.5999999940395355
+              },
+              "framesOver25Ms": 5,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 618.9928688959963,
+                "y": 331.60299128914994
+              },
+              "visitedChunks": 12,
+              "entities": 3,
+              "props": 6
+            },
+            {
+              "name": "zoom-out",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 2.5999999940395355,
+                "p95": 3.699999988079071,
+                "p99": 4.4000000059604645,
+                "max": 4.5
+              },
+              "framesOver25Ms": 3,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "entities": 4,
+              "props": 6
+            }
+          ]
+        },
+        {
+          "version": "regional-v10",
+          "arrival": {
+            "x": 314,
+            "y": 509,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v10",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "samples": [
+            {
+              "name": "cold",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 33.30000000000109,
+                "p99": 33.399999999999636,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.9000000059604645,
+                "p95": 4.200000017881393,
+                "p99": 4.799999982118607,
+                "max": 4.800000011920929
+              },
+              "framesOver25Ms": 14,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 15,
+              "displacement": {
+                "x": 11344,
+                "y": 15872
+              },
+              "visitedChunks": 4,
+              "entities": 11,
+              "props": 24
+            },
+            {
+              "name": "standing",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.80000000000109,
+                "p99": 16.80000000000109,
+                "max": 16.80000000000109
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.5,
+                "p95": 3.199999988079071,
+                "p99": 3.5,
+                "max": 4.0999999940395355
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 2,
+              "entities": 11,
+              "props": 24
+            },
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 33.30000000000291
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 1.7999999821186066,
+                "p95": 3,
+                "p99": 4.4000000059604645,
+                "max": 4.5
+              },
+              "framesOver25Ms": 1,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -223.2978515625,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "entities": 13,
+              "props": 27
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.300000011920929,
+                "p95": 3.2000000178813934,
+                "p99": 3.699999988079071,
+                "max": 3.9000000059604645
+              },
+              "framesOver25Ms": 4,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -748.416259765625,
+                "y": 0
+              },
+              "visitedChunks": 10,
+              "entities": 5,
+              "props": 8
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.799999999999272,
+                "p99": 33.29999999999927,
+                "max": 33.400000000001455
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 0.800000011920929,
+                "p95": 2.899999976158142,
+                "p99": 3.100000023841858,
+                "max": 3.4000000059604645
+              },
+              "framesOver25Ms": 9,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 465.0458984375009,
+                "y": 562.6484375
+              },
+              "visitedChunks": 10,
+              "entities": 5,
+              "props": 17
+            },
+            {
+              "name": "zoom-out",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.80000000000291,
+                "p99": 33.400000000001455,
+                "max": 33.5
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 2.699999988079071,
+                "p95": 4,
+                "p99": 4.9000000059604645,
+                "max": 5.0999999940395355
+              },
+              "framesOver25Ms": 8,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 8,
+              "entities": 11,
+              "props": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "revision": "19e332e8c559fd5f4bd996a4b6c3727d9c79c1df",
+      "dirty": true,
+      "date": "2026-10-03T07:58:11.200Z",
+      "platform": "physical-device",
+      "device": "Pixel 7a / Android 17",
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "instrumentation": true,
+      "label": "after-long-trace",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "arrival": {
+            "x": 300,
+            "y": 519,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v4",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "samples": [
+            {
+              "name": "cold",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.700000000000728,
+                "p99": 16.799999999999272,
+                "max": 16.80000000000109
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 2.2999999821186066,
+                "p95": 3.0999999940395355,
+                "p99": 4.0999999940395355,
+                "max": 4.299999982118607
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 3,
+              "incompleteCacheFrames": 34,
+              "displacement": {
+                "x": 10688,
+                "y": -1200
+              },
+              "visitedChunks": 8,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "standing",
+              "frames": {
+                "count": 120,
+                "p50": 16.69999999999891,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000109,
+                "max": 17.100000000000364
+              },
+              "renderMs": {
+                "count": 121,
+                "p50": 0.699999988079071,
+                "p95": 1,
+                "p99": 1.199999988079071,
+                "max": 1.2000000178813934
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 4,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "walk",
+              "frames": {
+                "count": 180,
+                "p50": 16.700000000000728,
+                "p95": 16.799999999999272,
+                "p99": 16.80000000000291,
+                "max": 16.899999999997817
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 0.800000011920929,
+                "p95": 2.5,
+                "p99": 3.9000000059604645,
+                "max": 3.9000000059604645
+              },
+              "framesOver25Ms": 0,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -222.07080078125,
+                "y": 0
+              },
+              "visitedChunks": 6,
+              "entities": 6,
+              "props": 15
+            },
+            {
+              "name": "sprint",
+              "frames": {
+                "count": 3600,
+                "p50": 16.69999999999709,
+                "p95": 16.70000000001164,
+                "p99": 16.80000000000291,
+                "max": 33.30000000000291
+              },
+              "renderMs": {
+                "count": 3601,
+                "p50": 1,
+                "p95": 3.4000000059604645,
+                "p99": 5,
+                "max": 8
+              },
+              "framesOver25Ms": 2,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": -8841.1279296875,
+                "y": 0
+              },
+              "visitedChunks": 72,
+              "entities": 1,
+              "props": 0
+            },
+            {
+              "name": "reverse",
+              "frames": {
+                "count": 300,
+                "p50": 16.69999999999709,
+                "p95": 16.80000000000291,
+                "p99": 33.29999999998836,
+                "max": 33.30000000000291
+              },
+              "renderMs": {
+                "count": 301,
+                "p50": 1.5,
+                "p95": 3.0999999940395355,
+                "p99": 3.7999999821186066,
+                "max": 5.4000000059604645
+              },
+              "framesOver25Ms": 4,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 650.796875,
+                "y": 0
+              },
+              "visitedChunks": 12,
+              "entities": 1,
+              "props": 0
+            },
+            {
+              "name": "zoom-out",
+              "frames": {
+                "count": 180,
+                "p50": 16.69999999999709,
+                "p95": 16.80000000000291,
+                "p99": 33.30000000000291,
+                "max": 33.40000000000873
+              },
+              "renderMs": {
+                "count": 181,
+                "p50": 3.899999976158142,
+                "p95": 5.4000000059604645,
+                "p99": 6.300000011920929,
+                "max": 6.4000000059604645
+              },
+              "framesOver25Ms": 3,
+              "framesOver50Ms": 0,
+              "missingDataFrames": 0,
+              "incompleteCacheFrames": 0,
+              "displacement": {
+                "x": 0,
+                "y": 0
+              },
+              "visitedChunks": 9,
+              "entities": 1,
+              "props": 0
+            }
+          ]
+        }
+      ],
+      "trace": {
+        "schema": "tilefun-streaming-trace/v1",
+        "durationMs": 60035.121,
+        "frameIntervals": {
+          "count": 3600,
+          "totalMs": 60023.2,
+          "p50Ms": 16.7,
+          "p95Ms": 16.7,
+          "maxMs": 33.3
+        },
+        "mainThreadTasks": {
+          "count": 34387,
+          "totalMs": 18585.936,
+          "p50Ms": 0.035,
+          "p95Ms": 4.433,
+          "maxMs": 33.283
+        },
+        "mainThreadGC": {
+          "count": 24,
+          "totalMs": 131.488,
+          "p50Ms": 3.352,
+          "p95Ms": 12.835,
+          "maxMs": 32.989
+        },
+        "gpuProcessRequests": {
+          "count": 4666,
+          "totalMs": 20238.137,
+          "p50Ms": 3.776,
+          "p95Ms": 14.17,
+          "maxMs": 29.759
+        },
+        "gpuProcessRequestCpu": {
+          "count": 4666,
+          "totalMs": 19652.647,
+          "p50Ms": 3.686,
+          "p95Ms": 13.691,
+          "maxMs": 29.029
+        },
+        "rasterBatchCount": 17719,
+        "slowFrames": [
+          {
+            "index": 287,
+            "startMs": 4792.131,
+            "intervalMs": 33.3,
+            "overlappingMainTaskMaxMs": 6.832,
+            "overlappingMainGcMaxMs": 0,
+            "overlappingGpuRequestMaxMs": 20.061,
+            "overlappingGpuRequestCpuMaxMs": 19.548
+          },
+          {
+            "index": 2210,
+            "startMs": 36853.531,
+            "intervalMs": 33.3,
+            "overlappingMainTaskMaxMs": 33.283,
+            "overlappingMainGcMaxMs": 32.989,
+            "overlappingGpuRequestMaxMs": 3.03,
+            "overlappingGpuRequestCpuMaxMs": 2.95
+          }
+        ],
+        "rasterBatchesPerSecond": [
+          {
+            "second": 0,
+            "count": 190
+          },
+          {
+            "second": 1,
+            "count": 620
+          },
+          {
+            "second": 2,
+            "count": 242
+          },
+          {
+            "second": 3,
+            "count": 634
+          },
+          {
+            "second": 4,
+            "count": 455
+          },
+          {
+            "second": 5,
+            "count": 60
+          },
+          {
+            "second": 6,
+            "count": 456
+          },
+          {
+            "second": 7,
+            "count": 60
+          },
+          {
+            "second": 8,
+            "count": 456
+          },
+          {
+            "second": 9,
+            "count": 172
+          },
+          {
+            "second": 10,
+            "count": 344
+          },
+          {
+            "second": 11,
+            "count": 456
+          },
+          {
+            "second": 12,
+            "count": 60
+          },
+          {
+            "second": 13,
+            "count": 456
+          },
+          {
+            "second": 14,
+            "count": 60
+          },
+          {
+            "second": 15,
+            "count": 456
+          },
+          {
+            "second": 16,
+            "count": 173
+          },
+          {
+            "second": 17,
+            "count": 343
+          },
+          {
+            "second": 18,
+            "count": 456
+          },
+          {
+            "second": 19,
+            "count": 60
+          },
+          {
+            "second": 20,
+            "count": 456
+          },
+          {
+            "second": 21,
+            "count": 62
+          },
+          {
+            "second": 22,
+            "count": 454
+          },
+          {
+            "second": 23,
+            "count": 338
+          },
+          {
+            "second": 24,
+            "count": 178
+          },
+          {
+            "second": 25,
+            "count": 456
+          },
+          {
+            "second": 26,
+            "count": 60
+          },
+          {
+            "second": 27,
+            "count": 456
+          },
+          {
+            "second": 28,
+            "count": 62
+          },
+          {
+            "second": 29,
+            "count": 454
+          },
+          {
+            "second": 30,
+            "count": 337
+          },
+          {
+            "second": 31,
+            "count": 179
+          },
+          {
+            "second": 32,
+            "count": 456
+          },
+          {
+            "second": 33,
+            "count": 60
+          },
+          {
+            "second": 34,
+            "count": 456
+          },
+          {
+            "second": 35,
+            "count": 63
+          },
+          {
+            "second": 36,
+            "count": 453
+          },
+          {
+            "second": 37,
+            "count": 456
+          },
+          {
+            "second": 38,
+            "count": 60
+          },
+          {
+            "second": 39,
+            "count": 456
+          },
+          {
+            "second": 40,
+            "count": 60
+          },
+          {
+            "second": 41,
+            "count": 456
+          },
+          {
+            "second": 42,
+            "count": 193
+          },
+          {
+            "second": 43,
+            "count": 323
+          },
+          {
+            "second": 44,
+            "count": 456
+          },
+          {
+            "second": 45,
+            "count": 60
+          },
+          {
+            "second": 46,
+            "count": 456
+          },
+          {
+            "second": 47,
+            "count": 60
+          },
+          {
+            "second": 48,
+            "count": 456
+          },
+          {
+            "second": 49,
+            "count": 341
+          },
+          {
+            "second": 50,
+            "count": 175
+          },
+          {
+            "second": 51,
+            "count": 456
+          },
+          {
+            "second": 52,
+            "count": 60
+          },
+          {
+            "second": 53,
+            "count": 456
+          },
+          {
+            "second": 54,
+            "count": 60
+          },
+          {
+            "second": 55,
+            "count": 456
+          },
+          {
+            "second": 56,
+            "count": 450
+          },
+          {
+            "second": 57,
+            "count": 66
+          },
+          {
+            "second": 58,
+            "count": 456
+          },
+          {
+            "second": 59,
+            "count": 60
+          },
+          {
+            "second": 60,
+            "count": 2
+          }
+        ]
+      }
+    }
+  ]
+}

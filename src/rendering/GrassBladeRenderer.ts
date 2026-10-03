@@ -16,6 +16,8 @@ interface BladeInstance {
 }
 
 interface ChunkBladeCache {
+  cx: number;
+  cy: number;
   revision: number;
   blades: BladeInstance[];
 }
@@ -32,7 +34,10 @@ export const GRASS_ANCHOR_X = 4;
 /** Anchor Y per variant: [big-A, big-B, small-A, small-B]. Exported for Canvas2D renderer. */
 export const GRASS_ANCHOR_Y = [7, 7, 6, 6];
 
-const bladeCache = new Map<string, ChunkBladeCache>();
+// Derived placements belong to a chunk's lifetime, not to a global coordinate.
+// Weak keys release unloaded chunks' blades and isolate worlds/replacements
+// whose coordinates and revisions happen to match. No GPU resources live here.
+const bladeCache = new WeakMap<Chunk, ChunkBladeCache>();
 
 function spatialHash(x: number, y: number): number {
   return ((x * 73856093) ^ (y * 19349663)) >>> 0;
@@ -87,13 +92,12 @@ function buildBladesForChunk(chunk: Chunk, cx: number, cy: number): BladeInstanc
 }
 
 function getBlades(chunk: Chunk, cx: number, cy: number): BladeInstance[] {
-  const key = `${cx},${cy}`;
-  const cached = bladeCache.get(key);
-  if (cached && cached.revision === chunk.revision) {
+  const cached = bladeCache.get(chunk);
+  if (cached && cached.revision === chunk.revision && cached.cx === cx && cached.cy === cy) {
     return cached.blades;
   }
   const blades = buildBladesForChunk(chunk, cx, cy);
-  bladeCache.set(key, { revision: chunk.revision, blades });
+  bladeCache.set(chunk, { cx, cy, revision: chunk.revision, blades });
   return blades;
 }
 

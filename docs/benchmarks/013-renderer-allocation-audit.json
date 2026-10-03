@@ -1,0 +1,340 @@
+{
+  "schema": "tilefun-renderer-allocation-audit/v1",
+  "scope": "Desktop diagnostic evidence, not phone reproduction or before/after optimization. Tracing and the runner allocate even with application metrics disabled. Raw traces remain local.",
+  "runs": [
+    {
+      "revision": "d91ded6c02faae1d755028d12edeea6e0cc17f1a",
+      "dirty": true,
+      "date": "2026-10-03T07:13:56.027Z",
+      "platform": "darwin 25.6.0 arm64",
+      "cpu": "Apple M4 Pro",
+      "headed": true,
+      "input": "keyboard",
+      "traceStage": "sprint",
+      "traceFrames": 1200,
+      "instrumentation": true,
+      "cpuRate": 1,
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "browser": "153.0.8010.12",
+      "fixtures": [
+        {
+          "version": "regional-v4",
+          "arrival": {
+            "x": 300,
+            "y": 519,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v4",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "sprint": {
+            "renderedFrames": 1201,
+            "frames": {
+              "count": 1200,
+              "p50": 8.300000000000182,
+              "p95": 10.199999999998909,
+              "p99": 10.300000000001091,
+              "max": 10.400000000001455
+            },
+            "renderMs": {
+              "count": 1201,
+              "p50": 0.2999997138977051,
+              "p95": 0.5,
+              "p99": 2.0999999046325684,
+              "max": 2.8999996185302734
+            },
+            "updateMs": {
+              "count": 600,
+              "p50": 0.19999980926513672,
+              "p95": 0.2999997138977051,
+              "p99": 0.39999961853027344,
+              "max": 0.5999999046325684
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "visitedChunks": 27,
+            "displacement": {
+              "x": -1472.2941560312502,
+              "y": 0
+            },
+            "entities": 1,
+            "props": 0,
+            "cache": {
+              "resident": 25,
+              "building": 0,
+              "pending": 0,
+              "oldestMs": 0,
+              "rowsLastFrame": 0,
+              "surfaceBytes": 6553600
+            }
+          },
+          "trace": {
+            "schema": "tilefun-streaming-trace/v1",
+            "durationMs": 10008.037,
+            "frameIntervals": {
+              "count": 1200,
+              "totalMs": 10001.1,
+              "p50Ms": 8.3,
+              "p95Ms": 10.2,
+              "maxMs": 10.4
+            },
+            "mainThreadTasks": {
+              "count": 24234,
+              "totalMs": 1042.867,
+              "p50Ms": 0.002,
+              "p95Ms": 0.328,
+              "maxMs": 4.095
+            },
+            "mainThreadGC": {
+              "count": 6,
+              "totalMs": 12.443,
+              "p50Ms": 2.264,
+              "p95Ms": 3.359,
+              "maxMs": 3.359
+            },
+            "gpuProcessRequests": {
+              "count": 1873,
+              "totalMs": 661.215,
+              "p50Ms": 0.365,
+              "p95Ms": 0.558,
+              "maxMs": 5.893
+            },
+            "gpuProcessRequestCpu": {
+              "count": 1863,
+              "totalMs": 609.519,
+              "p50Ms": 0.343,
+              "p95Ms": 0.522,
+              "maxMs": 7.452
+            },
+            "rasterBatchCount": 6623,
+            "slowFrames": []
+          }
+        },
+        {
+          "version": "regional-v10",
+          "arrival": {
+            "x": 314,
+            "y": 509,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v10",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "sprint": {
+            "renderedFrames": 1201,
+            "frames": {
+              "count": 1200,
+              "p50": 8.299999999999272,
+              "p95": 10,
+              "p99": 10.300000000001091,
+              "max": 17.399999999999636
+            },
+            "renderMs": {
+              "count": 1201,
+              "p50": 0.40000009536743164,
+              "p95": 0.6000003814697266,
+              "p99": 2.3000001907348633,
+              "max": 2.6999998092651367
+            },
+            "updateMs": {
+              "count": 600,
+              "p50": 0.19999980926513672,
+              "p95": 0.3000001907348633,
+              "p99": 0.40000009536743164,
+              "max": 0.5
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "visitedChunks": 18,
+            "displacement": {
+              "x": -1394.198983328125,
+              "y": 0
+            },
+            "entities": 1,
+            "props": 5,
+            "cache": {
+              "resident": 20,
+              "building": 0,
+              "pending": 0,
+              "oldestMs": 0,
+              "rowsLastFrame": 0,
+              "surfaceBytes": 5242880
+            }
+          },
+          "trace": {
+            "schema": "tilefun-streaming-trace/v1",
+            "durationMs": 10014.522,
+            "frameIntervals": {
+              "count": 1200,
+              "totalMs": 10006.9,
+              "p50Ms": 8.3,
+              "p95Ms": 10,
+              "maxMs": 17.4
+            },
+            "mainThreadTasks": {
+              "count": 27284,
+              "totalMs": 1208.649,
+              "p50Ms": 0.001,
+              "p95Ms": 0.043,
+              "maxMs": 20.249
+            },
+            "mainThreadGC": {
+              "count": 8,
+              "totalMs": 28.466,
+              "p50Ms": 1.936,
+              "p95Ms": 20.092,
+              "maxMs": 20.092
+            },
+            "gpuProcessRequests": {
+              "count": 3655,
+              "totalMs": 816.546,
+              "p50Ms": 0.031,
+              "p95Ms": 0.629,
+              "maxMs": 5.129
+            },
+            "gpuProcessRequestCpu": {
+              "count": 3630,
+              "totalMs": 748.636,
+              "p50Ms": 0.032,
+              "p95Ms": 0.581,
+              "maxMs": 4.194
+            },
+            "rasterBatchCount": 10922,
+            "slowFrames": []
+          }
+        }
+      ]
+    },
+    {
+      "revision": "50f5255a7650fa422f684dcd234c8a6ea8d61099",
+      "dirty": true,
+      "date": "2026-10-03T07:16:02.431Z",
+      "platform": "darwin 25.6.0 arm64",
+      "cpu": "Apple M4 Pro",
+      "headed": true,
+      "input": "keyboard",
+      "traceStage": "sprint",
+      "traceFrames": 3600,
+      "instrumentation": false,
+      "cpuRate": 1,
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "browser": "153.0.8010.12",
+      "fixtures": [
+        {
+          "version": "regional-v10",
+          "arrival": {
+            "x": 314,
+            "y": 509,
+            "generation": {
+              "type": "regional",
+              "version": "regional-v10",
+              "seed": 2026,
+              "preset": "temperate-v1"
+            }
+          },
+          "errors": [],
+          "sprint": {
+            "renderedFrames": 3601,
+            "frames": {
+              "count": 3600,
+              "p50": 8.300000000000182,
+              "p95": 10.100000000002183,
+              "p99": 10.30000000000291,
+              "max": 10.5
+            },
+            "renderMs": {
+              "count": 3601,
+              "p50": 0.3000001907348633,
+              "p95": 0.6999998092651367,
+              "p99": 2,
+              "max": 3.0999999046325684
+            },
+            "updateMs": {
+              "count": 1801,
+              "p50": 0.10000038146972656,
+              "p95": 0.3000001907348633,
+              "p99": 0.40000009536743164,
+              "max": 0.6999998092651367
+            },
+            "framesOver25Ms": 0,
+            "framesOver50Ms": 0,
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "visitedChunks": 38,
+            "displacement": {
+              "x": -3956.2045985625,
+              "y": 0
+            },
+            "entities": 1,
+            "props": 0,
+            "cache": {
+              "resident": 20,
+              "building": 0,
+              "pending": 0,
+              "oldestMs": 0,
+              "rowsLastFrame": 0,
+              "surfaceBytes": 5242880
+            }
+          },
+          "trace": {
+            "schema": "tilefun-streaming-trace/v1",
+            "durationMs": 30008.878,
+            "frameIntervals": {
+              "count": 3600,
+              "totalMs": 30000.2,
+              "p50Ms": 8.3,
+              "p95Ms": 10.1,
+              "maxMs": 10.5
+            },
+            "mainThreadTasks": {
+              "count": 78362,
+              "totalMs": 3930.763,
+              "p50Ms": 0.002,
+              "p95Ms": 0.069,
+              "maxMs": 5.561
+            },
+            "mainThreadGC": {
+              "count": 21,
+              "totalMs": 41.952,
+              "p50Ms": 1.904,
+              "p95Ms": 4.1,
+              "maxMs": 5.456
+            },
+            "gpuProcessRequests": {
+              "count": 5304,
+              "totalMs": 2090.288,
+              "p50Ms": 0.38,
+              "p95Ms": 0.743,
+              "maxMs": 5.33
+            },
+            "gpuProcessRequestCpu": {
+              "count": 5278,
+              "totalMs": 1947.703,
+              "p50Ms": 0.362,
+              "p95Ms": 0.705,
+              "maxMs": 5.511
+            },
+            "rasterBatchCount": 19362,
+            "slowFrames": []
+          }
+        }
+      ]
+    }
+  ]
+}

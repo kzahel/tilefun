@@ -24,6 +24,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [010 Outdoor assets](010-outdoor-asset-catalog-and-scene-review.md) | Catalog/metadata/scene feedback delivered for review; [art review topic](../topics/art-review.md) |
 | [011 Patterns and rooms](011-shared-pattern-brushes-and-room-drawing.md) | Shared drawing and saved gameplay room edits delivered; review/import/promotion remain |
 | [012 Streaming and Worker](012-streaming-performance-and-local-server-worker.md) | Delivered with desktop/Android evidence; raster scheduling follow-up in [performance topic](../topics/performance.md) |
+| [013 Renderer and allocation audit](013-renderer-boundary-and-allocation-audit.md) | Audit and grass cache lifetime fix complete; allocation reduction and renderer-boundary slices next; [performance topic](../topics/performance.md) |
 | [014 WebRTC delivery validation](014-webrtc-delivery-validation.md) | Audit confirms lost-state and stale-world defects; [networking topic](../topics/multiplayer-networking.md) owns recovery work |
 
 ## Earlier plans
