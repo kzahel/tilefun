@@ -7,7 +7,7 @@ export type LocalHostPacket = { buffer?: ArrayBuffer } & (
   | { type: "start" }
   | { type: "visibility"; hidden: boolean }
   | { type: "flush" | "shutdown" | "diagnostics" | "reset-diagnostics"; id: number }
-  | { type: "result"; id: number; diagnostics?: LocalHostDiagnostics }
+  | { type: "result"; id: number; error?: string; diagnostics?: LocalHostDiagnostics }
 );
 export interface LocalHostDiagnostics {
   timings: PerformanceSnapshot;

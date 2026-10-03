@@ -45,13 +45,20 @@ export async function streamingConformance(create: () => PersistenceStore, dista
         births++;
       },
     );
-    const visit = async (cx: number) => {
+    const visit = async (cx: number, secondCx?: number) => {
       streaming.interest.set("fixture", [
         { range: around(cx, 0, 0), activity: 2, reason: "player" },
       ]);
+      if (secondCx === undefined) streaming.interest.release("second-player");
+      else
+        streaming.interest.set("second-player", [
+          { range: around(secondCx, 0, 0), activity: 2, reason: "player" },
+        ]);
       streaming.residency.reconcile(streaming.interest.demand(0));
       await streaming.residency.settle();
       requireState(streaming.residency.ready(`${cx},0`), "destination ready");
+      if (secondCx !== undefined)
+        requireState(streaming.residency.ready(`${secondCx},0`), "second player destination ready");
     };
     return {
       saves,
@@ -85,6 +92,17 @@ export async function streamingConformance(create: () => PersistenceStore, dista
           f.records.features.size === 1,
         "fixed-interest plateau",
       );
+    }
+    for (let step = 0; step < distance; step++) {
+      await f.visit(distance + step, -1 - step);
+      requireState(
+        f.entities.entities.length === 2 &&
+          f.world.chunks.loadedCount === 2 &&
+          f.records.features.size === 2 &&
+          f.streaming.residency.holders.size === 2,
+        "two distant moving players retain only their combined demand",
+      );
+      requireState(f.saves.store.health.pendingRecords === 0, "travel saves make progress");
     }
     await f.visit(0);
     const parent = f.entities.entities[0];
@@ -147,6 +165,8 @@ export async function streamingConformance(create: () => PersistenceStore, dista
   }
   return {
     chunksVisited: distance,
+    distantPlayerSteps: distance,
+    totalDistinctChunks: distance * 3,
     maxActors,
     maxChunks,
     maxFeatures,

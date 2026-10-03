@@ -223,7 +223,7 @@ describe("generated road traffic", () => {
 
 it("validates an entire saved traffic batch before publishing any vehicle", () => {
   const f = fixture();
-  const record = f.traffic.save()[0]!;
+  const record = required(f.traffic.save()[0]);
   const count = f.traffic.states.size;
   expect(() =>
     f.traffic.restore([

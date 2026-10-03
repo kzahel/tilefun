@@ -138,6 +138,8 @@ export class PersistenceCoordinator {
     for (const mutation of [...this.inFlight.values(), ...this.pending.values()]) {
       const ref = "put" in mutation ? mutation.put : mutation.delete;
       if (ref.collection === query.collection) observer.mutations.set(ref.key, mutation);
+      if (observer.mutations.size > PERSISTENCE_BUDGET.queryChanges)
+        throw new SavePressureError("Spatial query changed too much; retry after saving.");
     }
     this.queries.add(observer);
     const records = new Map<string, StoredRecord>();

@@ -337,6 +337,7 @@ export class EntityManager {
 
     // --- Phase 4: Resolve parented entity positions ---
     this.resolveParentedPositions(players, active);
+    for (const entity of active) this.spatialHash.update(entity);
 
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
@@ -354,26 +355,14 @@ export class EntityManager {
     players: readonly Entity[],
     active: readonly Entity[] = this.entities,
   ): void {
-    // Build id→entity map for O(1) parent lookup (includes players)
-    const byId = new Map<number, Entity>();
-    for (const e of active) byId.set(e.id, e);
-    for (const p of players) byId.set(p.id, p);
-
-    // Count parented entities
-    let remaining = 0;
-    for (const e of active) {
-      if (e.parentId !== undefined) remaining++;
-    }
-    for (const p of players) {
-      if (p.parentId !== undefined) remaining++;
-    }
-    if (remaining === 0) return;
-
+    const allEntities = [...new Set([...active, ...players])];
+    const byId = new Map(allEntities.map((entity) => [entity.id, entity]));
+    let remaining = allEntities.filter((entity) => entity.parentId !== undefined).length;
+    if (!remaining) return;
     const resolved = new Set<number>();
-    const allEntities = [...active, ...players];
 
-    // Iterative resolution — max 10 passes for nesting depth (typically 1-2)
-    for (let pass = 0; pass < 10 && remaining > 0; pass++) {
+    // Admission caps nesting at 32; order does not depend on runtime allocation.
+    for (let pass = 0; pass < 32 && remaining > 0; pass++) {
       for (const e of allEntities) {
         if (e.parentId === undefined || resolved.has(e.id)) continue;
         const parent = byId.get(e.parentId);

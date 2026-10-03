@@ -1,3 +1,4 @@
+import { PERSISTENCE_BUDGET } from "./PersistenceBudget.js";
 import { PersistenceCoordinator } from "./PersistenceCoordinator.js";
 import type { PersistenceStore, SaveEntry } from "./PersistenceStore.js";
 import type { RecordStore } from "./RecordStore.js";
@@ -85,7 +86,7 @@ export class RecordPersistenceStore implements PersistenceStore {
   async readScope(
     collection: string,
     scope: string,
-    maximum = 4096,
+    maximum = PERSISTENCE_BUDGET.scopeRecords as number,
   ): Promise<Map<string, unknown>> {
     this.validate(collection);
     return new Map(

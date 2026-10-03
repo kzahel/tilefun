@@ -11,6 +11,8 @@ it("runs sustained travel and semantic restart through the real SQLite adapter",
     const result = await streamingConformance(() => new SqlitePersistenceStore(directory));
     expect(result).toMatchObject({
       chunksVisited: 1000,
+      distantPlayerSteps: 1000,
+      totalDistinctChunks: 3000,
       maxActors: 1,
       maxChunks: 1,
       maxFeatures: 1,

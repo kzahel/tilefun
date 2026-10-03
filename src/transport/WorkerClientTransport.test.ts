@@ -158,16 +158,24 @@ describe("local server Worker lifecycle", () => {
   });
 });
 
-it("fails a save fence explicitly rather than acknowledging lost edits", async () => {
+it("retains a failed save fence and permits retry without terminating authority", async () => {
+  let fail = true;
   const r = rig({
     flush: async () => {
-      throw Error("disk unavailable");
+      if (fail) throw Error("disk unavailable");
     },
   });
   await r.client.ready();
   await expect(r.client.shutdown()).rejects.toThrow("disk unavailable");
-  expect(r.errors).toHaveLength(1);
+  expect(r.errors).toHaveLength(0);
   expect(r.events).not.toContain("destroy");
+  expect(r.events).not.toContain("terminate");
+  r.client.send({ type: "set-editor-mode", enabled: true });
+  await vi.waitFor(() => expect(r.events).toContain("set-editor-mode"));
+  fail = false;
+  await r.client.flush();
+  await r.client.shutdown();
+  expect(r.events).toContain("destroy");
   expect(r.events).toContain("terminate");
 });
 
@@ -182,4 +190,16 @@ it("times out a Worker that never reaches readiness", async () => {
   const client = new WorkerClientTransport(endpoint, { timeoutMs: 10 });
   await expect(client.ready()).rejects.toThrow("startup timed out");
   expect(endpoint.terminate).toHaveBeenCalledTimes(1);
+});
+
+it("does not revive a terminated Worker when shutdown rejects after a fatal transport error", async () => {
+  const r = rig({ flush: () => new Promise<void>(() => {}) });
+  await r.client.ready();
+  const stopping = r.client.shutdown();
+  await vi.waitFor(() => expect(r.events).toContain("flush"));
+  const failed = expect(stopping).rejects.toThrow("worker crashed");
+  r.endpoint.onerror?.({ message: "worker crashed", preventDefault() {} } as ErrorEvent);
+  await failed;
+  expect(r.client.getDebugInfo().transport).toContain("failed");
+  expect(r.events).toContain("terminate");
 });

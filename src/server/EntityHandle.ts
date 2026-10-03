@@ -176,11 +176,13 @@ export class EntityHandle {
     }
     if (seen.size > 32) throw new Error("Attachment chain is too deep.");
     const root = [...seen].at(-1);
-    let groupSize = 1;
+    let groupSize = 0;
     for (const candidate of this.entityManager.entities) {
       let current: Entity | undefined = candidate;
       for (let depth = 0; current && depth < 64; depth++) {
-        if (current.id === root) {
+        if (current.id === this.id && depth + seen.size > 32)
+          throw new Error("Attachment chain is too deep.");
+        if (current.id === root || current.id === this.id) {
           groupSize++;
           break;
         }

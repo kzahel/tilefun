@@ -72,7 +72,12 @@ export function decodeActor(record: ActorRecord): Entity | Prop {
     record.version !== 2 ||
     !record.persistentId ||
     !Number.isFinite(record.wx) ||
-    !Number.isFinite(record.wy)
+    !Number.isFinite(record.wy) ||
+    (record.parent !== undefined &&
+      (![record.state.localOffsetX ?? 0, record.state.localOffsetY ?? 0].every(Number.isFinite) ||
+        Math.abs(record.state.localOffsetX ?? 0) > 512 ||
+        Math.abs(record.state.localOffsetY ?? 0) > 512)) ||
+    (record.spawnTimer !== undefined && !Number.isFinite(record.spawnTimer))
   )
     throw new Error("Invalid saved actor record.");
   let actor: Entity | Prop;

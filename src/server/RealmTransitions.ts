@@ -89,6 +89,9 @@ export class RealmTransitions {
           target.removePlayer(session.clientId);
         Object.assign(session, previous);
         source?.restorePlayer(session);
+        // A failed executor retains its pending destination pointer. Supersede it
+        // with the restored source before any subsequent close/retry can commit it.
+        if (source) await this.commit(session, source).catch(() => {});
         throw error;
       }
       // Ticks during saving may have emitted baselines the join response clears.

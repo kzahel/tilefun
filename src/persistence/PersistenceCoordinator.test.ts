@@ -206,3 +206,15 @@ it("acknowledges an earlier flush while a later writer is still blocked", async 
   await second;
   await coordinator.close();
 });
+
+it("bounds query reconciliation before reading when accepted mutations already exceed its budget", async () => {
+  const executor = new MemoryRecordStore(),
+    coordinator = new PersistenceCoordinator(executor);
+  coordinator.stage(Array.from({ length: 8193 }, (_, i) => put(String(i), i)));
+  await expect(coordinator.readScope("actors", "realm:0,0")).rejects.toThrow(/query changed/);
+  await coordinator.flush();
+  expect(
+    await coordinator.scan({ collection: "actors", scope: "realm:0,0", limit: 16 }),
+  ).toHaveLength(16);
+  await coordinator.close();
+});

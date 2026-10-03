@@ -190,7 +190,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
       }),
     )
     .toBe(true);
-  const changed = await page.evaluate(() => {
+  const changed = await page.evaluate(async () => {
     const g = (
       document.querySelector("#game") as unknown as {
         __game: import("../src/client/GameClient.js").GameClient;
@@ -205,7 +205,20 @@ test("dense building edits and actor tombstones survive saved-world inspection a
     g.transport.send({ type: "edit-delete-prop", propId: building.id });
     g.transport.send({ type: "edit-move-prop", propId: lamp.id, wx, wy });
     g.transport.send({ type: "edit-delete-entity", entityId: actor.id });
-    g.transport.send({ type: "flush" });
+    const lifecycle = g as unknown as {
+      loop: { stop(): void };
+      netEmulatedTransport: {
+        base: {
+          setHidden(hidden: boolean): void;
+          flush(): Promise<void>;
+          shutdown(): Promise<void>;
+        };
+      };
+    };
+    lifecycle.loop.stop();
+    lifecycle.netEmulatedTransport.base.setHidden(true);
+    await lifecycle.netEmulatedTransport.base.flush();
+    await lifecycle.netEmulatedTransport.base.shutdown();
     return {
       worldId: g.mainMenu.currentWorldId,
       buildingId: building.proceduralId,

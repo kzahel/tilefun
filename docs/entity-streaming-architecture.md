@@ -1,10 +1,10 @@
 # Target entity persistence and streaming architecture
 
-Status: implementation in progress, 2026-10-03.
+Status: implemented; final regression validation in 026, 2026-10-03.
 The user authorized end-to-end implementation and a new save format without
 compatibility with existing worlds. Incremental records and lazy residency are
 implemented, including world containers, traffic and pressure admission.
-026 is completing integration validation and the final lifecycle audit.
+026 records integration validation and the final lifecycle audit.
 This document records the selected contract; [the topic](topics/entity-activation.md) owns actual delivery
 status, [the research](research/entity-streaming-reference.md) distinguishes
 Minecraft/mclone evidence from Tilefun choices, and
@@ -160,8 +160,10 @@ An IO error must never manufacture an empty world.
   pickup and inventory change, attachment changes, seed markers and initial
   actors, or a same-world realm transfer. Do not split an atomic group merely
   to satisfy a batch limit. Bound group size through gameplay/edit limits.
-- Cross-world transfer is not covered by a single-world transaction. Keep it
-  unsupported until an explicit journal/recovery protocol exists.
+- Cross-world player travel uses the existing prepare-then-pointer recovery
+  protocol: persist complete source/destination visits before updating the global
+  current-location record. A failed commit stages the original pointer again.
+  General cross-world actor transfers remain unsupported.
 - Reads and index queries must account for pending writes/deletes. The shared
   coordinator merges pending changes and reconciles in-flight spatial loads
   against current ownership; it cannot read an old position from disk and
@@ -266,7 +268,7 @@ runtime ID or equivalent generation fence so delayed network messages cannot
 affect the wrong incarnation. This applies to local Worker transport as well
 as remote sessions.
 
-## Acceptance and remaining choices
+## Acceptance and selected implementation
 
 Required outcomes: one-actor edits write bounded actor/index records; startup
 loads only demanded spatial data; fixed-interest travel has bounded retained
@@ -276,8 +278,20 @@ identity/state without duplication. Test both real IndexedDB and SQLite, plus
 deterministic fault injection. [Tactical 019](tactical/019-entity-streaming-and-persistence.md)
 defines the delivery gates.
 
-Implementation must still select the SQLite driver across supported Node
-versions, exact record envelopes/codecs, spatial pagination consistency
-mechanism, numeric queue/byte budgets, activity distances and per-kind durable
-fields. Those choices do not reopen the selected principles: incremental
-records, shared policy, atomic mutations, lazy residency and bounded work.
+The Node adapter uses built-in `node:sqlite` on an IO worker (supported Node
+versions are declared in package.json), WAL/FULL transactions and an OS-released
+exclusive SQLite writer lease. IndexedDB uses native transactions and a Web Lock.
+Both use the same record facade, coordinator, query reconciliation, world leases,
+readiness controller and simulation. Realm namespaces share a world database.
+
+`SaveFormat.ts` selects format 3. `ActorRecords.ts` declares the semantic codec
+and transient exclusions; traffic has its own route codec. Active bounded query
+tokens reconcile intervening moves/deletes even after their commit completes.
+`PersistenceBudget.ts` owns numeric admission/byte limits; the activity radii
+and nominal decision cadence are documented in the entity-activation topic.
+
+Shared `storage_stats`, local Worker diagnostics and `/api/world-storage` expose
+retained objects/holders, queued commands, pending bytes/age, query pages and
+commit counters/timing. The common real-adapter conformance fixture and tactical
+026 record reproducible evidence. These operation-count gates do not promise
+unlimited nearby crowd performance or browser power-loss durability.

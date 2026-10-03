@@ -3055,7 +3055,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:101"
+          "source": "src/persistence/StreamingConformance.ts:119"
         }
       ]
     },
@@ -21381,11 +21381,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:116"
+          "source": "src/persistence/RealmRecords.ts:132"
         },
         {
           "system": "Gameplay",
           "source": "src/persistence/StreamingConformance.ts:50"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/persistence/StreamingConformance.ts:55"
         },
         {
           "system": "Gameplay",
@@ -21409,23 +21413,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1048"
+          "source": "src/server/Realm.ts:1060"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1959"
+          "source": "src/server/Realm.ts:1991"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:130"
+          "source": "src/server/RealmStreaming.ts:145"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:181"
+          "source": "src/server/RealmStreaming.ts:211"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:182"
+          "source": "src/server/RealmStreaming.ts:212"
         },
         {
           "system": "Gameplay",
@@ -22611,7 +22615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:101"
+          "source": "src/persistence/StreamingConformance.ts:119"
         }
       ]
     },

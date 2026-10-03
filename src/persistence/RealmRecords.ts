@@ -45,6 +45,22 @@ export class RealmRecords {
     return root;
   }
 
+  projectedPosition(actor: Entity | Prop): { wx: number; wy: number } {
+    let current = actor,
+      dx = 0,
+      dy = 0;
+    const seen = new Set<number>();
+    while (!("isProp" in current) && current.parentId !== undefined) {
+      if (seen.has(current.id) || seen.size >= 32) throw new Error("Invalid attachment chain.");
+      seen.add(current.id);
+      const parent = this.entities.byId.get(current.parentId);
+      if (!parent) break;
+      dx += current.localOffsetX ?? 0;
+      dy += current.localOffsetY ?? 0;
+      current = parent;
+    }
+    return { wx: current.position.wx + dx, wy: current.position.wy + dy };
+  }
   scope(actor: Entity | Prop): string {
     return actorScope(this.root(actor).position);
   }

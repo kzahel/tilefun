@@ -97,6 +97,8 @@ try {
     }
   });
   assert.equal(lifecycle.chunksVisited, 1000);
+  assert.equal(lifecycle.distantPlayerSteps, 1000);
+  assert.equal(lifecycle.totalDistinctChunks, 3000);
   console.log(JSON.stringify({ backend: "IndexedDB", ...lifecycle }));
   console.log(
     "IndexedDB conformance passed: atomic abort, writer lease, spatial move, typed payload, reopen, delete.",

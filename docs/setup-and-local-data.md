@@ -215,8 +215,9 @@ deletions, interiors or player progress. Current player locations are stored in
 history. Include this database when migrating browser state.
 
 Server-hosted worlds use filesystem state: `data/registry.json` and
-`data/worlds/` by default. Each realm stores transactional records in
-`records.sqlite` with its WAL and a separate `writer.sqlite` lease database.
+`data/worlds/` by default. Each world stores outdoor and interior namespaces together in
+`records.sqlite` with its WAL and a separate `writer.sqlite` lease database. There is one
+shared writer per open world, not one database per interior.
 Browser world record databases use the `-records-v3` suffix. Format 3 intentionally
 does not load old saves; create a new world to use the new runtime. For the standalone server, `DATA_DIR` changes that
 root; the Vite game server currently uses `./data`. Stop the game server before

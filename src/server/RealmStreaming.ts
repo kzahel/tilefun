@@ -55,21 +55,28 @@ export class RealmStreaming {
           saves.loadRecords("traffic", key),
         ]);
         const actors = [...entities.values(), ...props.values()] as ActorRecord[];
-        // Validate a complete group before publishing any live objects.
-        const ids = new Set(actors.map((actor) => actor.persistentId));
+        // Validate complete groups before publishing any live objects.
+        const byId = new Map(actors.map((actor) => [actor.persistentId, actor]));
+        if (byId.size !== actors.length) throw new Error("Duplicate durable actor identity.");
+        const groups = new Map<string, number>();
         for (const actor of actors) {
           decodeActor(actor);
           const seen = new Set<string>([actor.persistentId]);
-          let parent = actor.parent;
-          while (parent) {
-            if (seen.has(parent) || seen.size > 32)
+          let root = actor;
+          while (root.parent) {
+            if (seen.has(root.parent) || seen.size >= 32)
               throw new Error("Invalid saved attachment chain.");
-            seen.add(parent);
-            parent = actors.find((candidate) => candidate.persistentId === parent)?.parent;
+            seen.add(root.parent);
+            const parent = byId.get(root.parent);
+            if (!parent || parent.kind !== "entity")
+              throw new Error("Incomplete saved attachment group.");
+            root = parent;
           }
-          if (actor.parent && !ids.has(actor.parent) && !records.byId.has(actor.parent))
-            throw new Error("Incomplete saved attachment group.");
+          const count = (groups.get(root.persistentId) ?? 0) + 1;
+          if (count > 64) throw new Error("Saved attachment group exceeds its limit.");
+          groups.set(root.persistentId, count);
         }
+
         return {
           terrain,
           actors,
@@ -80,9 +87,17 @@ export class RealmStreaming {
       },
       publish: (key, payload) => {
         if (
-          records.entities.entities.length + payload.actors.length + payload.traffic.length >
+          records.entities.entities.length +
+            payload.actors.filter(
+              (actor) => actor.kind === "entity" && !records.byId.has(actor.persistentId),
+            ).length +
+            payload.traffic.length >
             PERSISTENCE_BUDGET.actors ||
-          props.props.length + payload.actors.length > PERSISTENCE_BUDGET.props
+          props.props.length +
+            payload.actors.filter(
+              (actor) => actor.kind === "prop" && !records.byId.has(actor.persistentId),
+            ).length >
+            PERSISTENCE_BUDGET.props
         )
           throw new Error("Actor residency budget exceeded.");
         const [cx = 0, cy = 0] = key.split(",").map(Number);
@@ -176,7 +191,22 @@ export class RealmStreaming {
       owners.add(owner);
       const cx = Math.floor(session.player.position.wx / CHUNK_SIZE_PX);
       const cy = Math.floor(session.player.position.wy / CHUNK_SIZE_PX);
+      const parent = this.records.entities.byId.get(session.player.parentId ?? -1);
+      const root = parent ? this.records.root(parent) : undefined;
       this.interest.set(owner, [
+        ...(root
+          ? [
+              {
+                range: around(
+                  Math.floor(root.position.wx / CHUNK_SIZE_PX),
+                  Math.floor(root.position.wy / CHUNK_SIZE_PX),
+                  1,
+                ),
+                activity: 2 as const,
+                reason: "dependency" as const,
+              },
+            ]
+          : []),
         { range: around(cx, cy, 5), activity: 0, reason: "dependency" },
         { range: around(cx, cy, 4), activity: session.debugPaused ? 0 : 1, reason: "player" },
         { range: around(cx, cy, 2), activity: session.debugPaused ? 0 : 2, reason: "player" },
@@ -216,12 +246,15 @@ export class RealmStreaming {
     }
   }
   supported(entity: Entity | Prop, dt = 1 / 60): boolean {
-    const p = entity.position,
-      c = entity.collider;
+    const p = this.records.projectedPosition(entity),
+      c = entity.collider,
+      root = this.records.root(entity);
     const reach = Math.max(
       32,
       Math.abs(("velocity" in entity ? entity.velocity?.vx : 0) ?? 0) * dt,
       Math.abs(("velocity" in entity ? entity.velocity?.vy : 0) ?? 0) * dt,
+      Math.abs(("velocity" in root ? root.velocity?.vx : 0) ?? 0) * dt,
+      Math.abs(("velocity" in root ? root.velocity?.vy : 0) ?? 0) * dt,
       c?.width ?? 0,
       c?.height ?? 0,
     );
@@ -234,6 +267,10 @@ export class RealmStreaming {
         if (!this.residency.ready(`${cx},${cy}`)) return false;
     return true;
   }
+  resume(): void {
+    this.closed = false;
+    this.residency.resume();
+  }
   async close(): Promise<void> {
     this.closed = true;
     await this.residency.close();
@@ -245,7 +282,8 @@ function recordsDependencyTickets(records: RealmRecords, demand: Map<string, Chu
   for (const [scope, actors] of records.buckets) {
     if (!demand.get(scope)?.activity) continue;
     for (const actor of actors)
-      if ("parentId" in actor && actor.parentId !== undefined) keys.add(actorScope(actor.position));
+      if ("parentId" in actor && actor.parentId !== undefined)
+        keys.add(actorScope(records.projectedPosition(actor)));
   }
   return [...keys].map((key) => {
     const [cx = 0, cy = 0] = key.split(",").map(Number);

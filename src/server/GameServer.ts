@@ -584,13 +584,14 @@ export class GameServer {
         this.transport,
         this.broadcasting && (this.transport.canSend?.() ?? true),
         dormantIds,
+        this.locations?.pressured ?? false,
       );
     }
     if (this.locations && !this.checkpointPending && Date.now() - this.lastCheckpoint >= 5000) {
       this.lastCheckpoint = Date.now();
       this.checkpointPending = true;
       void this.trackOperation(this.flushAsync())
-        .catch((error) => this.onLoopError?.(error))
+        .catch((error) => this.reportStorageFailure(error))
         .finally(() => {
           this.checkpointPending = false;
         });
@@ -1032,7 +1033,7 @@ export class GameServer {
         })();
         this.retiringRealms.set(worldId, retiring);
         void this.trackOperation(retiring.finally(() => this.retiringRealms.delete(worldId))).catch(
-          (error) => this.onLoopError?.(error),
+          (error) => this.reportStorageFailure(error),
         );
       }
     }
@@ -1149,18 +1150,38 @@ export class GameServer {
 
   async flushAsync(): Promise<void> {
     this.lastCheckpoint = Date.now();
-    for (const realm of this.realms.values()) await realm.flushAsync();
+    try {
+      for (const realm of this.realms.values()) await realm.flushAsync();
+      for (const session of this.sessions.values()) {
+        const realm = this.realms.get(session.realmId ?? "");
+        if (realm && !session.transitioning && !session.retired)
+          await this.saveLocation(session, realm);
+      }
+    } catch (error) {
+      this.reportStorageFailure(error);
+      throw error;
+    }
+  }
+
+  private reportStorageFailure(error: unknown): void {
+    console.error("[tilefun] Storage delayed; retained for retry", error);
     for (const session of this.sessions.values()) {
-      const realm = this.realms.get(session.realmId ?? "");
-      if (realm && !session.transitioning && !session.retired)
-        await this.saveLocation(session, realm);
+      const paused =
+        (this.locations?.pressured ?? false) ||
+        (this.realms.get(session.realmId ?? "")?.saveManager?.pressured ?? false);
+      this.transport.send(session.clientId, {
+        type: "storage-status",
+        paused,
+        message: paused
+          ? "Saving is delayed. Your changes are retained; retrying automatically."
+          : "A background world save is delayed; its changes are retained for retry.",
+      });
     }
   }
 
   flush(): void {
     void this.trackOperation(this.flushAsync()).catch((error) => {
-      console.error("[tilefun] Could not checkpoint player location", error);
-      this.onLoopError?.(error);
+      this.reportStorageFailure(error);
     });
   }
 
@@ -1169,8 +1190,18 @@ export class GameServer {
     for (const timer of this.dormantSessions.values()) clearTimeout(timer);
     this.dormantSessions.clear();
     await this.settle();
-    for (const realm of this.realms.values()) await realm.destroy();
-    this.realms.clear();
+    const realms = [...this.realms.values()];
+    await Promise.all(realms.map((realm) => realm.streaming?.close()));
+    try {
+      await this.flushAsync();
+    } catch (error) {
+      for (const realm of realms) realm.streaming?.resume();
+      throw error;
+    }
+    for (const [id, realm] of this.realms) {
+      await realm.destroy();
+      this.realms.delete(id);
+    }
     await this.locations?.close();
     this.registry.close();
     this.transport.close();
@@ -1437,6 +1468,8 @@ export class GameServer {
           message: error instanceof Error ? error.message : "The edit could not be applied.",
         });
       try {
+        if (this.locations?.pressured)
+          throw new Error("Saving is delayed. Please try again when play resumes.");
         const pending = realm.admitMutation(session, msg, dispatch);
         if (pending) void this.trackOperation(pending).catch(report);
       } catch (error) {

@@ -151,6 +151,12 @@ export class ChunkResidency<T> {
   async settle(): Promise<void> {
     while (this.pending.size) await Promise.all(this.pending);
   }
+  resume(): void {
+    this.closed = false;
+    for (const [key, holder] of this.holders)
+      if (holder.state === "loading") this.holders.delete(key);
+    this.reconcile(this.desired);
+  }
   async close(): Promise<void> {
     this.closed = true;
     await this.settle();

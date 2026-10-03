@@ -1107,6 +1107,33 @@ describe("durable player location", () => {
     }
   });
 
+  it("supersedes a staged failed destination pointer before later storage recovery", async () => {
+    const setup = await indoorSetup(),
+      session = setup.server.getLocalSession();
+    const store = setup.createStore("__player_locations__"),
+      executor = store.executor as MemoryRecordStore;
+    executor.beforeCommit = async () => {
+      throw Error("disk full after staging");
+    };
+    try {
+      await setup.enter();
+      expect(session.realmId).toBe(setup.meta.id);
+      expect(await store.get("players", restoreProfile.profileId)).toMatchObject({
+        realmId: setup.meta.id,
+      });
+      delete executor.beforeCommit;
+      await setup.server.flushAsync();
+      expect((await executor.read("players", restoreProfile.profileId))?.value).toMatchObject({
+        realmId: setup.meta.id,
+      });
+      await setup.enter();
+      expect(setup.server.worldInterior).not.toBeNull();
+    } finally {
+      delete executor.beforeCommit;
+      await setup.server.destroy();
+    }
+  });
+
   it("keeps the original entity and durable location if committing a transfer fails", async () => {
     const setup = await indoorSetup();
     const session = setup.server.getLocalSession();
@@ -1143,11 +1170,14 @@ describe("durable player location", () => {
         "players",
         restoreProfile.profileId,
       )) as import("../persistence/PlayerLocationStore.js").PlayerLocation;
+      await setup.server.destroy();
+      await store.open();
       if (failure === "missing") {
         saved.realmId = `interior~${setup.meta.id}~settlement%3A0%3A0%3Ablock%3A999%3A999%3Alot%3A999~0`;
         await store.save([{ collection: "players", key: restoreProfile.profileId, value: saved }]);
       } else {
         const roomStore = setup.createStore(saved.parentWorldId);
+        await roomStore.open();
         const collection = JSON.stringify([saved.realmId, "meta"]);
         const meta = (await roomStore.get(
           collection,
@@ -1156,8 +1186,9 @@ describe("durable player location", () => {
         await roomStore.save([
           { collection, key: "state", value: { ...meta, roomPlan: { version: 99 } } },
         ]);
+        await roomStore.close();
       }
-      await setup.server.destroy();
+      await store.close();
       const transport = new TestTransport();
       const server = new GameServer(transport, {
         registry: setup.registry,
@@ -1563,5 +1594,34 @@ it("keeps saved city room geometry and furniture while admitting the second exte
     ).toHaveLength(3);
   } finally {
     await server.destroy();
+  }
+});
+
+it("reports an idle world's save failure without pausing a healthy world's player", async () => {
+  const setup = await createTestSetup();
+  setup.transport.connect("local");
+  await setup.server.settle();
+  const source = setup.server.getLocalSession().realmId;
+  if (!source) throw Error("missing source");
+  const other = await setup.server.createWorld("Other", "flat", 42);
+  await setup.server.loadWorld(other.id);
+  await setup.server.loadWorld(source);
+  const store = setup.createStore(other.id),
+    executor = store.executor as MemoryRecordStore;
+  executor.beforeCommit = async () => {
+    throw Error("idle world disk full");
+  };
+  try {
+    await expect(
+      store.save([{ collection: "meta", key: "fixture", value: true }]),
+    ).rejects.toThrow();
+    await expect(setup.server.flushAsync()).rejects.toThrow();
+    expect(setup.transport.messagesOfType("local", "storage-status").at(-1)).toMatchObject({
+      paused: false,
+    });
+    expect(setup.server.getLocalSession().realmId).toBe(source);
+  } finally {
+    delete executor.beforeCommit;
+    await setup.server.destroy();
   }
 });

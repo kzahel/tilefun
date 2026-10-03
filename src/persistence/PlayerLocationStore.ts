@@ -16,6 +16,11 @@ export const PLAYER_LOCATIONS_STORE = "__player_locations__";
 /** Ordered commits; a failed write does not poison later retries. */
 export class PlayerLocationStore {
   private opened: Promise<void> | undefined;
+  private failed = false;
+  private pending = 0;
+  get pressured(): boolean {
+    return this.failed || this.pending >= 64;
+  }
   private writes: Promise<void> = Promise.resolve();
   constructor(private readonly store: PersistenceStore) {}
 
@@ -42,12 +47,22 @@ export class PlayerLocationStore {
   }
 
   save(id: string, location: PlayerLocation): Promise<void> {
+    if (this.pending >= 256) return Promise.reject(new Error("Player location queue is full."));
     const snapshot = structuredClone(location);
+    this.pending++;
     const write = this.writes
       .catch(() => {})
       .then(async () => {
         await this.open();
         await this.store.save([{ collection: "players", key: id, value: snapshot }]);
+        this.failed = false;
+      })
+      .catch((error) => {
+        this.failed = true;
+        throw error;
+      })
+      .finally(() => {
+        this.pending--;
       });
     this.writes = write;
     return write;

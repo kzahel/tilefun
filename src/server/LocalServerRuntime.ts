@@ -123,26 +123,32 @@ export class LocalServerRuntime {
         this.hidden = packet.hidden;
         if (this.hidden) {
           this.server.stopLoop();
-          void this.flush().catch((error) => this.fail(error));
+          void this.flush().catch((error) => this.storageFailure(error));
         } else if (this.started) this.startSimulation();
         break;
       case "flush":
         void this.flush().then(
           () => this.channel.send({ type: "result", id: packet.id }),
-          (error) => this.fail(error),
+          (error) => this.storageFailure(error, packet.id),
         );
         break;
       case "shutdown":
         this.state = "stopping";
         this.server.stopLoop();
         clearInterval(this.saveTimer);
+        this.saveTimer = undefined;
         void this.flush()
           .then(async () => {
             await this.server.destroy();
             this.state = "stopped";
             this.channel.send({ type: "result", id: packet.id });
           })
-          .catch((error) => this.fail(error));
+          .catch((error) => {
+            if (this.state === "failed" || this.state === "stopped") return;
+            this.state = "ready";
+            this.storageFailure(error, packet.id);
+            if (this.started && !this.hidden) this.startSimulation();
+          });
         break;
       case "diagnostics": {
         const diagnostics: LocalHostDiagnostics = {
@@ -164,6 +170,13 @@ export class LocalServerRuntime {
     }
   }
 
+  private storageFailure(error: unknown, id?: number): void {
+    const message = error instanceof Error ? error.message : String(error);
+    // The shared server reports pressure for the affected world; the host only
+    // rejects its lifecycle receipt and keeps the executor available for retry.
+    console.error("[tilefun] Local save delayed", message);
+    if (id !== undefined) this.channel.send({ type: "result", id, error: message });
+  }
   private startSimulation(): void {
     this.server.startLoop();
     if (this.saveTimer !== undefined) return;
@@ -172,7 +185,7 @@ export class LocalServerRuntime {
       if (this.state !== "ready" || this.hidden || this.checkpointPending) return;
       this.checkpointPending = true;
       void this.flush()
-        .catch((error) => this.fail(error))
+        .catch((error) => this.storageFailure(error))
         .finally(() => {
           this.checkpointPending = false;
         });
@@ -180,10 +193,12 @@ export class LocalServerRuntime {
   }
 
   private flush(): Promise<void> {
-    this.flushChain = this.flushChain.then(async () => {
-      await this.server.settle();
-      await this.server.flushAsync();
-    });
+    this.flushChain = this.flushChain
+      .catch(() => {})
+      .then(async () => {
+        await this.server.settle();
+        await this.server.flushAsync();
+      });
     return this.flushChain;
   }
 }

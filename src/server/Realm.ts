@@ -489,15 +489,27 @@ export class Realm {
     }
   }
 
+  private sessionSupported(session: PlayerSession, dt: number): boolean {
+    if (!this.streaming) return true;
+    if (!this.streaming.supported(session.player, dt)) return false;
+    const parent = this.entityManager.byId.get(session.player.parentId ?? -1);
+    return (
+      !parent ||
+      (this.records?.group(parent) ?? [parent]).every((actor) =>
+        this.streaming?.supported(actor, dt),
+      )
+    );
+  }
   /** Run one simulation tick. */
   tick(
     dt: number,
     transport: IServerTransport,
     broadcasting: boolean,
     dormantClientIds: ReadonlySet<string>,
+    globalStoragePaused = false,
   ): void {
     this.tickCounter++;
-    const storagePaused = this.saveManager?.pressured ?? false;
+    const storagePaused = globalStoragePaused || (this.saveManager?.pressured ?? false);
     if (storagePaused) this.saveManager?.flush();
     for (const session of this.sessions.values()) {
       if ((this.storageNotified.get(session) ?? false) === storagePaused) continue;
@@ -527,7 +539,7 @@ export class Realm {
       if (dormantClientIds.has(session.clientId) || session.transitioning || session.retired)
         continue;
 
-      if (this.streaming && !this.streaming.supported(session.player, dt)) continue;
+      if (!this.sessionSupported(session, dt)) continue;
 
       if (storagePaused) {
         session.lastProcessedInputSeq =
@@ -722,7 +734,7 @@ export class Realm {
         !s.transitioning &&
         !s.retired &&
         !dormantClientIds.has(s.clientId) &&
-        (!this.streaming || this.streaming.supported(s.player, dt)),
+        this.sessionSupported(s, dt),
     );
     if (activeSessions.length > 0) {
       const physicsSteps = Math.max(1, this.physicsMult);
@@ -1100,6 +1112,10 @@ export class Realm {
       return;
     switch (msg.type) {
       case "player-input":
+        if (session.editorEnabled) {
+          session.lastProcessedInputSeq = msg.seq;
+          break;
+        }
         session.inputQueue.push({
           dx: msg.dx,
           dy: msg.dy,
@@ -1229,6 +1245,12 @@ export class Realm {
         // Auto-dismount when entering editor mode
         if (msg.enabled && session.gameplaySession.mountId !== null) {
           this.dismountPlayer(session);
+        }
+        if (msg.enabled) {
+          session.lastProcessedInputSeq =
+            session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
+          session.inputQueue.length = 0;
+          session.player.velocity = { vx: 0, vy: 0 };
         }
         break;
 
@@ -1569,14 +1591,24 @@ export class Realm {
   /** Teardown mods and close persistence. */
   async destroy(): Promise<void> {
     await this.mutations.drain();
-    for (const teardown of this.modTeardowns.values()) {
-      teardown();
-    }
-    this.modTeardowns.clear();
     await this.streaming?.close();
     const saves = this.saveManager;
-    await saves?.close();
+    try {
+      await saves?.close();
+    } catch (error) {
+      this.streaming?.resume();
+      throw error;
+    }
     if (this.saveManager === saves) this.saveManager = null;
+    for (const teardown of this.modTeardowns.values()) teardown();
+    this.modTeardowns.clear();
+    for (const entity of [...this.entityManager.entities])
+      this.entityManager.remove(entity.id, false);
+    for (const prop of [...this.propManager.props]) this.propManager.remove(prop.id, false);
+    for (const [key] of this.world.chunks.entries()) this.world.chunks.remove(key);
+    this.records?.features.clear();
+    this.sessions.clear();
+    this.replication.clear();
   }
 
   // ---- Riding helpers ----

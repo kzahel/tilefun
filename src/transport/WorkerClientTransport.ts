@@ -140,7 +140,8 @@ export class WorkerClientTransport implements IClientTransport {
           if (!request) throw Error("Unexpected local server lifecycle response");
           clearTimeout(request.timer);
           this.requests.delete(packet.id);
-          request.resolve(packet.diagnostics);
+          if (packet.error) request.reject(new Error(packet.error));
+          else request.resolve(packet.diagnostics);
         } else throw Error("Unexpected local server packet");
       });
     } catch (error) {
@@ -174,11 +175,17 @@ export class WorkerClientTransport implements IClientTransport {
       this.state = "stopped";
       this.cleanup();
       this.disconnectHandler?.();
-    })();
+    })().catch((error) => {
+      if (this.state === "stopping") this.state = "ready";
+      this.shutdownPromise = undefined;
+      throw error;
+    });
     return this.shutdownPromise;
   }
   close(): void {
-    void this.shutdown().catch((error) => this.fail(error));
+    void this.shutdown().catch((error) =>
+      this.options.onError?.(error instanceof Error ? error : new Error(String(error))),
+    );
   }
   getDebugInfo() {
     return { transport: `Local server Worker (${this.state})` };

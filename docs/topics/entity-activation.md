@@ -2,8 +2,8 @@
 
 Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
-World containers, traffic records and pressure admission are implemented; final
-integration validation is in progress.
+World containers, traffic records, bounded admission and recovery validation
+are complete.
 Updated: 2026-10-03.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
@@ -25,7 +25,7 @@ required save acknowledgements and releases decoded caches as well as actors.
 [Reference research](../research/entity-streaming-reference.md) records the
 inspected Minecraft Java 1.17.1 and mclone sources. Java uses chunk-sized entity
 lists; individual records and reduced-rate AI are deliberate Tilefun choices.
-[Tactical 019](../tactical/019-entity-streaming-and-persistence.md) is the planned
+[Tactical 019](../tactical/019-entity-streaming-and-persistence.md) records the completed
 parent sequence. Runtime delivery includes [020](../tactical/020-shared-record-persistence.md) and
 [021](../tactical/021-incremental-world-records.md); [024](../tactical/024-interest-and-residency.md) and
 [026](../tactical/026-persistence-completion.md) complete residency and scheduling.
@@ -63,12 +63,14 @@ concurrent spatial-query fix discovered during that integration.
 
 ## Completion validation
 
-[026](../tactical/026-persistence-completion.md) records the current checkpoint:
+[026](../tactical/026-persistence-completion.md) records completion:
 outdoor/interior namespaces share one writer, transfers have an atomic world
 snapshot and durable recovery pointer, traffic uses spatial records, and pressure
 pauses producers with visible feedback. Actual IndexedDB and SQLite each pass
-the same 1,000-chunk travel/restart fixture. Full browser/streaming regression
-and the final lifecycle audit remain in progress.
+the same 3,000-distinct-chunk fixture: 1,000 single-player steps and 1,000 steps
+with two distant moving player tickets, followed by semantic restart checks.
+The full browser run and focused recovery/editor follow-ups pass; 026 records
+exact test counts, benchmark observations and limits.
 
 Dense active crowds still produce collision-pair and rendering costs. Bounded
 unloading is not proof of acceptable performance for arbitrarily dense nearby
@@ -94,7 +96,7 @@ that these activation gaps caused it.
   remain constant as unchanged population grows; see tactical 021.
 - [x] Deliver shared tickets/readiness, lazy indexed loads, acknowledged eviction
   and separate reduced decisions from fixed-step motion.
-- [ ] Complete the remaining container/traffic/pressure and lifecycle gates in 026.
+- [x] Complete the container/traffic/pressure and lifecycle gates in 026.
   [Tactical 019](../tactical/019-entity-streaming-and-persistence.md) owns phase
   dependencies, acceptance scenarios and failure/pressure gates.
 - [ ] Investigate dense active campfire collision and pickup behavior separately;

@@ -1,6 +1,6 @@
 # 019 — Incremental persistence and entity streaming
 
-Status: **implementation in progress**, authorized end to end after the design review.
+Status: **complete**. Phases A–F delivered through tacticals 020, 021, 024 and 026.
 Created: 2026-10-03. Bounded slices are planned just in time and committed after validation.
 Owner: [entity activation](../topics/entity-activation.md).
 Contract: [target architecture](../entity-streaming-architecture.md).
@@ -54,7 +54,8 @@ campfire collision/pickup behavior remains an independent investigation.
 ## Validation gates
 
 Use deterministic operation counts before setting hardware-dependent timing
-thresholds. Scenarios below are proposed tests, not existing passing evidence.
+thresholds. The scenarios below define the gates; child execution records identify the fixtures
+and measured limits rather than promising arbitrary population performance.
 
 | Concern | Required evidence |
 | --- | --- |
@@ -83,13 +84,15 @@ commit latency and simulation time. Record fixture seed/revision, backend,
 population, active demand and hardware with timings. Do not call a worker move
 or a single short traversal proof of bounded memory.
 
-## Decisions deliberately deferred
+## Final decisions and scope
 
-- Exact SQLite driver and packaging across the supported Node versions.
-- Numeric queue/byte/record-size limits and activity radii after measurements.
-- Detailed per-kind state codecs and script persistence declarations during A/B.
-- Cross-world atomic transfers, cloud sync, migration tooling, offline progression
-  and an optional journaled file adapter; none blocks the initial architecture.
+Built-in `node:sqlite` on an IO Worker and IndexedDB are the physical adapters.
+The shared coordinator, world containers, codecs, activity radii and bounded
+admission policy are implemented; 026 records the selected limits. Player travel
+uses prepared world snapshots followed by a durable global location pointer.
+General NPC transfers spanning world databases, cloud sync, migration tooling,
+offline progression and another file adapter remain outside this refactor.
+Script tags and attributes are explicitly transient.
 
 ## Execution record
 
@@ -109,3 +112,6 @@ or a single short traversal proof of bounded memory.
   residency, acknowledged eviction and active physics/reduced decisions.
 - [026](026-persistence-completion.md) completes world containers, traffic,
   pressure admission and sustained real-backend/lifecycle validation.
+
+- Final A–F acceptance and recovery audit completed in 026. The authority and
+  storage policy remain shared by the Node host and integrated Worker host.

@@ -38,6 +38,25 @@ function sendInput(transport: LocalTransport, seq: number, movement: Movement) {
 }
 
 describe("Input queue prediction invariant", () => {
+  it("entering editor stops motion and acknowledges discarded inputs without replaying them", () => {
+    const { server, transport, session } = createTestServer();
+    sendInput(transport, 1, RIGHT);
+    server.tick(DT);
+    expect(session.player.velocity?.vx).toBeGreaterThan(0);
+    sendInput(transport, 2, RIGHT);
+    transport.clientSide.send({ type: "set-editor-mode", enabled: true });
+    expect(session.inputQueue).toHaveLength(0);
+    expect(session.lastProcessedInputSeq).toBe(2);
+    const position = { ...session.player.position };
+    sendInput(transport, 3, RIGHT);
+    server.tick(DT);
+    expect(session.lastProcessedInputSeq).toBe(3);
+    expect(session.player.position).toEqual(position);
+    transport.clientSide.send({ type: "set-editor-mode", enabled: false });
+    server.tick(DT);
+    expect(session.player.position).toEqual(position);
+  });
+
   it("1 input per tick: player moves rightward (acceleration model)", () => {
     const { server, transport, session } = createTestServer();
     const startX = session.player.position.wx;
