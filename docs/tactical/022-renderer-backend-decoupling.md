@@ -1,6 +1,6 @@
 # 022 — Renderer backend decoupling
 
-Status: **prepared; awaiting the user's start signal**.
+Status: **active; authorized end to end**.
 Created: 2026-10-03. This is a parent sequencing and progress plan.
 Owner: [rendering architecture](../topics/rendering-architecture.md).
 Measurement owner: [performance](../topics/performance.md).
@@ -55,12 +55,10 @@ slices. If still awaiting activation, do not begin implementation.
 
 ## Progress checkpoint
 
-- **Activation:** awaiting user start signal; none recorded.
-- **Overall state:** prepared; no runtime implementation under this parent yet.
-- **Active child tactical:** none.
-- **Next action after activation:** inventory remaining rendering call sites and
-  baseline evidence, then write the bounded R1 child plan using the next free
-  tactical number. Allocate numbers at creation time; other work shares the index.
+- **Activation:** 2026-10-03: “go ahead proceed fully end to end autonomously committing as you go.”
+- **Overall state:** asset metadata prerequisite delivered; outdoor frame contract next.
+- **Active child tactical:** [028 Sprite metadata](028-sprite-metadata.md).
+- **Next action:** deliver R3 metadata separation, then plan the frame contract.
 - **Blockers:** none known; device availability and current checkout must be
   checked when implementation starts.
 - **Completion evidence:** pending the gates below.
@@ -80,7 +78,7 @@ Completed foundations, recorded in [Tactical 013](013-renderer-boundary-and-allo
 | --- | --- | --- | --- |
 | R1 | Define and use a neutral frame contract for outdoor terrain, shadows, sorted scene content and editor overlays. Separate static content updates from camera/dynamic frame data. Builds on the completed foundations. | Real outdoor/editor orchestration submits ordered data; no Canvas objects or draw callbacks cross the contract. Existing phase/depth behavior and reusable frame ownership are preserved. | Pending / — / — |
 | R2 | Express indoor floors, actors, furniture and walls through ordered data on the same contract. Depends on R1; split if needed to preserve occlusion safely. | Remove indoor actor draw callbacks; representative rooms, edited furniture and actor/wall crossings retain visual parity and cache reuse. | Pending / — / — |
-| R3 | Separate sprite/atlas descriptions from loaded images. Coordinate IDs and geometry with R1/R2; move earlier if those slices need the catalog first. | Presentation resolves metadata without browser image types. Backends own loaded resources, asset invalidation and stale-resource handling. | Pending / — / — |
+| R3 | Separate sprite/atlas descriptions from loaded images. Coordinate IDs and geometry with R1/R2; move earlier if those slices need the catalog first. | Presentation resolves metadata without browser image types. Backends own loaded resources, asset invalidation and stale-resource handling. | Metadata delivered; lifecycle integration remains in R4 / [028](028-sprite-metadata.md) / — |
 | R4 | Complete one backend interface and migrate gameplay, editor, explorer and review consumers. Depends on R1–R3. Include preparation, resize, invalidation, realm change, disposal and resource recovery ownership. | Consumers select a backend at composition; concrete Canvas renderer access leaves game presentation orchestration. Independent instances and lifecycle transitions do not share or leak resources. | Pending / — / — |
 | R5 | Remove transitional APIs and prove the boundary with a recording backend and final integration/allocation checks. Depends on R1–R4. | Representative outdoor, indoor and editor frames run through the same presentation path without Canvas resources, draw callbacks or simulation mutation. Remaining platform dependencies are inventoried and justified; all completion gates pass. | Pending / — / — |
 
@@ -167,3 +165,6 @@ fallback imagery; don't trade readiness for a better frame-time number.
   existing warnings). Checks ran in the shared checkout, which also contains
   concurrent persistence work. This commit changes documentation only; browser,
   rendering and device evidence will be collected during implementation.
+
+- 2026-10-03: activated on explicit end-to-end instruction. R3 metadata moves
+  first so frame contracts can use neutral asset descriptions from inception.

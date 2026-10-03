@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-03",
+  "sourceBase": "98ee708",
+  "stage": "028 metadata split; before outdoor frame changes",
+  "notes": [
+    "Synthetic allocation sampling only; excludes gameplay FPS and rasterization.",
+    "Pixel 7a attached at activation; end-to-end device validation pending."
+  ],
+  "elevation": {
+    "browser": "153.0.8010.12",
+    "frames": 600,
+    "items": 2073600,
+    "diagnostics": {
+      "layoutBuilds": 9,
+      "createdDescriptors": 3456,
+      "createdItems": 3456
+    },
+    "sampledBytes": 46111228,
+    "allocationByFunction": {
+      "collect": 46067216,
+      "get": 17656,
+      "serialize": 9168,
+      "evaluate": 4668,
+      "isURL": 4256,
+      "(V8 API)": 4160,
+      "values": 4104
+    },
+    "geometryHashes": [
+      "ccbb8955d980c438a6b3497072bdcb19749542424d8abca5ff92d88c953c5d5f",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "796f9780e428edfd1ea570c42306366bed1f619c41f0a7214b807f896653fb37",
+      "94ea4e80cda904ba51ceff58c2bbd9a1e2cc5f0aa565f4a6cc1977d7623f491d",
+      "5156abb7d7112cdfb981a5ac1caeda88ff8cbaff237f45897199ebe082aecf36"
+    ]
+  },
+  "terrainScheduler": {
+    "browser": "153.0.8010.12",
+    "scenarios": [
+      {
+        "pending": false,
+        "frames": 3000,
+        "diagnostics": {
+          "resident": 80,
+          "schedulerRecordsCreated": 80,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 0,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 20971520
+        },
+        "sampledBytes": 28333312,
+        "allocationByFunction": {
+          "prepareTerrain": 16515932,
+          "retainCoordinates": 7708936,
+          "next": 4006308,
+          "window.schedulerProbe": 41016,
+          "hypot": 36924,
+          "get": 11876,
+          "innerSerialize": 4112,
+          "sin": 4104,
+          "cos": 4104
+        }
+      },
+      {
+        "pending": true,
+        "frames": 3000,
+        "diagnostics": {
+          "resident": 80,
+          "schedulerRecordsCreated": 80,
+          "queuedJobs": 0,
+          "building": 0,
+          "pending": 80,
+          "oldestMs": 0,
+          "rowsLastFrame": 0,
+          "surfaceBytes": 0
+        },
+        "sampledBytes": 35960960,
+        "allocationByFunction": {
+          "prepareTerrain": 15172644,
+          "compareTerrainJobs": 11809668,
+          "sort": 3743120,
+          "hypot": 2998560,
+          "next": 2209040,
+          "get": 14472,
+          "evaluate": 9336,
+          "serializeAsCallArgument": 4120
+        }
+      }
+    ],
+    "orderHash": "2588d37fbaaed3e391bb1d678fd9b5beb25bf61925249d66693056cbc8531179"
+  }
+}

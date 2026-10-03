@@ -2,8 +2,7 @@
 
 Topic: rendering-architecture
 Status: terrain ownership, neutral elevation handles and static descriptors extracted;
-complete frame/backend and asset interfaces have a prepared end-to-end plan,
-awaiting the user's start signal.
+complete frame/backend and asset interfaces are being implemented under the activated end-to-end plan.
 Updated: 2026-10-03.
 
 Owns renderer boundaries and resource/frame lifetime contracts. The
@@ -79,7 +78,7 @@ boundaries. Keep the Canvas implementation working through every slice.
    including indoor and overlay phases. Remove concrete renderer/Canvas access
    from gameplay presentation orchestration in bounded follow-up slices.
    [Parent Tactical 022](../tactical/022-renderer-backend-decoupling.md) owns their
-   sequencing and progress; implementation is prepared but not yet activated.
+   sequencing and progress; implementation is active, beginning with asset metadata.
 5. Only then prototype a second backend against measured workloads, comparing
    crossings/copies, startup, memory, device recovery and frame presentation.
 
@@ -153,3 +152,12 @@ The next architectural slice should define the full frame/backend interface,
 starting with outdoor terrain/scene/editor phases and then replacing indoor draw
 callbacks with ordered data. Pair this with a backend-independent sprite metadata
 catalog; keep the current Canvas implementation as the reference renderer.
+
+## Sprite metadata prerequisite
+
+`SpriteCatalog` exposes immutable dimensions and tile-region geometry without
+images or drawing methods. Canvas `Spritesheet` owns the loaded image and uses
+that metadata for source rectangles. GameClient projects the catalog once after
+asset loading, including procedural sprites; resource replacement must refresh
+the catalog. Gameplay availability checks now use metadata. Concrete sheet access
+for drawing remains until the frame/backend consumer migration.

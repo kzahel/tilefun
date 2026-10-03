@@ -5,6 +5,7 @@ import {
   loadModernInteriorsAtlasIndex,
   MODERN_INTERIORS_SHEET_KEY,
 } from "../assets/ModernInteriorsAtlasIndex.js";
+import { createSpriteCatalog, type SpriteCatalog } from "../assets/SpriteCatalog.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
@@ -121,6 +122,7 @@ export class GameClient {
   private ctx: CanvasRenderingContext2D;
   private camera: Camera;
   private loop: GameLoop;
+  private spriteCatalog: SpriteCatalog = new Map();
   private sheets = new Map<string, Spritesheet>();
   private tileRenderer: TileRenderer;
   private readonly sceneFrame = new SceneFrame();
@@ -658,6 +660,7 @@ export class GameClient {
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
+    this.spriteCatalog = createSpriteCatalog(this.sheets);
 
     if (!this.serialized) {
       // Apply loaded world camera position (local mode — direct access)
@@ -1135,6 +1138,9 @@ export class GameClient {
       actions: this.actions,
       stateView: this.stateView,
       transport: this.transport,
+      get spriteCatalog() {
+        return client.spriteCatalog;
+      },
       get sheets() {
         return client.sheets;
       },

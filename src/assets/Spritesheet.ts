@@ -1,7 +1,10 @@
+import { type SpriteMetadata, spriteMetadata, spriteRegion } from "./SpriteCatalog.js";
+
 /** Any image source usable with drawImage that exposes width/height. */
 export type SpriteImage = CanvasImageSource & { width: number; height: number };
 
 export class Spritesheet {
+  readonly metadata: SpriteMetadata;
   readonly cols: number;
   readonly rows: number;
 
@@ -10,18 +13,14 @@ export class Spritesheet {
     readonly tileWidth: number,
     readonly tileHeight: number,
   ) {
-    this.cols = Math.floor(image.width / tileWidth);
-    this.rows = Math.floor(image.height / tileHeight);
+    this.metadata = spriteMetadata(image.width, image.height, tileWidth, tileHeight);
+    this.cols = this.metadata.cols;
+    this.rows = this.metadata.rows;
   }
 
   /** Get the source rectangle for a tile at (col, row). */
   getRegion(col: number, row: number): { x: number; y: number; width: number; height: number } {
-    return {
-      x: col * this.tileWidth,
-      y: row * this.tileHeight,
-      width: this.tileWidth,
-      height: this.tileHeight,
-    };
+    return spriteRegion(this.metadata, col, row);
   }
 
   /** Draw a tile from the spritesheet onto the given context. */

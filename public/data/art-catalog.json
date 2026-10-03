@@ -23394,6 +23394,10 @@
         {
           "system": "Editor",
           "source": "src/scenes/renderWorld.ts:93"
+        },
+        {
+          "system": "Editor",
+          "source": "src/scenes/renderWorld.ts:113"
         }
       ]
     },

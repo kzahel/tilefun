@@ -1,3 +1,4 @@
+import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { AudioManager } from "../audio/AudioManager.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
@@ -38,6 +39,7 @@ export interface GameContext {
   readonly actions: ActionManager;
   readonly stateView: ClientStateView;
   readonly transport: IClientTransport;
+  readonly spriteCatalog: SpriteCatalog;
   readonly sheets: Map<string, Spritesheet>;
   readonly tileRenderer: TileRenderer;
   readonly sceneFrame: SceneFrame;

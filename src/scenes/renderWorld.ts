@@ -61,7 +61,7 @@ export function renderWorld(gc: GameContext): void {
   ctx.fillStyle = "#1a1a2e";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  if (sheets.size === 0) return;
+  if (gc.spriteCatalog.size === 0) return;
 
   const visible = camera.getVisibleChunkRange();
 
@@ -83,7 +83,7 @@ export function renderWorld(gc: GameContext): void {
  */
 export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: ParticleItem[]): void {
   const { ctx, camera, stateView, sheets, tileRenderer } = gc;
-  if (sheets.size === 0) return;
+  if (gc.spriteCatalog.size === 0) return;
 
   if (stateView.interior) {
     renderInterior(gc, alpha, extraParticles ?? []);
@@ -110,7 +110,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     alpha,
     tileRenderer,
     extraParticles ?? [],
-    grassSheet !== undefined,
+    gc.spriteCatalog.has("grass-blades"),
     debugExtrapolation ? extrapolationGhosts : undefined,
     undefined,
     gc.sceneFrame,
