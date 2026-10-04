@@ -1,0 +1,2212 @@
+{
+  "identity": "mallard-duck-draft-v1-drawing-02",
+  "motionIdentity": "mallard-duck-draft-v1-motion-02",
+  "reviewStatus": "draft, pending visual gate and human review",
+  "image": "sheet.png",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "anchor": [
+    24,
+    34
+  ],
+  "rootMotion": false,
+  "frameDurationMs": 160,
+  "fps": 6.25,
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "orthoScale": 4.8,
+  "shiftY": 0.2083333283662796,
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "durationMs": 160
+    },
+    "waddle": {
+      "start": 1,
+      "count": 8,
+      "description": "Alternating webbed feet; six discrete planted samples per side including zero-lift swing boundary; one-pixel weight transfer",
+      "durationMs": 1280
+    },
+    "swim": {
+      "start": 9,
+      "count": 8,
+      "description": "Alternating submerged power and feathered recovery paddles, wings folded",
+      "durationMs": 1280
+    },
+    "flap": {
+      "start": 17,
+      "count": 8,
+      "description": "Articulated secondary/primary downstroke and folding recovery; tucked feet",
+      "durationMs": 1280
+    },
+    "action": {
+      "start": 25,
+      "count": 6,
+      "description": "Quack with hinged lower bill and tail shiver; fixed skull",
+      "durationMs": 960
+    }
+  },
+  "facings": {
+    "down": {
+      "row": 0,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 0
+        },
+        {
+          "clip": "waddle",
+          "index": 0,
+          "rect": [
+            48,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 1
+        },
+        {
+          "clip": "waddle",
+          "index": 1,
+          "rect": [
+            96,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 2
+        },
+        {
+          "clip": "waddle",
+          "index": 2,
+          "rect": [
+            144,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 3
+        },
+        {
+          "clip": "waddle",
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 4
+        },
+        {
+          "clip": "waddle",
+          "index": 4,
+          "rect": [
+            240,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 5
+        },
+        {
+          "clip": "waddle",
+          "index": 5,
+          "rect": [
+            288,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 6
+        },
+        {
+          "clip": "waddle",
+          "index": 6,
+          "rect": [
+            336,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 7
+        },
+        {
+          "clip": "waddle",
+          "index": 7,
+          "rect": [
+            384,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 8
+        },
+        {
+          "clip": "swim",
+          "index": 0,
+          "rect": [
+            432,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            36
+          ],
+          "guideRecord": 9
+        },
+        {
+          "clip": "swim",
+          "index": 1,
+          "rect": [
+            480,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            36
+          ],
+          "guideRecord": 10
+        },
+        {
+          "clip": "swim",
+          "index": 2,
+          "rect": [
+            528,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            37
+          ],
+          "guideRecord": 11
+        },
+        {
+          "clip": "swim",
+          "index": 3,
+          "rect": [
+            576,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            37
+          ],
+          "guideRecord": 12
+        },
+        {
+          "clip": "swim",
+          "index": 4,
+          "rect": [
+            624,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            36
+          ],
+          "guideRecord": 13
+        },
+        {
+          "clip": "swim",
+          "index": 5,
+          "rect": [
+            672,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            36
+          ],
+          "guideRecord": 14
+        },
+        {
+          "clip": "swim",
+          "index": 6,
+          "rect": [
+            720,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            37
+          ],
+          "guideRecord": 15
+        },
+        {
+          "clip": "swim",
+          "index": 7,
+          "rect": [
+            768,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            22,
+            29,
+            37
+          ],
+          "guideRecord": 16
+        },
+        {
+          "clip": "flap",
+          "index": 0,
+          "rect": [
+            816,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            14,
+            35,
+            31
+          ],
+          "guideRecord": 17
+        },
+        {
+          "clip": "flap",
+          "index": 1,
+          "rect": [
+            864,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            11,
+            16,
+            38,
+            31
+          ],
+          "guideRecord": 18
+        },
+        {
+          "clip": "flap",
+          "index": 2,
+          "rect": [
+            912,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            10,
+            16,
+            39,
+            31
+          ],
+          "guideRecord": 19
+        },
+        {
+          "clip": "flap",
+          "index": 3,
+          "rect": [
+            960,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            16,
+            16,
+            33,
+            32
+          ],
+          "guideRecord": 20
+        },
+        {
+          "clip": "flap",
+          "index": 4,
+          "rect": [
+            1008,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            19,
+            16,
+            30,
+            33
+          ],
+          "guideRecord": 21
+        },
+        {
+          "clip": "flap",
+          "index": 5,
+          "rect": [
+            1056,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            17,
+            16,
+            32,
+            32
+          ],
+          "guideRecord": 22
+        },
+        {
+          "clip": "flap",
+          "index": 6,
+          "rect": [
+            1104,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            16,
+            37,
+            31
+          ],
+          "guideRecord": 23
+        },
+        {
+          "clip": "flap",
+          "index": 7,
+          "rect": [
+            1152,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            11,
+            16,
+            38,
+            31
+          ],
+          "guideRecord": 24
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            1200,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 25
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            1248,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 26
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1296,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 27
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1344,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 28
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1392,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 29
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1440,
+            0,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            36
+          ],
+          "guideRecord": 30
+        }
+      ]
+    },
+    "up": {
+      "row": 1,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 31
+        },
+        {
+          "clip": "waddle",
+          "index": 0,
+          "rect": [
+            48,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            37
+          ],
+          "guideRecord": 32
+        },
+        {
+          "clip": "waddle",
+          "index": 1,
+          "rect": [
+            96,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            37
+          ],
+          "guideRecord": 33
+        },
+        {
+          "clip": "waddle",
+          "index": 2,
+          "rect": [
+            144,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 34
+        },
+        {
+          "clip": "waddle",
+          "index": 3,
+          "rect": [
+            192,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 35
+        },
+        {
+          "clip": "waddle",
+          "index": 4,
+          "rect": [
+            240,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            37
+          ],
+          "guideRecord": 36
+        },
+        {
+          "clip": "waddle",
+          "index": 5,
+          "rect": [
+            288,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            37
+          ],
+          "guideRecord": 37
+        },
+        {
+          "clip": "waddle",
+          "index": 6,
+          "rect": [
+            336,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 38
+        },
+        {
+          "clip": "waddle",
+          "index": 7,
+          "rect": [
+            384,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 39
+        },
+        {
+          "clip": "swim",
+          "index": 0,
+          "rect": [
+            432,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 40
+        },
+        {
+          "clip": "swim",
+          "index": 1,
+          "rect": [
+            480,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 41
+        },
+        {
+          "clip": "swim",
+          "index": 2,
+          "rect": [
+            528,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 42
+        },
+        {
+          "clip": "swim",
+          "index": 3,
+          "rect": [
+            576,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 43
+        },
+        {
+          "clip": "swim",
+          "index": 4,
+          "rect": [
+            624,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 44
+        },
+        {
+          "clip": "swim",
+          "index": 5,
+          "rect": [
+            672,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 45
+        },
+        {
+          "clip": "swim",
+          "index": 6,
+          "rect": [
+            720,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 46
+        },
+        {
+          "clip": "swim",
+          "index": 7,
+          "rect": [
+            768,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            21,
+            29,
+            37
+          ],
+          "guideRecord": 47
+        },
+        {
+          "clip": "flap",
+          "index": 0,
+          "rect": [
+            816,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            14,
+            35,
+            31
+          ],
+          "guideRecord": 48
+        },
+        {
+          "clip": "flap",
+          "index": 1,
+          "rect": [
+            864,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            38,
+            31
+          ],
+          "guideRecord": 49
+        },
+        {
+          "clip": "flap",
+          "index": 2,
+          "rect": [
+            912,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            10,
+            14,
+            39,
+            31
+          ],
+          "guideRecord": 50
+        },
+        {
+          "clip": "flap",
+          "index": 3,
+          "rect": [
+            960,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            16,
+            14,
+            33,
+            35
+          ],
+          "guideRecord": 51
+        },
+        {
+          "clip": "flap",
+          "index": 4,
+          "rect": [
+            1008,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            19,
+            14,
+            30,
+            35
+          ],
+          "guideRecord": 52
+        },
+        {
+          "clip": "flap",
+          "index": 5,
+          "rect": [
+            1056,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            17,
+            14,
+            32,
+            34
+          ],
+          "guideRecord": 53
+        },
+        {
+          "clip": "flap",
+          "index": 6,
+          "rect": [
+            1104,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            14,
+            37,
+            31
+          ],
+          "guideRecord": 54
+        },
+        {
+          "clip": "flap",
+          "index": 7,
+          "rect": [
+            1152,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            38,
+            31
+          ],
+          "guideRecord": 55
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            1200,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 56
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            1248,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 57
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1296,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 58
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1344,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 59
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1392,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 60
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1440,
+            48,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            20,
+            20,
+            29,
+            36
+          ],
+          "guideRecord": 61
+        }
+      ]
+    },
+    "left": {
+      "row": 2,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 62
+        },
+        {
+          "clip": "waddle",
+          "index": 0,
+          "rect": [
+            48,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            38
+          ],
+          "guideRecord": 63
+        },
+        {
+          "clip": "waddle",
+          "index": 1,
+          "rect": [
+            96,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 64
+        },
+        {
+          "clip": "waddle",
+          "index": 2,
+          "rect": [
+            144,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 65
+        },
+        {
+          "clip": "waddle",
+          "index": 3,
+          "rect": [
+            192,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            37
+          ],
+          "guideRecord": 66
+        },
+        {
+          "clip": "waddle",
+          "index": 4,
+          "rect": [
+            240,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 67
+        },
+        {
+          "clip": "waddle",
+          "index": 5,
+          "rect": [
+            288,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 68
+        },
+        {
+          "clip": "waddle",
+          "index": 6,
+          "rect": [
+            336,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 69
+        },
+        {
+          "clip": "waddle",
+          "index": 7,
+          "rect": [
+            384,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 70
+        },
+        {
+          "clip": "swim",
+          "index": 0,
+          "rect": [
+            432,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 71
+        },
+        {
+          "clip": "swim",
+          "index": 1,
+          "rect": [
+            480,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 72
+        },
+        {
+          "clip": "swim",
+          "index": 2,
+          "rect": [
+            528,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 73
+        },
+        {
+          "clip": "swim",
+          "index": 3,
+          "rect": [
+            576,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            37
+          ],
+          "guideRecord": 74
+        },
+        {
+          "clip": "swim",
+          "index": 4,
+          "rect": [
+            624,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            38
+          ],
+          "guideRecord": 75
+        },
+        {
+          "clip": "swim",
+          "index": 5,
+          "rect": [
+            672,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            38
+          ],
+          "guideRecord": 76
+        },
+        {
+          "clip": "swim",
+          "index": 6,
+          "rect": [
+            720,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            38
+          ],
+          "guideRecord": 77
+        },
+        {
+          "clip": "swim",
+          "index": 7,
+          "rect": [
+            768,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            36,
+            38
+          ],
+          "guideRecord": 78
+        },
+        {
+          "clip": "flap",
+          "index": 0,
+          "rect": [
+            816,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            9,
+            36,
+            29
+          ],
+          "guideRecord": 79
+        },
+        {
+          "clip": "flap",
+          "index": 1,
+          "rect": [
+            864,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            10,
+            36,
+            29
+          ],
+          "guideRecord": 80
+        },
+        {
+          "clip": "flap",
+          "index": 2,
+          "rect": [
+            912,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            17,
+            36,
+            36
+          ],
+          "guideRecord": 81
+        },
+        {
+          "clip": "flap",
+          "index": 3,
+          "rect": [
+            960,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            20,
+            36,
+            38
+          ],
+          "guideRecord": 82
+        },
+        {
+          "clip": "flap",
+          "index": 4,
+          "rect": [
+            1008,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            20,
+            36,
+            35
+          ],
+          "guideRecord": 83
+        },
+        {
+          "clip": "flap",
+          "index": 5,
+          "rect": [
+            1056,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            20,
+            36,
+            36
+          ],
+          "guideRecord": 84
+        },
+        {
+          "clip": "flap",
+          "index": 6,
+          "rect": [
+            1104,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            18,
+            36,
+            37
+          ],
+          "guideRecord": 85
+        },
+        {
+          "clip": "flap",
+          "index": 7,
+          "rect": [
+            1152,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            12,
+            10,
+            36,
+            29
+          ],
+          "guideRecord": 86
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            1200,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 87
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            1248,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            37
+          ],
+          "guideRecord": 88
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1296,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 89
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1344,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            37
+          ],
+          "guideRecord": 90
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1392,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 91
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1440,
+            96,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            36,
+            37
+          ],
+          "guideRecord": 92
+        }
+      ]
+    },
+    "right": {
+      "row": 3,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 93
+        },
+        {
+          "clip": "waddle",
+          "index": 0,
+          "rect": [
+            48,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            37
+          ],
+          "guideRecord": 94
+        },
+        {
+          "clip": "waddle",
+          "index": 1,
+          "rect": [
+            96,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 95
+        },
+        {
+          "clip": "waddle",
+          "index": 2,
+          "rect": [
+            144,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 96
+        },
+        {
+          "clip": "waddle",
+          "index": 3,
+          "rect": [
+            192,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 97
+        },
+        {
+          "clip": "waddle",
+          "index": 4,
+          "rect": [
+            240,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 98
+        },
+        {
+          "clip": "waddle",
+          "index": 5,
+          "rect": [
+            288,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 99
+        },
+        {
+          "clip": "waddle",
+          "index": 6,
+          "rect": [
+            336,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 100
+        },
+        {
+          "clip": "waddle",
+          "index": 7,
+          "rect": [
+            384,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 101
+        },
+        {
+          "clip": "swim",
+          "index": 0,
+          "rect": [
+            432,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            38
+          ],
+          "guideRecord": 102
+        },
+        {
+          "clip": "swim",
+          "index": 1,
+          "rect": [
+            480,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            38
+          ],
+          "guideRecord": 103
+        },
+        {
+          "clip": "swim",
+          "index": 2,
+          "rect": [
+            528,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            38
+          ],
+          "guideRecord": 104
+        },
+        {
+          "clip": "swim",
+          "index": 3,
+          "rect": [
+            576,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            38
+          ],
+          "guideRecord": 105
+        },
+        {
+          "clip": "swim",
+          "index": 4,
+          "rect": [
+            624,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 106
+        },
+        {
+          "clip": "swim",
+          "index": 5,
+          "rect": [
+            672,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 107
+        },
+        {
+          "clip": "swim",
+          "index": 6,
+          "rect": [
+            720,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 108
+        },
+        {
+          "clip": "swim",
+          "index": 7,
+          "rect": [
+            768,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            25,
+            35,
+            37
+          ],
+          "guideRecord": 109
+        },
+        {
+          "clip": "flap",
+          "index": 0,
+          "rect": [
+            816,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            9,
+            36,
+            29
+          ],
+          "guideRecord": 110
+        },
+        {
+          "clip": "flap",
+          "index": 1,
+          "rect": [
+            864,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            10,
+            36,
+            29
+          ],
+          "guideRecord": 111
+        },
+        {
+          "clip": "flap",
+          "index": 2,
+          "rect": [
+            912,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            17,
+            36,
+            36
+          ],
+          "guideRecord": 112
+        },
+        {
+          "clip": "flap",
+          "index": 3,
+          "rect": [
+            960,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            20,
+            36,
+            38
+          ],
+          "guideRecord": 113
+        },
+        {
+          "clip": "flap",
+          "index": 4,
+          "rect": [
+            1008,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            20,
+            36,
+            35
+          ],
+          "guideRecord": 114
+        },
+        {
+          "clip": "flap",
+          "index": 5,
+          "rect": [
+            1056,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            20,
+            36,
+            36
+          ],
+          "guideRecord": 115
+        },
+        {
+          "clip": "flap",
+          "index": 6,
+          "rect": [
+            1104,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            18,
+            36,
+            37
+          ],
+          "guideRecord": 116
+        },
+        {
+          "clip": "flap",
+          "index": 7,
+          "rect": [
+            1152,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            10,
+            36,
+            29
+          ],
+          "guideRecord": 117
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            1200,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 118
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            1248,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 119
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1296,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 120
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1344,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 121
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1392,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            14,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 122
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1440,
+            144,
+            48,
+            48
+          ],
+          "visibleBounds": [
+            13,
+            24,
+            35,
+            38
+          ],
+          "guideRecord": 123
+        }
+      ]
+    }
+  },
+  "sheetSha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e"
+}

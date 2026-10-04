@@ -1,0 +1,4 @@
+# Wildlife source and review revisions use byte-exact SHA-256 identities.
+# Preserve their bytes across Windows, Linux and macOS checkouts.
+art-source/wildlife-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/demos/wildlife-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

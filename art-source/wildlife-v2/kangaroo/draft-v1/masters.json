@@ -1,0 +1,246 @@
+{
+  "identity": "kangaroo-draft-v1-drawing-02",
+  "palette": {
+    "o": "#513426",
+    "b": "#a7673c",
+    "h": "#c78e55",
+    "s": "#805138",
+    "c": "#e3d0a2",
+    "l": "#f0dfb7",
+    "n": "#403c30",
+    "e": "#252f28",
+    "i": "#ad7560"
+  },
+  "bodies": {
+    "down": {
+      "offset": [
+        -5,
+        -26
+      ],
+      "pixels": [
+        "....hhh....",
+        "...hhbhh...",
+        "..ohbbbbo..",
+        "..ohcccbo..",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohccccbbo.",
+        ".ohhcccbbo.",
+        ".ohbbbbbbo.",
+        "..ohbbbbo..",
+        "...obbbbo..",
+        "....oooo..."
+      ]
+    },
+    "up": {
+      "offset": [
+        -5,
+        -31
+      ],
+      "pixels": [
+        "....hbo....",
+        "....hbo....",
+        "....hbo....",
+        "...ohbbo...",
+        "...ohbbo...",
+        "..ohbbbbo..",
+        ".ohhbbbbo..",
+        ".ohhbbbbbo.",
+        ".ohhbbbbbo.",
+        ".ohbbbbboo.",
+        "..ohbbbbo..",
+        "..ohbbbbo..",
+        "..ohbbbbo..",
+        ".ohhbbbbbo.",
+        "ohhbbbbbbbo",
+        "ohhbbbbbbbo",
+        "ohhbbbbbbbo",
+        "ohhbbbbbbbo",
+        ".ohbbbbbbbo",
+        ".ohbbbbbbbo",
+        "..ohbbbbbo.",
+        "...obbbbbo.",
+        "....oooo..."
+      ]
+    },
+    "left": {
+      "offset": [
+        -7,
+        -28
+      ],
+      "pixels": [
+        "..hbo.........",
+        "..hcbo........",
+        "..hcbbbo......",
+        "..hccbbbbo....",
+        "..hccbhbbbo...",
+        "..hccbhhbbbo..",
+        "..hccbbhbbbo..",
+        "..hccbbhbbbbo.",
+        "..hccbbhbbbbo.",
+        "...hccbbhbbbbo",
+        "...hccbbbbbbbo",
+        "...hccbbbbbbbo",
+        "...hccbbbbbbbo",
+        "...hccbbbbbbo.",
+        "...ohbbbbbbbo.",
+        "....ohbbbbbbbo",
+        "....ohhbbbbbbo",
+        ".....ohhbbbbbo",
+        "......obbbbbo.",
+        ".......oooo..."
+      ]
+    },
+    "right": {
+      "offset": [
+        -6,
+        -28
+      ],
+      "pixels": [
+        ".........obh..",
+        "........obch..",
+        "......obbbch..",
+        "....obbbbcch..",
+        "...obbbhbcch..",
+        "..obbbhhbcch..",
+        "..obbbhbbcch..",
+        ".obbbbhbbcch..",
+        ".obbbbhbbcch..",
+        "obbbbhbbcch...",
+        "obbbbbbbcch...",
+        "obbbbbbbcch...",
+        "obbbbbbbcch...",
+        ".obbbbbbcch...",
+        ".obbbbbbbho...",
+        "obbbbbbbho....",
+        "obbbbbbhho....",
+        "obbbbbhho.....",
+        ".obbbbbo......",
+        "...oooo......."
+      ]
+    }
+  },
+  "heads": {
+    "down": {
+      "offset": [
+        -3,
+        -3
+      ],
+      "pixels": [
+        "..hh...",
+        ".ohhbo.",
+        "ohbbbbo",
+        "obebebo",
+        "obcccco",
+        ".bnnb..",
+        ".cccb..",
+        "..ooo..",
+        "......."
+      ]
+    },
+    "up": {
+      "offset": [
+        -2,
+        -3
+      ],
+      "pixels": [
+        ".hhh.",
+        "ohbbo",
+        "ohbbo",
+        "ohbbo",
+        ".obbo",
+        ".obbo",
+        "..oo."
+      ]
+    },
+    "left": {
+      "offset": [
+        -7,
+        -3
+      ],
+      "pixels": [
+        "......hh...",
+        ".....ohhbo.",
+        "....ohbbbbo",
+        "...obebbbbo",
+        ".bbnccbbbbo",
+        "oncccchbbo.",
+        ".ccccbboo..",
+        "..oooo....."
+      ]
+    },
+    "right": {
+      "offset": [
+        -3,
+        -3
+      ],
+      "pixels": [
+        "...hh......",
+        ".obhho.....",
+        "obbbbho....",
+        "obbbbebo...",
+        "obbbbccnbb.",
+        ".obbhccccno",
+        "..oobbcccc.",
+        ".....oooo.."
+      ]
+    }
+  },
+  "hands": {
+    "down": {
+      "offset": [
+        -1,
+        0
+      ],
+      "pixels": [
+        "hbb",
+        "bnn",
+        ".oo"
+      ]
+    },
+    "up": {
+      "offset": [
+        -1,
+        0
+      ],
+      "pixels": [
+        "hbb",
+        "obb",
+        ".oo"
+      ]
+    },
+    "left": {
+      "offset": [
+        -1,
+        0
+      ],
+      "pixels": [
+        "hb.",
+        "bbn",
+        ".oo"
+      ]
+    },
+    "right": {
+      "offset": [
+        -1,
+        0
+      ],
+      "pixels": [
+        ".bh",
+        "nbb",
+        "oo."
+      ]
+    }
+  },
+  "stylization": [
+    "Rigid full head, cheek stripe and torso markings held fixed for all hop frames. Art head is deliberately one pixel broader than skull guide for readable muzzle/eye; no geometry scaling.",
+    "Ears remain independently rotated fixed-volume guide silhouettes; head master does not morph to suggest listening. Rear head hides face/eyes/stripe.",
+    "Actual limb joints and foot/tail hulls determine broad integer composition, with stable relative head/body anchor rounding.",
+    "Tiny syndactylous toes/fingers compress to clusters. Rear-facing heels hide the forward claw tips. Right profile mirrors painted lighting."
+  ]
+}

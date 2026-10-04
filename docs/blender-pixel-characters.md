@@ -31,6 +31,35 @@ or textures were used in the tiger.
 
 ## What we did
 
+### Projection contract for new animal work
+
+The original tiger's saved camera is orthographic at `(0,-8,5)`, looking at
+`(0,0,1.12)` (about 26 degrees above ground). Side model yaws turn 0.3 radians
+toward the viewer for face readability. These are recorded source settings,
+not a measured camera for every Modern Exteriors asset. Do not infer that any
+orthographic front/profile render will match the game.
+
+Tilefun's normal 2D renderer uses a square grid and only pans/scales sprites;
+the three-quarter top-down view must be authored into them. New wildlife must
+show upper surfaces and projected near/far feet in every facing. Calibrate a
+fixed orthographic camera against actual Modern Exteriors scenery and approved
+Explorer/cat/bear, recording elevation above ground, target, ortho scale, aspect,
+model yaws and ground anchor. Compare representative elevations before locking
+the campaign camera. The debug 3D camera is a diagnostic, not an art specification.
+
+For quadrupeds and other body plans, retain species-appropriate editable 3D
+geometry and independently exported volume/contact guides. Fixed-scale head and
+body geometry, unchanged head drawings during orientation-stable walking, real
+head pitch/yaw for replacement drawings, depth-correct foot contacts and distinct
+rear anatomy are invariants. Integer drawings are a finishing step, not a
+substitute for a pose model. Review all facings and continuous cycles at native
+size in scenery beside an approved character before propagating a body-plan
+template. Hash/palette/frame-count checks cannot make this visual decision.
+
+The [fresh wildlife contract](topics/wildlife.md) and
+[029](tactical/029-wildlife-fresh-production.md) own current campaign settings
+and coordinator-reviewed pilot evidence. Human approval remains separate.
+
 1. **Set a small export contract.** One model; 32x32 untrimmed frames; rows
    down, up, left, right, matching Tilefun's direction order; eight columns;
    8 fps; fixed ground pivot at `(16, 27)`; twelve shared colors and binary alpha.

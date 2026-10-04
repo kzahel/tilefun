@@ -1,0 +1,3164 @@
+{
+ "identity": "harbor-seal-draft-v1-drawing-02",
+ "reviewStatus": "pending",
+ "image": "sheet.png",
+ "frameWidth": 96,
+ "frameHeight": 96,
+ "anchor": [
+  48,
+  64
+ ],
+ "rootMotion": false,
+ "cameraContract": {
+  "identity": "wildlife-v2-camera-01",
+  "projection": "ORTHO",
+  "artPerspective": "three-quarter top-down RPG on a square grid",
+  "elevationAboveGroundDegrees": 40,
+  "polarAngleFromVerticalDegrees": 50,
+  "target": [
+   0,
+   0,
+   0
+  ],
+  "cameraLocationAtDistance10": [
+   0,
+   -7.660444431,
+   6.427876097
+  ],
+  "modelYawDegrees": {
+   "down": 180,
+   "up": 0,
+   "left": 100,
+   "right": 260
+  },
+  "pixelsPerWorldUnit": 10,
+  "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+  "profileIdleHeightTargets": {
+   "fox": 14,
+   "rabbit": 13,
+   "elephant": 51,
+   "giraffe": 75
+  },
+  "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+  "reviewStatus": "agent calibration; all human art approvals pending"
+ },
+ "orthoScale": 9.6,
+ "shiftY": 0.16666666666666666,
+ "waterPlaneZ": 3.4,
+ "clips": {
+  "idle": {
+   "start": 0,
+   "count": 1
+  },
+  "haul": {
+   "start": 1,
+   "count": 8
+  },
+  "swim": {
+   "start": 9,
+   "count": 8
+  },
+  "action": {
+   "start": 17,
+   "count": 6
+  }
+ },
+ "facings": {
+  "down": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      46,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 0,
+     "rect": [
+      96,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      45,
+      58,
+      75
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -8.63375984750429e-17,
+        0.48625847697257996,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7487337589263916,
+        1.4826749563217163,
+        1.7120114215174453e-09
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5512661933898926,
+        1.4173253774642944,
+        -1.7120114215174453e-09
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      66
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 1,
+     "rect": [
+      192,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      47,
+      57,
+      74
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7517967224121094,
+        1.446293830871582,
+        6.818774433980934e-10
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5482032299041748,
+        1.4037060737609863,
+        -6.818774433980934e-10
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      65
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 2,
+     "rect": [
+      288,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      47,
+      58,
+      66
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -4.5924256971943795e-17,
+        -1.2250001430511475,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      61
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 3,
+     "rect": [
+      384,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      47,
+      58,
+      64
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      59
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 4,
+     "rect": [
+      480,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      46,
+      58,
+      65
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.4874992370605469,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      59
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 5,
+     "rect": [
+      576,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      45,
+      58,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.589558482170105,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      61
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 6,
+     "rect": [
+      672,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470730126382042e-16,
+        0.16146327555179596,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 7,
+     "rect": [
+      768,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      75
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470729464637552e-16,
+        0.061354056000709534,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7496663331985474,
+        1.504709005355835,
+        1.5040605205740576e-08
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5503336191177368,
+        1.4452911615371704,
+        1.4761718070133156e-08
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      66
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      864,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      37,
+      59,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      49,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      960,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      36,
+      37,
+      57,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      45,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      1056,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      35,
+      37,
+      57,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      43,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      1152,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      35,
+      37,
+      57,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      44,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      1248,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      38,
+      37,
+      58,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      47,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      1344,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      37,
+      61,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      51,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1440,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      37,
+      62,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      53,
+      57
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1536,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      37,
+      62,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      52,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1632,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      46,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      1728,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      45,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      1824,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      1920,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2016,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      45,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2112,
+      0,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      46,
+      58,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      64
+     ]
+    }
+   ]
+  },
+  "up": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      76
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 0,
+     "rect": [
+      96,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      47,
+      58,
+      75
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -8.63375984750429e-17,
+        0.48625847697257996,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7487337589263916,
+        1.4826749563217163,
+        1.7120114215174453e-09
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5512661933898926,
+        1.4173253774642944,
+        -1.7120114215174453e-09
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      50
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 1,
+     "rect": [
+      192,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      46,
+      57,
+      77
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7517967224121094,
+        1.446293830871582,
+        6.818774433980934e-10
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5482032299041748,
+        1.4037060737609863,
+        -6.818774433980934e-10
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      49
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 2,
+     "rect": [
+      288,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      43,
+      58,
+      77
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -4.5924256971943795e-17,
+        -1.2250001430511475,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      46
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 3,
+     "rect": [
+      384,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      41,
+      58,
+      77
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      44
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 4,
+     "rect": [
+      480,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      41,
+      58,
+      76
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.4874992370605469,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      44
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 5,
+     "rect": [
+      576,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      42,
+      58,
+      75
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.589558482170105,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      45
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 6,
+     "rect": [
+      672,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      74
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470730126382042e-16,
+        0.16146327555179596,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 7,
+     "rect": [
+      768,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      46,
+      58,
+      74
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470729464637552e-16,
+        0.061354056000709534,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7496663331985474,
+        1.504709005355835,
+        1.5040605205740576e-08
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5503336191177368,
+        1.4452911615371704,
+        1.4761718070133156e-08
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      49
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      864,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      38,
+      37,
+      58,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      47,
+      40
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      960,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      37,
+      61,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      51,
+      40
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      1056,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      38,
+      62,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      53,
+      41
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      1152,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      40,
+      37,
+      62,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      52,
+      40
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      1248,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      37,
+      59,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      49,
+      40
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      1344,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      36,
+      37,
+      58,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      45,
+      40
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1440,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      35,
+      38,
+      57,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      43,
+      41
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1536,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      35,
+      37,
+      57,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      44,
+      40
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1632,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      76
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      1728,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      75
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      1824,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      73
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      1920,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      73
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2016,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      74
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2112,
+      96,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      39,
+      44,
+      58,
+      76
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      48,
+      47
+     ]
+    }
+   ]
+  },
+  "left": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      54,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 0,
+     "rect": [
+      96,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      53,
+      71,
+      72
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -8.63375984750429e-17,
+        0.48625847697257996,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7487337589263916,
+        1.4826749563217163,
+        1.7120114215174453e-09
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5512661933898926,
+        1.4173253774642944,
+        -1.7120114215174453e-09
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      60
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 1,
+     "rect": [
+      192,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      53,
+      71,
+      71
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7517967224121094,
+        1.446293830871582,
+        6.818774433980934e-10
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5482032299041748,
+        1.4037060737609863,
+        -6.818774433980934e-10
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      58
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 2,
+     "rect": [
+      288,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      52,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -4.5924256971943795e-17,
+        -1.2250001430511475,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      55
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 3,
+     "rect": [
+      384,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      33,
+      50,
+      71,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      37,
+      53
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 4,
+     "rect": [
+      480,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      50,
+      71,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.4874992370605469,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      53
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 5,
+     "rect": [
+      576,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      52,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.589558482170105,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      55
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 6,
+     "rect": [
+      672,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      52,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470730126382042e-16,
+        0.16146327555179596,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 7,
+     "rect": [
+      768,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      52,
+      71,
+      71
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470729464637552e-16,
+        0.061354056000709534,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7496663331985474,
+        1.504709005355835,
+        1.5040605205740576e-08
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5503336191177368,
+        1.4452911615371704,
+        1.4761718070133156e-08
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      59
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      864,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      46,
+      71,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      51
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      960,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      44,
+      70,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      48
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      1056,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      43,
+      70,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      47
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      1152,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      44,
+      70,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      47
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      1248,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      46,
+      71,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      50
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      1344,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      47,
+      71,
+      63
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      52
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1440,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      48,
+      71,
+      65
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      53
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1536,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      32,
+      47,
+      71,
+      65
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      36,
+      53
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1632,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      54,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      1728,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      54,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      1824,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      52,
+      70,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      1920,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      52,
+      70,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2016,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      53,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2112,
+      192,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      31,
+      54,
+      71,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      35,
+      57
+     ]
+    }
+   ]
+  },
+  "right": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      54,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 0,
+     "rect": [
+      96,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      53,
+      66,
+      71
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -8.63375984750429e-17,
+        0.48625847697257996,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7487337589263916,
+        1.4826749563217163,
+        1.7120114215174453e-09
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5512661933898926,
+        1.4173253774642944,
+        -1.7120114215174453e-09
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      60
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 1,
+     "rect": [
+      192,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      53,
+      65,
+      71
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7517967224121094,
+        1.446293830871582,
+        6.818774433980934e-10
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5482032299041748,
+        1.4037060737609863,
+        -6.818774433980934e-10
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      58
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 2,
+     "rect": [
+      288,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      52,
+      65,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -4.5924256971943795e-17,
+        -1.2250001430511475,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      55
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 3,
+     "rect": [
+      384,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      50,
+      64,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -7.898972000650986e-17,
+        -0.901818573474884,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      59,
+      53
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 4,
+     "rect": [
+      480,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      50,
+      65,
+      67
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.4874992370605469,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      53
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 5,
+     "rect": [
+      576,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      52,
+      65,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.010333620295539e-16,
+        -0.589558482170105,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      55
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 6,
+     "rect": [
+      672,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      53,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470730126382042e-16,
+        0.16146327555179596,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "haul",
+     "index": 7,
+     "rect": [
+      768,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      52,
+      66,
+      71
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.0470729464637552e-16,
+        0.061354056000709534,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [
+       [
+        -0.7496663331985474,
+        1.504709005355835,
+        1.5040605205740576e-08
+       ]
+      ],
+      "foreflipper-1": [
+       [
+        0.5503336191177368,
+        1.4452911615371704,
+        1.4761718070133156e-08
+       ]
+      ],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      59
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      864,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      46,
+      66,
+      63
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      50
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      960,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      47,
+      65,
+      63
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      52
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      1056,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      27,
+      48,
+      65,
+      65
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      53
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      1152,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      47,
+      65,
+      65
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      60,
+      53
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      1248,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      46,
+      66,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      51
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      1344,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      44,
+      66,
+      63
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      48
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1440,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      43,
+      66,
+      62
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      47
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1536,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      44,
+      66,
+      63
+     ],
+     "contacts": {
+      "continuous-tapered-body": [],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      47
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1632,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      54,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      1728,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      27,
+      54,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      1824,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      27,
+      53,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      1920,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      27,
+      53,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2016,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      27,
+      54,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2112,
+      288,
+      96,
+      96
+     ],
+     "visibleBounds": [
+      26,
+      54,
+      66,
+      69
+     ],
+     "contacts": {
+      "continuous-tapered-body": [
+       [
+        -1.1021821011522021e-16,
+        -0.20036959648132324,
+        0.0
+       ]
+      ],
+      "foreflipper--1": [],
+      "foreflipper-1": [],
+      "hindflipper--1": [],
+      "hindflipper-1": [],
+      "short-tail": []
+     },
+     "headAnchor": [
+      61,
+      57
+     ]
+    }
+   ]
+  }
+ }
+}

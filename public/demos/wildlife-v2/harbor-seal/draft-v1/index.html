@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Harbor seal draft-v1</title><link rel="icon" href="data:,"><style>body{background:#26342c;color:#eee;font:16px system-ui;margin:24px}canvas,img{image-rendering:pixelated}canvas{display:block;margin:16px 0}button,select{font:inherit}a{color:#c2e0bc}</style>
+<h1>Harbor seal — draft-v1</h1><p>Pending draft. Fixed elevated camera. Eight-pose belly haul, hind-flipper swim, resting hind-flipper stretch and whisker fan. Profiles16/15px beside24px Explorer; proposal23 differs.</p>
+<label>Scale <select id="scale"><option value="1">Native</option><option value="4" selected>4x</option></select></label>
+<label>Clip <select id="clip"><option value="sequence">Two hauls, two swims, stretch, idle</option><option value="haul">Belly haul</option><option value="swim">Swim</option><option value="action">Resting stretch</option><option value="idle">Idle</option></select></label>
+<button type="button" id="reset">Restart</button><button type="button" id="pause">Pause</button><span id="status"></span>
+<canvas id="playback" width="600" height="280"></canvas><canvas id="sprites" width="384" height="96"></canvas>
+<p><a href="review-observations.md">Observations</a> / <a href="validation.json">Integrity</a> / <a href="preview-native.gif">Native loop</a></p>
+<img src="scene-native.png" alt="Seal and Explorer in actual scenery"><img src="contact-sheet.png" alt="All seal frames"><img src="strip-down.png" alt="Down chronological"><img src="strip-up.png" alt="Up chronological"><img src="strip-left.png" alt="Left chronological"><img src="strip-right.png" alt="Right chronological"><script type="module" src="playback.js"></script></html>

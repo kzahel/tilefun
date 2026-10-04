@@ -44,6 +44,15 @@
   "overrides": [
     {
       "includes": [
+        "art-source/wildlife-v2/**/*.json",
+        "public/demos/wildlife-v2/**/*.json",
+        "src/wildlife/reviews.json"
+      ],
+      "files": { "maxSize": 33554432 },
+      "formatter": { "enabled": false }
+    },
+    {
+      "includes": [
         "public/data/art-catalog.json",
         "public/data/workshop-manifest.json",
         "public/data/outdoor-catalog.json",

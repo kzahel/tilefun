@@ -1,0 +1,149 @@
+{
+  "identity": "mallard-duck-draft-v1-drawing-02",
+  "palette": {
+    "o": "#3c493b",
+    "g": "#28744f",
+    "h": "#4d9562",
+    "v": "#164d3d",
+    "k": "#202925",
+    "b": "#7a4939",
+    "c": "#a76946",
+    "s": "#717c73",
+    "t": "#939d8e",
+    "l": "#bbc4ae",
+    "w": "#e2debe",
+    "y": "#d3b456",
+    "a": "#c67635",
+    "u": "#55729a"
+  },
+  "canvas": [
+    48,
+    48
+  ],
+  "bodies": {
+    "left": {
+      "offset": [
+        -6,
+        -8
+      ],
+      "pixels": [
+        "....ooooooo....",
+        "ggoollllllloo..",
+        "wwbblslllllllo.",
+        "obcblssssssstto",
+        "obbbssssuuuusto",
+        "obbbbssswwwsso.",
+        ".obbssssssooo..",
+        "..oooooooo....."
+      ]
+    },
+    "right": {
+      "offset": [
+        -9,
+        -8
+      ],
+      "pixels": [
+        "....ooooooo....",
+        "..oollllllloogg",
+        ".olllllllslbbww",
+        "ottssssssslbcbo",
+        "otsuuuussssbbbo",
+        ".osswwwsssbbbbo",
+        "..ooossssssbbo.",
+        ".....oooooooo.."
+      ]
+    },
+    "down": {
+      "offset": [
+        -3,
+        -10
+      ],
+      "pixels": [
+        "..ooo..",
+        ".olllo.",
+        ".olllto",
+        "olllllo",
+        "ulllltu",
+        "ulllltu",
+        "ubbbbbu",
+        "wbbbbbw",
+        ".obbbo.",
+        ".ooooo."
+      ]
+    },
+    "up": {
+      "offset": [
+        -3,
+        -9
+      ],
+      "pixels": [
+        ".wwwww.",
+        ".olllo.",
+        ".olllo.",
+        "ollllso",
+        "ollllso",
+        "ullllsu",
+        "utllssu",
+        "utllssu",
+        "wsssssw",
+        ".ossso.",
+        ".ooooo."
+      ]
+    }
+  },
+  "heads": {
+    "left": {
+      "offset": [
+        -3,
+        -2
+      ],
+      "pixels": [
+        ".oggo.",
+        "oghhgo",
+        "ogkggo",
+        "ovgggo",
+        ".ovvo."
+      ]
+    },
+    "right": {
+      "offset": [
+        -2,
+        -2
+      ],
+      "pixels": [
+        ".oggo.",
+        "oghhgo",
+        "oggkgo",
+        "ogggvo",
+        ".ovvo."
+      ]
+    },
+    "down": {
+      "offset": [
+        -3,
+        -2
+      ],
+      "pixels": [
+        ".oggo.",
+        "oghhgo",
+        "okggko",
+        "ovggvo",
+        ".ovvo."
+      ]
+    },
+    "up": {
+      "offset": [
+        -3,
+        -2
+      ],
+      "pixels": [
+        ".oggo.",
+        "oghhgo",
+        "oghggo",
+        "ovggvo",
+        ".ovvo."
+      ]
+    }
+  },
+  "stylization": "Deliberate six-pixel green heads with stable eyes/cap, chestnut breast, gray mantle and cream collar; broad speculum bars. Profile shading mirrors intentionally. Final web/wing/feather contours use integer hull/joint guides with authored palette clusters, not render sampling. Rear eyes/bill hidden deliberately."
+}

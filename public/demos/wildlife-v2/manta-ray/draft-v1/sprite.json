@@ -1,0 +1,1844 @@
+{
+ "identity": "manta-ray-draft-v1-drawing-02",
+ "reviewStatus": "pending",
+ "image": "sheet.png",
+ "frameWidth": 144,
+ "frameHeight": 144,
+ "anchor": [
+  72,
+  90
+ ],
+ "rootMotion": false,
+ "cameraContract": {
+  "identity": "wildlife-v2-camera-01",
+  "projection": "ORTHO",
+  "artPerspective": "three-quarter top-down RPG on a square grid",
+  "elevationAboveGroundDegrees": 40,
+  "polarAngleFromVerticalDegrees": 50,
+  "target": [
+   0,
+   0,
+   0
+  ],
+  "cameraLocationAtDistance10": [
+   0,
+   -7.660444431,
+   6.427876097
+  ],
+  "modelYawDegrees": {
+   "down": 180,
+   "up": 0,
+   "left": 100,
+   "right": 260
+  },
+  "pixelsPerWorldUnit": 10,
+  "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+  "profileIdleHeightTargets": {
+   "fox": 14,
+   "rabbit": 13,
+   "elephant": 51,
+   "giraffe": 75
+  },
+  "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+  "reviewStatus": "agent calibration; all human art approvals pending"
+ },
+ "orthoScale": 14.4,
+ "shiftY": 0.125,
+ "waterPlaneZ": 4.3,
+ "clips": {
+  "idle": {
+   "start": 0,
+   "count": 1
+  },
+  "swim": {
+   "start": 1,
+   "count": 12
+  },
+  "action": {
+   "start": 13,
+   "count": 8
+  }
+ },
+ "facings": {
+  "down": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      144,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      288,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      57,
+      104,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      432,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      576,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      57,
+      102,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      720,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      44,
+      57,
+      101,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      864,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      57,
+      102,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1008,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1152,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      57,
+      104,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 8,
+     "rect": [
+      1296,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 9,
+     "rect": [
+      1440,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      57,
+      102,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 10,
+     "rect": [
+      1584,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      44,
+      57,
+      101,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 11,
+     "rect": [
+      1728,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      57,
+      102,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1872,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      2016,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      91
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      2160,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      91
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      2304,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      92
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2448,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      92
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2592,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      92
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 6,
+     "rect": [
+      2736,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      91
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 7,
+     "rect": [
+      2880,
+      0,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      57,
+      103,
+      90
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      84
+     ]
+    }
+   ]
+  },
+  "up": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      144,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      288,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      66,
+      104,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      432,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      576,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      66,
+      102,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      720,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      44,
+      66,
+      101,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      864,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      66,
+      102,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1008,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1152,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      66,
+      104,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 8,
+     "rect": [
+      1296,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 9,
+     "rect": [
+      1440,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      66,
+      102,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 10,
+     "rect": [
+      1584,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      44,
+      66,
+      101,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 11,
+     "rect": [
+      1728,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      43,
+      66,
+      102,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1872,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      2016,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      2160,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      65,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      2304,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      64,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2448,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      64,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2592,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      65,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 6,
+     "rect": [
+      2736,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 7,
+     "rect": [
+      2880,
+      144,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      103,
+      98
+     ],
+     "contacts": {},
+     "headAnchor": [
+      72,
+      70
+     ]
+    }
+   ]
+  },
+  "left": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      144,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      288,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      56,
+      104,
+      97
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      432,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      51,
+      104,
+      92
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      576,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      49,
+      104,
+      88
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      720,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      49,
+      103,
+      86
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      864,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      50,
+      103,
+      88
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1008,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      53,
+      104,
+      93
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1152,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      57,
+      104,
+      99
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 8,
+     "rect": [
+      1296,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      63,
+      104,
+      103
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 9,
+     "rect": [
+      1440,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      67,
+      104,
+      105
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 10,
+     "rect": [
+      1584,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      68,
+      104,
+      106
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 11,
+     "rect": [
+      1728,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      66,
+      104,
+      105
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1872,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      2016,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      53,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      2160,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      52,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      2304,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      51,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2448,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      51,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2592,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      51,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 6,
+     "rect": [
+      2736,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      53,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 7,
+     "rect": [
+      2880,
+      288,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      54,
+      61,
+      104,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      61,
+      78
+     ]
+    }
+   ]
+  },
+  "right": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      91,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 0,
+     "rect": [
+      144,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      91,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 1,
+     "rect": [
+      288,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      56,
+      91,
+      97
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 2,
+     "rect": [
+      432,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      51,
+      91,
+      92
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 3,
+     "rect": [
+      576,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      49,
+      91,
+      88
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 4,
+     "rect": [
+      720,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      49,
+      91,
+      86
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 5,
+     "rect": [
+      864,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      50,
+      91,
+      88
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 6,
+     "rect": [
+      1008,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      53,
+      91,
+      93
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 7,
+     "rect": [
+      1152,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      57,
+      91,
+      99
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 8,
+     "rect": [
+      1296,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      63,
+      91,
+      103
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 9,
+     "rect": [
+      1440,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      67,
+      91,
+      105
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 10,
+     "rect": [
+      1584,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      68,
+      91,
+      106
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "swim",
+     "index": 11,
+     "rect": [
+      1728,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      42,
+      66,
+      91,
+      105
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 0,
+     "rect": [
+      1872,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      91,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 1,
+     "rect": [
+      2016,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      92,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 2,
+     "rect": [
+      2160,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      93,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 3,
+     "rect": [
+      2304,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      94,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 4,
+     "rect": [
+      2448,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      94,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 5,
+     "rect": [
+      2592,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      94,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 6,
+     "rect": [
+      2736,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      92,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    },
+    {
+     "clip": "action",
+     "index": 7,
+     "rect": [
+      2880,
+      432,
+      144,
+      144
+     ],
+     "visibleBounds": [
+      41,
+      61,
+      91,
+      102
+     ],
+     "contacts": {},
+     "headAnchor": [
+      83,
+      78
+     ]
+    }
+   ]
+  }
+ }
+}

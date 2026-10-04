@@ -1,0 +1,17 @@
+05b6aef884518c6aff51c72615ac82a0c374a980b79e4581931e2cac1e9d8e32  art-source/wildlife-v2/fox/pilot-v2/audit.py
+e6305ac12a54235c5aa4258067f8963b25ee78980143ae66750f64cad38b426b  art-source/wildlife-v2/fox/pilot-v2/build.py
+057f002363abbbf2c94bd51cc4e92d13c0dbd64a2fdec16018235a3c2698f03a  art-source/wildlife-v2/fox/pilot-v2/capture.mjs
+1c5aedeee62fcdeed03ea2210d66eea19f9f16defae3e9220bdc37ce319e3ff8  art-source/wildlife-v2/fox/pilot-v2/compare.py
+13ae1b335deb5441580f3eef3370fbb014f5c7d5a2445b0cda826c918e39f612  art-source/wildlife-v2/fox/pilot-v2/export_saved_guides.py
+8b96d7de022bbdcad4a71ebd3cd9c0820af9ee9582a202969a31b2dfebd1167d  art-source/wildlife-v2/fox/pilot-v2/finish.py
+c448c6f1421166daf93a1ec0179e17a5d16f4da61d0362611a8bf96914f6c242  art-source/wildlife-v2/fox/pilot-v2/fox.blend
+bd624ac9e417ff8f54b901a121d1ed71a8ef1ec937bc42f8dae36d503ff5a7d9  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-01/build.py
+747bbddb0300cd80d662e7756d540530e624d41c3334c075b182596756f881fc  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-01/finish.py
+e60c371d5784bf87219d5cfc46ee12f541a40735e0ebad8c7bcb9cd7089b3eb3  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-01/fox.blend
+820776435abea6b2aa274fdbe47b81dc4d159fee6cdd7701d74b6eeb8e799958  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-01/masters.json
+2a85f8a4e91c3adc054de8e5861e373779523098bc9f903d125aec3014086408  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-01/projected-guides.json.gz
+475a8eaff94471a919698f0c3cf7adf4868e5028e40e882da6ca3e274da0a5ef  art-source/wildlife-v2/fox/pilot-v2/iterations/drawing-02/masters.json
+ead96e5953a0e5a8f738ad2512d174896cdeedc087123aa79e1dd10acd7c9a2e  art-source/wildlife-v2/fox/pilot-v2/masters.json
+975ab4e296648c1a88cd03cec0ca6cff908b1ea5dd96d2d5c2cf4c02b2026af5  art-source/wildlife-v2/fox/pilot-v2/projected-guides.json
+7d679efe5041da787d1f31c851f055a01523ee846db23b0da78b6552a1df7f17  art-source/wildlife-v2/fox/pilot-v2/README.md
+5be7f2d0292ab214f8eedd663d53fa26206d7214596d283a8566c637de53439d  art-source/wildlife-v2/fox/pilot-v2/verify.py

@@ -1,0 +1,213 @@
+{
+  "identity": "ant-draft-v2-drawing-03",
+  "species": "Formica rufa worker",
+  "canvas": [
+    32,
+    32
+  ],
+  "palette": {
+    ".": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "k": [
+      31,
+      28,
+      25,
+      255
+    ],
+    "b": [
+      96,
+      54,
+      35,
+      255
+    ],
+    "o": [
+      148,
+      76,
+      39,
+      255
+    ],
+    "h": [
+      185,
+      110,
+      57,
+      255
+    ],
+    "d": [
+      53,
+      45,
+      38,
+      255
+    ],
+    "g": [
+      87,
+      72,
+      55,
+      255
+    ],
+    "l": [
+      134,
+      116,
+      79,
+      255
+    ]
+  },
+  "heads": {
+    "down": {
+      "offset": [
+        -1,
+        -1
+      ],
+      "pixels": [
+        ".h.",
+        "kok",
+        "boo"
+      ]
+    },
+    "up": {
+      "offset": [
+        -1,
+        -1
+      ],
+      "pixels": [
+        ".d.",
+        "bdb",
+        ".b."
+      ]
+    },
+    "left": {
+      "offset": [
+        -2,
+        -1
+      ],
+      "pixels": [
+        ".hb.",
+        "okob",
+        ".bo."
+      ]
+    },
+    "right": {
+      "offset": [
+        -1,
+        -1
+      ],
+      "pixels": [
+        ".bh.",
+        "boko",
+        ".ob."
+      ]
+    }
+  },
+  "thoraces": {
+    "down": {
+      "offset": [
+        -1,
+        -2
+      ],
+      "pixels": [
+        ".h.",
+        "bho",
+        "boo",
+        ".b.",
+        ".b."
+      ]
+    },
+    "up": {
+      "offset": [
+        -1,
+        -2
+      ],
+      "pixels": [
+        ".b.",
+        "bhb",
+        "boo",
+        ".o.",
+        ".b."
+      ]
+    },
+    "left": {
+      "offset": [
+        -2,
+        -1
+      ],
+      "pixels": [
+        "bhhoo",
+        ".bbbo"
+      ]
+    },
+    "right": {
+      "offset": [
+        -2,
+        -1
+      ],
+      "pixels": [
+        "oohhb",
+        "obbb."
+      ]
+    }
+  },
+  "gasters": {
+    "down": {
+      "offset": [
+        -1,
+        -2
+      ],
+      "pixels": [
+        ".gg.",
+        "gldk",
+        "ddkk",
+        ".kk."
+      ]
+    },
+    "up": {
+      "offset": [
+        -1,
+        -2
+      ],
+      "pixels": [
+        ".lg.",
+        "gdkk",
+        "dkkk",
+        ".kk."
+      ]
+    },
+    "left": {
+      "offset": [
+        -2,
+        -2
+      ],
+      "pixels": [
+        ".ggg.",
+        "glddk",
+        "dddkk",
+        ".kkk."
+      ]
+    },
+    "right": {
+      "offset": [
+        -2,
+        -2
+      ],
+      "pixels": [
+        ".ggg.",
+        "kddlg",
+        "kkddd",
+        ".kkk."
+      ]
+    }
+  },
+  "petiole": {
+    "offset": [
+      0,
+      -1
+    ],
+    "pixels": [
+      "o",
+      "b"
+    ]
+  },
+  "stylization": "Fresh species-specific palette-letter bicoloured rounded head, rust mesosoma, single petiole and dark warm-brown gaster with broad muted upper highlight. Profile head uses4px width following projected skull width; profile gaster uses4 integer rows for its3.1px projected volume instead of losing the upper curve. No geometry or head volume changes. Full head/body patches stay fixed; opposite profiles deliberately mirror lighting. Actual independently projected fixed-length six-leg chains and elbowed antennae guide one-pixel integer clusters. Body surfaces hide rasterized joint overlap; near legs use charcoal, far legs brown to keep depth readable. Tiny rear head cap has no front eyes/mandibles. Eyes/waist/tarsal tips are native pixel abstractions, not anatomical measurements."
+}

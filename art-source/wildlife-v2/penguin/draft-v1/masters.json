@@ -1,0 +1,262 @@
+{
+  "identity": "penguin-draft-v1-drawing-02",
+  "palette": {
+    "o": "#1e302f",
+    "k": "#2b3939",
+    "d": "#475555",
+    "g": "#69706a",
+    "w": "#dedbd0",
+    "c": "#a6afa6",
+    "y": "#d7bb6b",
+    "a": "#ad8042",
+    "f": "#62584c",
+    "e": "#102528",
+    "s": "#394743"
+  },
+  "heads": {
+    "down": {
+      "offset": [
+        -3,
+        -3
+      ],
+      "pixels": [
+        "..ddd..",
+        ".dkkkd.",
+        "okkkkko",
+        "eokkkke",
+        "ykkokky",
+        ".ykoky.",
+        "..aok..",
+        "..yyy.."
+      ]
+    },
+    "up": {
+      "offset": [
+        -3,
+        -3
+      ],
+      "pixels": [
+        "..ddd..",
+        ".dkkkd.",
+        "odkkkko",
+        "okkkkko",
+        "ykkkkky",
+        ".ykkky.",
+        "..ooo.."
+      ]
+    },
+    "left": {
+      "offset": [
+        -5,
+        -3
+      ],
+      "pixels": [
+        ".....ddd..",
+        "....dkkkd.",
+        "...okkkkko",
+        "ooookkkkkk",
+        ".aaooekkkk",
+        "....kyykk.",
+        ".....yyko.",
+        ".....ok..."
+      ]
+    },
+    "right": {
+      "offset": [
+        -4,
+        -3
+      ],
+      "pixels": [
+        "..ddd.....",
+        ".dkkkd....",
+        "okkkkko...",
+        "kkkkkkoooo",
+        "kkkkeooaa.",
+        ".kkyyk....",
+        ".okyy.....",
+        "...ko....."
+      ]
+    }
+  },
+  "standing": {
+    "down": {
+      "offset": [
+        -5,
+        -7
+      ],
+      "pixels": [
+        "...kkkkk...",
+        "..kkdddkk..",
+        ".kkdyyydkk.",
+        ".kdwywywdk.",
+        ".kdwwwwwdk.",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        ".kdwwwwwdk.",
+        ".kkcwwwckk.",
+        "..kkccckk..",
+        "...kkckk...",
+        "....ooo...."
+      ]
+    },
+    "up": {
+      "offset": [
+        -5,
+        -7
+      ],
+      "pixels": [
+        "...ddddd...",
+        "..dddddkd..",
+        ".ddddkkkdk.",
+        ".ddkkkkkkk.",
+        ".dkkkkkkkk.",
+        "odkkkkkkkko",
+        "odkkkkkkkko",
+        "odkkkkkkkko",
+        "okkkkkkkkko",
+        "okkkkkkkkko",
+        ".kkkkkkkkk.",
+        ".kkkkkkkkk.",
+        "..kkssskk..",
+        "...kkokk...",
+        "....ooo...."
+      ]
+    },
+    "left": {
+      "offset": [
+        -4,
+        -7
+      ],
+      "pixels": [
+        "...ddd...",
+        "..ddddk..",
+        ".kwddkkk.",
+        "owwddkkko",
+        "owwdkkkko",
+        "owwdkkkko",
+        "owwdkkkko",
+        "owwdkkkko",
+        "owwdkkkko",
+        "owwdkkkko",
+        "ocwdkkkko",
+        ".cwkkkkk.",
+        ".ockkkko.",
+        "..ockko..",
+        "...ooo..."
+      ]
+    },
+    "right": {
+      "offset": [
+        -4,
+        -7
+      ],
+      "pixels": [
+        "...ddd...",
+        "..kdddd..",
+        ".kkkddwk.",
+        "okkkddwwo",
+        "okkkkdwwo",
+        "okkkkdwwo",
+        "okkkkdwwo",
+        "okkkkdwwo",
+        "okkkkdwwo",
+        "okkkkdwwo",
+        "okkkkdwco",
+        ".kkkkkwc.",
+        ".okkkkco.",
+        "..okkco..",
+        "...ooo..."
+      ]
+    }
+  },
+  "swimming": {
+    "down": {
+      "offset": [
+        -5,
+        -5
+      ],
+      "pixels": [
+        "....ooo....",
+        "...kkkkk...",
+        "..kkdddkk..",
+        ".kkdwwwdkk.",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        "okdwwwwwdko",
+        ".kdwwwwwdk.",
+        ".kkcwwwckk.",
+        "..kkccckk..",
+        "...kkckk..."
+      ]
+    },
+    "up": {
+      "offset": [
+        -5,
+        -8
+      ],
+      "pixels": [
+        "....ddd....",
+        "...ddddk...",
+        "..ddddkkk..",
+        ".ddddkkkkk.",
+        ".dddkkkkkk.",
+        "odddkkkkkko",
+        "oddkkkkkkko",
+        "odkkkkkkkko",
+        "odkkkkkkkko",
+        "odkkkkkkkko",
+        "okkkkkkkkko",
+        "okkkkkkkkko",
+        ".kkkkkkkkk.",
+        ".kkkkkkkkk.",
+        "..kkssskk..",
+        "...kkokk...",
+        "....ooo...."
+      ]
+    },
+    "left": {
+      "offset": [
+        -9,
+        -4
+      ],
+      "pixels": [
+        ".....dddddddd......",
+        "...dddddddddkkk....",
+        "..dddddkkkkkkkkkk..",
+        ".ddkkkkkkkkkkkkkko.",
+        "odkkkkkkkkkkkkkkkko",
+        "okkkcccccccccccckko",
+        ".kkccwwwwwwwwcckk..",
+        "..kkccwwwwwcckk....",
+        "......ooooooo......"
+      ]
+    },
+    "right": {
+      "offset": [
+        -9,
+        -4
+      ],
+      "pixels": [
+        "......dddddddd.....",
+        "....kkkddddddddd...",
+        "..kkkkkkkkkkddddd..",
+        ".okkkkkkkkkkkkkkdd.",
+        "okkkkkkkkkkkkkkkkdo",
+        "okkcccccccccccckkko",
+        "..kkccwwwwwwwwcckk.",
+        "....kkccwwwwwcckk..",
+        "......ooooooo......"
+      ]
+    }
+  },
+  "stylization": [
+    "Full unchanged head/eye/gold-cheek/bill templates in every clip, swim skull counter-pitches rigidly to preserve global orientation.",
+    "Different fixed standing/swimming torso projections follow rigid75-degree posture; no geometry or pixel resampling.",
+    "Broad black back/white belly, restrained slate highlights and emperor gold ear/chest; rear hides pupils/bill/white front.",
+    "Web foot tops are dark, rear heels have no front toe highlights; hull contacts retain projected depths.",
+    "Three-link flipper hulls integer-composed with actual near/far occlusion, enough articulation for coherent underwater strokes."
+  ]
+}

@@ -1,0 +1,4195 @@
+{
+  "version": 2,
+  "id": "wildlife-campaign-v2",
+  "reference": {
+    "project": "mclone",
+    "path": "tools/asset-lab/ANIMALS.md",
+    "sha256": "200be3c4ff0f6fa760041b0db033a043ee15e8beea049fd974e3aee0fa525d41",
+    "readOn": "2026-10-03",
+    "checklistRows": [
+      {
+        "family": "Farm & livestock",
+        "label": "Pig",
+        "referenceFigure": "piglet"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Sheep",
+        "referenceFigure": "sheep"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Cow",
+        "referenceFigure": "cow"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Chicken",
+        "referenceFigure": "chicken"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Horse",
+        "referenceFigure": "horse"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Goat",
+        "referenceFigure": "goat"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Rabbit",
+        "referenceFigure": "rabbit"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Donkey / Mule",
+        "referenceFigure": "donkey"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Duck",
+        "referenceFigure": "mallard_duck"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Turkey",
+        "referenceFigure": "wild_turkey"
+      },
+      {
+        "family": "Farm & livestock",
+        "label": "Llama / Alpaca",
+        "referenceFigure": "llama"
+      },
+      {
+        "family": "Domestic pets",
+        "label": "Dog",
+        "referenceFigure": "dog"
+      },
+      {
+        "family": "Domestic pets",
+        "label": "Cat",
+        "referenceFigure": "cat"
+      },
+      {
+        "family": "Domestic pets",
+        "label": "Hamster / Guinea pig",
+        "referenceFigure": "hamster"
+      },
+      {
+        "family": "Domestic pets",
+        "label": "Parrot (pet)",
+        "referenceFigure": "parrot"
+      },
+      {
+        "family": "Canids (wild)",
+        "label": "Wolf",
+        "referenceFigure": "wolf"
+      },
+      {
+        "family": "Canids (wild)",
+        "label": "Fox",
+        "referenceFigure": "fox"
+      },
+      {
+        "family": "Canids (wild)",
+        "label": "Coyote",
+        "referenceFigure": "coyote"
+      },
+      {
+        "family": "Canids (wild)",
+        "label": "Hyena",
+        "referenceFigure": "spotted_hyena"
+      },
+      {
+        "family": "Felids (big cats)",
+        "label": "Lion",
+        "referenceFigure": "lion"
+      },
+      {
+        "family": "Felids (big cats)",
+        "label": "Tiger",
+        "referenceFigure": "tiger"
+      },
+      {
+        "family": "Felids (big cats)",
+        "label": "Leopard / Jaguar",
+        "referenceFigure": "jaguar"
+      },
+      {
+        "family": "Felids (big cats)",
+        "label": "Cheetah",
+        "referenceFigure": "cheetah"
+      },
+      {
+        "family": "Felids (big cats)",
+        "label": "Lynx / Bobcat",
+        "referenceFigure": "lynx"
+      },
+      {
+        "family": "Bears",
+        "label": "Bear",
+        "referenceFigure": "bear"
+      },
+      {
+        "family": "Bears",
+        "label": "Panda",
+        "referenceFigure": "panda"
+      },
+      {
+        "family": "Bears",
+        "label": "Polar bear",
+        "referenceFigure": "polar_bear"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Deer",
+        "referenceFigure": "deer"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Moose / Elk",
+        "referenceFigure": "moose"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Elephant",
+        "referenceFigure": "elephant"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Giraffe",
+        "referenceFigure": "giraffe"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Zebra",
+        "referenceFigure": "zebra"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Rhino",
+        "referenceFigure": "rhinoceros"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Hippo",
+        "referenceFigure": "hippopotamus"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Camel",
+        "referenceFigure": "camel"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Bison / Buffalo",
+        "referenceFigure": "american_bison"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Antelope / Gazelle / Impala",
+        "referenceFigure": "gemsbok_oryx"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Saiga antelope",
+        "referenceFigure": "saiga_antelope"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Musk ox",
+        "referenceFigure": "musk_ox"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Wildebeest / Gnu",
+        "referenceFigure": "wildebeest"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Tapir",
+        "referenceFigure": "malayan_tapir"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Okapi",
+        "referenceFigure": "okapi"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Warthog",
+        "referenceFigure": "warthog"
+      },
+      {
+        "family": "Hoofed & large herbivores",
+        "label": "Gerenuk",
+        "referenceFigure": "gerenuk"
+      },
+      {
+        "family": "Primates",
+        "label": "Monkey",
+        "referenceFigure": "capuchin_monkey"
+      },
+      {
+        "family": "Primates",
+        "label": "Gorilla",
+        "referenceFigure": "gorilla"
+      },
+      {
+        "family": "Primates",
+        "label": "Chimpanzee",
+        "referenceFigure": "chimpanzee"
+      },
+      {
+        "family": "Primates",
+        "label": "Orangutan",
+        "referenceFigure": "orangutan"
+      },
+      {
+        "family": "Primates",
+        "label": "Lemur",
+        "referenceFigure": "ring_tailed_lemur"
+      },
+      {
+        "family": "Primates",
+        "label": "Mandrill",
+        "referenceFigure": "mandrill"
+      },
+      {
+        "family": "Primates",
+        "label": "Proboscis monkey",
+        "referenceFigure": "proboscis_monkey"
+      },
+      {
+        "family": "Primates",
+        "label": "Japanese macaque",
+        "referenceFigure": "japanese_macaque"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Mouse / Rat",
+        "referenceFigure": "mouse"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Squirrel",
+        "referenceFigure": "red_squirrel"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Chinchilla",
+        "referenceFigure": "chinchilla"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Rabbit",
+        "referenceFigure": "rabbit"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Hedgehog",
+        "referenceFigure": "hedgehog"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Porcupine",
+        "referenceFigure": "porcupine"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Raccoon",
+        "referenceFigure": "raccoon"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Skunk",
+        "referenceFigure": "skunk"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Beaver",
+        "referenceFigure": "beaver"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Bat",
+        "referenceFigure": "bat"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Meerkat",
+        "referenceFigure": "meerkat"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Otter",
+        "referenceFigure": "river_otter"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Red panda",
+        "referenceFigure": "red_panda"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Sloth",
+        "referenceFigure": "sloth"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Capybara",
+        "referenceFigure": "capybara"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Anteater",
+        "referenceFigure": "giant_anteater"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Aardvark",
+        "referenceFigure": "aardvark"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Armadillo",
+        "referenceFigure": "armadillo"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Pangolin",
+        "referenceFigure": "pangolin"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Mongoose",
+        "referenceFigure": "mongoose"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Binturong",
+        "referenceFigure": "binturong"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Honey badger",
+        "referenceFigure": "honey_badger"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Fossa",
+        "referenceFigure": "fossa"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Aye-aye",
+        "referenceFigure": "aye_aye"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "White-nosed coati",
+        "referenceFigure": "white_nosed_coati"
+      },
+      {
+        "family": "Small & exotic mammals",
+        "label": "Kinkajou",
+        "referenceFigure": "kinkajou"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Kangaroo",
+        "referenceFigure": "kangaroo"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Koala",
+        "referenceFigure": "koala"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Wallaby",
+        "referenceFigure": "wallaby"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Wombat",
+        "referenceFigure": "wombat"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Opossum",
+        "referenceFigure": "opossum"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Tasmanian devil",
+        "referenceFigure": "tasmanian_devil"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Platypus",
+        "referenceFigure": "platypus"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Echidna",
+        "referenceFigure": "echidna"
+      },
+      {
+        "family": "Marsupials & monotremes",
+        "label": "Quokka",
+        "referenceFigure": "quokka"
+      },
+      {
+        "family": "Birds",
+        "label": "Chicken",
+        "referenceFigure": "chicken"
+      },
+      {
+        "family": "Birds",
+        "label": "Toucan",
+        "referenceFigure": "toucan"
+      },
+      {
+        "family": "Birds",
+        "label": "Great hornbill",
+        "referenceFigure": "great_hornbill"
+      },
+      {
+        "family": "Birds",
+        "label": "Owl",
+        "referenceFigure": "owl"
+      },
+      {
+        "family": "Birds",
+        "label": "Parrot",
+        "referenceFigure": "parrot"
+      },
+      {
+        "family": "Birds",
+        "label": "Eagle / Hawk",
+        "referenceFigure": "eagle"
+      },
+      {
+        "family": "Birds",
+        "label": "Penguin",
+        "referenceFigure": "penguin"
+      },
+      {
+        "family": "Birds",
+        "label": "Duck",
+        "referenceFigure": "mallard_duck"
+      },
+      {
+        "family": "Birds",
+        "label": "Pigeon / Dove",
+        "referenceFigure": "pigeon"
+      },
+      {
+        "family": "Birds",
+        "label": "Crow / Raven",
+        "referenceFigure": "raven"
+      },
+      {
+        "family": "Birds",
+        "label": "Flamingo",
+        "referenceFigure": "flamingo"
+      },
+      {
+        "family": "Birds",
+        "label": "Shoebill",
+        "referenceFigure": "shoebill"
+      },
+      {
+        "family": "Birds",
+        "label": "Pelican",
+        "referenceFigure": "pelican"
+      },
+      {
+        "family": "Birds",
+        "label": "Blue-footed booby",
+        "referenceFigure": "blue_footed_booby"
+      },
+      {
+        "family": "Birds",
+        "label": "Songbird (robin/sparrow)",
+        "referenceFigure": "robin"
+      },
+      {
+        "family": "Birds",
+        "label": "Peacock",
+        "referenceFigure": "peacock"
+      },
+      {
+        "family": "Birds",
+        "label": "Ostrich / Emu",
+        "referenceFigure": "ostrich"
+      },
+      {
+        "family": "Birds",
+        "label": "Cassowary",
+        "referenceFigure": "cassowary"
+      },
+      {
+        "family": "Birds",
+        "label": "Kiwi",
+        "referenceFigure": "kiwi"
+      },
+      {
+        "family": "Birds",
+        "label": "Secretary bird",
+        "referenceFigure": "secretary_bird"
+      },
+      {
+        "family": "Birds",
+        "label": "Marabou stork",
+        "referenceFigure": "marabou_stork"
+      },
+      {
+        "family": "Birds",
+        "label": "Kakapo",
+        "referenceFigure": "kakapo"
+      },
+      {
+        "family": "Birds",
+        "label": "Great blue heron",
+        "referenceFigure": "great_blue_heron"
+      },
+      {
+        "family": "Birds",
+        "label": "Atlantic puffin",
+        "referenceFigure": "atlantic_puffin"
+      },
+      {
+        "family": "Birds",
+        "label": "Ruby-throated hummingbird",
+        "referenceFigure": "ruby_throated_hummingbird"
+      },
+      {
+        "family": "Birds",
+        "label": "Great frigatebird",
+        "referenceFigure": "great_frigatebird"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Fish (generic)",
+        "referenceFigure": "fish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Ocean sunfish",
+        "referenceFigure": "ocean_sunfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Swordfish",
+        "referenceFigure": "swordfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Pufferfish",
+        "referenceFigure": "pufferfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Shark",
+        "referenceFigure": "shark"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Hammerhead shark",
+        "referenceFigure": "hammerhead_shark"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Whale shark",
+        "referenceFigure": "whale_shark"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Manta ray",
+        "referenceFigure": "manta_ray"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Dolphin",
+        "referenceFigure": "dolphin"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Whale",
+        "referenceFigure": "orca"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Narwhal",
+        "referenceFigure": "narwhal"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Octopus",
+        "referenceFigure": "octopus"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Cuttlefish",
+        "referenceFigure": "cuttlefish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Crab",
+        "referenceFigure": "crab"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Coconut crab",
+        "referenceFigure": "coconut_crab"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Horseshoe crab",
+        "referenceFigure": "horseshoe_crab"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Sea turtle",
+        "referenceFigure": "sea_turtle"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Seahorse",
+        "referenceFigure": "seahorse"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Jellyfish",
+        "referenceFigure": "jellyfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Starfish",
+        "referenceFigure": "starfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Lobster",
+        "referenceFigure": "lobster"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Shrimp",
+        "referenceFigure": "shrimp"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Mantis shrimp",
+        "referenceFigure": "mantis_shrimp"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Nautilus",
+        "referenceFigure": "nautilus"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Seal / Sea lion",
+        "referenceFigure": "harbor_seal"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Manatee / Dugong",
+        "referenceFigure": "manatee"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Walrus",
+        "referenceFigure": "walrus"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Anglerfish",
+        "referenceFigure": "anglerfish"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Leafy seadragon",
+        "referenceFigure": "leafy_seadragon"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Moray eel",
+        "referenceFigure": "moray_eel"
+      },
+      {
+        "family": "Marine & aquatic",
+        "label": "Electric eel",
+        "referenceFigure": "electric_eel"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Snake",
+        "referenceFigure": "king_cobra"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Gaboon viper",
+        "referenceFigure": "gaboon_viper"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Lizard / Gecko",
+        "referenceFigure": "gecko"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Turtle / Tortoise",
+        "referenceFigure": "sea_turtle"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Crocodile / Alligator",
+        "referenceFigure": "crocodile"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Komodo dragon",
+        "referenceFigure": "komodo_dragon"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Frog",
+        "referenceFigure": "frog"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Salamander / Newt",
+        "referenceFigure": "salamander"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Axolotl",
+        "referenceFigure": "axolotl"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Frilled-neck lizard",
+        "referenceFigure": "frilled_neck_lizard"
+      },
+      {
+        "family": "Reptiles & amphibians",
+        "label": "Texas horned lizard",
+        "referenceFigure": "texas_horned_lizard"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Butterfly",
+        "referenceFigure": "butterfly"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Bee",
+        "referenceFigure": "bee"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Ladybug",
+        "referenceFigure": "ladybug"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Dragonfly",
+        "referenceFigure": "dragonfly"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Spider",
+        "referenceFigure": "spider"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Ant",
+        "referenceFigure": "ant"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Beetle",
+        "referenceFigure": "stag_beetle"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Grasshopper / Cricket",
+        "referenceFigure": "grasshopper"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Praying mantis",
+        "referenceFigure": "praying_mantis"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Leaf insect",
+        "referenceFigure": "leaf_insect"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Scorpion",
+        "referenceFigure": "scorpion"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Roly-poly / Pill bug",
+        "referenceFigure": "roly_poly"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Earwig (pincher bug)",
+        "referenceFigure": "earwig"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Centipede / Millipede",
+        "referenceFigure": "centipede"
+      },
+      {
+        "family": "Insects & arthropods",
+        "label": "Snail",
+        "referenceFigure": "snail"
+      }
+    ]
+  },
+  "scope": "Natural checklist rows, named alternatives, earthworm, and two selected upright forms. Coat/breed/age variants are later.",
+  "animals": [
+    {
+      "id": "fox",
+      "name": "Red fox",
+      "form": "natural",
+      "family": "Canids (wild)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Fox",
+        "figure": "tools/asset-lab/examples/fox/figure.ts"
+      }
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Rabbit",
+        "figure": "tools/asset-lab/examples/rabbit/figure.ts"
+      }
+    },
+    {
+      "id": "elephant",
+      "name": "African elephant",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 51,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Elephant",
+        "figure": "tools/asset-lab/examples/elephant/figure.ts"
+      }
+    },
+    {
+      "id": "giraffe",
+      "name": "Giraffe",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 75,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Giraffe",
+        "figure": "tools/asset-lab/examples/giraffe/figure.ts"
+      }
+    },
+    {
+      "id": "mallard-duck",
+      "name": "Mallard duck",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "water", "air"],
+      "locomotion": ["waddle", "swim", "flap"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Duck",
+        "figure": "tools/asset-lab/examples/mallard_duck/figure.ts"
+      }
+    },
+    {
+      "id": "robin",
+      "name": "European robin",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["hop", "flap"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Songbird (robin/sparrow)",
+        "figure": "tools/asset-lab/examples/robin/figure.ts"
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Pond fish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Fish (generic)",
+        "figure": "tools/asset-lab/examples/fish/figure.ts"
+      }
+    },
+    {
+      "id": "butterfly",
+      "name": "Butterfly",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "flutterer",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flutter"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Butterfly",
+        "figure": "tools/asset-lab/examples/butterfly/figure.ts"
+      }
+    },
+    {
+      "id": "ant",
+      "name": "Ant",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ant",
+        "figure": "tools/asset-lab/examples/ant/figure.ts"
+      }
+    },
+    {
+      "id": "king-cobra",
+      "name": "King cobra",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "serpentine",
+      "media": ["ground"],
+      "locomotion": ["slither"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Snake",
+        "figure": "tools/asset-lab/examples/king_cobra/figure.ts"
+      }
+    },
+    {
+      "id": "frog",
+      "name": "Frog",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "hopper",
+      "media": ["ground", "water"],
+      "locomotion": ["hop", "swim"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Frog",
+        "figure": "tools/asset-lab/examples/frog/figure.ts"
+      }
+    },
+    {
+      "id": "gorilla",
+      "name": "Gorilla",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 37,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Gorilla",
+        "figure": "tools/asset-lab/examples/gorilla/figure.ts"
+      }
+    },
+    {
+      "id": "kangaroo",
+      "name": "Kangaroo",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 36,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Kangaroo",
+        "figure": "tools/asset-lab/examples/kangaroo/figure.ts"
+      }
+    },
+    {
+      "id": "crab",
+      "name": "Crab",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "many-leg",
+      "media": ["water"],
+      "locomotion": ["sideways-scuttle"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Crab",
+        "figure": "tools/asset-lab/examples/crab/figure.ts"
+      }
+    },
+    {
+      "id": "octopus",
+      "name": "Octopus",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "soft-aquatic",
+      "media": ["water"],
+      "locomotion": ["jet-swim"],
+      "idleVisibleHeightPx": 21,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Octopus",
+        "figure": "tools/asset-lab/examples/octopus/figure.ts"
+      }
+    },
+    {
+      "id": "penguin",
+      "name": "Penguin",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground", "water"],
+      "locomotion": ["walk", "swim"],
+      "idleVisibleHeightPx": 26,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Penguin",
+        "figure": "tools/asset-lab/examples/penguin/figure.ts"
+      }
+    },
+    {
+      "id": "harbor-seal",
+      "name": "Harbor seal",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "flippered",
+      "media": ["ground", "water"],
+      "locomotion": ["haul", "swim"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Seal / Sea lion",
+        "figure": "tools/asset-lab/examples/harbor_seal/figure.ts"
+      }
+    },
+    {
+      "id": "manta-ray",
+      "name": "Manta ray",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 24,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Manta ray",
+        "figure": "tools/asset-lab/examples/manta_ray/figure.ts"
+      }
+    },
+    {
+      "id": "jellyfish",
+      "name": "Jellyfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "soft-aquatic",
+      "media": ["water"],
+      "locomotion": ["pulse"],
+      "idleVisibleHeightPx": 12,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Jellyfish",
+        "figure": "tools/asset-lab/examples/jellyfish/figure.ts"
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "form": "natural",
+      "family": "Domestic pets",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Cat",
+        "figure": "tools/asset-lab/examples/cat/figure.ts"
+      }
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "form": "natural",
+      "family": "Domestic pets",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Dog",
+        "figure": "tools/asset-lab/examples/dog/figure.ts"
+      }
+    },
+    {
+      "id": "red-squirrel",
+      "name": "Red squirrel",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Squirrel",
+        "figure": "tools/asset-lab/examples/red_squirrel/figure.ts"
+      }
+    },
+    {
+      "id": "bear",
+      "name": "Brown bear",
+      "form": "natural",
+      "family": "Bears",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 37,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Bear",
+        "figure": "tools/asset-lab/examples/bear/figure.ts"
+      }
+    },
+    {
+      "id": "deer",
+      "name": "White-tailed deer",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 35,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Deer",
+        "figure": "tools/asset-lab/examples/deer/figure.ts"
+      }
+    },
+    {
+      "id": "cow",
+      "name": "Cow",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 32,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Cow",
+        "figure": "tools/asset-lab/examples/cow/figure.ts"
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Sheep",
+        "figure": "tools/asset-lab/examples/sheep/figure.ts"
+      }
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 38,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Horse",
+        "figure": "tools/asset-lab/examples/horse/figure.ts"
+      }
+    },
+    {
+      "id": "piglet",
+      "name": "Pig",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pig",
+        "figure": "tools/asset-lab/examples/piglet/figure.ts"
+      }
+    },
+    {
+      "id": "goat",
+      "name": "Goat",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Goat",
+        "figure": "tools/asset-lab/examples/goat/figure.ts"
+      }
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 16,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Chicken",
+        "figure": "tools/asset-lab/examples/chicken/figure.ts"
+      }
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "flutterer",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flutter"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Bee",
+        "figure": "tools/asset-lab/examples/bee/figure.ts"
+      }
+    },
+    {
+      "id": "ladybug",
+      "name": "Ladybug",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ladybug",
+        "figure": "tools/asset-lab/examples/ladybug/figure.ts"
+      }
+    },
+    {
+      "id": "owl",
+      "name": "Owl",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Owl",
+        "figure": "tools/asset-lab/examples/owl/figure.ts"
+      }
+    },
+    {
+      "id": "sea-turtle",
+      "name": "Green sea turtle",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Sea turtle",
+        "figure": "tools/asset-lab/examples/sea_turtle/figure.ts"
+      }
+    },
+    {
+      "id": "gecko",
+      "name": "Tokay gecko",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lizard / Gecko",
+        "figure": "tools/asset-lab/examples/gecko/figure.ts"
+      }
+    },
+    {
+      "id": "wolf",
+      "name": "Wolf",
+      "form": "natural",
+      "family": "Canids (wild)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Wolf",
+        "figure": "tools/asset-lab/examples/wolf/figure.ts"
+      }
+    },
+    {
+      "id": "donkey",
+      "name": "Donkey",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 31,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Donkey / Mule",
+        "figure": "tools/asset-lab/examples/donkey/figure.ts"
+      }
+    },
+    {
+      "id": "mule",
+      "name": "Mule",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 35,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Donkey / Mule",
+        "figure": "tools/asset-lab/examples/donkey/figure.ts"
+      }
+    },
+    {
+      "id": "wild-turkey",
+      "name": "Wild turkey",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 22,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Turkey",
+        "figure": "tools/asset-lab/examples/wild_turkey/figure.ts"
+      }
+    },
+    {
+      "id": "llama",
+      "name": "Llama",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 37,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Llama / Alpaca",
+        "figure": "tools/asset-lab/examples/llama/figure.ts"
+      }
+    },
+    {
+      "id": "alpaca",
+      "name": "Alpaca",
+      "form": "natural",
+      "family": "Farm & livestock",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 29,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Llama / Alpaca",
+        "figure": "tools/asset-lab/examples/llama/figure.ts"
+      }
+    },
+    {
+      "id": "hamster",
+      "name": "Hamster",
+      "form": "natural",
+      "family": "Domestic pets",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hamster / Guinea pig",
+        "figure": "tools/asset-lab/examples/hamster/figure.ts"
+      }
+    },
+    {
+      "id": "guinea-pig",
+      "name": "Guinea pig",
+      "form": "natural",
+      "family": "Domestic pets",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hamster / Guinea pig",
+        "figure": "tools/asset-lab/examples/hamster/figure.ts"
+      }
+    },
+    {
+      "id": "parrot",
+      "name": "Scarlet macaw",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 21,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Parrot",
+        "figure": "tools/asset-lab/examples/parrot/figure.ts"
+      }
+    },
+    {
+      "id": "coyote",
+      "name": "Coyote",
+      "form": "natural",
+      "family": "Canids (wild)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Coyote",
+        "figure": "tools/asset-lab/examples/coyote/figure.ts"
+      }
+    },
+    {
+      "id": "spotted-hyena",
+      "name": "Spotted hyena",
+      "form": "natural",
+      "family": "Canids (wild)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hyena",
+        "figure": "tools/asset-lab/examples/spotted_hyena/figure.ts"
+      }
+    },
+    {
+      "id": "lion",
+      "name": "Lion",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 28,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lion",
+        "figure": "tools/asset-lab/examples/lion/figure.ts"
+      }
+    },
+    {
+      "id": "tiger",
+      "name": "Tiger",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 30,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Tiger",
+        "figure": "tools/asset-lab/examples/tiger/figure.ts"
+      }
+    },
+    {
+      "id": "jaguar",
+      "name": "Jaguar",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Leopard / Jaguar",
+        "figure": "tools/asset-lab/examples/jaguar/figure.ts"
+      }
+    },
+    {
+      "id": "leopard",
+      "name": "Leopard",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Leopard / Jaguar",
+        "figure": "tools/asset-lab/examples/jaguar/figure.ts"
+      }
+    },
+    {
+      "id": "cheetah",
+      "name": "Cheetah",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Cheetah",
+        "figure": "tools/asset-lab/examples/cheetah/figure.ts"
+      }
+    },
+    {
+      "id": "lynx",
+      "name": "Eurasian lynx",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lynx / Bobcat",
+        "figure": "tools/asset-lab/examples/lynx/figure.ts"
+      }
+    },
+    {
+      "id": "bobcat",
+      "name": "Bobcat",
+      "form": "natural",
+      "family": "Felids (big cats)",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lynx / Bobcat",
+        "figure": "tools/asset-lab/examples/lynx/figure.ts"
+      }
+    },
+    {
+      "id": "panda",
+      "name": "Panda",
+      "form": "natural",
+      "family": "Bears",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 34,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Panda",
+        "figure": "tools/asset-lab/examples/panda/figure.ts"
+      }
+    },
+    {
+      "id": "polar-bear",
+      "name": "Polar bear",
+      "form": "natural",
+      "family": "Bears",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 40,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Polar bear",
+        "figure": "tools/asset-lab/examples/polar_bear/figure.ts"
+      }
+    },
+    {
+      "id": "moose",
+      "name": "Moose",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 47,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Moose / Elk",
+        "figure": "tools/asset-lab/examples/moose/figure.ts"
+      }
+    },
+    {
+      "id": "elk",
+      "name": "Elk",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 42,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Moose / Elk",
+        "figure": "tools/asset-lab/examples/moose/figure.ts"
+      }
+    },
+    {
+      "id": "zebra",
+      "name": "Zebra",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 37,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Zebra",
+        "figure": "tools/asset-lab/examples/zebra/figure.ts"
+      }
+    },
+    {
+      "id": "rhinoceros",
+      "name": "White rhinoceros",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 40,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Rhino",
+        "figure": "tools/asset-lab/examples/rhinoceros/figure.ts"
+      }
+    },
+    {
+      "id": "hippopotamus",
+      "name": "Hippo",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["walk", "swim"],
+      "idleVisibleHeightPx": 35,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hippo",
+        "figure": "tools/asset-lab/examples/hippopotamus/figure.ts"
+      }
+    },
+    {
+      "id": "camel",
+      "name": "Dromedary camel",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 47,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Camel",
+        "figure": "tools/asset-lab/examples/camel/figure.ts"
+      }
+    },
+    {
+      "id": "american-bison",
+      "name": "American bison",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 38,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Bison / Buffalo",
+        "figure": "tools/asset-lab/examples/american_bison/figure.ts"
+      }
+    },
+    {
+      "id": "water-buffalo",
+      "name": "Water buffalo",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 37,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Bison / Buffalo",
+        "figure": "tools/asset-lab/examples/american_bison/figure.ts"
+      }
+    },
+    {
+      "id": "gemsbok-oryx",
+      "name": "Gemsbok",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 34,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Antelope / Gazelle / Impala",
+        "figure": "tools/asset-lab/examples/gemsbok_oryx/figure.ts"
+      }
+    },
+    {
+      "id": "gazelle",
+      "name": "Gazelle",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Antelope / Gazelle / Impala",
+        "figure": "tools/asset-lab/examples/gemsbok_oryx/figure.ts"
+      }
+    },
+    {
+      "id": "impala",
+      "name": "Impala",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 30,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Antelope / Gazelle / Impala",
+        "figure": "tools/asset-lab/examples/gemsbok_oryx/figure.ts"
+      }
+    },
+    {
+      "id": "springbok",
+      "name": "Springbok",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 28,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Antelope / Gazelle / Impala",
+        "figure": "tools/asset-lab/examples/gemsbok_oryx/figure.ts"
+      }
+    },
+    {
+      "id": "saiga-antelope",
+      "name": "Saiga antelope",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Saiga antelope",
+        "figure": "tools/asset-lab/examples/saiga_antelope/figure.ts"
+      }
+    },
+    {
+      "id": "musk-ox",
+      "name": "Musk ox",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 34,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Musk ox",
+        "figure": "tools/asset-lab/examples/musk_ox/figure.ts"
+      }
+    },
+    {
+      "id": "wildebeest",
+      "name": "Wildebeest",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 36,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Wildebeest / Gnu",
+        "figure": "tools/asset-lab/examples/wildebeest/figure.ts"
+      }
+    },
+    {
+      "id": "malayan-tapir",
+      "name": "Tapir",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Tapir",
+        "figure": "tools/asset-lab/examples/malayan_tapir/figure.ts"
+      }
+    },
+    {
+      "id": "okapi",
+      "name": "Okapi",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 39,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Okapi",
+        "figure": "tools/asset-lab/examples/okapi/figure.ts"
+      }
+    },
+    {
+      "id": "warthog",
+      "name": "Warthog",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 24,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Warthog",
+        "figure": "tools/asset-lab/examples/warthog/figure.ts"
+      }
+    },
+    {
+      "id": "gerenuk",
+      "name": "Gerenuk",
+      "form": "natural",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 39,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Gerenuk",
+        "figure": "tools/asset-lab/examples/gerenuk/figure.ts"
+      }
+    },
+    {
+      "id": "capuchin-monkey",
+      "name": "White-faced capuchin",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 15,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Monkey",
+        "figure": "tools/asset-lab/examples/capuchin_monkey/figure.ts"
+      }
+    },
+    {
+      "id": "chimpanzee",
+      "name": "Chimpanzee",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Chimpanzee",
+        "figure": "tools/asset-lab/examples/chimpanzee/figure.ts"
+      }
+    },
+    {
+      "id": "orangutan",
+      "name": "Orangutan",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 30,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Orangutan",
+        "figure": "tools/asset-lab/examples/orangutan/figure.ts"
+      }
+    },
+    {
+      "id": "ring-tailed-lemur",
+      "name": "Ring-tailed lemur",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lemur",
+        "figure": "tools/asset-lab/examples/ring_tailed_lemur/figure.ts"
+      }
+    },
+    {
+      "id": "mandrill",
+      "name": "Mandrill",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Mandrill",
+        "figure": "tools/asset-lab/examples/mandrill/figure.ts"
+      }
+    },
+    {
+      "id": "proboscis-monkey",
+      "name": "Proboscis monkey",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 24,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Proboscis monkey",
+        "figure": "tools/asset-lab/examples/proboscis_monkey/figure.ts"
+      }
+    },
+    {
+      "id": "japanese-macaque",
+      "name": "Japanese macaque",
+      "form": "natural",
+      "family": "Primates",
+      "bodyPlan": "primate",
+      "media": ["ground"],
+      "locomotion": ["hand-walk"],
+      "idleVisibleHeightPx": 21,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Japanese macaque",
+        "figure": "tools/asset-lab/examples/japanese_macaque/figure.ts"
+      }
+    },
+    {
+      "id": "mouse",
+      "name": "Field mouse",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Mouse / Rat",
+        "figure": "tools/asset-lab/examples/mouse/figure.ts"
+      }
+    },
+    {
+      "id": "rat",
+      "name": "Rat",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Mouse / Rat",
+        "figure": "tools/asset-lab/examples/mouse/figure.ts"
+      }
+    },
+    {
+      "id": "chinchilla",
+      "name": "Chinchilla",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Chinchilla",
+        "figure": "tools/asset-lab/examples/chinchilla/figure.ts"
+      }
+    },
+    {
+      "id": "hedgehog",
+      "name": "Hedgehog",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hedgehog",
+        "figure": "tools/asset-lab/examples/hedgehog/figure.ts"
+      }
+    },
+    {
+      "id": "porcupine",
+      "name": "Porcupine",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Porcupine",
+        "figure": "tools/asset-lab/examples/porcupine/figure.ts"
+      }
+    },
+    {
+      "id": "raccoon",
+      "name": "Raccoon",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Raccoon",
+        "figure": "tools/asset-lab/examples/raccoon/figure.ts"
+      }
+    },
+    {
+      "id": "skunk",
+      "name": "Skunk",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Skunk",
+        "figure": "tools/asset-lab/examples/skunk/figure.ts"
+      }
+    },
+    {
+      "id": "beaver",
+      "name": "Beaver",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["walk", "swim"],
+      "idleVisibleHeightPx": 15,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Beaver",
+        "figure": "tools/asset-lab/examples/beaver/figure.ts"
+      }
+    },
+    {
+      "id": "bat",
+      "name": "Bat",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Bat",
+        "figure": "tools/asset-lab/examples/bat/figure.ts"
+      }
+    },
+    {
+      "id": "meerkat",
+      "name": "Meerkat",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 15,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Meerkat",
+        "figure": "tools/asset-lab/examples/meerkat/figure.ts"
+      }
+    },
+    {
+      "id": "river-otter",
+      "name": "River otter",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["walk", "swim"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Otter",
+        "figure": "tools/asset-lab/examples/river_otter/figure.ts"
+      }
+    },
+    {
+      "id": "red-panda",
+      "name": "Red panda",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 16,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Red panda",
+        "figure": "tools/asset-lab/examples/red_panda/figure.ts"
+      }
+    },
+    {
+      "id": "sloth",
+      "name": "Sloth",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Sloth",
+        "figure": "tools/asset-lab/examples/sloth/figure.ts"
+      }
+    },
+    {
+      "id": "capybara",
+      "name": "Capybara",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Capybara",
+        "figure": "tools/asset-lab/examples/capybara/figure.ts"
+      }
+    },
+    {
+      "id": "giant-anteater",
+      "name": "Giant anteater",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 24,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Anteater",
+        "figure": "tools/asset-lab/examples/giant_anteater/figure.ts"
+      }
+    },
+    {
+      "id": "aardvark",
+      "name": "Aardvark",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 22,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Aardvark",
+        "figure": "tools/asset-lab/examples/aardvark/figure.ts"
+      }
+    },
+    {
+      "id": "armadillo",
+      "name": "Armadillo",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Armadillo",
+        "figure": "tools/asset-lab/examples/armadillo/figure.ts"
+      }
+    },
+    {
+      "id": "pangolin",
+      "name": "Pangolin",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pangolin",
+        "figure": "tools/asset-lab/examples/pangolin/figure.ts"
+      }
+    },
+    {
+      "id": "mongoose",
+      "name": "Mongoose",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Mongoose",
+        "figure": "tools/asset-lab/examples/mongoose/figure.ts"
+      }
+    },
+    {
+      "id": "binturong",
+      "name": "Binturong",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Binturong",
+        "figure": "tools/asset-lab/examples/binturong/figure.ts"
+      }
+    },
+    {
+      "id": "honey-badger",
+      "name": "Honey badger",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 15,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Honey badger",
+        "figure": "tools/asset-lab/examples/honey_badger/figure.ts"
+      }
+    },
+    {
+      "id": "fossa",
+      "name": "Fossa",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Fossa",
+        "figure": "tools/asset-lab/examples/fossa/figure.ts"
+      }
+    },
+    {
+      "id": "aye-aye",
+      "name": "Aye-aye",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 16,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Aye-aye",
+        "figure": "tools/asset-lab/examples/aye_aye/figure.ts"
+      }
+    },
+    {
+      "id": "white-nosed-coati",
+      "name": "White-nosed coati",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 16,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "White-nosed coati",
+        "figure": "tools/asset-lab/examples/white_nosed_coati/figure.ts"
+      }
+    },
+    {
+      "id": "kinkajou",
+      "name": "Kinkajou",
+      "form": "natural",
+      "family": "Small & exotic mammals",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Kinkajou",
+        "figure": "tools/asset-lab/examples/kinkajou/figure.ts"
+      }
+    },
+    {
+      "id": "koala",
+      "name": "Koala",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Koala",
+        "figure": "tools/asset-lab/examples/koala/figure.ts"
+      }
+    },
+    {
+      "id": "wallaby",
+      "name": "Wallaby",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 26,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Wallaby",
+        "figure": "tools/asset-lab/examples/wallaby/figure.ts"
+      }
+    },
+    {
+      "id": "wombat",
+      "name": "Wombat",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Wombat",
+        "figure": "tools/asset-lab/examples/wombat/figure.ts"
+      }
+    },
+    {
+      "id": "opossum",
+      "name": "Opossum",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 12,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Opossum",
+        "figure": "tools/asset-lab/examples/opossum/figure.ts"
+      }
+    },
+    {
+      "id": "tasmanian-devil",
+      "name": "Tasmanian devil",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Tasmanian devil",
+        "figure": "tools/asset-lab/examples/tasmanian_devil/figure.ts"
+      }
+    },
+    {
+      "id": "platypus",
+      "name": "Platypus",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["walk", "swim"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Platypus",
+        "figure": "tools/asset-lab/examples/platypus/figure.ts"
+      }
+    },
+    {
+      "id": "echidna",
+      "name": "Echidna",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Echidna",
+        "figure": "tools/asset-lab/examples/echidna/figure.ts"
+      }
+    },
+    {
+      "id": "quokka",
+      "name": "Quokka",
+      "form": "natural",
+      "family": "Marsupials & monotremes",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 15,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Quokka",
+        "figure": "tools/asset-lab/examples/quokka/figure.ts"
+      }
+    },
+    {
+      "id": "toucan",
+      "name": "Toucan",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Toucan",
+        "figure": "tools/asset-lab/examples/toucan/figure.ts"
+      }
+    },
+    {
+      "id": "great-hornbill",
+      "name": "Great hornbill",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Great hornbill",
+        "figure": "tools/asset-lab/examples/great_hornbill/figure.ts"
+      }
+    },
+    {
+      "id": "eagle",
+      "name": "Eagle",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 22,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Eagle / Hawk",
+        "figure": "tools/asset-lab/examples/eagle/figure.ts"
+      }
+    },
+    {
+      "id": "hawk",
+      "name": "Hawk",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 18,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Eagle / Hawk",
+        "figure": "tools/asset-lab/examples/eagle/figure.ts"
+      }
+    },
+    {
+      "id": "pigeon",
+      "name": "Pigeon",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 12,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pigeon / Dove",
+        "figure": "tools/asset-lab/examples/pigeon/figure.ts"
+      }
+    },
+    {
+      "id": "dove",
+      "name": "Dove",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pigeon / Dove",
+        "figure": "tools/asset-lab/examples/pigeon/figure.ts"
+      }
+    },
+    {
+      "id": "raven",
+      "name": "Raven",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Crow / Raven",
+        "figure": "tools/asset-lab/examples/raven/figure.ts"
+      }
+    },
+    {
+      "id": "crow",
+      "name": "Crow",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Crow / Raven",
+        "figure": "tools/asset-lab/examples/raven/figure.ts"
+      }
+    },
+    {
+      "id": "flamingo",
+      "name": "Flamingo",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 39,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Flamingo",
+        "figure": "tools/asset-lab/examples/flamingo/figure.ts"
+      }
+    },
+    {
+      "id": "shoebill",
+      "name": "Shoebill",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 33,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Shoebill",
+        "figure": "tools/asset-lab/examples/shoebill/figure.ts"
+      }
+    },
+    {
+      "id": "pelican",
+      "name": "Pelican",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "water", "air"],
+      "locomotion": ["walk", "swim", "flap"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pelican",
+        "figure": "tools/asset-lab/examples/pelican/figure.ts"
+      }
+    },
+    {
+      "id": "blue-footed-booby",
+      "name": "Blue-footed booby",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "water", "air"],
+      "locomotion": ["walk", "swim", "flap"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Blue-footed booby",
+        "figure": "tools/asset-lab/examples/blue_footed_booby/figure.ts"
+      }
+    },
+    {
+      "id": "sparrow",
+      "name": "Sparrow",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Songbird (robin/sparrow)",
+        "figure": "tools/asset-lab/examples/robin/figure.ts"
+      }
+    },
+    {
+      "id": "peacock",
+      "name": "Peacock",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 26,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Peacock",
+        "figure": "tools/asset-lab/examples/peacock/figure.ts"
+      }
+    },
+    {
+      "id": "ostrich",
+      "name": "Ostrich",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 48,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ostrich / Emu",
+        "figure": "tools/asset-lab/examples/ostrich/figure.ts"
+      }
+    },
+    {
+      "id": "emu",
+      "name": "Emu",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 43,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ostrich / Emu",
+        "figure": "tools/asset-lab/examples/ostrich/figure.ts"
+      }
+    },
+    {
+      "id": "cassowary",
+      "name": "Cassowary",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 44,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Cassowary",
+        "figure": "tools/asset-lab/examples/cassowary/figure.ts"
+      }
+    },
+    {
+      "id": "kiwi",
+      "name": "Kiwi",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Kiwi",
+        "figure": "tools/asset-lab/examples/kiwi/figure.ts"
+      }
+    },
+    {
+      "id": "secretary-bird",
+      "name": "Secretary bird",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 33,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Secretary bird",
+        "figure": "tools/asset-lab/examples/secretary_bird/figure.ts"
+      }
+    },
+    {
+      "id": "marabou-stork",
+      "name": "Marabou stork",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 39,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Marabou stork",
+        "figure": "tools/asset-lab/examples/marabou_stork/figure.ts"
+      }
+    },
+    {
+      "id": "kakapo",
+      "name": "Kakapo",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "ground-bird",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 17,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Kakapo",
+        "figure": "tools/asset-lab/examples/kakapo/figure.ts"
+      }
+    },
+    {
+      "id": "great-blue-heron",
+      "name": "Great blue heron",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 33,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Great blue heron",
+        "figure": "tools/asset-lab/examples/great_blue_heron/figure.ts"
+      }
+    },
+    {
+      "id": "atlantic-puffin",
+      "name": "Atlantic puffin",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "water", "air"],
+      "locomotion": ["walk", "swim", "flap"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Atlantic puffin",
+        "figure": "tools/asset-lab/examples/atlantic_puffin/figure.ts"
+      }
+    },
+    {
+      "id": "ruby-throated-hummingbird",
+      "name": "Ruby-throated hummingbird",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ruby-throated hummingbird",
+        "figure": "tools/asset-lab/examples/ruby_throated_hummingbird/figure.ts"
+      }
+    },
+    {
+      "id": "great-frigatebird",
+      "name": "Great frigatebird",
+      "form": "natural",
+      "family": "Birds",
+      "bodyPlan": "winged",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flap"],
+      "idleVisibleHeightPx": 23,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Great frigatebird",
+        "figure": "tools/asset-lab/examples/great_frigatebird/figure.ts"
+      }
+    },
+    {
+      "id": "ocean-sunfish",
+      "name": "Ocean sunfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 32,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Ocean sunfish",
+        "figure": "tools/asset-lab/examples/ocean_sunfish/figure.ts"
+      }
+    },
+    {
+      "id": "swordfish",
+      "name": "Swordfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Swordfish",
+        "figure": "tools/asset-lab/examples/swordfish/figure.ts"
+      }
+    },
+    {
+      "id": "pufferfish",
+      "name": "Pufferfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Pufferfish",
+        "figure": "tools/asset-lab/examples/pufferfish/figure.ts"
+      }
+    },
+    {
+      "id": "shark",
+      "name": "Shark",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 27,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Shark",
+        "figure": "tools/asset-lab/examples/shark/figure.ts"
+      }
+    },
+    {
+      "id": "hammerhead-shark",
+      "name": "Hammerhead shark",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 28,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Hammerhead shark",
+        "figure": "tools/asset-lab/examples/hammerhead_shark/figure.ts"
+      }
+    },
+    {
+      "id": "whale-shark",
+      "name": "Whale shark",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 48,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Whale shark",
+        "figure": "tools/asset-lab/examples/whale_shark/figure.ts"
+      }
+    },
+    {
+      "id": "dolphin",
+      "name": "Dolphin",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 25,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Dolphin",
+        "figure": "tools/asset-lab/examples/dolphin/figure.ts"
+      }
+    },
+    {
+      "id": "orca",
+      "name": "Orca",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 55,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Whale",
+        "figure": "tools/asset-lab/examples/orca/figure.ts"
+      }
+    },
+    {
+      "id": "humpback-whale",
+      "name": "Humpback whale",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 65,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Whale",
+        "figure": "tools/asset-lab/examples/orca/figure.ts"
+      }
+    },
+    {
+      "id": "blue-whale",
+      "name": "Blue whale",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 76,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Whale",
+        "figure": "tools/asset-lab/examples/orca/figure.ts"
+      }
+    },
+    {
+      "id": "narwhal",
+      "name": "Narwhal",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 36,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Narwhal",
+        "figure": "tools/asset-lab/examples/narwhal/figure.ts"
+      }
+    },
+    {
+      "id": "cuttlefish",
+      "name": "Cuttlefish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "soft-aquatic",
+      "media": ["water"],
+      "locomotion": ["jet-swim"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Cuttlefish",
+        "figure": "tools/asset-lab/examples/cuttlefish/figure.ts"
+      }
+    },
+    {
+      "id": "coconut-crab",
+      "name": "Coconut crab",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["sideways-scuttle"],
+      "idleVisibleHeightPx": 14,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Coconut crab",
+        "figure": "tools/asset-lab/examples/coconut_crab/figure.ts"
+      }
+    },
+    {
+      "id": "horseshoe-crab",
+      "name": "Horseshoe crab",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "many-leg",
+      "media": ["water"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Horseshoe crab",
+        "figure": "tools/asset-lab/examples/horseshoe_crab/figure.ts"
+      }
+    },
+    {
+      "id": "seahorse",
+      "name": "Seahorse",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Seahorse",
+        "figure": "tools/asset-lab/examples/seahorse/figure.ts"
+      }
+    },
+    {
+      "id": "starfish",
+      "name": "Starfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "soft-aquatic",
+      "media": ["water"],
+      "locomotion": ["creep"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Starfish",
+        "figure": "tools/asset-lab/examples/starfish/figure.ts"
+      }
+    },
+    {
+      "id": "lobster",
+      "name": "Lobster",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "many-leg",
+      "media": ["water"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lobster",
+        "figure": "tools/asset-lab/examples/lobster/figure.ts"
+      }
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Shrimp",
+        "figure": "tools/asset-lab/examples/shrimp/figure.ts"
+      }
+    },
+    {
+      "id": "mantis-shrimp",
+      "name": "Mantis shrimp",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "many-leg",
+      "media": ["water"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Mantis shrimp",
+        "figure": "tools/asset-lab/examples/mantis_shrimp/figure.ts"
+      }
+    },
+    {
+      "id": "nautilus",
+      "name": "Nautilus",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "soft-aquatic",
+      "media": ["water"],
+      "locomotion": ["jet-swim"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Nautilus",
+        "figure": "tools/asset-lab/examples/nautilus/figure.ts"
+      }
+    },
+    {
+      "id": "sea-lion",
+      "name": "Sea lion",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "flippered",
+      "media": ["ground", "water"],
+      "locomotion": ["haul", "swim"],
+      "idleVisibleHeightPx": 29,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Seal / Sea lion",
+        "figure": "tools/asset-lab/examples/harbor_seal/figure.ts"
+      }
+    },
+    {
+      "id": "manatee",
+      "name": "Manatee",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 30,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Manatee / Dugong",
+        "figure": "tools/asset-lab/examples/manatee/figure.ts"
+      }
+    },
+    {
+      "id": "dugong",
+      "name": "Dugong",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 31,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Manatee / Dugong",
+        "figure": "tools/asset-lab/examples/manatee/figure.ts"
+      }
+    },
+    {
+      "id": "walrus",
+      "name": "Walrus",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "flippered",
+      "media": ["ground", "water"],
+      "locomotion": ["haul", "swim"],
+      "idleVisibleHeightPx": 34,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Walrus",
+        "figure": "tools/asset-lab/examples/walrus/figure.ts"
+      }
+    },
+    {
+      "id": "anglerfish",
+      "name": "Anglerfish",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Anglerfish",
+        "figure": "tools/asset-lab/examples/anglerfish/figure.ts"
+      }
+    },
+    {
+      "id": "leafy-seadragon",
+      "name": "Leafy seadragon",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "swimmer",
+      "media": ["water"],
+      "locomotion": ["swim"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Leafy seadragon",
+        "figure": "tools/asset-lab/examples/leafy_seadragon/figure.ts"
+      }
+    },
+    {
+      "id": "moray-eel",
+      "name": "Moray eel",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "serpentine",
+      "media": ["water"],
+      "locomotion": ["undulate"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Moray eel",
+        "figure": "tools/asset-lab/examples/moray_eel/figure.ts"
+      }
+    },
+    {
+      "id": "electric-eel",
+      "name": "Electric eel",
+      "form": "natural",
+      "family": "Marine & aquatic",
+      "bodyPlan": "serpentine",
+      "media": ["water"],
+      "locomotion": ["undulate"],
+      "idleVisibleHeightPx": 12,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Electric eel",
+        "figure": "tools/asset-lab/examples/electric_eel/figure.ts"
+      }
+    },
+    {
+      "id": "gaboon-viper",
+      "name": "Gaboon viper",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "serpentine",
+      "media": ["ground"],
+      "locomotion": ["slither"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Gaboon viper",
+        "figure": "tools/asset-lab/examples/gaboon_viper/figure.ts"
+      }
+    },
+    {
+      "id": "iguana",
+      "name": "Iguana",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lizard / Gecko",
+        "figure": "tools/asset-lab/examples/gecko/figure.ts"
+      }
+    },
+    {
+      "id": "chameleon",
+      "name": "Chameleon",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Lizard / Gecko",
+        "figure": "tools/asset-lab/examples/gecko/figure.ts"
+      }
+    },
+    {
+      "id": "pond-turtle",
+      "name": "Pond turtle",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["crawl", "swim"],
+      "idleVisibleHeightPx": 9,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Turtle / Tortoise",
+        "figure": "tools/asset-lab/examples/sea_turtle/figure.ts"
+      }
+    },
+    {
+      "id": "land-tortoise",
+      "name": "Land tortoise",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 11,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Turtle / Tortoise",
+        "figure": "tools/asset-lab/examples/sea_turtle/figure.ts"
+      }
+    },
+    {
+      "id": "crocodile",
+      "name": "Crocodile",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["crawl", "swim"],
+      "idleVisibleHeightPx": 19,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Crocodile / Alligator",
+        "figure": "tools/asset-lab/examples/crocodile/figure.ts"
+      }
+    },
+    {
+      "id": "alligator",
+      "name": "Alligator",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["crawl", "swim"],
+      "idleVisibleHeightPx": 19,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Crocodile / Alligator",
+        "figure": "tools/asset-lab/examples/crocodile/figure.ts"
+      }
+    },
+    {
+      "id": "komodo-dragon",
+      "name": "Komodo dragon",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 20,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Komodo dragon",
+        "figure": "tools/asset-lab/examples/komodo_dragon/figure.ts"
+      }
+    },
+    {
+      "id": "salamander",
+      "name": "Fire salamander",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Salamander / Newt",
+        "figure": "tools/asset-lab/examples/salamander/figure.ts"
+      }
+    },
+    {
+      "id": "newt",
+      "name": "Newt",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Salamander / Newt",
+        "figure": "tools/asset-lab/examples/salamander/figure.ts"
+      }
+    },
+    {
+      "id": "axolotl",
+      "name": "Axolotl",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground", "water"],
+      "locomotion": ["crawl", "swim"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Axolotl",
+        "figure": "tools/asset-lab/examples/axolotl/figure.ts"
+      }
+    },
+    {
+      "id": "frilled-neck-lizard",
+      "name": "Frilled-neck lizard",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 13,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Frilled-neck lizard",
+        "figure": "tools/asset-lab/examples/frilled_neck_lizard/figure.ts"
+      }
+    },
+    {
+      "id": "texas-horned-lizard",
+      "name": "Texas horned lizard",
+      "form": "natural",
+      "family": "Reptiles & amphibians",
+      "bodyPlan": "quadruped",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Texas horned lizard",
+        "figure": "tools/asset-lab/examples/texas_horned_lizard/figure.ts"
+      }
+    },
+    {
+      "id": "dragonfly",
+      "name": "Dragonfly",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "flutterer",
+      "media": ["ground", "air"],
+      "locomotion": ["walk", "flutter"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Dragonfly",
+        "figure": "tools/asset-lab/examples/dragonfly/figure.ts"
+      }
+    },
+    {
+      "id": "spider",
+      "name": "Spider",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Spider",
+        "figure": "tools/asset-lab/examples/spider/figure.ts"
+      }
+    },
+    {
+      "id": "stag-beetle",
+      "name": "Stag beetle",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Beetle",
+        "figure": "tools/asset-lab/examples/stag_beetle/figure.ts"
+      }
+    },
+    {
+      "id": "grasshopper",
+      "name": "Grasshopper",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 7,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Grasshopper / Cricket",
+        "figure": "tools/asset-lab/examples/grasshopper/figure.ts"
+      }
+    },
+    {
+      "id": "cricket",
+      "name": "Cricket",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "hopper",
+      "media": ["ground"],
+      "locomotion": ["hop"],
+      "idleVisibleHeightPx": 6,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Grasshopper / Cricket",
+        "figure": "tools/asset-lab/examples/grasshopper/figure.ts"
+      }
+    },
+    {
+      "id": "praying-mantis",
+      "name": "Praying mantis",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 10,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Praying mantis",
+        "figure": "tools/asset-lab/examples/praying_mantis/figure.ts"
+      }
+    },
+    {
+      "id": "leaf-insect",
+      "name": "Leaf insect",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Leaf insect",
+        "figure": "tools/asset-lab/examples/leaf_insect/figure.ts"
+      }
+    },
+    {
+      "id": "scorpion",
+      "name": "Scorpion",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Scorpion",
+        "figure": "tools/asset-lab/examples/scorpion/figure.ts"
+      }
+    },
+    {
+      "id": "roly-poly",
+      "name": "Pill bug",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Roly-poly / Pill bug",
+        "figure": "tools/asset-lab/examples/roly_poly/figure.ts"
+      }
+    },
+    {
+      "id": "earwig",
+      "name": "Earwig (pincher bug)",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "many-leg",
+      "media": ["ground"],
+      "locomotion": ["crawl"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Earwig (pincher bug)",
+        "figure": "tools/asset-lab/examples/earwig/figure.ts"
+      }
+    },
+    {
+      "id": "centipede",
+      "name": "Centipede",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "serpentine",
+      "media": ["ground"],
+      "locomotion": ["slither"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Centipede / Millipede",
+        "figure": "tools/asset-lab/examples/centipede/figure.ts"
+      }
+    },
+    {
+      "id": "millipede",
+      "name": "Millipede",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "serpentine",
+      "media": ["ground"],
+      "locomotion": ["slither"],
+      "idleVisibleHeightPx": 5,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Centipede / Millipede",
+        "figure": "tools/asset-lab/examples/centipede/figure.ts"
+      }
+    },
+    {
+      "id": "snail",
+      "name": "Snail",
+      "form": "natural",
+      "family": "Insects & arthropods",
+      "bodyPlan": "glider",
+      "media": ["ground"],
+      "locomotion": ["glide"],
+      "idleVisibleHeightPx": 8,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Snail",
+        "figure": "tools/asset-lab/examples/snail/figure.ts"
+      }
+    },
+    {
+      "id": "worm",
+      "name": "Earthworm",
+      "form": "natural",
+      "family": "Other invertebrates",
+      "bodyPlan": "serpentine",
+      "media": ["ground"],
+      "locomotion": ["slither"],
+      "idleVisibleHeightPx": 4,
+      "scaleStatus": "proposal",
+      "reference": {
+        "project": "tilefun",
+        "row": "Animal-kingdom coverage addition"
+      }
+    },
+    {
+      "id": "elephant-upright",
+      "name": "Upright elephant",
+      "form": "upright",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "upright",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 34,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Elephant",
+        "figure": "tools/asset-lab/examples/elephant/figure.ts"
+      }
+    },
+    {
+      "id": "giraffe-upright",
+      "name": "Upright giraffe",
+      "form": "upright",
+      "family": "Hoofed & large herbivores",
+      "bodyPlan": "upright",
+      "media": ["ground"],
+      "locomotion": ["walk"],
+      "idleVisibleHeightPx": 39,
+      "scaleStatus": "owner-direction",
+      "reference": {
+        "project": "mclone",
+        "checklist": "tools/asset-lab/ANIMALS.md",
+        "row": "Giraffe",
+        "figure": "tools/asset-lab/examples/giraffe/figure.ts"
+      }
+    }
+  ]
+}

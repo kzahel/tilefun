@@ -1,0 +1,18 @@
+{
+  "identity":"frog-draft-v1-drawing-02",
+  "palette":{"o":"#39372b","b":"#8d7044","h":"#b79b66","s":"#625133","c":"#cfbc85","g":"#c7a45a","e":"#1c2922"},
+  "bodies":{
+    "down":{"offset":[-4,-4],"pixels":["..hhhh..",".hbhbbh.","obbhbbbo","obbsbbbo","obbbbsbo",".obbbbo.","..oooo.."]},
+    "up":{"offset":[-4,-3],"pixels":["..hhhh..",".hbhbbh.","obbhbbbo","obbsbbbo","obbbbsbo",".obbbbo.","..oooo.."]},
+    "left":{"offset":[-4,-3],"pixels":["..hhhhhh.",".hbhbbbhb","obbbbsbbo","obbsbbbbo",".obbbcco.","..ooooo.."]},
+    "right":{"offset":[-5,-3],"pixels":[".hhhhhh..","bhbbbhbh.","obbsbbbbo","obbbbsbbo",".occbbbo.","..ooooo.."]}
+  },
+  "heads":{
+    "down":{"offset":[-3,-2],"pixels":[".hhhhh.","hbbsbbh","obbbbbo",".bcccb.","..ooo.."]},
+    "up":{"offset":[-3,-2],"pixels":[".hhhhh.","hbbsbbh","obbbbbo",".bbbbo.","..ooo.."]},
+    "left":{"offset":[-3,-2],"pixels":["..hhhhh",".hbbbsb","obbsbbo","occccbo",".ooooo."]},
+    "right":{"offset":[-3,-2],"pixels":["hhhhh..","bsbbbh.","obbsbbo","obcccco",".ooooo."]}
+  },
+  "eyes":{"open":["gg","ee"],"rear":["hh","bb"],"closed":["bh","bb"]},
+  "stylization":["Common frog brown dorsal spots/temporal mask, cream jaw and horizontal pupil clusters. No generic green recolor.","Full body/head marking patches and relative anchors remain invariant in hop/swim; guide rounding is deliberately held stable to prevent head pumping.","Fixed projected eye bulbs retract/close in the blink action; skull volume does not shrink.","Integer broad-shaded bent limb ribbons and actual web/toe guide contours; no palette quantization of a generic render."]
+}

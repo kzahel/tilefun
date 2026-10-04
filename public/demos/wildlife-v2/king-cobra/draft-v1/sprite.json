@@ -1,0 +1,1051 @@
+{
+  "identity": "king-cobra-draft-v1-drawing-02",
+  "reviewStatus": "pending",
+  "image": "sheet.png",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "anchor": [
+    48,
+    60
+  ],
+  "fps": 6.25,
+  "rootMotion": false,
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "orthoScale": 9.6,
+  "shiftY": 0.125,
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "durationMs": 160,
+      "description": "Alert raised head and hood"
+    },
+    "slither": {
+      "start": 1,
+      "count": 8,
+      "durationMs": 1280,
+      "description": "Eight-pose posterior travelling bend wave, continuous sliding ventral support, fixed link lengths"
+    },
+    "action": {
+      "start": 9,
+      "count": 6,
+      "durationMs": 960,
+      "description": "Fixed skull tongue extension/retraction with fixed-length distal tail curl; rear tongue hidden"
+    }
+  },
+  "facings": {
+    "down": {
+      "row": 0,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 0,
+          "rect": [
+            96,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 1,
+          "rect": [
+            192,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 2,
+          "rect": [
+            288,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 3,
+          "rect": [
+            384,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 4,
+          "rect": [
+            480,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 5,
+          "rect": [
+            576,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 6,
+          "rect": [
+            672,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            52,
+            60
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 7,
+          "rect": [
+            768,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            864,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            960,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1056,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1152,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            38,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1248,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1344,
+            0,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            37,
+            53,
+            60
+          ]
+        }
+      ]
+    },
+    "up": {
+      "row": 1,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 0,
+          "rect": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 1,
+          "rect": [
+            192,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 2,
+          "rect": [
+            288,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 3,
+          "rect": [
+            384,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            53,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 4,
+          "rect": [
+            480,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            53,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 5,
+          "rect": [
+            576,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 6,
+          "rect": [
+            672,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            45,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 7,
+          "rect": [
+            768,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            864,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            960,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1056,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1152,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            83
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1248,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1344,
+            96,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            44,
+            43,
+            52,
+            84
+          ]
+        }
+      ]
+    },
+    "left": {
+      "row": 2,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 0,
+          "rect": [
+            96,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 1,
+          "rect": [
+            192,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 2,
+          "rect": [
+            288,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 3,
+          "rect": [
+            384,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 4,
+          "rect": [
+            480,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 5,
+          "rect": [
+            576,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 6,
+          "rect": [
+            672,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 7,
+          "rect": [
+            768,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            864,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            960,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1056,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1152,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            42,
+            44,
+            83,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1248,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1344,
+            192,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            43,
+            44,
+            84,
+            62
+          ]
+        }
+      ]
+    },
+    "right": {
+      "row": 3,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 0,
+          "rect": [
+            96,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 1,
+          "rect": [
+            192,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 2,
+          "rect": [
+            288,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 3,
+          "rect": [
+            384,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 4,
+          "rect": [
+            480,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            62
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 5,
+          "rect": [
+            576,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 6,
+          "rect": [
+            672,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "slither",
+          "index": 7,
+          "rect": [
+            768,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            864,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            960,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            1056,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            1152,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            14,
+            44,
+            55,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            1248,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            1344,
+            288,
+            96,
+            96
+          ],
+          "visibleBounds": [
+            13,
+            44,
+            54,
+            61
+          ]
+        }
+      ]
+    }
+  },
+  "sheetSha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e"
+}

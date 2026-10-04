@@ -1,0 +1,1790 @@
+{
+  "identity": "giraffe-draft-v1-drawing-02",
+  "motionIdentity": "giraffe-draft-v1-motion-02",
+  "reviewStatus": "draft, pending visual gate and human review",
+  "image": "sheet.png",
+  "frameWidth": 144,
+  "frameHeight": 144,
+  "anchor": [
+    72,
+    120
+  ],
+  "rootMotion": false,
+  "fps": 5,
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "orthoScale": 14.4,
+  "shiftY": 0.3333333432674408,
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1
+    },
+    "walk": {
+      "start": 1,
+      "count": 16,
+      "durationMs": 3200,
+      "description": "Lateral sequence HL FL HR FR, landing offsets 0/2/8/10; 11 of 16 samples in stance; three rigid segments per leg"
+    },
+    "action": {
+      "start": 17,
+      "count": 8,
+      "durationMs": 1600,
+      "description": "Fixed-length tail fly-flick and ear swivel; fixed skull/neck"
+    }
+  },
+  "facings": {
+    "down": {
+      "row": 0,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 0
+        },
+        {
+          "clip": "walk",
+          "index": 0,
+          "rect": [
+            144,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            127
+          ],
+          "guideRecord": 1
+        },
+        {
+          "clip": "walk",
+          "index": 1,
+          "rect": [
+            288,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            129
+          ],
+          "guideRecord": 2
+        },
+        {
+          "clip": "walk",
+          "index": 2,
+          "rect": [
+            432,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            131
+          ],
+          "guideRecord": 3
+        },
+        {
+          "clip": "walk",
+          "index": 3,
+          "rect": [
+            576,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            63,
+            82,
+            131
+          ],
+          "guideRecord": 4
+        },
+        {
+          "clip": "walk",
+          "index": 4,
+          "rect": [
+            720,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            63,
+            82,
+            130
+          ],
+          "guideRecord": 5
+        },
+        {
+          "clip": "walk",
+          "index": 5,
+          "rect": [
+            864,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            63,
+            82,
+            129
+          ],
+          "guideRecord": 6
+        },
+        {
+          "clip": "walk",
+          "index": 6,
+          "rect": [
+            1008,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            129
+          ],
+          "guideRecord": 7
+        },
+        {
+          "clip": "walk",
+          "index": 7,
+          "rect": [
+            1152,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 8
+        },
+        {
+          "clip": "walk",
+          "index": 8,
+          "rect": [
+            1296,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            127
+          ],
+          "guideRecord": 9
+        },
+        {
+          "clip": "walk",
+          "index": 9,
+          "rect": [
+            1440,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            129
+          ],
+          "guideRecord": 10
+        },
+        {
+          "clip": "walk",
+          "index": 10,
+          "rect": [
+            1584,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            131
+          ],
+          "guideRecord": 11
+        },
+        {
+          "clip": "walk",
+          "index": 11,
+          "rect": [
+            1728,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            63,
+            84,
+            131
+          ],
+          "guideRecord": 12
+        },
+        {
+          "clip": "walk",
+          "index": 12,
+          "rect": [
+            1872,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            63,
+            84,
+            130
+          ],
+          "guideRecord": 13
+        },
+        {
+          "clip": "walk",
+          "index": 13,
+          "rect": [
+            2016,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            63,
+            84,
+            129
+          ],
+          "guideRecord": 14
+        },
+        {
+          "clip": "walk",
+          "index": 14,
+          "rect": [
+            2160,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            129
+          ],
+          "guideRecord": 15
+        },
+        {
+          "clip": "walk",
+          "index": 15,
+          "rect": [
+            2304,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 16
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            2448,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 17
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            2592,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 18
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            2736,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 19
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            2880,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 20
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            3024,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 21
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            3168,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 22
+        },
+        {
+          "clip": "action",
+          "index": 6,
+          "rect": [
+            3312,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 23
+        },
+        {
+          "clip": "action",
+          "index": 7,
+          "rect": [
+            3456,
+            0,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            63,
+            83,
+            128
+          ],
+          "guideRecord": 24
+        }
+      ]
+    },
+    "up": {
+      "row": 1,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 25
+        },
+        {
+          "clip": "walk",
+          "index": 0,
+          "rect": [
+            144,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            131
+          ],
+          "guideRecord": 26
+        },
+        {
+          "clip": "walk",
+          "index": 1,
+          "rect": [
+            288,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            132
+          ],
+          "guideRecord": 27
+        },
+        {
+          "clip": "walk",
+          "index": 2,
+          "rect": [
+            432,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            132
+          ],
+          "guideRecord": 28
+        },
+        {
+          "clip": "walk",
+          "index": 3,
+          "rect": [
+            576,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            34,
+            84,
+            133
+          ],
+          "guideRecord": 29
+        },
+        {
+          "clip": "walk",
+          "index": 4,
+          "rect": [
+            720,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            34,
+            84,
+            131
+          ],
+          "guideRecord": 30
+        },
+        {
+          "clip": "walk",
+          "index": 5,
+          "rect": [
+            864,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            63,
+            34,
+            84,
+            129
+          ],
+          "guideRecord": 31
+        },
+        {
+          "clip": "walk",
+          "index": 6,
+          "rect": [
+            1008,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 32
+        },
+        {
+          "clip": "walk",
+          "index": 7,
+          "rect": [
+            1152,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            130
+          ],
+          "guideRecord": 33
+        },
+        {
+          "clip": "walk",
+          "index": 8,
+          "rect": [
+            1296,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            131
+          ],
+          "guideRecord": 34
+        },
+        {
+          "clip": "walk",
+          "index": 9,
+          "rect": [
+            1440,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            132
+          ],
+          "guideRecord": 35
+        },
+        {
+          "clip": "walk",
+          "index": 10,
+          "rect": [
+            1584,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            132
+          ],
+          "guideRecord": 36
+        },
+        {
+          "clip": "walk",
+          "index": 11,
+          "rect": [
+            1728,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            34,
+            82,
+            133
+          ],
+          "guideRecord": 37
+        },
+        {
+          "clip": "walk",
+          "index": 12,
+          "rect": [
+            1872,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            34,
+            82,
+            131
+          ],
+          "guideRecord": 38
+        },
+        {
+          "clip": "walk",
+          "index": 13,
+          "rect": [
+            2016,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            61,
+            34,
+            82,
+            129
+          ],
+          "guideRecord": 39
+        },
+        {
+          "clip": "walk",
+          "index": 14,
+          "rect": [
+            2160,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 40
+        },
+        {
+          "clip": "walk",
+          "index": 15,
+          "rect": [
+            2304,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            130
+          ],
+          "guideRecord": 41
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            2448,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 42
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            2592,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 43
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            2736,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 44
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            2880,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 45
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            3024,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 46
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            3168,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 47
+        },
+        {
+          "clip": "action",
+          "index": 6,
+          "rect": [
+            3312,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 48
+        },
+        {
+          "clip": "action",
+          "index": 7,
+          "rect": [
+            3456,
+            144,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            62,
+            34,
+            83,
+            129
+          ],
+          "guideRecord": 49
+        }
+      ]
+    },
+    "left": {
+      "row": 2,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 50
+        },
+        {
+          "clip": "walk",
+          "index": 0,
+          "rect": [
+            144,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            124
+          ],
+          "guideRecord": 51
+        },
+        {
+          "clip": "walk",
+          "index": 1,
+          "rect": [
+            288,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            124
+          ],
+          "guideRecord": 52
+        },
+        {
+          "clip": "walk",
+          "index": 2,
+          "rect": [
+            432,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 53
+        },
+        {
+          "clip": "walk",
+          "index": 3,
+          "rect": [
+            576,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 54
+        },
+        {
+          "clip": "walk",
+          "index": 4,
+          "rect": [
+            720,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 55
+        },
+        {
+          "clip": "walk",
+          "index": 5,
+          "rect": [
+            864,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 56
+        },
+        {
+          "clip": "walk",
+          "index": 6,
+          "rect": [
+            1008,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 57
+        },
+        {
+          "clip": "walk",
+          "index": 7,
+          "rect": [
+            1152,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 58
+        },
+        {
+          "clip": "walk",
+          "index": 8,
+          "rect": [
+            1296,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 59
+        },
+        {
+          "clip": "walk",
+          "index": 9,
+          "rect": [
+            1440,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 60
+        },
+        {
+          "clip": "walk",
+          "index": 10,
+          "rect": [
+            1584,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            124
+          ],
+          "guideRecord": 61
+        },
+        {
+          "clip": "walk",
+          "index": 11,
+          "rect": [
+            1728,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            124
+          ],
+          "guideRecord": 62
+        },
+        {
+          "clip": "walk",
+          "index": 12,
+          "rect": [
+            1872,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            96,
+            124
+          ],
+          "guideRecord": 63
+        },
+        {
+          "clip": "walk",
+          "index": 13,
+          "rect": [
+            2016,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            124
+          ],
+          "guideRecord": 64
+        },
+        {
+          "clip": "walk",
+          "index": 14,
+          "rect": [
+            2160,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            123
+          ],
+          "guideRecord": 65
+        },
+        {
+          "clip": "walk",
+          "index": 15,
+          "rect": [
+            2304,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            122
+          ],
+          "guideRecord": 66
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            2448,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 67
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            2592,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 68
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            2736,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            93,
+            125
+          ],
+          "guideRecord": 69
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            2880,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            93,
+            125
+          ],
+          "guideRecord": 70
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            3024,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            93,
+            125
+          ],
+          "guideRecord": 71
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            3168,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            94,
+            125
+          ],
+          "guideRecord": 72
+        },
+        {
+          "clip": "action",
+          "index": 6,
+          "rect": [
+            3312,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 73
+        },
+        {
+          "clip": "action",
+          "index": 7,
+          "rect": [
+            3456,
+            288,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            37,
+            50,
+            95,
+            125
+          ],
+          "guideRecord": 74
+        }
+      ]
+    },
+    "right": {
+      "row": 3,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 75
+        },
+        {
+          "clip": "walk",
+          "index": 0,
+          "rect": [
+            144,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 76
+        },
+        {
+          "clip": "walk",
+          "index": 1,
+          "rect": [
+            288,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 77
+        },
+        {
+          "clip": "walk",
+          "index": 2,
+          "rect": [
+            432,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 78
+        },
+        {
+          "clip": "walk",
+          "index": 3,
+          "rect": [
+            576,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 79
+        },
+        {
+          "clip": "walk",
+          "index": 4,
+          "rect": [
+            720,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            49,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 80
+        },
+        {
+          "clip": "walk",
+          "index": 5,
+          "rect": [
+            864,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            50,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 81
+        },
+        {
+          "clip": "walk",
+          "index": 6,
+          "rect": [
+            1008,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            123
+          ],
+          "guideRecord": 82
+        },
+        {
+          "clip": "walk",
+          "index": 7,
+          "rect": [
+            1152,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            122
+          ],
+          "guideRecord": 83
+        },
+        {
+          "clip": "walk",
+          "index": 8,
+          "rect": [
+            1296,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 84
+        },
+        {
+          "clip": "walk",
+          "index": 9,
+          "rect": [
+            1440,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            124
+          ],
+          "guideRecord": 85
+        },
+        {
+          "clip": "walk",
+          "index": 10,
+          "rect": [
+            1584,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 86
+        },
+        {
+          "clip": "walk",
+          "index": 11,
+          "rect": [
+            1728,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 87
+        },
+        {
+          "clip": "walk",
+          "index": 12,
+          "rect": [
+            1872,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 88
+        },
+        {
+          "clip": "walk",
+          "index": 13,
+          "rect": [
+            2016,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 89
+        },
+        {
+          "clip": "walk",
+          "index": 14,
+          "rect": [
+            2160,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 90
+        },
+        {
+          "clip": "walk",
+          "index": 15,
+          "rect": [
+            2304,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 91
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            2448,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 92
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            2592,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 93
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            2736,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 94
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            2880,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            50,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 95
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            3024,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 96
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            3168,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 97
+        },
+        {
+          "clip": "action",
+          "index": 6,
+          "rect": [
+            3312,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            52,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 98
+        },
+        {
+          "clip": "action",
+          "index": 7,
+          "rect": [
+            3456,
+            432,
+            144,
+            144
+          ],
+          "visibleBounds": [
+            51,
+            50,
+            107,
+            125
+          ],
+          "guideRecord": 99
+        }
+      ]
+    }
+  },
+  "sheetSha256": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5"
+}

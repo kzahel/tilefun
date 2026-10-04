@@ -1,0 +1,1390 @@
+{
+  "schema": 1,
+  "identity": "wildlife-v2-source-checkpoint-20261004",
+  "createdUtc": "2026-10-04T13:59:25.389566+00:00",
+  "scope": "16 frozen production-reviewed drafts; source and native-sheet checkpoint, not gameplay promotion or human approval.",
+  "evidenceArchive": {
+    "filename": "wildlife-source-checkpoint-20261004T135641Z-fc6cefa2ca938180.zip",
+    "sha256": "fc6cefa2ca93818075cc2d0e5a35d8cba02bb82bf165ba5aa01a6b3374449178",
+    "bytes": 162870581,
+    "files": 3528,
+    "storage": "Local persistent archive outside repository; not remote hosting.",
+    "verifiedEveryArchivedFile": true,
+    "scratchRestoreFiles": 3
+  },
+  "animals": [
+    {
+      "id": "ant",
+      "revision": "draft-v2",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened real profile/front/rear guides and native/4x vendor scenes: warm upper rounded gaster and distinct front/rear foot depths preserve fixed40-degree elevated projection, without flat side elevation or per-facing squashing.",
+        "anatomy": "Observed large bicoloured head, rust mesosoma, narrow single petiole, dark rounded gaster, six articulated leg chains and elbowed antennae. Front/profile eye and mandibles are hidden in rear cap; tiny far legs overlap but belong to the thorax.",
+        "headVolume": "Opened adjacent final actual crawl/scan samples: complete head, torso and gaster marking patches stay stable around fixed anchors; no head shrinking or body pumping.60 head/120 body patch comparisons and fresh fixed-volume source pass.",
+        "contacts": "Observed bent/passing/lifted tarsal tips alternating with extended contacts in all facings. Fresh actual1080 segment/312 contact checks compute left fore+hind/right middle landing0 and opposite tripod4, with double support0/1/4/5 and no whole-ant flight.",
+        "continuousPlayback": "Opened all28 chronological actual Chromium states per facing at native and4x during original identical-art review, plus all revised4x timelines. Fresh revision2 capture has217 matching readbacks spanning8.462/8.404s, two sequences each; stable art and quiet antenna action unchanged.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside original24px Explorer: idle down11/up12/profile7,32px canvas, anchor16,25, ortho3.2, shift9/32,10 world pixels/unit. Profile7 exceeds provisional5 to retain rounded gaster detail; no native resampling."
+      }
+    },
+    {
+      "id": "cat",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened final84 poses, independent guides and actual vendor/Explorer native4x scenes: narrow upper-back band, foreshortened down/up torso and near/far paw depths follow the unchanged40-degree above-ground camera.",
+        "anatomy": "Observed natural low quadruped charcoal cat, short cream feline muzzle/bib, green eyes, triangular separated ears, padded mittens and raised tapered tail. Rear hides front eyes/muzzle/bib and has no front nail/toe decals on heels.",
+        "headVolume": "Observed stable complete skull/green eyes/pink nose/cream marking templates through all adjacent walk/action/idle poses.2688 full-template pixels and fresh35-mesh hashes/unit scale84 rigid head/body poses pass; independently hinged ears move without shrinking the skull.",
+        "contacts": "Observed planted/recovering near/far paws in both complete walks. Actual HL0 FL3 HR6 FR9 lateral sequence/support4,3,3 repeating;1428 fixed links304 actual floor contacts160 stance-travel compensation checks pass. Fixed root, separate.4u/cycle preview travel.",
+        "continuousPlayback": "Opened all38 actual full-Chromium states in every facing/native4x, two full walks, eight ear/tail poses and idle return.336 captures13.068/13.034s,1344 sprite checks; connected limbs/tail, unchanged face and no body pumping. Decoded native/enlarged loops and both travel cycles also opened.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars and approved24px Explorer at native4x.48 canvas/anchor24,34/ortho4.8/shift10/48/10px per unit. Idle down22/up19/profile15 versus13 proposal preserves raised-tail projection without resampling."
+      }
+    },
+    {
+      "id": "dog",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened final100 poses, independent guides and actual vendor/Explorer native4x scenes: upper black saddle surface, foreshortened down/up body and distinct paw depths follow the unchanged40-degree above-ground camera.",
+        "anatomy": "Observed natural tricolor beagle-shaped quadruped with long muzzle, low pendent near ear over cheek, cream blaze/chest, padded paws and tapered white-tipped tail. Rear hides eyes/muzzle/blaze and has heel mittens without front nail decals.",
+        "headVolume": "Observed unchanged complete walking skull/blaze/muzzle/ear pattern and rigid skull during ear-follow action.3760 full walking-template pixels,4429 visible template pixels,1446 explicitly reviewed ear-occluded pixels; fresh36-mesh hashes/unit scale100 rigid head/body poses pass.",
+        "contacts": "Observed planted and recovering near/far paws through two complete walks. Actual HL0 FL4 HR8 FR12 lateral order/support4,3,3,3;1800 fixed links352 floor contacts208 stance-travel checks pass. Root fixed, separate.6u/cycle preview travel.",
+        "continuousPlayback": "Opened all46 actual full-Chromium states in every facing at native4x, two16-pose walks, eight tail-wag poses and idle return.413 samples16.008/16.033s,1652 sprite checks; no head pumping, blaze flicker, near/far swaps or detached limbs. Decoded native/enlarged GIFs and both travel cycles opened.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside approved24px Explorer at native4x.64 canvas/anchor32,44/ortho6.4/shift12/64/10px per unit. Idle profile17 exact proposal, down26/up23 retains projection without resampling."
+      }
+    },
+    {
+      "id": "elephant",
+      "revision": "pilot-v2",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened exact vendor native/4x scene and all four strips: long elevated back visible behind front skull and in rear view; profile upper light band, darker far limbs and roughly ten-pixel foot-depth separation agree with the fixed 40-degree orthographic camera.",
+        "anatomy": "Broad gray torso, round fixed skull, African fan ears, short tusks, articulated tapering trunk and rump tail read as an elephant. Rear has no eyes/front tusks; v2 replaces the incorrect ivory heel nail clusters with continuous gray pads while preserving foot silhouettes.",
+        "headVolume": "All twelve walk and eight trunk-action poses retain complete skull/ear/tusk/light masters. Actual browser adjacent samples show intact head patches translating with restrained lateral weight shift, with no head shrink, pumping or marking flicker; saved geometry scale is fixed.",
+        "contacts": "Independently extracted actual guide landings at samples0/3/6/9 are hind(-1), fore(-1), hind(+1), fore(+1), a same-side hind-to-fore sequence. At least three contacts support every sampled swing. Two lift/passing samples per foot expose depth around partially occluding near legs.",
+        "continuousPlayback": "Reviewed chronological v2 full Chromium native/4x captures (15.806s and15.747s), all four facings, repeated twelve-pose walks, trunk curl/tail follow-through and idle return. Profile trunk remains connected and curls smoothly; rear trunk is hidden and tail moves subtly. Basic walk-to-idle feet still reset abruptly.",
+        "sceneScale": "Profiles remain51/52px beside exact24px Explorer and native Modern Exteriors roof/tree/cars. Down64/up65 retain longitudinal projection. Canvas112/ortho11.2 preserves ten pixels per world unit and anchor56,80; padding enlargement did not resize the animal."
+      }
+    },
+    {
+      "id": "fish",
+      "revision": "draft-v2",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened source guides and native/4x vendor scenes: gold upper back and sloped paired fins retain elevated40-degree projection; front/rear body and vertical tail project longer than10px profiles under fixed camera.",
+        "anatomy": "Every facing shows a stout single-tailed goldfish with short head, ventral cream mouth, dark eye, dorsal crest and forked caudal fan. Rear hides the front face; its edge-on tail is coarse but follows the actual vertical fin plane.",
+        "headVolume": "Opened all adjacent actual swim/action samples: complete front/profile swimming head markings remain fixed; action jaw overlaps lower cheek while cap/eyes remain stable. Fresh source retains rigid skull/anterior volume with no scale keys or shrinking.",
+        "contacts": "Swimming has no ground contacts. Observed posterior-to-caudal wave with sculling paired fins around fixed anterior body;120 fixed axial link and1080 underwater bounds checks pass with actual phase/tail table. No disconnected fins or near/far swaps seen.",
+        "continuousPlayback": "Opened28 chronological actual Chromium states per facing at native and4x CSS, covering two swim loops, gulp/fin-flare and idle return.248 readbacks span9.641/9.608s with exact output parity. Revised cheek jaw hinge gives small visible gape; media/action return is abrupt.",
+        "sceneScale": "Opened native and4x actual Modern Exteriors roof/tree/cars beside unchanged24px Explorer and committed native pond water: profile10px, down/up16px,48px canvas, anchor24,34, ortho4.8, shift10/48,10 world pixels/unit without native resampling."
+      }
+    },
+    {
+      "id": "fox",
+      "revision": "pilot-v2",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened exact vendor scene at native and 4x scale: elevated upper back/long axis visible in down/up views, side torso upper orange light band and far dark feet. Retained 40-degree Blender orthographic fit preserves square-grid RPG perspective.",
+        "anatomy": "After rejecting v1 and first v2 drawing, final front has separated dark ear tips, visible eyes and tapered cream muzzle; rear shows widened skull/ears with no front eyes or muzzle. Profile has pointed nose and bushy cream-tipped tail.",
+        "headVolume": "Opened all four chronological strips plus actual browser samples: each full skull/cheek/ear/marking patch stays identical through eight walk poses and tail action. No fox head shrinking/re-expansion action is delivered.",
+        "contacts": "Profiles show alternating extended/gathered fore and hind feet, with near dark feet lower than far contacts. Rear forefeet appear alternately at shoulder edges; bushy tail partly occludes hindfeet, so rear locomotion is deliberately subtle.",
+        "continuousPlayback": "Reviewed 17.278 seconds of full Chromium chronological samples across native and 4x scale, all four facings, repeated eight-pose walks and tail-flick action/idle return. No head or marking flicker; tail arc reverses coherently. Walk-to-idle paw reset remains a clip-boundary snap, not an in-cycle morph.",
+        "sceneScale": "Actual Modern Exteriors tree/roof/four cars and approved 24px Explorer remain native integer pixels. Fox side idle 14px, front20/rear25 due elevated length projection; no facing or exported cell was stretched to equal bounds."
+      }
+    },
+    {
+      "id": "frog",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened independent Blender guides, final hull/contact strip and native/4x vendor scenes: upper skull/back surfaces and distinct near/far foot depths follow fixed40-degree elevated camera; profile body is foreshortened rather than flat side elevation.",
+        "anatomy": "Observed broad brown spotted frog with temporal mask, golden horizontal-pupil eyes, cream jaw, bent powerful hind legs, smaller forelegs and guided web/toe fans. Rear hides front iris/muzzle, retaining eye-bulb backs; source saves four fore/five hind toes.",
+        "headVolume": "Opened adjacent final hop/swim frames: entire skull, eye spacing, mask and back spot clusters remain unchanged relative to rigid body, with no shrinking or pumping.68 full head/68 body locomotion checks pass; action retracts fixed eye bulbs into unchanged skull.",
+        "contacts": "Observed synchronous hind push, flight, fore-first landing and hind recovery. Fresh920 fixed segments/192 planted toe checks compute support4,4,2,0,0,2,4,4 with hind push2/fore landing5;128 aquatic feet stay beneath fixed .80 water plane, no ground footfalls.",
+        "continuousPlayback": "Opened all44 actual Chromium chronological states per facing at native and4x, two hop and two swim cycles, blink and idle return.336 exact readbacks span13.041/13.037s, exceeding two full sequences. Fixed marking patches stay stable; media switch/stop remain abrupt.",
+        "sceneScale": "Opened real Modern Exteriors roof/tree/four cars beside approved24px Explorer and unscaled committed water tiles.48 square canvas, anchor24,34, ortho4.8, shift10/48,10px/world. Profile11/down11/up12; provisional10 differs by1px, no image resampling."
+      }
+    },
+    {
+      "id": "giraffe",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened native/enlarged vendor scenes and independent renders: light upper withers/back band, elevated posterior neck and far feet six to eight pixels higher than near contacts preserve the fixed 40-degree camera; both profiles retain upper surfaces.",
+        "anatomy": "Opened every pose in four enlarged grids: tapered long neck, sloping withers, cream-separated ochre patches, articulated long legs, dark hooves, tufted tail, narrow muzzle and separate ossicones read as giraffe. Down has eyes/muzzle; up hides front facial features.",
+        "headVolume": "Adjacent captured walk samples preserve the complete skull/muzzle/ossicone and coat patches. Corrected one-pixel near-ear overlap flicker by freezing unchanged-orientation ear patches. Action articulates ears/tail around the same skull; no head shrink or body pumping observed.",
+        "contacts": "Left walk0-3 and7-10 expose staggered fore/hind reach and bent passing feet, with connected limbs and higher far contacts. Front/rear hind feet sit wider than forefeet but shafts partly occlude. Fresh source computed hind-left0 fore-left2 hind-right8 fore-right10, retaining three fixed segments per limb.",
+        "continuousPlayback": "Opened chronological samples from376 actual bundled full Chromium frames, 19.066 seconds native and19.040 seconds at4x CSS. Each covers four full walks, two tail/ear actions and idle returns. Markings stay fixed, tail chain reverses coherently; walk-to-action feet reset abruptly.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside original roughly24px Explorer. Giraffe profiles75px, down65/up95 reflect elevated longitudinal projection. Canvas144, ortho14.4, shift48/144 and anchor72,120 retain ten pixels per world unit without resampling."
+      }
+    },
+    {
+      "id": "harbor-seal",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened final92 poses, independent Blender haul/swim guides and native4x vendor scenes: upper skull/back and near/far paddle depths follow fixed40-degree elevated camera; profiles retain upper back above cream underside rather than flat side elevation.",
+        "anatomy": "Observed earless rounded skull, dark small nose/eyes, paired pale whiskered muzzle, continuous tapered silver spotted coat, short forepaddles and paired backward hind webs. Rear hides front eyes/muzzle/whiskers; no sea-lion walking hind feet.",
+        "headVolume": "Observed stable full head/nose/eye/whisker-root patterns across adjacent haul/swim/stretch/idle states;4508 full-head pixels pass. Raw25 meshes/276 spine links stay fixed; evaluated continuous torso volume varies0.505 percent, explicitly retained as a skinning limitation.",
+        "contacts": "Observed corrected fore pull with planted tips7/0/1 and fore recovery2-6 plus anterior spinal wave and sliding body supports. Actual support3,3,1,1,1,1,1,3;368 fore links24 compensated planted tips38520 floor vertices pass. Swim meshes1.0..2.32 stay beneath3.4 water plane with no floor footfalls.",
+        "continuousPlayback": "Opened all44 actual full-Chromium states per facing/native4x, two haul/two swim cycles, resting stretch and exact idle return.383 readbacks14.822/14.874s; stable skull/markings, connected paddles and coherent posterior sweep. Quiet stretch and abrupt media switches remain explicit limits.",
+        "sceneScale": "Opened actual Modern Exteriors roofs/tree/four-direction cars and approved24px Explorer in native4x final scenes.96 square canvas, anchor48,64, ortho9.6, shift16/96,10px/unit. Profiles15/down23/up32 versus23 proposal; retained low belly-resting anatomy without resampling."
+      }
+    },
+    {
+      "id": "kangaroo",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened all four guide/scene facings: profile skull cap and rounded back upper surfaces remain visible, near/far feet separate at elevated40degree camera; sideways motion stays foreshortened.",
+        "anatomy": "Observed long muzzle with pale cheek/jaw stripe, russet rounded torso, short tucked forepaws, large bent hind thighs/long feet and tapered tail. Rear has heel contours and hides front eyes/muzzle/claws. Tiny toes and far ear are coarse.",
+        "headVolume": "Compared adjacent actual hop states and ear action: full cheek/eye/muzzle master remains stable while skull translates rigidly; ears pivot separately. No head shrinking or facial-marking flicker observed.",
+        "contacts": "Observed compression1/push2, paired airborne feet3-8, gathered long feet at apex4-5, reach and synchronous heel/fourth-toe landing9. Near/far depths stay distinct; separate travel preview preserves planted progression apart from integer steps.",
+        "continuousPlayback": "Opened all34 chronological actual Chromium states for every facing at1x and4x, two ten-pose hops plus ear action/idle return.298 captures cover11.553/11.551s, over two complete5.44s sequences each. Retained and fixed earlier tail-tip gaps; final all76 alpha silhouettes are eight-connected.",
+        "sceneScale": "Opened native and4x actual Modern Exteriors roof/tree/four-direction cars with original24px Explorer. Profile43px reads as large adult male; proposal36 deviation is explicit. Down43/up58 include foreshortened long feet/tail; no resizing or camera/density changes."
+      }
+    },
+    {
+      "id": "king-cobra",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened Blender facings, projected hull/contact strip and native/4x vendor scene: upper head/body surfaces and long rear versus foreshortened front trailing body follow fixed40-degree elevated camera; narrow profile hood follows independent volume.",
+        "anatomy": "Observed rounded olive skull, narrow oval hood with yellow ventral bands, tapering attached serpentine body and red tongue. Rear hood/skull hides front eyes/mouth; no spectacle marks or invented feet.",
+        "headVolume": "Opened all final adjacent slither/action samples: complete skull and hood palette clusters remain unchanged at their fixed anchors, no head morphing or body pumping.60 full-head comparisons and fresh geometry/scale audit pass.",
+        "contacts": "Observed continuous grounded body curve, no aerial phase. Fresh Blender audit checks900 fixed .24-unit links and1800 sliding belly minima within near-zero tolerance; computed maximum left bends progress at poses(j+2)%8 toward tail.",
+        "continuousPlayback": "Opened all28 actual Chromium chronological states per facing at native and4x CSS, covering two slither loops, tongue/tail action and idle return.243 readbacks span9.412/9.459s and match exact authored pixels; angular one-pixel tip motion and abrupt stop remain.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four cars beside approved24px Explorer.96 square canvas, anchor48,60, ortho9.6, shift12/96,10px/world unit. Profile18/17, front23/rear41 reflect foreshortening and trailing body; no resampling."
+      }
+    },
+    {
+      "id": "mallard-duck",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened native and4x vendor scenes, all-facing guides and all124 drawn poses: gray upper mantle, rear cap/tail and different foot depths retain elevated40-degree projection; profile foreshortening follows guides.",
+        "anatomy": "Profiles show green drake head, yellow bill, chestnut breast, gray mantle, cream collar and blue folded speculum. Front has separate eyes/bill; rear hides the front face and heel toe rays. Flight has two articulated feather fans.",
+        "headVolume": "Opened adjacent playback samples and12x rear-waddle6 detail after correcting neck gap. Complete head and eye/cap templates stay fixed through all clips, including rigid flight translation; no shrinking or body pumping observed.",
+        "contacts": "Observed alternating orange web clusters and bent passing/lift positions, with far feet largely occluded in profiles. Fresh audit computes side-1 landing0 and side+1 landing4, six discrete planted samples per side and fixed.23/.28 links. Swim alternates below-water power/recovery; flight feet tuck above ground.",
+        "continuousPlayback": "Opened chronological native and4x CSS samples for two complete waddles, swims and flaps, quack and idle return.403 full Chromium samples span19.870/19.809 seconds and exact output parity. Revised both wing shading and rear neck gap; markings stay stable, clip-boundary media/feet reset abruptly.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside original24px Explorer: mallard profiles13/14px, down15/up16.48px canvas, ortho4.8, shift10/48, anchor24,34 retain10px/world-unit without export resampling."
+      }
+    },
+    {
+      "id": "manta-ray",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened all84 poses, independent guides and native4x vendor scenes: upper disc and nearer/farther wings follow the unchanged40-degree above-ground camera; profiles retain a projected upper disc rather than flat side elevation.",
+        "anatomy": "Observed diamond pectoral fins, compact rigid disc, narrow trailing tail, terminal mouth/lateral eyes, paired cephalic lobes and stable white dorsal shoulder patches. Rear hides front pupils/mouth; simplified two-panel fins remain angular at extremes.",
+        "headVolume": "Observed unchanged head and shoulder marks through adjacent swim/action states in all facings, with no pumping or flicker.4263 full-head pixels stay stable; fresh-process24 mesh hashes/scales and84 rigid-head poses pass.",
+        "contacts": "Observed twelve-pose oscillatory fin stroke: bases rise toward3, tips lag toward4, then descend toward9/10;1260 actual links retain length. All mesh Z.339627..3.060373 remains beneath4.3 water plane; no floor footfalls, fixed root and separate travel.",
+        "continuousPlayback": "Opened all38 captured states in each facing/native4x, two swim loops, all eight cephalic-lobe poses and idle return.335 full-Chromium captures13.002/13.014s and1340 pixel readbacks; no detached fins, shrinking head or mark flicker. Decoded native/enlarged GIFs and both travel cycles were also opened.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside approved24px Explorer at native4x.144 canvas, anchor72,90, ortho14.4, shift18/144 and10px/unit. Idle down33/up32/profile41 exceeds24 proposal, retaining adult6.3-unit span without resampling."
+      }
+    },
+    {
+      "id": "penguin",
+      "revision": "draft-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened final100 pose panels, independent Blender swim/stretch guides and native4x scenes: upper skull/back surfaces and near/far foot depths follow fixed40-degree elevated camera; swimming body bounds differ by true rigid-pitch foreshortening.",
+        "anatomy": "Observed adult emperor black rounded head/back, gold ears/top chest, small orange-edged dark bill, pear-shaped white belly and dark webbed feet. Rear hides front eyes/bill/belly and omits front toe highlights; swim flippers remain connected and stiff, without feather fans.",
+        "headVolume": "Observed stable head/cheek/bill markings throughout adjacent walk/swim/stretch states and idle return.100 source fixed-head orientations and3999 visible template pixels pass;176 rear-swim lower-head pixels are legitimately torso-occluded, explicitly skipped.",
+        "contacts": "Observed body weight shifting toward planted foot with opposite lift. Actual support2,2,2,1,2,2,2,1, right apex3/left7; fresh8 torso-over-single-support polygons,400 leg links,600 flipper links,128 web-floor contacts. Swimming meshes stay below3.0 water plane with no floor footfalls.",
+        "continuousPlayback": "Opened all46 actual full-Chromium chronological states per facing at native and4x, two walk/two swim cycles, stretch and idle return.400 readbacks span15.531/15.500s; no observed head/marking pumping, detached wing roots or near/far swaps. Profile stretch reads quietly; media switching remains abrupt.",
+        "sceneScale": "Opened actual Modern Exteriors roofs/tree/four cars and approved24px Explorer beside penguin at native/4x.64 square canvas, anchor32,44, ortho6.4, shift12/64,10world pixels/unit. Profiles22/down21/up22 vs26 proposal, no resampling/stretching."
+      }
+    },
+    {
+      "id": "rabbit",
+      "revision": "pilot-v1",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened actual saved-volume guides and four-facing scene/contact art: elevated upper rump and skull surfaces, foreshortened front/rear, and separated near/far feet fit the fixed 40-degree square-grid scenery contract.",
+        "anatomy": "Round rump, long hind feet, short forepaws, cream tail and two pink-lined front ears read as a natural rabbit. The rear has neither front eyes nor a front muzzle; profile ear overlap is appropriate but less clear than the front.",
+        "headVolume": "The chronological browser poses preserve the cream muzzle, eye placement and skull size through gathering, flight and landing. The listening action splays ears around the same skull; it does not substitute a smaller head for movement.",
+        "contacts": "The actual browser hop exposes bent hind legs, lifted/tucked feet and fore reach before settling. Saved-source contact audit confirms fore landings at 4/5, paired hind landing at 6 and all-feet flight at 2/3, with fixed planted ankles.",
+        "continuousPlayback": "Opened chronological native-scale samples from the final 172-frame, 17.293-second actual Chromium sequence and all-frame strips. Distinct gather/push/flight/reach/fore/hind poses loop without head pumping; revised listening uses the same ear masters and returns to idle without false length growth. Front motion is subtler and rigid body pitch is quantized.",
+        "sceneScale": "Opened the actual Modern Exteriors scene beside the approved Explorer: left/right idle profiles are 13 pixels high versus the roughly 24-pixel person. The rabbit reads as a small ground animal with sufficient head/ear detail, without equalizing differently projected facing heights."
+      }
+    },
+    {
+      "id": "robin",
+      "revision": "draft-v2",
+      "productionReview": "draft-ready",
+      "humanReview": "pending",
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "observations": {
+        "projection": "Opened actual guides and native/enlarged vendor scenes: light olive mantle and wing bands retain upper surfaces, profile feet have different projected depths, and front far tail projects above the body under fixed40-degree camera.",
+        "anatomy": "Every facing shows a compact brown/orange robin with cream belly, fine pointed bill, short tail and grasping toe clusters. Front orange face has separated dark eyes; rear cap/back hides front eyes/bill and corrected near-tail order preserves its action.",
+        "headVolume": "Opened adjacent actual Chromium hop/flap/action samples after drawing03 corrections: complete cap/face/eye patch stays fixed around its anchor, including rigid flight translation. No head shrinking, marking flicker or detached limbs seen.",
+        "contacts": "Observed gather, tucked rise/apex, descent and extended paired landing with three rigid leg segments. Fresh source computes flight2/3/4 and both-foot landing5. Native tuck is about one pixel; far feet/toes partly overlap rather than sharing a forced baseline.",
+        "continuousPlayback": "Opened all44 chronological first-sequence states for each facing at native and4x CSS capture, covering two hops, two flaps, action and idle return.290 actual full Chromium readbacks span11.265/11.248s and match exact output pixels. Articulated fans fold during recovery; clip boundaries reset abruptly.",
+        "sceneScale": "Opened actual Modern Exteriors roof/tree/four-direction cars beside original24px Explorer: robin idle bounds down10/up9/left10/right9,32px canvas, ortho3.2, shift9/32, anchor16,25 and10 world pixels/unit, without native export resampling."
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/README.md",
+      "bytes": 4086,
+      "sha256": "0337d3099cc214833c37d9e1e56dca41c98af77ea66a3e5c82735c5d1f9c1ac9"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/ant.blend",
+      "bytes": 163557,
+      "sha256": "d303fbee7f54b0fd5e6b5f6ae94047fc8502ae528a470848dc1c8d9c60a0b788"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/audit.py",
+      "bytes": 3527,
+      "sha256": "ee02262b2356dfa00d4490f27da67d0dc5fee6d1c7114894370da0f2032f24c5"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/author_masters.py",
+      "bytes": 2140,
+      "sha256": "162cae99af31eb5cfdfd7b2a25bd3d25da5bcb741eded24345eae7b1501e09d1"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/build.py",
+      "bytes": 7879,
+      "sha256": "eb113542f9a91ee2c1538bbf689345cd4730513d14b07f46832b933a12d8547f"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/capture.mjs",
+      "bytes": 3690,
+      "sha256": "43868645e157f6d1f50f44c3188f910aff25de2be6f3cadd89d80b92f97397ae"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/finish.py",
+      "bytes": 6487,
+      "sha256": "df764c01db1c70c2eed5fea29a04d36191f93f54a46576878fecd086fcd38e3e"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/masters.json",
+      "bytes": 3379,
+      "sha256": "e8b7fd08adb72fd40dadc8ae559667f5bfd10738498fe30da3e7bbbcc68c8bad"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/review_panels.py",
+      "bytes": 1542,
+      "sha256": "15b5afb60155b16778f803a35aff11babd94cd43c814c41f46d3c5f7a1c963ee"
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/verify.py",
+      "bytes": 3295,
+      "sha256": "469c8972559051d1b8252bb4ad74fb94f1956f43fd9dcb9fbe20296a1c1f6a28"
+    },
+    {
+      "path": "art-source/wildlife-v2/camera.json",
+      "bytes": 1086,
+      "sha256": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/README.md",
+      "bytes": 3337,
+      "sha256": "c2eadd8c0c0792cc7a8f46dd6c3ccb0ef82eed277a0133668f67eb05c0d9fd82"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/audit-output.py",
+      "bytes": 3263,
+      "sha256": "c73171ef604b35d389a17aa57d24c208dc7565fc11c76dec4e9063df8d88c04e"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/audit-source.py",
+      "bytes": 3542,
+      "sha256": "0adb5ec0445fe8d8426380626c2dcbb30cbd690ec23f7cab5d148a41957bc19c"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/author-masters.py",
+      "bytes": 4110,
+      "sha256": "2ef8af6b8aad105688654d0384bbb47fc674bf622e17d0fcdd4d8a4208a324a5"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/build.py",
+      "bytes": 8654,
+      "sha256": "2fa5c2736fd8641141506a49ab9ad9a2da17439d9571af09475482f51614009d"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/capture.mjs",
+      "bytes": 3682,
+      "sha256": "bf4f105e60a921e74e259edf14a252b668906556d4a4d570cb1473394c8df37f"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/cat.blend",
+      "bytes": 189632,
+      "sha256": "c7420f78ea93df2f257a0de94fccb7d91a25902fa37242ad7756d1570b9a0ace"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/finish.py",
+      "bytes": 5497,
+      "sha256": "4b992bd0467d8f65c642df010b3584de550c2f980e6d06d36a4d5097c8dbbb6a"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/masters.json",
+      "bytes": 238667,
+      "sha256": "d117ca4d3a4f17a327bdecd54bdb4f5f6d589f4f869088d8b387f3b805681a84"
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/review-panels.py",
+      "bytes": 2213,
+      "sha256": "a1f608cd07722850a97a78232ce4511a699d0a41d752ce34d9fa95fdb21012c1"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/README.md",
+      "bytes": 2183,
+      "sha256": "d16a83a50523a3ad388a655c8d158dd30fceec299b457d105b27f981a09e0a62"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/audit-output.py",
+      "bytes": 4015,
+      "sha256": "828cba1f9f837c45437bd17ad59eb2df3e7e4f7c4027af7e8fc59a89791d14b4"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/audit-source.py",
+      "bytes": 3533,
+      "sha256": "4c9b96dfdd9ed5b909ec25bb30ebeb139fc7ca0974ce28f8ef1c272054f8dd78"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/author-masters.py",
+      "bytes": 4283,
+      "sha256": "9af04aec321b30b09b01e6a3efc3bb431059ed67214ad439a9ee2c5bf515fb69"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/build.py",
+      "bytes": 8348,
+      "sha256": "947b2356d38effa8e35dc143e19da71821d9e1b46a6d52737fec7d0111f9fe77"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/capture.mjs",
+      "bytes": 3682,
+      "sha256": "057e3188309e5cde816c365368d16ba6d3948bef1a3f067a98aff5678ec23a1a"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/dog.blend",
+      "bytes": 222938,
+      "sha256": "b4968351dd05749707b3eb7e350b3fc3a38016203692228c072358c05edda350"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/finish.py",
+      "bytes": 5480,
+      "sha256": "362f1993127bd1cd706dd492e5c05ede512bc13c099a78e845c07e2207b4b772"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/masters.json",
+      "bytes": 477891,
+      "sha256": "1d4d42f3386391a6a6a85d1589e3fbe64c6d6523e6e2ff6b9f9785c4caed864b"
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/review-panels.py",
+      "bytes": 2215,
+      "sha256": "5b33e24236bb3b961e383ffd6f9b5413b6c55ea388cbc6a16655b2210fb3f82b"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/README.md",
+      "bytes": 4540,
+      "sha256": "74446090f889bb20de57ea1bf22016c40075da56615f9fd917cbfda48ed36e68"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/audit.py",
+      "bytes": 5086,
+      "sha256": "cf1cb952139ac684d61043c7ff083b6beefc5fab44b437967be0f00692dae7c6"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/author_masters.py",
+      "bytes": 6848,
+      "sha256": "669bf62adf261d18ba00f9334dde3ae6ced81ff72e974ac2d51edd97255c80b5"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/build.py",
+      "bytes": 12546,
+      "sha256": "30fa7999d8130f4ec72c29bf321e05db2b5c58aba8e8e35d61372d2b7c6dee8e"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/capture.mjs",
+      "bytes": 3697,
+      "sha256": "926e61d529bf6cda2df86bd915b999b63b5978fc4340ad321c14611be13eb716"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/elephant.blend",
+      "bytes": 172565,
+      "sha256": "c359047567305be7c924e42de53e3c890dbd319bfded6a5948d42998118a972c"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/finish.py",
+      "bytes": 10644,
+      "sha256": "678226fa1592c584354ce2cab9e6840111d8d216b07e9157e691f411fb4798ae"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/masters.json",
+      "bytes": 13966,
+      "sha256": "bd7adc1983d3545bc75cf2205c1228c147d68e7bffc909cf25589a0108d8b514"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/replay.py",
+      "bytes": 2581,
+      "sha256": "b78f3dda589ef8bbe4a8b41022db245300578213731788a088910fcff1182377"
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/verify_capture.py",
+      "bytes": 2819,
+      "sha256": "479b70b15afa2c2adcbaa83f24e83183261dfb56db238fe8953b3308005ba7db"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/README.md",
+      "bytes": 3212,
+      "sha256": "e5fcc55def87289ff99140e8ee2cd6145d48de324b06b44c0dfef5b7bc8d3562"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/audit.py",
+      "bytes": 4153,
+      "sha256": "1e7872abf680f5a80a66cd8dd5eec99b382aaccbdfe7e5b111b99aabaa59a2ee"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/author_masters.py",
+      "bytes": 1693,
+      "sha256": "e0a9f8457a204d2ba5ccf1392efaa12aa771ea10823838a287e5a83a3eb58b9d"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/build.py",
+      "bytes": 8859,
+      "sha256": "90849e6eb0acaad6b8a9298fb2c5423c118db1274b06da58a842a999be38120c"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/capture.mjs",
+      "bytes": 3693,
+      "sha256": "568841d5313b1e1a2530108a1f5ff6e03a1ac7651a2e3b73c53bbf34d6d94119"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/finish.py",
+      "bytes": 8528,
+      "sha256": "6aeffb8d766d01778aa32ea4022273cd66b7486979679d65e314d1f84118f152"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/fish.blend",
+      "bytes": 141833,
+      "sha256": "c0ffd36f427fbb4ccf5cc320a834bb347899711f5ca39763a70f1943675c805d"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/masters.json",
+      "bytes": 2637,
+      "sha256": "1162d6bd653f6f5a0f60e6bb60640787f4e9d823bf684392bf407e7cd79d224b"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/review_panels.py",
+      "bytes": 1801,
+      "sha256": "31dfd311e3df38291574331193fd11d15a8fb3b144888314d4351c4eaab20e62"
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/verify.py",
+      "bytes": 3454,
+      "sha256": "32703f34b9142fa5cbfd481f349146eebbfb7bf6f81966cb4269bf8e5584a5c9"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/README.md",
+      "bytes": 6395,
+      "sha256": "7d679efe5041da787d1f31c851f055a01523ee846db23b0da78b6552a1df7f17"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/audit.py",
+      "bytes": 2900,
+      "sha256": "05b6aef884518c6aff51c72615ac82a0c374a980b79e4581931e2cac1e9d8e32"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/build.py",
+      "bytes": 14362,
+      "sha256": "e6305ac12a54235c5aa4258067f8963b25ee78980143ae66750f64cad38b426b"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/capture.mjs",
+      "bytes": 3907,
+      "sha256": "057f002363abbbf2c94bd51cc4e92d13c0dbd64a2fdec16018235a3c2698f03a"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/checksums.sha256",
+      "bytes": 2102,
+      "sha256": "33b0c18421d23f63b46478062ab1166f8060dc3b2c0c6b6d7f589d306203c2c8"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/compare.py",
+      "bytes": 2362,
+      "sha256": "1c5aedeee62fcdeed03ea2210d66eea19f9f16defae3e9220bdc37ce319e3ff8"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/export_saved_guides.py",
+      "bytes": 4499,
+      "sha256": "13ae1b335deb5441580f3eef3370fbb014f5c7d5a2445b0cda826c918e39f612"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/finish.py",
+      "bytes": 13731,
+      "sha256": "8b96d7de022bbdcad4a71ebd3cd9c0820af9ee9582a202969a31b2dfebd1167d"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/fox.blend",
+      "bytes": 152823,
+      "sha256": "c448c6f1421166daf93a1ec0179e17a5d16f4da61d0362611a8bf96914f6c242"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/masters.json",
+      "bytes": 3071,
+      "sha256": "ead96e5953a0e5a8f738ad2512d174896cdeedc087123aa79e1dd10acd7c9a2e"
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/verify.py",
+      "bytes": 4143,
+      "sha256": "5be7f2d0292ab214f8eedd663d53fa26206d7214596d283a8566c637de53439d"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/README.md",
+      "bytes": 3835,
+      "sha256": "240ceacd53f7cc3e19c15cff454ff68182426ac5a2329897d3341f9cae8778d9"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/audit-output.py",
+      "bytes": 3640,
+      "sha256": "216c871a6e44360d0fae350d0b743aeee6f29bb7266fa11697c6eadd2e1f4336"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/audit-source.py",
+      "bytes": 4296,
+      "sha256": "eb09e795280a7400e08ee8bf6c84b695647a5a76063e94b84606fd6a076149e1"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/build.py",
+      "bytes": 10271,
+      "sha256": "3189e57f67ab6a3eecb03fab5497330cb1304f96e6f4ff69376d28d9a9ae83ed"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/capture.mjs",
+      "bytes": 3703,
+      "sha256": "f514777647078ecf12c69135d42fea2c5c9de3f0b2767bda22a30ea5406f9bd8"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/finish.py",
+      "bytes": 9670,
+      "sha256": "e18fe7fe9a2ee6373abc75c9719dc5234ab9daa1c6cfb7830f59a1a6cd4351c1"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/frog.blend",
+      "bytes": 159185,
+      "sha256": "f0dd75a0b5bc877ce7b0aac4812afc7ce8ef150edf5d7ab213b4745e31ee25f9"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/masters.json",
+      "bytes": 1593,
+      "sha256": "0b739a657bc7a2bdd5c3f1a75353d71dc5af9ba6e115de25221d417d0976d665"
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/review-panels.py",
+      "bytes": 1390,
+      "sha256": "2057956e9e36969619f085b3156203a8b8f3583a5e2195b0ac2cd5dbbb4357d2"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/README.md",
+      "bytes": 2140,
+      "sha256": "df9eead6a67be67a1266e4765ea77fa2fe797ce6e8da82ea14cac37688c23d58"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/audit.py",
+      "bytes": 4477,
+      "sha256": "200fc7163f6a9f1d803b5c0aa58fcad9882ac935b44f56c8c2ff62666d7338b4"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/author_masters.py",
+      "bytes": 8460,
+      "sha256": "cff723628a68188323d573398dbcff5303d1ebeead331cf634ad580a13c67f91"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/build.py",
+      "bytes": 10640,
+      "sha256": "63a6747b73bacd31478580eea3118de1c5a1f21e6a1da0ecdbd52400acf2b825"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/capture.mjs",
+      "bytes": 3698,
+      "sha256": "3cb5027630d637d987e16d50179065fb2807aa9254bae3c1241e5ca6e90e14c1"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/finish.py",
+      "bytes": 9734,
+      "sha256": "57def3b68aa9438424e70f7ff28fdae907d2bac3d3407c3e21240d83485379b6"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/giraffe.blend",
+      "bytes": 174579,
+      "sha256": "4fc4e8ee9ad1a46d2fc16d4496a03dbe9a4dde6b5f63e7b743ae225aa0c783e2"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/masters.json",
+      "bytes": 11133,
+      "sha256": "c6e247c65d484a48634e5e2f5ae80cb6077493599eb40486674d80277ffc7e25"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/review_panels.py",
+      "bytes": 2375,
+      "sha256": "bbc424e7786b38b7e8c1f93139766b39ce5a151230f8df9645500186dcc2316a"
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/verify.py",
+      "bytes": 3417,
+      "sha256": "8813c283758e6f5c43c84380440832bdddda85ee61bc7507b1263de3ef5d4548"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/README.md",
+      "bytes": 4848,
+      "sha256": "a1a91a19ecaf99be161a3a8f9218fc708a9a3c2cb1b6a5ff30e8480b3775214a"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/audit-output.py",
+      "bytes": 2657,
+      "sha256": "3845ecf409b1b6efca47bad364e4676a6b5e77d650ec309fe7d75938e21d236b"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/audit-source.py",
+      "bytes": 4306,
+      "sha256": "34bf60ee0d4b8c969b6afbcd98f347b404bcb57dc3061e0acd7493359c8ce019"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/author-masters.py",
+      "bytes": 4836,
+      "sha256": "ad1cbc63ec94a594e11a7da7d3dd08fc9d02520f5a81a95058554a4d5b4f3445"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/build.py",
+      "bytes": 14890,
+      "sha256": "a569bc5b6b81f66a582a7aa9a6955c09305097b598d408fc78d986e80636a677"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/capture.mjs",
+      "bytes": 3731,
+      "sha256": "97a5e34f51494838153a14f0eeeea6261546871366e0e2318363332f71d4d702"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/finish.py",
+      "bytes": 6216,
+      "sha256": "10f0c0a4877b84b8b4829e60984cac3f7e838d86fe626413c9b4fa672abb7261"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/harbor-seal.blend",
+      "bytes": 195722,
+      "sha256": "f05c0997b07979632b28a0b6ad946bfb5ae36db507a61535e0e2de4957809ac1"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/masters.json",
+      "bytes": 937239,
+      "sha256": "de71e0309c78daff6445ebcbbea519c917ad693a306f7a6792cd0c8eb352959f"
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/review-panels.py",
+      "bytes": 1440,
+      "sha256": "270648dd732d105afe9646148006d9a4e5cf27f159aea79275cb53180b5061e5"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/README.md",
+      "bytes": 4232,
+      "sha256": "35eb9865f492bc0dff04e115afa9ad28a22ab82501403651c8b9848957cc7879"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/audit-output.py",
+      "bytes": 3340,
+      "sha256": "aa9bd11408a0e090ce3c6b70ea394984ce9172a0fc52dc04443e720f93b9b74d"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/audit-source.py",
+      "bytes": 4778,
+      "sha256": "653977107ab4d1981328eaa2f8c7e0e8dd1bb676ec7b46dbb6c17c90ae90fa0c"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/author-masters.py",
+      "bytes": 3190,
+      "sha256": "1baf5d0518abfe892a86cfd9bbaa56c3dcfae02fa19b1622c6827742fd4469b6"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/build.py",
+      "bytes": 10563,
+      "sha256": "1a17a84f4afae039f93763f5ce0b8d94a14f108ba65700875de8098dd2920465"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/capture.mjs",
+      "bytes": 3701,
+      "sha256": "d63e39870d5f8744584cc4e0f4791aad81df4c0a685b1c9c10a541bbece8678a"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/finish.py",
+      "bytes": 10087,
+      "sha256": "75a2efe00fc0924a7dd3ce314fc4010cbccc91d0f107a5a866600f442bdb12f7"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/kangaroo.blend",
+      "bytes": 220224,
+      "sha256": "185fa4ec9d1acff0f0350ee846348159acdad02a76180750ea7bb0399972f0ca"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/masters.json",
+      "bytes": 5142,
+      "sha256": "effb4b2e1359f2d4139cf488e02eb03e82332470e0c17edf0508ab8d3f2f21d9"
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/review-panels.py",
+      "bytes": 1654,
+      "sha256": "47762c676be0a4f3026eb767301012cb053081ac9de91a2011696bcf72a7f652"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/README.md",
+      "bytes": 3048,
+      "sha256": "75c103274136f13d735b3c4130af729346a1c0fe78dccb10dc737ef6ae9539f7"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/audit-output.py",
+      "bytes": 3499,
+      "sha256": "a9fb8f4c1d3629c5e8a6551694df00bdf44e113957bbe989afaff1ae57238fa5"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/audit-source.py",
+      "bytes": 3690,
+      "sha256": "84074fa724508192ef09982f6d11d8c13760bd192693130d8bceaed6c1b8adbd"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/build.py",
+      "bytes": 9657,
+      "sha256": "e64fddf777e72a9783a35981241671ac1402c4db9fe559b82094d72508fe5145"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/capture.mjs",
+      "bytes": 3696,
+      "sha256": "25585b5421a0bf77bca5910263f97c9b3762078e24e5ee62d2d81fd53e781730"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/finish.py",
+      "bytes": 8335,
+      "sha256": "f599ca7872c40dd74230f9e97bc2dee88071fb22f4dcd208cfc2f9fdf50b1fba"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/king-cobra.blend",
+      "bytes": 171723,
+      "sha256": "6766cb8d5c91c98af0d02e619516b508249741acf9f3233aa5c3e010b8cfead9"
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/masters.json",
+      "bytes": 1650,
+      "sha256": "e6af704d8174ac012ad2d4ef70f37b8c4d9d95da22510d01e3b0edc80ccafe1c"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/README.md",
+      "bytes": 3903,
+      "sha256": "26b39ce5c457784ec1cb889ebbc21d94dd6e8f403629aab7c9f850ac42f31e90"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/audit.py",
+      "bytes": 4686,
+      "sha256": "7678d7efefb20bd30e3a59754b748efb64d55356d9da3c28b0dc0a69069ffd76"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/author_masters.py",
+      "bytes": 3308,
+      "sha256": "e21576c9df232e7dfbb7ae227ad9b4803681eac01d3d8e19a8b63ad156c80093"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/build.py",
+      "bytes": 10691,
+      "sha256": "c090192f53f462c23fdce5960224f37b9f93fe9861aaa7733899eb5070a8eb1e"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/capture.mjs",
+      "bytes": 3742,
+      "sha256": "2c5074318995b383a5d3443beabbdf57930babdbab6f90f64f5bfd2dec24303d"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/finish.py",
+      "bytes": 9715,
+      "sha256": "aef5f49a6aa97fe409e1cbe1315ff3a9822f3205532c388fd91736e3453aa95d"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/mallard-duck.blend",
+      "bytes": 150212,
+      "sha256": "651651c1c3bcd573475a10dda691b776242f3d8166df48c10eabcf88c0f1e156"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/masters.json",
+      "bytes": 2861,
+      "sha256": "05778cb21778f0aae051c188d2cd19972eeaa18280c1ed0fb1a8facc86e57d5d"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/review_panels.py",
+      "bytes": 1957,
+      "sha256": "bb2782ff9b3ffb07648483ff950692c17a59538a8be88e11af928b78574e817c"
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/verify.py",
+      "bytes": 2850,
+      "sha256": "09a9a6d863974f82dbee60e1e5eac1e0be9c7b7d0e65c07eab22427950275e6e"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/README.md",
+      "bytes": 3279,
+      "sha256": "561ff5c454912bad2274e55d470ea0b654da26df001a9bc1021208e12033b7d1"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/audit-output.py",
+      "bytes": 3045,
+      "sha256": "f39cdb78bb724df7fe9e04aed989bb155a77f4762614adfc2a83e059e1074566"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/audit-source.py",
+      "bytes": 3636,
+      "sha256": "072babe806cd6437fcf566ab4ec4cad00933ff81ed7ddbcb27d14cbd9c535ea2"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/author-masters.py",
+      "bytes": 4184,
+      "sha256": "899085a836fccd3a2f0091fb3927ee8a08cd78cbe829865e5836f6a01c231cc8"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/build.py",
+      "bytes": 9263,
+      "sha256": "a1c5d19b7d59207a237b626ccea7847d2b13c6795e526a1134609c89db622b49"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/capture.mjs",
+      "bytes": 3705,
+      "sha256": "599a8ac7c7cf7a69a11500fa135ec5746864091fe4311f039c99579c339282c3"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/finish.py",
+      "bytes": 5565,
+      "sha256": "d0f10ba09d8ca479cd1c0421d2395c01a11d98b549e5144e99e0f9150d0e09bf"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/manta-ray.blend",
+      "bytes": 158706,
+      "sha256": "ba55bc1b9c5154638471010ca67a3268a84c2423d1ce96e1867d5e56cc3d280b"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/masters.json",
+      "bytes": 1859856,
+      "sha256": "1dba2aca7a54dbe13f745072ef309cc9805a7565c057143e2c7fd7295a4681c9"
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/review-panels.py",
+      "bytes": 1434,
+      "sha256": "b065228243ff6322455ea5349acb2107752233b6d284c3bfb653619789570237"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/README.md",
+      "bytes": 4068,
+      "sha256": "0ec1df4dd616d482b7e7bf2aff13c462f9a76e2a889349b648d8620669e0e5dd"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/audit-output.py",
+      "bytes": 3150,
+      "sha256": "d229c900b150f5886ca9d546d3d3cd866dbc8c13cd918760cc41a399c4fa7240"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/audit-source.py",
+      "bytes": 6360,
+      "sha256": "02cb9edd59260131ae0e13dfeef9b04330ec573b8fc8182a13f41d28b7ebf35a"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/author-masters.py",
+      "bytes": 3759,
+      "sha256": "1cea74923129fe406bbccd81e8233055ccb1e7ea5f41e88f6bee624315121e7f"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/build.py",
+      "bytes": 11167,
+      "sha256": "39cfa8f023618e4b76d0343473a53b4c780ca2b84f15485bd4d7803344f222d0"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/capture.mjs",
+      "bytes": 3716,
+      "sha256": "6d841ee57cf9615267608fc8d5b3b9ba29bbf2a771b4b80f4f2f5ad58292631d"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/finish.py",
+      "bytes": 9479,
+      "sha256": "4c8d9274e56e74a951c04d5cb05180aab761041a843b7251e02155fb4ef611a7"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/masters.json",
+      "bytes": 5573,
+      "sha256": "b186f4c3c583d8a4754670e706a0b966d0d272ce6708b6497b1301597d2b019f"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/penguin.blend",
+      "bytes": 161674,
+      "sha256": "c5ca925d0590860be64ff01f114602db1d9c790cb15976938ef30dfd98e005b6"
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/review-panels.py",
+      "bytes": 1410,
+      "sha256": "19bba5324f676b4e74a22895273954e943ce60c0133d753874c6a09fac5f1c0b"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/README.md",
+      "bytes": 5081,
+      "sha256": "04239e4e1229f06cd0df7bd3bbcfbb4e5cd2ff1aa4098d56643dba96218bf64d"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/audit.py",
+      "bytes": 4478,
+      "sha256": "02a126561c4ed591d87e55abc01253c57a0326eec42c87bf1b10e21da19d384e"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/build.py",
+      "bytes": 9035,
+      "sha256": "fc2ba6fafa1eb07c79ca858b4a9462786c0b48fffd6807f7cf2d9084f0db0209"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/capture.mjs",
+      "bytes": 3945,
+      "sha256": "d8844e1d68ca64c44254b84ea2bfdf702a12998c42c7e56d6f5d1466fd51924a"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/checksums.sha256",
+      "bytes": 12125,
+      "sha256": "6b0b38030d6fa2aa7057d0c61857c6c7e14bb6dc2a16e8035924b27b72a1cee1"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/finish.py",
+      "bytes": 9473,
+      "sha256": "c40e501c64395f107eae2dadacf44766f0a6bf7c8d159d2396a401996b1c9a69"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/masters.json",
+      "bytes": 2559,
+      "sha256": "c4cb88c30ef3585c8a99e27a45f4cbb2b22a1c540877ee9e77871db2b1040e79"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/rabbit.blend",
+      "bytes": 143766,
+      "sha256": "a699a7e99893ffee1c42dde81261745a4811459a6f3793e19904d266c32923dc"
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/verify.py",
+      "bytes": 3761,
+      "sha256": "10ade93cdad25e42e2358fc20eb64f4de92ec30b2395d0c029ea33116bccb8de"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/README.md",
+      "bytes": 3230,
+      "sha256": "77bcbcf44b0840b0ab6661e307429c5b15aa56ddeafb66b507e54a6a4f56f0f9"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/audit.py",
+      "bytes": 4491,
+      "sha256": "88d324d05876639532c937748529abbcccfc35186ff02518cf0aee8bf50f3a9c"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/author_masters.py",
+      "bytes": 1646,
+      "sha256": "809909ca14154aec1de2c653419e7c4bec4274d29e72ad016703b40acf28b46d"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/build.py",
+      "bytes": 11397,
+      "sha256": "dbc087f73574dc2bf131e4a5dd4a9f54ea3a47011617ec506820b48e686f862f"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/capture.mjs",
+      "bytes": 3716,
+      "sha256": "75b45d50d34c45ef62f4a072e390ade5c38c02a1dfa56298807f069048d2ddf4"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/finish.py",
+      "bytes": 8429,
+      "sha256": "23c77b35b4561eb9d172c248de0d06744026289f517835eb1dd033e7485f65cd"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/masters.json",
+      "bytes": 2421,
+      "sha256": "87d4b85f45cce5b919eda049081d13dc8f1b829d324e2b583958b2f223ffd5ae"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/review_panels.py",
+      "bytes": 2351,
+      "sha256": "1603e565f5d863a04a3eb454245d37e0f99f7dfad4513770e9d58704e263cdb6"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/robin.blend",
+      "bytes": 142275,
+      "sha256": "a51c6a42066a28126fef5377842ecb67c09c748b99dfc06ce1a21baceaff2adc"
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/verify.py",
+      "bytes": 2691,
+      "sha256": "278336f0d125d02d2a077351ba2f924b2b1c2ed3494d254c09b92b5ea3f1bc6d"
+    },
+    {
+      "path": "art-source/wildlife-v2/roster.json",
+      "bytes": 116774,
+      "sha256": "95901f0cb55046145a810fc4659d4097c96a8ac6d2614fea47e2a3f80d278df6"
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/index.html",
+      "bytes": 1024,
+      "sha256": "bd49816929af6e9603746607772a88d83c30248ef38160a500e238880200019e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/playback.js",
+      "bytes": 3196,
+      "sha256": "cdab2ca6480a8a05dd1ea297c10a5038d76dcfeb23650e02cb2bb6cb983e7eba"
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "bytes": 2121,
+      "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f"
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/sprite.json",
+      "bytes": 28743,
+      "sha256": "e763e42f7de2bdf341499f3875bfe8c4931a58bc7732bb5f3c7821cffc065b06"
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/index.html",
+      "bytes": 1961,
+      "sha256": "de438aa044b7331f87cc3e2899abe19261d15a624f97fbede39a4ee23971fd3f"
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/playback.js",
+      "bytes": 3262,
+      "sha256": "66c43077f7eab0ea58597b4dddedb0a1beed2d92ae40d5440fa701feda560589"
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/sheet.png",
+      "bytes": 4549,
+      "sha256": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86"
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/sprite.json",
+      "bytes": 120533,
+      "sha256": "972ef76759c8e1ff70a8fd344ae43dc0e2fd2dfb7ac92a45294c99b36ff49a82"
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/index.html",
+      "bytes": 1928,
+      "sha256": "758318edb4238cd69aba7066b8d1180b6fc163786b707da003b99d2c7b54de30"
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/playback.js",
+      "bytes": 3269,
+      "sha256": "52831dab56297fda56ef83ce33c8e20777892862115de0f3786ae37555bfb8f2"
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/sheet.png",
+      "bytes": 9182,
+      "sha256": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf"
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/sprite.json",
+      "bytes": 140996,
+      "sha256": "a254a8f5caa698d629090ade1d2539518084b71c5fc6d13ef97fc2def9eebf4b"
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/index.html",
+      "bytes": 2426,
+      "sha256": "d80dbdf10d3a45f2796f865d7b07a035ef086e4ef86c47db925fe3403e7a4bd7"
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/playback.js",
+      "bytes": 3278,
+      "sha256": "d7f00ffb1a77bbe22f6c5653c81dce650fb037ff98e77ad9faf3272a0e4b7b47"
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+      "bytes": 26646,
+      "sha256": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94"
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json",
+      "bytes": 458020,
+      "sha256": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/index.html",
+      "bytes": 2169,
+      "sha256": "425e43b9cb608634f6b72ef1b45b139b45d2dda6ebcece8125aa1824f0c09c76"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/playback.js",
+      "bytes": 3259,
+      "sha256": "a848902e51fbf3e65a3fc16d44bc806cf14c07e18bba2f3dbcd42b7c0e6d9d1b"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "bytes": 4061,
+      "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/sprite.json",
+      "bytes": 21720,
+      "sha256": "e12f0e8c58b519467eed60fd754b13e220cb56560aed94b3e061e0ce5f661c5c"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/index.html",
+      "bytes": 3805,
+      "sha256": "2d46c2d9157a36bb61cd1be8710fc1c2d173f16d4d5ac378ed1f157d50fd58bb"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/playback.js",
+      "bytes": 2868,
+      "sha256": "1ebb799c0381589d29eeab7e4b0b5b75acf07fa21946541beda6272d4aca0057"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/sheet.png",
+      "bytes": 4888,
+      "sha256": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab"
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/sprite.json",
+      "bytes": 109282,
+      "sha256": "f4a8f168ab03f1685dcfefa851fe9e244718629166d95eaff8fc199ac9773866"
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/index.html",
+      "bytes": 1036,
+      "sha256": "ed6d921262160c27ea389bfcc905516f03562205e920fea662019beed1cb9372"
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/playback.js",
+      "bytes": 3347,
+      "sha256": "196e23524a64cbccd5d2b3cc7263398ca1546e69d6388cfa9f46054235f302e6"
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "bytes": 6994,
+      "sha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919"
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/sprite.json",
+      "bytes": 622505,
+      "sha256": "e87f7e5cca1ee780173a098299a4e8a795e1507da2ec2a20d2e7ef21c852f21e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/index.html",
+      "bytes": 2240,
+      "sha256": "cc5d4ee9bb0b04d987f601686d84c74a1605376da2a67ca0add60571d245c8f7"
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/playback.js",
+      "bytes": 3275,
+      "sha256": "fd024e7024b65cc47ccc0ccd3eee136cdb896ad16cec352f14dbb14322bfe636"
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+      "bytes": 31736,
+      "sha256": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5"
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/sprite.json",
+      "bytes": 34618,
+      "sha256": "95bb744f47a7ddc73e1f0cb731e121c2e8eb569a8d2b6f8a149b0cc7e526a835"
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/index.html",
+      "bytes": 1693,
+      "sha256": "79a33fcfdaa714add0ccc4f1b59a46605c20c09923efa06eb95fd26341e3d63a"
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/playback.js",
+      "bytes": 3219,
+      "sha256": "84fd088a3fbaf9063b7d42a42274de43653f0200b22a30f94a5b06b8dc3b84f6"
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "bytes": 18424,
+      "sha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe"
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/sprite.json",
+      "bytes": 53158,
+      "sha256": "df9e71f4b32db3bbb6bccfc2223e2e495c297debde6a2a63d91fbec639619db1"
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/index.html",
+      "bytes": 1133,
+      "sha256": "2028c669b0c1810e5ce8151623d660ae146adb96fcc466239d0c2ea4b3f865fa"
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/playback.js",
+      "bytes": 3206,
+      "sha256": "36f37b7269fcd964cf99814365a0d058aa8efed1059aefbb8d9decd3ccbe379b"
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "bytes": 17865,
+      "sha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99"
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/sprite.json",
+      "bytes": 484489,
+      "sha256": "4320065389d9c536f6b75b5230fbc5ec5e654e9cb687aa755b8f5150838ca947"
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/index.html",
+      "bytes": 1040,
+      "sha256": "281dc78722942f785b77a1822a4849089ad54fb6c329ddf54692e3342ed4a3e0"
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/playback.js",
+      "bytes": 3203,
+      "sha256": "a8d0ccb34c4554ae46ba48db5a8e8b88f8a9daf830645e0f504267b7cebb1fb7"
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "bytes": 7006,
+      "sha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/sprite.json",
+      "bytes": 19823,
+      "sha256": "8c599edb78cbe18ce845fb2f84bf1bf9a9b72ec72444205868b486124303ae00"
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/index.html",
+      "bytes": 2360,
+      "sha256": "0115731dc3ef1443637a75c8b200ce3a0359541a2e53815afed21e8c353de69b"
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/playback.js",
+      "bytes": 3309,
+      "sha256": "6d3d400984f1ae2a18793ff045f4cd129190ef1c81c5afd1372dcd6d52cfd77e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "bytes": 10958,
+      "sha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/sprite.json",
+      "bytes": 42277,
+      "sha256": "0b365602855a444c7df45e797a615dfb48e335a9ae6649a98c7f3738b6433def"
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/index.html",
+      "bytes": 1659,
+      "sha256": "d87c11d1c93d371cf560507e22058101daceb487487ab1d6077e0f1648940871"
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/playback.js",
+      "bytes": 3077,
+      "sha256": "bc7b1207dbb162e3054b63b7dd8663e6c973c4165848de55c642881714d697e8"
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "bytes": 19156,
+      "sha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f"
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/sprite.json",
+      "bytes": 25250,
+      "sha256": "e571a27d2d3e629281ba7b7c920de4cade8d7d7a607a16de4c51831c86ed1687"
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/index.html",
+      "bytes": 1897,
+      "sha256": "ea2ba01e507430778be96b9424507ff220d85b18b4be9a8c35005f41f169594e"
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/playback.js",
+      "bytes": 3332,
+      "sha256": "7534d5ec380b7adb69f5854963a3d337cdc8241fc7db2344bbb079992353e01b"
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "bytes": 11190,
+      "sha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5"
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/sprite.json",
+      "bytes": 401884,
+      "sha256": "84dbe8456b179a62bb86f1dbf695a658135af62a564ae098194cbf8da1579153"
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/index.html",
+      "bytes": 2220,
+      "sha256": "8e5403633644531b855df350165f8a4dfd06297f7c94866a047fba4401dda405"
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/playback.js",
+      "bytes": 2895,
+      "sha256": "87345febc2bb4c29df886b6915f8701b6644a65aa3bd854efe85832cc39a6ac6"
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+      "bytes": 4461,
+      "sha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110"
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/sprite.json",
+      "bytes": 97962,
+      "sha256": "526a3a575e5c5e9c744e4b228e53453b37207b438edf9f620b6aefbe454455e3"
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/index.html",
+      "bytes": 2220,
+      "sha256": "7e4a7e9518de5f537dfd93e47f889ba72ab201869bb873384201642068738a39"
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/playback.js",
+      "bytes": 3282,
+      "sha256": "a105dde81a6ee17ffbc5dcb1860acc264ccc56afacfcf49d08c0a8f48c189fdf"
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/sheet.png",
+      "bytes": 5828,
+      "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c"
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/sprite.json",
+      "bytes": 31739,
+      "sha256": "30800bf96036022810760e7ae25372e98bc0d84ca588f6e9adef34c536abf8df"
+    }
+  ]
+}

@@ -1,0 +1,1418 @@
+{
+  "identity": "ant-draft-v2-drawing-03",
+  "motionIdentity": "ant-draft-v2-motion-01",
+  "reviewStatus": "pending production and human review",
+  "image": "sheet.png",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    25
+  ],
+  "rootMotion": false,
+  "frameDurationMs": 140,
+  "fps": 7.142857142857143,
+  "cameraContract": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending"
+  },
+  "orthoScale": 3.2,
+  "shiftY": 0.28125,
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1
+    },
+    "crawl": {
+      "start": 1,
+      "count": 8
+    },
+    "action": {
+      "start": 9,
+      "count": 6
+    }
+  },
+  "facings": {
+    "down": {
+      "row": 0,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 0,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 0,
+          "rect": [
+            32,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 1,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 2,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 2,
+          "rect": [
+            96,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 3,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 3,
+          "rect": [
+            128,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 4,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 4,
+          "rect": [
+            160,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 5,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 5,
+          "rect": [
+            192,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 6,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 6,
+          "rect": [
+            224,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 7,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 7,
+          "rect": [
+            256,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 8,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            288,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 9,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            320,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 10,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            352,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 11,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            384,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 12,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            416,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 13,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            448,
+            0,
+            32,
+            32
+          ],
+          "guideRecord": 14,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            26
+          ]
+        }
+      ]
+    },
+    "up": {
+      "row": 1,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 15,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 0,
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 16,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 1,
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 17,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 2,
+          "rect": [
+            96,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 18,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 3,
+          "rect": [
+            128,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 19,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 4,
+          "rect": [
+            160,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 20,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 5,
+          "rect": [
+            192,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 21,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 6,
+          "rect": [
+            224,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 22,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 7,
+          "rect": [
+            256,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 23,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            288,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 24,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            320,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 25,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            352,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 26,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            384,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 27,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            416,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 28,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            448,
+            32,
+            32,
+            32
+          ],
+          "guideRecord": 29,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            16,
+            21
+          ]
+        }
+      ]
+    },
+    "left": {
+      "row": 2,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 30,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 0,
+          "rect": [
+            32,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 31,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 1,
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 32,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 2,
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 33,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 3,
+          "rect": [
+            128,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 34,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 4,
+          "rect": [
+            160,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 35,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 5,
+          "rect": [
+            192,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 36,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 6,
+          "rect": [
+            224,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 37,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 7,
+          "rect": [
+            256,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 38,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            288,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 39,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            320,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 40,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            352,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 41,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            384,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 42,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            416,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 43,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            448,
+            64,
+            32,
+            32
+          ],
+          "guideRecord": 44,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            12,
+            24
+          ]
+        }
+      ]
+    },
+    "right": {
+      "row": 3,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "rect": [
+            0,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 45,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 0,
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 46,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 1,
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 47,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 2,
+          "rect": [
+            96,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 48,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 3,
+          "rect": [
+            128,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 49,
+          "contacts": [
+            "fore:-1",
+            "hind:-1",
+            "middle:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 4,
+          "rect": [
+            160,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 50,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 5,
+          "rect": [
+            192,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 51,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 6,
+          "rect": [
+            224,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 52,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "crawl",
+          "index": 7,
+          "rect": [
+            256,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 53,
+          "contacts": [
+            "middle:-1",
+            "fore:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "rect": [
+            288,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 54,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "rect": [
+            320,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 55,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "rect": [
+            352,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 56,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "rect": [
+            384,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 57,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "rect": [
+            416,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 58,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "rect": [
+            448,
+            96,
+            32,
+            32
+          ],
+          "guideRecord": 59,
+          "contacts": [
+            "fore:-1",
+            "middle:-1",
+            "hind:-1",
+            "fore:1",
+            "middle:1",
+            "hind:1"
+          ],
+          "headAnchor": [
+            20,
+            24
+          ]
+        }
+      ]
+    }
+  }
+}

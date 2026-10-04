@@ -20,6 +20,9 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
 - Update the owning doc when behavior, contracts, evidence or next work changes.
   Create a focused topic when continuity is useful, not for every small edit.
   New tacticals use the next zero-padded number and belong in the tactical index.
+- Wildlife agents must refresh the [production table](docs/wildlife-status.md)
+  after task checkpoints/completion/blocking and before handoff: persist fresh
+  progress first, then run `node scripts/wildlife/status.mjs`. See the wildlife topic.
 - Keep this file short: agent guardrails and routing only. Put progress logs,
   benchmark captures and detailed review state in the owning docs. `CLAUDE.md`
   imports this file; do not add a second set of instructions there.

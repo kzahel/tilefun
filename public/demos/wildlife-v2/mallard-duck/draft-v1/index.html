@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mallard duck · fresh draft</title>
+<link rel="icon" href="data:,">
+<style>
+body { margin:24px; background:#26342c; color:#e9eee5; font:16px system-ui; }
+a { color:#c2e0bc; } canvas, img { image-rendering:pixelated; }
+canvas { display:block; margin:16px 0; background:#879b82; }
+.controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+button, select { font:inherit; padding:5px; } .gallery img { max-width:100%; height:auto; }
+</style>
+<h1>Mallard duck — draft-v1</h1>
+<p>Natural drake draft, 13px profiles beside the approved Explorer. Human review pending.</p>
+<div class="controls">
+<label>Scale <select id="scale"><option value="1">Native 1×</option><option value="4" selected>4×</option></select></label>
+<label>Clip <select id="clip"><option value="sequence">Two cycles per gait → quack → idle</option><option value="waddle">Waddle</option><option value="swim">Paddle</option><option value="flap">Flight</option><option value="action">Quack and tail shiver</option><option value="idle">Idle</option></select></label>
+<button type="button" id="reset">Restart</button><button type="button" id="pause">Pause</button><span id="status"></span>
+</div>
+<canvas id="playback" width="320" height="208"></canvas>
+<canvas id="sprites" width="192" height="48"></canvas>
+<p>Down, up, left and right. Submerged paddle strokes are subtle at this scale; flight uses jointed wings and tucked feet. Rear hides the front eyes and bill.</p>
+<p><a href="review-observations.md">Review observations</a> · <a href="validation.json">Integrity checks</a> · <a href="preview-native.gif">Native loop</a> · <a href="preview.gif">Enlarged loop</a></p>
+<div class="gallery">
+<h2>Native scene</h2><img src="scene-native.png" alt="Native duck scenery comparison">
+<h2>All frames</h2><img src="contact-sheet.png" alt="All duck frames">
+<h2>Chronological strips</h2><img src="strip-down.png" alt="Down cycle"><img src="strip-up.png" alt="Up cycle"><img src="strip-left.png" alt="Left cycle"><img src="strip-right.png" alt="Right cycle">
+<h2>Independent volumes over authored art</h2><img src="guide-art-comparison.png" alt="Blender guide hulls and authored art">
+</div>
+<script type="module" src="playback.js"></script>
+</html>

@@ -1,0 +1,4345 @@
+{
+  "identity": "rabbit-pilot-v1-drawing-04",
+  "status": "draft pending coordinator review; no approval",
+  "image": "sheet.png",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    24
+  ],
+  "fps": 8,
+  "rootMotion": false,
+  "camera": {
+    "identity": "wildlife-v2-camera-01",
+    "projection": "ORTHO",
+    "artPerspective": "three-quarter top-down RPG on a square grid",
+    "elevationAboveGroundDegrees": 40,
+    "polarAngleFromVerticalDegrees": 50,
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "cameraLocationAtDistance10": [
+      0,
+      -7.660444431,
+      6.427876097
+    ],
+    "modelYawDegrees": {
+      "down": 180,
+      "up": 0,
+      "left": 100,
+      "right": 260
+    },
+    "pixelsPerWorldUnit": 10,
+    "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+    "profileIdleHeightTargets": {
+      "fox": 14,
+      "rabbit": 13,
+      "elephant": 51,
+      "giraffe": 75
+    },
+    "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+    "reviewStatus": "agent calibration; all human art approvals pending",
+    "orthoScale": 3.2,
+    "shiftY": 0.25
+  },
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1
+    },
+    "hop": {
+      "start": 1,
+      "count": 8
+    },
+    "action": {
+      "start": 9,
+      "count": 6
+    }
+  },
+  "facings": {
+    "down": {
+      "row": 0,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 0,
+          "phase": "gather",
+          "rect": [
+            32,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 1,
+          "phase": "hind push",
+          "rect": [
+            64,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            13,
+            21,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                25.3851,
+                9.5549
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                25.3851,
+                9.5549
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 2,
+          "phase": "lift",
+          "rect": [
+            96,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            25
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                24.4809,
+                9.41375
+              ],
+              "ground": [
+                17.8,
+                27.0854,
+                9.6323
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                24.4809,
+                9.41375
+              ],
+              "ground": [
+                14.2,
+                27.0854,
+                9.6323
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                20.3864,
+                10.0884
+              ],
+              "ground": [
+                18.8,
+                22.0717,
+                10.22981
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                20.3864,
+                10.0884
+              ],
+              "ground": [
+                13.2,
+                22.0717,
+                10.22981
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 3,
+          "phase": "apex",
+          "rect": [
+            128,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            25
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                23.7914,
+                9.3559
+              ],
+              "ground": [
+                17.8,
+                27.0854,
+                9.6323
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                23.7914,
+                9.3559
+              ],
+              "ground": [
+                14.2,
+                27.0854,
+                9.6323
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                20.2684,
+                9.79131
+              ],
+              "ground": [
+                18.8,
+                23.4858,
+                10.06128
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                20.2684,
+                9.79131
+              ],
+              "ground": [
+                13.2,
+                23.4858,
+                10.06128
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 4,
+          "phase": "reach",
+          "rect": [
+            160,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                25.5383,
+                9.56775
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                22.3447,
+                9.73056
+              ],
+              "ground": [
+                18.8,
+                24.6428,
+                9.9234
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                22.3447,
+                9.73056
+              ],
+              "ground": [
+                13.2,
+                24.6428,
+                9.9234
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 5,
+          "phase": "fore landing",
+          "rect": [
+            192,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                23.3036,
+                9.77186
+              ],
+              "ground": [
+                18.8,
+                24.8357,
+                9.90041
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                23.3036,
+                9.77186
+              ],
+              "ground": [
+                13.2,
+                24.8357,
+                9.90041
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 6,
+          "phase": "hind landing",
+          "rect": [
+            224,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 7,
+          "phase": "settle",
+          "rect": [
+            256,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            288,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "phase": "rest",
+          "rect": [
+            320,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "phase": "rest",
+          "rect": [
+            352,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            10,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "phase": "rest",
+          "rect": [
+            384,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            10,
+            15,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "phase": "rest",
+          "rect": [
+            416,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "phase": "rest",
+          "rect": [
+            448,
+            0,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            14,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                17.8,
+                26.764,
+                9.6706
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                26.3427,
+                9.63525
+              ],
+              "ground": [
+                14.2,
+                26.764,
+                9.6706
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                18.8,
+                24.1286,
+                9.98468
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.7073,
+                9.94933
+              ],
+              "ground": [
+                13.2,
+                24.1286,
+                9.98468
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "up": {
+      "row": 1,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            0,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 0,
+          "phase": "gather",
+          "rect": [
+            32,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            12,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 1,
+          "phase": "hind push",
+          "rect": [
+            64,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            28
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                19.8572,
+                10.2137
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                19.8572,
+                10.2137
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 2,
+          "phase": "lift",
+          "rect": [
+            96,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            10,
+            21,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                18.3101,
+                10.14915
+              ],
+              "ground": [
+                14.2,
+                20.9146,
+                10.3677
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                18.3101,
+                10.14915
+              ],
+              "ground": [
+                17.8,
+                20.9146,
+                10.3677
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                24.2431,
+                9.62877
+              ],
+              "ground": [
+                13.2,
+                25.9284,
+                9.77019
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                24.2431,
+                9.62877
+              ],
+              "ground": [
+                18.8,
+                25.9284,
+                9.77019
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 3,
+          "phase": "apex",
+          "rect": [
+            128,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            8,
+            21,
+            24
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                14.2,
+                17.6207,
+                10.0913
+              ],
+              "ground": [
+                14.2,
+                20.9146,
+                10.3677
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                17.6207,
+                10.0913
+              ],
+              "ground": [
+                17.8,
+                20.9146,
+                10.3677
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                21.2969,
+                9.66875
+              ],
+              "ground": [
+                13.2,
+                24.5143,
+                9.93872
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                21.2969,
+                9.66875
+              ],
+              "ground": [
+                18.8,
+                24.5143,
+                9.93872
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 4,
+          "phase": "reach",
+          "rect": [
+            160,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            10,
+            21,
+            25
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                17.8,
+                20.0104,
+                10.22655
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                21.0591,
+                9.88377
+              ],
+              "ground": [
+                13.2,
+                23.3572,
+                10.0766
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                21.0591,
+                9.88377
+              ],
+              "ground": [
+                18.8,
+                23.3572,
+                10.0766
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 5,
+          "phase": "fore landing",
+          "rect": [
+            192,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                13.2,
+                21.6323,
+                9.97103
+              ],
+              "ground": [
+                13.2,
+                23.1644,
+                10.09959
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                18.8,
+                21.6323,
+                9.97103
+              ],
+              "ground": [
+                18.8,
+                23.1644,
+                10.09959
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 6,
+          "phase": "hind landing",
+          "rect": [
+            224,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            12,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 7,
+          "phase": "settle",
+          "rect": [
+            256,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            12,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            288,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "phase": "rest",
+          "rect": [
+            320,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "phase": "rest",
+          "rect": [
+            352,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            10,
+            12,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "phase": "rest",
+          "rect": [
+            384,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            10,
+            12,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "phase": "rest",
+          "rect": [
+            416,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "phase": "rest",
+          "rect": [
+            448,
+            32,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            11,
+            11,
+            21,
+            27
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                14.2,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                14.2,
+                21.236,
+                10.3294
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                17.8,
+                20.8147,
+                10.29405
+              ],
+              "ground": [
+                17.8,
+                21.236,
+                10.3294
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                13.2,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                13.2,
+                23.8715,
+                10.01532
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                18.8,
+                23.4501,
+                9.97997
+              ],
+              "ground": [
+                18.8,
+                23.8715,
+                10.01532
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "left": {
+      "row": 2,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            0,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            13,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 0,
+          "phase": "gather",
+          "rect": [
+            32,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            14,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 1,
+          "phase": "hind push",
+          "rect": [
+            64,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            10,
+            12,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                12.0779,
+                24.2405,
+                9.69131
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                11.4528,
+                21.9617,
+                9.96289
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 2,
+          "phase": "lift",
+          "rect": [
+            96,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            11,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                11.5855,
+                23.0707,
+                9.58181
+              ],
+              "ground": [
+                11.5855,
+                25.6752,
+                9.80036
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                10.9604,
+                20.7918,
+                9.85339
+              ],
+              "ground": [
+                10.9604,
+                23.3964,
+                10.07194
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                19.4406,
+                23.7523,
+                9.68726
+              ],
+              "ground": [
+                19.4406,
+                25.4376,
+                9.82867
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                18.4682,
+                20.2074,
+                10.10973
+              ],
+              "ground": [
+                18.4682,
+                21.8927,
+                10.25114
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 3,
+          "phase": "apex",
+          "rect": [
+            128,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            10,
+            25,
+            24
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                11.5855,
+                22.3812,
+                9.52396
+              ],
+              "ground": [
+                11.5855,
+                25.6752,
+                9.80036
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                10.9604,
+                20.1024,
+                9.79554
+              ],
+              "ground": [
+                10.9604,
+                23.3964,
+                10.07194
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                17.2741,
+                22.4658,
+                9.52944
+              ],
+              "ground": [
+                17.2741,
+                25.6832,
+                9.79941
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                16.3016,
+                18.9209,
+                9.95191
+              ],
+              "ground": [
+                16.3016,
+                22.1383,
+                10.22188
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 4,
+          "phase": "reach",
+          "rect": [
+            160,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            13,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                11.4528,
+                22.1149,
+                9.97575
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                15.5014,
+                23.586,
+                9.58263
+              ],
+              "ground": [
+                15.5014,
+                25.8841,
+                9.77546
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                14.529,
+                20.0411,
+                10.0051
+              ],
+              "ground": [
+                14.529,
+                22.3392,
+                10.19793
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 5,
+          "phase": "fore landing",
+          "rect": [
+            192,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            13,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                15.206,
+                24.3855,
+                9.64292
+              ],
+              "ground": [
+                15.206,
+                25.9176,
+                9.77147
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                14.2335,
+                20.8406,
+                10.06538
+              ],
+              "ground": [
+                14.2335,
+                22.3727,
+                10.19394
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 6,
+          "phase": "hind landing",
+          "rect": [
+            224,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            14,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 7,
+          "phase": "settle",
+          "rect": [
+            256,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            14,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            288,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            13,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "phase": "rest",
+          "rect": [
+            320,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            12,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "phase": "rest",
+          "rect": [
+            352,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            12,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "phase": "rest",
+          "rect": [
+            384,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            12,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "phase": "rest",
+          "rect": [
+            416,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            12,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "phase": "rest",
+          "rect": [
+            448,
+            64,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            13,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                12.0779,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                12.0779,
+                25.6194,
+                9.80701
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                11.4528,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                11.4528,
+                23.3406,
+                10.07859
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.2893,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                16.2893,
+                25.7948,
+                9.78611
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.3168,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                15.3168,
+                22.2499,
+                10.20857
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "right": {
+      "row": 3,
+      "frames": [
+        {
+          "clip": "idle",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            0,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            13,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 0,
+          "phase": "gather",
+          "rect": [
+            32,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            14,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 1,
+          "phase": "hind push",
+          "rect": [
+            64,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            12,
+            23,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                20.5472,
+                21.9617,
+                9.96289
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                19.9221,
+                24.2405,
+                9.69131
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 2,
+          "phase": "lift",
+          "rect": [
+            96,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            11,
+            24,
+            25
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                21.0396,
+                20.7918,
+                9.85339
+              ],
+              "ground": [
+                21.0396,
+                23.3964,
+                10.07194
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                20.4145,
+                23.0707,
+                9.58181
+              ],
+              "ground": [
+                20.4145,
+                25.6752,
+                9.80036
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                13.5318,
+                20.2074,
+                10.10973
+              ],
+              "ground": [
+                13.5318,
+                21.8927,
+                10.25114
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                12.5594,
+                23.7523,
+                9.68726
+              ],
+              "ground": [
+                12.5594,
+                25.4376,
+                9.82867
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 3,
+          "phase": "apex",
+          "rect": [
+            128,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            10,
+            24,
+            23
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": false,
+              "foot": [
+                21.0396,
+                20.1024,
+                9.79554
+              ],
+              "ground": [
+                21.0396,
+                23.3964,
+                10.07194
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                20.4145,
+                22.3812,
+                9.52396
+              ],
+              "ground": [
+                20.4145,
+                25.6752,
+                9.80036
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                15.6984,
+                18.9209,
+                9.95191
+              ],
+              "ground": [
+                15.6984,
+                22.1383,
+                10.22188
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                14.7259,
+                22.4658,
+                9.52944
+              ],
+              "ground": [
+                14.7259,
+                25.6832,
+                9.79941
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 4,
+          "phase": "reach",
+          "rect": [
+            160,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            13,
+            25,
+            25
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": false,
+              "foot": [
+                19.9221,
+                24.3938,
+                9.70416
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                17.471,
+                20.0411,
+                10.0051
+              ],
+              "ground": [
+                17.471,
+                22.3392,
+                10.19793
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                16.4986,
+                23.586,
+                9.58263
+              ],
+              "ground": [
+                16.4986,
+                25.8841,
+                9.77546
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 5,
+          "phase": "fore landing",
+          "rect": [
+            192,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            9,
+            13,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": false,
+              "foot": [
+                17.7665,
+                20.8406,
+                10.06538
+              ],
+              "ground": [
+                17.7665,
+                22.3727,
+                10.19394
+              ]
+            },
+            "hind1": {
+              "planted": false,
+              "foot": [
+                16.794,
+                24.3855,
+                9.64292
+              ],
+              "ground": [
+                16.794,
+                25.9176,
+                9.77147
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 6,
+          "phase": "hind landing",
+          "rect": [
+            224,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            14,
+            25,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "hop",
+          "index": 7,
+          "phase": "settle",
+          "rect": [
+            256,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            14,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 0,
+          "phase": "rest",
+          "rect": [
+            288,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            13,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 1,
+          "phase": "rest",
+          "rect": [
+            320,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            12,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 2,
+          "phase": "rest",
+          "rect": [
+            352,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            12,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 3,
+          "phase": "rest",
+          "rect": [
+            384,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            12,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 4,
+          "phase": "rest",
+          "rect": [
+            416,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            12,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        },
+        {
+          "clip": "action",
+          "index": 5,
+          "phase": "rest",
+          "rect": [
+            448,
+            96,
+            32,
+            32
+          ],
+          "visibleBounds": [
+            8,
+            13,
+            24,
+            26
+          ],
+          "contacts": {
+            "fore-1": {
+              "planted": true,
+              "foot": [
+                20.5472,
+                22.9192,
+                10.04324
+              ],
+              "ground": [
+                20.5472,
+                23.3406,
+                10.07859
+              ]
+            },
+            "fore1": {
+              "planted": true,
+              "foot": [
+                19.9221,
+                25.1981,
+                9.77165
+              ],
+              "ground": [
+                19.9221,
+                25.6194,
+                9.80701
+              ]
+            },
+            "hind-1": {
+              "planted": true,
+              "foot": [
+                16.6832,
+                21.8286,
+                10.17322
+              ],
+              "ground": [
+                16.6832,
+                22.2499,
+                10.20857
+              ]
+            },
+            "hind1": {
+              "planted": true,
+              "foot": [
+                15.7107,
+                25.3735,
+                9.75075
+              ],
+              "ground": [
+                15.7107,
+                25.7948,
+                9.78611
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sheetSha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110"
+}

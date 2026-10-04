@@ -1,0 +1,34 @@
+{
+  "identity": "rabbit-pilot-v1-drawing-04",
+  "palette": {"K":"#554d42","S":"#807464","B":"#ab9c83","L":"#c8ba9e","H":"#ded1b5","C":"#eee4cb","P":"#b88580","E":"#302d2c"},
+  "heads": {
+    "down":{"offset":[-4,-3],"pixels":["..KLLK..",".KHLBLK.","KLHBBBSK","KBEBBEBK",".BCCCBK.","..CPEC..","...KS..."]},
+    "up":{"offset":[-3,-3],"pixels":[".KLLK.","KHLBLK","KLBBBS","KBBBBK",".BSSK.","..KK.."]},
+    "left":{"offset":[-4,-3],"pixels":["..KLLK..",".KHLLBK.","KBLBEBBK","PCCBBBSK",".CCBSSK.","..KSSK.."]},
+    "right":{"mirror":"left","offset":[-3,-3]}
+  },
+  "rump": {
+    "down":{"offset":[-4,-4],"pixels":["..KLLLK..",".KHHLLBK.","KLHLLBBSK","KLBBBBBSK","KBBBBBBSK",".BSSSSSK.","..KSSSK..","...KKK..."]},
+    "up":{"offset":[-4,-4],"pixels":["..KLLLK..",".KHHLLBK.","KLHLLBBSK","KLBBBBBSK","KBBBBBBSK",".BSSSSSK.","..KSSSK..","...KKK..."]},
+    "left":{"offset":[-4,-3],"pixels":["..KLLLK..",".KHLLLBK.","KLHBBBBSK","KBBBBBBSK","KBBBBSSSK",".KSSSSSK.","..KKKKK.."]},
+    "right":{"mirror":"left","offset":[-4,-3]}
+  },
+  "chest": {
+    "down":{"offset":[-3,-3],"pixels":[".KLLK.","KLBBBK","KLBBBK","KBBBSK",".BSSK.","..KK.."]},
+    "up":{"offset":[-3,-3],"pixels":[".KLLK.","KLBBBK","KLBBBK","KBBBSK",".BSSK.","..KK.."]},
+    "left":{"offset":[-3,-3],"pixels":[".KLLK.","KLBBBK","KLBBBK","KBBBSK",".BSSK.","..KK.."]},
+    "right":{"mirror":"left","offset":[-2,-3]}
+  },
+  "ears": {
+    "down":{"offset":[-1,-6],"pixels":["K.","LP","LP","BP","BP","BK","SK"]},
+    "up":{"offset":[-1,-5],"pixels":["K.","LB","LB","BB","BS","SK"]},
+    "left-far":{"offset":[-2,-4],"pixels":["K.","LP","LP","BP","BP","SK"]},
+    "left-near":{"offset":[0,-5],"pixels":["K.","LP","LP","BP","BP","SK"]},
+    "right-far":{"mirror":"left-far","offset":[1,-4]},
+    "right-near":{"mirror":"left-near","offset":[-1,-5]}
+  },
+  "tail":{"offset":[-1,-1],"pixels":[".H.","HCC",".CK"]},
+  "forepaw":{"offset":[-1,0],"pixels":["CS"]},
+  "hindpaw":{"offset":[-2,-1],"pixels":["BCCK",".SS."]},
+  "stylization":["Full skull templates retain shape and markings under hop translation. Ears are separate rigid hinge silhouettes.","Broad upper light and lower shadow replace faceted guide shading. Body silhouettes stay fixed at rest; rigid pitch changes are authored using one-pixel shoulder/rump shifts from projected centers.","Two-pixel eyes and compact cream muzzle enlarge facial readability relative to guides; rear template has neither.","Far ear and foot layers are darker; hind feet remain longer than forepaws. All patterns are authored at native resolution without resampling."]
+}

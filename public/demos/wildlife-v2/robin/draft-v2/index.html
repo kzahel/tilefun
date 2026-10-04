@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>European robin | fresh draft</title><link rel="icon" href="data:,">
+<style>body{margin:24px;background:#26342c;color:#e9eee5;font:16px system-ui}a{color:#c2e0bc}canvas,img{image-rendering:pixelated}canvas{display:block;margin:16px 0;background:#899780}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap}button,select{font:inherit;padding:5px}.gallery img{max-width:100%;height:auto}</style>
+<h1>European robin — draft-v2</h1><p>Small orange-breasted robin beside Explorer and Modern Exteriors. Human review pending.</p>
+<div class="controls"><label>Scale <select id="scale"><option value="1">Native 1x</option><option value="4" selected>4x</option></select></label>
+<label>Clip <select id="clip"><option value="sequence">Two hops, two flaps, perched song, idle</option><option value="hop">Hop</option><option value="flap">Flap</option><option value="action">Perched song</option><option value="idle">Idle</option></select></label>
+<button type="button" id="reset">Restart</button><button type="button" id="pause">Pause</button><span id="status"></span></div>
+<canvas id="playback" width="320" height="208"></canvas><canvas id="sprites" width="128" height="32"></canvas>
+<p>Facings down, up, left, right. Paired hop and small articulated wings. No song audio, travel or takeoff transition.</p>
+<p><a href="review-observations.md">Observed findings and limits</a> · <a href="validation.json">Integrity checks</a> · <a href="preview-native.gif">Native loop</a> · <a href="preview.gif">Enlarged loop</a></p>
+<div class="gallery"><h2>Native scene</h2><img src="scene-native.png" alt="Native robin scale comparison"><h2>All frames</h2><img src="contact-sheet.png" alt="All robin frames"><h2>Chronological strips</h2><img src="strip-down.png" alt="Down cycle"><img src="strip-up.png" alt="Up cycle"><img src="strip-left.png" alt="Left cycle"><img src="strip-right.png" alt="Right cycle"><h2>Independent volume guides</h2><img src="guide-art-comparison.png" alt="Projected guides and authored robin art"></div>
+<script type="module" src="playback.js"></script></html>

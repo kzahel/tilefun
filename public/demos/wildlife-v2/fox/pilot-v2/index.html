@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fox pilot-v2 revision</title>
+    <style>
+      body { margin: 24px; background: #27332e; color: #ede8d8; font: 16px system-ui; }
+      canvas, img { image-rendering: pixelated; }
+      canvas { display: block; margin: 16px 0; border: 1px solid #617467; }
+      .scene { width: 960px; max-width: 100%; height: auto; }
+      .strip { max-width: 100%; height: auto; }
+      button, select { font: inherit; padding: 6px; margin-right: 8px; }
+      a { color: #f0c477; }
+    </style>
+  </head>
+  <body>
+    <h1>Red fox · fresh supervised pilot</h1>
+    <p>Pending coordinator visual review. Native authored pixels, fixed ground anchor, no human approval.</p>
+    <label for="clip">Playback</label>
+    <select id="clip">
+      <option value="sequence">Idle → two walk loops → tail flick → idle</option>
+      <option value="idle">Idle</option>
+      <option value="walk">Walk loop</option>
+      <option value="action">Tail flick loop</option>
+    </select>
+    <button id="pause" type="button">Pause</button>
+    <button id="reset" type="button">Restart</button>
+    <label for="scale">Scale</label>
+    <select id="scale"><option value="1">Native 1×</option><option value="4" selected>4× nearest neighbor</option></select>
+    <p id="status">Loading retained sheet…</p>
+    <canvas id="playback" width="320" height="208" aria-label="Four fox facings in Modern Exteriors scenery beside approved Explorer"></canvas>
+    <p><a href="sprite.json">Sprite contract</a> · <a href="validation.json">Integrity checks</a> · <a href="review-observations.md">Visual observations</a> · <a href="projected-guides.json">Independent bpy projections</a></p>
+    <p>Exact Modern Exteriors roof, tree and four-direction car crops; approved person-32.png at native scale. Ground is a flat scene-study swatch. Preview remains in place.</p>
+    <img class="scene" src="scene-native.png" alt="Static scene at native pixel density" />
+    <h2>Direct fresh v1 / v2 comparison</h2><p>Rejected v1 above; revised v2 below. Same camera, world density and anchor.</p><img src="v1-v2-native.png" alt="Exact native v1/v2 comparison" /><img class="strip" src="v1-v2-6x.png" alt="Six times enlarged v1/v2 comparison" /><p><a href="v1-v2-native.gif">Native comparison cycle</a> ? <a href="v1-v2-6x.gif">Enlarged comparison cycle</a> ? <a href="scene-native.gif">Native scene cycle</a> ? <a href="scene-4x.gif">Enlarged scene cycle</a></p><h2>All frames</h2><img class="strip" src="contact-sheet.png" alt="Every idle, walk and tail action frame in four facings" />
+    <h2>Chronological cycles</h2>
+    <img class="strip" src="strip-down.png" alt="Down chronological strip" />
+    <img class="strip" src="strip-up.png" alt="Up chronological strip" />
+    <img class="strip" src="strip-left.png" alt="Left chronological strip" />
+    <img class="strip" src="strip-right.png" alt="Right chronological strip" />
+    <h2>Retained fixed 40-degree camera</h2><img class="strip" src="camera-comparison.png" alt="Edited Blender fox at 40 degrees above ground" />
+    <p><a href="camera-scene-comparison.png">Compare the retained 40-degree guide beside Explorer and exact Modern Exteriors crops</a></p>
+    <h2>Independent head volume silhouettes</h2><img class="strip" src="head-silhouettes.png" alt="Union of actual Blender-projected mesh convex hulls; guide renders retain visible occlusion" />
+    <h2>Projected rigid volumes and contacts</h2><img class="strip" src="projected-volume-contact-sheet.png" alt="Evaluated Blender mesh vertices and independent IK contacts" />
+    <script src="playback.js"></script>
+  </body>
+</html>

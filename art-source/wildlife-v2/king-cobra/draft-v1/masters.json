@@ -1,0 +1,17 @@
+{
+  "identity": "king-cobra-draft-v1-drawing-02",
+  "palette": {"o":"#35392b","b":"#62663f","h":"#929367","s":"#4b5133","c":"#bfb77a","e":"#151d19","t":"#8a514e"},
+  "heads": {
+    "down":{"offset":[-2,-2],"pixels":[".hhh.","oheho","obcbo",".ooo."]},
+    "up":{"offset":[-2,-2],"pixels":[".hhh.","ohhho","obboo",".ooo."]},
+    "left":{"offset":[-3,-2],"pixels":[".hhhhh","oehhbo","occcoo"]},
+    "right":{"offset":[-2,-2],"pixels":["hhhhh.","obhheo","ooccco"]}
+  },
+  "hoods": {
+    "down":{"offset":[-3,1],"pixels":["..bcb..",".bcccb.","obcccbo","obcccbo","obbbbbo","obcccbo",".bcccbo",".bbcb..","..bcb..","..bcb..","..obo.."]},
+    "up":{"offset":[-3,1],"pixels":["..bbb..",".bhhbo.","ohhhbbo","ohhbboo","ohbbbbo","obbbbbo","obbbbbo",".obbb..",".obbb..","..bbb..","..obo..","..obo..","..obo..","..obo.."]},
+    "left":{"offset":[-1,0],"pixels":["bbb..","cbbb.","cbbbo","cbbbo","cbbbo",".cbbo",".cbbo",".cbbo",".cbo.",".cbo.","..bo.","..bo.","..bo."]},
+    "right":{"offset":[-3,0],"pixels":["..bbb",".bbbc","obbbc","obbbc","obbbc","obbc.","obbc.","obbc.",".obc.",".obc.",".ob..",".ob..",".ob.."]}
+  },
+  "stylization": ["Explicit palette-letter skull and hood stay invariant throughout slither and tongue action.","Fixed master bounds follow independent projected skull/hood silhouettes to nearest pixel; ventral bands are deliberate clusters rather than render quantization.","Body taper uses independently projected chain hulls, broad olive fill and connected upper highlight. Distal links below one pixel become single pixel tail.","No spectacle marks, no front eyes or mouth on rear master; tongue appears only beyond front/profile muzzle."]
+}
