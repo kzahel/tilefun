@@ -6,7 +6,13 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!dist", "!test-results", "!ME complete tileset.tsx"]
+    "includes": [
+      "**",
+      "!dist",
+      "!test-results",
+      "!ME complete tileset.tsx",
+      "!docs/tactical/053-semantic-tileset-map/source-files.json"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -42,7 +48,6 @@
         "public/data/workshop-manifest.json",
         "public/data/outdoor-catalog.json",
         "docs/tactical/053-semantic-tileset-map/source-manifest.json",
-        "docs/tactical/053-semantic-tileset-map/source-files.json",
         "docs/tactical/053-semantic-tileset-map/packets/*.json",
         "src/assets/outdoor/outdoor-runtime-v1.json",
         "src/art/city-review-snapshots-v1.json"

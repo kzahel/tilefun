@@ -1,0 +1,3464 @@
+{
+  "schema_version": 1,
+  "packet": "P01",
+  "revision": 1,
+  "state": "proposed-independent-review-pending",
+  "source": {
+    "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "width": 2816,
+    "height": 8224,
+    "alias": "public/assets/tilesets/me-complete.png"
+  },
+  "coordinates": "Original pixels x,y,w,h; half-open. Named-single rectangles are local to that PNG; master_anchor/occurrences are original master coordinates.",
+  "candidates": [
+    {
+      "id": "T01",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_1.png",
+      "source_sha256": "d0cc6d4bcf31727719ce49217571c248168700aa08a701a8e75e6ea1b9a08a56",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": [
+        2464,
+        16,
+        64,
+        64
+      ],
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "brown",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; exact master whole occurrence",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T02",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_2.png",
+      "source_sha256": "af85517c1a47c5c1de98a395ce22f30caf7b83652d59a268ee6f2890448a6b5b",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "pale",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T03",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_3.png",
+      "source_sha256": "830b683994587dd5a8b26d8ee320e42f7e354ba753b1429e2933e9bf6377a561",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "green-tinted",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B01",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        80,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "pale lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T01 to reproduce T02 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "green",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B02",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        96,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "green-tinted lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T01 to reproduce T03 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "green",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T04",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_4.png",
+      "source_sha256": "dab33c407f6eca37c34255f80df201a296a1b12d743602e1a4cbb6ceee3b232b",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": [
+        2464,
+        448,
+        64,
+        64
+      ],
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "orange-red",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "brown",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; exact master whole occurrence",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T05",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_5.png",
+      "source_sha256": "3a32e9a662366617c35e5e5f391677bdd6eacc908a6b6441a41129c0fd6e9cee",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "orange-red",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "pale",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T06",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_6.png",
+      "source_sha256": "16e14844c25680942b5156d8bcc6d02ba1cf724dec6c48041d555bdab96cb5eb",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "orange-red",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "green-tinted",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B03",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        512,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "pale lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T04 to reproduce T05 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "orange-red",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B04",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        528,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "green-tinted lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T04 to reproduce T06 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "orange-red",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T07",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_7.png",
+      "source_sha256": "bc8803e12027f2069a33e7a23faa1ebfe3e2e435b9d33b5a37df4d34f8fc6569",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": [
+        2464,
+        864,
+        64,
+        64
+      ],
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "blue-green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "brown",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; exact master whole occurrence",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T08",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_8.png",
+      "source_sha256": "bc7cd7512082204cbfa7bb8aaf753d1bf73f4f9f60d80fbe65c3bb7d9e1ab308",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "blue-green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "pale",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T09",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_9.png",
+      "source_sha256": "c4fc75c89ba191a5baa5374eece4695b48ffbb07a48b5c1eb97dc3b40c26773f",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "blue-green",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "green-tinted",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B05",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        928,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "pale lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T07 to reproduce T08 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "blue-green",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B06",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        944,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "green-tinted lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T07 to reproduce T09 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "blue-green",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T10",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_10.png",
+      "source_sha256": "a8f43fa9b84c59c709701092f24304ad1df02aec09f66e6f3812ca951ad5e058",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": [
+        2464,
+        1280,
+        64,
+        64
+      ],
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "ochre-yellow",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "brown",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; exact master whole occurrence",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T11",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_11.png",
+      "source_sha256": "e1f21aed8708680e9b0aa9863193a2bffe818ad927a71829bd5208bb03434624",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "ochre-yellow",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "pale",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "T12",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_12.png",
+      "source_sha256": "10e5ec724d47b29389e9c6ccc54647fae1c3cc618d2b95f788881450d0ae7de6",
+      "source_rect": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "source_kind": "named-single",
+      "master_anchor": null,
+      "proposed_fields": {
+        "identity": {
+          "value": "rounded broadleaf tree",
+          "confidence": "high",
+          "evidence": "Viewed whole named single, crown and trunk/root structure."
+        },
+        "family": {
+          "value": "rounded broadleaf palette/trunk family",
+          "confidence": "high",
+          "evidence": "Four palettes, three lower-section treatments; reconstruction and silhouette comparisons below."
+        },
+        "palette": {
+          "value": "ochre-yellow",
+          "confidence": "high",
+          "evidence": "Visible crown color."
+        },
+        "trunk_treatment": {
+          "value": "green-tinted",
+          "confidence": "high",
+          "evidence": "Visible lower section compared within same palette."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No botanical evidence distinguishing species."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Colors suggest autumn for orange/red or ochre, but no supported four-season assignment."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No directional identity established."
+        },
+        "component_role": {
+          "value": "whole named sprite; reconstructable from shared crown and lower patch",
+          "confidence": "high",
+          "evidence": "Exact RGBA reconstruction test."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B07",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        1344,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "pale lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T10 to reproduce T11 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "ochre-yellow",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "B08",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "source_sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source_rect": [
+        2464,
+        1360,
+        64,
+        16
+      ],
+      "source_kind": "master-patch",
+      "proposed_fields": {
+        "identity": {
+          "value": "green-tinted lower trunk/root/ground replacement strip",
+          "confidence": "high",
+          "evidence": "Replaces local y48\u201364 of T10 to reproduce T12 exactly."
+        },
+        "family": {
+          "value": "rounded broadleaf lower replacement components",
+          "confidence": "high",
+          "evidence": "Exact whole-single reconstruction."
+        },
+        "palette": {
+          "value": "ochre-yellow",
+          "confidence": "high",
+          "evidence": "Patch retains foliage edge colors belonging to this bank."
+        },
+        "component_role": {
+          "value": "replacement bottom strip, not standalone whole tree",
+          "confidence": "high",
+          "evidence": "Only 16px tall; whole-single match requires shared upper48px."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Not established for this component."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F01",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_1.png",
+      "source_sha256": "a97ff4c03c97a4ca24328dca3358d2c0453bd2c10bed91e8ae4d254b6fa2c5af",
+      "source_rect": [
+        0,
+        0,
+        48,
+        112
+      ],
+      "master_anchor": [
+        2448,
+        1600,
+        48,
+        112
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 1",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "left end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F02",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_2.png",
+      "source_sha256": "d94e3a737fb708e01b365d546b70e47e3aaf26d5db19be04b86d94ea7217f3fd",
+      "source_rect": [
+        0,
+        0,
+        128,
+        112
+      ],
+      "master_anchor": [
+        2512,
+        1600,
+        128,
+        112
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 1",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "central composition",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F03",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_3.png",
+      "source_sha256": "442413aadfb75919d09bbd885f7e2ed6c067c34a90c3296ca8cc154ee9f47e3b",
+      "source_rect": [
+        0,
+        0,
+        32,
+        96
+      ],
+      "master_anchor": [
+        2656,
+        1600,
+        32,
+        96
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 1",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "right end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F04",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_4.png",
+      "source_sha256": "71bb60b602d0a874ae4453ed25ea849b8c43f4784523efac00b22cccd1ad9d65",
+      "source_rect": [
+        0,
+        0,
+        48,
+        80
+      ],
+      "master_anchor": [
+        2448,
+        1712,
+        48,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 2",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "left end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F05",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_5.png",
+      "source_sha256": "4e4efa911d34d8ae701b0c6f2999c1586cba9b5e1d583852e3cca13b4dfc6165",
+      "source_rect": [
+        0,
+        0,
+        128,
+        80
+      ],
+      "master_anchor": [
+        2512,
+        1712,
+        128,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 2",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "central composition",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F06",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_6.png",
+      "source_sha256": "d198cf6615ce34968afcd693b7b59bec95e6d1ed1a371df33327f7d0dd030d01",
+      "source_rect": [
+        0,
+        0,
+        32,
+        80
+      ],
+      "master_anchor": [
+        2656,
+        1712,
+        32,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 2",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "right end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F07",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_7.png",
+      "source_sha256": "08af425772e28d1ed8a5125d582aff26d637659e7880e421cf7c0e882ab6e670",
+      "source_rect": [
+        0,
+        0,
+        48,
+        80
+      ],
+      "master_anchor": [
+        2448,
+        1792,
+        48,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 3",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "left end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F08",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_8.png",
+      "source_sha256": "ed89c901dcb7990cc8c5e17b8259ec0afbdcc75ede505ea4c6272824f0241050",
+      "source_rect": [
+        0,
+        0,
+        112,
+        80
+      ],
+      "master_anchor": [
+        2512,
+        1792,
+        112,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 3",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "central composition",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    },
+    {
+      "id": "F09",
+      "source_path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Tree_Wall_Modular_9.png",
+      "source_sha256": "33fe0da2bb5da2e1bb45298dafea406a5fa3ccfe0af25e0ccc09d5f6e19a7f72",
+      "source_rect": [
+        0,
+        0,
+        32,
+        80
+      ],
+      "master_anchor": [
+        2640,
+        1792,
+        32,
+        80
+      ],
+      "source_kind": "named-single",
+      "proposed_fields": {
+        "identity": {
+          "value": "dense forest/vegetation composition segment",
+          "confidence": "high",
+          "evidence": "Actual mixed crown/tree grouping, with cropped side profiles."
+        },
+        "family": {
+          "value": "forest composition row 3",
+          "confidence": "high",
+          "evidence": "Same-row adjacent silhouettes and contiguous render."
+        },
+        "component_role": {
+          "value": "right end fragment",
+          "confidence": "medium",
+          "evidence": "Left/center/right top-aligned composition supports connected crowns; ground backgrounds retain boundaries. Corner role or repeatability not proved."
+        },
+        "species": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed tree forms without species evidence."
+        },
+        "season": {
+          "value": null,
+          "confidence": null,
+          "evidence": "Mixed green, teal and warm crowns occur within a composition."
+        },
+        "facing": {
+          "value": null,
+          "confidence": null,
+          "evidence": "No facing assignments."
+        }
+      },
+      "gameplay_geometry": "unknown",
+      "independent_review": "pending",
+      "human_approval": "none"
+    }
+  ],
+  "relations": [
+    {
+      "type": "palette-family",
+      "members": [
+        "T01",
+        "T04",
+        "T07",
+        "T10"
+      ],
+      "confidence": "high",
+      "limitation": "Near-identical silhouettes with one-pixel exception, not exact recolors or season labels."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T01",
+      "patch": "B01",
+      "result": "T02",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T01",
+      "patch": "B02",
+      "result": "T03",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T04",
+      "patch": "B03",
+      "result": "T05",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T04",
+      "patch": "B04",
+      "result": "T06",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T07",
+      "patch": "B05",
+      "result": "T08",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T07",
+      "patch": "B06",
+      "result": "T09",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T10",
+      "patch": "B07",
+      "result": "T11",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "lower-strip-replacement",
+      "base": "T10",
+      "patch": "B08",
+      "result": "T12",
+      "replace_local_rect": [
+        0,
+        48,
+        64,
+        16
+      ],
+      "confidence": "high",
+      "operation": "RGBA overwrite of all pixels in local bottom strip, including transparent pixels; not source-over alpha compositing."
+    },
+    {
+      "type": "forest-assembly-proposal",
+      "members": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "layout": "top-aligned; remove16px source gaps; x offsets cumulative widths",
+      "confidence": "medium",
+      "unresolved": [
+        "ground seam aesthetics",
+        "repeatable middle behavior",
+        "corners not tested"
+      ]
+    },
+    {
+      "type": "forest-assembly-proposal",
+      "members": [
+        "F04",
+        "F05",
+        "F06"
+      ],
+      "layout": "top-aligned; remove16px source gaps; x offsets cumulative widths",
+      "confidence": "medium",
+      "unresolved": [
+        "ground seam aesthetics",
+        "repeatable middle behavior",
+        "corners not tested"
+      ]
+    },
+    {
+      "type": "forest-assembly-proposal",
+      "members": [
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "layout": "top-aligned; remove16px source gaps; x offsets cumulative widths",
+      "confidence": "medium",
+      "unresolved": [
+        "ground seam aesthetics",
+        "repeatable middle behavior",
+        "corners not tested"
+      ]
+    }
+  ],
+  "coverage": {
+    "explicit_candidates": 29,
+    "scope": "12 whole named trees +8 master lower-section patches +9 forest modules; not all trees on master.",
+    "independent_reviewed_candidates": 0,
+    "human_approved_candidates": 0
+  },
+  "experiments": {
+    "matching_method": "All original-master grid16 occurrences and all pixel-origin occurrences; exact visible RGBA and alpha, transparent RGB ignored.",
+    "matching_limitation": "No exact pixel-origin match does not exclude compressed components, reconstructable art, near-matches or semantic variants.",
+    "occurrences": [
+      {
+        "id": "T01",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            16,
+            64,
+            64
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            16,
+            64,
+            64
+          ]
+        ]
+      },
+      {
+        "id": "T02",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "T03",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "B01",
+        "source_rect": [
+          2464,
+          80,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            80,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            80,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "B02",
+        "source_rect": [
+          2464,
+          96,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            96,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            96,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "T04",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            448,
+            64,
+            64
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            448,
+            64,
+            64
+          ]
+        ]
+      },
+      {
+        "id": "T05",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "T06",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "B03",
+        "source_rect": [
+          2464,
+          512,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            512,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            512,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "B04",
+        "source_rect": [
+          2464,
+          528,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            528,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            528,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "T07",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            864,
+            64,
+            64
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            864,
+            64,
+            64
+          ]
+        ]
+      },
+      {
+        "id": "T08",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "T09",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "B05",
+        "source_rect": [
+          2464,
+          928,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            928,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            928,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "B06",
+        "source_rect": [
+          2464,
+          944,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            944,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            944,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "T10",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            1280,
+            64,
+            64
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            1280,
+            64,
+            64
+          ]
+        ]
+      },
+      {
+        "id": "T11",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "T12",
+        "source_rect": [
+          0,
+          0,
+          64,
+          64
+        ],
+        "grid16_exact_master_occurrences": [],
+        "all_pixel_exact_master_occurrences": []
+      },
+      {
+        "id": "B07",
+        "source_rect": [
+          2464,
+          1344,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            1344,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            1344,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "B08",
+        "source_rect": [
+          2464,
+          1360,
+          64,
+          16
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2464,
+            1360,
+            64,
+            16
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2464,
+            1360,
+            64,
+            16
+          ]
+        ]
+      },
+      {
+        "id": "F01",
+        "source_rect": [
+          0,
+          0,
+          48,
+          112
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2448,
+            1600,
+            48,
+            112
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2448,
+            1600,
+            48,
+            112
+          ]
+        ]
+      },
+      {
+        "id": "F02",
+        "source_rect": [
+          0,
+          0,
+          128,
+          112
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2512,
+            1600,
+            128,
+            112
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2512,
+            1600,
+            128,
+            112
+          ]
+        ]
+      },
+      {
+        "id": "F03",
+        "source_rect": [
+          0,
+          0,
+          32,
+          96
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2656,
+            1600,
+            32,
+            96
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2656,
+            1600,
+            32,
+            96
+          ]
+        ]
+      },
+      {
+        "id": "F04",
+        "source_rect": [
+          0,
+          0,
+          48,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2448,
+            1712,
+            48,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2448,
+            1712,
+            48,
+            80
+          ]
+        ]
+      },
+      {
+        "id": "F05",
+        "source_rect": [
+          0,
+          0,
+          128,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2512,
+            1712,
+            128,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2512,
+            1712,
+            128,
+            80
+          ]
+        ]
+      },
+      {
+        "id": "F06",
+        "source_rect": [
+          0,
+          0,
+          32,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2656,
+            1712,
+            32,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2656,
+            1712,
+            32,
+            80
+          ]
+        ]
+      },
+      {
+        "id": "F07",
+        "source_rect": [
+          0,
+          0,
+          48,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2448,
+            1792,
+            48,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2448,
+            1792,
+            48,
+            80
+          ]
+        ]
+      },
+      {
+        "id": "F08",
+        "source_rect": [
+          0,
+          0,
+          112,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2512,
+            1792,
+            112,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2512,
+            1792,
+            112,
+            80
+          ]
+        ]
+      },
+      {
+        "id": "F09",
+        "source_rect": [
+          0,
+          0,
+          32,
+          80
+        ],
+        "grid16_exact_master_occurrences": [
+          [
+            2640,
+            1792,
+            32,
+            80
+          ]
+        ],
+        "all_pixel_exact_master_occurrences": [
+          [
+            2640,
+            1792,
+            32,
+            80
+          ]
+        ]
+      }
+    ],
+    "exact_reconstructions": [
+      {
+        "base": "T01",
+        "patch": "B01",
+        "result": "T02",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T01",
+        "patch": "B02",
+        "result": "T03",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T04",
+        "patch": "B03",
+        "result": "T05",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T04",
+        "patch": "B04",
+        "result": "T06",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T07",
+        "patch": "B05",
+        "result": "T08",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T07",
+        "patch": "B06",
+        "result": "T09",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T10",
+        "patch": "B07",
+        "result": "T11",
+        "exact_normalized_rgba": true
+      },
+      {
+        "base": "T10",
+        "patch": "B08",
+        "result": "T12",
+        "exact_normalized_rgba": true
+      }
+    ],
+    "palette_comparisons": [
+      {
+        "base": "T01",
+        "compared": "T04",
+        "alpha_difference_pixels": [],
+        "exact_normalized_rgba": false,
+        "single_global_color_mapping": false,
+        "color_mapping_exceptions": [
+          {
+            "source_rgba": [
+              58,
+              58,
+              80,
+              255
+            ],
+            "destination_rgba": [
+              [
+                55,
+                133,
+                78,
+                255
+              ],
+              [
+                58,
+                58,
+                80,
+                255
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "base": "T01",
+        "compared": "T07",
+        "alpha_difference_pixels": [
+          [
+            16,
+            47,
+            255,
+            0
+          ]
+        ],
+        "exact_normalized_rgba": false,
+        "single_global_color_mapping": false,
+        "color_mapping_exceptions": [
+          {
+            "source_rgba": [
+              58,
+              58,
+              80,
+              255
+            ],
+            "destination_rgba": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                58,
+                58,
+                80,
+                255
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "base": "T01",
+        "compared": "T10",
+        "alpha_difference_pixels": [
+          [
+            16,
+            47,
+            255,
+            0
+          ]
+        ],
+        "exact_normalized_rgba": false,
+        "single_global_color_mapping": false,
+        "color_mapping_exceptions": [
+          {
+            "source_rgba": [
+              58,
+              58,
+              80,
+              255
+            ],
+            "destination_rgba": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                58,
+                58,
+                80,
+                255
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "forest_assemblies": [
+      {
+        "row": 1,
+        "arrangement": "ordered-top-aligned",
+        "members": [
+          "F01",
+          "F02",
+          "F03"
+        ],
+        "size": [
+          208,
+          112
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            48,
+            0
+          ],
+          [
+            176,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 48,
+            "alpha_edge_mismatch_rows": [
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111
+            ]
+          },
+          {
+            "x": 176,
+            "alpha_edge_mismatch_rows": [
+              41,
+              42,
+              43,
+              44,
+              45,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111
+            ]
+          }
+        ],
+        "matching_ground_rgba": [
+          71,
+          151,
+          87,
+          255
+        ]
+      },
+      {
+        "row": 1,
+        "arrangement": "reversed-failed-order",
+        "members": [
+          "F03",
+          "F02",
+          "F01"
+        ],
+        "size": [
+          208,
+          112
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            32,
+            0
+          ],
+          [
+            160,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 32,
+            "alpha_edge_mismatch_rows": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111
+            ]
+          },
+          {
+            "x": 160,
+            "alpha_edge_mismatch_rows": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              71,
+              74,
+              75,
+              76,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111
+            ]
+          }
+        ],
+        "matching_ground_rgba": null
+      },
+      {
+        "row": 2,
+        "arrangement": "ordered-top-aligned",
+        "members": [
+          "F04",
+          "F05",
+          "F06"
+        ],
+        "size": [
+          208,
+          80
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            48,
+            0
+          ],
+          [
+            176,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 48,
+            "alpha_edge_mismatch_rows": [
+              11,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          },
+          {
+            "x": 176,
+            "alpha_edge_mismatch_rows": [
+              11,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          }
+        ],
+        "matching_ground_rgba": [
+          55,
+          133,
+          78,
+          255
+        ]
+      },
+      {
+        "row": 2,
+        "arrangement": "reversed-failed-order",
+        "members": [
+          "F06",
+          "F05",
+          "F04"
+        ],
+        "size": [
+          208,
+          80
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            32,
+            0
+          ],
+          [
+            160,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 32,
+            "alpha_edge_mismatch_rows": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          },
+          {
+            "x": 160,
+            "alpha_edge_mismatch_rows": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          }
+        ],
+        "matching_ground_rgba": null
+      },
+      {
+        "row": 3,
+        "arrangement": "ordered-top-aligned",
+        "members": [
+          "F07",
+          "F08",
+          "F09"
+        ],
+        "size": [
+          192,
+          80
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            48,
+            0
+          ],
+          [
+            160,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 48,
+            "alpha_edge_mismatch_rows": [
+              1
+            ]
+          },
+          {
+            "x": 160,
+            "alpha_edge_mismatch_rows": [
+              1
+            ]
+          }
+        ],
+        "matching_ground_rgba": [
+          71,
+          151,
+          87,
+          255
+        ]
+      },
+      {
+        "row": 3,
+        "arrangement": "reversed-failed-order",
+        "members": [
+          "F09",
+          "F08",
+          "F07"
+        ],
+        "size": [
+          192,
+          80
+        ],
+        "offsets": [
+          [
+            0,
+            0
+          ],
+          [
+            32,
+            0
+          ],
+          [
+            144,
+            0
+          ]
+        ],
+        "seams": [
+          {
+            "x": 32,
+            "alpha_edge_mismatch_rows": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          },
+          {
+            "x": 144,
+            "alpha_edge_mismatch_rows": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79
+            ]
+          }
+        ],
+        "matching_ground_rgba": null
+      }
+    ]
+  },
+  "related_implementation_evidence": {
+    "path": "src/patterns/FencedTrees.ts",
+    "source_rects": [
+      [
+        1568,
+        0,
+        48,
+        96
+      ],
+      [
+        1632,
+        0,
+        80,
+        96
+      ],
+      [
+        1728,
+        0,
+        48,
+        96
+      ]
+    ],
+    "relation": "Different source tree-wall kit; its caps/16px-repeat compiler does not establish these forest modules assembly or gameplay geometry. Five cases documented unchecked."
+  },
+  "visual_observations": {
+    "ordered_forest": "Crown contours connect in left/middle/right order, with gray-background ground rectangles visible on rows1\u20132.",
+    "reversed_forest": "Caps disconnect and outer crowns show vertical truncation.",
+    "matching_ground": "Solid backdrop sampled from middle bottom pixel visually hides row1\u20132 rectangular ground boundaries; they are not unavoidable seams. Does not prove realistic textured-ground compatibility."
+  }
+}

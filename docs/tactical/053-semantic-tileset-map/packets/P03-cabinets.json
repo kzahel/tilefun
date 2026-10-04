@@ -1,0 +1,3110 @@
+{
+  "schema": "semantic-cabinet-pilot-proposal-v1",
+  "packet": "P03",
+  "revision": 1,
+  "date": "2026-10-04",
+  "state": "proposal-ready-for-independent-review",
+  "coordinateConvention": "Rects [x,y,width,height] source pixels, half-open; XYXY bounds explicitly named; packed rectangles are separate aliases",
+  "scope": "Living-room indices37\u201345, three vendor shadow sets;27 source records. Source family boundaries do not follow filename range. No new human approval or gameplay metadata.",
+  "measurements": {
+    "sources": {
+      "originalMaster": {
+        "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+        "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+        "dimensions": [
+          256,
+          17024
+        ]
+      },
+      "packedAtlas": {
+        "path": "public/assets/tilesets/modern-interiors-atlas.png",
+        "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+        "dimensions": [
+          2048,
+          8800
+        ]
+      },
+      "packedCatalog": {
+        "path": "public/data/modern-interiors-atlas.json",
+        "sha256": "c2beaba7bbd767b14df8cb7faa042908adbda89e0a43a7fd5c37cb5101a9a02e"
+      }
+    },
+    "comparison": "Exact RGBA with hidden RGB at alpha=0 normalized; original search checks every pixel origin",
+    "scope": {
+      "singleRecords": 27,
+      "uniqueVendorIndices": 9,
+      "normalExactOriginalFiles": 8,
+      "otherVariantExactOriginalFiles": 0
+    },
+    "counterpartReferenceCorpus": {
+      "variant": "shadowless",
+      "fileCount": 122,
+      "sortedPathAndHashJSONFingerprint": "753d1b5e2a90ef77457cfa6c90ad89b586f9b2361c99cf00c372b1eb48f39c8c"
+    },
+    "bodyCanonicalizationHypothesis": "Remove normal RGBA167,151,150,255 ground pixels; remove black-shadow RGBA58,58,80,100 pixels; map opaque white248 to255. Verified separately by raw per-pixel deltas, not universal pack rule.",
+    "records": [
+      {
+        "id": "P03-37-normal",
+        "vendorIndex": 37,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_37.png",
+          "sha256": "c0fbaaccd25f87b27a39968373876f37db2ee84e88ad3ed800667fa5dc01f85b",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          43
+        ],
+        "exactOriginalOccurrences": [
+          [
+            112,
+            480,
+            32,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-37",
+        "packedRect": [
+          928,
+          4014,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "98600bc3067cee0585489a999b96c6ffdc12aae8b2ff22e0b1cbea2f7cfde197",
+        "shadowlessCounterpartPoolMatches": [
+          37
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 47,
+          "differenceBBoxXYXY": [
+            2,
+            32,
+            29,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 47,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "c85c25e6f633da926147d7f35da8f8c3ed2449688bcb8642ff1606b663636c0e"
+      },
+      {
+        "id": "P03-37-black-shadow",
+        "vendorIndex": 37,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_37.png",
+          "sha256": "e6ac1f50fa3f12b8da733f147180e19fc11ee6205c0b16c5b23c51c83f7c221e",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-37",
+        "packedRect": [
+          512,
+          3582,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "24f5e96ab8b17ec87a4a21a830a49959a89d8c1470d4c3b2df5709db29fc8356",
+        "shadowlessCounterpartPoolMatches": [
+          37
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 47,
+          "differenceBBoxXYXY": [
+            2,
+            32,
+            29,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 47,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "c85c25e6f633da926147d7f35da8f8c3ed2449688bcb8642ff1606b663636c0e"
+      },
+      {
+        "id": "P03-37-shadowless",
+        "vendorIndex": 37,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_37.png",
+          "sha256": "3d653caa54393daf2a2417d2a423ce4608b4ac72ba03f3377b825373c1dc7f31",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-37",
+        "packedRect": [
+          1408,
+          4446,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "c85c25e6f633da926147d7f35da8f8c3ed2449688bcb8642ff1606b663636c0e",
+        "shadowlessCounterpartPoolMatches": [
+          37
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "c85c25e6f633da926147d7f35da8f8c3ed2449688bcb8642ff1606b663636c0e"
+      },
+      {
+        "id": "P03-38-normal",
+        "vendorIndex": 38,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_38.png",
+          "sha256": "4ab990fb58157313877a351dd598935cbc16a47660ff5814510ab4c740c064bf",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-38",
+        "packedRect": [
+          960,
+          4014,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "7101bb3218a8320edf58ce981c523a45953a2fea48769889e6940342c82def1d",
+        "shadowlessCounterpartPoolMatches": [
+          38
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 79,
+          "differenceBBoxXYXY": [
+            2,
+            19,
+            29,
+            43
+          ],
+          "onReferenceBodyPixels": 32,
+          "outsideReferenceBodyPixels": 47,
+          "bodyColorChanges": [
+            "((248, 248, 248, 255), (255, 255, 255, 255))"
+          ],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "5672441f1749c184e4f8785f93c27ed1a557627d16d3557bf4947049d7c357f4"
+      },
+      {
+        "id": "P03-38-black-shadow",
+        "vendorIndex": 38,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_38.png",
+          "sha256": "547474fd54fac38d2a82519aa55f526401288ac7f493f7df411474204e5efab6",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-38",
+        "packedRect": [
+          544,
+          3582,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "f57a425cf3036aedc948fd58e530a398a5e79819e2dc8a3c08d603c903779c57",
+        "shadowlessCounterpartPoolMatches": [
+          38
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 47,
+          "differenceBBoxXYXY": [
+            2,
+            32,
+            29,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 47,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "5672441f1749c184e4f8785f93c27ed1a557627d16d3557bf4947049d7c357f4"
+      },
+      {
+        "id": "P03-38-shadowless",
+        "vendorIndex": 38,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_38.png",
+          "sha256": "c0f26ea1da967bd7feb56c3050892ba3a1f04b451b2143679882d331d42ee900",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          29,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-38",
+        "packedRect": [
+          1440,
+          4446,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "5672441f1749c184e4f8785f93c27ed1a557627d16d3557bf4947049d7c357f4",
+        "shadowlessCounterpartPoolMatches": [
+          38
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "5672441f1749c184e4f8785f93c27ed1a557627d16d3557bf4947049d7c357f4"
+      },
+      {
+        "id": "P03-39-normal",
+        "vendorIndex": 39,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_39.png",
+          "sha256": "4f1baa9bc9c0039bd93c3d89a5df5fb98d86b14a70a43f94b1af780a350c3ab7",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          41
+        ],
+        "exactOriginalOccurrences": [
+          [
+            208,
+            480,
+            32,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-39",
+        "packedRect": [
+          992,
+          4014,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "eaf8a24f20e7a5af3f25a3db4bcabef85074dc12df05538eb55129b589a35c4a",
+        "shadowlessCounterpartPoolMatches": [
+          39
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 43,
+          "differenceBBoxXYXY": [
+            3,
+            32,
+            30,
+            41
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 43,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "c96212191a688b0da51a18c88d85397fb9c2695450bf523f9b5c5caab2ed8e05"
+      },
+      {
+        "id": "P03-39-black-shadow",
+        "vendorIndex": 39,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_39.png",
+          "sha256": "bc1b1d0526adfbdf9765cafebc1654370b1175a398655821b75e0e8eddbdcf28",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          41
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-39",
+        "packedRect": [
+          576,
+          3582,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "16202cfa5c64032c0d0c771c9194d2a66e35e0ffa0f0be3c83379e7fc1ec8a8b",
+        "shadowlessCounterpartPoolMatches": [
+          39
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 43,
+          "differenceBBoxXYXY": [
+            3,
+            32,
+            30,
+            41
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 43,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "c96212191a688b0da51a18c88d85397fb9c2695450bf523f9b5c5caab2ed8e05"
+      },
+      {
+        "id": "P03-39-shadowless",
+        "vendorIndex": 39,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_39.png",
+          "sha256": "66e681c5c7f8e54e035bde2711978e87885b80e14ebfaa409f828e8d42c97566",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          40
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-39",
+        "packedRect": [
+          1472,
+          4446,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "c96212191a688b0da51a18c88d85397fb9c2695450bf523f9b5c5caab2ed8e05",
+        "shadowlessCounterpartPoolMatches": [
+          39
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "c96212191a688b0da51a18c88d85397fb9c2695450bf523f9b5c5caab2ed8e05"
+      },
+      {
+        "id": "P03-40-normal",
+        "vendorIndex": 40,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_40.png",
+          "sha256": "64f353816c27b1bff26b692595d5de684c6b8a48df42b3873241a718a105e765",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          41
+        ],
+        "exactOriginalOccurrences": [
+          [
+            176,
+            480,
+            32,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-40",
+        "packedRect": [
+          1024,
+          4014,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "b1df222768cbd9b6cbc550242bc7de264b7e47f0f2bd84856b001b2f2906b96f",
+        "shadowlessCounterpartPoolMatches": [
+          40
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 59,
+          "differenceBBoxXYXY": [
+            3,
+            24,
+            30,
+            41
+          ],
+          "onReferenceBodyPixels": 16,
+          "outsideReferenceBodyPixels": 43,
+          "bodyColorChanges": [
+            "((248, 248, 248, 255), (255, 255, 255, 255))"
+          ],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "b1eb364b1e667e846ebd6ca2af38cb2f1bc9dee73cfe67dc33db1a1c4bc4aa68"
+      },
+      {
+        "id": "P03-40-black-shadow",
+        "vendorIndex": 40,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_40.png",
+          "sha256": "12bcaa822f3921b755689a5f9e82d63a911cf668cdc49cce9885ed49c7dac950",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          41
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-40",
+        "packedRect": [
+          608,
+          3582,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "69a17700f0e77642810aa17331b12d2f09bf0b6c5ba67030b8a1e9f6961704b1",
+        "shadowlessCounterpartPoolMatches": [
+          40
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 43,
+          "differenceBBoxXYXY": [
+            3,
+            32,
+            30,
+            41
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 43,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "b1eb364b1e667e846ebd6ca2af38cb2f1bc9dee73cfe67dc33db1a1c4bc4aa68"
+      },
+      {
+        "id": "P03-40-shadowless",
+        "vendorIndex": 40,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_40.png",
+          "sha256": "18a75addb0ed2a20b076ff34dcb29007ab7600a46afceef8ef9fc9e8cebc2c61",
+          "dimensions": [
+            32,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          3,
+          9,
+          30,
+          40
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-40",
+        "packedRect": [
+          1504,
+          4446,
+          32,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          32,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "b1eb364b1e667e846ebd6ca2af38cb2f1bc9dee73cfe67dc33db1a1c4bc4aa68",
+        "shadowlessCounterpartPoolMatches": [
+          40
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "b1eb364b1e667e846ebd6ca2af38cb2f1bc9dee73cfe67dc33db1a1c4bc4aa68"
+      },
+      {
+        "id": "P03-41-normal",
+        "vendorIndex": 41,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_41.png",
+          "sha256": "adc62fc9ace6c698524c56ad173aae553ceb1e7f74ebf90f147c98ac34c4d26c",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [
+          [
+            112,
+            528,
+            16,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-41",
+        "packedRect": [
+          512,
+          4926,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "b2b1b4aed745a3ba42048f9ae7fda3b356278c81558191a091ed26fb4c4abc83",
+        "shadowlessCounterpartPoolMatches": [
+          41
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 24,
+          "differenceBBoxXYXY": [
+            2,
+            32,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 24,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "94067f29ed529b2fc46e099e1a31a67e63caedbc935b1e2a3f9cf26ab78b66e7"
+      },
+      {
+        "id": "P03-41-black-shadow",
+        "vendorIndex": 41,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_41.png",
+          "sha256": "966331b3c703b5ca0ba97661225d34f63688d4444fef25a359b7152ac752ac87",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-41",
+        "packedRect": [
+          592,
+          4734,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "c878ce0cb25469a5863debc66cc0e8fabaeb55102cde397534f591cd63282a7c",
+        "shadowlessCounterpartPoolMatches": [
+          41
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 24,
+          "differenceBBoxXYXY": [
+            2,
+            32,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 24,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "94067f29ed529b2fc46e099e1a31a67e63caedbc935b1e2a3f9cf26ab78b66e7"
+      },
+      {
+        "id": "P03-41-shadowless",
+        "vendorIndex": 41,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_41.png",
+          "sha256": "f95a334e3260bb8190130c1f71fa58b66d947ee475f333ca06593e4d812bb2a9",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          2,
+          4,
+          16,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-41",
+        "packedRect": [
+          384,
+          5118,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "94067f29ed529b2fc46e099e1a31a67e63caedbc935b1e2a3f9cf26ab78b66e7",
+        "shadowlessCounterpartPoolMatches": [
+          41
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "94067f29ed529b2fc46e099e1a31a67e63caedbc935b1e2a3f9cf26ab78b66e7"
+      },
+      {
+        "id": "P03-42-normal",
+        "vendorIndex": 42,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_42.png",
+          "sha256": "bfc3b20dc2c6d4acb4cee742fdab1caf4a95a3c52215ee1ad94bc9a4825f8b2d",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [
+          [
+            144,
+            528,
+            16,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-42",
+        "packedRect": [
+          528,
+          4926,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "7c446cf80ad5cb9f409b1f57111ab4475ca0a2bdf6b613368a6eb8e40f06ead5",
+        "shadowlessCounterpartPoolMatches": [
+          42
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 48,
+          "differenceBBoxXYXY": [
+            0,
+            19,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 32,
+          "outsideReferenceBodyPixels": 16,
+          "bodyColorChanges": [
+            "((248, 248, 248, 255), (255, 255, 255, 255))"
+          ],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "e394b93d82041345fc5ca0540a2d23106fc18257fadeaac2a65c7e0a94a67713"
+      },
+      {
+        "id": "P03-42-black-shadow",
+        "vendorIndex": 42,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_42.png",
+          "sha256": "3197bd13537266288b12df1964ea0e10720a047c760905c94778612cc9382a1a",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-42",
+        "packedRect": [
+          608,
+          4734,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "4651d404b0e9b4f0cd064122de78ed4228bd25a75893dfb153eba3eeeed7a70f",
+        "shadowlessCounterpartPoolMatches": [
+          42
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 16,
+          "differenceBBoxXYXY": [
+            0,
+            42,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 16,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "e394b93d82041345fc5ca0540a2d23106fc18257fadeaac2a65c7e0a94a67713"
+      },
+      {
+        "id": "P03-42-shadowless",
+        "vendorIndex": 42,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_42.png",
+          "sha256": "7861d3e3ef11de7b1e3d32fe77f850e8e5b9aa593a1f2943a8a7ed88fca0ef34",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-42",
+        "packedRect": [
+          400,
+          5118,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "e394b93d82041345fc5ca0540a2d23106fc18257fadeaac2a65c7e0a94a67713",
+        "shadowlessCounterpartPoolMatches": [
+          42
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "e394b93d82041345fc5ca0540a2d23106fc18257fadeaac2a65c7e0a94a67713"
+      },
+      {
+        "id": "P03-43-normal",
+        "vendorIndex": 43,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_43.png",
+          "sha256": "509a795420526eb9a1f44eb257c074086a8d9e5782a6beedf86753554acf3569",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [
+          [
+            160,
+            528,
+            16,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-43",
+        "packedRect": [
+          544,
+          4926,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "00d91134637faed570665470f850c1c643db8c1d8d28476b86ec57ac22509b67",
+        "shadowlessCounterpartPoolMatches": [
+          43
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 16,
+          "differenceBBoxXYXY": [
+            0,
+            42,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 16,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "40461d60d098416a90c9b4a78e735b778676eb2ca357a6b46d88d00c943f0cd1"
+      },
+      {
+        "id": "P03-43-black-shadow",
+        "vendorIndex": 43,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_43.png",
+          "sha256": "3f25f11ff60eaead07a7b1a7580a0efc5c3d8b720c6b9eb2be9f8ab3a5edcfa9",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-43",
+        "packedRect": [
+          624,
+          4734,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "e50dc81f966b8a129cd9c92ebfd7c6460f4f97b7d9a1fa3ce06c340a984d375c",
+        "shadowlessCounterpartPoolMatches": [
+          43
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 16,
+          "differenceBBoxXYXY": [
+            0,
+            42,
+            16,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 16,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "40461d60d098416a90c9b4a78e735b778676eb2ca357a6b46d88d00c943f0cd1"
+      },
+      {
+        "id": "P03-43-shadowless",
+        "vendorIndex": 43,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_43.png",
+          "sha256": "8c8d3cee4abddb4e3b60e8ea04ef6ae40482f44f2913c8be40382298fbe0c625",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          16,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-43",
+        "packedRect": [
+          416,
+          5118,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "40461d60d098416a90c9b4a78e735b778676eb2ca357a6b46d88d00c943f0cd1",
+        "shadowlessCounterpartPoolMatches": [
+          43
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "40461d60d098416a90c9b4a78e735b778676eb2ca357a6b46d88d00c943f0cd1"
+      },
+      {
+        "id": "P03-44-normal",
+        "vendorIndex": 44,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_44.png",
+          "sha256": "f165318280f4dce5f051782c1e65277a899387319c4791918e37ec4628ccc3c1",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          13,
+          43
+        ],
+        "exactOriginalOccurrences": [
+          [
+            128,
+            528,
+            16,
+            48
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-44",
+        "packedRect": [
+          560,
+          4926,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "c8c2edac164437750842e3ce48f9b6afce7464aa76dba311e5c287cf9af03424",
+        "shadowlessCounterpartPoolMatches": [
+          44
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 23,
+          "differenceBBoxXYXY": [
+            0,
+            32,
+            13,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 23,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "923a5d0e78e395b09bf6d32233b85a06ae4338d9a3a5a36f9b8e9c0bd36292a0"
+      },
+      {
+        "id": "P03-44-black-shadow",
+        "vendorIndex": 44,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_44.png",
+          "sha256": "ae95acddb2f3e7c7ae89b4920751826b278a486fbd07cf39cd30871ecb3b81b6",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          13,
+          43
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-44",
+        "packedRect": [
+          640,
+          4734,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "43944bec4a89159a052dd993eebeab1e2536d5aaaf32312d9b7176579a2db110",
+        "shadowlessCounterpartPoolMatches": [
+          44
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 23,
+          "differenceBBoxXYXY": [
+            0,
+            32,
+            13,
+            43
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 23,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "923a5d0e78e395b09bf6d32233b85a06ae4338d9a3a5a36f9b8e9c0bd36292a0"
+      },
+      {
+        "id": "P03-44-shadowless",
+        "vendorIndex": 44,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_44.png",
+          "sha256": "924677eae2ed78f3fb048b6c61c79828d1b2c5e0935e9cf0fa1d1634d1d0b0b7",
+          "dimensions": [
+            16,
+            48
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          4,
+          13,
+          42
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-44",
+        "packedRect": [
+          432,
+          5118,
+          16,
+          48
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          48
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "923a5d0e78e395b09bf6d32233b85a06ae4338d9a3a5a36f9b8e9c0bd36292a0",
+        "shadowlessCounterpartPoolMatches": [
+          44
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "923a5d0e78e395b09bf6d32233b85a06ae4338d9a3a5a36f9b8e9c0bd36292a0"
+      },
+      {
+        "id": "P03-45-normal",
+        "vendorIndex": 45,
+        "variant": "normal",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_45.png",
+          "sha256": "65890735f7c56f7d3f0a5294508853dcde1004b76e7bb350f2c36800bf556912",
+          "dimensions": [
+            16,
+            32
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          6,
+          16,
+          24
+        ],
+        "exactOriginalOccurrences": [
+          [
+            176,
+            528,
+            16,
+            32
+          ]
+        ],
+        "packedAliasKey": "single/normal/living-room/living-room-singles-45",
+        "packedRect": [
+          112,
+          7214,
+          16,
+          32
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "96b392d5d1b79e84c85dc7133cf7f89422004204b83990b0ee7eef3ba750bda8",
+        "shadowlessCounterpartPoolMatches": [
+          45
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 22,
+          "differenceBBoxXYXY": [
+            1,
+            22,
+            15,
+            24
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 22,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((167, 151, 150, 255), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "2a570afad68bd3cc9b523adf0c277545aa512b3cc000298798ee7e92d9dc98b4"
+      },
+      {
+        "id": "P03-45-black-shadow",
+        "vendorIndex": 45,
+        "variant": "black-shadow",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/2_LivingRoom_Black_Shadow_Singles_16x16/Living_Room_Black_Shadow_Singles_45.png",
+          "sha256": "f438f033f923339a47c30b75be4eafa9dcdce531e6027370132a4c34079e4051",
+          "dimensions": [
+            16,
+            32
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          6,
+          16,
+          24
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/black-shadow/living-room/living-room-black-shadow-singles-45",
+        "packedRect": [
+          1968,
+          6734,
+          16,
+          32
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "8f6bc222c635ea801934cc0e4ed14a20f49dfcc9d7fc67a0da4dc061e6cc9549",
+        "shadowlessCounterpartPoolMatches": [
+          45
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 22,
+          "differenceBBoxXYXY": [
+            1,
+            22,
+            15,
+            24
+          ],
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 22,
+          "bodyColorChanges": [],
+          "outsideColorChanges": [
+            "((58, 58, 80, 100), (0, 0, 0, 0))"
+          ]
+        },
+        "canonicalBodyHash": "2a570afad68bd3cc9b523adf0c277545aa512b3cc000298798ee7e92d9dc98b4"
+      },
+      {
+        "id": "P03-45-shadowless",
+        "vendorIndex": 45,
+        "variant": "shadowless",
+        "single": {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/2_Living_Room_Singles_Shadowless/Living_Room_Singles_Shadowless_45.png",
+          "sha256": "083e3002a9b04ece28b4831c58cbb3df34537bae515f96032b038d30fe02d2b4",
+          "dimensions": [
+            16,
+            32
+          ]
+        },
+        "alphaBBoxXYXY": [
+          0,
+          6,
+          16,
+          23
+        ],
+        "exactOriginalOccurrences": [],
+        "packedAliasKey": "single/shadowless/living-room/living-room-singles-shadowless-45",
+        "packedRect": [
+          128,
+          7662,
+          16,
+          32
+        ],
+        "singleSourceRect": [
+          0,
+          0,
+          16,
+          32
+        ],
+        "packedVisiblePixelsExact": true,
+        "visibleRGBAHash": "2a570afad68bd3cc9b523adf0c277545aa512b3cc000298798ee7e92d9dc98b4",
+        "shadowlessCounterpartPoolMatches": [
+          45
+        ],
+        "deltaFromShadowlessSameIndex": {
+          "differentPixels": 0,
+          "differenceBBoxXYXY": null,
+          "onReferenceBodyPixels": 0,
+          "outsideReferenceBodyPixels": 0,
+          "bodyColorChanges": [],
+          "outsideColorChanges": []
+        },
+        "canonicalBodyHash": "2a570afad68bd3cc9b523adf0c277545aa512b3cc000298798ee7e92d9dc98b4"
+      }
+    ],
+    "missing38Experiment": {
+      "candidate": "P03-38-normal",
+      "candidateFrame": [
+        0,
+        0,
+        32,
+        48
+      ],
+      "hypothesizedOriginalFrame": [
+        144,
+        480,
+        32,
+        48
+      ],
+      "differenceBeforeReconstruction": {
+        "differentPixels": 318,
+        "differenceBBoxXYXY": [
+          2,
+          4,
+          29,
+          16
+        ],
+        "onReferenceBodyPixels": 0,
+        "outsideReferenceBodyPixels": 318,
+        "bodyColorChanges": [],
+        "outsideColorChanges": [
+          "((107, 80, 82, 255), (0, 0, 0, 0))",
+          "((168, 95, 70, 255), (0, 0, 0, 0))",
+          "((181, 117, 77, 255), (0, 0, 0, 0))",
+          "((199, 140, 89, 255), (0, 0, 0, 0))",
+          "((224, 184, 112, 255), (0, 0, 0, 0))",
+          "((226, 189, 121, 255), (0, 0, 0, 0))",
+          "((228, 193, 129, 255), (0, 0, 0, 0))",
+          "((58, 58, 80, 255), (0, 0, 0, 0))",
+          "((70, 70, 94, 255), (0, 0, 0, 0))",
+          "((86, 89, 114, 255), (0, 0, 0, 0))"
+        ]
+      },
+      "alphaTrimmedCandidateRectXYXY": [
+        2,
+        4,
+        29,
+        43
+      ],
+      "alphaTrimmedExactOriginalOccurrences": [],
+      "upperStripCandidateRect": [
+        0,
+        0,
+        32,
+        16
+      ],
+      "upperStripOriginalOccurrences": [
+        [
+          112,
+          480,
+          32,
+          16
+        ],
+        [
+          177,
+          485,
+          32,
+          16
+        ],
+        [
+          209,
+          485,
+          32,
+          16
+        ]
+      ],
+      "lowerStripCandidateRect": [
+        0,
+        16,
+        32,
+        32
+      ],
+      "lowerStripOriginalOccurrences": [
+        [
+          144,
+          496,
+          32,
+          32
+        ]
+      ],
+      "composition": [
+        {
+          "sourceRect": [
+            112,
+            480,
+            32,
+            16
+          ],
+          "targetRect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "sourceRect": [
+            144,
+            496,
+            32,
+            32
+          ],
+          "targetRect": [
+            0,
+            16,
+            32,
+            32
+          ]
+        }
+      ],
+      "replacementExact": true,
+      "alphaOverlayExact": true,
+      "reconstructionHash": "7101bb3218a8320edf58ce981c523a45953a2fea48769889e6940342c82def1d",
+      "paddingOnlyExplanationRefuted": true
+    },
+    "assemblyExperiments": [
+      {
+        "name": "closed-two-end-pieces",
+        "members": [
+          41,
+          44
+        ],
+        "variant": "normal",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "b82ddae62b776172917e08e0cba07f5b496a82b17358158b0366f113750b02f8",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": [
+          [
+            112,
+            528,
+            32,
+            48
+          ]
+        ]
+      },
+      {
+        "name": "closed-two-end-pieces",
+        "members": [
+          41,
+          44
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "e0280d8a6e36a931c7dedc6ec49f06cdcae958c30d953e19d83d2baf86764141",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "closed-two-end-pieces",
+        "members": [
+          41,
+          44
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "84e2945d236885f2865d52640f1f14ff65f3cd3953df2ba2fbdb1b17a420b614",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "solid-expanded",
+        "members": [
+          41,
+          43,
+          44
+        ],
+        "variant": "normal",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "25b3b19c1278bc2b78116b76a32b0494ee8085f9955b11d4ca160337eb7f641a",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "solid-expanded",
+        "members": [
+          41,
+          43,
+          44
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "366fb6e688709d00e08c9a0014c165584159c6cd5509bacde07b5a3410d188dd",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "solid-expanded",
+        "members": [
+          41,
+          43,
+          44
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "64cdccea1f8b3f2531f00991d4d141eedf04e6b759b7fd3c9efec69b337326dc",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "reflective-expanded",
+        "members": [
+          41,
+          42,
+          44
+        ],
+        "variant": "normal",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "5e1c91ebbdb3aa4486cc71a895ecf8d59a635e633e17964b844746b54ff95d03",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "reflective-expanded",
+        "members": [
+          41,
+          42,
+          44
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "edb63e2505fe5332723332282d0354e70db568b3af49cb162dc91c94669e953f",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "reflective-expanded",
+        "members": [
+          41,
+          42,
+          44
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "5adbd13b7241c2179c4c6419bcbdeb1205ad35f162a114691739a9bb6f2ce93e",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "mixed-expanded",
+        "members": [
+          41,
+          42,
+          43,
+          44
+        ],
+        "variant": "normal",
+        "dimensions": [
+          64,
+          48
+        ],
+        "visibleRGBAHash": "f2130af079b29fb73233b603561ede4ed0c3469162fb237991147d1b4aea1d4a",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "mixed-expanded",
+        "members": [
+          41,
+          42,
+          43,
+          44
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          64,
+          48
+        ],
+        "visibleRGBAHash": "f534f2bf2f55df3115a03e47086460bdbde4e1fd558428f56893461d1fa88e45",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "mixed-expanded",
+        "members": [
+          41,
+          42,
+          43,
+          44
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          64,
+          48
+        ],
+        "visibleRGBAHash": "dc89043dcfa1afd7c97bd6c843439e53d8dc38eb7327785ec4560ba1ce287a6c",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "uncapped-original-sampler",
+        "members": [
+          42,
+          43
+        ],
+        "variant": "normal",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "c9133557a4e725b1e5cf0287c641cc9e1bef62ced1ef9d5b537c04dd3f645a8c",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": [
+          [
+            144,
+            528,
+            32,
+            48
+          ]
+        ]
+      },
+      {
+        "name": "uncapped-original-sampler",
+        "members": [
+          42,
+          43
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "16fc11c8115aba95c23dc2c01ef7ed2e7bbf79addc29e3bdd1d8deb84208545b",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "uncapped-original-sampler",
+        "members": [
+          42,
+          43
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          32,
+          48
+        ],
+        "visibleRGBAHash": "a2549d42d100b21cf4c59430a15072fb95c4b717ce7aad9fe37972d73ebdff73",
+        "internalAlphaGapRows4to41": [],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "wrong-end-order",
+        "members": [
+          44,
+          42,
+          41
+        ],
+        "variant": "normal",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "e54a41c1e2079fb3d8da7c1d127cb4b11e3beed18d4f07d498ca15b7fe996152",
+        "internalAlphaGapRows4to41": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "wrong-end-order",
+        "members": [
+          44,
+          42,
+          41
+        ],
+        "variant": "black-shadow",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "a7e713754d21b11696ad5e830c08bbb597ce6bfde2283da2edad0cb683df3c96",
+        "internalAlphaGapRows4to41": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ],
+        "exactOriginalOccurrences": []
+      },
+      {
+        "name": "wrong-end-order",
+        "members": [
+          44,
+          42,
+          41
+        ],
+        "variant": "shadowless",
+        "dimensions": [
+          48,
+          48
+        ],
+        "visibleRGBAHash": "cbfdf670e2c3698858c945fdd7c1509e29a56911e9d214a37d99f77c0471c8bf",
+        "internalAlphaGapRows4to41": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ],
+        "exactOriginalOccurrences": []
+      }
+    ]
+  },
+  "semanticProposals": [
+    {
+      "id": "P03-C37",
+      "label": "Tall two-panel wooden storage cabinet",
+      "memberRecords": [
+        "P03-37-normal",
+        "P03-37-black-shadow",
+        "P03-37-shadowless"
+      ],
+      "identity": {
+        "value": "tall-solid-front-cabinet",
+        "confidence": "high",
+        "evidence": "Solid inset panels, framed cabinet body and capped golden top; closed sides and base",
+        "unresolved": "complete, standalone cabinet; contents/wardrobe usage unknown"
+      },
+      "segmentation": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          32,
+          48
+        ],
+        "objectBodyRectLocal": [
+          2,
+          4,
+          27,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "complete-wooden-cabinets",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-37-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                112,
+                480,
+                32,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-37-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-37-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-37-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-37-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C38",
+      "label": "Tall two-panel reflective-front wooden storage cabinet",
+      "memberRecords": [
+        "P03-38-normal",
+        "P03-38-black-shadow",
+        "P03-38-shadowless"
+      ],
+      "identity": {
+        "value": "tall-reflective-front-cabinet",
+        "confidence": "high",
+        "evidence": "Same silhouette and frame as37; two pale blue panels with diagonal white reflections",
+        "unresolved": "reflective surface may be mirror or glazing; contents unknown"
+      },
+      "segmentation": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          32,
+          48
+        ],
+        "objectBodyRectLocal": [
+          2,
+          4,
+          27,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "complete-wooden-cabinets",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-38-normal",
+          "originalCorrespondence": {
+            "kind": "exact-composition",
+            "composition": [
+              {
+                "sourceRect": [
+                  112,
+                  480,
+                  32,
+                  16
+                ],
+                "targetRect": [
+                  0,
+                  0,
+                  32,
+                  16
+                ]
+              },
+              {
+                "sourceRect": [
+                  144,
+                  496,
+                  32,
+                  32
+                ],
+                "targetRect": [
+                  0,
+                  16,
+                  32,
+                  32
+                ]
+              }
+            ],
+            "wholeFrameAbsent": true
+          }
+        },
+        {
+          "record": "P03-38-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-38-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-38-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-38-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C39",
+      "label": "Shorter two-panel wooden storage cabinet",
+      "memberRecords": [
+        "P03-39-normal",
+        "P03-39-black-shadow",
+        "P03-39-shadowless"
+      ],
+      "identity": {
+        "value": "shorter-solid-front-cabinet",
+        "confidence": "high",
+        "evidence": "Closed cabinet silhouette with inset solid panels and golden top; occupied body smaller than37 though frame remains32x48",
+        "unresolved": "storage function supported; exact purpose and real height unknown"
+      },
+      "segmentation": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          32,
+          48
+        ],
+        "objectBodyRectLocal": [
+          3,
+          9,
+          27,
+          31
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "complete-wooden-cabinets",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-39-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                208,
+                480,
+                32,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-39-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-39-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-39-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-39-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C40",
+      "label": "Shorter two-panel reflective-front wooden storage cabinet",
+      "memberRecords": [
+        "P03-40-normal",
+        "P03-40-black-shadow",
+        "P03-40-shadowless"
+      ],
+      "identity": {
+        "value": "shorter-reflective-front-cabinet",
+        "confidence": "high",
+        "evidence": "Pairs with39 by silhouette/top/closed perimeter; blue reflective panel alternative",
+        "unresolved": "mirror versus glazing unresolved"
+      },
+      "segmentation": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          32,
+          48
+        ],
+        "objectBodyRectLocal": [
+          3,
+          9,
+          27,
+          31
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "complete-wooden-cabinets",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "complete-object",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-40-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                176,
+                480,
+                32,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-40-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-40-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-40-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-40-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C41",
+      "label": "Cabinet left end with solid inset panel",
+      "memberRecords": [
+        "P03-41-normal",
+        "P03-41-black-shadow",
+        "P03-41-shadowless"
+      ],
+      "identity": {
+        "value": "modular-cabinet-left-end",
+        "confidence": "high",
+        "evidence": "Left vertical outline and terminating top edge; rails and body continue to the source right edge",
+        "unresolved": "not a separate side-facing complete cabinet"
+      },
+      "segmentation": {
+        "value": "horizontal-assembly-component",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          16,
+          48
+        ],
+        "objectBodyRectLocal": [
+          2,
+          4,
+          14,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "modular-wood-cabinet-kit",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "left-end",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-41-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                112,
+                528,
+                16,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-41-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-41-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-41-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-41-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C42",
+      "label": "Cabinet middle segment with two reflective panels",
+      "memberRecords": [
+        "P03-42-normal",
+        "P03-42-black-shadow",
+        "P03-42-shadowless"
+      ],
+      "identity": {
+        "value": "modular-cabinet-reflective-middle",
+        "confidence": "high",
+        "evidence": "Roof/body/base continue through both source edges; no outer side cap; reflected panels",
+        "unresolved": "mirror versus glazing unresolved; number of functional doors unknown"
+      },
+      "segmentation": {
+        "value": "horizontal-assembly-component",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          16,
+          48
+        ],
+        "objectBodyRectLocal": [
+          0,
+          4,
+          16,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "modular-wood-cabinet-kit",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "repeatable-reflective-middle",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-42-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                144,
+                528,
+                16,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-42-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-42-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-42-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-42-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C43",
+      "label": "Cabinet middle segment with two solid inset panels",
+      "memberRecords": [
+        "P03-43-normal",
+        "P03-43-black-shadow",
+        "P03-43-shadowless"
+      ],
+      "identity": {
+        "value": "modular-cabinet-solid-middle",
+        "confidence": "high",
+        "evidence": "Roof/body/base continue through both edges; no outer side cap; matches adjoining end rails",
+        "unresolved": "panel count is visual; functional door assignment unproven"
+      },
+      "segmentation": {
+        "value": "horizontal-assembly-component",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          16,
+          48
+        ],
+        "objectBodyRectLocal": [
+          0,
+          4,
+          16,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "modular-wood-cabinet-kit",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "repeatable-solid-middle",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-43-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                160,
+                528,
+                16,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-43-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-43-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-43-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-43-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C44",
+      "label": "Cabinet right end with solid inset panel",
+      "memberRecords": [
+        "P03-44-normal",
+        "P03-44-black-shadow",
+        "P03-44-shadowless"
+      ],
+      "identity": {
+        "value": "modular-cabinet-right-end",
+        "confidence": "high",
+        "evidence": "Right vertical outline and terminating top edge; rails and body continue to left edge",
+        "unresolved": "not a separate side-facing complete cabinet"
+      },
+      "segmentation": {
+        "value": "horizontal-assembly-component",
+        "confidence": "high",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          16,
+          48
+        ],
+        "objectBodyRectLocal": [
+          0,
+          4,
+          13,
+          38
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "modular-wood-cabinet-kit",
+        "confidence": "high",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "right-end",
+        "confidence": "high",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-44-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                128,
+                528,
+                16,
+                48
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-44-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-44-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-44-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-44-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    },
+    {
+      "id": "P03-C45",
+      "label": "Small wooden open-front shelf/side-table unit with colored contents",
+      "memberRecords": [
+        "P03-45-normal",
+        "P03-45-black-shadow",
+        "P03-45-shadowless"
+      ],
+      "identity": {
+        "value": "small-open-shelf-unit",
+        "confidence": "medium",
+        "evidence": "Broad wood top, two side supports and open compartment(s) containing green/cream/brown shapes; closed outer silhouette",
+        "unresolved": "precise table versus low shelf identity and book/content identity unresolved; separate family from cabinet kit"
+      },
+      "segmentation": {
+        "value": "complete-object",
+        "confidence": "medium",
+        "evidence": "Source frames, closed/missing outer edges, matching rails and rendered positive/negative assemblies",
+        "frameDimensions": [
+          16,
+          32
+        ],
+        "objectBodyRectLocal": [
+          0,
+          6,
+          16,
+          17
+        ],
+        "bodyBoundsEvidence": "Alpha-tight shadowless source bounds; displayed art bounds only, no geometry approval"
+      },
+      "family": {
+        "value": "small-open-shelf-furniture",
+        "confidence": "medium",
+        "evidence": "Appearance and component edges; nearby suffix alone is not evidence of same family"
+      },
+      "facing": {
+        "value": "front-facing depiction; compass facing unknown",
+        "confidence": "medium",
+        "evidence": "Front inset/reflective panels and horizontal top/base rails; no orthogonal side-view relationship is present in this set",
+        "unresolved": "World-facing convention and available other views remain unknown"
+      },
+      "shadowVariants": {
+        "value": [
+          "normal",
+          "black-shadow",
+          "shadowless"
+        ],
+        "confidence": "high",
+        "evidence": "All three map uniquely to same-index body signature after pilot-specific ground/reflection normalization across122 shadowless reference files; raw reflection changes retained"
+      },
+      "assemblyRole": {
+        "value": "complete-object",
+        "confidence": "medium",
+        "evidence": "Correct end order produces capped complete silhouettes and continuous rails; wrong order produces internal gaps on every body row; originals include41+44 and uncapped42+43 sampler"
+      },
+      "geometry": {
+        "footprint": "unknown",
+        "collision": "unknown",
+        "walkability": "unknown",
+        "height": "unknown"
+      },
+      "independentReview": {
+        "state": "pending",
+        "reviewer": null
+      },
+      "humanApproval": "not-requested",
+      "sourceCorrespondences": [
+        {
+          "record": "P03-45-normal",
+          "originalCorrespondence": {
+            "kind": "exact-whole-frame",
+            "sourceRects": [
+              [
+                176,
+                528,
+                16,
+                32
+              ]
+            ]
+          }
+        },
+        {
+          "record": "P03-45-black-shadow",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-45-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        },
+        {
+          "record": "P03-45-shadowless",
+          "originalCorrespondence": {
+            "kind": "counterpart-based-derived",
+            "normalRecord": "P03-45-normal",
+            "wholeFrameAbsent": true,
+            "warning": "Normal original art supports identity, not a raw occurrence of this shadow variant; source variant pixels are pinned separately."
+          }
+        }
+      ]
+    }
+  ],
+  "assemblyProposals": {
+    "family": "modular-wood-cabinet-kit",
+    "members": [
+      "P03-C41",
+      "P03-C42",
+      "P03-C43",
+      "P03-C44"
+    ],
+    "leftEnd": "P03-C41",
+    "rightEnd": "P03-C44",
+    "middleOptions": [
+      "P03-C42",
+      "P03-C43"
+    ],
+    "ordering": "41 + zero or more42/43 +44",
+    "repetitionStatus": "Rendered mixtures and expansions support horizontal repetition at16px boundaries; all combinations and wider extents are not exhaustively tested",
+    "testedPositiveSequences": [
+      [
+        41,
+        44
+      ],
+      [
+        41,
+        43,
+        44
+      ],
+      [
+        41,
+        42,
+        44
+      ],
+      [
+        41,
+        42,
+        43,
+        44
+      ]
+    ],
+    "sourceSamplerSequence": [
+      42,
+      43
+    ],
+    "negativeSequence": [
+      44,
+      42,
+      41
+    ],
+    "geometry": "unknown",
+    "humanApproval": "not-requested"
+  },
+  "challenges": [
+    {
+      "id": "P03-E01",
+      "hypothesis": "Packed aliases preserve each full single frame",
+      "test": "Compare normalized full-frameRGBA at every catalog rectangle; all27 pinned",
+      "result": "supported27/27",
+      "limit": "Exact pixel identity does not approve names or gameplay geometry"
+    },
+    {
+      "id": "P03-E02",
+      "hypothesis": "#38 fails only because its origin is off-grid",
+      "test": "Whole original master search at every pixel origin for all27; no grid restriction",
+      "result": "refuted for38;8 normal matches,0 other shadow matches",
+      "limit": "Other versions/sheets outside this master are not excluded"
+    },
+    {
+      "id": "P03-E03",
+      "hypothesis": "#38 differs only by transparent margins",
+      "test": "Alpha-trim candidate and search every original pixel origin",
+      "result": "refuted; no match for alpha-trimmed27x39 body"
+    },
+    {
+      "id": "P03-E04",
+      "hypothesis": "#38 is composed from a shared top and an incomplete original body",
+      "test": "Master[144,480,32,48] differs by318 pixels only in upper16; combine top[112,480,32,16] with lower[144,496,32,32]",
+      "result": "supported; replacement and alpha-overlay are exact; all candidate upper/lower strip occurrences retained",
+      "limit": "Proof applies only to exact pinned normal38; do not silently treat composition as a whole-sheet occurrence"
+    },
+    {
+      "id": "P03-E05",
+      "hypothesis": "Same numbered shadow files share identity and differ only outside body",
+      "test": "Full raw deltas to shadowless and unique normalized body match against122 shadowless files",
+      "result": "identity pairing supported, pure-shadow-only claim refuted for38/40/42:32/16/32 opaque reflection pixels248 versus255",
+      "limit": "Pilot-specific normalization is not a universal pack conversion rule"
+    },
+    {
+      "id": "P03-E06",
+      "hypothesis": "41\u201344 are side-facing complete cabinet variants",
+      "test": "Examine chopped source edges; render capped positive sequences and reversed-end negative control",
+      "result": "refuted; horizontal component roles supported; wrong end order has38 internal-gap rows in each shadow set",
+      "limit": "Compass-facing and real gameplay dimensions remain unknown"
+    },
+    {
+      "id": "P03-E07",
+      "hypothesis": "45 belongs to the same modular wardrobe kit",
+      "test": "Compare source shape, open front and top/base rails to41\u201344",
+      "result": "weakened; separate complete small open-shelf furniture proposal",
+      "limit": "Exact contents and shelf-versus-side-table usage unresolved"
+    }
+  ],
+  "coverage": {
+    "sourceRecords": 27,
+    "semanticCandidates": 9,
+    "wholeObjectCandidates": 5,
+    "horizontalComponentCandidates": 4,
+    "exactWholeOriginalSourceFiles": 8,
+    "exactComposedOriginalSourceFiles": 1,
+    "variantCounterpartMappings": 18,
+    "independentlyReviewedCandidates": 0,
+    "humanApprovedCandidates": 0,
+    "semanticIdentityUncertainties": [
+      "reflective panels: mirror versus glazing",
+      "45 specific furniture function/contents"
+    ],
+    "unexaminedCoreRecords": 0,
+    "elapsedInvestigation": "Not clocked; no full-run extrapolation",
+    "ownerReviewEffort": "not-yet-measured"
+  },
+  "evidenceRecipe": "python3 scripts/semantic-map-cabinet-pilot.py --verify-proposal --out /tmp/tilefun-semantic-cabinets",
+  "evidenceArtifacts": [
+    "variants.png",
+    "master-context.png",
+    "38-reconstruction.png",
+    "assemblies.png",
+    "shadow-backgrounds.png",
+    "detail-41.png",
+    "detail-42.png",
+    "detail-43.png",
+    "detail-44.png",
+    "detail-45.png",
+    "findings.json"
+  ],
+  "nextAction": "Independent review of fresh pixels, cabinet role/reflective interpretation and exact composition/alias claims. Retain uncertainties for owner review; no runtime promotion."
+}

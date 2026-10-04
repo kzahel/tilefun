@@ -200,5 +200,7 @@ Use Python 3 with Pillow for image inspection and full inventory validation.
   and rejection of row matches that wrap across a source edge.
 
 Source-specific survey helpers and their capture commands are linked from the
-investigation packets. Generated source ledgers retain deterministic formatting;
-their formatting is excluded from Biome alongside other generated inventories.
+investigation packets. Generated proposals retain deterministic formatting.
+The large source-file ledger is checked by the inventory script rather than
+Biome; formatting of the smaller generated JSON is excluded alongside other
+generated inventories.
