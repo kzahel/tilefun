@@ -46,19 +46,65 @@ for (const backend of ["canvas", "gpu"]) {
   });
 }
 
-test("geometry controls fit a phone and release touch input", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/workshop.html#/tool/world-geometry");
-  const c = page.getByLabel("World geometry scene");
-  await expect(c).toHaveAttribute("data-ready", "true");
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  const right = page.getByRole("button", { name: "→", exact: true });
-  await right.dispatchEvent("pointerdown", { pointerId: 1 });
-  await expect
-    .poll(async () => Number(await c.getAttribute("data-player-x")))
-    .toBeGreaterThan(-210);
-  await right.dispatchEvent("pointercancel", { pointerId: 1 });
-  await page.getByRole("button", { name: "Start at deck", exact: true }).click();
-  await expect(c).toHaveAttribute("data-player-z", "48");
-  await page.screenshot({ path: "/tmp/tilefun-geometry-phone.png", fullPage: true });
+test.describe("phone controls", () => {
+  test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
+
+  test("geometry controls suppress long-press defaults and release touch input", async ({
+    page,
+  }) => {
+    await page.goto("/tilefun/workshop.html#/tool/world-geometry");
+    const c = page.getByLabel("World geometry scene");
+    await expect(c).toHaveAttribute("data-ready", "true");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    const right = page.getByRole("button", { name: "→", exact: true });
+    await right.scrollIntoViewIfNeeded();
+    const buttons = page.locator(".geometry-controls button");
+    for (const button of await buttons.all()) {
+      await expect(button).toHaveCSS("user-select", "none");
+      await expect(button).toHaveCSS("touch-action", "none");
+      // Check the cancelable browser event, including non-movement controls.
+      expect(
+        await button.evaluate((el) =>
+          el.dispatchEvent(
+            new MouseEvent("contextmenu", {
+              bubbles: true,
+              cancelable: true,
+            }),
+          ),
+        ),
+      ).toBe(false);
+    }
+    const cdp = await page.context().newCDPSession(page);
+    for (const end of ["touchEnd", "touchCancel"] as const) {
+      await page.getByRole("button", { name: "Start at ramp", exact: true }).tap();
+      await expect(c).toHaveAttribute("data-player-x", "-216");
+      await right.scrollIntoViewIfNeeded();
+      const box = await right.boundingBox();
+      if (!box) throw new Error("Movement button is not visible");
+      const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+      // Deliberately hold beyond the browser's long-press threshold.
+      await page.waitForTimeout(900);
+      const heldX = Number(await c.getAttribute("data-player-x"));
+      expect(heldX).toBeGreaterThan(-210);
+      await page.waitForTimeout(200);
+      expect(Number(await c.getAttribute("data-player-x"))).toBeGreaterThan(heldX);
+      expect(await page.evaluate(() => window.getSelection()?.toString())).toBe("");
+      await cdp.send("Input.dispatchTouchEvent", { type: end, touchPoints: [] });
+      // Allow ordinary deceleration, then check that input is no longer held.
+      await page.waitForTimeout(500);
+      const stoppedX = Number(await c.getAttribute("data-player-x"));
+      await page.waitForTimeout(250);
+      expect(Number(await c.getAttribute("data-player-x"))).toBeCloseTo(stoppedX, 1);
+    }
+    await cdp.detach();
+    await page.getByRole("button", { name: "Start at deck", exact: true }).tap();
+    await expect(c).toHaveAttribute("data-player-z", "48");
+    await page.getByRole("button", { name: "Pause", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("button", { name: "Resume", exact: true })).toBeVisible();
+    await page.screenshot({ path: "/tmp/tilefun-geometry-phone.png", fullPage: true });
+  });
 });

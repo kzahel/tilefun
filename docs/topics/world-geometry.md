@@ -110,6 +110,10 @@ It uses production Realm/Worker replication, prediction and the shared embedded
 presentation host. Schematic geometry is registered as an experiment, not approved
 art. Normal worlds and generation output are unchanged.
 
+Lab buttons suppress long-press context menus, touch callouts and text selection.
+Movement holds retain pointer capture and release on pointer up, cancellation or
+lost capture; other buttons retain normal click and keyboard activation.
+
 - `SurfacePatch` describes a rectangular planar top, constant vertical slab
   thickness, surface/space identities and neighboring patch IDs. An optional
   `PropCollider.surface` carries it through current spatial queries, replication

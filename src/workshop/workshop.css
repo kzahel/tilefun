@@ -540,6 +540,12 @@ time {
 .native-preview {
   min-width: 0;
 }
+.geometry-controls button {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 .canvas-stage {
   background: #dde2d4;
   border: 1px solid #c7d1bc;

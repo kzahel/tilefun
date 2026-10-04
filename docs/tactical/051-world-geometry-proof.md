@@ -82,6 +82,17 @@ cold, standing, walking, sprinting, reverse and zoom-out samples all recorded ze
 missing-data or incomplete-cache frames. This is readiness evidence, not a new
 performance comparison or evidence for generated multilevel terrain.
 
+## Mobile control follow-up (2026-10-04)
+
+Lab buttons now suppress context menus, selection and WebKit touch callouts;
+movement pointer-down also prevents default focus/selection behavior. The phone
+regression uses Chromium touch input held beyond the long-press threshold, checks
+continued movement and release/cancellation, and verifies ordinary tap and
+keyboard activation of scene controls. Native iOS callouts are covered by CSS,
+not a physical-device test. Typechecks, all 1,462 unit tests, inventories, build
+and the three geometry browser tests pass. The full browser suite passes all 311
+tests. Repository-wide lint passes with existing warnings.
+
 ## Follow-on boundary
 
 Review this proof before extending it. Next decide how a passage replaces the

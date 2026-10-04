@@ -108,6 +108,8 @@ export default function WorldGeometryPage() {
   }, [restart]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
+      // Keep a held control from starting selection or stealing canvas focus.
+      e.preventDefault();
       e.currentTarget.setPointerCapture(e.pointerId);
       keys.current.add(key);
     },
@@ -127,9 +129,10 @@ export default function WorldGeometryPage() {
         Automatic cutaway reveals the space you occupy. View selection changes drawing only. This is
         diagnostic geometry, not finished building artwork.
       </p>
-      <div className="actions">
+      <div className="actions geometry-controls">
         {Object.entries(GEOMETRY_STARTS).map(([name, start]) => (
           <button
+            onContextMenu={(e) => e.preventDefault()}
             type="button"
             key={name}
             onClick={() => {
@@ -143,10 +146,15 @@ export default function WorldGeometryPage() {
             Start at {name}
           </button>
         ))}
-        <button type="button" onClick={() => setPaused(!paused)}>
+        <button
+          onContextMenu={(e) => e.preventDefault()}
+          type="button"
+          onClick={() => setPaused(!paused)}
+        >
           {paused ? "Resume" : "Pause"}
         </button>
         <button
+          onContextMenu={(e) => e.preventDefault()}
           type="button"
           onClick={() => {
             setPaused(false);
@@ -156,6 +164,7 @@ export default function WorldGeometryPage() {
           Reset scene
         </button>
         <button
+          onContextMenu={(e) => e.preventDefault()}
           type="button"
           onClick={() => {
             void scene.current?.session.reload().catch((e) => setError(String(e)));
@@ -202,7 +211,7 @@ export default function WorldGeometryPage() {
           onBlur={() => keys.current.clear()}
         />
       </div>
-      <fieldset className="actions" aria-label="Movement controls">
+      <fieldset className="actions geometry-controls" aria-label="Movement controls">
         {[
           ["←", "ArrowLeft"],
           ["↑", "ArrowUp"],
@@ -210,7 +219,12 @@ export default function WorldGeometryPage() {
           ["→", "ArrowRight"],
           ["Jump", " "],
         ].map(([label, key]) => (
-          <button type="button" key={key} {...touch(key ?? "")}>
+          <button
+            onContextMenu={(e) => e.preventDefault()}
+            type="button"
+            key={key}
+            {...touch(key ?? "")}
+          >
             {label}
           </button>
         ))}
