@@ -180,3 +180,13 @@ traffic lanes through RealmOptions and seed bounded road areas once. Their cars
 use the same TrafficSystem, actor replication and TrafficRecords as generated
 traffic, including height and route restoration. The lab owns recipe selection
 and observer controls only; it has no car movement loop.
+
+
+[Train grades](../tactical/061-train-grade-proof.md) use the same RailwaySystem,
+per-carriage replicas, native asset loader and surface ordering as gameplay.
+The shared scenario host now requests bounded view-range updates during paused
+camera inspection, and reload preserves the requested view range. Neither action
+advances physics. Moving diagnostic cameras also drive the streaming range;
+the scenario view includes the player’s prediction neighborhood when the camera
+looks elsewhere. This supports the lab's follow-train/whole-route cameras without
+an independent simulation or a renderer-only train substitute.

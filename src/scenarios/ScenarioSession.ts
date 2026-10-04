@@ -53,7 +53,13 @@ export class ScenarioSession {
         !line.id ||
         ![line.start, line.end, line.y].every(Number.isSafeInteger) ||
         line.end <= line.start ||
-        line.end - line.start > 256
+        line.end - line.start > 256 ||
+        (line.surfaceFollowing &&
+          (![line.surfaceFollowing.startZ, line.surfaceFollowing.endZ].every(
+            (z) => Number.isFinite(z) && Math.abs(z) <= 4096,
+          ) ||
+            (line.surfaceFollowing.startAtEnd !== undefined &&
+              typeof line.surfaceFollowing.startAtEnd !== "boolean")))
       )
         throw new Error("Invalid scenario railway");
     this.physics = scenarioPhysics(recipe.physics);
@@ -239,8 +245,19 @@ export class ScenarioSession {
       minCy: cy - 2,
       maxCy: cy + 2,
     };
+    // A diagnostic camera may inspect a remote actor. Keep the controlled
+    // player's prediction/support neighborhood in the replicated view as well.
+    const view = this.player.visibleRange;
+    this.player.visibleRange = {
+      minCx: Math.min(view.minCx, cx - 2),
+      maxCx: Math.max(view.maxCx, cx + 2),
+      minCy: Math.min(view.minCy, cy - 2),
+      maxCy: Math.max(view.maxCy, cy + 2),
+    };
     this.realm.updateVisibleChunks(this.player.visibleRange);
     await this.realm.ensureReady(this.player.visibleRange);
+    await this.realm.railway?.settle();
+    if (this.realm.railway?.error) throw this.realm.railway.error;
   }
   async step(input: Movement, dt = 1 / 60, range?: ChunkRange) {
     if (this.closed) throw new Error("Scenario is closed");
@@ -268,6 +285,18 @@ export class ScenarioSession {
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
     const player = this.player.player;
+    if (command.kind === "view-range") {
+      const r = command.range;
+      if (
+        !Object.values(r).every(Number.isSafeInteger) ||
+        r.maxCx < r.minCx ||
+        r.maxCy < r.minCy ||
+        (r.maxCx - r.minCx + 1) * (r.maxCy - r.minCy + 1) > 4096
+      )
+        throw new Error("Invalid scenario view range");
+      await this.ready(r);
+      return;
+    }
     if (command.kind === "traffic-settings") {
       const settings = this.realm.traffic?.settings;
       if (!settings) throw new Error("No traffic in this scenario");
@@ -305,7 +334,7 @@ export class ScenarioSession {
     delete player.jumpZ;
     this.player.jumpConsumed = this.player.lastJumpHeld = false;
     this.realm.entityManager.spatialHash.update(player);
-    await this.ready();
+    await this.ready(this.player.visibleRange);
   }
   frames(): ArrayBuffer[] {
     return this.realm.replicate(this.player.clientId).map(encodeServerMessage);
@@ -322,11 +351,13 @@ export class ScenarioSession {
     await this.open(true);
   }
   async reload() {
+    const range = this.player.visibleRange;
     if (this.closed) throw new Error("Scenario is closed");
     await this.realm.flushAsync();
     await this.realm.destroy();
     this.seq = 0;
     await this.open(false);
+    await this.ready(range);
   }
   async close() {
     if (this.closed) return;

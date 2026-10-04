@@ -23,6 +23,8 @@ wall props. Recipes contain no update callbacks and need no DOM or image loading
 - `TrafficRecipe`: current regional lanes, a compact car and bus, braking/roof commands.
 - `FurnitureRecipe`: compiled furniture placements, reviewed body proposals and room edges.
 - `CharacterRecipe`: candidate settings, passage/step/clearance obstacles and scale reference.
+- `TrainGeometryRecipe`: one production railway service with per-carriage grade
+  support, bridge/tunnel surfaces and two termini.
 - `VehicleGeometryRecipe`: straight car routes over the railway bridge or into the garage,
   with the production traffic controller and explicit opposite-direction starts.
 - `OutdoorRecipe`: the selected asset's actual prop geometry and a bounded walking area.
@@ -104,3 +106,10 @@ return to zero on exit, and verifies that no IndexedDB worlds are created.
 
 Next: review movement feel in the migrated labs. Future small gameplay examples
 should add fixture data and semantic integration assertions through this host.
+
+
+Paused camera changes use the `view-range` command to ready/replicate a bounded
+chunk range without a simulation tick. Reload preserves that range, including
+when the camera is far from the player. Railway restoration waits for service
+footprint readiness before publishing bodies. `ScenarioSession.ready` also waits
+for pending railway lifecycle work and reports its errors.

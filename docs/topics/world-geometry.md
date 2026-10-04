@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: deck, garage and crossing proofs accepted; car bridge/garage grades implemented for review. Broader terrain authoring and interior integration remain open.
+Status: deck, garage, crossing and car grade proofs accepted; per-carriage train grades implemented for review. Broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -261,13 +261,18 @@ with continuous connected spaces remains open. No realm migration is selected.
 
 ## Next step and evaluation
 
-Review the [vehicle grade proof](../tactical/060-vehicle-grade-proof.md): cars cross
-the bridge and descend into the garage using production traffic, footprint support,
-body clearance and durable height restoration. The chassis remains level and
-generated traffic remains unchanged. Both directions are selectable fresh runs;
-automatic cutaway follows the player observer. Next consider per-carriage rail poses. Connected indoor
-levels still need an explicit design against existing realm boundaries before
-migrating interiors or committing a durable terrain-authoring format.
+The user accepted the [car proof](../tactical/060-vehicle-grade-proof.md) and
+next authorized [train grades](../tactical/061-train-grade-proof.md). Review three
+independent carriage heights across a raised section and tunnel, whole-train
+clearance, reversing and slope reload. Follow/overview camera inspection stays
+independent of physics, including while paused. Native carriage bodies remain
+horizontal, exposing stepped joins on grades; articulated presentation is still
+an open decision. Generated infrastructure remains unchanged.
+
+After review, choose one deliberate generated bridge/tunnel crossing and decide
+whether its required art needs further work first. Connected indoor levels still
+need a design against realm boundaries before migration or a durable authoring
+format is selected.
 
 Further prototypes should use the existing [scenario runtime](gameplay-scenarios.md)
 and respect [embedded engine lab alignment](embedded-engine-labs.md). Exercise

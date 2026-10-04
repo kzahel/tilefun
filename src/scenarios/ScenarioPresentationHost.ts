@@ -79,6 +79,7 @@ export class ScenarioPresentationHost {
   private renderX = 0;
   private renderY = 0;
   private steps = 0;
+  private pausedViewKey = "";
   private poseSeconds = 0;
   private displayedPlayer: Entity | undefined;
 
@@ -155,6 +156,11 @@ export class ScenarioPresentationHost {
     try {
       this.camera.zoom = this.options.settings().zoom;
       this.camera.savePrev();
+      const fixed = this.fixedCamera(1);
+      if (fixed) {
+        this.camera.x = fixed.wx;
+        this.camera.y = fixed.wy;
+      }
       this.interpolate = this.session.step(
         this.options.input(),
         dt,
@@ -199,6 +205,16 @@ export class ScenarioPresentationHost {
           false,
           this.options.cameraOffsetY,
         );
+      // Camera inspection while paused still needs streamed chunks and replicas,
+      // but must not advance the simulation clock.
+      if (this.options.settings().paused && this.controls === 0) {
+        const range = this.camera.getVisibleChunkRange(),
+          key = JSON.stringify(range);
+        if (key !== this.pausedViewKey) {
+          this.pausedViewKey = key;
+          void this.command({ kind: "view-range", range }).catch((e) => this.fail(e));
+        }
+      }
       const player = view.playerEntity;
       const cycle = this.options.poseCycle?.();
       const row = Math.floor(this.poseSeconds / 2) % 4;

@@ -218,3 +218,25 @@ it("resizes before readiness and during use without replacing the Worker", async
   expect(mocks.factory).toHaveBeenCalledTimes(1);
   host.dispose();
 });
+
+it("uses the moving diagnostic camera for streaming as well as drawing", async () => {
+  let x = 1000;
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {
+    ...options,
+    fixedCamera: () => ({ wx: x, wy: 0 }),
+  });
+  const player = createPlayer(0, 0);
+  Object.assign(host.session.view, { playerEntity: player, entities: [player] });
+  await host.ready;
+  x = 5000;
+  const start = performance.now();
+  for (let i = 1; i <= 3; i++)
+    vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + i * 100);
+  expect(mocks.step).toHaveBeenCalled();
+  expect(mocks.step).toHaveBeenLastCalledWith(
+    expect.anything(),
+    expect.any(Number),
+    expect.objectContaining({ minCx: 18 }),
+  );
+  host.dispose();
+});

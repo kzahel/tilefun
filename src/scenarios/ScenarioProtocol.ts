@@ -3,6 +3,7 @@ import type { Movement } from "../input/ActionManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =
+  | { kind: "view-range"; range: ChunkRange }
   | { kind: "teleport"; position: Entity["position"]; z?: number }
   | { kind: "traffic-position"; roof: boolean }
   | { kind: "traffic-settings"; speed?: number; gap?: number };

@@ -450,7 +450,9 @@ for (const sprite of SPRITE_MANIFEST) {
   add(
     `sprite:${sprite.key}`,
     sprite.key,
-    [0, 0, sheet.width, sheet.height],
+    sprite.cropX === undefined
+      ? [0, 0, sheet.width, sheet.height]
+      : [sprite.cropX, 0, sprite.w, sprite.h],
     `${sprite.key} · registered ${sprite.w}×${sprite.h} frames`,
     "sprite",
     [

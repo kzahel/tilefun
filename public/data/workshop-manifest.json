@@ -4780,7 +4780,7 @@
       "name": "Road bridge over a moving train",
       "prompt": "Walk both road approaches while the production train service passes beneath; inspect clearance, ordering and save/reload. Schematic engine proof.",
       "url": "/tilefun/workshop.html?geometry=crossing#/tool/world-geometry",
-      "fingerprint": "afca0ca387f64b81304a694968d08e7ac9ec5dc806bf5e1ab806ef716e8ad05b",
+      "fingerprint": "5261abccd810ce745b730a0af8402ea65f27638dc709c9bb008b73f8bf454df3",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -4790,7 +4790,7 @@
       "name": "Car crossing the railway bridge",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-bridge#/tool/world-geometry",
-      "fingerprint": "fd34086ef3d1d6f39f97f7da8bad6b9c15eafa54d5cb2acc0418c3a968d601c9",
+      "fingerprint": "fdd18d609fe2dc6a37108fedc5a8396ac5749e99928a80107c02206795060cbc",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -4801,6 +4801,16 @@
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry",
       "fingerprint": "36515b2f7c65b1b74ef5284c3882ddd00dc16c9fd403a3372244eecf31ddadcf",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:train-grades-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Train grades, bridge and tunnel",
+      "prompt": "Follow three independent carriage heights across ramps, bridge and tunnel, reverse at both termini and reload on a slope. Schematic proof with horizontal native art and visible slope-join limitations.",
+      "url": "/tilefun/workshop.html?geometry=train-grades#/tool/world-geometry",
+      "fingerprint": "9a950afa9c2cfde625a81c1bd8bb72752a51d7e15879f015787f2fd4e6d84810",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -12619,7 +12629,7 @@
       "name": "Tiger",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=tiger",
-      "fingerprint": "eedd8464971eb64ef75cec3dffdd3a2a4046f981611eb00da5716941d52fea33",
+      "fingerprint": "66c2d83a919d315d26da2350aa3c5c93b21c9e9d9a79f7c50f414d6d6b0d1b58",
       "sourceFingerprint": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a",
       "characterId": "tiger"
     },
@@ -12630,7 +12640,7 @@
       "name": "Tuxedo Cat",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=cat",
-      "fingerprint": "ae40b8cc0ebbc72c924ccd73178b2de7470f1aa0de33c11a7fbf04600d4b67ba",
+      "fingerprint": "9572206ee41aae86c99d3c8836bed007c13706dac42210fd37104969e3d914cc",
       "sourceFingerprint": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99",
       "characterId": "cat"
     },
@@ -12641,7 +12651,7 @@
       "name": "Floppy Dog",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=dog",
-      "fingerprint": "0b55cd59e1984b7cfaaf0cdaaeafb7f011ea431e0e7a17aeff3efa0b620b4bc2",
+      "fingerprint": "602583f39fdd89bc73bd48a0f3d49ba70cd3d8de49a9e3615efd21a652cd92e3",
       "sourceFingerprint": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200",
       "characterId": "dog"
     },
@@ -12652,7 +12662,7 @@
       "name": "Trail Explorer",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=person",
-      "fingerprint": "85fe6b5043526604fc74d7d324f7c531e71090b3770f862331efbfed4fd5bcc9",
+      "fingerprint": "11214faea3f7c902b8016670a086fa9fbe01256b4174716fffe1eb5a392d6324",
       "sourceFingerprint": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
       "characterId": "person"
     },
@@ -12663,7 +12673,7 @@
       "name": "Russet Squirrel",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=squirrel",
-      "fingerprint": "0cb847af444e56ddce3e93f4bff345e007b537b3cca6fb7e593ba52e4d3b168a",
+      "fingerprint": "0c30b5ef36892c0739beb3538600649dd6d6b38166c9b2b2813adffd99edca0e",
       "sourceFingerprint": "03d5f92be37d50b8fd1c1a1f40171bf491085bc2d750b32d01f3165b46eb8c9d",
       "characterId": "squirrel"
     },
@@ -12674,7 +12684,7 @@
       "name": "Brown Bear",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=bear",
-      "fingerprint": "930c07e9a3ff23260c5fd2b70240de46a7baa8199137c91de6f042548c29ad27",
+      "fingerprint": "0a72e771f07b5a78f0ba1cef9fdcb95c28b0eabc411291ed432c089b963cac5b",
       "sourceFingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
       "characterId": "bear"
     },

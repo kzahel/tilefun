@@ -1,5 +1,5 @@
 import { CHARACTER_ENTITY_DEFS } from "../characters/PromotedCharacters.js";
-import { TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js";
+import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js";
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
@@ -142,6 +142,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
   ...CHARACTER_ENTITY_DEFS,
   ...VEHICLE_DEFS,
   [TRAIN_TYPE]: TRAIN_DEF,
+  ...TRAIN_CARRIAGE_DEFS,
   player: {
     sprite: {
       sheetKey: "player",

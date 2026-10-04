@@ -2,6 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { Prop } from "../entities/Prop.js";
 import type { PropManager } from "../entities/PropManager.js";
+import { isTrain } from "../railway/Train.js";
 import {
   type ActorRecord,
   actorScope,
@@ -130,11 +131,7 @@ export class RealmRecords {
   ) {
     entities.onMutation = (entity) => this.changed(entity);
     entities.onSpawn = (entity) => {
-      if (
-        entity.type === "player" ||
-        entity.type.startsWith("vehicle-v1:") ||
-        entity.type === "train-local-v1"
-      )
+      if (entity.type === "player" || entity.type.startsWith("vehicle-v1:") || isTrain(entity))
         return;
       this.attach(entity);
       if (!this.hydrating) {

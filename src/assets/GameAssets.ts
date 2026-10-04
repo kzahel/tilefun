@@ -2,6 +2,7 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
+import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { loadImage } from "./AssetLoader.js";
 import { MODERN_INTERIORS_SHEET_KEY } from "./ModernInteriorsAtlasIndex.js";
@@ -15,7 +16,30 @@ export interface GameAssets {
 }
 
 /** Sprite asset manifest: key → { path, width, height }. */
-export const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
+interface SpriteAsset {
+  key: string;
+  path: string;
+  w: number;
+  h: number;
+  cropX?: number;
+}
+async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
+  const image = await loadImage(entry.path);
+  if (entry.cropX === undefined) return image;
+  try {
+    return await createImageBitmap(image, entry.cropX, 0, entry.w, entry.h);
+  } finally {
+    image.close();
+  }
+}
+export const SPRITE_MANIFEST: SpriteAsset[] = [
+  ...TRAIN_CARRIAGES.map((c) => ({
+    key: c.type,
+    path: trainBank.image,
+    w: c.width,
+    h: trainBank.height,
+    cropX: c.x,
+  })),
   { key: "train-local-v1", path: trainBank.image, w: trainBank.width, h: trainBank.height },
   { key: "railway-review-v1", path: "assets/tilesets/railway-review-v1.png", w: 16, h: 16 },
   { key: "door-butcher-v1", path: "assets/sprites/door-butcher-v1.png", w: 16, h: 32 },
@@ -126,7 +150,7 @@ export async function loadTerrainAssets(blendGraph: BlendGraph): Promise<GameAss
 export async function loadGameAssets(blendGraph: BlendGraph): Promise<GameAssets> {
   const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
     loadTerrainAssets(blendGraph),
-    Promise.all(SPRITE_MANIFEST.map((m) => loadImage(m.path))),
+    Promise.all(SPRITE_MANIFEST.map(loadSpriteAsset)),
     loadImage("assets/tilesets/modern-interiors-atlas.png"),
   ]);
   for (const [i, manifest] of SPRITE_MANIFEST.entries()) {
@@ -201,7 +225,7 @@ export async function loadSceneAssets(
     if (!keys.has(entry.key) || assets.sheets.has(entry.key)) continue;
     let pending = loads.get(entry.key);
     if (!pending) {
-      pending = loadImage(entry.path)
+      pending = loadSpriteAsset(entry)
         .then((image) => {
           if (closedAssets.has(assets)) image.close();
           else assets.sheets.set(entry.key, new Spritesheet(image, entry.w, entry.h));

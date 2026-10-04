@@ -155,3 +155,16 @@ The subsequent [road-over-rail engine proof](../tactical/058-road-rail-crossing-
 uses the actual horizontal service below a walkable road deck. It validates
 clearance and stacked actor ordering without changing regional generation or
 claiming train grades, curved-carriage art or an approved bridge kit.
+
+
+## Per-carriage grade proof
+
+[Train grade lab](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train-grades#/tool/world-geometry)
+and [tactical 061](../tactical/061-train-grade-proof.md) add opt-in authored
+horizontal routes with three replicated native sections, separate footprint
+support/clearance and a single service record retaining all heights and speed.
+The shared Realm/renderer handles each body; dependency terrain is readied before
+restoration publishes the group. Generated services remain on flat single-body
+routes and older records remain readable. This lab is pending human review;
+carriages stay horizontal, so slope joins expose the remaining articulation/art
+gap. Review before selecting one small generated structure crossing.

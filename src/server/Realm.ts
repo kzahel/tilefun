@@ -810,7 +810,7 @@ export class Realm {
         this.worldAPI.tick.firePre(stepDt);
 
         for (const service of this.railway?.services.values() ?? [])
-          preSteppedEntityIds.add(service.entity.id);
+          for (const car of service.carriages) preSteppedEntityIds.add(car.id);
         for (const vehicle of this.traffic?.states.values() ?? [])
           preSteppedEntityIds.add(vehicle.entity.id);
         for (const player of players) {
@@ -1493,6 +1493,7 @@ export class Realm {
           this.entityManager,
           this.propManager,
           this.saveManager,
+          (range) => this.ensureReady(range),
         )
       : null;
     if (this.traffic)

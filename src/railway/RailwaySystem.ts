@@ -1,17 +1,22 @@
+import { required } from "../art/ArtCatalog.js";
 import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import type { SaveManager } from "../persistence/SaveManager.js";
+import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { RoadType } from "../road/RoadType.js";
 import type { InterestTicket } from "../server/InterestManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { RailLine } from "./RailwayPlanner.js";
-import { createTrain, TRAIN_LENGTH } from "./Train.js";
+import { createTrain, createTrainCarriages, TRAIN_LENGTH } from "./Train.js";
 
 /** Straight horizontal route in tile coordinates, independent of town planning. */
-export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end">;
+export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end"> & {
+  /** Authored straight grade proof. Generated services retain their flat whole-train body. */
+  surfaceFollowing?: { startZ: number; endZ: number; startAtEnd?: boolean };
+};
 export interface RailRouteSource {
   query(bounds: { minX: number; maxX: number; minY: number; maxY: number }): RailRoute[];
 }
@@ -22,10 +27,13 @@ export interface RailServiceRecord {
   target: 0 | 1;
   dwell: number;
   deleted: boolean;
+  heights?: number[];
+  speed?: number;
 }
 export interface RailService {
   line: RailRoute;
   entity: Entity;
+  carriages: Entity[];
   record: RailServiceRecord;
   speed: number;
   retiring: boolean;
@@ -47,12 +55,14 @@ export class RailwaySystem {
     readonly entities: EntityManager,
     readonly props: PropManager,
     readonly saves: SaveManager,
+    readonly prepare?: (range: ChunkRange) => Promise<void>,
   ) {
     entities.removalListeners.add((entity, destroyed) => {
       if (!destroyed) return;
-      const state = [...this.services.values()].find((s) => s.entity === entity);
+      const state = [...this.services.values()].find((s) => s.carriages.includes(entity));
       if (state) {
         state.record.deleted = true;
+        for (const car of state.carriages) if (car.velocity) car.velocity.vx = 0;
         state.speed = 0;
         this.dirty(state);
       }
@@ -60,6 +70,8 @@ export class RailwaySystem {
   }
   private dirty(s: RailService) {
     s.record.x = s.entity.position.wx;
+    s.record.speed = s.speed;
+    if (s.line.surfaceFollowing) s.record.heights = s.carriages.map((c) => c.wz ?? 0);
     this.saves.markRecordDirty("railServices", s.line.id, () => ({
       collection: "railServices",
       key: s.line.id,
@@ -102,7 +114,7 @@ export class RailwaySystem {
       if (!this.wanted.has(s.line.id) && !s.retiring) {
         s.retiring = true;
         s.speed = 0;
-        if (s.entity.velocity) s.entity.velocity.vx = 0;
+        for (const car of s.carriages) if (car.velocity) car.velocity.vx = 0;
         this.dirty(s);
         const task = this.saves
           .flushSnapshot()
@@ -111,7 +123,7 @@ export class RailwaySystem {
               s.retiring = false;
               return;
             }
-            this.entities.remove(s.entity.id, false);
+            for (const car of s.carriages) this.entities.remove(car.id, false);
             this.services.delete(s.line.id);
           })
           .catch((e) => {
@@ -137,25 +149,59 @@ export class RailwaySystem {
         !Number.isFinite(saved.dwell) ||
         saved.dwell < 0 ||
         saved.dwell > DWELL ||
-        typeof saved.deleted !== "boolean")
+        typeof saved.deleted !== "boolean" ||
+        !Number.isFinite(saved.speed ?? 0) ||
+        (saved.speed ?? 0) < 0 ||
+        (saved.speed ?? 0) > SPEED ||
+        (line.surfaceFollowing &&
+          (saved.heights?.length !== 3 ||
+            !saved.heights.every((z) => Number.isFinite(z) && Math.abs(z) <= 4096))))
     )
       throw Error("Invalid saved railway service");
     const record = saved ?? {
       version: 1 as const,
-      x: line.start * 16,
-      target: 1 as const,
+      x: (line.surfaceFollowing?.startAtEnd ? line.end : line.start) * 16,
+      target: line.surfaceFollowing?.startAtEnd ? (0 as const) : (1 as const),
       dwell: DWELL,
       deleted: false,
     };
-    const entity = createTrain(record.x, line.y * 16);
-    entity.proceduralId = `${line.id}:train`;
-    const state = { line, record: { ...record }, entity, speed: 0, retiring: false };
+    const grade = line.surfaceFollowing;
+    const carriages = grade
+      ? createTrainCarriages(
+          record.x,
+          line.y * 16,
+          saved?.heights ?? Array(3).fill(grade.startAtEnd ? grade.endZ : grade.startZ),
+        )
+      : [createTrain(record.x, line.y * 16)];
+    const entity = required(carriages[grade ? 1 : 0]);
+    carriages.forEach((car, i) => {
+      car.proceduralId = grade ? `${line.id}:carriage:${i}` : `${line.id}:train`;
+    });
+    const state: RailService = {
+      line,
+      record: { ...record },
+      entity,
+      carriages,
+      speed: saved?.speed ?? 0,
+      retiring: false,
+    };
+    if (!record.deleted) {
+      // Restored trains may be far from the observer. Publish only after their
+      // complete dependency footprint is ready, not just the player's chunks.
+      await this.prepare?.(this.range(state));
+      if (this.closed || !this.wanted.has(line.id)) return;
+      try {
+        for (const car of carriages) this.entities.spawn(car);
+      } catch (error) {
+        for (const car of carriages) if (car.id) this.entities.remove(car.id, false);
+        throw error;
+      }
+    }
     this.services.set(line.id, state);
-    if (!record.deleted) this.entities.spawn(entity);
     this.dirty(state);
   }
   range(s: RailService): ChunkRange {
-    const margin = TRAIN_LENGTH / 2 + (SPEED * SPEED) / (2 * ACCEL) + 64;
+    const margin = TRAIN_LENGTH / 2 + 12 + (SPEED * SPEED) / (2 * ACCEL) + 64;
     return {
       minCx: Math.floor((s.entity.position.wx - margin) / 256),
       maxCx: Math.floor((s.entity.position.wx + margin) / 256),
@@ -172,9 +218,18 @@ export class RailwaySystem {
     if (this.closed || this.saves.pressured) return;
     for (const s of this.services.values()) {
       const e = s.entity;
-      if (s.record.deleted || s.retiring || !e.velocity || !e.collider) continue;
-      e.prevPosition = { ...e.position };
-      e.velocity.vx = 0;
+      if (s.record.deleted) {
+        // Removal listeners run before EntityManager splices the original body.
+        // Retire siblings here, outside that mutation, to preserve array/index consistency.
+        for (const car of s.carriages) this.entities.remove(car.id, false);
+        continue;
+      }
+      if (s.retiring || !e.velocity || !e.collider) continue;
+      for (const car of s.carriages) {
+        car.prevPosition = { ...car.position };
+        car.prevWz = car.wz ?? 0;
+        if (car.velocity) car.velocity.vx = 0;
+      }
       if (!ready(this.range(s))) {
         s.speed = 0;
         e.velocity.vx = 0;
@@ -203,69 +258,116 @@ export class RailwaySystem {
         }
         s.speed = Math.min(SPEED, s.speed + ACCEL * step, Math.sqrt(2 * ACCEL * distance));
         const dx = sign * Math.min(distance, s.speed * step);
-        const current = getEntityAABB(e.position, e.collider),
-          next = getEntityAABB({ wx: e.position.wx + dx, wy: e.position.wy }, e.collider);
-        const swept = {
-          left: Math.min(current.left, next.left),
-          right: Math.max(current.right, next.right),
-          top: current.top,
-          bottom: current.bottom,
-        };
-        let blocked = false;
-        for (let tx = Math.floor(swept.left / 16); tx <= Math.floor(swept.right / 16); tx++)
-          for (
-            let ty = Math.floor(swept.top / 16);
-            ty <= Math.floor((swept.bottom - 0.001) / 16);
-            ty++
-          ) {
-            const chunk = this.world.getChunkIfLoaded(Math.floor(tx / 16), Math.floor(ty / 16));
-            const road = chunk?.getRoad(((tx % 16) + 16) % 16, ((ty % 16) + 16) % 16);
-            if (
-              !chunk ||
-              ![RoadType.RailHorizontalTop, RoadType.RailHorizontalBottom].includes(road ?? 0) ||
-              this.world.getHeightAt(tx, ty) !== 0
-            )
-              blocked = true;
-          }
-        for (const other of this.entities.spatialHash.queryRange(
-          Math.floor(swept.left / 256),
-          Math.floor(swept.top / 256),
-          Math.floor(swept.right / 256),
-          Math.floor(swept.bottom / 256),
-        ))
-          if (
-            other !== e &&
-            other.collider &&
-            other.collider.solid !== false &&
-            (other.wz ?? 0) < 44 &&
-            (other.wz ?? 0) + (other.collider.physicalHeight ?? Infinity) > 0 &&
-            aabbsOverlap(swept, getEntityAABB(other.position, other.collider))
-          )
-            blocked = true;
-        for (const p of this.props.getPropsInChunkRange(
-          Math.floor(swept.left / 256),
-          Math.floor(swept.top / 256),
-          Math.floor(swept.right / 256),
-          Math.floor(swept.bottom / 256),
-        ))
-          if (aabbOverlapsPropWalls(swept, p.position, p, 0, 44)) blocked = true;
-        if (blocked) {
+        const poses = this.probe(s, dx);
+        if (!poses) {
           s.speed = 0;
           e.velocity.vx = 0;
           break;
         }
-        e.position.wx += dx;
-        e.velocity.vx = dx / step;
-        if (e.sprite) {
-          e.sprite.direction = sign > 0 ? Direction.Right : Direction.Left;
-          e.sprite.frameRow = 0;
-          e.sprite.flipX = false;
+        for (const [j, car] of s.carriages.entries()) {
+          car.position.wx += dx;
+          car.wz = car.groundZ = required(poses[j]);
+          if (car.velocity) car.velocity.vx = dx / step;
+          if (car.sprite) {
+            car.sprite.direction = sign > 0 ? Direction.Right : Direction.Left;
+            car.sprite.frameRow = 0;
+            car.sprite.flipX = false;
+          }
         }
       }
-      if (e.sprite) e.sprite.moving = e.velocity.vx !== 0;
-      this.entities.spatialHash.update(e);
+      for (const car of s.carriages) {
+        if (car.velocity) car.velocity.vx = e.velocity.vx;
+        if (car.sprite) car.sprite.moving = e.velocity.vx !== 0;
+        this.entities.spatialHash.update(car);
+      }
       this.dirty(s);
     }
+  }
+  /** Probe every carriage before committing any pose; one obstruction stops the service.
+   * Small substeps bound grade changes and prevent selecting another stacked floor. */
+  private probe(s: RailService, dx: number): number[] | undefined {
+    const heights: number[] = [];
+    for (const car of s.carriages) {
+      const collider = required(car.collider),
+        height = collider.physicalHeight ?? 44;
+      const position = { wx: car.position.wx + dx, wy: car.position.wy };
+      const current = getEntityAABB(car.position, collider),
+        next = getEntityAABB(position, collider);
+      const swept = {
+        left: Math.min(current.left, next.left),
+        right: Math.max(current.right, next.right),
+        top: current.top,
+        bottom: current.bottom,
+      };
+      const range = {
+        minCx: Math.floor(swept.left / 256),
+        maxCx: Math.floor(swept.right / 256),
+        minCy: Math.floor(swept.top / 256),
+        maxCy: Math.floor(swept.bottom / 256),
+      };
+      for (let tx = Math.floor(swept.left / 16); tx <= Math.floor((swept.right - 0.001) / 16); tx++)
+        for (
+          let ty = Math.floor(swept.top / 16);
+          ty <= Math.floor((swept.bottom - 0.001) / 16);
+          ty++
+        ) {
+          const chunk = this.world.getChunkIfLoaded(Math.floor(tx / 16), Math.floor(ty / 16));
+          const road = chunk?.getRoad(((tx % 16) + 16) % 16, ((ty % 16) + 16) % 16);
+          if (
+            !chunk ||
+            ![RoadType.RailHorizontalTop, RoadType.RailHorizontalBottom].includes(road ?? 0) ||
+            (!s.line.surfaceFollowing && this.world.getHeightAt(tx, ty) !== 0)
+          )
+            return;
+        }
+      const props = this.props.getPropsInChunkRange(
+        range.minCx,
+        range.minCy,
+        range.maxCx,
+        range.maxCy,
+      );
+      const beforeZ = car.wz ?? 0;
+      const z = s.line.surfaceFollowing
+        ? resolveGroundZForTracking(
+            { ...car, position },
+            (x, y) => this.world.getHeightAt(x, y),
+            props,
+            [],
+          )
+        : 0;
+      if (Math.abs(z - beforeZ) > Math.abs(dx) * 0.5 + 0.001) return;
+      // On a slope the support itself intersects the swept vertical envelope.
+      // Test both endpoint bodies against slabs; substeps move at most 3.2px.
+      for (const p of props)
+        if (
+          aabbOverlapsPropWalls(current, p.position, p, beforeZ, height) ||
+          aabbOverlapsPropWalls(next, p.position, p, z, height)
+        )
+          return;
+      for (const other of this.entities.spatialHash.queryRange(
+        range.minCx,
+        range.minCy,
+        range.maxCx,
+        range.maxCy,
+      )) {
+        if (
+          s.carriages.includes(other) ||
+          !other.collider ||
+          other.collider.solid === false ||
+          other.flashHidden
+        )
+          continue;
+        const base = other.wz ?? 0;
+        if (
+          base >= Math.max(z, beforeZ) + height ||
+          base + (other.collider.physicalHeight ?? Infinity) <= Math.min(z, beforeZ)
+        )
+          continue;
+        if (aabbsOverlap(swept, getEntityAABB(other.position, other.collider))) return;
+      }
+      heights.push(z);
+    }
+    return heights;
   }
   async settle() {
     await Promise.all(this.pending.values());

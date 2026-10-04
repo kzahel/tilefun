@@ -178,3 +178,21 @@ describe("generated railway", () => {
     await f.saves.close();
   });
 });
+
+it("replicates independent carriage geometry and contiguous crops from the unchanged train bank", async () => {
+  const { TRAIN_CARRIAGES, createTrainCarriages } = await import("./Train.js");
+  const cars = createTrainCarriages(0, 0, [0, 12, 36]);
+  for (const [i, car] of cars.entries()) {
+    const copy = deserializeEntity(serializeEntity(car));
+    expect(copy.wz).toBe([0, 12, 36][i]);
+    expect(copy.sprite?.sheetKey).toBe(car.type);
+    expect(copy.sprite?.spriteWidth).toBe(car.sprite?.spriteWidth);
+    expect(copy.collider).toEqual(car.collider);
+  }
+  expect(TRAIN_CARRIAGES.map((c) => [c.x, c.width])).toEqual([
+    [0, 136],
+    [136, 160],
+    [296, 160],
+  ]);
+  expect(TRAIN_CARRIAGES.reduce((n, c) => n + c.width, 0)).toBe(bank.width);
+});

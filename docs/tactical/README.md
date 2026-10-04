@@ -106,6 +106,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [060 Fresh wildlife production](060-wildlife-fresh-production.md) | Fresh gpt-6.1-sol/high campaign; fixed-camera Blender guides and supervised animal pilots before background production; prior 027/028 preserved on backup branch |
 | [060 Vehicle grade proof](060-vehicle-grade-proof.md) | Implemented for review: cars on bridge and garage ramps through production traffic; [world geometry](../topics/world-geometry.md) |
 
+| [061 Train grade proof](061-train-grade-proof.md) | Implemented for review: per-carriage bridge/tunnel heights, clearance and persistence; [trains](../topics/trains.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in
