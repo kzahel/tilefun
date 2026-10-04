@@ -71,6 +71,7 @@ export function sanitizeReport(report) {
       "input",
       "renderer",
       "terrainPacing",
+      "diagnosticUncachedImageSizes",
       "noclip",
       "meshes",
       "motionZooms",
@@ -82,6 +83,15 @@ export function sanitizeReport(report) {
     fixtures: report.fixtures.map((f) => ({
       ...pick(f, ["version", "zoom", "displayCadenceMs", "failures"]),
       pageErrorCount: f.errors.length,
+      ...(f.thermals
+        ? {
+            thermals: {
+              ...pick(f.thermals, ["gateMaxBatteryC"]),
+              before: pick(f.thermals.before, ["batteryC", "thermalStatus"]),
+              after: pick(f.thermals.after, ["batteryC", "thermalStatus"]),
+            },
+          }
+        : {}),
       arrival: pick(f.arrival, ["x", "y", "generation"]),
       display: pick(f.display, ["viewport", "canvas", "devicePixelRatio"]),
       samples: f.samples.map((s) => ({

@@ -27,6 +27,12 @@ function raw() {
         version: "current",
         zoom: 0.1,
         displayCadenceMs: 8.33,
+        thermals: {
+          before: { batteryC: 29, thermalStatus: 0, deviceId: "secret" },
+          after: { batteryC: 30, thermalStatus: 0 },
+          gateMaxBatteryC: 31,
+          secret: "secret",
+        },
         failures: ["entry-catchup: timeout"],
         errors: ["secret URL"],
         arrival: { x: 300, y: 519 },
@@ -112,4 +118,16 @@ test("CPU profile summary excludes origins and weights sampled functions", async
     timeDeltas: [1000, 2000],
   });
   assert.deepEqual(result, [{ functionName: "/src/rendering/Draw.ts:draw", selfMs: 3 }]);
+});
+
+test("uncached GPU control fails closed when the production branch changes", async () => {
+  const { disableImageDimensionCache } = await import("./streaming-dimension-control.mjs");
+  const { readFileSync } = await import("node:fs");
+  const source = readFileSync(
+    new URL("../src/rendering/GpuRasterSurface.ts", import.meta.url),
+    "utf8",
+  );
+  assert.match(disableImageDimensionCache(source), /if \(false\) \{/);
+  assert.throws(() => disableImageDimensionCache("unexpected source"));
+  assert.throws(() => disableImageDimensionCache(source + source));
 });

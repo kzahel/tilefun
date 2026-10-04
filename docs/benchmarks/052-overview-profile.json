@@ -1,0 +1,564 @@
+{
+  "schema": 1,
+  "limits": [
+    "Opt-in CPU and method instrumentation adds overhead; these profiles attribute work, not before/after speed.",
+    "Counter hooks span a slightly wider window than frame sampling.",
+    "A creation is a newly allocated page, not proof the source was never resident in an earlier stage.",
+    "Raw Chrome profiles stay outside Git."
+  ],
+  "profiles": [
+    {
+      "label": "canvas-profile",
+      "renderer": "canvas",
+      "stage": "recovery-warm",
+      "zoom": 0.1,
+      "profile": {
+        "totals": {
+          "submit:clear": {
+            "calls": 122,
+            "ms": 0.8999999947845936,
+            "items": 0
+          },
+          "prepareTerrain": {
+            "calls": 122,
+            "ms": 12.399999998509884,
+            "items": 0
+          },
+          "collectTerrain": {
+            "calls": 122,
+            "ms": 2.3999999947845936,
+            "items": 0
+          },
+          "submit:terrain": {
+            "calls": 122,
+            "ms": 48.49999998509884,
+            "items": 26962
+          },
+          "collectElevationItems": {
+            "calls": 122,
+            "ms": 3.800000000745058,
+            "items": 0
+          },
+          "submit:scene": {
+            "calls": 122,
+            "ms": 4585.500000011176,
+            "items": 3717584
+          }
+        },
+        "uploads": {},
+        "evictions": {},
+        "cpu": [
+          {
+            "functionName": "browser/benchmark:restore",
+            "selfMs": 2741.119
+          },
+          {
+            "functionName": "browser/benchmark:drawImage",
+            "selfMs": 1070.194
+          },
+          {
+            "functionName": "browser/benchmark:(program)",
+            "selfMs": 288.95
+          },
+          {
+            "functionName": "/src/rendering/collectScene.ts:collectScene",
+            "selfMs": 229.301
+          },
+          {
+            "functionName": "browser/benchmark:save",
+            "selfMs": 211.17
+          },
+          {
+            "functionName": "browser/benchmark:rotate",
+            "selfMs": 171.131
+          },
+          {
+            "functionName": "/src/rendering/GrassBladeRenderer.ts:getBlades",
+            "selfMs": 141.989
+          },
+          {
+            "functionName": "/src/rendering/collectScene.ts:(anonymous)",
+            "selfMs": 119.459
+          },
+          {
+            "functionName": "browser/benchmark:translate",
+            "selfMs": 113.832
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawGrass",
+            "selfMs": 107.573
+          },
+          {
+            "functionName": "browser/benchmark:(garbage collector)",
+            "selfMs": 43.183
+          },
+          {
+            "functionName": "/src/rendering/RenderFrame.ts:collectSceneOrder",
+            "selfMs": 16.381
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawScenePass2D",
+            "selfMs": 14.922
+          },
+          {
+            "functionName": "browser/benchmark:postMessage",
+            "selfMs": 9.545
+          },
+          {
+            "functionName": "browser/benchmark:time",
+            "selfMs": 9.188
+          },
+          {
+            "functionName": "browser/benchmark:callbacks.render",
+            "selfMs": 9.079
+          },
+          {
+            "functionName": "/src/assets/SpriteCatalog.ts:spriteRegion",
+            "selfMs": 7.082
+          },
+          {
+            "functionName": "/src/world/ChunkManager.ts:get",
+            "selfMs": 6.386
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawSceneEntry2D",
+            "selfMs": 6.04
+          },
+          {
+            "functionName": "/src/rendering/GrassBladeRenderer.ts:appendGrassBladeItems",
+            "selfMs": 5.612
+          },
+          {
+            "functionName": "/src/client/DoorPresentation.ts:appendOverlays",
+            "selfMs": 4.8
+          },
+          {
+            "functionName": "/src/rendering/Projection.ts:projectWorld",
+            "selfMs": 4.7
+          },
+          {
+            "functionName": "/src/scenes/renderWorld.ts:renderEntities",
+            "selfMs": 4.548
+          },
+          {
+            "functionName": "/src/rendering/DebugPanel.ts:get terrainPacing",
+            "selfMs": 3.493
+          },
+          {
+            "functionName": "/src/scenes/PlayScene.ts:render",
+            "selfMs": 3.365
+          },
+          {
+            "functionName": "browser/benchmark:owner.<computed>",
+            "selfMs": 3.154
+          },
+          {
+            "functionName": "/src/generation/regional/DenseDoorThresholds.ts:denseDoorThresholds",
+            "selfMs": 3.115
+          },
+          {
+            "functionName": "/src/client/DoorPresentation.ts:update",
+            "selfMs": 3.046
+          },
+          {
+            "functionName": "browser/benchmark:(anonymous)",
+            "selfMs": 3.037
+          },
+          {
+            "functionName": "/src/generation/regional/DenseDoorThresholds.ts:(anonymous)",
+            "selfMs": 3.031
+          }
+        ]
+      },
+      "renderMs": {
+        "count": 111,
+        "p50": 42.19999999925494,
+        "p95": 46.80000000074506,
+        "p99": 48.69999999925494,
+        "max": 49.19999999925494
+      },
+      "frameIntervalsMs": {
+        "count": 110,
+        "p50": 42.599999999998545,
+        "p95": 51.099999999998545,
+        "p99": 51.599999999998545,
+        "max": 56.79999999999927
+      },
+      "terrainRows": 0,
+      "uploadedBytes": null
+    },
+    {
+      "label": "gpu-profile",
+      "renderer": "gpu",
+      "stage": "recovery-warm",
+      "zoom": 0.1,
+      "profile": {
+        "totals": {
+          "submit:clear": {
+            "calls": 426,
+            "ms": 4.900000028312206,
+            "items": 0
+          },
+          "prepareTerrain": {
+            "calls": 426,
+            "ms": 27.49999999254942,
+            "items": 0
+          },
+          "collectTerrain": {
+            "calls": 426,
+            "ms": 11.6999999769032,
+            "items": 0
+          },
+          "submit:terrain": {
+            "calls": 426,
+            "ms": 164.899999987334,
+            "items": 94146
+          },
+          "collectElevationItems": {
+            "calls": 426,
+            "ms": 17.19999996945262,
+            "items": 0
+          },
+          "submit:scene": {
+            "calls": 426,
+            "ms": 2566.700000010431,
+            "items": 13045398
+          }
+        },
+        "uploads": {},
+        "evictions": {},
+        "cpu": [
+          {
+            "functionName": "/src/rendering/collectScene.ts:collectScene",
+            "selfMs": 782.095
+          },
+          {
+            "functionName": "/src/rendering/GrassBladeRenderer.ts:getBlades",
+            "selfMs": 632.915
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:size",
+            "selfMs": 541.517
+          },
+          {
+            "functionName": "/src/rendering/collectScene.ts:(anonymous)",
+            "selfMs": 477.466
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawGrass",
+            "selfMs": 456.756
+          },
+          {
+            "functionName": "browser/benchmark:(program)",
+            "selfMs": 425.73
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:drawImage",
+            "selfMs": 425.642
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:quad",
+            "selfMs": 415.576
+          },
+          {
+            "functionName": "browser/benchmark:owner.<computed>",
+            "selfMs": 278.646
+          },
+          {
+            "functionName": "browser/benchmark:(anonymous)",
+            "selfMs": 149.102
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:page",
+            "selfMs": 77.532
+          },
+          {
+            "functionName": "browser/benchmark:bufferSubData",
+            "selfMs": 61.41
+          },
+          {
+            "functionName": "browser/benchmark:(garbage collector)",
+            "selfMs": 45.201
+          },
+          {
+            "functionName": "/src/rendering/RenderFrame.ts:collectSceneOrder",
+            "selfMs": 44.352
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawScenePass2D",
+            "selfMs": 39.37
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawSceneEntry2D",
+            "selfMs": 37.757
+          },
+          {
+            "functionName": "/src/rendering/GrassBladeRenderer.ts:appendGrassBladeItems",
+            "selfMs": 27.069
+          },
+          {
+            "functionName": "browser/benchmark:callbacks.render",
+            "selfMs": 26.867
+          },
+          {
+            "functionName": "dependency:WebGLRenderer.renderBufferDirect",
+            "selfMs": 26.239
+          },
+          {
+            "functionName": "/src/rendering/ElevationDescriptorCache.ts:collect",
+            "selfMs": 16.193
+          },
+          {
+            "functionName": "dependency:WebGLRenderer.render",
+            "selfMs": 13.572
+          },
+          {
+            "functionName": "dependency:setProgram",
+            "selfMs": 12.059
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:beginFrame",
+            "selfMs": 10.531
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:flush",
+            "selfMs": 10.302
+          },
+          {
+            "functionName": "browser/benchmark:depthMask",
+            "selfMs": 10.247
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:fill",
+            "selfMs": 9.407
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:(anonymous)",
+            "selfMs": 9.049
+          },
+          {
+            "functionName": "browser/benchmark:disable",
+            "selfMs": 8.749
+          },
+          {
+            "functionName": "/src/rendering/CanvasTerrainResources.ts:retainCoordinates",
+            "selfMs": 8.539
+          },
+          {
+            "functionName": "/src/scenes/renderWorld.ts:renderEntities",
+            "selfMs": 8.452
+          }
+        ]
+      },
+      "renderMs": {
+        "count": 413,
+        "p50": 11.399999998509884,
+        "p95": 12.100000001490116,
+        "p99": 16.300000000745058,
+        "max": 18.099999997764826
+      },
+      "frameIntervalsMs": {
+        "count": 412,
+        "p50": 10,
+        "p95": 17.5,
+        "p99": 18.100000000000364,
+        "max": 23
+      },
+      "terrainRows": 0,
+      "uploadedBytes": 0
+    },
+    {
+      "label": "phone-profile",
+      "renderer": "gpu",
+      "stage": "recovery-warm",
+      "zoom": 0.1,
+      "profile": {
+        "totals": {
+          "submit:clear": {
+            "calls": 280,
+            "ms": 30.399999618530273,
+            "items": 0
+          },
+          "prepareTerrain": {
+            "calls": 280,
+            "ms": 50.50000011920929,
+            "items": 0
+          },
+          "collectTerrain": {
+            "calls": 280,
+            "ms": 14.70000022649765,
+            "items": 0
+          },
+          "submit:terrain": {
+            "calls": 280,
+            "ms": 234.10000014305115,
+            "items": 21840
+          },
+          "collectElevationItems": {
+            "calls": 280,
+            "ms": 16.999999821186066,
+            "items": 0
+          },
+          "submit:scene": {
+            "calls": 280,
+            "ms": 2498.399999856949,
+            "items": 2984620
+          }
+        },
+        "uploads": {
+          "sheet:vehicle-v1:bus-5:creation": {
+            "count": 1,
+            "bytes": 688128
+          },
+          "sheet:vehicle-v1:unindexed-sedan-cyan:creation": {
+            "count": 1,
+            "bytes": 688128
+          },
+          "sheet:vehicle-v1:car-24:creation": {
+            "count": 1,
+            "bytes": 688128
+          }
+        },
+        "evictions": {},
+        "cpu": [
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:size",
+            "selfMs": 996.615
+          },
+          {
+            "functionName": "browser/benchmark:(idle)",
+            "selfMs": 727.066
+          },
+          {
+            "functionName": "browser/benchmark:(program)",
+            "selfMs": 698.591
+          },
+          {
+            "functionName": "/src/rendering/collectScene.ts:collectScene",
+            "selfMs": 394.071
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawSceneEntry2D",
+            "selfMs": 392.083
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:quad",
+            "selfMs": 331.836
+          },
+          {
+            "functionName": "/src/rendering/GrassBladeRenderer.ts:getBlades",
+            "selfMs": 304.438
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:drawImage",
+            "selfMs": 228.991
+          },
+          {
+            "functionName": "/src/rendering/collectScene.ts:(anonymous)",
+            "selfMs": 133.033
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:page",
+            "selfMs": 123.1
+          },
+          {
+            "functionName": "browser/benchmark:(garbage collector)",
+            "selfMs": 117.111
+          },
+          {
+            "functionName": "/src/rendering/Canvas2DRenderer.ts:drawScenePass2D",
+            "selfMs": 106.146
+          },
+          {
+            "functionName": "browser/benchmark:bufferSubData",
+            "selfMs": 84.949
+          },
+          {
+            "functionName": "browser/benchmark:owner.<computed>",
+            "selfMs": 50.095
+          },
+          {
+            "functionName": "/src/rendering/RenderFrame.ts:collectSceneOrder",
+            "selfMs": 27.115
+          },
+          {
+            "functionName": "browser/benchmark:callbacks.render",
+            "selfMs": 25.173
+          },
+          {
+            "functionName": "browser/benchmark:postMessage",
+            "selfMs": 24.047
+          },
+          {
+            "functionName": "dependency:WebGLRenderer.render",
+            "selfMs": 22.554
+          },
+          {
+            "functionName": "browser/benchmark:(anonymous)",
+            "selfMs": 21.955
+          },
+          {
+            "functionName": "browser/benchmark:bindTexture",
+            "selfMs": 20.526
+          },
+          {
+            "functionName": "/src/scenes/renderWorld.ts:renderEntities",
+            "selfMs": 20.15
+          },
+          {
+            "functionName": "/src/world/ChunkManager.ts:get",
+            "selfMs": 19.594
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:(anonymous)",
+            "selfMs": 19.261
+          },
+          {
+            "functionName": "dependency:WebGLRenderer.renderBufferDirect",
+            "selfMs": 18.295
+          },
+          {
+            "functionName": "browser/benchmark:drawImage",
+            "selfMs": 17.172
+          },
+          {
+            "functionName": "/src/rendering/GrassFrameBuffer.ts:begin",
+            "selfMs": 15.149
+          },
+          {
+            "functionName": "/src/scenes/PlayScene.ts:drawGemHUD",
+            "selfMs": 14.781
+          },
+          {
+            "functionName": "dependency:disable",
+            "selfMs": 14.765
+          },
+          {
+            "functionName": "/src/rendering/GpuRasterSurface.ts:flush",
+            "selfMs": 14.725
+          },
+          {
+            "functionName": "/src/client/DoorPresentation.ts:update",
+            "selfMs": 13.932
+          }
+        ]
+      },
+      "renderMs": {
+        "count": 266,
+        "p50": 13.599999964237213,
+        "p95": 15.100000023841858,
+        "p99": 18.099999964237213,
+        "max": 25.899999976158142
+      },
+      "frameIntervalsMs": {
+        "count": 265,
+        "p50": 16.69999999999709,
+        "p95": 33.30000000000291,
+        "p99": 33.400000000001455,
+        "max": 33.400000000001455
+      },
+      "terrainRows": 0,
+      "uploadedBytes": 2064384
+    }
+  ]
+}

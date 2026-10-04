@@ -1,6 +1,6 @@
 # 052: Overview drawing and warm GPU uploads
 
-Status: investigating. Owner: [performance](../topics/performance.md).
+Status: validating (GPU fix and browser checks complete; final phone repeats pending). Owner: [performance](../topics/performance.md).
 
 ## Slices
 
@@ -41,3 +41,37 @@ game and embedded labs; they do not reduce grass density or change animation.
 A concurrent unrelated browser suite overlapped the first unprofiled Mac baseline;
 that run is excluded and will be repeated after the suite exits. Phone timings
 execute on the physical device; host concurrency during serving is recorded.
+
+
+## Candidate selection
+
+The Canvas transform shortcut is **not retained**. Its matrix-object variant
+was slower despite passing ten exact-pixel fixtures (zoom, rotated/scaled
+parent, clip, mixed particles). A subsequent numeric identity-reset experiment
+only moved Mac overview motion render p95 from 47.7 to 42.8 ms, with worse
+stationary recovery timing; it was discarded before broader validation. That is insufficient evidence for extending the shared drawing
+surface. Canvas keeps the original implementation. This suggests native draw
+submission cost needs a more substantial batching/detail strategy, measured
+separately before changing visual policy.
+
+The GPU candidate caches both `ImageBitmap` (the gameplay loader's decoded
+source) and `HTMLImageElement` dimensions once per synchronous frame. A first
+HTML-image-only control had no meaningful improvement because gameplay uses
+bitmaps. Mutable canvases still read dimensions at every draw; weak keys and
+resource reset prevent adding another source-retention owner.
+
+
+## Validation checkpoint
+
+Typechecks, 1,462 unit tests, six benchmark-tooling tests and lint pass (114
+existing warnings / 32 infos). Catalog/manifest generation and production build
+pass. All 312 browser tests pass, including native/GPU parity, the new decoded
+bitmap getter-count/recovery regression, graphics loss, renderer switching,
+Traffic and Outdoor Geometry lab behavior. The legacy streaming `--assert-ready`
+check passes. No artwork or Canvas rendering policy changed.
+
+The matched Mac 0.1× control uses identical code and a benchmark-only Vite
+transform to disable just the decoded-image dimension-cache branch. Over 20
+seconds of noclip motion, render CPU p95 is 11.6 ms uncached versus 10.0 ms cached;
+calibrated missed intervals are 534/1,864 versus 217/2,183. Frame-interval p95 is
+17.1 versus 16.7 ms, still above the approximately 8.3 ms display target.

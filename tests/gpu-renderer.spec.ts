@@ -332,3 +332,59 @@ test("debug renderer selector switches live without replacing the game or Worker
   await original.dispose();
   expect(errors).toEqual([]);
 });
+
+test("GPU reads decoded image dimensions once per frame and resets on recovery", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(async () => {
+    const surface = (
+      window as unknown as {
+        rendererLab: {
+          gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+        };
+      }
+    ).rendererLab.gpu.surface;
+    const source = document.createElement("canvas");
+    source.width = source.height = 8;
+    source.getContext("2d")?.fillRect(0, 0, 8, 8);
+    const image = new Image();
+    image.src = source.toDataURL();
+    await image.decode();
+    // Gameplay uses ImageBitmap; decoded HTML images are supported too.
+    const bitmap = await createImageBitmap(image);
+    const width = Object.getOwnPropertyDescriptor(ImageBitmap.prototype, "width")?.get;
+    if (!width) throw Error("No bitmap width getter");
+    let reads = 0;
+    Object.defineProperty(bitmap, "width", {
+      get() {
+        reads++;
+        return width.call(bitmap);
+      },
+    });
+    surface.beginFrame();
+    for (let i = 0; i < 100; i++) surface.drawImage(bitmap, i, 0);
+    surface.flush();
+    const first = reads;
+    const uploads = surface.stats.uploads;
+    surface.beginFrame();
+    surface.drawImage(bitmap, 0, 0);
+    surface.flush();
+    const second = reads;
+    const reused = surface.stats.uploads === uploads;
+    surface.recover();
+    surface.drawImage(bitmap, 0, 0);
+    surface.flush();
+    return {
+      first,
+      second,
+      recovered: reads > second,
+      reused,
+      reuploaded: surface.stats.uploads === uploads + 1,
+    };
+  });
+  expect(result.first).toBeLessThanOrEqual(2);
+  expect(result.second).toBeGreaterThan(result.first);
+  expect(result).toMatchObject({ recovered: true, reused: true, reuploaded: true });
+});

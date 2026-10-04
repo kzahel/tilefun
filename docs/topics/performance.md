@@ -353,3 +353,20 @@ below the threshold **and** thermal status is zero, with a bounded
 readings fail closed. This controls entry conditions, not temperature throughout
 the run; keep charging state, workload and durations matched. The single runner
 owns these optional flags; matrix-level forwarding is not implemented yet.
+
+
+For a matched GPU counterfactual, `streaming:bench -- --renderer=gpu
+--uncached-image-sizes` disables only the new dimension cache in that run's
+isolated Vite transform. It uses the existing dynamic-source size lookup and
+records `diagnosticUncachedImageSizes`; it never changes production source or
+settings. Pair with identical movement/zoom/thermal flags. The transform fails
+closed if its source branch changes. Sanitized summaries retain this control
+marker and allowlisted before/after thermal readings.
+
+
+The GPU adapter now reads decoded `ImageBitmap`/HTML-image dimensions once per
+synchronous frame, instead of once per sprite/grass draw. Mutable canvases keep
+live dimension reads; the weak cache resets with graphics resources and does not
+retain unloaded sources. All game and lab GPU consumers share this adapter.
+Canvas remains unchanged after its transform experiment failed to show a
+consistent gain. 052 records the attribution and final comparison in progress.

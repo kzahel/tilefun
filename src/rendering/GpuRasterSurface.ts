@@ -54,6 +54,13 @@ export class GpuRasterSurface implements RasterSurface {
   private count = 0;
   private frame = 0;
   private readonly pages = new Map<CanvasImageSource, Page[]>();
+  // Decoded images cannot change asynchronously during synchronous submission.
+  // Read their DOM dimensions once per frame, retaining only weak source keys.
+  // Dynamic canvas sources continue through size() on every call.
+  private imageSizes = new WeakMap<
+    HTMLImageElement | ImageBitmap,
+    { frame: number; width: number; height: number }
+  >();
   private readonly scratch = document.createElement("canvas");
   private readonly colorContext: CanvasRenderingContext2D;
   private readonly colors = new Map<string, readonly number[]>();
@@ -174,6 +181,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.texture = null;
     for (const pages of this.pages.values()) for (const p of pages) p.texture.dispose();
     this.pages.clear();
+    this.imageSizes = new WeakMap();
     this.ellipses.clear();
     this.stats.textureBytes = 0;
     this.stats.textures = 0;
@@ -340,7 +348,20 @@ export class GpuRasterSurface implements RasterSurface {
     this.quad(this.white, x, y, w, h, 0, 0, 1, 1, this.color());
   }
   drawImage(image: CanvasImageSource, ...v: number[]) {
-    const dim = size(image);
+    let dim: { width: number; height: number };
+    if (image instanceof ImageBitmap || image instanceof HTMLImageElement) {
+      let cached = this.imageSizes.get(image);
+      if (!cached) {
+        cached = { frame: this.frame, ...size(image) };
+        this.imageSizes.set(image, cached);
+      } else if (cached.frame !== this.frame) {
+        const current = size(image);
+        cached.width = current.width;
+        cached.height = current.height;
+        cached.frame = this.frame;
+      }
+      dim = cached;
+    } else dim = size(image);
     let sx = 0,
       sy = 0,
       sw = dim.width,

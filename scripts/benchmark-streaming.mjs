@@ -8,6 +8,7 @@ import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 import { readAndroidThermals, waitForAndroidCool } from "./android-thermal-gate.mjs";
+import { disableImageDimensionCache } from "./streaming-dimension-control.mjs";
 import { installStreamingProfile, summarizeCpuProfile } from "./streaming-profile.mjs";
 
 const option = (key, fallback) =>
@@ -43,6 +44,9 @@ if (assertBounded && (terrainPacing !== "responsive" || !(zoomSweep || zoomMotio
   throw Error(
     "--assert-bounded requires --terrain-pacing=responsive and --zoom-sweep or --zoom-motion",
   );
+const uncachedImageSizes = process.argv.includes("--uncached-image-sizes");
+if (uncachedImageSizes && (renderer !== "gpu" || process.env.TILEFUN_DEV_URL))
+  throw Error("--uncached-image-sizes requires GPU and the isolated benchmark server");
 const meshes = process.argv.includes("--meshes");
 const noclip = process.argv.includes("--noclip");
 const headed = process.argv.includes("--headed");
@@ -102,7 +106,9 @@ let server, browser;
 let devicePage, deviceSession, testOrigin;
 let activeTraceSession;
 const failures = [];
+const cooldownAbort = new AbortController();
 const interrupt = () => {
+  cooldownAbort.abort();
   void (async () => {
     await devicePage?.close().catch(() => {});
     await browser?.close().catch(() => {});
@@ -124,6 +130,7 @@ const report = {
   ...(terrainRowBudget ? { diagnosticTerrainRowBudget: terrainRowBudget } : {}),
   ...(zoomRowBudget ? { diagnosticZoomRowBudget: zoomRowBudget } : {}),
   instrumentation,
+  ...(uncachedImageSizes ? { diagnosticUncachedImageSizes: true } : {}),
   terrainPacing,
   zoomSweep,
   zoomMotion,
@@ -144,7 +151,21 @@ try {
     server = await createServer({
       configFile: false,
       base: "/tilefun/",
-      plugins: [react()],
+      plugins: [
+        react(),
+        ...(uncachedImageSizes
+          ? [
+              {
+                name: "streaming-dimension-control",
+                enforce: "pre",
+                transform(code, id) {
+                  if (id.endsWith("/src/rendering/GpuRasterSurface.ts"))
+                    return disableImageDimensionCache(code);
+                },
+              },
+            ]
+          : []),
+      ],
       server: { host: "127.0.0.1", port, strictPort: true, hmr: false },
       logLevel: "error",
     });
@@ -188,7 +209,7 @@ try {
         })
       : null;
     const thermalsBefore = androidCli
-      ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds)
+      ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds, cooldownAbort.signal)
       : undefined;
     const arrival = await page.evaluate(async (version) => {
       const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");

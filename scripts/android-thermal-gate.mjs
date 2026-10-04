@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { setTimeout } from "node:timers/promises";
 
 export function parseAndroidThermals(battery, thermal) {
   const temperature = battery.match(/^\s*temperature:\s*(\d+)/m);
@@ -16,13 +17,14 @@ export function readAndroidThermals(cli) {
   return parseAndroidThermals(read("battery"), read("thermalservice"));
 }
 
-export async function waitForAndroidCool(cli, maxC, timeoutSeconds) {
+export async function waitForAndroidCool(cli, maxC, timeoutSeconds, signal) {
   const deadline = Date.now() + timeoutSeconds * 1000;
   for (;;) {
+    signal?.throwIfAborted();
     const sample = readAndroidThermals(cli);
     console.log(`Thermal gate: ${sample.batteryC} C, status ${sample.thermalStatus}`);
     if (sample.batteryC <= maxC && sample.thermalStatus === 0) return sample;
     if (Date.now() >= deadline) throw Error("Android cooldown gate timed out");
-    await new Promise((resolve) => setTimeout(resolve, Math.min(15000, deadline - Date.now())));
+    await setTimeout(Math.min(15000, deadline - Date.now()), undefined, { signal });
   }
 }
