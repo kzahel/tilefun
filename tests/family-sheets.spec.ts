@@ -10,6 +10,16 @@ const catalog = JSON.parse(
   readFileSync("public/data/family-sheets.json", "utf8"),
 ) as FamilySheetCatalog;
 const URL = "/tilefun/workshop.html#/tool/families";
+const broadPackets = ["B01-kitchens", "B02-music-recreation", "B03-street-hardware"].map(
+  (name) =>
+    JSON.parse(
+      readFileSync(`docs/tactical/053-semantic-tileset-map/packets/${name}.json`, "utf8"),
+    ) as {
+      familyId: FamilySheetCatalog["families"][number]["id"];
+      cards: unknown[];
+      records: unknown[];
+    },
+);
 
 function reviseCatalog(changed: FamilySheetCatalog) {
   for (const family of changed.families) {
@@ -59,7 +69,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${URL}?family=cabinets`);
-  const counts = {
+  const counts: Record<string, number> = {
     cabinets: 9,
     trees: 14,
     scrapyard: 29,
@@ -71,15 +81,16 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     "plants-planters": 7,
     bedroom: 6,
     "fences-gates": 25,
+    ...Object.fromEntries(broadPackets.map((p) => [p.familyId, p.cards.length])),
   };
   const members = catalog.families.flatMap((family) =>
     family.groups.flatMap((group) => group.members),
   );
-  expect(members).toHaveLength(169);
+  expect(members).toHaveLength(169 + broadPackets.reduce((sum, p) => sum + p.cards.length, 0));
   expect(
     new Set(members.flatMap((member) => member.variants.flatMap((variant) => variant.recordIds)))
       .size,
-  ).toBe(255);
+  ).toBe(255 + broadPackets.reduce((sum, p) => sum + p.records.length, 0));
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 966, height: 1024 },
@@ -88,7 +99,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await expect(
       page.getByRole("navigation", { name: "Art families" }).getByRole("link"),
-    ).toHaveCount(11);
+    ).toHaveCount(14);
     for (const family of catalog.families) {
       const tab = page
         .getByRole("navigation", { name: "Art families" })
@@ -939,3 +950,51 @@ test("fence sheets distinguish required joins, open sections and uncertain garde
   expect(event.sliceKeys).toContain("family-sheet:fences-gates");
   expect(event.sliceKeys.some((key) => key.startsWith("family-member:"))).toBe(false);
 });
+
+for (const packet of broadPackets) {
+  test(`broad ${packet.familyId} sheet retains uncertain components and exact variant notes`, async ({
+    page,
+  }) => {
+    const events = await mockDiscussions(page);
+    const family = required(catalog.families.find((f) => f.id === packet.familyId));
+    const members = family.groups.flatMap((g) => g.members);
+    const part = required(members.find((m) => m.kind === "component"));
+    await page.goto(`${URL}?family=${family.id}&member=${part.id}`);
+    await ready(page, packet.cards.length);
+    await expect(page.locator(".family-detail-copy")).toContainText("Cannot stand alone");
+    const uncertain = required(
+      members.find((m) => m.facts.some((f) => ["Uncertain", "Unknown"].includes(f.label))),
+    );
+    await page
+      .getByRole("button", { name: `${uncertain.number}. ${uncertain.label}`, exact: true })
+      .click();
+    await expect(page.locator(".family-detail-copy")).toContainText(
+      required(uncertain.facts.find((f) => ["Uncertain", "Unknown"].includes(f.label))).value,
+    );
+    const varied = required(members.find((m) => m.variants.length > 1));
+    await page
+      .getByRole("button", { name: `${varied.number}. ${varied.label}`, exact: true })
+      .click();
+    const last = required(varied.variants.at(-1));
+    await page.getByRole("combobox", { name: varied.variantLabel }).selectOption(last.id);
+    const note = page.locator(".family-piece-discussion");
+    await note.getByText("Discuss this piece", { exact: true }).click();
+    await note.getByRole("textbox").fill("A correction for this selected appearance");
+    await note.getByRole("button", { name: "Save note", exact: true }).click();
+    await expect.poll(() => events.length).toBe(1);
+    const layer = required(last.sprite.layers[0]);
+    expect(events[0]).toMatchObject({
+      sheetId: layer.sheetId,
+      rect: layer.rect,
+      sliceKeys: expect.arrayContaining([
+        `family-sheet:${family.id}`,
+        `family-member:${varied.id}`,
+        `family-variant:${last.id}`,
+        `family-proposal:${family.revision}`,
+      ]),
+    });
+    await expect(
+      page.locator(".family-sheet-discussion").getByText("Comment on whole sheet", { exact: true }),
+    ).toBeVisible();
+  });
+}

@@ -6214,7 +6214,7 @@
       "name": "Wooden cabinets",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=cabinets&revision=ec4ba96c694701c27e14b750e5a446e776c51b1c6a0b0bdc88d39aba170981f3",
-      "fingerprint": "4423085cdce452ae8721472d5ff69f0bdb363f405bda836cf5283845f0012fbe"
+      "fingerprint": "81c11152fa4afc24436a6c7184bdb5e632a5629ee07dcc011afd70ca20f5ceac"
     },
     {
       "id": "family:trees",
@@ -6223,7 +6223,7 @@
       "name": "Trees and forest",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=trees&revision=b049e3e9dd662ebe3954a4cf5a59d685ba7c9b4de67e700893dce1c3ad85b930",
-      "fingerprint": "fc06552bc86f8c80b2cddad24acb73bca122d4a5cb5e5525e7f3f8984f322d72"
+      "fingerprint": "09d13d94ef723f07ef26402f3e20fa86dc9472809226e5b8e2eddd185f4060d0"
     },
     {
       "id": "family:scrapyard",
@@ -6232,7 +6232,7 @@
       "name": "Scrapyard and debris",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=scrapyard&revision=042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90",
-      "fingerprint": "3ff19852c4849072c2b897d41cb007fe8d6849de3f398fa05a5237cee84d02ca"
+      "fingerprint": "8ae4c859adb1e20543f18a53a5461bf3a925f12f9b4a25f533ed807f52d96d1e"
     },
     {
       "id": "family:outdoor-seating",
@@ -6241,7 +6241,7 @@
       "name": "Outdoor seating",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=outdoor-seating&revision=02e667bf94babe9f5b1f9057536a7ccbeae82087484f80af67af51deb2da30bf",
-      "fingerprint": "184dcf1044881bdf65715928347f7ac37ac6d9b24cfee9cd805607b89b89f053"
+      "fingerprint": "738f861dd7aec4f32c41dc22816b2d44dbbf1f00e00f05fe4ab6654aed3dd44e"
     },
     {
       "id": "family:sofas",
@@ -6250,7 +6250,7 @@
       "name": "Sofas and seats",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=sofas&revision=e0c30f0530f49fe6a1ec823b68d806f274a14f0a25c3f2ee620dc3694bc13ea0",
-      "fingerprint": "498315b6d400eaa9135256584ea1f836f0654aae140df9c0b4cb792d46761c23"
+      "fingerprint": "6a05afd59ab6b57d28766a7f7b9d068623b73a5dd856ff264788d55e83e65135"
     },
     {
       "id": "family:room-builder",
@@ -6259,7 +6259,7 @@
       "name": "Floors and stone arches",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=room-builder&revision=ea6a039d20fb017dd60ebe33506a835c6ccea6ff7a4dc62a6d729cbfa81f3422",
-      "fingerprint": "f1d413782cd70911846d1154df8f7a580ba3eea41e5c8aa08fad30ea3d44841a"
+      "fingerprint": "1535858ec88f58054de13209d4cf59d0be56a9acfef6c776b772b961ee7f4e3a"
     },
     {
       "id": "family:playground-tubes",
@@ -6268,7 +6268,7 @@
       "name": "Playground tubes",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=playground-tubes&revision=f30af146aa7f9ccd15544286a2b18e623d240cb54a3165c666e2db76ad651bf0",
-      "fingerprint": "76bcd8443d993923e515b38d9da26817e08948da7b1157e16f1d0f1699953d11"
+      "fingerprint": "0ef00f678c30d697d79c15ed6db14b849d2db40a619a0f3a5255c05e3fbed931"
     },
     {
       "id": "family:animated-doors",
@@ -6277,7 +6277,7 @@
       "name": "Animated doors",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=animated-doors&revision=369525f6b27956fa01cf659ee9f16aa34c383b8d1dc1f564f1626c8dc0f0f3be",
-      "fingerprint": "d99ccdf395140698e009c22ff21d33a208aa4c864e447cdb5cb5dd66115929a6"
+      "fingerprint": "a0cb90b918d2772b718272aa5ed9919512c35eae9cd41a18228b32a4c19f343b"
     },
     {
       "id": "family:plants-planters",
@@ -6286,7 +6286,7 @@
       "name": "Plants and planters",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=plants-planters&revision=67c6ab226cbdb0a80603686bf48c6153ea02ad770888dbd556f73fe3af7a4e41",
-      "fingerprint": "74d5b5a5d6bcf0d2be8ce03f2026607d5764a69a5f12a59e16f23dd7570cd608"
+      "fingerprint": "2ba3db5984a991855256493d127e9658a5738148a15ac5620eb438b1bc827b90"
     },
     {
       "id": "family:bedroom",
@@ -6295,7 +6295,7 @@
       "name": "Side beds and blue blankets",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=bedroom&revision=a4b2e4b7130473bb18c158e8d8dc1955f1f9d651e47d835ca88a0c8600e6e5f6",
-      "fingerprint": "6c31a83579f88543091066022104eb2ee1b2a828f9f1b13858208b722b087a8e"
+      "fingerprint": "b1645493de2f04ee5d916c0da77d4a2aca022c3e3adca3b96a8dbb00f5918679"
     },
     {
       "id": "family:fences-gates",
@@ -6304,7 +6304,34 @@
       "name": "Low picket fences and garden gates",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=fences-gates&revision=7d646e502d8d97a12c9a9d75d06541b9f88cce119840a22e31a479de3f7e574a",
-      "fingerprint": "862f16552939ef2481c9bd98e1154985219b13f449d62e99b6dc0f4640cb8b33"
+      "fingerprint": "65480ca9e14853a31ad73437f816dc52815c98c649b985fa83825973cfc77fd6"
+    },
+    {
+      "id": "family:kitchens",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Kitchens and appliances",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=kitchens&revision=cd10aa65fcf6b75c737d1f691bb7713d0ff4e3e57b0a1439c74b5ad55c6b1523",
+      "fingerprint": "b8a1d548c4b0fe34efefde218214f3caac44914be08aff105386096edab48bb9"
+    },
+    {
+      "id": "family:music-recreation",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Music and recreation",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=music-recreation&revision=fd66585c9fb29e87f2d577f91e67f8b8200ccec75b56ae1e86ed5c113fa65c60",
+      "fingerprint": "a886c7aecf13aa23b55102f8029b508fe6b1451c7f5aa2d078191d1c13d72138"
+    },
+    {
+      "id": "family:street-hardware",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Street lights, poles and hardware",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=street-hardware&revision=758d8ba08540383845336d60a01bd73495cb43261c79e87501c050829a4609f5",
+      "fingerprint": "bc3969029c8d62abba118438a96f34f8a46bd747b10eda00194652b907c432d6"
     },
     {
       "id": "review-0-6ba78e73",

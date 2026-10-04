@@ -122,6 +122,14 @@ for (const path of files("public/assets/tilesets").filter((p) => /me-autotile-\d
   const id = `me${basename(path).match(/\d+/)?.[0]}`;
   if (!imageMap.has(id)) imageMap.set(id, path.replace(/^public\//, ""));
 }
+// Exact native exports retained by broad semantic proposal sheets.
+for (const path of files("public/assets/semantic-sources/broad").filter((p) =>
+  p.endsWith(".png"),
+)) {
+  const id = basename(path, ".png");
+  if (imageMap.has(id)) throw new Error(`Duplicate broad source sheet: ${id}`);
+  imageMap.set(id, path.replace(/^public\//, ""));
+}
 const sheets: ArtSheet[] = [...imageMap].map(([id, image]) => {
   const bytes = readFileSync(`public/${image}`);
   const sheet: ArtSheet = {

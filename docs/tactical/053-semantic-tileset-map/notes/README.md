@@ -1,5 +1,6 @@
 # Semantic mapping investigation notes
 
+- [Broad adapter targeted review](2026-10-04-broad-adapter-review.md): sampled visual audit and reusable source/topology checks.
 - [Broader first-pass mapping](2026-10-04-broad-first-pass.md): owner-directed larger batches with visible uncertainty and targeted review.
 
 - [Next-family model](2026-10-04-next-family-model.md): explicit normalization and coverage for E04/I02/E05.
@@ -16,7 +17,7 @@ generated crops and contact sheets can use ignored local output, with reproducib
 capture commands and source hashes recorded here. Temporary file links alone are
 not durable evidence. Do not commit original downloaded packs or private review logs.
 
-Current next-family slice: [plants, bedroom furniture and fences](2026-10-04-plants-bedroom-fences.md).
+Current slice: [broad kitchens, music/recreation and street hardware](2026-10-04-broad-first-pass.md).
 
 ## Planning checkpoint — 2026-10-04
 

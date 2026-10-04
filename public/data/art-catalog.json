@@ -1794,6 +1794,366 @@
       "tileSize": 16,
       "fingerprint": "6466ac3b04210fc3c653a64a5c8ac8dd066f0b85e08a3847e181d5e21b2f886e",
       "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-drinking-fountain-2",
+      "name": "street source drinking fountain 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-drinking-fountain-2.png",
+      "width": 32,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "7326379ebfccb5c2e157ef82c84828f626aadecd6cc49f106ac0c47c29254ca7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-hydrant-2",
+      "name": "street source hydrant 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-hydrant-2.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "ba36c661e5b1b9dd8e87362e486eb0047ad582090c4f21e5ed6e6d54791ea0b3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-hydrant-3",
+      "name": "street source hydrant 3",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-hydrant-3.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "e82886a68a9029e805bf8e587cfa730a02d214d9b78f3e03bb20ae1e61e344e5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-1",
+      "name": "street source info sign 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-1.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "6e83123ae94afdc2aede2ac72e7654d627af165efe86ab8f6c639ec7bd50c9c8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-2",
+      "name": "street source info sign 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-2.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "19cc3511841dad69a6820f1120110de121ebb44636c1f42a56ca8e8df052538c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-3",
+      "name": "street source info sign 3",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-3.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "280440c23062c61a65e374aae3129ce8c6b7d6ab1246cd2b23636f18c411057e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-4",
+      "name": "street source info sign 4",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-4.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "3cbd193fdf6b2f441593e2e80bfa0899c240d8484af4a332e1fe27c77512fa7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-5",
+      "name": "street source info sign 5",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-5.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "b2ffbea0ba8a9373d706588ce4be18fbca97db990e778418b3c54f290a3a41a4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-info-sign-6",
+      "name": "street source info sign 6",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-info-sign-6.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "1464a377f1e30db7f75c072a5252c281b7e46cb0a6d2577c769463448ce9b09d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-mailbox-1",
+      "name": "street source mailbox 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-mailbox-1.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "90950abc1d89e671d4fe1c61e0232ccda33426f7a138ac0f9cdc385847b0ee5a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-phone-booth-2",
+      "name": "street source phone booth 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-phone-booth-2.png",
+      "width": 48,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "a33c4d53489816a4be43628a8433e796ec54dba81bbcdf8aef524b300cf7de0f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-phone-booth-4",
+      "name": "street source phone booth 4",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-phone-booth-4.png",
+      "width": 48,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "06bf34b9eab08b8c802e62ae6177b2fea1b51838fdb8ec34ca4eb783167cb852",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-street-lamp-1",
+      "name": "street source street lamp 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-street-lamp-1.png",
+      "width": 32,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "6a37cc1ecc8ef36ecee892dea48ac0636c3bca800af81ec5fcaa56ae9a248801",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-street-lamp-2",
+      "name": "street source street lamp 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-street-lamp-2.png",
+      "width": 32,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "4c010d4770d7863a51f796da9cd64f44b64decd24fe9e4de76978a1914b7e6e8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-street-lamp-3",
+      "name": "street source street lamp 3",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-street-lamp-3.png",
+      "width": 32,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "2eea46ce7c13e4e815796ca3e8bf49d3dbfff22e6bd48fc862fa06cd4259ffe2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-street-lamp-4",
+      "name": "street source street lamp 4",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-street-lamp-4.png",
+      "width": 32,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "6ab92d3e145fb596a128621f391f051beae0af23e12d5db1dbc2063877817f25",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-1",
+      "name": "street source traffic light 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-1.png",
+      "width": 16,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "5060bd3caf8097e93dbd02c87eaadc71a70951f3e47ea9ba84454c3161cdc6e8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-10",
+      "name": "street source traffic light 10",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-10.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "f5c19e6c39b557e303f4b22beda608090eb5a2da8c49f35ebd7a0f9f04bee209",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-11",
+      "name": "street source traffic light 11",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-11.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "483b0230accedbc44849a91682b332a974b20e1b503bc1a783f3d982eef0c9b1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-12",
+      "name": "street source traffic light 12",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-12.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "110617db27c70fb0d7e57f286733553240c5da662bec4a74276347e00fa872e9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-13",
+      "name": "street source traffic light 13",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-13.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "4e59dde2ad4c35a4e362501f4bdabec39b673f606d03eedf1b6c0073e4c08ab8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-14",
+      "name": "street source traffic light 14",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-14.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "e1ab7903a61f2dcebbc6512c04ea48035a4c9a9069e02dd9a12b5f4bec236a51",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-15",
+      "name": "street source traffic light 15",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-15.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "40e3349a8667eb266e9538807ff3397ad74917328b9d2c4d061b1b508706b16b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-16",
+      "name": "street source traffic light 16",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-16.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "d84626a8e242b73b8d88dc64e115291bfa4e6cd1ef0380bdacd19c579568c482",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-2",
+      "name": "street source traffic light 2",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-2.png",
+      "width": 16,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "f623624617c211877ad45e93f5d63ee656188c92aa62057cf376c968c9c2ec1d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-3",
+      "name": "street source traffic light 3",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-3.png",
+      "width": 16,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "c16b0e4101202fc30a8074c2152bb80274978a25b1cd6474ad06a08872d9a990",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-4",
+      "name": "street source traffic light 4",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-4.png",
+      "width": 16,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "83d8a57fc78d883dc0e3c80100dbd9715ab0961d20e26567882d263b01836cca",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-6",
+      "name": "street source traffic light 6",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-6.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "116ac342c8e3a4834c46dca12d4de6c627c8f0f829527b3bcb2e0af7be308cc4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-7",
+      "name": "street source traffic light 7",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-7.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "9710d092d21ca1d806abf9fccf20210dbaac64f915dc83feae3ce8cc04c617c5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-8",
+      "name": "street source traffic light 8",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-8.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "7928af2ad93fef128460310f4238b595f0b431fd59aff55105362e0df093f3a3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-9",
+      "name": "street source traffic light 9",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-9.png",
+      "width": 64,
+      "height": 96,
+      "tileSize": 16,
+      "fingerprint": "098c0270727f237026587d168061a17b7a402da39f2968ad20678c64306b7bb8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-light-new-front-diagonal-right-up-1",
+      "name": "street source traffic light new front diagonal right up 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-light-new-front-diagonal-right-up-1.png",
+      "width": 48,
+      "height": 80,
+      "tileSize": 16,
+      "fingerprint": "ec61f2e1348563e150680ebfa5635b306e2c7734e9573d3adfe5b3283190c8e8",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-lights-back-1",
+      "name": "street source traffic lights back 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-lights-back-1.png",
+      "width": 16,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "6f2694dbb22b8d05b8f8556d4e8041f42cdb04effb358220fc154681c8554028",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-lights-right-1",
+      "name": "street source traffic lights right 1",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-lights-right-1.png",
+      "width": 16,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "9be012d054f2ad36dda340f5c1e39058dcdc515efbb49a6143ecf31a2c5b6696",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-sign-new-64",
+      "name": "street source traffic sign new 64",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-sign-new-64.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "abd0b231518b9f77bf9a8992dc2293d6b0f0dccecdeeebb28fcf2a3dd389cc67",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "street-source-traffic-sign-new-65",
+      "name": "street source traffic sign new 65",
+      "image": "assets/semantic-sources/broad/street-hardware/street-source-traffic-sign-new-65.png",
+      "width": 16,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "abd0b231518b9f77bf9a8992dc2293d6b0f0dccecdeeebb28fcf2a3dd389cc67",
+      "source": "public/assets/SOURCES.md"
     }
   ],
   "usages": [

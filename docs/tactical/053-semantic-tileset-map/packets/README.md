@@ -84,3 +84,17 @@ as three quiet sheets with 38 cards. The [delivery record](../notes/2026-10-04-p
 records independent source and implementation review, bringing the total to 255
 records / 216 proposal units. Registry entries alone do not grant coverage,
 human approval or gameplay geometry.
+
+
+## Broad first-pass sheets
+
+| Packet | Delivered scope | Review stage |
+| --- | --- | --- |
+| [B01 Kitchens](B01-kitchens.md) · [JSON](B01-kitchens.json) | 166 cards / 408 normal kitchen exports, including counters, storage, appliances, dining and small props | Source-pinned proposal; coordinator sampled components and underlays |
+| [B02 Music/recreation](B02-music-recreation.md) · [JSON](B02-music-recreation.json) | 93 cards / 213 instruments, audio, screens/games and table-game exports | Source-pinned proposal; independent sampled visual review |
+| [B03 Street hardware](B03-street-hardware.md) · [JSON](B03-street-hardware.json) | 155 cards / 381 signals, lamps, poles, signs, utilities and barriers | Source-pinned proposal; independent sampled visual review |
+
+The [targeted adapter review](../notes/2026-10-04-broad-adapter-review.md) records its
+scope and limits. These 1,002 first-pass records use one compact contract and appear
+in the Workshop; they are registered without exhaustive normalized-model credit.
+The earlier 255 records / 216 proposal units remain separately normalized.

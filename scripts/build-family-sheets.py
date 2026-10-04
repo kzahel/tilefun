@@ -535,6 +535,10 @@ def build():
     require(topology['baseProposal']['sha256'] == PINS['P03-cabinets.json'], 'Topology base proposal mismatch')
     require(topology['evidence']['agentEvidence']['reviewSha256'] == PINS['P03-cabinets-review.md'],
             'Topology review mismatch')
+    spec = importlib.util.spec_from_file_location('family_broad', ROOT / 'scripts/build-family-broad.py')
+    broad = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(broad)
+    broad_packets = broad.read_packets(SimpleNamespace(**globals()))
     sheets = {row['id']: row for row in load(ROOT / 'public/data/art-catalog.json')['sheets']}
     sources = [sheets[key] for key in ('me-complete', 'modern-interiors', 'exteriors-bench-5', 'exteriors-bench-6',
                                       'interiors-door-1', 'interiors-door-1-locked')]
@@ -544,6 +548,14 @@ def build():
             'exteriors-bench-6': 'a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f',
             'interiors-door-1': 'dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165',
             'interiors-door-1-locked': 'dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9'}
+    for packet in broad_packets:
+        for pin in packet['sourcePins']:
+            key = pin['sheetId']
+            if key in pins:
+                require(pins[key] == pin['sha256'], 'Conflicting broad source pin')
+            else:
+                sources.append(sheets[key])
+                pins[key] = pin['sha256']
     require(scrapyard['source']['sha256'] == pins['me-complete'], 'Exteriors proposal source mismatch')
     images = {}
     for sheet in sources:
@@ -577,13 +589,16 @@ def build():
                                    ('bedroom', 'I02-bedroom.json'),
                                    ('fences-gates', 'E05-fences-gates.json')]:
         expected[family_id] = [row['id'] for row in load(PACKETS / packet_file)['candidates']]
+    require(sum(map(len, expected.values())) == 255, 'Unexpected earlier source record count')
+    families.extend(broad.build_broad(SimpleNamespace(**globals()), images, sheets, broad_packets))
+    for packet in broad_packets:
+        expected[packet['familyId']] = [row['id'] for row in packet['records']]
     for item in families:
         records = [r for g in item['groups'] for m in g['members'] for v in m['variants'] for r in v['recordIds']]
         require(Counter(records) == Counter(expected[item['id']]), f"Incomplete or duplicated coverage: {item['id']}")
         for entry in [m for g in item['groups'] for m in g['members']] + item['examples']:
             for value in entry['variants']:
                 render(value['sprite'], images)
-    require(sum(map(len, expected.values())) == 255, 'Unexpected source record count')
     result = {'version': 1, 'sources': sources, 'families': families}
     result['revision'] = revision(result)
     return result

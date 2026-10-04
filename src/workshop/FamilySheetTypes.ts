@@ -12,6 +12,9 @@ export const FAMILY_SHEET_IDS = [
   "plants-planters",
   "bedroom",
   "fences-gates",
+  "kitchens",
+  "music-recreation",
+  "street-hardware",
 ] as const;
 
 export interface FamilyFact {

@@ -35,18 +35,14 @@ an agent-written queue status.
 | E05 | Fence and gate topology | S02 Exteriors; E03 lessons | Delivered proposal | 27 records / units; 25 cards, seven closed forms and one open section; garden joins unknown; separately reviewed |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Bounded mapped-evidence audit; entire-pack semantic audit remains open | [Expansion audit](notes/2026-10-04-expansion-audit.md); inventory duplicates, mapped frames and coverage consistency; unsegmented art remains unassigned |
-| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and independently checked for all eleven normalized packets | 169 cards / 255 records, variants, assemblies, selected-piece metadata and shared notes; eleven proposed discovery candidates, no approval/promotion controls |
+| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Delivered for eleven normalized packets and three targeted-audit broad packets | 583 cards / 1,257 records, variants, assemblies, selected-piece metadata and shared notes; fourteen proposed discovery candidates, no approval/promotion controls |
 | R02 | Act on first owner comments: tree-base names/relations and forest repeat examples | R01 | Implemented and validated | [Feedback evidence](notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up); cabinets/scrapyard have positive whole-sheet comments; F05 ground correction and three varied-offset examples accepted in chat; exact source/recipe recorded; boundaries remain unresolved |
 
-Next action: read owner comments on E04/I02/E05, reconcile exact proposed fields,
-and select the next bounded repeated families. The locked-door clarification and
-three new sheets are delivered; all metadata remains Proposed. The
-[expansion reconciliation](notes/2026-10-04-component-animation-expansion.md) is the
-frozen research checkpoint; current delivery is recorded in the
-[component family delivery](notes/2026-10-04-component-family-delivery.md).
-Continue explicit supplemental reconciliation and whole-source
-gap auditing without treating surveyed windows as completed semantics. R02 delivery
-is recorded in the [integration note](notes/2026-10-04-tree-sheet-integration.md).
+Next action: collect owner corrections on B01/B02/B03 and choose similarly broad
+coherent themes for the next pass. Positive prior-sheet feedback is recorded in
+[the broad delivery note](notes/2026-10-04-broad-first-pass.md). Do not shrink the
+next slice back to a single counter palette, piano style or signal design. Detailed
+normalization follows separately; all displayed metadata remains Proposed.
 Read the [coordinator corrections](notes/2026-10-04-pilot-reconciliation.md)
 alongside all frozen proposals. Worker models are GPT-6.1 Sol/high. The coordinator
 alone commits checkpoints. Reconciled research does not mean human-approved or
@@ -122,3 +118,18 @@ packets/helpers and approved source copies. Coordinator owns the common adapter,
 shared data/UI/docs and checkpoints. Deliver broad sheets after source validation
 and targeted visual audit; exhaustive semantic normalization remains a separate
 stage. See [policy and feedback](notes/2026-10-04-broad-first-pass.md).
+
+
+### Broad delivery checkpoint
+
+| Packet | Sheet size | Status |
+| --- | --- | --- |
+| B01 Kitchens | 166 cards / 408 source exports | Delivered proposal; full normal Kitchen theme, two rug examples |
+| B02 Music/recreation | 93 cards / 213 source exports | Delivered proposal; instruments, audio, games/screens, two finite examples |
+| B03 Street hardware | 155 cards / 381 source exports | Delivered proposal; lights, poles, signs, services and barriers; joins remain untested |
+
+Targeted code/source sampling passed; exact pixels, aliases, frame bounds and card
+membership are checked deterministically. Broad packets remain proposal-ready in
+the registry, pending explicit semantic normalization. This does not alter the
+255-record / 216-unit normalized model or grant full-review/owner-approval credit.
+See [delivery and validation](notes/2026-10-04-broad-first-pass.md).

@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: eleven family sheets delivered; 255 source records normalized; whole-pack mapping continues.
+Status: fourteen family sheets delivered, 583 cards / 1,257 displayed source records; 255 normalized and 1,002 broad first-pass records.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -57,8 +57,9 @@ dashboard, agent states or technical identifiers to normal browsing. The
 [family sheets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
 now cover cabinets, trees, scrapyard pieces, outdoor seating, sofas, floors/arches,
 playground tubes, animated doors, plants/planters, side beds/blankets and picket
-fences/garden gates: 169 cards expose 255 source records through variant and frame
-selectors. All eleven are marked Proposed. Notes reuse
+fences/garden gates, plus broad kitchens, music/recreation and street hardware:
+583 cards expose 1,257 source records through variant and frame selectors. All
+fourteen are marked Proposed. Notes reuse
 the Workshop outbox/inbox and pin family revision, selected member, variant and
 source layers. They do not approve or promote metadata. The current slice has no
 approval buttons or generator placement enforcement. Asset families appears in the
@@ -90,11 +91,11 @@ labels. Apply it alongside the frozen proposal JSONs. That reconciliation predat
 the owner feedback and bounded visual acceptance recorded below.
 
 The contact-sheet adapter uses committed source images only and checks source
-pins, available pixel hashes, exact frame bounds, all 255 displayed record references and
+pins, available pixel hashes, exact frame bounds, all 1,257 displayed record references and
 cabinet component restrictions. Run `python3 scripts/build-family-sheets.py --check`
 with Pillow to verify the saved output; ordinary browsing/builds use committed
 JSON and images without original packs. Source images and metadata revisions are
-also verified before browser notes can be submitted. Eleven discovery candidates
+also verified before browser notes can be submitted. Fourteen discovery candidates
 in one existing-inbox batch route directly to these sheets; notes remain discussion.
 
 The first owner comments gave positive whole-sheet feedback on cabinets and
@@ -132,7 +133,7 @@ crediting unrecognized packet formats.
 
 The [outdoor seating delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-outdoor-seating-delivery.md)
 adds 15 cards with four-color chair variants. Two benches use byte-identical
-original PNG copies and retain original-only master lineage. All eleven family
+original PNG copies and retain original-only master lineage. All fourteen family
 sheets support exact piece/variant and whole-sheet discussion.
 
 The [I01 sofa packet](../tactical/053-semantic-tileset-map/packets/I01-interior-sofas.md)
@@ -189,3 +190,30 @@ rules; unknown regions remain explicit in the coverage ledger. The
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.
 The user authorized reasonable checkpoint commits. The broader plan remains active;
 these records cover a small part of the entire packs.
+
+
+## Broad first-pass delivery
+
+The [broad slice](../tactical/053-semantic-tileset-map/notes/2026-10-04-broad-first-pass.md)
+adds **414 cards / 1,002 records**: 166 kitchen cards (408 exports), 93 music and
+recreation cards (213 exports), and 155 street-hardware cards (381 exports).
+Traffic signals, detached heads/supports, street lamps, poles, signs, utilities and
+barriers share one large themed sheet. Ambiguous names and untested joins stay
+visible. Sinks need supporting counters/cabinets, cloth covers need table underlays,
+and cropped signal/rail pieces remain components. Four finite examples reproduce
+source-pinned rugs, a billiard table and a television cabinet; arbitrary compatible
+assemblies and game behavior are not established.
+
+One reusable adapter checks source/index bytes, native frame pixels, exact named
+aliases and complete card membership. Thirty-six street exports are committed
+byte-identical copies; their missing selected legacy-index entries do not establish
+absence from the master. The [targeted audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-broad-adapter-review.md)
+is deliberately sampled. All three registry entries are proposal-ready, with no
+exhaustive independent semantic review or normalized coverage credit. The existing
+normalized model remains 255 records / 216 units. Earlier eleven family objects and
+revision-scoped comments are unchanged.
+
+Next: collect corrections on these larger sheets, then continue similarly broad
+theme batches with explicit uncertain members. Detailed normalization and difficult
+join investigations follow consequential feedback; they are not a gate before
+showing the next broad theme. Final semantic approval remains with the owner.

@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: eleven family sheets delivered; 255 records / 216 proposal units normalized; whole-pack mapping continues.
+Status: fourteen family sheets delivered (583 cards / 1,257 displayed records); 255 records / 216 proposal units normalized; 1,002 broad first-pass records await semantic normalization.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -239,14 +239,15 @@ unblocked queue item. Update the queue and link findings before ending a work se
 These are offline evidence tools; they do not repack assets or change gameplay.
 Use Python 3 with Pillow for image inspection and full inventory validation.
 
-- `python3 scripts/build-family-sheets.py --check` verifies the eleven contact
-  sheets against pinned proposals and committed atlases, including all 255 source
+- `python3 scripts/build-family-sheets.py --check` verifies the fourteen contact
+  sheets against pinned proposals and committed atlases, including all 1,257 source
   records and the cabinet component restrictions. Omit `--check` to regenerate
   the JSON. `python3 scripts/build-family-sheets.test.py` exercises source drift,
   frame replacement, record coverage and component/unknown placement distinctions.
   `python3 scripts/build-family-expansion.test.py` additionally exercises the
   Room Builder, playground and animation adapters; `python3 scripts/build-family-next.test.py`
-  covers plants, beds and fences. `python3 scripts/semantic-map-next-families.test.py`
+  covers plants, beds and fences. `python3 scripts/build-family-broad.test.py` checks
+  the reusable broad-packet source/topology contract. `python3 scripts/semantic-map-next-families.test.py`
   checks their normalized semantics and absent-original reporting. These commands do not require
   ignored original packs. Normal app builds consume
   the committed output; they do not regenerate it or require Pillow.
