@@ -1,6 +1,6 @@
 # Roadmap
 
-Direction as of 2026-10-03. This is a short project overview; the linked topics
+Direction as of 2026-10-04. This is a short project overview; the linked topics
 own current status and next work. Ideas are not commitments: see the
 [backlog](ideas.md), [playtester feedback](todo-from-playtesters.md) and
 [long-term vision](VISION.md). [Tactical plans](tactical/README.md) preserve
@@ -11,6 +11,7 @@ implementation scope and evidence.
 | Area | Delivered | Next checkpoint / owner |
 | --- | --- | --- |
 | Streaming and execution | Shared single-player Worker authority, terrain preparation, desktop and Pixel 7a traversal evidence | Bound offscreen raster work, improve cold entry and broaden device coverage; [performance](topics/performance.md) |
+| Rendering and 3D exploration | Renderer separation and an isolated GPU car projection lab; top-view appearance remains unresolved | Compare reconstruction approaches and prototype gameplay GPU rendering; [3D assets](topics/3d-assets.md), [engine checkpoints](topics/rendering-architecture.md#open-engine-checkpoints) |
 | Entity persistence and unloading | Tick-aware NPC separation; target architecture researched and documented | Incremental entity saves first, then shared tickets/readiness, lazy residency and eviction; [entity activation](topics/entity-activation.md), [planned sequence](tactical/019-entity-streaming-and-persistence.md) |
 | Regional cities | One current explorer/game generator, explicit same-seed recreation, approved dense neighborhood and v6 commercial streets | Review thirteen staged v7–v10 parking/park/architecture/pedestrian views; [city generation](topics/city-generation.md) |
 | Road vehicles | Approved 180-view bank, gentle generated-road traffic and roof riding in the current regional generator | Playtest the Traffic playground and current density/turning/jumps; [vehicles](topics/vehicles.md) |

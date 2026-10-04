@@ -143,74 +143,44 @@ A recording backend proves the data boundary, not GPU raster parity or performan
 No Rust/WASM/WebGPU engine has been implemented. Intermittent phone hitches and
 cold-entry presentation remain separate measured performance work.
 
-## Sprite artwork on 3D proxies
+## 3D assets and current GPU experiments
 
-[Car projection lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/car-projection)
-implements the first bounded experiment, recorded in
-[037](../tactical/037-car-projection-experiment.md). It fits one approved compact-car
-side image to a closed, low-poly visual shell: bonnet, windscreen, roof, rear slope
-and side. Orbit, source, far-side and low perspective views expose depth; exact
-orthographic side/top presets support pan, zoom and reset. Toggles show mesh edges,
-unchanged approved collision bounds and unpainted faces. User corrections and
-orthographic checks are recorded in [038](../tactical/038-car-proxy-orthographic-checks.md).
+[3D assets](3d-assets.md) now owns the car reconstruction workstream, including
+037/038 evidence, the unresolved top-view appearance and model-assisted options.
+The car lab and `ThreeDebugRenderer` already use GPU-accelerated Three.js/WebGL;
+neither is a gameplay backend. The [research record](../research/sprite-to-3d-and-renderer-options.md)
+compares Three.js, WebGPU, Rust/wgpu and a full-engine migration.
 
-`src/projection/CarProxy.ts` owns graphics-independent geometry in world-pixel
-X/ground-Y/height-Z coordinates, pinned source/crop provenance and fixed oblique
-source projection. Vertices are recovered from authored image points plus depth;
-UVs remain tied to that fixed projection while the viewing camera moves. This is
-actual textured geometry, not a billboard that turns with the camera.
-`CarProxyScene.ts` owns the Three.js/WebGL adapter, cameras, input and GPU resources;
-`CarProjectionPage.tsx` owns the DOM controls and lifecycle. Rendering is on demand.
-This lab deliberately does not enlarge the production `RenderBackend` contract.
+Backend independence is delivered; general 3D presentation is not. `RenderView`
+contains x/y/zoom and viewport dimensions, terrain placements are screen-space,
+and scene passes preserve the current body/shadow ordering. Mesh/material
+instances, a 3D camera and world-space terrain need an additional neutral contract.
+Do not derive a 3D world from screen rectangles or move Three.js objects into
+simulation. Keep presentation inputs read-only and physical proxies independent
+from visual meshes. Existing height-aware physics can remain while that is tested.
 
-A visual proxy and a physical proxy have different jobs. The experimental shell
-extends beyond the existing 56 × 20 × 24 collision box in places; its fitted roof
-and alpha-cut silhouette do not replace approved support/collision geometry.
-The near wheels remain painted onto the vertical side. Their visible lower edge
-now reaches Z=0, and the grid lies on that same ground plane. The fitted roof is
-21 pixels high; these inspection corrections do not alter the approved 24-pixel
-physical height. Top surfaces have equal heights across the car, so bonnet and
-windscreen are edge-on from the side. Hand-picked source samples check that their
-painted details are assigned to top surfaces, rather than leaking onto the side.
+## Open engine checkpoints
 
-`ProxyTexture.ts` derives a separate top texture by extending nearest opaque edge
-colors through transparent border texels. This closes visible holes against the
-checker face while retaining the original source and side/wheel alpha. Source
-lighting and oblique distortions stay baked into the texture; a closed top is not
-a fully authored top-view asset. Amber faces indicate missing artwork; they do not
-mirror or invent the hidden side. No source pixels, promoted asset banks or gameplay
-rules change.
+These are proposed follow-ups, not unfinished gates in the completed 022 refactor.
+Plan the next slice just in time; no GPU backend or Rust port is selected for
+production by this document.
 
-Full Chromium reproduces all 1,809 painted source pixels within one color level,
-with no uncovered pixels, when viewed through the fixed source camera. Top edge
-extension now adds 182 pixels outside the original silhouette, explicitly reported
-by the lab. Orthographic GPU probes find zero visible top-face pixels from the
-side, 1,152/1,152 filled pixels across the top footprint, contacts under both tires
-and zero pixels below ground. That proves source registration and the targeted
-geometry fixes, not unique reconstruction or arbitrary-angle fidelity. The same sprite admits many possible depths. Touch orbit, graphics
-context restoration and resource release on navigation have browser coverage.
-The experiment is registered and discoverable but excluded from approval:
-arbitrary orbit output is not an immutable native review snapshot.
+| ID | State | Next evidence / decision |
+| --- | --- | --- |
+| G1 | Open | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
+| G2 | Proposed | Portable mesh/material import and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
+| G3 | Proposed | Neutral world-space scene and camera data feeding a shared-world 3D lab: ground, car, prop and actor; retain Worker authority and browser UI |
+| G4 | Proposed | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
+| G5 | Proposed | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
+| G6 | Later | Broader asset/world coverage and first-person interaction/content; consider Rust/wgpu only with a concrete measured or platform reason |
 
-The user suggested model-assisted reconstruction as a follow-up discussion. The
-source image, fitted proxy and orthographic silhouettes/contact checks can serve as
-inputs and acceptance constraints for that exploration; no model or external asset
-service is integrated here.
+G1 can proceed independently of reconstructing convincing 3D assets. G2/G3 make
+those assets renderable in shared-world context; they do not require completing
+a production replacement first. Existing DOM and independent Canvas UI/debug
+surfaces can stay across browser rendering experiments.
 
-Next useful slice: fit the same car against its other existing directional views,
-assign explicit per-face image coverage and separate wheel geometry. Inspect the
-views together before adding new textures or generalizing to other assets.
-Do not assume stylized directional sprites are mutually consistent projections.
-First-person presentation would additionally need interiors, surfaces below the
-source view, close-up detail and world-wide geometry coverage. This experiment
-makes no performance claim; its cold load still decodes the full source atlas.
-
-## Next architecture experiment
-
-Build a bounded second-backend prototype behind `RenderHost`, starting with a
-representative terrain/sprite scene. Reuse presentation builders and compare
-pixel/depth behavior, copied/uploaded bytes, startup, memory, loss/recovery and
-actual device presentation. Preserve the Canvas reference and immutable approvals.
-Only then decide whether broader WebGPU adoption or a Rust/WASM component pays
-for its crossings and maintenance cost. Graphics API and execution language are
-independent choices; neither requires rewriting simulation.
+Recommended implementation route: use the existing TypeScript/Three.js stack for
+the first portable-asset and world-view experiments, then compare WebGPU and
+WebGL2 in a bounded test. Graphics API, execution language and simulation engine
+are separate decisions. A backend swap alone neither guarantees a performance
+improvement nor supplies hidden artwork or first-person-ready world geometry.

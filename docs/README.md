@@ -37,6 +37,7 @@ completion from an old unchecked checklist. Existing guide filenames stay stable
 | Rooms, furniture and drawing | [Interior workbench](interior-workbench.md), [counterexample search](interior-counterexamples.md), [editing topic](topics/patterns-and-interiors.md) |
 | Authority, transport and hosting | [Client/server](client-server-architecture.md), [network design](NETWORK-ARCHITECTURE.md), [networking topic](topics/multiplayer-networking.md), [server security](SERVER-SECURITY.md) |
 | Rendering and backend separation | [Architecture](topics/rendering-architecture.md), [progress tracker](tactical/022-renderer-backend-decoupling.md), [performance evidence](topics/performance.md) |
+| 3D assets and GPU experiments | [Asset workstream](topics/3d-assets.md), [investigations and renderer options](research/sprite-to-3d-and-renderer-options.md) |
 | Simulation and prediction | [3D physics](3D-PHYSICS-DESIGN.md), [riding debugging](RIDING-DEBUG.md), [prediction lessons](hard-won-knowledge.md), [spatial optimization](SPATIAL-OPTIMIZATION.md) |
 | Entity persistence and unloading | [Current status](topics/entity-activation.md), [target architecture (planned)](entity-streaming-architecture.md), [refactor sequence](tactical/019-entity-streaming-and-persistence.md) |
 | Experiences and scripting | [Scripting API design](SCRIPTING-API-DESIGN.md), [vision](VISION.md) |
@@ -50,6 +51,7 @@ history, not instructions to implement or confirmed present-day failures.
 
 ## Research and history
 
+- [Sprite-to-3D investigations and renderer options](research/sprite-to-3d-and-renderer-options.md)
 - [Entity streaming: Minecraft Java and mclone](research/entity-streaming-reference.md)
 - [Wire protocol survey](research/wire-protocol-survey.md)
 - [Roblox economy and ownership](research/roblox-economy-and-ownership.md)

@@ -179,7 +179,8 @@ top seams. The fitted visual roof is 21 pixels high; approved physics stays 24.
 The visual shell
 is an unapproved approximation, not new physics or a replacement vehicle bank.
 Hidden faces are marked; near wheels remain part of the painted side.
-[Rendering architecture](rendering-architecture.md#sprite-artwork-on-3d-proxies)
-owns the data/graphics split and follow-up direction;
+[3D assets](3d-assets.md) owns reconstruction and follow-up direction; the user
+subsequently found top-view appearance unacceptable despite passing coverage
+checks. [Rendering architecture](rendering-architecture.md) owns the engine boundary;
 [037](../tactical/037-car-projection-experiment.md) records initial validation and
 [038](../tactical/038-car-proxy-orthographic-checks.md) records the inspection fixes.
