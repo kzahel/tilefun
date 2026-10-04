@@ -1,0 +1,3982 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "me-complete",
+      "name": "Modern Exteriors \u00b7 complete",
+      "image": "assets/tilesets/me-complete.png",
+      "width": 2816,
+      "height": 8224,
+      "tileSize": 16,
+      "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "source": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "index": "data/me-atlas-index.json",
+      "indexKind": "exteriors"
+    },
+    {
+      "id": "modern-interiors",
+      "name": "Modern Interiors \u00b7 packed atlas",
+      "image": "assets/tilesets/modern-interiors-atlas.png",
+      "width": 2048,
+      "height": 8800,
+      "tileSize": 16,
+      "fingerprint": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+      "source": "assets/interiors/ (packed; individual source paths in slice index)",
+      "index": "data/modern-interiors-atlas.json",
+      "indexKind": "interiors"
+    }
+  ],
+  "families": [
+    {
+      "id": "cabinets",
+      "name": "Wooden cabinets",
+      "description": "Complete cabinets and pieces for a wider cabinet.",
+      "status": "proposed",
+      "variantLabel": "Shadow",
+      "variants": [
+        {
+          "id": "normal",
+          "label": "Normal"
+        },
+        {
+          "id": "black-shadow",
+          "label": "Dark shadow"
+        },
+        {
+          "id": "shadowless",
+          "label": "No shadow"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Appearance",
+          "value": "Wooden frames, shown from the front."
+        },
+        {
+          "label": "Assembly",
+          "value": "Left end \u2192 optional middles \u2192 right end. Keep one shadow style."
+        },
+        {
+          "label": "Variants",
+          "value": "Reflection highlights also change slightly in three pieces."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision and height are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "whole",
+          "title": "Complete cabinets",
+          "members": [
+            {
+              "id": "P03-C37",
+              "number": 37,
+              "label": "Tall solid-front cabinet",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete object"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-37-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          928,
+                          4014,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-37-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          512,
+                          3582,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-37-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1408,
+                          4446,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P03-C38",
+              "number": 38,
+              "label": "Tall reflective cabinet",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete object"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-38-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          960,
+                          4014,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-38-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          544,
+                          3582,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-38-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1440,
+                          4446,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Mirror or glass?"
+            },
+            {
+              "id": "P03-C39",
+              "number": 39,
+              "label": "Short solid-front cabinet",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete object"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-39-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          992,
+                          4014,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-39-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          576,
+                          3582,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-39-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1472,
+                          4446,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P03-C40",
+              "number": 40,
+              "label": "Short reflective cabinet",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete object"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-40-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1024,
+                          4014,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-40-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          608,
+                          3582,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-40-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1504,
+                          4446,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Mirror or glass?"
+            },
+            {
+              "id": "P03-C45",
+              "number": 45,
+              "label": "Small open-front unit",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete object"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-45-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          112,
+                          7214,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-45-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1968,
+                          6734,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-45-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          128,
+                          7662,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Shelf, side table, or another small unit?"
+            }
+          ]
+        },
+        {
+          "id": "components",
+          "title": "Pieces to combine",
+          "members": [
+            {
+              "id": "P03-C41",
+              "number": 41,
+              "label": "Left end",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in any shadow style."
+                },
+                {
+                  "label": "Join",
+                  "value": "Add a middle or right end on the right."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-41-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          512,
+                          4926,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-41-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          592,
+                          4734,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-41-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          384,
+                          5118,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P03-C42",
+              "number": 42,
+              "label": "Reflective middle",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in any shadow style."
+                },
+                {
+                  "label": "Join",
+                  "value": "Connect another piece on both sides."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-42-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          528,
+                          4926,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-42-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          608,
+                          4734,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-42-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          400,
+                          5118,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Mirror or glass?"
+            },
+            {
+              "id": "P03-C43",
+              "number": 43,
+              "label": "Solid middle",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in any shadow style."
+                },
+                {
+                  "label": "Join",
+                  "value": "Connect another piece on both sides."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-43-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          544,
+                          4926,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-43-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          624,
+                          4734,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-43-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          416,
+                          5118,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P03-C44",
+              "number": 44,
+              "label": "Right end",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in any shadow style."
+                },
+                {
+                  "label": "Join",
+                  "value": "Add a middle or left end on the left."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "P03-44-normal"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          560,
+                          4926,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "P03-44-black-shadow"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          640,
+                          4734,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "P03-44-shadowless"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          432,
+                          5118,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "description": "These four pieces cannot stand alone in any shadow style."
+        }
+      ],
+      "examples": [
+        {
+          "id": "cabinet-assembly",
+          "label": "A wider cabinet",
+          "description": "Left end, reflective middle, solid middle, right end. Proposed assembly; not human-approved.",
+          "variants": [
+            {
+              "id": "normal",
+              "label": "Normal",
+              "recordIds": [
+                "P03-41-normal",
+                "P03-42-normal",
+                "P03-43-normal",
+                "P03-44-normal"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      512,
+                      4926,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      528,
+                      4926,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      544,
+                      4926,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      560,
+                      4926,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "black-shadow",
+              "label": "Dark shadow",
+              "recordIds": [
+                "P03-41-black-shadow",
+                "P03-42-black-shadow",
+                "P03-43-black-shadow",
+                "P03-44-black-shadow"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      592,
+                      4734,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      608,
+                      4734,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      624,
+                      4734,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      640,
+                      4734,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "shadowless",
+              "label": "No shadow",
+              "recordIds": [
+                "P03-41-shadowless",
+                "P03-42-shadowless",
+                "P03-43-shadowless",
+                "P03-44-shadowless"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      384,
+                      5118,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      400,
+                      5118,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      416,
+                      5118,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      432,
+                      5118,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "revision": "8a3b74a0c34beff07aacd97c4004102c58991c7d5468a40938a8fe2c7b89d31e"
+    },
+    {
+      "id": "trees",
+      "name": "Trees and forest",
+      "description": "One rounded-canopy form, four palettes, three lower sections, and forest pieces.",
+      "status": "proposed",
+      "variantLabel": "Palette",
+      "variants": [
+        {
+          "id": "green",
+          "label": "Green"
+        },
+        {
+          "id": "orange-red",
+          "label": "Orange / red"
+        },
+        {
+          "id": "blue-green",
+          "label": "Blue-green"
+        },
+        {
+          "id": "ochre-yellow",
+          "label": "Ochre / yellow"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Identity",
+          "value": "Species and seasons are unknown."
+        },
+        {
+          "label": "Palettes",
+          "value": "Four colors for the rounded trees and strips. Forest pieces keep their original colors."
+        },
+        {
+          "label": "Ground",
+          "value": "Forest ground colors differ by row. Other terrain compatibility is unknown."
+        },
+        {
+          "label": "Assembly",
+          "value": "Match forest rows. Seamless repeats and corners are unproven."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision and height are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "whole",
+          "title": "Complete trees",
+          "members": [
+            {
+              "id": "tree-1",
+              "number": 1,
+              "label": "Tree \u00b7 brown lower section",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Rounded canopy"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "T01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          16,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "orange-red",
+                  "label": "Orange / red",
+                  "recordIds": [
+                    "T04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          448,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue-green",
+                  "label": "Blue-green",
+                  "recordIds": [
+                    "T07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          864,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre-yellow",
+                  "label": "Ochre / yellow",
+                  "recordIds": [
+                    "T10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1280,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "tree-2",
+              "number": 2,
+              "label": "Tree \u00b7 pale lower section",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Rounded canopy"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "T02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          16,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          80,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "orange-red",
+                  "label": "Orange / red",
+                  "recordIds": [
+                    "T05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          448,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          512,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue-green",
+                  "label": "Blue-green",
+                  "recordIds": [
+                    "T08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          864,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          928,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre-yellow",
+                  "label": "Ochre / yellow",
+                  "recordIds": [
+                    "T11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1280,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1344,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "tree-3",
+              "number": 3,
+              "label": "Tree \u00b7 green-tinted lower section",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Rounded canopy"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "T03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          16,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          96,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "orange-red",
+                  "label": "Orange / red",
+                  "recordIds": [
+                    "T06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          448,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          528,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue-green",
+                  "label": "Blue-green",
+                  "recordIds": [
+                    "T09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          864,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          944,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre-yellow",
+                  "label": "Ochre / yellow",
+                  "recordIds": [
+                    "T12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1280,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      },
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1360,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          48
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "patches",
+          "title": "Replacement strips",
+          "members": [
+            {
+              "id": "tree-patch-1",
+              "number": 4,
+              "label": "Pale replacement strip",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone. Replaces the bottom 16 pixels of the matching tree."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "B01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          80,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "orange-red",
+                  "label": "Orange / red",
+                  "recordIds": [
+                    "B03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          512,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue-green",
+                  "label": "Blue-green",
+                  "recordIds": [
+                    "B05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          928,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre-yellow",
+                  "label": "Ochre / yellow",
+                  "recordIds": [
+                    "B07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1344,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "tree-patch-2",
+              "number": 5,
+              "label": "Green-tinted replacement strip",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone. Replaces the bottom 16 pixels of the matching tree."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "B02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          96,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "orange-red",
+                  "label": "Orange / red",
+                  "recordIds": [
+                    "B04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          528,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue-green",
+                  "label": "Blue-green",
+                  "recordIds": [
+                    "B06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          944,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre-yellow",
+                  "label": "Ochre / yellow",
+                  "recordIds": [
+                    "B08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2464,
+                          1360,
+                          64,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "forest-1",
+          "title": "Forest 1 pieces",
+          "members": [
+            {
+              "id": "F01",
+              "number": 6,
+              "label": "Forest 1 \u00b7 left fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 1 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      112
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2448,
+                          1600,
+                          48,
+                          112
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F02",
+              "number": 7,
+              "label": "Forest 1 \u00b7 center",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 1 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      128,
+                      112
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2512,
+                          1600,
+                          128,
+                          112
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F03",
+              "number": 8,
+              "label": "Forest 1 \u00b7 right fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 1 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      96
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2656,
+                          1600,
+                          32,
+                          96
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "forest-2",
+          "title": "Forest 2 pieces",
+          "members": [
+            {
+              "id": "F04",
+              "number": 9,
+              "label": "Forest 2 \u00b7 left fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 2 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2448,
+                          1712,
+                          48,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F05",
+              "number": 10,
+              "label": "Forest 2 \u00b7 center with stump",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 2 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      128,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2512,
+                          1712,
+                          128,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F06",
+              "number": 11,
+              "label": "Forest 2 \u00b7 right fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 2 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2656,
+                          1712,
+                          32,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "forest-3",
+          "title": "Forest 3 pieces",
+          "members": [
+            {
+              "id": "F07",
+              "number": 12,
+              "label": "Forest 3 \u00b7 left fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 3 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2448,
+                          1792,
+                          48,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F08",
+              "number": 13,
+              "label": "Forest 3 \u00b7 center",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 3 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      112,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2512,
+                          1792,
+                          112,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "F09",
+              "number": 14,
+              "label": "Forest 3 \u00b7 right fragment",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Proposed combination with the other forest 3 pieces."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "fixed",
+                  "label": "Original colors",
+                  "recordIds": [
+                    "F09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2640,
+                          1792,
+                          32,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "forest-row-1",
+          "label": "Forest 1",
+          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F01",
+                "F02",
+                "F03"
+              ],
+              "sprite": {
+                "size": [
+                  208,
+                  112
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2448,
+                      1600,
+                      48,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2656,
+                      1600,
+                      32,
+                      96
+                    ],
+                    "at": [
+                      176,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "forest-row-2",
+          "label": "Forest 2",
+          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F04",
+                "F05",
+                "F06"
+              ],
+              "sprite": {
+                "size": [
+                  208,
+                  80
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2448,
+                      1712,
+                      48,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2656,
+                      1712,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      176,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "forest-row-3",
+          "label": "Forest 3",
+          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F07",
+                "F08",
+                "F09"
+              ],
+              "sprite": {
+                "size": [
+                  192,
+                  80
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2448,
+                      1792,
+                      48,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2640,
+                      1792,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      160,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "revision": "577cb23aac8255b6359471b3350c2d2116e7767c649a581a0ea6955c1b9b7145"
+    },
+    {
+      "id": "scrapyard",
+      "name": "Scrapyard and debris",
+      "description": "Wrecked cars, scrap, refuse pieces, and nearby utility structures.",
+      "status": "proposed",
+      "variantLabel": "Appearance",
+      "variants": [
+        {
+          "id": "original",
+          "label": "Original"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Identity",
+          "value": "Labels describe visible forms; uncertain purposes have a question."
+        },
+        {
+          "label": "Joins",
+          "value": "Refuse tapers and middle connect in the examples; seamless texture is unproven."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision, anchors, and walkability are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "wrecks",
+          "title": "Wrecked cars",
+          "members": [
+            {
+              "id": "P02-01",
+              "number": 1,
+              "label": "Damaged teal car shell",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1776,
+                          3104,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-02",
+              "number": 2,
+              "label": "Damaged pale-gray car shell",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1712,
+                          3104,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-03",
+              "number": 3,
+              "label": "Two-car stack: gray over orange",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1968,
+                          3088,
+                          64,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-04",
+              "number": 4,
+              "label": "Three-car stack: orange, gray, teal",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1904,
+                          3072,
+                          64,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-05",
+              "number": 5,
+              "label": "Overturned teal car \u00b7 lower row",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2032,
+                          3104,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "A different underside view or a different wreck?"
+            },
+            {
+              "id": "P02-06",
+              "number": 6,
+              "label": "Overturned teal car \u00b7 upper row",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2032,
+                          3056,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "A different underside view or a different wreck?"
+            }
+          ]
+        },
+        {
+          "id": "scrap",
+          "title": "Loose scrap and stacks",
+          "members": [
+            {
+              "id": "P02-07",
+              "number": 7,
+              "label": "Rust-colored hollow ring",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1504,
+                          3072,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Tire, pipe coupling, or loop?"
+            },
+            {
+              "id": "P02-08",
+              "number": 8,
+              "label": "Stacked curved metal strips",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1488,
+                          3136,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Car bumpers or bent metal panels?"
+            },
+            {
+              "id": "P02-09",
+              "number": 9,
+              "label": "Brown slatted frame",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1472,
+                          3072,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Pallet, grating, or ladder-like frame?"
+            },
+            {
+              "id": "P02-10",
+              "number": 10,
+              "label": "Gray-and-orange compact scrap block",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2000,
+                          3296,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            },
+            {
+              "id": "P02-11",
+              "number": 11,
+              "label": "Tall green-and-orange scrap block",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2000,
+                          3280,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            },
+            {
+              "id": "P02-12",
+              "number": 12,
+              "label": "Small green-and-orange scrap block",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2032,
+                          3296,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            },
+            {
+              "id": "P02-13",
+              "number": 13,
+              "label": "Small pale metallic scrap block",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2032,
+                          3280,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            },
+            {
+              "id": "P02-14",
+              "number": 14,
+              "label": "Tall mixed-color scrap block",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          3296,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            },
+            {
+              "id": "P02-15",
+              "number": 15,
+              "label": "Stacked compact scrap blocks",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      80,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          3232,
+                          80,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Compressed scrap or bundled mixed trash?"
+            }
+          ]
+        },
+        {
+          "id": "piles",
+          "title": "Mixed refuse mounds",
+          "members": [
+            {
+              "id": "P02-16",
+              "number": 16,
+              "label": "Mixed refuse mound, plain",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2112,
+                          3280,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-17",
+              "number": 17,
+              "label": "Mixed refuse mound with blue sign",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2112,
+                          3248,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-18",
+              "number": 18,
+              "label": "Mixed refuse mound with warning triangle",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2112,
+                          3216,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-19",
+              "number": 19,
+              "label": "Mixed refuse mound with round dark item",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-19"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2112,
+                          3165,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-20",
+              "number": 20,
+              "label": "Mixed refuse mound with tall white item",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "One image containing a stack or mixed pile."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-20"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          3164,
+                          64,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "components",
+          "title": "Refuse pieces to combine",
+          "members": [
+            {
+              "id": "P02-21",
+              "number": 21,
+              "label": "Refuse strip left taper",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Left taper; join a middle on the right."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-21"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1872,
+                          3280,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-22",
+              "number": 22,
+              "label": "Refuse strip middle",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Middle; place between the left and right tapers."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-22"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1904,
+                          3280,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Repeatable fill or a fixed-width strip?"
+            },
+            {
+              "id": "P02-23",
+              "number": 23,
+              "label": "Refuse strip right taper",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Right taper; join a middle on the left."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-23"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          3280,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "loose",
+          "title": "Signs and loose pieces",
+          "members": [
+            {
+              "id": "P02-24",
+              "number": 24,
+              "label": "Blue directional sign among debris",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Loose piece; possible mound addition."
+                },
+                {
+                  "label": "Placement",
+                  "value": "Whether it can stand alone is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-24"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2064,
+                          3264,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-25",
+              "number": 25,
+              "label": "Warning triangle on support",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Loose piece; possible mound addition."
+                },
+                {
+                  "label": "Placement",
+                  "value": "Whether it can stand alone is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-25"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2064,
+                          3280,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Does this triangle belong to the mound? The visible match is incomplete."
+            },
+            {
+              "id": "P02-26",
+              "number": 26,
+              "label": "Tall white rectangular discarded item",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Loose piece; possible mound addition."
+                },
+                {
+                  "label": "Placement",
+                  "value": "Whether it can stand alone is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-26"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2080,
+                          3216,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Discarded appliance, cabinet, or bin?"
+            }
+          ],
+          "description": "Possible mound additions; standalone suitability is unknown."
+        },
+        {
+          "id": "utilities",
+          "title": "Nearby utility structures",
+          "members": [
+            {
+              "id": "P02-27",
+              "number": 27,
+              "label": "Cylindrical tank",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-27"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      112
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1648,
+                          3152,
+                          48,
+                          112
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "question": "Water storage or another industrial tank?"
+            },
+            {
+              "id": "P02-28",
+              "number": 28,
+              "label": "Container-like utility cabin",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-28"
+                  ],
+                  "sprite": {
+                    "size": [
+                      80,
+                      80
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1920,
+                          3152,
+                          80,
+                          80
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "P02-29",
+              "number": 29,
+              "label": "Corrugated shed or shack",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete source image"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "P02-29"
+                  ],
+                  "sprite": {
+                    "size": [
+                      96,
+                      96
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2176,
+                          3216,
+                          96,
+                          96
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "refuse-strip",
+          "label": "A longer refuse strip",
+          "description": "Left taper, two middles, right taper. Longer repeats remain unproven.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "P02-21",
+                "P02-22",
+                "P02-22",
+                "P02-23"
+              ],
+              "sprite": {
+                "size": [
+                  160,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1872,
+                      3280,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1904,
+                      3280,
+                      64,
+                      32
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1904,
+                      3280,
+                      64,
+                      32
+                    ],
+                    "at": [
+                      80,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      3280,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      144,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "revision": "8e78a4e155364093ac871c6a3bda1e4894779f414f171e7e79c59c5344c5bea2"
+    }
+  ],
+  "revision": "9094d2efecb3e60c0d0f05719f6be0cb48182c15407999a344adaf5efabbbc61"
+}

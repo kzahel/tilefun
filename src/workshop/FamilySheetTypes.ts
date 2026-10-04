@@ -1,0 +1,51 @@
+import type { ArtRect, ArtSheet } from "../art/ArtCatalog.js";
+
+export interface FamilyFact {
+  label: string;
+  value: string;
+}
+export interface FamilySprite {
+  size: [number, number];
+  /** Each layer replaces its destination rectangle, including transparent pixels. */
+  layers: { sheetId: string; rect: ArtRect; at: [number, number] }[];
+}
+export interface FamilyVariant {
+  id: string;
+  label: string;
+  recordIds: string[];
+  sprite: FamilySprite;
+}
+export interface FamilyMember {
+  id: string;
+  number: number;
+  label: string;
+  kind: "whole" | "component";
+  facts: FamilyFact[];
+  question?: string;
+  variants: FamilyVariant[];
+}
+export interface FamilySheet {
+  id: "cabinets" | "trees" | "scrapyard";
+  name: string;
+  description: string;
+  status: "proposed";
+  revision: string;
+  variantLabel: string;
+  variants: { id: string; label: string }[];
+  facts: FamilyFact[];
+  groups: { id: string; title: string; description?: string; members: FamilyMember[] }[];
+  examples: { id: string; label: string; description: string; variants: FamilyVariant[] }[];
+}
+export interface FamilySheetCatalog {
+  version: 1;
+  revision: string;
+  sources: ArtSheet[];
+  families: FamilySheet[];
+}
+
+/** Fixed-color members (e.g. mixed forest strips) keep their own first variant. */
+export function familyVariant(member: { variants: FamilyVariant[] }, id: string): FamilyVariant {
+  const result = member.variants.find((variant) => variant.id === id) ?? member.variants[0];
+  if (!result) throw new Error("This piece has no artwork.");
+  return result;
+}
