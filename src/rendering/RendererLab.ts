@@ -1,7 +1,7 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
-import { COMPACT_CAR_MESH, yawOrientation } from "./MeshPresentation.js";
+import { COMPACT_CAR_MESH, poseOrientation, yawOrientation } from "./MeshPresentation.js";
 import { touchRaster } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -137,6 +137,10 @@ const lab = {
     foreground = value;
     return draw();
   },
+  setPose(yaw: number, pitch: number, roll: number) {
+    car.mesh.orientation = poseOrientation(yaw, pitch, roll);
+    return draw();
+  },
   setYaw(radians: number) {
     car.mesh.orientation = yawOrientation(radians);
     return draw();
@@ -180,5 +184,26 @@ heading.value = "180";
 heading.setAttribute("aria-label", "Car heading");
 heading.oninput = () => lab.setYaw((Number(heading.value) * Math.PI) / 180);
 controls.append(heading);
+const pitch = document.createElement("input"),
+  roll = document.createElement("input");
+for (const [input, name] of [
+  [pitch, "Car pitch"],
+  [roll, "Car roll"],
+] as const) {
+  input.type = "range";
+  input.min = "-45";
+  input.max = "45";
+  input.value = "0";
+  input.setAttribute("aria-label", name);
+  controls.append(input);
+}
+const updatePose = () =>
+  lab.setPose(
+    (Number(heading.value) * Math.PI) / 180,
+    (Number(pitch.value) * Math.PI) / 180,
+    (Number(roll.value) * Math.PI) / 180,
+  );
+heading.oninput = pitch.oninput = roll.oninput = updatePose;
+
 draw();
 window.addEventListener("pagehide", () => lab.dispose(), { once: true });

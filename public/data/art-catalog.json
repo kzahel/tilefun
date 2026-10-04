@@ -20634,6 +20634,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/EntityMeshPose.ts:11"
         }
       ]
     },

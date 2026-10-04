@@ -5,7 +5,9 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { Camera } from "../rendering/Camera.js";
 import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
+import type { RasterRenderBackend } from "../rendering/RasterRenderBackend.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import { SceneFrame } from "../rendering/SceneFrame.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
 
@@ -27,7 +29,8 @@ export default function TrafficPage() {
     scene.current = s;
     keys.current.clear();
     const camera = new Camera();
-    let renderer: CanvasRenderBackend | null = null;
+    let renderer: RasterRenderBackend | null = null;
+    const sceneFrame = new SceneFrame();
     const order: number[] = [];
     camera.setViewport(960, 600);
     camera.zoom = 0.75;
@@ -43,13 +46,25 @@ export default function TrafficPage() {
           closeAssets(assets);
           return;
         }
-        const c = required(canvas.current),
-          ctx = required(c.getContext("2d"));
-        const backend = new CanvasRenderBackend(ctx, assets.sheets);
+        const c = required(canvas.current);
+        const GpuBackend =
+          new URLSearchParams(location.search).get("renderer") === "gpu"
+            ? (await import("../rendering/GpuRenderBackend.js")).GpuRenderBackend
+            : null;
+        if (!alive) {
+          closeAssets(assets);
+          return;
+        }
+        const gpu = GpuBackend ? new GpuBackend(c) : null;
+        const backend = gpu ?? new CanvasRenderBackend(required(c.getContext("2d")), assets.sheets);
+        if (gpu) {
+          gpu.setAssets(assets.sheets);
+          gpu.meshes.setEnabled(new URLSearchParams(location.search).has("meshes"));
+        }
+
         renderer = backend;
         const visiblePreparation = { scope: "visible" as const };
-        c.width = 960;
-        c.height = 600;
+        backend.resize(960, 600);
         c.dataset.ready = "true";
         let last = performance.now(),
           accumulator = 0,
@@ -90,9 +105,8 @@ export default function TrafficPage() {
               });
             loadTimer = 0.3;
           }
-          ctx.imageSmoothingEnabled = false;
-          ctx.fillStyle = "#cbd5c3";
-          ctx.fillRect(0, 0, c.width, c.height);
+          gpu?.beginFrame();
+          backend.submit(camera, { kind: "clear", color: "#cbd5c3" });
           backend.prepareTerrain(camera, s.view.world, range, { timeBudgetMs: 4, rowBudget: 256 });
           backend.prepareTerrain(camera, s.view.world, range, visiblePreparation);
           backend.submit(camera, {
@@ -109,8 +123,13 @@ export default function TrafficPage() {
             backend,
             [],
             false,
+            undefined,
+            undefined,
+            sceneFrame,
           );
           backend.submit(camera, { kind: "scene", items, order: collectSceneOrder(items, order) });
+          sceneFrame.release();
+          if (gpu) c.dataset.meshDraws = String(gpu.meshes.draws);
           const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
           c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
           c.dataset.carX = String(car.position.wx);
@@ -135,6 +154,7 @@ export default function TrafficPage() {
       alive = false;
       cancelAnimationFrame(raf);
       renderer?.dispose();
+      sceneFrame.clear();
       window.removeEventListener("blur", release);
       keys.current.clear();
       void pending.then(closeAssets).catch(() => {});

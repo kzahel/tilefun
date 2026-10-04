@@ -1,4 +1,5 @@
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
+import { EntityMeshPose } from "./EntityMeshPose.js";
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 import { OverlayFrame } from "./OverlayFrame.js";
 import { PropDepthCache } from "./propDepth.js";
@@ -12,6 +13,7 @@ import type { SceneItem } from "./SceneItem.js";
 export class SceneFrame {
   interior: InteriorPresentation | null = null;
   interiorKey = "";
+  readonly meshPoses = new EntityMeshPose();
   readonly overlays = new OverlayFrame();
   readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
@@ -33,6 +35,7 @@ export class SceneFrame {
   }
 
   clear(): void {
+    this.meshPoses.clear();
     this.release();
     this.overlays.clear();
     this.interior?.clear();

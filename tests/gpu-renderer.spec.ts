@@ -91,3 +91,15 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   expect(after.mismatches).toBe(0);
   expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
 });
+
+test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+  const canvas = page.getByLabel("Generated traffic playground");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect
+    .poll(() => canvas.getAttribute("data-mesh-draws").then((value) => Number(value)))
+    .toBeGreaterThan(0);
+  expect(errors).toEqual([]);
+});

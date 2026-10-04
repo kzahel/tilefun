@@ -71,6 +71,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [042 Optional mesh bodies](042-optional-mesh-bodies.md) | Active neutral instances, fallback and isolated GPU depth |
 
+| [043 Shared mesh pose](043-shared-mesh-pose.md) | Active continuous cosmetic heading in shared presentation |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

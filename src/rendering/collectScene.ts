@@ -6,7 +6,9 @@ import { isVehicle } from "../traffic/Vehicle.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import { entityHeading, meshAssetFor } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, collectGrassBladeItems } from "./GrassBladeRenderer.js";
+import { yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
@@ -91,16 +93,19 @@ export function collectScene(
     ? [...propSurfaces, ...vehicleSurfaces]
     : propSurfaces;
 
+  const poseTime = performance.now() / 1000;
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite) continue;
     const effectiveWy = e.position.wy - (e.wz ?? 0);
-    const halfW = e.sprite.spriteWidth / 2;
+    const meshAsset = meshAssetFor(e);
+    const meshRadius = meshAsset ? 64 : 0;
+    const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     if (
       e.position.wx + halfW < vpTL.wx - M ||
       e.position.wx - halfW > vpBR.wx + M ||
-      effectiveWy < vpTL.wy - M ||
-      effectiveWy - e.sprite.spriteHeight > vpBR.wy + M
+      effectiveWy + meshRadius * Math.SQRT2 < vpTL.wy - M ||
+      effectiveWy - Math.max(e.sprite.spriteHeight, meshRadius * Math.SQRT2) > vpBR.wy + M
     )
       continue;
 
@@ -138,7 +143,13 @@ export function collectScene(
       depthSurfaces,
     );
 
+    const mesh =
+      frame?.meshPoses.evaluate(e, poseTime) ??
+      (meshAsset
+        ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: 64 }
+        : undefined);
     items.push({
+      ...(mesh ? { mesh } : {}),
       kind: "sprite",
       sortKey,
       wx: pos.wx,

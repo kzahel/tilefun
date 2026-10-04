@@ -7,6 +7,7 @@ const neutral = [
   "assets/SpriteCatalog.ts",
   "rendering/RenderFrame.ts",
   "rendering/MeshPresentation.ts",
+  "rendering/EntityMeshPose.ts",
   "rendering/Projection.ts",
   "rendering/TerrainPresentation.ts",
   "rendering/TerrainFrame.ts",

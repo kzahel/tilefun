@@ -15,8 +15,8 @@ Diagnostic mesh acceptance is separate from approving reconstructed artwork.
 | 1 — Compatibility baseline | Complete: 040 | Projection fixtures and reference scene coverage identified |
 | 2 — GPU sprite scene | Complete: 041 | Shared drawing rules, persistent texture resources, actual GPU comparison |
 | 3 — Optional mesh body | Complete: 042 | Neutral asset/pose data, isolated depth, same anchor/order and sprite fallback |
-| 4 — Continuous orientation | Active: 043 | Shared pose evaluation, arbitrary headings, inspector/gameplay reuse |
-| 5 — Integration/lifecycle | Pending | All passes, streaming/editing, bounded residency, recovery and fallback tests |
+| 4 — Continuous orientation | Complete: 043 | Shared pose evaluation, arbitrary headings, inspector/gameplay reuse |
+| 5 — Integration/lifecycle | Active: 044 | All passes, streaming/editing, bounded residency, recovery and fallback tests |
 | 6 — Measurement/decision | Pending | Matched browser/phone evidence, WebGPU feasibility, honest default decision |
 
 Create each slice tactical on arrival. Commit validated increments; record scope
