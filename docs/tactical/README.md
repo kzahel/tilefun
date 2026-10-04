@@ -88,6 +88,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [051 World geometry proof](051-world-geometry-proof.md) | First shared-engine ramp, raised deck, passage, vertical saves and diagnostic cutaways |
 
+| [052 Overview draw and upload profile](052-overview-draw-and-upload-profile.md) | In progress: attribute warm overview cost and Pixel uploads, validate focused fixes |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

@@ -337,3 +337,19 @@ two seconds. Attribution is pending. Next: profile recurring warm overview
 collection/draw costs and these uploads, then use temperature-controlled phone
 repeats and longer motion traces to evaluate a focused change. See 049 for
 complete conditions, gates and measurement limits.
+
+
+[052](../tactical/052-overview-draw-and-upload-profile.md) investigates those
+costs. `streaming:bench -- --zoom-motion --zooms=0.1 --noclip
+--profile-stage=recovery-warm` adds inclusive pass timings, GPU upload-source
+attribution and a sampled CPU summary to that stage. Raw `.cpuprofile` files stay
+local. Profiling changes timing; use separate runs for before/after comparison.
+
+Physical-device runs can supply `--android-device-cli=/path/to/android-device`
+(the machine-control Android adapter) and `--max-battery-c=29`. Before each fresh
+world, the runner waits on the idle tools page until battery temperature is at or
+below the threshold **and** thermal status is zero, with a bounded
+`--cooldown-timeout-seconds=600`. It records before/after readings. Missing sensor
+readings fail closed. This controls entry conditions, not temperature throughout
+the run; keep charging state, workload and durations matched. The single runner
+owns these optional flags; matrix-level forwarding is not implemented yet.

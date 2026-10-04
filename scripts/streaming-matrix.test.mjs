@@ -85,3 +85,31 @@ test("table retains failed fixtures and uses calibrated display misses", () => {
   assert.match(text, /interrupted/);
   assert.doesNotMatch(text, /secret/);
 });
+
+test("Android thermal gate parses exact readings and fails closed on missing values", async () => {
+  const { parseAndroidThermals } = await import("./android-thermal-gate.mjs");
+  assert.deepEqual(parseAndroidThermals("  temperature: 287", "Thermal Status: 0"), {
+    batteryC: 28.7,
+    thermalStatus: 0,
+  });
+  assert.throws(() => parseAndroidThermals("unavailable", "Thermal Status: 0"));
+  assert.throws(() => parseAndroidThermals("  temperature: 287", "unavailable"));
+});
+
+test("CPU profile summary excludes origins and weights sampled functions", async () => {
+  const { summarizeCpuProfile } = await import("./streaming-profile.mjs");
+  const result = summarizeCpuProfile({
+    nodes: [
+      {
+        id: 1,
+        callFrame: {
+          url: "http://private/src/rendering/Draw.ts?token=secret",
+          functionName: "draw",
+        },
+      },
+    ],
+    samples: [1, 1],
+    timeDeltas: [1000, 2000],
+  });
+  assert.deepEqual(result, [{ functionName: "/src/rendering/Draw.ts:draw", selfMs: 3 }]);
+});

@@ -7,6 +7,8 @@ import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
+import { readAndroidThermals, waitForAndroidCool } from "./android-thermal-gate.mjs";
+import { installStreamingProfile, summarizeCpuProfile } from "./streaming-profile.mjs";
 
 const option = (key, fallback) =>
   process.argv
@@ -51,10 +53,27 @@ const cpuRate = Number(option("cpu", "1"));
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
 const touch = process.argv.includes("--touch");
+const androidCli = option("android-device-cli", "");
+const maxBatteryC = Number(option("max-battery-c", "29"));
+const cooldownSeconds = Number(option("cooldown-timeout-seconds", "600"));
+if (
+  androidCli &&
+  (!endpoint ||
+    !Number.isFinite(maxBatteryC) ||
+    maxBatteryC < 15 ||
+    maxBatteryC > 40 ||
+    !Number.isFinite(cooldownSeconds) ||
+    cooldownSeconds < 1 ||
+    cooldownSeconds > 1800)
+)
+  throw Error(
+    "Thermal gate requires physical CDP, max-battery-c 15–40 and cooldown-timeout-seconds 1–1800",
+  );
 const sprintFrames = Number(option("sprint-frames", "300"));
 if (!Number.isInteger(sprintFrames) || sprintFrames < 1 || sprintFrames > 7200)
   throw Error("--sprint-frames must be between 1 and 7200");
 const traceStage = option("trace-stage", "");
+const profileStage = option("profile-stage", "");
 const traceFrames = Number(option("trace-frames", "600"));
 const frameTimelineEnabled = process.argv.includes("--frame-timeline");
 const zoomSettled = process.argv.includes("--zoom-settled");
@@ -168,6 +187,9 @@ try {
           return times[Math.floor(times.length / 2)];
         })
       : null;
+    const thermalsBefore = androidCli
+      ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds)
+      : undefined;
     const arrival = await page.evaluate(async (version) => {
       const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
       const generation = createDescriptor("regional", 2026);
@@ -258,6 +280,12 @@ try {
     };
     const sample = async (name, count, untilSettled = false, durationMs = 0) => {
       const tracing = name === traceStage;
+      const profiling = name === profileStage;
+      if (profiling) {
+        await page.evaluate(installStreamingProfile);
+        await cdp.send("Profiler.enable");
+        await cdp.send("Profiler.start");
+      }
       let traceComplete;
       if (tracing) {
         traceComplete = new Promise((resolve) => cdp.once("Tracing.tracingComplete", resolve));
@@ -570,6 +598,17 @@ try {
           await cdp.send("IO.close", { handle: stream });
         }
       }
+      if (profiling) {
+        const { profile } = await cdp.send("Profiler.stop");
+        await cdp.send("Profiler.disable");
+        data.profile = await page.evaluate(() => window.__streamingProfile());
+        data.profile.cpu = summarizeCpuProfile(profile);
+        await writeFile(
+          path.join(output, `${fixtureName}-${name}.cpuprofile`),
+          JSON.stringify(profile),
+          { mode: 0o600 },
+        );
+      }
       const result = { name, ...data };
       console.log(JSON.stringify({ version, ...result }));
       return result;
@@ -665,6 +704,15 @@ try {
       samples,
       errors,
       failures: fixtureFailures,
+      ...(androidCli
+        ? {
+            thermals: {
+              before: thermalsBefore,
+              after: readAndroidThermals(androidCli),
+              gateMaxBatteryC: maxBatteryC,
+            },
+          }
+        : {}),
     });
     await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
     if (zoomMotion) {
