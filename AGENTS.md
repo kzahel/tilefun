@@ -30,6 +30,11 @@ Single-player authority runs in a Worker using the shared server implementation;
 prediction and rendering remain on the main thread. Read
 [client/server boundaries](docs/client-server-architecture.md) for ownership.
 
+Engine changes must account for affected embedded labs. Read
+[embedded engine labs](docs/topics/embedded-engine-labs.md) before changing shared
+simulation, prediction, presentation or renderer lifecycle; keep game and lab
+consumers aligned through shared engine code.
+
 Maintain one current regional generator. Bump its version when output changes;
 retired worlds require explicit same-seed recreation, not historical emulation.
 Promoted asset banks and exact review snapshots remain immutable; never regenerate

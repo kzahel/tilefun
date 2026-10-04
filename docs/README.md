@@ -33,6 +33,7 @@ completion from an old unchecked checklist. Existing guide filenames stay stable
 | --- | --- |
 | Setup and portable data | [Setup](setup-and-local-data.md) |
 | Workshop, login and feedback APIs | [Workshop](tilefun-workshop.md), [art workbench](art-workbench.md) |
+| Embedded gameplay labs | [Engine alignment](topics/embedded-engine-labs.md), [scenario runtime](topics/gameplay-scenarios.md) |
 | World exploration and generation | [World explorer](world-explorer.md), [city topic](topics/city-generation.md) |
 | Rooms, furniture and drawing | [Interior workbench](interior-workbench.md), [counterexample search](interior-counterexamples.md), [editing topic](topics/patterns-and-interiors.md) |
 | Authority, transport and hosting | [Client/server](client-server-architecture.md), [network design](NETWORK-ARCHITECTURE.md), [networking topic](topics/multiplayer-networking.md), [server security](SERVER-SECURITY.md) |

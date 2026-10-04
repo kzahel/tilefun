@@ -11,6 +11,11 @@ owns timing and allocation evidence; [client/server architecture](../client-serv
 owns authority and prediction. [Parent 022](../tactical/022-renderer-backend-decoupling.md)
 tracks this refactor and its completion gates.
 
+[Embedded engine labs](embedded-engine-labs.md) owns game/lab integration parity.
+Changes to shared presentation, assets, preparation or lifecycle must account for
+embedded consumers as well as gameplay; shared backend imports alone are not
+evidence of equivalent scheduling or resource behavior.
+
 The optional fixed-view GPU renderer preserves existing sprite presentation
 and can replace individual sprite bodies with meshes. Entity orientation may
 vary continuously while the camera projection stays fixed. The following

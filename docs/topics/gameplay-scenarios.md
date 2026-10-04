@@ -7,6 +7,10 @@ record persistence, binary replication and `PlayerPredictor`. The temporary host
 changes storage and scheduling; it does not implement another gameplay loop.
 [Tactical 027](../tactical/027-composable-gameplay-scenarios.md) owns delivery evidence.
 
+[Embedded engine labs](embedded-engine-labs.md) owns the requirement to keep labs
+aligned with engine changes, including the remaining presentation-host gaps.
+Shared simulation does not mean every lab runs the game's complete frame loop.
+
 ## Composition
 
 `src/scenarios/ScenarioRecipe.ts` defines versioned plain data: generator identity,

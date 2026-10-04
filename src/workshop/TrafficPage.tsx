@@ -11,8 +11,13 @@ import { SceneFrame } from "../rendering/SceneFrame.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
 
+export type TrafficCanvas = HTMLCanvasElement & {
+  /** Read-only, on-demand diagnostics for lab profiling and integration checks. */
+  __terrainDiagnostics?: () => ReturnType<RasterRenderBackend["getDiagnostics"]>;
+};
+
 export default function TrafficPage() {
-  const canvas = useRef<HTMLCanvasElement>(null),
+  const canvas = useRef<TrafficCanvas>(null),
     scene = useRef<ScenarioClient | null>(null),
     keys = useRef(new Set<string>());
   const [error, setError] = useState(""),
@@ -21,6 +26,7 @@ export default function TrafficPage() {
   const pause = useRef(false);
   pause.current = paused;
   useEffect(() => {
+    const c = required(canvas.current);
     let alive = true,
       raf = 0;
     const s = new ScenarioClient(trafficRecipe());
@@ -46,7 +52,6 @@ export default function TrafficPage() {
           closeAssets(assets);
           return;
         }
-        const c = required(canvas.current);
         const GpuBackend =
           new URLSearchParams(location.search).get("renderer") === "gpu"
             ? (await import("../rendering/GpuRenderBackend.js")).GpuRenderBackend
@@ -63,7 +68,7 @@ export default function TrafficPage() {
         }
 
         renderer = backend;
-        const visiblePreparation = { scope: "visible" as const };
+        c.__terrainDiagnostics = () => backend.getDiagnostics();
         backend.resize(960, 600);
         c.dataset.ready = "true";
         let last = performance.now(),
@@ -107,8 +112,9 @@ export default function TrafficPage() {
           }
           gpu?.beginFrame();
           backend.submit(camera, { kind: "clear", color: "#cbd5c3" });
-          backend.prepareTerrain(camera, s.view.world, range, { timeBudgetMs: 4, rowBudget: 256 });
-          backend.prepareTerrain(camera, s.view.world, range, visiblePreparation);
+          // Use gameplay's bounded scheduler. A visible-only pass here would evict
+          // its retained halo and restart the same offscreen work every frame.
+          backend.prepareTerrain(camera, s.view.world, range);
           backend.submit(camera, {
             kind: "terrain",
             draws: backend.collectTerrain(camera, s.view.world, range),
@@ -153,6 +159,8 @@ export default function TrafficPage() {
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
+      delete c.__terrainDiagnostics;
+      delete c.dataset.ready;
       renderer?.dispose();
       sceneFrame.clear();
       window.removeEventListener("blur", release);
@@ -249,6 +257,7 @@ export default function TrafficPage() {
       </div>
       {error ? <p role="alert">{error}</p> : null}
       <canvas
+        key={restart}
         ref={canvas}
         aria-label="Generated traffic playground"
         tabIndex={0}

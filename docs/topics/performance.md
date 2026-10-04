@@ -7,7 +7,7 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
-Updated: 2026-10-03.
+Updated: 2026-10-04.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -159,6 +159,55 @@ texture uploads and draw submission need profiling before adoption. Live-heap
 snapshots do not attribute allocation churn or close the intermittent-hitch issue.
 The car also renders in native WebGPU, but this is an asset probe, not a complete
 WebGPU game backend or proof that it will be faster.
+
+## Traffic workshop cache churn
+
+Investigation on 2026-10-04 against the live GPU + meshes Traffic playground
+identified competing preparation policies in `TrafficPage`: budgeted surrounding
+terrain preparation followed by visible-only preparation. The latter retains only
+visible coordinates, discarding offscreen resources and partial builds prepared
+by the former. The stationary scene repeatedly rebuilds unchanged terrain.
+
+An isolated bundled full Chromium run (headless, Apple M4 Pro via ANGLE Metal,
+1440 × 1000 browser viewport, 960 × 600 lab canvas) temporarily bypassed
+`TileRenderer.prepareVisibleTerrain` in the page, then restored it. Each condition
+had four seconds of settling and eight seconds of sampling, with meshes enabled:
+
+| Condition | Mean frame rate | Median frame callback | Pending terrain jobs at sample end |
+| --- | ---: | ---: | ---: |
+| Original | 31.8 FPS | 4.4 ms | 8 |
+| Bypass second pass | 60.0 FPS | 0.3 ms | 0 |
+| Restore original | 37.6 FPS | 4.3 ms | 8 |
+
+Prepared rows in the final sampled frame fell from 105 to zero and returned to
+100 after restoration. This is a diagnostic browser intervention, not a shipped
+fix, automated timing gate or proof of mobile/moving-camera performance. No raw
+trace was retained. The browser was closed and repository runtime code unchanged.
+Separate profiles showed terrain drawing dominating active main-thread work in
+Canvas, GPU sprites and GPU + meshes; this issue is not specific to mesh drawing.
+
+[Embedded engine labs](embedded-engine-labs.md) owns the resulting alignment
+constraint and follow-up to consolidate lab presentation with the game.
+
+The repository fix removes the visible-only pass and uses gameplay's default
+2 ms/128-row scheduler budget. On-demand lab diagnostics expose residency, pending
+work and prepared rows without collecting metrics each frame. Browser regressions
+exercise Canvas, GPU sprites and GPU + meshes through the real scenario Worker:
+each scene must settle with no pending builds or prepared rows for 60 consecutive
+frames, retain stable residency/surface bytes, ride over 100 world pixels, settle
+after pause and reset, and exit without page errors. Timing remains separate from
+these behavioral assertions; interpolation and camera-follow parity are still open.
+The reset coverage also reproduced an existing GPU failure: disposal loses the
+WebGL context, but the lab reused that canvas. Reset now creates a fresh canvas
+and removes diagnostics/readiness from the retired element.
+
+Validation: typechecks, 1,444 unit tests, lint (existing warnings), catalog/manifest
+verification and production build pass. All 299 existing browser cases passed in
+the full run; after correcting the startup-settling assertion and GPU reset, all
+17 traffic/GPU checks passed, including the three new renderer-mode regressions.
+The isolated current-generator `streaming:bench -- --assert-ready` run passes with
+zero missing-data or incomplete-cache frames across cold entry, standing, walking,
+sprinting, reversal and zoom-out. This is desktop evidence, not a new phone claim.
 
 
 ## Longer GPU stutter investigation
