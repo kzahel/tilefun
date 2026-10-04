@@ -19,6 +19,12 @@ can retain its sprite presentation while an experimental view shows the same
 world from orthographic or perspective cameras. Later, sufficiently complete
 assets could support a fully 3D presentation, including first person.
 
+The immediate integration target keeps the current fixed game projection and
+allows individual entities to use meshes with continuous orientation. Sprites
+remain the fallback. The [sprite/mesh invariants](rendering-architecture.md#fixed-view-spritemesh-invariants)
+own identity, transform, composition and lifecycle rules for that shared path;
+asset tools must consume its common implementation rather than fork it.
+
 This is a direction, not a claim that all sprites have recoverable hidden surfaces
 or that changing the renderer alone makes the world ready for first person.
 
@@ -82,7 +88,7 @@ Plan each implementation slice in a new tactical when it is taken up.
 | A3 | Proposed | Compare authored geometry/rectified UVs, image-generated geometry, and authored geometry with generated textures on the same car |
 | A4 | Proposed | Evaluate fixed source/front/back/side/top and oblique views; inspect wheel volume, roof/hood layout, seams, ground contact and unknown surfaces; record human judgment alongside metrics |
 | A5 | Proposed | Export/import the chosen candidate as a portable asset with provenance and explicit axis/scale conversion; establish bounded triangle/texture budgets from device evidence |
-| A6 | Proposed | Render the asset in a small shared-world 3D scene; engine work is tracked in the rendering topic |
+| A6 | Proposed | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
 | A7 | Later | Test a second asset class before generalizing authoring, animation or batch generation; first-person coverage remains a later scope |
 
 Recommended next slice: A2 plus a fixed-camera comparison harness. It makes the

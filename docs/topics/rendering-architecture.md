@@ -11,6 +11,12 @@ owns timing and allocation evidence; [client/server architecture](../client-serv
 owns authority and prediction. [Parent 022](../tactical/022-renderer-backend-decoupling.md)
 tracks this refactor and its completion gates.
 
+The next target is a fixed-view renderer that preserves existing sprite output
+and can replace individual sprite bodies with meshes. Entity orientation may
+vary continuously while the camera projection stays fixed. The following
+invariants govern that extension; they are design requirements, not a claim that
+the current interfaces already implement mesh presentation.
+
 ## Architecture
 
 ```text
@@ -168,8 +174,8 @@ production by this document.
 | ID | State | Next evidence / decision |
 | --- | --- | --- |
 | G1 | Open | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
-| G2 | Proposed | Portable mesh/material import and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
-| G3 | Proposed | Neutral world-space scene and camera data feeding a shared-world 3D lab: ground, car, prop and actor; retain Worker authority and browser UI |
+| G2 | Proposed | Portable mesh/material import, sprite fallback and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
+| G3 | Proposed | One shared presentation path with optional mesh bodies and full transforms; first prove continuous car heading under the unchanged fixed projection, then expose diagnostic cameras |
 | G4 | Proposed | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
 | G5 | Proposed | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
 | G6 | Later | Broader asset/world coverage and first-person interaction/content; consider Rust/wgpu only with a concrete measured or platform reason |
@@ -184,3 +190,123 @@ the first portable-asset and world-view experiments, then compare WebGPU and
 WebGL2 in a bounded test. Graphics API, execution language and simulation engine
 are separate decisions. A backend swap alone neither guarantees a performance
 improvement nor supplies hidden artwork or first-person-ready world geometry.
+
+## Fixed-view sprite/mesh invariants
+
+These are the review checklist for G1–G5. Put shared behavior in one owner;
+Canvas and GPU necessarily have different drawing implementations, but must not
+acquire different gameplay or presentation rules.
+
+1. **One simulation and identity.** A car remains the same entity whether drawn
+   as a sprite, mesh or fallback. Rendering reads replicated/predicted state;
+   it never advances movement, steering, collision, support or gameplay animation
+   events. No GPU-only entity class, second world or renderer-owned simulation.
+   Gameplay labs use shared scenario/runtime code rather than new movement loops.
+
+2. **One presentation evaluation per view/frame.** Shared presentation owns
+   interpolation, pose time, visual effects, visibility rules, ordering and shadow
+   policy. Representation adapters consume its result. Backends may cache derived
+   resources and perform conservative GPU culling, but cannot independently infer
+   headings, rerun animation clocks or recollect gameplay state. Evolve the existing
+   builders; do not create a parallel `collect3DWorld` containing copied policy.
+   Multiple views may evaluate different cameras against the same state and time.
+
+3. **One asset identity, explicit alternatives.** Asset metadata associates a
+   sprite presentation and an optional versioned mesh presentation with the same
+   logical asset. Source direction labels are normalized in that metadata, not
+   patched in each consumer. A shared resolver uses view policy, capabilities and
+   a frame-stable readiness snapshot to select exactly one body. Missing, loading,
+   failed or unsupported meshes use the sprite fallback without changing gameplay.
+   Promotion replaces that body atomically at a frame boundary; never draw both
+   bodies or omit both. Multipart models remain one logical body's parts.
+
+4. **One transform composition.** Internal spatial data uses world pixels with
+   X/right, Y/ground and Z/up. Mesh metadata normalizes its local forward to +X,
+   ground/pivot and units once. Pose orientation is a backend-neutral unit
+   quaternion (x,y,z,w); positive yaw about +Z turns +X toward +Y. Euler inputs,
+   if introduced, require one documented conversion/order. With column vectors,
+   the conceptual composition is `world = entityPose * visualLocal * assetToLocal
+   * vertex`. Asset normalization happens once, even if baked during import;
+   renderer axis conversion happens at its boundary. Shared presentation resolves
+   parent/rider attachment and interpolated world height once. Never add terrain,
+   support height, jump offset, sprite pivot or camera offset a second time.
+
+5. **Visual pose does not silently become physics.** Continuous visual heading,
+   suspension lean, pitch/roll or wheel animation cannot rotate colliders or move
+   support surfaces. A heading affecting gameplay belongs to shared simulation and
+   the appropriate replication/prediction contracts. A cosmetic pose derives from
+   shared presentation inputs, not a renderer-local controller. Existing discrete
+   facing cannot magically provide authoritative continuous steering. Physical
+   orientation is a separately specified change, not a side effect of a mesh.
+
+6. **One projection and viewport contract.** The initial mode preserves current
+   ground placement and the vertical screen displacement from world height,
+   including zoom, shake, pixel rounding, viewport and DPR conventions. A generic
+   tilted orthographic camera is not automatically equivalent to this projection.
+   Sprites, mesh anchors, shadows, clips and editor overlays must agree at known
+   world points. Mesh-local vertices rotate before projection; the fixed camera
+   does not rotate with the entity. Ground picking uses the matching inverse;
+   elevated picking requires an explicit height/surface policy, since a screen
+   point has no unique 3D inverse. UI coordinates stay in the host's UI contract.
+
+7. **One explicit composition policy.** Initially, a mesh body occupies the same
+   ordered scene position as its sprite alternative. Depth resolves triangles
+   within that body; it must not leak into other ordered bodies, terrain or later
+   passes. Backends must isolate/remap depth appropriately and preserve supplied
+   clips, alpha cutouts and transparent blending. A separate always-on-top 3D
+   canvas cannot correctly interleave with sprite foregrounds. Offscreen mesh
+   rendering is permitted only as an implementation of the ordered body command,
+   with matching projection/alpha and bounded resource ownership. Whole-body
+   ordering cannot depict arbitrary interpenetration; object splitting or a future
+   world-depth mode needs explicit shared semantics, never per-car z-offset hacks.
+
+8. **One shadow and appearance policy.** Sprite and mesh alternatives emit one
+   logical shadow under the current ground/elevated ordering rules. Do not combine
+   the legacy shadow with an extra Three.js shadow by default. Material metadata
+   states unlit/lit and opaque/cutout/blended behavior; backends honor it. The
+   compatibility path preserves sprite filtering, alpha and color behavior rather
+   than silently adding lighting or tone mapping. New mesh art has its own visual
+   acceptance criteria; unchanged sprites remain the parity baseline.
+
+9. **One definition of each spatial bound.** Physical collision/support bounds
+   remain simulation metadata; visual bounds enclose the posed artwork, and sorting
+   anchors retain their defined presentation meaning. Culling considers rotation,
+   animation and visible attachments, not just the collider. Picking declares
+   whether it selects physical or visual geometry and maps the result to the same
+   stable entity identity; a mesh hit cannot become a gameplay collision implicitly.
+
+10. **One resource/lifetime owner.** `RenderHost` selects and owns a backend per
+    view; that backend owns its GPU objects, loading publications and disposal.
+    Asset IDs/versions cross the interface, Three.js objects do not. Existing
+    borrowed-frame and revision rules still apply. Stale async completion cannot
+    resurrect an evicted/replaced asset or disposed host. Readiness and fallback
+    are explicit; recovery rebuilds graphics without resetting simulation. Source
+    assets can be shared, while device/context resources have distinct owners.
+    No per-frame reload, unbounded mesh cache or unaccounted offscreen render pool.
+
+11. **One route from experiments into gameplay.** New asset inspectors exercise
+    the same asset normalization, pose, material and body-submission implementation
+    as gameplay; tool camera controls and annotations remain local. The existing
+    car/debug labs are evidence, not parallel implementations to copy forward.
+    Before reusing their code, extract the common behavior and document any retained
+    diagnostic adapter. Immutable Canvas review references remain intentional
+    independent oracles; preserving them does not justify another gameplay pipeline.
+
+## Enforcement at implementation time
+
+Documentation alone cannot enforce these rules. Each implementing slice must add
+the relevant evidence before it becomes a supported path:
+
+| Gate | Required evidence |
+| --- | --- |
+| Boundary and identity | Extend dependency guards and recording-backend tests for mesh data; switching representation/backend preserves entity state, identity and shared presentation results |
+| Transform and projection | Landmark fixtures cover ground/elevated anchors, parent/rider height, yaw wraparound, pitch/roll, asset-axis normalization, zoom/DPR and screen-to-ground round trips; model and sprite origins coincide |
+| Mixed composition | Full-Chromium fixtures cover a car behind/in front of a sprite prop, elevated bodies/shadows, foreground clips, transparent holes and overlapping mesh bodies; depth state cannot corrupt the next pass |
+| Fallback and lifecycle | Loading/error/unsupported cases, replacement mid-load, eviction, realm reset and loss/recovery select one body and one shadow with bounded resources and no stale publication |
+| Unchanged appearance | Compare the sprite-only GPU mode with pinned Canvas scenes before enabling meshes; exact pixels where deterministic and explicitly justified tolerances elsewhere, never widening tolerances merely to pass |
+| Reuse and performance | Gameplay and the asset inspector consume the same mesh path; matched phone scenarios measure allocations, frame pacing, uploads and residency with repeated load/unload |
+
+First implementation slice: G1 with the unchanged sprite scene and projection
+fixtures. G2/G3 then add one optional car mesh with continuous visual heading under
+that fixed view. Detail the concrete frame types and depth-isolation strategy in
+that slice's tactical; do not build two competing APIs ahead of the evidence.
