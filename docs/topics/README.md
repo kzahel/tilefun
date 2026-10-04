@@ -27,6 +27,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
+| [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Rendering architecture](rendering-architecture.md) | Backend separation, resource ownership, frame lifetime and incremental renderer replacement |

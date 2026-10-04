@@ -88,6 +88,11 @@ changed recipes or rendered pixels return to review. See [art workbench guide](.
 
 ## Outdoor metadata and scene locations
 
+Whole-sheet semantic investigation for both Modern Exteriors and Interiors is
+planned in [Semantic tileset map](semantic-tileset-map.md), with a dedicated plan,
+queue and notes folder. It starts with thematic reconnaissance and preserves the
+approval and promotion rules here.
+
 Outdoor asset semantics and scene-location feedback continue in
 [Tactical 010](../tactical/010-outdoor-asset-catalog-and-scene-review.md). Workshop's Outdoor
 assets tool is native React (`#/tool/outdoor`); coverage inspection uses Source

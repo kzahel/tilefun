@@ -90,6 +90,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [052 Overview draw and upload profile](052-overview-draw-and-upload-profile.md) | Complete: GPU dimension cache, 18 measured cases; extra Pixel repeat/long run blocked by cooldown |
 
+| [053 Semantic tileset map](053-semantic-tileset-map.md) | Parent plan and dedicated investigation folder: thematic survey, bounded agent trials and final owner review; [semantic mapping topic](../topics/semantic-tileset-map.md) |
+
 | [054 Character presentation host](054-character-presentation-host.md) | Shared interactive character host; immutable approval renderer preserved; [embedded labs](../topics/embedded-engine-labs.md) |
 | [055 Overview frame reuse](055-overview-frame-reuse.md) | Complete: bounded overview grass pooling, indexed GPU quads and Mac/Pixel comparisons; [performance topic](../topics/performance.md) |
 
