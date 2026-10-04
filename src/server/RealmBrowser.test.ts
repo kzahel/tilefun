@@ -1726,3 +1726,48 @@ it("lists retired worlds without opening them and recreates into a clean contain
   await expect(server.loadWorld(fresh.id)).resolves.toBeDefined();
   await server.destroy();
 });
+
+it.each(["butcher", "condo-bay"])(
+  "%s exits begin at the same doorway pose as entry ends",
+  async (building) => {
+    const { server, transport, lot, doors } = await cityDoorSetup(building);
+    try {
+      const session = server.getLocalSession();
+      const door = doors[1];
+      if (!door) throw new Error("Missing second door");
+      session.editorEnabled = false;
+      session.player.position = { ...door.outside };
+      session.doorIntent = { dx: 0, dy: -1, at: Date.now() };
+      transport.clientSend("local", {
+        type: "enter-building",
+        requestId: 2410,
+        featureId: lot.id,
+        doorId: door.id,
+        walkThrough: true,
+      });
+      await server.settle();
+      const { buildingDoor } = await import("../interiors/BuildingDoors.js");
+      const interior = server.worldInterior;
+      if (!interior) throw new Error("Missing interior");
+      const connection = buildingDoor(interior, door.id);
+      session.player.position = { ...connection.inside };
+      session.doorArrivalUntil = 0;
+      session.doorIntent = { dx: 0, dy: 1, at: Date.now() };
+      transport.clientSend("local", {
+        type: "exit-building",
+        requestId: 2411,
+        doorId: door.id,
+        walkThrough: true,
+      });
+      await server.settle();
+      const motions = transport.messagesOfType("local", "door-motion");
+      expect(motions).toHaveLength(4);
+      expect(motions[3]?.from).toEqual(motions[0]?.to);
+      expect(motions[3]?.to).toEqual(door.outside);
+      expect(motions[3]?.revealMs).toBe(180);
+      expect(motions[1]?.revealMs).toBeUndefined();
+    } finally {
+      await server.destroy();
+    }
+  },
+);

@@ -6,6 +6,7 @@ import {
   SURFACE_COLS,
   SURFACE_ROWS,
 } from "../road/CitySurfaceRecipes.js";
+import { reviewContext2D } from "./reviewCanvas.js";
 
 /** The shared composer supplies all surface decisions; the lab only projects pixels. */
 export function drawSurfaceShowcase(
@@ -16,8 +17,7 @@ export function drawSurfaceShowcase(
 ) {
   canvas.width = SURFACE_COLS * 16 * 2;
   canvas.height = SURFACE_ROWS * 16 * 2;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Missing surface canvas");
+  const ctx = reviewContext2D(canvas);
   ctx.imageSmoothingEnabled = false;
   const pieces = composeCitySurface(scene);
   drawCitySurfacePieces(ctx, sheet, pieces, 0, 0, 2);

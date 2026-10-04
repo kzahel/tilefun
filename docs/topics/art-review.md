@@ -50,11 +50,28 @@ Exact canvas fingerprints must use `reviewContext2D` from the **first** context
 acquisition, including intermediate sprite canvases. Default GPU and CPU canvas
 rasterization can disagree despite identical source art; a current manifest digest
 does not prove browser parity. Keep platform-dependent text out of hashed art.
-Manifest generation compares fresh character/vehicle identities in headless-shell
-and normal Chromium at retina scale before writing, and rejects concurrent input
-changes. New review kinds need equivalent normal-browser verification in addition
-to ordinary headless tests. A rebuilt manifest alone cannot fix nondeterministic
+Source crops in review contexts use a raster pattern rather than Skia's fast image
+blit: x64 and ARM round translucent source-over channels differently in that fast
+path. The pattern preserves the registered pixels across both architectures;
+ordinary gameplay contexts retain their native image path. Manifest generation
+compares every candidate in headless-shell and normal Chromium at retina scale
+before writing, and rejects concurrent input changes. CI additionally runs
+`npm run workshop:manifest -- --verify-raster` on Ubuntu x64 to compare fresh
+renders against every committed fingerprint without writing the manifest.
+New review kinds need equivalent normal-browser verification in addition to
+ordinary headless tests. A rebuilt manifest alone cannot fix nondeterministic
 rendering.
+
+The 2026-10-03 CI repair preserved all 551 candidate records byte-for-byte (only
+the broad input digest changed). Typechecks, lint, production build, 1,424 unit
+tests and all 293 browser tests passed locally; Worker checks and both dependency
+audits also passed. Ubuntu x64 Playwright containers verified every registered
+fingerprint in both browser modes and passed the latest failed run's fourteen
+browser checks serially. The x64 run used CPU emulation and a longer overall
+test deadline; its normal five-second assertion deadline remained unchanged.
+City-generation coverage now runs each seed separately within the normal unit
+test deadline. The phone Building Lab stage also leaves more space for review
+controls with Linux font metrics.
 
 The art workbench is at `/tilefun/art-workbench.html`. See
 [art workbench guide](../art-workbench.md) for source-use inventory coverage and the shared note

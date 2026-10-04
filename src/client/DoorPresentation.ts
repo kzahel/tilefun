@@ -76,7 +76,8 @@ export class DoorPresentation {
       );
       if (!motion || (motion === this.own && this.waiting)) return entity;
       const { event, start } = motion;
-      const t = Math.min(1, Math.max(0, (now - start) / event.duration));
+      const walkElapsed = Math.max(0, now - start - (event.revealMs ?? 0));
+      const t = Math.min(1, walkElapsed / event.duration);
       if (event.phase === "arrive" && t >= 1) return entity;
       const position = {
         wx: event.from.wx + (event.to.wx - event.from.wx) * t,
@@ -92,9 +93,9 @@ export class DoorPresentation {
               ...entity.sprite,
               direction,
               frameRow: direction,
-              moving: t < 1,
+              moving: walkElapsed > 0 && t < 1,
               frameCol:
-                Math.floor((now - start) / entity.sprite.frameDuration) % entity.sprite.frameCount,
+                Math.floor(walkElapsed / entity.sprite.frameDuration) % entity.sprite.frameCount,
             }
           : null,
       };

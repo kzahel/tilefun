@@ -21,6 +21,7 @@ import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { World } from "../world/World.js";
 import type { ArtRect } from "./ArtCatalog.js";
 import { archivedCityScene, createPreviewGenerator } from "./CityReviewArchive.js";
+import { reviewContext2D } from "./reviewCanvas.js";
 
 export const DENSE_DEMO_GENERATION: GenerationDescriptor = {
   type: "regional",
@@ -315,8 +316,7 @@ export function drawDenseDistrictShowcase(
   canvas.height = height;
   // Approval hashes must use the same raster path in normal GPU-backed
   // browsers and headless builds (chunk overscan and ellipse edge rounding).
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) throw new Error("Missing district canvas");
+  const ctx = reviewContext2D(canvas);
   ctx.imageSmoothingEnabled = false;
   const generator = createPreviewGenerator(s.generation),
     world = new World(generator.terrain),

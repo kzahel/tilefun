@@ -12,8 +12,14 @@ export interface DoorMotion {
   from: PositionComponent;
   to: PositionComponent;
   duration: number;
+  /** Local reveal time at the doorway before the arrival walk starts. */
+  revealMs?: number;
   /** Optional exact facade animation, independent of the building's frozen art. */
   overlay?: { wx: number; wy: number; kind: "butcher" };
+}
+/** The same facade pose closes an entry walk and opens its return trip. */
+export function exteriorDoorWalkAnchor(outside: PositionComponent): PositionComponent {
+  return { wx: outside.wx, wy: outside.wy - 24 };
 }
 export function atDoorThreshold(
   position: PositionComponent,

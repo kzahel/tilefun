@@ -73,3 +73,36 @@ it("keeps a shared door open while another player is still using it", () => {
   expect(items).toHaveLength(1);
   expect(items[0]).toMatchObject({ kind: "sprite", frameCol: 6 });
 });
+
+it("reveals the player at the exterior threshold before walking to the safe landing", () => {
+  const presentation = new DoorPresentation();
+  const arrival: DoorMotion = {
+    ...motion,
+    phase: "arrive",
+    from: { wx: 100, wy: 96 },
+    to: { wx: 100, wy: 120 },
+    revealMs: 180,
+  };
+  const actor: Entity = {
+    id: 1,
+    type: "player",
+    position: { ...arrival.to },
+    sprite: null,
+    velocity: null,
+    collider: null,
+    wanderAI: null,
+  };
+  presentation.receive(arrival, 0);
+  presentation.update("street", false, 500);
+  expect(veil.style.opacity).toBe("1");
+  presentation.update("street", true, 1000);
+  presentation.update("street", true, 1180);
+  expect(veil.style.opacity).toBe("0");
+  expect(presentation.entities([actor], "street", 1180)[0]?.position).toEqual(arrival.from);
+  expect(presentation.entities([actor], "street", 1380)[0]?.position.wy).toBe(108);
+  expect(presentation.busy).toBe(true);
+  presentation.update("street", true, 1580);
+  expect(presentation.entities([actor], "street", 1580)[0]).toBe(actor);
+  expect(presentation.busy).toBe(false);
+  expect(actor.position).toEqual(arrival.to);
+});

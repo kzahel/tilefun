@@ -151,7 +151,12 @@ the destination and saves the source, then broadcasts a 400ms cosmetic walk and
 waits 180ms for the local fade. Authority stays at the safe source throughout that
 walk. Only the existing transactional realm transfer changes the saved location.
 After commit, clients wait for the destination player/room baseline (or outdoor
-terrain cache), fade in and show a one-tile arrival walk to the validated landing.
+terrain cache). Indoor arrival fades in during its one-tile walk. Outdoor arrival
+starts at the exact facade pose where the entry walk ends, reveals that doorway
+for 180ms, then walks out to the validated landing. The cosmetic exit origin
+comes from the selected door, never an offset from a potentially relocated safe
+landing. Other players see the exit walk immediately; only the traveller waits
+for their local reveal.
 Guided poses never modify collision, prediction or persistence. Source players are
 excluded from peer-driven simulation while travelling; arrival briefly suppresses
 movement and interactions. Failed requests, disconnects and a bounded presentation
@@ -181,3 +186,19 @@ Workshop raster parity passed. Streaming v4/v10 walking, sprinting and reversal
 had zero missing-data or unfinished-cache frames (`--assert-ready` passed).
 Next: review the two butcher animation candidates, then source or author matching
 apartment door panels under new review identities.
+
+Exit presentation correction (2026-10-04): the old exit started one tile before
+its landing and spent almost half its walk under the fade, so the player first
+became visible already out on the sidewalk. Entry and exit now share the facade
+anchor, with the exit walk delayed until the reveal finishes. The authoritative
+safe landing and the entry timing are unchanged. Regression checks cover both
+butcher and condo secondary doors and sample actual presented player positions
+through fade-in, rather than only checking the final server position. Exit door
+overlays are resolved after outdoor destination preparation, so evicting the
+facade while the player is indoors cannot silently drop its opening animation.
+
+Validation: 1,421 unit tests and all 285 browser tests passed, including the
+rendered exit/reveal regression and dev reload during travel. Typechecks, build,
+lint (existing warnings), inventory generation and all 551 Workshop raster
+identities passed. Current-generator streaming readiness passed with no missing
+or unfinished terrain frames. Existing Workshop candidate records are unchanged.

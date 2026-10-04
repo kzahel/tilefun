@@ -117,6 +117,41 @@ for (const kind of ["butcher", "condo-bay"]) {
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     // New worlds open in the editor; walk-through is deliberately play-only.
     await page.keyboard.press("Tab");
+    // Observe the actual presented actor, not just its already-safe authority position.
+    await page.evaluate(() => {
+      const game = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      const probe: {
+        motions: import("../src/interiors/DoorTraversal.js").DoorMotion[];
+        frames: { opacity: number; position: { wx: number; wy: number } }[];
+      } = { motions: [], frames: [] };
+      Reflect.set(window, "exitDoorProbe", probe);
+      const presentation = Reflect.get(
+        game,
+        "doorPresentation",
+      ) as import("../src/client/DoorPresentation.js").DoorPresentation;
+      const receive = presentation.receive.bind(presentation);
+      presentation.receive = (message, ...args) => {
+        if (message.self) probe.motions.push(message);
+        receive(message, ...args);
+      };
+      const present = presentation.entities.bind(presentation);
+      presentation.entities = (...args) => {
+        const entities = present(...args);
+        const actor = entities.find((e) => e.id === game.stateView.playerEntity.id);
+        if (!game.stateView.interior && probe.motions.at(-1)?.phase === "arrive" && actor) {
+          const veil = document.querySelector<HTMLElement>('[data-door-fade="true"]');
+          probe.frames.push({
+            opacity: Number(veil?.style.opacity),
+            position: { ...actor.position },
+          });
+        }
+        return entities;
+      };
+    });
     await page.keyboard.down("ArrowUp");
     const fade = page.locator('[data-door-fade="true"]');
     await expect(fade).toHaveAttribute("data-stage", "depart");
@@ -133,7 +168,30 @@ for (const kind of ["butcher", "condo-bay"]) {
     await expect(fade).toHaveAttribute("data-stage", "depart");
     await page.keyboard.up("ArrowDown");
     await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
+    await expect(fade).toHaveAttribute("data-stage", "arrive");
+    await page.screenshot({ path: `/tmp/tilefun-exit-${kind}-emerging.png` });
     await expect(fade).toHaveAttribute("data-stage", "idle");
+    const probe = (await page.evaluate(() => Reflect.get(window, "exitDoorProbe"))) as {
+      motions: import("../src/interiors/DoorTraversal.js").DoorMotion[];
+      frames: { opacity: number; position: { wx: number; wy: number } }[];
+    };
+    const entry = probe.motions[0],
+      exit = probe.motions[3];
+    expect(exit?.from).toEqual(entry?.to);
+    expect(exit?.to).toEqual(door.outside);
+    if (kind === "butcher") expect(exit?.overlay?.kind).toBe("butcher");
+    // The doorway itself is visible before the guided walk heads onto the sidewalk.
+    expect(
+      probe.frames.some(
+        (f) =>
+          f.opacity <= 0.5 && f.position.wx === exit?.from.wx && f.position.wy === exit?.from.wy,
+      ),
+    ).toBe(true);
+    expect(
+      probe.frames.some(
+        (f) => f.position.wy > (exit?.from.wy ?? Infinity) && f.position.wy < door.outside.wy,
+      ),
+    ).toBe(true);
     await page.reload();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.keyboard.down("ArrowUp");

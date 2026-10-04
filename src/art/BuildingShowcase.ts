@@ -9,6 +9,7 @@ import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { World } from "../world/World.js";
+import { reviewContext2D } from "./reviewCanvas.js";
 
 /** Ground is a diagnostic stage; building composition is the exact gameplay pipeline. */
 export function drawBuildingShowcase(
@@ -24,8 +25,7 @@ export function drawBuildingShowcase(
   const maxY = 64;
   canvas.width = (maxX - minX) * 2;
   canvas.height = (maxY - minY) * 2;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Missing building canvas");
+  const ctx = reviewContext2D(canvas);
   // Resizing resets context state. Match gameplay's nearest-neighbor sampling
   // so transparent atlas gutters cannot bleed into adjoining facade pieces.
   ctx.imageSmoothingEnabled = false;

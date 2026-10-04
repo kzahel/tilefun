@@ -10,6 +10,7 @@ import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
 import { World } from "../world/World.js";
+import { reviewContext2D } from "./reviewCanvas.js";
 
 /** Phase-0 furniture stage. Surfaces reuse the dense city composer; sprites and
  * collision use the game factories/renderer. This is not a district generator.
@@ -23,8 +24,7 @@ export function drawStreetShowcase(
   const b = scene.bounds;
   canvas.width = (b.maxX - b.minX) * 2;
   canvas.height = (b.maxY - b.minY) * 2;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) throw new Error("Missing street canvas");
+  const ctx = reviewContext2D(canvas);
   ctx.imageSmoothingEnabled = false;
   const camera = new Camera();
   camera.setViewport(canvas.width, canvas.height);

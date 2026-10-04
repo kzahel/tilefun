@@ -34,7 +34,7 @@ export function renderInteriorCandidate(
       : buildLayeredApartmentPlan(plan);
   canvas.width = map.width * 16;
   canvas.height = map.pixelHeight;
-  const ctx = required(canvas.getContext("2d"));
+  const ctx = reviewContext2D(canvas);
   ctx.fillStyle = "#171e2a";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   if (c.furniture) drawFurnishedInterior(ctx, atlas, map, plan, c.furniture);

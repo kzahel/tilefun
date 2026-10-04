@@ -36,6 +36,7 @@ npm test
 npx biome check .
 npm run build
 npx playwright install chromium
+npm run workshop:manifest -- --verify-raster
 npx playwright test
 ```
 
@@ -43,6 +44,10 @@ Playwright uses its own Chromium and an isolated preview on port 4174. Its
 feedback goes under `test-results/`, not the human review inbox. On Linux,
 Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
+The raster verification renders every Workshop candidate in headless-shell and
+full Chromium, checks the committed fingerprints and leaves the manifest intact.
+CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind
+a current source digest or passing ARM browser tests.
 
 The shared human review deployment is
 <https://tilefun.graehlarts.com/tilefun/workshop.html>. Visiting that deployment

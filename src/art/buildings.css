@@ -229,7 +229,7 @@
     gap: 12px;
   }
   .building-stage {
-    height: clamp(110px, calc(100dvh - 560px - var(--workshop-nav-height, 0px)), 400px);
+    height: clamp(110px, calc(100dvh - 600px - var(--workshop-nav-height, 0px)), 400px);
   }
   .building-preview:has(#hotel-options:not([hidden])) .building-stage {
     height: clamp(110px, calc(100dvh - 610px - var(--workshop-nav-height, 0px)), 350px);
