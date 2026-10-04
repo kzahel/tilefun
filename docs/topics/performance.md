@@ -333,14 +333,14 @@ cannot isolate renderer effects from heat/order effects. Keep defaults unchanged
 
 Successful cases reached zero warm terrain rebuilding, but both Pixel GPU
 small-batch overview samples still requested 2,064,384 texture-upload bytes in
-two seconds. Attribution is pending. Next: profile recurring warm overview
-collection/draw costs and these uploads, then use temperature-controlled phone
-repeats and longer motion traces to evaluate a focused change. See 049 for
+two seconds. 052 attributes the reproduced uploads to three vehicle sprite
+page allocations, with no terrain revision uploads or evictions during the
+sample. Recurring overview collection/draw costs remain the main profiling thread. See 049 for
 complete conditions, gates and measurement limits.
 
 
-[052](../tactical/052-overview-draw-and-upload-profile.md) investigates those
-costs. `streaming:bench -- --zoom-motion --zooms=0.1 --noclip
+[052](../tactical/052-overview-draw-and-upload-profile.md) investigated those
+costs and delivered the GPU dimension-cache fix. `streaming:bench -- --zoom-motion --zooms=0.1 --noclip
 --profile-stage=recovery-warm` adds inclusive pass timings, GPU upload-source
 attribution and a sampled CPU summary to that stage. Raw `.cpuprofile` files stay
 local. Profiling changes timing; use separate runs for before/after comparison.
@@ -369,4 +369,17 @@ synchronous frame, instead of once per sprite/grass draw. Mutable canvases keep
 live dimension reads; the weak cache resets with graphics resources and does not
 retain unloaded sources. All game and lab GPU consumers share this adapter.
 Canvas remains unchanged after its transform experiment failed to show a
-consistent gain. 052 records the attribution and final comparison in progress.
+consistent gain. The [completed comparison](../benchmarks/052-overview-comparison.md)
+contains 18 passing zoom cases and explicitly records two unmeasured phone cases.
+Matched Mac overview render CPU p95 improved from 11.6 to 10.0 ms, with calibrated
+missed intervals falling from 534/1,864 to 217/2,183. Pixel samples show 14.0–14.8
+ms uncached versus 11.3 ms cached, but frame p95 stays around 33 ms and end thermal
+status differs. A one-minute Mac sprint had zero missed intervals or terrain gaps.
+The extra Pixel overview repeat hit the 600-second cooldown deadline; its planned
+one-minute sprint was canceled before measurement. Resume those cases on a cooled
+phone, retaining the <=31°C/status-zero entry gate.
+
+Next engine target: shared grass collection/sorting and recurring vertex creation.
+The measured Mac overview still requests about 5.78 MiB of vertex uploads per
+render frame; persistent ordering and instanced quad submission are candidates
+for measured follow-ups. Keep current renderer/pacing defaults.

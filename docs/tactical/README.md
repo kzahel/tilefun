@@ -88,7 +88,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [051 World geometry proof](051-world-geometry-proof.md) | First shared-engine ramp, raised deck, passage, vertical saves and diagnostic cutaways |
 
-| [052 Overview draw and upload profile](052-overview-draw-and-upload-profile.md) | In progress: attribute warm overview cost and Pixel uploads, validate focused fixes |
+| [052 Overview draw and upload profile](052-overview-draw-and-upload-profile.md) | Complete: GPU dimension cache, 18 measured cases; extra Pixel repeat/long run blocked by cooldown |
 
 ## Earlier plans
 
