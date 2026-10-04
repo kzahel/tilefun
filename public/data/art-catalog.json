@@ -20435,7 +20435,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:246"
+          "source": "src/rendering/RendererLab.ts:250"
         }
       ]
     },
@@ -20453,7 +20453,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:247"
+          "source": "src/rendering/RendererLab.ts:251"
         }
       ]
     },
@@ -20681,15 +20681,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:200"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:204"
         },
         {
           "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:208"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:212"
         }
       ]
     },

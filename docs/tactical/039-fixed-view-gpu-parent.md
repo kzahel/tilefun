@@ -1,6 +1,6 @@
 # 039 — Fixed-view GPU rendering and optional mesh bodies
 
-Status: active, 2026-10-04. Parent sequencing plan.
+Status: complete, 2026-10-04. Parent sequencing plan.
 Owner: [rendering architecture](../topics/rendering-architecture.md).
 User authorized end-to-end autonomous implementation and commits on 2026-10-04.
 
@@ -17,10 +17,16 @@ Diagnostic mesh acceptance is separate from approving reconstructed artwork.
 | 3 — Optional mesh body | Complete: 042 | Neutral asset/pose data, isolated depth, same anchor/order and sprite fallback |
 | 4 — Continuous orientation | Complete: 043 | Shared pose evaluation, arbitrary headings, inspector/gameplay reuse |
 | 5 — Integration/lifecycle | Complete: 044 | All passes, streaming/editing, bounded residency, recovery and fallback tests |
-| 6 — Measurement/decision | Active: 045 | Matched browser/phone evidence, WebGPU feasibility, honest default decision |
+| 6 — Measurement/decision | Complete: 045 | Matched browser/phone evidence, WebGPU feasibility, honest default decision |
 
 Create each slice tactical on arrival. Commit validated increments; record scope
 adjustments and failures. Run required unit/type/lint checks and full rendering
 validation, catalog/manifest verification and streaming readiness where affected.
 No automatic artwork approval or presumption of a speedup. Canvas stays default
 unless parity and device evidence justify adoption. Rust is outside this delivery.
+
+
+All six slices delivered. Canvas remains default after matched desktop/Android
+measurements; optional GPU gameplay, shared diagnostic mesh bodies and asset-only
+WebGPU probes are available. Next work is measured GPU optimization and car
+reconstruction quality, not an unfinished implementation slice of this plan.

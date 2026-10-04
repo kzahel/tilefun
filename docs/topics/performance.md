@@ -145,3 +145,17 @@ touch movement advances 12.8 pixels, and return to the street succeeds. No page
 errors occurred. The phone was charging, about 30.5–30.8°C during traversal,
 thermal status 0 afterward. This short run does not establish sustained thermal,
 lower-end device or iOS performance, and does not close the intermittent-hitch issue.
+
+
+## Optional GPU renderer comparison
+
+[045](../tactical/045-gpu-measurement-decision.md) and its
+[measurements](../benchmarks/045-gpu-comparison.json) compare the same traversal
+with Canvas and optional WebGL2. All six runs pass movement terrain readiness.
+On Pixel 7a, Canvas records 0/3 movement frames over 25 ms in two runs versus
+GPU 19/13; desktop GPU submission also costs more CPU in movement. Canvas remains
+the default. Warm standing uploads no new GPU page textures, but traversal staging,
+texture uploads and draw submission need profiling before adoption. Live-heap
+snapshots do not attribute allocation churn or close the intermittent-hitch issue.
+The car also renders in native WebGPU, but this is an asset probe, not a complete
+WebGPU game backend or proof that it will be faster.

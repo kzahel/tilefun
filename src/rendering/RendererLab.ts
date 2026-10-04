@@ -190,6 +190,10 @@ function setCarHeading(yaw: number) {
 }
 const lab = {
   draw,
+  async probeWebGpu(forceWebGL = false) {
+    const { probeWebGpuAsset } = await import("./WebGpuAssetProbe.js");
+    return probeWebGpuAsset(forceWebGL);
+  },
   async setMesh(value: boolean) {
     meshMode = value;
     carMode = true;
@@ -331,6 +335,22 @@ const updatePose = () =>
     (Number(roll.value) * Math.PI) / 180,
   );
 heading.oninput = pitch.oninput = roll.oninput = updatePose;
+
+for (const forceWebGL of [false, true]) {
+  const probe = document.createElement("button");
+  probe.textContent = forceWebGL ? "Probe WebGL2 asset" : "Probe WebGPU asset";
+  probe.onclick = async () => {
+    probe.disabled = true;
+    try {
+      result.textContent = JSON.stringify(await lab.probeWebGpu(forceWebGL), null, 2);
+    } catch (error) {
+      result.textContent = String(error);
+    } finally {
+      probe.disabled = false;
+    }
+  };
+  controls.append(probe);
+}
 
 draw();
 window.addEventListener("pagehide", () => lab.dispose(), { once: true });

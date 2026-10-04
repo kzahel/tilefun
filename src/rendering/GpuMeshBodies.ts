@@ -17,6 +17,7 @@ export class GpuMeshBodies {
   private readonly clearColor = new THREE.Color();
   private enabled = false;
   draws = 0;
+  drawCalls = 0;
   constructor(private readonly surface: GpuRasterSurface) {
     this.target.texture.colorSpace = THREE.SRGBColorSpace;
     this.target.texture.magFilter = this.target.texture.minFilter = THREE.NearestFilter;
@@ -76,6 +77,7 @@ export class GpuMeshBodies {
       renderer.setClearColor(0, 0);
       renderer.clear();
       renderer.render(this.scene, this.camera);
+      this.drawCalls += renderer.info.render.calls;
     } finally {
       renderer.setRenderTarget(previous);
       renderer.setClearColor(this.clearColor, alpha);

@@ -92,6 +92,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
       gpu: {
         ...this.surface.stats,
         meshDraws: this.meshes.draws,
+        meshDrawCalls: this.meshes.drawCalls,
         meshState: this.meshes.car.state,
         targetBytes: this.meshes.targetBytes,
       },

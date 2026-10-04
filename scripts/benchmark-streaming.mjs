@@ -14,6 +14,9 @@ const option = (key, fallback) =>
     ?.split("=")
     .slice(1)
     .join("=") ?? fallback;
+const renderer = option("renderer", "canvas");
+if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
+const meshes = process.argv.includes("--meshes");
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
@@ -60,6 +63,8 @@ const report = {
   ...(pauseZoomPreparation ? { diagnosticControl: "pause terrain preparation after zoom" } : {}),
   ...(zoomRowBudget ? { diagnosticZoomRowBudget: zoomRowBudget } : {}),
   instrumentation,
+  renderer,
+  meshes,
   cpuRate,
   viewport: endpoint ? null : { width: 1280, height: 900 },
   fixtures: [],
@@ -81,7 +86,7 @@ try {
   testOrigin = new URL(origin).origin;
   browser = endpoint
     ? await chromium.connectOverCDP(endpoint, { noDefaults: true })
-    : await chromium.launch({ headless: !headed });
+    : await chromium.launch({ headless: !headed, channel: "chromium" });
   report.browser = browser.version();
   for (const version of versions) {
     const context = endpoint
@@ -104,7 +109,7 @@ try {
       return { x: 300, y: 519, generation };
     }, version);
     await page.goto(
-      `${origin}/?nogamepad&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${origin}/?nogamepad&renderer=${renderer}&${meshes ? "meshes&" : ""}${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await page.waitForFunction((arrival) => {
@@ -118,6 +123,9 @@ try {
         Math.hypot(p.wx / 16 - arrival.x, p.wy / 16 - arrival.y) <= 46
       );
     }, arrival);
+    const actualRenderer = await page.locator("#game").getAttribute("data-renderer");
+    if (renderer === "gpu" && actualRenderer !== "gpu")
+      throw Error(`GPU benchmark fell back to ${actualRenderer}`);
     const display = await page.evaluate(() => ({
       viewport: { width: innerWidth, height: innerHeight },
       screen: { width: screen.width, height: screen.height },

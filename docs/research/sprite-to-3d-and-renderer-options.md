@@ -189,3 +189,19 @@ Current frames are borrowed until synchronous submission returns. GPU encoding
 may consume them synchronously; any work retaining those arrays afterward needs
 a copy or explicit ownership/acknowledgment. Reusable buffers, bounded residency
 and a bulk WASM interface must preserve that lifetime, not merely avoid GC.
+
+
+## Fixed-view implementation and measured follow-up (2026-10-04)
+
+[039–045](../tactical/039-fixed-view-gpu-parent.md) deliver the optional WebGL2
+world backend and shared diagnostic car body/pose path. The same car geometry and
+unlit material render through Three WebGPU and forced WebGL2 on full desktop
+Chromium and Pixel 7a. See [045 evidence](../benchmarks/045-gpu-comparison.json).
+This establishes asset renderability, not identical output or a full WebGPU port:
+the sprite ShaderMaterial requires a corresponding node/TSL material adapter.
+
+Matched traversal does not justify replacing Canvas yet. Keep the backend opt-in;
+profile GPU uploads/submission and improve the car asset independently. No Rust
+requirement emerged. The car still decodes the full source atlas at first use,
+which dominates its phone asset-probe load; a compact derived asset is concrete
+next work. Current source/top/hidden-face quality limitations remain unresolved.

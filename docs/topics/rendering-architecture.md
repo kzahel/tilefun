@@ -2,8 +2,8 @@
 
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
-desktop/Android validation delivered; isolated car projection experiment delivered;
-Canvas2D remains production.
+desktop/Android validation delivered; optional WebGL2 gameplay backend and shared mesh-car presentation delivered;
+Canvas2D remains the default pending performance/asset acceptance.
 Updated: 2026-10-04.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
@@ -11,11 +11,10 @@ owns timing and allocation evidence; [client/server architecture](../client-serv
 owns authority and prediction. [Parent 022](../tactical/022-renderer-backend-decoupling.md)
 tracks this refactor and its completion gates.
 
-The next target is a fixed-view renderer that preserves existing sprite output
+The optional fixed-view GPU renderer preserves existing sprite presentation
 and can replace individual sprite bodies with meshes. Entity orientation may
 vary continuously while the camera projection stays fixed. The following
-invariants govern that extension; they are design requirements, not a claim that
-the current interfaces already implement mesh presentation.
+invariants govern that extension; they remain requirements for further assets and backends.
 
 ## Architecture
 
@@ -25,7 +24,7 @@ Worker simulation → replicated world + client prediction
                   frame builder + static content updates
                               ↓ ordered data + resource identities
                       renderer backend and resources
-                       Canvas2D now / GPU backend later
+                       Canvas2D default / optional WebGL2
 ```
 
 World chunks contain tile grids and content versions, never graphics resources.
@@ -37,8 +36,9 @@ eviction, resize, recovery and teardown. It does not decide depth/shadow order.
 
 `GameClientOptions.renderHostFactory` is the production selection point.
 `RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
-independent HUD/touch/debug context. Canvas2D remains the default. A GPU host can
-supply a separate UI overlay without changing physics, generation, editing or
+independent HUD/touch/debug context. Canvas2D remains the default. The GPU host
+supplies a separate UI overlay and composes it for feedback capture. This works
+without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
 platform input/UI wiring remain application composition responsibilities.
 
@@ -113,7 +113,7 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | Indoor review/reference and furniture playtest | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
-| Optional Three.js diagnostics | Separate debug renderer, dynamically selected outside gameplay presentation |
+| Optional GPU gameplay and diagnostics | `?renderer=gpu` selects the shared raster backend; `&meshes` enables the diagnostic car; renderer lab shares its body adapter |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
 `TileRenderer` is now an internal Canvas terrain preparation/resource component.
@@ -146,7 +146,7 @@ Earlier delivery evidence:
   unchanged review identities and lower allocation for matched terrain placement.
 
 A recording backend proves the data boundary, not GPU raster parity or performance.
-No Rust/WASM/WebGPU engine has been implemented. Intermittent phone hitches and
+No Rust/WASM engine or WebGPU gameplay backend has been implemented. Intermittent phone hitches and
 cold-entry presentation remain separate measured performance work.
 
 ## 3D assets and current GPU experiments
@@ -154,13 +154,13 @@ cold-entry presentation remain separate measured performance work.
 [3D assets](3d-assets.md) now owns the car reconstruction workstream, including
 037/038 evidence, the unresolved top-view appearance and model-assisted options.
 The car lab and `ThreeDebugRenderer` already use GPU-accelerated Three.js/WebGL;
-neither is a gameplay backend. The [research record](../research/sprite-to-3d-and-renderer-options.md)
+the new GPU gameplay backend is separate from those retained diagnostic adapters. The [research record](../research/sprite-to-3d-and-renderer-options.md)
 compares Three.js, WebGPU, Rust/wgpu and a full-engine migration.
 
 Backend independence is delivered; general 3D presentation is not. `RenderView`
 contains x/y/zoom and viewport dimensions, terrain placements are screen-space,
-and scene passes preserve the current body/shadow ordering. Mesh/material
-instances, a 3D camera and world-space terrain need an additional neutral contract.
+and scene passes preserve the current body/shadow ordering. Neutral mesh instances now carry asset identity and orientation. A freely moving
+3D camera and world-space terrain still need additional contracts.
 Do not derive a 3D world from screen rectangles or move Three.js objects into
 simulation. Keep presentation inputs read-only and physical proxies independent
 from visual meshes. Existing height-aware physics can remain while that is tested.
@@ -175,11 +175,11 @@ production by this document.
 
 | ID | State | Next evidence / decision |
 | --- | --- | --- |
-| G1 | Open | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
-| G2 | Proposed | Portable mesh/material import, sprite fallback and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
-| G3 | Proposed | One shared presentation path with optional mesh bodies and full transforms; first prove continuous car heading under the unchanged fixed projection, then expose diagnostic cameras |
-| G4 | Proposed | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
-| G5 | Proposed | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
+| G1 | Delivered, optional WebGL2 | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
+| G2 | Diagnostic car delivered; general import later | Portable mesh/material import, sprite fallback and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
+| G3 | Fixed-view pose delivered | One shared presentation path with optional mesh bodies and full transforms; first prove continuous car heading under the unchanged fixed projection, then expose diagnostic cameras |
+| G4 | Compatibility path delivered | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
+| G5 | Measured in 045; Canvas retained | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
 | G6 | Later | Broader asset/world coverage and first-person interaction/content; consider Rust/wgpu only with a concrete measured or platform reason |
 
 G1 can proceed independently of reconstructing convincing 3D assets. G2/G3 make
@@ -312,3 +312,39 @@ First implementation slice: G1 with the unchanged sprite scene and projection
 fixtures. G2/G3 then add one optional car mesh with continuous visual heading under
 that fixed view. Detail the concrete frame types and depth-isolation strategy in
 that slice's tactical; do not build two competing APIs ahead of the evidence.
+
+
+## Delivered fixed-view backend (039–045)
+
+`RasterRenderBackend` owns common resource preparation and pass consumption.
+`Canvas2DRenderer` now draws through the narrow graphics-side `RasterSurface`;
+Canvas and GPU share placement, grass, shadows and room composition rules.
+`GpuRasterSurface` batches quads and retains revision-tracked texture pages; it
+still uploads CPU-prepared terrain/room images. It is not GPU terrain generation.
+Neutral `RenderBackend` frames never contain Three objects or decoded images.
+
+`EntityMeshPose` evaluates cosmetic orientation once in shared presentation.
+`CarMeshDefinition` normalizes the original source geometry into world-pixel
+coordinates and the sprite's ground anchor. `GpuMeshBodies` draws that body into
+one reusable depth target and composites it at its supplied scene position.
+Depth is local to a body: arbitrary interpenetrating objects are not supported.
+Missing/loading/failed assets retain the sprite. A generation-checked resource
+slot prevents late async publication after replacement or disposal.
+
+Use `?renderer=gpu` for sprites, `?renderer=gpu&meshes` for the experimental car.
+The [renderer comparison tool](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
+exercises the same body adapter, pose and fallback. Its WebGPU/forced-WebGL2
+buttons probe portable geometry/materials, not the gameplay sprite shader.
+The older car projection lab remains a source/geometry investigation reference.
+DOM controls and the original Canvas UI/input surface remain in place.
+
+Residency is a 64 MiB soft texture-page budget with age eviction, plus CPU source
+and staging images. Active working sets can exceed the soft budget. A single
+mesh target is capped at 1024²; model textures and driver memory are additional.
+Texture/vertex upload counters estimate requested bytes, not measured bus traffic.
+Context loss pauses graphics; restoration rebuilds resources without resetting
+the Worker world. Unsupported construction falls back to Canvas.
+
+See [045](../tactical/045-gpu-measurement-decision.md) for measurements and the
+adoption decision. Reconstructed car quality, WebGPU sprite-shader adaptation,
+general mesh import and broader device coverage remain explicit next work.

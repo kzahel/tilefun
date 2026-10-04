@@ -2,7 +2,7 @@
 
 Topic: 3d-assets
 Status: car projection and orthographic inspection delivered; top-view appearance
-unresolved. Model-assisted reconstruction and gameplay 3D integration are proposed.
+unresolved. Optional fixed-view GPU gameplay integration is delivered; model-assisted reconstruction remains proposed.
 Updated: 2026-10-04.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
@@ -88,7 +88,7 @@ Plan each implementation slice in a new tactical when it is taken up.
 | A3 | Proposed | Compare authored geometry/rectified UVs, image-generated geometry, and authored geometry with generated textures on the same car |
 | A4 | Proposed | Evaluate fixed source/front/back/side/top and oblique views; inspect wheel volume, roof/hood layout, seams, ground contact and unknown surfaces; record human judgment alongside metrics |
 | A5 | Proposed | Export/import the chosen candidate as a portable asset with provenance and explicit axis/scale conversion; establish bounded triangle/texture budgets from device evidence |
-| A6 | Proposed | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
+| A6 | Diagnostic implementation delivered in 039–045 | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
 | A7 | Later | Test a second asset class before generalizing authoring, animation or batch generation; first-person coverage remains a later scope |
 
 Recommended next slice: A2 plus a fixed-camera comparison harness. It makes the
@@ -104,3 +104,10 @@ still open; custom training is not the starting assumption.
 - [3D physics](../3D-PHYSICS-DESIGN.md): existing height/support/collision semantics.
 - [Research](../research/sprite-to-3d-and-renderer-options.md): model capabilities,
   comparison protocol and renderer decision matrix.
+
+
+The optional `?renderer=gpu&meshes` path and renderer comparison tool now share
+`CarMeshAsset`, asset registration and isolated body depth. Continuous yaw plus
+diagnostic pitch/roll work under the unchanged game projection. This does not
+resolve A2–A5: the proxy still has flat wheels, incomplete hidden surfaces and
+unacceptable top-view artwork. No candidate has been promoted by this integration.

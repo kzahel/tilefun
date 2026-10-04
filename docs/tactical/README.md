@@ -63,17 +63,19 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [038 Car proxy orthographic checks](038-car-proxy-orthographic-checks.md) | Delivered: side/top presets, grounded tires and closed top texture seams |
 
-| [039 Fixed-view GPU parent](039-fixed-view-gpu-parent.md) | Active autonomous six-slice delivery; optional GPU gameplay and mesh bodies |
+| [039 Fixed-view GPU parent](039-fixed-view-gpu-parent.md) | Completed autonomous six-slice delivery; optional GPU gameplay and mesh bodies |
 
 | [040 GPU compatibility baseline](040-gpu-compatibility-baseline.md) | Shared projection and reference validation |
 
-| [041 GPU sprite backend](041-gpu-sprite-backend.md) | Active shared drawing and optional GPU host |
+| [041 GPU sprite backend](041-gpu-sprite-backend.md) | Delivered shared drawing and optional GPU host |
 
-| [042 Optional mesh bodies](042-optional-mesh-bodies.md) | Active neutral instances, fallback and isolated GPU depth |
+| [042 Optional mesh bodies](042-optional-mesh-bodies.md) | Delivered neutral instances, fallback and isolated GPU depth |
 
-| [043 Shared mesh pose](043-shared-mesh-pose.md) | Active continuous cosmetic heading in shared presentation |
+| [043 Shared mesh pose](043-shared-mesh-pose.md) | Delivered continuous cosmetic heading in shared presentation |
 
-| [044 GPU integration/lifecycle](044-gpu-integration-lifecycle.md) | Active all-pass and recovery validation |
+| [044 GPU integration/lifecycle](044-gpu-integration-lifecycle.md) | Delivered all-pass and recovery validation |
+
+| [045 GPU measurement/decision](045-gpu-measurement-decision.md) | Complete matched renderer measurements; Canvas remains default |
 
 ## Earlier plans
 

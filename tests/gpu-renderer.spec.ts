@@ -222,3 +222,40 @@ test("GPU feedback capture includes the world and preserves generation metadata"
   expect(snapshot.opaque).toBe(snapshot.area);
   expect(snapshot.generation).toBe(snapshot.expected);
 });
+
+test("portable car materials render through WebGPU selection and forced WebGL2", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  for (const forceWebGL of [false, true]) {
+    const result = await page.evaluate(
+      (force) =>
+        (
+          window as unknown as {
+            rendererLab: {
+              probeWebGpu(force: boolean): Promise<{ backend: string; coloredPixels: number }>;
+            };
+          }
+        ).rendererLab.probeWebGpu(force),
+      forceWebGL,
+    );
+    expect(result.backend).toMatch(forceWebGL ? /^WebGLBackend$/ : /^(WebGPU|WebGL)Backend$/);
+    expect(result.coloredPixels).toBeGreaterThan(1000);
+    expect(result.coloredPixels).toBeLessThan((192 * 192) / 2);
+  }
+});
+
+test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (kind: string, ...args: unknown[]) {
+      if (kind === "webgl2") return null;
+      return Reflect.apply(original, this, [kind, ...args]);
+    } as typeof original;
+  });
+  await page.goto("/tilefun/?renderer=gpu");
+  await expect(page.locator("#game")).toHaveAttribute("data-renderer", "canvas-fallback");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("canvas[data-renderer=gpu]")).toHaveCount(0);
+});

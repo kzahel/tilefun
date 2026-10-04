@@ -78,6 +78,7 @@ export class GpuRasterSurface implements RasterSurface {
   readonly stats = {
     uploads: 0,
     uploadedBytes: 0,
+    vertexUploadedBytes: 0,
     drawCalls: 0,
     frames: 0,
     textureBytes: 0,
@@ -478,6 +479,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.buffer.clearUpdateRanges();
     this.buffer.addUpdateRange(0, this.count * 8);
     this.buffer.needsUpdate = true;
+    this.stats.vertexUploadedBytes += this.count * 8 * 4;
     const uniform = this.material.uniforms.image;
     if (uniform) uniform.value = this.texture;
     const encode = this.material.uniforms.encode;

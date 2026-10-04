@@ -1,0 +1,1845 @@
+{
+  "date": "2026-10-04",
+  "scope": "Fixed-view WebGL2 sprite backend, optional diagnostic car, asset-only WebGPU probe",
+  "decision": "Canvas remains default; GPU and mesh opt-ins remain experimental",
+  "phoneConditions": {
+    "model": "Pixel 7a",
+    "charging": true,
+    "observedBatteryC": 25.8,
+    "thermalStatus": 0,
+    "runOrder": ["canvas-1", "gpu-1", "gpu-2", "canvas-2"]
+  },
+  "limits": [
+    "Development Vite source runs, not production-load benchmarks. Desktop full Chromium headless; phone real Chrome/touch.",
+    "Desktop comparison sequential. Phone runs sequential, while desktop regression suite ran; host contention may affect initial serving. Not sustained thermal or broad-device evidence.",
+    "cold is first 120 sampled frames after game readiness, not HTTP/navigation cold start.",
+    "renderMs measures CPU callback time, not GPU execution.",
+    "heapBytes is browser-reported live heap, not allocation profiling or total process/GPU memory; phone values are coarse and constant within each run.",
+    "GPU textureBytes estimates retained page RGBA storage; excludes source/staging images, model textures, driver/shader memory. targetBytes estimates RGBA plus depth.",
+    "uploadedBytes covers requested page texture uploads, vertexUploadedBytes covers batched sprite buffer updates. Neither is measured bus traffic; model uploads are additional.",
+    "Probe timings include shader compilation/readback and sequential warm asset reuse; not an API speed comparison. Probe image occupancy differs across backends, so this is renderability, not pixel parity.",
+    "Reconstructed car remains unapproved and incomplete."
+  ],
+  "runs": [
+    {
+      "device": "desktop",
+      "renderer": "canvas",
+      "repeat": 1,
+      "browser": "153.0.8010.12",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "input": "keyboard",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:51:12.922Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.2999999998137355,
+            "p95": 2.2999999998137355,
+            "p99": 2.400000000372529,
+            "max": 2.599999999627471
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 39241816,
+          "cache": {
+            "resident": 25,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 6553600
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.20000000018626451,
+            "p95": 0.3000000002793968,
+            "p99": 0.3000000002793968,
+            "max": 0.3000000002793968
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 34624554,
+          "cache": {
+            "resident": 25,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 6553600
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 0.3000000002793968,
+            "p95": 0.40000000037252903,
+            "p99": 0.5,
+            "max": 0.5
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -222.0712890625,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 31376612,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 0.39999999990686774,
+            "p95": 0.5,
+            "p99": 1,
+            "max": 2.3999999999068677
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -466.22662934374966,
+            "y": 0
+          },
+          "visitedChunks": 12,
+          "heapBytes": 38578205,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 51,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 0.39999999990686774,
+            "p95": 0.5,
+            "p99": 2.3000000002793968,
+            "max": 2.400000000372529
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 738.60107421875,
+            "y": 0
+          },
+          "visitedChunks": 15,
+          "heapBytes": 33868254,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 66,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.1000000000931323,
+            "p95": 1.2000000001862645,
+            "p99": 3.1999999997206032,
+            "max": 3.2000000001862645
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 12,
+          "heapBytes": 42269951,
+          "cache": {
+            "resident": 30,
+            "schedulerRecordsCreated": 76,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 7864320
+          }
+        }
+      ]
+    },
+    {
+      "device": "desktop",
+      "renderer": "gpu",
+      "repeat": 1,
+      "browser": "153.0.8010.12",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "input": "keyboard",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:51:57.475Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.3000000002793968,
+            "p95": 2.3999999999068677,
+            "p99": 2.6999999997206032,
+            "max": 3.1999999997206032
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 50827223,
+          "cache": {
+            "resident": 25,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 6553600,
+            "gpu": {
+              "uploads": 42,
+              "uploadedBytes": 26218432,
+              "vertexUploadedBytes": 4749888,
+              "drawCalls": 3607,
+              "frames": 175,
+              "textureBytes": 20515584,
+              "textures": 26,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.2999999998137355,
+            "p95": 0.40000000037252903,
+            "p99": 0.5,
+            "max": 0.5
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 50053498,
+          "cache": {
+            "resident": 25,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 6553600,
+            "gpu": {
+              "uploads": 43,
+              "uploadedBytes": 26267584,
+              "vertexUploadedBytes": 8036928,
+              "drawCalls": 6960,
+              "frames": 302,
+              "textureBytes": 18205440,
+              "textures": 18,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 0.3000000002793968,
+            "p95": 1,
+            "p99": 1.2999999998137355,
+            "max": 1.6000000000931323
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -222.0712890625,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 45019340,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 41,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880,
+            "gpu": {
+              "uploads": 44,
+              "uploadedBytes": 29413312,
+              "vertexUploadedBytes": 12139392,
+              "drawCalls": 13172,
+              "frames": 487,
+              "textureBytes": 21302016,
+              "textures": 18,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 0.3000000002793968,
+            "p95": 1.099999999627471,
+            "p99": 2.2000000001862645,
+            "max": 2.8999999999068677
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -466.22662934374966,
+            "y": 0
+          },
+          "visitedChunks": 12,
+          "heapBytes": 51872635,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 51,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880,
+            "gpu": {
+              "uploads": 52,
+              "uploadedBytes": 31723456,
+              "vertexUploadedBytes": 20828160,
+              "drawCalls": 25036,
+              "frames": 792,
+              "textureBytes": 17795840,
+              "textures": 18,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 0.2999999998137355,
+            "p95": 0.8999999999068677,
+            "p99": 2.2000000001862645,
+            "max": 2.3999999999068677
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 738.60107421875,
+            "y": 0
+          },
+          "visitedChunks": 15,
+          "heapBytes": 57538413,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 66,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880,
+            "gpu": {
+              "uploads": 65,
+              "uploadedBytes": 39063488,
+              "vertexUploadedBytes": 28189440,
+              "drawCalls": 36946,
+              "frames": 1097,
+              "textureBytes": 22825728,
+              "textures": 23,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 0.5,
+            "p95": 0.6000000000931323,
+            "p99": 2.7000000001862645,
+            "max": 2.7000000001862645
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -0.0002107187501678709,
+            "y": 0
+          },
+          "visitedChunks": 12,
+          "heapBytes": 49358423,
+          "cache": {
+            "resident": 30,
+            "schedulerRecordsCreated": 76,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 7864320,
+            "gpu": {
+              "uploads": 73,
+              "uploadedBytes": 44798464,
+              "vertexUploadedBytes": 51331392,
+              "drawCalls": 48222,
+              "frames": 1282,
+              "textureBytes": 27772480,
+              "textures": 27,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "device": "phone",
+      "renderer": "canvas",
+      "repeat": 1,
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:55:42.677Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 33.30000000000109,
+            "p99": 33.399999999999636,
+            "max": 33.399999999999636
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.800000011920929,
+            "p95": 2.900000035762787,
+            "p99": 3.100000023841858,
+            "max": 3.599999964237213
+          },
+          "framesOver25Ms": 7,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 6,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 28,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.699999988079071,
+            "p95": 1,
+            "p99": 1.399999976158142,
+            "max": 1.4000000357627869
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 28,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1,
+            "p95": 2.699999988079071,
+            "p99": 3.600000023841858,
+            "max": 4.300000011920929
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -222.07080078125,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.2000000476837158,
+            "p95": 3,
+            "p99": 3.5,
+            "max": 4
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -458.86530121874966,
+            "y": 0
+          },
+          "visitedChunks": 8,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 40,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 22.799999999999272
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.5,
+            "p95": 3.599999964237213,
+            "p99": 4.300000011920929,
+            "max": 8.399999976158142
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 738.6012129999999,
+            "y": 0
+          },
+          "visitedChunks": 15,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 59,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 3,
+            "surfaceBytes": 5242880
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 3.099999964237213,
+            "p95": 3.800000011920929,
+            "p99": 4.199999988079071,
+            "max": 7.900000035762787
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 59,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          }
+        }
+      ]
+    },
+    {
+      "device": "phone",
+      "renderer": "canvas",
+      "repeat": 2,
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:59:43.124Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 16.80000000000109,
+            "p99": 16.80000000000109,
+            "max": 33.30000000000109
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.800000011920929,
+            "p95": 2.900000035762787,
+            "p99": 3,
+            "max": 3.099999964237213
+          },
+          "framesOver25Ms": 1,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 8,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.5999999642372131,
+            "p95": 0.800000011920929,
+            "p99": 0.9000000357627869,
+            "max": 1
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 0.9000000357627869,
+            "p95": 2.699999988079071,
+            "p99": 3.899999976158142,
+            "max": 4
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -222.07080078125,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 36,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.199999988079071,
+            "p95": 2.900000035762787,
+            "p99": 4.5,
+            "max": 4.800000011920929
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -458.86481293749966,
+            "y": 0
+          },
+          "visitedChunks": 8,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 44,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 33.29999999999927,
+            "max": 33.39999999999782
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 2,
+            "p95": 3.699999988079071,
+            "p99": 4.099999964237213,
+            "max": 4.5
+          },
+          "framesOver25Ms": 3,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 600.84326171875,
+            "y": 321.8798828125
+          },
+          "visitedChunks": 12,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 12,
+            "schedulerRecordsCreated": 60,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 3145728
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 33.39999999999782,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 2.900000035762787,
+            "p95": 4.100000023841858,
+            "p99": 4.800000011920929,
+            "max": 5
+          },
+          "framesOver25Ms": 5,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 33100000,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 68,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880
+          }
+        }
+      ]
+    },
+    {
+      "device": "phone",
+      "renderer": "gpu",
+      "repeat": 1,
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:56:38.193Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 33.29999999999927,
+            "p99": 33.30000000000109,
+            "max": 33.399999999999636
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 1.4000000357627869,
+            "p95": 3.800000011920929,
+            "p99": 4.199999988079071,
+            "max": 4.300000011920929
+          },
+          "framesOver25Ms": 9,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 8,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 28,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 36,
+              "uploadedBytes": 10226624,
+              "vertexUploadedBytes": 912768,
+              "drawCalls": 1472,
+              "frames": 391,
+              "textureBytes": 2164480,
+              "textures": 11,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 1,
+            "p95": 1.300000011920929,
+            "p99": 1.5,
+            "max": 1.600000023841858
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 28,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 36,
+              "uploadedBytes": 10226624,
+              "vertexUploadedBytes": 1108992,
+              "drawCalls": 2494,
+              "frames": 537,
+              "textureBytes": 1066752,
+              "textures": 6,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 33.29999999999927,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.0999999642372131,
+            "p95": 3,
+            "p99": 4.5,
+            "max": 5.199999988079071
+          },
+          "framesOver25Ms": 3,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -225.75146484375,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 41,
+              "uploadedBytes": 14995392,
+              "vertexUploadedBytes": 1824768,
+              "drawCalls": 4187,
+              "frames": 727,
+              "textureBytes": 5311232,
+              "textures": 9,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.300000011920929,
+            "p95": 3.199999988079071,
+            "p99": 4.199999988079071,
+            "max": 4.300000011920929
+          },
+          "framesOver25Ms": 2,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -453.95758637499966,
+            "y": 0
+          },
+          "visitedChunks": 8,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 40,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 52,
+              "uploadedBytes": 32149440,
+              "vertexUploadedBytes": 3610368,
+              "drawCalls": 10170,
+              "frames": 1035,
+              "textureBytes": 17124096,
+              "textures": 13,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 22.80000000000291,
+            "p99": 33.400000000001455,
+            "max": 33.5
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.399999976158142,
+            "p95": 3.400000035762787,
+            "p99": 4.5,
+            "max": 6.699999988079071
+          },
+          "framesOver25Ms": 14,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 775.4084806874998,
+            "y": 0
+          },
+          "visitedChunks": 15,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 59,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880,
+            "gpu": {
+              "uploads": 70,
+              "uploadedBytes": 54005696,
+              "vertexUploadedBytes": 6902400,
+              "drawCalls": 18284,
+              "frames": 1354,
+              "textureBytes": 18205440,
+              "textures": 18,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999995634,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.699999988079071,
+            "p95": 2.199999988079071,
+            "p99": 2.399999976158142,
+            "max": 2.400000035762787
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 50400000,
+          "cache": {
+            "resident": 20,
+            "schedulerRecordsCreated": 59,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 5242880,
+            "gpu": {
+              "uploads": 72,
+              "uploadedBytes": 54022656,
+              "vertexUploadedBytes": 17157888,
+              "drawCalls": 22194,
+              "frames": 1542,
+              "textureBytes": 13190720,
+              "textures": 14,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        }
+      ]
+    },
+    {
+      "device": "phone",
+      "renderer": "gpu",
+      "repeat": 2,
+      "browser": "154.0.8037.57",
+      "viewport": {
+        "width": 411,
+        "height": 789
+      },
+      "input": "touch joystick and sprint button",
+      "sourceRevision": "83514802720e55e9fd3db60a9cc597660856dc6d",
+      "sourceDirty": true,
+      "date": "2026-10-04T06:58:18.311Z",
+      "arrival": {
+        "x": 300,
+        "y": 519,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "samples": [
+        {
+          "name": "cold",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 33.29999999999927,
+            "p99": 33.399999999999636,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 1.300000011920929,
+            "p95": 3.700000047683716,
+            "p99": 4.100000023841858,
+            "max": 4.300000011920929
+          },
+          "framesOver25Ms": 10,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 7,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 42,
+              "uploadedBytes": 11799488,
+              "vertexUploadedBytes": 1483200,
+              "drawCalls": 1553,
+              "frames": 401,
+              "textureBytes": 2164480,
+              "textures": 11,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "standing",
+          "renderedFrames": 121,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 0.9000000357627869,
+            "p95": 1.300000011920929,
+            "p99": 1.600000023841858,
+            "max": 1.800000011920929
+          },
+          "framesOver25Ms": 0,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 4,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 32,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 42,
+              "uploadedBytes": 11799488,
+              "vertexUploadedBytes": 1679424,
+              "drawCalls": 2575,
+              "frames": 547,
+              "textureBytes": 1066752,
+              "textures": 6,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "walk",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 33.29999999999927,
+            "max": 33.29999999999927
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.100000023841858,
+            "p95": 2.700000047683716,
+            "p99": 5.100000023841858,
+            "max": 5.5
+          },
+          "framesOver25Ms": 2,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -223.29799034374992,
+            "y": 0
+          },
+          "visitedChunks": 6,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 36,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 47,
+              "uploadedBytes": 16568256,
+              "vertexUploadedBytes": 2395200,
+              "drawCalls": 4275,
+              "frames": 738,
+              "textureBytes": 5311232,
+              "textures": 9,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "sprint",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 33.29999999999927
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.2999999523162842,
+            "p95": 3.199999988079071,
+            "p99": 3.899999976158142,
+            "max": 4.300000011920929
+          },
+          "framesOver25Ms": 2,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": -453.95758637499966,
+            "y": 0
+          },
+          "visitedChunks": 8,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 16,
+            "schedulerRecordsCreated": 44,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 4194304,
+            "gpu": {
+              "uploads": 58,
+              "uploadedBytes": 33722304,
+              "vertexUploadedBytes": 4185408,
+              "drawCalls": 10266,
+              "frames": 1047,
+              "textureBytes": 17124096,
+              "textures": 13,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "reverse",
+          "renderedFrames": 301,
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.80000000000291,
+            "p99": 33.39999999999782,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 1.300000011920929,
+            "p95": 3.5,
+            "p99": 3.900000035762787,
+            "max": 4.400000035762787
+          },
+          "framesOver25Ms": 9,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 614.3851646747262,
+            "y": 329.1353107353443
+          },
+          "visitedChunks": 12,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 12,
+            "schedulerRecordsCreated": 60,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 3145728,
+            "gpu": {
+              "uploads": 72,
+              "uploadedBytes": 54742976,
+              "vertexUploadedBytes": 8410944,
+              "drawCalls": 17501,
+              "frames": 1365,
+              "textureBytes": 20515584,
+              "textures": 15,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        },
+        {
+          "name": "zoom-out",
+          "renderedFrames": 181,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999709,
+            "p95": 16.80000000000291,
+            "p99": 33.39999999999782,
+            "max": 33.400000000001455
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 1.5,
+            "p95": 3.5,
+            "p99": 4.199999988079071,
+            "max": 6.300000011920929
+          },
+          "framesOver25Ms": 5,
+          "framesOver50Ms": 0,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "visitedChunks": 9,
+          "heapBytes": 47400000,
+          "cache": {
+            "resident": 25,
+            "schedulerRecordsCreated": 73,
+            "queuedJobs": 0,
+            "building": 0,
+            "pending": 0,
+            "oldestMs": 0,
+            "rowsLastFrame": 0,
+            "surfaceBytes": 6553600,
+            "gpu": {
+              "uploads": 77,
+              "uploadedBytes": 55579136,
+              "vertexUploadedBytes": 12856128,
+              "drawCalls": 21119,
+              "frames": 1553,
+              "textureBytes": 10815040,
+              "textures": 15,
+              "recoveries": 0,
+              "meshDraws": 0,
+              "meshDrawCalls": 0,
+              "meshState": "empty",
+              "targetBytes": 8
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "assetProbes": {
+    "desktop": [
+      {
+        "requested": "webgpu",
+        "backend": "WebGPUBackend",
+        "initializationMs": 1.8000000002793968,
+        "assetLoadMs": 279.29999999981374,
+        "firstRenderAndReadbackMs": 564.2000000001863,
+        "coloredPixels": 4848
+      },
+      {
+        "requested": "webgl2",
+        "backend": "WebGLBackend",
+        "initializationMs": 3.5,
+        "assetLoadMs": 0.900000000372529,
+        "firstRenderAndReadbackMs": 269.79999999981374,
+        "coloredPixels": 4944
+      }
+    ],
+    "phone": [
+      {
+        "requested": "webgpu",
+        "backend": "WebGPUBackend",
+        "initializationMs": 31,
+        "assetLoadMs": 836.1999999880791,
+        "firstRenderAndReadbackMs": 242.0999999642372,
+        "coloredPixels": 4848
+      },
+      {
+        "requested": "webgl2",
+        "backend": "WebGLBackend",
+        "initializationMs": 22.5,
+        "assetLoadMs": 5.600000023841858,
+        "firstRenderAndReadbackMs": 172.0999999642372,
+        "coloredPixels": 4944
+      }
+    ]
+  }
+}
