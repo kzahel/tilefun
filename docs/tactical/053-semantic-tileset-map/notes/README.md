@@ -15,7 +15,9 @@ not durable evidence. Do not commit original downloaded packs or private review 
 Current implementation records: [shared model](2026-10-04-semantic-model.md),
 [independent model audit](2026-10-04-semantic-model-review.md),
 [full-source coverage ledger](2026-10-04-coverage-ledger.md), and
-[tree-sheet integration](2026-10-04-tree-sheet-integration.md).
+[tree-sheet integration](2026-10-04-tree-sheet-integration.md), and
+[outdoor seating delivery](2026-10-04-outdoor-seating-delivery.md), and
+[bounded expansion audit](2026-10-04-expansion-audit.md).
 
 Later execution records: [source inventory](2026-10-04-source-inventory.md),
 [pilot method assessment](2026-10-04-pilot-method-review.md), and

@@ -57,11 +57,13 @@ Exteriors residuals remain visible. Room Builder annotation windows can overlap
 art: only residual-alpha pixels outside family windows were classified as lettering
 or arrows. An entire annotation rectangle cannot be excluded from future art work.
 
-Nine supplemental groups have no pilot investigation: Exteriors animation,
-autotiles and theme sheets; Interiors animation, home examples, Room Builder
-subfiles and all three theme-sheet/shadow groups. Five supplemental groups contain
-partial pilot records: the two Exteriors single groups and the three Interiors
-single/shadow groups. A referenced master PNG does not mean its whole art is
+Eight supplemental groups have no normalized investigation: Exteriors animation
+and autotiles; Interiors animation, home examples, Room Builder subfiles and all
+three theme-sheet/shadow groups. Six supplemental groups have partial normalized
+evidence: the two Exteriors single groups, Exteriors theme sheets, and the three
+Interiors single/shadow groups. E01 contributes 25 exact crops across three
+Exteriors theme sheets; this is bounded occurrence evidence, not complete sheet
+semantics or a new visual whole-sheet survey. A referenced master PNG does not mean its whole art is
 investigated. All 6,224 byte-identical Exteriors theme/complete single pairs remain
 separate source occurrences; duplicate content earns no inherited semantic credit.
 
@@ -70,12 +72,25 @@ one Interiors sofa contrast, corrected Exteriors playground tubes and a limited
 supplemental animation reconciliation. These are unassigned packet scopes rather
 than completed work or a replacement for the coordinator's queue.
 
-[Mapping registry](../mapping-registry.json) separately registers the current
-E01 outdoor-seating assignment as investigating. Its 27 planned exports and
-three context windows are task scope only. The first rectangle intersects both
-E01 and E05, the second E03, and the third E35: four broad region references
-from three context rectangles. No proposal, member records, independent review or source-unit
-credit is asserted until the packet is pinned and reconciled.
+[Mapping registry](../mapping-registry.json) registers E01 outdoor seating as
+reconciled and I01 Interiors sofas as review-ready. Explicit E01 normalization is
+now pinned to semantic model SHA-256
+`2f612b7fd2e2b9d07bd9c00bbf02cd4955210959b4a8a411857b0c6da93bbc26`.
+Its 27 records/27 proposal units stay separate from the pilot 85/67 baseline,
+giving 112 normalized records/94 proposal units. E01 primary master lineage is
+25 direct records plus two original-only long benches. Its 54 named exports,
+25 theme-sheet crops and two committed byte-identical integration copies are
+separate evidence counts. Bench 5/6 retain no master rectangles or region links;
+the committed copies do not invent occurrences. Original/committed master group
+references point to the same 25 occurrences, counted once despite byte-identical
+alias paths. Exact E01 links cover E01 (two), E05 (two), E03 (20) and E35 (one).
+No owner feedback/acceptance is inherited for this new packet.
+
+I01 is independently reviewed but has zero normalization credit in this ledger.
+The sofa packet descriptor derives its review-ready status from that registration,
+rather than continuing to offer an unassigned sofa task. I01's source/record
+references remain registered evidence pending a versioned adapter; the total stays
+112. Other ready bounded packet descriptors remain unassigned.
 
 ## Scalable registration contract
 
@@ -90,9 +105,10 @@ Draft assignments cannot claim records, sources or reviews without a pinned
 proposal. Proposal/review-ready assignment stages require the corresponding
 pins; a registered review must explicitly contain the proposal digest. Unknown
 regions/groups, duplicate IDs, mismatched member pointers and source-pin/bounds
-errors fail verification. Registration always has `coverageCredit:false`:
-validation of references does not validate an arbitrary future packet schema or
-its semantics. Root reconciliation supplies explicit packet adapters/model
+errors fail verification. Registration alone has `coverageCredit:false`: validation of references does not
+validate an arbitrary future packet schema or its semantics. The explicit reviewed
+E01 adapter marks its 27 bounded records credited and records the exact model pin;
+I01 and unsupported future registrations remain uncredited. Root reconciliation supplies explicit packet adapters/model
 normalization and tests before records enter semantic counts. New acceptance
 requires its own exact human scope and provenance, separately from task status.
 
@@ -112,13 +128,16 @@ source rectangles and actual portable source/index/builder bytes. They do not
 verify ignored original PNG bytes. For that use the full source-inventory and
 survey/pilot reproduction commands in their owning records.
 
-Ten regression checks pass. They verify portable deterministic reproduction with
+Twelve regression checks pass. They verify portable deterministic reproduction with
 no original assets, no-write/stale failure, corrupted inventory/proposal/source
 and packed-index rejection, review-digest mismatch failure, corrected themes,
 bounded acceptance without member inheritance, original/packed distinction,
-overlap accounting and extensible pinned registration without fabricated credit.
+overlap accounting, original-only export copies without invented master links,
+separate pilot/expansion/supplemental counts and extensible pinned registration
+without fabricated credit.
 The coordinator owns repository-wide typecheck, unit tests and lint validation.
 
-Next: freeze/review E01, register its exact proposal/member/source references, then
-normalize its claims and reconcile the ledger without declaring whole regions
-complete. Start the Room Builder path/arch packet when a worker slot is free.
+Next: normalize the frozen, independently reviewed I01 packet in a separate
+versioned slice, preserving its partial/unknown placement policies and separate
+accounting. The Room Builder path/arch packet remains unassigned. No further
+semantic expansion is claimed by this checkpoint.

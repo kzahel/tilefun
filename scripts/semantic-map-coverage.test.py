@@ -120,22 +120,67 @@ class CoverageTests(unittest.TestCase):
         self.assertGreater(len(records['P01/F02']['regionLinks']), 1)
         self.assertEqual(len(records), 85)
 
-    def test_draft_registry_no_completion_credit_and_stage_validation(self):
-        registration = self.ledger['registeredPackets'][0]
-        self.assertEqual(registration['assignmentState'], 'investigating')
-        self.assertFalse(registration['coverageCredit'])
-        self.assertEqual(registration['memberRecords'], [])
-        self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'no-evidence')
+    def test_registry_requires_normalization_and_stage_validation(self):
+        registrations = {r['packetId']: r for r in self.ledger['registeredPackets']}
+        self.assertTrue(registrations['E01-outdoor-seating']['coverageCredit'])
+        self.assertEqual(registrations['E01-outdoor-seating']['normalization']['sourceRecords'], 27)
+        self.assertFalse(registrations['I01-interior-sofas']['coverageCredit'])
+        self.assertEqual(registrations['I01-interior-sofas']['assignmentState'], 'review-ready')
         target = self.fixture / coverage.REGISTRY
         before = target.read_bytes()
         try:
             data = json.loads(before)
-            data['registrations'][0]['assignmentState'] = 'reconciled'
+            draft = copy.deepcopy(data['registrations'][0])
+            draft.update(packetId='draft', assignmentState='investigating', proposal=None,
+                         independentReview=None, memberRecords=[], sourceRefs=[])
+            data['registrations'].append(draft)
+            target.write_bytes(coverage.encode(data))
+            result = coverage.build(self.fixture)
+            self.assertFalse(result['registeredPackets'][-1]['coverageCredit'])
+            self.assertEqual(result['registeredPackets'][-1]['stages']['independentlyReviewed']['state'], 'no-evidence')
+            draft['assignmentState'] = 'reconciled'
             target.write_bytes(coverage.encode(data))
             with self.assertRaisesRegex(ValueError, 'requires pinned proposal'):
                 coverage.build(self.fixture)
         finally:
             target.write_bytes(before)
+
+    def test_expansion_primary_lineage_supplemental_aliases_and_gaps(self):
+        counts = self.ledger['accounting']
+        self.assertEqual(counts['pilotSourceRecords'], 85)
+        self.assertEqual(counts['allNormalizedSourceRecords'], 112)
+        self.assertEqual(counts['allNormalizedProposalUnits'], 94)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords'], {'exact-direct': 25, 'original-only': 2})
+        self.assertEqual(counts['expansionNamedExportReferences'], 54)
+        self.assertEqual(counts['expansionSupplementalExactOccurrences'], 25)
+        self.assertEqual(counts['expansionCommittedIntegrationAliases'], 2)
+        records = {r['id']: r for r in self.ledger['expandedRecords']}
+        for rid in ['E01-05', 'E01-06']:
+            self.assertEqual(records[rid]['lineage']['kind'], 'original-only')
+            self.assertEqual(records[rid]['lineage']['rects'], [])
+            self.assertEqual(records[rid]['regionLinks'], [])
+            self.assertEqual(records[rid]['supplementalOccurrences'], [])
+            self.assertEqual(len(records[rid]['integrationAliases']), 1)
+        for record in records.values():
+            self.assertEqual(record['stages']['accepted']['state'], 'no-evidence')
+        sofa = next(r for r in self.ledger['readyBoundedPackets'] if r['key'] == 'interiors-sofa-contrast')
+        self.assertEqual(sofa['state'], 'review-ready')
+        self.assertIn('I01', sofa['supersededByRegistration'])
+        self.assertNotIn('exteriors-theme-sheets', self.ledger['gaps']['supplementalUnassignedGroups'])
+        self.assertIn('interiors-theme-normal', self.ledger['gaps']['supplementalUnassignedGroups'])
+        groups = {g['id']: g for g in self.ledger['sourceGroups']}
+        self.assertEqual(len(groups['exteriors-master']['expandedPrimaryMasterReferences']), 25)
+        self.assertEqual(len(groups['exteriors-master']['expandedRecordIds']), 25)
+        self.assertEqual(len(groups['committed-reference']['expandedRecordIds']), 25)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords']['exact-direct'], 25)
+        registration = next(r for r in self.ledger['registeredPackets'] if r['packetId'] == 'E01-outdoor-seating')
+        self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'evidenced')
+        self.assertNotIn('pending', registration['stages']['independentlyReviewed']['scope'])
+
+    def test_expansion_pins_and_committed_original_only_copy_corruption(self):
+        self.assert_corruption_rejected(coverage.MODEL)
+        self.assert_corruption_rejected(coverage.BASE + '/packets/E01-outdoor-seating.json')
+        self.assert_corruption_rejected('public/assets/semantic-sources/exteriors-bench-5.png')
 
     def test_extensible_registration_pins_members_and_review_without_credit(self):
         target = self.fixture / coverage.REGISTRY

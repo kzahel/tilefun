@@ -114,3 +114,43 @@ unknown object roles and new packet semantics need their own evidence/review.
 Next: adapt the separately frozen and independently reviewed E01 packet, preserving
 pilot counts separately from expansion counts. Reconcile exact review/source scope
 and coverage registration again before crediting its records.
+
+## E01 adapter addendum — final expanded freeze
+
+The later explicit E01 adapter was separately checked at these final raw SHA-256
+pins. The pilot-only snapshot above remains its reviewed historical checkpoint.
+
+| Artifact | Expanded SHA-256 |
+| --- | --- |
+| `scripts/semantic-map-model.py` | `e97dde5c615f846488d0e9eaa9cfc71ba4b5ca20e2a97071fc89d8bfca57ed99` |
+| `scripts/semantic-map-model.test.py` | `337ee1e73c95278e35183f1d2d1638f0a3bde3323cbd82e124580055740db3db` |
+| `semantic-model.json` | `2f612b7fd2e2b9d07bd9c00bbf02cd4955210959b4a8a411857b0c6da93bbc26` |
+
+Model revision: `61e1b53455aa82b54c60020c847e4ec2750ebce2f5c9da9f560074200e366fd5`.
+E01 proposal/review SHA-256 pins:
+`9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b` /
+`5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0`.
+
+Supported for this exact explicit adapter. Independent structural reconciliation
+compared all 27 E01 raw candidate records against normalized `originalEvidence`,
+all 54 named references against source-table IDs and export rectangles, and all
+50 listed occurrence counts. Primary master lineage is 25 direct plus two
+original-only records. The two long benches have no master or theme occurrence;
+their new committed integration aliases were independently hashed and agree with
+the exact original-export pins. Alias copies stay separate from original record
+references/occurrences and do not fabricate a reconstruction or master crop.
+
+The independent check verified 82 explicit E01 review-source pins (all 80 declared
+packet sources plus two integration copies) and 27 exact member dispositions.
+All 94 model proposal units retain unknown gameplay geometry and unregistered
+human approval. The full final `--check --summary` passed: 112 normalized records /
+94 proposal units, separate pilot 85/67 and E01 27/27, nine composition targets,
+zero human approvals/runtime promotions. The author reports its final 14 full
+regression checks and subsequent targeted E01 scope/lineage test passed; I did not
+repeat the entire expanded four-minute suite. Final script/test/model hashes were
+independently rechecked after these checks and unchanged.
+
+No blocking inconsistency remains in this bounded expanded contract. I01's later
+20-member review is a separate packet with zero model normalization credit here;
+no further adapter, theme semantics, source absence claim or human approval is
+inferred. Coverage and the bounded expansion audit pin this expanded model.

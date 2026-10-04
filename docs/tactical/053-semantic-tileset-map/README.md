@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: three pilot sheets and approved forest examples delivered; shared model and coverage ledger checked; next themes in progress.
+Status: four family sheets delivered; shared model and coverage ledger extended; sofa packet reviewed; whole-pack mapping continues.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -217,7 +217,7 @@ unblocked queue item. Update the queue and link findings before ending a work se
 
 ## Investigation tools
 
-- `python3 scripts/semantic-map-model.py --check` validates the normalized pilot
+- `python3 scripts/semantic-map-model.py --check` validates the normalized pilot and E01
   model, exact source lineage and review applicability; `--committed-only` permits
   missing ignored originals but reports that limitation. See the
   [model note](notes/2026-10-04-semantic-model.md) and
@@ -230,8 +230,8 @@ unblocked queue item. Update the queue and link findings before ending a work se
 These are offline evidence tools; they do not repack assets or change gameplay.
 Use Python 3 with Pillow for image inspection and full inventory validation.
 
-- `python3 scripts/build-family-sheets.py --check` verifies the three contact
-  sheets against pinned proposals and committed atlases, including all 85 source
+- `python3 scripts/build-family-sheets.py --check` verifies the four contact
+  sheets against pinned proposals and committed atlases, including all 112 source
   records and the cabinet component restrictions. Omit `--check` to regenerate
   the JSON. `python3 scripts/build-family-sheets.test.py` exercises source drift,
   frame replacement, record coverage and component/unknown placement distinctions.

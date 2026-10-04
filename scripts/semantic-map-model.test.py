@@ -33,8 +33,8 @@ class SemanticModelTests(unittest.TestCase):
 
     def test_exact_accounting_composition_and_unknown_geometry(self):
         report = self.full_report
-        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (85, 67))
-        self.assertEqual(report['lineage'], {'direct': 58, 'composed': 9, 'derived': 18})
+        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (112, 94))
+        self.assertEqual(report['lineage'], {'direct': 83, 'composed': 9, 'derived': 18, 'original-only': 2})
         self.assertEqual(len(report['compositionsComparedToPinnedTargets']), 9)
         self.assertEqual(report['compositionsUnavailable'], [])
         self.assertEqual(report['variantDeltasVerified'], 27)
@@ -69,7 +69,7 @@ class SemanticModelTests(unittest.TestCase):
         self.assertFalse(M.review_applicability(review, '0' * 64, review['memberRecords']))
         self.assertFalse(M.review_applicability(review, review['proposalSha256'], review['memberRecords'][:-1]))
         self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews']))
-        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 67)
+        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 94)
 
     def test_aliases_offgrid_occurrences_and_exceptions_preserved(self):
         records = {r['id']: r for r in self.model['sourceRecords']}
@@ -131,6 +131,11 @@ class SemanticModelTests(unittest.TestCase):
             self.assertEqual(report['compositionsUnavailable'], ['P03-38-normal'])
             self.assertGreater(len(report['sourceFilesUnavailable']), 0)
             self.assertEqual(report['humanApprovedProposalUnits'], 0)
+            self.assertEqual(report['originalOnlyRecordIds'], ['E01-05', 'E01-06'])
+            self.assertEqual(report['E01VariantDeltasVerified'], 18)
+            self.assertEqual(report['E01VariantDeltasUnavailable'], [])
+            self.assertEqual(report['E01PartialComparisonsVerified'], 2)
+            self.assertTrue({'E01-05', 'E01-06'}.isdisjoint(report['recordPixelsUnavailable']))
             with self.assertRaisesRegex(ValueError, 'Missing source reference'):
                 M.validate_model(self.model, root)
             # A present original that drifts is never excused as unavailable.
@@ -162,6 +167,41 @@ class SemanticModelTests(unittest.TestCase):
         for edit in (offset, lambda m: m.update(reviews=[]), lambda m: m['reviews'][0].update(sourcePins=[]), identity, derived_occurrence):
             with self.subTest(edit=edit), self.assertRaisesRegex(ValueError, 'Canonical packet adapter contract drift'):
                 M.validate_model(self.mutated(edit))
+
+    def test_versioned_extension_preserves_pilot_accounting_and_original_only_sources(self):
+        report = self.full_report
+        self.assertEqual(report['pilotAccounting'], {'sourceRecords': 85, 'proposalUnits': 67,
+                         'lineage': {'direct': 58, 'composed': 9, 'derived': 18}})
+        self.assertEqual(report['extensionAccounting']['E01'], {'sourceRecords': 27, 'proposalUnits': 27,
+                         'lineage': {'direct': 25, 'original-only': 2}})
+        self.assertEqual(report['E01VariantDeltasVerified'], 18)
+        self.assertEqual(report['E01PartialComparisonsVerified'], 2)
+        records = [r for r in self.model['sourceRecords'] if r['packetId'] == 'E01']
+        self.assertEqual(sum(len(r['references']) for r in records), 54)
+        self.assertEqual(sum(len(r['occurrences']) for r in records), 50)
+        review = next(r for r in self.model['reviews'] if r['packetId'] == 'E01')
+        scope = {pin['path'] for pin in review['sourcePins']}
+        self.assertEqual(len(scope), 82)  # All 80 packet sources plus two exact integration aliases.
+        packet = M.load(M.ROOT / M.PLAN / 'packets/E01-outdoor-seating.json')
+        self.assertTrue({source['path'] for source in packet['sources']}.issubset(scope))
+        for record in records:
+            if record['primaryLineage'] == 'original-only':
+                self.assertEqual(record['occurrences'], [])
+                self.assertEqual(record['sourceIdentity'], 'exact-pinned-whole-export')
+                self.assertEqual(len(record['references']), 2)
+                self.assertEqual(len(record['integrationAliases']), 1)
+                self.assertEqual(record['committedRendering']['status'], 'requires exact original single; no committed whole crop')
+                self.assertEqual(next(p for p in self.model['proposals'] if p['id'] == record['id'])['humanApproval'], 'unregistered')
+        def fabricate(m):
+            r = next(r for r in m['sourceRecords'] if r['id'] == 'E01-05')
+            r['occurrences'].append(copy.deepcopy(r['references'][0]))
+        with self.assertRaisesRegex(ValueError, 'Original-only lineage'):
+            M.validate_model(self.mutated(fabricate))
+        def alter_delta(m):
+            e = next(r for r in m['relationships'] if r['id'] == 'E01:experiments')
+            e['originalEvidence']['variantDeltas'][0]['rgbaChangedPixels'] += 1
+        with self.assertRaisesRegex(ValueError, 'E01 variant delta differs'):
+            M.validate_model(self.mutated(alter_delta))
 
     def test_normalization_does_not_erase_translucent_color(self):
         im = Image.new('RGBA', (2, 1))

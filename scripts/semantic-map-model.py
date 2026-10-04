@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only semantic packet adapter/validator (P01/P02/P03).
+"""Read-only semantic packet adapter/validator (P01/P02/P03 and E01 v1).
 
 Default writes only semantic-model.json. --check never writes and emits stable JSON;
 --summary prints a human summary. Full validation requires ignored originals.
@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PLAN = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = ROOT / PLAN / 'semantic-model.json'
 PINS = {
+    'E01-outdoor-seating.json': '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b',
+    'E01-outdoor-seating-review.md': '5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0',
     'P01-trees.json': '3df0e42f9012644afe5cd1233f604b5dd74ec05c4c4f26253834dc2a05281ff6',
     'P02-scrapyard.json': '429d796ec87adb007a4febc267fabff14c1032cd197dc47ed50d729f65073957',
     'P03-cabinets.json': 'c22f7b16e24816a231883bad04cd29e43eac2ce81f09f444d4bc5ffad7875254',
@@ -36,6 +38,7 @@ NORMALIZATION = 'RGBA bytes row-major; RGB=0 where alpha=0; translucent RGBA unc
 PILOT_ACCOUNTING = {'P01': {'records': 29, 'proposals': 29, 'direct': 21, 'composed': 8, 'derived': 0},
                     'P02': {'records': 29, 'proposals': 29, 'direct': 29, 'composed': 0, 'derived': 0},
                     'P03': {'records': 27, 'proposals': 9, 'direct': 8, 'composed': 1, 'derived': 18}}
+PACKET_ACCOUNTING = {**PILOT_ACCOUNTING, 'E01': {'records': 27, 'proposals': 27, 'direct': 25, 'composed': 0, 'derived': 0, 'original-only': 2}}
 GEOMETRY = {k: 'unknown' for k in ('anchor', 'footprint', 'collision', 'walkability', 'height')}
 
 
@@ -139,6 +142,20 @@ def difference(a, b):
             'outsideColorChanges': sorted({str((p[2], p[3])) for p in outside})}
 
 
+def seating_delta(a, b):
+    require(a.size == b.size, 'E01 variant comparison frames differ')
+    ar, br = a.tobytes(), b.tobytes()
+    mask = bytes(255 if ar[i:i + 4] != br[i:i + 4] else 0 for i in range(0, len(ar), 4))
+    changed = [i for i, value in enumerate(mask) if value]
+    bbox = ([min(i % a.width for i in changed), min(i // a.width for i in changed),
+             max(i % a.width for i in changed) + 1, max(i // a.width for i in changed) + 1] if changed else None)
+    alpha_changes = sum(ar[i] != br[i] for i in range(3, len(ar), 4))
+    return {'size': list(a.size), 'leftNormalizedRgbaSHA256': sha(ar), 'rightNormalizedRgbaSHA256': sha(br),
+            'rgbaChangedPixels': len(changed), 'alphaChangedPixels': alpha_changes,
+            'alphaMaskEqual': alpha_changes == 0, 'changedBoundsXYXY': bbox,
+            'changedMaskSHA256': sha(mask), 'exactEqual': ar == br}
+
+
 def table_dispositions(text, ids):
     """Read explicit Markdown table rows, preserving every cell and qualification."""
     rows = {}
@@ -178,6 +195,8 @@ def build_model(root=ROOT):
     scrap = load(packet_dir / 'P02-scrapyard.json')
     cabinets = load(packet_dir / 'P03-cabinets.json')
     topology = load(packet_dir / 'P03-cabinets-topology.json')
+    seating = load(packet_dir / 'E01-outdoor-seating.json')
+    require(seating['schemaVersion'] == 2 and seating['packetId'] == 'E01' and seating['proposalRevision'] == 1, 'Unsupported E01 adapter version')
     inventory = load(root / PLAN / 'source-files.json')
     inventory = {row[0]: dict(zip(inventory['columns'], row)) for row in inventory['files']}
     files, records, proposals, relations, reviews, packets = {}, [], [], [], [], []
@@ -377,36 +396,102 @@ def build_model(root=ROOT):
                       'members': [r['id'] for r in measurements['records']],
                       'originalEvidence': {k: v for k, v in measurements.items() if k not in ('records', 'sources')},
                       'challenges': cabinets['challenges'], 'assemblyProposals': cabinets['assemblyProposals']})
-    for pid, name, packet in [('P01', 'trees', trees), ('P02', 'scrapyard', scrap), ('P03', 'cabinets', cabinets)]:
-        file = f'P{pid[-2:]}-{name}.json'
+    # Versioned E01 adapter: exact full exports are authoritative, while
+    # primaryLineage describes correspondence to the original master only.
+    # Two original-only records have no master occurrence or invented recipe.
+    seating_sources = {}
+    for item in seating['sources']:
+        path = source(item['path'], item['pngSHA256'], item['size'])
+        files[path]['normalizedPixelSha256'] = item['normalizedRgbaSHA256']
+        seating_sources[item['id']] = path
+    for name, pin in seating['pins'].items():
+        require(sha(repo_path(root, pin['path']).read_bytes()) == pin['sha256'], f'E01 input pin drift: {name}')
+        pins[pin['path']] = pin['sha256']
+    for r in seating['candidates']:
+        uid = r['id']
+        fields = fields_from(r['fields'])
+        integration_aliases = []
+        if uid in ('E01-05', 'E01-06'):
+            alias_path = f"public/assets/semantic-sources/exteriors-bench-{5 if uid == 'E01-05' else 6}.png"
+            origin = seating_sources[r['primarySourceId']]
+            source(alias_path, files[origin]['sha256'], r['exportRect'][2:])
+            files[alias_path]['normalizedPixelSha256'] = r['normalizedRgbaSHA256']
+            integration_aliases.append({'sourceFile': alias_path, 'bounds': rect(r['exportRect'], 'source-file-pixels', 'integration-alias'),
+                                        'originSourceFile': origin, 'lineage': 'byte-identical-copy-of-pinned-export',
+                                        'scope': 'Serial integration alias; frozen proposal committedRendering remains unchanged. Does not create a master occurrence or human approval.'})
+            relations.append({'id': uid + ':integration-alias', 'packetId': 'E01', 'kind': 'integration-source-alias',
+                              'members': [uid], 'originSourceFile': origin, 'sourceFile': alias_path,
+                              'sha256': files[origin]['sha256'], 'humanApproval': 'unregistered',
+                              'limit': 'Source copy only; original-only master correspondence remains.'})
+        records.append({'id': uid, 'packetId': 'E01', 'sourceId': uid, 'sourceKind': 'named-single',
+                        'primaryLineage': 'direct' if r['masterOccurrences'] else 'original-only',
+                        'lineageDomain': 'pinned-original-master',
+                        'sourceIdentity': 'exact-pinned-whole-export',
+                        'frameDimensions': r['exportRect'][2:],
+                        'normalizedPixelSha256': r['normalizedRgbaSHA256'],
+                        'references': [{'sourceFile': seating_sources[sid], 'bounds': rect(r['exportRect'], 'source-file-pixels')}
+                                       for sid in r['namedExportAliases']],
+                        'occurrences': [{'sourceFile': seating_sources[o['sourceId']],
+                                         'bounds': rect(o['rect'], 'source-file-pixels'),
+                                         'visibleBounds': rect(o['alphaVisibleRect'], 'source-file-pixels', 'alpha-visible'),
+                                         'lineage': o['lineage']} for o in r['occurrences']],
+                        'bounds': [rect(r['exportRect'], 'record-local-pixels'),
+                                   rect(r['alphaVisibleRect'], 'record-local-pixels', 'alpha-visible')],
+                        'integrationAliases': integration_aliases, 'legacyIndexAlias': r['legacyIndexAlias'],
+                        'committedRendering': r['committedRendering'],
+                        'searchEvidence': seating['matching'], 'originalEvidence': r})
+        proposals.append({'id': uid, 'packetId': 'E01', 'members': [uid], 'unitType': 'whole-export-visual-proposal',
+                          'fields': fields, 'identity': fields['identity'], 'family': fields['family'],
+                          'componentRole': fields['role'], 'variant': fields['variant'], 'facing': fields['facing'],
+                          'gameplayGeometry': GEOMETRY.copy(), 'alternatives': fields['identity']['alternatives'],
+                          'topology': r['topology'], 'state': 'proposed', 'humanApproval': 'unregistered'})
+    for i, relation in enumerate(seating['relations']):
+        relations.append({'id': f'E01:R{i + 1:02}', 'packetId': 'E01', 'kind': relation['relation'],
+                          'members': relation['members'], 'originalEvidence': relation})
+    relations.append({'id': 'E01:experiments', 'packetId': 'E01', 'kind': 'experiment-evidence',
+                      'members': [r['id'] for r in seating['candidates']], 'adapter': 'E01-outdoor-seating-v1',
+                      'originalEvidence': seating['experiments'], 'limits': seating['matching']['limitation']})
+    relations.append({'id': 'E01:search-domain', 'packetId': 'E01', 'kind': 'search-domain',
+                      'members': [r['id'] for r in seating['candidates']],
+                      'sources': [seating_sources[sid] for sid in seating['matching']['sheetDomains']],
+                      'namedAliasDomain': seating['matching']['namedAliasDomain'],
+                      'limit': 'Exact full-export master/theme correspondence only; no absent-source inference.'})
+    for pid, file, packet in [('P01', 'P01-trees.json', trees), ('P02', 'P02-scrapyard.json', scrap),
+                              ('P03', 'P03-cabinets.json', cabinets), ('E01', 'E01-outdoor-seating.json', seating)]:
         reviewfile = file.replace('.json', '-review.md')
         text = (packet_dir / reviewfile).read_text()
         pr = [p for p in proposals if p['packetId'] == pid]
         sr = [r for r in records if r['packetId'] == pid]
         ids = [p['id'].split(':')[-1] for p in pr]
         raw_ids = [r['sourceId'] for r in sr]
-        review_sources = {ref['sourceFile'] for r in sr for ref in r['references'] + r['occurrences']}
+        review_sources = {ref['sourceFile'] for r in sr for ref in r['references'] + r.get('integrationAliases', []) + r['occurrences']}
         review_sources.update(ref['aliasFile'] for r in sr for ref in r['occurrences'] if 'aliasFile' in ref)
         review_sources.update(layer['sourceFile'] for rel in relations if rel['packetId'] == pid
                               for layer in rel.get('recipe', {}).get('layers', []))
+        review_sources.update(path for rel in relations if rel['packetId'] == pid and rel['kind'] == 'search-domain'
+                              for path in rel['sources'])
+        if pid == 'E01':
+            review_sources.update(seating_sources.values())  # Review independently checked all 80 frozen source pins.
         review_sources.update(item['path'] for rel in relations if rel['packetId'] == pid and rel['kind'] == 'counterpart-corpus'
                               for item in rel['files'])
         reviews.append({'id': pid + ':independent-review', 'packetId': pid, 'kind': 'agent-review',
                         'proposalPath': f'{PLAN}/packets/{file}', 'proposalSha256': PINS[file],
                         'proposalRevision': 1, 'sourcePins': [files[path] for path in sorted(review_sources)],
-                        'sourceScope': 'Record references, exact occurrence/alias sources, composition input sources and conditional counterpart corpus; each raw hash/dimension pinned.',
+                        'sourceScope': 'Record references, exact occurrence/alias sources, composition inputs, declared sheet search domains and conditional counterpart corpus; each raw hash/dimension pinned.',
                         'memberRecords': [r['id'] for r in sr], 'proposalUnits': [p['id'] for p in pr],
                         'applicability': 'exact-proposal-hash-only', 'reviewPath': f'{PLAN}/packets/{reviewfile}',
                         'reviewSha256': PINS[reviewfile], 'proposalDispositions': table_dispositions(text, ids),
                         'recordDispositions': table_dispositions(text, raw_ids) if pid == 'P03' else [],
-                        'observationOrder': 'Initial observations before full proposal read; coordinator brief informed; not formally blinded.',
+                        'observationOrder': ('Initial contact sheet before proposal JSON; coordinator brief and contact-sheet labels visible; mapper note before raw contexts; not blinded.' if pid == 'E01' else 'Initial observations before full proposal read; coordinator brief informed; not formally blinded.'),
                         'originalText': text, 'humanApproval': 'unregistered', 'runtimePromotion': False})
         packets.append({'id': pid, 'proposalPath': f'{PLAN}/packets/{file}', 'proposalSha256': PINS[file],
                         'revision': 1, 'sourceRecordCount': len(sr), 'proposalUnitCount': len(pr),
                         'state': 'proposed', 'coverageLimit': packet['coverage'],
                         'originalContext': {k: v for k, v in packet.items() if k not in
                                             ('candidates', 'semanticProposals', 'measurements', 'relations', 'experiments')}})
-    model = {'schema': 'semantic-tileset-model-v1', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
+    model = {'schema': 'semantic-tileset-model-v1',
+             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1']},
+             'lineageContract': 'Primary lineage describes correspondence to the packet original master. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
              'normalization': NORMALIZATION, 'inputPins': pins, 'packets': packets,
              'sourceFiles': [files[k] for k in sorted(files)], 'sourceRecords': records,
              'proposals': proposals, 'relationships': relations, 'reviews': reviews,
@@ -502,17 +587,20 @@ def validate_model(model, root=ROOT, committed_only=False):
         if path not in images:
             images[path] = normalized(Image.open(root / path))
         return images[path]
+    for path, pin in files.items():
+        if pin.get('normalizedPixelSha256') and path not in missing:
+            require(pixel_hash(image(path)) == pin['normalizedPixelSha256'], f'Normalized source hash drift: {path}')
     records = {r['id']: r for r in model['sourceRecords']}
     proposals = {p['id']: p for p in model['proposals']}
     require(len(records) == len(model['sourceRecords']), 'Duplicate record ID')
     require(len(proposals) == len(model['proposals']), 'Duplicate proposal ID')
-    require({p['id'] for p in model['packets']} == set(PILOT_ACCOUNTING), 'Unsupported packet adapter; register its explicit accounting contract')
-    for pid, accounting in PILOT_ACCOUNTING.items():
+    require({p['id'] for p in model['packets']} == set(PACKET_ACCOUNTING), 'Unsupported packet adapter; register its explicit accounting contract')
+    for pid, accounting in PACKET_ACCOUNTING.items():
         packet_records = [r for r in records.values() if r['packetId'] == pid]
         packet_proposals = [p for p in proposals.values() if p['packetId'] == pid]
         require(len(packet_records) == accounting['records'] and len(packet_proposals) == accounting['proposals'], f'Packet record/proposal accounting drift: {pid}')
         require(Counter(r['primaryLineage'] for r in packet_records) ==
-                {k: accounting[k] for k in ('direct', 'composed', 'derived') if accounting[k]}, f'Lineage accounting drift: {pid}')
+                {k: accounting[k] for k in ('direct', 'composed', 'derived', 'original-only') if accounting.get(k)}, f'Lineage accounting drift: {pid}')
     covered = Counter(rid for p in proposals.values() for rid in p['members'])
     require(covered == Counter(records.keys()), 'Proposal membership missing or duplicated')
     for p in proposals.values():
@@ -523,7 +611,7 @@ def validate_model(model, root=ROOT, committed_only=False):
         for bounds in record['bounds']:
             require(bounds['coordinateSpace'] == 'record-local-pixels', f'Wrong record bounds space: {rid}')
             check_bounds(bounds, record['frameDimensions'])
-        for ref in record['references'] + record['occurrences']:
+        for ref in record['references'] + record.get('integrationAliases', []) + record['occurrences']:
             path = ref['sourceFile']
             require(path in files and files[path]['dimensions'], f'Missing source pin/dimensions: {rid}: {path}')
             expected_space = 'packed-atlas-pixels' if ref.get('aliasKey') else 'source-file-pixels'
@@ -531,6 +619,10 @@ def validate_model(model, root=ROOT, committed_only=False):
             check_bounds(ref['bounds'], files[path]['dimensions'])
             if 'visibleBounds' in ref:
                 check_bounds(ref['visibleBounds'], files[path]['dimensions'])
+            if ref.get('originSourceFile'):
+                origin = ref['originSourceFile']
+                require(origin in files and files[origin]['sha256'] == files[path]['sha256'] and
+                        files[origin]['dimensions'] == files[path]['dimensions'], 'Integration alias differs from pinned original export')
             if ref.get('aliasKey'):
                 catalog = load(root / ref['catalogFile'])
                 aliases = {a['key']: a for a in catalog['entries']}
@@ -557,7 +649,8 @@ def validate_model(model, root=ROOT, committed_only=False):
                 verified_refs += 1
         if rid in rendered:
             alpha = next(b for b in record['bounds'] if b['kind'] == 'alpha-visible')
-            require(list(rendered[rid].getbbox()) == alpha['value'], f'Alpha bounds drift: {rid}')
+            ax, ay, aw, ah = xywh(alpha)
+            require(list(rendered[rid].getbbox()) == [ax, ay, ax + aw, ay + ah], f'Alpha bounds drift: {rid}')
     recipes, exact_targets, replay_only, unavailable_recipes = 0, [], [], []
     for relation in model['relationships']:
         require(all(r in records or r in proposals for r in relation['members']), f'Unresolved relationship member: {relation["id"]}')
@@ -652,6 +745,41 @@ def validate_model(model, root=ROOT, committed_only=False):
                 r = records[relation['members'][0]]
                 matches = sorted(pool.get((tuple(r['frameDimensions']), relation['canonicalBodySha256']), []))
                 require(matches == relation['matchesInCorpus'], 'Counterpart uniqueness differs')
+    seating_evidence = next(r['originalEvidence'] for r in model['relationships'] if r['id'] == 'E01:experiments')
+    seating_checked, seating_unavailable, partial_checked, partial_unavailable = 0, [], 0, []
+    for experiment in seating_evidence['variantDeltas']:
+        if any(rid not in rendered for rid in experiment['members']):
+            seating_unavailable.append(experiment['members'])
+            continue
+        a, b = [rendered[rid] for rid in experiment['members']]
+        if experiment['operation'] == 'horizontal-reflection':
+            a = a.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+        elif experiment['operation'] == 'target crop [0,16,48,32]':
+            b = crop(b, rect([0, 16, 48, 32], 'record-local-pixels'))
+        else:
+            require(experiment['operation'] == 'identity', 'Unsupported E01 comparison operation')
+        measured = seating_delta(a, b)
+        require(all(experiment[key] == value for key, value in measured.items()), 'E01 variant delta differs')
+        seating_checked += 1
+    for experiment in seating_evidence['longBenchPartialCorrespondence']:
+        if any(rid not in rendered for rid in experiment['members']):
+            partial_unavailable.append(experiment['members'])
+            continue
+        a, b = [rendered[rid] for rid in experiment['members']]
+        for kind in ('topCorrespondence', 'bottomCorrespondence'):
+            expected = experiment[kind]
+            measured = seating_delta(crop(a, rect(expected['shortRect'], 'record-local-pixels')),
+                                     crop(b, rect(expected['longRect'], 'record-local-pixels')))
+            require(all(expected[key] == value for key, value in measured.items()), 'E01 partial correspondence differs')
+        short_bytes, long_bytes = a.tobytes(), b.tobytes()
+        short_rows = {short_bytes[y * a.width * 4:(y + 1) * a.width * 4] for y in range(a.height)}
+        unknown_rows = [y for y in range(b.height) if long_bytes[y * b.width * 4:(y + 1) * b.width * 4] not in short_rows]
+        require(unknown_rows == experiment['longRowsWithoutAnyEqualShortRow'], 'E01 long-bench row exception differs')
+        partial_checked += 1
+    original_only = [r['id'] for r in records.values() if r['primaryLineage'] == 'original-only']
+    for rid in original_only:
+        require(not records[rid]['occurrences'] and records[rid]['sourceIdentity'] == 'exact-pinned-whole-export',
+                'Original-only lineage cannot fabricate a master occurrence or erase exact source identity')
     review_results = []
     for review in model['reviews']:
         members = [r['id'] for r in records.values() if r['packetId'] == review['packetId']]
@@ -666,16 +794,24 @@ def validate_model(model, root=ROOT, committed_only=False):
                    'Pilot proposal units are not unique-object counts or pack completeness.']
     if missing:
         limitations.append('Original references are absent: their raw hashes/dimensions and independent target comparisons were not checked.')
+    if seating_unavailable or partial_unavailable:
+        limitations.append('Original-only long-bench sources unavailable; their mirror/partial-delta checks were not performed. Exact sources remain pinned.')
     if not corpus_available:
         limitations.append('122-file counterpart corpus unavailable; recorded uniqueness claim not independently rechecked.')
     return {'ok': True, 'mode': 'committed-only' if committed_only else 'full', 'modelRevision': model['revision'],
             'sourceRecords': len(records), 'proposalUnits': len(proposals),
+            'pilotAccounting': {'sourceRecords': 85, 'proposalUnits': 67, 'lineage': {'direct': 58, 'composed': 9, 'derived': 18}},
+            'extensionAccounting': {'E01': {'sourceRecords': 27, 'proposalUnits': 27, 'lineage': {'direct': 25, 'original-only': 2}}},
             'lineage': dict(sorted(Counter(r['primaryLineage'] for r in records.values()).items())),
             'sourceFilesVerified': len(files) - len(missing), 'sourceFilesUnavailable': missing,
             'recordReferencesVerified': verified_refs, 'recordOccurrencesVerified': verified_occurrences,
             'compositionRecipes': recipes, 'compositionsComparedToPinnedTargets': exact_targets,
             'compositionsReplayOnly': replay_only, 'compositionsUnavailable': unavailable_recipes,
             'variantDeltasVerified': variants_checked, 'counterpartCorpusRechecked': corpus_available,
+            'E01VariantDeltasVerified': seating_checked, 'E01VariantDeltasUnavailable': seating_unavailable,
+            'E01PartialComparisonsVerified': partial_checked, 'E01PartialComparisonsUnavailable': partial_unavailable,
+            'originalOnlyRecordIds': original_only,
+            'recordPixelsUnavailable': [rid for rid in records if rid not in rendered],
             'positiveTopologyCasesChecked': len(top_tests), 'reviews': review_results,
             'humanApprovedProposalUnits': 0, 'runtimePromotedProposalUnits': 0, 'limitations': limitations}
 
@@ -697,8 +833,8 @@ def main():
         if not args.check:
             OUTPUT.write_bytes(encoded(model))
         if args.summary:
-            print(f"Semantic pilots: {report['sourceRecords']} source records / {report['proposalUnits']} proposal units; "
-                  '58 direct, 9 composed, 18 derived. Human approvals: 0; runtime promotions: 0.')
+            print(f"Semantic map: {report['sourceRecords']} source records / {report['proposalUnits']} proposal units. "
+                  'Pilots: 85/67 (58 direct, 9 composed, 18 derived); E01: 27/27 (25 direct, 2 original-only). Human approvals: 0; runtime promotions: 0.')
             print(f"Compositions: {len(report['compositionsComparedToPinnedTargets'])} target comparisons, "
                   f"{len(report['compositionsReplayOnly'])} replay-only, {len(report['compositionsUnavailable'])} unavailable. "
                   f"Missing original references: {len(report['sourceFilesUnavailable'])}.")

@@ -42,3 +42,15 @@ non-standalone rule for all 12 records of cabinet components 41–44, with requi
 connections and assembly completeness. These constraints are saved metadata;
 the shared validator enforces these chains; runtime enforcement remains pending. This clarification is not a
 registered approval of every rendered combination or of gameplay geometry.
+
+## Expansion packets
+
+| Packet | Scope | Review / delivery |
+| --- | --- | --- |
+| [E01 Outdoor seating](E01-outdoor-seating.md) · [JSON](E01-outdoor-seating.json) | 27 benches, camping chairs and picnic-table exports; 25 direct master matches, two original-only benches | [Independent review](E01-outdoor-seating-review.md) supports all 27 with explicit exceptions; [fourth family sheet](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=outdoor-seating) presents 15 cards and chair colors |
+| [I01 Sofas and seats](I01-interior-sofas.md) · [JSON](I01-interior-sofas.json) | 18 normal Basement pieces plus two render counterparts; 15 assembly probes | [Independent review](I01-interior-sofas-review.md) supports all 20 and 15 assembly probes; four lower-seat roles remain unresolved |
+
+Packet totals are source records, including components and variants. E01's
+normalized integration preserves the original-only master status even though two
+exact public PNG copies now support ordinary browsing. I01 is not yet in the
+normalized model or owner-facing family catalog.

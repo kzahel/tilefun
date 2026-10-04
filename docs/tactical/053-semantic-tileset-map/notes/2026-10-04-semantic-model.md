@@ -1,6 +1,6 @@
 # V01 — Shared semantic model and read-only pilot validation
 
-2026-10-04. Bounded implementation over the three frozen pilots; no source art,
+2026-10-04. Foundation implementation over the three frozen pilots, followed by the explicit E01 extension below; no source art,
 proposal JSON, runtime bank or owner review event changed. The
 [model](../semantic-model.json) is deterministic adapter output, not a promoted
 catalog. The [adapter](../../../../scripts/semantic-map-model.py) and
@@ -40,6 +40,21 @@ cabinet roles rest on their own contours, rather than the modular negative probe
 Raw review text preserves initial observations, briefing limits, explicit member
 dispositions and qualifications. Review applicability requires the exact frozen
 proposal hash and member list; changed identities cannot inherit review.
+
+## Interpretation scope and later evidence
+
+Normalized P01 fields describe the frozen pilot plus its pinned coordinator
+reconciliation. They are not the complete latest state of all subsequent tree
+research. For example, F05's pilot component-role wording retains the original
+repeatability limitation. The later bounded forest-repeat/phase evidence and
+owner acceptance are recorded in the
+[family delivery note](2026-10-04-family-contact-sheets.md#owner-acceptance-varied-offset-forest-compositions)
+and [coverage ledger](../coverage-ledger.json). Those approved exact varied-offset
+examples supplement the pilot interpretation; they do not approve every member,
+repeat length, boundary condition, gameplay use or this model. Consumers seeking
+current delivery/review state must consult that separately scoped evidence. This
+adapter does not compile an unrestricted forest generator or inherit example
+approval onto P01 proposals.
 
 ## Verification behavior
 
@@ -115,7 +130,7 @@ counterpart uniqueness is not rechecked. None is reported as a completed check.
 
 Future packets need a versioned adapter with explicit pin/revision/member and
 accounting contracts. Unsupported packets fail visibly rather than entering
-counts through guessed field names. Extend `build_model`, `PILOT_ACCOUNTING`
+counts through guessed field names. Extend `build_model`, `PACKET_ACCOUNTING`
 (or a subsequent versioned registry), and the packet-specific evidence checks
 with named sources, typed bounds, searches/limits, recipes/variants and per-field
 unknowns. Add independent tamper fixtures before admitting a new packet. Keep
@@ -131,7 +146,7 @@ elapsed effort and owner effort as the method-review acceptance criteria require
 
 Local originals were available. Full model generation and `--check` verified all
 85 records / 67 units, nine exact composition target comparisons, 27 raw variant
-deltas and the 122-file counterpart corpus. The 13-test regression suite covers
+deltas and the 122-file counterpart corpus. The foundation 13-test regression suite covers
 repeatable read-only JSON output, committed-only limits, source and reference
 drift, coordinate-space/bounds violations, composition-offset tampering, raw
 variant-delta tampering, review applicability, aliases/exceptions and topology
@@ -141,3 +156,53 @@ unit tests, lint and the separate family-sheet rendering checks.
 Next: independently review this adapter and admit the next bounded theme packet
 through an explicit source/review contract; keep exact owner metadata approval as
 a separate later decision.
+
+
+## E01 versioned adapter extension
+
+The foundation was checkpointed in commit `2f53abd` after independent review.
+E01 uses the explicit `E01-outdoor-seating-v1` adapter for packet schema 2,
+proposal revision 1, with proposal SHA-256
+`9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b` and
+[independent review](../packets/E01-outdoor-seating-review.md) SHA-256
+`5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0`.
+All 27 members have separate proposal/source/review identities and retained
+field alternatives. The adapter verifies all 80 frozen source pins, 54 named
+aliases, 25 master and 25 theme occurrences, 18 exact variant-delta/mask
+experiments and two long-bench partial/row-exception probes. All 24 theme sheets
+remain explicit search-domain evidence, without a new exhaustive absence claim.
+The review separately reproduced the exhaustive full-origin searches.
+
+Aggregate accounting is now **112 records / 94 proposal units**. The stable
+report preserves `pilotAccounting` as **85 / 67**, independent from
+`extensionAccounting.E01` as **27 / 27**. Aggregate primary master lineage is
+83 direct, nine composed, 18 derived and two original-only. E01's 27 proposal
+units are 25 direct master matches plus **two original-only master records**;
+the latter retain exact full exported-source identities. Empty master occurrence
+lists do not become absent-source claims or invented reconstructions.
+
+Bench 5/6 have supplementary serial-integration aliases at
+`public/assets/semantic-sources/exteriors-bench-5.png` and
+`public/assets/semantic-sources/exteriors-bench-6.png`, raw PNG hashes
+`a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa` and
+`a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f`.
+Their `integrationAliases` and explicit source-alias relationships are separate
+from the frozen packet's original `committedRendering` handoff. The alias PNGs
+must match the pinned original bytes, dimensions and normalized full frames;
+they are required committed references. They allow full mirror/partial checks
+on fresh clones without original packs. Their presence changes neither the two
+original-only master dispositions nor unregistered human approval.
+
+E01 whole-object topology remains a visual proposal: no required neighbors and
+no proposed repeats. Cabinet component topology remains governed by its separate
+supplement. Bench mirror exceptions, exact side-chair mirror pairs, panel/frame
+color correspondences, Generic Buildings bench 7, and the taller decorated-table
+frame are preserved. Gameplay geometry remains unknown for all 94 proposals.
+Human approvals and runtime promotions remain **zero**.
+
+The expanded regression suite adds separate pilot/extension accounting,
+original-only absence/source distinction, supplementary-alias scope, exact E01
+deltas, fabricated-occurrence rejection and fresh-clone committed-only checks.
+The latter verifies both committed bench aliases while still reporting absent
+original packs and unavailable Interiors reconstruction/corpus verification.
+The coordinator owns repository-wide and presentation validation.

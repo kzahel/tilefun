@@ -17,6 +17,10 @@ REPO = Path(__file__).resolve().parent.parent
 BASE = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = BASE + '/coverage-ledger.json'
 REGISTRY = BASE + '/mapping-registry.json'
+MODEL = BASE + '/semantic-model.json'
+MODEL_PIN = '2f612b7fd2e2b9d07bd9c00bbf02cd4955210959b4a8a411857b0c6da93bbc26'
+E01_PROPOSAL_PIN = '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b'
+E01_REVIEW_PIN = '5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0'
 FROZEN = {
     'S02-exteriors-regions.json': 'dea87c451f573270590135211f43a2d0a9cf27cf5f56b8c90227c44dec07b771',
     'S02-interiors-regions.json': 'f4f6d6d5f35677a96102e62b1a5a83fc8975d1c2938c1fc1551274fb9fc942a1',
@@ -147,6 +151,82 @@ def registrations(evidence, region_ids, group_ids, source_ref):
                                   'investigated': stage('registered-proposal' if packet else 'in-progress', 'assignment/proposal registration only', [packet['path']] if packet else []),
                                   'independentlyReviewed': stage('registered-evidence' if review else 'no-evidence', 'review reference only; applicability requires explicit normalization', [review['path']] if review else []),
                                   'ownerFeedback': stage(), 'accepted': stage()}})
+    return result
+
+
+def e01_expansion(evidence, source_ref, masters):
+    path = BASE + '/packets/E01-outdoor-seating.json'
+    review_path = BASE + '/packets/E01-outdoor-seating-review.md'
+    packet = evidence.json(path, E01_PROPOSAL_PIN)
+    review_text = evidence.read(review_path, E01_REVIEW_PIN).decode()
+    if E01_PROPOSAL_PIN not in review_text:
+        raise ValueError('E01 review applicability mismatch')
+    model = evidence.json(MODEL, MODEL_PIN)
+    if model.get('versionedAdapters', {}).get('extensions') != ['E01-outdoor-seating-v1']:
+        raise ValueError('Unsupported normalized extension adapters')
+    model_records = {r['id']: r for r in model['sourceRecords'] if r['packetId'] == 'E01'}
+    model_files = {r['path']: r for r in model['sourceFiles']}
+    source_table = {r['id']: r for r in packet['sources']}
+    for value in source_table.values():
+        source_ref(value['path'], value['pngSHA256'], [0, 0, *value['size']])
+    if packet['schemaVersion'] != 2 or len(model_records) != 27:
+        raise ValueError('E01 schema/accounting mismatch')
+    result = []
+    for candidate in packet['candidates']:
+        rid = candidate['id']
+        normalized = model_records[rid]
+        kind = 'exact-direct' if candidate['masterOccurrences'] else 'original-only'
+        if (normalized['originalEvidence'] != candidate or
+                normalized['primaryLineage'] != ('direct' if kind == 'exact-direct' else 'original-only')):
+            raise ValueError('E01 normalized source lineage differs')
+        refs = []
+        for sid in candidate['namedExportAliases']:
+            source = source_table[sid]
+            refs.append(source_ref(source['path'], source['pngSHA256'], candidate['exportRect']))
+        master_aliases, supplemental = [], []
+        for occurrence in candidate['occurrences']:
+            source = source_table[occurrence['sourceId']]
+            ref = source_ref(source['path'], source['pngSHA256'], occurrence['rect'])
+            if source['path'] == masters['exteriors']['alias']:
+                if source['pngSHA256'] != masters['exteriors']['sha256']:
+                    raise ValueError('E01 committed/original master alias pin differs')
+                master_aliases.append(ref)
+            else:
+                if ref['scopeGroup'] != 'exteriors-theme-sheets':
+                    raise ValueError('Unsupported E01 supplemental occurrence domain')
+                supplemental.append(ref)
+        master_rects = [o['rect'] for o in candidate['masterOccurrences']]
+        if [r['rect'] for r in master_aliases] != master_rects:
+            raise ValueError('E01 original/committed master lineage differs')
+        integration = []
+        for alias in normalized.get('integrationAliases', []):
+            original = next(r for r in refs if r['path'] == alias['originSourceFile'])
+            pin = model_files[alias['sourceFile']]
+            if pin['sha256'] != original['sha256'] or alias['bounds']['value'] != original['rect']:
+                raise ValueError('E01 integration alias differs from original export')
+            evidence.read(alias['sourceFile'], pin['sha256'])
+            integration.append({'path': alias['sourceFile'], 'sha256': pin['sha256'],
+                                'rect': alias['bounds']['value'], 'originSource': original,
+                                'scope': 'byte-identical committed export copy; no original-master occurrence or semantic approval'})
+        if kind == 'original-only' and (master_rects or supplemental):
+            raise ValueError('Original-only E01 record cannot gain a sheet occurrence')
+        for rect in master_rects:
+            check_rect(rect, masters['exteriors']['dimensions'])
+        result.append({'id': rid, 'packet': 'E01', 'sources': refs,
+                       'normalizedPixelSHA256': candidate['normalizedRgbaSHA256'],
+                       'frameDimensions': candidate['exportRect'][2:],
+                       'lineage': {'kind': kind, 'master': 'exteriors', 'rects': master_rects,
+                                   'scope': 'primary original-master correspondence only; original-only still has exact whole-export source identity'},
+                       'committedMasterAliases': master_aliases, 'supplementalOccurrences': supplemental,
+                       'integrationAliases': integration, 'regionLinks': [],
+                       'stages': {'surveyed': stage('context-only', 'survey does not individually segment this export'),
+                                  'investigated': stage('evidenced', 'pinned bounded E01 record', [path], [rid]),
+                                  'independentlyReviewed': stage('evidenced', 'explicit E01 member disposition; bounded source/interpretation limits', [review_path], [rid]),
+                                  'ownerFeedback': stage(), 'accepted': stage()}})
+    if Counter(r['lineage']['kind'] for r in result) != {'exact-direct': 25, 'original-only': 2}:
+        raise ValueError('E01 primary lineage accounting differs')
+    if sum(len(r['supplementalOccurrences']) for r in result) != 25:
+        raise ValueError('E01 supplemental occurrence accounting differs')
     return result
 
 
@@ -341,7 +421,55 @@ def build(root=REPO):
                                    'Master/sheet path reference never means the whole PNG is semantically investigated.',
                                    'Unreferenced files remain unassigned even when a duplicate or packed alias is known.']})
 
+    expanded = e01_expansion(evidence, source_ref, masters)
+    for record in expanded:
+        for region in regions:
+            if region['master'] == 'exteriors' and any(intersects(region['source']['rect'], r) for r in record['lineage']['rects']):
+                record['regionLinks'].append({'regionId': region['id'], 'relation': 'exact-master-source-rectangle-intersection'})
+        if record['lineage']['kind'] == 'exact-direct' and not record['regionLinks']:
+            raise ValueError('Unassigned E01 exact master occurrence')
+    for region in regions:
+        linked = [r['id'] for r in expanded if any(l['regionId'] == region['id'] for l in r['regionLinks'])]
+        region['expandedRecordIds'] = linked
+        if linked:
+            region['stages']['investigated']['state'] = 'partial'
+            region['stages']['investigated']['scope'] = 'listed pilot/expansion records only'
+            region['stages']['investigated']['recordIds'].extend(linked)
+            region['stages']['investigated']['evidence'].append(BASE + '/packets/E01-outdoor-seating.json')
+            region['assignment']['state'] = 'partial-mapped-records'
+        region['expandedIndependentReviewEvidence'] = [BASE + '/packets/E01-outdoor-seating-review.md'] if linked else []
+    for group in groups:
+        group_refs = [(r, ref) for r in expanded for ref in r['sources'] + r['supplementalOccurrences'] + r['committedMasterAliases'] if ref['scopeGroup'] == group['id']]
+        primary_refs = []
+        if group['id'] == 'exteriors-master':
+            for record in expanded:
+                for rect in record['lineage']['rects']:
+                    ref = source_ref(masters['exteriors']['path'], masters['exteriors']['sha256'], rect)
+                    primary_refs.append({'recordId': record['id'], 'source': ref, 'proof': 'original-master/committed-master byte identity from source manifest; same occurrence, not an additional count'})
+                    group_refs.append((record, ref))
+        group['expandedPrimaryMasterReferences'] = primary_refs
+        ids = sorted({r['id'] for r, ref in group_refs})
+        paths = sorted({ref['path'] for r, ref in group_refs})
+        group['expandedRecordIds'] = ids
+        group['expandedReferencedPNGPaths'] = paths
+        group['expandedReferencedPNGPathCount'] = len(paths)
+        group['expandedSupplementalOccurrenceCount'] = sum(len([ref for ref in r['supplementalOccurrences'] if ref['scopeGroup'] == group['id']]) for r in expanded)
+        if ids:
+            group['stages']['investigated'] = stage('partial', 'listed pilot/expansion references only; no whole-PNG completion', group['stages']['investigated']['evidence'] + [BASE + '/packets/E01-outdoor-seating.json'], group['pilotRecordIds'] + ids)
+            group['stages']['independentlyReviewed'] = stage('related-evidence', 'listed survey/pilot/expansion records only', group['stages']['independentlyReviewed']['evidence'] + [BASE + '/packets/E01-outdoor-seating-review.md'])
+            group['assignment']['state'] = 'partial-mapped-records'
+
     registered = registrations(evidence, {r['id'] for r in regions}, {g['id'] for g in groups}, source_ref)
+    for registration in registered:
+        if registration['packetId'] == 'E01-outdoor-seating':
+            if {m['id'] for m in registration['memberRecords']} != {r['id'] for r in expanded}:
+                raise ValueError('E01 registered/model membership mismatch')
+            if registration['proposal']['sha256'] != E01_PROPOSAL_PIN or registration['independentReview']['sha256'] != E01_REVIEW_PIN:
+                raise ValueError('E01 registration applicability differs')
+            registration['stages']['investigated'] = stage('evidenced', '27 explicit normalized bounded E01 records; no whole-region completeness', [registration['proposal']['path'], MODEL], [r['id'] for r in expanded])
+            registration['stages']['independentlyReviewed'] = stage('evidenced', 'exact E01 proposal/member dispositions preserved by reviewed explicit model adapter', [registration['independentReview']['path'], MODEL], [r['id'] for r in expanded])
+            registration['coverageCredit'] = True
+            registration['normalization'] = {'adapter': 'E01-outdoor-seating-v1', 'modelPath': MODEL, 'modelSHA256': MODEL_PIN, 'sourceRecords': 27, 'proposalUnits': 27, 'limit': 'bounded records only; no region/family/pixel completion'}
     for region in regions:
         region['packetAssignments'] = [{'packetId': p['packetId'], 'state': p['assignmentState']}
                                        for p in registered if region['id'] in p['regionIds']]
@@ -372,15 +500,22 @@ def build(root=REPO):
             'accounting': {'surveyWindows': len(regions), 'surveyWindowsByMaster': dict(Counter(r['master'] for r in regions)),
                            'inventoryGroups': len(groups), 'originalPNGPaths': len(originals),
                            'pilotSourceRecords': len(records), 'pilotProposalUnits': 67,
+                           'expandedSourceRecords': len(expanded), 'expandedProposalUnits': 27,
+                           'allNormalizedSourceRecords': len(records) + len(expanded),
+                           'allNormalizedProposalUnits': 94,
+                           'expansionPrimaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in expanded)),
+                           'expansionNamedExportReferences': sum(len(r['sources']) for r in expanded),
+                           'expansionSupplementalExactOccurrences': sum(len(r['supplementalOccurrences']) for r in expanded),
+                           'expansionCommittedIntegrationAliases': sum(len(r['integrationAliases']) for r in expanded),
                            'primaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in records)),
                            'explicitOwnerAcceptedCompositionExamples': 3,
                            'semanticCompletion': 'unknown; no exhaustive object/family denominator',
                            'countsAreNot': ['unique objects', 'completed-source percentage', 'human-approved source members']},
-            'regions': regions, 'sourceGroups': groups, 'pilotRecords': records, 'registeredPackets': registered, 'acceptanceScopes': [acceptance],
+            'regions': regions, 'sourceGroups': groups, 'pilotRecords': records, 'expandedRecords': expanded, 'registeredPackets': registered, 'acceptanceScopes': [acceptance],
             'gaps': {'individualSemantics': 'Every master region retains unsegmented/unassigned content beyond explicitly linked pilot records; no region is complete.',
                      'exteriorsResiduals': [r['id'] for r in regions if r['role'] == 'residual-accounting-window'],
-                     'supplementalUnassignedGroups': [g['id'] for g in groups if g['kind'] == 'supplemental' and not g['pilotRecordIds']],
-                     'supplementalPartialGroups': [g['id'] for g in groups if g['kind'] == 'supplemental' and g['pilotRecordIds']],
+                     'supplementalUnassignedGroups': [g['id'] for g in groups if g['kind'] == 'supplemental' and not g['pilotRecordIds'] and not g['expandedRecordIds']],
+                     'supplementalPartialGroups': [g['id'] for g in groups if g['kind'] == 'supplemental' and (g['pilotRecordIds'] or g['expandedRecordIds'])],
                      'annotation': 'Five Room Builder search windows can overlap art; only alpha residuals outside family windows were dispositioned as captions/arrows.',
                      'duplicates': '6,224 Exteriors theme singles are byte-identical same-name complete singles. Distinct paths remain occurrences; no semantic completion inherited.',
                      'packedAliases': 'Interiors atlas is a selection, not either master. Packed rect never supplies original-master coordinates. Unindexed/unreferenced does not prove missing art.',
@@ -389,7 +524,7 @@ def build(root=REPO):
                 {'key': 'room-builder-path-arch', 'regions': ['S02-R11', 'S02-R09'],
                  'scope': 'One material path corner/edge/center set plus one three-tile arch; find exact master/subfile/packed relations and positive/negative seams.', 'state': 'ready-unassigned'},
                 {'key': 'interiors-sofa-contrast', 'regions': ['S02-I16', 'S02-F-large-sofa-probe'],
-                 'scope': 'One bounded sofa/armchair arrangement; segment complete art and cushions, test all shadow counterparts without inheriting cabinet normalization.', 'state': 'ready-unassigned'},
+                 'scope': 'Bounded Basement sofa component/seat packet I01 independently reviewed; normalization remains the next slice.', 'state': next((r['assignmentState'] for r in registered if r['packetId'] == 'I01-interior-sofas'), 'ready-unassigned'), 'supersededByRegistration': 'I01-interior-sofas'},
                 {'key': 'exteriors-playground-tubes', 'regions': ['S02-exteriors/E10'],
                  'scope': 'Bounded tube bend/cross/end set near [1984,1104,256,288]; distinguish components from standalone props and test join order.', 'state': 'ready-unassigned'},
                 {'key': 'supplemental-animation-reconciliation', 'groups': ['exteriors-animations', 'interiors-animations'],
@@ -418,7 +553,7 @@ def main():
         else:
             output.write_bytes(result)
         counts = json.loads(result)['accounting']
-        print(f"{'Checked' if args.check else 'Wrote'} source assignment ledger: {counts['surveyWindows']} windows, {counts['inventoryGroups']} groups, {counts['pilotSourceRecords']} pilot records; semantic completeness unknown.")
+        print(f"{'Checked' if args.check else 'Wrote'} source assignment ledger: {counts['surveyWindows']} windows, {counts['inventoryGroups']} groups, {counts['pilotSourceRecords']} pilot + {counts['expandedSourceRecords']} expanded records; semantic completeness unknown.")
     except (ValueError, KeyError, OSError, StopIteration) as error:
         print(str(error), file=sys.stderr)
         return 1

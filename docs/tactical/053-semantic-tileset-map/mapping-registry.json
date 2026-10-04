@@ -4,9 +4,9 @@
   "registrations": [
     {
       "packetId": "E01-outdoor-seating",
-      "assignmentState": "investigating",
-      "owner": "semantic_next_themes",
-      "taskDescriptor": "Bounded outdoor seating: City Props Bench 1\u20137, Camping Chair 1\u201316, Camping Benched Table 1\u20134 (27 exports planned). Independent review pending; source/record references await frozen packet.",
+      "assignmentState": "reconciled",
+      "owner": "coordinator",
+      "taskDescriptor": "27 independently reviewed exports: City Props Bench 1–7, Camping Chair 1–16 and Benched Table 1–4. 25 direct master matches and two original-only benches; exact source, member and review references frozen.",
       "regionIds": [
         "S02-exteriors/E01",
         "S02-exteriors/E05",
@@ -14,11 +14,467 @@
         "S02-exteriors/E35"
       ],
       "sourceGroupIds": ["exteriors-complete-singles", "exteriors-theme-singles"],
-      "proposal": null,
-      "independentReview": null,
-      "memberRecords": [],
-      "sourceRefs": [],
+      "proposal": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/E01-outdoor-seating.json",
+        "sha256": "9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b"
+      },
+      "independentReview": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/E01-outdoor-seating-review.md",
+        "sha256": "5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0"
+      },
+      "memberRecords": [
+        {
+          "id": "E01-01",
+          "jsonPointer": "/candidates/0"
+        },
+        {
+          "id": "E01-02",
+          "jsonPointer": "/candidates/1"
+        },
+        {
+          "id": "E01-03",
+          "jsonPointer": "/candidates/2"
+        },
+        {
+          "id": "E01-04",
+          "jsonPointer": "/candidates/3"
+        },
+        {
+          "id": "E01-05",
+          "jsonPointer": "/candidates/4"
+        },
+        {
+          "id": "E01-06",
+          "jsonPointer": "/candidates/5"
+        },
+        {
+          "id": "E01-07",
+          "jsonPointer": "/candidates/6"
+        },
+        {
+          "id": "E01-08",
+          "jsonPointer": "/candidates/7"
+        },
+        {
+          "id": "E01-09",
+          "jsonPointer": "/candidates/8"
+        },
+        {
+          "id": "E01-10",
+          "jsonPointer": "/candidates/9"
+        },
+        {
+          "id": "E01-11",
+          "jsonPointer": "/candidates/10"
+        },
+        {
+          "id": "E01-12",
+          "jsonPointer": "/candidates/11"
+        },
+        {
+          "id": "E01-13",
+          "jsonPointer": "/candidates/12"
+        },
+        {
+          "id": "E01-14",
+          "jsonPointer": "/candidates/13"
+        },
+        {
+          "id": "E01-15",
+          "jsonPointer": "/candidates/14"
+        },
+        {
+          "id": "E01-16",
+          "jsonPointer": "/candidates/15"
+        },
+        {
+          "id": "E01-17",
+          "jsonPointer": "/candidates/16"
+        },
+        {
+          "id": "E01-18",
+          "jsonPointer": "/candidates/17"
+        },
+        {
+          "id": "E01-19",
+          "jsonPointer": "/candidates/18"
+        },
+        {
+          "id": "E01-20",
+          "jsonPointer": "/candidates/19"
+        },
+        {
+          "id": "E01-21",
+          "jsonPointer": "/candidates/20"
+        },
+        {
+          "id": "E01-22",
+          "jsonPointer": "/candidates/21"
+        },
+        {
+          "id": "E01-23",
+          "jsonPointer": "/candidates/22"
+        },
+        {
+          "id": "E01-24",
+          "jsonPointer": "/candidates/23"
+        },
+        {
+          "id": "E01-25",
+          "jsonPointer": "/candidates/24"
+        },
+        {
+          "id": "E01-26",
+          "jsonPointer": "/candidates/25"
+        },
+        {
+          "id": "E01-27",
+          "jsonPointer": "/candidates/26"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_1.png",
+          "sha256": "51b219abee134542e2deff9fc2f8fce028712d1fe132f7fd4f727486446b2fa5",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_2.png",
+          "sha256": "6085aa68ef56e492c3b38d0848e7acf45098b4e992fd24e7b53677a3b8120f1b",
+          "rect": [0, 0, 48, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_3.png",
+          "sha256": "877a6ba94191fb745488b72eb936b0c6530f912d10636a82bc83bbf3163a41fd",
+          "rect": [0, 0, 16, 48]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_4.png",
+          "sha256": "44fdb05b38aa6c3673c9a52a83598b2cbee07715fa8a2bffdf38d8438f530799",
+          "rect": [0, 0, 16, 48]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_5.png",
+          "sha256": "a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa",
+          "rect": [0, 0, 16, 48]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_6.png",
+          "sha256": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f",
+          "rect": [0, 0, 16, 48]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_City_Props_16x16_Bench_7.png",
+          "sha256": "04400eea1adb64d22fad8c441158557b5456fb803e036b0b89dfc4c2d8202a67",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_1.png",
+          "sha256": "9ab18c04e1c92f1b2f97db6e0a53e9d2d59c92e49b22c9c82fec0e8969065701",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_2.png",
+          "sha256": "f65da312f24319f6be9dd8818f394a3418e3369c6d2c462367a871338ae3c93d",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_3.png",
+          "sha256": "84a79e479aaa765b976a3150c48e3560dcd6e6be3f4e62bf4c7102127717d23f",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_4.png",
+          "sha256": "98c11d0790206610d6c25b9f7c69df3a746ec6cc64436b6b44f2c713a28f222a",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_5.png",
+          "sha256": "de6a9db7f7d42b8a5ffdcee74edc4b689a32a844d8349fe34573df9d355749e3",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_6.png",
+          "sha256": "cb1a763b475afd1dbecf402bb9031fcdac1ec48ab19849dc4e700ed9274982c8",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_7.png",
+          "sha256": "b82ebb1b8a96dc7aea4a6427b6b71bb29932d4ed3984d75d2b7257b67810f4da",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_8.png",
+          "sha256": "2bc6c7158e1111b5fcb0fabf33c8a9a392aba52bd762185f242b40054e3c27af",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_9.png",
+          "sha256": "a6e27244a876ed8a47d59758d2fe6a99f3c2ae9d9b1ad9f6d45e1dd0fded33c1",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_10.png",
+          "sha256": "1aa1c28bd401a4f986ca3f912ab85c510abfa11b0fabdf51ce61639682659ec0",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_11.png",
+          "sha256": "c4fff9e3860ea2e7d1bc570202a013fba7af76ac69eaea85941593cfc0504337",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_12.png",
+          "sha256": "29582e51ac42e736d34a7d98303d496d8ab1085fc6178a1f4ec111833fb28e33",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_13.png",
+          "sha256": "40cbe9af50e3283f5d58369c428028b21e198471888ccca4160e6cc790841b89",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_14.png",
+          "sha256": "2fc2e41a48ca45dacb073e0047152be6033226494f19d82c45d448244b16e923",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_15.png",
+          "sha256": "7dd92980d89404f02403633304e0003f4a4d9c1f9a61b4873d98ccef79fb60a2",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Chair_16.png",
+          "sha256": "7e136dbeedc0fce3c5d060e2d510bb5208b4c609ce47cf1c8739119028d4552a",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Benched_Table_1.png",
+          "sha256": "80d0d77371da81fe308ce97e31ad997c53e9ec03bacf303280f3153ef700d134",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Benched_Table_2.png",
+          "sha256": "5b007ec37217651ec61a1a890e2f7a48773a20cbc573295d29ef1d1d5816f948",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Benched_Table_3.png",
+          "sha256": "c079b6bf1b97d0fa3aca15f6b1250339049ac97362d9ca70338383f671126d11",
+          "rect": [0, 0, 48, 32]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_Camping_16x16_Benched_Table_4.png",
+          "sha256": "11c50a50887c457fe260f28572008631d9f5a17535801d3c14e61be948e3c1ff",
+          "rect": [0, 0, 48, 48]
+        }
+      ],
       "contextWindows": [[32, 128, 176, 464], [1808, 32, 320, 384], [2672, 5280, 144, 160]]
+    },
+    {
+      "packetId": "I01-interior-sofas",
+      "assignmentState": "review-ready",
+      "owner": "coordinator",
+      "taskDescriptor": "20 independently reviewed Basement sofa/seat records: 18 normal pieces plus two cap render counterparts. Four lower-seat roles unresolved; model normalization and owner-facing sheet pending.",
+      "regionIds": ["S02-I16", "S02-F-large-sofa-probe"],
+      "sourceGroupIds": [
+        "interiors-singles-black-shadow",
+        "interiors-singles-normal",
+        "interiors-singles-shadowless"
+      ],
+      "proposal": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json",
+        "sha256": "75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df"
+      },
+      "independentReview": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md",
+        "sha256": "1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb"
+      },
+      "memberRecords": [
+        {
+          "id": "I01-01",
+          "jsonPointer": "/candidates/0"
+        },
+        {
+          "id": "I01-02",
+          "jsonPointer": "/candidates/1"
+        },
+        {
+          "id": "I01-03",
+          "jsonPointer": "/candidates/2"
+        },
+        {
+          "id": "I01-04",
+          "jsonPointer": "/candidates/3"
+        },
+        {
+          "id": "I01-05",
+          "jsonPointer": "/candidates/4"
+        },
+        {
+          "id": "I01-06",
+          "jsonPointer": "/candidates/5"
+        },
+        {
+          "id": "I01-07",
+          "jsonPointer": "/candidates/6"
+        },
+        {
+          "id": "I01-08",
+          "jsonPointer": "/candidates/7"
+        },
+        {
+          "id": "I01-09",
+          "jsonPointer": "/candidates/8"
+        },
+        {
+          "id": "I01-10",
+          "jsonPointer": "/candidates/9"
+        },
+        {
+          "id": "I01-11",
+          "jsonPointer": "/candidates/10"
+        },
+        {
+          "id": "I01-12",
+          "jsonPointer": "/candidates/11"
+        },
+        {
+          "id": "I01-13",
+          "jsonPointer": "/candidates/12"
+        },
+        {
+          "id": "I01-14",
+          "jsonPointer": "/candidates/13"
+        },
+        {
+          "id": "I01-15",
+          "jsonPointer": "/candidates/14"
+        },
+        {
+          "id": "I01-16",
+          "jsonPointer": "/candidates/15"
+        },
+        {
+          "id": "I01-17",
+          "jsonPointer": "/candidates/16"
+        },
+        {
+          "id": "I01-18",
+          "jsonPointer": "/candidates/17"
+        },
+        {
+          "id": "I01-19",
+          "jsonPointer": "/candidates/18"
+        },
+        {
+          "id": "I01-20",
+          "jsonPointer": "/candidates/19"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_4.png",
+          "sha256": "654e0a9b922ea797e2a9ca8637350b1f317898ae973aad96a47c803abbe90664",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_5.png",
+          "sha256": "80ee6e12172022eebf609903842900fc9fa4e71c726b2f452604784b96bb356a",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_6.png",
+          "sha256": "b32fa71ff54a9eb5ab3cdda1aaa5c5f0590903c1ecfef946f9a5c51ab7f1f5dd",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_7.png",
+          "sha256": "2b778331d638cb06526c4551264ce879a4be4287f4dcf7b11c7fc58187e1c620",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_8.png",
+          "sha256": "03eb56859138aa4f6d3420b754ab695c5e609b474d391a0677c74e1cd32601c6",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_9.png",
+          "sha256": "9362c69364b2208147e2d6a068008f07801b82657a0278a8492716c4d94b4d13",
+          "rect": [0, 0, 16, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_10.png",
+          "sha256": "6c7fa5a1fe025d4ace536b61793c318a9e3676483d46d53df7b311175dd17d53",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_11.png",
+          "sha256": "997132cd190cbb671969406266aae555f9eb240e7830ac45266c084ca68465e6",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_12.png",
+          "sha256": "6947dddb4040de9696764aa1889101ef3411a0c1fb70f4829d470ff4daf2d962",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_13.png",
+          "sha256": "403ae5e50ff5711997d9b52ec9139ca8afad026f6cae9a4251c0c8bf0f9307d5",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_14.png",
+          "sha256": "76ac38d70b40cd425e6f0fcfed5d19723c79f8d3de08b28acf278622ccf1f1b7",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_15.png",
+          "sha256": "509fb79777d36f2901c3c3541643ea0b635774eac9414922a236ec49c2aaa3cf",
+          "rect": [0, 0, 16, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_27.png",
+          "sha256": "9196babf0cc6006c06fd29249257124ed2baa4199b59984324da745985982e2d",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_28.png",
+          "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+          "rect": [0, 0, 32, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_29.png",
+          "sha256": "931c874276e0ac0b96b35da4c32003abd9a755e6a8157a17b48ae579710752ef",
+          "rect": [0, 0, 32, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_30.png",
+          "sha256": "d527c3827fbaf615453a865facdd6e8a73d1c190ae40683ca974f68c02dd6981",
+          "rect": [0, 0, 32, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_31.png",
+          "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+          "rect": [0, 0, 32, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_32.png",
+          "sha256": "64fbfc91ad9608a851dd7f033325cf8542f8da83b9d9344eeef23bb544ea1bbe",
+          "rect": [0, 0, 32, 16]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_4.png",
+          "sha256": "34594e9b066af9956696cfe2d77c6c432e0cf318d1eb621d9b46b76837c3e07e",
+          "rect": [0, 0, 16, 32]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_4.png",
+          "sha256": "a9a9bd17e784b4833938a76716fd65af3646ccdb6d1adf2b1533759dcd4f0859",
+          "rect": [0, 0, 16, 32]
+        }
+      ],
+      "contextWindows": [[0, 5456, 256, 208]]
     }
   ]
 }

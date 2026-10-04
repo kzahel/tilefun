@@ -43,6 +43,6 @@ all 16 chair/color assignments are correct, both bench copies are byte-identical
 and family/catalog revisions and proposal/review pins recompute exactly. The
 worker made no UI or source edits and found no blocking presentation discrepancy.
 
-Next: finish explicit model/ledger normalization for E01. I01 sofa components
-are now independently reviewed and registered; normalize their component rules
+E01 is now explicitly normalized in the model and coverage ledger. I01 sofa components
+are independently reviewed and registered; next, normalize their component rules
 and unresolved long-seat roles before another owner-facing family sheet.

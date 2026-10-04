@@ -8,7 +8,7 @@ without writing. Needs Python 3 and Pillow; no downloaded source packs.
 Revision algorithm: SHA-256 of UTF-8 JSON, sorted keys, compact separators,
 ensure_ascii=True, with the object's own top-level revision omitted. Family
 revisions hash their family object, including sourcePins for its used sheets;
-catalog revision hashes the catalog including family revisions and the two source
+catalog revision hashes the catalog including family revisions and all source
 ArtSheet records. Array order is significant. sourcePins are sorted by source ID.
 Proposal/review pins remain here, outside the plain-language browsing artifact.
 """
