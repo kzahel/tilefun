@@ -16,6 +16,16 @@ const option = (key, fallback) =>
     .join("=") ?? fallback;
 const renderer = option("renderer", "canvas");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
+const terrainPacing = option("terrain-pacing", "throughput");
+if (!["throughput", "responsive"].includes(terrainPacing))
+  throw Error("--terrain-pacing must be throughput or responsive");
+const zoomSweep = process.argv.includes("--zoom-sweep");
+const catchupFrames = Number(option("catchup-frames", "7200"));
+if (!Number.isInteger(catchupFrames) || catchupFrames < 60 || catchupFrames > 14400)
+  throw Error("--catchup-frames must be between 60 and 14400");
+const assertBounded = process.argv.includes("--assert-bounded");
+if (assertBounded && (terrainPacing !== "responsive" || !zoomSweep))
+  throw Error("--assert-bounded requires --terrain-pacing=responsive --zoom-sweep");
 const meshes = process.argv.includes("--meshes");
 const noclip = process.argv.includes("--noclip");
 const headed = process.argv.includes("--headed");
@@ -71,6 +81,9 @@ const report = {
   ...(terrainRowBudget ? { diagnosticTerrainRowBudget: terrainRowBudget } : {}),
   ...(zoomRowBudget ? { diagnosticZoomRowBudget: zoomRowBudget } : {}),
   instrumentation,
+  terrainPacing,
+  zoomSweep,
+  catchupFrames,
   sprintFrames,
   noclip,
   renderer,
@@ -133,6 +146,10 @@ try {
         Math.hypot(p.wx / 16 - arrival.x, p.wy / 16 - arrival.y) <= 46
       );
     }, arrival);
+    await page.evaluate(
+      (value) => document.querySelector("#game").__game.debugPanel.setTerrainPacing(value),
+      terrainPacing,
+    );
     if (noclip)
       await page.evaluate(() => document.querySelector("#game").__game.debugPanel.setNoclip(true));
     if (terrainRowBudget)
@@ -185,7 +202,7 @@ try {
       });
       if (initial) await move(direction);
     };
-    const sample = async (name, count) => {
+    const sample = async (name, count, untilSettled = false) => {
       const tracing = name === traceStage;
       let traceComplete;
       if (tracing) {
@@ -199,7 +216,7 @@ try {
         count = traceFrames;
       }
       const data = await page.evaluate(
-        async ({ count, tracing, timeline }) => {
+        async ({ count, tracing, timeline, untilSettled }) => {
           const game = document.querySelector("#game").__game;
           game.performanceMetrics.reset();
           if (game.transport.resetDiagnostics) await game.transport.resetDiagnostics();
@@ -244,6 +261,18 @@ try {
           let previousUpload = gpuStats?.uploadedBytes ?? 0;
           let previousVertex = gpuStats?.vertexUploadedBytes ?? 0;
           let previousDraws = gpuStats?.drawCalls ?? 0;
+          const initialUpload = previousUpload;
+          const initialVertex = previousVertex;
+          let maxTerrainRows = 0,
+            totalTerrainRows = 0,
+            peakPending = 0;
+          let finalMissing = 0,
+            finalIncomplete = 0,
+            finalStale = 0;
+          let firstReadyFrame = null,
+            settledFrames = 0,
+            settled = false;
+          let staleCacheFrames = 0;
           let sampleStartMs = 0;
           let travelledPx = 0,
             stationaryMs = 0,
@@ -289,6 +318,10 @@ try {
             render(alpha);
             const end = performance.now();
             renders.push(end - t);
+            const terrain = game.renderer.getDiagnostics();
+            maxTerrainRows = Math.max(maxTerrainRows, terrain.rowsLastFrame);
+            totalTerrainRows += terrain.rowsLastFrame;
+            peakPending = Math.max(peakPending, terrain.pending);
             if (tracing) {
               const diagnostics = game.renderer.getDiagnostics?.();
               renderTimeline.push({
@@ -307,7 +340,8 @@ try {
             if (tracing) performance.measure("tilefun.render", { start: t, end });
             const r = game.camera.getVisibleChunkRange();
             let missing = 0,
-              incomplete = 0;
+              incomplete = 0,
+              stale = 0;
             for (let cy = r.minCy; cy <= r.maxCy; cy++)
               for (let cx = r.minCx; cx <= r.maxCx; cx++) {
                 const p = game.camera.worldToScreen(cx * 256, cy * 256),
@@ -323,7 +357,18 @@ try {
                 const chunk = game.stateView.world.getChunkIfLoaded(cx, cy);
                 if (!chunk) missing++;
                 else if (!game.renderer.hasTerrain(chunk)) incomplete++;
+                else if (!game.renderer.isTerrainReady(chunk)) stale++;
               }
+            finalMissing = missing;
+            finalIncomplete = incomplete;
+            finalStale = stale;
+            if (stale) staleCacheFrames++;
+            if (!missing && !incomplete && !stale && firstReadyFrame === null)
+              firstReadyFrame = renders.length;
+            settledFrames =
+              !missing && !incomplete && !stale && !terrain.pending && !terrain.rowsLastFrame
+                ? settledFrames + 1
+                : 0;
             if (missing) missingDataFrames++;
             if (incomplete) incompleteCacheFrames++;
             currentGap = missing || incomplete ? currentGap + 1 : 0;
@@ -367,6 +412,10 @@ try {
               }
               if (tracing) performance.measure("tilefun.frame", { start: last, end: now });
               last = now;
+              if (untilSettled && settledFrames >= 60) {
+                settled = true;
+                break;
+              }
             }
             if (tracing) performance.mark("tilefun.sample.end");
           } finally {
@@ -386,6 +435,20 @@ try {
           return {
             ...(timeline ? { frameTimeline } : {}),
             ...(tracing ? { renderTimeline, sampleStartMs } : {}),
+            terrainPacing: game.debugPanel.terrainPacing,
+            zoom: game.camera.zoom,
+            maxTerrainRows,
+            totalTerrainRows,
+            peakPending,
+            finalMissing,
+            finalIncomplete,
+            finalStale,
+            staleCacheFrames,
+            firstReadyFrame,
+            settled: untilSettled ? settled : undefined,
+            elapsedMs: frames.reduce((sum, value) => sum + value, 0),
+            textureUploadedBytes: gpuStats ? gpuStats.uploadedBytes - initialUpload : null,
+            vertexUploadedBytes: gpuStats ? gpuStats.vertexUploadedBytes - initialVertex : null,
             travelledPx,
             maxStationaryMs,
             renderedFrames: renders.length,
@@ -416,7 +479,7 @@ try {
             heapBytes: performance.memory?.usedJSHeapSize ?? null,
           };
         },
-        { count, tracing, timeline: tracing || frameTimelineEnabled },
+        { count, tracing, timeline: tracing || frameTimelineEnabled, untilSettled },
       );
       if (tracing) {
         await cdp.send("Tracing.end");
@@ -482,6 +545,22 @@ try {
     samples.push(await sample("zoom-out", 180));
     if (zoomSettled) samples.push(await sample("zoom-settled", 180));
     await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
+    if (zoomSweep) {
+      const presets = await page.evaluate(async () => {
+        const { ZOOM_PRESETS } = await import("/tilefun/src/rendering/PresentationSettings.ts");
+        return ["2", "1", "0", "3"].map((key) => ZOOM_PRESETS.find((p) => p.key === key));
+      });
+      for (const preset of presets) {
+        if (touch)
+          await page.evaluate(
+            (zoom) => document.querySelector("#game").__game.debugPanel.setZoom(zoom),
+            preset.zoom,
+          );
+        else await page.keyboard.press(preset.key);
+        samples.push(await sample(`zoom-${preset.key}-catchup`, catchupFrames, true));
+        samples.push(await sample(`zoom-${preset.key}-warm`, 120));
+      }
+    }
     // Keep measurements available even when a coverage assertion fails.
     report.fixtures.push({ version, arrival, display, samples, errors });
     await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
@@ -492,6 +571,18 @@ try {
       for (const s of samples.filter((s) => ["walk", "sprint", "reverse"].includes(s.name)))
         if (s.missingDataFrames || s.incompleteCacheFrames)
           throw Error(`${version}/${s.name}: visible terrain was not ready`);
+    }
+    if (assertBounded) {
+      for (const s of samples) {
+        if (s.maxTerrainRows > 2) throw Error(`${version}/${s.name}: terrain row cap exceeded`);
+        if (s.name.endsWith("-catchup") && !s.settled)
+          throw Error(`${version}/${s.name}: terrain did not catch up`);
+        if (
+          s.name.endsWith("-warm") &&
+          (s.totalTerrainRows || s.finalMissing || s.finalIncomplete || s.finalStale)
+        )
+          throw Error(`${version}/${s.name}: warm terrain rebuilt or lost readiness`);
+      }
     }
     if (endpoint) {
       await page.goto("about:blank");

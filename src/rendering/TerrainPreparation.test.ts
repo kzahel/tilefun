@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
+import { TERRAIN_PACING } from "./PresentationSettings.js";
 import { TerrainFrame } from "./TerrainFrame.js";
 import { TileRenderer } from "./TileRenderer.js";
 
@@ -370,4 +371,45 @@ it("submits reusable neutral placements and retires partial identities on restar
   frame.clear();
   expect(first).toEqual([]);
   expect(renderer.resolveTerrainResource(completeId)).toBeNull();
+});
+
+it("responsive publication caps visible debt, retains replacements and reuses warm surfaces", () => {
+  const { camera, world } = scene();
+  const renderer = new TileRenderer(() => 0);
+  const draw = drawing(renderer);
+  const policy = TERRAIN_PACING.responsive;
+  const range = { minCx: -1, minCy: -1, maxCx: 1, maxCy: 1 };
+  const frame = new TerrainFrame();
+  const prepare = () => {
+    renderer.prepareTerrain(
+      camera,
+      world,
+      sheets,
+      range,
+      policy.preparation.timeBudgetMs,
+      policy.preparation.rowBudget,
+    );
+    expect(renderer.getDiagnostics().rowsLastFrame).toBeLessThanOrEqual(2);
+  };
+  const center = world.getChunkIfLoaded(0, 0);
+  if (!center) throw Error("Missing center");
+  prepare();
+  expect(draw.mock.calls.every((c) => c[1] === 0 && c[2] === 0)).toBe(true);
+  expect(frame.collect(camera, world, renderer, visible, policy.drawing)).toHaveLength(0);
+  expect(frame.collect(camera, world, renderer, visible)).toHaveLength(1); // partial is opt-in
+  for (let i = 1; i < 8; i++) prepare();
+  expect(frame.collect(camera, world, renderer, visible, policy.drawing)).toHaveLength(1);
+  const original = renderer.groundResourceId(center, 0, 0, true);
+  for (let i = 8; i < 72; i++) prepare();
+  expect(renderer.getDiagnostics().pending).toBe(0);
+  const draws = draw.mock.calls.length;
+  for (let i = 0; i < 30; i++) prepare();
+  expect(draw.mock.calls).toHaveLength(draws);
+  expect(renderer.getDiagnostics()).toMatchObject({ rowsLastFrame: 0, building: 0 });
+  center.revision++;
+  prepare();
+  expect(renderer.groundResourceId(center, 0, 0, true)).toBe(original);
+  for (let i = 1; i < 8; i++) prepare();
+  expect(renderer.groundResourceId(center, 0, 0, true)).not.toBe(original);
+  expect(renderer.isTerrainReady(center)).toBe(true);
 });

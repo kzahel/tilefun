@@ -28,6 +28,7 @@ export type ActionName =
   // Play mode (discrete)
   | "enter_place"
   | "throw"
+  | "zoom_0"
   | "zoom_1"
   | "zoom_2"
   | "zoom_3"
@@ -75,6 +76,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "throw", keys: ["b"] },
   { action: "enter_place", keys: ["e", "E"] },
   // Play mode zoom presets
+  { action: "zoom_0", keys: ["0"] },
   { action: "zoom_1", keys: ["1"] },
   { action: "zoom_2", keys: ["2"] },
   { action: "zoom_3", keys: ["3"] },

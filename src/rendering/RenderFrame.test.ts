@@ -85,6 +85,7 @@ describe("backend-independent frame submission", () => {
       },
     };
     const gc = {
+      debugPanel: { terrainPacing: "throughput" },
       camera,
       renderer,
       spriteCatalog: assets,

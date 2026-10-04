@@ -49,6 +49,7 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
     getPatternPreview: () => null,
   } as unknown as EditorMode;
   const gc = {
+    debugPanel: { terrainPacing: "throughput" },
     camera,
     renderer: backend,
     spriteCatalog: assets,

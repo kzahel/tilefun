@@ -22315,7 +22315,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:676"
+          "source": "src/scenes/PlayScene.ts:670"
         }
       ]
     },
@@ -23571,7 +23571,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:66"
+          "source": "src/scenes/renderWorld.ts:68"
         }
       ]
     },

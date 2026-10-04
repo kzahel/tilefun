@@ -27,7 +27,9 @@ the remaining recommendations are not implemented fixes.
   and rendering stay on the main thread. P2P hosting still runs its authority
   on the main thread; dedicated hosts reuse the same server implementation.
 - Terrain cache preparation runs ahead of the camera. Measure both visible
-  readiness and frame pacing; a fast frame with missing terrain is not success.
+  readiness and frame pacing. Explicit progressive presentation may accept gaps
+  to preserve responsiveness; report gap duration, backlog and catch-up alongside
+  timing. Ordinary readiness and progressive-presentation gates are separate.
 - Gameplay rooms cache native floor/wall layers per active room/plan. Furniture
   edits and actor depth remain live. See [Tactical 009](../tactical/009-city-places-and-indoor-performance.md)
   for cache parity and [011](../tactical/011-shared-pattern-brushes-and-room-drawing.md)
@@ -46,7 +48,9 @@ the remaining recommendations are not implemented fixes.
   Membership and priorities still refresh every frame, including zero-work-budget
   frames; departing chunks and reset/error paths release references and surfaces.
   Visible holes, visible replacements and approaching halo work keep their order,
-  with the same 2 ms deadline and 128-row ceiling.
+  under the selected shared policy: default 2 ms/128 rows, or experimental
+  small batches at 2 ms/2 rows including visible holes. Visibility affects priority,
+  never bypasses the cap. Old complete surfaces survive replacement builds.
 
 - Each `SceneFrame` owns a prop depth cache. Object identity and scalar position/
   collider comparisons invalidate changed entries, including in-place edits.
@@ -228,5 +232,40 @@ unfinished-cache frames from 9–10 to 26, so no blanket production cap is adopt
 
 Next: bound background/offscreen raster work through the shared preparation owner,
 retain urgency for visible terrain, and validate entry/movement plus affected labs.
-The Traffic lab's conflicting preparation policies remain a separate known issue.
+The Traffic lab's conflicting preparation policies were fixed separately; see above.
 Production renderer behavior and Canvas default are unchanged by this investigation.
+
+
+## Explicit terrain pacing and zoom workloads
+
+[047](../tactical/047-terrain-pacing-and-zoom-stress.md) adds shared settings in
+`PresentationSettings.ts`. **Debug → Terrain pacing → Small batches** permits
+visible presentation debt: at most two terrain rows per preparation call under
+an admission deadline of 2 ms. Completed chunks publish together, avoiding repeated
+GPU texture uploads of partial builds. Existing complete terrain remains visible
+until a replacement is complete. **Faster fill** retains the existing 128-row cap
+and partial-chunk display. Canvas remains the default renderer; faster fill remains
+the default policy. Settings are per view/session and survive live renderer swaps.
+
+Play-mode shortcuts and **Debug → Zoom preset** share the same definitions:
+**0 = 0.1× overview, 1 = ¼×, 2 = ½×, 3 = 1×, 4 = 2×**. The slider still allows
+custom values. Observer mode is separate: leave it off for view-distance stress,
+since it intentionally requests only the 1× world region. Traffic exposes the
+same zoom presets and terrain policy, retaining its ¾× initial camera.
+
+Use `--terrain-pacing=responsive --zoom-sweep --assert-bounded` with
+`streaming:bench` to exercise ½× → ¼× → 0.1× → 1×. Each zoom allows up to
+`--catchup-frames=7200` to reach 60 consecutive frames with complete visible
+terrain and no pending/raster work, followed by a 120-frame warm sample. The
+runner reports missing data separately from absent complete surfaces and stale
+replacement surfaces, first visible-ready frame, catch-up time, prepared rows,
+pending jobs and requested GPU upload bytes. The bounded gate enforces the row
+cap, catch-up and warm-cache reuse; it deliberately does not require zero
+transient gaps. `--assert-ready` remains the strict ordinary movement gate.
+
+This bounds terrain raster submission, not the whole frame. Membership scans,
+collection, entity counts, uploads and driver execution can still grow with the
+view. A row is indivisible, so time deadlines may overshoot. Next boundaries are
+separate GPU upload admission, persistent work queues and measured detail/LOD
+policy if the warm overview itself exceeds the frame budget. Moving compilation
+to another thread would not remove these costs.

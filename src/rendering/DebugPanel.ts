@@ -4,6 +4,7 @@ import {
   setBaseSelectionMode,
   setForceConvex,
 } from "../autotile/TerrainId.js";
+import { TERRAIN_PACING, type TerrainPacing, ZOOM_PRESETS } from "./PresentationSettings.js";
 import type { RendererMode, RenderHost } from "./RenderHost.js";
 
 const PANEL_STYLE = `
@@ -12,6 +13,7 @@ const PANEL_STYLE = `
   font: 13px monospace; padding: 8px 12px;
   border-radius: 4px; z-index: 100;
   display: none; user-select: none;
+  max-width: calc(100vw - 40px); max-height: calc(100dvh - 32px); overflow: auto;
 `;
 
 const ROW_STYLE = "margin: 4px 0; display: flex; align-items: center; gap: 6px;";
@@ -19,6 +21,8 @@ const ROW_STYLE = "margin: 4px 0; display: flex; align-items: center; gap: 6px;"
 export class DebugPanel {
   private readonly container: HTMLDivElement;
   private readonly playerInfoEl: HTMLDivElement;
+  private readonly zoomPreset: HTMLSelectElement;
+  private readonly terrainPacingSelect: HTMLSelectElement;
   private readonly zoomSlider: HTMLInputElement;
   private readonly zoomLabel: HTMLSpanElement;
   private readonly noclipCheckbox: HTMLInputElement;
@@ -33,12 +37,43 @@ export class DebugPanel {
   constructor() {
     this.container = document.createElement("div");
     this.container.style.cssText = PANEL_STYLE;
+    // Focused controls own their keys; selecting a preset must not move the player.
+    this.container.addEventListener("keydown", (event) => event.stopPropagation());
 
     // Player info row (updated externally)
     this.playerInfoEl = document.createElement("div");
     this.playerInfoEl.style.cssText =
       "margin: 4px 0 8px; font-size: 11px; color: #8cf; border-bottom: 1px solid #444; padding-bottom: 6px; word-break: break-all;";
     this.container.appendChild(this.playerInfoEl);
+
+    const presetRow = document.createElement("label");
+    presetRow.style.cssText = ROW_STYLE;
+    presetRow.append("Zoom preset");
+    this.zoomPreset = document.createElement("select");
+    this.zoomPreset.setAttribute("aria-label", "Zoom preset");
+    this.zoomPreset.add(new Option("Custom", "custom"));
+    for (const preset of ZOOM_PRESETS)
+      this.zoomPreset.add(new Option(`${preset.key}: ${preset.label}`, String(preset.zoom)));
+    this.zoomPreset.value = "1";
+    this.zoomPreset.onchange = () => {
+      if (this.zoomPreset.value !== "custom") this.setZoom(Number(this.zoomPreset.value));
+    };
+    presetRow.append(this.zoomPreset);
+
+    const pacingRow = document.createElement("label");
+    pacingRow.style.cssText = ROW_STYLE;
+    pacingRow.append("Terrain pacing");
+    this.terrainPacingSelect = document.createElement("select");
+    this.terrainPacingSelect.setAttribute("aria-label", "Terrain pacing");
+    for (const [key, policy] of Object.entries(TERRAIN_PACING))
+      this.terrainPacingSelect.add(new Option(policy.label, key));
+    const pacingHint = document.createElement("div");
+    pacingHint.style.cssText = "font-size:11px;color:#ccc;max-width:280px";
+    pacingHint.textContent = TERRAIN_PACING.throughput.hint;
+    this.terrainPacingSelect.onchange = () => {
+      pacingHint.textContent = TERRAIN_PACING[this.terrainPacing].hint;
+    };
+    pacingRow.append(this.terrainPacingSelect);
 
     // Zoom slider
     const zoomRow = document.createElement("div");
@@ -47,6 +82,7 @@ export class DebugPanel {
     zoomLbl.textContent = "Zoom";
     this.zoomSlider = document.createElement("input");
     this.zoomSlider.type = "range";
+    this.zoomSlider.setAttribute("aria-label", "Zoom");
     this.zoomSlider.min = "0.05";
     this.zoomSlider.max = "3";
     this.zoomSlider.step = "0.05";
@@ -55,7 +91,7 @@ export class DebugPanel {
     this.zoomLabel = document.createElement("span");
     this.zoomLabel.textContent = "1.0x";
     this.zoomSlider.addEventListener("input", () => {
-      this.zoomLabel.textContent = `${parseFloat(this.zoomSlider.value).toFixed(2)}x`;
+      this.setZoom(parseFloat(this.zoomSlider.value));
     });
     zoomRow.append(zoomLbl, this.zoomSlider, this.zoomLabel);
 
@@ -136,7 +172,10 @@ export class DebugPanel {
     show3dRow.append(show3dLbl, this.show3dCheckbox, show3dHint);
 
     this.container.append(
+      presetRow,
       zoomRow,
+      pacingRow,
+      pacingHint,
       observerRow,
       noclipRow,
       pauseRow,
@@ -206,6 +245,15 @@ export class DebugPanel {
     return parseFloat(this.zoomSlider.value);
   }
 
+  get terrainPacing(): TerrainPacing {
+    return this.terrainPacingSelect.value as TerrainPacing;
+  }
+
+  setTerrainPacing(value: TerrainPacing): void {
+    this.terrainPacingSelect.value = value;
+    this.terrainPacingSelect.dispatchEvent(new Event("change"));
+  }
+
   get noclip(): boolean {
     return this.noclipCheckbox.checked;
   }
@@ -232,7 +280,9 @@ export class DebugPanel {
 
   setZoom(value: number): void {
     this.zoomSlider.value = String(value);
-    this.zoomLabel.textContent = `${value.toFixed(2)}x`;
+    const actual = this.zoom;
+    this.zoomLabel.textContent = `${actual.toFixed(2)}x`;
+    this.zoomPreset.value = ZOOM_PRESETS.some((p) => p.zoom === actual) ? String(actual) : "custom";
   }
 
   setNoclip(value: boolean): void {

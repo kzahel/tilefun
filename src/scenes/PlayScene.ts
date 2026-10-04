@@ -9,6 +9,7 @@ import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
+import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
@@ -60,13 +61,6 @@ const BALL_HIT_VOLUME = 0.4;
 
 /** Max hold time in seconds before throw force reaches 1.0. */
 const THROW_CHARGE_DURATION = 1.0;
-
-const ZOOM_PRESETS: Record<string, number> = {
-  zoom_1: 0.25,
-  zoom_2: 0.5,
-  zoom_3: 1,
-  zoom_4: 2,
-};
 
 export class PlayScene implements GameScene {
   readonly transparent = false;
@@ -649,9 +643,9 @@ export class PlayScene implements GameScene {
 
   private bindZoomActions(gc: GameContext): void {
     this.unbindZoomActions();
-    for (const [action, zoom] of Object.entries(ZOOM_PRESETS)) {
+    for (const { action, zoom } of ZOOM_PRESETS) {
       this.zoomUnsubs.push(
-        gc.actions.on(action as import("../input/ActionMap.js").ActionName, () => {
+        gc.actions.on(action, () => {
           gc.debugPanel.setZoom(zoom);
         }),
       );

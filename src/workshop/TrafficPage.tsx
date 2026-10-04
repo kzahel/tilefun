@@ -5,6 +5,11 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { Camera } from "../rendering/Camera.js";
 import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
+import {
+  TERRAIN_PACING,
+  type TerrainPacing,
+  ZOOM_PRESETS,
+} from "../rendering/PresentationSettings.js";
 import type { RasterRenderBackend } from "../rendering/RasterRenderBackend.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
@@ -23,6 +28,11 @@ export default function TrafficPage() {
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
     [paused, setPaused] = useState(false);
+  const [zoom, setZoom] = useState(0.75);
+  const [terrainPacing, setTerrainPacing] = useState<TerrainPacing>("throughput");
+  const presentation = useRef({ zoom, terrainPacing });
+  presentation.current.zoom = zoom;
+  presentation.current.terrainPacing = terrainPacing;
   const pause = useRef(false);
   pause.current = paused;
   useEffect(() => {
@@ -76,6 +86,8 @@ export default function TrafficPage() {
           loadTimer = 0;
         const frame = (now: number) => {
           if (!alive) return;
+          camera.zoom = presentation.current.zoom;
+          const policy = TERRAIN_PACING[presentation.current.terrainPacing];
           const elapsed = Math.min(0.1, (now - last) / 1000);
           last = now;
           if (!pause.current) accumulator += elapsed;
@@ -114,10 +126,10 @@ export default function TrafficPage() {
           backend.submit(camera, { kind: "clear", color: "#cbd5c3" });
           // Use gameplay's bounded scheduler. A visible-only pass here would evict
           // its retained halo and restart the same offscreen work every frame.
-          backend.prepareTerrain(camera, s.view.world, range);
+          backend.prepareTerrain(camera, s.view.world, range, policy.preparation);
           backend.submit(camera, {
             kind: "terrain",
-            draws: backend.collectTerrain(camera, s.view.world, range),
+            draws: backend.collectTerrain(camera, s.view.world, range, policy.drawing),
           });
           const items = collectScene(
             s.view.entities,
@@ -254,6 +266,38 @@ export default function TrafficPage() {
             }}
           />
         </label>
+      </div>
+      <div className="actions">
+        <label>
+          Zoom preset{" "}
+          <select
+            aria-label="Zoom preset"
+            value={zoom}
+            onChange={(e) => setZoom(Number(e.target.value))}
+          >
+            <option value={0.75}>Lab default · ¾×</option>
+            {ZOOM_PRESETS.map((p) => (
+              <option key={p.key} value={p.zoom}>
+                {p.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Terrain pacing{" "}
+          <select
+            aria-label="Terrain pacing"
+            value={terrainPacing}
+            onChange={(e) => setTerrainPacing(e.target.value as TerrainPacing)}
+          >
+            {Object.entries(TERRAIN_PACING).map(([key, policy]) => (
+              <option key={key} value={key}>
+                {policy.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <small>{TERRAIN_PACING[terrainPacing].hint}</small>
       </div>
       {error ? <p role="alert">{error}</p> : null}
       <canvas

@@ -2,6 +2,7 @@ import { expect, type Locator, test } from "@playwright/test";
 import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 
 test.use({ channel: "chromium" });
+test.setTimeout(60000);
 
 async function expectSettledTerrain(canvas: Locator) {
   // Streaming/autotiling may still publish startup revisions after the first
@@ -25,7 +26,7 @@ async function expectSettledTerrain(canvas: Locator) {
       expect(d.resident).toBe(samples[0]?.resident);
       expect(d.surfaceBytes).toBe(samples[0]?.surfaceBytes);
     }
-  }).toPass({ timeout: 10000 });
+  }).toPass({ timeout: 30000 });
 }
 
 for (const mode of ["canvas", "gpu", "gpu&meshes"]) {
@@ -46,6 +47,25 @@ for (const mode of ["canvas", "gpu", "gpu&meshes"]) {
       .toBeGreaterThan(start + 100);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expectSettledTerrain(canvas);
+
+    await page
+      .getByRole("combobox", { name: "Terrain pacing", exact: true })
+      .selectOption("responsive");
+    const zoom = page.getByRole("combobox", { name: "Zoom preset", exact: true });
+    await zoom.selectOption("0.1");
+    await zoom.selectOption("0.25");
+    const maxRows = await canvas.evaluate(async (c: TrafficCanvas) => {
+      let max = 0;
+      for (let i = 0; i < 60; i++) {
+        await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+        max = Math.max(max, c.__terrainDiagnostics?.().rowsLastFrame ?? 0);
+      }
+      return max;
+    });
+    expect(maxRows).toBeLessThanOrEqual(2);
+    await expectSettledTerrain(canvas);
+    // Return to the lab viewport; reset keeps the selected pacing policy.
+    await zoom.selectOption("0.75");
 
     const previous = await canvas.elementHandle();
     if (!previous) throw Error("Missing traffic canvas");

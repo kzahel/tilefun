@@ -61,7 +61,9 @@ loop, camera updates and terrain calls. The game uses `PlayScene`, `renderWorld`
 and its render host. Traffic alignment status:
 
 - Terrain now uses the same single budgeted scheduler and default 2 ms/128-row
-  limits as gameplay. The redundant visible-only pass, which discarded offscreen
+  limits as gameplay by default. Both expose the shared experimental two-row
+  policy with completed-chunk publication and explicit zoom presets (047).
+  The redundant visible-only pass, which discarded offscreen
   resources and partial builds every frame, has been removed.
 - The camera snaps to the player and scene collection receives interpolation
   alpha 1. The game's interpolated player/camera path is not used.

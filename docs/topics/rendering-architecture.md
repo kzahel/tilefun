@@ -377,3 +377,12 @@ parameters. All eleven GPU browser tests pass. The full regression run passed
 298 existing cases; the new selector test's initial assumption of a New World
 screen was corrected to use the already-running game and actual menu controls.
 Typechecks, 1,444 unit tests, lint, catalog/manifest verification and build pass.
+
+
+Terrain pacing is shared presentation policy (`PresentationSettings.ts`), selected
+by the view independently of its backend. The game and Traffic use identical
+preparation and publication options. Visible holes rank before replacements and
+halo work but cannot bypass the selected cap. The experimental small-batch mode
+allows gaps while new chunks build and retains completed imagery during edits;
+collection/submission must never perform an implicit completion pass. Frame
+pacing and presentation debt are measured together; see [047](../tactical/047-terrain-pacing-and-zoom-stress.md).
