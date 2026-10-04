@@ -22,7 +22,12 @@ Current implementation records: [shared model](2026-10-04-semantic-model.md),
 [independent sofa model audit](2026-10-04-sofa-model-review.md), and
 [sofa delivery](2026-10-04-sofa-delivery.md) with its
 [independent presentation review](2026-10-04-sofa-sheet-review.md), and
-[component/animation expansion](2026-10-04-component-animation-expansion.md).
+[component/animation expansion](2026-10-04-component-animation-expansion.md),
+[component/animation normalization](2026-10-04-component-animation-model.md) with its
+[independent audit](2026-10-04-component-animation-model-review.md), and
+[component family delivery](2026-10-04-component-family-delivery.md) with
+[adapter evidence](2026-10-04-component-family-adapter.md) and
+[independent presentation review](2026-10-04-component-family-review.md).
 
 Later execution records: [source inventory](2026-10-04-source-inventory.md),
 [pilot method assessment](2026-10-04-pilot-method-review.md), and

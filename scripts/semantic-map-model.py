@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only semantic packet adapter/validator (P01/P02/P03 and E01/I01 v1).
+"""Read-only versioned semantic adapters (P01/P02/P03, E01/I01, RB01/E03/A01).
 
 Default writes only semantic-model.json. --check never writes and emits stable JSON;
 --summary prints a human summary. Full validation requires ignored originals.
@@ -11,6 +11,7 @@ from collections import Counter
 import copy
 import hashlib
 import json
+import re
 from pathlib import Path
 import sys
 
@@ -20,6 +21,12 @@ ROOT = Path(__file__).resolve().parents[1]
 PLAN = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = ROOT / PLAN / 'semantic-model.json'
 PINS = {
+    'A01-animation-review.md': '7ee15c2663c88f4e7aded23d9f8023b8fc0203264f77527617fbd265fbfe9dce',
+    'A01-animation.json': 'f0e5f627c4e8fe27c5de9c83c5b2ba98d60f273fd7361be07a914563a49e9f0c',
+    'E03-playground-tubes-review.md': 'ab901c1a2859661332b15187060a3c38d3ad1e7d04ed69656128e83f49f8df88',
+    'E03-playground-tubes.json': '4370a63a1308b9ccc844029bfe077bb304faac2e62826923c3ba5a685508143e',
+    'RB01-room-builder-path-arch-review.md': '31461d71cb25c1fa5eb9c4287dc2df4f2ca491a6e26367a21d69153f22821601',
+    'RB01-room-builder-path-arch.json': '88f2ebcf7f7509e3da1337f9e1bd2dde087f6b342e245f478fb94ddc07b2b6c4',
     'I01-interior-sofas.json': '75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df',
     'I01-interior-sofas-review.md': '1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb',
     'E01-outdoor-seating.json': '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b',
@@ -41,6 +48,7 @@ PILOT_ACCOUNTING = {'P01': {'records': 29, 'proposals': 29, 'direct': 21, 'compo
                     'P02': {'records': 29, 'proposals': 29, 'direct': 29, 'composed': 0, 'derived': 0},
                     'P03': {'records': 27, 'proposals': 9, 'direct': 8, 'composed': 1, 'derived': 18}}
 PACKET_ACCOUNTING = {**PILOT_ACCOUNTING, 'E01': {'records': 27, 'proposals': 27, 'direct': 25, 'composed': 0, 'derived': 0, 'original-only': 2}, 'I01': {'records': 20, 'proposals': 18, 'direct': 18, 'derived': 2}}
+PACKET_ACCOUNTING.update({'RB01': {'records': 25, 'proposals': 25, 'direct': 22, 'subfile-only': 3}, 'E03': {'records': 25, 'proposals': 25, 'direct': 25}, 'A01': {'records': 9, 'proposals': 2, 'temporal-frame': 9}})
 GEOMETRY = {k: 'unknown' for k in ('anchor', 'footprint', 'collision', 'walkability', 'height')}
 
 
@@ -185,6 +193,189 @@ def fields_from(raw):
     return result
 
 
+EXPANSION_PACKETS = {
+    'RB01': ('RB01-room-builder-path-arch', 2, 25, 25),
+    'E03': ('E03-playground-tubes', 2, 25, 25),
+    'A01': ('A01-animation', 1, 9, 2),
+}
+
+
+def expansion_adapters(root, source, files, pins, records, proposals, relations, reviews, packets):
+    """Explicit frozen RB01/E03/A01 adapters; no schema inference or approval."""
+    for pid, (name, version, count, units) in EXPANSION_PACKETS.items():
+        path = f'{PLAN}/packets/{name}.json'
+        review_path = f'{PLAN}/packets/{name}-review.md'
+        packet, text = load(root / path), (root / review_path).read_text()
+        require((packet['schemaVersion'], packet['packetId'], packet['proposalRevision']) ==
+                (version, pid, 1), f'Unsupported {pid} adapter version')
+        require(PINS[name + '.json'] in text, f'{pid} review applicability mismatch')
+        sources = {}
+        for item in packet['sources']:
+            sf = source(item['path'], item.get('pngSHA256', item.get('fileSHA256')),
+                        item.get('size', item.get('dimensions')))
+            files[sf]['normalizedPixelSha256'] = item['normalizedRgbaSHA256']
+            if sf.endswith('.gif'):
+                files[sf]['inventoryRole'] = 'supporting-GIF-outside-PNG-inventory'
+            sources[item['id']] = sf
+        for pin in packet['pins'].values():
+            require(sha(repo_path(root, pin['path']).read_bytes()) == pin['sha256'], f'{pid} input pin drift')
+            pins[pin['path']] = pin['sha256']
+        ids = [c['id'] for c in packet['candidates']]
+        dispositions = table_dispositions(text, ids)
+        if pid == 'A01':
+            for disposition in dispositions:
+                disposition['sourceIndexLabel'] = disposition['disposition']
+                disposition['disposition'] = disposition['qualifications'][0]
+                disposition['qualifications'] = ['Retained temporal source occurrence; no gameplay contract.']
+        master_id = packet['matching']['sheetDomains'][0]
+        for candidate, disposition in zip(packet['candidates'], dispositions):
+            uid = candidate['id']
+            bounds = candidate.get('sourceRect', candidate.get('exportRect'))
+            sid = candidate.get('primarySourceId', candidate.get('sourceStrip'))
+            refs = [{'sourceFile': sources[sid], 'bounds': rect(bounds, 'source-file-pixels')}]
+            aliases = []
+            if pid == 'RB01':
+                for alias in candidate['packedTileAliases'] + candidate['packedSheetOffsetAliases']:
+                    refs.append({'sourceFile': sources[alias['sourceId']],
+                                 'bounds': rect(alias['rect'], 'packed-atlas-pixels', 'packed-alias'),
+                                 'packedAliasEvidence': alias, 'catalogFile': packet['pins']['packedIndex']['path'],
+                                 'aliasSourceFile': sources[alias['originalSourceId']],
+                                 'aliasSourceBounds': rect(alias['originalSourceRect'], 'source-file-pixels')})
+            elif pid == 'E03':
+                refs = [{'sourceFile': sources[a], 'bounds': rect(bounds, 'source-file-pixels')}
+                        for a in candidate['namedExportAliases']]
+            else:
+                alias_path = 'public/assets/semantic-sources/' + (
+                    'interiors-door-1.png' if candidate['actionHypothesis'] == 'opening' else 'interiors-door-1-locked.png')
+                source(alias_path, files[sources[sid]]['sha256'], files[sources[sid]]['dimensions'])
+                files[alias_path]['normalizedPixelSha256'] = files[sources[sid]]['normalizedPixelSha256']
+                aliases = [{'sourceFile': alias_path, 'bounds': rect(bounds, 'source-file-pixels', 'integration-alias'),
+                            'originSourceFile': sources[sid], 'lineage': 'byte-identical-copy-of-pinned-strip'}]
+            occurrences = []
+            for occurrence in candidate.get('occurrences', candidate.get('staticOccurrences', [])):
+                ref = {'sourceFile': sources[occurrence['sourceId']],
+                       'bounds': rect(occurrence['rect'], 'source-file-pixels'), 'lineage': occurrence['lineage']}
+                if pid == 'E03' and occurrence['sourceId'] == master_id:
+                    source(EXTERIORS, files[sources[master_id]]['sha256'], files[sources[master_id]]['dimensions'])
+                    ref['aliasFile'] = EXTERIORS
+                occurrences.append(ref)
+            direct = any(o['sourceId'] == master_id for o in candidate.get('occurrences', []))
+            lineage = ('temporal-frame' if pid == 'A01' else 'direct' if direct else 'subfile-only')
+            record = {'id': uid, 'packetId': pid, 'sourceId': uid,
+                      'sourceKind': 'temporal-animation-frame' if pid == 'A01' else 'source-component',
+                      'primaryLineage': lineage, 'lineageDomain': 'temporal-strip' if pid == 'A01' else 'pinned-original-master',
+                      'sourceIdentity': 'exact-pinned-frame-crop', 'frameDimensions': bounds[2:],
+                      'normalizedPixelSha256': candidate['normalizedRgbaSHA256'], 'references': refs,
+                      'occurrences': occurrences, 'integrationAliases': aliases,
+                      'bounds': [rect([0, 0, *bounds[2:]], 'record-local-pixels'),
+                                 rect(candidate['alphaVisibleRect'], 'record-local-pixels', 'alpha-visible')],
+                      'independentDisposition': disposition, 'originalEvidence': candidate,
+                      'searchEvidence': packet['matching']}
+            if pid == 'A01':
+                record.update(sourceFrameIndex=candidate['sourceFrameIndex'],
+                              duplicateFrameIds=candidate['duplicateFrameIds'], staticLineage=candidate['primaryStaticLineage'])
+            else:
+                record['topology'] = candidate['topology']
+                fields = fields_from(candidate['fields'])
+                proposals.append({'id': uid, 'packetId': pid, 'members': [uid], 'unitType': 'source-component-proposal',
+                                  'fields': fields, 'identity': fields['identity'], 'family': fields['family'],
+                                  'componentRole': fields['role'], 'variant': fields['variant'], 'facing': fields['facing'],
+                                  'topology': candidate['topology'], 'gameplayGeometry': GEOMETRY.copy(),
+                                  'alternatives': fields['identity']['alternatives'], 'state': 'proposed', 'humanApproval': 'unregistered'})
+            records.append(record)
+        relations.append({'id': pid + ':search-domain', 'packetId': pid, 'kind': 'expansion-search-domain',
+                          'members': ids, 'sources': [sources[s] for s in packet['matching']['sheetDomains']],
+                          'originalEvidence': packet['matching'], 'limit': 'Listed correspondences replayed; exhaustive absence scans are not repeated by this adapter.'})
+        if pid == 'A01':
+            for sequence in packet['sequences']:
+                proposals.append({'id': sequence['id'], 'packetId': pid, 'members': sequence['memberRecords'],
+                                  'unitType': 'temporal-action-sequence', 'identity': sequence['logicalAnimationIdentity'],
+                                  'family': field('brown-door-animation'), 'componentRole': field('temporal frame sequence; no spatial assembly'),
+                                  'variant': field(), 'facing': field(), 'fields': {}, 'gameplayGeometry': GEOMETRY.copy(),
+                                  'gameplayPlayback': sequence['gameplayPlayback'], 'alternatives': sequence['logicalAnimationIdentity']['alternatives'],
+                                  'state': 'proposed', 'humanApproval': 'unregistered'})
+                relations.append({'id': sequence['id'] + ':source-order', 'packetId': pid, 'kind': 'temporal-sequence',
+                                  'members': sequence['memberRecords'], 'originalEvidence': sequence})
+            for demo in packet['sourceGifDemonstrations']:
+                relations.append({'id': demo['id'], 'packetId': pid, 'kind': 'supporting-GIF-demonstration',
+                                  'members': [frame['exactSourceFrameIds'][0] for frame in demo['frames']],
+                                  'sourceFile': sources[demo['sourceId']], 'originalEvidence': demo,
+                                  'limit': 'Source demonstration timing and loop only; gameplay playback remains unknown.'})
+            probe_dispositions = []
+        else:
+            experiments = packet['assemblyExperiments'] if pid == 'RB01' else packet['experiments']['assemblies']
+            # E03 Markdown quotes the IDs; normalize only that syntax before exact row lookup.
+            probe_text = text.split('Canonical recipe hashes below')[0] if pid == 'E03' else text
+            probe_dispositions = table_dispositions(probe_text.replace('`', ''), [e['id'] for e in experiments])
+            for experiment, disposition in zip(experiments, probe_dispositions):
+                recipe = experiment['renderRecipe'] if pid == 'RB01' else {
+                    k: experiment[k] for k in ('size', 'placements', 'operation')}
+                if pid == 'E03':
+                    require(revision(recipe) in text, 'E03 independent recipe receipt absent')
+                relations.append({'id': pid + ':assembly:' + experiment['id'], 'packetId': pid,
+                                  'kind': 'bounded-component-probe', 'members': [p['memberId'] for p in recipe['placements']],
+                                  'operation': 'rgba-overwrite' if pid == 'RB01' else 'source-over',
+                                  'renderRecipe': recipe, 'renderRecipeSha256': revision(recipe),
+                                  'recipeCoordinateSpaces': {'sourceRect': 'record-local-pixels', 'targetOffset': 'probe-canvas-pixels'}, 'sourceFilesById': sources,
+                                  'originalEvidence': experiment, 'independentDisposition': disposition,
+                                  'humanApproval': 'unregistered', 'limit': 'Frozen finite layout only; no arbitrary compatibility validator.'})
+            if pid == 'RB01':
+                for experiment in packet['contextExperiments']:
+                    relations.append({'id': pid + ':context:' + experiment['id'], 'packetId': pid,
+                                      'kind': 'context-only-probe', 'members': [], 'operation': 'rgba-overwrite',
+                                      'renderRecipe': experiment['renderRecipe'], 'sourceFilesById': sources,
+                                      'originalEvidence': experiment, 'independentDisposition': {
+                                          'disposition': 'Supported context only; not the fixed stone-frame body',
+                                          'qualifications': ['Review context probes section; no additional semantic members.']}})
+                relations.append({'id': pid + ':shadow-delta', 'packetId': pid, 'kind': 'master-subfile-alpha-difference',
+                                  'members': [], 'sourceFilesById': sources, 'originalEvidence': packet['variantExperiments'][0]})
+            else:
+                for i, comparison in enumerate(packet['experiments']['comparisons']):
+                    relations.append({'id': f'{pid}:comparison:{i}', 'packetId': pid, 'kind': 'component-pixel-comparison',
+                                      'members': comparison['members'], 'originalEvidence': comparison})
+                supplemental_rows = [line for line in text.splitlines() if line.startswith('|') and
+                                     any(label in line for label in ('Rounded upward end:', 'Upper mouth branch:', 'Rounded upper branch:', 'Right-collar repeat:', 'Left-collar repeat:'))]
+                require(len(supplemental_rows) == 5, 'E03 supplemental review scope drift')
+                for row in supplemental_rows:
+                    cells = [cell.strip() for cell in row.strip('|').split('|')]
+                    label = cells[0].split(':')[0]
+                    placements = [{'memberId': f'E03-{int(n):02}', 'offsetXY': [int(x), int(y)]}
+                                  for n, x, y in re.findall(r'(\d+)@\((\d+),(\d+)\)', cells[0])]
+                    require(len(placements) == 3, 'E03 supplemental recipe scope differs')
+                    recipe = {'size': [64, 80], 'placements': placements,
+                              'operation': 'Pillow RGBA alpha_composite in listed order; no scaling'}
+                    require(revision(recipe) in text, 'E03 supplemental recipe receipt absent')
+                    relations.append({'id': pid + ':reviewer:' + label.lower().replace(' ', '-'), 'packetId': pid,
+                                      'kind': 'supplemental-component-review-probe', 'members': [p['memberId'] for p in placements],
+                                      'operation': 'source-over', 'renderRecipe': recipe, 'renderRecipeSha256': revision(recipe),
+                                      'originalEvidence': {'row': row, 'label': label, 'observation': cells[1],
+                                                           'normalizedRgbaSHA256': cells[2].strip('`')},
+                                      'independentDisposition': {'disposition': 'Supplemental bounded observation', 'qualifications': [cells[1]]},
+                                      'source': review_path, 'humanApproval': 'unregistered',
+                                      'limit': 'Reviewer challenge only; no update to frozen eight-probe tested-neighbor matrix.'})
+        sr = [r for r in records if r['packetId'] == pid]
+        pr = [p for p in proposals if p['packetId'] == pid]
+        require((len(sr), len(pr)) == (count, units), f'{pid} count drift')
+        reviews.append({'id': pid + ':independent-review', 'packetId': pid, 'kind': 'agent-review',
+                        'proposalPath': path, 'proposalSha256': PINS[name + '.json'], 'proposalRevision': 1,
+                        'sourcePins': [files[p] for p in sorted(set(sources.values()) | {a['sourceFile'] for r in sr for a in r['integrationAliases']})],
+                        'sourceScope': 'All frozen packet source pins; integration copies separately pinned. GIFs support playback evidence outside PNG inventory.',
+                        'memberRecords': ids, 'proposalUnits': [p['id'] for p in pr],
+                        'applicability': 'exact-proposal-hash-and-member-records-only', 'reviewPath': review_path,
+                        'reviewSha256': PINS[name + '-review.md'], 'recordDispositions': dispositions,
+                        'proposalDispositions': dispositions if pid != 'A01' else [
+                            {'memberId': p['id'], 'disposition': 'Supported bounded action sequence',
+                             'qualifications': ['Source sequence and GIF demonstration only; gameplay timing/trigger/lock mechanics unknown.']} for p in pr],
+                        'probeDispositions': probe_dispositions, 'originalText': text,
+                        'observationOrder': 'See exact frozen independent review; not formally blinded.',
+                        'humanApproval': 'unregistered', 'runtimePromotion': False})
+        packets.append({'id': pid, 'proposalPath': path, 'proposalSha256': PINS[name + '.json'],
+                        'revision': 1, 'sourceRecordCount': count, 'proposalUnitCount': units,
+                        'proposalUnitDefinition': 'two action sequences, not nine spatial pieces' if pid == 'A01' else 'one frozen named component crop per proposal; no unique-object claim',
+                        'state': 'proposed', 'coverageLimit': packet['coverage'],
+                        'originalContext': {k: v for k, v in packet.items() if k not in ('candidates', 'sources')}})
+
+
 def build_model(root=ROOT):
     """Pure adapter output is stable across full and committed-only installations."""
     packet_dir = root / PLAN / 'packets'
@@ -214,8 +405,8 @@ def build_model(root=ROOT):
             dimensions = dims
         value = {'path': path, 'sha256': digest, 'dimensions': dimensions,
                  'required': not path.startswith('assets/')}
-        require(path not in files or files[path] == value, f'Conflicting source pin: {path}')
-        files[path] = value
+        require(path not in files or all(files[path].get(k) == v for k, v in value.items()), f'Conflicting source pin: {path}')
+        files.setdefault(path, value)
         return path
 
     exterior = source(EXTERIORS, trees['source']['sha256'], [trees['source']['width'], trees['source']['height']])
@@ -565,9 +756,10 @@ def build_model(root=ROOT):
                         'state': 'proposed', 'coverageLimit': packet['coverage'],
                         'originalContext': {k: v for k, v in packet.items() if k not in
                                             ('candidates', 'semanticProposals', 'measurements', 'relations', 'experiments')}})
+    expansion_adapters(root, source, files, pins, records, proposals, relations, reviews, packets)
     model = {'schema': 'semantic-tileset-model-v1',
-             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1']},
-             'lineageContract': 'Primary lineage describes correspondence to the packet original master. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
+             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1']},
+             'lineageContract': 'Primary lineage describes correspondence to the packet original master except A01 temporal-strip records, whose static correspondence stays separate. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
              'normalization': NORMALIZATION, 'inputPins': pins, 'packets': packets,
              'sourceFiles': [files[k] for k in sorted(files)], 'sourceRecords': records,
              'proposals': proposals, 'relationships': relations, 'reviews': reviews,
@@ -718,6 +910,155 @@ def review_applicability(review, proposal_sha256, members):
             review['memberRecords'] == members)
 
 
+def finite_tube_ports(recipe, records):
+    """Replay only the frozen image-axis continuation cuts; no eligibility verdict."""
+    ports = []
+    opposite = {'left': 'right', 'right': 'left', 'top': 'bottom', 'bottom': 'top'}
+    for i, placement in enumerate(recipe['placements']):
+        rid = placement['memberId']
+        x, y = placement['offsetXY']
+        for port in records[rid]['topology']['openJoinEdges']:
+            px, py = port['bandOriginXY']
+            ports.append(({'placementIndex': i, 'memberId': rid, 'edge': port['edge'],
+                           'globalBandOriginXY': [x + px, y + py]}, port['profile']))
+    pairs, unmatched = [], []
+    for i, (port, profile) in enumerate(ports):
+        peers = [j for j, (other, other_profile) in enumerate(ports)
+                 if other['placementIndex'] != port['placementIndex'] and
+                 other['edge'] == opposite[port['edge']] and profile == other_profile and
+                 other['globalBandOriginXY'] == port['globalBandOriginXY']]
+        if len(peers) != 1:
+            unmatched.append(port)
+        elif i < peers[0]:
+            pairs.append([port, ports[peers[0]][0]])
+    return {'matchedPairs': pairs, 'unmatchedPorts': unmatched}
+
+
+def validate_expansion(model, records, rendered, image, root):
+    result = {'probeRastersVerified': {}, 'probeRastersUnavailable': [], 'supplementalProbeRastersVerified': 0,
+              'originalProbeComparisonsVerified': 0, 'originalProbeComparisonsUnavailable': [],
+              'pixelComparisonsVerified': 0, 'pixelComparisonsUnavailable': [],
+              'GIFFramesVerified': 0, 'GIFDemonstrationsUnavailable': [],
+              'temporalDeltasVerified': 0, 'masterSubfileAlphaDifferenceVerified': False}
+    for relation in model['relationships']:
+        pid, kind = relation['packetId'], relation['kind']
+        if pid not in EXPANSION_PACKETS:
+            continue
+        evidence = relation.get('originalEvidence', {})
+        if kind in ('bounded-component-probe', 'context-only-probe', 'supplemental-component-review-probe'):
+            recipe = relation['renderRecipe']
+            if pid == 'RB01':
+                require(revision(recipe) == evidence['renderRecipeSHA256'], 'RB01 recipe receipt differs')
+                require(relation['operation'] == 'rgba-overwrite' and recipe['operation'].startswith('normalized RGBA overwrite'), 'RB01 operation differs')
+            else:
+                require(relation['operation'] == 'source-over' and recipe['operation'].startswith('Pillow RGBA alpha_composite'), 'E03 operation differs')
+                measured = finite_tube_ports(recipe, records) if kind != 'supplemental-component-review-probe' else None
+                if measured is not None:
+                    require(measured == evidence['portEvaluation'], 'E03 finite port evidence differs')
+                    require((not measured['unmatchedPorts']) == (evidence['topologyValidity'] == 'valid'), 'E03 probe disposition differs')
+            out = Image.new('RGBA', tuple(recipe['size']))
+            unavailable = False
+            parts = []
+            for placement in recipe['placements']:
+                if 'memberId' in placement:
+                    part = rendered.get(placement['memberId'])
+                else:
+                    part = image(relation['sourceFilesById'][placement['sourceId']])
+                if part is None:
+                    unavailable = True
+                    continue
+                if 'sourceRect' in placement:
+                    part = crop(part, rect(placement['sourceRect'], 'record-local-pixels' if 'memberId' in placement else 'source-file-pixels'))
+                at = placement.get('targetOffset', placement.get('offsetXY'))
+                check_bounds(rect([*at, *part.size], 'probe-canvas-pixels'), out.size)
+                if relation['operation'] == 'source-over':
+                    out.alpha_composite(part, tuple(at))
+                else:
+                    out.paste(part, tuple(at))
+                parts.append(part)
+            if unavailable:
+                result['probeRastersUnavailable'].append(relation['id'])
+                continue
+            expected_hash = evidence.get('outputNormalizedRgbaSHA256', evidence.get('normalizedRgbaSHA256'))
+            require(pixel_hash(out) == expected_hash, f'{pid} probe raster differs: {relation["id"]}')
+            if kind == 'supplemental-component-review-probe':
+                result['supplementalProbeRastersVerified'] += 1
+            else:
+                result['probeRastersVerified'][pid] = result['probeRastersVerified'].get(pid, 0) + 1
+            if pid == 'RB01':
+                for diagnostic in evidence.get('joinDiagnostics', []):
+                    a, b = [rendered[rid] for rid in diagnostic['members']]
+                    if diagnostic['axis'] == 'horizontal':
+                        changes = [y for y in range(a.height) if a.getpixel((a.width - 1, y)) != b.getpixel((0, y))]
+                    else:
+                        changes = [x for x in range(a.width) if a.getpixel((x, a.height - 1)) != b.getpixel((x, 0))]
+                    require(changes == diagnostic['differentAdjacentRGBAPositions'], 'RB01 join diagnostic differs')
+                if kind == 'context-only-probe':
+                    for side, a, b in [('left', parts[0], parts[1]), ('right', parts[1], parts[2])]:
+                        changes = [y for y in range(a.height) if a.getpixel((a.width - 1, y)) != b.getpixel((0, y))]
+                        require(changes == evidence[side + 'SeamDifferentRows'], 'RB01 context seam differs')
+                if 'sourceComparison' in evidence:
+                    comparison = evidence['sourceComparison']
+                    original = image(relation['sourceFilesById'][comparison['sourceId']])
+                    if original is None:
+                        result['originalProbeComparisonsUnavailable'].append(relation['id'])
+                    else:
+                        target = crop(original, rect(comparison['rect'], 'source-file-pixels'))
+                        require(pixel_hash(target) == comparison['referenceNormalizedRgbaSHA256'] and
+                                (target.tobytes() == out.tobytes()) == comparison['exactNormalizedRGBAEqual'], 'RB01 source comparison differs')
+                        result['originalProbeComparisonsVerified'] += 1
+        elif kind == 'component-pixel-comparison':
+            if any(r not in rendered for r in relation['members']):
+                result['pixelComparisonsUnavailable'].append(relation['id'])
+                continue
+            a, b = [rendered[r] for r in relation['members']]
+            if evidence['operation'] == 'horizontal-reflection':
+                a = a.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
+            else:
+                require(evidence['operation'] == 'identity', 'E03 comparison operation differs')
+            measured = seating_delta(a, b)
+            require(all(measured[k] == evidence[k] for k in evidence if k in measured), 'E03 pixel comparison differs')
+            result['pixelComparisonsVerified'] += 1
+        elif kind == 'master-subfile-alpha-difference':
+            paths = relation['sourceFilesById']
+            a, b = image(paths[evidence['subfileSourceId']]), image(paths[evidence['masterSourceId']])
+            if a is not None and b is not None:
+                a = crop(a, rect(evidence['subfileRect'], 'source-file-pixels'))
+                b = crop(b, rect(evidence['masterRect'], 'source-file-pixels'))
+                measured = seating_delta(a, b)
+                require((measured['rgbaChangedPixels'], measured['alphaChangedPixels'], measured['changedMaskSHA256'], measured['changedBoundsXYXY']) ==
+                        (evidence['changedPixels'], 176, evidence['changedMaskSHA256'], evidence['changedBoundsXYXY']) and
+                        pixel_hash(a) == evidence['subfileNormalizedRgbaSHA256'] and pixel_hash(b) == evidence['masterNormalizedRgbaSHA256'], 'RB01 master/subfile shadow delta differs')
+                values = Counter((p, q) for p, q in zip(pixels(a), pixels(b)) if p != q)
+                require([{'subfile': list(p), 'master': list(q), 'pixels': n} for (p, q), n in values.items()] == evidence['changedRGBAValues'], 'RB01 shadow alpha values differ')
+                result['masterSubfileAlphaDifferenceVerified'] = True
+        elif kind == 'temporal-sequence':
+            for delta in evidence['adjacentSourceFrameDeltas']:
+                a, b = [rendered[r] for r in delta['members']]
+                measured = seating_delta(a, b)
+                require((measured['rgbaChangedPixels'], measured['alphaChangedPixels'], measured['changedBoundsXYXY'], measured['changedMaskSHA256']) ==
+                        (delta['changedPixels'], delta['alphaChangedPixels'], delta['changedBoundsXYXY'], delta['maskSHA256']), 'A01 temporal delta differs')
+                result['temporalDeltasVerified'] += 1
+        elif kind == 'supporting-GIF-demonstration':
+            path = relation['sourceFile']
+            if image(path) is None:
+                result['GIFDemonstrationsUnavailable'].append(relation['id'])
+                continue
+            with Image.open(root / path) as gif:
+                require(gif.n_frames == evidence['decodedFrameCount'] and gif.info.get('loop') == evidence['loopExtension'], 'A01 GIF sequence differs')
+                duration = 0
+                for frame in evidence['frames']:
+                    gif.seek(frame['decodedFrameIndex'])
+                    decoded = normalized(gif)
+                    require(pixel_hash(decoded) == frame['normalizedRgbaSHA256'] and gif.info.get('duration') == frame['durationMs'] and
+                            gif.disposal_method == frame['decoderDisposalMethod'], 'A01 GIF frame/timing differs')
+                    require(all(decoded.tobytes() == rendered[r].tobytes() for r in frame['exactSourceFrameIds']), 'A01 GIF/PNG correspondence differs')
+                    duration += frame['durationMs']
+                    result['GIFFramesVerified'] += 1
+                require(duration == evidence['demonstrationCycleDurationMs'], 'A01 GIF cycle duration differs')
+    return result
+
+
 def validate_model(model, root=ROOT, committed_only=False):
     """Verify saved evidence; unavailable checks remain explicit in the result."""
     require(model['schema'] == 'semantic-tileset-model-v1', 'Unsupported semantic schema')
@@ -743,7 +1084,8 @@ def validate_model(model, root=ROOT, committed_only=False):
         if path in missing:
             return None
         if path not in images:
-            images[path] = normalized(Image.open(root / path))
+            with Image.open(root / path) as raw:
+                images[path] = normalized(raw)
         return images[path]
     for path, pin in files.items():
         if pin.get('normalizedPixelSha256') and path not in missing:
@@ -758,7 +1100,7 @@ def validate_model(model, root=ROOT, committed_only=False):
         packet_proposals = [p for p in proposals.values() if p['packetId'] == pid]
         require(len(packet_records) == accounting['records'] and len(packet_proposals) == accounting['proposals'], f'Packet record/proposal accounting drift: {pid}')
         require(Counter(r['primaryLineage'] for r in packet_records) ==
-                {k: accounting[k] for k in ('direct', 'composed', 'derived', 'original-only') if accounting.get(k)}, f'Lineage accounting drift: {pid}')
+                {k: accounting[k] for k in ('direct', 'composed', 'derived', 'original-only', 'subfile-only', 'temporal-frame') if accounting.get(k)}, f'Lineage accounting drift: {pid}')
     covered = Counter(rid for p in proposals.values() for rid in p['members'])
     require(covered == Counter(records.keys()), 'Proposal membership missing or duplicated')
     for p in proposals.values():
@@ -772,7 +1114,7 @@ def validate_model(model, root=ROOT, committed_only=False):
         for ref in record['references'] + record.get('integrationAliases', []) + record['occurrences']:
             path = ref['sourceFile']
             require(path in files and files[path]['dimensions'], f'Missing source pin/dimensions: {rid}: {path}')
-            expected_space = 'packed-atlas-pixels' if ref.get('aliasKey') else 'source-file-pixels'
+            expected_space = 'packed-atlas-pixels' if ref.get('aliasKey') or ref.get('packedAliasEvidence') else 'source-file-pixels'
             require(ref['bounds']['coordinateSpace'] == expected_space, f'Wrong source coordinate space: {rid}')
             check_bounds(ref['bounds'], files[path]['dimensions'])
             if 'visibleBounds' in ref:
@@ -781,6 +1123,26 @@ def validate_model(model, root=ROOT, committed_only=False):
                 origin = ref['originSourceFile']
                 require(origin in files and files[origin]['sha256'] == files[path]['sha256'] and
                         files[origin]['dimensions'] == files[path]['dimensions'], 'Integration alias differs from pinned original export')
+            if ref.get('packedAliasEvidence'):
+                alias = ref['packedAliasEvidence']
+                catalog = load(root / ref['catalogFile'])
+                key = alias.get('key', alias.get('sheetKey'))
+                entry = next(e for e in catalog['entries'] if e['key'] == key)
+                original = alias['originalSourceRect']
+                require(entry['sourcePath'] == ref['aliasSourceFile'] and original == ref['aliasSourceBounds']['value'] and
+                        any(o['sourceFile'] == ref['aliasSourceFile'] and o['bounds']['value'] == original for o in record['occurrences']), 'RB01 packed source lineage differs')
+                original_image = image(ref['aliasSourceFile'])
+                if original_image is not None:
+                    require(pixel_hash(crop(original_image, ref['aliasSourceBounds'])) == record['normalizedPixelSha256'], 'RB01 packed alias original pixels differ')
+                if 'key' in alias:
+                    expected = entry['rect']
+                    require(entry['sourceRect'] == original, 'RB01 packed tile source crop differs')
+                else:
+                    sx, sy, sw, sh = entry['sourceRect']
+                    ox, oy, ow, oh = original
+                    check_bounds(rect([ox - sx, oy - sy, ow, oh], 'sheet-local-pixels'), [sw, sh])
+                    expected = [entry['rect'][0] + ox - sx, entry['rect'][1] + oy - sy, ow, oh]
+                require(ref['bounds']['value'] == expected == alias['rect'] and alias['exactVerified'] is True, 'RB01 packed offset alias differs')
             if ref.get('aliasKey'):
                 catalog = load(root / ref['catalogFile'])
                 aliases = {a['key']: a for a in catalog['entries']}
@@ -988,6 +1350,7 @@ def validate_model(model, root=ROOT, committed_only=False):
                        shadow_signature(image(c['path']), None) == experiment['canonicalBodySHA256']]
             require(matches == experiment['shadowlessPoolMatches'], 'I01 counterpart corpus differs')
         sofa_counterparts += 1
+    expansion_report = validate_expansion(model, records, rendered, image, root)
     original_only = [r['id'] for r in records.values() if r['primaryLineage'] == 'original-only']
     for rid in original_only:
         require(not records[rid]['occurrences'] and records[rid]['sourceIdentity'] == 'exact-pinned-whole-export',
@@ -1004,6 +1367,12 @@ def validate_model(model, root=ROOT, committed_only=False):
     limitations = ['Recorded occurrence/search evidence is preserved; this validator checks listed crops, not a new exhaustive absence scan.',
                    'Topology-valid sequences are not thereby rendered, seam-reviewed or human-approved.',
                    'Pilot proposal units are not unique-object counts or pack completeness.']
+    limitations.append('RB01/E03 validate finite frozen probes only; open windows, weakened hypotheses and invalid layouts retain their exact dispositions. No general connector/height rule.')
+    limitations.append('A01 has nine temporal source occurrences / eight pixel states / two action-sequence proposal units; 82 PNG sources and two supporting GIFs outside the PNG inventory. Demonstration timing is not gameplay timing.')
+    if not expansion_report['masterSubfileAlphaDifferenceVerified']:
+        limitations.append('RB01 original master/subfile 176-pixel alpha comparison unavailable; preserved evidence is not newly verified.')
+    if expansion_report['GIFDemonstrationsUnavailable']:
+        limitations.append('A01 supporting GIF originals unavailable; demonstration order/timing not newly verified. Committed PNG strip frames and adjacent deltas remain checked.')
     if missing:
         limitations.append('Original references are absent: their raw hashes/dimensions and independent target comparisons were not checked.')
     if seating_unavailable or partial_unavailable:
@@ -1015,7 +1384,8 @@ def validate_model(model, root=ROOT, committed_only=False):
     if not corpus_available:
         limitations.append('122-file counterpart corpus unavailable; recorded uniqueness claim not independently rechecked.')
     return {'ok': True, 'mode': 'committed-only' if committed_only else 'full', 'modelRevision': model['revision'],
-            'sourceRecords': len(records), 'proposalUnits': len(proposals),
+            'sourceRecords': len(records), 'proposalUnits': len(proposals), 'componentAnimationValidation': expansion_report,
+            'componentAnimationAccounting': {pid: {'sourceRecords': spec[2], 'proposalUnits': spec[3]} for pid, spec in EXPANSION_PACKETS.items()},
             'pilotAccounting': {'sourceRecords': 85, 'proposalUnits': 67, 'lineage': {'direct': 58, 'composed': 9, 'derived': 18}},
             'extensionAccounting': {'E01': {'sourceRecords': 27, 'proposalUnits': 27, 'lineage': {'direct': 25, 'original-only': 2}}, 'I01': {'sourceRecords': 20, 'proposalUnits': 18, 'lineage': {'direct': 18, 'derived': 2}}},
             'lineage': dict(sorted(Counter(r['primaryLineage'] for r in records.values()).items())),
@@ -1054,7 +1424,7 @@ def main():
             OUTPUT.write_bytes(encoded(model))
         if args.summary:
             print(f"Semantic map: {report['sourceRecords']} source records / {report['proposalUnits']} proposal units. "
-                  'Pilots: 85/67 (58 direct, 9 composed, 18 derived); E01: 27/27 (25 direct, 2 original-only); I01: 20/18 (18 direct, 2 derived). Human approvals: 0; runtime promotions: 0.')
+                  'Pilots: 85/67; E01: 27/27; I01: 20/18; RB01: 25/25; E03: 25/25; A01: 9 temporal frames/2 action sequences (8 pixel states). Human approvals: 0; runtime promotions: 0.')
             print(f"Compositions: {len(report['compositionsComparedToPinnedTargets'])} target comparisons, "
                   f"{len(report['compositionsReplayOnly'])} replay-only, {len(report['compositionsUnavailable'])} unavailable. "
                   f"Missing original references: {len(report['sourceFilesUnavailable'])}.")

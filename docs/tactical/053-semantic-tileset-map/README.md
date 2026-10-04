@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: five family sheets delivered; Room Builder, playground and animation packets independently reviewed; whole-pack mapping continues.
+Status: eight family sheets delivered; 191 records / 164 proposal units normalized; whole-pack mapping continues.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -217,7 +217,7 @@ unblocked queue item. Update the queue and link findings before ending a work se
 
 ## Investigation tools
 
-- `python3 scripts/semantic-map-model.py --check` validates the normalized pilot and E01
+- `python3 scripts/semantic-map-model.py --check` validates the normalized eight-packet
   model, exact source lineage and review applicability; `--committed-only` permits
   missing ignored originals but reports that limitation. See the
   [model note](notes/2026-10-04-semantic-model.md) and
@@ -230,12 +230,14 @@ unblocked queue item. Update the queue and link findings before ending a work se
 These are offline evidence tools; they do not repack assets or change gameplay.
 Use Python 3 with Pillow for image inspection and full inventory validation.
 
-- `python3 scripts/build-family-sheets.py --check` verifies the four contact
-  sheets against pinned proposals and committed atlases, including all 112 source
+- `python3 scripts/build-family-sheets.py --check` verifies the eight contact
+  sheets against pinned proposals and committed atlases, including all 191 source
   records and the cabinet component restrictions. Omit `--check` to regenerate
   the JSON. `python3 scripts/build-family-sheets.test.py` exercises source drift,
   frame replacement, record coverage and component/unknown placement distinctions.
-  These commands do not require ignored original packs. Normal app builds consume
+  `python3 scripts/build-family-expansion.test.py` additionally exercises the
+  Room Builder, playground and animation adapters. These commands do not require
+  ignored original packs. Normal app builds consume
   the committed output; they do not regenerate it or require Pillow.
 
 - `python3 scripts/semantic-map-inventory.py --check` verifies the saved manifest

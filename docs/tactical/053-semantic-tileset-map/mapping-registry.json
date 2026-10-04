@@ -478,9 +478,9 @@
     },
     {
       "packetId": "RB01-room-builder-path-arch",
-      "assignmentState": "review-ready",
+      "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "25 independently reviewed crop records: 17 floor pieces and eight arch/shadow components; bounded recipes, weakened inset extensions and master/subfile shadow differences retained. Normalization and owner-facing sheet pending.",
+      "taskDescriptor": "25 independently reviewed crop records: 17 floor pieces and eight arch/shadow components; bounded recipes, weakened inset extensions and master/subfile shadow differences retained. Explicit normalization and quiet family presentation delivered; proposed metadata, no human semantic approval or runtime promotion.",
       "regionIds": ["S02-R11", "S02-R09"],
       "sourceGroupIds": ["interiors-room-builder-master", "interiors-room-builder-subfiles"],
       "proposal": {
@@ -723,9 +723,9 @@
     },
     {
       "packetId": "E03-playground-tubes",
-      "assignmentState": "review-ready",
+      "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "25 independently reviewed playground tube records; required continuation ports, eight frozen assembly dispositions and unresolved rounded/collared functions. Normalization and owner-facing sheet pending.",
+      "taskDescriptor": "25 independently reviewed playground tube records; required continuation ports, eight frozen assembly dispositions and unresolved rounded/collared functions. Explicit normalization and quiet family presentation delivered; proposed metadata, no human semantic approval or runtime promotion.",
       "regionIds": ["S02-exteriors/E10"],
       "sourceGroupIds": ["exteriors-complete-singles", "exteriors-theme-singles"],
       "proposal": {
@@ -968,9 +968,9 @@
     },
     {
       "packetId": "A01-animation",
-      "assignmentState": "review-ready",
+      "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "Nine independently reviewed native door frames / eight pixel states across two sequences. Exact static and GIF correspondence retained; supplemental GIF timing is separate from game playback. Normalization and owner-facing presentation pending.",
+      "taskDescriptor": "Nine independently reviewed native door frames / eight pixel states across two sequences. Exact static and GIF correspondence retained; supplemental GIF timing is separate from game playback. Explicit normalization and quiet family presentation delivered; proposed metadata, no human semantic approval or runtime promotion.",
       "regionIds": ["S02-I10"],
       "sourceGroupIds": ["interiors-animations"],
       "proposal": {

@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: five family sheets delivered; 132 source records normalized; three further component/animation packets independently reviewed.
+Status: eight family sheets delivered; 191 source records normalized; whole-pack mapping continues.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -47,8 +47,9 @@ Default to representative variants, separate complete objects from pieces to
 combine, and explain join requirements in ordinary language. Do not add a research
 dashboard, agent states or technical identifiers to normal browsing. The
 [family sheets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
-now cover cabinets, trees, scrapyard pieces, outdoor seating and sofas: 85 cards expose
-132 source records through variant selectors. All five are marked Proposed. Notes reuse
+now cover cabinets, trees, scrapyard pieces, outdoor seating, sofas, floors/arches,
+playground tubes and animated doors: 131 cards expose 191 source records through
+variant and frame selectors. All eight are marked Proposed. Notes reuse
 the Workshop outbox/inbox and pin family revision, selected member, variant and
 source layers. They do not approve or promote metadata. The current slice has no
 approval buttons or generator placement enforcement. Asset families appears in the
@@ -80,11 +81,11 @@ labels. Apply it alongside the frozen proposal JSONs. That reconciliation predat
 the owner feedback and bounded visual acceptance recorded below.
 
 The contact-sheet adapter uses committed source images only and checks source
-pins, available pixel hashes, exact frame bounds, all 132 displayed record references and
+pins, available pixel hashes, exact frame bounds, all 191 displayed record references and
 cabinet component restrictions. Run `python3 scripts/build-family-sheets.py --check`
 with Pillow to verify the saved output; ordinary browsing/builds use committed
 JSON and images without original packs. Source images and metadata revisions are
-also verified before browser notes can be submitted. Five discovery candidates
+also verified before browser notes can be submitted. Eight discovery candidates
 in one existing-inbox batch route directly to these sheets; notes remain discussion.
 
 The first owner comments gave positive whole-sheet feedback on cabinets and
@@ -104,9 +105,11 @@ the sheet; [delivery and validation](../tactical/053-semantic-tileset-map/notes/
 record the exact revision. The family metadata remains Proposed.
 
 The [normalized semantic model](../tactical/053-semantic-tileset-map/semantic-model.json)
-now covers 132 source records / 112 proposal units: 85 pilot records / 67 units,
-27 outdoor seating records / units and 20 sofa records / 18 units, with separate source, semantic, relation
-and review views. Its [independent audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-semantic-model-review.md)
+now covers 191 source records / 164 proposal units: the earlier 132 records / 112
+units plus 25 Room Builder components, 25 playground exports and nine door frames
+in two action sequences. These counts preserve duplicate exports and temporal
+frames; they are not counts of unique objects. Source, semantic, relation and
+review views remain separate. Its [independent audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-semantic-model-review.md)
 checks exact pixels, missing-source mode, stale reviews and arbitrary cabinet
 chains. Topology validation does not grant visual or gameplay approval.
 
@@ -120,7 +123,7 @@ crediting unrecognized packet formats.
 
 The [outdoor seating delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-outdoor-seating-delivery.md)
 adds 15 cards with four-color chair variants. Two benches use byte-identical
-original PNG copies and retain original-only master lineage. All five family
+original PNG copies and retain original-only master lineage. All eight family
 sheets support exact piece/variant and whole-sheet discussion.
 
 The [I01 sofa packet](../tactical/053-semantic-tileset-map/packets/I01-interior-sofas.md)
@@ -140,19 +143,31 @@ and [sheet delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-sofa-
 record independent source replay, adversarial checks and application validation.
 
 The [component/animation expansion](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-animation-expansion.md)
-adds three independently reviewed research packets: RB01's 25 floor/arch records,
-E03's 25 playground tube records and A01's nine animation frames (eight pixel
-states). These 59 records are registered with exact proposal/review pins and zero
-normalized coverage credit until explicit adapters are implemented. Room Builder
-retains a 176-pixel master/subfile shadow difference and weakened inset extensions;
-tubes separate continuation cuts from entrance mouths; animation source/GIF
-playback stays distinct from unknown game behavior. Research stays in the plan
-folder; the five delivered family sheets remain the owner-facing surface.
+contains RB01's 25 floor/arch records, E03's 25 playground tube records and A01's
+nine animation frames (eight pixel states). Explicit normalization now accounts
+for all 59, retaining exact source/review pins. Room Builder retains the
+176-pixel master/subfile shadow difference and weakened inset extensions. Tubes
+separate continuation cuts from entrance mouths. Animation source/GIF playback
+stays distinct from unknown game behavior. The
+[model implementation](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-animation-model.md)
+and [independent model review](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-animation-model-review.md)
+record the bounded validation and its limits.
 
-Next: normalize these three packet formats and add quiet sheets with supported
-assemblies and compact metadata. Keep open continuation windows distinct from
-closed objects, source-over tube recipes distinct from replacement recipes, and
-animation frames distinct from spatial components. The [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
+The three new sheets add 46 cards and 59 records. Floors/arches show six closed
+arrangements and two explicitly open path sections; tubes show five checked
+assemblies; doors show two manually started source demonstrations plus individual
+frame selection and exact frame notes. The two door strips are byte-for-byte
+committed source copies, so browsing needs no downloaded packs. Earlier family
+revisions and note targets are preserved. The
+[delivery record](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-family-delivery.md)
+and [independent presentation review](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-family-review.md)
+route implementation evidence. Whole-sheet comments remain available everywhere.
+
+Next: investigate another bounded set of unmapped themes and reconcile supplemental
+exports against the masters, using the same independent review and quiet-sheet
+workflow. Prioritize repeated families that can expose missed variants or assembly
+rules; unknown regions remain explicit in the coverage ledger. The
+[bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.
 The user authorized reasonable checkpoint commits. The broader plan remains active;
 these records cover a small part of the entire packs.

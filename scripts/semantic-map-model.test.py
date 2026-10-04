@@ -33,8 +33,8 @@ class SemanticModelTests(unittest.TestCase):
 
     def test_exact_accounting_composition_and_unknown_geometry(self):
         report = self.full_report
-        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (132, 112))
-        self.assertEqual(report['lineage'], {'direct': 101, 'composed': 9, 'derived': 20, 'original-only': 2})
+        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (191, 164))
+        self.assertEqual(report['lineage'], {'direct': 148, 'composed': 9, 'derived': 20, 'original-only': 2, 'subfile-only': 3, 'temporal-frame': 9})
         self.assertEqual(len(report['compositionsComparedToPinnedTargets']), 9)
         self.assertEqual(report['compositionsUnavailable'], [])
         self.assertEqual(report['variantDeltasVerified'], 27)
@@ -68,8 +68,8 @@ class SemanticModelTests(unittest.TestCase):
         self.assertTrue(M.review_applicability(review, review['proposalSha256'], review['memberRecords']))
         self.assertFalse(M.review_applicability(review, '0' * 64, review['memberRecords']))
         self.assertFalse(M.review_applicability(review, review['proposalSha256'], review['memberRecords'][:-1]))
-        self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews']))
-        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 112)
+        self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews'] if r['packetId'] not in M.EXPANSION_PACKETS))
+        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 164)
 
     def test_aliases_offgrid_occurrences_and_exceptions_preserved(self):
         records = {r['id']: r for r in self.model['sourceRecords']}
@@ -126,6 +126,18 @@ class SemanticModelTests(unittest.TestCase):
                 shutil.copyfile(M.ROOT / path, target)
             self.assertEqual(M.build_model(root), self.model)
             report = M.validate_model(self.model, root, committed_only=True)
+            expansion = report['componentAnimationValidation']
+            self.assertEqual(expansion['probeRastersVerified'], {'RB01': 16, 'E03': 8})
+            self.assertEqual(len(expansion['probeRastersUnavailable']), 2)
+            self.assertEqual(expansion['originalProbeComparisonsVerified'], 0)
+            self.assertEqual(len(expansion['originalProbeComparisonsUnavailable']), 3)
+            self.assertFalse(expansion['masterSubfileAlphaDifferenceVerified'])
+            self.assertEqual(expansion['GIFFramesVerified'], 0)
+            self.assertEqual(len(expansion['GIFDemonstrationsUnavailable']), 2)
+            self.assertEqual(expansion['temporalDeltasVerified'], 7)
+            self.assertEqual(expansion['pixelComparisonsVerified'], 10)
+            self.assertEqual(expansion['supplementalProbeRastersVerified'], 5)
+            self.assertTrue(all(r['id'] not in report['recordPixelsUnavailable'] for r in self.model['sourceRecords'] if r['packetId'] in M.EXPANSION_PACKETS))
             self.assertFalse(report['counterpartCorpusRechecked'])
             self.assertEqual(len(report['compositionsReplayOnly']), 8)
             self.assertEqual(report['compositionsUnavailable'], ['P03-38-normal'])
@@ -271,6 +283,91 @@ class SemanticModelTests(unittest.TestCase):
             r['originalEvidence']['shadowToken'] = [1, 2, 3, 4]
         for edit, message in [(assembly, 'I01 topology evidence differs'), (output, 'I01 assembly hash differs'),
                               (token, 'I01 shadow signature differs')]:
+            with self.subTest(edit=edit), self.assertRaisesRegex(ValueError, message):
+                M.validate_model(self.mutated(edit))
+
+    def test_previous_132_record_slice_is_byte_semantically_unchanged(self):
+        frozen = {'sourceRecords': 'bad1e8a8a7dc5b7e47d6e193ec16403e86107dfd5bd63b7ed2351f2aa08a6420',
+                  'proposals': '2debadf7fc78165280b85669735aee4b63bcddaa98427569da0ab3fb0ff10fb7',
+                  'relationships': '9341eff0e44e95f68a8e5500e8e2c4b69c9899e6869ffa655afd693180f38986',
+                  'reviews': '09f0138c855c79a83521d35c8f514acd9b689904d1357a85b78e4c10d27afbe1',
+                  'packets': '156ca59e3b68d701ba2f01486d6c1456754653cfdfc614d95e75ead9c9b8d598'}
+        for key, digest in frozen.items():
+            previous = [r for r in self.model[key] if r.get('packetId', r.get('id')) not in M.EXPANSION_PACKETS]
+            self.assertEqual(M.revision(previous), digest, key)
+
+    def test_component_probes_keep_closed_open_weakened_invalid_and_fixed_distinct(self):
+        relations = {r['id']: r for r in self.model['relationships']}
+        report = self.full_report['componentAnimationValidation']
+        self.assertEqual(report['probeRastersVerified'], {'RB01': 18, 'E03': 8})
+        self.assertEqual(report['originalProbeComparisonsVerified'], 3)
+        self.assertTrue(report['masterSubfileAlphaDifferenceVerified'])
+        self.assertEqual(report['pixelComparisonsVerified'], 10)
+        for probe, state in [('inset-square-native', 'proposed-valid-bounded-closed-motif'),
+                             ('inset-extension-3x3', 'topology-hypothesis-render-weakened'),
+                             ('L-continuation-window', 'proposed-valid-explicit-open-network-window'),
+                             ('stone-arch-body-three-rows', 'proposed-valid-fixed-body'),
+                             ('stone-arch-middle-row-omitted', 'unresolved-shortened-arch-alternative'),
+                             ('stone-arch-shadow-only', 'invalid-as-complete-standalone')]:
+            self.assertEqual(relations['RB01:assembly:' + probe]['originalEvidence']['topologyDisposition'], state)
+        shadow = relations['RB01:shadow-delta']['originalEvidence']
+        self.assertEqual((shadow['changedPixels'], shadow['changedRGBAValues']),
+                         (176, [{'subfile': [0, 0, 0, 25], 'master': [0, 0, 0, 48], 'pixels': 176}]))
+        records = {r['id']: r for r in self.model['sourceRecords']}
+        self.assertEqual([r['id'] for r in records.values() if r['primaryLineage'] == 'subfile-only'], ['RB01-A05', 'RB01-A07', 'RB01-A08'])
+        cross = records['E03-15']['topology']
+        self.assertEqual([p['edge'] for p in cross['openJoinEdges']], ['left', 'right'])
+        self.assertEqual(len(cross['externalEntrancesOrEnds']), 2)
+        for pid, count in [('RB01', 25), ('E03', 25), ('A01', 9)]:
+            review = next(r for r in self.model['reviews'] if r['packetId'] == pid)
+            self.assertEqual(len(review['recordDispositions']), count)
+        self.assertEqual(sum(r['kind'] == 'supplemental-component-review-probe' for r in relations.values()), 5)
+        self.assertEqual(report['supplementalProbeRastersVerified'], 5)
+
+    def test_room_builder_packed_offsets_preserve_nonprimary_exact_occurrences(self):
+        records = {r['id']: r for r in self.model['sourceRecords']}
+        p03 = records['RB01-P03']
+        self.assertTrue(any(r.get('aliasSourceBounds', {}).get('value') == [32, 48, 16, 16] for r in p03['references']))
+        a07 = records['RB01-A07']
+        self.assertEqual(sum('packedAliasEvidence' in ref for ref in a07['references']), 5)
+        def source_lineage(m):
+            r = next(r for r in m['sourceRecords'] if r['id'] == 'RB01-P03')
+            ref = next(ref for ref in r['references'] if ref.get('packedAliasEvidence', {}).get('originalSourceRect') == [32, 48, 16, 16])
+            ref['aliasSourceBounds']['value'] = [32, 16, 16, 16]
+        with self.assertRaisesRegex(ValueError, 'RB01 packed source lineage differs'):
+            M.validate_model(self.mutated(source_lineage))
+
+    def test_animation_temporal_identity_and_demonstration_contract(self):
+        records = [r for r in self.model['sourceRecords'] if r['packetId'] == 'A01']
+        proposals = [p for p in self.model['proposals'] if p['packetId'] == 'A01']
+        self.assertEqual((len(records), len(proposals), len({r['normalizedPixelSha256'] for r in records})), (9, 2, 8))
+        self.assertEqual(records[0]['duplicateFrameIds'], ['A01-06'])
+        self.assertEqual(records[5]['duplicateFrameIds'], ['A01-01'])
+        self.assertEqual(sum(len(r['occurrences']) for r in records), 8)
+        self.assertEqual(len({(o['sourceFile'], tuple(o['bounds']['value'])) for r in records for o in r['occurrences']}), 4)
+        self.assertTrue(all(r['primaryLineage'] == 'temporal-frame' for r in records))
+        self.assertTrue(all(all(v is None for v in p['gameplayPlayback'].values()) for p in proposals))
+        demos = [r['originalEvidence'] for r in self.model['relationships'] if r['kind'] == 'supporting-GIF-demonstration']
+        self.assertEqual([[f['durationMs'] for f in d['frames']] for d in demos], [[300, 100, 100, 100, 300], [500, 100, 100, 100]])
+        self.assertEqual([d['demonstrationCycleDurationMs'] for d in demos], [900, 800])
+        self.assertEqual(self.full_report['componentAnimationValidation']['GIFFramesVerified'], 9)
+        self.assertEqual(self.full_report['componentAnimationValidation']['temporalDeltasVerified'], 7)
+        scope = next(r['sourcePins'] for r in self.model['reviews'] if r['packetId'] == 'A01')
+        self.assertEqual(sum(p['path'].startswith('assets/') and p['path'].endswith('.png') for p in scope), 81)  # One of 82 PNGs is committed packed atlas.
+        self.assertEqual(sum(p['path'].endswith('.gif') for p in scope), 2)
+
+    def test_component_recipe_operation_port_and_temporal_tampering_rejected(self):
+        def operation(m):
+            next(r for r in m['relationships'] if r['id'] == 'E03:assembly:straight-two-mouths')['operation'] = 'rgba-overwrite'
+        def ports(m):
+            r = next(r for r in m['relationships'] if r['id'] == 'E03:assembly:isolated-cross')
+            r['originalEvidence']['portEvaluation']['unmatchedPorts'] = []
+        def alpha(m):
+            next(r for r in m['relationships'] if r['id'] == 'RB01:shadow-delta')['originalEvidence']['changedPixels'] = 0
+        def delta(m):
+            next(r for r in m['relationships'] if r['kind'] == 'temporal-sequence')['originalEvidence']['adjacentSourceFrameDeltas'][0]['changedPixels'] = 0
+        for edit, message in [(operation, 'E03 operation differs'), (ports, 'E03 finite port evidence differs'),
+                              (alpha, 'RB01 master/subfile shadow delta differs'), (delta, 'A01 temporal delta differs')]:
             with self.subTest(edit=edit), self.assertRaisesRegex(ValueError, message):
                 M.validate_model(self.mutated(edit))
 

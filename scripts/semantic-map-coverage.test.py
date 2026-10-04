@@ -104,7 +104,7 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(accepted[0]['recipe']['rowOffsets'], [0, 48, 16, 96, 32])
         self.assertEqual(len(self.ledger['gaps']['exteriorsResiduals']), 40)
         groups = {g['id']: g for g in self.ledger['sourceGroups']}
-        self.assertEqual(groups['interiors-animations']['stages']['investigated']['state'], 'no-evidence')
+        self.assertEqual(groups['interiors-animations']['stages']['investigated']['state'], 'partial')
         self.assertEqual(groups['exteriors-theme-singles']['pilotReferencedPNGPathCount'], 29)
 
     def test_coordinate_spaces_and_overlap_links_stay_distinct(self):
@@ -150,12 +150,12 @@ class CoverageTests(unittest.TestCase):
     def test_expansion_primary_lineage_supplemental_aliases_and_gaps(self):
         counts = self.ledger['accounting']
         self.assertEqual(counts['pilotSourceRecords'], 85)
-        self.assertEqual(counts['allNormalizedSourceRecords'], 132)
-        self.assertEqual(counts['allNormalizedProposalUnits'], 112)
-        self.assertEqual(counts['expansionPrimaryMasterLineageRecords'], {'exact-direct': 43, 'original-only': 2, 'counterpart-derived': 2})
-        self.assertEqual(counts['expansionNamedExportReferences'], 82)
-        self.assertEqual(counts['expansionSupplementalExactOccurrences'], 53)
-        self.assertEqual(counts['expansionCommittedIntegrationAliases'], 2)
+        self.assertEqual(counts['allNormalizedSourceRecords'], 191)
+        self.assertEqual(counts['allNormalizedProposalUnits'], 164)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords'], {'exact-direct': 90, 'original-only': 2, 'counterpart-derived': 2, 'subfile-only': 3, 'temporal-frame': 9})
+        self.assertEqual(counts['expansionNamedExportReferences'], 136)
+        self.assertEqual(counts['expansionSupplementalExactOccurrences'], 123)
+        self.assertEqual(counts['expansionCommittedIntegrationAliases'], 11)
         records = {r['id']: r for r in self.ledger['expandedRecords']}
         for rid in ['E01-05', 'E01-06']:
             self.assertEqual(records[rid]['lineage']['kind'], 'original-only')
@@ -172,10 +172,10 @@ class CoverageTests(unittest.TestCase):
         self.assertNotIn('interiors-theme-normal', self.ledger['gaps']['supplementalUnassignedGroups'])
         self.assertIn('interiors-theme-normal', self.ledger['gaps']['supplementalPartialGroups'])
         groups = {g['id']: g for g in self.ledger['sourceGroups']}
-        self.assertEqual(len(groups['exteriors-master']['expandedPrimaryMasterReferences']), 25)
-        self.assertEqual(len(groups['exteriors-master']['expandedRecordIds']), 25)
-        self.assertEqual(len(groups['committed-reference']['expandedRecordIds']), 25)
-        self.assertEqual(counts['expansionPrimaryMasterLineageRecords']['exact-direct'], 43)
+        self.assertEqual(len(groups['exteriors-master']['expandedPrimaryMasterReferences']), 55)
+        self.assertEqual(len(groups['exteriors-master']['expandedRecordIds']), 50)
+        self.assertEqual(len(groups['committed-reference']['expandedRecordIds']), 50)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords']['exact-direct'], 90)
         registration = next(r for r in self.ledger['registeredPackets'] if r['packetId'] == 'E01-outdoor-seating')
         self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'evidenced')
         self.assertNotIn('pending', registration['stages']['independentlyReviewed']['scope'])
@@ -205,8 +205,8 @@ class CoverageTests(unittest.TestCase):
             self.assertEqual(r['stages']['accepted']['state'], 'no-evidence')
             self.assertEqual(r['stages']['ownerFeedback']['state'], 'no-evidence')
         groups = {g['id']: g for g in self.ledger['sourceGroups']}
-        self.assertEqual(len(groups['interiors-master']['expandedPrimaryMasterReferences']), 18)
-        self.assertEqual(len(groups['interiors-master']['expandedRecordIds']), 18)
+        self.assertEqual(len(groups['interiors-master']['expandedPrimaryMasterReferences']), 20)
+        self.assertEqual(len(groups['interiors-master']['expandedRecordIds']), 20)
         self.assertNotIn('I01-19', groups['interiors-master']['expandedRecordIds'])
         reg = next(r for r in self.ledger['registeredPackets'] if r['packetId'] == 'I01-interior-sofas')
         self.assertTrue(reg['coverageCredit'])
@@ -228,22 +228,60 @@ class CoverageTests(unittest.TestCase):
         finally:
             target.write_bytes(before)
 
-    def test_reviewed_expansion_packets_await_explicit_normalization(self):
+    def test_component_animation_credit_has_explicit_units_and_no_completion(self):
         registrations = {r['packetId']: r for r in self.ledger['registeredPackets']}
-        for packet_id, count in [('RB01-room-builder-path-arch', 25),
-                                 ('E03-playground-tubes', 25), ('A01-animation', 9)]:
+        for packet_id, count, units in [('RB01-room-builder-path-arch', 25, 25),
+                                       ('E03-playground-tubes', 25, 25), ('A01-animation', 9, 2)]:
             registration = registrations[packet_id]
             self.assertEqual(len(registration['memberRecords']), count)
-            self.assertEqual(registration['assignmentState'], 'review-ready')
-            self.assertFalse(registration['coverageCredit'])
-            self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'registered-evidence')
+            self.assertTrue(registration['coverageCredit'])
+            self.assertEqual(registration['normalization']['sourceRecords'], count)
+            self.assertEqual(registration['normalization']['proposalUnits'], units)
+            self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'evidenced')
             self.assertEqual(registration['stages']['accepted']['state'], 'no-evidence')
-        self.assertEqual(self.ledger['accounting']['allNormalizedSourceRecords'], 132)
-        self.assertEqual(self.ledger['accounting']['allNormalizedProposalUnits'], 112)
-        queued = {r['key']: r for r in self.ledger['readyBoundedPackets']}
-        self.assertEqual(queued['room-builder-path-arch']['state'], 'review-ready')
-        self.assertEqual(queued['exteriors-playground-tubes']['state'], 'review-ready')
-        self.assertEqual(queued['supplemental-animation-reconciliation']['state'], 'partially-registered')
+        counts = self.ledger['accounting']
+        self.assertEqual((counts['allNormalizedSourceRecords'], counts['allNormalizedProposalUnits']), (191, 164))
+        self.assertEqual((counts['componentAnimationUnits']['A01TemporalFrames'], counts['componentAnimationUnits']['A01DistinctPixelStates']), (9, 8))
+        self.assertEqual(counts['componentAnimationUnits']['A01ActionSequenceUnits'], 2)
+        self.assertEqual(counts['originalPNGPaths'], 29449)
+        self.assertEqual(counts['expansionSourceCropReferences'], 170)
+        self.assertEqual(counts['expansionNamedExportReferences'], 136)
+        self.assertEqual(len(self.ledger['supplementalSupportingSources']), 2)
+        self.assertTrue(all(s['inventoryCredit'] is False and s['path'].endswith('.gif') for s in self.ledger['supplementalSupportingSources']))
+        groups = {g['id']: g for g in self.ledger['sourceGroups']}
+        self.assertEqual(len(groups['interiors-room-builder-master']['expandedRecordIds']), 22)
+        self.assertEqual(len(groups['interiors-room-builder-subfiles']['expandedRecordIds']), 25)
+        self.assertEqual(groups['interiors-animations']['stages']['investigated']['state'], 'partial')
+        self.assertEqual(groups['exteriors-animations']['stages']['investigated']['state'], 'no-evidence')
+        records = {r['id']: r for r in self.ledger['expandedRecords']}
+        for rid in ['RB01-A05', 'RB01-A07', 'RB01-A08']:
+            self.assertEqual(records[rid]['lineage']['kind'], 'subfile-only')
+            self.assertEqual(records[rid]['lineage']['rects'], [])
+            self.assertEqual(records[rid]['regionLinks'], [])
+        for rid in ['A01-01', 'A01-06']:
+            self.assertEqual(records[rid]['lineage']['kind'], 'temporal-frame')
+            self.assertEqual(records[rid]['lineage']['rects'], [[16, 3440, 16, 32]])
+        self.assertTrue(all(r['stages']['accepted']['state'] == 'no-evidence' for r in records.values()))
+        self.assertTrue(all(r['stages']['investigated']['state'] in ('partial', 'no-evidence') for r in self.ledger['regions']))
+
+    def test_new_packets_review_copy_pins_and_membership_fail_closed(self):
+        for path in ['packets/RB01-room-builder-path-arch.json', 'packets/RB01-room-builder-path-arch-review.md',
+                     'packets/E03-playground-tubes.json', 'packets/E03-playground-tubes-review.md',
+                     'packets/A01-animation.json', 'packets/A01-animation-review.md']:
+            self.assert_corruption_rejected(coverage.BASE + '/' + path)
+        self.assert_corruption_rejected('public/assets/semantic-sources/interiors-door-1.png')
+        self.assert_corruption_rejected('public/assets/semantic-sources/interiors-door-1-locked.png')
+        target = self.fixture / coverage.REGISTRY
+        before = target.read_bytes()
+        try:
+            registry = json.loads(before)
+            reg = next(r for r in registry['registrations'] if r['packetId'] == 'A01-animation')
+            reg['memberRecords'].pop()
+            target.write_bytes(coverage.encode(registry))
+            with self.assertRaisesRegex(ValueError, 'A01 registered/model membership mismatch'):
+                coverage.build(self.fixture)
+        finally:
+            target.write_bytes(before)
 
     def test_extensible_registration_pins_members_and_review_without_credit(self):
         target = self.fixture / coverage.REGISTRY

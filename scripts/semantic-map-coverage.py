@@ -18,7 +18,7 @@ BASE = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = BASE + '/coverage-ledger.json'
 REGISTRY = BASE + '/mapping-registry.json'
 MODEL = BASE + '/semantic-model.json'
-MODEL_PIN = 'c2a0ad9364cf99f0cc6d6e50f772335b6915c4c40187dab1a331608973b6f118'
+MODEL_PIN = '530352165c513d0731e1fe02a645b2a7a29a78fbdb1830f495e02b758fa31123'
 I01_PROPOSAL_PIN = '75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df'
 I01_REVIEW_PIN = '1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb'
 E01_PROPOSAL_PIN = '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b'
@@ -156,6 +156,91 @@ def registrations(evidence, region_ids, group_ids, source_ref):
     return result
 
 
+COMPONENT_CONTRACTS = {
+    'RB01-room-builder-path-arch': ('RB01', '88f2ebcf7f7509e3da1337f9e1bd2dde087f6b342e245f478fb94ddc07b2b6c4', '31461d71cb25c1fa5eb9c4287dc2df4f2ca491a6e26367a21d69153f22821601', 'RB01-room-builder-v1', 25, 25),
+    'E03-playground-tubes': ('E03', '4370a63a1308b9ccc844029bfe077bb304faac2e62826923c3ba5a685508143e', 'ab901c1a2859661332b15187060a3c38d3ad1e7d04ed69656128e83f49f8df88', 'E03-playground-tubes-v1', 25, 25),
+    'A01-animation': ('A01', 'f0e5f627c4e8fe27c5de9c83c5b2ba98d60f273fd7361be07a914563a49e9f0c', '7ee15c2663c88f4e7aded23d9f8023b8fc0203264f77527617fbd265fbfe9dce', 'A01-animation-v1', 9, 2),
+}
+PACKET_FILES = {'E01': 'E01-outdoor-seating', 'I01': 'I01-interior-sofas',
+                **{contract[0]: name for name, contract in COMPONENT_CONTRACTS.items()}}
+
+
+def component_animation_expansion(evidence, source_ref, masters):
+    """Credit explicit model records only; no label joins or whole-domain completion."""
+    model = evidence.json(MODEL, MODEL_PIN)
+    model_files = {s['path']: s for s in model['sourceFiles']}
+    result = []
+    for name, (pid, proposal_pin, review_pin, adapter, count, units) in COMPONENT_CONTRACTS.items():
+        path, review_path = BASE + '/packets/' + name + '.json', BASE + '/packets/' + name + '-review.md'
+        packet = evidence.json(path, proposal_pin)
+        text = evidence.read(review_path, review_pin).decode()
+        normalized = [r for r in model['sourceRecords'] if r['packetId'] == pid]
+        proposals = [p for p in model['proposals'] if p['packetId'] == pid]
+        review = next(r for r in model['reviews'] if r['packetId'] == pid)
+        if (len(normalized), len(proposals)) != (count, units) or adapter not in model['versionedAdapters']['extensions']:
+            raise ValueError(pid + ' explicit adapter/accounting mismatch')
+        if proposal_pin not in text or review['proposalSha256'] != proposal_pin or review['reviewSha256'] != review_pin or review['memberRecords'] != [r['id'] for r in normalized]:
+            raise ValueError(pid + ' normalized review scope differs')
+        table = {s['id']: s for s in packet['sources']}
+        for item in table.values():
+            if not item['path'].endswith('.gif'):
+                dims = item.get('size', item.get('dimensions'))
+                source_ref(item['path'], item.get('pngSHA256', item.get('fileSHA256')), [0, 0, *dims])
+        master = 'room-builder' if pid == 'RB01' else 'exteriors' if pid == 'E03' else 'interiors'
+        candidates = {c['id']: c for c in packet['candidates']}
+        for record in normalized:
+            rid = record['id']
+            if record['originalEvidence'] != candidates[rid]:
+                raise ValueError(pid + ' normalized source evidence differs')
+            refs, packed, supplemental, master_refs, committed, integration = [], [], [], [], [], []
+            for ref in record['references']:
+                pin = model_files[ref['sourceFile']]
+                if ref['bounds']['coordinateSpace'] == 'packed-atlas-pixels':
+                    evidence.read(pin['path'], pin['sha256'])
+                    packed.append({'path': pin['path'], 'sha256': pin['sha256'], 'rect': ref['bounds']['value'],
+                                   'coordinateSpace': 'packed-atlas-pixels', 'originalEvidence': ref['packedAliasEvidence']})
+                else:
+                    refs.append(source_ref(pin['path'], pin['sha256'], ref['bounds']['value']))
+            for ref in record['occurrences']:
+                pin = model_files[ref['sourceFile']]
+                occurrence = source_ref(pin['path'], pin['sha256'], ref['bounds']['value'])
+                if pin['path'] in (masters[master]['path'], masters[master].get('alias')):
+                    master_refs.append(source_ref(masters[master]['path'], masters[master]['sha256'], ref['bounds']['value']))
+                    if pin['path'] != masters[master]['path']:
+                        committed.append(occurrence)
+                else:
+                    supplemental.append(occurrence)
+                if ref.get('aliasFile'):
+                    alias = model_files[ref['aliasFile']]
+                    evidence.read(alias['path'], alias['sha256'])
+                    committed.append(source_ref(alias['path'], alias['sha256'], ref['bounds']['value']))
+            for ref in record['integrationAliases']:
+                pin = model_files[ref['sourceFile']]
+                origin = model_files[ref['originSourceFile']]
+                if pin['sha256'] != origin['sha256'] or pin['dimensions'] != origin['dimensions']:
+                    raise ValueError(pid + ' integration copy differs')
+                evidence.read(pin['path'], pin['sha256'])
+                integration.append({'path': pin['path'], 'sha256': pin['sha256'], 'rect': ref['bounds']['value'],
+                                    'coordinateSpace': 'source-file-pixels', 'originalSourcePath': origin['path'],
+                                    'scopeGroup': 'committed-integration-copy-outside-frozen-inventory'})
+            kind = 'temporal-frame' if pid == 'A01' else 'exact-direct' if master_refs else 'subfile-only'
+            if record['primaryLineage'] != ('temporal-frame' if pid == 'A01' else 'direct' if master_refs else 'subfile-only'):
+                raise ValueError(pid + ' primary lineage differs')
+            result.append({'id': rid, 'packet': pid, 'sources': refs, 'packedAliases': packed,
+                           'normalizedPixelSHA256': record['normalizedPixelSha256'], 'frameDimensions': record['frameDimensions'],
+                           'lineage': {'kind': kind, 'master': master, 'rects': [r['rect'] for r in master_refs],
+                                       'contextRects': [], 'scope': 'Static correspondence is separate from temporal-strip lineage' if pid == 'A01' else 'Exact original-master cells only; subfile shadow difference is not equality'},
+                           'supplementalOccurrences': supplemental, 'committedMasterAliases': committed,
+                           'integrationAliases': integration, 'regionLinks': [],
+                           'topology': candidates[rid].get('topology', packet.get('topology')),
+                           'independentDisposition': record['independentDisposition'],
+                           'stages': {'surveyed': stage('context-only', 'survey does not individually segment this crop'),
+                                      'investigated': stage('evidenced', 'explicit bounded ' + pid + ' record', [path, MODEL], [rid]),
+                                      'independentlyReviewed': stage('evidenced', 'exact per-record disposition; finite probe limits retained', [review_path], [rid]),
+                                      'ownerFeedback': stage(), 'accepted': stage()}})
+    return result
+
+
 def e01_expansion(evidence, source_ref, masters):
     path = BASE + '/packets/E01-outdoor-seating.json'
     review_path = BASE + '/packets/E01-outdoor-seating-review.md'
@@ -164,7 +249,7 @@ def e01_expansion(evidence, source_ref, masters):
     if E01_PROPOSAL_PIN not in review_text:
         raise ValueError('E01 review applicability mismatch')
     model = evidence.json(MODEL, MODEL_PIN)
-    if model.get('versionedAdapters', {}).get('extensions') != ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1']:
+    if model.get('versionedAdapters', {}).get('extensions') != ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1']:
         raise ValueError('Unsupported normalized extension adapters')
     model_records = {r['id']: r for r in model['sourceRecords'] if r['packetId'] == 'E01'}
     model_files = {r['path']: r for r in model['sourceFiles']}
@@ -476,7 +561,7 @@ def build(root=REPO):
                                    'Master/sheet path reference never means the whole PNG is semantically investigated.',
                                    'Unreferenced files remain unassigned even when a duplicate or packed alias is known.']})
 
-    expanded = e01_expansion(evidence, source_ref, masters) + i01_expansion(evidence, source_ref, masters)
+    expanded = e01_expansion(evidence, source_ref, masters) + i01_expansion(evidence, source_ref, masters) + component_animation_expansion(evidence, source_ref, masters)
     for record in expanded:
         for region in regions:
             if region['master'] == record['lineage']['master']:
@@ -492,15 +577,15 @@ def build(root=REPO):
             region['stages']['investigated']['state'] = 'partial'
             region['stages']['investigated']['scope'] = 'listed pilot/expansion records only'
             region['stages']['investigated']['recordIds'].extend(linked)
-            region['stages']['investigated']['evidence'].extend(sorted({BASE + '/packets/' + ('E01-outdoor-seating.json' if r['packet'] == 'E01' else 'I01-interior-sofas.json') for r in expanded if r['id'] in linked}))
+            region['stages']['investigated']['evidence'].extend(sorted({BASE + '/packets/' + (PACKET_FILES[r['packet']] + '.json') for r in expanded if r['id'] in linked}))
             region['assignment']['state'] = 'partial-mapped-records'
-        region['expandedIndependentReviewEvidence'] = sorted({BASE + '/packets/' + ('E01-outdoor-seating-review.md' if r['packet'] == 'E01' else 'I01-interior-sofas-review.md') for r in expanded if r['id'] in linked})
+        region['expandedIndependentReviewEvidence'] = sorted({BASE + '/packets/' + (PACKET_FILES[r['packet']] + '-review.md') for r in expanded if r['id'] in linked})
     for group in groups:
         group_refs = [(r, ref) for r in expanded for ref in r['sources'] + r['supplementalOccurrences'] + r['committedMasterAliases'] if ref['scopeGroup'] == group['id']]
         primary_refs = []
-        if group['id'] in ('exteriors-master', 'interiors-master'):
+        if group['id'] in ('exteriors-master', 'interiors-master', 'interiors-room-builder-master'):
             for record in expanded:
-                if group['id'] != record['lineage']['master'] + '-master':
+                if group['id'] != ('interiors-room-builder-master' if record['lineage']['master'] == 'room-builder' else record['lineage']['master'] + '-master'):
                     continue
                 master = masters[record['lineage']['master']]
                 for rect in record['lineage']['rects']:
@@ -515,14 +600,14 @@ def build(root=REPO):
         group['expandedReferencedPNGPathCount'] = len(paths)
         group['expandedSupplementalOccurrenceCount'] = sum(len([ref for ref in r['supplementalOccurrences'] if ref['scopeGroup'] == group['id']]) for r in expanded)
         if ids:
-            group['stages']['investigated'] = stage('partial', 'listed pilot/expansion references only; no whole-PNG completion', group['stages']['investigated']['evidence'] + sorted({BASE + '/packets/' + ('E01-outdoor-seating.json' if r['packet'] == 'E01' else 'I01-interior-sofas.json') for r, ref in group_refs}), group['pilotRecordIds'] + ids)
-            group['stages']['independentlyReviewed'] = stage('related-evidence', 'listed survey/pilot/expansion records only', group['stages']['independentlyReviewed']['evidence'] + sorted({BASE + '/packets/' + ('E01-outdoor-seating-review.md' if r['packet'] == 'E01' else 'I01-interior-sofas-review.md') for r, ref in group_refs}))
+            group['stages']['investigated'] = stage('partial', 'listed pilot/expansion references only; no whole-PNG completion', group['stages']['investigated']['evidence'] + sorted({BASE + '/packets/' + (PACKET_FILES[r['packet']] + '.json') for r, ref in group_refs}), group['pilotRecordIds'] + ids)
+            group['stages']['independentlyReviewed'] = stage('related-evidence', 'listed survey/pilot/expansion records only', group['stages']['independentlyReviewed']['evidence'] + sorted({BASE + '/packets/' + (PACKET_FILES[r['packet']] + '-review.md') for r, ref in group_refs}))
             group['assignment']['state'] = 'partial-mapped-records'
 
     registered = registrations(evidence, {r['id'] for r in regions}, {g['id'] for g in groups}, source_ref)
     for registration in registered:
         contracts = {'E01-outdoor-seating': ('E01', E01_PROPOSAL_PIN, E01_REVIEW_PIN, 'E01-outdoor-seating-v1', 27, 27),
-                     'I01-interior-sofas': ('I01', I01_PROPOSAL_PIN, I01_REVIEW_PIN, 'I01-interior-sofas-v1', 20, 18)}
+                     'I01-interior-sofas': ('I01', I01_PROPOSAL_PIN, I01_REVIEW_PIN, 'I01-interior-sofas-v1', 20, 18), **COMPONENT_CONTRACTS}
         if registration['packetId'] in contracts:
             pid, proposal_pin, review_pin, adapter, record_count, proposal_count = contracts[registration['packetId']]
             members = [r['id'] for r in expanded if r['packet'] == pid]
@@ -564,19 +649,22 @@ def build(root=REPO):
             'accounting': {'surveyWindows': len(regions), 'surveyWindowsByMaster': dict(Counter(r['master'] for r in regions)),
                            'inventoryGroups': len(groups), 'originalPNGPaths': len(originals),
                            'pilotSourceRecords': len(records), 'pilotProposalUnits': 67,
-                           'expandedSourceRecords': len(expanded), 'expandedProposalUnits': 45,
+                           'expandedSourceRecords': len(expanded), 'expandedProposalUnits': 97,
                            'allNormalizedSourceRecords': len(records) + len(expanded),
-                           'allNormalizedProposalUnits': 112,
-                           'expansionPacketAccounting': {pid: {'sourceRecords': sum(r['packet'] == pid for r in expanded), 'proposalUnits': units} for pid, units in [('E01', 27), ('I01', 18)]},
+                           'allNormalizedProposalUnits': 164,
+                           'expansionPacketAccounting': {pid: {'sourceRecords': sum(r['packet'] == pid for r in expanded), 'proposalUnits': units} for pid, units in [('E01', 27), ('I01', 18), ('RB01', 25), ('E03', 25), ('A01', 2)]},
                            'expansionPackedAliasReferences': sum(len(r.get('packedAliases', [])) for r in expanded),
                            'expansionPrimaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in expanded)),
-                           'expansionNamedExportReferences': sum(len(r['sources']) for r in expanded),
+                           'expansionNamedExportReferences': sum(len(r['sources']) for r in expanded if r['packet'] in ('E01', 'I01', 'E03')),
+                           'expansionSourceCropReferences': sum(len(r['sources']) for r in expanded),
                            'expansionSupplementalExactOccurrences': sum(len(r['supplementalOccurrences']) for r in expanded),
                            'expansionCommittedIntegrationAliases': sum(len(r['integrationAliases']) for r in expanded),
                            'primaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in records)),
                            'explicitOwnerAcceptedCompositionExamples': 3,
+                           'componentAnimationUnits': {'sourceRecords': 59, 'proposalUnits': 52, 'RB01ComponentUnits': 25, 'E03NamedComponentUnits': 25, 'A01ActionSequenceUnits': 2, 'A01TemporalFrames': 9, 'A01DistinctPixelStates': 8, 'A01InventoriedPNGSourcePaths': 82, 'A01SupportingGIFSourcePathsOutsideInventory': 2},
                            'semanticCompletion': 'unknown; no exhaustive object/family denominator',
                            'countsAreNot': ['unique objects', 'completed-source percentage', 'human-approved source members']},
+            'supplementalSupportingSources': [{'path': s['path'], 'sha256': s['sha256'], 'role': s['inventoryRole'], 'inventoryCredit': False} for s in evidence.json(MODEL, MODEL_PIN)['sourceFiles'] if s.get('inventoryRole') == 'supporting-GIF-outside-PNG-inventory'],
             'regions': regions, 'sourceGroups': groups, 'pilotRecords': records, 'expandedRecords': expanded, 'registeredPackets': registered, 'acceptanceScopes': [acceptance],
             'gaps': {'individualSemantics': 'Every master region retains unsegmented/unassigned content beyond explicitly linked pilot records; no region is complete.',
                      'exteriorsResiduals': [r['id'] for r in regions if r['role'] == 'residual-accounting-window'],
