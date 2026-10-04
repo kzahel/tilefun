@@ -1,0 +1,200 @@
+{
+  "identity": "deer-draft-v1-drawing-03",
+  "species": "adult white-tailed doe",
+  "palette": {
+    "K": "#574031",
+    "S": "#806044",
+    "B": "#ad8050",
+    "H": "#cfa16b",
+    "L": "#dfc69b",
+    "C": "#efe2c2",
+    "E": "#28241f",
+    "P": "#423b32"
+  },
+  "stylization": [
+    "Warm summer coat with broad upper-surface light and a restrained underside shadow.",
+    "White throat/muzzle and tail underside, no antlers on this adult doe.",
+    "Full head and ear clusters remain rigid throughout walking.",
+    "Front ears deliberately extend one pixel beyond the torso, following the independent ear hulls.",
+    "One-pixel cannon bones, two-pixel cloven hooves; near and far ground depths come from independent bpy projection."
+  ],
+  "bodies": {
+    "left": {
+      "pixels": [
+        "...KK......KKKKK....",
+        "..KHBK...KHHHHHHKK..",
+        "..KHBKKKKHHHBBBBBHK.",
+        "..KHBBHHHHBBBBBBBBHK",
+        "..KLBHBBBBBBBBBBBBBK",
+        "..KCLBBBBBBBBBBBBBSK",
+        "...KCLBBBBBBBBBBBSSK",
+        "....KCLSSSSSSSSSSSK.",
+        ".....KCCLLLLLLLSSK..",
+        "......KKKKKKKKKKK..."
+      ],
+      "offset": [
+        -10,
+        -5
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -9,
+        -5
+      ]
+    },
+    "down": {
+      "pixels": [
+        "...KKK...",
+        "..KHHHK..",
+        ".KHHHBBK.",
+        "KHHHHBBBK",
+        "KHHBBBBBK",
+        "KHBBBBBSK",
+        "KHBBBBBSK",
+        "KHBBBBBSK",
+        "KHBBBBBSK",
+        "KBBBBBSSK",
+        ".KBBBSSK.",
+        ".KBSSSSK.",
+        "..KSSSK..",
+        "...KKK..."
+      ],
+      "offset": [
+        -4,
+        -8
+      ]
+    },
+    "up": {
+      "pixels": [
+        "...KKK...",
+        "..KHHHK..",
+        "..KHBK...",
+        "..KHBK...",
+        "..KHBK...",
+        ".KHHBBK..",
+        "KHHHHBBK.",
+        "KHHHBBBSK",
+        "KHHBBBBBK",
+        "KHHBBBBBK",
+        "KHBBBBBSK",
+        "KHBBBBBSK",
+        "KHBBBBBSK",
+        "KHBBBBSSK",
+        "KBBBBBSSK",
+        ".KBBSSSK.",
+        "..KSSSK..",
+        "...KKK..."
+      ],
+      "offset": [
+        -4,
+        -13
+      ]
+    }
+  },
+  "heads": {
+    "left": {
+      "pixels": [
+        "........K....",
+        ".......KHK...",
+        ".......KCK...",
+        ".......KCK...",
+        ".......KCK.K.",
+        ".......KBKKSK",
+        "......KHHHBK.",
+        ".....KHLBBBBK",
+        "...KKHCELBBSK",
+        ".KKBBBBBBSSK.",
+        "EKCLBBSSSSK..",
+        ".KCCSSKKKK...",
+        "..KKKK......."
+      ],
+      "offset": [
+        -7,
+        -8
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -6,
+        -8
+      ]
+    },
+    "down": {
+      "pixels": [
+        ".K.......K.",
+        "KHK.....KHK",
+        "KBCK...KCBK",
+        ".KBBK.KBBK.",
+        "..KHHHHHK..",
+        "...KHHHK...",
+        "..KLEBELK..",
+        "...KBBBK...",
+        "...KLCLK...",
+        "....KEK....",
+        "....KCK....",
+        ".....K....."
+      ],
+      "offset": [
+        -5,
+        -6
+      ]
+    },
+    "up": {
+      "pixels": [
+        ".K.....K.",
+        "KHK...KHK",
+        "KBBK.KBBK",
+        ".KBK.KBK.",
+        "..KHHHK..",
+        "..KHBBSK.",
+        "..KBBBSK.",
+        "...KSSK..",
+        "....KK..."
+      ],
+      "offset": [
+        -4,
+        -5
+      ]
+    }
+  },
+  "hooves": {
+    "near": {
+      "pixels": [
+        "PP",
+        "EP"
+      ],
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    "far": {
+      "pixels": [
+        "SS",
+        "PP"
+      ],
+      "offset": [
+        -1,
+        0
+      ]
+    },
+    "rear": {
+      "pixels": [
+        "SP",
+        "PP"
+      ],
+      "offset": [
+        -1,
+        0
+      ]
+    }
+  },
+  "tail": {
+    "contourWidth": 3,
+    "whiteWidth": 2,
+    "tipWidth": 1
+  }
+}

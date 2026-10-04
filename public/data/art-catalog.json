@@ -1356,6 +1356,276 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-fox-pilot-v1",
+      "name": "wildlife v2 fox pilot v1",
+      "image": "demos/wildlife-v2/fox/pilot-v1/sheet.png",
+      "width": 816,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-fox-pilot-v2",
+      "name": "wildlife v2 fox pilot v2",
+      "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
+      "width": 816,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-elephant-pilot-v1",
+      "name": "wildlife v2 elephant pilot v1",
+      "image": "demos/wildlife-v2/elephant/pilot-v1/sheet.png",
+      "width": 2352,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-elephant-pilot-v2",
+      "name": "wildlife v2 elephant pilot v2",
+      "image": "demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+      "width": 2352,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-rabbit-pilot-v1",
+      "name": "wildlife v2 rabbit pilot v1",
+      "image": "demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-giraffe-draft-v1",
+      "name": "wildlife v2 giraffe draft v1",
+      "image": "demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+      "width": 3600,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mallard-duck-draft-v1",
+      "name": "wildlife v2 mallard duck draft v1",
+      "image": "demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "width": 1488,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-robin-draft-v1",
+      "name": "wildlife v2 robin draft v1",
+      "image": "demos/wildlife-v2/robin/draft-v1/sheet.png",
+      "width": 736,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-fish-draft-v1",
+      "name": "wildlife v2 fish draft v1",
+      "image": "demos/wildlife-v2/fish/draft-v1/sheet.png",
+      "width": 720,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-robin-draft-v2",
+      "name": "wildlife v2 robin draft v2",
+      "image": "demos/wildlife-v2/robin/draft-v2/sheet.png",
+      "width": 736,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-fish-draft-v2",
+      "name": "wildlife v2 fish draft v2",
+      "image": "demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "width": 720,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ant-draft-v1",
+      "name": "wildlife v2 ant draft v1",
+      "image": "demos/wildlife-v2/ant/draft-v1/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-king-cobra-draft-v1",
+      "name": "wildlife v2 king cobra draft v1",
+      "image": "demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "width": 1440,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ant-draft-v2",
+      "name": "wildlife v2 ant draft v2",
+      "image": "demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-frog-draft-v1",
+      "name": "wildlife v2 frog draft v1",
+      "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "width": 1104,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-kangaroo-draft-v1",
+      "name": "wildlife v2 kangaroo draft v1",
+      "image": "demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "width": 1824,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-penguin-draft-v1",
+      "name": "wildlife v2 penguin draft v1",
+      "image": "demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-harbor-seal-draft-v1",
+      "name": "wildlife v2 harbor seal draft v1",
+      "image": "demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "width": 2208,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-manta-ray-draft-v1",
+      "name": "wildlife v2 manta ray draft v1",
+      "image": "demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "width": 3024,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cat-draft-v1",
+      "name": "wildlife v2 cat draft v1",
+      "image": "demos/wildlife-v2/cat/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dog-draft-v1",
+      "name": "wildlife v2 dog draft v1",
+      "image": "demos/wildlife-v2/dog/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-deer-draft-v1",
+      "name": "wildlife v2 deer draft v1",
+      "image": "demos/wildlife-v2/deer/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cow-draft-v1",
+      "name": "wildlife v2 cow draft v1",
+      "image": "demos/wildlife-v2/cow/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sheep-draft-v1",
+      "name": "wildlife v2 sheep draft v1",
+      "image": "demos/wildlife-v2/sheep/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horse-draft-v1",
+      "name": "wildlife v2 horse draft v1",
+      "image": "demos/wildlife-v2/horse/draft-v1/sheet.png",
+      "width": 2000,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-piglet-draft-v1",
+      "name": "wildlife v2 piglet draft v1",
+      "image": "demos/wildlife-v2/piglet/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-goat-draft-v1",
+      "name": "wildlife v2 goat draft v1",
+      "image": "demos/wildlife-v2/goat/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

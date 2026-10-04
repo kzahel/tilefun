@@ -1,6 +1,6 @@
 # Wildlife source checkpoint
 
-This bank contains 16 production-reviewed drafts, not human approvals or game
+This bank contains 22 retained drafts, not human approvals or game
 integration. See [the wildlife topic](../../docs/topics/wildlife.md) for projection,
 motion, review and storage policy. The dated source checkpoint records exact
 committed file hashes and the checksum of the separate evidence archive.
@@ -30,14 +30,23 @@ before finishing. Pixel masters for cat, dog, harbor seal and manta ray already
 contain complete final frames; all four sheets were reconstructed byte-for-byte
 in scratch. Cross-platform reproduction of all revisions is not yet certified.
 
-Generated GIFs, guide renders/JSON, contact sheets, scene comparisons and browser
-captures are outside this commit. Existing candidate receipts still pin those
-files; their exact bytes remain in a separate checksum-addressed local archive.
+Native sheet, scene and contact PNGs for registered candidates are the small
+committed review render bank. Generated GIFs, guide renders/JSON, enlarged
+comparisons and browser captures stay outside Git. Existing candidate receipts
+still pin those files; their exact bytes remain in a separate checksum-addressed
+local archive.
 The dated checkpoint records its filename and full SHA-256, not a machine path.
 The archive is a local persistent backup, not a remote distribution service.
 
-Existing preview pages require that evidence to be restored before they can
-display their scene backgrounds and previews. A plain source checkout should
-not be treated as a complete Workshop preview deployment. Review integration
-and a portable archive hydration command remain follow-up work. The coordinator
-stages explicit source paths; there is no blanket PNG or JSON ignore rule.
+Normal builds and the gallery use committed render inputs. Human feedback requires
+every original pinned artifact, including animation evidence, both in the browser
+and on the server at submission time. Missing or changed evidence blocks feedback.
+The cleanup checkpoint records the archive containing all retained, superseded and
+blocked drafts. Restore it with `python scripts/wildlife/restore-evidence.py ARCHIVE`;
+use `--verify-only` to validate without writing. The command verifies the full
+archive and refuses to overwrite differing files. Obtain the archive separately;
+it is a local backup, not available from a Git clone.
+
+Production remains stopped. Only repairs of existing frozen-torso walks are in
+scope; committing these sources does not approve their motion or authorize new
+animals. Changed review renderer source produces fresh pending fingerprints.

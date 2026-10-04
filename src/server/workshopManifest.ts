@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { CHARACTERS } from "../characters/CharacterCatalog.js";
+import wildlifeReviews from "../wildlife/reviews.json" with { type: "json" };
 import type { WorkshopManifest } from "../workshop/WorkshopTypes.js";
 
 /** Broad render inputs are intentional: renderer/physics edits must reopen affected
@@ -27,6 +28,13 @@ export async function workshopInputDigest(root = ".") {
       !["src/art/buildings.ts", "src/art/ArtNoteInbox.ts"].includes(p),
   );
   await walk("public/assets", (p) => p.endsWith(".png") || p.endsWith(".json"));
+  // Only registered wildlife affects review freshness; unrelated draft authoring
+  // must not invalidate exact existing candidates or race manifest generation.
+  for (const draft of wildlifeReviews)
+    files.push(
+      ...[draft.sheet, draft.scene, draft.contact].map((sheet) => `public/${sheet.image}`),
+    );
+  files.push("public/demos/wildlife-v2/index.html", "public/demos/wildlife-v2/reviews.json");
   files.push(...CHARACTERS.map((c) => `public/${c.image}`));
   files.push(
     "public/data/art-catalog.json",
@@ -43,6 +51,7 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/CharacterCandidates.ts",
     "src/workshop/FamilySheetCandidates.ts",
     "public/data/family-sheets.json",
+    "src/workshop/WildlifeCandidates.ts",
     "docs/research/vehicle-source-audit.json",
   );
   const hash = createHash("sha256");

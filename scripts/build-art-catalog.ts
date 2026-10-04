@@ -35,6 +35,8 @@ import {
 import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { composeStreetStarterSurface } from "../src/road/StreetStarterSurface.js";
+import wildlifeReviews from "../src/wildlife/reviews.json" with { type: "json" };
+import type { WildlifeReview } from "../src/workshop/WildlifeCandidates.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
 
 function files(dir: string): string[] {
@@ -107,6 +109,9 @@ const imageMap = new Map<string, string>([
   ...graph.allSheets.map((s) => [s.sheetKey, s.assetPath] as [string, string]),
   ...SPRITE_MANIFEST.map((s) => [s.key, s.path] as [string, string]),
   ...CHARACTERS.map((c) => [c.sheetKey, c.image] as [string, string]),
+  ...(wildlifeReviews as WildlifeReview[]).map(
+    (d) => [d.sheet.id, d.sheet.image] as [string, string],
+  ),
 ]);
 // Browse every extracted autotile, including those not currently registered with BlendGraph.
 for (const path of files("public/assets/tilesets").filter((p) => /me-autotile-\d+\.png$/.test(p))) {

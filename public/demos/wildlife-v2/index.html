@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tilefun · Wildlife pilots</title>
+<style>
+body{margin:0;background:#19241f;color:#f4eddd;font:16px system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:28px}a{color:#a4e7c3}h1{font-size:28px}#drafts{display:grid;gap:24px}article{padding:20px;background:#26392e;border-radius:12px}img{image-rendering:pixelated;max-width:100%;height:auto;display:block;background:#879b82;margin:12px 0}p{line-height:1.5}nav{display:flex;gap:24px}
+</style>
+<main>
+<nav><a href="../../workshop.html">Workshop</a><a href="../../">Game</a></nav>
+<h1>Wildlife pilots</h1>
+<p>New animals shown at their native pixel scale beside the Explorer and Modern Exteriors scenery. These are drafts awaiting human review.</p>
+<section id="drafts" aria-label="Animal drafts"></section>
+<script type="module">
+const host=document.querySelector('#drafts');
+try {
+ const response=await fetch('./reviews.json');
+ if(!response.ok)throw new Error('The pilot gallery is still being prepared.');
+ const drafts=await response.json();
+ for(const d of drafts){
+  const article=document.createElement('article'),h=document.createElement('h2'),im=document.createElement('img'),play=document.createElement('a'),review=document.createElement('a');
+  h.textContent=d.name;im.src=`../../${d.scene.image}`;im.alt=`${d.name} beside the Explorer in all four directions`;
+  play.textContent='Play movement and actions';play.href=d.galleryUrl;
+  review.textContent='Review exact draft';review.href=`../../workshop.html#/review/${encodeURIComponent(`pattern:wildlife-v2-${d.id}`)}`;
+  const nav=document.createElement('nav');nav.append(play,review);article.append(h,im,nav);host.append(article);
+ }
+ if(!drafts.length)host.textContent='Supervised pilots are being prepared.';
+}catch(error){host.textContent=error.message;}
+</script>
+</main>
+</html>

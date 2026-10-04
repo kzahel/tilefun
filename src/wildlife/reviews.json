@@ -1,0 +1,2189 @@
+[
+  {
+    "id": "fox-pilot-v1",
+    "animalId": "fox",
+    "revision": "pilot-v1",
+    "name": "Red fox · initial pilot, revision in progress",
+    "batchId": "wildlife-v2-supervised-01",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/fox/pilot-v1/",
+    "sheet": {
+      "id": "wildlife-v2-fox-pilot-v1",
+      "name": "Red fox · initial pilot, revision in progress sheet",
+      "image": "demos/wildlife-v2/fox/pilot-v1/sheet.png",
+      "width": 816,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725",
+      "source": "art-source/wildlife-v2/fox/pilot-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-fox-pilot-v1-scene",
+      "name": "Red fox · initial pilot, revision in progress -scene",
+      "image": "demos/wildlife-v2/fox/pilot-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "12bb95ece8026d50196cef4e34a7c7b904ea76a7bc0ccb974384fde09a1c0de1",
+      "source": "art-source/wildlife-v2/fox/pilot-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-fox-pilot-v1-contact",
+      "name": "Red fox · initial pilot, revision in progress -contact",
+      "image": "demos/wildlife-v2/fox/pilot-v1/contact-sheet-native.png",
+      "width": 816,
+      "height": 232,
+      "tileSize": 16,
+      "fingerprint": "603535afa768c464402471efdd849e36e8eacb72fdb43d6d9328bddbb95c2659",
+      "source": "art-source/wildlife-v2/fox/pilot-v1"
+    },
+    "preview": "demos/wildlife-v2/fox/pilot-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/sheet.png",
+        "sha256": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/scene-native.png",
+        "sha256": "12bb95ece8026d50196cef4e34a7c7b904ea76a7bc0ccb974384fde09a1c0de1"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/contact-sheet-native.png",
+        "sha256": "603535afa768c464402471efdd849e36e8eacb72fdb43d6d9328bddbb95c2659"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/preview.gif",
+        "sha256": "de03776c8b6386a7dcc5b2faef8f4c52fd471b526a4aff8e6e084bf0625d2069"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/sprite.json",
+        "sha256": "c4dd1ec689afb0d0dfdddab4f4cb696b4d974971e9e0040502d521f727fb87e1"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/index.html",
+        "sha256": "9ea5d5746b18f2ef6d9f9c4e5f8428f49fc43be6af6e064c54535005d01f4400"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/playback.js",
+        "sha256": "1ebb799c0381589d29eeab7e4b0b5b75acf07fa21946541beda6272d4aca0057"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/preview-native.gif",
+        "sha256": "c2c9fb4fb1f9f34f43b6f605a6bcc062a14df041cd6d4255185f4797f531300d"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v1/scene-native.gif",
+        "sha256": "24025cf94c5091cd56805c9126d26e3b09f481dbc7dadd529a4508283f7601a6"
+      }
+    ]
+  },
+  {
+    "id": "fox-pilot-v2",
+    "animalId": "fox",
+    "revision": "pilot-v2",
+    "name": "Red fox · revised supervised pilot",
+    "batchId": "wildlife-v2-supervised-01",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/fox/pilot-v2/",
+    "sheet": {
+      "id": "wildlife-v2-fox-pilot-v2",
+      "name": "Red fox · revised supervised pilot sheet",
+      "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
+      "width": 816,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+      "source": "art-source/wildlife-v2/fox/pilot-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-fox-pilot-v2-scene",
+      "name": "Red fox · revised supervised pilot -scene",
+      "image": "demos/wildlife-v2/fox/pilot-v2/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "92438eabe96f8b1f45a2dfff2da7cafe64eea353fef6ebce85024afb866ab7ac",
+      "source": "art-source/wildlife-v2/fox/pilot-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-fox-pilot-v2-contact",
+      "name": "Red fox · revised supervised pilot -contact",
+      "image": "demos/wildlife-v2/fox/pilot-v2/contact-sheet-native.png",
+      "width": 816,
+      "height": 232,
+      "tileSize": 16,
+      "fingerprint": "e296347cb840af4af7d45c0ea389b6525acbe59df56a00eac470d5c6e8799baf",
+      "source": "art-source/wildlife-v2/fox/pilot-v2"
+    },
+    "preview": "demos/wildlife-v2/fox/pilot-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
+        "sha256": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/scene-native.png",
+        "sha256": "92438eabe96f8b1f45a2dfff2da7cafe64eea353fef6ebce85024afb866ab7ac"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/contact-sheet-native.png",
+        "sha256": "e296347cb840af4af7d45c0ea389b6525acbe59df56a00eac470d5c6e8799baf"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/preview.gif",
+        "sha256": "5e998899794a759d372fe8462a89ff43e37cee6d6c412e92f1b3caa279ca3bb2"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/sprite.json",
+        "sha256": "f4a8f168ab03f1685dcfefa851fe9e244718629166d95eaff8fc199ac9773866"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/index.html",
+        "sha256": "2d46c2d9157a36bb61cd1be8710fc1c2d173f16d4d5ac378ed1f157d50fd58bb"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/playback.js",
+        "sha256": "1ebb799c0381589d29eeab7e4b0b5b75acf07fa21946541beda6272d4aca0057"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/preview-native.gif",
+        "sha256": "3c7bd2b889786ffa9a2524d4e3a0cc5103995eb8f54d870097fab355b521da1f"
+      },
+      {
+        "path": "demos/wildlife-v2/fox/pilot-v2/scene-native.gif",
+        "sha256": "1c1124e9dbe69d8e0bb4a5373e4c91759c696f6d5e95c4eebe49914acae050f0"
+      }
+    ]
+  },
+  {
+    "id": "elephant-pilot-v1",
+    "animalId": "elephant",
+    "revision": "pilot-v1",
+    "name": "Elephant · initial pilot, heel revision pending",
+    "batchId": "wildlife-v2-supervised-01",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/elephant/pilot-v1/",
+    "sheet": {
+      "id": "wildlife-v2-elephant-pilot-v1",
+      "name": "Elephant · initial pilot, heel revision pending sheet",
+      "image": "demos/wildlife-v2/elephant/pilot-v1/sheet.png",
+      "width": 2352,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1",
+      "source": "art-source/wildlife-v2/elephant/pilot-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-elephant-pilot-v1-scene",
+      "name": "Elephant · initial pilot, heel revision pending -scene",
+      "image": "demos/wildlife-v2/elephant/pilot-v1/scene-native.png",
+      "width": 480,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "0ac79b961580b67da2bdd268b7bc2fa793c6aa41abe3f50d1a6bbb9e169a2185",
+      "source": "art-source/wildlife-v2/elephant/pilot-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-elephant-pilot-v1-contact",
+      "name": "Elephant · initial pilot, heel revision pending -contact",
+      "image": "demos/wildlife-v2/elephant/pilot-v1/contact-sheet-native.png",
+      "width": 2352,
+      "height": 468,
+      "tileSize": 16,
+      "fingerprint": "1d44057a8710a259e85e1fb20fa05f9c177d2cdd37f72867d2ebcc205fba99e2",
+      "source": "art-source/wildlife-v2/elephant/pilot-v1"
+    },
+    "preview": "demos/wildlife-v2/elephant/pilot-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/sheet.png",
+        "sha256": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/scene-native.png",
+        "sha256": "0ac79b961580b67da2bdd268b7bc2fa793c6aa41abe3f50d1a6bbb9e169a2185"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/contact-sheet-native.png",
+        "sha256": "1d44057a8710a259e85e1fb20fa05f9c177d2cdd37f72867d2ebcc205fba99e2"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/preview.gif",
+        "sha256": "59bfb2b8509b8d27b22191c1507ba897adbf62cd8484bfc7f52d467e019b546a"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/sprite.json",
+        "sha256": "dbbe3ca72fbe62999bfc601089d3473eed12302cd32b9dddec68558ce63f4c20"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/index.html",
+        "sha256": "fc287d367109fabe0f8c9a5660df579824b999cce33b3ebf58854af139119b7b"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/playback.js",
+        "sha256": "3cdd8822ab91d8ea0845c7e2c6fea85c8c386e5ebd727d07909705608935458e"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/scene-background.png",
+        "sha256": "80d35dd396c4453ec78012ddf4474d45ae0d15871b2e107f5c3850ffd2d2e73c"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/preview-native.gif",
+        "sha256": "a54f98fa69dc86387a3e29f87f5f2c64489e7577fc7f64f3e54d39aadd73ae84"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v1/scene-native.gif",
+        "sha256": "5dea9b5c7a77076112c10ddaf98898090723068caf86d30b8af54f108aa5a6d5"
+      }
+    ]
+  },
+  {
+    "id": "elephant-pilot-v2",
+    "animalId": "elephant",
+    "revision": "pilot-v2",
+    "name": "Elephant · corrected supervised pilot",
+    "batchId": "wildlife-v2-supervised-01",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/elephant/pilot-v2/",
+    "sheet": {
+      "id": "wildlife-v2-elephant-pilot-v2",
+      "name": "Elephant · corrected supervised pilot sheet",
+      "image": "demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+      "width": 2352,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "source": "art-source/wildlife-v2/elephant/pilot-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-elephant-pilot-v2-scene",
+      "name": "Elephant · corrected supervised pilot -scene",
+      "image": "demos/wildlife-v2/elephant/pilot-v2/scene-native.png",
+      "width": 480,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "0c3e5ab8755fe7cbbb2aea39d7da0c197a6c5c1fa9deef875ee8d89deed006d1",
+      "source": "art-source/wildlife-v2/elephant/pilot-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-elephant-pilot-v2-contact",
+      "name": "Elephant · corrected supervised pilot -contact",
+      "image": "demos/wildlife-v2/elephant/pilot-v2/contact-sheet-native.png",
+      "width": 2352,
+      "height": 468,
+      "tileSize": 16,
+      "fingerprint": "c009b49c011399ac1a28b7daaf918c17cdcc19c9bee413f3ce6f727ed1e8eced",
+      "source": "art-source/wildlife-v2/elephant/pilot-v2"
+    },
+    "preview": "demos/wildlife-v2/elephant/pilot-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+        "sha256": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/scene-native.png",
+        "sha256": "0c3e5ab8755fe7cbbb2aea39d7da0c197a6c5c1fa9deef875ee8d89deed006d1"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/contact-sheet-native.png",
+        "sha256": "c009b49c011399ac1a28b7daaf918c17cdcc19c9bee413f3ce6f727ed1e8eced"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/preview.gif",
+        "sha256": "d2ae0b41a9208700b22422921ed11ceb81fbbe729ad0c009ba1e3306d5e1a7e8"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/sprite.json",
+        "sha256": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/index.html",
+        "sha256": "d80dbdf10d3a45f2796f865d7b07a035ef086e4ef86c47db925fe3403e7a4bd7"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/playback.js",
+        "sha256": "d7f00ffb1a77bbe22f6c5653c81dce650fb037ff98e77ad9faf3272a0e4b7b47"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/scene-background.png",
+        "sha256": "80d35dd396c4453ec78012ddf4474d45ae0d15871b2e107f5c3850ffd2d2e73c"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/preview-native.gif",
+        "sha256": "6f982df3f6095fdab62c0e88983bdc44697d6c82a5ee40985cbef7b78b8c0ad9"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/pilot-v2/scene-native.gif",
+        "sha256": "7df4212a4be42d1ac31305006299834b0f9cea809069e17e8491efe9103f5788"
+      }
+    ]
+  },
+  {
+    "id": "rabbit-pilot-v1",
+    "animalId": "rabbit",
+    "revision": "pilot-v1",
+    "name": "Rabbit · supervised hop and listening",
+    "batchId": "wildlife-v2-supervised-02",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/rabbit/pilot-v1/",
+    "sheet": {
+      "id": "wildlife-v2-rabbit-pilot-v1",
+      "name": "Rabbit · supervised hop and listening sheet",
+      "image": "demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "source": "art-source/wildlife-v2/rabbit/pilot-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-rabbit-pilot-v1-scene",
+      "name": "Rabbit · supervised hop and listening -scene",
+      "image": "demos/wildlife-v2/rabbit/pilot-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "942a71dcb5ac6f346cf500fb3abc83d57fbb2ad8b0634aeefe6ea801fe01a787",
+      "source": "art-source/wildlife-v2/rabbit/pilot-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-rabbit-pilot-v1-contact",
+      "name": "Rabbit · supervised hop and listening -contact",
+      "image": "demos/wildlife-v2/rabbit/pilot-v1/contact-sheet-native.png",
+      "width": 480,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "717ee40dfde5fdc1e57e64e85f54d0ca5bf7a0efeb7911ac920eeb4506da4ba8",
+      "source": "art-source/wildlife-v2/rabbit/pilot-v1"
+    },
+    "preview": "demos/wildlife-v2/rabbit/pilot-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+        "sha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/scene-native.png",
+        "sha256": "942a71dcb5ac6f346cf500fb3abc83d57fbb2ad8b0634aeefe6ea801fe01a787"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/contact-sheet-native.png",
+        "sha256": "717ee40dfde5fdc1e57e64e85f54d0ca5bf7a0efeb7911ac920eeb4506da4ba8"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/preview.gif",
+        "sha256": "0b207f2591f538fa279a1a16235eaf86a557e729f55c3582d85b65ccad7a91a7"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/sprite.json",
+        "sha256": "526a3a575e5c5e9c744e4b228e53453b37207b438edf9f620b6aefbe454455e3"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/index.html",
+        "sha256": "8e5403633644531b855df350165f8a4dfd06297f7c94866a047fba4401dda405"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/playback.js",
+        "sha256": "87345febc2bb4c29df886b6915f8701b6644a65aa3bd854efe85832cc39a6ac6"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/preview-native.gif",
+        "sha256": "11f2a62dad6d5eb29d90279f32a219a1ed8a1c7d74847fb11bf3156db82d776e"
+      },
+      {
+        "path": "demos/wildlife-v2/rabbit/pilot-v1/scene-native.gif",
+        "sha256": "2cf8de2189037d4bb105aa145be5e962b433423930191a02cf961698492db3a5"
+      }
+    ]
+  },
+  {
+    "id": "giraffe-draft-v1",
+    "animalId": "giraffe",
+    "revision": "draft-v1",
+    "name": "Giraffe",
+    "batchId": "wildlife-v2-background-001",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giraffe/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-giraffe-draft-v1",
+      "name": "Giraffe sheet",
+      "image": "demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+      "width": 3600,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "source": "art-source/wildlife-v2/giraffe/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-giraffe-draft-v1-scene",
+      "name": "Giraffe -scene",
+      "image": "demos/wildlife-v2/giraffe/draft-v1/scene-native.png",
+      "width": 640,
+      "height": 272,
+      "tileSize": 16,
+      "fingerprint": "439de35b308c988a5169e29fb26d273efb784bda986469536cd9dd319b238e70",
+      "source": "art-source/wildlife-v2/giraffe/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-giraffe-draft-v1-contact",
+      "name": "Giraffe -contact",
+      "image": "demos/wildlife-v2/giraffe/draft-v1/contact-sheet-native.png",
+      "width": 3600,
+      "height": 594,
+      "tileSize": 16,
+      "fingerprint": "f72a4df27c9285dcd56bb2be14a87cfc744d6d2d57c812a15d35259640270047",
+      "source": "art-source/wildlife-v2/giraffe/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/giraffe/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+        "sha256": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/scene-native.png",
+        "sha256": "439de35b308c988a5169e29fb26d273efb784bda986469536cd9dd319b238e70"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/contact-sheet-native.png",
+        "sha256": "f72a4df27c9285dcd56bb2be14a87cfc744d6d2d57c812a15d35259640270047"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/preview.gif",
+        "sha256": "dab1fcdc29cc836c24b57342dc10c290fd4c887c127e0bac1ea2ba323403e837"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/sprite.json",
+        "sha256": "95bb744f47a7ddc73e1f0cb731e121c2e8eb569a8d2b6f8a149b0cc7e526a835"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/index.html",
+        "sha256": "cc5d4ee9bb0b04d987f601686d84c74a1605376da2a67ca0add60571d245c8f7"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/playback.js",
+        "sha256": "fd024e7024b65cc47ccc0ccd3eee136cdb896ad16cec352f14dbb14322bfe636"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/scene-background.png",
+        "sha256": "bcec5c9ab7343a2f71446da23c6e68012fc0617724129a0348fe5119e9daeae0"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/preview-native.gif",
+        "sha256": "ee0184107d10253b3aeabb4194d2d92693a937c5abbc8be3f7b334502d9beef7"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/draft-v1/scene-native.gif",
+        "sha256": "f74ba14f4c49186db86cd5c22d85c0280e1a100586dd93fcf466e1cffdca7148"
+      }
+    ]
+  },
+  {
+    "id": "mallard-duck-draft-v1",
+    "animalId": "mallard-duck",
+    "revision": "draft-v1",
+    "name": "Mallard drake",
+    "batchId": "wildlife-v2-background-001",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/mallard-duck/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-mallard-duck-draft-v1",
+      "name": "Mallard drake sheet",
+      "image": "demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "width": 1488,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "source": "art-source/wildlife-v2/mallard-duck/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-mallard-duck-draft-v1-scene",
+      "name": "Mallard drake -scene",
+      "image": "demos/wildlife-v2/mallard-duck/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "b0fc583ec5b5f1e6563a9bece4e46d908b27eddb47000517e7233f8cb8ce37e5",
+      "source": "art-source/wildlife-v2/mallard-duck/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-mallard-duck-draft-v1-contact",
+      "name": "Mallard drake -contact",
+      "image": "demos/wildlife-v2/mallard-duck/draft-v1/contact-sheet-native.png",
+      "width": 1488,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "4b48ed77610a6075b4d9c946557d9737f5e379ccf944f91117219f462396c7ea",
+      "source": "art-source/wildlife-v2/mallard-duck/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/mallard-duck/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+        "sha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/scene-native.png",
+        "sha256": "b0fc583ec5b5f1e6563a9bece4e46d908b27eddb47000517e7233f8cb8ce37e5"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/contact-sheet-native.png",
+        "sha256": "4b48ed77610a6075b4d9c946557d9737f5e379ccf944f91117219f462396c7ea"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/preview.gif",
+        "sha256": "177d04b16a403669eb54070c55f90dbf97ba98cf2abd3d84719d4630f358f314"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/sprite.json",
+        "sha256": "0b365602855a444c7df45e797a615dfb48e335a9ae6649a98c7f3738b6433def"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/index.html",
+        "sha256": "0115731dc3ef1443637a75c8b200ce3a0359541a2e53815afed21e8c353de69b"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/playback.js",
+        "sha256": "6d3d400984f1ae2a18793ff045f4cd129190ef1c81c5afd1372dcd6d52cfd77e"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/scene-background.png",
+        "sha256": "fbb0fc81a87e870b68de764fbc5731f679a9456755f8b465d3fe68d9c5157adc"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/preview-native.gif",
+        "sha256": "72524475f2840f3908ce35414176c4de4be7bae32d4490fcd1e24a867d514cbb"
+      },
+      {
+        "path": "demos/wildlife-v2/mallard-duck/draft-v1/scene-native.gif",
+        "sha256": "8b03acc27b1ac14b8638e9bcfeabb556a736221d4b985d95ca6029466e2e7037"
+      }
+    ]
+  },
+  {
+    "id": "robin-draft-v1",
+    "animalId": "robin",
+    "revision": "draft-v1",
+    "name": "European robin",
+    "batchId": "wildlife-v2-background-001",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/robin/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-robin-draft-v1",
+      "name": "European robin sheet",
+      "image": "demos/wildlife-v2/robin/draft-v1/sheet.png",
+      "width": 736,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "source": "art-source/wildlife-v2/robin/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-robin-draft-v1-scene",
+      "name": "European robin -scene",
+      "image": "demos/wildlife-v2/robin/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd",
+      "source": "art-source/wildlife-v2/robin/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-robin-draft-v1-contact",
+      "name": "European robin -contact",
+      "image": "demos/wildlife-v2/robin/draft-v1/contact-sheet-native.png",
+      "width": 736,
+      "height": 146,
+      "tileSize": 16,
+      "fingerprint": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d",
+      "source": "art-source/wildlife-v2/robin/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/robin/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/sheet.png",
+        "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/scene-native.png",
+        "sha256": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/contact-sheet-native.png",
+        "sha256": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/preview.gif",
+        "sha256": "3299a0ac6edeff39bf0d9f70bffc5e52b79605afd1b4f082a10a47143e648290"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/sprite.json",
+        "sha256": "e6b336603824470bdb552e429b767f519e40c33489211b6bafda312571db0828"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/index.html",
+        "sha256": "f024c16770d3213355851830aeacf3fea4cddb33360573d41b59e6ba84f89fbf"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/playback.js",
+        "sha256": "a105dde81a6ee17ffbc5dcb1860acc264ccc56afacfcf49d08c0a8f48c189fdf"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/scene-background.png",
+        "sha256": "fbb0fc81a87e870b68de764fbc5731f679a9456755f8b465d3fe68d9c5157adc"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/preview-native.gif",
+        "sha256": "d12a90b6013b2135c5103e53a2bcfe689a22f28b331d39e36d00dc3f62468a24"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v1/scene-native.gif",
+        "sha256": "99694f8ee326f985a13ab02a9d3ae4eee62b851e29643ec9a023beb41893d155"
+      }
+    ]
+  },
+  {
+    "id": "fish-draft-v1",
+    "animalId": "fish",
+    "revision": "draft-v1",
+    "name": "Pond goldfish",
+    "batchId": "wildlife-v2-background-001",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/fish/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-fish-draft-v1",
+      "name": "Pond goldfish sheet",
+      "image": "demos/wildlife-v2/fish/draft-v1/sheet.png",
+      "width": 720,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "art-source/wildlife-v2/fish/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-fish-draft-v1-scene",
+      "name": "Pond goldfish -scene",
+      "image": "demos/wildlife-v2/fish/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545",
+      "source": "art-source/wildlife-v2/fish/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-fish-draft-v1-contact",
+      "name": "Pond goldfish -contact",
+      "image": "demos/wildlife-v2/fish/draft-v1/contact-sheet-native.png",
+      "width": 720,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244",
+      "source": "art-source/wildlife-v2/fish/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/fish/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/sheet.png",
+        "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/scene-native.png",
+        "sha256": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/contact-sheet-native.png",
+        "sha256": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/preview.gif",
+        "sha256": "15ce57bdedae0c75f99fa043460e211fc38deb51a101809124a6bc760f672260"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/sprite.json",
+        "sha256": "51737fdaa6eaf3f81acbc4ee8bfd8bff7a2d067265d98d122fbfe169fd9f88b3"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/index.html",
+        "sha256": "f066ff11c19910e2b9b7190e4c72c2968dd4134d2a8dee9387990c98baaeb7f8"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/playback.js",
+        "sha256": "a848902e51fbf3e65a3fc16d44bc806cf14c07e18bba2f3dbcd42b7c0e6d9d1b"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/scene-background.png",
+        "sha256": "9b62715bfa51c68abd98e40506cbb4132a9745f52893981c71b796b2c85aeadd"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/preview-native.gif",
+        "sha256": "8e1baf0fdaabb85f4b9cb9f517bbbcf10baf875fb79aa1316cbf82d24102a2fd"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v1/scene-native.gif",
+        "sha256": "3cca47bf3775cc881f476087f83d4896a2622b110f6ff6706713b87159bc6222"
+      }
+    ]
+  },
+  {
+    "id": "robin-draft-v2",
+    "animalId": "robin",
+    "revision": "draft-v2",
+    "name": "European robin (UTF-8 preview)",
+    "batchId": "wildlife-v2-background-002",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/robin/draft-v2/",
+    "sheet": {
+      "id": "wildlife-v2-robin-draft-v2",
+      "name": "European robin (UTF-8 preview) sheet",
+      "image": "demos/wildlife-v2/robin/draft-v2/sheet.png",
+      "width": 736,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "source": "art-source/wildlife-v2/robin/draft-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-robin-draft-v2-scene",
+      "name": "European robin (UTF-8 preview) -scene",
+      "image": "demos/wildlife-v2/robin/draft-v2/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd",
+      "source": "art-source/wildlife-v2/robin/draft-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-robin-draft-v2-contact",
+      "name": "European robin (UTF-8 preview) -contact",
+      "image": "demos/wildlife-v2/robin/draft-v2/contact-sheet-native.png",
+      "width": 736,
+      "height": 146,
+      "tileSize": 16,
+      "fingerprint": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d",
+      "source": "art-source/wildlife-v2/robin/draft-v2"
+    },
+    "preview": "demos/wildlife-v2/robin/draft-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/sheet.png",
+        "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/scene-native.png",
+        "sha256": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/contact-sheet-native.png",
+        "sha256": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/preview.gif",
+        "sha256": "3299a0ac6edeff39bf0d9f70bffc5e52b79605afd1b4f082a10a47143e648290"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/sprite.json",
+        "sha256": "30800bf96036022810760e7ae25372e98bc0d84ca588f6e9adef34c536abf8df"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/index.html",
+        "sha256": "7e4a7e9518de5f537dfd93e47f889ba72ab201869bb873384201642068738a39"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/playback.js",
+        "sha256": "a105dde81a6ee17ffbc5dcb1860acc264ccc56afacfcf49d08c0a8f48c189fdf"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/scene-background.png",
+        "sha256": "fbb0fc81a87e870b68de764fbc5731f679a9456755f8b465d3fe68d9c5157adc"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/preview-native.gif",
+        "sha256": "d12a90b6013b2135c5103e53a2bcfe689a22f28b331d39e36d00dc3f62468a24"
+      },
+      {
+        "path": "demos/wildlife-v2/robin/draft-v2/scene-native.gif",
+        "sha256": "99694f8ee326f985a13ab02a9d3ae4eee62b851e29643ec9a023beb41893d155"
+      }
+    ]
+  },
+  {
+    "id": "fish-draft-v2",
+    "animalId": "fish",
+    "revision": "draft-v2",
+    "name": "Pond goldfish (UTF-8 preview)",
+    "batchId": "wildlife-v2-background-002",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/fish/draft-v2/",
+    "sheet": {
+      "id": "wildlife-v2-fish-draft-v2",
+      "name": "Pond goldfish (UTF-8 preview) sheet",
+      "image": "demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "width": 720,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "art-source/wildlife-v2/fish/draft-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-fish-draft-v2-scene",
+      "name": "Pond goldfish (UTF-8 preview) -scene",
+      "image": "demos/wildlife-v2/fish/draft-v2/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545",
+      "source": "art-source/wildlife-v2/fish/draft-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-fish-draft-v2-contact",
+      "name": "Pond goldfish (UTF-8 preview) -contact",
+      "image": "demos/wildlife-v2/fish/draft-v2/contact-sheet-native.png",
+      "width": 720,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244",
+      "source": "art-source/wildlife-v2/fish/draft-v2"
+    },
+    "preview": "demos/wildlife-v2/fish/draft-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/sheet.png",
+        "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/scene-native.png",
+        "sha256": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/contact-sheet-native.png",
+        "sha256": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/preview.gif",
+        "sha256": "15ce57bdedae0c75f99fa043460e211fc38deb51a101809124a6bc760f672260"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/sprite.json",
+        "sha256": "e12f0e8c58b519467eed60fd754b13e220cb56560aed94b3e061e0ce5f661c5c"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/index.html",
+        "sha256": "425e43b9cb608634f6b72ef1b45b139b45d2dda6ebcece8125aa1824f0c09c76"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/playback.js",
+        "sha256": "a848902e51fbf3e65a3fc16d44bc806cf14c07e18bba2f3dbcd42b7c0e6d9d1b"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/scene-background.png",
+        "sha256": "9b62715bfa51c68abd98e40506cbb4132a9745f52893981c71b796b2c85aeadd"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/preview-native.gif",
+        "sha256": "8e1baf0fdaabb85f4b9cb9f517bbbcf10baf875fb79aa1316cbf82d24102a2fd"
+      },
+      {
+        "path": "demos/wildlife-v2/fish/draft-v2/scene-native.gif",
+        "sha256": "3cca47bf3775cc881f476087f83d4896a2622b110f6ff6706713b87159bc6222"
+      }
+    ]
+  },
+  {
+    "id": "ant-draft-v1",
+    "animalId": "ant",
+    "revision": "draft-v1",
+    "name": "Red wood ant worker",
+    "batchId": "wildlife-v2-background-002",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ant/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-ant-draft-v1",
+      "name": "Red wood ant worker sheet",
+      "image": "demos/wildlife-v2/ant/draft-v1/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "art-source/wildlife-v2/ant/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-ant-draft-v1-scene",
+      "name": "Red wood ant worker -scene",
+      "image": "demos/wildlife-v2/ant/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a",
+      "source": "art-source/wildlife-v2/ant/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-ant-draft-v1-contact",
+      "name": "Red wood ant worker -contact",
+      "image": "demos/wildlife-v2/ant/draft-v1/contact-sheet-native.png",
+      "width": 480,
+      "height": 144,
+      "tileSize": 16,
+      "fingerprint": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283",
+      "source": "art-source/wildlife-v2/ant/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/ant/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/sheet.png",
+        "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/scene-native.png",
+        "sha256": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/contact-sheet-native.png",
+        "sha256": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/preview.gif",
+        "sha256": "a97674cab1b544a285bad00d4858fb3da305261f4c2deea918936235bf3f6768"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/sprite.json",
+        "sha256": "91bd110b196c9a41ffa2b0062b6cf8f78f7505b5095342c72881e78bfe0c9d25"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/index.html",
+        "sha256": "182bc90d935f99a442b713bbf81fcca8b3ef3f8e4549d32a70ca8447c353e28c"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/playback.js",
+        "sha256": "cdab2ca6480a8a05dd1ea297c10a5038d76dcfeb23650e02cb2bb6cb983e7eba"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/scene-background.png",
+        "sha256": "768e985ab2405ddc648ed9e14cddf79f339568bfbc2bc569411533fae8084a9d"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/preview-native.gif",
+        "sha256": "0803d0d3ff2d46fb9b991c7c09efc500e1461c21bce6230c6718e0e162e738e8"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v1/scene-native.gif",
+        "sha256": "520dec2f19d87ddf2a76284779683165327dd257094a6d75cb4e025fb2a6c47b"
+      }
+    ]
+  },
+  {
+    "id": "king-cobra-draft-v1",
+    "animalId": "king-cobra",
+    "revision": "draft-v1",
+    "name": "King cobra",
+    "batchId": "wildlife-v2-background-002",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/king-cobra/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-king-cobra-draft-v1",
+      "name": "King cobra sheet",
+      "image": "demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "width": 1440,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "source": "art-source/wildlife-v2/king-cobra/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-king-cobra-draft-v1-scene",
+      "name": "King cobra -scene",
+      "image": "demos/wildlife-v2/king-cobra/draft-v1/scene-native.png",
+      "width": 520,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "399c8bfb0c9fe970d00db80b99a2c440648ea1ca1c66cb01977f8931eded06c9",
+      "source": "art-source/wildlife-v2/king-cobra/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-king-cobra-draft-v1-contact",
+      "name": "King cobra -contact",
+      "image": "demos/wildlife-v2/king-cobra/draft-v1/contact-sheet-native.png",
+      "width": 1440,
+      "height": 404,
+      "tileSize": 16,
+      "fingerprint": "677ff0aa538fa0d69b3a6e70c8a7e33c735fe44a2409a24af79bbc5b3e5b48e1",
+      "source": "art-source/wildlife-v2/king-cobra/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/king-cobra/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+        "sha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/scene-native.png",
+        "sha256": "399c8bfb0c9fe970d00db80b99a2c440648ea1ca1c66cb01977f8931eded06c9"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/contact-sheet-native.png",
+        "sha256": "677ff0aa538fa0d69b3a6e70c8a7e33c735fe44a2409a24af79bbc5b3e5b48e1"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/preview.gif",
+        "sha256": "e8989ddcc141efac317cb0cfaccba3dd2bc3ed5906529c3ef8c71389f060c816"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/sprite.json",
+        "sha256": "8c599edb78cbe18ce845fb2f84bf1bf9a9b72ec72444205868b486124303ae00"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/index.html",
+        "sha256": "281dc78722942f785b77a1822a4849089ad54fb6c329ddf54692e3342ed4a3e0"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/playback.js",
+        "sha256": "a8d0ccb34c4554ae46ba48db5a8e8b88f8a9daf830645e0f504267b7cebb1fb7"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/scene-background.png",
+        "sha256": "4436b5c360eef7dadf1f2777ac08c538c8a35565ac0d6b89de6688a859ecb9c0"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/preview-native.gif",
+        "sha256": "5fdaf70d3ddb4145dea7780ad25aae26b75989fe53672848eadd8373693f63fd"
+      },
+      {
+        "path": "demos/wildlife-v2/king-cobra/draft-v1/scene-native.gif",
+        "sha256": "ceb1b1dc86df8c327188ae984858507fb36b59b61b5e8fcad572d31d37f726e0"
+      }
+    ]
+  },
+  {
+    "id": "ant-draft-v2",
+    "animalId": "ant",
+    "revision": "draft-v2",
+    "name": "Red wood ant",
+    "batchId": "wildlife-v2-background-003",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ant/draft-v2/",
+    "sheet": {
+      "id": "wildlife-v2-ant-draft-v2",
+      "name": "Red wood ant sheet",
+      "image": "demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "art-source/wildlife-v2/ant/draft-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-ant-draft-v2-scene",
+      "name": "Red wood ant -scene",
+      "image": "demos/wildlife-v2/ant/draft-v2/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a",
+      "source": "art-source/wildlife-v2/ant/draft-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-ant-draft-v2-contact",
+      "name": "Red wood ant -contact",
+      "image": "demos/wildlife-v2/ant/draft-v2/contact-sheet-native.png",
+      "width": 480,
+      "height": 144,
+      "tileSize": 16,
+      "fingerprint": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283",
+      "source": "art-source/wildlife-v2/ant/draft-v2"
+    },
+    "preview": "demos/wildlife-v2/ant/draft-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/sheet.png",
+        "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/scene-native.png",
+        "sha256": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/contact-sheet-native.png",
+        "sha256": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/preview.gif",
+        "sha256": "a97674cab1b544a285bad00d4858fb3da305261f4c2deea918936235bf3f6768"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/sprite.json",
+        "sha256": "e763e42f7de2bdf341499f3875bfe8c4931a58bc7732bb5f3c7821cffc065b06"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/index.html",
+        "sha256": "bd49816929af6e9603746607772a88d83c30248ef38160a500e238880200019e"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/playback.js",
+        "sha256": "cdab2ca6480a8a05dd1ea297c10a5038d76dcfeb23650e02cb2bb6cb983e7eba"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/scene-background.png",
+        "sha256": "768e985ab2405ddc648ed9e14cddf79f339568bfbc2bc569411533fae8084a9d"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/preview-native.gif",
+        "sha256": "0803d0d3ff2d46fb9b991c7c09efc500e1461c21bce6230c6718e0e162e738e8"
+      },
+      {
+        "path": "demos/wildlife-v2/ant/draft-v2/scene-native.gif",
+        "sha256": "520dec2f19d87ddf2a76284779683165327dd257094a6d75cb4e025fb2a6c47b"
+      }
+    ]
+  },
+  {
+    "id": "frog-draft-v1",
+    "animalId": "frog",
+    "revision": "draft-v1",
+    "name": "Brown common frog",
+    "batchId": "wildlife-v2-background-003",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/frog/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-frog-draft-v1",
+      "name": "Brown common frog sheet",
+      "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "width": 1104,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "source": "art-source/wildlife-v2/frog/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-frog-draft-v1-scene",
+      "name": "Brown common frog -scene",
+      "image": "demos/wildlife-v2/frog/draft-v1/scene-native.png",
+      "width": 400,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "b51f7adc2b0e8ddf2fd3369bc46727c0ebce4c3080682072c6d18d577799aa89",
+      "source": "art-source/wildlife-v2/frog/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-frog-draft-v1-contact",
+      "name": "Brown common frog -contact",
+      "image": "demos/wildlife-v2/frog/draft-v1/contact-sheet-native.png",
+      "width": 1104,
+      "height": 212,
+      "tileSize": 16,
+      "fingerprint": "96746f333e17d31f25e0a191a2ba96cb3796fd317e8b99c5ea1cf6e57ef65b4d",
+      "source": "art-source/wildlife-v2/frog/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/frog/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/sheet.png",
+        "sha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/scene-native.png",
+        "sha256": "b51f7adc2b0e8ddf2fd3369bc46727c0ebce4c3080682072c6d18d577799aa89"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/contact-sheet-native.png",
+        "sha256": "96746f333e17d31f25e0a191a2ba96cb3796fd317e8b99c5ea1cf6e57ef65b4d"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/preview.gif",
+        "sha256": "e19b4e81332605af804e2521d4a16d751f499fd2605bae20ea4cea1b5fb37c3a"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/sprite.json",
+        "sha256": "e87f7e5cca1ee780173a098299a4e8a795e1507da2ec2a20d2e7ef21c852f21e"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/index.html",
+        "sha256": "ed6d921262160c27ea389bfcc905516f03562205e920fea662019beed1cb9372"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/playback.js",
+        "sha256": "196e23524a64cbccd5d2b3cc7263398ca1546e69d6388cfa9f46054235f302e6"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/scene-background.png",
+        "sha256": "8b4c67bd45ecf5b2883daef4eee6824f1beef761a38a0c21b237d381133d791f"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/preview-native.gif",
+        "sha256": "4be54bb551fd93f4fed11ae050e11853e7888301a6662d4d28e752f39f01e1c8"
+      },
+      {
+        "path": "demos/wildlife-v2/frog/draft-v1/scene-native.gif",
+        "sha256": "f56fd52ffc1723a83f43c0b976c8c99587fa8de57e2eca4cee88aea325d1d4c7"
+      }
+    ]
+  },
+  {
+    "id": "kangaroo-draft-v1",
+    "animalId": "kangaroo",
+    "revision": "draft-v1",
+    "name": "Red kangaroo",
+    "batchId": "wildlife-v2-background-003",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/kangaroo/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-kangaroo-draft-v1",
+      "name": "Red kangaroo sheet",
+      "image": "demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "width": 1824,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "source": "art-source/wildlife-v2/kangaroo/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-kangaroo-draft-v1-scene",
+      "name": "Red kangaroo -scene",
+      "image": "demos/wildlife-v2/kangaroo/draft-v1/scene-native.png",
+      "width": 520,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "c5a786bd9a114b02806e37ecf38b8b904c84b88037ce302c4fd37788207326ed",
+      "source": "art-source/wildlife-v2/kangaroo/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-kangaroo-draft-v1-contact",
+      "name": "Red kangaroo -contact",
+      "image": "demos/wildlife-v2/kangaroo/draft-v1/contact-sheet-native.png",
+      "width": 1824,
+      "height": 404,
+      "tileSize": 16,
+      "fingerprint": "1f0c9bd9ed292a37f35f5f0e70d5c31ee1a1052e4e497c326707d359a99b35e5",
+      "source": "art-source/wildlife-v2/kangaroo/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/kangaroo/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+        "sha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/scene-native.png",
+        "sha256": "c5a786bd9a114b02806e37ecf38b8b904c84b88037ce302c4fd37788207326ed"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/contact-sheet-native.png",
+        "sha256": "1f0c9bd9ed292a37f35f5f0e70d5c31ee1a1052e4e497c326707d359a99b35e5"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/preview.gif",
+        "sha256": "8dc1f14be1dad1d70c642d9ad411169c0bcd4959bfce6606ab4179081c27fa0a"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/sprite.json",
+        "sha256": "4320065389d9c536f6b75b5230fbc5ec5e654e9cb687aa755b8f5150838ca947"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/index.html",
+        "sha256": "2028c669b0c1810e5ce8151623d660ae146adb96fcc466239d0c2ea4b3f865fa"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/playback.js",
+        "sha256": "36f37b7269fcd964cf99814365a0d058aa8efed1059aefbb8d9decd3ccbe379b"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/scene-background.png",
+        "sha256": "c7997f239965dcedb72a9ad5c346fe0b3b45d44db4990ced18b2a34b0c229c80"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/preview-native.gif",
+        "sha256": "f712ef5e56c4c0985a1decaaa87625c54bb995a1f4340eb788a82f7869ae0868"
+      },
+      {
+        "path": "demos/wildlife-v2/kangaroo/draft-v1/scene-native.gif",
+        "sha256": "578d117d1078ebb0172f369ff1a2b21ba1c8ffdac6306e0f1b65bfe5787c2379"
+      }
+    ]
+  },
+  {
+    "id": "penguin-draft-v1",
+    "animalId": "penguin",
+    "revision": "draft-v1",
+    "name": "Emperor penguin",
+    "batchId": "wildlife-v2-background-003",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/penguin/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-penguin-draft-v1",
+      "name": "Emperor penguin sheet",
+      "image": "demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "source": "art-source/wildlife-v2/penguin/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-penguin-draft-v1-scene",
+      "name": "Emperor penguin -scene",
+      "image": "demos/wildlife-v2/penguin/draft-v1/scene-native.png",
+      "width": 520,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "2c36eaccb528ba1c401a9591906aded6d63ad048791814e2f9bbca19aa3c5aad",
+      "source": "art-source/wildlife-v2/penguin/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-penguin-draft-v1-contact",
+      "name": "Emperor penguin -contact",
+      "image": "demos/wildlife-v2/penguin/draft-v1/contact-sheet-native.png",
+      "width": 1600,
+      "height": 276,
+      "tileSize": 16,
+      "fingerprint": "8a6f32a2928ed4b3e0c365a9b03fd39deddafab6a4965407ed106912097874b3",
+      "source": "art-source/wildlife-v2/penguin/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/penguin/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/sheet.png",
+        "sha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/scene-native.png",
+        "sha256": "2c36eaccb528ba1c401a9591906aded6d63ad048791814e2f9bbca19aa3c5aad"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/contact-sheet-native.png",
+        "sha256": "8a6f32a2928ed4b3e0c365a9b03fd39deddafab6a4965407ed106912097874b3"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/preview.gif",
+        "sha256": "1c5ed56d8bd1622e56a41f4d5894322e58f2b2e8d6817fe5d7fdd7ed952ce4d9"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/sprite.json",
+        "sha256": "84dbe8456b179a62bb86f1dbf695a658135af62a564ae098194cbf8da1579153"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/index.html",
+        "sha256": "ea2ba01e507430778be96b9424507ff220d85b18b4be9a8c35005f41f169594e"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/playback.js",
+        "sha256": "7534d5ec380b7adb69f5854963a3d337cdc8241fc7db2344bbb079992353e01b"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/scene-background.png",
+        "sha256": "c7997f239965dcedb72a9ad5c346fe0b3b45d44db4990ced18b2a34b0c229c80"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/preview-native.gif",
+        "sha256": "7e423a27e5f94c4befc4bae294fa99df09774c013f9229312ab502f7a83df610"
+      },
+      {
+        "path": "demos/wildlife-v2/penguin/draft-v1/scene-native.gif",
+        "sha256": "1ba7ccfda7fe49ac4c0e85eacb4fb2ee8cf65254bb596f00038f5ada0480918e"
+      }
+    ]
+  },
+  {
+    "id": "harbor-seal-draft-v1",
+    "animalId": "harbor-seal",
+    "revision": "draft-v1",
+    "name": "Harbor seal",
+    "batchId": "wildlife-v2-background-004",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/harbor-seal/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-harbor-seal-draft-v1",
+      "name": "Harbor seal sheet",
+      "image": "demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "width": 2208,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "source": "art-source/wildlife-v2/harbor-seal/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-harbor-seal-draft-v1-scene",
+      "name": "Harbor seal -scene",
+      "image": "demos/wildlife-v2/harbor-seal/draft-v1/scene-native.png",
+      "width": 600,
+      "height": 280,
+      "tileSize": 16,
+      "fingerprint": "bdcb5a051e9d392466aafa1c81617cfa4f0f0744d54fd467fd876fa9b5ae2f07",
+      "source": "art-source/wildlife-v2/harbor-seal/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-harbor-seal-draft-v1-contact",
+      "name": "Harbor seal -contact",
+      "image": "demos/wildlife-v2/harbor-seal/draft-v1/contact-sheet-native.png",
+      "width": 2208,
+      "height": 404,
+      "tileSize": 16,
+      "fingerprint": "2bb14aaf9151689c8dd5627df2c6f63792c22d79f0efb75e70ffadac7024f310",
+      "source": "art-source/wildlife-v2/harbor-seal/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/harbor-seal/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+        "sha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/scene-native.png",
+        "sha256": "bdcb5a051e9d392466aafa1c81617cfa4f0f0744d54fd467fd876fa9b5ae2f07"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/contact-sheet-native.png",
+        "sha256": "2bb14aaf9151689c8dd5627df2c6f63792c22d79f0efb75e70ffadac7024f310"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/preview.gif",
+        "sha256": "5fde518539a313a72e1c8978d3cd25a1b66165d310eda5a9a2b5b509bec8e9e3"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/sprite.json",
+        "sha256": "df9e71f4b32db3bbb6bccfc2223e2e495c297debde6a2a63d91fbec639619db1"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/index.html",
+        "sha256": "79a33fcfdaa714add0ccc4f1b59a46605c20c09923efa06eb95fd26341e3d63a"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/playback.js",
+        "sha256": "84fd088a3fbaf9063b7d42a42274de43653f0200b22a30f94a5b06b8dc3b84f6"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/scene-background.png",
+        "sha256": "0ab0b379a622fdedd5749e599b7055f3ad5e43c7c7210fb01124b2b9539f8537"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/preview-native.gif",
+        "sha256": "5d0e043f58a56900e79e8936e8caad08227d2ab69ad774e27eb5b497cb3e75e6"
+      },
+      {
+        "path": "demos/wildlife-v2/harbor-seal/draft-v1/scene-native.gif",
+        "sha256": "3e9800749b851f58220ddf34e20b160ec49156be26cac86702a5ed3944162df1"
+      }
+    ]
+  },
+  {
+    "id": "manta-ray-draft-v1",
+    "animalId": "manta-ray",
+    "revision": "draft-v1",
+    "name": "Giant manta ray",
+    "batchId": "wildlife-v2-background-004",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/manta-ray/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-manta-ray-draft-v1",
+      "name": "Giant manta ray sheet",
+      "image": "demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "width": 3024,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "source": "art-source/wildlife-v2/manta-ray/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-manta-ray-draft-v1-scene",
+      "name": "Giant manta ray -scene",
+      "image": "demos/wildlife-v2/manta-ray/draft-v1/scene-native.png",
+      "width": 780,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "ff99835a92010ceb9c36a3df817625dc6bbb0ffb0c16a63f96ea27c8597b88dd",
+      "source": "art-source/wildlife-v2/manta-ray/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-manta-ray-draft-v1-contact",
+      "name": "Giant manta ray -contact",
+      "image": "demos/wildlife-v2/manta-ray/draft-v1/contact-sheet-native.png",
+      "width": 3024,
+      "height": 596,
+      "tileSize": 16,
+      "fingerprint": "3a49683296cdf29a890377106f97a0f79735633a84bb0095dbe2b450be26621d",
+      "source": "art-source/wildlife-v2/manta-ray/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/manta-ray/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+        "sha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/scene-native.png",
+        "sha256": "ff99835a92010ceb9c36a3df817625dc6bbb0ffb0c16a63f96ea27c8597b88dd"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/contact-sheet-native.png",
+        "sha256": "3a49683296cdf29a890377106f97a0f79735633a84bb0095dbe2b450be26621d"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/preview.gif",
+        "sha256": "8dfdb13743eeb9dde8b83a03b7cacfc9fcea82ea7755339e93d992aac855a65b"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/sprite.json",
+        "sha256": "e571a27d2d3e629281ba7b7c920de4cade8d7d7a607a16de4c51831c86ed1687"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/index.html",
+        "sha256": "d87c11d1c93d371cf560507e22058101daceb487487ab1d6077e0f1648940871"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/playback.js",
+        "sha256": "bc7b1207dbb162e3054b63b7dd8663e6c973c4165848de55c642881714d697e8"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/scene-background.png",
+        "sha256": "c23dd2276d8c723271afcd1a893171ba7defb28d239dcde912218761e01844b5"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/preview-native.gif",
+        "sha256": "bf071e6a0250bd6e4ee6f03e33afff376bfd999f10ae3ac0016de9bffa8eec37"
+      },
+      {
+        "path": "demos/wildlife-v2/manta-ray/draft-v1/scene-native.gif",
+        "sha256": "528b7fbea27a661fd0ba8ab78784007ff5db07e71f2d3ae70a33f2f7fdcd04af"
+      }
+    ]
+  },
+  {
+    "id": "cat-draft-v1",
+    "animalId": "cat",
+    "revision": "draft-v1",
+    "name": "Natural tuxedo cat",
+    "batchId": "wildlife-v2-background-004",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cat/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-cat-draft-v1",
+      "name": "Natural tuxedo cat sheet",
+      "image": "demos/wildlife-v2/cat/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "source": "art-source/wildlife-v2/cat/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-cat-draft-v1-scene",
+      "name": "Natural tuxedo cat -scene",
+      "image": "demos/wildlife-v2/cat/draft-v1/scene-native.png",
+      "width": 600,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "859b23693551b48e3dc861f456095e0415fd70b3565d56f5268b72fd7a6d86dc",
+      "source": "art-source/wildlife-v2/cat/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-cat-draft-v1-contact",
+      "name": "Natural tuxedo cat -contact",
+      "image": "demos/wildlife-v2/cat/draft-v1/contact-sheet-native.png",
+      "width": 1008,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "a4cdef4e9a99c659310d3cfb75dc91e4bbba7f8e3598360965d3dd833b2eeb97",
+      "source": "art-source/wildlife-v2/cat/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/cat/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/sheet.png",
+        "sha256": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/scene-native.png",
+        "sha256": "859b23693551b48e3dc861f456095e0415fd70b3565d56f5268b72fd7a6d86dc"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/contact-sheet-native.png",
+        "sha256": "a4cdef4e9a99c659310d3cfb75dc91e4bbba7f8e3598360965d3dd833b2eeb97"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/preview.gif",
+        "sha256": "9cec4366d34f0ab159c787c4d7c0164772f8ab86f29f11a4cc4626ac473f6265"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/sprite.json",
+        "sha256": "972ef76759c8e1ff70a8fd344ae43dc0e2fd2dfb7ac92a45294c99b36ff49a82"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/index.html",
+        "sha256": "de438aa044b7331f87cc3e2899abe19261d15a624f97fbede39a4ee23971fd3f"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/playback.js",
+        "sha256": "66c43077f7eab0ea58597b4dddedb0a1beed2d92ae40d5440fa701feda560589"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/scene-background.png",
+        "sha256": "565e9f28ecfb8cea6fdfcc42032f4f89d9e032b153a572a037c7a5f72f9321a0"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/preview-native.gif",
+        "sha256": "ad4be9984f633ee2d5422bb1172dfc0033d70caa8c21bba95f45d8aa3a610253"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/draft-v1/scene-native.gif",
+        "sha256": "7f29cf37c636e572477299c654f58b70948d9038423cb9e00dca06c916761c0f"
+      }
+    ]
+  },
+  {
+    "id": "dog-draft-v1",
+    "animalId": "dog",
+    "revision": "draft-v1",
+    "name": "Natural tricolor dog",
+    "batchId": "wildlife-v2-background-004",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dog/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dog-draft-v1",
+      "name": "Natural tricolor dog sheet",
+      "image": "demos/wildlife-v2/dog/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "source": "art-source/wildlife-v2/dog/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dog-draft-v1-scene",
+      "name": "Natural tricolor dog -scene",
+      "image": "demos/wildlife-v2/dog/draft-v1/scene-native.png",
+      "width": 680,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "03f7d58d66b360459a1bed6cf9453ed359c8dd348827980796d2ec6b8768686f",
+      "source": "art-source/wildlife-v2/dog/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dog-draft-v1-contact",
+      "name": "Natural tricolor dog -contact",
+      "image": "demos/wildlife-v2/dog/draft-v1/contact-sheet-native.png",
+      "width": 1600,
+      "height": 276,
+      "tileSize": 16,
+      "fingerprint": "a7757ab52aa7a73f720c98f863a845981db4c7d52b553d54f8f5f257aebebba0",
+      "source": "art-source/wildlife-v2/dog/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/dog/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/sheet.png",
+        "sha256": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/scene-native.png",
+        "sha256": "03f7d58d66b360459a1bed6cf9453ed359c8dd348827980796d2ec6b8768686f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/contact-sheet-native.png",
+        "sha256": "a7757ab52aa7a73f720c98f863a845981db4c7d52b553d54f8f5f257aebebba0"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/preview.gif",
+        "sha256": "31ac8b2836ae85be15ff9395c761534dff657a8672c950669107ed481d1058f6"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/sprite.json",
+        "sha256": "a254a8f5caa698d629090ade1d2539518084b71c5fc6d13ef97fc2def9eebf4b"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/index.html",
+        "sha256": "758318edb4238cd69aba7066b8d1180b6fc163786b707da003b99d2c7b54de30"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/playback.js",
+        "sha256": "52831dab56297fda56ef83ce33c8e20777892862115de0f3786ae37555bfb8f2"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/scene-background.png",
+        "sha256": "d2ec8b43483375c7f656a59929c4e2edb11eb2f752e1dfaa23c20c3ab8b6b083"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/preview-native.gif",
+        "sha256": "1343c9343be0e16ffc3a4448a632d0a6c959f905bd15b828c4537390885bca84"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/draft-v1/scene-native.gif",
+        "sha256": "fdeefefb0d712d05102582cd7e47827133774691ccf5a42921487e6d24cf0497"
+      }
+    ]
+  },
+  {
+    "id": "deer-draft-v1",
+    "animalId": "deer",
+    "revision": "draft-v1",
+    "name": "White-tailed doe",
+    "batchId": "wildlife-v2-background-005",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/deer/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-deer-draft-v1",
+      "name": "White-tailed doe sheet",
+      "image": "demos/wildlife-v2/deer/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+      "source": "art-source/wildlife-v2/deer/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-deer-draft-v1-scene",
+      "name": "White-tailed doe -scene",
+      "image": "demos/wildlife-v2/deer/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "80c52cd9aa8c36bf2a402d63ddbab98e03f3af0e0d127bebace8237e0bd0210e",
+      "source": "art-source/wildlife-v2/deer/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-deer-draft-v1-contact",
+      "name": "White-tailed doe -contact",
+      "image": "demos/wildlife-v2/deer/draft-v1/contact-sheet-native.png",
+      "width": 1008,
+      "height": 212,
+      "tileSize": 16,
+      "fingerprint": "8600b30f30f6e0371b783452a9f1f4df5b49a84bc81ce7d7c74cc5645d665a57",
+      "source": "art-source/wildlife-v2/deer/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/deer/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/sheet.png",
+        "sha256": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/scene-native.png",
+        "sha256": "80c52cd9aa8c36bf2a402d63ddbab98e03f3af0e0d127bebace8237e0bd0210e"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/contact-sheet-native.png",
+        "sha256": "8600b30f30f6e0371b783452a9f1f4df5b49a84bc81ce7d7c74cc5645d665a57"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/preview.gif",
+        "sha256": "9fe56677e39e62e962ccd465397cd099de742143b227fe812d2b56a51edf62fe"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/sprite.json",
+        "sha256": "4dd4c7057b203ea9794ae4f9d24c6656a00fb8613f1ca8c4b0bcfab61ad89f63"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/index.html",
+        "sha256": "4300297779085f60eb30ecc41ad79ee0ca789ba7d09cfaf0f128664c90e86006"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/playback.js",
+        "sha256": "074067247c10fba9b3c58f19e97a15fea50aa090e764f8d27683a5c5d992ee4f"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/preview-native.gif",
+        "sha256": "22d028d0e34c9f44c7bbec38ba72c9150f7e86fdbd8cb17faff590957f9143e9"
+      },
+      {
+        "path": "demos/wildlife-v2/deer/draft-v1/scene-native.gif",
+        "sha256": "8583be661b43677f52f3422f30ebbd12c15eb2cca6526c2cc2409d8df6342a6a"
+      }
+    ]
+  },
+  {
+    "id": "cow-draft-v1",
+    "animalId": "cow",
+    "revision": "draft-v1",
+    "name": "Holstein cow",
+    "batchId": "wildlife-v2-background-005",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cow/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-cow-draft-v1",
+      "name": "Holstein cow sheet",
+      "image": "demos/wildlife-v2/cow/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "source": "art-source/wildlife-v2/cow/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-cow-draft-v1-scene",
+      "name": "Holstein cow -scene",
+      "image": "demos/wildlife-v2/cow/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "b3008d89b03089fad61ebe51f3062eea5eb2142b5445bbeb5464338eb3cfe5e4",
+      "source": "art-source/wildlife-v2/cow/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-cow-draft-v1-contact",
+      "name": "Holstein cow -contact",
+      "image": "demos/wildlife-v2/cow/draft-v1/contact-sheet-native.png",
+      "width": 1600,
+      "height": 276,
+      "tileSize": 16,
+      "fingerprint": "4e91cdc3e5da9ff66ca9cd6f27bbbb2dd25e2e0f7a942c9b3e1a603d7bd1b2e3",
+      "source": "art-source/wildlife-v2/cow/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/cow/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/sheet.png",
+        "sha256": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/scene-native.png",
+        "sha256": "b3008d89b03089fad61ebe51f3062eea5eb2142b5445bbeb5464338eb3cfe5e4"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/contact-sheet-native.png",
+        "sha256": "4e91cdc3e5da9ff66ca9cd6f27bbbb2dd25e2e0f7a942c9b3e1a603d7bd1b2e3"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/preview.gif",
+        "sha256": "8d3a9986f206966346fab0754bb79e0e28d714c1b189cae7a4ff3aa00839673a"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/sprite.json",
+        "sha256": "9844c9117721df72e07bc819d0f5ecd6f6775cb4bc47d2519bc605bce10dd651"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/index.html",
+        "sha256": "fe7e28214e1039f61e735f6ef1e68f12b1bbf6175958b6b6da8a5a2f19851d9b"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/playback.js",
+        "sha256": "1e11b906bfdf178e3781250da949149127a3fe2f561cd183ee54e3314eb47650"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/preview-native.gif",
+        "sha256": "362288b79a474f41780c4f4d07dd9f9076bc566e38950b5602358864ebd26079"
+      },
+      {
+        "path": "demos/wildlife-v2/cow/draft-v1/scene-native.gif",
+        "sha256": "f8bcaad79cb7ac3c202c3849cfcc9b0ecbcce5abfd50eff8cc9ebe30ba48630d"
+      }
+    ]
+  },
+  {
+    "id": "sheep-draft-v1",
+    "animalId": "sheep",
+    "revision": "draft-v1",
+    "name": "Suffolk ewe",
+    "batchId": "wildlife-v2-background-005",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/sheep/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-sheep-draft-v1",
+      "name": "Suffolk ewe sheet",
+      "image": "demos/wildlife-v2/sheep/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "source": "art-source/wildlife-v2/sheep/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-sheep-draft-v1-scene",
+      "name": "Suffolk ewe -scene",
+      "image": "demos/wildlife-v2/sheep/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "71d9438fe4f13cd280f2e84ef73bab10aa8415583e3b92ab42554861f28adcb3",
+      "source": "art-source/wildlife-v2/sheep/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-sheep-draft-v1-contact",
+      "name": "Suffolk ewe -contact",
+      "image": "demos/wildlife-v2/sheep/draft-v1/contact-sheet-native.png",
+      "width": 1200,
+      "height": 212,
+      "tileSize": 16,
+      "fingerprint": "df37fc7d7516ffbba6009f8eb4dcf5b2861ecf08b3939348242854b7e81e8506",
+      "source": "art-source/wildlife-v2/sheep/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/sheep/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/sheet.png",
+        "sha256": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/scene-native.png",
+        "sha256": "71d9438fe4f13cd280f2e84ef73bab10aa8415583e3b92ab42554861f28adcb3"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/contact-sheet-native.png",
+        "sha256": "df37fc7d7516ffbba6009f8eb4dcf5b2861ecf08b3939348242854b7e81e8506"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/preview.gif",
+        "sha256": "2541a2397d3471c7b7916f60b9656257323028547ec83754fbc7b518e4a1644c"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/sprite.json",
+        "sha256": "f1a15b2548433c90052d6b6ccd44a125553067b875530788fe1481229b81274e"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/index.html",
+        "sha256": "894a04296a57eb6167e332632510172bc9a96b6dec6fe00e6befe377e960bf78"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/playback.js",
+        "sha256": "c844460df2cffef8aaa7e47e62d7318b707a1edc250c78a78c1f41e3ac499e9f"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/preview-native.gif",
+        "sha256": "a48f0d94fc347dbff72d72e187a8c114e5fe6b2b03af18a22a1227437ea103ed"
+      },
+      {
+        "path": "demos/wildlife-v2/sheep/draft-v1/scene-native.gif",
+        "sha256": "d3d070225fdf74aa83359ef331560dca8ee254a875ff3bba7a2333babf77f321"
+      }
+    ]
+  },
+  {
+    "id": "horse-draft-v1",
+    "animalId": "horse",
+    "revision": "draft-v1",
+    "name": "Bay horse",
+    "batchId": "wildlife-v2-background-005",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-horse-draft-v1",
+      "name": "Bay horse sheet",
+      "image": "demos/wildlife-v2/horse/draft-v1/sheet.png",
+      "width": 2000,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "source": "art-source/wildlife-v2/horse/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-draft-v1-scene",
+      "name": "Bay horse -scene",
+      "image": "demos/wildlife-v2/horse/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "44367c9eec7f5a999d02465ef0ac612ec13e794efb688b69ff861d9344f9b466",
+      "source": "art-source/wildlife-v2/horse/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-draft-v1-contact",
+      "name": "Bay horse -contact",
+      "image": "demos/wildlife-v2/horse/draft-v1/contact-sheet-native.png",
+      "width": 2000,
+      "height": 340,
+      "tileSize": 16,
+      "fingerprint": "7a7f2cf9c5dfe256bf016f7053cb1c88d82766529ab8ccd4139b2e488560189e",
+      "source": "art-source/wildlife-v2/horse/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/horse/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/sheet.png",
+        "sha256": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/scene-native.png",
+        "sha256": "44367c9eec7f5a999d02465ef0ac612ec13e794efb688b69ff861d9344f9b466"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/contact-sheet-native.png",
+        "sha256": "7a7f2cf9c5dfe256bf016f7053cb1c88d82766529ab8ccd4139b2e488560189e"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/preview.gif",
+        "sha256": "a9c7a9f9c5bbebe13c8f666c941d278cd60b35ff4ccf0728d044d9814156b0f3"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/sprite.json",
+        "sha256": "f50c3b172b67fef937a278830841f30a48781e4153df7f37cadd10f24ad88104"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/index.html",
+        "sha256": "fb3c56a0c1423dd6d39ee8febc0cd8ff395f9c4596309e4e68356b540ba8beed"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/playback.js",
+        "sha256": "a0298e15829a07ca931253cd3e3ae1df2cd599d782bfb9f9a48125c5ca393266"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/preview-native.gif",
+        "sha256": "a902a49c0afc5a1156553c5beb14be4d6bba5f12a22be5e1e457b2041a25fa45"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/draft-v1/scene-native.gif",
+        "sha256": "be388627a78af813d535c7cbf4a0c84da4c29e19bc95459249f1d925d0819541"
+      }
+    ]
+  },
+  {
+    "id": "piglet-draft-v1",
+    "animalId": "piglet",
+    "revision": "draft-v1",
+    "name": "Domestic pig",
+    "batchId": "wildlife-v2-background-006",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/piglet/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-piglet-draft-v1",
+      "name": "Domestic pig sheet",
+      "image": "demos/wildlife-v2/piglet/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "source": "art-source/wildlife-v2/piglet/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-piglet-draft-v1-scene",
+      "name": "Domestic pig -scene",
+      "image": "demos/wildlife-v2/piglet/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "5fefb8f4faaf8941c371902f5bcfa132d14a98fb4ad74f9155b39b573280974d",
+      "source": "art-source/wildlife-v2/piglet/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-piglet-draft-v1-contact",
+      "name": "Domestic pig -contact",
+      "image": "demos/wildlife-v2/piglet/draft-v1/contact-sheet-native.png",
+      "width": 1008,
+      "height": 212,
+      "tileSize": 16,
+      "fingerprint": "f1426c5baa0e33ee2f5fb9a64d1f828db09ee6f8da1429d3c8718f85d2fabaca",
+      "source": "art-source/wildlife-v2/piglet/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/piglet/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/sheet.png",
+        "sha256": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/scene-native.png",
+        "sha256": "5fefb8f4faaf8941c371902f5bcfa132d14a98fb4ad74f9155b39b573280974d"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/contact-sheet-native.png",
+        "sha256": "f1426c5baa0e33ee2f5fb9a64d1f828db09ee6f8da1429d3c8718f85d2fabaca"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/preview.gif",
+        "sha256": "5f1219741807cba640449137854bfb07cf4d6b0af621f487d1154707deb26677"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/sprite.json",
+        "sha256": "f9fa3f3f4d7320c9e89d54208672e504b003cb517d86820278fb1a61df10b876"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/index.html",
+        "sha256": "b16cfd7083cd131b2e82d7fe15eeae7ecc9e7f87051dcd67ed9cd2c119ace50b"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/playback.js",
+        "sha256": "40e3c981bce893c8f2e39012733a84df73b85fe76809c2b10142ff4bdadb56eb"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/preview-native.gif",
+        "sha256": "cc576dd418d07abc8059b18e0c13366a1f6dc760c041d6ea8e98dcfb12f5647b"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/draft-v1/scene-native.gif",
+        "sha256": "c7466e00774528cc52841e9b08f759c28d2d9dc5ff6e113e879e739e277a9b1f"
+      }
+    ]
+  },
+  {
+    "id": "goat-draft-v1",
+    "animalId": "goat",
+    "revision": "draft-v1",
+    "name": "Horned domestic goat",
+    "batchId": "wildlife-v2-background-006",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/goat/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-goat-draft-v1",
+      "name": "Horned domestic goat sheet",
+      "image": "demos/wildlife-v2/goat/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "source": "art-source/wildlife-v2/goat/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-goat-draft-v1-scene",
+      "name": "Horned domestic goat -scene",
+      "image": "demos/wildlife-v2/goat/draft-v1/scene-native.png",
+      "width": 320,
+      "height": 208,
+      "tileSize": 16,
+      "fingerprint": "d3d2767d606471c24fe1fc01770897cb00528f3456878da4dc4d0c4caea10a4d",
+      "source": "art-source/wildlife-v2/goat/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-goat-draft-v1-contact",
+      "name": "Horned domestic goat -contact",
+      "image": "demos/wildlife-v2/goat/draft-v1/contact-sheet-native.png",
+      "width": 1200,
+      "height": 212,
+      "tileSize": 16,
+      "fingerprint": "ec4126726e20f0544dd90b900b16017788f245348e06edfb40a62d9bbff28c8f",
+      "source": "art-source/wildlife-v2/goat/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/goat/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/sheet.png",
+        "sha256": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/scene-native.png",
+        "sha256": "d3d2767d606471c24fe1fc01770897cb00528f3456878da4dc4d0c4caea10a4d"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/contact-sheet-native.png",
+        "sha256": "ec4126726e20f0544dd90b900b16017788f245348e06edfb40a62d9bbff28c8f"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/preview.gif",
+        "sha256": "4191437deb915fd6f21dddd11fce589f90d2355c7354c031b68fae4e29497005"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/sprite.json",
+        "sha256": "09dfabc82dbc8a4c802dad6cd35e8da79c37da5f61e1929efb0a83b51afc761d"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/index.html",
+        "sha256": "c00c8698d9a85a46f423eb10a57e0ac76c5bfb9a64250cc617fd5070dc24e47a"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/playback.js",
+        "sha256": "3c9340c947bbbae0f25f323b139cfb872ade7aeb08c92f84006b8524523837f8"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/scene-background.png",
+        "sha256": "fde9c5178f09310ccd2c3cdbadc36b80b41cd361da3ddf7b175cd35a0780472f"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/preview-native.gif",
+        "sha256": "3589896bae81b0e228854924a26bc324107b5bb36c1458bde3a23f40de96c7aa"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/draft-v1/scene-native.gif",
+        "sha256": "452119bbf9e4aa83cd4b7b3ec751821e53a8d54245743eeb9cb03f2ba613e34a"
+      }
+    ]
+  }
+]

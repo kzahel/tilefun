@@ -23,6 +23,7 @@ import { characterAnnotation } from "./characterAnnotations.js";
 import { InteriorReviewStore, interiorReviewHandler } from "./interiorReviewPlugin.js";
 import { outdoorAnnotation } from "./outdoorAnnotations.js";
 import { PlayIdeasService } from "./playIdeas.js";
+import { verifyWildlifeEvidence } from "./wildlifeEvidence.js";
 import { HttpError, jsonBody, jsonResponse, WorkshopAuth } from "./workshopAuth.js";
 import { loadWorkshopManifest, workshopInputDigest } from "./workshopManifest.js";
 
@@ -181,6 +182,8 @@ export class WorkshopService {
           candidate.fingerprint !== e.fingerprint
         )
           throw new HttpError(409, "Candidate changed. Reload the current review.");
+        if (candidate.kind === "wildlife")
+          await verifyWildlifeEvidence(candidate.id, this.options.root);
         if (
           !["approved", "changes", "clear"].includes(e.verdict) ||
           typeof e.note !== "string" ||

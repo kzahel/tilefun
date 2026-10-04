@@ -27,6 +27,14 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     mode: "adapter",
   },
   {
+    id: "wildlife-v2",
+    name: "Wildlife pilots",
+    description:
+      "Fresh animal drafts with elevated-view guides, scene comparisons and continuous playback.",
+    url: "demos/wildlife-v2/",
+    mode: "link",
+  },
+  {
     id: "railways",
     name: "Railway previews",
     description:

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Suffolk ewe wildlife draft</title>
+    <style>
+      body { margin: 24px; background: #27332e; color: #ede8d8; font: 16px system-ui; }
+      canvas, img { image-rendering: pixelated; }
+      canvas { display: block; margin: 16px 0; border: 1px solid #617467; }
+      img { max-width: 100%; height: auto; }
+      button, select { font: inherit; padding: 6px; margin-right: 8px; }
+      a { color: #f0c477; }
+    </style>
+  </head>
+  <body>
+    <h1>Suffolk ewe - fresh wildlife draft</h1>
+    <p>Pending human review. Four facings, sixteen walking poses and eight listening ear poses.</p>
+    <label for="clip">Playback</label>
+    <select id="clip">
+      <option value="sequence">Idle / two walks / ear action / idle</option>
+      <option value="idle">Idle</option>
+      <option value="walk">Walk loop</option>
+      <option value="action">Listening ears</option>
+    </select>
+    <button id="pause" type="button">Pause</button>
+    <button id="reset" type="button">Restart</button>
+    <label for="scale">Scale</label>
+    <select id="scale"><option value="1">Native 1x</option><option value="4" selected>4x nearest neighbor</option></select>
+    <p id="status">Loading retained sheet...</p>
+    <canvas id="playback" width="320" height="208" aria-label="Four sheep in Modern Exteriors scenery beside Explorer"></canvas>
+    <p><a href="review-observations.md">Review observations</a> / <a href="sprite.json">Sprite metadata</a> / <a href="validation.json">Integrity</a> / <a href="source-audit.json">Source audit</a></p>
+    <p><a href="preview-native.gif">Native loop</a> / <a href="preview.gif">Enlarged loop</a> / <a href="scene-native.gif">Native scene loop</a></p>
+    <img src="contact-sheet.png" alt="Every authored sheep pose" />
+    <img src="strip-down.png" alt="Down chronological clips" />
+    <img src="strip-up.png" alt="Up chronological clips" />
+    <img src="strip-left.png" alt="Left chronological clips" />
+    <img src="strip-right.png" alt="Right chronological clips" />
+    <script type="module" src="playback.js"></script>
+  </body>
+</html>

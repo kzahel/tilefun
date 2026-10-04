@@ -1,0 +1,9 @@
+# Domestic pig editable source
+
+Fresh species geometry01 and palette-letter drawing03, background-02-worker, actual gpt-6.1-sol/high. Adult pale domestic pig, undocked curly tail; roster id piglet does not imply a recolored baby. No human approval or gameplay promotion.
+
+Use the standalone build.py in Blender5.2.2 background mode to reproduce piglet.blend, independent compact projected guides and transparent volume/contact renders. finish.py uses masters.json and those guides for integer Pillow composition. Run audit.py in a fresh Blender process with the saved blend, verify.py --replay for deterministic/head/decoded-output checks, capture.mjs with bundled full Chromium, then verify.py --browser. Source and exact pending outputs are immutable after registration; new pixels require a new revision.
+
+Fixed accepted camera:40degrees above ground (polar50), ten world pixels/unit, yaw down180/up0/left100/right260.48square canvas, ortho4.8, shift11/48, constant ground anchor24,35. Own stocky barrel/low neck, rigid broad nose/skull, fleshy triangulated ears, three-link fixed-length legs with paired toes and raised dewclaws, editable mesh curl. Twelve walk poses, eight rigid ear/curl action poses, one idle per facing. Actual HL0 FL3 HR6 FR9; supports3,3,2 repeated; hind undertrack0.45units, no flight. No head/body scaling or root movement.
+
+The drawing is deliberately authored letter art with broad palette planes; mesh renders are guides rather than finished art. Ear hulls are integer finished separately around the stable head master; rear face omits eyes/nostrils and uses heel finishing. Detailed independent inspection, rejected iterations, references and limitations are in the matching public review-observations.md. Session commands/actual exits and capture panels live under ignored data/wildlife-campaign-v2/background-02-worker.

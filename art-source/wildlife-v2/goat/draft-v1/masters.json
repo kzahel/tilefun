@@ -1,0 +1,227 @@
+{
+  "identity": "goat-draft-v1-drawing-02",
+  "species": "tawny horned domestic goat buck",
+  "palette": {
+    "K": "#493e32",
+    "H": "#bd9862",
+    "B": "#a67a49",
+    "R": "#805a39",
+    "S": "#624b36",
+    "N": "#3e3c32",
+    "W": "#d8c59d",
+    "F": "#6f7562",
+    "E": "#242b27",
+    "Q": "#aa7970"
+  },
+  "stylization": [
+    "Own lean tawny goat barrel and raised neck; fixed dark dorsal mane, cream cheek and narrow beard.",
+    "Paired backward-curved horns follow independent rigid geometry, not antlers.",
+    "Stable full head/cheek/eye during walk; rear poll hides front eyes, muzzle and beard.",
+    "Fleshy mobile ear planes and short upright tail are integer finished from their rigid volume guides.",
+    "Broad upper/flank/belly planes; hoof clefts tiny and rear heels separately authored."
+  ],
+  "bodies": {
+    "left": {
+      "pixels": [
+        "..KKKKKKKKKKK...",
+        ".KHHHHHHHHHHHKK.",
+        "KHHHHHHHHHHHHHHK",
+        "KBBBBBBBBBBBBBBK",
+        "KBBBBBBBBBBBBBRK",
+        ".KBBBBBBBBBRRRK.",
+        "..KWWWWWWRRRRK..",
+        "...KKKKKKKKKK..."
+      ],
+      "offset": [
+        -8,
+        -4
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -8,
+        -4
+      ]
+    },
+    "down": {
+      "pixels": [
+        "..KKKK..",
+        ".KHHNHK.",
+        "KHHHNHKK",
+        "KHHHNHBK",
+        "KHHHNBBK",
+        "KBBBNBBK",
+        "KBBBNBBK",
+        "KBBBBBRK",
+        "KBBBBRRK",
+        ".KBBRRK.",
+        "..KRRK..",
+        "...KK..."
+      ],
+      "offset": [
+        -4,
+        -6
+      ]
+    },
+    "up": {
+      "pixels": [
+        "...KK...",
+        "..KHHK..",
+        ".KHHNHK.",
+        "KHHHNHHK",
+        "KHHHNHBK",
+        "KHHHNBBK",
+        "KBBBNBBK",
+        "KBBBNBBK",
+        "KBBBBBRK",
+        "KBBBBRRK",
+        ".KBRRRK.",
+        "..KKKK.."
+      ],
+      "offset": [
+        -4,
+        -6
+      ]
+    }
+  },
+  "heads": {
+    "left": {
+      "pixels": [
+        "...KKK..",
+        "..KHHHK.",
+        ".KHHWBK.",
+        "KWWWEWBK",
+        "KWWWWBBK",
+        ".KNWWRK.",
+        "..KKKK.."
+      ],
+      "offset": [
+        -5,
+        -3
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -3,
+        -3
+      ]
+    },
+    "down": {
+      "pixels": [
+        "..KKK..",
+        ".KHHHK.",
+        "KWEHEWK",
+        "KWWBWWK",
+        ".KWWWK.",
+        ".KNNNK.",
+        "..KNK..",
+        "...K..."
+      ],
+      "offset": [
+        -3,
+        -3
+      ]
+    },
+    "up": {
+      "pixels": [
+        "..KK..",
+        ".KHHK.",
+        "KHHHHK",
+        "KHBBBK",
+        ".KBBK.",
+        "..KK.."
+      ],
+      "offset": [
+        -3,
+        -3
+      ]
+    }
+  },
+  "necks": {
+    "left": {
+      "pixels": [
+        "KNB..",
+        "KNBB.",
+        "KNBBB",
+        ".NBBB",
+        ".BBBR",
+        "..BRR"
+      ],
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -4,
+        0
+      ]
+    },
+    "down": {
+      "pixels": [
+        "KHHK",
+        "KBBK",
+        "KBBK",
+        "KBBK",
+        ".RR.",
+        ".KK."
+      ],
+      "offset": [
+        -2,
+        0
+      ]
+    },
+    "up": {
+      "pixels": [
+        "KNNK",
+        "KHNK",
+        "KHNK",
+        "KBNS",
+        "KBNS",
+        "KBBS",
+        ".RR.",
+        ".KK."
+      ],
+      "offset": [
+        -2,
+        1
+      ]
+    }
+  },
+  "hooves": {
+    "near": {
+      "pixels": [
+        "KK",
+        "EN"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    },
+    "far": {
+      "pixels": [
+        "KK",
+        "FE"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    },
+    "rear": {
+      "pixels": [
+        "KK",
+        "SS"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    }
+  }
+}

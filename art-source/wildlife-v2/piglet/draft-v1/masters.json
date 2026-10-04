@@ -1,0 +1,191 @@
+{
+  "identity": "piglet-draft-v1-drawing-03",
+  "species": "pale domestic pig with undocked curl tail",
+  "palette": {
+    "K": "#514943",
+    "H": "#ead0b6",
+    "B": "#dab39d",
+    "R": "#bb8e83",
+    "S": "#927266",
+    "N": "#8b5557",
+    "W": "#f0dbc0",
+    "F": "#6f7762",
+    "E": "#25322f",
+    "Q": "#c77f78"
+  },
+  "stylization": [
+    "Stocky own pig barrel, low neck, long snout and broad nose disc; not a livestock recolor.",
+    "Pale pink upper plane, warm flank and restrained rose belly; no spots or invented fur.",
+    "Full fixed head/snout/eye template during walking; rear hides front eyes/nostrils.",
+    "Fleshy ear planes use the actual rigid projected closed hull with integer pink fill and rose edge; simplified one-pixel inner ear is intentional.",
+    "Curly mesh tail is drawn as a tiny open curl following actual projected centerline, with no per-frame geometry scaling."
+  ],
+  "bodies": {
+    "left": {
+      "pixels": [
+        ".............KKKK....",
+        "...KKKKKKKKKKHHHHKK..",
+        "..KHHHHHHHHHHHHHHHHK.",
+        ".KHHHHHHHHHHHHHHHHHHK",
+        "KHHHHHHHHHHHHHHHHHBBK",
+        "KBBBBBBBBBBBBBBBBBBBK",
+        "KBBBBBBBBBBBBBBBBBBBK",
+        "KBBBBBBBBBBBBBBBBBBRK",
+        ".KBBBBBBBBBBBBBBRRRK.",
+        "..KBBBBBBBBBBRRRRRK..",
+        "...KRRRRRRRRRRRRK....",
+        "....KKKKKKKKKKKK....."
+      ],
+      "offset": [
+        -10,
+        -6
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -9,
+        -6
+      ]
+    },
+    "down": {
+      "pixels": [
+        "...KKKKKK...",
+        "..KHHHHHHK..",
+        ".KHHHHHHHHK.",
+        "KHHHHHHHHHHK",
+        "KHHHHHHHHHBK",
+        "KHHHHHHHHBBK",
+        "KHHHHHHHBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBRK",
+        ".KBBBBBBRRK.",
+        ".KBBBBBRRRK.",
+        "..KBBRRRRK..",
+        "...KRRRRK...",
+        "....KKKK...."
+      ],
+      "offset": [
+        -6,
+        -9
+      ]
+    },
+    "up": {
+      "pixels": [
+        "....KKKK....",
+        "..KKHHHHKK..",
+        ".KHHHHHHHHK.",
+        "KHHHHHHHHHHK",
+        "KHHHHHHHHHBK",
+        "KHHHHHHHHBBK",
+        "KHHHHHHHBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBBK",
+        "KBBBBBBBBBRK",
+        "KBBBBBBBBRRK",
+        ".KBBBBBRRRK.",
+        ".KBBBBRRRRK.",
+        "..KRRRRRRK..",
+        "...KKKKKK..."
+      ],
+      "offset": [
+        -6,
+        -7
+      ]
+    }
+  },
+  "heads": {
+    "left": {
+      "pixels": [
+        "...KKKKK..",
+        "..KHHHHHK.",
+        ".KHHHHHHBK",
+        "KQBHHEBBBK",
+        "KQQBBBBBBK",
+        "KEQBBBBBRK",
+        ".KQQBRRRK.",
+        "..KKKKKK.."
+      ],
+      "offset": [
+        -6,
+        -3
+      ]
+    },
+    "right": {
+      "mirror": "left",
+      "offset": [
+        -4,
+        -3
+      ]
+    },
+    "down": {
+      "pixels": [
+        "..KKKKK..",
+        ".KHHHHHK.",
+        "KHHHHHHBK",
+        "KBEBBEBBK",
+        "KBBBBBBBK",
+        ".KBBBBBK.",
+        ".KQQQQQK.",
+        ".KQEQEQK.",
+        ".KQQQQQK.",
+        "..KKKKK.."
+      ],
+      "offset": [
+        -4,
+        -3
+      ]
+    },
+    "up": {
+      "pixels": [
+        "..KKKKK..",
+        ".KHHHHHK.",
+        "KHHHHHHBK",
+        "KHHHHHBBK",
+        "KBBBBBBBK",
+        ".KBBBBBK.",
+        "..KRRRK..",
+        "...KKK..."
+      ],
+      "offset": [
+        -4,
+        -4
+      ]
+    }
+  },
+  "hooves": {
+    "near": {
+      "pixels": [
+        "KK",
+        "EN"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    },
+    "far": {
+      "pixels": [
+        "KK",
+        "FE"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    },
+    "rear": {
+      "pixels": [
+        "KK",
+        "EE"
+      ],
+      "offset": [
+        -1,
+        -1
+      ]
+    }
+  }
+}

@@ -213,6 +213,17 @@ batch 01; initial revisions are clearly labeled and excluded from production see
 manifest freshness; unrelated drafting cannot invalidate frozen candidates.
 These new review pages have been verified locally; no deployment was performed.
 
+Source cleanup preserves all22 retained drafts and27 registered review revisions.
+Git retains editable sources, cut/timing definitions, player source and small native
+sheet/scene/contact PNGs. Generated animation, guides and diagnostics remain in a
+verified separate archive; its checksum and restoration command are recorded in
+the [source bank](../../art-source/wildlife-v2/README.md). Manifest builds require
+only committed native render inputs; browser review and server feedback submission
+still verify every original artifact pin. Missing/changed animation evidence blocks
+feedback, including when the broader development manifest is advisory. Review
+renderer edits mint fresh pending fingerprints and confer no approvals. New-animal
+production remains disabled; this cleanup makes no art corrections.
+
 Actual manual 02 rollout confirms Sol 6.1/high, CLI 0.160.0 and thread
 `01a104af-470f-7601-9e6c-2dd203c972e9`; its source audit, deterministic finishing
 and 17.278-second full Chromium capture pass. Typecheck/lint, focused feedback/

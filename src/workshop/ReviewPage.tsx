@@ -17,6 +17,7 @@ import { RailwayPlayback } from "./RailwayPlayback.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
 import { primaryScene, scenePath } from "./SceneReview.js";
+import { buildWildlifeCandidate, WILDLIFE_REVIEWS } from "./WildlifeCandidates.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
 import {
@@ -204,7 +205,13 @@ function ReviewCase({
     let cancelled = false;
     const render = async () => {
       const temporary = document.createElement("canvas");
-      if (c.kind === "railway") {
+      if (c.kind === "wildlife") {
+        const actual = await buildWildlifeCandidate(temporary, c.id);
+        if (actual.fingerprint !== c.fingerprint)
+          throw new Error(
+            "Wildlife preview changed. Reload the registered revision before reviewing.",
+          );
+      } else if (c.kind === "railway") {
         const actual = await buildRailwayCandidate(temporary, c.id);
         if (actual.fingerprint !== c.fingerprint || actual.review?.revision !== c.review?.revision)
           throw new Error("Railway preview changed. Regenerate the manifest before reviewing.");
@@ -483,6 +490,17 @@ function ReviewCase({
       ) : null}
       <div className="review-content" hidden={q.paused || !visible.length}>
         <div className="native-preview">
+          {c.kind === "wildlife" ? (
+            <LegacyLink
+              className="button"
+              url={
+                WILDLIFE_REVIEWS.find((d) => `pattern:wildlife-v2-${d.id}` === c.id)?.galleryUrl ??
+                "demos/wildlife-v2/"
+              }
+            >
+              Open native-scale movement and actions →
+            </LegacyLink>
+          ) : null}
           {c.kind === "railway" ? (
             <RailwayPlayback
               key={`playback:${c.id}`}

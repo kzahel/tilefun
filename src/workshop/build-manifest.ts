@@ -13,6 +13,7 @@ import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
+import { buildWildlifeCandidates, WILDLIFE_BATCHES } from "./WildlifeCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 import { buildWorldGeometryCandidate } from "./WorldGeometryCandidate.js";
 
@@ -42,6 +43,7 @@ try {
   candidates.push(...(await buildFamilySheetCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));
+  candidates.push(...(await buildWildlifeCandidates()));
   candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));
   Object.assign(window, {
     workshopManifest: {
@@ -63,6 +65,7 @@ try {
           toolId: "buildings",
         },
         ...INTERIOR_BATCHES,
+        ...WILDLIFE_BATCHES,
         {
           id: "motion",
           name: "Furniture movement sets",

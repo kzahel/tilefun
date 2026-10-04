@@ -1,0 +1,1797 @@
+{
+  "scope": "22 retained draft sources and native review render bank; no human approvals or new animals.",
+  "archive": {
+    "filename": "wildlife-source-checkpoint-20261004T180817Z-c468a0db9ddb2373.zip",
+    "sha256": "c468a0db9ddb2373789dbe6a4ad1a78176738a81a99bf586186d5a10422327b2",
+    "bytes": 201413928,
+    "files": 4465
+  },
+  "animals": 22,
+  "retainedFiles": [
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/README.md",
+      "sha256": "0337d3099cc214833c37d9e1e56dca41c98af77ea66a3e5c82735c5d1f9c1ac9",
+      "bytes": 4086
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/ant.blend",
+      "sha256": "d303fbee7f54b0fd5e6b5f6ae94047fc8502ae528a470848dc1c8d9c60a0b788",
+      "bytes": 163557
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/audit.py",
+      "sha256": "ee02262b2356dfa00d4490f27da67d0dc5fee6d1c7114894370da0f2032f24c5",
+      "bytes": 3527
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/author_masters.py",
+      "sha256": "162cae99af31eb5cfdfd7b2a25bd3d25da5bcb741eded24345eae7b1501e09d1",
+      "bytes": 2140
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/build.py",
+      "sha256": "eb113542f9a91ee2c1538bbf689345cd4730513d14b07f46832b933a12d8547f",
+      "bytes": 7879
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/capture.mjs",
+      "sha256": "43868645e157f6d1f50f44c3188f910aff25de2be6f3cadd89d80b92f97397ae",
+      "bytes": 3690
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/finish.py",
+      "sha256": "df764c01db1c70c2eed5fea29a04d36191f93f54a46576878fecd086fcd38e3e",
+      "bytes": 6487
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/masters.json",
+      "sha256": "e8b7fd08adb72fd40dadc8ae559667f5bfd10738498fe30da3e7bbbcc68c8bad",
+      "bytes": 3379
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/review_panels.py",
+      "sha256": "15b5afb60155b16778f803a35aff11babd94cd43c814c41f46d3c5f7a1c963ee",
+      "bytes": 1542
+    },
+    {
+      "path": "art-source/wildlife-v2/ant/draft-v2/verify.py",
+      "sha256": "469c8972559051d1b8252bb4ad74fb94f1956f43fd9dcb9fbe20296a1c1f6a28",
+      "bytes": 3295
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/README.md",
+      "sha256": "c2eadd8c0c0792cc7a8f46dd6c3ccb0ef82eed277a0133668f67eb05c0d9fd82",
+      "bytes": 3337
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/audit-output.py",
+      "sha256": "c73171ef604b35d389a17aa57d24c208dc7565fc11c76dec4e9063df8d88c04e",
+      "bytes": 3263
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/audit-source.py",
+      "sha256": "0adb5ec0445fe8d8426380626c2dcbb30cbd690ec23f7cab5d148a41957bc19c",
+      "bytes": 3542
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/author-masters.py",
+      "sha256": "2ef8af6b8aad105688654d0384bbb47fc674bf622e17d0fcdd4d8a4208a324a5",
+      "bytes": 4110
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/build.py",
+      "sha256": "2fa5c2736fd8641141506a49ab9ad9a2da17439d9571af09475482f51614009d",
+      "bytes": 8654
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/capture.mjs",
+      "sha256": "bf4f105e60a921e74e259edf14a252b668906556d4a4d570cb1473394c8df37f",
+      "bytes": 3682
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/cat.blend",
+      "sha256": "c7420f78ea93df2f257a0de94fccb7d91a25902fa37242ad7756d1570b9a0ace",
+      "bytes": 189632
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/finish.py",
+      "sha256": "4b992bd0467d8f65c642df010b3584de550c2f980e6d06d36a4d5097c8dbbb6a",
+      "bytes": 5497
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/masters.json",
+      "sha256": "d117ca4d3a4f17a327bdecd54bdb4f5f6d589f4f869088d8b387f3b805681a84",
+      "bytes": 238667
+    },
+    {
+      "path": "art-source/wildlife-v2/cat/draft-v1/review-panels.py",
+      "sha256": "a1f608cd07722850a97a78232ce4511a699d0a41d752ce34d9fa95fdb21012c1",
+      "bytes": 2213
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/README.md",
+      "sha256": "cec008bbd7d23e5f4c73ce9af5e1dddd1bb3640ff1d95e0bdfb9b46cf16d1e0b",
+      "bytes": 1547
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/audit.py",
+      "sha256": "061204dc824576322a61db7cdace9b7210caf44b397e2e45df791d9d4879e6db",
+      "bytes": 5147
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/author-masters.py",
+      "sha256": "13edfc1b465c061e26ad79e436464ba54c8c01dd57b6d382842019720f5be2ba",
+      "bytes": 3156
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/build.py",
+      "sha256": "1c22da3f962785ea2b8c596bf886d26249df112b2ad124740752b97321c19ebf",
+      "bytes": 10733
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/capture.mjs",
+      "sha256": "659ae5fcd9b9b99bbf4fb4f25b10971c726f1e259999b978954b0386486e9a41",
+      "bytes": 5208
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/cow.blend",
+      "sha256": "b63cc9d9e293c92efe8c040fe322a4fa14a5ff641d6e29937746e9edcdb02b3f",
+      "bytes": 175587
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/finish.py",
+      "sha256": "6d704334222191eeeb57e72714b49259c50a2966dce1a779a78bdf4419e5e46c",
+      "bytes": 8948
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/masters.json",
+      "sha256": "898bcf4f30636516534e36605e8b58a9699214f87fa630a67ad129d299a21cac",
+      "bytes": 5625
+    },
+    {
+      "path": "art-source/wildlife-v2/cow/draft-v1/verify.py",
+      "sha256": "cfd8ec0dc63d169ee7471cf3fcd4a8be828184c740d7c0144760502b3dcc32ab",
+      "bytes": 5936
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/README.md",
+      "sha256": "5158f620b36e3bdc445db9846916f9b3e88cd203569069041c8ad2a2c8736d84",
+      "bytes": 1375
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/audit.py",
+      "sha256": "672c7350a4476d9e8051784fd073b3ae01c06c3de36570681d85fa84bc6f5f38",
+      "bytes": 4859
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/author-masters.py",
+      "sha256": "5e17eb5501124cd677c7979f1841039dce6aacd9788a3d46440b2a09cdec00cc",
+      "bytes": 2514
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/build.py",
+      "sha256": "618a709b2a61c06561dc0b79bd05f529c3fc0c6aa941a713db0aaa0ce58ebc9c",
+      "bytes": 9502
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/capture.mjs",
+      "sha256": "773076137968c4d264c3193515c7be08f22348aed6146b61f11327d7c290323f",
+      "bytes": 4255
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/deer.blend",
+      "sha256": "949444ed55d3468ddd860faa238c524e79171a93cca9ea8eed821ba8f26191a0",
+      "bytes": 150077
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/finish.py",
+      "sha256": "0ddab187e998890210e5bccb6371cc7ae26bfccda29a3e80d83dda3719641cc6",
+      "bytes": 8515
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/masters.json",
+      "sha256": "906d56924c7335d3166be740026c5badb8a47f0acadb8bb1c805bcf63c105070",
+      "bytes": 3990
+    },
+    {
+      "path": "art-source/wildlife-v2/deer/draft-v1/verify.py",
+      "sha256": "9bdbd69c1556b1e4a68a3cb17730acfe1b3c97003c1acb196c6270a9594d8245",
+      "bytes": 4449
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/README.md",
+      "sha256": "d16a83a50523a3ad388a655c8d158dd30fceec299b457d105b27f981a09e0a62",
+      "bytes": 2183
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/audit-output.py",
+      "sha256": "828cba1f9f837c45437bd17ad59eb2df3e7e4f7c4027af7e8fc59a89791d14b4",
+      "bytes": 4015
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/audit-source.py",
+      "sha256": "4c9b96dfdd9ed5b909ec25bb30ebeb139fc7ca0974ce28f8ef1c272054f8dd78",
+      "bytes": 3533
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/author-masters.py",
+      "sha256": "9af04aec321b30b09b01e6a3efc3bb431059ed67214ad439a9ee2c5bf515fb69",
+      "bytes": 4283
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/build.py",
+      "sha256": "947b2356d38effa8e35dc143e19da71821d9e1b46a6d52737fec7d0111f9fe77",
+      "bytes": 8348
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/capture.mjs",
+      "sha256": "057e3188309e5cde816c365368d16ba6d3948bef1a3f067a98aff5678ec23a1a",
+      "bytes": 3682
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/dog.blend",
+      "sha256": "b4968351dd05749707b3eb7e350b3fc3a38016203692228c072358c05edda350",
+      "bytes": 222938
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/finish.py",
+      "sha256": "362f1993127bd1cd706dd492e5c05ede512bc13c099a78e845c07e2207b4b772",
+      "bytes": 5480
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/masters.json",
+      "sha256": "1d4d42f3386391a6a6a85d1589e3fbe64c6d6523e6e2ff6b9f9785c4caed864b",
+      "bytes": 477891
+    },
+    {
+      "path": "art-source/wildlife-v2/dog/draft-v1/review-panels.py",
+      "sha256": "5b33e24236bb3b961e383ffd6f9b5413b6c55ea388cbc6a16655b2210fb3f82b",
+      "bytes": 2215
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/README.md",
+      "sha256": "74446090f889bb20de57ea1bf22016c40075da56615f9fd917cbfda48ed36e68",
+      "bytes": 4540
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/audit.py",
+      "sha256": "cf1cb952139ac684d61043c7ff083b6beefc5fab44b437967be0f00692dae7c6",
+      "bytes": 5086
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/author_masters.py",
+      "sha256": "669bf62adf261d18ba00f9334dde3ae6ced81ff72e974ac2d51edd97255c80b5",
+      "bytes": 6848
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/build.py",
+      "sha256": "30fa7999d8130f4ec72c29bf321e05db2b5c58aba8e8e35d61372d2b7c6dee8e",
+      "bytes": 12546
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/capture.mjs",
+      "sha256": "926e61d529bf6cda2df86bd915b999b63b5978fc4340ad321c14611be13eb716",
+      "bytes": 3697
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/elephant.blend",
+      "sha256": "c359047567305be7c924e42de53e3c890dbd319bfded6a5948d42998118a972c",
+      "bytes": 172565
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/finish.py",
+      "sha256": "678226fa1592c584354ce2cab9e6840111d8d216b07e9157e691f411fb4798ae",
+      "bytes": 10644
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/masters.json",
+      "sha256": "bd7adc1983d3545bc75cf2205c1228c147d68e7bffc909cf25589a0108d8b514",
+      "bytes": 13966
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/replay.py",
+      "sha256": "b78f3dda589ef8bbe4a8b41022db245300578213731788a088910fcff1182377",
+      "bytes": 2581
+    },
+    {
+      "path": "art-source/wildlife-v2/elephant/pilot-v2/verify_capture.py",
+      "sha256": "479b70b15afa2c2adcbaa83f24e83183261dfb56db238fe8953b3308005ba7db",
+      "bytes": 2819
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/README.md",
+      "sha256": "e5fcc55def87289ff99140e8ee2cd6145d48de324b06b44c0dfef5b7bc8d3562",
+      "bytes": 3212
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/audit.py",
+      "sha256": "1e7872abf680f5a80a66cd8dd5eec99b382aaccbdfe7e5b111b99aabaa59a2ee",
+      "bytes": 4153
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/author_masters.py",
+      "sha256": "e0a9f8457a204d2ba5ccf1392efaa12aa771ea10823838a287e5a83a3eb58b9d",
+      "bytes": 1693
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/build.py",
+      "sha256": "90849e6eb0acaad6b8a9298fb2c5423c118db1274b06da58a842a999be38120c",
+      "bytes": 8859
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/capture.mjs",
+      "sha256": "568841d5313b1e1a2530108a1f5ff6e03a1ac7651a2e3b73c53bbf34d6d94119",
+      "bytes": 3693
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/finish.py",
+      "sha256": "6aeffb8d766d01778aa32ea4022273cd66b7486979679d65e314d1f84118f152",
+      "bytes": 8528
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/fish.blend",
+      "sha256": "c0ffd36f427fbb4ccf5cc320a834bb347899711f5ca39763a70f1943675c805d",
+      "bytes": 141833
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/masters.json",
+      "sha256": "1162d6bd653f6f5a0f60e6bb60640787f4e9d823bf684392bf407e7cd79d224b",
+      "bytes": 2637
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/review_panels.py",
+      "sha256": "31dfd311e3df38291574331193fd11d15a8fb3b144888314d4351c4eaab20e62",
+      "bytes": 1801
+    },
+    {
+      "path": "art-source/wildlife-v2/fish/draft-v2/verify.py",
+      "sha256": "32703f34b9142fa5cbfd481f349146eebbfb7bf6f81966cb4269bf8e5584a5c9",
+      "bytes": 3454
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/README.md",
+      "sha256": "7d679efe5041da787d1f31c851f055a01523ee846db23b0da78b6552a1df7f17",
+      "bytes": 6395
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/audit.py",
+      "sha256": "05b6aef884518c6aff51c72615ac82a0c374a980b79e4581931e2cac1e9d8e32",
+      "bytes": 2900
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/build.py",
+      "sha256": "e6305ac12a54235c5aa4258067f8963b25ee78980143ae66750f64cad38b426b",
+      "bytes": 14362
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/capture.mjs",
+      "sha256": "057f002363abbbf2c94bd51cc4e92d13c0dbd64a2fdec16018235a3c2698f03a",
+      "bytes": 3907
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/checksums.sha256",
+      "sha256": "33b0c18421d23f63b46478062ab1166f8060dc3b2c0c6b6d7f589d306203c2c8",
+      "bytes": 2102
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/compare.py",
+      "sha256": "1c5aedeee62fcdeed03ea2210d66eea19f9f16defae3e9220bdc37ce319e3ff8",
+      "bytes": 2362
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/export_saved_guides.py",
+      "sha256": "13ae1b335deb5441580f3eef3370fbb014f5c7d5a2445b0cda826c918e39f612",
+      "bytes": 4499
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/finish.py",
+      "sha256": "8b96d7de022bbdcad4a71ebd3cd9c0820af9ee9582a202969a31b2dfebd1167d",
+      "bytes": 13731
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/fox.blend",
+      "sha256": "c448c6f1421166daf93a1ec0179e17a5d16f4da61d0362611a8bf96914f6c242",
+      "bytes": 152823
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/masters.json",
+      "sha256": "ead96e5953a0e5a8f738ad2512d174896cdeedc087123aa79e1dd10acd7c9a2e",
+      "bytes": 3071
+    },
+    {
+      "path": "art-source/wildlife-v2/fox/pilot-v2/verify.py",
+      "sha256": "5be7f2d0292ab214f8eedd663d53fa26206d7214596d283a8566c637de53439d",
+      "bytes": 4143
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/README.md",
+      "sha256": "240ceacd53f7cc3e19c15cff454ff68182426ac5a2329897d3341f9cae8778d9",
+      "bytes": 3835
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/audit-output.py",
+      "sha256": "216c871a6e44360d0fae350d0b743aeee6f29bb7266fa11697c6eadd2e1f4336",
+      "bytes": 3640
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/audit-source.py",
+      "sha256": "eb09e795280a7400e08ee8bf6c84b695647a5a76063e94b84606fd6a076149e1",
+      "bytes": 4296
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/build.py",
+      "sha256": "3189e57f67ab6a3eecb03fab5497330cb1304f96e6f4ff69376d28d9a9ae83ed",
+      "bytes": 10271
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/capture.mjs",
+      "sha256": "f514777647078ecf12c69135d42fea2c5c9de3f0b2767bda22a30ea5406f9bd8",
+      "bytes": 3703
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/finish.py",
+      "sha256": "e18fe7fe9a2ee6373abc75c9719dc5234ab9daa1c6cfb7830f59a1a6cd4351c1",
+      "bytes": 9670
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/frog.blend",
+      "sha256": "f0dd75a0b5bc877ce7b0aac4812afc7ce8ef150edf5d7ab213b4745e31ee25f9",
+      "bytes": 159185
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/masters.json",
+      "sha256": "0b739a657bc7a2bdd5c3f1a75353d71dc5af9ba6e115de25221d417d0976d665",
+      "bytes": 1593
+    },
+    {
+      "path": "art-source/wildlife-v2/frog/draft-v1/review-panels.py",
+      "sha256": "2057956e9e36969619f085b3156203a8b8f3583a5e2195b0ac2cd5dbbb4357d2",
+      "bytes": 1390
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/README.md",
+      "sha256": "df9eead6a67be67a1266e4765ea77fa2fe797ce6e8da82ea14cac37688c23d58",
+      "bytes": 2140
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/audit.py",
+      "sha256": "200fc7163f6a9f1d803b5c0aa58fcad9882ac935b44f56c8c2ff62666d7338b4",
+      "bytes": 4477
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/author_masters.py",
+      "sha256": "cff723628a68188323d573398dbcff5303d1ebeead331cf634ad580a13c67f91",
+      "bytes": 8460
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/build.py",
+      "sha256": "63a6747b73bacd31478580eea3118de1c5a1f21e6a1da0ecdbd52400acf2b825",
+      "bytes": 10640
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/capture.mjs",
+      "sha256": "3cb5027630d637d987e16d50179065fb2807aa9254bae3c1241e5ca6e90e14c1",
+      "bytes": 3698
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/finish.py",
+      "sha256": "57def3b68aa9438424e70f7ff28fdae907d2bac3d3407c3e21240d83485379b6",
+      "bytes": 9734
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/giraffe.blend",
+      "sha256": "4fc4e8ee9ad1a46d2fc16d4496a03dbe9a4dde6b5f63e7b743ae225aa0c783e2",
+      "bytes": 174579
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/masters.json",
+      "sha256": "c6e247c65d484a48634e5e2f5ae80cb6077493599eb40486674d80277ffc7e25",
+      "bytes": 11133
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/review_panels.py",
+      "sha256": "bbc424e7786b38b7e8c1f93139766b39ce5a151230f8df9645500186dcc2316a",
+      "bytes": 2375
+    },
+    {
+      "path": "art-source/wildlife-v2/giraffe/draft-v1/verify.py",
+      "sha256": "8813c283758e6f5c43c84380440832bdddda85ee61bc7507b1263de3ef5d4548",
+      "bytes": 3417
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/README.md",
+      "sha256": "4e1636a6601562d8003fb46cc24ff4e1c8e9f7345187c79bb1b869c5d7a39c95",
+      "bytes": 1541
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/audit.py",
+      "sha256": "ccd11c21bef181d7f61f037eabbec6ec83130737d4eaad618b6a36ce62d860be",
+      "bytes": 5290
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/build.py",
+      "sha256": "bd4baf9f6c8720fa70b8cee010df259dbb71e42ac140c79bb39c4cf283e9961c",
+      "bytes": 10938
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/capture.mjs",
+      "sha256": "04b71f55f5382440e1932aadeddbb215141c4e85b526b4101c19ce14e7f7ba70",
+      "bytes": 5212
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/finish.py",
+      "sha256": "d3a7de295f1ef83ffc88a1ccc1bf0fdb78f7e1354e83167163fa643b10b47e88",
+      "bytes": 9913
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/goat.blend",
+      "sha256": "e6a964493c908e7ebdd869d465cc6cb52dedfe3d9fe22673331a5604ff08a7bd",
+      "bytes": 167118
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/masters.json",
+      "sha256": "3840fa57fc3d5a5b9a2b38f2f3b7248a75968324c1c6270069c3163a56057b22",
+      "bytes": 4053
+    },
+    {
+      "path": "art-source/wildlife-v2/goat/draft-v1/verify.py",
+      "sha256": "ad20e7167d36bfe676add40b4b90acf2c6eb6bc9e4255b1ab9f132533feebc44",
+      "bytes": 6676
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/README.md",
+      "sha256": "a1a91a19ecaf99be161a3a8f9218fc708a9a3c2cb1b6a5ff30e8480b3775214a",
+      "bytes": 4848
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/audit-output.py",
+      "sha256": "3845ecf409b1b6efca47bad364e4676a6b5e77d650ec309fe7d75938e21d236b",
+      "bytes": 2657
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/audit-source.py",
+      "sha256": "34bf60ee0d4b8c969b6afbcd98f347b404bcb57dc3061e0acd7493359c8ce019",
+      "bytes": 4306
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/author-masters.py",
+      "sha256": "ad1cbc63ec94a594e11a7da7d3dd08fc9d02520f5a81a95058554a4d5b4f3445",
+      "bytes": 4836
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/build.py",
+      "sha256": "a569bc5b6b81f66a582a7aa9a6955c09305097b598d408fc78d986e80636a677",
+      "bytes": 14890
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/capture.mjs",
+      "sha256": "97a5e34f51494838153a14f0eeeea6261546871366e0e2318363332f71d4d702",
+      "bytes": 3731
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/finish.py",
+      "sha256": "10f0c0a4877b84b8b4829e60984cac3f7e838d86fe626413c9b4fa672abb7261",
+      "bytes": 6216
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/harbor-seal.blend",
+      "sha256": "f05c0997b07979632b28a0b6ad946bfb5ae36db507a61535e0e2de4957809ac1",
+      "bytes": 195722
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/masters.json",
+      "sha256": "de71e0309c78daff6445ebcbbea519c917ad693a306f7a6792cd0c8eb352959f",
+      "bytes": 937239
+    },
+    {
+      "path": "art-source/wildlife-v2/harbor-seal/draft-v1/review-panels.py",
+      "sha256": "270648dd732d105afe9646148006d9a4e5cf27f159aea79275cb53180b5061e5",
+      "bytes": 1440
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/README.md",
+      "sha256": "772a17629a7a0502e1074b530c9a2e39c1159daeb32a96eaceac1e4944225f8a",
+      "bytes": 1439
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/audit.py",
+      "sha256": "72987a3e1c07151822aec9538475a87050eb1acbfb4c6b70e8c548a6cb16a3c4",
+      "bytes": 5201
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/author-masters.py",
+      "sha256": "827c743643f47ed42925a87dcfaf983ef60c6965d422077f9ff445758c1c0590",
+      "bytes": 3261
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/build.py",
+      "sha256": "bc1052e05c6c2f7373ebad19e7f2fc02b94c7936edd64a11d078b855e2d0d069",
+      "bytes": 10640
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/capture.mjs",
+      "sha256": "b0ca491efad81b450ee57c5d1abb02c866be89e4afbe06517f977a1891006e44",
+      "bytes": 5216
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/finish.py",
+      "sha256": "77a45a58cdf0abf56b9bb69030c3f43e6127545cf98322c52e0d76af3a6fea20",
+      "bytes": 8942
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/horse.blend",
+      "sha256": "680e9b4d9295b9d1322d4a6dcc9d3c2d98e1e19124026938d97c7db91e63d601",
+      "bytes": 180971
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/masters.json",
+      "sha256": "d69c4737a357f854f0c01c31a281d12f76369409f44f788bbb5fbd2dbfefe562",
+      "bytes": 5193
+    },
+    {
+      "path": "art-source/wildlife-v2/horse/draft-v1/verify.py",
+      "sha256": "b1ee815df7db542465104ca47a8da8c9e9104e459b6521315f8220fa934d1876",
+      "bytes": 5960
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/README.md",
+      "sha256": "35eb9865f492bc0dff04e115afa9ad28a22ab82501403651c8b9848957cc7879",
+      "bytes": 4232
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/audit-output.py",
+      "sha256": "aa9bd11408a0e090ce3c6b70ea394984ce9172a0fc52dc04443e720f93b9b74d",
+      "bytes": 3340
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/audit-source.py",
+      "sha256": "653977107ab4d1981328eaa2f8c7e0e8dd1bb676ec7b46dbb6c17c90ae90fa0c",
+      "bytes": 4778
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/author-masters.py",
+      "sha256": "1baf5d0518abfe892a86cfd9bbaa56c3dcfae02fa19b1622c6827742fd4469b6",
+      "bytes": 3190
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/build.py",
+      "sha256": "1a17a84f4afae039f93763f5ce0b8d94a14f108ba65700875de8098dd2920465",
+      "bytes": 10563
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/capture.mjs",
+      "sha256": "d63e39870d5f8744584cc4e0f4791aad81df4c0a685b1c9c10a541bbece8678a",
+      "bytes": 3701
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/finish.py",
+      "sha256": "75a2efe00fc0924a7dd3ce314fc4010cbccc91d0f107a5a866600f442bdb12f7",
+      "bytes": 10087
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/kangaroo.blend",
+      "sha256": "185fa4ec9d1acff0f0350ee846348159acdad02a76180750ea7bb0399972f0ca",
+      "bytes": 220224
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/masters.json",
+      "sha256": "effb4b2e1359f2d4139cf488e02eb03e82332470e0c17edf0508ab8d3f2f21d9",
+      "bytes": 5142
+    },
+    {
+      "path": "art-source/wildlife-v2/kangaroo/draft-v1/review-panels.py",
+      "sha256": "47762c676be0a4f3026eb767301012cb053081ac9de91a2011696bcf72a7f652",
+      "bytes": 1654
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/README.md",
+      "sha256": "75c103274136f13d735b3c4130af729346a1c0fe78dccb10dc737ef6ae9539f7",
+      "bytes": 3048
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/audit-output.py",
+      "sha256": "a9fb8f4c1d3629c5e8a6551694df00bdf44e113957bbe989afaff1ae57238fa5",
+      "bytes": 3499
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/audit-source.py",
+      "sha256": "84074fa724508192ef09982f6d11d8c13760bd192693130d8bceaed6c1b8adbd",
+      "bytes": 3690
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/build.py",
+      "sha256": "e64fddf777e72a9783a35981241671ac1402c4db9fe559b82094d72508fe5145",
+      "bytes": 9657
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/capture.mjs",
+      "sha256": "25585b5421a0bf77bca5910263f97c9b3762078e24e5ee62d2d81fd53e781730",
+      "bytes": 3696
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/finish.py",
+      "sha256": "f599ca7872c40dd74230f9e97bc2dee88071fb22f4dcd208cfc2f9fdf50b1fba",
+      "bytes": 8335
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/king-cobra.blend",
+      "sha256": "6766cb8d5c91c98af0d02e619516b508249741acf9f3233aa5c3e010b8cfead9",
+      "bytes": 171723
+    },
+    {
+      "path": "art-source/wildlife-v2/king-cobra/draft-v1/masters.json",
+      "sha256": "e6af704d8174ac012ad2d4ef70f37b8c4d9d95da22510d01e3b0edc80ccafe1c",
+      "bytes": 1650
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/README.md",
+      "sha256": "26b39ce5c457784ec1cb889ebbc21d94dd6e8f403629aab7c9f850ac42f31e90",
+      "bytes": 3903
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/audit.py",
+      "sha256": "7678d7efefb20bd30e3a59754b748efb64d55356d9da3c28b0dc0a69069ffd76",
+      "bytes": 4686
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/author_masters.py",
+      "sha256": "e21576c9df232e7dfbb7ae227ad9b4803681eac01d3d8e19a8b63ad156c80093",
+      "bytes": 3308
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/build.py",
+      "sha256": "c090192f53f462c23fdce5960224f37b9f93fe9861aaa7733899eb5070a8eb1e",
+      "bytes": 10691
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/capture.mjs",
+      "sha256": "2c5074318995b383a5d3443beabbdf57930babdbab6f90f64f5bfd2dec24303d",
+      "bytes": 3742
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/finish.py",
+      "sha256": "aef5f49a6aa97fe409e1cbe1315ff3a9822f3205532c388fd91736e3453aa95d",
+      "bytes": 9715
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/mallard-duck.blend",
+      "sha256": "651651c1c3bcd573475a10dda691b776242f3d8166df48c10eabcf88c0f1e156",
+      "bytes": 150212
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/masters.json",
+      "sha256": "05778cb21778f0aae051c188d2cd19972eeaa18280c1ed0fb1a8facc86e57d5d",
+      "bytes": 2861
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/review_panels.py",
+      "sha256": "bb2782ff9b3ffb07648483ff950692c17a59538a8be88e11af928b78574e817c",
+      "bytes": 1957
+    },
+    {
+      "path": "art-source/wildlife-v2/mallard-duck/draft-v1/verify.py",
+      "sha256": "09a9a6d863974f82dbee60e1e5eac1e0be9c7b7d0e65c07eab22427950275e6e",
+      "bytes": 2850
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/README.md",
+      "sha256": "561ff5c454912bad2274e55d470ea0b654da26df001a9bc1021208e12033b7d1",
+      "bytes": 3279
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/audit-output.py",
+      "sha256": "f39cdb78bb724df7fe9e04aed989bb155a77f4762614adfc2a83e059e1074566",
+      "bytes": 3045
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/audit-source.py",
+      "sha256": "072babe806cd6437fcf566ab4ec4cad00933ff81ed7ddbcb27d14cbd9c535ea2",
+      "bytes": 3636
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/author-masters.py",
+      "sha256": "899085a836fccd3a2f0091fb3927ee8a08cd78cbe829865e5836f6a01c231cc8",
+      "bytes": 4184
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/build.py",
+      "sha256": "a1c5d19b7d59207a237b626ccea7847d2b13c6795e526a1134609c89db622b49",
+      "bytes": 9263
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/capture.mjs",
+      "sha256": "599a8ac7c7cf7a69a11500fa135ec5746864091fe4311f039c99579c339282c3",
+      "bytes": 3705
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/finish.py",
+      "sha256": "d0f10ba09d8ca479cd1c0421d2395c01a11d98b549e5144e99e0f9150d0e09bf",
+      "bytes": 5565
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/manta-ray.blend",
+      "sha256": "ba55bc1b9c5154638471010ca67a3268a84c2423d1ce96e1867d5e56cc3d280b",
+      "bytes": 158706
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/masters.json",
+      "sha256": "1dba2aca7a54dbe13f745072ef309cc9805a7565c057143e2c7fd7295a4681c9",
+      "bytes": 1859856
+    },
+    {
+      "path": "art-source/wildlife-v2/manta-ray/draft-v1/review-panels.py",
+      "sha256": "b065228243ff6322455ea5349acb2107752233b6d284c3bfb653619789570237",
+      "bytes": 1434
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/README.md",
+      "sha256": "0ec1df4dd616d482b7e7bf2aff13c462f9a76e2a889349b648d8620669e0e5dd",
+      "bytes": 4068
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/audit-output.py",
+      "sha256": "d229c900b150f5886ca9d546d3d3cd866dbc8c13cd918760cc41a399c4fa7240",
+      "bytes": 3150
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/audit-source.py",
+      "sha256": "02cb9edd59260131ae0e13dfeef9b04330ec573b8fc8182a13f41d28b7ebf35a",
+      "bytes": 6360
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/author-masters.py",
+      "sha256": "1cea74923129fe406bbccd81e8233055ccb1e7ea5f41e88f6bee624315121e7f",
+      "bytes": 3759
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/build.py",
+      "sha256": "39cfa8f023618e4b76d0343473a53b4c780ca2b84f15485bd4d7803344f222d0",
+      "bytes": 11167
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/capture.mjs",
+      "sha256": "6d841ee57cf9615267608fc8d5b3b9ba29bbf2a771b4b80f4f2f5ad58292631d",
+      "bytes": 3716
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/finish.py",
+      "sha256": "4c8d9274e56e74a951c04d5cb05180aab761041a843b7251e02155fb4ef611a7",
+      "bytes": 9479
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/masters.json",
+      "sha256": "b186f4c3c583d8a4754670e706a0b966d0d272ce6708b6497b1301597d2b019f",
+      "bytes": 5573
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/penguin.blend",
+      "sha256": "c5ca925d0590860be64ff01f114602db1d9c790cb15976938ef30dfd98e005b6",
+      "bytes": 161674
+    },
+    {
+      "path": "art-source/wildlife-v2/penguin/draft-v1/review-panels.py",
+      "sha256": "19bba5324f676b4e74a22895273954e943ce60c0133d753874c6a09fac5f1c0b",
+      "bytes": 1410
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/README.md",
+      "sha256": "62f66ae7ea7580ad2098a79c0523e5396bd8fe3d185335126255b533059a5781",
+      "bytes": 1855
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/audit.py",
+      "sha256": "684c8daf484e75c954b722fcdf6f56e346364daaf6e2ae9a8bea5efb9314dfde",
+      "bytes": 5374
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/author-masters.py",
+      "sha256": "b420daa56dbdcbc20c122cb9ba944342f476d1c4210073cbd7bb31fd73a71b97",
+      "bytes": 2569
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/build.py",
+      "sha256": "bc1635119c55ffb831cc302f2720f43e0c6356ab882a37b68c8bd557c26a1ad1",
+      "bytes": 11150
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/capture.mjs",
+      "sha256": "72c24f16deefb12ef303195a30bf86c2cbb33bdfb70410ace827905bec4154f5",
+      "bytes": 5210
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/finish.py",
+      "sha256": "22d20cb4baa9ae8f8e8d6b0af7f8c515b3ea1e1807e807915ddfee2ab5a3cace",
+      "bytes": 9453
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/masters.json",
+      "sha256": "9f8b2936382128e12ecc6dc2bf62de3b1cfb03d1537483823b595d341b6b1131",
+      "bytes": 4004
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/piglet.blend",
+      "sha256": "420b695a1ce2572255e430690b5e67277bd814d5b124cc63e66501e6afe01f7a",
+      "bytes": 163763
+    },
+    {
+      "path": "art-source/wildlife-v2/piglet/draft-v1/verify.py",
+      "sha256": "dfd7339fa224597eee773155d95a60649ec1b4c45bc8e0f6e11e0f0b58d28586",
+      "bytes": 6543
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/README.md",
+      "sha256": "04239e4e1229f06cd0df7bd3bbcfbb4e5cd2ff1aa4098d56643dba96218bf64d",
+      "bytes": 5081
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/audit.py",
+      "sha256": "02a126561c4ed591d87e55abc01253c57a0326eec42c87bf1b10e21da19d384e",
+      "bytes": 4478
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/build.py",
+      "sha256": "fc2ba6fafa1eb07c79ca858b4a9462786c0b48fffd6807f7cf2d9084f0db0209",
+      "bytes": 9035
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/capture.mjs",
+      "sha256": "d8844e1d68ca64c44254b84ea2bfdf702a12998c42c7e56d6f5d1466fd51924a",
+      "bytes": 3945
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/checksums.sha256",
+      "sha256": "6b0b38030d6fa2aa7057d0c61857c6c7e14bb6dc2a16e8035924b27b72a1cee1",
+      "bytes": 12125
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/finish.py",
+      "sha256": "c40e501c64395f107eae2dadacf44766f0a6bf7c8d159d2396a401996b1c9a69",
+      "bytes": 9473
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/masters.json",
+      "sha256": "c4cb88c30ef3585c8a99e27a45f4cbb2b22a1c540877ee9e77871db2b1040e79",
+      "bytes": 2559
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/rabbit.blend",
+      "sha256": "a699a7e99893ffee1c42dde81261745a4811459a6f3793e19904d266c32923dc",
+      "bytes": 143766
+    },
+    {
+      "path": "art-source/wildlife-v2/rabbit/pilot-v1/verify.py",
+      "sha256": "10ade93cdad25e42e2358fc20eb64f4de92ec30b2395d0c029ea33116bccb8de",
+      "bytes": 3761
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/README.md",
+      "sha256": "77bcbcf44b0840b0ab6661e307429c5b15aa56ddeafb66b507e54a6a4f56f0f9",
+      "bytes": 3230
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/audit.py",
+      "sha256": "88d324d05876639532c937748529abbcccfc35186ff02518cf0aee8bf50f3a9c",
+      "bytes": 4491
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/author_masters.py",
+      "sha256": "809909ca14154aec1de2c653419e7c4bec4274d29e72ad016703b40acf28b46d",
+      "bytes": 1646
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/build.py",
+      "sha256": "dbc087f73574dc2bf131e4a5dd4a9f54ea3a47011617ec506820b48e686f862f",
+      "bytes": 11397
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/capture.mjs",
+      "sha256": "75b45d50d34c45ef62f4a072e390ade5c38c02a1dfa56298807f069048d2ddf4",
+      "bytes": 3716
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/finish.py",
+      "sha256": "23c77b35b4561eb9d172c248de0d06744026289f517835eb1dd033e7485f65cd",
+      "bytes": 8429
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/masters.json",
+      "sha256": "87d4b85f45cce5b919eda049081d13dc8f1b829d324e2b583958b2f223ffd5ae",
+      "bytes": 2421
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/review_panels.py",
+      "sha256": "1603e565f5d863a04a3eb454245d37e0f99f7dfad4513770e9d58704e263cdb6",
+      "bytes": 2351
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/robin.blend",
+      "sha256": "a51c6a42066a28126fef5377842ecb67c09c748b99dfc06ce1a21baceaff2adc",
+      "bytes": 142275
+    },
+    {
+      "path": "art-source/wildlife-v2/robin/draft-v2/verify.py",
+      "sha256": "278336f0d125d02d2a077351ba2f924b2b1c2ed3494d254c09b92b5ea3f1bc6d",
+      "bytes": 2691
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/README.md",
+      "sha256": "9ca901c8d1ca0a9e5ae99f3c23d3e2009b186a25faa78187ea48a3f619454e96",
+      "bytes": 1376
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/audit.py",
+      "sha256": "0051b7c011c5259a96223ae327400c1e3441c9e41ffe1c9a31e912891b105845",
+      "bytes": 5283
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/author-masters.py",
+      "sha256": "ae404c74389961ee5f4c07eeac96ac75252bfeabc5280f38a746595ac00278a4",
+      "bytes": 2213
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/build.py",
+      "sha256": "3883ec843ca1b51822a716eec4feda6cb19bd0cdeab25c4e6cd26595c6aed88e",
+      "bytes": 10196
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/capture.mjs",
+      "sha256": "cdf6eab8b522fc41365279d104c8f407659f4b3e1c3860986812a245af31c4e8",
+      "bytes": 5216
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/finish.py",
+      "sha256": "b1fa12a8b88345c1c7ad3c324997d1cd5ed78750f615cfd1ac43f0091c20eef0",
+      "bytes": 9117
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/masters.json",
+      "sha256": "9a8b6473236201c7554094c5361528257950747815b63d6518038d13687efede",
+      "bytes": 3636
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/sheep.blend",
+      "sha256": "b7104e3f2554dbf858b4a01463a1b53cc432bab9dfcaf0ec4577816db24d00ba",
+      "bytes": 166830
+    },
+    {
+      "path": "art-source/wildlife-v2/sheep/draft-v1/verify.py",
+      "sha256": "d4ab18b02f836d72177790a96a9930785d12ae5ca845ec76c498364e6bb7706e",
+      "bytes": 5960
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v1/contact-sheet-native.png",
+      "sha256": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283",
+      "bytes": 4703
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v1/scene-native.png",
+      "sha256": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a",
+      "bytes": 12248
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v1/sheet.png",
+      "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "bytes": 2121
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/contact-sheet-native.png",
+      "sha256": "8dae10d6b9aad8ce88a900b045dc4e60a2b487cf25b298b331694f4e88414283",
+      "bytes": 4703
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/index.html",
+      "sha256": "bd49816929af6e9603746607772a88d83c30248ef38160a500e238880200019e",
+      "bytes": 1024
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/playback.js",
+      "sha256": "cdab2ca6480a8a05dd1ea297c10a5038d76dcfeb23650e02cb2bb6cb983e7eba",
+      "bytes": 3196
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/scene-native.png",
+      "sha256": "f6c0ac14ca7333390c04d612904ee9c89e9a87911e4c9557358909588388243a",
+      "bytes": 12248
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "bytes": 2121
+    },
+    {
+      "path": "public/demos/wildlife-v2/ant/draft-v2/sprite.json",
+      "sha256": "e763e42f7de2bdf341499f3875bfe8c4931a58bc7732bb5f3c7821cffc065b06",
+      "bytes": 28743
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/contact-sheet-native.png",
+      "sha256": "a4cdef4e9a99c659310d3cfb75dc91e4bbba7f8e3598360965d3dd833b2eeb97",
+      "bytes": 7790
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/index.html",
+      "sha256": "de438aa044b7331f87cc3e2899abe19261d15a624f97fbede39a4ee23971fd3f",
+      "bytes": 1961
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/playback.js",
+      "sha256": "66c43077f7eab0ea58597b4dddedb0a1beed2d92ae40d5440fa701feda560589",
+      "bytes": 3262
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/scene-native.png",
+      "sha256": "859b23693551b48e3dc861f456095e0415fd70b3565d56f5268b72fd7a6d86dc",
+      "bytes": 13138
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/sheet.png",
+      "sha256": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "bytes": 4549
+    },
+    {
+      "path": "public/demos/wildlife-v2/cat/draft-v1/sprite.json",
+      "sha256": "972ef76759c8e1ff70a8fd344ae43dc0e2fd2dfb7ac92a45294c99b36ff49a82",
+      "bytes": 120533
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/contact-sheet-native.png",
+      "sha256": "4e91cdc3e5da9ff66ca9cd6f27bbbb2dd25e2e0f7a942c9b3e1a603d7bd1b2e3",
+      "bytes": 14671
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/index.html",
+      "sha256": "fe7e28214e1039f61e735f6ef1e68f12b1bbf6175958b6b6da8a5a2f19851d9b",
+      "bytes": 2290
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/playback.js",
+      "sha256": "1e11b906bfdf178e3781250da949149127a3fe2f561cd183ee54e3314eb47650",
+      "bytes": 3047
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/scene-native.png",
+      "sha256": "b3008d89b03089fad61ebe51f3062eea5eb2142b5445bbeb5464338eb3cfe5e4",
+      "bytes": 13136
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/sheet.png",
+      "sha256": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "bytes": 12061
+    },
+    {
+      "path": "public/demos/wildlife-v2/cow/draft-v1/sprite.json",
+      "sha256": "9844c9117721df72e07bc819d0f5ecd6f6775cb4bc47d2519bc605bce10dd651",
+      "bytes": 159552
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/contact-sheet-native.png",
+      "sha256": "8600b30f30f6e0371b783452a9f1f4df5b49a84bc81ce7d7c74cc5645d665a57",
+      "bytes": 10184
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/index.html",
+      "sha256": "4300297779085f60eb30ecc41ad79ee0ca789ba7d09cfaf0f128664c90e86006",
+      "bytes": 2290
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/playback.js",
+      "sha256": "074067247c10fba9b3c58f19e97a15fea50aa090e764f8d27683a5c5d992ee4f",
+      "bytes": 3039
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/scene-native.png",
+      "sha256": "80c52cd9aa8c36bf2a402d63ddbab98e03f3af0e0d127bebace8237e0bd0210e",
+      "bytes": 12982
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/sheet.png",
+      "sha256": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+      "bytes": 7961
+    },
+    {
+      "path": "public/demos/wildlife-v2/deer/draft-v1/sprite.json",
+      "sha256": "4dd4c7057b203ea9794ae4f9d24c6656a00fb8613f1ca8c4b0bcfab61ad89f63",
+      "bytes": 134061
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/contact-sheet-native.png",
+      "sha256": "a7757ab52aa7a73f720c98f863a845981db4c7d52b553d54f8f5f257aebebba0",
+      "bytes": 12410
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/index.html",
+      "sha256": "758318edb4238cd69aba7066b8d1180b6fc163786b707da003b99d2c7b54de30",
+      "bytes": 1928
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/playback.js",
+      "sha256": "52831dab56297fda56ef83ce33c8e20777892862115de0f3786ae37555bfb8f2",
+      "bytes": 3269
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/scene-native.png",
+      "sha256": "03f7d58d66b360459a1bed6cf9453ed359c8dd348827980796d2ec6b8768686f",
+      "bytes": 13828
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/sheet.png",
+      "sha256": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "bytes": 9182
+    },
+    {
+      "path": "public/demos/wildlife-v2/dog/draft-v1/sprite.json",
+      "sha256": "a254a8f5caa698d629090ade1d2539518084b71c5fc6d13ef97fc2def9eebf4b",
+      "bytes": 140996
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v1/contact-sheet-native.png",
+      "sha256": "1d44057a8710a259e85e1fb20fa05f9c177d2cdd37f72867d2ebcc205fba99e2",
+      "bytes": 30677
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v1/scene-native.png",
+      "sha256": "0ac79b961580b67da2bdd268b7bc2fa793c6aa41abe3f50d1a6bbb9e169a2185",
+      "bytes": 15387
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v1/sheet.png",
+      "sha256": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1",
+      "bytes": 26724
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/contact-sheet-native.png",
+      "sha256": "c009b49c011399ac1a28b7daaf918c17cdcc19c9bee413f3ce6f727ed1e8eced",
+      "bytes": 30590
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/index.html",
+      "sha256": "d80dbdf10d3a45f2796f865d7b07a035ef086e4ef86c47db925fe3403e7a4bd7",
+      "bytes": 2426
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/playback.js",
+      "sha256": "d7f00ffb1a77bbe22f6c5653c81dce650fb037ff98e77ad9faf3272a0e4b7b47",
+      "bytes": 3278
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/scene-native.png",
+      "sha256": "0c3e5ab8755fe7cbbb2aea39d7da0c197a6c5c1fa9deef875ee8d89deed006d1",
+      "bytes": 15364
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+      "sha256": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "bytes": 26646
+    },
+    {
+      "path": "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json",
+      "sha256": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618",
+      "bytes": 458020
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v1/contact-sheet-native.png",
+      "sha256": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244",
+      "bytes": 6920
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v1/scene-native.png",
+      "sha256": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545",
+      "bytes": 13070
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v1/sheet.png",
+      "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "bytes": 4061
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/contact-sheet-native.png",
+      "sha256": "7a13db1b6f8e55a617d2565af377ddc175cfc1dfe838f20d86cf69825bf03244",
+      "bytes": 6920
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/index.html",
+      "sha256": "425e43b9cb608634f6b72ef1b45b139b45d2dda6ebcece8125aa1824f0c09c76",
+      "bytes": 2169
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/playback.js",
+      "sha256": "a848902e51fbf3e65a3fc16d44bc806cf14c07e18bba2f3dbcd42b7c0e6d9d1b",
+      "bytes": 3259
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/scene-native.png",
+      "sha256": "0217e45a233185afb9048d93491828aba0509bd19aea72c0b0470c52e3328545",
+      "bytes": 13070
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "bytes": 4061
+    },
+    {
+      "path": "public/demos/wildlife-v2/fish/draft-v2/sprite.json",
+      "sha256": "e12f0e8c58b519467eed60fd754b13e220cb56560aed94b3e061e0ce5f661c5c",
+      "bytes": 21720
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v1/contact-sheet-native.png",
+      "sha256": "603535afa768c464402471efdd849e36e8eacb72fdb43d6d9328bddbb95c2659",
+      "bytes": 7797
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v1/scene-native.png",
+      "sha256": "12bb95ece8026d50196cef4e34a7c7b904ea76a7bc0ccb974384fde09a1c0de1",
+      "bytes": 12703
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v1/sheet.png",
+      "sha256": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725",
+      "bytes": 4834
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/contact-sheet-native.png",
+      "sha256": "e296347cb840af4af7d45c0ea389b6525acbe59df56a00eac470d5c6e8799baf",
+      "bytes": 7930
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/index.html",
+      "sha256": "2d46c2d9157a36bb61cd1be8710fc1c2d173f16d4d5ac378ed1f157d50fd58bb",
+      "bytes": 3805
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/playback.js",
+      "sha256": "1ebb799c0381589d29eeab7e4b0b5b75acf07fa21946541beda6272d4aca0057",
+      "bytes": 2868
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/scene-native.png",
+      "sha256": "92438eabe96f8b1f45a2dfff2da7cafe64eea353fef6ebce85024afb866ab7ac",
+      "bytes": 12771
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/sheet.png",
+      "sha256": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+      "bytes": 4888
+    },
+    {
+      "path": "public/demos/wildlife-v2/fox/pilot-v2/sprite.json",
+      "sha256": "f4a8f168ab03f1685dcfefa851fe9e244718629166d95eaff8fc199ac9773866",
+      "bytes": 109282
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/contact-sheet-native.png",
+      "sha256": "96746f333e17d31f25e0a191a2ba96cb3796fd317e8b99c5ea1cf6e57ef65b4d",
+      "bytes": 9893
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/index.html",
+      "sha256": "ed6d921262160c27ea389bfcc905516f03562205e920fea662019beed1cb9372",
+      "bytes": 1036
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/playback.js",
+      "sha256": "196e23524a64cbccd5d2b3cc7263398ca1546e69d6388cfa9f46054235f302e6",
+      "bytes": 3347
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/scene-native.png",
+      "sha256": "b51f7adc2b0e8ddf2fd3369bc46727c0ebce4c3080682072c6d18d577799aa89",
+      "bytes": 12346
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "sha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "bytes": 6994
+    },
+    {
+      "path": "public/demos/wildlife-v2/frog/draft-v1/sprite.json",
+      "sha256": "e87f7e5cca1ee780173a098299a4e8a795e1507da2ec2a20d2e7ef21c852f21e",
+      "bytes": 622505
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/contact-sheet-native.png",
+      "sha256": "f72a4df27c9285dcd56bb2be14a87cfc744d6d2d57c812a15d35259640270047",
+      "bytes": 35577
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/index.html",
+      "sha256": "cc5d4ee9bb0b04d987f601686d84c74a1605376da2a67ca0add60571d245c8f7",
+      "bytes": 2240
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/playback.js",
+      "sha256": "fd024e7024b65cc47ccc0ccd3eee136cdb896ad16cec352f14dbb14322bfe636",
+      "bytes": 3275
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/scene-native.png",
+      "sha256": "439de35b308c988a5169e29fb26d273efb784bda986469536cd9dd319b238e70",
+      "bytes": 16054
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+      "sha256": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "bytes": 31736
+    },
+    {
+      "path": "public/demos/wildlife-v2/giraffe/draft-v1/sprite.json",
+      "sha256": "95bb744f47a7ddc73e1f0cb731e121c2e8eb569a8d2b6f8a149b0cc7e526a835",
+      "bytes": 34618
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/contact-sheet-native.png",
+      "sha256": "ec4126726e20f0544dd90b900b16017788f245348e06edfb40a62d9bbff28c8f",
+      "bytes": 11450
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/index.html",
+      "sha256": "c00c8698d9a85a46f423eb10a57e0ac76c5bfb9a64250cc617fd5070dc24e47a",
+      "bytes": 2314
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/playback.js",
+      "sha256": "3c9340c947bbbae0f25f323b139cfb872ade7aeb08c92f84006b8524523837f8",
+      "bytes": 3048
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/scene-native.png",
+      "sha256": "d3d2767d606471c24fe1fc01770897cb00528f3456878da4dc4d0c4caea10a4d",
+      "bytes": 12880
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/sheet.png",
+      "sha256": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "bytes": 8509
+    },
+    {
+      "path": "public/demos/wildlife-v2/goat/draft-v1/sprite.json",
+      "sha256": "09dfabc82dbc8a4c802dad6cd35e8da79c37da5f61e1929efb0a83b51afc761d",
+      "bytes": 159529
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/contact-sheet-native.png",
+      "sha256": "2bb14aaf9151689c8dd5627df2c6f63792c22d79f0efb75e70ffadac7024f310",
+      "bytes": 21760
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/index.html",
+      "sha256": "79a33fcfdaa714add0ccc4f1b59a46605c20c09923efa06eb95fd26341e3d63a",
+      "bytes": 1693
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/playback.js",
+      "sha256": "84fd088a3fbaf9063b7d42a42274de43653f0200b22a30f94a5b06b8dc3b84f6",
+      "bytes": 3219
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/scene-native.png",
+      "sha256": "bdcb5a051e9d392466aafa1c81617cfa4f0f0744d54fd467fd876fa9b5ae2f07",
+      "bytes": 14330
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "sha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "bytes": 18424
+    },
+    {
+      "path": "public/demos/wildlife-v2/harbor-seal/draft-v1/sprite.json",
+      "sha256": "df9e71f4b32db3bbb6bccfc2223e2e495c297debde6a2a63d91fbec639619db1",
+      "bytes": 53158
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/contact-sheet-native.png",
+      "sha256": "7a7f2cf9c5dfe256bf016f7053cb1c88d82766529ab8ccd4139b2e488560189e",
+      "bytes": 19633
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/index.html",
+      "sha256": "fb3c56a0c1423dd6d39ee8febc0cd8ff395f9c4596309e4e68356b540ba8beed",
+      "bytes": 2262
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/playback.js",
+      "sha256": "a0298e15829a07ca931253cd3e3ae1df2cd599d782bfb9f9a48125c5ca393266",
+      "bytes": 3049
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/scene-native.png",
+      "sha256": "44367c9eec7f5a999d02465ef0ac612ec13e794efb688b69ff861d9344f9b466",
+      "bytes": 13247
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/sheet.png",
+      "sha256": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "bytes": 16884
+    },
+    {
+      "path": "public/demos/wildlife-v2/horse/draft-v1/sprite.json",
+      "sha256": "f50c3b172b67fef937a278830841f30a48781e4153df7f37cadd10f24ad88104",
+      "bytes": 159510
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/contact-sheet-native.png",
+      "sha256": "1f0c9bd9ed292a37f35f5f0e70d5c31ee1a1052e4e497c326707d359a99b35e5",
+      "bytes": 21418
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/index.html",
+      "sha256": "2028c669b0c1810e5ce8151623d660ae146adb96fcc466239d0c2ea4b3f865fa",
+      "bytes": 1133
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/playback.js",
+      "sha256": "36f37b7269fcd964cf99814365a0d058aa8efed1059aefbb8d9decd3ccbe379b",
+      "bytes": 3206
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/scene-native.png",
+      "sha256": "c5a786bd9a114b02806e37ecf38b8b904c84b88037ce302c4fd37788207326ed",
+      "bytes": 14389
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "sha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "bytes": 17865
+    },
+    {
+      "path": "public/demos/wildlife-v2/kangaroo/draft-v1/sprite.json",
+      "sha256": "4320065389d9c536f6b75b5230fbc5ec5e654e9cb687aa755b8f5150838ca947",
+      "bytes": 484489
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/contact-sheet-native.png",
+      "sha256": "677ff0aa538fa0d69b3a6e70c8a7e33c735fe44a2409a24af79bbc5b3e5b48e1",
+      "bytes": 10627
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/index.html",
+      "sha256": "281dc78722942f785b77a1822a4849089ad54fb6c329ddf54692e3342ed4a3e0",
+      "bytes": 1040
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/playback.js",
+      "sha256": "a8d0ccb34c4554ae46ba48db5a8e8b88f8a9daf830645e0f504267b7cebb1fb7",
+      "bytes": 3203
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/scene-native.png",
+      "sha256": "399c8bfb0c9fe970d00db80b99a2c440648ea1ca1c66cb01977f8931eded06c9",
+      "bytes": 13250
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "sha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "bytes": 7006
+    },
+    {
+      "path": "public/demos/wildlife-v2/king-cobra/draft-v1/sprite.json",
+      "sha256": "8c599edb78cbe18ce845fb2f84bf1bf9a9b72ec72444205868b486124303ae00",
+      "bytes": 19823
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/contact-sheet-native.png",
+      "sha256": "4b48ed77610a6075b4d9c946557d9737f5e379ccf944f91117219f462396c7ea",
+      "bytes": 13688
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/index.html",
+      "sha256": "0115731dc3ef1443637a75c8b200ce3a0359541a2e53815afed21e8c353de69b",
+      "bytes": 2360
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/playback.js",
+      "sha256": "6d3d400984f1ae2a18793ff045f4cd129190ef1c81c5afd1372dcd6d52cfd77e",
+      "bytes": 3309
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/scene-native.png",
+      "sha256": "b0fc583ec5b5f1e6563a9bece4e46d908b27eddb47000517e7233f8cb8ce37e5",
+      "bytes": 12465
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "sha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "bytes": 10958
+    },
+    {
+      "path": "public/demos/wildlife-v2/mallard-duck/draft-v1/sprite.json",
+      "sha256": "0b365602855a444c7df45e797a615dfb48e335a9ae6649a98c7f3738b6433def",
+      "bytes": 42277
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/contact-sheet-native.png",
+      "sha256": "3a49683296cdf29a890377106f97a0f79735633a84bb0095dbe2b450be26621d",
+      "bytes": 23392
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/index.html",
+      "sha256": "d87c11d1c93d371cf560507e22058101daceb487487ab1d6077e0f1648940871",
+      "bytes": 1659
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/playback.js",
+      "sha256": "bc7b1207dbb162e3054b63b7dd8663e6c973c4165848de55c642881714d697e8",
+      "bytes": 3077
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/scene-native.png",
+      "sha256": "ff99835a92010ceb9c36a3df817625dc6bbb0ffb0c16a63f96ea27c8597b88dd",
+      "bytes": 18097
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "sha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "bytes": 19156
+    },
+    {
+      "path": "public/demos/wildlife-v2/manta-ray/draft-v1/sprite.json",
+      "sha256": "e571a27d2d3e629281ba7b7c920de4cade8d7d7a607a16de4c51831c86ed1687",
+      "bytes": 25250
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/contact-sheet-native.png",
+      "sha256": "8a6f32a2928ed4b3e0c365a9b03fd39deddafab6a4965407ed106912097874b3",
+      "bytes": 14374
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/index.html",
+      "sha256": "ea2ba01e507430778be96b9424507ff220d85b18b4be9a8c35005f41f169594e",
+      "bytes": 1897
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/playback.js",
+      "sha256": "7534d5ec380b7adb69f5854963a3d337cdc8241fc7db2344bbb079992353e01b",
+      "bytes": 3332
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/scene-native.png",
+      "sha256": "2c36eaccb528ba1c401a9591906aded6d63ad048791814e2f9bbca19aa3c5aad",
+      "bytes": 13376
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "sha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "bytes": 11190
+    },
+    {
+      "path": "public/demos/wildlife-v2/penguin/draft-v1/sprite.json",
+      "sha256": "84dbe8456b179a62bb86f1dbf695a658135af62a564ae098194cbf8da1579153",
+      "bytes": 401884
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/contact-sheet-native.png",
+      "sha256": "f1426c5baa0e33ee2f5fb9a64d1f828db09ee6f8da1429d3c8718f85d2fabaca",
+      "bytes": 8699
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/index.html",
+      "sha256": "b16cfd7083cd131b2e82d7fe15eeae7ecc9e7f87051dcd67ed9cd2c119ace50b",
+      "bytes": 2263
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/playback.js",
+      "sha256": "40e3c981bce893c8f2e39012733a84df73b85fe76809c2b10142ff4bdadb56eb",
+      "bytes": 3047
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/scene-native.png",
+      "sha256": "5fefb8f4faaf8941c371902f5bcfa132d14a98fb4ad74f9155b39b573280974d",
+      "bytes": 12728
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/sheet.png",
+      "sha256": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "bytes": 6132
+    },
+    {
+      "path": "public/demos/wildlife-v2/piglet/draft-v1/sprite.json",
+      "sha256": "f9fa3f3f4d7320c9e89d54208672e504b003cb517d86820278fb1a61df10b876",
+      "bytes": 134154
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/contact-sheet-native.png",
+      "sha256": "717ee40dfde5fdc1e57e64e85f54d0ca5bf7a0efeb7911ac920eeb4506da4ba8",
+      "bytes": 6770
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/index.html",
+      "sha256": "8e5403633644531b855df350165f8a4dfd06297f7c94866a047fba4401dda405",
+      "bytes": 2220
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/playback.js",
+      "sha256": "87345febc2bb4c29df886b6915f8701b6644a65aa3bd854efe85832cc39a6ac6",
+      "bytes": 2895
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/scene-native.png",
+      "sha256": "942a71dcb5ac6f346cf500fb3abc83d57fbb2ad8b0634aeefe6ea801fe01a787",
+      "bytes": 12479
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+      "sha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "bytes": 4461
+    },
+    {
+      "path": "public/demos/wildlife-v2/rabbit/pilot-v1/sprite.json",
+      "sha256": "526a3a575e5c5e9c744e4b228e53453b37207b438edf9f620b6aefbe454455e3",
+      "bytes": 97962
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v1/contact-sheet-native.png",
+      "sha256": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d",
+      "bytes": 8196
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v1/scene-native.png",
+      "sha256": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd",
+      "bytes": 12220
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v1/sheet.png",
+      "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "bytes": 5828
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/contact-sheet-native.png",
+      "sha256": "60ab0017e311ab91470dcece744aec41fe436f33ca4de432f74cb57ee9ed046d",
+      "bytes": 8196
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/index.html",
+      "sha256": "7e4a7e9518de5f537dfd93e47f889ba72ab201869bb873384201642068738a39",
+      "bytes": 2220
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/playback.js",
+      "sha256": "a105dde81a6ee17ffbc5dcb1860acc264ccc56afacfcf49d08c0a8f48c189fdf",
+      "bytes": 3282
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/scene-native.png",
+      "sha256": "b97364d6b1cf9934f6cab903211861a48d531b9ecf02bb17b05b7ef787b25ddd",
+      "bytes": 12220
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/sheet.png",
+      "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "bytes": 5828
+    },
+    {
+      "path": "public/demos/wildlife-v2/robin/draft-v2/sprite.json",
+      "sha256": "30800bf96036022810760e7ae25372e98bc0d84ca588f6e9adef34c536abf8df",
+      "bytes": 31739
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/contact-sheet-native.png",
+      "sha256": "df37fc7d7516ffbba6009f8eb4dcf5b2861ecf08b3939348242854b7e81e8506",
+      "bytes": 9297
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/index.html",
+      "sha256": "894a04296a57eb6167e332632510172bc9a96b6dec6fe00e6befe377e960bf78",
+      "bytes": 2226
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/playback.js",
+      "sha256": "c844460df2cffef8aaa7e47e62d7318b707a1edc250c78a78c1f41e3ac499e9f",
+      "bytes": 3049
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/scene-native.png",
+      "sha256": "71d9438fe4f13cd280f2e84ef73bab10aa8415583e3b92ab42554861f28adcb3",
+      "bytes": 12564
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/sheet.png",
+      "sha256": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "bytes": 6704
+    },
+    {
+      "path": "public/demos/wildlife-v2/sheep/draft-v1/sprite.json",
+      "sha256": "f1a15b2548433c90052d6b6ccd44a125553067b875530788fe1481229b81274e",
+      "bytes": 159477
+    }
+  ]
+}
