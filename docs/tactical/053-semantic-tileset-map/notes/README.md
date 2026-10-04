@@ -12,6 +12,11 @@ not durable evidence. Do not commit original downloaded packs or private review 
 
 ## Planning checkpoint — 2026-10-04
 
+Later execution records: [source inventory](2026-10-04-source-inventory.md),
+[pilot method assessment](2026-10-04-pilot-method-review.md), and
+[coordinator reconciliation](2026-10-04-pilot-reconciliation.md).
+The planning/model/concurrency notes below preserve their original checkpoints.
+
 The owner agreed to one coordinator, limited worker concurrency, whole-sheet
 thematic categorization before detailed identification, and contrasting theme
 trials. Seasonal trees and a dumpyard area are owner-suggested reconnaissance

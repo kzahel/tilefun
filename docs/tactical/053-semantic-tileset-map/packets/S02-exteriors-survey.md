@@ -1,5 +1,9 @@
 # S02 — Modern Exteriors whole-sheet thematic survey
 
+Coordinator note: this is the original survey snapshot. Apply the
+[reconciliation corrections](../notes/2026-10-04-pilot-reconciliation.md#corrections-to-the-frozen-exteriors-survey)
+for E10, E15, E18 and E45 before using its labels or family suggestions.
+
 ## Assignment
 
 - Owner: Exteriors survey worker. Date: 2026-10-04. Revision: 1.

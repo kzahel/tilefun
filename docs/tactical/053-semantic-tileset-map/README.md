@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: source inventory and thematic survey in progress; trials pending.
+Status: source inventory, broad surveys and three pilots reconciled; shared validator next.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -15,6 +15,8 @@ and families. The owner should not have to identify every object for the agents.
 - [Packet template](packet-template.md): source evidence, hypotheses and review
   contract for a bounded investigation. Put completed packets in `packets/`.
 - [Notes](notes/README.md): dated observations, experiments and execution records.
+- [Pilot reconciliation](notes/2026-10-04-pilot-reconciliation.md): current
+  corrections and qualifications to apply when using the frozen trial snapshots.
 - [Topic](../../topics/semantic-tileset-map.md): current status and lasting decisions.
 - [Art review](../../topics/art-review.md): authoritative human-review rules.
 

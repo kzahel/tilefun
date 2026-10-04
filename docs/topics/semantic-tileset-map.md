@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: source inventory pinned and thematic surveys proposed; three trials in progress.
+Status: source inventory pinned; broad surveys and three pilots independently reviewed and reconciled.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -45,5 +45,14 @@ masters remain ignored local inputs; the Exteriors master matches committed art.
 The [packet index](../tactical/053-semantic-tileset-map/packets/README.md) routes
 whole-master Exteriors and Interiors/Room Builder surveys. Their proposed windows
 account for visible source regions but do not claim completed object semantics.
-Next: reconcile the three trial proposals and independently review them and the
-broad thematic maps. The user authorized reasonable checkpoint commits.
+The three pilots contain 85 source records / 67 proposal units, including variants
+and components; these are not unique-object or completion counts. The
+[coordinator reconciliation](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-reconciliation.md)
+owns adopted corrections and qualifications, including refuted Exteriors region
+labels. Apply it alongside the frozen proposal JSONs. No new human approvals exist.
+
+Next: build V01, a common read-only
+packet adapter/validator before expanding theme assignments. Its
+[criteria](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice)
+cover exact source references, all occurrences, compositions, derived variants and
+review applicability. The user authorized reasonable checkpoint commits.
