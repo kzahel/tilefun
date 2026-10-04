@@ -49,3 +49,34 @@ Three Sol6.1/high mappers own separate packet/helper paths; the coordinator owns
 presentation changes and shared catalogs. Frozen proposals rotate to different
 reviewers before integration. Exact whole-master matches, source-only records,
 reconstructed padding, topology and game geometry remain separate claims.
+
+
+## Independent research checkpoint
+
+All three mapper packets are frozen and separately reviewed. E04 and I02 were
+cross-reviewed by the other mapper; the coordinator reviewed E05 after inspecting
+source pixels before reading its claims. Source helpers and separate source/pixel
+and recipe checks passed. Each review has explicit candidate dispositions and
+pins the exact proposal/helper snapshot. The registry marks these review-ready;
+normalization and public delivery are separate steps.
+
+- E04: 19 records / 19 proposal units, displayed as seven card groups. Sixteen
+  whole-master matches and three alpha-visible matches restored to their native
+  transparent frames. Upright pot variants also differ in foliage; they are not
+  simple pot recolors. Species, material and raised-planter depth stay unknown.
+- I02: 18 records / six units. Four complete beds and two blanket components,
+  each with normal, dark-shadow and shadowless records. Black-shadow export
+  numbers differ from normal/shadowless numbering. Twelve bed records lack an
+  exact whole-master counterpart; six covers have one. Seventeen probes preserve
+  positive placement and rejected wrong-end/offset/standalone alternatives.
+- E05: 27 records / 27 units. Twenty-two picket components require matching
+  neighbors. Four garden gates have unknown standalone eligibility and one shrub
+  is a whole visual hypothesis. Seven closed fence forms, one explicitly open
+  run, four failed arrangements and two unresolved/weakened hedge trials were
+  replayed. Material and game behavior stay unknown; the two kits cannot inherit
+  each other's compatibility. The 27 names represent 23 distinct pixel states.
+
+Research therefore adds 64 source records / 52 proposal units, not 64 new game
+objects. Seven plant cards, six bed cards and 25 fence/gate cards are planned.
+The wider plant, bedroom and fence families remain unassigned; no master-sheet
+completion percentage follows from this slice.

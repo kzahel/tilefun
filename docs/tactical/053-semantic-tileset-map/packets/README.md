@@ -69,3 +69,17 @@ These 59 component/frame records now have explicit normalization and three quiet
 family sheets, bringing the total to 191 records / 164 proposal units. The
 [delivery record](../notes/2026-10-04-component-family-delivery.md) preserves exact
 validation and review scope. No human approval or gameplay metadata is inferred.
+
+
+## Reviewed plants, bedroom and fence slice
+
+| Packet | Bounded source scope | Independent review |
+| --- | --- | --- |
+| [E04 Plants and planters](E04-plants-planters.md) · [JSON](E04-plants-planters.json) | 19 broadleaf trees, flowers and pots; seven proposed display groups | [Review](E04-plants-planters-review.md): all 19; three native transparent-frame restorations retain partial-master lineage |
+| [I02 Side beds and blankets](I02-bedroom.md) · [JSON](I02-bedroom.json) | 18 records / six units in three render variants | [Review](I02-bedroom-review.md): all 18 and 17 overlay probes; twelve beds retain original-only master lineage |
+| [E05 Fences and garden gates](E05-fences-gates.md) · [JSON](E05-fences-gates.json) | 22 picket components, four separate garden gates and one shrub trial | [Review](E05-fences-gates-review.md): all 27 and 14 probes; gate-side and cross-kit joins unproven |
+
+These 64 source records / 52 proposal units are independently reviewed research.
+Their [delivery record](../notes/2026-10-04-plants-bedroom-fences.md) tracks explicit
+normalization and quiet sheets. Registry entries alone do not grant coverage,
+human approval or gameplay geometry.
