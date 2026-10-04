@@ -104,3 +104,80 @@ All eight family-sheet browser tests passed in the full regression run.
 The full browser run passed 332 of 333 tests; standalone review was blocked by
 the stale-build guard after concurrent shared-rendering changes. Rebuilding
 against the current manifest resolved it, and the standalone test passed.
+
+
+## First owner comments and tree follow-up
+
+Read the shared inbox on 2026-10-04. All four new comments match the current
+family revisions and catalog `a6485f487361ff60deb0373aaa65a0e2133fc02e0f8e0234741925d6857a03dd`.
+The original private records remain in the inbox; this is a decision/evidence
+summary, not a copied event log.
+
+- [Cabinets feedback](https://tilefun.graehlarts.com/tilefun/workshop.html#/thread/art%3A1533a623-2638-48a4-8b1b-8a21bab8deca): positive whole-sheet feedback on the displayed normal-shadow selection.
+- [Scrapyard feedback](https://tilefun.graehlarts.com/tilefun/workshop.html#/thread/art%3A676cafe4-78e4-4ced-8c7f-bac948f51368): positive whole-sheet feedback on the original artwork selection.
+- [Tree-base question](https://tilefun.graehlarts.com/tilefun/workshop.html#/thread/art%3A8f423e7e-7bf8-42f3-8e44-ad8e78b3dd26): the owner identifies card 4 as a tree base and asks about its color relative to cards 1–3.
+- [Forest repetition hypothesis](https://tilefun.graehlarts.com/tilefun/workshop.html#/thread/art%3Aa33d4926-c4de-4d66-8286-99065fca6af7): the large center pieces may repeat to produce a dense forest.
+
+Positive comments are retained as owner feedback on these exact proposals; the
+current discussion-only UI has not promoted catalog records or gameplay geometry.
+No agent replies or status changes were written to the shared inbox.
+
+### Tree bases
+
+The owner's noun is clearer: these are alternative tree bases. “Replacement” is
+an assembly operation, not their object identity. Rechecked the green palette from
+pinned Exteriors SHA `1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737`:
+
+| Base | Comparison to displayed complete trees' bottom 64×16 region |
+| --- | --- |
+| Card 4, B01 at `[2464,80,64,16]` | Exactly equals tree 2; differs from tree 1 in 165 RGBA pixels and tree 3 in 193 |
+| Card 5, B02 at `[2464,96,64,16]` | Exactly equals tree 3; differs from tree 1 in 194 RGBA pixels and tree 2 in 193 |
+
+Reproduction: render the first five green variants' recorded layers with RGBA
+replacement, then compare the bottom 16 rows of each complete tree to each base.
+B01/tree-2 lower bytes hash to
+`003a5d26c4bf038584a7903d998f0db8210c39f1d72c5e032525cc0dcc712422`;
+B02/tree-3 lower bytes hash to
+`de1e8ab9ef070f9e4f5cbde2efd15d95dbdca10f1ba672885fa06036c3f70d1b`.
+The current tree display therefore has no different-color mismatch between card 4
+and tree 2. The detached base can look different without its surrounding canopy.
+Presentation follow-up: label the group Tree bases, name pale/green-tinted bases,
+and say explicitly which displayed complete tree each base produces.
+
+### Forest repeat probe
+
+A GPT-6.1 Sol/high investigator checked all three center pieces against pinned
+source pixels; the coordinator inspected native-canvas repeat captures. No source
+pixels, frozen packets, displayed family metadata or approvals changed.
+
+| Center | Source rectangle | Tested horizontal step | Nonoverlapping vertical step |
+| --- | --- | ---: | ---: |
+| F02 / card 7 | `[2512,1600,128,112]` | 128px | 112px |
+| F05 / card 10 | `[2512,1712,128,80]` | 128px | 80px |
+| F08 / card 13 | `[2512,1792,112,80]` | 112px | 80px |
+
+Repeated centers with their own row's end pieces form visually plausible extended
+horizontal forest strips: left fragment at x=0, centers at x=48+k×step, right
+fragment at x=48+n×step, all top-aligned. A 3×3 grid using the full sprite heights exposes repeated
+front/base rows and green ground bands; it does not establish seamless dense fill
+in both directions. Painter-ordered row overlap at a 48px vertical step makes a
+dense-looking forest, but hides parts of previous trunks/bases and is an alternative
+scene composition hypothesis, not an established tile topology rule. Repeating
+motifs, corners, mixed-row compatibility, boundaries and collision still need review.
+
+Reproduction: use source-only canvas draws (no scaling while composing), render
+left + four centers + right at each row's recorded height; render a 3×3 center grid
+at the table's steps; compare vertically overlapping center rows with 16/32/48/64px
+steps, back rows before front rows. Use nearest-neighbor enlargement only for display.
+The independent probe used bundled full Playwright Chromium and CPU pattern drawing;
+temporary captures are [strips and grids](/tmp/tilefun-forest-repeat/nonoverlap.png),
+[vertical overlaps](/tmp/tilefun-forest-repeat/vertical-overlaps.png), and a
+[side-by-side comparison](/tmp/tilefun-forest-repeat/comparison.png). Exact rectangles and assembly
+steps here are sufficient to reconstruct the evidence without those files.
+
+Next display proposal: ordinary tree-base labels and explicit base-to-tree links,
+plus a horizontal repeated-center example; keep dense two-dimensional forest fill
+as a separate hypothesis for visual review. This checkpoint records findings only.
+
+Feedback checkpoint validation: 1,500 unit tests, typechecks and lint passed
+(existing warnings). Only plan/topic documentation changed in this checkpoint.

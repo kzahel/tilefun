@@ -29,7 +29,9 @@ an agent-written queue status.
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Queued | Unassigned |
 | R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and validated for all three pilots | 52 cards / 85 records, variants, assemblies, selected-piece metadata and shared notes; three proposed discovery candidates, no approval/promotion controls |
 
-Next action: discuss the three contact sheets with the owner, then complete V01's broader schema before scaling theme
+| R02 | Act on first owner comments: tree-base names/relations and forest repeat examples | R01 | Source checks complete; display proposal queued | [Feedback evidence](notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up); cabinets/scrapyard have positive whole-sheet comments; horizontal repeats supported, dense vertical fill remains a hypothesis |
+
+Next action: present R02’s tree-base relationships and repeated forest strips, then complete V01's broader schema before scaling theme
 assignments. Read the [coordinator corrections](notes/2026-10-04-pilot-reconciliation.md)
 alongside all frozen proposals. Worker models are GPT-6.1 Sol/high. The coordinator
 alone commits checkpoints. Reconciled research does not mean human-approved or

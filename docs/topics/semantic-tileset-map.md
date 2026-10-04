@@ -85,7 +85,15 @@ JSON and images without original packs. Source images and metadata revisions are
 also verified before browser notes can be submitted. Three discovery candidates
 in one existing-inbox batch route directly to these sheets; notes remain discussion.
 
-Next: discuss the sheets with the owner, then extend V01 beyond the presentation
+The first owner comments gave positive whole-sheet feedback on cabinets and
+scrapyard, questioned the tree-base naming/color, and proposed repeating forest
+centers. The [follow-up evidence](../tactical/053-semantic-tileset-map/notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up)
+confirms card 4 exactly matches tree 2’s base and card 5 matches tree 3’s base.
+Horizontal center repetition is visually supported; dense vertical fill requires
+a separate overlap/placement proposal. Display refinements are queued; formal
+catalog status remains Proposed.
+
+Next: present the tree-base relationships and repeated forest strips, then extend V01 beyond the presentation
 adapter to the full source/relationship/review schema before expanding themes. Its
 [criteria](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice)
 cover exact source references, all occurrences, compositions, derived variants and
