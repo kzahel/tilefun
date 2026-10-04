@@ -89,8 +89,9 @@ Use shared server authority, replicated rendering and the current shared
 persistence/residency contract. Existing vehicle approvals do not cover train
 or structure geometry. New exact candidates follow [art review](art-review.md);
 promoted banks and exact review snapshots remain immutable. Railway integration
-updates the current generator and bumps its version; retired saves use explicit
-same-seed recreation, as described in [city generation](city-generation.md).
+composes the current generator. The active greenfield policy permits changes
+without version bumps and treats development saves as disposable; see
+[city generation](city-generation.md).
 
 ## Review entry points
 
@@ -116,7 +117,8 @@ pixels still require review.
 
 Canonical east/west owner pairs can receive a straight single-track line, two
 north-side platforms and paved paths to the towns' southern center streets.
-Admission rejects wet approaches and existing road crossings. No town buildings
+Admission rejects wet approaches and unsupported road conflicts; the current
+greenfield slice allows one isolated straight road bridge per line. No town buildings
 are moved. Some seeds have no eligible line in the bounded starting search;
 those retain the normal town start. Seed 2026 starts at tile **2543,-2662**,
 beside a line to the second station at **3422,-2658**.
@@ -165,6 +167,17 @@ horizontal routes with three replicated native sections, separate footprint
 support/clearance and a single service record retaining all heights and speed.
 The shared Realm/renderer handles each body; dependency terrain is readied before
 restoration publishes the group. Generated services remain on flat single-body
-routes and older records remain readable. This lab is pending human review;
+routes and older records remain readable. The user accepted this lab in chat;
 carriages stay horizontal, so slope joins expose the remaining articulation/art
 gap. Review before selecting one small generated structure crossing.
+
+
+## Generated road-over-rail crossing
+
+The user accepted the train grade proof and authorized a first generated crossing,
+without a generator-version bump. [Tactical 062](../tactical/062-generated-road-rail-crossing.md)
+owns admission, streaming/persistence evidence and review links. One eligible
+north/south road receives a 64px deck with two ramps above the flat railway.
+Generated cars use the shared surface-following path; players can walk above
+or underneath. The bridge retains schematic lab presentation; no new bridge
+art bank is promoted. Review fixed seeds 100, 42 and 3 before expanding structures.

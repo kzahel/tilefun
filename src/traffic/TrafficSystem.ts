@@ -10,7 +10,10 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { actorScope } from "../persistence/ActorRecords.js";
+import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
+import { bridgePart } from "../railway/RoadRailBridge.js";
+import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import {
@@ -194,7 +197,10 @@ export class TrafficSystem {
           !road ||
           road === 2 ||
           road === 6 ||
-          (!surfaceFollowing && this.world.getHeightAt(x, y) !== 0)
+          (!surfaceFollowing &&
+            (this.world.getHeightAt(x, y) !== 0 ||
+              road === RoadType.RailHorizontalTop ||
+              road === RoadType.RailHorizontalBottom))
         )
           return false;
       }
@@ -226,6 +232,16 @@ export class TrafficSystem {
         Math.floor(box.right / CHUNK_SIZE_PX),
         Math.floor(box.bottom / CHUNK_SIZE_PX),
       );
+      for (const region of [
+        ...(s.lane.requiredSurfaces ?? []),
+        ...(s.next?.requiredSurfaces ?? []),
+      ]) {
+        if (
+          aabbsOverlap(box, region.bounds) &&
+          !props.some((p) => p.collider?.surface?.id === region.id)
+        )
+          return { z, reason: "surface unavailable" };
+      }
       const nextZ = resolveGroundZForTracking(
         {
           id: s.entity.id,
@@ -242,6 +258,13 @@ export class TrafficSystem {
         props,
         [],
       );
+      // A road bridge has one legal road level; never spawn/drive on its rails below.
+      for (const p of props) {
+        const c = p.collider;
+        if (!bridgePart(p.type) || !c?.surface) continue;
+        const support = querySurfacePatch(c.surface, getEntityAABB(p.position, c), box);
+        if (support && nextZ < support.topMax - 0.001) return { z, reason: "unsupported grade" };
+      }
       if (Math.abs(nextZ - z) > (i ? (ahead / steps) * 0.5 : 0) + 0.001)
         return { z, reason: "unsupported grade" };
       for (const p of props)
@@ -489,6 +512,8 @@ export class TrafficSystem {
         !TRAFFIC_MODELS.includes(r.model) ||
         ![
           r.wz ?? 0,
+          r.wx ?? r.x,
+          r.wy ?? r.y,
           r.x,
           r.y,
           r.distance,
@@ -503,7 +528,8 @@ export class TrafficSystem {
         typeof r.identity !== "string"
       )
         throw new Error("Invalid saved traffic record.");
-      const graph = this.strategy.trafficNetwork(r.x, r.y),
+      // Resolve the same local graph used when choosing the saved successor.
+      const graph = this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y),
         lane = graph.lanes.get(r.laneId);
       if (!lane) throw new Error("Saved traffic lane is unavailable.");
       const next = r.nextId

@@ -190,3 +190,9 @@ advances physics. Moving diagnostic cameras also drive the streaming range;
 the scenario view includes the player’s prediction neighborhood when the camera
 looks elsewhere. This supports the lab's follow-train/whole-route cameras without
 an independent simulation or a renderer-only train substitute.
+
+The [generated crossing previews](../tactical/062-generated-road-rail-crossing.md)
+use real regional recipes, generated surfaces/routes and terrain presentation
+through this same host. Their only staging is initial observer/car/train positions
+and disabled extra traffic population. Generated train starts are valid saved
+service records seeded before Realm startup, not a preview-only movement loop.

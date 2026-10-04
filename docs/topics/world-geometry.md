@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: deck, garage, crossing and car grade proofs accepted; per-carriage train grades implemented for review. Broader terrain authoring and interior integration remain open.
+Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge implemented for review. Broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -261,22 +261,20 @@ with continuous connected spaces remains open. No realm migration is selected.
 
 ## Next step and evaluation
 
-The user accepted the [car proof](../tactical/060-vehicle-grade-proof.md) and
-next authorized [train grades](../tactical/061-train-grade-proof.md). Review three
-independent carriage heights across a raised section and tunnel, whole-train
-clearance, reversing and slope reload. Follow/overview camera inspection stays
-independent of physics, including while paused. Native carriage bodies remain
-horizontal, exposing stepped joins on grades; articulated presentation is still
-an open decision. Generated infrastructure remains unchanged.
+The user accepted the [train grade proof](../tactical/061-train-grade-proof.md)
+and authorized [one generated road crossing](../tactical/062-generated-road-rail-crossing.md).
+Review the real regional terrain, road ramps, cars above a level train and
+save/reload in three fixed-seed worlds. Bridge presentation remains the schematic
+surface model; the unchanged horizontal train avoids grade-art joins here.
+The user explicitly waived a generator bump during greenfield development.
 
-After review, choose one deliberate generated bridge/tunnel crossing and decide
-whether its required art needs further work first. Connected indoor levels still
-need a design against realm boundaries before migration or a durable authoring
-format is selected.
+After review, consider a walkable underground station entrance to exercise a
+connected lower destination. Connected indoor levels still need a design against
+realm boundaries before migration or a durable authoring format is selected.
 
 Further prototypes should use the existing [scenario runtime](gameplay-scenarios.md)
 and respect [embedded engine lab alignment](embedded-engine-labs.md). Exercise
 shared collision and prediction, save/reload on ramps and below decks, chunk
 seams/readiness, two observers on different levels, and the normal fixed game
 view alongside geometry inspection. Maintain one current generator; do not
-change saved-world compatibility or promote new art during this design record.
+retain historical generator implementations or promote unreviewed new art.

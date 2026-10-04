@@ -113,3 +113,10 @@ chunk range without a simulation tick. Reload preserves that range, including
 when the camera is far from the player. Railway restoration waits for service
 footprint readiness before publishing bodies. `ScenarioSession.ready` also waits
 for pending railway lifecycle work and reports its errors.
+
+`GeneratedCrossingRecipe` supplies three current regional worlds without authored
+roads, railway routes or props. Optional `railwayStarts` seeds initial saved
+service positions before Realm startup; production railway validation and motion
+own them thereafter. Staged traffic uses the real generated lane graph. Reset
+creates a fresh world; reload preserves terrain, generated part identities,
+car height and service state. See [tactical 062](../tactical/062-generated-road-rail-crossing.md).

@@ -5,10 +5,14 @@ import queries from "../physics/SimulationEnvironment.ts?raw";
 import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
 import excavation from "../physics/TerrainExcavation.ts?raw";
+import planner from "../railway/RailwayPlanner.ts?raw";
+import strategy from "../railway/RailwayStrategy.ts?raw";
 import railway from "../railway/RailwaySystem.ts?raw";
+import bridge from "../railway/RoadRailBridge.ts?raw";
 import trainBodies from "../railway/Train.ts?raw";
 import ordering from "../rendering/presentSurfaceScene.ts?raw";
 import presentation from "../rendering/SurfacePresentation.ts?raw";
+import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
@@ -93,5 +97,40 @@ export async function buildWorldGeometryCandidate(
             : "/tilefun/workshop.html#/tool/world-geometry",
     fingerprint,
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",
+  };
+}
+
+export async function buildGeneratedCrossingCandidate(index: number): Promise<WorkshopCandidate> {
+  const scene = generatedCrossingRecipe(index);
+  return {
+    id: `geometry:generated-crossing-${scene.recipe.generation.seed}-v1`,
+    batchId: "world-geometry",
+    kind: "geometry",
+    name: `Generated road bridge · seed ${scene.recipe.generation.seed}`,
+    prompt:
+      "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
+    url: `/tilefun/workshop.html?geometry=generated-${scene.recipe.generation.seed}#/tool/world-geometry`,
+    fingerprint: await sha256(
+      new TextEncoder().encode(
+        JSON.stringify({
+          scene,
+          reverse: generatedCrossingRecipe(index, true),
+          planner,
+          strategy,
+          bridge,
+          traffic,
+          railway,
+          collision,
+          movement,
+          queries,
+          support,
+          geometry,
+          presentation,
+          ordering,
+        }),
+      ),
+    ),
+    excluded:
+      "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot.",
   };
 }

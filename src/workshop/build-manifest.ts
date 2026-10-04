@@ -15,7 +15,10 @@ import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import { buildWildlifeCandidates, WILDLIFE_BATCHES } from "./WildlifeCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
-import { buildWorldGeometryCandidate } from "./WorldGeometryCandidate.js";
+import {
+  buildGeneratedCrossingCandidate,
+  buildWorldGeometryCandidate,
+} from "./WorldGeometryCandidate.js";
 
 const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) => r.json())) as ArtCatalog;
 const source = required(catalog.sheets.find((s) => s.id === "me-complete"));
@@ -41,6 +44,7 @@ try {
     await buildWorldGeometryCandidate("car-bridge"),
     await buildWorldGeometryCandidate("car-garage"),
     await buildWorldGeometryCandidate("train-grades"),
+    ...(await Promise.all([0, 1, 2].map(buildGeneratedCrossingCandidate))),
   );
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildFamilySheetCandidates()));

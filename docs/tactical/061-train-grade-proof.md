@@ -1,6 +1,7 @@
 # 061 — Train grades, bridge and tunnel
 
-Status: implemented and validated; human review pending.
+Status: implemented, validated and accepted in chat on 2026-10-04.
+The user subsequently authorized the generated crossing in tactical 062.
 Owner: [world geometry](../topics/world-geometry.md), [trains](../topics/trains.md).
 
 The user accepted the car grade proof in chat and authorized the next bounded

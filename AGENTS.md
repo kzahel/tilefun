@@ -42,8 +42,9 @@ Engine changes must account for affected embedded labs. Read
 simulation, prediction, presentation or renderer lifecycle; keep game and lab
 consumers aligned through shared engine code.
 
-Maintain one current regional generator. Bump its version when output changes;
-retired worlds require explicit same-seed recreation, not historical emulation.
+Maintain one current regional generator. During active greenfield prototyping,
+output may change without version bumps; existing development worlds are disposable.
+Retired worlds use same-seed recreation, not historical emulation.
 Promoted asset banks and exact review snapshots remain immutable; never regenerate
 them during builds. Read [city generation](docs/topics/city-generation.md) before
 changing generation or promotions.

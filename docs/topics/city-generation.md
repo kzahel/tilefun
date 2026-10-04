@@ -14,11 +14,15 @@ It does not automatically promote the v7–v10 review candidates. Classic, Islan
 Flat remain distinct simple presets, not historical regional revisions.
 
 Build new features by composing the current planners, terrain, placements and actors.
-When output changes, bump the current version and update the current behavior tests.
-Keep deterministic replay, query-order independence, seam/geometry checks and stable
-IDs *within that version*. Do not retain runtime branches or old world-output hashes
-to reproduce retired versions. The version in a save detects incompatibility; it is
-not a promise that the old algorithm remains available.
+During the current greenfield phase, the user explicitly allows output changes
+without version bumps (2026-10-04); development worlds are disposable. Keep the
+current behavior tests, deterministic replay, query-order independence, seam/geometry
+checks and stable IDs for the current implementation. Old same-version terrain/edits
+are not migrated: use a fresh world or explicit recreation to inspect new output.
+This change does not automatically erase any saved worlds. Do not retain runtime
+branches or old world-output hashes to reproduce retired versions. The version
+in a save detects retired descriptors, not output drift within the active
+greenfield version; it is not a promise that the old algorithm remains available.
 
 Old worlds remain listed with a compatibility reason. **Recreate with same seed**
 creates a new save ID using the current generator; it copies no edits, characters,
@@ -71,11 +75,10 @@ asset promotion and inclusion in the current generator are separate decisions.
 
 ## Next work
 
-[Generated railways](trains.md) have isolated previews, not overworld integration.
-The next authorized railway slice would reserve stations, corridors, structure
-approaches and street/walking access together, then implement a two-town local
-service in the current generator with a version bump. No railway integration is
-part of the generation-policy cleanup.
+[Generated railways](trains.md) now admit one isolated road bridge per eligible
+line. [Tactical 062](../tactical/062-generated-road-rail-crossing.md) records the
+current greenfield integration and three seeded previews. Regional-v13 remains
+the descriptor by explicit user direction. No promoted art bank changed.
 
 Continue reviewing the thirteen city-place views before promotion. Later city work
 includes farmers markets, connected parks, frontage variety and richer schedules.

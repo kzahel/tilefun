@@ -1,3 +1,4 @@
+import { required } from "../art/ArtCatalog.js";
 import { pathDistance } from "../generation/regional/PlanGeometry.js";
 import {
   type Bounds,
@@ -9,6 +10,7 @@ import {
   settlementForOwner,
 } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
+import type { RailBridge } from "./RoadRailBridge.js";
 
 export interface RailStation {
   id: string;
@@ -25,6 +27,7 @@ export interface RailLine {
   start: number;
   end: number;
   stations: [RailStation, RailStation];
+  bridges: RailBridge[];
 }
 /** Non-overlapping east/west owner pairs. All distances are tiles. No unsupported crossings. */
 export class RailwayPlanner {
@@ -61,7 +64,7 @@ export class RailwayPlanner {
       }),
     ) as [RailStation, RailStation];
     const bounds = { minX: a.center.x - 20, maxX: b.center.x + 20, minY: y - 2, maxY: y + 2 };
-    // Grade-separated structures are not available yet: reject wet routes and road conflicts.
+    // Dry rail/station admission is unchanged; at most one isolated straight road crossing.
     const dry = (b: Bounds) => {
       for (let ty = b.minY; ty <= b.maxY; ty += 2)
         for (let tx = b.minX; tx <= b.maxX; tx += 4)
@@ -69,15 +72,56 @@ export class RailwayPlanner {
       return true;
     };
     if (!dry(bounds) || stations.some((s) => !dry(s.platform) || !dry(s.access))) return null;
+    const bridges: RailBridge[] = [];
     for (let sy = cy - 1; sy <= cy + 1; sy++)
       for (let sx = cx - 1; sx <= cx + 2; sx++)
         for (const axis of ["east", "south"] as const) {
           const road = connectionForOwner(this.world, sx, sy, axis);
           if (!road) continue;
+          const conflicts = [];
           for (let x = bounds.minX; x <= bounds.maxX; x += 4)
-            if (pathDistance(road.points, x, y) <= 10) return null;
+            if (pathDistance(road.points, x, y) <= 10) conflicts.push(x);
+          if (!conflicts.length) continue;
+          const crossing = road.points
+            .slice(1)
+            .map((p, i) => ({ a: required(road.points[i]), b: p }))
+            .find(
+              ({ a: p, b: q }) =>
+                p.x === q.x &&
+                p.x > a.center.x + 40 &&
+                p.x < b.center.x - 40 &&
+                Math.min(p.y, q.y) <= y - 28 &&
+                Math.max(p.y, q.y) >= y + 28,
+            );
+          if (!crossing || bridges.length || conflicts.some((x) => Math.abs(x - crossing.a.x) > 10))
+            return null;
+          const x = crossing.a.x;
+          const bridgeBounds = { minX: x - 6, maxX: x + 6, minY: y - 20, maxY: y + 20 };
+          if (!dry(bridgeBounds)) return null;
+          bridges.push({
+            id: `${id}:bridge:${road.id}`,
+            roadId: road.id,
+            x,
+            y,
+            bounds: bridgeBounds,
+          });
         }
-    return { id, bounds, y, start: a.center.x, end: b.center.x, stations };
+    // No other road, town block or station may intrude into an approach reservation.
+    for (const bridge of bridges) {
+      for (let sy = cy - 1; sy <= cy + 1; sy++)
+        for (let sx = cx - 1; sx <= cx + 2; sx++) {
+          const town = settlementForOwner(this.world, sx, sy);
+          if (town && Math.abs(town.center.x - bridge.x) < 54 && Math.abs(town.center.y - y) < 68)
+            return null;
+          for (const axis of ["east", "south"] as const) {
+            const road = connectionForOwner(this.world, sx, sy, axis);
+            if (!road || road.id === bridge.roadId) continue;
+            for (let ty = y - 24; ty <= y + 24; ty += 2)
+              if (pathDistance(road.points, bridge.x, ty) <= 14) return null;
+          }
+        }
+    }
+    return { id, bounds, y, start: a.center.x, end: b.center.x, stations, bridges };
   }
   query(bounds: Bounds): RailLine[] {
     const result: RailLine[] = [];
@@ -93,6 +137,7 @@ export class RailwayPlanner {
         if (
           line &&
           (intersects(bounds, line.bounds) ||
+            line.bridges.some((b) => intersects(bounds, b.bounds)) ||
             line.stations.some(
               (s) => intersects(bounds, s.platform) || intersects(bounds, s.access),
             ))

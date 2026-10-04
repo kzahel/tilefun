@@ -1,4 +1,5 @@
 import { required } from "../art/ArtCatalog.js";
+import type { AABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import type { DistrictPlan } from "../generation/regional/DistrictPlanner.js";
 import type { Connection, Point } from "../generation/regional/RegionalPlanner.js";
@@ -10,8 +11,10 @@ export interface RoadSegment {
   intercity: boolean;
 }
 export interface Lane {
-  /** Authored route follows shared terrain/slab support; ordinary generated lanes stay level. */
+  /** Route follows shared terrain/slab support, including generated road bridges. */
   surfaceFollowing?: boolean;
+  /** Required physical patches; absent/deleted/unready geometry blocks the route. */
+  requiredSurfaces?: { id: string; bounds: AABB }[];
   id: string;
   from: string;
   to: string;

@@ -76,6 +76,23 @@ export class ScenarioSession {
     }
   }
   private async open(fresh: boolean) {
+    if (fresh && this.recipe.railwayStarts) {
+      if (this.recipe.railwayStarts.length > 4) throw new Error("Too many scenario train starts");
+      await this.records.commit(
+        this.recipe.railwayStarts.map((r) => {
+          if (!r.id || !Number.isFinite(r.x) || ![0, 1].includes(r.target))
+            throw new Error("Invalid train start");
+          return {
+            put: {
+              collection: "railServices",
+              revision: 1,
+              key: r.id,
+              value: { version: 1, x: r.x, target: r.target, dwell: 0, speed: 0, deleted: false },
+            },
+          };
+        }),
+      );
+    }
     const meta: WorldMeta = {
       id: "scenario",
       name: this.recipe.id,
@@ -138,7 +155,7 @@ export class ScenarioSession {
       },
     });
     await this.realm.loadWorld(meta.id, registry, () => this.store);
-    if (this.recipe.trafficLanes && this.realm.traffic) {
+    if ((this.recipe.trafficLanes || this.recipe.traffic) && this.realm.traffic) {
       this.realm.traffic.canSpawn = () => false;
       this.realm.traffic.settings.speed = this.recipe.trafficSpeed ?? 36;
     }

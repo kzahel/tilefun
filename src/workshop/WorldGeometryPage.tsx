@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
@@ -6,6 +6,10 @@ import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
+import {
+  GENERATED_CROSSINGS,
+  generatedCrossingRecipe,
+} from "../scenarios/GeneratedCrossingRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { TRAIN_GEOMETRY_STARTS, trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
@@ -23,12 +27,18 @@ export default function WorldGeometryPage() {
   const [fixture, setFixture] = useState(
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
+  const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
+  const generated = generatedIndex >= 0;
   const garage = fixture === "garage" || fixture === "car-garage",
-    crossing = fixture === "crossing" || fixture === "car-bridge",
+    crossing = fixture === "crossing" || fixture === "car-bridge" || generated,
     vehicle = fixture === "car-garage" || fixture === "car-bridge",
     trainGrade = fixture === "train-grades";
   const [followTrain, setFollowTrain] = useState(true);
   const [reverse, setReverse] = useState(false);
+  const generatedScene = useMemo(
+    () => (generatedIndex >= 0 ? generatedCrossingRecipe(generatedIndex, reverse) : undefined),
+    [generatedIndex, reverse],
+  );
   const keys = useRef(new Set<string>());
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0);
@@ -47,29 +57,33 @@ export default function WorldGeometryPage() {
     keys.current.clear();
     const host = new ScenarioPresentationHost(
       c,
-      trainGrade
-        ? trainGeometryRecipe(reverse)
-        : vehicle
-          ? vehicleGeometryRecipe(garage, reverse)
-          : crossing
-            ? railCrossingRecipe()
-            : garage
-              ? undergroundGarageRecipe()
-              : worldGeometryRecipe(),
+      generatedScene
+        ? generatedScene.recipe
+        : trainGrade
+          ? trainGeometryRecipe(reverse)
+          : vehicle
+            ? vehicleGeometryRecipe(garage, reverse)
+            : crossing
+              ? railCrossingRecipe()
+              : garage
+                ? undergroundGarageRecipe()
+                : worldGeometryRecipe(),
       {
         width: 960,
         height: crossing ? 720 : 640,
-        fixedCamera: trainGrade
-          ? (_player, alpha) => {
-              const middle = scene.current?.session.view.entities.find(
-                (e) => e.type === "train-carriage-v1:middle",
-              );
-              if (!settings.current.followTrain || !middle) return { wx: 0, wy: -16 };
-              const p = interpolatePosition(middle.position, middle.prevPosition, alpha);
-              return { wx: p.wx, wy: p.wy - (interpolateWz(middle, alpha) ?? 0) - 16 };
-            }
-          : { wx: crossing ? 0 : vehicle ? -48 : -16, wy: -16 },
-        terrain: false,
+        fixedCamera: generatedScene
+          ? { wx: generatedScene.bridge.x * 16, wy: generatedScene.bridge.y * 16 - 16 }
+          : trainGrade
+            ? (_player, alpha) => {
+                const middle = scene.current?.session.view.entities.find(
+                  (e) => e.type === "train-carriage-v1:middle",
+                );
+                if (!settings.current.followTrain || !middle) return { wx: 0, wy: -16 };
+                const p = interpolatePosition(middle.position, middle.prevPosition, alpha);
+                return { wx: p.wx, wy: p.wy - (interpolateWz(middle, alpha) ?? 0) - 16 };
+              }
+            : { wx: crossing ? 0 : vehicle ? -48 : -16, wy: -16 },
+        terrain: generated,
         surfaceVisibility: () => settings.current.visibility,
         settings: () => ({
           paused: settings.current.paused,
@@ -95,6 +109,7 @@ export default function WorldGeometryPage() {
           sprinting: false,
         }),
         underlay: (frame, h) => {
+          if (generated) return;
           const scale = h.camera.scale;
           if (trainGrade) {
             const a = h.camera.worldToScreen(-1728, -160);
@@ -146,13 +161,15 @@ export default function WorldGeometryPage() {
         },
         overlay: (frame) => {
           frame.label(
-            trainGrade
-              ? "TRAIN GRADES"
-              : crossing
-                ? "ROAD OVER RAIL"
-                : garage
-                  ? "STREET → GARAGE"
-                  : "RAMP → DECK",
+            generated
+              ? `GENERATED CROSSING · SEED ${GENERATED_CROSSINGS[generatedIndex]?.seed}`
+              : trainGrade
+                ? "TRAIN GRADES"
+                : crossing
+                  ? "ROAD OVER RAIL"
+                  : garage
+                    ? "STREET → GARAGE"
+                    : "RAMP → DECK",
             35,
             38,
             "#253b42",
@@ -176,6 +193,14 @@ export default function WorldGeometryPage() {
         },
         onFrame: (h) => {
           const player = h.session.view.playerEntity;
+          c.dataset.generatedSeed = generatedScene
+            ? String(generatedScene.recipe.generation.seed)
+            : "";
+          c.dataset.bridgeX = generatedScene ? String(generatedScene.bridge.x * 16) : "0";
+          c.dataset.bridgeY = generatedScene ? String(generatedScene.bridge.y * 16) : "0";
+          c.dataset.surfaceCount = String(
+            h.session.view.props.filter((p) => p.collider?.surface).length,
+          );
           c.dataset.playerX = String(player.position.wx);
           c.dataset.playerY = String(player.position.wy);
           c.dataset.playerZ = String(player.wz ?? 0);
@@ -237,7 +262,17 @@ export default function WorldGeometryPage() {
       keys.current.clear();
       window.removeEventListener("blur", release);
     };
-  }, [restart, garage, crossing, vehicle, reverse, trainGrade]);
+  }, [
+    restart,
+    garage,
+    crossing,
+    vehicle,
+    reverse,
+    trainGrade,
+    generated,
+    generatedIndex,
+    generatedScene,
+  ]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       // Keep a held control from starting selection or stealing canvas focus.
@@ -254,15 +289,17 @@ export default function WorldGeometryPage() {
       <p className="eyebrow">ENGINE PROOF / SCHEMATIC GEOMETRY</p>
       <h1>World geometry lab</h1>
       <p>
-        {trainGrade
-          ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Native carriages stay horizontal, so slope joins are a visible limitation of this proof."
-          : vehicle
-            ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
-            : crossing
-              ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
-              : garage
-                ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
-                : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
+        {generated
+          ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
+          : trainGrade
+            ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Native carriages stay horizontal, so slope joins are a visible limitation of this proof."
+            : vehicle
+              ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
+              : crossing
+                ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
+                : garage
+                  ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
+                  : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
         Arrows/WASD move; Space jumps.
       </p>
       <p>
@@ -282,6 +319,11 @@ export default function WorldGeometryPage() {
             history.replaceState(null, "", url);
           }}
         >
+          {GENERATED_CROSSINGS.map((c) => (
+            <option key={c.seed} value={`generated-${c.seed}`}>
+              Generated bridge · {c.label}
+            </option>
+          ))}
           <option value="deck">Raised deck and passage</option>
           <option value="garage">Underground parking garage</option>
           <option value="crossing">Road bridge over railway</option>
@@ -291,7 +333,7 @@ export default function WorldGeometryPage() {
         </select>
       </label>
       <div className="actions geometry-controls">
-        {(vehicle || trainGrade) && (
+        {(vehicle || trainGrade || generated) && (
           <button
             type="button"
             onContextMenu={(e) => e.preventDefault()}
@@ -304,17 +346,19 @@ export default function WorldGeometryPage() {
           </button>
         )}
         {Object.entries(
-          trainGrade
-            ? TRAIN_GEOMETRY_STARTS
-            : vehicle
-              ? garage
-                ? VEHICLE_GARAGE_STARTS
-                : VEHICLE_BRIDGE_STARTS
-              : crossing
-                ? CROSSING_STARTS
-                : garage
-                  ? GARAGE_STARTS
-                  : GEOMETRY_STARTS,
+          generatedScene
+            ? generatedScene.starts
+            : trainGrade
+              ? TRAIN_GEOMETRY_STARTS
+              : vehicle
+                ? garage
+                  ? VEHICLE_GARAGE_STARTS
+                  : VEHICLE_BRIDGE_STARTS
+                : crossing
+                  ? CROSSING_STARTS
+                  : garage
+                    ? GARAGE_STARTS
+                    : GEOMETRY_STARTS,
         ).map(([name, start]) => (
           <button
             onContextMenu={(e) => e.preventDefault()}
