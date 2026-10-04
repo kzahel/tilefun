@@ -83,6 +83,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [048 Embedded presentation host](048-embedded-presentation-host.md) | Shared game/lab camera, terrain, assets and lifecycle; Traffic migrated |
 
+| [049 Renderer performance matrix](049-renderer-performance-matrix.md) | In progress: repeated renderer/pacing comparisons with movement at every zoom |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

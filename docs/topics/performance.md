@@ -283,3 +283,35 @@ Both policies settle with zero terrain rebuilding and texture uploads. Desktop
 0.1× warm rendering still takes ~11 ms p95 and misses the ~120 Hz cadence despite
 that reuse, so the next profiling target is shared collection/submission in the
 warm overview. See 047 for device, workload, debt and measurement limits.
+
+
+## Reusable renderer matrix
+
+[049](../tactical/049-renderer-performance-matrix.md) owns the repeated device ×
+renderer × pacing comparison. `npm run streaming:matrix -- --help` describes the
+committed sequential runner. It supports desktop/phone, Canvas/GPU, both pacing
+policies, reversed repeat order, source-checked resume and sanitized JSON/Markdown
+reports. The default matrix is desktop only; explicitly include phone after
+setting up the dedicated CDP endpoint and reverse port.
+
+```sh
+npm run streaming:matrix -- --targets=desktop,phone --cdp=http://127.0.0.1:9223 --port=4188 --device=Pixel-7a --output=/tmp/tilefun-matrix
+```
+
+The new single-run `streaming:bench -- --zoom-motion --noclip` workload starts a
+fresh seeded world per zoom (1, 0.5, 0.25, 0.1, 2). Each measures entry catch-up,
+stationary rendering, an 8-second sprint, recovery and warm reuse. Idle-page rAF
+calibration precedes game load; `framesOverDisplayCadence` detects sustained slow
+views that a per-stage median could normalize away. Existing cadence statistics
+remain for historical comparisons. Start/end position and actual travel remain
+visible; wall-time runs do not claim identical simulation trajectories.
+
+Use `--movement-seconds`, `--settle-seconds`, `--warm-seconds`, `--zooms` and
+`--repeats` for workload selection. `--resume` skips completed runs only when
+settings and executable-input fingerprints match; interrupted entries rerun.
+Use `--retry-failed` to rerun completed failures. Reports retain timeouts/missing
+motion/page errors and the runner exits nonzero if any configuration fails.
+Eight-second stages are broad coverage; use longer runs for infrequent hitches.
+Raw per-run reports/logs can contain local world IDs; only `matrix.json` and
+`comparison.md` use the sanitizer. Development serving, viewport differences,
+post-ready entry and benchmark instrumentation remain explicit measurement limits.

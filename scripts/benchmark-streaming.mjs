@@ -19,13 +19,28 @@ if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canva
 const terrainPacing = option("terrain-pacing", "throughput");
 if (!["throughput", "responsive"].includes(terrainPacing))
   throw Error("--terrain-pacing must be throughput or responsive");
+const zoomMotion = process.argv.includes("--zoom-motion");
+const motionZooms = option("zooms", "1,0.5,0.25,0.1,2").split(",").map(Number);
+if (
+  motionZooms.some((z) => !Number.isFinite(z) || z < 0.05 || z > 3) ||
+  new Set(motionZooms).size !== motionZooms.length
+)
+  throw Error("--zooms requires unique numbers between 0.05 and 3");
+const movementSeconds = Number(option("movement-seconds", "8"));
+const settleSeconds = Number(option("settle-seconds", "30"));
+const warmSeconds = Number(option("warm-seconds", "2"));
+for (const [key, value] of Object.entries({ movementSeconds, settleSeconds, warmSeconds }))
+  if (!Number.isFinite(value) || value < 1 || value > 300)
+    throw Error(`${key} must be between 1 and 300`);
 const zoomSweep = process.argv.includes("--zoom-sweep");
 const catchupFrames = Number(option("catchup-frames", "7200"));
 if (!Number.isInteger(catchupFrames) || catchupFrames < 60 || catchupFrames > 14400)
   throw Error("--catchup-frames must be between 60 and 14400");
 const assertBounded = process.argv.includes("--assert-bounded");
-if (assertBounded && (terrainPacing !== "responsive" || !zoomSweep))
-  throw Error("--assert-bounded requires --terrain-pacing=responsive --zoom-sweep");
+if (assertBounded && (terrainPacing !== "responsive" || !(zoomSweep || zoomMotion)))
+  throw Error(
+    "--assert-bounded requires --terrain-pacing=responsive and --zoom-sweep or --zoom-motion",
+  );
 const meshes = process.argv.includes("--meshes");
 const noclip = process.argv.includes("--noclip");
 const headed = process.argv.includes("--headed");
@@ -67,6 +82,15 @@ for (const key of [
 let server, browser;
 let devicePage, deviceSession, testOrigin;
 let activeTraceSession;
+const failures = [];
+const interrupt = () => {
+  void (async () => {
+    await devicePage?.close().catch(() => {});
+    await browser?.close().catch(() => {});
+  })();
+};
+process.once("SIGINT", interrupt);
+process.once("SIGTERM", interrupt);
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   dirty: !!execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
@@ -83,6 +107,8 @@ const report = {
   instrumentation,
   terrainPacing,
   zoomSweep,
+  zoomMotion,
+  ...(zoomMotion ? { motionZooms, movementSeconds, settleSeconds, warmSeconds } : {}),
   catchupFrames,
   sprintFrames,
   noclip,
@@ -111,7 +137,11 @@ try {
     ? await chromium.connectOverCDP(endpoint, { noDefaults: true })
     : await chromium.launch({ headless: !headed, channel: "chromium" });
   report.browser = browser.version();
-  for (const version of versions) {
+  const cases = versions.flatMap((version) =>
+    (zoomMotion ? motionZooms : [null]).map((zoom) => ({ version, zoom })),
+  );
+  for (const { version, zoom } of cases) {
+    const fixtureName = zoom === null ? version : `${version}-zoom-${zoom}`;
     const context = endpoint
       ? browser.contexts()[0]
       : await browser.newContext({ viewport: report.viewport, hasTouch: touch });
@@ -124,6 +154,20 @@ try {
     if (endpoint) deviceSession = cdp;
     else await cdp.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
     await page.goto(`${origin}/tools.html`);
+    // An idle page measures the display cadence before a heavy view can lower it.
+    const displayCadenceMs = zoomMotion
+      ? await page.evaluate(async () => {
+          const times = [];
+          let last = await new Promise(requestAnimationFrame);
+          for (let i = 0; i < 90; i++) {
+            const now = await new Promise(requestAnimationFrame);
+            if (i >= 30) times.push(now - last);
+            last = now;
+          }
+          times.sort((a, b) => a - b);
+          return times[Math.floor(times.length / 2)];
+        })
+      : null;
     const arrival = await page.evaluate(async (version) => {
       const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
       const generation = createDescriptor("regional", 2026);
@@ -159,6 +203,16 @@ try {
         renderer.prepareTerrain = (camera, world, visible) =>
           prepare(camera, world, visible, { timeBudgetMs: 2, rowBudget });
       }, terrainRowBudget);
+    if (zoomMotion) {
+      await page.evaluate(
+        (value) => document.querySelector("#game").__game.debugPanel.setZoom(value),
+        zoom,
+      );
+      await page.waitForFunction(
+        (value) => document.querySelector("#game").__game.camera.zoom === value,
+        zoom,
+      );
+    }
     const actualRenderer = await page.locator("#game").getAttribute("data-renderer");
     if (renderer === "gpu" && actualRenderer !== "gpu")
       throw Error(`GPU benchmark fell back to ${actualRenderer}`);
@@ -202,7 +256,7 @@ try {
       });
       if (initial) await move(direction);
     };
-    const sample = async (name, count, untilSettled = false) => {
+    const sample = async (name, count, untilSettled = false, durationMs = 0) => {
       const tracing = name === traceStage;
       let traceComplete;
       if (tracing) {
@@ -216,7 +270,7 @@ try {
         count = traceFrames;
       }
       const data = await page.evaluate(
-        async ({ count, tracing, timeline, untilSettled }) => {
+        async ({ count, tracing, timeline, untilSettled, durationMs, displayCadenceMs }) => {
           const game = document.querySelector("#game").__game;
           game.performanceMetrics.reset();
           if (game.transport.resetDiagnostics) await game.transport.resetDiagnostics();
@@ -261,6 +315,7 @@ try {
           let previousUpload = gpuStats?.uploadedBytes ?? 0;
           let previousVertex = gpuStats?.vertexUploadedBytes ?? 0;
           let previousDraws = gpuStats?.drawCalls ?? 0;
+          const initialDraws = previousDraws;
           const initialUpload = previousUpload;
           const initialVertex = previousVertex;
           let maxTerrainRows = 0,
@@ -412,6 +467,7 @@ try {
               }
               if (tracing) performance.measure("tilefun.frame", { start: last, end: now });
               last = now;
+              if (durationMs && performance.now() - sampleStartMs >= durationMs) break;
               if (untilSettled && settledFrames >= 60) {
                 settled = true;
                 break;
@@ -435,6 +491,13 @@ try {
           return {
             ...(timeline ? { frameTimeline } : {}),
             ...(tracing ? { renderTimeline, sampleStartMs } : {}),
+            before,
+            after: { ...after },
+            displayCadenceMs,
+            framesOverDisplayCadence: displayCadenceMs
+              ? frames.filter((v) => v > displayCadenceMs * 1.5).length
+              : null,
+            drawCalls: gpuStats ? gpuStats.drawCalls - initialDraws : null,
             terrainPacing: game.debugPanel.terrainPacing,
             zoom: game.camera.zoom,
             maxTerrainRows,
@@ -479,14 +542,21 @@ try {
             heapBytes: performance.memory?.usedJSHeapSize ?? null,
           };
         },
-        { count, tracing, timeline: tracing || frameTimelineEnabled, untilSettled },
+        {
+          count,
+          tracing,
+          timeline: tracing || frameTimelineEnabled,
+          untilSettled,
+          durationMs,
+          displayCadenceMs,
+        },
       );
       if (tracing) {
         await cdp.send("Tracing.end");
         activeTraceSession = undefined;
         const { stream } = await traceComplete;
         // Browser traces can contain unrelated browser metadata. Keep raw files local.
-        const file = await open(path.join(output, `${version}-${name}-trace.json`), "w", 0o600);
+        const file = await open(path.join(output, `${fixtureName}-${name}-trace.json`), "w", 0o600);
         try {
           for (;;) {
             const chunk = await cdp.send("IO.read", { handle: stream, size: 1024 * 1024 });
@@ -505,85 +575,141 @@ try {
       return result;
     };
     const samples = [];
-    samples.push(await sample("cold", 120));
-    await page.screenshot({ path: path.join(output, `${version}-settled.png`) });
-    samples.push(await sample("standing", 120));
-    if (touch) await move(-1, false, true);
-    else await page.keyboard.down("ArrowLeft");
-    samples.push(await sample("walk", 180));
-    if (touch) await move(-1, true);
-    else await page.keyboard.down("Shift");
-    const sprint = await sample("sprint", sprintFrames);
-    samples.push(sprint);
-    if (touch) {
-      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      await move(1, false, true);
-      await move(1, true);
+    let sprint;
+    if (zoomMotion) {
+      samples.push(await sample("entry-catchup", 100000, true, settleSeconds * 1000));
+      samples.push(await sample("stationary", 100000, false, warmSeconds * 1000));
+      if (touch) {
+        await move(-1, false, true);
+        await move(-1, true);
+      } else {
+        await page.keyboard.down("ArrowLeft");
+        await page.keyboard.down("Shift");
+      }
+      sprint = await sample("motion", 100000, false, movementSeconds * 1000);
+      samples.push(sprint);
+      if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      else {
+        await page.keyboard.up("ArrowLeft");
+        await page.keyboard.up("Shift");
+      }
+      samples.push(await sample("recovery-catchup", 100000, true, settleSeconds * 1000));
+      samples.push(await sample("recovery-warm", 100000, false, warmSeconds * 1000));
+      await page.screenshot({ path: path.join(output, `${fixtureName}-settled.png`) });
     } else {
-      await page.keyboard.up("ArrowLeft");
-      await page.keyboard.down("ArrowRight");
-    }
-    samples.push(await sample("reverse", 300));
-    if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-    else {
-      await page.keyboard.up("ArrowRight");
-      await page.keyboard.up("Shift");
-    }
-    await page.evaluate(
-      ({ pausePreparation, rowBudget }) => {
-        const game = document.querySelector("#game").__game;
-        if (pausePreparation) game.renderer.prepareTerrain = () => {};
-        else if (rowBudget) {
-          const prepare = game.renderer.prepareTerrain.bind(game.renderer);
-          game.renderer.prepareTerrain = (camera, world, visible) =>
-            prepare(camera, world, visible, { timeBudgetMs: 2, rowBudget });
+      samples.push(await sample("cold", 120));
+      await page.screenshot({ path: path.join(output, `${version}-settled.png`) });
+      samples.push(await sample("standing", 120));
+      if (touch) await move(-1, false, true);
+      else await page.keyboard.down("ArrowLeft");
+      samples.push(await sample("walk", 180));
+      if (touch) await move(-1, true);
+      else await page.keyboard.down("Shift");
+      sprint = await sample("sprint", sprintFrames);
+      samples.push(sprint);
+      if (touch) {
+        await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        await move(1, false, true);
+        await move(1, true);
+      } else {
+        await page.keyboard.up("ArrowLeft");
+        await page.keyboard.down("ArrowRight");
+      }
+      samples.push(await sample("reverse", 300));
+      if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      else {
+        await page.keyboard.up("ArrowRight");
+        await page.keyboard.up("Shift");
+      }
+      await page.evaluate(
+        ({ pausePreparation, rowBudget }) => {
+          const game = document.querySelector("#game").__game;
+          if (pausePreparation) game.renderer.prepareTerrain = () => {};
+          else if (rowBudget) {
+            const prepare = game.renderer.prepareTerrain.bind(game.renderer);
+            game.renderer.prepareTerrain = (camera, world, visible) =>
+              prepare(camera, world, visible, { timeBudgetMs: 2, rowBudget });
+          }
+          game.debugPanel.setZoom(0.5);
+        },
+        { pausePreparation: pauseZoomPreparation, rowBudget: zoomRowBudget },
+      );
+      samples.push(await sample("zoom-out", 180));
+      if (zoomSettled) samples.push(await sample("zoom-settled", 180));
+      await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
+      if (zoomSweep) {
+        const presets = await page.evaluate(async () => {
+          const { ZOOM_PRESETS } = await import("/tilefun/src/rendering/PresentationSettings.ts");
+          return ["2", "1", "0", "3"].map((key) => ZOOM_PRESETS.find((p) => p.key === key));
+        });
+        for (const preset of presets) {
+          if (touch)
+            await page.evaluate(
+              (zoom) => document.querySelector("#game").__game.debugPanel.setZoom(zoom),
+              preset.zoom,
+            );
+          else await page.keyboard.press(preset.key);
+          samples.push(await sample(`zoom-${preset.key}-catchup`, catchupFrames, true));
+          samples.push(await sample(`zoom-${preset.key}-warm`, 120));
         }
-        game.debugPanel.setZoom(0.5);
-      },
-      { pausePreparation: pauseZoomPreparation, rowBudget: zoomRowBudget },
-    );
-    samples.push(await sample("zoom-out", 180));
-    if (zoomSettled) samples.push(await sample("zoom-settled", 180));
-    await page.screenshot({ path: path.join(output, `${version}-zoom.png`) });
-    if (zoomSweep) {
-      const presets = await page.evaluate(async () => {
-        const { ZOOM_PRESETS } = await import("/tilefun/src/rendering/PresentationSettings.ts");
-        return ["2", "1", "0", "3"].map((key) => ZOOM_PRESETS.find((p) => p.key === key));
-      });
-      for (const preset of presets) {
-        if (touch)
-          await page.evaluate(
-            (zoom) => document.querySelector("#game").__game.debugPanel.setZoom(zoom),
-            preset.zoom,
-          );
-        else await page.keyboard.press(preset.key);
-        samples.push(await sample(`zoom-${preset.key}-catchup`, catchupFrames, true));
-        samples.push(await sample(`zoom-${preset.key}-warm`, 120));
       }
     }
     // Keep measurements available even when a coverage assertion fails.
-    report.fixtures.push({ version, arrival, display, samples, errors });
+    const fixtureFailures = [];
+    report.fixtures.push({
+      version,
+      zoom,
+      arrival,
+      display,
+      displayCadenceMs,
+      samples,
+      errors,
+      failures: fixtureFailures,
+    });
     await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
-    if (Math.abs(sprint.displacement.x) < 256 || sprint.visitedChunks < 6)
-      throw Error(`${version}: traversal failed to cross terrain (${sprint.displacement.x}px)`);
-    if (errors.length) throw Error(errors.join("\n"));
+    if (zoomMotion) {
+      if (sprint.travelledPx < movementSeconds * 80 || sprint.maxStationaryMs > 1000)
+        fixtureFailures.push("insufficient continuous movement");
+      for (const stage of samples) {
+        if (stage.name.endsWith("-catchup") && !stage.settled)
+          fixtureFailures.push(`${stage.name}: did not settle within ${settleSeconds}s`);
+        if (
+          stage.name === "recovery-warm" &&
+          (stage.totalTerrainRows ||
+            stage.missingDataFrames ||
+            stage.incompleteCacheFrames ||
+            stage.staleCacheFrames)
+        )
+          fixtureFailures.push("recovery-warm: terrain did not remain ready and idle");
+      }
+    } else if (Math.abs(sprint.displacement.x) < 256 || sprint.visitedChunks < 6)
+      fixtureFailures.push(`traversal failed to cross terrain (${sprint.displacement.x}px)`);
+    if (errors.length) fixtureFailures.push("browser page errors (see local report)");
     if (process.argv.includes("--assert-ready")) {
-      for (const s of samples.filter((s) => ["walk", "sprint", "reverse"].includes(s.name)))
-        if (s.missingDataFrames || s.incompleteCacheFrames)
-          throw Error(`${version}/${s.name}: visible terrain was not ready`);
+      for (const stage of samples.filter((s) =>
+        ["walk", "sprint", "reverse", "motion"].includes(s.name),
+      ))
+        if (stage.missingDataFrames || stage.incompleteCacheFrames)
+          fixtureFailures.push(`${stage.name}: visible terrain was not ready`);
     }
     if (assertBounded) {
-      for (const s of samples) {
-        if (s.maxTerrainRows > 2) throw Error(`${version}/${s.name}: terrain row cap exceeded`);
-        if (s.name.endsWith("-catchup") && !s.settled)
-          throw Error(`${version}/${s.name}: terrain did not catch up`);
+      for (const stage of samples) {
+        if (stage.maxTerrainRows > 2)
+          fixtureFailures.push(`${stage.name}: terrain row cap exceeded`);
+        if (stage.name.endsWith("-catchup") && !stage.settled)
+          fixtureFailures.push(`${stage.name}: terrain did not catch up`);
         if (
-          s.name.endsWith("-warm") &&
-          (s.totalTerrainRows || s.finalMissing || s.finalIncomplete || s.finalStale)
+          stage.name.endsWith("-warm") &&
+          (stage.totalTerrainRows ||
+            stage.finalMissing ||
+            stage.finalIncomplete ||
+            stage.finalStale)
         )
-          throw Error(`${version}/${s.name}: warm terrain rebuilt or lost readiness`);
+          fixtureFailures.push(`${stage.name}: warm terrain rebuilt or lost readiness`);
       }
     }
+    failures.push(...fixtureFailures.map((f) => `${fixtureName}: ${f}`));
+    await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
     if (endpoint) {
       await page.goto("about:blank");
       await cdp.send("Storage.clearDataForOrigin", { origin: testOrigin, storageTypes: "all" });
@@ -593,6 +719,10 @@ try {
   }
   await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${path.join(output, "report.json")}`);
+  if (failures.length) {
+    console.error(failures.join("\n"));
+    process.exitCode = 1;
+  }
 } finally {
   await activeTraceSession?.send("Tracing.end").catch(() => {});
   if (devicePage) {
@@ -606,4 +736,6 @@ try {
   await browser?.close();
   await server?.close();
   await rm(temp, { recursive: true, force: true });
+  process.removeListener("SIGINT", interrupt);
+  process.removeListener("SIGTERM", interrupt);
 }
