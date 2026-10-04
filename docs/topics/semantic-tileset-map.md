@@ -38,6 +38,15 @@ constraints and preserve the distinction between valid topology, tested renderin
 and human approval. Future catalogs/generators must not offer such pieces as whole
 props; assembly editors can still expose them as components.
 
+Owner-facing presentation is a large themed contact sheet with compact plain-language
+facts and lightweight corrections/discussion. The lab visualizes durable catalog
+knowledge; research stays in the plan folder. Reuse one quiet sheet for accepted
+catalog browsing and pinned proposals, with proposal state clearly distinguished.
+Default to representative variants, separate complete objects from pieces to
+combine, and explain join requirements in ordinary language. Do not add a research
+dashboard, agent states or technical identifiers to normal browsing. The next
+presentation slice is cabinets; see the [review design](../tactical/053-semantic-tileset-map/README.md#phase-5-owner-review).
+
 ## Plan and next work
 
 The [source manifest](../tactical/053-semantic-tileset-map/source-manifest.json)

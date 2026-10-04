@@ -27,7 +27,7 @@ an agent-written queue status.
 | E01 | Expand theme packets across both tilesets | V01 | Queued | Unassigned |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Queued | Unassigned |
-| R01 | Deliver theme/family review surface and exact registered candidates | V01; candidate packets | Queued | Unassigned |
+| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01; candidate packets | Queued; first sheet is cabinets | [Presentation contract](README.md#phase-5-owner-review); reuse existing review infrastructure, distinguish accepted catalog from proposals, keep research out of normal browsing |
 
 Next action: implement V01 before scaling theme
 assignments. Read the [coordinator corrections](notes/2026-10-04-pilot-reconciliation.md)

@@ -146,10 +146,39 @@ fully examined from fully understood, and review-ready from approved.
 
 ## Phase 5: owner review
 
-Extend the existing Workshop with a theme-oriented master-sheet view, searchable
-families and visible unexamined/proposed/disputed/reviewed states. Show exact crops,
-labels, assembly examples and exceptions; make alternatives and evidence available
-on demand. These extensions are planned, not implemented.
+Owner clarification, 2026-10-04: keep the lab a quiet visualization of durable
+catalog knowledge. Research packets, agent deliberation, experiment logs, confidence
+scores and queue states stay in this plan folder. The owner-facing format is a
+large themed contact sheet with compact, ordinary-language metadata, suitable for
+pointing at pieces and discussing them. This supersedes the earlier dashboard-like
+proposal. The presentation is planned, not implemented.
+
+Use one reusable contact-sheet view for catalog browsing and lightweight proposal
+review. The normal catalog shows accepted values and explicit unknowns. A review
+link opens a pinned proposed revision with a small “Proposed” indicator; discussing
+or viewing it does not replace the durable catalog. Reuse existing review storage
+and controls rather than introducing another top-level research dashboard.
+
+- Let the art occupy most of the page, at consistent integer pixel zoom, grouped
+  by recognizable theme/family. Give pieces short names or stable small numbers
+  the owner can refer to in conversation; no packet IDs, hashes or acronyms in
+  ordinary labels.
+- Show whole objects and pieces for combining in distinct groups on the same
+  sheet. For cabinets, label groups “Complete cabinets” and “Pieces to combine”.
+  A small assembled example can explain how parts connect.
+- Keep shared facts beside the family, with member exceptions on selection:
+  what it is, whether it can be used alone, how it joins, and available variants.
+  Write “Needs a piece on each side”, not internal schema/connector terminology.
+- Default to one representative shadow/color variant; offer a small variant
+  switch or comparison control instead of repeating every member three times.
+- A selected piece or group gets a compact note/correction affordance using the
+  existing review infrastructure. Show a short specific question only when it
+  matters, such as “Mirror or glass?”; do not expose the whole research backlog.
+
+First presentation slice: the existing cabinet family, followed by trees and
+scrapyard groups in the same format. Feed it validated metadata and exact pixels;
+the owner does not need to read or operate the validator. Keep provenance and
+full research available to agents without making them the main browsing surface.
 
 Support family-level review of an explicit member list with individual exceptions.
 Repeated views should not create duplicate approval work. Register candidates and
