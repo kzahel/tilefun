@@ -133,3 +133,10 @@ membership are checked deterministically. Broad packets remain proposal-ready in
 the registry, pending explicit semantic normalization. This does not alter the
 255-record / 216-unit normalized model or grant full-review/owner-approval credit.
 See [delivery and validation](notes/2026-10-04-broad-first-pass.md).
+
+
+Owner follow-up: all three broad sheets have positive whole-sheet comments.
+Two member corrections are delivered through the [semantic supplement](packets/broad-owner-corrections.json):
+card 140 is upright knives; street card 110 is a repeatable pole/wire section with
+an 80px horizontal stride. [Evidence](notes/2026-10-04-broad-owner-corrections.md)
+keeps earlier feedback on its exact revision. Next remains similarly broad themes.

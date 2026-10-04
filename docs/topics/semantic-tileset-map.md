@@ -217,3 +217,13 @@ Next: collect corrections on these larger sheets, then continue similarly broad
 theme batches with explicit uncertain members. Detailed normalization and difficult
 join investigations follow consequential feedback; they are not a gate before
 showing the next broad theme. Final semantic approval remains with the owner.
+
+
+The [owner follow-up](../tactical/053-semantic-tileset-map/notes/2026-10-04-broad-owner-corrections.md)
+records positive feedback on all three broad sheets and two corrections. Kitchen
+card 140 is upright knives, moved to Food preparation. Street card 110 is a utility
+pole with repeating wires: unchanged copies join horizontally every 80 pixels,
+with matching wire edge rows. It is a component of a wire line; endings, corners
+and branches remain unresolved. A semantic-only supplement preserves frozen source
+proposals and stable member/variant identities while updating the two family
+revisions. Pixels, examples, twelve other sheets and normalized counts are unchanged.

@@ -20815,43 +20815,6 @@
                   }
                 }
               ]
-            },
-            {
-              "id": "kitchen-card-140",
-              "number": 140,
-              "label": "Upright dish rack",
-              "kind": "whole",
-              "facts": [],
-              "variants": [
-                {
-                  "id": "drawing-378",
-                  "label": "Original",
-                  "recordIds": [
-                    "B01-378"
-                  ],
-                  "sprite": {
-                    "size": [
-                      16,
-                      32
-                    ],
-                    "layers": [
-                      {
-                        "sheetId": "modern-interiors",
-                        "rect": [
-                          32,
-                          7214,
-                          16,
-                          32
-                        ],
-                        "at": [
-                          0,
-                          0
-                        ]
-                      }
-                    ]
-                  }
-                }
-              ]
             }
           ]
         },
@@ -23377,6 +23340,43 @@
                         "sheetId": "modern-interiors",
                         "rect": [
                           16,
+                          7214,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "kitchen-card-140",
+              "number": 140,
+              "label": "Upright knives",
+              "kind": "whole",
+              "facts": [],
+              "variants": [
+                {
+                  "id": "drawing-378",
+                  "label": "Original",
+                  "recordIds": [
+                    "B01-378"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          32,
                           7214,
                           16,
                           32
@@ -30424,7 +30424,7 @@
           "height": 8800
         }
       ],
-      "revision": "cd10aa65fcf6b75c737d1f691bb7713d0ff4e3e57b0a1439c74b5ad55c6b1523"
+      "revision": "1b9d1ac0a4bc17d0198cc8969260ba80d02eb9329d31331ace60cb79c148205c"
     },
     {
       "id": "music-recreation",
@@ -39243,20 +39243,24 @@
             {
               "id": "street-110",
               "number": 110,
-              "label": "Utility pole with cut-off wires",
-              "kind": "unknown",
+              "label": "Utility pole with repeating wires",
+              "kind": "component",
               "facts": [
                 {
                   "label": "Use",
-                  "value": "Standalone use is uncertain."
+                  "value": "Cannot stand alone; combine with matching pieces."
                 },
                 {
-                  "label": "Use",
-                  "value": "Wires continue beyond both source edges; neighboring wires and exact joins are unknown."
+                  "label": "Pattern",
+                  "value": "A repeatable section of a wire line; the edge wires connect to the next copy."
                 },
                 {
-                  "label": "Unknown",
-                  "value": "Standalone pole body is complete but the wire network is cropped; whole-network eligibility is unresolved."
+                  "label": "Joins",
+                  "value": "Repeat the same pole 80 pixels to the left or right at the same height to continue both wires."
+                },
+                {
+                  "label": "Uncertain",
+                  "value": "End pieces, corners and branching wire networks remain unknown."
                 }
               ],
               "variants": [
@@ -51534,8 +51538,8 @@
           "height": 32
         }
       ],
-      "revision": "758d8ba08540383845336d60a01bd73495cb43261c79e87501c050829a4609f5"
+      "revision": "8e386970e3d1371691a1277fe5ca5331a1f9005e03ab93f7b8268bcac539f0c8"
     }
   ],
-  "revision": "601c48455c1b77b14ef25c7a024c18266f3948b7bc70bfe50cab568e5fc78431"
+  "revision": "b543a2659714af48a95f8a3401e44f71df6a27ab429dc97860b0295ed4d428ce"
 }

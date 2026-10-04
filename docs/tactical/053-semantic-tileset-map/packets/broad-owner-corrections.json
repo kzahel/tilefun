@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "corrections": [
+    {
+      "packet": "B01-kitchens.json",
+      "proposalSha256": "924cb3870f0e1d20138e96d61488d82915200da72f48cb7e26a18fe3f84c0ca7",
+      "feedback": {
+        "threadId": "cc65a563-76f0-4d0f-b6e7-9b0f1a3bbaf2",
+        "familyRevision": "cd10aa65fcf6b75c737d1f691bb7713d0ff4e3e57b0a1439c74b5ad55c6b1523",
+        "note": "Knives"
+      },
+      "recordId": "B01-378",
+      "cardId": "kitchen-card-140",
+      "recordChanges": {
+        "label": "Upright knives"
+      },
+      "cardChanges": {
+        "label": "Upright knives",
+        "groupId": "preparation"
+      }
+    },
+    {
+      "packet": "B03-street-hardware.json",
+      "proposalSha256": "57118aa460faca9f120dc42398eb8e15bbdf2ef56deb3f9c5a0f527ea7f0c063",
+      "feedback": {
+        "threadId": "577d3b9a-3008-40b6-8e41-a426d6f1a252",
+        "familyRevision": "758d8ba08540383845336d60a01bd73495cb43261c79e87501c050829a4609f5",
+        "note": "Probably meant to loop/repeat. Not cut off"
+      },
+      "recordId": "B03-289",
+      "cardId": "street-110",
+      "recordChanges": {
+        "label": "Utility pole with repeating wires",
+        "kind": "component",
+        "topology": {
+          "standalone": "forbidden",
+          "requiredNeighbors": [
+            "Repeat the same pole 80 pixels to the left or right at the same height to continue both wires."
+          ],
+          "repeat": {
+            "neighborRecordId": "B03-289",
+            "strideXY": [
+              80,
+              0
+            ],
+            "edgeRows": [
+              21,
+              26
+            ]
+          },
+          "limits": "Horizontal self-repeat is visually checked. Wire endings, corners and branches are not established; game geometry remains unknown."
+        },
+        "uncertainty": "End pieces, corners and branching wire networks remain unknown."
+      },
+      "cardChanges": {
+        "label": "Utility pole with repeating wires",
+        "kind": "component",
+        "facts": [
+          {
+            "label": "Pattern",
+            "value": "A repeatable section of a wire line; the edge wires connect to the next copy."
+          }
+        ]
+      }
+    }
+  ]
+}

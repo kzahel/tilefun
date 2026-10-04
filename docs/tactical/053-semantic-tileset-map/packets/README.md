@@ -98,3 +98,10 @@ The [targeted adapter review](../notes/2026-10-04-broad-adapter-review.md) recor
 scope and limits. These 1,002 first-pass records use one compact contract and appear
 in the Workshop; they are registered without exhaustive normalized-model credit.
 The earlier 255 records / 216 proposal units remain separately normalized.
+
+
+The [owner correction supplement](broad-owner-corrections.json) updates first-pass
+semantics without changing frozen proposals: upright knives and an 80px horizontal
+utility-pole/wire repeat. [Evidence and current revisions](../notes/2026-10-04-broad-owner-corrections.md)
+record exact feedback scope; supplementary semantics do not grant normalized-model
+or gameplay coverage.

@@ -6312,8 +6312,8 @@
       "kind": "family",
       "name": "Kitchens and appliances",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
-      "url": "/tilefun/workshop.html#/tool/families?family=kitchens&revision=cd10aa65fcf6b75c737d1f691bb7713d0ff4e3e57b0a1439c74b5ad55c6b1523",
-      "fingerprint": "b8a1d548c4b0fe34efefde218214f3caac44914be08aff105386096edab48bb9"
+      "url": "/tilefun/workshop.html#/tool/families?family=kitchens&revision=1b9d1ac0a4bc17d0198cc8969260ba80d02eb9329d31331ace60cb79c148205c",
+      "fingerprint": "c9a399980ca9b168389e9b001a2afef20283e624a1ff071cba258d128c04db8c"
     },
     {
       "id": "family:music-recreation",
@@ -6330,8 +6330,8 @@
       "kind": "family",
       "name": "Street lights, poles and hardware",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
-      "url": "/tilefun/workshop.html#/tool/families?family=street-hardware&revision=758d8ba08540383845336d60a01bd73495cb43261c79e87501c050829a4609f5",
-      "fingerprint": "bc3969029c8d62abba118438a96f34f8a46bd747b10eda00194652b907c432d6"
+      "url": "/tilefun/workshop.html#/tool/families?family=street-hardware&revision=8e386970e3d1371691a1277fe5ca5331a1f9005e03ab93f7b8268bcac539f0c8",
+      "fingerprint": "a6ea1f990d32eaad1193e2add3a42c927e00556e5fcbab45c5138985c1593690"
     },
     {
       "id": "review-0-6ba78e73",

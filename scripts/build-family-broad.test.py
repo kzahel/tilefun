@@ -69,6 +69,19 @@ class BroadContractTest(unittest.TestCase):
         self.assertIn('Needs its matching cabinet.', values)
         self.assertIn('Could be a trim piece.', values)
 
+    def test_owner_correction_keeps_exact_source_and_membership(self):
+        before = copy.deepcopy(self.packet)
+        correction = {'recordId': 'B01-001', 'cardId': 'piece',
+                      'recordChanges': {'label': 'Corrected component'},
+                      'cardChanges': {'label': 'Corrected component'}}
+        B.apply_correction(self.a, self.packet, correction)
+        self.assertEqual(self.packet['records'][0]['source'], before['records'][0]['source'])
+        self.assertEqual(self.packet['cards'][0]['variants'], before['cards'][0]['variants'])
+        self.assertNotEqual(self.build()['revision'], self.build(before)['revision'])
+        correction['recordChanges']['source'] = {}
+        with self.assertRaisesRegex(ValueError, 'cannot replace artwork'):
+            B.apply_correction(self.a, self.packet, correction)
+
     def test_named_alias_is_checked_even_if_pixels_are_identical(self):
         self.reject(lambda p:p['records'][0]['source'].update(packedKey='wrong-name'), 'source identity')
 

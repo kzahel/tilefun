@@ -1,5 +1,7 @@
 # Semantic mapping investigation notes
 
+- [Broad owner corrections](2026-10-04-broad-owner-corrections.md): knives and the tested 80px utility-wire repeat.
+
 - [Broad adapter targeted review](2026-10-04-broad-adapter-review.md): sampled visual audit and reusable source/topology checks.
 - [Broader first-pass mapping](2026-10-04-broad-first-pass.md): owner-directed larger batches with visible uncertainty and targeted review.
 

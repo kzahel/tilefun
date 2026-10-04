@@ -21,7 +21,28 @@ def read_packets(a):
         packet = a.load(path)
         a.require(packet['schemaVersion'] == 1 and packet['familyId'] == family_id, 'Unsupported broad packet')
         result.append(packet)
+    corrections = a.load(a.PACKETS / 'broad-owner-corrections.json')
+    a.require(corrections['schemaVersion'] == 1, 'Unsupported broad correction schema')
+    for correction in corrections['corrections']:
+        a.require(PINS.get(correction['packet']) == correction['proposalSha256'],
+                  'Broad correction targets a different proposal')
+        family_id = dict((filename, key) for key, filename in PACKETS)[correction['packet']]
+        packet = next(p for p in result if p['familyId'] == family_id)
+        apply_correction(a, packet, correction)
     return result
+
+
+def apply_correction(a, packet, correction):
+    # Frozen proposals remain historical evidence; owner corrections change only semantics.
+    record = next(r for r in packet['records'] if r['id'] == correction['recordId'])
+    card = next(c for c in packet['cards'] if c['id'] == correction['cardId'])
+    a.require([v['recordId'] for v in card['variants']] == [record['id']],
+              'Broad correction must target its exact single-record card')
+    a.require(set(correction['recordChanges']) <= {'label', 'kind', 'topology', 'uncertainty'} and
+              set(correction['cardChanges']) <= {'label', 'kind', 'facts', 'groupId'},
+              'Broad corrections cannot replace artwork or membership')
+    record.update(correction['recordChanges'])
+    card.update(correction['cardChanges'])
 
 
 def build_packet(a, packet, images, sheets):
