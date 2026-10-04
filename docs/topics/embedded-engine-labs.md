@@ -97,6 +97,13 @@ This host currently presents outdoor scenarios. It does not replace the full
 GameClient's menus, audio, particles, indoor scenes or world/profile persistence.
 The bounded scenario scheduling/transport remains distinct from LocalServerRuntime.
 
+The [World geometry lab](world-geometry.md) uses the same host with a fixed camera
+and schematic grid. Opt-in surface patches draw through shared
+`SurfacePresentation`, also called by the game's outdoor renderer; automatic and
+manual visibility affect presentation only. [Tactical 051](../tactical/051-world-geometry-proof.md)
+records ramp/deck/passage coverage. It does not establish indoor host support or
+full 3D debug-renderer/stacked-actor parity.
+
 | Remaining consumer | Current boundary / next work |
 | --- | --- |
 | `CharactersPage` | Shared scenario authority; local clock and native CharacterTestScene presentation/cycle inspector. Preserve source-hashed approval references when separating interactive presentation. |

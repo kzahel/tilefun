@@ -23,6 +23,16 @@ invariants govern that extension; they remain requirements for further assets an
 
 ## Architecture
 
+Cutaways and level/sector visibility are part of the agreed
+[world geometry direction](world-geometry.md#visibility-and-seamless-interiors),
+including underground spaces and seamless indoor floor transitions. Shared
+presentation should derive observer-specific visibility from physical space and
+connection data; backends consume that result. Visibility selection must not
+change simulation or collision. `SurfacePresentation` now supplies a bounded
+schematic slab view and whole-patch cutaway, shared by outdoor game rendering and
+the scenario host. General sector visibility and indoor transitions remain future
+work; the first observer-relative passes do not solve arbitrary multi-actor depth.
+
 ```text
 Worker simulation → replicated world + client prediction
                               ↓ read-only presentation inputs

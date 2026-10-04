@@ -139,3 +139,14 @@ in ordinary entity records. Existing saves require explicit same-seed recreation
 Next: station names/destination information and safe boarding/alighting at stopped
 trains. Then review paired tracks, vertical service, turnouts and structures before
 expanding generation; high-speed/world-spanning trunks remain later work.
+
+## World geometry prerequisite for expanded routes
+
+In the 2026-10-04 follow-up, the user proposed a town loop with several stops and
+grade-separated outgoing roads, then asked for broader terrain/structure design
+before implementing tunnels. [World geometry](world-geometry.md) owns the use
+cases, including mountain slopes and parking-garage ramps, and the open choice
+of constrained surface/sector representation. General solid-volume authoring is
+not a settled requirement. Resolve that shared model before selecting the next
+bridge/tunnel implementation; railway-specific structure hacks are not the next
+step. Station information and boarding remain independent railway follow-ons.

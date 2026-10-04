@@ -3,6 +3,7 @@ import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
+import { collectSurfacePresentation } from "../rendering/SurfacePresentation.js";
 import { renderInterior } from "./renderInterior.js";
 
 /**
@@ -68,11 +69,26 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
 
   gc.doorPresentation?.appendOverlays(items, gc.realmId ?? null);
   try {
+    const surfaces = (phase: "below" | "above") => {
+      const frame = gc.sceneFrame.overlays;
+      frame.begin();
+      collectSurfacePresentation(
+        frame,
+        camera,
+        stateView.props,
+        stateView.playerEntity,
+        "auto",
+        phase,
+      );
+      if (frame.items.length) renderer.submit(camera, { kind: "overlay", items: frame.items });
+    };
+    surfaces("below");
     renderer.submit(camera, {
       kind: "scene",
       items,
       order: collectSceneOrder(items, gc.sceneFrame.drawOrder),
     });
+    surfaces("above");
   } finally {
     gc.sceneFrame.release();
   }

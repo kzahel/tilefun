@@ -67,6 +67,7 @@ export default function ReviewPage() {
       </section>
     );
   if (candidate.kind === "projection") return <Navigate to="/tool/car-projection" replace />;
+  if (candidate.kind === "geometry") return <Navigate to="/tool/world-geometry" replace />;
   if (candidate.kind === "character")
     return <Navigate to={`/tool/character-lab?character=${candidate.characterId}`} replace />;
   if (candidate.kind === "vehicle")

@@ -54,6 +54,11 @@ landing; adding a second physical opening would require an explicit room migrati
 Older regional/country-house recipes retain their original compact interiors.
 Upper floors and per-building authored variants remain future work.
 
+The [world geometry direction](world-geometry.md#visibility-and-seamless-interiors)
+also targets seamless connected indoor levels with cutaways and level/sector
+visibility. Reconciliation with the current per-floor realm model remains a
+design question; this does not change the existing door or persistence contracts.
+
 Four new layout cases are registered, unchecked, in Workshop's **Playable building
 layouts** batch (`rooms-16`). This is a runtime content change using existing art,
 not a human approval of those new furnished compositions.

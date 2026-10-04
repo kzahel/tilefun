@@ -79,6 +79,10 @@ choices remain open.
 
 ## Engine, hosting and distribution
 
+- [Terrain heights and stacked spaces](topics/world-geometry.md): 2026-10-04
+  requests for tile-based mountain slopes, ramps into underground and above-ground
+  parking garages, bridges and tunnels. Explore constrained surfaces/sectors;
+  no voxel engine or mandatory solid-volume authoring is requested.
 - [Entity activation, AI and unloading](topics/entity-activation.md): known
   technical debt around distant simulation, placed-entity residency and physics
   passes that bypass AI tick tiers; measurement and improvement backlog.

@@ -12,6 +12,7 @@ import { yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
+import { surfaceShadowZ } from "./SurfacePresentation.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
 
 /**
@@ -78,6 +79,7 @@ export function collectScene(
   const M = 16;
 
   const propSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
+  const planarProps = props.filter((p) => p.collider?.surface || p.walls?.some((c) => c.surface));
   const vehicleSurfaces = entities.flatMap((e) =>
     isVehicle(e) && e.collider
       ? [
@@ -133,7 +135,11 @@ export function collectScene(
     const shadowFeetWy = pos.wy + (col ? col.offsetY : (e.sortOffsetY ?? 0));
     const shadowTx = Math.floor(pos.wx / TILE_SIZE);
     const shadowTy = Math.floor(pos.wy / TILE_SIZE);
-    const shadowTerrainZ = world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
+    const terrainZ = world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
+    const shadowTerrainZ =
+      col && planarProps.length
+        ? surfaceShadowZ(planarProps, getEntityAABB(pos, col), zOffset, terrainZ)
+        : terrainZ;
 
     // Sort key
     const sortKey = depthAboveProps(

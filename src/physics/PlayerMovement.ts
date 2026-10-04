@@ -31,6 +31,7 @@ import {
   type PropSurface,
   resolveGroundZForLanding,
   resolveGroundZForTracking,
+  resolveSurfaceCeiling,
 } from "./surfaceHeight.js";
 
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
@@ -513,6 +514,18 @@ export function tickJumpGravity(
     const prevWz = entity.wz;
     entity.jumpVZ -= JUMP_GRAVITY * physics.gravityScale * dt;
     entity.wz += entity.jumpVZ * dt;
+    if (entity.wz > prevWz && entity.collider && props) {
+      const height = entity.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
+      const ceiling = resolveSurfaceCeiling(
+        getEntityAABB(entity.position, entity.collider),
+        prevWz + height,
+        props,
+      );
+      if (ceiling !== undefined && entity.wz + height > ceiling) {
+        entity.wz = ceiling - height;
+        entity.jumpVZ = 0;
+      }
+    }
     const groundZ = resolveGroundZForLanding(entity, getHeight, props, entities, prevWz);
     entity.groundZ = groundZ;
     if (entity.wz <= groundZ) {
@@ -727,7 +740,7 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   }): boolean => {
     const mask = airborne ? CollisionFlag.Solid : BLOCK_MASK;
     if (aabbOverlapsSolid(aabb, ctx.getCollision, mask)) return true;
-    if (ctx.isPropBlocked(aabb, entityWz, entityHeight)) return true;
+    if (ctx.isPropBlocked(aabb, entityWz, entityHeight, elevStepUp)) return true;
     if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, elevStepUp)) return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;

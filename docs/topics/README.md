@@ -24,6 +24,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Embedded engine labs](embedded-engine-labs.md) | Game/lab architectural alignment, shared presentation hosting and drift prevention |
 | [Vehicles](vehicles.md) | Approved vehicle bank, generated traffic, roof riding and Workshop playground |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
+| [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |

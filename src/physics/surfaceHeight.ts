@@ -5,6 +5,7 @@ import type { ColliderComponent } from "../entities/Entity.js";
 import type { PropCollider } from "../entities/Prop.js";
 import { vehicleRoofBounds } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
+import { querySurfacePatch } from "./SurfacePatch.js";
 
 /**
  * Terrain surface height at a world-pixel point, in world pixels.
@@ -114,7 +115,7 @@ export function resolveGroundZForLanding(
   let groundZ = getTerrainGroundZ(entity, getHeight);
   if (props) {
     const propZ = groundFootprint
-      ? getHighestWalkablePropSurfaceZ(groundFootprint, props)
+      ? getHighestWalkablePropSurfaceZ(groundFootprint, props, prevWz ?? entity.wz)
       : undefined;
     if (propZ !== undefined && propZ > groundZ) groundZ = propZ;
   }
@@ -232,11 +233,23 @@ export interface PropSurface {
 export function getHighestWalkablePropSurfaceZ(
   aabb: AABB,
   props: readonly PropSurface[],
+  prevWz?: number,
 ): number | undefined {
   let maxZ: number | undefined;
   for (const prop of props) {
     const colliders = prop.walls ?? (prop.collider ? [prop.collider] : []);
     for (const c of colliders) {
+      if (c.surface) {
+        const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), aabb);
+        if (
+          hit &&
+          prevWz !== undefined &&
+          hit.topMax <= prevWz + 0.001 &&
+          (maxZ === undefined || hit.topMax > maxZ)
+        )
+          maxZ = hit.topMax;
+        continue;
+      }
       if (!c.walkableTop || c.zHeight === undefined) continue;
       const topZ = (c.zBase ?? 0) + c.zHeight;
       if (aabbsOverlap(aabb, getEntityAABB(prop.position, c))) {
@@ -261,6 +274,16 @@ export function getWalkablePropSurfaceZ(
   for (const prop of props) {
     const colliders = prop.walls ?? (prop.collider ? [prop.collider] : []);
     for (const c of colliders) {
+      if (c.surface) {
+        const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), aabb);
+        if (
+          hit &&
+          Math.abs(entityWz - hit.topMax) <= STEP_UP_THRESHOLD &&
+          (maxZ === undefined || hit.topMax > maxZ)
+        )
+          maxZ = hit.topMax;
+        continue;
+      }
       if (!c.walkableTop || c.zHeight === undefined) continue;
       const topZ = (c.zBase ?? 0) + c.zHeight;
       // Only walk on top if entity is within step-up range of the surface
@@ -273,6 +296,27 @@ export function getWalkablePropSurfaceZ(
     }
   }
   return maxZ;
+}
+
+/** First solid slab underside above the actor's previous head height. */
+export function resolveSurfaceCeiling(
+  aabb: AABB,
+  headZ: number,
+  props: readonly PropSurface[],
+): number | undefined {
+  let ceiling: number | undefined;
+  for (const prop of props)
+    for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
+      if (!c.surface || c.passable) continue;
+      const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), aabb);
+      if (
+        hit &&
+        hit.bottomMin >= headZ - 0.001 &&
+        (ceiling === undefined || hit.bottomMin < ceiling)
+      )
+        ceiling = hit.bottomMin;
+    }
+  return ceiling;
 }
 
 /**

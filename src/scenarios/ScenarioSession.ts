@@ -4,6 +4,7 @@ import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
+import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import {
@@ -33,7 +34,15 @@ export class ScenarioSession {
     if (recipe.version !== 1) throw new Error("Unsupported scenario recipe");
     recipe.props.forEach((p, i) => {
       p.type = `scenario-prop-${i}`;
+      for (const c of p.walls ?? (p.collider ? [p.collider] : []))
+        if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
     });
+    const patches = recipe.props
+      .flatMap((p) => p.walls ?? (p.collider ? [p.collider] : []))
+      .flatMap((c) => (c.surface ? [c.surface] : []));
+    const ids = new Set(patches.map((p) => p.id));
+    if (ids.size !== patches.length || patches.some((p) => p.connectsTo.some((id) => !ids.has(id))))
+      throw new Error("Invalid surface connections");
     if (recipe.actors?.some((e) => e.type === "player"))
       throw new Error("Use recipe.player for the controlled actor");
     this.physics = scenarioPhysics(recipe.physics);

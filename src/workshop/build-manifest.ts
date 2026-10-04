@@ -13,6 +13,7 @@ import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
+import { buildWorldGeometryCandidate } from "./WorldGeometryCandidate.js";
 
 const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) => r.json())) as ArtCatalog;
 const source = required(catalog.sheets.find((s) => s.id === "me-complete"));
@@ -31,6 +32,7 @@ try {
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
   candidates.push(await buildCarProjectionCandidate());
+  candidates.push(await buildWorldGeometryCandidate());
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));

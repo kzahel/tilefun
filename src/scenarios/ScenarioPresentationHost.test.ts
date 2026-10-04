@@ -28,7 +28,7 @@ vi.mock("../rendering/OutdoorPresentation.js", () => ({ presentTerrain: mocks.te
 vi.mock("./ScenarioClient.js", () => ({
   ScenarioClient: class {
     ready = Promise.resolve();
-    view = { playerEntity: { position: { wx: 80, wy: 160 } } };
+    view = { playerEntity: { position: { wx: 80, wy: 160 } }, props: [] };
     step = mocks.step;
     command = mocks.command;
     dispose = mocks.terminate;

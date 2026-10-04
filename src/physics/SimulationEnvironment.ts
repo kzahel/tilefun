@@ -9,6 +9,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import type { MovementContext } from "./MovementContext.js";
+import { querySurfacePatch } from "./SurfacePatch.js";
 import type { EntitySurface, PropSurface } from "./surfaceHeight.js";
 
 export interface SimulationQuerySource {
@@ -53,9 +54,20 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       }
       return false;
     },
-    isPropBlocked: (aabb, entityWz, entityHeight) => {
-      for (const prop of options.queryProps(aabb)) {
-        if (aabbOverlapsPropWalls(aabb, prop.position, prop, entityWz, entityHeight)) return true;
+    isPropBlocked: (aabb, entityWz, entityHeight, stepUp = 0) => {
+      const props = options.queryProps(aabb);
+      let supportZ = entityWz;
+      // Resolve the proposed foot height before testing overhead clearance. This
+      // permits a small continuous climb without passing through a low ceiling.
+      for (const prop of props)
+        for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
+          if (!c.surface) continue;
+          const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), aabb);
+          if (hit && hit.topMax <= entityWz + stepUp + 0.001)
+            supportZ = Math.max(supportZ, hit.topMax);
+        }
+      for (const prop of props) {
+        if (aabbOverlapsPropWalls(aabb, prop.position, prop, supportZ, entityHeight)) return true;
       }
       return false;
     },

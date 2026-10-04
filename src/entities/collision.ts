@@ -1,5 +1,6 @@
 import { DEFAULT_PHYSICAL_HEIGHT, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
+import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity, PositionComponent } from "./Entity.js";
 import type { PropCollider } from "./Prop.js";
@@ -50,6 +51,26 @@ function propColliderOverlapsZ(
   return entityWz < wallTop && entityWz + entityHeight > wallBase;
 }
 
+function propColliderBlocks(
+  c: PropCollider,
+  propPos: { wx: number; wy: number },
+  aabb: AABB,
+  entityWz?: number,
+  entityHeight?: number,
+): boolean {
+  if (c.passable) return false;
+  if (c.surface) {
+    const hit = querySurfacePatch(c.surface, getEntityAABB(propPos, c), aabb);
+    if (!hit) return false;
+    if (entityWz === undefined || entityHeight === undefined) return true;
+    return entityWz < hit.topMax - 0.001 && entityWz + entityHeight > hit.bottomMin + 0.001;
+  }
+  return (
+    propColliderOverlapsZ(c, entityWz, entityHeight) &&
+    aabbsOverlap(aabb, getEntityAABB(propPos, c))
+  );
+}
+
 /**
  * Check if an AABB overlaps a prop's wall segments (enterable props) or single collider.
  * When entityWz and entityHeight are provided, performs Z-axis filtering — walls whose
@@ -64,16 +85,12 @@ export function aabbOverlapsPropWalls(
 ): boolean {
   if (prop.walls) {
     for (const wall of prop.walls) {
-      if (wall.passable) continue; // walkable surface only — doesn't block movement
-      if (!propColliderOverlapsZ(wall, entityWz, entityHeight)) continue;
-      if (aabbsOverlap(aabb, getEntityAABB(propPos, wall))) return true;
+      if (propColliderBlocks(wall, propPos, aabb, entityWz, entityHeight)) return true;
     }
     return false;
   }
   if (prop.collider) {
-    if (prop.collider.passable) return false;
-    if (!propColliderOverlapsZ(prop.collider, entityWz, entityHeight)) return false;
-    return aabbsOverlap(aabb, getEntityAABB(propPos, prop.collider));
+    return propColliderBlocks(prop.collider, propPos, aabb, entityWz, entityHeight);
   }
   return false;
 }

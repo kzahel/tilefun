@@ -325,6 +325,15 @@ export class Realm {
         around(Math.floor(spawnX / CHUNK_SIZE_PX), Math.floor(spawnY / CHUNK_SIZE_PX), 3),
       );
     const player = createPlayer(spawnX, spawnY);
+    if (saved?.wz !== undefined && Number.isFinite(saved.wz)) {
+      player.wz = saved.wz;
+      player.groundZ =
+        saved.groundZ !== undefined && Number.isFinite(saved.groundZ) ? saved.groundZ : saved.wz;
+      if (saved.jumpVZ !== undefined && Number.isFinite(saved.jumpVZ)) {
+        player.jumpVZ = saved.jumpVZ;
+        player.jumpZ = saved.wz - (player.groundZ ?? saved.wz);
+      }
+    }
     applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
     const ride = saved?.roofRide;
@@ -487,6 +496,9 @@ export class Realm {
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
       y: session.player.position.wy,
+      ...(session.player.wz === undefined ? {} : { wz: session.player.wz }),
+      ...(session.player.groundZ === undefined ? {} : { groundZ: session.player.groundZ }),
+      ...(session.player.jumpVZ === undefined ? {} : { jumpVZ: session.player.jumpVZ }),
       cameraX: session.cameraX,
       cameraY: session.cameraY,
       cameraZoom: session.cameraZoom,

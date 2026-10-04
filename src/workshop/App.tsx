@@ -30,6 +30,7 @@ const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const CharactersPage = lazy(() => import("./CharactersPage.js"));
 const CarProjectionPage = lazy(() => import("./CarProjectionPage.js"));
 const TrafficPage = lazy(() => import("./TrafficPage.js"));
+const WorldGeometryPage = lazy(() => import("./WorldGeometryPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
@@ -239,6 +240,7 @@ export function App() {
               "patterns",
               "outdoor",
               "traffic",
+              "world-geometry",
               "railways",
               "vehicles",
               "car-projection",
@@ -953,6 +955,7 @@ function ToolPage() {
     );
   if (tool.id === "car-projection") return <CarProjectionPage />;
   if (tool.id === "traffic") return <TrafficPage />;
+  if (tool.id === "world-geometry") return <WorldGeometryPage />;
   if (tool.id === "vehicles")
     return (
       <AuthGate>

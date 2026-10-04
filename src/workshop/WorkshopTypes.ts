@@ -32,7 +32,8 @@ export interface WorkshopCandidate {
     | "vehicle"
     | "character"
     | "railway"
-    | "projection";
+    | "projection"
+    | "geometry";
   characterId?: string;
   vehicle?: VehicleView;
   /** Handoff derived from the candidate's actual world generation and location. */

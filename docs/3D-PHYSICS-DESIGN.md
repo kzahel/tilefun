@@ -22,6 +22,10 @@ Checked against code on 2026-10-03. The
   [propDepth](../src/rendering/propDepth.ts) handles standing-on-prop draw order.
 - [ThreeDebugRenderer](../src/rendering/ThreeDebugRenderer.ts) supplies the current
   `r_show3d` split-screen view, rather than the proposed 2D wireframe extension.
+- Opt-in [SurfacePatch](../src/physics/SurfacePatch.ts) colliders provide planar
+  slab support and undersides for the first [world geometry proof](topics/world-geometry.md).
+  Shared player movement checks slope support, landing and overhead clearance.
+  This does not yet replace terrain height queries or update ball/NPC navigation.
 
 ## Prediction, presentation and persistence
 
@@ -35,8 +39,16 @@ separate contract in [SaveManager](../src/persistence/SaveManager.ts). Do not in
 save fidelity or old-client compatibility from the original plan's statements.
 Current saves include room plans and procedural edit/tombstone metadata as well
 as ordinary world/player state.
+Player records now optionally include `wz`, `groundZ` and `jumpVZ` so reload
+preserves vertical location/motion. Explicit realm arrivals reset airborne state.
 
 ## Verification and remaining ideas
+
+The [world geometry topic](topics/world-geometry.md) records the 2026-10-04
+use cases for tile-based slopes, garage ramps, stacked floors, bridges and
+tunnels. The agreed direction is constrained terrain surfaces and connected
+stacked spaces; the schema remains open. This does not replace the current
+physics contract or select a solid-volume architecture.
 
 Start with [physics parity](../src/physics/physicsParity.test.ts),
 [environment tests](../src/physics/SimulationEnvironment.test.ts),

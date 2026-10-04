@@ -16,6 +16,10 @@ import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
+import {
+  collectSurfacePresentation,
+  type SurfaceVisibility,
+} from "../rendering/SurfacePresentation.js";
 import { ScenarioClient } from "./ScenarioClient.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
@@ -31,6 +35,7 @@ export interface ScenarioPresentationOptions {
   /** Diagnostic fixtures can replace terrain/grass with a grid. */
   terrain?: boolean;
   pixelExactShadows?: boolean;
+  surfaceVisibility?(): SurfaceVisibility;
   /** Borrowed frame/camera, consumed synchronously through either renderer backend. */
   underlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
   overlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
@@ -173,6 +178,16 @@ export class ScenarioPresentationHost {
           this.options.settings().terrainPacing,
         );
       this.drawOverlay(this.options.underlay);
+      this.drawOverlay((frame) =>
+        collectSurfacePresentation(
+          frame,
+          this.camera,
+          view.props,
+          view.playerEntity,
+          this.options.surfaceVisibility?.() ?? "auto",
+          "below",
+        ),
+      );
       const items = collectScene(
         view.entities,
         view.props,
@@ -193,6 +208,16 @@ export class ScenarioPresentationHost {
         order: collectSceneOrder(items, this.frame.drawOrder),
         pixelExactShadows: this.options.pixelExactShadows ?? false,
       });
+      this.drawOverlay((frame) =>
+        collectSurfacePresentation(
+          frame,
+          this.camera,
+          view.props,
+          view.playerEntity,
+          this.options.surfaceVisibility?.() ?? "auto",
+          "above",
+        ),
+      );
       this.drawOverlay(this.options.overlay);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
@@ -215,7 +240,8 @@ export class ScenarioPresentationHost {
     if (!collect || !this.host) return;
     this.overlays.begin();
     collect(this.overlays, this);
-    this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
+    if (this.overlays.items.length)
+      this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
   }
 
   getDiagnostics() {

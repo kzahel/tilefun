@@ -86,6 +86,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [049 Renderer performance matrix](049-renderer-performance-matrix.md) | Complete: 80 Mac/Pixel renderer/pacing/zoom cases; four Canvas overview catch-up failures |
 | [050 Outdoor Geometry presentation](050-outdoor-geometry-presentation.md) | Shared fixed-camera host and semantic overlays; [embedded labs topic](../topics/embedded-engine-labs.md) |
 
+| [051 World geometry proof](051-world-geometry-proof.md) | First shared-engine ramp, raised deck, passage, vertical saves and diagnostic cutaways |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

@@ -1,5 +1,8 @@
 import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
+import type { SurfacePatch } from "../physics/SurfacePatch.js";
 export interface PropCollider {
+  /** Opt-in planar slab; replaces legacy zBase/zHeight semantics for this collider. */
+  surface?: SurfacePatch;
   offsetX: number;
   offsetY: number;
   width: number;

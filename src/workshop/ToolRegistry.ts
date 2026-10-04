@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "world-geometry",
+    name: "World geometry lab",
+    description:
+      "Walk a ramp and raised deck, pass underneath, and inspect cutaway visibility using shared engine physics.",
+    url: "workshop.html#/tool/world-geometry",
+    mode: "source",
+  },
+  {
     id: "renderer-lab",
     name: "Renderer comparison",
     description:
@@ -173,6 +181,12 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "world-geometry",
+    name: "World geometry proof",
+    description: "Schematic engine experiment; no art promotion or approval action.",
+    toolId: "world-geometry",
+  },
   {
     id: "car-projection",
     name: "Car projection experiment",
