@@ -136,14 +136,37 @@ describe("reusable grass frames", () => {
     expect(scratch.getDiagnostics()).toEqual(diagnostics);
   });
 
+  it("reuses every record in a warm overview without changing values or order", () => {
+    const scratch = new GrassFrameBuffer();
+    scratch.begin([]);
+    const first = Array.from({ length: 40000 }, (_, i) => scratch.next(i, i % 1024, i % 4, 0));
+    scratch.end();
+    const before = scratch.getDiagnostics();
+    scratch.begin([]);
+    for (let i = 0; i < first.length; i++) {
+      const item = scratch.next(i + 1, i % 512, (i + 1) % 4, 0.125);
+      expect(item).toBe(first[i]);
+      expect(item).toEqual({
+        kind: "grass",
+        wx: i + 1,
+        wy: i % 512,
+        sortKey: i % 512,
+        variant: (i + 1) % 4,
+        angle: 0.125,
+      });
+    }
+    scratch.end();
+    expect(scratch.getDiagnostics()).toEqual(before);
+  });
+
   it("caps retained storage without dropping oversized output, then shrinks and clears", () => {
     const scratch = new GrassFrameBuffer();
     scratch.begin(Array.from({ length: 1025 }, () => ({ position: { wx: 1, wy: 2 } })));
-    const output = Array.from({ length: 9000 }, (_, i) => scratch.next(i, i, i % 4, 0));
+    const output = Array.from({ length: 66000 }, (_, i) => scratch.next(i, i, i % 4, 0));
     scratch.end();
-    expect(output).toHaveLength(9000);
-    expect(new Set(output).size).toBe(9000);
-    expect(scratch.getDiagnostics().retainedItems).toBe(8192);
+    expect(output).toHaveLength(66000);
+    expect(new Set(output).size).toBe(66000);
+    expect(scratch.getDiagnostics().retainedItems).toBe(65536);
     expect(scratch.getDiagnostics().positionCapacity).toBe(0);
     scratch.begin(Array.from({ length: 512 }, () => ({ position: { wx: 1, wy: 2 } })));
     scratch.end();

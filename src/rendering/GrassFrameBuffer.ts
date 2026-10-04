@@ -1,7 +1,10 @@
 import type { GrassItem } from "./SceneItem.js";
 
 const EMPTY = new Float64Array(0);
-const MAX_RETAINED_ITEMS = 8192;
+// The 0.1× desktop overview contains ~30k blades. The old 8k cap allocated
+// its overflow every frame. Retain a bounded overview working set on demand;
+// ordinary views allocate only what they use and shrink after sustained underuse.
+const MAX_RETAINED_ITEMS = 65536;
 const MAX_RETAINED_ENTITIES = 1024;
 const SHRINK_AFTER_FRAMES = 60;
 const positionCapacity = (count: number) => 2 ** Math.ceil(Math.log2(Math.max(32, count)));

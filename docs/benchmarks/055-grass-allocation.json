@@ -1,0 +1,63 @@
+{
+  "before": {
+    "browser": "153.0.8010.12",
+    "mode": "reused",
+    "frames": 120,
+    "radius": 5,
+    "items": 2567280,
+    "diagnostics": {
+      "retainedItems": 8192,
+      "positionCapacity": 32,
+      "activeItems": 21394,
+      "createdItems": 2384552,
+      "createdPositionBuffers": 2
+    },
+    "createdItemsDuringSample": 1584240,
+    "estimatedPoolHeapBytes": 453928,
+    "sampledBytes": 122547688,
+    "allocationByFunction": {
+      "appendGrassBladeItems": 117251916,
+      "next": 5161284,
+      "sin": 77940,
+      "end": 20996,
+      "push": 10904,
+      "chunkToWorld": 8232,
+      "getChunkIfLoaded": 8208,
+      "window.grassProbe": 4104,
+      "values": 4104
+    },
+    "frameHashes": [
+      "902f4efc30bfd44af494f95d3e9d2e7df0ba6c4fb42cfecef51b2e980a2678ad",
+      "5e5c462bd5b3e1123df8ba46a295642e4b8341f41046b5b58b02c7f285f1dc58",
+      "23fddbd3f1ad75f17aae199a910b3cf7331d37c03158176d8628e7bef2fe0f6c"
+    ]
+  },
+  "after": {
+    "browser": "153.0.8010.12",
+    "mode": "reused",
+    "frames": 120,
+    "radius": 5,
+    "items": 2567280,
+    "diagnostics": {
+      "retainedItems": 21394,
+      "positionCapacity": 32,
+      "activeItems": 21394,
+      "createdItems": 21394,
+      "createdPositionBuffers": 2
+    },
+    "createdItemsDuringSample": 0,
+    "estimatedPoolHeapBytes": 1137884,
+    "sampledBytes": 32799696,
+    "allocationByFunction": {
+      "appendGrassBladeItems": 32787268,
+      "evaluate": 4224,
+      "window.grassProbe": 4104,
+      "next": 4100
+    },
+    "frameHashes": [
+      "902f4efc30bfd44af494f95d3e9d2e7df0ba6c4fb42cfecef51b2e980a2678ad",
+      "5e5c462bd5b3e1123df8ba46a295642e4b8341f41046b5b58b02c7f285f1dc58",
+      "23fddbd3f1ad75f17aae199a910b3cf7331d37c03158176d8628e7bef2fe0f6c"
+    ]
+  }
+}

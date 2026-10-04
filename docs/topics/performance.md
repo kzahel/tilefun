@@ -383,3 +383,12 @@ Next engine target: shared grass collection/sorting and recurring vertex creatio
 The measured Mac overview still requests about 5.78 MiB of vertex uploads per
 render frame; persistent ordering and instanced quad submission are candidates
 for measured follow-ups. Keep current renderer/pacing defaults.
+
+
+[055](../tactical/055-overview-frame-reuse.md) is addressing overview frame reuse.
+The shared grass pool now retains up to 65,536 scalar records on demand (formerly
+8,192), with the same sustained-underuse shrink and realm/host teardown. A fixed
+21,394-blade allocation probe reduces warm record creation from 1.58 million to
+zero over 120 frames, with identical output hashes. Estimated pool retention is
+1.14 MB versus 0.45 MB for that fixture; sampled allocations fall about 73% but
+are not eliminated. This is allocation evidence, not a measured FPS claim.
