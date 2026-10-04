@@ -6154,7 +6154,7 @@
       "name": "Wooden cabinets",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=cabinets&revision=ec4ba96c694701c27e14b750e5a446e776c51b1c6a0b0bdc88d39aba170981f3",
-      "fingerprint": "33ffc848f25988fae9bdfdbfcfb5ebbf75e62c5ac79c8e0748c396b805125411"
+      "fingerprint": "9297116c0799defc6a92c79b1594c1344414b35254647c40f301b8af230efe6f"
     },
     {
       "id": "family:trees",
@@ -6163,7 +6163,7 @@
       "name": "Trees and forest",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=trees&revision=b049e3e9dd662ebe3954a4cf5a59d685ba7c9b4de67e700893dce1c3ad85b930",
-      "fingerprint": "c7d75332a0d4bdacc6562f934122c5b27b0c940fee3b65e9cf9db204e5d8a34e"
+      "fingerprint": "7c9874a73d2af9b3e5bd859d0ac83fc9860dda2fe67fc534bfb3972fab80f677"
     },
     {
       "id": "family:scrapyard",
@@ -6172,7 +6172,16 @@
       "name": "Scrapyard and debris",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=scrapyard&revision=042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90",
-      "fingerprint": "6c82c1cbf7a13d8d2dd5c781e8c2580878e92a9f9fd3d8ae600a81b255aa5d46"
+      "fingerprint": "a78e4612f88302efbe401cc3df548be1005bbbb7a6efb61359c5fc5c2199464a"
+    },
+    {
+      "id": "family:outdoor-seating",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Outdoor seating",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=outdoor-seating&revision=02e667bf94babe9f5b1f9057536a7ccbeae82087484f80af67af51deb2da30bf",
+      "fingerprint": "9eab8ce91df96550e9fefb24516a376447f01034269697f0e1bfa8f29c556699"
     },
     {
       "id": "review-0-6ba78e73",

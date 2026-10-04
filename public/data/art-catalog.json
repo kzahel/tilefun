@@ -36,6 +36,26 @@
       "indexKind": "interiors"
     },
     {
+      "id": "exteriors-bench-5",
+      "name": "exteriors bench 5",
+      "image": "assets/semantic-sources/exteriors-bench-5.png",
+      "width": 16,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "exteriors-bench-6",
+      "name": "exteriors bench 6",
+      "image": "assets/semantic-sources/exteriors-bench-6.png",
+      "width": 16,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "objects",
       "name": "objects",
       "image": "assets/tilesets/objects.png",

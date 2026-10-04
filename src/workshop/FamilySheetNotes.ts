@@ -1,5 +1,6 @@
 import type { ArtNote } from "../art/ArtNotes.js";
 import {
+  FAMILY_SHEET_IDS,
   type FamilyMember,
   type FamilySheet,
   type FamilySheetCatalog,
@@ -13,7 +14,7 @@ export function familyNoteTarget(keys: string[]) {
   const revision = get("family-proposal:");
   if (
     !family ||
-    !["cabinets", "trees", "scrapyard"].includes(family) ||
+    !FAMILY_SHEET_IDS.some((id) => id === family) ||
     !/^[a-f0-9]{64}$/.test(revision ?? "")
   )
     return null;

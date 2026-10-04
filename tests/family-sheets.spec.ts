@@ -42,14 +42,14 @@ async function pixels(canvas: Locator) {
   });
 }
 
-test("all three contact sheets fit desktop, tablet and 390px phone with the complete piece inventory", async ({
+test("all contact sheets fit desktop, tablet and 390px phone with the complete piece inventory", async ({
   page,
 }) => {
   await mockDiscussions(page);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${URL}?family=cabinets`);
-  const counts = { cabinets: 9, trees: 14, scrapyard: 29 };
+  const counts = { cabinets: 9, trees: 14, scrapyard: 29, "outdoor-seating": 15 };
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 966, height: 1024 },
@@ -58,7 +58,7 @@ test("all three contact sheets fit desktop, tablet and 390px phone with the comp
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await expect(
       page.getByRole("navigation", { name: "Art families" }).getByRole("link"),
-    ).toHaveCount(3);
+    ).toHaveCount(4);
     for (const family of catalog.families) {
       const tab = page
         .getByRole("navigation", { name: "Art families" })
@@ -105,6 +105,36 @@ test("shadow and tree color controls change real artwork pixels", async ({ page 
     }
     expect(new Set(hashes).size).toBe(family.variants.length);
   }
+});
+
+test("outdoor seating retains original-only benches and exact colored-chair note targets", async ({
+  page,
+}) => {
+  const events = await mockDiscussions(page);
+  await page.goto(`${URL}?family=outdoor-seating&member=bench-5`);
+  await ready(page, 15);
+  await expect(page.locator(".family-detail-copy")).toContainText("Complete bench");
+  const detail = page.locator(".family-piece-discussion");
+  await detail.getByText("Discuss this piece", { exact: true }).click();
+  await detail.getByRole("textbox").fill("Check this long bench");
+  await detail.getByRole("button", { name: "Save note" }).click();
+  await expect.poll(() => events.length).toBe(1);
+  expect(events[0]).toMatchObject({
+    type: "source",
+    sheetId: "exteriors-bench-5",
+    fingerprint: "a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa",
+    rect: [0, 0, 16, 48],
+  });
+  await page.getByRole("button", { name: "10. Side chair · back on left", exact: true }).click();
+  const card = page
+    .getByRole("button", { name: "10. Side chair · back on left", exact: true })
+    .locator("canvas");
+  const green = await pixels(card);
+  await page.getByLabel("Chair color", { exact: true }).selectOption("blue");
+  expect(await pixels(card)).not.toBe(green);
+  const family = required(catalog.families.find((f) => f.id === "outdoor-seating"));
+  const chair = required(family.groups.flatMap((g) => g.members).find((m) => m.id === "chair-3"));
+  expect(required(chair.variants.find((v) => v.id === "blue")).recordIds).toEqual(["E01-16"]);
 });
 
 test("cabinet connector details and piece/variant deep links survive reload", async ({ page }) => {

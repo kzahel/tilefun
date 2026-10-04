@@ -32,6 +32,8 @@ PINS = {
     'P01-trees-review.md': '91e950cc52b1192608c8811141ab0b42f69f916c24f94694e4022871131d8b36',
     'P02-scrapyard-review.md': 'a05de021a8524e4f9fd6510dc517241567845bdf36ad936d7c24ba80bbcfcee3',
     'P03-cabinets-review.md': 'd785fad5cd8629d31ee1781287f5b1fbc9f50ea8d2af8a2d02adf221f18f7465',
+    'E01-outdoor-seating.json': '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b',
+    'E01-outdoor-seating-review.md': '5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0',
 }
 SHADOWS = [('normal', 'Normal'), ('black-shadow', 'Dark shadow'), ('shadowless', 'No shadow')]
 PALETTES = [('green', 'Green'), ('orange-red', 'Orange / red'),
@@ -376,20 +378,71 @@ def build_scrapyard(packet, sources, source_sheets):
                     'variants': example_variants}], source_sheets)
 
 
+def build_seating(packet, images, sheets):
+    rows = {row['id']: row for row in packet['candidates']}
+    values = {}
+    for key, row in rows.items():
+        if row['masterOccurrences']:
+            image = sprite('me-complete', row['masterOccurrences'][0]['rect'])
+        else:
+            require(key in ('E01-05', 'E01-06'), 'Unregistered original-only seating source')
+            image = sprite(f'exteriors-bench-{int(key[-2:])}', row['exportRect'])
+        require(image['size'] == row['exportRect'][2:], 'Seating source frame changed')
+        check_pixels(image, row['normalizedRgbaSHA256'], images, key)
+        for occurrence in row['masterOccurrences']:
+            check_pixels(sprite('me-complete', occurrence['rect']), row['normalizedRgbaSHA256'], images, key)
+        values[key] = variant('original', 'Original', [key], image)
+
+    benches = [member(f'bench-{i}', i, rows[f'E01-{i:02}']['label'], 'whole',
+                      [fact('Use', 'Complete bench; no connecting piece required.'),
+                       fact('View', rows[f'E01-{i:02}']['fields']['facing']['value'])],
+                      [values[f'E01-{i:02}']]) for i in range(1, 8)]
+    colors = [('green', 'Green'), ('blue', 'Blue'), ('ochre', 'Ochre'), ('gray', 'Gray')]
+    chairs = []
+    for i, (label, records) in enumerate([
+        ('Chair · brown frame', [8, 9, 10, 11]),
+        ('Chair · gray frame', [12, 13, 14, 15]),
+        ('Side chair · back on left', [18, 16, 19, 17]),
+        ('Side chair · back on right', [22, 20, 23, 21]),
+    ]):
+        variants = [{**values[f'E01-{record:02}'], 'id': color, 'label': name}
+                    for record, (color, name) in zip(records, colors)]
+        chairs.append(member(f'chair-{i + 1}', i + 8, label, 'whole',
+                             [fact('Use', 'Complete chair; no connecting piece required.'),
+                              fact('Material', 'Patterned seat and back. Exact material and folding are unknown.')], variants))
+    tables = [member(f'table-{i + 1}', i + 12,
+                     ['Picnic table', 'Picnic table · set for a meal', 'Wide picnic table',
+                      'Wide picnic table · food and serving items'][i], 'whole',
+                     [fact('Form', 'Table and seating are one source image.'),
+                      fact('Attachments', 'Separate tabletop items have not been established.')],
+                     [values[f'E01-{i + 24:02}']]) for i in range(4)]
+    return family('outdoor-seating', 'Outdoor seating',
+                  'Slatted benches, camping chairs, and picnic tables.', 'Chair color', colors,
+                  [fact('Use', 'These are proposed complete objects; none needs an adjoining piece.'),
+                   fact('Variants', 'Chairs have four panel colors. Benches and tables keep their original colors.'),
+                   fact('Views', 'Left and right describe the image, not a world direction.'),
+                   fact('Gameplay', 'Collision, anchors and sitting positions are unknown.')],
+                  [group('benches', 'Benches', benches), group('chairs', 'Camping chairs', chairs),
+                   group('tables', 'Picnic tables', tables)], [], sheets)
+
+
 def build():
     for name, expected in PINS.items():
         require(sha((PACKETS / name).read_bytes()) == expected, f'Pinned proposal/review changed: {name}')
     trees = load(PACKETS / 'P01-trees.json')
     scrapyard = load(PACKETS / 'P02-scrapyard.json')
     cabinets = load(PACKETS / 'P03-cabinets.json')
+    seating = load(PACKETS / 'E01-outdoor-seating.json')
     topology = load(PACKETS / 'P03-cabinets-topology.json')
     require(topology['baseProposal']['sha256'] == PINS['P03-cabinets.json'], 'Topology base proposal mismatch')
     require(topology['evidence']['agentEvidence']['reviewSha256'] == PINS['P03-cabinets-review.md'],
             'Topology review mismatch')
     sheets = {row['id']: row for row in load(ROOT / 'public/data/art-catalog.json')['sheets']}
-    sources = [sheets[key] for key in ('me-complete', 'modern-interiors')]
+    sources = [sheets[key] for key in ('me-complete', 'modern-interiors', 'exteriors-bench-5', 'exteriors-bench-6')]
     pins = {'me-complete': trees['source']['sha256'],
-            'modern-interiors': cabinets['measurements']['sources']['packedAtlas']['sha256']}
+            'modern-interiors': cabinets['measurements']['sources']['packedAtlas']['sha256'],
+            'exteriors-bench-5': 'a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa',
+            'exteriors-bench-6': 'a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f'}
     require(scrapyard['source']['sha256'] == pins['me-complete'], 'Exteriors proposal source mismatch')
     images = {}
     for sheet in sources:
@@ -401,17 +454,18 @@ def build():
         require(list(image.size) == [sheet['width'], sheet['height']], 'Source dimensions differ')
         images[sheet['id']] = image
     families = [build_cabinets(cabinets, topology, images, sheets), build_trees(trees, sheets),
-                build_scrapyard(scrapyard, images, sheets)]
+                build_scrapyard(scrapyard, images, sheets), build_seating(seating, images, sheets)]
     expected = {'cabinets': [row['id'] for row in cabinets['measurements']['records']],
                 'trees': [row['id'] for row in trees['candidates']],
-                'scrapyard': [row['id'] for row in scrapyard['candidates']]}
+                'scrapyard': [row['id'] for row in scrapyard['candidates']],
+                'outdoor-seating': [row['id'] for row in seating['candidates']]}
     for item in families:
         records = [r for g in item['groups'] for m in g['members'] for v in m['variants'] for r in v['recordIds']]
         require(Counter(records) == Counter(expected[item['id']]), f"Incomplete or duplicated coverage: {item['id']}")
         for entry in [m for g in item['groups'] for m in g['members']] + item['examples']:
             for value in entry['variants']:
                 render(value['sprite'], images)
-    require(sum(map(len, expected.values())) == 85, 'Unexpected pilot record count')
+    require(sum(map(len, expected.values())) == 112, 'Unexpected source record count')
     result = {'version': 1, 'sources': sources, 'families': families}
     result['revision'] = revision(result)
     return result
@@ -429,7 +483,9 @@ def main():
                     'family-sheets.json is stale; run python3 scripts/build-family-sheets.py')
         else:
             OUTPUT.write_bytes(encoded)
-        print(f"Family sheets {'verified' if args.check else 'generated'}: 3 families, 52 cards, 85 source records.")
+        cards = [m for f in result['families'] for g in f['groups'] for m in g['members']]
+        records = [r for m in cards for v in m['variants'] for r in v['recordIds']]
+        print(f"Family sheets {'verified' if args.check else 'generated'}: {len(result['families'])} families, {len(cards)} cards, {len(records)} source records.")
     except (ValueError, KeyError, OSError, StopIteration) as error:
         print(f'Family sheets failed: {error}', file=sys.stderr)
         return 1

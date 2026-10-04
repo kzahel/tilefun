@@ -84,7 +84,7 @@ class FamilySheetsTest(unittest.TestCase):
             counts[family['id']] = len(records)
             self.assertEqual(family['status'], 'proposed')
             self.assertEqual(family['revision'], ADAPTER.revision(family))
-        self.assertEqual(counts, {'cabinets': 27, 'trees': 29, 'scrapyard': 29})
+        self.assertEqual(counts, {'cabinets': 27, 'trees': 29, 'scrapyard': 29, 'outdoor-seating': 27})
         cabinets = self.catalog['families'][0]
         parts = next(g['members'] for g in cabinets['groups'] if g['id'] == 'components')
         self.assertEqual([m['number'] for m in parts], [41, 42, 43, 44])
@@ -134,6 +134,17 @@ class FamilySheetsTest(unittest.TestCase):
             self.assertNotEqual(family['revision'], ADAPTER.revision(changed))
             changed['revision'] = ADAPTER.revision(changed)
             self.assertEqual(changed['revision'], ADAPTER.revision(changed))
+
+    def test_original_only_benches_and_chair_palette_correspondence(self):
+        seating = next(f for f in self.catalog['families'] if f['id'] == 'outdoor-seating')
+        groups = {g['id']: g['members'] for g in seating['groups']}
+        self.assertEqual(len(groups['benches']), 7)
+        for number in (5, 6):
+            image = groups['benches'][number - 1]['variants'][0]['sprite']
+            self.assertEqual(image, ADAPTER.sprite(f'exteriors-bench-{number}', [0, 0, 16, 48]))
+        for member, ids in zip(groups['chairs'], ([8,9,10,11], [12,13,14,15], [18,16,19,17], [22,20,23,21])):
+            self.assertEqual([v['id'] for v in member['variants']], ['green', 'blue', 'ochre', 'gray'])
+            self.assertEqual([v['recordIds'] for v in member['variants']], [[f'E01-{n:02}'] for n in ids])
 
 
 if __name__ == '__main__':

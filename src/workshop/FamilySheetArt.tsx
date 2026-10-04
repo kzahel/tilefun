@@ -3,7 +3,11 @@ import { useEffect, useRef } from "react";
 import { validateRect } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
-import type { FamilySheetCatalog, FamilySprite } from "./FamilySheetTypes.js";
+import {
+  FAMILY_SHEET_IDS,
+  type FamilySheetCatalog,
+  type FamilySprite,
+} from "./FamilySheetTypes.js";
 
 /** Matches the adapter's sorted, ASCII-escaped JSON; revisions exclude only themselves. */
 export function familyCanonicalJSON(value: unknown): string {
@@ -35,13 +39,13 @@ export async function loadFamilySheetCatalog(): Promise<FamilySheetCatalog> {
     catalog.version !== 1 ||
     !Array.isArray(catalog.sources) ||
     !Array.isArray(catalog.families) ||
-    catalog.families.length !== 3
+    catalog.families.length !== FAMILY_SHEET_IDS.length
   )
     throw new Error("Unsupported family sheets.");
   await verifyRevision(catalog);
   const ids = new Set<string>();
   for (const family of catalog.families) {
-    if (ids.has(family.id) || !["cabinets", "trees", "scrapyard"].includes(family.id))
+    if (ids.has(family.id) || !FAMILY_SHEET_IDS.includes(family.id))
       throw new Error("Invalid family identity.");
     ids.add(family.id);
     await verifyRevision(family);

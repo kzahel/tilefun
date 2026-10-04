@@ -23,9 +23,12 @@ examples. Desktop, tablet and phone captures were inspected. Typecheck, the
 The broad browser run passed 305 tests before 29 remaining tests lost a shared
 test-session file during another session's run; one standalone test also timed
 out. All 29 session-file failures pass on rerun (43 tests across the affected files).
-The standalone test still fails: the shared checkout reports a stale manifest
-while another session edits its inputs. An indexed-source snapshot passes all
-nine family tests; its standalone startup check is being retried separately.
+The standalone test initially remained blocked by a stale manifest in the shared
+checkout. After generating from an indexed-source snapshot and removing the
+leftover test server, it passed too. That snapshot also passes all nine family
+tests. No application change was needed for these test-environment failures.
+The subsequent full seating-integration run passes all 340 browser tests, including
+the ten current family-sheet regressions.
 
 Next: finish the semantic model's independent review, reconcile the next seating
 packet and present its exact sources in another quiet family sheet.

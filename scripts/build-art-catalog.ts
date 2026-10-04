@@ -102,6 +102,8 @@ const imageMap = new Map<string, string>([
   ["me-complete", "assets/tilesets/me-complete.png"],
   [railwaySource.sheetId, railwaySource.image],
   ["modern-interiors", "assets/tilesets/modern-interiors-atlas.png"],
+  ["exteriors-bench-5", "assets/semantic-sources/exteriors-bench-5.png"],
+  ["exteriors-bench-6", "assets/semantic-sources/exteriors-bench-6.png"],
   ["objects", "assets/tilesets/objects.png"],
   ["grass", "assets/tilesets/grass.png"],
   ["dirt", "assets/tilesets/dirt.png"],

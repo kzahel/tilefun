@@ -24,6 +24,26 @@
       "source": "assets/interiors/ (packed; individual source paths in slice index)",
       "index": "data/modern-interiors-atlas.json",
       "indexKind": "interiors"
+    },
+    {
+      "id": "exteriors-bench-5",
+      "name": "exteriors bench 5",
+      "image": "assets/semantic-sources/exteriors-bench-5.png",
+      "width": 16,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "exteriors-bench-6",
+      "name": "exteriors bench 6",
+      "image": "assets/semantic-sources/exteriors-bench-6.png",
+      "width": 16,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f",
+      "source": "public/assets/SOURCES.md"
     }
   ],
   "families": [
@@ -4693,7 +4713,1118 @@
         }
       ],
       "revision": "042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90"
+    },
+    {
+      "id": "outdoor-seating",
+      "name": "Outdoor seating",
+      "description": "Slatted benches, camping chairs, and picnic tables.",
+      "status": "proposed",
+      "variantLabel": "Chair color",
+      "variants": [
+        {
+          "id": "green",
+          "label": "Green"
+        },
+        {
+          "id": "blue",
+          "label": "Blue"
+        },
+        {
+          "id": "ochre",
+          "label": "Ochre"
+        },
+        {
+          "id": "gray",
+          "label": "Gray"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Use",
+          "value": "These are proposed complete objects; none needs an adjoining piece."
+        },
+        {
+          "label": "Variants",
+          "value": "Chairs have four panel colors. Benches and tables keep their original colors."
+        },
+        {
+          "label": "Views",
+          "value": "Left and right describe the image, not a world direction."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision, anchors and sitting positions are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "benches",
+          "title": "Benches",
+          "members": [
+            {
+              "id": "bench-1",
+              "number": 1,
+              "label": "Short golden slatted bench",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Broad horizontal seat/back view; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          80,
+                          176,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-2",
+              "number": 2,
+              "label": "Wide golden slatted bench",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Broad horizontal seat/back view; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          80,
+                          208,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-3",
+              "number": 3,
+              "label": "Short side-view bench, tall rail at image right",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Side view; tall back rail at image right; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          144,
+                          496,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-4",
+              "number": 4,
+              "label": "Short side-view bench, tall rail at image left",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Side view; tall back rail at image left; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          128,
+                          496,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-5",
+              "number": 5,
+              "label": "Long side-view bench, tall rail at image right",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Side view; tall back rail at image right; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "exteriors-bench-5",
+                        "rect": [
+                          0,
+                          0,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-6",
+              "number": 6,
+              "label": "Long side-view bench, tall rail at image left",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Side view; tall back rail at image left; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "exteriors-bench-6",
+                        "rect": [
+                          0,
+                          0,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "bench-7",
+              "number": 7,
+              "label": "Brown slatted bench",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete bench; no connecting piece required."
+                },
+                {
+                  "label": "View",
+                  "value": "Broad horizontal seat/back view; compass heading unknown"
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2752,
+                          5376,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "chairs",
+          "title": "Camping chairs",
+          "members": [
+            {
+              "id": "chair-1",
+              "number": 8,
+              "label": "Chair \u00b7 brown frame",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete chair; no connecting piece required."
+                },
+                {
+                  "label": "Material",
+                  "value": "Patterned seat and back. Exact material and folding are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "E01-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1856,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E01-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1872,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E01-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1888,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "gray",
+                  "label": "Gray",
+                  "recordIds": [
+                    "E01-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1904,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "chair-2",
+              "number": 9,
+              "label": "Chair \u00b7 gray frame",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete chair; no connecting piece required."
+                },
+                {
+                  "label": "Material",
+                  "value": "Patterned seat and back. Exact material and folding are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "E01-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1920,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E01-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1936,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E01-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1952,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "gray",
+                  "label": "Gray",
+                  "recordIds": [
+                    "E01-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1968,
+                          96,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "chair-3",
+              "number": 10,
+              "label": "Side chair \u00b7 back on left",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete chair; no connecting piece required."
+                },
+                {
+                  "label": "Material",
+                  "value": "Patterned seat and back. Exact material and folding are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "E01-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1952,
+                          240,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E01-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1952,
+                          208,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E01-19"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1968,
+                          240,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "gray",
+                  "label": "Gray",
+                  "recordIds": [
+                    "E01-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1968,
+                          208,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "chair-4",
+              "number": 11,
+              "label": "Side chair \u00b7 back on right",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Complete chair; no connecting piece required."
+                },
+                {
+                  "label": "Material",
+                  "value": "Patterned seat and back. Exact material and folding are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "green",
+                  "label": "Green",
+                  "recordIds": [
+                    "E01-22"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2000,
+                          304,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E01-20"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2000,
+                          272,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E01-23"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          304,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "gray",
+                  "label": "Gray",
+                  "recordIds": [
+                    "E01-21"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          272,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tables",
+          "title": "Picnic tables",
+          "members": [
+            {
+              "id": "table-1",
+              "number": 12,
+              "label": "Picnic table",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Table and seating are one source image."
+                },
+                {
+                  "label": "Attachments",
+                  "value": "Separate tabletop items have not been established."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-24"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1920,
+                          128,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "table-2",
+              "number": 13,
+              "label": "Picnic table \u00b7 set for a meal",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Table and seating are one source image."
+                },
+                {
+                  "label": "Attachments",
+                  "value": "Separate tabletop items have not been established."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-25"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1920,
+                          160,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "table-3",
+              "number": 14,
+              "label": "Wide picnic table",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Table and seating are one source image."
+                },
+                {
+                  "label": "Attachments",
+                  "value": "Separate tabletop items have not been established."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-26"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1952,
+                          128,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "table-4",
+              "number": 15,
+              "label": "Wide picnic table \u00b7 food and serving items",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Table and seating are one source image."
+                },
+                {
+                  "label": "Attachments",
+                  "value": "Separate tabletop items have not been established."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E01-27"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1952,
+                          160,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [],
+      "sourcePins": [
+        {
+          "id": "exteriors-bench-5",
+          "fingerprint": "a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa",
+          "width": 16,
+          "height": 48
+        },
+        {
+          "id": "exteriors-bench-6",
+          "fingerprint": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f",
+          "width": 16,
+          "height": 48
+        },
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "02e667bf94babe9f5b1f9057536a7ccbeae82087484f80af67af51deb2da30bf"
     }
   ],
-  "revision": "8adfd32a84f961c9cae74fbc235d6ada3b4ac6d088400be56888c0ecf3d1f43a"
+  "revision": "4cea7a218bc9bb84b2697486dcf9f21a8fd213c921064523cf69d4db84eb9c31"
 }

@@ -63,3 +63,14 @@ labelled layout proposals and are not claimed as vendor artwork.
 It contains fourteen 16×32 frames (opening then closing). Its closed panel matches
 `me-complete.png` at (1312,2432,16,32); runtime overlays preserve the frozen facade.
 New Workshop `doorways-v1` candidates review each entrance independently.
+
+## Semantic review source exports
+
+`semantic-sources/exteriors-bench-5.png` and `exteriors-bench-6.png` are unchanged
+16×48 PNG copies of LimeZu Modern Exteriors native16 complete singles
+`ME_Singles_City_Props_16x16_Bench_5.png` and `ME_Singles_City_Props_16x16_Bench_6.png`.
+Credit: https://limezu.itch.io/modernexteriors
+The [E01 proposal](../../docs/tactical/053-semantic-tileset-map/packets/E01-outdoor-seating.json)
+pins original paths, hashes and aliases. Neither has a whole-frame exact master
+or theme-sheet match. These copies let the family sheet display the originals;
+they are unapproved review sources, not a promoted gameplay bank.
