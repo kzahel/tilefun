@@ -111,6 +111,21 @@ class FamilySheetsTest(unittest.TestCase):
         self.assertEqual([v['id'] for v in example['variants']], ['original'])
         self.assertEqual(example['variants'][0]['recordIds'], ['P02-21', 'P02-22', 'P02-22', 'P02-23'])
 
+    def test_family_revisions_include_only_used_source_pins(self):
+        sources = {source['id']: source for source in self.catalog['sources']}
+        for family in self.catalog['families']:
+            entries = [m for g in family['groups'] for m in g['members']] + family['examples']
+            used = sorted({layer['sheetId'] for entry in entries for variant in entry['variants']
+                           for layer in variant['sprite']['layers']})
+            self.assertEqual(family['sourcePins'], [{field: sources[source_id][field]
+                                                    for field in ('id', 'fingerprint', 'width', 'height')}
+                                                   for source_id in used])
+            changed = copy.deepcopy(family)
+            changed['sourcePins'][0]['fingerprint'] = '0' * 64
+            self.assertNotEqual(family['revision'], ADAPTER.revision(changed))
+            changed['revision'] = ADAPTER.revision(changed)
+            self.assertEqual(changed['revision'], ADAPTER.revision(changed))
+
 
 if __name__ == '__main__':
     unittest.main()

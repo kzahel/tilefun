@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: source inventory, broad surveys and three pilots reconciled; shared validator next.
+Status: three family contact sheets implemented and validated; owner discussion is next.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -151,7 +151,8 @@ catalog knowledge. Research packets, agent deliberation, experiment logs, confid
 scores and queue states stay in this plan folder. The owner-facing format is a
 large themed contact sheet with compact, ordinary-language metadata, suitable for
 pointing at pieces and discussing them. This supersedes the earlier dashboard-like
-proposal. The presentation is planned, not implemented.
+proposal. The first three proposed sheets are implemented; integration evidence is
+recorded in the [delivery note](notes/2026-10-04-family-contact-sheets.md).
 
 Use one reusable contact-sheet view for catalog browsing and lightweight proposal
 review. The normal catalog shows accepted values and explicit unknowns. A review
@@ -175,10 +176,14 @@ and controls rather than introducing another top-level research dashboard.
   existing review infrastructure. Show a short specific question only when it
   matters, such as “Mirror or glass?”; do not expose the whole research backlog.
 
-First presentation slice: the existing cabinet family, followed by trees and
-scrapyard groups in the same format. Feed it validated metadata and exact pixels;
+The first presentation slice covers cabinets, trees and scrapyard groups in the
+same format. It uses validated metadata and exact pixels;
 the owner does not need to read or operate the validator. Keep provenance and
 full research available to agents without making them the main browsing surface.
+
+Current delivery exposes proposed metadata and shared discussion. Accepted-catalog
+promotion and family-level approval controls remain future work; notes never
+silently change the catalog or game placement rules.
 
 Support family-level review of an explicit member list with individual exceptions.
 Repeated views should not create duplicate approval work. Register candidates and
@@ -214,6 +219,14 @@ unblocked queue item. Update the queue and link findings before ending a work se
 
 These are offline evidence tools; they do not repack assets or change gameplay.
 Use Python 3 with Pillow for image inspection and full inventory validation.
+
+- `python3 scripts/build-family-sheets.py --check` verifies the three contact
+  sheets against pinned proposals and committed atlases, including all 85 source
+  records and the cabinet component restrictions. Omit `--check` to regenerate
+  the JSON. `python3 scripts/build-family-sheets.test.py` exercises source drift,
+  frame replacement, record coverage and component/unknown placement distinctions.
+  These commands do not require ignored original packs. Normal app builds consume
+  the committed output; they do not regenerate it or require Pillow.
 
 - `python3 scripts/semantic-map-inventory.py --check` verifies the saved manifest
   against original packs, committed atlas/index inputs and indexed source pixels.

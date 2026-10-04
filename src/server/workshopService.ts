@@ -213,7 +213,13 @@ export class WorkshopService {
             note: e.note.trim(),
             ...(e.pins ? { pins: e.pins } : {}),
           });
-        else throw new HttpError(400, "Review movement in the playable tool");
+        else
+          throw new HttpError(
+            400,
+            candidate.kind === "family"
+              ? "Leave a note on the family sheet; metadata approval is not enabled here."
+              : "Review movement in the playable tool",
+          );
       } else {
         if (
           typeof e.threadId !== "string" ||

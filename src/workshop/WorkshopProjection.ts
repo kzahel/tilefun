@@ -1,6 +1,7 @@
 import { type ArtNote, latestArtNotes } from "../art/ArtNotes.js";
 import { buildingCaseKey, currentBuildingVerdict } from "../art/BuildingReviewQueue.js";
 import type { ReviewFeedback } from "../interiors/review/ReviewFeedback.js";
+import { familyNoteUrl } from "./FamilySheetNotes.js";
 import type {
   CandidateSummary,
   WorkshopActivity,
@@ -16,6 +17,8 @@ export function candidateSummary(
 ): CandidateSummary {
   if (c.excluded) return { ...c, state: "excluded" };
   if (!current) return { ...c, state: "unchecked" };
+  // Family discussions do not approve metadata, rendered art or geometry.
+  if (c.kind === "family") return { ...c, state: "unchecked" };
   if (c.kind === "character") {
     const row = latestArtNotes(art)
       .filter((n) => n.characterAnnotation?.candidateId === c.id)
@@ -110,6 +113,7 @@ export function artThread(row: ArtNote): WorkshopThread {
       row.sceneAnnotation?.candidateId.replace("district:", "") ??
       row.buildingReview?.caseId ??
       row.buildingReview?.prefabIds.join(", ") ??
+      (familyNoteUrl(row) ? row.note.split("\n")[0] : undefined) ??
       row.sheetId,
     note: row.note,
     reply: row.reply,
@@ -125,6 +129,7 @@ export function artThread(row: ArtNote): WorkshopThread {
             : row.assetAnnotation
               ? `/tilefun/workshop.html#/tool/outdoor?asset=${encodeURIComponent(row.assetAnnotation.assetId)}`
               : undefined) ??
+      familyNoteUrl(row) ??
       row.buildingReview?.url ??
       `/tilefun/art-workbench.html?sheet=${encodeURIComponent(row.sheetId)}&rect=${row.rect.join(",")}`,
     ...(row.buildingReview ? { caseId: buildingCaseKey(row.buildingReview) } : {}),

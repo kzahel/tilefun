@@ -33,6 +33,7 @@ const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const WorldGeometryPage = lazy(() => import("./WorldGeometryPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
+const FamilySheetsPage = lazy(() => import("./FamilySheetsPage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
 const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
 const ScenePage = lazy(() => import("./ScenePage.js"));
@@ -963,6 +964,7 @@ function ToolPage() {
       </AuthGate>
     );
   if (tool.id === "outdoor") return <OutdoorPage />;
+  if (tool.id === "families") return <FamilySheetsPage />;
   if (tool.mode === "source") return <SourcePage />;
   if (tool.mode === "review")
     return (

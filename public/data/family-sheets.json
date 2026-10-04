@@ -1201,7 +1201,15 @@
           ]
         }
       ],
-      "revision": "8a3b74a0c34beff07aacd97c4004102c58991c7d5468a40938a8fe2c7b89d31e"
+      "sourcePins": [
+        {
+          "id": "modern-interiors",
+          "fingerprint": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "width": 2048,
+          "height": 8800
+        }
+      ],
+      "revision": "ec4ba96c694701c27e14b750e5a446e776c51b1c6a0b0bdc88d39aba170981f3"
     },
     {
       "id": "trees",
@@ -2584,7 +2592,15 @@
           ]
         }
       ],
-      "revision": "577cb23aac8255b6359471b3350c2d2116e7767c649a581a0ea6955c1b9b7145"
+      "sourcePins": [
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "ef50bbae146346fe06a3e0bcabce6ddd6d11eae89e3afc7f4419fe4bf0bfecd7"
     },
     {
       "id": "scrapyard",
@@ -3975,8 +3991,16 @@
           ]
         }
       ],
-      "revision": "8e78a4e155364093ac871c6a3bda1e4894779f414f171e7e79c59c5344c5bea2"
+      "sourcePins": [
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90"
     }
   ],
-  "revision": "9094d2efecb3e60c0d0f05719f6be0cb48182c15407999a344adaf5efabbbc61"
+  "revision": "a6485f487361ff60deb0373aaa65a0e2133fc02e0f8e0234741925d6857a03dd"
 }

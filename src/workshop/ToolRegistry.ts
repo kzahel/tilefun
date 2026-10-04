@@ -83,6 +83,14 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     mode: "source",
   },
   {
+    id: "families",
+    name: "Asset families",
+    description:
+      "Large contact sheets of cabinets, trees and scrapyard pieces, with short descriptions and shared notes.",
+    url: "workshop.html#/tool/families?family=cabinets",
+    mode: "source",
+  },
+  {
     id: "buildings",
     name: "Buildings",
     description: "Apartment, hotel and shop recipes, plus assembled frontage blocks.",

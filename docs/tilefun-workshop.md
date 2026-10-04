@@ -56,6 +56,24 @@ links and shareable selections. Save a shared note to put an art request into th
 same inbox. World explorer judgments remain labeled browser-local; they are not
 shared approvals. Indoor Workbench fixture export/import remains in its editor.
 
+## Asset family sheets
+
+[Asset families](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
+presents cabinets, trees and scrapyard objects as large themed contact sheets.
+Switch family, shadow/color variant and pixel zoom; select a numbered piece for
+short metadata and an optional shared note. Complete objects and pieces to combine
+are grouped separately, with assembly examples below. Links retain the selected
+piece and variant. **Discuss this family/piece** uses the existing shared inbox,
+with drafts scoped to the exact family revision, piece and variant.
+
+These first three sheets are labeled **Proposed**. Saving a note does not approve
+metadata, artwork or geometry. Cabinet end/middle pieces explicitly cannot stand
+alone; this is displayed metadata, not a change to game placement. The full mapping
+research stays in the [semantic mapping plan](tactical/053-semantic-tileset-map/README.md).
+Source pixels come from committed atlases, so original downloaded packs are not
+required. Failed source verification disables art/notes; old proposal links are
+identified and require opening the current proposal before writing new notes.
+
 The pending-save indicator includes both native and legacy browser outboxes.
 Expired login or an offline server retains submissions; signing back in retries
 with the original IDs. Drafts and room pins survive navigation/reload. Browser

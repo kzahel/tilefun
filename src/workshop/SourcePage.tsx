@@ -362,6 +362,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
           <p className="eyebrow">SOURCE ART → ASSETS</p>
           <h1>Art workbench</h1>
           <p>Select tiles or regions, see their recorded uses, and leave a shared request.</p>
+          <Link to="/tool/families?family=cabinets">Browse family sheets →</Link>
         </div>
         <a href={`/tilefun/art-workbench.html${location.search}`} target="_blank" rel="noreferrer">
           Original workbench ↗

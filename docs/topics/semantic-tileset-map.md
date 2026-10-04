@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: source inventory pinned; broad surveys and three pilots independently reviewed and reconciled.
+Status: three pilot contact sheets implemented and validated; owner discussion is next.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -44,8 +44,13 @@ knowledge; research stays in the plan folder. Reuse one quiet sheet for accepted
 catalog browsing and pinned proposals, with proposal state clearly distinguished.
 Default to representative variants, separate complete objects from pieces to
 combine, and explain join requirements in ordinary language. Do not add a research
-dashboard, agent states or technical identifiers to normal browsing. The next
-presentation slice is cabinets; see the [review design](../tactical/053-semantic-tileset-map/README.md#phase-5-owner-review).
+dashboard, agent states or technical identifiers to normal browsing. The
+[family sheets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
+now cover cabinets, trees and scrapyard pieces: 52 cards expose all 85 source
+records through variant selectors. All three are marked Proposed. Notes reuse
+the Workshop outbox/inbox and pin family revision, selected member, variant and
+source layers. They do not approve or promote metadata. The current slice has no
+approval buttons or generator placement enforcement.
 
 ## Plan and next work
 
@@ -70,8 +75,16 @@ and components; these are not unique-object or completion counts. The
 owns adopted corrections and qualifications, including refuted Exteriors region
 labels. Apply it alongside the frozen proposal JSONs. No new human approvals exist.
 
-Next: build V01, a common read-only
-packet adapter/validator before expanding theme assignments. Its
+The contact-sheet adapter uses committed source images only and checks source
+pins, available pixel hashes, exact frame bounds, all 85 record references and
+cabinet component restrictions. Run `python3 scripts/build-family-sheets.py --check`
+with Pillow to verify the saved output; ordinary browsing/builds use committed
+JSON and images without original packs. Source images and metadata revisions are
+also verified before browser notes can be submitted. Three discovery candidates
+in one existing-inbox batch route directly to these sheets; notes remain discussion.
+
+Next: discuss the sheets with the owner, then extend V01 beyond the presentation
+adapter to the full source/relationship/review schema before expanding themes. Its
 [criteria](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice)
 cover exact source references, all occurrences, compositions, derived variants and
 review applicability. The user authorized reasonable checkpoint commits.

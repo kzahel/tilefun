@@ -6,6 +6,7 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { buildCarProjectionCandidate } from "./CarProjectionCandidate.js";
 import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { DOOR_CASES } from "./DoorCandidates.js";
+import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
@@ -34,6 +35,7 @@ try {
   candidates.push(await buildCarProjectionCandidate());
   candidates.push(await buildWorldGeometryCandidate(), await buildWorldGeometryCandidate(true));
   candidates.push(...(await buildRailwayCandidates()));
+  candidates.push(...(await buildFamilySheetCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));
   candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));
@@ -43,6 +45,13 @@ try {
       tools: WORKSHOP_TOOLS,
       batches: [
         ...CITY_BATCHES,
+        {
+          id: "asset-families",
+          name: "Asset families",
+          description:
+            "Cabinets, trees and scrapyard pieces. Browse the proposed descriptions and leave shared notes.",
+          toolId: "families",
+        },
         {
           id: "doorways-v1",
           name: "Door opening animations",

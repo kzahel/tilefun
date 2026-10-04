@@ -72,6 +72,13 @@
       "mode": "source"
     },
     {
+      "id": "families",
+      "name": "Asset families",
+      "description": "Large contact sheets of cabinets, trees and scrapyard pieces, with short descriptions and shared notes.",
+      "url": "workshop.html#/tool/families?family=cabinets",
+      "mode": "source"
+    },
+    {
       "id": "buildings",
       "name": "Buildings",
       "description": "Apartment, hotel and shop recipes, plus assembled frontage blocks.",
@@ -277,6 +284,12 @@
       "name": "Street starter palette",
       "description": "Six focused prop and placement scenes.",
       "toolId": "streets"
+    },
+    {
+      "id": "asset-families",
+      "name": "Asset families",
+      "description": "Cabinets, trees and scrapyard pieces. Browse the proposed descriptions and leave shared notes.",
+      "toolId": "families"
     },
     {
       "id": "doorways-v1",
@@ -6048,6 +6061,33 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Arail-v1-tunnel"
         }
       }
+    },
+    {
+      "id": "family:cabinets",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Wooden cabinets",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=cabinets&revision=ec4ba96c694701c27e14b750e5a446e776c51b1c6a0b0bdc88d39aba170981f3",
+      "fingerprint": "33ffc848f25988fae9bdfdbfcfb5ebbf75e62c5ac79c8e0748c396b805125411"
+    },
+    {
+      "id": "family:trees",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Trees and forest",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=trees&revision=ef50bbae146346fe06a3e0bcabce6ddd6d11eae89e3afc7f4419fe4bf0bfecd7",
+      "fingerprint": "42c39864b6ebe81cfbc8034867ca2794cacaae503310a5ee630131dac24c1ddf"
+    },
+    {
+      "id": "family:scrapyard",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Scrapyard and debris",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=scrapyard&revision=042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90",
+      "fingerprint": "6c82c1cbf7a13d8d2dd5c781e8c2580878e92a9f9fd3d8ae600a81b255aa5d46"
     },
     {
       "id": "review-0-6ba78e73",
@@ -26819,5 +26859,5 @@
       }
     }
   ],
-  "inputDigest": "8e48d46542ab718efdf07fa1553df35e9a06bcd3b5b5e5771e1d6e2c4351d434"
+  "inputDigest": "aea836ddfae58228d07425e25b8c100aa018317d9e56ec51163b07ba96ff2f8d"
 }

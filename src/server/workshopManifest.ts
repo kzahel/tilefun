@@ -41,6 +41,8 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/WorldGeometryCandidate.ts",
     "src/workshop/RailwayCandidates.ts",
     "src/workshop/CharacterCandidates.ts",
+    "src/workshop/FamilySheetCandidates.ts",
+    "public/data/family-sheets.json",
     "docs/research/vehicle-source-audit.json",
   );
   const hash = createHash("sha256");

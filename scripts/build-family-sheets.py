@@ -7,8 +7,9 @@ without writing. Needs Python 3 and Pillow; no downloaded source packs.
 
 Revision algorithm: SHA-256 of UTF-8 JSON, sorted keys, compact separators,
 ensure_ascii=True, with the object's own top-level revision omitted. Family
-revisions hash their family object; catalog revision hashes the catalog including
-family revisions and the two source ArtSheet records. Array order is significant.
+revisions hash their family object, including sourcePins for its used sheets;
+catalog revision hashes the catalog including family revisions and the two source
+ArtSheet records. Array order is significant. sourcePins are sorted by source ID.
 Proposal/review pins remain here, outside the plain-language browsing artifact.
 """
 import argparse
@@ -94,10 +95,16 @@ def group(key, title, members, description=None):
     return result
 
 
-def family(key, name, description, variant_label, values, facts, groups, examples):
+def family(key, name, description, variant_label, values, facts, groups, examples, source_sheets):
+    entries = [m for g in groups for m in g['members']] + examples
+    used_sources = {layer['sheetId'] for entry in entries for value in entry['variants']
+                    for layer in value['sprite']['layers']}
+    source_pins = [{field: source_sheets[source_id][field]
+                    for field in ('id', 'fingerprint', 'width', 'height')}
+                   for source_id in sorted(used_sources)]
     result = {'id': key, 'name': name, 'description': description, 'status': 'proposed',
               'variantLabel': variant_label, 'variants': options(values), 'facts': facts,
-              'groups': groups, 'examples': examples}
+              'groups': groups, 'examples': examples, 'sourcePins': source_pins}
     result['revision'] = revision(result)
     return result
 
@@ -139,7 +146,7 @@ def check_pixels(image, expected, sources, context):
     require(sha(normalized_bytes(render(image, sources))) == expected, f'Pixel hash mismatch: {context}')
 
 
-def build_cabinets(packet, topology, sources):
+def build_cabinets(packet, topology, sources, source_sheets):
     records = {row['id']: row for row in packet['measurements']['records']}
     index_pin = packet['measurements']['sources']['packedCatalog']
     index_path = ROOT / index_pin['path']
@@ -203,10 +210,10 @@ def build_cabinets(packet, topology, sources):
                          'These four pieces cannot stand alone in any shadow style.')],
                   [{'id': 'cabinet-assembly', 'label': 'A wider cabinet',
                     'description': 'Left end, reflective middle, solid middle, right end. Proposed assembly; not human-approved.',
-                    'variants': example_variants}])
+                    'variants': example_variants}], source_sheets)
 
 
-def build_trees(packet):
+def build_trees(packet, source_sheets):
     records = {row['id']: row for row in packet['candidates']}
     occurrences = {row['id']: row['all_pixel_exact_master_occurrences']
                    for row in packet['experiments']['occurrences']}
@@ -273,10 +280,10 @@ def build_trees(packet):
                    fact('Gameplay', 'Collision and height are unknown.')],
                   [group('whole', 'Complete trees', whole), group('patches', 'Replacement strips', patches),
                    *[group(f'forest-{i + 1}', f'Forest {i + 1} pieces', forest[i * 3:i * 3 + 3])
-                     for i in range(3)]], examples)
+                     for i in range(3)]], examples, source_sheets)
 
 
-def build_scrapyard(packet, sources):
+def build_scrapyard(packet, sources, source_sheets):
     values = {}
     groups = {'wrecks': [], 'scrap': [], 'piles': [], 'components': [], 'loose': [], 'utilities': []}
     questions = {5: 'A different underside view or a different wreck?', 6: 'A different underside view or a different wreck?',
@@ -341,7 +348,7 @@ def build_scrapyard(packet, sources):
                    group('utilities', 'Nearby utility structures', groups['utilities'])],
                   [{'id': 'refuse-strip', 'label': 'A longer refuse strip',
                     'description': 'Left taper, two middles, right taper. Longer repeats remain unproven.',
-                    'variants': example_variants}])
+                    'variants': example_variants}], source_sheets)
 
 
 def build():
@@ -368,7 +375,8 @@ def build():
         image = Image.open(path).convert('RGBA')
         require(list(image.size) == [sheet['width'], sheet['height']], 'Source dimensions differ')
         images[sheet['id']] = image
-    families = [build_cabinets(cabinets, topology, images), build_trees(trees), build_scrapyard(scrapyard, images)]
+    families = [build_cabinets(cabinets, topology, images, sheets), build_trees(trees, sheets),
+                build_scrapyard(scrapyard, images, sheets)]
     expected = {'cabinets': [row['id'] for row in cabinets['measurements']['records']],
                 'trees': [row['id'] for row in trees['candidates']],
                 'scrapyard': [row['id'] for row in scrapyard['candidates']]}

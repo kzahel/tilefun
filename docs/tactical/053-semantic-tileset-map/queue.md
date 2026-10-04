@@ -23,13 +23,13 @@ an agent-written queue status.
 | P02 | Trial: suspected dumpyard area and object boundaries | S01; S02 source window located | Reconciled | [Scrapyard proposal](packets/P02-scrapyard.md), [review](packets/P02-scrapyard-review.md); 29 candidates, off-grid origins and weak subset-match limits retained |
 | P03 | Trial: Interiors furniture and original-to-packed correspondence | S01; S02 source window located | Reconciled | [Cabinet proposal](packets/P03-cabinets.md), [review](packets/P03-cabinets-review.md); 27 records/nine concepts; evidence attribution correction in coordinator note |
 | P04 | Audit trial results; add modular probe if needed; refine method and estimate | P01–P03 | Reconciled | [Method assessment](notes/2026-10-04-pilot-method-review.md), [reconciliation](notes/2026-10-04-pilot-reconciliation.md); modular probes covered, throughput estimate unsupported |
-| V01 | Read-only adapter/validator and deterministic report for the three trials | P04 | Queued; next implementation | [Acceptance criteria](notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice); must apply coordinator corrections and [explicit component topology](packets/P03-cabinets-topology.json), including rejection of standalone partials and incomplete chains |
+| V01 | Read-only adapter/validator and deterministic report for the three trials | P04 | Presentation adapter implemented; broader schema pending | `scripts/build-family-sheets.py` checks all 85 records and sources; full [acceptance criteria](notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice) still include normalized lineage/review views and general topology validation |
 | E01 | Expand theme packets across both tilesets | V01 | Queued | Unassigned |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Queued | Unassigned |
-| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01; candidate packets | Queued; first sheet is cabinets | [Presentation contract](README.md#phase-5-owner-review); reuse existing review infrastructure, distinguish accepted catalog from proposals, keep research out of normal browsing |
+| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and validated for all three pilots | 52 cards / 85 records, variants, assemblies, selected-piece metadata and shared notes; three proposed discovery candidates, no approval/promotion controls |
 
-Next action: implement V01 before scaling theme
+Next action: discuss the three contact sheets with the owner, then complete V01's broader schema before scaling theme
 assignments. Read the [coordinator corrections](notes/2026-10-04-pilot-reconciliation.md)
 alongside all frozen proposals. Worker models are GPT-6.1 Sol/high. The coordinator
 alone commits checkpoints. Reconciled research does not mean human-approved or

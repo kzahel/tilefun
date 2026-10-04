@@ -30,6 +30,7 @@ export interface FamilySheet {
   description: string;
   status: "proposed";
   revision: string;
+  sourcePins: { id: string; fingerprint: string; width: number; height: number }[];
   variantLabel: string;
   variants: { id: string; label: string }[];
   facts: FamilyFact[];
