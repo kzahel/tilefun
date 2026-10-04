@@ -15,7 +15,14 @@ test("car proxy preserves source pixels, orbits, recovers and releases its GPU c
   await expect(comparison).toHaveAttribute("data-source", "1809");
   await expect(comparison).toHaveAttribute("data-covered", "1809");
   await expect(comparison).toHaveAttribute("data-matching", "1809");
-  await expect(comparison).toHaveAttribute("data-extra", "0");
+  await expect(comparison).toHaveAttribute("data-extra", "182");
+  const geometry = page.getByTestId("geometry-check");
+  await expect(geometry).toHaveAttribute("data-side-top", "0");
+  await expect(geometry).toHaveAttribute("data-top-covered", "1152");
+  await expect(geometry).toHaveAttribute("data-top-expected", "1152");
+  await expect(geometry).toHaveAttribute("data-front-contact", /^[1-9]\d*$/);
+  await expect(geometry).toHaveAttribute("data-rear-contact", /^[1-9]\d*$/);
+  await expect(geometry).toHaveAttribute("data-below-ground", "0");
   const pixels = async () =>
     createHash("sha256")
       .update(await canvas.evaluate((c: HTMLCanvasElement) => c.toDataURL()))
@@ -52,6 +59,24 @@ test("car proxy preserves source pixels, orbits, recovers and releases its GPU c
   expect(await pixels()).not.toBe(source);
   await page.getByRole("button", { name: "Orbit view", exact: true }).click();
   await canvas.screenshot({ path: "/tmp/tilefun-car-projection-orbit.png" });
+  for (const [view, label] of [
+    ["side", "Side · ortho"],
+    ["top", "Top · ortho"],
+  ] as const) {
+    await page.getByRole("button", { name: label, exact: true }).click();
+    await expect(canvas).toHaveAttribute("data-view", view);
+    const preset = await pixels();
+    expect(preset).not.toBe(orbit);
+    await canvas.screenshot({ path: `/tmp/tilefun-car-projection-${view}.png` });
+    const box = await canvas.boundingBox();
+    if (!box) throw Error("Missing inspection canvas");
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.wheel(0, -250);
+    await expect.poll(pixels).not.toBe(preset);
+    await page.getByRole("button", { name: label, exact: true }).click();
+    expect(await pixels()).toBe(preset);
+  }
+  await page.getByRole("button", { name: "Orbit view", exact: true }).click();
 
   const beforeLoss = await pixels();
   const context = await canvas.evaluateHandle((c: HTMLCanvasElement) => {
@@ -131,6 +156,30 @@ test("car experiment is discoverable without approvals and works in a touch view
     });
     await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
     expect(await canvas.evaluate((c: HTMLCanvasElement) => c.toDataURL())).not.toBe(before);
+    await page.getByRole("button", { name: "Top · ortho", exact: true }).click();
+    await canvas.scrollIntoViewIfNeeded();
+    const topBefore = await canvas.evaluate((c: HTMLCanvasElement) => c.toDataURL());
+    const topBox = await canvas.boundingBox();
+    if (!topBox) throw Error("Missing top canvas");
+    const tx = topBox.x + topBox.width / 2,
+      ty = topBox.y + topBox.height / 2;
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [
+        { x: tx - 30, y: ty },
+        { x: tx + 30, y: ty },
+      ],
+    });
+    await cdp.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [
+        { x: tx - 50, y: ty },
+        { x: tx + 50, y: ty },
+      ],
+    });
+    await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    expect(await canvas.evaluate((c: HTMLCanvasElement) => c.toDataURL())).not.toBe(topBefore);
+    await page.getByRole("button", { name: "Top · ortho", exact: true }).click();
     await cdp.detach();
     await page.screenshot({ path: "/tmp/tilefun-car-projection-phone.png", fullPage: true });
   } finally {

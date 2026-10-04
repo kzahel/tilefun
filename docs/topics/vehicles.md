@@ -173,9 +173,13 @@ edges, braking and roof rides are covered by real-Realm integration tests.
 [Car projection lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/car-projection)
 uses the exact approved `vehicle:compact-1:east` source (visually left-facing),
 with an explicit body-only crop, on fitted 3D surfaces. It can orbit in perspective
-and overlay the unchanged approved 56 × 20 × 24 collision box. The visual shell
+and overlay the unchanged approved 56 × 20 × 24 collision box. Orthographic side/top
+presets now expose the corrected vertical side, grounded tire pixels and closed
+top seams. The fitted visual roof is 21 pixels high; approved physics stays 24.
+The visual shell
 is an unapproved approximation, not new physics or a replacement vehicle bank.
 Hidden faces are marked; near wheels remain part of the painted side.
 [Rendering architecture](rendering-architecture.md#sprite-artwork-on-3d-proxies)
 owns the data/graphics split and follow-up direction;
-[037](../tactical/037-car-projection-experiment.md) records validation.
+[037](../tactical/037-car-projection-experiment.md) records initial validation and
+[038](../tactical/038-car-proxy-orthographic-checks.md) records the inspection fixes.

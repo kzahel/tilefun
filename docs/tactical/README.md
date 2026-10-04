@@ -61,6 +61,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [037 Car projection experiment](037-car-projection-experiment.md) | Delivered: source artwork on an orbitable 3D proxy; [rendering topic](../topics/rendering-architecture.md) |
 
+| [038 Car proxy orthographic checks](038-car-proxy-orthographic-checks.md) | Delivered: side/top presets, grounded tires and closed top texture seams |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

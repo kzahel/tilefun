@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { CAR_PROXY, carProxyPatches, type Point3, sourceUV } from "./CarProxy.js";
+import { extendOpaqueEdges } from "./ProxyTexture.js";
 
-export type ProxyView = "source" | "orbit" | "back" | "low";
+export type ProxyView = "source" | "orbit" | "back" | "low" | "side" | "top";
 export interface ProxyOptions {
   view: ProxyView;
   collision: boolean;
@@ -14,6 +15,14 @@ export interface SourceComparison {
   sourcePixels: number;
   matching: number;
   extra: number;
+}
+export interface GeometryCheck {
+  sideTopPixels: number;
+  topPixels: number;
+  topExpected: number;
+  frontContactPixels: number;
+  rearContactPixels: number;
+  belowGroundPixels: number;
 }
 const toThree = ([x, y, z]: Point3) => new THREE.Vector3(x, z, y);
 
@@ -30,7 +39,11 @@ export class CarProxyScene {
     0.1,
     1000,
   );
+  private readonly inspectionCamera = new THREE.OrthographicCamera(-44, 44, 33, -33, 0.1, 1000);
+  private readonly inspectionControls: OrbitControls;
   private readonly controls: OrbitControls;
+  private readonly upper = new THREE.Group();
+  private readonly sides = new THREE.Group();
   private readonly textured = new THREE.Group();
   private readonly unseen = new THREE.Group();
   private readonly wires = new THREE.Group();
@@ -93,6 +106,21 @@ export class CarProxyScene {
       alphaTest: 0.01,
       side: THREE.FrontSide,
     });
+    const extended = document.createElement("canvas");
+    extended.width = 64;
+    extended.height = 40;
+    const extendedContext = extended.getContext("2d");
+    if (!extendedContext) throw Error("Derived texture canvas unavailable");
+    const original = ctx.getImageData(0, 0, 64, 40);
+    original.data.set(extendOpaqueEdges(original.data, 64, 40));
+    extendedContext.putImageData(original, 0, 0);
+    const topTexture = new THREE.CanvasTexture(extended);
+    topTexture.colorSpace = THREE.SRGBColorSpace;
+    topTexture.magFilter = topTexture.minFilter = THREE.NearestFilter;
+    topTexture.generateMipmaps = false;
+    const topPaint = new THREE.MeshBasicMaterial({ map: topTexture, side: THREE.FrontSide });
+    this.resources.push(topTexture, topPaint);
+    this.textured.add(this.upper, this.sides);
     // Diagnostic faces never borrow source pixels from the wrong side of the car.
     const checker = new THREE.DataTexture(
       new Uint8Array([238, 161, 67, 255, 77, 57, 43, 255, 77, 57, 43, 255, 238, 161, 67, 255]),
@@ -119,7 +147,7 @@ export class CarProxyScene {
         "uv",
         new THREE.Float32BufferAttribute(
           patch.vertices.flatMap((p) =>
-            patch.textured ? [...sourceUV(p)] : [p[0] / 8, (p[2] + p[1]) / 8],
+            patch.surface !== "unseen" ? [...sourceUV(p)] : [p[0] / 8, (p[2] + p[1]) / 8],
           ),
           2,
         ),
@@ -127,9 +155,17 @@ export class CarProxyScene {
       // Game Y/Z swap reverses handedness. Quads are wound toward the source.
       geometry.setIndex([0, 2, 1, 0, 3, 2]);
       geometry.computeVertexNormals();
-      const mesh = new THREE.Mesh(geometry, patch.textured ? paint : missing);
+      const mesh = new THREE.Mesh(
+        geometry,
+        patch.surface === "top" ? topPaint : patch.surface === "side" ? paint : missing,
+      );
       mesh.name = patch.name;
-      (patch.textured ? this.textured : this.unseen).add(mesh);
+      (patch.surface === "top"
+        ? this.upper
+        : patch.surface === "side"
+          ? this.sides
+          : this.unseen
+      ).add(mesh);
       const edges = new THREE.EdgesGeometry(geometry);
       const wire = new THREE.LineSegments(edges, line);
       wire.renderOrder = 3;
@@ -149,7 +185,7 @@ export class CarProxyScene {
     this.collision.renderOrder = 4;
     this.resources.push(boxEdges, boxMaterial);
     this.floor = new THREE.GridHelper(160, 16, 0x526c81, 0x293d4e);
-    this.floor.position.y = -0.5;
+    this.floor.position.y = 0;
     this.resources.push(
       this.floor.geometry,
       ...(Array.isArray(this.floor.material) ? this.floor.material : [this.floor.material]),
@@ -161,6 +197,13 @@ export class CarProxyScene {
     this.controls.maxDistance = 320;
     this.controls.maxPolarAngle = Math.PI * 0.95;
     this.controls.addEventListener("change", this.onChange);
+    this.inspectionControls = new OrbitControls(this.inspectionCamera, canvas);
+    this.inspectionControls.enableRotate = false;
+    this.inspectionControls.minZoom = 0.5;
+    this.inspectionControls.maxZoom = 8;
+    this.inspectionControls.mouseButtons.LEFT = THREE.MOUSE.PAN;
+    this.inspectionControls.touches.ONE = THREE.TOUCH.PAN;
+    this.inspectionControls.addEventListener("change", this.onChange);
     canvas.addEventListener("webglcontextlost", this.onLost);
     canvas.addEventListener("webglcontextrestored", this.onRestored);
     this.observer = new ResizeObserver(() => this.resize());
@@ -175,8 +218,19 @@ export class CarProxyScene {
     const changed = options.view !== this.options.view;
     const initial = this.perspective.position.length() === 0;
     this.options = { ...options };
-    this.controls.enabled = options.view !== "source";
+    const inspection = options.view === "side" || options.view === "top";
+    this.controls.enabled = options.view !== "source" && !inspection;
+    this.inspectionControls.enabled = inspection;
     if (changed || initial || resetView) {
+      if (inspection) {
+        const top = options.view === "top";
+        this.inspectionCamera.zoom = 1;
+        this.inspectionCamera.up.set(0, top ? 0 : 1, top ? -1 : 0);
+        this.inspectionControls.target.set(0, top ? 0 : 12, 0);
+        this.inspectionCamera.position.set(0, top ? 112 : 12, top ? 0 : 100);
+        this.inspectionControls.update();
+        this.inspectionCamera.updateProjectionMatrix();
+      }
       this.controls.target.set(0, 12, 0);
       this.perspective.position.copy(
         toThree(
@@ -206,6 +260,11 @@ export class CarProxyScene {
     this.perspective.updateProjectionMatrix();
     const scale = Math.min(this.width / 88, this.height / 66);
     this.setSourceCamera(this.width / scale, this.height / scale);
+    this.inspectionCamera.left = -this.width / scale / 2;
+    this.inspectionCamera.right = -this.inspectionCamera.left;
+    this.inspectionCamera.top = this.height / scale / 2;
+    this.inspectionCamera.bottom = -this.inspectionCamera.top;
+    this.inspectionCamera.updateProjectionMatrix();
     this.render();
   }
   private setSourceCamera(width: number, height: number): void {
@@ -214,16 +273,30 @@ export class CarProxyScene {
     c.right = width / 2;
     c.top = height / 2 / Math.SQRT2;
     c.bottom = -c.top;
-    c.position.set(0, 111, 100);
-    c.lookAt(0, 11, 0);
+    const centerHeight = CAR_PROXY.sourceOrigin[1] - (CAR_PROXY.cropTop + 20);
+    c.position.set(0, centerHeight + 100, 100);
+    c.lookAt(0, centerHeight, 0);
     c.updateProjectionMatrix();
     c.updateMatrixWorld();
   }
   render(): void {
     if (this.disposed || this.lost) return;
+    if (this.options.view === "side" || this.options.view === "top") {
+      // OrbitControls nudges polar angles away from zero. Inspection views stay
+      // exactly on-axis, including after panning/zooming the top camera.
+      const target = this.inspectionControls.target;
+      this.inspectionCamera.position.copy(target);
+      if (this.options.view === "top") this.inspectionCamera.position.y += 100;
+      else this.inspectionCamera.position.z += 100;
+      this.inspectionCamera.lookAt(target);
+    }
     this.renderer.render(
       this.scene,
-      this.options.view === "source" ? this.sourceCamera : this.perspective,
+      this.options.view === "source"
+        ? this.sourceCamera
+        : this.options.view === "side" || this.options.view === "top"
+          ? this.inspectionCamera
+          : this.perspective,
     );
     this.canvas.dataset.draws = String(this.renderer.info.render.calls);
     this.canvas.dataset.recoveries = String(this.recoveryCount);
@@ -283,12 +356,83 @@ export class CarProxyScene {
       this.resize();
     }
   }
+  /** Fixed world-space probes, independent of the interactive framing/zoom.
+   * Actual GPU coverage catches alpha holes that closed-mesh edge tests cannot. */
+  checkGeometry(): GeometryCheck {
+    const saved = [
+      this.unseen.visible,
+      this.wires.visible,
+      this.collision.visible,
+      this.floor.visible,
+    ];
+    const previousTarget = this.renderer.getRenderTarget();
+    const target = new THREE.WebGLRenderTarget(64, 32);
+    const pixels = new Uint8Array(64 * 32 * 4);
+    const camera = new THREE.OrthographicCamera(-32, 32, 16, -16, 0.1, 1000);
+    const draw = () => {
+      camera.updateProjectionMatrix();
+      camera.updateMatrixWorld();
+      this.renderer.setRenderTarget(target);
+      this.renderer.render(this.scene, camera);
+      this.renderer.readRenderTargetPixels(target, 0, 0, target.width, target.height, pixels);
+    };
+    const occupied = (start: number, end: number) => {
+      let n = 0;
+      for (let i = start; i < end; i++) if ((pixels[i * 4 + 3] ?? 0) > 0) n++;
+      return n;
+    };
+    try {
+      this.unseen.visible =
+        this.wires.visible =
+        this.collision.visible =
+        this.floor.visible =
+          false;
+      this.renderer.setClearColor(0, 0);
+      camera.position.set(0, 15, 100);
+      camera.lookAt(0, 15, 0);
+      this.sides.visible = false;
+      draw();
+      const sideTopPixels = occupied(0, 64 * 32);
+      this.sides.visible = true;
+      draw();
+      // GPU row 0 spans height [-1,0]; row 1 spans [0,1].
+      const belowGroundPixels = occupied(0, 64);
+      const frontContactPixels = occupied(64 + 8, 64 + 24);
+      const rearContactPixels = occupied(64 + 44, 64 + 60);
+      this.sides.visible = false;
+      target.setSize(64, 18);
+      camera.top = 9;
+      camera.bottom = -9;
+      camera.up.set(0, 0, -1);
+      camera.position.set(0, 100, 0);
+      camera.lookAt(0, 0, 0);
+      draw();
+      return {
+        sideTopPixels,
+        topPixels: occupied(0, 64 * 18),
+        topExpected: 64 * 18,
+        frontContactPixels,
+        rearContactPixels,
+        belowGroundPixels,
+      };
+    } finally {
+      this.renderer.setRenderTarget(previousTarget);
+      this.renderer.setClearColor(0x111c29, 1);
+      target.dispose();
+      this.sides.visible = true;
+      [this.unseen.visible, this.wires.visible, this.collision.visible, this.floor.visible] =
+        saved as [boolean, boolean, boolean, boolean];
+      this.render();
+    }
+  }
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
     this.observer.disconnect();
     this.controls.removeEventListener("change", this.onChange);
     this.controls.dispose();
+    this.inspectionControls.removeEventListener("change", this.onChange);
+    this.inspectionControls.dispose();
     this.canvas.removeEventListener("webglcontextlost", this.onLost);
     this.canvas.removeEventListener("webglcontextrestored", this.onRestored);
     for (const resource of this.resources) resource.dispose();

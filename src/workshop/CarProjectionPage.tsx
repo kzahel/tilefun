@@ -3,6 +3,7 @@ import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { CAR_PROXY } from "../projection/CarProxy.js";
 import {
   CarProxyScene,
+  type GeometryCheck,
   type ProxyOptions,
   type ProxyView,
   type SourceComparison,
@@ -21,6 +22,7 @@ export default function CarProjectionPage() {
   });
   const [comparison, setComparison] = useState<SourceComparison | null>(null),
     [error, setError] = useState("");
+  const [geometry, setGeometry] = useState<GeometryCheck | null>(null);
   const latest = useRef(options);
   latest.current = options;
   useEffect(() => {
@@ -47,6 +49,7 @@ export default function CarProjectionPage() {
           s.getContext("2d")?.drawImage(renderer.sourceCanvas, 0, 0);
         }
         setComparison(renderer.compareSource());
+        setGeometry(renderer.checkGeometry());
       })
       .catch((e) => {
         if (active) setError(String(e));
@@ -66,12 +69,15 @@ export default function CarProjectionPage() {
       <h1>Car projection lab</h1>
       <p>
         The same pixels, given depth. Drag to orbit; pinch or scroll to zoom. Amber checks mark
-        surfaces this side-view artwork never shows.
+        surfaces this side-view artwork never shows. Side and top presets are orthographic: drag to
+        pan and pinch or scroll to zoom.
       </p>
       <fieldset className="actions" aria-label="Camera presets">
         {(
           [
             ["source", "Source view"],
+            ["side", "Side · ortho"],
+            ["top", "Top · ortho"],
             ["orbit", "Orbit view"],
             ["back", "Far side"],
             ["low", "Low view"],
@@ -139,11 +145,31 @@ export default function CarProjectionPage() {
               data-extra={comparison.extra}
             >
               Source-camera check: {comparison.covered} / {comparison.sourcePixels} painted pixels
-              covered; {comparison.matching} match within one color level. Checked without the
-              ground, collision box or amber surfaces.
+              covered; {comparison.matching} match within one color level. {comparison.extra} extra
+              pixels extend the top edges to close seams. Checked without the ground, collision box
+              or amber surfaces.
             </p>
           ) : (
             !error && <p role="status">Preparing the car…</p>
+          )}
+          {geometry && (
+            <p
+              role="status"
+              data-testid="geometry-check"
+              data-side-top={geometry.sideTopPixels}
+              data-top-covered={geometry.topPixels}
+              data-top-expected={geometry.topExpected}
+              data-front-contact={geometry.frontContactPixels}
+              data-rear-contact={geometry.rearContactPixels}
+              data-below-ground={geometry.belowGroundPixels}
+            >
+              Orthographic checks: {geometry.sideTopPixels} top-face pixels visible from the side;{" "}
+              {geometry.topPixels} / {geometry.topExpected} top-view pixels filled. Both tires{" "}
+              {geometry.frontContactPixels > 0 && geometry.rearContactPixels > 0
+                ? "touch"
+                : "do not both touch"}{" "}
+              ground; {geometry.belowGroundPixels} pixels below it.
+            </p>
           )}
           <p>
             This is an unapproved visual study. Hidden faces, separate wheels and interior artwork

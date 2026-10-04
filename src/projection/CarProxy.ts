@@ -6,7 +6,7 @@ export type Pixel = readonly [u: number, v: number];
 export interface ProxyPatch {
   readonly name: string;
   readonly vertices: readonly Point3[];
-  readonly textured: boolean;
+  readonly surface: "top" | "side" | "unseen";
 }
 const approved = bank.views.find((v) => v.id === "vehicle:compact-1:east");
 if (!approved) throw Error("Missing pinned compact-car view");
@@ -17,7 +17,7 @@ const collider = approved.metadata.colliders[0];
 if (!collider) throw Error("Missing approved collision geometry");
 
 export const CAR_PROXY = {
-  revision: "car-projection-v1",
+  revision: "car-projection-v2",
   name: "Blue compact car",
   sourceView: approved.id,
   sourceFingerprint: bank.sourceFingerprint,
@@ -26,7 +26,7 @@ export const CAR_PROXY = {
   atlasSize: [2816, 8224] as const,
   // Crop only the car body; the full approved atlas rectangle stays unchanged.
   rect: [sourceX, sourceY + 24, 64, 40] as const,
-  sourceOrigin: [32, 55] as Pixel,
+  sourceOrigin: [32, 54] as Pixel,
   sourceSize: [64, 64] as const,
   cropTop: 24,
   // The approved side artwork visibly faces left, despite its source label.
@@ -51,14 +51,17 @@ export function sourceUV(point: Point3): Pixel {
  * This is a fitted visual approximation, not a replacement physics mesh.
  */
 export function carProxyPatches(): ProxyPatch[] {
-  const columns = [0, 14, 24, 48, 64];
-  const farPixels = [37, 30, 24, 24, 38];
-  const nearPixels = [55, 49, 42, 42, 57];
+  const columns = [0, 16, 32, 48, 64];
+  // Near seam follows the bonnet/windscreen/roof boundary in the source artwork.
+  const farPixels = [36, 32, 24, 24, 36];
+  // Equal heights across the car: top faces must be exactly edge-on from the side.
+  const nearPixels = farPixels.map((v) => v + 18);
   const names = ["Bonnet", "Windscreen", "Roof", "Rear slope"];
-  const far = columns.map((u, i) => liftSource([u, farPixels[i] ?? 24], -7));
-  const near = columns.map((u, i) => liftSource([u, nearPixels[i] ?? 42], 11));
-  const bottom = columns.map((u) => liftSource([u, 64], 9));
-  const backBottom = columns.map((u) => [u - 32, -7, 0] as Point3);
+  const far = columns.map((u, i) => liftSource([u, farPixels[i] ?? 24], -9));
+  const near = columns.map((u, i) => liftSource([u, nearPixels[i] ?? 42], 9));
+  // Last tire pixels occupy source row 62; its lower boundary at v=63 is ground.
+  const bottom = columns.map((u) => liftSource([u, 63], 9));
+  const backBottom = columns.map((u) => [u - 32, -9, 0] as Point3);
   const patches: ProxyPatch[] = [];
   for (let i = 0; i < columns.length - 1; i++) {
     const a = far[i],
@@ -70,10 +73,10 @@ export function carProxyPatches(): ProxyPatch[] {
       g = backBottom[i],
       h = backBottom[i + 1];
     if (!a || !b || !c || !d || !e || !f || !g || !h) throw Error("Invalid proxy section");
-    patches.push({ name: names[i] ?? "Body", vertices: [a, b, c, d], textured: true });
-    patches.push({ name: `Side ${i + 1}`, vertices: [d, c, f, e], textured: true });
-    patches.push({ name: `Unseen back ${i + 1}`, vertices: [b, a, g, h], textured: false });
-    patches.push({ name: `Underside ${i + 1}`, vertices: [e, f, h, g], textured: false });
+    patches.push({ name: names[i] ?? "Body", vertices: [a, b, c, d], surface: "top" });
+    patches.push({ name: `Side ${i + 1}`, vertices: [d, c, f, e], surface: "side" });
+    patches.push({ name: `Unseen back ${i + 1}`, vertices: [b, a, g, h], surface: "unseen" });
+    patches.push({ name: `Underside ${i + 1}`, vertices: [e, f, h, g], surface: "unseen" });
   }
   for (const i of [0, 4]) {
     const a = far[i],
@@ -84,7 +87,7 @@ export function carProxyPatches(): ProxyPatch[] {
     patches.push({
       name: i === 0 ? "Unseen front" : "Unseen rear",
       vertices: i === 0 ? [a, b, c, d] : [d, c, b, a],
-      textured: false,
+      surface: "unseen",
     });
   }
   return patches;

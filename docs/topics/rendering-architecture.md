@@ -149,8 +149,10 @@ cold-entry presentation remain separate measured performance work.
 implements the first bounded experiment, recorded in
 [037](../tactical/037-car-projection-experiment.md). It fits one approved compact-car
 side image to a closed, low-poly visual shell: bonnet, windscreen, roof, rear slope
-and side. Orbit, source, far-side and low perspective views expose depth; toggles
-show mesh edges, unchanged approved collision bounds and unpainted faces.
+and side. Orbit, source, far-side and low perspective views expose depth; exact
+orthographic side/top presets support pan, zoom and reset. Toggles show mesh edges,
+unchanged approved collision bounds and unpainted faces. User corrections and
+orthographic checks are recorded in [038](../tactical/038-car-proxy-orthographic-checks.md).
 
 `src/projection/CarProxy.ts` owns graphics-independent geometry in world-pixel
 X/ground-Y/height-Z coordinates, pinned source/crop provenance and fixed oblique
@@ -164,18 +166,36 @@ This lab deliberately does not enlarge the production `RenderBackend` contract.
 A visual proxy and a physical proxy have different jobs. The experimental shell
 extends beyond the existing 56 × 20 × 24 collision box in places; its fitted roof
 and alpha-cut silhouette do not replace approved support/collision geometry.
-The near wheels remain painted onto the side, and alpha holes are not solid
-geometry; wheel ground contact is approximate and lighting stays baked into the
-texture. Amber faces indicate missing artwork; they do not mirror or invent the
-hidden side. No source pixels, promoted asset banks or gameplay rules change.
+The near wheels remain painted onto the vertical side. Their visible lower edge
+now reaches Z=0, and the grid lies on that same ground plane. The fitted roof is
+21 pixels high; these inspection corrections do not alter the approved 24-pixel
+physical height. Top surfaces have equal heights across the car, so bonnet and
+windscreen are edge-on from the side. Hand-picked source samples check that their
+painted details are assigned to top surfaces, rather than leaking onto the side.
+
+`ProxyTexture.ts` derives a separate top texture by extending nearest opaque edge
+colors through transparent border texels. This closes visible holes against the
+checker face while retaining the original source and side/wheel alpha. Source
+lighting and oblique distortions stay baked into the texture; a closed top is not
+a fully authored top-view asset. Amber faces indicate missing artwork; they do not
+mirror or invent the hidden side. No source pixels, promoted asset banks or gameplay
+rules change.
 
 Full Chromium reproduces all 1,809 painted source pixels within one color level,
-with no uncovered or extra pixels, when viewed through the fixed source camera.
-That proves source registration, not unique reconstruction or arbitrary-angle
-fidelity. The same sprite admits many possible depths. Touch orbit, graphics
+with no uncovered pixels, when viewed through the fixed source camera. Top edge
+extension now adds 182 pixels outside the original silhouette, explicitly reported
+by the lab. Orthographic GPU probes find zero visible top-face pixels from the
+side, 1,152/1,152 filled pixels across the top footprint, contacts under both tires
+and zero pixels below ground. That proves source registration and the targeted
+geometry fixes, not unique reconstruction or arbitrary-angle fidelity. The same sprite admits many possible depths. Touch orbit, graphics
 context restoration and resource release on navigation have browser coverage.
 The experiment is registered and discoverable but excluded from approval:
 arbitrary orbit output is not an immutable native review snapshot.
+
+The user suggested model-assisted reconstruction as a follow-up discussion. The
+source image, fitted proxy and orthographic silhouettes/contact checks can serve as
+inputs and acceptance constraints for that exploration; no model or external asset
+service is integrated here.
 
 Next useful slice: fit the same car against its other existing directional views,
 assign explicit per-face image coverage and separate wheel geometry. Inspect the

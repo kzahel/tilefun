@@ -4662,7 +4662,7 @@
       "url": "/tilefun/workshop.html#/tool/car-projection",
       "kind": "projection",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
-      "fingerprint": "f752c5d3e22f5c6650b10a94b1ccfcbdeb9b80902a42f5634db741a5e04f929a",
+      "fingerprint": "fb67640fe63f5cf557e03a1ebcc4cbcac23c1ac4913e7b9977b9bf366d4517d8",
       "excluded": "Exploratory orbit view; not an immutable approval snapshot."
     },
     {
@@ -26779,5 +26779,5 @@
       }
     }
   ],
-  "inputDigest": "512361f75c958bc89887784713b14bb78fb6c77918a5ba1d00a2fe6255287dbf"
+  "inputDigest": "93df545fa935319d685b76e3c6088ee4f4cd3fc4467f9ccacb8d54457bcb33f0"
 }

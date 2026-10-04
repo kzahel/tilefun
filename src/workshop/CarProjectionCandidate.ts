@@ -2,6 +2,7 @@ import { sha256 } from "../art/ArtSource.js";
 import { CAR_PROXY, carProxyPatches } from "../projection/CarProxy.js";
 import geometrySource from "../projection/CarProxy.ts?raw";
 import rendererSource from "../projection/CarProxyScene.ts?raw";
+import textureSource from "../projection/ProxyTexture.ts?raw";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 /** Discoverable experiment identity, deliberately not an approvable GPU snapshot. */
@@ -13,6 +14,7 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
         patches: carProxyPatches(),
         geometrySource,
         rendererSource,
+        textureSource,
       }),
     ),
   );
