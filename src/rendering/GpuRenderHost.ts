@@ -3,7 +3,10 @@ import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import type { RenderHost } from "./RenderHost.js";
 
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
-export function createGpuRenderHost(canvas: HTMLCanvasElement): RenderHost {
+export function createGpuRenderHost(
+  canvas: HTMLCanvasElement,
+  options?: { meshes: boolean },
+): RenderHost {
   const world = document.createElement("canvas");
   world.dataset.renderer = "gpu";
   world.setAttribute("aria-hidden", "true");
@@ -17,7 +20,7 @@ export function createGpuRenderHost(canvas: HTMLCanvasElement): RenderHost {
     canvas.dataset.renderer = "canvas-fallback";
     return createCanvasRenderHost(canvas);
   }
-  renderer.meshes.setEnabled(new URLSearchParams(location.search).has("meshes"));
+  renderer.meshes.setEnabled(options?.meshes ?? new URLSearchParams(location.search).has("meshes"));
   const uiContext = canvas.getContext("2d");
   if (!uiContext) {
     renderer.dispose();

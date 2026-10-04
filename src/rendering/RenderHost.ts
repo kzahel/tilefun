@@ -5,7 +5,13 @@ import type { RenderBackend } from "./RenderFrame.js";
 /** Browser composition only. A GPU host may provide a separate 2D UI overlay;
  * world presentation never receives its context or loaded image resources.
  */
+export type RendererMode = "canvas" | "gpu" | "gpu-mesh";
+
 export interface RenderHost {
+  readonly rendererControl?: {
+    readonly mode: RendererMode;
+    select(mode: RendererMode): Promise<RendererMode>;
+  };
   readonly renderer: RenderBackend;
   readonly uiContext: CanvasRenderingContext2D;
   setAssets(assets: GameAssets, graph: BlendGraph): void;

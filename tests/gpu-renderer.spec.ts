@@ -259,3 +259,73 @@ test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("canvas[data-renderer=gpu]")).toHaveCount(0);
 });
+
+test("debug renderer selector switches live without replacing the game or Worker", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/tilefun/?nogamepad&testflag=keep");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "☰", exact: true }).click();
+  await page.getByRole("button", { name: "Debug", exact: true }).click();
+  const selector = page.getByRole("combobox", { name: "Renderer", exact: true });
+  await expect(selector).toHaveValue("canvas");
+  const bounds = await selector.boundingBox();
+  expect(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390).toBe(true);
+  const original = await page.locator("#game").evaluateHandle((canvas) => {
+    const game = (
+      canvas as unknown as {
+        __game: { transport: unknown; stateView: { playerEntity: { id: number } } };
+      }
+    ).__game;
+    return { game, transport: game.transport, playerId: game.stateView.playerEntity.id };
+  });
+  for (const mode of ["gpu", "gpu-mesh", "canvas", "gpu", "canvas"]) {
+    await selector.selectOption(mode);
+    await expect(selector).toBeEnabled();
+    await expect(selector).toHaveValue(mode);
+    await expect(page.locator("#game")).toHaveAttribute(
+      "data-renderer",
+      mode === "canvas" ? "canvas" : "gpu",
+    );
+    await expect(page.locator("canvas[data-renderer=gpu][aria-hidden=true]")).toHaveCount(
+      mode === "canvas" ? 0 : 1,
+    );
+    await page.waitForFunction(
+      () =>
+        (
+          document.querySelector("#game") as unknown as {
+            __game: { renderer: { getDiagnostics(): { resident: number } } };
+          }
+        ).__game.renderer.getDiagnostics().resident > 0,
+    );
+    expect(
+      await original.evaluate((before) => {
+        const game = (document.querySelector("#game") as unknown as { __game: typeof before.game })
+          .__game;
+        return (
+          game === before.game &&
+          game.transport === before.transport &&
+          game.stateView.playerEntity.id === before.playerId
+        );
+      }),
+    ).toBe(true);
+    const url = new URL(page.url());
+    expect(url.searchParams.get("testflag")).toBe("keep");
+    expect(url.searchParams.get("renderer")).toBe(mode === "canvas" ? null : "gpu");
+    expect(url.searchParams.has("meshes")).toBe(mode === "gpu-mesh");
+    if (mode === "gpu-mesh")
+      await page.waitForFunction(
+        () =>
+          (
+            document.querySelector("#game") as unknown as {
+              __game: { renderer: { getDiagnostics(): { gpu: { meshState: string } } } };
+            }
+          ).__game.renderer.getDiagnostics().gpu.meshState === "ready",
+      );
+  }
+  await original.dispose();
+  expect(errors).toEqual([]);
+});

@@ -128,7 +128,9 @@ export class GameClient {
   private loop: GameLoop;
   private sheets = new Map<string, Spritesheet>();
   private readonly renderHost: RenderHost;
-  private readonly renderer: RenderBackend;
+  private get renderer(): RenderBackend {
+    return this.renderHost.renderer;
+  }
   private readonly sceneFrame = new SceneFrame();
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
@@ -207,7 +209,6 @@ export class GameClient {
     this.adminToken = admin.token;
     if (admin.token !== undefined) window.history.replaceState(window.history.state, "", admin.url);
     this.renderHost = (options?.renderHostFactory ?? createCanvasRenderHost)(canvas);
-    this.renderer = this.renderHost.renderer;
     this.canvas = canvas;
     this.ctx = this.renderHost.uiContext;
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
@@ -237,6 +238,8 @@ export class GameClient {
     this.actions.setTouchButtons(this.touchButtons);
     this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
+    if (this.renderHost.rendererControl)
+      this.debugPanel.setRendererControl(this.renderHost.rendererControl);
     this.editorModel = new EditorModel();
     this.editorMode = new EditorMode(canvas, this.camera, this.actions, this.editorModel);
     this.editorPanel = new EditorPanel(this.editorModel);
@@ -912,6 +915,7 @@ export class GameClient {
     this.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
     this.renderHost.dispose();
+    this.debugPanel.destroy();
     this.sceneFrame.clear();
     this.doorControl.destroy();
     this.doorPresentation.destroy();
@@ -1172,7 +1176,9 @@ export class GameClient {
       get spriteCatalog() {
         return client.renderer.assets;
       },
-      renderer: this.renderer,
+      get renderer() {
+        return client.renderer;
+      },
       sceneFrame: this.sceneFrame,
       audioManager: this.audioManager,
       editorMode: this.editorMode,

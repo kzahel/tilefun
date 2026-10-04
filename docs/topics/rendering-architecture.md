@@ -331,7 +331,22 @@ Depth is local to a body: arbitrary interpenetrating objects are not supported.
 Missing/loading/failed assets retain the sprite. A generation-checked resource
 slot prevents late async publication after replacement or disposal.
 
-Use `?renderer=gpu` for sprites, `?renderer=gpu&meshes` for the experimental car.
+In the game, open **☰ → Debug → Renderer** (or press **F3**). Choose Canvas,
+GPU sprites, or GPU + 3D car. The selector switches live and updates only the
+renderer/mesh URL parameters, so refreshing retains the choice. Canvas stays the
+default; the GPU choices and car artwork remain experimental. The separate
+**3D View** control still opens collision/debug geometry.
+
+`SelectableRenderHost` owns replacement between frames, reusing loaded assets and
+the original input/UI canvas. It disposes the previous backend and rebuilds its
+static caches, without replacing the client, Worker, player, realm or camera.
+The game context reads the current backend through a getter rather than retaining
+a disposed backend. A module-load failure leaves the current renderer running;
+unavailable WebGL2 construction selects Canvas. The selector is disabled while
+loading, and disposal prevents a late import from creating another host.
+
+Direct links still support `?renderer=gpu` for sprites and
+`?renderer=gpu&meshes` for the experimental car.
 The [renderer comparison tool](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
 exercises the same body adapter, pose and fallback. Its WebGPU/forced-WebGL2
 buttons probe portable geometry/materials, not the gameplay sprite shader.
@@ -348,3 +363,12 @@ the Worker world. Unsupported construction falls back to Canvas.
 See [045](../tactical/045-gpu-measurement-decision.md) for measurements and the
 adoption decision. Reconstructed car quality, WebGPU sprite-shader adaptation,
 general mesh import and broader device coverage remain explicit next work.
+
+
+Debug selector validation (2026-10-04): repeated Canvas → GPU → mesh → Canvas
+switches at a 390-pixel viewport preserve the client, transport and player ID,
+rebuild resident terrain, retire old world canvases and preserve unrelated URL
+parameters. All eleven GPU browser tests pass. The full regression run passed
+298 existing cases; the new selector test's initial assumption of a New World
+screen was corrected to use the already-running game and actual menu controls.
+Typechecks, 1,444 unit tests, lint, catalog/manifest verification and build pass.
