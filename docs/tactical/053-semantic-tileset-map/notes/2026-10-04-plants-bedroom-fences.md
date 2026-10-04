@@ -121,7 +121,52 @@ separate ports and isolated data; test discussion writes are intercepted.
 Application/catalog output SHA-256:
 `e5683e0d4bf4476d785ce2c109995b6cdabf56b8d4b012e65c265daf1f9a02ad`.
 The full isolated Playwright suite passed **360 tests with one existing skip**.
-Normalized-model final results are recorded below after completion.
+The normalized-model results are recorded below.
 
 Checkpoint history: `c4eb6d6` clarifies the door and zoom; `844c8a6` freezes the
 three independently reviewed source investigations.
+
+
+## Normalized model and final reconciliation
+
+Explicit E04/I02/E05 adapters now bring the model to **255 source records / 216
+proposal units**. The previous 191 records, 164 proposals, 156 relationships,
+eight reviews and eight packet objects compare exactly with `c4eb6d6`. The new
+64 records distinguish 49 direct master matches, three native transparent-frame
+restorations and twelve subfile-only bed records. Packed rendering or visible
+crop equality does not create a missing whole-master match.
+
+[Model implementation](2026-10-04-next-family-model.md) and
+[independent integration review](2026-10-04-next-family-implementation-review.md)
+record deterministic validation, exact review applicability and limits. All
+three registry entries are reconciled. The coverage ledger still accounts for
+163 survey windows and 18 inventory groups; unknown semantics remain in every
+window. Reconciled research is not human acceptance or runtime promotion.
+
+Full-original model replay, model/coverage read-only output checks, **22 model
+tests and 18 coverage tests** passed. Independent review rebuilt both model and
+ledger in an actual fixture without an `assets/` directory. All 64 committed
+native frames, 31 finite positive/negative/research rasters, seventeen bed underlay
+probes, twelve fence port graphs and forty seam diagnostics replay. Missing
+original native frames, original occurrences, original-only visible comparisons,
+filename refutations and counterpart uniqueness are explicitly unavailable in
+that fixture. Thirty-nine presentation/model/coverage mutations were rejected;
+no blocking finding remains. An additional **11 focused normalized-model tests**
+passed in 41 seconds, reusing one missing-original fixture for targeted padding,
+source identity, underlay, gate-status and recipe mutations. Its initial overly
+broad assertion was corrected to exclude only whole-master credit while retaining
+valid theme-sheet occurrences. No production implementation correction was needed.
+This supplements the application validation above.
+
+Final normalized model SHA-256:
+`edd116e96f8b7eba18e5cf0715e1354d14fcf16e99ff7cddaacfe96f899f45f7`.
+Final reconciled ledger SHA-256:
+`7ff1b4aa4de81b79f2e19dbe66b11e231874ac9172dcaaa03b468cd16ea86714`.
+Independent implementation review SHA-256:
+`bf4b333c7a987a00fde29b94f0ed9d284f32c1dc706126404d8bd708f0a412e0`.
+Application delivery checkpoint: `e5ef0e0`.
+
+Next: reconcile owner comments on the three sheets. The queue suggests kitchen
+counters, a piano/bench family and one traffic-light design as the next bounded
+contrast; none has been mapped or registered by this slice. Garden-gate hedge
+closure and other excluded plants/beds/fences retain their explicit unknown scope.

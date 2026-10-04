@@ -79,7 +79,8 @@ validation and review scope. No human approval or gameplay metadata is inferred.
 | [I02 Side beds and blankets](I02-bedroom.md) · [JSON](I02-bedroom.json) | 18 records / six units in three render variants | [Review](I02-bedroom-review.md): all 18 and 17 overlay probes; twelve beds retain original-only master lineage |
 | [E05 Fences and garden gates](E05-fences-gates.md) · [JSON](E05-fences-gates.json) | 22 picket components, four separate garden gates and one shrub trial | [Review](E05-fences-gates-review.md): all 27 and 14 probes; gate-side and cross-kit joins unproven |
 
-These 64 source records / 52 proposal units are independently reviewed research.
-Their [delivery record](../notes/2026-10-04-plants-bedroom-fences.md) tracks explicit
-normalization and quiet sheets. Registry entries alone do not grant coverage,
+These 64 source records / 52 proposal units are explicitly normalized and delivered
+as three quiet sheets with 38 cards. The [delivery record](../notes/2026-10-04-plants-bedroom-fences.md)
+records independent source and implementation review, bringing the total to 255
+records / 216 proposal units. Registry entries alone do not grant coverage,
 human approval or gameplay geometry.

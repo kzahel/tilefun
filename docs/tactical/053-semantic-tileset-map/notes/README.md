@@ -1,5 +1,9 @@
 # Semantic mapping investigation notes
 
+- [Next-family model](2026-10-04-next-family-model.md): explicit normalization and coverage for E04/I02/E05.
+- [Next-family presentation](2026-10-04-next-family-presentation.md): committed-only adapters and focused checks.
+- [Next-family implementation review](2026-10-04-next-family-implementation-review.md): independent integration audit.
+
 Store dated notes here as `YYYY-MM-DD-short-subject.md`. Each note should state
 the question, source/packet references, observed evidence, conclusion or remaining
 uncertainty, and next action. Keep historical experiment outcomes; update the topic

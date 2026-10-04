@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: eight family sheets delivered; 191 source records normalized; whole-pack mapping continues.
+Status: eleven family sheets delivered; 255 source records normalized; whole-pack mapping continues.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -48,8 +48,9 @@ combine, and explain join requirements in ordinary language. Do not add a resear
 dashboard, agent states or technical identifiers to normal browsing. The
 [family sheets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
 now cover cabinets, trees, scrapyard pieces, outdoor seating, sofas, floors/arches,
-playground tubes and animated doors: 131 cards expose 191 source records through
-variant and frame selectors. All eight are marked Proposed. Notes reuse
+playground tubes, animated doors, plants/planters, side beds/blankets and picket
+fences/garden gates: 169 cards expose 255 source records through variant and frame
+selectors. All eleven are marked Proposed. Notes reuse
 the Workshop outbox/inbox and pin family revision, selected member, variant and
 source layers. They do not approve or promote metadata. The current slice has no
 approval buttons or generator placement enforcement. Asset families appears in the
@@ -81,11 +82,11 @@ labels. Apply it alongside the frozen proposal JSONs. That reconciliation predat
 the owner feedback and bounded visual acceptance recorded below.
 
 The contact-sheet adapter uses committed source images only and checks source
-pins, available pixel hashes, exact frame bounds, all 191 displayed record references and
+pins, available pixel hashes, exact frame bounds, all 255 displayed record references and
 cabinet component restrictions. Run `python3 scripts/build-family-sheets.py --check`
 with Pillow to verify the saved output; ordinary browsing/builds use committed
 JSON and images without original packs. Source images and metadata revisions are
-also verified before browser notes can be submitted. Eight discovery candidates
+also verified before browser notes can be submitted. Eleven discovery candidates
 in one existing-inbox batch route directly to these sheets; notes remain discussion.
 
 The first owner comments gave positive whole-sheet feedback on cabinets and
@@ -105,9 +106,9 @@ the sheet; [delivery and validation](../tactical/053-semantic-tileset-map/notes/
 record the exact revision. The family metadata remains Proposed.
 
 The [normalized semantic model](../tactical/053-semantic-tileset-map/semantic-model.json)
-now covers 191 source records / 164 proposal units: the earlier 132 records / 112
-units plus 25 Room Builder components, 25 playground exports and nine door frames
-in two action sequences. These counts preserve duplicate exports and temporal
+now covers 255 source records / 216 proposal units. The latest slice adds 64 records /
+52 units to the earlier 191 / 164: 19 plants, 18 bed/blanket render records in six
+units, and 27 fence/gate/shrub records. These counts preserve duplicate exports and temporal
 frames; they are not counts of unique objects. Source, semantic, relation and
 review views remain separate. Its [independent audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-semantic-model-review.md)
 checks exact pixels, missing-source mode, stale reviews and arbitrary cabinet
@@ -123,7 +124,7 @@ crediting unrecognized packet formats.
 
 The [outdoor seating delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-outdoor-seating-delivery.md)
 adds 15 cards with four-color chair variants. Two benches use byte-identical
-original PNG copies and retain original-only master lineage. All eight family
+original PNG copies and retain original-only master lineage. All eleven family
 sheets support exact piece/variant and whole-sheet discussion.
 
 The [I01 sofa packet](../tactical/053-semantic-tileset-map/packets/I01-interior-sofas.md)
@@ -167,9 +168,14 @@ The owner’s latest floor/arch and tube comments are positive whole-sheet feedb
 The door label now describes a proposed locked-door attempt, with source
 demonstrations following artwork zoom. The
 [next-family slice](../tactical/053-semantic-tileset-map/notes/2026-10-04-plants-bedroom-fences.md)
-owns that correction and the active plants/planters, bed/bedding and fence/gate
-investigations. New research will receive separate independent review before
-normalization and quiet-sheet delivery. Prioritize repeated families that can expose missed variants or assembly
+owns that correction and the independently reviewed plants/planters, bed/bedding
+and fence/gate slice. Three quiet sheets add 38 cards / 64 records. Plant crops
+retain native transparent padding; three are partial-master reconstructions, not
+whole-master matches. Bed blankets require matching underlays; twelve bed records
+retain original-only master lineage. Fence pieces need neighbors; garden gates
+retain unknown standalone eligibility and cannot inherit picket-kit joins. The
+[implementation review](../tactical/053-semantic-tileset-map/notes/2026-10-04-next-family-implementation-review.md)
+checks integration separately from the frozen source reviews. Prioritize repeated families that can expose missed variants or assembly
 rules; unknown regions remain explicit in the coverage ledger. The
 [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.

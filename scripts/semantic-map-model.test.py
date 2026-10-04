@@ -33,8 +33,8 @@ class SemanticModelTests(unittest.TestCase):
 
     def test_exact_accounting_composition_and_unknown_geometry(self):
         report = self.full_report
-        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (191, 164))
-        self.assertEqual(report['lineage'], {'direct': 148, 'composed': 9, 'derived': 20, 'original-only': 2, 'subfile-only': 3, 'temporal-frame': 9})
+        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (255, 216))
+        self.assertEqual(report['lineage'], {'direct': 197, 'composed': 9, 'derived': 20, 'original-only': 2, 'subfile-only': 15, 'temporal-frame': 9, 'alpha-visible-reconstruction': 3})
         self.assertEqual(len(report['compositionsComparedToPinnedTargets']), 9)
         self.assertEqual(report['compositionsUnavailable'], [])
         self.assertEqual(report['variantDeltasVerified'], 27)
@@ -68,8 +68,8 @@ class SemanticModelTests(unittest.TestCase):
         self.assertTrue(M.review_applicability(review, review['proposalSha256'], review['memberRecords']))
         self.assertFalse(M.review_applicability(review, '0' * 64, review['memberRecords']))
         self.assertFalse(M.review_applicability(review, review['proposalSha256'], review['memberRecords'][:-1]))
-        self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews'] if r['packetId'] not in M.EXPANSION_PACKETS))
-        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 164)
+        self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews'] if r['packetId'] not in M.EXPANSION_PACKETS and r['packetId'] not in M.NEXT.CONTRACTS))
+        self.assertEqual(sum(len(r.get('proposalDispositions', [])) for r in self.model['reviews']), 164)
 
     def test_aliases_offgrid_occurrences_and_exceptions_preserved(self):
         records = {r['id']: r for r in self.model['sourceRecords']}
@@ -293,7 +293,7 @@ class SemanticModelTests(unittest.TestCase):
                   'reviews': '09f0138c855c79a83521d35c8f514acd9b689904d1357a85b78e4c10d27afbe1',
                   'packets': '156ca59e3b68d701ba2f01486d6c1456754653cfdfc614d95e75ead9c9b8d598'}
         for key, digest in frozen.items():
-            previous = [r for r in self.model[key] if r.get('packetId', r.get('id')) not in M.EXPANSION_PACKETS]
+            previous = [r for r in self.model[key] if r.get('packetId', r.get('id')) not in M.EXPANSION_PACKETS and r.get('packetId', r.get('id')) not in M.NEXT.CONTRACTS]
             self.assertEqual(M.revision(previous), digest, key)
 
     def test_component_probes_keep_closed_open_weakened_invalid_and_fixed_distinct(self):
@@ -314,7 +314,7 @@ class SemanticModelTests(unittest.TestCase):
         self.assertEqual((shadow['changedPixels'], shadow['changedRGBAValues']),
                          (176, [{'subfile': [0, 0, 0, 25], 'master': [0, 0, 0, 48], 'pixels': 176}]))
         records = {r['id']: r for r in self.model['sourceRecords']}
-        self.assertEqual([r['id'] for r in records.values() if r['primaryLineage'] == 'subfile-only'], ['RB01-A05', 'RB01-A07', 'RB01-A08'])
+        self.assertEqual([r['id'] for r in records.values() if r['packetId'] == 'RB01' and r['primaryLineage'] == 'subfile-only'], ['RB01-A05', 'RB01-A07', 'RB01-A08'])
         cross = records['E03-15']['topology']
         self.assertEqual([p['edge'] for p in cross['openJoinEdges']], ['left', 'right'])
         self.assertEqual(len(cross['externalEntrancesOrEnds']), 2)

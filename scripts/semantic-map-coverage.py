@@ -18,7 +18,7 @@ BASE = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = BASE + '/coverage-ledger.json'
 REGISTRY = BASE + '/mapping-registry.json'
 MODEL = BASE + '/semantic-model.json'
-MODEL_PIN = '530352165c513d0731e1fe02a645b2a7a29a78fbdb1830f495e02b758fa31123'
+MODEL_PIN = 'edd116e96f8b7eba18e5cf0715e1354d14fcf16e99ff7cddaacfe96f899f45f7'
 I01_PROPOSAL_PIN = '75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df'
 I01_REVIEW_PIN = '1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb'
 E01_PROPOSAL_PIN = '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b'
@@ -163,6 +163,94 @@ COMPONENT_CONTRACTS = {
 }
 PACKET_FILES = {'E01': 'E01-outdoor-seating', 'I01': 'I01-interior-sofas',
                 **{contract[0]: name for name, contract in COMPONENT_CONTRACTS.items()}}
+NEXT_CONTRACTS = {
+    'E04-plants-planters': ('E04', '8fbca92889dd7bc587093eaa38d276b36d6ccbe22a8f748c79d4b4f6c4554f36', '7815d8d76dfa2543f5ee43f10d9da5ff375a02043574a8bcd2474e7a508ea961', 'E04-plants-planters-v1', 19, 19),
+    'I02-bedroom': ('I02', '9b951c075c0707f86391b14741f533c499a8b1938342db936e0b9dea29f7e0a5', 'fb62ea277d4c053acf5ba752dd2da54963c55e30a8920425c1cb050e5f0efc88', 'I02-bedroom-v1', 18, 6),
+    'E05-fences-gates': ('E05', '238778d9b00baadfa7de2799b3d55a0f834be22237b0994c77e731efba1e2870', '3395feed2cfe2f9e505c9ca375b2792b22519c95f078d0ab58d92bb0663191e8', 'E05-fences-gates-v1', 27, 27),
+}
+PACKET_FILES.update({contract[0]: name for name, contract in NEXT_CONTRACTS.items()})
+
+
+def next_family_expansion(evidence, source_ref, masters):
+    """Separate full master frames, visible correspondences and packed fallback."""
+    model = evidence.json(MODEL, MODEL_PIN)
+    files = {s['path']: s for s in model['sourceFiles']}
+    result = []
+    for name, (pid, proposal_pin, review_pin, adapter, count, units) in NEXT_CONTRACTS.items():
+        path, review_path = BASE + '/packets/' + name + '.json', BASE + '/packets/' + name + '-review.md'
+        packet, text = evidence.json(path, proposal_pin), evidence.read(review_path, review_pin).decode()
+        records = [r for r in model['sourceRecords'] if r['packetId'] == pid]
+        proposals = [p for p in model['proposals'] if p['packetId'] == pid]
+        review = next(r for r in model['reviews'] if r['packetId'] == pid)
+        if ((len(records), len(proposals)) != (count, units) or adapter not in model['versionedAdapters']['extensions'] or
+                proposal_pin not in text or review['proposalSha256'] != proposal_pin or review['reviewSha256'] != review_pin or
+                review['memberRecords'] != [r['id'] for r in records]):
+            raise ValueError(pid + ' explicit next-family adapter/review/accounting mismatch')
+        table = {s['id']: s for s in packet['sources']}
+        for s in table.values():
+            source_ref(s['path'], s['sha256'], [0, 0, *s['dimensions']])
+        master = 'interiors' if pid == 'I02' else 'exteriors'
+        candidates = {c['id']: c for c in packet['candidates']}
+        for record in records:
+            candidate, uid = candidates[record['id']], record['id']
+            if record['originalEvidence'] != candidate:
+                raise ValueError(pid + ' normalized next-family source evidence differs')
+            refs, packed, supplemental, master_rects, committed = [], [], [], [], []
+            for ref in record['references']:
+                pin = files[ref['sourceFile']]
+                if ref['bounds']['coordinateSpace'] == 'packed-atlas-pixels':
+                    evidence.read(pin['path'], pin['sha256'])
+                    packed.append({'path': pin['path'], 'sha256': pin['sha256'], 'rect': ref['bounds']['value'],
+                        'key': ref['aliasKey'], 'coordinateSpace': 'packed-atlas-pixels',
+                        'originalSource': source_ref(ref['aliasSourceFile'], files[ref['aliasSourceFile']]['sha256'], ref['aliasSourceBounds']['value'])})
+                elif not ref.get('transparentFrame'):
+                    refs.append(source_ref(pin['path'], pin['sha256'], ref['bounds']['value']))
+            for occurrence in record['occurrences']:
+                pin = files[occurrence['sourceFile']]
+                ref = source_ref(pin['path'], pin['sha256'], occurrence['bounds']['value'])
+                if pin['path'] in (masters[master]['path'], masters[master].get('alias')):
+                    master_rects.append(ref['rect'])
+                    if pin['path'] != masters[master]['path']:
+                        evidence.read(pin['path'], pin['sha256'])
+                        committed.append(ref)
+                else:
+                    supplemental.append(ref)
+            visible = []
+            for correspondence in record.get('alphaVisibleCorrespondences', []):
+                pin = files[correspondence['sourceFile']]
+                visible.append({**source_ref(pin['path'], pin['sha256'], correspondence['bounds']['value']),
+                    'recordLocalRect': correspondence['recordLocalBounds']['value'],
+                    'lineage': 'alpha-visible-only; no whole-frame occurrence credit'})
+            if record['primaryLineage'] == 'alpha-visible-reconstruction':
+                if master_rects:
+                    raise ValueError('Visible reconstruction cannot gain whole-master-frame credit')
+                kind = 'alpha-visible-reconstruction'
+            else:
+                kind = 'exact-direct' if master_rects else 'subfile-only'
+                if record['primaryLineage'] != ('direct' if master_rects else 'subfile-only'):
+                    raise ValueError(pid + ' next-family master lineage differs')
+            render = candidate['committedRendering']
+            render_pin = files[table[render['sourceId']]['path']]
+            evidence.read(render_pin['path'], render_pin['sha256'])
+            rendering = {**source_ref(render_pin['path'], render_pin['sha256'], render['rect']),
+                'coordinateSpace': 'packed-atlas-pixels' if pid == 'I02' else 'source-file-pixels',
+                'originalEvidence': render,
+                'scope': 'Committed rendering correspondence; not additional original-master occurrence credit'}
+            context = [v['rect'] for v in visible if v['path'] in (masters[master]['path'], masters[master].get('alias'))] if kind == 'alpha-visible-reconstruction' else []
+            result.append({'id': uid, 'packet': pid, 'sources': refs, 'packedAliases': packed,
+                'normalizedPixelSHA256': record['normalizedPixelSha256'], 'frameDimensions': record['frameDimensions'],
+                'lineage': {'kind': kind, 'master': master, 'rects': master_rects, 'contextRects': context,
+                    'scope': 'Only whole-frame equality earns exact-direct credit. Visible crop/frame restoration and packed render sources remain separate.'},
+                'supplementalOccurrences': supplemental, 'committedMasterAliases': committed,
+                'alphaVisibleCorrespondences': visible, 'committedRenderReferences': [rendering],
+                'integrationAliases': [], 'regionLinks': [], 'topology': candidate['topology'],
+                'independentDisposition': record['independentDisposition'],
+                'stages': {'surveyed': stage('context-only', 'survey does not individually segment this object'),
+                    'investigated': stage('evidenced', 'explicit bounded ' + pid + ' source record', [path, MODEL], [uid]),
+                    'independentlyReviewed': stage('evidenced', 'exact per-record agent review; finite probe limits retained', [review_path, MODEL], [uid]),
+                    'ownerFeedback': stage('identity-clue', 'pinned pending planter annotation; not approval', [path], [uid]) if pid == 'E04' and uid in ('E04-07', 'E04-08') else stage(),
+                    'accepted': stage()}})
+    return result
 
 
 def component_animation_expansion(evidence, source_ref, masters):
@@ -249,7 +337,7 @@ def e01_expansion(evidence, source_ref, masters):
     if E01_PROPOSAL_PIN not in review_text:
         raise ValueError('E01 review applicability mismatch')
     model = evidence.json(MODEL, MODEL_PIN)
-    if model.get('versionedAdapters', {}).get('extensions') != ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1']:
+    if model.get('versionedAdapters', {}).get('extensions') != ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1'] + [contract[3] for contract in NEXT_CONTRACTS.values()]:
         raise ValueError('Unsupported normalized extension adapters')
     model_records = {r['id']: r for r in model['sourceRecords'] if r['packetId'] == 'E01'}
     model_files = {r['path']: r for r in model['sourceFiles']}
@@ -561,13 +649,13 @@ def build(root=REPO):
                                    'Master/sheet path reference never means the whole PNG is semantically investigated.',
                                    'Unreferenced files remain unassigned even when a duplicate or packed alias is known.']})
 
-    expanded = e01_expansion(evidence, source_ref, masters) + i01_expansion(evidence, source_ref, masters) + component_animation_expansion(evidence, source_ref, masters)
+    expanded = e01_expansion(evidence, source_ref, masters) + i01_expansion(evidence, source_ref, masters) + component_animation_expansion(evidence, source_ref, masters) + next_family_expansion(evidence, source_ref, masters)
     for record in expanded:
         for region in regions:
             if region['master'] == record['lineage']['master']:
                 for key, relation in [('rects', 'exact-master-source-rectangle-intersection'), ('contextRects', 'counterpart-lineage-context')]:
                     if any(intersects(region['source']['rect'], r) for r in record['lineage'].get(key, [])):
-                        record['regionLinks'].append({'regionId': region['id'], 'relation': relation})
+                        record['regionLinks'].append({'regionId': region['id'], 'relation': 'alpha-visible-crop-context' if key == 'contextRects' and record['lineage']['kind'] == 'alpha-visible-reconstruction' else relation})
         if record['lineage']['kind'] == 'exact-direct' and not record['regionLinks']:
             raise ValueError('Unassigned expansion exact master occurrence')
     for region in regions:
@@ -581,7 +669,7 @@ def build(root=REPO):
             region['assignment']['state'] = 'partial-mapped-records'
         region['expandedIndependentReviewEvidence'] = sorted({BASE + '/packets/' + (PACKET_FILES[r['packet']] + '-review.md') for r in expanded if r['id'] in linked})
     for group in groups:
-        group_refs = [(r, ref) for r in expanded for ref in r['sources'] + r['supplementalOccurrences'] + r['committedMasterAliases'] if ref['scopeGroup'] == group['id']]
+        group_refs = [(r, ref) for r in expanded for ref in r['sources'] + r['supplementalOccurrences'] + r['committedMasterAliases'] + r.get('committedRenderReferences', []) if ref['scopeGroup'] == group['id']]
         primary_refs = []
         if group['id'] in ('exteriors-master', 'interiors-master', 'interiors-room-builder-master'):
             for record in expanded:
@@ -607,7 +695,7 @@ def build(root=REPO):
     registered = registrations(evidence, {r['id'] for r in regions}, {g['id'] for g in groups}, source_ref)
     for registration in registered:
         contracts = {'E01-outdoor-seating': ('E01', E01_PROPOSAL_PIN, E01_REVIEW_PIN, 'E01-outdoor-seating-v1', 27, 27),
-                     'I01-interior-sofas': ('I01', I01_PROPOSAL_PIN, I01_REVIEW_PIN, 'I01-interior-sofas-v1', 20, 18), **COMPONENT_CONTRACTS}
+                     'I01-interior-sofas': ('I01', I01_PROPOSAL_PIN, I01_REVIEW_PIN, 'I01-interior-sofas-v1', 20, 18), **COMPONENT_CONTRACTS, **NEXT_CONTRACTS}
         if registration['packetId'] in contracts:
             pid, proposal_pin, review_pin, adapter, record_count, proposal_count = contracts[registration['packetId']]
             members = [r['id'] for r in expanded if r['packet'] == pid]
@@ -649,16 +737,18 @@ def build(root=REPO):
             'accounting': {'surveyWindows': len(regions), 'surveyWindowsByMaster': dict(Counter(r['master'] for r in regions)),
                            'inventoryGroups': len(groups), 'originalPNGPaths': len(originals),
                            'pilotSourceRecords': len(records), 'pilotProposalUnits': 67,
-                           'expandedSourceRecords': len(expanded), 'expandedProposalUnits': 97,
+                           'expandedSourceRecords': len(expanded), 'expandedProposalUnits': 97 + sum(contract[5] for contract in NEXT_CONTRACTS.values()),
                            'allNormalizedSourceRecords': len(records) + len(expanded),
-                           'allNormalizedProposalUnits': 164,
-                           'expansionPacketAccounting': {pid: {'sourceRecords': sum(r['packet'] == pid for r in expanded), 'proposalUnits': units} for pid, units in [('E01', 27), ('I01', 18), ('RB01', 25), ('E03', 25), ('A01', 2)]},
+                           'allNormalizedProposalUnits': 164 + sum(contract[5] for contract in NEXT_CONTRACTS.values()),
+                           'expansionPacketAccounting': {pid: {'sourceRecords': sum(r['packet'] == pid for r in expanded), 'proposalUnits': units} for pid, units in [('E01', 27), ('I01', 18), ('RB01', 25), ('E03', 25), ('A01', 2)] + [(contract[0], contract[5]) for contract in NEXT_CONTRACTS.values()]},
                            'expansionPackedAliasReferences': sum(len(r.get('packedAliases', [])) for r in expanded),
                            'expansionPrimaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in expanded)),
-                           'expansionNamedExportReferences': sum(len(r['sources']) for r in expanded if r['packet'] in ('E01', 'I01', 'E03')),
+                           'expansionNamedExportReferences': sum(len(r['sources']) for r in expanded if r['packet'] in ('E01', 'I01', 'E03', 'E04', 'I02', 'E05')),
                            'expansionSourceCropReferences': sum(len(r['sources']) for r in expanded),
                            'expansionSupplementalExactOccurrences': sum(len(r['supplementalOccurrences']) for r in expanded),
                            'expansionCommittedIntegrationAliases': sum(len(r['integrationAliases']) for r in expanded),
+                           'nextFamilyAlphaVisibleCorrespondences': sum(len(r.get('alphaVisibleCorrespondences', [])) for r in expanded),
+                           'nextFamilyCommittedRenderReferences': sum(len(r.get('committedRenderReferences', [])) for r in expanded),
                            'primaryMasterLineageRecords': dict(Counter(r['lineage']['kind'] for r in records)),
                            'explicitOwnerAcceptedCompositionExamples': 3,
                            'componentAnimationUnits': {'sourceRecords': 59, 'proposalUnits': 52, 'RB01ComponentUnits': 25, 'E03NamedComponentUnits': 25, 'A01ActionSequenceUnits': 2, 'A01TemporalFrames': 9, 'A01DistinctPixelStates': 8, 'A01InventoriedPNGSourcePaths': 82, 'A01SupportingGIFSourcePathsOutsideInventory': 2},

@@ -1,6 +1,6 @@
 # Semantic mapping work queue
 
-Updated: 2026-10-04. Source inventory, broad surveys and three pilots are reconciled; shared model and coverage ledger implemented; eight family sheets implemented; 191 source records / 164 proposal units normalized and independently audited.
+Updated: 2026-10-04. Source inventory, broad surveys and three pilots are reconciled; shared model and coverage ledger implemented; eleven family sheets implemented; 255 source records / 216 proposal units normalized and independently audited.
 
 The coordinator alone updates this queue. Record an owner/session, source revision
 and artifact link when assigning work. Workers can finish their own packet without
@@ -23,23 +23,24 @@ an agent-written queue status.
 | P02 | Trial: suspected dumpyard area and object boundaries | S01; S02 source window located | Reconciled | [Scrapyard proposal](packets/P02-scrapyard.md), [review](packets/P02-scrapyard-review.md); 29 candidates, off-grid origins and weak subset-match limits retained |
 | P03 | Trial: Interiors furniture and original-to-packed correspondence | S01; S02 source window located | Reconciled | [Cabinet proposal](packets/P03-cabinets.md), [review](packets/P03-cabinets-review.md); 27 records/nine concepts; evidence attribution correction in coordinator note |
 | P04 | Audit trial results; add modular probe if needed; refine method and estimate | P01–P03 | Reconciled | [Method assessment](notes/2026-10-04-pilot-method-review.md), [reconciliation](notes/2026-10-04-pilot-reconciliation.md); modular probes covered, throughput estimate unsupported |
-| V01 | Read-only normalized model, validator and deterministic evidence report | P04 | Independently checked | [Normalized model](semantic-model.json), [implementation](notes/2026-10-04-semantic-model.md), [adversarial review](notes/2026-10-04-semantic-model-review.md); 191 records / 164 proposal units, lineage, exact review scope and general cabinet/sofa chains; [sofa audit](notes/2026-10-04-sofa-model-review.md) |
+| V01 | Read-only normalized model, validator and deterministic evidence report | P04 | Independently checked | [Normalized model](semantic-model.json), [implementation](notes/2026-10-04-semantic-model.md), [adversarial review](notes/2026-10-04-semantic-model-review.md); 255 records / 216 proposal units, lineage, exact review scope and general cabinet/sofa chains; [sofa audit](notes/2026-10-04-sofa-model-review.md) |
 | E01 | Outdoor benches, camping chairs and picnic tables | V01 contract; S02 | Reconciled and delivered | [27-export proposal](packets/E01-outdoor-seating.md); 25 direct master matches and two original-only exports; [independent review](packets/E01-outdoor-seating-review.md), [sheet delivery](notes/2026-10-04-outdoor-seating-delivery.md) |
 | C01 | Full source-domain and region coverage ledger | S01, S02 | Implemented and checked | [Coverage ledger](coverage-ledger.json), [registry](mapping-registry.json), [evidence](notes/2026-10-04-coverage-ledger.md): 163 windows, all 18 source groups, separate evidence stages |
 | I01 | Interiors sofa and upholstered-seat contrast | V01; S02 | Reconciled and delivered | [Proposal](packets/I01-interior-sofas.md), [review](packets/I01-interior-sofas-review.md); 20 records / 18 units, 15 assembly probes; [sheet delivery](notes/2026-10-04-sofa-delivery.md); four lower-seat roles remain unknown |
 | RB01 | Room Builder path edges and arch assembly | S02-R11/R09 | Reconciled and delivered | [25-record packet](packets/RB01-room-builder-path-arch.md), [review](packets/RB01-room-builder-path-arch-review.md); fixed arch/shadow differences, weakened inset extension and open network windows retained |
 | E03 | Playground crawl tubes | S02-exteriors/E10 | Reconciled and delivered | [25-record packet](packets/E03-playground-tubes.md), [review](packets/E03-playground-tubes-review.md); required continuation ports, finite assemblies, rounded/collared roles qualified |
 | A01 | Small door-animation family | S01 animation inventory | Reconciled and delivered | [Nine-frame packet](packets/A01-animation.md), [review](packets/A01-animation-review.md); eight pixel states, exact GIF correspondence; game playback remains unknown |
-| E04 | City plants and planters | S02; owner planter annotations | Assigned | `plants_mapping`: Eight broadleaf City Props Tree, seven Flower_Bush and four Pot exports; exclusive `E04-plants-planters` packet/helper |
-| I02 | Side-view beds and blanket overlays | S02 Interiors; I01 lessons | Assigned | `bedroom_mapping`: four bed exports and two matching cover exports across three shadow sets; exclusive `I02-bedroom` packet/helper |
-| E05 | Fence and gate topology | S02 Exteriors; E03 lessons | Assigned | `expansion_sheets`: bounded complete fence/gate kit; exclusive `E05-fences-gates` packet/helper |
+| E04 | City plants and planters | S02; owner planter annotations | Delivered proposal | 19 records / 19 units; seven cards, three transparent-frame restorations; separately reviewed |
+| I02 | Side-view beds and blanket overlays | S02 Interiors; I01 lessons | Delivered proposal | 18 records / six units; six cards and four assembled examples in three shadow styles; separately reviewed |
+| E05 | Fence and gate topology | S02 Exteriors; E03 lessons | Delivered proposal | 27 records / units; 25 cards, seven closed forms and one open section; garden joins unknown; separately reviewed |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Bounded mapped-evidence audit; entire-pack semantic audit remains open | [Expansion audit](notes/2026-10-04-expansion-audit.md); inventory duplicates, mapped frames and coverage consistency; unsegmented art remains unassigned |
-| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and independently checked for all eight normalized packets | 131 cards / 191 records, variants, assemblies, selected-piece metadata and shared notes; eight proposed discovery candidates, no approval/promotion controls |
+| R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and independently checked for all eleven normalized packets | 169 cards / 255 records, variants, assemblies, selected-piece metadata and shared notes; eleven proposed discovery candidates, no approval/promotion controls |
 | R02 | Act on first owner comments: tree-base names/relations and forest repeat examples | R01 | Implemented and validated | [Feedback evidence](notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up); cabinets/scrapyard have positive whole-sheet comments; F05 ground correction and three varied-offset examples accepted in chat; exact source/recipe recorded; boundaries remain unresolved |
 
-Next action: reconcile the locked-door wording feedback, then investigate E04/I02/E05,
-rotate independent reviewers across their frozen packets, and deliver quiet sheets. The
+Next action: read owner comments on E04/I02/E05, reconcile exact proposed fields,
+and select the next bounded repeated families. The locked-door clarification and
+three new sheets are delivered; all metadata remains Proposed. The
 [expansion reconciliation](notes/2026-10-04-component-animation-expansion.md) is the
 frozen research checkpoint; current delivery is recorded in the
 [component family delivery](notes/2026-10-04-component-family-delivery.md).
@@ -78,3 +79,34 @@ contract. The coordinator owns this presentation clarification and all shared
 registries/catalogs. Three Sol6.1/high workers own separate packet/helper paths.
 Research scope is bounded per selected subfamily; full-pack completeness remains
 unknown. Mapper packets freeze before a different worker reviews them.
+
+
+### Integration and review ownership for this slice
+
+- `plants_mapping`: shared model/coverage normalization and focused helper/tests.
+- `bedroom_mapping`: new family presentation adapter/tests.
+- `expansion_sheets`: independent presentation/model implementation audit.
+- Coordinator: E05 independent source review, registry/main builder/browser tests,
+  catalogs, shared docs, isolated application validation and checkpoint commits.
+
+Mapper packets freeze before integration. E04 and I02 were cross-reviewed by
+separate mappers, and E05 by the coordinator. The delivery record retains exact
+source/review pins and validation. No new human approval or game geometry is inferred.
+
+
+### Suggested next slice — unassigned
+
+After reconciling comments on the delivered sheets, consider three bounded themes:
+
+- **Kitchen counters** (S02-I12): one matching counter palette with ends, middles,
+  sink/hob forms and actual render counterparts. Test counter inserts versus whole
+  appliances, baked surfaces versus overlays, and valid chain endings.
+- **Pianos and their benches** (S02-I03 / I40): one repeated piano design with
+  matching facings and shadows. Test whole-instrument versus lid/bench companions;
+  open/closed drawings do not automatically establish animation.
+- **Traffic lights** (S02-exteriors/E37): one pole/head design with matching
+  orientations and depicted light states. Test detached heads/supports versus
+  complete objects and exact attachment offsets; operational traffic rules unknown.
+
+These are navigation hypotheses and suggested assignments, not mapped records.
+They exclude the newly delivered plants, side beds and low fence/garden-gate kits.

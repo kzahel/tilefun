@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only versioned semantic adapters (P01/P02/P03, E01/I01, RB01/E03/A01).
+"""Read-only versioned semantic adapters (P01/P02/P03, E01/I01, RB01/E03/A01, E04/I02/E05).
 
 Default writes only semantic-model.json. --check never writes and emits stable JSON;
 --summary prints a human summary. Full validation requires ignored originals.
@@ -10,12 +10,17 @@ import argparse
 from collections import Counter
 import copy
 import hashlib
+import importlib.util
 import json
 import re
 from pathlib import Path
 import sys
 
 from PIL import Image
+
+NEXT_SPEC = importlib.util.spec_from_file_location('semantic_next_families', Path(__file__).with_name('semantic-map-next-families.py'))
+NEXT = importlib.util.module_from_spec(NEXT_SPEC)
+NEXT_SPEC.loader.exec_module(NEXT)
 
 ROOT = Path(__file__).resolve().parents[1]
 PLAN = 'docs/tactical/053-semantic-tileset-map'
@@ -49,6 +54,8 @@ PILOT_ACCOUNTING = {'P01': {'records': 29, 'proposals': 29, 'direct': 21, 'compo
                     'P03': {'records': 27, 'proposals': 9, 'direct': 8, 'composed': 1, 'derived': 18}}
 PACKET_ACCOUNTING = {**PILOT_ACCOUNTING, 'E01': {'records': 27, 'proposals': 27, 'direct': 25, 'composed': 0, 'derived': 0, 'original-only': 2}, 'I01': {'records': 20, 'proposals': 18, 'direct': 18, 'derived': 2}}
 PACKET_ACCOUNTING.update({'RB01': {'records': 25, 'proposals': 25, 'direct': 22, 'subfile-only': 3}, 'E03': {'records': 25, 'proposals': 25, 'direct': 25}, 'A01': {'records': 9, 'proposals': 2, 'temporal-frame': 9}})
+PACKET_ACCOUNTING.update({pid: {'records': contract['records'], 'proposals': contract['units'], **contract['lineage']}
+                          for pid, contract in NEXT.CONTRACTS.items()})
 GEOMETRY = {k: 'unknown' for k in ('anchor', 'footprint', 'collision', 'walkability', 'height')}
 
 
@@ -82,11 +89,11 @@ def repo_path(root, path):
 
 def normalized(im):
     im = im.convert('RGBA')
-    raw = bytearray(im.tobytes())
-    for i in range(0, len(raw), 4):
-        if raw[i + 3] == 0:
-            raw[i:i + 3] = bytes(3)
-    return Image.frombytes('RGBA', im.size, bytes(raw))
+    # Same byte contract as the matcher; Pillow applies the alpha-zero mask in C.
+    # Visible and translucent channels are retained exactly, including alpha.
+    invisible = im.getchannel('A').point(lambda alpha: 255 if alpha == 0 else 0)
+    im.paste((0, 0, 0, 0), mask=invisible)
+    return im
 
 
 def pixel_hash(im):
@@ -757,9 +764,12 @@ def build_model(root=ROOT):
                         'originalContext': {k: v for k, v in packet.items() if k not in
                                             ('candidates', 'semanticProposals', 'measurements', 'relations', 'experiments')}})
     expansion_adapters(root, source, files, pins, records, proposals, relations, reviews, packets)
+    pins['scripts/semantic-map-next-families.py'] = sha((root / 'scripts/semantic-map-next-families.py').read_bytes())
+    NEXT.build(root, source, files, pins, records, proposals, relations, reviews, packets,
+               {'rect': rect, 'fields_from': fields_from, 'geometry': GEOMETRY})
     model = {'schema': 'semantic-tileset-model-v1',
-             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1']},
-             'lineageContract': 'Primary lineage describes correspondence to the packet original master except A01 temporal-strip records, whose static correspondence stays separate. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
+             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1', 'RB01-room-builder-v1', 'E03-playground-tubes-v1', 'A01-animation-v1'] + [c['name'] + '-v1' for c in NEXT.CONTRACTS.values()]},
+             'lineageContract': 'Primary lineage describes correspondence to the packet original master except A01 temporal-strip records, whose static correspondence stays separate. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes. Alpha-visible-reconstruction preserves an exact visible master crop restored into the native transparent frame without whole-master-frame occurrence credit. Subfile-only preserves exact original singles and packed rendering when no whole-master frame matches.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
              'normalization': NORMALIZATION, 'inputPins': pins, 'packets': packets,
              'sourceFiles': [files[k] for k in sorted(files)], 'sourceRecords': records,
              'proposals': proposals, 'relationships': relations, 'reviews': reviews,
@@ -1100,7 +1110,7 @@ def validate_model(model, root=ROOT, committed_only=False):
         packet_proposals = [p for p in proposals.values() if p['packetId'] == pid]
         require(len(packet_records) == accounting['records'] and len(packet_proposals) == accounting['proposals'], f'Packet record/proposal accounting drift: {pid}')
         require(Counter(r['primaryLineage'] for r in packet_records) ==
-                {k: accounting[k] for k in ('direct', 'composed', 'derived', 'original-only', 'subfile-only', 'temporal-frame') if accounting.get(k)}, f'Lineage accounting drift: {pid}')
+                {k: accounting[k] for k in ('direct', 'composed', 'derived', 'original-only', 'subfile-only', 'temporal-frame', 'alpha-visible-reconstruction') if accounting.get(k)}, f'Lineage accounting drift: {pid}')
     covered = Counter(rid for p in proposals.values() for rid in p['members'])
     require(covered == Counter(records.keys()), 'Proposal membership missing or duplicated')
     for p in proposals.values():
@@ -1160,6 +1170,18 @@ def validate_model(model, root=ROOT, committed_only=False):
             if im is None:
                 continue
             value = crop(im, ref['bounds'])
+            if ref.get('transparentFrame'):
+                reconstruction = ref['transparentFrame']
+                require(reconstruction['operation'] in ('direct-crop', 'crop-into-transparent-frame'), 'Unsupported transparent-frame operation')
+                require(reconstruction['frameSize'] == record['frameDimensions'], 'Transparent-frame dimensions drift')
+                at = reconstruction['offsetXY']
+                if reconstruction['operation'] == 'direct-crop':
+                    require(at == [0, 0] and list(value.size) == reconstruction['frameSize'], 'Direct committed crop frame drift')
+                check_bounds(rect([*at, *value.size], 'record-local-pixels'), reconstruction['frameSize'])
+                framed = Image.new('RGBA', tuple(reconstruction['frameSize']))
+                framed.paste(value, tuple(at))
+                require(pixel_hash(framed) == reconstruction['normalizedRgbaSHA256'], 'Transparent-frame reconstruction hash drift')
+                value = framed
             require(list(value.size) == record['frameDimensions'], f'Frame dimensions drift: {rid}')
             require(pixel_hash(value) == record['normalizedPixelSha256'], f'Record pixels differ: {rid}: {path}')
             rendered[rid] = value
@@ -1351,6 +1373,9 @@ def validate_model(model, root=ROOT, committed_only=False):
             require(matches == experiment['shadowlessPoolMatches'], 'I01 counterpart corpus differs')
         sofa_counterparts += 1
     expansion_report = validate_expansion(model, records, rendered, image, root)
+    next_report = NEXT.validate(model, records, rendered, image, {
+        'rect': rect, 'crop': crop, 'pixel_hash': pixel_hash, 'delta': seating_delta,
+        'check_bounds': check_bounds, 'pixels': pixels})
     original_only = [r['id'] for r in records.values() if r['primaryLineage'] == 'original-only']
     for rid in original_only:
         require(not records[rid]['occurrences'] and records[rid]['sourceIdentity'] == 'exact-pinned-whole-export',
@@ -1369,6 +1394,11 @@ def validate_model(model, root=ROOT, committed_only=False):
                    'Pilot proposal units are not unique-object counts or pack completeness.']
     limitations.append('RB01/E03 validate finite frozen probes only; open windows, weakened hypotheses and invalid layouts retain their exact dispositions. No general connector/height rule.')
     limitations.append('A01 has nine temporal source occurrences / eight pixel states / two action-sequence proposal units; 82 PNG sources and two supporting GIFs outside the PNG inventory. Demonstration timing is not gameplay timing.')
+    limitations.append('E04 visible crop/padding recipes do not gain whole-master-frame occurrence credit. I02 underlays and E05 ports are bounded metadata/finite recipes, not runtime placement, arbitrary assemblies or human approval.')
+    if next_report['originalNativeFramesUnavailable']:
+        limitations.append('Next-family original native frames are absent; committed rendering and finite recipes remain verified, while original raw/native comparisons are unavailable.')
+    if not next_report['I02CounterpartCorpusRechecked']:
+        limitations.append('I02 black-shadow counterpart pool absent; committed body/delta comparisons are checked, but conditional uniqueness and wrong-name original comparisons are not newly verified.')
     if not expansion_report['masterSubfileAlphaDifferenceVerified']:
         limitations.append('RB01 original master/subfile 176-pixel alpha comparison unavailable; preserved evidence is not newly verified.')
     if expansion_report['GIFDemonstrationsUnavailable']:
@@ -1385,6 +1415,8 @@ def validate_model(model, root=ROOT, committed_only=False):
         limitations.append('122-file counterpart corpus unavailable; recorded uniqueness claim not independently rechecked.')
     return {'ok': True, 'mode': 'committed-only' if committed_only else 'full', 'modelRevision': model['revision'],
             'sourceRecords': len(records), 'proposalUnits': len(proposals), 'componentAnimationValidation': expansion_report,
+            'nextFamilyValidation': next_report,
+            'nextFamilyAccounting': {pid: {'sourceRecords': contract['records'], 'proposalUnits': contract['units'], 'lineage': contract['lineage']} for pid, contract in NEXT.CONTRACTS.items()},
             'componentAnimationAccounting': {pid: {'sourceRecords': spec[2], 'proposalUnits': spec[3]} for pid, spec in EXPANSION_PACKETS.items()},
             'pilotAccounting': {'sourceRecords': 85, 'proposalUnits': 67, 'lineage': {'direct': 58, 'composed': 9, 'derived': 18}},
             'extensionAccounting': {'E01': {'sourceRecords': 27, 'proposalUnits': 27, 'lineage': {'direct': 25, 'original-only': 2}}, 'I01': {'sourceRecords': 20, 'proposalUnits': 18, 'lineage': {'direct': 18, 'derived': 2}}},
@@ -1424,7 +1456,7 @@ def main():
             OUTPUT.write_bytes(encoded(model))
         if args.summary:
             print(f"Semantic map: {report['sourceRecords']} source records / {report['proposalUnits']} proposal units. "
-                  'Pilots: 85/67; E01: 27/27; I01: 20/18; RB01: 25/25; E03: 25/25; A01: 9 temporal frames/2 action sequences (8 pixel states). Human approvals: 0; runtime promotions: 0.')
+                  'Pilots: 85/67; E01: 27/27; I01: 20/18; RB01: 25/25; E03: 25/25; A01: 9 temporal frames/2 action sequences (8 pixel states); E04: 19/19; I02: 18/6; E05: 27/27. Human approvals: 0; runtime promotions: 0.')
             print(f"Compositions: {len(report['compositionsComparedToPinnedTargets'])} target comparisons, "
                   f"{len(report['compositionsReplayOnly'])} replay-only, {len(report['compositionsUnavailable'])} unavailable. "
                   f"Missing original references: {len(report['sourceFilesUnavailable'])}.")
