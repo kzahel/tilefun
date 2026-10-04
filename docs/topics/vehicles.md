@@ -2,7 +2,7 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-03.
+Updated: 2026-10-04.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
 is the review entry point, linked from the sidebar, All tools and the global
@@ -167,3 +167,15 @@ separate work; no new art/behavior approval has been inferred from implementatio
 The Traffic playground now runs `TrafficRecipe` through `ScenarioSession` in a
 Worker, with binary replicas and normal player prediction. All four walk-off
 edges, braking and roof rides are covered by real-Realm integration tests.
+
+## Isolated 3D artwork experiment
+
+[Car projection lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/car-projection)
+uses the exact approved `vehicle:compact-1:east` source (visually left-facing),
+with an explicit body-only crop, on fitted 3D surfaces. It can orbit in perspective
+and overlay the unchanged approved 56 × 20 × 24 collision box. The visual shell
+is an unapproved approximation, not new physics or a replacement vehicle bank.
+Hidden faces are marked; near wheels remain part of the painted side.
+[Rendering architecture](rendering-architecture.md#sprite-artwork-on-3d-proxies)
+owns the data/graphics split and follow-up direction;
+[037](../tactical/037-car-projection-experiment.md) records validation.

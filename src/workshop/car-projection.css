@@ -1,0 +1,75 @@
+.car-projection {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.proxy-stage {
+  width: 100%;
+  height: clamp(280px, 48vw, 520px);
+  background: #111c29;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.proxy-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+.proxy-controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+}
+.proxy-controls label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+.proxy-controls input {
+  width: 20px;
+  height: 20px;
+}
+.proxy-comparison {
+  display: grid;
+  grid-template-columns: minmax(180px, 256px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.proxy-comparison figure {
+  margin: 0;
+}
+.proxy-comparison canvas {
+  width: 100%;
+  image-rendering: pixelated;
+  background: #111c29;
+  border-radius: 10px;
+}
+.proxy-comparison figcaption {
+  font-size: 0.85rem;
+  padding-top: 8px;
+}
+.car-projection .actions button[aria-pressed="true"] {
+  background: #305c74;
+  color: white;
+}
+@media (max-width: 650px) {
+  .proxy-comparison {
+    grid-template-columns: 1fr;
+  }
+  .proxy-comparison figure {
+    max-width: 256px;
+  }
+}
+
+.car-projection .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin: 16px 0 12px;
+  min-width: 0;
+}

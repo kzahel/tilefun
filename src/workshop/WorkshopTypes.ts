@@ -24,7 +24,15 @@ export interface WorkshopCandidate {
   name: string;
   prompt: string;
   url: string;
-  kind: "art" | "interior" | "motion" | "pattern" | "vehicle" | "character" | "railway";
+  kind:
+    | "art"
+    | "interior"
+    | "motion"
+    | "pattern"
+    | "vehicle"
+    | "character"
+    | "railway"
+    | "projection";
   characterId?: string;
   vehicle?: VehicleView;
   /** Handoff derived from the candidate's actual world generation and location. */

@@ -28,6 +28,7 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const CharactersPage = lazy(() => import("./CharactersPage.js"));
+const CarProjectionPage = lazy(() => import("./CarProjectionPage.js"));
 const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
@@ -240,6 +241,7 @@ export function App() {
               "traffic",
               "railways",
               "vehicles",
+              "car-projection",
               "character-lab",
               "art",
               "buildings",
@@ -949,6 +951,7 @@ function ToolPage() {
         <CharactersPage />
       </AuthGate>
     );
+  if (tool.id === "car-projection") return <CarProjectionPage />;
   if (tool.id === "traffic") return <TrafficPage />;
   if (tool.id === "vehicles")
     return (

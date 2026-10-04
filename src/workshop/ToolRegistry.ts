@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "car-projection",
+    name: "Car projection lab",
+    description:
+      "Orbit a car built from sprite artwork and fitted 3D surfaces. Compare the source view and approved collision box.",
+    url: "workshop.html#/tool/car-projection",
+    mode: "adapter",
+  },
+  {
     id: "railways",
     name: "Railway previews",
     description:
@@ -157,6 +165,12 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "car-projection",
+    name: "Car projection experiment",
+    description: "Exploratory 3D proxy; no approval or gameplay promotion.",
+    toolId: "car-projection",
+  },
   ...[
     { id: "rail-patterns", name: "Railway track patterns" },
     { id: "rail-trains", name: "Trains · directional motion" },

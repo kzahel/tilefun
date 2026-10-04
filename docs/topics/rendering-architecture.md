@@ -2,8 +2,9 @@
 
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
-desktop/Android validation delivered; Canvas2D remains production.
-Updated: 2026-10-03.
+desktop/Android validation delivered; isolated car projection experiment delivered;
+Canvas2D remains production.
+Updated: 2026-10-04.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
@@ -141,6 +142,48 @@ Earlier delivery evidence:
 A recording backend proves the data boundary, not GPU raster parity or performance.
 No Rust/WASM/WebGPU engine has been implemented. Intermittent phone hitches and
 cold-entry presentation remain separate measured performance work.
+
+## Sprite artwork on 3D proxies
+
+[Car projection lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/car-projection)
+implements the first bounded experiment, recorded in
+[037](../tactical/037-car-projection-experiment.md). It fits one approved compact-car
+side image to a closed, low-poly visual shell: bonnet, windscreen, roof, rear slope
+and side. Orbit, source, far-side and low perspective views expose depth; toggles
+show mesh edges, unchanged approved collision bounds and unpainted faces.
+
+`src/projection/CarProxy.ts` owns graphics-independent geometry in world-pixel
+X/ground-Y/height-Z coordinates, pinned source/crop provenance and fixed oblique
+source projection. Vertices are recovered from authored image points plus depth;
+UVs remain tied to that fixed projection while the viewing camera moves. This is
+actual textured geometry, not a billboard that turns with the camera.
+`CarProxyScene.ts` owns the Three.js/WebGL adapter, cameras, input and GPU resources;
+`CarProjectionPage.tsx` owns the DOM controls and lifecycle. Rendering is on demand.
+This lab deliberately does not enlarge the production `RenderBackend` contract.
+
+A visual proxy and a physical proxy have different jobs. The experimental shell
+extends beyond the existing 56 × 20 × 24 collision box in places; its fitted roof
+and alpha-cut silhouette do not replace approved support/collision geometry.
+The near wheels remain painted onto the side, and alpha holes are not solid
+geometry; wheel ground contact is approximate and lighting stays baked into the
+texture. Amber faces indicate missing artwork; they do not mirror or invent the
+hidden side. No source pixels, promoted asset banks or gameplay rules change.
+
+Full Chromium reproduces all 1,809 painted source pixels within one color level,
+with no uncovered or extra pixels, when viewed through the fixed source camera.
+That proves source registration, not unique reconstruction or arbitrary-angle
+fidelity. The same sprite admits many possible depths. Touch orbit, graphics
+context restoration and resource release on navigation have browser coverage.
+The experiment is registered and discoverable but excluded from approval:
+arbitrary orbit output is not an immutable native review snapshot.
+
+Next useful slice: fit the same car against its other existing directional views,
+assign explicit per-face image coverage and separate wheel geometry. Inspect the
+views together before adding new textures or generalizing to other assets.
+Do not assume stylized directional sprites are mutually consistent projections.
+First-person presentation would additionally need interiors, surfaces below the
+source view, close-up detail and world-wide geometry coverage. This experiment
+makes no performance claim; its cold load still decodes the full source atlas.
 
 ## Next architecture experiment
 

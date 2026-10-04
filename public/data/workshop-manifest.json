@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "car-projection",
+      "name": "Car projection lab",
+      "description": "Orbit a car built from sprite artwork and fitted 3D surfaces. Compare the source view and approved collision box.",
+      "url": "workshop.html#/tool/car-projection",
+      "mode": "adapter"
+    },
+    {
       "id": "railways",
       "name": "Railway previews",
       "description": "Review rail patterns, five trains in all four directions, station plans and structure studies for railway expansion.",
@@ -143,6 +150,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "car-projection",
+      "name": "Car projection experiment",
+      "description": "Exploratory 3D proxy; no approval or gameplay promotion.",
+      "toolId": "car-projection"
+    },
     {
       "id": "rail-patterns",
       "name": "Railway track patterns",
@@ -4640,6 +4653,17 @@
           "url": "/tilefun/workshop.html#/review/pattern:door-butcher-v1-right"
         }
       }
+    },
+    {
+      "id": "projection:compact-car-v1",
+      "batchId": "car-projection",
+      "name": "Blue compact car · projected 3D proxy",
+      "prompt": "Orbit the fitted surfaces, compare the source image and inspect approved collision bounds. This experiment has no gameplay promotion or approval action.",
+      "url": "/tilefun/workshop.html#/tool/car-projection",
+      "kind": "projection",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "fingerprint": "f752c5d3e22f5c6650b10a94b1ccfcbdeb9b80902a42f5634db741a5e04f929a",
+      "excluded": "Exploratory orbit view; not an immutable approval snapshot."
     },
     {
       "id": "pattern:rail-v1-rails-grey",
@@ -26755,5 +26779,5 @@
       }
     }
   ],
-  "inputDigest": "0dd7359c471edf7b6f50cce79b761585c21a3638903a5b8c56e894eb17e92f7f"
+  "inputDigest": "512361f75c958bc89887784713b14bb78fb6c77918a5ba1d00a2fe6255287dbf"
 }

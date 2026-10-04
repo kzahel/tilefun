@@ -3,6 +3,7 @@ import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { buildCarProjectionCandidate } from "./CarProjectionCandidate.js";
 import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
@@ -29,6 +30,7 @@ try {
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
+  candidates.push(await buildCarProjectionCandidate());
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));

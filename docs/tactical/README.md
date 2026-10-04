@@ -59,6 +59,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [036 First generated railway](036-first-generated-railway.md) | Horizontal two-town service, platforms, native blue train and bounded saved simulation |
 
+| [037 Car projection experiment](037-car-projection-experiment.md) | Delivered: source artwork on an orbitable 3D proxy; [rendering topic](../topics/rendering-architecture.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in
