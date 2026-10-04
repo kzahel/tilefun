@@ -99,6 +99,22 @@ function makeStairSteps(config: {
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
+  "prop-rail-platform-edge": {
+    sheetKey: "railway-review-v1",
+    col: 264 / 16,
+    row: 560 / 16,
+    width: 16,
+    height: 16,
+    collider: null,
+  },
+  "prop-rail-bench": {
+    sheetKey: "railway-review-v1",
+    col: 152 / 16,
+    row: 560 / 16,
+    width: 48,
+    height: 16,
+    collider: { offsetX: 0, offsetY: 0, width: 44, height: 8, zHeight: 12 },
+  },
   ...Object.fromEntries(
     [...STREET_PROP_RECIPES, ...COMMERCIAL_STREET_PROPS].map((p) => [
       p.type,

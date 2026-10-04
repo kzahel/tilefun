@@ -6,7 +6,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     id: "railways",
     name: "Railway previews",
     description:
-      "Review rail patterns, five trains in all four directions, station plans and structure studies before overworld integration.",
+      "Review rail patterns, five trains in all four directions, station plans and structure studies for railway expansion.",
     url: "workshop.html#/tool/railways",
     mode: "review",
   },
@@ -164,7 +164,8 @@ export const CITY_BATCHES: ReviewBatch[] = [
     { id: "rail-structures", name: "Railway bridge & tunnel studies" },
   ].map((b) => ({
     ...b,
-    description: "Isolated proposals for your review. No overworld railway integration.",
+    description:
+      "Isolated railway studies. The first horizontal blue-train service is now in current regional worlds.",
     toolId: "railways",
   })),
   {

@@ -1,7 +1,7 @@
 # Vehicles: generated traffic and roof riding
 
 Topic: vehicles
-Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in the current regional generator (regional-v12).
+Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-03.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)

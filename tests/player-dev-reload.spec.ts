@@ -149,7 +149,39 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.keyboard.press("Tab");
+    await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();
+    await expect(page.getByRole("button", { name: "Edit", exact: true })).toBeVisible();
+    await page.waitForFunction(() => {
+      const game = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      const p = game.stateView.playerEntity.position;
+      return (
+        !game.stateView.editorEnabled &&
+        game.renderer.isTerrainReady(
+          game.stateView.world.chunks.get(Math.floor(p.wx / 256), Math.floor(p.wy / 256)),
+        )
+      );
+    });
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
+    await page.keyboard.down("ArrowDown");
+    await page.waitForFunction(
+      (y) =>
+        (
+          document.querySelector("#game") as unknown as {
+            __game: import("../src/client/GameClient.js").GameClient;
+          }
+        ).__game.stateView.playerEntity.position.wy > y,
+      lot.entrance.y * 16 + 96,
+    );
+    await page.keyboard.up("ArrowDown");
     await page.keyboard.down("ArrowUp");
     await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "depart");
     await page.keyboard.up("ArrowUp");

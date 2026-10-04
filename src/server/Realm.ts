@@ -75,6 +75,8 @@ import {
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { RailwayStrategy } from "../railway/RailwayStrategy.js";
+import { RailwaySystem } from "../railway/RailwaySystem.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
@@ -187,6 +189,7 @@ export class Realm {
   private processedStructureKeys = new Set<string>();
   private proceduralActors!: ProceduralActors;
   traffic: TrafficSystem | null = null;
+  railway: RailwaySystem | null = null;
   private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */
@@ -493,6 +496,8 @@ export class Realm {
   /** Close persistence if the given worldId matches the currently loaded world. */
   async closePersistenceIfCurrent(worldId: string): Promise<void> {
     if (worldId === this.currentWorldId && this.saveManager) {
+      await this.railway?.close();
+      this.railway = null;
       await this.streaming?.close();
       await this.saveManager.close();
       this.saveManager = null;
@@ -792,6 +797,8 @@ export class Realm {
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
 
+        for (const service of this.railway?.services.values() ?? [])
+          preSteppedEntityIds.add(service.entity.id);
         for (const vehicle of this.traffic?.states.values() ?? [])
           preSteppedEntityIds.add(vehicle.entity.id);
         for (const player of players) {
@@ -813,6 +820,7 @@ export class Realm {
         );
 
         this.traffic?.tick(stepDt, players, this.streaming ? new Set(active) : undefined);
+        this.railway?.tick(stepDt, (range) => this.streaming?.rangeReady(range) ?? false);
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {
@@ -996,6 +1004,14 @@ export class Realm {
         maxCx: Math.ceil(((this.roomState?.document.width ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
         maxCy: Math.ceil(((this.roomState?.document.height ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
       };
+    if (this.railway && this.streaming) {
+      this.railway.update(
+        [...this.sessions.values()]
+          .filter((s) => !s.retired && !s.transitioning)
+          .map((s) => s.player),
+      );
+      this.streaming.interest.set("railways", this.railway.tickets());
+    }
     if (this.traffic) {
       this.traffic.visibleRanges = Array.isArray(range) ? range : [range as ChunkRange];
       const support = this.traffic.supportRanges([...this.sessions.values()].map((s) => s.player));
@@ -1314,6 +1330,8 @@ export class Realm {
     const worldMeta = overrideMeta ?? (await registry.getWorld(worldId));
     if (!worldMeta) throw new Error("World not found.");
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
+    await this.railway?.close();
+    this.railway = null;
     await this.streaming?.close();
     this.streaming = null;
     // Close previous save manager
@@ -1454,6 +1472,16 @@ export class Realm {
       trafficRecords,
     );
 
+    this.railway =
+      this.generator.terrain instanceof RailwayStrategy
+        ? new RailwaySystem(
+            this.generator.terrain.railways,
+            this.world,
+            this.entityManager,
+            this.propManager,
+            this.saveManager,
+          )
+        : null;
     if (this.traffic)
       this.traffic.canSpawn = (id, wx, wy) =>
         !this.records?.features.has(id) &&
@@ -1484,7 +1512,9 @@ export class Realm {
       // Find a walkable spawn point using a temporary entity
       const start =
         this.generation.type === "regional"
-          ? regionalStart(regionalWorld(this.generation.seed))
+          ? ((this.generator.terrain instanceof RailwayStrategy
+              ? this.generator.terrain.railways.start()
+              : undefined) ?? regionalStart(regionalWorld(this.generation.seed)))
           : { x: 0, y: 0 };
       const tempPlayer = createPlayer(start.x * TILE_SIZE, start.y * TILE_SIZE);
       await this.ensureReady(
@@ -1562,6 +1592,7 @@ export class Realm {
 
   async flushAsync(): Promise<void> {
     await this.mutations.drain();
+    await this.railway?.settle();
     for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
     await this.saveManager?.flushAsync();
@@ -1587,6 +1618,8 @@ export class Realm {
   /** Teardown mods and close persistence. */
   async destroy(): Promise<void> {
     await this.mutations.drain();
+    await this.railway?.close();
+    this.railway = null;
     await this.streaming?.close();
     const saves = this.saveManager;
     try {

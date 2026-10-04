@@ -1,4 +1,5 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { getEntityAABB } from "./collision.js";
 import type { Entity } from "./Entity.js";
 
 /**
@@ -13,6 +14,8 @@ export class SpatialHash {
   private cells = new Map<number, Entity[]>();
   /** entity id → current cell key */
   private entityCell = new Map<number, number>();
+  /** Long bodies can overlap a query whose cells do not include their origin. */
+  private largeEntities = new Map<number, Entity>();
 
   /** Pack chunk coordinates into a single integer key. Handles negative coords up to +-32767. */
   private static key(cx: number, cy: number): number {
@@ -26,6 +29,8 @@ export class SpatialHash {
 
   /** Add an entity to the hash. */
   insert(entity: Entity): void {
+    if (entity.collider && Math.max(entity.collider.width, entity.collider.height) >= CHUNK_SIZE_PX)
+      this.largeEntities.set(entity.id, entity);
     const cx = SpatialHash.toChunk(entity.position.wx);
     const cy = SpatialHash.toChunk(entity.position.wy);
     const k = SpatialHash.key(cx, cy);
@@ -40,6 +45,7 @@ export class SpatialHash {
 
   /** Remove an entity from the hash. */
   remove(entity: Entity): void {
+    this.largeEntities.delete(entity.id);
     const k = this.entityCell.get(entity.id);
     if (k === undefined) return;
     this.entityCell.delete(entity.id);
@@ -97,6 +103,17 @@ export class SpatialHash {
         }
       }
     }
+    for (const entity of this.largeEntities.values()) {
+      if (!entity.collider || result.includes(entity)) continue;
+      const b = getEntityAABB(entity.position, entity.collider);
+      if (
+        b.right >= minCx * CHUNK_SIZE_PX &&
+        b.left < (maxCx + 1) * CHUNK_SIZE_PX &&
+        b.bottom >= minCy * CHUNK_SIZE_PX &&
+        b.top < (maxCy + 1) * CHUNK_SIZE_PX
+      )
+        result.push(entity);
+    }
     return result;
   }
 
@@ -132,5 +149,6 @@ export class SpatialHash {
   clear(): void {
     this.cells.clear();
     this.entityCell.clear();
+    this.largeEntities.clear();
   }
 }

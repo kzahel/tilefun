@@ -566,7 +566,19 @@ export class TileRenderer implements TerrainPresentation {
 
         // 4. Road layer (asphalt base + overlay autotile)
         const road = chunk.getRoad(lx, ly);
-        if (isCommercialSurface(road) || (isCitySurface(road) && getGlobalRoad)) {
+        if (road === RoadType.RailHorizontalTop || road === RoadType.RailHorizontalBottom) {
+          // Native grey straight rail, split into the two 16px terrain cells.
+          const sheet = sheets.get("me-complete");
+          if (sheet)
+            sheet.drawTile(
+              offCtx,
+              0,
+              292 + (road === RoadType.RailHorizontalBottom ? 1 : 0),
+              dx,
+              dy,
+              1,
+            );
+        } else if (isCommercialSurface(road) || (isCitySurface(road) && getGlobalRoad)) {
           const sheet = sheets.get("me-complete");
           if (sheet)
             drawCitySurfacePieces(

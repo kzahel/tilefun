@@ -57,6 +57,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [035 Current world generation](035-current-world-generation.md) | One evolving regional generator, explicit same-seed recreation and finite archived city reviews |
 
+| [036 First generated railway](036-first-generated-railway.md) | Horizontal two-town service, platforms, native blue train and bounded saved simulation |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

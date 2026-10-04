@@ -54,7 +54,10 @@ test("traffic revision creates a real Worker world and survives reload", async (
     seed: 2026,
     preset: "temperate-v1",
   };
-  await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
+  const arrival = { x: 300, y: 519, generation };
+  await page.goto(
+    `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+  );
   const c = page.locator("#game");
   await expect(c).toHaveAttribute("data-ready", "true");
   await page.getByPlaceholder("World name...").fill("Traffic test");

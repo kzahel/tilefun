@@ -2,14 +2,14 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-03.
+Updated: 2026-10-04.
 
 ## Current generation policy
 
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
-regional creation/runtime version, currently **regional-v12**. It uses the existing
-connected dense neighborhood and gentle traffic composition previously used by v11.
+regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road
+traffic and the [first generated two-town railway](trains.md).
 It does not automatically promote the v7–v10 review candidates. Classic, Island and
 Flat remain distinct simple presets, not historical regional revisions.
 

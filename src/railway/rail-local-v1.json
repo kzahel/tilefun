@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "sourceSha256": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+  "image": "assets/sprites/rail-local-blue-v1.png",
+  "width": 456,
+  "height": 62,
+  "sha256": "7bf4b1888e256c2734dac8bcbc54cc5639a975aa7f17638d70ab9e0ea0ee0f7d",
+  "parts": ["Exterior_Train_Blue_Left", "Exterior_Train_Blue_Middle", "Exterior_Train_Blue_Right"],
+  "authorization": "User accepted the previews in chat, then explicitly authorized the two-town moving-train integration on 2026-10-04. Workshop verdict records are unchanged."
+}

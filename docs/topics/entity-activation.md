@@ -107,3 +107,12 @@ Create bounded child tacticals as implementation slices are selected. Existing
 complete simulation sleep. Execution changes require the standard checks
 and `npm run streaming:bench -- --assert-ready` in addition to focused regression
 tests; see [performance validation](performance.md#evidence-and-validation).
+
+## Generated railway services
+
+[Trains](trains.md) use a bounded service controller with at most four trains and
+footprint/braking-halo dependency tickets. One `railServices` record owns each
+train, separate from ordinary entity records. Retirement waits for a finite save
+barrier; returning to either station restores the same frozen service. Unknown
+terrain pauses movement. [Tactical 036](../tactical/036-first-generated-railway.md)
+records the initial implementation and validation.

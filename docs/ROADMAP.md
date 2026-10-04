@@ -14,12 +14,12 @@ implementation scope and evidence.
 | Entity persistence and unloading | Tick-aware NPC separation; target architecture researched and documented | Incremental entity saves first, then shared tickets/readiness, lazy residency and eviction; [entity activation](topics/entity-activation.md), [planned sequence](tactical/019-entity-streaming-and-persistence.md) |
 | Regional cities | One current explorer/game generator, explicit same-seed recreation, approved dense neighborhood and v6 commercial streets | Review thirteen staged v7–v10 parking/park/architecture/pedestrian views; [city generation](topics/city-generation.md) |
 | Road vehicles | Approved 180-view bank, gentle generated-road traffic and roof riding in the current regional generator | Playtest the Traffic playground and current density/turning/jumps; [vehicles](topics/vehicles.md) |
-| Generated railways | 32 isolated Workshop previews; no overworld railways | Human review of rail patterns, four-direction train motion, stations and structure studies; [trains](topics/trains.md) |
+| Generated railways | First horizontal two-town service with furnished platforms and a saved reversing train | Station information and boarding; review larger networks and structures before expansion; [trains](topics/trains.md) |
 | Workshop and source art | Unified review inbox, authenticated feedback, source catalog and outdoor metadata/scene annotations | Address exact recorded feedback and review candidate geometry; [art review](topics/art-review.md) |
 | Play ideas | Public text/screenshot suggestions, hold-to-speak input, spoken proofreading and private Workshop management | Try recognition and readback on the child's device; [play ideas topic](topics/play-ideas.md) |
 | Patterns and interiors | Shared semantic brushes, persistent gameplay room editing, furniture and static-layer caching | Review gameplay room editing and tree kit; explicit prefab import/promotion next; [patterns and interiors](topics/patterns-and-interiors.md) |
 
-New regional worlds use regional-v12. Retired saves can be recreated with the same
+New regional worlds use regional-v13. Retired saves can be recreated with the same
 seed; exact review scenes remain archived. City candidates require explicit approval
 and promotion before current-generator inclusion. Read the live
 Workshop inbox for decisions after the documented checkpoints.

@@ -115,8 +115,29 @@ for (const kind of ["butcher", "condo-bay"]) {
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    // New worlds open in the editor; walk-through is deliberately play-only.
-    await page.keyboard.press("Tab");
+    await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();
+    // Fresh worlds start in play mode; Tab would disable automatic door entry.
+    await expect(page.getByRole("button", { name: "Edit", exact: true })).toBeVisible();
+    await page.waitForFunction(() => {
+      const game = (
+        document.querySelector("#game") as unknown as {
+          __game: import("../src/client/GameClient.js").GameClient;
+        }
+      ).__game;
+      const p = game.stateView.playerEntity.position;
+      return (
+        !game.stateView.editorEnabled &&
+        game.renderer.isTerrainReady(
+          game.stateView.world.chunks.get(Math.floor(p.wx / 256), Math.floor(p.wy / 256)),
+        )
+      );
+    });
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+        ),
+    );
     // Observe the actual presented actor, not just its already-safe authority position.
     await page.evaluate(() => {
       const game = (
@@ -152,6 +173,18 @@ for (const kind of ["butcher", "condo-bay"]) {
         return entities;
       };
     });
+    // Clear the arrival latch with real movement before making a fresh approach.
+    await page.keyboard.down("ArrowDown");
+    await page.waitForFunction(
+      (y) =>
+        (
+          document.querySelector("#game") as unknown as {
+            __game: import("../src/client/GameClient.js").GameClient;
+          }
+        ).__game.stateView.playerEntity.position.wy > y,
+      door.outside.wy + 64,
+    );
+    await page.keyboard.up("ArrowDown");
     await page.keyboard.down("ArrowUp");
     const fade = page.locator('[data-door-fade="true"]');
     await expect(fade).toHaveAttribute("data-stage", "depart");

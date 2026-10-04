@@ -24,7 +24,7 @@ export type GenerationDescriptor =
     };
 
 /** Bump when generation output changes; older saves are recreated, not emulated. */
-export const CURRENT_REGIONAL_VERSION = "regional-v12" as const;
+export const CURRENT_REGIONAL_VERSION = "regional-v13" as const;
 export const REGIONAL_REVISIONS = [
   { version: CURRENT_REGIONAL_VERSION, label: "Current regional" },
 ] as const;

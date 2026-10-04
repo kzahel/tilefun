@@ -4,6 +4,7 @@ import type { PersistenceStore, SaveEntry } from "./PersistenceStore.js";
 import type { RecordStore } from "./RecordStore.js";
 
 export const WORLD_COLLECTIONS = [
+  "railServices",
   "meta",
   "chunks",
   "players",

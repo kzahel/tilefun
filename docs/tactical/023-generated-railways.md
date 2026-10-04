@@ -1,6 +1,6 @@
 # Generated regional railways, stations and structures
 
-Status: parent plan, 2026-10-03; isolated review previews delivered in [025](025-railway-workshop-previews.md), no overworld railway runtime.
+Status: parent plan, updated 2026-10-04; previews delivered in [025](025-railway-workshop-previews.md), first horizontal two-town service delivered in [036](036-first-generated-railway.md).
 [Trains](../topics/trains.md) owns current direction. This replaces the initial
 straight-shuttle/player-built proposal following the user's clarified request:
 railways are generated world infrastructure, like roads, connecting towns and

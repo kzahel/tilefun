@@ -122,7 +122,7 @@ test("district notes round trip through the isolated inbox and are discoverable 
     page.locator('a[href*="run=districts"][href*="district-v1-neighborhood"]').first(),
   ).toBeVisible();
 });
-test("archived dense review hands off to current gameplay with moving planned walkers", async ({
+test("archived dense review hands off to the current station start with a moving train", async ({
   page,
 }) => {
   await page.goto(url);
@@ -146,17 +146,19 @@ test("archived dense review hands off to current gameplay with moving planned wa
         }
       ).__game;
       return g.stateView.entities
-        .filter((e) => e.type.startsWith("person"))
+        .filter((e) => e.type === "train-local-v1")
         .map((e) => ({ id: e.id, ...e.position }));
     });
   await expect.poll(async () => (await read()).length).toBeGreaterThan(0);
   const before = await read();
   await expect
-    .poll(async () =>
-      (await read()).some((e) => {
-        const old = before.find((o) => o.id === e.id);
-        return old && Math.hypot(e.wx - old.wx, e.wy - old.wy) > 8;
-      }),
+    .poll(
+      async () =>
+        (await read()).some((e) => {
+          const old = before.find((o) => o.id === e.id);
+          return old && Math.hypot(e.wx - old.wx, e.wy - old.wy) > 8;
+        }),
+      { timeout: 15000 },
     )
     .toBe(true);
   await page.screenshot({ path: "/tmp/tilefun-dense-game.png" });

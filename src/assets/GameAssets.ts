@@ -1,6 +1,7 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { loadImage } from "./AssetLoader.js";
 import { MODERN_INTERIORS_SHEET_KEY } from "./ModernInteriorsAtlasIndex.js";
@@ -15,6 +16,8 @@ export interface GameAssets {
 
 /** Sprite asset manifest: key → { path, width, height }. */
 export const SPRITE_MANIFEST: { key: string; path: string; w: number; h: number }[] = [
+  { key: "train-local-v1", path: trainBank.image, w: trainBank.width, h: trainBank.height },
+  { key: "railway-review-v1", path: "assets/tilesets/railway-review-v1.png", w: 16, h: 16 },
   { key: "door-butcher-v1", path: "assets/sprites/door-butcher-v1.png", w: 16, h: 32 },
   ...PROMOTED_CHARACTERS.map((c) => ({
     key: c.sheetKey,

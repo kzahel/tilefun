@@ -130,7 +130,12 @@ export class RealmRecords {
   ) {
     entities.onMutation = (entity) => this.changed(entity);
     entities.onSpawn = (entity) => {
-      if (entity.type === "player" || entity.type.startsWith("vehicle-v1:")) return;
+      if (
+        entity.type === "player" ||
+        entity.type.startsWith("vehicle-v1:") ||
+        entity.type === "train-local-v1"
+      )
+        return;
       this.attach(entity);
       if (!this.hydrating) {
         this.changed(entity);
