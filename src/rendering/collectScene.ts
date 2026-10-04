@@ -9,7 +9,7 @@ import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { entityHeading, meshAssetFor } from "./EntityMeshPose.js";
-import { appendGrassBladeItems, collectGrassBladeItems } from "./GrassBladeRenderer.js";
+import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import { yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
@@ -55,7 +55,9 @@ export function collectScene(
   drawProps?: ReadonlySet<number>,
   frame?: SceneFrame,
 ): SceneItem[] {
-  const items = frame ? frame.begin(hasGrass) : [];
+  const grassAlpha = hasGrass ? grassOpacity(camera.zoom) : 0;
+  const visibleGrass = grassAlpha > 0;
+  const items = frame ? frame.begin(visibleGrass) : [];
   const ghostByEntityId =
     extrapolationGhosts && extrapolationGhosts.length > 0
       ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
@@ -262,7 +264,7 @@ export function collectScene(
   }
 
   // --- Grass blades ---
-  if (hasGrass) {
+  if (visibleGrass) {
     const viewport = {
       minWx: vpTL.wx,
       minWy: vpTL.wy,
@@ -270,12 +272,16 @@ export function collectScene(
       maxWy: vpBR.wy,
     };
     const nowSec = performance.now() / 1000;
-    if (frame) {
-      appendGrassBladeItems(world, entities, visible, viewport, nowSec, frame.grass, items);
-    } else {
-      const grassItems = collectGrassBladeItems(world, entities, visible, viewport, nowSec);
-      for (const g of grassItems) items.push(g);
-    }
+    appendGrassBladeItems(
+      world,
+      entities,
+      visible,
+      viewport,
+      nowSec,
+      frame?.grass ?? new GrassFrameBuffer(),
+      items,
+      grassAlpha === 1 ? undefined : grassAlpha,
+    );
   }
 
   // --- Elevation tiles ---

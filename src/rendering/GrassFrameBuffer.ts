@@ -35,7 +35,7 @@ export class GrassFrameBuffer {
     }
   }
 
-  next(wx: number, wy: number, variant: number, angle: number): GrassItem {
+  next(wx: number, wy: number, variant: number, angle: number, alpha?: number): GrassItem {
     const index = this.used++;
     let item = this.items[index];
     if (!item) {
@@ -49,6 +49,7 @@ export class GrassFrameBuffer {
       item.variant = variant;
       item.angle = angle;
     }
+    item.alpha = alpha;
     return item;
   }
 

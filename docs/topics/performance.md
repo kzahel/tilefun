@@ -407,12 +407,30 @@ run order/temperature still vary. Current code also completes the one-minute
 This supplies current long-run evidence without rewriting 052's unmeasured cases.
 
 
-Next: measure cached grass depth order plus a stable merge with live scene items
-in the shared collector. The post-change five-second GPU profile still attributes
-1,218 ms to `collectScene` and 725 ms to its anonymous callbacks (including sort),
-versus 303 ms to quad generation and 27 ms to GC. Inlining and instrumentation
-limit attribution. Preserve equal-depth order, viewport/chunk invalidation and
-independent host lifetimes, and retain the change only if comparison beats the
-native sort. Keep Canvas drawing cost as a separate thread and renderer/pacing
-defaults unchanged. [055](../tactical/055-overview-frame-reuse.md) records full
-validation, memory tradeoffs, the new profile and measurement limits.
+## Current optimization stopping point
+
+[059: Grass overview LOD](../tactical/059-grass-overview-lod.md) is the agreed
+final small performance slice. Individual blades retain full detail at zoom
+>=0.5, fade smoothly between 0.25 and 0.5, and disappear at <=0.25. The shared
+scene collector skips their placement lookup, animation/push, item creation and
+sorting when hidden, and releases its grass frame storage. Base terrain remains
+visible. Optional grass opacity is backend-neutral scene data; the common raster
+adapter preserves inherited alpha around each blade. Game and outdoor embedded
+labs share the policy, independently of device pixel ratio. Assets, generation,
+ordinary-zoom appearance and renderer/pacing defaults are unchanged.
+
+After validating this slice, pause engine optimization. Cached grass ordering,
+nearby-entity filtering, deeper GPU instancing and normal-play hitch attribution
+are deferred candidates, not an autonomous implementation queue. Resume when
+ordinary play shows a material problem, sustained mobile heat/battery use needs
+attention, or a feature consumes existing frame headroom. Keep the benchmark
+runner available for those decisions. The 055 profile remains evidence for
+future investigation; it does not require pursuing every remaining hot function.
+
+
+The [059 Mac measurements](../benchmarks/059-grass-lod.md) show overview render
+CPU p95 dropping from 47.4 to 1.6 ms on Canvas and 9.4 to 1.6 ms on GPU. Both
+0.1× after runs record zero slow intervals over 20 seconds of movement, with
+frame p95 near 9 ms on the 120 Hz Mac. Full-detail 1× controls remain healthy.
+This gain deliberately trades distant blade detail for less work. Pixel timing
+was not measured: its fixed <=31°C/status-zero gate expired at 32.6–32.7°C.

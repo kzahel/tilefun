@@ -405,3 +405,19 @@ halo work but cannot bypass the selected cap. The experimental small-batch mode
 allows gaps while new chunks build and retains completed imagery during edits;
 collection/submission must never perform an implicit completion pass. Frame
 pacing and presentation debt are measured together; see [047](../tactical/047-terrain-pacing-and-zoom-stress.md).
+
+Grass LOD is shared scene policy: full detail at >=0.5×, smooth opacity fade to
+zero at 0.25×, then omission before collection/animation/sorting. Opacity travels
+as optional scalar `GrassItem.alpha`; the common raster adapter applies it within
+saved state. No backend independently chooses grass density or visibility. Game
+and outdoor embedded hosts inherit it through `collectScene`; base terrain and
+explicit grass-free diagnostic/indoor hosts are unaffected. See
+[059](../tactical/059-grass-overview-lod.md) for validation and the performance
+stopping point.
+
+Raster parity remains fixture-scoped. 059's new grass diagnostic exposed
+pre-existing Canvas/WebGL nearest-neighbor differences at fractional scales and
+rotated blade edges, including at full opacity. Fixed-angle, integer-projection
+fixtures establish opacity/composition parity; actual-zoom images are visually
+inspected without asserting pixel identity. The sampling difference is recorded
+for future renderer fidelity work, not expanded into this LOD optimization.

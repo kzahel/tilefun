@@ -73,6 +73,8 @@ export interface GrassItem {
   variant: number;
   /** Pre-computed sway + push angle in radians. */
   angle: number;
+  /** Presentation opacity for grass LOD; omitted/undefined means full detail. */
+  alpha?: number | undefined;
 }
 
 export interface ParticleItem {

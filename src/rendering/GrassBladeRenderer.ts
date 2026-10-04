@@ -10,6 +10,14 @@ import type { GrassItem, SceneItem } from "./SceneItem.js";
 
 export { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 
+/** Shared presentation LOD in logical camera zoom, independent of backend/DPR.
+ * At overview scale the base grass terrain carries the surface detail instead.
+ */
+export function grassOpacity(zoom: number): number {
+  const t = Math.max(0, Math.min(1, (zoom - 0.25) / 0.25));
+  return t * t * (3 - 2 * t);
+}
+
 interface BladeInstance {
   wx: number;
   wy: number;
@@ -142,6 +150,7 @@ export function appendGrassBladeItems(
   nowSec: number,
   scratch: GrassFrameBuffer,
   result: SceneItem[],
+  alpha?: number,
 ): void {
   scratch.begin(entityPositions);
   // World-space margin for culling (grass blades are small, 30 world pixels is generous)
@@ -230,7 +239,7 @@ export function appendGrassBladeItems(
         // 3. Blend: push overrides sway but keeps a trace of sway for liveliness
         const angle = pushAngle !== 0 ? pushAngle + swayAngle * 0.3 : swayAngle;
 
-        result.push(scratch.next(blade.wx, blade.wy, blade.variant, angle));
+        result.push(scratch.next(blade.wx, blade.wy, blade.variant, angle, alpha));
       }
     }
   }

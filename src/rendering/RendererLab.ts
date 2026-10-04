@@ -1,14 +1,19 @@
 import { loadModernInteriorsAtlasIndex } from "../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { Direction } from "../entities/Entity.js";
 import type { InteriorContent } from "../interiors/InteriorPresentation.js";
 import { vehicleFrameDirection } from "../traffic/Vehicle.js";
+import { Chunk } from "../world/Chunk.js";
+import { Camera } from "./Camera.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
+import { collectScene } from "./collectScene.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { COMPACT_CAR_MESH, poseOrientation, yawOrientation } from "./MeshPresentation.js";
 import { OverlayFrame } from "./OverlayFrame.js";
 import { touchRaster } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
+import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 
 function required<T>(value: T | null | undefined): T {
@@ -64,6 +69,8 @@ const items: SceneItem[] = [
   { ...sprite(20, 24, 1), flipX: true, zOffset: 8 },
   { kind: "particle", wx: 0, wy: 0, z: 16, size: 4, color: "#f8dd17", alpha: 0.5, sortKey: 100 },
 ];
+const grassFrame = new SceneFrame();
+let grassItems: SceneItem[] | null = null;
 let clips = false;
 let meshMode = false;
 let carMode = false;
@@ -80,13 +87,14 @@ const car = {
 
 function draw() {
   gpu.beginFrame();
-  const selectedItems = carMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items;
+  const selectedItems =
+    grassItems ?? (carMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items);
   if (carMode && foreground) selectedItems.reverse();
   const sceneItems = clips
     ? selectedItems.map((item) => (item.kind === "sprite" ? { ...item, hasShadow: false } : item))
     : selectedItems;
   const passes: RenderPass[] = [
-    { kind: "clear", color: "#243245" },
+    { kind: "clear", color: grassItems ? "#638543" : "#243245" },
     {
       kind: "scene",
       items: sceneItems,
@@ -168,6 +176,8 @@ function draw() {
   const report = {
     mismatches,
     maxError,
+    grassCount: sceneItems.filter((item) => item.kind === "grass").length,
+    grassAlpha: sceneItems.find((item) => item.kind === "grass")?.alpha ?? 1,
     ...gpu.surface.stats,
     meshDraws: gpu.meshes.draws,
     meshState: gpu.meshes.car.state,
@@ -190,6 +200,59 @@ function setCarHeading(yaw: number) {
 }
 const lab = {
   draw,
+  async setGrassDetail(zoom: number, fixedProjection = false) {
+    if (!sheets.has("grass-blades")) {
+      const image = new Image();
+      image.src = `${import.meta.env.BASE_URL}assets/sprites/grass-blades.png`;
+      await image.decode();
+      sheets.set("grass-blades", new Spritesheet(image, 8, 8));
+      native.addSpriteAssets(sheets);
+      gpu.addSpriteAssets(sheets);
+    }
+    const chunk = new Chunk();
+    chunk.autotileComputed = true;
+    chunk.blendBase.fill(TerrainId.Grass);
+    const camera = new Camera();
+    camera.snapTo(128, 128);
+    camera.setViewport(view.viewportWidth, view.viewportHeight);
+    camera.zoom = zoom;
+    // Fixed projection isolates LOD opacity from pre-existing fractional-scale
+    // nearest-neighbor sampling differences between Canvas and WebGL.
+    Object.assign(view, { x: camera.x, y: camera.y, zoom: fixedProjection ? 1 : zoom });
+    const world = {
+      getHeightAt: () => 0,
+      getRoadAt: () => 0,
+      getChunkIfLoaded: (x: number, y: number) => (x === 0 && y === 0 ? chunk : undefined),
+    };
+    grassItems = collectScene(
+      [],
+      [],
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      { collectElevationItems: () => [] },
+      [],
+      true,
+      undefined,
+      undefined,
+      grassFrame,
+    );
+    // Freeze blade rotation for raster parity; animation is covered by collector tests.
+    for (const item of grassItems) if (item.kind === "grass") item.angle = 0;
+    grassItems.push(sprite(112, 128, 0), {
+      kind: "particle",
+      wx: 150,
+      wy: 140,
+      sortKey: 140,
+      z: 0,
+      size: 8,
+      color: "#f8dd17",
+      alpha: 1,
+    });
+    grassItems.sort((a, b) => a.sortKey - b.sortKey);
+    return draw();
+  },
   async probeWebGpu(forceWebGL = false) {
     const { probeWebGpuAsset } = await import("./WebGpuAssetProbe.js");
     return probeWebGpuAsset(forceWebGL);
@@ -291,6 +354,7 @@ const lab = {
     return draw();
   },
   dispose() {
+    grassFrame.clear();
     native.dispose();
     gpu.dispose();
   },

@@ -1,0 +1,2671 @@
+{
+  "schema": 1,
+  "policy": {
+    "fullZoom": 0.5,
+    "hiddenZoom": 0.25,
+    "transition": "smoothstep opacity"
+  },
+  "limits": [
+    "Sequential Mac observations, not randomized trials. Each case starts a fresh same-seed world with real noclip sprint input, 20-second movement, 3-second warm windows and faster-fill terrain.",
+    "Mac uses headed bundled Chromium at 1280x900; retained timings exclude concurrent test/build suites. Normal-zoom after cases are controls, not a new before/after ordinary-play comparison.",
+    "Other surface-cutaway work was developed concurrently, outside this seeded outdoor fixture; source revision/dirty metadata is preserved.",
+    "Pixel movement was not measured because the fixed <=31 C / status zero entry gate timed out after 120 seconds at 32.6–32.7 C; GPU phone run was not attempted after the same blocker."
+  ],
+  "runs": [
+    {
+      "name": "canvas-before",
+      "report": {
+        "revision": "8651480a0f5355cd82610ca4b976bd73a97d107c",
+        "dirty": false,
+        "date": "2026-10-04T15:02:09.037Z",
+        "platform": "darwin 25.6.0 arm64",
+        "cpu": "Apple M4 Pro",
+        "browser": "153.0.8010.12",
+        "headed": true,
+        "input": "keyboard",
+        "renderer": "canvas",
+        "terrainPacing": "throughput",
+        "noclip": true,
+        "meshes": false,
+        "motionZooms": [0.1],
+        "movementSeconds": 20,
+        "settleSeconds": 30,
+        "warmSeconds": 3,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "fixtures": [
+          {
+            "version": "current",
+            "zoom": 0.1,
+            "displayCadenceMs": 8.300000000000068,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 200,
+                  "p50": 25,
+                  "p95": 50,
+                  "p99": 50.40000000000009,
+                  "max": 50.899999999999636
+                },
+                "renderMs": {
+                  "count": 201,
+                  "p50": 20,
+                  "p95": 43.099999997764826,
+                  "p99": 47.399999998509884,
+                  "max": 48.899999998509884
+                },
+                "updateMs": {
+                  "count": 319,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.5,
+                  "p99": 0.9000000022351742,
+                  "max": 4.599999997764826
+                },
+                "cadenceMs": 25,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 138,
+                "framesOverCadence": 80,
+                "framesOver25Ms": 95,
+                "framesOver50Ms": 7,
+                "renderedFrames": 201,
+                "elapsedMs": 5317,
+                "travelledPx": 0,
+                "maxStationaryMs": 5317.000000000001,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 38,
+                "incompleteCacheFrames": 40,
+                "staleCacheFrames": 38,
+                "maxIncomplete": 93,
+                "longestGapFrames": 40,
+                "firstReadyFrame": 62,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 9218,
+                "peakPending": 100,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 67,
+                  "p50": 41.70000000000073,
+                  "p95": 50.100000000000364,
+                  "p99": 58.5,
+                  "max": 58.5
+                },
+                "renderMs": {
+                  "count": 68,
+                  "p50": 42.5,
+                  "p95": 47.19999999925494,
+                  "p99": 48.399999998509884,
+                  "max": 48.399999998509884
+                },
+                "updateMs": {
+                  "count": 182,
+                  "p50": 0.09999999776482582,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.30000000074505806,
+                  "max": 0.30000000074505806
+                },
+                "cadenceMs": 41.70000000000073,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 67,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 67,
+                "framesOver50Ms": 6,
+                "renderedFrames": 68,
+                "elapsedMs": 2991.7,
+                "travelledPx": 0,
+                "maxStationaryMs": 2991.7000000000007,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 448,
+                  "p50": 41.70000000000073,
+                  "p95": 50.5,
+                  "p99": 50.900000000001455,
+                  "max": 58.5
+                },
+                "renderMs": {
+                  "count": 449,
+                  "p50": 41.600000001490116,
+                  "p95": 47.399999998509884,
+                  "p99": 50.80000000074506,
+                  "max": 52.19999999925494
+                },
+                "updateMs": {
+                  "count": 1200,
+                  "p50": 0.09999999776482582,
+                  "p95": 0.30000000074505806,
+                  "p99": 0.8000000007450581,
+                  "max": 3.899999998509884
+                },
+                "cadenceMs": 41.70000000000073,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 448,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 448,
+                "framesOver50Ms": 54,
+                "renderedFrames": 449,
+                "elapsedMs": 19966.6,
+                "travelledPx": 2937.2275056406233,
+                "maxStationaryMs": 0,
+                "displacement": {
+                  "x": -2944.5888337656233,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 3,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 6666,
+                "peakPending": 17,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 4763.192650187499,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1818.6038164218755,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 59,
+                  "p50": 49.900000000001455,
+                  "p95": 58.19999999999709,
+                  "p99": 58.30000000000291,
+                  "max": 58.30000000000291
+                },
+                "renderMs": {
+                  "count": 60,
+                  "p50": 43.400000002235174,
+                  "p95": 48,
+                  "p99": 48.599999997764826,
+                  "max": 48.599999997764826
+                },
+                "updateMs": {
+                  "count": 170,
+                  "p50": 0,
+                  "p95": 0.10000000149011612,
+                  "p99": 0.19999999925494194,
+                  "max": 0.19999999925494194
+                },
+                "cadenceMs": 49.900000000001455,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 59,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 59,
+                "framesOver50Ms": 9,
+                "renderedFrames": 60,
+                "elapsedMs": 2783.399999999998,
+                "travelledPx": 0,
+                "maxStationaryMs": 2783.399999999987,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 1796.5194091796875,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1796.5194091796875,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 63,
+                  "p50": 49.900000000001455,
+                  "p95": 50.799999999995634,
+                  "p99": 58.30000000000291,
+                  "max": 58.30000000000291
+                },
+                "renderMs": {
+                  "count": 64,
+                  "p50": 43.100000001490116,
+                  "p95": 48.900000002235174,
+                  "p99": 49.399999998509884,
+                  "max": 49.399999998509884
+                },
+                "updateMs": {
+                  "count": 181,
+                  "p50": 0,
+                  "p95": 0.19999999925494194,
+                  "p99": 0.20000000298023224,
+                  "max": 0.30000000074505806
+                },
+                "cadenceMs": 49.900000000001455,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 63,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 63,
+                "framesOver50Ms": 11,
+                "renderedFrames": 64,
+                "elapsedMs": 2975,
+                "travelledPx": 0,
+                "maxStationaryMs": 2975,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 1796.5194091796875,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1796.5194091796875,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "gpu-before",
+      "report": {
+        "revision": "8651480a0f5355cd82610ca4b976bd73a97d107c",
+        "dirty": true,
+        "date": "2026-10-04T15:02:48.742Z",
+        "platform": "darwin 25.6.0 arm64",
+        "cpu": "Apple M4 Pro",
+        "browser": "153.0.8010.12",
+        "headed": true,
+        "input": "keyboard",
+        "renderer": "gpu",
+        "terrainPacing": "throughput",
+        "noclip": true,
+        "meshes": false,
+        "motionZooms": [0.1],
+        "movementSeconds": 20,
+        "settleSeconds": 30,
+        "warmSeconds": 3,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "fixtures": [
+          {
+            "version": "current",
+            "zoom": 0.1,
+            "displayCadenceMs": 8.300000000000011,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 354,
+                  "p50": 8.300000000000182,
+                  "p95": 15.700000000000728,
+                  "p99": 16.700000000000273,
+                  "max": 25
+                },
+                "renderMs": {
+                  "count": 355,
+                  "p50": 6.5,
+                  "p95": 8.899999998509884,
+                  "p99": 9.199999999254942,
+                  "max": 21
+                },
+                "updateMs": {
+                  "count": 187,
+                  "p50": 0.19999999925494194,
+                  "p95": 0.6999999992549419,
+                  "p99": 1,
+                  "max": 1.1000000014901161
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 18,
+                "framesOverCadence": 18,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 355,
+                "elapsedMs": 3108.3999999999996,
+                "travelledPx": 0,
+                "maxStationaryMs": 3108.400000000016,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 24,
+                "incompleteCacheFrames": 39,
+                "staleCacheFrames": 41,
+                "maxIncomplete": 143,
+                "longestGapFrames": 39,
+                "firstReadyFrame": 62,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 9197,
+                "peakPending": 177,
+                "textureUploadedBytes": 125830144,
+                "vertexUploadedBytes": 897131008,
+                "drawCalls": 105337,
+                "maxLoaded": 300,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 87442528,
+                    "textures": 253,
+                    "uploads": 555,
+                    "uploadedBytes": 180049504,
+                    "vertexUploadedBytes": 897793664,
+                    "drawCalls": 107324,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 353,
+                  "p50": 8.300000000000182,
+                  "p95": 9.300000000000182,
+                  "p99": 16.699999999999818,
+                  "max": 16.800000000000182
+                },
+                "renderMs": {
+                  "count": 354,
+                  "p50": 7.799999997019768,
+                  "p95": 8.600000001490116,
+                  "p99": 8.899999998509884,
+                  "max": 15.900000002235174
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.30000000074505806,
+                  "max": 0.30000000074505806
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 7,
+                "framesOverCadence": 7,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 354,
+                "elapsedMs": 2999.8999999999996,
+                "travelledPx": 0,
+                "maxStationaryMs": 2999.8999999999924,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 1428777984,
+                "drawCalls": 111864,
+                "maxLoaded": 300,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 87442528,
+                    "textures": 253,
+                    "uploads": 555,
+                    "uploadedBytes": 180049504,
+                    "vertexUploadedBytes": 2358860416,
+                    "drawCalls": 221716,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 2240,
+                  "p50": 8.299999999999272,
+                  "p95": 16.599999999998545,
+                  "p99": 17,
+                  "max": 17.700000000000728
+                },
+                "renderMs": {
+                  "count": 2241,
+                  "p50": 8.199999999254942,
+                  "p95": 9.400000002235174,
+                  "p99": 11.600000001490116,
+                  "max": 18.100000001490116
+                },
+                "updateMs": {
+                  "count": 1200,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.29999999701976776,
+                  "p99": 0.5,
+                  "max": 0.7000000029802322
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 160,
+                "framesOverCadence": 160,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 2241,
+                "elapsedMs": 19999.899999999998,
+                "travelledPx": 2942.1350984140627,
+                "maxStationaryMs": 16.600000000002183,
+                "displacement": {
+                  "x": -2944.5889892578116,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 8448,
+                "peakPending": 15,
+                "textureUploadedBytes": 81788928,
+                "vertexUploadedBytes": 9056062848,
+                "drawCalls": 671470,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 4790.1849147187495,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.5959254609377,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 67028064,
+                    "textures": 257,
+                    "uploads": 867,
+                    "uploadedBytes": 261838432,
+                    "vertexUploadedBytes": 11459324672,
+                    "drawCalls": 896662,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 59,
+                  "p50": 8.30000000000291,
+                  "p95": 16.599999999998545,
+                  "p99": 17.5,
+                  "max": 17.5
+                },
+                "renderMs": {
+                  "count": 60,
+                  "p50": 8.099999997764826,
+                  "p95": 9,
+                  "p99": 9.5,
+                  "max": 9.5
+                },
+                "updateMs": {
+                  "count": 31,
+                  "p50": 0.09999999776482582,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.20000000298023224,
+                  "max": 0.20000000298023224
+                },
+                "cadenceMs": 8.30000000000291,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 3,
+                "framesOverCadence": 3,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 60,
+                "elapsedMs": 517,
+                "travelledPx": 0,
+                "maxStationaryMs": 517,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 263854080,
+                "drawCalls": 15300,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 1838.234375,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1838.234375,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 65455200,
+                    "textures": 251,
+                    "uploads": 867,
+                    "uploadedBytes": 261838432,
+                    "vertexUploadedBytes": 11758367744,
+                    "drawCalls": 914002,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 336,
+                  "p50": 8.299999999999272,
+                  "p95": 16.599999999998545,
+                  "p99": 17.599999999998545,
+                  "max": 17.700000000000728
+                },
+                "renderMs": {
+                  "count": 337,
+                  "p50": 8.300000000745058,
+                  "p95": 9.100000001490116,
+                  "p99": 9.5,
+                  "max": 9.800000000745058
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.19999999925494194,
+                  "p99": 0.20000000298023224,
+                  "max": 0.30000000074505806
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 23,
+                "framesOverCadence": 23,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 337,
+                "elapsedMs": 2991.7000000000007,
+                "travelledPx": 0,
+                "maxStationaryMs": 2991.69999999995,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 1481980416,
+                "drawCalls": 85935,
+                "maxLoaded": 300,
+                "entities": 2,
+                "props": 2,
+                "before": {
+                  "wx": 1838.234375,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1838.234375,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 61359200,
+                    "textures": 237,
+                    "uploads": 867,
+                    "uploadedBytes": 261838432,
+                    "vertexUploadedBytes": 13279926272,
+                    "drawCalls": 1002232,
+                    "recoveries": 0
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "canvas-after",
+      "report": {
+        "revision": "2cb786c09646a7fae54f6bd77517645bf03f3594",
+        "dirty": true,
+        "date": "2026-10-04T15:18:05.273Z",
+        "platform": "darwin 25.6.0 arm64",
+        "cpu": "Apple M4 Pro",
+        "browser": "153.0.8010.12",
+        "headed": true,
+        "input": "keyboard",
+        "renderer": "canvas",
+        "terrainPacing": "throughput",
+        "noclip": true,
+        "meshes": false,
+        "motionZooms": [0.1, 1],
+        "movementSeconds": 20,
+        "settleSeconds": 30,
+        "warmSeconds": 3,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "fixtures": [
+          {
+            "version": "current",
+            "zoom": 0.1,
+            "displayCadenceMs": 8.300000000000068,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 356,
+                  "p50": 8.300000000000182,
+                  "p95": 16.40000000000009,
+                  "p99": 17.40000000000009,
+                  "max": 17.700000000000273
+                },
+                "renderMs": {
+                  "count": 357,
+                  "p50": 1.4000000059604645,
+                  "p95": 4,
+                  "p99": 4.699999995529652,
+                  "max": 5.700000002980232
+                },
+                "updateMs": {
+                  "count": 188,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.6999999955296516,
+                  "p99": 1,
+                  "max": 1.0999999940395355
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 19,
+                "framesOverCadence": 19,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 357,
+                "elapsedMs": 3124.9,
+                "travelledPx": 0,
+                "maxStationaryMs": 3124.900000000014,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 20,
+                "incompleteCacheFrames": 42,
+                "staleCacheFrames": 47,
+                "maxIncomplete": 160,
+                "longestGapFrames": 42,
+                "firstReadyFrame": 66,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 9295,
+                "peakPending": 211,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 6,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 359,
+                  "p50": 8.300000000000182,
+                  "p95": 9.299999999999272,
+                  "p99": 9.300000000000182,
+                  "max": 9.400000000000546
+                },
+                "renderMs": {
+                  "count": 360,
+                  "p50": 1,
+                  "p95": 1.2999999970197678,
+                  "p99": 1.3000000044703484,
+                  "max": 1.3999999985098839
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.3999999985098839,
+                  "max": 0.3999999985098839
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 360,
+                "elapsedMs": 2992.2,
+                "travelledPx": 0,
+                "maxStationaryMs": 2992.1999999999916,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 6,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 2399,
+                  "p50": 8.299999999999272,
+                  "p95": 9.200000000000728,
+                  "p99": 9.30000000000291,
+                  "max": 9.400000000001455
+                },
+                "renderMs": {
+                  "count": 2400,
+                  "p50": 0.9000000059604645,
+                  "p95": 1.6000000014901161,
+                  "p99": 3.2000000029802322,
+                  "max": 4.700000002980232
+                },
+                "updateMs": {
+                  "count": 1200,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.6000000014901161,
+                  "max": 0.8000000044703484
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 2400,
+                "elapsedMs": 19991.6,
+                "travelledPx": 2944.5887451171875,
+                "maxStationaryMs": 16.5,
+                "displacement": {
+                  "x": -2944.588745117187,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 8416,
+                "peakPending": 15,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 4795.092352,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1850.5036068828126,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 32,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 63,
+                  "p50": 8.299999999999272,
+                  "p95": 9.100000000002183,
+                  "p99": 9.299999999999272,
+                  "max": 9.299999999999272
+                },
+                "renderMs": {
+                  "count": 64,
+                  "p50": 0.7000000029802322,
+                  "p95": 0.8999999985098839,
+                  "p99": 1.6000000014901161,
+                  "max": 1.6000000014901161
+                },
+                "updateMs": {
+                  "count": 32,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.20000000298023224,
+                  "max": 0.20000000298023224
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 64,
+                "elapsedMs": 525.7999999999993,
+                "travelledPx": 0.00008864843744049722,
+                "maxStationaryMs": 525.7999999999993,
+                "displacement": {
+                  "x": 0.00008864843744049722,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 64,
+                "totalTerrainRows": 96,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 1845.5958586171876,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 359,
+                  "p50": 8.299999999999272,
+                  "p95": 9.100000000002183,
+                  "p99": 9.299999999999272,
+                  "max": 9.399999999997817
+                },
+                "renderMs": {
+                  "count": 360,
+                  "p50": 0.7999999970197678,
+                  "p95": 1,
+                  "p99": 1,
+                  "max": 1.0999999940395355
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.29999999701976776,
+                  "p99": 0.30000000447034836,
+                  "max": 0.30000000447034836
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 360,
+                "elapsedMs": 2991.800000000003,
+                "travelledPx": 0,
+                "maxStationaryMs": 2991.800000000014,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200
+                }
+              }
+            ]
+          },
+          {
+            "version": "current",
+            "zoom": 1,
+            "displayCadenceMs": 8.300000000000011,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 121,
+                  "p50": 8.300000000000182,
+                  "p95": 9.300000000000182,
+                  "p99": 9.400000000000091,
+                  "max": 9.400000000000091
+                },
+                "renderMs": {
+                  "count": 122,
+                  "p50": 0.29999999701976776,
+                  "p95": 2.1999999955296516,
+                  "p99": 2.2999999970197678,
+                  "max": 2.3000000044703484
+                },
+                "updateMs": {
+                  "count": 61,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.7000000029802322,
+                  "max": 0.7000000029802322
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 122,
+                "elapsedMs": 1008.3999999999999,
+                "travelledPx": 0,
+                "maxStationaryMs": 1008.3999999999996,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 2,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 39,
+                "totalTerrainRows": 496,
+                "peakPending": 4,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 25,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 360,
+                  "p50": 8.300000000000182,
+                  "p95": 9.300000000000182,
+                  "p99": 9.400000000000091,
+                  "max": 9.400000000000091
+                },
+                "renderMs": {
+                  "count": 361,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.4000000059604645,
+                  "max": 0.4000000059604645
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.3999999985098839,
+                  "max": 0.3999999985098839
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 361,
+                "elapsedMs": 2999.4,
+                "travelledPx": 0,
+                "maxStationaryMs": 2999.400000000004,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 25,
+                "entities": 14,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 2399,
+                  "p50": 8.299999999999272,
+                  "p95": 9.299999999999272,
+                  "p99": 9.399999999997817,
+                  "max": 9.400000000001455
+                },
+                "renderMs": {
+                  "count": 2400,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.5,
+                  "p99": 0.6000000014901161,
+                  "max": 2.3000000044703484
+                },
+                "updateMs": {
+                  "count": 1200,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.3999999985098839,
+                  "max": 0.5
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 2400,
+                "elapsedMs": 19991.5,
+                "travelledPx": 2944.5887451171875,
+                "maxStationaryMs": 16.600000000000364,
+                "displacement": {
+                  "x": -2944.588745117187,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 80,
+                "totalTerrainRows": 880,
+                "peakPending": 4,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 4795.092352,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1850.5036068828126,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 59,
+                  "p50": 8.299999999999272,
+                  "p95": 9,
+                  "p99": 9.200000000000728,
+                  "max": 9.200000000000728
+                },
+                "renderMs": {
+                  "count": 60,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.4000000059604645,
+                  "max": 0.4000000059604645
+                },
+                "updateMs": {
+                  "count": 30,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.20000000298023224,
+                  "max": 0.20000000298023224
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 60,
+                "elapsedMs": 491.7000000000007,
+                "travelledPx": 0,
+                "maxStationaryMs": 491.7000000000007,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 359,
+                  "p50": 8.299999999999272,
+                  "p95": 9.299999999999272,
+                  "p99": 9.30000000000291,
+                  "max": 9.399999999997817
+                },
+                "renderMs": {
+                  "count": 360,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.3999999985098839,
+                  "max": 0.4000000059604645
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.30000000447034836,
+                  "max": 0.3999999985098839
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 360,
+                "elapsedMs": 2992.2000000000007,
+                "travelledPx": 0,
+                "maxStationaryMs": 2992.2000000000007,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": null,
+                "vertexUploadedBytes": null,
+                "drawCalls": null,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "gpu-after",
+      "report": {
+        "revision": "851f231282b75680a05c50aad8c0998f897fee31",
+        "dirty": true,
+        "date": "2026-10-04T15:19:09.748Z",
+        "platform": "darwin 25.6.0 arm64",
+        "cpu": "Apple M4 Pro",
+        "browser": "153.0.8010.12",
+        "headed": true,
+        "input": "keyboard",
+        "renderer": "gpu",
+        "terrainPacing": "throughput",
+        "noclip": true,
+        "meshes": false,
+        "motionZooms": [0.1, 1],
+        "movementSeconds": 20,
+        "settleSeconds": 30,
+        "warmSeconds": 3,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "fixtures": [
+          {
+            "version": "current",
+            "zoom": 0.1,
+            "displayCadenceMs": 8.300000000000011,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 358,
+                  "p50": 8.300000000000182,
+                  "p95": 9.300000000000182,
+                  "p99": 17.09999999999991,
+                  "max": 17.59999999999991
+                },
+                "renderMs": {
+                  "count": 359,
+                  "p50": 1.3999999985098839,
+                  "p95": 4.200000002980232,
+                  "p99": 5,
+                  "max": 5.5
+                },
+                "updateMs": {
+                  "count": 187,
+                  "p50": 0.29999999701976776,
+                  "p95": 0.6000000014901161,
+                  "p99": 1,
+                  "max": 1.2000000029802322
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 14,
+                "framesOverCadence": 14,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 359,
+                "elapsedMs": 3100,
+                "travelledPx": 0,
+                "maxStationaryMs": 3100.00000000001,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 20,
+                "incompleteCacheFrames": 41,
+                "staleCacheFrames": 48,
+                "maxIncomplete": 170,
+                "longestGapFrames": 41,
+                "firstReadyFrame": 66,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 9271,
+                "peakPending": 212,
+                "textureUploadedBytes": 126877696,
+                "vertexUploadedBytes": 14294400,
+                "drawCalls": 96956,
+                "maxLoaded": 300,
+                "entities": 6,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 84688992,
+                    "textures": 248,
+                    "uploads": 548,
+                    "uploadedBytes": 164580384,
+                    "vertexUploadedBytes": 16106880,
+                    "drawCalls": 98417,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 359,
+                  "p50": 8.300000000000182,
+                  "p95": 9.099999999999454,
+                  "p99": 9.300000000000182,
+                  "max": 9.400000000000546
+                },
+                "renderMs": {
+                  "count": 360,
+                  "p50": 0.7999999970197678,
+                  "p95": 1.1000000014901161,
+                  "p99": 1.2000000029802322,
+                  "max": 1.3000000044703484
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.30000000447034836,
+                  "max": 0.3999999985098839
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 360,
+                "elapsedMs": 2992.5,
+                "travelledPx": 0,
+                "maxStationaryMs": 2992.500000000029,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 15022080,
+                "drawCalls": 102600,
+                "maxLoaded": 300,
+                "entities": 6,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 84688992,
+                    "textures": 248,
+                    "uploads": 548,
+                    "uploadedBytes": 164580384,
+                    "vertexUploadedBytes": 31504512,
+                    "drawCalls": 203582,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 2400,
+                  "p50": 8.299999999999272,
+                  "p95": 9.100000000002183,
+                  "p99": 9.300000000001091,
+                  "max": 9.400000000001455
+                },
+                "renderMs": {
+                  "count": 2401,
+                  "p50": 0.7999999970197678,
+                  "p95": 1.6000000014901161,
+                  "p99": 3.1999999955296516,
+                  "max": 7
+                },
+                "updateMs": {
+                  "count": 1201,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.5999999940395355,
+                  "max": 0.8000000044703484
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 2401,
+                "elapsedMs": 19999.899999999998,
+                "travelledPx": 2944.5889558359377,
+                "maxStationaryMs": 16.5,
+                "displacement": {
+                  "x": -2947.0425691171868,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 128,
+                "totalTerrainRows": 8448,
+                "peakPending": 15,
+                "textureUploadedBytes": 81788928,
+                "vertexUploadedBytes": 93573376,
+                "drawCalls": 652313,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 4795.092352,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1848.0497828828127,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 32,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 66863200,
+                    "textures": 257,
+                    "uploads": 860,
+                    "uploadedBytes": 246369312,
+                    "vertexUploadedBytes": 125411712,
+                    "drawCalls": 858175,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 61,
+                  "p50": 8.299999999999272,
+                  "p95": 9.299999999999272,
+                  "p99": 9.299999999999272,
+                  "max": 9.299999999999272
+                },
+                "renderMs": {
+                  "count": 62,
+                  "p50": 0.6999999955296516,
+                  "p95": 0.8000000044703484,
+                  "p99": 1,
+                  "max": 1
+                },
+                "updateMs": {
+                  "count": 30,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.20000000298023224,
+                  "max": 0.20000000298023224
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 62,
+                "elapsedMs": 507.8999999999978,
+                "travelledPx": 0,
+                "maxStationaryMs": 507.8999999999978,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 32,
+                "totalTerrainRows": 32,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 1880832,
+                "drawCalls": 14694,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 1843.14208984375,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1843.14208984375,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 64766048,
+                    "textures": 249,
+                    "uploads": 860,
+                    "uploadedBytes": 246369312,
+                    "vertexUploadedBytes": 127535232,
+                    "drawCalls": 874765,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 0.1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 360,
+                  "p50": 8.30000000000291,
+                  "p95": 9.19999999999709,
+                  "p99": 9.299999999999272,
+                  "max": 9.30000000000291
+                },
+                "renderMs": {
+                  "count": 361,
+                  "p50": 0.6999999955296516,
+                  "p95": 0.8000000044703484,
+                  "p99": 0.9000000059604645,
+                  "max": 1
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.30000000447034836,
+                  "max": 0.30000000447034836
+                },
+                "cadenceMs": 8.30000000000291,
+                "displayCadenceMs": 8.300000000000011,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 361,
+                "elapsedMs": 3000,
+                "travelledPx": 0,
+                "maxStationaryMs": 3000.0000000000073,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 10951296,
+                "drawCalls": 85557,
+                "maxLoaded": 300,
+                "entities": 1,
+                "props": 2,
+                "before": {
+                  "wx": 1843.14208984375,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1843.14208984375,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 300,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 78643200,
+                  "gpu": {
+                    "textureBytes": 61358176,
+                    "textures": 236,
+                    "uploads": 860,
+                    "uploadedBytes": 246369312,
+                    "vertexUploadedBytes": 138668544,
+                    "drawCalls": 961744,
+                    "recoveries": 0
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "version": "current",
+            "zoom": 1,
+            "displayCadenceMs": 8.300000000000068,
+            "failures": [],
+            "pageErrorCount": 0,
+            "arrival": {
+              "x": 300,
+              "y": 519,
+              "generation": {
+                "type": "regional",
+                "version": "regional-v13",
+                "seed": 2026,
+                "preset": "temperate-v1"
+              }
+            },
+            "display": {
+              "viewport": {
+                "width": 1280,
+                "height": 900
+              },
+              "canvas": {
+                "width": 1280,
+                "height": 900
+              },
+              "devicePixelRatio": 1
+            },
+            "samples": [
+              {
+                "name": "entry-catchup",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 121,
+                  "p50": 8.300000000000182,
+                  "p95": 9,
+                  "p99": 9.199999999999818,
+                  "max": 9.300000000000182
+                },
+                "renderMs": {
+                  "count": 122,
+                  "p50": 0.29999999701976776,
+                  "p95": 2.1999999955296516,
+                  "p99": 2.399999998509884,
+                  "max": 2.5
+                },
+                "updateMs": {
+                  "count": 61,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.6000000014901161,
+                  "max": 0.6000000014901161
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 122,
+                "elapsedMs": 1008.3000000000002,
+                "travelledPx": 0,
+                "maxStationaryMs": 1008.2999999999988,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 2,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 38,
+                "totalTerrainRows": 561,
+                "peakPending": 9,
+                "textureUploadedBytes": 2360320,
+                "vertexUploadedBytes": 1692544,
+                "drawCalls": 3087,
+                "maxLoaded": 25,
+                "entities": 12,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600,
+                  "gpu": {
+                    "textureBytes": 20515584,
+                    "textures": 26,
+                    "uploads": 41,
+                    "uploadedBytes": 25956288,
+                    "vertexUploadedBytes": 3815552,
+                    "drawCalls": 3955,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "stationary",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 360,
+                  "p50": 8.300000000000182,
+                  "p95": 9.099999999999909,
+                  "p99": 9.300000000000182,
+                  "max": 9.400000000000546
+                },
+                "renderMs": {
+                  "count": 361,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.5,
+                  "max": 0.8000000044703484
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.5,
+                  "max": 0.6000000014901161
+                },
+                "cadenceMs": 8.300000000000182,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 361,
+                "elapsedMs": 3000,
+                "travelledPx": 0,
+                "maxStationaryMs": 3000.0000000000055,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 49152,
+                "vertexUploadedBytes": 6215936,
+                "drawCalls": 9480,
+                "maxLoaded": 25,
+                "entities": 14,
+                "props": 15,
+                "before": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 4800,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600,
+                  "gpu": {
+                    "textureBytes": 18205440,
+                    "textures": 18,
+                    "uploads": 42,
+                    "uploadedBytes": 26005440,
+                    "vertexUploadedBytes": 10168704,
+                    "drawCalls": 13643,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "motion",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 2400,
+                  "p50": 8.300000000001091,
+                  "p95": 9.199999999998909,
+                  "p99": 9.300000000001091,
+                  "max": 9.400000000001455
+                },
+                "renderMs": {
+                  "count": 2401,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.5,
+                  "p99": 1,
+                  "max": 3.100000001490116
+                },
+                "updateMs": {
+                  "count": 1200,
+                  "p50": 0.19999999552965164,
+                  "p95": 0.3999999985098839,
+                  "p99": 0.5,
+                  "max": 0.9000000059604645
+                },
+                "cadenceMs": 8.300000000001091,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 2401,
+                "elapsedMs": 19999.999999999996,
+                "travelledPx": 2944.5887451171875,
+                "maxStationaryMs": 16.600000000002183,
+                "displacement": {
+                  "x": -2944.588745117187,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 80,
+                "totalTerrainRows": 880,
+                "peakPending": 5,
+                "textureUploadedBytes": 13910016,
+                "vertexUploadedBytes": 66158848,
+                "drawCalls": 49315,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 4795.092352,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1850.5036068828126,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600,
+                  "gpu": {
+                    "textureBytes": 2378496,
+                    "textures": 12,
+                    "uploads": 80,
+                    "uploadedBytes": 39915456,
+                    "vertexUploadedBytes": 76449408,
+                    "drawCalls": 63147,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-catchup",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 59,
+                  "p50": 8.30000000000291,
+                  "p95": 8.900000000001455,
+                  "p99": 9.19999999999709,
+                  "max": 9.19999999999709
+                },
+                "renderMs": {
+                  "count": 60,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.3999999985098839,
+                  "max": 0.3999999985098839
+                },
+                "updateMs": {
+                  "count": 30,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.20000000298023224,
+                  "p99": 0.20000000298023224,
+                  "max": 0.20000000298023224
+                },
+                "cadenceMs": 8.30000000000291,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 60,
+                "elapsedMs": 491.7000000000007,
+                "travelledPx": 0,
+                "maxStationaryMs": 491.7000000000007,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "settled": true,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 1684096,
+                "drawCalls": 840,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600,
+                  "gpu": {
+                    "textureBytes": 2378496,
+                    "textures": 12,
+                    "uploads": 80,
+                    "uploadedBytes": 39915456,
+                    "vertexUploadedBytes": 78343552,
+                    "drawCalls": 64085,
+                    "recoveries": 0
+                  }
+                }
+              },
+              {
+                "name": "recovery-warm",
+                "zoom": 1,
+                "terrainPacing": "throughput",
+                "frames": {
+                  "count": 359,
+                  "p50": 8.299999999999272,
+                  "p95": 9.099999999998545,
+                  "p99": 9.30000000000291,
+                  "max": 9.400000000001455
+                },
+                "renderMs": {
+                  "count": 360,
+                  "p50": 0.20000000298023224,
+                  "p95": 0.5,
+                  "p99": 0.7000000029802322,
+                  "max": 0.8000000044703484
+                },
+                "updateMs": {
+                  "count": 180,
+                  "p50": 0.10000000149011612,
+                  "p95": 0.30000000447034836,
+                  "p99": 0.3999999985098839,
+                  "max": 0.5
+                },
+                "cadenceMs": 8.299999999999272,
+                "displayCadenceMs": 8.300000000000068,
+                "framesOverDisplayCadence": 0,
+                "framesOverCadence": 0,
+                "framesOver25Ms": 0,
+                "framesOver50Ms": 0,
+                "renderedFrames": 360,
+                "elapsedMs": 2991.7000000000007,
+                "travelledPx": 0,
+                "maxStationaryMs": 2991.7000000000007,
+                "displacement": {
+                  "x": 0,
+                  "y": 0
+                },
+                "missingDataFrames": 0,
+                "incompleteCacheFrames": 0,
+                "staleCacheFrames": 0,
+                "maxIncomplete": 0,
+                "longestGapFrames": 0,
+                "firstReadyFrame": 1,
+                "finalMissing": 0,
+                "finalIncomplete": 0,
+                "finalStale": 0,
+                "maxTerrainRows": 0,
+                "totalTerrainRows": 0,
+                "peakPending": 0,
+                "textureUploadedBytes": 0,
+                "vertexUploadedBytes": 9816448,
+                "drawCalls": 5040,
+                "maxLoaded": 25,
+                "entities": 1,
+                "props": 0,
+                "before": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "after": {
+                  "wx": 1845.595947265625,
+                  "wy": 8304
+                },
+                "cache": {
+                  "resident": 25,
+                  "building": 0,
+                  "pending": 0,
+                  "oldestMs": 0,
+                  "rowsLastFrame": 0,
+                  "surfaceBytes": 6553600,
+                  "gpu": {
+                    "textureBytes": 2378496,
+                    "textures": 12,
+                    "uploads": 80,
+                    "uploadedBytes": 39915456,
+                    "vertexUploadedBytes": 88351744,
+                    "drawCalls": 69223,
+                    "recoveries": 0
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

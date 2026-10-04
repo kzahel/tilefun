@@ -295,6 +295,7 @@ function drawGrass(ctx: RasterSurface, camera: Camera, item: GrassItem, sheet: S
   const scale = camera.scale;
   const ay = GRASS_ANCHOR_Y[item.variant] ?? 7;
   ctx.save();
+  if (item.alpha !== undefined) ctx.globalAlpha *= item.alpha;
   ctx.translate(screen.sx, screen.sy);
   ctx.rotate(item.angle);
   const region = sheet.getRegion(item.variant, 0);

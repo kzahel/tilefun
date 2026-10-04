@@ -444,3 +444,51 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
   expect(result.draws).toBe(3);
   expect(result.uploaded).toBe(4101 * 4 * 8 * 4);
 });
+
+test("shared grass LOD fades consistently in Canvas and GPU and returns at ordinary zoom", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  for (const zoom of [1, 0.5, 0.375, 0.251, 0.25, 0.1, 0.375, 1]) {
+    const report = await page.evaluate(
+      (zoom) =>
+        (
+          window as unknown as {
+            rendererLab: {
+              setGrassDetail(
+                zoom: number,
+                fixedProjection?: boolean,
+              ): Promise<{
+                mismatches: number;
+                maxError: number;
+                grassCount: number;
+                grassAlpha: number;
+              }>;
+            };
+          }
+        ).rendererLab.setGrassDetail(zoom, true),
+      zoom,
+    );
+    expect(report.mismatches).toBe(0);
+    if (zoom <= 0.25) expect(report.grassCount).toBe(0);
+    else {
+      expect(report.grassCount).toBeGreaterThan(0);
+      if (zoom >= 0.5) expect(report.grassAlpha).toBe(1);
+      if (zoom === 0.375) expect(report.grassAlpha).toBe(0.5);
+      if (zoom === 0.251) expect(report.grassAlpha).toBeLessThan(0.001);
+    }
+    if ([0.5, 0.375, 0.25].includes(zoom)) {
+      await page.evaluate(
+        (zoom) =>
+          (
+            window as unknown as {
+              rendererLab: { setGrassDetail(zoom: number): Promise<unknown> };
+            }
+          ).rendererLab.setGrassDetail(zoom),
+        zoom,
+      );
+      await page.screenshot({ path: `/tmp/tilefun-059-grass-${zoom}.png` });
+    }
+  }
+});
