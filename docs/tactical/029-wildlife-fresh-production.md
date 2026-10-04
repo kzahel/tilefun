@@ -1,7 +1,7 @@
 # Fresh wildlife production with supervised projection pilots
 
-Status: backup complete; three supervised pilots accepted; final integration
-passes; bounded background continuation launched on 2026-10-04 at 04:00 UTC.
+Status: source checkpoint committed; broad production stopped on 2026-10-04
+after owner rigid-torso rejection. New sheep/pig motion prototypes precede restart.
 Owner: [Wildlife](../topics/wildlife.md).
 
 ## Authorized sequence
@@ -573,3 +573,85 @@ passing integrity checks. Neither failed bear nor squirrel is a master. Counts
 are17 ready/seven blocked/172 queued, with all prior receipts preserved. Session
 commands, captures and exact observations route through background-02-worker;
 inventory/build refresh follows this registration before serial continuation.
+
+At14:25 UTC `cow/draft-v1` joins batch005 pending, with141 exact hashes. Its
+fresh48-mesh/100-pose Holstein source uses three fixed leg segments and paired
+hoof toes; actual hind/front tracking residual is0.000000033 world units, with
+the preceding forefoot lifted and three supports at every walk sample. Opened
+all facing cycles, stable complete head/coat patches,601 actual Chromium samples
+and twelve forced reset-clock regressions. The negative-frame reset failure and
+earlier geometry/drawings remain rejected evidence. Native profile25/front29/
+rear33px at10px/unit; small teats/hooves and front/profile tail occlusion are
+recorded limitations. Ready18/blocked7; batch005 currently contains doe and cow.
+Catalog/manifest/build refresh and serial queue continuation retain exact prior
+bytes and receipts. All human review remains pending.
+
+At14:47 UTC `sheep/draft-v1` joins pending batch005 as its third member with141
+exact source/output hashes. Fresh44-mesh/100-pose Suffolk ewe source and authored
+fleece/black-face masters retain fixed camera/density; native profile18/front20/
+rear21px. Short profile muzzle and weak ear motion were rejected and retained;
+revised rigid ears now visibly lift/widen without skull resizing. Opened every
+facing, two walks/action/idle return at native/enlarged sizes beside vendor scenery
+and Explorer;603 actual Chromium samples/19.784s cover both48-state sequences
+per scale. Fresh source/replay/contact audits passed; three supports, fixed links
+and ~0.00000006 world-unit hind/front tracking residual. Quiet native ear action
+and tiny hoof/eye detail remain limitations. Ready19/blocked7; human review pending.
+Receipt validation initially rejected a session-data artifact path; it was removed
+from the allowed source/output map and separately hashed as evidence before the
+validated receipt was persisted. Catalog/manifest/build refresh precedes horse.
+
+At15:07 UTC `horse/draft-v1` fills pending batch005 (doe/cow/sheep/horse),141
+exact hashes. Fresh47-mesh/100-pose bay horse has four fixed leg links including
+pasterns, solid hooves, own raised neck/long face/mane/blaze and five-link tail.
+Black-only rear neck and profile shoulder seam were rejected and corrected in
+drawing02. Opened every facing at native/enlarged scale through two walks/action/
+idle return;604 actual Chromium samples/19.792s and12 reset probes pass. Actual
+footfalls HL0 FL4 HR8 FR12 alternate3,3,2,2 supports; no flight, tracking residual
+0.000000013 world units. Profile37/front38/rear49px at10px/unit; upright rear neck,
+steady head without natural nod and quieter profile tail are recorded limitations.
+Catalog168 sheets/manifest574 candidates/247 identities and build/typecheck pass.
+Queue tests8/8 pass; global lint currently4 errors, exact diagnostics retained.
+Ready20/blocked7/queued169; next is piglet. All human review remains pending.
+
+Batch005 validation at15:15 UTC: wildlife feedback unit2/2 and Workshop Chromium
+2/2 pass. Browser output was buffered during preview teardown; test-port4174
+PID3220/start15:09:58UTC was identified, taskkill was denied, native Stop-Process
+succeeded and the runner returned exit0. Logs retain the5.6m teardown delay.
+Current-session squirrel JS formatting was fixed with original bytes retained,
+blocked evidence hashes refreshed and status regenerated; art/geometry unchanged.
+Remaining global lint errors are prior registered ant button types and fish/robin
+HTML UTF-8 failures, preserved exact bytes. Batch006 inbox/art notes have no
+pending feedback. Piglet selected15:14; ready20/blocked7/in-progress1/queued168.
+
+At15:44 UTC `piglet/draft-v1` is the first exact pending draft in batch006,
+125 source/output hashes. Own44-mesh/84-pose domestic pig, drawing03, retains
+incorrect-ear/closed-curl and spike-ear rejected evidence. Every facing was
+opened native/enlarged through two12-pose walks/eight ear-curl poses/idle return;
+500 actual Chromium samples/16.559s and12 reset probes pass. HL0 FL3 HR6 FR9,
+3,3,2 supports/no flight,0.45unit hind undertrack. Profile18/front23/rear24px;
+small curl/subtle action/covered far roots documented. Fresh source and explicit
+replay pass. Nested Windows quoting broke initial registration; receipt ran too
+early. Structured registration then succeeded with unchanged pixels and hashes
+revalidated before any new selection. Initial concurrent manifest/build rejected
+changed inputs/stale inventory; corrected catalog169/manifest575/248 pass.
+Ready21/blocked7/queued168, next goat; human review remains pending.
+
+At15:59 UTC `goat/draft-v1` becomes batch006 animal2,140 pinned hashes.
+43fresh meshes/100poses, geometry02 shorter upright tail and drawing02 muted
+horn curves after retained failed comparisons. Every facing opened native/
+enlarged through two16-pose walks/eight ear-tail/idle:600 actual Chromium samples
+over19.776s,12reset probes/noerrors. HL0 FL4 HR8 FR12,3,3,3,2 supports/no flight,
+0.02000005unit hind track. Source contacts/scales and explicit replay pass.
+Profile/front23/rear28px; simple rear neck and quiet profile action documented.
+Catalog170/manifest576/249/build pass. New session helper requires registration
+hashes and batchsize<=4 before receipt persistence, and guards command argument
+count; structured files avoid nested Windows quoting. Ready22/blocked7/queued167;
+all human review pending.
+
+Background02 at16:35 UTC blocks `chicken/draft-v1` after actual native/integer4x
+playback inspection in all four facings:503 samples/16.583s, two full walks,
+wing stretch and idle return.47mesh/84poses, geometry04/drawing03 passes source
+and replay integrity, but front tail post/indistinct face and bare rear neck
+fail art.124 blocked evidence hashes; three rejected revisions retained,
+including corrected actual toe hull floor0.008 gap. No registration or family
+unlock. Ready22/blocked8/queued166; continue only another unlocked prototype.

@@ -1,0 +1,28 @@
+{
+  "identity": "body-motion-20261004",
+  "schema": 1,
+  "reason": "Owner rejected rigid walking torsos; revised body-motion prototypes must pass coordinator review before broad production resumes.",
+  "correctionPrototypes": ["sheep", "piglet"],
+  "requirements": [
+    "Fixed ground anchor and fixed mesh volume allow rigid body translation and rotation.",
+    "Walking body mass visibly rises/falls and transfers weight in phase with support changes at final native resolution.",
+    "Animated shoulder/hip transforms drive constant-length leg solving; stance contacts remain grounded.",
+    "Per-pose landmarks come from evaluated Blender world matrices and survive integer finishing.",
+    "Review all four facings in native and enlarged continuous in-place and matching travel playback.",
+    "No whole-sprite bouncing postprocess, volume scaling, shading flicker or appendage-only substitute.",
+    "New corrected revisions and explicit coordinator weightTransfer observations are required; old art/receipts remain unchanged."
+  ],
+  "affected": {
+    "fox": { "revision": "pilot-v2", "reason": "Requires re-review under the owner's visible body-motion requirement." },
+    "elephant": { "revision": "pilot-v2", "reason": "Requires re-review under the owner's visible body-motion requirement." },
+    "giraffe": { "revision": "draft-v1", "reason": "Requires re-review under the owner's visible body-motion requirement." },
+    "cat": { "revision": "draft-v1", "reason": "Requires re-review under the owner's visible body-motion requirement." },
+    "dog": { "revision": "draft-v1", "reason": "Requires re-review under the owner's visible body-motion requirement." },
+    "deer": { "revision": "draft-v1", "reason": "Body transform and projected torso landmark remain fixed throughout walking." },
+    "cow": { "revision": "draft-v1", "reason": "Tiny lateral movement needs native-pixel weight-transfer review; no body rise/fall is authored." },
+    "sheep": { "revision": "draft-v1", "reason": "Owner rejected walk; BODY location is reset to zero at every pose." },
+    "horse": { "revision": "draft-v1", "reason": "Body transform and projected torso landmark remain fixed throughout walking." },
+    "piglet": { "revision": "draft-v1", "reason": "Owner rejected walk; BODY location is reset to zero at every pose." },
+    "goat": { "revision": "draft-v1", "reason": "Body transform and projected torso landmark remain fixed throughout walking." }
+  }
+}

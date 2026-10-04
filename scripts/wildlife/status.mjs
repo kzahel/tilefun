@@ -22,18 +22,24 @@ export function writeStatus() {
       .replaceAll("|", "/")
       .replace(/[\r\n]+/g, " ");
   const status = (task) =>
-    task.valid
-      ? "Draft ready"
-      : task.state === "draft-ready"
-        ? "Receipt needs checking"
-        : task.state === "in-progress"
-          ? "In progress"
-          : task.state === "blocked"
-            ? "Blocked"
-            : "Queued";
+    task.qualityHold
+      ? "Motion review required"
+      : task.state === "paused"
+        ? "Paused"
+        : task.valid
+          ? "Draft ready"
+          : task.state === "draft-ready"
+            ? "Receipt needs checking"
+            : task.state === "in-progress"
+              ? "In progress"
+              : task.state === "blocked"
+                ? "Blocked"
+                : "Queued";
   const counts = {};
   for (const task of result.tasks) counts[status(task)] = (counts[status(task)] ?? 0) + 1;
   const rank = {
+    "Motion review required": 0,
+    Paused: 1,
     "Draft ready": 0,
     "In progress": 1,
     Blocked: 2,
@@ -50,19 +56,23 @@ export function writeStatus() {
     "",
     "Draft ready means retained sprite sheets/animation sources and a validated production-review receipt. It does not mean the animal is integrated into gameplay or human-approved. Preview links open the actual local animation files. Blocked attempts are retained and never counted as ready.",
     "",
-    `**${result.valid}/${result.total} draft ready; ${counts["In progress"] ?? 0} in progress; ${counts.Blocked ?? 0} blocked; ${counts.Queued ?? 0} queued.**`,
+    `**${result.valid}/${result.total} draft ready; ${counts["Motion review required"] ?? 0} require motion review; ${counts["In progress"] ?? 0} in progress; ${counts.Paused ?? 0} paused; ${counts.Blocked ?? 0} blocked; ${counts.Queued ?? 0} queued.**`,
+    ...(result.productionHold && result.productionHold.active !== false
+      ? ["", `**Production paused:** ${clean(result.productionHold.reason)}`]
+      : []),
     "",
     `[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/029-wildlife-fresh-production.md)${sessionLink}`,
     "",
-    "## Current work and blocked attempts",
+    "## Current work, motion holds and blocked attempts",
     "",
     "| Animal | State | Current stage / reason |",
     "| --- | --- | --- |",
   ];
   for (const task of tasks.filter((t) => !t.valid && t.state !== "queued")) {
     const details = state.tasks[task.id] ?? {};
-    const detail =
-      task.state === "blocked"
+    const detail = task.qualityHold
+      ? task.qualityHold
+      : task.state === "blocked"
         ? (details.summary ?? details.detail)
         : `${details.stage ?? "In progress"}. ${details.detail ?? ""}`;
     lines.push(
@@ -87,7 +97,7 @@ export function writeStatus() {
     if (base && existsSync(resolve(ROOT, `${base}/sprite.json`)) && task.valid)
       clips = Object.keys(read(`${base}/sprite.json`).clips ?? {}).join(", ");
     if (base && existsSync(resolve(ROOT, `${base}/preview.gif`)))
-      links = `[${task.valid ? "Animation" : "Unaccepted attempt"}](../${base}/preview.gif)`;
+      links = `[${task.valid ? "Animation" : task.qualityHold ? "Needs motion review" : "Unaccepted attempt"}](../${base}/preview.gif)`;
     if (base && existsSync(resolve(ROOT, `${base}/review-observations.md`)))
       links += `${links ? " · " : ""}[Notes](../${base}/review-observations.md)`;
     lines.push(

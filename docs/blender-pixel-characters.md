@@ -60,6 +60,25 @@ The [fresh wildlife contract](topics/wildlife.md) and
 [029](tactical/029-wildlife-fresh-production.md) own current campaign settings
 and coordinator-reviewed pilot evidence. Human approval remains separate.
 
+### Body motion above a fixed ground anchor
+
+An in-place root and stable mesh volume do not freeze the animal's torso. Author
+walking body rise/fall, shoulder/pelvis weight transfer and restrained pitch/roll
+in the Blender pose, then solve constant-length legs from the moving hips to
+their contact trajectories. Head/neck follow or counteract those rigid motions
+without changing skull dimensions. A small walking animal's weight transfer
+must survive integer drawing at native size; an invisible subpixel rig movement
+does not satisfy the requirement. Review motion amplitude and timing for the
+species instead of applying one bouncing curve to every body plan.
+
+Export evaluated world-matrix landmarks for every pose. Rest-coordinate body
+projections or finishing at an idle head/torso anchor can erase real rig motion.
+Do not shift the whole completed frame to add bob, because stance feet would
+float. In-place and matching travel loops must show a moving body over grounded
+contacts. Compare head/marking patches after accounting for rigid translation;
+stable drawings can move in the cell. The wildlife prompt owns the explicit
+per-facing guide, integer-position and continuous-playback review requirements.
+
 1. **Set a small export contract.** One model; 32x32 untrimmed frames; rows
    down, up, left, right, matching Tilefun's direction order; eight columns;
    8 fps; fixed ground pivot at `(16, 27)`; twelve shared colors and binary alpha.

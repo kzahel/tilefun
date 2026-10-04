@@ -4,7 +4,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { test } from "node:test";
-import { gateErrors, queue, receiptErrors, safeArtifact } from "./campaign.mjs";
+import { gateErrors, motionGateErrors, queue, receiptErrors, safeArtifact } from "./campaign.mjs";
 
 const digest = (value) => createHash("sha256").update(value).digest("hex");
 function fixture(t) {
@@ -170,4 +170,200 @@ test("different animal families and gait sets require independent prototypes", (
   const tasks = queue(f.root).tasks;
   assert.equal(tasks.find((task) => task.id === "kangaroo").prototype, "kangaroo");
   assert.equal(tasks.find((task) => task.id === "hare").prototype, "hare");
+});
+
+test("owner production hold prevents selecting or launching another animal", (t) => {
+  const f = fixture(t);
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: ["fox", "elephant", "rabbit", "giraffe"].map((id) => ({
+      id,
+      form: "natural",
+      bodyPlan: "quadruped",
+      media: ["ground"],
+    })),
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", { receipts: f.receipts, tasks: {} });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  assert.equal(queue(f.root).next.id, "giraffe");
+  f.write("data/wildlife-campaign-v2/production-hold.json", {
+    active: true,
+    reason: "Owner rejected rigid walking torsos; correction prototypes required.",
+  });
+  assert.equal(queue(f.root).next, null);
+  assert.match(queue(f.root).errors.join(" "), /Production paused: Owner rejected/);
+});
+
+test("motion hold preserves the receipt but removes readiness and sibling gate", (t) => {
+  const f = fixture(t);
+  const giraffe = { ...f.receipt("giraffe"), revision: "draft-v1" };
+  const preserved = JSON.stringify(giraffe);
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: ["fox", "elephant", "rabbit", "giraffe", "horse"].map((id) => ({
+      id,
+      family: ["giraffe", "horse"].includes(id) ? "Hoofed" : id,
+      form: "natural",
+      bodyPlan: "quadruped",
+      media: ["ground"],
+    })),
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", {
+    receipts: { ...f.receipts, giraffe },
+    tasks: { giraffe: { status: "draft-ready" } },
+  });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  assert.equal(queue(f.root).next.id, "horse");
+  f.write("data/wildlife-campaign-v2/production-hold.json", {
+    active: false,
+    affected: { giraffe: { revision: "draft-v1", reason: "Torso transfer needs review." } },
+  });
+  const result = queue(f.root);
+  assert.equal(result.tasks.find((task) => task.id === "giraffe").valid, false);
+  assert.equal(result.valid, 3);
+  assert.equal(result.next, null);
+  assert.deepEqual(receiptErrors(f.root, giraffe, "giraffe"), []);
+  assert.equal(JSON.stringify(giraffe), preserved);
+});
+
+test("new revision does not bypass an active global correction hold", (t) => {
+  const f = fixture(t);
+  const giraffe = { ...f.receipt("giraffe"), revision: "draft-v2" };
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: ["fox", "elephant", "rabbit", "giraffe"].map((id) => ({
+      id,
+      form: "natural",
+      bodyPlan: "quadruped",
+      media: ["ground"],
+    })),
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", {
+    receipts: { ...f.receipts, giraffe },
+    tasks: {},
+  });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  const hold = {
+    active: true,
+    reason: "Coordinator has not reviewed correction pilots.",
+    affected: { giraffe: { revision: "draft-v1", reason: "Old frozen torso." } },
+  };
+  f.write("data/wildlife-campaign-v2/production-hold.json", hold);
+  assert.equal(queue(f.root).tasks.find((task) => task.id === "giraffe").qualityHold, null);
+  assert.match(queue(f.root).errors.join(" "), /Production paused/);
+  f.write("data/wildlife-campaign-v2/production-hold.json", { ...hold, active: false });
+  assert.deepEqual(queue(f.root).errors, []);
+});
+
+test("malformed hold state fails closed instead of ignoring owner feedback", (t) => {
+  const f = fixture(t);
+  f.write("art-source/wildlife-v2/roster.json", { animals: [] });
+  f.write("data/wildlife-campaign-v2/production-hold.json", "{broken");
+  assert.throws(() => queue(f.root), SyntaxError);
+});
+
+function motionFixture(t) {
+  const f = fixture(t);
+  const contract = {
+    identity: "body-motion-20261004",
+    correctionPrototypes: ["sheep", "piglet"],
+    affected: { sheep: { revision: "draft-v1" }, piglet: { revision: "draft-v1" } },
+  };
+  f.write("art-source/wildlife-v2/body-motion-contract.json", contract);
+  const receipts = Object.fromEntries(
+    contract.correctionPrototypes.map((id) => {
+      const receipt = {
+        ...f.receipt(id),
+        revision: "draft-v2",
+        motionContract: contract.identity,
+      };
+      receipt.visualReview.checks.weightTransfer =
+        "Inspected all facings: native body rise and support transfer survive finishing and match travel contacts.";
+      return [id, receipt];
+    }),
+  );
+  const gate = {
+    reviewer: "coordinator",
+    model: "gpt-6.1-sol",
+    effort: "high",
+    contract: contract.identity,
+    contractSha256: digest(JSON.stringify(contract)),
+    receiptSha256: Object.fromEntries(
+      Object.entries(receipts).map(([id, receipt]) => [id, digest(JSON.stringify(receipt))]),
+    ),
+  };
+  return { ...f, contract, motionReceipts: receipts, motionGate: gate };
+}
+
+test("tracked motion contract blocks restart even if local owner hold is absent", (t) => {
+  const f = motionFixture(t);
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: ["fox", "elephant", "rabbit", "giraffe"].map((id) => ({
+      id,
+      form: "natural",
+      bodyPlan: "quadruped",
+      media: ["ground"],
+    })),
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", { receipts: f.receipts, tasks: {} });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  assert.equal(queue(f.root).next, null);
+  assert.match(queue(f.root).errors.join(" "), /body-motion correction gate is absent/);
+});
+
+test("motion gate pins corrected prototype pixels and contract bytes", (t) => {
+  const f = motionFixture(t);
+  assert.deepEqual(motionGateErrors(f.root, f.contract, f.motionGate, f.motionReceipts), []);
+  f.write("art-source/wildlife-v2/sheep/sheet.png", "changed corrected pixels");
+  assert.match(
+    motionGateErrors(f.root, f.contract, f.motionGate, f.motionReceipts).join(" "),
+    /Changed or invalid artifact/,
+  );
+  f.write("art-source/wildlife-v2/body-motion-contract.json", { ...f.contract, changed: true });
+  assert.ok(
+    motionGateErrors(f.root, f.contract, f.motionGate, f.motionReceipts).includes(
+      "Body-motion contract changed",
+    ),
+  );
+});
+
+test("old revisions, worker claims and absent motion observations cannot unlock", (t) => {
+  const f = motionFixture(t);
+  f.motionReceipts.sheep.revision = "draft-v1";
+  f.motionReceipts.piglet.visualReview.observer = "production-agent";
+  delete f.motionReceipts.piglet.visualReview.checks.weightTransfer;
+  const errors = motionGateErrors(f.root, f.contract, f.motionGate, f.motionReceipts);
+  assert.ok(errors.includes("sheep: new coordinator-reviewed motion revision required"));
+  assert.ok(errors.includes("piglet: new coordinator-reviewed motion revision required"));
+  assert.ok(errors.includes("piglet: missing concrete weight-transfer review"));
+  delete f.motionReceipts.sheep;
+  assert.doesNotThrow(() => motionGateErrors(f.root, f.contract, f.motionGate, f.motionReceipts));
+});
+
+test("future walkers cannot count as ready without current motion review", (t) => {
+  const f = motionFixture(t);
+  const giraffe = { ...f.receipt("giraffe"), revision: "draft-v2" };
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: [
+      {
+        id: "giraffe",
+        form: "natural",
+        bodyPlan: "quadruped",
+        media: ["ground"],
+        locomotion: ["walk"],
+      },
+    ],
+  });
+  const save = () =>
+    f.write("data/wildlife-campaign-v2/progress.json", {
+      receipts: { ...f.receipts, ...f.motionReceipts, giraffe },
+      tasks: {},
+    });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  f.write("data/wildlife-campaign-v2/body-motion-gate.json", f.motionGate);
+  save();
+  assert.equal(queue(f.root).valid, 0);
+  assert.match(queue(f.root).tasks[0].errors.join(" "), /body-motion contract/);
+  giraffe.motionContract = f.contract.identity;
+  giraffe.visualReview.checks.weightTransfer =
+    "Observed native shoulder/pelvis transfer through both travel cycles in all four facings.";
+  save();
+  assert.equal(queue(f.root).valid, 1);
 });

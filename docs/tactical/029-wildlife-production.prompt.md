@@ -69,6 +69,30 @@ to read the action (typically 4-8), not a forced universal four-frame template.
 Root stays in place; preview travel is separate. Keep credible planted contacts,
 constant limb lengths, occlusion order, volume and transitions. Appendage swings
 and translated/bobbing stills alone are not locomotion.
+FIXED ROOT IS NOT A FIXED TORSO. Keep the ground anchor, camera, export cell and
+mesh dimensions fixed; animate the body's rigid translation and rotation above
+that anchor. A stationary body with cycling legs is a failed walking quadruped.
+Do not reset BODY.location/rotation to an identical pose throughout the walk.
+Build the body rise/fall and shoulder/pelvis weight transfer FIRST, phase them
+with support changes, then solve the legs from the transformed hips. Head/neck
+follow or stabilize that movement coherently; unchanged head volume/patterns
+do not require an unchanged absolute screen position. Secondary ear/tail motion
+cannot substitute for movement of the main body mass.
+For sheep/pig-sized pixel walkers, start by testing 1-2 NATIVE pixels of visible
+peak-to-peak body rise/fall, plus restrained species-appropriate pitch/roll.
+This is a readability target to inspect, not a universal biological amplitude
+or a quota to impose on insects, swimmers or heavy animals. Keep each animal's
+motion restrained and species-specific. The final torso must visibly carry
+weight; subpixel Blender movement that rounds to one frozen pixel pose fails.
+Never add bob by shifting the entire finished sprite: that also lifts planted
+feet. Do not fake it with body/head scaling, palette flicker or changing shading.
+Re-solve constant-length limbs from the animated shoulders/hips to the intended
+contact trajectories; stance feet remain on the ground. In-place stance feet
+retreat at the virtual travel speed, so a matching travel preview plants them
+in world space. Review that preview for sliding, float, knee pops and teleporting.
+Export body/shoulder/pelvis/head transforms and landmarks from evaluated Blender
+world matrices at EVERY pose, not projected rest-coordinate constants. Finish
+from those pose landmarks, not idle torso/head anchors reused for the full clip.
 Ground unfamiliar anatomy/gaits in primary references before rigging. Record
 the actual computed footfall/contact sequence and check it against the intended
 species gait; phase-offset signs can reverse a seemingly correct schedule.
@@ -79,7 +103,19 @@ REVIEW: produce an all-frame contact sheet, chronological strips for each full
 cycle, native and enlarged looping previews, and actual Modern Exteriors scene
 comparisons beside approved Explorer. Review every facing, two complete loops,
 actions and return to idle. Compare adjacent poses for head/marking flicker,
-body pumping, leg sliding, detached limbs and near/far swaps. Actually open and
+unintended volume changes, leg sliding, detached limbs and near/far swaps.
+BODY-MOTION REVIEW: in every walking facing, record the low/high body poses,
+native pixel displacement, visible shoulder/pelvis support transfer and the
+footfall phase they correspond to. Inspect a torso/shoulder/pelvis/head landmark
+overlay and actual native/4x continuous in-place AND travel playback. Report
+measured 3D/projected ranges AND final integer drawing positions: frame hashes
+can differ solely because feet move, and nonzero guide ranges can round away.
+Head/marking patch tests must compare after aligning their rigid translations;
+do not turn those checks into a requirement to freeze the animal in screen space.
+Reject a frozen torso, movement only in appendages, arbitrary unphased bob or a
+sprite-wide bouncing postprocess. Mechanical motion measurements supplement
+visual inspection; they never establish convincing weight transfer by themselves.
+Actually open and
 inspect the images and sample continuous cycles. Record precise observations,
 reject failed iterations, fix them and repeat. Do not substitute assertions,
 guides authored from the same mistaken pixels, hashes or test results for seeing.
@@ -93,6 +129,18 @@ For each new locomotion family, produce/review a prototype before siblings. A
 failed style/camera/motion gate blocks that family. Do not persist a flawed
 shared template across dozens of species. Two saved Needs changes reports pause
 the batch until the owner says ready. Owner feedback is not an agent approval.
+Read data/wildlife-campaign-v2/production-hold.json when present. An active owner
+motion hold forbids background production and template expansion. Preserve all
+old receipt/artifact bytes. Only explicitly assigned correction prototypes may
+run during that hold, using new revisions. Do not clear the hold, replace its
+reasons with your own approval, or use an old pilot's gait to bypass it.
+After the owner's rigid-torso rejection, correction order is sheep then pig,
+with coordinator review of each new revision's complete native/4x loops before
+any wider restart. The coordinator must audit other walking quadrupeds against
+the revised body-motion contract; earlier draft-ready receipts do not certify it.
+Assigned corrections may start from that animal's own frozen scene/drawings in
+a new revision. Do not treat the rejected walk as an accepted gait or propagate
+it to another animal; repair the rig/finishing motion and review the new pixels.
 
 OUTPUT: write editable sources in art-source/wildlife-v2 and transparent sheet,
 sprite metadata, contact sheet, preview GIF, in-scene previews, projected guides,
@@ -106,6 +154,14 @@ Record actual model/effort/thread/rollout and commands/exit codes. Report native
 scale, camera settings, gait/contact design, inspection evidence and limitations.
 Atomic progress writes; hash required outputs. Completion means draft-integrity
 plus explicit visual observations, never human approval. Keep owning docs current.
+For every new walking-quadruped receipt, set motionContract to the identity in
+art-source/wildlife-v2/body-motion-contract.json and add an explicit
+visualReview.checks.weightTransfer observation describing the inspected native
+body range/support phases and continuous in-place/travel loops. Do not insert
+those fields into old receipts to retroactively claim a review. The separate
+data/wildlife-campaign-v2/body-motion-gate.json is coordinator-owned: it pins new
+sheep/piglet coordinator receipts and contract bytes; production agents never
+create or clear it. Background launch cannot bypass it by deleting a local hold.
 After persisting task selection, meaningful checkpoints, completion, blocking or
 receipt revision, regenerate docs/wildlife-status.md with
 `node scripts/wildlife/status.mjs`; also refresh before final handoff. A checkpoint

@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: fresh high-effort campaign; background continuation through 06:00 Berlin on 2026-10-05.
+Status: broad production paused after owner rejected rigid-torso walks; corrected motion prototypes required.
 Updated: 2026-10-04.
 
 For the whole-roster completion table and local animation links, see the generated
@@ -53,6 +53,78 @@ volume geometry and reviewed replacement drawings; smaller head templates are
 not a substitute for motion. Simpler credible actions are preferable to a
 complex action with weak anatomy. Ground contact, gait timing, rear anatomy,
 occlusion and continuous transitions require visual checks, not frame counts.
+
+## Owner body-motion correction, 2026-10-04
+
+The owner rejected the stationary torsos in sheep/pig and reported the same bad
+walk trend across animals. Coordinator review had missed this while checking
+stable volume and contacts. Sheep/pig builders explicitly set BODY.location to
+zero every pose; deer/horse/goat do the same. All their projected body landmarks
+are constant per facing. Cow only authors0.025-world-unit lateral sway, projecting
+to at most0.3165px of vertical range in profiles, which may vanish in finishing.
+Opened exact native sheep/pig all-frame sheets and inspected their source; no
+old art, source or receipt was rewritten to manufacture a fix.
+
+Fixed ground anchor/root motion and constant mesh volume DO NOT require a
+stationary torso. The revised workflow requires species-appropriate rigid body
+rise/fall and shoulder/pelvis transfer tied to support changes, head/neck follow
+or stabilization, and constant-length leg solves from moving hips. Final native
+integer drawings must retain that movement. Small sheep/pig walkers should test
+1-2px peak-to-peak rise/fall as a readability starting point; it is not a universal
+biological amplitude. Do not bounce the whole sprite, scale volumes, animate
+shading or use moving appendages as a substitute. Export pose landmarks from
+evaluated world matrices and inspect all facings in continuous native/enlarged
+in-place AND matching travel playback, with grounded/sliding-contact checks.
+
+The [tracked body-motion contract](../../art-source/wildlife-v2/body-motion-contract.json)
+owns the affected exact revisions and correction prototype IDs. All11 completed
+walking quadrupeds are now motion-review-required, including the old walking
+pilots, without claiming that every one has the identical defect.22 retained
+completed draft receipts become11 still ready plus11 needing motion re-review;
+eight earlier quality failures remain blocked. The interrupted ladybug task is
+paused. Receipt fields, artifact hashes, registered identities and human review
+decisions remain unchanged. The generated table reflects these separate holds.
+
+Stopped the verified background02 launcher and its16 descendants after preserving
+the owner-stop record; its watchdog then exited. The interrupted lock and original
+checkpoint remain evidence. Active-session metadata records the stop; no worker
+or automatic continuation is running. Original06:00 Berlin deadline is retained
+for any eventual continuation, not treated as permission to bypass this hold.
+
+`campaign.mjs` rejects background launch under an active local production hold.
+The tracked contract ALSO requires a new coordinator body-motion gate, even if
+the local hold is missing. It pins the contract and new sheep/piglet receipt
+hashes, rejects old revisions/worker-as-coordinator claims, and requires concrete
+weightTransfer observations. Future walking receipts must name this contract and
+include native body-motion observations. Old held revisions cannot unlock their
+families or count as ready. Mechanical fields are gate prerequisites, not visual
+approval or proof of animation quality.
+
+Next: author corrected sheep then pig in new revisions, inspect body/hip/foot
+landmarks plus full native/4x in-place/travel playback, and record actual
+coordinator observations. Only after those prototypes pass can the coordinator
+write the pinned gate and release the global hold. Re-audit/correct the other
+held walkers before releasing their family gates. The production agent cannot
+clear the hold, create the coordinator gate or retrofit old receipts. Broad
+background production remains stopped; this prompt change is not an art fix.
+
+Source audit, owner stop, old progress/checkpoint snapshots and inbox/art-note
+reads are retained under ignored coordinator-review/background-02-worker. No
+formal Needs changes votes/notes existed at this checkpoint; the owner's direct
+chat rejection is the authority for this hold, not an invented Workshop event.
+Primary biomechanical context: [Griffin et al.2004](https://pubmed.ncbi.nlm.nih.gov/15339951/)
+models distinct fore/hind-quarter movement and phase coordination; it does not
+provide the pixel amplitude target, which is an explicit art/readability choice.
+
+Verification: sixteen wildlife queue/gate tests pass, including holds without
+local state, changed prototype bytes, old revisions, absent observations and
+future walking receipts. Typecheck, changed-file lint and Git whitespace checks
+pass. Full unit run retains1357 passes/five Windows platform failures/ten skips;
+full lint retains only the two preserved fish/robin-v1 invalid-UTF8 errors.
+All22 completed receipts are unchanged and all2516 referenced artifact hashes
+still match. Status refresh reports11 ready,11 motion-review-required,eight
+blocked,one paused,165 queued; live launch assertion rejects both missing motion
+gate and active hold. Detailed motion-* logs are under coordinator-review.
 
 ## Production gate
 
@@ -584,3 +656,93 @@ passing integrity checks. Neither failed bear nor squirrel is a master. Counts
 are17 ready/seven blocked/172 queued, with all prior receipts preserved. Session
 commands, captures and exact observations route through background-02-worker;
 inventory/build refresh follows this registration before serial continuation.
+
+At14:25 UTC `cow/draft-v1` joins batch005 pending, with141 exact hashes. Its
+fresh48-mesh/100-pose Holstein source uses three fixed leg segments and paired
+hoof toes; actual hind/front tracking residual is0.000000033 world units, with
+the preceding forefoot lifted and three supports at every walk sample. Opened
+all facing cycles, stable complete head/coat patches,601 actual Chromium samples
+and twelve forced reset-clock regressions. The negative-frame reset failure and
+earlier geometry/drawings remain rejected evidence. Native profile25/front29/
+rear33px at10px/unit; small teats/hooves and front/profile tail occlusion are
+recorded limitations. Ready18/blocked7; batch005 currently contains doe and cow.
+Catalog/manifest/build refresh and serial queue continuation retain exact prior
+bytes and receipts. All human review remains pending.
+
+At14:47 UTC `sheep/draft-v1` joins pending batch005 as its third member with141
+exact source/output hashes. Fresh44-mesh/100-pose Suffolk ewe source and authored
+fleece/black-face masters retain fixed camera/density; native profile18/front20/
+rear21px. Short profile muzzle and weak ear motion were rejected and retained;
+revised rigid ears now visibly lift/widen without skull resizing. Opened every
+facing, two walks/action/idle return at native/enlarged sizes beside vendor scenery
+and Explorer;603 actual Chromium samples/19.784s cover both48-state sequences
+per scale. Fresh source/replay/contact audits passed; three supports, fixed links
+and ~0.00000006 world-unit hind/front tracking residual. Quiet native ear action
+and tiny hoof/eye detail remain limitations. Ready19/blocked7; human review pending.
+Receipt validation initially rejected a session-data artifact path; it was removed
+from the allowed source/output map and separately hashed as evidence before the
+validated receipt was persisted. Catalog/manifest/build refresh precedes horse.
+
+At15:07 UTC `horse/draft-v1` fills pending batch005 (doe/cow/sheep/horse),141
+exact hashes. Fresh47-mesh/100-pose bay horse has four fixed leg links including
+pasterns, solid hooves, own raised neck/long face/mane/blaze and five-link tail.
+Black-only rear neck and profile shoulder seam were rejected and corrected in
+drawing02. Opened every facing at native/enlarged scale through two walks/action/
+idle return;604 actual Chromium samples/19.792s and12 reset probes pass. Actual
+footfalls HL0 FL4 HR8 FR12 alternate3,3,2,2 supports; no flight, tracking residual
+0.000000013 world units. Profile37/front38/rear49px at10px/unit; upright rear neck,
+steady head without natural nod and quieter profile tail are recorded limitations.
+Catalog168 sheets/manifest574 candidates/247 identities and build/typecheck pass.
+Queue tests8/8 pass; global lint currently4 errors, exact diagnostics retained.
+Ready20/blocked7/queued169; next is piglet. All human review remains pending.
+
+Batch005 validation at15:15 UTC: wildlife feedback unit2/2 and Workshop Chromium
+2/2 pass. Browser output was buffered during preview teardown; test-port4174
+PID3220/start15:09:58UTC was identified, taskkill was denied, native Stop-Process
+succeeded and the runner returned exit0. Logs retain the5.6m teardown delay.
+Current-session squirrel JS formatting was fixed with original bytes retained,
+blocked evidence hashes refreshed and status regenerated; art/geometry unchanged.
+Remaining global lint errors are prior registered ant button types and fish/robin
+HTML UTF-8 failures, preserved exact bytes. Batch006 inbox/art notes have no
+pending feedback. Piglet selected15:14; ready20/blocked7/in-progress1/queued168.
+
+At15:44 UTC `piglet/draft-v1` is the first exact pending draft in batch006,
+125 source/output hashes. Fresh44-mesh/84-pose domestic pig has own low barrel,
+rigid broad snout, fleshy triangulated ears, paired bearing toes/elevated dewclaws
+and editable mesh curl. Two finishing attempts were retained as evidence:
+incorrect near-ear occlusion/thick closed curl, then needle-like profile ears.
+Drawing03 fills independent ear hulls. Opened every facing native/enlarged through
+two12-pose walks/eight ear-curl poses/idle return;500 actual Chromium samples over
+16.559s,12 reset probes pass. HL0 FL3 HR6 FR9 alternates3,3,2 support without flight;
+hind undertracks0.45units. Profile18/front23/rear24px at10px/unit; tiny curl,
+subtle profile action and covered far roots are recorded limits. Source audit
+and explicit replay pass. Initial Windows quoting broke registration and caused
+premature receipt persistence; corrected structured registration succeeded,
+exact receipt/registered hashes revalidated before selecting anything else.
+Concurrent initial manifest/build failed changed-input/stale-inventory checks;
+after registration catalog169 and manifest575 candidates/248 identities pass.
+Ready21/blocked7/queued168; next eligible is goat. All human review pending.
+
+At15:59 UTC `goat/draft-v1` is pending batch006 animal2,140 exact hashes.
+Own43-mesh/100-pose horned tawny buck retains curved horns/beard/raised neck,
+cloven toes/mobile ears/upright tail. Rejected bright horn bars and overlong tail
+were corrected in drawing02/geometry02; no per-frame scaling. Opened every facing
+native/enlarged through two16-pose walks/eight ear-tail poses/idle return:
+600 actual Chromium samples/19.776s and12 reset probes pass. HL0 FL4 HR8 FR12,
+supports3,3,3,2/no flight and0.02000005unit hind track; fixed segments/actual toe
+floors and deterministic replay pass. Profile/front23px, rear28px at10px/unit;
+simple narrow rear neck and quiet profile action documented. Catalog170,
+manifest576 candidates/249 identities and build pass. Session receipt helper now
+requires exact registered hashes and batchsize<=4 before persistence; quoted
+commands use structured files. Ready22/blocked7/queued167, human review pending.
+
+At16:35 UTC `chicken/draft-v1` is blocked,124 evidence hashes, no registration.
+Fresh47-mesh/84-pose ground-bird prototype geometry04/drawing03 passed actual
+toe-floor/fixed wing/head-volume and deterministic replay audits.503 actual
+Chromium samples/16.583s cover two walks/action/idle at native/integer4x in every
+facing, all opened. Front dark tail post/indistinct face and bare rear neck still
+fail the visual gate despite connected wing action and alternating contacts.
+Retained three rejected revisions include the corrected0.008unit toe-floor gap.
+Native profile15/front16/rear17px; primary anatomy text available, direct image
+downloads blocked WinError10013. Full findings in its review-observations.md;
+ground-bird siblings stay gated. Ready22/blocked8/queued166, no human feedback.
