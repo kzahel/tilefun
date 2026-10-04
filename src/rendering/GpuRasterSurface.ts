@@ -43,7 +43,7 @@ export class GpuRasterSurface implements RasterSurface {
   readonly camera = new THREE.OrthographicCamera(0, 1, 0, 1, -1, 1);
   private readonly scene = new THREE.Scene();
   private readonly geometry = new THREE.BufferGeometry();
-  private readonly vertices = new Float32Array(QUADS * 6 * 8);
+  private readonly vertices = new Float32Array(QUADS * 4 * 8);
   private readonly buffer = new THREE.InterleavedBuffer(this.vertices, 8).setUsage(
     THREE.DynamicDrawUsage,
   );
@@ -124,6 +124,12 @@ export class GpuRasterSurface implements RasterSurface {
       blendSrcAlpha: THREE.OneFactor,
       blendDstAlpha: THREE.OneMinusSrcAlphaFactor,
     });
+    // Keep the original triangle order, but write/upload each corner only once.
+    // This immutable 24 KiB index buffer is recreated by Three on context recovery.
+    const indices = new Uint16Array(QUADS * 6);
+    for (let quad = 0; quad < QUADS; quad++)
+      for (let i = 0; i < CORNERS.length; i++) indices[quad * 6 + i] = quad * 4 + (CORNERS[i] ?? 0);
+    this.geometry.setIndex(new THREE.BufferAttribute(indices, 1));
     this.geometry.setAttribute("point", new THREE.InterleavedBufferAttribute(this.buffer, 2, 0));
     this.geometry.setAttribute("tex", new THREE.InterleavedBufferAttribute(this.buffer, 2, 2));
     this.geometry.setAttribute("tint", new THREE.InterleavedBufferAttribute(this.buffer, 4, 4));
@@ -472,9 +478,9 @@ export class GpuRasterSurface implements RasterSurface {
     color: readonly number[],
   ) {
     if (this.lost || this.disposed) return;
-    if (this.texture !== texture || this.count + 6 > QUADS * 6) this.flush();
+    if (this.texture !== texture || this.count + 4 > QUADS * 4) this.flush();
     this.texture = texture;
-    for (const corner of CORNERS) {
+    for (let corner = 0; corner < 4; corner++) {
       const right = corner === 1 || corner === 2,
         bottom = corner >= 2;
       const px = x + (right ? w : 0),
@@ -496,7 +502,7 @@ export class GpuRasterSurface implements RasterSurface {
       this.count = 0;
       return;
     }
-    this.geometry.setDrawRange(0, this.count);
+    this.geometry.setDrawRange(0, (this.count / 4) * 6);
     this.buffer.clearUpdateRanges();
     this.buffer.addUpdateRange(0, this.count * 8);
     this.buffer.needsUpdate = true;

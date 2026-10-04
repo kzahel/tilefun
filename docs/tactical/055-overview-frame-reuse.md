@@ -44,3 +44,21 @@ reports warm record creation and estimated retained storage. Reproduce with
 Ten grass tests pass, including 40,000-record reuse, oversized distinct output,
 shrink/clear, revisions, culling and independent consumers. Full rendering and
 integration validation follows both slices. No placement or sorting code changed.
+
+
+## Slice 2: indexed GPU quads
+
+`GpuRasterSurface` now writes four interleaved vertices per quad and uses a
+persistent 24 KiB Uint16 index buffer for the original two triangles. Quad batch
+capacity, texture/clip flushes, shader, CPU coordinate arithmetic and draw order
+are unchanged. Recurring requested vertex bytes fall from 192 to 128 per quad;
+initial/index-buffer uploads are not included in that existing dynamic counter.
+The adapter's geometry disposal and Three context recovery own the index buffer.
+
+Build/catalog/manifest generation and all 13 targeted full-Chromium GPU tests
+pass. A new 4,101-quad regression spans two full batches plus a partial batch,
+checks overlapping alpha/tints and transformed placement against Canvas, and
+asserts three draws and exactly 128 dynamic bytes per quad. Existing tests cover
+texture changes, union clips, shadows, mesh composition, shared Traffic, renderer
+switches, fallback and real graphics recovery. Full suite and measured movement
+comparisons follow; pixel parity alone does not establish a frame-pacing win.

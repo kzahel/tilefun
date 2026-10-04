@@ -392,3 +392,9 @@ The shared grass pool now retains up to 65,536 scalar records on demand (formerl
 zero over 120 frames, with identical output hashes. Estimated pool retention is
 1.14 MB versus 0.45 MB for that fixture; sampled allocations fall about 73% but
 are not eliminated. This is allocation evidence, not a measured FPS claim.
+
+The GPU raster adapter now submits four vertices with a persistent index buffer
+per quad, preserving the original triangle order. Requested dynamic vertex data
+is 128 bytes/quad versus 192, with the same batching and shader. Game and embedded
+GPU consumers share it. Full-Chromium parity and multi-batch upload accounting
+pass; this byte reduction is not a physical bandwidth measurement or FPS claim.

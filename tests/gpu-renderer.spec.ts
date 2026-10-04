@@ -388,3 +388,59 @@ test("GPU reads decoded image dimensions once per frame and resets on recovery",
   expect(result.second).toBeGreaterThan(result.first);
   expect(result).toMatchObject({ recovered: true, reused: true, reuploaded: true });
 });
+
+test("GPU indexed batches preserve quad order, capacity boundaries and upload accounting", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(() => {
+    const surface = (
+      window as unknown as {
+        rendererLab: {
+          gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+        };
+      }
+    ).rendererLab.gpu.surface;
+    const reference = document.createElement("canvas");
+    reference.width = surface.canvas.width;
+    reference.height = surface.canvas.height;
+    const ctx = reference.getContext("2d");
+    if (!ctx) throw Error("Missing reference context");
+    const before = { ...surface.stats };
+    surface.beginFrame();
+    // One texture, more than two full batches. Overlap and changing tint/alpha
+    // expose index order errors; the final partial batch must not draw stale quads.
+    for (const target of [ctx, surface]) {
+      target.save();
+      target.translate(3, 5);
+      target.scale(2, 2);
+      for (let i = 0; i < 4101; i++) {
+        target.fillStyle = i % 2 ? "#28a45d" : "#9631e2";
+        target.globalAlpha = i % 3 ? 1 : 0.5;
+        target.fillRect((i * 7) % 160, (i * 11) % 120, 4, 5);
+      }
+      target.restore();
+    }
+    surface.flush();
+    const copy = document.createElement("canvas");
+    copy.width = reference.width;
+    copy.height = reference.height;
+    const gpuCtx = copy.getContext("2d");
+    if (!gpuCtx) throw Error("Missing GPU capture context");
+    gpuCtx.drawImage(surface.canvas, 0, 0);
+    const actual = gpuCtx.getImageData(0, 0, copy.width, copy.height).data;
+    const expected = ctx.getImageData(0, 0, copy.width, copy.height).data;
+    let maxError = 0;
+    for (let i = 0; i < actual.length; i++)
+      maxError = Math.max(maxError, Math.abs((actual[i] ?? 0) - (expected[i] ?? 0)));
+    return {
+      maxError,
+      uploaded: surface.stats.vertexUploadedBytes - before.vertexUploadedBytes,
+      draws: surface.stats.drawCalls - before.drawCalls,
+    };
+  });
+  expect(result.maxError).toBeLessThanOrEqual(1);
+  expect(result.draws).toBe(3);
+  expect(result.uploaded).toBe(4101 * 4 * 8 * 4);
+});
