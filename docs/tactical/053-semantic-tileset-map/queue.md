@@ -94,7 +94,7 @@ separate mappers, and E05 by the coordinator. The delivery record retains exact
 source/review pins and validation. No new human approval or game geometry is inferred.
 
 
-### Suggested next slice — unassigned
+### Earlier suggested slice — superseded by broader owner direction
 
 After reconciling comments on the delivered sheets, consider three bounded themes:
 
@@ -110,3 +110,15 @@ After reconciling comments on the delivered sheets, consider three bounded theme
 
 These are navigation hypotheses and suggested assignments, not mapped records.
 They exclude the newly delivered plants, side beds and low fence/garden-gate kits.
+
+
+## Active broad first pass
+
+The owner accepted the prior three sheets visually and requested substantially
+larger batches with plausible uncertainty. B01 kitchens (bedroom_mapping), B02
+music/recreation (plants_mapping), B03 street hardware (expansion_sheets) replace
+the narrow counter/piano/single-pole assignments. Workers own only dedicated broad
+packets/helpers and approved source copies. Coordinator owns the common adapter,
+shared data/UI/docs and checkpoints. Deliver broad sheets after source validation
+and targeted visual audit; exhaustive semantic normalization remains a separate
+stage. See [policy and feedback](notes/2026-10-04-broad-first-pass.md).

@@ -11,6 +11,14 @@ the existing catalogs and Workshop rather than replacing those contracts.
 
 ## Current direction
 
+The owner now prioritizes larger themed first-pass sheets over near-perfect small
+families. Include plausible interpretations with concise uncertainty and preserve
+component requirements. Use targeted independent review and one reusable adapter;
+exhaustive correspondence research and bespoke normalization are follow-up work,
+not gates before owner discussion. Exact source pixels and note identity remain
+strict. The [broader pass](../tactical/053-semantic-tileset-map/notes/2026-10-04-broad-first-pass.md)
+records the policy change and positive feedback on plants, beds and fences.
+
 Start with source reconciliation and a broad thematic map of the master sheets.
 Investigate seasonal trees, a suspected dumpyard area and an Interiors furniture
 theme as contrasting trials before expanding. Categories guide investigation;

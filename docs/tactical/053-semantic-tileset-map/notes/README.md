@@ -1,5 +1,7 @@
 # Semantic mapping investigation notes
 
+- [Broader first-pass mapping](2026-10-04-broad-first-pass.md): owner-directed larger batches with visible uncertainty and targeted review.
+
 - [Next-family model](2026-10-04-next-family-model.md): explicit normalization and coverage for E04/I02/E05.
 - [Next-family presentation](2026-10-04-next-family-presentation.md): committed-only adapters and focused checks.
 - [Next-family implementation review](2026-10-04-next-family-implementation-review.md): independent integration audit.

@@ -82,6 +82,15 @@ packet format and estimate the full run from measured throughput. Do not invent
 a completion date or infer accuracy from agent confidence alone. Routine internal
 trial evaluation does not require an extra owner approval gate before continuing.
 
+## Current execution policy: broad first passes
+
+The owner's 2026-10-04 correction favors much larger sheets with plausible,
+explicitly uncertain hypotheses over small batches optimized toward certainty.
+Use the [compact packet contract](broad-packet-format.md), reusable presentation
+adapter and targeted review. The earlier detailed trials remain evidence and
+examples, not a mandatory amount of research per future record. Exact pixels,
+source identity, component restrictions and human approval boundaries still apply.
+
 ## Phase 3: bounded agent investigation
 
 Use GPT-6 Astra at high reasoning (`gpt-6-astra`, `high`) for the coordinating
