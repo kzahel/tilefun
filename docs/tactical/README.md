@@ -79,7 +79,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [046 GPU stutter investigation](046-gpu-stutter-investigation.md) | Complete: desktop/Pixel traces, GC/raster findings and bounded-work diagnostic |
 
-| [047 Terrain pacing and zoom stress](047-terrain-pacing-and-zoom-stress.md) | In progress: explicit presentation debt and shared zoom workloads |
+| [047 Terrain pacing and zoom stress](047-terrain-pacing-and-zoom-stress.md) | Complete: explicit presentation debt, shared zoom workloads and desktop/Pixel evidence |
 
 ## Earlier plans
 

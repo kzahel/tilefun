@@ -269,3 +269,15 @@ view. A row is indivisible, so time deadlines may overshoot. Next boundaries are
 separate GPU upload admission, persistent work queues and measured detail/LOD
 policy if the warm overview itself exceeds the frame budget. Moving compilation
 to another thread would not remove these costs.
+
+
+047 evidence: one sequential Pixel GPU pair reduces missed intervals during
+3,600-frame noclip sprints from 20 to 1, with no movement terrain gaps. Small
+batches reduce overview catch-up frame p95 from 33.4 to 16.8 ms, but full terrain
+quiescence (including halo and a 60-frame quiet window) takes 12.45 s versus
+2.37 s; visible terrain also fills later. Requested overview upload falls from
+19.0 to 10.75 MiB. This supports an explicit trade-off, not a default change.
+Both policies settle with zero terrain rebuilding and texture uploads. Desktop
+0.1× warm rendering still takes ~11 ms p95 and misses the ~120 Hz cadence despite
+that reuse, so the next profiling target is shared collection/submission in the
+warm overview. See 047 for device, workload, debt and measurement limits.
