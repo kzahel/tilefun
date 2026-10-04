@@ -1,6 +1,6 @@
 # Semantic tileset map
 
-Status: parent sequencing plan; four family sheets delivered, shared model and coverage ledger checked; full-pack mapping continues.
+Status: parent sequencing plan; five family sheets delivered, shared model and coverage ledger checked; full-pack mapping continues.
 Created: 2026-10-04.
 Continuing owner: [Semantic tileset map topic](../topics/semantic-tileset-map.md).
 

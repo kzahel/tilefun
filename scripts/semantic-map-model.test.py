@@ -33,8 +33,8 @@ class SemanticModelTests(unittest.TestCase):
 
     def test_exact_accounting_composition_and_unknown_geometry(self):
         report = self.full_report
-        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (112, 94))
-        self.assertEqual(report['lineage'], {'direct': 83, 'composed': 9, 'derived': 18, 'original-only': 2})
+        self.assertEqual((report['sourceRecords'], report['proposalUnits']), (132, 112))
+        self.assertEqual(report['lineage'], {'direct': 101, 'composed': 9, 'derived': 20, 'original-only': 2})
         self.assertEqual(len(report['compositionsComparedToPinnedTargets']), 9)
         self.assertEqual(report['compositionsUnavailable'], [])
         self.assertEqual(report['variantDeltasVerified'], 27)
@@ -69,7 +69,7 @@ class SemanticModelTests(unittest.TestCase):
         self.assertFalse(M.review_applicability(review, '0' * 64, review['memberRecords']))
         self.assertFalse(M.review_applicability(review, review['proposalSha256'], review['memberRecords'][:-1]))
         self.assertTrue(all('initial' in r['originalText'].lower() and 'brief' in r['originalText'].lower() for r in self.model['reviews']))
-        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 94)
+        self.assertEqual(sum(len(r['proposalDispositions']) for r in self.model['reviews']), 112)
 
     def test_aliases_offgrid_occurrences_and_exceptions_preserved(self):
         records = {r['id']: r for r in self.model['sourceRecords']}
@@ -131,6 +131,11 @@ class SemanticModelTests(unittest.TestCase):
             self.assertEqual(report['compositionsUnavailable'], ['P03-38-normal'])
             self.assertGreater(len(report['sourceFilesUnavailable']), 0)
             self.assertEqual(report['humanApprovedProposalUnits'], 0)
+            self.assertEqual(report['I01AssemblyProbesVerified'], 15)
+            self.assertEqual(report['I01AssemblyMasterComparisonsVerified'], 0)
+            self.assertFalse(report['I01CounterpartCorpusRechecked'])
+            self.assertEqual(report['I01CounterpartDeltasVerified'], 3)
+            self.assertTrue(all(r['id'] not in report['recordPixelsUnavailable'] for r in self.model['sourceRecords'] if r['packetId'] == 'I01'))
             self.assertEqual(report['originalOnlyRecordIds'], ['E01-05', 'E01-06'])
             self.assertEqual(report['E01VariantDeltasVerified'], 18)
             self.assertEqual(report['E01VariantDeltasUnavailable'], [])
@@ -202,6 +207,72 @@ class SemanticModelTests(unittest.TestCase):
             e['originalEvidence']['variantDeltas'][0]['rgbaChangedPixels'] += 1
         with self.assertRaisesRegex(ValueError, 'E01 variant delta differs'):
             M.validate_model(self.mutated(alter_delta))
+
+    def test_sofa_counts_aliases_probes_and_unknown_placement(self):
+        records = [r for r in self.model['sourceRecords'] if r['packetId'] == 'I01']
+        topology = next(r['topology'] for r in self.model['relationships'] if r['kind'] == 'closed-chain-topology')
+        self.assertEqual(self.full_report['extensionAccounting']['I01'],
+                         {'sourceRecords': 20, 'proposalUnits': 18, 'lineage': {'direct': 18, 'derived': 2}})
+        self.assertEqual(sum(len(r['references']) for r in records), 56)  # 28 named + 28 packed equality aliases.
+        self.assertEqual(sum(len(r['occurrences']) for r in records), 46)
+        self.assertEqual(self.full_report['I01AssemblyProbesVerified'], 15)
+        self.assertEqual(self.full_report['I01AssemblyMasterComparisonsVerified'], 7)
+        self.assertEqual(self.full_report['I01TopologyProbeDispositions'],
+                         {'proposed-valid': 9, 'invalid-open-ends': 4, 'unresolved-role-probe': 2})
+        self.assertEqual(self.full_report['I01CounterpartDeltasVerified'], 3)
+        self.assertTrue(self.full_report['I01CounterpartCorpusRechecked'])
+        scope = next(r['sourcePins'] for r in self.model['reviews'] if r['packetId'] == 'I01')
+        self.assertEqual(len(scope), 268)
+        for c in topology['components']:
+            if c['recordId'] in ['I01-04', 'I01-05', 'I01-10', 'I01-11']:
+                self.assertEqual(M.standalone_policy(c)['state'], 'unknown')
+                self.assertFalse(M.standalone_policy(c)['allowed'])
+            if c['recordId'] in ['I01-06', 'I01-12']:
+                self.assertTrue(M.standalone_policy(c)['allowed'])
+                self.assertEqual(M.standalone_policy(c)['state'], 'visual-proposal-only')
+            self.assertEqual(M.standalone_policy(c)['humanApproval'], 'unregistered')
+        proposals = [p for p in self.model['proposals'] if p['packetId'] == 'I01']
+        self.assertEqual(len(proposals), 18)
+        self.assertEqual(proposals[0]['members'], ['I01-01', 'I01-19', 'I01-20'])
+        for r in records[-2:]:
+            self.assertTrue(all('Theme_Sorter' in o['sourceFile'] for o in r['occurrences']))
+            self.assertEqual(r['primaryLineage'], 'derived')
+
+    def test_sofa_generic_topology_missing_caps_mixed_sets_and_untested_layouts(self):
+        top = next(r['topology'] for r in self.model['relationships'] if r['kind'] == 'closed-chain-topology')
+        rid = lambda n: f'I01-{n:02}'
+        for sequence in [[], [1], [2], [4], [1, 2], [2, 3], [3, 2, 1], [13, 15, 14],
+                         [15, 14, 13], [1, 8, 3], [13, 17, 15], [13, 18], [19, 2, 3], [20, 3], [4, 5], [6, 12]]:
+            with self.subTest(sequence=sequence):
+                result = M.check_topology(top, list(map(rid, sequence)))
+                self.assertFalse(result['valid'])
+                self.assertEqual(result['visualStatus'], 'not-evaluated')
+                self.assertEqual(result['humanApproval'], 'unregistered')
+        # Untested gray-front/left-side repetitions can satisfy metadata without inheriting visual review.
+        for sequence in [[7, 9], [7, 8, 8, 8, 9], [16, 17, 17, 18]]:
+            result = M.check_topology(top, list(map(rid, sequence)))
+            self.assertTrue(result['valid'], result)
+            self.assertEqual(result['visualStatus'], 'not-evaluated')
+        self.assertEqual(M.check_topology(top, [rid(13), rid(14), rid(15)])['offsets'], [[0, 0], [0, 32], [0, 48]])
+        bad = copy.deepcopy(top)
+        next(c for c in bad['components'] if c['recordId'] == rid(14))['frameDimensions'] = [32, 32]
+        self.assertFalse(M.check_topology(bad, [rid(13), rid(14), rid(15)])['valid'])
+        self.assertFalse(M.check_topology(top, ['I01-unrecognized'])['valid'])
+
+    def test_sofa_render_and_topology_evidence_tampering_rejected(self):
+        def assembly(m):
+            r = next(r for r in m['relationships'] if r['id'] == 'I01:assembly:gray-side-source-sampler')
+            r['originalEvidence']['topologyDisposition'] = 'proposed-valid'
+        def output(m):
+            r = next(r for r in m['relationships'] if r['kind'] == 'rendered-assembly-probe')
+            r['originalEvidence']['outputNormalizedRgbaSHA256'] = '0' * 64
+        def token(m):
+            r = next(r for r in m['relationships'] if r['kind'] == 'bounded-shadow-counterpart')
+            r['originalEvidence']['shadowToken'] = [1, 2, 3, 4]
+        for edit, message in [(assembly, 'I01 topology evidence differs'), (output, 'I01 assembly hash differs'),
+                              (token, 'I01 shadow signature differs')]:
+            with self.subTest(edit=edit), self.assertRaisesRegex(ValueError, message):
+                M.validate_model(self.mutated(edit))
 
     def test_normalization_does_not_erase_translucent_color(self):
         im = Image.new('RGBA', (2, 1))

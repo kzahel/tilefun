@@ -17,7 +17,11 @@ Current implementation records: [shared model](2026-10-04-semantic-model.md),
 [full-source coverage ledger](2026-10-04-coverage-ledger.md), and
 [tree-sheet integration](2026-10-04-tree-sheet-integration.md), and
 [outdoor seating delivery](2026-10-04-outdoor-seating-delivery.md), and
-[bounded expansion audit](2026-10-04-expansion-audit.md).
+[bounded expansion audit](2026-10-04-expansion-audit.md),
+[sofa normalization](2026-10-04-sofa-model.md),
+[independent sofa model audit](2026-10-04-sofa-model-review.md), and
+[sofa delivery](2026-10-04-sofa-delivery.md) with its
+[independent presentation review](2026-10-04-sofa-sheet-review.md).
 
 Later execution records: [source inventory](2026-10-04-source-inventory.md),
 [pilot method assessment](2026-10-04-pilot-method-review.md), and

@@ -25,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKETS = ROOT / 'docs/tactical/053-semantic-tileset-map/packets'
 OUTPUT = ROOT / 'public/data/family-sheets.json'
 PINS = {
+    'I01-interior-sofas.json': '75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df',
+    'I01-interior-sofas-review.md': '1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb',
     'P01-trees.json': '3df0e42f9012644afe5cd1233f604b5dd74ec05c4c4f26253834dc2a05281ff6',
     'P02-scrapyard.json': '429d796ec87adb007a4febc267fabff14c1032cd197dc47ed50d729f65073957',
     'P03-cabinets.json': 'c22f7b16e24816a231883bad04cd29e43eac2ce81f09f444d4bc5ffad7875254',
@@ -426,6 +428,99 @@ def build_seating(packet, images, sheets):
                    group('tables', 'Picnic tables', tables)], [], sheets)
 
 
+def build_sofas(packet, images, sheets):
+    records = {row['id']: row for row in packet['candidates']}
+    sources = {row['id']: row for row in packet['sources']}
+    pin = packet['pins']['packedIndex']
+    require(sha((ROOT / pin['path']).read_bytes()) == pin['sha256'], 'Sofa packed index changed')
+    index = {row['key']: row for row in load(ROOT / pin['path'])['entries']}
+    variants = {}
+    for key, row in records.items():
+        alias = row['packedAlias']
+        packed = index[alias['key']]
+        require(packed['rect'] == alias['rect']
+                and packed['sourcePath'] == sources[row['primarySourceId']]['path']
+                and packed['sourceRect'] == row['exportRect'], f'Sofa packed lineage changed: {key}')
+        image = sprite('modern-interiors', alias['rect'])
+        check_pixels(image, row['normalizedRgbaSHA256'], images, key)
+        variants[key] = variant(row['variant'], dict(SHADOWS)[row['variant']], [key], image)
+    groups = {key: [] for key in ('whole', 'front', 'side', 'unknown')}
+    joins = {'front-left-cap': 'Add a matching middle or right end on the right.',
+             'front-repeat-middle': 'Connect matching pieces on both sides.',
+             'front-right-cap': 'Add a matching middle or left end on the left.',
+             'side-top-cap': 'Add a matching middle or bottom end below.',
+             'side-repeat-middle': 'Connect matching pieces above and below.',
+             'side-bottom-cap': 'Add a matching middle or top end above.'}
+    names = {'front-left-cap': 'left end', 'front-repeat-middle': 'middle',
+             'front-right-cap': 'right end', 'side-top-cap': 'top end',
+             'side-repeat-middle': 'middle', 'side-bottom-cap': 'bottom end'}
+    for row in packet['candidates'][:18]:
+        key = row['id']
+        number = int(key.split('-')[1])
+        role = row['fields']['role']['value']
+        color = 'Blue-gray' if row['vendorIndex'] < 10 else 'Pale gray'
+        values = [variants[key]]
+        facts, question = [], None
+        if role in joins:
+            kind = 'component'
+            group_id = 'front' if role.startswith('front') else 'side'
+            label = f'{color} {names[role]}'
+            facts = [fact('Use', 'Cannot stand alone.'), fact('Join', joins[role])]
+            if group_id == 'side':
+                side = 'right' if row['vendorIndex'] < 30 else 'left'
+                label = f'{names[role].capitalize()} · rail on {side}'
+                facts.append(fact('View', f'The raised rail is on the {side} of the image.'))
+            if key == 'I01-01':
+                values += [variants['I01-19'], variants['I01-20']]
+                facts.append(fact('Shadows', 'This end also has dark and shadowless versions. Matching neighbors for those versions are not included here.'))
+        elif row['topology']['standaloneEligibility'].startswith('allowed'):
+            kind, group_id, label = 'whole', 'whole', f'{color} small seat'
+            facts = [fact('Form', 'Appears complete; its exact use is uncertain.')]
+            question = 'An ottoman or a low seat?'
+        else:
+            kind, group_id, label = 'unknown', 'unknown', f'{color} long seat'
+            facts = [fact('Use', 'Whether this can stand alone is unknown.'),
+                     fact('Join', 'No joining rule established yet.')]
+            question = 'A separate backless seat, or an extension for a sofa?'
+        groups[group_id].append(member(key, number, label, kind, facts, values, question))
+    example_names = {
+        'blue-front-closed': 'Blue-gray sofa', 'gray-front-closed': 'Pale gray sofa',
+        'blue-front-short': 'Short blue-gray sofa', 'blue-front-repeated-middle': 'Wider blue-gray sofa',
+        'gray-side-right-short': 'Short side sofa · right rail',
+        'gray-side-right-extended': 'Long side sofa · right rail',
+        'gray-side-right-repeated': 'Longer side sofa · right rail',
+        'gray-side-left-short': 'Short side sofa · left rail',
+        'gray-side-left-extended': 'Long side sofa · left rail'}
+    examples = []
+    for probe in packet['assemblyExperiments']:
+        if probe['topologyDisposition'] != 'proposed-valid':
+            continue
+        layers = []
+        for placement in probe['placements']:
+            rect = records[placement['memberId']]['packedAlias']['rect']
+            x, y, w, h = placement['sourceRect']
+            require(x >= 0 and y >= 0 and x + w <= rect[2] and y + h <= rect[3], 'Sofa probe crop exceeds member')
+            layers.append({'sheetId': 'modern-interiors', 'rect': [rect[0] + x, rect[1] + y, w, h],
+                           'at': placement['targetOffset']})
+        image = {'size': probe['size'], 'layers': layers}
+        check_pixels(image, probe['outputNormalizedRgbaSHA256'], images, probe['id'])
+        examples.append({'id': probe['id'], 'label': example_names[probe['id']],
+                         'description': 'Matching ends close the shape. Original texture bands remain visible.',
+                         'variants': [variant('normal', 'Normal',
+                            [p['memberId'] for p in probe['placements']], image)]})
+    require(len(examples) == 9, 'Sofa positive probe coverage changed')
+    return family('sofas', 'Sofas and seats', 'Small seats, sofa pieces, and examples of how they fit together.',
+                  'Shadow', [('normal', 'Normal')],
+                  [fact('Assembly', 'Keep the same color, view and shadow style. Middles need an end at each side.'),
+                   fact('Examples', 'Nine tested arrangements with normal shadows; longer combinations still need visual review.'),
+                   fact('Gameplay', 'Collision, anchors and sitting positions are unknown.')],
+                  [group('whole', 'Complete small seats', groups['whole']),
+                   group('front', 'Front sofa pieces', groups['front'], 'These pieces need matching neighbors.'),
+                   group('side', 'Side sofa pieces', groups['side'], 'Top ends are taller than middles and bottom ends.'),
+                   group('unknown', 'Seats or extensions?', groups['unknown'], 'These four roles are still uncertain.')],
+                  examples, sheets)
+
+
 def build():
     for name, expected in PINS.items():
         require(sha((PACKETS / name).read_bytes()) == expected, f'Pinned proposal/review changed: {name}')
@@ -433,6 +528,7 @@ def build():
     scrapyard = load(PACKETS / 'P02-scrapyard.json')
     cabinets = load(PACKETS / 'P03-cabinets.json')
     seating = load(PACKETS / 'E01-outdoor-seating.json')
+    sofas = load(PACKETS / 'I01-interior-sofas.json')
     topology = load(PACKETS / 'P03-cabinets-topology.json')
     require(topology['baseProposal']['sha256'] == PINS['P03-cabinets.json'], 'Topology base proposal mismatch')
     require(topology['evidence']['agentEvidence']['reviewSha256'] == PINS['P03-cabinets-review.md'],
@@ -454,18 +550,20 @@ def build():
         require(list(image.size) == [sheet['width'], sheet['height']], 'Source dimensions differ')
         images[sheet['id']] = image
     families = [build_cabinets(cabinets, topology, images, sheets), build_trees(trees, sheets),
-                build_scrapyard(scrapyard, images, sheets), build_seating(seating, images, sheets)]
+                build_scrapyard(scrapyard, images, sheets), build_seating(seating, images, sheets),
+                build_sofas(sofas, images, sheets)]
     expected = {'cabinets': [row['id'] for row in cabinets['measurements']['records']],
                 'trees': [row['id'] for row in trees['candidates']],
                 'scrapyard': [row['id'] for row in scrapyard['candidates']],
-                'outdoor-seating': [row['id'] for row in seating['candidates']]}
+                'outdoor-seating': [row['id'] for row in seating['candidates']],
+                'sofas': [row['id'] for row in sofas['candidates']]}
     for item in families:
         records = [r for g in item['groups'] for m in g['members'] for v in m['variants'] for r in v['recordIds']]
         require(Counter(records) == Counter(expected[item['id']]), f"Incomplete or duplicated coverage: {item['id']}")
         for entry in [m for g in item['groups'] for m in g['members']] + item['examples']:
             for value in entry['variants']:
                 render(value['sprite'], images)
-    require(sum(map(len, expected.values())) == 112, 'Unexpected source record count')
+    require(sum(map(len, expected.values())) == 132, 'Unexpected source record count')
     result = {'version': 1, 'sources': sources, 'families': families}
     result['revision'] = revision(result)
     return result

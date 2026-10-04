@@ -6194,6 +6194,15 @@
       "fingerprint": "9eab8ce91df96550e9fefb24516a376447f01034269697f0e1bfa8f29c556699"
     },
     {
+      "id": "family:sofas",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Sofas and seats",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=sofas&revision=e0c30f0530f49fe6a1ec823b68d806f274a14f0a25c3f2ee620dc3694bc13ea0",
+      "fingerprint": "8b5f8cb6b43612950cdbe3cff2108559e8875361d59669db3e3b78c43076b24d"
+    },
+    {
       "id": "review-0-6ba78e73",
       "batchId": "rooms-0",
       "name": "1 × 1 · wood",

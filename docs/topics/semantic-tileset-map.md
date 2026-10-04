@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: four family sheets delivered; 112 source records normalized; sofa components independently reviewed; full-pack mapping continues.
+Status: five family sheets delivered; 132 source records normalized; Room Builder, playground and animation expansion underway.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -47,8 +47,8 @@ Default to representative variants, separate complete objects from pieces to
 combine, and explain join requirements in ordinary language. Do not add a research
 dashboard, agent states or technical identifiers to normal browsing. The
 [family sheets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=cabinets)
-now cover cabinets, trees, scrapyard pieces and outdoor seating: 67 cards expose
-112 source records through variant selectors. All four are marked Proposed. Notes reuse
+now cover cabinets, trees, scrapyard pieces, outdoor seating and sofas: 85 cards expose
+132 source records through variant selectors. All five are marked Proposed. Notes reuse
 the Workshop outbox/inbox and pin family revision, selected member, variant and
 source layers. They do not approve or promote metadata. The current slice has no
 approval buttons or generator placement enforcement. Asset families appears in the
@@ -80,11 +80,11 @@ labels. Apply it alongside the frozen proposal JSONs. That reconciliation predat
 the owner feedback and bounded visual acceptance recorded below.
 
 The contact-sheet adapter uses committed source images only and checks source
-pins, available pixel hashes, exact frame bounds, all 112 displayed record references and
+pins, available pixel hashes, exact frame bounds, all 132 displayed record references and
 cabinet component restrictions. Run `python3 scripts/build-family-sheets.py --check`
 with Pillow to verify the saved output; ordinary browsing/builds use committed
 JSON and images without original packs. Source images and metadata revisions are
-also verified before browser notes can be submitted. Four discovery candidates
+also verified before browser notes can be submitted. Five discovery candidates
 in one existing-inbox batch route directly to these sheets; notes remain discussion.
 
 The first owner comments gave positive whole-sheet feedback on cabinets and
@@ -104,8 +104,8 @@ the sheet; [delivery and validation](../tactical/053-semantic-tileset-map/notes/
 record the exact revision. The family metadata remains Proposed.
 
 The [normalized semantic model](../tactical/053-semantic-tileset-map/semantic-model.json)
-now covers 112 source records / 94 proposal units: 85 pilot records / 67 units
-plus 27 outdoor seating records / units, with separate source, semantic, relation
+now covers 132 source records / 112 proposal units: 85 pilot records / 67 units,
+27 outdoor seating records / units and 20 sofa records / 18 units, with separate source, semantic, relation
 and review views. Its [independent audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-semantic-model-review.md)
 checks exact pixels, missing-source mode, stale reviews and arbitrary cabinet
 chains. Topology validation does not grant visual or gameplay approval.
@@ -120,18 +120,27 @@ crediting unrecognized packet formats.
 
 The [outdoor seating delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-outdoor-seating-delivery.md)
 adds 15 cards with four-color chair variants. Two benches use byte-identical
-original PNG copies and retain original-only master lineage. All four family
+original PNG copies and retain original-only master lineage. All five family
 sheets support exact piece/variant and whole-sheet discussion.
 
 The [I01 sofa packet](../tactical/053-semantic-tileset-map/packets/I01-interior-sofas.md)
 is independently reviewed: 20 records, including 14 forbidden-standalone partials,
 two complete-seat proposals and four unresolved lower-seat roles. Its 15 assembly
 probes distinguish a pixel-exact source sampler from a complete usable chain.
-It is registered without normalized coverage credit until its explicit adapter is
-implemented. No source member or gameplay geometry is human-approved by that review.
+Its explicit adapter preserves 18 direct master records and two derived render
+counterparts. The general chain checker uses the actual 32px side top and 16px
+middle/end advances; unknown roles never grant standalone permission. The sofa
+sheet exposes 18 cards and nine positive assembly probes. Only the verified left
+end offers extra shadow variants, through a piece-specific control. Those variants
+do not change the complete examples or whole-sheet discussion context. No source
+member or gameplay geometry is human-approved by that review.
 
-Next: normalize I01 and present its assembly examples, then investigate the Room
-Builder path/arch kit. The [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
+The [sofa model audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-sofa-model-review.md)
+and [sheet delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-sofa-delivery.md)
+record independent source replay, adversarial checks and application validation.
+
+Next: finish the bounded Room Builder path/arch and playground tube packets, then
+reconcile a small animation family. Separate mapper/reviewer paths keep work independent. The [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.
 The user authorized reasonable checkpoint commits. The broader plan remains active;
 these records cover a small part of the entire packs.

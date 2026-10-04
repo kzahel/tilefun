@@ -124,8 +124,10 @@ class CoverageTests(unittest.TestCase):
         registrations = {r['packetId']: r for r in self.ledger['registeredPackets']}
         self.assertTrue(registrations['E01-outdoor-seating']['coverageCredit'])
         self.assertEqual(registrations['E01-outdoor-seating']['normalization']['sourceRecords'], 27)
-        self.assertFalse(registrations['I01-interior-sofas']['coverageCredit'])
-        self.assertEqual(registrations['I01-interior-sofas']['assignmentState'], 'review-ready')
+        self.assertTrue(registrations['I01-interior-sofas']['coverageCredit'])
+        self.assertEqual(registrations['I01-interior-sofas']['normalization']['sourceRecords'], 20)
+        self.assertEqual(registrations['I01-interior-sofas']['normalization']['proposalUnits'], 18)
+        self.assertIn(registrations['I01-interior-sofas']['assignmentState'], ('review-ready', 'reconciled'))
         target = self.fixture / coverage.REGISTRY
         before = target.read_bytes()
         try:
@@ -148,11 +150,11 @@ class CoverageTests(unittest.TestCase):
     def test_expansion_primary_lineage_supplemental_aliases_and_gaps(self):
         counts = self.ledger['accounting']
         self.assertEqual(counts['pilotSourceRecords'], 85)
-        self.assertEqual(counts['allNormalizedSourceRecords'], 112)
-        self.assertEqual(counts['allNormalizedProposalUnits'], 94)
-        self.assertEqual(counts['expansionPrimaryMasterLineageRecords'], {'exact-direct': 25, 'original-only': 2})
-        self.assertEqual(counts['expansionNamedExportReferences'], 54)
-        self.assertEqual(counts['expansionSupplementalExactOccurrences'], 25)
+        self.assertEqual(counts['allNormalizedSourceRecords'], 132)
+        self.assertEqual(counts['allNormalizedProposalUnits'], 112)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords'], {'exact-direct': 43, 'original-only': 2, 'counterpart-derived': 2})
+        self.assertEqual(counts['expansionNamedExportReferences'], 82)
+        self.assertEqual(counts['expansionSupplementalExactOccurrences'], 53)
         self.assertEqual(counts['expansionCommittedIntegrationAliases'], 2)
         records = {r['id']: r for r in self.ledger['expandedRecords']}
         for rid in ['E01-05', 'E01-06']:
@@ -164,15 +166,16 @@ class CoverageTests(unittest.TestCase):
         for record in records.values():
             self.assertEqual(record['stages']['accepted']['state'], 'no-evidence')
         sofa = next(r for r in self.ledger['readyBoundedPackets'] if r['key'] == 'interiors-sofa-contrast')
-        self.assertEqual(sofa['state'], 'review-ready')
+        self.assertIn(sofa['state'], ('review-ready', 'reconciled'))
         self.assertIn('I01', sofa['supersededByRegistration'])
         self.assertNotIn('exteriors-theme-sheets', self.ledger['gaps']['supplementalUnassignedGroups'])
-        self.assertIn('interiors-theme-normal', self.ledger['gaps']['supplementalUnassignedGroups'])
+        self.assertNotIn('interiors-theme-normal', self.ledger['gaps']['supplementalUnassignedGroups'])
+        self.assertIn('interiors-theme-normal', self.ledger['gaps']['supplementalPartialGroups'])
         groups = {g['id']: g for g in self.ledger['sourceGroups']}
         self.assertEqual(len(groups['exteriors-master']['expandedPrimaryMasterReferences']), 25)
         self.assertEqual(len(groups['exteriors-master']['expandedRecordIds']), 25)
         self.assertEqual(len(groups['committed-reference']['expandedRecordIds']), 25)
-        self.assertEqual(counts['expansionPrimaryMasterLineageRecords']['exact-direct'], 25)
+        self.assertEqual(counts['expansionPrimaryMasterLineageRecords']['exact-direct'], 43)
         registration = next(r for r in self.ledger['registeredPackets'] if r['packetId'] == 'E01-outdoor-seating')
         self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'evidenced')
         self.assertNotIn('pending', registration['stages']['independentlyReviewed']['scope'])
@@ -181,6 +184,49 @@ class CoverageTests(unittest.TestCase):
         self.assert_corruption_rejected(coverage.MODEL)
         self.assert_corruption_rejected(coverage.BASE + '/packets/E01-outdoor-seating.json')
         self.assert_corruption_rejected('public/assets/semantic-sources/exteriors-bench-5.png')
+
+    def test_sofa_normalization_keeps_counterpart_context_and_unknowns_separate(self):
+        records = {r['id']: r for r in self.ledger['expandedRecords'] if r['packet'] == 'I01'}
+        self.assertEqual(len(records), 20)
+        self.assertEqual(sum(len(r['sources']) for r in records.values()), 28)
+        self.assertEqual(sum(len(r['packedAliases']) for r in records.values()), 28)
+        self.assertEqual(sum(len(r['lineage']['rects']) for r in records.values()), 18)
+        self.assertEqual(sum(len(r['supplementalOccurrences']) for r in records.values()), 28)
+        self.assertEqual(self.ledger['accounting']['expansionPacketAccounting']['I01'], {'sourceRecords': 20, 'proposalUnits': 18})
+        for rid in ['I01-19', 'I01-20']:
+            r = records[rid]
+            self.assertEqual(r['lineage']['rects'], [])
+            self.assertEqual(r['lineage']['kind'], 'counterpart-derived')
+            self.assertTrue(r['regionLinks'])
+            self.assertTrue(all(l['relation'] == 'counterpart-lineage-context' for l in r['regionLinks']))
+        for rid in ['I01-04', 'I01-05', 'I01-10', 'I01-11']:
+            self.assertEqual(records[rid]['topology']['standaloneEligibility'], 'unknown; role unresolved')
+        for r in records.values():
+            self.assertEqual(r['stages']['accepted']['state'], 'no-evidence')
+            self.assertEqual(r['stages']['ownerFeedback']['state'], 'no-evidence')
+        groups = {g['id']: g for g in self.ledger['sourceGroups']}
+        self.assertEqual(len(groups['interiors-master']['expandedPrimaryMasterReferences']), 18)
+        self.assertEqual(len(groups['interiors-master']['expandedRecordIds']), 18)
+        self.assertNotIn('I01-19', groups['interiors-master']['expandedRecordIds'])
+        reg = next(r for r in self.ledger['registeredPackets'] if r['packetId'] == 'I01-interior-sofas')
+        self.assertTrue(reg['coverageCredit'])
+        self.assertEqual(reg['stages']['independentlyReviewed']['state'], 'evidenced')
+        self.assertEqual(self.ledger['accounting']['semanticCompletion'], 'unknown; no exhaustive object/family denominator')
+
+    def test_sofa_proposal_review_pins_and_registration_membership_rejected(self):
+        self.assert_corruption_rejected(coverage.BASE + '/packets/I01-interior-sofas.json')
+        self.assert_corruption_rejected(coverage.BASE + '/packets/I01-interior-sofas-review.md')
+        target = self.fixture / coverage.REGISTRY
+        before = target.read_bytes()
+        try:
+            registry = json.loads(before)
+            reg = next(r for r in registry['registrations'] if r['packetId'] == 'I01-interior-sofas')
+            reg['memberRecords'].pop()
+            target.write_bytes(coverage.encode(registry))
+            with self.assertRaisesRegex(ValueError, 'I01 registered/model membership mismatch'):
+                coverage.build(self.fixture)
+        finally:
+            target.write_bytes(before)
 
     def test_extensible_registration_pins_members_and_review_without_credit(self):
         target = self.fixture / coverage.REGISTRY

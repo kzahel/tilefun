@@ -6,7 +6,7 @@
       "packetId": "E01-outdoor-seating",
       "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "27 independently reviewed exports: City Props Bench 1–7, Camping Chair 1–16 and Benched Table 1–4. 25 direct master matches and two original-only benches; exact source, member and review references frozen.",
+      "taskDescriptor": "27 independently reviewed exports: City Props Bench 1\u20137, Camping Chair 1\u201316 and Benched Table 1\u20134. 25 direct master matches and two original-only benches; exact source, member and review references frozen.",
       "regionIds": [
         "S02-exteriors/E01",
         "S02-exteriors/E05",
@@ -273,9 +273,9 @@
     },
     {
       "packetId": "I01-interior-sofas",
-      "assignmentState": "review-ready",
+      "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "20 independently reviewed Basement sofa/seat records: 18 normal pieces plus two cap render counterparts. Four lower-seat roles unresolved; model normalization and owner-facing sheet pending.",
+      "taskDescriptor": "20 independently reviewed Basement sofa/seat records normalized as 18 proposal units and presented in 18 cards with nine tested assemblies. Four lower-seat roles remain unresolved; two cap render counterparts do not gain direct master lineage.",
       "regionIds": ["S02-I16", "S02-F-large-sofa-probe"],
       "sourceGroupIds": [
         "interiors-singles-black-shadow",

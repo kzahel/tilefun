@@ -1,6 +1,12 @@
 import type { ArtRect, ArtSheet } from "../art/ArtCatalog.js";
 
-export const FAMILY_SHEET_IDS = ["cabinets", "trees", "scrapyard", "outdoor-seating"] as const;
+export const FAMILY_SHEET_IDS = [
+  "cabinets",
+  "trees",
+  "scrapyard",
+  "outdoor-seating",
+  "sofas",
+] as const;
 
 export interface FamilyFact {
   label: string;
@@ -27,7 +33,7 @@ export interface FamilyMember {
   id: string;
   number: number;
   label: string;
-  kind: "whole" | "component";
+  kind: "whole" | "component" | "unknown";
   facts: FamilyFact[];
   question?: string;
   variants: FamilyVariant[];

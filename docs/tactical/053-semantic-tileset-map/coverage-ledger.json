@@ -112,7 +112,7 @@
     },
     {
       "path": "docs/tactical/053-semantic-tileset-map/semantic-model.json",
-      "sha256": "2f612b7fd2e2b9d07bd9c00bbf02cd4955210959b4a8a411857b0c6da93bbc26"
+      "sha256": "c2a0ad9364cf99f0cc6d6e50f772335b6915c4c40187dab1a331608973b6f118"
     },
     {
       "path": "public/assets/semantic-sources/exteriors-bench-5.png",
@@ -123,16 +123,16 @@
       "sha256": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f"
     },
     {
-      "path": "docs/tactical/053-semantic-tileset-map/mapping-registry.json",
-      "sha256": "086061c57e42658058be849978affa074edd40bf921ab6f17b10c5e8c108888c"
-    },
-    {
       "path": "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json",
       "sha256": "75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df"
     },
     {
       "path": "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md",
       "sha256": "1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/mapping-registry.json",
+      "sha256": "ad8607f824a2d7ac6d3b60cb1392a6613e87a8830387d61239df79988f1d196f"
     }
   ],
   "verification": {
@@ -158,16 +158,28 @@
     "originalPNGPaths": 29449,
     "pilotSourceRecords": 85,
     "pilotProposalUnits": 67,
-    "expandedSourceRecords": 27,
-    "expandedProposalUnits": 27,
-    "allNormalizedSourceRecords": 112,
-    "allNormalizedProposalUnits": 94,
-    "expansionPrimaryMasterLineageRecords": {
-      "exact-direct": 25,
-      "original-only": 2
+    "expandedSourceRecords": 47,
+    "expandedProposalUnits": 45,
+    "allNormalizedSourceRecords": 132,
+    "allNormalizedProposalUnits": 112,
+    "expansionPacketAccounting": {
+      "E01": {
+        "sourceRecords": 27,
+        "proposalUnits": 27
+      },
+      "I01": {
+        "sourceRecords": 20,
+        "proposalUnits": 18
+      }
     },
-    "expansionNamedExportReferences": 54,
-    "expansionSupplementalExactOccurrences": 25,
+    "expansionPackedAliasReferences": 28,
+    "expansionPrimaryMasterLineageRecords": {
+      "exact-direct": 43,
+      "original-only": 2,
+      "counterpart-derived": 2
+    },
+    "expansionNamedExportReferences": 82,
+    "expansionSupplementalExactOccurrences": 53,
     "expansionCommittedIntegrationAliases": 2,
     "primaryMasterLineageRecords": {
       "exact-direct": 58,
@@ -9959,10 +9971,33 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "individual semantics unassigned",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion records only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18",
+            "I01-19",
+            "I01-20"
+          ]
         },
         "independentlyReviewed": {
           "state": "evidenced",
@@ -9988,7 +10023,7 @@
       },
       "pilotRecordIds": [],
       "assignment": {
-        "state": "unassigned",
+        "state": "partial-mapped-records",
         "owner": null,
         "next": "Segment bounded objects and verify all occurrences/relations; retain unknown geometry."
       },
@@ -9997,12 +10032,35 @@
         "Intersection can clip a frame; links do not count unique objects or completed pixels.",
         "Counterpart lineage does not establish a raw master occurrence."
       ],
-      "expandedRecordIds": [],
-      "expandedIndependentReviewEvidence": [],
+      "expandedRecordIds": [
+        "I01-01",
+        "I01-02",
+        "I01-03",
+        "I01-04",
+        "I01-05",
+        "I01-06",
+        "I01-07",
+        "I01-08",
+        "I01-09",
+        "I01-10",
+        "I01-11",
+        "I01-12",
+        "I01-13",
+        "I01-14",
+        "I01-15",
+        "I01-16",
+        "I01-17",
+        "I01-18",
+        "I01-19",
+        "I01-20"
+      ],
+      "expandedIndependentReviewEvidence": [
+        "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+      ],
       "packetAssignments": [
         {
           "packetId": "I01-interior-sofas",
-          "state": "review-ready"
+          "state": "reconciled"
         }
       ]
     },
@@ -13702,10 +13760,33 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "individual semantics unassigned",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion records only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18",
+            "I01-19",
+            "I01-20"
+          ]
         },
         "independentlyReviewed": {
           "state": "evidenced",
@@ -13731,7 +13812,7 @@
       },
       "pilotRecordIds": [],
       "assignment": {
-        "state": "unassigned",
+        "state": "partial-mapped-records",
         "owner": null,
         "next": "Segment bounded objects and verify all occurrences/relations; retain unknown geometry."
       },
@@ -13740,12 +13821,35 @@
         "Intersection can clip a frame; links do not count unique objects or completed pixels.",
         "Counterpart lineage does not establish a raw master occurrence."
       ],
-      "expandedRecordIds": [],
-      "expandedIndependentReviewEvidence": [],
+      "expandedRecordIds": [
+        "I01-01",
+        "I01-02",
+        "I01-03",
+        "I01-04",
+        "I01-05",
+        "I01-06",
+        "I01-07",
+        "I01-08",
+        "I01-09",
+        "I01-10",
+        "I01-11",
+        "I01-12",
+        "I01-13",
+        "I01-14",
+        "I01-15",
+        "I01-16",
+        "I01-17",
+        "I01-18",
+        "I01-19",
+        "I01-20"
+      ],
+      "expandedIndependentReviewEvidence": [
+        "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+      ],
       "packetAssignments": [
         {
           "packetId": "I01-interior-sofas",
-          "state": "review-ready"
+          "state": "reconciled"
         }
       ]
     },
@@ -15173,7 +15277,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-02",
@@ -15188,7 +15292,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-03",
@@ -15203,7 +15307,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-04",
@@ -15218,7 +15322,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-07",
@@ -15233,7 +15337,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-08",
@@ -15248,7 +15352,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-09",
@@ -15263,7 +15367,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-10",
@@ -15278,7 +15382,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-11",
@@ -15293,7 +15397,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-12",
@@ -15308,7 +15412,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-13",
@@ -15323,7 +15427,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-14",
@@ -15338,7 +15442,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-15",
@@ -15353,7 +15457,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-16",
@@ -15368,7 +15472,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-17",
@@ -15383,7 +15487,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-18",
@@ -15398,7 +15502,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-19",
@@ -15413,7 +15517,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-20",
@@ -15428,7 +15532,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-21",
@@ -15443,7 +15547,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-22",
@@ -15458,7 +15562,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-23",
@@ -15473,7 +15577,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-24",
@@ -15488,7 +15592,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-25",
@@ -15503,7 +15607,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-26",
@@ -15518,7 +15622,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         },
         {
           "recordId": "E01-27",
@@ -15533,7 +15637,7 @@
             ],
             "scopeGroup": "exteriors-master"
           },
-          "proof": "original-master/committed-master byte identity from source manifest; same occurrence, not an additional count"
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
         }
       ],
       "expandedRecordIds": [
@@ -16151,7 +16255,7 @@
       "pilotReferencedPNGPathCount": 0,
       "pilotRecordIds": [],
       "assignment": {
-        "state": "master-surveyed-partial-semantics",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16164,16 +16268,38 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "listed pilot records only",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18"
+          ]
         },
         "independentlyReviewed": {
           "state": "related-evidence",
-          "scope": "listed surveys/pilots only",
+          "scope": "listed survey/pilot/expansion records only",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/S02-interiors-review.md"
+            "docs/tactical/053-semantic-tileset-map/packets/S02-interiors-review.md",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
           ],
           "recordIds": []
         },
@@ -16195,10 +16321,302 @@
         "Master/sheet path reference never means the whole PNG is semantically investigated.",
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
-      "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
+      "expandedPrimaryMasterReferences": [
+        {
+          "recordId": "I01-01",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              48,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-02",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              64,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-03",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              80,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-04",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              48,
+              5488,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-05",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              64,
+              5488,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-06",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              80,
+              5488,
+              16,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-07",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              96,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-08",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              112,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-09",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              128,
+              5456,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-10",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              112,
+              5488,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-11",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              96,
+              5488,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-12",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              128,
+              5488,
+              16,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-13",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              48,
+              5520,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-14",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              48,
+              5568,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-15",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              48,
+              5552,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-16",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              80,
+              5520,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-17",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              80,
+              5568,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        },
+        {
+          "recordId": "I01-18",
+          "source": {
+            "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+            "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+            "rect": [
+              80,
+              5552,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-master"
+          },
+          "proof": "Exact pinned original-master occurrence; alias is not an additional record or occurrence count"
+        }
+      ],
+      "expandedRecordIds": [
+        "I01-01",
+        "I01-02",
+        "I01-03",
+        "I01-04",
+        "I01-05",
+        "I01-06",
+        "I01-07",
+        "I01-08",
+        "I01-09",
+        "I01-10",
+        "I01-11",
+        "I01-12",
+        "I01-13",
+        "I01-14",
+        "I01-15",
+        "I01-16",
+        "I01-17",
+        "I01-18"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Interiors_16x16.png"
+      ],
+      "expandedReferencedPNGPathCount": 1,
       "expandedSupplementalOccurrenceCount": 0,
       "packetAssignments": []
     },
@@ -16395,7 +16813,7 @@
         "P03-45-black-shadow"
       ],
       "assignment": {
-        "state": "partial-pilot",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16407,9 +16825,10 @@
         },
         "investigated": {
           "state": "partial",
-          "scope": "listed pilot records only",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
           ],
           "recordIds": [
             "P03-37-black-shadow",
@@ -16420,14 +16839,20 @@
             "P03-42-black-shadow",
             "P03-43-black-shadow",
             "P03-44-black-shadow",
-            "P03-45-black-shadow"
+            "P03-45-black-shadow",
+            "I01-13",
+            "I01-14",
+            "I01-16",
+            "I01-17",
+            "I01-19"
           ]
         },
         "independentlyReviewed": {
           "state": "related-evidence",
-          "scope": "listed surveys/pilots only",
+          "scope": "listed survey/pilot/expansion records only",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
           ],
           "recordIds": []
         },
@@ -16452,14 +16877,26 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
+      "expandedRecordIds": [
+        "I01-13",
+        "I01-14",
+        "I01-16",
+        "I01-17",
+        "I01-19"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_27.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_28.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_30.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_31.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_4.png"
+      ],
+      "expandedReferencedPNGPathCount": 5,
       "expandedSupplementalOccurrenceCount": 0,
       "packetAssignments": [
         {
           "packetId": "I01-interior-sofas",
-          "state": "review-ready"
+          "state": "reconciled"
         }
       ]
     },
@@ -16502,7 +16939,7 @@
         "P03-45-normal"
       ],
       "assignment": {
-        "state": "partial-pilot",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16514,9 +16951,10 @@
         },
         "investigated": {
           "state": "partial",
-          "scope": "listed pilot records only",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
           ],
           "recordIds": [
             "P03-37-normal",
@@ -16527,14 +16965,33 @@
             "P03-42-normal",
             "P03-43-normal",
             "P03-44-normal",
-            "P03-45-normal"
+            "P03-45-normal",
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18"
           ]
         },
         "independentlyReviewed": {
           "state": "related-evidence",
-          "scope": "listed surveys/pilots only",
+          "scope": "listed survey/pilot/expansion records only",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
           ],
           "recordIds": []
         },
@@ -16559,14 +17016,52 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
+      "expandedRecordIds": [
+        "I01-01",
+        "I01-02",
+        "I01-03",
+        "I01-04",
+        "I01-05",
+        "I01-06",
+        "I01-07",
+        "I01-08",
+        "I01-09",
+        "I01-10",
+        "I01-11",
+        "I01-12",
+        "I01-13",
+        "I01-14",
+        "I01-15",
+        "I01-16",
+        "I01-17",
+        "I01-18"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_10.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_11.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_12.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_13.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_14.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_15.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_27.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_28.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_29.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_30.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_31.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_32.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_4.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_5.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_6.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_7.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_8.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_9.png"
+      ],
+      "expandedReferencedPNGPathCount": 18,
       "expandedSupplementalOccurrenceCount": 0,
       "packetAssignments": [
         {
           "packetId": "I01-interior-sofas",
-          "state": "review-ready"
+          "state": "reconciled"
         }
       ]
     },
@@ -16609,7 +17104,7 @@
         "P03-45-shadowless"
       ],
       "assignment": {
-        "state": "partial-pilot",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16621,9 +17116,10 @@
         },
         "investigated": {
           "state": "partial",
-          "scope": "listed pilot records only",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets.json",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
           ],
           "recordIds": [
             "P03-37-shadowless",
@@ -16634,14 +17130,20 @@
             "P03-42-shadowless",
             "P03-43-shadowless",
             "P03-44-shadowless",
-            "P03-45-shadowless"
+            "P03-45-shadowless",
+            "I01-13",
+            "I01-14",
+            "I01-16",
+            "I01-17",
+            "I01-20"
           ]
         },
         "independentlyReviewed": {
           "state": "related-evidence",
-          "scope": "listed surveys/pilots only",
+          "scope": "listed survey/pilot/expansion records only",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md"
+            "docs/tactical/053-semantic-tileset-map/packets/P03-cabinets-review.md",
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
           ],
           "recordIds": []
         },
@@ -16666,14 +17168,26 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
+      "expandedRecordIds": [
+        "I01-13",
+        "I01-14",
+        "I01-16",
+        "I01-17",
+        "I01-20"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_27.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_28.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_30.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_31.png",
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_4.png"
+      ],
+      "expandedReferencedPNGPathCount": 5,
       "expandedSupplementalOccurrenceCount": 0,
       "packetAssignments": [
         {
           "packetId": "I01-interior-sofas",
-          "state": "review-ready"
+          "state": "reconciled"
         }
       ]
     },
@@ -16696,7 +17210,7 @@
       "pilotReferencedPNGPathCount": 0,
       "pilotRecordIds": [],
       "assignment": {
-        "state": "unassigned",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16707,15 +17221,25 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "listed pilot records only",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-13",
+            "I01-14",
+            "I01-16",
+            "I01-17",
+            "I01-19"
+          ]
         },
         "independentlyReviewed": {
-          "state": "no-evidence",
-          "scope": "listed surveys/pilots only",
-          "evidence": [],
+          "state": "related-evidence",
+          "scope": "listed survey/pilot/expansion records only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
           "recordIds": []
         },
         "ownerFeedback": {
@@ -16737,10 +17261,18 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
-      "expandedSupplementalOccurrenceCount": 0,
+      "expandedRecordIds": [
+        "I01-13",
+        "I01-14",
+        "I01-16",
+        "I01-17",
+        "I01-19"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png"
+      ],
+      "expandedReferencedPNGPathCount": 1,
+      "expandedSupplementalOccurrenceCount": 5,
       "packetAssignments": []
     },
     {
@@ -16762,7 +17294,7 @@
       "pilotReferencedPNGPathCount": 0,
       "pilotRecordIds": [],
       "assignment": {
-        "state": "unassigned",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16773,15 +17305,38 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "listed pilot records only",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18"
+          ]
         },
         "independentlyReviewed": {
-          "state": "no-evidence",
-          "scope": "listed surveys/pilots only",
-          "evidence": [],
+          "state": "related-evidence",
+          "scope": "listed survey/pilot/expansion records only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
           "recordIds": []
         },
         "ownerFeedback": {
@@ -16803,10 +17358,31 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
-      "expandedSupplementalOccurrenceCount": 0,
+      "expandedRecordIds": [
+        "I01-01",
+        "I01-02",
+        "I01-03",
+        "I01-04",
+        "I01-05",
+        "I01-06",
+        "I01-07",
+        "I01-08",
+        "I01-09",
+        "I01-10",
+        "I01-11",
+        "I01-12",
+        "I01-13",
+        "I01-14",
+        "I01-15",
+        "I01-16",
+        "I01-17",
+        "I01-18"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png"
+      ],
+      "expandedReferencedPNGPathCount": 1,
+      "expandedSupplementalOccurrenceCount": 18,
       "packetAssignments": []
     },
     {
@@ -16828,7 +17404,7 @@
       "pilotReferencedPNGPathCount": 0,
       "pilotRecordIds": [],
       "assignment": {
-        "state": "unassigned",
+        "state": "partial-mapped-records",
         "owner": null
       },
       "stages": {
@@ -16839,15 +17415,25 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "no-evidence",
-          "scope": "listed pilot records only",
-          "evidence": [],
-          "recordIds": []
+          "state": "partial",
+          "scope": "listed pilot/expansion references only; no whole-PNG completion",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-13",
+            "I01-14",
+            "I01-16",
+            "I01-17",
+            "I01-20"
+          ]
         },
         "independentlyReviewed": {
-          "state": "no-evidence",
-          "scope": "listed surveys/pilots only",
-          "evidence": [],
+          "state": "related-evidence",
+          "scope": "listed survey/pilot/expansion records only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
           "recordIds": []
         },
         "ownerFeedback": {
@@ -16869,10 +17455,18 @@
         "Unreferenced files remain unassigned even when a duplicate or packed alias is known."
       ],
       "expandedPrimaryMasterReferences": [],
-      "expandedRecordIds": [],
-      "expandedReferencedPNGPaths": [],
-      "expandedReferencedPNGPathCount": 0,
-      "expandedSupplementalOccurrenceCount": 0,
+      "expandedRecordIds": [
+        "I01-13",
+        "I01-14",
+        "I01-16",
+        "I01-17",
+        "I01-20"
+      ],
+      "expandedReferencedPNGPaths": [
+        "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png"
+      ],
+      "expandedReferencedPNGPathCount": 1,
+      "expandedSupplementalOccurrenceCount": 5,
       "packetAssignments": []
     }
   ],
@@ -28311,6 +28905,3304 @@
           "recordIds": []
         }
       }
+    },
+    {
+      "id": "I01-01",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_4.png",
+          "sha256": "654e0a9b922ea797e2a9ca8637350b1f317898ae973aad96a47c803abbe90664",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "3f18c784e200c798e2d0e7998300aa82f0d833f3ae16fcebac3b1900b5f41122",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            48,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-4",
+          "rect": [
+            832,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_4.png",
+            "sha256": "654e0a9b922ea797e2a9ca8637350b1f317898ae973aad96a47c803abbe90664",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            48,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "right"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-02",
+          "I01-03"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-01"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-01"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-02",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_5.png",
+          "sha256": "80ee6e12172022eebf609903842900fc9fa4e71c726b2f452604784b96bb356a",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "f509c7eda0b8a7535f20b04c10754ae973bba886fb5970a6f1aa06f6e96cb664",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            64,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-5",
+          "rect": [
+            848,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_5.png",
+            "sha256": "80ee6e12172022eebf609903842900fc9fa4e71c726b2f452604784b96bb356a",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            64,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "left",
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "left",
+          "right"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-01",
+          "I01-02",
+          "I01-03"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "left": [
+            "front-left-cap",
+            "front-repeat-middle"
+          ],
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": true,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-02"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-02"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-03",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_6.png",
+          "sha256": "b32fa71ff54a9eb5ab3cdda1aaa5c5f0590903c1ecfef946f9a5c51ab7f1f5dd",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "29344d766bb3b579c38ff0828113d2a837eb795561bed9a84498a08361632349",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            80,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-6",
+          "rect": [
+            864,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_6.png",
+            "sha256": "b32fa71ff54a9eb5ab3cdda1aaa5c5f0590903c1ecfef946f9a5c51ab7f1f5dd",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            80,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "left"
+        ],
+        "requiredNeighborEdges": [
+          "left"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-01",
+          "I01-02"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "left": [
+            "front-left-cap",
+            "front-repeat-middle"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-03"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-03"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-04",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_7.png",
+          "sha256": "2b778331d638cb06526c4551264ce879a4be4287f4dcf7b11c7fc58187e1c620",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "addf3ecbad4a0f3d9a2e2edbc0ba8acb536cf184d8e85cba3f901a60882911f6",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            48,
+            5488,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-7",
+          "rect": [
+            880,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_7.png",
+            "sha256": "2b778331d638cb06526c4551264ce879a4be4287f4dcf7b11c7fc58187e1c620",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            48,
+            32,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "unknown; role unresolved",
+        "openJoinEdges": [
+          "top-edge connection is a hypothesis, not an established port"
+        ],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-04"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-04"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-05",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_8.png",
+          "sha256": "03eb56859138aa4f6d3420b754ab695c5e609b474d391a0677c74e1cd32601c6",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "bc57f22312b7047a6bf1fa92b150d97f5a442e0d982ea7097b697661bf2ac4bd",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            64,
+            5488,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-8",
+          "rect": [
+            896,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_8.png",
+            "sha256": "03eb56859138aa4f6d3420b754ab695c5e609b474d391a0677c74e1cd32601c6",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            64,
+            32,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "unknown; role unresolved",
+        "openJoinEdges": [
+          "top-edge connection is a hypothesis, not an established port"
+        ],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-05"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-05"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-06",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_9.png",
+          "sha256": "9362c69364b2208147e2d6a068008f07801b82657a0278a8492716c4d94b4d13",
+          "rect": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "6afef70f34865db00a214e0ee406764e2ec1bf824800e65ecd9aeaef090e14cf",
+      "frameDimensions": [
+        16,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            80,
+            5488,
+            16,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-9",
+          "rect": [
+            1824,
+            8462,
+            16,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_9.png",
+            "sha256": "9362c69364b2208147e2d6a068008f07801b82657a0278a8492716c4d94b4d13",
+            "rect": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            80,
+            32,
+            16,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "allowed as visual proposal only",
+        "openJoinEdges": [],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-06"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-06"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-07",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_10.png",
+          "sha256": "6c7fa5a1fe025d4ace536b61793c318a9e3676483d46d53df7b311175dd17d53",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "667c041841e97741daca47f6e93a935714145938d1b868e4301c41285a843441",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            96,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-10",
+          "rect": [
+            912,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_10.png",
+            "sha256": "6c7fa5a1fe025d4ace536b61793c318a9e3676483d46d53df7b311175dd17d53",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            96,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "right"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-08",
+          "I01-09"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-07"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-07"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-08",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_11.png",
+          "sha256": "997132cd190cbb671969406266aae555f9eb240e7830ac45266c084ca68465e6",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "9d07ce9624cb8f47f762eb1d92b5de88faa2cf75603629840510ee359ae76461",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            112,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-11",
+          "rect": [
+            928,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_11.png",
+            "sha256": "997132cd190cbb671969406266aae555f9eb240e7830ac45266c084ca68465e6",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            112,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "left",
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "left",
+          "right"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-07",
+          "I01-08",
+          "I01-09"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "left": [
+            "front-left-cap",
+            "front-repeat-middle"
+          ],
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": true,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-08"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-08"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-09",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_12.png",
+          "sha256": "6947dddb4040de9696764aa1889101ef3411a0c1fb70f4829d470ff4daf2d962",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "aba7f14ce33c71290485a6a8b74d44bb3dab5e40e764c45ea3e1d0363252774b",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            128,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-12",
+          "rect": [
+            944,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_12.png",
+            "sha256": "6947dddb4040de9696764aa1889101ef3411a0c1fb70f4829d470ff4daf2d962",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            128,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "left"
+        ],
+        "requiredNeighborEdges": [
+          "left"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-07",
+          "I01-08"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "left": [
+            "front-left-cap",
+            "front-repeat-middle"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-09"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-09"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-10",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_13.png",
+          "sha256": "403ae5e50ff5711997d9b52ec9139ca8afad026f6cae9a4251c0c8bf0f9307d5",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "73ebb7c73620f8577bada7546d768da08089125d040859b6565d5b6c227672f1",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            112,
+            5488,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-13",
+          "rect": [
+            960,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_13.png",
+            "sha256": "403ae5e50ff5711997d9b52ec9139ca8afad026f6cae9a4251c0c8bf0f9307d5",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            112,
+            32,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "unknown; role unresolved",
+        "openJoinEdges": [
+          "top-edge connection is a hypothesis, not an established port"
+        ],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-10"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-10"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-11",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_14.png",
+          "sha256": "76ac38d70b40cd425e6f0fcfed5d19723c79f8d3de08b28acf278622ccf1f1b7",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "b89ecc55e3a232d27e5ab71b75734215a55947dfb8ce0043c53733ca45ce7d32",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            96,
+            5488,
+            16,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-14",
+          "rect": [
+            976,
+            6830,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_14.png",
+            "sha256": "76ac38d70b40cd425e6f0fcfed5d19723c79f8d3de08b28acf278622ccf1f1b7",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            96,
+            32,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "unknown; role unresolved",
+        "openJoinEdges": [
+          "top-edge connection is a hypothesis, not an established port"
+        ],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-11"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-11"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-12",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_15.png",
+          "sha256": "509fb79777d36f2901c3c3541643ea0b635774eac9414922a236ec49c2aaa3cf",
+          "rect": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "ace739fa14e87f577b13f62f5da788fb7fd95e64cc11f98ce5fda52484840bc5",
+      "frameDimensions": [
+        16,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            128,
+            5488,
+            16,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-15",
+          "rect": [
+            1840,
+            8462,
+            16,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_15.png",
+            "sha256": "509fb79777d36f2901c3c3541643ea0b635774eac9414922a236ec49c2aaa3cf",
+            "rect": [
+              0,
+              0,
+              16,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            128,
+            32,
+            16,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "allowed as visual proposal only",
+        "openJoinEdges": [],
+        "requiredNeighborEdges": [],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {},
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-12"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-12"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-13",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_27.png",
+          "sha256": "9053dcd8ccb70a372724c43af2ded1d749de4529c1afc16a7549d479fbb632f1",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_27.png",
+          "sha256": "9196babf0cc6006c06fd29249257124ed2baa4199b59984324da745985982e2d",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_27.png",
+          "sha256": "9053dcd8ccb70a372724c43af2ded1d749de4529c1afc16a7549d479fbb632f1",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-shadowless"
+        }
+      ],
+      "normalizedPixelSHA256": "04cbde8e80aeb511fa291f92217173db31d25eb38fe1a84cbe56c389336d36f4",
+      "frameDimensions": [
+        32,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            48,
+            5520,
+            32,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/black-shadow/basement/basement-shadow-singles-27",
+          "rect": [
+            1184,
+            5198,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_27.png",
+            "sha256": "9053dcd8ccb70a372724c43af2ded1d749de4529c1afc16a7549d479fbb632f1",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-black-shadow"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-27",
+          "rect": [
+            1280,
+            5582,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_27.png",
+            "sha256": "9196babf0cc6006c06fd29249257124ed2baa4199b59984324da745985982e2d",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/shadowless/basement/basement-singles-shadowless-27",
+          "rect": [
+            224,
+            5998,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_27.png",
+            "sha256": "9053dcd8ccb70a372724c43af2ded1d749de4529c1afc16a7549d479fbb632f1",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-shadowless"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            48,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+          "sha256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+          "rect": [
+            48,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+          "sha256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+          "rect": [
+            48,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-shadowless"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "bottom"
+        ],
+        "requiredNeighborEdges": [
+          "bottom"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-14",
+          "I01-15"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "bottom": [
+            "side-repeat-middle",
+            "side-bottom-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-13"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-13"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-14",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_28.png",
+          "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_28.png",
+          "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_28.png",
+          "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-shadowless"
+        }
+      ],
+      "normalizedPixelSHA256": "2c5afdea46562082df5d9ca40d0e5da57df3fd8a4515c29b419186add912c75e",
+      "frameDimensions": [
+        32,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            48,
+            5568,
+            32,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/black-shadow/basement/basement-shadow-singles-28",
+          "rect": [
+            512,
+            7726,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_28.png",
+            "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-black-shadow"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-28",
+          "rect": [
+            192,
+            7790,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_28.png",
+            "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/shadowless/basement/basement-singles-shadowless-28",
+          "rect": [
+            128,
+            7838,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_28.png",
+            "sha256": "067f9732a7ae10b3e9cf78bdffc0d41aef081fce24d561401d0bc16e71e595b6",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-shadowless"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            48,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+          "sha256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+          "rect": [
+            48,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+          "sha256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+          "rect": [
+            48,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-shadowless"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "top",
+          "bottom"
+        ],
+        "requiredNeighborEdges": [
+          "top",
+          "bottom"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-13",
+          "I01-14",
+          "I01-15"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "top": [
+            "side-top-cap",
+            "side-repeat-middle"
+          ],
+          "bottom": [
+            "side-repeat-middle",
+            "side-bottom-cap"
+          ]
+        },
+        "repeatableMiddle": true,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-14"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-14"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-15",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_29.png",
+          "sha256": "931c874276e0ac0b96b35da4c32003abd9a755e6a8157a17b48ae579710752ef",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "41d48214bdd7ec68c3c2c7c91dbcc8a796adc94c1b2ab89494fec3cac4936e80",
+      "frameDimensions": [
+        32,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            48,
+            5552,
+            32,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-29",
+          "rect": [
+            224,
+            7790,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_29.png",
+            "sha256": "931c874276e0ac0b96b35da4c32003abd9a755e6a8157a17b48ae579710752ef",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            48,
+            96,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "top"
+        ],
+        "requiredNeighborEdges": [
+          "top"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-13",
+          "I01-14"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "top": [
+            "side-top-cap",
+            "side-repeat-middle"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-15"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-15"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-16",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_30.png",
+          "sha256": "e4c5d76a87a721b4d61d3696e4643fba0bf668d0b1f598293feea913829d57dd",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_30.png",
+          "sha256": "d527c3827fbaf615453a865facdd6e8a73d1c190ae40683ca974f68c02dd6981",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_30.png",
+          "sha256": "e4c5d76a87a721b4d61d3696e4643fba0bf668d0b1f598293feea913829d57dd",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-singles-shadowless"
+        }
+      ],
+      "normalizedPixelSHA256": "be24be0379b0976b62ae0455726b482ae6c8b6c933fd98b1d6a559ec1037f556",
+      "frameDimensions": [
+        32,
+        32
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            80,
+            5520,
+            32,
+            32
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/black-shadow/basement/basement-shadow-singles-30",
+          "rect": [
+            1216,
+            5198,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_30.png",
+            "sha256": "e4c5d76a87a721b4d61d3696e4643fba0bf668d0b1f598293feea913829d57dd",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-black-shadow"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-30",
+          "rect": [
+            1312,
+            5582,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_30.png",
+            "sha256": "d527c3827fbaf615453a865facdd6e8a73d1c190ae40683ca974f68c02dd6981",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/shadowless/basement/basement-singles-shadowless-30",
+          "rect": [
+            256,
+            5998,
+            32,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_30.png",
+            "sha256": "e4c5d76a87a721b4d61d3696e4643fba0bf668d0b1f598293feea913829d57dd",
+            "rect": [
+              0,
+              0,
+              32,
+              32
+            ],
+            "scopeGroup": "interiors-singles-shadowless"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            80,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+          "sha256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+          "rect": [
+            80,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+          "sha256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+          "rect": [
+            80,
+            64,
+            32,
+            32
+          ],
+          "scopeGroup": "interiors-theme-shadowless"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "bottom"
+        ],
+        "requiredNeighborEdges": [
+          "bottom"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-17",
+          "I01-18"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "bottom": [
+            "side-repeat-middle",
+            "side-bottom-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-16"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-16"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-17",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_31.png",
+          "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_31.png",
+          "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_31.png",
+          "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-shadowless"
+        }
+      ],
+      "normalizedPixelSHA256": "9b38423d377605eff34995e219d36486bc5ad880ab2591c1212613761e8b1b29",
+      "frameDimensions": [
+        32,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            80,
+            5568,
+            32,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/black-shadow/basement/basement-shadow-singles-31",
+          "rect": [
+            576,
+            7726,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_31.png",
+            "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-black-shadow"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-31",
+          "rect": [
+            256,
+            7790,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_31.png",
+            "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        },
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/shadowless/basement/basement-singles-shadowless-31",
+          "rect": [
+            192,
+            7838,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_31.png",
+            "sha256": "64f3c7747e38265e20d5d9612dff2b4758e906ee261b5456681de7309e03764d",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-shadowless"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            80,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+          "sha256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+          "rect": [
+            80,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-black-shadow"
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+          "sha256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+          "rect": [
+            80,
+            112,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-shadowless"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "top",
+          "bottom"
+        ],
+        "requiredNeighborEdges": [
+          "top",
+          "bottom"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-16",
+          "I01-17",
+          "I01-18"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "top": [
+            "side-top-cap",
+            "side-repeat-middle"
+          ],
+          "bottom": [
+            "side-repeat-middle",
+            "side-bottom-cap"
+          ]
+        },
+        "repeatableMiddle": true,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-17"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-17"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-18",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_32.png",
+          "sha256": "64fbfc91ad9608a851dd7f033325cf8542f8da83b9d9344eeef23bb544ea1bbe",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-singles-normal"
+        }
+      ],
+      "normalizedPixelSHA256": "fa4deabe1abcc37690aa0acb57c870e21b76faa12ebe796926eecf31a58805f1",
+      "frameDimensions": [
+        32,
+        16
+      ],
+      "lineage": {
+        "kind": "exact-direct",
+        "master": "interiors",
+        "rects": [
+          [
+            80,
+            5552,
+            32,
+            16
+          ]
+        ],
+        "contextRects": [],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/normal/basement/basement-singles-32",
+          "rect": [
+            288,
+            7790,
+            32,
+            16
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/14_Basement_Singles/Basement_Singles_32.png",
+            "sha256": "64fbfc91ad9608a851dd7f033325cf8542f8da83b9d9344eeef23bb544ea1bbe",
+            "rect": [
+              0,
+              0,
+              32,
+              16
+            ],
+            "scopeGroup": "interiors-singles-normal"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+          "sha256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+          "rect": [
+            80,
+            96,
+            32,
+            16
+          ],
+          "scopeGroup": "interiors-theme-normal"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "exact-master-source-rectangle-intersection"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "exact-master-source-rectangle-intersection"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "top"
+        ],
+        "requiredNeighborEdges": [
+          "top"
+        ],
+        "compatibleSelectedMembers": [
+          "I01-16",
+          "I01-17"
+        ],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "top": [
+            "side-top-cap",
+            "side-repeat-middle"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-18"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-18"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-19",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_4.png",
+          "sha256": "34594e9b066af9956696cfe2d77c6c432e0cf318d1eb621d9b46b76837c3e07e",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-black-shadow"
+        }
+      ],
+      "normalizedPixelSHA256": "afc6f4eea68301e7aa54ae1ec367d5a5331623bc96b049b5fe9eb78945d350f9",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "counterpart-derived",
+        "master": "interiors",
+        "rects": [],
+        "contextRects": [
+          [
+            48,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/black-shadow/basement/basement-shadow-singles-4",
+          "rect": [
+            1168,
+            6382,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow_Singles/14_Basement_Black_Shadow_Singles_16x16/Basement_Shadow_Singles_4.png",
+            "sha256": "34594e9b066af9956696cfe2d77c6c432e0cf318d1eb621d9b46b76837c3e07e",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-black-shadow"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+          "sha256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+          "rect": [
+            48,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-black-shadow"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "counterpart-lineage-context"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "counterpart-lineage-context"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "right"
+        ],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-19"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-19"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "id": "I01-20",
+      "packet": "I01",
+      "sources": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_4.png",
+          "sha256": "a9a9bd17e784b4833938a76716fd65af3646ccdb6d1adf2b1533759dcd4f0859",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-singles-shadowless"
+        }
+      ],
+      "normalizedPixelSHA256": "3f23e890b237c17c35ffd26b4a3108534dfb6bdd3dd27694a54b148c560daf64",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "lineage": {
+        "kind": "counterpart-derived",
+        "master": "interiors",
+        "rects": [],
+        "contextRects": [
+          [
+            48,
+            5456,
+            16,
+            32
+          ]
+        ],
+        "scope": "exact original-master frames separate from bounded cap-4 counterpart context; context is not an occurrence"
+      },
+      "packedAliases": [
+        {
+          "path": "public/assets/tilesets/modern-interiors-atlas.png",
+          "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "key": "single/shadowless/basement/basement-singles-shadowless-4",
+          "rect": [
+            1024,
+            7278,
+            16,
+            32
+          ],
+          "originalSource": {
+            "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless_Singles/14_Basement_Singles_Shadowless/Basement_Singles_Shadowless_4.png",
+            "sha256": "a9a9bd17e784b4833938a76716fd65af3646ccdb6d1adf2b1533759dcd4f0859",
+            "rect": [
+              0,
+              0,
+              16,
+              32
+            ],
+            "scopeGroup": "interiors-singles-shadowless"
+          },
+          "coordinateSpace": "packed-atlas-pixels"
+        }
+      ],
+      "committedMasterAliases": [],
+      "supplementalOccurrences": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+          "sha256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+          "rect": [
+            48,
+            0,
+            16,
+            32
+          ],
+          "scopeGroup": "interiors-theme-shadowless"
+        }
+      ],
+      "integrationAliases": [],
+      "regionLinks": [
+        {
+          "regionId": "S02-I16",
+          "relation": "counterpart-lineage-context"
+        },
+        {
+          "regionId": "S02-F-large-sofa-probe",
+          "relation": "counterpart-lineage-context"
+        }
+      ],
+      "topology": {
+        "standaloneEligibility": "forbidden; partial component",
+        "openJoinEdges": [
+          "right"
+        ],
+        "requiredNeighborEdges": [
+          "right"
+        ],
+        "compatibleSelectedMembers": [],
+        "variantCompatibility": "same body palette, facing family and render variant; cross-variant mixing not tested",
+        "requiredPortNeighborRoles": {
+          "right": [
+            "front-repeat-middle",
+            "front-right-cap"
+          ]
+        },
+        "repeatableMiddle": false,
+        "limits": "Only explicit examples below rendered; 7/8/13/14 retain unresolved join and standalone roles; black-shadow/shadowless cap4 needs neighbors outside this selected packet.",
+        "enforcement": "metadata only; no runtime/catalog change"
+      },
+      "stages": {
+        "surveyed": {
+          "state": "context-only",
+          "scope": "survey does not individually segment this export",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "evidenced",
+          "scope": "pinned bounded I01 record",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+          ],
+          "recordIds": [
+            "I01-20"
+          ]
+        },
+        "independentlyReviewed": {
+          "state": "evidenced",
+          "scope": "exact I01 per-record disposition; unresolved roles and bounded rendering retained",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+          ],
+          "recordIds": [
+            "I01-20"
+          ]
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
     }
   ],
   "registeredPackets": [
@@ -28743,7 +32635,7 @@
       "normalization": {
         "adapter": "E01-outdoor-seating-v1",
         "modelPath": "docs/tactical/053-semantic-tileset-map/semantic-model.json",
-        "modelSHA256": "2f612b7fd2e2b9d07bd9c00bbf02cd4955210959b4a8a411857b0c6da93bbc26",
+        "modelSHA256": "c2a0ad9364cf99f0cc6d6e50f772335b6915c4c40187dab1a331608973b6f118",
         "sourceRecords": 27,
         "proposalUnits": 27,
         "limit": "bounded records only; no region/family/pixel completion"
@@ -28845,9 +32737,9 @@
     },
     {
       "packetId": "I01-interior-sofas",
-      "assignmentState": "review-ready",
+      "assignmentState": "reconciled",
       "owner": "coordinator",
-      "taskDescriptor": "20 independently reviewed Basement sofa/seat records: 18 normal pieces plus two cap render counterparts. Four lower-seat roles unresolved; model normalization and owner-facing sheet pending.",
+      "taskDescriptor": "20 independently reviewed Basement sofa/seat records normalized as 18 proposal units and presented in 18 cards with nine tested assemblies. Four lower-seat roles remain unresolved; two cap render counterparts do not gain direct master lineage.",
       "regionIds": [
         "S02-I16",
         "S02-F-large-sofa-probe"
@@ -29157,8 +33049,15 @@
           208
         ]
       ],
-      "coverageCredit": false,
-      "normalization": "pending explicit packet adapter/model validation; no source-unit or semantic count credited",
+      "coverageCredit": true,
+      "normalization": {
+        "adapter": "I01-interior-sofas-v1",
+        "modelPath": "docs/tactical/053-semantic-tileset-map/semantic-model.json",
+        "modelSHA256": "c2a0ad9364cf99f0cc6d6e50f772335b6915c4c40187dab1a331608973b6f118",
+        "sourceRecords": 20,
+        "proposalUnits": 18,
+        "limit": "bounded records only; no region/family/pixel completion"
+      },
       "stages": {
         "surveyed": {
           "state": "related-context",
@@ -29167,20 +33066,64 @@
           "recordIds": []
         },
         "investigated": {
-          "state": "registered-proposal",
-          "scope": "assignment/proposal registration only",
+          "state": "evidenced",
+          "scope": "20 explicit normalized bounded I01 records; no whole-region completeness",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json"
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas.json",
+            "docs/tactical/053-semantic-tileset-map/semantic-model.json"
           ],
-          "recordIds": []
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18",
+            "I01-19",
+            "I01-20"
+          ]
         },
         "independentlyReviewed": {
-          "state": "registered-evidence",
-          "scope": "review reference only; applicability requires explicit normalization",
+          "state": "evidenced",
+          "scope": "exact I01 proposal/member dispositions preserved by reviewed explicit model adapter",
           "evidence": [
-            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md"
+            "docs/tactical/053-semantic-tileset-map/packets/I01-interior-sofas-review.md",
+            "docs/tactical/053-semantic-tileset-map/semantic-model.json"
           ],
-          "recordIds": []
+          "recordIds": [
+            "I01-01",
+            "I01-02",
+            "I01-03",
+            "I01-04",
+            "I01-05",
+            "I01-06",
+            "I01-07",
+            "I01-08",
+            "I01-09",
+            "I01-10",
+            "I01-11",
+            "I01-12",
+            "I01-13",
+            "I01-14",
+            "I01-15",
+            "I01-16",
+            "I01-17",
+            "I01-18",
+            "I01-19",
+            "I01-20"
+          ]
         },
         "ownerFeedback": {
           "state": "no-evidence",
@@ -29313,10 +33256,7 @@
       "exteriors-autotiles",
       "interiors-animations",
       "interiors-home-examples",
-      "interiors-room-builder-subfiles",
-      "interiors-theme-black-shadow",
-      "interiors-theme-normal",
-      "interiors-theme-shadowless"
+      "interiors-room-builder-subfiles"
     ],
     "supplementalPartialGroups": [
       "exteriors-complete-singles",
@@ -29324,12 +33264,15 @@
       "exteriors-theme-singles",
       "interiors-singles-black-shadow",
       "interiors-singles-normal",
-      "interiors-singles-shadowless"
+      "interiors-singles-shadowless",
+      "interiors-theme-black-shadow",
+      "interiors-theme-normal",
+      "interiors-theme-shadowless"
     ],
     "annotation": "Five Room Builder search windows can overlap art; only alpha residuals outside family windows were dispositioned as captions/arrows.",
     "duplicates": "6,224 Exteriors theme singles are byte-identical same-name complete singles. Distinct paths remain occurrences; no semantic completion inherited.",
     "packedAliases": "Interiors atlas is a selection, not either master. Packed rect never supplies original-master coordinates. Unindexed/unreferenced does not prove missing art.",
-    "assemblyAndGeometry": "Cabinet 41–44 topology supplement constrains component use. Arbitrary assemblies, terrain compatibility, collision and runtime enforcement remain unaccepted."
+    "assemblyAndGeometry": "Cabinet 41–44 and I01 front/side topology constrain component use; four lower-seat roles remain unknown. Arbitrary assemblies, terrain compatibility, collision and runtime enforcement remain unaccepted."
   },
   "readyBoundedPackets": [
     {
@@ -29347,8 +33290,8 @@
         "S02-I16",
         "S02-F-large-sofa-probe"
       ],
-      "scope": "Bounded Basement sofa component/seat packet I01 independently reviewed; normalization remains the next slice.",
-      "state": "review-ready",
+      "scope": "Bounded Basement sofa component/seat packet I01 independently reviewed; explicit20-record/18-unit normalization retains partial/unknown placement and independent exact review.",
+      "state": "reconciled",
       "supersededByRegistration": "I01-interior-sofas"
     },
     {

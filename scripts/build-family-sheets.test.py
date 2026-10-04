@@ -84,7 +84,7 @@ class FamilySheetsTest(unittest.TestCase):
             counts[family['id']] = len(records)
             self.assertEqual(family['status'], 'proposed')
             self.assertEqual(family['revision'], ADAPTER.revision(family))
-        self.assertEqual(counts, {'cabinets': 27, 'trees': 29, 'scrapyard': 29, 'outdoor-seating': 27})
+        self.assertEqual(counts, {'cabinets': 27, 'trees': 29, 'scrapyard': 29, 'outdoor-seating': 27, 'sofas': 20})
         cabinets = self.catalog['families'][0]
         parts = next(g['members'] for g in cabinets['groups'] if g['id'] == 'components')
         self.assertEqual([m['number'] for m in parts], [41, 42, 43, 44])
@@ -134,6 +134,27 @@ class FamilySheetsTest(unittest.TestCase):
             self.assertNotEqual(family['revision'], ADAPTER.revision(changed))
             changed['revision'] = ADAPTER.revision(changed)
             self.assertEqual(changed['revision'], ADAPTER.revision(changed))
+
+    def test_sofa_roles_shadows_and_unequal_vertical_assembly_offsets(self):
+        sofas = next(f for f in self.catalog['families'] if f['id'] == 'sofas')
+        groups = {g['id']: g['members'] for g in sofas['groups']}
+        self.assertEqual([len(groups[k]) for k in ('whole', 'front', 'side', 'unknown')], [2, 6, 6, 4])
+        for item in groups['unknown']:
+            self.assertEqual(item['kind'], 'unknown')
+            self.assertIn('Whether this can stand alone is unknown.', [f['value'] for f in item['facts']])
+        for item in groups['front'] + groups['side']:
+            self.assertEqual(item['kind'], 'component')
+            self.assertIn('Cannot stand alone.', [f['value'] for f in item['facts']])
+        self.assertEqual([v['id'] for v in sofas['variants']], ['normal'])
+        self.assertEqual([v['recordIds'] for v in groups['front'][0]['variants']],
+                         [['I01-01'], ['I01-19'], ['I01-20']])
+        examples = {e['id']: e for e in sofas['examples']}
+        self.assertEqual(len(examples), 9)
+        self.assertNotIn('gray-side-source-sampler', examples)
+        repeated = examples['gray-side-right-repeated']['variants'][0]['sprite']
+        self.assertEqual(repeated['size'], [32, 80])
+        self.assertEqual([layer['at'] for layer in repeated['layers']], [[0, 0], [0, 32], [0, 48], [0, 64]])
+        self.assertTrue(all(v['id'] == 'normal' for e in sofas['examples'] for v in e['variants']))
 
     def test_original_only_benches_and_chair_palette_correspondence(self):
         seating = next(f for f in self.catalog['families'] if f['id'] == 'outdoor-seating')

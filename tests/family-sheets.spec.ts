@@ -49,7 +49,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${URL}?family=cabinets`);
-  const counts = { cabinets: 9, trees: 14, scrapyard: 29, "outdoor-seating": 15 };
+  const counts = { cabinets: 9, trees: 14, scrapyard: 29, "outdoor-seating": 15, sofas: 18 };
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 966, height: 1024 },
@@ -58,7 +58,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await expect(
       page.getByRole("navigation", { name: "Art families" }).getByRole("link"),
-    ).toHaveCount(4);
+    ).toHaveCount(5);
     for (const family of catalog.families) {
       const tab = page
         .getByRole("navigation", { name: "Art families" })
@@ -415,4 +415,47 @@ test("tree bases explain their counterparts and dense forests preserve the appro
     expect(await pixels(canvas)).toBe(hash);
     await expect(canvas.locator("xpath=ancestor::figure")).toContainText("Approved example.");
   }
+});
+
+test("sofa partial shadows stay scoped to the selected piece and exact discussion target", async ({
+  page,
+}) => {
+  const events = await mockDiscussions(page);
+  await page.goto(`${URL}?family=sofas&member=I01-01`);
+  await ready(page, 18);
+  await expect(page.getByRole("combobox", { name: "Shadow", exact: true })).toHaveCount(0);
+  const canvas = page
+    .getByRole("button", { name: "1. Blue-gray left end", exact: true })
+    .locator("canvas");
+  const normal = await pixels(canvas);
+  const example = page.locator(".family-examples canvas").first();
+  const assembled = await pixels(example);
+  await page.getByLabel("Piece appearance", { exact: true }).selectOption("black-shadow");
+  await expect.poll(() => pixels(canvas)).not.toBe(normal);
+  expect(await pixels(example)).toBe(assembled);
+  await page.reload();
+  await ready(page, 18);
+  await expect(page.getByLabel("Piece appearance", { exact: true })).toHaveValue("black-shadow");
+  await expect(page.locator(".family-detail-copy")).toContainText("Cannot stand alone.");
+  await page.getByText("Discuss this piece", { exact: true }).click();
+  const piece = page.locator(".family-piece-discussion");
+  await piece.getByRole("textbox").fill("Dark end needs matching neighbors");
+  await piece.getByRole("button", { name: "Save note" }).click();
+  await expect.poll(() => events.length).toBe(1);
+  expect(events[0]).toMatchObject({
+    sheetId: "modern-interiors",
+    rect: [1168, 6382, 16, 32],
+    sliceKeys: expect.arrayContaining(["family-member:I01-01", "family-variant:black-shadow"]),
+  });
+  await page.getByText("Comment on whole sheet", { exact: true }).click();
+  const whole = page.locator(".family-sheet-discussion");
+  await whole.getByRole("textbox").fill("Review all sofa pieces");
+  await whole.getByRole("button", { name: "Save note" }).click();
+  await expect.poll(() => events.length).toBe(2);
+  expect(events[1]).toMatchObject({ sliceKeys: expect.arrayContaining(["family-variant:normal"]) });
+  await page.getByRole("button", { name: "4. Blue-gray long seat", exact: true }).click();
+  await expect(page.locator(".family-detail-copy")).toContainText(
+    "Whether this can stand alone is unknown.",
+  );
+  await expect(page.getByLabel("Piece appearance", { exact: true })).toHaveCount(0);
 });

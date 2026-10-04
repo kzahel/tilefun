@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only semantic packet adapter/validator (P01/P02/P03 and E01 v1).
+"""Read-only semantic packet adapter/validator (P01/P02/P03 and E01/I01 v1).
 
 Default writes only semantic-model.json. --check never writes and emits stable JSON;
 --summary prints a human summary. Full validation requires ignored originals.
@@ -20,6 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PLAN = 'docs/tactical/053-semantic-tileset-map'
 OUTPUT = ROOT / PLAN / 'semantic-model.json'
 PINS = {
+    'I01-interior-sofas.json': '75b0910c5565e9bff3db9b819f76fe2cca0e5e268b6438a2ff7023a061a260df',
+    'I01-interior-sofas-review.md': '1b93f7b2b438eb4f74f3e01f898b746bd5f0f7a5a36eb48e4b23f7651cc256fb',
     'E01-outdoor-seating.json': '9562c3956611af40245966284ad5614bbff9a7c11a07fac78c9b9a6a5c5bd62b',
     'E01-outdoor-seating-review.md': '5b85986b906910e857549c7528b33ef70b995fb7c5ec7276d1e65a01d6ee1ef0',
     'P01-trees.json': '3df0e42f9012644afe5cd1233f604b5dd74ec05c4c4f26253834dc2a05281ff6',
@@ -38,7 +40,7 @@ NORMALIZATION = 'RGBA bytes row-major; RGB=0 where alpha=0; translucent RGBA unc
 PILOT_ACCOUNTING = {'P01': {'records': 29, 'proposals': 29, 'direct': 21, 'composed': 8, 'derived': 0},
                     'P02': {'records': 29, 'proposals': 29, 'direct': 29, 'composed': 0, 'derived': 0},
                     'P03': {'records': 27, 'proposals': 9, 'direct': 8, 'composed': 1, 'derived': 18}}
-PACKET_ACCOUNTING = {**PILOT_ACCOUNTING, 'E01': {'records': 27, 'proposals': 27, 'direct': 25, 'composed': 0, 'derived': 0, 'original-only': 2}}
+PACKET_ACCOUNTING = {**PILOT_ACCOUNTING, 'E01': {'records': 27, 'proposals': 27, 'direct': 25, 'composed': 0, 'derived': 0, 'original-only': 2}, 'I01': {'records': 20, 'proposals': 18, 'direct': 18, 'derived': 2}}
 GEOMETRY = {k: 'unknown' for k in ('anchor', 'footprint', 'collision', 'walkability', 'height')}
 
 
@@ -196,6 +198,8 @@ def build_model(root=ROOT):
     cabinets = load(packet_dir / 'P03-cabinets.json')
     topology = load(packet_dir / 'P03-cabinets-topology.json')
     seating = load(packet_dir / 'E01-outdoor-seating.json')
+    sofas = load(packet_dir / 'I01-interior-sofas.json')
+    require(sofas['schemaVersion'] == 2 and sofas['packetId'] == 'I01' and sofas['proposalRevision'] == 1, 'Unsupported I01 adapter version')
     require(seating['schemaVersion'] == 2 and seating['packetId'] == 'E01' and seating['proposalRevision'] == 1, 'Unsupported E01 adapter version')
     inventory = load(root / PLAN / 'source-files.json')
     inventory = {row[0]: dict(zip(inventory['columns'], row)) for row in inventory['files']}
@@ -456,8 +460,78 @@ def build_model(root=ROOT):
                       'sources': [seating_sources[sid] for sid in seating['matching']['sheetDomains']],
                       'namedAliasDomain': seating['matching']['namedAliasDomain'],
                       'limit': 'Exact full-export master/theme correspondence only; no absent-source inference.'})
+    sofa_sources = {}
+    for item in sofas['sources']:
+        path = source(item['path'], item['pngSHA256'], item['size'])
+        files[path]['normalizedPixelSha256'] = item['normalizedRgbaSHA256']
+        sofa_sources[item['id']] = path
+    for name, pin in sofas['pins'].items():
+        require(sha(repo_path(root, pin['path']).read_bytes()) == pin['sha256'], f'I01 input pin drift: {name}')
+        pins[pin['path']] = pin['sha256']
+    sofa_components = []
+    for r in sofas['candidates']:
+        uid = r['id']
+        refs = [{'sourceFile': sofa_sources[a['sourceId']], 'bounds': rect(r['exportRect'], 'source-file-pixels')}
+                for a in r['namedExportAliases']]
+        for a in r['namedExportAliases']:
+            refs.append({'sourceFile': sofa_sources[r['packedAlias']['sourceId']],
+                         'bounds': rect(a['packedRect'], 'packed-atlas-pixels', 'packed-alias'),
+                         'catalogFile': sofas['pins']['packedIndex']['path'], 'aliasKey': a['packedKey'],
+                         'aliasSourceFile': sofa_sources[a['sourceId']], 'aliasSourceBounds': rect(r['exportRect'], 'source-file-pixels')})
+        records.append({'id': uid, 'packetId': 'I01', 'sourceId': uid, 'sourceKind': 'named-single',
+                        'variant': r['variant'], 'vendorIndex': r['vendorIndex'],
+                        'primaryLineage': 'direct' if r['variant'] == 'normal' else 'derived',
+                        'lineageDomain': 'pinned-original-master', 'sourceIdentity': 'exact-pinned-whole-export',
+                        'frameDimensions': r['exportRect'][2:], 'normalizedPixelSha256': r['normalizedRgbaSHA256'],
+                        'references': refs, 'occurrences': [{'sourceFile': sofa_sources[o['sourceId']],
+                            'bounds': rect(o['rect'], 'source-file-pixels'), 'lineage': o['lineage']} for o in r['occurrences']],
+                        'bounds': [rect(r['exportRect'], 'record-local-pixels'), rect(r['alphaVisibleRect'], 'record-local-pixels', 'alpha-visible')],
+                        'topology': r['topology'], 'originalEvidence': r, 'searchEvidence': sofas['matching']})
+        fields = fields_from(r['fields'])
+        if r['variant'] == 'normal':
+            members = [uid] + (['I01-19', 'I01-20'] if uid == 'I01-01' else [])
+            proposals.append({'id': uid, 'packetId': 'I01', 'members': members,
+                              'unitType': 'normal-export-proposal-with-render-counterparts', 'fields': fields,
+                              'identity': fields['identity'], 'family': fields['family'], 'componentRole': fields['role'],
+                              'variant': fields['variant'], 'facing': fields['facing'], 'topology': r['topology'],
+                              'gameplayGeometry': GEOMETRY.copy(), 'alternatives': fields['identity']['alternatives'],
+                              'state': 'proposed', 'humanApproval': 'unregistered'})
+        sofa_components.append({'recordId': uid, 'role': fields['role']['value'],
+                                'palette': fields['variant']['value'].split('; ')[0],
+                                'facing': fields['facing']['value'], 'renderVariant': r['variant'],
+                                'frameDimensions': r['exportRect'][2:], 'topology': r['topology']})
+    relations.append({'id': 'I01:topology', 'packetId': 'I01', 'kind': 'closed-chain-topology',
+                      'members': [c['recordId'] for c in sofa_components],
+                      'topology': {'schema': 'closed-chain-topology-v1', 'components': sofa_components,
+                                   'rules': [{'axis': 'x', 'startRole': 'front-left-cap', 'middleRoles': ['front-repeat-middle'],
+                                              'endRole': 'front-right-cap', 'crossSize': 32,
+                                              'advanceByRole': {'front-left-cap': 16, 'front-repeat-middle': 16, 'front-right-cap': 16}},
+                                             {'axis': 'y', 'startRole': 'side-top-cap', 'middleRoles': ['side-repeat-middle'],
+                                              'endRole': 'side-bottom-cap', 'crossSize': 32,
+                                              'advanceByRole': {'side-top-cap': 32, 'side-repeat-middle': 16, 'side-bottom-cap': 16}}],
+                                   'originalEvidence': sofas['completenessRules']}, 'humanApproval': 'unregistered'})
+    for experiment in sofas['counterpartExperiments']:
+        relations.append({'id': experiment['member'] + ':counterpart', 'packetId': 'I01', 'kind': 'bounded-shadow-counterpart',
+                          'members': [experiment['member'], experiment['shadowlessReference']], 'originalEvidence': experiment,
+                          'limit': 'Conditional observed-token removal only; no invented original-master occurrence.'})
+    review_text = (packet_dir / 'I01-interior-sofas-review.md').read_text()
+    assembly_dispositions = table_dispositions(review_text, [e['id'] for e in sofas['assemblyExperiments']])
+    for experiment, disposition in zip(sofas['assemblyExperiments'], assembly_dispositions):
+        relations.append({'id': 'I01:assembly:' + experiment['id'], 'packetId': 'I01', 'kind': 'rendered-assembly-probe',
+                          'members': [p['memberId'] for p in experiment['placements']],
+                          'originalEvidence': experiment, 'independentDisposition': disposition,
+                          'humanApproval': 'unregistered', 'limit': 'Exact rendered layout only; validity, source equality and human approval are separate.'})
+    relations.append({'id': 'I01:search-domain', 'packetId': 'I01', 'kind': 'search-domain',
+                      'members': [r['id'] for r in sofas['candidates']],
+                      'sources': [sofa_sources[sid] for sid in sofas['matching']['sheetDomains']],
+                      'originalEvidence': sofas['matching'], 'limit': sofas['matching']['limitation']})
+    relations.append({'id': 'I01:counterpart-corpus', 'packetId': 'I01', 'kind': 'bounded-shadow-corpus',
+                      'members': [], 'files': [{'path': sofa_sources[c['sourceId']], 'vendorIndex': c['vendorIndex']}
+                                               for c in sofas['counterpartCorpus']],
+                      'limit': '240 shadowless Basement frames; bounded cap-4 observed-token signature only.'})
     for pid, file, packet in [('P01', 'P01-trees.json', trees), ('P02', 'P02-scrapyard.json', scrap),
-                              ('P03', 'P03-cabinets.json', cabinets), ('E01', 'E01-outdoor-seating.json', seating)]:
+                              ('P03', 'P03-cabinets.json', cabinets), ('E01', 'E01-outdoor-seating.json', seating),
+                              ('I01', 'I01-interior-sofas.json', sofas)]:
         reviewfile = file.replace('.json', '-review.md')
         text = (packet_dir / reviewfile).read_text()
         pr = [p for p in proposals if p['packetId'] == pid]
@@ -470,6 +544,8 @@ def build_model(root=ROOT):
                               for layer in rel.get('recipe', {}).get('layers', []))
         review_sources.update(path for rel in relations if rel['packetId'] == pid and rel['kind'] == 'search-domain'
                               for path in rel['sources'])
+        if pid == 'I01':
+            review_sources.update(sofa_sources.values())  # All 268 independently checked source pins.
         if pid == 'E01':
             review_sources.update(seating_sources.values())  # Review independently checked all 80 frozen source pins.
         review_sources.update(item['path'] for rel in relations if rel['packetId'] == pid and rel['kind'] == 'counterpart-corpus'
@@ -481,7 +557,7 @@ def build_model(root=ROOT):
                         'memberRecords': [r['id'] for r in sr], 'proposalUnits': [p['id'] for p in pr],
                         'applicability': 'exact-proposal-hash-only', 'reviewPath': f'{PLAN}/packets/{reviewfile}',
                         'reviewSha256': PINS[reviewfile], 'proposalDispositions': table_dispositions(text, ids),
-                        'recordDispositions': table_dispositions(text, raw_ids) if pid == 'P03' else [],
+                        'recordDispositions': table_dispositions(text, raw_ids) if pid in ('P03', 'I01') else [],
                         'observationOrder': ('Initial contact sheet before proposal JSON; coordinator brief and contact-sheet labels visible; mapper note before raw contexts; not blinded.' if pid == 'E01' else 'Initial observations before full proposal read; coordinator brief informed; not formally blinded.'),
                         'originalText': text, 'humanApproval': 'unregistered', 'runtimePromotion': False})
         packets.append({'id': pid, 'proposalPath': f'{PLAN}/packets/{file}', 'proposalSha256': PINS[file],
@@ -490,7 +566,7 @@ def build_model(root=ROOT):
                         'originalContext': {k: v for k, v in packet.items() if k not in
                                             ('candidates', 'semanticProposals', 'measurements', 'relations', 'experiments')}})
     model = {'schema': 'semantic-tileset-model-v1',
-             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1']},
+             'versionedAdapters': {'pilots': ['P01-trees-v1', 'P02-scrapyard-v1', 'P03-cabinets-v1'], 'extensions': ['E01-outdoor-seating-v1', 'I01-interior-sofas-v1']},
              'lineageContract': 'Primary lineage describes correspondence to the packet original master. Original-only preserves exact full named exports without inventing whole-master occurrences or recipes.', 'revisionAlgorithm': 'sha256 sorted compact ASCII JSON excluding top-level revision',
              'normalization': NORMALIZATION, 'inputPins': pins, 'packets': packets,
              'sourceFiles': [files[k] for k in sorted(files)], 'sourceRecords': records,
@@ -507,12 +583,94 @@ def build_model(root=ROOT):
     return model
 
 
+def standalone_policy(component):
+    """Unknown eligibility never grants permission; allowed remains visual proposal only."""
+    eligibility = component['topology']['standaloneEligibility']
+    return {'allowed': eligibility == 'allowed as visual proposal only',
+            'state': 'visual-proposal-only' if eligibility == 'allowed as visual proposal only' else
+                     'forbidden-partial' if eligibility == 'forbidden; partial component' else 'unknown',
+            'humanApproval': 'unregistered', 'gameplayGeometry': 'unknown'}
+
+
+def check_closed_chain(topology, member_ids):
+    """General closed-chain rules; front and side advances can have unequal sizes."""
+    mapping = {c['recordId']: c for c in topology['components']}
+    errors = [f'Unknown component record: {rid}' for rid in member_ids if rid not in mapping]
+    members = [mapping[rid] for rid in member_ids if rid in mapping]
+    rule = next((r for r in topology['rules'] if members and members[0]['role'] in
+                 [r['startRole'], *r['middleRoles'], r['endRole']]), None)
+    if len(members) < 2:
+        errors.append('Components cannot stand alone; both caps are required.')
+    if not rule:
+        errors.append('No established complete-chain role; unknown eligibility is not permission.')
+    elif members:
+        if members[0]['role'] != rule['startRole'] or members[-1]['role'] != rule['endRole']:
+            errors.append('Missing or reversed outer caps.')
+        if any(c['role'] not in rule['middleRoles'] for c in members[1:-1]):
+            errors.append('Internal members must be middles; closed caps cannot be internal.')
+        axis = 0 if rule['axis'] == 'x' else 1
+        first_edge, last_edge = ('left', 'right') if axis == 0 else ('top', 'bottom')
+        for i, c in enumerate(members):
+            if c['frameDimensions'][1 - axis] != rule['crossSize'] or c['frameDimensions'][axis] != rule['advanceByRole'].get(c['role']):
+                errors.append(f'Wrong member dimensions at position {i}.')
+            if any(c[key] != members[0][key] for key in ('palette', 'facing', 'renderVariant')):
+                errors.append(f'Mixed palette/facing/render set at position {i}.')
+            if standalone_policy(c)['state'] != 'forbidden-partial':
+                errors.append(f'Unestablished component role at position {i}.')
+            ports = c['topology']['requiredPortNeighborRoles']
+            for edge, offset, opposite in ((first_edge, -1, last_edge), (last_edge, 1, first_edge)):
+                n = i + offset
+                if edge in ports:
+                    if n < 0 or n >= len(members):
+                        errors.append(f'Unconnected {edge} edge at position {i}.')
+                    elif (members[n]['role'] not in ports[edge] or
+                          c['role'] not in members[n]['topology']['requiredPortNeighborRoles'].get(opposite, []) or
+                          members[n]['recordId'] not in c['topology']['compatibleSelectedMembers']):
+                        errors.append(f'Incompatible {edge} neighbor at position {i}.')
+                elif 0 <= n < len(members):
+                    errors.append(f'Internal closed {edge} edge at position {i}.')
+    offsets, advance = [], 0
+    if rule and not errors:
+        for c in members:
+            offsets.append([advance, 0] if rule['axis'] == 'x' else [0, advance])
+            advance += rule['advanceByRole'][c['role']]
+    return {'valid': not errors, 'errors': errors, 'offsets': offsets,
+            'visualStatus': 'not-evaluated', 'humanApproval': 'unregistered'}
+
+
+def shadow_signature(im, token):
+    raw = bytearray(normalized(im).tobytes())
+    if token:
+        for i in range(0, len(raw), 4):
+            if list(raw[i:i + 4]) == token:
+                raw[i:i + 4] = bytes(4)
+    return sha(raw)
+
+
+def sofa_delta(a, b):
+    require(a.size == b.size, 'I01 variant frames differ')
+    ar, br = a.tobytes(), b.tobytes()
+    changed = [(i // 4, tuple(ar[i:i + 4]), tuple(br[i:i + 4]))
+               for i in range(0, len(ar), 4) if ar[i:i + 4] != br[i:i + 4]]
+    mask = Image.frombytes('L', a.size, bytes(255 if ar[i:i + 4] != br[i:i + 4] else 0 for i in range(0, len(ar), 4)))
+    inside = sum(bool(q[3]) for _, p, q in changed)
+    return {'size': list(a.size), 'inputNormalizedRgbaSHA256': sha(ar), 'referenceNormalizedRgbaSHA256': sha(br),
+            'changedPixels': len(changed), 'onReferenceBodyPixels': inside,
+            'outsideReferenceBodyPixels': len(changed) - inside,
+            'changedBoundsXYXY': list(mask.getbbox()) if changed else None,
+            'changedMaskSHA256': sha(mask.tobytes()),
+            'changedColorPairs': [[list(p), list(q)] for p, q in sorted({(p, q) for _, p, q in changed})],
+            'exactEqual': not changed}
+
+
 def check_topology(topology, member_ids):
     """Validate named records against declared edges, roles and variant policy.
 
     Topology validity is metadata only; visual evidence and approval are separate.
     Unknown records are rejected. Members must be concrete variant record IDs.
     """
+    if topology.get('schema') == 'closed-chain-topology-v1':
+        return check_closed_chain(topology, member_ids)
     errors, members = [], []
     mapping = {rid: c for c in topology['components'] for rid in c['memberRecords']}
     for rid in member_ids:
@@ -629,8 +787,8 @@ def validate_model(model, root=ROOT, committed_only=False):
                 require(ref['aliasKey'] in aliases, f'Missing packed alias: {rid}')
                 alias = aliases[ref['aliasKey']]
                 require(alias['rect'] == ref['bounds']['value'] and
-                        alias['sourcePath'] == record['references'][0]['sourceFile'] and
-                        alias['sourceRect'] == record['references'][0]['bounds']['value'], f'Packed alias lineage drift: {rid}')
+                        alias['sourcePath'] == ref.get('aliasSourceFile', record['references'][0]['sourceFile']) and
+                        alias['sourceRect'] == ref.get('aliasSourceBounds', record['references'][0]['bounds'])['value'], f'Packed alias lineage drift: {rid}')
             im = image(path)
             if im is None and ref.get('aliasFile'):
                 alias_file = ref['aliasFile']
@@ -776,6 +934,60 @@ def validate_model(model, root=ROOT, committed_only=False):
         unknown_rows = [y for y in range(b.height) if long_bytes[y * b.width * 4:(y + 1) * b.width * 4] not in short_rows]
         require(unknown_rows == experiment['longRowsWithoutAnyEqualShortRow'], 'E01 long-bench row exception differs')
         partial_checked += 1
+    sofa_topology = next(r['topology'] for r in model['relationships'] if r['kind'] == 'closed-chain-topology')
+    sofa_components = {c['recordId']: c for c in sofa_topology['components']}
+    require(Counter(standalone_policy(c)['state'] for c in sofa_components.values()) ==
+            {'forbidden-partial': 14, 'unknown': 4, 'visual-proposal-only': 2}, 'I01 standalone policy accounting differs')
+    sofa_assemblies, sofa_assembly_unavailable, sofa_master_comparisons = 0, [], 0
+    for relation in model['relationships']:
+        if relation['kind'] != 'rendered-assembly-probe':
+            continue
+        experiment = relation['originalEvidence']
+        result = check_topology(sofa_topology, relation['members'])
+        require(result['valid'] == (experiment['topologyDisposition'] == 'proposed-valid'), 'I01 topology evidence differs')
+        if result['valid']:
+            require(result['offsets'] == [p['targetOffset'] for p in experiment['placements']], 'I01 assembly advance differs')
+        if any(rid not in rendered for rid in relation['members']):
+            sofa_assembly_unavailable.append(experiment['id'])
+            continue
+        require(experiment['operation'] == 'RGBA overwrite onto transparent canvas; no source resizing', 'Unsupported I01 assembly operation')
+        out = Image.new('RGBA', tuple(experiment['size']))
+        for placement in experiment['placements']:
+            part = crop(rendered[placement['memberId']], rect(placement['sourceRect'], 'record-local-pixels'))
+            check_bounds(rect([*placement['targetOffset'], *part.size], 'record-local-pixels'), out.size)
+            out.paste(part, tuple(placement['targetOffset']))
+        require(pixel_hash(out) == experiment['outputNormalizedRgbaSHA256'], 'I01 assembly hash differs')
+        alpha = out.getchannel('A')
+        for join in experiment['joinAlphaContinuity']:
+            axis, seam = join['axis'], join['offset']
+            require(axis in ('x', 'y') and 0 < seam < (out.width if axis == 'x' else out.height), 'Invalid I01 seam')
+            occupied = [k for k in range(out.height if axis == 'x' else out.width)
+                        if (alpha.getpixel((seam - 1, k)) and alpha.getpixel((seam, k)) if axis == 'x' else
+                            alpha.getpixel((k, seam - 1)) and alpha.getpixel((k, seam)))]
+            require(occupied == join['positionsOccupiedOnBothSides'], 'I01 join alpha evidence differs')
+        master_path = next(r['sources'][0] for r in model['relationships'] if r['id'] == 'I01:search-domain')
+        for occurrence in experiment['exactMasterOccurrences']:
+            bounds = rect(occurrence, 'source-file-pixels')
+            check_bounds(bounds, files[master_path]['dimensions'])
+            if image(master_path) is not None:
+                require(crop(image(master_path), bounds).tobytes() == out.tobytes(), 'I01 assembly master occurrence differs')
+                sofa_master_comparisons += 1
+        sofa_assemblies += 1
+    sofa_corpus = next(r for r in model['relationships'] if r['kind'] == 'bounded-shadow-corpus')
+    sofa_corpus_available = all(r['path'] not in missing for r in sofa_corpus['files'])
+    sofa_counterparts = 0
+    for relation in model['relationships']:
+        if relation['kind'] != 'bounded-shadow-counterpart':
+            continue
+        experiment = relation['originalEvidence']
+        a, b = [rendered[rid] for rid in relation['members']]
+        require(shadow_signature(a, experiment['shadowToken']) == experiment['canonicalBodySHA256'], 'I01 shadow signature differs')
+        require(sofa_delta(a, b) == experiment['deltaFromShadowless'], 'I01 raw counterpart delta differs')
+        if sofa_corpus_available:
+            matches = [c['vendorIndex'] for c in sofa_corpus['files'] if image(c['path']).size == a.size and
+                       shadow_signature(image(c['path']), None) == experiment['canonicalBodySHA256']]
+            require(matches == experiment['shadowlessPoolMatches'], 'I01 counterpart corpus differs')
+        sofa_counterparts += 1
     original_only = [r['id'] for r in records.values() if r['primaryLineage'] == 'original-only']
     for rid in original_only:
         require(not records[rid]['occurrences'] and records[rid]['sourceIdentity'] == 'exact-pinned-whole-export',
@@ -796,12 +1008,16 @@ def validate_model(model, root=ROOT, committed_only=False):
         limitations.append('Original references are absent: their raw hashes/dimensions and independent target comparisons were not checked.')
     if seating_unavailable or partial_unavailable:
         limitations.append('Original-only long-bench sources unavailable; their mirror/partial-delta checks were not performed. Exact sources remain pinned.')
+    if not sofa_corpus_available:
+        limitations.append('240-file Basement counterpart corpus unavailable; conditional uniqueness not rechecked.')
+    if missing:
+        limitations.append('I01 listed original-master/theme occurrence and assembly source comparisons unavailable where originals are absent; committed packed frames still checked.')
     if not corpus_available:
         limitations.append('122-file counterpart corpus unavailable; recorded uniqueness claim not independently rechecked.')
     return {'ok': True, 'mode': 'committed-only' if committed_only else 'full', 'modelRevision': model['revision'],
             'sourceRecords': len(records), 'proposalUnits': len(proposals),
             'pilotAccounting': {'sourceRecords': 85, 'proposalUnits': 67, 'lineage': {'direct': 58, 'composed': 9, 'derived': 18}},
-            'extensionAccounting': {'E01': {'sourceRecords': 27, 'proposalUnits': 27, 'lineage': {'direct': 25, 'original-only': 2}}},
+            'extensionAccounting': {'E01': {'sourceRecords': 27, 'proposalUnits': 27, 'lineage': {'direct': 25, 'original-only': 2}}, 'I01': {'sourceRecords': 20, 'proposalUnits': 18, 'lineage': {'direct': 18, 'derived': 2}}},
             'lineage': dict(sorted(Counter(r['primaryLineage'] for r in records.values()).items())),
             'sourceFilesVerified': len(files) - len(missing), 'sourceFilesUnavailable': missing,
             'recordReferencesVerified': verified_refs, 'recordOccurrencesVerified': verified_occurrences,
@@ -810,6 +1026,10 @@ def validate_model(model, root=ROOT, committed_only=False):
             'variantDeltasVerified': variants_checked, 'counterpartCorpusRechecked': corpus_available,
             'E01VariantDeltasVerified': seating_checked, 'E01VariantDeltasUnavailable': seating_unavailable,
             'E01PartialComparisonsVerified': partial_checked, 'E01PartialComparisonsUnavailable': partial_unavailable,
+            'I01AssemblyProbesVerified': sofa_assemblies, 'I01AssemblyProbesUnavailable': sofa_assembly_unavailable,
+            'I01AssemblyMasterComparisonsVerified': sofa_master_comparisons,
+            'I01CounterpartDeltasVerified': sofa_counterparts, 'I01CounterpartCorpusRechecked': sofa_corpus_available,
+            'I01TopologyProbeDispositions': dict(Counter(r['originalEvidence']['topologyDisposition'] for r in model['relationships'] if r['kind'] == 'rendered-assembly-probe')),
             'originalOnlyRecordIds': original_only,
             'recordPixelsUnavailable': [rid for rid in records if rid not in rendered],
             'positiveTopologyCasesChecked': len(top_tests), 'reviews': review_results,
@@ -834,11 +1054,11 @@ def main():
             OUTPUT.write_bytes(encoded(model))
         if args.summary:
             print(f"Semantic map: {report['sourceRecords']} source records / {report['proposalUnits']} proposal units. "
-                  'Pilots: 85/67 (58 direct, 9 composed, 18 derived); E01: 27/27 (25 direct, 2 original-only). Human approvals: 0; runtime promotions: 0.')
+                  'Pilots: 85/67 (58 direct, 9 composed, 18 derived); E01: 27/27 (25 direct, 2 original-only); I01: 20/18 (18 direct, 2 derived). Human approvals: 0; runtime promotions: 0.')
             print(f"Compositions: {len(report['compositionsComparedToPinnedTargets'])} target comparisons, "
                   f"{len(report['compositionsReplayOnly'])} replay-only, {len(report['compositionsUnavailable'])} unavailable. "
                   f"Missing original references: {len(report['sourceFilesUnavailable'])}.")
-            print('Agent reviews apply to exact frozen hashes. Cabinet topology validity is separate from rendering/approval.')
+            print('Agent reviews apply to exact frozen hashes. Cabinet/sofa topology validity is separate from rendering/approval.')
         else:
             print(json.dumps(report, indent=2, sort_keys=True))
         return 0

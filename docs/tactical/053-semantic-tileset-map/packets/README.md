@@ -52,5 +52,6 @@ registered approval of every rendered combination or of gameplay geometry.
 
 Packet totals are source records, including components and variants. E01's
 normalized integration preserves the original-only master status even though two
-exact public PNG copies now support ordinary browsing. I01 is not yet in the
-normalized model or owner-facing family catalog.
+exact public PNG copies now support ordinary browsing. I01 is normalized as twenty records / eighteen proposal units and has a
+[fifth family sheet](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=sofas)
+with eighteen cards and nine positive assembly examples. Four roles remain unknown.

@@ -48,7 +48,12 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
       "",
     selected = family.groups
       .flatMap((group) => group.members)
-      .find((member) => member.id === params.get("member"));
+      .find((member) => member.id === params.get("member")),
+    selectedVariantId =
+      selected?.variants.find((variant) => variant.id === params.get("variant"))?.id ?? variantId,
+    hasPieceVariants = selected?.variants.some(
+      (variant) => !family.variants.some((option) => option.id === variant.id),
+    );
   const select = (memberId?: string, nextVariant = variantId) => {
     const next = new URLSearchParams({ family: family.id, variant: nextVariant });
     if (memberId) next.set("member", memberId);
@@ -81,20 +86,22 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
           <p>{family.description}</p>
         </div>
         <div className="family-controls">
-          <label className="family-variant">
-            {family.variantLabel}
-            <select
-              aria-label={family.variantLabel}
-              value={variantId}
-              onChange={(event) => select(selected?.id, event.target.value)}
-            >
-              {family.variants.map((variant) => (
-                <option key={variant.id} value={variant.id}>
-                  {variant.label}
-                </option>
-              ))}
-            </select>
-          </label>
+          {family.variants.length > 1 ? (
+            <label className="family-variant">
+              {family.variantLabel}
+              <select
+                aria-label={family.variantLabel}
+                value={variantId}
+                onChange={(event) => select(selected?.id, event.target.value)}
+              >
+                {family.variants.map((variant) => (
+                  <option key={variant.id} value={variant.id}>
+                    {variant.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
           <fieldset className="family-zoom" aria-label="Artwork zoom">
             {[2, 3, 4].map((value) => (
               <button
@@ -142,6 +149,22 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
                   Clear selection
                 </button>
               </div>
+              {hasPieceVariants ? (
+                <label className="family-variant">
+                  Piece appearance
+                  <select
+                    aria-label="Piece appearance"
+                    value={selectedVariantId}
+                    onChange={(event) => select(selected.id, event.target.value)}
+                  >
+                    {selected.variants.map((variant) => (
+                      <option key={variant.id} value={variant.id}>
+                        {variant.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
               <Facts facts={selected.facts} />
               {selected.question ? <p className="family-question">{selected.question}</p> : null}
             </>
@@ -161,7 +184,7 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
               catalog={catalog}
               family={family}
               member={selected}
-              variantId={variantId}
+              variantId={selectedVariantId}
               imagesReady={!!images.data && !images.error}
             />
           </details>
@@ -185,7 +208,10 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
               </div>
               <div className="family-piece-grid">
                 {group.members.map((member) => {
-                  const variant = familyVariant(member, variantId);
+                  const variant = familyVariant(
+                    member,
+                    selected?.id === member.id ? selectedVariantId : variantId,
+                  );
                   return (
                     <button
                       className="family-piece"
