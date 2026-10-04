@@ -17,10 +17,10 @@ an agent-written queue status.
 
 | ID | Work | Depends on | State | Owner / evidence |
 | --- | --- | --- | --- | --- |
-| S01 | Freeze source manifest and reconcile existing index scope | — | Assigned | `source_inventory`: inventory script, source manifest/file inventory and source-inventory note |
+| S01 | Freeze source manifest and reconcile existing index scope | — | Reconciled | [Manifest](source-manifest.json), [source evidence](notes/2026-10-04-source-inventory.md); coordinator full/committed-only checks passed |
 | S02 | Survey both masters and Room Builder; map broad thematic regions | S01 verification before integration | Assigned | `exteriors_survey` and `interiors_survey`: separate S02 packet/region files and capture helpers |
 | P01 | Trial: seasonal trees and family/variant structure | S02 | Queued | Unassigned |
-| P02 | Trial: suspected dumpyard area and object boundaries | S02 | Queued | Unassigned |
+| P02 | Trial: suspected dumpyard area and object boundaries | S01; S02 source window located | Assigned | `source_inventory`: P02 scrapyard packet/JSON and capture helper; separate output paths |
 | P03 | Trial: Interiors furniture and original-to-packed correspondence | S02 | Queued | Unassigned |
 | P04 | Audit trial results; add modular probe if needed; refine method and estimate | P01–P03 | Queued | Unassigned |
 | E01 | Expand theme packets across both tilesets | P04 | Queued | Unassigned |

@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: source inventory and thematic reconnaissance in progress; trials pending.
+Status: source inventory pinned; thematic reconnaissance and first trial in progress.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -29,6 +29,14 @@ Agents record alternatives and reproducible refutation evidence; unresolved fiel
 remain visible. No source art or runtime definitions have changed for this effort.
 
 ## Plan and next work
+
+The [source manifest](../tactical/053-semantic-tileset-map/source-manifest.json)
+pins 29,449 original PNG files plus two committed references. Existing Exteriors
+and Interiors indexed source crops match; this establishes source provenance,
+not semantic completeness. The
+[inventory note](../tactical/053-semantic-tileset-map/notes/2026-10-04-source-inventory.md)
+owns counts, source limitations and reproducible verification. Original Interiors
+masters remain ignored local inputs; the Exteriors master matches committed art.
 
 [Tactical 053](../tactical/053-semantic-tileset-map.md) routes the
 [dedicated plan folder](../tactical/053-semantic-tileset-map/README.md),

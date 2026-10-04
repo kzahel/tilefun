@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "scope": "native16 Modern Exteriors/Interiors semantic investigation",
+  "revision": {
+    "vendorRelease": null,
+    "vendorReleaseStatus": "unverified; local archive names do not establish release identity",
+    "fingerprintAlgorithm": "SHA256 of sorted compact JSON [repoPath,pngSHA256,width,height] lines; UTF-8 with LF",
+    "includedOriginalPNGsFingerprint": "5d85c3fa77f0273a21e1625ae3a4497087ad5d2133624c3a338b61042bf04ea2",
+    "exteriorsFingerprint": "533e49db3c8db34d58f0b4a5de6f7355aee690b0c86d3495872a93fa202165f8",
+    "interiorsFingerprint": "32f7f1d75642ed6aac5dd869f0c7ca10f50200d3b21a554cc01e697218cb0a30"
+  },
+  "coordinates": {
+    "unit": "native source pixels",
+    "origin": "top-left",
+    "rect": "[x,y,width,height]; right/bottom exclusive",
+    "tileSize": 16,
+    "exteriorsIndex": "rectangles refer to original master, byte-identical committed me-complete",
+    "interiorsIndex": "rect is packed-atlas coordinates; sourceRect and sourcePath refer to original files; packed origins need not be tile-aligned"
+  },
+  "sourceFiles": {
+    "path": "docs/tactical/053-semantic-tileset-map/source-files.json",
+    "sha256": "c98c9174f84c7cc8f38011a7b02f87b00f6891a416d0627b31ba7f2a223d2bda",
+    "pngCount": 29451,
+    "originalPNGCount": 29449,
+    "committedReferencePNGCount": 2
+  },
+  "groups": {
+    "committed-reference": {
+      "pngCount": 2,
+      "bytes": 19697219,
+      "distinctPngSHA256": 2,
+      "fingerprint": "cf9a5db4efd8e32351b1dccc373e89d55cc08c9f905666b942aa004ccfebd33e"
+    },
+    "exteriors-animations": {
+      "pngCount": 541,
+      "bytes": 7912901,
+      "distinctPngSHA256": 541,
+      "fingerprint": "958d4df321846b2e9b9e0b593a8a83569b90c09fe13db345e906c308f3799eaf"
+    },
+    "exteriors-autotiles": {
+      "pngCount": 28,
+      "bytes": 256818,
+      "distinctPngSHA256": 28,
+      "fingerprint": "762b0d1bfcc846d5a78a151f1d7630afc0a60b2dca54f23337021bf25563cd36"
+    },
+    "exteriors-complete-singles": {
+      "pngCount": 6224,
+      "bytes": 9121200,
+      "distinctPngSHA256": 6043,
+      "fingerprint": "137ef5ab1b8cfef55102a361b0506e71b17e95169c22408631e853613278a598"
+    },
+    "exteriors-master": {
+      "pngCount": 1,
+      "bytes": 7104296,
+      "distinctPngSHA256": 1,
+      "fingerprint": "c46d64d664986dffb2ddb3977832ddef4c9bf5daba371fa8ab95622d9cdd6c74"
+    },
+    "exteriors-theme-sheets": {
+      "pngCount": 24,
+      "bytes": 7125758,
+      "distinctPngSHA256": 24,
+      "fingerprint": "73d5b1eb6bb771fe57481e3b535316d69b1e34e240838de561e3443c30cffe8f"
+    },
+    "exteriors-theme-singles": {
+      "pngCount": 6224,
+      "bytes": 9121200,
+      "distinctPngSHA256": 6043,
+      "fingerprint": "c35b07be9bd8227d91b12989a9040f201e42d5599576628f18d9d1e5e4bc71f3"
+    },
+    "interiors-animations": {
+      "pngCount": 311,
+      "bytes": 515968,
+      "distinctPngSHA256": 310,
+      "fingerprint": "4fe3be8d10f4f874f8b68d2aab3b6b27258bd8139882c00dd3a4342ff830bffd"
+    },
+    "interiors-home-examples": {
+      "pngCount": 44,
+      "bytes": 598492,
+      "distinctPngSHA256": 44,
+      "fingerprint": "2fdf91db98702c38ed0ffad176d7187dcb5ab2780d7b63a8084aa6bfededebb2"
+    },
+    "interiors-master": {
+      "pngCount": 1,
+      "bytes": 1921396,
+      "distinctPngSHA256": 1,
+      "fingerprint": "d7dc4ac18f1fd019423b2755e60a2be8a5c02c41d19018b0e10f78e7739c17dd"
+    },
+    "interiors-room-builder-master": {
+      "pngCount": 1,
+      "bytes": 277656,
+      "distinctPngSHA256": 1,
+      "fingerprint": "f690bb91e773fbe28731b9b57d6b2c1c6d4eb08020dfcdb702ebbc9584158c8d"
+    },
+    "interiors-room-builder-subfiles": {
+      "pngCount": 9,
+      "bytes": 199988,
+      "distinctPngSHA256": 9,
+      "fingerprint": "3492e68ae26c9dd10f2ac06ce036e63b76b895a50dd2c06abdb84ecc23009a61"
+    },
+    "interiors-singles-black-shadow": {
+      "pngCount": 5253,
+      "bytes": 3510970,
+      "distinctPngSHA256": 5234,
+      "fingerprint": "23d788986b228780db34782fa9c6ef2d9571e527175f404c9539e97cc44705a3"
+    },
+    "interiors-singles-normal": {
+      "pngCount": 5381,
+      "bytes": 3258388,
+      "distinctPngSHA256": 5351,
+      "fingerprint": "236c5523346fa4d2d70e2fd593f4c79336af9adf42329efd0ea7c38dc19507d2"
+    },
+    "interiors-singles-shadowless": {
+      "pngCount": 5330,
+      "bytes": 3255869,
+      "distinctPngSHA256": 5309,
+      "fingerprint": "be030e02c77d2dfaa7beed21037f6e13a33934a788ad4334e687090099b1c242"
+    },
+    "interiors-theme-black-shadow": {
+      "pngCount": 26,
+      "bytes": 1279462,
+      "distinctPngSHA256": 26,
+      "fingerprint": "6b71bc2f3255cda18c69668a6a5ea88c25d5a4a0e0432e39c1d5d109844c7523"
+    },
+    "interiors-theme-normal": {
+      "pngCount": 26,
+      "bytes": 2009589,
+      "distinctPngSHA256": 26,
+      "fingerprint": "dde4f715be4345672badf054614570a2d6e686f67b6cb7af7ae61ed4ebe4450b"
+    },
+    "interiors-theme-shadowless": {
+      "pngCount": 25,
+      "bytes": 1813786,
+      "distinctPngSHA256": 25,
+      "fingerprint": "30aeee0f879df4dd82cf865f086e16a4591c141cb21395f6f753f630114ac817"
+    }
+  },
+  "anchorFiles": [
+    {
+      "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+      "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "width": 2816,
+      "height": 8224,
+      "scopeGroup": "exteriors-master"
+    },
+    {
+      "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+      "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+      "width": 256,
+      "height": 17024,
+      "scopeGroup": "interiors-master"
+    },
+    {
+      "path": "assets/interiors/1_Interiors/16x16/Room_Builder_16x16.png",
+      "sha256": "f53d7cd04f275dfa4b3e1f410569d491275105e2710a0f86ec46edeff3ab576f",
+      "width": 1216,
+      "height": 1808,
+      "scopeGroup": "interiors-room-builder-master"
+    },
+    {
+      "path": "public/assets/tilesets/me-complete.png",
+      "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "width": 2816,
+      "height": 8224,
+      "scopeGroup": "committed-reference"
+    },
+    {
+      "path": "public/assets/tilesets/modern-interiors-atlas.png",
+      "sha256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+      "width": 2048,
+      "height": 8800,
+      "scopeGroup": "committed-reference"
+    }
+  ],
+  "committedIndexAndBuilderInputs": [
+    {
+      "path": "public/data/me-atlas-index.json",
+      "sha256": "248dec52d18da770669fe9b633697654f5789be3e7f12021222a36c8bad26dd2",
+      "bytes": 248191
+    },
+    {
+      "path": "public/data/modern-interiors-atlas.json",
+      "sha256": "c2beaba7bbd767b14df8cb7faa042908adbda89e0a43a7fd5c37cb5101a9a02e",
+      "bytes": 7156401
+    },
+    {
+      "path": "scripts/index-atlas.py",
+      "sha256": "0da7c53ef58e40d3ea3d40937361093596a01fd688652c51c7dd294c09a79f52",
+      "bytes": 6929
+    },
+    {
+      "path": "scripts/index-interiors-atlas.mjs",
+      "sha256": "1a4a92554d5ca204955536d1d3d3a9a84cef9601e829c21995ca00510d166a53",
+      "bytes": 10820
+    }
+  ],
+  "freshClone": {
+    "originalsAvailable": false,
+    "ignoredRoots": [
+      "assets/exteriors/Modern_Exteriors_16x16",
+      "assets/interiors/1_Interiors/16x16",
+      "assets/interiors/3_Animated_objects/16x16",
+      "assets/interiors/6_Home_Designs"
+    ],
+    "gitTrackedOriginalPNGCount": 0,
+    "gitTrackedCommittedReferencePNGCount": 2,
+    "fullVerification": "requires restoring these exact original PNGs and installing Pillow",
+    "committedVerification": "python3 scripts/semantic-map-inventory.py --check --committed-only"
+  },
+  "exclusions": [
+    {
+      "paths": [
+        "assets/exteriors/Modern_Exteriors_32x32",
+        "assets/exteriors/Modern_Exteriors_48x48",
+        "assets/interiors/1_Interiors/32x32",
+        "assets/interiors/1_Interiors/48x48"
+      ],
+      "reason": "other resolutions"
+    },
+    {
+      "paths": [
+        "assets/exteriors/Modern_Exteriors_16x16/Character_Generator_Addons_16x16",
+        "assets/interiors/2_Characters",
+        "assets/interiors/4_User_Interface_Elements"
+      ],
+      "reason": "characters and UI"
+    },
+    {
+      "paths": [
+        "assets/interiors/1_Interiors/16x16/Old stuff",
+        "assets/exteriors/Modern_Exteriors_16x16/ME_Theme_Sorter_16x16/Old_Sorting",
+        "assets/exteriors/Modern_Exteriors_16x16/OLD.zip",
+        "assets/exteriors_rpg",
+        "assets/interiors_rpg"
+      ],
+      "reason": "legacy packs/sorting and RPG conversions; excluded 22 Interiors Old stuff PNGs and 5 Exteriors Old_Sorting PNGs"
+    },
+    {
+      "paths": [
+        "assets/interiors/3_Animated_objects/32x32",
+        "assets/interiors/3_Animated_objects/48x48",
+        "assets/interiors/6_Home_Designs/**/32x32",
+        "assets/interiors/6_Home_Designs/**/48x48"
+      ],
+      "reason": "other-resolution animations and examples"
+    },
+    {
+      "patterns": [
+        "*.gif",
+        "*.zip",
+        "*.ase",
+        "*.aseprite",
+        "*.tsx",
+        "*.ini",
+        ".DS_Store"
+      ],
+      "reason": "non-PNG exports, archives, editing metadata or OS state; animation PNG sheets/frames are included"
+    },
+    {
+      "paths": [
+        "assets/interiors/Palettes",
+        "assets/Palette.png"
+      ],
+      "reason": "palette references outside semantic source-art scope"
+    },
+    {
+      "paths": [
+        "public/assets/ (except the two named committed references)",
+        "src/interiors/review/assets/",
+        "src/generation/regional/*assets*.json"
+      ],
+      "reason": "derived runtime/review/promotion artifacts; never regenerated or counted as original source occurrences"
+    }
+  ],
+  "indexReconciliation": {
+    "exteriors": {
+      "indexedNames": 4816,
+      "distinctMasterRects": 4624,
+      "resolvedSinglePaths": 4816,
+      "unindexedCompleteSingles": 1408,
+      "unindexedSinglePathsDigest": "3684e2f0593f7598a86fc00cd14330e9173da3d7aad46430e2ee6c8d0b7830d9",
+      "reportedMatched": 4816,
+      "reportedUnmatched": 1408,
+      "indexNameToOriginalPath": "theme + '_16x16_' + key when theme is nonempty; otherwise key; append .png beneath complete-singles root",
+      "themeSinglesByteIdenticalToSameNamedCompleteSingle": 6224,
+      "themeSingleCount": 6224,
+      "originalMasterEqualsCommittedBytes": true,
+      "comparison": "exact RGBA after zero-alpha RGB normalization"
+    },
+    "interiors": {
+      "entries": 19493,
+      "distinctSourcePaths": 16017,
+      "entrySourceKinds": {
+        "home_design_layer": 44,
+        "room_builder_sheet": 9,
+        "room_builder_tile": 3476,
+        "single": 15964
+      },
+      "sourcePathsByScopeGroup": {
+        "interiors-home-examples": 44,
+        "interiors-room-builder-subfiles": 9,
+        "interiors-singles-black-shadow": 5253,
+        "interiors-singles-normal": 5381,
+        "interiors-singles-shadowless": 5330
+      },
+      "inScopeOriginalPNGsNotReferenced": 390,
+      "unreferencedGroups": {
+        "interiors-animations": 311,
+        "interiors-master": 1,
+        "interiors-room-builder-master": 1,
+        "interiors-theme-black-shadow": 26,
+        "interiors-theme-normal": 26,
+        "interiors-theme-shadowless": 25
+      },
+      "comparison": "exact decoded RGBA including transparent RGB"
+    },
+    "failures": [],
+    "limits": [
+      "Existing indexes are a reconciliation baseline, not semantic coverage.",
+      "No new single-to-master search; unmatched is not proof of missing art.",
+      "Theme sheets, animations and example assemblies are inventoried, not semantically verified."
+    ]
+  },
+  "reproduce": {
+    "write": "python3 scripts/semantic-map-inventory.py",
+    "check": "python3 scripts/semantic-map-inventory.py --check",
+    "changes": "only source-manifest.json and source-files.json; sources, indexes and promoted banks remain read-only"
+  }
+}

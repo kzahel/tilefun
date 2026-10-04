@@ -175,3 +175,26 @@ Read the topic, this plan, the queue and the latest relevant notes. Read the cur
 Workshop/art inbox before acting on human feedback. Verify sources before reusing
 evidence, reconcile stale assignments with saved artifacts, and pick the first
 unblocked queue item. Update the queue and link findings before ending a work session.
+
+## Investigation tools
+
+These are offline evidence tools; they do not repack assets or change gameplay.
+Use Python 3 with Pillow for image inspection and full inventory validation.
+
+- `python3 scripts/semantic-map-inventory.py --check` verifies the saved manifest
+  against original packs, committed atlas/index inputs and indexed source pixels.
+  `--check --committed-only` verifies the saved ledger and committed references
+  on a fresh clone, explicitly without checking absent original-pack pixels.
+- `python3 scripts/semantic-map-match.py --master SOURCE.png --candidate SINGLE.png
+  --output /tmp/semantic-matches.json` finds every exact grid-aligned occurrence.
+  Repeat `--candidate` or provide a directory to compare a family. The default
+  16px grid starts at the source origin; `--grid 1` checks arbitrary pixel origins
+  when necessary, with a larger memory/time cost. Hidden RGB under zero alpha is
+  ignored; all visible pixels and alpha must match. Unmatched means no match under
+  that search, not proof of missing art. Empty sprites are reported separately.
+- `python3 scripts/semantic-map-match.test.py` checks duplicate occurrences, full
+  rectangle verification, alpha handling, partial-tile sizes and off-grid limits.
+
+Source-specific survey helpers and their capture commands are linked from the
+investigation packets. Generated source ledgers retain deterministic formatting;
+their formatting is excluded from Biome alongside other generated inventories.
