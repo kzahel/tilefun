@@ -6,7 +6,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     id: "world-geometry",
     name: "World geometry lab",
     description:
-      "Walk a ramp and raised deck, pass underneath, and inspect cutaway visibility using shared engine physics.",
+      "Walk a raised deck or descend into an underground garage; inspect shared physics, spaces and cutaway visibility.",
     url: "workshop.html#/tool/world-geometry",
     mode: "source",
   },

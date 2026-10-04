@@ -11,6 +11,8 @@ export interface MovementContext {
   getCollision(tx: number, ty: number): number;
   /** Tile elevation at the given tile coords. */
   getHeight(tx: number, ty: number): number;
+  /** Solid terrain base with bounded excavations, in world-pixel height. */
+  getTerrainZ?(aabb: AABB): number;
   /** Whether the AABB overlaps any blocking entity. */
   isEntityBlocked(aabb: AABB): boolean;
   /** Whether the AABB overlaps any prop wall/collider. Z params enable Z-axis filtering. */

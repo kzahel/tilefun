@@ -4,15 +4,18 @@ import movement from "../physics/PlayerMovement.ts?raw";
 import queries from "../physics/SimulationEnvironment.ts?raw";
 import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
+import excavation from "../physics/TerrainExcavation.ts?raw";
 import presentation from "../rendering/SurfacePresentation.ts?raw";
+import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
-export async function buildWorldGeometryCandidate(): Promise<WorkshopCandidate> {
+export async function buildWorldGeometryCandidate(garage = false): Promise<WorkshopCandidate> {
   const fingerprint = await sha256(
     new TextEncoder().encode(
       JSON.stringify({
-        recipe: worldGeometryRecipe(),
+        recipe: garage ? undergroundGarageRecipe() : worldGeometryRecipe(),
+        ...(garage ? { excavation } : {}),
         collision,
         movement,
         queries,
@@ -23,13 +26,18 @@ export async function buildWorldGeometryCandidate(): Promise<WorkshopCandidate> 
     ),
   );
   return {
-    id: "geometry:deck-ramp-v1",
+    id: garage ? "geometry:underground-garage-v1" : "geometry:deck-ramp-v1",
     batchId: "world-geometry",
     kind: "geometry",
-    name: "Ramp, raised deck and lower passage",
-    prompt:
-      "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
-    url: "/tilefun/workshop.html#/tool/world-geometry",
+    name: garage
+      ? "Underground garage, entrance and usable street"
+      : "Ramp, raised deck and lower passage",
+    prompt: garage
+      ? "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload."
+      : "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
+    url: garage
+      ? "/tilefun/workshop.html?geometry=garage#/tool/world-geometry"
+      : "/tilefun/workshop.html#/tool/world-geometry",
     fingerprint,
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",
   };

@@ -5,6 +5,7 @@ import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
+import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import {
@@ -37,6 +38,7 @@ export class ScenarioSession {
       for (const c of p.walls ?? (p.collider ? [p.collider] : []))
         if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
     });
+    validateExcavations(recipe.props);
     const patches = recipe.props
       .flatMap((p) => p.walls ?? (p.collider ? [p.collider] : []))
       .flatMap((c) => (c.surface ? [c.surface] : []));

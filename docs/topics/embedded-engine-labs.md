@@ -130,6 +130,12 @@ manual visibility affect presentation only. [Tactical 051](../tactical/051-world
 records ramp/deck/passage coverage. It does not establish
 full 3D debug-renderer/stacked-actor parity.
 
+Its [underground garage fixture](../tactical/057-underground-garage-proof.md) also
+uses shared terrain-base queries for bounded excavations, negative-height support
+and shadows, and derived floor/ceiling space identity. It retains the same Realm,
+Worker and predictor during street-to-garage traversal; no indoor realm switch or
+lab-only collision path is involved.
+
 No identified interactive consumer remains to migrate in this plan. Static diagrams,
 source experiments and frozen approval renders intentionally retain diagnostic/reference
 adapters; they do not claim full gameplay parity. Shared hosting establishes ownership

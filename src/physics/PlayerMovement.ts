@@ -741,7 +741,12 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
     const mask = airborne ? CollisionFlag.Solid : BLOCK_MASK;
     if (aabbOverlapsSolid(aabb, ctx.getCollision, mask)) return true;
     if (ctx.isPropBlocked(aabb, entityWz, entityHeight, elevStepUp)) return true;
-    if (isElevationBlocked3D(aabb, entityWz, ctx.getHeight, elevStepUp)) return true;
+    if (
+      ctx.getTerrainZ
+        ? ctx.getTerrainZ(aabb) > entityWz + elevStepUp
+        : isElevationBlocked3D(aabb, entityWz, ctx.getHeight, elevStepUp)
+    )
+      return true;
     if (ctx.isEntityBlocked(aabb)) return true;
     return false;
   };

@@ -25,7 +25,9 @@ Checked against code on 2026-10-03. The
 - Opt-in [SurfacePatch](../src/physics/SurfacePatch.ts) colliders provide planar
   slab support and undersides for the first [world geometry proof](topics/world-geometry.md).
   Shared player movement checks slope support, landing and overhead clearance.
-  This does not yet replace terrain height queries or update ball/NPC navigation.
+  Bounded `excavation` floors now lower the terrain collision base through shared
+  `terrainBaseZ` queries; optional ceiling references retain a usable upper slab.
+  Ordinary terrain grids are unchanged. This does not update ball/NPC navigation.
 
 ## Prediction, presentation and persistence
 

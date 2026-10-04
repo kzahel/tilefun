@@ -2,6 +2,7 @@ import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import { isVehicle } from "../traffic/Vehicle.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
@@ -68,6 +69,9 @@ export function collectScene(
 
   const propSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
   const planarProps = props.filter((p) => p.collider?.surface || p.walls?.some((c) => c.surface));
+  const hasExcavations = planarProps.some((p) =>
+    (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
+  );
   const vehicleSurfaces = entities.flatMap((e) =>
     isVehicle(e) && e.collider
       ? [
@@ -123,7 +127,10 @@ export function collectScene(
     const shadowFeetWy = pos.wy + (col ? col.offsetY : (e.sortOffsetY ?? 0));
     const shadowTx = Math.floor(pos.wx / TILE_SIZE);
     const shadowTy = Math.floor(pos.wy / TILE_SIZE);
-    const terrainZ = world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
+    const terrainZ =
+      col && hasExcavations
+        ? terrainBaseZ(getEntityAABB(pos, col), (tx, ty) => world.getHeightAt(tx, ty), planarProps)
+        : world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
     const shadowTerrainZ =
       col && planarProps.length
         ? surfaceShadowZ(planarProps, getEntityAABB(pos, col), zOffset, terrainZ)

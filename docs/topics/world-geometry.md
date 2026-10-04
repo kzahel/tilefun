@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: first shared-engine ramp/deck/passage proof implemented; broader terrain and interior representation remains open.
+Status: shared ramp/deck proof and bounded underground garage implemented; broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -151,6 +151,27 @@ draw ordering and the separate 3D debug renderer need their own integration.
 Existing indoor realms are unchanged. The first diagnostic renderer uses the
 fixed game projection; a free camera is not delivered.
 
+## Underground garage proof
+
+The authorized follow-on adds a garage fixture to the same lab:
+[open garage](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=garage#/tool/world-geometry).
+[Tactical 057](../tactical/057-underground-garage-proof.md) owns the contract and
+validation. A bounded `SurfacePatch.excavation` lowers the terrain collision base
+to its floor while preserving the surrounding terrain. An optional ceiling ID
+names a separate slab with a usable top. The open ramp descends continuously from
+0 to −48; the covered garage and street can occupy the same map coordinates.
+These remain definition-backed patches, not a terrain-grid format migration.
+
+Shared footprint queries preserve exact slopes and solid uncut boundaries.
+Authority, prediction, ground tracking, landing and shadows consume this model.
+Floor/ceiling membership derives a space identity from XYZ even during jumps;
+existing saves restore it without a second floor-selection state. The first
+contract requires tile-aligned, nonoverlapping excavation footprints and matching
+ceiling footprints. Neighbor IDs document joins; there is no general portal or
+navigation graph yet. The schematic cutaway and manual level views remain
+presentation-only. Tile solid/water flags, NPC routes, train grades, world
+generation and indoor realms are unchanged.
+
 ## Prior art informing the direction
 
 - [OpenTTD's landscape implementation](https://docs.openttd.org/source/d0/d94/landscape_8cpp)
@@ -218,23 +239,11 @@ with continuous connected spaces remains open. No realm migration is selected.
 
 ## Next step and evaluation
 
-Review the first lab's walking, headroom and cutaway behavior. Next, design how
-a declared underground space replaces normally solid terrain, using the garage
-exercise below; do not infer excavation support from the raised-deck fixture.
-Sketch connected indoor levels against existing realm boundaries before choosing
-a durable terrain/space schema.
-
-Compare a constrained surface stack with a connected floor/ceiling-sector model
-against the same small examples: a tiled hillside, a garage ramp with two decks,
-and a road/rail crossing with a short covered passage. Document which properties
-are authored and which are derived, including awkward edges and clearance cases.
-Choose a bounded design before expanding the shared-runtime proof or generation.
-The next combined design exercise should be a small two-storey parking garage
-with a ramp and a passage underneath: it tests slopes, stacked support, headroom
-and visibility together, rather than validating only an isolated flat tunnel.
-Include automatic underground reveal, manual level/sector selection and movement
-between connected indoor levels in this exercise. Extend the World geometry lab
-with fixtures and inspection controls over shared engine behavior.
+Review the garage's continuous descent, headroom, solid perimeter, space identity
+and save/reload alongside the retained raised-deck fixture. A road/rail crossing
+is the next potential consumer once these contracts are accepted. Connected indoor
+levels still need an explicit design against existing realm boundaries before
+migrating interiors or committing a durable terrain-authoring format.
 
 Further prototypes should use the existing [scenario runtime](gameplay-scenarios.md)
 and respect [embedded engine lab alignment](embedded-engine-labs.md). Exercise

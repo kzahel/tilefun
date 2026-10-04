@@ -21611,11 +21611,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:46"
+          "source": "src/scenarios/ScenarioSession.ts:48"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:101"
+          "source": "src/scenarios/ScenarioSession.ts:103"
         },
         {
           "system": "Gameplay",

@@ -2,6 +2,7 @@ import { type AABB, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { querySurfacePatch, type SurfacePatch, surfaceZAt } from "../physics/SurfacePatch.js";
+import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
@@ -68,7 +69,8 @@ export function surfacePresentationState(
     : { left: position.wx, right: position.wx, top: position.wy, bottom: position.wy };
   const top = nearbySurfaceTop(patch, bounds, feet);
   const above = feetZ < top - SUPPORT_TOLERANCE;
-  if (mode === "lower") return { visible: false, above };
+  if (mode === "lower") return { visible: !!patch.excavation, above };
+  if (mode === "upper" && patch.excavation) return { visible: false, above };
   if (mode !== "auto" || !above || !observer.sprite) return { visible: true, above };
 
   const sprite = observer.sprite;
@@ -119,6 +121,33 @@ export function collectSurfacePresentation(
       const patch = c.surface;
       if (!patch) continue;
       const bounds = getEntityAABB(prop.position, c);
+      if (mode === "auto" && patch.excavation?.ceilingId) {
+        const roofProp = props.find((p) =>
+          (p.walls ?? (p.collider ? [p.collider] : [])).some(
+            (wall) => wall.surface?.id === patch.excavation?.ceilingId,
+          ),
+        );
+        const roof = (roofProp?.walls ?? (roofProp?.collider ? [roofProp.collider] : [])).find(
+          (wall) => wall.surface?.id === patch.excavation?.ceilingId,
+        );
+        if (
+          roofProp &&
+          roof?.surface &&
+          surfaceVisibility(
+            roof.surface,
+            getEntityAABB(roofProp.position, roof),
+            observer,
+            mode,
+            alpha,
+          ) &&
+          locateSurfaceSpace(props, {
+            ...observer,
+            position: interpolatePosition(observer.position, observer.prevPosition, alpha),
+            wz: interpolateWz(observer, alpha) ?? 0,
+          }) !== patch.spaceId
+        )
+          continue;
+      }
       const { visible, above } = surfacePresentationState(patch, bounds, observer, mode, alpha);
       if ((phase === "above") !== (visible && above)) continue;
       const { sx, sy } = projectWorld(camera, bounds.left, bounds.top);
@@ -143,7 +172,7 @@ export function collectSurfacePresentation(
           north.sy,
           width * camera.scale + 0.5,
           south.sy - north.sy,
-          patch.riseX || patch.riseY ? "#d4ad73" : "#98bec6",
+          patch.riseX || patch.riseY ? "#d4ad73" : patch.excavation ? "#c7cbb9" : "#98bec6",
         );
         frame.rect(
           south.sx,

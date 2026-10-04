@@ -32,7 +32,7 @@ try {
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
   candidates.push(await buildCarProjectionCandidate());
-  candidates.push(await buildWorldGeometryCandidate());
+  candidates.push(await buildWorldGeometryCandidate(), await buildWorldGeometryCandidate(true));
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildInteriorCandidates()));
   candidates.push(...(await buildCharacterCandidates(catalog)));

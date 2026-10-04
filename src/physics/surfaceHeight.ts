@@ -6,6 +6,7 @@ import type { PropCollider } from "../entities/Prop.js";
 import { vehicleRoofBounds } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
+import { terrainBaseZ } from "./TerrainExcavation.js";
 
 /**
  * Terrain surface height at a world-pixel point, in world pixels.
@@ -81,7 +82,7 @@ export function resolveGroundZForTracking(
   entities: readonly EntitySurface[],
 ): number {
   const groundFootprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
-  let groundZ = getTerrainGroundZ(entity, getHeight);
+  let groundZ = getTerrainGroundZ(entity, getHeight, props);
   const propZ = groundFootprint
     ? getWalkablePropSurfaceZ(groundFootprint, entity.wz ?? 0, props)
     : undefined;
@@ -112,7 +113,7 @@ export function resolveGroundZForLanding(
   prevWz?: number,
 ): number {
   const groundFootprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
-  let groundZ = getTerrainGroundZ(entity, getHeight);
+  let groundZ = getTerrainGroundZ(entity, getHeight, props);
   if (props) {
     const propZ = groundFootprint
       ? getHighestWalkablePropSurfaceZ(groundFootprint, props, prevWz ?? entity.wz)
@@ -145,12 +146,34 @@ function getTerrainGroundZ(
     collider: ColliderComponent | null;
   },
   getHeight: (tx: number, ty: number) => number,
+  props: readonly PropSurface[] = [],
 ): number {
   const feetZ = getSurfaceZ(entity.position.wx, entity.position.wy, getHeight);
   if (!entity.collider) return feetZ;
   const footprint = getEntityAABB(entity.position, entity.collider);
-  const footprintZ = getMaxSurfaceZUnderAABB(footprint, getHeight);
-  return Math.max(footprintZ, feetZ);
+  if (
+    !props.some((p) =>
+      (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
+    )
+  )
+    return Math.max(getMaxSurfaceZUnderAABB(footprint, getHeight), feetZ);
+  const footprintZ = terrainBaseZ(footprint, getHeight, props);
+  // Feet on the footprint's inclusive edge belong to that support, not the next
+  // terrain tile. Offset anchors outside it still contribute their own sample.
+  const { wx, wy } = entity.position;
+  if (
+    wx >= footprint.left &&
+    wx <= footprint.right &&
+    wy >= footprint.top &&
+    wy <= footprint.bottom
+  )
+    return footprintZ;
+  const anchorZ = terrainBaseZ(
+    { left: wx - 0.001, right: wx + 0.001, top: wy - 0.001, bottom: wy + 0.001 },
+    getHeight,
+    props,
+  );
+  return Math.max(footprintZ, anchorZ);
 }
 
 /**

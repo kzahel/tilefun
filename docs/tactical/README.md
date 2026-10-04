@@ -97,6 +97,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [056 Furniture presentation host](056-furniture-presentation-host.md) | Shared indoor game/lab presentation; static approvals preserved, live motion reviews versioned; [embedded labs](../topics/embedded-engine-labs.md) |
 
+| [057 Underground garage proof](057-underground-garage-proof.md) | Bounded terrain opening, descending ramp, covered floor and derived space identity; [world geometry](../topics/world-geometry.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

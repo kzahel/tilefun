@@ -4,6 +4,9 @@ import type { AABB } from "../entities/collision.js";
  * Stored on a prop collider for this first slice; independent of sprites/terrain storage.
  */
 export interface SurfacePatch {
+  /** Locally lower the solid terrain base to this floor. Omitted ceiling means
+   * an open entrance; a ceiling ID references a separate usable upper slab. */
+  excavation?: { ceilingId?: string };
   id: string;
   spaceId: string;
   /** Top at the footprint's north-west corner. */
@@ -48,6 +51,12 @@ export function querySurfacePatch(patch: SurfacePatch, bounds: AABB, footprint: 
 
 export function validateSurfacePatch(p: SurfacePatch, width: number, height: number): void {
   if (
+    (p.excavation !== undefined &&
+      (!p.excavation ||
+        typeof p.excavation !== "object" ||
+        Array.isArray(p.excavation) ||
+        (p.excavation.ceilingId !== undefined &&
+          (typeof p.excavation.ceilingId !== "string" || !p.excavation.ceilingId)))) ||
     !p.id ||
     !p.spaceId ||
     ![p.z, p.riseX, p.riseY, p.thickness, width, height].every(Number.isFinite) ||

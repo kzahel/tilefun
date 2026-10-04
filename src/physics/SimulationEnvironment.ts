@@ -11,6 +11,7 @@ import { zRangesOverlap } from "./AABB3D.js";
 import type { MovementContext } from "./MovementContext.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
 import type { EntitySurface, PropSurface } from "./surfaceHeight.js";
+import { terrainBaseZ } from "./TerrainExcavation.js";
 
 export interface SimulationQuerySource {
   queryEntities: (aabb: AABB) => readonly Entity[];
@@ -41,6 +42,7 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
   const ctx: MovementContext = {
     getCollision: options.getCollision,
     getHeight: options.getHeight,
+    getTerrainZ: (aabb) => terrainBaseZ(aabb, options.getHeight, options.queryProps(aabb)),
     isEntityBlocked: (aabb) => {
       const selfWz = options.movingEntity.wz ?? 0;
       const selfHeight = options.movingEntity.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
