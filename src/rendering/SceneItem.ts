@@ -1,3 +1,4 @@
+import type { MeshInstance } from "./MeshPresentation.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 /**
@@ -9,6 +10,8 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
 
 export interface SpriteItem {
+  /** Optional representation; all sprite fields remain the complete fallback. */
+  mesh?: MeshInstance;
   kind: "sprite";
   sortKey: number;
   /** Interpolated world position (feet = bottom-center). */

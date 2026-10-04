@@ -1,4 +1,5 @@
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
+import { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { touchRaster } from "./RasterSurface.js";
@@ -7,18 +8,22 @@ import type { RenderPass, RenderView } from "./RenderFrame.js";
 /** GPU draw adapter with shared terrain, interior and scene preparation. */
 export class GpuRenderBackend extends RasterRenderBackend {
   readonly surface: GpuRasterSurface;
+  readonly meshes: GpuMeshBodies;
   private readonly overlay = document.createElement("canvas");
   private readonly overlayContext: CanvasRenderingContext2D;
   constructor(canvas: HTMLCanvasElement) {
     const surface = new GpuRasterSurface(canvas);
     super(surface, new Map());
     this.surface = surface;
+    this.meshes = new GpuMeshBodies(surface);
+    surface.meshBody = (camera, item) => this.meshes.draw(camera, item);
     const ctx = this.overlay.getContext("2d");
     if (!ctx) throw Error("Overlay surface unavailable");
     this.overlayContext = ctx;
   }
   beginFrame() {
     this.surface.beginFrame();
+    this.meshes.beginFrame();
   }
   override submit(view: RenderView, pass: RenderPass) {
     if (this.surface.lost) return;
@@ -40,7 +45,15 @@ export class GpuRenderBackend extends RasterRenderBackend {
     if (this.overlay.height !== height) this.overlay.height = height;
   }
   override getDiagnostics() {
-    return { ...super.getDiagnostics(), gpu: { ...this.surface.stats } };
+    return {
+      ...super.getDiagnostics(),
+      gpu: {
+        ...this.surface.stats,
+        meshDraws: this.meshes.draws,
+        meshState: this.meshes.car.state,
+        targetBytes: this.meshes.targetBytes,
+      },
+    };
   }
   override invalidateAssets() {
     super.invalidateAssets();
@@ -53,9 +66,11 @@ export class GpuRenderBackend extends RasterRenderBackend {
   override recover() {
     super.recover();
     this.surface.recover();
+    this.meshes.recover();
   }
   override dispose() {
     super.dispose();
+    this.meshes.dispose();
     this.surface.dispose();
   }
 }

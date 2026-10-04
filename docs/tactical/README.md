@@ -69,6 +69,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [041 GPU sprite backend](041-gpu-sprite-backend.md) | Active shared drawing and optional GPU host |
 
+| [042 Optional mesh bodies](042-optional-mesh-bodies.md) | Active neutral instances, fallback and isolated GPU depth |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

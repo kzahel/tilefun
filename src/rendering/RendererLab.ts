@@ -1,6 +1,7 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
+import { COMPACT_CAR_MESH, yawOrientation } from "./MeshPresentation.js";
 import { touchRaster } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -59,9 +60,21 @@ const items: SceneItem[] = [
   { kind: "particle", wx: 0, wy: 0, z: 16, size: 4, color: "#f8dd17", alpha: 0.5, sortKey: 100 },
 ];
 let clips = false;
+let meshMode = false;
+let foreground = false;
+const car = {
+  ...sprite(0, 24, 1),
+  hasShadow: false,
+  mesh: { assetId: COMPACT_CAR_MESH, orientation: yawOrientation(Math.PI), radius: 64 },
+};
+
 function draw() {
   gpu.beginFrame();
-  const sceneItems = clips ? items.map(item => item.kind === "sprite" ? {...item, hasShadow:false} : item) : items;
+  const selectedItems = meshMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items;
+  if (meshMode && foreground) selectedItems.reverse();
+  const sceneItems = clips
+    ? selectedItems.map((item) => (item.kind === "sprite" ? { ...item, hasShadow: false } : item))
+    : selectedItems;
   const passes: RenderPass[] = [
     { kind: "clear", color: "#243245" },
     {
@@ -99,13 +112,35 @@ function draw() {
     if (error > 1) mismatches++;
     maxError = Math.max(maxError, error);
   }
-  const report = { mismatches, maxError, ...gpu.surface.stats };
+  const report = {
+    mismatches,
+    maxError,
+    ...gpu.surface.stats,
+    meshDraws: gpu.meshes.draws,
+    meshState: gpu.meshes.car.state,
+    targetBytes: gpu.meshes.targetBytes,
+  };
   result.textContent = JSON.stringify(report, null, 2);
   canvas.dataset.ready = "true";
   return report;
 }
 const lab = {
   draw,
+  async setMesh(value: boolean) {
+    meshMode = value;
+    gpu.meshes.setEnabled(value);
+    while (value && gpu.meshes.car.state === "loading")
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    return draw();
+  },
+  setForeground(value: boolean) {
+    foreground = value;
+    return draw();
+  },
+  setYaw(radians: number) {
+    car.mesh.orientation = yawOrientation(radians);
+    return draw();
+  },
   setClips(value: boolean) {
     clips = value;
     return draw();
@@ -127,5 +162,23 @@ const lab = {
   gpu,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;
+const controls = required(document.querySelector<HTMLElement>("#controls"));
+const toggle = document.createElement("button");
+toggle.textContent = "Show diagnostic mesh car";
+toggle.onclick = async () => {
+  toggle.disabled = true;
+  await lab.setMesh(!meshMode);
+  toggle.textContent = meshMode ? "Show sprite fixture" : "Show diagnostic mesh car";
+  toggle.disabled = false;
+};
+controls.append(toggle);
+const heading = document.createElement("input");
+heading.type = "range";
+heading.min = "-180";
+heading.max = "180";
+heading.value = "180";
+heading.setAttribute("aria-label", "Car heading");
+heading.oninput = () => lab.setYaw((Number(heading.value) * Math.PI) / 180);
+controls.append(heading);
 draw();
 window.addEventListener("pagehide", () => lab.dispose(), { once: true });

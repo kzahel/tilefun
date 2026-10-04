@@ -6,6 +6,8 @@ import { expect, it } from "vitest";
 const neutral = [
   "assets/SpriteCatalog.ts",
   "rendering/RenderFrame.ts",
+  "rendering/MeshPresentation.ts",
+  "rendering/Projection.ts",
   "rendering/TerrainPresentation.ts",
   "rendering/TerrainFrame.ts",
   "rendering/SceneItem.ts",

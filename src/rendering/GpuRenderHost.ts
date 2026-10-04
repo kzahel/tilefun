@@ -17,6 +17,7 @@ export function createGpuRenderHost(canvas: HTMLCanvasElement): RenderHost {
     canvas.dataset.renderer = "canvas-fallback";
     return createCanvasRenderHost(canvas);
   }
+  renderer.meshes.setEnabled(new URLSearchParams(location.search).has("meshes"));
   const uiContext = canvas.getContext("2d");
   if (!uiContext) {
     renderer.dispose();

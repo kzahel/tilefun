@@ -70,6 +70,7 @@ export class GpuRasterSurface implements RasterSurface {
   globalAlpha = 1;
   fillStyle: string | CanvasGradient | CanvasPattern = "#000";
   imageSmoothingEnabled = false;
+  meshBody?: NonNullable<RasterSurface["meshBody"]>;
   lost = false;
   disposed = false;
   readonly stats = {
@@ -97,12 +98,12 @@ export class GpuRasterSurface implements RasterSurface {
     this.white.needsUpdate = true;
     // Raw sampled bytes are already display sRGB; no lighting or tone mapping.
     this.material = new THREE.ShaderMaterial({
-      uniforms: { image: { value: this.white } },
+      uniforms: { image: { value: this.white }, encode: { value: false } },
       vertexShader: `attribute vec2 point; attribute vec2 tex; attribute vec4 tint;
         varying vec2 uv0; varying vec4 color0;
         void main(){uv0=tex;color0=tint;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
-      fragmentShader: `uniform sampler2D image; varying vec2 uv0; varying vec4 color0;
-        void main(){vec4 c=texture2D(image,uv0)*color0;gl_FragColor=vec4(c.rgb*c.a,c.a);}`,
+      fragmentShader: `uniform sampler2D image; uniform bool encode; varying vec2 uv0; varying vec4 color0;
+        void main(){vec4 c=texture2D(image,uv0)*color0;if(encode)c.rgb=mix(12.92*c.rgb,1.055*pow(c.rgb,vec3(1./2.4))-.055,step(vec3(.0031308),c.rgb));gl_FragColor=vec4(c.rgb*c.a,c.a);}`,
       side: THREE.DoubleSide,
       transparent: true,
       depthTest: false,
@@ -461,6 +462,8 @@ export class GpuRasterSurface implements RasterSurface {
     this.buffer.needsUpdate = true;
     const uniform = this.material.uniforms.image;
     if (uniform) uniform.value = this.texture;
+    const encode = this.material.uniforms.encode;
+    if (encode) encode.value = this.texture?.colorSpace === THREE.SRGBColorSpace;
     if (this.clips) {
       this.renderer.setScissorTest(true);
       for (const r of this.clips) {

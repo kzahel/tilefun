@@ -187,6 +187,7 @@ function drawSprite(
   sheets: Map<string, Spritesheet>,
 ): void {
   if (item.flashHidden) return;
+  if (ctx.meshBody?.(camera, item)) return;
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
 

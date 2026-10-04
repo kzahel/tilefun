@@ -1,3 +1,5 @@
+import type { Camera } from "./Camera.js";
+import type { SpriteItem } from "./SceneItem.js";
 /** Drawing-side compatibility surface. Image resources stay behind RenderBackend;
  * this is not a presentation/world contract or a general Canvas emulation API.
  */
@@ -20,6 +22,7 @@ export type RasterSurface = Pick<
   | "fillStyle"
   | "imageSmoothingEnabled"
 > & {
+  meshBody?: (camera: Camera, item: SpriteItem) => boolean;
   pixelShadow?: (cx: number, cy: number, rx: number, ry: number) => void;
 };
 

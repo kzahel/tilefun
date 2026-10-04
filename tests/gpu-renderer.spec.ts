@@ -46,3 +46,48 @@ test("GPU host runs the shared game and retains the input/UI canvas", async ({ p
   await page.keyboard.up("ArrowRight");
   expect(errors).toEqual([]);
 });
+
+test("optional mesh body rotates, composes in order and falls back atomically", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const report = () =>
+    page
+      .locator("#result")
+      .textContent()
+      .then((text) => JSON.parse(text ?? "{}"));
+  await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setMesh(value: boolean): Promise<unknown> } }
+    ).rendererLab.setMesh(true),
+  );
+  expect((await report()).meshDraws).toBe(1);
+  expect((await report()).meshState).toBe("ready");
+  const picture = () =>
+    page.locator("#gpu").evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
+  const first = await picture();
+  await page.evaluate(() =>
+    (window as unknown as { rendererLab: { setYaw(value: number): unknown } }).rendererLab.setYaw(
+      Math.PI / 4,
+    ),
+  );
+  expect(await picture()).not.toBe(first);
+  const angled = await picture();
+  await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setForeground(value: boolean): unknown } }
+    ).rendererLab.setForeground(true),
+  );
+  expect(await picture()).not.toBe(angled);
+  const before = await report();
+  await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setMesh(value: boolean): Promise<unknown> } }
+    ).rendererLab.setMesh(false),
+  );
+  const after = await report();
+  expect(after.meshDraws).toBe(before.meshDraws);
+  expect(after.mismatches).toBe(0);
+  expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
+});
