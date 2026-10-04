@@ -6260,6 +6260,33 @@
       "fingerprint": "d99ccdf395140698e009c22ff21d33a208aa4c864e447cdb5cb5dd66115929a6"
     },
     {
+      "id": "family:plants-planters",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Plants and planters",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=plants-planters&revision=67c6ab226cbdb0a80603686bf48c6153ea02ad770888dbd556f73fe3af7a4e41",
+      "fingerprint": "74d5b5a5d6bcf0d2be8ce03f2026607d5764a69a5f12a59e16f23dd7570cd608"
+    },
+    {
+      "id": "family:bedroom",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Side beds and blue blankets",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=bedroom&revision=a4b2e4b7130473bb18c158e8d8dc1955f1f9d651e47d835ca88a0c8600e6e5f6",
+      "fingerprint": "6c31a83579f88543091066022104eb2ee1b2a828f9f1b13858208b722b087a8e"
+    },
+    {
+      "id": "family:fences-gates",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Low picket fences and garden gates",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=fences-gates&revision=7d646e502d8d97a12c9a9d75d06541b9f88cce119840a22e31a479de3f7e574a",
+      "fingerprint": "862f16552939ef2481c9bd98e1154985219b13f449d62e99b6dc0f4640cb8b33"
+    },
+    {
       "id": "review-0-6ba78e73",
       "batchId": "rooms-0",
       "name": "1 × 1 · wood",

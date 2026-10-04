@@ -85,7 +85,8 @@ class FamilySheetsTest(unittest.TestCase):
             self.assertEqual(family['status'], 'proposed')
             self.assertEqual(family['revision'], ADAPTER.revision(family))
         self.assertEqual(counts, {'cabinets': 27, 'trees': 29, 'scrapyard': 29, 'outdoor-seating': 27, 'sofas': 20,
-                                  'room-builder': 25, 'playground-tubes': 25, 'animated-doors': 9})
+                                  'room-builder': 25, 'playground-tubes': 25, 'animated-doors': 9, 'plants-planters': 19, 'bedroom': 18,
+                                  'fences-gates': 27})
         cabinets = self.catalog['families'][0]
         parts = next(g['members'] for g in cabinets['groups'] if g['id'] == 'components')
         self.assertEqual([m['number'] for m in parts], [41, 42, 43, 44])

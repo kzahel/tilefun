@@ -80,3 +80,48 @@ Research therefore adds 64 source records / 52 proposal units, not 64 new game
 objects. Seven plant cards, six bed cards and 25 fence/gate cards are planned.
 The wider plant, bedroom and fence families remain unassigned; no master-sheet
 completion percentage follows from this slice.
+
+
+## Quiet sheet delivery
+
+The committed-only adapter adds these proposed sheets:
+
+| Sheet | Cards | Source records | Exact family revision |
+| --- | --- | --- | --- |
+| [Plants and planters](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=plants-planters) | 7 | 19 | `67c6ab226cbdb0a80603686bf48c6153ea02ad770888dbd556f73fe3af7a4e41` |
+| [Side beds and blue blankets](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=bedroom) | 6 | 18 | `a4b2e4b7130473bb18c158e8d8dc1955f1f9d651e47d835ca88a0c8600e6e5f6` |
+| [Low picket fences and garden gates](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=fences-gates) | 25 | 27 | `7d646e502d8d97a12c9a9d75d06541b9f88cce119840a22e31a479de3f7e574a` |
+
+The total is eleven families / 169 cards / 255 records. The eight existing family
+objects match checkpoint `c4eb6d6` exactly, including prior note targets. No new
+public source image was needed. The Workshop manifest adds three discoverable
+zero-event candidates to the existing asset-families batch; all remain Proposed.
+Whole-sheet and exact member/variant comments use the existing discussion flow.
+
+The [adapter note](2026-10-04-next-family-presentation.md) records component rules,
+source-only replay and mutation checks. The
+[independent implementation review](2026-10-04-next-family-implementation-review.md)
+replays all 64 new member frames and twenty example variants using committed art.
+Plant variant selectors keep original tree bases and flower/pot differences;
+three source crops restore transparent padding by unmasked copy. Bed examples
+show four compatible overlays with all three shadow variants. Fence examples
+keep seven closed arrangements separate from the one explicitly open section.
+Unresolved hedge trials remain research, and gate standalone status stays unknown.
+
+Desktop, tablet and phone layouts were captured with bundled Playwright Chromium;
+desktop and phone captures were visually inspected. The new browser checks independently reconstruct a plant's
+native frame, test exact source-note targets and variant reload, confirm blankets
+remain components while bed assemblies follow shadow choices, and distinguish
+open fence sections from unknown gate eligibility. All 25 family browser tests
+passed. Typecheck, lint (zero errors; existing warnings), all 1,541 unit tests,
+three ten-test adapter suites, catalog/manifest generation and production builds
+passed. Validation uses a fresh source snapshot without ignored source packs,
+separate ports and isolated data; test discussion writes are intercepted.
+
+Application/catalog output SHA-256:
+`e5683e0d4bf4476d785ce2c109995b6cdabf56b8d4b012e65c265daf1f9a02ad`.
+The full isolated Playwright suite passed **360 tests with one existing skip**.
+Normalized-model final results are recorded below after completion.
+
+Checkpoint history: `c4eb6d6` clarifies the door and zoom; `844c8a6` freezes the
+three independently reviewed source investigations.

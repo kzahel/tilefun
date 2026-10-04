@@ -68,15 +68,18 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     "room-builder": 25,
     "playground-tubes": 19,
     "animated-doors": 2,
+    "plants-planters": 7,
+    bedroom: 6,
+    "fences-gates": 25,
   };
   const members = catalog.families.flatMap((family) =>
     family.groups.flatMap((group) => group.members),
   );
-  expect(members).toHaveLength(131);
+  expect(members).toHaveLength(169);
   expect(
     new Set(members.flatMap((member) => member.variants.flatMap((variant) => variant.recordIds)))
       .size,
-  ).toBe(191);
+  ).toBe(255);
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 966, height: 1024 },
@@ -85,7 +88,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await expect(
       page.getByRole("navigation", { name: "Art families" }).getByRole("link"),
-    ).toHaveCount(8);
+    ).toHaveCount(11);
     for (const family of catalog.families) {
       const tab = page
         .getByRole("navigation", { name: "Art families" })
@@ -804,3 +807,135 @@ for (const invalid of [
     await expect(page.locator(".family-piece canvas")).toHaveCount(0);
   });
 }
+
+test("plant variants preserve native padding and exact piece discussion targets", async ({
+  page,
+}) => {
+  const events = await mockDiscussions(page);
+  const family = required(catalog.families.find((f) => f.id === "plants-planters"));
+  const member = required(
+    family.groups
+      .flatMap((g) => g.members)
+      .find((m) => m.variants.some((v) => v.recordIds.includes("E04-03"))),
+  );
+  const variant = required(member.variants.find((v) => v.recordIds.includes("E04-03")));
+  await page.goto(`${URL}?family=plants-planters&member=${member.id}&variant=${variant.id}`);
+  await ready(page, 7);
+  const canvas = page
+    .getByRole("button", { name: `${member.number}. ${member.label}`, exact: true })
+    .locator("canvas");
+  // Tree 9 has an exact 32×52 visible crop, restored at y=11 in its 32×64 native frame.
+  const reference = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = "/tilefun/assets/tilesets/me-complete.png";
+    await image.decode();
+    const c = document.createElement("canvas");
+    c.width = 32;
+    c.height = 64;
+    const ctx = c.getContext("2d");
+    if (!ctx) throw new Error("Missing canvas");
+    ctx.drawImage(image, 352, 52, 32, 52, 0, 11, 32, 52);
+    return [
+      ...new Uint8Array(await crypto.subtle.digest("SHA-256", ctx.getImageData(0, 0, 32, 64).data)),
+    ]
+      .map((v) => v.toString(16).padStart(2, "0"))
+      .join("");
+  });
+  expect(await pixels(canvas)).toBe(reference);
+  await expect(canvas).toHaveAttribute("height", "64");
+  const note = page.locator(".family-piece-discussion");
+  await note.getByText("Discuss this piece", { exact: true }).click();
+  await note.getByRole("textbox").fill("This exact tree base");
+  await note.getByRole("button", { name: "Save note", exact: true }).click();
+  await expect.poll(() => events.length).toBe(1);
+  expect(events[0]).toMatchObject({
+    sheetId: "me-complete",
+    rect: [352, 52, 32, 52],
+    sliceKeys: expect.arrayContaining([
+      `family-member:${member.id}`,
+      `family-variant:${variant.id}`,
+      `family-proposal:${family.revision}`,
+    ]),
+  });
+  const next = required(member.variants.find((v) => v.id !== variant.id));
+  await page.getByRole("combobox", { name: member.variantLabel }).selectOption(next.id);
+  await expect.poll(() => pixels(canvas)).not.toBe(reference);
+  const url = page.url();
+  await page.reload();
+  await ready(page, 7);
+  await expect(page).toHaveURL(url);
+  await expect(page.getByRole("combobox", { name: member.variantLabel })).toHaveValue(next.id);
+});
+
+test("bed blankets remain components and assembled examples follow shadow selection", async ({
+  page,
+}) => {
+  await mockDiscussions(page);
+  const family = required(catalog.families.find((f) => f.id === "bedroom"));
+  const members = family.groups.flatMap((g) => g.members);
+  const blanket = required(members.find((m) => m.kind === "component"));
+  await page.goto(`${URL}?family=bedroom&member=${blanket.id}`);
+  await ready(page, 6);
+  await expect(page.locator(".family-detail-copy")).toContainText(/matching bed/i);
+  await expect(page.locator(".family-examples canvas")).toHaveCount(4);
+  const bed = required(members.find((m) => m.kind === "whole"));
+  const bedCanvas = page
+    .getByRole("button", { name: `${bed.number}. ${bed.label}`, exact: true })
+    .locator("canvas");
+  const blanketCanvas = page
+    .getByRole("button", { name: `${blanket.number}. ${blanket.label}`, exact: true })
+    .locator("canvas");
+  const bedPixels: string[] = [],
+    examplePixels: string[] = [],
+    blanketPixels: string[] = [];
+  for (const variant of family.variants) {
+    await page.getByRole("combobox", { name: family.variantLabel }).selectOption(variant.id);
+    if (bedPixels.length) await expect.poll(() => pixels(bedCanvas)).not.toBe(bedPixels.at(-1));
+    bedPixels.push(await pixels(bedCanvas));
+    examplePixels.push(await pixels(page.locator(".family-examples canvas").first()));
+    blanketPixels.push(await pixels(blanketCanvas));
+  }
+  expect(new Set(bedPixels).size).toBe(3);
+  expect(new Set(examplePixels).size).toBe(3);
+  // The three named cover exports are pixel duplicates, but keep distinct note identities.
+  expect(new Set(blanketPixels).size).toBe(1);
+  await expect(page).toHaveURL(/variant=shadowless/);
+});
+
+test("fence sheets distinguish required joins, open sections and uncertain garden gates", async ({
+  page,
+}) => {
+  const events = await mockDiscussions(page);
+  const family = required(catalog.families.find((f) => f.id === "fences-gates"));
+  const members = family.groups.flatMap((g) => g.members);
+  const corner = required(
+    members.find((m) => m.variants.some((v) => v.recordIds.includes("E05-01"))),
+  );
+  await page.goto(`${URL}?family=fences-gates&member=${corner.id}`);
+  await ready(page, 25);
+  await expect(page.locator(".family-detail-copy")).toContainText(/right and bottom/i);
+  await expect(
+    page.getByRole("heading", { name: "Open fence sections", exact: true }),
+  ).toBeVisible();
+  const open = page
+    .locator(".family-examples")
+    .filter({ has: page.getByRole("heading", { name: "Open fence sections", exact: true }) });
+  await expect(open).toContainText(/post|continu/i);
+  const gate = required(
+    members.find((m) => m.variants.some((v) => v.recordIds.includes("E05-23"))),
+  );
+  expect(gate.kind).toBe("unknown");
+  await page.getByRole("button", { name: `${gate.number}. ${gate.label}`, exact: true }).click();
+  await expect(page.locator(".family-detail-copy")).toContainText(/standalone.*unresolved/i);
+  const warm = required(gate.variants.find((v) => v.recordIds.includes("E05-24")));
+  await page.getByRole("combobox", { name: gate.variantLabel }).selectOption(warm.id);
+  const whole = page.locator(".family-sheet-discussion");
+  await whole.getByText("Comment on whole sheet", { exact: true }).click();
+  await whole.getByRole("textbox").fill("Discuss the fence set as a whole");
+  await whole.getByRole("button", { name: "Save note", exact: true }).click();
+  await expect.poll(() => events.length).toBe(1);
+  const event = events[0];
+  if (event?.type !== "source") throw new Error("Expected source note");
+  expect(event.sliceKeys).toContain("family-sheet:fences-gates");
+  expect(event.sliceKeys.some((key) => key.startsWith("family-member:"))).toBe(false);
+});

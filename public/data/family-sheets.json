@@ -11678,7 +11678,4125 @@
         }
       ],
       "revision": "369525f6b27956fa01cf659ee9f16aa34c383b8d1dc1f564f1626c8dc0f0f3be"
+    },
+    {
+      "id": "plants-planters",
+      "name": "Plants and planters",
+      "description": "Broadleaf trees, flowerbeds and small potted plants from the civic set.",
+      "status": "proposed",
+      "variantLabel": "Appearance",
+      "variants": [
+        {
+          "id": "original",
+          "label": "Original"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Form",
+          "value": "Complete trees, flowerbeds, shrubs and potted plants."
+        },
+        {
+          "label": "Variants",
+          "value": "Original tree bases, flower colors and potted plant forms are selectable."
+        },
+        {
+          "label": "Unknown",
+          "value": "Plant species, container materials and raised planter versus ground edging are unknown."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Size, collision, height and walkability are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "plants",
+          "title": "Trees, flowers and small pots",
+          "members": [
+            {
+              "id": "small-broadleaf-tree",
+              "number": 1,
+              "label": "Small broadleaf tree",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Base",
+                  "value": "Bare trunk, grass, square base or rounded base are original whole-tree variants."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "Raised planter versus bordered ground, species and material are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-04",
+                  "label": "Rounded planter base",
+                  "recordIds": [
+                    "E04-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          320,
+                          52,
+                          32,
+                          53
+                        ],
+                        "at": [
+                          0,
+                          11
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-01",
+                  "label": "Bare trunk",
+                  "recordIds": [
+                    "E04-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          256,
+                          48,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-02",
+                  "label": "With grass",
+                  "recordIds": [
+                    "E04-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          288,
+                          48,
+                          32,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-03",
+                  "label": "Square grass base",
+                  "recordIds": [
+                    "E04-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          352,
+                          52,
+                          32,
+                          52
+                        ],
+                        "at": [
+                          0,
+                          11
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Tree base"
+            },
+            {
+              "id": "large-broadleaf-tree",
+              "number": 2,
+              "label": "Large broadleaf tree",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Base",
+                  "value": "Bare trunk, grass, square base or rounded base are original whole-tree variants."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "Raised planter versus bordered ground, species and material are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-07",
+                  "label": "Rounded planter base",
+                  "recordIds": [
+                    "E04-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          352,
+                          121,
+                          48,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-05",
+                  "label": "Bare trunk",
+                  "recordIds": [
+                    "E04-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          256,
+                          96,
+                          48,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-06",
+                  "label": "With grass",
+                  "recordIds": [
+                    "E04-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          304,
+                          112,
+                          48,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-08",
+                  "label": "Square grass base",
+                  "recordIds": [
+                    "E04-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      64
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          400,
+                          121,
+                          48,
+                          64
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Tree base"
+            },
+            {
+              "id": "narrow-flowerbed",
+              "number": 3,
+              "label": "Narrow flowerbed",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Form",
+                  "value": "Flowers and the closed bordered bed are drawn together."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-09",
+                  "label": "Pink",
+                  "recordIds": [
+                    "E04-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          448,
+                          16,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-10",
+                  "label": "Red and yellow",
+                  "recordIds": [
+                    "E04-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          416,
+                          16,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-11",
+                  "label": "White and yellow",
+                  "recordIds": [
+                    "E04-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          384,
+                          16,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Flower colors"
+            },
+            {
+              "id": "wide-flowerbed",
+              "number": 4,
+              "label": "Wide flowerbed",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Form",
+                  "value": "Flowers and the closed bordered bed are drawn together."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-12",
+                  "label": "Red and white mix",
+                  "recordIds": [
+                    "E04-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          480,
+                          16,
+                          48,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-13",
+                  "label": "Pink and white mix",
+                  "recordIds": [
+                    "E04-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          432,
+                          32,
+                          48,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-14",
+                  "label": "White and yellow",
+                  "recordIds": [
+                    "E04-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          384,
+                          32,
+                          48,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Flower colors"
+            },
+            {
+              "id": "loose-flowering-bush",
+              "number": 5,
+              "label": "Small flowering bush",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "Low shrub or compact flower clump; no box or pot is shown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-15",
+                  "label": "Loose bush",
+                  "recordIds": [
+                    "E04-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          225,
+                          80,
+                          14,
+                          13
+                        ],
+                        "at": [
+                          1,
+                          2
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Plant appearance"
+            },
+            {
+              "id": "upright-potted-plant",
+              "number": 6,
+              "label": "Upright potted plant",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Variants",
+                  "value": "The tan-pot plant also has shorter, slightly different leaves."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-16",
+                  "label": "Red-brown pot",
+                  "recordIds": [
+                    "E04-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2768,
+                          5360,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-17",
+                  "label": "Tan pot with shorter leaves",
+                  "recordIds": [
+                    "E04-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2288,
+                          5632,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Plant appearance"
+            },
+            {
+              "id": "arching-potted-plant",
+              "number": 7,
+              "label": "Arching potted plant",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete visual object; no other piece required."
+                },
+                {
+                  "label": "Variants",
+                  "value": "The foliage stays the same; the original pot colors differ."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "E04-18",
+                  "label": "Red-brown pot",
+                  "recordIds": [
+                    "E04-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2288,
+                          5616,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "E04-19",
+                  "label": "Tan pot",
+                  "recordIds": [
+                    "E04-19"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2288,
+                          5648,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Plant appearance"
+            }
+          ]
+        }
+      ],
+      "examples": [],
+      "sourcePins": [
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "67c6ab226cbdb0a80603686bf48c6153ea02ad770888dbd556f73fe3af7a4e41"
+    },
+    {
+      "id": "bedroom",
+      "name": "Side beds and blue blankets",
+      "description": "Side-view beds with optional blue patterned blanket pieces.",
+      "status": "proposed",
+      "variantLabel": "Shadow",
+      "variants": [
+        {
+          "id": "normal",
+          "label": "Normal"
+        },
+        {
+          "id": "black-shadow",
+          "label": "Dark shadow"
+        },
+        {
+          "id": "shadowless",
+          "label": "No shadow"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Beds",
+          "value": "Headboard on the left or right, with blue or pale lilac pillows."
+        },
+        {
+          "label": "Blankets",
+          "value": "Pieces need a matching complete bed; the bed can appear without a blanket."
+        },
+        {
+          "label": "Variants",
+          "value": "Shadow choices keep the same bed body. Blankets have identical pixels in each choice."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision, size, height and occlusion are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "beds",
+          "title": "Complete beds",
+          "members": [
+            {
+              "id": "I02-unit-1",
+              "number": 1,
+              "label": "Pale-gray bed, blue pillow at right",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Pale-gray bedding and a blue pillow."
+                },
+                {
+                  "label": "Form",
+                  "value": "Headboard and pillow at image-right."
+                },
+                {
+                  "label": "Form",
+                  "value": "Complete visual bed; game geometry is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          720,
+                          2958,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          512,
+                          2814,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1248,
+                          3102,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "I02-unit-2",
+              "number": 2,
+              "label": "Pale-gray bed, pale lilac pillow at right",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Pale-gray bedding and a pale lilac pillow."
+                },
+                {
+                  "label": "Form",
+                  "value": "Headboard and pillow at image-right."
+                },
+                {
+                  "label": "Form",
+                  "value": "Complete visual bed; game geometry is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          768,
+                          2958,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          560,
+                          2814,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1296,
+                          3102,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "I02-unit-63",
+              "number": 3,
+              "label": "Pale-gray bed, blue pillow at left",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Pale-gray bedding and a blue pillow."
+                },
+                {
+                  "label": "Form",
+                  "value": "Headboard and pillow at image-left."
+                },
+                {
+                  "label": "Form",
+                  "value": "Complete visual bed; game geometry is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1392,
+                          3006,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1152,
+                          2862,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1920,
+                          3150,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "I02-unit-64",
+              "number": 4,
+              "label": "Pale-gray bed, pale lilac pillow at left",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Pale-gray bedding and a pale lilac pillow."
+                },
+                {
+                  "label": "Form",
+                  "value": "Headboard and pillow at image-left."
+                },
+                {
+                  "label": "Form",
+                  "value": "Complete visual bed; game geometry is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1440,
+                          3006,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1200,
+                          2862,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1968,
+                          3150,
+                          48,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "blankets",
+          "title": "Pieces to combine",
+          "members": [
+            {
+              "id": "I02-unit-57",
+              "number": 5,
+              "label": "Blue star/moon blanket, pillow at right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Blue blanket with pale star and moon-like marks."
+                },
+                {
+                  "label": "Form",
+                  "value": "Place over the matching bed with the pillow at image-right."
+                },
+                {
+                  "label": "Form",
+                  "value": "The piece has no frame or pillow of its own."
+                },
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in this bed kit; lay over a matching complete bed."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "A separate decorative cloth or rug remains an alternative interpretation."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          720,
+                          5166,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1952,
+                          5118,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1872,
+                          5166,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "I02-unit-119",
+              "number": 6,
+              "label": "Blue star/moon blanket, pillow at left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Blue blanket with pale star and moon-like marks."
+                },
+                {
+                  "label": "Form",
+                  "value": "Place over the matching bed with the pillow at image-left."
+                },
+                {
+                  "label": "Form",
+                  "value": "The piece has no frame or pillow of its own."
+                },
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone in this bed kit; lay over a matching complete bed."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "A separate decorative cloth or rug remains an alternative interpretation."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "normal",
+                  "label": "Normal",
+                  "recordIds": [
+                    "I02-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1008,
+                          5166,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "black-shadow",
+                  "label": "Dark shadow",
+                  "recordIds": [
+                    "I02-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          192,
+                          5166,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "shadowless",
+                  "label": "No shadow",
+                  "recordIds": [
+                    "I02-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          144,
+                          5198,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "bed-1-blue-blanket",
+          "label": "Blue pillow at right \u00b7 blue blanket",
+          "description": "Matching blanket layered over a complete bed; the pillow and headboard stay visible. Other bed fits are unknown.",
+          "variants": [
+            {
+              "id": "normal",
+              "label": "Normal",
+              "recordIds": [
+                "I02-01",
+                "I02-05"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      720,
+                      2958,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      720,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "black-shadow",
+              "label": "Dark shadow",
+              "recordIds": [
+                "I02-07",
+                "I02-11"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      512,
+                      2814,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1952,
+                      5118,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "shadowless",
+              "label": "No shadow",
+              "recordIds": [
+                "I02-13",
+                "I02-17"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1248,
+                      3102,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1872,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "bed-2-blue-blanket",
+          "label": "Pale lilac pillow at right \u00b7 blue blanket",
+          "description": "Matching blanket layered over a complete bed; the pillow and headboard stay visible. Other bed fits are unknown.",
+          "variants": [
+            {
+              "id": "normal",
+              "label": "Normal",
+              "recordIds": [
+                "I02-02",
+                "I02-05"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      768,
+                      2958,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      720,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "black-shadow",
+              "label": "Dark shadow",
+              "recordIds": [
+                "I02-08",
+                "I02-11"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      560,
+                      2814,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1952,
+                      5118,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "shadowless",
+              "label": "No shadow",
+              "recordIds": [
+                "I02-14",
+                "I02-17"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1296,
+                      3102,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1872,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "bed-63-blue-blanket",
+          "label": "Blue pillow at left \u00b7 blue blanket",
+          "description": "Matching blanket layered over a complete bed; the pillow and headboard stay visible. Other bed fits are unknown.",
+          "variants": [
+            {
+              "id": "normal",
+              "label": "Normal",
+              "recordIds": [
+                "I02-03",
+                "I02-06"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1392,
+                      3006,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1008,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "black-shadow",
+              "label": "Dark shadow",
+              "recordIds": [
+                "I02-09",
+                "I02-12"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1152,
+                      2862,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      192,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "shadowless",
+              "label": "No shadow",
+              "recordIds": [
+                "I02-15",
+                "I02-18"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1920,
+                      3150,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      144,
+                      5198,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "bed-64-blue-blanket",
+          "label": "Pale lilac pillow at left \u00b7 blue blanket",
+          "description": "Matching blanket layered over a complete bed; the pillow and headboard stay visible. Other bed fits are unknown.",
+          "variants": [
+            {
+              "id": "normal",
+              "label": "Normal",
+              "recordIds": [
+                "I02-04",
+                "I02-06"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1440,
+                      3006,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1008,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "black-shadow",
+              "label": "Dark shadow",
+              "recordIds": [
+                "I02-10",
+                "I02-12"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1200,
+                      2862,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      192,
+                      5166,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "shadowless",
+              "label": "No shadow",
+              "recordIds": [
+                "I02-16",
+                "I02-18"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1968,
+                      3150,
+                      48,
+                      48
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      144,
+                      5198,
+                      48,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sourcePins": [
+        {
+          "id": "modern-interiors",
+          "fingerprint": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "width": 2048,
+          "height": 8800
+        }
+      ],
+      "revision": "a4b2e4b7130473bb18c158e8d8dc1955f1f9d651e47d835ca88a0c8600e6e5f6"
+    },
+    {
+      "id": "fences-gates",
+      "name": "Low picket fences and garden gates",
+      "description": "Low picket pieces and a separate hedge-framed garden gate set.",
+      "status": "proposed",
+      "variantLabel": "Appearance",
+      "variants": [
+        {
+          "id": "original",
+          "label": "Original"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Kits",
+          "value": "Picket fences and hedge-framed gates are separate; joining them is unproven."
+        },
+        {
+          "label": "Assembly",
+          "value": "Fence pieces cannot stand alone. Only the pictured enclosure and diagonal pairings are checked."
+        },
+        {
+          "label": "Gates",
+          "value": "Cool and warm frames, in two widths; linework and a few edge pixels also differ. Hedge-side extension and gate behavior are unknown."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Collision, height, walkability and opening triggers are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "pickets",
+          "title": "Picket pieces",
+          "members": [
+            {
+              "id": "E05-01",
+              "number": 1,
+              "label": "Upper-left corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the right and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1360,
+                          2960,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-02",
+              "number": 2,
+              "label": "Upper horizontal section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and right."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1408,
+                          2976,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-03",
+              "number": 3,
+              "label": "Upper-right corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          2976,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-04",
+              "number": 4,
+              "label": "Right vertical section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          2992,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-05",
+              "number": 5,
+              "label": "Right vertical section \u00b7 alternate shading",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          3008,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-06",
+              "number": 6,
+              "label": "Lower-right corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-07",
+              "number": 7,
+              "label": "Lower horizontal section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and right."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1408,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-08",
+              "number": 8,
+              "label": "Lower-left corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the right and top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1376,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-09",
+              "number": 9,
+              "label": "Left vertical section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1376,
+                          3008,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-10",
+              "number": 10,
+              "label": "Left vertical section \u00b7 alternate shading",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1376,
+                          2992,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-11",
+              "number": 11,
+              "label": "Upper-left corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the right and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1360,
+                          2960,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-12",
+              "number": 12,
+              "label": "Upper-right corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          2976,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-13",
+              "number": 13,
+              "label": "Lower-right corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the left and top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1424,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-14",
+              "number": 14,
+              "label": "Lower-left corner",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the right and top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1376,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-15",
+              "number": 15,
+              "label": "Rising diagonal \u00b7 lower half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1488,
+                          2976,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-16",
+              "number": 16,
+              "label": "Rising diagonal \u00b7 upper half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1472,
+                          2960,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-17",
+              "number": 17,
+              "label": "Falling diagonal \u00b7 upper half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1520,
+                          2960,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-18",
+              "number": 18,
+              "label": "Falling diagonal \u00b7 lower half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1520,
+                          2976,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-19",
+              "number": 19,
+              "label": "Rising diagonal \u00b7 alternate upper half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-19"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1520,
+                          3008,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-20",
+              "number": 20,
+              "label": "Rising diagonal \u00b7 alternate lower half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-20"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1520,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-21",
+              "number": 21,
+              "label": "Falling diagonal \u00b7 alternate lower half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the top."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-21"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1488,
+                          3024,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E05-22",
+              "number": 22,
+              "label": "Falling diagonal \u00b7 alternate upper half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Use",
+                  "value": "Needs matching neighbors on the bottom."
+                },
+                {
+                  "label": "Material",
+                  "value": "Gray/violet pickets and rails; wood versus metal is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-22"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1488,
+                          3008,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "garden-gates",
+          "title": "Garden gates",
+          "members": [
+            {
+              "id": "narrow-gate",
+              "number": 23,
+              "label": "Narrow garden gate",
+              "kind": "unknown",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Outer hedge sides and standalone use are unresolved."
+                },
+                {
+                  "label": "Variants",
+                  "value": "Cool and warm frames; linework and a few edge pixels also differ."
+                },
+                {
+                  "label": "Gameplay",
+                  "value": "Opening, movement and collision are unknown."
+                },
+                {
+                  "label": "Use",
+                  "value": "Whether this can stand alone is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "cool",
+                  "label": "Cool frame",
+                  "recordIds": [
+                    "E05-23"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          352,
+                          3376,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "warm",
+                  "label": "Warm frame",
+                  "recordIds": [
+                    "E05-24"
+                  ],
+                  "sprite": {
+                    "size": [
+                      48,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          352,
+                          3408,
+                          48,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Frame appearance"
+            },
+            {
+              "id": "wide-gate",
+              "number": 24,
+              "label": "Wide garden gate",
+              "kind": "unknown",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Outer hedge sides and standalone use are unresolved."
+                },
+                {
+                  "label": "Variants",
+                  "value": "Cool and warm frames; linework and a few edge pixels also differ."
+                },
+                {
+                  "label": "Gameplay",
+                  "value": "Opening, movement and collision are unknown."
+                },
+                {
+                  "label": "Use",
+                  "value": "Whether this can stand alone is unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "cool",
+                  "label": "Cool frame",
+                  "recordIds": [
+                    "E05-25"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          416,
+                          3376,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "warm",
+                  "label": "Warm frame",
+                  "recordIds": [
+                    "E05-26"
+                  ],
+                  "sprite": {
+                    "size": [
+                      64,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          416,
+                          3408,
+                          64,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Frame appearance"
+            }
+          ]
+        },
+        {
+          "id": "hedge-support",
+          "title": "Hedge trial piece",
+          "members": [
+            {
+              "id": "E05-27",
+              "number": 25,
+              "label": "Upright shrub",
+              "kind": "whole",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Complete outlined shrub; not a proven repeating hedge module."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "E05-27"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          224,
+                          3408,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "closed-picket-48",
+          "label": "Small picket enclosure",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-01",
+                "E05-02",
+                "E05-03",
+                "E05-10",
+                "E05-04",
+                "E05-08",
+                "E05-07",
+                "E05-06"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1360,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      2992,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2992,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      32
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "closed-picket-48-duplicate-exports",
+          "label": "Small enclosure \u00b7 alternate exports",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-11",
+                "E05-02",
+                "E05-12",
+                "E05-09",
+                "E05-05",
+                "E05-14",
+                "E05-07",
+                "E05-13"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1360,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      32
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "closed-picket-64",
+          "label": "Larger picket enclosure",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-01",
+                "E05-02",
+                "E05-02",
+                "E05-03",
+                "E05-10",
+                "E05-09",
+                "E05-04",
+                "E05-05",
+                "E05-08",
+                "E05-07",
+                "E05-07",
+                "E05-06"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1360,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      2992,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2992,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1376,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      48
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "rising-diagonal-a",
+          "label": "Rising diagonal pair",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-16",
+                "E05-15"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1472,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1488,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "falling-diagonal-a",
+          "label": "Falling diagonal pair",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-17",
+                "E05-18"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1520,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1520,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "rising-diagonal-b",
+          "label": "Rising diagonal pair \u00b7 alternate shading",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-19",
+                "E05-20"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1520,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1520,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "falling-diagonal-b",
+          "label": "Falling diagonal pair \u00b7 alternate shading",
+          "description": "Only this finite source pairing is checked; other lengths and joins are unknown.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-22",
+                "E05-21"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1488,
+                      3008,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1488,
+                      3024,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "open-upper-run",
+          "label": "Upper fence section",
+          "description": "Both downward cuts need continuing side posts; this is an open section.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "E05-01",
+                "E05-02",
+                "E05-03"
+              ],
+              "sprite": {
+                "size": [
+                  48,
+                  16
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1360,
+                      2960,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1408,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1424,
+                      2976,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ],
+          "groupLabel": "Open fence sections"
+        }
+      ],
+      "sourcePins": [
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "7d646e502d8d97a12c9a9d75d06541b9f88cce119840a22e31a479de3f7e574a"
     }
   ],
-  "revision": "a9658052cff5c4e0d0aac5b950f24a7c871becd8b8426bf35e65574d3bfdad2a"
+  "revision": "12225e967cc572f627356d8a7712b8f25ca0ce282368e9b4cd34e10d29bb66b2"
 }

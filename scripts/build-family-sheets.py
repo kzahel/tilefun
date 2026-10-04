@@ -561,6 +561,10 @@ def build():
     expansion = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(expansion)
     families.extend(expansion.build_expansion(SimpleNamespace(**globals()), images, sheets))
+    spec = importlib.util.spec_from_file_location('family_next', ROOT / 'scripts/build-family-next.py')
+    next_adapter = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(next_adapter)
+    families.extend(next_adapter.build_next(SimpleNamespace(**globals()), images, sheets))
     expected = {'cabinets': [row['id'] for row in cabinets['measurements']['records']],
                 'trees': [row['id'] for row in trees['candidates']],
                 'scrapyard': [row['id'] for row in scrapyard['candidates']],
@@ -568,7 +572,10 @@ def build():
                 'sofas': [row['id'] for row in sofas['candidates']]}
     for family_id, packet_file in [('room-builder', 'RB01-room-builder-path-arch.json'),
                                    ('playground-tubes', 'E03-playground-tubes.json'),
-                                   ('animated-doors', 'A01-animation.json')]:
+                                   ('animated-doors', 'A01-animation.json'),
+                                   ('plants-planters', 'E04-plants-planters.json'),
+                                   ('bedroom', 'I02-bedroom.json'),
+                                   ('fences-gates', 'E05-fences-gates.json')]:
         expected[family_id] = [row['id'] for row in load(PACKETS / packet_file)['candidates']]
     for item in families:
         records = [r for g in item['groups'] for m in g['members'] for v in m['variants'] for r in v['recordIds']]
@@ -576,7 +583,7 @@ def build():
         for entry in [m for g in item['groups'] for m in g['members']] + item['examples']:
             for value in entry['variants']:
                 render(value['sprite'], images)
-    require(sum(map(len, expected.values())) == 191, 'Unexpected source record count')
+    require(sum(map(len, expected.values())) == 255, 'Unexpected source record count')
     result = {'version': 1, 'sources': sources, 'families': families}
     result['revision'] = revision(result)
     return result
