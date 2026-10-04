@@ -187,7 +187,7 @@ checks. [Rendering architecture](rendering-architecture.md) owns the engine boun
 
 ## Authored vehicle grades
 
-[Vehicle grade proof](../tactical/060-vehicle-grade-proof.md) adds opt-in surface
+[Vehicle grade proof](../tactical/064-vehicle-grade-proof.md) adds opt-in surface
 following to the production TrafficSystem. World geometry offers car bridge and
 underground garage fixtures, both directions and slope save/reload. Full collider
 footprints use shared terrain/excavation support; vertical body clearance includes

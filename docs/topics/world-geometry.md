@@ -180,7 +180,7 @@ The user accepted the garage on 2026-10-04 and authorized a crossing proof.
 continuous north/south road approaches above the production horizontal train
 service. Clearance, two-height collision, persistence and per-actor slab ordering
 are exercised together. The train stays on level track; train grades and generated
-structures remain deferred. The subsequent [vehicle proof](../tactical/060-vehicle-grade-proof.md)
+structures remain deferred. The subsequent [vehicle proof](../tactical/064-vehicle-grade-proof.md)
 adds authored car routes on these road ramps. Both game and lab now
 order sprites against slabs using each actor's height, while the observer still
 controls cutaway visibility. Arbitrary intersecting surfaces remain unsupported.
