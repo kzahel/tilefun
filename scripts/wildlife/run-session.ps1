@@ -13,7 +13,7 @@ $OutputEncoding = [Console]::OutputEncoding
 $taskRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $taskRunRoot = Join-Path $taskRoot 'data/wildlife-campaign-v2'
 $taskBriefPath = (Resolve-Path -LiteralPath $Brief).Path
-$taskBasePath = Join-Path $taskRoot 'docs/tactical/029-wildlife-production.prompt.md'
+$taskBasePath = Join-Path $taskRoot 'docs/tactical/060-wildlife-production.prompt.md'
 if ($DeadlineUtc -and $PSBoundParameters.ContainsKey('Hours')) {
     throw 'Supply DeadlineUtc or Hours, not both.'
 }

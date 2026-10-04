@@ -1,6 +1,6 @@
 Repair existing Tilefun frozen-torso walks using the wildlife-v2 workflow. Read
 AGENTS.md, docs/topics/wildlife.md, docs/topics/art-review.md,
-docs/blender-pixel-characters.md and docs/tactical/029-wildlife-fresh-production.md.
+docs/blender-pixel-characters.md and docs/tactical/060-wildlife-fresh-production.md.
 Use the local blender-game-assets and blender-animation skills as standalone
 asset workflows. Use gpt-6.1-sol with high reasoning effort; the launcher pins
 these values. Never silently fall back to another model or effort.

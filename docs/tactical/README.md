@@ -38,7 +38,6 @@ Several early plans contain original unchecked lists superseded by later work.
 | [024 Interest and residency](024-interest-and-residency.md) | Delivered core shared tickets/readiness, lazy indexed hydration, acknowledged eviction and active scheduling; completion gates in 026 |
 | [025 Railway Workshop previews](025-railway-workshop-previews.md) | Delivered: 32 isolated source/motion/layout previews awaiting human review; [trains topic](../topics/trains.md) |
 | [026 Persistence completion](026-persistence-completion.md) | Complete: shared world containers, traffic records, pressure admission, recovery and sustained lifecycle validation |
-| [029 Fresh wildlife production](029-wildlife-fresh-production.md) | Fresh gpt-6.1-sol/high campaign; fixed-camera Blender guides and supervised animal pilots before background production; prior 027/028 preserved on backup branch |
 
 | [027 Composable gameplay scenarios](027-composable-gameplay-scenarios.md) | Complete: shared recipes, memory-backed authority and interactive lab migrations |
 
@@ -103,6 +102,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [058 Road/rail crossing proof](058-road-rail-crossing-proof.md) | Walkable road approaches over a production train service; [world geometry](../topics/world-geometry.md) |
 
 | [059 Grass overview LOD](059-grass-overview-lod.md) | In progress: shared fade/cutoff for distant grass; [performance](../topics/performance.md) |
+
+| [060 Fresh wildlife production](060-wildlife-fresh-production.md) | Fresh gpt-6.1-sol/high campaign; fixed-camera Blender guides and supervised animal pilots before background production; prior 027/028 preserved on backup branch |
 
 ## Earlier plans
 

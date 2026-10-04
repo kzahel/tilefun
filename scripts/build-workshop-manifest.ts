@@ -29,7 +29,9 @@ if (process.argv.includes("--check")) {
     const page = await browser.newPage();
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
-    await page.goto(`http://127.0.0.1:${address.port}/tilefun/workshop-manifest.html`);
+    await page.goto(`http://127.0.0.1:${address.port}/tilefun/workshop-manifest.html`, {
+      waitUntil: "commit",
+    });
     await page
       .waitForFunction(() => "workshopManifestReady" in window, undefined, { timeout: 180000 })
       .catch((error) => {
@@ -45,7 +47,9 @@ if (process.argv.includes("--check")) {
       const normalPage = await normalBrowser.newPage({ deviceScaleFactor: 2 });
       const normalErrors: string[] = [];
       normalPage.on("pageerror", (error) => normalErrors.push(error.message));
-      await normalPage.goto(`http://127.0.0.1:${address.port}/tilefun/workshop-manifest.html`);
+      await normalPage.goto(`http://127.0.0.1:${address.port}/tilefun/workshop-manifest.html`, {
+        waitUntil: "commit",
+      });
       await normalPage.waitForFunction(() => "workshopManifestReady" in window, undefined, {
         timeout: 180000,
       });

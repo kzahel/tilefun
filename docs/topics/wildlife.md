@@ -22,7 +22,7 @@ archived locally. They are historical evidence, not inputs to this campaign.
 Use gpt-6.1-sol with high reasoning effort, explicitly pinned for every session.
 The original owner authorization for whole-roster production is superseded by
 repair-only scope below. This authorizes corrections, not human art approval,
-publication or gameplay promotion. See [029](../tactical/029-wildlife-fresh-production.md).
+publication or gameplay promotion. See [060](../tactical/060-wildlife-fresh-production.md).
 
 ## Current scope: existing frozen-torso repairs only
 
@@ -224,20 +224,30 @@ feedback, including when the broader development manifest is advisory. Review
 renderer edits mint fresh pending fingerprints and confer no approvals. New-animal
 production remains disabled; this cleanup makes no art corrections.
 
+Cleanup/rebase verification, 2026-10-04: typecheck, lint,19 queue tests, all three
+wildlife browser checks and builds pass. The cache-free staged checkout rebuilds
+the identical585-candidate manifest, with every identity matching full Chromium;
+all357 retained source/render hashes and4465 archived artifacts verify. Full unit
+results are1493 passes/five Windows symlink/process failures/ten skips. Full browser
+results are332 passes/four failures/one skip; the two mobile-layout and two GPU
+failures also reproduce in an unchanged origin/main snapshot on this machine.
+The wildlife tactical is now060 to resolve its numbering collision with upstream.
+Source and review cleanup does not fix the11 held walks or resume production.
+
 Actual manual 02 rollout confirms Sol 6.1/high, CLI 0.160.0 and thread
 `01a104af-470f-7601-9e6c-2dd203c972e9`; its source audit, deterministic finishing
 and 17.278-second full Chromium capture pass. Typecheck/lint, focused feedback/
 projection/service tests, eight queue tests, catalog/manifest and build pass.
-Final integrated inventory counts are recorded in tactical 029 after all pilots
+Final integrated inventory counts are recorded in tactical 060 after all pilots
 are registered.
 Two new browser checks pass: zero-event registration/exact native preview pixels
 in full Chromium, and disabling review when pinned playback bytes change.
 
 The broad unit/browser suites remain failed: Windows symlink EPERM/SIGKILL
 expectations, denied C:/tmp screenshot writes and remaining rendering/phone
-assertions are retained with exact diagnostics in tactical 029. Introduced test
+assertions are retained with exact diagnostics in tactical 060. Introduced test
 loader/type/formatting issues were corrected and checked again; no test or
-permission rule was weakened. See [029](../tactical/029-wildlife-fresh-production.md)
+permission rule was weakened. See [060](../tactical/060-wildlife-fresh-production.md)
 for session history and the exact retained review observations for art evidence.
 
 The corrected elephant preserves fixed 40-degree geometry/density, 51/52px

@@ -57,7 +57,7 @@ size in scenery beside an approved character before propagating a body-plan
 template. Hash/palette/frame-count checks cannot make this visual decision.
 
 The [fresh wildlife contract](topics/wildlife.md) and
-[029](tactical/029-wildlife-fresh-production.md) own current campaign settings
+[060](tactical/060-wildlife-fresh-production.md) own current campaign settings
 and coordinator-reviewed pilot evidence. Human approval remains separate.
 
 ### Body motion above a fixed ground anchor

@@ -70,7 +70,7 @@ export function writeStatus() {
         ]
       : []),
     "",
-    `[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/029-wildlife-fresh-production.md)${sessionLink}`,
+    `[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md)${sessionLink}`,
     "",
     "## Current work, motion holds and blocked attempts",
     "",

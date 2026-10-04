@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-04T17:07:32.729Z (04/10/2026, 19:07:32 Berlin).
+Snapshot: 2026-10-04T18:31:03.307Z (04/10/2026, 20:31:03 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -12,7 +12,7 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 
 **Scope: repair existing frozen-torso walks only. No new animals.** 166 unfinished roster entries are outside the current plan, not queued for production.
 
-[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/029-wildlife-fresh-production.md) · [Latest session activity](../data/wildlife-campaign-v2/background-02-worker/checkpoint.md)
+[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md) · [Latest session activity](../data/wildlife-campaign-v2/background-02-worker/checkpoint.md)
 
 ## Current work, motion holds and blocked attempts
 

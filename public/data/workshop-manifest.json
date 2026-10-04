@@ -23,6 +23,13 @@
       "mode": "adapter"
     },
     {
+      "id": "wildlife-v2",
+      "name": "Wildlife pilots",
+      "description": "Fresh animal drafts with elevated-view guides, scene comparisons and continuous playback.",
+      "url": "demos/wildlife-v2/",
+      "mode": "link"
+    },
+    {
       "id": "railways",
       "name": "Railway previews",
       "description": "Review rail patterns, five trains in all four directions, station plans and structure studies for railway expansion.",
@@ -398,6 +405,54 @@
       "name": "Playable building layouts",
       "description": "Generated interior cases rendered with the shared room compiler.",
       "toolId": "rooms"
+    },
+    {
+      "id": "wildlife-v2-supervised-01",
+      "name": "Wildlife · supervised-01",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-supervised-02",
+      "name": "Wildlife · supervised-02",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-001",
+      "name": "Wildlife · background-001",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-002",
+      "name": "Wildlife · background-002",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-003",
+      "name": "Wildlife · background-003",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-004",
+      "name": "Wildlife · background-004",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-005",
+      "name": "Wildlife · background-005",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-background-006",
+      "name": "Wildlife · background-006",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
     },
     {
       "id": "motion",
@@ -12593,6 +12648,1140 @@
       "fingerprint": "943ce5f1b35bd0c5dc82c196d9aaf1b0e91e544f6407c3b8a380ca38404f33fd",
       "sourceFingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
       "characterId": "bear"
+    },
+    {
+      "id": "pattern:wildlife-v2-fox-pilot-v1",
+      "batchId": "wildlife-v2-supervised-01",
+      "kind": "wildlife",
+      "name": "Red fox · initial pilot, revision in progress",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v1",
+      "fingerprint": "e3e5d088fc51c50e940787d697ff281c00314d0dedc42b085f927c54b83f4c6d",
+      "sourceFingerprint": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-fox-pilot-v1",
+        "prefabIds": [],
+        "revision": "f94266ea901500be84f1e8827cdc1cc3bd1420e601ec40a5a8b79e0d95a73f54",
+        "renderFingerprint": "e3e5d088fc51c50e940787d697ff281c00314d0dedc42b085f927c54b83f4c6d",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-fox-pilot-v1",
+        "fingerprint": "7aba9083fbfdedfd15487db694e88adeb27cad811de95d6bfd104de20d50b725",
+        "sheetSize": [
+          816,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          816,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-fox-pilot-v1",
+          "prefabIds": [],
+          "revision": "f94266ea901500be84f1e8827cdc1cc3bd1420e601ec40a5a8b79e0d95a73f54",
+          "renderFingerprint": "e3e5d088fc51c50e940787d697ff281c00314d0dedc42b085f927c54b83f4c6d",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-fox-pilot-v2",
+      "batchId": "wildlife-v2-supervised-01",
+      "kind": "wildlife",
+      "name": "Red fox · revised supervised pilot",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v2",
+      "fingerprint": "99c575ea3ee70c9ef410694c451884f5bfc7111e80c7cb6c15fb9e5f142621fb",
+      "sourceFingerprint": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-fox-pilot-v2",
+        "prefabIds": [],
+        "revision": "f40e110624dc14a52758bb9236b97bfba91734fe6d09bca0eca0483f6856e098",
+        "renderFingerprint": "99c575ea3ee70c9ef410694c451884f5bfc7111e80c7cb6c15fb9e5f142621fb",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-fox-pilot-v2",
+        "fingerprint": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+        "sheetSize": [
+          816,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          816,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-fox-pilot-v2",
+          "prefabIds": [],
+          "revision": "f40e110624dc14a52758bb9236b97bfba91734fe6d09bca0eca0483f6856e098",
+          "renderFingerprint": "99c575ea3ee70c9ef410694c451884f5bfc7111e80c7cb6c15fb9e5f142621fb",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-pilot-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-elephant-pilot-v1",
+      "batchId": "wildlife-v2-supervised-01",
+      "kind": "wildlife",
+      "name": "Elephant · initial pilot, heel revision pending",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v1",
+      "fingerprint": "58bcf5341094820e978a709434a01dbfe48d92d3aefae4e0f032550bf2fd6e46",
+      "sourceFingerprint": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-elephant-pilot-v1",
+        "prefabIds": [],
+        "revision": "8aac02d491549e4dc54dc986d34fb4c15782c7980e0c314c8e03aa3a23294866",
+        "renderFingerprint": "58bcf5341094820e978a709434a01dbfe48d92d3aefae4e0f032550bf2fd6e46",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-elephant-pilot-v1",
+        "fingerprint": "c0f16b36cd6d4e53a5c8f58fd540824bcfd684aee20d98aa80179979422050e1",
+        "sheetSize": [
+          2352,
+          448
+        ],
+        "rect": [
+          0,
+          0,
+          2352,
+          448
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-elephant-pilot-v1",
+          "prefabIds": [],
+          "revision": "8aac02d491549e4dc54dc986d34fb4c15782c7980e0c314c8e03aa3a23294866",
+          "renderFingerprint": "58bcf5341094820e978a709434a01dbfe48d92d3aefae4e0f032550bf2fd6e46",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-elephant-pilot-v2",
+      "batchId": "wildlife-v2-supervised-01",
+      "kind": "wildlife",
+      "name": "Elephant · corrected supervised pilot",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v2",
+      "fingerprint": "41e68b3dd718f133984e72b4e246b862fd67af2d726f54339349633a29ee1f85",
+      "sourceFingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-elephant-pilot-v2",
+        "prefabIds": [],
+        "revision": "7696bfd37e63f0bcfaf0b5091a28e7cea476382617c2d0a74ca9340b41cc9851",
+        "renderFingerprint": "41e68b3dd718f133984e72b4e246b862fd67af2d726f54339349633a29ee1f85",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-elephant-pilot-v2",
+        "fingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+        "sheetSize": [
+          2352,
+          448
+        ],
+        "rect": [
+          0,
+          0,
+          2352,
+          448
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-elephant-pilot-v2",
+          "prefabIds": [],
+          "revision": "7696bfd37e63f0bcfaf0b5091a28e7cea476382617c2d0a74ca9340b41cc9851",
+          "renderFingerprint": "41e68b3dd718f133984e72b4e246b862fd67af2d726f54339349633a29ee1f85",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-pilot-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-rabbit-pilot-v1",
+      "batchId": "wildlife-v2-supervised-02",
+      "kind": "wildlife",
+      "name": "Rabbit · supervised hop and listening",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-rabbit-pilot-v1",
+      "fingerprint": "f3a3754bfc0eb9495f50a716abd3e66f42d743c4b14a358ec132814eea60e7d8",
+      "sourceFingerprint": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-rabbit-pilot-v1",
+        "prefabIds": [],
+        "revision": "326223a7f6db04d011dd96c2da956480db71f4cc4a38d5296b31d0b4437433f0",
+        "renderFingerprint": "f3a3754bfc0eb9495f50a716abd3e66f42d743c4b14a358ec132814eea60e7d8",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-rabbit-pilot-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-rabbit-pilot-v1",
+        "fingerprint": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+        "sheetSize": [
+          480,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          480,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-rabbit-pilot-v1",
+          "prefabIds": [],
+          "revision": "326223a7f6db04d011dd96c2da956480db71f4cc4a38d5296b31d0b4437433f0",
+          "renderFingerprint": "f3a3754bfc0eb9495f50a716abd3e66f42d743c4b14a358ec132814eea60e7d8",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-rabbit-pilot-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-giraffe-draft-v1",
+      "batchId": "wildlife-v2-background-001",
+      "kind": "wildlife",
+      "name": "Giraffe",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-draft-v1",
+      "fingerprint": "7a12d8ffd00fe3dd642ed714cb9d620b112a9823837f357976a916ce212df0af",
+      "sourceFingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-giraffe-draft-v1",
+        "prefabIds": [],
+        "revision": "df4b6b901e8f1474d1decc68c5ddd8d23e500fba9d3610f68c9579464a728ef9",
+        "renderFingerprint": "7a12d8ffd00fe3dd642ed714cb9d620b112a9823837f357976a916ce212df0af",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-giraffe-draft-v1",
+        "fingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+        "sheetSize": [
+          3600,
+          576
+        ],
+        "rect": [
+          0,
+          0,
+          3600,
+          576
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-giraffe-draft-v1",
+          "prefabIds": [],
+          "revision": "df4b6b901e8f1474d1decc68c5ddd8d23e500fba9d3610f68c9579464a728ef9",
+          "renderFingerprint": "7a12d8ffd00fe3dd642ed714cb9d620b112a9823837f357976a916ce212df0af",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-mallard-duck-draft-v1",
+      "batchId": "wildlife-v2-background-001",
+      "kind": "wildlife",
+      "name": "Mallard drake",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-mallard-duck-draft-v1",
+      "fingerprint": "7462b43ee109aab6646b83b1a4aa3de2393c2a247b7719c7dcd8cc342b24113a",
+      "sourceFingerprint": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-mallard-duck-draft-v1",
+        "prefabIds": [],
+        "revision": "363fac19f0f7904eabb6ecf49cce31fa506c19aa4e2f161e7393620ecb96827e",
+        "renderFingerprint": "7462b43ee109aab6646b83b1a4aa3de2393c2a247b7719c7dcd8cc342b24113a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-mallard-duck-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-mallard-duck-draft-v1",
+        "fingerprint": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+        "sheetSize": [
+          1488,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1488,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-mallard-duck-draft-v1",
+          "prefabIds": [],
+          "revision": "363fac19f0f7904eabb6ecf49cce31fa506c19aa4e2f161e7393620ecb96827e",
+          "renderFingerprint": "7462b43ee109aab6646b83b1a4aa3de2393c2a247b7719c7dcd8cc342b24113a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-mallard-duck-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-robin-draft-v1",
+      "batchId": "wildlife-v2-background-001",
+      "kind": "wildlife",
+      "name": "European robin",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v1",
+      "fingerprint": "b2857ae375633916349650705817687473693e12b431cd2ced8c97c3be6f7d64",
+      "sourceFingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-robin-draft-v1",
+        "prefabIds": [],
+        "revision": "3909a4a41b5f88f7ff94946c4c6a288455187b57f981145b95e9def1e312d91e",
+        "renderFingerprint": "b2857ae375633916349650705817687473693e12b431cd2ced8c97c3be6f7d64",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-robin-draft-v1",
+        "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+        "sheetSize": [
+          736,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          736,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-robin-draft-v1",
+          "prefabIds": [],
+          "revision": "3909a4a41b5f88f7ff94946c4c6a288455187b57f981145b95e9def1e312d91e",
+          "renderFingerprint": "b2857ae375633916349650705817687473693e12b431cd2ced8c97c3be6f7d64",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-fish-draft-v1",
+      "batchId": "wildlife-v2-background-001",
+      "kind": "wildlife",
+      "name": "Pond goldfish",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v1",
+      "fingerprint": "a36ca20cc1ed8118020600cf71cc7e901b350c3b54b8cd2aaa8411efed69028e",
+      "sourceFingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-fish-draft-v1",
+        "prefabIds": [],
+        "revision": "32ec35f2c1afbfb4772caa13b588f12cdc07abb4c5c7be278d12390b421dd855",
+        "renderFingerprint": "a36ca20cc1ed8118020600cf71cc7e901b350c3b54b8cd2aaa8411efed69028e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-fish-draft-v1",
+        "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+        "sheetSize": [
+          720,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          720,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-fish-draft-v1",
+          "prefabIds": [],
+          "revision": "32ec35f2c1afbfb4772caa13b588f12cdc07abb4c5c7be278d12390b421dd855",
+          "renderFingerprint": "a36ca20cc1ed8118020600cf71cc7e901b350c3b54b8cd2aaa8411efed69028e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-robin-draft-v2",
+      "batchId": "wildlife-v2-background-002",
+      "kind": "wildlife",
+      "name": "European robin (UTF-8 preview)",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v2",
+      "fingerprint": "3d422c6cb3a3eb95e8da5bf7debb8dc5954b9d095f6aa0a8460b09456f96fcd3",
+      "sourceFingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-robin-draft-v2",
+        "prefabIds": [],
+        "revision": "bcfe923ff6c3584b36cd800ddc2183a722e3592f2b9ad267a2222c884a1704e0",
+        "renderFingerprint": "3d422c6cb3a3eb95e8da5bf7debb8dc5954b9d095f6aa0a8460b09456f96fcd3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-robin-draft-v2",
+        "fingerprint": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+        "sheetSize": [
+          736,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          736,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-robin-draft-v2",
+          "prefabIds": [],
+          "revision": "bcfe923ff6c3584b36cd800ddc2183a722e3592f2b9ad267a2222c884a1704e0",
+          "renderFingerprint": "3d422c6cb3a3eb95e8da5bf7debb8dc5954b9d095f6aa0a8460b09456f96fcd3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-robin-draft-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-fish-draft-v2",
+      "batchId": "wildlife-v2-background-002",
+      "kind": "wildlife",
+      "name": "Pond goldfish (UTF-8 preview)",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v2",
+      "fingerprint": "223e83eeffe3cde832f72e848309b4b58fbc47613c6d614e30a3edee1eb72031",
+      "sourceFingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-fish-draft-v2",
+        "prefabIds": [],
+        "revision": "3b8341bf7efbef375c51ba0aec613f6b0383777ea53707a5c71faa849bc470f1",
+        "renderFingerprint": "223e83eeffe3cde832f72e848309b4b58fbc47613c6d614e30a3edee1eb72031",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-fish-draft-v2",
+        "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+        "sheetSize": [
+          720,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          720,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-fish-draft-v2",
+          "prefabIds": [],
+          "revision": "3b8341bf7efbef375c51ba0aec613f6b0383777ea53707a5c71faa849bc470f1",
+          "renderFingerprint": "223e83eeffe3cde832f72e848309b4b58fbc47613c6d614e30a3edee1eb72031",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fish-draft-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-ant-draft-v1",
+      "batchId": "wildlife-v2-background-002",
+      "kind": "wildlife",
+      "name": "Red wood ant worker",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v1",
+      "fingerprint": "cb7ff397977aced531dfa15b6947c5d0862f31d86afa7197e2c4fc88e6ebf632",
+      "sourceFingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-ant-draft-v1",
+        "prefabIds": [],
+        "revision": "c4324e1568b1f223950985e46d3e11db5fba1b7da9dc3286e08d1f96e0060320",
+        "renderFingerprint": "cb7ff397977aced531dfa15b6947c5d0862f31d86afa7197e2c4fc88e6ebf632",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-ant-draft-v1",
+        "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+        "sheetSize": [
+          480,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          480,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-ant-draft-v1",
+          "prefabIds": [],
+          "revision": "c4324e1568b1f223950985e46d3e11db5fba1b7da9dc3286e08d1f96e0060320",
+          "renderFingerprint": "cb7ff397977aced531dfa15b6947c5d0862f31d86afa7197e2c4fc88e6ebf632",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-king-cobra-draft-v1",
+      "batchId": "wildlife-v2-background-002",
+      "kind": "wildlife",
+      "name": "King cobra",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-king-cobra-draft-v1",
+      "fingerprint": "560ce3889b1bd478479a87d1c4e8b91faa4726c0dcd3d0b78601b35d88336018",
+      "sourceFingerprint": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-king-cobra-draft-v1",
+        "prefabIds": [],
+        "revision": "5c3fe2c184ba7376ccea7d505bc23a78031e739f93201eb747be55dc2f42ca36",
+        "renderFingerprint": "560ce3889b1bd478479a87d1c4e8b91faa4726c0dcd3d0b78601b35d88336018",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-king-cobra-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-king-cobra-draft-v1",
+        "fingerprint": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+        "sheetSize": [
+          1440,
+          384
+        ],
+        "rect": [
+          0,
+          0,
+          1440,
+          384
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-king-cobra-draft-v1",
+          "prefabIds": [],
+          "revision": "5c3fe2c184ba7376ccea7d505bc23a78031e739f93201eb747be55dc2f42ca36",
+          "renderFingerprint": "560ce3889b1bd478479a87d1c4e8b91faa4726c0dcd3d0b78601b35d88336018",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-king-cobra-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-ant-draft-v2",
+      "batchId": "wildlife-v2-background-003",
+      "kind": "wildlife",
+      "name": "Red wood ant",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v2",
+      "fingerprint": "408f6123104fc1fcd6a360cec91abb4c6c3dea0a12cd4f25544bd6c01bc1e21e",
+      "sourceFingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-ant-draft-v2",
+        "prefabIds": [],
+        "revision": "16cf4508344bef5c39c6a6587a5a9f82646b2bb4da2e566010e25e7bdc100b8d",
+        "renderFingerprint": "408f6123104fc1fcd6a360cec91abb4c6c3dea0a12cd4f25544bd6c01bc1e21e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-ant-draft-v2",
+        "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+        "sheetSize": [
+          480,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          480,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-ant-draft-v2",
+          "prefabIds": [],
+          "revision": "16cf4508344bef5c39c6a6587a5a9f82646b2bb4da2e566010e25e7bdc100b8d",
+          "renderFingerprint": "408f6123104fc1fcd6a360cec91abb4c6c3dea0a12cd4f25544bd6c01bc1e21e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-ant-draft-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-frog-draft-v1",
+      "batchId": "wildlife-v2-background-003",
+      "kind": "wildlife",
+      "name": "Brown common frog",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-frog-draft-v1",
+      "fingerprint": "5889a3a62e0e7a5a99ead8e448b1428fde0aebd8f56fee7021083c0f6249e9d9",
+      "sourceFingerprint": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-frog-draft-v1",
+        "prefabIds": [],
+        "revision": "a31152b049bf14499fd21431bdf2c73cd60dc4e28506b7f709f45299f3dd60e0",
+        "renderFingerprint": "5889a3a62e0e7a5a99ead8e448b1428fde0aebd8f56fee7021083c0f6249e9d9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-frog-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-frog-draft-v1",
+        "fingerprint": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+        "sheetSize": [
+          1104,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1104,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-frog-draft-v1",
+          "prefabIds": [],
+          "revision": "a31152b049bf14499fd21431bdf2c73cd60dc4e28506b7f709f45299f3dd60e0",
+          "renderFingerprint": "5889a3a62e0e7a5a99ead8e448b1428fde0aebd8f56fee7021083c0f6249e9d9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-frog-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-kangaroo-draft-v1",
+      "batchId": "wildlife-v2-background-003",
+      "kind": "wildlife",
+      "name": "Red kangaroo",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-kangaroo-draft-v1",
+      "fingerprint": "ab2a8c7f919d78da4069f142aff5d78796a7529f58a0b448d36333b3c5fda911",
+      "sourceFingerprint": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-kangaroo-draft-v1",
+        "prefabIds": [],
+        "revision": "8a508042f53242cdd296ca53ddbbd37bc68baa04f854a0a95ee3aa6ca85488cc",
+        "renderFingerprint": "ab2a8c7f919d78da4069f142aff5d78796a7529f58a0b448d36333b3c5fda911",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-kangaroo-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-kangaroo-draft-v1",
+        "fingerprint": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+        "sheetSize": [
+          1824,
+          384
+        ],
+        "rect": [
+          0,
+          0,
+          1824,
+          384
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-kangaroo-draft-v1",
+          "prefabIds": [],
+          "revision": "8a508042f53242cdd296ca53ddbbd37bc68baa04f854a0a95ee3aa6ca85488cc",
+          "renderFingerprint": "ab2a8c7f919d78da4069f142aff5d78796a7529f58a0b448d36333b3c5fda911",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-kangaroo-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-penguin-draft-v1",
+      "batchId": "wildlife-v2-background-003",
+      "kind": "wildlife",
+      "name": "Emperor penguin",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-penguin-draft-v1",
+      "fingerprint": "7b345109b0ed96b80bd5c676d0b2f540d1fed07ede074500a0c1ee2f12b36c7c",
+      "sourceFingerprint": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-penguin-draft-v1",
+        "prefabIds": [],
+        "revision": "0a8c0c3d50c556df76725479f22795cec174e437115864ca6b52fd99016bacce",
+        "renderFingerprint": "7b345109b0ed96b80bd5c676d0b2f540d1fed07ede074500a0c1ee2f12b36c7c",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-penguin-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-penguin-draft-v1",
+        "fingerprint": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+        "sheetSize": [
+          1600,
+          256
+        ],
+        "rect": [
+          0,
+          0,
+          1600,
+          256
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-penguin-draft-v1",
+          "prefabIds": [],
+          "revision": "0a8c0c3d50c556df76725479f22795cec174e437115864ca6b52fd99016bacce",
+          "renderFingerprint": "7b345109b0ed96b80bd5c676d0b2f540d1fed07ede074500a0c1ee2f12b36c7c",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-penguin-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-harbor-seal-draft-v1",
+      "batchId": "wildlife-v2-background-004",
+      "kind": "wildlife",
+      "name": "Harbor seal",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-harbor-seal-draft-v1",
+      "fingerprint": "a438391d9115240d5dd9b393b5f0df819cd5327f2742a9b06484f6ca45313392",
+      "sourceFingerprint": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-harbor-seal-draft-v1",
+        "prefabIds": [],
+        "revision": "fa725f12855f21efe9dd5c6319a857129308d474205b504abea414d2f27636ac",
+        "renderFingerprint": "a438391d9115240d5dd9b393b5f0df819cd5327f2742a9b06484f6ca45313392",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-harbor-seal-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-harbor-seal-draft-v1",
+        "fingerprint": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+        "sheetSize": [
+          2208,
+          384
+        ],
+        "rect": [
+          0,
+          0,
+          2208,
+          384
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-harbor-seal-draft-v1",
+          "prefabIds": [],
+          "revision": "fa725f12855f21efe9dd5c6319a857129308d474205b504abea414d2f27636ac",
+          "renderFingerprint": "a438391d9115240d5dd9b393b5f0df819cd5327f2742a9b06484f6ca45313392",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-harbor-seal-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-manta-ray-draft-v1",
+      "batchId": "wildlife-v2-background-004",
+      "kind": "wildlife",
+      "name": "Giant manta ray",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-manta-ray-draft-v1",
+      "fingerprint": "f9c832c561b81580e0345d4fe32a741b3cbc7ba0f30595b57df2895c8b6dd8b9",
+      "sourceFingerprint": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-manta-ray-draft-v1",
+        "prefabIds": [],
+        "revision": "0aa583cca384e0dd860cc93a28497a14c0fa012193af225685a3d0e307bea8cb",
+        "renderFingerprint": "f9c832c561b81580e0345d4fe32a741b3cbc7ba0f30595b57df2895c8b6dd8b9",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-manta-ray-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-manta-ray-draft-v1",
+        "fingerprint": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+        "sheetSize": [
+          3024,
+          576
+        ],
+        "rect": [
+          0,
+          0,
+          3024,
+          576
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-manta-ray-draft-v1",
+          "prefabIds": [],
+          "revision": "0aa583cca384e0dd860cc93a28497a14c0fa012193af225685a3d0e307bea8cb",
+          "renderFingerprint": "f9c832c561b81580e0345d4fe32a741b3cbc7ba0f30595b57df2895c8b6dd8b9",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-manta-ray-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-cat-draft-v1",
+      "batchId": "wildlife-v2-background-004",
+      "kind": "wildlife",
+      "name": "Natural tuxedo cat",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-draft-v1",
+      "fingerprint": "ecef435872c02a637cc911bb862bd72c5a0e5a0b71d1f2c9b8025ab30b55f7d7",
+      "sourceFingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-cat-draft-v1",
+        "prefabIds": [],
+        "revision": "2630b7a84b68bc392fbd33aa205f16c6279dbc917e336d76309297f5041f017b",
+        "renderFingerprint": "ecef435872c02a637cc911bb862bd72c5a0e5a0b71d1f2c9b8025ab30b55f7d7",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-cat-draft-v1",
+        "fingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+        "sheetSize": [
+          1008,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1008,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-cat-draft-v1",
+          "prefabIds": [],
+          "revision": "2630b7a84b68bc392fbd33aa205f16c6279dbc917e336d76309297f5041f017b",
+          "renderFingerprint": "ecef435872c02a637cc911bb862bd72c5a0e5a0b71d1f2c9b8025ab30b55f7d7",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-dog-draft-v1",
+      "batchId": "wildlife-v2-background-004",
+      "kind": "wildlife",
+      "name": "Natural tricolor dog",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-draft-v1",
+      "fingerprint": "ca8495cca4d559e362291f4cf2ee20a15f4fa16327300da346ff3062955b3836",
+      "sourceFingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-dog-draft-v1",
+        "prefabIds": [],
+        "revision": "e6491b0d4dc8d2b6d5a0ad17f3be56ce894832b82df9a6b7076c5909d98aa8e0",
+        "renderFingerprint": "ca8495cca4d559e362291f4cf2ee20a15f4fa16327300da346ff3062955b3836",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-dog-draft-v1",
+        "fingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+        "sheetSize": [
+          1600,
+          256
+        ],
+        "rect": [
+          0,
+          0,
+          1600,
+          256
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-dog-draft-v1",
+          "prefabIds": [],
+          "revision": "e6491b0d4dc8d2b6d5a0ad17f3be56ce894832b82df9a6b7076c5909d98aa8e0",
+          "renderFingerprint": "ca8495cca4d559e362291f4cf2ee20a15f4fa16327300da346ff3062955b3836",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-deer-draft-v1",
+      "batchId": "wildlife-v2-background-005",
+      "kind": "wildlife",
+      "name": "White-tailed doe",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-deer-draft-v1",
+      "fingerprint": "37b9e3f21f384e75c128ad2437bbf182720e51fbea8fcf83858f85e1e505e9fa",
+      "sourceFingerprint": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-deer-draft-v1",
+        "prefabIds": [],
+        "revision": "efa7191dd6f7f175e55c83b7b0fe02dfb97618bad000d8abdc69ad2f1b0cd63c",
+        "renderFingerprint": "37b9e3f21f384e75c128ad2437bbf182720e51fbea8fcf83858f85e1e505e9fa",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-deer-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-deer-draft-v1",
+        "fingerprint": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+        "sheetSize": [
+          1008,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1008,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-deer-draft-v1",
+          "prefabIds": [],
+          "revision": "efa7191dd6f7f175e55c83b7b0fe02dfb97618bad000d8abdc69ad2f1b0cd63c",
+          "renderFingerprint": "37b9e3f21f384e75c128ad2437bbf182720e51fbea8fcf83858f85e1e505e9fa",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-deer-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-cow-draft-v1",
+      "batchId": "wildlife-v2-background-005",
+      "kind": "wildlife",
+      "name": "Holstein cow",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-draft-v1",
+      "fingerprint": "8afec071a93d7b81c7454e7d81d9bd7a5071d953e91eb2b5b8df9cfda048a726",
+      "sourceFingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-cow-draft-v1",
+        "prefabIds": [],
+        "revision": "237ba98b241fa8784f1ff99de69495de69b880b669f170631573468f04dd73aa",
+        "renderFingerprint": "8afec071a93d7b81c7454e7d81d9bd7a5071d953e91eb2b5b8df9cfda048a726",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-cow-draft-v1",
+        "fingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+        "sheetSize": [
+          1600,
+          256
+        ],
+        "rect": [
+          0,
+          0,
+          1600,
+          256
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-cow-draft-v1",
+          "prefabIds": [],
+          "revision": "237ba98b241fa8784f1ff99de69495de69b880b669f170631573468f04dd73aa",
+          "renderFingerprint": "8afec071a93d7b81c7454e7d81d9bd7a5071d953e91eb2b5b8df9cfda048a726",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-sheep-draft-v1",
+      "batchId": "wildlife-v2-background-005",
+      "kind": "wildlife",
+      "name": "Suffolk ewe",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-draft-v1",
+      "fingerprint": "cdd6d328124e026bb59dfaf391eee1ab15c27b6f79aa0ccee19d0bd23a4c791a",
+      "sourceFingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-sheep-draft-v1",
+        "prefabIds": [],
+        "revision": "2fd3d293f3d05b12da8fbb89f4573faa512a3c31021c379b7697089774a9018f",
+        "renderFingerprint": "cdd6d328124e026bb59dfaf391eee1ab15c27b6f79aa0ccee19d0bd23a4c791a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-sheep-draft-v1",
+        "fingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+        "sheetSize": [
+          1200,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1200,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-sheep-draft-v1",
+          "prefabIds": [],
+          "revision": "2fd3d293f3d05b12da8fbb89f4573faa512a3c31021c379b7697089774a9018f",
+          "renderFingerprint": "cdd6d328124e026bb59dfaf391eee1ab15c27b6f79aa0ccee19d0bd23a4c791a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-horse-draft-v1",
+      "batchId": "wildlife-v2-background-005",
+      "kind": "wildlife",
+      "name": "Bay horse",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-draft-v1",
+      "fingerprint": "ebeb72e5eaaefb39f731a74ae00edb32eb53ad22d42e091b5d79458ee87256a0",
+      "sourceFingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-horse-draft-v1",
+        "prefabIds": [],
+        "revision": "e1cfa20746aaf64a401123414e282e83d5aa0a2dfd3d7e8408e8c802cfc2a9a9",
+        "renderFingerprint": "ebeb72e5eaaefb39f731a74ae00edb32eb53ad22d42e091b5d79458ee87256a0",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-horse-draft-v1",
+        "fingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+        "sheetSize": [
+          2000,
+          320
+        ],
+        "rect": [
+          0,
+          0,
+          2000,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-horse-draft-v1",
+          "prefabIds": [],
+          "revision": "e1cfa20746aaf64a401123414e282e83d5aa0a2dfd3d7e8408e8c802cfc2a9a9",
+          "renderFingerprint": "ebeb72e5eaaefb39f731a74ae00edb32eb53ad22d42e091b5d79458ee87256a0",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-piglet-draft-v1",
+      "batchId": "wildlife-v2-background-006",
+      "kind": "wildlife",
+      "name": "Domestic pig",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-draft-v1",
+      "fingerprint": "c97462bb848a94ba554e4b7dca1d0f20d25672a66faa0b5b411d58987251fa4a",
+      "sourceFingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-piglet-draft-v1",
+        "prefabIds": [],
+        "revision": "42d525667890929d8fcb190c7992e40bb66eb53888af05dd647d5af881ac1b5d",
+        "renderFingerprint": "c97462bb848a94ba554e4b7dca1d0f20d25672a66faa0b5b411d58987251fa4a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-piglet-draft-v1",
+        "fingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+        "sheetSize": [
+          1008,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1008,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-piglet-draft-v1",
+          "prefabIds": [],
+          "revision": "42d525667890929d8fcb190c7992e40bb66eb53888af05dd647d5af881ac1b5d",
+          "renderFingerprint": "c97462bb848a94ba554e4b7dca1d0f20d25672a66faa0b5b411d58987251fa4a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-draft-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-goat-draft-v1",
+      "batchId": "wildlife-v2-background-006",
+      "kind": "wildlife",
+      "name": "Horned domestic goat",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-goat-draft-v1",
+      "fingerprint": "33f08dfa4fe5a6dd576be77198a26a9360bb5908d2e10b6afb3aae56ac46fa8a",
+      "sourceFingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-goat-draft-v1",
+        "prefabIds": [],
+        "revision": "a48dc723469a8a49f0454c4ac7a5621ade3b5c33034ff56b8ed5e0093284d7e1",
+        "renderFingerprint": "33f08dfa4fe5a6dd576be77198a26a9360bb5908d2e10b6afb3aae56ac46fa8a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-goat-draft-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-goat-draft-v1",
+        "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+        "sheetSize": [
+          1200,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1200,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-goat-draft-v1",
+          "prefabIds": [],
+          "revision": "a48dc723469a8a49f0454c4ac7a5621ade3b5c33034ff56b8ed5e0093284d7e1",
+          "renderFingerprint": "33f08dfa4fe5a6dd576be77198a26a9360bb5908d2e10b6afb3aae56ac46fa8a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-goat-draft-v1"
+        }
+      }
     },
     {
       "id": "vehicle:compact-1:north",
@@ -26869,5 +28058,5 @@
       }
     }
   ],
-  "inputDigest": "bff281be0d72636f503c4b4f8627c38ec1f5b901fa4a46d9ddaff54d112c9788"
+  "inputDigest": "c790d44c17d3af209e0b0aa8f17fefb152200de874cf96d7d740ac64bca6e8bf"
 }
