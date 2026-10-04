@@ -1,6 +1,6 @@
 # 059: Grass overview LOD
 
-Status: in progress (2026-10-04). Owner: [performance](../topics/performance.md).
+Status: complete (2026-10-04); phone timing unavailable at the thermal gate. Owner: [performance](../topics/performance.md).
 
 Implement the agreed final small performance slice, then defer further engine
 optimization until ordinary play or new features justify it. This supersedes
@@ -37,7 +37,8 @@ path remains unchanged. Both game and `ScenarioPresentationHost` use it.
 
 Cutoff/fade tests cover no chunk lookup below the threshold, storage release,
 pooled opacity reset, unpooled parity, chunk edits while hidden and restored full
-detail. The monotonic fade has exact 0/1 endpoints and 0.5 opacity at 0.375×.
+detail. The monotonic fade has exact 0/1 endpoints and 0.5 opacity at 0.375×. It follows
+zoom rather than elapsed time; preset jumps apply their target detail immediately.
 The new browser fixture uses the actual blade sheet, shared collector and both
 backends, plus opaque sprite/particle controls. Fixed blade angles and fixed
 projection isolate opacity parity; actual-zoom screenshots are inspected too.
@@ -67,5 +68,25 @@ observations, not randomized trials or proof that every kind of stutter is fixed
 This is a visual detail policy improvement: distant blades are deliberately
 omitted. Base terrain remains visible, as inspected in the real-game overview
 capture. No phone performance claim is made because its thermal gate failed.
-The ordinary streaming readiness check also passes. Full repository/browser
-validation is in progress before the final completion record.
+The ordinary streaming readiness check also passes.
+
+
+## Completion
+
+Implementation: `3d787c6`. Typechecks, 1,505 unit tests across 178 files, lint
+(115 existing warnings / 32 infos), catalog generation, 558-candidate manifest
+verification and production build pass. All 334 browser tests pass, including
+LOD fade/re-entry, GPU context recovery and switching, and the shared Traffic,
+Character, Outdoor/World Geometry and indoor presentation hosts. The existing
+streaming readiness runner and all six retained Mac measurement cases pass.
+Raw reports and diagnostic screenshots remain local; committed measurement
+summaries are allowlisted. The Pixel attempt remains explicitly unmeasured.
+
+Owned test browsers, tabs and servers exited; temporary Android ports were
+removed. Concurrent surface-cutaway/family-review work was preserved. Full-detail
+asset appearance and production renderer/pacing defaults are unchanged.
+
+Stop here for now. Further collection/sorting, instancing and hitch work are
+recorded as deferred in the owning topic. Resume for a visible ordinary-play
+problem, sustained mobile heat/battery concerns, or new feature load—not merely
+because profiling can identify another hot function.

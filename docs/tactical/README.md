@@ -101,7 +101,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [058 Road/rail crossing proof](058-road-rail-crossing-proof.md) | Walkable road approaches over a production train service; [world geometry](../topics/world-geometry.md) |
 
-| [059 Grass overview LOD](059-grass-overview-lod.md) | In progress: shared fade/cutoff for distant grass; [performance](../topics/performance.md) |
+| [059 Grass overview LOD](059-grass-overview-lod.md) | Complete: shared grass fade/cutoff, Mac comparison and explicit optimization stopping point; [performance](../topics/performance.md) |
 
 | [060 Fresh wildlife production](060-wildlife-fresh-production.md) | Fresh gpt-6.1-sol/high campaign; fixed-camera Blender guides and supervised animal pilots before background production; prior 027/028 preserved on backup branch |
 

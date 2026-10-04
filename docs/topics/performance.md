@@ -419,7 +419,7 @@ adapter preserves inherited alpha around each blade. Game and outdoor embedded
 labs share the policy, independently of device pixel ratio. Assets, generation,
 ordinary-zoom appearance and renderer/pacing defaults are unchanged.
 
-After validating this slice, pause engine optimization. Cached grass ordering,
+With this slice validated, pause engine optimization. Cached grass ordering,
 nearby-entity filtering, deeper GPU instancing and normal-play hitch attribution
 are deferred candidates, not an autonomous implementation queue. Resume when
 ordinary play shows a material problem, sustained mobile heat/battery use needs
@@ -434,3 +434,9 @@ CPU p95 dropping from 47.4 to 1.6 ms on Canvas and 9.4 to 1.6 ms on GPU. Both
 frame p95 near 9 ms on the 120 Hz Mac. Full-detail 1× controls remain healthy.
 This gain deliberately trades distant blade detail for less work. Pixel timing
 was not measured: its fixed <=31°C/status-zero gate expired at 32.6–32.7°C.
+
+Validation for 059: typechecks, 1,505 unit tests, all 334 browser tests, lint,
+asset inventories/build and ordinary streaming readiness pass. The embedded
+hosts remain covered by the common engine suite. Grass cutoff/fade and re-entry
+checks pass; fractional-scale sampling differences remain an explicitly recorded
+renderer fidelity limitation rather than another performance task.
