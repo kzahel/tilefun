@@ -1242,15 +1242,15 @@
         },
         {
           "label": "Palettes",
-          "value": "Four colors for the rounded trees and strips. Forest pieces keep their original colors."
+          "value": "Four colors for the rounded trees and bases. Forest pieces keep their original colors."
         },
         {
           "label": "Ground",
-          "value": "Forest ground colors differ by row. Other terrain compatibility is unknown."
+          "value": "These forest examples share one grass green. Other terrain compatibility is unknown."
         },
         {
           "label": "Assembly",
-          "value": "Match forest rows. Seamless repeats and corners are unproven."
+          "value": "Centers repeat sideways. Dense rows overlap with varied offsets; outer edges and corners need review."
         },
         {
           "label": "Gameplay",
@@ -1748,17 +1748,21 @@
         },
         {
           "id": "patches",
-          "title": "Replacement strips",
+          "title": "Tree bases",
           "members": [
             {
               "id": "tree-patch-1",
               "number": 4,
-              "label": "Pale replacement strip",
+              "label": "Pale tree base",
               "kind": "component",
               "facts": [
                 {
                   "label": "Use",
-                  "value": "Cannot stand alone. Replaces the bottom 16 pixels of the matching tree."
+                  "value": "Cannot stand alone. Fits under the matching rounded canopy."
+                },
+                {
+                  "label": "Matches",
+                  "value": "The base shown on tree 2, in the selected palette."
                 }
               ],
               "variants": [
@@ -1879,12 +1883,16 @@
             {
               "id": "tree-patch-2",
               "number": 5,
-              "label": "Green-tinted replacement strip",
+              "label": "Green-tinted tree base",
               "kind": "component",
               "facts": [
                 {
                   "label": "Use",
-                  "value": "Cannot stand alone. Replaces the bottom 16 pixels of the matching tree."
+                  "value": "Cannot stand alone. Fits under the matching rounded canopy."
+                },
+                {
+                  "label": "Matches",
+                  "value": "The base shown on tree 3, in the selected palette."
                 }
               ],
               "variants": [
@@ -2405,7 +2413,7 @@
         {
           "id": "forest-row-1",
           "label": "Forest 1",
-          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "description": "Matching left, center and right pieces. Corners and mixed-row joins remain untested.",
           "variants": [
             {
               "id": "fixed",
@@ -2468,7 +2476,7 @@
         {
           "id": "forest-row-2",
           "label": "Forest 2",
-          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "description": "Matching left, center and right pieces. Corners and mixed-row joins remain untested.",
           "variants": [
             {
               "id": "fixed",
@@ -2531,7 +2539,7 @@
         {
           "id": "forest-row-3",
           "label": "Forest 3",
-          "description": "Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.",
+          "description": "Matching left, center and right pieces. Corners and mixed-row joins remain untested.",
           "variants": [
             {
               "id": "fixed",
@@ -2590,6 +2598,691 @@
               }
             }
           ]
+        },
+        {
+          "id": "forest-fill-1",
+          "label": "Dense forest 1",
+          "description": "Approved example. Overlapping rows use varied sideways offsets. Interior section; outer edges still need their own arrangement.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F02"
+              ],
+              "sprite": {
+                "size": [
+                  256,
+                  304
+                ],
+                "background": "#479757",
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      128,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2592,
+                      1600,
+                      48,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      48,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      80,
+                      112
+                    ],
+                    "at": [
+                      176,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2624,
+                      1600,
+                      16,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      16,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      112,
+                      112
+                    ],
+                    "at": [
+                      144,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2544,
+                      1600,
+                      96,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      96,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      32,
+                      112
+                    ],
+                    "at": [
+                      224,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2608,
+                      1600,
+                      32,
+                      112
+                    ],
+                    "at": [
+                      0,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      128,
+                      112
+                    ],
+                    "at": [
+                      32,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1600,
+                      96,
+                      112
+                    ],
+                    "at": [
+                      160,
+                      192
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "forest-fill-2",
+          "label": "Dense forest 2",
+          "description": "Approved example. Overlapping rows use varied sideways offsets. Interior section; outer edges still need their own arrangement.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F05"
+              ],
+              "sprite": {
+                "size": [
+                  256,
+                  272
+                ],
+                "background": "#479757",
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      128,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2592,
+                      1712,
+                      48,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      48,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      80,
+                      80
+                    ],
+                    "at": [
+                      176,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2624,
+                      1712,
+                      16,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      16,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      144,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2544,
+                      1712,
+                      96,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      96,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      224,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2608,
+                      1712,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      128,
+                      80
+                    ],
+                    "at": [
+                      32,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1712,
+                      96,
+                      80
+                    ],
+                    "at": [
+                      160,
+                      192
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "forest-fill-3",
+          "label": "Dense forest 3",
+          "description": "Approved example. Overlapping rows use varied sideways offsets. Interior section; outer edges still need their own arrangement.",
+          "variants": [
+            {
+              "id": "fixed",
+              "label": "Original colors",
+              "recordIds": [
+                "F08"
+              ],
+              "sprite": {
+                "size": [
+                  256,
+                  272
+                ],
+                "background": "#479757",
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      112,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      224,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2576,
+                      1792,
+                      48,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      48,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      96,
+                      80
+                    ],
+                    "at": [
+                      160,
+                      48
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2608,
+                      1792,
+                      16,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      16,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      128,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      16,
+                      80
+                    ],
+                    "at": [
+                      240,
+                      96
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2528,
+                      1792,
+                      96,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      96,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      48,
+                      80
+                    ],
+                    "at": [
+                      208,
+                      144
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2592,
+                      1792,
+                      32,
+                      80
+                    ],
+                    "at": [
+                      0,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      32,
+                      192
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2512,
+                      1792,
+                      112,
+                      80
+                    ],
+                    "at": [
+                      144,
+                      192
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "sourcePins": [
@@ -2600,7 +3293,7 @@
           "height": 8224
         }
       ],
-      "revision": "ef50bbae146346fe06a3e0bcabce6ddd6d11eae89e3afc7f4419fe4bf0bfecd7"
+      "revision": "b049e3e9dd662ebe3954a4cf5a59d685ba7c9b4de67e700893dce1c3ad85b930"
     },
     {
       "id": "scrapyard",
@@ -4002,5 +4695,5 @@
       "revision": "042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90"
     }
   ],
-  "revision": "a6485f487361ff60deb0373aaa65a0e2133fc02e0f8e0234741925d6857a03dd"
+  "revision": "8adfd32a84f961c9cae74fbc235d6ada3b4ac6d088400be56888c0ecf3d1f43a"
 }

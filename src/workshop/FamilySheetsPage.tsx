@@ -220,7 +220,10 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
               <h2 id="family-examples-heading">Together</h2>
               <div className="family-example-grid">
                 {family.examples.map((example) => (
-                  <figure key={example.id}>
+                  <figure
+                    key={example.id}
+                    className={example.variants[0]?.sprite.background ? "is-large" : undefined}
+                  >
                     <SpriteStage
                       sprite={familyVariant(example, variantId).sprite}
                       images={images.data}

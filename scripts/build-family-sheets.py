@@ -127,7 +127,10 @@ def render(image, sources):
     size = image['size']
     require(len(size) == 2 and all(type(v) is int and v > 0 for v in size), 'Invalid sprite size')
     require(image['layers'], 'Sprite has no layers')
-    result = Image.new('RGBA', tuple(size))
+    background = image.get('background')
+    require(background is None or (len(background) == 7 and background[0] == '#'
+            and all(c in '0123456789abcdef' for c in background[1:])), 'Invalid background')
+    result = Image.new('RGBA', tuple(size), background or (0, 0, 0, 0))
     for layer in image['layers']:
         source = sources[layer['sheetId']]
         x, y, w, h = layer['rect']
@@ -137,8 +140,13 @@ def render(image, sources):
                 and y + h <= source.height, 'Source rectangle outside pinned sheet')
         require(ax >= 0 and ay >= 0 and ax + w <= size[0] and ay + h <= size[1],
                 'Destination rectangle outside sprite')
-        # No mask: Pillow paste replaces RGBA, including transparent pixels.
-        result.paste(source.crop((x, y, x + w, y + h)), (ax, ay))
+        require(layer.get('blend') in (None, 'over'), 'Unsupported artwork blend')
+        crop = source.crop((x, y, x + w, y + h))
+        if layer.get('blend') == 'over':
+            result.alpha_composite(crop, (ax, ay))
+        else:
+            # No mask: replace RGBA, including transparent pixels.
+            result.paste(crop, (ax, ay))
     return result
 
 
@@ -247,7 +255,7 @@ def build_trees(packet, source_sheets):
         whole.append(member(f'tree-{treatment + 1}', treatment + 1, 'Tree · ' + label.lower(), 'whole',
                             [fact('Form', 'Rounded canopy')], values))
     patches = []
-    for treatment, label in enumerate(['Pale replacement strip', 'Green-tinted replacement strip']):
+    for treatment, label in enumerate(['Pale tree base', 'Green-tinted tree base']):
         values = []
         for i, (key, palette) in enumerate(PALETTES):
             record_id = f'B{1 + i * 2 + treatment:02}'
@@ -255,7 +263,8 @@ def build_trees(packet, source_sheets):
                     f'Tree patch grouping differs: {record_id}')
             values.append(variant(key, palette, [record_id], images[record_id]))
         patches.append(member(f'tree-patch-{treatment + 1}', treatment + 4, label, 'component',
-                              [fact('Use', 'Cannot stand alone. Replaces the bottom 16 pixels of the matching tree.')], values))
+                              [fact('Use', 'Cannot stand alone. Fits under the matching rounded canopy.'),
+                               fact('Matches', f'The base shown on tree {treatment + 2}, in the selected palette.')], values))
     forest = []
     for i in range(9):
         record_id = f'F{i + 1:02}'
@@ -269,16 +278,32 @@ def build_trees(packet, source_sheets):
         keys = relation['members']
         values = [variant('fixed', 'Original colors', [key], images[key]) for key in keys]
         examples.append({'id': f'forest-row-{i + 1}', 'label': f'Forest {i + 1}',
-                         'description': 'Ordered fragments. Ground colors belong to this row; repeated centers and corners remain untested.',
+                         'description': 'Matching left, center and right pieces. Corners and mixed-row joins remain untested.',
                          'variants': [variant('fixed', 'Original colors', keys, combine(values))]})
+    # Exact source recipe accepted in chat, 2026-10-04 (probe commit 2cb786c).
+    # Clip copies at the 256px interior frame, preserving phase and painter order.
+    for i, record_id in enumerate(['F02', 'F05', 'F08']):
+        sx, sy, width, height = images[record_id]['layers'][0]['rect']
+        layers = []
+        for row, phase in enumerate([0, 48, 16, 96, 32]):
+            for x in range(-width + phase, 256, width):
+                left, right = max(0, x), min(256, x + width)
+                if left < right:
+                    layers.append({'sheetId': 'me-complete',
+                                   'rect': [sx + left - x, sy, right - left, height],
+                                   'at': [left, row * 48], 'blend': 'over'})
+        examples.append({'id': f'forest-fill-{i + 1}', 'label': f'Dense forest {i + 1}',
+                         'description': 'Approved example. Overlapping rows use varied sideways offsets. Interior section; outer edges still need their own arrangement.',
+                         'variants': [variant('fixed', 'Original colors', [record_id],
+                                      {'size': [256, 4 * 48 + height], 'background': '#479757', 'layers': layers})]})
     return family('trees', 'Trees and forest', 'One rounded-canopy form, four palettes, three lower sections, and forest pieces.',
                   'Palette', PALETTES,
                   [fact('Identity', 'Species and seasons are unknown.'),
-                   fact('Palettes', 'Four colors for the rounded trees and strips. Forest pieces keep their original colors.'),
-                   fact('Ground', 'Forest ground colors differ by row. Other terrain compatibility is unknown.'),
-                   fact('Assembly', 'Match forest rows. Seamless repeats and corners are unproven.'),
+                   fact('Palettes', 'Four colors for the rounded trees and bases. Forest pieces keep their original colors.'),
+                   fact('Ground', 'These forest examples share one grass green. Other terrain compatibility is unknown.'),
+                   fact('Assembly', 'Centers repeat sideways. Dense rows overlap with varied offsets; outer edges and corners need review.'),
                    fact('Gameplay', 'Collision and height are unknown.')],
-                  [group('whole', 'Complete trees', whole), group('patches', 'Replacement strips', patches),
+                  [group('whole', 'Complete trees', whole), group('patches', 'Tree bases', patches),
                    *[group(f'forest-{i + 1}', f'Forest {i + 1} pieces', forest[i * 3:i * 3 + 3])
                      for i in range(3)]], examples, source_sheets)
 

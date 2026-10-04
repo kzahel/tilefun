@@ -332,6 +332,9 @@
   background: #2b382e;
   border-radius: 6px;
 }
+.family-example-grid figure.is-large {
+  width: 560px;
+}
 .family-example-grid figcaption {
   margin-top: 10px;
   font-size: 12px;

@@ -330,3 +330,59 @@ test("whole-sheet comments remain available while a piece is selected", async ({
     "page",
   );
 });
+
+test("tree bases explain their counterparts and dense forests preserve the approved compositions", async ({
+  page,
+}) => {
+  await mockDiscussions(page);
+  await page.goto(`${URL}?family=trees`);
+  await ready(page, 14);
+  await page.getByRole("button", { name: "4. Pale tree base", exact: true }).click();
+  await expect(page.locator(".family-detail-copy")).toContainText("The base shown on tree 2");
+  await page.getByRole("button", { name: "5. Green-tinted tree base", exact: true }).click();
+  await expect(page.locator(".family-detail-copy")).toContainText("The base shown on tree 3");
+  // Independent reference: full signed source draws from the owner-approved
+  // research probe, rather than the sheet adapter's clipped layer recipes.
+  const expected = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = "/tilefun/assets/tilesets/me-complete.png";
+    await image.decode();
+    const result: string[] = [];
+    for (const [sx, sy, width, height] of [
+      [2512, 1600, 128, 112],
+      [2512, 1712, 128, 80],
+      [2512, 1792, 112, 80],
+    ]) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 192 + height;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx) throw new Error("No canvas context");
+      ctx.imageSmoothingEnabled = false;
+      ctx.fillStyle = "#479757";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      for (const [row, phase] of [0, 48, 16, 96, 32].entries()) {
+        for (let x = -width + phase; x < 256; x += width) {
+          const pattern = ctx.createPattern(image, "no-repeat");
+          if (!pattern) throw new Error("No source pattern");
+          pattern.setTransform(new DOMMatrix([1, 0, 0, 1, x - sx, row * 48 - sy]));
+          ctx.fillStyle = pattern;
+          ctx.fillRect(x, row * 48, width, height);
+        }
+      }
+      const bytes = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      result.push(
+        [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
+          .map((value) => value.toString(16).padStart(2, "0"))
+          .join(""),
+      );
+    }
+    return result;
+  });
+  for (const [index, hash] of expected.entries()) {
+    const canvas = page.getByRole("img", { name: `Dense forest ${index + 1}`, exact: true });
+    await expect(canvas).toHaveAttribute("data-art-ready", "true");
+    expect(await pixels(canvas)).toBe(hash);
+    await expect(canvas.locator("xpath=ancestor::figure")).toContainText("Approved example.");
+  }
+});

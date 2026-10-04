@@ -62,10 +62,14 @@ export async function loadFamilySheetCatalog(): Promise<FamilySheetCatalog> {
     for (const item of [...family.groups.flatMap((g) => g.members), ...family.examples]) {
       for (const variant of item.variants) {
         const [width, height] = variant.sprite.size;
+        if (variant.sprite.background && !/^#[a-f0-9]{6}$/.test(variant.sprite.background))
+          throw new Error("Invalid artwork background.");
         if (!Number.isInteger(width) || !Number.isInteger(height) || width < 1 || height < 1)
           throw new Error("Invalid artwork size.");
         if (!variant.sprite.layers.length) throw new Error("Artwork is missing.");
         for (const layer of variant.sprite.layers) {
+          if (layer.blend !== undefined && layer.blend !== "over")
+            throw new Error("Unsupported artwork blend.");
           const sheet = catalog.sources.find((s) => s.id === layer.sheetId);
           if (!sheet || !pinnedIds.has(sheet.id)) throw new Error("Artwork source is missing.");
           usedIds.add(sheet.id);
@@ -122,6 +126,10 @@ export function drawFamilySprite(
   [canvas.width, canvas.height] = sprite.size;
   const ctx = reviewContext2D(canvas);
   ctx.imageSmoothingEnabled = false;
+  if (sprite.background) {
+    ctx.fillStyle = sprite.background;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
   for (const layer of sprite.layers) {
     const image = images.get(layer.sheetId);
     if (!image) throw new Error("Artwork source is not loaded.");
@@ -129,7 +137,7 @@ export function drawFamilySprite(
     const [x, y] = layer.at;
     // Replacement strips also replace transparent pixels. Source-over alone would
     // retain pixels from earlier layers and would misrepresent a composed sprite.
-    ctx.clearRect(x, y, width, height);
+    if (layer.blend !== "over") ctx.clearRect(x, y, width, height);
     ctx.drawImage(image, sx, sy, width, height, x, y, width, height);
   }
   canvas.dataset.artReady = "true";

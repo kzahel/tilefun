@@ -66,6 +66,15 @@ class FamilySheetsTest(unittest.TestCase):
             ADAPTER.check_pixels(ADAPTER.sprite('test', [0, 0, 1, 1]), '0' * 64,
                                  {'test': Image.new('RGBA', (1, 1))}, 'test')
 
+    def test_forest_overlap_preserves_ground_under_transparent_source(self):
+        sprite = {'size': [1, 1], 'background': '#479757', 'layers': [
+            {'sheetId': 'test', 'rect': [0, 0, 1, 1], 'at': [0, 0], 'blend': 'over'},
+        ]}
+        sources = {'test': Image.new('RGBA', (1, 1), (0, 0, 0, 0))}
+        self.assertEqual(ADAPTER.render(sprite, sources).getpixel((0, 0)), (71, 151, 87, 255))
+        del sprite['layers'][0]['blend']
+        self.assertEqual(ADAPTER.render(sprite, sources).getpixel((0, 0)), (0, 0, 0, 0))
+
     def test_all_records_and_cabinet_partial_restrictions_survive(self):
         counts = {}
         for family in self.catalog['families']:

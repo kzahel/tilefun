@@ -6,8 +6,14 @@ export interface FamilyFact {
 }
 export interface FamilySprite {
   size: [number, number];
-  /** Each layer replaces its destination rectangle, including transparent pixels. */
-  layers: { sheetId: string; rect: ArtRect; at: [number, number] }[];
+  background?: string;
+  /** Replacement is the default; overlapping forest rows explicitly use source-over. */
+  layers: {
+    sheetId: string;
+    rect: ArtRect;
+    at: [number, number];
+    blend?: "over";
+  }[];
 }
 export interface FamilyVariant {
   id: string;
