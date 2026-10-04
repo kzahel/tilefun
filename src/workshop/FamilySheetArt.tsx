@@ -62,6 +62,45 @@ export async function loadFamilySheetCatalog(): Promise<FamilySheetCatalog> {
         throw new Error("The artwork no longer matches this family proposal.");
       pinnedIds.add(pin.id);
     }
+    for (const member of family.groups.flatMap((group) => group.members)) {
+      if (
+        member.variantLabel !== undefined &&
+        (typeof member.variantLabel !== "string" || !member.variantLabel.trim())
+      )
+        throw new Error("Invalid piece appearance label.");
+    }
+    for (const example of family.examples) {
+      if (
+        example.groupLabel !== undefined &&
+        (typeof example.groupLabel !== "string" || !example.groupLabel.trim())
+      )
+        throw new Error("Invalid example group label.");
+      if (example.animation !== undefined) {
+        const animation = example.animation;
+        if (
+          !animation ||
+          typeof animation !== "object" ||
+          Array.isArray(animation) ||
+          !Array.isArray(animation.frameDurationsMs) ||
+          animation.frameDurationsMs.length === 0 ||
+          animation.frameDurationsMs.length !== example.variants.length ||
+          animation.frameDurationsMs.some(
+            (duration) =>
+              !Number.isFinite(duration) || !Number.isInteger(duration) || duration <= 0,
+          ) ||
+          typeof animation.loop !== "boolean"
+        )
+          throw new Error("Invalid source demonstration timing.");
+        const size = example.variants[0]?.sprite.size;
+        if (
+          !size ||
+          example.variants.some(
+            (variant) => variant.sprite.size[0] !== size[0] || variant.sprite.size[1] !== size[1],
+          )
+        )
+          throw new Error("Source demonstration frames must have the same size.");
+      }
+    }
     const usedIds = new Set<string>();
     for (const item of [...family.groups.flatMap((g) => g.members), ...family.examples]) {
       for (const variant of item.variants) {

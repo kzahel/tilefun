@@ -74,3 +74,13 @@ The [E01 proposal](../../docs/tactical/053-semantic-tileset-map/packets/E01-outd
 pins original paths, hashes and aliases. Neither has a whole-frame exact master
 or theme-sheet match. These copies let the family sheet display the originals;
 they are unapproved review sources, not a promoted gameplay bank.
+
+
+`semantic-sources/interiors-door-1.png` and `interiors-door-1-locked.png` are
+byte-identical copies of LimeZu Modern Interiors native16 animation strips
+`assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png` and
+`animated_door_1_locked.png`. They retain their original 80×32 / 64×32 frames and
+transparency. The [A01 packet](../../docs/tactical/053-semantic-tileset-map/packets/A01-animation.json)
+pins their exact original bytes; these review sources do not establish gameplay
+animation timing, door mechanics or approval. Companion GIFs remain supporting
+research evidence and are not repacked here.

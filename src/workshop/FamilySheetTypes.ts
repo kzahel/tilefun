@@ -6,6 +6,9 @@ export const FAMILY_SHEET_IDS = [
   "scrapyard",
   "outdoor-seating",
   "sofas",
+  "room-builder",
+  "playground-tubes",
+  "animated-doors",
 ] as const;
 
 export interface FamilyFact {
@@ -33,10 +36,20 @@ export interface FamilyMember {
   id: string;
   number: number;
   label: string;
-  kind: "whole" | "component" | "unknown";
+  kind: "whole" | "component" | "unknown" | "frame";
+  variantLabel?: string;
   facts: FamilyFact[];
   question?: string;
   variants: FamilyVariant[];
+}
+export interface FamilyExample {
+  id: string;
+  label: string;
+  description: string;
+  groupLabel?: string;
+  variants: FamilyVariant[];
+  /** Source demonstration timing; does not define gameplay behavior. */
+  animation?: { frameDurationsMs: number[]; loop: boolean };
 }
 export interface FamilySheet {
   id: (typeof FAMILY_SHEET_IDS)[number];
@@ -49,7 +62,7 @@ export interface FamilySheet {
   variants: { id: string; label: string }[];
   facts: FamilyFact[];
   groups: { id: string; title: string; description?: string; members: FamilyMember[] }[];
-  examples: { id: string; label: string; description: string; variants: FamilyVariant[] }[];
+  examples: FamilyExample[];
 }
 export interface FamilySheetCatalog {
   version: 1;

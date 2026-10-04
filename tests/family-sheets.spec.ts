@@ -11,6 +11,16 @@ const catalog = JSON.parse(
 ) as FamilySheetCatalog;
 const URL = "/tilefun/workshop.html#/tool/families";
 
+function reviseCatalog(changed: FamilySheetCatalog) {
+  for (const family of changed.families) {
+    const { revision: _revision, ...contents } = family;
+    family.revision = createHash("sha256").update(familyCanonicalJSON(contents)).digest("hex");
+  }
+  const { revision: _revision, ...contents } = changed;
+  changed.revision = createHash("sha256").update(familyCanonicalJSON(contents)).digest("hex");
+  return changed;
+}
+
 // The normal test server is isolated, but these discussions must not generate
 // even test inbox history. Exercise the existing sync contract with a mock.
 async function mockDiscussions(page: Page) {
@@ -49,7 +59,24 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${URL}?family=cabinets`);
-  const counts = { cabinets: 9, trees: 14, scrapyard: 29, "outdoor-seating": 15, sofas: 18 };
+  const counts = {
+    cabinets: 9,
+    trees: 14,
+    scrapyard: 29,
+    "outdoor-seating": 15,
+    sofas: 18,
+    "room-builder": 25,
+    "playground-tubes": 19,
+    "animated-doors": 2,
+  };
+  const members = catalog.families.flatMap((family) =>
+    family.groups.flatMap((group) => group.members),
+  );
+  expect(members).toHaveLength(131);
+  expect(
+    new Set(members.flatMap((member) => member.variants.flatMap((variant) => variant.recordIds)))
+      .size,
+  ).toBe(191);
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 966, height: 1024 },
@@ -58,7 +85,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await expect(
       page.getByRole("navigation", { name: "Art families" }).getByRole("link"),
-    ).toHaveCount(5);
+    ).toHaveCount(8);
     for (const family of catalog.families) {
       const tab = page
         .getByRole("navigation", { name: "Art families" })
@@ -459,3 +486,315 @@ test("sofa partial shadows stay scoped to the selected piece and exact discussio
   );
   await expect(page.getByLabel("Piece appearance", { exact: true })).toHaveCount(0);
 });
+
+test("room continuation windows have their own section", async ({ page }) => {
+  await mockDiscussions(page);
+  await page.goto(`${URL}?family=room-builder`);
+  await ready(page, 25);
+  const together = page.getByRole("region", { name: "Together", exact: true });
+  const open = page.getByRole("region", { name: "Open path sections", exact: true });
+  await expect(together.locator("figure")).toHaveCount(6);
+  await expect(open.locator("figure")).toHaveCount(2);
+  await expect(open).toContainText("continuing path pieces");
+});
+
+test("tube examples replay the independently reviewed source-over recipes", async ({ page }) => {
+  await mockDiscussions(page);
+  await page.goto(`${URL}?family=playground-tubes`);
+  await ready(page, 19);
+  const family = required(catalog.families.find((item) => item.id === "playground-tubes"));
+  const packet = JSON.parse(
+    readFileSync(
+      "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes.json",
+      "utf8",
+    ),
+  ) as {
+    candidates: { id: string; committedRendering: { rect: [number, number, number, number] } }[];
+    experiments: {
+      assemblies: {
+        id: string;
+        topologyValidity: string;
+        size: [number, number];
+        placements: { memberId: string; offsetXY: [number, number] }[];
+      }[];
+    };
+  };
+  const recipes = packet.experiments.assemblies
+    .filter((recipe) => recipe.topologyValidity === "valid")
+    .map((recipe) => ({
+      id: recipe.id,
+      size: recipe.size,
+      placements: recipe.placements.map((placement) => ({
+        rect: required(packet.candidates.find((candidate) => candidate.id === placement.memberId))
+          .committedRendering.rect,
+        at: placement.offsetXY,
+      })),
+    }));
+  // Independent packet geometry and raster-pattern reference, with no adapter layers.
+  const expected = await page.evaluate(async (recipes) => {
+    const image = new Image();
+    image.src = "/tilefun/assets/tilesets/me-complete.png";
+    await image.decode();
+    const outputs = [];
+    for (const recipe of recipes) {
+      const canvas = document.createElement("canvas");
+      [canvas.width, canvas.height] = recipe.size;
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+      if (!context) throw new Error("No reference canvas");
+      for (const placement of recipe.placements) {
+        const [sx, sy, width, height] = placement.rect;
+        const [x, y] = placement.at;
+        const pattern = context.createPattern(image, "no-repeat");
+        if (!pattern) throw new Error("No source pattern");
+        pattern.setTransform(new DOMMatrix([1, 0, 0, 1, x - sx, y - sy]));
+        context.fillStyle = pattern;
+        context.fillRect(x, y, width, height);
+      }
+      const bytes = context.getImageData(0, 0, canvas.width, canvas.height).data;
+      outputs.push({
+        id: recipe.id,
+        hash: [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
+          .map((value) => value.toString(16).padStart(2, "0"))
+          .join(""),
+      });
+    }
+    return outputs;
+  }, recipes);
+  for (const reference of expected) {
+    const example = required(family.examples.find((item) => item.id === reference.id));
+    const canvas = page.getByRole("img", { name: example.label, exact: true });
+    await expect(canvas).toHaveAttribute("data-art-ready", "true");
+    expect(await pixels(canvas)).toBe(reference.hash);
+  }
+  const paletteMembers = family.groups
+    .flatMap((group) => group.members)
+    .filter((member) => member.variants.length > 1);
+  expect(paletteMembers).toHaveLength(3);
+  const exampleHashes = await Promise.all(
+    family.examples.map((example) =>
+      pixels(page.getByRole("img", { name: example.label, exact: true })),
+    ),
+  );
+  await page.getByLabel(family.variantLabel, { exact: true }).selectOption("blue");
+  for (const [index, example] of family.examples.entries())
+    expect(await pixels(page.getByRole("img", { name: example.label, exact: true }))).toBe(
+      exampleHashes[index],
+    );
+});
+
+test("door source demonstrations stay paused and expose every frame independently of note selection", async ({
+  page,
+}) => {
+  const events = await mockDiscussions(page);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const family = required(catalog.families.find((item) => item.id === "animated-doors"));
+  const members = family.groups.flatMap((group) => group.members);
+  const member = required(members[0]);
+  await page.goto(`${URL}?family=animated-doors&member=${member.id}&variant=frame-3`);
+  await ready(page, 2);
+  await page.clock.install();
+  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  const frameSelect = page.getByLabel("Frame", { exact: true });
+  await expect(frameSelect).toHaveValue("frame-3");
+  const selectedCanvas = page
+    .getByRole("button", {
+      name: `${member.number}. ${member.label}`,
+      exact: true,
+    })
+    .locator("canvas");
+  const selectedPixels = await pixels(selectedCanvas);
+  const link = page.url();
+  const demonstrations = page.locator(".family-source-animation");
+  await expect(demonstrations).toHaveCount(2);
+  for (const [index, example] of family.examples.entries()) {
+    const demo = demonstrations.nth(index);
+    await expect(demo).toContainText("Source demonstration");
+    await expect(demo.getByRole("button", { name: "Play", exact: true })).toBeVisible();
+    await expect(demo.locator(".family-animation-frame")).toHaveText(
+      `Frame 1 of ${example.variants.length}`,
+    );
+    const initial = await pixels(demo.locator("canvas"));
+    await page.clock.runFor(1000);
+    expect(await pixels(demo.locator("canvas"))).toBe(initial);
+    for (const [frameIndex, variant] of example.variants.entries()) {
+      // The static piece and the demonstration must show the same native source frame.
+      const staticMember = required(
+        members.find((item) =>
+          item.variants.some((itemVariant) => itemVariant.recordIds[0] === variant.recordIds[0]),
+        ),
+      );
+      await page
+        .getByRole("button", {
+          name: `${staticMember.number}. ${staticMember.label}`,
+          exact: true,
+        })
+        .click();
+      await expect(page).toHaveURL((url) =>
+        url.hash.includes(`member=${encodeURIComponent(staticMember.id)}`),
+      );
+      await expect(
+        page.getByRole("heading", {
+          name: `${staticMember.number} ${staticMember.label}`,
+          exact: true,
+        }),
+      ).toBeVisible();
+      await frameSelect.selectOption(variant.id);
+      await expect(frameSelect).toHaveValue(variant.id);
+      const staticCanvas = page
+        .getByRole("button", {
+          name: `${staticMember.number}. ${staticMember.label}`,
+          exact: true,
+        })
+        .locator("canvas");
+      await expect(demo.locator(".family-animation-frame")).toHaveText(
+        `Frame ${frameIndex + 1} of ${example.variants.length}`,
+      );
+      await expect
+        .poll(async () => (await pixels(demo.locator("canvas"))) === (await pixels(staticCanvas)))
+        .toBe(true);
+      await expect(demo.locator("canvas")).toHaveAttribute("width", "16");
+      await expect(demo.locator("canvas")).toHaveAttribute("height", "32");
+      await demo.getByRole("button", { name: "Next frame", exact: true }).click();
+    }
+    expect(await pixels(demo.locator("canvas"))).toBe(initial);
+  }
+  await page.clock.resume();
+  await page.goto(link);
+  await ready(page, 2);
+  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  await expect(frameSelect).toHaveValue("frame-3");
+  expect(await pixels(selectedCanvas)).toBe(selectedPixels);
+  await page.getByText("Discuss this piece", { exact: true }).click();
+  const note = page.locator(".family-piece-discussion");
+  await note.getByRole("textbox").fill("Inspect this exact source frame");
+  await demonstrations.first().getByRole("button", { name: "Play", exact: true }).click();
+  const duration = required(family.examples[0]?.animation?.frameDurationsMs[0]);
+  await page.clock.runFor(duration - 1);
+  await expect(demonstrations.first().locator(".family-animation-frame")).toHaveText(
+    "Frame 1 of 5",
+  );
+  await page.clock.runFor(1);
+  await expect(demonstrations.first().locator(".family-animation-frame")).toHaveText(
+    "Frame 2 of 5",
+  );
+  await expect(demonstrations.nth(1).locator(".family-animation-frame")).toHaveText("Frame 1 of 4");
+  await demonstrations.first().getByRole("button", { name: "Pause", exact: true }).click();
+  const paused = await pixels(demonstrations.first().locator("canvas"));
+  await page.clock.runFor(1000);
+  expect(await pixels(demonstrations.first().locator("canvas"))).toBe(paused);
+  await demonstrations.first().getByRole("button", { name: "Play", exact: true }).click();
+  await demonstrations.first().getByRole("button", { name: "Next frame", exact: true }).click();
+  await expect(
+    demonstrations.first().getByRole("button", { name: "Play", exact: true }),
+  ).toBeVisible();
+  await expect(page).toHaveURL(link);
+  await expect(frameSelect).toHaveValue("frame-3");
+  expect(await pixels(selectedCanvas)).toBe(selectedPixels);
+  await expect(note.getByRole("textbox")).toHaveValue("Inspect this exact source frame");
+  await note.getByRole("button", { name: "Save note", exact: true }).click();
+  await expect.poll(() => events.length).toBe(1);
+  const variant = required(member.variants.find((item) => item.id === "frame-3"));
+  const layer = required(variant.sprite.layers[0]);
+  expect(events[0]).toMatchObject({
+    sheetId: layer.sheetId,
+    rect: layer.rect,
+    sliceKeys: expect.arrayContaining([
+      `family-member:${member.id}`,
+      "family-variant:frame-3",
+      `family-proposal:${family.revision}`,
+    ]),
+  });
+  await page.getByText("Comment on whole sheet", { exact: true }).click();
+  const whole = page.locator(".family-sheet-discussion");
+  await whole.getByRole("textbox").fill("Whole door sheet");
+  await whole.getByRole("button", { name: "Save note", exact: true }).click();
+  await expect.poll(() => events.length).toBe(2);
+  expect(events[1]).toMatchObject({
+    sliceKeys: expect.arrayContaining(["family-variant:frame-1"]),
+  });
+  await demonstrations.first().getByRole("button", { name: "Play", exact: true }).click();
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", { value: true, configurable: true });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(
+    demonstrations.first().getByRole("button", { name: "Play", exact: true }),
+  ).toBeVisible();
+  const hiddenFrame = await pixels(demonstrations.first().locator("canvas"));
+  await page.clock.runFor(1000);
+  expect(await pixels(demonstrations.first().locator("canvas"))).toBe(hiddenFrame);
+  await page.evaluate(() => {
+    Reflect.deleteProperty(document, "hidden");
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await demonstrations.first().getByRole("button", { name: "Play", exact: true }).click();
+  await page.clock.resume();
+  await page.reload();
+  await ready(page, 2);
+  await page.clock.pauseAt(await page.evaluate(() => Date.now()));
+  await expect(
+    demonstrations.first().getByRole("button", { name: "Play", exact: true }),
+  ).toBeVisible();
+  await expect(demonstrations.first().locator(".family-animation-frame")).toHaveText(
+    "Frame 1 of 5",
+  );
+  await demonstrations.first().getByRole("button", { name: "Play", exact: true }).click();
+  await page
+    .getByRole("navigation", { name: "Art families" })
+    .getByRole("link", { name: "Trees and forest" })
+    .click();
+  await ready(page, 14);
+  await page.clock.runFor(1000);
+  await page
+    .getByRole("navigation", { name: "Art families" })
+    .getByRole("link", { name: family.name, exact: true })
+    .click();
+  await ready(page, 2);
+  await expect(
+    demonstrations.first().getByRole("button", { name: "Play", exact: true }),
+  ).toBeVisible();
+  await expect(demonstrations.first().locator(".family-animation-frame")).toHaveText(
+    "Frame 1 of 5",
+  );
+});
+
+for (const invalid of [
+  "length",
+  "empty",
+  "zero",
+  "negative",
+  "fractional",
+  "non-finite",
+  "loop",
+  "size",
+] as const) {
+  test(`invalid animation ${invalid} is blocked even with current metadata revisions`, async ({
+    page,
+  }) => {
+    await mockDiscussions(page);
+    const changed = structuredClone(catalog);
+    const family = required(changed.families.find((item) => item.id === "animated-doors"));
+    const example = required(family.examples[0]);
+    const animation = required(example.animation);
+    if (invalid === "length") animation.frameDurationsMs.pop();
+    if (invalid === "empty") animation.frameDurationsMs = [];
+    if (invalid === "zero") animation.frameDurationsMs[0] = 0;
+    if (invalid === "negative") animation.frameDurationsMs[0] = -1;
+    if (invalid === "fractional") animation.frameDurationsMs[0] = 1.5;
+    if (invalid === "non-finite") animation.frameDurationsMs[0] = Number.POSITIVE_INFINITY;
+    if (invalid === "loop") animation.loop = "yes" as unknown as boolean;
+    if (invalid === "size") required(example.variants[1]).sprite.size[0] += 1;
+    reviseCatalog(changed);
+    await page.route("**/data/family-sheets.json", (route) => route.fulfill({ json: changed }));
+    await page.goto(`${URL}?family=animated-doors`);
+    await expect(
+      page.getByText(
+        invalid === "size"
+          ? "Source demonstration frames must have the same size."
+          : "Invalid source demonstration timing.",
+        { exact: true },
+      ),
+    ).toBeVisible();
+    await expect(page.locator(".family-piece canvas")).toHaveCount(0);
+  });
+}

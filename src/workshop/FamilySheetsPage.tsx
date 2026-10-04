@@ -1,9 +1,10 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { ErrorMessage } from "./App.js";
 import { FamilySpriteCanvas, useFamilyImages, useFamilySheets } from "./FamilySheetArt.js";
 import { FamilySheetNote } from "./FamilySheetNote.js";
 import {
+  type FamilyExample,
   type FamilyFact,
   type FamilySheetCatalog,
   type FamilySprite,
@@ -61,6 +62,13 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
     if (revision) next.set("revision", revision);
     setParams(next, { preventScrollReset: true });
   };
+  const exampleGroups = new Map<string, FamilyExample[]>();
+  for (const example of family.examples) {
+    const label = example.groupLabel ?? "Together";
+    const group = exampleGroups.get(label) ?? [];
+    group.push(example);
+    exampleGroups.set(label, group);
+  }
 
   return (
     <section className="family-page">
@@ -151,9 +159,9 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
               </div>
               {hasPieceVariants ? (
                 <label className="family-variant">
-                  Piece appearance
+                  {selected.variantLabel ?? "Piece appearance"}
                   <select
-                    aria-label="Piece appearance"
+                    aria-label={selected.variantLabel ?? "Piece appearance"}
                     value={selectedVariantId}
                     onChange={(event) => select(selected.id, event.target.value)}
                   >
@@ -241,21 +249,29 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
               </div>
             </section>
           ))}
-          {family.examples.length ? (
-            <section className="family-examples" aria-labelledby="family-examples-heading">
-              <h2 id="family-examples-heading">Together</h2>
+          {[...exampleGroups].map(([groupLabel, examples], index) => (
+            <section
+              key={`${family.id}:${groupLabel}`}
+              className="family-examples"
+              aria-labelledby={`family-examples-heading-${index}`}
+            >
+              <h2 id={`family-examples-heading-${index}`}>{groupLabel}</h2>
               <div className="family-example-grid">
-                {family.examples.map((example) => (
+                {examples.map((example) => (
                   <figure
-                    key={example.id}
+                    key={`${family.id}:${example.id}`}
                     className={example.variants[0]?.sprite.background ? "is-large" : undefined}
                   >
-                    <SpriteStage
-                      sprite={familyVariant(example, variantId).sprite}
-                      images={images.data}
-                      zoom={2}
-                      label={example.label}
-                    />
+                    {example.animation ? (
+                      <SourceAnimation example={example} images={images.data} />
+                    ) : (
+                      <SpriteStage
+                        sprite={familyVariant(example, variantId).sprite}
+                        images={images.data}
+                        zoom={2}
+                        label={example.label}
+                      />
+                    )}
                     <figcaption>
                       <strong>{example.label}</strong>
                       <p>{example.description}</p>
@@ -264,10 +280,75 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
                 ))}
               </div>
             </section>
-          ) : null}
+          ))}
         </>
       )}
     </section>
+  );
+}
+
+/** Playback is local to this demonstration; source selection and note targets stay static. */
+function SourceAnimation({
+  example,
+  images,
+}: {
+  example: FamilyExample;
+  images: Map<string, HTMLImageElement>;
+}) {
+  const [frame, setFrame] = useState(0),
+    [playing, setPlaying] = useState(false);
+  const animation = example.animation;
+  useEffect(() => {
+    const pauseWhenHidden = () => {
+      if (document.hidden) setPlaying(false);
+    };
+    document.addEventListener("visibilitychange", pauseWhenHidden);
+    return () => document.removeEventListener("visibilitychange", pauseWhenHidden);
+  }, []);
+  useEffect(() => {
+    if (!playing || !animation || document.hidden) return;
+    const timer = window.setTimeout(() => {
+      if (frame + 1 < example.variants.length) setFrame(frame + 1);
+      else if (animation.loop) setFrame(0);
+      else setPlaying(false);
+    }, animation.frameDurationsMs[frame]);
+    return () => window.clearTimeout(timer);
+  }, [playing, frame, animation, example.variants.length]);
+  const variant = example.variants[frame];
+  if (!variant) return null;
+  return (
+    <div className="family-source-animation">
+      <SpriteStage
+        sprite={variant.sprite}
+        images={images}
+        zoom={2}
+        label={`${example.label} · Frame ${frame + 1}`}
+      />
+      <p className="family-source-label">Source demonstration</p>
+      <fieldset className="family-animation-controls" aria-label={`${example.label} playback`}>
+        <button
+          type="button"
+          onClick={() => {
+            if (!playing && !animation?.loop && frame === example.variants.length - 1) setFrame(0);
+            setPlaying(!playing);
+          }}
+        >
+          {playing ? "Pause" : "Play"}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setPlaying(false);
+            setFrame((current) => (current + 1) % example.variants.length);
+          }}
+        >
+          Next frame
+        </button>
+        <span className="family-animation-frame">
+          Frame {frame + 1} of {example.variants.length}
+        </span>
+      </fieldset>
+    </div>
   );
 }
 

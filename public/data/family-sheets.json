@@ -44,6 +44,26 @@
       "tileSize": 16,
       "fingerprint": "a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f",
       "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "interiors-door-1",
+      "name": "interiors door 1",
+      "image": "assets/semantic-sources/interiors-door-1.png",
+      "width": 80,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+      "source": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png"
+    },
+    {
+      "id": "interiors-door-1-locked",
+      "name": "interiors door 1 locked",
+      "image": "assets/semantic-sources/interiors-door-1-locked.png",
+      "width": 64,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+      "source": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png"
     }
   ],
   "families": [
@@ -7354,7 +7374,4307 @@
         }
       ],
       "revision": "e0c30f0530f49fe6a1ec823b68d806f274a14f0a25c3f2ee620dc3694bc13ea0"
+    },
+    {
+      "id": "room-builder",
+      "name": "Floors and stone arches",
+      "description": "Pale floor pieces and a fixed stone arch.",
+      "status": "proposed",
+      "variantLabel": "Appearance",
+      "variants": [
+        {
+          "id": "original",
+          "label": "Original"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Assembly",
+          "value": "These are pieces to combine, not separate whole objects."
+        },
+        {
+          "label": "Arch",
+          "value": "Six body pieces; ground shadow is optional. Source shadows differ from the master."
+        },
+        {
+          "label": "Limits",
+          "value": "Only the shown arrangements are supported. Other joins and larger inset floors are unknown."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Walkability, collision, arch height and clearance are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "floors",
+          "title": "Floor pieces",
+          "members": [
+            {
+              "id": "RB01-P01",
+              "number": 1,
+              "label": "Fill",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          608,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P02",
+              "number": 2,
+              "label": "Left side",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          736,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P03",
+              "number": 3,
+              "label": "Right side",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          896,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P04",
+              "number": 4,
+              "label": "Inset upper left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1072,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P05",
+              "number": 5,
+              "label": "Inset upper right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1264,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P06",
+              "number": 6,
+              "label": "Inset upper edge",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1456,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P07",
+              "number": 7,
+              "label": "Inset lower left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1088,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P08",
+              "number": 8,
+              "label": "Inset lower right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1280,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P09",
+              "number": 9,
+              "label": "Lower edge",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1472,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P10",
+              "number": 10,
+              "label": "Narrow horizontal section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1104,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P11",
+              "number": 11,
+              "label": "Downward junction \u00b7 left half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          768,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P12",
+              "number": 12,
+              "label": "Outer right bend",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          960,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P13",
+              "number": 13,
+              "label": "Downward junction \u00b7 right half",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1344,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P14",
+              "number": 14,
+              "label": "Shaded upper left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1120,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P15",
+              "number": 15,
+              "label": "Shaded upper right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1312,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P16",
+              "number": 16,
+              "label": "Narrow lower left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          1136,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-P17",
+              "number": 17,
+              "label": "Narrow lower right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Only the arrangements shown below have been checked."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-P17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          944,
+                          8094,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arch-body",
+          "title": "Stone arch body",
+          "members": [
+            {
+              "id": "RB01-A01",
+              "number": 18,
+              "label": "Arch upper left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          2016,
+                          7998,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A02",
+              "number": 19,
+              "label": "Arch upper right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          480,
+                          8014,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A03",
+              "number": 20,
+              "label": "Arch pier middle left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          2032,
+                          7998,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A04",
+              "number": 21,
+              "label": "Arch pier middle right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          496,
+                          8014,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A05",
+              "number": 22,
+              "label": "Arch pier lower left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          0,
+                          8014,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A06",
+              "number": 23,
+              "label": "Arch pier lower right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Six body pieces make a fixed two-column, three-row arch."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          512,
+                          8014,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "arch-shadow",
+          "title": "Optional ground shadow",
+          "members": [
+            {
+              "id": "RB01-A07",
+              "number": 24,
+              "label": "Arch ground shadow left",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Optional strip below the matching lower arch pier."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      8
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          0,
+                          992,
+                          16,
+                          8
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "RB01-A08",
+              "number": 25,
+              "label": "Arch ground shadow right",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone; combine with matching pieces."
+                },
+                {
+                  "label": "Join",
+                  "value": "Optional strip below the matching lower arch pier."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "original",
+                  "label": "Original",
+                  "recordIds": [
+                    "RB01-A08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      8
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "modern-interiors",
+                        "rect": [
+                          16,
+                          992,
+                          16,
+                          8
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "inset-square-native",
+          "label": "Small inset square",
+          "description": "The small closed source motif; larger inset extensions remain unresolved.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P04",
+                "RB01-P05",
+                "RB01-P07",
+                "RB01-P08"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1072,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1264,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1088,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1280,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "shaded-vertical-0-middle-rows",
+          "label": "Short capped floor strip",
+          "description": "A bounded source arrangement; further extension is unproven.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P14",
+                "RB01-P15",
+                "RB01-P16",
+                "RB01-P17"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1120,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1312,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1136,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      944,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "shaded-vertical-1-middle-rows",
+          "label": "Capped floor strip",
+          "description": "A bounded source arrangement; further extension is unproven.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P14",
+                "RB01-P15",
+                "RB01-P02",
+                "RB01-P03",
+                "RB01-P16",
+                "RB01-P17"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1120,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1312,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      736,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      896,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1136,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      944,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "shaded-vertical-2-middle-rows",
+          "label": "Long capped floor strip",
+          "description": "A bounded source arrangement; further extension is unproven.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P14",
+                "RB01-P15",
+                "RB01-P02",
+                "RB01-P03",
+                "RB01-P02",
+                "RB01-P03",
+                "RB01-P16",
+                "RB01-P17"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1120,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1312,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      736,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      896,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      736,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      896,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1136,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      944,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      48
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "stone-arch-body-three-rows",
+          "label": "Stone arch",
+          "description": "Fixed 32 \u00d7 48 body; width and height repetition are unproven.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-A01",
+                "RB01-A02",
+                "RB01-A03",
+                "RB01-A04",
+                "RB01-A05",
+                "RB01-A06"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  48
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      2016,
+                      7998,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      480,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      2032,
+                      7998,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      496,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      0,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      512,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "stone-arch-with-shadow",
+          "label": "Stone arch with ground shadow",
+          "description": "Fixed 32 \u00d7 48 body, with two optional shadow strips below.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-A01",
+                "RB01-A02",
+                "RB01-A03",
+                "RB01-A04",
+                "RB01-A05",
+                "RB01-A06",
+                "RB01-A07",
+                "RB01-A08"
+              ],
+              "sprite": {
+                "size": [
+                  32,
+                  56
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      2016,
+                      7998,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      480,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      2032,
+                      7998,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      496,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      0,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      512,
+                      8014,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      32
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      0,
+                      992,
+                      16,
+                      8
+                    ],
+                    "at": [
+                      0,
+                      48
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      16,
+                      992,
+                      16,
+                      8
+                    ],
+                    "at": [
+                      16,
+                      48
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "L-continuation-window",
+          "label": "L-shaped path section",
+          "description": "Open cuts at the boundary need continuing path pieces; this is a section of a network.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P10",
+                "RB01-P10",
+                "RB01-P11",
+                "RB01-P12",
+                "RB01-P02",
+                "RB01-P03"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1104,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1104,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      768,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      960,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      736,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      896,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      16
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "groupLabel": "Open path sections"
+        },
+        {
+          "id": "T-continuation-window",
+          "label": "T-shaped path section",
+          "description": "Open cuts at the boundary need continuing path pieces; this is a section of a network.",
+          "variants": [
+            {
+              "id": "original",
+              "label": "Original",
+              "recordIds": [
+                "RB01-P10",
+                "RB01-P11",
+                "RB01-P13",
+                "RB01-P10",
+                "RB01-P02",
+                "RB01-P03"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1104,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      768,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1344,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      1104,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      736,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      16,
+                      16
+                    ]
+                  },
+                  {
+                    "sheetId": "modern-interiors",
+                    "rect": [
+                      896,
+                      8094,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "groupLabel": "Open path sections"
+        }
+      ],
+      "sourcePins": [
+        {
+          "id": "modern-interiors",
+          "fingerprint": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+          "width": 2048,
+          "height": 8800
+        }
+      ],
+      "revision": "ea6a039d20fb017dd60ebe33506a835c6ccea6ff7a4dc62a6d729cbfa81f3422"
+    },
+    {
+      "id": "playground-tubes",
+      "name": "Playground tubes",
+      "description": "Bends, straight sections and entrance mouths to combine.",
+      "status": "proposed",
+      "variantLabel": "Color",
+      "variants": [
+        {
+          "id": "ochre",
+          "label": "Ochre"
+        },
+        {
+          "id": "blue",
+          "label": "Blue"
+        },
+        {
+          "id": "red",
+          "label": "Red"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Join",
+          "value": "Continuation cuts need neighbors; entrance mouths are different."
+        },
+        {
+          "label": "Variants",
+          "value": "Only the crossing and two side entrances have blue and red variants. Other pieces stay ochre."
+        },
+        {
+          "label": "Limits",
+          "value": "Only the pictured same-color joins are checked; arbitrary color mixing is unproven."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Traversal, collision, anchors and climbing are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "pieces",
+          "title": "Pieces to combine",
+          "members": [
+            {
+              "id": "E03-01",
+              "number": 1,
+              "label": "Upper-left bend",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the right and bottom."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1152,
+                          16,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-02",
+              "number": 2,
+              "label": "Horizontal straight section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1152,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-03",
+              "number": 3,
+              "label": "Upper-right bend",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and bottom."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1152,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-04",
+              "number": 4,
+              "label": "Vertical straight section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top and bottom."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1184,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-05",
+              "number": 5,
+              "label": "Lower-right bend",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top and left."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1216,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-06",
+              "number": 6,
+              "label": "Horizontal straight section",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Pixels",
+                  "value": "Same pixels as horizontal straight section 2; both source names are retained."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1152,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-07",
+              "number": 7,
+              "label": "Lower-left bend",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1216,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-08",
+              "number": 8,
+              "label": "Vertical straight section \u00b7 alternate shading",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top and bottom."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Pixels",
+                  "value": "Subtle shading differs from the similar-looking counterpart."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1184,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-09",
+              "number": 9,
+              "label": "Down-facing entrance",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1248,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-10",
+              "number": 10,
+              "label": "Down-facing entrance \u00b7 alternate shading",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the top."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Pixels",
+                  "value": "Subtle shading differs from the similar-looking counterpart."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-10"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      16
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1248,
+                          32,
+                          16
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-11",
+              "number": 11,
+              "label": "Horizontal tube with down-facing entrance",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-11"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1248,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-12",
+              "number": 12,
+              "label": "Round-topped vertical end",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the bottom."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "The rounded area may be a closed end or a hidden mouth."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-12"
+                  ],
+                  "sprite": {
+                    "size": [
+                      32,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1280,
+                          32,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-13",
+              "number": 13,
+              "label": "Horizontal tube with upper opening",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-13"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1280,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-14",
+              "number": 14,
+              "label": "Horizontal tube with rounded upper branch",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "The rounded area may be a closed end or a hidden mouth."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-14"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1280,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-15",
+              "number": 15,
+              "label": "Cross-shaped tube with two entrances",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-15"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1328,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E03-20"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2112,
+                          1328,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "red",
+                  "label": "Red",
+                  "recordIds": [
+                    "E03-23"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      48
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2000,
+                          1104,
+                          16,
+                          48
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-16",
+              "number": 16,
+              "label": "Right-facing side entrance",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-16"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1328,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E03-21"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2016,
+                          1120,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "red",
+                  "label": "Red",
+                  "recordIds": [
+                    "E03-24"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2240,
+                          1328,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-17",
+              "number": 17,
+              "label": "Left-facing side entrance",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-17"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1120,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "blue",
+                  "label": "Blue",
+                  "recordIds": [
+                    "E03-22"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2080,
+                          1328,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "red",
+                  "label": "Red",
+                  "recordIds": [
+                    "E03-25"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2176,
+                          1328,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-18",
+              "number": 18,
+              "label": "Horizontal section with right rim",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "The rim\u2019s purpose and compatible joins are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-18"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          2048,
+                          1360,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "id": "E03-19",
+              "number": 19,
+              "label": "Horizontal section with left rim",
+              "kind": "component",
+              "facts": [
+                {
+                  "label": "Use",
+                  "value": "Cannot stand alone."
+                },
+                {
+                  "label": "Join",
+                  "value": "Needs another piece on the left and right."
+                },
+                {
+                  "label": "Padding",
+                  "value": "Joins follow the tube body; transparent padding and overlapping shadows stay intact."
+                },
+                {
+                  "label": "Unknown",
+                  "value": "The rim\u2019s purpose and compatible joins are unknown."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "ochre",
+                  "label": "Ochre",
+                  "recordIds": [
+                    "E03-19"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "me-complete",
+                        "rect": [
+                          1984,
+                          1360,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "straight-two-mouths",
+          "label": "Straight tube with two mouths",
+          "description": "Every continuation cut has a neighbor. Visible mouths stay at the outside; traversal is unknown.",
+          "variants": [
+            {
+              "id": "ochre",
+              "label": "Ochre",
+              "recordIds": [
+                "E03-17",
+                "E03-02",
+                "E03-02",
+                "E03-16"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      1120,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2016,
+                      1152,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2016,
+                      1152,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2048,
+                      1328,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      48,
+                      0
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "cross-four-mouths-ochre",
+          "label": "Four-mouth crossing \u00b7 ochre",
+          "description": "Every continuation cut has a neighbor. Visible mouths stay at the outside; traversal is unknown.",
+          "variants": [
+            {
+              "id": "ochre",
+              "label": "Ochre",
+              "recordIds": [
+                "E03-17",
+                "E03-15",
+                "E03-16"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      1120,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2016,
+                      1328,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2048,
+                      1328,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "u-two-mouths",
+          "label": "U-shaped tube with two mouths",
+          "description": "Every continuation cut has a neighbor. Visible mouths stay at the outside; traversal is unknown.",
+          "variants": [
+            {
+              "id": "ochre",
+              "label": "Ochre",
+              "recordIds": [
+                "E03-01",
+                "E03-02",
+                "E03-03",
+                "E03-08",
+                "E03-04",
+                "E03-10",
+                "E03-09"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      1152,
+                      16,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2016,
+                      1152,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2048,
+                      1152,
+                      32,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      1184,
+                      32,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2048,
+                      1184,
+                      32,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      1984,
+                      1248,
+                      32,
+                      16
+                    ],
+                    "at": [
+                      0,
+                      32
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2048,
+                      1248,
+                      32,
+                      16
+                    ],
+                    "at": [
+                      32,
+                      32
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "cross-four-mouths-blue",
+          "label": "Four-mouth crossing \u00b7 blue",
+          "description": "Every continuation cut has a neighbor. Visible mouths stay at the outside; traversal is unknown.",
+          "variants": [
+            {
+              "id": "blue",
+              "label": "Blue",
+              "recordIds": [
+                "E03-22",
+                "E03-20",
+                "E03-21"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2080,
+                      1328,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2112,
+                      1328,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2016,
+                      1120,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "cross-four-mouths-red",
+          "label": "Four-mouth crossing \u00b7 red",
+          "description": "Every continuation cut has a neighbor. Visible mouths stay at the outside; traversal is unknown.",
+          "variants": [
+            {
+              "id": "red",
+              "label": "Red",
+              "recordIds": [
+                "E03-25",
+                "E03-23",
+                "E03-24"
+              ],
+              "sprite": {
+                "size": [
+                  64,
+                  64
+                ],
+                "layers": [
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2176,
+                      1328,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      16
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2000,
+                      1104,
+                      16,
+                      48
+                    ],
+                    "at": [
+                      16,
+                      0
+                    ],
+                    "blend": "over"
+                  },
+                  {
+                    "sheetId": "me-complete",
+                    "rect": [
+                      2240,
+                      1328,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      32,
+                      16
+                    ],
+                    "blend": "over"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "sourcePins": [
+        {
+          "id": "me-complete",
+          "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+          "width": 2816,
+          "height": 8224
+        }
+      ],
+      "revision": "f30af146aa7f9ccd15544286a2b18e623d240cb54a3165c666e2db76ad651bf0"
+    },
+    {
+      "id": "animated-doors",
+      "name": "Animated doors",
+      "description": "Two source strips of the same brown door.",
+      "status": "proposed",
+      "variantLabel": "Frame",
+      "variants": [
+        {
+          "id": "frame-1",
+          "label": "Frame 1"
+        }
+      ],
+      "facts": [
+        {
+          "label": "Frames",
+          "value": "Five opening frames and four closed-door movement frames; the closed first frame is shared."
+        },
+        {
+          "label": "Playback",
+          "value": "Examples replay the companion GIF demonstrations. Game playback is unknown."
+        },
+        {
+          "label": "Gameplay",
+          "value": "Placement, collision, opening triggers, reverse closing and lock mechanics are unknown."
+        }
+      ],
+      "groups": [
+        {
+          "id": "strips",
+          "title": "Source frame strips",
+          "members": [
+            {
+              "id": "A01:opening",
+              "number": 1,
+              "label": "Door opening frames",
+              "kind": "frame",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Frames of one source strip; these are not spatial assembly pieces."
+                },
+                {
+                  "label": "Use",
+                  "value": "Standalone placement is unknown; the frames grant no placement permission."
+                },
+                {
+                  "label": "Playback",
+                  "value": "Source order and companion GIF timing are demonstration evidence only."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "frame-1",
+                  "label": "Frame 1",
+                  "recordIds": [
+                    "A01-01"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1",
+                        "rect": [
+                          0,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-2",
+                  "label": "Frame 2",
+                  "recordIds": [
+                    "A01-02"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1",
+                        "rect": [
+                          16,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-3",
+                  "label": "Frame 3",
+                  "recordIds": [
+                    "A01-03"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1",
+                        "rect": [
+                          32,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-4",
+                  "label": "Frame 4",
+                  "recordIds": [
+                    "A01-04"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1",
+                        "rect": [
+                          48,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-5",
+                  "label": "Frame 5",
+                  "recordIds": [
+                    "A01-05"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1",
+                        "rect": [
+                          64,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Frame"
+            },
+            {
+              "id": "A01:closed-perturbation",
+              "number": 2,
+              "label": "Closed door movement frames",
+              "kind": "frame",
+              "facts": [
+                {
+                  "label": "Form",
+                  "value": "Frames of one source strip; these are not spatial assembly pieces."
+                },
+                {
+                  "label": "Use",
+                  "value": "Standalone placement is unknown; the frames grant no placement permission."
+                },
+                {
+                  "label": "Playback",
+                  "value": "Source order and companion GIF timing are demonstration evidence only."
+                }
+              ],
+              "variants": [
+                {
+                  "id": "frame-1",
+                  "label": "Frame 1",
+                  "recordIds": [
+                    "A01-06"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1-locked",
+                        "rect": [
+                          0,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-2",
+                  "label": "Frame 2",
+                  "recordIds": [
+                    "A01-07"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1-locked",
+                        "rect": [
+                          16,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-3",
+                  "label": "Frame 3",
+                  "recordIds": [
+                    "A01-08"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1-locked",
+                        "rect": [
+                          32,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "frame-4",
+                  "label": "Frame 4",
+                  "recordIds": [
+                    "A01-09"
+                  ],
+                  "sprite": {
+                    "size": [
+                      16,
+                      32
+                    ],
+                    "layers": [
+                      {
+                        "sheetId": "interiors-door-1-locked",
+                        "rect": [
+                          48,
+                          0,
+                          16,
+                          32
+                        ],
+                        "at": [
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "variantLabel": "Frame"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "id": "A01:opening-demonstration",
+          "groupLabel": "Source demonstrations",
+          "label": "Door opening demonstration",
+          "description": "Repeats the companion GIF in source order. Game timing, triggers and lock mechanics are unknown. The reset to closed is not a closing sequence.",
+          "variants": [
+            {
+              "id": "frame-1",
+              "label": "Frame 1",
+              "recordIds": [
+                "A01-01"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1",
+                    "rect": [
+                      0,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-2",
+              "label": "Frame 2",
+              "recordIds": [
+                "A01-02"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1",
+                    "rect": [
+                      16,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-3",
+              "label": "Frame 3",
+              "recordIds": [
+                "A01-03"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1",
+                    "rect": [
+                      32,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-4",
+              "label": "Frame 4",
+              "recordIds": [
+                "A01-04"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1",
+                    "rect": [
+                      48,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-5",
+              "label": "Frame 5",
+              "recordIds": [
+                "A01-05"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1",
+                    "rect": [
+                      64,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "animation": {
+            "frameDurationsMs": [
+              300,
+              100,
+              100,
+              100,
+              300
+            ],
+            "loop": true
+          }
+        },
+        {
+          "id": "A01:closed-perturbation-demonstration",
+          "groupLabel": "Source demonstrations",
+          "label": "Closed door movement demonstration",
+          "description": "Repeats the companion GIF in source order. Game timing, triggers and lock mechanics are unknown.",
+          "variants": [
+            {
+              "id": "frame-1",
+              "label": "Frame 1",
+              "recordIds": [
+                "A01-06"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1-locked",
+                    "rect": [
+                      0,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-2",
+              "label": "Frame 2",
+              "recordIds": [
+                "A01-07"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1-locked",
+                    "rect": [
+                      16,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-3",
+              "label": "Frame 3",
+              "recordIds": [
+                "A01-08"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1-locked",
+                    "rect": [
+                      32,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "frame-4",
+              "label": "Frame 4",
+              "recordIds": [
+                "A01-09"
+              ],
+              "sprite": {
+                "size": [
+                  16,
+                  32
+                ],
+                "layers": [
+                  {
+                    "sheetId": "interiors-door-1-locked",
+                    "rect": [
+                      48,
+                      0,
+                      16,
+                      32
+                    ],
+                    "at": [
+                      0,
+                      0
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "animation": {
+            "frameDurationsMs": [
+              500,
+              100,
+              100,
+              100
+            ],
+            "loop": true
+          }
+        }
+      ],
+      "sourcePins": [
+        {
+          "id": "interiors-door-1",
+          "fingerprint": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "width": 80,
+          "height": 32
+        },
+        {
+          "id": "interiors-door-1-locked",
+          "fingerprint": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+          "width": 64,
+          "height": 32
+        }
+      ],
+      "revision": "b6049c97c198489e793bf32885dfd7096f6cbb14edf3ed15d6fd132928771d1c"
     }
   ],
-  "revision": "a33f904cbeb7b6720c29810c2153b839a9e5dac118cd0c8e493194a84793a5f7"
+  "revision": "e52e627c6da1ab1691708e5fef012f0af545457688c322df9df191f8113ef132"
 }

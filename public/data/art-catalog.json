@@ -56,6 +56,26 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "interiors-door-1",
+      "name": "interiors door 1",
+      "image": "assets/semantic-sources/interiors-door-1.png",
+      "width": 80,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+      "source": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png"
+    },
+    {
+      "id": "interiors-door-1-locked",
+      "name": "interiors door 1 locked",
+      "image": "assets/semantic-sources/interiors-door-1-locked.png",
+      "width": 64,
+      "height": 32,
+      "tileSize": 16,
+      "fingerprint": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+      "source": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png"
+    },
+    {
       "id": "objects",
       "name": "objects",
       "image": "assets/tilesets/objects.png",

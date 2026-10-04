@@ -315,6 +315,37 @@
   padding-top: 21px;
   border-top: 1px solid var(--family-line);
 }
+.family-examples + .family-examples {
+  margin-top: 24px;
+}
+.family-source-label {
+  font-size: 11px;
+  color: var(--family-muted);
+}
+.family-animation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  margin: 9px 0 0;
+  padding: 0;
+  border: 0;
+}
+.family-animation-controls button {
+  min-height: 37px;
+  padding: 6px 11px;
+  border: 1px solid #536053;
+  border-radius: 5px;
+  background: #2e3c34;
+  color: var(--family-ink);
+  font-size: 12px;
+}
+.family-animation-frame {
+  font-size: 11px;
+  color: var(--family-muted);
+  font-variant-numeric: tabular-nums;
+}
 .family-example-grid {
   display: flex;
   flex-wrap: wrap;

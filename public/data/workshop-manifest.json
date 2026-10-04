@@ -6194,7 +6194,7 @@
       "name": "Wooden cabinets",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=cabinets&revision=ec4ba96c694701c27e14b750e5a446e776c51b1c6a0b0bdc88d39aba170981f3",
-      "fingerprint": "9297116c0799defc6a92c79b1594c1344414b35254647c40f301b8af230efe6f"
+      "fingerprint": "4423085cdce452ae8721472d5ff69f0bdb363f405bda836cf5283845f0012fbe"
     },
     {
       "id": "family:trees",
@@ -6203,7 +6203,7 @@
       "name": "Trees and forest",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=trees&revision=b049e3e9dd662ebe3954a4cf5a59d685ba7c9b4de67e700893dce1c3ad85b930",
-      "fingerprint": "7c9874a73d2af9b3e5bd859d0ac83fc9860dda2fe67fc534bfb3972fab80f677"
+      "fingerprint": "fc06552bc86f8c80b2cddad24acb73bca122d4a5cb5e5525e7f3f8984f322d72"
     },
     {
       "id": "family:scrapyard",
@@ -6212,7 +6212,7 @@
       "name": "Scrapyard and debris",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=scrapyard&revision=042bf1ed4ae154575e948c3697e60b7c9ed09219d9bc7c7eff3d344aba199c90",
-      "fingerprint": "a78e4612f88302efbe401cc3df548be1005bbbb7a6efb61359c5fc5c2199464a"
+      "fingerprint": "3ff19852c4849072c2b897d41cb007fe8d6849de3f398fa05a5237cee84d02ca"
     },
     {
       "id": "family:outdoor-seating",
@@ -6221,7 +6221,7 @@
       "name": "Outdoor seating",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=outdoor-seating&revision=02e667bf94babe9f5b1f9057536a7ccbeae82087484f80af67af51deb2da30bf",
-      "fingerprint": "9eab8ce91df96550e9fefb24516a376447f01034269697f0e1bfa8f29c556699"
+      "fingerprint": "184dcf1044881bdf65715928347f7ac37ac6d9b24cfee9cd805607b89b89f053"
     },
     {
       "id": "family:sofas",
@@ -6230,7 +6230,34 @@
       "name": "Sofas and seats",
       "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
       "url": "/tilefun/workshop.html#/tool/families?family=sofas&revision=e0c30f0530f49fe6a1ec823b68d806f274a14f0a25c3f2ee620dc3694bc13ea0",
-      "fingerprint": "8b5f8cb6b43612950cdbe3cff2108559e8875361d59669db3e3b78c43076b24d"
+      "fingerprint": "498315b6d400eaa9135256584ea1f836f0654aae140df9c0b4cb792d46761c23"
+    },
+    {
+      "id": "family:room-builder",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Floors and stone arches",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=room-builder&revision=ea6a039d20fb017dd60ebe33506a835c6ccea6ff7a4dc62a6d729cbfa81f3422",
+      "fingerprint": "f1d413782cd70911846d1154df8f7a580ba3eea41e5c8aa08fad30ea3d44841a"
+    },
+    {
+      "id": "family:playground-tubes",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Playground tubes",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=playground-tubes&revision=f30af146aa7f9ccd15544286a2b18e623d240cb54a3165c666e2db76ad651bf0",
+      "fingerprint": "76bcd8443d993923e515b38d9da26817e08948da7b1157e16f1d0f1699953d11"
+    },
+    {
+      "id": "family:animated-doors",
+      "batchId": "asset-families",
+      "kind": "family",
+      "name": "Animated doors",
+      "prompt": "Look through the pieces and leave a note about their names or how they fit together.",
+      "url": "/tilefun/workshop.html#/tool/families?family=animated-doors&revision=b6049c97c198489e793bf32885dfd7096f6cbb14edf3ed15d6fd132928771d1c",
+      "fingerprint": "d483511f990cfe4f4b0a75705ba7d488ab2edcad2fda6aaea3ed5da1f0cb12ad"
     },
     {
       "id": "review-0-6ba78e73",

@@ -104,6 +104,8 @@ const imageMap = new Map<string, string>([
   ["modern-interiors", "assets/tilesets/modern-interiors-atlas.png"],
   ["exteriors-bench-5", "assets/semantic-sources/exteriors-bench-5.png"],
   ["exteriors-bench-6", "assets/semantic-sources/exteriors-bench-6.png"],
+  ["interiors-door-1", "assets/semantic-sources/interiors-door-1.png"],
+  ["interiors-door-1-locked", "assets/semantic-sources/interiors-door-1-locked.png"],
   ["objects", "assets/tilesets/objects.png"],
   ["grass", "assets/tilesets/grass.png"],
   ["dirt", "assets/tilesets/dirt.png"],
@@ -154,6 +156,8 @@ const sheets: ArtSheet[] = [...imageMap].map(([id, image]) => {
       index: "data/modern-interiors-atlas.json",
       indexKind: "interiors",
     });
+  if (id === "interiors-door-1" || id === "interiors-door-1-locked")
+    sheet.source = `assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1${id.endsWith("-locked") ? "_locked" : ""}.png`;
   return sheet;
 });
 const aliases = new Map([

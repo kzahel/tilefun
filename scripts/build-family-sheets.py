@@ -15,9 +15,11 @@ Proposal/review pins remain here, outside the plain-language browsing artifact.
 import argparse
 from collections import Counter
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import sys
+from types import SimpleNamespace
 
 from PIL import Image
 
@@ -534,11 +536,14 @@ def build():
     require(topology['evidence']['agentEvidence']['reviewSha256'] == PINS['P03-cabinets-review.md'],
             'Topology review mismatch')
     sheets = {row['id']: row for row in load(ROOT / 'public/data/art-catalog.json')['sheets']}
-    sources = [sheets[key] for key in ('me-complete', 'modern-interiors', 'exteriors-bench-5', 'exteriors-bench-6')]
+    sources = [sheets[key] for key in ('me-complete', 'modern-interiors', 'exteriors-bench-5', 'exteriors-bench-6',
+                                      'interiors-door-1', 'interiors-door-1-locked')]
     pins = {'me-complete': trees['source']['sha256'],
             'modern-interiors': cabinets['measurements']['sources']['packedAtlas']['sha256'],
             'exteriors-bench-5': 'a20540ddc069f247d4ea6550deba55d4e69a44d3e57a0636d04b155ad08c33fa',
-            'exteriors-bench-6': 'a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f'}
+            'exteriors-bench-6': 'a009c6d2666cf55b4f05a1b8307f84d147f3434aba2ccfc956ce7a46ee63f74f',
+            'interiors-door-1': 'dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165',
+            'interiors-door-1-locked': 'dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9'}
     require(scrapyard['source']['sha256'] == pins['me-complete'], 'Exteriors proposal source mismatch')
     images = {}
     for sheet in sources:
@@ -552,18 +557,26 @@ def build():
     families = [build_cabinets(cabinets, topology, images, sheets), build_trees(trees, sheets),
                 build_scrapyard(scrapyard, images, sheets), build_seating(seating, images, sheets),
                 build_sofas(sofas, images, sheets)]
+    spec = importlib.util.spec_from_file_location('family_expansion', ROOT / 'scripts/build-family-expansion.py')
+    expansion = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(expansion)
+    families.extend(expansion.build_expansion(SimpleNamespace(**globals()), images, sheets))
     expected = {'cabinets': [row['id'] for row in cabinets['measurements']['records']],
                 'trees': [row['id'] for row in trees['candidates']],
                 'scrapyard': [row['id'] for row in scrapyard['candidates']],
                 'outdoor-seating': [row['id'] for row in seating['candidates']],
                 'sofas': [row['id'] for row in sofas['candidates']]}
+    for family_id, packet_file in [('room-builder', 'RB01-room-builder-path-arch.json'),
+                                   ('playground-tubes', 'E03-playground-tubes.json'),
+                                   ('animated-doors', 'A01-animation.json')]:
+        expected[family_id] = [row['id'] for row in load(PACKETS / packet_file)['candidates']]
     for item in families:
         records = [r for g in item['groups'] for m in g['members'] for v in m['variants'] for r in v['recordIds']]
         require(Counter(records) == Counter(expected[item['id']]), f"Incomplete or duplicated coverage: {item['id']}")
         for entry in [m for g in item['groups'] for m in g['members']] + item['examples']:
             for value in entry['variants']:
                 render(value['sprite'], images)
-    require(sum(map(len, expected.values())) == 132, 'Unexpected source record count')
+    require(sum(map(len, expected.values())) == 191, 'Unexpected source record count')
     result = {'version': 1, 'sources': sources, 'families': families}
     result['revision'] = revision(result)
     return result
