@@ -58,6 +58,8 @@
         "public/data/outdoor-catalog.json",
         "public/data/family-sheets.json",
         "docs/tactical/053-semantic-tileset-map/source-manifest.json",
+        "docs/tactical/053-semantic-tileset-map/semantic-model.json",
+        "docs/tactical/053-semantic-tileset-map/coverage-ledger.json",
         "docs/tactical/053-semantic-tileset-map/packets/*.json",
         "src/assets/outdoor/outdoor-runtime-v1.json",
         "src/art/city-review-snapshots-v1.json"

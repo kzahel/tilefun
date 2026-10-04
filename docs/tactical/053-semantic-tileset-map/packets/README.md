@@ -40,5 +40,5 @@ to the frozen snapshots while preserving each reviewed JSON hash.
 The [P03 topology supplement](P03-cabinets-topology.json) adds the owner's explicit
 non-standalone rule for all 12 records of cabinet components 41–44, with required
 connections and assembly completeness. These constraints are saved metadata;
-validator and runtime enforcement remain pending. This clarification is not a
+the shared validator enforces these chains; runtime enforcement remains pending. This clarification is not a
 registered approval of every rendered combination or of gameplay geometry.

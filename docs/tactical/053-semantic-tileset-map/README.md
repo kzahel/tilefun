@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: three family contact sheets implemented and validated; owner discussion is next.
+Status: three pilot sheets and approved forest examples delivered; shared model and coverage ledger checked; next themes in progress.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors
@@ -216,6 +216,16 @@ evidence, reconcile stale assignments with saved artifacts, and pick the first
 unblocked queue item. Update the queue and link findings before ending a work session.
 
 ## Investigation tools
+
+- `python3 scripts/semantic-map-model.py --check` validates the normalized pilot
+  model, exact source lineage and review applicability; `--committed-only` permits
+  missing ignored originals but reports that limitation. See the
+  [model note](notes/2026-10-04-semantic-model.md) and
+  [independent review](notes/2026-10-04-semantic-model-review.md).
+- `python3 scripts/semantic-map-coverage.py --check` reproduces the complete
+  assignment ledger from committed evidence. The separate mapping registry is
+  its extensible input; registration alone earns no semantic completion credit.
+
 
 These are offline evidence tools; they do not repack assets or change gameplay.
 Use Python 3 with Pillow for image inspection and full inventory validation.

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Assignments and exact future packet references. Registration alone earns no semantic coverage credit; root reconciliation owns normalization.",
+  "registrations": [
+    {
+      "packetId": "E01-outdoor-seating",
+      "assignmentState": "investigating",
+      "owner": "semantic_next_themes",
+      "taskDescriptor": "Bounded outdoor seating: City Props Bench 1\u20137, Camping Chair 1\u201316, Camping Benched Table 1\u20134 (27 exports planned). Independent review pending; source/record references await frozen packet.",
+      "regionIds": [
+        "S02-exteriors/E01",
+        "S02-exteriors/E05",
+        "S02-exteriors/E03",
+        "S02-exteriors/E35"
+      ],
+      "sourceGroupIds": ["exteriors-complete-singles", "exteriors-theme-singles"],
+      "proposal": null,
+      "independentReview": null,
+      "memberRecords": [],
+      "sourceRefs": [],
+      "contextWindows": [[32, 128, 176, 464], [1808, 32, 320, 384], [2672, 5280, 144, 160]]
+    }
+  ]
+}

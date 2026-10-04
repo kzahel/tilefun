@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: three pilot sheets delivered; varied-offset forest examples owner-approved; integration next.
+Status: approved forest examples integrated; shared semantic validator and coverage ledger checked; next themes in progress.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -98,12 +98,26 @@ incorrect dark background in the F05 probe; all three centers share the sampled
 base ground color `#479757`. Vertically overlapping rows need varied horizontal
 phases to avoid obvious columns. The [phase probe](../../scripts/semantic-forest-repeat-probe.mjs)
 compares aligned, alternating and varied offsets; boundary rules remain unresolved.
-The approved examples are queued for sheet integration; the current catalog still
-shows the earlier Proposed metadata.
+The approved examples and corrected tree-base relationships are now integrated in
+the sheet; [delivery and validation](../tactical/053-semantic-tileset-map/notes/2026-10-04-tree-sheet-integration.md)
+record the exact revision. The family metadata remains Proposed.
 
-Next: integrate the approved varied-offset forest examples and tree-base relationships,
-then extend V01 beyond the presentation
-adapter to the full source/relationship/review schema before expanding themes. Its
-[criteria](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice)
-cover exact source references, all occurrences, compositions, derived variants and
-review applicability. The user authorized reasonable checkpoint commits.
+The [normalized semantic model](../tactical/053-semantic-tileset-map/semantic-model.json)
+now covers all 85 pilot records with separate source, semantic, relation and review
+views. Its [independent audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-semantic-model-review.md)
+checks exact pixels, missing-source mode, stale reviews and arbitrary cabinet
+chains. Topology validation does not grant visual or gameplay approval.
+
+The [coverage ledger](../tactical/053-semantic-tileset-map/coverage-ledger.json)
+accounts for 163 survey windows and all 18 source-inventory groups, distinguishing
+survey, investigation, review, feedback and bounded acceptance. Every window still
+contains unassigned semantics; no percentage of semantic completion is claimed.
+The separate [mapping registry](../tactical/053-semantic-tileset-map/mapping-registry.json)
+tracks assignments and exact proposal/review references without automatically
+crediting unrecognized packet formats.
+
+Next: independently review and normalize outdoor seating E01, deliver its quiet
+contact sheet, and continue the bounded Interiors sofa/component packet I01.
+Retain two original-only bench exports rather than inventing master-sheet crops.
+The user authorized reasonable checkpoint commits. The broader plan remains active;
+these records cover a small part of the entire packs.
