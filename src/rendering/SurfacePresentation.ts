@@ -38,7 +38,7 @@ export function surfaceShadowZ(
  * A sprite can overlap the ramp before its smaller feet collider does. Comparing
  * those feet to the distant high end would briefly misclassify the low entrance.
  */
-function nearbySurfaceTop(patch: SurfacePatch, bounds: AABB, feet: AABB): number {
+export function nearbySurfaceTop(patch: SurfacePatch, bounds: AABB, feet: AABB): number {
   const x = Math.max(
     bounds.left,
     Math.min(bounds.right, patch.riseX >= 0 ? feet.right : feet.left),
@@ -112,14 +112,15 @@ export function collectSurfacePresentation(
   props: readonly Prop[],
   observer: Entity,
   mode: SurfaceVisibility,
-  phase: "below" | "above",
+  phase: "below" | "above" | "all",
   alpha = 1,
+  onlyId?: string,
 ) {
   for (const prop of props) {
     if (!prop.collider?.surface && !prop.walls?.some((c) => c.surface)) continue;
     for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
       const patch = c.surface;
-      if (!patch) continue;
+      if (!patch || (onlyId && patch.id !== onlyId)) continue;
       const bounds = getEntityAABB(prop.position, c);
       if (mode === "auto" && patch.excavation?.ceilingId) {
         const roofProp = props.find((p) =>
@@ -149,7 +150,7 @@ export function collectSurfacePresentation(
           continue;
       }
       const { visible, above } = surfacePresentationState(patch, bounds, observer, mode, alpha);
-      if ((phase === "above") !== (visible && above)) continue;
+      if (phase !== "all" && (phase === "above") !== (visible && above)) continue;
       const { sx, sy } = projectWorld(camera, bounds.left, bounds.top);
       if (!visible) {
         frame.rect(sx, sy, c.width * camera.scale, c.height * camera.scale, "", "#748b8d");

@@ -7,8 +7,14 @@ import { RoadType } from "../road/RoadType.js";
 import type { InterestTicket } from "../server/InterestManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
-import type { RailLine, RailwayPlanner } from "./RailwayPlanner.js";
+import type { RailLine } from "./RailwayPlanner.js";
 import { createTrain, TRAIN_LENGTH } from "./Train.js";
+
+/** Straight horizontal route in tile coordinates, independent of town planning. */
+export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end">;
+export interface RailRouteSource {
+  query(bounds: { minX: number; maxX: number; minY: number; maxY: number }): RailRoute[];
+}
 
 export interface RailServiceRecord {
   version: 1;
@@ -18,7 +24,7 @@ export interface RailServiceRecord {
   deleted: boolean;
 }
 export interface RailService {
-  line: RailLine;
+  line: RailRoute;
   entity: Entity;
   record: RailServiceRecord;
   speed: number;
@@ -36,7 +42,7 @@ export class RailwaySystem {
   private closed = false;
   error: unknown;
   constructor(
-    readonly planner: RailwayPlanner,
+    readonly planner: RailRouteSource,
     readonly world: World,
     readonly entities: EntityManager,
     readonly props: PropManager,
@@ -63,7 +69,7 @@ export class RailwaySystem {
   }
   update(players: readonly Entity[]): void {
     if (this.closed) return;
-    const nearby = new Map<string, RailLine>();
+    const nearby = new Map<string, RailRoute>();
     for (const p of players) {
       const x = p.position.wx / 16,
         y = p.position.wy / 16;
@@ -116,7 +122,7 @@ export class RailwaySystem {
         this.pending.set(s.line.id, task);
       }
   }
-  private async load(line: RailLine) {
+  private async load(line: RailRoute) {
     const saved = (await this.saves.store.get("railServices", line.id)) as
       | RailServiceRecord
       | undefined;
@@ -232,6 +238,7 @@ export class RailwaySystem {
             other.collider &&
             other.collider.solid !== false &&
             (other.wz ?? 0) < 44 &&
+            (other.wz ?? 0) + (other.collider.physicalHeight ?? Infinity) > 0 &&
             aabbsOverlap(swept, getEntityAABB(other.position, other.collider))
           )
             blocked = true;

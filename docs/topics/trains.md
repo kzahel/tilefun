@@ -150,3 +150,8 @@ of constrained surface/sector representation. General solid-volume authoring is
 not a settled requirement. Resolve that shared model before selecting the next
 bridge/tunnel implementation; railway-specific structure hacks are not the next
 step. Station information and boarding remain independent railway follow-ons.
+
+The subsequent [road-over-rail engine proof](../tactical/058-road-rail-crossing-proof.md)
+uses the actual horizontal service below a walkable road deck. It validates
+clearance and stacked actor ordering without changing regional generation or
+claiming train grades, curved-carriage art or an approved bridge kit.

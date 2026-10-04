@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: shared ramp/deck proof and bounded underground garage implemented; broader terrain authoring and interior integration remain open.
+Status: deck and garage proofs accepted; road-over-rail crossing implemented for review. Broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -172,6 +172,18 @@ navigation graph yet. The schematic cutaway and manual level views remain
 presentation-only. Tile solid/water flags, NPC routes, train grades, world
 generation and indoor realms are unchanged.
 
+## Road/rail crossing proof
+
+The user accepted the garage on 2026-10-04 and authorized a crossing proof.
+[Open the road bridge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=crossing#/tool/world-geometry).
+[Tactical 058](../tactical/058-road-rail-crossing-proof.md) records the bounded scope:
+continuous north/south road approaches above the production horizontal train
+service. Clearance, two-height collision, persistence and per-actor slab ordering
+are exercised together. The train stays on level track; train grades, road vehicle
+routes and generated structures are not yet integrated. Both game and lab now
+order sprites against slabs using each actor's height, while the observer still
+controls cutaway visibility. Arbitrary intersecting surfaces remain unsupported.
+
 ## Prior art informing the direction
 
 - [OpenTTD's landscape implementation](https://docs.openttd.org/source/d0/d94/landscape_8cpp)
@@ -239,9 +251,9 @@ with continuous connected spaces remains open. No realm migration is selected.
 
 ## Next step and evaluation
 
-Review the garage's continuous descent, headroom, solid perimeter, space identity
-and save/reload alongside the retained raised-deck fixture. A road/rail crossing
-is the next potential consumer once these contracts are accepted. Connected indoor
+Review the moving train beneath the road bridge, continuous road approaches,
+clearance, per-actor ordering and save/reload. The garage and deck remain regression
+fixtures. Next consider shared vehicle grade support and per-carriage rail poses. Connected indoor
 levels still need an explicit design against existing realm boundaries before
 migrating interiors or committing a durable terrain-authoring format.
 

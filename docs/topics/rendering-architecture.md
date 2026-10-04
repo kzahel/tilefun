@@ -30,8 +30,10 @@ presentation should derive observer-specific visibility from physical space and
 connection data; backends consume that result. Visibility selection must not
 change simulation or collision. `SurfacePresentation` now supplies a bounded
 schematic slab view and whole-patch cutaway, shared by outdoor game rendering and
-the scenario host. General sector visibility and indoor transitions remain future
-work; the first observer-relative passes do not solve arbitrary multi-actor depth.
+the scenario host. `presentSurfaceScene` now orders individual sprites against
+overlapping slabs at their own heights, so a lower train remains below a bridge
+when the observer stands on it. General sector visibility, indoor transitions,
+intersecting surfaces and arbitrary mesh/particle depth remain future work.
 
 ```text
 Worker simulation → replicated world + client prediction

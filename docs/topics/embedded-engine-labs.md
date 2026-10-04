@@ -136,6 +136,11 @@ and shadows, and derived floor/ceiling space identity. It retains the same Realm
 Worker and predictor during street-to-garage traversal; no indoor realm switch or
 lab-only collision path is involved.
 
+The [road/rail crossing](../tactical/058-road-rail-crossing-proof.md) supplies authored
+route data to Realm's production railway service. `presentSurfaceScene` is shared
+by outdoor gameplay and scenario presentation: each actor's height determines
+its ordering against slabs; observer height controls only visibility.
+
 No identified interactive consumer remains to migrate in this plan. Static diagrams,
 source experiments and frozen approval renders intentionally retain diagnostic/reference
 adapters; they do not claim full gameplay parity. Shared hosting establishes ownership

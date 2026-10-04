@@ -76,7 +76,7 @@ import { createMovementContext, createSurfaceSampler } from "../physics/Simulati
 import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
-import { RailwaySystem } from "../railway/RailwaySystem.js";
+import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
@@ -118,6 +118,8 @@ export interface RealmOptions {
   physics?: () => import("../physics/PlayerMovement.js").MovementPhysicsParams;
   random?: () => number;
   ambientSpawns?: boolean;
+  /** Explicit route source for authored infrastructure/scenarios. */
+  railways?: RailRouteSource;
 }
 
 export class Realm {
@@ -1484,16 +1486,20 @@ export class Realm {
       trafficRecords,
     );
 
-    this.railway =
-      this.generator.terrain instanceof RailwayStrategy
-        ? new RailwaySystem(
-            this.generator.terrain.railways,
-            this.world,
-            this.entityManager,
-            this.propManager,
-            this.saveManager,
-          )
-        : null;
+    const railwayRoutes =
+      this.options.railways ??
+      (this.generator.terrain instanceof RailwayStrategy
+        ? this.generator.terrain.railways
+        : undefined);
+    this.railway = railwayRoutes
+      ? new RailwaySystem(
+          railwayRoutes,
+          this.world,
+          this.entityManager,
+          this.propManager,
+          this.saveManager,
+        )
+      : null;
     if (this.traffic)
       this.traffic.canSpawn = (id, wx, wy) =>
         !this.records?.features.has(id) &&

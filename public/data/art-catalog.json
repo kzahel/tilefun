@@ -21611,11 +21611,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:48"
+          "source": "src/scenarios/ScenarioSession.ts:49"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:103"
+          "source": "src/scenarios/ScenarioSession.ts:126"
         },
         {
           "system": "Gameplay",
@@ -21635,11 +21635,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1102"
+          "source": "src/server/Realm.ts:1104"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2032"
+          "source": "src/server/Realm.ts:2038"
         },
         {
           "system": "Gameplay",
@@ -23571,11 +23571,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:259"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:244"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:64"
+          "source": "src/scenes/renderWorld.ts:63"
         }
       ]
     },

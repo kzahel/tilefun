@@ -5,16 +5,27 @@ import queries from "../physics/SimulationEnvironment.ts?raw";
 import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
 import excavation from "../physics/TerrainExcavation.ts?raw";
+import railway from "../railway/RailwaySystem.ts?raw";
+import ordering from "../rendering/presentSurfaceScene.ts?raw";
 import presentation from "../rendering/SurfacePresentation.ts?raw";
+import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
-export async function buildWorldGeometryCandidate(garage = false): Promise<WorkshopCandidate> {
+export async function buildWorldGeometryCandidate(
+  fixture: "deck" | "garage" | "crossing" = "deck",
+): Promise<WorkshopCandidate> {
+  const garage = fixture === "garage",
+    crossing = fixture === "crossing";
   const fingerprint = await sha256(
     new TextEncoder().encode(
       JSON.stringify({
-        recipe: garage ? undergroundGarageRecipe() : worldGeometryRecipe(),
+        recipe: crossing
+          ? railCrossingRecipe()
+          : garage
+            ? undergroundGarageRecipe()
+            : worldGeometryRecipe(),
         ...(garage ? { excavation } : {}),
         collision,
         movement,
@@ -22,22 +33,34 @@ export async function buildWorldGeometryCandidate(garage = false): Promise<Works
         support,
         geometry,
         presentation,
+        ordering,
+        ...(crossing ? { railway } : {}),
       }),
     ),
   );
   return {
-    id: garage ? "geometry:underground-garage-v1" : "geometry:deck-ramp-v1",
+    id: crossing
+      ? "geometry:rail-crossing-v1"
+      : garage
+        ? "geometry:underground-garage-v1"
+        : "geometry:deck-ramp-v1",
     batchId: "world-geometry",
     kind: "geometry",
-    name: garage
-      ? "Underground garage, entrance and usable street"
-      : "Ramp, raised deck and lower passage",
-    prompt: garage
-      ? "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload."
-      : "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
-    url: garage
-      ? "/tilefun/workshop.html?geometry=garage#/tool/world-geometry"
-      : "/tilefun/workshop.html#/tool/world-geometry",
+    name: crossing
+      ? "Road bridge over a moving train"
+      : garage
+        ? "Underground garage, entrance and usable street"
+        : "Ramp, raised deck and lower passage",
+    prompt: crossing
+      ? "Walk both road approaches while the production train service passes beneath; inspect clearance, ordering and save/reload. Schematic engine proof."
+      : garage
+        ? "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload."
+        : "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
+    url: crossing
+      ? "/tilefun/workshop.html?geometry=crossing#/tool/world-geometry"
+      : garage
+        ? "/tilefun/workshop.html?geometry=garage#/tool/world-geometry"
+        : "/tilefun/workshop.html#/tool/world-geometry",
     fingerprint,
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",
   };

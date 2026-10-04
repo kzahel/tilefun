@@ -6,6 +6,7 @@ import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
+import { RoadType } from "../road/RoadType.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import {
@@ -47,6 +48,14 @@ export class ScenarioSession {
       throw new Error("Invalid surface connections");
     if (recipe.actors?.some((e) => e.type === "player"))
       throw new Error("Use recipe.player for the controlled actor");
+    for (const line of recipe.railways ?? [])
+      if (
+        !line.id ||
+        ![line.start, line.end, line.y].every(Number.isSafeInteger) ||
+        line.end <= line.start ||
+        line.end - line.start > 256
+      )
+        throw new Error("Invalid scenario railway");
     this.physics = scenarioPhysics(recipe.physics);
     this.randomState = recipe.generation.seed;
   }
@@ -87,6 +96,20 @@ export class ScenarioSession {
     this.realm = new Realm([baseGameMod], {
       physics: () => this.physics,
       ambientSpawns: false,
+      ...(this.recipe.railways
+        ? {
+            railways: {
+              query: (b) =>
+                this.recipe.railways?.filter(
+                  (line) =>
+                    line.start <= b.maxX &&
+                    line.end >= b.minX &&
+                    line.y >= b.minY &&
+                    line.y <= b.maxY,
+                ) ?? [],
+            },
+          }
+        : {}),
       definitions: new Map(this.recipe.props.map((p) => [p.type, p])),
       random: () => {
         this.randomState = (Math.imul(this.randomState, 1664525) + 1013904223) >>> 0;
@@ -108,6 +131,31 @@ export class ScenarioSession {
     applyScenarioAppearance(this.player.player, this.recipe.player);
     await this.ready();
     if (fresh) {
+      // Seed the entire bounded track once; saved chunk edits own it thereafter.
+      for (const line of this.recipe.railways ?? []) {
+        const minX = line.start - 16,
+          maxX = line.end + 16;
+        const range = {
+          minCx: Math.floor(minX / 16),
+          maxCx: Math.floor(maxX / 16),
+          minCy: Math.floor((line.y - 1) / 16),
+          maxCy: Math.floor(line.y / 16),
+        };
+        await this.ready(range);
+        for (let tx = minX; tx <= maxX; tx++)
+          for (const ty of [line.y - 1, line.y]) {
+            const cx = Math.floor(tx / 16),
+              cy = Math.floor(ty / 16);
+            const chunk = this.realm.world.getChunkIfLoaded(cx, cy);
+            if (!chunk) throw new Error("Scenario track is not ready");
+            chunk.setRoad(
+              ((tx % 16) + 16) % 16,
+              ((ty % 16) + 16) % 16,
+              ty < line.y ? RoadType.RailHorizontalTop : RoadType.RailHorizontalBottom,
+            );
+            this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
+          }
+      }
       for (const prop of this.recipe.props) this.realm.propManager.add(structuredClone(prop));
       for (const actor of this.recipe.actors ?? [])
         this.realm.entityManager.spawn(structuredClone(actor));

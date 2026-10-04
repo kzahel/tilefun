@@ -5,6 +5,7 @@ import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
+import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
@@ -12,10 +13,11 @@ import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometry
 export default function WorldGeometryPage() {
   const canvas = useRef<HTMLCanvasElement>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
-  const [fixture, setFixture] = useState(() =>
-    new URLSearchParams(location.search).get("geometry") === "garage" ? "garage" : "deck",
+  const [fixture, setFixture] = useState(
+    () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
-  const garage = fixture === "garage";
+  const garage = fixture === "garage",
+    crossing = fixture === "crossing";
   const keys = useRef(new Set<string>());
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0);
@@ -34,16 +36,16 @@ export default function WorldGeometryPage() {
     keys.current.clear();
     const host = new ScenarioPresentationHost(
       c,
-      garage ? undergroundGarageRecipe() : worldGeometryRecipe(),
+      crossing ? railCrossingRecipe() : garage ? undergroundGarageRecipe() : worldGeometryRecipe(),
       {
         width: 960,
-        height: 640,
-        fixedCamera: { wx: -16, wy: -16 },
+        height: crossing ? 720 : 640,
+        fixedCamera: { wx: crossing ? 0 : -16, wy: -16 },
         terrain: false,
         surfaceVisibility: () => settings.current.visibility,
         settings: () => ({
           paused: settings.current.paused,
-          zoom: 0.625,
+          zoom: crossing ? 0.225 : 0.625,
           terrainPacing: "throughput",
         }),
         input: () => ({
@@ -58,6 +60,20 @@ export default function WorldGeometryPage() {
         }),
         underlay: (frame, h) => {
           const scale = h.camera.scale;
+          if (crossing) {
+            const a = h.camera.worldToScreen(-672, -400);
+            frame.rect(a.sx, a.sy, 1344 * scale, 800 * scale, "#edf1e8", "#7f928d");
+            for (let x = -640; x <= 640; x += 16) {
+              const p = h.camera.worldToScreen(x, -12);
+              frame.rect(p.sx, p.sy, 4 * scale, 24 * scale, "#9e8c70");
+            }
+            for (const y of [-8, 8]) {
+              const p = h.camera.worldToScreen(-640, y),
+                q = h.camera.worldToScreen(640, y);
+              frame.line(p.sx, p.sy, q.sx, q.sy, "#47595f");
+            }
+            return;
+          }
           const a = h.camera.worldToScreen(-256, -144);
           frame.rect(a.sx, a.sy, 480 * scale, 288 * scale, "#edf1e8", "#7f928d");
           for (let x = -256; x <= 224; x += 16) {
@@ -82,16 +98,18 @@ export default function WorldGeometryPage() {
         },
         overlay: (frame) => {
           frame.label(
-            garage ? "STREET → GARAGE" : "RAMP → DECK",
+            crossing ? "ROAD OVER RAIL" : garage ? "STREET → GARAGE" : "RAMP → DECK",
             35,
             38,
             "#253b42",
             "bold 16px sans-serif",
           );
           frame.label(
-            garage
-              ? "Walk right to descend · floor −48 · street 0"
-              : "Passage below runs north / south",
+            crossing
+              ? "Road 64 · train 0 · clearance 56 · train height 44"
+              : garage
+                ? "Walk right to descend · floor −48 · street 0"
+                : "Passage below runs north / south",
             35,
             62,
             "#435a60",
@@ -111,7 +129,12 @@ export default function WorldGeometryPage() {
             h.session.view.serverPlayerEntity,
           );
           c.dataset.visibility = settings.current.visibility;
-          const next = `Height ${(player.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space} · ${settings.current.visibility} view`;
+          const train = h.session.view.entities.find((e) => e.type === "train-local-v1");
+          if (train) {
+            c.dataset.trainX = String(train.position.wx);
+            c.dataset.trainZ = String(train.wz ?? 0);
+          }
+          const next = `Height ${(player.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space} · ${settings.current.visibility} view${train ? ` · train ${Math.round(train.position.wx)} (stops 8s at each end)` : ""}`;
           if (next !== lastStatus && alive) {
             lastStatus = next;
             setStatus(next);
@@ -141,7 +164,7 @@ export default function WorldGeometryPage() {
       keys.current.clear();
       window.removeEventListener("blur", release);
     };
-  }, [restart, garage]);
+  }, [restart, garage, crossing]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       // Keep a held control from starting selection or stealing canvas focus.
@@ -158,9 +181,11 @@ export default function WorldGeometryPage() {
       <p className="eyebrow">ENGINE PROOF / SCHEMATIC GEOMETRY</p>
       <h1>World geometry lab</h1>
       <p>
-        {garage
-          ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
-          : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
+        {crossing
+          ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
+          : garage
+            ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
+            : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
         Arrows/WASD move; Space jumps.
       </p>
       <p>
@@ -182,25 +207,28 @@ export default function WorldGeometryPage() {
         >
           <option value="deck">Raised deck and passage</option>
           <option value="garage">Underground parking garage</option>
+          <option value="crossing">Road bridge over railway</option>
         </select>
       </label>
       <div className="actions geometry-controls">
-        {Object.entries(garage ? GARAGE_STARTS : GEOMETRY_STARTS).map(([name, start]) => (
-          <button
-            onContextMenu={(e) => e.preventDefault()}
-            type="button"
-            key={name}
-            onClick={() => {
-              keys.current.clear();
-              void scene.current
-                ?.command({ kind: "teleport", ...start })
-                .catch((e) => setError(String(e)));
-              canvas.current?.focus();
-            }}
-          >
-            Start at {name}
-          </button>
-        ))}
+        {Object.entries(crossing ? CROSSING_STARTS : garage ? GARAGE_STARTS : GEOMETRY_STARTS).map(
+          ([name, start]) => (
+            <button
+              onContextMenu={(e) => e.preventDefault()}
+              type="button"
+              key={name}
+              onClick={() => {
+                keys.current.clear();
+                void scene.current
+                  ?.command({ kind: "teleport", ...start })
+                  .catch((e) => setError(String(e)));
+                canvas.current?.focus();
+              }}
+            >
+              Start at {name}
+            </button>
+          ),
+        )}
         <button
           onContextMenu={(e) => e.preventDefault()}
           type="button"
@@ -248,7 +276,7 @@ export default function WorldGeometryPage() {
           key={`${fixture}-${restart}`}
           ref={canvas}
           width={960}
-          height={640}
+          height={crossing ? 720 : 640}
           aria-label="World geometry scene"
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none" }}

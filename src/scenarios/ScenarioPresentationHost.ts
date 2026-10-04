@@ -16,14 +16,11 @@ import {
   followPlayer,
 } from "../rendering/PlayerPresentation.js";
 import type { TerrainPacing } from "../rendering/PresentationSettings.js";
-import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
-import {
-  collectSurfacePresentation,
-  type SurfaceVisibility,
-} from "../rendering/SurfacePresentation.js";
+import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ScenarioClient } from "./ScenarioClient.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
@@ -233,18 +230,6 @@ export class ScenarioPresentationHost {
           this.options.settings().terrainPacing,
         );
       this.drawOverlay(this.options.underlay);
-      if (!this.options.interior)
-        this.drawOverlay((frame) =>
-          collectSurfacePresentation(
-            frame,
-            this.camera,
-            view.props,
-            view.playerEntity,
-            this.options.surfaceVisibility?.() ?? "auto",
-            "below",
-            this.alpha,
-          ),
-        );
       const items = collectScene(
         entities,
         view.props,
@@ -265,23 +250,16 @@ export class ScenarioPresentationHost {
       if (interior)
         presentInterior(renderer, this.camera, interior.presentation, interior.placements, items);
       else
-        renderer.submit(this.camera, {
-          kind: "scene",
+        presentSurfaceScene(
+          renderer,
+          this.camera,
+          this.frame,
           items,
-          order: collectSceneOrder(items, this.frame.drawOrder),
-          pixelExactShadows: this.options.pixelExactShadows ?? false,
-        });
-      if (!this.options.interior)
-        this.drawOverlay((frame) =>
-          collectSurfacePresentation(
-            frame,
-            this.camera,
-            view.props,
-            view.playerEntity,
-            this.options.surfaceVisibility?.() ?? "auto",
-            "above",
-            this.alpha,
-          ),
+          view.props,
+          view.playerEntity,
+          this.options.surfaceVisibility?.() ?? "auto",
+          this.alpha,
+          this.options.pixelExactShadows ?? false,
         );
       this.drawOverlay(this.options.overlay);
       this.options.uiOverlay?.(this.host.uiContext, this);

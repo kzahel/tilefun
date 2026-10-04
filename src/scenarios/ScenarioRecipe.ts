@@ -2,6 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { getMovementPhysicsParams, type MovementPhysicsParams } from "../physics/PlayerMovement.js";
+import type { RailRoute } from "../railway/RailwaySystem.js";
 
 /** Data only: the Realm owns all updates, collisions, AI and persistence. */
 export interface ScenarioRecipe {
@@ -11,6 +12,8 @@ export interface ScenarioRecipe {
   player: Entity;
   props: Prop[];
   actors?: Entity[];
+  /** Authored straight tracks, served by the production RailwaySystem. */
+  railways?: RailRoute[];
   physics?: Partial<MovementPhysicsParams>;
   traffic?: {
     model: string;

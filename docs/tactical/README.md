@@ -99,6 +99,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [057 Underground garage proof](057-underground-garage-proof.md) | Bounded terrain opening, descending ramp, covered floor and derived space identity; [world geometry](../topics/world-geometry.md) |
 
+| [058 Road/rail crossing proof](058-road-rail-crossing-proof.md) | Walkable road approaches over a production train service; [world geometry](../topics/world-geometry.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in
