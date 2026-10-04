@@ -315,3 +315,25 @@ Eight-second stages are broad coverage; use longer runs for infrequent hitches.
 Raw per-run reports/logs can contain local world IDs; only `matrix.json` and
 `comparison.md` use the sanitizer. Development serving, viewport differences,
 post-ready entry and benchmark instrumentation remain explicit measurement limits.
+
+
+049 completed evidence: [all 80 cases](../benchmarks/049-renderer-matrix.md)
+cover both devices, both renderers, both policies, all five zooms and two repeats.
+76 passed; Canvas small batches at 0.1× failed the 30-second entry/recovery gate
+on both devices in both repeats. There were no page errors or row-cap violations.
+GPU small batches allowed transient overview terrain gaps and then recovered.
+
+With faster fill, 0.1× motion frame p95 was 50.4–51.1 ms Canvas versus 17.1 ms
+GPU on Mac, and 66.7–99.9 ms Canvas versus 33.4–33.5 ms GPU on Pixel. Ordinary
+zooms were much closer; GPU is not an across-the-board ordinary-play win. A
+two-row preparation cap barely changes the expensive overview's frame p95 and
+does not universally improve Canvas. The Pixel warmed from 26.6°C / thermal
+status 0 to 35.9°C / status 1 while charging, without cooldown; later repeats
+cannot isolate renderer effects from heat/order effects. Keep defaults unchanged.
+
+Successful cases reached zero warm terrain rebuilding, but both Pixel GPU
+small-batch overview samples still requested 2,064,384 texture-upload bytes in
+two seconds. Attribution is pending. Next: profile recurring warm overview
+collection/draw costs and these uploads, then use temperature-controlled phone
+repeats and longer motion traces to evaluate a focused change. See 049 for
+complete conditions, gates and measurement limits.

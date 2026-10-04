@@ -83,7 +83,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [048 Embedded presentation host](048-embedded-presentation-host.md) | Shared game/lab camera, terrain, assets and lifecycle; Traffic migrated |
 
-| [049 Renderer performance matrix](049-renderer-performance-matrix.md) | In progress: repeated renderer/pacing comparisons with movement at every zoom |
+| [049 Renderer performance matrix](049-renderer-performance-matrix.md) | Complete: 80 Mac/Pixel renderer/pacing/zoom cases; four Canvas overview catch-up failures |
 
 ## Earlier plans
 
