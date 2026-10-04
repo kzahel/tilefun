@@ -21611,6 +21611,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/rendering/PlayerPresentation.ts:28"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/ScenarioSession.ts:37"
         },
         {
@@ -22315,7 +22319,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:670"
+          "source": "src/scenes/PlayScene.ts:624"
         }
       ]
     },
@@ -23570,8 +23574,12 @@
           "source": "src/rendering/RasterRenderBackend.ts:155"
         },
         {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioPresentationHost.ts:161"
+        },
+        {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:68"
+          "source": "src/scenes/renderWorld.ts:63"
         }
       ]
     },

@@ -6,6 +6,7 @@ import type { RendererMode, RenderHost, RenderHostFactory } from "./RenderHost.j
 /** Browser composition owns backend changes; the same client/Worker keeps running. */
 export async function selectableRenderHostFactory(
   params: URLSearchParams,
+  options?: { embedded?: boolean },
 ): Promise<RenderHostFactory> {
   const initial: RendererMode =
     params.get("renderer") === "gpu" ? (params.has("meshes") ? "gpu-mesh" : "gpu") : "canvas";
@@ -17,7 +18,7 @@ export async function selectableRenderHostFactory(
       delete canvas.dataset.gpuDevice;
       return mode === "canvas" || !createGpu
         ? createCanvasRenderHost(canvas)
-        : createGpu(canvas, { meshes: mode === "gpu-mesh" });
+        : createGpu(canvas, { meshes: mode === "gpu-mesh", ...options });
     };
     let current = create(initial);
     let mode: RendererMode = canvas.dataset.renderer === "gpu" ? initial : "canvas";

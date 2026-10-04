@@ -47,6 +47,12 @@ without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
 platform input/UI wiring remain application composition responsibilities.
 
+`ScenarioPresentationHost` embeds the same render-host implementations for Traffic.
+`PlayerPresentation` and `OutdoorPresentation` share camera interpolation and terrain
+policy with gameplay. GPU hosts support an absolute world surface inside a positioned
+lab wrapper, while the input/UI canvas stays in document flow. See
+[embedded engine labs](embedded-engine-labs.md) for lifecycle and migration boundaries.
+
 ## Data and resource contracts
 
 - `SpriteCatalog` exposes immutable image/tile dimensions and sprite-region

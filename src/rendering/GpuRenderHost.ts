@@ -5,12 +5,14 @@ import type { RenderHost } from "./RenderHost.js";
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
 export function createGpuRenderHost(
   canvas: HTMLCanvasElement,
-  options?: { meshes: boolean },
+  options?: { meshes: boolean; embedded?: boolean },
 ): RenderHost {
   const world = document.createElement("canvas");
   world.dataset.renderer = "gpu";
   world.setAttribute("aria-hidden", "true");
-  world.style.cssText = "position:fixed;pointer-events:none;";
+  world.style.cssText = options?.embedded
+    ? "position:absolute;pointer-events:none;"
+    : "position:fixed;pointer-events:none;";
   let renderer: GpuRenderBackend;
   try {
     renderer = new GpuRenderBackend(world);
@@ -32,8 +34,10 @@ export function createGpuRenderHost(
   if (getComputedStyle(canvas).position === "static") canvas.style.position = "relative";
   const align = () => {
     const rect = canvas.getBoundingClientRect();
-    world.style.left = `${rect.left}px`;
-    world.style.top = `${rect.top}px`;
+    // Embedded views supply a positioned wrapper; absolute placement then follows
+    // document scrolling without a separate scroll listener or per-frame layout.
+    world.style.left = `${options?.embedded ? canvas.offsetLeft : rect.left}px`;
+    world.style.top = `${options?.embedded ? canvas.offsetTop : rect.top}px`;
     world.style.width = `${rect.width}px`;
     world.style.height = `${rect.height}px`;
   };

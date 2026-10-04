@@ -81,6 +81,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [047 Terrain pacing and zoom stress](047-terrain-pacing-and-zoom-stress.md) | Complete: explicit presentation debt, shared zoom workloads and desktop/Pixel evidence |
 
+| [048 Embedded presentation host](048-embedded-presentation-host.md) | Shared game/lab camera, terrain, assets and lifecycle; Traffic migrated |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

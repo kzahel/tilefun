@@ -3,12 +3,12 @@ import { FootstepSystem } from "../audio/FootstepSystem.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
-import { CAMERA_LERP } from "../config/constants.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
+import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
@@ -366,8 +366,7 @@ export class PlayScene implements GameScene {
       // pending until a real player position arrives.
       const playerEnt = gc.stateView.playerEntity;
       if (playerEnt.id !== -1) {
-        const zOffset = verticalFollow ? (playerEnt.wz ?? 0) : 0;
-        gc.camera.follow(playerEnt.position.wx, playerEnt.position.wy - zOffset, CAMERA_LERP);
+        followPlayer(gc.camera, playerEnt, verticalFollow);
       }
       if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
         const savedZoom = gc.camera.zoom;
@@ -382,12 +381,7 @@ export class PlayScene implements GameScene {
       session.visibleRange = gc.camera.getVisibleChunkRange();
       gc.server.tick(dt);
 
-      const localZOffset = verticalFollow ? (gc.stateView.playerEntity.wz ?? 0) : 0;
-      gc.camera.follow(
-        gc.stateView.playerEntity.position.wx,
-        gc.stateView.playerEntity.position.wy - localZOffset,
-        CAMERA_LERP,
-      );
+      followPlayer(gc.camera, gc.stateView.playerEntity, verticalFollow);
 
       session.cameraX = gc.camera.x;
       session.cameraY = gc.camera.y;
@@ -467,53 +461,13 @@ export class PlayScene implements GameScene {
   }
 
   render(alpha: number, gc: GameContext): void {
-    gc.camera.applyInterpolation(alpha);
-
-    // Override camera with exponential follow toward the interpolated player.
-    // Standard linear camera interpolation creates derivative discontinuities
-    // at tick boundaries (camera lerp != entity linear motion), visible as
-    // jitter at high refresh rates. The exponential form matches the follow()
-    // decay curve, giving smooth sub-tick motion tied to the player.
-    const verticalFollow = gc.console.cvars.get("cl_verticalfollow")?.get() === true;
-    if (gc.serialized && this.predictor?.player) {
-      // Use predicted player's prevPosition for smooth camera interpolation
-      const prev = this.predictor.prevPosition;
-      const cur = this.predictor.player.position;
-      const px = prev.wx + (cur.wx - prev.wx) * alpha;
-      let py = prev.wy + (cur.wy - prev.wy) * alpha;
-      if (verticalFollow) {
-        const prevZ = this.predictor.prevWz ?? 0;
-        const curZ = this.predictor.player.wz ?? 0;
-        py -= prevZ + (curZ - prevZ) * alpha;
-      }
-      const f = 1 - (1 - CAMERA_LERP) ** alpha;
-      gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
-      gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
-
-      // Set prev state on the predicted entity so renderEntities
-      // interpolates it correctly for Y-sorting and drawing
-      this.predictor.player.prevPosition = prev;
-      this.predictor.player.prevJumpZ = this.predictor.prevJumpZ;
-      this.predictor.player.prevWz = this.predictor.prevWz;
-    } else {
-      const player = gc.stateView.playerEntity;
-      if (player.prevPosition) {
-        const px = player.prevPosition.wx + (player.position.wx - player.prevPosition.wx) * alpha;
-        let py = player.prevPosition.wy + (player.position.wy - player.prevPosition.wy) * alpha;
-        if (verticalFollow) {
-          const prevZ = player.prevWz ?? 0;
-          const curZ = player.wz ?? 0;
-          py -= prevZ + (curZ - prevZ) * alpha;
-        }
-        const f = 1 - (1 - CAMERA_LERP) ** alpha;
-        gc.camera.x = gc.camera.prevX + (px - gc.camera.prevX) * f;
-        gc.camera.y = gc.camera.prevY + (py - gc.camera.prevY) * f;
-      }
-    }
-
-    // Apply screen shake after camera override so it isn't clobbered
-    gc.camera.x += gc.camera.shakeOffsetX;
-    gc.camera.y += gc.camera.shakeOffsetY;
+    beginPlayerPresentation(
+      gc.camera,
+      gc.stateView.playerEntity,
+      alpha,
+      gc.serialized ? this.predictor : undefined,
+      gc.console.cvars.get("cl_verticalfollow")?.get() === true,
+    );
 
     renderWorld(gc);
     const particleItems = this.particles.collectItems();

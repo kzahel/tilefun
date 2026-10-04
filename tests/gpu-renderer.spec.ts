@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 
 test.use({ channel: "chromium" });
 test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
@@ -99,7 +100,9 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
   const canvas = page.getByLabel("Generated traffic playground");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect
-    .poll(() => canvas.getAttribute("data-mesh-draws").then((value) => Number(value)))
+    .poll(() =>
+      canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
+    )
     .toBeGreaterThan(0);
   expect(errors).toEqual([]);
 });

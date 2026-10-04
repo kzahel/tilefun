@@ -200,7 +200,9 @@ exercise Canvas, GPU sprites and GPU + meshes through the real scenario Worker:
 each scene must settle with no pending builds or prepared rows for 60 consecutive
 frames, retain stable residency/surface bytes, ride over 100 world pixels, settle
 after pause and reset, and exit without page errors. Timing remains separate from
-these behavioral assertions; interpolation and camera-follow parity are still open.
+these behavioral assertions. Interpolation/camera-follow alignment was subsequently
+delivered through the [embedded presentation host](../tactical/048-embedded-presentation-host.md);
+its topic owns remaining lab migrations.
 The reset coverage also reproduced an existing GPU failure: disposal loses the
 WebGL context, but the lab reused that canvas. Reset now creates a fresh canvas
 and removes diagnostics/readiness from the retired element.

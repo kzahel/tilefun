@@ -41,8 +41,11 @@ predictor and replica animation clock. `predictInput` is shared with `PlayScene`
 The client bounds outstanding steps to six; pause/hidden views do not accumulate
 unbounded command debt. Explicit commands change scenario state at the authority.
 
-Presentation remains in the owning view: cameras, asset loading, diagnostics,
-placement controls and static review painting. FurnitureMotion and CharacterTestScene
+Traffic presentation now uses `ScenarioPresentationHost` with the production
+clock, render host and shared camera/terrain helpers. Other labs retain their
+view-specific presentation adapters; [embedded engine labs](embedded-engine-labs.md)
+tracks migration and the remaining camera/overlay/indoor boundaries. Diagnostics,
+placement controls and static review painting remain view responsibilities. FurnitureMotion and CharacterTestScene
 are layout/render models without movement loops. The former synchronous traffic
 loop is `TrafficTestHarness`, imported only by low-level lane stress tests.
 Static art/rail diagrams and frozen approval renders remain render fixtures.

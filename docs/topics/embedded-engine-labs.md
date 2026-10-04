@@ -1,9 +1,9 @@
 # Embedded engine labs
 
 Topic: embedded-engine-labs
-Status: shared scenario simulation and renderer components delivered; shared
-presentation hosting remains incomplete. Traffic cache churn fixed; interpolation
-and broader lab presentation alignment remain follow-up work.
+Status: shared scenario simulation and embedded outdoor presentation host delivered;
+Traffic uses shared engine interpolation, terrain, asset setup and render lifecycle.
+Other interactive lab presentation adapters remain to migrate.
 Updated: 2026-10-04.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
@@ -55,28 +55,46 @@ binary replicas and `PlayerPredictor`. This is a temporary engine host, with
 explicit step scheduling, rather than the game's complete `LocalServerRuntime`
 and `GameClient` composition. The simulation migration is delivered.
 
-Presentation is less consolidated. `src/workshop/TrafficPage.tsx` selects the
-shared Canvas/GPU backend and uses `collectScene`, but owns its own animation
-loop, camera updates and terrain calls. The game uses `PlayScene`, `renderWorld`
-and its render host. Traffic alignment status:
+`ScenarioPresentationHost` now owns Traffic's client/Worker, production `GameLoop`,
+render host, asset lifetime, camera and frame storage. The React page supplies
+controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
+records this extraction and its validation. Shared owners are:
 
-- Terrain now uses the same single budgeted scheduler and default 2 ms/128-row
-  limits as gameplay by default. Both expose the shared experimental two-row
-  policy with completed-chunk publication and explicit zoom presets (047).
-  The redundant visible-only pass, which discarded offscreen
-  resources and partial builds every frame, has been removed.
-- The camera snaps to the player and scene collection receives interpolation
-  alpha 1. The game's interpolated player/camera path is not used.
+- `PlayerPresentation`: fixed-tick follow and exponential sub-tick camera
+  interpolation, called by both `PlayScene` and the lab. Predictor previous poses
+  supply body and camera interpolation together. The lab's -12px framing offset
+  is explicit; position commands snap, while ordinary movement interpolates.
+- `OutdoorPresentation.presentTerrain`: one scheduler/publication policy for game
+  and lab, retaining the shared default 2 ms/128-row budget and experimental
+  two-row/completed-chunk mode. `collectScene` and `collectSceneOrder` provide the
+  common actor/prop/grass/elevation/mesh presentation.
+- The existing Canvas/GPU `RenderHost` implementations configure complete terrain
+  assets (blend sheets, roads, variants) and own recovery/disposal. Embedded GPU
+  placement keeps the world canvas beneath the lab's input/UI canvas through
+  scrolling and resize. The replica uses server-computed autotiles.
 
-The [traffic investigation](performance.md#traffic-workshop-cache-churn) records
-the cache diagnosis and fix validation. `tests/traffic-rendering.spec.ts` checks
-stationary cache settling, riding, pause, reset and exit in Canvas, GPU sprites
-and GPU + meshes. The lab exposes on-demand terrain diagnostics without adding
-per-frame measurement work; teardown removes that callback and its ready flag.
-Reset also replaces the canvas: a disposed GPU backend deliberately loses its
-context, so its old canvas cannot host the replacement renderer.
-Other interactive labs need a consumer audit; shared scenario
-simulation does not establish presentation or performance parity for all tools.
+Pause submits no simulation steps; hidden views stop/restart the clock without
+hidden-time debt. Disposal releases the Worker, frame, host and assets; late
+asset arrivals close without publishing a renderer. Diagnostics are on-demand,
+including interpolation and terrain state, and are detached with readiness on exit.
+Reset still creates a fresh canvas. Context loss/recovery now uses the production
+render host. The [cache investigation](performance.md#traffic-workshop-cache-churn)
+records the earlier competing-preparation failure.
+
+This host currently presents outdoor scenarios. It does not replace the full
+GameClient's menus, audio, particles, indoor scenes or world/profile persistence.
+The bounded scenario scheduling/transport remains distinct from LocalServerRuntime.
+
+| Remaining consumer | Current boundary / next work |
+| --- | --- |
+| `OutdoorGeometryTest` | Shared scenario authority; variable-step local loop, fixed camera and geometry/grid overlays. Next candidate for explicit fixed-camera and overlay hooks in the host. |
+| `CharactersPage` | Shared scenario authority; local clock and native CharacterTestScene presentation/cycle inspector. Preserve source-hashed approval references when separating interactive presentation. |
+| `interiors/playtest/main.ts` | Shared scenario authority; furniture-specific layout and native room presentation. Needs an indoor host adapter and review-contract validation. |
+| Static diagrams, source experiments and frozen approval renders | Intentional diagnostic/reference adapters; no claim of full gameplay parity. |
+
+Shared authority alone does not establish presentation or performance parity for
+these remaining tools. Migrate them with focused evidence, preserving approved
+reference pixels and explicit diagnostic camera/overlay policies.
 
 ## Change and validation discipline
 
@@ -101,6 +119,6 @@ the scenario tests under `src/scenarios/`, and the shared renderer boundary and
 terrain preparation tests. Prefer behavioral/cache counters over brittle FPS
 thresholds in regression tests, with separate browser timing evidence.
 
-Next: consolidate presentation scheduling/interpolation and audit the remaining
-interactive labs against this contract. Track bounded implementation slices in
-tacticals; this topic owns the continuing constraint and outstanding gaps.
+Next: migrate OutdoorGeometryTest using explicit fixed-camera and overlay hooks,
+then address character and indoor playtest adapters. This topic owns the continuing
+constraint and outstanding gaps; tacticals own bounded migration evidence.

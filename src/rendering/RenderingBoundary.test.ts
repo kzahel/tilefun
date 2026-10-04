@@ -11,6 +11,8 @@ const neutral = [
   "rendering/CarMeshDefinition.ts",
   "rendering/Projection.ts",
   "rendering/PresentationSettings.ts",
+  "rendering/PlayerPresentation.ts",
+  "rendering/OutdoorPresentation.ts",
   "rendering/TerrainPresentation.ts",
   "rendering/TerrainFrame.ts",
   "rendering/SceneItem.ts",

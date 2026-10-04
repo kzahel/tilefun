@@ -1,167 +1,79 @@
 import { useEffect, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
-import { closeAssets, loadGameAssets, loadSceneAssets } from "../assets/GameAssets.js";
-import { BlendGraph } from "../autotile/BlendGraph.js";
-import { Camera } from "../rendering/Camera.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
-import { collectScene } from "../rendering/collectScene.js";
 import {
   TERRAIN_PACING,
   type TerrainPacing,
   ZOOM_PRESETS,
 } from "../rendering/PresentationSettings.js";
-import type { RasterRenderBackend } from "../rendering/RasterRenderBackend.js";
-import { collectSceneOrder } from "../rendering/RenderFrame.js";
-import { SceneFrame } from "../rendering/SceneFrame.js";
-import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import type { TerrainDiagnostics } from "../rendering/RenderFrame.js";
+import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
 
 export type TrafficCanvas = HTMLCanvasElement & {
   /** Read-only, on-demand diagnostics for lab profiling and integration checks. */
-  __terrainDiagnostics?: () => ReturnType<RasterRenderBackend["getDiagnostics"]>;
+  __terrainDiagnostics?: () => TerrainDiagnostics | undefined;
+  __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
 
 export default function TrafficPage() {
   const canvas = useRef<TrafficCanvas>(null),
-    scene = useRef<ScenarioClient | null>(null),
+    scene = useRef<ScenarioPresentationHost | null>(null),
     keys = useRef(new Set<string>());
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
     [paused, setPaused] = useState(false);
   const [zoom, setZoom] = useState(0.75);
   const [terrainPacing, setTerrainPacing] = useState<TerrainPacing>("throughput");
-  const presentation = useRef({ zoom, terrainPacing });
+  const presentation = useRef({ zoom, terrainPacing, paused });
   presentation.current.zoom = zoom;
   presentation.current.terrainPacing = terrainPacing;
-  const pause = useRef(false);
-  pause.current = paused;
+  presentation.current.paused = paused;
   useEffect(() => {
     const c = required(canvas.current);
-    let alive = true,
-      raf = 0;
-    const s = new ScenarioClient(trafficRecipe());
-    const blend = new BlendGraph();
+    let alive = true;
+    setError("");
     if (restart > 0) setPaused(false);
-    scene.current = s;
     keys.current.clear();
-    const camera = new Camera();
-    let renderer: RasterRenderBackend | null = null;
-    const sceneFrame = new SceneFrame();
-    const order: number[] = [];
-    camera.setViewport(960, 600);
-    camera.zoom = 0.75;
-    const center = () =>
-      camera.snapTo(s.view.playerEntity.position.wx, s.view.playerEntity.position.wy - 12);
-    const pending = loadGameAssets(blend);
-    void pending
-      .then(async (assets) => {
-        await s.ready;
-        center();
-        await loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type)));
-        if (!alive) {
-          closeAssets(assets);
-          return;
-        }
-        const GpuBackend =
-          new URLSearchParams(location.search).get("renderer") === "gpu"
-            ? (await import("../rendering/GpuRenderBackend.js")).GpuRenderBackend
-            : null;
-        if (!alive) {
-          closeAssets(assets);
-          return;
-        }
-        const gpu = GpuBackend ? new GpuBackend(c) : null;
-        const backend = gpu ?? new CanvasRenderBackend(required(c.getContext("2d")), assets.sheets);
-        if (gpu) {
-          gpu.setAssets(assets.sheets);
-          gpu.meshes.setEnabled(new URLSearchParams(location.search).has("meshes"));
-        }
-
-        renderer = backend;
-        c.__terrainDiagnostics = () => backend.getDiagnostics();
-        backend.resize(960, 600);
-        c.dataset.ready = "true";
-        let last = performance.now(),
-          accumulator = 0,
-          loadTimer = 0;
-        const frame = (now: number) => {
-          if (!alive) return;
-          camera.zoom = presentation.current.zoom;
-          const policy = TERRAIN_PACING[presentation.current.terrainPacing];
-          const elapsed = Math.min(0.1, (now - last) / 1000);
-          last = now;
-          if (!pause.current) accumulator += elapsed;
-          while (accumulator >= 1 / 60) {
-            const k = keys.current;
-            s.step(
-              {
-                dx:
-                  Number(k.has("ArrowRight") || k.has("d")) -
-                  Number(k.has("ArrowLeft") || k.has("a")),
-                dy:
-                  Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
-                jump: k.has(" "),
-                sprinting: false,
-              },
-              1 / 60,
-              camera.getVisibleChunkRange(),
-            );
-            accumulator -= 1 / 60;
-          }
-          center();
-          const range = camera.getVisibleChunkRange();
-          loadTimer -= elapsed;
-          if (loadTimer <= 0) {
-            s.view.world.computeAutotile(blend, 64);
-            void loadSceneAssets(assets, new Set(s.view.props.map((p) => p.type)))
-              .then(() => {
-                if (alive) backend.addSpriteAssets(assets.sheets);
-              })
-              .catch((e) => {
-                if (alive) setError(String(e));
-              });
-            loadTimer = 0.3;
-          }
-          gpu?.beginFrame();
-          backend.submit(camera, { kind: "clear", color: "#cbd5c3" });
-          // Use gameplay's bounded scheduler. A visible-only pass here would evict
-          // its retained halo and restart the same offscreen work every frame.
-          backend.prepareTerrain(camera, s.view.world, range, policy.preparation);
-          backend.submit(camera, {
-            kind: "terrain",
-            draws: backend.collectTerrain(camera, s.view.world, range, policy.drawing),
-          });
-          const items = collectScene(
-            s.view.entities,
-            s.view.props,
-            s.view.world,
-            camera,
-            range,
-            1,
-            backend,
-            [],
-            false,
-            undefined,
-            undefined,
-            sceneFrame,
-          );
-          backend.submit(camera, { kind: "scene", items, order: collectSceneOrder(items, order) });
-          sceneFrame.release();
-          if (gpu) c.dataset.meshDraws = String(gpu.meshes.draws);
-          const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
-          c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
-          c.dataset.carX = String(car.position.wx);
-          c.dataset.carY = String(car.position.wy);
-          c.dataset.speed = String(s.traffic?.speed ?? 0);
-          c.dataset.waiting = s.traffic?.waiting ?? "";
-          c.dataset.cars = String(
-            s.view.entities.filter((e) => e.type.startsWith("vehicle-v1:")).length,
-          );
-          c.dataset.playerX = String(s.view.playerEntity.position.wx);
-          c.dataset.playerY = String(s.view.playerEntity.position.wy);
-          raf = requestAnimationFrame(frame);
+    const host = new ScenarioPresentationHost(c, trafficRecipe(), {
+      width: 960,
+      height: 600,
+      cameraOffsetY: -12,
+      settings: () => presentation.current,
+      input: () => {
+        const k = keys.current;
+        return {
+          dx: Number(k.has("ArrowRight") || k.has("d")) - Number(k.has("ArrowLeft") || k.has("a")),
+          dy: Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
+          jump: k.has(" "),
+          sprinting: false,
         };
-        raf = requestAnimationFrame(frame);
+      },
+      onError: (e) => {
+        delete c.dataset.ready;
+        if (alive) setError(String(e));
+      },
+      onFrame: (h) => {
+        const s = h.session;
+        const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
+        c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
+        c.dataset.carX = String(car.position.wx);
+        c.dataset.carY = String(car.position.wy);
+        c.dataset.speed = String(s.traffic?.speed ?? 0);
+        c.dataset.waiting = s.traffic?.waiting ?? "";
+        c.dataset.cars = String(
+          s.view.entities.filter((e) => e.type.startsWith("vehicle-v1:")).length,
+        );
+        c.dataset.playerX = String(s.view.playerEntity.position.wx);
+        c.dataset.playerY = String(s.view.playerEntity.position.wy);
+      },
+    });
+    scene.current = host;
+    void host.ready
+      .then(() => {
+        if (!alive) return;
+        c.__terrainDiagnostics = () => host.getDiagnostics().terrain;
+        c.__presentationDiagnostics = () => host.getDiagnostics();
+        c.dataset.ready = "true";
       })
       .catch((e) => {
         if (alive) setError(String(e));
@@ -170,15 +82,12 @@ export default function TrafficPage() {
     window.addEventListener("blur", release);
     return () => {
       alive = false;
-      cancelAnimationFrame(raf);
       delete c.__terrainDiagnostics;
       delete c.dataset.ready;
-      renderer?.dispose();
-      sceneFrame.clear();
+      delete c.__presentationDiagnostics;
+      host.dispose();
       window.removeEventListener("blur", release);
       keys.current.clear();
-      void pending.then(closeAssets).catch(() => {});
-      s.dispose();
       scene.current = null;
     };
   }, [restart]);
@@ -300,25 +209,27 @@ export default function TrafficPage() {
         <small>{TERRAIN_PACING[terrainPacing].hint}</small>
       </div>
       {error ? <p role="alert">{error}</p> : null}
-      <canvas
-        key={restart}
-        ref={canvas}
-        aria-label="Generated traffic playground"
-        tabIndex={0}
-        style={{ width: "100%", maxWidth: 960, touchAction: "none", borderRadius: 12 }}
-        onKeyDown={(e) => {
-          if (
-            ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
-              e.key,
-            )
-          ) {
-            keys.current.add(e.key);
-            e.preventDefault();
-          }
-        }}
-        onKeyUp={(e) => keys.current.delete(e.key)}
-        onBlur={() => keys.current.clear()}
-      />
+      <div style={{ position: "relative", maxWidth: 960, borderRadius: 12, overflow: "hidden" }}>
+        <canvas
+          key={restart}
+          ref={canvas}
+          aria-label="Generated traffic playground"
+          tabIndex={0}
+          style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
+          onKeyDown={(e) => {
+            if (
+              ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
+                e.key,
+              )
+            ) {
+              keys.current.add(e.key);
+              e.preventDefault();
+            }
+          }}
+          onKeyUp={(e) => keys.current.delete(e.key)}
+          onBlur={() => keys.current.clear()}
+        />
+      </div>
       <div className="actions">
         {[
           ["ArrowLeft", "←"],

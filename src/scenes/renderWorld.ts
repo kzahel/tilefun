@@ -1,6 +1,6 @@
 import type { GameContext } from "../core/GameScene.js";
 import { collectScene } from "../rendering/collectScene.js";
-import { TERRAIN_PACING } from "../rendering/PresentationSettings.js";
+import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
 import { renderInterior } from "./renderInterior.js";
@@ -19,12 +19,7 @@ export function renderWorld(gc: GameContext): void {
 
   if (stateView.interior) return;
   // Terrain + autotile + details (baked into chunk cache)
-  const policy = TERRAIN_PACING[gc.debugPanel.terrainPacing];
-  renderer.prepareTerrain(camera, stateView.world, visible, policy.preparation);
-  renderer.submit(camera, {
-    kind: "terrain",
-    draws: renderer.collectTerrain(camera, stateView.world, visible, policy.drawing),
-  });
+  presentTerrain(renderer, camera, stateView.world, visible, gc.debugPanel.terrainPacing);
 
   // Elevation is drawn interleaved with entities via collectScene
   // (moved from a separate pass so cliffs properly occlude entities behind them)

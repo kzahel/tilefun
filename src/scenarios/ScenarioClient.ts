@@ -102,9 +102,9 @@ export class ScenarioClient {
     });
   }
   /** Bounded outstanding commands prevent a hidden/sluggish tab accumulating simulation debt. */
-  step(input: Movement, dt = 1 / 60, range?: ChunkRange): void {
+  step(input: Movement, dt = 1 / 60, range?: ChunkRange): boolean {
     if (this.failure) throw this.failure;
-    if (!this.loaded || this.closed || this.controls > 0 || this.inFlight >= 6) return;
+    if (!this.loaded || this.closed || this.controls > 0 || this.inFlight >= 6) return false;
     const length = Math.max(1, Math.hypot(input.dx, input.dy));
     const movement = {
       ...input,
@@ -112,7 +112,7 @@ export class ScenarioClient {
       dy: quantizeAxis(input.dy / length),
     };
     const seconds = quantizeInputDtMs(Math.min(dt, 0.1) * 1000) / 1000;
-    if (!seconds) return;
+    if (!seconds) return false;
     this.view.tickAnimations(seconds);
     predictInput(
       this.predictor,
@@ -127,6 +127,7 @@ export class ScenarioClient {
     void this.request({ kind: "step", input: movement, dt: seconds, ...(range ? { range } : {}) })
       .catch((e) => this.fail(e))
       .finally(() => this.inFlight--);
+    return true;
   }
   async command(command: ScenarioCommand) {
     this.controls++;
