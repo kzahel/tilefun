@@ -5,7 +5,12 @@ import type { Movement } from "../input/ActionManager.js";
 import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
-import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
+import { OverlayFrame } from "../rendering/OverlayFrame.js";
+import {
+  beginPlayerPresentation,
+  bindPredictedPlayerPose,
+  followPlayer,
+} from "../rendering/PlayerPresentation.js";
 import type { TerrainPacing } from "../rendering/PresentationSettings.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
@@ -19,6 +24,16 @@ export interface ScenarioPresentationOptions {
   width: number;
   height: number;
   cameraOffsetY?: number;
+  /** Fixed diagnostic framing; otherwise use production player follow. */
+  fixedCamera?: { wx: number; wy: number };
+  /** Owned asset set; disposal closes bitmaps, leaving borrowed HTML images intact. */
+  loadAssets?(graph: BlendGraph): Promise<GameAssets>;
+  /** Diagnostic fixtures can replace terrain/grass with a grid. */
+  terrain?: boolean;
+  pixelExactShadows?: boolean;
+  /** Borrowed frame/camera, consumed synchronously through either renderer backend. */
+  underlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
+  overlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
   input(): Movement;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
   onFrame?(host: ScenarioPresentationHost): void;
@@ -34,6 +49,7 @@ export class ScenarioPresentationHost {
   readonly camera = new Camera();
   readonly ready: Promise<void>;
   private readonly frame = new SceneFrame();
+  private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private host: RenderHost | undefined;
   private assets: GameAssets | undefined;
@@ -66,7 +82,7 @@ export class ScenarioPresentationHost {
 
   private async initialize(canvas: HTMLCanvasElement) {
     const graph = new BlendGraph();
-    const loading = loadGameAssets(graph).then((assets) => {
+    const loading = (this.options.loadAssets ?? loadGameAssets)(graph).then((assets) => {
       if (this.disposed) closeAssets(assets);
       else this.assets = assets;
       return assets;
@@ -96,7 +112,8 @@ export class ScenarioPresentationHost {
 
   private snapCamera() {
     const p = this.session.view.playerEntity.position;
-    this.camera.snapTo(p.wx, p.wy + (this.options.cameraOffsetY ?? 0));
+    const fixed = this.options.fixedCamera;
+    this.camera.snapTo(fixed?.wx ?? p.wx, fixed?.wy ?? p.wy + (this.options.cameraOffsetY ?? 0));
     this.interpolate = false;
   }
 
@@ -112,12 +129,13 @@ export class ScenarioPresentationHost {
       );
       if (this.interpolate) {
         this.steps++;
-        followPlayer(
-          this.camera,
-          this.session.view.playerEntity,
-          false,
-          this.options.cameraOffsetY,
-        );
+        if (!this.options.fixedCamera)
+          followPlayer(
+            this.camera,
+            this.session.view.playerEntity,
+            false,
+            this.options.cameraOffsetY,
+          );
       }
     } catch (error) {
       this.fail(error);
@@ -130,25 +148,31 @@ export class ScenarioPresentationHost {
     const view = this.session.view;
     this.camera.zoom = this.options.settings().zoom;
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
-    beginPlayerPresentation(
-      this.camera,
-      view.playerEntity,
-      this.alpha,
-      this.session.predictor,
-      false,
-      this.options.cameraOffsetY,
-    );
+    if (this.options.fixedCamera) {
+      bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
+      this.camera.applyInterpolation(this.alpha);
+    } else
+      beginPlayerPresentation(
+        this.camera,
+        view.playerEntity,
+        this.alpha,
+        this.session.predictor,
+        false,
+        this.options.cameraOffsetY,
+      );
     try {
       this.host.beginFrame();
       renderer.submit(this.camera, { kind: "clear", color: "#cbd5c3" });
       const range = this.camera.getVisibleChunkRange();
-      presentTerrain(
-        renderer,
-        this.camera,
-        view.world,
-        range,
-        this.options.settings().terrainPacing,
-      );
+      if (this.options.terrain !== false)
+        presentTerrain(
+          renderer,
+          this.camera,
+          view.world,
+          range,
+          this.options.settings().terrainPacing,
+        );
+      this.drawOverlay(this.options.underlay);
       const items = collectScene(
         view.entities,
         view.props,
@@ -158,7 +182,7 @@ export class ScenarioPresentationHost {
         this.alpha,
         renderer,
         [],
-        renderer.assets.has("grass-blades"),
+        this.options.terrain !== false && renderer.assets.has("grass-blades"),
         undefined,
         undefined,
         this.frame,
@@ -167,7 +191,9 @@ export class ScenarioPresentationHost {
         kind: "scene",
         items,
         order: collectSceneOrder(items, this.frame.drawOrder),
+        pixelExactShadows: this.options.pixelExactShadows ?? false,
       });
+      this.drawOverlay(this.options.overlay);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
       this.options.onFrame?.(this);
@@ -175,8 +201,21 @@ export class ScenarioPresentationHost {
       this.fail(error);
     } finally {
       this.frame.release();
+      this.overlays.release();
       this.camera.restoreActual();
     }
+  }
+
+  /** The same sub-tick fraction used by the scene collector this frame. */
+  get presentationAlpha() {
+    return this.alpha;
+  }
+
+  private drawOverlay(collect: ScenarioPresentationOptions["overlay"]) {
+    if (!collect || !this.host) return;
+    this.overlays.begin();
+    collect(this.overlays, this);
+    this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
   }
 
   getDiagnostics() {
@@ -215,6 +254,7 @@ export class ScenarioPresentationHost {
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();
+    this.overlays.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.session.dispose();

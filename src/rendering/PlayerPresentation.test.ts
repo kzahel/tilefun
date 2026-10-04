@@ -1,7 +1,12 @@
 import { expect, it } from "vitest";
 import { createPlayer } from "../entities/Player.js";
 import { Camera } from "./Camera.js";
-import { beginPlayerPresentation, followPlayer } from "./PlayerPresentation.js";
+import { interpolatePosition } from "./collectScene.js";
+import {
+  beginPlayerPresentation,
+  bindPredictedPlayerPose,
+  followPlayer,
+} from "./PlayerPresentation.js";
 
 it("shares predicted camera/body interpolation, height follow and framing at sub-tick times", () => {
   const player = createPlayer(140, 260);
@@ -59,4 +64,22 @@ it("keeps a snap pending for the first real player and does not sweep teleports"
   player.prevPosition = { ...player.position };
   beginPlayerPresentation(camera, player, 0.25);
   expect([camera.x, camera.y]).toEqual([1000, 2000]);
+});
+
+it("binds the same sub-tick body and overlay pose without following a diagnostic camera", () => {
+  const player = createPlayer(100, 160);
+  bindPredictedPlayerPose(player, {
+    player,
+    prevPosition: { wx: 80, wy: 120 },
+    prevJumpZ: 4,
+    prevWz: 8,
+  });
+  for (const alpha of [0, 0.25, 0.5, 1]) {
+    expect(interpolatePosition(player.position, player.prevPosition, alpha)).toEqual({
+      wx: 80 + 20 * alpha,
+      wy: 120 + 40 * alpha,
+    });
+  }
+  expect(player.prevJumpZ).toBe(4);
+  expect(player.prevWz).toBe(8);
 });

@@ -30,13 +30,7 @@ export function beginPlayerPresentation(
   offsetY = 0,
 ): void {
   camera.applyInterpolation(alpha);
-  const predicted = predictor?.player;
-  if (predicted && predictor) {
-    player = predicted;
-    player.prevPosition = predictor.prevPosition;
-    player.prevJumpZ = predictor.prevJumpZ;
-    player.prevWz = predictor.prevWz;
-  }
+  player = bindPredictedPlayerPose(player, predictor);
   const prev = player.prevPosition;
   if (prev) {
     const px = prev.wx + (player.position.wx - prev.wx) * alpha;
@@ -53,4 +47,19 @@ export function beginPlayerPresentation(
   }
   camera.x += camera.shakeOffsetX;
   camera.y += camera.shakeOffsetY;
+}
+
+/** Bind the production prediction history for body/overlay interpolation, including fixed cameras. */
+export function bindPredictedPlayerPose(
+  player: Entity,
+  predictor?: Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> | null,
+): Entity {
+  const predicted = predictor?.player;
+  if (predicted && predictor) {
+    player = predicted;
+    player.prevPosition = predictor.prevPosition;
+    player.prevJumpZ = predictor.prevJumpZ;
+    player.prevWz = predictor.prevWz;
+  }
+  return player;
 }

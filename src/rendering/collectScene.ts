@@ -29,7 +29,7 @@ interface ExtrapolationGhostItem {
 }
 
 /** Interpolate between previous and current position. */
-function lerpPos(
+export function interpolatePosition(
   pos: { wx: number; wy: number },
   prev: { wx: number; wy: number } | undefined,
   alpha: number,
@@ -109,7 +109,7 @@ export function collectScene(
     )
       continue;
 
-    const pos = lerpPos(e.position, e.prevPosition, alpha);
+    const pos = interpolatePosition(e.position, e.prevPosition, alpha);
 
     // Compute Z offset in world pixels
     let zOffset: number;

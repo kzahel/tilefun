@@ -21615,6 +21615,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/rendering/PlayerPresentation.ts:55"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/ScenarioSession.ts:37"
         },
         {
@@ -23575,7 +23579,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:161"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:185"
         },
         {
           "system": "Editor",

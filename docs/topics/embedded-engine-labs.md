@@ -2,7 +2,8 @@
 
 Topic: embedded-engine-labs
 Status: shared scenario simulation and embedded outdoor presentation host delivered;
-Traffic uses shared engine interpolation, terrain, asset setup and render lifecycle.
+Traffic and Outdoor Geometry use shared engine interpolation, asset setup and render
+lifecycle; Traffic also uses the shared terrain policy.
 Other interactive lab presentation adapters remain to migrate.
 Updated: 2026-10-04.
 
@@ -55,8 +56,8 @@ binary replicas and `PlayerPredictor`. This is a temporary engine host, with
 explicit step scheduling, rather than the game's complete `LocalServerRuntime`
 and `GameClient` composition. The simulation migration is delivered.
 
-`ScenarioPresentationHost` now owns Traffic's client/Worker, production `GameLoop`,
-render host, asset lifetime, camera and frame storage. The React page supplies
+`ScenarioPresentationHost` owns Traffic and Outdoor Geometry's client/Worker,
+production `GameLoop`, render host, asset lifetime, camera and frame storage. The React page supplies
 controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
 records this extraction and its validation. Shared owners are:
 
@@ -77,9 +78,20 @@ Pause submits no simulation steps; hidden views stop/restart the clock without
 hidden-time debt. Disposal releases the Worker, frame, host and assets; late
 asset arrivals close without publishing a renderer. Diagnostics are on-demand,
 including interpolation and terrain state, and are detached with readiness on exit.
-Reset still creates a fresh canvas. Context loss/recovery now uses the production
-render host. The [cache investigation](performance.md#traffic-workshop-cache-churn)
+Traffic reset still creates a fresh canvas. Context loss/recovery uses the
+production render host. The [cache investigation](performance.md#traffic-workshop-cache-churn)
 records the earlier competing-preparation failure.
+
+Outdoor Geometry now uses this host with an explicit fixed world camera, no terrain
+or grass, pixel-exact shadows and a scoped asset loader. Its grid underlay and
+geometry overlay use backend-neutral `OverlayFrame` commands before/after the
+replicated scene. Player collider outlines use the scene collector's interpolated
+position and predictor history; fixed framing never turns into player follow on
+movement or teleport. The host owns each walker bitmap and releases it on metadata
+changes/unmount; the catalog's borrowed HTML image remains usable. Grid lines,
+fixture selection and DOM input remain lab responsibilities. Closing the geometry
+panel stops the clock and disposes its Worker and GPU sibling canvas. See
+[Tactical 050](../tactical/050-outdoor-geometry-presentation.md) for validation.
 
 This host currently presents outdoor scenarios. It does not replace the full
 GameClient's menus, audio, particles, indoor scenes or world/profile persistence.
@@ -87,7 +99,6 @@ The bounded scenario scheduling/transport remains distinct from LocalServerRunti
 
 | Remaining consumer | Current boundary / next work |
 | --- | --- |
-| `OutdoorGeometryTest` | Shared scenario authority; variable-step local loop, fixed camera and geometry/grid overlays. Next candidate for explicit fixed-camera and overlay hooks in the host. |
 | `CharactersPage` | Shared scenario authority; local clock and native CharacterTestScene presentation/cycle inspector. Preserve source-hashed approval references when separating interactive presentation. |
 | `interiors/playtest/main.ts` | Shared scenario authority; furniture-specific layout and native room presentation. Needs an indoor host adapter and review-contract validation. |
 | Static diagrams, source experiments and frozen approval renders | Intentional diagnostic/reference adapters; no claim of full gameplay parity. |
@@ -119,6 +130,7 @@ the scenario tests under `src/scenarios/`, and the shared renderer boundary and
 terrain preparation tests. Prefer behavioral/cache counters over brittle FPS
 thresholds in regression tests, with separate browser timing evidence.
 
-Next: migrate OutdoorGeometryTest using explicit fixed-camera and overlay hooks,
-then address character and indoor playtest adapters. This topic owns the continuing
-constraint and outstanding gaps; tacticals own bounded migration evidence.
+Next: migrate the interactive character lab clock/presentation into the shared
+host, preserving the independent source-hashed approval renderer; then address
+the indoor playtest adapter. This topic owns the continuing constraint and
+outstanding gaps; tacticals own bounded migration evidence.

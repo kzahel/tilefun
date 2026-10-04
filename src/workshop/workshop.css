@@ -1104,14 +1104,19 @@ time {
   background: #f6f3ec;
   margin: 8px 0;
 }
-.geometry-test canvas {
+.geometry-viewport {
+  position: relative;
+}
+.geometry-viewport canvas {
+  image-rendering: pixelated;
+}
+.geometry-test canvas[aria-label] {
   display: block;
   width: 100%;
   height: auto;
-  image-rendering: pixelated;
   border: 2px solid #ccd5c2;
 }
-.geometry-test canvas:focus {
+.geometry-test canvas[aria-label]:focus {
   border-color: #245b45;
 }
 .scene-shortcuts {
@@ -1195,7 +1200,7 @@ time {
 .asset-inspector {
   scroll-margin-top: 84px;
 }
-.geometry-test canvas {
+.geometry-test canvas[aria-label] {
   width: auto;
   max-width: 100%;
   max-height: 480px;
