@@ -196,3 +196,11 @@ use real regional recipes, generated surfaces/routes and terrain presentation
 through this same host. Their only staging is initial observer/car/train positions
 and disabled extra traffic population. Generated train starts are valid saved
 service records seeded before Realm startup, not a preview-only movement loop.
+
+
+The [curved train fixtures](../tactical/063-curved-train-routes.md) supply tangent
+line/arc paths and named stops to the same RailwaySystem. Train geometry is drawn
+by the shared raster renderer on Canvas/GPU using replicated heading frames;
+replicas derive matching conservative colliders from those frames. Lab underlays
+only draw the static alignment/platform/town diagram. Generated routes keep the
+accepted native horizontal representation until the new motion/art is reviewed.

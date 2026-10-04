@@ -110,6 +110,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [062 Generated road/rail crossing](062-generated-road-rail-crossing.md) | Implemented for review: three seeded regional crossings with shared road grades and persistence; [world geometry](../topics/world-geometry.md) |
 
+| [063 Curved train routes](063-curved-train-routes.md) | Implemented for review: smooth carriage corners, four-stop town loop and winding station link; [trains](../topics/trains.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

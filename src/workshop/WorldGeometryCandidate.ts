@@ -5,20 +5,27 @@ import queries from "../physics/SimulationEnvironment.ts?raw";
 import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
 import excavation from "../physics/TerrainExcavation.ts?raw";
+import curveMotion from "../railway/CurvedRailMotion.ts?raw";
+import curveTrain from "../railway/CurveTrain.ts?raw";
+import curvePath from "../railway/RailPath.ts?raw";
 import planner from "../railway/RailwayPlanner.ts?raw";
 import strategy from "../railway/RailwayStrategy.ts?raw";
 import railway from "../railway/RailwaySystem.ts?raw";
 import bridge from "../railway/RoadRailBridge.ts?raw";
 import trainBodies from "../railway/Train.ts?raw";
+import curveDrawing from "../rendering/CurveTrainPresentation.ts?raw";
 import ordering from "../rendering/presentSurfaceScene.ts?raw";
 import presentation from "../rendering/SurfacePresentation.ts?raw";
+import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
+import scenarioHost from "../scenarios/ScenarioSession.ts?raw";
 import { trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import traffic from "../traffic/TrafficSystem.ts?raw";
+import curveLayout from "./CurvedTrainPreview.ts?raw";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildWorldGeometryCandidate(
@@ -132,5 +139,36 @@ export async function buildGeneratedCrossingCandidate(index: number): Promise<Wo
     ),
     excluded:
       "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot.",
+  };
+}
+
+export async function buildCurvedTrainCandidate(loop: boolean): Promise<WorkshopCandidate> {
+  const fixture = loop ? "train-loop" : "train-winding";
+  return {
+    id: `geometry:${fixture}-v1`,
+    batchId: "world-geometry",
+    kind: "geometry",
+    name: loop ? "Train around town, four stops" : "Winding train between towns",
+    prompt:
+      "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Shared authority with schematic train bodies and track; review before world generation.",
+    url: `/tilefun/workshop.html?geometry=${fixture}#/tool/world-geometry`,
+    fingerprint: await sha256(
+      new TextEncoder().encode(
+        JSON.stringify({
+          recipe: curvedTrainRecipe(loop),
+          reverse: curvedTrainRecipe(loop, true),
+          railway,
+          curveMotion,
+          curvePath,
+          curveTrain,
+          curveDrawing,
+          curveLayout,
+          scenarioHost,
+          collision,
+        }),
+      ),
+    ),
+    excluded:
+      "Interactive engine experiment; schematic rolling stock, not a promoted art snapshot.",
   };
 }

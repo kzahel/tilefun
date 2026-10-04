@@ -1,6 +1,6 @@
 # 062 — First generated road-over-rail crossing
 
-Status: implemented and validated; human review pending.
+Status: implemented, validated and accepted in chat on 2026-10-04 (“All seems fine”).
 Owners: [world geometry](../topics/world-geometry.md), [trains](../topics/trains.md),
 [city generation](../topics/city-generation.md).
 

@@ -95,7 +95,7 @@ export function collectScene(
     if (!e.sprite) continue;
     const effectiveWy = e.position.wy - (e.wz ?? 0);
     const meshAsset = meshAssetFor(e);
-    const meshRadius = meshAsset ? 64 : 0;
+    const meshRadius = e.type === "train-curve-proof-v1" ? 96 : meshAsset ? 64 : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     if (
       e.position.wx + halfW < vpTL.wx - M ||

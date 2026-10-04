@@ -21969,7 +21969,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:148"
+          "source": "src/entities/EntityDefs.ts:150"
         },
         {
           "system": "Gameplay",
@@ -22013,11 +22013,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:49"
+          "source": "src/scenarios/ScenarioSession.ts:50"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:168"
+          "source": "src/scenarios/ScenarioSession.ts:179"
         },
         {
           "system": "Gameplay",
@@ -22057,7 +22057,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:24"
+          "source": "src/shared/serialization.ts:25"
         },
         {
           "system": "Gameplay",
@@ -22111,7 +22111,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:188"
+          "source": "src/entities/EntityDefs.ts:190"
         },
         {
           "system": "World generation",
@@ -22165,7 +22165,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:217"
+          "source": "src/entities/EntityDefs.ts:219"
         },
         {
           "system": "World generation",
@@ -22199,7 +22199,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:247"
+          "source": "src/entities/EntityDefs.ts:249"
         },
         {
           "system": "Gameplay",
@@ -22237,7 +22237,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:272"
+          "source": "src/entities/EntityDefs.ts:274"
         },
         {
           "system": "Gameplay",
@@ -22275,7 +22275,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:297"
+          "source": "src/entities/EntityDefs.ts:299"
         },
         {
           "system": "Gameplay",
@@ -22317,7 +22317,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:319"
+          "source": "src/entities/EntityDefs.ts:321"
         },
         {
           "system": "Gameplay",
@@ -22359,7 +22359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:341"
+          "source": "src/entities/EntityDefs.ts:343"
         },
         {
           "system": "Gameplay",
@@ -22417,7 +22417,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:363"
+          "source": "src/entities/EntityDefs.ts:365"
         },
         {
           "system": "Gameplay",
@@ -22463,11 +22463,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:460"
+          "source": "src/entities/EntityDefs.ts:462"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:462"
+          "source": "src/entities/EntityDefs.ts:464"
         },
         {
           "system": "Gameplay",
@@ -22509,7 +22509,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:475"
+          "source": "src/entities/EntityDefs.ts:477"
         },
         {
           "system": "World generation",
@@ -22543,7 +22543,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:500"
+          "source": "src/entities/EntityDefs.ts:502"
         },
         {
           "system": "Gameplay",
@@ -22705,7 +22705,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:168"
+          "source": "src/entities/EntityDefs.ts:170"
         },
         {
           "system": "Gameplay",
@@ -22747,11 +22747,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:401"
+          "source": "src/entities/EntityDefs.ts:403"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:403"
+          "source": "src/entities/EntityDefs.ts:405"
         },
         {
           "system": "Gameplay",
@@ -22805,11 +22805,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:430"
+          "source": "src/entities/EntityDefs.ts:432"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:432"
+          "source": "src/entities/EntityDefs.ts:434"
         },
         {
           "system": "Gameplay",

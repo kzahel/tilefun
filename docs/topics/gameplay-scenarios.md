@@ -23,6 +23,8 @@ wall props. Recipes contain no update callbacks and need no DOM or image loading
 - `TrafficRecipe`: current regional lanes, a compact car and bus, braking/roof commands.
 - `FurnitureRecipe`: compiled furniture placements, reviewed body proposals and room edges.
 - `CharacterRecipe`: candidate settings, passage/step/clearance obstacles and scale reference.
+- `CurvedTrainRecipe`: a four-stop loop and a winding three-stop corridor, using
+  production distance-based train motion and schematic heading frames.
 - `TrainGeometryRecipe`: one production railway service with per-carriage grade
   support, bridge/tunnel surfaces and two termini.
 - `VehicleGeometryRecipe`: straight car routes over the railway bridge or into the garage,

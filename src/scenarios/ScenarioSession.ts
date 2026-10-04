@@ -6,6 +6,7 @@ import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
+import { railAlignment } from "../railway/RailPath.js";
 import { RoadType } from "../road/RoadType.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
@@ -62,6 +63,7 @@ export class ScenarioSession {
               typeof line.surfaceFollowing.startAtEnd !== "boolean")))
       )
         throw new Error("Invalid scenario railway");
+    for (const line of recipe.railways ?? []) if (line.path) railAlignment(line.path);
     this.physics = scenarioPhysics(recipe.physics);
     this.randomState = recipe.generation.seed;
   }
@@ -138,13 +140,22 @@ export class ScenarioSession {
         ? {
             railways: {
               query: (b) =>
-                this.recipe.railways?.filter(
-                  (line) =>
-                    line.start <= b.maxX &&
-                    line.end >= b.minX &&
-                    line.y >= b.minY &&
-                    line.y <= b.maxY,
-                ) ?? [],
+                this.recipe.railways?.filter((line) => {
+                  const bounds = line.path
+                    ? railAlignment(line.path).bounds
+                    : {
+                        minX: line.start * 16,
+                        maxX: line.end * 16,
+                        minY: line.y * 16,
+                        maxY: line.y * 16,
+                      };
+                  return (
+                    bounds.minX <= b.maxX * 16 &&
+                    bounds.maxX >= b.minX * 16 &&
+                    bounds.minY <= b.maxY * 16 &&
+                    bounds.maxY >= b.minY * 16
+                  );
+                }) ?? [],
             },
           }
         : {}),
@@ -175,6 +186,31 @@ export class ScenarioSession {
     if (fresh) {
       // Seed the entire bounded track once; saved chunk edits own it thereafter.
       for (const line of this.recipe.railways ?? []) {
+        if (line.path) {
+          const alignment = railAlignment(line.path),
+            b = alignment.bounds;
+          await this.ready({
+            minCx: Math.floor(b.minX / 256),
+            maxCx: Math.floor(b.maxX / 256),
+            minCy: Math.floor(b.minY / 256),
+            maxCy: Math.floor(b.maxY / 256),
+          });
+          for (const p of alignment.samples(8))
+            for (let tx = Math.floor((p.x - 24) / 16); tx <= Math.floor((p.x + 24) / 16); tx++)
+              for (let ty = Math.floor((p.y - 24) / 16); ty <= Math.floor((p.y + 24) / 16); ty++) {
+                const cx = Math.floor(tx / 16),
+                  cy = Math.floor(ty / 16);
+                const chunk = this.realm.world.getChunkIfLoaded(cx, cy);
+                if (!chunk) throw Error("Curved track is not ready");
+                chunk.setRoad(
+                  ((tx % 16) + 16) % 16,
+                  ((ty % 16) + 16) % 16,
+                  RoadType.RailCurveProof,
+                );
+                this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
+              }
+          continue;
+        }
         const minX = line.start - 16,
           maxX = line.end + 16;
         const range = {

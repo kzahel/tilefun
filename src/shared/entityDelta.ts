@@ -1,4 +1,5 @@
 import { applyPlayerModel } from "../characters/PlayerModels.js";
+import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
  * Entity delta compression — diff and apply functions for per-entity
@@ -291,6 +292,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "parentId");
   applyOptionalNum(entity, delta, "localOffsetX");
   applyOptionalNum(entity, delta, "localOffsetY");
+  applyCurveTrainFacing(entity);
 }
 
 function applyOptionalBool(entity: Entity, delta: EntityDelta, field: OptionalBoolField): void {

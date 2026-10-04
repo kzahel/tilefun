@@ -77,7 +77,11 @@ export const TRAIN_CARRIAGE_DEFS: Record<string, EntityDef> = Object.fromEntries
   ]),
 );
 export function isTrain(entity: { type: string }): boolean {
-  return entity.type === TRAIN_TYPE || entity.type.startsWith("train-carriage-v1:");
+  return (
+    entity.type === "train-curve-proof-v1" ||
+    entity.type === TRAIN_TYPE ||
+    entity.type.startsWith("train-carriage-v1:")
+  );
 }
 export function createTrainCarriages(wx: number, wy: number, heights: readonly number[]): Entity[] {
   return TRAIN_CARRIAGES.map((c, i) => {

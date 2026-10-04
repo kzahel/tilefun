@@ -9,11 +9,15 @@ import { RoadType } from "../road/RoadType.js";
 import type { InterestTicket } from "../server/InterestManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
+import { stepCurvedTrain } from "./CurvedRailMotion.js";
+import { createCurveTrain } from "./CurveTrain.js";
+import { type RailPath, railAlignment } from "./RailPath.js";
 import type { RailLine } from "./RailwayPlanner.js";
 import { createTrain, createTrainCarriages, TRAIN_LENGTH } from "./Train.js";
 
-/** Straight horizontal route in tile coordinates, independent of town planning. */
+/** Legacy straight tile route, or an opt-in world-pixel alignment with station distances. */
 export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end"> & {
+  path?: RailPath;
   /** Authored straight grade proof. Generated services retain their flat whole-train body. */
   surfaceFollowing?: { startZ: number; endZ: number; startAtEnd?: boolean };
 };
@@ -27,6 +31,10 @@ export interface RailServiceRecord {
   target: 0 | 1;
   dwell: number;
   deleted: boolean;
+  /** Curved routes persist arc distance, next stop and exact geometry identity. */
+  distance?: number;
+  nextStop?: number;
+  pathKey?: string;
   heights?: number[];
   speed?: number;
 }
@@ -62,7 +70,7 @@ export class RailwaySystem {
       const state = [...this.services.values()].find((s) => s.carriages.includes(entity));
       if (state) {
         state.record.deleted = true;
-        for (const car of state.carriages) if (car.velocity) car.velocity.vx = 0;
+        for (const car of state.carriages) if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
         state.speed = 0;
         this.dirty(state);
       }
@@ -114,7 +122,7 @@ export class RailwaySystem {
       if (!this.wanted.has(s.line.id) && !s.retiring) {
         s.retiring = true;
         s.speed = 0;
-        for (const car of s.carriages) if (car.velocity) car.velocity.vx = 0;
+        for (const car of s.carriages) if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
         this.dirty(s);
         const task = this.saves
           .flushSnapshot()
@@ -135,6 +143,8 @@ export class RailwaySystem {
       }
   }
   private async load(line: RailRoute) {
+    const alignment = line.path ? railAlignment(line.path) : undefined;
+    if (alignment && line.surfaceFollowing) throw Error("Curved grades are not supported yet");
     const saved = (await this.saves.store.get("railServices", line.id)) as
       | RailServiceRecord
       | undefined;
@@ -143,8 +153,15 @@ export class RailwaySystem {
       saved &&
       (saved.version !== 1 ||
         !Number.isFinite(saved.x) ||
-        saved.x < line.start * 16 ||
-        saved.x > line.end * 16 ||
+        (!alignment && (saved.x < line.start * 16 || saved.x > line.end * 16)) ||
+        (alignment &&
+          (!Number.isFinite(saved.distance) ||
+            required(saved.distance) < 0 ||
+            required(saved.distance) >= alignment.length ||
+            !Number.isInteger(saved.nextStop) ||
+            required(saved.nextStop) < 0 ||
+            required(saved.nextStop) >= alignment.path.stops.length ||
+            saved.pathKey !== JSON.stringify(line.path))) ||
         ![0, 1].includes(saved.target) ||
         !Number.isFinite(saved.dwell) ||
         saved.dwell < 0 ||
@@ -158,24 +175,35 @@ export class RailwaySystem {
             !saved.heights.every((z) => Number.isFinite(z) && Math.abs(z) <= 4096))))
     )
       throw Error("Invalid saved railway service");
-    const record = saved ?? {
+    const record: RailServiceRecord = saved ?? {
       version: 1 as const,
       x: (line.surfaceFollowing?.startAtEnd ? line.end : line.start) * 16,
       target: line.surfaceFollowing?.startAtEnd ? (0 as const) : (1 as const),
       dwell: DWELL,
       deleted: false,
     };
+    if (alignment && !saved) {
+      const initial = line.path?.reverse ? alignment.path.stops.length - 1 : 0;
+      record.distance = required(alignment.path.stops[initial]).distance;
+      record.target = line.path?.reverse ? 0 : 1;
+      record.nextStop =
+        (initial + (record.target ? 1 : -1) + alignment.path.stops.length) %
+        alignment.path.stops.length;
+      record.pathKey = JSON.stringify(line.path);
+    }
     const grade = line.surfaceFollowing;
-    const carriages = grade
-      ? createTrainCarriages(
-          record.x,
-          line.y * 16,
-          saved?.heights ?? Array(3).fill(grade.startAtEnd ? grade.endZ : grade.startZ),
-        )
-      : [createTrain(record.x, line.y * 16)];
-    const entity = required(carriages[grade ? 1 : 0]);
+    const carriages = alignment
+      ? createCurveTrain(alignment, required(record.distance))
+      : grade
+        ? createTrainCarriages(
+            record.x,
+            line.y * 16,
+            saved?.heights ?? Array(3).fill(grade.startAtEnd ? grade.endZ : grade.startZ),
+          )
+        : [createTrain(record.x, line.y * 16)];
+    const entity = required(carriages[grade || alignment ? 1 : 0]);
     carriages.forEach((car, i) => {
-      car.proceduralId = grade ? `${line.id}:carriage:${i}` : `${line.id}:train`;
+      car.proceduralId = grade || alignment ? `${line.id}:carriage:${i}` : `${line.id}:train`;
     });
     const state: RailService = {
       line,
@@ -205,8 +233,8 @@ export class RailwaySystem {
     return {
       minCx: Math.floor((s.entity.position.wx - margin) / 256),
       maxCx: Math.floor((s.entity.position.wx + margin) / 256),
-      minCy: Math.floor((s.entity.position.wy - 32) / 256),
-      maxCy: Math.floor((s.entity.position.wy + 32) / 256),
+      minCy: Math.floor((s.entity.position.wy - (s.line.path ? margin : 32)) / 256),
+      maxCy: Math.floor((s.entity.position.wy + (s.line.path ? margin : 32)) / 256),
     };
   }
   tickets(): InterestTicket[] {
@@ -228,7 +256,7 @@ export class RailwaySystem {
       for (const car of s.carriages) {
         car.prevPosition = { ...car.position };
         car.prevWz = car.wz ?? 0;
-        if (car.velocity) car.velocity.vx = 0;
+        if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
       }
       if (!ready(this.range(s))) {
         s.speed = 0;
@@ -238,6 +266,11 @@ export class RailwaySystem {
       const steps = Math.max(1, Math.ceil(Math.min(dt, 1) * 60)),
         step = Math.min(dt, 1) / steps;
       for (let i = 0; i < steps; i++) {
+        if (s.line.path) {
+          for (const car of s.carriages) if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
+          stepCurvedTrain(s, step, this.world, this.entities, this.props);
+          continue;
+        }
         if (s.record.dwell > 0) {
           s.record.dwell = Math.max(0, s.record.dwell - step);
           s.speed = 0;
@@ -276,8 +309,9 @@ export class RailwaySystem {
         }
       }
       for (const car of s.carriages) {
-        if (car.velocity) car.velocity.vx = e.velocity.vx;
-        if (car.sprite) car.sprite.moving = e.velocity.vx !== 0;
+        if (!s.line.path && car.velocity) car.velocity.vx = e.velocity.vx;
+        if (car.sprite)
+          car.sprite.moving = Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0) > 0;
         this.entities.spatialHash.update(car);
       }
       this.dirty(s);

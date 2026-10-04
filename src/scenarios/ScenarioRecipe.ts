@@ -13,7 +13,7 @@ export interface ScenarioRecipe {
   player: Entity;
   props: Prop[];
   actors?: Entity[];
-  /** Authored straight tracks, served by the production RailwaySystem. */
+  /** Authored straight or curved tracks, served by the production RailwaySystem. */
   railways?: RailRoute[];
   /** Initial saved positions for generated services in temporary review worlds. */
   railwayStarts?: { id: string; x: number; target: 0 | 1 }[];

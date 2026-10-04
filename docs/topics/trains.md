@@ -1,7 +1,7 @@
 # Generated railways, stations and trains
 
 Topic: trains
-Status: first generated horizontal two-town service implemented; boarding and expanded networks next.
+Status: generated horizontal services and road crossings delivered; curved-route and town-loop engine previews implemented for review.
 Updated: 2026-10-04.
 
 Owns generated railway networks, town stations, train services, railway structures
@@ -180,4 +180,27 @@ owns admission, streaming/persistence evidence and review links. One eligible
 north/south road receives a 64px deck with two ramps above the flat railway.
 Generated cars use the shared surface-following path; players can walk above
 or underneath. The bridge retains schematic lab presentation; no new bridge
-art bank is promoted. Review fixed seeds 100, 42 and 3 before expanding structures.
+art bank is promoted. The user accepted these crossings in chat on 2026-10-04.
+
+
+## Curved routes and town loops
+
+The user next prioritized train corners and curved inter-town routes. [Tactical
+063](../tactical/063-curved-train-routes.md) delivers an opt-in shared-engine path
+model with straight sections and tangent circular arcs, separate bogie-following
+carriages, closed loops, intermediate stops and persistent distance-based service
+state. Both directions, complete loop circulation and mid-bend reload are covered.
+This advances the machinery beyond the earlier cardinal-pose art studies.
+
+Review [Town loop](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train-loop#/tool/world-geometry)
+and [Winding inter-town route](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train-winding#/tool/world-geometry).
+Both run real Realm/Worker services. New geometric train bodies turn through 256
+heading poses on Canvas and GPU; rails/platforms/town blocks remain labelled
+schematic geometry. The source pack has no intermediate turning sprites, so this
+is an explicit representation proposal, not promotion of the native train bank.
+
+Current generated worlds still use the accepted straight horizontal services.
+The pre-integration review gate remains: first accept the new motion/layout and
+choose rolling-stock presentation, then add bounded generated loops/curved links
+with road-crossing and terrain admission. Curves plus grades, switches, shared
+track traffic and boarding are not part of this slice.

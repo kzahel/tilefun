@@ -20,6 +20,8 @@ export enum RoadType {
   CommercialStart = 15,
   RailHorizontalTop = 76,
   RailHorizontalBottom = 77,
+  /** Reserved bed for authored curved-route engine proofs; no promoted tile art. */
+  RailCurveProof = 78,
 }
 
 /** True if the road type is any non-None road (draws asphalt base). */

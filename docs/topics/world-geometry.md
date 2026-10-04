@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge implemented for review. Broader terrain authoring and interior integration remain open.
+Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge accepted; curved train previews implemented for review. Broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -278,3 +278,9 @@ shared collision and prediction, save/reload on ramps and below decks, chunk
 seams/readiness, two observers on different levels, and the normal fixed game
 view alongside geometry inspection. Maintain one current generator; do not
 retain historical generator implementations or promote unreviewed new art.
+
+
+The generated crossing was accepted in chat on 2026-10-04. The user then chose
+train corners and curved inter-town routes as the next priority. [Trains](trains.md#curved-routes-and-town-loops)
+owns that level-ground motion proof; underground station access and combined
+curves/grades remain subsequent geometry consumers.

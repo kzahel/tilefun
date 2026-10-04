@@ -1,6 +1,7 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
+import { drawCurveTrain } from "./CurveTrainPresentation.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
@@ -187,6 +188,7 @@ function drawSprite(
   sheets: Map<string, Spritesheet>,
 ): void {
   if (item.flashHidden) return;
+  if (drawCurveTrain(ctx, camera, item)) return;
   if (ctx.meshBody?.(camera, item)) return;
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
