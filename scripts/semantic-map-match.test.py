@@ -52,6 +52,22 @@ class MatchTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "transparent"):
             Matcher(Image.new("RGBA", (32, 32))).find(Image.new("RGBA", (16, 16)))
 
+    def test_arbitrary_origin_padding_and_repeated_occurrences(self):
+        sprite = Image.new("RGBA", (16, 23))
+        sprite.paste((10, 20, 30, 200), (0, 13, 16, 23))
+        master = Image.new("RGBA", (64, 64))
+        master.paste(sprite, (3, 5))
+        master.paste(sprite, (33, 29))
+        self.assertEqual(Matcher(master, grid=1).find(sprite),
+                         [[3, 5, 16, 23], [33, 29, 16, 23]])
+
+    def test_row_anchor_cannot_wrap_across_source_edge(self):
+        master = Image.new("RGBA", (4, 3))
+        master.putpixel((3, 0), (30, 50, 70, 255))
+        master.putpixel((0, 1), (30, 50, 70, 255))
+        sprite = Image.new("RGBA", (2, 1), (30, 50, 70, 255))
+        self.assertEqual(Matcher(master, grid=1).find(sprite), [])
+
 
 if __name__ == "__main__":
     unittest.main()

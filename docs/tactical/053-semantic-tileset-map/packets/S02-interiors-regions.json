@@ -1,0 +1,2082 @@
+{
+  "schema": "semantic-survey-proposal-v1",
+  "packet": "S02",
+  "revision": 1,
+  "date": "2026-10-04",
+  "coordinateConvention": "[x,y,width,height], original pixels, top-left origin; half-open; packed alias coordinates explicitly separate",
+  "sources": {
+    "interiors": {
+      "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+      "dimensions": [
+        256,
+        17024
+      ],
+      "sha256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b"
+    },
+    "room-builder": {
+      "path": "assets/interiors/1_Interiors/16x16/Room_Builder_16x16.png",
+      "dimensions": [
+        1216,
+        1808
+      ],
+      "sha256": "f53d7cd04f275dfa4b3e1f410569d491275105e2710a0f86ec46edeff3ab576f"
+    }
+  },
+  "evidenceRecipe": "python3 scripts/semantic-map-interiors-survey.py --out /tmp/tilefun-semantic-interiors",
+  "detailEvidence": [
+    {
+      "source": "interiors",
+      "path": "interiors-00.png",
+      "rect": [
+        0,
+        0,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-01.png",
+      "rect": [
+        0,
+        960,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-02.png",
+      "rect": [
+        0,
+        1920,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-03.png",
+      "rect": [
+        0,
+        2880,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-04.png",
+      "rect": [
+        0,
+        3840,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-05.png",
+      "rect": [
+        0,
+        4800,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-06.png",
+      "rect": [
+        0,
+        5760,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-07.png",
+      "rect": [
+        0,
+        6720,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-08.png",
+      "rect": [
+        0,
+        7680,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-09.png",
+      "rect": [
+        0,
+        8640,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-10.png",
+      "rect": [
+        0,
+        9600,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-11.png",
+      "rect": [
+        0,
+        10560,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-12.png",
+      "rect": [
+        0,
+        11520,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-13.png",
+      "rect": [
+        0,
+        12480,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-14.png",
+      "rect": [
+        0,
+        13440,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-15.png",
+      "rect": [
+        0,
+        14400,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-16.png",
+      "rect": [
+        0,
+        15360,
+        256,
+        1024
+      ]
+    },
+    {
+      "source": "interiors",
+      "path": "interiors-17.png",
+      "rect": [
+        0,
+        16320,
+        256,
+        704
+      ]
+    },
+    {
+      "source": "room-builder",
+      "path": "room-builder-00.png",
+      "rect": [
+        0,
+        0,
+        640,
+        960
+      ]
+    },
+    {
+      "source": "room-builder",
+      "path": "room-builder-01.png",
+      "rect": [
+        576,
+        0,
+        640,
+        960
+      ]
+    },
+    {
+      "source": "room-builder",
+      "path": "room-builder-02.png",
+      "rect": [
+        0,
+        848,
+        640,
+        960
+      ]
+    },
+    {
+      "source": "room-builder",
+      "path": "room-builder-03.png",
+      "rect": [
+        576,
+        848,
+        640,
+        960
+      ]
+    }
+  ],
+  "coverage": {
+    "interiors": {
+      "wholeSourceVisuallySurveyed": true,
+      "detailCrops": 18,
+      "occupiedPixels": 1952339,
+      "occupiedPixelsOutsideProposedWindows": 0,
+      "outsideWindowsBBox": null,
+      "unexaminedPixels": 0,
+      "objectSegmentationComplete": false,
+      "semanticCompleteness": "not-measured; broad survey only"
+    },
+    "room-builder": {
+      "wholeSourceVisuallySurveyed": true,
+      "detailCrops": 4,
+      "occupiedPixels": 880450,
+      "occupiedPixelsOutsideProposedWindows": 0,
+      "outsideWindowsBBox": null,
+      "unexaminedPixels": 0,
+      "objectSegmentationComplete": false,
+      "semanticCompleteness": "not-measured; broad survey only",
+      "occupiedPixelsOutsideFamilyWindows": 2466,
+      "outsideFamilyWindowsDisposition": "2466 pixels in five embedded-caption/arrow windows, visually confirmed after excluding family windows; not asset art."
+    }
+  },
+  "regions": [
+    {
+      "id": "S02-I01",
+      "source": "interiors",
+      "rect": [
+        0,
+        0,
+        256,
+        416
+      ],
+      "role": "navigation-band",
+      "themeProposal": "basic-domestic-and-shop",
+      "observedFamilies": "Mixed beds/tables, rugs, pictures, lockers/shelves, chairs, portraits and potted plants",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-00.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I02",
+      "source": "interiors",
+      "rect": [
+        0,
+        416,
+        256,
+        512
+      ],
+      "role": "navigation-band",
+      "themeProposal": "domestic-storage-and-circulation",
+      "observedFamilies": "Purple/gold furniture, wooden cabinets, mirrors, bookcases, counters/registers, stairs, rugs and fireplace",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-00.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I03",
+      "source": "interiors",
+      "rect": [
+        0,
+        928,
+        256,
+        320
+      ],
+      "role": "navigation-band",
+      "themeProposal": "music-and-sport-early",
+      "observedFamilies": "Upright/grand pianos, guitars, harps, drums, microphones, balls and sports posters",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-00.png",
+        "interiors-01.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I04",
+      "source": "interiors",
+      "rect": [
+        0,
+        1248,
+        256,
+        80
+      ],
+      "role": "navigation-band",
+      "themeProposal": "party-and-art-transition",
+      "observedFamilies": "Cakes/balloons/gifts/plates and easels at the right; adjoining music/art equipment",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-01.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I05",
+      "source": "interiors",
+      "rect": [
+        0,
+        1328,
+        256,
+        400
+      ],
+      "role": "navigation-band",
+      "themeProposal": "art-gym-and-bath-transition",
+      "observedFamilies": "Easels/paint and mats/punching bags/weights at left; pots, toilets, sinks and laundry at right/lower",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-01.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I06",
+      "source": "interiors",
+      "rect": [
+        0,
+        1728,
+        256,
+        256
+      ],
+      "role": "navigation-band",
+      "themeProposal": "bathroom-early",
+      "observedFamilies": "Sinks, mirrors, tubs, toilets, shower stalls, buckets and laundry baskets",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-01.png",
+        "interiors-02.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I07",
+      "source": "interiors",
+      "rect": [
+        0,
+        1984,
+        256,
+        224
+      ],
+      "role": "navigation-band",
+      "themeProposal": "fishing-and-camping",
+      "observedFamilies": "Coolers, rods/tackle, compact chairs/stools, cooking equipment and fish/catch",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-02.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I08",
+      "source": "interiors",
+      "rect": [
+        0,
+        2208,
+        256,
+        192
+      ],
+      "role": "navigation-band",
+      "themeProposal": "parasols-and-reclining-chairs",
+      "observedFamilies": "Shade umbrellas and paired outdoor/leisure chairs, several colors and combinations",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-02.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I09",
+      "source": "interiors",
+      "rect": [
+        0,
+        2400,
+        256,
+        544
+      ],
+      "role": "navigation-band",
+      "themeProposal": "bedroom-playroom-and-gym-transition",
+      "observedFamilies": "Beds, dressers, toys, dolls, train set, rugs, low play tables; gym equipment intrudes lower right",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-02.png",
+        "interiors-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I10",
+      "source": "interiors",
+      "rect": [
+        0,
+        2944,
+        256,
+        640
+      ],
+      "role": "navigation-band",
+      "themeProposal": "halloween-and-domestic-additions",
+      "observedFamilies": "Pumpkins, webs, coffins, ghosts, ritual markings and stains; wooden tables, beds, windows and doors mixed in",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I11",
+      "source": "interiors",
+      "rect": [
+        0,
+        3584,
+        256,
+        544
+      ],
+      "role": "navigation-band",
+      "themeProposal": "library-and-stage-additions",
+      "observedFamilies": "Bookcase size/color repeats dominate; curtains, coffin/bed/rug additions, podium and stage components",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-03.png",
+        "interiors-04.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I12",
+      "source": "interiors",
+      "rect": [
+        0,
+        4128,
+        256,
+        608
+      ],
+      "role": "navigation-band",
+      "themeProposal": "kitchen-and-dining",
+      "observedFamilies": "Cabinets/counters, sinks, chairs and tables, cloths, fridges, ovens, cookware and food",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-04.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I13",
+      "source": "interiors",
+      "rect": [
+        0,
+        4736,
+        256,
+        336
+      ],
+      "role": "navigation-band",
+      "themeProposal": "library-repeat-and-counter-edges",
+      "observedFamilies": "More bookcases interleaved with glass-topped tables and narrow cabinet/counter panels",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-04.png",
+        "interiors-05.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I14",
+      "source": "interiors",
+      "rect": [
+        0,
+        5072,
+        256,
+        240
+      ],
+      "role": "navigation-band",
+      "themeProposal": "conference-and-stage",
+      "observedFamilies": "Podiums, platforms, projection/display pieces, lectern, chairs and equipment; draped tables",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-05.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I15",
+      "source": "interiors",
+      "rect": [
+        0,
+        5312,
+        256,
+        144
+      ],
+      "role": "navigation-band",
+      "themeProposal": "classroom",
+      "observedFamilies": "Desks, books, globes, chairs, chalkboards and bulletin boards",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-05.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I16",
+      "source": "interiors",
+      "rect": [
+        0,
+        5456,
+        256,
+        208
+      ],
+      "role": "navigation-band",
+      "themeProposal": "upholstered-sofa-family",
+      "observedFamilies": "Sofas/armchairs in multiple facing/size/color arrangements, cushions, small round tables and vases",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-05.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I17",
+      "source": "interiors",
+      "rect": [
+        0,
+        5664,
+        256,
+        320
+      ],
+      "role": "navigation-band",
+      "themeProposal": "recreation-and-living-furniture",
+      "observedFamilies": "Table tennis, billiards, benches/tables/stools, wardrobes/cabinet sides and televisions",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-05.png",
+        "interiors-06.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I18",
+      "source": "interiors",
+      "rect": [
+        0,
+        5984,
+        256,
+        288
+      ],
+      "role": "navigation-band",
+      "themeProposal": "living-circulation-and-shop-additions",
+      "observedFamilies": "Armchairs, low cushions, stairs/banisters, rug, curtains/windows, signs/tools and vending/display machines",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-06.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I19",
+      "source": "interiors",
+      "rect": [
+        0,
+        6272,
+        256,
+        256
+      ],
+      "role": "navigation-band",
+      "themeProposal": "christmas",
+      "observedFamilies": "Evergreen trees, gifts, wreaths, fireplaces, stockings, nutcrackers, stars and seasonal decoration",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-06.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I20",
+      "source": "interiors",
+      "rect": [
+        0,
+        6528,
+        256,
+        784
+      ],
+      "role": "navigation-band",
+      "themeProposal": "grocery-bakery-and-butcher",
+      "observedFamilies": "Shopping carts, shelves/products, refrigerated displays, baskets, checkout, bakery food and meat/hanging carcasses",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-06.png",
+        "interiors-07.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I21",
+      "source": "interiors",
+      "rect": [
+        0,
+        7312,
+        256,
+        160
+      ],
+      "role": "navigation-band",
+      "themeProposal": "stairs-balcony-and-transition",
+      "observedFamilies": "Long stairs, railings, balcony/upper-floor sections; retail/fish/flower pieces at the right",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-07.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I22",
+      "source": "interiors",
+      "rect": [
+        0,
+        7472,
+        256,
+        208
+      ],
+      "role": "navigation-band",
+      "themeProposal": "fish-produce-and-market",
+      "observedFamilies": "Fish counters/aquariums and fish pieces, produce/crates, hanging food/garlands and carts",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-07.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I23",
+      "source": "interiors",
+      "rect": [
+        0,
+        7680,
+        256,
+        192
+      ],
+      "role": "navigation-band",
+      "themeProposal": "damaged-and-intact-domestic-furniture",
+      "observedFamilies": "Broken wooden seats/cabinets and debris beside intact wardrobes/counters, mirrors and lamps",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-07.png",
+        "interiors-08.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I24",
+      "source": "interiors",
+      "rect": [
+        0,
+        7872,
+        256,
+        224
+      ],
+      "role": "navigation-band",
+      "themeProposal": "florist-and-plants",
+      "observedFamilies": "Potted topiary/cacti/flowers, bouquets, wreath-like arrangements, flower cabinets and heart displays",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-08.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I25",
+      "source": "interiors",
+      "rect": [
+        0,
+        8096,
+        256,
+        400
+      ],
+      "role": "navigation-band",
+      "themeProposal": "jail-and-medical-office-transition",
+      "observedFamilies": "Bars/prison bunks and stained wall pieces left; medical beds/exam apparatus, monitors/desks and office chairs right/lower",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-08.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I26",
+      "source": "interiors",
+      "rect": [
+        0,
+        8496,
+        256,
+        448
+      ],
+      "role": "navigation-band",
+      "themeProposal": "food-service-and-awards",
+      "observedFamilies": "Display shelving/screens, divider panels, chairs, desserts/boxed food plus trophy/medal rows",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-08.png",
+        "interiors-09.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I27",
+      "source": "interiors",
+      "rect": [
+        0,
+        8944,
+        256,
+        512
+      ],
+      "role": "navigation-band",
+      "themeProposal": "bathroom-laundry-repeat",
+      "observedFamilies": "Vanities, toilets, mirrors, laundry baskets/washers, showers/tubs, cabinets and debris/dirty variants",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-09.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I28",
+      "source": "interiors",
+      "rect": [
+        0,
+        9456,
+        256,
+        336
+      ],
+      "role": "navigation-band",
+      "themeProposal": "reception-and-waiting",
+      "observedFamilies": "Reception counters, forms/screens, storage shelves, potted plants and colored chair facings",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-09.png",
+        "interiors-10.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I29",
+      "source": "interiors",
+      "rect": [
+        0,
+        9792,
+        256,
+        896
+      ],
+      "role": "navigation-band",
+      "themeProposal": "hospital",
+      "observedFamilies": "Beds/stretchers, partitions/curtains, equipment, windows/doors, fire/waiting furniture and medical workstations",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-10.png",
+        "interiors-11.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I30",
+      "source": "interiors",
+      "rect": [
+        0,
+        10688,
+        256,
+        496
+      ],
+      "role": "navigation-band",
+      "themeProposal": "child-furniture-and-medical-lockers",
+      "observedFamilies": "Wheelchairs, child-sized castle storage, colorful chairs/tables, backpacks and kindergarten/playroom furniture; lockers and dirty variants lower",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-11.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I31",
+      "source": "interiors",
+      "rect": [
+        0,
+        11184,
+        256,
+        480
+      ],
+      "role": "navigation-band",
+      "themeProposal": "bed-and-bedding-modules",
+      "observedFamilies": "Bed frames, side-facing beds, mattress and blanket/color/pattern variants",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-11.png",
+        "interiors-12.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I32",
+      "source": "interiors",
+      "rect": [
+        0,
+        11664,
+        256,
+        544
+      ],
+      "role": "navigation-band",
+      "themeProposal": "child-bedroom-toys-and-bunks",
+      "observedFamilies": "Dolls, rugs, toy trains, skateboard-like objects, nightlights, bunk beds and toy houses",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-12.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I33",
+      "source": "interiors",
+      "rect": [
+        0,
+        12208,
+        256,
+        448
+      ],
+      "role": "navigation-band",
+      "themeProposal": "japanese-interior",
+      "observedFamilies": "Built-in storage, tatami-like mats, low tables/cushions, shoji panels, floor bedding and decorative alcove-like components",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-12.png",
+        "interiors-13.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I34",
+      "source": "interiors",
+      "rect": [
+        0,
+        12656,
+        256,
+        496
+      ],
+      "role": "navigation-band",
+      "themeProposal": "clothing-store-and-garment-pieces",
+      "observedFamilies": "Garments, mannequins, hats, racks, folded stock, mirrors, shelving and changing-room fixtures",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-13.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I35",
+      "source": "interiors",
+      "rect": [
+        0,
+        13152,
+        256,
+        592
+      ],
+      "role": "navigation-band",
+      "themeProposal": "clothing-seating-and-headwear",
+      "observedFamilies": "Retail accessories plus many small directional garment/headwear pieces and mannequin arrangements",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-13.png",
+        "interiors-14.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I36",
+      "source": "interiors",
+      "rect": [
+        0,
+        13744,
+        256,
+        752
+      ],
+      "role": "navigation-band",
+      "themeProposal": "museum-ticketing-art-and-botany",
+      "observedFamilies": "Ticket counters/turnstiles, pottery/plinths, ropes, framed paintings, columns, display cases, specimens and botanical displays",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-14.png",
+        "interiors-15.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I37",
+      "source": "interiors",
+      "rect": [
+        0,
+        14496,
+        256,
+        496
+      ],
+      "role": "navigation-band",
+      "themeProposal": "museum-statues-and-display-cases",
+      "observedFamilies": "Pond/plant edge above; statues, busts, mannequins/exhibits, empty and populated glass cases, fossils/rocks",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-15.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I38",
+      "source": "interiors",
+      "rect": [
+        0,
+        14992,
+        256,
+        480
+      ],
+      "role": "navigation-band",
+      "themeProposal": "museum-large-creatures-and-fossils",
+      "observedFamilies": "Mounted skeletons and dinosaur-like reconstruction exhibits with platforms/backdrops and bare versions",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-15.png",
+        "interiors-16.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I39",
+      "source": "interiors",
+      "rect": [
+        0,
+        15472,
+        256,
+        224
+      ],
+      "role": "navigation-band",
+      "themeProposal": "museum-souvenirs",
+      "observedFamilies": "Souvenir counters, signs, plush-like creature replicas, books/posters/cards and pottery",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-16.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I40",
+      "source": "interiors",
+      "rect": [
+        0,
+        15696,
+        256,
+        272
+      ],
+      "role": "navigation-band",
+      "themeProposal": "music-repeat",
+      "observedFamilies": "Pianos/keyboards, guitars, drums/harps and percussion, instruments in several sizes/colors",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-16.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I41",
+      "source": "interiors",
+      "rect": [
+        0,
+        15968,
+        256,
+        240
+      ],
+      "role": "navigation-band",
+      "themeProposal": "gym-repeat",
+      "observedFamilies": "Exercise balls, dumbbells, weights/racks, mats, benches/machines and punching bags",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-16.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I42",
+      "source": "interiors",
+      "rect": [
+        0,
+        16208,
+        256,
+        112
+      ],
+      "role": "navigation-band",
+      "themeProposal": "television-film-studio",
+      "observedFamilies": "Cameras/tripods, lights/stands, screens, green-screen pieces, equipment and director-style chairs",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-16.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I43",
+      "source": "interiors",
+      "rect": [
+        0,
+        16320,
+        256,
+        288
+      ],
+      "role": "navigation-band",
+      "themeProposal": "ice-cream-shop",
+      "observedFamilies": "Counters, menu boards, ice-cream cones, dispensers and multicolor refrigerated tubs/displays",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-16.png",
+        "interiors-17.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I44",
+      "source": "interiors",
+      "rect": [
+        0,
+        16608,
+        256,
+        80
+      ],
+      "role": "navigation-band",
+      "themeProposal": "shooting-range",
+      "observedFamilies": "Counters/benches, circular targets on posts, hanging target carriers and screens",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-17.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-I45",
+      "source": "interiors",
+      "rect": [
+        0,
+        16688,
+        256,
+        336
+      ],
+      "role": "navigation-band",
+      "themeProposal": "condominium-circulation-and-party-tail",
+      "observedFamilies": "Multiple long stair configurations, landing/door/rail/mailbox-like additions plus cakes/balloons at bottom",
+      "identityConfidence": "medium",
+      "boundsConfidence": "medium",
+      "boundsNote": "Exact navigation rectangle; theme transition is approximate, may cut objects. Not an object segmentation.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "interiors-17.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R01",
+      "source": "room-builder",
+      "rect": [
+        0,
+        0,
+        800,
+        160
+      ],
+      "role": "family-search-window",
+      "themeProposal": "borders",
+      "observedFamilies": "Ceiling/room border assemblies; arrows and embedded label",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R02",
+      "source": "room-builder",
+      "rect": [
+        800,
+        0,
+        160,
+        160
+      ],
+      "role": "family-search-window",
+      "themeProposal": "floor-shadow-connectors",
+      "observedFamilies": "Floor-shadow entrance/exit shapes and thin/classic/thick connectors; labels",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R03",
+      "source": "room-builder",
+      "rect": [
+        0,
+        160,
+        512,
+        640
+      ],
+      "role": "family-search-window",
+      "themeProposal": "walls",
+      "observedFamilies": "Repeated wall material/color strips and corners; narrow decorative band at top",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R04",
+      "source": "room-builder",
+      "rect": [
+        544,
+        176,
+        240,
+        608
+      ],
+      "role": "family-search-window",
+      "themeProposal": "floors",
+      "observedFamilies": "Floor textures and related material transitions in four vertical lanes",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R05",
+      "source": "room-builder",
+      "rect": [
+        800,
+        176,
+        112,
+        160
+      ],
+      "role": "family-search-window",
+      "themeProposal": "carpet-floor-connectors",
+      "observedFamilies": "Short patterned floor/carpet strips, several lengths/colors",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R06",
+      "source": "room-builder",
+      "rect": [
+        800,
+        336,
+        112,
+        288
+      ],
+      "role": "family-search-window",
+      "themeProposal": "stairs",
+      "observedFamilies": "Stair/railing assemblies, small directional fragments and color variants",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R07",
+      "source": "room-builder",
+      "rect": [
+        800,
+        624,
+        96,
+        64
+      ],
+      "role": "family-search-window",
+      "themeProposal": "steps",
+      "observedFamilies": "Two short step/threshold strips",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R08",
+      "source": "room-builder",
+      "rect": [
+        960,
+        96,
+        96,
+        192
+      ],
+      "role": "family-search-window",
+      "themeProposal": "baseboards",
+      "observedFamilies": "L-shaped and short baseboard/trim pieces beside embedded label",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R09",
+      "source": "room-builder",
+      "rect": [
+        1056,
+        160,
+        160,
+        512
+      ],
+      "role": "family-search-window",
+      "themeProposal": "arched-entryways",
+      "observedFamilies": "Three-tile arched openings and wall-texture matching variants",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R10",
+      "source": "room-builder",
+      "rect": [
+        832,
+        704,
+        128,
+        160
+      ],
+      "role": "family-search-window",
+      "themeProposal": "3d-wall-intro",
+      "observedFamilies": "Introductory projected wall corner/opening assembly plus 3d walls label",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R11",
+      "source": "room-builder",
+      "rect": [
+        0,
+        864,
+        672,
+        192
+      ],
+      "role": "family-search-window",
+      "themeProposal": "floor-paths",
+      "observedFamilies": "Colored/material path corners, edges and intersections in modular repeated sets",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-R12",
+      "source": "room-builder",
+      "rect": [
+        704,
+        864,
+        384,
+        944
+      ],
+      "role": "family-search-window",
+      "themeProposal": "3d-walls",
+      "observedFamilies": "Repeated projected wall/doorway/room-opening sets by material/color",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "boundsNote": "Source window, not alpha-tight object bounds; annotation overlap and split components possible.",
+      "state": "visually-surveyed-proposed",
+      "evidence": [
+        "room-builder-00.png",
+        "room-builder-01.png",
+        "room-builder-02.png",
+        "room-builder-03.png"
+      ],
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-initial-purple-gold-furniture",
+      "source": "interiors",
+      "rect": [
+        0,
+        416,
+        160,
+        64
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "initial-purple-gold-furniture",
+      "observedFamilies": "Matching purple/gold furniture; upholstered seats versus tables/low cabinets needs a close object-level challenge",
+      "identityConfidence": "low",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-wooden-cabinet-pilot",
+      "source": "interiors",
+      "rect": [
+        112,
+        480,
+        128,
+        96
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "wooden-cabinet-pilot",
+      "observedFamilies": "Wardrobes/cabinets with front and side views, glass and solid doors",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-large-sofa-probe",
+      "source": "interiors",
+      "rect": [
+        48,
+        5456,
+        208,
+        208
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "large-sofa-probe",
+      "observedFamilies": "Upholstered couch/armchair arrangements, pillows along right",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-broken-wooden-furniture",
+      "source": "interiors",
+      "rect": [
+        0,
+        7680,
+        144,
+        192
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "broken-wooden-furniture",
+      "observedFamilies": "Intact/damaged wooden furniture and separate rubble/debris; segmentation must distinguish pieces from assemblies",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-topiary-cactus-flowers",
+      "source": "interiors",
+      "rect": [
+        0,
+        7872,
+        256,
+        224
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "topiary-cactus-flowers",
+      "observedFamilies": "Plant families spread across the florist band; no species or growth-state claims yet",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-F-large-skeleton-exhibits",
+      "source": "interiors",
+      "rect": [
+        0,
+        14992,
+        256,
+        480
+      ],
+      "role": "overlapping-family-search-window",
+      "themeProposal": "large-skeleton-exhibits",
+      "observedFamilies": "Skeleton/exhibit variants with platforms and backdrops versus bare art",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "unknown"
+    },
+    {
+      "id": "S02-A-exit-caption",
+      "source": "room-builder",
+      "rect": [
+        944,
+        0,
+        48,
+        64
+      ],
+      "role": "annotation-search-window",
+      "themeProposal": "vendor-annotation",
+      "observedFamilies": "Embedded caption/arrow fragments outside art family windows",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "not-applicable"
+    },
+    {
+      "id": "S02-A-connector-carpet-captions",
+      "source": "room-builder",
+      "rect": [
+        800,
+        144,
+        176,
+        96
+      ],
+      "role": "annotation-search-window",
+      "themeProposal": "vendor-annotation",
+      "observedFamilies": "Embedded caption/arrow fragments outside art family windows",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "not-applicable"
+    },
+    {
+      "id": "S02-A-arch-caption",
+      "source": "room-builder",
+      "rect": [
+        1040,
+        80,
+        176,
+        96
+      ],
+      "role": "annotation-search-window",
+      "themeProposal": "vendor-annotation",
+      "observedFamilies": "Embedded caption/arrow fragments outside art family windows",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "not-applicable"
+    },
+    {
+      "id": "S02-A-stairs-caption",
+      "source": "room-builder",
+      "rect": [
+        896,
+        320,
+        80,
+        80
+      ],
+      "role": "annotation-search-window",
+      "themeProposal": "vendor-annotation",
+      "observedFamilies": "Embedded caption/arrow fragments outside art family windows",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "not-applicable"
+    },
+    {
+      "id": "S02-A-steps-caption",
+      "source": "room-builder",
+      "rect": [
+        896,
+        576,
+        80,
+        80
+      ],
+      "role": "annotation-search-window",
+      "themeProposal": "vendor-annotation",
+      "observedFamilies": "Embedded caption/arrow fragments outside art family windows",
+      "identityConfidence": "high",
+      "boundsConfidence": "medium",
+      "state": "visually-surveyed-proposed",
+      "independentReview": "pending",
+      "humanApproval": "not-requested",
+      "gameplayGeometry": "not-applicable"
+    }
+  ],
+  "furniturePilot": {
+    "region": "S02-F-wooden-cabinet-pilot",
+    "normalIndices": [
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "proposedVariants": [
+      "normal",
+      "black-shadow",
+      "shadowless"
+    ],
+    "normalSeeds": [
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_37.png",
+        "sha256": "c0fbaaccd25f87b27a39968373876f37db2ee84e88ad3ed800667fa5dc01f85b",
+        "normalIndex": 37,
+        "originalOccurrences": [
+          [
+            112,
+            480,
+            32,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-37",
+        "packedRect": [
+          928,
+          4014,
+          32,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_38.png",
+        "sha256": "4ab990fb58157313877a351dd598935cbc16a47660ff5814510ab4c740c064bf",
+        "normalIndex": 38,
+        "originalOccurrences": [],
+        "aliasKey": "single/normal/living-room/living-room-singles-38",
+        "packedRect": [
+          960,
+          4014,
+          32,
+          48
+        ],
+        "matchStatus": "unmatched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_39.png",
+        "sha256": "4f1baa9bc9c0039bd93c3d89a5df5fb98d86b14a70a43f94b1af780a350c3ab7",
+        "normalIndex": 39,
+        "originalOccurrences": [
+          [
+            208,
+            480,
+            32,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-39",
+        "packedRect": [
+          992,
+          4014,
+          32,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_40.png",
+        "sha256": "64f353816c27b1bff26b692595d5de684c6b8a48df42b3873241a718a105e765",
+        "normalIndex": 40,
+        "originalOccurrences": [
+          [
+            176,
+            480,
+            32,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-40",
+        "packedRect": [
+          1024,
+          4014,
+          32,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_41.png",
+        "sha256": "adc62fc9ace6c698524c56ad173aae553ceb1e7f74ebf90f147c98ac34c4d26c",
+        "normalIndex": 41,
+        "originalOccurrences": [
+          [
+            112,
+            528,
+            16,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-41",
+        "packedRect": [
+          512,
+          4926,
+          16,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_42.png",
+        "sha256": "bfc3b20dc2c6d4acb4cee742fdab1caf4a95a3c52215ee1ad94bc9a4825f8b2d",
+        "normalIndex": 42,
+        "originalOccurrences": [
+          [
+            144,
+            528,
+            16,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-42",
+        "packedRect": [
+          528,
+          4926,
+          16,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_43.png",
+        "sha256": "509a795420526eb9a1f44eb257c074086a8d9e5782a6beedf86753554acf3569",
+        "normalIndex": 43,
+        "originalOccurrences": [
+          [
+            160,
+            528,
+            16,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-43",
+        "packedRect": [
+          544,
+          4926,
+          16,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_44.png",
+        "sha256": "f165318280f4dce5f051782c1e65277a899387319c4791918e37ec4628ccc3c1",
+        "normalIndex": 44,
+        "originalOccurrences": [
+          [
+            128,
+            528,
+            16,
+            48
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-44",
+        "packedRect": [
+          560,
+          4926,
+          16,
+          48
+        ],
+        "matchStatus": "matched"
+      },
+      {
+        "singlePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_45.png",
+        "sha256": "65890735f7c56f7d3f0a5294508853dcde1004b76e7bb350f2c36800bf556912",
+        "normalIndex": 45,
+        "originalOccurrences": [
+          [
+            176,
+            528,
+            16,
+            32
+          ]
+        ],
+        "aliasKey": "single/normal/living-room/living-room-singles-45",
+        "packedRect": [
+          112,
+          7214,
+          16,
+          32
+        ],
+        "matchStatus": "matched"
+      }
+    ],
+    "unindexedContrastRegion": "S02-F-large-sofa-probe",
+    "caveat": "No normal living-room singles exact-match sofa contrast window; other themes not searched. Normal singles 38 unmatched at grid16; existence or identity not refuted."
+  },
+  "architectureProbe": {
+    "region": "S02-R11",
+    "secondaryRegion": "S02-R09",
+    "goal": "Map 16px corner/edge/center floor-path modules and one 3-tile arch to exact master, subfile and packed tile occurrences; render seams at multiple widths, retaining failed matches. Whole subfile identity is not assumed."
+  },
+  "matchingBaseline": {
+    "candidateTheme": "normal living-room",
+    "filesExamined": 122,
+    "filesWithExactGrid16Occurrences": 82,
+    "unmatchedFiles": 40,
+    "duplicateExample": {
+      "singleIndex": 96,
+      "originalOccurrences": [
+        [
+          48,
+          7696,
+          16,
+          32
+        ],
+        [
+          96,
+          7728,
+          16,
+          32
+        ]
+      ]
+    },
+    "comparison": "Visible RGBA plus alpha exact, transparent RGB normalized; all grid16 occurrences"
+  },
+  "approval": "Agent proposal only; no semantic or gameplay approval created"
+}

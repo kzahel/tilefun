@@ -27,6 +27,33 @@ class Matcher:
         self.master = normalized(master)
         self.grid = grid
         self.indexes = {}
+        self.master_bytes = None
+
+    def find_at_any_pixel(self, candidate):
+        """Stream row-anchor hits instead of indexing millions of pixel origins."""
+        width, height = candidate.size
+        mw, mh = self.master.size
+        expected = candidate.tobytes()
+        row_size = width * 4
+        # The most occupied row avoids using a transparent padding row as anchor.
+        sy = max(range(height), key=lambda y: sum(
+            expected[i] != 0 for i in range(y * row_size + 3, (y + 1) * row_size, 4)
+        ))
+        needle = expected[sy * row_size:(sy + 1) * row_size]
+        if self.master_bytes is None:
+            self.master_bytes = self.master.tobytes()
+        haystack = self.master_bytes
+        stride = mw * 4
+        matches = []
+        offset = haystack.find(needle)
+        while offset >= 0:
+            x = (offset % stride) // 4
+            y = offset // stride - sy
+            if offset % 4 == 0 and x + width <= mw and 0 <= y <= mh - height:
+                if self.master.crop((x, y, x + width, y + height)).tobytes() == expected:
+                    matches.append([x, y, width, height])
+            offset = haystack.find(needle, offset + 1)
+        return matches
 
     def index(self, width, height):
         key = (width, height)
@@ -48,6 +75,8 @@ class Matcher:
             return []
         if candidate.getchannel("A").getbbox() is None:
             raise ValueError("Fully transparent candidates have no asset identity")
+        if self.grid == 1:
+            return self.find_at_any_pixel(candidate)
         aw, ah = min(self.grid, width), min(self.grid, height)
         index = self.index(aw, ah)
         # Pick the least frequent sampled anchor; always verify the whole sprite.

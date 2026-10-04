@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: source inventory pinned; thematic reconnaissance and first trial in progress.
+Status: source inventory pinned and thematic surveys proposed; three trials in progress.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -42,5 +42,8 @@ masters remain ignored local inputs; the Exteriors master matches committed art.
 [dedicated plan folder](../tactical/053-semantic-tileset-map/README.md),
 [queue](../tactical/053-semantic-tileset-map/queue.md) and
 [notes](../tactical/053-semantic-tileset-map/notes/README.md).
-Next: verify the source manifest and integrate Exteriors/Interiors thematic surveys,
-then run the contrasting trials. The user authorized reasonable checkpoint commits.
+The [packet index](../tactical/053-semantic-tileset-map/packets/README.md) routes
+whole-master Exteriors and Interiors/Room Builder surveys. Their proposed windows
+account for visible source regions but do not claim completed object semantics.
+Next: reconcile the three trial proposals and independently review them and the
+broad thematic maps. The user authorized reasonable checkpoint commits.

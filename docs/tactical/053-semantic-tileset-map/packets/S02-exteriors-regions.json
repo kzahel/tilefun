@@ -1,0 +1,1812 @@
+{
+  "schema_version": 1,
+  "packet": "S02",
+  "revision": 1,
+  "coordinate_convention": "Original-source pixels, top-left origin; rect x,y,w,h is half-open [x,x+w) \u00d7 [y,y+h). Broad windows may overlap and include neighboring art/transparent pixels.",
+  "source": {
+    "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "width": 2816,
+    "height": 8224,
+    "alias": "public/assets/tilesets/me-complete.png",
+    "alias_kind": "byte-identical full sheet, coordinates unchanged"
+  },
+  "inspection": {
+    "whole_sheet": true,
+    "scale": "1/4 overview, 1/2 overlapping 1024px height bands spaced896px, 2x/3x pilot detail crops",
+    "inspected_y_ranges": [
+      [
+        0,
+        1024
+      ],
+      [
+        896,
+        1920
+      ],
+      [
+        1792,
+        2816
+      ],
+      [
+        2688,
+        3712
+      ],
+      [
+        3584,
+        4608
+      ],
+      [
+        4480,
+        5504
+      ],
+      [
+        5376,
+        6400
+      ],
+      [
+        6272,
+        7296
+      ],
+      [
+        7168,
+        8192
+      ],
+      [
+        8064,
+        8224
+      ]
+    ],
+    "approval": "none",
+    "independent_review": "pending"
+  },
+  "coverage": {
+    "occupied_pixels": 11431345,
+    "occupied_pixels_in_theme_windows": 11331822,
+    "residual_occupied_pixels": 99523,
+    "denominator": "Nonzero source-alpha pixels, not assets; includes lettering/shadows. Whole sheet visually examined, zero objects claimed fully segmented.",
+    "regions": 45,
+    "unclassified_residual_windows": 40
+  },
+  "regions": [
+    {
+      "id": "E01",
+      "name": "Terrain, fences, small park vegetation",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 816,
+        "h": 352
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Surface swatches, tree/shrub samples, benches and fences; street assets overlap on left.",
+      "families": [
+        "ground surfaces",
+        "fence segments",
+        "small garden vegetation"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E02",
+      "name": "Domestic garden, villa and tree-house kit",
+      "rect": {
+        "x": 816,
+        "y": 0,
+        "w": 880,
+        "h": 352
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Flowers, hedges, greenhouse-like red roofs, patio/pool rectangles and wooden tree houses.",
+      "families": [
+        "garden plants",
+        "garden surfaces",
+        "small red-roof structures",
+        "tree houses"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E03",
+      "name": "Camping and waterside recreation",
+      "rect": {
+        "x": 1696,
+        "y": 0,
+        "w": 640,
+        "h": 672
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Camping sign, campers, tents, gear, water/pond banks, decks, boats and bridge.",
+      "families": [
+        "campers and tents",
+        "camp supplies",
+        "water banks",
+        "wooden dock and bridge",
+        "boats"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E04",
+      "name": "Tree color and form banks",
+      "rect": {
+        "x": 2336,
+        "y": 0,
+        "w": 448,
+        "h": 1888
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Four repeated crown-color banks plus bare branches and three dense forest compositions.",
+      "families": [
+        "broadleaf crowns",
+        "fruiting variants",
+        "conifer forms",
+        "bare branches",
+        "forest compositions"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E05",
+      "name": "Street props and construction equipment",
+      "rect": {
+        "x": 0,
+        "y": 352,
+        "w": 672,
+        "h": 400
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Traffic/street props, work barriers, scaffolding and construction materials.",
+      "families": [
+        "street lighting",
+        "signals and bollards",
+        "worksite barriers",
+        "scaffolds",
+        "loose materials"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E06",
+      "name": "Commercial facade and modular building kit",
+      "rect": {
+        "x": 688,
+        "y": 352,
+        "w": 848,
+        "h": 400
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Window/roof palettes and repeated storefronts with signage.",
+      "families": [
+        "facade palettes",
+        "roof pieces",
+        "shop fronts",
+        "signs"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E07",
+      "name": "Generic building pieces and garage clutter",
+      "rect": {
+        "x": 0,
+        "y": 752,
+        "w": 688,
+        "h": 448
+      },
+      "theme_confidence": "medium",
+      "boundary_confidence": "medium",
+      "evidence": "Low-rise fronts, shutters and mixed garage-sale clutter; furniture detail not resolved.",
+      "families": [
+        "garage clutter",
+        "shutters",
+        "facade pieces"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E08",
+      "name": "Brown flat-roof residence kit",
+      "rect": {
+        "x": 688,
+        "y": 752,
+        "w": 656,
+        "h": 288
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Repeated brown wall fronts and flat roof rectangles with side/corner variants.",
+      "families": [
+        "roofs",
+        "window fronts",
+        "corners"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E09",
+      "name": "Colored pitched-roof houses and components",
+      "rect": {
+        "x": 1344,
+        "y": 736,
+        "w": 576,
+        "h": 448
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Orange, brown, purple, red and blue roof house examples and dismantled modular pieces.",
+      "families": [
+        "house color variants",
+        "roof slopes",
+        "front assemblies"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E10",
+      "name": "Park and playground kit",
+      "rect": {
+        "x": 1808,
+        "y": 672,
+        "w": 512,
+        "h": 1056
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Grass/earth shape variants followed by climbing frames, slides and many colored chairs.",
+      "families": [
+        "terrain samples",
+        "play structures",
+        "chairs",
+        "fencing"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E11",
+      "name": "Colored cars, buses and street directions",
+      "rect": {
+        "x": 0,
+        "y": 1200,
+        "w": 624,
+        "h": 592
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Side/front/top vehicle variants, BUS markings and road signs.",
+      "families": [
+        "compact cars",
+        "buses",
+        "bus lane labels",
+        "traffic signs"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E12",
+      "name": "Colored market storefront kit",
+      "rect": {
+        "x": 688,
+        "y": 1040,
+        "w": 704,
+        "h": 576
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Paired green, ochre and cream market facades with awnings and roof size variants.",
+      "families": [
+        "market colors",
+        "awnings",
+        "roof panels"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E13",
+      "name": "Police buildings and aircraft",
+      "rect": {
+        "x": 1408,
+        "y": 1184,
+        "w": 912,
+        "h": 544
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "POLICE signs, repeated gray station structures, curved wings, emblem and helicopter.",
+      "families": [
+        "station assemblies",
+        "curved roof wings",
+        "emblems",
+        "helicopter"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E14",
+      "name": "Service station and compact car palettes",
+      "rect": {
+        "x": 528,
+        "y": 1328,
+        "w": 880,
+        "h": 592
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Red-trim canopy/store kit and dense vehicle color/facing palettes.",
+      "families": [
+        "service canopy",
+        "shop building",
+        "car palettes"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E15",
+      "name": "Delivery vans and streets/roundabouts",
+      "rect": {
+        "x": 0,
+        "y": 1792,
+        "w": 816,
+        "h": 832
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "White/red service vans above three roundabout and sidewalk layouts.",
+      "families": [
+        "delivery vans",
+        "roundabout assemblies",
+        "sidewalk and crossing pieces"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E16",
+      "name": "Tall corner/flat facade modular buildings",
+      "rect": {
+        "x": 1088,
+        "y": 1840,
+        "w": 784,
+        "h": 848
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Repeated red/white multistory front/corner forms and many ground-floor shops.",
+      "families": [
+        "front/corner facades",
+        "roofs",
+        "entrances",
+        "ground-floor shops"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E17",
+      "name": "Hotel and red-brick commercial facades",
+      "rect": {
+        "x": 1872,
+        "y": 1744,
+        "w": 944,
+        "h": 896
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "HOTEL vertical sign and teal hotel fronts, billboard artwork and red-brick modular buildings.",
+      "families": [
+        "hotel fronts",
+        "billboards",
+        "brick facades",
+        "roof details"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E18",
+      "name": "Hospital, helipad and ambulances",
+      "rect": {
+        "x": 496,
+        "y": 2240,
+        "w": 576,
+        "h": 608
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "HOSPITAL/Emergency labels, roof H markers, ambulances and helicopters.",
+      "families": [
+        "hospital assemblies",
+        "ambulances",
+        "helipad",
+        "helicopters"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E19",
+      "name": "Pool and sports equipment",
+      "rect": {
+        "x": 0,
+        "y": 2624,
+        "w": 448,
+        "h": 688
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Swimming rings, pool edge pieces and sport/ball equipment.",
+      "families": [
+        "pool edges",
+        "inflatable rings",
+        "balls",
+        "sports racks"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E20",
+      "name": "Soccer and basketball courts",
+      "rect": {
+        "x": 400,
+        "y": 2640,
+        "w": 768,
+        "h": 656
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Green soccer pitch examples and four tan basketball court layouts.",
+      "families": [
+        "soccer fields",
+        "goals",
+        "basketball courts"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E21",
+      "name": "Food kiosks and school facade",
+      "rect": {
+        "x": 1088,
+        "y": 2672,
+        "w": 1728,
+        "h": 416
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Small concession stand/counter palettes beside large red-roof school and clock tower.",
+      "families": [
+        "food stalls",
+        "awnings",
+        "school facade",
+        "clock tower"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E22",
+      "name": "Fence layout examples beside scrap yard",
+      "rect": {
+        "x": 1152,
+        "y": 2896,
+        "w": 864,
+        "h": 144
+      },
+      "theme_confidence": "medium",
+      "boundary_confidence": "medium",
+      "evidence": "Dark wire and orange-framed fence rings; decorative boundary kit rather than exclusive yard ownership.",
+      "families": [
+        "wire fencing",
+        "framed fencing",
+        "shape examples"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E23",
+      "name": "Scrapyard/dumpyard and utility kit",
+      "rect": {
+        "x": 1280,
+        "y": 3040,
+        "w": 1152,
+        "h": 288
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Crushed and stacked cars, containers, junk, hazard signs, water towers, wire fencing, scrap/trash piles and shack.",
+      "families": [
+        "car wrecks",
+        "shipping containers",
+        "loose scrap",
+        "hazard signs",
+        "water towers",
+        "trash/scrap piles",
+        "shack"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E24",
+      "name": "Alternate police facade panels",
+      "rect": {
+        "x": 2432,
+        "y": 3072,
+        "w": 384,
+        "h": 256
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Two roof/facade variants with POLICE labels and detached assembly pieces.",
+      "families": [
+        "station facades",
+        "roof panels"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E25",
+      "name": "Garden hedges, topiary, statues and fountains",
+      "rect": {
+        "x": 0,
+        "y": 3376,
+        "w": 592,
+        "h": 416
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Repeated hedge arches and shaped shrubs above white statues, columns and fountain palettes.",
+      "families": [
+        "hedge arches",
+        "topiary",
+        "statues",
+        "fountains",
+        "columns"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E26",
+      "name": "Office facade/roof assembly kit",
+      "rect": {
+        "x": 592,
+        "y": 3312,
+        "w": 2224,
+        "h": 464
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Many modern glass fronts, narrow modular panels and larger office examples.",
+      "families": [
+        "windows",
+        "roof panels",
+        "wall panels",
+        "office assemblies"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E27",
+      "name": "Classical mansion/civic facade kit",
+      "rect": {
+        "x": 0,
+        "y": 3776,
+        "w": 832,
+        "h": 576
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Two ornate cream building examples with many roof/window/corner pieces.",
+      "families": [
+        "ornate facade",
+        "roof assemblies",
+        "stairs"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E28",
+      "name": "Garden nursery, greenhouse and floral kit",
+      "rect": {
+        "x": 832,
+        "y": 3664,
+        "w": 1328,
+        "h": 672
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Planters, flowers, greenhouses, wall/building pieces, fencing and water/soil rectangles.",
+      "families": [
+        "flower pots",
+        "greenhouses",
+        "nursery facades",
+        "garden surfaces",
+        "wire fences"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E29",
+      "name": "Fire station and emergency trucks",
+      "rect": {
+        "x": 2160,
+        "y": 4016,
+        "w": 656,
+        "h": 384
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "FIRE STATION sign, station fronts and red fire engines in multiple views.",
+      "families": [
+        "station facade",
+        "fire engines",
+        "equipment"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E30",
+      "name": "Graveyard and autumn/horror props",
+      "rect": {
+        "x": 0,
+        "y": 4336,
+        "w": 1920,
+        "h": 208
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Gravestones, dark chapel/gates, pumpkins, bare branches and coffin palettes.",
+      "families": [
+        "tombs",
+        "coffins",
+        "chapel and gates",
+        "pumpkins",
+        "bare trees"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E31",
+      "name": "Railway/subway buildings, platforms and trains",
+      "rect": {
+        "x": 0,
+        "y": 4384,
+        "w": 2816,
+        "h": 704
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Repeated station facades, train views, tracks, entrances, arches and stairs.",
+      "families": [
+        "station buildings",
+        "train vehicles",
+        "track pieces",
+        "subway stairs",
+        "railings"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E32",
+      "name": "Beach, sand and resort props",
+      "rect": {
+        "x": 0,
+        "y": 4880,
+        "w": 1360,
+        "h": 656
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Sand shapes, beach chairs, umbrellas, rock groups, palms, decking and beach counter kit.",
+      "families": [
+        "sand surfaces",
+        "umbrellas",
+        "chairs",
+        "palms",
+        "rocks",
+        "wood decking"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E33",
+      "name": "Cylindrical beacon/tower assembly kit",
+      "rect": {
+        "x": 1408,
+        "y": 4976,
+        "w": 512,
+        "h": 512
+      },
+      "theme_confidence": "medium",
+      "boundary_confidence": "medium",
+      "evidence": "Red cylindrical tower examples, circular caps and cut-away layer pieces; lighthouse/beacon plausible.",
+      "families": [
+        "tower walls",
+        "caps",
+        "circular floors"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E34",
+      "name": "Raised sand/cliff examples",
+      "rect": {
+        "x": 1408,
+        "y": 5248,
+        "w": 512,
+        "h": 368
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Sand-top raised edge blocks, posts and cross/step examples; height geometry unknown.",
+      "families": [
+        "sand tops",
+        "cliff edges",
+        "example assemblies"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E35",
+      "name": "Post office and gray business facades",
+      "rect": {
+        "x": 1952,
+        "y": 5056,
+        "w": 864,
+        "h": 1184
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Parcel/post office kit, HARDWARE fronts and additional gray urban facade modules.",
+      "families": [
+        "post office",
+        "hardware fronts",
+        "generic urban facades"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E36",
+      "name": "Road layout/marking examples and car bank",
+      "rect": {
+        "x": 0,
+        "y": 5488,
+        "w": 1360,
+        "h": 768
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Intersection diagram tiles, bright green markings, dense car palette/view groups, and bridge pieces below.",
+      "families": [
+        "road examples",
+        "markings",
+        "car colors/views",
+        "bridge beginnings"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E37",
+      "name": "Traffic light and overhead sign frames",
+      "rect": {
+        "x": 1376,
+        "y": 5664,
+        "w": 720,
+        "h": 528
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Repeated signal poles, crossbars, dangling signs and alternate layouts.",
+      "families": [
+        "signal poles",
+        "overhead signs",
+        "crossbars"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E38",
+      "name": "Novelty food-shaped kiosk structures",
+      "rect": {
+        "x": 1824,
+        "y": 5904,
+        "w": 512,
+        "h": 336
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Mushroom/red-dot and ice-cream/cup-shaped stand structures with dismantled wall/cap pieces.",
+      "families": [
+        "novelty roofs",
+        "kiosk fronts",
+        "cap components"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E39",
+      "name": "Bridge roadway, piers and railings",
+      "rect": {
+        "x": 0,
+        "y": 6000,
+        "w": 1824,
+        "h": 352
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Straight road/bridge decks, ramps, columns, railings and blue water samples.",
+      "families": [
+        "decks",
+        "ramps",
+        "piers",
+        "railings"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E40",
+      "name": "Military buildings, hangars, tents and towers",
+      "rect": {
+        "x": 0,
+        "y": 6320,
+        "w": 2496,
+        "h": 688
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Gray barriers and industrial sheds, rounded hangars, tan/gray tents and radar towers.",
+      "families": [
+        "perimeter walls",
+        "barracks",
+        "hangars",
+        "field tents",
+        "radar towers",
+        "supplies"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E41",
+      "name": "Military armored vehicles and helicopters",
+      "rect": {
+        "x": 0,
+        "y": 6960,
+        "w": 2816,
+        "h": 288
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Olive/brown armored vehicle view banks and dark helicopter views; rotors detached.",
+      "families": [
+        "armored vehicles",
+        "turrets",
+        "helicopters",
+        "rotor parts"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E42",
+      "name": "Helicopter vertical views and rotors",
+      "rect": {
+        "x": 2496,
+        "y": 6352,
+        "w": 320,
+        "h": 608
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Dark vertical-view aircraft, elongated rotor pieces and other small aircraft parts.",
+      "families": [
+        "helicopters",
+        "rotors"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E43",
+      "name": "Wood cottage and sloped-roof modern houses",
+      "rect": {
+        "x": 0,
+        "y": 7248,
+        "w": 2128,
+        "h": 688
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Wood cottages left; gray shed/sloped roofs in repeated wall/roof variants through center.",
+      "families": [
+        "wood cottage",
+        "sloped roofs",
+        "modern modular houses",
+        "gardens"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E44",
+      "name": "East Asian styled buildings and roof/prop kit",
+      "rect": {
+        "x": 1728,
+        "y": 7328,
+        "w": 1088,
+        "h": 608
+      },
+      "theme_confidence": "medium",
+      "boundary_confidence": "medium",
+      "evidence": "Large layered/hipped roofs, timber facades, banners, windmill-like wheels and detached small props.",
+      "families": [
+        "large roofs",
+        "timber facades",
+        "banner structures",
+        "wheels"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "E45",
+      "name": "Mansion and gothic/abandoned architecture tail",
+      "rect": {
+        "x": 0,
+        "y": 7904,
+        "w": 2320,
+        "h": 320
+      },
+      "theme_confidence": "high",
+      "boundary_confidence": "medium",
+      "evidence": "Large cream/dark mansions, pointed-roof gothic house, window/wall/roof modules and dark fencing; sheet final rows included.",
+      "families": [
+        "mansion assemblies",
+        "gothic house",
+        "roof modules",
+        "dark fence components"
+      ],
+      "state": "proposed-theme",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    }
+  ],
+  "pilot_windows": [
+    {
+      "id": "P-tree-green",
+      "name": "Green tree bank including bare branch forms",
+      "rect": {
+        "x": 2336,
+        "y": 16,
+        "w": 448,
+        "h": 416
+      },
+      "confidence": "high",
+      "note": "Only first palette includes this adjacent bare-branch subregion; do not assume every bank has identical members."
+    },
+    {
+      "id": "P-tree-orange",
+      "name": "Orange/red crown bank",
+      "rect": {
+        "x": 2336,
+        "y": 448,
+        "w": 448,
+        "h": 400
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-tree-teal",
+      "name": "Blue-green crown bank",
+      "rect": {
+        "x": 2336,
+        "y": 864,
+        "w": 448,
+        "h": 400
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-tree-ochre",
+      "name": "Ochre/yellow crown bank with adjacent forest overlap",
+      "rect": {
+        "x": 2336,
+        "y": 1280,
+        "w": 448,
+        "h": 400
+      },
+      "confidence": "high",
+      "note": "Overlaps composed forest group at y1600; bank rectangle alone is not an exclusive object membership list."
+    },
+    {
+      "id": "P-tree-forest",
+      "name": "Three composed forest groups",
+      "rect": {
+        "x": 2448,
+        "y": 1600,
+        "w": 240,
+        "h": 272
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-tree-form",
+      "name": "Repeated rounded tree form comparison strip",
+      "rect": {
+        "x": 2464,
+        "y": 16,
+        "w": 64,
+        "h": 1664
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-dump-core",
+      "name": "Wrecks, scrap, piles and storage",
+      "rect": {
+        "x": 1344,
+        "y": 3040,
+        "w": 1088,
+        "h": 272
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-dump-wrecks",
+      "name": "Crushed, stacked and overturned cars",
+      "rect": {
+        "x": 1712,
+        "y": 3040,
+        "w": 512,
+        "h": 112
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-dump-piles",
+      "name": "Piles, loose components, shack and modular scrap",
+      "rect": {
+        "x": 1808,
+        "y": 3152,
+        "w": 624,
+        "h": 160
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "P-dump-utility",
+      "name": "Adjacent utility fronts and water towers",
+      "rect": {
+        "x": 1280,
+        "y": 3152,
+        "w": 512,
+        "h": 160
+      },
+      "confidence": "medium"
+    }
+  ],
+  "unclassified_regions": [
+    {
+      "id": "U01",
+      "name": "Facades between commercial and camping windows",
+      "rect": {
+        "x": 1609,
+        "y": 442,
+        "w": 87,
+        "h": 70
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U02",
+      "name": "Facades between commercial and camping windows",
+      "rect": {
+        "x": 1609,
+        "y": 512,
+        "w": 87,
+        "h": 64
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U03",
+      "name": "Police/vehicle/sign boundary fragments",
+      "rect": {
+        "x": 1408,
+        "y": 1728,
+        "w": 128,
+        "h": 27
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U04",
+      "name": "Police/vehicle/sign boundary fragments",
+      "rect": {
+        "x": 1536,
+        "y": 1728,
+        "w": 256,
+        "h": 64
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U05",
+      "name": "Police/vehicle/sign boundary fragments",
+      "rect": {
+        "x": 1792,
+        "y": 1728,
+        "w": 110,
+        "h": 64
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U06",
+      "name": "Police/vehicle/sign boundary fragments",
+      "rect": {
+        "x": 2163,
+        "y": 1728,
+        "w": 141,
+        "h": 16
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U07",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 817,
+        "y": 1920,
+        "w": 207,
+        "h": 125
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U08",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 1024,
+        "y": 1920,
+        "w": 64,
+        "h": 128
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U09",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 1408,
+        "y": 1808,
+        "w": 112,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U10",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 1574,
+        "y": 1808,
+        "w": 106,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U11",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 832,
+        "y": 2052,
+        "w": 192,
+        "h": 188
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U12",
+      "name": "Street fixtures, wreck-like props and facade side pieces",
+      "rect": {
+        "x": 1024,
+        "y": 2048,
+        "w": 64,
+        "h": 192
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U13",
+      "name": "Shop/school border pieces",
+      "rect": {
+        "x": 1872,
+        "y": 2640,
+        "w": 112,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U14",
+      "name": "Shop/school border pieces",
+      "rect": {
+        "x": 2432,
+        "y": 2640,
+        "w": 114,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U15",
+      "name": "Shop/school border pieces",
+      "rect": {
+        "x": 2560,
+        "y": 2640,
+        "w": 176,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U16",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 16,
+        "y": 3312,
+        "w": 210,
+        "h": 16
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U17",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 336,
+        "y": 3303,
+        "w": 146,
+        "h": 25
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U18",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 514,
+        "y": 3318,
+        "w": 56,
+        "h": 10
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U19",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 1202,
+        "y": 3131,
+        "w": 78,
+        "h": 149
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U20",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 16,
+        "y": 3328,
+        "w": 222,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U21",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 336,
+        "y": 3328,
+        "w": 176,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U22",
+      "name": "Sports/pool pieces and isolated wind turbine",
+      "rect": {
+        "x": 514,
+        "y": 3328,
+        "w": 62,
+        "h": 31
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U23",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2176,
+        "y": 3776,
+        "w": 73,
+        "h": 48
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U24",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2421,
+        "y": 3776,
+        "w": 21,
+        "h": 48
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U25",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2614,
+        "y": 3776,
+        "w": 6,
+        "h": 48
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U26",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2176,
+        "y": 3840,
+        "w": 112,
+        "h": 128
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U27",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2304,
+        "y": 3840,
+        "w": 256,
+        "h": 176
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U28",
+      "name": "Office/nursery wall and window fragments",
+      "rect": {
+        "x": 2576,
+        "y": 3840,
+        "w": 44,
+        "h": 128
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U29",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1360,
+        "y": 5200,
+        "w": 32,
+        "h": 32
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U30",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1360,
+        "y": 5539,
+        "w": 13,
+        "h": 24
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U31",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1728,
+        "y": 5616,
+        "w": 64,
+        "h": 16
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U32",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1394,
+        "y": 5650,
+        "w": 118,
+        "h": 14
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U33",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1555,
+        "y": 5650,
+        "w": 237,
+        "h": 14
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U34",
+      "name": "Printed source labels and overhead-signal border fragments",
+      "rect": {
+        "x": 1805,
+        "y": 5649,
+        "w": 147,
+        "h": 15
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U35",
+      "name": "Novelty-kiosk bottom pieces and military rotor border",
+      "rect": {
+        "x": 1824,
+        "y": 6240,
+        "w": 224,
+        "h": 28
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U36",
+      "name": "Novelty-kiosk bottom pieces and military rotor border",
+      "rect": {
+        "x": 2048,
+        "y": 6240,
+        "w": 253,
+        "h": 16
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U37",
+      "name": "Novelty-kiosk bottom pieces and military rotor border",
+      "rect": {
+        "x": 2496,
+        "y": 6336,
+        "w": 4,
+        "h": 16
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U38",
+      "name": "Novelty-kiosk bottom pieces and military rotor border",
+      "rect": {
+        "x": 2561,
+        "y": 6240,
+        "w": 233,
+        "h": 112
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U39",
+      "name": "Large eastern roof boundary fragments",
+      "rect": {
+        "x": 2382,
+        "y": 7280,
+        "w": 178,
+        "h": 48
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    },
+    {
+      "id": "U40",
+      "name": "Large eastern roof boundary fragments",
+      "rect": {
+        "x": 2560,
+        "y": 7306,
+        "w": 188,
+        "h": 22
+      },
+      "state": "unclassified",
+      "evidence": "Occupied pixels outside broad proposed theme windows; visually covered by overview and overlapping bands. Needs detail segmentation.",
+      "theme_confidence": "low",
+      "boundary_confidence": "high-for-residual-window-only",
+      "object_segmentation": "not-performed",
+      "gameplay_geometry": "unknown"
+    }
+  ]
+}

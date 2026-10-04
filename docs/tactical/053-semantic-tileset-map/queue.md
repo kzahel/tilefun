@@ -18,19 +18,19 @@ an agent-written queue status.
 | ID | Work | Depends on | State | Owner / evidence |
 | --- | --- | --- | --- | --- |
 | S01 | Freeze source manifest and reconcile existing index scope | — | Reconciled | [Manifest](source-manifest.json), [source evidence](notes/2026-10-04-source-inventory.md); coordinator full/committed-only checks passed |
-| S02 | Survey both masters and Room Builder; map broad thematic regions | S01 verification before integration | Assigned | `exteriors_survey` and `interiors_survey`: separate S02 packet/region files and capture helpers |
-| P01 | Trial: seasonal trees and family/variant structure | S02 | Queued | Unassigned |
+| S02 | Survey both masters and Room Builder; map broad thematic regions | S01 | Proposed | [Exteriors](packets/S02-exteriors-survey.md), [Interiors](packets/S02-interiors-survey.md); source/coverage checks passed, independent semantic review pending |
+| P01 | Trial: seasonal trees and family/variant structure | S01; S02 source window located | Assigned | `exteriors_survey`: P01 tree packet/JSON and capture helper; includes modular forest probe |
 | P02 | Trial: suspected dumpyard area and object boundaries | S01; S02 source window located | Assigned | `source_inventory`: P02 scrapyard packet/JSON and capture helper; separate output paths |
-| P03 | Trial: Interiors furniture and original-to-packed correspondence | S02 | Queued | Unassigned |
+| P03 | Trial: Interiors furniture and original-to-packed correspondence | S01; S02 source window located | Assigned | `interiors_survey`: P03 cabinet packet/JSON and capture helper; original/single/packed correspondence |
 | P04 | Audit trial results; add modular probe if needed; refine method and estimate | P01–P03 | Queued | Unassigned |
 | E01 | Expand theme packets across both tilesets | P04 | Queued | Unassigned |
-| G01 | Global boundary, duplicate, gap and semantic consistency audit | E01 | Queued | Unassigned |
+| E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, P04 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
+| G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Queued | Unassigned |
 | R01 | Deliver theme/family review surface and exact registered candidates | P04; candidate packets | Queued | Unassigned |
 
-Next action: verify the source manifest and integrate the two independently owned
-survey outputs against its hashes. Survey workers inspect individually hashed
-sources while the full inventory runs; integration waits for source reconciliation.
-Worker models are GPT-6.1 Sol/high. The coordinator alone commits checkpoints.
+Next action: finish the three trial proposals, then rotate workers to independently
+review a different packet and challenge the broad survey labels/boundaries. Worker
+models are GPT-6.1 Sol/high. The coordinator alone commits checkpoints.
 
 Keep rows bounded as the survey reveals themes; replace E01 with linked theme
 assignments rather than assigning the entire remaining atlas to one worker.

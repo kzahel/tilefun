@@ -133,6 +133,9 @@ semantics. Recheck family boundaries and apparent regular patterns for exception
 After theme work, inspect overlaps, crop boundaries, unexplained leftovers and
 related families elsewhere. Every visible region needs a disposition; a giant
 bounding box or one vague unknown region cannot stand in for an object-level audit.
+Explicitly reconcile supplemental singles, theme sheets and animations that are
+not represented in the masters or current packed atlas. A complete master survey
+cannot close the broader source inventory on its own.
 
 Report separate denominators for source occupancy/occurrences, segmented candidate
 regions, semantic field completion, independent review and human approval. Existing
@@ -189,11 +192,12 @@ Use Python 3 with Pillow for image inspection and full inventory validation.
   --output /tmp/semantic-matches.json` finds every exact grid-aligned occurrence.
   Repeat `--candidate` or provide a directory to compare a family. The default
   16px grid starts at the source origin; `--grid 1` checks arbitrary pixel origins
-  when necessary, with a larger memory/time cost. Hidden RGB under zero alpha is
+  using a streamed row search rather than a per-pixel index. Hidden RGB under zero alpha is
   ignored; all visible pixels and alpha must match. Unmatched means no match under
   that search, not proof of missing art. Empty sprites are reported separately.
 - `python3 scripts/semantic-map-match.test.py` checks duplicate occurrences, full
-  rectangle verification, alpha handling, partial-tile sizes and off-grid limits.
+  rectangle verification, alpha handling, partial-tile sizes, off-grid padded sprites
+  and rejection of row matches that wrap across a source edge.
 
 Source-specific survey helpers and their capture commands are linked from the
 investigation packets. Generated source ledgers retain deterministic formatting;
