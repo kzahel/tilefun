@@ -1,7 +1,12 @@
+import { loadModernInteriorsAtlasIndex } from "../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { Direction } from "../entities/Entity.js";
+import type { InteriorContent } from "../interiors/InteriorPresentation.js";
+import { vehicleFrameDirection } from "../traffic/Vehicle.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { COMPACT_CAR_MESH, poseOrientation, yawOrientation } from "./MeshPresentation.js";
+import { OverlayFrame } from "./OverlayFrame.js";
 import { touchRaster } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -61,6 +66,11 @@ const items: SceneItem[] = [
 ];
 let clips = false;
 let meshMode = false;
+let carMode = false;
+let carSpriteLoaded = false;
+let interior: InteriorContent | null = null;
+let overlayMode = false;
+let smoothShadows = false;
 let foreground = false;
 const car = {
   ...sprite(0, 24, 1),
@@ -70,8 +80,8 @@ const car = {
 
 function draw() {
   gpu.beginFrame();
-  const selectedItems = meshMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items;
-  if (meshMode && foreground) selectedItems.reverse();
+  const selectedItems = carMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items;
+  if (carMode && foreground) selectedItems.reverse();
   const sceneItems = clips
     ? selectedItems.map((item) => (item.kind === "sprite" ? { ...item, hasShadow: false } : item))
     : selectedItems;
@@ -81,7 +91,7 @@ function draw() {
       kind: "scene",
       items: sceneItems,
       order: collectSceneOrder(sceneItems, []),
-      pixelExactShadows: true,
+      pixelExactShadows: !smoothShadows,
       ...(clips
         ? {
             clipRects: [
@@ -92,6 +102,49 @@ function draw() {
         : {}),
     },
   ];
+  if (interior) {
+    native.prepareInterior(interior);
+    gpu.prepareInterior(interior);
+    passes.splice(1, 1, {
+      kind: "interior",
+      contentId: interior.id,
+      draws: [
+        { kind: "layer", layer: "floor" },
+        { kind: "layer", layer: "walls" },
+        { kind: "wall-band", row: 0, y: -16 },
+        { kind: "furniture", src: [240, 8078, 16, 16], x: 8, y: 8, width: 24, height: 32 },
+        {
+          kind: "scene",
+          item: { ...sprite(8, 32, 1), hasShadow: false },
+          offsetY: 4,
+          shadow: false,
+        },
+      ],
+    });
+  }
+  if (overlayMode) {
+    const frame = new OverlayFrame();
+    const box = frame.next("rect");
+    Object.assign(box, {
+      x: 8,
+      y: 8,
+      width: 90,
+      height: 30,
+      fill: "#175c55",
+      stroke: "#eebb66",
+      lineWidth: 2,
+      alpha: 0.7,
+    });
+    const label = frame.next("text");
+    Object.assign(label, {
+      x: 16,
+      y: 28,
+      text: "GPU test",
+      font: "12px sans-serif",
+      fill: "white",
+    });
+    passes.push({ kind: "overlay", items: frame.items });
+  }
   for (const pass of passes) {
     native.submit(view, pass);
     gpu.submit(view, pass);
@@ -124,13 +177,85 @@ function draw() {
   canvas.dataset.ready = "true";
   return report;
 }
+function setCarHeading(yaw: number) {
+  const direction =
+    Math.abs(Math.cos(yaw)) > Math.abs(Math.sin(yaw))
+      ? Math.cos(yaw) > 0
+        ? Direction.Right
+        : Direction.Left
+      : Math.sin(yaw) > 0
+        ? Direction.Down
+        : Direction.Up;
+  if (carSpriteLoaded) car.frameRow = vehicleFrameDirection("vehicle-v1:compact-1", direction);
+}
 const lab = {
   draw,
   async setMesh(value: boolean) {
     meshMode = value;
+    carMode = true;
+    if (!carSpriteLoaded) {
+      const image = new Image();
+      image.src = `${import.meta.env.BASE_URL}assets/vehicles/compact-1-v1.png`;
+      await image.decode();
+      sheets.set("vehicle-v1:compact-1", new Spritesheet(image, 192, 224));
+      native.addSpriteAssets(sheets);
+      gpu.addSpriteAssets(sheets);
+      Object.assign(car, {
+        sheetKey: "vehicle-v1:compact-1",
+        spriteWidth: 192,
+        spriteHeight: 224,
+        frameCol: 0,
+        frameRow: vehicleFrameDirection("vehicle-v1:compact-1", Direction.Left),
+        drawOffsetY: 80,
+      });
+      carSpriteLoaded = true;
+    }
     gpu.meshes.setEnabled(value);
     while (value && gpu.meshes.car.state === "loading")
       await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    return draw();
+  },
+  setSmoothShadows(value: boolean) {
+    smoothShadows = value;
+    return draw();
+  },
+  setZoom(value: number) {
+    view.zoom = value;
+    return draw();
+  },
+  async setInterior(value: boolean) {
+    if (value) {
+      await loadModernInteriorsAtlasIndex();
+      const image = new Image();
+      image.src = `${import.meta.env.BASE_URL}assets/tilesets/modern-interiors-atlas.png`;
+      await image.decode();
+      sheets.set("modern-interiors", new Spritesheet(image, 16, 16));
+      native.setAssets(sheets);
+      gpu.setAssets(sheets);
+      interior = {
+        id: 1,
+        editable: true,
+        map: {
+          width: 4,
+          height: 4,
+          pixelHeight: 64,
+          contentOffsetY: 4,
+          cells: Array.from({ length: 4 }, (_, y) =>
+            Array.from({ length: 4 }, () => ({
+              semantic: "floor",
+              floor: [{ key: "room-builder/floor-connectors/c00-r00" }],
+              wall: y === 0 ? [{ key: "room-builder/floor-connectors/c00-r01" }] : [],
+              foreground: [],
+              objects: [],
+            })),
+          ),
+        },
+      };
+    } else interior = null;
+    return draw();
+  },
+  setOverlay(value: boolean) {
+    overlayMode = value;
     return draw();
   },
   setForeground(value: boolean) {
@@ -138,10 +263,12 @@ const lab = {
     return draw();
   },
   setPose(yaw: number, pitch: number, roll: number) {
+    setCarHeading(yaw);
     car.mesh.orientation = poseOrientation(yaw, pitch, roll);
     return draw();
   },
   setYaw(radians: number) {
+    setCarHeading(radians);
     car.mesh.orientation = yawOrientation(radians);
     return draw();
   },
@@ -172,7 +299,7 @@ toggle.textContent = "Show diagnostic mesh car";
 toggle.onclick = async () => {
   toggle.disabled = true;
   await lab.setMesh(!meshMode);
-  toggle.textContent = meshMode ? "Show sprite fixture" : "Show diagnostic mesh car";
+  toggle.textContent = meshMode ? "Show car sprite fallback" : "Show diagnostic mesh car";
   toggle.disabled = false;
 };
 controls.append(toggle);

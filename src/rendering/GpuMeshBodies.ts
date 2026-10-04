@@ -38,7 +38,10 @@ export class GpuMeshBodies {
       renderer = surface.renderer;
     surface.flush();
     const radius = item.mesh.radius;
-    const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2 * camera.scale)));
+    const resolution = Math.min(
+      1024,
+      Math.max(1, Math.ceil(radius * 2 * camera.scale * surface.transformScale)),
+    );
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
     const object = this.car.value.object;

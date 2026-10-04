@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { CAR_PROXY, carProxyPatches, sourceUV } from "../projection/CarProxy.js";
 import { extendOpaqueEdges } from "../projection/ProxyTexture.js";
+import { carVertexToLocal } from "./CarMeshDefinition.js";
 
 /** Diagnostic asset adapter. Geometry/source provenance is shared with the original
  * projection lab. That older source-comparison tool retains its reference adapter.
@@ -45,7 +46,7 @@ export class CarMeshAsset {
       geometry.setAttribute(
         "position",
         new THREE.Float32BufferAttribute(
-          patch.vertices.flatMap(([x, y, z]) => [-x, -y, z]),
+          patch.vertices.flatMap((p) => [...carVertexToLocal(p)]),
           3,
         ),
       );

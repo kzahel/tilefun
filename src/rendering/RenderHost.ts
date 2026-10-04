@@ -12,6 +12,8 @@ export interface RenderHost {
   resize(width: number, height: number): void;
   /** Clear a separate UI overlay before scene rendering, if this host has one. */
   beginFrame(): void;
+  /** Snapshot of world plus Canvas UI. Caller may encode it outside the render loop. */
+  captureFrame?(): HTMLCanvasElement;
   dispose(): void;
 }
 export type RenderHostFactory = (canvas: HTMLCanvasElement) => RenderHost;

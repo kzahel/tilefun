@@ -8,6 +8,7 @@ const neutral = [
   "rendering/RenderFrame.ts",
   "rendering/MeshPresentation.ts",
   "rendering/EntityMeshPose.ts",
+  "rendering/CarMeshDefinition.ts",
   "rendering/Projection.ts",
   "rendering/TerrainPresentation.ts",
   "rendering/TerrainFrame.ts",

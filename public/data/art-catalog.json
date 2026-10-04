@@ -20422,6 +20422,42 @@
       ]
     },
     {
+      "id": "architecture:room-builder/floor-connectors/c00-r00",
+      "sheetId": "modern-interiors",
+      "rect": [
+        240,
+        8078,
+        16,
+        16
+      ],
+      "label": "room-builder/floor-connectors/c00-r00",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:246"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/floor-connectors/c00-r01",
+      "sheetId": "modern-interiors",
+      "rect": [
+        256,
+        8078,
+        16,
+        16
+      ],
+      "label": "room-builder/floor-connectors/c00-r01",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:247"
+        }
+      ]
+    },
+    {
       "id": "sprite:train-local-v1",
       "sheetId": "train-local-v1",
       "rect": [
@@ -20638,6 +20674,22 @@
         {
           "system": "Gameplay",
           "source": "src/rendering/EntityMeshPose.ts:11"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:189"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:200"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:204"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/RendererLab.ts:208"
         }
       ]
     },

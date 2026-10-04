@@ -73,6 +73,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [043 Shared mesh pose](043-shared-mesh-pose.md) | Active continuous cosmetic heading in shared presentation |
 
+| [044 GPU integration/lifecycle](044-gpu-integration-lifecycle.md) | Active all-pass and recovery validation |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

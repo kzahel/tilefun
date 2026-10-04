@@ -26,6 +26,8 @@ interface Page {
 }
 const PAGE = 1024;
 const QUADS = 2048;
+const CORNERS = [0, 1, 2, 0, 2, 3];
+const WHITE = [1, 1, 1, 1];
 const size = (image: CanvasImageSource) => {
   const source = image as HTMLImageElement;
   return {
@@ -133,7 +135,12 @@ export class GpuRasterSurface implements RasterSurface {
     this.camera.bottom = height;
     this.camera.updateProjectionMatrix();
   }
+  get transformScale() {
+    return Math.hypot(this.a, this.b);
+  }
   beginFrame() {
+    if (this.disposed) throw Error("Renderer is disposed");
+    if (this.lost) return;
     this.frame++;
     this.stats.frames++;
     this.count = 0;
@@ -191,17 +198,15 @@ export class GpuRasterSurface implements RasterSurface {
       state = {} as State;
       this.stack.push(state);
     }
-    Object.assign(state, {
-      a: this.a,
-      b: this.b,
-      c: this.c,
-      d: this.d,
-      e: this.e,
-      f: this.f,
-      globalAlpha: this.globalAlpha,
-      fillStyle: this.fillStyle,
-      clips: this.clips,
-    });
+    state.a = this.a;
+    state.b = this.b;
+    state.c = this.c;
+    state.d = this.d;
+    state.e = this.e;
+    state.f = this.f;
+    state.globalAlpha = this.globalAlpha;
+    state.fillStyle = this.fillStyle;
+    state.clips = this.clips;
     this.depth++;
   }
   restore() {
@@ -270,9 +275,18 @@ export class GpuRasterSurface implements RasterSurface {
     if (!this.ellipsePath) throw Error("Only ellipse fill is supported by the scene sink");
     const [x = 0, y = 0, rx = 0, ry = 0] = this.ellipsePath;
     if (rx <= 0 || ry <= 0) return;
-    const width = Math.ceil(rx * 2) + 2,
-      height = Math.ceil(ry * 2) + 2;
-    const key = `${rx}:${ry}:${String(this.fillStyle)}`;
+    // Rasterize at final screen resolution. Fractional local origins and room
+    // scaling must not turn a smooth shadow into a shifted/upscaled bitmap.
+    if (this.b || this.c) throw Error("Rotated ellipse transforms are not supported");
+    const cx = this.a * x + this.e,
+      cy = this.d * y + this.f,
+      sx = Math.abs(this.a) * rx,
+      sy = Math.abs(this.d) * ry;
+    const left = Math.floor(cx - sx) - 1,
+      top = Math.floor(cy - sy) - 1;
+    const width = Math.ceil(cx + sx) - left + 1,
+      height = Math.ceil(cy + sy) - top + 1;
+    const key = `${cx - left}:${cy - top}:${sx}:${sy}:${String(this.fillStyle)}`;
     let image = this.ellipses.get(key);
     if (!image) {
       if (this.ellipses.size >= 128) this.ellipses.delete(this.ellipses.keys().next().value ?? "");
@@ -283,11 +297,15 @@ export class GpuRasterSurface implements RasterSurface {
       if (!ctx) throw Error("Ellipse canvas unavailable");
       ctx.fillStyle = this.fillStyle;
       ctx.beginPath();
-      ctx.ellipse(rx + 1, ry + 1, rx, ry, 0, 0, Math.PI * 2);
+      ctx.ellipse(cx - left, cy - top, sx, sy, 0, 0, Math.PI * 2);
       ctx.fill();
       this.ellipses.set(key, image);
     }
-    this.drawImage(image, x - rx - 1, y - ry - 1);
+    this.save();
+    this.a = this.d = 1;
+    this.b = this.c = this.e = this.f = 0;
+    this.drawImage(image, left, top);
+    this.restore();
   }
   pixelShadow = (cx: number, cy: number, rx: number, ry: number) => {
     this.save();
@@ -363,7 +381,7 @@ export class GpuRasterSurface implements RasterSurface {
           1 - (y - py) / page.height,
           w / page.width,
           -h / page.height,
-          [1, 1, 1, 1],
+          WHITE,
         );
       }
   }
@@ -417,7 +435,7 @@ export class GpuRasterSurface implements RasterSurface {
     return page;
   }
   drawTexture(texture: THREE.Texture, x: number, y: number, w: number, h: number) {
-    this.quad(texture, x, y, w, h, 0, 1, 1, -1, [1, 1, 1, 1]);
+    this.quad(texture, x, y, w, h, 0, 1, 1, -1, WHITE);
   }
   private quad(
     texture: THREE.Texture,
@@ -434,7 +452,7 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.lost || this.disposed) return;
     if (this.texture !== texture || this.count + 6 > QUADS * 6) this.flush();
     this.texture = texture;
-    for (const corner of [0, 1, 2, 0, 2, 3]) {
+    for (const corner of CORNERS) {
       const right = corner === 1 || corner === 2,
         bottom = corner >= 2;
       const px = x + (right ? w : 0),

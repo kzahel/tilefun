@@ -1265,7 +1265,7 @@ export class GameClient {
       try {
         const position = this.stateView.playerEntity.position;
         ideaSnapshot = captureIdea(
-          this.canvas,
+          this.renderHost.captureFrame?.() ?? this.canvas,
           this.mainMenu.currentWorldId ?? "",
           position.wx,
           position.wy,

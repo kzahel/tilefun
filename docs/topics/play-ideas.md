@@ -14,6 +14,8 @@ The proposed extension into companion and builder-agent sessions lives in
 - Game hamburger menu → **💡 Idea**. Capture a downscaled game canvas PNG and
   world/realm, generation descriptor, player coordinates, capture time and build
   identifier when that menu opens. This is a game image, not desktop capture.
+  In GPU mode the render host combines world and Canvas UI before capture; the
+  input/UI canvas alone does not contain the world.
 - Hold the large button (pointer or Space / Enter) and speak after the chime.
   That press starts recognition and requests browser microphone permission when
   needed; there is no separate enable step or independent permission stream.

@@ -103,3 +103,122 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
     .toBeGreaterThan(0);
   expect(errors).toEqual([]);
 });
+
+test("shared room and editor passes match the native reference", async ({ page }) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const room = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: { setInterior(v: boolean): Promise<{ mismatches: number }> };
+      }
+    ).rendererLab.setInterior(true),
+  );
+  expect(room.mismatches).toBe(0);
+  const overlay = await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setOverlay(v: boolean): { mismatches: number } } }
+    ).rendererLab.setOverlay(true),
+  );
+  // A staged 8-bit Canvas overlay incurs one additional premultiply/composite
+  // rounding step. Only these three antialiased fixture pixels differ by 2.
+  expect(overlay.mismatches).toBeLessThanOrEqual(3);
+  expect((overlay as { maxError: number }).maxError).toBeLessThanOrEqual(2);
+});
+
+test("real graphics loss recovers resources without restarting gameplay", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/tilefun/?renderer=gpu&meshes");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  const gpu = page.locator("canvas[data-renderer=gpu][aria-hidden=true]");
+  const extension = await gpu.evaluateHandle((c: HTMLCanvasElement) =>
+    c.getContext("webgl2")?.getExtension("WEBGL_lose_context"),
+  );
+  const identity = await page.evaluate(
+    () =>
+      (
+        document.querySelector("#game") as unknown as {
+          __game: { stateView: { playerEntity: { id: number } } };
+        }
+      ).__game.stateView.playerEntity.id,
+  );
+  await extension.evaluate((e) => e?.loseContext());
+  await expect(page.locator("#game")).toHaveAttribute("data-gpu-device", "lost");
+  await extension.evaluate((e) => e?.restoreContext());
+  await expect(page.locator("#game")).toHaveAttribute("data-gpu-device", "ready");
+  await page.waitForFunction(
+    () =>
+      (
+        document.querySelector("#game") as unknown as {
+          __game: { renderer: { getDiagnostics(): { gpu: { recoveries: number } } } };
+        }
+      ).__game.renderer.getDiagnostics().gpu.recoveries === 1,
+  );
+  expect(
+    await page.evaluate(
+      () =>
+        (
+          document.querySelector("#game") as unknown as {
+            __game: { stateView: { playerEntity: { id: number } } };
+          }
+        ).__game.stateView.playerEntity.id,
+    ),
+  ).toBe(identity);
+  await extension.dispose();
+  expect(errors).toEqual([]);
+});
+
+test("smooth shadows preserve final pixel placement at different scales", async ({ page }) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setSmoothShadows(v: boolean): unknown } }
+    ).rendererLab.setSmoothShadows(true),
+  );
+  for (const zoom of [0.5, 1, 1.5]) {
+    const report = await page.evaluate(
+      (value) =>
+        (
+          window as unknown as { rendererLab: { setZoom(v: number): { maxError: number } } }
+        ).rendererLab.setZoom(value),
+      zoom,
+    );
+    expect(report.maxError).toBeLessThanOrEqual(1);
+  }
+});
+
+test("GPU feedback capture includes the world and preserves generation metadata", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/?renderer=gpu");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.waitForFunction(
+    () =>
+      (
+        document.querySelector("#game") as unknown as {
+          __game: { renderer: { getDiagnostics(): { resident: number } } };
+        }
+      ).__game.renderer.getDiagnostics().resident > 0,
+  );
+  const snapshot = await page.evaluate(() => {
+    const original = document.querySelector("#game") as HTMLCanvasElement & {
+      __game: { renderHost: { captureFrame(): HTMLCanvasElement } };
+    };
+    const copy = original.__game.renderHost.captureFrame(),
+      ctx = copy.getContext("2d");
+    if (!ctx) throw Error("Missing capture context");
+    const pixels = ctx.getImageData(0, 0, copy.width, copy.height).data;
+    let opaque = 0;
+    for (let i = 3; i < pixels.length; i += 4) if (pixels[i] === 255) opaque++;
+    return {
+      opaque,
+      area: copy.width * copy.height,
+      generation: copy.dataset.generation,
+      expected: original.dataset.generation,
+    };
+  });
+  expect(snapshot.opaque).toBe(snapshot.area);
+  expect(snapshot.generation).toBe(snapshot.expected);
+});
