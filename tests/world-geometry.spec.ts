@@ -1,4 +1,7 @@
+// @ts-expect-error pngjs has no bundled declarations
+
 import { expect, test } from "@playwright/test";
+import pngjs from "pngjs";
 
 test.use({ channel: "chromium" });
 for (const backend of ["canvas", "gpu"]) {
@@ -108,3 +111,69 @@ test.describe("phone controls", () => {
     await page.screenshot({ path: "/tmp/tilefun-geometry-phone.png", fullPage: true });
   });
 });
+
+for (const backend of ["canvas", "gpu"]) {
+  test(`automatic cutaway follows rendered occlusion north and south of the deck (${backend})`, async ({
+    page,
+  }) => {
+    await page.goto(`/tilefun/workshop.html?renderer=${backend}#/tool/world-geometry`);
+    const c = page.getByLabel("World geometry scene");
+    await expect(c).toHaveAttribute("data-ready", "true");
+    const select = page.getByLabel("Visible surfaces");
+    const capture = async (mode: string) => {
+      await select.selectOption(mode);
+      await expect(c).toHaveAttribute("data-visibility", mode);
+      return c.screenshot();
+    };
+    for (const direction of ["north", "south"]) {
+      await page.getByRole("button", { name: "Start at passage", exact: true }).click();
+      const resume = page.getByRole("button", { name: "Resume", exact: true });
+      if (await resume.isVisible()) await resume.click();
+      await c.focus();
+      const key = direction === "north" ? "ArrowUp" : "ArrowDown";
+      await page.keyboard.down(key);
+      if (direction === "north") {
+        await expect
+          .poll(async () => Number(await c.getAttribute("data-player-y")), { intervals: [25] })
+          .toBeLessThan(-80);
+      } else {
+        await expect
+          .poll(async () => Number(await c.getAttribute("data-player-y")), { intervals: [25] })
+          .toBeGreaterThan(52);
+      }
+      await page.keyboard.up(key);
+      await page.getByRole("button", { name: "Pause", exact: true }).click();
+      await expect(c).toHaveAttribute("data-player-z", "0");
+      const y = Number(await c.getAttribute("data-player-y"));
+      const all = await capture("all");
+      const automatic = await capture("auto");
+      if (direction === "south") {
+        expect(y).toBeLessThan(64); // Still physically beneath the deck.
+        expect(automatic.equals(all)).toBe(true);
+      } else {
+        expect(y).toBeLessThan(-64); // Outside its footprint, yet occluded.
+        const lower = await capture("lower");
+        const body = (bytes: Buffer) => {
+          const image = pngjs.PNG.sync.read(bytes);
+          const ratio = image.width / 960;
+          const scale = 3 * 0.625;
+          const left = Math.floor(((80 - 8 + 16) * scale + 480) * ratio);
+          const right = Math.ceil(((80 + 8 + 16) * scale + 480) * ratio);
+          const top = Math.floor(((y - 16 + 16) * scale + 320) * ratio);
+          const bottom = Math.ceil(((y + 16) * scale + 320) * ratio);
+          const rows: Buffer[] = [];
+          for (let row = top; row < bottom; row++)
+            rows.push(
+              image.data.subarray((row * image.width + left) * 4, (row * image.width + right) * 4),
+            );
+          return Buffer.concat(rows);
+        };
+        expect(body(automatic).equals(body(lower))).toBe(true);
+        expect(body(all).equals(body(lower))).toBe(false);
+        await select.selectOption("auto");
+        await expect(c).toHaveAttribute("data-visibility", "auto");
+      }
+      await c.screenshot({ path: `/tmp/tilefun-geometry-${backend}-${direction}-occlusion.png` });
+    }
+  });
+}

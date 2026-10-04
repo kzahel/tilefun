@@ -79,6 +79,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
         stateView.playerEntity,
         "auto",
         phase,
+        alpha,
       );
       if (frame.items.length) renderer.submit(camera, { kind: "overlay", items: frame.items });
     };

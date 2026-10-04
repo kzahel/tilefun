@@ -93,6 +93,31 @@ not a physical-device test. Typechecks, all 1,462 unit tests, inventories, build
 and the three geometry browser tests pass. The full browser suite passes all 311
 tests. Repository-wide lint passes with existing warnings.
 
+## Projected cutaway follow-up (2026-10-04)
+
+Replaced ground-footprint reveal with fixed-projection sprite/slab overlap. The
+slab silhouette is clipped to the sprite's X interval before its projected north
+edge and south fascia are compared; this avoids the false positives from a whole
+ramp bounding box. Supported actors keep their floor visible and behind them,
+using the same 1px tolerance in both decisions. Previously the cutaway tolerated
+1px but draw order used a strict height comparison, allowing float noise to put
+a visible ramp over its rider. Shared XY/Z interpolation now drives both the
+actor and the surface policy in game and scenario rendering.
+
+This remains whole-patch hiding with conservative sprite-frame bounds, not an
+opaque-pixel mask, soft fade or general stacked-actor depth solution. Unit
+regressions cover north/south coverage, fascia-only coverage, slopes, visual
+offsets, manual modes, support noise and interpolated poses. Browser regressions
+compare rendered player pixels with the unobstructed lower view in Canvas and
+GPU modes, and require automatic/all views to match when the lower actor is
+already visible near the south edge.
+
+Validation: shared-checkout typechecks, 1,474 unit tests, lint (existing warnings),
+catalog/manifest, production build and all 316 browser tests pass. Inspected north
+and south screenshots in Canvas and GPU. The commit's source-only snapshot also
+regenerates both inventories and builds independently of concurrent character-lab
+changes; no approved art pixels or promotions changed.
+
 ## Follow-on boundary
 
 Review this proof before extending it. Next decide how a passage replaces the

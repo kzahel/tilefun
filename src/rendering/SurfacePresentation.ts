@@ -3,6 +3,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { querySurfacePatch, type SurfacePatch, surfaceZAt } from "../physics/SurfacePatch.js";
 import type { Camera } from "./Camera.js";
+import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
 import { projectWorld } from "./Projection.js";
 
@@ -27,17 +28,67 @@ export function surfaceShadowZ(
   return z;
 }
 
-/** Read-only, observer-local reveal policy. Never removes collision or changes residency. */
+// Use the same tolerance for visibility and draw order. Float32 replication and
+// interpolation across a clipped ramp/deck join must not put support over feet.
+const SUPPORT_TOLERANCE = 1;
+
+/** Read-only observer policy in fixed-projection coordinates (x, y-z). Camera
+ * translation and zoom cancel out. Tests use the sprite frame, not its ground
+ * collider: a north-side actor may be covered without standing under the slab.
+ * This is conservative frame overlap, not an opaque-pixel or general depth test.
+ */
+export function surfacePresentationState(
+  patch: SurfacePatch,
+  bounds: AABB,
+  observer: Entity,
+  mode: SurfaceVisibility,
+  alpha = 1,
+): { visible: boolean; above: boolean } {
+  const position = interpolatePosition(observer.position, observer.prevPosition, alpha);
+  const feetZ = interpolateWz(observer, alpha) ?? 0;
+  const hit = observer.collider
+    ? querySurfacePatch(patch, bounds, getEntityAABB(position, observer.collider))
+    : undefined;
+  const top =
+    hit?.topMax ??
+    Math.max(
+      patch.z,
+      patch.z + patch.riseX,
+      patch.z + patch.riseY,
+      patch.z + patch.riseX + patch.riseY,
+    );
+  const above = feetZ < top - SUPPORT_TOLERANCE;
+  if (mode === "lower") return { visible: false, above };
+  if (mode !== "auto" || !above || !observer.sprite) return { visible: true, above };
+
+  const sprite = observer.sprite;
+  const left = Math.max(bounds.left, position.wx - sprite.spriteWidth / 2);
+  const right = Math.min(bounds.right, position.wx + sprite.spriteWidth / 2);
+  if (left >= right) return { visible: true, above };
+
+  // Clip the slab silhouette to the sprite's X interval before comparing Y.
+  // The planar top plus the drawn south fascia form one continuous convex band;
+  // using the whole ramp's bounding box would hide its uncovered low end too.
+  const northLeft = bounds.top - surfaceZAt(patch, bounds, left, bounds.top);
+  const northRight = bounds.top - surfaceZAt(patch, bounds, right, bounds.top);
+  const southLeft = bounds.bottom - surfaceZAt(patch, bounds, left, bounds.bottom);
+  const southRight = bounds.bottom - surfaceZAt(patch, bounds, right, bounds.bottom);
+  const surfaceTop = Math.min(northLeft, northRight);
+  const surfaceBottom = Math.max(southLeft, southRight) + patch.thickness;
+  const spriteBottom = position.wy - feetZ + (sprite.drawOffsetY ?? 0);
+  const spriteTop = spriteBottom - sprite.spriteHeight;
+  const occluded = spriteTop < surfaceBottom && spriteBottom > surfaceTop;
+  return { visible: !occluded, above };
+}
+
 export function surfaceVisibility(
   patch: SurfacePatch,
   bounds: AABB,
   observer: Entity,
   mode: SurfaceVisibility,
-) {
-  if (mode === "lower") return false;
-  if (mode !== "auto" || !observer.collider) return true;
-  const hit = querySurfacePatch(patch, bounds, getEntityAABB(observer.position, observer.collider));
-  return !hit || (observer.wz ?? 0) >= hit.topMax - 1;
+  alpha = 1,
+): boolean {
+  return surfacePresentationState(patch, bounds, observer, mode, alpha).visible;
 }
 
 /** Diagnostic surfaces, using the same fixed projection and backend-neutral overlays
@@ -50,6 +101,7 @@ export function collectSurfacePresentation(
   observer: Entity,
   mode: SurfaceVisibility,
   phase: "below" | "above",
+  alpha = 1,
 ) {
   for (const prop of props) {
     if (!prop.collider?.surface && !prop.walls?.some((c) => c.surface)) continue;
@@ -57,15 +109,7 @@ export function collectSurfacePresentation(
       const patch = c.surface;
       if (!patch) continue;
       const bounds = getEntityAABB(prop.position, c);
-      const visible = surfaceVisibility(patch, bounds, observer, mode);
-      const hit = querySurfacePatch(
-        patch,
-        bounds,
-        observer.collider ? getEntityAABB(observer.position, observer.collider) : bounds,
-      );
-      const above =
-        (observer.wz ?? 0) <
-        (hit?.topMax ?? Math.max(patch.z, patch.z + patch.riseX, patch.z + patch.riseY));
+      const { visible, above } = surfacePresentationState(patch, bounds, observer, mode, alpha);
       if ((phase === "above") !== (visible && above)) continue;
       const { sx, sy } = projectWorld(camera, bounds.left, bounds.top);
       if (!visible) {

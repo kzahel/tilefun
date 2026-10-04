@@ -4692,7 +4692,7 @@
       "name": "Ramp, raised deck and lower passage",
       "prompt": "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
       "url": "/tilefun/workshop.html#/tool/world-geometry",
-      "fingerprint": "537c8622646be1fdee930a41e862ad5be3e4c27197b4c6617b9a7754b19b480c",
+      "fingerprint": "69690a335567d7a49191c78077fd2d264e95ec0bdff154bdee1e35e2c2bb8070",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -26809,5 +26809,5 @@
       }
     }
   ],
-  "inputDigest": "a3f82c313b4bd52486ba2f7dd5fe3bb6a8c29bdfe03b913855fe8e66228be309"
+  "inputDigest": "49e1689ba75101d8830220c5334799fdc8435bd6984cbc3de0bfa0ef356df86c"
 }

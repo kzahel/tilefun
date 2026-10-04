@@ -128,8 +128,14 @@ lost capture; other buttons retain normal click and keyboard activation.
 - Shared surface presentation supplies automatic observer-local cutaway and
   manual lower/upper/all inspection through the existing Canvas/GPU overlay path.
   Game outdoor rendering and scenario hosting consume the same implementation.
+  Automatic reveal compares the interpolated sprite frame with the projected
+  slab silhouette, including its south face: it reveals an occluded actor north
+  of the footprint and retains a slab when an actor beneath it is already visible.
+  Support uses one height tolerance for both visibility and draw order, avoiding
+  ramp surfaces flickering in front of their rider because of subpixel differences.
   Hiding a slab never modifies physics. The first reveal hides a whole patch;
-  it is not a general portal/occlusion algorithm or a polished terrain cutout.
+  overlap uses the sprite frame rather than opaque pixels. It is not a general
+  portal/occlusion algorithm or a polished terrain cutout.
 - Space identity is attached to static surfaces and support is derived from
   footprint/height. Neighbor IDs describe intended joins; they do not yet enforce
   portal traversal, navigation or persistent actor sector membership.

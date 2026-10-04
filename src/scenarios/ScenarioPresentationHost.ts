@@ -186,6 +186,7 @@ export class ScenarioPresentationHost {
           view.playerEntity,
           this.options.surfaceVisibility?.() ?? "auto",
           "below",
+          this.alpha,
         ),
       );
       const items = collectScene(
@@ -216,6 +217,7 @@ export class ScenarioPresentationHost {
           view.playerEntity,
           this.options.surfaceVisibility?.() ?? "auto",
           "above",
+          this.alpha,
         ),
       );
       this.drawOverlay(this.options.overlay);

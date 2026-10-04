@@ -6,6 +6,7 @@ import { isVehicle } from "../traffic/Vehicle.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { entityHeading, meshAssetFor } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, collectGrassBladeItems } from "./GrassBladeRenderer.js";
 import { yawOrientation } from "./MeshPresentation.js";
@@ -29,20 +30,7 @@ interface ExtrapolationGhostItem {
   wz?: number;
 }
 
-/** Interpolate between previous and current position. */
-export function interpolatePosition(
-  pos: { wx: number; wy: number },
-  prev: { wx: number; wy: number } | undefined,
-  alpha: number,
-): { wx: number; wy: number } {
-  if (prev) {
-    return {
-      wx: prev.wx + (pos.wx - prev.wx) * alpha,
-      wy: prev.wy + (pos.wy - prev.wy) * alpha,
-    };
-  }
-  return pos;
-}
+export { interpolatePosition } from "./EntityInterpolation.js";
 
 /**
  * Collect, cull, interpolate, and Y-sort all visible scene items.
@@ -115,9 +103,9 @@ export function collectScene(
 
     // Compute Z offset in world pixels
     let zOffset: number;
-    if (e.wz !== undefined) {
-      const prevWz = e.prevWz ?? e.wz;
-      zOffset = prevWz + (e.wz - prevWz) * alpha;
+    const displayedWz = interpolateWz(e, alpha);
+    if (displayedWz !== undefined) {
+      zOffset = displayedWz;
     } else {
       const tx = Math.floor(pos.wx / TILE_SIZE);
       const ty = Math.floor(pos.wy / TILE_SIZE);
