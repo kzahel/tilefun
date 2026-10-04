@@ -207,8 +207,9 @@ five rows of each center at a 48px vertical step, drawn back to front:
 | Alternating halves | 0, 64, 0, 64, 0 for F02/F05; 0, 56, 0, 56, 0 for F08 | Breaks columns but creates a regular two-row zigzag; F08's 56px is off the 16px placement grid |
 | Varied phase on 16px grid | 0, 48, 16, 96, 32 | Breaks the simple column/zigzag rhythm across this five-row sample |
 
-Varied phases are the coordinator's preferred next visual proposal, not a claim
-that a five-value sequence is nonperiodic or human-approved. Each row is extended
+At the probe checkpoint, varied phases were the coordinator’s preferred visual
+proposal. The owner subsequently approved the depicted examples below; this does
+not establish that a five-value sequence is nonperiodic. Each row is extended
 past the capture bounds to avoid mistaking crop edges for placement seams. These
 are interior-fill samples; shifted boundaries, matching caps, corners and clipped
 foreground trunks still need explicit handling. Preserve the source motif's
@@ -230,3 +231,27 @@ policy. A statement that an asset simply “loops” loses these required distin
 Phase-probe checkpoint: generated both comparisons with the shared canvas helper
 and inspected them; typechecks, 1,505 unit tests and lint passed (existing warnings).
 No gameplay, Workshop UI, source assets or review-manifest inputs changed.
+
+
+### Owner acceptance: varied-offset forest compositions
+
+On 2026-10-04 the owner explicitly accepted the comparison in chat:
+“varied offsets look awesome. nice work. everything looks good.”
+This records human acceptance of the three depicted varied-offset interior-fill
+compositions and the corrected F05 ground comparison from commit `2cb786c`.
+
+Accepted recipe: centers F02/F05/F08 at the pinned rectangles above; horizontal
+periods 128/128/112px; vertical step 48px; five row offsets `[0,48,16,96,32]`;
+background `#479757`; rows drawn back to front with unchanged source sprites.
+The compared interior crop is 256px wide, enlarged 2× for display. Source SHA is
+`1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737`.
+Probe script SHA-256: `2d060fe37cb5fc93b76c21827a4a9abe29910c01aca433bd61cd6de26f245092`.
+
+The approved direction is varied horizontal phase between overlapping forest rows.
+Edges/caps, infinite or chunked placement, a seeded phase-selection algorithm and
+collision were not depicted and remain separate work. Preserve the approved
+examples when adding them to the family sheet; changed compositions need review.
+This chat acceptance does not fabricate a Workshop event or rewrite frozen pilots.
+
+Next: carry the approved examples, corrected ground metadata and clearer tree-base
+relationships into R02’s sheet update, with approval provenance linked to this record.

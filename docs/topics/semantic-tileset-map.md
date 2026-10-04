@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: three pilot contact sheets implemented and validated; owner discussion is next.
+Status: three pilot sheets delivered; varied-offset forest examples owner-approved; integration next.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -75,7 +75,8 @@ The three pilots contain 85 source records / 67 proposal units, including varian
 and components; these are not unique-object or completion counts. The
 [coordinator reconciliation](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-reconciliation.md)
 owns adopted corrections and qualifications, including refuted Exteriors region
-labels. Apply it alongside the frozen proposal JSONs. No new human approvals exist.
+labels. Apply it alongside the frozen proposal JSONs. That reconciliation predates
+the owner feedback and bounded visual acceptance recorded below.
 
 The contact-sheet adapter uses committed source images only and checks source
 pins, available pixel hashes, exact frame bounds, all 85 record references and
@@ -89,16 +90,19 @@ The first owner comments gave positive whole-sheet feedback on cabinets and
 scrapyard, questioned the tree-base naming/color, and proposed repeating forest
 centers. The [follow-up evidence](../tactical/053-semantic-tileset-map/notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up)
 confirms card 4 exactly matches tree 2’s base and card 5 matches tree 3’s base.
-Horizontal center repetition is visually supported; dense vertical fill requires
-a separate overlap/placement proposal. A subsequent owner correction exposed an
+Horizontal center repetition is visually supported. The owner approved the three
+depicted varied-offset, vertically overlapping forest compositions on 2026-10-04;
+[exact acceptance scope](../tactical/053-semantic-tileset-map/notes/2026-10-04-family-contact-sheets.md#owner-acceptance-varied-offset-forest-compositions)
+pins the source and recipe. A subsequent owner correction exposed an
 incorrect dark background in the F05 probe; all three centers share the sampled
 base ground color `#479757`. Vertically overlapping rows need varied horizontal
 phases to avoid obvious columns. The [phase probe](../../scripts/semantic-forest-repeat-probe.mjs)
 compares aligned, alternating and varied offsets; boundary rules remain unresolved.
-Display refinements are queued; formal
-catalog status remains Proposed.
+The approved examples are queued for sheet integration; the current catalog still
+shows the earlier Proposed metadata.
 
-Next: present the tree-base relationships and repeated forest strips, then extend V01 beyond the presentation
+Next: integrate the approved varied-offset forest examples and tree-base relationships,
+then extend V01 beyond the presentation
 adapter to the full source/relationship/review schema before expanding themes. Its
 [criteria](../tactical/053-semantic-tileset-map/notes/2026-10-04-pilot-method-review.md#minimal-next-implementation-slice)
 cover exact source references, all occurrences, compositions, derived variants and
